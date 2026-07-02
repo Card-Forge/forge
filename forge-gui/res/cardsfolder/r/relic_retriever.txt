@@ -1,0 +1,11 @@
+Name:Relic Retriever
+ManaCost:1 R
+Types:Creature Spirit Monkey
+PT:2/1
+K:First Strike
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigToken | CheckSVar$ X | TriggerDescription$ At the beginning of each end step, if a card left your graveyard this turn, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:X:Count$LeftGraveyardThisTurn Card.YouOwn
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:First strike\nAt the beginning of each end step, if a card left your graveyard this turn, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

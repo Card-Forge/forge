@@ -6,7 +6,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>${revision}</version>
+        <version>2.0.13</version>
     </parent>
 
     <artifactId>forge-game</artifactId>
@@ -19,11 +19,6 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.googlecode</groupId>
-            <artifactId>minlog</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.10.2</version>
@@ -31,7 +26,7 @@
         </dependency>
         <dependency>
             <groupId>io.sentry</groupId>
-            <artifactId>sentry-logback</artifactId>
+            <artifactId>sentry</artifactId>
             <version>8.21.1</version>
         </dependency>
         <dependency>

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Gix
+Title=Gix
+Icon=Gix.jpg
+Difficulty=Hard
+Description=../Modern/Aether_Revolt/George_Ogilvie-Russell_-_Zoo_(Modern,_#668253).dck
+Deck Type=constructed
+
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+4 Kird Ape
+2 Kitchen Finks
+3 Loxodon Smiter
+4 Reckless Bushwhacker
+1 Renegade Rallier
+3 Scavenging Ooze
+3 Voice of Resurgence
+4 Wild Nacatl
+4 Atarka's Command
+4 Lightning Bolt
+4 Path to Exile
+2 Bloodstained Mire
+1 Flooded Strand
+2 Forest
+1 Mountain
+1 Plains
+2 Sacred Foundry
+2 Stomping Ground
+2 Windswept Heath
+3 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+2 Lightning Helix
+2 Qasali Pridemage
+2 Scavenging Ooze
+2 Selfless Spirit
+2 Stony Silence
+2 Sudden Shock
+1 Thalia, Guardian of Thraben

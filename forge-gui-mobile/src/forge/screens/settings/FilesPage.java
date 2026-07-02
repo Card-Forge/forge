@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableList;
 import forge.StaticData;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.download.*;
 import forge.screens.LoadingOverlay;
 import forge.util.ZipUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -23,10 +24,6 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.gui.download.GuiDownloadPrices;
-import forge.gui.download.GuiDownloadService;
-import forge.gui.download.GuiDownloadSkins;
-import forge.gui.download.GuiDownloadZipService;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeProfileProperties;
 import forge.screens.TabPageScreen.TabPage;
@@ -37,6 +34,7 @@ import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.FileUtil;
+import forge.util.LogExporter;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class FilesPage extends TabPage<SettingsScreen> {
@@ -92,6 +90,12 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 });
             }
         }, 0);
+        lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("lblExportLogs"), Forge.getLocalizer().getMessage("lblExportLogsDescription")) {
+            @Override
+            public void select() {
+                exportLogs();
+            }
+        }, 0);
         //Auditer
         lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("btnListImageData"), Forge.getLocalizer().getMessage("lblListImageData")) {
             @Override
@@ -130,13 +134,13 @@ public class FilesPage extends TabPage<SettingsScreen> {
 //                return new GuiDownloadSetPicturesLQ();
 //            }
 //        }, 2);
-//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
-//                Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
-//            @Override
-//            protected GuiDownloadService createService() {
-//                return new GuiDownloadQuestImages();
-//            }
-//        }, 2);
+        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
+                Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
+            @Override
+            protected GuiDownloadService createService() {
+                return new GuiDownloadQuestImages();
+            }
+        }, 2);
 //        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadAchievementImages"),
 //                Forge.getLocalizer().getMessage("lblDownloadAchievementImages")) {
 //            @Override
@@ -160,6 +164,13 @@ public class FilesPage extends TabPage<SettingsScreen> {
             @Override
             protected void finishCallback() {
                 SettingsScreen.getSettingsScreen().getSettingsPage().refreshSkinsList();
+            }
+        }, 2);
+        lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("btnDownloadCardImages"),
+                Forge.getLocalizer().getMessage("lblDownloadCardImages")) {
+            @Override
+            public void select() {
+                Forge.openScreen(new CardImageBrowserScreen());
             }
         }, 2);
         lstItems.addItem(new OptionContentDownloader(Forge.getLocalizer().getMessage("btnDownloadCJKFonts"),
@@ -227,6 +238,27 @@ public class FilesPage extends TabPage<SettingsScreen> {
     @Override
     protected void doLayout(float width, float height) {
         lstItems.setBounds(0, 0, width, height);
+    }
+
+    private void exportLogs() {
+        if (Forge.getDeviceAdapter().needFileAccess()) {
+            Forge.getDeviceAdapter().requestFileAcces();
+            return;
+        }
+        final String dialogTitle = Forge.getLocalizer().getMessage("lblExportLogs");
+        FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblExporting"), true, () -> {
+            try {
+                File downloads = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
+                File zipFile = LogExporter.exportLogs(downloads);
+                if (zipFile == null) {
+                    FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblNoLogFilesFound"), dialogTitle, FOptionPane.INFORMATION_ICON);
+                    return;
+                }
+                FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + zipFile.getAbsolutePath(), dialogTitle, FOptionPane.INFORMATION_ICON);
+            } catch (IOException e) {
+                FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
+            }
+        }));
     }
 
     private abstract class FilesItem {

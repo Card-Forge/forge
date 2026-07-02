@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Quest for Ulas Temple
+Title=Quest for Ulas Temple
+Icon=Quest for Ulas Temple.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/Daisuke_Yamada_-_WUB_Junk_(Standard,_#1524057).dck
+Deck Type=constructed
+
+[Main]
+1 Razorlash Transmogrant
+2 Tenacious Underdog
+3 Ao, the Dawn Sky
+3 Dennick, Pious Apprentice
+3 Sheoldred, the Apocalypse
+4 Raffine, Scheming Seer
+1 Reckoner Bankbuster
+2 Destroy Evil
+3 Go for the Throat
+4 Make Disappear
+4 Wedding Announcement
+4 The Wandering Emperor
+1 Shattered Sanctum
+1 Island
+1 Takenuma, Abandoned Mire
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+2 Plaza of Heroes
+2 Underground River
+2 Adarkar Wastes
+3 Shipwreck Marsh
+4 Raffine's Tower
+4 Deserted Beach
+4 Caves of Koilos
+[Sideboard]
+1 Liliana of the Veil
+1 Rona's Vortex
+1 Disdainful Stroke
+2 Duress
+2 Negate
+2 Siphon Insight
+2 Reckoner Bankbuster
+4 Cut Down

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/Lennny_-_Red_Deck_Wins_(Standard,_#1550183).dck
+Deck Type=constructed
+
+[Main]
+1 Shivan Devastator
+2 Feldon, Ronom Excavator
+3 Thundering Raiju
+4 Monastery Swiftspear
+4 Squee, Dubious Monarch
+4 Phoenix Chick
+4 Kumano Faces Kakkazan
+4 Bloodthirsty Adversary
+2 Abrade
+4 Play with Fire
+4 Lightning Strike
+2 Strangle
+2 Sokenzan, Crucible of Defiance
+3 Mishra's Foundry
+6 Mountain
+11 Mountain
+[Sideboard]
+1 The Elder Dragon War
+2 Giant Cindermaw
+2 Jaya, Fiery Negotiator
+2 Chandra, Dressed to Kill
+4 Obliterating Bolt
+4 Rending Flame

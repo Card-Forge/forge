@@ -1,0 +1,13 @@
+Name:Crescendo Conductor
+ManaCost:1 R
+Types:Creature Orc Sorcerer
+PT:2/2
+K:Reach
+T:Mode$ ConjureAll | ValidPlayer$ You | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigPrepare | TriggerDescription$ Whenever you conjure one or more cards, this creature becomes prepared.
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:Reach\nWhenever you conjure one or more cards, this creature becomes prepared.
+
+ALTERNATE
+
+CopyFaceFrom:Boltwave

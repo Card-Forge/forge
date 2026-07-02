@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Adam_Hulbert_-_Mono-G_Stompy_(Standard,_#1006018).dck
+Deck Type=constructed
+
+[Main]
+3 Scavenging Ooze
+4 Questing Beast
+4 Yorvo, Lord of Garenbrig
+4 Lovestruck Beast
+4 Kraul Harpooner
+4 Barkhide Troll
+4 Pelt Collector
+3 The Great Henge
+2 Nissa, Who Shakes the World
+4 Vivien, Arkbow Ranger
+4 Castle Garenbrig
+20 Forest
+[Sideboard]
+1 Sorcerous Spyglass
+2 Soul-Guide Lantern
+2 Grafdigger's Cage
+2 Tormod's Crypt
+4 Thrashing Brontodon
+4 Heroic Intervention

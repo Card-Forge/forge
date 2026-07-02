@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tweedledum
+Title=Tweedledum
+Icon=Tweedledum.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/BONK101_-_Worldsoul's_Ramp_(Standard,_#1988291).dck
+Deck Type=constructed
+
+[Main]
+4 Aftermath Analyst
+2 Fallaji Archaeologist
+4 Nissa, Resurgent Animist
+1 Shigeki, Jukai Visionary
+1 Galvanic Iteration
+4 Memory Deluge
+2 Vampires' Vengeance
+4 Ill-Timed Explosion
+4 Virtue of Strength
+4 Worldsoul's Rage
+4 Brokers Hideout
+4 Cabaretti Courtyard
+4 Maestros Theater
+4 Mountain
+1 Riveteers Overlook
+7 Forest
+6 Island
+[Sideboard]
+3 Negate
+1 Doppelgang
+1 End the Festivities
+1 Lithomantic Barrage
+3 Abrade
+1 Titania, Voice of Gaea
+2 Tranquil Frillback
+1 Turn the Earth
+1 Vampires' Vengeance
+1 Spelunking

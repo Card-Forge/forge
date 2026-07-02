@@ -183,24 +183,21 @@ public abstract class FloatingCardArea extends CardArea {
 
     protected void refresh() {
         if (!getWindow().isVisible()) { return; } //don't refresh while window hidden
-	doRefresh();
+        doRefresh();
     }
 
     protected void doRefresh() {
         List<CardPanel> cardPanels = new ArrayList<>();
-        Iterable<CardView> cards = getCards();
-        if (cards != null) {
-            for (final CardView card : cards) {
-                CardPanel cardPanel = getCardPanel(card.getId());
-                if (cardPanel == null) {
-                    cardPanel = new CardPanel(getMatchUI(), card);
-                    cardPanel.setDisplayEnabled(true);
-                }
-                else {
-                    cardPanel.setCard(card); //ensure card view updated
-                }
-                cardPanels.add(cardPanel);
+        for (final CardView card : getCards()) {
+            CardPanel cardPanel = getCardPanel(card.getId());
+            if (cardPanel == null) {
+                cardPanel = new CardPanel(getMatchUI(), card);
+                cardPanel.setDisplayEnabled(true);
             }
+            else {
+                cardPanel.setCard(card); //ensure card view updated
+            }
+            cardPanels.add(cardPanel);
         }
 
         boolean hadCardPanels = getCardPanels().size() > 0;

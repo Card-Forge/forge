@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sherlock Holmes
+Title=Sherlock Holmes
+Icon=Sherlock Holmes.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/Modern_Daily_#8373476/lgarrett_-_Burn_(Modern,_#264502).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+3 Searing Blaze
+1 Shard Volley
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Bloodstained Mire
+4 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+2 Dragon's Claw
+3 Molten Rain
+3 Skullcrack

@@ -1,9 +1,0 @@
-Name:Loch Mare
-ManaCost:1 U
-Types:Creature Horse Serpent
-PT:4/5
-K:etbCounter:M1M1:3
-A:AB$ Draw | Cost$ 1 U RemoveAnyCounter<1/Any/Card.Self/this creature> | SpellDescription$ Draw a card.
-A:AB$ Tap | Cost$ 2 U RemoveAnyCounter<2/Any/Card.Self/this creature> | ValidTgts$ Creature | TgtPrompt$ Choose target creature to tap. | SubAbility$ DBPutCounter | SpellDescription$ Tap target creature. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
-Oracle:This creature enters with three -1/-1 counters on it.\n{1}{U}, Remove a counter from this creature: Draw a card.\n{2}{U}, Remove two counters from this creature: Tap target creature. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)

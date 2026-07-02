@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Aaron_Moller_-_Simic_Ramp_(Standard,_#1143175).dck
+Deck Type=constructed
+
+[Main]
+2 Kazandu Nectarpot
+3 Jadzi, Oracle of Arcavios
+3 Icebreaker Kraken
+3 Quandrix Cultivator
+1 Whirlwind Denial
+2 Into the Roil
+2 Miscast
+4 Graven Lore
+2 Tempted by the Oriq
+2 Alrund's Epiphany
+3 Verdant Mastery
+4 Sea Gate Restoration
+4 Cultivate
+4 Fabled Passage
+4 Faceless Haven
+8 Snow-Covered Island
+9 Snow-Covered Forest
+[Sideboard]
+1 Disdainful Stroke
+1 Thassa's Oracle
+2 Test of Talents
+2 Mystical Dispute
+2 Elder Gargaroth
+2 Quandrix Command
+2 Kazandu Nectarpot
+3 Glimpse of Freedom

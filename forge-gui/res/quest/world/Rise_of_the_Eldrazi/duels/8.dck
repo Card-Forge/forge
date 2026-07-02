@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Imperial Guard
+Title=Imperial Guard
+Icon=Imperial Guard.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/Magic-League_Standard_Master_20-06-10/Wichtelman_-_Blightning_Deck_Wins_(Standard,_#1360).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Hell's Thunder
+4 Hellspark Elemental
+4 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Staggershock
+4 Blightning
+4 Forked Bolt
+4 Akoum Refuge
+4 Dragonskull Summit
+4 Lavaclaw Reaches
+10 Mountain
+2 Swamp
+[Sideboard]
+4 Doom Blade
+4 Goblin Outlander
+4 Malakir Bloodwitch
+3 Pithing Needle

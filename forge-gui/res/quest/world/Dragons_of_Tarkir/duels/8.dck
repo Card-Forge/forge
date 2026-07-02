@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling White
+Title=Dungeon Crawling White
+Icon=Dungeon Crawling White.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/SCG_Invitational_Qualifier/Jason_Passaro_-_Abzan_Aggro_(Standard,_#236244).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Anafenza, the Foremost
+3 Den Protector
+4 Fleecemane Lion
+3 Rakshasa Deathdealer
+4 Siege Rhino
+2 Warden of the First Tree
+1 Whisperwood Elemental
+1 Wingmate Roc
+3 Abzan Charm
+2 Dromoka's Command
+3 Hero's Downfall
+1 Ultimate Price
+3 Thoughtseize
+2 Sorin, Solemn Visitor
+2 Caves of Koilos
+2 Forest
+3 Llanowar Wastes
+1 Mana Confluence
+2 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+1 Temple of Plenty
+2 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+3 Drown in Sorrow
+2 Duress
+1 Foul-Tongue Invocation
+3 Self-Inflicted Wound

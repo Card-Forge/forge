@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Antoine57437_-_Bant_Company_(Modern,_#1050184).dck
+Deck Type=constructed
+
+[Main]
+1 Renegade Rallier
+1 Ranger-Captain of Eos
+1 Charming Prince
+1 Birds of Paradise
+2 Wall of Blossoms
+2 Soulherder
+2 Ice-Fang Coatl
+2 Eternal Witness
+3 Glasspool Mimic
+3 Skyclave Apparition
+4 Giver of Runes
+4 Wall of Omens
+4 Aether Vial
+2 Force of Negation
+2 Collected Company
+4 Ephemerate
+3 Neoform
+3 Teferi, Time Raveler
+1 Misty Rainforest
+1 Temple Garden
+1 Snow-Covered Island
+1 Breeding Pool
+1 Snow-Covered Forest
+1 Hallowed Fountain
+2 Snow-Covered Plains
+4 Flooded Strand
+4 Windswept Heath
+[Sideboard]
+1 Collector Ouphe
+1 Mangara of Corondor
+1 Sacred Foundry
+2 Gaddock Teeg
+2 Surgical Extraction
+4 Magus of the Moon
+4 Auriok Champion

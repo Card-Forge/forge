@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Radiant
+Title=Radiant
+Icon=Radiant.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/ArctiCMooN#62136_-_Mono_Green_(Standard,_#936540).dck
+Deck Type=constructed
+
+[Main]
+3 Questing Beast
+3 Kraul Harpooner
+3 Yorvo, Lord of Garenbrig
+4 Wildwood Tracker
+4 Pelt Collector
+4 Paradise Druid
+4 Lovestruck Beast
+4 Barkhide Troll
+1 The First Iroan Games
+1 Karn, the Great Creator
+2 Nissa, Who Shakes the World
+4 Vivien, Arkbow Ranger
+1 Mobilized District
+3 Castle Garenbrig
+19 Forest
+[Sideboard]
+1 Wings of Hubris
+1 Karn, the Great Creator
+1 Grafdigger's Cage
+1 Sorcerous Spyglass
+1 Stonecoil Serpent
+1 The Great Henge
+1 Shadowspear
+2 Thrashing Brontodon
+3 Thrash // Threat
+3 Shifting Ceratops

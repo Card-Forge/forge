@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Asanbosam
+Title=Asanbosam
+Icon=Asanbosam.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/IWDominate_-_Esper_Midrange_(Standard,_#1979899).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+2 Ertai Resurrected
+3 Faerie Mastermind
+2 Gix, Yawgmoth Praetor
+4 Raffine, Scheming Seer
+4 Sheoldred, the Apocalypse
+4 Thalia, Guardian of Thraben
+1 Tishana's Tidebinder
+3 Dennick, Pious Apprentice
+4 Skrelv, Defector Mite
+2 Go for the Throat
+4 Caves of Koilos
+4 Darkslick Shores
+4 Seachrome Coast
+2 Eiganjo, Seat of the Empire
+3 Otawara, Soaring City
+4 Plaza of Heroes
+1 Shattered Sanctum
+2 Shipwreck Marsh
+2 Takenuma, Abandoned Mire
+1 Swamp
+[Sideboard]
+4 Disdainful Stroke
+1 Ao, the Dawn Sky
+3 Cut Down
+2 Destroy Evil
+1 Aclazotz, Deepest Betrayal
+1 Gix's Command
+1 Loran of the Third Path
+2 Shrouded Shepherd

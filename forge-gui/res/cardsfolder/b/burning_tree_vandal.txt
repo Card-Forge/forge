@@ -5,5 +5,6 @@ PT:2/1
 K:Riot
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you may discard a card. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card>
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters
 Oracle:Riot (This creature enters with your choice of a +1/+1 counter or haste.)\nWhenever Burning-Tree Vandal attacks, you may discard a card. If you do, draw a card.

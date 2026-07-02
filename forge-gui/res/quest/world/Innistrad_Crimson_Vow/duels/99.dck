@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sharee
+Title=Sharee
+Icon=Sharee.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Abe_Kenichi_-_Heliod_Company_(Modern,_#1239399).dck
+Deck Type=constructed
+
+[Main]
+2 Trelasarra, Moon Dancer
+4 Spike Feeder
+4 Scurry Oak
+4 Heliod, Sun-Crowned
+4 Voice of the Blessed
+4 Prosperous Innkeeper
+4 Auriok Champion
+4 Noble Hierarch
+4 Birds of Paradise
+4 Collected Company
+1 Sunpetal Grove
+1 Plains
+1 Pendelhaven
+1 Gavony Township
+2 Wooded Foothills
+2 Horizon Canopy
+2 Forest
+4 Razorverge Thicket
+4 Temple Garden
+4 Windswept Heath
+[Sideboard]
+2 Force of Vigor
+2 Endurance
+2 Void Mirror
+2 Sanctifier en-Vec
+2 Veil of Summer
+2 Engineered Explosives
+3 Path to Exile

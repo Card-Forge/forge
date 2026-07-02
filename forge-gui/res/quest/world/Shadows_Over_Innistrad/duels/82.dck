@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Very Hard
+Description=../Modern/Shadows_over_Innistrad/SCG_Invitational_Qualifier_-_Cookeville,_TN/Elliott_Cannon_-_G-W_Aggro_(Modern,_#640503).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+4 Dryad Militant
+4 Fleecemane Lion
+4 Loxodon Smiter
+1 Noble Hierarch
+4 Wilt-Leaf Liege
+4 Dromoka's Command
+4 Path to Exile
+4 Lingering Souls
+1 Gryff's Boon
+3 Rancor
+7 Forest
+3 Ghost Quarter
+1 Godless Shrine
+1 Overgrown Tomb
+5 Plains
+2 Temple Garden
+4 Windswept Heath
+[Sideboard]
+1 Armada Wurm
+3 Auriok Champion
+1 Celestial Purge
+2 Dismember
+1 Ghost Quarter
+2 Gut Shot
+2 Leyline of Sanctity
+2 Rule of Law
+1 Tasigur, the Golden Fang

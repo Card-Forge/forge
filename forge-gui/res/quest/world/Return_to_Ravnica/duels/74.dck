@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Luna Lovegood
+Title=Luna Lovegood
+Icon=Luna Lovegood.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/PTQ_San_Diego'13_(Paris,_France)/Julien_Pochard_-_Junk_(Modern,_#46857).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+4 Deathrite Shaman
+4 Loxodon Smiter
+4 Tarmogoyf
+2 Thalia, Guardian of Thraben
+1 Thrun, the Last Troll
+1 Batterskull
+4 Abrupt Decay
+4 Path to Exile
+3 Inquisition of Kozilek
+2 Maelstrom Pulse
+3 Thoughtseize
+1 Forest
+2 Godless Shrine
+4 Marsh Flats
+2 Overgrown Tomb
+1 Plains
+1 Stirring Wildwood
+2 Swamp
+2 Tectonic Edge
+2 Temple Garden
+3 Treetop Village
+4 Verdant Catacombs
+[Sideboard]
+3 Engineered Explosives
+4 Nevermore
+4 Stony Silence

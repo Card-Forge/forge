@@ -1,5 +1,6 @@
 package forge.screens.home;
 
+import forge.ai.AiProfileUtil;
 import forge.deckchooser.FDeckChooser;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -77,6 +78,11 @@ public class PlayerPanel extends FPanel {
     private FRadioButton radioOpen;
     private FCheckBox chkReady;
 
+    // AI picker
+    private String aiProfile;
+    private final FLabel aiPickerLabel = new FLabel.Builder().text(localizer.getMessage("lblAiPickerPanel") + ":").build();
+    private FComboBoxWrapper<Object> aiPickerComboBox = new FComboBoxWrapper<>();
+
     private final FComboBoxWrapper<Object> teamComboBox = new FComboBoxWrapper<>();
     private final FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<>();
 
@@ -107,20 +113,18 @@ public class PlayerPanel extends FPanel {
     private FDeckChooser deckChooser;
 
     private final VLobby lobby;
-    public PlayerPanel(final VLobby lobby, final boolean allowNetworking, final int index, final LobbySlot slot, final boolean mayEdit, final boolean mayControl) {
-        super();
-
+    public PlayerPanel(final VLobby lobby, final int index, final LobbySlot slot, final boolean mayEdit, final boolean mayControl) {
         this.lobby = lobby;
         this.index = index;
         this.mayEdit = mayEdit;
         this.mayControl = mayControl;
-        this.allowNetworking = allowNetworking;
+        this.allowNetworking = lobby.getLobby().isAllowNetworking();
 
         this.deckLabel = lobby.newLabel(localizer.getMessage("lblDeck") + ":");
         this.scmLabel = lobby.newLabel(localizer.getMessage("lblSchemeDeck") + ":");
         this.cmdLabel = lobby.newLabel(localizer.getMessage("lblCommanderDeck") + ":");
-        this.pchLabel =  lobby.newLabel(localizer.getMessage("lblPlanarDeck") + ":");
-        this.vgdLabel =  lobby.newLabel(localizer.getMessage("lblVanguard") + ":");
+        this.pchLabel = lobby.newLabel(localizer.getMessage("lblPlanarDeck") + ":");
+        this.vgdLabel = lobby.newLabel(localizer.getMessage("lblVanguard") + ":");
 
         setLayout(new MigLayout("insets 10px, gap 5px"));
 
@@ -129,11 +133,10 @@ public class PlayerPanel extends FPanel {
         this.add(closeBtn, "w 20, h 20, pos (container.w-20) 0");
 
         createAvatar();
-        this.add(avatarLabel, "spany 2, width 80px, height 80px");
+        this.add(avatarLabel, "cell 0 0, spany 2, split 2, width 80px, height 80px");
 
-        /*TODO Layout and Override for PC*/
-        //createSleeve();
-        //this.add(sleeveLabel, "spany 2, width 60px, height 80px");
+        createSleeve();
+        this.add(sleeveLabel, "width 58px, height 80px, gapleft 5px");
 
         createNameEditor();
         this.add(lobby.newLabel(localizer.getMessage("lblName") +":"), "w 40px, h 30px, gaptop 5px");
@@ -146,7 +149,17 @@ public class PlayerPanel extends FPanel {
         this.add(radioHuman, "gapright 5px");
         this.add(radioAi, "wrap");
 
-        this.add(lobby.newLabel(localizer.getMessage("lblTeam") + ":"), "w 40px, h 30px");
+        int cellY = 1;
+        if (prefs.getPrefBoolean(FPref.UI_ENABLE_AI_PICKER)) {
+            this.add(aiPickerLabel, "w 40px, h 30px");
+            populateAiPickerComboBox();
+            aiPickerComboBox.addTo(this, "h 30px, pushx, growx, wrap");
+            aiPickerComboBox.addActionListener(aiPickerListener);
+            cellY += 1;
+        }
+        this.setAiProfile(slot.getAiProfile());
+
+        this.add(lobby.newLabel(localizer.getMessage("lblTeam") + ":"), "cell 0 " + cellY +", sx 2, ax right, w 40px, h 30px");
         populateTeamsComboBoxes();
 
         // Set these before action listeners are added
@@ -155,17 +168,17 @@ public class PlayerPanel extends FPanel {
 
         teamComboBox.addActionListener(teamListener);
         aeTeamComboBox.addActionListener(teamListener);
-        teamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
-        aeTeamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
+        teamComboBox.addTo(this, variantBtnConstraints + ", cell 2 " + cellY + ", growx, gaptop 5px, wrap");
+        aeTeamComboBox.addTo(this, variantBtnConstraints + ", cell 2 " + cellY + ", growx, gaptop 5px, wrap");
 
         createReadyButton();
         if (allowNetworking) {
-            this.add(radioOpen, "cell 4 1, ax left, sx 2");
-            this.add(chkReady, "cell 5 1, ax left, sx 2, wrap");
+            this.add(radioOpen, "cell 4 4, ax left, sx 2");
+            this.add(chkReady, "cell 5 4, ax left, sx 2, wrap");
         }
 
-        this.add(deckLabel, variantBtnConstraints + ", cell 0 2, sx 2, ax right");
-        this.add(deckBtn, variantBtnConstraints + ", cell 2 2, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
+        this.add(deckLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
+        this.add(deckBtn, variantBtnConstraints + ", cell 2 3, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
 
         addHandlersDeckSelector();
 
@@ -219,6 +232,12 @@ public class PlayerPanel extends FPanel {
         txtPlayerName.setEnabled(mayEdit);
         txtPlayerName.setText(type == LobbySlotType.OPEN ? StringUtils.EMPTY : playerName);
         nameRandomiser.setEnabled(mayEdit);
+
+        boolean enableAiPicker = mayEdit && type == LobbySlotType.AI && prefs.getPrefBoolean(FPref.UI_ENABLE_AI_PICKER);
+        aiPickerLabel.setVisible(enableAiPicker);
+        aiPickerComboBox.setVisible(enableAiPicker);
+        aiPickerComboBox.setEnabled(enableAiPicker);
+
         teamComboBox.setEnabled(mayEdit);
         deckLabel.setVisible(mayEdit);
         deckBtn.setVisible(mayEdit);
@@ -255,6 +274,10 @@ public class PlayerPanel extends FPanel {
                     return;
                 }
                 setType(type);
+                if (type == LobbySlotType.AI && getPlayerName().isEmpty()) {
+                    final String newName = NameGenerator.getRandomName("Any", "Any", lobby.getPlayerNames());
+                    setPlayerName(newName);
+                }
                 lobby.firePlayerChangeListener(index);
                 avatarLabel.requestFocusInWindow();
                 lobby.updateVanguardList(index);
@@ -296,101 +319,11 @@ public class PlayerPanel extends FPanel {
         }
     };
 
-    private final FMouseAdapter avatarMouseListener = new FMouseAdapter() {
-        @Override public void onLeftClick(final MouseEvent e) {
-            if (!avatarLabel.isEnabled()) {
-                return;
-            }
-
-            final FLabel avatar = (FLabel)e.getSource();
-
-            lobby.changePlayerFocus(index);
-            avatar.requestFocusInWindow();
-
-            final AvatarSelector aSel = new AvatarSelector(playerName, avatarIndex, lobby.getUsedAvatars());
-            for (final FLabel lbl : aSel.getSelectables()) {
-                lbl.setCommand((UiCommand) () -> {
-                    setAvatarIndex(Integer.parseInt(lbl.getName().substring(11)));
-                    aSel.setVisible(false);
-                });
-            }
-
-            aSel.setVisible(true);
-            aSel.dispose();
-
-            if (index < 2) {
-                lobby.updateAvatarPrefs();
-            }
-
-            lobby.firePlayerChangeListener(index);
-        }
-
-        @Override public void onRightClick(final MouseEvent e) {
-            if (!avatarLabel.isEnabled()) {
-                return;
-            }
-
-            lobby.changePlayerFocus(index);
-            avatarLabel.requestFocusInWindow();
-
-            setRandomAvatar();
-
-            if (index < 2) {
-                lobby.updateAvatarPrefs();
-            }
-        }
-    };
-
     /** Listens to sleeve buttons and gives the appropriate player focus. */
     private final FocusAdapter sleeveFocusListener = new FocusAdapter() {
         @Override
         public void focusGained(final FocusEvent e) {
             lobby.changePlayerFocus(index);
-        }
-    };
-
-    private final FMouseAdapter sleeveMouseListener = new FMouseAdapter() {
-        @Override public void onLeftClick(final MouseEvent e) {
-            if (!sleeveLabel.isEnabled()) {
-                return;
-            }
-
-            final FLabel sleeve = (FLabel)e.getSource();
-
-            lobby.changePlayerFocus(index);
-            sleeve.requestFocusInWindow();
-
-            final SleeveSelector sSel = new SleeveSelector(playerName, sleeveIndex, lobby.getUsedSleeves());
-            for (final FLabel lbl : sSel.getSelectables()) {
-                lbl.setCommand((UiCommand) () -> {
-                    setSleeveIndex(Integer.parseInt(lbl.getName().substring(11)));
-                    sSel.setVisible(false);
-                });
-            }
-
-            sSel.setVisible(true);
-            sSel.dispose();
-
-            if (index < 2) {
-                lobby.updateSleevePrefs();
-            }
-
-            lobby.firePlayerChangeListener(index);
-        }
-
-        @Override public void onRightClick(final MouseEvent e) {
-            if (!sleeveLabel.isEnabled()) {
-                return;
-            }
-
-            lobby.changePlayerFocus(index);
-            sleeveLabel.requestFocusInWindow();
-
-            setRandomSleeve();
-
-            if (index < 2) {
-                lobby.updateSleevePrefs();
-            }
         }
     };
 
@@ -509,6 +442,20 @@ public class PlayerPanel extends FPanel {
         avatarLabel.requestFocusInWindow();
     }
 
+    /**
+     * Setup the AI Picker combo box with the known AI profiles.
+     * Default the combo box selection to the default value of FPref.UI_CURRENT_AI_PROFILE.
+     */
+    private void populateAiPickerComboBox() {
+        aiPickerComboBox.removeAllItems();
+        final List<String> aiProfiles = AiProfileUtil.getAvailableProfiles();
+        for (final String profile : aiProfiles) {
+            aiPickerComboBox.addItem(profile);
+        }
+        aiPickerComboBox.setSelectedItem(FPref.UI_CURRENT_AI_PROFILE.getDefault());
+        aiPickerComboBox.setEnabled(true);
+    }
+
     private void populateTeamsComboBoxes() {
         aeTeamComboBox.addItem(localizer.getMessage("lblArchenemy"));
         aeTeamComboBox.addItem(localizer.getMessage("lblHeroes"));
@@ -527,6 +474,21 @@ public class PlayerPanel extends FPanel {
             final Object selection = cb.getSelectedItem();
 
             if (null != selection) {
+                lobby.changePlayerFocus(index);
+                lobby.firePlayerChangeListener(index);
+            }
+        }
+    };
+
+    private final ActionListener aiPickerListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            final FComboBox<Object> comboBox = (FComboBox<Object>) e.getSource();
+            closeBtn.requestFocusInWindow();
+            final Object selection = comboBox.getSelectedItem();
+
+            if (selection != null) {
+                setAiProfile(selection.toString());
                 lobby.changePlayerFocus(index);
                 lobby.firePlayerChangeListener(index);
             }
@@ -698,7 +660,37 @@ public class PlayerPanel extends FPanel {
 
         avatarLabel.setToolTipText(localizer.getMessage("ttlblAvatar"));
         avatarLabel.addFocusListener(avatarFocusListener);
-        avatarLabel.addMouseListener(avatarMouseListener);
+        avatarLabel.setCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            avatarLabel.requestFocusInWindow();
+
+            final AvatarSelector aSel = new AvatarSelector(playerName, avatarIndex, lobby.getUsedAvatars());
+            for (final FLabel lbl : aSel.getSelectables()) {
+                lbl.setCommand((UiCommand) () -> {
+                    setAvatarIndex(Integer.parseInt(lbl.getName().substring(11)));
+                    aSel.setVisible(false);
+                });
+            }
+
+            aSel.setVisible(true);
+            aSel.dispose();
+
+            if (index < 2) {
+                lobby.updateAvatarPrefs();
+            }
+
+            lobby.firePlayerChangeListener(index);
+        });
+        avatarLabel.setRightClickCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            avatarLabel.requestFocusInWindow();
+
+            setRandomAvatar();
+
+            if (index < 2) {
+                lobby.updateAvatarPrefs();
+            }
+        });
     }
 
     private void createSleeve() {
@@ -712,7 +704,37 @@ public class PlayerPanel extends FPanel {
 
         sleeveLabel.setToolTipText("L-click: Select sleeve. R-click: Randomize sleeve.");
         sleeveLabel.addFocusListener(sleeveFocusListener);
-        sleeveLabel.addMouseListener(sleeveMouseListener);
+        sleeveLabel.setCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            sleeveLabel.requestFocusInWindow();
+
+            final SleeveSelector sSel = new SleeveSelector(playerName, sleeveIndex, lobby.getUsedSleeves());
+            for (final FLabel lbl : sSel.getSelectables()) {
+                lbl.setCommand((UiCommand) () -> {
+                    setSleeveIndex(Integer.parseInt(lbl.getName().substring(11)));
+                    sSel.setVisible(false);
+                });
+            }
+
+            sSel.setVisible(true);
+            sSel.dispose();
+
+            if (index < 2) {
+                lobby.updateSleevePrefs();
+            }
+
+            lobby.firePlayerChangeListener(index);
+        });
+        sleeveLabel.setRightClickCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            sleeveLabel.requestFocusInWindow();
+
+            setRandomSleeve();
+
+            if (index < 2) {
+                lobby.updateSleevePrefs();
+            }
+        });
     }
 
     /** Applies a random avatar, avoiding avatars already used. */
@@ -838,5 +860,20 @@ public class PlayerPanel extends FPanel {
 
     void setDeckChooser(final FDeckChooser deckChooser) {
         this.deckChooser = deckChooser;
+    }
+
+    public void setAiProfile(String aiProfile) {
+        this.aiProfile = aiProfile;
+        if (aiProfile != null) {
+            aiPickerComboBox.setSelectedItem(aiProfile);
+        }
+    }
+
+    public String getAiProfile() {
+        final Object selection = aiPickerComboBox.getSelectedItem();
+        if (selection != null) {
+            return selection.toString();
+        }
+        return aiProfile;
     }
 }

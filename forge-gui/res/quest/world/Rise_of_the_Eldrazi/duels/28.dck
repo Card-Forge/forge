@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mystique
+Title=Mystique
+Icon=Mystique.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/Nationals_2010_-_El_Salvador/Javier_Morales_-_Centinel_Control_-_pal_Mundo_(Standard,_#922).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Bogardan Hellkite
+1 Sphinx of Jwar Isle
+4 Double Negative
+3 Essence Scatter
+4 Lightning Bolt
+3 Mana Leak
+3 Negate
+3 Terminate
+2 Cruel Ultimatum
+3 Divination
+4 Spreading Seas
+3 Jace, the Mind Sculptor
+1 Liliana Vess
+3 Creeping Tar Pit
+3 Dragonskull Summit
+4 Drowned Catacomb
+4 Island
+2 Lavaclaw Reaches
+2 Mountain
+4 Scalding Tarn
+2 Swamp
+[Sideboard]
+2 Consume the Meek
+2 Duress
+4 Flashfreeze
+2 Inquisition of Kozilek

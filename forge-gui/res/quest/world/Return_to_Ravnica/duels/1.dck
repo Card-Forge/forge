@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Agrus
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Vestavia_Hills,_Alabama/Alex_Soper_-_Bant_Blink_(Standard,_#40107).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+2 Angel of Serenity
+1 Armada Wurm
+2 Borderland Ranger
+2 Centaur Healer
+2 Deadeye Navigator
+1 Lyev Skyknight
+4 Restoration Angel
+4 Thragtusk
+1 Azorius Charm
+2 Selesnya Charm
+4 Farseek
+3 Detention Sphere
+2 Oblivion Ring
+1 Garruk, Primal Hunter
+2 Jace, Architect of Thought
+3 Forest
+1 Gavony Township
+2 Glacial Fortress
+4 Hallowed Fountain
+4 Hinterland Harbor
+2 Island
+1 Plains
+4 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+3 Feeling of Dread
+2 Negate
+2 Nevermore
+2 Supreme Verdict

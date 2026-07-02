@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Red
+Title=Dungeon Crawling Red
+Icon=Dungeon Crawling Red.jpg
+Difficulty=Medium
+Description=New_Phyrexia/GB_Nationals_LCQ_Winners/Matthew_Trindall_-_Mono_Black_Control_(Standard,_#18738).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Gatekeeper of Malakir
+2 Grave Titan
+4 Vampire Nighthawk
+4 Vault Skirge
+1 Batterskull
+4 Lashwrithe
+2 Dismember
+2 Doom Blade
+2 Go for the Throat
+2 Distress
+1 Duress
+4 Inquisition of Kozilek
+4 Sign in Blood
+4 Marsh Flats
+17 Swamp
+4 Verdant Catacombs
+[Sideboard]
+2 Despise
+3 Hex Parasite
+4 Memoricide
+2 Wurmcoil Engine

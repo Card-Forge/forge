@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Easy
+Description=Gatecrash/2013_Spring_States_-_Nebraska/PhilCamire_-_Gruul_Aggro_(Standard,_#52047).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Experiment One
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Hellrider
+4 Rakdos Cackler
+4 Stromkirk Noble
+4 Searing Spear
+3 Pillar of Flame
+1 Forest
+9 Mountain
+1 Overgrown Tomb
+4 Rootbound Crag
+4 Stomping Ground
+2 Temple Garden
+[Sideboard]
+3 Domri Rade
+3 Mark of Mutiny
+4 Skullcrack
+1 Thundermaw Hellkite
+4 Volcanic Strength

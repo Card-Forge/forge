@@ -1,0 +1,11 @@
+Name:Voracious Brood
+ManaCost:2 G
+Types:Creature Alien Insect
+PT:1/1
+K:etbCounter:P1P1:X:no Condition:This creature enters with a +1/+1 counter on it for each creature card in your graveyard.
+SVar:X:Count$LastStateGraveyard Creature.YouCtrl
+DeckHas:Ability$Counters
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouOwn+!token | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more creature cards are put into your graveyard from anywhere, put that many +1/+1 counters on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Y
+SVar:Y:TriggerCount$Amount
+Oracle:This creature enters with a +1/+1 counter on it for each creature card in your graveyard.\nWhenever one or more creature cards are put into your graveyard from anywhere, put that many +1/+1 counters on this creature.

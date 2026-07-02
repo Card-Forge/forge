@@ -138,14 +138,15 @@ public class CardRanker {
             String customRankings = IBoosterDraft.CUSTOM_RANKINGS_FILE[0];
             if (customRankings != null) {
                 rkg = DraftRankCache.getCustomRanking(customRankings, card.getName());
+                boolean isCustom = card.getRules().isCustom();
                 if (rkg == null) {
-                    // try the default rankings if custom rankings contain no entry, but penalize missing cards
+                    // try the default rankings if custom rankings contain no entry, but penalize missing cards that aren't custom
                     rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
-                    if (rkg != null) {
+                    if (!isCustom && rkg != null) {
                         rkg = rkg + 1;
                     }
                 }
-                if (rkg != null) {
+                if (!isCustom && rkg != null) {
                     rkg = rkg / 2;
                 }
             } else {

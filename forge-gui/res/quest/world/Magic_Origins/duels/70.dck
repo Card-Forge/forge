@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Redwall
+Title=Redwall
+Icon=Redwall.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/StarCityGames.com_Modern_Open_-_Syracuse,_NY/Ellis_Linnen_-_Burn_(Modern,_#636324).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+3 Searing Blaze
+1 Shard Volley
+2 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+4 Bloodstained Mire
+3 Mountain
+3 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+3 Destructive Revelry
+2 Exquisite Firecraft
+2 Grafdigger's Cage
+2 Kor Firewalker
+3 Path to Exile

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/Pro_Tour_Eldritch_Moon_2016_-_18-20_Points/GEORGE_CHANNING_-_WUG_Aggro_(Standard,_#635148).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+3 Duskwatch Recruiter
+1 Nissa, Vastwood Seer
+4 Reflector Mage
+3 Selfless Spirit
+4 Spell Queller
+4 Sylvan Advocate
+2 Thalia, Heretic Cathar
+3 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+4 Canopy Vista
+4 Evolving Wilds
+4 Forest
+1 Island
+2 Lumbering Falls
+5 Plains
+3 Prairie Stream
+3 Yavimaya Coast
+[Sideboard]
+3 Declaration in Stone
+3 Negate
+2 Ojutai's Command
+1 Summary Dismissal
+2 Tamiyo, Field Researcher
+2 Tragic Arrogance

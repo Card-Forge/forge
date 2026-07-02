@@ -1,0 +1,9 @@
+Name:K'un-Lun Warrior
+ManaCost:1 R
+Types:Creature Human Warrior Hero
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoice | TriggerDescription$ When this creature enters, you may sacrifice an artifact or discard a card. If you do, draw a card.
+SVar:TrigChoice:DB$ GenericChoice | Choices$ DBSacToDraw,DBDiscardToDraw
+SVar:DBSacToDraw:DB$ Draw | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Sacrifice an artifact.
+SVar:DBDiscardToDraw:DB$ Draw | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Discard a card.
+Oracle:When this creature enters, you may sacrifice an artifact or discard a card. If you do, draw a card.

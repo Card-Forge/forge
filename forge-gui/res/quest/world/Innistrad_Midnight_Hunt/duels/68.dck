@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/harukispecial_-_Jeskai_Stoneblade_(Modern,_#1220488).dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+3 Ragavan, Nimble Pilferer
+3 Snapcaster Mage
+3 Stoneforge Mystic
+1 Batterskull
+1 Sword of Fire and Ice
+1 Faithful Mending
+1 Electrolyze
+1 Consider
+3 Lightning Helix
+3 Force of Negation
+4 Lightning Bolt
+4 Counterspell
+2 Supreme Verdict
+1 Teferi, Hero of Dominaria
+2 Jace, the Mind Sculptor
+3 Teferi, Time Raveler
+1 Mountain
+1 Arid Mesa
+1 Sacred Foundry
+1 Raugrin Triome
+1 Plains
+1 Hallowed Fountain
+2 Steam Vents
+2 Island
+2 Field of Ruin
+3 Celestial Colonnade
+4 Flooded Strand
+4 Scalding Tarn
+[Sideboard]
+1 Lightning Helix
+1 Cleansing Wildfire
+1 Stony Silence
+1 Shatterstorm
+1 Kozilek, Butcher of Truth
+1 Dovin's Veto
+2 Timely Reinforcements
+2 Aether Gust
+2 Wear // Tear
+3 Rest in Peace

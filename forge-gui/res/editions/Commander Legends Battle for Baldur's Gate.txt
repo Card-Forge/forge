@@ -785,7 +785,7 @@ ScryfallCode=CLB
 760 C Malakir Blood-Priest @Scott Murphy
 761 R Mardu Strike Leader @Jason Rainville
 762 R Mindblade Render @Mitchell Malloy
-763 R Nighthawk Scavenger @Heonhwa Choe
+763 R Nighthawk Scavenger @Heonhwa
 764 R Nighthowler @Nils Hamm
 765 R Nihilith @Dave Allsop
 766 C Phyrexian Rager @Stephan Martiniere

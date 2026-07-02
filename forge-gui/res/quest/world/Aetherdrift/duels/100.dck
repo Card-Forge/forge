@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Piotr_Glogowski_-_URG_Junk_(Modern,_#2363687).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+3 Krenko, Mob Boss
+3 Inti, Seneschal of the Sun
+4 Fear of Missing Out
+4 Draconautics Engineer
+4 Afterburner Expert
+4 Loot, the Pathfinder
+4 Agatha's Soul Cauldron
+4 Cache Grab
+4 Dredger's Insight
+3 Forest
+4 Botanical Sanctum
+4 Karplusan Forest
+4 Copperline Gorge
+3 Thundering Falls
+4 Thornspire Verge
+[Sideboard]
+4 Obstinate Baloth
+3 Squee, Dubious Monarch
+4 Haywire Mite
+4 Torch the Tower

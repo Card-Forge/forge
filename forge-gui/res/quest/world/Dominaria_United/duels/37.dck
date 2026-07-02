@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Anansi
+Title=Anansi
+Icon=Anansi.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/João_Afonso_-_Dimir_Zombies_(Standard,_#1445562).dck
+Deck Type=constructed
+
+[Main]
+1 Geralf, Visionary Stitcher
+2 Tainted Adversary
+3 Jadar, Ghoulcaller of Nephalia
+4 Bladestitched Skaab
+4 Siege Zombie
+4 Headless Rider
+4 Fell Stinger
+4 Archghoul of Thraben
+4 Champion of the Perished
+2 Cut Down
+2 Infernal Grasp
+2 Necroduality
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+4 Shipwreck Marsh
+5 Island
+13 Swamp
+[Sideboard]
+1 The Meathook Massacre
+1 Sheoldred, the Apocalypse
+2 Pithing Needle
+2 Overcharged Amalgam
+2 Spell Pierce
+2 Sorin the Mirthless
+2 Graveyard Trespasser
+3 Pilfer

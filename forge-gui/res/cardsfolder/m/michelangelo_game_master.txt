@@ -1,0 +1,7 @@
+Name:Michelangelo, Game Master
+ManaCost:2 G
+Types:Legendary Creature Mutant Ninja Turtle
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Revolt$ True | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, put a +1/+1 counter on Michelangelo.

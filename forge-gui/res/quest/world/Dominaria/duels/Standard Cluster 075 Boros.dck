@@ -1,0 +1,38 @@
+[metadata]
+Name=Boros
+Deck Type=constructed
+Title=Boros
+Description=Boros
+Difficulty=Easy
+Icon=Electro
+[Main]
+4 Abrade
+4 Approach of the Second Sun
+1 Arch of Orazca
+4 Azor's Gateway
+4 Cast Out
+4 Chandra, Torch of Defiance
+2 Field of Ruin
+1 Gideon of the Trials
+4 Inspiring Vantage
+1 Ixalan's Binding
+4 Magma Spray
+3 Mountain
+2 Mountain
+1 Mountain
+1 Mountain
+3 Plains
+2 Plains
+1 Renewed Faith
+2 Scavenger Grounds
+2 Settle the Wreckage
+4 Stone Quarry
+1 Sunbird's Invocation
+4 Sweltering Suns
+1 Thaumatic Compass
+[Sideboard]
+3 Chandra's Defeat
+3 Combustible Gearhulk
+3 Glorybringer
+4 Regal Caracal
+2 Silent Gravestone

@@ -1,0 +1,11 @@
+Name:Dina, Essence Brewer
+ManaCost:1 B G
+Types:Legendary Creature Dryad Druid
+PT:2/3
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever you sacrifice a creature, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+A:AB$ GainLife | Cost$ 2 T Sac<1/Creature.Other/another creature> | Defined$ You | LifeAmount$ X | SubAbility$ DBPutCounter | SpellDescription$ You gain X life and put X +1/+1 counters on target creature you control, where X is the sacrificed creature's power.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Sacrificed$CardPower
+DeckHas:Ability$LifeGain|Counters
+Oracle:Whenever you sacrifice a creature, draw a card. This ability triggers only once each turn.\n{2}, {T}, Sacrifice another creature: You gain X life and put X +1/+1 counters on target creature you control, where X is the sacrificed creature's power.

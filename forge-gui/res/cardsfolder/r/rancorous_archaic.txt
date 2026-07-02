@@ -1,0 +1,10 @@
+Name:Rancorous Archaic
+ManaCost:5
+Types:Creature Avatar
+PT:2/2
+K:Trample
+K:Reach
+K:etbCounter:P1P1:X:no Condition:Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.
+SVar:X:Count$Converge
+DeckHas:Ability$Counters
+Oracle:Trample, reach\nConverge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.

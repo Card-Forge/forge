@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Deadpool
+Title=Deadpool
+Icon=Deadpool.jpg
+Difficulty=Hard
+Description=../Modern/Shadows_over_Innistrad/Dutch_Modern_Open/Hylco_Worm_-_Bogles_(Modern,_#612731).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+1 Gaddock Teeg
+4 Gladecover Scout
+3 Kor Spiritdancer
+4 Slippery Bogle
+3 Path to Exile
+1 Open the Armory
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+1 Spirit Link
+2 Spirit Mantle
+1 Suppression Field
+1 Forest
+4 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+4 Temple Garden
+4 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+1 Grafdigger's Cage
+3 Leyline of Sanctity
+2 Nature's Claim
+2 Rest in Peace
+1 Seal of Primordium
+3 Stony Silence

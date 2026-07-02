@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=R2-D2
+Title=R2-D2
+Icon=R2-D2.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Gregory_Vaughan_-_Selesnya_Rhythm_(Standard,_#2940566).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Gene Pollinator
+4 Llanowar Elves
+4 Spider Manifestation
+3 Brightglass Gearhulk
+3 Keen-Eyed Curator
+3 Sage of the Skies
+1 Craterhoof Behemoth
+1 Nurturing Pixie
+1 Ouroboroid
+4 Nature's Rhythm
+3 Seam Rip
+2 Meltstrider's Resolve
+7 Forest
+4 Hushwood Verge
+4 Temple Garden
+2 Abandoned Air Temple
+2 Multiversal Passage
+2 Plains
+2 Starting Town
+[Sideboard]
+3 Erode
+3 Rest in Peace
+2 Leatherhead, Swamp Stalker
+2 Surrak, Elusive Hunter
+1 Authority of the Consuls
+1 Get Lost
+1 Insidious Fungus
+1 Ouroboroid
+1 Sage of the Skies

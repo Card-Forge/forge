@@ -4,13 +4,15 @@ import java.util.Locale;
 
 import forge.card.CardType;
 
-public class Devour extends KeywordWithAmount {
+public class Devour extends KeywordWithAmount implements KeywordWithTypeInterface {
     protected String type = null;
     protected String descType = null;
     protected String reminderType = null;
     protected String extra = null;
 
+    @Override
     public String getValidType() { return type == null ? "Creature" : type; }
+    @Override
     public String getTypeDescription() { return descType; }
 
     public String getTitle() {

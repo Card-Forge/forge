@@ -1,0 +1,46 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Special Delivery
+Description=Special Delivery brings the biggest creatures to the battlefield fast. Ramp into massive threats and deliver the beatdown.
+Deck Type=constructed
+Set=USG
+Image=special_delivery.jpg
+[main]
+4 Mountain|USG|1
+4 Mountain|USG|2
+3 Mountain|USG|3
+4 Forest|USG|1
+3 Forest|USG|2
+3 Forest|USG|3
+2 Slippery Karst|USG
+2 Smoldering Crater|USG
+2 Acridian|USG
+1 Anaconda|USG
+1 Argothian Wurm|USG
+1 Bull Hippo|USG
+2 Cradle Guard|USG
+2 Goblin Patrol|USG
+2 Goblin War Buggy|USG
+1 Pouncing Jaguar|USG
+2 Shivan Raptor|USG
+2 Thundering Giant|USG
+3 Wild Dogs|USG
+1 Heat Ray|USG
+1 Scrap|USG
+1 Shower of Sparks|USG
+1 Symbiosis|USG
+3 Arc Lightning|USG
+1 Hush|USG
+1 Jagged Lightning|USG
+1 Wildfire|USG
+1 Fiery Mantle|USG
+1 Hidden Ancients|USG
+1 Hidden Spider|USG
+1 Shiv's Embrace|USG
+1 Torch Song|USG
+1 Thran Turbine|USG
+[sideboard]

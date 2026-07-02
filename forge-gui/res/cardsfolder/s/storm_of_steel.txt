@@ -1,0 +1,5 @@
+Name:Storm of Steel
+ManaCost:3 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | TargetMin$ 1 | TargetMax$ 2 | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each of one or two targets.
+Oracle:Storm of Steel deals 2 damage to each of one or two targets.

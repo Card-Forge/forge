@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Kang
+Title=Kang
+Icon=Kang.jpg
+Difficulty=Easy
+Description=Oath_of_the_Gatewatch/Grand_Prix_Paris_2016_-_Undefeated_Day_1/Martin_Juza_-_Abzan_Midrange_(Standard,_#608520).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+3 Den Protector
+4 Siege Rhino
+4 Sylvan Advocate
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+4 Dromoka's Command
+2 Murderous Cut
+2 Silkwrap
+1 Gideon, Ally of Zendikar
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+2 Llanowar Wastes
+2 Plains
+4 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Arashin Cleric
+3 Duress
+2 Hallowed Moonlight
+3 Self-Inflicted Wound
+3 Transgress the Mind

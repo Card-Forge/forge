@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Oberon
+Title=Oberon
+Icon=Oberon.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/Fumiya_Tanaka_-_Azorius_Tempo_(Standard,_#1455057).dck
+Deck Type=constructed
+
+[Main]
+4 Stormchaser Drake
+4 Ledger Shredder
+4 Illuminator Virtuoso
+4 Delver of Secrets
+1 Spell Pierce
+1 Essence Capture
+1 Negate
+2 Make Disappear
+2 March of Swirling Mist
+4 Consider
+4 Shore Up
+4 Homestead Courage
+4 Combat Research
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+2 Plains
+4 Deserted Beach
+4 Adarkar Wastes
+9 Island
+[Sideboard]
+1 Spell Pierce
+1 Negate
+1 Disdainful Stroke
+1 Essence Capture
+3 Dennick, Pious Apprentice
+4 Witness Protection
+4 Malevolent Hermit

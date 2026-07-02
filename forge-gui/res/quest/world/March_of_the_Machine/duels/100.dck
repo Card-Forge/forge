@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Zatanna
+Title=Zatanna
+Icon=Zatanna.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/Aeonyx_-_Jund_Creativity_(Modern,_#1637917).dck
+Deck Type=constructed
+
+[Main]
+3 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+2 Titan of Industry
+1 Lightning Bolt
+2 Lightning Bolt
+2 Fatal Push
+1 Unholy Heat
+2 Thoughtseize
+2 Inquisition of Kozilek
+4 Indomitable Creativity
+3 Persist
+1 Strike It Rich
+3 Bitter Reunion
+4 Wrenn and Six
+3 Wrenn and Realmbreaker
+1 Stomping Ground
+2 Blood Crypt
+2 Stomping Ground
+1 Mountain
+3 Bloodstained Mire
+4 Wooded Foothills
+3 Dwarven Mine
+3 Arid Mesa
+3 Scalding Tarn
+1 Ziatora's Proving Ground
+[Sideboard]
+2 Nature's Claim
+1 Ancient Grudge
+3 Veil of Summer
+2 Necromentia
+1 Strike It Rich
+2 Turn the Earth
+1 Hidetsugu Consumes All
+1 Boseiju, Who Endures
+2 Brotherhood's End

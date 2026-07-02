@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=The Thing
+Title=The Thing
+Icon=The Thing.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/Beaudacious_-_Jund_Treasures_(Standard,_#1271236).dck
+Deck Type=constructed
+
+[Main]
+2 Valki, God of Lies
+2 Halana and Alena, Partners
+3 Immersturm Predator
+3 Reckless Stormseeker
+4 Prosperous Innkeeper
+4 Jaspera Sentinel
+4 Magda, Brazen Outlaw
+4 Goldspan Dragon
+4 Esika's Chariot
+3 Infernal Grasp
+2 Shatterskull Smashing
+1 Ranger Class
+2 Lolth, Spider Queen
+1 Mountain
+1 Den of the Bugbear
+2 Haunted Ridge
+2 Rockfall Vale
+2 Lair of the Hydra
+2 Forest
+4 Darkbore Pathway
+4 Cragcrown Pathway
+4 Blightstep Pathway
+[Sideboard]
+1 Shadows' Verdict
+2 Go Blank
+2 Kalain, Reclusive Painter
+3 Ray of Enfeeblement
+3 Power Word Kill
+4 Duress

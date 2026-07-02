@@ -1,0 +1,34 @@
+[metadata]
+Name=BR Aggro
+Deck Type=constructed
+Title=BR Aggro
+Description=BR Aggro
+Difficulty=Easy
+Icon=Raven
+[Main]
+1 Abrade
+4 Ahn-Crop Crasher
+4 Bomat Courier
+4 Earthshaker Khenra
+4 Fanatical Firebrand
+3 Grasping Dunes
+4 Hazoret the Fervent
+3 Kari Zev, Skyship Raider
+4 Lightning Strike
+1 Mountain
+5 Mountain
+3 Mountain
+9 Mountain
+1 Pia Nalaar
+3 Rekindling Phoenix
+3 Scavenger Grounds
+4 Shock
+[Sideboard]
+2 Abrade
+2 Aethersphere Harvester
+3 Chandra, Torch of Defiance
+2 Dire Fleet Daredevil
+1 Glorybringer
+2 Magma Spray
+2 Pia Nalaar
+1 Vance's Blasting Cannons

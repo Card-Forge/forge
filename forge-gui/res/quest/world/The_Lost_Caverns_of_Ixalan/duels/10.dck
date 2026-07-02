@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Lisa Simpson
+Title=Lisa Simpson
+Icon=Lisa Simpson.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/AvocadoToast_-_Dimir_Midrange_(Standard,_#1979891).dck
+Deck Type=constructed
+
+[Main]
+2 Sheoldred, the Apocalypse
+4 Spyglass Siren
+4 Deep-Cavern Bat
+3 Faerie Mastermind
+3 Gix, Yawgmoth Praetor
+1 Aclazotz, Deepest Betrayal
+4 Preacher of the Schism
+2 Subterranean Schooner
+4 Go for the Throat
+3 Make Disappear
+3 Cut Down
+1 Spell Pierce
+1 Duress
+4 Darkslick Shores
+4 Underground River
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+3 Restless Reef
+3 Shipwreck Marsh
+3 Mirrex
+3 Swamp
+3 Island
+[Sideboard]
+1 Negate
+2 Disdainful Stroke
+1 Duress
+3 Path of Peril
+2 Tishana's Tidebinder
+1 Gix's Command
+1 Blot Out
+2 Kaito Shizuki
+1 Aclazotz, Deepest Betrayal
+1 Spell Pierce

@@ -1,0 +1,9 @@
+Name:Primordial Pachyderm
+ManaCost:3 G
+Types:Creature Elephant Avatar
+PT:4/4
+K:Reach
+K:Trample
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ When this creature enters, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:Reach, trample\nWhen this creature enters, you gain 2 life.

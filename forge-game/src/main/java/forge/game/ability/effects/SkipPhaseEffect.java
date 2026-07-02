@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.SpellAbilityEffect;
@@ -95,20 +94,12 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
             re.setOverridingAbility(exile);
         }
         if (duration != null) {
-            addUntilCommand(sa, exileEffectCommand(game, eff));
+            addUntilCommand(sa, () -> game.getAction().exileEffect(eff));
         }
         eff.addReplacementEffect(re);
 
         if (sa.hasParam("Start")) {
-            final GameCommand startEffect = new GameCommand() {
-                private static final long serialVersionUID = -5861749814760561373L;
-
-                @Override
-                public void run() {
-                    game.getAction().moveToCommand(eff, sa);
-                }
-            };
-            game.getUpkeep().addUntil(player, startEffect);
+            game.getUpkeep().addUntil(player, () -> game.getAction().moveToCommand(eff, sa));
         } else {
             game.getAction().moveToCommand(eff, sa);
         }

@@ -11,6 +11,7 @@ import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
+import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
 import forge.adventure.world.WorldSave;
@@ -99,8 +100,7 @@ public class AdventureQuestController implements Serializable {
                     if (!toBoost.isEmpty()) {
                         float value = totalWeightToAssign / toBoost.size();
                         for (String key : toBoost) {
-                            float existingValue = boostedSpawns.getOrDefault(key, 0.0f);
-                                boostedSpawns.put(key, value + existingValue);
+                            boostedSpawns.merge(key, value, Float::sum);
                         }
                     }
                 }
@@ -284,6 +284,22 @@ public class AdventureQuestController implements Serializable {
 
     public static void clear(){
         object = null;
+    }
+
+    public boolean hasClearQuestActive() {
+        if (!MapStage.getInstance().isInMap() || TileMapScene.instance().rootPoint == null) {
+            return false;
+        }
+        for (AdventureQuestData quest : Current.player().getQuests()) {
+            for (AdventureQuestStage stage : quest.stages) {
+                if (stage.getStatus() == ACTIVE
+                        && stage.objective == ObjectiveTypes.Clear
+                        && stage.checkIfTargetLocation(TileMapScene.instance().rootPoint)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private AdventureQuestController(){

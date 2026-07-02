@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ghost Council
+Title=Ghost Council
+Icon=Ghost Council.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/PTQ_Amsterdam_2010_-_Madison_-_USA/Christian_Valenti_-_Cruel_Control_(Standard,_#1716).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Gatekeeper of Malakir
+4 Sedraxis Specter
+3 Siege-Gang Commander
+3 Countersquall
+4 Lightning Bolt
+3 Terminate
+4 Blightning
+2 Cruel Ultimatum
+4 Spreading Seas
+4 Jace, the Mind Sculptor
+4 Creeping Tar Pit
+4 Crumbling Necropolis
+2 Dragonskull Summit
+3 Drowned Catacomb
+2 Island
+2 Lavaclaw Reaches
+2 Mountain
+3 Scalding Tarn
+4 Swamp
+[Sideboard]
+3 Consuming Vapors
+3 Doom Blade
+4 Goblin Ruinblaster
+1 Nicol Bolas, Planeswalker
+3 Thought Hemorrhage

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=The Shade
+Title=The Shade
+Icon=The Shade.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/Standard_Champs_#8986329/ht991122_-_Abzan_Aggro_(Standard,_#337107).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Den Protector
+3 Hangarback Walker
+1 Heir of the Wilds
+4 Siege Rhino
+4 Warden of the First Tree
+3 Wingmate Roc
+3 Abzan Charm
+3 Dromoka's Command
+2 Murderous Cut
+3 Gideon, Ally of Zendikar
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+2 Llanowar Wastes
+2 Plains
+4 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+3 Arashin Cleric
+3 Duress
+1 Self-Inflicted Wound
+3 Silkwrap
+2 Tasigur, the Golden Fang
+2 Transgress the Mind

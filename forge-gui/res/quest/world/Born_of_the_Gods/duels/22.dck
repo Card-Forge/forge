@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=The Court Jester
+Title=The Court Jester
+Icon=The Court Jester.jpg
+Difficulty=Easy
+Description=Born_of_the_Gods/Gran_Prix_Trial_Manchester/Valeri_-_Esper_Control_(Standard,_#68685).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+1 Blood Baron of Vizkopa
+1 Elixir of Immortality
+2 Devour Flesh
+4 Dissolve
+1 Fated Retribution
+4 Hero's Downfall
+3 Sphinx's Revelation
+1 Syncopate
+4 Supreme Verdict
+2 Thoughtseize
+4 Detention Sphere
+2 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+4 Godless Shrine
+4 Hallowed Fountain
+4 Island
+2 Plains
+2 Temple of Deceit
+2 Temple of Enlightenment
+4 Temple of Silence
+4 Watery Grave
+[Sideboard]
+2 Dispel
+1 Doom Blade
+2 Duress
+1 Last Breath
+2 Negate
+1 Notion Thief
+1 Obzedat, Ghost Council
+2 Pithing Needle
+1 Revoke Existence
+1 Ultimate Price

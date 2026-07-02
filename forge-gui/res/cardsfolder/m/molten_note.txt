@@ -1,0 +1,9 @@
+Name:Molten Note
+ManaCost:X R W
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ Y | SubAbility$ DBUntapAll | SpellDescription$ CARDNAME deals damage to target creature equal to the amount of mana spent to cast this spell. Untap all creatures you control.
+SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
+K:Flashback:6 R W
+SVar:X:Count$xPaid
+SVar:Y:Count$CastTotalManaSpent
+Oracle:Molten Note deals damage to target creature equal to the amount of mana spent to cast this spell. Untap all creatures you control.\nFlashback {6}{R}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/Modern_Turniers_vom_15.11.2011/Christian_Krug_-_Red_Deck_Wins_(Modern,_#22651).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+4 Goblin Guide
+4 Grim Lavamancer
+4 Lightning Bolt
+4 Magma Jet
+4 Shard Volley
+4 Blightning
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Blackcleave Cliffs
+4 Blood Crypt
+4 Mountain
+4 Scalding Tarn
+[Sideboard]
+2 Dismember
+4 Flamebreak
+3 Flames of the Blood Hand
+2 Searing Blaze
+4 Smash to Smithereens

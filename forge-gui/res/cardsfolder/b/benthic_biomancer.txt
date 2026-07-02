@@ -2,7 +2,7 @@ Name:Benthic Biomancer
 ManaCost:U
 Types:Creature Merfolk Wizard Mutant
 PT:1/1
-K:Adapt:1:1 U
+A:AB$ PutCounter | Cost$ 1 U | Adapt$ 1
 T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigDraw | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, draw a card, then discard a card.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose

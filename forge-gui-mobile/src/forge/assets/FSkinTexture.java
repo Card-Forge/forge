@@ -2,8 +2,10 @@ package forge.assets;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
@@ -116,6 +118,47 @@ public enum FSkinTexture implements FImage {
         load("");
     }
 
+    private static final EnumSet<FSkinTexture> ADVENTURE_BACKGROUNDS = EnumSet.of(
+            ADV_BG_TEXTURE, ADV_BG_MATCH, ADV_BG_MATCH_DAY, ADV_BG_MATCH_NIGHT,
+            ADV_BG_SWAMP, ADV_BG_FOREST, ADV_BG_MOUNTAIN, ADV_BG_ISLAND, ADV_BG_PLAINS,
+            ADV_BG_WASTE, ADV_BG_COMMON, ADV_BG_CAVE, ADV_BG_DUNGEON, ADV_BG_CASTLE
+    );
+
+    private boolean isAdventureBackground() {
+        return ADVENTURE_BACKGROUNDS.contains(this);
+    }
+
+    public static void invalidateAdventureTextures() {
+        for (FSkinTexture texture : ADVENTURE_BACKGROUNDS) {
+            texture.isloaded = false;
+            texture.texture = null;
+            texture.hasError = false;
+        }
+    }
+
+    private FileHandle getAdventureBackgroundFile() {
+        String adventureDirectory = GuiBase.getAdventureDirectory();
+        if (adventureDirectory == null || adventureDirectory.isEmpty()) {
+            return null;
+        }
+
+        // Check adventure-specific skin directory first
+        String adventureSkinPath = adventureDirectory + ForgeConstants.SKIN_DIR + filename;
+        FileHandle adventureFile = Gdx.files.absolute(adventureSkinPath);
+        if (adventureFile.exists()) {
+            return adventureFile;
+        }
+
+        // Check common adventure skin directory
+        String commonSkinPath = ForgeConstants.ADVENTURE_COMMON_DIR + ForgeConstants.SKIN_DIR + filename;
+        FileHandle commonFile = Gdx.files.absolute(commonSkinPath);
+        if (commonFile.exists()) {
+            return commonFile;
+        }
+
+        return null;
+    }
+
     public boolean load(String planeName) {
         if (hasError)
             return false;
@@ -123,7 +166,21 @@ public enum FSkinTexture implements FImage {
             texture = null; //reset
             this.filename = ImageFetcher.getPlanechaseFilename(planeName);
         }
-        FileHandle preferredFile = isPlanechaseBG ? FSkin.getCachePlanechaseFile(filename) : FSkin.getSkinFile(filename);
+
+        FileHandle preferredFile;
+        if (isPlanechaseBG) {
+            preferredFile = FSkin.getCachePlanechaseFile(filename);
+        } else if (isAdventureBackground()) {
+            // For adventure backgrounds, check adventure directories first
+            preferredFile = getAdventureBackgroundFile();
+            if (preferredFile == null) {
+                // Fall back to skin directories
+                preferredFile = FSkin.getSkinFile(filename);
+            }
+        } else {
+            preferredFile = FSkin.getSkinFile(filename);
+        }
+
         if (preferredFile.exists()) {
             try {
                 texture = Forge.getAssets().getTexture(preferredFile, false);

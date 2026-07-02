@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robot84
+Title=Robot84
+Icon=Black Flame.jpg
+Difficulty=Easy
+Description=Abzan Control 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+3 Renegade Map
+3 Treasure Map
+4 Fatal Push
+4 Fumigate
+4 Anointed Procession
+4 Cast Out
+4 Hidden Stockpile
+3 Legion's Landing
+1 Ajani Unyielding
+2 Vraska, Relic Seeker
+4 Concealed Courtyard
+4 Evolving Wilds
+1 Forest
+2 Ifnir Deadlands
+6 Plains
+3 Shefet Dunes
+2 Swamp
+[Sideboard]
+2 Arguel's Blood Fast
+1 Dispossess
+3 Duress
+2 Ixalan's Binding
+2 Lost Legacy
+4 Sunscourge Champion
+1 Treasure Map

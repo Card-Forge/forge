@@ -1,0 +1,9 @@
+Name:Toph, Earthbending Master|Deck:Toph, Earthbending Master.dck|Variant:Commander|Avatar:Toph, Earthbending Master|Desc:
+Name:The Earth King|Deck:The Earth King.dck|Variant:Commander|Avatar:The Earth King|Desc:
+Name:Bumi, Unleashed|Deck:Bumi, Unleashed.dck|Variant:Commander|Avatar:Bumi, Unleashed|Desc:
+Name:Toph, the First Metalbender|Deck:Toph, the First Metalbender.dck|Variant:Commander|Avatar:Toph, the First Metalbender|Desc:
+Name:Momir Vig Avatar|Deck:Momir Vig, Simic Visionary Avatar.dck|Variant:Vanguard|Avatar:Momir Vig, Simic Visionary Avatar|Desc:
+Name:Avatar Kyoshi, Earthbender|Deck:Avatar Kyoshi, Earthbender.dck|Variant:Commander|Avatar:Avatar Kyoshi, Earthbender|Desc:
+Name:Flopsie, Bumi's Buddy|Deck:Flopsie, Bumi's Buddy.dck|Variant:Commander|Avatar:Flopsie, Bumi's Buddy|Desc:
+Name:Katara, the Fearless|Deck:Katara, the Fearless.dck|Variant:Commander|Avatar:Katara, the Fearless|Desc:
+Name:Aang, at the Crossroads|Deck:Aang, at the Crossroads.dck|Variant:Commander|Avatar:Aang, at the Crossroads|Desc:

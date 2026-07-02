@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Firestorm
+Title=Firestorm
+Icon=Firestorm.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/Baumgarten_-_Tribal_Zoo_(Modern,_#1975687).dck
+Deck Type=constructed
+
+[Main]
+4 Nishoba Brawler
+4 Ragavan, Nimble Pilferer
+4 Scion of Draco
+4 Territorial Kavu
+4 Wild Nacatl
+4 Lightning Bolt
+3 Stubborn Denial
+4 Tribal Flames
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Breeding Pool
+4 Flooded Strand
+1 Forest
+1 Mountain
+1 Overgrown Tomb
+1 Sacred Foundry
+1 Savai Triome
+1 Steam Vents
+1 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+1 Zagoth Triome
+[Sideboard]
+2 Endurance
+1 Flusterstorm
+2 Force of Vigor
+2 Path to Exile
+2 Rest in Peace
+2 Shadow Prophecy
+1 Stubborn Denial
+2 Veil of Summer
+1 Wear // Tear

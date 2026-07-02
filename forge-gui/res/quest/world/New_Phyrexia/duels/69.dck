@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Rockville,_Maryland/Ian_Shore_in_PTQ_Barcelona_-_Faeries_(Modern,_#28985).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+4 Spellstutter Sprite
+3 Vendilion Clique
+2 Relic of Progenitus
+3 Vedalken Shackles
+4 Cryptic Command
+1 Dispel
+2 Mana Leak
+4 Remand
+4 Spell Snare
+1 Faerie Conclave
+17 Island
+4 Mutavault
+3 Tectonic Edge
+[Sideboard]
+1 Mortarpod
+3 Ratchet Bomb
+2 Spellskite
+2 Steel Sabotage
+3 Threads of Disloyalty
+1 Wurmcoil Engine

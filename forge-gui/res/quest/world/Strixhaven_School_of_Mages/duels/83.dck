@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=WereHyena
+Title=WereHyena
+Icon=WereHyena.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Chris_Schiber_-_Cascade_Crash_(Modern,_#1228979).dck
+Deck Type=constructed
+
+[Main]
+2 Brazen Borrower
+2 Bonecrusher Giant
+4 Shardless Agent
+4 Omnath, Locus of Creation
+4 Solitude
+4 Fury
+1 Valakut Awakening
+3 Prismari Command
+4 Fire // Ice
+4 Force of Negation
+4 Violent Outburst
+4 Crashing Footfalls
+4 Ardent Plea
+4 Teferi, Time Raveler
+1 Stomping Ground
+1 Riverglide Pathway
+1 Forest
+1 Hallowed Fountain
+1 Island
+1 Ketria Triome
+1 Temple Garden
+1 Mountain
+1 Plains
+1 Raugrin Triome
+1 Sulfur Falls
+1 Sacred Foundry
+1 Steam Vents
+1 Breeding Pool
+2 Raging Ravine
+2 Wooded Foothills
+3 Scalding Tarn
+3 Windswept Heath
+4 Flooded Strand
+4 Misty Rainforest
+[Sideboard]
+1 Seasoned Pyromancer
+1 Knight of Autumn
+1 Yorion, Sky Nomad
+2 Wear // Tear
+3 Mystical Dispute
+3 Force of Vigor
+4 Endurance

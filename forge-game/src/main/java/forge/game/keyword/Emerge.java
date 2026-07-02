@@ -5,20 +5,16 @@ import java.util.Locale;
 import forge.card.CardType;
 import forge.game.cost.Cost;
 
-public class Emerge extends KeywordWithCost {
+public class Emerge extends KeywordWithCost implements KeywordWithTypeInterface {
     protected String type = null;
     protected String descType = null;
 
+    @Override
     public String getValidType() { return type == null ? "Creature" : type; }
+    @Override
     public String getTypeDescription() { return descType; }
 
-    public String getTitle() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getTitleWithoutCost());
-        sb.append(" ").append(cost.toSimpleString());
-        return sb.toString();
-    }
-
+    @Override
     public String getTitleWithoutCost() {
         StringBuilder sb = new StringBuilder();
         sb.append(getKeyword());

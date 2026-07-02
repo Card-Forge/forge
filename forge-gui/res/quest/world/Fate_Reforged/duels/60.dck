@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rocky
+Title=Rocky
+Icon=Rocky.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/µÖ┤ÒéîÒéïÕ▒ïÒâóÒâÇÒâ│µØ»_-_2015-03-15┬á/Kageyama_Hiroki_-_Dredge_(Modern,_#202865).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodghast
+2 Bloodsoaked Champion
+4 Gravecrawler
+4 Gurmag Angler
+4 Lotleth Troll
+4 Satyr Wayfinder
+4 Vengevine
+4 Abrupt Decay
+2 Dismember
+4 Grisly Salvage
+4 Inquisition of Kozilek
+2 Bloodstained Mire
+1 Forest
+4 Marsh Flats
+2 Overgrown Tomb
+3 Swamp
+4 Verdant Catacombs
+4 Woodland Cemetery
+[Sideboard]
+2 Feed the Clan
+3 Fulminator Mage
+2 Golgari Charm
+3 Lifebane Zombie
+2 Pithing Needle
+3 Thoughtseize

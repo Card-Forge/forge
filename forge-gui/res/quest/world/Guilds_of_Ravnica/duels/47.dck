@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Fin Fang Foom
+Title=Fin Fang Foom
+Icon=Fin Fang Foom.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Alessio_Silvi_-_Golgari_(Standard,_#769032).dck
+Deck Type=constructed
+
+[Main]
+1 Carnage Tyrant
+3 Doom Whisperer
+2 Golgari Findbroker
+4 Jadelight Ranger
+4 Merfolk Branchwalker
+2 Midnight Reaper
+3 Ravenous Chupacabra
+2 Seekers' Squire
+3 Wildgrowth Walker
+2 Assassin's Trophy
+2 Cast Down
+2 Vraska's Contempt
+2 Find // Finality
+2 Vivien Reid
+2 Vraska, Relic Seeker
+8 Forest
+2 Memorial to Folly
+4 Overgrown Tomb
+6 Swamp
+4 Woodland Cemetery
+[Sideboard]
+1 Assassin's Trophy
+2 Carnage Tyrant
+2 Deathgorge Scavenger
+4 Duress
+1 Find // Finality
+2 Ritual of Soot
+2 The Eldest Reborn
+1 Vraska, Golgari Queen

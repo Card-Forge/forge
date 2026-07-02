@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigExile:DB$ Dig | DigNum$ 5 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeHandExile | TriggerDescription$ At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with CARDNAME into your hand.
 SVar:TrigChangeHandExile:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | ChangeType$ Card.YouCtrl | RememberChanged$ True | SubAbility$ ChangeBack
-SVar:ChangeBack:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn+ExiledWithSource+IsNotRemembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
+SVar:ChangeBack:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn+ExiledWithSource+!IsRemembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your end step, discard a card.
 SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose

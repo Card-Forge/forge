@@ -4,7 +4,7 @@ Types:Legendary Creature Merfolk Wizard
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Creature.Other+YouCtrl+counters_GE1_P1P1 | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, if you control another creature with a +1/+1 counter on it, draw a card.
 SVar:TrigDraw:DB$ Draw
-K:Adapt:4:4 G U
+A:AB$ PutCounter | Cost$ 4 G U | Adapt$ 4
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
 DeckHas:Ability$Counters
 DeckHints:Ability$Counters

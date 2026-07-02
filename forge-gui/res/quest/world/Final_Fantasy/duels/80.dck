@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Waterlord
+Title=Waterlord
+Icon=Waterlord.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/AceyMTG_-_Grixis_Control_(Modern,_#2531932).dck
+Deck Type=constructed
+
+[Main]
+4 Tamiyo, Inquisitive Student
+3 Snapcaster Mage
+1 Murktide Regent
+4 Psychic Frog
+1 Stern Scolding
+1 Cling to Dust
+3 Flame of Anor
+4 Lightning Bolt
+4 Counterspell
+1 Bitter Triumph
+3 Fatal Push
+1 Force of Negation
+3 Spell Snare
+1 Sheoldred's Edict
+2 Thoughtseize
+2 Kaito, Bane of Nightmares
+2 Undercity Sewers
+1 Spirebluff Canal
+2 Watery Grave
+1 Swamp
+2 Island
+2 Bloodstained Mire
+1 Raucous Theater
+1 Darkslick Shores
+2 Steam Vents
+4 Polluted Delta
+3 Scalding Tarn
+1 Thundering Falls
+[Sideboard]
+1 Stern Scolding
+1 Fire Magic
+1 Jace, the Mind Sculptor
+1 Cling to Dust
+4 Consign to Memory
+2 Break the Ice
+1 Ashiok, Dream Render
+1 Force of Negation
+1 Kolaghan's Command
+1 The Meathook Massacre
+1 Murktide Regent

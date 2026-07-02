@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/demonictutors_-_5rack!_(Modern,_#1499979).dck
+Deck Type=constructed
+
+[Main]
+1 Nihil Spellbomb
+1 Pithing Needle
+2 The Rack
+2 Funeral Charm
+3 Fatal Push
+1 Path of Peril
+2 Bloodchief's Thirst
+3 Thoughtseize
+3 Wrench Mind
+4 Smallpox
+4 Raven's Crime
+4 Inquisition of Kozilek
+2 Shrieking Affliction
+4 Urza's Saga
+1 Davriel, Rogue Shadowmage
+4 Liliana of the Veil
+2 Silent Clearing
+3 Urborg, Tomb of Yawgmoth
+3 Mishra's Factory
+11 Swamp
+[Sideboard]
+1 Plague Engineer
+1 Path of Peril
+1 Ashiok, Dream Render
+2 Surgical Extraction
+2 Ensnaring Bridge
+2 Delirium Skeins
+2 Death's Shadow
+4 Leyline of the Void

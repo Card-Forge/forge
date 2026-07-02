@@ -3,6 +3,6 @@ ManaCost:X X G
 Types:Sorcery
 A:SP$ Repeat | RepeatSubAbility$ DBPopulate | MaxRepeat$ X | StackDescription$ SpellDescription | SpellDescription$ Populate X times. (To populate, create a token that's a copy of a creature token you control. Do this X times.)
 SVar:X:Count$xPaid
-SVar:DBPopulate:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | Populate$ True
+SVar:DBPopulate:DB$ CopyPermanent | Populate$ True
 DeckNeeds:Ability$Token
 Oracle:Populate X times. (To populate, create a token that's a copy of a creature token you control. Do this X times.)

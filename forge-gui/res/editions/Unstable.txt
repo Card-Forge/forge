@@ -10,11 +10,14 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=UST
 
 [cards]
+1 C Adorable Kitten @Andrea Radeck
 2 U Aerial Toastmaster @Carl Critchlow
 3a C Amateur Auteur @McLean Kendree
 3b C Amateur Auteur @McLean Kendree
 3c C Amateur Auteur @McLean Kendree
 3d C Amateur Auteur @McLean Kendree
+4 R By Gnome Means @Sean Murray
+5 C Chivalrous Chevalier @Dmitry Burmak
 6 M Do-It-Yourself Seraph @David Sladek
 7 U Gimme Five @Jesper Ejsing
 8 C GO TO JAIL @Marco Teixeira
@@ -90,7 +93,7 @@ ScryfallCode=UST
 62 U Old-Fashioned Vampire @Simon Dominic
 63 R Over My Dead Bodies @Even Amundsen
 64 U Overt Operative @Bram Sels
-65 U "Rumors of My Death..." @Alex Konstad
+65 U "Rumors of My Death . . ." @Alex Konstad
 66 U Skull Saucer @Mike Burns
 67a U Sly Spy @Michael Phillippi ${"variant": "A"}
 67b U Sly Spy @Michael Phillippi ${"variant": "B"}
@@ -299,3 +302,10 @@ ScryfallCode=UST
 18 c_a_clue_draw @John Avon
 19 c_x_x_a_construct @Matt Gaser
 20 c_1_1_a_gnome @Dmitry Burmak
+
+[CreatureTypes]
+Brainiac:Brainiacs
+Cyborg:Cyborgs
+Killbot:Killbots
+[ArtifactTypes]
+Contraption:Contraptions

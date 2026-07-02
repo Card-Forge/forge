@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Batman
+Title=Batman
+Icon=Batman.jpg
+Difficulty=Medium
+Description=Gatecrash/2013_TCGplayer_Open_5K_-_Dallas/WesBlanchard_-_Jund_Aggro_(Standard,_#50275).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+3 Dreg Mangler
+4 Experiment One
+4 Falkenrath Aristocrat
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Mogg Flunkies
+4 Rakdos Cackler
+4 Searing Spear
+3 Dreadbore
+4 Blood Crypt
+2 Dragonskull Summit
+2 Forest
+1 Mountain
+4 Overgrown Tomb
+3 Rootbound Crag
+4 Stomping Ground
+2 Woodland Cemetery
+[Sideboard]
+1 Abrupt Decay
+2 Appetite for Brains
+3 Cremate
+2 Domri Rade
+2 Golgari Charm
+1 Kessig Wolf Run
+2 Olivia Voldaren
+2 Wolfir Silverheart

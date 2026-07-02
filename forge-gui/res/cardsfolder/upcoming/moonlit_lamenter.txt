@@ -1,7 +1,0 @@
-Name:Moonlit Lamenter
-ManaCost:2 W
-Types:Creature Treefolk Cleric
-PT:2/5
-K:etbCounter:M1M1:1
-A:AB$ Draw | Cost$ 1 W RemoveAnyCounter<1/Any/Card.Self/this creature> | SorcerySpeed$ True | SpellDescription$ Draw a card. Activate only as a sorcery.
-Oracle:This creature enters with a -1/-1 counter on it.\n{1}{W}, Remove a counter from this creature: Draw a card. Activate only as a sorcery.

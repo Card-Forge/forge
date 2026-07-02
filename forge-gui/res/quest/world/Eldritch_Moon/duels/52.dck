@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ulasht
+Title=Ulasht
+Icon=Ulasht.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/Competitive_Modern_Constructed_League/Sqlut_-_Red_Deck_Wins_(Modern,_#657509).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+2 Blood Crypt
+3 Bloodstained Mire
+2 Mountain
+2 Sacred Foundry
+3 Scalding Tarn
+3 Wooded Foothills
+[Sideboard]
+4 Collective Brutality
+3 Grafdigger's Cage
+4 Self-Inflicted Wound
+4 Smash to Smithereens

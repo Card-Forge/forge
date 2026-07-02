@@ -27,6 +27,7 @@ import com.google.common.collect.Multimaps;
 import com.google.common.collect.Table;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
@@ -67,7 +68,7 @@ public class Combat {
     private final Supplier<Map<Card, CardCollection>> attackersOrderedForDamageAssignment = Suppliers.memoize(Maps::newHashMap);
     private final Supplier<Map<Card, CardCollection>> blockersOrderedForDamageAssignment = Suppliers.memoize(Maps::newHashMap);
     private final Supplier<CardCollection> lkiCache = Suppliers.memoize(CardCollection::new);
-    private final Supplier<CardDamageMap> damageMap = Suppliers.memoize(CardDamageMap::new);
+    private final Supplier<CardDamageTable> damageMap = Suppliers.memoize(CardDamageTable::new);
 
     // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW)
     private final Supplier<CardCollection> combatantsThatDealtFirstStrikeDamage = Suppliers.memoize(CardCollection::new);
@@ -288,13 +289,12 @@ public class Combat {
     public final Player getDefenderPlayerByAttacker(final Card c) {
         GameEntity defender = getDefenderByAttacker(c);
 
-        if (defender instanceof Player) {
-            return (Player) defender;
+        if (defender instanceof Player def) {
+            return def;
         }
 
         // maybe attack on a controlled planeswalker?
-        if (defender instanceof Card) {
-            Card def = (Card)defender;
+        if (defender instanceof Card def) {
             if (def.isBattle()) {
                 return def.getProtectingPlayer();
             } else {
@@ -513,7 +513,7 @@ public class Combat {
                 sb.append(", ");
             }
         }
-        playerWhoAttacks.getGame().getGameLog().add(GameLogEntryType.COMBAT, sb.toString());
+        playerWhoAttacks.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.COMBAT, sb.toString()));
     }
 
     /**
@@ -929,7 +929,7 @@ public class Combat {
         final Game game = playerWhoAttacks.getGame();
         game.copyLastState();
 
-        CardDamageMap preventMap = new CardDamageMap();
+        CardDamageTable preventMap = new CardDamageTable();
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
         game.getAction().dealDamage(true, damageMap.get(), preventMap, counterTable, null);

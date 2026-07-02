@@ -1,0 +1,17 @@
+Name:Honorbound Page
+ManaCost:3 W
+Types:Creature Cat Cleric
+PT:3/3
+K:First Strike
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+AlternateMode:Prepare
+Oracle:First strike\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Forum's Favor
+ManaCost:W
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +1 | KW$ Flying | SpellDescription$ Target creature gets +1/+0 and gains flying until end of turn.
+Oracle:Target creature gets +1/+0 and gains flying until end of turn.

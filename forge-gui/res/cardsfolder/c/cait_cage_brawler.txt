@@ -8,6 +8,6 @@ SVar:TrigDraw:DB$ Draw | Defined$ You & TriggeredDefendingPlayer | NumCards$ 1 |
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ TriggeredDefendingPlayer & You | RememberDiscarded$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | ConditionDefined$ Remembered | ConditionPresent$ Card.greatestRememberedCMC+YouOwn | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:HasAttackEffect:True
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Discard|Counters
 Oracle:During your turn, Cait, Cage Brawler has indestructible.\nWhenever Cait attacks, you and defending player each draw a card, then discard a card. Put two +1/+1 counters on Cait if you discarded the card with the highest mana value among those cards or tied for highest.

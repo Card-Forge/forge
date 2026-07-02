@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Captain America
+Title=Captain America
+Icon=Captain America.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/AshenFenix_-_Orzhov_Standard_(Standard,_#1507289).dck
+Deck Type=constructed
+
+[Main]
+1 Steel Seraph
+1 Gix, Yawgmoth Praetor
+2 Liesa, Forgotten Archangel
+2 Hero of the Dunes
+2 Loran of the Third Path
+2 Battlefly Swarm
+2 Airlift Chaplain
+2 Tenacious Underdog
+2 Splatter Goblin
+2 Elas il-Kor, Sadistic Pilgrim
+2 Benalish Sleeper
+2 Yotian Frontliner
+2 Recruitment Officer
+2 Gnawing Vermin
+1 Legions to Ashes
+2 Kayla's Command
+2 Gix's Command
+2 Recommission
+1 In the Trenches
+2 Wedding Announcement
+1 Takenuma, Abandoned Mire
+2 Shattered Sanctum
+2 Scoured Barrens
+9 Swamp
+10 Plains
+[Sideboard]

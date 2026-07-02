@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Bryant_Norwood_-_Mono-White_Control_(Standard,_#1145055).dck
+Deck Type=constructed
+
+[Main]
+2 Giant Killer
+2 Luminarch Aspirant
+2 Realm-Cloaked Giant
+3 Lavabrink Venturer
+4 Expel
+4 Swift Response
+2 Shatter the Sky
+3 Doomskar
+2 Elspeth Conquers Death
+3 Nahiri's Binding
+4 Banishing Light
+4 Pacifism
+4 Bound in Gold
+1 Faceless Haven
+1 Crawling Barrens
+19 Snow-Covered Plains
+[Sideboard]
+1 Cosmos Elixir
+1 Archon of Sun's Grace
+1 Sigrid, God-Favored
+2 Reidane, God of the Worthy
+2 Maskwood Nexus

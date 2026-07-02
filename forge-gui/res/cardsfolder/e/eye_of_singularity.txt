@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:World Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME enters, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatCards$ Permanent.nonBasic | RepeatSubAbility$ DBRem | SubAbility$ DBDestroy
-SVar:DBRem:DB$ Pump | ImprintCards$ Valid Permanent.sharesNameWith Remembered+IsNotRemembered
+SVar:DBRem:DB$ Pump | ImprintCards$ Valid Permanent.sharesNameWith Remembered+!IsRemembered
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Card.IsImprinted | NoRegen$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.nonBasic | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a permanent other than a basic land enters, destroy all other permanents with that name. They can't be regenerated.

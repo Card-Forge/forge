@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Hans
+Title=Hans
+Icon=Hans.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Sean_Franko_Braga_-_Grixis_Gearhulks_(Standard,_#2386066).dck
+Deck Type=constructed
+
+[Main]
+4 Coalstoke Gearhulk
+2 Kiora, the Rising Tide
+4 Oildeep Gearhulk
+4 Visage Bandit
+4 Waxen Shapethief
+2 Brass's Tunnel-Grinder
+3 Bitter Triumph
+2 Go for the Throat
+3 Brotherhood's End
+2 Ill-Timed Explosion
+1 Slagstorm
+3 Bitter Reunion
+2 Liliana of the Veil
+4 Blazemire Verge
+2 Cavern of Souls
+2 Gloomlake Verge
+3 Raucous Theater
+4 Riverpyre Verge
+2 Sulfurous Springs
+1 Swamp
+3 Thundering Falls
+3 Undercity Sewers
+[Sideboard]
+2 Abrade
+1 Blot Out
+1 Disdainful Stroke
+3 Duress
+2 Negate
+2 Obliterating Bolt
+2 Sheoldred, the Apocalypse
+2 Withering Torment

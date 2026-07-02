@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 040715 - Death in Segments
 URL:http://www.gatheringmagic.com/seanuy-040715-perplexing-chimera-2-death-in-segments/
 Goal:Win
 Turns:2
-Difficulty:Hard
+Difficulty:Rare
 Description:Win this turn.
 [state]
 ActivePlayer=AI

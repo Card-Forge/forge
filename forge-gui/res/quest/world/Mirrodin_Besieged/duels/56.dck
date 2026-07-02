@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Sidisi
+Title=Sidisi
+Icon=Sidisi.jpg
+Difficulty=Hard
+Description=../Modern/Mirrodin_Besieged/Arcore_(MI)_-_Gran_Modern/Luppino_Marcello_-_Weenie_White_(Modern,_#22585).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Accorder Paladin
+4 Hero of Bladehold
+4 Knight Exemplar
+4 Mirran Crusader
+4 Student of Warfare
+4 White Knight
+3 Condemn
+3 Path to Exile
+4 Honor of the Pure
+4 Oblivion Ring
+2 Story Circle
+20 Plains
+[Sideboard]
+4 Celestial Purge
+3 Day of Judgment
+2 Inspired Charge
+4 Leyline of Sanctity

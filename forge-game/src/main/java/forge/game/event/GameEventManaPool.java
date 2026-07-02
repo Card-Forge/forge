@@ -1,10 +1,17 @@
 package forge.game.event;
 
-import forge.game.mana.Mana;
+import java.util.Set;
+
+import forge.card.MagicColor;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.Lang;
 
-public record GameEventManaPool(Player player, EventValueChangeType mode, Mana mana) implements GameEvent {
+public record GameEventManaPool(PlayerView player, EventValueChangeType mode, Set<MagicColor.Color> colors) implements GameEvent {
+
+    public GameEventManaPool(Player player, EventValueChangeType mode, Set<MagicColor.Color> colors) {
+        this(PlayerView.get(player), mode, colors);
+    }
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
@@ -21,7 +28,7 @@ public record GameEventManaPool(Player player, EventValueChangeType mode, Mana m
         switch (mode) {
         case Added:
         case Removed:
-            sb.append(" - ").append(mana);
+            sb.append(" - ").append(colors);
             break;
         default:
             break;

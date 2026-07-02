@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Havok
+Title=Havok
+Icon=Havok.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Granger_Hamilton_-_Rakdos_Goblins_(Modern,_#2370467).dck
+Deck Type=constructed
+
+[Main]
+1 Battle Cry Goblin
+3 Boggart Harbinger
+1 Boggart Trawler
+4 Conspicuous Snoop
+2 Draconautics Engineer
+4 Goblin Matron
+1 Goblin Ringleader
+2 Greasewrench Goblin
+2 Kiki-Jiki, Mirror Breaker
+1 Krenko, Mob Boss
+1 Mogg Mob
+3 Mogg War Marshal
+4 Munitions Expert
+1 Searslicer Goblin
+1 Skirk Prospector
+1 Sling-Gang Lieutenant
+4 Aether Vial
+2 Agatha's Soul Cauldron
+1 Chthonian Nightmare
+2 Arena of Glory
+3 Arid Mesa
+1 Auntie's Hovel
+3 Blood Crypt
+4 Bloodstained Mire
+3 Cavern of Souls
+4 Mountain
+1 Raucous Theater
+1 Swamp
+[Sideboard]
+1 Chthonian Nightmare
+2 Fatal Push
+2 Fulminator Mage
+1 Goblin Cratermaker
+1 Goblin Trashmaster
+4 Leyline of the Void
+2 Mogg Mob
+2 Thoughtseize

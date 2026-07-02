@@ -53,6 +53,7 @@ public class EndureEffect extends TokenEffectBase {
         int amount = AbilityUtils.calculateAmount(host, num, sa);
 
         if (amount < 1) {
+            // CR 701.63b
             return;
         }
 
@@ -83,7 +84,7 @@ public class EndureEffect extends TokenEffectBase {
                 tokenTable.put(pl, result, 1);
             }
         }
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
 
         if (!tokenTable.isEmpty()) {
             CardZoneTable triggerList = new CardZoneTable();

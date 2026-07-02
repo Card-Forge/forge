@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=DonkeyKong
+Title=DonkeyKong
+Icon=DonkeyKong.jpg
+Difficulty=Medium
+Description=Zendikar/Zendikar_Game_Day_-_White_Cap_Comics_-_USA/Jim_Dewey_-_Mono_Red_(Standard,_#3544).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ball Lightning
+4 Hell's Thunder
+4 Hellspark Elemental
+4 Jackal Familiar
+3 Raging Goblin
+4 Burst Lightning
+4 Lightning Bolt
+4 Banefire
+4 Earthquake
+2 Fireball
+3 Pyroclasm
+18 Mountain
+2 Valakut, the Molten Pinnacle
+[Sideboard]
+3 Act of Treason
+2 Hellkite Charger
+4 Punishing Fire
+4 Zektar Shrine Expedition

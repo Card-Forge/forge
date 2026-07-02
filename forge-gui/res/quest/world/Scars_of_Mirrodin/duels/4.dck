@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Ulasht
+Title=Ulasht
+Icon=Ulasht.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/2011_TCGplayer.com_WWS_Toronto/GideonLi_-_Red_Deck_Wins_(Standard,_#11598).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ember Hauler
+4 Goblin Guide
+4 Plated Geopede
+4 Spikeshot Elder
+4 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Staggershock
+4 Koth of the Hammer
+4 Arid Mesa
+12 Mountain
+4 Scalding Tarn
+[Sideboard]
+4 Arc Trail
+3 Goblin Ruinblaster
+2 Jinxed Idol
+4 Manic Vandal
+2 Mark of Mutiny

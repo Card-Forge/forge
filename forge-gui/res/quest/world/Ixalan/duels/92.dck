@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Robot92
+Title=Robot92
+Icon=Magneto.jpg
+Difficulty=Medium
+Description=BR Aggro 
+Deck Type=constructed
+
+[Main]
+4 Bomat Courier
+4 Dread Wanderer
+2 Gifted Aetherborn
+4 Glint-Sleeve Siphoner
+4 Hazoret the Fervent
+4 Scrapheap Scrounger
+3 Yahenni, Undying Partisan
+2 Aethersphere Harvester
+4 Fatal Push
+4 Lightning Strike
+1 Vraska's Contempt
+4 Aether Hub
+4 Dragonskull Summit
+4 Mountain
+11 Swamp
+[Sideboard]
+2 Abrade
+1 Aethersphere Harvester
+3 Bontu's Last Reckoning
+1 Chandra's Defeat
+2 Doomfall
+3 Duress
+1 Vance's Blasting Cannons
+2 Vraska's Contempt

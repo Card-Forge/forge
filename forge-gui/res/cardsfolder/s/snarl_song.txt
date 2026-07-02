@@ -1,0 +1,10 @@
+Name:Snarl Song
+ManaCost:5 G
+Types:Sorcery
+A:SP$ Token | TokenScript$ gu_0_0_fractal | TokenAmount$ 2 | RememberTokens$ True | SubAbility$ DBPutCounter | SpellDescription$ Converge — Create two 0/0 green and blue Fractal creature tokens. Put X +1/+1 counters on each of them and you gain X life, where X is the number of colors of mana spent to cast this spell.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Converge
+DeckHas:Ability$Token|Counters|Lifegain
+Oracle:Converge — Create two 0/0 green and blue Fractal creature tokens. Put X +1/+1 counters on each of them and you gain X life, where X is the number of colors of mana spent to cast this spell.

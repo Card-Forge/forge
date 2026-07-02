@@ -1,0 +1,43 @@
+[metadata]
+Name=Grixis Energy
+Deck Type=constructed
+Title=Grixis Energy
+Description=Grixis Energy
+Difficulty=Medium
+Icon=Apu Nahasapeemapetilon
+[Main]
+2 Abrade
+4 Aether Hub
+3 Canyon Slough
+1 Chandra, Torch of Defiance
+4 Dragonskull Summit
+4 Drowned Catacomb
+1 Essence Scatter
+3 Fatal Push
+3 Fetid Pools
+1 Glimmer of Genius
+4 Glint-Sleeve Siphoner
+3 Glorybringer
+4 Harnessed Lightning
+1 Hostage Taker
+1 Island
+1 Mountain
+1 Mountain
+1 Ravenous Chupacabra
+4 Spirebluff Canal
+2 Supreme Will
+1 Swamp
+2 The Scarab God
+2 Torrential Gearhulk
+3 Vraska's Contempt
+4 Whirler Virtuoso
+[Sideboard]
+1 Abrade
+1 Chandra's Defeat
+1 Chandra, Torch of Defiance
+3 Dreamstealer
+2 Duress
+1 Hour of Devastation
+2 Magma Spray
+3 Negate
+1 Search for Azcanta

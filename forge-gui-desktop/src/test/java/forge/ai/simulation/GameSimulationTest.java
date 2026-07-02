@@ -6,21 +6,21 @@ import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CounterEnumType;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.StreamUtil;
+
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class GameSimulationTest extends SimulationTest {
 
@@ -324,7 +324,7 @@ public class GameSimulationTest extends SimulationTest {
         Card manifestedCreature = findCardWithName(simGame, "");
         AssertJUnit.assertNotNull(manifestedCreature);
 
-        SpellAbility unmanifestSA = findSAWithPrefix(manifestedCreature.getAllPossibleAbilities(p, false),
+        SpellAbility unmanifestSA = findSAWithPrefix(manifestedCreature.getAllPossibleAbilities(simGame.getPlayers().get(1), false),
                 "Unmanifest");
         AssertJUnit.assertNotNull(unmanifestSA);
         AssertJUnit.assertEquals(2, manifestedCreature.getNetPower());
@@ -528,7 +528,7 @@ public class GameSimulationTest extends SimulationTest {
         addCard("Swamp", p);
         addCard("Swamp", p);
         Card depths = addCard("Dark Depths", p);
-        depths.addCounterInternal(CounterEnumType.ICE, 10, p, false, null, null);
+        depths.addCounterInternal(CounterType.getType("ICE"), 10, p, false, null, null);
         Card thespian = addCard("Thespian's Stage", p);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
@@ -2699,14 +2699,11 @@ public class GameSimulationTest extends SimulationTest {
      */
     protected boolean areWordsInIterable(List<String> words, Iterable<String> iterable) {
         // Create a frequency map for the words in the iterable
-        Map<String, Integer> frequencyMap = new HashMap<>();
-        for (String item : iterable) {
-            frequencyMap.put(item, frequencyMap.getOrDefault(item, 0) + 1);
-        }
+        Map<String, Long> frequencyMap = StreamUtil.stream(iterable).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         // Check if each word in the list appears exactly once
         for (String word : words) {
-            if (frequencyMap.getOrDefault(word, 0) != 1) {
+            if (frequencyMap.getOrDefault(word, 0l) != 1) {
                 return false;  // If the word doesn't appear exactly once, return false
             }
         }

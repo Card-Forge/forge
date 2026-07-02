@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Bugs Bunny
+Title=Bugs Bunny
+Icon=Bugs Bunny.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/StarCityGames.com_Modern_Open_-_Louisville,_KY/Zach_Voss_-_Eldrazi_(Modern,_#601836).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eldrazi Mimic
+4 Endless One
+1 Kozilek, the Great Distortion
+4 Oblivion Sower
+4 Reality Smasher
+4 Thought-Knot Seer
+2 Ulamog, the Ceaseless Hunger
+4 Expedition Map
+4 Dismember
+3 Spatial Contortion
+2 All Is Dust
+4 Eldrazi Temple
+3 Eye of Ugin
+1 Ghost Quarter
+3 Urborg, Tomb of Yawgmoth
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+1 Wastes
+[Sideboard]
+3 Chalice of the Void
+2 Pithing Needle
+2 Ratchet Bomb
+3 Relic of Progenitus
+3 Surgical Extraction

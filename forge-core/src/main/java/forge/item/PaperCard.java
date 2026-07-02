@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A lightweight version of a card that matches real-world cards, to use outside of games (eg. inventory, decks, trade).
@@ -348,7 +349,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
                 return Set.of(this.name);
             else {
                 String translatedName = CardTranslation.getTranslatedName(this.name);
-                return Set.of(this.name, translatedName, StringUtils.stripAccents(translatedName));
+                return Stream.of(this.name, translatedName, StringUtils.stripAccents(translatedName))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toSet());
             }
         }
         Set<String> names = new HashSet<>();
@@ -566,14 +569,6 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         return cardGSpecImageKey;
     }
 
-    public boolean isLocked() {
-        return isLocked;
-    }
-
-    public void setLocked(boolean locked) {
-        isLocked = locked;
-    }
-
     @Override
     public boolean hasBackFace(){
         CardSplitType cst = this.rules.getSplitType();
@@ -597,7 +592,15 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
     @Override
     public List<ICardFace> getAllFaces() {
-        return StreamUtil.stream(this.rules.getAllFaces()).map(this::getVariantForFace).collect(Collectors.toList());
+        return this.rules.getAllFaces().stream().map(this::getVariantForFace).collect(Collectors.toList());
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
     }
 
     private ICardFace getVariantForFace(ICardFace face) {

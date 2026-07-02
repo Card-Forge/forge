@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Da Vinci
+Title=Da Vinci
+Icon=Da Vinci.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Aaron_Osborne_-_Mono-Red_Aggro_(Standard,_#798272).dck
+Deck Type=constructed
+
+[Main]
+3 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Goblin Chainwhirler
+1 Legion Warboss
+4 Viashino Pyromancer
+4 Lightning Strike
+4 Risk Factor
+4 Shock
+4 Wizard's Lightning
+1 Lava Coil
+4 Light Up the Stage
+3 Skewer the Critics
+20 Mountain
+[Sideboard]
+1 Dire Fleet Daredevil
+3 Legion Warboss
+2 Experimental Frenzy
+2 Chandra, Fire Artisan
+1 Tibalt, Rakish Instigator
+2 Banefire
+1 Fight with Fire
+3 Lava Coil

@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Black Flame
+Title=Black Flame
+Icon=Black Flame.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Phill_Hellmuth_-_Vizier_(Modern,_#1587862)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Stoneforge Mystic
+1 Spellskite
+1 Duskwatch Recruiter
+1 Walking Ballista
+4 Vizier of Remedies
+4 Devoted Druid
+4 Giver of Runes
+4 Esper Sentinel
+1 Haywire Mite
+1 Viridian Longbow
+1 Shadowspear
+1 Springleaf Drum
+1 Kaldra Compleat
+1 Luxior, Giada's Gift
+2 Eladamri's Call
+2 Eladamri's Call
+4 Urza's Saga
+4 Tyvar, Jubilant Brawler
+1 Godless Shrine
+1 Snow-Covered Plains
+1 Horizon Canopy
+2 Overgrown Tomb
+4 Windswept Heath
+4 Verdant Catacombs
+2 Temple Garden
+1 Snow-Covered Forest
+2 Lair of the Hydra
+1 Boseiju, Who Endures
+[Sideboard]
+4 Burrenton Forge-Tender
+1 Pithing Needle
+1 Emrakul, the Aeons Torn
+2 Gaddock Teeg
+2 Hushbringer
+1 Soul-Guide Lantern
+2 Sanctifier en-Vec
+1 Solitude
+1 Haywire Mite

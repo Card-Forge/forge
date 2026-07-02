@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=DonkeyKong
+Title=DonkeyKong
+Icon=DonkeyKong.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine_The_Aftermath/Cicada3301_-_White_Weenie_(Standard,_#1734321).dck
+Deck Type=constructed
+
+[Main]
+4 Thalia, Guardian of Thraben
+3 Adeline, Resplendent Cathar
+2 Brutal Cathar
+4 Intrepid Adversary
+4 Hopeful Initiate
+2 Extraction Specialist
+4 Recruitment Officer
+2 Steel Seraph
+2 Phyrexian Vindicator
+1 Skrelv, Defector Mite
+4 Coppercoat Vanguard
+1 Fateful Absence
+4 Ossification
+2 Eiganjo, Seat of the Empire
+3 Mishra's Foundry
+9 Plains
+5 Plains
+4 Plains
+[Sideboard]
+1 Brutal Cathar
+2 Fateful Absence
+2 The Wandering Emperor
+2 Extraction Specialist
+3 Destroy Evil
+2 Steel Seraph
+1 Phyrexian Vindicator
+2 Invasion of Gobakhan

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Alice in Wonderland
+Title=Alice in Wonderland
+Icon=Alice in Wonderland.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/Cittadella_Aosta__2014_Tappa_1/Olivotto_Kevin_-_Selesnya_Aggro_(Standard,_#66799).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boon Satyr
+2 Brimaz, King of Oreskos
+4 Experiment One
+4 Fleecemane Lion
+4 Loxodon Smiter
+4 Soldier of the Pantheon
+4 Voice of Resurgence
+4 Advent of the Wurm
+3 Gods Willing
+4 Selesnya Charm
+8 Forest
+8 Plains
+4 Temple Garden
+3 Temple of Plenty
+[Sideboard]
+2 Banisher Priest
+1 Druid's Deliverance
+4 Mistcutter Hydra
+2 Revoke Existence
+3 Rootborn Defenses
+3 Unflinching Courage

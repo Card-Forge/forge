@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Homer Simpson
+Title=Homer Simpson
+Icon=Homer Simpson.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/SCG_Standard_Open_Worcester/Philip_Sagnay_-_W-R_Aggro_(Standard,_#79222).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Akroan Crusader
+1 Brimaz, King of Oreskos
+3 Cavalry Pegasus
+4 Favored Hoplite
+4 Phalanx Leader
+4 Soldier of the Pantheon
+4 Boros Charm
+4 Coordinated Assault
+4 Titan's Strength
+3 Launch the Fleet
+4 Dragon Mantle
+4 Mana Confluence
+5 Mountain
+4 Plains
+4 Sacred Foundry
+4 Temple of Triumph
+[Sideboard]
+2 Banishing Light
+2 Fiendslayer Paladin
+3 Gift of Orzhova
+2 Hammer of Purphoros
+2 Harness by Force
+3 Skullcrack

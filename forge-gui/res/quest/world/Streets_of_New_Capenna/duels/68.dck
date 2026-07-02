@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Blackbeard
+Title=Blackbeard
+Icon=Blackbeard.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Arnaud_COLAS_-_Jund_(Modern,_#1457931).dck
+Deck Type=constructed
+
+[Main]
+1 Kroxa, Titan of Death's Hunger
+1 Fury
+2 Tarmogoyf
+2 Seasoned Pyromancer
+3 Dauthi Voidwalker
+4 Ragavan, Nimble Pilferer
+1 Unlicensed Hearse
+1 Terminate
+2 Kolaghan's Command
+2 Riveteers Charm
+2 Fatal Push
+4 Lightning Bolt
+3 Inquisition of Kozilek
+3 Thoughtseize
+3 Wrenn and Six
+3 Liliana of the Veil
+1 Nurturing Peatland
+1 Boseiju, Who Endures
+1 Ziatora's Proving Ground
+1 Den of the Bugbear
+1 Takenuma, Abandoned Mire
+2 Overgrown Tomb
+2 Blood Crypt
+2 Swamp
+4 Verdant Catacombs
+4 Blackcleave Cliffs
+4 Bloodstained Mire
+[Sideboard]
+1 Endurance
+1 Ashiok, Dream Render
+1 Tourach, Dread Cantor
+1 Force of Vigor
+1 Boseiju, Who Endures
+2 Magus of the Moon
+2 Nihil Spellbomb
+2 Collective Brutality
+2 Chalice of the Void
+2 Engineered Explosives

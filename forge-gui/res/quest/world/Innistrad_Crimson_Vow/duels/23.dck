@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Amphibian
+Title=Amphibian
+Icon=Amphibian.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/Elizabeth_Knightmare_-_Boros_Aggro_(Standard,_#1235608).dck
+Deck Type=constructed
+
+[Main]
+1 Kindly Ancestor
+1 Odric, Blood-Cursed
+1 Faithbound Judge
+2 Kessig Wolfrider
+2 Creepy Puppeteer
+2 Manaform Hellkite
+4 Traveling Minister
+4 Markov Waltzer
+4 Kessig Flamebreather
+4 Sure Strike
+4 Abrade
+1 Arm the Cathars
+2 Bloody Betrayal
+4 Ancestral Anger
+1 Stensia Uprising
+4 Nurturing Presence
+1 Sundown Pass
+11 Plains
+12 Mountain
+[Sideboard]

@@ -1,0 +1,10 @@
+Name:Don & Raph, Hard Science
+ManaCost:1 UR UR
+Types:Legendary Creature Mutant Ninja Turtle
+PT:2/4
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ Whenever NICKNAME attack, the next noncreature spell you cast this turn has affinity for artifacts. (It costs {1} less to cast for each artifact you control.)
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ GrantAffinity | ForgetOnCast$ Card.nonCreature+YouCtrl
+SVar:GrantAffinity:Mode$ Continuous | Affected$ Card.nonCreature+YouCtrl | AffectedZone$ Stack | AddKeyword$ Affinity:Artifact | Description$ The next spell you cast this turn has affinity for artifacts. (It costs {1} less to cast for each artifact you control as you cast it.)
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nWhenever Don & Raph attack, the next noncreature spell you cast this turn has affinity for artifacts. (It costs {1} less to cast for each artifact you control.)

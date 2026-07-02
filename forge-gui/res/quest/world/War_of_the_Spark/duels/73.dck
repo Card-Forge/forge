@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Boba Fett
+Title=Boba Fett
+Icon=Boba Fett.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/François_Hannebique_-_Ub_Faeries_(Modern,_#798159).dck
+Deck Type=constructed
+
+[Main]
+2 Snapcaster Mage
+4 Spellstutter Sprite
+1 Vendilion Clique
+2 Mistbind Clique
+4 Fatal Push
+2 Cast Down
+3 Cryptic Command
+4 Inquisition of Kozilek
+4 Serum Visions
+4 Bitterblossom
+3 Liliana of the Veil
+2 Jace, the Mind Sculptor
+3 Field of Ruin
+1 Flooded Strand
+2 Mutavault
+4 Polluted Delta
+1 Scalding Tarn
+2 Watery Grave
+4 Darkslick Shores
+3 Creeping Tar Pit
+2 Swamp
+3 Island
+[Sideboard]
+2 Kalitas, Traitor of Ghet
+1 Ashiok, Dream Render
+1 Liliana, the Last Hope
+2 Engineered Explosives
+2 Nihil Spellbomb
+1 Surgical Extraction
+2 Countersquall
+1 Disdainful Stroke
+1 Hero's Downfall
+2 Collective Brutality

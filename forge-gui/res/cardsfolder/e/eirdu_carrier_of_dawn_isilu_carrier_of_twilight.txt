@@ -20,7 +20,7 @@ Types:Legendary Creature Elemental God
 PT:5/5
 K:Flying
 K:Lifelink
-S:Mode$ Continuous | Affected$ Card.Creature+YouCtrl+!token+Other | AffectedZone$ Battlefield | AddKeyword$ Persist | Description$ Each other nontoken creature you control has persist. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner’s control with a -1/-1 counter on it.)
+S:Mode$ Continuous | Affected$ Card.Creature+YouCtrl+!token+Other | AffectedZone$ Battlefield | AddKeyword$ Persist | Description$ Each other nontoken creature you control has persist. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {W}. If you do, transform NICKNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ W | Defined$ Self | Mode$ Transform
 Oracle:Flying, lifelink\nEach other nontoken creature you control has persist. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.) At the beginning of your first main phase, you may pay {W}. If you do, transform Isilu.

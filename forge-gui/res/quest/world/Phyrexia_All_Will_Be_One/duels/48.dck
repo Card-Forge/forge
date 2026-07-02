@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Gruul-precon
+Title=Gruul-precon
+Icon=Gruul-precon.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/Gabriell86_-_Azorius_Soldiers_(Standard,_#1569898).dck
+Deck Type=constructed
+
+[Main]
+4 Thalia, Guardian of Thraben
+3 Brutal Cathar
+4 Resolute Reinforcements
+4 Valiant Veteran
+3 Myrel, Shield of Argive
+4 Recruitment Officer
+4 Siege Veteran
+4 Skystrike Officer
+3 Harbin, Vanguard Aviator
+4 Skrelv, Defector Mite
+3 Adarkar Wastes
+3 Seachrome Coast
+1 Plains
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+4 Secluded Courtyard
+1 Adarkar Wastes
+4 Fortified Beachhead
+2 Mishra's Foundry
+1 Seachrome Coast
+2 Plains
+[Sideboard]
+2 Dennick, Pious Apprentice
+2 Circle of Confinement
+2 Lantern Flare
+1 Spell Pierce
+2 Destroy Evil
+4 Protect the Negotiators
+2 Annex Sentry

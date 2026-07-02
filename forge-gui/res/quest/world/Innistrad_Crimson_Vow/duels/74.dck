@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Waterlord
+Title=Waterlord
+Icon=Waterlord.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Alex_Dalton_-_Burn_(Modern,_#1296742).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Guide
+4 Eidolon of the Great Revel
+4 Monastery Swiftspear
+2 Lightning Helix
+2 Skullcrack
+4 Boros Charm
+4 Searing Blaze
+4 Lightning Bolt
+4 Skewer the Critics
+4 Rift Bolt
+4 Lava Spike
+1 Fiery Islet
+2 Scalding Tarn
+2 Sacred Foundry
+3 Mountain
+4 Wooded Foothills
+4 Sunbaked Canyon
+4 Inspiring Vantage
+[Sideboard]
+2 Cemetery Gatekeeper
+2 Sanctifier en-Vec
+2 Deflecting Palm
+3 Smash to Smithereens
+3 Roiling Vortex
+3 Path to Exile

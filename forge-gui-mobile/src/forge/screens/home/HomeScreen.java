@@ -6,7 +6,6 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
 
-import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -114,7 +113,7 @@ public class HomeScreen extends FScreen {
         addButton(Forge.getLocalizer().getMessage("lblHelp"), e -> FThreads.invokeInEdtLater(() -> {
             try {
                 if (Forge.getDeviceAdapter().isConnectedToInternet()) {
-                    FOptionPane.showOptionDialog("Join Discord option will open the invite link to join Forge Discord server. Forge Support option will open the Forge Support Channel.", "Choose option", FOptionPane.INFORMATION_ICON, ImmutableList.of("Join Discord", "Forge Support"), -1, result -> {
+                    FOptionPane.showOptionDialog("Join Discord option will open the invite link to join Forge Discord server. Forge Support option will open the Forge Support Channel.", "Choose option", FOptionPane.INFORMATION_ICON, List.of("Join Discord", "Forge Support"), -1, result -> {
                         switch (result) {
                             case 0:
                                 Gdx.net.openURI("https://discord.gg/3v9JCVr");

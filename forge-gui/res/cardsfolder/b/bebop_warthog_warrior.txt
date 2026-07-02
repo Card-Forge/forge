@@ -1,0 +1,8 @@
+Name:Bebop, Warthog Warrior
+ManaCost:4 U4 B
+Types:Legendary Creature Boar Mutant Warrior
+PT:5/4
+K:Menace
+K:TypeCycling:Swamp:2
+S:Mode$ Continuous | Affected$ Rhino.YouCtrl | AddKeyword$ Menace | Description$ Rhinos you control have menace.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nRhinos you control have menace.\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)

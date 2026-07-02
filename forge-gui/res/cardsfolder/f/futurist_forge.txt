@@ -1,0 +1,7 @@
+Name:Futurist Forge
+ManaCost:1 U
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this artifact enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ Draw | Cost$ 3 U Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:When this artifact enters, draw a card.\n{3}{U}, Sacrifice this artifact: Draw two cards.

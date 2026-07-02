@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=BlackTalon
+Title=BlackTalon
+Icon=BlackTalon.jpg
+Difficulty=Hard
+Description=./Modern/Tarkir_Dragonstorm/Arlen_Pan_-_Orzhov_Flicker_(Modern,_#2452962).dck
+Deck Type=constructed
+
+[Main]
+1 Aven Interrupter
+1 Boggart Trawler
+3 Emperor of Bones
+2 Flickerwisp
+1 Orcish Bowmasters
+4 Overlord of the Balemurk
+3 Phelia, Exuberant Shepherd
+3 Recruiter of the Guard
+1 Skyclave Apparition
+4 Solitude
+2 White Orchid Phantom
+4 Witch Enchanter
+4 Aether Vial
+3 Ephemerate
+4 Fatal Push
+1 March of Otherworldly Light
+2 Thoughtseize
+1 Bleachbone Verge
+4 Flooded Strand
+2 Godless Shrine
+1 Hallowed Fountain
+4 Marsh Flats
+1 Meticulous Archive
+2 Plains
+1 Shadowy Backstreet
+1 Swamp
+[Sideboard]
+1 Aven Interrupter
+2 Celestial Purge
+1 Clarion Conqueror
+3 Consign to Memory
+1 March of Otherworldly Light
+1 Thoughtseize
+2 Vindicate
+1 White Orchid Phantom
+3 Wrath of the Skies

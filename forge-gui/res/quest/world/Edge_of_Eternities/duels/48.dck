@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Dr Fate
+Title=Dr Fate
+Icon=Dr Fate.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/A_Little_Sound_-_Selesnya_Cage_(Standard,_#2622357).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+4 Pawpatch Recruit
+3 Sanguine Evangelist
+4 Sandstorm Salvager
+2 Ouroboroid
+4 Skyknight Squire
+3 Overlord of the Mistmoors
+4 Collector's Cage
+4 Sheltered by Ghosts
+2 Seam Rip
+2 Elspeth, Storm Slayer
+4 Hushwood Verge
+3 Restless Prairie
+6 Forest
+6 Plains
+1 Fountainport
+4 Starting Town
+[Sideboard]
+2 Split Up
+3 Aven Interrupter
+2 Disenchant
+2 Get Lost
+1 Authority of the Consuls
+2 Seam Rip
+2 Rest in Peace
+1 Overlord of the Mistmoors

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Erebos
+Title=Erebos
+Icon=Erebos.jpg
+Difficulty=Medium
+Description=./Standard/Kamigawa_Neon_Dynasty/Brackmeister_-_NEO_White_Aggro_(Standard,_#1313428).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+3 Thalia, Guardian of Thraben
+3 Adeline, Resplendent Cathar
+4 Luminarch Aspirant
+4 Usher of the Fallen
+4 Elite Spellbinder
+4 Brutal Cathar
+4 Intrepid Adversary
+4 Hopeful Initiate
+2 Portable Hole
+2 Fateful Absence
+2 The Wandering Emperor
+2 Cave of the Frost Dragon
+2 Eiganjo, Seat of the Empire
+19 Plains
+[Sideboard]
+3 Legion Angel

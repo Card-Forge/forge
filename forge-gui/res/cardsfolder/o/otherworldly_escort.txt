@@ -3,7 +3,6 @@ ManaCost:3 W
 Types:Creature Human Detective
 PT:4/3
 K:Flash
-Oracle:Flash
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+nonSpirit | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME dies, if it's not a Spirit, return it to the battlefield under its owner's control with four charge counters on it. It's a Spirit Detective. (It's no longer a Human.)
 SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ CHARGE | WithCountersAmount$ 4 | StaticEffect$ Animate
 SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Spirit & Detective | RemoveCreatureTypes$ True

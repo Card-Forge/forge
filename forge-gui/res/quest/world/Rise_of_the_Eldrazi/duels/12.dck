@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ulasht
+Title=Ulasht
+Icon=Ulasht.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/Nationals_2010_-_China/Liu_Zhuo_Ran_-_Boros_Landfall_(Standard,_#644).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Goblin Bushwhacker
+4 Goblin Guide
+4 Hell's Thunder
+4 Plated Geopede
+4 Ranger of Eos
+4 Steppe Lynx
+4 Lightning Bolt
+3 Staggershock
+3 Earthquake
+3 Oblivion Ring
+2 Elspeth, Knight-Errant
+4 Arid Mesa
+4 Marsh Flats
+7 Mountain
+5 Plains
+4 Scalding Tarn
+[Sideboard]
+3 Celestial Purge
+4 Kor Firewalker
+3 Linvala, Keeper of Silence
+3 Manabarbs

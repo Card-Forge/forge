@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Black
+Title=Dungeon Crawling Black
+Icon=Dungeon Crawling Black.jpg
+Difficulty=Medium
+Description=Gatecrash/Standard_Platinum_TCQ_-_Niles,_IL_-_2-9-13/KyleChmielewski_-_Gruul_Aggro_(Standard,_#45362).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Flinthoof Boar
+4 Hellrider
+1 Lightning Mauler
+4 Rakdos Cackler
+4 Stromkirk Noble
+4 Searing Spear
+3 Pillar of Flame
+4 Rancor
+12 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+[Sideboard]
+2 Mugging
+4 Reckless Waif
+2 Skullcrack
+3 Traitorous Blood
+3 Volcanic Strength

@@ -4,7 +4,7 @@ Types:Creature Human Cleric
 PT:1/3
 A:AB$ ChangeZone | Cost$ T | ValidTgts$ Card.OppOwn | TgtPrompt$ Select target card in an opponent's graveyard | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBChooseSource | SpellDescription$ Return target card from an opponent's graveyard to their hand. Prevent all damage that would be dealt to any target this turn by a source of your choice.
 SVar:DBChooseSource:DB$ ChooseSource | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | ValidTgts$ Any | TgtPrompt$ Select any target to prevent damage | ForgetOnMoved$ Battlefield | ReplacementEffects$ RPrevent | RememberObjects$ TargetedPlayer,ThisTargetedCard | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | ValidTgts$ Any | TgtPrompt$ Select any target to prevent damage | ForgetOnMoved$ Battlefield | ReplacementEffects$ RPrevent | RememberObjects$ TargetedPlayer & ThisTargetedCard | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidSource$ Card.ChosenCard | ValidTarget$ Player.IsRemembered,Card.IsRemembered | Description$ Prevent all damage that would be dealt to any target this turn by a source of your choice.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 AI:RemoveDeck:All

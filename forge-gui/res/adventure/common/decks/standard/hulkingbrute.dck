@@ -5,7 +5,7 @@ Difficulty=medium
 Description=Mono B control deck
 Icon=Hugo Drax.jpg
 Deck Type=constructed
-[main]
+[Main]
 24 Swamp|TMP
 2 Will-o'-the-Wisp
 2 Zulaport Enforcer
@@ -34,4 +34,4 @@ Deck Type=constructed
 1 Doom Blade
 1 Go for the Throat
 1 Victim of Night
-[sideboard]
+[Sideboard]

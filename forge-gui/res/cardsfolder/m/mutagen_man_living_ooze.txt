@@ -1,0 +1,11 @@
+Name:Mutagen Man, Living Ooze
+ManaCost:X G G
+Types:Legendary Creature Ooze Mutant
+PT:2/3
+K:Trample
+S:Mode$ ReduceCost | ValidCard$ Artifact.token+YouCtrl | Type$ Ability | Amount$ 1 | AffectedZone$ Battlefield | Description$ Activated abilities of artifact tokens you control cost {1} less to activate.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create X Mutagen tokens. (They're artifacts with "{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.")
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_mutagen_sac | TokenOwner$ You
+SVar:X:Count$xPaid
+DeckHas:Ability$Token|Counters
+Oracle:Trample\nActivated abilities of artifact tokens you control cost {1} less to activate.\nWhen Mutagen Man enters, create X Mutagen tokens. (They're artifacts with "{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.")

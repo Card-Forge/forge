@@ -37,30 +37,25 @@ public class FOptionPane extends FDialog {
         return Forge.getScreenHeight() - VPrompt.HEIGHT - 2 * FDialog.MSG_HEIGHT;
     }
 
-    public static void showMessageDialog(final String message) {
-        showMessageDialog(message, "", INFORMATION_ICON);
-    }
-
-    public static void showMessageDialog(final String message, final String title) {
-        showMessageDialog(message, title, INFORMATION_ICON);
-    }
-
     public static void showErrorDialog(final String message) {
-        showMessageDialog(message, "", ERROR_ICON);
+        showErrorDialog(message, "");
     }
-
     public static void showErrorDialog(final String message, final String title) {
         showMessageDialog(message, title, ERROR_ICON);
     }
 
+    public static void showMessageDialog(final String message) {
+        showMessageDialog(message, "");
+    }
+    public static void showMessageDialog(final String message, final String title) {
+        showMessageDialog(message, title, INFORMATION_ICON);
+    }
     public static void showMessageDialog(final String message, final String title, final FImage icon) {
         showOptionDialog(message, title, icon, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, null);
     }
-
     public static void showMessageDialog(final String message, FSkinFont messageFont, final String title, final FImage icon) {
         showOptionDialog(message, messageFont, title, icon, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, null);
     }
-
     public static void showMessageDialog(final String message, final String title, final FImage icon, final Consumer<Integer> callback) {
         showOptionDialog(message, title, icon, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, callback);
     }
@@ -68,19 +63,15 @@ public class FOptionPane extends FDialog {
     public static void showConfirmDialog(final String message, final Consumer<Boolean> callback) {
         showConfirmDialog(message, "", callback);
     }
-
     public static void showConfirmDialog(final String message, final String title, final Consumer<Boolean> callback) {
         showConfirmDialog(message, title, Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"), true, callback);
     }
-
     public static void showConfirmDialog(final String message, final String title, final boolean defaultYes, final Consumer<Boolean> callback) {
         showConfirmDialog(message, title, Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"), defaultYes, callback);
     }
-
     public static void showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final Consumer<Boolean> callback) {
         showConfirmDialog(message, title, yesButtonText, noButtonText, true, callback);
     }
-
     public static void showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes, final Consumer<Boolean> callback) {
         final List<String> options = ImmutableList.of(yesButtonText, noButtonText);
         showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1, result -> callback.accept(result == 0));
@@ -89,11 +80,9 @@ public class FOptionPane extends FDialog {
     public static void showOptionDialog(final String message, final String title, final FImage icon, final List<String> options, final Consumer<Integer> callback) {
         showOptionDialog(message, title, icon, options, 0, callback);
     }
-    
     public static void showOptionDialog(final String message, final String title, final FImage icon, final List<String> options, final int defaultOption, final Consumer<Integer> callback) {
         showOptionDialog(message, null, title, icon, options, defaultOption, callback);
     }
-
     public static void showOptionDialog(final String message, final FSkinFont messageFont, final String title, final FImage icon, final List<String> options, final int defaultOption, final Consumer<Integer> callback) {
         final FOptionPane optionPane = new FOptionPane(message, messageFont, title, icon, null, options, defaultOption, callback);
         optionPane.show();
@@ -107,7 +96,6 @@ public class FOptionPane extends FDialog {
             }
         }.invokeAndWait();
     }
-
     public static void showCardOptionDialog(final CardView card, String message, String title, FImage icon, final List<String> options, final int defaultOption, final Consumer<Integer> callback) {
         final FDisplayObject cardDisplay;
         if (card != null) {

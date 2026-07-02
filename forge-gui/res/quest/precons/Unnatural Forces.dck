@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Unnatural Forces
+Description=Unnatural Forces wields strange magic. Blue-black control with unusual threats.
+Deck Type=constructed
+Set=VIS
+Image=unnatural_forces.jpg
+[main]
+4 Island|MIR|1
+4 Island|MIR|2
+4 Island|MIR|3
+4 Swamp|MIR|1
+4 Swamp|MIR|2
+4 Swamp|MIR|3
+2 Brood of Cockroaches|VIS
+1 Coral Fighters|MIR
+2 Fetid Horror|MIR
+2 Kukemssa Serpent|MIR
+2 Man-o'-War|VIS
+1 Necrosavant|VIS
+1 Nekrataal|VIS
+2 Restless Dead|MIR
+1 Shrieking Drake|VIS
+2 Waterspout Djinn|VIS
+1 Zombie Mob|MIR
+2 Enfeeblement|MIR
+1 Flooded Shoreline|VIS
+2 Necromancy|VIS
+1 Boomerang|MIR
+2 Ether Well|MIR
+1 Funeral Charm|VIS
+2 Impulse|VIS
+2 Inspiration|VIS
+1 Ray of Command|MIR
+1 Vision Charm|VIS
+2 Coercion|VIS
+2 Sealed Fate|MIR
+[sideboard]

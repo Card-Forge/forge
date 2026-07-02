@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=DonkeyKong
+Title=DonkeyKong
+Icon=DonkeyKong.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Aaron_Rubin_-_Izzet_(Standard,_#769544).dck
+Deck Type=constructed
+
+[Main]
+4 Arclight Phoenix
+4 Crackling Drake
+2 Enigma Drake
+2 Goblin Electromancer
+4 Opt
+2 Radical Idea
+4 Shock
+1 Beacon Bolt
+4 Chart a Course
+2 Crash Through
+3 Discovery // Dispersal
+2 Lava Coil
+2 Maximize Velocity
+2 Tormenting Voice
+2 Warlord's Fury
+6 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+1 Beacon Bolt
+1 Chemister's Insight
+1 Deep Freeze
+1 Disdainful Stroke
+1 Dive Down
+2 Fiery Cannonade
+1 Firemind's Research
+1 Lava Coil
+2 Niv-Mizzet, Parun
+2 Sarkhan, Fireblood
+2 Spell Pierce

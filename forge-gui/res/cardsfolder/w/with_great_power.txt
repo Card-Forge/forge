@@ -1,4 +1,4 @@
-Name:With Great Power...
+Name:With Great Power . . .
 Variant:UniversesWithin:FlavorName:Chosen by Valgavoth
 ManaCost:3 W
 Types:Enchantment Aura

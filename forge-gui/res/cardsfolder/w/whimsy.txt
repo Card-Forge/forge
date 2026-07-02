@@ -27,12 +27,12 @@ SVar:Mill2:DB$ ChoosePlayer | Choices$ Player | Random$ True | SubAbility$ DBMil
 SVar:DBMill13:DB$ Mill | Defined$ ChosenPlayer | NumCards$ 2 | SubAbility$ DBCleanup
 SVar:Wasp:DB$ Token | TokenScript$ wasp | LockInText$ True | SpellDescription$ Create a 1/1 colorless Insect artifact creature token with flying named Wasp.
 SVar:Nevinyrral:DB$ DestroyAll | ValidCards$ Artifact,Creature,Enchantment | SpellDescription$ Destroy all artifacts, creatures and enchantments.
-SVar:Suleiman:DB$ FlipACoin | WinSubAbility$ DBToken | LoseSubAbility$ DBDamage | LockInText$ True | SpellDescription$ Flip a coin. If you win the flip, create a 5/5 colorless Djinn artifact creature token with flying. If you lose the flip, CARDNAME deals 5 damage to you.
+SVar:Suleiman:DB$ FlipCoin | WinSubAbility$ DBToken | LoseSubAbility$ DBDamage | LockInText$ True | SpellDescription$ Flip a coin. If you win the flip, create a 5/5 colorless Djinn artifact creature token with flying. If you lose the flip, CARDNAME deals 5 damage to you.
 SVar:DBToken:DB$ Token | LockInText$ True | TokenScript$ c_5_5_a_djinn_flying
 SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 5
 SVar:Pandora:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | AllCards$ True | SubAbility$ DBRepeatEach17 | SpellDescription$ Choose a creature card at random from all players' decklists. Each player flips a coin. Each player whose coin comes up heads creates a token that's a copy of that card.
 SVar:DBRepeatEach17:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBFlip17 | SubAbility$ DBCleanup
-SVar:DBFlip17:DB$ FlipACoin | Flipper$ Remembered | NoCall$ True | HeadsSubAbility$ DBCopyPermanent17
+SVar:DBFlip17:DB$ FlipCoin | Flipper$ Remembered | NoCall$ True | HeadsSubAbility$ DBCopyPermanent17
 SVar:DBCopyPermanent17:DB$ CopyPermanent | Defined$ ChosenCard | Controller$ Remembered
 SVar:Discard:DB$ ChoosePlayer | Choices$ Player | Random$ True | SubAbility$ DBDiscard18 | SpellDescription$ A player chosen at random discards a card.
 SVar:DBDiscard18:DB$ Discard | Defined$ ChosenPlayer | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBCleanup

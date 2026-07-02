@@ -29,13 +29,13 @@ import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbilityAdditionalActivations;
 import forge.game.staticability.StaticAbilityCastWithFlash;
-import forge.game.staticability.StaticAbilityExhaust;
 import forge.game.staticability.StaticAbilityNumLoyaltyAct;
+import forge.game.zone.CostPaymentStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -146,13 +146,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (params.containsKey("ActivationGameTypes")) {
             this.setGameTypes(GameType.listValueOf(params.get("ActivationGameTypes")));
-        }
-
-        if (params.containsKey("ActivationCardsInHand")) {
-            this.setActivateCardsInHand(Integer.parseInt(params.get("ActivationCardsInHand")));
-        }
-        if (params.containsKey("OrActivationCardsInHand")) {
-            this.setActivateCardsInHand2(Integer.parseInt(params.get("OrActivationCardsInHand")));
         }
 
         if (params.containsKey("IsPresent")) {
@@ -389,17 +382,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        if (getCardsInHand() != -1) {
-            int h = activator.getCardsIn(ZoneType.Hand).size();
-            if (getCardsInHand2() != -1) {
-                if (h != getCardsInHand() && h != getCardsInHand2()) {
-                    return false;
-                }
-            } else if (h != getCardsInHand()) {
-                return false;
-            }
-        }
-
         if (isHellbent()) {
             if (!activator.hasHellbent()) {
                 return false;
@@ -498,6 +480,14 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     return false;
                 }
             }
+        } else if (sa.isBoast()) {
+            if (sa.getActivationsThisTurn() >= StaticAbilityAdditionalActivations.getLimit(c, sa, activator)) {
+                return false;
+            }
+        } else if (sa.isExhaust() || sa.isPowerUp()) {
+            if (sa.getActivationsThisGame() >= StaticAbilityAdditionalActivations.getLimit(c, sa, activator)) {
+                return false;
+            }
         }
 
         // CR 702.37e / 702.168b
@@ -528,25 +518,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
-        if (sa.isBoast()) {
-            int limit = activator.hasKeyword("Creatures you control can boast twice during each of your turns rather than once.") ? 2 : 1;
-            if (limit <= sa.getActivationsThisTurn()) {
-                return false;
-            }
-        } else if (sa.isExhaust()) {
-            if (sa.getActivationsThisGame() > 0 && !StaticAbilityExhaust.anyWithExhaust(activator)) {
-                return false;
-            }
-        } else if (sa.isPowerUp()) {
-            if (sa.getActivationsThisGame() > 0) {
-                return false;
-            }
-        }
-
         // Rule 605.3c about Mana Abilities
         if (sa.isManaAbility()) {
-            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
-                if (i.getPayment().getAbility().equals(sa)) {
+            for (CostPaymentStack.Entry i : game.costPaymentStack) {
+                if (i.payment().getAbility().equals(sa)) {
                     return false;
                 }
             }

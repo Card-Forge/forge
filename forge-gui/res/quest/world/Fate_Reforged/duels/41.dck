@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Cable
+Title=Cable
+Icon=Cable.jpg
+Difficulty=Medium
+Description=Fate_Reforged/God_Series_3/Niade_Kazutaka_-_Boros_(Standard,_#205594).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Rabblemaster
+4 Seeker of the Way
+4 Soulfire Grand Master
+3 Lightning Strike
+4 Stoke the Flames
+1 Valorous Stance
+4 Wild Slash
+4 Hordeling Outburst
+4 Chained to the Rocks
+4 Outpost Siege
+4 Battlefield Forge
+3 Evolving Wilds
+9 Mountain
+4 Plains
+4 Temple of Triumph
+[Sideboard]
+2 Arc Lightning
+3 Erase
+3 Mastery of the Unseen
+2 Sarkhan, the Dragonspeaker
+3 Stormbreath Dragon

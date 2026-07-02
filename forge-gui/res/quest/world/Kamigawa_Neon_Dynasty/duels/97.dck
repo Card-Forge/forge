@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Sorin
+Title=Sorin
+Icon=Sorin.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/AJ_Sangco_-_Affinity_(Modern,_#1525003)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+4 Thought Monitor
+4 Sojourner's Companion
+4 Ornithopter
+4 Memnite
+4 Frogmite
+1 Welding Jar
+1 Shadowspear
+1 Relic of Progenitus
+1 Nettlecyst
+2 Aether Spellbomb
+4 Cranial Plating
+4 Springleaf Drum
+3 Galvanic Blast
+4 Thoughtcast
+4 Urza's Saga
+1 Island
+1 Otawara, Soaring City
+4 Shivan Reef
+4 Silverbluff Bridge
+4 Darksteel Citadel
+[Sideboard]
+1 Pithing Needle
+1 Etched Champion
+1 Relic of Progenitus
+2 Rebuild
+2 Spell Pierce
+2 Grafdigger's Cage
+3 Damping Sphere
+3 Metallic Rebuke

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Kang
+Title=Kang
+Icon=Kang.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/Grand_Prix_Manila_2010_-_Top31_Decks/Martin_Juza_-_Eldrazi_Ramp_(Standard,_#1558).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+4 Oracle of Mul Daya
+2 Sphinx of Lost Truths
+1 Ulamog, the Infinite Gyre
+3 All Is Dust
+4 Explore
+3 Mind Spring
+4 Rampant Growth
+4 Time Warp
+3 Jace, the Mind Sculptor
+4 Eldrazi Temple
+6 Forest
+3 Halimar Depths
+6 Island
+4 Khalni Garden
+4 Misty Rainforest
+1 Scalding Tarn
+1 Verdant Catacombs
+[Sideboard]
+1 Emrakul, the Aeons Torn
+1 Eye of Ugin
+4 Flashfreeze
+2 Fog
+3 Negate
+1 Overgrown Battlement
+1 Sphinx of Jwar Isle
+2 Wall of Frost

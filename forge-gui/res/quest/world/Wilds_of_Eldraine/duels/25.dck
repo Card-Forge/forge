@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Odysseus
+Title=Odysseus
+Icon=Odysseus.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/INickStrad_-_Esper_Legends_(Standard,_#1745969).dck
+Deck Type=constructed
+
+[Main]
+3 Adeline, Resplendent Cathar
+4 Dennick, Pious Apprentice
+4 Thalia, Guardian of Thraben
+4 Raffine, Scheming Seer
+2 Ertai Resurrected
+4 Skrelv, Defector Mite
+4 Sheoldred, the Apocalypse
+3 Rona, Herald of Invasion
+2 Faerie Mastermind
+3 Go for the Throat
+1 Plains
+3 Eiganjo, Seat of the Empire
+3 Otawara, Soaring City
+2 Takenuma, Abandoned Mire
+4 Caves of Koilos
+4 Plaza of Heroes
+4 Darkslick Shores
+2 Seachrome Coast
+4 Restless Fortress
+[Sideboard]
+3 Disdainful Stroke
+2 The Wandering Emperor
+4 Cut Down
+1 Ertai Resurrected
+2 Loran of the Third Path
+1 Virtue of Persistence
+2 Lord Skitter, Sewer King

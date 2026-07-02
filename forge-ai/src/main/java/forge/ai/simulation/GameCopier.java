@@ -6,6 +6,7 @@ import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardType;
 import forge.game.*;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
@@ -108,7 +109,7 @@ public class GameCopier {
             newPlayer.setCrankCounter(origPlayer.getCrankCounter());
             // TODO creatureAttackedThisTurn
             for (Mana m : origPlayer.getManaPool()) {
-                newPlayer.getManaPool().addMana(m, false);
+                newPlayer.getManaPool().addManaNoEvent(m);
             }
             playerMap.put(origPlayer, newPlayer);
         }
@@ -315,7 +316,7 @@ public class GameCopier {
         newCard.setOwner(newOwner);
         newCard.setName(c.getName());
         newCard.setCommander(c.isCommander());
-        newCard.addType(c.getType());
+        newCard.setType(new CardType(c.getType()));
         for (StaticAbility stAb : c.getStaticAbilities()) {
             newCard.addStaticAbility(stAb.copy(newCard, true));
         }
@@ -360,10 +361,6 @@ public class GameCopier {
             newCard.setDamageReceivedThisTurn(c.getDamageReceivedThisTurn());
 
             newCard.copyFrom(c);
-
-            for (Table.Cell<Long, Long, List<String>> kw : c.getHiddenExtrinsicKeywordsTable().cellSet()) {
-                newCard.addHiddenExtrinsicKeywords(kw.getRowKey(), kw.getColumnKey(), kw.getValue());
-            }
             newCard.updateKeywordsCache();
 
             if (c.isTapped()) {

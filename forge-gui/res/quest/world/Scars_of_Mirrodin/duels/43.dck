@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Green Arrow
+Title=Green Arrow
+Icon=Green Arrow.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/States-Champs_Pennsylvania/Gerald_Freas_-_Valakut_Ramp_(Standard,_#7622).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+4 Oracle of Mul Daya
+4 Primeval Titan
+4 Harrow
+4 Lightning Bolt
+3 Summoning Trap
+4 Cultivate
+2 Explore
+2 Pyroclasm
+4 Khalni Heart Expedition
+5 Forest
+12 Mountain
+2 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Back to Nature
+2 Koth of the Hammer
+2 Lavaball Trap
+2 Mimic Vat
+2 Naturalize
+3 Ricochet Trap

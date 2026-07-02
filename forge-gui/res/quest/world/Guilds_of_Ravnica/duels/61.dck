@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Demon
+Title=Demon
+Icon=Demon.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/Andrew_Son_-_Burn_(Modern,_#765929).dck
+Deck Type=constructed
+
+[Main]
+3 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Hellspark Elemental
+4 Spark Elemental
+3 Vexing Devil
+3 Shrine of Burning Rage
+4 Lightning Bolt
+1 Risk Factor
+4 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+2 Bloodstained Mire
+6 Mountain
+4 Ramunap Ruins
+4 Wooded Foothills
+[Sideboard]
+1 Banefire
+4 Rampaging Ferocidon
+2 Ravenous Trap
+4 Shattering Spree
+2 Skullcrack
+2 Tormod's Crypt

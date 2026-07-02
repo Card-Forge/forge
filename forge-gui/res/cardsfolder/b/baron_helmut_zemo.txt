@@ -1,0 +1,10 @@
+Name:Baron Helmut Zemo
+ManaCost:B B B
+Types:Legendary Creature Human Noble Villain
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.Black+wasCastFromYourHand | TriggerZones$ Battlefield | Execute$ TrigConnive | TriggerDescription$ Whenever you cast a black spell from your hand, CARDNAME connives.
+SVar:TrigConnive:DB$ Connive
+A:AB$ Play | Cost$ ExileFromGrave<1+/Card.Black+withTotalManaSymbols_Black_GE15> | CostDesc$ Exile any number of black cards from your graveyard with fifteen or more black mana symbols among their mana costs: | Boast$ True | Defined$ ExiledWith | ValidSA$ Spell | WithoutManaCost$ True | CopyCard$ True | Amount$ 3 | Optional$ True | SpellDescription$ Copy those exiled cards. You may cast up to three of the copies without paying their mana costs. (Activate only if this creature attacked this turn and only once each turn.)
+DeckHas:Ability$Graveyard
+AI:RemoveDeck:All
+Oracle:Whenever you cast a black spell from your hand, Baron Helmut Zemo connives.\nBoast — Exile any number of black cards from your graveyard with fifteen or more black mana symbols among their mana costs: Copy those exiled cards. You may cast up to three of the copies without paying their mana costs. (Activate only if this creature attacked this turn and only once each turn.)

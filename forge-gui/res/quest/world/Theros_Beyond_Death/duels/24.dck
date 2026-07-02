@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Beast
+Title=Beast
+Icon=Beast.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/Aitor_Peñuela__Caballero_-_Abzan_Aggro_(Standard,_#955257).dck
+Deck Type=constructed
+
+[Main]
+2 Anax, Hardened in the Forge
+4 Legion Warboss
+4 Tin Street Dodger
+4 Chandra's Spitfire
+4 Scorch Spitter
+4 Shock
+3 Claim the Firstborn
+4 Lava Coil
+4 Cavalcade of Calamity
+4 Omen of the Forge
+3 Chandra, Acolyte of Flame
+20 Mountain
+[Sideboard]

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Preacher
+Title=Preacher
+Icon=Preacher.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/Grand_Prix_Nagoya_2012_-_Grinder_Winners/Cortese_Alessandro_-_Zombies_(Standard,_#41987).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Diregraf Ghoul
+3 Falkenrath Aristocrat
+3 Geralf's Messenger
+3 Gravecrawler
+3 Hellrider
+3 Knight of Infamy
+3 Rakdos Cackler
+3 Thundermaw Hellkite
+3 Vampire Nighthawk
+3 Searing Spear
+3 Victim of Night
+3 Pillar of Flame
+3 Blood Crypt
+3 Cavern of Souls
+3 Dragonskull Summit
+3 Mountain
+3 Rakdos Guildgate
+9 Swamp
+[Sideboard]
+3 Appetite for Brains
+3 Cremate
+3 Liliana of the Veil
+3 Olivia Voldaren
+3 Zealous Conscripts

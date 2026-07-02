@@ -1,17 +1,17 @@
 [
   {
     "name": "Challenge Coin",
-    "description": "A heavy coin made of gold.",
+    "description": "A heavy coin made of gold",
     "iconName": "ChallengeCoin"
   },
   {
     "name": "Silver Challenge Coin",
-    "description": "A decorative coin made of silver.",
+    "description": "A weighty coin made of silver",
     "iconName": "SilverChallengeCoin"
   },
   {
     "name": "Bronze Challenge Coin",
-    "description": "A lightweight coin made of bronze.",
+    "description": "A lightweight coin made of bronze",
     "iconName": "BronzeChallengeCoin"
   },
   {
@@ -362,7 +362,7 @@
   },
   {
     "name": "Chandra's Tome",
-    "description": "Draft a Chandra themed card that can be cast with mana of any color.",
+    "description": "Draft a Chandra themed card that can be cast with mana of any color",
     "equipmentSlot": "Left",
     "iconName": "ChandrasTome",
     "cost": 8000,
@@ -374,7 +374,7 @@
   },
   {
     "name": "Phoenix Charm",
-    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color",
     "equipmentSlot": "Neck",
     "iconName": "PhoenixCharm",
     "cost": 8000,
@@ -386,12 +386,23 @@
   },
   {
     "name": "Chandra's Stone",
-    "description": "A small red gemstone recovered after your battle with Chandra.",
+    "description": "A small red gemstone recovered after your battle with Chandra",
     "iconName": "r"
   },
   {
+    "name": "Phoenix",
+    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color",
+    "equipmentSlot": "Neck",
+    "iconName": "PhoenixCharm",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Phoenix Charm"
+      ]
+    }
+  },
+  {
     "name": "Liliana's Stone",
-    "description": "A small black gemstone recovered after your battle with Liliana.",
+    "description": "A small black gemstone recovered after your battle with Liliana",
     "iconName": "b"
   },
   {
@@ -911,6 +922,47 @@
     }
   },
   {
+     "name": "Basilisk Collar",
+    "equipmentSlot": "Neck",
+    "cost": 25000,
+    "description": "Equipment that gives deathouch and lifelink",
+    "iconName": "BasiliskCollar",
+    "effect": {
+      "lifeModifier": 1,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Basilisk Collar"
+      ]
+    }
+  },
+  {
+    "name": "Evil Ankh",
+    "equipmentSlot": "Right",
+    "description": "Start with Ankh of Mishra",
+    "cost": 25000,
+    "iconName": "EvilAnkh",
+    "effect": {
+      "lifeModifier": 1,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Ankh of Mishra"
+      ]
+    }
+  },
+  {
+    "name": "Staff of the Demoncaller",
+    "equipmentSlot": "Left",
+    "description": "Griselbrand starts in the command zone, but there's a catch ...",
+    "cost": 25000,
+    "iconName": "DemonCallerStaff",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Staff of the Demoncaller Effect"
+      ]
+    }
+  },
+  {
     "name": "Dungeon Map",
     "equipmentSlot": "Right",
     "iconName": "DungeonMap",
@@ -918,6 +970,83 @@
     "effect": {
       "startBattleWithCard": [
         "Dungeon Map"
+      ]
+    }
+  },
+  {
+    "name": "Concordant Boots",
+    "description": "All creatures have haste",
+    "equipmentSlot": "Boots",
+    "iconName": "ConcordantBoots",
+    "cost": 9000,
+    "effect": {
+      "startBattleWithCard": [
+        "Concordant Crossroads|LEG"
+      ]
+    }
+  },
+  {
+    "name": "Crown of Growth",
+    "description": "Start with Season of Growth",
+    "equipmentSlot": "Neck",
+    "iconName": "CrownofGrowth",
+    "cost": 3000,
+     "effect": {
+      "lifeModifier": 1,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Season of Growth"
+      ]
+    }
+  },
+  {
+    "name": "Mantle of Denial",
+    "description": "Start with Hesitation",
+    "equipmentSlot": "Body",
+    "iconName": "MantleofDenial",
+    "cost": 3000,
+     "effect": {
+      "lifeModifier": 1,
+      "changeStartCards": 1,
+      "startBattleWithCard": [
+        "Hesitation"
+      ]
+    }
+  },
+  {
+  "name": "Raptor Bondband",
+    "description": "4/2 dinosaur",
+    "equipmentSlot": "Boots",
+    "iconName": "RaptorBondband",
+    "cost": 4000,
+    "effect": {
+        "lifeModifier": -3,
+        "startBattleWithCard": [
+        "Frenzied Raptor|IKO"
+     ]
+    }
+  },
+    {
+        "name": "Golden Egg",
+    "description": "Filter mana or pay 2 for 3 life",
+    "equipmentSlot": "Left",
+    "iconName": "GoldenEgg",
+    "cost": 2000,
+    "effect": {
+        "startBattleWithCard": [
+        "Golden Egg|ELD"
+     ]
+    }
+  },
+    {
+        "name": "Amulet of Telepathy",
+    "description": "Your opponent plays with their hand revealed",
+    "equipmentSlot": "Neck",
+    "iconName": "RelicAmulet",
+    "cost": 3000,
+    "effect": {
+      "startBattleWithCard": [
+        "Telepathy|USG"
       ]
     }
   },
@@ -944,6 +1073,31 @@
     }
   },
   {
+    "name": "Warren Tender's Baton",
+    "equipmentSlot": "Left",
+    "iconName": "WarrenTendersBaton",
+    "cost": 3000,
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCard": [
+        "Goblin Warrens|FEM"
+      ]
+    },
+    "description": "Pay 2R and sac 2 Goblins to create 3 1/1 Goblin tokens"
+  },
+  {
+   "name": "Prayerbook of Ire",
+    "description": "3R for 5 damage to a player",
+    "equipmentSlot": "Left",
+    "iconName": "PrayerbookofIre",
+    "cost": 3000,
+    "effect": {
+        "startBattleWithCard": [
+        "Font of Ire|JOU"
+     ]
+    }
+  },
+    {
     "name": "Wood Bow",
     "equipmentSlot": "Left",
     "iconName": "WoodBow",
@@ -953,6 +1107,43 @@
     }
   },
   {
+      "name": "Robes of Omniscience",
+    "equipmentSlot": "Body",
+    "iconName": "RobesOfOmniscience",
+    "cost": 10000,
+    "effect": {
+      "lifeModifier": -6,
+      "changeStartCards": 2
+    },
+    "description": "-6 life. Draw 2 extra cards at game start"
+  },
+  {
+      "name": "Angelic Armaments",
+    "description": "Equip 4, +2/+2 and flying and become an angel",
+    "equipmentSlot": "Right",
+    "iconName": "AngelicArmaments",
+    "cost": 10000,
+    "effect": {
+        "lifeModifier": 4,
+        "startBattleWithCard": [
+        "Angelic Armaments|AVR"
+     ]
+    }
+  },
+    {
+        "name": "Angelic Greaves",
+    "description": "0/4 wall with flying",
+    "equipmentSlot": "Boots",
+    "iconName": "AngelicGreaves",
+      "cost": 8000,
+    "effect": {
+         "lifeModifier": 2,
+        "startBattleWithCard": [
+        "Angelic Wall|PO2"
+     ]
+    }
+  },
+    {
     "name": "Sandals",
     "equipmentSlot": "Boots",
     "iconName": "Sandals",
@@ -1354,7 +1545,7 @@
     "effect": {
       "colorView": true
     },
-    "description": "Grants Manasight, letting you know the colors used by your adversaries.",
+    "description": "Grants Manasight, letting you know the colors used by your adversaries",
     "iconName": "RelicAmulet",
     "cost": 4000
   },
@@ -1752,7 +1943,7 @@
   },
   {
     "name": "Hallowed Sigil",
-    "description": "Turn a creature hexproof until end of turn.",
+    "description": "Give a creature hexproof until end of turn",
     "equipmentSlot": "Neck",
     "iconName": "HallowedSigil",
     "cost": 6000,
@@ -1764,7 +1955,7 @@
   },
   {
     "name": "Unhallowed Sigil",
-    "description": "Devour the life of an enemy creature, killing it.",
+    "description": "Devour the life of an enemy creature, killing it",
     "equipmentSlot": "Right",
     "iconName": "UnhallowedSigil",
     "cost": 6000,

@@ -1,7 +1,7 @@
 Name:Odds
 ManaCost:U R
 Types:Instant
-A:SP$ FlipACoin | NoCall$ True | HeadsSubAbility$ OddCounter | TailsSubAbility$ OddCopy | TgtZone$ Stack | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target instant or sorcery spell | SpellDescription$ Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy.
+A:SP$ FlipCoin | NoCall$ True | HeadsSubAbility$ OddCounter | TailsSubAbility$ OddCopy | TgtZone$ Stack | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target instant or sorcery spell | SpellDescription$ Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy.
 SVar:OddCounter:DB$ Counter | Defined$ Targeted
 SVar:OddCopy:DB$ CopySpellAbility | Defined$ Targeted | MayChooseTarget$ True
 AlternateMode:Split

@@ -2091,7 +2091,7 @@ public class ComputerUtilCombat {
                 if (hasTrample && isAttacking) // if you have trample, deal damage to defending entity
                     damageMap.put(null, dmgCanDeal);
                 else if (lastBlocker != null) { // otherwise flush it into last blocker
-                    damageMap.put(lastBlocker, dmgCanDeal + damageMap.get(lastBlocker));
+                    damageMap.merge(lastBlocker, dmgCanDeal, Integer::sum);
                 }
             }
         } else {

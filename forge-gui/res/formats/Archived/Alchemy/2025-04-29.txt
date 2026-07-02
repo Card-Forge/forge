@@ -3,5 +3,5 @@ Name:Alchemy (YTDM)
 Type:Archived
 Subtype:Arena
 Effective:2025-04-29
-Sets:ANA, ANB, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG, YOTJ, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM
+Sets:ANB, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG, YOTJ, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM
 Banned:Monstrous Rage

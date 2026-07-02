@@ -2,7 +2,9 @@ Name:Dragon Typhoon
 ManaCost:4 R R
 Types:Kindred Enchantment Dragon
 T:Mode$ SpellCast | ValidCard$ Card.Dragon,Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDraft | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Dragon or noncreature spell, draft a card from CARDNAME's spellbook and put it onto the battlefield.
-SVar:TrigDraft:DB$ Draft | Spellbook$ Boltwing Marauder,Caldera Pyremaw,Magmatic Hellkite,Neriv; Heart of the Storm,Stormscale Scion,Thunderbreak Regent,Thundermane Dragon | Zone$ Battlefield
+SVar:TrigDraft:DB$ Draft | Spellbook$ Boltwing Marauder,Caldera Pyremaw,Magmatic Hellkite,Neriv; Heart of the Storm,Stormscale Scion,Thunderbreak Regent,Thundermane Dragon | RememberDrafted$ True | SubAbility$ DBPut
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Token | PrecostDesc$ Channel — | Cost$ 2 R R Discard<1/CARDNAME> | ActivationZone$ Hand | TokenScript$ r_4_4_dragon_flying | SpellDescription$ Create a 4/4 red Dragon creature token with flying.
 DeckHas:Type$Dragon
 DeckHints:Type$Dragon

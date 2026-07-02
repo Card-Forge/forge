@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Seth
+Title=Seth
+Icon=Seth.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Salutpoilu_-_Mono_Black_(Modern,_#795935).dck
+Deck Type=constructed
+
+[Main]
+2 Ensnaring Bridge
+4 The Rack
+3 Fatal Push
+2 Liliana's Triumph
+1 Bontu's Last Reckoning
+4 Inquisition of Kozilek
+4 Raven's Crime
+4 Smallpox
+3 Thoughtseize
+3 Shrieking Affliction
+3 Davriel, Rogue Shadowmage
+4 Liliana of the Veil
+2 Field of Ruin
+4 Mutavault
+13 Swamp
+4 Urborg, Tomb of Yawgmoth
+[Sideboard]
+2 Bontu's Last Reckoning
+3 Dark Confidant
+2 Delirium Skeins
+4 Leyline of the Void
+2 Ratchet Bomb
+2 Waste Not

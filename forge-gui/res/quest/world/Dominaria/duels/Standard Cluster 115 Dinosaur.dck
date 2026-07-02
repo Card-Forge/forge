@@ -1,0 +1,44 @@
+[metadata]
+Name=Dinosaur
+Deck Type=constructed
+Title=Dinosaur
+Description=Dinosaur
+Difficulty=Easy
+Icon=Selesnya-precon
+[Main]
+2 Ajani Unyielding
+4 Carnage Tyrant
+4 Chandra's Pyrohelix
+3 Commune with Dinosaurs
+2 Drover of the Mighty
+2 Druid of the Cowl
+1 Forest
+4 Forest
+3 Hashep Oasis
+2 Inspiring Vantage
+2 Jadelight Ranger
+1 Mountain
+1 Mountain
+2 Onward // Victory
+1 Plains
+4 Ranging Raptors
+4 Reckless Rage
+4 Ripjaw Raptor
+4 Rootbound Crag
+1 Scattered Groves
+4 Sheltered Thicket
+1 Struggle // Survive
+2 Sunpetal Grove
+2 Walking Ballista
+[Sideboard]
+1 Ajani Unyielding
+1 Chandra's Defeat
+1 Chandra, Torch of Defiance
+1 Dire Fleet Daredevil
+1 Fiery Cannonade
+1 Prepare // Fight
+4 Rekindling Phoenix
+1 Skysovereign, Consul Flagship
+2 Struggle // Survive
+1 Thrashing Brontodon
+1 Treasure Map

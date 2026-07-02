@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Silver Surfer
+Title=Silver Surfer
+Icon=Silver Surfer.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Aaron_Elliott_-_Infect_(Modern,_#1599580).dck
+Deck Type=constructed
+
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+3 Ignoble Hierarch
+3 Noble Hierarch
+3 Phyrexian Crusader
+3 Venerated Rotpriest
+3 Aspirant's Ascent
+4 Blossoming Defense
+3 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+4 Scale Up
+1 Boseiju, Who Endures
+2 Breeding Pool
+1 Forest
+4 Inkmoth Nexus
+2 Misty Rainforest
+1 Nurturing Peatland
+2 Overgrown Tomb
+1 Pendelhaven
+2 Verdant Catacombs
+1 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+2 Flusterstorm
+2 Dismember
+3 Veil of Summer
+2 Chalice of the Void
+1 Nature's Claim
+2 Force of Vigor
+3 Endurance

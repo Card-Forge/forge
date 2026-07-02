@@ -1,5 +1,5 @@
 map_marker.png
-size: 64,48
+size: 128,128
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -17,4 +17,13 @@ castle
   size: 32, 32     
 capital
   xy: 32, 16
-  size: 32, 32    
+  size: 32, 32
+sidebosseasy
+  xy: 0, 48
+  size: 16, 16
+sidebossmoderate
+  xy: 16, 48
+  size: 16, 16
+sidebosshard
+  xy: 32, 48
+  size: 16, 16

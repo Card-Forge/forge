@@ -1,0 +1,38 @@
+[metadata]
+Name=Cat Aggro
+Deck Type=constructed
+Title=Cat Aggro
+Description=Cat Aggro
+Difficulty=Hard
+Icon=Doran
+[Main]
+4 Adorned Pouncer
+2 Aethersphere Harvester
+1 Appeal // Authority
+4 Blossoming Defense
+3 Cast Out
+2 Dusk // Dawn
+2 Forest
+1 Forest
+1 Forest
+4 Hashep Oasis
+4 Metallic Mimic
+1 Plains
+3 Plains
+4 Pride Sovereign
+4 Regal Caracal
+3 Sacred Cat
+4 Scattered Groves
+2 Scavenger Grounds
+3 Scrounging Bandar
+4 Shefet Dunes
+4 Sunpetal Grove
+[Sideboard]
+2 Carnage Tyrant
+1 Forsake the Worldly
+3 Gideon's Intervention
+1 Settle the Wreckage
+3 Shapers' Sanctuary
+1 Skysovereign, Consul Flagship
+1 Sorcerous Spyglass
+3 Thopter Arrest

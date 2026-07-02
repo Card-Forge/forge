@@ -2,9 +2,9 @@ Name:Masterpiece Vault
 ManaCost:3
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When this artifact is put into a graveyard from the battlefield, draft a card from CARDNAME's spellbook and put it onto the battlefield. When an Equipment enters this way, attach it to up to one target creature you control.
-SVar:TrigDraft:DB$ Draft | Spellbook$ Champion's Helm,Lightning Greaves,Sword of Body and Mind,Sword of Feast and Famine,Sword of Fire and Ice,Sword of Light and Shadow,Sword of War and Peace | Zone$ Battlefield | RememberDrafted$ True | SubAbility$ MoveToPlay
-SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.Equipment | SubAbility$ DBTrigger
-SVar:DBTrigger:DB$ ImmediateTrigger | Execute$ TrigAttach | TriggerDescription$ When an Equipment enters this way, attach it to up to one target creature you control.
-SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | Object$ Remembered | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control
+SVar:TrigDraft:DB$ Draft | Spellbook$ Champion's Helm,Lightning Greaves,Sword of Body and Mind,Sword of Feast and Famine,Sword of Fire and Ice,Sword of Light and Shadow,Sword of War and Peace | RememberDrafted$ True | SubAbility$ DBPut
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBTrigger
+SVar:DBTrigger:DB$ ImmediateTrigger | Execute$ TrigAttach | ConditionDefined$ Remembered | RememberObjects$ Remembered | ConditionPresent$ Card.Equipment | TriggerDescription$ When an Equipment enters this way, attach it to up to one target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | Object$ DelayTriggerRememberedLKI | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control
 A:AB$ Sacrifice | Cost$ 5 | SpellDescription$ Sacrifice this artifact.
 Oracle:When this artifact is put into a graveyard from the battlefield, draft a card from Masterpiece Vault's spellbook and put it onto the battlefield. When an Equipment enters this way, attach it to up to one target creature you control.\n{5}: Sacrifice this artifact.

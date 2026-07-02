@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Wolverine
+Title=Wolverine
+Icon=Wolverine.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Joe_Dixon_-_Orzhov_Affinity_(Modern,_#1172769).dck
+Deck Type=constructed
+
+[Main]
+1 Serra's Emissary
+1 Archon of Cruelty
+1 Ashen Rider
+4 Stoneforge Mystic
+4 Priest of Fell Rites
+1 Sword of Fire and Ice
+1 Kaldra Compleat
+1 Kaya's Guile
+4 Fatal Push
+1 Vindicate
+2 Collective Brutality
+2 Lingering Souls
+4 Persist
+4 Unmarked Grave
+4 Thoughtseize
+3 Liliana of the Veil
+1 Castle Locthwain
+2 Plains
+3 Swamp
+4 Concealed Courtyard
+4 Godless Shrine
+4 Marsh Flats
+4 Silent Clearing
+[Sideboard]
+1 Batterskull
+1 Kozilek, Butcher of Truth
+1 Collective Brutality
+2 Vanishing Verse
+2 Disenchant
+2 Kaya's Guile
+3 Duress
+3 Damping Sphere

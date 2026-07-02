@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Tarzan
+Title=Tarzan
+Icon=Tarzan.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/Andurin_Wednesday_Evening_Magic/Jose_Manuel_Garcia_-_Dark_Burn_(Modern,_#21806).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+4 Goblin Guide
+3 Shrine of Burning Rage
+4 Lightning Bolt
+4 Needle Drop
+4 Searing Blaze
+4 Bump in the Night
+4 Forked Bolt
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Blood Crypt
+4 Dragonskull Summit
+5 Mountain
+4 Scalding Tarn
+[Sideboard]
+3 Flamebreak
+3 Guttural Response
+3 Smash to Smithereens
+3 Thoughtseize
+3 Tormod's Crypt

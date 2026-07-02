@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Air-Walker
+Title=Air-Walker
+Icon=Air-Walker.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/ATXroy_-_Selesnya_Landfall_(Standard,_#2930328).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+2 Dyadrine, Synthesis Amalgam
+1 Keen-Eyed Curator
+4 Llanowar Elves
+4 Mightform Harmonizer
+4 Sazh's Chocobo
+2 Surrak, Elusive Hunter
+2 Mossborn Hydra
+2 Lumbering Worldwagon
+4 Erode
+1 Snakeskin Veil
+4 Earthbender Ascension
+4 Ba Sing Se
+3 Escape Tunnel
+4 Fabled Passage
+7 Forest
+4 Hushwood Verge
+2 Temple Garden
+2 Plains
+[Sideboard]
+1 Leatherhead, Swamp Stalker
+2 Mossborn Hydra
+4 Sheltered by Ghosts
+2 Snakeskin Veil
+1 Surrak, Elusive Hunter
+2 Voice of Victory
+3 Rest in Peace

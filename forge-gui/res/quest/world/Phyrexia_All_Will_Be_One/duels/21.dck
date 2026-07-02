@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/27TrueRunes_-_Azorius_Superfriends_(Standard,_#1618879).dck
+Deck Type=constructed
+
+[Main]
+4 Ambitious Farmhand
+3 Dennick, Pious Apprentice
+3 The Restoration of Eiganjo
+4 Reckoner Bankbuster
+4 Fateful Absence
+4 Lay Down Arms
+4 White Sun's Twilight
+4 Jace, the Perfected Mind
+4 The Wandering Emperor
+3 The Eternal Wanderer
+12 Plains
+3 Island
+4 Raffine's Tower
+4 Spara's Headquarters
+[Sideboard]

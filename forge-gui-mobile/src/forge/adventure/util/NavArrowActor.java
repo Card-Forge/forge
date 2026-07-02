@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.graphics.Color;
 
 public class NavArrowActor extends Actor {
 
@@ -38,7 +39,12 @@ public class NavArrowActor extends Actor {
         setHeight(currentFrame.getRegionHeight());
         setWidth(currentFrame.getRegionWidth());
 
+        Color oldColor = batch.getColor();
+        Color actorColor = getColor();
+        batch.setColor(actorColor.r, actorColor.g, actorColor.b, actorColor.a * parentAlpha);
+
         //TODO: Simplify params somehow for readability? All this does is spin the image around the player.
         batch.draw(currentFrame, getX() - currentFrame.getRegionWidth() / 2, getY() - currentFrame.getRegionHeight() / 2, (currentFrame.getRegionWidth() * 0.5f), (currentFrame.getRegionHeight() * 0.5f), currentFrame.getRegionWidth(), currentFrame.getRegionHeight(), 1, 1, navTargetAngle);
+        batch.setColor(oldColor);
     }
 }

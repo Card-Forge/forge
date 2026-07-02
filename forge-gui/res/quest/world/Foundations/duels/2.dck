@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sphinx
+Title=Sphinx
+Icon=Sphinx.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/ItsJustSquid_-_Rakdos_Aggro_(Standard,_#2274012).dck
+Deck Type=constructed
+
+[Main]
+3 Callous Sell-Sword
+4 Emberheart Challenger
+4 Heartfire Hero
+1 Kellan, Planar Trailblazer
+4 Monastery Swiftspear
+4 Manifold Mouse
+4 Slickshot Show-Off
+2 Ashnod's Intervention
+2 Dreadmaw's Ire
+4 Monstrous Rage
+4 Burst Lightning
+4 Turn Inside Out
+4 Blackcleave Cliffs
+7 Mountain
+1 Razortrap Gorge
+2 Rockface Village
+2 Blazemire Verge
+4 Sulfurous Springs
+[Sideboard]
+2 Anoint with Affliction
+2 Urabrask's Forge
+2 Feed the Swarm
+1 Lithomantic Barrage
+2 Screaming Nemesis
+1 Sheoldred's Edict
+2 Torch the Tower
+3 Duress

@@ -1,0 +1,12 @@
+Name:Doctor Doom, King of Latveria
+ManaCost:1 U B R
+Types:Legendary Creature Human Noble Villain
+PT:3/3
+T:Mode$ DiscardedAll | ValidCard$ Land | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever you discard one or more land cards, each opponent loses 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target Villain you control gains menace until end of turn. It connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Villain.YouCtrl | TgtPrompt$ Select target Villain you control | KW$ Menace | SubAbility$ DBConnive
+SVar:DBConnive:DB$ Connive | Defined$ Targeted
+DeckHas:Ability$Discard|Counters
+DeckHints:Ability$Discard
+Oracle:Whenever you discard one or more land cards, each opponent loses 2 life.\nAt the beginning of combat on your turn, target Villain you control gains menace until end of turn. It connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

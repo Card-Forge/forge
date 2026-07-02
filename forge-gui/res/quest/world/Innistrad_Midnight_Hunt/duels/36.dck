@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Teysa
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Andrea_Beatrice_-_Mono-Black_Control_❄_(Standard,_#1212457).dck
+Deck Type=constructed
+
+[Main]
+2 Valki, God of Lies
+3 Skullport Merchant
+3 Sedgemoor Witch
+4 Eyetwitch
+4 Shambling Ghast
+1 Hagra Mauling
+1 Soul Shatter
+2 Infernal Grasp
+3 Deadly Dispute
+2 Hunt for Specimens
+4 Blood on the Snow
+2 The Meathook Massacre
+2 Professor Onyx
+4 Lolth, Spider Queen
+2 Hive of the Eye Tyrant
+2 Field of Ruin
+4 Faceless Haven
+15 Snow-Covered Swamp
+[Sideboard]
+1 Crippling Fear
+1 Mascot Exhibition
+1 Pest Summoning
+1 Necrotic Fumes
+1 Flunk
+1 Containment Breach
+1 The Meathook Massacre
+2 Environmental Sciences
+3 Duress
+3 Skyclave Shade

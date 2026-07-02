@@ -1,0 +1,9 @@
+Name:Ninja Pizza
+ManaCost:2 G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Food.YouCtrl | AddAbility$ Mana | Description$ Foods you control have "{T}, Sacrifice this artifact: Add one mana of any color."
+SVar:Mana:AB$ Mana | Cost$ T Sac<1/CARDNAME/this artifact> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your second main phase, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac
+DeckHas:Ability$Token|Sacrifice & Type$Food
+Oracle:Foods you control have "{T}, Sacrifice this artifact: Add one mana of any color."\nAt the beginning of your second main phase, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")

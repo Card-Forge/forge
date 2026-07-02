@@ -1,0 +1,9 @@
+Name:Omni-Changeling
+ManaCost:3 U U
+Types:Creature Shapeshifter
+PT:0/0
+K:Changeling
+K:Convoke
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | AddKeywords$ Changeling | SpellDescription$ You may have this creature enter as a copy of any creature on the battlefield, except it has changeling.
+Oracle:Changeling (This card is every creature type.)\nConvoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nYou may have this creature enter as a copy of any creature on the battlefield, except it has changeling.

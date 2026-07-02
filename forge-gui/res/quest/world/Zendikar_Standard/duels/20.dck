@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Waterlord
+Title=Waterlord
+Icon=Waterlord.jpg
+Difficulty=Easy
+Description=Zendikar/Zendikar_Game_Day_-_Quarterstaff_Games_-_USA/Matthew_Wood_-_Champion_UWR_(Standard,_#3469).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+2 Bogardan Hellkite
+2 Sphinx of Jwar Isle
+2 Sphinx of Lost Truths
+3 Wall of Denial
+1 Wall of Reverence
+2 Armillary Sphere
+1 Obelisk of Alara
+3 Path to Exile
+4 Day of Judgment
+1 Martial Coup
+2 Rite of Replication
+2 Oblivion Ring
+3 Ajani Vengeant
+3 Jace Beleren
+2 Arid Mesa
+1 Gargoyle Castle
+2 Glacial Fortress
+4 Island
+3 Mountain
+4 Plains
+2 Rupture Spire
+2 Scalding Tarn
+4 Sejiri Refuge
+[Sideboard]
+3 Celestial Purge
+3 Double Negative
+4 Luminarch Ascension
+2 Pyroclasm
+3 Swerve

@@ -18,7 +18,9 @@ Image=crusher.jpg
 3 Drifting Meadow|USG
 1 Elvish Herder|USG
 1 Erase|ULG
-17 Forest|USG
+6 Forest|USG|1
+6 Forest|USG|2
+5 Forest|USG|3
 1 Gaea's Bounty|USG
 1 Gaea's Embrace|USG
 1 Gang of Elk|ULG
@@ -26,7 +28,9 @@ Image=crusher.jpg
 1 Lone Wolf|ULG
 2 Mother of Runes|ULG
 2 Pacifism|USG
-4 Plains|USG
+2 Plains|USG|1
+1 Plains|USG|2
+1 Plains|USG|3
 1 Radiant's Judgment|ULG
 1 Rancor|ULG
 1 Silk Net|ULG

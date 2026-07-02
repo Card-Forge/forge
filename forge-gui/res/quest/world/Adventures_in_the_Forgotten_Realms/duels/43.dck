@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tanit
+Title=Tanit
+Icon=Tanit.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/David_Davila_-_Esper_Control_(Standard,_#1183902).dck
+Deck Type=constructed
+
+[Main]
+4 Mazemind Tome
+3 Power Word Kill
+3 Vanishing Verse
+4 Jwari Disruption
+4 Saw It Coming
+2 Extinction Event
+4 Doomskar
+4 Shark Typhoon
+2 Ashiok, Nightmare Muse
+4 Niko Aris
+1 Swamp
+1 Plains
+1 Field of Ruin
+2 Island
+2 Temple of Deceit
+3 Temple of Enlightenment
+4 Clearwater Pathway
+4 Fabled Passage
+4 Hengegate Pathway
+4 Brightclimb Pathway
+[Sideboard]
+1 Field of Ruin
+1 Shadows' Verdict
+1 Lochmere Serpent
+1 Disdainful Stroke
+3 Mystical Dispute
+4 Duress
+4 Drannith Magistrate

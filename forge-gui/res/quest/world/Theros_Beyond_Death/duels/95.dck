@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/Akiyama_Atsunori_-_BR_Aggro_(Modern,_#1048480).dck
+Deck Type=constructed
+
+[Main]
+2 Dark Confidant
+2 Kroxa, Titan of Death's Hunger
+4 Lightning Skelemental
+4 Seasoned Pyromancer
+2 Kolaghan's Command
+4 Lightning Bolt
+4 Fatal Push
+2 Collective Brutality
+2 Thoughtseize
+4 Unearth
+4 Inquisition of Kozilek
+4 Liliana of the Veil
+2 Wooded Foothills
+2 Castle Locthwain
+2 Swamp
+2 Mountain
+2 Arid Mesa
+4 Bloodstained Mire
+4 Blood Crypt
+4 Dragonskull Summit
+[Sideboard]
+2 Pillage
+2 Ashiok, Dream Render
+2 Dreadbore
+2 Rakdos Charm
+2 Boil
+2 Blood Moon
+3 Leyline of the Void

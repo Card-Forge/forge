@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Azorius-precon
+Title=Azorius-precon
+Icon=Azorius-precon.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/Alguitomas_-_Mardu_Vampires_(Standard,_#1699955).dck
+Deck Type=constructed
+
+[Main]
+4 Vampire Socialite
+2 Florian, Voldaren Scion
+2 Henrika Domnathi
+4 Voldaren Epicure
+1 Anje, Maid of Dishonor
+4 Bloodtithe Harvester
+3 Edgar, Charmed Groom
+4 Markov Baron
+4 Dusk Legion Duelist
+4 Voldaren Thrillseeker
+2 Go for the Throat
+2 Pile On
+3 Haunted Ridge
+2 Shattered Sanctum
+4 Voldaren Estate
+2 Sundown Pass
+1 Swamp
+1 Mountain
+4 Secluded Courtyard
+2 Caves of Koilos
+1 Battlefield Forge
+4 Blackcleave Cliffs
+[Sideboard]
+4 Duress
+4 Vampires' Vengeance
+2 Unlicensed Hearse
+1 Go for the Throat
+3 Loran of the Third Path
+1 Pile On

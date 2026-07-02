@@ -1,4 +1,4 @@
-Name:Fishing Gear 
+Name:Fishing Gear
 ManaCost:3
 Types:Artifact Equipment
 K:Equip:2

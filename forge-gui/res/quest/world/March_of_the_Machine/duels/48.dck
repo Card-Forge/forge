@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Walle
+Title=Walle
+Icon=Walle.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Henip_-_Jeskai_Midrange_(Standard,_#1638181).dck
+Deck Type=constructed
+
+[Main]
+4 Spirited Companion
+4 Fable of the Mirror-Breaker
+4 Guardian of Ghirapur
+2 Atsushi, the Blazing Sky
+3 Serra Paragon
+3 Quintorius, Loremaster
+3 Volcanic Spite
+3 Nahiri's Warcrafting
+4 Invasion of Gobakhan
+4 Invasion of Tarkir
+2 Plains
+1 Island
+3 Mountain
+3 Battlefield Forge
+1 Shivan Reef
+4 Seachrome Coast
+4 Deserted Beach
+4 Stormcarved Coast
+4 Sundown Pass
+[Sideboard]
+1 Lithomantic Barrage
+1 Pithing Needle
+1 Strangle
+1 Abrade
+1 Destroy Evil
+1 Disdainful Stroke
+1 Negate
+3 Chrome Host Seedshark
+1 Big Score
+1 See Double

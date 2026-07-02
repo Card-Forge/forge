@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jack Sparrow
+Title=Jack Sparrow
+Icon=Jack Sparrow.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/ShowTime__-_Domain_Aggro_(Modern,_#2273055).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+3 Phlage, Titan of Fire's Fury
+4 Ragavan, Nimble Pilferer
+4 Territorial Kavu
+4 Scion of Draco
+4 Stubborn Denial
+4 Lightning Bolt
+4 Tribal Flames
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Plains
+1 Mountain
+1 Thundering Falls
+1 Arena of Glory
+4 Flooded Strand
+4 Wooded Foothills
+1 Sacred Foundry
+1 Steam Vents
+4 Arid Mesa
+1 Temple Garden
+1 Blood Crypt
+1 Indatha Triome
+[Sideboard]
+2 Consign to Memory
+2 Ghost Vacuum
+4 Pyroclasm
+2 Wear // Tear
+2 Mystical Dispute
+1 Jegantha, the Wellspring
+2 Obsidian Charmaw

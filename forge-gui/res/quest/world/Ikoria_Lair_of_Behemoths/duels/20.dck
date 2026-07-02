@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Neo
+Title=Neo
+Icon=Neo.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/Adrian_Trueba_-_Esper_Control__(Yorion)_(Standard,_#968011).dck
+Deck Type=constructed
+
+[Main]
+2 Arcanist's Owl
+2 Gray Merchant of Asphodel
+3 Charming Prince
+3 Serrated Scorpion
+4 Elite Guardmage
+2 Bolas's Citadel
+2 Teferi's Time Twist
+3 Mortify
+2 Agonizing Remorse
+3 Shatter the Sky
+1 Elspeth's Nightmare
+2 Elspeth Conquers Death
+2 Omen of the Sun
+2 Banishing Light
+4 Doom Foretold
+4 Oath of Kaya
+4 Omen of the Sea
+1 Ashiok, Nightmare Muse
+4 Teferi, Time Raveler
+1 Island
+1 Castle Vantress
+1 Temple of Deceit
+1 Temple of Silence
+1 Hallowed Fountain
+2 Temple of Enlightenment
+2 Watery Grave
+3 Castle Ardenvale
+3 Godless Shrine
+4 Fabled Passage
+5 Swamp
+6 Plains
+[Sideboard]
+1 Agent of Treachery
+1 Kiora Bests the Sea God
+1 Legion's End
+1 Leyline of the Void
+1 Yorion, Sky Nomad
+2 Mystical Dispute
+2 Lavinia, Azorius Renegade
+2 Elspeth's Nightmare
+2 Agonizing Remorse
+2 Cry of the Carnarium

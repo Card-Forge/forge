@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="71">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="3477" source="../../../../common/maps/tileset/buildings.tsx" />
  <layer id="6" name="Collision" width="40" height="30">
   <data encoding="base64" compression="zlib">
    eJzVlkEOwyAMBHONxBOa7+TP7et6ikoRXq/XjkpX8iUBe7DBcO7bdv6RjbL+ZWI82repbEhXHDQfxe/HMOtRNOYBrcWKw+RwBSHGFXQXn1fbiCr5xr1XwZjJ4YwHGcvTj0V86GxVGePX65ksm7IONH7WT2f9fObDqodXN2U8u/9Qvav5rjnZHv0rPlZKzSK+V+dDezCi1w18/Rzm/Kox+nkKH/tmZPsXYhvfeR4z0/+yxvg82oeH4UM5yBhTT+b+YHwg3/23qBg+5Y2lnh2PsYrv2bg+E2FEfFW5WIWvsr4sX+Qur863x8fmMHM3KL1ZeeNb52r2nYnDsKlm8VXZGxqBiRM=
@@ -22,7 +22,7 @@
  </layer>
  <layer id="3" name="Clutter" width="40" height="30">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJztl0sKgzAQQN3YS9idBa3X1kvoThda8FKli0CQmPk3InmrYCYzwflliiJjQZv6AjdgMNa/Cs42RPnOW5eKejGM3npXtFUxzrwjewvzHi9Af8/UK2FKYDODB/LPk6Brh0XYWNQDCbPwfI2U24R2jnyU9VEZYRERLl5db0kdN5TeQMk1B7Z3Y2t/KK61ajjlX6T22xlX62dQzFjn2w/Lun9HHiffodhyORF628XmLGnN18xFzVjpInucWnqE+w63wJ+VQv74R55DcOagjA5fSzYWWA==
@@ -34,28 +34,64 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="237.667" y="177.583"/>
-  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="322.666" y="47"/>
-  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="224.36" y="392.771">
+  <object id="48" template="../../../../common/maps/obj/treasure.tx" x="237.667" y="177.583"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="63" template="../../../../common/maps/obj/gold.tx" x="322.666" y="47" />
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="224.36" y="392.771">
    <properties>
-    <property name="enemy" value="Centaur"/>
+    <property name="enemy" value="Centaur" />
    </properties>
   </object>
-  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="220.861" y="281.033">
+  <object id="66" template="../../../../common/maps/obj/enemy.tx" x="220.861" y="281.033">
    <properties>
-    <property name="enemy" value="Satyr"/>
+    <property name="enemy" value="Satyr" />
    </properties>
   </object>
-  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="16.167" y="350.833"/>
-  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="476.796" y="309.503">
+  <object id="68" template="../../../../common/maps/obj/gold.tx" x="16.167" y="350.833" />
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="476.796" y="309.503">
    <properties>
-    <property name="enemy" value="Satyr"/>
+    <property name="enemy" value="Satyr" />
    </properties>
   </object>
-  <object id="70" template="../../../../../../common/maps/obj/door_up.tx" x="271.5" y="480">
+  <object id="70" template="../../../../common/maps/obj/door_up.tx" x="271.5" y="480">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/grove_11.tmx"/>
-    <property name="teleportObjectId" value="69"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/grove_11.tmx" />
+    <property name="teleportObjectId" value="69" />
    </properties>
   </object>
  </objectgroup>

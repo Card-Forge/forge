@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Ghost Rider
+Title=Ghost Rider
+Icon=Ghost Rider.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/States-Champs_Oklahoma/Darin_Minard_-_Valakut_Ramp_(Standard,_#7968).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+2 Oracle of Mul Daya
+4 Primeval Titan
+2 Wurmcoil Engine
+3 Harrow
+4 Lightning Bolt
+4 Summoning Trap
+4 Cultivate
+3 Explore
+4 Khalni Heart Expedition
+2 Evolving Wilds
+5 Forest
+12 Mountain
+2 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+3 Naturalize
+3 Obstinate Baloth
+4 Pyroclasm
+4 Tunnel Ignus
+1 Ulamog, the Infinite Gyre

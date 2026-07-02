@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/Frank_Robert_Flørenes_-_Esper_Midrange_(Modern,_#2527792).dck
+Deck Type=constructed
+
+[Main]
+4 Overlord of the Balemurk
+4 Satoru, the Infiltrator
+4 Solitude
+3 Flickerwisp
+3 Orcish Bowmasters
+3 Phelia, Exuberant Shepherd
+3 Witch Enchanter
+2 Boggart Trawler
+2 Emperor of Bones
+2 Recruiter of the Guard
+1 Skyclave Apparition
+1 Squall, SeeD Mercenary
+1 White Orchid Phantom
+4 Aether Vial
+4 Ephemerate
+3 Fatal Push
+3 Flooded Strand
+3 Godless Shrine
+2 Marsh Flats
+2 Plains
+1 Hallowed Fountain
+1 Meticulous Archive
+1 Polluted Delta
+1 Shadowy Backstreet
+1 Swamp
+1 Watery Grave
+[Sideboard]
+4 Consign to Memory
+2 Ashiok, Dream Render
+2 Celestial Purge
+2 White Orchid Phantom
+2 Wrath of the Skies
+1 Sanctifier en-Vec
+1 Surgical Extraction
+1 Tishana's Tidebinder

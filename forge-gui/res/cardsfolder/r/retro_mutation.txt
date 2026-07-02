@@ -1,0 +1,9 @@
+Name:Retro-Mutation
+ManaCost:2 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature is a Turtle with base power and toughness 0/1. It can't attack and loses all abilities. (It also loses all other creature types.)
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 0 | SetToughness$ 1 | AddType$ Turtle | RemoveCreatureTypes$ True | RemoveAllAbilities$ True | Secondary$ True | Description$ Enchanted creature is a Turtle with base power and toughness 0/1. It can't attack and loses all abilities. (It also loses all other creature types.)
+Oracle:Flash\nEnchant creature\nEnchanted creature is a Turtle with base power and toughness 0/1. It can't attack and loses all abilities. (It also loses all other creature types.)

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ancient Battlefield
+Title=Ancient Battlefield
+Icon=Ancient Battlefield.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/2010_TCGplayer_WWS_Atlanta_$5k/JoshuaMiller_-_Valakut_Ramp_(Standard,_#8128).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+4 Overgrown Battlement
+4 Primeval Titan
+3 Harrow
+4 Lightning Bolt
+2 Summoning Trap
+4 Cultivate
+4 Explore
+2 Khalni Heart Expedition
+3 Koth of the Hammer
+2 Evolving Wilds
+5 Forest
+1 Khalni Garden
+11 Mountain
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Acidic Slime
+1 Act of Treason
+2 Back to Nature
+4 Pyroclasm
+3 Ricochet Trap
+1 Tajuru Preserver

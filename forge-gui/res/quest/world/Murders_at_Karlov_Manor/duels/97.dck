@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Quicksilver
+Title=Quicksilver
+Icon=Quicksilver.jpg
+Difficulty=Hard
+Description=./Modern/Murders_at_Karlov_Manor/ARCll_-_Golgari_Yawgmoth_(Modern,_#2010944)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Blood Artist
+1 Hapatra, Vizier of Poisons
+1 Ignoble Hierarch
+4 Young Wolf
+4 Delighted Halfling
+4 Yawgmoth, Thran Physician
+1 Sheoldred, the Apocalypse
+4 Orcish Bowmasters
+4 Wall of Roots
+1 Haywire Mite
+1 Scavenging Ooze
+3 Agatha's Soul Cauldron
+4 Chord of Calling
+1 Eldritch Evolution
+4 Grist, the Hunger Tide
+2 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+2 Overgrown Tomb
+3 Blooming Marsh
+1 Pendelhaven
+4 Verdant Catacombs
+2 Twilight Mire
+1 Misty Rainforest
+1 Dryad Arbor
+2 Forest
+1 Swamp
+1 Nurturing Peatland
+1 Underground Mortuary
+[Sideboard]
+1 Reclamation Sage
+1 Soulless Jailer
+2 Thoughtseize
+2 Fatal Push
+2 Endurance
+1 Legion's End
+2 Force of Vigor
+2 Pick Your Poison
+2 Fulminator Mage

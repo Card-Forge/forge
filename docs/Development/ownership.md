@@ -5,9 +5,9 @@ Please also try to check back a bit after your PR gets merged in case it causes 
 ## DevOps
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
-| PC Releases | friarsol | Agetian | - update Maven dependencies |
+| PC Releases | friarsol | Agetian | - update Maven dependencies<br>- maintain CI files |
 | Android Releases | | kevlahnota | |
-| Sentry | JaminCollins | | - watch for rare/unusual crashes |
+| Sentry | JaminCollins | | - watch trends for rare/unusual crashes |
 
 ## Ingame Engine
 | Concept | Owners | Ancestors | Example tasks |
@@ -26,7 +26,7 @@ Please also try to check back a bit after your PR gets merged in case it causes 
 ## User Interface
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
-| Desktop | | | |
+| Desktop | | | - performance profiling |
 | Android | | DrDev, kevlahnota | - test new libGDX versions |
 | Localization | | Alumi | - update card translation files<br>- update engine text (native speaker not required) |
 | Sound effects | | | |
@@ -41,7 +41,7 @@ Please also try to check back a bit after your PR gets merged in case it causes 
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
 | Quest | friarsol | | |
-| [Network Play](../network-play.md) | | JaminCollins | |
+| [Network Play](../network-play.md) | MostCromulent | JaminCollins | |
 | Gauntlet | | | |
 | Draft | | | |
 | Planar Conquest | | DrDev | |
@@ -61,4 +61,4 @@ Please also try to check back a bit after your PR gets merged in case it causes 
 ## Miscellaneous
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
-| Documentation | | | - update Wiki |
+| Documentation | TRT | | - update Wiki |

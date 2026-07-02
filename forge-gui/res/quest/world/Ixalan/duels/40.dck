@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Robot40
+Title=Robot40
+Icon=Ned Flanders.jpg
+Difficulty=Hard
+Description=BR Artifacts 
+Deck Type=constructed
+
+[Main]
+4 Bomat Courier
+3 Dhund Operative
+4 Dread Wanderer
+4 Hazoret the Fervent
+2 Pia Nalaar
+4 Scrapheap Scrounger
+2 Aethersphere Harvester
+4 Heart of Kiran
+2 Fatal Push
+3 Lightning Strike
+4 Unlicensed Disintegration
+2 Aether Hub
+4 Canyon Slough
+4 Dragonskull Summit
+5 Mountain
+9 Swamp
+[Sideboard]
+2 Abrade
+1 Aethersphere Harvester
+1 Chandra's Defeat
+4 Duress
+2 Fatal Push
+3 Rampaging Ferocidon
+2 Vraska's Contempt

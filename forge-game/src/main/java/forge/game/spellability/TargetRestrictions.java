@@ -20,8 +20,7 @@ package forge.game.spellability;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.ObjectUtils;
+import java.util.Objects;
 
 import com.google.common.collect.Lists;
 
@@ -370,7 +369,7 @@ public class TargetRestrictions {
      */
     public final boolean isMinTargetsChosen(final Card c, final SpellAbility sa) {
         int min = getMinTargets(c, sa);
-        if (min == 0 || (sa.isDividedAsYouChoose() && ObjectUtils.getIfNull(sa.getDividedValue(), 0) == 0)) {
+        if (min == 0 || (sa.isDividedAsYouChoose() && Objects.requireNonNullElse(sa.getDividedValue(), 0) == 0)) {
             return true;
         }
         return min <= sa.getTargets().size();
@@ -498,17 +497,6 @@ public class TargetRestrictions {
 
     /**
      * <p>
-     * canTgtCreatureAndPlayer.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean canTgtCreatureAndPlayer() {
-        return this.canTgtPlayer() && this.canTgtCreature();
-    }
-
-    /**
-     * <p>
      * hasCandidates.
      * </p>
      * 
@@ -559,14 +547,11 @@ public class TargetRestrictions {
      * <p>
      * getNumCandidates.
      * </p>
-     * 
-     * @param sa
-     *            the sa
-     * @param isTargeted
-     *            Check Valid Candidates and Targeting
+     *
+     * @param sa the sa
      * @return a int.
      */
-    public final int getNumCandidates(final SpellAbility sa, final boolean isTargeted) {
+    public final int getNumCandidates(final SpellAbility sa) {
         int num = 0;
         if (this.tgtZone.contains(ZoneType.Stack)) {
             for (final SpellAbilityStackInstance si : sa.getHostCard().getGame().getStack()) {
@@ -577,14 +562,13 @@ public class TargetRestrictions {
             }
         }
         // TODO this may count some SA twice
-        return num + getAllCandidates(sa, isTargeted).size();
+        return num + getAllCandidates(sa).size();
     }
 
-    public final List<GameEntity> getAllCandidates(final SpellAbility sa, final boolean isTargeted) {
-        return getAllCandidates(sa, isTargeted, false);
+    public final List<GameEntity> getAllCandidates(final SpellAbility sa) {
+        return getAllCandidates(sa, false);
     }
-
-    public final List<GameEntity> getAllCandidates(final SpellAbility sa, final boolean isTargeted, final boolean onlyNonCard) {
+    public final List<GameEntity> getAllCandidates(final SpellAbility sa, final boolean onlyNonCard) {
         final Game game = sa.getActivatingPlayer().getGame();
         final List<GameEntity> candidates = Lists.newArrayList();
         for (Player player : game.getPlayers()) {
@@ -599,12 +583,8 @@ public class TargetRestrictions {
             return candidates;
         }
 
-        final Card srcCard = sa.getHostCard(); // should there be OrginalHost at any moment?
-
         for (final Card c : game.getCardsIn(this.tgtZone)) {
-            if (c.isValid(this.validTgts, sa.getActivatingPlayer(), srcCard, sa)
-                    && (!isTargeted || sa.canTarget(c))
-                    && !sa.getTargets().contains(c)) {
+            if (sa.canTarget(c)) {
                 candidates.add(c);
             }
         }

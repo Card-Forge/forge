@@ -1,0 +1,45 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Morph Mayhem
+Description=Morph Mayhem hides threats face-down. Flip creatures at opportune moments for maximum impact.
+Deck Type=constructed
+Set=LGN
+Image=morph_mayhem.jpg
+[main]
+4 Plains|ONS|1
+4 Plains|ONS|2
+3 Plains|ONS|3
+4 Island|ONS|1
+4 Island|ONS|2
+3 Island|ONS|3
+2 Lonely Sandbar|ONS
+2 Secluded Steppe|ONS
+2 Ascending Aven|ONS
+1 Aven Redeemer|LGN
+1 Chromeshell Crab|LGN
+1 Daru Mender|LGN
+1 Daru Lancer|ONS
+2 Deftblade Elite|LGN
+2 Echo Tracer|LGN
+4 Glory Seeker|ONS
+1 Imagecrafter|ONS
+1 Ironfist Crusher|ONS
+1 Liege of the Axe|LGN
+1 Master of the Veil|LGN
+1 Mistform Mutant|ONS
+1 Swooping Talon|LGN
+2 Voidmage Apprentice|LGN
+1 Wall of Deceit|LGN
+1 Weaver of Lies|LGN
+1 Whipcorder|ONS
+2 Willbender|LGN
+2 Wingbeat Warrior|LGN
+1 Akroma's Blessing|ONS
+1 Discombobulate|ONS
+1 Improvised Armor|ONS
+2 Pacifism|MIR
+[sideboard]

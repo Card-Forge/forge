@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Blue
+Title=Dungeon Crawling Blue
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/BigTomTom79_-_GW_Auras_(Modern,_#1069426).dck
+Deck Type=constructed
+
+[Main]
+1 Dryad Arbor
+4 Kor Spiritdancer
+4 Slippery Bogle
+4 Gladecover Scout
+2 Dromoka's Command
+2 Path to Exile
+2 Spirit Mantle
+2 Sixth Sense
+4 Rancor
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Gryff's Boon
+4 Hyena Umbra
+1 Forest
+1 Plains
+1 Wooded Foothills
+4 Windswept Heath
+4 Temple Garden
+4 Razorverge Thicket
+4 Horizon Canopy
+[Sideboard]
+1 Gaea's Blessing
+1 Lurrus of the Dream-Den
+2 Path to Exile
+2 Spirit Link
+3 Relic of Progenitus
+3 Gaddock Teeg
+3 Force of Vigor

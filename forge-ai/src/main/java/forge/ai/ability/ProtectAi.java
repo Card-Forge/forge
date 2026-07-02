@@ -233,7 +233,7 @@ public class ProtectAi extends SpellAbilityAi {
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().size() < tgt.getMinTargets(source, sa)) || sa.getTargets().size() == 0) {
+                if (sa.getTargets().size() < sa.getMinTargets() || sa.getTargets().size() == 0) {
                     if (mandatory) {
                         if (protectMandatoryTarget(ai, sa)) {
                             return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
@@ -257,11 +257,9 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectTgtAI()
 
     private static boolean protectMandatoryTarget(final Player ai, final SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getHostCard();
         final List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
-        if (list.size() < tgt.getMinTargets(source, sa)) {
+        if (list.size() < sa.getMinTargets()) {
             sa.resetTargets();
             return false;
         }

@@ -1,0 +1,6 @@
+Name:Splinter's Technique
+ManaCost:3 B
+Types:Sorcery
+K:Sneak:1 B
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle.
+Oracle:Sneak {1}{B} (You may cast this spell for {1}{B} if you also return an unblocked attacker you control to hand during the declare blockers step.)\nSearch your library for a card, put that card into your hand, then shuffle.

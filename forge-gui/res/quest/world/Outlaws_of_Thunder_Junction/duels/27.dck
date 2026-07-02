@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Tweedledum
+Title=Tweedledum
+Icon=Tweedledum.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/Akio_Matsuzaki_-_Mono-Blue_Cauldron_(Standard,_#2021736).dck
+Deck Type=constructed
+
+[Main]
+4 Omen Hawker
+4 Hypnotic Grifter
+1 Realm-Scorcher Hellkite
+4 Sleep-Cursed Faerie
+1 Forensic Researcher
+4 Harrier Strix
+4 The Reality Chip
+2 Glistener Seer
+4 Agatha's Soul Cauldron
+3 The Enigma Jewel
+4 Training Grounds
+2 Witness Protection
+20 Island
+3 Otawara, Soaring City
+[Sideboard]
+1 Witness Protection
+2 Ledger Shredder
+3 Faerie Mastermind
+3 Malevolent Hermit
+1 The Stone Brain
+3 Tishana's Tidebinder
+1 Negate
+1 Surge Engine

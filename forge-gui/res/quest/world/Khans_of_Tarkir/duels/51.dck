@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Colorless
+Title=Dungeon Crawling Colorless
+Icon=Dungeon Crawling Colorless.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/SCG_Super_IQ_Raleigh/Edwin_Harris_-_Red_Deck_Wins_(Modern,_#620710).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+1 Flame Javelin
+4 Lightning Bolt
+2 Lightning Helix
+2 Searing Blaze
+1 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+1 Bloodstained Mire
+5 Mountain
+4 Sacred Foundry
+4 Scalding Tarn
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+3 Kor Firewalker
+2 Path to Exile
+4 Smash to Smithereens

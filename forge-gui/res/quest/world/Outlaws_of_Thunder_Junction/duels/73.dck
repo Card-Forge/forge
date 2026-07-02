@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/Bosseidon_-_Burn_(Modern,_#2065732).dck
+Deck Type=constructed
+
+[Main]
+4 Slickshot Show-Off
+4 Dragon's Rage Channeler
+4 Monastery Swiftspear
+4 Mishra's Bauble
+4 Lightning Bolt
+4 Boros Charm
+4 Lava Dart
+3 Play with Fire
+4 Skewer the Critics
+4 Light Up the Stage
+4 Lava Spike
+4 Arid Mesa
+4 Mountain
+2 Sacred Foundry
+2 Inspiring Vantage
+4 Scalding Tarn
+1 Elegant Parlor
+[Sideboard]
+4 Wear // Tear
+4 Searing Blaze
+2 Destroy Evil
+2 Engineered Explosives
+3 Rest in Peace

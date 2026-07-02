@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Avatar: The Last Airbender #04
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/12/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You have additional islands and mountains in your library. Any cards you could draw are not relevant to the solution. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Lost Days;Aang's Journey;Self-Destruct;Abandon Attachments;Twin Blades
+p0battlefield=Melek, Reforged Researcher;Fire Nation Palace;Island;Island;Mountain;Mountain
+p0library=Island;Island;Island;Mountain;Mountain;Mountain;Island;Mountain;Island;Mountain;Island;Mountain;Island;Mountain;Island;Mountain
+p0graveyard=How to Start a Riot
+p1life=22
+p1battlefield=Foggy Swamp Spirit Keeper|Counters:P1P1=1;T:c_1_1_spirit_spiritshadow;T:c_1_1_spirit_spiritshadow

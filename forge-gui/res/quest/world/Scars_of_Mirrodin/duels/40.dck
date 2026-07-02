@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Princess Selenia
+Title=Princess Selenia
+Icon=Princess Selenia.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/States-Champs_Wisconsin/Carl_Rappelt_-_Valakut_Ramp_(Standard,_#7960).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avenger of Zendikar
+4 Primeval Titan
+3 Harrow
+3 Summoning Trap
+4 Cultivate
+4 Explore
+4 Pyroclasm
+4 Khalni Heart Expedition
+2 Koth of the Hammer
+4 Evolving Wilds
+6 Forest
+12 Mountain
+4 Valakut, the Molten Pinnacle
+2 Verdant Catacombs
+[Sideboard]
+4 Acidic Slime
+2 Chain Reaction
+3 Cunning Sparkmage
+2 Lightning Bolt
+2 Manic Vandal
+1 Mimic Vat

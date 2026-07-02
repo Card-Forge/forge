@@ -109,6 +109,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Bargain")) {
                 this.bargain = true;
             }
+            if (value.equals("Teamwork")) {
+                this.teamwork = true;
+            }
             if (value.equals("AltCost"))
                 this.altCostPaid = true;
 
@@ -155,10 +158,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (params.containsKey("ConditionChosenColor")) {
             this.setColorToCheck(params.get("ConditionChosenColor"));
-        }
-
-        if (params.containsKey("Presence")) {
-            this.setPresenceCondition(params.get("Presence"));
         }
 
         // Condition version of IsPresent stuff
@@ -279,23 +278,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.surgeCostPaid && !sa.isSurged()) return false;
         if (this.bargain && !sa.isBargained()) return false;
         if (this.foretold && !sa.isForetold()) return false;
+        if (this.teamwork && !sa.isTeamwork()) return false;
 
         if (this.optionalCostPaid && this.optionalBoolean && !sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
         if (this.optionalCostPaid && !this.optionalBoolean && sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
-        
-        if (!this.getPresenceCondition().isEmpty()) {
-            if (host.getCastFrom() == null || host.getCastSA() == null)
-                return false;
-
-            final String type = this.getPresenceCondition();
-
-            int revealed = AbilityUtils.calculateAmount(host, "Revealed$Valid " + type, host.getCastSA());
-            int ctrl = AbilityUtils.calculateAmount(host, "Count$LastStateBattlefield " + type + ".YouCtrl", host.getCastSA());
-
-            if (revealed + ctrl == 0) {
-                return false;
-            }
-        }
 
         if (this.getNoDifferentColors() != null) {
             List<Card> tgts = AbilityUtils.getDefinedCards(host, this.getNoDifferentColors(), sa);
@@ -349,13 +335,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (this.getGameTypes().size() > 0) {
             if (!getGameTypes().contains(game.getRules().getGameType())) {
-                return false;
-            }
-        }
-
-        if (this.getCardsInHand() != -1) {
-            // Can handle Library of Alexandria, or Hellbent
-            if (activator.getCardsIn(ZoneType.Hand).size() != this.getCardsInHand()) {
                 return false;
             }
         }

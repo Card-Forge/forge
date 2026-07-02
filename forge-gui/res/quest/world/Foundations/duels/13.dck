@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Radiant
+Title=Radiant
+Icon=Radiant.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/BARNYARD_-_Boros_Tokens_Control_(Standard,_#2271614).dck
+Deck Type=constructed
+
+[Main]
+4 Enduring Innocence
+2 Overlord of the Mistmoors
+4 Beza, the Bounding Spring
+4 Sun-Blessed Healer
+4 Carrot Cake
+4 Torch the Tower
+4 Lightning Helix
+4 Sunfall
+4 Caretaker's Talent
+3 Mountain
+4 Inspiring Vantage
+1 Temple of Triumph
+4 Elegant Parlor
+4 Fountainport
+2 Sunken Citadel
+5 Plains
+1 Demolition Field
+2 Battlefield Forge
+[Sideboard]
+1 Campus Renovation
+1 Season of the Burrow
+1 Overlord of the Mistmoors
+3 Rest in Peace
+3 Loran of the Third Path
+4 Exorcise
+1 Split Up
+1 Scrollshift

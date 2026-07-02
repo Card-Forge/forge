@@ -7,6 +7,7 @@ Ajani, Caller of the Pride|Ajani's Menagerie|You're a crazy cat lady now!
 Ajani, Inspiring Leader|Ajani's Leap of Faith|Cats from above!
 Ajani, Mentor of Heroes|Ajani's Vitality|Do sta let!
 Ajani, Nacatl Avenger|Ajani's Vengeance|There can only be one. For you, that is.
+Ajani, Outland Chaperone|Ajani's Search and Rescue|Here you are! I've been worried about you!
 Ajani, Sleeper Agent|Ajani's Progress|Every step brings us closer to perfection.
 Ajani, Strength of the Pride|Ajani's Obliteration|A defiant roar... then silence.
 Ajani, Valiant Protector|Ajani's Valiant Smash|Sometimes, life can be brutal.
@@ -157,7 +158,9 @@ Ob Nixilis Reignited|Ob Nixilis's Torment|I'll give you dreams from beyond the u
 Ob Nixilis, the Adversary|Ob Nixilis's Pact|The price is, let's see... everything.
 Oko, the Ringleader|Oko's Fearsome Posse|Meet new mooks, same as the old mooks.
 Oko, the Trickster|Oko's Massive Friends|And watch where you're stomping!
+Oko, Shadowmoor Scion|Oko's Shadowmoor Support|Protect people, huh? Am I doing it right?
 Oko, Thief of Crowns|Oko's Unfair Switcheroo|How about some magic beans for that?
+Professor Dellian Fel|Dellian's Sanguine Bond|I am not interested in your excuses.
 Professor Onyx|Professor's Discipline|You'll get it back at the end of the semester unless you pay a... fine.
 Quintorius Kand|Quintorius's Archeological Dig|The past is still alive.
 Ral Zarek|Ral's Long Day|So much work, so much time!
@@ -165,6 +168,7 @@ Ral, Caller of Storms|Ral's Invocation|The storm called and left a message.
 Ral, Crackling Wit|Ral's Perfect Storm|I am not the eye of the storm. I am its heart.
 Ral, Izzet Viceroy|Ral's Bonus|I was just researching lightning and then it hit me.
 Ral, Leyline Prodigy|Ral's Bolt of Inspiration|There's always more ideas.
+Ral Zarek, Guest Lecturer|Ral's Stasis|Detention.
 Rowan, Fearless Sparkmage|Rowan's Magnetic Personality|Personal magnetism can create the spark of revolt.
 Rowan, Scholar of Sparks|Rowan's Twin Magic|Of course I haven't copied my answers, professor!
 Saheeli Rai|Saheeli's Creativity|I love when all the pieces come together!

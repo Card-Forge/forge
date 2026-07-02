@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Frodo
+Title=Frodo
+Icon=Frodo.jpg
+Difficulty=Easy
+Description=Fate_Reforged/Standard_Champs_#8046232/d4ygum_-_Gruul_Aggro_(Standard,_#191361).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Ashcloud Phoenix
+2 Boon Satyr
+4 Elvish Mystic
+4 Fanatic of Xenagos
+4 Goblin Rabblemaster
+4 Heir of the Wilds
+2 Rattleclaw Mystic
+3 Shaman of the Great Hunt
+4 Stormbreath Dragon
+3 Lightning Strike
+4 Crater's Claws
+7 Forest
+2 Mana Confluence
+7 Mountain
+4 Temple of Abandon
+4 Wooded Foothills
+[Sideboard]
+3 Arc Lightning
+1 Chandra, Pyromaster
+2 Destructive Revelry
+2 Fated Conflagration
+1 Magma Spray
+1 Sarkhan, the Dragonspeaker
+2 Wild Slash
+2 Xenagos, the Reveler

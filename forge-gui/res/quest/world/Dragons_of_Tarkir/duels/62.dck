@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Blood Oath
+Title=Blood Oath
+Icon=Blood Oath.jpg
+Difficulty=Hard
+Description=../Modern/Dragons_of_Tarkir/µÖ┤ÒéîÒéïÕ▒ïÒâóÒâÇÒâ│µØ»/Mochizuki_Masaki_-_Burn_(Modern,_#640321).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+4 Bloodstained Mire
+2 Mountain
+3 Sacred Foundry
+3 Stomping Ground
+3 Windswept Heath
+3 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+3 Kor Firewalker
+3 Path to Exile
+3 Skullcrack
