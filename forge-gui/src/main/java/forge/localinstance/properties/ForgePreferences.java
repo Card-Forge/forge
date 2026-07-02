@@ -65,6 +65,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_MATCHES_PER_GAME("3"),
         UI_APPLIED_VARIANTS(""),
         UI_RANDOM_FOIL ("false"),
+        /** A or B; empty defaults to A. See {@code forge.eval.variant} system property (overrides this). */
+        UI_GAME_STATE_EVAL_VARIANT(""),
         UI_AVATARS ("0,1"),
         UI_SLEEVES ("0,1"),
         UI_SHOW_CARD_OVERLAYS ("true"),
@@ -213,6 +215,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         LEGACY_ORDER_COMBATANTS("false"),
 
         DEV_MODE_ENABLED ("false"),
+        DEV_SHOW_OWNER_IN_CARD_DETAIL ("false"),
         DEV_WORKSHOP_SYNTAX ("false"),
         DEV_LOG_ENTRY_TYPE (GameLogVerbosity.MEDIUM.name()),
         DEV_LOG_CUSTOM_TYPES (defaultCustomLogTypes()),
@@ -321,6 +324,14 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         BRAWL_P6_DECK_STATE(""),
         BRAWL_P7_DECK_STATE(""),
         BRAWL_P8_DECK_STATE(""),
+        DAN_DAN_P1_DECK_STATE(""),
+        DAN_DAN_P2_DECK_STATE(""),
+        DAN_DAN_P3_DECK_STATE(""),
+        DAN_DAN_P4_DECK_STATE(""),
+        DAN_DAN_P5_DECK_STATE(""),
+        DAN_DAN_P6_DECK_STATE(""),
+        DAN_DAN_P7_DECK_STATE(""),
+        DAN_DAN_P8_DECK_STATE(""),
 
         SHORTCUT_SHOWSTACK ("83"),
         SHORTCUT_SHOWCOMBAT ("67"),
@@ -393,6 +404,12 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
                 BRAWL_P3_DECK_STATE, BRAWL_P4_DECK_STATE,
                 BRAWL_P5_DECK_STATE, BRAWL_P6_DECK_STATE,
                 BRAWL_P7_DECK_STATE, BRAWL_P8_DECK_STATE };
+
+        public static FPref[] DAN_DAN_DECK_STATES = {
+                DAN_DAN_P1_DECK_STATE, DAN_DAN_P2_DECK_STATE,
+                DAN_DAN_P3_DECK_STATE, DAN_DAN_P4_DECK_STATE,
+                DAN_DAN_P5_DECK_STATE, DAN_DAN_P6_DECK_STATE,
+                DAN_DAN_P7_DECK_STATE, DAN_DAN_P8_DECK_STATE };
 
         /** Phase stop prefs in PhaseType order (UPKEEP through CLEANUP, skipping UNTAP). */
         public static FPref[] PHASES_AI = {

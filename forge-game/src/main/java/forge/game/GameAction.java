@@ -653,6 +653,37 @@ public class GameAction {
             copied.clearControllers();
         }
 
+        if (toBattlefield) {
+            final GameRules dandanEtbRules = game.getRules();
+            if (dandanEtbRules != null && dandanEtbRules.isDanDan() && copied.isPermanent()) {
+                // DanDan format: whoever put the permanent on the battlefield becomes its owner
+                // (shared-deck / shared zones; not CR-accurate for paper Magic).
+                final Player newOwner = (cause != null && cause.getActivatingPlayer() != null)
+                        ? cause.getActivatingPlayer()
+                        : zoneTo.getPlayer();
+                if (copied.getOwner() != newOwner) {
+                    copied.setOwner(newOwner);
+                }
+                if (copied.getController() != newOwner) {
+                    copied.setController(newOwner, game.getNextTimestamp());
+                }
+            }
+        }
+
+        if (zoneTo.is(ZoneType.Hand)) {
+            final GameRules rules = game.getRules();
+            if (rules != null && rules.isDanDan()) {
+                // DanDan: owner is always the hand recipient (not cause.getActivatingPlayer()).
+                final Player handPlayer = zoneTo.getPlayer();
+                if (copied.getOwner() != handPlayer) {
+                    copied.setOwner(handPlayer);
+                }
+                if (copied.getController() != handPlayer) {
+                    copied.setController(handPlayer, game.getNextTimestamp());
+                }
+            }
+        }
+
         return copied;
     }
 
@@ -856,6 +887,10 @@ public class GameAction {
         final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
         return moveTo(hand, c, cause, params);
     }
+    public final Card moveToHand(final Card c, final Player recipient, SpellAbility cause, Map<AbilityKey, Object> params) {
+        final PlayerZone hand = recipient != null ? recipient.getZone(ZoneType.Hand) : c.getOwner().getZone(ZoneType.Hand);
+        return moveTo(hand, c, cause, params);
+    }
 
     public final Card moveToPlay(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         return moveToPlay(c, c.getController(), cause, params);
@@ -883,7 +918,15 @@ public class GameAction {
         return moveToLibrary(c, libPosition, cause, null);
     }
     public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
-        final PlayerZone library = c.getOwner().getZone(ZoneType.Library);
+        final PlayerZone library;
+        final GameRules rules = game.getRules();
+        final boolean isDanDan = rules != null && rules.isDanDan();
+        if (isDanDan && !game.getPlayers().isEmpty()) {
+            // DanDan uses one shared library zone for all players.
+            library = game.getPlayers().get(0).getZone(ZoneType.Library);
+        } else {
+            library = c.getOwner().getZone(ZoneType.Library);
+        }
         if (libPosition == -1 || libPosition > library.size()) {
             libPosition = library.size();
         }

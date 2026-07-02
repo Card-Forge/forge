@@ -1,0 +1,6 @@
+Name:Dandan Test
+ManaCost:U
+Types:Instant
+A:SP$ Scry | ScryNum$ 3 | SpellDescription$ Scry 3, then discard two cards. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
+Oracle:Scry 3, then discard two cards.

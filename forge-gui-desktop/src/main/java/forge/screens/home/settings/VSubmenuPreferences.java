@@ -12,6 +12,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
+import forge.screens.home.CHomeUI;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinnedLabel;
@@ -51,6 +52,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FScrollPane scrContent = new FScrollPane(pnlPrefs, false,
     ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
+    private final FLabel btnBackToLobby = new FLabel.ButtonBuilder().fontSize(14)
+            .text(localizer.getMessage("lblBackToLobby")).build();
+
     private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnReset")).build();
     private final FLabel btnDeleteMatchUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteMatchUI")).build();
     private final FLabel btnDeleteEditorUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteEditorUI")).build();
@@ -77,6 +81,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbOrderCombatants = new OptionsCheckBox(localizer.getMessage("cbOrderCombatants"));
     private final JCheckBox cbManaLostPrompt = new OptionsCheckBox(localizer.getMessage("cbManaLostPrompt"));
     private final JCheckBox cbDevMode = new OptionsCheckBox(localizer.getMessage("cbDevMode"));
+    private final JCheckBox cbDevShowOwnerInCardDetail = new OptionsCheckBox(localizer.getMessage("cbDevShowOwnerInCardDetail"));
     private final JCheckBox cbLoadCardsLazily = new OptionsCheckBox(localizer.getMessage("cbLoadCardsLazily"));
     private final JCheckBox cbLoadArchivedFormats = new OptionsCheckBox(localizer.getMessage("cbLoadArchivedFormats"));
     private final JCheckBox cbWorkshopSyntax = new OptionsCheckBox(localizer.getMessage("cbWorkshopSyntax"));
@@ -355,6 +360,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbDevMode, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDevMode")), descriptionConstraints);
 
+        pnlPrefs.add(cbDevShowOwnerInCardDetail, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDevShowOwnerInCardDetail")), descriptionConstraints);
+
         pnlPrefs.add(cbWorkshopSyntax, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlWorkshopSyntax")), descriptionConstraints);
 
@@ -528,8 +536,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public void populate() {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0"));
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrContent, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        btnBackToLobby.setCommand(() -> CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_CONSTRUCTED));
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 1"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnBackToLobby, "gap 8 8 8 8, al left");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrContent, "w 98%!, push, grow, gap 1% 0 1% 0");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
@@ -860,6 +871,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbDevMode() {
         return cbDevMode;
+    }
+
+    public JCheckBox getCbDevShowOwnerInCardDetail() {
+        return cbDevShowOwnerInCardDetail;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

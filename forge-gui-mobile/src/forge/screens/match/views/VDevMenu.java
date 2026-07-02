@@ -1,9 +1,12 @@
 package forge.screens.match.views;
 
 import forge.Forge;
+import forge.game.player.PlayerView;
+import forge.interfaces.IGameController;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
+import forge.player.PlayerControllerHuman;
 import forge.screens.match.MatchController;
 import forge.util.ThreadUtil;
 
@@ -70,9 +73,17 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblUnlimitedLands"), unlimitedLands, e ->
                 MatchController.instance.getGameController().cheat().setCanPlayUnlimitedLands(!unlimitedLands)
         ));
-        final boolean viewAll = MatchController.instance.getGameController().mayLookAtAllCards();
+        final boolean viewAll = MatchController.instance.anyLocalMayLookAtAllCards();
         addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblViewAll"), viewAll, e ->
-                MatchController.instance.getGameController().cheat().setViewAllCards(!viewAll)
+                ThreadUtil.invokeInGameThread(() -> {
+                    final boolean newVal = !MatchController.instance.anyLocalMayLookAtAllCards();
+                    for (final PlayerView pv : MatchController.instance.getLocalPlayers()) {
+                        final IGameController gc = MatchController.instance.getGameController(pv);
+                        if (gc instanceof PlayerControllerHuman) {
+                            ((PlayerControllerHuman) gc).setMayLookAtAllCards(newVal);
+                        }
+                    }
+                })
         ));
         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAddCounterPermanent"), e ->
                 ThreadUtil.invokeInGameThread(() -> MatchController.instance.getGameController().cheat().addCountersToPermanent())

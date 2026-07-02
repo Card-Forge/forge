@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class DeckPreferences {
     private static String selectedDeckType = "", currentDeck = "", draftDeck = "", sealedDeck = "", commanderDeck = "",
-            oathbreakerDeck = "", tinyLeadersDeck = "", brawlDeck = "", planarDeck = "", schemeDeck = "";
+            oathbreakerDeck = "", tinyLeadersDeck = "", brawlDeck = "", danDanDeck = "", planarDeck = "", schemeDeck = "";
     private static Map<String, DeckPreferences> allPrefs = new HashMap<>();
 
     public static DeckType getSelectedDeckType() {
@@ -97,6 +97,15 @@ public class DeckPreferences {
         save();
     }
 
+    public static String getDanDanDeck() {
+        return danDanDeck;
+    }
+    public static void setDanDanDeck(String danDanDeck0) {
+        if (danDanDeck.equals(danDanDeck0)) { return; }
+        danDanDeck = danDanDeck0;
+        save();
+    }
+
     public static String getPlanarDeck() {
         return planarDeck;
     }
@@ -136,6 +145,7 @@ public class DeckPreferences {
             commanderDeck = root.getAttribute("commanderDeck");
             oathbreakerDeck = root.getAttribute("oathbreakerDeck");
             brawlDeck = root.getAttribute("brawlDeck");
+            danDanDeck = root.getAttribute("danDanDeck");
             tinyLeadersDeck = root.getAttribute("tinyLeadersDeck");
             planarDeck = root.getAttribute("planarDeck");
             schemeDeck = root.getAttribute("schemeDeck");
@@ -169,6 +179,7 @@ public class DeckPreferences {
             root.setAttribute("commanderDeck", commanderDeck);
             root.setAttribute("oathbreakerDeck", oathbreakerDeck);
             root.setAttribute("brawlDeck", brawlDeck);
+            root.setAttribute("danDanDeck", danDanDeck);
             root.setAttribute("tinyLeadersDeck", tinyLeadersDeck);
             root.setAttribute("planarDeck", planarDeck);
             root.setAttribute("schemeDeck", schemeDeck);

@@ -86,6 +86,10 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                 return DeckgenUtil.generateCommanderDeck(isAi, GameType.TinyLeaders);
             case Brawl:
                 return DeckgenUtil.generateCommanderDeck(isAi, GameType.Brawl);
+            case DanDan:
+                if (!Iterables.isEmpty(DeckProxy.getAllDanDanDecks())) {
+                    return Aggregates.random(DeckProxy.getAllDanDanDecks()).getDeck();
+                }
             case Archenemy:
                 return DeckgenUtil.generateSchemeDeck();
             case Planechase:
@@ -154,6 +158,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             case Brawl -> DeckProxy.getAllBrawlDecks(DeckFormat.Brawl.isLegalDeckPredicate());
             case Archenemy -> DeckProxy.getAllSchemeDecks(DeckFormat.Archenemy.isLegalDeckPredicate());
             case Planechase -> DeckProxy.getAllPlanarDecks(DeckFormat.Planechase.isLegalDeckPredicate());
+            case DanDan ->  DeckProxy.getAllDanDanDecks(DeckFormat.DanDan.isLegalDeckPredicate());
             default -> DeckProxy.getAllConstructedDecks(gameType.getDeckFormat().isLegalDeckPredicate());
         };
         if (Iterables.isEmpty(decks)) {
@@ -174,6 +179,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             case TinyLeaders -> DeckProxy.getAllTinyLeadersDecks();
             case Archenemy -> DeckProxy.getAllSchemeDecks();
             case Planechase -> DeckProxy.getAllPlanarDecks();
+            case DanDan -> DeckProxy.getAllDanDanDecks();
             default -> DeckProxy.getAllConstructedDecks();
         };
         decks = IterableUtil.filter(decks, DeckProxy::isFavoriteDeck);

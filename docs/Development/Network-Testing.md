@@ -41,7 +41,7 @@ The key entry points in `NetworkPlayIntegrationTest`:
 ---
 
 # Running Tests
-All network tests are run via Maven from the repository root. Most batch tests are gated behind `-Drun.stress.tests=true` so they don't run during normal CI builds.
+All network tests are run via Maven from the repository root. `NetworkPlayIntegrationTest` is excluded from the default `forge-gui-desktop` Surefire run (so a plain `mvn test` does not execute it); passing `-Dtest="NetworkPlayIntegrationTest#…"` still runs the methods you name. To include that class when running the **entire** desktop test suite without a `-Dtest` filter, use `-Prun-network-integration-tests`. Most batch tests are gated behind `-Drun.stress.tests=true` so they don't run during normal CI builds.
 
 The basic command structure is:
 

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
+import forge.game.DanDanViewZones;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -91,14 +92,14 @@ public class VZone implements IVDoc<CZone> {
     /** Refresh card panels from zone data. */
     public void refresh() {
         final List<CardPanel> cardPanels = new ArrayList<>();
-        final FCollectionView<CardView> cards = player.getCards(zone);
-        if (!cards.isEmpty()) {
+        final FCollectionView<CardView> cards = matchUI.cardsForZoneDisplay(player, zone);
+        if (cards != null) {
             final Iterable<CardView> safeCards = matchUI.isNetGame() ? cards.threadSafeIterable() : cards;
             final List<CardView> cardList = new ArrayList<>();
             for (final CardView card : safeCards) {
                 cardList.add(card);
             }
-            if (sortedByName) {
+            if (sortedByName && !suppressNameSortForZone()) {
                 cardList.sort(Comparator.comparing(CardView::getName));
             } else if (zone == ZoneType.Flashback) {
                 cardList.sort(FloatingZone.ZONE_ORDER_COMPARATOR);
@@ -124,6 +125,10 @@ public class VZone implements IVDoc<CZone> {
         updateTabLabel(cardPanels.size());
     }
 
+    private boolean isTabVisible() {
+        return parentCell != null && parentCell.getSelected() == this;
+    }
+
     private void updateTabLabel(final int count) {
         final int delta = tabDiff.update(count, tab);
         String label = capitalizedName();
@@ -146,6 +151,15 @@ public class VZone implements IVDoc<CZone> {
     private void toggleSorted() {
         sortedByName = !sortedByName;
         refresh();
+    }
+
+    /** Match {@link FloatingZone} name-sort suppression for shared DanDan zones and dev view-all. */
+    private boolean suppressNameSortForZone() {
+        if (DanDanViewZones.isDanDan(matchUI.getGameView())
+                && (zone == ZoneType.Library || zone == ZoneType.Graveyard)) {
+            return true;
+        }
+        return zone == ZoneType.Library && matchUI.anyLocalMayLookAtAllCards();
     }
 
     public CMatchUI getMatchUI() { return matchUI; }

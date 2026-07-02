@@ -53,6 +53,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
+import forge.screens.match.CMatchUI;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.imaging.FCardImageRenderer;
@@ -141,8 +142,20 @@ public class ImageCache {
      * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
+    static String imageKeyForCardDisplay(final CardView card, final Iterable<PlayerView> viewers, final CMatchUI matchUI) {
+        if (matchUI != null && matchUI.mayView(card)) {
+            return card.getCurrentState().getPhysicalCardImageKey(viewers);
+        }
+        return card.getCurrentState().getImageKey(viewers);
+    }
+
     public static BufferedImage getImage(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height) {
-        final String key = card.getCurrentState().getImageKey(viewers);
+        return getImage(card, viewers, width, height, null);
+    }
+
+    public static BufferedImage getImage(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height,
+            final CMatchUI matchUI) {
+        final String key = imageKeyForCardDisplay(card, viewers, matchUI);
         return scaleImage(key, width, height, true, card);
     }
 
@@ -152,7 +165,12 @@ public class ImageCache {
      * Same as getImage() but returns null if the image is not available, instead of a default image.
      */
     public static BufferedImage getImageNoDefault(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height) {
-        final String key = card.getCurrentState().getImageKey(viewers);
+        return getImageNoDefault(card, viewers, width, height, null);
+    }
+
+    public static BufferedImage getImageNoDefault(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height,
+            final CMatchUI matchUI) {
+        final String key = imageKeyForCardDisplay(card, viewers, matchUI);
         return scaleImage(key, width, height, false, card);
     }
 

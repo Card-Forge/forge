@@ -14,6 +14,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.screens.deckeditor.controllers.CCurrentDeck;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
+import forge.toolbox.FTextArea;
 import forge.toolbox.FTextField;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
@@ -88,10 +89,12 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
             .opaque(true).hoverable(true).build();
 
     private final FTextField txfTitle = new FTextField.Builder().ghostText("[" + localizer.getMessage("lblNewDeck") +"]").build();
+    private final FTextArea txfDescription = new FTextArea();
 
     private final JPanel pnlHeader = new JPanel();
 
-    private final FLabel lblTitle = new FLabel.Builder().text(localizer.getMessage("lblTitle")).fontSize(14).build();
+    private final FLabel lblTitle = new FLabel.Builder().text(localizer.getMessage("lblTitle") + ":").fontSize(14).build();
+    private final FLabel lblDescription = new FLabel.Builder().text(localizer.getMessage("lblDescription") + ":").fontSize(14).build();
 
     private final ItemManagerContainer itemManagerContainer = new ItemManagerContainer();
     private ItemManager<? extends InventoryItem> itemManager;
@@ -111,7 +114,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         pnlHeader.add(btnLoad, "w 26px!, h 26px!");
         pnlHeader.add(btnSaveAs, "w 26px!, h 26px!");
         pnlHeader.add(btnCopyToClipboard, "w 26px!, h 26px!");
-        pnlHeader.add(btnImport, "w 61px!, h 26px!");
+        pnlHeader.add(btnImport, "w 61px!, h 26px!, wrap");
+        pnlHeader.add(lblDescription, "h 26px!");
+        txfDescription.setFocusable(true);
+        txfDescription.setEditable(true);
+        pnlHeader.add(txfDescription, "pushx, growx, h 72px!, spanx 7");
     }
 
     //========== Overridden from IVDoc
@@ -177,6 +184,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
     }
 
     public FLabel getLblTitle() { return lblTitle; }
+    public FLabel getLblDescription() { return lblDescription; }
 
     //========== Retrieval
 
@@ -213,6 +221,10 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
     /** @return {@link forge.gui.toolbar.FTextField} */
     public FTextField getTxfTitle() {
         return txfTitle;
+    }
+
+    public FTextArea getTxfDescription() {
+        return txfDescription;
     }
 
     /** @return {@link javax.swing.JPanel} */

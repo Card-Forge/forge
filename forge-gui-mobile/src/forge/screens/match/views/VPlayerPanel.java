@@ -15,6 +15,8 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinImageInterface;
+import forge.game.DanDanViewZones;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
@@ -30,6 +32,7 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
 import forge.util.Utils;
+import forge.util.collect.FCollectionView;
 import org.apache.commons.text.WordUtils;
 
 public class VPlayerPanel extends FContainer {
@@ -898,7 +901,7 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         protected FSkinColor getSelectedBackgroundColor() {
-            if ((this.zoneType == ZoneType.Graveyard) && player.hasDelirium())
+            if ((this.zoneType == ZoneType.Graveyard) && DanDanViewZones.hasDeliriumForDisplay(MatchController.instance.getGameView(), player))
                 return getDeliriumHighlight();
             return super.getSelectedBackgroundColor();
         }
@@ -941,7 +944,9 @@ public class VPlayerPanel extends FContainer {
             super(DEFAULT_ICON);
             this.displayAreas = new EnumMap<>(ZoneType.class);
             for (ZoneType zoneType : EXTRA_ZONES) {
-                if (player.getCards(zoneType).isEmpty())
+                final GameView gv = MatchController.instance.getGameView();
+                FCollectionView<CardView> cards = DanDanViewZones.cardsForZoneDisplay(gv, player, zoneType);
+                if (cards == null || cards.isEmpty())
                     continue;
                 createZoneIfMissing(zoneType);
                 hasCardsInExtraZone = true;
@@ -1026,7 +1031,9 @@ public class VPlayerPanel extends FContainer {
             if (!displayAreas.containsKey(zoneType)) {
                 if (!EXTRA_ZONES.contains(zoneType))
                     return;
-                if (player.getCards(zoneType).isEmpty())
+                final GameView gv = MatchController.instance.getGameView();
+                FCollectionView<CardView> cards = DanDanViewZones.cardsForZoneDisplay(gv, player, zoneType);
+                if (cards == null || cards.isEmpty())
                     return;
                 createZoneIfMissing(zoneType);
             }
