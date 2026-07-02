@@ -100,7 +100,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         isForCommander = forCommander;
         final UiCommand cmdViewDeck = () -> {
             if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
-                FDeckViewer.show(getDeck(), gameType.getDeckFormat() == DeckFormat.Commander);
+                final DeckProxy selectedDeck = lstDecks.getSelectedItem();
+                if (selectedDeck != null) {
+                    FDeckViewer.show(selectedDeck.getDeck(), selectedDeck.isCommanderDeck());
+                }
             }
         };
         lstDecks.setItemActivateCommand(cmdViewDeck);
@@ -299,7 +302,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private void updateProvidedDeckUrl() {
         lstDecks.setAllowMultipleSelections(false);
-        setDeckPoolWithConfig(DeckUrlLoader.getUrlDecks(), ItemManagerConfig.NET_DECKS);
+        setDeckPoolWithConfig(DeckUrlLoader.getUrlDecks(), ItemManagerConfig.PROVIDED_DECK_URL_DECKS);
 
         btnRandom.setText(localizer.getMessage("lblRandomDeck"));
         btnRandom.setCommand((UiCommand) () -> DeckgenUtil.randomSelect(lstDecks));

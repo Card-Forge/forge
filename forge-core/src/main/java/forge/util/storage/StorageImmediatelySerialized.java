@@ -72,6 +72,11 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
         this.serializer.save(item);
     }
 
+    @Override
+    public boolean saveMetadata(final T item) {
+        return serializer.saveMetadata(item);
+    }
+
     /*
      * (non-Javadoc)
      * 

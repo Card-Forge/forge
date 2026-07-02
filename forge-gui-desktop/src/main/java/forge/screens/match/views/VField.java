@@ -27,7 +27,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-import forge.deck.CommanderBracketCalculator;
+import forge.deck.CommanderBracketService;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.card.CounterEnumType;
@@ -460,7 +460,7 @@ public class VField implements IVDoc<CField> {
         }
 
         commanderBracketTooltipLine = Localizer.getInstance().getMessage("lblBracket")
-                + ": " + CommanderBracketCalculator.getBracket(deck);
+                + ": " + CommanderBracketService.getBestAvailableBracket(deck);
         return commanderBracketTooltipLine;
     }
 

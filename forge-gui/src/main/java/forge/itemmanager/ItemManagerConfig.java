@@ -113,6 +113,8 @@ public enum ItemManagerConfig {
             null, null, 3, 0),
     NET_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
             null, null, 3, 0),
+    PROVIDED_DECK_URL_DECKS(SColumnUtil.getDecksDefaultColumns(false, false, true), false, false, false,
+            null, null, 3, 0),
     NET_COMMANDER_DECKS(SColumnUtil.getDecksDefaultColumns(false, false, true), false, false, false,
             null, null, 3, 0),
     NET_ARCHIVE_STANDARD_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,

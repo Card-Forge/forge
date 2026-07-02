@@ -55,6 +55,10 @@ public class DeckSerializer {
         if (d.getComment() != null) {
             out.add(TextUtil.concatNoSpace(DeckFileHeader.COMMENT,"=", d.getComment().replaceAll("\n", "")));
         }
+        if (StringUtils.isNotBlank(d.getDeckHash()) && d.getCommanderBracket() != null) {
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.DECK_HASH, "=", d.getDeckHash()));
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.COMMANDER_BRACKET, "=", String.valueOf(d.getCommanderBracket())));
+        }
         if (!d.getTags().isEmpty()) {
             out.add(TextUtil.concatNoSpace(DeckFileHeader.TAGS,"=", StringUtils.join(d.getTags(), DeckFileHeader.TAGS_SEPARATOR)));
         }
@@ -111,6 +115,7 @@ public class DeckSerializer {
         d.setAiHints(dh.getAiHints());
         d.getTags().addAll(dh.getTags());
         d.setDraftNotes(dh.getDraftNotes());
+        d.setCommanderBracket(dh.getDeckHash(), dh.getCommanderBracket());
         for (String keyCard : dh.getKeyCards()) {
             d.addKeyCard(keyCard);
         }

@@ -8,16 +8,20 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 import javax.swing.JMenu;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 
 import forge.itemmanager.filters.*;
 import forge.itemmanager.views.CommanderBracketView;
+import forge.itemmanager.views.ItemView;
 import forge.localinstance.properties.ForgePreferences;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
+import forge.deck.CommanderBracketService;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
@@ -63,6 +67,8 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     //private static final FSkin.SkinIcon icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
 
     private final GameType gameType;
+    private final Consumer<CommanderBracketService.BracketUpdate> commanderBracketUpdateListener =
+            update -> SwingUtilities.invokeLater(() -> updateCommanderBracketView(update));
     private UiCommand cmdDelete, cmdSelect;
 
     /**
@@ -78,6 +84,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         if (gt.getDeckFormat() == DeckFormat.Commander) {
             this.addView(new CommanderBracketView(this));
         }
+        CommanderBracketService.addUpdateListener(commanderBracketUpdateListener);
 
         this.addSelectionListener(e -> {
             if (cmdSelect != null) {
@@ -86,6 +93,31 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         });
 
         this.setItemActivateCommand((UiCommand) () -> editDeck(getSelectedItem()));
+    }
+
+    private void updateCommanderBracketView(final CommanderBracketService.BracketUpdate update) {
+        if (update == null || this.getPool() == null || this.getPool().countAll() == 0) {
+            return;
+        }
+
+        if (isCommanderBracketSortActive()) {
+            this.refresh();
+            return;
+        }
+
+        final ItemView<DeckProxy> currentView = this.getCurrentView();
+        if (currentView instanceof CommanderBracketView) {
+            currentView.refresh(this.getSelectedItems(), this.getSelectedIndex(), currentView.getScrollValue());
+        }
+        else {
+            currentView.getComponent().repaint();
+        }
+    }
+
+    private boolean isCommanderBracketSortActive() {
+        return this.getConfig() != null
+                && this.getConfig().getCols().containsKey(ColumnDef.DECK_BRACKET)
+                && this.getConfig().getCols().get(ColumnDef.DECK_BRACKET).getSortPriority() > 0;
     }
 
     @Override

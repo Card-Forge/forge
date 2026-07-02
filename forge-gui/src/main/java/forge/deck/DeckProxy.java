@@ -83,6 +83,35 @@ public class DeckProxy implements InventoryItem {
         return deck instanceof Deck && fnGetDeck == null ? (Deck) deck : fnGetDeck.apply(deck);
     }
 
+    public void saveDeckMetadata() {
+        if (!canSaveDeckMetadata()) {
+            return;
+        }
+        @SuppressWarnings("unchecked")
+        final IStorage<IHasName> writableStorage = (IStorage<IHasName>) storage;
+        writableStorage.saveMetadata(deck);
+    }
+
+    public boolean canSaveDeckMetadata() {
+        return storage != null && deck instanceof Deck && !isGeneratedDeck() && !isPreconstructedDeck();
+    }
+
+    public boolean isPreconstructedDeck() {
+        return deck instanceof PreconDeck || "Precon".equals(deckType) || "Commander Precon".equals(deckType);
+    }
+
+    public boolean isCommanderDeck() {
+        final Deck sourceDeck = getDeck();
+        final DeckFormat format = sourceDeck == null ? null : sourceDeck.getDeckFormat();
+        return format != null && format.hasCommander()
+                || sourceDeck != null && sourceDeck.has(DeckSection.Commander)
+                || "Commander".equals(deckType)
+                || "Commander Precon".equals(deckType)
+                || "Oathbreaker".equals(deckType)
+                || "Brawl".equals(deckType)
+                || "Tiny Leaders".equals(deckType);
+    }
+
     public String getPath() {
         return path;
     }
