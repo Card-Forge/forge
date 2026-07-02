@@ -184,7 +184,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidSA")) {
             final String valid[] = sa.getParam("ValidSA").split(",");
-            final List<Card> invalid = tgtCards.stream().filter(c -> !IterableUtil.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller, source, sa))).collect(Collectors.toList());
+            final List<Card> invalid = tgtCards.stream().filter(c -> lacksValidSpellAbility(c, controller, source, sa, valid)).collect(Collectors.toList());
             if (!invalid.isEmpty())
                 tgtCards.removeAll(invalid);
             if (tgtCards.isEmpty()) {
@@ -220,7 +220,7 @@ public class PlayEffect extends SpellAbilityEffect {
             if (hasTotalCMCLimit) {
                 // filter out cards with mana value greater than limit
                 final String [] valid = {"Spell.cmcLE" + totalCMCLimit};
-                final List<Card> invalid = tgtCards.stream().filter(c -> !IterableUtil.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller, c, sa))).collect(Collectors.toList());
+                final List<Card> invalid = tgtCards.stream().filter(c -> lacksValidSpellAbility(c, controller, c, sa, valid)).collect(Collectors.toList());
                 if (!invalid.isEmpty())
                     tgtCards.removeAll(invalid);
                 if (tgtCards.isEmpty())
@@ -482,6 +482,24 @@ public class PlayEffect extends SpellAbilityEffect {
         if (controlledByPlayer != null) {
             controller.removeController(controlledByTimeStamp);
             controller.popPaidForSA();
+        }
+    }
+
+    private static boolean lacksValidSpellAbility(final Card card, final Player controller, final Card source,
+            final SpellAbility sa, final String[] valid) {
+        boolean wasFaceDown = false;
+        if (card.isFaceDown()) {
+            card.forceTurnFaceUp();
+            wasFaceDown = true;
+        }
+        try {
+            return !IterableUtil.any(AbilityUtils.getBasicSpellsFromPlayEffect(card, controller),
+                    SpellAbilityPredicates.isValid(valid, controller, source, sa));
+        } finally {
+            if (wasFaceDown) {
+                card.turnFaceDownNoUpdate();
+                card.updateStateForView();
+            }
         }
     }
 
