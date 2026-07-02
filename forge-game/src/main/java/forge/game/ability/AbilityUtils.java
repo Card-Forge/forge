@@ -49,7 +49,14 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AbilityUtils {
+public class AbilityUtils implements IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AbilityCount", "AnnounceMax", "Destination", "ETB", "ForgetOtherTargets",
+        "IncludeAllComponentCards", "LockInText", "RememberCostMana", "RememberTargets",
+        "Triggered", "UnlessColor", "UnlessCost", "UnlessPayer", "UnlessResolveSubs",
+        "UnlessSwitched", "UnlessUpTo", "XMax", "XMin",
+    };
+
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
     // should the three getDefined functions be merged into one? Or better to

@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
+import forge.game.ability.IHasForgeParams;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
@@ -46,7 +47,16 @@ import java.util.List;
  * @author Forge
  * @version $Id$
  */
-public class Cost implements Serializable {
+public class Cost implements Serializable, IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AffectedZone", "Amount", "Announce", "Collected", "CollectedCards", "Color",
+        "Cost", "Exiled", "ExiledCards", "FirstForetell", "ForEachShard", "Foraged",
+        "ForagedCards", "IgnoreGeneric", "MinMana", "ModeCost", "OnlyFirstSpell",
+        "RaiseCost", "RaiseTo", "ReduceAmount", "ReduceCost", "Relative",
+        "SpellDescription", "TapCreaturesForMana", "Type", "UnlessValidTarget", "UpTo",
+        "ValidCard", "ValidSpell", "ValidTarget",
+    };
+
     /**
      * Serializables need a version ID.
      */

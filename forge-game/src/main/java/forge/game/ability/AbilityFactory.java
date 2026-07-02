@@ -45,7 +45,18 @@ import java.util.stream.Collectors;
  * @author Forge
  * @version $Id$
  */
-public final class AbilityFactory {
+public final class AbilityFactory implements IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "BidSubAbility", "CantChooseSubAbility", "Choices", "ChooseNumberSubAbility",
+        "ChooseSubAbility", "ChosenPile", "Cost", "Execute", "FallbackAbility",
+        "FalseSubAbility", "GiftAbility", "GuessCorrect", "GuessWrong", "HeadsSubAbility",
+        "Highest", "LoseSubAbility", "Lowest", "MatchedAbility", "NonBasicSpell",
+        "NotLowest", "Origin", "OtherwiseSubAbility", "PreventionSubAbility",
+        "RegenerationAbility", "RepeatSubAbility", "ResultSubAbilities", "ReturnAbility",
+        "SpellDescription", "SubAbility", "TailsSubAbility", "TrueSubAbility",
+        "UnchosenPile", "UnmatchedAbility", "ValidTgts", "VoteSubAbility",
+        "VoteTiedAbility", "WinSubAbility",
+    };
 
     public static final List<String> additionalAbilityKeys = Lists.newArrayList(
             "WinSubAbility", "OtherwiseSubAbility", // Clash
