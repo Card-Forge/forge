@@ -1416,7 +1416,7 @@ public class Game {
 
     public boolean isVoid() {
         return getLeftBattlefieldThisTurn().stream().anyMatch(c -> !c.isLand()) ||
-                getStack().getSpellsCastThisTurn().stream().anyMatch(s -> s.getCastSA().isWarp());
+                getStack().getSpellsCastThisTurn().stream().anyMatch(SpellAbility::isWarp);
     }
 
     public int getAITimeout() {

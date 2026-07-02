@@ -170,7 +170,7 @@ public class TriggerChangesZone extends Trigger {
         /* this trigger only activates for the nth spell you cast this turn */
         if (hasParam("ConditionYouCastThisTurn")) {
             final String compare = getParam("ConditionYouCastThisTurn");
-            List<Card> thisTurnCast = getHostCard().getGame().getStack().getSpellsCastThisTurn();
+            List<Card> thisTurnCast = getHostCard().getGame().getStack().getSpellCardsCastThisTurn();
             thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, getHostCard().getController());
 
             // checks which card this spell was the castSA

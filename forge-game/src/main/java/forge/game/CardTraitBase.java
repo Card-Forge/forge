@@ -509,15 +509,8 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         }
 
         if (params.containsKey("WerewolfUntransformCondition")) {
-            List<Card> casted = game.getStack().getSpellsCastLastTurn();
-            boolean conditionMet = false;
-            for (Player p : game.getPlayers()) {
-                if (CardLists.count(casted, CardPredicates.isController(p)) > 1) {
-                    conditionMet = true;
-                    break;
-                }
-            }
-            if (!conditionMet) {
+            final List<Card> casted = game.getStack().getSpellsCastLastTurn();
+            if (game.getPlayers().stream().noneMatch(p -> CardLists.count(casted, CardPredicates.isController(p)) > 1)) {
                 return false;
             }
         }
