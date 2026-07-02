@@ -37,6 +37,9 @@ This Archipelago implementation adds the following rewards and filler rewards to
 - Max life in various amounts
 - Pieces of equipment for the player to wear
 
+This Archipelago implementation has the following win-conditions:
+- Defeating X amount of Castle bosses, this defaults to 3 but when set to all 6, Emrakul must also be defeated in order to win.
+
 #### Generating the Archipelago Multiworld
 1. Download the [latest release](https://github.com/BramTeurlings/forge-archipelago/releases) of this repository
 2. Download the [latest release](https://github.com/BramTeurlings/forge-APWorld/releases) of the Forge APWorld repository
