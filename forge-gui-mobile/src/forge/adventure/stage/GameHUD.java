@@ -69,7 +69,6 @@ public class GameHUD extends Stage {
     private final TypingLabel notificationText = Controls.newTypingLabel("");
     private final TypingLabel enemyCounterText;
     private final Image enemyCounterBackground;
-    private final TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
     private final TextraButton deckActor, openMapActor, menuActor, logbookActor, inventoryActor, exitToWorldMapActor, bookmarkActor, apSettingsActor;
