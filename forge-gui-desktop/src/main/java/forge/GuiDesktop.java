@@ -303,7 +303,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void startAltSoundSystem(final String filename, final boolean isSynchronized) {
-        new AltSoundSystem(filename, isSynchronized).start();
+        AltSoundSystem.play(filename, isSynchronized);
     }
 
     @Override
