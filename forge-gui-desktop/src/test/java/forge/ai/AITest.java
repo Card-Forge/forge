@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import forge.GuiDesktop;
 import forge.StaticData;
 import forge.deck.Deck;
 import forge.game.Game;
@@ -26,6 +25,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperToken;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.net.HeadlessGuiDesktop;
 
 import org.testng.annotations.BeforeMethod;
 
@@ -65,8 +65,16 @@ public class AITest {
         return game;
     }
 
-    protected Game initAndCreateThreePlayerGame() {
-        initAndCreateGame();
+    protected Game initAndCreateGame() {
+        if (!initialized) {
+            GuiBase.setInterface(new HeadlessGuiDesktop());
+            FModel.initialize(null, preferences -> {
+                preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
+                preferences.setPref(FPref.UI_LANGUAGE, "en-US");
+                return null;
+            });
+            initialized = true;
+        }
 
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
