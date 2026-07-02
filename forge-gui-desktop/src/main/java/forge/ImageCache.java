@@ -24,6 +24,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,6 +32,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
+import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -49,6 +51,7 @@ import forge.gui.GuiBase;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.localinstance.properties.ForgeConstants;
+import forge.util.SleeveArt;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
@@ -206,7 +209,163 @@ public class ImageCache {
     }
 
     private static String hiddenSleeveCacheKey(final CardView cardView, final int width, final int height) {
+        final String artKey = customSleeveArtKey(cardView);
+        if (artKey != null) {
+            return String.format("__SLEEVEART_%s_%d__#%dx%d", SleeveArt.cacheFileName(artKey),
+                    sleeveArtOffsetOf(cardView), width, height);
+        }
         return String.format("__SLEEVE_%d__#%dx%d", sleeveIndexOf(cardView), width, height);
+    }
+
+    private static int sleeveArtOffsetOf(final CardView cardView) {
+        final PlayerView owner = cardView != null ? cardView.getOwner() : null;
+        return owner != null ? owner.getSleeveArtOffset() : SleeveArt.DEFAULT_OFFSET;
+    }
+
+    private static String customSleeveArtKey(final CardView cardView) {
+        final PlayerView owner = cardView != null ? cardView.getOwner() : null;
+        if (owner == null) {
+            return null;
+        }
+        final String key = owner.getSleeveArtKey();
+        return key == null || key.isEmpty() ? null : key;
+    }
+
+    // null when the art is not yet cached; a fetch is started so the built-in sleeve shows meanwhile
+    private static BufferedImage customSleeveBack(final CardView cardView) {
+        final String key = customSleeveArtKey(cardView);
+        if (key == null) {
+            return null;
+        }
+        final BufferedImage art = getSleeveArtCropped(key, sleeveArtOffsetOf(cardView));
+        if (art != null) {
+            return art;
+        }
+        fetchSleeveArt(key, () -> { });
+        return null;
+    }
+
+    // The width:height ratio of the built-in deck sleeves, so card-art sleeves match their shape
+    public static double sleeveAspect() {
+        final BufferedImage s = FSkin.getSleeveImage(0);
+        if (s != null && s.getHeight() > 0) {
+            return (double) s.getWidth() / s.getHeight();
+        }
+        return 360.0 / 500.0; // fallback to the sleeve sprite tile ratio
+    }
+
+    // Matches the dark frame baked into the built-in sleeve sprites, ~4% of the short edge
+    private static final Color SLEEVE_ART_BORDER = new Color(38, 37, 38);
+    private static final double SLEEVE_ART_BORDER_FRACTION = 0.04;
+    // A thin diagonally-lit sliver just inside the frame (bright top-right, dark bottom-left),
+    // giving the art/border seam the same depth as the built-in sleeves.
+    private static final double SLEEVE_ART_BEVEL_FRACTION = 0.008;
+    private static final int SLEEVE_ART_BEVEL_HI = 50;
+    private static final int SLEEVE_ART_BEVEL_LO = 40;
+
+    // Cover-crop a (usually landscape) art-crop to the built-in sleeve aspect, positioning the crop
+    // window along whichever axis has slack by offset (0 = left/top, 1000 = right/bottom, 500 = centre),
+    // then frame it so it reads as a sleeve next to the built-in ones in the picker.
+    private static BufferedImage cropToCardAspect(final BufferedImage src, final int offset) {
+        final double aspect = sleeveAspect();
+        final int w = src.getWidth();
+        final int h = src.getHeight();
+        final double srcAspect = (double) w / h;
+        final double f = SleeveArt.clampOffset(offset) / 1000.0;
+        int cropW, cropH;
+        if (srcAspect > aspect) {
+            cropH = h;
+            cropW = (int) Math.round(h * aspect);
+        } else {
+            cropW = w;
+            cropH = (int) Math.round(w / aspect);
+        }
+        // only the cropped (slack) axis moves; the pinned axis has no travel
+        final int x = (int) Math.round((w - cropW) * f);
+        final int y = (int) Math.round((h - cropH) * f);
+        final BufferedImage out = new BufferedImage(cropW, cropH, BufferedImage.TYPE_INT_RGB);
+        final Graphics2D g = out.createGraphics();
+        g.drawImage(src.getSubimage(x, y, cropW, cropH), 0, 0, null);
+        final int bw = Math.max(1, (int) Math.round(Math.min(cropW, cropH) * SLEEVE_ART_BORDER_FRACTION));
+        g.setColor(SLEEVE_ART_BORDER);
+        g.fillRect(0, 0, cropW, bw);
+        g.fillRect(0, cropH - bw, cropW, bw);
+        g.fillRect(0, 0, bw, cropH);
+        g.fillRect(cropW - bw, 0, bw, cropH);
+        g.dispose();
+        bevelSeam(out, bw);
+        return out;
+    }
+
+    // Blend a diagonally-lit sliver into the inner edge of the frame: white toward the top-right
+    // corner, black toward the bottom-left, fading to neutral along the way.
+    private static void bevelSeam(final BufferedImage img, final int frame) {
+        final int w = img.getWidth();
+        final int h = img.getHeight();
+        final int s = Math.max(1, (int) Math.round(Math.min(w, h) * SLEEVE_ART_BEVEL_FRACTION));
+        for (int yy = frame; yy < h - frame; yy++) {
+            for (int xx = frame; xx < w - frame; xx++) {
+                if (yy >= frame + s && yy < h - frame - s && xx >= frame + s && xx < w - frame - s) {
+                    continue;
+                }
+                final double dd = ((double) xx / (w - 1) + (1.0 - (double) yy / (h - 1))) / 2.0;
+                final int rgb = img.getRGB(xx, yy);
+                int r = (rgb >> 16) & 0xFF, g = (rgb >> 8) & 0xFF, b = rgb & 0xFF;
+                if (dd > 0.5) {
+                    final double a = (dd - 0.5) * 2 * SLEEVE_ART_BEVEL_HI / 255.0;
+                    r += (int) ((255 - r) * a);
+                    g += (int) ((255 - g) * a);
+                    b += (int) ((255 - b) * a);
+                } else {
+                    final double a = (0.5 - dd) * 2 * SLEEVE_ART_BEVEL_LO / 255.0;
+                    r -= (int) (r * a);
+                    g -= (int) (g * a);
+                    b -= (int) (b * a);
+                }
+                img.setRGB(xx, yy, (r << 16) | (g << 8) | b);
+            }
+        }
+    }
+
+    /** The cropped card-art sleeve image for a key at the given offset if it is cached, else null (no fetch). */
+    public static BufferedImage getSleeveArtCropped(final String key, final int offset) {
+        if (key == null || key.isEmpty()) {
+            return null;
+        }
+        final File f = new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(key));
+        if (!f.exists()) {
+            return null;
+        }
+        try {
+            final BufferedImage art = ImageIO.read(f);
+            return art == null ? null : cropToCardAspect(art, offset);
+        } catch (final IOException e) {
+            return null;
+        }
+    }
+
+    /** The full, uncropped art-crop image for a key if cached, else null. Used by the draggable preview. */
+    public static BufferedImage getSleeveArtFull(final String key) {
+        if (key == null || key.isEmpty()) {
+            return null;
+        }
+        final File f = new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(key));
+        if (!f.exists()) {
+            return null;
+        }
+        try {
+            return ImageIO.read(f);
+        } catch (final IOException e) {
+            return null;
+        }
+    }
+
+    /** Fetch the card-art sleeve for a key (if not cached) and run onReady on the EDT when it lands. */
+    public static void fetchSleeveArt(final String key, final Runnable onReady) {
+        if (key == null || key.isEmpty()) {
+            return;
+        }
+        SwingUtilities.invokeLater(() -> GuiBase.getInterface().getImageFetcher().fetchSleeveArt(key, onReady::run));
     }
 
     // return the pair of image and a flag to indicate if it is a placeholder image.
@@ -218,6 +377,10 @@ public class ImageCache {
         // Owner's sleeve as the back for any card the viewer can't see
         // With no sleeve set, fall through so the standard t:hidden back renders
         if (imageKey.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
+            final BufferedImage artBack = customSleeveBack(cardView);
+            if (artBack != null) {
+                return Pair.of(artBack, false);
+            }
             final BufferedImage back = FSkin.getSleeveImage(sleeveIndexOf(cardView));
             if (back != null) {
                 return Pair.of(back, false);
