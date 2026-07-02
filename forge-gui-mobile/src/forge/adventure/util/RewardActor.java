@@ -33,7 +33,6 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
-import forge.StaticData;
 import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.archipelago.ArchipelagoUtil;
 import forge.adventure.data.ItemData;
