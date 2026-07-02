@@ -1,7 +1,23 @@
 package forge.screens.home.sanctioned;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.SwingUtilities;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -27,13 +43,6 @@ import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.deckeditor.views.VStatistics;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
-
-import javax.swing.*;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Controls the draft submenu in the home UI.
@@ -72,6 +81,16 @@ public enum CSubmenuDraft implements ICDoc {
 
         view.getRadAll().addActionListener(radioAction);
         view.getRadMultiple().addActionListener(radioAction);
+        view.getRadGauntlet().addActionListener(radioAction);
+        view.getBtnGauntletOptions().addActionListener(e -> {
+            final CGauntletOptionsDialog.GauntletOptions opts = CGauntletOptionsDialog.SINGLETON_INSTANCE.showDialog();
+            if (opts != null) {
+                // Persist preferred games-per-match
+                FModel.getPreferences().setPref(FPref.UI_MATCHES_PER_GAME, String.valueOf(opts.gamesPerMatch));
+                // Update UI binder
+                view.getGamesInMatchBinder().load();
+            }
+        });
     }
 
     /* (non-Javadoc)
@@ -104,7 +123,7 @@ public enum CSubmenuDraft implements ICDoc {
     private void startGame(final GameType gameType) {
         final Localizer localizer = Localizer.getInstance();
         final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
-        final boolean gauntlet = view.isGauntlet();
+        final boolean gauntlet = view.isGauntlet() || view.isLimitedGauntletSelected();
         final DeckProxy humanDeck = view.getLstDecks().getSelectedItem();
 
         if (humanDeck == null) {
@@ -121,7 +140,7 @@ public enum CSubmenuDraft implements ICDoc {
         }
 
         FModel.getGauntletMini().resetGauntletDraft();
-        String duelType = (String)VSubmenuDraft.SINGLETON_INSTANCE.getCbOpponent().getSelectedItem();
+        final String duelType = (String)VSubmenuDraft.SINGLETON_INSTANCE.getCbOpponent().getSelectedItem();
 
         if (duelType == null) {
             FOptionPane.showErrorDialog("Please select duel types for the draft match.", "Missing opponent items");
@@ -130,12 +149,7 @@ public enum CSubmenuDraft implements ICDoc {
 
         final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
         if (gauntlet) {
-            if ("Gauntlet".equals(duelType)) {
-                final int rounds = opponentDecks.getAiDecks().size();
-                FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), gameType);
-            } else if ("Tournament".equals(duelType)) {
-                // TODO Allow for tournament style draft, instead of always a gauntlet
-            }
+            startGauntlet(view, opponentDecks, humanDeck, gameType, duelType);
             return;
         }
 
@@ -198,6 +212,35 @@ public enum CSubmenuDraft implements ICDoc {
         SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }
 
+    private void startGauntlet(final VSubmenuDraft view, final DeckGroup opponentDecks,
+            final DeckProxy humanDeck, final GameType gameType, final String duelType) {
+        final int maxRounds = opponentDecks.getAiDecks().size();
+        final int configuredRounds = getConfiguredGauntletRounds(maxRounds);
+        final int rounds = view.isLimitedGauntletSelected()
+            ? Math.min(parseGauntletRounds(duelType, opponentDecks), configuredRounds)
+            : configuredRounds;
+        FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), gameType);
+    }
+
+    private int getConfiguredGauntletRounds(final int maxRounds) {
+        final String savedRounds = FModel.getPreferences().getPref(FPref.UI_GAUNTLET_ROUNDS);
+        try {
+            final int parsedRounds = Integer.parseInt(savedRounds);
+            return Math.max(1, Math.min(parsedRounds, maxRounds));
+        } catch (final NumberFormatException e) {
+            return Math.min(4, maxRounds);
+        }
+    }
+
+    private int parseGauntletRounds(final String duelType, final DeckGroup opponentDecks) {
+        final int rounds = Integer.parseInt(duelType);
+        final int maxRounds = opponentDecks.getAiDecks().size();
+        if (rounds < 1 || rounds > maxRounds) {
+            throw new IllegalStateException("Draft: Invalid gauntlet round count!");
+        }
+        return rounds;
+    }
+
     /** */
     private void setupDraft() {
         final Localizer localizer = Localizer.getInstance();
@@ -222,36 +265,104 @@ public enum CSubmenuDraft implements ICDoc {
         final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
         JComboBox<String> combo = view.getCbOpponent();
         combo.removeAllItems();
+        final Localizer localizer = Localizer.getInstance();
 
         final DeckProxy humanDeck = view.getLstDecks().getSelectedItem();
+        final String placeholder = localizer.getMessage("lblSelectOpponentPlaceholder");
+        // Set a renderer that displays placeholder text in gray when appropriate
+        combo.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index,
+                    final boolean isSelected, final boolean cellHasFocus) {
+                final JLabel lbl = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value == null || (value instanceof String && ((String) value).isEmpty())) {
+                    lbl.setText(placeholder);
+                    lbl.setForeground(Color.GRAY);
+                } else if (!combo.isEnabled()) {
+                    lbl.setForeground(Color.GRAY);
+                } else {
+                    lbl.setForeground(null);
+                }
+                return lbl;
+            }
+        });
+
         if (humanDeck == null) {
+            combo.addItem("");
+            combo.setEnabled(false);
+            combo.setToolTipText(placeholder);
             return;
         }
 
         final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
+        if (opponentDecks == null || opponentDecks.getAiDecks().isEmpty()) {
+            combo.addItem("");
+            combo.setEnabled(false);
+            combo.setToolTipText(localizer.getMessage("lblNoDeck"));
+            return;
+        }
         if (VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected()) {
-            // Single opponent
-            int indx = 0;
-            for (@SuppressWarnings("unused") Deck d : opponentDecks.getAiDecks()) {
-                indx++;
-                // 1-7 instead of 0-6
-                combo.addItem(String.valueOf(indx));
-            }
-        } else if (VSubmenuDraft.SINGLETON_INSTANCE.isGauntlet()) {
-            // Gauntlet/Tournament
-            combo.addItem("Gauntlet");
-            //combo.addItem("Tournament");
-        } else {
-            int size = opponentDecks.getAiDecks().size();
-            combo.addItem("2");
-            if (size > 2) {
-                combo.addItem("3");
-            }
+            fillSingleOpponentChoices(combo, opponentDecks);
+            return;
+        }
 
-            if (size >= 4) {
-                combo.addItem("4");
-                combo.addItem("5");
+        if (VSubmenuDraft.SINGLETON_INSTANCE.isLimitedGauntletSelected()) {
+            fillLimitedGauntletChoices(combo, opponentDecks);
+            return;
+        }
+
+        if (VSubmenuDraft.SINGLETON_INSTANCE.isGauntlet()) {
+            fillFullGauntletChoices(combo);
+            return;
+        }
+
+        fillMultipleOpponentChoices(combo, opponentDecks);
+        // ensure combo enabled and select a sensible default when items were added
+        if (combo.getItemCount() > 0) {
+            combo.setEnabled(true);
+            if (combo.getSelectedItem() == null) {
+                combo.setSelectedIndex(0);
             }
+            combo.setToolTipText(null);
+        } else {
+            combo.setEnabled(false);
+            combo.setToolTipText(placeholder);
+        }
+    }
+
+    private void fillSingleOpponentChoices(final JComboBox<String> combo, final DeckGroup opponentDecks) {
+        int index = 0;
+        for (@SuppressWarnings("unused") Deck deck : opponentDecks.getAiDecks()) {
+            index++;
+            combo.addItem(String.valueOf(index));
+        }
+    }
+
+    private void fillLimitedGauntletChoices(final JComboBox<String> combo, final DeckGroup opponentDecks) {
+        final int rounds = opponentDecks.getAiDecks().size();
+        for (int round = 1; round <= rounds; round++) {
+            combo.addItem(String.valueOf(round));
+        }
+
+        final int preferredRounds = Math.min(4, rounds);
+        combo.setSelectedItem(String.valueOf(preferredRounds));
+    }
+
+    private void fillFullGauntletChoices(final JComboBox<String> combo) {
+        combo.addItem("Gauntlet");
+        // combo.addItem("Tournament");
+    }
+
+    private void fillMultipleOpponentChoices(final JComboBox<String> combo, final DeckGroup opponentDecks) {
+        final int size = opponentDecks.getAiDecks().size();
+        combo.addItem("2");
+        if (size > 2) {
+            combo.addItem("3");
+        }
+
+        if (size >= 4) {
+            combo.addItem("4");
+            combo.addItem("5");
         }
     }
 }

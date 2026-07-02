@@ -63,6 +63,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         MATCH_HOT_SEAT_MODE("false"),
 
         UI_MATCHES_PER_GAME("3"),
+        UI_GAUNTLET_ROUNDS("4"),
         UI_APPLIED_VARIANTS(""),
         UI_RANDOM_FOIL ("false"),
         UI_AVATARS ("0,1"),
