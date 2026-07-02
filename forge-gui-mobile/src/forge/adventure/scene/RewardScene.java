@@ -619,7 +619,7 @@ public class RewardScene extends UIScene {
                             changes.buyCard(objectID, index);
 
                         Current.player().takeGold(price);
-                        if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago && rewardActor.getReward().getItem().archilepagoLocationId >= 0) {
+                        if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago && rewardActor.getReward().getItem() != null && rewardActor.getReward().getItem().archilepagoLocationId >= 0) {
                             ItemData itemData = rewardActor.getReward().getItem();
                             Archipelago.getInstance().checkLocation(itemData.archilepagoLocationId);
                         } else {
