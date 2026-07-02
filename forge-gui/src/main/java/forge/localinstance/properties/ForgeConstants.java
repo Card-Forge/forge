@@ -240,6 +240,7 @@ public final class ForgeConstants {
     }
 
     // data that is only in the profile dirs
+    public static final String CACHE_CDN_UUID_DIR         = CACHE_DIR + "cdn_uuid" + PATH_SEPARATOR;
     public static final String USER_QUEST_DIR             = USER_DIR + "quest" + PATH_SEPARATOR;
     public static final String USER_QUEST_WORLD_DIR       = USER_QUEST_DIR + "world" + PATH_SEPARATOR;
     public static final String USER_CONQUEST_DIR          = USER_DIR + "conquest" + PATH_SEPARATOR;
@@ -345,6 +346,8 @@ public final class ForgeConstants {
     public static final String URL_PRICE_DOWNLOAD = GITHUB_ASSETS_BASE + "all-prices.txt";
     private static final String URL_SCRYFALL = "https://api.scryfall.com";
     public static final String URL_PIC_SCRYFALL_DOWNLOAD = URL_SCRYFALL + "/cards/";
+    public static final String URL_SCRYFALL_CDN = "https://cards.scryfall.io/";
+    public static final String FORGE_EXTRAS_CDN_UUID_URL = GITHUB_ASSETS_BASE + "cdn_uuid/";
 
     // Constants for Display Card Identity game setting
     public static final String DISP_CURRENT_COLORS_ALWAYS = "Always";
