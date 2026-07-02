@@ -262,7 +262,7 @@ public class CardLists {
     }
 
     public static CardCollection canSubsequentlyTarget(CardCollection list, SpellAbility source) {
-        if (source.getTargets().isEmpty()) {
+        if (source.getTargets().isEmpty() || !source.getTargetRestrictions().isForEachPlayer()) {
             return list;
         }
 
