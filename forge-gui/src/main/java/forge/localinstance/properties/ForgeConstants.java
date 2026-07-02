@@ -343,7 +343,7 @@ public final class ForgeConstants {
     public static final String URL_PIC_DOWNLOAD = URL_CARDFORGE + "/images/cards/";
     public static final String URL_TOKEN_DOWNLOAD = URL_CARDFORGE + "/images/tokens/";
     public static final String URL_PRICE_DOWNLOAD = GITHUB_ASSETS_BASE + "all-prices.txt";
-    private static final String URL_SCRYFALL = "https://api.scryfall.com";
+    private static final String URL_SCRYFALL = "https://card-forge.net/api/v1";
     public static final String URL_PIC_SCRYFALL_DOWNLOAD = URL_SCRYFALL + "/cards/";
 
     // Constants for Display Card Identity game setting

@@ -257,7 +257,7 @@ public class ImageUtil {
             cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
         }
 
-        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, encodeUtf8(cardCollectorNumber),
+        return String.format("%s/%s/%s?version=%s%s", editionCode, encodeUtf8(cardCollectorNumber),
                 langCode, versionParam, faceParam);
     }
 
@@ -270,7 +270,7 @@ public class ImageUtil {
             faceParam = "&face=back";
             collectorNumber = collectorNumber.substring(0, collectorNumber.length() - 1);
         }
-        return String.format("%s/%s/%s?format=image&version=%s%s", setCode, encodeUtf8(collectorNumber),
+        return String.format("%s/%s/%s?version=%s%s", setCode, encodeUtf8(collectorNumber),
                 langCode, versionParam, faceParam);
     }
 
