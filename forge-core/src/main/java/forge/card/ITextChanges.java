@@ -9,4 +9,5 @@ public interface ITextChanges {
     boolean isEmpty();
 
     ITextChanges combine(ITextChanges output);
+    default ITextChanges getView() { return this; }
 }

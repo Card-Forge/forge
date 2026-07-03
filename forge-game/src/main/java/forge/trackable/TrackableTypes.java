@@ -10,6 +10,7 @@ import com.google.common.collect.Multiset;
 import forge.card.CardType;
 import forge.card.CardTypeView;
 import forge.card.ColorSet;
+import forge.card.TextChangesView;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
@@ -183,4 +184,5 @@ public class TrackableTypes {
     public static final TrackableType<Multiset<CounterType>> CounterMapType = new TrackableType<>(null);
     public static final TrackableType<Map<Object, Object>> GenericMapType = new TrackableType<>(null);
     public static final TrackableType<KeywordCollectionView> KeywordCollectionViewType = new TrackableType<>(KeywordCollectionView.EMPTY);
+    public static final TrackableType<TextChangesView> TextChangesViewType = new TrackableType<>(TextChangesView.EMPTY);
 }

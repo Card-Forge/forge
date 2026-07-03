@@ -180,8 +180,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private final Set<Long> canBlockAny = Sets.newHashSet();
 
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
-    private final CardChangedWords changedTextColors = new CardChangedWords();
-    private final CardChangedWords changedTextTypes = new CardChangedWords();
+    private final TextChanges textChanges = new TextChanges();
 
     private final Set<Object> rememberedObjects = Sets.newLinkedHashSet();
     private final List<String> draftActions = Lists.newArrayList();
@@ -410,8 +409,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         view = new CardView(id0, tracker0);
         currentState = new CardState(view.getCurrentState(), this);
         states.put(CardStateName.Original, currentState);
-        view.updateChangedColorWords(this);
-        view.updateChangedTypes(this);
         view.updateSickness(this);
         view.updateClassLevel(this);
         view.updateDraftAction(this);
@@ -4774,7 +4771,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!canUseCachedTrait(result, stAb)) {
             result = AbilityFactory.getAbility(str, this, stAb);
             // apply text changes from the statics host
-            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
+            result.changeTextIntrinsic(stAb.getTextChanges());
             result.setIntrinsic(false);
             result.setGrantorStatic(stAb);
             storedSpellAbility.put(stAb, str, result);
@@ -4787,7 +4784,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!canUseCachedTrait(result, stAb)) {
             result = TriggerHandler.parseTrigger(str, this, false, stAb);
             // apply text changes from the statics host
-            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
+            result.changeTextIntrinsic(stAb.getTextChanges());
             storedTrigger.put(stAb, str, result);
         }
         return result;
@@ -4827,7 +4824,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!canUseCachedTrait(result, stAb)) {
             result = ReplacementHandler.parseReplacement(str, this, false, stAb);
             // apply text changes from the statics host
-            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
+            result.changeTextIntrinsic(stAb.getTextChanges());
             storedReplacementEffect.put(stAb, str, result);
         }
         return result;
@@ -4838,7 +4835,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!canUseCachedTrait(result, stAb)) {
             result = StaticAbility.create(str, this, stAb.getCardState(), false);
             // apply text changes from the statics host
-            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
+            result.changeTextIntrinsic(stAb.getTextChanges());
             storedStaticAbility.put(stAb, str, result);
         }
         return result;
@@ -4914,7 +4911,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (cached == null) {
             return false;
         }
-        return cached.getChangedTextColors().equals(stAb.getChangedTextColors()) && cached.getChangedTextTypes().equals(stAb.getChangedTextTypes());
+        return cached.getTextChanges().equals(stAb.getTextChanges());
     }
 
     public final Table<Long, Long, CardTraitChanges> getChangedCardTraitsByText() {
@@ -4933,8 +4930,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         ));
 
         // setting card traits via text, does overwrite any other word change effects?
-        this.changedTextColors.addEmpty(timestamp, staticId);
-        this.changedTextTypes.addEmpty(timestamp, staticId);
+        textChanges.add(staticId, staticId, new ResetChangedText());
         updateChangedText();
     }
 
@@ -4963,7 +4959,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return changedCardTraits.remove(timestamp, staticId) != null;
     }
     public final boolean removeChangedCardTraitsByText(long timestamp, long staticId) {
-        return changedCardTraitsByText.remove(timestamp, staticId) != null;
+        boolean changed = false;
+        if (changedCardTraitsByText.remove(timestamp, staticId) != null) {
+            changed = true;
+        }
+        if (textChanges.remove(timestamp, staticId)) {
+            changed = true;
+        }
+        return changed;
     }
 
     public Iterable<? extends ICardTraitChanges> getChangedCardTraitsList(CardState state) {
@@ -5448,13 +5451,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (MagicColor.fromName(newWord) == 0) {
             throw new RuntimeException("Not a color: " + newWord);
         }
-        changedTextColors.add(timestamp, staticId, StringUtils.capitalize(originalWord), StringUtils.capitalize(newWord));
-
+        ChangedColorWord word = new ChangedColorWord(originalWord.equals("Any") ? null : MagicColor.Color.fromName(originalWord), MagicColor.Color.fromName(newWord));
+        textChanges.add(timestamp, staticId, word);
         updateChangedText();
     }
 
     public final void removeChangedTextColorWord(final Long timestamp, final long staticId) {
-        if (changedTextColors.remove(timestamp, staticId)) {
+        if (textChanges.remove(timestamp, staticId)) {
             updateChangedText();
         }
     }
@@ -5465,8 +5468,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
      * @param newWord the new type word.
      */
     public final void addChangedTextTypeWord(final String originalWord, final String newWord, final Long timestamp, final long staticId) {
-        changedTextTypes.add(timestamp, staticId, originalWord, newWord);
-        changedCardTypesByText.put(timestamp, staticId, new WordChangedType(originalWord, newWord));
+        WordChangedType word = new WordChangedType(originalWord, newWord);
+        changedCardTypesByText.put(timestamp, staticId, word);
+        textChanges.add(timestamp, staticId, word);
         updateChangedText();
     }
 
@@ -5474,7 +5478,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (changedCardTypesByText.remove(timestamp, staticId) != null) {
             updateTypeCache();
         }
-        if (changedTextTypes.remove(timestamp, staticId)) {
+        if (textChanges.remove(timestamp, staticId)) {
             updateChangedText();
         }
     }
@@ -5509,7 +5513,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     trait.changeText();
                 }
             } else {
-                final String newtxt = AbilityUtils.applyKeywordTextChangeEffects(oldtxt, getChangedTextColorWords(), getChangedTextTypeWords());
+                final String newtxt = AbilityUtils.applyKeywordTextChangeEffects(oldtxt, this.getTextChanges());
                 if (!newtxt.equals(oldtxt)) {
                     KeywordInterface newKw = Keyword.getInstance(newtxt);
                     newKw.createTraits(this, true);
@@ -5523,8 +5527,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         text = AbilityUtils.applyDescriptionTextChangeEffects(originalText, this);
 
-        getView().updateChangedColorWords(this);
-        getView().updateChangedTypes(this);
+        getView().updateTextChanges(this);
         updateManaCostForView();
 
         updateTypeCache();
@@ -5534,12 +5537,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         view.updateNonAbilityText(this);
     }
 
-    public final ImmutableMap<String, String> getChangedTextColorWords() {
-        return ImmutableMap.copyOf(changedTextColors);
-    }
-
-    public final ImmutableMap<String, String> getChangedTextTypeWords() {
-        return ImmutableMap.copyOf(changedTextTypes);
+    public ITextChanges getTextChanges() {
+        return this.textChanges;
     }
 
     /**
@@ -5547,8 +5546,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
      * one. The original changes of this Card are removed.
      */
     public final void copyChangedTextFrom(final Card other) {
-        changedTextColors.copyFrom(other.changedTextColors);
-        changedTextTypes.copyFrom(other.changedTextTypes);
+        textChanges.copyFrom(other.textChanges);
     }
 
     public final boolean isPermanent() {
