@@ -595,7 +595,6 @@ public class ArchipelagoData implements SaveFileContent {
 
     @Override
     public void load(SaveFileData data) {
-        // Todo: We might need to clear lists on load
         if (data == null) {
             // No archipelago data found, treat archipelago as inactive for this save file.
             setupFreshSaveFile(ArchipelagoMode.disabled);
