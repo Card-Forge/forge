@@ -569,6 +569,19 @@ public class ArchipelagoData implements SaveFileContent {
         Collections.addAll(set, values);
     }
 
+    private static void saveLongList(SaveFileData parent, String key, List<Long> list) {
+        parent.storeObject(key, list.toArray(new Long[0]));
+    }
+
+    private static void loadLongList(SaveFileData parent, String key, List<Long> list) {
+        list.clear();
+
+        if (!parent.containsKey(key)) return;
+
+        Long[] values = (Long[]) parent.readObject(key);
+        Collections.addAll(list, values);
+    }
+
     private void loadAllAvailableSets() {
         Set<String> newSetCodes = new HashSet<>();
         for (CardEdition edition : allOrderedEditions) {
@@ -642,6 +655,7 @@ public class ArchipelagoData implements SaveFileContent {
             loadItemDataSet(data, "blackItemShop", networkedRandomizer.blackItemShopList);
             loadItemDataSet(data, "redItemShop", networkedRandomizer.redItemShopList);
             loadItemDataSet(data, "greenItemShop", networkedRandomizer.greenItemShopList);
+            loadLongList(data,"locationQueue", networkedRandomizer.locationQueue);
             if (data.containsKey("slotData")) networkedRandomizer.setSlotData((SlotData) data.readObject("slotData"));
             if (data.containsKey("lastIp")) networkedRandomizer.setLastIp(data.readString("lastIp"));
             if (data.containsKey("lastPort")) networkedRandomizer.setLastPort(data.readString("lastPort"));
@@ -724,6 +738,7 @@ public class ArchipelagoData implements SaveFileContent {
             saveItemDataSet(data, "blackItemShop", networkedRandomizer.blackItemShopList);
             saveItemDataSet(data, "redItemShop", networkedRandomizer.redItemShopList);
             saveItemDataSet(data, "greenItemShop", networkedRandomizer.greenItemShopList);
+            saveLongList(data,"locationQueue", networkedRandomizer.locationQueue);
             data.storeObject("slotData", networkedRandomizer.getSlotData());
             data.store("lastIp", networkedRandomizer.getLastIp());
             data.store("lastPort", networkedRandomizer.getLastPort());

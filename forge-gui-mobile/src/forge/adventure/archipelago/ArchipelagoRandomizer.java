@@ -9,7 +9,6 @@ import java.util.*;
 public class ArchipelagoRandomizer {
     private static final ArchipelagoRandomizer archipelagoRandomizerInstance = new ArchipelagoRandomizer();
     private final ArchipelagoData archipelagoDataInstance;
-
     protected final Set<ItemData> colorlessEquipmentShopList = new HashSet<>();
     protected final Set<ItemData> whiteEquipmentShopList = new HashSet<>();
     protected final Set<ItemData> blueEquipmentShopList = new HashSet<>();
