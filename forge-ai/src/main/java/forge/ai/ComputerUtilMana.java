@@ -146,6 +146,8 @@ public class ComputerUtilMana {
             System.out.println();
         }
 
+        final int spellCmc = cost.getConvertedManaCost();
+        final boolean preferTotalMana = spellCmc > orderedCards.size();
         List<Integer> colorsMostCommon;
         if (sourcesForShards.keySet().stream().anyMatch(ManaCostShard::isGeneric)) {
             // early tempo is more important so we only look at hand here
@@ -165,17 +167,24 @@ public class ComputerUtilMana {
         for (final ManaCostShard shard : sourcesForShards.keySet()) {
             final List<SpellAbility> abilities = sourcesForShards.get(shard);
             final List<SpellAbility> newAbilities = new ArrayList<>(abilities);
+            final boolean preferCostedMultiMana = !shard.isGeneric() && spellCmc > 1;
 
             if (DEBUG_MANA_PAYMENT) {
                 System.out.println("Unsorted Abilities: " + newAbilities);
             }
 
             newAbilities.sort((ability1, ability2) -> {
-                if (!shard.isGeneric() && cost.getConvertedManaCost() > 1) {
-                    int amount1 = ability1.totalAmountOfManaGenerated(sa, true);
-                    int amount2 = ability2.totalAmountOfManaGenerated(sa, true);
-                    if (amount1 != amount2 && (amount1 > 1 || amount2 > 1)) {
-                        return amount2 - amount1;
+                if (preferCostedMultiMana) {
+                    int amount1 = manaCostedMultiManaAmount(ability1, sa);
+                    int amount2 = manaCostedMultiManaAmount(ability2, sa);
+                    if (amount1 != amount2) {
+                        return Integer.compare(amount2, amount1);
+                    }
+                    if (preferTotalMana) {
+                        int amountOrder = compareTotalManaGenerated(ability1, ability2, sa);
+                        if (amountOrder != 0) {
+                            return amountOrder;
+                        }
                     }
                 }
 
@@ -204,6 +213,13 @@ public class ComputerUtilMana {
                 }
 
                 // Mana abilities on the same card
+                if (preferTotalMana) {
+                    int amountOrder = compareTotalManaGenerated(ability1, ability2, sa);
+                    if (amountOrder != 0) {
+                        return amountOrder;
+                    }
+                }
+
                 String shardMana = shard.toShortString();
 
                 boolean payWithAb1 = ability1.getManaPart().mana(ability1).contains(shardMana);
@@ -269,6 +285,20 @@ public class ComputerUtilMana {
                 }
             }
         }
+    }
+
+    private static int compareTotalManaGenerated(final SpellAbility ability1, final SpellAbility ability2, final SpellAbility saPaidFor) {
+        return Integer.compare(ability2.totalAmountOfManaGenerated(saPaidFor, true), ability1.totalAmountOfManaGenerated(saPaidFor, true));
+    }
+
+    private static int manaCostedMultiManaAmount(final SpellAbility ability, final SpellAbility saPaidFor) {
+        final Cost cost = ability.getPayCosts();
+        if (!cost.hasManaCost() || !canPlanManaCostedManaAbility(ability) || cost.getTotalMana().getCMC() != 1
+                || (ability.hasParam("Amount") && !StringUtils.isNumeric(ability.getParam("Amount")))) {
+            return 0;
+        }
+        final int amount = ability.totalAmountOfManaGenerated(saPaidFor, true);
+        return amount == 2 ? amount : 0;
     }
 
     public static SpellAbility chooseManaAbility(ManaCostBeingPaid cost, SpellAbility sa, Player ai, ManaCostShard toPay,
@@ -1133,6 +1163,15 @@ public class ComputerUtilMana {
             return false;
         }
 
+        if ("Chosen".equals(m.getOrigProduced())) {
+            for (byte c : MagicColor.WUBRG) {
+                if (ai.getManaPool().canPayForShardWithColor(toPay, c) && sa.allowsPayingWithShard(sourceCard, c)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         if (!sa.allowsPayingWithShard(sourceCard, MagicColor.fromName(m.getOrigProduced()))) {
             return false;
         }
@@ -1722,7 +1761,7 @@ public class ComputerUtilMana {
 
                 SpellAbility tail = m;
                 while (tail != null) {
-                    AbilityManaPart mp = m.getManaPart();
+                    AbilityManaPart mp = tail.getManaPart();
                     if (mp != null && tail.metConditions()) {
                         // TODO Replacement Check currently doesn't work for reflected colors
 
@@ -1739,11 +1778,11 @@ public class ComputerUtilMana {
                             Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
                             // find possible colors
                             for (byte color : MagicColor.WUBRG) {
-                                if (tail.canThisProduce(MagicColor.toShortString(color)) || reflectedColors.contains(MagicColor.toLongString(color))) {
+                                if ("Chosen".equals(origin) || tail.canThisProduce(MagicColor.toShortString(color)) || reflectedColors.contains(MagicColor.toLongString(color))) {
                                     manaMap.put((int)color, m);
                                 }
                             }
-                            if (m.canThisProduce("C") || reflectedColors.contains(MagicColor.Constant.COLORLESS)) {
+                            if (tail.canThisProduce("C") || reflectedColors.contains(MagicColor.Constant.COLORLESS)) {
                                 manaMap.put(ManaAtom.COLORLESS, m);
                             }
                         } else {
@@ -1893,7 +1932,7 @@ public class ComputerUtilMana {
 
     private static boolean canPlanManaCostedManaAbility(final SpellAbility ability) {
         final Cost cost = ability.getPayCosts();
-        return cost.isReusuableResource() && cost.hasTapCost() && cost.getTotalMana().getCMC() == 1;
+        return cost.isReusuableResource() && cost.hasTapCost();
     }
 
     /**
