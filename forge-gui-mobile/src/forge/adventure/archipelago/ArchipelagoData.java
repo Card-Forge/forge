@@ -631,7 +631,6 @@ public class ArchipelagoData implements SaveFileContent {
         }
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
             WorldData.resetShopLists();
-            loadItemDataSet(data, "boughtColorlessEquipment", networkedRandomizer.boughtColorlessEquipmentShopList);
             loadItemDataSet(data, "colorlessEquipmentShop", networkedRandomizer.colorlessEquipmentShopList);
             loadItemDataSet(data, "whiteEquipmentShop", networkedRandomizer.whiteEquipmentShopList);
             loadItemDataSet(data, "blueEquipmentShop", networkedRandomizer.blueEquipmentShopList);
@@ -714,7 +713,6 @@ public class ArchipelagoData implements SaveFileContent {
             data.store("checksSinceLastRegionReward", localRandomizer.checksSinceLastRegionReward);
         }
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
-            saveItemDataSet(data, "boughtColorlessEquipment", networkedRandomizer.getBoughtColorlessEquipmentShopList());
             saveItemDataSet(data, "colorlessEquipmentShop", networkedRandomizer.colorlessEquipmentShopList);
             saveItemDataSet(data, "whiteEquipmentShop", networkedRandomizer.whiteEquipmentShopList);
             saveItemDataSet(data, "blueEquipmentShop", networkedRandomizer.blueEquipmentShopList);

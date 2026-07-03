@@ -33,7 +33,6 @@ import forge.sound.SoundSystem;
 import forge.util.ItemPool;
 
 import java.util.Comparator;
-import java.util.Set;
 
 /**
  * Displays the rewards of a fight or a treasure
@@ -550,15 +549,9 @@ public class RewardScene extends UIScene {
                         itemData.name = "Archipelago Reward";
                         reward = new Reward(itemData);
                     }
-                } else if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago && type == Type.Shop && shopActor.getName().equalsIgnoreCase("equipment")) {
+                } else if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago && type == Type.Shop && (shopActor.getName().toLowerCase().contains("equipment") || shopActor.getName().toLowerCase().contains("items"))) {
                     skipCard = false;
-                    Set<ItemData> data = ArchipelagoRandomizer.getInstance().getBoughtColorlessEquipmentShopList();
-                    for (ItemData item : data) {
-                        if (item.name.equalsIgnoreCase(reward.getItem().name) && item.archilepagoLocationId == reward.getItem().archilepagoLocationId) {
-                            itemAlreadySold = true;
-                            break;
-                        }
-                    }
+                    itemAlreadySold = reward.getItem().archipelagoAlreadyChecked;
                 }
                 actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
                 if (itemAlreadySold) {
@@ -676,7 +669,7 @@ public class RewardScene extends UIScene {
                         if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago && rewardActor.getReward().getItem() != null && rewardActor.getReward().getItem().archilepagoLocationId >= 0) {
                             ItemData itemData = rewardActor.getReward().getItem();
                             Archipelago.getInstance().checkLocation(itemData.archilepagoLocationId);
-                            ArchipelagoRandomizer.getInstance().addToBoughtColorlessEquipmentShopList(itemData);
+                            itemData.archipelagoAlreadyChecked = true;
                         } else {
                             Current.player().addReward(rewardActor.getReward());
                         }

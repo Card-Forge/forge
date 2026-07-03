@@ -38,6 +38,7 @@ public class ItemData implements Serializable, Cloneable {
     public String archipelagoItemName = "";
     public String archipelagoLocationName = "";
     public String archipelagoPlayerName = "";
+    public boolean archipelagoAlreadyChecked = false;
 
     public ItemData() {
 
@@ -66,6 +67,10 @@ public class ItemData implements Serializable, Cloneable {
     }
 
     public ItemData(NetworkItem networkItem) {
+        this(networkItem, false);
+    }
+
+    public ItemData(NetworkItem networkItem, boolean alreadyChecked) {
         String itemType = "Filler";
         switch (networkItem.flags){
             case 0b001:
@@ -99,6 +104,7 @@ public class ItemData implements Serializable, Cloneable {
         archipelagoItemName     = networkItem.itemName;
         archipelagoLocationName = networkItem.locationName;
         archipelagoPlayerName   = networkItem.playerName;
+        archipelagoAlreadyChecked = alreadyChecked;
     }
 
     public Sprite sprite() {
