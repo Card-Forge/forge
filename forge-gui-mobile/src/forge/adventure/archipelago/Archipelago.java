@@ -48,7 +48,7 @@ public class Archipelago {
     }
 
     public void checkLocation(Long id) {
-        if (APClient == null || !APClient.checkLocation(id)) {
+        if (APClient == null || !APClient.isConnected() || !APClient.checkLocation(id)) {
             ArchipelagoRandomizer.getInstance().locationQueue.add(id);
         }
     }
