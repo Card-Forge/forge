@@ -1778,7 +1778,7 @@ public class ComputerUtilMana {
                             Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
                             // find possible colors
                             for (byte color : MagicColor.WUBRG) {
-                                if ("Chosen".equals(origin) || mp.canProduce(MagicColor.toShortString(color), tail) || reflectedColors.contains(MagicColor.toLongString(color))) {
+                                if (mp.canProduce(MagicColor.toShortString(color), tail) || reflectedColors.contains(MagicColor.toLongString(color))) {
                                     manaMap.put((int)color, m);
                                 }
                             }
