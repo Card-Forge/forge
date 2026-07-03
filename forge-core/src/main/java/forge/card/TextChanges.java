@@ -8,6 +8,8 @@ import java.util.Map;
 
 public class TextChanges implements ITextChanges {
 
+    public static ITextChanges EMPTY = TextChangesView.EMPTY;
+
     private final Table<Long, Long, IChangedText> map = TreeBasedTable.create();
     private final Map<MagicColor.Color, MagicColor.Color> colorChanges = Maps.newHashMap();
     private final Map<String, String> typeChanges = Maps.newHashMap();
@@ -29,6 +31,11 @@ public class TextChanges implements ITextChanges {
         colorChanges.clear();
         typeChanges.clear();
         isDirty = false;
+    }
+    public void copyFrom(final TextChanges other) {
+        map.clear();
+        map.putAll(other.map);
+        isDirty = true;
     }
 
     @Override
@@ -60,6 +67,7 @@ public class TextChanges implements ITextChanges {
         }
     }
 
+    @Override
     public TextChangesView getView() {
         return new TextChangesView(colorChanges(), typeChanges());
     }
