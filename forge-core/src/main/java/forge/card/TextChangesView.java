@@ -6,6 +6,8 @@ import java.util.Map;
 
 public record TextChangesView(Map<MagicColor.Color, MagicColor.Color> colorChanges, Map<String, String> typeChanges) implements ITextChanges {
 
+    public static TextChangesView EMPTY = new TextChangesView(Map.of(), Map.of());
+
     @Override
     public boolean isEmpty() {
         return colorChanges.isEmpty() && typeChanges.isEmpty();
