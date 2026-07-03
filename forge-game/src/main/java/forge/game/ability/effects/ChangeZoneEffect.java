@@ -1534,7 +1534,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 "While you're searching your library, you may cast CARDNAME from your library.");
         decider.getController().tempShowCards(canCastWhileSearching);
         for (final Card tgtCard : canCastWhileSearching) {
-            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, decider, CardStateName.Original, true);
+            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, decider, CardStateName.Original, true, null);
             if (sas.isEmpty()) {
                 continue;
             }

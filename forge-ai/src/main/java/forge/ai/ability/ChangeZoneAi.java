@@ -2,6 +2,8 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multiset;
+
 import forge.ai.*;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -1292,13 +1294,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         }
                     }
                 }
-                Map<CounterType, Integer> counters = c.getCounters();
-                for (CounterType ct : counters.keySet()) {
-                    int amount = counters.get(ct);
-                    if (ComputerUtil.isNegativeCounter(ct, c)) {
-                        numNegativeCounters += amount;
+                for (Multiset.Entry<CounterType> e : c.getCounters().entrySet()) {
+                    if (ComputerUtil.isNegativeCounter(e.getElement(), c)) {
+                        numNegativeCounters += e.getCount();
                     }
-                    numTotalCounters += amount;
+                    numTotalCounters += e.getCount();
                 }
                 if (hasValuableAttachments || (ComputerUtilCard.isUselessCreature(ai, c) && !hasOppAttachments)) {
                     continue;
@@ -1469,7 +1469,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Focus on the keycards I don't already have access to
         if (destination.equals(ZoneType.Battlefield) || destination.equals(ZoneType.Hand) ||
                 (destination.equals(ZoneType.Library) && "0".equals(position))) {
-            for (Card c : player.getCardsIn(Lists.newArrayList(ZoneType.Hand, ZoneType.Battlefield))) {
+            for (Card c : player.getCardsIn(ZoneType.Hand, ZoneType.Battlefield)) {
                 keyCards.remove(c.getName());
             }
         }

@@ -22,8 +22,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
 
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -51,7 +52,7 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
     protected int id;
     private String name = "";
     protected CardCollection attachedCards = new CardCollection();
-    protected Map<CounterType, Integer> counters = Maps.newHashMap();
+    protected Multiset<CounterType> counters = HashMultiset.create();
     protected List<Pair<Integer, Boolean>> damageReceivedThisTurn = Lists.newArrayList();
 
     protected GameEntity(int id0) {
@@ -297,35 +298,24 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
     }
 
     // get all counters from a card
-    public final Map<CounterType, Integer> getCounters() {
+    public final Multiset<CounterType> getCounters() {
         return counters;
     }
 
     // get total number of all counters on an entity
     public final int getNumAllCounters() {
-        int count = 0;
-        for (Integer i : getCounters().values()) {
-            if (i != null && i > 0) {
-                count += i;
-            }
-        }
-        return count;
+        return this.counters.size();
     }
 
     public final int getCounters(final CounterType counterName) {
-        Integer value = counters.get(counterName);
-        return value == null ? 0 : value;
+        return counters.count(counterName);
     }
 
     public void setCounters(final CounterType counterType, final Integer num) {
-        if (num <= 0) {
-            counters.remove(counterType);
-        } else {
-            counters.put(counterType, num);
-        }
+        counters.setCount(counterType, num);
     }
 
-    abstract public void setCounters(final Map<CounterType, Integer> allCounters);
+    abstract public void setCounters(final Multiset<CounterType> allCounters);
 
     abstract public boolean canRemoveCounters(final CounterType type);
 

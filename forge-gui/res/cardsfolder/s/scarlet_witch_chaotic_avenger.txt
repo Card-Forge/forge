@@ -5,5 +5,6 @@ PT:3/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDig | CombatDamage$ True | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, look at the top two cards of your library, then exile them face down. Then you may cast a Hero or noncreature spell from among cards exiled with NICKNAME without paying its mana cost.
 SVar:TrigDig:DB$ Dig | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | WithMayLook$ True | RememberChanged$ True | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | ValidZone$ Exile | Valid$ Hero.nonLand+ExiledWithSource,Card.nonCreature+nonLand+ExiledWithSource | ValidSA$ Spell | Controller$ You | WithoutManaCost$ True | Amount$ 1
+SVar:DBPlay:DB$ Play | ValidZone$ Exile | Valid$ Card.ExiledWithSource | ValidSA$ Spell.Hero,Spell.nonCreature | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Flying\nWhenever Scarlet Witch deals combat damage to a player, look at the top two cards of your library, then exile them face down. Then you may cast a Hero or noncreature spell from among cards exiled with Scarlet Witch without paying its mana cost.

@@ -2843,7 +2843,7 @@ public class AbilityUtils {
             final String rest = l[0].substring(22);
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
             for (final Card card : list) {
-                kinds.addAll(card.getCounters().keySet());
+                kinds.addAll(card.getCounters().elementSet());
             }
             return doXMath(kinds.size(), expr, c, ctb);
         }
@@ -2887,9 +2887,9 @@ public class AbilityUtils {
     }
 
     public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller) {
-        return getSpellsFromPlayEffect(tgtCard, controller, CardStateName.Original, false);
+        return getSpellsFromPlayEffect(tgtCard, controller, CardStateName.Original, false, null);
     }
-    public static final List<SpellAbility> getSpellsFromPlayEffect(final Card tgtCard, final Player controller, CardStateName state, boolean withAltCost) {
+    public static final List<SpellAbility> getSpellsFromPlayEffect(final Card tgtCard, final Player controller, CardStateName state, boolean withAltCost, Predicate<SpellAbility> validSA) {
         List<SpellAbility> sas = new ArrayList<>();
         List<SpellAbility> list = new ArrayList<>();
         collectSpellsForPlayEffect(list, tgtCard.getState(tgtCard.getCurrentStateName()), controller, withAltCost);
@@ -2897,20 +2897,21 @@ public class AbilityUtils {
 
         if (tgtCard.isFaceDown()) {
             collectSpellsForPlayEffect(list, original, controller, withAltCost);
-        } else {
-            if (state == CardStateName.Backside && !tgtCard.isModal() && tgtCard.isPermanent() && !tgtCard.isAura()) {
-                // casting defeated battle
-                Spell sp = new SpellPermanent(tgtCard, original);
-                sp.setCardState(original);
-                list.add(sp);
-            }
-            if (tgtCard.isModal() && tgtCard.hasState(CardStateName.Backside)) {
-                collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Backside), controller, withAltCost);
-            }
+        } else if (state == CardStateName.Backside && !tgtCard.isModal() && tgtCard.isPermanent() && !tgtCard.isAura()) {
+            // casting defeated battle
+            Spell sp = new SpellPermanent(tgtCard, original);
+            sp.setCardState(original);
+            list.add(sp);
+        }
+        if (tgtCard.isModal() && tgtCard.hasState(CardStateName.Backside)) {
+            collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Backside), controller, withAltCost);
         }
 
         for (SpellAbility s : list) {
             if (s.isLandAbility()) {
+                if (validSA != null && !validSA.test(s)) {
+                    continue;
+                }
                 s.setActivatingPlayer(controller);
                 // CR 305.3
                 if (controller.getGame().getPhaseHandler().isPlayerTurn(controller) && controller.canPlayLand(tgtCard, true, s)) {
@@ -2921,7 +2922,16 @@ public class AbilityUtils {
                 newSA.getRestrictions().setZone(null);
                 newSA.setCastFromPlayEffect(true);
                 // extra timing restrictions still apply
-                if (newSA.canPlay()) {
+                Card newHost = newSA.canPlayFromHost();
+                if (newHost != null) {
+                    if (validSA != null) {
+                        Card oldHost = newSA.getHostCard();
+                        newSA.setHostCard(newHost);
+                        if (!validSA.test(newSA)) {
+                            continue;
+                        }
+                        newSA.setHostCard(oldHost);
+                    }
                     sas.add(newSA);
                 }
             }
@@ -3518,7 +3528,7 @@ public class AbilityUtils {
         if (value.contains("Counters")) {
             int count = 0;
             if (sq[1].equals("ALL")) {
-                count = Aggregates.sum(player.getCounters().values());
+                count = player.getNumAllCounters();
             } else {
                 count = player.getCounters(CounterType.getType(sq[1]));
             }
