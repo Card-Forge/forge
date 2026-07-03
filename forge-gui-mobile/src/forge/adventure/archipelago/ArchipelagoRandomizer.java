@@ -23,7 +23,6 @@ public class ArchipelagoRandomizer {
     protected final Set<ItemData> greenItemShopList = new HashSet<>();
     protected final Set<ItemData> remainingEquipmentPool = new HashSet<>();
     protected final List<Long> locationQueue = new ArrayList<>();
-    protected Set<ItemData> boughtColorlessEquipmentShopList = new HashSet<>();
     private SlotData slotData;
     private String lastIp = "";
     private String lastPort = "";
@@ -47,7 +46,6 @@ public class ArchipelagoRandomizer {
     }
 
     private void clearShopData() {
-        boughtColorlessEquipmentShopList.clear();
         colorlessEquipmentShopList.clear();
         whiteEquipmentShopList.clear();
         blueEquipmentShopList.clear();
@@ -255,31 +253,33 @@ public class ArchipelagoRandomizer {
         archipelagoDataInstance.addGold(amount);
     }
 
-    public void handleShopData(List<NetworkItem> shopLocationScouts) {
+    public void handleShopData(List<NetworkItem> shopLocationScouts, Set<Long> checkedLocations) {
         clearShopData();
         for (NetworkItem shopLocation : shopLocationScouts) {
+            boolean alreadyChecked = checkedLocations.contains(shopLocation.locationID);
+
             if (shopLocation.locationID >= 1000 && shopLocation.locationID < 1100) {
-                colorlessEquipmentShopList.add(new ItemData(shopLocation));
+                colorlessEquipmentShopList.add(new ItemData(shopLocation, alreadyChecked));
             } else if (shopLocation.locationID >= 1100 && shopLocation.locationID < 1200) {
-                whiteEquipmentShopList.add(new ItemData(shopLocation));
+                whiteEquipmentShopList.add(new ItemData(shopLocation, alreadyChecked));
             } else if (shopLocation.locationID >= 1200 && shopLocation.locationID < 1300) {
-                whiteItemShopList.add(new ItemData(shopLocation));
+                whiteItemShopList.add(new ItemData(shopLocation, alreadyChecked));
             } else if (shopLocation.locationID >= 1300 && shopLocation.locationID < 1400) {
-                blueEquipmentShopList.add(new ItemData(shopLocation));
+                blueEquipmentShopList.add(new ItemData(shopLocation, alreadyChecked));
             } else if (shopLocation.locationID >= 1400 && shopLocation.locationID < 1500) {
-                blueItemShopList.add(new ItemData(shopLocation));
+                blueItemShopList.add(new ItemData(shopLocation, alreadyChecked));
             } else if (shopLocation.locationID >= 1500 && shopLocation.locationID < 1600) {
-                blackEquipmentShopList.add(new ItemData(shopLocation));
+                blackEquipmentShopList.add(new ItemData(shopLocation, alreadyChecked));
             } else if (shopLocation.locationID >= 1600 && shopLocation.locationID < 1700) {
-                blackItemShopList.add(new ItemData(shopLocation));
+                blackItemShopList.add(new ItemData(shopLocation, alreadyChecked));
             } else if (shopLocation.locationID >= 1700 && shopLocation.locationID < 1800) {
-                redEquipmentShopList.add(new ItemData(shopLocation));
+                redEquipmentShopList.add(new ItemData(shopLocation, alreadyChecked));
             } else if (shopLocation.locationID >= 1800 && shopLocation.locationID < 1900) {
-                redItemShopList.add(new ItemData(shopLocation));
+                redItemShopList.add(new ItemData(shopLocation, alreadyChecked));
             } else if (shopLocation.locationID >= 1900 && shopLocation.locationID < 2000) {
-                greenEquipmentShopList.add(new ItemData(shopLocation));
+                greenEquipmentShopList.add(new ItemData(shopLocation, alreadyChecked));
             } else if (shopLocation.locationID >= 2000 && shopLocation.locationID < 2100) {
-                greenItemShopList.add(new ItemData(shopLocation));
+                greenItemShopList.add(new ItemData(shopLocation, alreadyChecked));
             }
         }
         ArchipelagoData.getInstance().setTotalAmountOfSetUnlockChecks(slotData.SetUnlockCount);
@@ -377,13 +377,5 @@ public class ArchipelagoRandomizer {
 
     public int getLastArchipelagoRewardIndex() {
         return archipelagoDataInstance.lastArchipelagoRewardIndex;
-    }
-
-    public Set<ItemData> getBoughtColorlessEquipmentShopList() {
-        return boughtColorlessEquipmentShopList;
-    }
-
-    public void addToBoughtColorlessEquipmentShopList(ItemData item) {
-        this.boughtColorlessEquipmentShopList.add(item);
     }
 }

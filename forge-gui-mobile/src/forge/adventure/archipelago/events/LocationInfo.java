@@ -17,7 +17,7 @@ public class LocationInfo {
     public void onLocationInfo(LocationInfoEvent event) {
         int locationCount = APClient.getLocationManager().getMissingLocations().size() + APClient.getLocationManager().getCheckedLocations().size();
         if (event.locations.size() == locationCount) {
-            ArchipelagoRandomizer.getInstance().handleShopData(event.locations);
+            ArchipelagoRandomizer.getInstance().handleShopData(event.locations, APClient.getLocationManager().getCheckedLocations());
         } else {
             // Todo: Show hints in console, maybe handle this in PrintJsonListener later?
         }
