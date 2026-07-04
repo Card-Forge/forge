@@ -213,10 +213,12 @@ public class ArchipelagoData implements SaveFileContent {
         addSetUnlockedByCode(setToUnlock);
         String setUnlockedText = String.format("Set Unlock: %s%s{RESET}", ArchipelagoColors.Cyan, setToUnlock);
         // Some sets don't have booster packs such as full-art land sets (P23).
-        var booster = StaticData.instance().getBoosters().get(setToUnlock);
-        if (booster != null) {
-            Current.player().addBooster(AdventureEventController.instance().generateBooster(setToUnlock));
-            setUnlockedText += String.format(" + %s%s{RESET}", ArchipelagoColors.Green, "Matching Booster Pack");
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer || (archipelagoMode == ArchipelagoMode.networked_archipelago && ArchipelagoRandomizer.getInstance().getSlotData() != null && ArchipelagoRandomizer.getInstance().getSlotData().GiftPack == 1)) {
+            var booster = StaticData.instance().getBoosters().get(setToUnlock);
+            if (booster != null) {
+                Current.player().addBooster(AdventureEventController.instance().generateBooster(setToUnlock));
+                setUnlockedText += String.format(" + %s%s{RESET}", ArchipelagoColors.Green, "Matching Booster Pack");
+            }
         }
         // Archipelago does not know what set will be unlocked, this is randomized locally. Therefore, we always wanna show the player a notification.
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
