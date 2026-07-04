@@ -40,14 +40,18 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         return dataMap;
     }
 
-    public Integer put(Player putter, GameEntity object, CounterType type, Integer value) {
+    public int put(Player putter, GameEntity object, CounterType type, int value) {
         Optional<Player> o = Optional.ofNullable(putter);
         Multiset<CounterType> map = get(o, object);
         if (map == null) {
             map = HashMultiset.create();
             put(o, object, map);
         }
-        return map.add(type, value);
+        if (value > 0) {
+            return map.add(type, value);
+        } else {
+            return map.remove(type, -value);
+        }
     }
 
     public int get(Player putter, GameEntity object, CounterType type) {
