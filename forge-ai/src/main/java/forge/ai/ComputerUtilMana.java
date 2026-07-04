@@ -650,7 +650,6 @@ public class ComputerUtilMana {
                 return false;
             }
 
-            setExpressColorChoice(saPayment, ai, activationCost, toPay, activationPayment);
             if (test) {
                 activationPayments.add(activationPayment);
             } else {
