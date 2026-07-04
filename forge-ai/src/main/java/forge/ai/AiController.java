@@ -765,26 +765,13 @@ public class AiController {
         return reserveManaSources(sa, phaseType, enemy, true, null);
     }
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy, boolean forNextSpell, SpellAbility exceptForThisSa) {
-        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, player, true, 0, false);
-        CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
-
-        // used for chained spells where two spells need to be cast in succession
-        if (exceptForThisSa != null) {
-            manaSources.removeAll(ComputerUtilMana.getManaSourcesToPayCost(
-                    ComputerUtilMana.calculateManaCost(exceptForThisSa.getPayCosts(), exceptForThisSa, player, true, 0, false),
-                    exceptForThisSa, player));
-        }
-
-        if (manaSources.isEmpty()) {
-            return false;
-        }
-
         AiCardMemory.MemorySet memSet = null;
         if (phaseType == null && forNextSpell) {
             memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL;
         } else if (phaseType != null) {
             switch (phaseType) {
                 case MAIN2:
+                    // TODO bail if profile chance 0 anyway
                     memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
                     break;
                 case COMBAT_DECLARE_BLOCKERS:
@@ -797,6 +784,20 @@ public class AiController {
                     memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
                     break;
             }
+        }
+
+        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, player, true, 0, false);
+        CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
+
+        if (manaSources.isEmpty()) {
+            return false;
+        }
+
+        // used for chained spells where two spells need to be cast in succession
+        if (exceptForThisSa != null) {
+            manaSources.removeAll(ComputerUtilMana.getManaSourcesToPayCost(
+                    ComputerUtilMana.calculateManaCost(exceptForThisSa.getPayCosts(), exceptForThisSa, player, true, 0, false),
+                    exceptForThisSa, player));
         }
 
         // This is a simplification, since one mana source can produce more than one mana,
@@ -1668,6 +1669,7 @@ public class AiController {
                 if (opinion != AiPlayDecision.WillPlay)
                     continue;
 
+                // TODO could continue to try find another with higher rating (weighted by priority ordering)
                 return sa;
             }
 

@@ -354,7 +354,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         // The ability is added to stack HERE
-        si = push(sp, si, id);
+        push(sp, si, id);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -517,7 +517,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     // Push should only be used by add.
-    private SpellAbilityStackInstance push(final SpellAbility sp, SpellAbilityStackInstance si, int id) {
+    private void push(final SpellAbility sp, SpellAbilityStackInstance si, int id) {
         if (null == sp.getActivatingPlayer()) {
             sp.setActivatingPlayer(sp.getHostCard().getController());
             System.out.println(sp.getHostCard().getName() + " - activatingPlayer not set before adding to stack.");
@@ -558,7 +558,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         game.updateStackForView();
         game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex));
-        return si;
     }
 
     public final void resolveStack() {
@@ -679,8 +678,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if ((source.isInstant() || source.isSorcery() || fizzle) &&
-                source.isInZone(ZoneType.Stack)) {
+        if ((source.isInstant() || source.isSorcery() || fizzle) && source.isInZone(ZoneType.Stack)) {
             // If Spell and still on the Stack then let it goto the graveyard or replace its own movement
             Map<AbilityKey, Object> params = AbilityKey.newMap();
             params.put(AbilityKey.StackSa, sa);
