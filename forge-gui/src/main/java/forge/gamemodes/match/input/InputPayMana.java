@@ -322,9 +322,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 producedColorMask |= color;
             }
         }
-        ColorSet producedAndNeededColors = ColorSet.fromMask(producedColorMask);
 
-        chosen.setManaExpressChoice(producedAndNeededColors);
+        chosen.setManaExpressChoice(ColorSet.fromMask(producedColorMask));
 
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getHostCard() + " to pay mana");
 
