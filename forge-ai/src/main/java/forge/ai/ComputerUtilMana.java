@@ -1128,7 +1128,15 @@ public class ComputerUtilMana {
 
         if (m.isComboMana()) {
             for (String s : m.getComboColors(ma).split(" ")) {
-                if (canPayShardWithProducedMana(toPay, ai, sa, sourceCard, s, xManaCostPaidByColor)) {
+                if (toPay == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(s, xManaCostPaidByColor)) {
+                    continue;
+                }
+
+                if (!sa.allowsPayingWithShard(sourceCard, ManaAtom.fromName(s))) {
+                    continue;
+                }
+
+                if ("Any".equals(s) || ai.getManaPool().canPayForShardWithColor(toPay, ManaAtom.fromName(s))){
                     return true;
                 }
             }
@@ -1139,8 +1147,15 @@ public class ComputerUtilMana {
             Set<String> reflected = CardUtil.getReflectableManaColors(ma);
 
             for (byte c : MagicColor.WUBRGC) {
-                if (reflected.contains(MagicColor.toLongString(c))
-                        && canPayShardWithColor(toPay, ai, sa, sourceCard, c, xManaCostPaidByColor)) {
+                if (toPay == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(MagicColor.toShortString(c), xManaCostPaidByColor)) {
+                    continue;
+                }
+
+                if (!sa.allowsPayingWithShard(sourceCard, c)) {
+                    continue;
+                }
+
+                if (ai.getManaPool().canPayForShardWithColor(toPay, c) && reflected.contains(MagicColor.toLongString(c))) {
                     m.setExpressChoice(MagicColor.toShortString(c));
                     return true;
                 }
@@ -1148,37 +1163,20 @@ public class ComputerUtilMana {
             return false;
         }
 
-        for (String s : m.mana(ma).split(" ")) {
-            if (canPayShardWithProducedMana(toPay, ai, sa, sourceCard, s, xManaCostPaidByColor)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean canPayShardWithProducedMana(final ManaCostShard toPay, final Player ai, final SpellAbility sa,
-            final Card sourceCard, final String produced, final Map<String, Integer> xManaCostPaidByColor) {
-        if (produced.isEmpty()) {
+        if (!sa.allowsPayingWithShard(sourceCard, MagicColor.fromName(m.getOrigProduced()))) {
             return false;
         }
-        if ("Any".equals(produced)) {
-            for (byte c : MagicColor.WUBRG) {
-                if (canPayShardWithColor(toPay, ai, sa, sourceCard, c, xManaCostPaidByColor)) {
+
+        if (toPay == ManaCostShard.COLORED_X) {
+            for (String s : m.mana(ma).split(" ")) {
+                if (ManaCostBeingPaid.canColoredXShardBePaidByColor(s, xManaCostPaidByColor)) {
                     return true;
                 }
             }
             return false;
         }
-        return canPayShardWithColor(toPay, ai, sa, sourceCard, ManaAtom.fromName(produced), xManaCostPaidByColor);
-    }
 
-    private static boolean canPayShardWithColor(final ManaCostShard toPay, final Player ai, final SpellAbility sa,
-            final Card sourceCard, final byte color, final Map<String, Integer> xManaCostPaidByColor) {
-        if (toPay == ManaCostShard.COLORED_X
-                && !ManaCostBeingPaid.canColoredXShardBePaidByColor(MagicColor.toShortString(color), xManaCostPaidByColor)) {
-            return false;
-        }
-        return sa.allowsPayingWithShard(sourceCard, color) && ai.getManaPool().canPayForShardWithColor(toPay, color);
+        return true;
     }
 
     // isManaSourceReserved returns true if sourceCard is reserved as a mana source for payment
