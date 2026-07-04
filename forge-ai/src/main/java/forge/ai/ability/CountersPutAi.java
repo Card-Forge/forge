@@ -284,17 +284,15 @@ public class CountersPutAi extends CountersAi {
         } else if (logic.startsWith("MoveCounter")) {
             return doMoveCounterLogic(ai, sa, ph);
         } else if (logic.equals("CrawlingBarrens")) {
-            boolean willActivate = SpecialCardAi.CrawlingBarrens.consider(ai, sa);
-            if (willActivate && ph.getPhase().isBefore(PhaseType.MAIN2)) {
+            if (!SpecialCardAi.CrawlingBarrens.consider(ai, sa)) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            if (ph.getPhase().isBefore(PhaseType.MAIN2)) {
                 // don't use this for mana until after combat
                 AiCardMemory.rememberCard(ai, source, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
                 return new AiAbilityDecision(25, AiPlayDecision.WaitForMain2);
             }
-
-            if (willActivate) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            }
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if (logic.equals("ChargeToBestCMC")) {
             return doChargeToCMCLogic(ai, sa);
         } else if (logic.equals("ChargeToBestOppControlledCMC")) {

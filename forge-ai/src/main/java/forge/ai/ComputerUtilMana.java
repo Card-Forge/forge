@@ -99,7 +99,7 @@ public class ComputerUtilMana {
             ability.setActivatingPlayer(card.getController());
             if (ability.isManaAbility()) {
                 score += ability.calculateScoreForManaAbility();
-                // TODO check TriggersWhenSpent
+                // TODO check TriggersWhenSpent: decrease score depending on context
             }
             else if (!ability.isTrigger() && ability.isPossible()) {
                 score += 13; //add 13 for any non-mana activated abilities
@@ -107,7 +107,7 @@ public class ComputerUtilMana {
         }
 
         if (card.isCreature()) {
-            //treat attacking and blocking as though they're non-mana abilities
+            // treat attacking and blocking as though they're non-mana abilities
             if (CombatUtil.canAttack(card)) {
                 score += 13;
             }
@@ -127,6 +127,7 @@ public class ComputerUtilMana {
             for (SpellAbility ability : sourcesForShards.get(shard)) {
                 final Card hostCard = ability.getHostCard();
                 if (!manaCardMap.containsKey(hostCard)) {
+                    // TODO +1 when reserved
                     manaCardMap.put(hostCard, scoreManaProducingCard(hostCard));
                     orderedCards.add(hostCard);
                 }
@@ -1010,7 +1011,7 @@ public class ComputerUtilMana {
     private static boolean canPayShardWithSpellAbility(ManaCostShard toPay, Player ai, SpellAbility ma, SpellAbility sa, ManaCostBeingPaid cost, boolean checkCosts, Map<String, Integer> xManaCostPaidByColor) {
         final Card sourceCard = ma.getHostCard();
 
-        if (isManaSourceReserved(ai, sourceCard, sa)) {
+        if (isManaSourceReserved(ai, sourceCard)) {
             return false;
         }
 
@@ -1109,57 +1110,48 @@ public class ComputerUtilMana {
         return true;
     }
 
-    // isManaSourceReserved returns true if sourceCard is reserved as a mana source for payment
-    // for the future spell to be cast in another phase. However, if "sa" (the spell ability that is
-    // being considered for casting) is high priority, then mana source reservation will be ignored.
-    private static boolean isManaSourceReserved(Player ai, Card sourceCard, SpellAbility sa) {
-        if (sa == null) {
-            return false;
-        }
+    // returns true if sourceCard is reserved as a mana source for payment
+    // for the future spell to be cast in another phase. However, if the spell ability that is
+    // being considered for casting is high priority, then mana source reservation will be ignored.
+    private static boolean isManaSourceReserved(Player ai, Card sourceCard) {
         if (!(ai.getController() instanceof PlayerControllerAi)) {
             return false;
         }
 
-        // Mana reserved for spell synchronization
+        // reserved for spell synchronization
         if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL)) {
             return true;
         }
 
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
 
         // For combat tricks, always obey mana reservation
         if (curPhase == PhaseType.COMBAT_DECLARE_BLOCKERS || curPhase == PhaseType.CLEANUP) {
-            if (!(ai.getGame().getPhaseHandler().isPlayerTurn(ai))) {
+            if (ai.getGame().getPhaseHandler().isPlayerTurn(ai)) {
+                AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK);
+            } else {
                 AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
                 AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
-            } else
-                AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK);
-        } else {
-            if ((AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK)) ||
-                    (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK))) {
-                // This mana source is held elsewhere for a combat trick.
-                return true;
             }
+        } else if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK) ||
+                AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK)) {
+            // This mana source is held elsewhere for a combat trick.
+            return true;
         }
 
-        // If it's a low priority spell (it's explicitly marked so elsewhere in the AI with a SVar), always
-        // obey mana reservations for Main 2; otherwise, obey mana reservations depending on the "chance to reserve"
-        // AI profile variable.
-        if (sa.getSVar("LowPriorityAI").isEmpty()) {
-            if (chanceToReserve == 0 || MyRandom.getRandom().nextInt(100) >= chanceToReserve) {
-                return false;
-            }
+        int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
+        // TODO use Math.min(100 - AiAbilityDecision.rating(), chanceToReserve)
+        if (chanceToReserve == 0 || !MyRandom.percentTrue(chanceToReserve)) {
+            // using a reserved source might make rest of reservation pointless, but that's tricky to conclude
+            return false;
         }
 
         if (curPhase == PhaseType.MAIN2 || curPhase == PhaseType.CLEANUP) {
             AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
-        } else {
-            if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2)) {
-                // This mana source is held elsewhere for a Main Phase 2 spell.
-                return true;
-            }
+        } else if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2)) {
+            // mana source is held elsewhere for a Main 2 spell
+            return true;
         }
 
         return false;
@@ -1569,7 +1561,6 @@ public class ComputerUtilMana {
         final ListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
         final Game game = ai.getGame();
 
-        // Loop over all current available mana sources
         for (final Card sourceCard : getAvailableManaSources(ai, checkPlayable)) {
             if (DEBUG_MANA_PAYMENT) {
                 System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor sourceCard = " + sourceCard);
@@ -1596,7 +1587,7 @@ public class ComputerUtilMana {
                     continue;
                 }
 
-                manaMap.put(ManaAtom.GENERIC, m); // add to generic source list
+                manaMap.put(ManaAtom.GENERIC, m);
 
                 SpellAbility tail = m;
                 while (tail != null) {
@@ -1616,13 +1607,10 @@ public class ComputerUtilMana {
                         if (reList.isEmpty()) {
                             Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
                             // find possible colors
-                            for (byte color : MagicColor.WUBRG) {
-                                if (mp.canProduce(MagicColor.toShortString(color), tail) || reflectedColors.contains(MagicColor.toLongString(color))) {
-                                    manaMap.put((int)color, m);
+                            for (MagicColor.Color color : MagicColor.Color.values()) {
+                                if (mp.canProduce(color.getShortName(), tail) || reflectedColors.contains(color.getName())) {
+                                    manaMap.put((int) ManaAtom.fromName(color.getName()), m);
                                 }
-                            }
-                            if (mp.canProduce("C", tail) || reflectedColors.contains(MagicColor.Constant.COLORLESS)) {
-                                manaMap.put(ManaAtom.COLORLESS, m);
                             }
                         } else {
                             // try to guess the color the mana gets replaced to
