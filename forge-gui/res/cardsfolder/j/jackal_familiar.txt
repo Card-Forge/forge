@@ -2,5 +2,5 @@ Name:Jackal Familiar
 ManaCost:R
 Types:Creature Jackal
 PT:2/2
-K:CARDNAME can't attack or block alone.
+S:Mode$ AttackRestrict,BlockRestrict | ValidCard$ Card.Self | Description$ CARDNAME can't attack or block alone.
 Oracle:Jackal Familiar can't attack or block alone.
