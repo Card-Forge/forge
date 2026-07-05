@@ -649,7 +649,14 @@ public class AiBlockController {
     }
 
     private void makeChumpBlocks(final Combat combat, List<Card> attackers) {
-        if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
+        makeChumpBlocks(combat, attackers, true);
+    }
+
+    // recheckDanger: lifeInDanger runs a full combat damage prediction, so only
+    // re-evaluate it when a blocker was assigned since the last check - skipping
+    // an attacker leaves the combat unchanged and the previous result still holds
+    private void makeChumpBlocks(final Combat combat, List<Card> attackers, boolean recheckDanger) {
+        if (recheckDanger && !ComputerUtilCombat.lifeInDanger(ai, combat)) {
             lifeInDanger = false;
             return;
         }
@@ -663,10 +670,11 @@ public class AiBlockController {
             || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)
             || ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
             attackers.remove(0);
-            makeChumpBlocks(combat, attackers);
+            makeChumpBlocks(combat, attackers, false);
             return;
         }
 
+        boolean blocked = false;
         List<Card> chumpBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
         if (!chumpBlockers.isEmpty()) {
             final Card blocker = ComputerUtilCard.getWorstCreatureAI(chumpBlockers);
@@ -688,7 +696,7 @@ public class AiBlockController {
                             attackersLeft.remove(other);
                             blockedButUnkilled.add(other);
                             attackers.remove(other);
-                            makeChumpBlocks(combat, attackers);
+                            makeChumpBlocks(combat, attackers, true);
                             return;
                         }
                     }
@@ -698,9 +706,10 @@ public class AiBlockController {
             combat.addBlocker(attacker, blocker);
             attackersLeft.remove(attacker);
             blockedButUnkilled.add(attacker);
+            blocked = true;
         }
         attackers.remove(0);
-        makeChumpBlocks(combat, attackers);
+        makeChumpBlocks(combat, attackers, blocked);
     }
 
     // Block creatures with "can't be blocked except by two or more creatures"
