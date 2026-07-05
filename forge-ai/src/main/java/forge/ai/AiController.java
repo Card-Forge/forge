@@ -98,7 +98,7 @@ public class AiController {
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
-    private boolean timeoutReached;
+    private volatile boolean timeoutReached;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -1601,7 +1601,7 @@ public class AiController {
                     continue;
                 }
 
-                if (timeoutReached) {
+                if (timeoutReached || Thread.currentThread().isInterrupted()) {
                     timeoutReached = false;
                     break;
                 }
@@ -1681,16 +1681,23 @@ public class AiController {
         try {
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            try {
-                e.printStackTrace();
-                t.stop();
-            } catch (UnsupportedOperationException | NoSuchMethodError ex) {
-                // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
-                timeoutReached = true;
-                future.cancel(true);
-                // TODO wait a few more seconds to try and exit at a safe point before letting the engine continue
-                // TODO mark some as skipped to increase chance to find something playable next priority
+            e.printStackTrace();
+            if (e instanceof TimeoutException) {
+                // log where the eval thread currently is - each timeout doubles as a
+                // profiler sample for diagnosing remaining AI slowdowns from user logs
+                StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
+                StackTraceElement[] evalStack = t.getStackTrace();
+                for (int i = 0; i < Math.min(30, evalStack.length); i++) {
+                    sb.append("\n\tat ").append(evalStack[i]);
+                }
+                System.out.println(sb);
             }
+            // don't use Thread.stop() even where it still exists (Java <20): killing the
+            // eval thread mid-evaluation corrupts shared state; signal it to exit at the
+            // next SpellAbility via the volatile flag / interrupt instead
+            timeoutReached = true;
+            future.cancel(true);
+            // TODO mark some as skipped to increase chance to find something playable next priority
             return null;
         }
     }
