@@ -43,9 +43,9 @@ This Archipelago implementation has the following win-conditions:
 #### Generating the Archipelago Multiworld
 1. Download the [latest release](https://github.com/BramTeurlings/forge-archipelago/releases) of this repository
 2. Download the [latest release](https://github.com/BramTeurlings/forge-APWorld/releases) of the Forge APWorld repository
-3. Download the [latest release](https://github.com/ArchipelagoMW/Archipelago/releases) of the Archipelago Client
-4. Install Card-Forge using the `forge-installer-<VERSION>-SNAPSHOT.jar` file bundled in this repository's release files
-5. Install the Archipelago Client by opening the `Setup.Archipelago.<VERSION>.exe` bundled in Archipelago Client release files
+3. Download the [latest release](https://github.com/ArchipelagoMW/Archipelago/releases) of the Archipelago Launcher
+4. Install Card-Forge using the `forge-installer-<VERSION>.jar` file bundled in this repository's release files
+5. Install the Archipelago Launcher by opening the `Setup.Archipelago.<VERSION>.exe` bundled in Archipelago Launcher release files
 6. Open the Archipelago Launcher and click "Open" on the "Install APWorld" option.![img.png](docs/Adventure/Archipelago/archipelago_launcher_1.png)
 7. When prompted, select the `forge.apworld` file downloaded from the Forge APWorld repository release files.
 8. Once complete, restart the launcher.
