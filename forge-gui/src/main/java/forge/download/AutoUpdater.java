@@ -114,8 +114,16 @@ public class AutoUpdater {
     }
 
     private boolean testNetConnection() {
+        // test against the host updates are actually fetched from;
+        // releases.cardforge.org is no longer reachable and blocked all updates
+        String host;
+        try {
+            host = new URL(versionUrlString).getHost();
+        } catch (MalformedURLException e) {
+            host = "github.com";
+        }
         try (Socket socket = new Socket()) {
-            InetSocketAddress address = new InetSocketAddress("releases.cardforge.org", 443);
+            InetSocketAddress address = new InetSocketAddress(host, 443);
             socket.connect(address, 1000);
             return true;
         } catch (IOException e) {
