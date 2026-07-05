@@ -27,8 +27,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-import forge.deck.CommanderBracketCalculator;
-import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
@@ -71,8 +69,6 @@ public class VField implements IVDoc<CField> {
     // Other fields
     private final CMatchUI matchUI;
     private final PlayerView player;
-    private boolean commanderBracketTooltipCalculated = false;
-    private String commanderBracketTooltipLine;
 
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
@@ -438,11 +434,6 @@ public class VField implements IVDoc<CField> {
     }
 
     private String getCommanderBracketTooltipLine() {
-        if (commanderBracketTooltipCalculated) {
-            return commanderBracketTooltipLine;
-        }
-
-        commanderBracketTooltipCalculated = true;
         if (matchUI == null || matchUI.getGameView() == null || !matchUI.getGameView().isCommander()) {
             return null;
         }
@@ -454,14 +445,11 @@ public class VField implements IVDoc<CField> {
         if (maximumBracket < 1 || maximumBracket > 4) {
             return null;
         }
-        final Deck deck = matchUI.getGameView().getDeck(player);
-        if (deck == null) {
+        final int bracket = player.getCommanderBracket();
+        if (bracket < 1) {
             return null;
         }
-
-        commanderBracketTooltipLine = Localizer.getInstance().getMessage("lblBracket")
-                + ": " + CommanderBracketCalculator.getBracket(deck);
-        return commanderBracketTooltipLine;
+        return Localizer.getInstance().getMessage("lblBracket") + ": " + bracket;
     }
 
 }

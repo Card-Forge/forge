@@ -9,6 +9,8 @@ import com.google.common.eventbus.Subscribe;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
+import forge.deck.CommanderBracketCalculator;
+import forge.deck.Deck;
 import forge.game.*;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSubgameEnd;
@@ -197,6 +199,14 @@ public class HostedMatch {
         for (int iPlayer = 0; iPlayer < players.size(); iPlayer++) {
             final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
             final Player p = players.get(iPlayer);
+
+            // The deck is server-only, so push its derived bracket onto the PlayerView for clients
+            if (gameView.isCommander()) {
+                final Deck deck = rp.getDeck();
+                if (deck != null) {
+                    p.getView().setCommanderBracket(CommanderBracketCalculator.getBracket(deck));
+                }
+            }
 
             p.getLobbyPlayer().setAvatarIndex(rp.getPlayer().getAvatarIndex());
             if (p.getLobbyPlayer().getAvatarIndex() == -1) {
