@@ -120,32 +120,32 @@ public class ArchipelagoRandomizer {
                     }
                 }
                 case COLORLESS_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.colorlessCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.colorlessCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                    if (!archipelagoDataInstance.colorlessCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.colorlessCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
                         Archipelago.getInstance().checkLocation(10999L + archipelagoDataInstance.colorlessCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case WHITE_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.whiteCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.whiteCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                    if (!archipelagoDataInstance.whiteCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.whiteCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
                         Archipelago.getInstance().checkLocation(20999L + archipelagoDataInstance.whiteCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case BLUE_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.blueCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.blueCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                    if (!archipelagoDataInstance.blueCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.blueCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
                         Archipelago.getInstance().checkLocation(30999L + archipelagoDataInstance.blueCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case BLACK_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.blackCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.blackCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                    if (!archipelagoDataInstance.blackCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.blackCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
                         Archipelago.getInstance().checkLocation(40999L + archipelagoDataInstance.blackCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case RED_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.redCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.redCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                    if (!archipelagoDataInstance.redCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.redCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
                         Archipelago.getInstance().checkLocation(50999L + archipelagoDataInstance.redCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case GREEN_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.greenCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.greenCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                    if (!archipelagoDataInstance.greenCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.greenCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
                         Archipelago.getInstance().checkLocation(60999L + archipelagoDataInstance.greenCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }

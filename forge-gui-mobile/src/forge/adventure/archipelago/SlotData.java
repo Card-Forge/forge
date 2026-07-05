@@ -37,24 +37,8 @@ public class SlotData implements Serializable {
     public int MythicRareCardLocations;
     @SerializedName("mythic_rare_cards_per_location")
     public int MythicRareCardsPerLocation;
-    @SerializedName("include_power")
-    public int IncludePower;
-    @SerializedName("include_cheat")
-    public int IncludeCheat;
-    @SerializedName("set_unlocks_percentage")
-    public int SetUnlocksPercentage;
     @SerializedName("gift_pack")
     public int GiftPack;
-    @SerializedName("gold_percentage")
-    public int GoldPercentage;
-    @SerializedName("mana_shard_percentage")
-    public int ManaShardPercentage;
-    @SerializedName("life_upgrade_percentage")
-    public int LifeUpgradePercentage;
-    @SerializedName("equipment_percentage")
-    public int EquipmentPercentage;
-    @SerializedName("try_include_all_equipment")
-    public int TryIncludeAllEquipment;
     @SerializedName("min_shop_price")
     public int MinShopPrice;
     @SerializedName("max_shop_price")
