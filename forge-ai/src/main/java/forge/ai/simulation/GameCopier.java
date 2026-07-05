@@ -100,7 +100,6 @@ public class GameCopier {
             newPlayer.setBlessing(origPlayer.hasBlessing(), null);
             newPlayer.setDescended(origPlayer.getDescended());
             newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
-            newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
             for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++) {
                 newPlayer.addSpellCastThisTurn();
             }
