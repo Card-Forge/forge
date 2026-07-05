@@ -104,7 +104,6 @@ public class GameCopier {
             // here would create a second effect card the zone copy duplicates.
             newPlayer.setDescended(origPlayer.getDescended());
             newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
-            newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
             for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++) {
                 newPlayer.addSpellCastThisTurn();
             }

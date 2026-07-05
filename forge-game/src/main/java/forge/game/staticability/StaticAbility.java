@@ -552,7 +552,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
 
     public int getMayPlayTurn() {
-        return mayPlayTurn + (int)this.hostCard.getGame().getStack().getSpellsCastThisTurn().stream().filter(sp -> this.equals(sp.getMayPlay())).count();
+        return mayPlayTurn + (int)this.hostCard.getGame().getStack().getSpellsCastThisTurn().values().stream().filter(sp -> this.equals(sp.getMayPlay())).count();
     }
 
     public void incMayPlayTurn() {
