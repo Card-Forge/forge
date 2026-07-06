@@ -1692,11 +1692,24 @@ public class AiController {
                 }
                 System.out.println(sb);
             }
-            // don't use Thread.stop() even where it still exists (Java <20): killing the
-            // eval thread mid-evaluation corrupts shared state; signal it to exit at the
-            // next SpellAbility via the volatile flag / interrupt instead
+            // ask the eval thread to exit at the next SpellAbility check first: a brutal
+            // Thread.stop() mid-evaluation can leave partially mutated shared state behind
             timeoutReached = true;
             future.cancel(true);
+            try {
+                t.join(500);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+            if (t.isAlive()) {
+                // last resort, see #8302: the eval thread may be stuck inside a single
+                // evaluation or an infinite loop and never reach the cooperative exit
+                try {
+                    t.stop();
+                } catch (UnsupportedOperationException | NoSuchMethodError ex) {
+                    // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
+                }
+            }
             // TODO mark some as skipped to increase chance to find something playable next priority
             return null;
         }
