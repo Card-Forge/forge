@@ -554,6 +554,7 @@ public class RewardScene extends UIScene {
                         reward = new Reward(itemData);
                     }
                 } else if (archipelagoMode == ArchipelagoMode.networked_archipelago && type == Type.Shop && (shopActor.getName().toLowerCase().contains("equipment") || shopActor.getName().toLowerCase().contains("items"))) {
+                    // Prevent the game from removing the shop entry so we can show it as sold.
                     skipCard = false;
                     itemAlreadySold = reward.getItem().archipelagoAlreadyChecked;
                 }

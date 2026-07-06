@@ -728,10 +728,10 @@ public class MapStage extends GameStage {
                         shopsAlreadyPresent.add(data.name);
                         Array<Reward> ret = new Array<>();
                         WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
-                        // Todo: This is where equipment shops load their rewards. Each reward has a RewardType of "item" and comes pre-defined with an item name.
-                        //  They are defined in Shandalar/Shops.json as Equipment, <Color>Item and <Color>Equipment. We can dynamically detect those names and replace their items if AP mode is enabled here.
-                        //  The "Equipment" shop is used generically for all non capital equipment vendors and as such always carries the same items.
-                        //  Some equipment doesn't have a cost so we'll need to make up a number for how much it will cost to buy.
+                        // This is where equipment shops load their rewards. Each reward has a RewardType of "item" and comes pre-defined with an item name.
+                        //  They are defined in Shandalar/Shops.json as Equipment, <Color>Item and <Color>Equipment.
+                        //  We dynamically detect those names and replace their items if AP mode is enabled here.
+                        //  The "Equipment" shop is used generically for all non-capital equipment vendors and as such always carries the same items.
                         switch (ArchipelagoData.getInstance().getArchipelagoMode()) {
                             case disabled:
                                 for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
@@ -739,8 +739,6 @@ public class MapStage extends GameStage {
                                 }
                                 break;
                             case solo_randomizer:
-                                // Todo: Get randomized subset from the total list of available items inside ArchipelagoData.
-                                //  Also, there's code duplication here, you should fix that by making a function.
                                 if (data.name.toLowerCase().contains("equipment") || data.name.toLowerCase().contains("items")) {
                                     // Get list of items for specific shop.
                                     Object[] randomizedEquipmentList = LocalRandomizer.getInstance().getItemsForEquipmentShop(data.name);
@@ -769,6 +767,7 @@ public class MapStage extends GameStage {
                                         ret.addAll(rdata.generate(false, false));
                                     }
                                 }
+                                break;
                         }
                         ShopActor actor = new ShopActor(this, id, ret, data);
                         addMapActor(obj, actor);

@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
+import forge.adventure.archipelago.ArchipelagoMode;
 import forge.adventure.data.AdventureEventData;
 import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.data.ItemData;
@@ -92,8 +93,11 @@ public class AdventureDeckEditor extends FDeckEditor {
         public ItemPool<PaperCard> getCardPool() {
             ItemPool<PaperCard> pool = new ItemPool<>(PaperCard.class);
             pool.addAll(Current.player().getCards());
-            for (Map.Entry<PaperCard, Integer> card : pool) {
-                card.getKey().setLocked(!ArchipelagoData.getInstance().checkCardUnlocked(card.getKey()));
+            ArchipelagoData apData = ArchipelagoData.getInstance();
+            if (apData.getArchipelagoMode() != ArchipelagoMode.disabled) {
+                for (Map.Entry<PaperCard, Integer> card : pool) {
+                    card.getKey().setLocked(!apData.checkCardUnlocked(card.getKey()));
+                }
             }
             return pool;
         }
@@ -981,7 +985,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected void addDefaultFilters() {
             this.addFilter(new CardColorFilter(this));
             this.addFilter(new CardTypeFilter(this));
-            this.addFilter(new CardLockFilter(this));
+            if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled) this.addFilter(new CardLockFilter(this));
         }
 
         @Override

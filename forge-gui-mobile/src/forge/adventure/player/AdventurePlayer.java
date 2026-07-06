@@ -1011,8 +1011,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 addShards(reward.getCount());
                 break;
         }
-        // Todo: Remove this so it only shows important notifications but this is a good example of how to summon a dialog.
-        // GameHUD.getInstance().addNotification(forgeNotification, 0.5f, 3f, 0.5f);
     }
 
     private void refreshEditor() {
