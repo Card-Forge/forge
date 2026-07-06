@@ -919,20 +919,6 @@ public class ReplacementHandler {
      * @return true if there is some resolved fog effect
      */
     public final boolean isPreventCombatDamageThisTurn() {
-        // cache per game timestamp: the set of active fog effects only changes together
-        // with events that advance it (zone changes, ability grants), and this check
-        // sits in the AI's combat prediction hot path
-        final long ts = game.getTimestamp();
-        if (preventCombatDamageTimestamp != ts) {
-            preventCombatDamageResult = checkPreventCombatDamageThisTurn();
-            preventCombatDamageTimestamp = ts;
-        }
-        return preventCombatDamageResult;
-    }
-    private volatile long preventCombatDamageTimestamp = -1;
-    private volatile boolean preventCombatDamageResult = false;
-
-    private boolean checkPreventCombatDamageThisTurn() {
         // a fog effect can only be active from a zone in STATIC_ABILITIES_SOURCE_ZONES
         // (zonesCheck below rejects other zones), so don't scan libraries and hands
         for (final Card c : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
