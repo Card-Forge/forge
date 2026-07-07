@@ -180,13 +180,6 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Life, p.getLife());
     }
 
-    public int getCommanderBracket() {
-        return get(TrackableProperty.CommanderBracket);
-    }
-    public void setCommanderBracket(final int bracket) {
-        set(TrackableProperty.CommanderBracket, bracket);
-    }
-
     public boolean getIsExtraTurn() {
         return get(TrackableProperty.IsExtraTurn);
     }

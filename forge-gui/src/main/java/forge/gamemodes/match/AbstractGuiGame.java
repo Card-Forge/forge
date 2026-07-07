@@ -2,6 +2,7 @@ package forge.gamemodes.match;
 
 import com.google.common.collect.*;
 
+import forge.deck.Deck;
 import forge.game.GameEntityView;
 import forge.game.GameEndReason;
 import forge.game.GameLog;
@@ -21,6 +22,8 @@ import forge.gui.control.PlaybackSpeed;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IMayViewCards;
 import forge.interfaces.IGameController;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
@@ -104,6 +107,36 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     public final GameView getGameView() {
         return gameView;
+    }
+
+    // Network clients have no server-side match, so decks are only reachable through the lobby.
+    // Null on the host and in local games, where getGameView().getDeck() works directly.
+    private GameLobby clientLobby;
+
+    public final void setClientLobby(final GameLobby lobby) {
+        clientLobby = lobby;
+    }
+
+    public final Deck getDeckForPlayer(final PlayerView player) {
+        if (player == null) {
+            return null;
+        }
+        if (clientLobby != null) {
+            for (int i = 0; i < clientLobby.getNumberOfSlots(); i++) {
+                final LobbySlot slot = clientLobby.getSlot(i);
+                if (slot != null && player.getLobbyPlayerName().equals(slot.getName())) {
+                    return slot.getDeck();
+                }
+            }
+            return null;
+        }
+        return gameView == null ? null : gameView.getDeck(player);
+    }
+
+    public final int getMaximumCommanderBracket() {
+        return clientLobby != null
+                ? clientLobby.getData().getMaximumCommanderBracket()
+                : FModel.getPreferences().getPrefInt(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET);
     }
 
     /**

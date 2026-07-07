@@ -253,6 +253,9 @@ public class GameView extends TrackableObject {
     }
 
     public Deck getDeck(final PlayerView pv) {
+        if (getMatch() == null) { // transient, null on network clients after deserialization
+            return null;
+        }
         for (final RegisteredPlayer rp : getMatch().getPlayers()) {
             if (pv.isLobbyPlayer(rp.getPlayer())) {
                 return rp.getDeck();

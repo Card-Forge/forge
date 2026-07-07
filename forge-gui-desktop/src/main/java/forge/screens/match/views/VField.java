@@ -27,6 +27,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import forge.deck.CommanderBracketCalculator;
+import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
@@ -35,9 +37,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
-import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CField;
 import forge.toolbox.FLabel;
@@ -69,6 +69,8 @@ public class VField implements IVDoc<CField> {
     // Other fields
     private final CMatchUI matchUI;
     private final PlayerView player;
+    private boolean commanderBracketTooltipCalculated = false;
+    private String commanderBracketTooltipLine;
 
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
@@ -434,6 +436,11 @@ public class VField implements IVDoc<CField> {
     }
 
     private String getCommanderBracketTooltipLine() {
+        if (commanderBracketTooltipCalculated) {
+            return commanderBracketTooltipLine;
+        }
+
+        commanderBracketTooltipCalculated = true;
         if (matchUI == null || matchUI.getGameView() == null || !matchUI.getGameView().isCommander()) {
             return null;
         }
@@ -441,15 +448,18 @@ public class VField implements IVDoc<CField> {
         if (gameType == GameType.Adventure || gameType == GameType.AdventureEvent) {
             return null;
         }
-        final int maximumBracket = FModel.getPreferences().getPrefInt(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET);
+        final int maximumBracket = matchUI.getMaximumCommanderBracket();
         if (maximumBracket < 1 || maximumBracket > 4) {
             return null;
         }
-        final int bracket = player.getCommanderBracket();
-        if (bracket < 1) {
+        final Deck deck = matchUI.getDeckForPlayer(player);
+        if (deck == null) {
             return null;
         }
-        return Localizer.getInstance().getMessage("lblBracket") + ": " + bracket;
+
+        commanderBracketTooltipLine = Localizer.getInstance().getMessage("lblBracket")
+                + ": " + CommanderBracketCalculator.getBracket(deck);
+        return commanderBracketTooltipLine;
     }
 
 }
