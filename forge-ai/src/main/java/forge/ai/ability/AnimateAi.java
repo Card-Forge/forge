@@ -258,6 +258,13 @@ public class AnimateAi extends SpellAbilityAi {
                 if (list.isEmpty()) {
                     return decision;
                 }
+                // don't gift a beneficial effect to an opponent's creature if self-targeting is possible
+                if (!sa.isCurse()) {
+                    List<Card> ownChoices = CardLists.filterControlledBy(list, aiPlayer);
+                    if (!ownChoices.isEmpty()) {
+                        list = ownChoices;
+                    }
+                }
                 Card toAnimate = ComputerUtilCard.getWorstAI(list);
                 rememberAnimatedThisTurn(aiPlayer, toAnimate);
                 sa.getTargets().add(toAnimate);
@@ -434,6 +441,35 @@ public class AnimateAi extends SpellAbilityAi {
             sa.getTargets().add(best);
             rememberAnimatedThisTurn(ai, best);
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        // Pure P/T-setting effect without type or ability changes (e.g. Genemorph Imago):
+        // buff own creatures that actually gain from it, or shrink an opponent's
+        if (logic.isEmpty() && sa.hasParam("Power") && sa.hasParam("Toughness")
+                && !sa.hasParam("Types") && !sa.hasParam("Keywords") && !sa.hasParam("Abilities")) {
+            Card best = null;
+            int bestGain = 0;
+            for (final Card c : list) {
+                if (!c.isCreature()) {
+                    continue;
+                }
+                final Card animatedCopy = becomeAnimated(c, sa);
+                int gain = ComputerUtilCard.evaluateCreature(animatedCopy) - ComputerUtilCard.evaluateCreature(c);
+                if (c.getController().isOpponentOf(ai)) {
+                    // making an opponent's creature smaller is worth as much as it loses
+                    gain = -gain;
+                }
+                if (gain > bestGain) {
+                    bestGain = gain;
+                    best = c;
+                }
+            }
+            if (best != null) {
+                rememberAnimatedThisTurn(ai, best);
+                sa.getTargets().add(best);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
