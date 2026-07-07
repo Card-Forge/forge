@@ -42,6 +42,7 @@ import forge.game.ability.ApiType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -102,12 +103,15 @@ public class ReplacementHandler {
             Card c = preList.get(crd);
             Zone cardZone = game.getZoneOf(c);
 
-            // tap/untap events can only be replaced by effects active from open zones;
-            // don't scan libraries and hands for them - this is a major hot path, as
-            // canTap/canUntap run a cantHappenCheck per mana source per AI cost check
-            if ((event == ReplacementType.Tap || event == ReplacementType.Untap)
+            // all tap/untap replacements are active from the battlefield or the command zone
+            // (e.g. Ood Sphere); skip other zones - this is a major hot path, as canTap/canUntap
+            // run a cantHappenCheck per mana source per AI cost check
+            // (performance mode only, in case a custom card wants one active from elsewhere)
+            if (Spell.isPerformanceMode()
+                    && (event == ReplacementType.Tap || event == ReplacementType.Untap)
                     && cardZone != null
-                    && !ZoneType.STATIC_ABILITIES_SOURCE_ZONES.contains(cardZone.getZoneType())) {
+                    && cardZone.getZoneType() != ZoneType.Battlefield
+                    && cardZone.getZoneType() != ZoneType.Command) {
                 return true;
             }
 
