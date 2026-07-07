@@ -44,7 +44,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     private final Queue<Card> delaySelectCards = new LinkedList<>();
 
     private boolean bPaid = false;
-    protected Boolean canPayManaCost = null;
+    /** null = not yet evaluated, or not payable; otherwise cards Auto would tap */
+    private CardCollection autoPayManaSources = null;
+    private boolean autoPayManaSourcesKnown = false;
 
     private boolean locked = false;
 
@@ -349,7 +351,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 if (!restrictionsMet || chosen.getPayCosts().hasManaCost()) {
                     // force refresh in case too much mana got spent
                     updateButtons();
-                    canPayManaCost = null;
+                    invalidateAutoPayManaSources();
                 }
                 onManaAbilityPaid();
             }
@@ -405,18 +407,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         // Drop just-tapped sources from the highlight set.
         getController().pushActionableCards(true);
         if (supportAutoPay()) {
-            if (canPayManaCost == null) {
-                //use AI utility to determine if mana cost can be paid if that hasn't been determined yet
-                Evaluator<Boolean> proc = new Evaluator<Boolean>() {
-                    @Override
-                    public Boolean evaluate() {
-                        return ComputerUtilMana.canPayManaCost(manaCost, saPaidFor, player, effect);
-                    }
-                };
-                runAsAi(proc);
-                canPayManaCost = proc.getResult();
-            }
-            if (canPayManaCost) { //enabled Auto button if mana cost can be paid
+            ensureAutoPayManaSources();
+            if (autoPayManaSources != null) { //enabled Auto button if mana cost can be paid
                 getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, !mandatory, true);
             }
         }
@@ -445,33 +437,39 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected abstract void done();
     protected abstract String getMessage();
 
+    private void invalidateAutoPayManaSources() {
+        autoPayManaSourcesKnown = false;
+        autoPayManaSources = null;
+    }
+
+    private void ensureAutoPayManaSources() {
+        if (autoPayManaSourcesKnown) {
+            return;
+        }
+        final ManaCostBeingPaid costCopy = new ManaCostBeingPaid(manaCost);
+        Evaluator<CardCollection> proc = new Evaluator<CardCollection>() {
+            @Override
+            public CardCollection evaluate() {
+                return ComputerUtilMana.getManaSourcesToPayCostIfAble(costCopy, saPaidFor, player);
+            }
+        };
+        runAsAi(proc);
+        autoPayManaSources = proc.getResult();
+        autoPayManaSourcesKnown = true;
+    }
+
     private void pushAutoTapPreview() {
         if (!supportAutoPay() || manaCost == null || manaCost.isPaid()) {
             getController().getGui().clearAutoTapPreviewCards();
             return;
         }
-        if (canPayManaCost == null) {
-            return;
-        }
-        if (!canPayManaCost) {
+        if (!autoPayManaSourcesKnown || autoPayManaSources == null) {
             getController().getGui().clearAutoTapPreviewCards();
             return;
         }
-
-        final ManaCostBeingPaid costCopy = new ManaCostBeingPaid(manaCost);
-        Evaluator<CardCollection> proc = new Evaluator<CardCollection>() {
-            @Override
-            public CardCollection evaluate() {
-                return ComputerUtilMana.getManaSourcesToPayCost(costCopy, saPaidFor, player);
-            }
-        };
-        runAsAi(proc);
-        final CardCollection sources = proc.getResult();
         final Set<CardView> views = new HashSet<>();
-        if (sources != null) {
-            for (Card c : sources) {
-                views.add(c.getView());
-            }
+        for (Card c : autoPayManaSources) {
+            views.add(c.getView());
         }
         getController().getGui().setAutoTapPreviewCards(views);
     }

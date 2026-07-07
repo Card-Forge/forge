@@ -672,6 +672,13 @@ public class ComputerUtilMana {
         return manaSources;
     }
 
+    /** @return cards Auto would tap to pay, or null if the cost can't be paid */
+    public static CardCollection getManaSourcesToPayCostIfAble(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
+        final ManaCostBeingPaid costCopy = new ManaCostBeingPaid(cost);
+        final CardCollection sources = getManaSourcesToPayCost(costCopy, sa, ai);
+        return costCopy.isPaid() ? sources : null;
+    }
+
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
         if ((sa.isOffering() && sa.getSacrificedAsOffering() == null) || (sa.isEmerge() && sa.getSacrificedAsEmerge() == null)) {
             // nothing was chosen
