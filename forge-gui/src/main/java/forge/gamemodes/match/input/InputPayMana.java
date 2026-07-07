@@ -21,7 +21,6 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
 import forge.gui.FThreads;
-import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.PlayerControllerHuman;
 import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
@@ -68,7 +67,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     @Override
     protected void onStop() {
         getController().clearActionableCards();
-        getController().getGui().clearAutoTapPreviewCards();
         if (!isFinished()) {
             // Clear current Mana cost being paid for SA
             saPaidFor.setManaCostBeingPaid(null);
@@ -405,15 +403,14 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (activateDelayedCard()) {
             return;
         }
-        // Drop just-tapped sources from the highlight set.
-        getController().pushActionableCards(true);
         if (supportAutoPay()) {
             ensureAutoPayManaSources();
             if (autoPayManaSources != null) { //enabled Auto button if mana cost can be paid
                 getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, !mandatory, true);
             }
         }
-        pushAutoTapPreview();
+        // Drop just-tapped sources from the highlight set; emphasize the AI's auto-tap plan.
+        getController().pushActionableCards(true, getAutoTapPreviewViews());
         showMessage(getMessage(), saPaidFor.getView());
     }
 
@@ -459,21 +456,17 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         autoPayManaSourcesKnown = true;
     }
 
-    private void pushAutoTapPreview() {
+    /** Cards the Auto button would tap, for emphasized highlighting; null when unavailable. */
+    private Iterable<CardView> getAutoTapPreviewViews() {
         if (!supportAutoPay() || manaCost == null || manaCost.isPaid()
-                || !getController().getYieldController().getBoolPref(FPref.UI_SHOW_AUTOTAP_PREVIEW)) {
-            getController().getGui().clearAutoTapPreviewCards();
-            return;
-        }
-        if (!autoPayManaSourcesKnown || autoPayManaSources == null) {
-            getController().getGui().clearAutoTapPreviewCards();
-            return;
+                || !autoPayManaSourcesKnown || autoPayManaSources == null) {
+            return null;
         }
         final Set<CardView> views = new HashSet<>();
         for (Card c : autoPayManaSources) {
             views.add(c.getView());
         }
-        getController().getGui().setAutoTapPreviewCards(views);
+        return views;
     }
 
     @Override

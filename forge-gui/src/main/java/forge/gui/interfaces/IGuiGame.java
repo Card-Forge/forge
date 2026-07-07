@@ -276,9 +276,6 @@ public interface IGuiGame {
     void setWeaklySelectable(final Iterable<CardView> cards);
     void clearWeaklySelectable();
 
-    void setAutoTapPreviewCards(final Iterable<CardView> cards);
-    void clearAutoTapPreviewCards();
-
     boolean isGamePaused();
     void setGamePause(boolean pause);
 

@@ -739,30 +739,6 @@ public final class CMatchUI
     }
 
     @Override
-    public void setAutoTapPreviewCards(final Iterable<CardView> cards) {
-        super.setAutoTapPreviewCards(cards);
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
-            }
-            FloatingZone.refreshAll();
-        });
-    }
-
-    @Override
-    public void clearAutoTapPreviewCards() {
-        super.clearAutoTapPreviewCards();
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
-            }
-            FloatingZone.refreshAll();
-        });
-    }
-
-    @Override
     public void refreshField() {
         super.refreshField();
         FThreads.invokeInEdtNowOrLater(() -> {
