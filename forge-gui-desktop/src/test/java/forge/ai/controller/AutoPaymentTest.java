@@ -40,6 +40,11 @@ public class AutoPaymentTest extends SimulationTest {
         return result[0];
     }
 
+    private void assertProductionPayment(Game game, Player p, ManaCostBeingPaid mc, SpellAbility sa) {
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+        AssertJUnit.assertTrue(prodAutoPay(game, p, mc, sa));
+    }
+
     private int countTapped(Game game, String name) {
         int i = 0;
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
@@ -203,14 +208,11 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
-        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
-        AssertJUnit.assertTrue(score > 0);
-        Game simGame = sim.getSimulatedGameState();
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("R W"), sa);
 
-        AssertJUnit.assertNotNull(findSpellCard(simGame, "Lightning Helix"));
-        AssertJUnit.assertEquals("Signet should be tapped", 1, countTapped(simGame, "Boros Signet"));
-        int tappedBasics = countTapped(simGame, "Mountain") + countTapped(simGame, "Plains");
+        AssertJUnit.assertEquals("Signet should be tapped", 1, countTapped(game, "Boros Signet"));
+        int tappedBasics = countTapped(game, "Mountain") + countTapped(game, "Plains");
         AssertJUnit.assertEquals("Only one basic should pay the Signet's {1}", 1, tappedBasics);
     }
 
@@ -227,14 +229,11 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
-        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
-        AssertJUnit.assertTrue(score > 0);
-        Game simGame = sim.getSimulatedGameState();
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("R"), sa);
 
-        AssertJUnit.assertNotNull(findSpellCard(simGame, "Shock"));
-        AssertJUnit.assertEquals("Mountain should be tapped for R", 1, countTapped(simGame, "Mountain"));
-        AssertJUnit.assertEquals("Signet should be untapped", 0, countTapped(simGame, "Boros Signet"));
+        AssertJUnit.assertEquals("Mountain should be tapped for R", 1, countTapped(game, "Mountain"));
+        AssertJUnit.assertEquals("Signet should be untapped", 0, countTapped(game, "Boros Signet"));
     }
 
     // {R}{W} with two Signets + one Plains should use one Signet + Plains, not both Signets (anti-chain rule D).
@@ -251,14 +250,11 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
-        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
-        AssertJUnit.assertTrue(score > 0);
-        Game simGame = sim.getSimulatedGameState();
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("R W"), sa);
 
-        AssertJUnit.assertNotNull(findSpellCard(simGame, "Lightning Helix"));
-        AssertJUnit.assertEquals("Exactly one Signet should be used", 1, countTapped(simGame, "Boros Signet"));
-        AssertJUnit.assertEquals("Plains pays the Signet's {1}", 1, countTapped(simGame, "Plains"));
+        AssertJUnit.assertEquals("Exactly one Signet should be used", 1, countTapped(game, "Boros Signet"));
+        AssertJUnit.assertEquals("Plains pays the Signet's {1}", 1, countTapped(game, "Plains"));
     }
 
     // {B} with Swamp + Initiates: tap the Swamp, never the useless 1:1 filter (rule H).
@@ -275,14 +271,11 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
-        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
-        AssertJUnit.assertTrue(score > 0);
-        Game simGame = sim.getSimulatedGameState();
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("B"), sa);
 
-        AssertJUnit.assertNotNull(findSpellCard(simGame, "Duress"));
-        AssertJUnit.assertEquals("Swamp should be tapped for B", 1, countTapped(simGame, "Swamp"));
-        AssertJUnit.assertEquals("Initiates should not be used", 0, countTapped(simGame, "Initiates of the Ebon Hand"));
+        AssertJUnit.assertEquals("Swamp should be tapped for B", 1, countTapped(game, "Swamp"));
+        AssertJUnit.assertEquals("Initiates should not be used", 0, countTapped(game, "Initiates of the Ebon Hand"));
     }
 
     // {R}{W} with only Plains + Signet (no Mountain) is still payable: Plains -> Signet {1}, Signet -> {R}{W}.
@@ -405,15 +398,12 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
-        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
-        AssertJUnit.assertTrue(score > 0);
-        Game simGame = sim.getSimulatedGameState();
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("R W"), sa);
 
-        AssertJUnit.assertNotNull(findSpellCard(simGame, "Lightning Helix"));
-        AssertJUnit.assertEquals("Signet should be tapped", 1, countTapped(simGame, "Boros Signet"));
-        AssertJUnit.assertEquals("Mountain should pay the Signet's {1}", 1, countTapped(simGame, "Mountain"));
-        AssertJUnit.assertEquals("Plains should stay untapped for the command-zone spell", 0, countTapped(simGame, "Plains"));
+        AssertJUnit.assertEquals("Signet should be tapped", 1, countTapped(game, "Boros Signet"));
+        AssertJUnit.assertEquals("Mountain should pay the Signet's {1}", 1, countTapped(game, "Mountain"));
+        AssertJUnit.assertEquals("Plains should stay untapped for the command-zone spell", 0, countTapped(game, "Plains"));
     }
 
     // Canopy Vista produces {W} directly; Study Hall should not be used for a lone {W} pip.

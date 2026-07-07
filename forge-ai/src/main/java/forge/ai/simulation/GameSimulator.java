@@ -217,8 +217,6 @@ public class GameSimulator {
                 if (interceptor != null) {
                     interceptor.announceX(playingSa);
                     interceptor.chooseTargets(playingSa, GameSimulator.this);
-                } else if (playingSa.usesTargeting()) {
-                    aiPlayer.getController().chooseTargetsFor(playingSa);
                 }
             });
             if (!success) {
