@@ -1075,7 +1075,7 @@ public class ComputerUtilMana {
 
             // Skip useless 1:1 filters (e.g. Initiates of the Ebon Hand: {1} -> {B}) when a direct,
             // free source for the same color is available. No net mana profit means the filter is wasteful.
-            if (isUselessFilter(paymentChoice, toPay, maList)) {
+            if (isUselessFilter(paymentChoice, toPay, maList, ai)) {
                 continue;
             }
 
@@ -1085,18 +1085,25 @@ public class ComputerUtilMana {
     }
 
     /**
-     * Skip useless 1:1 filters (e.g. Initiates of the Ebon Hand: {1} -> {B}) when a direct,
-     * free source for the same color is available. No net mana profit means the filter is wasteful.
+     * Skip useless filters when a direct source in the candidate pool can pay {@code toPay} without
+     * routing through the filter. Covers 1:1 filters (Initiates {1} -> {B}) and any-mana filters
+     * (Study Hall) when activation would burn a disposable that could pay the pip directly.
      */
-    private static boolean isUselessFilter(final SpellAbility ma, final ManaCostShard toPay, final Collection<SpellAbility> maList) {
+    private static boolean isUselessFilter(final SpellAbility ma, final ManaCostShard toPay,
+            final Collection<SpellAbility> maList, final Player ai) {
         final Cost payCosts = ma.getPayCosts();
         if (payCosts == null || !payCosts.hasManaCost()) {
             return false;
         }
         final AbilityManaPart mp = ma.getManaPart();
-        // multi-color / any / combo producers are genuine value, never useless
-        if (mp.isAnyMana() || mp.isComboMana() || mp.mana(ma).split(" ").length > 1) {
+        if (mp == null) {
             return false;
+        }
+        if (mp.isComboMana() || mp.mana(ma).split(" ").length > 1) {
+            return false;
+        }
+        if (mp.isAnyMana()) {
+            return isUselessAnyManaFilter(ma, maList, ai);
         }
         final CostPartMana costMana = payCosts.getCostMana();
         final int activationCMC = costMana == null ? 0 : costMana.getMana().getCMC();
@@ -1112,6 +1119,44 @@ public class ComputerUtilMana {
             final Cost otherCost = other.getPayCosts();
             if (otherCost != null && !otherCost.hasManaCost()) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Any-mana filters (Study Hall) are wasteful for a single pip when a disposable such as Lotus Petal
+     * could pay it directly, but still valuable when a reusable source (Plains) can pay the activation.
+     */
+    private static boolean isUselessAnyManaFilter(final SpellAbility filter, final Collection<SpellAbility> maList,
+            final Player ai) {
+        if (hasReusableActivatorForFilter(filter, ai)) {
+            return false;
+        }
+        final Card filterHost = filter.getHostCard();
+        for (SpellAbility other : maList) {
+            if (other == filter || other.getHostCard() == filterHost) {
+                continue;
+            }
+            final Cost otherCost = other.getPayCosts();
+            if (otherCost != null && !otherCost.hasManaCost() && isDisposableManaAbility(other)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** True when some reusable (non-disposable) source on the battlefield can pay this filter's activation cost. */
+    private static boolean hasReusableActivatorForFilter(final SpellAbility filter, final Player ai) {
+        if (ai == null) {
+            return false;
+        }
+        final Card filterHost = filter.getHostCard();
+        for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            for (SpellAbility ma : getAIPlayableMana(c)) {
+                if (isFreeManaSourceForNestedActivation(ma, filterHost) && !isDisposableManaAbility(ma)) {
+                    return true;
+                }
             }
         }
         return false;

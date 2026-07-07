@@ -721,6 +721,28 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertEquals("Mountain should stay untapped for Shock", 0, countTapped(simGame, "Mountain"));
     }
 
+    // {B} with only Study Hall + Lotus Petal should sacrifice the Petal directly, not route it through Study Hall.
+    @Test
+    public void studyHallDoesNotRouteDisposableThroughFilter() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Study Hall", p);
+        addCard("Lotus Petal", p);
+        Card spell = addCardToZone("Duress", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("B"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("B"), sa);
+        AssertJUnit.assertTrue("Lotus Petal should pay {B} directly", sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+        AssertJUnit.assertFalse("Study Hall should not be used when only a Petal can activate it",
+                sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+    }
+
     // Only Sol Ring + Boros Signet (3 mana total): Ring {C}{C} pays Signet's {1} and leaves {C} in the pool
     // for the spell's generic; Signet pays {R}{W}. Casts a real 3 CMC spell ({1}{R}{W}).
     @Test
