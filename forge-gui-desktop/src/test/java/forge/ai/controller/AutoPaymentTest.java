@@ -1,11 +1,17 @@
 package forge.ai.controller;
 
+import forge.ai.ComputerUtilMana;
+import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameSimulator;
 import forge.ai.simulation.Plan;
 import forge.ai.simulation.SimulationTest;
 import forge.ai.simulation.SpellAbilityPicker;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -15,8 +21,46 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-
 public class AutoPaymentTest extends SimulationTest {
+    private static ManaCostBeingPaid cost(String s) {
+        return new ManaCostBeingPaid(new ManaCost(new ManaCostParser(s)));
+    }
+
+    private boolean canAutoPay(Game game, Player p, ManaCostBeingPaid mc, SpellAbility sa) {
+        final boolean[] result = new boolean[1];
+        p.runWithController(() -> result[0] = ComputerUtilMana.canPayManaCost(mc, sa, p, false),
+                new PlayerControllerAi(game, p, p.getOriginalLobbyPlayer()));
+        return result[0];
+    }
+
+    private boolean prodAutoPay(Game game, Player p, ManaCostBeingPaid mc, SpellAbility sa) {
+        final boolean[] result = new boolean[1];
+        p.runWithController(() -> result[0] = ComputerUtilMana.payManaCost(mc, sa, p, false),
+                new PlayerControllerAi(game, p, p.getOriginalLobbyPlayer()));
+        return result[0];
+    }
+
+    private int countTapped(Game game, String name) {
+        int i = 0;
+        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            if (c.getName().equals(name) && c.isTapped()) {
+                i++;
+            }
+        }
+        return i;
+    }
+
+    /** Find a spell card after simulation (hand, stack, graveyard, or battlefield). */
+    private Card findSpellCard(Game game, String name) {
+        for (ZoneType zone : new ZoneType[] { ZoneType.Hand, ZoneType.Stack, ZoneType.Graveyard, ZoneType.Battlefield }) {
+            for (Card c : game.getCardsIn(zone)) {
+                if (c.getName().equals(name)) {
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
 
     @Test
     public void dontPayWithAshnodsAltar() {
@@ -142,5 +186,488 @@ public class AutoPaymentTest extends SimulationTest {
         // AI able to cast both creatures
         Plan plan = picker.getPlan();
         AssertJUnit.assertEquals(2, plan.getDecisions().size());
+    }
+
+    // {R}{W} with Mountain + Plains + Signet should consolidate onto one basic + Signet (rule A):
+    // exactly one basic tapped, Signet used, one basic left untapped.
+    @Test
+    public void consolidatesTwoColoredShardsOntoSignet() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mountain", p);
+        addCard("Plains", p);
+        addCard("Boros Signet", p);
+        Card spell = addCardToZone("Lightning Helix", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
+        AssertJUnit.assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        AssertJUnit.assertNotNull(findSpellCard(simGame, "Lightning Helix"));
+        AssertJUnit.assertEquals("Signet should be tapped", 1, countTapped(simGame, "Boros Signet"));
+        int tappedBasics = countTapped(simGame, "Mountain") + countTapped(simGame, "Plains");
+        AssertJUnit.assertEquals("Only one basic should pay the Signet's {1}", 1, tappedBasics);
+    }
+
+    // {R} alone with Mountain + Signet should tap the Mountain, not the Signet (single-shard penalty).
+    @Test
+    public void singleShardPrefersBasicOverSignet() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mountain", p);
+        addCard("Boros Signet", p);
+        Card spell = addCardToZone("Shock", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
+        AssertJUnit.assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        AssertJUnit.assertNotNull(findSpellCard(simGame, "Shock"));
+        AssertJUnit.assertEquals("Mountain should be tapped for R", 1, countTapped(simGame, "Mountain"));
+        AssertJUnit.assertEquals("Signet should be untapped", 0, countTapped(simGame, "Boros Signet"));
+    }
+
+    // {R}{W} with two Signets + one Plains should use one Signet + Plains, not both Signets (anti-chain rule D).
+    @Test
+    public void doesNotChainTwoSignets() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Boros Signet", p);
+        addCard("Boros Signet", p);
+        addCard("Plains", p);
+        Card spell = addCardToZone("Lightning Helix", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
+        AssertJUnit.assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        AssertJUnit.assertNotNull(findSpellCard(simGame, "Lightning Helix"));
+        AssertJUnit.assertEquals("Exactly one Signet should be used", 1, countTapped(simGame, "Boros Signet"));
+        AssertJUnit.assertEquals("Plains pays the Signet's {1}", 1, countTapped(simGame, "Plains"));
+    }
+
+    // {B} with Swamp + Initiates: tap the Swamp, never the useless 1:1 filter (rule H).
+    @Test
+    public void skipsUselessFilterWhenDirectSourceExists() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Swamp", p);
+        Card initiates = addCard("Initiates of the Ebon Hand", p);
+        initiates.setSickness(false);
+        Card spell = addCardToZone("Duress", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
+        AssertJUnit.assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        AssertJUnit.assertNotNull(findSpellCard(simGame, "Duress"));
+        AssertJUnit.assertEquals("Swamp should be tapped for B", 1, countTapped(simGame, "Swamp"));
+        AssertJUnit.assertEquals("Initiates should not be used", 0, countTapped(simGame, "Initiates of the Ebon Hand"));
+    }
+
+    // {R}{W} with only Plains + Signet (no Mountain) is still payable: Plains -> Signet {1}, Signet -> {R}{W}.
+    @Test
+    public void filterOnlyPathIsFeasible() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Boros Signet", p);
+        Card spell = addCardToZone("Lightning Helix", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("R W"), spell.getFirstSpellAbility()));
+    }
+
+    // {1}{R}{W} with only 1 Plains + Signet is not enough mana; Auto must report infeasible.
+    @Test
+    public void insufficientManaIsInfeasible() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Boros Signet", p);
+        Card spell = addCardToZone("Lightning Helix", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertFalse(canAutoPay(game, p, cost("1 R W"), spell.getFirstSpellAbility()));
+    }
+
+    // Skycloud Expanse ({1}{T}: Add {W}{U}) with a Wastes for its {1} can pay {W}{U}.
+    @Test
+    public void filterLandOnlyBaseIsFeasible() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Wastes", p);
+        addCard("Skycloud Expanse", p);
+        Card spell = addCardToZone("Azorius Charm", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("W U"), spell.getFirstSpellAbility()));
+    }
+
+    // Selesnya Signet should cover {G}{W} (with a reusable source for its {1}) instead of sacrificing Lotus Petal.
+    @Test
+    public void signetConsolidatesColoredShardsOverLotusPetal() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Wastes", p);
+        addCard("Selesnya Signet", p);
+        addCard("Lotus Petal", p);
+        Card spell = addCardToZone("Arcus Acolyte", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
+        AssertJUnit.assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        AssertJUnit.assertNotNull(findSpellCard(simGame, "Arcus Acolyte"));
+        AssertJUnit.assertNotNull("Lotus Petal should not be sacrificed", findSpellCard(simGame, "Lotus Petal"));
+        AssertJUnit.assertEquals("Signet should be tapped", 1, countTapped(simGame, "Selesnya Signet"));
+    }
+
+    // {W}{G}: Selesnya Signet + Mox Emerald for its {1} beats sacrificing Lotus Petal.
+    @Test
+    public void signetConsolidatesOverPetalWithMoxEmerald() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mox Emerald", p);
+        addCard("Selesnya Signet", p);
+        addCard("Lotus Petal", p);
+        Card spell = addCardToZone("Arcus Acolyte", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("W G"), spell.getFirstSpellAbility()));
+    }
+
+    // Study Hall ({1}: any) can pay the second {W} when Plains pays the first.
+    @Test
+    public void filterLandPaysSecondColoredShardAfterBasic() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Study Hall", p);
+        Card spell = addCardToZone("Flowering of the White Tree", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("W W"), spell.getFirstSpellAbility()));
+    }
+
+    // Signet {1} should tap Mountain, not Plains, when a {W} commander in command zone still needs white mana.
+    @Test
+    public void filterActivationPreservesCommandZoneCastability() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mountain", p);
+        addCard("Plains", p);
+        addCard("Boros Signet", p);
+        addCardToZone("Yoshimaru, Ever Faithful", p, ZoneType.Command);
+        Card spell = addCardToZone("Lightning Helix", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
+        AssertJUnit.assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        AssertJUnit.assertNotNull(findSpellCard(simGame, "Lightning Helix"));
+        AssertJUnit.assertEquals("Signet should be tapped", 1, countTapped(simGame, "Boros Signet"));
+        AssertJUnit.assertEquals("Mountain should pay the Signet's {1}", 1, countTapped(simGame, "Mountain"));
+        AssertJUnit.assertEquals("Plains should stay untapped for the command-zone spell", 0, countTapped(simGame, "Plains"));
+    }
+
+    // Canopy Vista produces {W} directly; Study Hall should not be used for a lone {W} pip.
+    @Test
+    public void studyHallDoesNotBeatDualLandForSingleWhite() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Study Hall", p);
+        addCard("Canopy Vista", p);
+        addCard("Snow-Covered Forest", p);
+        Card spell = addCardToZone("Healing Salve", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("W"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("W"), sa);
+        AssertJUnit.assertTrue("Canopy Vista should pay {W} directly", sources.anyMatch(c -> "Canopy Vista".equals(c.getName())));
+        AssertJUnit.assertFalse("Study Hall should not be used for a single {W}", sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+    }
+
+    private CardCollection predictedManaSources(Game game, Player p, ManaCostBeingPaid mc, SpellAbility sa) {
+        final CardCollection[] sources = new CardCollection[1];
+        p.runWithController(() -> sources[0] = ComputerUtilMana.getManaSourcesToPayCost(mc, sa, p),
+                new PlayerControllerAi(game, p, p.getOriginalLobbyPlayer()));
+        return sources[0];
+    }
+
+    // {G} with Plains + Study Hall + Lotus Petal should tap Plains for Study Hall's {1}, not sacrifice Petal.
+    @Test
+    public void studyHallBeatsLotusPetalForSingleGreen() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Study Hall", p);
+        addCard("Lotus Petal", p);
+        Card spell = addCardToZone("Hardened Scales", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("G"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("G"), sa);
+        AssertJUnit.assertTrue("Study Hall should produce {G}", sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+        AssertJUnit.assertTrue("Plains should pay Study Hall's {1}", sources.anyMatch(c -> "Plains".equals(c.getName())));
+        AssertJUnit.assertFalse("Lotus Petal should not be sacrificed", sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+    }
+
+    // Generic {1} should tap colorless mana, not an any-mana signet, when {W}{W} also need paying.
+    @Test
+    public void genericShardPrefersColorlessOverSignet() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mind Stone", p);
+        addCard("Plains", p);
+        addCard("Plains", p);
+        addCard("Arcane Signet", p);
+        Card spell = addCardToZone("Akroma's Vengeance", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("1 W W"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("1 W W"), sa);
+        AssertJUnit.assertTrue("Mind Stone should pay generic {1}", sources.anyMatch(c -> "Mind Stone".equals(c.getName())));
+        AssertJUnit.assertFalse("Arcane Signet should not pay generic {1}", sources.anyMatch(c -> "Arcane Signet".equals(c.getName())));
+    }
+
+    // Lone generic {1} should still prefer a colorless rock over a colored basic.
+    @Test
+    public void genericShardPrefersColorlessWithoutColorlessDemand() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mind Stone", p);
+        addCard("Plains", p);
+        Card spell = addCardToZone("Expedition Map", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        CardCollection sources = predictedManaSources(game, p, cost("1"), sa);
+        AssertJUnit.assertTrue("Mind Stone should pay generic {1}", sources.anyMatch(c -> "Mind Stone".equals(c.getName())));
+        AssertJUnit.assertFalse("Plains should not pay generic {1}", sources.anyMatch(c -> "Plains".equals(c.getName())));
+    }
+
+    // Eldrazi and other {C}-heavy hands should spend colored mana on generic pips and keep rocks for {C}.
+    @Test
+    public void reservesColorlessWhenHandNeedsColorlessPips() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mind Stone", p);
+        addCard("Plains", p);
+        addCardToZone("Thought-Knot Seer", p, ZoneType.Hand);
+        Card spell = addCardToZone("Expedition Map", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        CardCollection sources = predictedManaSources(game, p, cost("1"), sa);
+        AssertJUnit.assertTrue("Plains should pay generic {1}", sources.anyMatch(c -> "Plains".equals(c.getName())));
+        AssertJUnit.assertFalse("Mind Stone should be reserved for {C}", sources.anyMatch(c -> "Mind Stone".equals(c.getName())));
+    }
+
+    // Signet {1} should prefer colorless mana (Mind Stone) over a colored basic when both can pay generic.
+    @Test
+    public void nestedActivationPrefersColorlessOverColoredBasic() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mind Stone", p);
+        addCard("Mountain", p);
+        addCard("Boros Signet", p);
+        Card spell = addCardToZone("Lightning Helix", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("R W"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("R W"), sa);
+        AssertJUnit.assertTrue("Mind Stone should pay the Signet's {1}", sources.anyMatch(c -> "Mind Stone".equals(c.getName())));
+        AssertJUnit.assertFalse("Mountain should not pay generic {1}", sources.anyMatch(c -> "Mountain".equals(c.getName())));
+        AssertJUnit.assertTrue("Signet should produce both colors", sources.anyMatch(c -> "Boros Signet".equals(c.getName())));
+    }
+
+    // {2} with Sungrass Prairie + Study Hall should tap both (Prairie pays both generic pips), not also a basic.
+    @Test
+    public void multiManaFilterLandConsolidatesGenericCost() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Snow-Covered Forest", p);
+        addCard("Study Hall", p);
+        addCard("Sungrass Prairie", p);
+        Card spell = addCardToZone("Shadowspear", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("2"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("2"), sa);
+        AssertJUnit.assertTrue("Sungrass Prairie should pay {2}",
+                sources.anyMatch(c -> "Sungrass Prairie".equals(c.getName())));
+        AssertJUnit.assertTrue("Study Hall should pay Sungrass Prairie's {1}",
+                sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+        AssertJUnit.assertFalse("Forest should not be tapped for {2}",
+                sources.anyMatch(c -> "Snow-Covered Forest".equals(c.getName())));
+    }
+
+    // {2} for Thought Vessel should not spend Selesnya Signet when Phelia ({1}{W}) is still in hand.
+    @Test
+    public void genericCostPreservesSignetForHandSpell() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Study Hall", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Selesnya Signet", p);
+        addCardToZone("Phelia, Exuberant Shepherd", p, ZoneType.Hand);
+        Card spell = addCardToZone("Thought Vessel", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("2"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("2"), sa);
+        AssertJUnit.assertFalse("Signet should stay available for Phelia",
+                sources.anyMatch(c -> "Selesnya Signet".equals(c.getName())));
+        AssertJUnit.assertTrue("Study Hall should help pay {2}", sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+    }
+
+    // Lotus Petal should be reserved to activate the Signet; Signet then produces {G}{W} to pay both
+    // Luminarch Aspirant's {W} and generic {1}. Spending Petal directly on {W} strands the Signet.
+    @Test
+    public void lotusPetalCanActivateSignetForOneWhiteCost() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Lotus Petal", p);
+        addCard("Selesnya Signet", p);
+        Card spell = addCardToZone("Luminarch Aspirant", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("1 W"), spell.getFirstSpellAbility()));
+    }
+
+    // {1}{W}{G} with Plains + Lotus Petal + Study Hall must be payable: Plains -> {W}, Lotus Petal -> {G},
+    // Study Hall {C} -> generic {1}. Using Study Hall (and its nested Plains activation) for {G} strands {1}.
+    @Test
+    public void filterActivationDoesNotStrandGenericPip() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Lotus Petal", p);
+        addCard("Study Hall", p);
+        Card spell = addCardToZone("Calix, Guided by Fate", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 G W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Plains should pay {W}", sources.anyMatch(c -> "Plains".equals(c.getName())));
+        AssertJUnit.assertTrue("Lotus Petal should pay {G}", sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+        AssertJUnit.assertTrue("Study Hall should pay generic {1}", sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
+    // Only Sol Ring + Boros Signet (3 mana total): Ring {C}{C} pays Signet's {1} and leaves {C} in the pool
+    // for the spell's generic; Signet pays {R}{W}. Casts a real 3 CMC spell ({1}{R}{W}).
+    @Test
+    public void nestedManaSurplusPaysOuterGeneric() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Sol Ring", p);
+        addCard("Boros Signet", p);
+        Card spell = addCardToZone("Goblin Trenches", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertEquals(3, spell.getManaCost().getCMC());
+        ManaCostBeingPaid mc = new ManaCostBeingPaid(spell.getManaCost());
+
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+        AssertJUnit.assertTrue("Only Ring + Signet should pay a 3 CMC spell via surplus {C}",
+                prodAutoPay(game, p, mc, sa));
     }
 }
