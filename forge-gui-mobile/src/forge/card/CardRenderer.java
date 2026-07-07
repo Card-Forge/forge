@@ -839,7 +839,8 @@ public class CardRenderer {
         //Magenta outline when card is chosen
         if (MatchController.instance.isHighlighted(card)) {
             g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
-        } else if (MatchController.instance.isAutoTapPreview(card)) {
+        } else if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_AUTOTAP_PREVIEW)
+                && MatchController.instance.isAutoTapPreview(card)) {
             drawAutoTapGlow(g, cx, cy, cw, ch);
         } else if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
                 && MatchController.instance.isWeaklySelectable(card)) {

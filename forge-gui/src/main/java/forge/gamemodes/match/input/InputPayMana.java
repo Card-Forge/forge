@@ -21,6 +21,7 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
 import forge.gui.FThreads;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.PlayerControllerHuman;
 import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
@@ -459,7 +460,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     private void pushAutoTapPreview() {
-        if (!supportAutoPay() || manaCost == null || manaCost.isPaid()) {
+        if (!supportAutoPay() || manaCost == null || manaCost.isPaid()
+                || !getController().getYieldController().getBoolPref(FPref.UI_SHOW_AUTOTAP_PREVIEW)) {
             getController().getGui().clearAutoTapPreviewCards();
             return;
         }
