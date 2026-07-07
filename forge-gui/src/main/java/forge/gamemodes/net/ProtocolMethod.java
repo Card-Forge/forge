@@ -70,6 +70,8 @@ public enum ProtocolMethod implements IHasForgeLog {
     setHighlighted      (Mode.SERVER, Void.TYPE, Iterable/*GameEntityView*/.class, Boolean.TYPE),
     setWeaklySelectable (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     clearWeaklySelectable(Mode.SERVER, Void.TYPE),
+    setAutoTapPreviewCards(Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
+    clearAutoTapPreviewCards(Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class, Boolean.TYPE),
     restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, PlayerZoneUpdates.class),

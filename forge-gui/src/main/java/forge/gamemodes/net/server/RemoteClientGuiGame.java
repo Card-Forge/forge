@@ -518,6 +518,18 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
+    public void setAutoTapPreviewCards(final Iterable<CardView> cards) {
+        updateGameView();
+        send(ProtocolMethod.setAutoTapPreviewCards, cards);
+    }
+
+    @Override
+    public void clearAutoTapPreviewCards() {
+        updateGameView();
+        send(ProtocolMethod.clearAutoTapPreviewCards);
+    }
+
+    @Override
     public void setPlayerAvatar(final LobbyPlayer player, final IHasIcon ihi) {
         // TODO Auto-generated method stub
     }

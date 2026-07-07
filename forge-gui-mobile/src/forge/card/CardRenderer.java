@@ -86,6 +86,16 @@ public class CardRenderer {
         return FSkinColor.fromRGB(r, g, b);
     }
 
+    private static void drawAutoTapGlow(Graphics g, float cx, float cy, float cw, float ch) {
+        for (int layer = 4; layer >= 1; layer--) {
+            float expand = layer * Utils.scale(2f);
+            float alpha = 0.12f * layer;
+            g.drawRect(BORDER_THICKNESS + layer, FSkinColor.alphaColor(Color.YELLOW, alpha),
+                    cx - expand, cy - expand, cw + expand * 2, ch + expand * 2);
+        }
+        g.drawRect(BORDER_THICKNESS + 1, Color.YELLOW, cx, cy, cw, ch);
+    }
+
     // class that simplifies the callback logic of CachedCardImage
     static class RendererCachedCardImage extends CachedCardImage {
         boolean clearcardArtCache = false;
@@ -833,6 +843,8 @@ public class CardRenderer {
         //Magenta outline when card is chosen
         if (MatchController.instance.isHighlighted(card)) {
             g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
+        } else if (MatchController.instance.isAutoTapPreview(card)) {
+            drawAutoTapGlow(g, cx, cy, cw, ch);
         } else if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
                 && MatchController.instance.isWeaklySelectable(card)) {
             g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);

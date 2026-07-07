@@ -9,6 +9,8 @@ import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.card.Card;
+import forge.game.card.CardView;
+import forge.game.card.CardCollection;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.PlaySpellAbility;
 import forge.game.player.Player;
@@ -63,6 +65,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     @Override
     protected void onStop() {
         getController().clearActionableCards();
+        getController().getGui().clearAutoTapPreviewCards();
         if (!isFinished()) {
             // Clear current Mana cost being paid for SA
             saPaidFor.setManaCostBeingPaid(null);
@@ -417,6 +420,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, !mandatory, true);
             }
         }
+        pushAutoTapPreview();
         showMessage(getMessage(), saPaidFor.getView());
     }
 
@@ -440,6 +444,37 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected void onManaAbilityPaid() {} // some inputs overload it
     protected abstract void done();
     protected abstract String getMessage();
+
+    private void pushAutoTapPreview() {
+        if (!supportAutoPay() || manaCost == null || manaCost.isPaid()) {
+            getController().getGui().clearAutoTapPreviewCards();
+            return;
+        }
+        if (canPayManaCost == null) {
+            return;
+        }
+        if (!canPayManaCost) {
+            getController().getGui().clearAutoTapPreviewCards();
+            return;
+        }
+
+        final ManaCostBeingPaid costCopy = new ManaCostBeingPaid(manaCost);
+        Evaluator<CardCollection> proc = new Evaluator<CardCollection>() {
+            @Override
+            public CardCollection evaluate() {
+                return ComputerUtilMana.getManaSourcesToPayCost(costCopy, saPaidFor, player);
+            }
+        };
+        runAsAi(proc);
+        final CardCollection sources = proc.getResult();
+        final Set<CardView> views = new HashSet<>();
+        if (sources != null) {
+            for (Card c : sources) {
+                views.add(c.getView());
+            }
+        }
+        getController().getGui().setAutoTapPreviewCards(views);
+    }
 
     @Override
     public String toString() {

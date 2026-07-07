@@ -322,6 +322,15 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
         final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
 
+        // Yellow glow for cards that Auto would tap to pay
+        if (matchUI.isAutoTapPreview(getCard())) {
+            for (int layer = 4; layer >= 1; layer--) {
+                g2d.setColor(new Color(1f, 1f, 0f, 0.12f * layer));
+                final int n = Math.max(1, Math.round(layer * 2 * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+                g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n, cornerSize + n);
+            }
+        }
+
         // Magenta outline for when card is chosen
         if (matchUI.isHighlighted(getCard())) {
             g2d.setColor(Color.magenta);

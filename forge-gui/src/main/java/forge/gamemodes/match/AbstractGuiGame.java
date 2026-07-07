@@ -359,6 +359,23 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return weaklySelectableCards.contains(card);
     }
 
+    private final Set<CardView> autoTapPreviewCards = Sets.newHashSet();
+
+    public void setAutoTapPreviewCards(final Iterable<CardView> cards) {
+        autoTapPreviewCards.clear();
+        for (CardView cv : cards) {
+            autoTapPreviewCards.add(cv);
+        }
+    }
+
+    public void clearAutoTapPreviewCards() {
+        autoTapPreviewCards.clear();
+    }
+
+    public boolean isAutoTapPreview(final CardView card) {
+        return autoTapPreviewCards.contains(card);
+    }
+
     public boolean isGamePaused() {
         return gamePause;
     }

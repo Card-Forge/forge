@@ -581,6 +581,28 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
+    public void setAutoTapPreviewCards(final Iterable<CardView> cards) {
+        super.setAutoTapPreviewCards(cards);
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+        });
+    }
+
+    @Override
+    public void clearAutoTapPreviewCards() {
+        super.clearAutoTapPreviewCards();
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+        });
+    }
+
+    @Override
     public void afterGameEnd() {
         super.afterGameEnd();
         Forge.back(true);
