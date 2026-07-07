@@ -324,9 +324,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         // Yellow glow for cards that Auto would tap to pay
         if (matchUI.isAutoTapPreview(getCard())) {
-            for (int layer = 4; layer >= 1; layer--) {
-                g2d.setColor(new Color(1f, 1f, 0f, 0.12f * layer));
-                final int n = Math.max(1, Math.round(layer * 2 * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+            for (int layer = 2; layer >= 1; layer--) {
+                g2d.setColor(new Color(1f, 1f, 0f, 0.08f * layer));
+                final int n = Math.max(1, Math.round(layer * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
                 g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n, cornerSize + n);
             }
         }

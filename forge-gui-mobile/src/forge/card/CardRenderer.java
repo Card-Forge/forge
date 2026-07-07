@@ -87,13 +87,9 @@ public class CardRenderer {
     }
 
     private static void drawAutoTapGlow(Graphics g, float cx, float cy, float cw, float ch) {
-        for (int layer = 4; layer >= 1; layer--) {
-            float expand = layer * Utils.scale(2f);
-            float alpha = 0.12f * layer;
-            g.drawRect(BORDER_THICKNESS + layer, FSkinColor.alphaColor(Color.YELLOW, alpha),
-                    cx - expand, cy - expand, cw + expand * 2, ch + expand * 2);
-        }
-        g.drawRect(BORDER_THICKNESS + 1, Color.YELLOW, cx, cy, cw, ch);
+        g.drawRect(BORDER_THICKNESS, FSkinColor.alphaColor(Color.YELLOW, 0.16f),
+                cx - Utils.scale(1f), cy - Utils.scale(1f), cw + Utils.scale(2f), ch + Utils.scale(2f));
+        g.drawRect(BORDER_THICKNESS, FSkinColor.alphaColor(Color.YELLOW, 0.7f), cx, cy, cw, ch);
     }
 
     // class that simplifies the callback logic of CachedCardImage
