@@ -648,6 +648,79 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
 
+    // Cascade Bluffs ({U/R}{T}: Add {U}{U}, {U}{R}, or {R}{R}) with an Island paying its hybrid
+    // activation cost can pay {U}{R} on its own.
+    @Test
+    public void comboFilterLandOnlyBaseIsFeasible() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Island", p);
+        addCard("Cascade Bluffs", p);
+        Card spell = addCardToZone("Goblin Electromancer", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("U R"), sa));
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("U R"), sa));
+    }
+
+    // {U}{R} with Island + Mountain + Cascade Bluffs should consolidate onto one basic + Bluffs,
+    // like the Boros Signet consolidation, instead of tapping both basics.
+    @Test
+    public void comboFilterConsolidatesTwoColoredShards() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Island", p);
+        addCard("Mountain", p);
+        addCard("Cascade Bluffs", p);
+        Card spell = addCardToZone("Goblin Electromancer", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
+        AssertJUnit.assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        AssertJUnit.assertNotNull(findSpellCard(simGame, "Goblin Electromancer"));
+        AssertJUnit.assertEquals("Cascade Bluffs should be tapped", 1, countTapped(simGame, "Cascade Bluffs"));
+        int tappedBasics = countTapped(simGame, "Island") + countTapped(simGame, "Mountain");
+        AssertJUnit.assertEquals("Only one basic should pay the Bluffs' {U/R}", 1, tappedBasics);
+    }
+
+    // Bluffs' hybrid {U/R} can be paid by either basic; with Shock ({R}) still in hand, the Island
+    // should be tapped so the Mountain stays available.
+    @Test
+    public void comboFilterActivationPreservesHandCastability() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Island", p);
+        addCard("Mountain", p);
+        addCard("Cascade Bluffs", p);
+        addCardToZone("Shock", p, ZoneType.Hand);
+        Card spell = addCardToZone("Goblin Electromancer", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(spell.getFirstSpellAbility()).value;
+        AssertJUnit.assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        AssertJUnit.assertNotNull(findSpellCard(simGame, "Goblin Electromancer"));
+        AssertJUnit.assertEquals("Cascade Bluffs should be tapped", 1, countTapped(simGame, "Cascade Bluffs"));
+        AssertJUnit.assertEquals("Island should pay the Bluffs' {U/R}", 1, countTapped(simGame, "Island"));
+        AssertJUnit.assertEquals("Mountain should stay untapped for Shock", 0, countTapped(simGame, "Mountain"));
+    }
+
     // Only Sol Ring + Boros Signet (3 mana total): Ring {C}{C} pays Signet's {1} and leaves {C} in the pool
     // for the spell's generic; Signet pays {R}{W}. Casts a real 3 CMC spell ({1}{R}{W}).
     @Test

@@ -302,6 +302,23 @@ public class ComputerUtilMana {
     }
 
     /**
+     * True when one activation of this combo filter produces two or more mana (e.g. Cascade Bluffs
+     * {@code {U/R},{T}: Add {U}{U}, {U}{R}, or {R}{R}}).
+     */
+    private static boolean isComboConsolidatingFilter(final SpellAbility ability) {
+        if (ability.getPayCosts() == null || !ability.getPayCosts().hasManaCost()) {
+            return false;
+        }
+        final AbilityManaPart mp = ability.getManaPart();
+        if (mp == null || !mp.isComboMana()) {
+            return false;
+        }
+        final int amount = ability.hasParam("Amount")
+                ? AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("Amount"), ability) : 1;
+        return amount >= 2;
+    }
+
+    /**
      * True when one activation of this filter produces multiple colored mana at once (e.g. Boros Signet
      * {@code Produced$ R W}). {@code Produced$ Any} filters such as Study Hall add only one mana per
      * activation and must not receive the multi-shard consolidation bonus.
@@ -318,29 +335,60 @@ public class ComputerUtilMana {
     }
 
     /**
-     * True when a filter can be activated by a separate free source still available on the battlefield.
-     * Covers multi-mana signets (Boros Signet) and any-mana filters (Study Hall) so a reusable line like
-     * Plains -> Study Hall -> {G} beats sacrificing Lotus Petal for a single colored pip.
+     * True when a filter's activation cost (generic {1} or hybrid {U/R}) can be paid by separate free
+     * sources still available on the battlefield. Covers multi-mana signets (Boros Signet), any-mana
+     * filters (Study Hall) and combo filter lands (Cascade Bluffs) so a reusable consolidation line
+     * beats tapping several basics or sacrificing one-shot mana.
      */
-    private static boolean canActivateFilterWithFreeGenericSource(final SpellAbility filter,
+    private static boolean canActivateFilterWithFreeSources(final SpellAbility filter,
             final ListMultimap<Integer, SpellAbility> manaAbilityMap) {
         if (filter.getPayCosts() == null || !filter.getPayCosts().hasManaCost()) {
             return false;
         }
-        if (!manaAbilityMap.containsKey(ManaAtom.GENERIC)) {
-            return false;
-        }
         final AbilityManaPart mp = filter.getManaPart();
-        if (mp == null || mp.isComboMana()) {
+        if (mp == null) {
             return false;
         }
-        if (!isMultiShardConsolidatingFilter(filter) && !mp.isAnyMana()) {
+        if (!isMultiShardConsolidatingFilter(filter) && !isComboConsolidatingFilter(filter) && !mp.isAnyMana()) {
+            return false;
+        }
+        final CostPartMana costMana = filter.getPayCosts().getCostMana();
+        if (costMana == null) {
             return false;
         }
         final Card filterHost = filter.getHostCard();
-        for (SpellAbility candidate : manaAbilityMap.get(ManaAtom.GENERIC)) {
-            if (isFreeManaSourceForNestedActivation(candidate, filterHost)) {
-                return true;
+        final ManaCost activation = costMana.getMana();
+        if (activation.getGenericCost() > 0) {
+            boolean found = false;
+            for (final SpellAbility candidate : manaAbilityMap.get(ManaAtom.GENERIC)) {
+                if (isFreeManaSourceForNestedActivation(candidate, filterHost)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        }
+        for (final ManaCostShard shard : activation) {
+            if (!hasFreeSourceForShard(manaAbilityMap, shard, filterHost)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** True when a free source (no mana activation cost, not the filter itself) can pay this shard. */
+    private static boolean hasFreeSourceForShard(final ListMultimap<Integer, SpellAbility> manaAbilityMap,
+            final ManaCostShard shard, final Card filterHost) {
+        for (final byte color : ManaAtom.MANATYPES) {
+            if (!shard.canBePaidWithManaOfColor(color)) {
+                continue;
+            }
+            for (final SpellAbility candidate : manaAbilityMap.get((int) color)) {
+                if (isFreeManaSourceForNestedActivation(candidate, filterHost)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -363,6 +411,7 @@ public class ComputerUtilMana {
 
         // count the distinct colored shards each card can pay, so a filter covering 2+ can be prioritized
         final Map<Card, Set<ManaCostShard>> coloredShardsCovered = Maps.newHashMap();
+        final Map<Card, Set<ManaCostShard>> comboShardsCovered = Maps.newHashMap();
         for (final ManaCostShard shard : sourcesForShards.keySet()) {
             for (SpellAbility ability : sourcesForShards.get(shard)) {
                 final Card hostCard = ability.getHostCard();
@@ -371,16 +420,34 @@ public class ComputerUtilMana {
                     manaCardMap.put(hostCard, scoreManaProducingCard(hostCard));
                     orderedCards.add(hostCard);
                 }
-                if (!shard.isGeneric() && isMultiShardConsolidatingFilter(ability)) {
-                    coloredShardsCovered.computeIfAbsent(hostCard, k -> new HashSet<>()).add(shard);
+                if (!shard.isGeneric()) {
+                    if (isMultiShardConsolidatingFilter(ability)) {
+                        coloredShardsCovered.computeIfAbsent(hostCard, k -> new HashSet<>()).add(shard);
+                    } else if (isComboConsolidatingFilter(ability)) {
+                        comboShardsCovered.computeIfAbsent(hostCard, k -> new HashSet<>()).add(shard);
+                    }
                 }
             }
         }
 
-        // Consolidation bonus (rule A/B): a filter that can pay 2+ unpaid colored shards in one activation
+        // Consolidation bonus: a filter that can pay 2+ unpaid colored shards in one activation
         // (e.g. Boros Signet -> {R}{W}) should beat tapping two separate basics.
         for (Map.Entry<Card, Set<ManaCostShard>> e : coloredShardsCovered.entrySet()) {
             if (e.getValue().size() >= 2) {
+                manaCardMap.put(e.getKey(), manaCardMap.get(e.getKey()) - FILTER_CONSOLIDATION_BONUS);
+            }
+        }
+        // Combo filters (Cascade Bluffs) choose their output, so unlike fixed signets they can cover two
+        // pips of the SAME shard ({U}{U}) as well as two different ones ({U}{R}): count pips, not shards.
+        for (Map.Entry<Card, Set<ManaCostShard>> e : comboShardsCovered.entrySet()) {
+            if (coloredShardsCovered.containsKey(e.getKey())) {
+                continue; // already received the bonus above
+            }
+            int coverablePips = 0;
+            for (final ManaCostShard s : e.getValue()) {
+                coverablePips += cost.getUnpaidShards(s);
+            }
+            if (coverablePips >= 2) {
                 manaCardMap.put(e.getKey(), manaCardMap.get(e.getKey()) - FILTER_CONSOLIDATION_BONUS);
             }
         }
@@ -391,7 +458,7 @@ public class ComputerUtilMana {
             final Set<Card> genericConsolidators = new HashSet<>();
             for (SpellAbility ability : sourcesForShards.get(ManaCostShard.GENERIC)) {
                 if (isMultiShardConsolidatingFilter(ability)
-                        && canActivateFilterWithFreeGenericSource(ability, manaAbilityMap)
+                        && canActivateFilterWithFreeSources(ability, manaAbilityMap)
                         && genericConsolidators.add(ability.getHostCard())) {
                     manaCardMap.put(ability.getHostCard(),
                             manaCardMap.get(ability.getHostCard()) - FILTER_CONSOLIDATION_BONUS);
@@ -450,9 +517,9 @@ public class ComputerUtilMana {
                     if (shard.isGeneric()) {
                         if (unpaidGeneric >= 2) {
                             boolean ab1Consolidates = isMultiShardConsolidatingFilter(ability1)
-                                    && canActivateFilterWithFreeGenericSource(ability1, manaAbilityMap);
+                                    && canActivateFilterWithFreeSources(ability1, manaAbilityMap);
                             boolean ab2Consolidates = isMultiShardConsolidatingFilter(ability2)
-                                    && canActivateFilterWithFreeGenericSource(ability2, manaAbilityMap);
+                                    && canActivateFilterWithFreeSources(ability2, manaAbilityMap);
                             if (ab1Consolidates != ab2Consolidates) {
                                 return ab1Consolidates ? -1 : 1;
                             }
@@ -465,20 +532,22 @@ public class ComputerUtilMana {
                     } else if (!shard.isGeneric() && shard != ManaCostShard.COLORLESS) {
                         boolean ab1Filter = ability1.getPayCosts() != null && ability1.getPayCosts().hasManaCost();
                         boolean ab2Filter = ability2.getPayCosts() != null && ability2.getPayCosts().hasManaCost();
-                        boolean ab1ConsolidatesGeneric = ab1Filter && canActivateFilterWithFreeGenericSource(ability1, manaAbilityMap);
-                        boolean ab2ConsolidatesGeneric = ab2Filter && canActivateFilterWithFreeGenericSource(ability2, manaAbilityMap);
-                        if (ab1ConsolidatesGeneric != ab2ConsolidatesGeneric) {
-                            // Multi-shard filters consolidate colored pips (e.g. {R}{W} via Boros Signet).
-                            // Any-mana filters (Study Hall) only beat disposables — see next checks.
+                        boolean ab1Consolidates = ab1Filter && canActivateFilterWithFreeSources(ability1, manaAbilityMap);
+                        boolean ab2Consolidates = ab2Filter && canActivateFilterWithFreeSources(ability2, manaAbilityMap);
+                        if (ab1Consolidates != ab2Consolidates) {
+                            // Multi-shard filters consolidate colored pips (e.g. {R}{W} via Boros Signet,
+                            // {U}{R} via Cascade Bluffs). Any-mana filters (Study Hall) only beat
+                            // disposables — see next checks.
                             if (unpaidColoredShards >= 2
-                                    && (isMultiShardConsolidatingFilter(ability1) || isMultiShardConsolidatingFilter(ability2))) {
-                                return ab1ConsolidatesGeneric ? -1 : 1;
+                                    && (isMultiShardConsolidatingFilter(ability1) || isMultiShardConsolidatingFilter(ability2)
+                                            || isComboConsolidatingFilter(ability1) || isComboConsolidatingFilter(ability2))) {
+                                return ab1Consolidates ? -1 : 1;
                             }
                         }
-                        if (ab1ConsolidatesGeneric && isDisposableManaAbility(ability2)) {
+                        if (ab1Consolidates && isDisposableManaAbility(ability2)) {
                             return -1;
                         }
-                        if (ab2ConsolidatesGeneric && isDisposableManaAbility(ability1)) {
+                        if (ab2Consolidates && isDisposableManaAbility(ability1)) {
                             return 1;
                         }
                         if (ab1Filter != ab2Filter) {
@@ -518,7 +587,7 @@ public class ComputerUtilMana {
                 }
 
                 // Mana abilities on the same card
-                // Rule C: prefer the ability without a mana activation cost (e.g. Painted Bluffs {T}:{C}
+                // Prefer the ability without a mana activation cost (e.g. Painted Bluffs {T}:{C}
                 // over its {1}{T}: any mode) when both can pay the shard.
                 boolean ab1HasManaCost = ability1.getPayCosts() != null && ability1.getPayCosts().hasManaCost();
                 boolean ab2HasManaCost = ability2.getPayCosts() != null && ability2.getPayCosts().hasManaCost();
@@ -636,7 +705,7 @@ public class ComputerUtilMana {
             return null;
         }
         if (valid.size() == 1 || inFilterActivationProbe.get() || !shouldUseCastabilityProbeForFilterActivation(sa)
-                || valid.stream().noneMatch(ComputerUtilMana::isMultiShardConsolidatingFilter)
+                || valid.stream().noneMatch(ma -> isMultiShardConsolidatingFilter(ma) || isComboConsolidatingFilter(ma))
                 || !hasOtherHandOrCommandSpells(ai, sa)) {
             return preferSourceThatKeepsRestPayable(cost, sa, ai, toPay, valid);
         }
@@ -764,6 +833,13 @@ public class ComputerUtilMana {
         final ManaCostBeingPaid remaining = new ManaCostBeingPaid(cost);
         if (isMultiShardConsolidatingFilter(chosen)) {
             payMultipleMana(remaining, predictManafromSpellAbility(chosen, ai, toPay), ai);
+        } else if (isComboConsolidatingFilter(chosen)) {
+            setComboManaChoice(ai, chosen, remaining);
+            try {
+                payMultipleMana(remaining, predictManafromSpellAbility(chosen, ai, toPay), ai);
+            } finally {
+                chosen.getManaPart().clearExpressChoice();
+            }
         } else {
             remaining.decreaseShard(toPay, 1);
         }
@@ -997,7 +1073,7 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            // Rule H: skip useless 1:1 filters (e.g. Initiates of the Ebon Hand: {1} -> {B}) when a direct,
+            // Skip useless 1:1 filters (e.g. Initiates of the Ebon Hand: {1} -> {B}) when a direct,
             // free source for the same color is available. No net mana profit means the filter is wasteful.
             if (isUselessFilter(paymentChoice, toPay, maList)) {
                 continue;
@@ -1009,9 +1085,8 @@ public class ComputerUtilMana {
     }
 
     /**
-     * Rule H: a mana ability is a "useless filter" when it costs mana to convert into the same amount of a
-     * single color (no net gain) and another free source in the candidate pool can produce that color.
-     * Boros Signet is not useless ({1} -> {R}{W} is net +1); Initiates of the Ebon Hand ({1} -> {B}) is.
+     * Skip useless 1:1 filters (e.g. Initiates of the Ebon Hand: {1} -> {B}) when a direct,
+     * free source for the same color is available. No net mana profit means the filter is wasteful.
      */
     private static boolean isUselessFilter(final SpellAbility ma, final ManaCostShard toPay, final Collection<SpellAbility> maList) {
         final Cost payCosts = ma.getPayCosts();
@@ -1045,7 +1120,7 @@ public class ComputerUtilMana {
     /**
      * Simulate paying a mana ability's generic activation cost (e.g. a signet's {1}) during test-mode planning.
      * Only free sources (no mana activation cost of their own) may pay it, which blocks filter-for-filter
-     * chains (rule D). Consumed sources are removed from the shared candidate pool so they can't be reused.
+     * chains. Consumed sources are removed from the shared candidate pool so they can't be reused.
      *
      * @return true if the activation cost was fully paid from free sources.
      */
@@ -1218,6 +1293,9 @@ public class ComputerUtilMana {
                     return false;
                 }
             }
+            if (isComboConsolidatingFilter(saPayment)) {
+                setComboManaChoice(ai, saPayment, cost);
+            }
             final String manaProduced = predictManafromSpellAbility(saPayment, ai, toPay);
             debugLogMain(true, "  tap " + saPayment.getHostCard() + " -> " + manaProduced + " (paying " + toPay + ")");
             payMultipleMana(cost, manaProduced, ai);
@@ -1242,7 +1320,7 @@ public class ComputerUtilMana {
 
     /**
      * Choose which free source pays a filter's generic activation cost, preferring the source that keeps
-     * the most castable spells in hand and command zone afterwards (castability-aware, rule A).
+     * the most castable spells in hand and command zone afterwards (castability-aware).
      * Falls back to {@link #chooseManaAbility}.
      */
     private static SpellAbility chooseSourceForFilterActivation(final SpellAbility sa, final Player ai,
@@ -2791,10 +2869,9 @@ public class ComputerUtilMana {
             }
 
             final Cost cost = a.getPayCosts();
-            // Abilities with a colored or X mana activation cost are still too hard for the AI to plan
-            // (which color to spend, how much X, etc.). Generic-only costs like {1} (signets, filter lands)
-            // are supported via nested payment planning in payManaCost.
-            if (cost.hasManaCost() && !hasOnlyGenericManaCost(cost)) {
+            // Generic ({1}) and hybrid-only ({U/R}) activation costs are supported via nested payment
+            // planning. Single-colored, X, and phyrexian activation costs are still excluded.
+            if (cost.hasManaCost() && !hasPlannableManaActivationCost(cost)) {
                 continue;
             }
 
@@ -2814,7 +2891,6 @@ public class ComputerUtilMana {
     }
 
     // True when the ability's mana cost is only generic mana (e.g. {1}, {2}) with no colored, hybrid, or X pips.
-    // Such costs can be paid by the nested payment planner; colored/X costs are excluded from AI planning.
     private static boolean hasOnlyGenericManaCost(final Cost cost) {
         final CostPartMana manaCost = cost.getCostMana();
         if (manaCost == null) {
@@ -2822,6 +2898,32 @@ public class ComputerUtilMana {
         }
         final ManaCost mc = manaCost.getMana();
         return mc.getColorProfile() == 0 && mc.countX() == 0;
+    }
+
+    /**
+     * True when nested payment planning can pay this ability's mana activation cost: generic-only
+     * (signets, Skycloud Expanse) or hybrid-only (Cascade Bluffs, Flooded Grove).
+     */
+    private static boolean hasPlannableManaActivationCost(final Cost cost) {
+        if (hasOnlyGenericManaCost(cost)) {
+            return true;
+        }
+        final CostPartMana costMana = cost.getCostMana();
+        if (costMana == null) {
+            return true;
+        }
+        final ManaCost mc = costMana.getMana();
+        if (mc.countX() > 0 || mc.getGenericCost() > 0) {
+            return false;
+        }
+        boolean hasHybridShard = false;
+        for (final ManaCostShard shard : mc) {
+            hasHybridShard = true;
+            if (shard.isPhyrexian() || shard.isOr2Generic() || shard.isMonoColor() || !shard.isMultiColor()) {
+                return false;
+            }
+        }
+        return hasHybridShard;
     }
 
     /**
