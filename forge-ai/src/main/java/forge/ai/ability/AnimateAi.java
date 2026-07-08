@@ -12,7 +12,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AnimateEffectBase;
 import forge.game.card.*;
-import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPutCounter;
 import forge.game.keyword.Keyword;
@@ -357,10 +356,13 @@ public class AnimateAi extends SpellAbilityAi {
                 // check if its Permanent or that creature would attack
                 if (ph.isPlayerTurn(ai)) {
                     if (!"Permanent".equals(sa.getParam("Duration"))
-                            && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animatedCopy)
-                            && !"UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
+                            && !"UntilHostLeavesPlay".equals(sa.getParam("Duration"))
+                            && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animatedCopy)) {
                         continue;
                     }
+                } else if (ph.inCombat() && game.getCombat().getDefendingPlayers().contains(ai)
+                        && !ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animatedCopy)) {
+                    continue;
                 }
 
                 // store in map
@@ -399,54 +401,10 @@ public class AnimateAi extends SpellAbilityAi {
                 sa.getTargets().add(worst);
             }
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
-        if (logic.equals("SetPT")) {
-            // TODO: 1. Teach the AI to use this to save the creature from direct damage;
-            //  2. Determine the best target in a smarter way?
-            Card worst = ComputerUtilCard.getWorstCreatureAI(ai.getCreaturesInPlay());
-            Card buffed = becomeAnimated(worst, sa);
-
-            if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, buffed)
-                    && (buffed.getNetPower() - worst.getNetPower() >= 3 || !ComputerUtilCard.doesCreatureAttackAI(ai, worst))) {
-                sa.getTargets().add(worst);
-                rememberAnimatedThisTurn(ai, worst);
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            }
-        }
-
-        if (logic.equals("ValuableAttackerOrBlocker")) {
-            final Combat combat = ph.getCombat();
-            for (Card c : list) {
-                Card animated = becomeAnimated(c, sa);
-                boolean isValuableAttacker = ph.is(PhaseType.COMBAT_BEGIN, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
-                boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
-                if (isValuableAttacker || isValuableBlocker)
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            }
-        }
-
-        if (logic.equals("Worst")) {
-            Card worst = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
-            if(worst != null) {
-                sa.getTargets().add(worst);
-                rememberAnimatedThisTurn(ai, worst);
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            }
-        }
-
-        if (sa.hasParam("AITgts") && !list.isEmpty()) {
-            //No logic, but we do have preferences. Pick the best among those?
-            Card best = ComputerUtilCard.getBestAI(list);
-            sa.getTargets().add(best);
-            rememberAnimatedThisTurn(ai, best);
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
-        // Pure P/T-setting effect without type or ability changes (e.g. Genemorph Imago):
-        // buff own creatures that actually gain from it, or shrink an opponent's
-        if (logic.isEmpty() && sa.hasParam("Power") && sa.hasParam("Toughness")
-                && !sa.hasParam("Types") && !sa.hasParam("Keywords") && !sa.hasParam("Abilities")) {
+        } else if (logic.isEmpty() && sa.hasParam("Power") && sa.hasParam("Toughness")
+                && !sa.hasParam("Keywords") && !sa.hasParam("Abilities")) {
+            // Pure P/T-setting effect without card type or ability changes (e.g. Genemorph Imago):
+            // buff own creatures that actually gain from it, or shrink an opponent's
             Card best = null;
             int bestGain = 0;
             for (final Card c : list) {
@@ -470,6 +428,23 @@ public class AnimateAi extends SpellAbilityAi {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+
+        if (logic.equals("Worst")) {
+            Card worst = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
+            if (worst != null) {
+                sa.getTargets().add(worst);
+                rememberAnimatedThisTurn(ai, worst);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+        }
+
+        if (sa.hasParam("AITgts") && !list.isEmpty()) {
+            //No logic, but we do have preferences. Pick the best among those?
+            Card best = ComputerUtilCard.getBestAI(list);
+            sa.getTargets().add(best);
+            rememberAnimatedThisTurn(ai, best);
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or

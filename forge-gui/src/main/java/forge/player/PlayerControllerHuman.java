@@ -1301,6 +1301,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Mana chooseManaFromPool(final List<Mana> manaChoices) {
         if (!isFullControl(FullControlFlag.ChooseManaPoolShard))
             return manaChoices.get(0);
+        // TODO check if there are any special properties?
         final List<String> options = Lists.newArrayList();
         for (int i = 0; i < manaChoices.size(); i++) {
             final Mana m = manaChoices.get(i);
@@ -1590,7 +1591,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private boolean cardHasPlayableManaAbility(Card c) {
         for (SpellAbility sa : c.getAllPossibleAbilities(player, true)) {
-            if (sa.isManaAbility() && sa.canPlay()) return true;
+            if (sa.isManaAbility()) return true;
         }
         return false;
     }
