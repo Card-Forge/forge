@@ -580,7 +580,6 @@ public class MatchController extends NetworkGuiGame {
         });
     }
 
-
     @Override
     public void afterGameEnd() {
         super.afterGameEnd();

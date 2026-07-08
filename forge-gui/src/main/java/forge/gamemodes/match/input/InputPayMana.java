@@ -119,8 +119,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(result.size());
         for (final SpellAbility sa : result) {
             sa.setActivatingPlayer(player);
-            // fix things like retrace
-            // check only if SA can't be cast normally
             if (sa.canPlay(true)) {
                 continue;
             }
@@ -201,7 +199,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost, saPaidFor.getPayingMana())) {
             // Record paying mana from pool here
             getController().macros().addRememberedAction(new PayManaFromPoolAction(colorCode));
-            onManaAbilityPaid();
             showMessage();
         }
     }
@@ -352,7 +349,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     updateButtons();
                     invalidateAutoPayManaSources();
                 }
-                onManaAbilityPaid();
             }
             // Need to call this to unlock
             onStateChanged();
@@ -431,7 +427,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
     }
 
-    protected void onManaAbilityPaid() {} // some inputs overload it
     protected abstract void done();
     protected abstract String getMessage();
 
@@ -445,10 +440,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             return;
         }
         final ManaCostBeingPaid costCopy = new ManaCostBeingPaid(manaCost);
-        Evaluator<CardCollection> proc = new Evaluator<CardCollection>() {
+        Evaluator<CardCollection> proc = new Evaluator<>() {
             @Override
             public CardCollection evaluate() {
-                return ComputerUtilMana.getManaSourcesToPayCostIfAble(costCopy, saPaidFor, player);
+                return ComputerUtilMana.getManaSourcesToPayCost(costCopy, saPaidFor, player);
             }
         };
         runAsAi(proc);
