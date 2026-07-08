@@ -138,6 +138,9 @@ public class ReplacementHandler {
                         && replacementEffect.requirementsCheck(game)
                         && replacementEffect.canReplace(runParams)) {
                     possibleReplacers.add(replacementEffect);
+                    if (layer == ReplacementLayer.CantHappen) {
+                        return false;
+                    }
                 }
             }
             return true;
