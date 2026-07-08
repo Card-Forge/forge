@@ -447,7 +447,7 @@ public class AbilityManaPart implements java.io.Serializable {
                     return false;
                 }
 
-                continue;
+                return true;
             }
 
             // TODO refactor to differ between ForCost and ForEffect
