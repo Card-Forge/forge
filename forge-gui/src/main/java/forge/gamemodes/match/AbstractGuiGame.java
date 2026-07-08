@@ -47,7 +47,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private boolean ignoreConcedeChain = false;
     private boolean networkGame = false;
 
-    private java.util.Timer waitingTimer;
+    private Timer waitingTimer;
     private long waitingStartTime;
 
     @Override
@@ -601,9 +601,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
         this.waitingStartTime = System.currentTimeMillis();
         // Capture timer so stale EDT tick runnables detect cancel/restart and skip
-        final java.util.Timer myTimer = new java.util.Timer("waitingTimer");
+        final Timer myTimer = new Timer("waitingTimer");
         waitingTimer = myTimer;
-        myTimer.schedule(new java.util.TimerTask() {
+        myTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 FThreads.invokeInEdtLater(() -> {
