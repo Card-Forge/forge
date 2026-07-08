@@ -240,18 +240,13 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("Random")) {
+            boolean random = true;
             if (sa.getParam("Random").equals("Compare")) {
-                // RandomCompareSVar$ Y | RandomCompare$ LT1
-                String svar = sa.getParam("RandomCompareSVar");
                 String compare = sa.getParam("RandomCompare");
-                int value = AbilityUtils.calculateAmount(source, sa.getSVar(svar), sa);
-
-                if (Expressions.compare(value, compare.substring(0, 2), Integer.parseInt(compare.substring(2)))) {
-                    // If we don't meet the condition, let the player choose
-                    chainAbilities(sa, Aggregates.random(choices, num));
-                    return true;
-                }
-            } else {
+                int value = AbilityUtils.calculateAmount(source, sa.getParam("RandomCompareSVar"), sa);
+                random = Expressions.compare(value, compare.substring(0, 2), Integer.parseInt(compare.substring(2)));
+            }
+            if (random) {
                 chainAbilities(sa, Aggregates.random(choices, num));
                 return true;
             }

@@ -450,7 +450,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                             FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset, cardWidth, cardHeight);
                 }
             }
-
         }
         displayIconOverlay(g, canShow);
         if (groupCount >= 2) {
@@ -686,7 +685,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         if (card.getCounters() != null && !card.getCounters().isEmpty()) {
-
             switch (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE))) {
                 case OLD_WHEN_SMALL:
                 case TEXT:
@@ -700,7 +698,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     drawCounterTabs(g);
                     break;
             }
-
         }
 
         if(card.getMarkerText() != null) {
@@ -861,7 +858,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             drawVerticallyCenteredString(g, String.valueOf(numberOfCounters), numberBounds, largeCounterFont, largeFontMetrics);
 
         }
-
     }
 
     private void drawCounterImage(final Graphics g) {
