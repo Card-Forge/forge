@@ -787,7 +787,7 @@ public class AiController {
         }
 
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, player, true, 0, false);
-        CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
+        CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player, false);
 
         if (manaSources.isEmpty()) {
             return false;
@@ -797,7 +797,7 @@ public class AiController {
         if (exceptForThisSa != null) {
             manaSources.removeAll(ComputerUtilMana.getManaSourcesToPayCost(
                     ComputerUtilMana.calculateManaCost(exceptForThisSa.getPayCosts(), exceptForThisSa, player, true, 0, false),
-                    exceptForThisSa, player));
+                    exceptForThisSa, player, false));
         }
 
         // This is a simplification, since one mana source can produce more than one mana,

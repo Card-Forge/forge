@@ -92,8 +92,8 @@ public class ComputerUtilMana {
         return payManaCost(sa.getPayCosts(), sa, ai, true, 0, false, false);
     }
 
-    public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
-        return new CardCollection(payManaCost(cost, sa, ai, true, true, false).stream().map(m -> m.getSourceCard()).filter(Objects::nonNull));
+    public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
+        return new CardCollection(payManaCost(cost, sa, ai, true, true, effect).stream().map(m -> m.getSourceCard()).filter(Objects::nonNull));
     }
 
     private static Integer scoreManaProducingCard(final Card card) {
