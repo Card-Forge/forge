@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import forge.game.IIdentifiable;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardView;
 
 /**
  * Base for objects that mirror engine state into a serialized view consumed by GUI(s).
@@ -134,7 +137,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         if (copyingProps) { return; } //prevent infinite loop from circular reference
         copyingProps = true;
         for (final TrackableProperty prop : from.props.keySet()) {
-            prop.copyChangedProps(from, this);
+            prop.getType().copyChangedProps(from, this, prop);
         }
         // Remove properties that reverted to default on the source.
         // set() removes props that equal their default value, so they won't
@@ -211,4 +214,127 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         return copy;
     }
 
+    //special methods for updating card and player properties as needed and returning the new collection
+    public Card setCard(Card oldCard, Card newCard, TrackableProperty key) {
+        if (newCard != oldCard) {
+            set(key, CardView.get(newCard));
+        }
+        return newCard;
+    }
+    public CardCollection setCards(CardCollection oldCards, CardCollection newCards, TrackableProperty key) {
+        if (newCards == null || newCards.isEmpty()) { //avoid storing empty collections
+            set(key, null);
+            return null;
+        }
+        set(key, CardView.getCollection(newCards)); //TODO prevent overwriting list if not necessary
+        return newCards;
+    }
+    public CardCollection setCards(CardCollection oldCards, Iterable<Card> newCards, TrackableProperty key) {
+        if (newCards == null) {
+            set(key, null);
+            return null;
+        }
+        return setCards(oldCards, new CardCollection(newCards), key);
+    }
+    public CardCollection addCard(CardCollection oldCards, Card cardToAdd, TrackableProperty key) {
+        if (cardToAdd == null) { return oldCards; }
+
+        if (oldCards == null) {
+            oldCards = new CardCollection();
+        }
+        if (oldCards.add(cardToAdd)) {
+            TrackableCollection<CardView> views = get(key);
+            if (views == null) {
+                views = new TrackableCollection<>();
+                views.add(cardToAdd.getView());
+                set(key, views);
+            }
+            else if (views.add(cardToAdd.getView())) {
+                flagAsChanged(key);
+            }
+        }
+        return oldCards;
+    }
+    public CardCollection addCards(CardCollection oldCards, Iterable<Card> cardsToAdd, TrackableProperty key) {
+        if (cardsToAdd == null) { return oldCards; }
+
+        TrackableCollection<CardView> views = get(key);
+        if (oldCards == null) {
+            oldCards = new CardCollection();
+        }
+        boolean needFlagAsChanged = false;
+        for (Card c : cardsToAdd) {
+            if (c != null && oldCards.add(c)) {
+                if (views == null) {
+                    views = new TrackableCollection<>();
+                    views.add(c.getView());
+                    set(key, views);
+                }
+                else if (views.add(c.getView())) {
+                    needFlagAsChanged = true;
+                }
+            }
+        }
+        if (needFlagAsChanged) {
+            flagAsChanged(key);
+        }
+        return oldCards;
+    }
+    public CardCollection removeCard(CardCollection oldCards, Card cardToRemove, TrackableProperty key) {
+        if (cardToRemove == null || oldCards == null) { return oldCards; }
+
+        if (oldCards.remove(cardToRemove)) {
+            TrackableCollection<CardView> views = get(key);
+            if (views == null) {
+                set(key, null);
+            } else if (views.remove(cardToRemove.getView())) {
+                if (views.isEmpty()) {
+                    set(key, null); //avoid keeping around an empty collection
+                }
+                else {
+                    flagAsChanged(key);
+                }
+            }
+            if (oldCards.isEmpty()) {
+                oldCards = null; //avoid keeping around an empty collection
+            }
+        }
+        return oldCards;
+    }
+    public CardCollection removeCards(CardCollection oldCards, Iterable<Card> cardsToRemove, TrackableProperty key) {
+        if (cardsToRemove == null || oldCards == null) { return oldCards; }
+
+        TrackableCollection<CardView> views = get(key);
+        boolean needFlagAsChanged = false;
+        for (Card c : cardsToRemove) {
+            if (oldCards.remove(c)) {
+                if (views == null) {
+                    set(key, null);
+                } else if (views.remove(c.getView())) {
+                    if (views.isEmpty()) {
+                        views = null;
+                        set(key, null); //avoid keeping around an empty collection
+                        needFlagAsChanged = false; //doesn't need to be flagged a second time
+                    }
+                    else {
+                        needFlagAsChanged = true;
+                    }
+                }
+                if (oldCards.isEmpty()) {
+                    oldCards = null; //avoid keeping around an empty collection
+                    break;
+                }
+            }
+        }
+        if (needFlagAsChanged) {
+            flagAsChanged(key);
+        }
+        return oldCards;
+    }
+    public CardCollection clearCards(CardCollection oldCards, TrackableProperty key) {
+        if (oldCards != null) {
+            set(key, null);
+        }
+        return null;
+    }
 }

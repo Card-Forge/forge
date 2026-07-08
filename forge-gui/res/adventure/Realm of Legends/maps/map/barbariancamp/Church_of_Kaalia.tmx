@@ -64,12 +64,12 @@ With that, she finally collapses, dead.&quot;,
   </object>
   <object id="66" template="../../obj/treasure.tx" x="207.833" y="50.0833">
    <properties>
-    <property name="reward">{
+    <property name="reward">[{
 &quot;type&quot;: &quot;card&quot;,
 &quot;count&quot;: 3,
 &quot;subTypes&quot;: [&quot;Dragon&quot;],
 &quot;rarity&quot;: [&quot;rare&quot;]
-}</property>
+}]</property>
    </properties>
   </object>
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="207.5" y="202.667">
@@ -120,22 +120,22 @@ With that, she finally collapses, dead.&quot;,
   <object id="85" template="../../../../common/maps/obj/manashards.tx" x="96.1667" y="131.333"/>
   <object id="86" template="../../obj/treasure.tx" x="224.667" y="50.3333">
    <properties>
-    <property name="reward">{
+    <property name="reward">[{
 &quot;type&quot;: &quot;card&quot;,
 &quot;count&quot;: 3,
 &quot;subTypes&quot;: [ &quot;Angel&quot; ],
 &quot;rarity&quot;: [&quot;rare&quot;]
-}</property>
+}]</property>
    </properties>
   </object>
   <object id="87" template="../../obj/treasure.tx" x="191.667" y="49.6667">
    <properties>
-    <property name="reward">{
+    <property name="reward">[{
 &quot;type&quot;: &quot;card&quot;,
 &quot;count&quot;: 3,
 &quot;subTypes&quot;: [&quot;Demon&quot;],
 &quot;rarity&quot;: [&quot;rare&quot;]
-}</property>
+}]</property>
    </properties>
   </object>
   <object id="88" template="../../../../common/maps/obj/manashards.tx" x="320" y="161"/>

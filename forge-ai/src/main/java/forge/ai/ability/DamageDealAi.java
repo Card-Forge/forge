@@ -190,9 +190,8 @@ public class DamageDealAi extends DamageAiBase {
                     }
                     return new AiAbilityDecision(0, AiPlayDecision.StackNotEmpty);
                 }
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if ("NinThePainArtist".equals(logic)) {
             // Make sure not to mana lock ourselves + make the opponent draw cards into an immediate discard
             if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
@@ -716,7 +715,7 @@ public class DamageDealAi extends DamageAiBase {
             if (mandatory) {
                 // Sanity check: if there are any legal non-owned targets after the check (which may happen for complex cards like Rift Bolt),
                 // choose a random opponent's target before forcing targeting of own stuff
-                List<GameEntity> allTgtEntities = sa.getTargetRestrictions().getAllCandidates(sa, true);
+                List<GameEntity> allTgtEntities = sa.getTargetRestrictions().getAllCandidates(sa);
                 for (GameEntity ent : allTgtEntities) {
                     if ((ent instanceof Player && ((Player)ent).isOpponentOf(ai))
                             || (ent instanceof Card && ((Card)ent).getController().isOpponentOf(ai))) {
@@ -914,11 +913,6 @@ public class DamageDealAi extends DamageAiBase {
         final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
         int dmg = calculateDamageAmount(sa, source, damage);
-
-        // Remove all damage
-        if (sa.hasParam("Remove")) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             dmg = ComputerUtilCost.setMaxXValue(sa, ai, true);

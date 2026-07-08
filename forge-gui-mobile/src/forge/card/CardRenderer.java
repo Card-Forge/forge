@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.google.common.collect.Multiset;
 
 import forge.CachedCardImage;
 import forge.Forge;
@@ -66,6 +67,23 @@ public class CardRenderer {
         Top,
         BehindHorz,
         BehindVert
+    }
+
+    /** Pref is normalized to 6 hex chars on the write side; this just parses,
+     *  falling back to the FPref default if the stored value is malformed. */
+    private static Color parseActionableHighlightColor() {
+        String s = FModel.getPreferences().getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR);
+        try {
+            if (s != null && s.length() == 6) return rgbFromHex(s);
+        } catch (NumberFormatException ignored) {}
+        return rgbFromHex(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR.getDefault());
+    }
+
+    private static Color rgbFromHex(String s) {
+        int r = Integer.parseInt(s.substring(0, 2), 16);
+        int g = Integer.parseInt(s.substring(2, 4), 16);
+        int b = Integer.parseInt(s.substring(4, 6), 16);
+        return FSkinColor.fromRGB(r, g, b);
     }
 
     // class that simplifies the callback logic of CachedCardImage
@@ -815,6 +833,9 @@ public class CardRenderer {
         //Magenta outline when card is chosen
         if (MatchController.instance.isHighlighted(card)) {
             g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
+        } else if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
+                && MatchController.instance.isWeaklySelectable(card)) {
+            g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);
         }
         //Ability Icons
         if (unselectable) {
@@ -936,10 +957,7 @@ public class CardRenderer {
         int currentCounter = 0;
 
         if (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE)) == CounterDisplayType.OLD_WHEN_SMALL) {
-            int maxCounters = 0;
-            for (Integer numberOfCounters : card.getCounters().values()) {
-                maxCounters = Math.max(maxCounters, numberOfCounters);
-            }
+            int maxCounters = card.getCounters().entrySet().stream().mapToInt(Multiset.Entry::getCount).max().orElse(0);
 
             //if (counterBoxBaseWidth + font.getBounds(String.valueOf(maxCounters)).width > w) {
             if (font != null && !String.valueOf(maxCounters).isEmpty()) {
@@ -951,9 +969,9 @@ public class CardRenderer {
             }
         }
         int c = 0;
-        for (Map.Entry<CounterType, Integer> counterEntry : card.getCounters().entrySet()) {
-            final CounterType counter = counterEntry.getKey();
-            final int numberOfCounters = counterEntry.getValue();
+        for (Multiset.Entry<CounterType> counterEntry : card.getCounters().entrySet()) {
+            final CounterType counter = counterEntry.getElement();
+            final int numberOfCounters = counterEntry.getCount();
             //final float counterBoxRealWidth = counterBoxBaseWidth + font.getBounds(String.valueOf(numberOfCounters)).width + 4;
             if (font != null && !String.valueOf(numberOfCounters).isEmpty()) {
                 layout.setText(font, String.valueOf(numberOfCounters));
@@ -1004,9 +1022,7 @@ public class CardRenderer {
     private static void drawCounterImage(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {
         int number = 0;
         if (card.getCounters() != null) {
-            for (final Integer i : card.getCounters().values()) {
-                number += i;
-            }
+            number = card.getCounters().size();
         }
 
         final int counters = number;

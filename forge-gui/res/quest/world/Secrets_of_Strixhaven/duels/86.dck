@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Shanna
+Title=Shanna
+Icon=Shanna.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Gods_Shadow_-_Grixis_Control_(Modern,_#2935378).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+4 Tamiyo, Inquisitive Student
+2 Hydroelectric Specimen
+2 Wan Shi Tong, Librarian
+4 Snapcaster Mage
+4 Traumatic Critique
+4 Lightning Bolt
+4 Counterspell
+3 Kolaghan's Command
+4 Fatal Push
+3 Force of Negation
+1 Thundering Falls
+1 Undercity Sewers
+4 Polluted Delta
+1 Mistrise Village
+1 Blood Crypt
+1 Creeping Tar Pit
+2 Watery Grave
+4 Scalding Tarn
+2 Steam Vents
+2 Snow-Covered Island
+1 Snow-Covered Swamp
+1 Snow-Covered Mountain
+1 Otawara, Soaring City
+[Sideboard]
+2 Meltdown
+2 Fire Magic
+2 Inquisition of Kozilek
+2 Surgical Extraction
+2 Thoughtseize
+3 Mystical Dispute
+2 Obsidian Charmaw

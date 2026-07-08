@@ -248,7 +248,7 @@ ScryfallCode=BBD
 238 U Juggernaut @Kev Walker
 239 C Millennial Gargoyle @Seb McKinnon
 240 R Mind's Eye @Karl Kopinski
-241 M Mycosynth Lattice @Anthony S. Waters
+241 M Mycosynth Lattice @Anthony S. Waters & Cara Mitten
 242 C Night Market Guard @Steve Argyle
 243 C Peace Strider @Igor Kieryluk
 244 C Pierce Strider @Igor Kieryluk

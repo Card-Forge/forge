@@ -593,7 +593,7 @@ public class AiAttackController {
             final CardCollectionView beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
             for (final Card beastion : beastions) {
-                final int counters = beastion.getCounters(CounterEnumType.QUEST);
+                final int counters = beastion.getCounters(CounterType.getType("QUEST"));
                 minCreatures = Math.min(minCreatures, 7 - counters);
             }
             if (this.attackers.size() >= minCreatures) {
@@ -940,7 +940,12 @@ public class AiAttackController {
                         }
                     }
                     if (mustAttackDef != null) {
-                        combat.addAttacker(attacker, mustAttackDef);
+                        // combat is shared across these parallel futures and its attacker
+                        // multimap is not thread-safe; unsynchronized addAttacker calls
+                        // collide (ConcurrentModificationException, dropped attackers)
+                        synchronized (combat) {
+                            combat.addAttacker(attacker, mustAttackDef);
+                        }
                         attackersLeft.remove(attacker);
                         numForcedAttackers.incrementAndGet();
                     }

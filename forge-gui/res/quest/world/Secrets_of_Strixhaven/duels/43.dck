@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Samwise Gamgee
+Title=Samwise Gamgee
+Icon=Samwise Gamgee.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Jacob_Wiechmann_-_Selesnya_Landfall_(Standard,_#2940286).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Llanowar Elves
+4 Mightform Harmonizer
+4 Sazh's Chocobo
+2 Icetill Explorer
+2 Keen-Eyed Curator
+2 Surrak, Elusive Hunter
+1 Dyadrine, Synthesis Amalgam
+1 Lumbering Worldwagon
+4 Erode
+1 Snakeskin Veil
+1 Bushwhack
+4 Earthbender Ascension
+10 Forest
+4 Fabled Passage
+3 Ba Sing Se
+3 Escape Tunnel
+3 Temple Garden
+2 Hushwood Verge
+1 Plains
+[Sideboard]
+3 Mossborn Hydra
+3 Sheltered by Ghosts
+2 Pawpatch Formation
+2 Requisition Raid
+2 Rest in Peace
+2 Snakeskin Veil
+1 Pick Your Poison

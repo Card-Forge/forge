@@ -15,7 +15,6 @@ import forge.gamemodes.net.OfflineLobby;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gui.FThreads;
-import forge.gui.GuiBase;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
 import forge.localinstance.properties.ForgeConstants;
@@ -105,8 +104,6 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
             FThreads.invokeInBackgroundThread(() -> {
                 final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, Forge.getLocalizer().getMessage("lblError"), FSkinProp.ICO_WARNING, List.of(Forge.getLocalizer().getMessage("lblOK")), 1) == 0;
                 if (callBackAlwaysTrue) { //to activate online menu popup when player press play online
-                    GuiBase.setInterrupted(false);
-
                     if(FServerManager.getInstance() != null)
                         FServerManager.getInstance().stopServer();
                     if(getfGameClient() != null)
@@ -129,10 +126,6 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
 
     @Override
     public void onActivate() {
-        if (GuiBase.isInterrupted()) {
-            GuiBase.setInterrupted(false);
-            return;
-        }
         if (getGameLobby() == null) {
             revalidate();
         } else {

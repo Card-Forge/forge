@@ -20,16 +20,12 @@ public class NetDeckCategory extends NetDeckStorageBase {
         return selectAndLoad(gameType, name, false);
     }
 
-    public static Map<String, NetDeckCategory> getCategories(GameType gameType) {
-        return getCategoriesForGameType(gameType);
-    }
-
     public static NetDeckCategory selectAndLoad(GameType gameType, String name, boolean forceDownload) {
-        Map<String, NetDeckCategory> categories = getCategoriesForGameType(gameType);
+        Map<String, NetDeckCategory> categories = getCategories(gameType);
         return selectAndLoad(categories, name, forceDownload, "Select a Net Deck category");
     }
 
-    private static Map<String, NetDeckCategory> getCategoriesForGameType(GameType gameType) {
+    private static Map<String, NetDeckCategory> getCategories(GameType gameType) {
         Map<String, NetDeckCategory> categories;
         switch (gameType) {
         case Constructed:

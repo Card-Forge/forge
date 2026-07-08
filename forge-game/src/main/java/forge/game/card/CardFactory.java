@@ -406,10 +406,13 @@ public class CardFactory {
             for (String t : face.getTriggers())
                 c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
 
-            CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
+            // keywords not before variables
+            if (c.getCurrentState().addIntrinsicKeywords(face.getKeywords(), false)) {
+                c.updateKeywordsCache();
+            }
 
-            // keywords not before variables and spells
-            c.addIntrinsicKeywords(face.getKeywords(), false);
+            // add spells only after
+            CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
         }
     }
 
@@ -593,9 +596,8 @@ public class CardFactory {
             }
 
             // CR 208.3 A noncreature object not on the battlefield has power or toughness only if it has a power and toughness printed on it.
-            // currently only LKI can be trusted?
             if ((cause.hasParam("SetPower") || cause.hasParam("SetToughness")) &&
-                (state.getType().isCreature() || (originalState != null && in.getOriginalState(originalState.getStateName()).getBasePowerString() != null))) {
+                    (state.getType().isCreature() || (originalState != null && in.getOriginalState(originalState.getStateName()).hasPrintedPT()))) {
                 if (cause.hasParam("SetPower")) {
                     state.setBasePower(AbilityUtils.calculateAmount(host, cause.getParam("SetPower"), cause));
                 }

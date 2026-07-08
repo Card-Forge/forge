@@ -91,3 +91,4 @@ Name:Edge of Eternities (*)|Dir:Edge_of_Eternities|Sets:WOE, LCI, MKM, OTJ, BIG,
 Name:Marvel's Spider Man (*)|Dir:Marvels_Spider_Man|Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE, SPM
 Name:Avatar The Last Airbender (*)|Dir:Avatar_The_Last_Airbender|Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE, SPM, TLA
 Name:Lorwyn Eclipsed (*)|Dir:Lorwyn_Eclipsed|Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE, SPM, TLA, ECL
+Name:Secrets of Strixhaven (*)|Dir:Secrets_of_Strixhaven|Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE, SPM, TLA, ECL, TMT, SOS

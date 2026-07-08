@@ -16,6 +16,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
+import forge.model.FModel;
 import forge.screens.LoadingOverlay;
 import forge.screens.SplashScreen;
 import forge.screens.TransitionScreen;
@@ -42,10 +43,10 @@ public class FSkin {
     }
 
     public static void changeSkin(final String skinName) {
-        if (skinName.equals(GuiBase.getForgePrefs().getPref(FPref.UI_SKIN))) { return; }
+        if (skinName.equals(FModel.getPreferences().getPref(FPref.UI_SKIN))) { return; }
 
         //save skin preference
-        saveSkinName(GuiBase.getForgePrefs(), skinName);
+        saveSkinName(FModel.getPreferences(), skinName);
 
         Forge.setTransitionScreen(new TransitionScreen(() -> FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
             final LoadingOverlay loader = new LoadingOverlay(Forge.getLocalizer().getMessageorUseDefault("lblRestartInFewSeconds", "Forge will restart after a few seconds..."), true);
@@ -100,7 +101,7 @@ public class FSkin {
                     FSkinFont.deleteCachedFiles();
                     //use default skin if valid
                     preferredDir = def;
-                    saveSkinName(GuiBase.getForgePrefs(), "Default");
+                    saveSkinName(FModel.getPreferences(), "Default");
                 } else {
                     useFallbackDir();
                 }

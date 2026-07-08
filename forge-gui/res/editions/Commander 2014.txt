@@ -382,4 +382,4 @@ ScryfallCode=C14
 [other]
 34 emblem_teferi_temporal_archmage @Tyler Jacobson
 35 emblem_ob_nixilis_of_the_black_oath @Daarken
-36 Emblem_daretti_scrap_savant @Dan Murayama Scott
+36 emblem_daretti_scrap_savant @Dan Murayama Scott

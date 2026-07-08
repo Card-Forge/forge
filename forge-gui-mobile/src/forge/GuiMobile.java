@@ -346,6 +346,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public IGuiGame getNewGuiGame() {
+        MatchController.instance.resetForNewMatch();
         return MatchController.instance;
     }
 

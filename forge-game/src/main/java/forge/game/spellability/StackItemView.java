@@ -118,10 +118,10 @@ public class StackItemView extends TrackableObject implements IHasCardView {
     }
 
     public String getText() {
-        return get(TrackableProperty.Text);
+        return get(TrackableProperty.Description);
     }
     void updateText(SpellAbilityStackInstance si) {
-        set(TrackableProperty.Text, si.getStackDescription());
+        set(TrackableProperty.Description, si.getStackDescription());
     }
 
     public CardView getSourceCard() {

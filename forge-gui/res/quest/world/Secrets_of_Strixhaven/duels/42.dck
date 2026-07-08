@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman
+Title=Gunnery Sergeant Hartman
+Icon=Gunnery Sergeant Hartman.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Akinori_Hishida_-_Selesnya_(Standard,_#2926729).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Llanowar Elves
+4 Mightform Harmonizer
+4 Mossborn Hydra
+4 Sazh's Chocobo
+3 Keen-Eyed Curator
+2 Icetill Explorer
+1 Lumbering Worldwagon
+4 Erode
+1 Bushwhack
+4 Earthbender Ascension
+7 Forest
+4 Fabled Passage
+4 Hushwood Verge
+3 Ba Sing Se
+3 Escape Tunnel
+2 Plains
+2 Temple Garden
+[Sideboard]
+4 Sheltered by Ghosts
+3 Rest in Peace
+3 Snakeskin Veil
+3 Surrak, Elusive Hunter
+2 Leatherhead, Swamp Stalker

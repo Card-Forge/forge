@@ -26,7 +26,7 @@ ScryfallCode=PCA
 18 R Higure, the Still Wind @Christopher Moeller
 19 U Illusory Angel @Allen Williams
 20 C Mistblade Shinobi @Kev Walker
-21 C Ninja of the Deep Hours @Dan Scott
+21 C Ninja of the Deep Hours @Dan Murayama Scott
 22 U Peregrine Drake @Bob Eggleton
 23 C Primal Plasma @Luca Zontini
 24 R Sakashima's Student @Brian Snõddy
@@ -134,7 +134,7 @@ ScryfallCode=PCA
 126 C Shimmering Grotto @Cliff Childs
 127 U Skarrg, the Rage Pits @Martina Pilcerova
 128 U Tainted Isle @Alan Pollack
-129 C Terramorphic Expanse @Dan Scott
+129 C Terramorphic Expanse @Dan Murayama Scott
 130 U Vitu-Ghazi, the City-Tree @Martina Pilcerova
 131 U Vivid Creek @Fred Fields
 132 L Plains @John Avon
@@ -162,12 +162,12 @@ ScryfallCode=PCA
 154 L Forest @Véronique Meignaud
 155 L Forest @Vincent Proce
 156 L Forest @Stephen Tappin
-OPCA1 C Chaotic Aether @Dan Scott
+OPCA1 C Chaotic Aether @Dan Murayama Scott
 OPCA2 C Interplanar Tunnel @Chuck Lukacs
 OPCA3 C Morphic Tide @Brandon Kitkouski
 OPCA4 C Mutual Epiphany @Jason Felix
 OPCA5 C Planewide Disaster @Dave Kendall
-OPCA6 C Reality Shaping @Dan Scott
+OPCA6 C Reality Shaping @Dan Murayama Scott
 OPCA7 C Spatial Merging @Gabor Szikszai
 OPCA8 C Time Distortion @rk post
 OPCA9 C Academy at Tolaria West @James Paick

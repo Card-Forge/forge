@@ -139,7 +139,7 @@ public class DiscardAi extends SpellAbilityAi {
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final PlayerCollection opps = ai.getOpponents();
-        Collections.shuffle(opps);
+        Collections.shuffle(opps, MyRandom.getRandom());
         for (Player opp : opps) {
             if (opp.getCardsIn(ZoneType.Hand).isEmpty() && !ComputerUtil.activateForCost(sa, ai)) {
                 continue;

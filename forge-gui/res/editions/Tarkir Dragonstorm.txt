@@ -490,7 +490,7 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 426 R Qarsi Revenant @Diana Franco
 
 [rebalanced]
-A-103 A-Cori-Steel Cutter @Xabi Gaztelua
+A-103 R A-Cori-Steel Cutter @Xabi Gaztelua
 
 [gain lands]
 1 Bloodfell Caves|TDM

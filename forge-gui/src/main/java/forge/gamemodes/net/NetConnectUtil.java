@@ -1,5 +1,6 @@
 package forge.gamemodes.net;
 
+import forge.gamemodes.match.AbstractGuiGame;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.client.ClientGameLobby;
@@ -29,42 +30,6 @@ import java.util.List;
 
 public class NetConnectUtil {
     private NetConnectUtil() { }
-
-    /**
-     * Base listener that forwards the four draft-specific callbacks to the given
-     * {@link ILobbyView}. Host-side and client-side listeners share the same draft
-     * forwarding logic; subclasses only need to override the non-draft methods.
-     */
-    private static abstract class DraftForwardingLobbyListener implements ILobbyListener {
-        private final ILobbyView view;
-
-        DraftForwardingLobbyListener(final ILobbyView view) {
-            this.view = view;
-        }
-
-        @Override
-        public void draftPackArrived(int seatIndex, List<forge.item.PaperCard> pack,
-                int packNumber, int pickNumber, int timerDurationSeconds) {
-            view.onDraftPackArrived(seatIndex, pack, packNumber, pickNumber, timerDurationSeconds);
-        }
-        @Override
-        public void draftSeatPicked(int seatIndex, int[] seatQueueDepths) {
-            view.onDraftSeatPicked(seatIndex, seatQueueDepths);
-        }
-        @Override
-        public void draftAutoPicked(int seatIndex, forge.item.PaperCard card, int packNumber, int pickInPack) {
-            view.onDraftAutoPicked(seatIndex, card, packNumber, pickInPack);
-        }
-        @Override
-        public void receiveEventPool(String eventId, forge.deck.Deck pool) {
-            view.onReceiveEventPool(eventId, pool);
-        }
-        @Override
-        public void lobbyAlert(final String title, final String message) {
-            FThreads.invokeInBackgroundThread(() ->
-                    SOptionPane.showMessageDialog(message, title, SOptionPane.WARNING_ICON));
-        }
-    }
 
     /**
      * Prompt for the server address to join. Returns null if cancelled, or the address string.
@@ -111,7 +76,7 @@ public class NetConnectUtil {
         // updateLobbyState; calling it again here would broadcast a duplicate LobbyUpdateEvent.
         view.setPlayerChangeListener(server::updateSlot);
 
-        server.setLobbyListener(new DraftForwardingLobbyListener(view) {
+        server.setLobbyListener(new ILobbyListener() {
             @Override
             public void update(final GameLobbyData state, final int slot) {
                 // NO-OP, lobby connected directly
@@ -128,7 +93,13 @@ public class NetConnectUtil {
             public ClientGameLobby getLobby() {
                 return null;
             }
+            @Override
+            public void lobbyAlert(final String title, final String message) {
+                FThreads.invokeInBackgroundThread(() ->
+                        SOptionPane.showMessageDialog(message, title, SOptionPane.WARNING_ICON));
+            }
         });
+        server.setDraftHandler(view.getDraftHandler());
         chatInterface.setGameClient(new IRemote() {
             @Override
             public void send(final NetEvent event) {
@@ -217,7 +188,10 @@ public class NetConnectUtil {
         final ClientGameLobby lobby = new ClientGameLobby();
         final ILobbyView view =  onlineLobby.setLobby(lobby);
         lobby.setListener(view);
-        client.addLobbyListener(new DraftForwardingLobbyListener(view) {
+        if (gui instanceof AbstractGuiGame agg) {
+            agg.setClientLobby(lobby);
+        }
+        client.addLobbyListener(new ILobbyListener() {
             @Override
             public void message(final String source, final String message, final ChatMessage.MessageType type) {
                 chatInterface.addMessage(new ChatMessage(source, message, type));
@@ -229,14 +203,19 @@ public class NetConnectUtil {
             }
             @Override
             public void close() {
-                GuiBase.setInterrupted(true);
                 onlineLobby.closeConn(Localizer.getInstance().getMessage("lblYourConnectionToHostWasInterrupted", url));
             }
             @Override
             public ClientGameLobby getLobby() {
                 return lobby;
             }
+            @Override
+            public void lobbyAlert(final String title, final String message) {
+                FThreads.invokeInBackgroundThread(() ->
+                        SOptionPane.showMessageDialog(message, title, SOptionPane.WARNING_ICON));
+            }
         });
+        client.setDraftHandler(view.getDraftHandler());
         view.setPlayerChangeListener((index, event) -> client.send(event));
 
         NetworkLogConfig.activateNetworkLogging();

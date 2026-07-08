@@ -1,0 +1,12 @@
+Name:Kimoyo Beads
+ManaCost:4
+Types:Artifact
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBToken,DBLife | ChoiceRestriction$ ThisGame
+SVar:DBDraw:DB$ Draw | SpellDescription$ AV Bead — Draw a card.
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Communication Bead — Create two 1/1 white Soldier creature tokens.
+SVar:DBLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBExile | SpellDescription$ Prime Bead — You gain 3 life. Exile this artifact, then return it to the battlefield under its owner's control.
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | RememberChanged$ True
+SVar:DBReturn:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:At the beginning of your end step, choose one that hasn't been chosen —\n• AV Bead — Draw a card.\n• Communication Bead — Create two 1/1 white Soldier creature tokens.\n• Prime Bead — You gain 3 life. Exile this artifact, then return it to the battlefield under its owner's control.

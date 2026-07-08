@@ -931,7 +931,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         }
 
         // fireEvent to update the Details
-        game.fireEvent(new GameEventPlayerStatsChanged(toUpdate, false));
+        game.fireEvent(new GameEventPlayerStatsChanged(toUpdate));
 
         return result;
     }

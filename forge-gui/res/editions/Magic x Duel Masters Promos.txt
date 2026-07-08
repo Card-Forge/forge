@@ -7,7 +7,7 @@ ScryfallCode=PMDA
 CardLang=ja
 
 [cards]
-1 R Nicol Bolas @Toshiaki Takayama
+1 R Nicol Bolas @Takayama Toshiaki
 2 R Pouncing Jaguar @Nablange
 3 R Serra Angel @Mikio Masuda
 4 R Earthquake @Sansyu

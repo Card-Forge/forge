@@ -1,6 +1,6 @@
 [metadata]
 Code=PDST
-Date=2004-06-04
+Date=2004-02-06
 Name=Darksteel Promos
 Type=Promo
 ScryfallCode=PDST
