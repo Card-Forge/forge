@@ -1840,12 +1840,13 @@ public class ComputerUtilMana {
     }
 
     private static SpellAbility chooseManaAbilityForShard(final ManaCostBeingPaid cost, final SpellAbility sa,
-            final Player ai, final ManaCostShard toPay, Collection<SpellAbility> maList, final boolean checkCosts) {
+            final Player ai, final ManaCostShard toPay, Collection<SpellAbility> maList, final boolean checkCosts,
+            final boolean test) {
         final List<SpellAbility> valid = collectValidManaPaymentChoices(cost, sa, ai, toPay, maList, checkCosts);
         if (valid.isEmpty()) {
             return null;
         }
-        if (valid.size() == 1 || inFilterActivationProbe.get() || !shouldUseCastabilityProbeForFilterActivation(sa)
+        if (valid.size() == 1 || inFilterActivationProbe.get() || !shouldUseCastabilityProbeForFilterActivation(sa, test)
                 || valid.stream().noneMatch(ComputerUtilMana::isConsolidatingCandidate)
                 || !hasOtherHandOrCommandSpells(ai, sa)) {
             return preferSourceThatKeepsRestPayable(cost, sa, ai, toPay, valid);
@@ -2652,7 +2653,8 @@ public class ComputerUtilMana {
             sortFreeSourcesForNestedActivation(freeCandidates, toPay,
                     shouldReserveColorlessMana(ai, sa));
 
-            final SpellAbility chosen = chooseSourceForFilterActivation(sa, ai, filterAb, toPay, freeCandidates, nestedCost, nestedSourcesForShards);
+            final SpellAbility chosen = chooseSourceForFilterActivation(sa, ai, filterAb, toPay, freeCandidates,
+                    nestedCost, nestedSourcesForShards, test);
             if (chosen == null) {
                 return false;
             }
@@ -3134,13 +3136,14 @@ public class ComputerUtilMana {
      */
     private static SpellAbility chooseSourceForFilterActivation(final SpellAbility sa, final Player ai,
             final SpellAbility filterAb, final ManaCostShard toPay, final List<SpellAbility> candidates,
-            final ManaCostBeingPaid nestedCost, final ListMultimap<ManaCostShard, SpellAbility> sourcesForShards) {
+            final ManaCostBeingPaid nestedCost, final ListMultimap<ManaCostShard, SpellAbility> sourcesForShards,
+            final boolean test) {
         if (candidates.size() == 1) {
             // Sole free source for a nested activation; reservation runs when the payment is applied.
             return candidates.get(0);
         }
-        // Castability probing runs full canPayManaCost and can recurse heavily; only use it for hand/command casts.
-        if (inFilterActivationProbe.get() || !shouldUseCastabilityProbeForFilterActivation(sa)) {
+        // Castability probing runs full canPayManaCost and can recurse heavily; only use it during actual payment.
+        if (inFilterActivationProbe.get() || !shouldUseCastabilityProbeForFilterActivation(sa, test)) {
             return chooseManaAbility(nestedCost, sa, ai, toPay, candidates, true);
         }
 
@@ -3159,8 +3162,11 @@ public class ComputerUtilMana {
         return chooseManaAbility(nestedCost, sa, ai, toPay, candidates, true);
     }
 
-    /** Hand and command-zone casts benefit from castability-aware filter activation payment. */
-    private static boolean shouldUseCastabilityProbeForFilterActivation(final SpellAbility sa) {
+    /** Hand and command-zone casts benefit from castability-aware filter activation during actual payment only. */
+    private static boolean shouldUseCastabilityProbeForFilterActivation(final SpellAbility sa, final boolean test) {
+        if (test) {
+            return false;
+        }
         final Card host = sa.getHostCard();
         return host.isInZone(ZoneType.Hand) || host.isInZone(ZoneType.Command);
     }
@@ -3570,7 +3576,7 @@ public class ComputerUtilMana {
             debugLogMain(test, "  shard " + toPay + " candidates: " + saList);
 
             SpellAbility saPayment = saList.isEmpty() ? null
-                    : chooseManaAbilityForShard(cost, sa, ai, toPay, saList, checkPlayable || !test);
+                    : chooseManaAbilityForShard(cost, sa, ai, toPay, saList, checkPlayable || !test, test);
             debugLogMain(test, "  chosen for " + toPay + ": " + (saPayment == null ? "(none)" : saPayment.getHostCard()));
 
             if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts()) && sa.isTargeting(saPayment.getHostCard())) {
