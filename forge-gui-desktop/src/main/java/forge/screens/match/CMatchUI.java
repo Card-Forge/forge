@@ -940,7 +940,14 @@ public final class CMatchUI
     @Override
     public void updatePlayerControl() {
         initHandViews();
-        FloatingZone.registerZoneDocs(this, getLocalPlayers());
+        // Use live PlayerViews; getLocalPlayers() can hand back an orphaned key from the prior game (equality is by id)
+        final List<PlayerView> localPlayers = new ArrayList<>();
+        for (final PlayerView p : getGameView().getPlayers()) {
+            if (isLocalPlayer(p)) {
+                localPlayers.add(p);
+            }
+        }
+        FloatingZone.registerZoneDocs(this, localPlayers);
         SLayoutIO.loadLayout(null);
         FloatingZone.pruneUnparentedDocks();
         view.populate();
