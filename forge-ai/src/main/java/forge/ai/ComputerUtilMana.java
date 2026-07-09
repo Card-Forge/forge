@@ -874,7 +874,10 @@ public class ComputerUtilMana {
 
     /**
      * Keep a multi-shard signet available when the spell being paid is generic-only but hand/command
-     * still needs its colors (see {@code genericCostPreservesSignetForHandSpell}).
+     * still needs a colored pip that only this consolidator can supply (see
+     * {@code genericCostPreservesSignetForHandSpell}). Mono-color hand spells with another producer
+     * for that color (e.g. Eternal Witness with a Forest while Sungrass Prairie is on board) do not
+     * reserve the consolidator.
      */
     private static boolean shouldReserveConsolidator(final SpellAbility filter, final SpellAbility sa,
             final ManaCostBeingPaid cost, final Player ai) {
@@ -885,7 +888,129 @@ public class ComputerUtilMana {
         if (coloredUnpaid > 0) {
             return false;
         }
-        return handHasMulticolorManaSpells(ai, sa) || handHasGenericAndColoredCast(ai, sa);
+        return handHasSpellDependingOnConsolidator(filter, sa, ai);
+    }
+
+    private static boolean handHasSpellDependingOnConsolidator(final SpellAbility filter, final SpellAbility sa,
+            final Player ai) {
+        final Card consolidatorHost = filter.getHostCard();
+        final Set<ManaCostShard> consolidatorColors = getColoredShardsProducedByConsolidator(filter);
+        if (consolidatorColors.isEmpty()) {
+            return false;
+        }
+        final ListMultimap<Integer, SpellAbility> manaAbilityMap = getOrBuildManaAbilityMap(ai, true);
+        final Card being = sa.getHostCard();
+        for (final ZoneType zone : new ZoneType[] { ZoneType.Hand, ZoneType.Command }) {
+            for (Card c : ai.getCardsIn(zone)) {
+                if (c == being) {
+                    continue;
+                }
+                if (spellDependsOnConsolidatorForColor(c, consolidatorColors, consolidatorHost, manaAbilityMap, ai)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static Set<ManaCostShard> getColoredShardsProducedByConsolidator(final SpellAbility filter) {
+        final Set<ManaCostShard> result = new HashSet<>();
+        final AbilityManaPart mp = filter.getManaPart();
+        if (mp == null) {
+            return result;
+        }
+        for (final String color : mp.mana(filter).split(" ")) {
+            if (color.isEmpty() || "C".equals(color)) {
+                continue;
+            }
+            result.add(ManaCostShard.valueOf(ManaAtom.fromName(color)));
+        }
+        return result;
+    }
+
+    private static boolean spellDependsOnConsolidatorForColor(final Card handSpell,
+            final Set<ManaCostShard> consolidatorColors, final Card consolidatorHost,
+            final ListMultimap<Integer, SpellAbility> manaAbilityMap, final Player ai) {
+        final ManaCost mc = handSpell.getManaCost();
+        if (mc == null || mc.isNoCost()) {
+            return false;
+        }
+        for (final ManaCostShard needed : mc) {
+            if (needed.isGeneric() || needed == ManaCostShard.COLORLESS || needed.isPhyrexian()) {
+                continue;
+            }
+            if (!consolidatorProducesShard(needed, consolidatorColors)) {
+                continue;
+            }
+            if (!hasOtherReusableProducerForShard(manaAbilityMap, needed, consolidatorHost, ai)) {
+                // A disposable (Petal, Treasure) can still cover the hand spell's pip; use the
+                // consolidator on the spell being paid instead of hoarding it.
+                if (!hasDisposableProducerForShard(manaAbilityMap, needed, consolidatorHost, ai)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasDisposableProducerForShard(
+            final ListMultimap<Integer, SpellAbility> manaAbilityMap, final ManaCostShard shard,
+            final Card excludeHost, final Player ai) {
+        for (final byte color : ManaAtom.MANATYPES) {
+            if (!shard.canBePaidWithManaOfColor(color)) {
+                continue;
+            }
+            for (final SpellAbility ma : manaAbilityMap.get((int) color)) {
+                if (ma.getHostCard() == excludeHost || !isDisposableManaAbility(ma)) {
+                    continue;
+                }
+                if (AiCardMemory.isRememberedCard(ai, ma.getHostCard(), MemorySet.PAYS_SAC_COST)) {
+                    continue;
+                }
+                final AbilityManaPart mp = ma.getManaPart();
+                if (mp != null && (mp.isAnyMana() || mp.canProduce(shard.toShortString(), ma))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean consolidatorProducesShard(final ManaCostShard needed,
+            final Set<ManaCostShard> consolidatorColors) {
+        for (final ManaCostShard produced : consolidatorColors) {
+            if (needed == produced) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasOtherReusableProducerForShard(
+            final ListMultimap<Integer, SpellAbility> manaAbilityMap, final ManaCostShard shard,
+            final Card excludeHost, final Player ai) {
+        for (final byte color : ManaAtom.MANATYPES) {
+            if (!shard.canBePaidWithManaOfColor(color)) {
+                continue;
+            }
+            for (final SpellAbility ma : manaAbilityMap.get((int) color)) {
+                if (ma.getHostCard() == excludeHost) {
+                    continue;
+                }
+                if (!isReusableFreeManaForShard(ma, shard)) {
+                    continue;
+                }
+                if (ma.getPayCosts().hasTapCost()
+                        && AiCardMemory.isRememberedCard(ai, ma.getHostCard(), MemorySet.PAYS_TAP_COST)) {
+                    continue;
+                }
+                if (AiCardMemory.isRememberedCard(ai, ma.getHostCard(), MemorySet.PAYS_SAC_COST)) {
+                    continue;
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     private static ManaCostShard shardForConsolidatorProbe(final ManaCostBeingPaid cost) {

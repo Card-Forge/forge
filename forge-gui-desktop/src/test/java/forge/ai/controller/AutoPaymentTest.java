@@ -693,6 +693,63 @@ public class AutoPaymentTest extends SimulationTest {
                 prodAutoPay(game, p, cost("2"), sa));
     }
 
+    // {2} with Sungrass Prairie + Study Hall should still consolidate when Eternal Witness ({1}{G}{G})
+    // is in hand — Forest covers {G}, so Prairie must not be reserved for Witness.
+    @Test
+    public void sungrassPrairieConsolidatesDespiteMonoColorHandSpell() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Snow-Covered Forest", p);
+        addCard("Study Hall", p);
+        addCard("Sungrass Prairie", p);
+        addCard("Lotus Petal", p);
+        addCardToZone("Eternal Witness", p, ZoneType.Hand);
+        Card spell = addCardToZone("Shadowspear", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("2"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("2"), sa);
+        AssertJUnit.assertTrue("Sungrass Prairie should pay {2}",
+                sources.anyMatch(c -> "Sungrass Prairie".equals(c.getName())));
+        AssertJUnit.assertTrue("Study Hall should pay Sungrass Prairie's {1}",
+                sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+        AssertJUnit.assertFalse("Lotus Petal should not be sacrificed for {2}",
+                sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("2"), sa));
+    }
+
+    // Same as above without a Forest: Witness's {G} can come from Lotus Petal, so Prairie still pays {2}.
+    @Test
+    public void sungrassPrairieConsolidatesWhenHandGreenCoveredByPetal() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Study Hall", p);
+        addCard("Sungrass Prairie", p);
+        addCard("Lotus Petal", p);
+        addCardToZone("Eternal Witness", p, ZoneType.Hand);
+        Card spell = addCardToZone("Shadowspear", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("2"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("2"), sa);
+        AssertJUnit.assertTrue("Sungrass Prairie should pay {2}",
+                sources.anyMatch(c -> "Sungrass Prairie".equals(c.getName())));
+        AssertJUnit.assertFalse("Lotus Petal should not be sacrificed for {2}",
+                sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+    }
+
     // {2}{G}{G} should tap Sol Ring once for {2}, not Thought Vessel + Sol Ring.
     @Test
     public void solRingPaysDoubleGenericWithoutExtraRock() {
