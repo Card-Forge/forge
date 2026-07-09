@@ -257,6 +257,96 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertEquals("Plains pays the Signet's {1}", 1, countTapped(game, "Plains"));
     }
 
+    // {1}{R}{R} with Plains + two Rakdos Signets (3 mana total): Plains pays the first Signet's {1},
+    // the Signet's {B} pays the second Signet's {1}, and both Signets' {R} plus a {B} pay Aisha.
+    @Test
+    public void chainedSignetsPayTripleRedSpell() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Rakdos Signet", p);
+        addCard("Rakdos Signet", p);
+        Card spell = addCardToZone("Aisha of Sparks and Smoke", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertEquals(3, spell.getManaCost().getCMC());
+        ManaCostBeingPaid mc = new ManaCostBeingPaid(spell.getManaCost());
+
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, new ManaCostBeingPaid(spell.getManaCost()), sa);
+        AssertJUnit.assertTrue("Plains should pay the first Signet's {1}",
+                sources.anyMatch(c -> "Plains".equals(c.getName())));
+        AssertJUnit.assertEquals("Both Rakdos Signets should be used", 2,
+                sources.stream().filter(c -> "Rakdos Signet".equals(c.getName())).count());
+
+        AssertJUnit.assertTrue("Production auto-pay should chain Signets for a 3 CMC spell",
+                prodAutoPay(game, p, new ManaCostBeingPaid(spell.getManaCost()), sa));
+        AssertJUnit.assertEquals("Plains should be tapped", 1, countTapped(game, "Plains"));
+        AssertJUnit.assertEquals("Both Signets should be tapped", 2, countTapped(game, "Rakdos Signet"));
+    }
+
+    // {1}{R}{R} with Plains + three Rakdos Signets: only two Signets are needed; the third must stay untapped.
+    @Test
+    public void chainedSignetsIgnoreExtraSignet() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCards("Rakdos Signet", 3, p);
+        Card spell = addCardToZone("Aisha of Sparks and Smoke", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = new ManaCostBeingPaid(spell.getManaCost());
+
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+        AssertJUnit.assertTrue(prodAutoPay(game, p, new ManaCostBeingPaid(spell.getManaCost()), sa));
+        AssertJUnit.assertEquals("Only two Signets should be tapped", 2, countTapped(game, "Rakdos Signet"));
+    }
+
+    // {1}{R}{R} with Plains + Rakdos Signet + Cascade Bluffs: Plains -> Signet {B}{R}, pool {R} pays
+    // Bluffs' {U/R} for {R}{R}, then {R}{R}{B} pays Aisha.
+    @Test
+    public void signetAndCascadeBluffsPayTripleRedSpell() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Rakdos Signet", p);
+        addCard("Cascade Bluffs", p);
+        Card spell = addCardToZone("Aisha of Sparks and Smoke", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = new ManaCostBeingPaid(spell.getManaCost());
+
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, new ManaCostBeingPaid(spell.getManaCost()), sa);
+        AssertJUnit.assertTrue("Plains should pay the Signet's {1}",
+                sources.anyMatch(c -> "Plains".equals(c.getName())));
+        AssertJUnit.assertTrue("Rakdos Signet should be used",
+                sources.anyMatch(c -> "Rakdos Signet".equals(c.getName())));
+        AssertJUnit.assertTrue("Cascade Bluffs should be used",
+                sources.anyMatch(c -> "Cascade Bluffs".equals(c.getName())));
+        AssertJUnit.assertFalse("A second Signet is not required",
+                sources.stream().filter(c -> "Rakdos Signet".equals(c.getName())).count() > 1);
+
+        AssertJUnit.assertTrue(prodAutoPay(game, p, new ManaCostBeingPaid(spell.getManaCost()), sa));
+        AssertJUnit.assertEquals("Plains should be tapped", 1, countTapped(game, "Plains"));
+        AssertJUnit.assertEquals("Signet should be tapped", 1, countTapped(game, "Rakdos Signet"));
+        AssertJUnit.assertEquals("Cascade Bluffs should be tapped", 1, countTapped(game, "Cascade Bluffs"));
+    }
+
     // {B} with Swamp + Initiates: tap the Swamp, never the useless 1:1 filter (rule H).
     @Test
     public void skipsUselessFilterWhenDirectSourceExists() {
@@ -501,6 +591,33 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertFalse("Plains should not pay generic {1}", sources.anyMatch(c -> "Plains".equals(c.getName())));
     }
 
+    // {1}{W}: Plains pays {W}, colorless source pays generic {1}; Forest stays untapped for future {G}.
+    @Test
+    public void colorlessGenericPreservesColoredBasicsForColoredPips() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Forest", p);
+        addCard("Reliquary Tower", p);
+        Card spell = addCardToZone("Sheltered by Ghosts", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Plains should pay {W}", sources.anyMatch(c -> "Plains".equals(c.getName())));
+        AssertJUnit.assertTrue("Colorless source should pay generic {1}",
+                sources.anyMatch(c -> "Reliquary Tower".equals(c.getName())));
+        AssertJUnit.assertFalse("Forest should not pay generic {1}", sources.anyMatch(c -> "Forest".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
     // Eldrazi and other {C}-heavy hands should spend colored mana on generic pips and keep rocks for {C}.
     @Test
     public void reservesColorlessWhenHandNeedsColorlessPips() {
@@ -610,8 +727,7 @@ public class AutoPaymentTest extends SimulationTest {
         Player p = game.getPlayers().get(1);
 
         addCard("Gilded Lotus", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
+        addCards("Forest", 2, p);
         Card spell = addCardToZone("Slith Predator", p, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
@@ -663,9 +779,8 @@ public class AutoPaymentTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Study Hall", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
+        addCard("Wastes", p);
+        addCards("Forest", 2, p);
         addCard("Selesnya Signet", p);
         addCardToZone("Phelia, Exuberant Shepherd", p, ZoneType.Hand);
         Card spell = addCardToZone("Thought Vessel", p, ZoneType.Hand);
@@ -695,12 +810,80 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        AssertJUnit.assertTrue(canAutoPay(game, p, cost("1 W"), spell.getFirstSpellAbility()));
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
 
-        CardCollection sources = predictedManaSources(game, p, cost("1 W"), spell.getFirstSpellAbility());
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
         AssertJUnit.assertTrue("Signet should pay", sources.anyMatch(c -> "Selesnya Signet".equals(c.getName())));
         AssertJUnit.assertFalse("Lotus Petal should not pay {W} directly",
                 sources.size() == 1 && sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
+    /** Place a spell on the game stack for payment tests (player zones have no Stack). */
+    private Card addSpellOnStack(Game game, String name, Player p) {
+        Card spell = createCard(name, p);
+        spell.setGameTimestamp(game.getNextTimestamp());
+        SpellAbility sa = spell.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        game.getStack().addAndUnfreeze(sa);
+        return spell;
+    }
+
+    // Same as above when the spell is already on the stack (Luminarch Aspirant is {1}{W}).
+    @Test
+    public void lotusPetalActivatesSignetForOneWhiteCostOnStack() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Lotus Petal", p);
+        addCard("Selesnya Signet", p);
+        Card spell = addSpellOnStack(game, "Luminarch Aspirant", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Signet should pay", sources.anyMatch(c -> "Selesnya Signet".equals(c.getName())));
+        AssertJUnit.assertTrue("Lotus Petal should activate the Signet",
+                sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
+    // {2} with imprinted Chrome Mox {G} + Study Hall {T}:{C} should not sacrifice Lotus Petal.
+    @Test
+    public void chromeMoxAndStudyHallPayDoubleGenericWithoutPetal() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card imprint = addCardToZone("Llanowar Elves", p, ZoneType.Exile);
+        Card mox = addCard("Chrome Mox", p);
+        mox.addImprintedCard(imprint);
+        addCard("Study Hall", p);
+        addCard("Lotus Petal", p);
+        Card spell = addSpellOnStack(game, "Selesnya Signet", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("2");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Chrome Mox should pay", sources.anyMatch(c -> "Chrome Mox".equals(c.getName())));
+        AssertJUnit.assertTrue("Study Hall should pay", sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+        AssertJUnit.assertFalse("Lotus Petal should not be sacrificed",
+                sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
 
     // {5}{W}{W}: Signet + reusable activator should cover a {W} pip instead of sacrificing Lotus Petal.
@@ -712,8 +895,7 @@ public class AutoPaymentTest extends SimulationTest {
         addCard("Reliquary Tower", p);
         addCard("Selesnya Signet", p);
         addCard("Lotus Petal", p);
-        addCard("Plains", p);
-        addCards("Plains", 5, p);
+        addCards("Plains", 6, p);
         Card spell = addCardToZone("Elesh Norn, Grand Cenobite", p, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
@@ -889,8 +1071,7 @@ public class AutoPaymentTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Snow-Covered Plains", p);
-        addCard("Plains", p);
+        addCards("Plains", 2, p);
         addCard("Study Hall", p);
         addCard("Reliquary Tower", p);
         addCard("Lotus Petal", p);
@@ -1037,6 +1218,35 @@ public class AutoPaymentTest extends SimulationTest {
                 sources.anyMatch(c -> "Study Hall".equals(c.getName())));
     }
 
+    // {W}{G} with Forest + Study Hall + Lotus Petal: Forest pays {G}, Petal pays {W}. Study Hall must not
+    // burn Forest on its {1} activation when the disposable can cover the other colored pip.
+    @Test
+    public void forestAndPetalBeatStudyHallForPureMulticolor() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Snow-Covered Forest", p);
+        addCard("Study Hall", p);
+        addCard("Lotus Petal", p);
+        Card spell = addCardToZone("Arcus Acolyte", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("W G");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Forest should pay {G}",
+                sources.anyMatch(c -> "Snow-Covered Forest".equals(c.getName())));
+        AssertJUnit.assertTrue("Lotus Petal should pay {W}", sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+        AssertJUnit.assertFalse("Study Hall should not burn Forest for {W}",
+                sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
     // Only Sol Ring + Boros Signet (3 mana total): Ring {C}{C} pays Signet's {1} and leaves {C} in the pool
     // for the spell's generic; Signet pays {R}{W}. Casts a real 3 CMC spell ({1}{R}{W}).
     @Test
@@ -1092,5 +1302,75 @@ public class AutoPaymentTest extends SimulationTest {
 
         SpellAbility sa = spell.getFirstSpellAbility();
         AssertJUnit.assertFalse(canAutoPay(game, p, cost("R"), sa));
+    }
+
+    // Many duplicate basics: payment planning must still succeed on large boards.
+    @Test
+    public void manyDuplicateBasicsPayMulticolor() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCards("Plains", 7, p);
+        addCards("Island", 7, p);
+        addCards("Swamp", 6, p);
+        Card spell = addCardToZone("Dromar's Charm", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("W U B"), sa);
+    }
+
+    // Many identical signets: consolidation and nested activation must still work.
+    @Test
+    public void manyDuplicateSignetsPayMulticolor() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCards("Boros Signet", 10, p);
+        addCard("Mountain", p);
+        addCard("Plains", p);
+        Card spell = addCardToZone("Lightning Helix", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("R W"), sa);
+
+        CardCollection sources = predictedManaSources(game, p, cost("R W"), sa);
+        AssertJUnit.assertTrue("A signet should pay", sources.anyMatch(c -> "Boros Signet".equals(c.getName())));
+        AssertJUnit.assertTrue("At least one land should be tapped for signet activation",
+                countTapped(game, "Mountain") + countTapped(game, "Plains") >= 1);
+    }
+
+    // Genju animate: with duplicate Forests, do not tap the enchanted Forest for {2}.
+    @Test
+    public void genjuAnimateAvoidsEnchantedForestWhenDuplicateExists() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        List<Card> forests = addCards("Forest", 20, p);
+        Card enchantedForest = forests.get(0);
+        Card genju = addCard("Genju of the Cedars", p);
+        genju.attachToEntity(enchantedForest, null);
+
+        SpellAbility animate = null;
+        for (SpellAbility ab : genju.getSpellAbilities()) {
+            if (ab.isActivatedAbility() && ab.getPayCosts() != null && ab.getPayCosts().hasManaCost()) {
+                animate = ab;
+                break;
+            }
+        }
+        AssertJUnit.assertNotNull(animate);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        assertProductionPayment(game, p, cost("2"), animate);
+        AssertJUnit.assertFalse("Enchanted Forest should not be tapped for {2}",
+                enchantedForest.isTapped());
+        AssertJUnit.assertTrue("Another Forest should be tapped", countTapped(game, "Forest") >= 1);
     }
 }
