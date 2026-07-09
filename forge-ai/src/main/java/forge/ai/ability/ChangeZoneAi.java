@@ -479,7 +479,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         Iterable<Player> pDefined;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if ((tgt != null) && tgt.canTgtPlayer()) {
+        if (tgt != null && tgt.canTgtPlayer()) {
             final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
             if (sa.isCurse()) {
                 if (sa.canTarget(opp)) {

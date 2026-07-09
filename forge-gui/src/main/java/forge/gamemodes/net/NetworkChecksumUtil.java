@@ -1,5 +1,6 @@
 package forge.gamemodes.net;
 
+import com.google.common.collect.Multiset;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
@@ -166,14 +167,9 @@ public final class NetworkChecksumUtil {
         hash = 31 * hash + (zone instanceof ZoneType ? ((ZoneType) zone).ordinal() : -1);
         Object ctrl = getEffectiveValue(card, TrackableProperty.Controller);
         hash = 31 * hash + (ctrl instanceof PlayerView ? ((PlayerView) ctrl).getId() : -1);
-        Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
-        int counterTotal = 0;
-        if (countersObj instanceof Map) {
-            for (Object count : ((Map<?, ?>) countersObj).values()) {
-                if (count instanceof Integer) counterTotal += (int) count;
-            }
+        if (getEffectiveValue(card, TrackableProperty.Counters) instanceof Multiset counters) {
+            hash = 31 * hash + counters.size();
         }
-        hash = 31 * hash + counterTotal;
         hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Sickness)) ? 1 : 0);
         hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Attacking)) ? 1 : 0);
         hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Blocking)) ? 1 : 0);
@@ -269,12 +265,9 @@ public final class NetworkChecksumUtil {
             int zoneOrd = zoneObj instanceof ZoneType ? ((ZoneType) zoneObj).ordinal() : -1;
             Object ctrlObj = getEffectiveValue(card, TrackableProperty.Controller);
             int ctrlId = ctrlObj instanceof PlayerView ? ((PlayerView) ctrlObj).getId() : -1;
-            Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
             int ct = 0;
-            if (countersObj instanceof Map) {
-                for (Object v : ((Map<?, ?>) countersObj).values()) {
-                    if (v instanceof Integer) ct += (int) v;
-                }
+            if (getEffectiveValue(card, TrackableProperty.Counters) instanceof Multiset counters) {
+                ct = counters.size();
             }
             boolean sick = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Sickness));
             boolean attacking = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Attacking));

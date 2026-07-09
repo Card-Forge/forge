@@ -1301,6 +1301,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Mana chooseManaFromPool(final List<Mana> manaChoices) {
         if (!isFullControl(FullControlFlag.ChooseManaPoolShard))
             return manaChoices.get(0);
+        // TODO check if there are any special properties?
         final List<String> options = Lists.newArrayList();
         for (int i = 0; i < manaChoices.size(); i++) {
             final Mana m = manaChoices.get(i);
@@ -1562,35 +1563,56 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /** Push the actionable-card set to the GUI. Payment mode falls back to the
      *  "playable mana ability" predicate; non-payment reuses {@link #cachedActionableCards}. */
     public void pushActionableCards(boolean paymentMode) {
-        if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
+        pushActionableCards(paymentMode, null);
+    }
+
+    /** Weighted push: actionable cards get strength 1; {@code emphasized} cards (the AI's
+     *  auto-tap plan) are raised to strength 2 by adding them a second time, so the GUI can
+     *  render them more prominently. Each pref layer is gated independently. */
+    public void pushActionableCards(boolean paymentMode, Iterable<CardView> emphasized) {
+        final boolean showActionable = yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
+        final boolean showAutoTap = emphasized != null
+                && yieldController.getBoolPref(FPref.UI_SHOW_AUTOTAP_PREVIEW);
+
+        if (!showActionable && !showAutoTap) {
             getGui().clearWeaklySelectable();
             return;
         }
 
-        if (paymentMode) {
-            final Set<CardView> result = Sets.newHashSet();
-            for (ZoneType zone : ACTIONABLE_PAYMENT_ZONES) {
-                for (Card c : player.getCardsIn(zone)) {
-                    if (cardHasPlayableManaAbility(c)) {
-                        result.add(c.getView());
+        final Set<CardView> actionable = Sets.newHashSet();
+        if (showActionable) {
+            if (paymentMode) {
+                for (ZoneType zone : ACTIONABLE_PAYMENT_ZONES) {
+                    for (Card c : player.getCardsIn(zone)) {
+                        if (cardHasPlayableManaAbility(c)) {
+                            actionable.add(c.getView());
+                        }
                     }
                 }
+            } else if (cachedActionableCards != null) {
+                // Reuse the priority-time scan; recompute if neither APINA nor highlights triggered it.
+                actionable.addAll(cachedActionableCards);
+            } else {
+                actionable.addAll(AvailableActions.collectActionable(getPlayer(), computeAvailableActionsBudgetMs(getPlayer())));
             }
-            getGui().setWeaklySelectable(result);
-            return;
         }
 
-        // Reuse the priority-time scan; recompute if neither APINA nor highlights triggered it.
-        Set<CardView> actionable = cachedActionableCards;
-        if (actionable == null) {
-            actionable = AvailableActions.collectActionable(getPlayer(), computeAvailableActionsBudgetMs(getPlayer()));
+        final List<CardView> weighted = Lists.newArrayList(actionable);
+        if (showAutoTap) {
+            for (CardView cv : emphasized) {
+                // Bring each auto-tap card to strength 2 regardless of the actionable layer.
+                if (!actionable.contains(cv)) {
+                    weighted.add(cv);
+                }
+                weighted.add(cv);
+            }
         }
-        getGui().setWeaklySelectable(actionable);
+        getGui().setWeaklySelectable(weighted);
     }
 
     private boolean cardHasPlayableManaAbility(Card c) {
         for (SpellAbility sa : c.getAllPossibleAbilities(player, true)) {
-            if (sa.isManaAbility() && sa.canPlay()) return true;
+            if (sa.isManaAbility()) return true;
         }
         return false;
     }

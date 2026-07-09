@@ -37,9 +37,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
-import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CField;
 import forge.toolbox.FLabel;
@@ -450,11 +448,11 @@ public class VField implements IVDoc<CField> {
         if (gameType == GameType.Adventure || gameType == GameType.AdventureEvent) {
             return null;
         }
-        final int maximumBracket = FModel.getPreferences().getPrefInt(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET);
+        final int maximumBracket = matchUI.getMaximumCommanderBracket();
         if (maximumBracket < 1 || maximumBracket > 4) {
             return null;
         }
-        final Deck deck = matchUI.getGameView().getDeck(player);
+        final Deck deck = matchUI.getDeckForPlayer(player);
         if (deck == null) {
             return null;
         }

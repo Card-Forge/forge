@@ -940,7 +940,12 @@ public class AiAttackController {
                         }
                     }
                     if (mustAttackDef != null) {
-                        combat.addAttacker(attacker, mustAttackDef);
+                        // combat is shared across these parallel futures and its attacker
+                        // multimap is not thread-safe; unsynchronized addAttacker calls
+                        // collide (ConcurrentModificationException, dropped attackers)
+                        synchronized (combat) {
+                            combat.addAttacker(attacker, mustAttackDef);
+                        }
                         attackersLeft.remove(attacker);
                         numForcedAttackers.incrementAndGet();
                     }

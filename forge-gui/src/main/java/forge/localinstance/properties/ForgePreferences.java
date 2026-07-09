@@ -95,6 +95,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SCALE_LARGER ("true"),
         UI_RENDER_BLACK_BORDERS ("true"),
         UI_SHOW_ACTIONABLE_HIGHLIGHTS ("false"),
+        UI_SHOW_AUTOTAP_PREVIEW ("false"),
         UI_ACTIONABLE_HIGHLIGHT_COLOR ("66CCFF"),
         UI_SHOW_LINKED_EXILE_CARDS ("true"),
         UI_LARGE_CARD_VIEWERS ("false"),
