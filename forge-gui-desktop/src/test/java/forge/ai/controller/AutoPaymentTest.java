@@ -576,6 +576,87 @@ public class AutoPaymentTest extends SimulationTest {
                 prodAutoPay(game, p, cost("2"), sa));
     }
 
+    // {2}{G}{G} should tap Sol Ring once for {2}, not Thought Vessel + Sol Ring.
+    @Test
+    public void solRingPaysDoubleGenericWithoutExtraRock() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Snow-Covered Forest", p);
+        addCard("Forest", p);
+        addCard("Sol Ring", p);
+        addCard("Thought Vessel", p);
+        Card spell = addCardToZone("Ouroboroid", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("2 G G"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("2 G G"), sa);
+        AssertJUnit.assertTrue("Sol Ring should pay {2}", sources.anyMatch(c -> "Sol Ring".equals(c.getName())));
+        AssertJUnit.assertFalse("Thought Vessel should not pay generic",
+                sources.anyMatch(c -> "Thought Vessel".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("2 G G"), sa));
+    }
+
+    // {G}{G} with two Forests should not waste Gilded Lotus's third mana.
+    @Test
+    public void forestsPayDoubleGreenWithoutLotus() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Gilded Lotus", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        Card spell = addCardToZone("Slith Predator", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("G G"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("G G"), sa);
+        AssertJUnit.assertFalse("Gilded Lotus should not be tapped",
+                sources.anyMatch(c -> "Gilded Lotus".equals(c.getName())));
+        AssertJUnit.assertEquals("Both Forests should pay {G}{G}", 2,
+                sources.stream().filter(c -> "Forest".equals(c.getName())).count());
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("G G"), sa));
+    }
+
+    // {2}{R} with M/P/F + Lotus should tap Lotus when Lightning Helix ({R}{W}) is still in hand.
+    @Test
+    public void gildedLotusUsedWhenHandNeedsMultipleColors() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mountain", p);
+        addCard("Plains", p);
+        addCard("Forest", p);
+        addCard("Gilded Lotus", p);
+        addCardToZone("Lightning Helix", p, ZoneType.Hand);
+        Card spell = addCardToZone("Homing Sliver", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("2 R"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("2 R"), sa);
+        AssertJUnit.assertTrue("Gilded Lotus should pay part of {2}{R}",
+                sources.anyMatch(c -> "Gilded Lotus".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("2 R"), sa));
+    }
+
     // {2} for Thought Vessel should not spend Selesnya Signet when Phelia ({1}{W}) is still in hand.
     @Test
     public void genericCostPreservesSignetForHandSpell() {
@@ -736,6 +817,38 @@ public class AutoPaymentTest extends SimulationTest {
                 sources.anyMatch(c -> "Study Hall".equals(c.getName()) || "Reliquary Tower".equals(c.getName())));
         AssertJUnit.assertFalse("Lotus Petal should not be sacrificed",
                 sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
+    // {1}{W}{G} with Arcane Signet, Forest, Study Hall ({T}:{C} is free), and Basalt Monolith:
+    // Signet -> {W}, Forest -> {G}, Study Hall's free {C} -> generic {1}; not Basalt's {C}{C}{C}.
+    @Test
+    public void studyHallFreeColorlessBeatsBasaltForSingleGeneric() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Forest", p);
+        addCard("Arcane Signet", p);
+        addCard("Study Hall", p);
+        addCard("Basalt Monolith", p);
+        Card commander = addCardToZone("Calix, Guided by Fate", p, ZoneType.Command);
+        p.addCommander(commander);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = commander.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 G W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Arcane Signet should pay {W}", sources.anyMatch(c -> "Arcane Signet".equals(c.getName())));
+        AssertJUnit.assertTrue("Forest should pay {G}", sources.anyMatch(c -> "Forest".equals(c.getName())));
+        AssertJUnit.assertTrue("Study Hall should pay generic {1} via free {C}",
+                sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+        AssertJUnit.assertFalse("Basalt Monolith should not pay a lone generic {1}",
+                sources.anyMatch(c -> "Basalt Monolith".equals(c.getName())));
 
         AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
