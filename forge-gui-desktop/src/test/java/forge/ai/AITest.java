@@ -27,10 +27,27 @@ import forge.item.PaperToken;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 
+import org.testng.annotations.BeforeMethod;
+
 public class AITest {
     private static boolean initialized = false;
 
-    public Game resetGame() {
+    // One-time card DB load must run outside any @Test(timeOut) window, or a timeout interrupt mid-load corrupts the shared StaticData cache.
+    @BeforeMethod
+    public void initializeModel() {
+        if (initialized) {
+            return;
+        }
+        GuiBase.setInterface(new GuiDesktop());
+        FModel.initialize(null, preferences -> {
+            preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
+            preferences.setPref(FPref.UI_LANGUAGE, "en-US");
+            return null;
+        });
+        initialized = true;
+    }
+
+    protected Game initAndCreateGame() {
         // need to be done after FModel.initialize, or the Localizer isn't loaded yet
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
@@ -46,20 +63,6 @@ public class AITest {
         // game.getAction().checkStateEffects(true);
 
         return game;
-    }
-
-    protected Game initAndCreateGame() {
-        if (!initialized) {
-            GuiBase.setInterface(new GuiDesktop());
-            FModel.initialize(null, preferences -> {
-                preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
-                preferences.setPref(FPref.UI_LANGUAGE, "en-US");
-                return null;
-            });
-            initialized = true;
-        }
-
-        return resetGame();
     }
 
     protected Game initAndCreateThreePlayerGame() {

@@ -2228,9 +2228,18 @@ public class ComputerUtilCombat {
         int restDamage = damage;
 
         restDamage = target.staticReplaceDamage(restDamage, source, isCombat);
-        restDamage = target.staticDamagePrevention(restDamage, possiblePrevention, source, isCombat);
+        restDamage = target.staticDamagePrevention(restDamage, possiblePrevention, source, isCombat,
+                isCombat ? isCombatDamagePreventedThisTurnCached(target.getGame()) : null);
 
         return restDamage;
+    }
+
+    // cached per AI decision (AiCache is cleared in chooseSpellAbilityToPlay);
+    // predictions ask this once per attacker otherwise
+    private static Boolean isCombatDamagePreventedThisTurnCached(final Game game) {
+        return AiCache.getCached("isPreventCombatDamageThisTurn",
+                () -> game.getReplacementHandler().isPreventCombatDamageThisTurn(),
+                List.of(AiCache::identity), game);
     }
 
     public final static boolean dealsFirstStrikeDamage(final Card combatant, final boolean withoutAbilities, final Combat combat) {

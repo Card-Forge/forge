@@ -83,7 +83,7 @@ public class CardUtil {
                 return !this.shouldBeEqual;
             if (!this.editions.isEmpty() && !this.editions.contains(card.getEdition())) {
                 boolean found = false;
-                List<PaperCard> allPrintings = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getCardName());
+                List<PaperCard> allPrintings = FModel.getMagicDb().getCommonCards().getAllCards(card);
                 for (PaperCard c : allPrintings) {
                     if (this.editions.contains(c.getEdition())) {
                         found = true;
@@ -95,7 +95,7 @@ public class CardUtil {
             }
             if (!this.minDate.isEmpty()) {
                 boolean found = false;
-                List<PaperCard> allPrintings = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getCardName());
+                List<PaperCard> allPrintings = FModel.getMagicDb().getCommonCards().getAllCards(card);
                 List<CardEdition> cardEditionList = new ArrayList<>();
 
                 Date d = parseDate(this.minDate);
@@ -850,7 +850,7 @@ public class CardUtil {
             }
             validCards = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName, combined_predicate);
         } else {
-            validCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
+            validCards = List.of(FModel.getMagicDb().getCommonCards().getUniqueByNameNoAlt(cardName));
             // Filter to allowed editions to prevent showing printings from wrong sets.
             if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
                 Set<String> allowed = new HashSet<>(Arrays.asList(configData.allowedEditions));
@@ -885,7 +885,7 @@ public class CardUtil {
         }
         List<PaperCard> cardPool = Config.instance().getSettingData().useAllCardVariants
                 ? FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName)
-                : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
+                : List.of(FModel.getMagicDb().getCommonCards().getUniqueByNameNoAlt(cardName));
         List<PaperCard> validCards = cardPool.stream()
                 .filter(input -> input.getEdition().equals(edition)).collect(Collectors.toList());
 
@@ -910,12 +910,12 @@ public class CardUtil {
             }
             // For unique cards, replace non-allowed printings with allowed ones.
             List<PaperCard> filtered = new ArrayList<>();
-            for (PaperCard card : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt()) {
+            for (PaperCard card : FModel.getMagicDb().getCommonCards().getUniqueCards()) {
                 if (card == null) continue;
                 if (allowed.contains(card.getEdition())) {
                     filtered.add(card);
                 } else {
-                    for (PaperCard p : FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName())) {
+                    for (PaperCard p : FModel.getMagicDb().getCommonCards().getAllCards(card)) {
                         if (allowed.contains(p.getEdition())) {
                             filtered.add(p);
                             break;
@@ -927,7 +927,7 @@ public class CardUtil {
         }
         return allCardVariants
             ? FModel.getMagicDb().getCommonCards().getAllCards()
-            : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
+            : FModel.getMagicDb().getCommonCards().getUniqueCards();
     }
 
     /**
@@ -971,7 +971,7 @@ public class CardUtil {
         Set<String> allowed = new HashSet<>(Arrays.asList(configData.allowedEditions));
         if (allowed.contains(card.getEdition()))
             return card;
-        for (PaperCard p : FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName())) {
+        for (PaperCard p : FModel.getMagicDb().getCommonCards().getAllCards(card)) {
             if (allowed.contains(p.getEdition()))
                 return p;
         }

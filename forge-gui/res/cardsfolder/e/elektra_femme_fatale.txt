@@ -1,0 +1,10 @@
+Name:Elektra, Femme Fatale
+ManaCost:3 R
+Types:Legendary Creature Human Assassin Hero
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage1 | TriggerDescription$ When NICKNAME enters, you may have her deal 2 damage to you. When you do, she deals 4 damage to target creature.
+SVar:TrigDamage1:DB$ DealDamage | NumDmg$ 2 | Defined$ You | Optional$ True | RememberDamaged$ True | SubAbility$ DBImmediateTrig
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigDamage2 | ConditionDefined$ Remembered | ConditionPresent$ You | SubAbility$ DBCleanup | TriggerDescription$ When you do, she deals 4 damage to target creature.
+SVar:TrigDamage2:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 4
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When Elektra enters, you may have her deal 2 damage to you. When you do, she deals 4 damage to target creature.

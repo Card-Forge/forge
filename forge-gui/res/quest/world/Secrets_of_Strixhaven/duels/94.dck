@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Waylon Smithers
+Title=Waylon Smithers
+Icon=Waylon Smithers.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Nathan_Fourage_-_Hammertime_(Modern,_#2939405).dck
+Deck Type=constructed
+
+[Main]
+4 Memnite
+4 Ornithopter
+4 Puresteel Paladin
+4 Stoneforge Mystic
+4 Colossus Hammer
+1 Cryptic Coat
+1 Lavaspur Boots
+4 Leyline Axe
+4 Mox Opal
+1 Shadowspear
+4 Battlefield Improvisation
+2 Surge of Salvation
+2 Steelshaper's Gift
+4 Urza's Saga
+1 Forge Anew
+4 Arid Mesa
+2 Hallowed Fountain
+3 Inkmoth Nexus
+1 Meticulous Archive
+2 Plains
+4 Windswept Heath
+[Sideboard]
+3 Damping Sphere
+2 Erode
+1 Forge Anew
+1 Grafdigger's Cage
+3 Metallic Rebuke
+1 Pithing Needle
+1 Tormod's Crypt
+3 Vexing Bauble

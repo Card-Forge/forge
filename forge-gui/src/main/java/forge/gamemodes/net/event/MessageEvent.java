@@ -1,7 +1,6 @@
 package forge.gamemodes.net.event;
 
 import forge.gamemodes.net.ChatMessage;
-import forge.gamemodes.net.server.RemoteClient;
 
 public final class MessageEvent implements NetEvent {
     private static final long serialVersionUID = 1700060210647684186L;
@@ -27,10 +26,6 @@ public final class MessageEvent implements NetEvent {
 
     public static MessageEvent warning(final String message) {
         return new MessageEvent(null, message, ChatMessage.MessageType.WARNING);
-    }
-
-    @Override
-    public void updateForClient(final RemoteClient client) {
     }
 
     public String getSource() {

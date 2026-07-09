@@ -43,7 +43,7 @@ public class Selector extends Table {
             }
         };
 
-        label = new Controls.TextButtonFix("")
+        label = new Controls.MarqueeButton("")
         {
             @Override
             public boolean hasKeyboardFocus()

@@ -101,7 +101,7 @@ Base=Land:fromSheet("OTJ cards")
 63 C Razzle-Dazzler @Wayne Wu
 64 C Seize the Secrets @Miranda Meeks
 65 U Shackle Slinger @Josh Hass
-66 U Shifting Grift @Marzena Nereida Piwowar
+66 U Shifting Grift @Nereida
 67 U Slickshot Lockpicker @Wei Wei
 68 C Slickshot Vault-Buster @Julia Metzger
 69 C Spring Splasher @Loïc Canavaggia
@@ -130,7 +130,7 @@ Base=Land:fromSheet("OTJ cards")
 92 R Kaervek, the Punisher @Cristi Balanescu
 93 U Lively Dirge @Warren Mahy
 94 C Mourner's Surprise @Zuzanna Wużyk
-95 U Neutralize the Guards @Marzena Nereida Piwowar
+95 U Neutralize the Guards @Nereida
 96 C Nezumi Linkbreaker @Miro Petrov
 97 C Overzealous Muscle @Sam White
 98 R Pitiless Carnage @Richard Kane Ferguson
@@ -145,7 +145,7 @@ Base=Land:fromSheet("OTJ cards")
 107 C Skulduggery @Miro Petrov
 108 R Tinybones Joins Up @Wylie Beckert
 109 M Tinybones, the Pickpocket @Ekaterina Burmak
-110 U Treasure Dredger @Marzena Nereida Piwowar
+110 U Treasure Dredger @Nereida
 111 U Unfortunate Accident @Josiah "Jo" Cameron
 112 U Unscrupulous Contractor @Mila Pesic
 113 R Vadmir, New Blood @Andreas Zafiratos
@@ -265,7 +265,7 @@ Base=Land:fromSheet("OTJ cards")
 227 R Riku of Many Paths @Denys Tsiperko
 228 R Roxanne, Starfall Savant @Ina Wong
 229 U Ruthless Lawbringer @Joshua Raphael
-230 R Satoru, the Infiltrator @Heonhwa Choe
+230 R Satoru, the Infiltrator @Heonhwa
 231 M Selvala, Eager Trailblazer @Viko Menezes
 232 R Seraphic Steed @Jonas De Ro
 233 U Slick Sequence @Fajareka Setiawan

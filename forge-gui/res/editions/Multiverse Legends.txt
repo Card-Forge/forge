@@ -58,7 +58,7 @@ ScryfallCode=MUL
 50 R Lathiel, the Bounteous Dawn @Shawn Wood
 51 R Lurrus of the Dream-Den @Steve Ellis
 52 R Lutri, the Spellchaser @Justine Mara Andersen
-53 M Niv-Mizzet Reborn @Illustranesia
+53 M Niv-Mizzet Reborn @Septian Fajrianto
 54 R Obosh, the Preypiercer @Denis Medri
 55 U Radha, Coalition Warlord @Justin Hernandez & Alexis Hernandez
 56 U Raff, Weatherlight Stalwart @Nino Vecia
@@ -188,7 +188,7 @@ ScryfallCode=MUL
 180 R Lathiel, the Bounteous Dawn @Shawn Wood
 181 R Lurrus of the Dream-Den @Steve Ellis
 182 R Lutri, the Spellchaser @Justine Mara Andersen
-183 M Niv-Mizzet Reborn @Illustranesia
+183 M Niv-Mizzet Reborn @Septian Fajrianto
 184 R Obosh, the Preypiercer @Denis Medri
 185 U Radha, Coalition Warlord @Justin Hernandez & Alexis Hernandez
 186 U Raff, Weatherlight Stalwart @Nino Vecia

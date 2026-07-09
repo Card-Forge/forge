@@ -1,0 +1,11 @@
+Name:Tigra, Feline Fury
+ManaCost:1 G
+Types:Legendary Creature Cat Human Hero
+PT:2/1
+K:Flash
+K:Trample
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Ability$LifeGain
+Oracle:Flash\nTrample\nWhenever you gain life, put a +1/+1 counter on Tigra.

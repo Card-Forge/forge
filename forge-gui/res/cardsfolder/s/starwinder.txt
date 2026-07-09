@@ -6,4 +6,5 @@ T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | Comba
 SVar:TrigDraw:DB$ Draw | NumCards$ X | OptionalDecider$ True
 SVar:X:TriggerCount$DamageAmount
 K:Warp:2 U U
+SVar:PlayMain1:TRUE
 Oracle:Whenever a creature you control deals combat damage to a player, you may draw that many cards.\nWarp {2}{U}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

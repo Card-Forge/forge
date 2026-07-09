@@ -49,32 +49,32 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     private CLobby lobby;
 
     void setLobby(final VLobby lobbyView) {
-        lobby = new CLobby(lobbyView);
+        lobby = lobbyView.getController();
         initialize();
     }
 
-    void connectToServer() {
-        final String url = NetConnectUtil.getServerUrl();
-        if (url == null) { return; }
-
+    void hostGame() {
+        NetConnectUtil.ensurePlayerName();
         FThreads.invokeInBackgroundThread(() -> {
-            if (!url.isEmpty()) {
-                join(url);
-            }
-            else {
-                try {
-                    host();
-                } catch (Exception ex) {
-                    // IntelliJ swears that BindException isn't thrown in this try block, but it is!
-                    if (ex.getClass() == BindException.class) {
-                        SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblUnableStartServerPortAlreadyUse"));
-                        SOverlayUtils.hideOverlay();
-                    } else {
-                        BugReporter.reportException(ex);
-                    }
+            try {
+                host();
+            } catch (Exception ex) {
+                // IntelliJ swears that BindException isn't thrown in this try block, but it is!
+                if (ex.getClass() == BindException.class) {
+                    SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblUnableStartServerPortAlreadyUse"));
+                    SOverlayUtils.hideOverlay();
+                } else {
+                    BugReporter.reportException(ex);
                 }
             }
         });
+    }
+
+    void joinGame() {
+        final String url = NetConnectUtil.getJoinServerUrl();
+        if (url == null) { return; }
+
+        FThreads.invokeInBackgroundThread(() -> join(url));
     }
 
     private void host() {

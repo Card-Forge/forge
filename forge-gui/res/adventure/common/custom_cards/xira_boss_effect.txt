@@ -12,6 +12,6 @@ SVar:TrigChooseRandom:DB$ ChooseCard | AtRandom$ True | Choices$ Card.Egg+YouCtr
 SVar:DBSac:DB$ Sacrifice | SacValid$ Card.ChosenCard | RememberSacrificed$ True | SubAbility$ DBNameCard
 SVar:DBNameCard:DB$ NameCard | AtRandom$ True | ValidCards$ Insect.cmcEQX | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | Name$ ChosenName | Conjure$ True | Zone$ Battlefield | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearNamedCard$ True
 SVar:X:Remembered$CardCounters.HATCHLING
 Oracle:Insects you control have double team and attack each turn if able\nAt the beginning of your upkeep, create a 0/1 green Egg creature token with defender, then put an Hatchling counter on each Egg you control.\nAt the beginning of your end step, if you control 3 or more Eggs, sacrifice one at random and conjure a random Insect with mana value equal to it's Hatchling counters 

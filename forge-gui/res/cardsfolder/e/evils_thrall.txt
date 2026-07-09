@@ -1,0 +1,8 @@
+Name:Evil's Thrall
+ManaCost:2 R
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBGainControl | SpellDescription$ Gain control of target creature until end of turn. If you control a Villain with greater mana value than that creature, gain control of that creature until the end of your next turn instead. Untap that creature. It gains haste until end of turn.
+SVar:DBGainControl:DB$ GainControl | Defined$ Targeted | LoseControl$ UntilTheEndOfYourNextTurn | Untap$ True | AddKWs$ Haste | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:X:Count$Valid Villain.YouCtrl+cmcGTY
+SVar:Y:Targeted$CardManaCost
+Oracle:Gain control of target creature until end of turn. If you control a Villain with greater mana value than that creature, gain control of that creature until the end of your next turn instead. Untap that creature. It gains haste until end of turn.

@@ -82,10 +82,10 @@ public class PlayerPanel extends FContainer {
     private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstOathbreakerDecks, lstTinyLeadersDecks, lstBrawlDecks, lstPlanarDecks;
     private final FVanguardChooser lstVanguardAvatars;
 
-    public PlayerPanel(final LobbyScreen screen0, final boolean allowNetworking0, final int index0, final LobbySlot slot, final boolean mayEdit0, final boolean mayControl0) {
+    public PlayerPanel(final LobbyScreen screen0, final int index0, final LobbySlot slot, final boolean mayEdit0, final boolean mayControl0) {
         super();
         screen = screen0;
-        allowNetworking = allowNetworking0;
+        allowNetworking = screen.getLobby().isAllowNetworking();
         if (allowNetworking) {
             humanAiSwitch = new FToggleSwitch(Forge.getLocalizer().getMessage("lblNotReady"), Forge.getLocalizer().getMessage("lblReady"));
         }
@@ -465,8 +465,31 @@ public class PlayerPanel extends FContainer {
         public void handleEvent(FEvent e) {
             boolean toggled = humanAiSwitch.isToggled();
             if (allowNetworking) {
-                setIsReady(toggled);
-                screen.setReady(index, toggled);
+                if (isOpenAiSlotToggle()) {
+                    LobbySlotType newType = toggled ? LobbySlotType.AI : LobbySlotType.OPEN;
+                    boolean wasAi = isAi();
+                    type = newType;
+
+                    LobbySlot slot = screen.getLobby().getSlot(index);
+                    slot.setType(newType);
+
+                    if (newType == LobbySlotType.AI && getPlayerName().isEmpty()) {
+                        setPlayerName(NameGenerator.getRandomName("Any", "Any", screen.getPlayerNames()));
+                    }
+
+                    screen.update(index, newType);
+
+                    if (isAi() != wasAi) {
+                        onIsAiChanged(isAi());
+                    }
+
+                    setMayEdit(screen.getLobby().mayEdit(index));
+                    refreshSlotToggle();
+                    screen.firePlayerChangeListener(index);
+                } else {
+                    setIsReady(toggled);
+                    screen.setReady(index, toggled);
+                }
             }
             else {
                 type = toggled ? LobbySlotType.AI : LobbySlotType.LOCAL;
@@ -484,6 +507,27 @@ public class PlayerPanel extends FContainer {
             }
         }
     };
+
+    private boolean isOpenAiSlotToggle() {
+        return allowNetworking && index > 0 && mayControl
+                && (type == LobbySlotType.OPEN || type == LobbySlotType.AI);
+    }
+
+    private void refreshSlotToggle() {
+        if (isOpenAiSlotToggle()) {
+            humanAiSwitch.setOffText(Forge.getLocalizer().getMessage("lblOpen"));
+            humanAiSwitch.setOnText(Forge.getLocalizer().getMessage("lblAI"));
+            humanAiSwitch.setEnabled(mayControl);
+        } else if (allowNetworking) {
+            humanAiSwitch.setOffText(Forge.getLocalizer().getMessage("lblNotReady"));
+            humanAiSwitch.setOnText(Forge.getLocalizer().getMessage("lblReady"));
+            humanAiSwitch.setEnabled(mayEdit);
+        } else {
+            humanAiSwitch.setOffText(Forge.getLocalizer().getMessage("lblHuman"));
+            humanAiSwitch.setOnText(Forge.getLocalizer().getMessage("lblAI"));
+            humanAiSwitch.setEnabled(mayEdit);
+        }
+    }
 
     private final FEventHandler devModeSwitched = new FEventHandler() {
         @Override
@@ -551,7 +595,7 @@ public class PlayerPanel extends FContainer {
     private FEventHandler sleeveCommand = new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            SleevesSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), result -> {
+            SleeveSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), result -> {
                 setSleeveIndex(result);
 
                 if (index < 2) {
@@ -849,7 +893,7 @@ public class PlayerPanel extends FContainer {
             setSleeveIndex(Integer.parseInt(currentPrefs[index]));
         }
         else {
-            setSleeveIndex(SleevesSelector.getRandomSleeves(screen.getUsedSleeves()));
+            setSleeveIndex(SleeveSelector.getRandomSleeves(screen.getUsedSleeves()));
         }
         sleeveLabel.setCommand(sleeveCommand);
     }
@@ -916,6 +960,8 @@ public class PlayerPanel extends FContainer {
             break;
         }
 
+        refreshSlotToggle();
+
         boolean isAi = isAi();
         if (isAi != wasAi && deckChooser != null) {
             onIsAiChanged(isAi);
@@ -954,7 +1000,9 @@ public class PlayerPanel extends FContainer {
     public void setIsReady(boolean isReady0) {
         if (isReady == isReady0) { return; }
         isReady = isReady0;
-        if (allowNetworking) {
+        // humanAiSwitch doubles as the Open/AI selector for host-controlled opponent slots;
+        // only drive it from the ready field when the switch is actually showing Ready/NotReady.
+        if (allowNetworking && !isOpenAiSlotToggle()) {
             humanAiSwitch.setToggled(isReady);
         }
     }
@@ -966,7 +1014,7 @@ public class PlayerPanel extends FContainer {
         sleeveLabel.setEnabled(mayEdit);
         txtPlayerName.setEnabled(mayEdit);
         nameRandomiser.setEnabled(mayEdit);
-        humanAiSwitch.setEnabled(mayEdit);
+        refreshSlotToggle();
         cbTeam.setEnabled(mayEdit);
         if (devModeSwitch != null) {
             devModeSwitch.setEnabled(mayEdit);
@@ -992,6 +1040,7 @@ public class PlayerPanel extends FContainer {
     public void setMayControl(boolean mayControl0) {
         if (mayControl == mayControl0) { return; }
         mayControl = mayControl0;
+        refreshSlotToggle();
     }
 
     public void setMayRemove(boolean mayRemove0) {

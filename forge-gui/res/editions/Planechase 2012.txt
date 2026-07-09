@@ -162,12 +162,12 @@ ScryfallCode=PC2
 154 L Forest @Véronique Meignaud
 155 L Forest @Vincent Proce
 156 L Forest @Stephen Tappin
-OPC21 C Chaotic Aether @Dan Scott
+OPC21 C Chaotic Aether @Dan Murayama Scott
 OPC22 C Interplanar Tunnel @Chuck Lukacs
 OPC23 C Morphic Tide @Brandon Kitkouski
 OPC24 C Mutual Epiphany @Jason Felix
 OPC25 C Planewide Disaster @Dave Kendall
-OPC26 C Reality Shaping @Dan Scott
+OPC26 C Reality Shaping @Dan Murayama Scott
 OPC27 C Spatial Merging @Gabor Szikszai
 OPC28 C Time Distortion @rk post
 OPC29 C Akoum @Rob Alexander

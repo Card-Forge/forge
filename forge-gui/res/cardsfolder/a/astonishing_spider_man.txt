@@ -1,0 +1,11 @@
+Name:Astonishing Spider-Man
+ManaCost:2 UR UR
+Types:Legendary Creature Spider Human Hero
+PT:4/4
+K:Reach
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand. If you do, draw a card for each card you've discarded this turn.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Hand> | NumCards$ X
+SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
+DeckHas:Ability$Discard
+SVar:HasAttackEffect:TRUE
+Oracle:Reach\nWhenever Astonishing Spider-Man attacks, you may discard your hand. If you do, draw a card for each card you've discarded this turn.

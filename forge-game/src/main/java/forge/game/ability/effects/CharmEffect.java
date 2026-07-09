@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import java.util.Comparator;
 import java.util.List;
 
+import forge.util.Expressions;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -37,7 +38,7 @@ public class CharmEffect extends SpellAbilityEffect {
             for (AbilitySub ch : choices) {
                 // 603.3c If one of the modes would be illegal, that mode can't be chosen.
                 if ((ch.usesTargeting() && ch.getMinTargets() > 0 &&
-                        ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
+                        ch.getTargetRestrictions().getNumCandidates(ch) == 0) ||
                         (restriction != null && restriction.contains(ch.getDescription()))) {
                     toRemove.add(ch);
                 }
@@ -239,8 +240,16 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("Random")) {
-            chainAbilities(sa, Aggregates.random(choices, num));
-            return true;
+            boolean random = true;
+            if (sa.getParam("Random").equals("Compare")) {
+                String compare = sa.getParam("RandomCompare");
+                int value = AbilityUtils.calculateAmount(source, sa.getParam("RandomCompareSVar"), sa);
+                random = Expressions.compare(value, compare.substring(0, 2), Integer.parseInt(compare.substring(2)));
+            }
+            if (random) {
+                chainAbilities(sa, Aggregates.random(choices, num));
+                return true;
+            }
         }
 
         Player chooser = sa.getActivatingPlayer();

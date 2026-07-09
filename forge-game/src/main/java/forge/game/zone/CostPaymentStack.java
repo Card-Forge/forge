@@ -5,32 +5,27 @@ import java.util.Stack;
 
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPayment;
-import forge.game.cost.IndividualCostPaymentInstance;
 
 /*
  * simple stack wrapper class for tracking cost payments (mainly for triggers to use)
  */
-public class CostPaymentStack implements Iterable<IndividualCostPaymentInstance> {
+public class CostPaymentStack implements Iterable<CostPaymentStack.Entry> {
 
-    private Stack<IndividualCostPaymentInstance> stack;
+    private Stack<Entry> stack;
 
     public CostPaymentStack() {
         stack = new Stack<>();
     }
 
-    public IndividualCostPaymentInstance push(final CostPart cost, final CostPayment payment) {
-        return this.push(new IndividualCostPaymentInstance(cost, payment));
+    public Entry push(final CostPart cost, final CostPayment payment) {
+        return stack.push(new Entry(cost, payment));
     }
 
-    public IndividualCostPaymentInstance push(IndividualCostPaymentInstance costPaymentInstance) {
-        return stack.push(costPaymentInstance);
-    }
-
-    public IndividualCostPaymentInstance pop() {
+    public Entry pop() {
         return stack.pop();
     }
 
-    public IndividualCostPaymentInstance peek() {
+    public Entry peek() {
         if (stack.empty()) {
             return null;
         }
@@ -43,12 +38,16 @@ public class CostPaymentStack implements Iterable<IndividualCostPaymentInstance>
     }
 
     @Override
-    public Iterator<IndividualCostPaymentInstance> iterator() {
+    public Iterator<Entry> iterator() {
         return stack.iterator();
     }
 
     @Override
     public String toString() {
         return stack.toString();
+    }
+
+    public record Entry(CostPart cost, CostPayment payment) {
+
     }
 }

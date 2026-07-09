@@ -1,0 +1,9 @@
+[metadata]
+Code=TRC
+Date=2026-11-20
+Name=Star Trek Commander
+Type=Commander
+ScryfallCode=TRC
+
+[cards]
+85 M Captain Kirk, Boldly Going @Josh Newton

@@ -1,0 +1,10 @@
+Name:Human Torch, Johnny Storm
+ManaCost:2 R
+Types:Legendary Creature Human Hero
+PT:2/2
+K:Flying
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | IsPresent$ Hero.YouCtrl+Other | TriggerDescription$ Whenever you draw a card, if you control another Hero, NICKNAME deals 1 damage to target opponent.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 1
+A:AB$ PutCounter | Cost$ 6 R | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | PowerUp$ True | SpellDescription$ Put three +1/+1 counters on NICKNAME. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+DeckHints:Type$Hero
+Oracle:Flying\nWhenever you draw a card, if you control another Hero, Human Torch deals 1 damage to target opponent.\nPower-up — {6}{R}: Put three +1/+1 counters on Human Torch. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)

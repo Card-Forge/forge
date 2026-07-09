@@ -31,6 +31,7 @@ import forge.toolbox.FList.CompactModeHandler;
 public class CardManager extends ItemManager<PaperCard> {
     public CardManager(boolean wantUnique0) {
         super(PaperCard.class, wantUnique0);
+        setAllowGroupIdentical(true);
     }
 
     @Override
@@ -70,7 +71,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
     @Override
     protected Iterable<Entry<PaperCard, Integer>> getUnique(Iterable<Entry<PaperCard, Integer>> items) {
-        //TO-maybe-DO: Share logic between this and identical method in desktop.
+        //TO-maybe-DO: Share logic between this and identical method in desktop. Possibly also with the unique indexing in CardDB?
         ListMultimap<String, Entry<PaperCard, Integer>> entriesByName = Multimaps.newListMultimap(
                 new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
         for (Entry<PaperCard, Integer> item : items) {

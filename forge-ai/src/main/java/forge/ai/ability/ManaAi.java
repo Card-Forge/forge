@@ -263,11 +263,11 @@ public class ManaAi extends SpellAbilityAi {
         if (mp.isEmpty()) {
             // TODO use color from ability
             test = new Mana((byte) ManaAtom.COLORLESS, source, null, ai);
-            mp.addMana(test, false);
+            mp.addManaNoEvent(test);
         }
         boolean lose = mp.willManaBeLostAtEndOfPhase();
         if (test != null) {
-            mp.removeMana(test, false);
+            mp.removeManaNoEvent(test);
         }
         return !lose;
     }

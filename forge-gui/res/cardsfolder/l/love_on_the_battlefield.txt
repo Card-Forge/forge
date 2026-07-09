@@ -1,0 +1,11 @@
+Name:Love on the Battlefield
+ManaCost:1 U R
+Types:Enchantment
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature | IsPresent$ Creature.attacking+YouCtrl | PresentCompare$ EQ2 | NoResolvingCheck$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with exactly two creatures, those creatures gain first strike until end of turn, then draw a card. Whenever either of those creatures deals combat damage to a player this combat, put a +1/+1 counter on it.
+SVar:TrigPump:DB$ Pump | Defined$ TriggerObjectsAttackers | KW$ First Strike | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Triggers$ DamageTrigger | RememberObjects$ TriggeredAttackers | Duration$ UntilEndOfCombat
+SVar:DamageTrigger:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | ValidTarget$ Player | Execute$ TrigPutCounter | CombatDamage$ True | TriggerDescription$ Whenever either of those creatures deals combat damage to a player this combat, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+Oracle:Whenever you attack with exactly two creatures, those creatures gain first strike until end of turn, then draw a card. Whenever either of those creatures deals combat damage to a player this combat, put a +1/+1 counter on it.

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/MillerMTG_-_Eldrazi_Aggro_(Modern,_#2944527).dck
+Deck Type=constructed
+
+[Main]
+3 Devourer of Destiny
+4 Glaring Fleshraker
+4 It That Heralds the End
+2 Wastescape Battlemage
+4 Eldrazi Linebreaker
+3 Sowing Mycospawn
+3 Sire of Seven Deaths
+4 Thought-Knot Seer
+3 Vexing Bauble
+2 Chalice of the Void
+4 Kozilek's Command
+2 Ugin, Eye of the Storms
+4 Ugin's Labyrinth
+2 Petrified Hamlet
+4 Eldrazi Temple
+4 Cavern of Souls
+2 Wastes
+1 Mountain
+1 Forest
+4 Secluded Courtyard
+[Sideboard]
+2 The Stone Brain
+2 Soulless Jailer
+1 Wastescape Battlemage
+2 Disruptor Flute
+2 Dismember
+2 Torpor Orb
+2 Damping Sphere
+2 Trinisphere

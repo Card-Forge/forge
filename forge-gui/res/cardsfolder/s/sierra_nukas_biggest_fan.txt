@@ -10,4 +10,5 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target 
 SVar:X:Count$CardCounters.QUEST
 DeckHas:Ability$Token|Counters & Type$Food
 DeckHints:Type$Food
+SVar:AICounterOverrideQUEST:Positive
 Oracle:The Nuka-Cola Challenge — Whenever one or more creatures you control deal combat damage to a player, put a quest counter on Sierra, Nuka's Biggest Fan and create a Food token.\nWhenever you sacrifice a Food, target creature you control gets +X/+X until end of turn, where X is the number of quest counters on Sierra.

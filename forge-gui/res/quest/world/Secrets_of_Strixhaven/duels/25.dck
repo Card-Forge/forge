@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Orunmila
+Title=Orunmila
+Icon=Orunmila.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Aleksander_Jones_-_Azorius_Prison_(Standard,_#2940445).dck
+Deck Type=constructed
+
+[Main]
+4 Aang, Swift Savior
+4 Aven Interrupter
+4 Floodpits Drowner
+4 Skycoach Conductor
+4 Voice of Victory
+2 Enduring Curiosity
+2 Wan Shi Tong, Librarian
+2 Get Lost
+2 Spell Snare
+2 Avatar's Wrath
+4 High Noon
+1 Airbender Ascension
+4 Floodfarm Verge
+4 Hallowed Fountain
+4 Island
+4 Plains
+4 Starting Town
+2 Abandoned Air Temple
+2 Multiversal Passage
+1 Restless Anchorage
+[Sideboard]
+2 Annul
+2 Beza, the Bounding Spring
+2 Disdainful Stroke
+2 Flashfreeze
+2 Ghost Vacuum
+2 Seam Rip
+2 Tishana's Tidebinder
+1 Avatar's Wrath

@@ -73,6 +73,14 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
             .icon(FSkin.getIcon(FSkinProp.ICO_PRINT))
             .text(" ").hoverable(true).build();
 
+    private final FLabel btnCopyToClipboard = new FLabel.Builder()
+            .fontSize(14)
+            .tooltip(localizer.getMessage("btnCopyToClipboard"))
+            .iconInBackground(true)
+            .iconAlignX(SwingConstants.CENTER)
+            .icon(FSkin.getIcon(FSkinProp.ICO_CLIPBOARD))
+            .text(" ").hoverable(true).build();
+
     private final FLabel btnImport = new FLabel.Builder()
             .fontSize(14)
             .text(localizer.getMessage("lblImport"))
@@ -102,7 +110,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
         pnlHeader.add(btnLoad, "w 26px!, h 26px!");
         pnlHeader.add(btnSaveAs, "w 26px!, h 26px!");
-        pnlHeader.add(btnPrintProxies, "w 26px!, h 26px!");
+        pnlHeader.add(btnCopyToClipboard, "w 26px!, h 26px!");
         pnlHeader.add(btnImport, "w 61px!, h 26px!");
     }
 
@@ -185,6 +193,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
     /** @return {@link javax.swing.JLabel} */
     public FLabel getBtnPrintProxies() {
         return btnPrintProxies;
+    }
+
+    /** @return {@link javax.swing.JLabel} */
+    public FLabel getBtnCopyToClipboard() {
+        return btnCopyToClipboard;
     }
 
     /** @return {@link javax.swing.JLabel} */

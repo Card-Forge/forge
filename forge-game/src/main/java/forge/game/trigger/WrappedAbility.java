@@ -14,7 +14,7 @@ import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardDamageMap;
+import forge.game.card.CardDamageTable;
 import forge.game.card.CardState;
 import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
@@ -155,12 +155,10 @@ public class WrappedAbility extends Ability {
         if (getTrigger() != null) {
             if (getHostCard() != null) {
                 return getHostCard().toString() + ": " + getTrigger().toString();
-            } else {
-                return getTrigger().toString();
             }
-        } else {
-            return super.yieldKey();
+            return getTrigger().toString();
         }
+        return super.yieldKey();
     }
 
     // include triggering information so that different effects look different
@@ -172,7 +170,8 @@ public class WrappedAbility extends Ability {
         String card = getHostCard().toString();
         if (!desc.contains(card) && desc.contains(" this ")) { /* a hack for Evolve and similar that don't have CARDNAME */
                 return card + ": " + desc;
-        } else return desc;
+        }
+        return desc;
     }
 
     @Override
@@ -185,6 +184,9 @@ public class WrappedAbility extends Ability {
         if (regtrig == null) return "";
         final StringBuilder sb =
                 new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this, true));
+        if (!regtrig.getTriggerRemembered().isEmpty()) {
+            sb.append(" (").append(regtrig.getTriggerRemembered()).append(")");
+        }
 
         // prevent text growing too long when SA target other in a chain and also potential StackOverflow
         if (withTargets) {
@@ -439,11 +441,11 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public CardDamageMap getDamageMap() {
+    public CardDamageTable getDamageMap() {
         return sa.getDamageMap();
     }
     @Override
-    public CardDamageMap getPreventMap() {
+    public CardDamageTable getPreventMap() {
         return sa.getPreventMap();
     }
     @Override
@@ -455,11 +457,11 @@ public class WrappedAbility extends Ability {
         return sa.getChangeZoneTable();
     }
     @Override
-    public void setDamageMap(final CardDamageMap map) {
+    public void setDamageMap(final CardDamageTable map) {
         sa.setDamageMap(map);
     }
     @Override
-    public void setPreventMap(final CardDamageMap map) {
+    public void setPreventMap(final CardDamageTable map) {
         sa.setPreventMap(map);
     }
     @Override
@@ -510,5 +512,10 @@ public class WrappedAbility extends Ability {
 
     public boolean isKeyword(Keyword kw) {
         return sa.isKeyword(kw);
+    }
+
+    @Override
+    public String getName() {
+        return sa.getName();
     }
 }
