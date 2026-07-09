@@ -95,7 +95,7 @@ public class GameCopier {
             newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
             newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
             newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
-            newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
+            newPlayer.setCounters(HashMultiset.create(origPlayer.getCounters()));
             newPlayer.setSpeed(origPlayer.getSpeed());
             newPlayer.setBlessing(origPlayer.hasBlessing(), null);
             newPlayer.setDescended(origPlayer.getDescended());
@@ -409,9 +409,9 @@ public class GameCopier {
                 newCard.addCloneState(e.getValue().copy(newCard, true), e.getKey());
             }
 
-            Map<CounterType, Integer> counters = c.getCounters();
+            Multiset<CounterType> counters = c.getCounters();
             if (!counters.isEmpty()) {
-                newCard.setCounters(Maps.newHashMap(counters));
+                newCard.setCounters(HashMultiset.create(counters));
             }
             if (c.hasChosenPlayer()) {
                 newCard.setChosenPlayer(playerMap.get(c.getChosenPlayer()));

@@ -252,7 +252,7 @@ public class GameAction {
 
             // need to copy counters when card enters another zone than hand or library
             if (StaticAbilityCountersRemain.countersRemain(lastKnownInfo, zoneTo)) {
-                copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()));
+                copied.setCounters(HashMultiset.create(lastKnownInfo.getCounters()));
             }
 
             // perpetual stuff
@@ -2279,7 +2279,7 @@ public class GameAction {
 
         //shuffle
         List<Card> shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
-        Collections.shuffle(shuffledCards);
+        Collections.shuffle(shuffledCards, MyRandom.getRandom());
 
         //check a second hand
         List<Card> hand2 = shuffledCards.subList(0,p1.getMaxHandSize());

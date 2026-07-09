@@ -1,9 +1,12 @@
 package forge.game;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multiset;
+
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.CardStateName;
@@ -423,10 +426,9 @@ public class GameState {
 
         if (zoneType == ZoneType.Battlefield || zoneType == ZoneType.Exile) {
             // A card can have counters on the battlefield and in exile (e.g. exiled by Mairsil, the Pretender)
-            Map<CounterType, Integer> counters = c.getCounters();
-            if (!counters.isEmpty()) {
+            if (!c.getCounters().isEmpty()) {
                 newText.append("|Counters:");
-                newText.append(countersToString(counters));
+                newText.append(countersToString(c.getCounters()));
             }
         }
 
@@ -450,17 +452,17 @@ public class GameState {
         cardTexts.put(zoneType, newText.toString());
     }
 
-    private String countersToString(Map<CounterType, Integer> counters) {
+    private String countersToString(Multiset<CounterType> counters) {
         boolean first = true;
         StringBuilder counterString = new StringBuilder();
 
-        for (Entry<CounterType, Integer> kv : counters.entrySet()) {
+        for (Multiset.Entry<CounterType> kv : counters.entrySet()) {
             if (!first) {
                 counterString.append(",");
             }
 
             first = false;
-            counterString.append(TextUtil.concatNoSpace(kv.getKey().toString(), "=", String.valueOf(kv.getValue())));
+            counterString.append(TextUtil.concatNoSpace(kv.getElement().toString(), "=", String.valueOf(kv.getCount())));
         }
         return counterString.toString();
     }
@@ -1124,7 +1126,7 @@ public class GameState {
     }
 
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
-        entity.setCounters(Maps.newHashMap());
+        entity.setCounters(HashMultiset.create());
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
@@ -1174,9 +1176,9 @@ public class GameState {
                     }
                     boolean tapped = c.isTapped();
                     boolean sickness = c.hasSickness();
-                    Map<CounterType, Integer> counters = c.getCounters();
+                    Multiset<CounterType> counters = c.getCounters();
                     // Note: Not clearCounters() since we want to keep the counters var as-is.
-                    c.setCounters(Maps.newHashMap());
+                    c.setCounters(HashMultiset.create());
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere
                         // (will be overridden later, so the actual value shouldn't matter)

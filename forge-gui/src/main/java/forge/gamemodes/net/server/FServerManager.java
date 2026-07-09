@@ -26,6 +26,7 @@ import forge.gui.interfaces.IGuiGame;
 import forge.gui.util.SOptionPane;
 import forge.interfaces.IGameController;
 import forge.interfaces.ILobbyListener;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.util.BuildInfo;
@@ -437,6 +438,8 @@ public final class FServerManager implements IHasForgeLog {
     }
 
     public void updateLobbyState() {
+        localLobby.getData().setMaximumCommanderBracket(
+                FModel.getPreferences().getPrefInt(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET));
         final LobbyUpdateEvent event = new LobbyUpdateEvent(localLobby.getData());
         broadcast(event);
     }
