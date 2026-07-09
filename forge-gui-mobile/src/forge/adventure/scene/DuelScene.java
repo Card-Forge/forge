@@ -159,10 +159,20 @@ public class DuelScene extends ForgeScene {
         boolean isBossLoss = (chaosBattle || showMessages) && !finalWinner;
         boolean hasAnteResults = !anteWonCards.isEmpty() || !anteLostCards.isEmpty();
 
-        // No popups needed, preserve original behavior
-        if (!hasAnteResults && !isBossLoss) {
-            afterGameEnd(enemyName, finalWinner);
-            return;
+        if (!isBossLoss) {
+            if (enemy.getData().boss) {
+                // Check if the enemy's deck is stored in a path containing "miniboss" or just "boss".
+                if (enemy.getData().deck[0].toLowerCase().contains("miniboss")) {
+                    ArchipelagoData.getInstance().addMiniBossDefeated(enemyName);
+                } else {
+                    ArchipelagoData.getInstance().addBossDefeated(enemyName);
+                }
+            }
+            // No popups needed, preserve original behavior
+            if (!hasAnteResults) {
+                afterGameEnd(enemyName, finalWinner);
+                return;
+            }
         }
 
         // Build popup chain: ante results -> boss dialogue -> exit
@@ -186,14 +196,6 @@ public class DuelScene extends ForgeScene {
                 FThreads.invokeInEdtNowOrLater(() -> bossDialogue.show());
             };
         } else {
-            if (enemy.getData().boss) {
-                // Check if the enemy's deck is stored in a path containing "miniboss" or just "boss".
-                if (enemy.getData().deck[0].toLowerCase().contains("miniboss")) {
-                    ArchipelagoData.getInstance().addMiniBossDefeated(enemyName);
-                } else {
-                    ArchipelagoData.getInstance().addBossDefeated(enemyName);
-                }
-            }
             afterAnte = exitChain;
         }
 
