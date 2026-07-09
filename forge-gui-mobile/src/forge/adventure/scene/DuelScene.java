@@ -8,6 +8,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
 import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
@@ -160,7 +161,7 @@ public class DuelScene extends ForgeScene {
         boolean hasAnteResults = !anteWonCards.isEmpty() || !anteLostCards.isEmpty();
 
         if (!isBossLoss) {
-            if (enemy.getData().boss) {
+            if (enemy.getData().boss && ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled) {
                 // Check if the enemy's deck is stored in a path containing "miniboss" or just "boss".
                 if (enemy.getData().deck[0].toLowerCase().contains("miniboss")) {
                     ArchipelagoData.getInstance().addMiniBossDefeated(enemyName);
