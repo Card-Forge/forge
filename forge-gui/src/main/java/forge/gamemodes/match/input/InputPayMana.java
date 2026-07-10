@@ -443,7 +443,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         Evaluator<CardCollection> proc = new Evaluator<>() {
             @Override
             public CardCollection evaluate() {
-                return ComputerUtilMana.getManaSourcesToPayCost(costCopy, saPaidFor, player, effect);
+                return ComputerUtilMana.getManaSourcesToPayCostForPaymentPrompt(costCopy, saPaidFor, player, effect);
             }
         };
         runAsAi(proc);

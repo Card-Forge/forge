@@ -523,7 +523,7 @@ public class AutoPaymentTest extends SimulationTest {
 
     private CardCollection predictedManaSources(Game game, Player p, ManaCostBeingPaid mc, SpellAbility sa) {
         final CardCollection[] sources = new CardCollection[1];
-        p.runWithController(() -> sources[0] = ComputerUtilMana.getManaSourcesToPayCost(mc, sa, p),
+        p.runWithController(() -> sources[0] = ComputerUtilMana.getManaSourcesToPayCostForPaymentPrompt(mc, sa, p, false),
                 new PlayerControllerAi(game, p, p.getOriginalLobbyPlayer()));
         return sources[0];
     }
@@ -761,6 +761,124 @@ public class AutoPaymentTest extends SimulationTest {
                 sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
     }
 
+    // Casting {2} on stack: one colorless rock + one colored basic, not two colored basics; test == prod.
+    @Test
+    public void doubleGenericUsesColorlessRockNotSecondColoredBasic() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Forest", p);
+        addCard("Reliquary Tower", p);
+        addCards("Snow-Covered Forest", 1, p);
+        addCardToZone("Thought-Knot Seer", p, ZoneType.Hand);
+        Card spell = addSpellOnStack(game, "Fellwar Stone", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("2");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Reliquary Tower should pay generic {1}",
+                sources.anyMatch(c -> "Reliquary Tower".equals(c.getName())));
+        AssertJUnit.assertEquals("Should tap exactly two sources for {2}", 2, sources.size());
+        AssertJUnit.assertFalse("Should not tap two colored basics for {2}",
+                sources.stream().filter(c -> c.getName().contains("Forest")).count() >= 2);
+
+        AssertJUnit.assertTrue("Production auto-pay should match preview", prodAutoPay(game, p, mc, sa));
+    }
+
+    // {2} Mind Stone on stack: Snow-Covered Forest + Study Hall {T}:{C}, not two colored basics; test == prod.
+    @Test
+    public void stackMindStoneUsesStudyHallNotSecondForestForGeneric() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Snow-Covered Forest", p);
+        addCard("Forest", p);
+        addCard("Study Hall", p);
+        Card spell = addSpellOnStack(game, "Mind Stone", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("2");
+        AssertJUnit.assertTrue(canAutoPay(game, p, new ManaCostBeingPaid(mc), sa));
+
+        CardCollection sources = predictedManaSources(game, p, new ManaCostBeingPaid(mc), sa);
+        AssertJUnit.assertTrue("Study Hall should pay generic {1}",
+                sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+        AssertJUnit.assertEquals("Should tap exactly two sources for {2}", 2, sources.size());
+        AssertJUnit.assertFalse("Should not tap two colored basics for {2}",
+                sources.stream().filter(c -> c.getName().contains("Forest")).count() >= 2);
+
+        AssertJUnit.assertTrue("Production auto-pay should match preview", prodAutoPay(game, p, new ManaCostBeingPaid(mc), sa));
+        AssertJUnit.assertEquals("Study Hall should be tapped in production", 1, countTapped(game, "Study Hall"));
+        AssertJUnit.assertEquals("Only one Forest should be tapped in production", 1,
+                countTapped(game, "Snow-Covered Forest") + countTapped(game, "Forest"));
+    }
+
+    // {1}{W}{G} on stack: Plains {W}, Forest {G}, Reliquary Tower {C} for generic — not Sol Ring.
+    @Test
+    public void stackCalixUsesReliquaryTowerNotSolRingForGeneric() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Forest", p);
+        addCard("Reliquary Tower", p);
+        addCard("Sol Ring", p);
+        Card spell = addSpellOnStack(game, "Calix, Guided by Fate", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 W G");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Plains should pay {W}", sources.anyMatch(c -> "Plains".equals(c.getName())));
+        AssertJUnit.assertTrue("Forest should pay {G}", sources.anyMatch(c -> "Forest".equals(c.getName())));
+        AssertJUnit.assertTrue("Reliquary Tower should pay generic {1}",
+                sources.anyMatch(c -> "Reliquary Tower".equals(c.getName())));
+        AssertJUnit.assertFalse("Sol Ring should not pay generic {1} when Reliquary Tower can",
+                sources.anyMatch(c -> "Sol Ring".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
+    // {2}{G} should tap Sol Ring once for {2}, not Reliquary Tower + Sol Ring.
+    @Test
+    public void solRingPaysDoubleGenericWithColoredPip() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Snow-Covered Forest", p);
+        addCard("Reliquary Tower", p);
+        addCard("Sol Ring", p);
+        Card spell = addCardToZone("Chomping Changeling", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("2 G"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("2 G"), sa);
+        AssertJUnit.assertTrue("Forest should pay {G}",
+                sources.anyMatch(c -> c.getName().contains("Forest")));
+        AssertJUnit.assertTrue("Sol Ring should pay {2}", sources.anyMatch(c -> "Sol Ring".equals(c.getName())));
+        AssertJUnit.assertFalse("Reliquary Tower should not pay generic when Sol Ring covers {2}",
+                sources.anyMatch(c -> "Reliquary Tower".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("2 G"), sa));
+    }
+
     // {2}{G}{G} should tap Sol Ring once for {2}, not Thought Vessel + Sol Ring.
     @Test
     public void solRingPaysDoubleGenericWithoutExtraRock() {
@@ -946,6 +1064,38 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue("Signet should pay", sources.anyMatch(c -> "Selesnya Signet".equals(c.getName())));
         AssertJUnit.assertTrue("Lotus Petal should activate the Signet",
                 sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
+    // {1}{W} on stack: preserve Razorverge Thicket for another hand spell; pay generic with Fellwar Stone.
+    @Test
+    public void stackPaymentUsesOffColorRockForGeneric() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        addCard("Swamp", opp);
+        addCard("Snow-Covered Plains", p);
+        addCard("Razorverge Thicket", p);
+        addCard("Fellwar Stone", p);
+        addCardToZone("Healing Salve", p, ZoneType.Hand);
+        Card spell = addSpellOnStack(game, "Luminarch Aspirant", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Plains should pay {W}",
+                sources.anyMatch(c -> c.getName().contains("Plains")));
+        AssertJUnit.assertTrue("Fellwar Stone should pay generic {1}",
+                sources.anyMatch(c -> "Fellwar Stone".equals(c.getName())));
+        AssertJUnit.assertFalse("Razorverge Thicket should be preserved for hand spells",
+                sources.anyMatch(c -> "Razorverge Thicket".equals(c.getName())));
 
         AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
