@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -47,6 +49,7 @@ import forge.util.TextUtil;
  */
 final class ManaPaymentPlanner {
     private static final int DEFAULT_MAX_STATES = 10000;
+    private static final int MAX_PAYMENT_CANDIDATES = 16;
     static int maxStates = DEFAULT_MAX_STATES;
     private final Player ai;
     private final boolean checkPlayable;
@@ -54,6 +57,8 @@ final class ManaPaymentPlanner {
     private final Map<AbilityManaPart, String> originalChoices = new HashMap<>();
     private final Map<Integer, AbilityInfo> abilityInfo = new HashMap<>();
     private final Map<Integer, Integer> sourceScores = new HashMap<>();
+    private final Map<Integer, Integer> sourcePaymentScores = new HashMap<>();
+    private final Map<Integer, Integer> sourcePotentials = new HashMap<>();
     private final Map<String, List<Mana>> virtualManaCache = new HashMap<>();
     private int remainingStates = maxStates;
 
@@ -87,10 +92,65 @@ final class ManaPaymentPlanner {
         return new ManaPaymentPlanner(ai, checkPlayable).findPlan(cost, sa);
     }
 
+    static Plan findBetterConsolidatingPlan(final ManaCostBeingPaid cost, final SpellAbility sa,
+            final Player ai, final boolean checkPlayable, final Set<Card> greedySources) {
+        return new ManaPaymentPlanner(ai, checkPlayable).findBetterConsolidatingPlan(cost, sa, greedySources);
+    }
+
     private Plan findPlan(final ManaCostBeingPaid cost, final SpellAbility sa) {
-        State start = new State(new VirtualPool(Lists.newArrayList(ai.getManaPool())), new HashSet<>(),
-                new ArrayList<>(), 0);
-        return findPaymentPlan(new ManaCostBeingPaid(cost), start, sa);
+        List<State> candidates = findPaymentCandidates(new ManaCostBeingPaid(cost), sa);
+        if (candidates == null) {
+            return Plan.EXHAUSTED;
+        }
+        State best = candidates.stream().min(Comparator.comparingInt(State::score)).orElse(null);
+        return best == null ? null : new Plan(best.actions, usedPoolSources(best));
+    }
+
+    private Plan findBetterConsolidatingPlan(final ManaCostBeingPaid cost, final SpellAbility sa,
+            final Set<Card> greedySources) {
+        if (greedySources.isEmpty()) {
+            return null;
+        }
+        boolean spendsDisposableMana = greedySources.stream().anyMatch(source -> source.getManaAbilities().stream()
+                .anyMatch(ma -> ComputerUtilCost.isSacrificeSelfCost(ma.getPayCosts())));
+        if (!spendsDisposableMana && (greedySources.size() < 2 || greedySources.size() <= cost.getConvertedManaCost()
+                && manaAbilities.stream().noneMatch(ma -> {
+            Cost abilityCost = ma.getPayCosts();
+            SpellAbility manaSa = ComputerUtilMana.getManaPartAbility(ma);
+            return abilityCost.hasManaCost() && abilityCost.hasTapCost()
+                    && (manaSa != null && manaSa.getManaPart().isComboMana()
+                    || ma.totalAmountOfManaGenerated(sa, true) > abilityCost.getCostMana().getMana().getCMC());
+        }))) {
+            return null;
+        }
+        Set<Integer> greedySourceIds = new HashSet<>();
+        greedySources.forEach(source -> greedySourceIds.add(source.getId()));
+
+        List<State> candidates = findPaymentCandidates(new ManaCostBeingPaid(cost), sa);
+        if (candidates == null) {
+            return null;
+        }
+
+        int bestPotential = remainingManaPotential(greedySourceIds);
+        int bestScore = paymentScore(greedySourceIds);
+        State best = null;
+        for (State candidate : candidates) {
+            int potential = remainingManaPotential(candidate.usedSourceIds);
+            // Replay an equally cheap disposable payment so the real greedy pass cannot reroute it.
+            boolean better = spendsDisposableMana
+                    ? candidate.score < bestScore || candidate.score == bestScore && best == null
+                    : potential > bestPotential || potential == bestPotential && candidate.score < bestScore;
+            if (better) {
+                bestPotential = potential;
+                bestScore = candidate.score;
+                best = candidate;
+            }
+        }
+        return best == null ? null : new Plan(best.actions, usedPoolSources(best));
+    }
+
+    private int paymentScore(final Set<Integer> usedSources) {
+        return usedSources.stream().mapToInt(id -> sourcePaymentScores.getOrDefault(id, 0)).sum();
     }
 
     private static boolean isSupportedActivationCost(final Cost cost) {
@@ -107,20 +167,29 @@ final class ManaPaymentPlanner {
         return true;
     }
 
-    private Plan findPaymentPlan(final ManaCostBeingPaid cost, final State start, final SpellAbility paidFor) {
-        List<State> candidates;
+    private List<State> findPaymentCandidates(final ManaCostBeingPaid cost, final SpellAbility paidFor) {
+        State start = new State(new VirtualPool(Lists.newArrayList(ai.getManaPool())), new HashSet<>(),
+                new ArrayList<>(), 0);
         try {
-            candidates = findPaymentCandidates(cost, start, paidFor);
+            return searchPaymentCandidates(cost, start, paidFor);
         } finally {
             originalChoices.forEach(AbilityManaPart::setExpressChoice);
         }
-        if (candidates == null) {
-            return Plan.EXHAUSTED;
-        }
-        return candidates.isEmpty() ? null : new Plan(candidates.get(0).actions);
     }
 
-    private List<State> findPaymentCandidates(final ManaCostBeingPaid cost, final State start,
+    private Set<Card> usedPoolSources(final State result) {
+        Set<Mana> remaining = Collections.newSetFromMap(new IdentityHashMap<>());
+        remaining.addAll(result.pool.mana);
+        Set<Card> sources = new LinkedHashSet<>();
+        for (Mana mana : ai.getManaPool()) {
+            if (!remaining.remove(mana) && mana.getSourceCard() != null) {
+                sources.add(mana.getSourceCard());
+            }
+        }
+        return sources;
+    }
+
+    private List<State> searchPaymentCandidates(final ManaCostBeingPaid cost, final State start,
             final SpellAbility paidFor) {
         // Best-first search prefers lower-score plans, with the priority nudged toward states that
         // leave less of the current cost unpaid. The request-wide hard cap keeps adversarial boards bounded.
@@ -134,6 +203,7 @@ final class ManaPaymentPlanner {
         bestScores.put(startKey, start.score);
         ManaCostBeingPaid remainingCost = start.pool.remainingCost(cost, paidFor, ai);
         search.add(new Node(remainingCost, start, 250 * remainingCost.getConvertedManaCost(), startKey));
+        List<State> candidates = new ArrayList<>();
 
         while (!search.isEmpty() && remainingStates-- > 0) {
             Node node = search.poll();
@@ -147,7 +217,11 @@ final class ManaPaymentPlanner {
             if (state.pool.mana.size() >= cost.getConvertedManaCost()) {
                 List<State> paid = payCostFromVirtualPool(new ManaCostBeingPaid(cost), state, paidFor, false);
                 if (!paid.isEmpty()) {
-                    return paid;
+                    candidates.addAll(paid);
+                    if (candidates.size() >= MAX_PAYMENT_CANDIDATES) {
+                        return candidates;
+                    }
+                    continue;
                 }
             }
 
@@ -210,7 +284,12 @@ final class ManaPaymentPlanner {
         }
 
         // An empty queue proves there is no remaining path; a non-empty queue means the budget expired.
-        return search.isEmpty() ? Collections.emptyList() : null;
+        return !search.isEmpty() && candidates.isEmpty() ? null : candidates;
+    }
+
+    private int remainingManaPotential(final Set<Integer> usedSources) {
+        return sourcePotentials.entrySet().stream().filter(e -> !usedSources.contains(e.getKey()))
+                .mapToInt(Map.Entry::getValue).sum();
     }
 
     private List<State> payManaAbilityActivationCost(final State state, final SpellAbility ma) {
@@ -528,10 +607,16 @@ final class ManaPaymentPlanner {
         for (SpellAbility ma : manaAbilities) {
             Card source = ma.getHostCard();
             int amount = Math.max(1, ma.totalAmountOfManaGenerated(paidFor, true));
+            int colors = Integer.bitCount(getManaAbilityColorMask(ma, paidFor) & MagicColor.ALL_COLORS);
             int score = 10 * sourceScores.computeIfAbsent(source.getId(), id ->
-                    ComputerUtilMana.scoreManaProducingCard(source)) + 25 * amount * amount;
+                    ComputerUtilMana.scoreManaProducingCard(source)) + 25 * amount * amount + colors;
             String abilityKey = manaAbilitySourceKey(ma, amount, score);
             abilityInfo.put(ma.getId(), new AbilityInfo(abilityKey, score));
+            sourcePaymentScores.merge(source.getId(), score, Math::min);
+            if (!ma.getPayCosts().hasManaCost()) {
+                // Preserve mana quantity first; use color breadth only to break equal-output choices.
+                sourcePotentials.merge(source.getId(), 10 * amount + colors, Math::max);
+            }
             keysBySource.computeIfAbsent(source.getId(), k -> new ArrayList<>())
                     .add(abilityKey);
         }
@@ -588,15 +673,22 @@ final class ManaPaymentPlanner {
 
     static final class Plan {
         private static final List<Action> EXHAUSTED_ACTIONS = Collections.emptyList();
-        private static final Plan EXHAUSTED = new Plan(EXHAUSTED_ACTIONS);
+        private static final Plan EXHAUSTED = new Plan(EXHAUSTED_ACTIONS, Collections.emptySet());
         private final List<Action> actions;
+        private final Set<Card> poolSources;
 
-        private Plan(final List<Action> actions) {
+        private Plan(final List<Action> actions, final Set<Card> poolSources) {
             this.actions = actions;
+            this.poolSources = poolSources;
         }
 
         boolean isExhausted() {
             return actions == EXHAUSTED_ACTIONS;
+        }
+
+        void addManaSourcesTo(final Set<Card> sources) {
+            sources.addAll(poolSources);
+            actions.stream().map(action -> action.manaAbility.getHostCard()).forEach(sources::add);
         }
 
         boolean pay(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
