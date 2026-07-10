@@ -431,6 +431,16 @@ public class SFilterUtil {
         };
     }
 
+    public static Predicate<PaperCard> buildLockedFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {
+        return card -> {
+            if (buttonMap.get(StatTypes.LOCKED).isSelected()) {
+                return card.isLocked();
+            } else {
+                return !card.isLocked();
+            }
+        };
+    }
+
     public static Predicate<PaperCard> buildColorFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {
         byte colors0 = 0;
 

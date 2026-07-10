@@ -23,6 +23,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.archipelago.*;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
 import forge.adventure.player.AdventurePlayer;
@@ -557,7 +558,10 @@ public class MapStage extends GameStage {
                             {
                                 mob.speedModifier = Float.parseFloat(prop.get("speedModifier").toString());
                             }
-
+                            if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled) {
+                                // Increase base speed of mobs in AP mode.
+                                mob.speedModifier *= 1.15f;
+                            }
                             enemies.add(mob);
                             addMapActor(obj, mob);
                         }
@@ -718,8 +722,32 @@ public class MapStage extends GameStage {
                         shopsAlreadyPresent.add(data.name);
                         Array<Reward> ret = new Array<>();
                         WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
-                        for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
-                            ret.addAll(rdata.generate(false, false));
+                        // This is where equipment shops load their rewards. Each reward has a RewardType of "item" and comes pre-defined with an item name.
+                        //  They are defined in Shandalar/Shops.json as Equipment, <Color>Item and <Color>Equipment.
+                        //  We dynamically detect those names and replace their items if AP mode is enabled here.
+                        //  The "Equipment" shop is used generically for all non-capital equipment vendors and as such always carries the same items.
+                        switch (ArchipelagoData.getInstance().getArchipelagoMode()) {
+                            case disabled:
+                                for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
+                                    ret.addAll(rdata.generate(false, false));
+                                }
+                                break;
+                            case solo_randomizer:
+                                if (data.name.toLowerCase().contains("equipment") || data.name.toLowerCase().contains("items")) {
+                                    // Get list of items for specific shop.
+                                    // Todo: Since we're storing the equipment in a Set object, the order isn't guaranteed so we have to deploy a similar system to the Archipelago shop system or store the data as arraylists.
+                                    Object[] randomizedEquipmentList = LocalRandomizer.getInstance().getItemsForEquipmentShop(data.name);
+                                    // Swap the shop's rewards
+                                    if (randomizedEquipmentList != null && randomizedEquipmentList.length <= data.rewards.size) {
+                                        for (int i = 0; i < randomizedEquipmentList.length; i++) {
+                                            data.rewards.set(i, ArchipelagoUtil.generateRewardData("item", 1, randomizedEquipmentList[i].toString()));
+                                        }
+                                    }
+                                }
+                                for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
+                                    ret.addAll(rdata.generate(false, false));
+                                }
+                                break;
                         }
                         ShopActor actor = new ShopActor(this, id, ret, data);
                         addMapActor(obj, actor);

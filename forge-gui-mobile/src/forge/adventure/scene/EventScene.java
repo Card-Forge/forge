@@ -16,6 +16,7 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.AdventureEventData;
+import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.data.DialogData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -537,6 +538,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void setWinner(boolean winner, boolean isArena) {
+        IAfterMatch.super.setWinner(winner, isArena);
         if (winner) {
             humanMatch.winner = humanMatch.p1;
             humanMatch.p1.wins++;
@@ -572,6 +574,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
     public void finishEvent() {
         currentEvent.eventStatus = AdventureEventController.EventStatus.Completed;
+        ArchipelagoData.getInstance().addCompletedTownInnEvents();
     }
 
     public void loadMetaDraft() {
