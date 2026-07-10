@@ -2,6 +2,6 @@ Name:Seer's Lantern
 ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Scry | Cost$ 2 T | ScryNum$ 1 | SpellDescription$ Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+A:AB$ Scry | Cost$ 2 T | ScryNum$ 1 | SpellDescription$ Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
 DeckHas:Ability$Mana.Colorless
-Oracle:{T}: Add {C}.\n{2}, {T}: Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+Oracle:{T}: Add {C}.\n{2}, {T}: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
