@@ -48,6 +48,21 @@ public class PeekAndRevealAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
+        // if the AI may already look at its own top card (e.g. Iron Lad, Diverging Destiny),
+        // don't activate when a sub-ability conditioned on the revealed card can't pay off
+        if (libraryOwner == aiPlayer && !sa.isTrigger() && sa.hasParam("RememberRevealed")
+                && "1".equals(sa.getParamOrDefault("PeekAmount", "1"))) {
+            final Card topCard = aiPlayer.getCardsIn(ZoneType.Library).getFirst();
+            if (topCard.mayPlayerLook(aiPlayer)) {
+                for (AbilitySub sub = sa.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+                    if ("Remembered".equals(sub.getParam("ConditionDefined")) && sub.hasParam("ConditionPresent")
+                            && !topCard.isValid(sub.getParam("ConditionPresent").split(","), aiPlayer, sa.getHostCard(), sa)) {
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
+                }
+            }
+        }
+
         if ("X".equals(sa.getParam("PeekAmount")) && sa.getSVar("X").equals("Count$xPaid")) {
             int xPay = ComputerUtilCost.setMaxXValue(sa, aiPlayer, sa.isTrigger());
             if (xPay == 0) {
