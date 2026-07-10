@@ -93,7 +93,11 @@ public class ComputerUtilMana {
     }
 
     public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
-        return new CardCollection(payManaCost(cost, sa, ai, true, true, effect).stream().map(m -> m.getSourceCard()).filter(Objects::nonNull));
+        final List<Mana> payment = payManaCost(cost, sa, ai, true, true, effect);
+        if (payment == null) {
+            return null;
+        }
+        return new CardCollection(payment.stream().map(Mana::getSourceCard).filter(Objects::nonNull));
     }
 
     private static Integer scoreManaProducingCard(final Card card) {

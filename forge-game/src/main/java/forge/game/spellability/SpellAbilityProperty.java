@@ -97,6 +97,8 @@ public class SpellAbilityProperty {
             return sa.isEquip();
         } else if (property.equals("Boast")) {
             return sa.isBoast();
+        } else if (property.equals("Monstrosity")) {
+            return sa.isMonstrosity();
         } else if (property.equals("Exhaust")) {
             return sa.isExhaust();
         } else if (property.equals("Mayhem")) {

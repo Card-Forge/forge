@@ -190,8 +190,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
+        // HashMap.put keeps the existing key on an id-equal put and PlayerView equality is by id, so without
+        // removing first, re-registration across matches would retain the prior game's stale PlayerView
         final boolean doSetCurrentPlayer = originalGameControllers.isEmpty();
+        originalGameControllers.remove(player);
         originalGameControllers.put(player, gameController);
+        gameControllers.remove(player);
         gameControllers.put(player, gameController);
         if (doSetCurrentPlayer) {
             setCurrentPlayer(player);
