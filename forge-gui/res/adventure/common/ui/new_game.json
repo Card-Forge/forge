@@ -19,6 +19,15 @@
       "height": 250
     },
     {
+      "type": "Scroll",
+      "name" : "selectorScroll",
+      "style": "nobg",
+      "x": 56,
+      "y": 110,
+      "width": 280,
+      "height": 145
+    },
+    {
       "type": "Label",
       "name" : "titleL",
       "text": "[%150][BLACK]tr(lblCreateACharacter)",
@@ -87,6 +96,25 @@
       "type": "Label",
       "name" : "modeL",
       "text": "[BLACK]tr(lblMode)",
+      "width": 128,
+      "height": 16,
+      "x": 75,
+      "yOffset": 8
+    },
+    {
+      "type": "ImageButton",
+      "name": "archipelagoHelp",
+      "style": "roundhint",
+      "selectable": true,
+      "width": 12,
+      "height": 15,
+      "x": 145,
+      "yOffset": -17
+    },
+    {
+      "type": "Label",
+      "name" : "enableArchipelagoL",
+      "text": "[BLACK]tr(lblArchipelagoMode)",
       "width": 128,
       "height": 16,
       "x": 75,
@@ -188,6 +216,15 @@
     {
       "type": "Selector",
       "name": "mode",
+      "selectable": true,
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
+    },
+    {
+      "type": "Selector",
+      "name": "enableArchipelago",
       "selectable": true,
       "width": 142,
       "height": 14,

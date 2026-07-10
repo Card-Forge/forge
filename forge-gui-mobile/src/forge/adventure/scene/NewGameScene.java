@@ -2,9 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -12,9 +10,11 @@ import com.badlogic.gdx.utils.Array;
 
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
+import forge.adventure.archipelago.ArchipelagoMode;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
+import forge.adventure.data.WorldData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
@@ -30,6 +30,7 @@ import forge.sound.SoundSystem;
 import forge.util.Localizer;
 import forge.util.NameGenerator;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -40,6 +41,8 @@ public class NewGameScene extends MenuScene {
     TextField selectedName;
     ColorSet[] colorIds;
     CardEdition[] editionIds;
+    ScrollPane scrollPane;
+    private final Table settingGroup;
     private final Image avatarImage;
     private int avatarIndex = 0;
     private final Selector race;
@@ -48,21 +51,35 @@ public class NewGameScene extends MenuScene {
     private final Selector mode;
     private final Selector difficulty;
     private final Selector starterEdition;
-    private final TextraLabel starterEditionLabel;
+    private final Selector enableArchipelago;
+    private boolean isArchipelagoSupported = false;
     private final Array<String> custom;
+    private final TextraLabel starterEditionLabel;
+    private final TextraLabel raceLabel;
+    private final TextraLabel genderLabel;
+    private final TextraLabel difficultyLabel;
     private final TextraLabel colorLabel;
+    private final TextraLabel modeLabel;
+    private final TextraLabel enableArchipelagoLabel;
     private final ImageButton difficultyHelp;
     private DialogData difficultySummary;
     private final ImageButton modeHelp;
     private DialogData modeSummary;
+    private final ImageButton archipelagoHelp;
+    private DialogData archipelagoSummary;
     private final Random rand = new Random();
     private String originalEditionLabelText;
     private Array<String> originalEditionNames;
 
     private final Array<AdventureModes> modes = new Array<>();
+    private final Array<ArchipelagoMode> archipelagoModes = new Array<>();
+
+    private boolean isShandalar;
 
     private NewGameScene() {
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
+
+        settingGroup = new Table();
         gender = ui.findActor("gender");
         selectedName = ui.findActor("nameField");
         generateName();
@@ -109,6 +126,15 @@ public class NewGameScene extends MenuScene {
             }
             break;
         }
+
+        isShandalar = Objects.equals(
+                Config.instance().getSettingData().plane,
+                "Shandalar"
+        );
+
+        enableArchipelago = ui.findActor("enableArchipelago");
+        enableArchipelagoLabel = ui.findActor("enableArchipelagoL");
+        archipelagoHelp = ui.findActor("archipelagoHelp");
 
         starterEdition = ui.findActor("starterEdition");
         starterEditionLabel = ui.findActor("starterEditionL");
@@ -234,6 +260,51 @@ public class NewGameScene extends MenuScene {
                 showModeHelp();
             }
         });
+
+        raceLabel = ui.findActor("raceL");
+        genderLabel = ui.findActor("genderL");
+        difficultyLabel = ui.findActor("difficultyL");
+        modeLabel = ui.findActor("modeL");
+
+        addSelectorToScrollGroup(raceLabel, race, null);
+        addSelectorToScrollGroup(genderLabel, gender, null);
+        addSelectorToScrollGroup(difficultyLabel, difficulty, difficultyHelp);
+        addSelectorToScrollGroup(colorLabel, colorId, null);
+
+        // Check if the UI has Archipelago elements loaded
+        if (enableArchipelago != null) {
+            isArchipelagoSupported = true;
+            enableArchipelago.setTextList(new String[]{"Disabled", "Enabled", "Archipelago"});
+            archipelagoHelp.addListener(new ClickListener() {
+                public void clicked(InputEvent e, float x, float y) {
+                    archipelagoHelp();
+                }
+            });
+            if (isShandalar) {
+                addSelectorToScrollGroup(enableArchipelagoLabel, enableArchipelago, archipelagoHelp);
+            }
+            enableArchipelago.setVisible(isShandalar);
+            enableArchipelagoLabel.setVisible(isShandalar);
+            archipelagoHelp.setVisible(isShandalar);
+        }
+
+        addSelectorToScrollGroup(modeLabel, mode, modeHelp);
+        addSelectorToScrollGroup(starterEditionLabel, starterEdition, null);
+
+        scrollPane = ui.findActor("selectorScroll");
+        scrollPane.setActor(settingGroup);
+        addToSelectable(settingGroup);
+    }
+
+    void addSelectorToScrollGroup(TextraLabel label, Selector selector, ImageButton helpLabel) {
+        settingGroup.row();
+        settingGroup.add(label).left().padLeft(19);
+        if (helpLabel != null) {
+            settingGroup.add(helpLabel).padRight(10);
+        } else {
+            settingGroup.add().width(16);
+        }
+        settingGroup.add(selector).expandX().right().fillX().padRight(40);
     }
 
     // class field
@@ -331,9 +402,21 @@ public class NewGameScene extends MenuScene {
         if (selectedName.getText().isEmpty()) {
             generateName();
         }
+        ArchipelagoMode archipelagoMode;
+        if (isArchipelagoSupported) {
+            if (isShandalar && enableArchipelago.getCurrentIndex() < ArchipelagoMode.values().length && enableArchipelago.getCurrentIndex() > -1) {
+                archipelagoMode = ArchipelagoMode.values()[enableArchipelago.getCurrentIndex()];
+            } else {
+                archipelagoMode = ArchipelagoMode.disabled;
+            }
+        } else {
+            archipelagoMode = ArchipelagoMode.disabled;
+        }
+
         Runnable runnable = () -> {
             started = false;
             //FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
+            WorldData.resetShopLists();
             WorldSave.generateNewWorld(selectedName.getText(),
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),
@@ -341,12 +424,15 @@ public class NewGameScene extends MenuScene {
                     getStartingColor(),
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    getStartingEdition(), 0);
+                    getStartingEdition(), 0, archipelagoMode);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().enterSpawnPOI();
             if (AdventurePlayer.current().getQuests().stream().noneMatch(q -> q.getID() == 28)) {
                 AdventurePlayer.current().addQuest("28", true); //Temporary link to Shandalar main questline
+            }
+            if (archipelagoMode != ArchipelagoMode.disabled) {
+                AdventurePlayer.current().removeItem("Leather Boots");
             }
             Forge.switchScene(GameScene.instance());
         };
@@ -458,6 +544,33 @@ public class NewGameScene extends MenuScene {
         loadDialog(difficultySummary);
     }
 
+    private void archipelagoHelp() {
+
+        ArchipelagoMode selectedMode = ArchipelagoMode.values()[enableArchipelago.getCurrentIndex()];
+
+        archipelagoSummary = new DialogData();
+        archipelagoSummary.name = "Summary";
+
+        StringBuilder summaryText = new StringBuilder();
+        switch (selectedMode) {
+            case disabled:
+                summaryText.append("Randomizer: Disabled\n\nNo changes, the regular Adventure mode experience.\n\n");
+                break;
+            case solo_randomizer:
+                summaryText.append("Randomizer: Solo Randomizer\n\nAll cards outside of your starting deck will be locked by default. Biomes, cards and equipment unlocks are randomized and can be unlocked by completing various objectives in the game.\nThe Leather Boots in your starting equipment are removed regardless of difficulty, all entities' base speed are increased to compensate.\n\n");
+                break;
+            default:
+                summaryText.append("No summary available for this randomizer.");
+                break;
+        }
+
+        DialogData dismiss = new DialogData();
+        dismiss.name = "OK";
+        archipelagoSummary.text = summaryText.toString();
+        archipelagoSummary.options = new DialogData[1];
+        archipelagoSummary.options[0] = dismiss;
+        loadDialog(archipelagoSummary);
+    }
     private void showModeHelp() {
 
         Localizer localizer = Forge.getLocalizer();

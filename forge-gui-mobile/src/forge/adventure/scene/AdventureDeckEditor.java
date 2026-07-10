@@ -6,7 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
+import forge.adventure.archipelago.ArchipelagoMode;
 import forge.adventure.data.AdventureEventData;
+import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.AdventureEventController;
@@ -27,6 +29,7 @@ import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.*;
 import forge.itemmanager.filters.CardColorFilter;
+import forge.itemmanager.filters.CardLockFilter;
 import forge.itemmanager.filters.CardTypeFilter;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
@@ -97,6 +100,12 @@ public class AdventureDeckEditor extends FDeckEditor {
         public ItemPool<PaperCard> getCardPool() {
             ItemPool<PaperCard> pool = new ItemPool<>(PaperCard.class);
             pool.addAll(Current.player().getCards());
+            ArchipelagoData apData = ArchipelagoData.getInstance();
+            if (apData.getArchipelagoMode() != ArchipelagoMode.disabled) {
+                for (Map.Entry<PaperCard, Integer> card : pool) {
+                    card.getKey().setLocked(!apData.checkCardUnlocked(card.getKey()));
+                }
+            }
             return pool;
         }
 
@@ -1006,6 +1015,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected void addDefaultFilters() {
             this.addFilter(new CardColorFilter(this));
             this.addFilter(new CardTypeFilter(this));
+            if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled) this.addFilter(new CardLockFilter(this));
         }
 
         @Override

@@ -38,6 +38,9 @@ public class WorldData implements Serializable {
     private static Array<EnemyData> allEnemies;
     private static Array<ShopData> shopList;
 
+    public static void resetShopLists() {
+        shopList = null;
+    }
 
     public static Array<ShopData> getShopList() {
         if (shopList == null) {
