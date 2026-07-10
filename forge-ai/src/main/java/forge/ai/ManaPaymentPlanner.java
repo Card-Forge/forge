@@ -91,6 +91,88 @@ final class ManaPaymentPlanner {
         }
     }
 
+    static boolean greedyPaymentMayStrandFutureSpell(final Player ai, final SpellAbility paidFor,
+            final boolean checkPlayable, final Set<Card> usedSources) {
+        if (usedSources.isEmpty()) {
+            return false;
+        }
+
+        for (Card card : ai.getCardsIn(ZoneType.Hand)) {
+            if (card == paidFor.getHostCard()) {
+                continue;
+            }
+            SpellAbility futureSpell = card.getFirstSpellAbility();
+            if (futureSpell == null) {
+                continue;
+            }
+
+            futureSpell.setActivatingPlayer(ai);
+            ManaCostBeingPaid futureCost = ComputerUtilMana.calculateManaCost(futureSpell.getPayCosts(), futureSpell,
+                    ai, true, 0, false);
+            if (futureCost.getConvertedManaCost() == 0) {
+                continue;
+            }
+
+            int[] remainingMana = getRemainingManaAfterGreedyPayment(ai, futureSpell, checkPlayable, usedSources);
+            if (remainingMana[0] >= futureCost.getConvertedManaCost()
+                    && !canCoverMonoColorPips(futureCost, remainingMana)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static int[] getRemainingManaAfterGreedyPayment(final Player ai, final SpellAbility futureSpell,
+            final boolean checkPlayable, final Set<Card> usedSources) {
+        int[] result = new int[MagicColor.WUBRG.length + 1];
+        for (Card source : ComputerUtilMana.getAvailableManaSources(ai, checkPlayable)) {
+            if (usedSources.contains(source)) {
+                continue;
+            }
+
+            int sourceAmount = 0;
+            byte sourceColors = 0;
+            for (SpellAbility ma : ComputerUtilMana.getAIPlayableMana(source)) {
+                ma.setActivatingPlayer(ai);
+                if (ma.getPayCosts().hasManaCost() || (checkPlayable && !ma.canPlay())) {
+                    continue;
+                }
+
+                int amount = ma.totalAmountOfManaGenerated(futureSpell, true);
+                if (amount <= 0) {
+                    continue;
+                }
+                sourceAmount = Math.max(sourceAmount, amount);
+                sourceColors |= getManaAbilityColorMask(ma, futureSpell);
+            }
+
+            if (sourceAmount > 0) {
+                result[0] += sourceAmount;
+                for (int i = 0; i < MagicColor.WUBRG.length; i++) {
+                    if ((sourceColors & MagicColor.WUBRG[i]) != 0) {
+                        result[i + 1] += sourceAmount;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    private static boolean canCoverMonoColorPips(final ManaCostBeingPaid cost, final int[] remainingMana) {
+        int[] needed = new int[MagicColor.WUBRG.length];
+        for (ManaCostShard shard : cost.getUnpaidShards()) {
+            if (!shard.isMonoColor()) {
+                continue;
+            }
+            for (int i = 0; i < MagicColor.WUBRG.length; i++) {
+                if (shard.getColorMask() == MagicColor.WUBRG[i] && ++needed[i] > remainingMana[i + 1]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     private static boolean isPlannableManaAbility(final SpellAbility ma, final Cost cost) {
         if (!ma.isManaAbility()) {
             return false;
