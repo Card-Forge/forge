@@ -246,11 +246,11 @@ public class ComputerUtilMana {
     }
 
     public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
-        final List<Mana> payment = payManaCost(cost, sa, ai, true, true, effect);
-        if (payment == null) {
+        final CardCollection plan = new CardCollection();
+        if (!payManaCost(cost, sa, ai, true, true, effect, plan, ManaPaymentContext.outer())) {
             return null;
         }
-        return new CardCollection(payment.stream().map(Mana::getSourceCard).filter(Objects::nonNull));
+        return plan;
     }
 
     private static Integer scoreManaProducingCard(final Card card) {
@@ -3500,7 +3500,7 @@ public class ComputerUtilMana {
         try {
         if ((sa.isOffering() && sa.getSacrificedAsOffering() == null) || (sa.isEmerge() && sa.getSacrificedAsEmerge() == null)) {
             // nothing was chosen
-            return null;
+            return false;
         }
 
         if (outermost) {
@@ -3543,7 +3543,7 @@ public class ComputerUtilMana {
             CostPayment.handleOfferings(sa, test, cost.isPaid());
             debugLogMain(test, "  result: PAID (pool)", ctx);
             // paid all from floating mana
-            return manaSpentToPay;
+            return true;
         }
 
         int phyLifeToPay = 2;
@@ -3743,7 +3743,7 @@ public class ComputerUtilMana {
                 System.out.println("ComputerUtilMana: payManaCost() cost was not paid for " + sa + " (" +  sa.getHostCard().getName() + "). Didn't find what to pay for " + toPay);
                 sa.setSkip(true);
             }
-            return null;
+            return false;
         }
 
         debugLogMain(test, "  result: PAID", ctx);
