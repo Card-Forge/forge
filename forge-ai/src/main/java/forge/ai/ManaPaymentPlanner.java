@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.function.BiPredicate;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -48,31 +47,34 @@ import forge.util.TextUtil;
  */
 final class ManaPaymentPlanner {
     private static final int DEFAULT_MAX_STATES = 10000;
-    private static final int FUTURE_CASTABILITY_PENALTY = 2000;
-    private static final int MAX_FUTURE_SCORING_CANDIDATES = 16;
     static int maxStates = DEFAULT_MAX_STATES;
+    private final Player ai;
+    private final boolean checkPlayable;
+    private final List<SpellAbility> manaAbilities;
+    private final Map<AbilityManaPart, String> originalChoices = new HashMap<>();
+    private final Map<Integer, AbilityInfo> abilityInfo = new HashMap<>();
+    private final Map<Integer, Integer> sourceScores = new HashMap<>();
+    private final Map<String, List<Mana>> virtualManaCache = new HashMap<>();
+    private int remainingStates = maxStates;
 
-    private ManaPaymentPlanner() {
-    }
-
-    static boolean shouldUse(final Player ai, final boolean checkPlayable, final ManaCostBeingPaid cost,
-            final SpellAbility paidFor) {
-        return hasManaAbility(ai, checkPlayable, (ma, abilityCost) -> isPlannableManaAbility(ma, abilityCost)
-                && canHelpPayCurrentCost(ma, ai, cost, paidFor, checkPlayable));
+    private ManaPaymentPlanner(final Player ai, final boolean checkPlayable) {
+        this.ai = ai;
+        this.checkPlayable = checkPlayable;
+        manaAbilities = getManaAbilities(ai, checkPlayable);
+        for (SpellAbility ma : manaAbilities) {
+            for (AbilityManaPart manaPart : ma.getAllManaParts()) {
+                originalChoices.putIfAbsent(manaPart, manaPart.getExpressChoice());
+            }
+        }
     }
 
     static boolean hasCostedManaAbility(final Player ai, final boolean checkPlayable) {
-        return hasManaAbility(ai, checkPlayable, (ma, cost) -> isSupportedActivationCost(cost)
-                && cost.isReusuableResource() && cost.hasManaCost() && cost.hasTapCost());
-    }
-
-    private static boolean hasManaAbility(final Player ai, final boolean checkPlayable,
-            final BiPredicate<SpellAbility, Cost> predicate) {
         for (final Card source : CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand))) {
             for (final SpellAbility ma : source.getManaAbilities()) {
                 ma.setActivatingPlayer(ai);
                 Cost cost = ma.getPayCosts();
-                if (predicate.test(ma, cost) && (!checkPlayable || ma.canPlay())) {
+                if (isSupportedActivationCost(cost) && cost.isReusuableResource()
+                        && cost.hasManaCost() && cost.hasTapCost() && (!checkPlayable || ma.canPlay())) {
                     return true;
                 }
             }
@@ -81,106 +83,14 @@ final class ManaPaymentPlanner {
     }
 
     static Plan findPlan(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
-            final boolean checkPlayable, final boolean scoreFutureOptions) {
+            final boolean checkPlayable) {
+        return new ManaPaymentPlanner(ai, checkPlayable).findPlan(cost, sa);
+    }
+
+    private Plan findPlan(final ManaCostBeingPaid cost, final SpellAbility sa) {
         State start = new State(new VirtualPool(Lists.newArrayList(ai.getManaPool())), new HashSet<>(),
                 new ArrayList<>(), 0);
-        List<SpellAbility> manaAbilities = getManaAbilities(ai, checkPlayable);
-        return findPaymentPlan(new ManaCostBeingPaid(cost), start, sa, ai, checkPlayable, manaAbilities,
-                scoreFutureOptions, new SearchContext(manaAbilities, maxStates));
-    }
-
-    static boolean greedyPaymentMayStrandFutureSpell(final Player ai, final SpellAbility paidFor,
-            final boolean checkPlayable, final Set<Card> usedSources) {
-        if (usedSources.isEmpty()) {
-            return false;
-        }
-
-        for (Card card : ai.getCardsIn(ZoneType.Hand)) {
-            if (card == paidFor.getHostCard()) {
-                continue;
-            }
-            SpellAbility futureSpell = card.getFirstSpellAbility();
-            if (futureSpell == null) {
-                continue;
-            }
-
-            futureSpell.setActivatingPlayer(ai);
-            ManaCostBeingPaid futureCost = ComputerUtilMana.calculateManaCost(futureSpell.getPayCosts(), futureSpell,
-                    ai, true, 0, false);
-            if (futureCost.getConvertedManaCost() == 0) {
-                continue;
-            }
-
-            int[] remainingMana = getRemainingManaAfterGreedyPayment(ai, futureSpell, checkPlayable, usedSources);
-            if (remainingMana[0] >= futureCost.getConvertedManaCost()
-                    && !canCoverMonoColorPips(futureCost, remainingMana)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static int[] getRemainingManaAfterGreedyPayment(final Player ai, final SpellAbility futureSpell,
-            final boolean checkPlayable, final Set<Card> usedSources) {
-        int[] result = new int[MagicColor.WUBRG.length + 1];
-        for (Card source : ComputerUtilMana.getAvailableManaSources(ai, checkPlayable)) {
-            if (usedSources.contains(source)) {
-                continue;
-            }
-
-            int sourceAmount = 0;
-            byte sourceColors = 0;
-            for (SpellAbility ma : ComputerUtilMana.getAIPlayableMana(source)) {
-                ma.setActivatingPlayer(ai);
-                if (ma.getPayCosts().hasManaCost() || (checkPlayable && !ma.canPlay())) {
-                    continue;
-                }
-
-                int amount = ma.totalAmountOfManaGenerated(futureSpell, true);
-                if (amount <= 0) {
-                    continue;
-                }
-                sourceAmount = Math.max(sourceAmount, amount);
-                sourceColors |= getManaAbilityColorMask(ma, futureSpell);
-            }
-
-            if (sourceAmount > 0) {
-                result[0] += sourceAmount;
-                for (int i = 0; i < MagicColor.WUBRG.length; i++) {
-                    if ((sourceColors & MagicColor.WUBRG[i]) != 0) {
-                        result[i + 1] += sourceAmount;
-                    }
-                }
-            }
-        }
-        return result;
-    }
-
-    private static boolean canCoverMonoColorPips(final ManaCostBeingPaid cost, final int[] remainingMana) {
-        int[] needed = new int[MagicColor.WUBRG.length];
-        for (ManaCostShard shard : cost.getUnpaidShards()) {
-            if (!shard.isMonoColor()) {
-                continue;
-            }
-            for (int i = 0; i < MagicColor.WUBRG.length; i++) {
-                if (shard.getColorMask() == MagicColor.WUBRG[i] && ++needed[i] > remainingMana[i + 1]) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private static boolean isPlannableManaAbility(final SpellAbility ma, final Cost cost) {
-        if (!ma.isManaAbility()) {
-            return false;
-        }
-
-        SpellAbility manaSa = ComputerUtilMana.getManaPartAbility(ma);
-        return isSupportedActivationCost(cost) && cost.isReusuableResource()
-                && ((cost.hasManaCost() && cost.hasTapCost())
-                || (manaSa != null && !manaSa.getManaPart().getManaRestrictions().isEmpty()
-                && (getManaAbilityColorMask(ma) & MagicColor.ALL_COLORS) != 0));
+        return findPaymentPlan(new ManaCostBeingPaid(cost), start, sa);
     }
 
     private static boolean isSupportedActivationCost(final Cost cost) {
@@ -197,46 +107,21 @@ final class ManaPaymentPlanner {
         return true;
     }
 
-    private static boolean canHelpPayCurrentCost(final SpellAbility ma, final Player ai,
-            final ManaCostBeingPaid cost, final SpellAbility paidFor, final boolean checkPlayable) {
-        SpellAbility manaSa = ComputerUtilMana.getManaPartAbility(ma);
-        String originalChoice = manaSa == null ? "" : manaSa.getManaPart().getExpressChoice();
-        try {
-            for (ManaCostShard shard : getPlannerShards(cost)) {
-                if (ComputerUtilMana.canPayShardWithSpellAbility(shard, ai, ma, paidFor, cost, checkPlayable,
-                        cost.getXManaCostPaidByColor())) {
-                    return true;
-                }
-            }
-            return false;
-        } finally {
-            if (manaSa != null) {
-                manaSa.getManaPart().setExpressChoice(originalChoice);
-            }
-        }
-    }
-
-    private static Plan findPaymentPlan(final ManaCostBeingPaid cost, final State start,
-            final SpellAbility paidFor, final Player ai, final boolean checkPlayable,
-            final List<SpellAbility> manaAbilities, final boolean scoreFutureOptions, final SearchContext context) {
+    private Plan findPaymentPlan(final ManaCostBeingPaid cost, final State start, final SpellAbility paidFor) {
         List<State> candidates;
         try {
-            candidates = findPaymentCandidates(cost, start, paidFor, ai, checkPlayable, manaAbilities,
-                    scoreFutureOptions, context);
+            candidates = findPaymentCandidates(cost, start, paidFor);
         } finally {
-            context.restoreChoices();
+            originalChoices.forEach(AbilityManaPart::setExpressChoice);
         }
         if (candidates == null) {
             return Plan.EXHAUSTED;
         }
-        State state = chooseBestPlan(candidates, paidFor, ai, checkPlayable, manaAbilities, scoreFutureOptions,
-                context);
-        return state == null ? null : new Plan(state.actions);
+        return candidates.isEmpty() ? null : new Plan(candidates.get(0).actions);
     }
 
-    private static List<State> findPaymentCandidates(final ManaCostBeingPaid cost, final State start,
-            final SpellAbility paidFor, final Player ai, final boolean checkPlayable,
-            final List<SpellAbility> manaAbilities, final boolean scoreFutureOptions, final SearchContext context) {
+    private List<State> findPaymentCandidates(final ManaCostBeingPaid cost, final State start,
+            final SpellAbility paidFor) {
         // Best-first search prefers lower-score plans, with the priority nudged toward states that
         // leave less of the current cost unpaid. The request-wide hard cap keeps adversarial boards bounded.
         PriorityQueue<Node> search = new PriorityQueue<>(
@@ -244,14 +129,13 @@ final class ManaPaymentPlanner {
                         .thenComparingInt(node -> -node.state.actions.size())
                         .thenComparingInt(node -> node.state.score));
         Map<String, Integer> bestScores = new HashMap<>();
-        List<State> candidates = new ArrayList<>();
-        Map<Integer, String> sourceKeys = getSourceEquivalenceKeys(manaAbilities, paidFor, context);
+        Map<Integer, String> sourceKeys = getSourceEquivalenceKeys(paidFor);
         String startKey = manaPlannerKey(start, sourceKeys);
         bestScores.put(startKey, start.score);
         ManaCostBeingPaid remainingCost = start.pool.remainingCost(cost, paidFor, ai);
         search.add(new Node(remainingCost, start, 250 * remainingCost.getConvertedManaCost(), startKey));
 
-        while (!search.isEmpty() && context.trySpend()) {
+        while (!search.isEmpty() && remainingStates-- > 0) {
             Node node = search.poll();
             State state = node.state;
 
@@ -261,12 +145,10 @@ final class ManaPaymentPlanner {
             }
 
             if (state.pool.mana.size() >= cost.getConvertedManaCost()) {
-                List<State> paid = payCostFromVirtualPool(new ManaCostBeingPaid(cost), state, paidFor, ai,
-                        scoreFutureOptions);
-                if (!scoreFutureOptions && !paid.isEmpty()) {
+                List<State> paid = payCostFromVirtualPool(new ManaCostBeingPaid(cost), state, paidFor, false);
+                if (!paid.isEmpty()) {
                     return paid;
                 }
-                candidates.addAll(paid);
             }
 
             List<ManaCostShard> shardsToTry = getPlannerShards(node.cost);
@@ -290,11 +172,11 @@ final class ManaPaymentPlanner {
 
                     for (String produced : predictManaChoicesForShard(ma, ai, toPay, paidFor, cost,
                             cost.getXManaCostPaidByColor())) {
-                        final List<Mana> virtualMana = getVirtualMana(ma, produced, ai, context.virtualManaCache);
-                        if (!canUseProducedMana(ma, virtualMana, cost, toPay, paidFor, state, manaAbilities, ai)) {
+                        final List<Mana> virtualMana = getVirtualMana(ma, produced, ai, virtualManaCache);
+                        if (!canUseProducedMana(ma, virtualMana, cost, toPay, paidFor, state)) {
                             continue;
                         }
-                        AbilityInfo info = context.abilityInfo.get(ma.getId());
+                        AbilityInfo info = abilityInfo.get(ma.getId());
                         if (!triedManaAbilityKeys.add(info.key + "|" + produced)) {
                             continue;
                         }
@@ -303,7 +185,7 @@ final class ManaPaymentPlanner {
                         // to let Forge's normal cost code evaluate the activation cost, then snapshot it
                         // in Action so the real payment can replay the same choice.
                         AbilityManaPart manaPart = setExpressChoice(ma, produced);
-                        List<State> statesAfterActivationCost = payManaAbilityActivationCost(state, ma, ai);
+                        List<State> statesAfterActivationCost = payManaAbilityActivationCost(state, ma);
                         if (statesAfterActivationCost.isEmpty()) {
                             continue;
                         }
@@ -328,44 +210,10 @@ final class ManaPaymentPlanner {
         }
 
         // An empty queue proves there is no remaining path; a non-empty queue means the budget expired.
-        return !search.isEmpty() && candidates.isEmpty() ? null : candidates;
+        return search.isEmpty() ? Collections.emptyList() : null;
     }
 
-    private static State chooseBestPlan(final List<State> candidates, final SpellAbility paidFor,
-            final Player ai, final boolean checkPlayable, final List<SpellAbility> manaAbilities,
-            final boolean scoreFutureOptions, final SearchContext context) {
-        List<State> plans = candidates;
-        if (scoreFutureOptions && plans.size() > MAX_FUTURE_SCORING_CANDIDATES) {
-            // Future scoring recursively replans other spells in hand. Keep it bounded and only apply
-            // it to the strongest normal-payment candidates so equivalent sources do not stall the UI.
-            plans.sort(Comparator.comparingInt((State state) -> state.score)
-                    .thenComparingInt(state -> state.actions.size()));
-            plans = plans.subList(0, MAX_FUTURE_SCORING_CANDIDATES);
-        }
-
-        State bestPlan = null;
-        int bestPlanScore = Integer.MAX_VALUE;
-        for (State candidate : plans) {
-            int score = candidate.score;
-            if (scoreFutureOptions) {
-                Integer futureScore = scoreFutureCastability(candidate, paidFor, ai, checkPlayable, manaAbilities,
-                        context);
-                if (futureScore == null) {
-                    return chooseBestPlan(plans, paidFor, ai, checkPlayable, manaAbilities, false, context);
-                }
-                score += futureScore;
-            }
-            if (score < bestPlanScore || (score == bestPlanScore
-                    && (bestPlan == null || candidate.actions.size() < bestPlan.actions.size()))) {
-                bestPlan = candidate;
-                bestPlanScore = score;
-            }
-        }
-        return bestPlan;
-    }
-
-    private static List<State> payManaAbilityActivationCost(final State state, final SpellAbility ma,
-            final Player ai) {
+    private List<State> payManaAbilityActivationCost(final State state, final SpellAbility ma) {
         Cost cost = ma.getPayCosts();
         if (!CostPayment.canPayAdditionalCosts(cost, ma, false)) {
             return Collections.emptyList();
@@ -377,11 +225,11 @@ final class ManaPaymentPlanner {
         }
 
         ManaCostBeingPaid activationCost = ComputerUtilMana.calculateManaCost(cost, ma, ai, true, 0, ma.isTrigger());
-        return payCostFromVirtualPool(activationCost, reservedState, ma, ai, true);
+        return payCostFromVirtualPool(activationCost, reservedState, ma, true);
     }
 
-    private static List<State> payCostFromVirtualPool(final ManaCostBeingPaid cost, final State start,
-            final SpellAbility paidFor, final Player ai, final boolean findAll) {
+    private List<State> payCostFromVirtualPool(final ManaCostBeingPaid cost, final State start,
+            final SpellAbility paidFor, final boolean findAll) {
         List<State> result = new ArrayList<>();
         List<Node> search = new ArrayList<>();
         Set<String> seen = new HashSet<>();
@@ -421,34 +269,6 @@ final class ManaPaymentPlanner {
         }
 
         return result;
-    }
-
-    private static Integer scoreFutureCastability(final State state, final SpellAbility paidFor,
-            final Player ai, final boolean checkPlayable, final List<SpellAbility> manaAbilities,
-            final SearchContext context) {
-        int score = 0;
-        for (Card card : ai.getCardsIn(ZoneType.Hand)) {
-            if (card == paidFor.getHostCard()) {
-                continue;
-            }
-            SpellAbility spell = card.getFirstSpellAbility();
-            if (spell == null) {
-                continue;
-            }
-
-            spell.setActivatingPlayer(ai);
-            ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(spell.getPayCosts(), spell, ai, true, 0, false);
-            // This is a shallow future check: recursive scoring is disabled in the nested search, so
-            // current plans are preferred when they leave other spells castable without exploding depth.
-            Plan futurePlan = findPaymentPlan(cost, state, spell, ai, checkPlayable, manaAbilities, false, context);
-            if (futurePlan != null && futurePlan.isExhausted()) {
-                return null;
-            }
-            if (futurePlan == null) {
-                score += FUTURE_CASTABILITY_PENALTY;
-            }
-        }
-        return score;
     }
 
     static int getManaAbilityColorMask(final SpellAbility ma) {
@@ -608,9 +428,8 @@ final class ManaPaymentPlanner {
         return cache.computeIfAbsent(key, k -> createVirtualMana(ma, produced, ai));
     }
 
-    private static boolean canUseProducedMana(final SpellAbility ma, final List<Mana> produced,
-            final ManaCostBeingPaid cost, final ManaCostShard toPay, final SpellAbility paidFor, final State state,
-            final List<SpellAbility> manaAbilities, final Player ai) {
+    private boolean canUseProducedMana(final SpellAbility ma, final List<Mana> produced,
+            final ManaCostBeingPaid cost, final ManaCostShard toPay, final SpellAbility paidFor, final State state) {
         if (canPayShardWithProducedMana(toPay, produced, paidFor, ai, cost.getXManaCostPaidByColor())) {
             return true;
         }
@@ -622,7 +441,7 @@ final class ManaPaymentPlanner {
 
         Mana mana = produced.get(0);
         return !canPayWithVirtualMana(cost, mana, paidFor, ai)
-                && canPayFutureManaAbilityActivationCost(mana, state, manaAbilities, ai);
+                && canPayFutureManaAbilityActivationCost(mana, state);
     }
 
     private static boolean canPayShardWithProducedMana(final ManaCostShard toPay, final List<Mana> produced,
@@ -654,8 +473,7 @@ final class ManaPaymentPlanner {
         return manaPart;
     }
 
-    private static boolean canPayFutureManaAbilityActivationCost(final Mana mana, final State state,
-            final List<SpellAbility> manaAbilities, final Player ai) {
+    private boolean canPayFutureManaAbilityActivationCost(final Mana mana, final State state) {
         for (SpellAbility ma : manaAbilities) {
             if (state.hasUsedSource(ma.getHostCard()) || !ma.getPayCosts().hasManaCost()) {
                 continue;
@@ -705,15 +523,15 @@ final class ManaPaymentPlanner {
         return result;
     }
 
-    private static Map<Integer, String> getSourceEquivalenceKeys(final List<SpellAbility> manaAbilities,
-            final SpellAbility paidFor, final SearchContext context) {
+    private Map<Integer, String> getSourceEquivalenceKeys(final SpellAbility paidFor) {
         Map<Integer, List<String>> keysBySource = new HashMap<>();
         for (SpellAbility ma : manaAbilities) {
             Card source = ma.getHostCard();
             int amount = Math.max(1, ma.totalAmountOfManaGenerated(paidFor, true));
-            int score = 10 * context.getSourceScore(source) + 25 * amount * amount;
+            int score = 10 * sourceScores.computeIfAbsent(source.getId(), id ->
+                    ComputerUtilMana.scoreManaProducingCard(source)) + 25 * amount * amount;
             String abilityKey = manaAbilitySourceKey(ma, amount, score);
-            context.abilityInfo.put(ma.getId(), new AbilityInfo(abilityKey, score));
+            abilityInfo.put(ma.getId(), new AbilityInfo(abilityKey, score));
             keysBySource.computeIfAbsent(source.getId(), k -> new ArrayList<>())
                     .add(abilityKey);
         }
@@ -863,36 +681,6 @@ final class ManaPaymentPlanner {
     }
 
     private record AbilityInfo(String key, int score) {
-    }
-
-    private static final class SearchContext {
-        private final Map<AbilityManaPart, String> originalChoices = new HashMap<>();
-        private final Map<Integer, AbilityInfo> abilityInfo = new HashMap<>();
-        private final Map<Integer, Integer> sourceScores = new HashMap<>();
-        private final Map<String, List<Mana>> virtualManaCache = new HashMap<>();
-        private int remaining;
-
-        private SearchContext(final List<SpellAbility> manaAbilities, final int maxStates) {
-            remaining = maxStates;
-            for (SpellAbility ma : manaAbilities) {
-                for (AbilityManaPart manaPart : ma.getAllManaParts()) {
-                    originalChoices.putIfAbsent(manaPart, manaPart.getExpressChoice());
-                }
-            }
-        }
-
-        private boolean trySpend() {
-            return remaining-- > 0;
-        }
-
-        private int getSourceScore(final Card source) {
-            return sourceScores.computeIfAbsent(source.getId(), id ->
-                    ComputerUtilMana.scoreManaProducingCard(source));
-        }
-
-        private void restoreChoices() {
-            originalChoices.forEach(AbilityManaPart::setExpressChoice);
-        }
     }
 
     private record Action(SpellAbility manaAbility, AbilityManaPart manaPart, String expressChoice) {
