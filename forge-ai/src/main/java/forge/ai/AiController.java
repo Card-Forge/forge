@@ -789,15 +789,18 @@ public class AiController {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, player, true, 0, false);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player, false);
 
-        if (manaSources.isEmpty()) {
+        if (manaSources == null || manaSources.isEmpty()) {
             return false;
         }
 
         // used for chained spells where two spells need to be cast in succession
         if (exceptForThisSa != null) {
-            manaSources.removeAll(ComputerUtilMana.getManaSourcesToPayCost(
+            CardCollection exceptSources = ComputerUtilMana.getManaSourcesToPayCost(
                     ComputerUtilMana.calculateManaCost(exceptForThisSa.getPayCosts(), exceptForThisSa, player, true, 0, false),
-                    exceptForThisSa, player, false));
+                    exceptForThisSa, player, false);
+            if (exceptSources != null) {
+                manaSources.removeAll(exceptSources);
+            }
         }
 
         // This is a simplification, since one mana source can produce more than one mana,
