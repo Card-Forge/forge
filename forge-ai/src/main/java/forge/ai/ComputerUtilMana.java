@@ -594,11 +594,11 @@ public class ComputerUtilMana {
 
     // returns null if unpayable
     private static List<Mana> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
-        return payManaCost(cost, sa, ai, test, checkPlayable, effect, true, true, null);
+        return payManaCost(cost, sa, ai, test, checkPlayable, effect, null);
     }
 
     private static List<Mana> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable,
-            boolean effect, boolean usePlanner, boolean allowManaCostedManaAbilities, Set<Card> paymentProbe) {
+            boolean effect, Set<Card> paymentProbe) {
         if ((sa.isOffering() && sa.getSacrificedAsOffering() == null) || (sa.isEmerge() && sa.getSacrificedAsEmerge() == null)) {
             // nothing was chosen
             return null;
@@ -629,13 +629,13 @@ public class ComputerUtilMana {
             StaticAbilityManaConvert.manaConvert(manapool, ai, sa.getHostCard(), effect && !sa.isCastFromPlayEffect() ? null : sa);
         }
 
-        boolean shouldUsePlanner = usePlanner && !cost.containsPhyrexianMana() && !sa.getHostCard().hasConverge()
+        boolean shouldUsePlanner = paymentProbe == null && !cost.containsPhyrexianMana() && !sa.getHostCard().hasConverge()
                 && ManaPaymentPlanner.shouldUse(ai, checkPlayable, cost, sa);
         boolean greedyProbeCanPay = false;
         if (shouldUsePlanner && (test || ai.getControllingPlayer() != null)) {
             Set<Card> greedyProbePayments = new HashSet<>();
-            greedyProbeCanPay = payManaCost(new ManaCostBeingPaid(cost), sa, ai, true, checkPlayable, effect, false,
-                    false, greedyProbePayments) != null;
+            greedyProbeCanPay = payManaCost(new ManaCostBeingPaid(cost), sa, ai, true, checkPlayable, effect,
+                    greedyProbePayments) != null;
             AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
             AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_SAC_COST);
             if (greedyProbeCanPay && !test && !greedyPaymentMayStrandFutureSpell(ai, sa, checkPlayable,
@@ -683,7 +683,7 @@ public class ComputerUtilMana {
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         boolean hasConverge = sa.getHostCard().hasConverge();
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test, checkPlayable,
-                hasConverge, allowManaCostedManaAbilities);
+                hasConverge, paymentProbe == null);
 
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
         ManaCostShard toPay = null;
@@ -868,7 +868,7 @@ public class ComputerUtilMana {
         return manaSpentToPay;
     }
 
-    private static void resetPayment(List<SpellAbility> payments) {
+    static void resetPayment(List<SpellAbility> payments) {
         for (SpellAbility sa : payments) {
             SpellAbility manaSa = getManaPartAbility(sa);
             if (manaSa != null) {

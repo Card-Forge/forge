@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.BiPredicate;
 
 import org.apache.commons.lang3.StringUtils;
@@ -86,7 +87,7 @@ final class ManaPaymentPlanner {
                     scoreFutureOptions);
             return state == null ? null : new Plan(state.actions);
         } finally {
-            resetPayment(manaAbilities);
+            ComputerUtilMana.resetPayment(manaAbilities);
         }
     }
 
@@ -123,13 +124,14 @@ final class ManaPaymentPlanner {
     private static State findPaymentPlan(final ManaCostBeingPaid cost, final State start,
             final SpellAbility paidFor, final Player ai, final boolean checkPlayable,
             final List<SpellAbility> manaAbilities, final boolean scoreFutureOptions) {
-        List<State> candidates = findPaymentCandidates(cost, start, paidFor, ai, checkPlayable, manaAbilities);
+        List<State> candidates = findPaymentCandidates(cost, start, paidFor, ai, checkPlayable, manaAbilities,
+                scoreFutureOptions);
         return chooseBestPlan(candidates, paidFor, ai, checkPlayable, manaAbilities, scoreFutureOptions);
     }
 
     private static List<State> findPaymentCandidates(final ManaCostBeingPaid cost, final State start,
             final SpellAbility paidFor, final Player ai, final boolean checkPlayable,
-            final List<SpellAbility> manaAbilities) {
+            final List<SpellAbility> manaAbilities, final boolean scoreFutureOptions) {
         // Best-first search prefers lower-score plans, with the priority nudged toward states that
         // leave less of the current cost unpaid. The hard cap keeps adversarial boards bounded.
         PriorityQueue<Node> search = new PriorityQueue<>(
@@ -137,31 +139,31 @@ final class ManaPaymentPlanner {
                         .thenComparingInt(node -> -node.state.actions.size())
                         .thenComparingInt(node -> node.state.score));
         Map<String, Integer> bestScores = new HashMap<>();
-        Map<String, Integer> queuedScores = new HashMap<>();
         List<State> candidates = new ArrayList<>();
         Map<Integer, String> sourceKeys = getSourceEquivalenceKeys(manaAbilities, paidFor);
         Map<String, List<Mana>> virtualManaCache = new HashMap<>();
         Map<Integer, Integer> actionScoreCache = new HashMap<>();
-        queuedScores.put(manaPlannerKey(cost, start, paidFor, sourceKeys), start.score);
-        search.add(new Node(cost, start, priorityFor(cost, start, paidFor, ai)));
+        String startKey = manaPlannerKey(start, sourceKeys);
+        bestScores.put(startKey, start.score);
+        ManaCostBeingPaid remainingCost = start.pool.remainingCost(cost, paidFor, ai);
+        search.add(new Node(remainingCost, start, 250 * remainingCost.getConvertedManaCost(), startKey));
 
         int stateCount = 0;
         for (; !search.isEmpty() && stateCount < maxStates; stateCount++) {
             Node node = search.poll();
             State state = node.state;
 
-            if (state.pool.size() >= cost.getConvertedManaCost()) {
-                candidates.addAll(payCostFromVirtualPool(new ManaCostBeingPaid(cost), state, paidFor, ai));
-            }
-
-            String key = manaPlannerKey(cost, state, paidFor, sourceKeys);
-            Integer bestScore = bestScores.get(key);
-            if (bestScore != null && bestScore <= state.score) {
+            Integer bestScore = bestScores.get(node.key);
+            if (bestScore == null || bestScore < state.score) {
                 continue;
             }
-            bestScores.put(key, state.score);
 
-            List<ManaCostShard> shardsToTry = getPlannerShards(cost, state, paidFor, ai);
+            if (state.pool.mana.size() >= cost.getConvertedManaCost()) {
+                candidates.addAll(payCostFromVirtualPool(new ManaCostBeingPaid(cost), state, paidFor, ai,
+                        scoreFutureOptions));
+            }
+
+            List<ManaCostShard> shardsToTry = getPlannerShards(node.cost);
             if (shardsToTry.isEmpty()) {
                 continue;
             }
@@ -186,7 +188,8 @@ final class ManaPaymentPlanner {
                         if (!canUseProducedMana(ma, virtualMana, cost, toPay, paidFor, state, manaAbilities, ai)) {
                             continue;
                         }
-                        int actionScore = scoreManaPaymentAction(ma, paidFor, actionScoreCache);
+                        int actionScore = actionScoreCache.computeIfAbsent(ma.getId(),
+                                id -> scoreManaPaymentAction(ma, paidFor));
                         if (!triedManaAbilityKeys.add(sourceKey(source, sourceKeys) + "|" + produced)) {
                             continue;
                         }
@@ -201,21 +204,18 @@ final class ManaPaymentPlanner {
                         }
 
                         for (State stateAfterActivationCost : statesAfterActivationCost) {
-                            State nextState = stateAfterActivationCost.withManaAbilityResolved(source,
+                            State nextState = stateAfterActivationCost.withManaAbilityResolved(
                                     new Action(ma), virtualMana, actionScore);
 
-                            if (nextState.pool.size() >= cost.getConvertedManaCost()) {
-                                candidates.addAll(payCostFromVirtualPool(new ManaCostBeingPaid(cost),
-                                        nextState, paidFor, ai));
-                            }
-
-                            String nextKey = manaPlannerKey(cost, nextState, paidFor, sourceKeys);
-                            Integer queuedScore = queuedScores.get(nextKey);
+                            String nextKey = manaPlannerKey(nextState, sourceKeys);
+                            Integer queuedScore = bestScores.get(nextKey);
                             if (queuedScore != null && queuedScore <= nextState.score) {
                                 continue;
                             }
-                            queuedScores.put(nextKey, nextState.score);
-                            search.add(new Node(cost, nextState, priorityFor(cost, nextState, paidFor, ai)));
+                            bestScores.put(nextKey, nextState.score);
+                            remainingCost = nextState.pool.remainingCost(cost, paidFor, ai);
+                            search.add(new Node(remainingCost, nextState,
+                                    nextState.score + 250 * remainingCost.getConvertedManaCost(), nextKey));
                         }
                     }
                 }
@@ -228,18 +228,18 @@ final class ManaPaymentPlanner {
     private static State chooseBestPlan(final List<State> candidates, final SpellAbility paidFor,
             final Player ai, final boolean checkPlayable, final List<SpellAbility> manaAbilities,
             final boolean scoreFutureOptions) {
-        if (scoreFutureOptions && candidates.size() > MAX_FUTURE_SCORING_CANDIDATES) {
+        List<State> plans = candidates;
+        if (scoreFutureOptions && plans.size() > MAX_FUTURE_SCORING_CANDIDATES) {
             // Future scoring recursively replans other spells in hand. Keep it bounded and only apply
             // it to the strongest normal-payment candidates so equivalent sources do not stall the UI.
-            candidates.sort(Comparator.comparingInt((State state) -> state.score)
+            plans.sort(Comparator.comparingInt((State state) -> state.score)
                     .thenComparingInt(state -> state.actions.size()));
-            return chooseBestPlan(candidates.subList(0, MAX_FUTURE_SCORING_CANDIDATES), paidFor, ai,
-                    checkPlayable, manaAbilities, true);
+            plans = plans.subList(0, MAX_FUTURE_SCORING_CANDIDATES);
         }
 
         State bestPlan = null;
         int bestPlanScore = Integer.MAX_VALUE;
-        for (State candidate : candidates) {
+        for (State candidate : plans) {
             int score = candidate.score;
             if (scoreFutureOptions) {
                 score += scoreFutureCastability(candidate, paidFor, ai, checkPlayable, manaAbilities);
@@ -266,15 +266,15 @@ final class ManaPaymentPlanner {
         }
 
         ManaCostBeingPaid activationCost = ComputerUtilMana.calculateManaCost(cost, ma, ai, true, 0, ma.isTrigger());
-        return payCostFromVirtualPool(activationCost, reservedState, ma, ai);
+        return payCostFromVirtualPool(activationCost, reservedState, ma, ai, true);
     }
 
     private static List<State> payCostFromVirtualPool(final ManaCostBeingPaid cost, final State start,
-            final SpellAbility paidFor, final Player ai) {
+            final SpellAbility paidFor, final Player ai, final boolean findAll) {
         List<State> result = new ArrayList<>();
         List<Node> search = new ArrayList<>();
         Set<String> seen = new HashSet<>();
-        search.add(new Node(cost, start, 0));
+        search.add(new Node(cost, start, 0, null));
 
         for (int index = 0; index < search.size(); index++) {
             Node node = search.get(index);
@@ -283,16 +283,19 @@ final class ManaPaymentPlanner {
 
             if (nodeCost.isPaid()) {
                 result.add(state);
+                if (!findAll) {
+                    return result;
+                }
                 continue;
             }
 
-            if (!seen.add(activationPaymentKey(nodeCost, state, paidFor))) {
+            if (!seen.add(activationPaymentKey(nodeCost, state))) {
                 continue;
             }
 
             Set<String> triedMana = new HashSet<>();
-            for (int i = 0; i < state.pool.size(); i++) {
-                Mana mana = state.pool.get(i);
+            for (int i = 0; i < state.pool.mana.size(); i++) {
+                Mana mana = state.pool.mana.get(i);
                 if (!canPayWithVirtualMana(nodeCost, mana, paidFor, ai)) {
                     continue;
                 }
@@ -302,7 +305,7 @@ final class ManaPaymentPlanner {
 
                 ManaCostBeingPaid nextCost = new ManaCostBeingPaid(nodeCost);
                 nextCost.payMana(mana, ai.getManaPool());
-                search.add(new Node(nextCost, state.withoutManaAt(i), 0));
+                search.add(new Node(nextCost, state.withoutManaAt(i), 0, null));
             }
         }
 
@@ -312,11 +315,6 @@ final class ManaPaymentPlanner {
     private static int scoreManaPaymentAction(final SpellAbility ma, final SpellAbility paidFor) {
         int produced = Math.max(1, ma.totalAmountOfManaGenerated(paidFor, true));
         return 10 * ComputerUtilMana.scoreManaProducingCard(ma.getHostCard()) + 25 * produced * produced;
-    }
-
-    private static int scoreManaPaymentAction(final SpellAbility ma, final SpellAbility paidFor,
-            final Map<Integer, Integer> cache) {
-        return cache.computeIfAbsent(ma.getId(), id -> scoreManaPaymentAction(ma, paidFor));
     }
 
     private static int scoreFutureCastability(final State state, final SpellAbility paidFor,
@@ -340,7 +338,7 @@ final class ManaPaymentPlanner {
                     score += FUTURE_CASTABILITY_PENALTY;
                 }
             } finally {
-                resetPayment(manaAbilities);
+                ComputerUtilMana.resetPayment(manaAbilities);
             }
         }
         return score;
@@ -499,7 +497,7 @@ final class ManaPaymentPlanner {
 
     private static List<Mana> getVirtualMana(final SpellAbility ma, final String produced, final Player ai,
             final Map<String, List<Mana>> cache) {
-        String key = ma.getHostCard().getId() + "|" + produced;
+        String key = ma.getId() + "|" + produced;
         return cache.computeIfAbsent(key, k -> createVirtualMana(ma, produced, ai));
     }
 
@@ -599,16 +597,6 @@ final class ManaPaymentPlanner {
         return result;
     }
 
-    private static List<ManaCostShard> getPlannerShards(final ManaCostBeingPaid cost, final State state,
-            final SpellAbility paidFor, final Player ai) {
-        return getPlannerShards(state.pool.remainingCost(cost, paidFor, ai));
-    }
-
-    private static int priorityFor(final ManaCostBeingPaid cost, final State state, final SpellAbility paidFor,
-            final Player ai) {
-        return state.score + 250 * state.pool.remainingCost(cost, paidFor, ai).getConvertedManaCost();
-    }
-
     private static Map<Integer, String> getSourceEquivalenceKeys(final List<SpellAbility> manaAbilities,
             final SpellAbility paidFor) {
         Map<Integer, List<String>> keysBySource = new HashMap<>();
@@ -640,31 +628,22 @@ final class ManaPaymentPlanner {
                 + "|" + scoreManaPaymentAction(ma, paidFor);
     }
 
-    private static String manaPlannerKey(final ManaCostBeingPaid cost, final State state,
-            final SpellAbility paidFor, final Map<Integer, String> sourceKeys) {
-        Map<String, Integer> usedCounts = new HashMap<>();
+    private static String manaPlannerKey(final State state, final Map<Integer, String> sourceKeys) {
+        Map<String, Integer> usedCounts = new TreeMap<>();
         for (Integer sourceId : state.usedSourceIds) {
             usedCounts.merge(sourceKeys.getOrDefault(sourceId, "id:" + sourceId), 1, Integer::sum);
         }
-        List<String> used = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : usedCounts.entrySet()) {
-            used.add(entry.getKey() + "=" + entry.getValue());
-        }
-        Collections.sort(used);
-
-        return paidFor.getHostCard().getId() + "|" + cost + "|" + state.pool.key(sourceKeys) + "|" + used;
+        return state.pool.key(sourceKeys) + "|" + usedCounts;
     }
 
-    private static String activationPaymentKey(final ManaCostBeingPaid cost, final State state,
-            final SpellAbility paidFor) {
+    private static String activationPaymentKey(final ManaCostBeingPaid cost, final State state) {
         List<Integer> used = new ArrayList<>(state.usedSourceIds);
         Collections.sort(used);
-        return paidFor.getHostCard().getId() + "|" + cost + "|" + state.pool.key(null) + "|" + used;
+        return cost + "|" + state.pool.key(null) + "|" + used;
     }
 
     private static String sourceKey(final Card source, final Map<Integer, String> sourceKeys) {
-        String key = sourceKeys.get(source.getId());
-        return key == null ? "id:" + source.getId() : key;
+        return sourceKeys.getOrDefault(source.getId(), "id:" + source.getId());
     }
 
     private static String manaKey(final Mana mana, final Map<Integer, String> sourceKeys) {
@@ -672,19 +651,8 @@ final class ManaPaymentPlanner {
         if (!mana.isRestricted()) {
             return color;
         }
-        if (sourceKeys == null) {
-            return color + ":" + mana.getSourceCard().getName();
-        }
-        return color + ":" + sourceKey(mana.getSourceCard(), sourceKeys);
-    }
-
-    private static void resetPayment(final List<SpellAbility> payments) {
-        for (SpellAbility sa : payments) {
-            SpellAbility manaSa = ComputerUtilMana.getManaPartAbility(sa);
-            if (manaSa != null) {
-                manaSa.getManaPart().clearExpressChoice();
-            }
-        }
+        return color + ":" + (sourceKeys == null ? mana.getSourceCard().getName()
+                : sourceKey(mana.getSourceCard(), sourceKeys));
     }
 
     static final class Plan {
@@ -716,37 +684,21 @@ final class ManaPaymentPlanner {
         }
     }
 
-    private static final class State {
-        private final VirtualPool pool;
-        private final Set<Integer> usedSourceIds;
-        private final List<Action> actions;
-        private final int score;
-
-        private State(final VirtualPool pool, final Set<Integer> usedSourceIds,
-                final List<Action> actions, final int score) {
-            this.pool = pool;
-            this.usedSourceIds = usedSourceIds;
-            this.actions = actions;
-            this.score = score;
-        }
-
+    private record State(VirtualPool pool, Set<Integer> usedSourceIds, List<Action> actions, int score) {
         private State withoutManaAt(final int index) {
-            return new State(pool.without(index), new HashSet<>(usedSourceIds), new ArrayList<>(actions), score);
+            return new State(pool.without(index), usedSourceIds, actions, score);
         }
 
         private State withUsedSource(final Card source) {
             Set<Integer> nextUsedSources = new HashSet<>(usedSourceIds);
             nextUsedSources.add(source.getId());
-            return new State(pool, nextUsedSources, new ArrayList<>(actions), score);
+            return new State(pool, nextUsedSources, actions, score);
         }
 
-        private State withManaAbilityResolved(final Card source, final Action action, final List<Mana> produced,
-                final int actionScore) {
-            Set<Integer> nextUsedSources = new HashSet<>(usedSourceIds);
-            nextUsedSources.add(source.getId());
+        private State withManaAbilityResolved(final Action action, final List<Mana> produced, final int actionScore) {
             List<Action> nextActions = new ArrayList<>(actions);
             nextActions.add(action);
-            return new State(pool.plusAll(produced), nextUsedSources, nextActions, score + actionScore);
+            return new State(pool.plusAll(produced), usedSourceIds, nextActions, score + actionScore);
         }
 
         private boolean hasUsedSource(final Card source) {
@@ -754,21 +706,7 @@ final class ManaPaymentPlanner {
         }
     }
 
-    private static final class VirtualPool {
-        private final List<Mana> mana;
-
-        private VirtualPool(final List<Mana> mana) {
-            this.mana = new ArrayList<>(mana);
-        }
-
-        private int size() {
-            return mana.size();
-        }
-
-        private Mana get(final int index) {
-            return mana.get(index);
-        }
-
+    private record VirtualPool(List<Mana> mana) {
         private VirtualPool without(final int index) {
             List<Mana> next = new ArrayList<>(mana);
             next.remove(index);
@@ -784,12 +722,10 @@ final class ManaPaymentPlanner {
         private ManaCostBeingPaid remainingCost(final ManaCostBeingPaid cost, final SpellAbility paidFor,
                 final Player ai) {
             ManaCostBeingPaid remaining = new ManaCostBeingPaid(cost);
-            Set<String> triedMana = new HashSet<>();
             for (Mana m : mana) {
-                if (!canPayWithVirtualMana(remaining, m, paidFor, ai) || !triedMana.add(manaKey(m, null))) {
-                    continue;
+                if (canPayWithVirtualMana(remaining, m, paidFor, ai)) {
+                    remaining.payMana(m, ai.getManaPool());
                 }
-                remaining.payMana(m, ai.getManaPool());
             }
             return remaining;
         }
@@ -804,16 +740,7 @@ final class ManaPaymentPlanner {
         }
     }
 
-    private static final class Node {
-        private final ManaCostBeingPaid cost;
-        private final State state;
-        private final int priority;
-
-        private Node(final ManaCostBeingPaid cost, final State state, final int priority) {
-            this.cost = cost;
-            this.state = state;
-            this.priority = priority;
-        }
+    private record Node(ManaCostBeingPaid cost, State state, int priority, String key) {
     }
 
     private static final class Action {
