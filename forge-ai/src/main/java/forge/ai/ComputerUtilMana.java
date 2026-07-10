@@ -638,10 +638,8 @@ public class ComputerUtilMana {
                     greedyProbePayments) != null;
             AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
             AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_SAC_COST);
-            if (greedyProbeCanPay && !test && !ManaPaymentPlanner.greedyPaymentMayStrandFutureSpell(ai, sa,
-                    checkPlayable, greedyProbePayments)) {
-                shouldUsePlanner = false;
-            }
+            shouldUsePlanner = !greedyProbeCanPay || test || ManaPaymentPlanner.greedyPaymentMayStrandFutureSpell(
+                    ai, sa, checkPlayable, greedyProbePayments);
         }
         if (greedyProbeCanPay && test) {
             CostPayment.handleOfferings(sa, true, true);
@@ -653,7 +651,12 @@ public class ComputerUtilMana {
             // scoring is much more expensive and only matters when the AI is choosing a real payment.
             boolean scoreFutureOptions = !test && ai.getController() instanceof PlayerControllerAi;
             ManaPaymentPlanner.Plan plan = ManaPaymentPlanner.findPlan(cost, sa, ai, checkPlayable, scoreFutureOptions);
-            if (plan != null) {
+            boolean plannerExhausted = plan != null && plan.isExhausted();
+            if (plannerExhausted && test) {
+                CostPayment.handleOfferings(sa, true, true);
+                return manaSpentToPay;
+            }
+            if (!plannerExhausted && plan != null) {
                 boolean planned = test || plan.pay(cost, sa, ai, effect, manaSpentToPay);
                 CostPayment.handleOfferings(sa, test, planned);
                 if (!planned && !test) {
@@ -663,10 +666,10 @@ public class ComputerUtilMana {
                 return planned ? manaSpentToPay : null;
             }
 
-            // In test mode, do not fall back to the legacy payer: it cannot prove that mana abilities
-            // with mana activation costs are payable. During real payment, fall back only when no such
-            // source is involved, so a planner miss does not unnecessarily block ordinary restricted mana.
-            if (test || (!greedyProbeCanPay && ManaPaymentPlanner.hasCostedManaAbility(ai, checkPlayable))) {
+            // A completed planner miss is authoritative in test mode because the legacy payer cannot
+            // prove costed mana abilities payable. Exhaustion remains unknown and may use legacy fallback.
+            if (!plannerExhausted
+                    && (test || (!greedyProbeCanPay && ManaPaymentPlanner.hasCostedManaAbility(ai, checkPlayable)))) {
                 CostPayment.handleOfferings(sa, test, false);
                 return null;
             }
@@ -868,7 +871,7 @@ public class ComputerUtilMana {
         return manaSpentToPay;
     }
 
-    static void resetPayment(List<SpellAbility> payments) {
+    private static void resetPayment(List<SpellAbility> payments) {
         for (SpellAbility sa : payments) {
             SpellAbility manaSa = getManaPartAbility(sa);
             if (manaSa != null) {
