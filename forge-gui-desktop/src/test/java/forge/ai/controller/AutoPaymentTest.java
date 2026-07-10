@@ -9,8 +9,11 @@ import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
+import forge.card.CardStateName;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -21,6 +24,9 @@ import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class AutoPaymentTest extends SimulationTest {
@@ -528,6 +534,69 @@ public class AutoPaymentTest extends SimulationTest {
         return sources[0];
     }
 
+    private SpellAbility findEquipAbility(final Card equipment) {
+        for (KeywordInterface kw : equipment.getKeywords(Keyword.EQUIP)) {
+            for (SpellAbility sa : kw.getAbilities()) {
+                if (sa.isEquip()) {
+                    return sa;
+                }
+            }
+        }
+        return null;
+    }
+
+    private String capturePaymentPlan(Game game, Player p, ManaCostBeingPaid mc, SpellAbility sa, final boolean test) {
+        final String prevPlan = System.getProperty("forge.debugManaPayment.plan");
+        final PrintStream prevOut = System.out;
+        final ByteArrayOutputStream captured = new ByteArrayOutputStream();
+        try {
+            System.setProperty("forge.debugManaPayment.plan", "true");
+            System.setOut(new PrintStream(captured, true, StandardCharsets.UTF_8));
+            if (test) {
+                final CardCollection[] sources = new CardCollection[1];
+                p.runWithController(() -> sources[0] = ComputerUtilMana.getManaSourcesToPayCostForPaymentPrompt(
+                        new ManaCostBeingPaid(mc), sa, p, false),
+                        new PlayerControllerAi(game, p, p.getOriginalLobbyPlayer()));
+                AssertJUnit.assertNotNull(sources[0]);
+            } else {
+                final boolean[] result = new boolean[1];
+                p.runWithController(() -> result[0] = ComputerUtilMana.payManaCostFromPaymentPrompt(
+                        new ManaCostBeingPaid(mc), sa, p, false),
+                        new PlayerControllerAi(game, p, p.getOriginalLobbyPlayer()));
+                AssertJUnit.assertTrue(result[0]);
+            }
+            return captured.toString(StandardCharsets.UTF_8);
+        } finally {
+            System.setOut(prevOut);
+            if (prevPlan == null) {
+                System.clearProperty("forge.debugManaPayment.plan");
+            } else {
+                System.setProperty("forge.debugManaPayment.plan", prevPlan);
+            }
+        }
+    }
+
+    private List<String> extractPaymentPlanSteps(final String log, final boolean test) {
+        final String marker = "MANA_PAYMENT_PLAN [" + (test ? "test" : "prod") + "]";
+        final int start = log.indexOf(marker);
+        if (start < 0) {
+            return List.of();
+        }
+        final List<String> steps = Lists.newArrayList();
+        final String[] lines = log.substring(start).split("\\R");
+        for (int i = 1; i < lines.length; i++) {
+            final String line = lines[i].trim();
+            if (line.isEmpty()) {
+                break;
+            }
+            if (!line.matches("\\d+\\. .*")) {
+                break;
+            }
+            steps.add(line.replaceFirst("^\\d+\\. ", ""));
+        }
+        return steps;
+    }
+
     /** Cards added directly to a zone skip ETB; register triggers for TapsForMana auras/enchantments. */
     private void registerBattlefieldTriggers(Game game, Card... cards) {
         for (final Card c : cards) {
@@ -558,6 +627,114 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue("Study Hall should produce {G}", sources.anyMatch(c -> "Study Hall".equals(c.getName())));
         AssertJUnit.assertTrue("Plains should pay Study Hall's {1}", sources.anyMatch(c -> "Plains".equals(c.getName())));
         AssertJUnit.assertFalse("Lotus Petal should not be sacrificed", sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+    }
+
+    // {W} with tapped Plains: Forest pays Study Hall's {1}, not Lotus Petal.
+    @Test
+    public void studyHallBeatsLotusPetalWhenPlainsTapped() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card plains = addCard("Plains", p);
+        plains.setTapped(true);
+        Card prairie = addCard("Sungrass Prairie", p);
+        prairie.setTapped(true);
+        Card petal2 = addCard("Lotus Petal", p);
+        petal2.setTapped(true);
+        addCard("Forest", p);
+        addCard("Study Hall", p);
+        addCard("Lotus Petal", p);
+        addCardToZone("Healing Salve", p, ZoneType.Hand);
+        Card spell = addSpellOnStack(game, "Speaker of the Heavens", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Study Hall should produce {W}", sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+        AssertJUnit.assertTrue("Forest should pay Study Hall's {1}", sources.anyMatch(c -> "Forest".equals(c.getName())));
+        AssertJUnit.assertFalse("Lotus Petal should not be sacrificed", sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
+    // {1}{W} on stack: Mind Stone activates Sungrass Prairie; Study Hall filter stays for later.
+    @Test
+    public void shelteredByGhostsUsesMindStoneNotStudyHallForPrairie() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mind Stone", p);
+        addCard("Study Hall", p);
+        addCard("Sungrass Prairie", p);
+        Card spell = addSpellOnStack(game, "Sheltered by Ghosts", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Sungrass Prairie should pay {1}{W}",
+                sources.anyMatch(c -> "Sungrass Prairie".equals(c.getName())));
+        AssertJUnit.assertTrue("Mind Stone should activate Sungrass Prairie",
+                sources.anyMatch(c -> "Mind Stone".equals(c.getName())));
+        AssertJUnit.assertFalse("Study Hall should not be tapped for Prairie's {1}",
+                sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+
+        final String testLog = capturePaymentPlan(game, p, mc, sa, true);
+        final String prodLog = capturePaymentPlan(game, p, mc, sa, false);
+        final List<String> testSteps = extractPaymentPlanSteps(testLog, true);
+        final List<String> prodSteps = extractPaymentPlanSteps(prodLog, false);
+        AssertJUnit.assertFalse("Test plan should not be empty", testSteps.isEmpty());
+        AssertJUnit.assertFalse("Prod plan should not be empty", prodSteps.isEmpty());
+        AssertJUnit.assertEquals("Preview and production plans should match", prodSteps, testSteps);
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
+    // {1}{W} on stack: preview should match prod (Haven for generic, not off-color Forest).
+    @Test
+    public void ainokBondKinStackPreviewMatchesProduction() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card lair = addCard("Valgavoth's Lair", p);
+        lair.setChosenColors(Lists.newArrayList("white"));
+        addCard("Snow-Covered Forest", p);
+        Card haven = addCard("Strength of the Harvest", p);
+        haven.setState(CardStateName.Backside, false, true);
+        haven.setTapped(false);
+        addCardToZone("Healing Salve", p, ZoneType.Hand);
+        Card spell = addSpellOnStack(game, "Ainok Bond-Kin", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Valgavoth's Lair should pay {W}",
+                sources.anyMatch(c -> "Valgavoth's Lair".equals(c.getName())));
+        AssertJUnit.assertTrue("Haven of the Harvest should pay generic {1}",
+                sources.anyMatch(c -> "Haven of the Harvest".equals(c.getName())));
+        AssertJUnit.assertFalse("Forest should not pay generic {1}",
+                sources.anyMatch(c -> "Snow-Covered Forest".equals(c.getName())));
+
+        final String testLog = capturePaymentPlan(game, p, mc, sa, true);
+        final String prodLog = capturePaymentPlan(game, p, mc, sa, false);
+        AssertJUnit.assertEquals("Preview and production plans should match",
+                extractPaymentPlanSteps(prodLog, false), extractPaymentPlanSteps(testLog, true));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
 
     // Generic {1} should tap colorless mana, not an any-mana signet, when {W}{W} also need paying.
@@ -821,6 +998,85 @@ public class AutoPaymentTest extends SimulationTest {
                 countTapped(game, "Snow-Covered Forest") + countTapped(game, "Forest"));
     }
 
+    // Equip {1}: payment-prompt preview and Auto commit both emit MANA_PAYMENT_PLAN tagged [equip].
+    @Test
+    public void equipAbilityEmitsPaymentPromptPlans() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        Card bear = addCard("Runeclaw Bear", p);
+        bear.setSickness(false);
+        Card equipment = addCard("Bonesplitter", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility equipSa = findEquipAbility(equipment);
+        AssertJUnit.assertNotNull(equipSa);
+        equipSa.setActivatingPlayer(p);
+        equipSa.getTargets().add(bear);
+
+        ManaCostBeingPaid mc = new ManaCostBeingPaid(equipSa.getPayCosts().getCostMana().getMana());
+
+        final String testLog = capturePaymentPlan(game, p, mc, equipSa, true);
+        AssertJUnit.assertTrue("Test plan should be emitted for equip", testLog.contains("MANA_PAYMENT_PLAN [test]"));
+        AssertJUnit.assertTrue("Test plan should tag equip abilities", testLog.contains("Bonesplitter [equip]"));
+
+        final String prodLog = capturePaymentPlan(game, p, mc, equipSa, false);
+        AssertJUnit.assertTrue("Prod plan should be emitted for equip", prodLog.contains("MANA_PAYMENT_PLAN [prod]"));
+        AssertJUnit.assertTrue("Prod plan should tag equip abilities", prodLog.contains("Bonesplitter [equip]"));
+
+        final List<String> testSteps = extractPaymentPlanSteps(testLog, true);
+        final List<String> prodSteps = extractPaymentPlanSteps(prodLog, false);
+        AssertJUnit.assertFalse("Test plan should list tap steps", testSteps.isEmpty());
+        AssertJUnit.assertEquals("Prod plan steps should match test", testSteps, prodSteps);
+    }
+
+    // Companion {3}: ST$ put-into-hand is AbilityStatic; preview and Auto commit emit [companion] plans.
+    @Test
+    public void companionAbilityEmitsPaymentPromptPlans() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Island", p);
+        addCard("Swamp", p);
+        Card companion = addCardToZone("Grizzly Bears", p, ZoneType.Command);
+        p.getZone(ZoneType.Command).add(Player.createCompanionEffect(companion));
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility companionSa = null;
+        for (final SpellAbility sa : companion.getNonManaAbilities()) {
+            final String desc = sa.getDescription();
+            if (desc != null && desc.contains("Companion")
+                    && sa.getPayCosts() != null && sa.getPayCosts().hasManaCost()) {
+                companionSa = sa;
+                break;
+            }
+        }
+        AssertJUnit.assertNotNull("Companion put-into-hand ability should be granted", companionSa);
+        companionSa.setActivatingPlayer(p);
+
+        final ManaCostBeingPaid mc = new ManaCostBeingPaid(companionSa.getPayCosts().getCostMana().getMana());
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, companionSa));
+
+        final String testLog = capturePaymentPlan(game, p, mc, companionSa, true);
+        AssertJUnit.assertTrue("Test plan should be emitted for companion", testLog.contains("MANA_PAYMENT_PLAN [test]"));
+        AssertJUnit.assertTrue("Test plan should tag companion abilities", testLog.contains("Grizzly Bears [companion]"));
+
+        final String prodLog = capturePaymentPlan(game, p, mc, companionSa, false);
+        AssertJUnit.assertTrue("Prod plan should be emitted for companion", prodLog.contains("MANA_PAYMENT_PLAN [prod]"));
+        AssertJUnit.assertTrue("Prod plan should tag companion abilities", prodLog.contains("Grizzly Bears [companion]"));
+
+        final List<String> testSteps = extractPaymentPlanSteps(testLog, true);
+        final List<String> prodSteps = extractPaymentPlanSteps(prodLog, false);
+        AssertJUnit.assertFalse("Test plan should list tap steps", testSteps.isEmpty());
+        AssertJUnit.assertEquals("Prod plan steps should match test", testSteps, prodSteps);
+    }
+
     // {1}{W}{G} on stack: Plains {W}, Forest {G}, Reliquary Tower {C} for generic — not Sol Ring.
     @Test
     public void stackCalixUsesReliquaryTowerNotSolRingForGeneric() {
@@ -1068,7 +1324,7 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
 
-    // {1}{W} on stack: preserve Razorverge Thicket for another hand spell; pay generic with Fellwar Stone.
+    // {1}{W} on stack: preview and production both tap the on-color dual for generic (no castability probe).
     @Test
     public void stackPaymentUsesOffColorRockForGeneric() {
         Game game = initAndCreateGame();
@@ -1092,10 +1348,13 @@ public class AutoPaymentTest extends SimulationTest {
         CardCollection sources = predictedManaSources(game, p, mc, sa);
         AssertJUnit.assertTrue("Plains should pay {W}",
                 sources.anyMatch(c -> c.getName().contains("Plains")));
-        AssertJUnit.assertTrue("Fellwar Stone should pay generic {1}",
-                sources.anyMatch(c -> "Fellwar Stone".equals(c.getName())));
-        AssertJUnit.assertFalse("Razorverge Thicket should be preserved for hand spells",
+        AssertJUnit.assertTrue("Razorverge Thicket should pay generic {1}",
                 sources.anyMatch(c -> "Razorverge Thicket".equals(c.getName())));
+
+        final String testLog = capturePaymentPlan(game, p, mc, sa, true);
+        final String prodLog = capturePaymentPlan(game, p, mc, sa, false);
+        AssertJUnit.assertEquals("Preview and production plans should match",
+                extractPaymentPlanSteps(prodLog, false), extractPaymentPlanSteps(testLog, true));
 
         AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
