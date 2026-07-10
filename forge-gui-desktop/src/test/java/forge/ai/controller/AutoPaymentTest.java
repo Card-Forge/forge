@@ -19,6 +19,8 @@ import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import com.google.common.collect.Lists;
+
 import java.util.List;
 
 public class AutoPaymentTest extends SimulationTest {
@@ -526,6 +528,15 @@ public class AutoPaymentTest extends SimulationTest {
         return sources[0];
     }
 
+    /** Cards added directly to a zone skip ETB; register triggers for TapsForMana auras/enchantments. */
+    private void registerBattlefieldTriggers(Game game, Card... cards) {
+        for (final Card c : cards) {
+            if (c != null) {
+                game.getTriggerHandler().registerActiveTrigger(c, false);
+            }
+        }
+    }
+
     // {G} with Plains + Study Hall + Lotus Petal should tap Plains for Study Hall's {1}, not sacrifice Petal.
     @Test
     public void studyHallBeatsLotusPetalForSingleGreen() {
@@ -914,6 +925,58 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
 
+    // Jacked Rabbit is {X}{1}{W}; X=0 matches the Petal + Signet routing case on stack.
+    @Test
+    public void lotusPetalActivatesSignetForJackedRabbitOnStack() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Lotus Petal", p);
+        addCard("Selesnya Signet", p);
+        Card spell = addSpellOnStack(game, "Jacked Rabbit", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Signet should pay", sources.anyMatch(c -> "Selesnya Signet".equals(c.getName())));
+        AssertJUnit.assertTrue("Lotus Petal should activate the Signet",
+                sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
+    // Tapped land must not block Petal from activating Signet when the land cannot actually pay {1}.
+    @Test
+    public void lotusPetalActivatesSignetWhenOnlyLandIsTapped() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card plains = addCard("Plains", p);
+        plains.setTapped(true);
+        addCard("Lotus Petal", p);
+        addCard("Selesnya Signet", p);
+        Card spell = addSpellOnStack(game, "Jacked Rabbit", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Signet should pay", sources.anyMatch(c -> "Selesnya Signet".equals(c.getName())));
+        AssertJUnit.assertTrue("Lotus Petal should activate the Signet",
+                sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
     // {2} with imprinted Chrome Mox {G} + Study Hall {T}:{C} should not sacrifice Lotus Petal.
     @Test
     public void chromeMoxAndStudyHallPayDoubleGenericWithoutPetal() {
@@ -992,6 +1055,34 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue("Plains should pay {W}", sources.anyMatch(c -> "Plains".equals(c.getName())));
         AssertJUnit.assertTrue("Lotus Petal should pay {G}", sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
         AssertJUnit.assertTrue("Study Hall should pay generic {1}", sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
+    // Two Plains + Study Hall + Petal on stack: Petal {G}, one Plains {W}, Study Hall {C} for {1}.
+    @Test
+    public void calixOnStackDoesNotBurnStudyHallForGreenWithTwoPlains() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Snow-Covered Plains", p);
+        addCard("Lotus Petal", p);
+        addCard("Study Hall", p);
+        Card spell = addSpellOnStack(game, "Calix, Guided by Fate", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("1 G W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Lotus Petal should pay {G}", sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+        AssertJUnit.assertTrue("Study Hall should pay generic {1}", sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+        AssertJUnit.assertEquals("Only one Plains should be tapped", 1,
+                sources.stream().filter(c -> c.getName().contains("Plains")).count());
 
         AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
@@ -1121,8 +1212,8 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
 
-    // {1}{W}{G} with two Plains, Study Hall, Reliquary Tower, and Lotus Petal: Reliquary pays Study
-    // Hall's filter {1} for {G}; both Plains cover {W} and generic {1}; Petal unused.
+    // {1}{W}{G} with two Plains, Study Hall, Reliquary Tower, and Lotus Petal: Petal -> {G}, one Plains
+    // -> {W}, Reliquary Tower {C} -> generic {1}; Study Hall stays untapped for its filter ability.
     @Test
     public void studyHallFilterWithReliquaryTowerBeatsLotusPetal() {
         Game game = initAndCreateGame();
@@ -1142,15 +1233,97 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
 
         CardCollection sources = predictedManaSources(game, p, mc, sa);
-        AssertJUnit.assertTrue("Study Hall should pay {G}", sources.anyMatch(c -> "Study Hall".equals(c.getName())));
-        AssertJUnit.assertTrue("Reliquary Tower should pay Study Hall's {1}",
+        AssertJUnit.assertTrue("Lotus Petal should pay {G}", sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+        AssertJUnit.assertTrue("Reliquary Tower should pay generic {1}",
                 sources.anyMatch(c -> "Reliquary Tower".equals(c.getName())));
-        AssertJUnit.assertTrue("Both Plains should be tapped",
-                sources.stream().filter(c -> c.getName().contains("Plains")).count() >= 2);
+        AssertJUnit.assertEquals("Only one Plains should be tapped", 1,
+                sources.stream().filter(c -> c.getName().contains("Plains")).count());
+        AssertJUnit.assertFalse("Study Hall should stay untapped when Reliquary Tower can pay generic {1}",
+                sources.anyMatch(c -> "Study Hall".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+    }
+
+    // Forest + Utopia Sprawl (chosen blue): one tap produces {G}{U} via TapsForMana trigger simulation.
+    @Test
+    public void utopiaSprawlPaysGreenAndChosenColorFromOneForestTap() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card forest = addCard("Forest", p);
+        Card sprawl = addCard("Utopia Sprawl", p);
+        sprawl.setChosenColors(Lists.newArrayList("blue"));
+        sprawl.attachToEntity(forest, null);
+        registerBattlefieldTriggers(game, sprawl);
+        Card spell = addCardToZone("Growth Spiral", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("G U"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("G U"), sa);
+        AssertJUnit.assertEquals("Only the Sprawl'd Forest should be tapped", 1,
+                sources.stream().filter(c -> "Forest".equals(c.getName())).count());
+        AssertJUnit.assertFalse("Utopia Sprawl is not a mana source host",
+                sources.anyMatch(c -> "Utopia Sprawl".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, cost("G U"), sa));
+        AssertJUnit.assertEquals(1, countTapped(game, "Forest"));
+    }
+
+    // Mana Flare doubles land output: one Plains pays {W}{W}.
+    @Test
+    public void manaFlareDoublesLandOutputForDoubleWhite() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card manaFlare = addCard("Mana Flare", p);
+        addCards("Plains", 2, p);
+        registerBattlefieldTriggers(game, manaFlare);
+        Card spell = addCardToZone("Raise the Alarm", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("W W"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("W W"), sa);
+        AssertJUnit.assertEquals("Only one Plains should be tapped", 1,
+                sources.stream().filter(c -> "Plains".equals(c.getName())).count());
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, cost("W W"), sa));
+        AssertJUnit.assertEquals(1, countTapped(game, "Plains"));
+    }
+
+    // Sprawl'd Forest covers {G}{U}; Lotus Petal should stay unused.
+    @Test
+    public void utopiaSprawlForestBeatsLotusPetalForGreenAndBlue() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card forest = addCard("Forest", p);
+        Card sprawl = addCard("Utopia Sprawl", p);
+        sprawl.setChosenColors(Lists.newArrayList("blue"));
+        sprawl.attachToEntity(forest, null);
+        registerBattlefieldTriggers(game, sprawl);
+        addCard("Lotus Petal", p);
+        Card spell = addCardToZone("Growth Spiral", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("G U"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("G U"), sa);
+        AssertJUnit.assertTrue("Forest should pay both pips", sources.anyMatch(c -> "Forest".equals(c.getName())));
         AssertJUnit.assertFalse("Lotus Petal should not be sacrificed",
                 sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
 
-        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, cost("G U"), sa));
     }
 
     // {1}{G} with Forest available: tap Forest for {G}, keep Lotus Petal unused (disposable is last resort).
@@ -1394,10 +1567,12 @@ public class AutoPaymentTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         SpellAbility sa = spell.getFirstSpellAbility();
-        assertProductionPayment(game, p, cost("R W"), sa);
-
         CardCollection sources = predictedManaSources(game, p, cost("R W"), sa);
         AssertJUnit.assertTrue("A signet should pay", sources.anyMatch(c -> "Boros Signet".equals(c.getName())));
+        AssertJUnit.assertTrue("At least one land should be tapped for signet activation",
+                sources.stream().filter(c -> c.getName().contains("Plains") || c.getName().contains("Mountain")).count() >= 1);
+
+        assertProductionPayment(game, p, cost("R W"), sa);
         AssertJUnit.assertTrue("At least one land should be tapped for signet activation",
                 countTapped(game, "Mountain") + countTapped(game, "Plains") >= 1);
     }
