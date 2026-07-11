@@ -60,7 +60,7 @@ public class ComputerUtilMana {
     private final static int COLORLESS_PIP_INDEX = 5;
 
     /** Per-outer-payment caches shared by nested feasibility probes. */
-    private static final class CastabilityProbeScratch {
+    static final class CastabilityProbeScratch {
         final Set<ManaCostShard> unavailableColoredShards = new HashSet<>();
         int availableManaAfterReservation = -1;
         ManaCostShard lastFailedColoredShard;
@@ -78,13 +78,12 @@ public class ComputerUtilMana {
         }
     }
 
-    private static final class ManaPaymentPlanCache {
+    static final class ManaPaymentPlanCache {
         ListMultimap<Integer, SpellAbility> manaAbilityMap;
         Long manaAbilityMapKey;
         final Map<Card, List<SpellAbility>> playableManaCache = new HashMap<>();
         Long reusableTapLandKey;
         Set<Card> reusableTapLandSet;
-        /** Hand/command castability predicates for the spell being paid (stable within one outer payment). */
         int handProbeSpellId = -1;
         Boolean hasOtherHandOrCommandSpells;
         Boolean handHasMulticolorManaSpells;
@@ -94,15 +93,12 @@ public class ComputerUtilMana {
 
     /**
      * Explicit payment-plan state passed through nested {@link #payManaCost} calls.
-     * {@link #outer()} starts a fresh plan; {@link #nested()} / {@link #nestedWithFilterProbe()} share caches.
      */
-    private static final class ManaPaymentContext {
+    static final class ManaPaymentContext {
         final ManaPaymentPlanCache caches;
         final int depth;
         final boolean inFilterActivationProbe;
-        /** Human payment-prompt Auto preview; enables castability probing during dry-run only here. */
         final boolean paymentPromptPreview;
-        /** Emit numbered MANA_PAYMENT_PLAN for this outer payment (payment-prompt preview or commit). */
         final boolean tracePaymentPlan;
         List<Mana> testDepositedSurplus;
         List<String> planSteps;
@@ -126,12 +122,10 @@ public class ComputerUtilMana {
             return outer(planSteps, false, false);
         }
 
-        /** Payment-prompt Auto preview dry-run (last probe before prod; emits {@code [test]} plan). */
         static ManaPaymentContext outerForPaymentPrompt() {
             return outer(null, true, true);
         }
 
-        /** Payment-prompt Auto commit (emits {@code [prod]} plan). */
         static ManaPaymentContext outerForPaymentPromptCommit() {
             return outer(null, false, true);
         }
@@ -170,13 +164,6 @@ public class ComputerUtilMana {
 
     /** Extra fungible representatives kept per equivalence class for saExcludeList retries. */
     private static final int FUNGIBLE_CANDIDATE_BUFFER = 2;
-    /** Max candidates evaluated by castability / stranding probes on large boards. */
-    private static final int CASTABILITY_PROBE_CANDIDATE_CAP = 5;
-    /** Soft CMC cap: skip castability dry-runs above this CMC when total mana budget is insufficient. */
-    private static final int CASTABILITY_SOFT_CMC_CAP = 3;
-
-    /** Test hook: dry-runs executed in {@link #canPayManaCostExcluding} (not skipped by pruning). */
-    static int castabilityProbeDryRunCountForTests;
 
     // Runtime-toggleable payment tracing, enabled with -Dforge.debugManaPayment=true.
     // Trace filter (first match wins):
@@ -271,7 +258,7 @@ public class ComputerUtilMana {
         }
     }
 
-    private static void debugLog(boolean test, String msg) {
+    static void debugLog(boolean test, String msg) {
         if (debugManaPayment(test)) {
             System.out.println("MANA_PAYMENT [" + (test ? "test" : "prod") + "] " + msg);
         }
@@ -451,7 +438,7 @@ public class ComputerUtilMana {
         return "command";
     }
 
-    private static ListMultimap<Integer, SpellAbility> getOrBuildManaAbilityMap(final Player ai,
+    static ListMultimap<Integer, SpellAbility> getOrBuildManaAbilityMap(final Player ai,
             final boolean checkPlayable, final ManaPaymentContext ctx) {
         if (ctx == null) {
             return groupSourcesByManaColor(ai, checkPlayable, null);
@@ -833,7 +820,7 @@ public class ComputerUtilMana {
     }
 
     /** True when hand/command still holds a spell whose mana cost uses two or more colors. */
-    private static boolean handHasMulticolorManaSpells(final Player ai, final SpellAbility spellBeingPaid,
+    static boolean handHasMulticolorManaSpells(final Player ai, final SpellAbility spellBeingPaid,
             final ManaPaymentContext ctx) {
         if (ctx != null && spellBeingPaid.getHostCard() != null
                 && ctx.caches.handProbeSpellId == spellBeingPaid.getHostCard().getId()
@@ -938,7 +925,7 @@ public class ComputerUtilMana {
      * How generic mana pips should be paid relative to colorless vs colored sources.
      * Lower {@link #rankGenericManaSource} ranks are better.
      */
-    private enum GenericColorPreference {
+    enum GenericColorPreference {
         /** Colorless rocks carry generic; colored basics are acceptable fallback. */
         DEFAULT,
         /** Every colored pip has a reusable producer — spend {C} on generic, keep colored basics. */
@@ -1020,7 +1007,7 @@ public class ComputerUtilMana {
     /**
      * Preference rank for paying a generic mana pip. Lower is better.
      */
-    private static int rankGenericManaSource(final SpellAbility ma, final GenericColorPreference pref) {
+    static int rankGenericManaSource(final SpellAbility ma, final GenericColorPreference pref) {
         if (isDisposableManaAbility(ma)) {
             return 50;
         }
@@ -1134,7 +1121,7 @@ public class ComputerUtilMana {
     }
 
     /** Gilded Lotus-style: any one color, two or more mana per activation. */
-    private static boolean isAnyMultiManaProducer(final SpellAbility ma) {
+    static boolean isAnyMultiManaProducer(final SpellAbility ma) {
         if (!isMultiManaProducer(ma)) {
             return false;
         }
@@ -1237,11 +1224,6 @@ public class ComputerUtilMana {
             }
             return flags;
         }
-    }
-
-    @FunctionalInterface
-    private interface CastabilityConsumedBuilder {
-        Set<Card> build(SpellAbility cand, SpellAbility sa, Player ai, ManaPaymentContext ctx);
     }
 
     private static int countUnpaidPips(final ManaCostBeingPaid cost) {
@@ -2368,10 +2350,10 @@ public class ComputerUtilMana {
     }
 
     private static List<SpellAbility> capProbeCandidates(final List<SpellAbility> candidates) {
-        if (candidates.size() <= CASTABILITY_PROBE_CANDIDATE_CAP) {
+        if (candidates.size() <= CastabilityProbe.CANDIDATE_CAP) {
             return candidates;
         }
-        return candidates.subList(0, CASTABILITY_PROBE_CANDIDATE_CAP);
+        return candidates.subList(0, CastabilityProbe.CANDIDATE_CAP);
     }
 
     public static SpellAbility chooseManaAbility(ManaCostBeingPaid cost, SpellAbility sa, Player ai, ManaCostShard toPay,
@@ -2406,91 +2388,8 @@ public class ComputerUtilMana {
         return null;
     }
 
-    /**
-     * Like {@link #chooseManaAbility} but, when a consolidating filter is in play, may compare
-     * candidates by how many hand/command spells remain castable afterwards.
-     */
-    private static SpellAbility pickByCastabilityProbe(final ManaCostBeingPaid cost,
-            final List<SpellAbility> candidates, final SpellAbility sa,
-            final Player ai, final ManaCostShard toPay, final CastabilityConsumedBuilder consumedBuilder,
-            final boolean preferMultiForGeneric, final boolean test, final ManaPaymentContext ctx) {
-        SpellAbility best = null;
-        int bestCastable = -1;
-        int bestEfficiency = Integer.MAX_VALUE;
-        final boolean multicolorHand = handHasMulticolorManaSpells(ai, sa, ctx);
-        final ManaPaymentContext probeCtx = ctx.withFilterProbe();
-        for (final SpellAbility cand : capProbeCandidates(candidates)) {
-            final Set<Card> sacSnapshot = snapshotMemory(ai, MemorySet.PAYS_SAC_COST);
-            final Set<Card> tapSnapshot = snapshotMemory(ai, MemorySet.PAYS_TAP_COST);
-            final Set<Card> consumed = consumedBuilder.build(cand, sa, ai, probeCtx);
-            if (consumed == null) {
-                restoreMemory(ai, MemorySet.PAYS_SAC_COST, sacSnapshot);
-                restoreMemory(ai, MemorySet.PAYS_TAP_COST, tapSnapshot);
-                continue;
-            }
-            final int castable = countCastableSpellsAfterPayment(ai, sa, consumed, probeCtx);
-            restoreMemory(ai, MemorySet.PAYS_SAC_COST, sacSnapshot);
-            restoreMemory(ai, MemorySet.PAYS_TAP_COST, tapSnapshot);
-            debugLog(test, "    castability " + cand.getHostCard() + " -> " + castable
-                    + " hand/command spells remain");
-            final boolean preferCand = multicolorHand && isAnyMultiManaProducer(cand) && preferMultiForGeneric;
-            final boolean preferBest = multicolorHand && best != null && isAnyMultiManaProducer(best)
-                    && preferMultiForGeneric;
-            boolean takeCand = false;
-            if (castable > bestCastable) {
-                takeCand = true;
-                bestEfficiency = Integer.MAX_VALUE;
-            } else if (castable == bestCastable) {
-                if (preferCand && !preferBest) {
-                    takeCand = true;
-                    bestEfficiency = Integer.MAX_VALUE;
-                } else if (!preferCand && !preferBest) {
-                    final PaymentImpact impact = evaluatePaymentImpact(cost, sa, ai, toPay, cand, candidates,
-                            probeCtx);
-                    final int candEfficiency = impact.efficiencyScore;
-                    if (best == null) {
-                        takeCand = true;
-                        bestEfficiency = candEfficiency;
-                    } else {
-                        if (bestEfficiency == Integer.MAX_VALUE) {
-                            bestEfficiency = evaluatePaymentImpact(cost, sa, ai, toPay, best, candidates, probeCtx)
-                                    .efficiencyScore;
-                        }
-                        if (castabilityTieBreakPrefers(cand, best, candEfficiency, bestEfficiency, toPay, cost, ai,
-                                sa)) {
-                            takeCand = true;
-                            bestEfficiency = candEfficiency;
-                        }
-                    }
-                }
-            }
-            if (takeCand) {
-                bestCastable = castable;
-                best = cand;
-            }
-        }
-        return best;
-    }
-
-    /** When castability counts tie, prefer lower efficiency and dedicated colorless rocks over filter hosts. */
-    private static boolean castabilityTieBreakPrefers(final SpellAbility cand, final SpellAbility best,
-            final int candEfficiency, final int bestEfficiency, final ManaCostShard toPay,
-            final ManaCostBeingPaid cost, final Player ai, final SpellAbility sa) {
-        if (candEfficiency < bestEfficiency) {
-            return true;
-        }
-        if (candEfficiency > bestEfficiency || best == null) {
-            return false;
-        }
-        if (toPay != ManaCostShard.GENERIC && toPay != ManaCostShard.X) {
-            return false;
-        }
-        final GenericColorPreference pref = genericColorPreferenceForNestedActivation(ai, sa, cost);
-        return rankGenericManaSource(cand, pref) < rankGenericManaSource(best, pref);
-    }
-
     /** Match {@link #sortFreeSourcesForNestedActivation} / {@link #chooseManaAbility} generic ranking. */
-    private static GenericColorPreference genericColorPreferenceForNestedActivation(final Player ai,
+    static GenericColorPreference genericColorPreferenceForNestedActivation(final Player ai,
             final SpellAbility sa, final ManaCostBeingPaid cost) {
         if (coloredBasicTappedThisPayment(ai)) {
             return GenericColorPreference.PREFER_COLORLESS;
@@ -2511,7 +2410,7 @@ public class ComputerUtilMana {
         if (valid.isEmpty()) {
             return null;
         }
-        if (valid.size() == 1 || ctx.inFilterActivationProbe || !shouldUseCastabilityProbe(sa, test, ctx)
+        if (valid.size() == 1 || ctx.inFilterActivationProbe || !CastabilityProbe.shouldUse(sa, test, ctx)
                 || ((ctx == null || !ctx.paymentPromptPreview)
                         && valid.stream().noneMatch(ComputerUtilMana::isConsolidatingCandidate))
                 || !hasOtherHandOrCommandSpells(ai, sa, ctx)) {
@@ -2524,7 +2423,7 @@ public class ComputerUtilMana {
         }
 
         final boolean preferMultiForGeneric = toPay.isGeneric() || toPay == ManaCostShard.X;
-        final SpellAbility best = pickByCastabilityProbe(cost, valid, sa, ai, toPay,
+        final SpellAbility best = CastabilityProbe.pickBest(cost, valid, sa, ai, toPay,
                 ComputerUtilMana::collectCardsConsumedByPayment, preferMultiForGeneric, test, ctx);
         return best != null ? refreshExpressChoice(cost, sa, ai, toPay, best)
                 : refreshExpressChoice(cost, sa, ai, toPay, valid.get(0));
@@ -2637,7 +2536,7 @@ public class ComputerUtilMana {
         return null;
     }
 
-    private static final class PaymentImpact {
+    static final class PaymentImpact {
         final boolean keepsRest;
         final int consumedCount;
         final int efficiencyScore;
@@ -2702,7 +2601,7 @@ public class ComputerUtilMana {
      * Single pass: cards consumed by paying with {@code chosen}, and whether the rest of {@code cost}
      * remains payable afterwards.
      */
-    private static PaymentImpact evaluatePaymentImpact(final ManaCostBeingPaid cost, final SpellAbility sa,
+    static PaymentImpact evaluatePaymentImpact(final ManaCostBeingPaid cost, final SpellAbility sa,
             final Player ai, final ManaCostShard toPay, final SpellAbility chosen,
             final List<SpellAbility> alternatives, final ManaPaymentContext ctx) {
         final Set<Card> consumed = collectCardsConsumedByPayment(chosen, sa, ai, ctx);
@@ -2781,13 +2680,13 @@ public class ComputerUtilMana {
     }
 
     /** Copy the current contents of an AI card memory set (or null if unavailable). */
-    private static Set<Card> snapshotMemory(final Player ai, final MemorySet set) {
+    static Set<Card> snapshotMemory(final Player ai, final MemorySet set) {
         final Set<Card> live = AiCardMemory.getMemorySet(ai, set);
         return live == null ? null : new HashSet<>(live);
     }
 
     /** Reset an AI card memory set back to a previously captured snapshot. */
-    private static void restoreMemory(final Player ai, final MemorySet set, final Set<Card> snapshot) {
+    static void restoreMemory(final Player ai, final MemorySet set, final Set<Card> snapshot) {
         if (snapshot == null) {
             return;
         }
@@ -3871,16 +3770,18 @@ public class ComputerUtilMana {
             // Sole free source for a nested activation; reservation runs when the payment is applied.
             return candidates.get(0);
         }
-        if (ctx == null || ctx.inFilterActivationProbe || !shouldUseCastabilityProbeForNestedActivation(sa, test, ctx)) {
+        if (ctx == null || ctx.inFilterActivationProbe
+                || !CastabilityProbe.shouldUseForNestedActivation(sa, test, ctx)) {
             return chooseManaAbility(nestedCost, sa, ai, toPay, candidates, true);
         }
 
-        final SpellAbility best = pickByCastabilityProbe(nestedCost, candidates, sa, ai, toPay, (cand, spell, player, probeCtx) -> {
-            final Set<Card> consumed = new HashSet<>();
-            consumed.add(cand.getHostCard());
-            consumed.add(filterAb.getHostCard());
-            return consumed;
-        }, false, test, ctx);
+        final SpellAbility best = CastabilityProbe.pickBest(nestedCost, candidates, sa, ai, toPay,
+                (cand, spell, player, probeCtx) -> {
+                    final Set<Card> consumed = new HashSet<>();
+                    consumed.add(cand.getHostCard());
+                    consumed.add(filterAb.getHostCard());
+                    return consumed;
+                }, false, test, ctx);
         if (best != null) {
             debugLog(test, "    candidate for " + filterAb.getHostCard() + " {1}: " + best.getHostCard()
                     + " chosen by castability probe");
@@ -3890,249 +3791,20 @@ public class ComputerUtilMana {
         return chooseManaAbility(nestedCost, sa, ai, toPay, candidates, true);
     }
 
-    /**
-     * Nested filter activations ({@code Sungrass Prairie}'s {@code {1}}, etc.) use rank/efficiency for
-     * stack and battlefield payments; castability applies only when the spell being paid is in hand/command.
-     */
-    private static boolean shouldUseCastabilityProbeForNestedActivation(final SpellAbility sa, final boolean test,
-            final ManaPaymentContext ctx) {
-        final Card host = sa.getHostCard();
-        if (host == null || (!host.isInZone(ZoneType.Hand) && !host.isInZone(ZoneType.Command))) {
-            return false;
-        }
-        return shouldUseCastabilityProbe(sa, test, ctx);
+    /** Nested castability dry-run from {@link CastabilityProbe}. */
+    static boolean payManaCostForCastabilityProbe(final forge.game.cost.Cost cost, final SpellAbility sa,
+            final Player ai, final ComputerUtilMana.ManaPaymentContext ctx) {
+        return payManaCost(cost, sa, ai, true, 0, true, false, ctx.nestedWithFilterProbe());
     }
 
-    /**
-     * Castability-aware source comparison during payment (counts hand/command spells still castable
-     * after each candidate). Enabled for human payment-prompt Auto preview and for AI production payment
-     * of hand/command spells only; stack spells always use {@link #preferSourceThatKeepsRestPayable}
-     * so preview and commit stay aligned.
-     */
-    private static boolean shouldUseCastabilityProbe(final SpellAbility sa, final boolean test,
-            final ManaPaymentContext ctx) {
-        final Card host = sa.getHostCard();
-        if (host == null) {
-            return false;
-        }
-        if (host.isInZone(ZoneType.Hand) || host.isInZone(ZoneType.Command)) {
-            return test ? ctx != null && ctx.paymentPromptPreview : true;
-        }
-        return false;
-    }
-
-    /**
-     * Count how many other spells in hand and command zone could still be cast if the given cards were
-     * consumed for the current payment. Used for castability-aware source selection.
-     */
-    private static int countCastableSpellsAfterPayment(final Player ai, final SpellAbility spellBeingPaid,
-            final Set<Card> consumed, final ManaPaymentContext ctx) {
-        final Set<Card> reserved = new HashSet<>(consumed);
-        final Set<Card> tapCost = AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST);
-        if (tapCost != null) {
-            reserved.addAll(tapCost);
-        }
-        final Set<Card> sacCost = AiCardMemory.getMemorySet(ai, MemorySet.PAYS_SAC_COST);
-        if (sacCost != null) {
-            reserved.addAll(sacCost);
-        }
-        final CastabilityProbeScratch probe = ctx.caches.castabilityProbe;
-        probe.resetForProbe();
-        probe.unavailableColoredShards.addAll(computeUnavailableColoredShards(ai, reserved, ctx));
-        probe.availableManaAfterReservation = computeAvailableManaAfterReservation(ai, reserved, ctx);
-        int count = countCastableSpellsInZone(ai, spellBeingPaid, reserved, ZoneType.Hand, ctx);
-        count += countCastableSpellsInZone(ai, spellBeingPaid, reserved, ZoneType.Command, ctx);
-        probe.resetForProbe();
-        return count;
-    }
-
-    private static int countCastableSpellsInZone(final Player ai, final SpellAbility spellBeingPaid,
-            final Set<Card> consumed, final ZoneType zone, final ManaPaymentContext ctx) {
-        int count = 0;
-        final Card being = spellBeingPaid.getHostCard();
-        final CastabilityProbeScratch probe = ctx.caches.castabilityProbe;
-        for (Card c : ai.getCardsIn(zone)) {
-            if (c == being) {
-                continue;
-            }
-            for (SpellAbility candSa : c.getSpellAbilities()) {
-                if (!candSa.isSpell() || candSa.getPayCosts() == null || !candSa.getPayCosts().hasManaCost()) {
-                    continue;
-                }
-                candSa.setActivatingPlayer(ai);
-                if (isUncastableByTotalManaBudget(candSa, probe.availableManaAfterReservation)) {
-                    continue;
-                }
-                final ManaCost mc = candSa.getPayCosts().getCostMana().getMana();
-                if (spellRequiresUnavailableColoredShard(mc, probe.unavailableColoredShards)) {
-                    continue;
-                }
-                if (canPayManaCostExcluding(candSa, ai, consumed, ctx)) {
-                    count++;
-                    break;
-                }
-            }
-        }
-        return count;
-    }
-
-    /** True when a spell needs a colored shard with no remaining producer after reservations. */
-    private static boolean spellRequiresUnavailableColoredShard(final ManaCost mc,
-            final Set<ManaCostShard> unavailableColoredShards) {
-        if (mc == null || unavailableColoredShards == null || unavailableColoredShards.isEmpty()) {
-            return false;
-        }
-        final ManaCostBeingPaid probe = new ManaCostBeingPaid(mc);
-        for (final ManaCostShard shard : probe.getDistinctShards()) {
-            if (shard.isGeneric() || shard == ManaCostShard.COLORLESS || shard.isPhyrexian()
-                    || shard == ManaCostShard.X || shard == ManaCostShard.COLORED_X) {
-                continue;
-            }
-            if (unavailableColoredShards.contains(shard)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /** Skip castability dry-runs for high-CMC spells when total mana budget cannot reach CMC. */
-    private static boolean isUncastableByTotalManaBudget(final SpellAbility candSa, final int availableMana) {
-        if (availableMana < 0 || candSa == null || candSa.getPayCosts() == null
-                || !candSa.getPayCosts().hasManaCost()) {
-            return false;
-        }
-        final int cmc = candSa.getPayCosts().getCostMana().getMana().getCMC();
-        return cmc > CASTABILITY_SOFT_CMC_CAP && cmc > availableMana;
-    }
-
-    private static Set<ManaCostShard> computeUnavailableColoredShards(final Player ai, final Set<Card> reserved,
-            final ManaPaymentContext ctx) {
-        final Set<ManaCostShard> unavailable = new HashSet<>();
-        final ListMultimap<Integer, SpellAbility> map = getOrBuildManaAbilityMap(ai, true, ctx);
-        for (final ManaCostShard shard : ManaCostShard.values()) {
-            if (shard.isGeneric() || shard == ManaCostShard.COLORLESS || shard.isPhyrexian()
-                    || shard == ManaCostShard.X || shard == ManaCostShard.COLORED_X) {
-                continue;
-            }
-            if (!hasAvailableProducerForShard(ai, map, shard, reserved)) {
-                unavailable.add(shard);
-            }
-        }
-        return unavailable;
-    }
-
-    private static boolean hasAvailableProducerForShard(final Player ai,
-            final ListMultimap<Integer, SpellAbility> manaAbilityMap, final ManaCostShard shard,
-            final Set<Card> reserved) {
-        for (final byte color : ManaAtom.MANATYPES) {
-            if (!shard.canBePaidWithManaOfColor(color)) {
-                continue;
-            }
-            for (final SpellAbility candidate : manaAbilityMap.get((int) color)) {
-                if (isManaSourceAvailableAfterReservation(ai, candidate, reserved)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private static boolean isManaSourceAvailableAfterReservation(final Player ai, final SpellAbility ma,
-            final Set<Card> reserved) {
-        if (ma == null || ai == null) {
-            return false;
-        }
-        final Card host = ma.getHostCard();
-        if (host == null || reserved.contains(host)) {
-            return false;
-        }
-        if (AiCardMemory.isRememberedCard(ai, host, MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL)) {
-            return false;
-        }
-        if (AiCardMemory.isRememberedCard(ai, host, MemorySet.PAYS_SAC_COST)) {
-            return false;
-        }
-        if (ma.getPayCosts() != null && ma.getPayCosts().hasTapCost()) {
-            if (AiCardMemory.isRememberedCard(ai, host, MemorySet.PAYS_TAP_COST) || host.isTapped()) {
-                return false;
-            }
-        }
-        ma.setActivatingPlayer(ai);
-        return ma.canPlay();
-    }
-
-    private static int computeAvailableManaAfterReservation(final Player ai, final Set<Card> reserved,
-            final ManaPaymentContext ctx) {
-        int available = ai.getManaPool().totalMana();
-        final ListMultimap<Integer, SpellAbility> map = getOrBuildManaAbilityMap(ai, true, ctx);
-        final Set<Card> seenHosts = new HashSet<>();
-        for (final SpellAbility ma : map.values()) {
-            final Card host = ma.getHostCard();
-            if (host == null || seenHosts.contains(host)) {
-                continue;
-            }
-            if (!isManaSourceAvailableAfterReservation(ai, ma, reserved)) {
-                continue;
-            }
-            int maxForHost = 0;
-            for (final SpellAbility ma2 : host.getManaAbilities()) {
-                if (!isManaSourceAvailableAfterReservation(ai, ma2, reserved)) {
-                    continue;
-                }
-                ma2.setActivatingPlayer(ai);
-                if (!ma2.canPlay()) {
-                    continue;
-                }
-                maxForHost = Math.max(maxForHost, ma2.amountOfManaGenerated(true));
-            }
-            seenHosts.add(host);
-            available += maxForHost;
-        }
-        return available;
-    }
-
-    /** Test hook: reset {@link #castabilityProbeDryRunCountForTests}. */
+    /** Test hook: reset castability nested dry-run counter. */
     public static void resetCastabilityProbeDryRunCountForTests() {
-        castabilityProbeDryRunCountForTests = 0;
+        CastabilityProbe.resetDryRunCountForTests();
     }
 
     /** Test hook: nested castability dry-runs since last reset. */
     public static int getCastabilityProbeDryRunCountForTests() {
-        return castabilityProbeDryRunCountForTests;
-    }
-
-    /**
-     * Feasibility check for a spell while pretending the given cards are already consumed (tapped) for another payment.
-     */
-    private static boolean canPayManaCostExcluding(final SpellAbility candSa, final Player ai, final Set<Card> consumed,
-            final ManaPaymentContext ctx) {
-        final CastabilityProbeScratch probe = ctx.caches.castabilityProbe;
-        probe.clearLastFailure();
-        final List<Card> reserved = new ArrayList<>();
-        for (Card c : consumed) {
-            if (!AiCardMemory.isRememberedCard(ai, c, MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL)) {
-                AiCardMemory.rememberCard(ai, c, MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
-                reserved.add(c);
-            }
-        }
-        final Set<Card> sacSnapshot = snapshotMemory(ai, MemorySet.PAYS_SAC_COST);
-        final Set<Card> tapSnapshot = snapshotMemory(ai, MemorySet.PAYS_TAP_COST);
-        try {
-            castabilityProbeDryRunCountForTests++;
-            final boolean result = payManaCost(candSa.getPayCosts(), candSa, ai, true, 0, true, false,
-                    ctx.nestedWithFilterProbe());
-            if (!result && probe.lastFailureWasNoSources && probe.lastFailedColoredShard != null) {
-                probe.unavailableColoredShards.add(probe.lastFailedColoredShard);
-            }
-            return result;
-        } finally {
-            probe.clearLastFailure();
-            for (Card c : reserved) {
-                AiCardMemory.forgetCard(ai, c, MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
-            }
-            restoreMemory(ai, MemorySet.PAYS_SAC_COST, sacSnapshot);
-            restoreMemory(ai, MemorySet.PAYS_TAP_COST, tapSnapshot);
-        }
+        return CastabilityProbe.getDryRunCountForTests();
     }
 
     public static String predictManaReplacement(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
@@ -4503,13 +4175,8 @@ public class ComputerUtilMana {
             }
 
             if (saPayment == null) {
-                if (test && ctx != null && ctx.inFilterActivationProbe
-                        && ctx.caches.castabilityProbe.availableManaAfterReservation >= 0
-                        && toPay != null && !toPay.isGeneric() && !toPay.isPhyrexian()
-                        && toPay != ManaCostShard.COLORLESS && toPay != ManaCostShard.X
-                        && toPay != ManaCostShard.COLORED_X && saList.isEmpty()) {
-                    ctx.caches.castabilityProbe.lastFailedColoredShard = toPay;
-                    ctx.caches.castabilityProbe.lastFailureWasNoSources = true;
+                if (test && ctx != null && ctx.inFilterActivationProbe) {
+                    CastabilityProbe.recordNoSourceColoredShardFailure(ctx, toPay, saList);
                 }
                 boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
                 if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(phyLifeToPay, false, sa)

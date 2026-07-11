@@ -23,6 +23,7 @@ import com.google.common.collect.Maps;
 import forge.*;
 import forge.CardStorageReader.ProgressObserver;
 import forge.ai.AiProfileUtil;
+import forge.ai.CastabilityProbe;
 import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
@@ -243,6 +244,7 @@ public final class FModel {
         }
 
         Spell.setPerformanceMode(getPreferences().getPrefBoolean(FPref.PERFORMANCE_MODE));
+        CastabilityProbe.setDefaultEnabled(getPreferences().getPrefBoolean(FPref.MANA_PAYMENT_CASTABILITY_PROBE));
 
         if (progressBar != null) {
             FThreads.invokeInEdtLater(() -> progressBar.setDescription(Localizer.getInstance().getMessage("splash.loading.decks")));

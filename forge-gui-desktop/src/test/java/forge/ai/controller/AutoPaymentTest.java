@@ -1,6 +1,7 @@
 package forge.ai.controller;
 
 import forge.ai.ComputerUtilMana;
+import forge.ai.CastabilityProbe;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameSimulator;
 import forge.ai.simulation.Plan;
@@ -20,6 +21,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
@@ -30,6 +32,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class AutoPaymentTest extends SimulationTest {
+    // Tests are written with the CastabilityProbe enabled.
+    @BeforeMethod(alwaysRun = true)
+    public void enableCastabilityProbeForPaymentTests() {
+        CastabilityProbe.enableForTests();
+    }
+
     private static ManaCostBeingPaid cost(String s) {
         return new ManaCostBeingPaid(new ManaCost(new ManaCostParser(s)));
     }
