@@ -1146,10 +1146,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         GameEntityViewMap<Card, CardView> gameCacheMove = GameEntityView.getMap(cards);
         List<CardView> choices = gameCacheMove.getTrackableKeys();
 
-        boolean topOfDeck = destinationZone.isDeck()
-                && (source == null
-                    || !source.hasParam("LibraryPosition")
-                    || AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) >= 0);
+        boolean topOfDeck = orderedMoveToTopOfLibrary(destinationZone, source);
 
         switch (destinationZone) {
             case Library:
