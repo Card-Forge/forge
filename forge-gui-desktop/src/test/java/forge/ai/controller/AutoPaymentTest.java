@@ -2470,6 +2470,52 @@ public class AutoPaymentTest extends SimulationTest {
                 prodAutoPay(game, p, cost("B B"), sa));
     }
 
+    // --- Non-untapping sources (Mana Vault) deprioritized for generic mana ---
+
+    // Mana Vault ({T}: {C}{C}{C}, doesn't untap) shouldn't be preferred for the {2} of {2}{U}{R}
+    // when basics can pay it: tapping Mana Vault strands it and wastes a mana.
+    @Test
+    public void manaVaultDeprioritizedForGenericWhenLandsAvailable() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Island", p);
+        addCard("Mountain", p);
+        addCards("Wastes", 2, p);
+        addCard("Mana Vault", p);
+        Card spell = addCardToZone("Jhoira, Weatherlight Captain", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("2 U R"), sa);
+
+        AssertJUnit.assertEquals("Mana Vault should stay untapped when lands can pay the generic",
+                0, countTapped(game, "Mana Vault"));
+    }
+
+    // With no other sources for the generic, Mana Vault is still used (feasibility unaffected).
+    @Test
+    public void manaVaultStillUsedWhenNoOtherGenericSource() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Island", p);
+        addCard("Mountain", p);
+        addCard("Mana Vault", p);
+        Card spell = addCardToZone("Jhoira, Weatherlight Captain", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("2 U R"), sa);
+
+        AssertJUnit.assertEquals("Mana Vault pays the generic when nothing else can",
+                1, countTapped(game, "Mana Vault"));
+    }
+
     // Cascade Bluffs ({U/R}{T}: Add {U}{U}, {U}{R}, or {R}{R}) with an Island paying its hybrid
     // activation cost can pay {U}{R} on its own.
     @Test

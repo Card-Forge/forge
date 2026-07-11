@@ -909,6 +909,24 @@ public class ComputerUtilMana {
     }
 
     /**
+     * Tap-cost mana source whose host won't untap during its controller's untap step (Mana Vault,
+     * Grim Monolith, stunned permanents). Tapping it strands the card for future turns, so it is less
+     * desirable than a normal reusable source even though it is not sacrificed. Disposable sources are
+     * handled by their own tiers.
+     */
+    private static boolean doesNotUntapNormally(final SpellAbility ma) {
+        if (ma == null || !ma.isManaAbility() || isDisposableManaAbility(ma)) {
+            return false;
+        }
+        final Cost payCosts = ma.getPayCosts();
+        if (payCosts == null || !payCosts.hasTapCost()) {
+            return false;
+        }
+        final Card host = ma.getHostCard();
+        return host != null && !host.canUntap(host.getController(), true);
+    }
+
+    /**
      * Disposable sacrifice tier for sorting. Lower = preferred.
      * 0 = self-sac token/artifact (Treasure, Petal); 1 = self-sac creature; 2 = sacrifice-other outlet.
      */
@@ -1464,6 +1482,11 @@ public class ComputerUtilMana {
             }
         }
         if (unpaidGeneric >= 2) {
+            final boolean noUntap1 = doesNotUntapNormally(a);
+            final boolean noUntap2 = doesNotUntapNormally(b);
+            if (noUntap1 != noUntap2) {
+                return noUntap1 ? 1 : -1;
+            }
             final boolean multi1 = isMultiManaProducer(a);
             final boolean multi2 = isMultiManaProducer(b);
             if (multi1 != multi2) {
@@ -1522,6 +1545,9 @@ public class ComputerUtilMana {
         }
         if (requiresTappingOtherCreatureForMana(ma)) {
             return 49;
+        }
+        if (doesNotUntapNormally(ma)) {
+            return 44;
         }
         if (isManaReserveHost(ma.getHostCard())) {
             return 45;
@@ -1730,6 +1756,7 @@ public class ComputerUtilMana {
         boolean hasTightGenericAlt;
         boolean hasAnyMultiAlt;
         boolean hasReusableNonCreatureTapAlt;
+        boolean hasReusableUntappingAlt;
         boolean hasCheaperAnyManaFilterAlt;
 
         static AlternativeScanFlags scan(final List<SpellAbility> alternatives, final SpellAbility skip,
@@ -1763,6 +1790,10 @@ public class ComputerUtilMana {
                 }
                 if (!isDisposableManaAbility(ma) && !requiresTappingOtherCreatureForMana(ma)) {
                     flags.hasReusableNonCreatureTapAlt = true;
+                }
+                if (!isDisposableManaAbility(ma) && !requiresTappingOtherCreatureForMana(ma)
+                        && !doesNotUntapNormally(ma)) {
+                    flags.hasReusableUntappingAlt = true;
                 }
                 if (isAnyManaConsolidatingFilter(ma) && isAnyManaConsolidatingFilter(skip)
                         && getFilterActivationCMC(ma) < getFilterActivationCMC(skip)) {
@@ -1908,6 +1939,9 @@ public class ComputerUtilMana {
         if (requiresTappingOtherCreatureForMana(chosen) && castBonusAdj >= 0
                 && altFlags.hasReusableNonCreatureTapAlt) {
             score += 40;
+        }
+        if (doesNotUntapNormally(chosen) && castBonusAdj >= 0 && altFlags.hasReusableUntappingAlt) {
+            score += 60;
         }
         if (netNegativeAnyManaFilterLoss(chosen) > 0 && altFlags.hasCheaperAnyManaFilterAlt) {
             score += 25 * netNegativeAnyManaFilterLoss(chosen);
@@ -2652,6 +2686,11 @@ public class ComputerUtilMana {
             final int prod1 = getManaProducedAmount(ability1);
             final int prod2 = getManaProducedAmount(ability2);
             if (!hasManaActivationCost(ability1) && !hasManaActivationCost(ability2)) {
+                final boolean noUntap1 = doesNotUntapNormally(ability1);
+                final boolean noUntap2 = doesNotUntapNormally(ability2);
+                if (noUntap1 != noUntap2) {
+                    return noUntap1 ? 1 : -1;
+                }
                 final boolean multi1 = isMultiManaProducer(ability1);
                 final boolean multi2 = isMultiManaProducer(ability2);
                 if (multi1 != multi2) {
