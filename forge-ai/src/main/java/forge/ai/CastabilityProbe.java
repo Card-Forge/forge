@@ -130,7 +130,7 @@ public final class CastabilityProbe {
                     bestEfficiency = Integer.MAX_VALUE;
                 } else if (!preferCand && !preferBest) {
                     final ComputerUtilMana.PaymentImpact impact = ComputerUtilMana.evaluatePaymentImpact(cost, sa, ai,
-                            toPay, cand, candidates, probeCtx);
+                            toPay, cand, candidates, test, probeCtx);
                     final int candEfficiency = impact.efficiencyScore;
                     if (best == null) {
                         takeCand = true;
@@ -138,7 +138,7 @@ public final class CastabilityProbe {
                     } else {
                         if (bestEfficiency == Integer.MAX_VALUE) {
                             bestEfficiency = ComputerUtilMana.evaluatePaymentImpact(cost, sa, ai, toPay, best,
-                                    candidates, probeCtx).efficiencyScore;
+                                    candidates, test, probeCtx).efficiencyScore;
                         }
                         if (tieBreakPrefers(cand, best, candEfficiency, bestEfficiency, toPay, cost, ai, sa)) {
                             takeCand = true;

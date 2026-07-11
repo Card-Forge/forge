@@ -180,6 +180,17 @@ public class ComputerUtilMana {
         }
     }
 
+    /**
+     * Full stranding / efficiency re-simulation runs for payment-prompt preview and production Auto-pay.
+     * AI feasibility dry-runs ({@link #canPayManaCost}) use sort order only to avoid M2 timeouts.
+     */
+    private static boolean useFullPaymentProbes(final boolean test, final ManaPaymentContext ctx) {
+        if (!test) {
+            return true;
+        }
+        return ctx != null && ctx.paymentPromptPreview;
+    }
+
     /** Live spell cost + tap source while production Auto-pay runs (for TapsForMana combo choices). */
     private static final class ProductionPaymentState {
         final ManaCostBeingPaid cost;
@@ -3155,12 +3166,12 @@ public class ComputerUtilMana {
                 || ((ctx == null || !ctx.paymentPromptPreview)
                         && valid.stream().noneMatch(ComputerUtilMana::isConsolidatingCandidate))
                 || !hasOtherHandOrCommandSpells(ai, sa, ctx)) {
-            return preferSourceThatKeepsRestPayable(cost, sa, ai, toPay, valid, ctx);
+            return preferSourceThatKeepsRestPayable(cost, sa, ai, toPay, valid, test, ctx);
         }
         if ((toPay.isGeneric() || toPay == ManaCostShard.X)
                 && (handHasMulticolorManaSpells(ai, sa, ctx) || handHasGenericAndColoredCast(ai, sa, ctx))
                 && valid.stream().anyMatch(ComputerUtilMana::isAnyMultiManaProducer)) {
-            return preferSourceThatKeepsRestPayable(cost, sa, ai, toPay, valid, ctx);
+            return preferSourceThatKeepsRestPayable(cost, sa, ai, toPay, valid, test, ctx);
         }
 
         final boolean preferMultiForGeneric = toPay.isGeneric() || toPay == ManaCostShard.X;
@@ -3195,7 +3206,7 @@ public class ComputerUtilMana {
      */
     private static SpellAbility pickDirectColoredMultiWhenSinglePipsInsufficient(final ManaCostBeingPaid cost,
             final SpellAbility sa, final Player ai, final ManaCostShard toPay, final List<SpellAbility> valid,
-            final ManaPaymentContext ctx) {
+            final boolean test, final ManaPaymentContext ctx) {
         if (toPay == null || toPay.isGeneric() || toPay == ManaCostShard.X || toPay == ManaCostShard.COLORLESS
                 || toPay.isPhyrexian()) {
             return null;
@@ -3226,7 +3237,7 @@ public class ComputerUtilMana {
             restoreMemory(ai, MemorySet.PAYS_TAP_COST, tapSnapshot);
             return null;
         }
-        final PaymentImpact impact = evaluatePaymentImpact(cost, sa, ai, toPay, bestMulti, valid, ctx);
+        final PaymentImpact impact = evaluatePaymentImpact(cost, sa, ai, toPay, bestMulti, valid, test, ctx);
         restoreMemory(ai, MemorySet.PAYS_SAC_COST, sacSnapshot);
         restoreMemory(ai, MemorySet.PAYS_TAP_COST, tapSnapshot);
         if (impact.keepsRest) {
@@ -3236,17 +3247,17 @@ public class ComputerUtilMana {
     }
 
     private static SpellAbility preferSourceThatKeepsRestPayable(final ManaCostBeingPaid cost, final SpellAbility sa,
-            final Player ai, final ManaCostShard toPay, final List<SpellAbility> valid,
+            final Player ai, final ManaCostShard toPay, final List<SpellAbility> valid, final boolean test,
             final ManaPaymentContext ctx) {
         // Nested feasibility probes follow sort order only; stranding / efficiency checks are for the
         // outer spell payment (depth 1) so we don't re-simulate every land on every recursive call.
-        if (ctx != null && ctx.inFilterActivationProbe || ctx != null && ctx.depth > 1) {
+        if ((ctx != null && ctx.inFilterActivationProbe) || (ctx != null && ctx.depth > 1)) {
             final SpellAbility first = pickFirstReservedManaChoice(ai, sa, valid);
             return first == null ? null : refreshExpressChoice(cost, sa, ai, toPay, first);
         }
 
         final SpellAbility directMulti = pickDirectColoredMultiWhenSinglePipsInsufficient(cost, sa, ai, toPay, valid,
-                ctx);
+                test, ctx);
         if (directMulti != null) {
             return directMulti;
         }
@@ -3281,7 +3292,7 @@ public class ComputerUtilMana {
                 first = cand;
             }
 
-            final PaymentImpact impact = evaluatePaymentImpact(cost, sa, ai, toPay, cand, valid, ctx);
+            final PaymentImpact impact = evaluatePaymentImpact(cost, sa, ai, toPay, cand, valid, test, ctx);
             restoreMemory(ai, MemorySet.PAYS_SAC_COST, sacSnapshot);
             restoreMemory(ai, MemorySet.PAYS_TAP_COST, tapSnapshot);
 
@@ -3303,7 +3314,7 @@ public class ComputerUtilMana {
         if (best != null) {
             return refreshExpressChoice(cost, sa, ai, toPay, best);
         }
-        final SpellAbility consolidator = pickConsolidatorWhenDisposableWouldStrand(cost, sa, ai, toPay, valid, ctx);
+        final SpellAbility consolidator = pickConsolidatorWhenDisposableWouldStrand(cost, sa, ai, toPay, valid, test, ctx);
         if (consolidator != null) {
             return refreshExpressChoice(cost, sa, ai, toPay, consolidator);
         }
@@ -3316,7 +3327,7 @@ public class ComputerUtilMana {
      */
     private static SpellAbility pickConsolidatorWhenDisposableWouldStrand(final ManaCostBeingPaid cost,
             final SpellAbility sa, final Player ai, final ManaCostShard toPay,
-            final List<SpellAbility> valid, final ManaPaymentContext ctx) {
+            final List<SpellAbility> valid, final boolean test, final ManaPaymentContext ctx) {
         if (valid.isEmpty() || toPay.isGeneric()) {
             return null;
         }
@@ -3338,7 +3349,7 @@ public class ComputerUtilMana {
                 restoreMemory(ai, MemorySet.PAYS_TAP_COST, tapSnapshot);
                 continue;
             }
-            final PaymentImpact impact = evaluatePaymentImpact(cost, sa, ai, toPay, cand, valid, ctx);
+            final PaymentImpact impact = evaluatePaymentImpact(cost, sa, ai, toPay, cand, valid, test, ctx);
             restoreMemory(ai, MemorySet.PAYS_SAC_COST, sacSnapshot);
             restoreMemory(ai, MemorySet.PAYS_TAP_COST, tapSnapshot);
             if (impact.keepsRest) {
@@ -3429,7 +3440,7 @@ public class ComputerUtilMana {
      */
     static PaymentImpact evaluatePaymentImpact(final ManaCostBeingPaid cost, final SpellAbility sa,
             final Player ai, final ManaCostShard toPay, final SpellAbility chosen,
-            final List<SpellAbility> alternatives, final ManaPaymentContext ctx) {
+            final List<SpellAbility> alternatives, final boolean test, final ManaPaymentContext ctx) {
         refreshExpressChoice(cost, sa, ai, toPay, chosen);
         final Set<Card> consumed = collectCardsConsumedByPayment(chosen, sa, ai, ctx);
         if (consumed == null) {
@@ -3440,7 +3451,7 @@ public class ComputerUtilMana {
             return new PaymentImpact(true, consumedCount, chosen, cost, toPay, alternatives, ai, sa, ctx);
         }
         return new PaymentImpact(
-                keepsRemainingCostPayableWithConsumed(cost, sa, ai, toPay, chosen, consumed, ctx),
+                keepsRemainingCostPayableWithConsumed(cost, sa, ai, toPay, chosen, consumed, test, ctx),
                 consumedCount, chosen, cost, toPay, alternatives, ai, sa, ctx);
     }
 
@@ -3477,8 +3488,8 @@ public class ComputerUtilMana {
      */
     private static boolean keepsRemainingCostPayableWithConsumed(final ManaCostBeingPaid cost,
             final SpellAbility sa, final Player ai, final ManaCostShard toPay, final SpellAbility chosen,
-            final Set<Card> consumed, final ManaPaymentContext ctx) {
-        if (ctx != null && ctx.inFilterActivationProbe) {
+            final Set<Card> consumed, final boolean test, final ManaPaymentContext ctx) {
+        if ((ctx != null && ctx.inFilterActivationProbe) || !useFullPaymentProbes(test, ctx)) {
             return true;
         }
         final ManaCostBeingPaid remaining = new ManaCostBeingPaid(cost);
