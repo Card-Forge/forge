@@ -56,6 +56,8 @@ public class ComputerUtilMana {
     private final static int FILTER_CONSOLIDATION_BONUS = 20;
     // Sacrifice / one-shot mana (Lotus Petal) should lose to a consolidating signet when both can pay a colored pip.
     private final static int DISPOSABLE_MANA_PENALTY = 30;
+    /** Outlets like Ashnod's Altar that sacrifice another permanent — below self-sac disposables. */
+    private final static int EXTERNAL_SACRIFICE_MANA_PENALTY = 15;
     /** Host cards with SVar AIManaReserve (Karakas, Library of Alexandria) — tap for mana only as last resort. */
     private final static int MANA_RESERVE_HOST_PENALTY = 45;
     /** Index of colorless ({C}) pips in {@link AiDeckStatistics#maxPips} (WUBRGC order). */
@@ -662,6 +664,10 @@ public class ComputerUtilMana {
             score += DISPOSABLE_MANA_PENALTY;
         }
 
+        if (hasExternalSacrificeManaOutlet(card)) {
+            score += EXTERNAL_SACRIFICE_MANA_PENALTY;
+        }
+
         if (isManaReserveHost(card)) {
             score += MANA_RESERVE_HOST_PENALTY;
         }
@@ -702,6 +708,60 @@ public class ComputerUtilMana {
             }
         }
         return false;
+    }
+
+    private static boolean hasExternalSacrificeManaOutlet(final Card card) {
+        for (final SpellAbility ma : card.getManaAbilities()) {
+            if (sacrificesOtherPermanentsForMana(ma)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Sac/one-shot source that produces 2+ mana per activation (Goldspan Treasure, etc.). */
+    private static boolean isMultiManaDisposable(final SpellAbility ma) {
+        if (!isDisposableManaAbility(ma) || sacrificesOtherPermanentsForMana(ma)) {
+            return false;
+        }
+        return getManaProducedAmount(ma) >= 2;
+    }
+
+    /** True for outlets like Ashnod's Altar that sacrifice another permanent, not the mana source itself. */
+    private static boolean sacrificesOtherPermanentsForMana(final SpellAbility ma) {
+        final Cost payCosts = ma.getPayCosts();
+        if (payCosts == null) {
+            return false;
+        }
+        for (final CostPart part : payCosts.getCostParts()) {
+            if (part instanceof CostSacrifice && !part.payCostFromSource()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Among disposable candidates only. Lower return = better.
+     * When {@code remaining >= 2}, prefer higher output; when {@code remaining == 1}, prefer tight fit.
+     */
+    private static int compareDisposableByYield(final SpellAbility a, final SpellAbility b, final int remaining) {
+        final int prodA = getManaProducedAmount(a);
+        final int prodB = getManaProducedAmount(b);
+        if (remaining >= 2) {
+            return Integer.compare(prodB, prodA);
+        }
+        return Integer.compare(prodA, prodB);
+    }
+
+    /** Self-sac disposables (Treasure, Petal) before sacrifice-other outlets (Ashnod's Altar). */
+    private static int compareDisposableCandidates(final SpellAbility a, final SpellAbility b, final int remaining) {
+        final boolean otherA = sacrificesOtherPermanentsForMana(a);
+        final boolean otherB = sacrificesOtherPermanentsForMana(b);
+        if (otherA != otherB) {
+            return otherA ? 1 : -1;
+        }
+        return compareDisposableByYield(a, b, remaining);
     }
 
     /**
@@ -1003,6 +1063,12 @@ public class ComputerUtilMana {
         if (rankCmp != 0) {
             return rankCmp;
         }
+        if (isDisposableManaAbility(a) && isDisposableManaAbility(b)) {
+            final int disposableCmp = compareDisposableCandidates(a, b, unpaidGeneric);
+            if (disposableCmp != 0) {
+                return disposableCmp;
+            }
+        }
         final boolean land1 = a.getHostCard().isLand();
         final boolean land2 = b.getHostCard().isLand();
         if (land1 != land2) {
@@ -1021,7 +1087,10 @@ public class ComputerUtilMana {
      */
     static int rankGenericManaSource(final SpellAbility ma, final GenericColorPreference pref) {
         if (isDisposableManaAbility(ma)) {
-            return 50;
+            if (sacrificesOtherPermanentsForMana(ma)) {
+                return 55;
+            }
+            return isMultiManaDisposable(ma) ? 48 : 50;
         }
         if (isManaReserveHost(ma.getHostCard())) {
             return 45;
@@ -1085,6 +1154,12 @@ public class ComputerUtilMana {
             final boolean d2 = isDisposableManaAbility(a2);
             if (d1 != d2) {
                 return d1 ? 1 : -1;
+            }
+            if (d1 && d2) {
+                final int disposableCmp = compareDisposableCandidates(a1, a2, 1);
+                if (disposableCmp != 0) {
+                    return disposableCmp;
+                }
             }
             return 0;
         });
@@ -1209,6 +1284,8 @@ public class ComputerUtilMana {
     private static final class AlternativeScanFlags {
         boolean hasMultiShardAlt;
         boolean hasMultiManaAlt;
+        boolean hasMultiManaDisposableAlt;
+        boolean hasSelfSacDisposableAlt;
         boolean hasDirectColoredAlt;
         boolean hasTightGenericAlt;
         boolean hasAnyMultiAlt;
@@ -1226,6 +1303,12 @@ public class ComputerUtilMana {
                 if (isMultiManaProducer(ma) && !isAnyMultiManaProducer(ma)
                         && getManaProducedAmount(ma) >= remaining) {
                     flags.hasMultiManaAlt = true;
+                }
+                if (isMultiManaDisposable(ma) && getManaProducedAmount(ma) >= remaining) {
+                    flags.hasMultiManaDisposableAlt = true;
+                }
+                if (isDisposableManaAbility(ma) && !sacrificesOtherPermanentsForMana(ma)) {
+                    flags.hasSelfSacDisposableAlt = true;
                 }
                 if (producesShardDirectly(ma, toPay)) {
                     flags.hasDirectColoredAlt = true;
@@ -1346,10 +1429,17 @@ public class ComputerUtilMana {
                 score += 100;
             }
         }
+        if (sacrificesOtherPermanentsForMana(chosen) && altFlags.hasSelfSacDisposableAlt) {
+            score += 75;
+        }
         if (isAnyManaConsolidatingFilter(chosen) && cost.getGenericManaAmount() > 0 && !toPay.isGeneric()) {
             score += 50;
         }
         if (remaining >= 2 && getManaProducedAmount(chosen) < remaining && altFlags.hasMultiManaAlt) {
+            score += 50;
+        }
+        if (remaining >= 2 && isDisposableManaAbility(chosen) && getManaProducedAmount(chosen) < remaining
+                && altFlags.hasMultiManaDisposableAlt) {
             score += 50;
         }
         if (isAnyMultiManaProducer(chosen) && getManaProducedAmount(chosen) > remaining
@@ -2582,6 +2672,14 @@ public class ComputerUtilMana {
             if (before - countUnpaidPips(probe) >= 2) {
                 return 1;
             }
+        } else if (isMultiManaDisposable(chosen)) {
+            final ManaCostBeingPaid probe = new ManaCostBeingPaid(cost);
+            final int before = countUnpaidPips(probe);
+            refreshExpressChoice(cost, sa, ai, toPay, chosen);
+            payMultipleMana(probe, predictManafromSpellAbility(chosen, ai, toPay), ai);
+            if (before - countUnpaidPips(probe) >= 2) {
+                return 1;
+            }
         }
         return consumed.size();
     }
@@ -3784,6 +3882,11 @@ public class ComputerUtilMana {
         if (candidates.size() == 1) {
             // Sole free source for a nested activation; reservation runs when the payment is applied.
             return candidates.get(0);
+        }
+        if (candidates.stream().allMatch(ComputerUtilMana::isDisposableManaAbility)) {
+            final List<SpellAbility> sorted = Lists.newArrayList(candidates);
+            sortFreeSourcesForNestedActivation(sorted, toPay, shouldReserveColorlessMana(ai, sa));
+            return sorted.get(0);
         }
         if (ctx == null || ctx.inFilterActivationProbe
                 || !CastabilityProbe.shouldUseForNestedActivation(sa, test, ctx)) {

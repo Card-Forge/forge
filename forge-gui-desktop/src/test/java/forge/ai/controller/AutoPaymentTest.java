@@ -71,6 +71,16 @@ public class AutoPaymentTest extends SimulationTest {
         return i;
     }
 
+    private int countOnBattlefield(Game game, String name) {
+        int i = 0;
+        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            if (c.getName().equals(name)) {
+                i++;
+            }
+        }
+        return i;
+    }
+
     /** Find a spell card after simulation (hand, stack, graveyard, or battlefield). */
     private Card findSpellCard(Game game, String name) {
         for (ZoneType zone : new ZoneType[] { ZoneType.Hand, ZoneType.Stack, ZoneType.Graveyard, ZoneType.Battlefield }) {
@@ -444,6 +454,96 @@ public class AutoPaymentTest extends SimulationTest {
         assertProductionPayment(game, p, cost("1"), sa);
         AssertJUnit.assertEquals("Mind Stone should be tapped", 1, countTapped(game, "Mind Stone"));
         AssertJUnit.assertEquals("Library should stay untapped", 0, countTapped(game, "Library of Alexandria"));
+    }
+
+    // {2} with Goldspan Treasure (2 mana) + Lotus Petal (1): sacrifice the Treasure, keep the Petal.
+    @Test
+    public void goldspanTreasurePaysDoubleGenericOverSingleManaDisposable() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Goldspan Dragon", p);
+        addToken("c_a_treasure_sac", p);
+        addCard("Lotus Petal", p);
+        Card spell = addCardToZone("Darksteel Pendant", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("2"), sa);
+
+        AssertJUnit.assertEquals("Lotus Petal should stay on the battlefield", 1, countOnBattlefield(game, "Lotus Petal"));
+        AssertJUnit.assertEquals("Treasure should be sacrificed for {2}", 0, countOnBattlefield(game, "Treasure Token"));
+    }
+
+    // {R}{R} with Goldspan + one Treasure: one activation pays both red pips.
+    @Test
+    public void goldspanTreasurePaysDoubleRedInOneActivation() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Goldspan Dragon", p);
+        addToken("c_a_treasure_sac", p);
+        Card spell = addCardToZone("Doublecast", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("R R"), sa);
+
+        AssertJUnit.assertEquals("Only one Treasure should be sacrificed", 0, countOnBattlefield(game, "Treasure Token"));
+    }
+
+    // Reusable basics still beat Goldspan Treasures for a single colored pip.
+    @Test
+    public void reusableStillBeatsGoldspanTreasure() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Goldspan Dragon", p);
+        addToken("c_a_treasure_sac", p);
+        addCard("Forest", p);
+        Card spell = addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("G"), sa);
+
+        AssertJUnit.assertEquals("Forest should be tapped for {G}", 1, countTapped(game, "Forest"));
+        AssertJUnit.assertEquals("Treasure should stay unused", 1, countOnBattlefield(game, "Treasure Token"));
+    }
+
+    // Signet {1} nested activation: Lotus Petal beats Goldspan Treasure (don't waste 2-mana disposable).
+    @Test
+    public void petalPreferredOverGoldspanTreasureForSignetActivation() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Goldspan Dragon", p);
+        addToken("c_a_treasure_sac", p);
+        addCard("Lotus Petal", p);
+        addCard("Boros Signet", p);
+        Card spell = addCardToZone("Lightning Helix", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("R W");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Lotus Petal should activate the Signet",
+                sources.anyMatch(c -> "Lotus Petal".equals(c.getName())));
+        AssertJUnit.assertFalse("Goldspan Treasure should not pay {R}{W} directly",
+                sources.size() == 1 && sources.anyMatch(c -> "Treasure Token".equals(c.getName())));
+
+        assertProductionPayment(game, p, mc, sa);
+        AssertJUnit.assertEquals("Treasure should stay unused", 1, countOnBattlefield(game, "Treasure Token"));
     }
 
     // {R}{W} with only Plains + Signet (no Mountain) is still payable: Plains -> Signet {1}, Signet -> {R}{W}.
