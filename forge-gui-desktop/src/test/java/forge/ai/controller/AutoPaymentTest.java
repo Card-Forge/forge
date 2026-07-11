@@ -2092,6 +2092,34 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertEquals(1, countTapped(game, "Forest"));
     }
 
+    // Forest + Market Festival: one tap produces {G} plus two any ({G}{U}{R} from a single source).
+    @Test
+    public void marketFestivalProducesThreeManaFromOneForestTap() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card forest = addCard("Forest", p);
+        Card festival = addCard("Market Festival", p);
+        festival.attachToEntity(forest, null);
+        registerBattlefieldTriggers(game, festival);
+        Card spell = addCardToZone("Temur Charm", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue("One Festival'd Forest should pay {G}{U}{R}",
+                canAutoPay(game, p, cost("G U R"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("G U R"), sa);
+        AssertJUnit.assertEquals("Only the Festival'd Forest should be tapped", 1,
+                sources.stream().filter(c -> "Forest".equals(c.getName())).count());
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("G U R"), sa));
+        AssertJUnit.assertEquals(1, countTapped(game, "Forest"));
+    }
+
     // Mana Flare doubles land output: one Plains pays {W}{W}.
     @Test
     public void manaFlareDoublesLandOutputForDoubleWhite() {
