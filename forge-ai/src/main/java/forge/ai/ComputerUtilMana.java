@@ -788,17 +788,20 @@ public class ComputerUtilMana {
         if (ma == null || !ma.isManaAbility()) {
             return false;
         }
-        if (!ma.isUndoable()) {
-            return true;
-        }
         final Cost payCosts = ma.getPayCosts();
-        if (payCosts == null) {
-            return false;
-        }
-        for (final CostPart part : payCosts.getCostParts()) {
-            if (part instanceof CostSacrifice) {
-                return true;
+        if (payCosts != null) {
+            for (final CostPart part : payCosts.getCostParts()) {
+                if (part instanceof CostSacrifice) {
+                    return true;
+                }
             }
+        }
+        if (!ma.isUndoable()) {
+            // Variable-amount tap lands (Gaea's Cradle) are marked non-undoable but are reusable.
+            if (payCosts != null && payCosts.hasTapCost() && !payCosts.hasManaCost()) {
+                return false;
+            }
+            return true;
         }
         return false;
     }
@@ -1279,6 +1282,16 @@ public class ComputerUtilMana {
         return mp.mana(ma).contains(shard.toShortString());
     }
 
+    /** Dedicated 1-mana producer for this colored shard (Forest for {G}, etc.). */
+    private static boolean isSinglePipDirectColoredProducer(final SpellAbility ma, final ManaCostShard toPay) {
+        return producesShardDirectly(ma, toPay) && getManaProducedAmount(ma) == 1;
+    }
+
+    /** Reusable direct colored source that produces 2+ mana per activation (Gaea's Cradle, etc.). */
+    private static boolean isDirectColoredMultiProducer(final SpellAbility ma, final ManaCostShard toPay) {
+        return isMultiManaProducer(ma) && !isAnyMultiManaProducer(ma) && producesShardDirectly(ma, toPay);
+    }
+
     /** Dedicated colored producer (e.g. Plains, Mountain) without a mana activation cost. */
     private static boolean producesColoredManaWithoutFilterCost(final SpellAbility ma) {
         if (ma == null || hasManaActivationCost(ma) || isDisposableManaAbility(ma)) {
@@ -1753,6 +1766,7 @@ public class ComputerUtilMana {
         boolean hasMultiManaDisposableAlt;
         boolean hasSelfSacDisposableAlt;
         boolean hasDirectColoredAlt;
+        boolean hasSinglePipDirectColoredAlt;
         boolean hasTightGenericAlt;
         boolean hasAnyMultiAlt;
         boolean hasReusableNonCreatureTapAlt;
@@ -1781,6 +1795,9 @@ public class ComputerUtilMana {
                 }
                 if (producesShardDirectly(ma, toPay)) {
                     flags.hasDirectColoredAlt = true;
+                    if (isSinglePipDirectColoredProducer(ma, toPay)) {
+                        flags.hasSinglePipDirectColoredAlt = true;
+                    }
                 }
                 if (isTightGenericProducer(ma, remaining)) {
                     flags.hasTightGenericAlt = true;
@@ -1949,7 +1966,8 @@ public class ComputerUtilMana {
         if (isAnyManaConsolidatingFilter(chosen) && cost.getGenericManaAmount() > 0 && !toPay.isGeneric()) {
             score += 50;
         }
-        if (remaining >= 2 && getManaProducedAmount(chosen) < remaining && altFlags.hasMultiManaAlt) {
+        if (remaining >= 2 && getManaProducedAmount(chosen) < remaining && altFlags.hasMultiManaAlt
+                && !altFlags.hasSinglePipDirectColoredAlt) {
             score += 50;
         }
         if (remaining >= 2 && isDisposableManaAbility(chosen) && getManaProducedAmount(chosen) < remaining
@@ -1958,6 +1976,10 @@ public class ComputerUtilMana {
         }
         if (isAnyMultiManaProducer(chosen) && getManaProducedAmount(chosen) > remaining
                 && altFlags.hasDirectColoredAlt) {
+            score += 25 * (getManaProducedAmount(chosen) - remaining);
+        }
+        if (isDirectColoredMultiProducer(chosen, toPay) && getManaProducedAmount(chosen) > remaining
+                && altFlags.hasSinglePipDirectColoredAlt) {
             score += 25 * (getManaProducedAmount(chosen) - remaining);
         }
         if ((toPay.isGeneric() || toPay == ManaCostShard.X)
@@ -2753,6 +2775,27 @@ public class ComputerUtilMana {
             if (anyMulti2 && direct1) {
                 return -1;
             }
+            final boolean directMulti1 = isDirectColoredMultiProducer(ability1, shard);
+            final boolean directMulti2 = isDirectColoredMultiProducer(ability2, shard);
+            final boolean singlePip1 = isSinglePipDirectColoredProducer(ability1, shard);
+            final boolean singlePip2 = isSinglePipDirectColoredProducer(ability2, shard);
+            if (directMulti1 && singlePip2) {
+                return 1;
+            }
+            if (directMulti2 && singlePip1) {
+                return -1;
+            }
+        } else if (ctx.cost.getUnpaidShards(shard) == 1) {
+            final boolean directMulti1 = isDirectColoredMultiProducer(ability1, shard);
+            final boolean directMulti2 = isDirectColoredMultiProducer(ability2, shard);
+            final boolean singlePip1 = isSinglePipDirectColoredProducer(ability1, shard);
+            final boolean singlePip2 = isSinglePipDirectColoredProducer(ability2, shard);
+            if (directMulti1 && singlePip2) {
+                return 1;
+            }
+            if (directMulti2 && singlePip1) {
+                return -1;
+            }
         }
         if (ab1Filter && ab2Filter) {
             final int filterCostCmp = compareAnyManaFilterActivationCost(ability1, ability2);
@@ -3120,6 +3163,64 @@ public class ComputerUtilMana {
      * needed Plains). Only reorders when the top choice has such a cost and a cheaper alternative keeps the
      * remaining cost payable; otherwise the existing order is preserved.
      */
+    /** Count reusable 1-mana producers for {@code toPay} among {@code valid} candidates. */
+    private static int countSinglePipDirectColoredProducers(final List<SpellAbility> valid,
+            final ManaCostShard toPay) {
+        int count = 0;
+        for (final SpellAbility ma : valid) {
+            if (isSinglePipDirectColoredProducer(ma, toPay)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * When basics cannot cover all remaining colored pips but a direct multi-producer can (e.g. Cradle
+     * for 4 with only 2 Forests paying {G}{G}{G}), prefer one multi activation over piecing basics first.
+     */
+    private static SpellAbility pickDirectColoredMultiWhenSinglePipsInsufficient(final ManaCostBeingPaid cost,
+            final SpellAbility sa, final Player ai, final ManaCostShard toPay, final List<SpellAbility> valid,
+            final ManaPaymentContext ctx) {
+        if (toPay == null || toPay.isGeneric() || toPay == ManaCostShard.X || toPay == ManaCostShard.COLORLESS
+                || toPay.isPhyrexian()) {
+            return null;
+        }
+        final int remaining = remainingPipsForShard(cost, toPay);
+        if (remaining <= 1 || countSinglePipDirectColoredProducers(valid, toPay) >= remaining) {
+            return null;
+        }
+        SpellAbility bestMulti = null;
+        int bestAmount = 0;
+        for (final SpellAbility ma : valid) {
+            if (!isDirectColoredMultiProducer(ma, toPay)) {
+                continue;
+            }
+            final int prod = getManaProducedAmount(ma);
+            if (prod >= remaining && prod > bestAmount) {
+                bestAmount = prod;
+                bestMulti = ma;
+            }
+        }
+        if (bestMulti == null) {
+            return null;
+        }
+        final Set<Card> sacSnapshot = snapshotMemory(ai, MemorySet.PAYS_SAC_COST);
+        final Set<Card> tapSnapshot = snapshotMemory(ai, MemorySet.PAYS_TAP_COST);
+        if (!passesManaPaymentReservationChecks(ai, bestMulti, sa)) {
+            restoreMemory(ai, MemorySet.PAYS_SAC_COST, sacSnapshot);
+            restoreMemory(ai, MemorySet.PAYS_TAP_COST, tapSnapshot);
+            return null;
+        }
+        final PaymentImpact impact = evaluatePaymentImpact(cost, sa, ai, toPay, bestMulti, valid, ctx);
+        restoreMemory(ai, MemorySet.PAYS_SAC_COST, sacSnapshot);
+        restoreMemory(ai, MemorySet.PAYS_TAP_COST, tapSnapshot);
+        if (impact.keepsRest) {
+            return refreshExpressChoice(cost, sa, ai, toPay, bestMulti);
+        }
+        return null;
+    }
+
     private static SpellAbility preferSourceThatKeepsRestPayable(final ManaCostBeingPaid cost, final SpellAbility sa,
             final Player ai, final ManaCostShard toPay, final List<SpellAbility> valid,
             final ManaPaymentContext ctx) {
@@ -3128,6 +3229,12 @@ public class ComputerUtilMana {
         if (ctx.inFilterActivationProbe || ctx.depth > 1) {
             final SpellAbility first = pickFirstReservedManaChoice(ai, sa, valid);
             return first == null ? null : refreshExpressChoice(cost, sa, ai, toPay, first);
+        }
+
+        final SpellAbility directMulti = pickDirectColoredMultiWhenSinglePipsInsufficient(cost, sa, ai, toPay, valid,
+                ctx);
+        if (directMulti != null) {
+            return directMulti;
         }
 
         SpellAbility first = null;

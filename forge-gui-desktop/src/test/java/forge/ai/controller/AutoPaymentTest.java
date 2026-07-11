@@ -1598,6 +1598,83 @@ public class AutoPaymentTest extends SimulationTest {
                 prodAutoPay(game, p, cost("G G"), sa));
     }
 
+    // {G}{G} with Gaea's Cradle (4 creatures → 4G) + two Forests should not waste Cradle's extra mana.
+    @Test
+    public void forestsPayDoubleGreenWithoutGaesCradle() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Gaea's Cradle", p);
+        addCards("Forest", 2, p);
+        addCards("Bear Cub", 4, p);
+        Card spell = addCardToZone("Slith Predator", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("G G"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("G G"), sa);
+        AssertJUnit.assertFalse("Gaea's Cradle should not be tapped",
+                sources.anyMatch(c -> "Gaea's Cradle".equals(c.getName())));
+        AssertJUnit.assertEquals("Both Forests should pay {G}{G}", 2,
+                sources.stream().filter(c -> "Forest".equals(c.getName())).count());
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("G G"), sa));
+    }
+
+    // Cradle (4 creatures → 4G) + 2 Forests: {G}{G}{G} needs Cradle; don't also tap both Forests.
+    @Test
+    public void gaesCradleUsedAloneWhenForestsCannotCoverCost() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Gaea's Cradle", p);
+        addCards("Forest", 2, p);
+        addCards("Bear Cub", 4, p);
+        Card spell = addCardToZone("Slith Predator", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("G G G");
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Gaea's Cradle should pay when two Forests cannot cover {G}{G}{G}",
+                sources.anyMatch(c -> "Gaea's Cradle".equals(c.getName())));
+        AssertJUnit.assertEquals("Forests should stay untapped when Cradle covers the cost",
+                0, sources.stream().filter(c -> "Forest".equals(c.getName())).count());
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, mc, sa));
+    }
+
+    // {G}{G}{G}{G} with Cradle matching creature count should use Cradle instead of stranding basics.
+    @Test
+    public void gaesCradleUsedWhenCostNeedsFullOutput() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Gaea's Cradle", p);
+        addCards("Forest", 4, p);
+        addCards("Bear Cub", 4, p);
+        Card spell = addCardToZone("Slith Predator", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("G G G G"), sa);
+
+        CardCollection sources = predictedManaSources(game, p, cost("G G G G"), sa);
+        AssertJUnit.assertTrue("Gaea's Cradle should pay when the cost needs all four green",
+                sources.anyMatch(c -> "Gaea's Cradle".equals(c.getName())));
+    }
+
     // {2}{R} with M/P/F + Lotus should tap Lotus when Lightning Helix ({R}{W}) is still in hand.
     @Test
     public void gildedLotusUsedWhenHandNeedsMultipleColors() {
