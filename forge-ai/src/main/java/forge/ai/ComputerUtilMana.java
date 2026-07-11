@@ -7,6 +7,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
+import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -55,10 +56,16 @@ public class ComputerUtilMana {
     // two or more of the unpaid colored shards (see sortManaAbilities).
     private final static int FILTER_SINGLE_SHARD_PENALTY = 8;
     private final static int FILTER_CONSOLIDATION_BONUS = 20;
+    /** Per mana lost on net-negative any-mana filters ({2} -> one any pip). */
+    private final static int NET_NEGATIVE_ANY_MANA_FILTER_PENALTY = 8;
     // Sacrifice / one-shot mana (Lotus Petal) should lose to a consolidating signet when both can pay a colored pip.
     private final static int DISPOSABLE_MANA_PENALTY = 30;
     /** Outlets like Ashnod's Altar that sacrifice another permanent — below self-sac disposables. */
     private final static int EXTERNAL_SACRIFICE_MANA_PENALTY = 15;
+    /** Self-sac creature mana (Treva's Attendant) — just above external-sac outlets, below tokens/Petal. */
+    private final static int SELF_SAC_CREATURE_MANA_PENALTY = 12;
+    /** Mana abilities that tap another creature (Springleaf Drum) — after reusables, before disposables. */
+    private final static int CREATURE_TAP_MANA_PENALTY = 10;
     /** Host cards with SVar AIManaReserve (Karakas, Library of Alexandria) — tap for mana only as last resort. */
     private final static int MANA_RESERVE_HOST_PENALTY = 45;
     /** Index of colorless ({C}) pips in {@link AiDeckStatistics#maxPips} (WUBRGC order). */
@@ -640,6 +647,7 @@ public class ComputerUtilMana {
                     hasManaCostAbility = true;
                 }
                 score += castBonusPreferenceAdjustment(ability, spellBeingPaid, ai);
+                score += netNegativeAnyManaFilterLoss(ability) * NET_NEGATIVE_ANY_MANA_FILTER_PENALTY;
             }
             else if (!ability.isTrigger() && ability.isPossible()) {
                 score += 13; //add 13 for any non-mana activated abilities
@@ -673,6 +681,14 @@ public class ComputerUtilMana {
 
         if (isDisposableManaCard(card)) {
             score += DISPOSABLE_MANA_PENALTY;
+        }
+
+        if (hasSelfSacrificeCreatureMana(card)) {
+            score += SELF_SAC_CREATURE_MANA_PENALTY;
+        }
+
+        if (hasCreatureTapManaAbility(card)) {
+            score += CREATURE_TAP_MANA_PENALTY;
         }
 
         if (hasExternalSacrificeManaOutlet(card)) {
@@ -752,6 +768,88 @@ public class ComputerUtilMana {
         return false;
     }
 
+    /** Self-sac disposable on a creature (Treva's Attendant), not a token or artifact rock. */
+    private static boolean isSelfSacrificeCreatureMana(final SpellAbility ma) {
+        return isDisposableManaAbility(ma) && !sacrificesOtherPermanentsForMana(ma)
+                && ma.getHostCard().isCreature();
+    }
+
+    private static boolean hasSelfSacrificeCreatureMana(final Card card) {
+        if (card == null) {
+            return false;
+        }
+        for (final SpellAbility ma : card.getManaAbilities()) {
+            if (isSelfSacrificeCreatureMana(ma)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Mana ability whose cost taps another creature via {@code tapXType} (Springleaf Drum,
+     * Survivors' Encampment). Excludes self-tap dorks ({@code Cost$ T} on the creature itself)
+     * and disposables, which have their own sacrifice tiers.
+     */
+    private static boolean requiresTappingOtherCreatureForMana(final SpellAbility ma) {
+        if (ma == null || !ma.isManaAbility() || isDisposableManaAbility(ma)) {
+            return false;
+        }
+        final Cost payCosts = ma.getPayCosts();
+        if (payCosts == null) {
+            return false;
+        }
+        for (final CostPart part : payCosts.getCostParts()) {
+            if (part instanceof CostTapType && isCreatureTapType(part.getType())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** True when a {@code tapXType} type string targets creatures (Creature, Elf, Spirit, ...). */
+    private static boolean isCreatureTapType(final String type) {
+        if (type == null) {
+            return false;
+        }
+        for (final String option : type.split(";")) {
+            final String core = option.split("\\.", 2)[0].trim();
+            if ("Creature".equals(core) || CardType.isACreatureType(core)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasCreatureTapManaAbility(final Card card) {
+        if (card == null) {
+            return false;
+        }
+        for (final SpellAbility ma : card.getManaAbilities()) {
+            if (requiresTappingOtherCreatureForMana(ma)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Disposable sacrifice tier for sorting. Lower = preferred.
+     * 0 = self-sac token/artifact (Treasure, Petal); 1 = self-sac creature; 2 = sacrifice-other outlet.
+     */
+    private static int disposableSacrificeTier(final SpellAbility ma) {
+        if (!isDisposableManaAbility(ma)) {
+            return -1;
+        }
+        if (sacrificesOtherPermanentsForMana(ma)) {
+            return 2;
+        }
+        if (isSelfSacrificeCreatureMana(ma)) {
+            return 1;
+        }
+        return 0;
+    }
+
     /**
      * Among disposable candidates only. Lower return = better.
      * When {@code remaining >= 2}, prefer higher output; when {@code remaining == 1}, prefer tight fit.
@@ -765,12 +863,12 @@ public class ComputerUtilMana {
         return Integer.compare(prodA, prodB);
     }
 
-    /** Self-sac disposables (Treasure, Petal) before sacrifice-other outlets (Ashnod's Altar). */
+    /** Self-sac tokens before self-sac creatures before sacrifice-other outlets (Ashnod's Altar). */
     private static int compareDisposableCandidates(final SpellAbility a, final SpellAbility b, final int remaining) {
-        final boolean otherA = sacrificesOtherPermanentsForMana(a);
-        final boolean otherB = sacrificesOtherPermanentsForMana(b);
-        if (otherA != otherB) {
-            return otherA ? 1 : -1;
+        final int tierA = disposableSacrificeTier(a);
+        final int tierB = disposableSacrificeTier(b);
+        if (tierA != tierB) {
+            return Integer.compare(tierA, tierB);
         }
         return compareDisposableByYield(a, b, remaining);
     }
@@ -1317,6 +1415,10 @@ public class ComputerUtilMana {
                 return disposableCmp;
             }
         }
+        final int filterCostCmp = compareAnyManaFilterActivationCost(a, b);
+        if (filterCostCmp != 0) {
+            return filterCostCmp;
+        }
         final boolean land1 = a.getHostCard().isLand();
         final boolean land2 = b.getHostCard().isLand();
         if (land1 != land2) {
@@ -1338,7 +1440,13 @@ public class ComputerUtilMana {
             if (sacrificesOtherPermanentsForMana(ma)) {
                 return 55;
             }
+            if (isSelfSacrificeCreatureMana(ma)) {
+                return 54;
+            }
             return isMultiManaDisposable(ma) ? 48 : 50;
+        }
+        if (requiresTappingOtherCreatureForMana(ma)) {
+            return 49;
         }
         if (isManaReserveHost(ma.getHostCard())) {
             return 45;
@@ -1359,7 +1467,8 @@ public class ComputerUtilMana {
             return ma.getHostCard().isLand() ? 15 : 0;
         }
         if (hasManaCost) {
-            return 40;
+            final int netLoss = netNegativeAnyManaFilterLoss(ma);
+            return netLoss > 0 ? 40 + netLoss : 40;
         }
         final AbilityManaPart mp = ma.getManaPart();
         if (mp != null && mp.isAnyMana()) {
@@ -1398,12 +1507,12 @@ public class ComputerUtilMana {
                     return colorlessCmp;
                 }
             }
-            final boolean d1 = isDisposableManaAbility(a1);
-            final boolean d2 = isDisposableManaAbility(a2);
-            if (d1 != d2) {
-                return d1 ? 1 : -1;
+            final int t1 = nestedActivationSourceTier(a1);
+            final int t2 = nestedActivationSourceTier(a2);
+            if (t1 != t2) {
+                return Integer.compare(t1, t2);
             }
-            if (d1 && d2) {
+            if (isDisposableManaAbility(a1) && isDisposableManaAbility(a2)) {
                 final int disposableCmp = compareDisposableCandidates(a1, a2, 1);
                 if (disposableCmp != 0) {
                     return disposableCmp;
@@ -1411,6 +1520,14 @@ public class ComputerUtilMana {
             }
             return 0;
         });
+    }
+
+    /** Reusable (0) before creature-tap sources like Springleaf Drum (1) before disposables (2). */
+    private static int nestedActivationSourceTier(final SpellAbility ma) {
+        if (isDisposableManaAbility(ma)) {
+            return 2;
+        }
+        return requiresTappingOtherCreatureForMana(ma) ? 1 : 0;
     }
 
     private static int compareColorlessPreference(final SpellAbility a1, final SpellAbility a2,
@@ -1537,6 +1654,8 @@ public class ComputerUtilMana {
         boolean hasDirectColoredAlt;
         boolean hasTightGenericAlt;
         boolean hasAnyMultiAlt;
+        boolean hasReusableNonCreatureTapAlt;
+        boolean hasCheaperAnyManaFilterAlt;
 
         static AlternativeScanFlags scan(final List<SpellAbility> alternatives, final SpellAbility skip,
                 final ManaCostShard toPay, final int remaining) {
@@ -1566,6 +1685,13 @@ public class ComputerUtilMana {
                 }
                 if (isAnyMultiManaProducer(ma)) {
                     flags.hasAnyMultiAlt = true;
+                }
+                if (!isDisposableManaAbility(ma) && !requiresTappingOtherCreatureForMana(ma)) {
+                    flags.hasReusableNonCreatureTapAlt = true;
+                }
+                if (isAnyManaConsolidatingFilter(ma) && isAnyManaConsolidatingFilter(skip)
+                        && getFilterActivationCMC(ma) < getFilterActivationCMC(skip)) {
+                    flags.hasCheaperAnyManaFilterAlt = true;
                 }
             }
             return flags;
@@ -1681,6 +1807,13 @@ public class ComputerUtilMana {
         if (sacrificesOtherPermanentsForMana(chosen) && altFlags.hasSelfSacDisposableAlt) {
             score += 75;
         }
+        if (requiresTappingOtherCreatureForMana(chosen) && castBonusAdj >= 0
+                && altFlags.hasReusableNonCreatureTapAlt) {
+            score += 40;
+        }
+        if (netNegativeAnyManaFilterLoss(chosen) > 0 && altFlags.hasCheaperAnyManaFilterAlt) {
+            score += 25 * netNegativeAnyManaFilterLoss(chosen);
+        }
         if (isAnyManaConsolidatingFilter(chosen) && cost.getGenericManaAmount() > 0 && !toPay.isGeneric()) {
             score += 50;
         }
@@ -1748,6 +1881,27 @@ public class ComputerUtilMana {
         }
         final CostPartMana costMana = filter.getPayCosts().getCostMana();
         return costMana == null ? 0 : costMana.getMana().getCMC();
+    }
+
+    /** Mana lost per activation on any-mana filters that produce less than their activation cost (Signpost {2}: any). */
+    private static int netNegativeAnyManaFilterLoss(final SpellAbility ma) {
+        if (!isAnyManaConsolidatingFilter(ma) || isNetPositiveConsolidator(ma)) {
+            return 0;
+        }
+        return Math.max(0, getFilterActivationCMC(ma) - getManaProducedAmount(ma));
+    }
+
+    /** Among any-mana filters, prefer lower activation costs ({1} Study Hall over {2} Signpost). */
+    private static int compareAnyManaFilterActivationCost(final SpellAbility a, final SpellAbility b) {
+        if (!isAnyManaConsolidatingFilter(a) || !isAnyManaConsolidatingFilter(b)) {
+            return 0;
+        }
+        final int c1 = getFilterActivationCMC(a);
+        final int c2 = getFilterActivationCMC(b);
+        if (c1 != c2) {
+            return Integer.compare(c1, c2);
+        }
+        return 0;
     }
 
     /** Produced mana exceeds the filter's activation cost (e.g. Signet {1} -> {G}{W}). */
@@ -2396,6 +2550,10 @@ public class ComputerUtilMana {
                 }
             }
         }
+        final int filterCostCmp = compareAnyManaFilterActivationCost(ability1, ability2);
+        if (filterCostCmp != 0) {
+            return filterCostCmp;
+        }
         return rankGenericManaSource(ability1, effectiveGenericColorPreference(ctx))
                 - rankGenericManaSource(ability2, effectiveGenericColorPreference(ctx));
     }
@@ -2443,6 +2601,12 @@ public class ComputerUtilMana {
             }
             if (anyMulti2 && direct1) {
                 return -1;
+            }
+        }
+        if (ab1Filter && ab2Filter) {
+            final int filterCostCmp = compareAnyManaFilterActivationCost(ability1, ability2);
+            if (filterCostCmp != 0) {
+                return filterCostCmp;
             }
         }
         return 0;
@@ -2946,6 +3110,11 @@ public class ComputerUtilMana {
             if (before - countUnpaidPips(probe) >= 2) {
                 return 1;
             }
+        }
+        if (requiresTappingOtherCreatureForMana(chosen)) {
+            // The tapped creature is consumed too, but collectCardsConsumedByPayment only tracks
+            // nested taps for filters with mana activation costs.
+            return consumed.size() + 1;
         }
         return consumed.size();
     }

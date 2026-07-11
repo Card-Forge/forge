@@ -128,6 +128,69 @@ public class AutoPaymentTest extends SimulationTest {
     }
 
     @Test
+    public void trevasAttendantBeforeAshnodsAltar() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Forest", p);
+        addCard("Treva's Attendant", p);
+        addCard("Ashnod's Altar", p);
+        Card elf = addCard("Llanowar Elves", p);
+        elf.setSickness(false);
+        Card spell = addCardToZone("Mind Stone", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        assertProductionPayment(game, p, cost("2"), spell.getFirstSpellAbility());
+        AssertJUnit.assertEquals(0, countOnBattlefield(game, "Treva's Attendant"));
+        AssertJUnit.assertEquals(1, countOnBattlefield(game, "Llanowar Elves"));
+        AssertJUnit.assertEquals(1, countOnBattlefield(game, "Ashnod's Altar"));
+    }
+
+    // Springleaf Drum taps another creature, so a plain land should be preferred for a colored pip.
+    @Test
+    public void springleafDrumAfterForestBeforeTreasure() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Forest", p);
+        addCard("Springleaf Drum", p);
+        addToken("c_a_treasure_sac", p);
+        Card elf = addCard("Llanowar Elves", p);
+        elf.setSickness(false);
+        Card spell = addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        assertProductionPayment(game, p, cost("G"), spell.getFirstSpellAbility());
+        AssertJUnit.assertEquals("Forest should pay {G}", 1, countTapped(game, "Forest"));
+        AssertJUnit.assertEquals("Springleaf Drum should stay untapped", 0, countTapped(game, "Springleaf Drum"));
+        AssertJUnit.assertEquals("Treasure should stay unused", 1, countOnBattlefield(game, "Treasure Token"));
+    }
+
+    // Without a land, Springleaf Drum (reusable but taps a creature) should still beat sacrificing a Treasure.
+    @Test
+    public void springleafDrumBeforeTreasureWhenNoLand() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Springleaf Drum", p);
+        addToken("c_a_treasure_sac", p);
+        Card bear = addCard("Bear Cub", p);
+        bear.setSickness(false);
+        Card spell = addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        assertProductionPayment(game, p, cost("G"), spell.getFirstSpellAbility());
+        AssertJUnit.assertEquals("Springleaf Drum should pay {G}", 1, countTapped(game, "Springleaf Drum"));
+        AssertJUnit.assertEquals("Treasure should stay on the battlefield", 1, countOnBattlefield(game, "Treasure Token"));
+    }
+
+    @Test
     public void yunaGrandSummonPaysCreatureWithYuna() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -432,6 +495,61 @@ public class AutoPaymentTest extends SimulationTest {
 
         AssertJUnit.assertEquals("Swamp should be tapped for B", 1, countTapped(game, "Swamp"));
         AssertJUnit.assertEquals("Initiates should not be used", 0, countTapped(game, "Initiates of the Ebon Hand"));
+    }
+
+    // {G} with Forest + Signpost Scarecrow ({2}: any): tap the Forest, not the expensive filter.
+    @Test
+    public void skipsSignpostScarecrowWhenDirectSourceExists() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Forest", p);
+        addCard("Signpost Scarecrow", p);
+        Card spell = addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        assertProductionPayment(game, p, cost("G"), spell.getFirstSpellAbility());
+        AssertJUnit.assertEquals("Forest should be tapped for {G}", 1, countTapped(game, "Forest"));
+        AssertJUnit.assertEquals("Signpost Scarecrow should not be used", 0, countTapped(game, "Signpost Scarecrow"));
+    }
+
+    // {G} with Forest + Prismite ({2}: any): same as Signpost — direct basic wins.
+    @Test
+    public void skipsPrismiteWhenDirectSourceExists() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Forest", p);
+        addCard("Prismite", p);
+        Card spell = addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        assertProductionPayment(game, p, cost("G"), spell.getFirstSpellAbility());
+        AssertJUnit.assertEquals("Forest should be tapped for {G}", 1, countTapped(game, "Forest"));
+        AssertJUnit.assertEquals("Prismite should not be used", 0, countTapped(game, "Prismite"));
+    }
+
+    // {R} with Study Hall ({1}: any) + Signpost ({2}: any) + one Plains: prefer the cheaper filter.
+    @Test
+    public void prefersStudyHallOverSignpostForOffColor() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Study Hall", p);
+        addCard("Signpost Scarecrow", p);
+        addCard("Plains", p);
+        Card spell = addCardToZone("Shock", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        assertProductionPayment(game, p, cost("R"), spell.getFirstSpellAbility());
+        AssertJUnit.assertEquals("Study Hall should pay {R}", 1, countTapped(game, "Study Hall"));
+        AssertJUnit.assertEquals("Signpost Scarecrow should stay unused", 0, countTapped(game, "Signpost Scarecrow"));
     }
 
     // {W} with Plains + Karakas: tap Plains; keep Karakas for its bounce ability.
