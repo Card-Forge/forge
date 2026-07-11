@@ -193,7 +193,8 @@ public class ComputerUtilMana {
                 int preOrder = cardRanks.get(card1) - cardRanks.get(card2);
 
                 if (preOrder != 0) {
-                    if (shard.isGeneric() && card1.isLand() && card2.isLand()) {
+                    if (shard.isGeneric() && ability1.getPayCosts().isReusuableResource()
+                            && ability2.getPayCosts().isReusuableResource()) {
                         boolean colorless1 = (colors1 & ManaAtom.COLORLESS) != 0;
                         boolean colorless2 = (colors2 & ManaAtom.COLORLESS) != 0;
                         if (colorless1 != colorless2) {
@@ -292,6 +293,17 @@ public class ComputerUtilMana {
     public static SpellAbility chooseManaAbility(ManaCostBeingPaid cost, SpellAbility sa, Player ai, ManaCostShard toPay,
             Collection<SpellAbility> maList, boolean checkCosts) {
         Card saHost = sa.getHostCard();
+
+        int generic = cost.getUnpaidShards(ManaCostShard.GENERIC);
+        if (toPay.isGeneric() && generic > 1) {
+            List<SpellAbility> sorted = new ArrayList<>(maList);
+            sorted.sort(Comparator.comparingInt(ma -> {
+                int amount = ma.totalAmountOfManaGenerated(sa, true);
+                return ma.getPayCosts().isReusuableResource() && ma.getSubAbility() == null && amount <= generic
+                        ? -amount : 0;
+            }));
+            maList = sorted;
+        }
 
         // CastTotalManaSpent (AIPreference:ManaFrom$Type or AIManaPref$ Type)
         String manaSourceType = "";
@@ -649,7 +661,7 @@ public class ComputerUtilMana {
         }
 
         boolean shouldUsePlanner = !greedyProbe && !cost.containsPhyrexianMana() && !sa.getHostCard().hasConverge()
-                && ManaPaymentPlanner.hasCostedManaAbility(ai, checkPlayable);
+                && ManaPaymentPlanner.shouldUsePlanner(cost, sa, ai, checkPlayable);
         List<Mana> greedyPayment = null;
         Set<Card> greedySources = shouldUsePlanner ? new HashSet<>() : null;
         if (shouldUsePlanner) {
@@ -1623,8 +1635,6 @@ public class ComputerUtilMana {
                     continue;
                 }
 
-                manaMap.put(ManaAtom.GENERIC, m);
-
                 SpellAbility tail = m;
                 while (tail != null) {
                     AbilityManaPart mp = tail.getManaPart();
@@ -1691,6 +1701,17 @@ public class ComputerUtilMana {
                     tail = tail.getSubAbility();
                 }
 
+                // Include mana added by TapsForMana triggers such as Utopia Sprawl.
+                for (String produced : TextUtil.split(predictManafromSpellAbility(m, ai,
+                        ManaCostShard.GENERIC).trim(), ' ')) {
+                    int color = StringUtils.isNumeric(produced) ? ManaAtom.GENERIC : ManaAtom.fromName(produced);
+                    if (color != 0 && !manaMap.get(color).contains(m)) {
+                        manaMap.put(color, m);
+                    }
+                }
+                if (manaMap.values().contains(m)) {
+                    manaMap.put(ManaAtom.GENERIC, m);
+                }
                 if (m.getHostCard().isSnow()) {
                     manaMap.put(ManaAtom.IS_SNOW, m);
                 }
