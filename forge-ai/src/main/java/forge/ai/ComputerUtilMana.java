@@ -1644,7 +1644,7 @@ public class ComputerUtilMana {
         if (ma == null || hasManaActivationCost(ma) || isDisposableManaAbility(ma)) {
             return false;
         }
-        if (isMultiShardConsolidatingFilter(ma) || isMultiManaComboAbility(ma)) {
+        if (isMultiPipActivationFilter(ma) || isMultiManaComboAbility(ma)) {
             return false;
         }
         return getManaProducedAmount(ma) >= 2;
@@ -1660,7 +1660,7 @@ public class ComputerUtilMana {
     }
 
     private static boolean isConsolidatingCandidate(final SpellAbility ma) {
-        return isMultiShardConsolidatingFilter(ma) || isMultiManaComboAbility(ma) || isAnyMultiManaProducer(ma);
+        return isMultiPipActivationFilter(ma) || isMultiManaComboAbility(ma) || isAnyMultiManaProducer(ma);
     }
 
     private static boolean hasAlternativeExcept(final List<SpellAbility> alternatives, final SpellAbility skip,
@@ -1695,7 +1695,7 @@ public class ComputerUtilMana {
             FilterKind kind = FilterKind.NONE;
             if (isComboConsolidatingFilter(ma)) {
                 kind = FilterKind.COMBO_MULTI;
-            } else if (isMultiShardConsolidatingFilter(ma)) {
+            } else if (isMultiPipActivationFilter(ma)) {
                 kind = FilterKind.MULTI_SHARD;
             } else if (isAnyManaConsolidatingFilter(ma)) {
                 kind = FilterKind.ANY_MANA;
@@ -1739,7 +1739,7 @@ public class ComputerUtilMana {
                 if (ma == skip) {
                     continue;
                 }
-                if (isMultiShardConsolidatingFilter(ma) || isComboConsolidatingFilter(ma)) {
+                if (isMultiPipActivationFilter(ma) || isComboConsolidatingFilter(ma)) {
                     flags.hasMultiShardAlt = true;
                 }
                 if (isMultiManaProducer(ma) && !isAnyMultiManaProducer(ma)
@@ -1854,6 +1854,29 @@ public class ComputerUtilMana {
     }
 
     /**
+     * Single-color filter that produces two or more mana per activation (e.g. Cabal Coffers
+     * {@code Amount$ X} with {@code Produced$ B}).
+     */
+    private static boolean isVariableAmountConsolidatingFilter(final SpellAbility ability) {
+        if (!hasManaActivationCost(ability)) {
+            return false;
+        }
+        final AbilityManaPart mp = ability.getManaPart();
+        if (mp == null || mp.isAnyMana() || mp.isComboMana()) {
+            return false;
+        }
+        if (mp.mana(ability).split(" ").length >= 2) {
+            return false;
+        }
+        return getManaProducedAmount(ability) >= 2;
+    }
+
+    /** Multi-shard signets or variable-amount filters that apply multiple pips per activation. */
+    private static boolean isMultiPipActivationFilter(final SpellAbility ability) {
+        return isMultiShardConsolidatingFilter(ability) || isVariableAmountConsolidatingFilter(ability);
+    }
+
+    /**
      * Any-mana filter with a mana activation cost (Study Hall), distinct from multi-mana signets that
      * produce two colored mana per activation.
      */
@@ -1946,7 +1969,7 @@ public class ComputerUtilMana {
             final SpellAbility disposable) {
         return alternatives.stream()
                 .filter(ma -> ma != disposable && (isAnyManaConsolidatingFilter(ma)
-                        || isMultiShardConsolidatingFilter(ma) || isComboConsolidatingFilter(ma)))
+                        || isMultiPipActivationFilter(ma) || isComboConsolidatingFilter(ma)))
                 .collect(Collectors.toList());
     }
 
@@ -1994,7 +2017,7 @@ public class ComputerUtilMana {
      */
     private static boolean shouldReserveConsolidator(final SpellAbility filter, final SpellAbility sa,
             final ManaCostBeingPaid cost, final Player ai, final ManaPaymentContext ctx) {
-        if (!isMultiShardConsolidatingFilter(filter) || cost.getGenericManaAmount() <= 0) {
+        if (!isMultiPipActivationFilter(filter) || cost.getGenericManaAmount() <= 0) {
             return false;
         }
         int coloredUnpaid = countUnpaidPips(cost) - cost.getGenericManaAmount();
@@ -2264,7 +2287,7 @@ public class ComputerUtilMana {
             if (other == filter || other.getHostCard() == filter.getHostCard()) {
                 continue;
             }
-            if (isMultiShardConsolidatingFilter(other) && isNetPositiveConsolidator(other)
+            if (isMultiPipActivationFilter(other) && isNetPositiveConsolidator(other)
                     && !shouldReserveConsolidator(other, sa, cost, ai, ctx)) {
                 return true;
             }
@@ -2295,7 +2318,7 @@ public class ComputerUtilMana {
             if (!isAnyManaConsolidatingFilter(filter)) {
                 return false;
             }
-        } else if (!isMultiShardConsolidatingFilter(filter) && !isComboConsolidatingFilter(filter)
+        } else if (!isMultiPipActivationFilter(filter) && !isComboConsolidatingFilter(filter)
                 && !mp.isAnyMana()) {
             return false;
         }
@@ -2497,7 +2520,7 @@ public class ComputerUtilMana {
                     orderedCardsOut.add(hostCard);
                 }
                 if (!shard.isGeneric()) {
-                    if (isMultiShardConsolidatingFilter(ability)) {
+                    if (isMultiPipActivationFilter(ability)) {
                         coloredShardsCovered.computeIfAbsent(hostCard, k -> new HashSet<>()).add(shard);
                     } else if (isMultiManaComboAbility(ability)) {
                         comboShardsCovered.computeIfAbsent(hostCard, k -> new HashSet<>()).add(shard);
@@ -2508,6 +2531,20 @@ public class ComputerUtilMana {
         for (Map.Entry<Card, Set<ManaCostShard>> e : coloredShardsCovered.entrySet()) {
             if (e.getValue().size() >= 2) {
                 manaCardMap.put(e.getKey(), manaCardMap.get(e.getKey()) - FILTER_CONSOLIDATION_BONUS);
+            }
+        }
+        for (final ManaCostShard shard : sourcesForShards.keySet()) {
+            if (shard.isGeneric() || cost.getUnpaidShards(shard) < 2) {
+                continue;
+            }
+            for (SpellAbility ability : sourcesForShards.get(shard)) {
+                if (isVariableAmountConsolidatingFilter(ability)) {
+                    final Card hostCard = ability.getHostCard();
+                    if (manaCardMap.containsKey(hostCard)) {
+                        manaCardMap.put(hostCard, manaCardMap.get(hostCard) - FILTER_CONSOLIDATION_BONUS);
+                    }
+                    break;
+                }
             }
         }
         for (Map.Entry<Card, Set<ManaCostShard>> e : comboShardsCovered.entrySet()) {
@@ -2525,7 +2562,7 @@ public class ComputerUtilMana {
         if (unpaidGeneric >= 2 && sourcesForShards.containsKey(ManaCostShard.GENERIC)) {
             final Set<Card> genericConsolidators = new HashSet<>();
             for (SpellAbility ability : sourcesForShards.get(ManaCostShard.GENERIC)) {
-                final boolean consolidates = (isMultiShardConsolidatingFilter(ability)
+                final boolean consolidates = (isMultiPipActivationFilter(ability)
                         && canActivateFilter(ai, ability, manaAbilityMap, false))
                         || (isMultiManaComboAbility(ability) && !hasManaActivationCost(ability));
                 if (consolidates && genericConsolidators.add(ability.getHostCard())) {
@@ -2595,8 +2632,8 @@ public class ComputerUtilMana {
             }
         }
         if (ctx.unpaidGeneric >= 2) {
-            final boolean ab1Multi = isMultiShardConsolidatingFilter(ability1) && ctx.consolidates(ability1);
-            final boolean ab2Multi = isMultiShardConsolidatingFilter(ability2) && ctx.consolidates(ability2);
+            final boolean ab1Multi = isMultiPipActivationFilter(ability1) && ctx.consolidates(ability1);
+            final boolean ab2Multi = isMultiPipActivationFilter(ability2) && ctx.consolidates(ability2);
             if (ab1Multi != ab2Multi) {
                 return ab1Multi ? -1 : 1;
             }
@@ -2651,7 +2688,7 @@ public class ComputerUtilMana {
         final boolean ab1Consolidates = ctx.consolidates(ability1);
         final boolean ab2Consolidates = ctx.consolidates(ability2);
         if (ab1Consolidates != ab2Consolidates && ctx.unpaidColoredShards >= 2
-                && (isMultiShardConsolidatingFilter(ability1) || isMultiShardConsolidatingFilter(ability2)
+                && (isMultiPipActivationFilter(ability1) || isMultiPipActivationFilter(ability2)
                         || isComboConsolidatingFilter(ability1) || isComboConsolidatingFilter(ability2))) {
             return ab1Consolidates ? -1 : 1;
         }
@@ -2859,6 +2896,11 @@ public class ComputerUtilMana {
     /**
      * After sorting, keep only enough fungible representatives per equivalence class to pay the
      * remaining shards (plus a small buffer for excluded retries).
+     * <p>
+     * For generic/{@code X}, also keep copies for unpaid colored pips: the same basics may be
+     * spent on colored shards first, and sources trimmed out of the generic list (but still on
+     * the colored list) are unavailable once colored is paid — e.g. Cabal Coffers + Drain Life
+     * {@code {8}{1}{B}} stranding the final {@code {1}}.
      */
     private static List<SpellAbility> trimFungibleManaCandidates(final List<SpellAbility> sorted,
             final ManaCostShard shard, final ManaCostBeingPaid cost, final Player ai) {
@@ -2867,7 +2909,7 @@ public class ComputerUtilMana {
         }
         int cap = FUNGIBLE_CANDIDATE_BUFFER;
         if (shard.isGeneric() || shard == ManaCostShard.X) {
-            cap += Math.max(cost.getGenericManaAmount(), cost.getUnpaidShards(shard));
+            cap += countUnpaidPips(cost);
         } else {
             cap += cost.getUnpaidShards(shard);
         }
@@ -3163,7 +3205,7 @@ public class ComputerUtilMana {
 
     private static int effectiveCardsConsumedForPayment(final ManaCostBeingPaid cost, final SpellAbility sa,
             final Player ai, final ManaCostShard toPay, final SpellAbility chosen, final Set<Card> consumed) {
-        if (isMultiShardConsolidatingFilter(chosen) || isMultiManaComboAbility(chosen)) {
+        if (isMultiPipActivationFilter(chosen) || isMultiManaComboAbility(chosen)) {
             final ManaCostBeingPaid probe = new ManaCostBeingPaid(cost);
             applyChosenPaymentToCostProbe(probe, chosen, ai, toPay);
             if (probe.isPaid()) {
@@ -3197,7 +3239,7 @@ public class ComputerUtilMana {
     /** Apply {@code chosen}'s mana production toward {@code remaining} for feasibility probes. */
     private static void applyChosenPaymentToCostProbe(final ManaCostBeingPaid remaining, final SpellAbility chosen,
             final Player ai, final ManaCostShard toPay) {
-        if (isMultiShardConsolidatingFilter(chosen)) {
+        if (isMultiPipActivationFilter(chosen)) {
             payMultipleMana(remaining, predictManafromSpellAbility(chosen, ai, toPay, remaining), ai);
         } else if (isMultiManaComboAbility(chosen)) {
             setComboManaChoice(ai, chosen, remaining);

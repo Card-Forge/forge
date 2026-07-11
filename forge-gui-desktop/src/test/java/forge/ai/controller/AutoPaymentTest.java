@@ -2342,6 +2342,134 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertEquals(2, countTapped(game, "Wastes"));
     }
 
+    // --- ManaReflected (Corrupted Grafstone: color from a card in your graveyard) ---
+
+    // Lightning Bolt in the graveyard enables Grafstone to pay {R}.
+    @Test
+    public void corruptedGrafstonePaysColorFromGraveyard() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Corrupted Grafstone", p);
+        addCardToZone("Lightning Bolt", p, ZoneType.Graveyard);
+        Card spell = addCardToZone("Shock", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("R"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("R"), sa);
+        AssertJUnit.assertTrue("Corrupted Grafstone should be the mana source",
+                sources.anyMatch(c -> "Corrupted Grafstone".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("R"), sa));
+        AssertJUnit.assertEquals(1, countTapped(game, "Corrupted Grafstone"));
+    }
+
+    // With no graveyard colors matching the spell, Grafstone cannot pay {R}.
+    @Test
+    public void corruptedGrafstoneCannotPayWithoutMatchingGraveyardColor() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Corrupted Grafstone", p);
+        addCardToZone("Counterspell", p, ZoneType.Graveyard);
+        Card spell = addCardToZone("Shock", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertFalse("Grafstone cannot add {R} when the graveyard has only blue",
+                canAutoPay(game, p, cost("R"), sa));
+    }
+
+    // --- Variable-amount filters (Cabal Coffers, Crypt of Agadeem) ---
+
+    // Six Swamps + Coffers: pay {2} to activate → 6{B} from Coffers + 4 remaining Swamps = 10{B},
+    // enough for Drain Life with X=8 ({8}{1}{B}).
+    @Test
+    public void cabalCoffersPaysMultipleBlackFromSwamps() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Cabal Coffers", p);
+        addCards("Swamp", 6, p);
+        Card spell = addCardToZone("Drain Life", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("X 1 B");
+        mc.setXManaCostPaid(8, "B");
+
+        AssertJUnit.assertTrue(canAutoPay(game, p, mc, sa));
+
+        CardCollection sources = predictedManaSources(game, p, mc, sa);
+        AssertJUnit.assertTrue("Cabal Coffers should be among mana sources",
+                sources.anyMatch(c -> "Cabal Coffers".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, mc, sa));
+    }
+
+    // Coffers alone (X=0) cannot pay a large Drain Life.
+    @Test
+    public void cabalCoffersInfeasibleWithoutSwamps() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Cabal Coffers", p);
+        Card spell = addCardToZone("Drain Life", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        ManaCostBeingPaid mc = cost("X 1 B");
+        mc.setXManaCostPaid(8, "B");
+
+        AssertJUnit.assertFalse("Coffers with no Swamps cannot pay {8}{1}{B}",
+                canAutoPay(game, p, mc, sa));
+    }
+
+    // Crypt of Agadeem adds {B} per black creature in the graveyard.
+    @Test
+    public void cryptOfAgadeemPaysBlackFromGraveyardCreatures() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Crypt of Agadeem", p);
+        addCards("Swamp", 2, p);
+        addCardToZone("Gravecrawler", p, ZoneType.Graveyard);
+        addCardToZone("Typhoid Rats", p, ZoneType.Graveyard);
+        Card spell = addCardToZone("Distress", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        // Crypt enters tapped; untap so the {2}{T} variable-amount ability can be used.
+        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            if ("Crypt of Agadeem".equals(c.getName())) {
+                c.setTapped(false);
+            }
+        }
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("B B"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("B B"), sa);
+        AssertJUnit.assertTrue("Crypt of Agadeem should be among mana sources",
+                sources.anyMatch(c -> "Crypt of Agadeem".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("B B"), sa));
+    }
+
     // Cascade Bluffs ({U/R}{T}: Add {U}{U}, {U}{R}, or {R}{R}) with an Island paying its hybrid
     // activation cost can pay {U}{R} on its own.
     @Test
