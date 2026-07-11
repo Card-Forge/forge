@@ -384,6 +384,68 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertEquals("Initiates should not be used", 0, countTapped(game, "Initiates of the Ebon Hand"));
     }
 
+    // {W} with Plains + Karakas: tap Plains; keep Karakas for its bounce ability.
+    @Test
+    public void karakasReservedWhenPlainsAvailable() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Karakas", p);
+        Card spell = addCardToZone("Healing Salve", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("W"), sa);
+
+        AssertJUnit.assertEquals("Plains should be tapped for W", 1, countTapped(game, "Plains"));
+        AssertJUnit.assertEquals("Karakas should stay untapped", 0, countTapped(game, "Karakas"));
+    }
+
+    // {W} with only Karakas: still payable — reserve is soft depriorization, not a hard block.
+    @Test
+    public void karakasTappedWhenOnlyWhiteSource() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Karakas", p);
+        Card spell = addCardToZone("Healing Salve", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("W"), sa);
+
+        AssertJUnit.assertEquals("Karakas should be tapped when it is the only source", 1, countTapped(game, "Karakas"));
+    }
+
+    // Generic {1} with Mind Stone + Library of Alexandria: spend the rock, not the draw land.
+    @Test
+    public void libraryReservedWhenColorlessRockAvailable() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mind Stone", p);
+        addCard("Library of Alexandria", p);
+        Card spell = addCardToZone("Expedition Map", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        CardCollection sources = predictedManaSources(game, p, cost("1"), sa);
+        AssertJUnit.assertTrue("Mind Stone should pay generic {1}", sources.anyMatch(c -> "Mind Stone".equals(c.getName())));
+        AssertJUnit.assertFalse("Library should not pay generic {1}",
+                sources.anyMatch(c -> "Library of Alexandria".equals(c.getName())));
+
+        assertProductionPayment(game, p, cost("1"), sa);
+        AssertJUnit.assertEquals("Mind Stone should be tapped", 1, countTapped(game, "Mind Stone"));
+        AssertJUnit.assertEquals("Library should stay untapped", 0, countTapped(game, "Library of Alexandria"));
+    }
+
     // {R}{W} with only Plains + Signet (no Mountain) is still payable: Plains -> Signet {1}, Signet -> {R}{W}.
     @Test
     public void filterOnlyPathIsFeasible() {

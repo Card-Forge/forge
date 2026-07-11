@@ -56,6 +56,8 @@ public class ComputerUtilMana {
     private final static int FILTER_CONSOLIDATION_BONUS = 20;
     // Sacrifice / one-shot mana (Lotus Petal) should lose to a consolidating signet when both can pay a colored pip.
     private final static int DISPOSABLE_MANA_PENALTY = 30;
+    /** Host cards with SVar AIManaReserve (Karakas, Library of Alexandria) — tap for mana only as last resort. */
+    private final static int MANA_RESERVE_HOST_PENALTY = 45;
     /** Index of colorless ({C}) pips in {@link AiDeckStatistics#maxPips} (WUBRGC order). */
     private final static int COLORLESS_PIP_INDEX = 5;
 
@@ -660,7 +662,17 @@ public class ComputerUtilMana {
             score += DISPOSABLE_MANA_PENALTY;
         }
 
+        if (isManaReserveHost(card)) {
+            score += MANA_RESERVE_HOST_PENALTY;
+        }
+
         return score;
+    }
+
+    /** True when the host card should only be tapped for mana when no better source exists. */
+    private static boolean isManaReserveHost(final Card card) {
+        return card != null && card.hasSVar("AIManaReserve")
+                && "True".equalsIgnoreCase(card.getSVar("AIManaReserve"));
     }
 
     /** True for sacrifice or other one-shot mana abilities the AI should not spend before a reusable filter. */
@@ -1010,6 +1022,9 @@ public class ComputerUtilMana {
     static int rankGenericManaSource(final SpellAbility ma, final GenericColorPreference pref) {
         if (isDisposableManaAbility(ma)) {
             return 50;
+        }
+        if (isManaReserveHost(ma.getHostCard())) {
+            return 45;
         }
         final Cost payCosts = ma.getPayCosts();
         final boolean hasManaCost = payCosts != null && payCosts.hasManaCost();
