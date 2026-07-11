@@ -2063,6 +2063,8 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
 
+    // --- TapsForMana bonuses and conditional mana links (Sprawl, Festival, Flare, Gemstone Caverns) ---
+
     // Forest + Utopia Sprawl (chosen blue): one tap produces {G}{U} via TapsForMana trigger simulation.
     @Test
     public void utopiaSprawlPaysGreenAndChosenColorFromOneForestTap() {
@@ -2118,6 +2120,26 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue("Production auto-pay should match feasibility",
                 prodAutoPay(game, p, cost("G U R"), sa));
         AssertJUnit.assertEquals(1, countTapped(game, "Forest"));
+    }
+
+    // One Festival'd Forest tap yields at most three mana ({G} plus two any); four colored pips is infeasible.
+    @Test
+    public void marketFestivalCannotPayFourColorsFromOneForest() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card forest = addCard("Forest", p);
+        Card festival = addCard("Market Festival", p);
+        festival.attachToEntity(forest, null);
+        registerBattlefieldTriggers(game, festival);
+        Card spell = addCardToZone("Lightning Helix", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertFalse("One Forest tap cannot pay {G}{U}{R}{W}",
+                canAutoPay(game, p, cost("G U R W"), sa));
     }
 
     // Gemstone Caverns with a luck counter: tap adds one mana of any color.
