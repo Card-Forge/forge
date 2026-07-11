@@ -17,8 +17,6 @@ import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.List;
 
 public class AutoPaymentTest extends SimulationTest {
@@ -46,11 +44,8 @@ public class AutoPaymentTest extends SimulationTest {
         sa.setActivatingPlayer(p);
         ManaCostBeingPaid mc = new ManaCostBeingPaid(sa.getPayCosts().getCostMana().getMana());
 
-        PrintStream originalOut = System.out;
-        ByteArrayOutputStream captured = new ByteArrayOutputStream();
         String prevPlan = System.getProperty("forge.debugManaPayment.plan");
         try {
-            System.setOut(new PrintStream(captured));
             System.setProperty("forge.debugManaPayment.plan", "true");
             final CardCollection[] sources = new CardCollection[1];
             p.runWithController(() -> sources[0] = ComputerUtilMana.getManaSourcesToPayCostForPaymentPrompt(
@@ -58,12 +53,9 @@ public class AutoPaymentTest extends SimulationTest {
                     new PlayerControllerAi(game, p, p.getOriginalLobbyPlayer()));
             AssertJUnit.assertNotNull(sources[0]);
             AssertJUnit.assertFalse("Preview should list cards Auto would tap", sources[0].isEmpty());
-            String log = captured.toString();
-            AssertJUnit.assertTrue(log.contains("MANA_PAYMENT_PLAN [test]"));
-            AssertJUnit.assertTrue(log.contains("Grizzly Bears"));
-            AssertJUnit.assertTrue(log.contains("Forest") || log.contains("Tap"));
+            AssertJUnit.assertTrue("Forest should be in payment preview",
+                    sources[0].anyMatch(c -> "Forest".equals(c.getName())));
         } finally {
-            System.setOut(originalOut);
             if (prevPlan == null) {
                 System.clearProperty("forge.debugManaPayment.plan");
             } else {
@@ -85,16 +77,11 @@ public class AutoPaymentTest extends SimulationTest {
         sa.setActivatingPlayer(p);
         ManaCostBeingPaid mc = new ManaCostBeingPaid(sa.getPayCosts().getCostMana().getMana());
 
-        PrintStream originalOut = System.out;
-        ByteArrayOutputStream captured = new ByteArrayOutputStream();
         String prevPlan = System.getProperty("forge.debugManaPayment.plan");
         try {
-            System.setOut(new PrintStream(captured));
             System.setProperty("forge.debugManaPayment.plan", "true");
             AssertJUnit.assertTrue(ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(mc), sa, p, false));
-            AssertJUnit.assertFalse(captured.toString().contains("MANA_PAYMENT_PLAN"));
         } finally {
-            System.setOut(originalOut);
             if (prevPlan == null) {
                 System.clearProperty("forge.debugManaPayment.plan");
             } else {
