@@ -2120,6 +2120,54 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertEquals(1, countTapped(game, "Forest"));
     }
 
+    // Gemstone Caverns with a luck counter: tap adds one mana of any color.
+    @Test
+    public void gemstoneCavernsWithLuckCounterPaysColoredMana() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card caverns = addCard("Gemstone Caverns", p);
+        caverns.addCounterInternal(forge.game.card.CounterEnumType.LUCK, 1, p, false, null, null);
+        Card spell = addCardToZone("Lightning Bolt", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue("Luck-counter Gemstone Caverns should pay {R}",
+                canAutoPay(game, p, cost("R"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("R"), sa);
+        AssertJUnit.assertTrue("Gemstone Caverns should be the mana source",
+                sources.anyMatch(c -> "Gemstone Caverns".equals(c.getName())));
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("R"), sa));
+        AssertJUnit.assertEquals(1, countTapped(game, "Gemstone Caverns"));
+    }
+
+    // Gemstone Caverns without a luck counter: tap adds {C} only.
+    @Test
+    public void gemstoneCavernsWithoutLuckCounterPaysColorlessOnly() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Gemstone Caverns", p);
+        Card spell = addCardToZone("Expedition Map", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("1"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("1"), sa);
+        AssertJUnit.assertTrue(sources.anyMatch(c -> "Gemstone Caverns".equals(c.getName())));
+
+        AssertJUnit.assertTrue(prodAutoPay(game, p, cost("1"), sa));
+        AssertJUnit.assertEquals(1, countTapped(game, "Gemstone Caverns"));
+    }
+
     // Mana Flare doubles land output: one Plains pays {W}{W}.
     @Test
     public void manaFlareDoublesLandOutputForDoubleWhite() {
