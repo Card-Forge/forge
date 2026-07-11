@@ -4593,7 +4593,8 @@ public class ComputerUtilMana {
                 payMultipleMana(probe, landManaAlready.trim(), ai);
             }
             if (!probe.isPaid()) {
-                final String choice = buildComboManaChoiceString(ai, trSA, probe, pAmount, false);
+                final String choice = buildComboManaChoiceString(ai, trSA, probe, pAmount,
+                        requiresDifferentComboColors(trSA.getManaPart()));
                 if (!StringUtils.isBlank(choice) && !"0".equals(choice)) {
                     return choice;
                 }
@@ -5167,6 +5168,10 @@ public class ComputerUtilMana {
         return sb.toString();
     }
 
+    private static boolean requiresDifferentComboColors(final AbilityManaPart mp) {
+        return mp != null && mp.getOrigProduced().contains("Different");
+    }
+
     private static void setComboManaChoice(final Player ai, final SpellAbility manaAb, final ManaCostBeingPaid cost) {
         final AbilityManaPart comboMana = manaAb.getManaPart();
         final int amount = manaAb.hasParam("Amount") ? AbilityUtils.calculateAmount(manaAb.getHostCard(), manaAb.getParam("Amount"), manaAb) : 1;
@@ -5174,7 +5179,8 @@ public class ComputerUtilMana {
         comboMana.clearExpressChoice();
         final String preferredColor = expressHint != null && !expressHint.isEmpty() && !expressHint.contains(" ")
                 ? expressHint : "";
-        final String choices = buildComboManaChoiceString(ai, manaAb, cost, amount, false, preferredColor);
+        final String choices = buildComboManaChoiceString(ai, manaAb, cost, amount,
+                requiresDifferentComboColors(comboMana), preferredColor);
         comboMana.setExpressChoice(choices);
     }
 

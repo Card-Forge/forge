@@ -2270,6 +2270,78 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue("Production auto-pay should match feasibility", prodAutoPay(game, p, mc, sa));
     }
 
+    // --- Combo AnyDifferent ({T}: two mana of different colors) ---
+
+    // Firemind Vessel: one tap adds two different colors ({U}{R} from a single source).
+    @Test
+    public void firemindVesselPaysTwoDifferentColorsFromOneTap() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Firemind Vessel", p);
+        Card spell = addCardToZone("Goblin Electromancer", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("U R"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("U R"), sa);
+        AssertJUnit.assertEquals("Only Firemind Vessel should be tapped", 1,
+                sources.stream().filter(c -> "Firemind Vessel".equals(c.getName())).count());
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("U R"), sa));
+        AssertJUnit.assertEquals(1, countTapped(game, "Firemind Vessel"));
+    }
+
+    // One Firemind tap cannot produce two blue pips ({U}{U}).
+    @Test
+    public void firemindVesselCannotPayTwoSameColorsFromOneTap() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Firemind Vessel", p);
+        Card spell = addCardToZone("Counterspell", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertFalse("Firemind Vessel cannot pay {U}{U}",
+                canAutoPay(game, p, cost("U U"), sa));
+    }
+
+    // Guild Globe: {2}{T}, Sac — two different colors; Wastes pay the {2} activation cost.
+    @Test
+    public void guildGlobeSacPaysTwoDifferentColorsWithGenericCost() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCards("Wastes", 2, p);
+        addCard("Guild Globe", p);
+        Card spell = addCardToZone("Terminate", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        AssertJUnit.assertTrue(canAutoPay(game, p, cost("B R"), sa));
+
+        CardCollection sources = predictedManaSources(game, p, cost("B R"), sa);
+        AssertJUnit.assertTrue("Guild Globe should be a mana source",
+                sources.anyMatch(c -> "Guild Globe".equals(c.getName())));
+        AssertJUnit.assertEquals("Both Wastes should be tapped for Globe's {2}", 2,
+                sources.stream().filter(c -> "Wastes".equals(c.getName())).count());
+
+        AssertJUnit.assertTrue("Production auto-pay should match feasibility",
+                prodAutoPay(game, p, cost("B R"), sa));
+        AssertJUnit.assertEquals("Guild Globe should be sacrificed", 0,
+                countOnBattlefield(game, "Guild Globe"));
+        AssertJUnit.assertEquals(2, countTapped(game, "Wastes"));
+    }
+
     // Cascade Bluffs ({U/R}{T}: Add {U}{U}, {U}{R}, or {R}{R}) with an Island paying its hybrid
     // activation cost can pay {U}{R} on its own.
     @Test
