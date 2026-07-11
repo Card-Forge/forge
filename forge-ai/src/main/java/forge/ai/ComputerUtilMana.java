@@ -583,16 +583,66 @@ public class ComputerUtilMana {
         return fp;
     }
 
+    /** Per-priority cache for outermost {@link #canPayManaCost} dry-runs (see {@link #beginAffordabilityCachePass}). */
+    private static Map<String, Boolean> affordabilityCache = null;
+
+    /**
+     * Start caching {@link #canPayManaCost} results for one AI priority pass. Cleared/replaced on each call;
+     * pair with {@link AiController#chooseSpellAbilityToPlay()}.
+     */
+    public static void beginAffordabilityCachePass() {
+        affordabilityCache = Maps.newHashMap();
+    }
+
+    public static void clearAffordabilityCachePass() {
+        affordabilityCache = null;
+    }
+
+    private static long fingerprintManaPool(final ManaPool pool) {
+        if (pool == null) {
+            return 0;
+        }
+        long fp = pool.totalMana();
+        for (final byte color : ManaAtom.MANATYPES) {
+            fp = fp * 31 + pool.getAmountOfColor(color);
+        }
+        return fp;
+    }
+
+    private static String buildAffordabilityCacheKey(final SpellAbility sa, final Player ai,
+            final ManaCostBeingPaid cost, final int extraMana, final boolean checkPlayable, final boolean effect) {
+        return sa.getId() + "|" + cost + "|" + extraMana + "|" + (checkPlayable ? '1' : '0') + "|"
+                + (effect ? '1' : '0') + "|" + paymentPlanReservationFingerprint(ai) + "|"
+                + fingerprintManaPool(ai.getManaPool());
+    }
+
+    private static boolean canPayManaCostCached(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
+            final int extraMana, final boolean checkPlayable, final boolean effect) {
+        if (affordabilityCache != null && sa != null && ai != null && cost != null) {
+            final String key = buildAffordabilityCacheKey(sa, ai, cost, extraMana, checkPlayable, effect);
+            final Boolean cached = affordabilityCache.get(key);
+            if (cached != null) {
+                return cached;
+            }
+            final boolean result = payManaCost(cost, sa, ai, true, checkPlayable, effect, null,
+                    ManaPaymentContext.outer());
+            affordabilityCache.put(key, result);
+            return result;
+        }
+        return payManaCost(cost, sa, ai, true, checkPlayable, effect, null, ManaPaymentContext.outer());
+    }
+
     public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
         //check copy of cost so it doesn't modify the exist cost being paid
         cost = new ManaCostBeingPaid(cost);
-        return payManaCost(cost, sa, ai, true, true, effect, null, ManaPaymentContext.outer());
+        return canPayManaCostCached(cost, sa, ai, 0, true, effect);
     }
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
         return canPayManaCost(sa.getPayCosts(), sa, ai, extraMana, effect);
     }
     public static boolean canPayManaCost(final Cost cost, final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
-        return payManaCost(cost, sa, ai, true, extraMana, true, effect, ManaPaymentContext.outer());
+        final ManaCostBeingPaid manaCost = calculateManaCost(cost, sa, ai, true, extraMana, effect);
+        return canPayManaCostCached(manaCost, sa, ai, extraMana, true, effect);
     }
 
     public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
