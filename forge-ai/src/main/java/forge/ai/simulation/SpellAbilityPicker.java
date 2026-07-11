@@ -359,6 +359,10 @@ public class SpellAbilityPicker {
             simulator.setInterceptor(choicesIterator);
             // I feel like something here is making a wrong assumption about what the target is
             lastScore = simulator.simulateSpellAbility(sa);
+            final int castBonus = ComputerUtilMana.estimateCastBonusForSpell(sa, player);
+            if (castBonus != 0) {
+                lastScore = new Score(lastScore.value + castBonus, lastScore.summonSickValue + castBonus);
+            }
             numSimulations++;
             if (lastScore.value > bestScore.value) {
                 bestScore = lastScore;

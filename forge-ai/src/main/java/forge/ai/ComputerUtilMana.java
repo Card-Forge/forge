@@ -38,6 +38,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -62,6 +63,12 @@ public class ComputerUtilMana {
     private final static int MANA_RESERVE_HOST_PENALTY = 45;
     /** Index of colorless ({C}) pips in {@link AiDeckStatistics#maxPips} (WUBRGC order). */
     private final static int COLORLESS_PIP_INDEX = 5;
+    /** Prefer a mana source that grants a type-matching cast bonus (Yuna, Dragon Orbs, etc.). */
+    private final static int CAST_BONUS_P1P1_WEIGHT = 35;
+    private final static int CAST_BONUS_DEFAULT_WEIGHT = 25;
+    private final static int CAST_BONUS_COPY_KEYWORD_WEIGHT = 30;
+    /** Light penalty when a cast-bonus source does not match the spell being paid. */
+    private final static int CAST_BONUS_MISMATCH_PENALTY = 15;
 
     /** Per-outer-payment caches shared by nested feasibility probes. */
     static final class CastabilityProbeScratch {
@@ -616,6 +623,10 @@ public class ComputerUtilMana {
     }
 
     private static Integer scoreManaProducingCard(final Card card) {
+        return scoreManaProducingCard(card, null, card.getController());
+    }
+
+    private static Integer scoreManaProducingCard(final Card card, final SpellAbility spellBeingPaid, final Player ai) {
         int score = 0;
 
         int maxManaProduced = 0;
@@ -628,7 +639,7 @@ public class ComputerUtilMana {
                 if (ability.getPayCosts() != null && ability.getPayCosts().hasManaCost()) {
                     hasManaCostAbility = true;
                 }
-                // TODO check TriggersWhenSpent: decrease score depending on context
+                score += castBonusPreferenceAdjustment(ability, spellBeingPaid, ai);
             }
             else if (!ability.isTrigger() && ability.isPossible()) {
                 score += 13; //add 13 for any non-mana activated abilities
@@ -762,6 +773,235 @@ public class ComputerUtilMana {
             return otherA ? 1 : -1;
         }
         return compareDisposableByYield(a, b, remaining);
+    }
+
+    /** Collect SpellCast triggers tied to a mana ability (TriggersWhenSpent or Effect subability). */
+    private static List<Trigger> resolveCastBonusTriggers(final SpellAbility manaAb) {
+        if (manaAb == null || !manaAb.isManaAbility()) {
+            return Collections.emptyList();
+        }
+        final Card host = manaAb.getHostCard();
+        if (host == null) {
+            return Collections.emptyList();
+        }
+        final List<Trigger> result = new ArrayList<>();
+        final AbilityManaPart mp = manaAb.getManaPart();
+        if (mp != null && mp.getTriggersWhenSpent()) {
+            addParsedCastBonusTrigger(result, host, manaAb.getParam("TriggersWhenSpent"), manaAb.isIntrinsic(), true);
+        }
+        for (SpellAbility sub = manaAb.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            if (sub.getApi() != ApiType.Effect) {
+                continue;
+            }
+            if (sub.hasParam("Triggers")) {
+                for (final String trigName : sub.getParam("Triggers").split(",")) {
+                    addParsedCastBonusTrigger(result, host, trigName.trim(), manaAb.isIntrinsic(), false);
+                }
+            }
+        }
+        if (manaAb.hasParam("SubAbility")) {
+            collectCastBonusTriggersFromEffectSVar(result, host, manaAb.getParam("SubAbility"), manaAb.isIntrinsic());
+        }
+        return result;
+    }
+
+    private static void collectCastBonusTriggersFromEffectSVar(final List<Trigger> result, final Card host,
+            final String effectSVarName, final boolean intrinsic) {
+        if (host == null || StringUtils.isBlank(effectSVarName)) {
+            return;
+        }
+        final String effectDef = host.getSVar(effectSVarName);
+        if (StringUtils.isBlank(effectDef)) {
+            return;
+        }
+        for (final String part : TextUtil.split(effectDef, '|')) {
+            final String trimmed = part.trim();
+            if (trimmed.startsWith("Triggers$")) {
+                addParsedCastBonusTrigger(result, host, trimmed.substring("Triggers$".length()).trim(), intrinsic,
+                        false);
+            }
+        }
+    }
+
+    private static void addParsedCastBonusTrigger(final List<Trigger> result, final Card host,
+            final String trigSVarName, final boolean intrinsic, final boolean fromTriggersWhenSpent) {
+        if (StringUtils.isBlank(trigSVarName)) {
+            return;
+        }
+        final String trigDef = host.getSVar(trigSVarName);
+        if (StringUtils.isBlank(trigDef)) {
+            return;
+        }
+        try {
+            final Trigger t = TriggerHandler.parseTrigger(trigDef, host, false, host);
+            if (isCastBonusTrigger(t, fromTriggersWhenSpent)) {
+                result.add(t);
+            }
+        } catch (RuntimeException ex) {
+            // Unparseable trigger script — skip for AI planning.
+        }
+    }
+
+    private static boolean isCastBonusTrigger(final Trigger t, final boolean fromTriggersWhenSpent) {
+        if (t == null || t.getMode() != TriggerType.SpellCast) {
+            return false;
+        }
+        if (fromTriggersWhenSpent) {
+            return true;
+        }
+        return "True".equalsIgnoreCase(t.getParam("OneOff"))
+                || "True".equalsIgnoreCase(t.getParam("ThisTurn"));
+    }
+
+    private static boolean spellMatchesCastBonusTrigger(final SpellAbility spellBeingPaid, final Trigger t,
+            final Player ai) {
+        if (spellBeingPaid == null || t == null || ai == null) {
+            return false;
+        }
+        final Card cast = spellBeingPaid.getHostCard();
+        if (cast == null) {
+            return false;
+        }
+        spellBeingPaid.setActivatingPlayer(ai);
+        if (t.hasParam("ValidActivatingPlayer") && !t.matchesValidParam("ValidActivatingPlayer", ai)) {
+            return false;
+        }
+        if (!t.matchesValidParam("ValidCard", cast)) {
+            return false;
+        }
+        return !t.hasParam("ValidSA") || t.matchesValidParam("ValidSA", spellBeingPaid);
+    }
+
+    private static int estimateCastBonusWeight(final SpellAbility manaAb, final Trigger t) {
+        int counterBonus = parseCounterBonusWeight(manaAb, t);
+        if (counterBonus > 0) {
+            return counterBonus;
+        }
+        final String execute = t.getParam("Execute");
+        if (StringUtils.isNotBlank(execute)) {
+            final Card host = manaAb.getHostCard();
+            if (host != null) {
+                final String executeDef = host.getSVar(execute);
+                if (executeDef != null && (executeDef.contains("Copy") || executeDef.contains("Scry")
+                        || executeDef.contains("Animate") || executeDef.contains("Keyword"))) {
+                    return CAST_BONUS_COPY_KEYWORD_WEIGHT;
+                }
+            }
+        }
+        return CAST_BONUS_DEFAULT_WEIGHT;
+    }
+
+    private static int parseCounterBonusWeight(final SpellAbility manaAb, final Trigger t) {
+        final Card host = manaAb.getHostCard();
+        if (host == null) {
+            return 0;
+        }
+        int maxCounters = findPutCounterAmount(host, t.getParam("Execute"), 0, 4);
+        if (maxCounters <= 0) {
+            return 0;
+        }
+        return maxCounters * CAST_BONUS_P1P1_WEIGHT;
+    }
+
+    private static int findPutCounterAmount(final Card host, final String sVarName, final int depth,
+            final int maxDepth) {
+        if (host == null || StringUtils.isBlank(sVarName) || depth > maxDepth) {
+            return 0;
+        }
+        final String def = host.getSVar(sVarName);
+        if (StringUtils.isBlank(def)) {
+            return 0;
+        }
+        int max = 0;
+        for (final String part : TextUtil.split(def, '|')) {
+            final String trimmed = part.trim();
+            if (trimmed.startsWith("DB$ PutCounter")) {
+                int counterNum = 1;
+                for (final String token : TextUtil.split(trimmed, '|')) {
+                    if (token.startsWith("CounterNum$")) {
+                        try {
+                            counterNum = Integer.parseInt(token.substring("CounterNum$".length()));
+                        } catch (NumberFormatException ignored) {
+                            counterNum = 1;
+                        }
+                    }
+                }
+                max = Math.max(max, counterNum);
+            }
+            for (final String token : trimmed.split("\\s+")) {
+                if (token.startsWith("Execute$") || token.startsWith("ReplacementEffects$")
+                        || token.startsWith("ReplaceWith$") || token.startsWith("SubAbility$")) {
+                    final int idx = token.indexOf('$');
+                    if (idx >= 0 && idx + 1 < token.length()) {
+                        max = Math.max(max, findPutCounterAmount(host, token.substring(idx + 1), depth + 1, maxDepth));
+                    }
+                }
+            }
+        }
+        return max;
+    }
+
+    /** Lower return = prefer this source. Zero = neutral; positive = deprioritize. */
+    private static int castBonusPreferenceAdjustment(final SpellAbility manaAb, final SpellAbility spellBeingPaid,
+            final Player ai) {
+        if (manaAb == null || spellBeingPaid == null || ai == null) {
+            return 0;
+        }
+        final List<Trigger> triggers = resolveCastBonusTriggers(manaAb);
+        if (triggers.isEmpty()) {
+            return 0;
+        }
+        int bestMatch = 0;
+        for (final Trigger t : triggers) {
+            if (spellMatchesCastBonusTrigger(spellBeingPaid, t, ai)) {
+                bestMatch = Math.min(bestMatch, -estimateCastBonusWeight(manaAb, t));
+            }
+        }
+        if (bestMatch < 0) {
+            return bestMatch;
+        }
+        return CAST_BONUS_MISMATCH_PENALTY;
+    }
+
+    /**
+     * Estimated value of available cast-type bonuses when choosing which spell to cast (simulation).
+     * Higher = more reason to cast a matching spell now.
+     */
+    public static int estimateCastBonusForSpell(final SpellAbility spellBeingPaid, final Player ai) {
+        if (spellBeingPaid == null || ai == null) {
+            return 0;
+        }
+        int total = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            for (final SpellAbility ma : c.getManaAbilities()) {
+                ma.setActivatingPlayer(ai);
+                if (!ma.canPlay()) {
+                    continue;
+                }
+                if (ma.getPayCosts() != null && ma.getPayCosts().hasTapCost()
+                        && (c.isTapped() || AiCardMemory.isRememberedCard(ai, c, MemorySet.PAYS_TAP_COST))) {
+                    continue;
+                }
+                final int adj = castBonusPreferenceAdjustment(ma, spellBeingPaid, ai);
+                if (adj < 0) {
+                    total += -adj;
+                }
+            }
+        }
+        return total;
+    }
+
+    private static int compareCastBonusPreference(final ManaAbilitySortContext ctx,
+            final SpellAbility ability1, final SpellAbility ability2) {
+        if (ctx.spellBeingPaid == null) {
+            return 0;
+        }
+        final int adj1 = castBonusPreferenceAdjustment(ability1, ctx.spellBeingPaid, ctx.ai);
+        final int adj2 = castBonusPreferenceAdjustment(ability2, ctx.spellBeingPaid, ctx.ai);
+        if (adj1 != adj2) {
+            return Integer.compare(adj1, adj2);
+        }
+        return 0;
     }
 
     /**
@@ -1041,7 +1281,15 @@ public class ComputerUtilMana {
     }
 
     private static int compareGenericCandidatesForPayment(final SpellAbility a, final SpellAbility b,
-            final GenericColorPreference pref, final int unpaidGeneric) {
+            final GenericColorPreference pref, final int unpaidGeneric, final SpellAbility spellBeingPaid,
+            final Player ai) {
+        if (spellBeingPaid != null && ai != null) {
+            final int bonusCmp = castBonusPreferenceAdjustment(a, spellBeingPaid, ai)
+                    - castBonusPreferenceAdjustment(b, spellBeingPaid, ai);
+            if (bonusCmp != 0) {
+                return bonusCmp;
+            }
+        }
         if (unpaidGeneric >= 2) {
             final boolean multi1 = isMultiManaProducer(a);
             final boolean multi2 = isMultiManaProducer(b);
@@ -1422,9 +1670,10 @@ public class ComputerUtilMana {
             final ManaCostBeingPaid cost, final ManaCostShard toPay, final List<SpellAbility> alternatives,
             final Player ai, final SpellAbility sa, final ManaPaymentContext ctx) {
         int score = consumedCount;
+        final int castBonusAdj = castBonusPreferenceAdjustment(chosen, sa, ai);
         final int remaining = remainingPipsForShard(cost, toPay);
         final AlternativeScanFlags altFlags = AlternativeScanFlags.scan(alternatives, chosen, toPay, remaining);
-        if (isDisposableManaAbility(chosen)) {
+        if (isDisposableManaAbility(chosen) && castBonusAdj >= 0) {
             if (altFlags.hasMultiShardAlt || !disposableIsReasonableForShard(chosen, cost, toPay, alternatives, ai, ctx)) {
                 score += 100;
             }
@@ -1453,6 +1702,9 @@ public class ComputerUtilMana {
         if ((toPay.isGeneric() || toPay == ManaCostShard.X) && producesColoredManaWithoutFilterCost(chosen)
                 && handHasMulticolorManaSpells(ai, sa, ctx) && altFlags.hasAnyMultiAlt) {
             score += 50;
+        }
+        if (castBonusAdj != 0) {
+            score += castBonusAdj;
         }
         return score;
     }
@@ -1951,13 +2203,15 @@ public class ComputerUtilMana {
         final Map<Card, Integer> cardRank;
         final Map<Integer, Set<Card>> hostsByColor;
         final List<Integer> colorsMostCommon;
+        final SpellAbility spellBeingPaid;
         private final Map<SpellAbility, Boolean> consolidatesCache = new IdentityHashMap<>();
         private final Map<SpellAbility, ManaSourceTraits> traitsMap = new IdentityHashMap<>();
 
         ManaAbilitySortContext(final Player ai, final ListMultimap<Integer, SpellAbility> manaAbilityMap,
                 final ManaCostBeingPaid cost, final int unpaidGeneric, final int unpaidColoredShards,
                 final GenericColorPreference genericColorPref, final Map<Card, Integer> manaCardMap,
-                final Map<Card, Integer> cardRank, final List<Integer> colorsMostCommon) {
+                final Map<Card, Integer> cardRank, final List<Integer> colorsMostCommon,
+                final SpellAbility spellBeingPaid) {
             this.ai = ai;
             this.manaAbilityMap = manaAbilityMap;
             this.cost = cost;
@@ -1967,6 +2221,7 @@ public class ComputerUtilMana {
             this.manaCardMap = manaCardMap;
             this.cardRank = cardRank;
             this.colorsMostCommon = colorsMostCommon;
+            this.spellBeingPaid = spellBeingPaid;
             this.hostsByColor = buildHostsByColor(manaAbilityMap);
         }
 
@@ -2001,7 +2256,7 @@ public class ComputerUtilMana {
     private static Map<Card, Integer> buildManaCardRankings(final Player ai,
             final ListMultimap<ManaCostShard, SpellAbility> sourcesForShards,
             final ListMultimap<Integer, SpellAbility> manaAbilityMap, final ManaCostBeingPaid cost,
-            final int unpaidGeneric, final List<Card> orderedCardsOut) {
+            final int unpaidGeneric, final List<Card> orderedCardsOut, final SpellAbility spellBeingPaid) {
         final Map<Card, Integer> manaCardMap = Maps.newHashMap();
         final Map<Card, Set<ManaCostShard>> coloredShardsCovered = Maps.newHashMap();
         final Map<Card, Set<ManaCostShard>> comboShardsCovered = Maps.newHashMap();
@@ -2009,7 +2264,7 @@ public class ComputerUtilMana {
             for (SpellAbility ability : sourcesForShards.get(shard)) {
                 final Card hostCard = ability.getHostCard();
                 if (!manaCardMap.containsKey(hostCard)) {
-                    manaCardMap.put(hostCard, scoreManaProducingCard(hostCard));
+                    manaCardMap.put(hostCard, scoreManaProducingCard(hostCard, spellBeingPaid, ai));
                     orderedCardsOut.add(hostCard);
                 }
                 if (!shard.isGeneric()) {
@@ -2285,6 +2540,10 @@ public class ComputerUtilMana {
 
     private static int compareManaAbilities(final ManaAbilitySortContext ctx, final SpellAbility ability1,
             final SpellAbility ability2, final ManaCostShard shard) {
+        final int castBonusCmp = compareCastBonusPreference(ctx, ability1, ability2);
+        if (castBonusCmp != 0) {
+            return castBonusCmp;
+        }
         final int preOrder = ctx.cardPreOrder(ability1, ability2);
         if (preOrder != 0) {
             return compareDifferentCards(ctx, ability1, ability2, shard);
@@ -2321,7 +2580,7 @@ public class ComputerUtilMana {
         }
         final List<Card> orderedCards = Lists.newArrayList();
         final Map<Card, Integer> manaCardMap = buildManaCardRankings(ai, sourcesForShards, manaAbilityMap, cost,
-                unpaidGeneric, orderedCards);
+                unpaidGeneric, orderedCards, sa);
         orderedCards.sort(Comparator.comparingInt(manaCardMap::get));
         final Map<Card, Integer> cardRank = new HashMap<>();
         for (int i = 0; i < orderedCards.size(); i++) {
@@ -2333,7 +2592,7 @@ public class ComputerUtilMana {
         final GenericColorPreference genericColorPref = genericColorPreference(ai, sa, cost, coloredShardCount,
                 sourcesForShards, paymentCtx);
         final ManaAbilitySortContext ctx = new ManaAbilitySortContext(ai, manaAbilityMap, cost, unpaidGeneric,
-                coloredShardCount, genericColorPref, manaCardMap, cardRank, colorsMostCommon);
+                coloredShardCount, genericColorPref, manaCardMap, cardRank, colorsMostCommon, sa);
 
         for (final ManaCostShard shard : sourcesForShards.keySet()) {
             final List<SpellAbility> newAbilities = new ArrayList<>(sourcesForShards.get(shard));
@@ -2559,7 +2818,11 @@ public class ComputerUtilMana {
         if (toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X) {
             ranked = Lists.newArrayList(valid);
             final GenericColorPreference pref = resolveGenericColorPreference(ai, sa);
-            ranked.sort((a, b) -> compareGenericCandidatesForPayment(a, b, pref, cost.getGenericManaAmount()));
+            ranked.sort((a, b) -> compareGenericCandidatesForPayment(a, b, pref, cost.getGenericManaAmount(), sa, ai));
+        } else if (toPay != null && !toPay.isPhyrexian() && toPay != ManaCostShard.COLORLESS) {
+            ranked = Lists.newArrayList(valid);
+            ranked.sort((a, b) -> castBonusPreferenceAdjustment(a, sa, ai)
+                    - castBonusPreferenceAdjustment(b, sa, ai));
         }
 
         for (final SpellAbility cand : capProbeCandidates(ranked)) {
@@ -2586,9 +2849,12 @@ public class ComputerUtilMana {
             }
             if (impact.efficiencyScore < bestEfficiency
                     || (impact.efficiencyScore == bestEfficiency && best != null
-                            && (toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X)
-                            && compareGenericCandidatesForPayment(cand, best,
-                                    resolveGenericColorPreference(ai, sa), cost.getGenericManaAmount()) < 0)) {
+                            && ((toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X)
+                                    && compareGenericCandidatesForPayment(cand, best,
+                                            resolveGenericColorPreference(ai, sa), cost.getGenericManaAmount(), sa, ai) < 0)
+                            || (toPay != null && !toPay.isGeneric() && toPay != ManaCostShard.X
+                                    && castBonusPreferenceAdjustment(cand, sa, ai)
+                                            < castBonusPreferenceAdjustment(best, sa, ai)))) {
                 bestEfficiency = impact.efficiencyScore;
                 best = cand;
             }
@@ -2717,6 +2983,7 @@ public class ComputerUtilMana {
     static PaymentImpact evaluatePaymentImpact(final ManaCostBeingPaid cost, final SpellAbility sa,
             final Player ai, final ManaCostShard toPay, final SpellAbility chosen,
             final List<SpellAbility> alternatives, final ManaPaymentContext ctx) {
+        refreshExpressChoice(cost, sa, ai, toPay, chosen);
         final Set<Card> consumed = collectCardsConsumedByPayment(chosen, sa, ai, ctx);
         if (consumed == null) {
             return new PaymentImpact(false, Integer.MAX_VALUE, chosen, cost, toPay, alternatives, ai, sa, ctx);
@@ -4271,7 +4538,7 @@ public class ComputerUtilMana {
                 final GenericColorPreference pref = resolveGenericColorPreference(ai, sa);
                 final List<SpellAbility> sorted = Lists.newArrayList(saList);
                 final int unpaidGeneric = cost.getGenericManaAmount();
-                sorted.sort((a, b) -> compareGenericCandidatesForPayment(a, b, pref, unpaidGeneric));
+                sorted.sort((a, b) -> compareGenericCandidatesForPayment(a, b, pref, unpaidGeneric, sa, ai));
                 saList = sorted;
             }
             debugLogMain(test, "  shard " + toPay + " candidates: " + saList, ctx);

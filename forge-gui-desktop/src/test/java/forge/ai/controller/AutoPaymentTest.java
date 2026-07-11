@@ -128,6 +128,46 @@ public class AutoPaymentTest extends SimulationTest {
     }
 
     @Test
+    public void yunaGrandSummonPaysCreatureWithYuna() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card yuna = addCard("Yuna, Grand Summoner", p);
+        yuna.setSickness(false);
+        addCards("Forest", 4, p);
+        Card spell = addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        assertProductionPayment(game, p, cost("1 G"), sa);
+        AssertJUnit.assertEquals(1, countTapped(game, "Yuna, Grand Summoner"));
+        AssertJUnit.assertEquals("A single Forest could pay alone; Yuna should be preferred",
+                1, countTapped(game, "Forest"));
+        AssertJUnit.assertEquals(4, countOnBattlefield(game, "Forest"));
+    }
+
+    @Test
+    public void jadeOrbPrefersOrbForDragon() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Jade Orb of Dragonkind", p);
+        addCard("Forest", p);
+        addCards("Mountain", 4, p);
+        Card spell = addCardToZone("Swift Warkite", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = spell.getFirstSpellAbility();
+        CardCollection sources = predictedManaSources(game, p, cost("4 R G"), sa);
+        AssertJUnit.assertTrue("Jade Orb should pay the {G} for a Dragon",
+                sources.anyMatch(c -> "Jade Orb of Dragonkind".equals(c.getName())));
+    }
+
+    @Test
     public void payWithTreasuresOverPhyrexianAltar() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
