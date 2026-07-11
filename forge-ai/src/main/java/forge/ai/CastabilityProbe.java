@@ -6,6 +6,7 @@ import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
+import forge.game.cost.CostPartMana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -222,7 +223,11 @@ public final class CastabilityProbe {
                 if (isUncastableByTotalManaBudget(candSa, probe.availableManaAfterReservation)) {
                     continue;
                 }
-                final ManaCost mc = candSa.getPayCosts().getCostMana().getMana();
+                final CostPartMana costMana = candSa.getPayCosts().getCostMana();
+                if (costMana == null) {
+                    continue;
+                }
+                final ManaCost mc = costMana.getMana();
                 if (spellRequiresUnavailableColoredShard(mc, probe.unavailableColoredShards)) {
                     continue;
                 }

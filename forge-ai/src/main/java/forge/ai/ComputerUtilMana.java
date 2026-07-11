@@ -777,6 +777,20 @@ public class ComputerUtilMana {
         return score;
     }
 
+    private static Cost payCostsOf(final SpellAbility sa) {
+        return sa == null ? null : sa.getPayCosts();
+    }
+
+    private static boolean hasTapCost(final SpellAbility sa) {
+        final Cost c = payCostsOf(sa);
+        return c != null && c.hasTapCost();
+    }
+
+    private static boolean hasManaCost(final SpellAbility sa) {
+        final Cost c = payCostsOf(sa);
+        return c != null && c.hasManaCost();
+    }
+
     /** True when the host card should only be tapped for mana when no better source exists. */
     private static boolean isManaReserveHost(final Card card) {
         return card != null && card.hasSVar("AIManaReserve")
@@ -1223,7 +1237,7 @@ public class ComputerUtilMana {
         if (AiCardMemory.isRememberedCard(ai, host, MemorySet.PAYS_SAC_COST)) {
             return false;
         }
-        if (ma.getPayCosts().hasTapCost()) {
+        if (hasTapCost(ma)) {
             if (AiCardMemory.isRememberedCard(ai, host, MemorySet.PAYS_TAP_COST) || host.isTapped()) {
                 return false;
             }
@@ -2192,7 +2206,7 @@ public class ComputerUtilMana {
                 if (!isReusableFreeManaForShard(ma, shard)) {
                     continue;
                 }
-                if (ma.getPayCosts().hasTapCost()
+                if (hasTapCost(ma)
                         && AiCardMemory.isRememberedCard(ai, ma.getHostCard(), MemorySet.PAYS_TAP_COST)) {
                     continue;
                 }
@@ -3137,7 +3151,7 @@ public class ComputerUtilMana {
         if (valid.isEmpty()) {
             return null;
         }
-        if (valid.size() == 1 || ctx.inFilterActivationProbe || !CastabilityProbe.shouldUse(sa, test, ctx)
+        if (valid.size() == 1 || (ctx != null && ctx.inFilterActivationProbe) || !CastabilityProbe.shouldUse(sa, test, ctx)
                 || ((ctx == null || !ctx.paymentPromptPreview)
                         && valid.stream().noneMatch(ComputerUtilMana::isConsolidatingCandidate))
                 || !hasOtherHandOrCommandSpells(ai, sa, ctx)) {
@@ -3226,7 +3240,7 @@ public class ComputerUtilMana {
             final ManaPaymentContext ctx) {
         // Nested feasibility probes follow sort order only; stranding / efficiency checks are for the
         // outer spell payment (depth 1) so we don't re-simulate every land on every recursive call.
-        if (ctx.inFilterActivationProbe || ctx.depth > 1) {
+        if (ctx != null && ctx.inFilterActivationProbe || ctx != null && ctx.depth > 1) {
             final SpellAbility first = pickFirstReservedManaChoice(ai, sa, valid);
             return first == null ? null : refreshExpressChoice(cost, sa, ai, toPay, first);
         }
@@ -3441,7 +3455,7 @@ public class ComputerUtilMana {
 
     /** True when the ability has a mana activation cost of its own (filter), so using it taps an extra source. */
     private static boolean hasManaActivationCost(final SpellAbility ma) {
-        return ma.getPayCosts() != null && ma.getPayCosts().hasManaCost();
+        return hasManaCost(ma);
     }
 
     /** True when the cost still has unpaid shards other than a single copy of the one about to be paid. */
@@ -3464,7 +3478,7 @@ public class ComputerUtilMana {
     private static boolean keepsRemainingCostPayableWithConsumed(final ManaCostBeingPaid cost,
             final SpellAbility sa, final Player ai, final ManaCostShard toPay, final SpellAbility chosen,
             final Set<Card> consumed, final ManaPaymentContext ctx) {
-        if (ctx.inFilterActivationProbe) {
+        if (ctx != null && ctx.inFilterActivationProbe) {
             return true;
         }
         final ManaCostBeingPaid remaining = new ManaCostBeingPaid(cost);
@@ -3681,7 +3695,7 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (ma.getPayCosts().hasTapCost() && AiCardMemory.isRememberedCard(ai, ma.getHostCard(), MemorySet.PAYS_TAP_COST)) {
+            if (hasTapCost(ma) && AiCardMemory.isRememberedCard(ai, ma.getHostCard(), MemorySet.PAYS_TAP_COST)) {
                 continue;
             }
             if (AiCardMemory.isRememberedCard(ai, ma.getHostCard(), MemorySet.PAYS_SAC_COST)) {
@@ -3698,7 +3712,7 @@ public class ComputerUtilMana {
                 // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
                 if (saHost.isAura() && "Enchanted".equals(sa.getParam("Defined"))
                         && ma.getHostCard() == saHost.getEnchantingCard()
-                        && ma.getPayCosts().hasTapCost()) {
+                        && hasTapCost(ma)) {
                     continue;
                 }
 
@@ -3712,7 +3726,7 @@ public class ComputerUtilMana {
                 if ((saHost.isInstant() || saHost.isSorcery())
                         && ma.getHostCard().isCreature()
                         && ai.getController().isAI()
-                        && ma.getPayCosts().hasTapCost()
+                        && hasTapCost(ma)
                         && sa.getTargets().getTargetCards().contains(ma.getHostCard())) {
                     // do not activate pump instants/sorceries targeting creatures by tapping targeted
                     // creatures for mana (for example, Servant of the Conduit)
@@ -3947,7 +3961,7 @@ public class ComputerUtilMana {
 
     /** Record tap/sacrifice reservation during test-mode planning so it matches production auto-pay. */
     private static void rememberManaSourceConsumed(final Player ai, final SpellAbility ma) {
-        if (ma.getPayCosts().hasTapCost()) {
+        if (hasTapCost(ma)) {
             AiCardMemory.rememberCard(ai, ma.getHostCard(), MemorySet.PAYS_TAP_COST);
         }
         if (isDisposableManaAbility(ma)) {
@@ -4014,6 +4028,9 @@ public class ComputerUtilMana {
             final SpellAbility sa, final Player ai, final ListMultimap<ManaCostShard, SpellAbility> sourcesForShards,
             final List<Mana> manaSpentToPay, final List<Mana> testDepositedSurplus, final boolean test,
             final boolean effect, final CardCollection outTapped, final ManaPaymentContext ctx) {
+        if (filterAb.getPayCosts() == null) {
+            return true;
+        }
         final CostPartMana costMana = filterAb.getPayCosts().getCostMana();
         if (costMana == null) {
             return true;
@@ -4210,7 +4227,7 @@ public class ComputerUtilMana {
             final List<Mana> manaSpentToPay, final List<Mana> testDepositedSurplus, final boolean test,
             final boolean effect, final ManaPool manapool, final CardCollection planOut,
             final List<SpellAbility> paymentList, final ManaPaymentContext ctx) {
-        if (cost.isPaid() || ctx.inFilterActivationProbe || countUnpaidPips(cost) < 3) {
+        if (cost.isPaid() || (ctx != null && ctx.inFilterActivationProbe) || countUnpaidPips(cost) < 3) {
             return false;
         }
         final List<SpellAbility> combos = new ArrayList<>();
@@ -4220,7 +4237,7 @@ public class ComputerUtilMana {
                 if (ma.getHostCard() != c) {
                     continue;
                 }
-                if (ma.getPayCosts().hasTapCost()
+                if (hasTapCost(ma)
                         && AiCardMemory.isRememberedCard(ai, c, MemorySet.PAYS_TAP_COST)) {
                     continue;
                 }
@@ -4335,17 +4352,17 @@ public class ComputerUtilMana {
             final boolean test, final boolean effect, final CardCollection planOut,
             final List<SpellAbility> paymentList, final ManaPaymentContext ctx) {
         paymentList.add(filterAb);
-        if (filterAb.getPayCosts().hasTapCost()) {
+        if (hasTapCost(filterAb)) {
             AiCardMemory.rememberCard(ai, filterAb.getHostCard(), MemorySet.PAYS_TAP_COST);
         }
-        if (filterAb.getPayCosts() != null && filterAb.getPayCosts().hasManaCost()) {
+        if (hasManaCost(filterAb)) {
             if (test) {
                 final CardCollection nestedTaps = planOut == null ? null : new CardCollection();
                 if (!simulateNestedActivationCost(filterAb, sa, ai,
                         sourcesForShards == null ? ArrayListMultimap.create() : sourcesForShards,
                         manaSpentToPay, testDepositedSurplus, nestedTaps, ctx)) {
                     paymentList.remove(filterAb);
-                    if (filterAb.getPayCosts().hasTapCost()) {
+                    if (hasTapCost(filterAb)) {
                         AiCardMemory.forgetCard(ai, filterAb.getHostCard(), MemorySet.PAYS_TAP_COST);
                     }
                     return false;
@@ -4355,7 +4372,7 @@ public class ComputerUtilMana {
                 }
             } else if (!executeNestedActivationCost(filterAb, sa, ai, sourcesForShards, manaSpentToPay, effect, ctx)) {
                 paymentList.remove(filterAb);
-                if (filterAb.getPayCosts().hasTapCost()) {
+                if (hasTapCost(filterAb)) {
                     AiCardMemory.forgetCard(ai, filterAb.getHostCard(), MemorySet.PAYS_TAP_COST);
                 }
                 return false;
@@ -4363,7 +4380,7 @@ public class ComputerUtilMana {
         }
         if (!bankManaAfterActivation(filterAb, sa, ai, spellCost, testDepositedSurplus, test, effect)) {
             paymentList.remove(filterAb);
-            if (filterAb.getPayCosts().hasTapCost()) {
+            if (hasTapCost(filterAb)) {
                 AiCardMemory.forgetCard(ai, filterAb.getHostCard(), MemorySet.PAYS_TAP_COST);
             }
             return false;
@@ -4493,7 +4510,7 @@ public class ComputerUtilMana {
         restoreMemory(ai, MemorySet.PAYS_TAP_COST, tapSnapshot);
 
         paymentList.add(best);
-        if (best.getPayCosts().hasTapCost()) {
+        if (hasTapCost(best)) {
             AiCardMemory.rememberCard(ai, best.getHostCard(), MemorySet.PAYS_TAP_COST);
         }
         // Verbose trace only; the plan gets the "tap ..." step from applyChosenManaPayment below.
@@ -4502,7 +4519,7 @@ public class ComputerUtilMana {
         if (!applyChosenManaPayment(best, sa, ai, cost, bestShard, sourcesForShards, manaSpentToPay,
                 testDepositedSurplus, test, effect, manapool, planOut, ctx)) {
             paymentList.remove(best);
-            if (best.getPayCosts().hasTapCost()) {
+            if (hasTapCost(best)) {
                 AiCardMemory.forgetCard(ai, best.getHostCard(), MemorySet.PAYS_TAP_COST);
             }
             return false;
@@ -4630,6 +4647,9 @@ public class ComputerUtilMana {
 
     public static String predictManaReplacement(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
         Card hostCard = saPayment.getHostCard();
+        if (hostCard == null) {
+            return "";
+        }
         Game game = hostCard.getGame();
         String manaProduced = toPay.isSnow() && hostCard.isSnow() ? "S" : GameActionUtil.generatedTotalMana(saPayment);
 
@@ -4980,6 +5000,9 @@ public class ComputerUtilMana {
     }
 
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect, final CardCollection planOut, final ManaPaymentContext ctx) {
+        if (ai == null || sa == null || cost == null || ctx == null) {
+            return false;
+        }
         final boolean outermost = ctx.isOutermost();
         List<Mana> manaSpentToPay = null;
         List<Mana> testDepositedSurplus = null;
@@ -5102,6 +5125,9 @@ public class ComputerUtilMana {
             }
 
             toPay = getNextShardToPay(cost, sourcesForShards);
+            if (toPay == null) {
+                break;
+            }
 
             Collection<SpellAbility> saList = null;
             if (hasConverge &&
@@ -5195,13 +5221,14 @@ public class ComputerUtilMana {
             }
 
             paymentList.add(saPayment);
-            if (saPayment.getPayCosts().hasTapCost()) {
+            if (hasTapCost(saPayment)) {
                 AiCardMemory.rememberCard(ai, saPayment.getHostCard(), MemorySet.PAYS_TAP_COST);
             }
 
             if (test) {
                 // Check energy when testing
-                CostPayEnergy energyCost = saPayment.getPayCosts().getCostEnergy();
+                final Cost payCosts = payCostsOf(saPayment);
+                CostPayEnergy energyCost = payCosts != null ? payCosts.getCostEnergy() : null;
                 if (energyCost != null) {
                     testEnergyPool -= Integer.parseInt(energyCost.getAmount());
                     if (testEnergyPool < 0) {
@@ -5213,13 +5240,13 @@ public class ComputerUtilMana {
 
             if (!applyChosenManaPayment(saPayment, sa, ai, cost, toPay, sourcesForShards, manaSpentToPay,
                     testDepositedSurplus, test, effect, manapool, planOut, ctx)) {
-                if (saPayment.getPayCosts().hasManaCost()) {
+                if (hasManaCost(saPayment)) {
                     debugLogResult(test, false, "  reject " + saPayment.getHostCard()
                             + " (nested activation cost unpayable)", ctx);
                 }
                 saExcludeList.add(saPayment);
                 paymentList.remove(saPayment);
-                if (saPayment.getPayCosts().hasTapCost()) {
+                if (hasTapCost(saPayment)) {
                     AiCardMemory.forgetCard(ai, saPayment.getHostCard(), MemorySet.PAYS_TAP_COST);
                 }
                 if (!test) {
@@ -5887,7 +5914,7 @@ public class ComputerUtilMana {
                 if (ma.getHostCard() != c || !isManaActivationConsolidator(ma)) {
                     continue;
                 }
-                if (ma.getPayCosts().hasTapCost()
+                if (hasTapCost(ma)
                         && AiCardMemory.isRememberedCard(ai, c, MemorySet.PAYS_TAP_COST)) {
                     continue;
                 }
@@ -5903,7 +5930,7 @@ public class ComputerUtilMana {
                 if (ma.getHostCard() != c || !isManaActivationConsolidator(ma)) {
                     continue;
                 }
-                if (!(ma.getPayCosts().hasTapCost()
+                if (!(hasTapCost(ma)
                         && AiCardMemory.isRememberedCard(ai, c, MemorySet.PAYS_TAP_COST))) {
                     return true;
                 }
@@ -6051,6 +6078,9 @@ public class ComputerUtilMana {
      */
     public static ManaCostBeingPaid calculateManaCost(final Cost cost, final SpellAbility sa, final Player payer, final boolean test, final int extraMana, final boolean effect) {
         Card host = sa.getHostCard();
+        if (host == null) {
+            return new ManaCostBeingPaid(ManaCost.NO_COST);
+        }
         Zone castFromBackup = null;
         if (test && sa.isSpell() && !host.isInZone(ZoneType.Stack)) {
             castFromBackup = host.getCastFrom();
@@ -6084,7 +6114,8 @@ public class ComputerUtilMana {
                 manaToAdd = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("XAlternative", "X"), sa) * xCounter;
             }
 
-            if (manaToAdd < 1 && payCosts != null && payCosts.getCostMana().getXMin() > 0) {
+            final CostPartMana xCostMana = payCosts != null ? payCosts.getCostMana() : null;
+            if (manaToAdd < 1 && xCostMana != null && xCostMana.getXMin() > 0) {
                 // AI cannot really handle X costs properly but this keeps AI from violating rules
                 manaToAdd = 1;
             }
@@ -6110,14 +6141,17 @@ public class ComputerUtilMana {
         CostAdjustment.adjust(manaCost, sa, payer, null, test, effect);
 
         if ("NumTimes".equals(sa.getParam("Announce"))) { // e.g. the Adversary cycle
-            ManaCost mkCost = sa.getPayCosts().getTotalMana();
-            ManaCost mCost = ManaCost.ZERO;
-            for (int i = 0; i < 10; i++) {
-                mCost = ManaCost.combine(mCost, mkCost);
-                ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
-                if (!canPayManaCost(mcbp, sa, sa.getActivatingPlayer(), true)) {
-                    host.setSVar("NumTimes", "Number$" + i);
-                    break;
+            final Cost announcePayCosts = sa.getPayCosts();
+            if (announcePayCosts != null) {
+                ManaCost mkCost = announcePayCosts.getTotalMana();
+                ManaCost mCost = ManaCost.ZERO;
+                for (int i = 0; i < 10; i++) {
+                    mCost = ManaCost.combine(mCost, mkCost);
+                    ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
+                    if (!canPayManaCost(mcbp, sa, sa.getActivatingPlayer(), true)) {
+                        host.setSVar("NumTimes", "Number$" + i);
+                        break;
+                    }
                 }
             }
         }
@@ -6604,7 +6638,7 @@ public class ComputerUtilMana {
             final Cost cost = a.getPayCosts();
             // Generic ({1}) and hybrid-only ({U/R}) activation costs are supported via nested payment
             // planning. Single-colored, X, and phyrexian activation costs are still excluded.
-            if (cost.hasManaCost() && !hasPlannableManaActivationCost(cost)) {
+            if (cost != null && cost.hasManaCost() && !hasPlannableManaActivationCost(cost)) {
                 continue;
             }
 
@@ -6615,7 +6649,7 @@ public class ComputerUtilMana {
             if (!seen.add(a)) {
                 continue;
             }
-            if (cost.isReusuableResource()) {
+            if (cost == null || cost.isReusuableResource()) {
                 res.add(0, a);
             } else {
                 res.add(a);
