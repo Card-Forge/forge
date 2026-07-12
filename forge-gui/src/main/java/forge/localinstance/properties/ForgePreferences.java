@@ -151,7 +151,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
         UI_DEFAULT_FONT_SIZE("12"),
         UI_CARD_ART_FORMAT("Full"),
-    	UI_SELECT_FROM_CARD_DISPLAYS("true"),
+        UI_SELECT_FROM_CARD_DISPLAYS("true"),
         UI_SWITCH_STATES_DECKVIEW("Switch back on hover"),
         UI_ORDER_HAND("false"),
         UI_HAND_MAX_CARDS_PER_ROW("0"),

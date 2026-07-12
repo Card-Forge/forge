@@ -60,12 +60,11 @@ public class Config {
 
     private Config() {
         String path = resPath();
-        FilenameFilter planesFilter = (file, s) -> (!s.contains(".") && !s.equals(commonDirectoryName));
+        FilenameFilter planesFilter = (file, s) -> !s.contains(".") && !s.equals(commonDirectoryName);
 
         adventures = new File(GuiBase.isAndroid() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list(planesFilter);
         try {
             settingsData = new Json().fromJson(SettingData.class, new FileHandle(ForgeConstants.USER_ADVENTURE_DIR + "settings.json"));
-
         } catch (Exception e) {
             settingsData = new SettingData();
         }
@@ -102,7 +101,6 @@ public class Config {
         if (settingsData.cardTooltipAdjLandscape == null || settingsData.cardTooltipAdjLandscape == 0f)
             settingsData.cardTooltipAdjLandscape = 1f;
 
-
         //prefix = "forge-gui/res/adventure/Shandalar/";
         prefix = getPlanePath(settingsData.plane);
         commonPrefix = resPath() + "/res/adventure/" + commonDirectoryName + "/";
@@ -120,11 +118,9 @@ public class Config {
             e.printStackTrace();
             configData = new ConfigData();
         }
-
     }
 
     private String resPath() {
-
         return GuiBase.isAndroid() ? ForgeConstants.ASSETS_DIR : Files.exists(Paths.get("./res")) ? "./" : Files.exists(Paths.get("./forge-gui/")) ? "./forge-gui/" : "../forge-gui";
     }
 
@@ -215,7 +211,6 @@ public class Config {
         String langFile = fileName + "-" + Lang + ext;
 
         for (int iter = 1; iter <= 2; iter++) {
-
             if (Files.exists(Paths.get(langFile))) {
                 System.out.println("Found!");
                 Cache.put(path, new FileHandle(langFile));
@@ -238,17 +233,14 @@ public class Config {
     }
 
     public String[] colorIdNames() {
-
         return configData.colorIdNames;
     }
 
     public String[] colorIds() {
-
         return configData.colorIds;
     }
 
     public String[] starterEditionNames() {
-
         return configData.starterEditionNames;
     }
 
@@ -403,11 +395,9 @@ public class Config {
     }
 
     public void saveSettings() {
-
         Json json = new Json(JsonWriter.OutputType.json);
         FileHandle handle = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure/settings.json");
         handle.writeString(json.prettyPrint(json.toJson(settingsData, SettingData.class)), false);
-
     }
 
     // --- Folder-backed starter deck support ---
