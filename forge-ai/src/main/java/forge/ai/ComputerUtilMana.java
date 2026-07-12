@@ -935,6 +935,99 @@ public class ComputerUtilMana {
         return tail;
     }
 
+    static SpellAbility getEffectiveManaPartAbility(final SpellAbility sa) {
+        SpellAbility rootMana = getManaPartAbility(sa);
+        if (rootMana == null || rootMana.getConditions() == null || rootMana.metConditions()) {
+            return rootMana;
+        }
+        for (SpellAbility tail = rootMana.getSubAbility(); tail != null; tail = tail.getSubAbility()) {
+            if (tail.getManaPart() != null && tail.getConditions() != null && tail.metConditions()) {
+                return tail;
+            }
+        }
+        return rootMana;
+    }
+
+    static String predictManaForShard(final SpellAbility ma, final Player ai,
+            final ManaCostShard toPay, final SpellAbility paidFor, final ManaCostBeingPaid cost,
+            final Map<String, Integer> xManaCostPaidByColor) {
+        SpellAbility manaSa = getEffectiveManaPartAbility(ma);
+        if (manaSa == null) {
+            return "";
+        }
+
+        AbilityManaPart manaPart = manaSa.getManaPart();
+        if (!"Chosen".equals(manaPart.getOrigProduced())
+                && (!manaPart.isAnyMana() || manaPart.isComboMana())) {
+            return predictManafromSpellAbility(manaSa == getManaPartAbility(ma) ? ma : manaSa, ai, toPay);
+        }
+
+        Card source = ma.getHostCard();
+        byte[] colors = source.hasChosenColor()
+                ? new byte[] { MagicColor.fromName(source.getChosenColor()) } : MagicColor.WUBRG;
+        for (byte color : colors) {
+            if (color == 0 || !ai.getManaPool().canPayForShardWithColor(toPay, color)) {
+                continue;
+            }
+            if (toPay == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(
+                    MagicColor.toShortString(color), xManaCostPaidByColor)) {
+                continue;
+            }
+
+            if (manaPart.isAnyMana()) {
+                manaPart.setExpressChoice(MagicColor.toShortString(color));
+            }
+            String produced = manaPart.isAnyMana() ? predictManafromSpellAbility(manaSa, ai, toPay)
+                    : predictManaWithTemporaryChosenColor(manaSa, ai, toPay, color);
+            for (Mana mana : createVirtualMana(ma, produced, ai)) {
+                if (canPayWithMana(cost, mana, paidFor, ai)) {
+                    manaPart.setExpressChoice(MagicColor.toShortString(color));
+                    return produced;
+                }
+            }
+        }
+        return "";
+    }
+
+    private static String predictManaWithTemporaryChosenColor(final SpellAbility ma, final Player ai,
+            final ManaCostShard toPay, final byte color) {
+        Card source = ma.getHostCard();
+        boolean hadChosenColor = source.hasChosenColor();
+        List<String> oldChosenColors = hadChosenColor ? Lists.newArrayList(source.getChosenColors()) : null;
+        // Chosen-color mana is implemented by reading the source card's chosen colors.
+        source.setChosenColors(Lists.newArrayList(MagicColor.toLongString(color)));
+        try {
+            return predictManafromSpellAbility(ma, ai, toPay);
+        } finally {
+            source.setChosenColors(hadChosenColor ? oldChosenColors : null);
+        }
+    }
+
+    static List<Mana> createVirtualMana(final SpellAbility ma, final String produced, final Player ai) {
+        List<Mana> result = new ArrayList<>();
+        AbilityManaPart manaPart = getEffectiveManaPartAbility(ma).getManaPart();
+        for (String mana : TextUtil.split(produced, ' ')) {
+            if (mana.isEmpty()) {
+                continue;
+            }
+            if (StringUtils.isNumeric(mana)) {
+                for (int i = Integer.parseInt(mana); i > 0; i--) {
+                    result.add(new Mana((byte) ManaAtom.COLORLESS, ma.getHostCard(), manaPart, ai));
+                }
+            } else {
+                result.add(new Mana(ManaAtom.fromName(mana), ma.getHostCard(), manaPart, ai));
+            }
+        }
+        return result;
+    }
+
+    static boolean canPayWithMana(final ManaCostBeingPaid cost, final Mana mana,
+            final SpellAbility paidFor, final Player ai) {
+        return mana.meetsManaRestrictions(paidFor)
+                && paidFor.allowsPayingWithShard(mana.getSourceCard(), mana.getColor())
+                && cost.isNeeded(mana, ai.getManaPool());
+    }
+
     /**
      * Creates a mapping between the required mana shards and the available spell abilities to pay for them
      */
@@ -1057,7 +1150,7 @@ public class ComputerUtilMana {
             return false;
         }
 
-        SpellAbility manaSa = getManaPartAbility(ma);
+        SpellAbility manaSa = getEffectiveManaPartAbility(ma);
         if (manaSa == null) {
             return false;
         }
@@ -1123,7 +1216,7 @@ public class ComputerUtilMana {
         }
 
         if ("Chosen".equals(m.getOrigProduced())) {
-            return !ManaPaymentPlanner.predictManaForShard(ma, ai, toPay, sa, cost, xManaCostPaidByColor).isEmpty();
+            return !predictManaForShard(ma, ai, toPay, sa, cost, xManaCostPaidByColor).isEmpty();
         }
 
         if (m.isAnyMana()) {
