@@ -474,7 +474,7 @@ public class DeckProxy implements InventoryItem {
         return getAllCommanderPreconDecks(null);
     }
     public static Iterable<DeckProxy> getAllCommanderPreconDecks(final Predicate<Deck> filter) {
-        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<>();
         addDecksRecursivelly("Commander Precon", GameType.Commander, result, "", FModel.getDecks().getCommanderPrecons(), filter);
         return result;
     }

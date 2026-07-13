@@ -4376,7 +4376,7 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Avacyn's Memorial'",
+        "cardName": "Avacyn's Memorial",
         "editions": [ "MIC" ]
       },
       {
@@ -23892,7 +23892,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 1,
+    "scale": 3,
     "life": 30,
     "rewards": [
       {
@@ -52695,7 +52695,7 @@
         "type": "item",
         "count": 1,
         "probability": 0.5,
-        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Glove", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -53637,7 +53637,7 @@
         "type": "item",
         "count": 1,
         "probability": 0.5,
-        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Glove", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -54108,7 +54108,7 @@
         "type": "item",
         "count": 1,
         "probability": 0.5,
-        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Glove", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -54511,7 +54511,7 @@
         "type": "item",
         "count": 1,
         "probability": 0.5,
-        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Glove", "Mithril Armor"]
       },
       {
         "type": "deckCard",

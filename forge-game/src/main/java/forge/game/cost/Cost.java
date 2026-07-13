@@ -74,6 +74,9 @@ public class Cost implements Serializable {
         return this.getCostMana() != null;
     }
 
+    public final boolean isFree() {
+        return isOnlyManaCost() && getTotalMana().isZero();
+    }
     public final boolean hasSpecificCostType(Class<? extends CostPart> costType) {
         for (CostPart p : getCostParts()) {
             if (costType.isInstance(p)) {

@@ -86,6 +86,16 @@ public class CardRenderer {
         return FSkinColor.fromRGB(r, g, b);
     }
 
+    /** Outset-only rings so the actionable border on the card edge stays visible underneath. */
+    private static void drawAutoTapGlow(Graphics g, float cx, float cy, float cw, float ch) {
+        final float outer = Utils.scale(3f);
+        final float inner = Utils.scale(1.5f);
+        g.drawRect(BORDER_THICKNESS, FSkinColor.alphaColor(Color.YELLOW, 0.30f),
+                cx - outer, cy - outer, cw + outer * 2, ch + outer * 2);
+        g.drawRect(BORDER_THICKNESS, FSkinColor.alphaColor(Color.YELLOW, 0.55f),
+                cx - inner, cy - inner, cw + inner * 2, ch + inner * 2);
+    }
+
     // class that simplifies the callback logic of CachedCardImage
     static class RendererCachedCardImage extends CachedCardImage {
         boolean clearcardArtCache = false;
@@ -833,9 +843,15 @@ public class CardRenderer {
         //Magenta outline when card is chosen
         if (MatchController.instance.isHighlighted(card)) {
             g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
-        } else if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
-                && MatchController.instance.isWeaklySelectable(card)) {
-            g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);
+        } else {
+            if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
+                    && MatchController.instance.isWeaklySelectable(card)) {
+                g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);
+            }
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_AUTOTAP_PREVIEW)
+                    && MatchController.instance.getWeakSelectableStrength(card) >= 2) {
+                drawAutoTapGlow(g, cx, cy, cw, ch);
+            }
         }
         //Ability Icons
         if (unselectable) {

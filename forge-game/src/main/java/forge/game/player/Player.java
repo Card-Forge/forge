@@ -2766,6 +2766,31 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
+    /**
+     * Wires this player's field-managed effect cards (keyword, monarch,
+     * initiative, blessing, contraption sprocket, radiation, speed) to their
+     * already-copied counterparts on a snapshot player, the same way
+     * copyCommandersToSnapshot wires commanderEffect. Without this, the
+     * snapshot's lazy getters re-create the effect card on next use while the
+     * copied original sits orphaned in the command zone (visible as duplicate
+     * "Keyword Effects" cards that compound with each copy generation).
+     */
+    public void copyEffectCardsToSnapshot(Player toPlayer, Function<Card, Card> mapper) {
+        toPlayer.keywordEffect = mapEffectCard(keywordEffect, mapper);
+        toPlayer.monarchEffect = mapEffectCard(monarchEffect, mapper);
+        toPlayer.initiativeEffect = mapEffectCard(initiativeEffect, mapper);
+        toPlayer.blessingEffect = mapEffectCard(blessingEffect, mapper);
+        toPlayer.contraptionSprocketEffect = mapEffectCard(contraptionSprocketEffect, mapper);
+        toPlayer.radiationEffect = mapEffectCard(radiationEffect, mapper);
+        toPlayer.speedEffect = mapEffectCard(speedEffect, mapper);
+    }
+
+    private static Card mapEffectCard(Card effect, Function<Card, Card> mapper) {
+        // An effect card in no zone was not part of the copy; leave the
+        // snapshot's field unset so its lazy creation path stays consistent.
+        return effect == null || effect.getZone() == null ? null : mapper.apply(effect);
+    }
+
     public void addCommander(Card commander) {
         assert(this.equals(commander.getOwner())); //Making someone else's card your commander isn't currently supported.
         if(this.commanders.contains(commander))

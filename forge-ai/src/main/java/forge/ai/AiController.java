@@ -787,17 +787,20 @@ public class AiController {
         }
 
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, player, true, 0, false);
-        CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
+        CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player, false);
 
-        if (manaSources.isEmpty()) {
+        if (manaSources == null || manaSources.isEmpty()) {
             return false;
         }
 
         // used for chained spells where two spells need to be cast in succession
         if (exceptForThisSa != null) {
-            manaSources.removeAll(ComputerUtilMana.getManaSourcesToPayCost(
+            CardCollection exceptSources = ComputerUtilMana.getManaSourcesToPayCost(
                     ComputerUtilMana.calculateManaCost(exceptForThisSa.getPayCosts(), exceptForThisSa, player, true, 0, false),
-                    exceptForThisSa, player));
+                    exceptForThisSa, player, false);
+            if (exceptSources != null) {
+                manaSources.removeAll(exceptSources);
+            }
         }
 
         // This is a simplification, since one mana source can produce more than one mana,
@@ -1132,6 +1135,7 @@ public class AiController {
             }
             if (prefCard == null) {
                 prefCard = ComputerUtil.getCardPreference(player, sourceCard, "DiscardCost", validCards);
+                // TODO use DiscardMe:0 instead so each card without is just treated as 1
                 if (prefCard != null && prefCard.hasSVar("DoNotDiscardIfAble")) {
                     prefCard = null;
                 }

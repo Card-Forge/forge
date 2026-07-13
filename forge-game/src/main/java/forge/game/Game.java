@@ -550,6 +550,16 @@ public class Game {
         this.timestamp = timestamp;
     }
 
+    /**
+     * Snapshot support: aligns this game's fresh-card-id counters with the
+     * source game's, so a copy that preserves original card ids can never
+     * collide with ids handed out for cards created after the copy.
+     */
+    public void dangerouslySyncCardIdCounters(Game from) {
+        this.cardIdCounter = from.cardIdCounter;
+        this.hiddenCardIdCounter = from.hiddenCardIdCounter;
+    }
+
     public final GameOutcome getOutcome() {
         return outcome;
     }
