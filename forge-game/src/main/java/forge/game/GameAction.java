@@ -1858,8 +1858,10 @@ public class GameAction {
             // N +1/+1 and N -1/-1 counters are removed from it, where N is the
             // smaller of the number of +1/+1 and -1/-1 counters on it.
             // This should fire remove counters trigger
-            c.subtractCounter(p1p1, remove, null);
-            c.subtractCounter(m1m1, remove, null);
+            GameEntityCounterTable sbaTable = new GameEntityCounterTable();
+            c.subtractCounter(p1p1, remove, null, sbaTable);
+            c.subtractCounter(m1m1, remove, null, sbaTable);
+            sbaTable.replaceRemoveCounterEffect(c.getGame(), null);
             checkAgain = true;
         }
         return checkAgain;
