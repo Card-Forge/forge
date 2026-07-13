@@ -2812,4 +2812,45 @@ public class GameSimulationTest extends SimulationTest {
         return true;  // All words appear exactly once
     }
 
+    @Test
+    public void testCounterAddedAllTriggerRespectsCounterType() {
+        // Cloaked Cadet: Whenever one or more +1/+1 counters are put on one or more
+        // Humans you control, draw a card.
+        String cadetName = "Cloaked Cadet";
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Card cadet = addCard(cadetName, p);
+        addCard("Swamp", p);
+        addCard("Forest", p);
+        addCardToZone("Runeclaw Bear", p, ZoneType.Library);
+        addCardToZone("Runeclaw Bear", p, ZoneType.Library);
+        Card woundCard = addCardToZone("Virulent Wound", p, ZoneType.Hand);
+        Card growthCard = addCardToZone("Battlegrowth", p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        int handSize = p.getCardsIn(ZoneType.Hand).size();
+
+        // a -1/-1 counter on a Human must not fire the +1/+1 counter trigger
+        SpellAbility woundSA = woundCard.getFirstSpellAbility();
+        woundSA.setActivatingPlayer(p);
+        woundSA.getTargets().add(cadet);
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(woundSA);
+        Game simGame = sim.getSimulatedGameState();
+        AssertJUnit.assertEquals(1, findCardWithName(simGame, cadetName).getCounters(CounterEnumType.M1M1));
+        AssertJUnit.assertEquals(handSize - 1, simGame.getPlayers().get(1).getCardsIn(ZoneType.Hand).size());
+
+        // a +1/+1 counter fires it: one card cast from hand, one drawn
+        SpellAbility growthSA = growthCard.getFirstSpellAbility();
+        growthSA.setActivatingPlayer(p);
+        growthSA.getTargets().add(cadet);
+        sim = createSimulator(game, p);
+        sim.simulateSpellAbility(growthSA);
+        simGame = sim.getSimulatedGameState();
+        AssertJUnit.assertEquals(1, findCardWithName(simGame, cadetName).getCounters(CounterEnumType.P1P1));
+        AssertJUnit.assertEquals(handSize, simGame.getPlayers().get(1).getCardsIn(ZoneType.Hand).size());
+    }
+
 }
