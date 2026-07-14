@@ -31,17 +31,17 @@ jobs:
       # only compiles/transforms — nothing is signed or installed.
       APP_ID: forge.ios.ci
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
 
       - name: Cache pipeline tool jars
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: tmp/jvmdg/tools
           key: jvmdg-tools-${{ hashFiles('forge-gui-ios/pipeline/ios-pipeline.sh') }}
@@ -51,7 +51,7 @@ jobs:
 
       - name: Upload transform reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ios-audit-reports
           path: |

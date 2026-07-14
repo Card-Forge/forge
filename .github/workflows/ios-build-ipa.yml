@@ -25,23 +25,23 @@ jobs:
     env:
       APP_ID: ${{ github.event.inputs.bundle_id || 'forge.cardforge.ios' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
 
       - name: Cache pipeline tool jars
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: tmp/jvmdg/tools
           key: jvmdg-tools-${{ hashFiles('forge-gui-ios/pipeline/ios-pipeline.sh') }}
 
       - name: Cache RoboVM SDK + AOT cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.robovm
@@ -53,7 +53,7 @@ jobs:
         run: SKIP_CACHE_CLEAR=1 bash forge-gui-ios/pipeline/ios-pipeline.sh ipa
 
       - name: Upload IPA artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: forge-ios-unsigned-ipa
           path: forge-gui-ios/target/robovm/*.ipa
@@ -61,7 +61,7 @@ jobs:
 
       - name: Upload build reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ios-build-reports
           path: |
