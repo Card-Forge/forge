@@ -1,0 +1,8 @@
+Name:Crystalline Entity
+ManaCost:8
+Types:Artifact Creature Elemental
+PT:7/7
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCastByYou | Destination$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ When this creature enters, if you cast it, destroy all nonartifact creatures.
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonArtifact
+Oracle:Flying\hWhen this creature enters, if you cast it, destroy all nonartifact creatures.
