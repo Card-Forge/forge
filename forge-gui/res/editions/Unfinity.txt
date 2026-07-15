@@ -663,3 +663,6 @@ F538 R Water Gun Balloon Game @Ralph Horsley
 11 c_a_food_sac @Chuck Lukacs
 12 c_a_treasure_sac @Ben Maier
 13 c_a_treasure_sac @Michael Phillippi
+
+[CreatureTypes]
+Teddy:Teddies
