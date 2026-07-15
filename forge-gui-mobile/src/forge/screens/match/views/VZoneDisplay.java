@@ -4,6 +4,8 @@ import java.util.List;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.game.DanDanViewZones;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -28,7 +30,8 @@ public class VZoneDisplay extends VCardDisplayArea {
 
     @Override
     public void update() {
-        FCollectionView<CardView> cards = player.getCards(zoneType);
+        final GameView gv = MatchController.instance.getGameView();
+        final FCollectionView<CardView> cards = DanDanViewZones.cardsForZoneDisplay(gv, player, zoneType);
         refreshCardPanels(MatchController.instance.isNetGame() ? cards.threadSafeIterable() : cards);
     }
 

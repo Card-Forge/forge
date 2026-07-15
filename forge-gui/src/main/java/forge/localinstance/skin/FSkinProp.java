@@ -464,6 +464,13 @@ public enum FSkinProp {
     IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}, PropType.ICON),
     IMG_BTN_START_OVER      (new int[] {480, 280, 160, 80}, PropType.ICON),
     IMG_BTN_START_DOWN      (new int[] {480, 360, 160, 80}, PropType.ICON),
+    /**
+     * Lobby preferences: same SkinnedButton treatment as start. Coordinates match the start strip so
+     * existing skins render correctly; skins may point these at dedicated prefs artwork when available.
+     */
+    IMG_BTN_PREFERENCES_UP   (new int[] {480, 200, 160, 80}, PropType.ICON),
+    IMG_BTN_PREFERENCES_OVER (new int[] {480, 280, 160, 80}, PropType.ICON),
+    IMG_BTN_PREFERENCES_DOWN (new int[] {480, 360, 160, 80}, PropType.ICON),
     IMG_BTN_UP_LEFT         (new int[] {80, 0, 40, 40}, PropType.ICON),
     IMG_BTN_UP_CENTER       (new int[] {120, 0, 1, 40}, PropType.ICON),
     IMG_BTN_UP_RIGHT        (new int[] {160, 0, 40, 40}, PropType.ICON),

@@ -51,8 +51,14 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
         FAbsolutePositioner.SINGLETON_INSTANCE.hideAll();
         id0.getDoc().populate();
         id0.getDoc().getLayoutControl().update();
-        lblSelected = VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(id0);
-        lblSelected.setSelected(true);
+        LblMenuItem next = VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(id0);
+        if (next == null) {
+            next = VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(EDocID.HOME_CONSTRUCTED);
+        }
+        lblSelected = next;
+        if (lblSelected != null) {
+            lblSelected.setSelected(true);
+        }
 
         prefs.setPref(FPref.SUBMENU_CURRENTMENU, id0.toString());
         prefs.save();

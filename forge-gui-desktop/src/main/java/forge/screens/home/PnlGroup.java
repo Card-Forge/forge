@@ -36,6 +36,10 @@ public class PnlGroup extends SkinnedPanel {
     @Override
     public void paintComponent(Graphics g) {
         final JLabel lbl = CHomeUI.SINGLETON_INSTANCE.getLblSelected();
+        if (lbl == null) {
+            super.paintComponent(g);
+            return;
+        }
         int yTop = (lbl.getY() + lbl.getParent().getY());
 
         //super.paintComponent(g);

@@ -29,6 +29,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     private String name;
     private transient String directory;
     private String comment = null;
+    private DeckFormat deckFormat = DeckFormat.Constructed;
 
     /**
      * Instantiates a new deck base.
@@ -115,6 +116,14 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
         return comment;
     }
 
+    public DeckFormat getDeckFormat() {
+        return deckFormat;
+    }
+
+    public void setDeckFormat(final DeckFormat deckFormat0) {
+        deckFormat = deckFormat0 == null ? DeckFormat.Constructed : deckFormat0;
+    }
+
     /**
      * New instance.
      *
@@ -131,6 +140,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     protected void cloneFieldsTo(final DeckBase clone) {
         clone.directory = directory;
         clone.comment = comment;
+        clone.deckFormat = deckFormat;
     }
 
     /**

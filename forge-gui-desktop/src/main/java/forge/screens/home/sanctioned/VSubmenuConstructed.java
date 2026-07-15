@@ -3,6 +3,7 @@ package forge.screens.home.sanctioned;
 import javax.swing.JPanel;
 
 import forge.deckchooser.FDeckChooser;
+import forge.game.GameType;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LocalLobby;
 import forge.gui.framework.DragCell;
@@ -29,13 +30,15 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab(localizer.getMessage("lblConstructedMode"));
     private final GameLobby lobby = new LocalLobby();
-    private final VLobby vLobby = new VLobby(lobby);
+    private final VLobby vLobby = new VLobby(lobby, VLobby.LobbyChrome.DANDAN_ONLY);
     VSubmenuConstructed() {
         lobby.setListener(vLobby);
 
         vLobby.setPlayerChangeListener(lobby::applyToSlot);
-
+        // Build player panels before applyVariant: populate() can synchronously fire selectMainDeck,
+        // which must not index past playerPanels.size() while panels are still being added.
         vLobby.update(false);
+        lobby.applyVariant(GameType.DanDan);
     }
 
     public VLobby getLobby() {

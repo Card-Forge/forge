@@ -21,6 +21,10 @@ import java.util.Set;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
+/**
+ * Heuristic board evaluator used during AI simulation. Weight coefficients are selected via
+ * {@link GameStateEvalWeights} (process-wide; configure before starting matches when comparing batches).
+ */
 public class GameStateEvaluator {
     private boolean debugging = false;
     private SimulationCreatureEvaluator eval = new SimulationCreatureEvaluator();
@@ -108,15 +112,16 @@ public class GameStateEvaluator {
         }
         debugPrint("My cards in hand: " + myCards);
         debugPrint("Their cards in hand: " + theirCards);
+        final GameStateEvalWeights w = GameStateEvalWeights.current();
         if (!aiPlayer.isUnlimitedHandSize() && myCards > aiPlayer.getMaxHandSize()) {
             // Count excess cards for less.
-            score += myCards - aiPlayer.getMaxHandSize();
+            score += w.getExcessHandPenaltyPerCard() * (myCards - aiPlayer.getMaxHandSize());
             myCards = aiPlayer.getMaxHandSize();
         }
         // TODO weight cards in hand more if opponent has discard or if we have looting or can bluff a trick
-        score += 5 * myCards - 4 * theirCards;
+        score += w.getHandMyCoefficient() * myCards - w.getHandTheirCoefficient() * theirCards;
         debugPrint("  My life: " + aiPlayer.getLife());
-        score += 2 * aiPlayer.getLife();
+        score += w.getLifeMyCoefficient() * aiPlayer.getLife();
         int opponentIndex = 1;
         int opponentLife = 0;
         for (Player opponent : aiPlayer.getOpponents()) {
@@ -124,7 +129,7 @@ public class GameStateEvaluator {
             opponentLife += opponent.getLife();
             opponentIndex++;
         }
-        score -= 2* opponentLife / (game.getPlayers().size() - 1);
+        score -= w.getLifeOppCoefficient() * opponentLife / (game.getPlayers().size() - 1);
 
         // evaluate mana base quality
         score += evalManaBase(game, aiPlayer, AiDeckStatistics.fromPlayer(aiPlayer));
@@ -163,6 +168,19 @@ public class GameStateEvaluator {
             }
         }
 
+        if (DanDanEvalSupport.applies(game)) {
+            final Card top = DanDanEvalSupport.sharedLibraryTop(game);
+            if (top != null) {
+                final int raw = evalCard(game, aiPlayer, top);
+                final Player recipient = DanDanEvalSupport.nextLibraryDrawRecipient(game);
+                final int sign = recipient == aiPlayer ? 1 : -1;
+                final int dandanTerm = sign * w.getDanDanSharedTopCoefficient() * raw;
+                debugPrint("  DanDan shared top: " + cardToString(top) + " raw=" + raw + " recipient="
+                        + recipient.getName() + " term=" + dandanTerm);
+                score += dandanTerm;
+            }
+        }
+
         debugPrint("Score = " + score);
         return new Score(score, summonSickScore);
     }
@@ -194,17 +212,18 @@ public class GameStateEvaluator {
             max_total += max_produced;
         }
 
+        final GameStateEvalWeights w = GameStateEvalWeights.current();
         // Compare against the maximums in the deck and in the hand
         // TODO check number of castable cards in hand
         for (int i = 0; i < counts.length; i++) {
             // for each color pip, add 100
-            value += Math.min(counts[i], statistics.maxPips[i]) * 100;
+            value += Math.min(counts[i], statistics.maxPips[i]) * w.getManaColorPipUnit();
         }
         // value for being able to cast all the cards in your deck
-        value += min(max_total, statistics.maxCost) * 100;
+        value += min(max_total, statistics.maxCost) * w.getManaMaxCostUnit();
 
         // excess mana is valued less than getting enough to use everything
-        value += max(0, max_total - statistics.maxCost) * 5;
+        value += max(0, max_total - statistics.maxCost) * w.getManaExcessUnit();
 
         return value;
     }

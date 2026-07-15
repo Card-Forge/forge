@@ -262,17 +262,37 @@ public class FScreen {
     }
 
     public FileLocation getLayoutFile() {
+        if (isMatch && controller instanceof CMatchUI) {
+            return ((CMatchUI) controller).getActiveMatchLayoutFile();
+        }
         return layoutFile;
     }
 
     public boolean deleteLayoutFile() {
-        if (layoutFile == null) { return false; }
-        return deleteLayoutFile(layoutFile);
+        final FileLocation file = getLayoutFile();
+        if (file == null) { return false; }
+        return deleteUserPrefLayoutFile(file);
     }
     public static boolean deleteMatchLayoutFile() {
-        return deleteLayoutFile(ForgeConstants.MATCH_LAYOUT_FILE);
+        boolean anyRemoved = false;
+        anyRemoved |= deleteUserPrefLayoutFileIfPresent(ForgeConstants.MATCH_LAYOUT_FILE);
+        anyRemoved |= deleteUserPrefLayoutFileIfPresent(ForgeConstants.MATCH_DANDAN_LAYOUT_FILE);
+        return anyRemoved;
     }
-    private static boolean deleteLayoutFile(final FileLocation file) {
+    private static boolean deleteUserPrefLayoutFileIfPresent(final FileLocation file) {
+        try {
+            final File f = new File(file.userPrefLoc);
+            if (!f.exists()) {
+                return false;
+            }
+            return f.delete();
+        } catch (final Exception e) {
+            e.printStackTrace();
+            FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("txerrFailedtodeletelayoutfile"));
+        }
+        return false;
+    }
+    private static boolean deleteUserPrefLayoutFile(final FileLocation file) {
         try {
             final File f = new File(file.userPrefLoc);
             f.delete();

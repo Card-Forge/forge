@@ -9,6 +9,7 @@ import javax.swing.DefaultComboBoxModel;
 import com.google.common.collect.Lists;
 
 import forge.deck.DeckType;
+import forge.game.GameType;
 import forge.gui.MouseUtil;
 import forge.toolbox.FComboBox.TextAlignment;
 import forge.toolbox.FComboBoxWrapper;
@@ -24,10 +25,12 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
         addActionListener(getDeckTypeComboListener());
     }
 
-    public void refresh(final DeckType deckType, final boolean isForCommander) {
-        if(isForCommander){
+    public void refresh(final DeckType deckType, final GameType gameType) {
+        if (gameType.getDeckFormat().hasCommander()) {
             setModel(new DefaultComboBoxModel<>(DeckType.CommanderOptions));
-        }else {
+        } else if (gameType == GameType.DanDan) {
+            setModel(new DefaultComboBoxModel<>(DeckType.DanDanOptions));
+        } else {
             setModel(new DefaultComboBoxModel<>(DeckType.ConstructedOptions));
         }
         setSelectedItem(deckType);

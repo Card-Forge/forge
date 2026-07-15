@@ -20,6 +20,7 @@ package forge.view;
 import forge.GuiDesktop;
 import forge.Singletons;
 import forge.error.ExceptionHandler;
+import forge.gui.GameStateEvalVariantBootstrap;
 import forge.gui.GuiBase;
 import forge.gui.card.CardReaderExperiments;
 import forge.util.BuildInfo;
@@ -62,6 +63,7 @@ public final class Main {
 
         // Start splash screen first, then data models, then controller.
         if (args.length == 0) {
+            GameStateEvalVariantBootstrap.apply();
             Singletons.initializeOnce(true);
 
             // Controller can now step in and take over.
