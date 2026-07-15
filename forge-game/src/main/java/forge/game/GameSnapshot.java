@@ -223,7 +223,7 @@ public class GameSnapshot {
         Map<Integer, SpellAbilityStackInstance> stackIds = new HashMap<>();
         for (SpellAbilityStackInstance toEntry : toGame.getStack()) {
             stackIds.put(toEntry.getId(), toEntry);
-            copiedSpells.put(toEntry.getSpellAbility().getId(), toEntry.getSpellAbility());
+            mapCopiedSpellAbilities(toEntry.getSpellAbility(), toEntry.getSpellAbility(), copiedSpells);
         }
 
         for (Iterator<SpellAbilityStackInstance> it = fromGame.getStack().reverseIterator(); it.hasNext(); ) {
@@ -260,32 +260,43 @@ public class GameSnapshot {
             // Is the SA on the stack?
             if (newSa != null) {
                 newSa.setActivatingPlayer(findBy(toGame, origSa.getActivatingPlayer()));
-                if (origSa.usesTargeting()) {
-                    for (GameObject o : origSa.getTargets()) {
-                        if (o instanceof Card) {
-                            newSa.getTargets().add(findBy(toGame, (Card) o));
-                        } else if (o instanceof Player) {
-                            newSa.getTargets().add(findBy(toGame, (Player) o));
-                        } else if (o instanceof SpellAbility targetSa) {
-                            SpellAbility copiedTargetSa = copiedSpells.get(targetSa.getId());
-                            if (copiedTargetSa != null) {
-                                newSa.getTargets().add(copiedTargetSa);
-                            } else {
-                                SpellAbilityStackInstance targetInstance = toGame.getStack().getInstanceMatchingSpellAbilityID(targetSa);
-                                if (targetInstance != null) {
-                                    newSa.getTargets().add(targetInstance.getSpellAbility());
-                                } else {
-                                    System.out.println("Failed to restore target " + o + " for " + origSa);
-                                }
-                            }
-                        } else {
-                            System.out.println("Failed to restore target " + o + " for " + origSa);
-                        }
-                    }
-                }
+                copyTargets(origSa, newSa, toGame, copiedSpells);
                 toGame.getStack().add(newSa, id);
-                copiedSpells.put(origSa.getId(), newSa);
+                mapCopiedSpellAbilities(origSa, newSa, copiedSpells);
             }
+        }
+    }
+
+    private void copyTargets(SpellAbility origSa, SpellAbility newSa, Game toGame, Map<Integer, SpellAbility> copiedSpells) {
+        if (origSa.usesTargeting()) {
+            for (GameObject target : origSa.getTargets()) {
+                if (target instanceof Card card) {
+                    newSa.getTargets().add(findBy(toGame, card));
+                } else if (target instanceof Player player) {
+                    newSa.getTargets().add(findBy(toGame, player));
+                } else if (target instanceof SpellAbility targetSa) {
+                    SpellAbility copiedTargetSa = copiedSpells.get(targetSa.getId());
+                    if (copiedTargetSa != null) {
+                        newSa.getTargets().add(copiedTargetSa);
+                    } else {
+                        System.out.println("Failed to restore target " + target + " for " + origSa);
+                    }
+                } else {
+                    System.out.println("Failed to restore target " + target + " for " + origSa);
+                }
+            }
+        }
+
+        if (origSa.getSubAbility() != null && newSa.getSubAbility() != null) {
+            copyTargets(origSa.getSubAbility(), newSa.getSubAbility(), toGame, copiedSpells);
+        }
+    }
+
+    private static void mapCopiedSpellAbilities(SpellAbility origSa, SpellAbility newSa,
+            Map<Integer, SpellAbility> copiedSpells) {
+        copiedSpells.put(origSa.getId(), newSa);
+        if (origSa.getSubAbility() != null && newSa.getSubAbility() != null) {
+            mapCopiedSpellAbilities(origSa.getSubAbility(), newSa.getSubAbility(), copiedSpells);
         }
     }
 

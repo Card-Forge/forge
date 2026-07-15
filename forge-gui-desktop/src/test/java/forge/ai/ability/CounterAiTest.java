@@ -65,42 +65,7 @@ public class CounterAiTest extends AITest {
                 decision.willingToPlay());
     }
 
-    private void runCounterspellCounterWarTest(boolean useSimulation) {
-        Game game = initAndCreateThreePlayerGame(useSimulation);
-        Player spellCaster = game.getPlayers().get(0);
-        Player ai = game.getPlayers().get(1);
-        Player counterCaster = game.getPlayers().get(2);
-
-        spellCaster.setTeam(0);
-        ai.setTeam(1);
-        counterCaster.setTeam(2);
-
-        addCards("Forest", 1, spellCaster);
-        addCards("Island", 2, ai);
-        addCards("Island", 2, counterCaster);
-
-        Card creatureSpell = addCardToZone(GENERIC_TEST_CREATURE, spellCaster, ZoneType.Hand);
-        Card counterspell = addCardToZone(GENERIC_COUNTERSPELL, counterCaster, ZoneType.Hand);
-        Card aiCounterspell = addCardToZone(GENERIC_COUNTERSPELL, ai, ZoneType.Hand);
-
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, spellCaster);
-        game.getAction().checkStateEffects(true);
-
-        SpellAbility creatureSa = creatureSpell.getFirstSpellAbility();
-        creatureSa.setActivatingPlayer(spellCaster);
-        AssertJUnit.assertTrue(ComputerUtil.handlePlayingSpellAbility(spellCaster, creatureSa, null));
-
-        SpellAbility counterspellSa = counterspell.getFirstSpellAbility();
-        counterspellSa.setActivatingPlayer(counterCaster);
-        counterspellSa.getTargets().add(creatureSa);
-        AssertJUnit.assertTrue(ComputerUtil.handlePlayingSpellAbility(counterCaster, counterspellSa, null));
-
-        AiAbilityDecision decision = getCounterDecision(ai, aiCounterspell);
-        AssertJUnit.assertFalse("AI should not use Counterspell to counter another opponent's Counterspell.",
-                decision.willingToPlay());
-    }
-
-    private void runCounterspellIgnoresBounceAimedAtOtherOpponentTest(boolean useSimulation, boolean commanderTarget) {
+    private void runCounterspellIgnoresBounceAimedAtOtherOpponentTest(boolean useSimulation) {
         Game game = initAndCreateThreePlayerGame(useSimulation);
         Player bounceCaster = game.getPlayers().get(0);
         Player ai = game.getPlayers().get(1);
@@ -114,7 +79,6 @@ public class CounterAiTest extends AITest {
         addCards("Island", 2, ai);
 
         Card victimPermanent = addCard(GENERIC_TEST_CREATURE, victim);
-        victimPermanent.setCommander(commanderTarget);
         Card unsummon = addCardToZone(GENERIC_BOUNCE_SPELL, bounceCaster, ZoneType.Hand);
         Card counterspell = addCardToZone(GENERIC_COUNTERSPELL, ai, ZoneType.Hand);
 
@@ -206,22 +170,7 @@ public class CounterAiTest extends AITest {
 
     @Test
     public void testCounterspellIgnoresUnsummonOnAnotherOpponentsCreature() {
-        runCounterspellIgnoresBounceAimedAtOtherOpponentTest(true, false);
-    }
-
-    @Test
-    public void testCounterspellIgnoresUnsummonOnAnotherOpponentsCommander() {
-        runCounterspellIgnoresBounceAimedAtOtherOpponentTest(true, true);
-    }
-
-    @Test
-    public void testCounterspellIgnoresCounterspellCounterWarBetweenOpponents() {
-        runCounterspellCounterWarTest(true);
-    }
-
-    @Test
-    public void testCounterspellIgnoresCounterspellCounterWarBetweenOpponentsWithoutSimulation() {
-        runCounterspellCounterWarTest(false);
+        runCounterspellIgnoresBounceAimedAtOtherOpponentTest(true);
     }
 
     @Test

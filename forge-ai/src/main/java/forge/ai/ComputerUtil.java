@@ -47,7 +47,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
@@ -1612,7 +1611,7 @@ public class ComputerUtil {
      * Returns list of objects threatened by effects on the stack
      *
      * @param ai
-     *            calling player
+     *            player whose objects to evaluate
      * @param sa
      *            SpellAbility to exclude
      * @param top
@@ -1669,8 +1668,6 @@ public class ComputerUtil {
 
         final Card source = topStack.getHostCard();
         final ApiType threatApi = topStack.getApi();
-        final SpellAbilityStackInstance si = aiPlayer.getGame().getStack().getInstanceMatchingSpellAbilityID(topStack);
-        final TargetChoices targetChoices = si != null ? si.getTargetChoices() : topStack.getTargets();
 
         // Can only Predict things from AFs
         if (threatApi == null) {
@@ -1688,7 +1685,7 @@ public class ComputerUtil {
             }
         } else {
             final List<GameObject> canBeTargeted = new ArrayList<>();
-            for (GameEntity ge : targetChoices.getTargetEntities()) {
+            for (GameEntity ge : topStack.getTargets().getTargetEntities()) {
                 if (ge.canBeTargetedBy(topStack)) {
                     canBeTargeted.add(ge);
                 }
@@ -1698,6 +1695,18 @@ public class ComputerUtil {
             }
             objects = canBeTargeted;
         }
+
+        final List<GameObject> playerObjects = new ArrayList<>();
+        for (GameObject object : objects) {
+            if ((object instanceof Card card && card.getController().equals(aiPlayer))
+                    || aiPlayer.equals(object)) {
+                playerObjects.add(object);
+            }
+        }
+        if (playerObjects.isEmpty()) {
+            return threatened;
+        }
+        objects = playerObjects;
 
         SpellAbility saviorWithSubs = saviour;
         ApiType saviorWithSubsApi = saviorWithSubs == null ? null : saviorWithSubs.getApi();

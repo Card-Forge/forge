@@ -29,14 +29,14 @@ public class ChangeZoneAiTest extends AITest {
     }
 
     private void runUnsummonDoesNotSaveOpponentCreatureFromCommitTest(boolean useSimulation) {
-        Game game = initAndCreateThreePlayerGame(useSimulation, 2, "victim", "caster", "ai");
+        Game game = initAndCreateThreePlayerGame(useSimulation);
         Player victim = game.getPlayers().get(0);
-        Player caster = game.getPlayers().get(1);
-        Player ai = game.getPlayers().get(2);
+        Player ai = game.getPlayers().get(1);
+        Player caster = game.getPlayers().get(2);
 
         victim.setTeam(0);
-        caster.setTeam(1);
-        ai.setTeam(2);
+        ai.setTeam(1);
+        caster.setTeam(2);
 
         Card victimCreature = addCard(GENERIC_TEST_CREATURE, victim);
         addCards("Island", 4, caster);
@@ -59,14 +59,14 @@ public class ChangeZoneAiTest extends AITest {
     }
 
     private void runUnsummonDoesNotRedundantlyBounceCommanderTest(boolean useSimulation) {
-        Game game = initAndCreateThreePlayerGame(useSimulation, 2, "victim", "caster", "ai");
+        Game game = initAndCreateThreePlayerGame(useSimulation);
         Player victim = game.getPlayers().get(0);
-        Player caster = game.getPlayers().get(1);
-        Player ai = game.getPlayers().get(2);
+        Player ai = game.getPlayers().get(1);
+        Player caster = game.getPlayers().get(2);
 
         victim.setTeam(0);
-        caster.setTeam(1);
-        ai.setTeam(2);
+        ai.setTeam(1);
+        caster.setTeam(2);
 
         Card victimCommander = addCard(GENERIC_TEST_CREATURE, victim);
         victimCommander.setCommander(true);
@@ -102,12 +102,12 @@ public class ChangeZoneAiTest extends AITest {
     @Test
     public void testUnsummonStillSavesOwnCreatureFromCommit() {
         Game game = initAndCreateThreePlayerGame();
-        Player ai = game.getPlayers().get(0);
-        Player caster = game.getPlayers().get(1);
+        Player caster = game.getPlayers().get(0);
+        Player ai = game.getPlayers().get(1);
         Player otherOpponent = game.getPlayers().get(2);
 
-        ai.setTeam(0);
-        caster.setTeam(1);
+        caster.setTeam(0);
+        ai.setTeam(1);
         otherOpponent.setTeam(2);
 
         Card aiCreature = addCard(GENERIC_TEST_CREATURE, ai);
