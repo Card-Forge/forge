@@ -241,6 +241,7 @@ Praetor:Praetors
 Primarch:Primarchs
 Prism:Prisms
 Processor:Processors
+Q:Q
 Qu:Qu
 Raccoon:Raccoons
 Rabbit:Rabbits
@@ -311,6 +312,7 @@ Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
 Time Lord:Time Lords
+Tosk:Tosks
 Toy:Toys
 Treefolk:Treefolk
 Trilobite:Trilobites
