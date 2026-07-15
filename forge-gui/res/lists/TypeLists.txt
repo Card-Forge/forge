@@ -53,6 +53,7 @@ Bird:Birds
 Bison:Bisons
 Blinkmoth:Blinkmoths
 Boar:Boars
+Borg:Borg
 Bringer:Bringers
 Brushwagg:Brushwaggs
 Camarid:Camarids
