@@ -164,6 +164,7 @@ Kangaroo:Kangaroos
 Kavu:Kavu
 Kirin:Kirins
 Kithkin:Kithkin
+Klingon:Klingons
 Knight:Knights
 Kobold:Kobolds
 Kor:Kors
