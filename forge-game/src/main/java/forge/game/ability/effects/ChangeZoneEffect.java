@@ -902,10 +902,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         boolean mandatory = sa.hasParam("Mandatory");
         Map<Player, HiddenOriginChoices> hiddenChoices = Maps.newHashMap();
 
-        List<Player> fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
+        List<Player> fetchers = AbilityUtils.getDefinedPlayers(source, sa.getParam("DefinedPlayer"), sa);
         Player chooser = null;
         if (sa.hasParam("Chooser")) {
-            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(source, sa.getParam("Chooser"), sa);
             if (!choosers.isEmpty()) {
                 chooser = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
             }
@@ -1140,8 +1140,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
                 // ensure that selection is within maximum allowed changeNum
+                final int multiMin = sa.hasParam("Mandatory") ? Math.min(changeNum, fetchList.size()) : 0;
                 do {
-                    selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, 0, changeNum, delayedReveal, selectPrompt, decider);
+                    selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, multiMin, changeNum, delayedReveal, selectPrompt, decider);
                 } while (selectedCards != null && selectedCards.size() > changeNum);
                 if (selectedCards != null) {
                     chosenCards.addAll(selectedCards);
@@ -1533,7 +1534,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 "While you're searching your library, you may cast CARDNAME from your library.");
         decider.getController().tempShowCards(canCastWhileSearching);
         for (final Card tgtCard : canCastWhileSearching) {
-            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, decider, CardStateName.Original, true);
+            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, decider, CardStateName.Original, true, null);
             if (sas.isEmpty()) {
                 continue;
             }
@@ -1560,8 +1561,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     }
 
     private static boolean allowMultiSelect(Player decider, SpellAbility sa) {
-        return decider.getController().isGuiPlayer()        // limit mass selection to human players for now
-                && !sa.hasParam("Mandatory")                // only handle optional decisions, for now
+        return !decider.getController().isAI()
                 && !sa.hasParam("ShareLandType")
                 && !sa.hasParam("DifferentNames")
                 && !sa.hasParam("DifferentPower")

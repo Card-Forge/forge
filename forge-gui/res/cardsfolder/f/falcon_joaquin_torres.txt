@@ -1,0 +1,11 @@
+Name:Falcon, Joaquin Torres
+ManaCost:2 W
+Types:Legendary Creature Bird Human Hero
+PT:2/2
+K:Flying
+K:Lifelink
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | PresentCompare$ GE2 | NoResolvingCheck$ True | Execute$ TrigPutCounter | TriggerDescription$ Battalion — Whenever NICKNAME and at least two other creatures attack, put a +1/+1 counter on him and scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flying, lifelink\nBattalion — Whenever Falcon and at least two other creatures attack, put a +1/+1 counter on him and scry 1. (Look at the top card of your library. You may put that card on the bottom.)

@@ -22,7 +22,7 @@
  </layer>
  <layer id="7" name="ClutterSubGround" width="37" height="33">
   <data encoding="base64" compression="zlib">
-   eJztls9Kw0AQxocUFPFQfIqe9OItKXj0D4pv0mq9eO1B8FWsr+BbeNK7KAitrejZb5IMjnE2tdmNp/3BR8Km/eZjM7sbokgopinRDHqD5tAiLcZv9okm0C20u0M0NMaXeTRlkKEedAadQ6PMrsGZXOOWhw9T/H+WFXMxx3WR2TVctfOspQffi4fXPPXhBV1uog6uo/53DUbXkHH+rYzzvXgw4hEK9tc1dE6dv1p7mP6WD1aPSLaqqvD7dnn4UNefOks1213nbx5NsHpcY82Py4MJ2eOM1Z+S6aFH9Nhr5rEquicvjDmRTB/I8wm9U/HeRPxc7mVvbaPHrUwW0l//1eN1a6463laPM3oftDJZGfN5amkfZ6Q/uS9k73Fl0c/EgzOF3scliyuThTy77/6ULycJ0WliZ3LNkc7MyLpjBht+eba3iMbwu4KOk2LMdd4IrnXGWUQ+dNaIjpDlAHoqM7m+SWTfca2zEHmYvXWiF2R5hq7LM8xaizpT3ToLkYl5RZ7Dsqdy3yVnRZvfS5FIJBKJrMoXVkT0BA==
+   eJztls9Kw0AQxscUFOnJp+hJL96Sgkf/oPgmrdaL1x4EX8X6Cr6IHgVREFpb0bPfJBkc42xqsxtP+4OPhE37zcdmdjdEkVBMU6IZ9AbNoUVajN/sE02gW2h3h2hojC/zaMogQz3oDDqHRpldgzO5xi0PH6b4/ywr5mKO6yKza7hq51lLD74XD6956sMLuuyiDq6j/ncNRteQcf6tjPO9eDDiEQr21zV0Tp2/WnuY/pYPVo9Itqqq8Pt2efhQ1586SzXbXedvHk2welxjzY/LgwnZ44zVn5Lpvkf00GvmsSq6Jy+MOZFMH8jzCb1T8d5E/FzuZW9to8etTBbSX//V43VrrjreVo8zeh+0MlkZ83lqaR9npD+5L2TvcWXRz8SDM4XexyWLK5OFPHtc+ylfThKi08TO5JojnZmRdccMNv3ybG8RjeF3BR0nxZjrvBFc64yziHzorBMdIcsB9FRmcn2TyL7jWmch8jB7G0QvyPIMXZdnmLUWdaa6dRYiE/OKPIdlT+W+S86KNr+XIpFIJBJZlS98BPQI
   </data>
  </layer>
  <layer id="3" name="Clutter" width="37" height="33">
@@ -30,7 +30,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -63,7 +63,7 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 5,
-  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
+  &quot;colorType&quot;: &quot;MultiColor&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;black&quot;, &quot;red&quot;, &quot;green&quot; ]
 }]</property>
@@ -118,7 +118,7 @@
   <object id="136" template="../../../../common/maps/obj/gold.tx" x="108" y="517.333"/>
   <object id="137" template="../../../../common/maps/obj/gold.tx" x="59.3333" y="180"/>
   <object id="140" template="../../../../common/maps/obj/collision.tx" x="308.333" y="158.617" width="26" height="34.5236"/>
-  <object id="141" template="../../../../common/maps/obj/enemy.tx" x="360.667" y="264.667">
+  <object id="141" template="../../../../common/maps/obj/enemy.tx" x="384.667" y="281.334">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Corroding Dragonstorm|TDM&quot;, &quot;Skull of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Teneb"/>
@@ -130,7 +130,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="142" template="../../../../common/maps/obj/enemy.tx" x="281" y="268.5">
+  <object id="142" template="../../../../common/maps/obj/enemy.tx" x="259.667" y="274.5">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Breaching Dragonstorm|TDM&quot;, &quot;Heart of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Numot"/>
@@ -140,7 +140,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="143" template="../../../../common/maps/obj/enemy.tx" x="382.5" y="191.5">
+  <object id="143" template="../../../../common/maps/obj/enemy.tx" x="369.167" y="178.833">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Encroaching Dragonstorm|TDM&quot;, &quot;Horn of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Vorosh"/>
@@ -150,7 +150,7 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="144" template="../../../../common/maps/obj/enemy.tx" x="243.5" y="190.5">
+  <object id="144" template="../../../../common/maps/obj/enemy.tx" x="257.5" y="185.167">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Roiling Dragonstorm|TDM&quot;, &quot;Eye of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Intet"/>
@@ -160,7 +160,7 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="145" template="../../../../common/maps/obj/enemy.tx" x="312.5" y="213">
+  <object id="145" template="../../../../common/maps/obj/enemy.tx" x="318.5" y="281">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Teeming Dragonstorm|TDM&quot;, &quot;Tooth of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Oros"/>
@@ -188,35 +188,35 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
+  &quot;colorType&quot;: &quot;MultiColor&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
+  &quot;colorType&quot;: &quot;MultiColor&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;blue&quot;, &quot;black&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
+  &quot;colorType&quot;: &quot;MultiColor&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;black&quot;, &quot;red&quot;, &quot;white&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
+  &quot;colorType&quot;: &quot;MultiColor&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;red&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
+  &quot;colorType&quot;: &quot;MultiColor&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;blue&quot;, &quot;red&quot;, &quot;green&quot; ]
 }]</property>
@@ -227,35 +227,35 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
+  &quot;colorType&quot;: &quot;MultiColor&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;black&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
+  &quot;colorType&quot;: &quot;MultiColor&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;blue&quot;, &quot;black&quot;, &quot;red&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
+  &quot;colorType&quot;: &quot;MultiColor&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;black&quot;, &quot;red&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
+  &quot;colorType&quot;: &quot;MultiColor&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
+  &quot;colorType&quot;: &quot;MultiColor&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;red&quot;, &quot;green&quot; ]
 }]</property>
@@ -282,7 +282,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   <object id="167" template="../../../../common/maps/obj/collision.tx" x="471" y="194.451" width="24" height="56.0994"/>
   <object id="168" template="../../../../common/maps/obj/collision.tx" x="338.5" y="34.9503" width="44.75" height="10.8494"/>
   <object id="169" template="../../../../common/maps/obj/collision.tx" x="242.875" y="34.0753" width="44.75" height="10.8494"/>
-  <object id="170" template="../../../../common/maps/obj/enemy.tx" x="362.25" y="263.75">
+  <object id="170" template="../../../../common/maps/obj/enemy.tx" x="384.25" y="280.417">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Corroding Dragonstorm|TDM&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Teneb"/>
@@ -292,7 +292,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="171" template="../../../../common/maps/obj/enemy.tx" x="281.5" y="266.25">
+  <object id="171" template="../../../../common/maps/obj/enemy.tx" x="260.167" y="275.583">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Breaching Dragonstorm|TDM&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Numot"/>
@@ -302,7 +302,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="172" template="../../../../common/maps/obj/enemy.tx" x="313" y="212.75">
+  <object id="172" template="../../../../common/maps/obj/enemy.tx" x="318.333" y="284.75">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Teeming Dragonstorm|TDM&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Oros"/>
@@ -312,7 +312,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="173" template="../../../../common/maps/obj/enemy.tx" x="381.5" y="190">
+  <object id="173" template="../../../../common/maps/obj/enemy.tx" x="372.833" y="178.667">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Encroaching Dragonstorm|TDM&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Vorosh"/>
@@ -322,7 +322,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="174" template="../../../../common/maps/obj/enemy.tx" x="243.5" y="190.5">
+  <object id="174" template="../../../../common/maps/obj/enemy.tx" x="257.5" y="183.167">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Roiling Dragonstorm|TDM&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Intet"/>

@@ -26,9 +26,15 @@ public final class AudioMenu {
         final Localizer localizer = Localizer.getInstance();
         final JMenu menu = new JMenu(localizer.getMessage("lblAudio"));
         menu.setMnemonic(KeyEvent.VK_A);
-        menu.add(getMenu_SoundSetOptions());
-        menu.add(getMenu_MusicSetOptions());
-        menu.addSeparator();
+        if (SoundSystem.instance.getAvailableSoundSets().length > 1) {
+            menu.add(getMenu_SoundSetOptions());
+        }
+        if (SoundSystem.getAvailableMusicSets().length > 1) {
+            menu.add(getMenu_MusicSetOptions());
+        }
+        if (menu.getItemCount() > 0) {
+            menu.addSeparator();
+        }
         int soundsVol = prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS) ? prefs.getPrefInt(FPref.UI_VOL_SOUNDS) : 0;
         int musicVol = prefs.getPrefBoolean(FPref.UI_ENABLE_MUSIC) ? prefs.getPrefInt(FPref.UI_VOL_MUSIC) : 0;
         menu.add(buildSliderPanel(
@@ -57,7 +63,7 @@ public final class AudioMenu {
         final ButtonGroup group = new ButtonGroup();
         final String currentSet = prefs.getPref(FPref.UI_CURRENT_SOUND_SET);
         for (final String set : SoundSystem.instance.getAvailableSoundSets()) {
-            JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem(set);
+            JRadioButtonMenuItem menuItem = MenuUtil.createStayOpenRadioButton(set);
             group.add(menuItem);
             if (set.equals(currentSet)) {
                 menuItem.setSelected(true);
@@ -79,7 +85,7 @@ public final class AudioMenu {
         final ButtonGroup group = new ButtonGroup();
         final String currentSet = prefs.getPref(FPref.UI_CURRENT_MUSIC_SET);
         for (final String set : SoundSystem.getAvailableMusicSets()) {
-            JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem(set);
+            JRadioButtonMenuItem menuItem = MenuUtil.createStayOpenRadioButton(set);
             group.add(menuItem);
             if (set.equals(currentSet)) {
                 menuItem.setSelected(true);

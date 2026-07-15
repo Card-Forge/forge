@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Tibalt
+Title=Tibalt
+Icon=Tibalt.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Yoshida_Tatsunari_-_Domain_Zoo_(Modern,_#2923324).dck
+Deck Type=constructed
+
+[Main]
+4 Ragavan, Nimble Pilferer
+4 Territorial Kavu
+4 Scion of Draco
+4 Phlage, Titan of Fire's Fury
+4 Lightning Bolt
+4 Consign to Memory
+4 Tribal Flames
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Oko, Lorwyn Liege
+1 Plains
+1 Mountain
+1 Blood Crypt
+1 Sacred Foundry
+1 Steam Vents
+4 Flooded Strand
+4 Wooded Foothills
+4 Arid Mesa
+1 Temple Garden
+1 Indatha Triome
+1 Lush Portico
+1 Thundering Falls
+2 Arena of Glory
+[Sideboard]
+2 Celestial Purge
+2 Wear
+2 Surgical Extraction
+1 Ashiok, Dream Render
+2 Mystical Dispute
+1 High Noon
+1 Wrath of the Skies
+2 Fire Magic
+2 Erode

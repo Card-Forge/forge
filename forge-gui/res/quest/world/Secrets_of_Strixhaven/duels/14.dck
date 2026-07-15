@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Gobern_-_Sultai_Control_(Standard,_#2930616).dck
+Deck Type=constructed
+
+[Main]
+4 Deceit
+3 Emeritus of Ideation
+1 Harvester of Misery
+4 Kavaero, Mind-Bitten
+1 Wistfulness
+4 Ancient Cornucopia
+2 Quandrix Charm
+4 Rakshasa's Bargain
+3 Requiting Hex
+2 Shoot the Sheriff
+2 Witherbloom Charm
+3 Withering Curse
+3 Awaken the Honored Dead
+4 Overgrown Tomb
+1 Dreamroot Cascade
+1 Gloomlake Verge
+1 Swamp
+1 Multiversal Passage
+2 Undercity Sewers
+4 Starting Town
+1 Island
+4 Watery Grave
+1 Underground Mortuary
+4 Wastewood Verge
+[Sideboard]
+1 Awaken the Honored Dead
+2 Flashfreeze
+2 Wrench, Speedway Saboteur
+2 Ancient Vendetta
+2 Pest Control
+2 Duress
+1 Harvester of Misery
+3 Strategic Betrayal

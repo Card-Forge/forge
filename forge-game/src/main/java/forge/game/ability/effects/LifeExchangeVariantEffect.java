@@ -44,18 +44,15 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
         if (tgtPlayers.isEmpty()) {
             return;
         }
+        if (!source.isInPlay() || !source.isCreature()) {
+            return;
+        }
 
         Player p = tgtPlayers.get(0);
-
         Integer power = null;
         Integer toughness = null;
-
-        final Game game = p.getGame();
-        final long timestamp = game.getNextTimestamp();
-
         final int pLife = p.getLife();
-        int num = 0;
-
+        int num;
         if ("Power".equals(mode)) {
             num = source.getNetPower();
             power = pLife;
@@ -66,30 +63,28 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
             return;
         }
 
-        if (!source.isInPlay()) {
+        if (pLife > num && !p.canLoseLife()) {
+            return;
+        }
+        if (num > pLife && !p.canGainLife()) {
             return;
         }
 
-        if (pLife > num && p.canLoseLife()) {
-            final int diff = pLife - num;
-            final int lost = p.loseLife(diff, false, false);
-            source.addNewPT(power, toughness, timestamp, 0);
-            game.fireEvent(new GameEventCardStatsChanged(source));
-
-            if (lost > 0) { // Run triggers if player actually lost life
-                final Map<Player, Integer> lossMap = Maps.newHashMap();
-                lossMap.put(p, lost);
-                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
-                source.getGame().getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
-            }
-        } else if (num > pLife && p.canGainLife()) {
-            final int diff = num - pLife;
-            p.gainLife(diff, source, sa);
-            source.addNewPT(power, toughness, timestamp, 0);
-            game.fireEvent(new GameEventCardStatsChanged(source));
-        } else {
-            // do nothing if they are equal
+        final Game game = p.getGame();
+        final long timestamp = game.getNextTimestamp();
+        int lost = 0;
+        if (pLife > num) {
+            lost = p.loseLife(pLife - num, false, false);
+        } else if (num > pLife) {
+            p.gainLife(num - pLife, source, sa);
+        }
+        source.addNewPT(power, toughness, timestamp, 0);
+        game.fireEvent(new GameEventCardStatsChanged(source));
+        if (lost > 0) { // Run triggers if player actually lost life
+            final Map<Player, Integer> lossMap = Maps.newHashMap();
+            lossMap.put(p, lost);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
+            game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
         }
     }
-
 }

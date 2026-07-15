@@ -1,0 +1,11 @@
+Name:Machinesmith Automaton
+ManaCost:2 R
+Types:Artifact Creature Robot Villain
+PT:2/2
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another artifact you control enters, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Artifact
+DeckHas:Ability$Counters
+DeckHints:Type$Artifact
+Oracle:Trample\nWhenever another artifact you control enters, put a +1/+1 counter on this creature.

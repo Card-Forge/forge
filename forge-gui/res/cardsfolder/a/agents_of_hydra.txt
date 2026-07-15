@@ -1,0 +1,9 @@
+Name:Agents of HYDRA
+ManaCost:1 B
+Types:Creature Human Spy Villain
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_1_villain_menace | TokenOwner$ You
+SVar:SacMe:2
+DeckHas:Ability$Token
+Oracle:When this creature dies, create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)

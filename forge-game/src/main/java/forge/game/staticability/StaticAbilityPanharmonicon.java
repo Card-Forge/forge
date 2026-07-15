@@ -1,14 +1,12 @@
 package forge.game.staticability;
 
-import com.google.common.collect.ImmutableList;
-
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
+import forge.game.card.CardDamageTable;
 import forge.game.GameObjectPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
@@ -132,7 +130,7 @@ public class StaticAbilityPanharmonicon {
             }
             CardCollection causesForTrigger = table.filterCards(trigOrigin, trigDestination, trigger.getParam("ValidCards"), trigger.getHostCard(), trigger);
 
-            CardCollection causesForStatic = table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), destination == null ? null : ZoneType.listValueOf(destination), stAb.getParam("ValidCause"), host, stAb);
+            CardCollection causesForStatic = table.filterCards(origin == null ? null : List.of(ZoneType.smartValueOf(origin)), destination == null ? null : ZoneType.listValueOf(destination), stAb.getParam("ValidCause"), host, stAb);
 
             // check that whatever caused the trigger to fire is also a cause the static applies for
             if (Collections.disjoint(causesForTrigger, causesForStatic)) {
@@ -209,7 +207,7 @@ public class StaticAbilityPanharmonicon {
                 }
             }
             if (trigMode.equals(TriggerType.DamageAll)) {
-                CardDamageMap table = (CardDamageMap) runParams.get(AbilityKey.DamageMap);
+                CardDamageTable table = (CardDamageTable) runParams.get(AbilityKey.DamageMap);
                 table = table.filteredMap(trigger.getParam("ValidSource"), trigger.getParam("ValidTarget"), trigger.getHostCard(), trigger);
                 table = table.filteredMap(stAb.getParam("ValidSource"), stAb.getParam("ValidTarget"), host, stAb);
                 if (table.isEmpty()) {

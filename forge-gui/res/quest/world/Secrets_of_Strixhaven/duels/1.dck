@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Isperia
+Title=Isperia
+Icon=Isperia.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/AlekRivera_-_Izzet_Aggro_(Standard,_#2935902).dck
+Deck Type=constructed
+
+[Main]
+4 Eddymurk Crab
+4 Hearth Elemental
+4 Sunderflock
+4 Opt
+4 Prismari Charm
+3 Burst Lightning
+2 Get Out
+1 Bounce Off
+1 Spell Pierce
+1 Spell Snare
+4 Flow State
+4 Sleight of Hand
+2 Impractical Joke
+2 Winternight Stories
+6 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+2 Multiversal Passage
+[Sideboard]
+3 Colorstorm Stallion
+2 Annul
+2 Flashfreeze
+2 The Legend of Kuruk
+1 Abrade
+1 Broadside Barrage
+1 Disdainful Stroke
+1 Ghost Vacuum
+1 Hydro-Man, Fluid Felon
+1 Ral, Crackling Wit

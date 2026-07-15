@@ -276,11 +276,9 @@ public abstract class SpellAbilityEffect {
         if (resultUnique == null)
             return null;
         if (sa.hasParam("IncludeAllComponentCards")) {
-            CardCollection components = new CardCollection();
             for (Card c : resultUnique) {
-                components.addAll(c.getAllComponentCards(false));
+                resultUnique.addAll(c.getAllComponentCards(false));
             }
-            resultUnique.addAll(components);
         }
         return resultUnique;
     }
@@ -291,6 +289,7 @@ public abstract class SpellAbilityEffect {
     protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa) {                            return getPlayers(true,  "Defined",    sa); }
     protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa, final String definedParam) { return getPlayers(true,  definedParam, sa); }
 
+    // should really only be used by effects that need it to avoid overhead
     protected static List<Player> getTargetPlayersWithDuplicates(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         List<Player> result = Lists.newArrayList();
         getPlayers(definedFirst, definedParam, sa, result);
@@ -814,7 +813,8 @@ public abstract class SpellAbilityEffect {
 
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
-        hostCard.addUntilLeavesBattlefield(triggerList.allCards());
+        // tokens cease to exist once exiled and never return, and nothing ever cleans them from this list
+        hostCard.addUntilLeavesBattlefield(CardLists.filter(triggerList.allCards(), CardPredicates.NON_TOKEN));
         final TriggerHandler trigHandler = game.getTriggerHandler();
 
         final Card lki;

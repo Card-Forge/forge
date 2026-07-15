@@ -1,10 +1,14 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.github.tommyettinger.textra.TextraButton;
@@ -38,6 +42,39 @@ public class InventoryScene extends UIScene {
     Texture equipOverlay, unusableOverlay;
     Dialog useDialog, deleteDialog;
     int columns = 0;
+    private String selectedSlot = null;
+    private NinePatchDrawable slotBorderDrawable = null;
+    private static final String SLOT_BORDER_NAME = "slotBorder";
+    private static final String SLOT_ITEM_NAME = "slotItem";
+
+    private NinePatchDrawable getSlotBorderDrawable() {
+        if (slotBorderDrawable == null) {
+            int border = 4;
+            int size = border * 2 + 2; // 10px total; center is 2x2 transparent
+            Pixmap pm = new Pixmap(size, size, Pixmap.Format.RGBA8888);
+            pm.setColor(new Color(1f, 0.9f, 0.05f, 1f)); // bright yellow
+            pm.fill();
+            pm.setBlending(Pixmap.Blending.None); // write transparent pixels directly, no alpha blending
+            pm.setColor(0f, 0f, 0f, 0f);
+            pm.fillRectangle(border, border, size - border * 2, size - border * 2);
+            Texture tex = new Texture(pm);
+            pm.dispose();
+            slotBorderDrawable = new NinePatchDrawable(new NinePatch(tex, border, border, border, border));
+        }
+        return slotBorderDrawable;
+    }
+
+    private void addSlotBorder(Button button) {
+        Image border = new Image(getSlotBorderDrawable());
+        border.setName(SLOT_BORDER_NAME);
+        border.setSize(button.getWidth(), button.getHeight());
+        button.addActor(border);
+    }
+
+    private void removeSlotBorder(Button button) {
+        Actor border = button.findActor(SLOT_BORDER_NAME);
+        if (border != null) border.remove();
+    }
 
     public InventoryScene() {
         super(Forge.isLandscapeMode() ? "ui/inventory.json" : "ui/inventory_portrait.json");
@@ -77,11 +114,13 @@ public class InventoryScene extends UIScene {
                                     otherButton.setChecked(false);
                                 }
                             }
+                            selectedSlot = slotName;
+                            updateInventory();
                             Long id = Current.player().itemInSlot(slotName);
                             if (id != null) {
                                 Button changeButton = null;
                                 for (Button invButton : inventoryButtons) {
-                                    if(itemLocation.get(invButton) == null)
+                                    if (itemLocation.get(invButton) == null)
                                         continue;
                                     ItemData data = itemLocation.get(invButton).getRight();
                                     if (data != null && id.equals(data.longID)) {
@@ -93,6 +132,19 @@ public class InventoryScene extends UIScene {
                                     changeButton.setChecked(true);
                             } else {
                                 setSelected(null);
+                            }
+                        } else {
+                            removeSlotBorder(button);
+                            boolean anyChecked = false;
+                            for (Button otherButton : equipmentSlots.values()) {
+                                if (otherButton.isChecked()) {
+                                    anyChecked = true;
+                                    break;
+                                }
+                            }
+                            if (!anyChecked) {
+                                selectedSlot = null;
+                                updateInventory();
                             }
                         }
                     }
@@ -167,6 +219,11 @@ public class InventoryScene extends UIScene {
 
 
     public void done() {
+        selectedSlot = null;
+        for (Button slot : equipmentSlots.values()) {
+            removeSlotBorder(slot);
+            slot.setChecked(false);
+        }
         GameHUD.getInstance().getTouchpad().setVisible(false);
         Forge.switchToLast();
     }
@@ -355,7 +412,9 @@ public class InventoryScene extends UIScene {
                 System.err.print("Can not find sprite name " + item.iconName + "\n");
                 continue;
             }
-
+            if (selectedSlot != null && !selectedSlot.equals(item.equipmentSlot)) {
+                continue;
+            }
             items.add(item);
         }
         // sort these by slot type and name
@@ -374,7 +433,6 @@ public class InventoryScene extends UIScene {
                 return o1.name.compareTo(o2.name);
             }
         });
-
 
         for (int i = 0; i < items.size(); i++) {
             if (i % columns == 0)
@@ -418,53 +476,64 @@ public class InventoryScene extends UIScene {
             itemSlotsUsed++;
         }
 
-        for (int i = 0; i < Current.player().getBoostersOwned().size; i++) {
-            if ((i + itemSlotsUsed) % columns == 0)
-                inventory.row();
-            Button newActor = createInventorySlot();
-            inventory.add(newActor).top().left().space(1);
-            addToSelectable(new Selectable(newActor) {
-                @Override
-                public void onSelect(UIScene scene) {
-                    setSelected(newActor);
-                    super.onSelect(scene);
-                }
-            });
-            inventoryButtons.add(newActor);
-            Deck deck = Current.player().getBoostersOwned().get(i);
-            if (deck == null | deck.isEmpty()) {
-                System.err.print("Can not add null / empty booster " + Current.player().getBoostersOwned().get(i) + "\n");
-                continue;
-            }
-            Sprite deckSprite = Config.instance().getItemSprite("Deck");
-
-            Image img = new Image(deckSprite);
-            img.setX((newActor.getWidth() - img.getWidth()) / 2);
-            img.setY((newActor.getHeight() - img.getHeight()) / 2);
-            newActor.addActor(img);
-            deckLocation.put(newActor, Current.player().getBoostersOwned().get(i));
-            newActor.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    if (((Button) actor).isChecked()) {
-                        setSelected((Button) actor);
+        if (selectedSlot == null) {
+            for (int i = 0; i < Current.player().getBoostersOwned().size; i++) {
+                if ((i + itemSlotsUsed) % columns == 0)
+                    inventory.row();
+                Button newActor = createInventorySlot();
+                inventory.add(newActor).top().left().space(1);
+                addToSelectable(new Selectable(newActor) {
+                    @Override
+                    public void onSelect(UIScene scene) {
+                        setSelected(newActor);
+                        super.onSelect(scene);
                     }
+                });
+                inventoryButtons.add(newActor);
+                Deck deck = Current.player().getBoostersOwned().get(i);
+                if (deck == null | deck.isEmpty()) {
+                    System.err.print("Can not add null / empty booster " + Current.player().getBoostersOwned().get(i) + "\n");
+                    continue;
                 }
-            });
+                Sprite deckSprite = Config.instance().getItemSprite("Deck");
+
+                Image img = new Image(deckSprite);
+                img.setX((newActor.getWidth() - img.getWidth()) / 2);
+                img.setY((newActor.getHeight() - img.getHeight()) / 2);
+                newActor.addActor(img);
+                deckLocation.put(newActor, Current.player().getBoostersOwned().get(i));
+                newActor.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        if (((Button) actor).isChecked()) {
+                            setSelected((Button) actor);
+                        }
+                    }
+                });
+            }
         }
 
         for (Map.Entry<String, Button> slot : equipmentSlots.entrySet()) {
-            if (slot.getValue().getChildren().size >= 2)
-                slot.getValue().removeActorAt(1, false);
+            Button slotButton = slot.getValue();
+            // Remove the previous item image and border by name (order-independent)
+            Actor oldItem = slotButton.findActor(SLOT_ITEM_NAME);
+            if (oldItem != null) oldItem.remove();
+            removeSlotBorder(slotButton);
+
             Long id = Current.player().itemInSlot(slot.getKey());
-            if (id == null)
-                continue;
-            ItemData item = Current.player().getEquippedItem(id);
-            if (item != null) {
-                Image img = new Image(item.sprite());
-                img.setX((slot.getValue().getWidth() - img.getWidth()) / 2);
-                img.setY((slot.getValue().getHeight() - img.getHeight()) / 2);
-                slot.getValue().addActor(img);
+            if (id != null) {
+                ItemData item = Current.player().getEquippedItem(id);
+                if (item != null) {
+                    Image img = new Image(item.sprite());
+                    img.setName(SLOT_ITEM_NAME);
+                    img.setX((slotButton.getWidth() - img.getWidth()) / 2);
+                    img.setY((slotButton.getHeight() - img.getHeight()) / 2);
+                    slotButton.addActor(img);
+                }
+            }
+            // Re-add border on top if this slot is currently selected
+            if (slot.getKey().equals(selectedSlot)) {
+                addSlotBorder(slotButton);
             }
         }
         // make sure repair is clickable
@@ -473,6 +542,11 @@ public class InventoryScene extends UIScene {
 
     @Override
     public void enter() {
+        selectedSlot = null;
+        for (Button slot : equipmentSlots.values()) {
+            removeSlotBorder(slot);
+            slot.setChecked(false);
+        }
         clearItemDescription();
         updateInventory();
         //inventory.add().expand();

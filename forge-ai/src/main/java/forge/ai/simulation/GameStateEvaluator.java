@@ -50,14 +50,8 @@ public class GameStateEvaluator {
             return null;
         }
 
-        Game gameCopy;
         GameCopier copier = new GameCopier(evalGame);
-
-        if (evalGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
-            gameCopy = copier.makeCopy();
-        } else {
-            gameCopy = copier.makeCopy(null, aiPlayer);
-        }
+        Game gameCopy = copier.makeCopy(null, aiPlayer);
 
         gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE, () -> GameSimulator.resolveStack(gameCopy, aiPlayer.getWeakestOpponent()));
         CombatSimResult result = new CombatSimResult();

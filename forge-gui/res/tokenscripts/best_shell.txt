@@ -1,0 +1,5 @@
+Name:Best Shell
+ManaCost:no cost
+Types:Artifact
+A:AB$ Destroy | Cost$ T Sac<1/CARDNAME/this token> | ValidTgts$ Creature.greatestPower | TgtPrompt$ Select target creature with the greatest power | SpellDescription$ Destroy target creature with the greatest power.
+Oracle:{T}, Sacrifice this token: Destroy target creature with the greatest power.

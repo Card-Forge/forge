@@ -6,4 +6,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSubCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
 A:AB$ Mana | Cost$ T | Produced$ Combo U B | Amount$ 1 | SubAbility$ AddCounter | SpellDescription$ Add {U} or {B}. Put a depletion counter on CARDNAME.
 SVar:AddCounter:DB$ PutCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
+SVar:AICounterOverrideDEPLETION:Negative
 Oracle:River Delta doesn't untap during your untap step if it has a depletion counter on it.\nAt the beginning of your upkeep, remove a depletion counter from River Delta.\n{T}: Add {U} or {B}. Put a depletion counter on River Delta.

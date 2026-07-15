@@ -1,0 +1,13 @@
+Name:Black Widow, Daring Operative
+ManaCost:4 B
+Types:Legendary Creature Human Spy Hero
+PT:3/4
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When NICKNAME enters, mill three cards. (Put the top three cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, each opponent loses life equal to the number of creature cards in your graveyard.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Player.Opponent
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+DeckHas:Ability$Mill|Graveyard
+DeckHints:Ability$Mill|Graveyard
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Black Widow enters, mill three cards. (Put the top three cards of your library into your graveyard.)\nWhenever Black Widow deals combat damage to a player, each opponent loses life equal to the number of creature cards in your graveyard.

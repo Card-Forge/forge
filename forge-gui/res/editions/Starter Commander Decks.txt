@@ -238,7 +238,7 @@ ScryfallCode=SCD
 230 R Harbinger of the Hunt @Chris Rahn
 231 M Havengul Lich @James Ryman
 232 U Jubilant Skybonder @Jesper Ejsing
-233 R Kaervek the Merciless @Heonhwa Choe
+233 R Kaervek the Merciless @Heonhwa
 234 U Kangee, Sky Warden @Dan Murayama Scott
 235 U Maja, Bretagard Protector @Lie Setiawan
 236 M March of the Multitudes @Zack Stella

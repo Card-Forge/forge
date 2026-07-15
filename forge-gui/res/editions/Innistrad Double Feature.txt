@@ -139,7 +139,7 @@ ScryfallCode=DBL
 126 U Vengeful Strangler @Sean Sevestre
 127 C Abandon the Post @Zoltan Boros
 128 C Ardent Elementalist @Miguel Mercado
-129 M Bloodthirsty Adversary @Heonhwa Choe
+129 M Bloodthirsty Adversary @Heonhwa
 130 C Brimstone Vandal @Andreas Zafiratos
 131 R Burn Down the House @Campbell White
 132 C Burn the Accursed @David Auden Nash
@@ -218,7 +218,7 @@ ScryfallCode=DBL
 205 U Turn the Earth @Alayna Danner
 206 R Unnatural Growth @Svetlin Velinov
 207 R Willow Geist @Ryan Yee
-208 M Wrenn and Seven @Heonhwa Choe
+208 M Wrenn and Seven @Heonhwa
 209 R Angelfire Ignition @Yeong-Hao Han
 210 U Arcane Infusion @Jason Felix
 211 M Arlinn, the Pack's Hope @Anna Steinbauer
@@ -255,7 +255,7 @@ ScryfallCode=DBL
 242 R Slogurk, the Overslime @Nicholas Gregory
 243 U Storm Skreelix @Darek Zabrocki
 244 U Sunrise Cavalier @John Di Giovanni
-245 M Teferi, Who Slows the Sunset @Heonhwa Choe
+245 M Teferi, Who Slows the Sunset @Heonhwa
 246 R Tovolar, Dire Overlord @Chris Rahn
 247 U Unnatural Moonrise @Ryan Pancoast
 248 R Vadrik, Astral Archmage @Kieran Yanner
@@ -464,7 +464,7 @@ ScryfallCode=DBL
 451 C Weary Prisoner @Jason Rainville
 452 C Apprentice Sharpshooter @Steve Prescott
 453 R Ascendant Packleader @Alessandra Pisano
-454 M Avabruck Caretaker @Heonhwa Choe
+454 M Avabruck Caretaker @Heonhwa
 455 C Bramble Armor @Alessandra Pisano
 456 U Bramble Wurm @Lars Grant-West
 457 U Cartographer's Survey @Donato Giancola

@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.Map;
 
 import forge.card.CardStateName;
-import forge.card.GamePieceType;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.GameType;
@@ -12,7 +11,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCopyService;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCardPlotted;
 import forge.game.player.Player;
@@ -70,8 +68,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                             if (gameCard.isPrepared() || !gameCard.hasState(CardStateName.PreparedSpell)) {
                                 continue;
                             }
-                            Card prepared = new CardCopyService(gameCard).copyCard(true, activator);
-                            prepared.setGamePieceType(GamePieceType.TOKEN);
+                            Card prepared = CopyPermanentEffect.getProtoType(sa, gameCard, activator);
                             prepared.setState(CardStateName.PreparedSpell, true);
                             prepared.getOwner().getZone(ZoneType.Exile).add(prepared);
                             eff = createEffect(null, gameCard, activator, gameCard + "'s Prepared Spell", prepared.getImageKey(), game.getNextTimestamp());

@@ -1,0 +1,15 @@
+[metadata]
+Code=HOC
+Date=2026-08-14
+Name=The Hobbit Eternal
+Type=Commander
+ScryfallCode=HOC
+
+[cards]
+36 M Sauron, the Dark Lord @Mark Zug
+38 M Tom Bombadil @Omar Rayyan
+44 M The One Ring @Dan Frazier
+76 M Sauron, the Dark Lord @Mark Zug
+78 M Tom Bombadil @Omar Rayyan
+84 M The One Ring @Dan Frazier
+95 M Arcane Signet @Anastasia Balakchina

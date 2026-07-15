@@ -8,6 +8,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.Graphics;
+import forge.adventure.data.RewardData;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.assets.ImageCache;
@@ -237,6 +238,16 @@ public class SettingsScene extends UIScene {
             public void changed(ChangeEvent event, Actor actor) {
                 Config.instance().getSettingData().useAllCardVariants = ((CheckBox) actor).isChecked();
                 Config.instance().saveSettings();
+                RewardData.invalidateCardPool();
+            }
+        });
+        addSettingField(Forge.getLocalizer().getMessage("lblPreferEraMatchedTokenArt"), Config.instance().getSettingData().preferEraMatchedTokenArt, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean enabled = ((CheckBox) actor).isChecked();
+                Config.instance().getSettingData().preferEraMatchedTokenArt = enabled;
+                forge.model.FModel.getMagicDb().getAllTokens().setPreferEraMatchedArt(enabled);
+                Config.instance().saveSettings();
             }
         });
         addSettingField(Forge.getLocalizer().getMessage("lblExcludeAlchemyVariants"), Config.instance().getSettingData().excludeAlchemyVariants, new ChangeListener() {
@@ -244,6 +255,7 @@ public class SettingsScene extends UIScene {
             public void changed(ChangeEvent event, Actor actor) {
                 Config.instance().getSettingData().excludeAlchemyVariants = ((CheckBox) actor).isChecked();
                 Config.instance().saveSettings();
+                RewardData.invalidateCardPool();
             }
         });
         addSettingField(Forge.getLocalizer().getMessage("lblGenerateLDADecks"), Config.instance().getSettingData().generateLDADecks, new ChangeListener() {
@@ -286,19 +298,21 @@ public class SettingsScene extends UIScene {
                 boolean enabled = ((CheckBox) actor).isChecked();
                 cbAnteMatchRarity.setDisabled(!enabled);
                 cbAnteIncludeBasicLands.setDisabled(!enabled);
+                RewardData.invalidateCardPool();
             }
         });
         addCheckBox(Forge.getLocalizer().getMessage("lblPromptAutoSell"), ForgePreferences.FPref.PROMPT_FOR_AUTOSELL);
+        addCheckBox(Forge.getLocalizer().getMessage("lblAutoSellVariantsCommander"), ForgePreferences.FPref.ADV_COMMANDER_AUTOSELL_VARIANT);
         addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);
+        addCheckBox(Forge.getLocalizer().getMessage("cbShowAutoTapPreview"), ForgePreferences.FPref.UI_SHOW_AUTOTAP_PREVIEW);
         addCheckBox(Forge.getLocalizer().getMessage("lblManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST);
         addCheckBox(Forge.getLocalizer().getMessage("lblPerpetualManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_PERPETUAL_MANA_COST);
         addCheckBox(Forge.getLocalizer().getMessage("lblPowerOrToughness"), ForgePreferences.FPref.UI_OVERLAY_CARD_POWER);
         addCheckBox(Forge.getLocalizer().getMessage("lblCardID"), ForgePreferences.FPref.UI_OVERLAY_CARD_ID);
         addCheckBox(Forge.getLocalizer().getMessage("lblAbilityIcon"), ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
         addCheckBox(Forge.getLocalizer().getMessage("cbImageFetcher"), ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
-
 
         if (!GuiBase.isAndroid()) {
             addCheckBox(Forge.getLocalizer().getMessage("lblBattlefieldTextureFiltering"), ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);

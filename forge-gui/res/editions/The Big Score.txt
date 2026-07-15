@@ -23,7 +23,7 @@ ScryfallCode=BIG
 15 M Territory Forge @Mirko Failoni
 16 M Ancient Cornucopia @Bartek Fedyczak
 17 M Bristlebud Farmer @Adrián Rodríguez Pérez
-18 M Omenpath Journey @Marzena Nereida Piwowar
+18 M Omenpath Journey @Nereida
 19 M Sandstorm Salvager @Francis Tneh
 20 M Vaultborn Tyrant @Loïc Canavaggia
 21 M Loot, the Key to Everything @Rudy Siswanto
@@ -92,7 +92,7 @@ ScryfallCode=BIG
 80 M Territory Forge @Mirko Failoni
 81 M Ancient Cornucopia @Bartek Fedyczak
 82 M Bristlebud Farmer @Adrián Rodríguez Pérez
-83 M Omenpath Journey @Marzena Nereida Piwowar
+83 M Omenpath Journey @Nereida
 84 M Sandstorm Salvager @Francis Tneh
 85 M Vaultborn Tyrant @Loïc Canavaggia
 86 M Loot, the Key to Everything @Rudy Siswanto

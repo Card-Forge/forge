@@ -413,8 +413,8 @@ public class ListChooser<T> {
             } else if (value instanceof CardType.CoreType c) {
                 defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromCoreType(c)));
             } else if (value instanceof CounterType) {
-                if (value instanceof CounterKeywordType c && c.isKeywordCounter()) {
-                    defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromKeyword(c.type(), c.keyword())));
+                if (value instanceof CounterKeywordType c) {
+                    defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromKeyword(c.keyword())));
                 } else {
                     defRenderer.setIcon(fromSkinProp(null));
                 }

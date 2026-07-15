@@ -66,10 +66,10 @@ public class AnalysisResult {
     private int totalEncodedMessages;
     private long minEncodedBytes;
     private long maxEncodedBytes;
-    private int totalSendBlocked;
-    private long totalBlockedMs;
-    private long minBlockedMs;
-    private long maxBlockedMs;
+    private int totalSaturationEpisodes;
+    private long totalSaturationMs;
+    private long maxSaturationMs;
+    private long totalSendsDuringSaturation;
 
     public AnalysisResult(List<GameLogMetrics> metrics) {
         this.allMetrics = metrics;
@@ -214,13 +214,10 @@ public class AnalysisResult {
                 .mapToLong(GameLogMetrics::getMinEncodedBytes)
                 .min().orElse(0);
         maxEncodedBytes = allMetrics.stream().mapToLong(GameLogMetrics::getMaxEncodedBytes).max().orElse(0);
-        totalSendBlocked = allMetrics.stream().mapToInt(GameLogMetrics::getSendBlockedCount).sum();
-        totalBlockedMs = allMetrics.stream().mapToLong(GameLogMetrics::getTotalBlockedMs).sum();
-        minBlockedMs = allMetrics.stream()
-                .filter(m -> m.getSendBlockedCount() > 0)
-                .mapToLong(GameLogMetrics::getMinBlockedMs)
-                .min().orElse(0);
-        maxBlockedMs = allMetrics.stream().mapToLong(GameLogMetrics::getMaxBlockedMs).max().orElse(0);
+        totalSaturationEpisodes = allMetrics.stream().mapToInt(GameLogMetrics::getSaturationEpisodeCount).sum();
+        totalSaturationMs = allMetrics.stream().mapToLong(GameLogMetrics::getTotalSaturationMs).sum();
+        maxSaturationMs = allMetrics.stream().mapToLong(GameLogMetrics::getMaxSaturationMs).max().orElse(0);
+        totalSendsDuringSaturation = allMetrics.stream().mapToLong(GameLogMetrics::getTotalSendsDuringSaturation).sum();
     }
 
     public int getTotalGames() { return totalGames; }
@@ -438,15 +435,17 @@ public class AnalysisResult {
                         TestUtils.formatBytes(minEncodedBytes), TestUtils.formatBytes(maxEncodedBytes)));
             }
 
-            if (totalSendBlocked > 0) {
-                sb.append(String.format("| send() Blocked Count | %,d |\n",
-                        totalSendBlocked));
-                sb.append(String.format("| Avg Blocking Time | %d ms |\n",
-                        totalBlockedMs / totalSendBlocked));
-                sb.append(String.format("| Blocking Range | %d - %,d ms |\n",
-                        minBlockedMs, maxBlockedMs));
-                sb.append(String.format("| Total Thread Blocking | %s |\n",
-                        formatDurationMs(totalBlockedMs)));
+            if (totalSaturationEpisodes > 0) {
+                sb.append(String.format("| Saturation Episodes | %,d |\n",
+                        totalSaturationEpisodes));
+                sb.append(String.format("| Total Saturation Duration | %s |\n",
+                        formatDurationMs(totalSaturationMs)));
+                sb.append(String.format("| Avg Episode Duration | %d ms |\n",
+                        totalSaturationMs / totalSaturationEpisodes));
+                sb.append(String.format("| Longest Episode | %s |\n",
+                        formatDurationMs(maxSaturationMs)));
+                sb.append(String.format("| Server Sends During Saturation | %,d |\n",
+                        totalSendsDuringSaturation));
             }
 
             if (totalSendErrors > 0) {

@@ -1,0 +1,8 @@
+Name:Ares, God of War
+ManaCost:1 B R
+Types:Legendary Creature God Warrior Villain
+PT:4/3
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ NICKNAME attacks each combat if able.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.attacking+YouCtrl | Execute$ TrigChangeZone | TriggerDescription$ Whenever an attacking creature you control dies, return that card to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand
+Oracle:Ares attacks each combat if able.\nWhenever an attacking creature you control dies, return that card to its owner's hand.

@@ -136,7 +136,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 126 U Vengeful Strangler @Sean Sevestre
 127 C Abandon the Post @Zoltan Boros
 128 C Ardent Elementalist @Miguel Mercado
-129 M Bloodthirsty Adversary @Heonhwa Choe
+129 M Bloodthirsty Adversary @Heonhwa
 130 C Brimstone Vandal @Andreas Zafiratos
 131 R Burn Down the House @Campbell White
 132 C Burn the Accursed @David Auden Nash
@@ -215,7 +215,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 205 U Turn the Earth @Alayna Danner
 206 R Unnatural Growth @Svetlin Velinov
 207 R Willow Geist @Ryan Yee
-208 M Wrenn and Seven @Heonhwa Choe
+208 M Wrenn and Seven @Heonhwa
 209 R Angelfire Ignition @Yeong-Hao Han
 210 U Arcane Infusion @Jason Felix
 211 M Arlinn, the Pack's Hope @Anna Steinbauer
@@ -252,7 +252,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 242 R Slogurk, the Overslime @Nicholas Gregory
 243 U Storm Skreelix @Darek Zabrocki
 244 U Sunrise Cavalier @John Di Giovanni
-245 M Teferi, Who Slows the Sunset @Heonhwa Choe
+245 M Teferi, Who Slows the Sunset @Heonhwa
 246 R Tovolar, Dire Overlord @Chris Rahn
 247 U Unnatural Moonrise @Ryan Pancoast
 248 R Vadrik, Astral Archmage @Kieran Yanner
@@ -374,7 +374,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 348 M The Meathook Massacre @Chris Seaman
 349 R Slaughter Specialist @Kari Christensen
 350 M Tainted Adversary @Tuan Duong Chu
-351 M Bloodthirsty Adversary @Heonhwa Choe
+351 M Bloodthirsty Adversary @Heonhwa
 352 R Burn Down the House @Campbell White
 353 R Curse of Shaken Faith @Campbell White
 354 R Falkenrath Pit Fighter @Anna Fehr

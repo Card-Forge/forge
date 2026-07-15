@@ -28,482 +28,490 @@ import java.util.Locale;
  */
 public enum CounterEnumType implements CounterType {
 
-    M1M1("-1/-1", "-1/-1", 255, 110, 106),
-    P1P1("+1/+1", "+1/+1", 96, 226, 23),
+    M1M1("-1/-1", "-1/-1", 255, 110, 106, CounterAiCategory.Negative),
+    P1P1("+1/+1", "+1/+1", 96, 226, 23, CounterAiCategory.Positive),
 
-    LOYALTY("LOYAL", 198, 198, 198),
+    LOYALTY("LOYAL", 198, 198, 198, CounterAiCategory.Positive),
 
-    ACORN("ACORN", 139, 69, 19),
+    ACORN("ACORN", 139, 69, 19, CounterAiCategory.Positive),
 
-    AEGIS("AEGIS", 207, 207, 207),
+    ACQUIREDTASTE("acquired taste", "ATASTE", 139, 19, 69, CounterAiCategory.Positive),
 
-    AGE("AGE", 255, 137, 57),
+    AEGIS("AEGIS", 207, 207, 207, CounterAiCategory.Positive),
 
-    AIM("AIM", 255, 180, 0),
+    AGE("AGE", 255, 137, 57, CounterAiCategory.Negative),
 
-    ARROW("ARROW", 237, 195, 0),
+    AIM("AIM", 255, 180, 0, CounterAiCategory.Positive),
 
-    ARROWHEAD("ARWHD", 230, 191, 167),
+    ARROW("ARROW", 237, 195, 0, CounterAiCategory.Positive),
 
-    AWAKENING("AWAKE", 0, 231, 79),
+    ARROWHEAD("ARWHD", 230, 191, 167, CounterAiCategory.Positive),
 
-    BAIT("BAIT", 120, 100, 60),
+    AWAKENING("AWAKE", 0, 231, 79, CounterAiCategory.Neutral),
 
-    BLAZE("BLAZE", 255, 124, 82),
+    BAIT("BAIT", 120, 100, 60, CounterAiCategory.Positive),
 
-    BLESSING("BLESS", 251, 0, 94),
+    BLAZE("BLAZE", 255, 124, 82, CounterAiCategory.Positive),
 
-    BLIGHT("BLGHT", 130, 115, 160),
+    BLESSING("BLESS", 251, 0, 94, CounterAiCategory.Positive),
 
-    BLOOD("BLOOD", 255, 108, 111),
+    BLIGHT("BLGHT", 130, 115, 160, CounterAiCategory.Positive),
 
-    BLOODLINE("BLDLN", 224, 44, 44),
+    BLOOD("BLOOD", 255, 108, 111, CounterAiCategory.Positive),
 
-    BLOODSTAIN("BLDST", 224, 44, 44),
+    BLOODLINE("BLDLN", 224, 44, 44, CounterAiCategory.Positive),
 
-    BORE("BORE", 98, 47, 34),
+    BLOODSTAIN("BLDST", 224, 44, 44, CounterAiCategory.Positive),
 
-    BOUNTY("BOUNT", 255, 158, 0),
+    BORE("BORE", 98, 47, 34, CounterAiCategory.Positive),
 
-    BRAIN("BRAIN", 197, 62, 212),
+    BOUNTY("BOUNT", 255, 158, 0, CounterAiCategory.Positive),
 
-    BRIBERY("BRIBE", 172, 201, 235),
+    BRAIN("BRAIN", 197, 62, 212, CounterAiCategory.Positive),
 
-    BRICK("BRICK", 226, 192, 164),
+    BRIBERY("BRIBE", 172, 201, 235, CounterAiCategory.Negative),
 
-    BURDEN("BURDEN", 135, 62, 35),
+    BRICK("BRICK", 226, 192, 164, CounterAiCategory.Positive),
 
-    CAGE("CAGE", 155, 155, 155),
+    BURDEN("BURDEN", 135, 62, 35, CounterAiCategory.Positive),
 
-    CARRION("CRRON", 255, 163, 222),
+    CAGE("CAGE", 155, 155, 155, CounterAiCategory.Positive),
 
-    CELL ("CELL", 90, 10, 95),
+    CARRION("CRRON", 255, 163, 222, CounterAiCategory.Positive),
 
-    CHARGE("CHARG", 246, 192, 0),
+    CELL ("CELL", 90, 10, 95, CounterAiCategory.Positive),
 
-    CHORUS("CHRUS", 0, 192, 246),
+    CHARGE("CHARG", 246, 192, 0, CounterAiCategory.Positive),
 
-    COIN("COIN", 255, 215, 0),
+    CHORUS("CHRUS", 0, 192, 246, CounterAiCategory.Positive),
 
-    COLLECTION("CLLCT", 255, 215, 0),
+    COIN("COIN", 255, 215, 0, CounterAiCategory.Positive),
 
-    COMPONENT("COMPN", 224, 160, 48),
+    COLLECTION("CLLCT", 255, 215, 0, CounterAiCategory.Positive),
 
-    CONQUEROR("CONQR", 225, 210, 25),
+    COMPONENT("COMPN", 224, 160, 48, CounterAiCategory.Positive),
 
-    CONTESTED("CONTES", 255, 76, 2),
+    CONQUEROR("CONQR", 225, 210, 25, CounterAiCategory.Positive),
 
-    CORPSE("CRPSE", 230, 186, 209),
+    CONTESTED("CONTES", 255, 76, 2, CounterAiCategory.Positive),
 
-    CORRUPTION("CRPTN", 210, 121, 210),
+    CORPSE("CRPSE", 230, 186, 209, CounterAiCategory.Positive),
 
-    CROAK("CROAK", 155, 255, 5),
+    CORRUPTION("CRPTN", 210, 121, 210, CounterAiCategory.Positive),
 
-    CREDIT("CRDIT", 188, 197, 234),
+    CROAK("CROAK", 155, 255, 5, CounterAiCategory.Positive),
 
-    CRYSTAL("CRYST", 255, 85, 206),
+    CREDIT("CRDIT", 188, 197, 234, CounterAiCategory.Positive),
 
-    CUBE("CUBE", 148, 219, 0),
+    CRYSTAL("CRYST", 255, 85, 206, CounterAiCategory.Positive),
 
-    CURRENCY("CURR", 223, 200, 0),
+    CUBE("CUBE", 148, 219, 0, CounterAiCategory.Positive),
 
-    DEATH("DEATH", 255, 108, 110),
+    CURRENCY("CURR", 223, 200, 0, CounterAiCategory.Positive),
 
-    DEFENSE("DEF", 164, 23, 32),
+    DEATH("DEATH", 255, 108, 110, CounterAiCategory.Positive),
 
-    DELAY("DELAY", 102, 206, 255),
+    DEFENSE("DEF", 164, 23, 32, CounterAiCategory.Positive),
 
-    DEPLETION("DPLT", 185, 201, 208),
+    DELAY("DELAY", 102, 206, 255, CounterAiCategory.Positive),
 
-    DESCENT("DESCT", 175, 35, 40),
+    DEPLETION("DPLT", 185, 201, 208, CounterAiCategory.Positive),
 
-    DESPAIR("DESPR", 238, 186, 187),
+    DESCENT("DESCT", 175, 35, 40, CounterAiCategory.Positive),
 
-    DEVOTION("DEVOT", 255, 111, 255),
+    DESPAIR("DESPR", 238, 186, 187, CounterAiCategory.Positive),
 
-    DISCOVERY("DISCO", 12, 230, 100),
+    DEVOTION("DEVOT", 255, 111, 255, CounterAiCategory.Positive),
 
-    DIVINITY("DVNTY", 0, 233, 255),
+    DISCOVERY("DISCO", 12, 230, 100, CounterAiCategory.Positive),
 
-    DOOM("DOOM", 255, 104, 118),
+    DIVINITY("DVNTY", 0, 233, 255, CounterAiCategory.Positive),
 
-    DREAD ("DREAD", 205, 170, 240),
+    DOOM("DOOM", 255, 104, 118, CounterAiCategory.Negative),
 
-    DREAM("DREAM", 190, 189, 255),
+    DREAD ("DREAD", 205, 170, 240, CounterAiCategory.Positive),
 
-    DUTY("DUTY", 232, 245, 245),
+    DREAM("DREAM", 190, 189, 255, CounterAiCategory.Positive),
 
-    ECHO("ECHO", 225, 180, 255),
+    DUTY("DUTY", 232, 245, 245, CounterAiCategory.Positive),
 
-    EGG("EGG", 255, 245, 195),
+    ECHO("ECHO", 225, 180, 255, CounterAiCategory.Positive),
 
-    ELIXIR("ELIXR", 81, 221, 175),
+    EGG("EGG", 255, 245, 195, CounterAiCategory.Positive),
 
-    EMBER("EMBER", 247, 52, 43),
+    ELIXIR("ELIXR", 81, 221, 175, CounterAiCategory.Positive),
 
-    EON("EON", 23, 194, 255),
+    EMBER("EMBER", 247, 52, 43, CounterAiCategory.Positive),
 
-    ERUPTION("ERUPTION", 255, 124, 124),
+    EON("EON", 23, 194, 255, CounterAiCategory.Positive),
 
-    EXPOSURE("EXPOSURE", 50, 180, 30),
+    ERUPTION("ERUPTION", 255, 124, 124, CounterAiCategory.Positive),
 
-    EYEBALL("EYE", 184, 202, 201),
+    EXPOSURE("EXPOSURE", 50, 180, 30, CounterAiCategory.Positive),
 
-    EYESTALK("EYES", 184, 202, 201),
+    EYEBALL("EYE", 184, 202, 201, CounterAiCategory.Positive),
 
-    EVERYTHING("EVRY", 255, 255, 255),
+    EYESTALK("EYES", 184, 202, 201, CounterAiCategory.Positive),
 
-    FADE("FADE", 159, 209, 192),
+    EVERYTHING("EVRY", 255, 255, 255, CounterAiCategory.Positive),
 
-    FATE("FATE", 255, 164, 226),
+    FADE("FADE", 159, 209, 192, CounterAiCategory.Positive),
 
-    FEATHER("FTHR", 195, 202, 165),
+    FATE("FATE", 255, 164, 226, CounterAiCategory.Positive),
 
-    FEEDING("FEED", 245, 21, 5),
+    FEATHER("FTHR", 195, 202, 165, CounterAiCategory.Positive),
 
-    FELLOWSHIP("FLWS", 255, 255, 255),
+    FEEDING("FEED", 245, 21, 5, CounterAiCategory.Positive),
 
-    FETCH("FETCH", 180, 235, 52),
+    FELLOWSHIP("FLWS", 255, 255, 255, CounterAiCategory.Positive),
 
-    FILIBUSTER("FLBTR", 255, 179, 119),
+    FETCH("FETCH", 180, 235, 52, CounterAiCategory.Positive),
 
-    FILM("FILM", 255, 255, 255),
+    FILIBUSTER("FLBTR", 255, 179, 119, CounterAiCategory.Positive),
 
-    FINALITY("FINAL", 255, 255, 255),
+    FILM("FILM", 255, 255, 255, CounterAiCategory.Positive),
 
-    FIRE("FIRE", 240, 30, 35),
+    FINALITY("FINAL", 255, 255, 255, CounterAiCategory.Negative),
 
-    FLAME("FLAME", 255, 143, 43),
+    FIRE("FIRE", 240, 30, 35, CounterAiCategory.Positive),
 
-    FLAVOR("FLAVOR", 208, 152, 97), ///adventure only
+    FLAME("FLAME", 255, 143, 43, CounterAiCategory.Positive),
 
-    FLOOD("FLOOD", 0, 203, 255),
+    FLAVOR("FLAVOR", 208, 152, 97, CounterAiCategory.Positive), ///adventure only
 
-    FORESHADOW("FRSHD", 144, 99, 207),
+    FLOOD("FLOOD", 0, 203, 255, CounterAiCategory.Positive),
 
-    FUNGUS("FNGUS", 121, 219, 151),
+    FORESHADOW("FRSHD", 144, 99, 207, CounterAiCategory.Positive),
 
-    FUNK("FUNK", 215, 24, 222),
+    FUNGUS("FNGUS", 121, 219, 151, CounterAiCategory.Positive),
 
-    FURY("FURY", 255, 120, 89),
+    FUNK("FUNK", 215, 24, 222, CounterAiCategory.Positive),
 
-    FUSE("FUSE", 255, 122, 85),
+    FURY("FURY", 255, 120, 89, CounterAiCategory.Positive),
 
-    GEM("GEM", 255, 99, 251),
+    FUSE("FUSE", 255, 122, 85, CounterAiCategory.Positive),
 
-    GHOSTFORM("GHSTF", 223, 0, 254),
+    GEM("GEM", 255, 99, 251, CounterAiCategory.Positive),
 
-    GLYPH("GLYPH", 184, 202, 199),
+    GHOSTFORM("GHSTF", 223, 0, 254, CounterAiCategory.Neutral),
 
-    GOLD("GOLD", 248, 191, 0),
+    GLYPH("GLYPH", 184, 202, 199, CounterAiCategory.Positive),
 
-    GROWTH("GRWTH", 87, 226, 32),
+    GOLD("GOLD", 248, 191, 0, CounterAiCategory.Negative),
 
-    HARMONY("HRMNY", 0, 230, 155),
+    GROWTH("GRWTH", 87, 226, 32, CounterAiCategory.Positive),
 
-    HATCHING("HATCH", 204, 255, 204),
+    HARMONY("HRMNY", 0, 230, 155, CounterAiCategory.Positive),
 
-    HATCHLING("HTCHL", 201, 199, 186),
+    HATCHING("HATCH", 204, 255, 204, CounterAiCategory.Positive),
 
-    HEALING("HEAL", 255, 166, 236),
+    HATCHLING("HTCHL", 201, 199, 186, CounterAiCategory.Positive),
 
-    HIT("HIT", 255, 245, 195),
+    HEALING("HEAL", 255, 166, 236, CounterAiCategory.Positive),
 
-    HONE("HONE", 51, 227, 255),
+    HIT("HIT", 255, 245, 195, CounterAiCategory.Positive),
 
-    HOPE("HOPE", 232, 245, 245),
+    HONE("HONE", 51, 227, 255, CounterAiCategory.Positive),
 
-    HOOFPRINT("HOOF", 233, 189, 170),
+    HOPE("HOPE", 232, 245, 245, CounterAiCategory.Positive),
 
-    HOUR("HOUR", 198, 197, 210),
+    HOOFPRINT("HOOF", 233, 189, 170, CounterAiCategory.Positive),
 
-    HOURGLASS("HRGLS", 0, 215, 255),
+    HOUR("HOUR", 198, 197, 210, CounterAiCategory.Positive),
 
-    HUNGER("HUNGR", 255, 91, 149),
+    HOURGLASS("HRGLS", 0, 215, 255, CounterAiCategory.Positive),
 
-    HUSK("HUSK", 227, 212, 173),
+    HUNGER("HUNGR", 255, 91, 149, CounterAiCategory.Positive),
 
-    ICE("ICE", 0, 239, 255),
+    HUSK("HUSK", 227, 212, 173, CounterAiCategory.Positive),
 
-    IMPOSTOR("IMPO", 173, 194, 255),
+    ICE("ICE", 0, 239, 255, CounterAiCategory.Positive),
 
-    INCARNATION("INCRN", 247, 206, 64),
+    IMPOSTOR("IMPO", 173, 194, 255, CounterAiCategory.Positive),
 
-    INCUBATION("INCBT", 40, 210, 25),
+    INCARNATION("INCRN", 247, 206, 64, CounterAiCategory.Negative),
 
-    INGREDIENT("INGRD", 180, 50, 145),
+    INCUBATION("INCBT", 40, 210, 25, CounterAiCategory.Positive),
 
-    INFECTION("INFCT", 0, 230, 66),
+    INGREDIENT("INGRD", 180, 50, 145, CounterAiCategory.Positive),
 
-    INFLUENCE("INFL", 201, 99, 212),
+    INFECTION("INFCT", 0, 230, 66, CounterAiCategory.Positive),
 
-    INGENUITY("INGTY", 67, 186, 205),
+    INFLUENCE("INFL", 201, 99, 212, CounterAiCategory.Positive),
 
-    INTEL("INTEL", 80, 250, 180),
+    INGENUITY("INGTY", 67, 186, 205, CounterAiCategory.Positive),
 
-    INTERVENTION("INTRV", 205, 203, 105),
+    INTEL("INTEL", 80, 250, 180, CounterAiCategory.Positive),
 
-    INVITATION("INVIT", 205, 0, 26),
+    INTERVENTION("INTRV", 205, 203, 105, CounterAiCategory.Positive),
 
-    ISOLATION("ISOLT", 250, 190, 0),
+    INVASION("INVAS", 235, 120, 60, CounterAiCategory.Positive),
+    
+    INVITATION("INVIT", 205, 0, 26, CounterAiCategory.Positive),
 
-    JAVELIN("JAVLN", 180, 206, 172),
+    ISOLATION("ISOLT", 250, 190, 0, CounterAiCategory.Positive),
 
-    JUDGMENT("JUDGM", 249, 220, 52),
+    JAVELIN("JAVLN", 180, 206, 172, CounterAiCategory.Positive),
 
-    KI("KI", 190, 189, 255),
+    JUDGMENT("JUDGM", 249, 220, 52, CounterAiCategory.Positive),
 
-    KICK("KICK", 255, 255, 240),
+    KI("KI", 190, 189, 255, CounterAiCategory.Positive),
 
-    KNOWLEDGE("KNOWL", 0, 115, 255),
+    KICK("KICK", 255, 255, 240, CounterAiCategory.Positive),
 
-    LANDMARK("LNMRK", 186, 28, 28),
+    KNOWLEDGE("KNOWL", 0, 115, 255, CounterAiCategory.Positive),
 
-    LEVEL("LEVEL", 60, 222, 185),
+    LANDMARK("LNMRK", 186, 28, 28, CounterAiCategory.Positive),
 
-    LOOT("LOOT", 255, 215, 0),
+    LEVEL("LEVEL", 60, 222, 185, CounterAiCategory.Positive),
 
-    LORE("LORE", 209, 198, 161),
+    LOOT("LOOT", 255, 215, 0, CounterAiCategory.Positive),
 
-    LUCK("LUCK", 185, 174, 255),
+    LORE("LORE", 209, 198, 161, CounterAiCategory.Positive),
 
-    MANABOND("MANA", 0, 255, 0),
+    LUCK("LUCK", 185, 174, 255, CounterAiCategory.Positive),
 
-    M0M1("-0/-1", "-0/-1", 255, 110, 106),
+    MANABOND("MANA", 0, 255, 0, CounterAiCategory.Positive),
 
-    M0M2("-0/-2", "-0/-2", 255, 110, 106),
+    M0M1("-0/-1", "-0/-1", 255, 110, 106, CounterAiCategory.Negative),
 
-    M1M0("-1/-0", "-1/-0", 255, 110, 106),
+    M0M2("-0/-2", "-0/-2", 255, 110, 106, CounterAiCategory.Negative),
 
-    M2M1("-2/-1", "-2/-1", 255, 110, 106),
+    M1M0("-1/-0", "-1/-0", 255, 110, 106, CounterAiCategory.Negative),
 
-    M2M2("-2/-2", "-2/-2", 255, 110, 106),
+    M2M1("-2/-1", "-2/-1", 255, 110, 106, CounterAiCategory.Negative),
 
-    MAGNET("MAGNT", 198, 197, 210),
+    M2M2("-2/-2", "-2/-2", 255, 110, 106, CounterAiCategory.Negative),
 
-    MANA("MANA", 0, 237, 152),
+    MAGNET("MAGNT", 198, 197, 210, CounterAiCategory.Positive),
 
-    MANIFESTATION("MNFST", 104, 225, 8),
+    MANA("MANA", 0, 237, 152, CounterAiCategory.Positive),
 
-    MANNEQUIN("MANQN", 206, 199, 162),
+    MANIFESTATION("MNFST", 104, 225, 8, CounterAiCategory.Neutral),
 
-    MATRIX("MATRX", 183, 174, 255),
+    MANNEQUIN("MANQN", 206, 199, 162, CounterAiCategory.Positive),
 
-    MEMORY("MEMRY", 174, 183, 255),
+    MATRIX("MATRX", 183, 174, 255, CounterAiCategory.Positive),
 
-    MIDWAY("MDWAY", 84, 101, 207),
+    MEMORY("MEMRY", 174, 183, 255, CounterAiCategory.Positive),
 
-    MINE("MINE", 255, 100, 127),
+    MIDWAY("MDWAY", 84, 101, 207, CounterAiCategory.Positive),
 
-    MINING("MINNG", 184, 201, 207),
+    MINE("MINE", 255, 100, 127, CounterAiCategory.Positive),
 
-    MIRE("MIRE", 153, 209, 199),
+    MINING("MINNG", 184, 201, 207, CounterAiCategory.Positive),
 
-    MUSIC("MUSIC", 255, 138, 255),
+    MIRE("MIRE", 153, 209, 199, CounterAiCategory.Positive),
 
-    MUSTER("MUSTR", 235, 196, 0),
+    MUSIC("MUSIC", 255, 138, 255, CounterAiCategory.Negative),
 
-    NECRODERMIS("NECRO", 80, 209, 250),
+    MUSTER("MUSTR", 235, 196, 0, CounterAiCategory.Positive),
 
-    NET("NET", 0, 221, 251),
+    NECRODERMIS("NECRO", 80, 209, 250, CounterAiCategory.Positive),
 
-    NEST("NEST", 80, 80, 50),
+    NET("NET", 0, 221, 251, CounterAiCategory.Positive),
 
-    OIL("OIL", 99, 102, 106),
+    NEST("NEST", 80, 80, 50, CounterAiCategory.Positive),
 
-    OMEN("OMEN", 255, 178, 120),
+    OIL("OIL", 99, 102, 106, CounterAiCategory.Positive),
 
-    ORE("ORE", 200, 201, 163),
+    OMEN("OMEN", 255, 178, 120, CounterAiCategory.Positive),
 
-    PAGE("PAGE", 218, 195, 162),
+    ORE("ORE", 200, 201, 163, CounterAiCategory.Positive),
 
-    PAIN("PAIN", 255, 108, 111),
+    PAGE("PAGE", 218, 195, 162, CounterAiCategory.Positive),
 
-    PALLIATION("PALLI", 114, 243, 250),
+    PAIN("PAIN", 255, 108, 111, CounterAiCategory.Positive),
 
-    PARALYZATION("PRLYZ", 220, 201, 0),
+    PALLIATION("PALLI", 114, 243, 250, CounterAiCategory.Positive),
 
-    PETAL("PETAL", 255, 162, 216),
+    PARALYZATION("PRLYZ", 220, 201, 0, CounterAiCategory.Negative),
 
-    PETRIFICATION("PETRI", 185, 201, 208),
+    PETAL("PETAL", 255, 162, 216, CounterAiCategory.Positive),
 
-    PIN("PIN", 194, 196, 233),
+    PETRIFICATION("PETRI", 185, 201, 208, CounterAiCategory.Neutral),
 
-    PLAGUE("PLGUE", 94, 226, 25),
+    PIN("PIN", 194, 196, 233, CounterAiCategory.Positive),
 
-    PLOT("PLOT", 255, 172, 133),
+    PLAGUE("PLGUE", 94, 226, 25, CounterAiCategory.Positive),
 
-    PRESSURE("PRESS", 255, 164, 159),
+    PLOT("PLOT", 255, 172, 133, CounterAiCategory.Positive),
 
-    PHYLACTERY("PHYLA", 117, 219, 153),
+    PRESSURE("PRESS", 255, 164, 159, CounterAiCategory.Positive),
 
-    PHYRESIS("PHYRE", 125, 97, 128),
+    PHYLACTERY("PHYLA", 117, 219, 153, CounterAiCategory.Positive),
 
-    PLAN("PLAN", 20, 35, 235),
+    PHYRESIS("PHYRE", 125, 97, 128, CounterAiCategory.Positive),
 
-    POINT("POINT", 153, 255, 130),
+    PLAN("PLAN", 20, 35, 235, CounterAiCategory.Positive),
 
-    POLYP("POLYP", 236, 185, 198),
+    POINT("POINT", 153, 255, 130, CounterAiCategory.Positive),
 
-    POSSESSION("POSSN", 60, 65, 85),
+    POLYP("POLYP", 236, 185, 198, CounterAiCategory.Positive),
 
-    PREY("PREY", 240, 0, 0),
+    POSSESSION("POSSN", 60, 65, 85, CounterAiCategory.Positive),
 
-    PUPA("PUPA", 0, 223, 203),
+    PREY("PREY", 240, 0, 0, CounterAiCategory.Positive),
 
-    P0P1("+0/+1", "+0/+1", 96, 226, 23),
+    PUPA("PUPA", 0, 223, 203, CounterAiCategory.Negative),
 
-    P0P2("+0/+2", "+0/+2", 96, 226, 23),
+    P0P1("+0/+1", "+0/+1", 96, 226, 23, CounterAiCategory.Positive),
 
-    P1P0("+1/+0", "+1/+0", 96, 226, 23),
+    P0P2("+0/+2", "+0/+2", 96, 226, 23, CounterAiCategory.Positive),
 
-    P1P2("+1/+2", "+1/+2", 96, 226, 23),
+    P1P0("+1/+0", "+1/+0", 96, 226, 23, CounterAiCategory.Positive),
 
-    P2P0("+2/+0", "+2/+0", 96, 226, 23),
+    P1P2("+1/+2", "+1/+2", 96, 226, 23, CounterAiCategory.Positive),
 
-    P2P2("+2/+2", "+2/+2", 96, 226, 23),
+    P2P0("+2/+0", "+2/+0", 96, 226, 23, CounterAiCategory.Positive),
 
-    QUEST("QUEST", 251, 189, 0),
+    P2P2("+2/+2", "+2/+2", 96, 226, 23, CounterAiCategory.Positive),
 
-    RALLY("RALLY", 25, 230, 225),
+    QUEST("QUEST", 251, 189, 0, CounterAiCategory.Neutral),
 
-    RELEASE("RELEASE", 200, 210, 50),
+    RALLY("RALLY", 25, 230, 225, CounterAiCategory.Positive),
 
-    REPRIEVE("REPR", 240, 120, 50),
+    RELEASE("RELEASE", 200, 210, 50, CounterAiCategory.Positive),
 
-    REJECTION("REJECT", 212, 235, 242),
+    REPRIEVE("REPR", 240, 120, 50, CounterAiCategory.Positive),
 
-    REV("REV", 255, 108, 111),
+    REJECTION("REJECT", 212, 235, 242, CounterAiCategory.Positive),
 
-    REVIVAL("REVIVL", 130, 230, 50),
+    REV("REV", 255, 108, 111, CounterAiCategory.Positive),
 
-    RIBBON("RIBBON", 233, 245, 232),
+    REVIVAL("REVIVL", 130, 230, 50, CounterAiCategory.Positive),
 
-    RITUAL("RITUAL", 155, 17, 30),
+    RIBBON("RIBBON", 233, 245, 232, CounterAiCategory.Positive),
 
-    ROPE("ROPE", 239, 223, 187),
+    RITUAL("RITUAL", 155, 17, 30, CounterAiCategory.Positive),
 
-    RUST("RUST", 255, 181, 116),
+    ROPE("ROPE", 239, 223, 187, CounterAiCategory.Positive),
 
-    SCREAM("SCREM", 0, 220, 255),
+    RUST("RUST", 255, 181, 116, CounterAiCategory.Negative),
 
-    SCROLL("SCRLL", 206, 199, 162),
+    SAURIAN("SAUR", 120, 203, 161, CounterAiCategory.Positive),
 
-    SHELL("SHELL", 190, 207, 111),
+    SCREAM("SCREM", 0, 220, 255, CounterAiCategory.Positive),
 
-    SHIELD("SHLD", 202, 198, 186),
+    SCROLL("SCRLL", 206, 199, 162, CounterAiCategory.Positive),
 
-    SHRED("SHRED", 255, 165, 152),
+    SHELL("SHELL", 190, 207, 111, CounterAiCategory.Negative),
 
-    SILVER("SILVER", 192, 192, 192),
+    SHIELD("SHLD", 202, 198, 186, CounterAiCategory.Positive),
 
-    SKEWER("SKEWER", 202, 192, 156),
+    SHRED("SHRED", 255, 165, 152, CounterAiCategory.Positive),
 
-    SLEEP("SLEEP", 178, 192, 255),
+    SILVER("SILVER", 192, 192, 192, CounterAiCategory.Positive),
 
-    SLUMBER("SLMBR", 178, 205, 255),
+    SKEWER("SKEWER", 202, 192, 156, CounterAiCategory.Positive),
 
-    SLEIGHT("SLGHT", 185, 174, 255),
+    SLEEP("SLEEP", 178, 192, 255, CounterAiCategory.Negative),
 
-    SLIME("SLIME", 101, 220, 163),
+    SLUMBER("SLMBR", 178, 205, 255, CounterAiCategory.Negative),
 
-    SOUL("SOUL", 243, 190, 247),
+    SLEIGHT("SLGHT", 185, 174, 255, CounterAiCategory.Negative),
 
-    SOOT("SOOT", 211, 194, 198),
+    SLIME("SLIME", 101, 220, 163, CounterAiCategory.Positive),
 
-    SPITE("SPITE", 0, 218, 255),
+    SOUL("SOUL", 243, 190, 247, CounterAiCategory.Positive),
 
-    SPORE("SPORE", 122, 218, 150),
+    SOOT("SOOT", 211, 194, 198, CounterAiCategory.Positive),
 
-    STASH("STASH", 248, 191, 0),
+    SPITE("SPITE", 0, 218, 255, CounterAiCategory.Positive),
 
-    STORAGE("STORG", 255, 177, 121),
+    SPORE("SPORE", 122, 218, 150, CounterAiCategory.Positive),
 
-    STORY("STORY", 180, 72, 195),
+    STASH("STASH", 248, 191, 0, CounterAiCategory.Positive),
 
-    STRIFE("STRFE", 255, 89, 223),
+    STORAGE("STORG", 255, 177, 121, CounterAiCategory.Positive),
 
-    STUDY("STUDY", 226, 192, 165),
+    STORY("STORY", 180, 72, 195, CounterAiCategory.Positive),
 
-    STUN("STUN", 226, 192, 165),
+    STRIFE("STRFE", 255, 89, 223, CounterAiCategory.Positive),
 
-    SUPPLY("SPPLY", 70, 105, 60),
+    STUDY("STUDY", 226, 192, 165, CounterAiCategory.Positive),
 
-    TAKEOVER("TKVR", 63, 49, 191),
+    STUN("STUN", 226, 192, 165, CounterAiCategory.Negative),
 
-    TASK("TASK", 191, 63, 49),
+    SUPPLY("SPPLY", 70, 105, 60, CounterAiCategory.Positive),
 
-    THEFT("THEFT", 255, 176, 125),
+    TAKEOVER("TKVR", 63, 49, 191, CounterAiCategory.Positive),
 
-    TIDE("TIDE", 0, 212, 187),
+    TASK("TASK", 191, 63, 49, CounterAiCategory.Positive),
 
-    TIME("TIME", 255, 121, 255),
+    THEFT("THEFT", 255, 176, 125, CounterAiCategory.Positive),
 
-    TOWER("tower", "TOWER", 0, 239, 255),
+    TIDE("TIDE", 0, 212, 187, CounterAiCategory.Positive),
 
-    TRAINING("TRAIN", 220, 201, 0),
+    TIME("TIME", 255, 121, 255, CounterAiCategory.Positive),
 
-    TRAP("TRAP", 255, 121, 86),
+    TOWER("tower", "TOWER", 0, 239, 255, CounterAiCategory.Positive),
 
-    TREASURE("TRSUR", 255, 184, 0),
+    TRAINING("TRAIN", 220, 201, 0, CounterAiCategory.Neutral),
 
-    UNITY("UNITY", 242, 156, 255),
+    TRAP("TRAP", 255, 121, 86, CounterAiCategory.Positive),
 
-    UNLOCK("UNLCK", 222, 146, 205),
+    TREASURE("TRSUR", 255, 184, 0, CounterAiCategory.Positive),
 
-    VALOR("VALOR", 252, 250, 222),
+    UNITY("UNITY", 242, 156, 255, CounterAiCategory.Positive),
 
-    VELOCITY("VELO", 255, 95, 138),
+    UNLOCK("UNLCK", 222, 146, 205, CounterAiCategory.Positive),
 
-    VERSE("VERSE", 0, 237, 155),
+    VALOR("VALOR", 252, 250, 222, CounterAiCategory.Positive),
 
-    VITALITY("VITAL", 255, 94, 142),
+    VELOCITY("VELO", 255, 95, 138, CounterAiCategory.Positive),
 
-    VORTEX("VORTX", 142, 200, 255),
+    VERSE("VERSE", 0, 237, 155, CounterAiCategory.Positive),
 
-    VOYAGE("VOYAGE", 38, 150, 137),
+    VITALITY("VITAL", 255, 94, 142, CounterAiCategory.Positive),
 
-    WAGE("WAGE", 242, 190, 106),
+    VORTEX("VORTX", 142, 200, 255, CounterAiCategory.Positive),
 
-    WINCH("WINCH", 208, 195, 203),
+    VOYAGE("VOYAGE", 38, 150, 137, CounterAiCategory.Positive),
 
-    WIND("WIND", 0, 236, 255),
+    WAGE("WAGE", 242, 190, 106, CounterAiCategory.Negative),
 
-    WISH("WISH", 255, 85, 206),
+    WINCH("WINCH", 208, 195, 203, CounterAiCategory.Positive),
 
-    WRECK("WRECK", 208, 55, 255),
+    WIND("WIND", 0, 236, 255, CounterAiCategory.Positive),
+
+    WISH("WISH", 255, 85, 206, CounterAiCategory.Positive),
+
+    WRECK("WRECK", 208, 55, 255, CounterAiCategory.Positive),
 
     // Player Counters
 
-    ENERGY("ENRGY"),
+    ENERGY("ENRGY", CounterAiCategory.Positive),
 
-    EXPERIENCE("EXP"),
+    EXPERIENCE("EXP", CounterAiCategory.Positive),
 
-    POISON("POISN"),
+    POISON("POISN", CounterAiCategory.Negative),
 
-    RAD("RAD"),
+    RAD("RAD", CounterAiCategory.Neutral),
 
-    TICKET("TICKET"),
+    TICKET("TICKET", CounterAiCategory.Positive),
 
     ;
 
     private String name, counterOnCardDisplayName;
     private int red, green, blue;
+    private CounterAiCategory aiCategory;
 
-    CounterEnumType(final String counterOnCardDisplayName) {
-        this(counterOnCardDisplayName, 255, 255, 255);
+    CounterEnumType(final String counterOnCardDisplayName, CounterAiCategory aiCategory) {
+        this(counterOnCardDisplayName, 255, 255, 255, aiCategory);
     }
 
-    CounterEnumType(final String counterOnCardDisplayName, final int red, final int green, final int blue) {
+    CounterEnumType(final String counterOnCardDisplayName, final int red, final int green, final int blue, CounterAiCategory aiCategory) {
         this.name = this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
         this.counterOnCardDisplayName = counterOnCardDisplayName;
         this.red = red;
         this.green = green;
         this.blue = blue;
+        this.aiCategory = aiCategory;
     }
 
-    CounterEnumType(final String name, final String counterOnCardDisplayName, final int red, final int green, final int blue) {
-        this(counterOnCardDisplayName, red, green, blue);
+    CounterEnumType(final String name, final String counterOnCardDisplayName, final int red, final int green, final int blue, CounterAiCategory aiCategory) {
+        this(counterOnCardDisplayName, red, green, blue, aiCategory);
         this.name = name;
     }
 
@@ -511,18 +519,27 @@ public enum CounterEnumType implements CounterType {
         return this.name;
     }
 
+    @Override
     public int getRed() {
         return red;
     }
 
+    @Override
     public int getGreen() {
         return green;
     }
 
+    @Override
     public int getBlue() {
         return blue;
     }
 
+    @Override
+    public CounterAiCategory getAiCategory() {
+        return aiCategory;
+    }
+
+    @Override
     public String getCounterOnCardDisplayName() {
         return counterOnCardDisplayName;
     }
@@ -535,10 +552,5 @@ public enum CounterEnumType implements CounterType {
     @Override
     public boolean is(CounterEnumType eType) {
         return this == eType;
-    }
-
-    @Override
-    public boolean isKeywordCounter() {
-        return false;
     }
 }

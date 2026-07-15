@@ -288,6 +288,8 @@ public class CounterAi extends SpellAbilityAi {
             dontCounter = true;
         }
 
+        // TODO check against game changers
+
         if (tgtSA != null && tgtCMC < AiProfileUtil.getIntProperty(ai, AiProps.MIN_SPELL_CMC_TO_COUNTER)) {
             dontCounter = true;
             Card tgtSource = tgtSA.getHostCard();

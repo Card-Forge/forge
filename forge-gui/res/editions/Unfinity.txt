@@ -50,7 +50,7 @@ F77 R Knife and Death @Caio Monteiro
 F82 R Nocturno of Myra's Marvels @Gaboleps
 F83 M Photo Op @Setor Fiadzigbey
 F84 C Questionable Cuisine @Chuck Lukacs
-F86 C Rat in the Hat @Filip Burburan
+F86 C Rat in the Hat @Filipe Pagliuso
 F87 U A Real Handful @Tomek Larek
 F91 C Scooch @Filipe Pagliuso
 F97 C Aardwolf's Advantage @Tomek Larek
@@ -213,9 +213,9 @@ F363 R Knife and Death @Caio Monteiro
 F368 R Nocturno of Myra's Marvels @Gaboleps
 F369 M Photo Op @Setor Fiadzigbey
 F370 C Questionable Cuisine @Chuck Lukacs
-F372 C Rat in the Hat @Filip Burburan
+F372 C Rat in the Hat @Filipe Pagliuso
 F373 U A Real Handful @Tomek Larek
-F377 C Scooch @Filip Burburan
+F377 C Scooch @Filipe Pagliuso
 F383 C Aardwolf's Advantage @Tomek Larek
 F384 C Amped Up @Jamroz Gary
 F385 C Art Appreciation @April Prime
@@ -327,7 +327,7 @@ F538 R Water Gun Balloon Game @Ralph Horsley
 79 R "Lifetime" Pass Holder @Jeff Miracola
 80 C Line Cutter @Paolo Parente
 81 U Night Shift of the Living Dead @Sebastian Giacobino
-85 U Quick Fixer @Francis Tsai
+85 U Quick Fixer @Francis Tneh
 88 R Saw in Half @Sebastian Giacobino
 89 U Scampire @Armand Baltazar
 90 C Scared Stiff @José Parodi
@@ -551,7 +551,7 @@ F538 R Water Gun Balloon Game @Ralph Horsley
 365 R "Lifetime" Pass Holder @Jeff Miracola
 366 C Line Cutter @Paolo Parente
 367 U Night Shift of the Living Dead @Sebastian Giacobino
-371 U Quick Fixer @Francis Tsai
+371 U Quick Fixer @Francis Tneh
 374 R Saw in Half @Sebastian Giacobino
 375 U Scampire @Armand Baltazar
 376 C Scared Stiff @José Parodi

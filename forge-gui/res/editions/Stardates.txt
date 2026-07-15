@@ -1,0 +1,9 @@
+[metadata]
+Code=SDS
+Date=2026-11-20
+Name=Stardates
+Type=Collector_Edition
+ScryfallCode=SDS
+
+[cards]
+11 M Sheoldred, the Apocalypse @Nicky Barkla ${"flavorName": "Khan, Engineered Evil"}

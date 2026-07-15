@@ -1,0 +1,9 @@
+Name:Lo and Li, Royal Advisors|Deck:Lo and Li, Royal Advisors.dck|Variant:Commander|Avatar:Lo and Li, Royal Advisors|Desc:
+Name:Ozai, the Phoenix King|Deck:Ozai, the Phoenix King.dck|Variant:Commander|Avatar:Ozai, the Phoenix King|Desc:
+Name:Mai, Scornful Striker|Deck:Mai, Scornful Striker.dck|Variant:Commander|Avatar:Mai, Scornful Striker|Desc:
+Name:Azula, Cunning Usurper|Deck:Azula, Cunning Usurper.dck|Variant:Commander|Avatar:Azula, Cunning Usurper|Desc:
+Name:Royal Assassin Avatar|Deck:Royal Assassin Avatar.dck|Variant:Vanguard|Avatar:Royal Assassin Avatar|Desc:
+Name:Mai and Zuko|Deck:Mai and Zuko.dck|Variant:Commander|Avatar:Mai and Zuko|Desc:
+Name:Fire Lord Azula|Deck:Fire Lord Azula.dck|Variant:Commander|Avatar:Fire Lord Azula|Desc:
+Name:Avatar Aang|Deck:Avatar Aang.dck|Variant:Commander|Avatar:Avatar Aang|Desc:
+Name:Fire Lord Ozai|Deck:Fire Lord Ozai.dck|Variant:Commander|Avatar:Fire Lord Ozai|Desc:

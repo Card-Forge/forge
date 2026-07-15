@@ -654,6 +654,30 @@ OozeAmulet
 Ajani'sAmulet
   xy: 128, 800
   size: 16, 16
+TeamPennant
+  xy: 128, 496
+  size: 16, 16
+Referee'sShoes
+  xy: 32, 144
+  size: 16, 16
+Girlfriend'sSkirt
+  xy: 144, 432
+  size: 16, 16
+LeechBreeches
+  xy: 112, 448
+  size: 16, 16
+ChaosWand
+  xy: 288, 560
+  size: 16, 16
+BearHelm
+  xy: 0, 368
+  size: 16, 16
+Alesha'sWarSkirt
+  xy: 112, 416
+  size: 16, 16
+Acolyte'sAnklet
+  xy: 80, 976
+  size: 16, 16
 PackLeaderPants
   xy: 0, 480
   size: 16, 16

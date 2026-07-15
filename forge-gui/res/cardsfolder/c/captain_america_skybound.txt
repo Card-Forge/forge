@@ -1,0 +1,10 @@
+Name:Captain America, Skybound
+ManaCost:3 W W
+Types:Legendary Creature Human Soldier Hero
+PT:3/5
+K:Flying
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | TriggerDescription$ Battalion — Whenever NICKNAME and at least two other creatures attack, put a +1/+1 counter on each attacking creature. They gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.attacking | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking | KW$ Indestructible
+Oracle:Flying, vigilance\nBattalion — Whenever Captain America and at least two other creatures attack, put a +1/+1 counter on each attacking creature. They gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)

@@ -563,13 +563,13 @@ public class Assets implements Disposable {
                 if (parameter == null) {
                     parameter = (AssetLoaderParameters<T>) getTextureFilter();
                 }
-
-                final AssetLoaderParameters.LoadedCallback prevCallback = parameter.loadedCallback;
+                // shared filter holds our own prior wrapper; chaining overflows the stack — replace it, but keep a fresh caller's callback (libgdx refcount restore on context loss)
+                boolean sharedFilter = parameter == (Object) textureParameter;
+                final AssetLoaderParameters.LoadedCallback prevCallback = sharedFilter ? null : parameter.loadedCallback;
                 parameter.loadedCallback = (assetManager, fileName1, type1) -> {
                     if (prevCallback != null) {
                         prevCallback.finishedLoading(assetManager, fileName1, type1);
                     }
-
                     currentMemory = calculateTextureSize(assetManager, fileName1, type1);
                 };
             }

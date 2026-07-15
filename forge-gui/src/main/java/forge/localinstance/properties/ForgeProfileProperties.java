@@ -75,8 +75,6 @@ public class ForgeProfileProperties {
         decksDir    = getDir(props, DECKS_DIR_KEY, userDir + "decks" + File.separator);
         decksConstructedDir = getDir(props, DECKS_CONSTRUCTED_DIR_KEY, decksDir + "constructed" + File.separator);
 
-
-        //ensure directories exist
         FileUtil.ensureDirectoryExists(userDir);
         FileUtil.ensureDirectoryExists(cacheDir);
         FileUtil.ensureDirectoryExists(cardPicsDir);
