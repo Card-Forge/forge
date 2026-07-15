@@ -250,6 +250,7 @@ Rhino:Rhinos
 Rigger:Riggers
 Robot:Robots
 Rogue:Rogues
+Romulan:Romulans
 Sable:Sables
 Salamander:Salamanders
 Samurai:Samurais
