@@ -112,6 +112,7 @@ public enum AbilityKey {
     Player("Player"),
     PreventedAmount("PreventedAmount"),
     Produced("Produced"),
+    Putter("Putter"),
     Regeneration("Regeneration"),
     ReplacementEffect("ReplacementEffect"),
     ReplacementResult("ReplacementResult"),

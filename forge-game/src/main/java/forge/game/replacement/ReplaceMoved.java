@@ -51,6 +51,9 @@ public class ReplaceMoved extends ReplacementEffect {
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }
+        if (!matchesValidParam("ValidPutter", runParams.get(AbilityKey.Putter))) {
+            return false;
+        }
         
         if (hasParam("ExcludeDestination")) {
             ZoneType zt = (ZoneType) runParams.get(AbilityKey.Destination);
@@ -119,7 +122,7 @@ public class ReplaceMoved extends ReplacementEffect {
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject(AbilityKey.Card, runParams.get(AbilityKey.Affected));
-        sa.setReplacingObjectsFrom(runParams, AbilityKey.NewCard, AbilityKey.CardLKI, AbilityKey.Cause,
+        sa.setReplacingObjectsFrom(runParams, AbilityKey.NewCard, AbilityKey.CardLKI, AbilityKey.Cause, AbilityKey.Putter,
                 AbilityKey.LastStateBattlefield, AbilityKey.LastStateGraveyard, AbilityKey.CounterTable, AbilityKey.CounterMap);
     }
 
