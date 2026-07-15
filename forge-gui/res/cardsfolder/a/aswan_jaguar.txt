@@ -4,5 +4,5 @@ Types:Creature Cat
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseCT | TriggerDescription$ When CARDNAME comes into play, choose a random creature type from those in target opponent's deck.
 SVar:TrigChooseCT:DB$ ChooseType | ValidTgts$ Opponent | IsCurse$ True | AtRandom$ True | Type$ CreatureInTargetedDeck
-A:AB$ Destroy | Cost$ G G T | ValidTgts$ Creature.ChosenType | NoRegen$ True | TgtPrompt$ Select target creature with the chosen type | SpellDescription$ Destroy target creature with the chosen type. It can't be regenerated.
-Oracle:When Aswan Jaguar comes into play, choose a random creature type from those in target opponent's deck.\n{G}{G}, {T}: Destroy target creature with the chosen type. It can't be regenerated.
+A:AB$ Destroy | Cost$ G G T | ValidTgts$ Creature.ChosenType | NoRegen$ True | TgtPrompt$ Select target creature with the chosen type | SpellDescription$ Bury target creature of the chosen type.
+Oracle:When Aswan Jaguar comes into play, choose a random creature type from those in target opponent's deck.\n{G}{G}, {T}: Bury target creature of the chosen type.

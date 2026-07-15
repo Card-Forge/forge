@@ -7,4 +7,4 @@ A:AB$ DealDamage | Cost$ T SubCounter<X/P1P1> | ValidTgts$ Creature.attacking,Cr
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters
 DeckHints:Type$Artifact & Ability$Counters|Proliferate
-Oracle:{T}, Remove X +1/+1 counters from Arcbound Javelineer: It deals X damage to target attacking or blocking creature.\nModular 1 (This creature enters with a +1/+1 counter on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
+Oracle:{T}, Remove X +1/+1 counters from this creature: It deals X damage to target attacking or blocking creature.\nModular 1 (This creature enters with a +1/+1 counter on it. When it dies, you may put its +1/+1 counters on target artifact creature.)

@@ -6,4 +6,4 @@ K:Kicker:Return<1/Creature>
 K:etbCounter:P1P1:1:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters with a +1/+1 counter on it.
 SVar:WasKicked:Count$Kicked.1.0
 AI:RemoveDeck:All
-Oracle:Kicker—Return a creature you control to its owner's hand. (You may return a creature you control to its owner's hand in addition to any other costs as you cast this spell.)\nIf Arctic Merfolk was kicked, it enters with a +1/+1 counter on it.
+Oracle:Kicker—Return a creature you control to its owner's hand. (You may return a creature you control to its owner's hand in addition to any other costs as you cast this spell.)\nIf this creature was kicked, it enters with a +1/+1 counter on it.

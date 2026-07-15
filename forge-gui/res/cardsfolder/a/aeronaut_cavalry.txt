@@ -3,8 +3,8 @@ ManaCost:4 W
 Types:Creature Human Soldier
 PT:3/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on another target Soldier you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When this creature enters, put a +1/+1 counter on another target Soldier you control.
 SVar:TrigPut:DB$ PutCounter | ValidTgts$ Soldier.Other+YouCtrl | TgtPrompt$ Select another target Soldier you control | CounterType$ P1P1
 DeckHas:Ability$Counters
 DeckHints:Type$Soldier
-Oracle:Flying\nWhen Aeronaut Cavalry enters, put a +1/+1 counter on another target Soldier you control.
+Oracle:Flying\nWhen this creature enters, put a +1/+1 counter on another target Soldier you control.

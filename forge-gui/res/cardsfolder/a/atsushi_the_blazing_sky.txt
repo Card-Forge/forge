@@ -12,4 +12,4 @@ SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | Aff
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:CreateTreasure:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | SpellDescription$ Create three Treasure tokens.
 DeckHas:Ability$Token|Sacrifice
-Oracle:Flying, trample\nWhen Atsushi, the Blazing Sky dies, choose one —\n• Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\n• Create three Treasure tokens.
+Oracle:Flying, trample\nWhen Atsushi dies, choose one —\n• Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\n• Create three Treasure tokens.

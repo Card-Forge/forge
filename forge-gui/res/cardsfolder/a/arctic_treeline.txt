@@ -1,6 +1,6 @@
 Name:Arctic Treeline
 ManaCost:no cost
 Types:Snow Land Forest Plains
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-Oracle:({T}: Add {G} or {W}.)\nArctic Treeline enters tapped.
+Oracle:({T}: Add {G} or {W}.)\nThis land enters tapped.

@@ -10,4 +10,4 @@ SVar:Y:Count$Compare X LT5.X.Z
 SVar:Z:Count$xPaid/Twice
 DeckHas:Ability$Counters
 DeckHints:Ability$Proliferate
-Oracle:Apocalypse Hydra enters with X +1/+1 counters on it. If X is 5 or more, it enters with an additional X +1/+1 counters on it.\n{1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: It deals 1 damage to any target.
+Oracle:This creature enters with X +1/+1 counters on it. If X is 5 or more, it enters with an additional X +1/+1 counters on it.\n{1}{R}, Remove a +1/+1 counter from this creature: It deals 1 damage to any target.
