@@ -1,0 +1,10 @@
+Name:Gandalf, Party Guest
+ManaCost:1 U R W
+Types:Legendary Creature Avatar Wizard
+PT:3/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPlay | TriggerDescription$ At the beginning of combat on your turn, you may cast an instant or sorcery spell with mana value X or less from your hand without paying its mana cost, where X is twice the number of legendary Wizards you control.
+SVar:TrigPlay:DB$ Play | Valid$ Card | ValidSA$ Spell.Instant+cmcLEX,Spell.Sorcery+cmcLEX | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True
+SVar:X:Count$Valid Wizard.Legendary+YouCtrl/Twice
+SVar:PlayMain1:TRUE
+DeckHints:Type$Legendary|Wizard
+Oracle:At the beginning of combat on your turn, you may cast an instant or sorcery spell with mana value X or less from your hand without paying its mana cost, where X is twice the number of legendary Wizards you control.
