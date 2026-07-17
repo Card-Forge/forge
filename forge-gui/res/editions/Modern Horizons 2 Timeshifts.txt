@@ -1,6 +1,6 @@
 [metadata]
 Code=H2R
-Date=2024-06-07
+Date=2024-06-14
 Name=Modern Horizons 2 Timeshifts
 Type=Draft
 ScryfallCode=H2R

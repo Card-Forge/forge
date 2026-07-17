@@ -6,3 +6,4 @@ Type=Commander
 ScryfallCode=FRC
 
 [cards]
+13 R Darksteel Angel @Chippy

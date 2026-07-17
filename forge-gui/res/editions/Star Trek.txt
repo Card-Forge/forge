@@ -1,6 +1,6 @@
 [metadata]
 Code=TRK
-Date=2026-11-20
+Date=2026-11-13
 Name=Star Trek
 Type=Expansion
 ScryfallCode=TRK
@@ -67,3 +67,6 @@ ScryfallCode=TRK
 557 R U.S.S. Enterprise-D, Galaxy-Class @Scott Okumura
 1701 M Captain James T. Kirk @Chris Rallis
 1704 M Captain Kathryn Janeway @Lie Setiawan
+
+[tokens]
+1 w_0_1_human_nophasingin @David Álvarez
