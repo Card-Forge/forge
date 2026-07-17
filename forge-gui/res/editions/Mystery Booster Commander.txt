@@ -1,0 +1,10 @@
+[metadata]
+Code=MBC
+Date=2027-01-01
+Name=Mystery Booster Commander
+Type=Commander
+ScryfallCode=MBC
+
+[cards]
+12 R Tolabow, Loch Rascal @Brian Valeza
+24 R Joven and Chandler @Douglas Shuler

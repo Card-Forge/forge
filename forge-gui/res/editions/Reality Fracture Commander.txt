@@ -7,3 +7,4 @@ ScryfallCode=FRC
 
 [cards]
 13 R Darksteel Angel @Chippy
+98 R Darksteel Angel @Chippy

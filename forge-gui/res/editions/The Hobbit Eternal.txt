@@ -6,6 +6,7 @@ Type=Commander
 ScryfallCode=HOC
 
 [cards]
+2 R Gandalf, Party Guest @Dmitriy Burmak
 36 M Sauron, the Dark Lord @Mark Zug
 38 M Tom Bombadil @Omar Rayyan
 44 M The One Ring @Dan Frazier
