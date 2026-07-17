@@ -13,6 +13,5 @@ SVar:DBStoreSVar:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0 | SubAbi
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBIncrease | SubAbility$ DBDraw
 SVar:DBIncrease:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1 | ConditionCheckSVar$ Y | ConditionSVarCompare$ LT2
 SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$Valid Card.nonLand+RememberedPlayerOwn
 Oracle:If a creature an opponent controls would die, exile it instead.\n[+2]: Up to one target creature gets -4/-1 until your next turn.\n[-2]: Each player sacrifices a creature of their choice. If you sacrificed a creature this way, create a 4/4 green Beast creature token with trample.\n[-3]: Each opponent discards two cards. For each opponent who didn't discard two nonland cards this way, you draw a card.
