@@ -512,7 +512,11 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     game.onCleanupPhase();
                     // set previous player
                     playerPreviousTurn = this.getPlayerTurn();
-                    setPlayerTurn(handleNextTurn());
+                    Player next = handleNextTurn();
+                    if (game.isGameOver()) {
+                        return;
+                    }
+                    setPlayerTurn(next);
 
                     // start effects for next turn (do this first for ControlPlayer)
                     game.getCleanup().executeUntil();
@@ -835,8 +839,19 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
         game.getTriggerHandler().clearThisTurnDelayedTrigger();
 
+        // A player can receive an outcome after the last state-based check,
+        // so process the loss before selecting from the turn order.
+        game.getAction().checkGameOverCondition();
+        if (game.isGameOver()) {
+            return playerTurn;
+        }
+
         Player next = getNextActivePlayer();
         while (!next.isInGame()) {
+            game.getAction().checkGameOverCondition();
+            if (game.isGameOver()) {
+                return next;
+            }
             next = getNextActivePlayer();
         }
 
@@ -1144,6 +1159,9 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 // end phase
                 givePriorityToPlayer = true;
                 onPhaseEnd();
+                if (game.isGameOver()) {
+                    return;
+                }
                 advanceToNextPhase();
                 onPhaseBegin();
             }
@@ -1202,6 +1220,9 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 resolver.run();
             }
             onPhaseEnd();
+            if (game.isGameOver()) {
+                return false;
+            }
             advanceToNextPhase();
             onPhaseBegin();
         }
