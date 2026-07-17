@@ -3,8 +3,8 @@ ManaCost:1 B
 Types:Creature Phyrexian Rat
 PT:2/2
 K:Toxic:1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME dies, proliferate.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When this creature dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
 SVar:TrigProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
-Oracle:Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen Blightbelly Rat dies, proliferate.
+Oracle:Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen this creature dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

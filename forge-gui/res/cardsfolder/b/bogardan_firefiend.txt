@@ -2,6 +2,6 @@ Name:Bogardan Firefiend
 ManaCost:2 R
 Types:Creature Elemental Spirit
 PT:2/1
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDamage | TriggerDescription$ When CARDNAME dies, it deals 2 damage to target creature.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDamage | TriggerDescription$ When this creature dies, it deals 2 damage to target creature.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 2
-Oracle:When Bogardan Firefiend dies, it deals 2 damage to target creature.
+Oracle:When this creature dies, it deals 2 damage to target creature.

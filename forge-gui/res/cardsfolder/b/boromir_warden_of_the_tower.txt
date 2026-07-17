@@ -7,4 +7,4 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZ
 SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility
 A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SubAbility$ TrigTempt | SpellDescription$ Creatures you control gain indestructible until end of turn. The Ring tempts you.
 SVar:TrigTempt:DB$ RingTemptsYou
-Oracle:Vigilance\nWhenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.\nSacrifice Boromir, Warden of the Tower: Creatures you control gain indestructible until end of turn. The Ring tempts you.
+Oracle:Vigilance\nWhenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.\nSacrifice Boromir: Creatures you control gain indestructible until end of turn. The Ring tempts you.

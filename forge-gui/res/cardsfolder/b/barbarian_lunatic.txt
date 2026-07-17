@@ -4,4 +4,4 @@ Types:Creature Human Barbarian
 PT:2/1
 A:AB$ DealDamage | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Creature | NumDmg$ 2 | SpellDescription$ It deals 2 damage to target creature.
 DeckHas:Ability$Sacrifice
-Oracle:{2}{R}, Sacrifice Barbarian Lunatic: It deals 2 damage to target creature.
+Oracle:{2}{R}, Sacrifice this creature: It deals 2 damage to target creature.

@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You | Execute$ TrigDebuff | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature attacks you, it loses flanking until end of turn.
 SVar:TrigDebuff:DB$ Debuff | Defined$ TriggeredAttackerLKICopy | Keywords$ Flanking
-T:Mode$ Attacks | ValidCard$ Creature.withoutFlying | Attacked$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature without flying attacks you, CARDNAME deals 1 damage to it.
+T:Mode$ Attacks | ValidCard$ Creature.withoutFlying | Attacked$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature without flying attacks you, this enchantment deals 1 damage to it.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ TriggeredAttackerLKICopy
-Oracle:Whenever a creature attacks you, it loses flanking until end of turn.\nWhenever a creature without flying attacks you, Barbed Foliage deals 1 damage to it.
+Oracle:Whenever a creature attacks you, it loses flanking until end of turn.\nWhenever a creature without flying attacks you, this enchantment deals 1 damage to it.

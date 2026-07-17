@@ -2,4 +2,4 @@ Name:Broken Fall
 ManaCost:2 G
 Types:Enchantment
 A:AB$ Regenerate | ValidTgts$ Creature | Cost$ Return<1/CARDNAME> | SpellDescription$ Regenerate target creature.
-Oracle:Return Broken Fall to its owner's hand: Regenerate target creature.
+Oracle:Return this enchantment to its owner's hand: Regenerate target creature.

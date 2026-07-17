@@ -3,16 +3,16 @@ ManaCost:3 W
 Types:Creature Hippogriff
 PT:2/3
 K:Flying
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target attacking creature without flying gains flying until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, target attacking creature without flying gains flying until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | KW$ Flying
 AlternateMode:Adventure
 SVar:HasAttackEffect:TRUE
-Oracle:Flying\nWhenever Blessed Hippogriff attacks, target attacking creature without flying gains flying until end of turn.
+Oracle:Flying\nWhenever this creature attacks, target attacking creature without flying gains flying until end of turn.
 
 ALTERNATE
 
 Name:Tyr's Blessing
 ManaCost:W
 Types:Instant Adventure
-A:SP$ Pump | ValidTgts$ Creature | KW$ Indestructible | SpellDescription$ Target creature gains indestructible until end of turn.
-Oracle:Target creature gains indestructible until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | KW$ Indestructible | SpellDescription$ Target creature gains indestructible until end of turn. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Target creature gains indestructible until end of turn. (Then exile this card. You may cast the creature later from exile.)

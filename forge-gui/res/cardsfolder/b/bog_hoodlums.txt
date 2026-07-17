@@ -2,8 +2,8 @@ Name:Bog Hoodlums
 ManaCost:5 B
 Types:Creature Goblin Warrior
 PT:4/1
-S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigClash | TriggerDescription$ When CARDNAME enters, clash with an opponent. If you win, put a +1/+1 counter on CARDNAME.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ This creature can't block.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigClash | TriggerDescription$ When this creature enters, clash with an opponent. If you win, put a +1/+1 counter on this creature.
 SVar:TrigClash:DB$ Clash | WinSubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1
-Oracle:Bog Hoodlums can't block.\nWhen Bog Hoodlums enters, clash with an opponent. If you win, put a +1/+1 counter on Bog Hoodlums. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)
+Oracle:This creature can't block.\nWhen this creature enters, clash with an opponent. If you win, put a +1/+1 counter on this creature. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)

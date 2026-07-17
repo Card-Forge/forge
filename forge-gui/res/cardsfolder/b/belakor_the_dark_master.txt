@@ -3,7 +3,7 @@ ManaCost:3 U B R
 Types:Legendary Creature Demon Noble
 PT:6/5
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Prince of Chaos — When CARDNAME enters, you draw X cards and you lose X life, where X is the number of Demons you control.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Prince of Chaos — When NICKNAME enters, you draw X cards and you lose X life, where X is the number of Demons you control.
 SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Demon.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Lord of Torment — Whenever another Demon you control enters, it deals damage equal to its power to any target.
@@ -12,4 +12,4 @@ SVar:X:Count$Valid Demon.YouCtrl
 SVar:Y:TriggeredCard$CardPower
 SVar:BuffedBy:Demon
 DeckHints:Type$Demon
-Oracle:Flying\nPrince of Chaos — When Be'lakor, the Dark Master enters, you draw X cards and you lose X life, where X is the number of Demons you control.\nLord of Torment — Whenever another Demon you control enters, it deals damage equal to its power to any target.
+Oracle:Flying\nPrince of Chaos — When Be'lakor enters, you draw X cards and you lose X life, where X is the number of Demons you control.\nLord of Torment — Whenever another Demon you control enters, it deals damage equal to its power to any target.

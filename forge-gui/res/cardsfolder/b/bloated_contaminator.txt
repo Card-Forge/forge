@@ -4,8 +4,8 @@ Types:Creature Phyrexian Beast
 PT:4/4
 K:Trample
 K:Toxic:1
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigProliferate | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, proliferate.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigProliferate | TriggerDescription$ Whenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
 SVar:TrigProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate
 DeckHints:Type$Planeswalker & Ability$Counters
-Oracle:Trample\nToxic 1\nWhenever Bloated Contaminator deals combat damage to a player, proliferate.
+Oracle:Trample\nToxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

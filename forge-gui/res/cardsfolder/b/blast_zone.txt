@@ -3,10 +3,10 @@ ManaCost:no cost
 Types:Land
 K:etbCounter:CHARGE:1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ PutCounter | Cost$ X X T | CounterType$ CHARGE | CounterNum$ X | SpellDescription$ Put X charge counters on CARDNAME.
+A:AB$ PutCounter | Cost$ X X T | CounterType$ CHARGE | CounterNum$ X | SpellDescription$ Put X charge counters on this land.
 SVar:X:Count$xPaid
-A:AB$ DestroyAll | Cost$ 3 T Sac<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQY | SpellDescription$ Destroy each nonland permanent with mana value equal to the number of charge counters on CARDNAME.
+A:AB$ DestroyAll | Cost$ 3 T Sac<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQY | SpellDescription$ Destroy each nonland permanent with mana value equal to the number of charge counters on this land.
 SVar:Y:Count$CardCounters.CHARGE
 AI:RemoveDeck:All
 DeckHas:Ability$Counters
-Oracle:Blast Zone enters with a charge counter on it.\n{T}: Add {C}.\n{X}{X}, {T}: Put X charge counters on Blast Zone.\n{3}, {T}, Sacrifice Blast Zone: Destroy each nonland permanent with mana value equal to the number of charge counters on Blast Zone.
+Oracle:This land enters with a charge counter on it.\n{T}: Add {C}.\n{X}{X}, {T}: Put X charge counters on this land.\n{3}, {T}, Sacrifice this land: Destroy each nonland permanent with mana value equal to the number of charge counters on this land.

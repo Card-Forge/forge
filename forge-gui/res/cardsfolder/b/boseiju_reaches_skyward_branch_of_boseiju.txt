@@ -18,7 +18,7 @@ Colors:green
 Types:Enchantment Creature Plant
 PT:0/0
 K:Reach
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each land you control.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ This creature gets +1/+1 for each land you control.
 SVar:X:Count$Valid Land.YouCtrl
 SVar:BuffedBy:Land
-Oracle:Reach\nBranch of Boseiju gets +1/+1 for each land you control.
+Oracle:Reach\nThis creature gets +1/+1 for each land you control.

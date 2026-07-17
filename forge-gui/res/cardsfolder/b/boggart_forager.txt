@@ -4,4 +4,4 @@ Types:Creature Goblin Rogue
 PT:1/1
 A:AB$ Shuffle | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Player | SpellDescription$ Target player shuffles their library.
 AI:RemoveDeck:All
-Oracle:{R}, Sacrifice Boggart Forager: Target player shuffles their library.
+Oracle:{R}, Sacrifice this creature: Target player shuffles their library.

@@ -3,7 +3,7 @@ ManaCost:4 B R G
 Types:Creature Dragon
 PT:5/5
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 5/5 red Dragon creature token with flying.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 5/5 red Dragon creature token with flying.
 SVar:TrigToken:DB$ Token | TokenScript$ r_5_5_dragon_flying | TokenOwner$ You
 K:Encore:5 B R G
-Oracle:Flying\nWhen Broodmate Tyrant enters, create a 5/5 red Dragon creature token with flying.\nEncore {5}{B}{R}{G}
+Oracle:Flying\nWhen this creature enters, create a 5/5 red Dragon creature token with flying.\nEncore {5}{B}{R}{G}
