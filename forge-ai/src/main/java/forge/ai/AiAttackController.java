@@ -245,22 +245,9 @@ public class AiAttackController {
         preferences.sort(Comparator.comparingInt(scores::get).reversed());
 
         // Sample the primary target with softmax so near-equal threats do not always draw every attack.
-        final int bestScore = scores.get(preferences.get(0));
-        double totalWeight = 0;
-        final double[] weights = new double[preferences.size()];
-        for (int i = 0; i < preferences.size(); i++) {
-            weights[i] = Math.exp((scores.get(preferences.get(i)) - bestScore) / DEFENDER_SCORE_TEMPERATURE);
-            totalWeight += weights[i];
-        }
-        double roll = MyRandom.getRandom().nextDouble() * totalWeight;
-        for (int i = 0; i < preferences.size(); i++) {
-            roll -= weights[i];
-            if (roll < 0) {
-                final Player selected = preferences.remove(i);
-                preferences.add(0, selected);
-                break;
-            }
-        }
+        final Player selected = Aggregates.itemWithSoftmax(preferences, scores::get, DEFENDER_SCORE_TEMPERATURE);
+        preferences.remove(selected);
+        preferences.add(0, selected);
         return preferences;
     }
 
