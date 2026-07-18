@@ -1,0 +1,14 @@
+Name:Drop Bear
+ManaCost:3 R G
+Types:Creature Koala Bear Horror
+PT:*/*
+K:Flash
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests you control plus the number of Bears you control.
+SVar:X:Count$Valid Forest.YouCtrl/Plus.Y
+SVar:Y:Count$Valid Bear.YouCtrl
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When this creature enters, it fights up to one target creature.
+SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1
+SVar:BuffedBy:Forest,Bear
+SVar:NoZeroToughnessAI:True
+Oracle:Flash, haste\nDrop Bear has power and toughness each equal to the number of Forests you control plus the number of Bears you control.\nWhen this creature enters, it fights up to one target creature.

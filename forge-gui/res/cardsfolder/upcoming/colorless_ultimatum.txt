@@ -1,0 +1,8 @@
+Name:Colorless Ultimatum
+ManaCost:2 C C C 2
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBDigExile | SubAbility$ DBPump | SpellDescription$ Each opponent exiles half the cards in their library, rounded up. Until end of turn, creatures you control gain annihilator 1.
+SVar:DBDigExile:DB$ Dig | DigNum$ X | ChangeNum$ All | Defined$ Player.IsRemembered | DestinationZone$ Exile
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Annihilator:1
+SVar:X:Count$ValidLibrary Card.RememberedPlayerCtrl/HalfUp
+Oracle:Each opponent exiles half the cards in their library, rounded up. Until end of turn, creatures you control gain annihilator 1.

@@ -1,0 +1,12 @@
+Name:The Bird Champion
+ManaCost:2 G G U U
+Types:Legendary Creature Bird Wizard
+PT:9/9
+K:Defender
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 green and blue Bird creature token with flying for each Bird you control.
+SVar:TrigToken:DB$ Token | TokenScript$ gu_1_1_bird_flying | TokenAmount$ X
+SVar:X:Count$Valid Bird.YouCtrl
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | Layer$ CantHappen | CheckSVar$ X | SVarCompare$ GE12 | Description$ As long as you control twelve or more Birds, you can't lose the game and your opponents can't win the game.
+R:Event$ GameWin | ActiveZones$ Battlefield | ValidPlayer$ Opponent | Layer$ CantHappen | CheckSVar$ X | SVarCompare$ GE12 | Secondary$ True | Description$ As long as you control twelve or more Birds, you can't lose the game and your opponents can't win the game.
+Oracle:Defender, flying\nAt the beginning of your upkeep, create a 1/1 green and blue Bird creature token with flying for each Bird you control.\nAs long as you control twelve or more Birds, you can't lose the game and opponents can't win the game.

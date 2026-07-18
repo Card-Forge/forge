@@ -1,0 +1,10 @@
+Name:Wurmcoil Broodmother
+ManaCost:9
+Types:Artifact Creature Wurm
+PT:9/9
+K:Deathtouch
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Wurmcoil Engine token and a Wurmcoil Larva token.
+SVar:TrigToken:DB$ CopyPermanent | DefinedName$ Wurmcoil Engine | SubAbility$ DBToken
+SVar:DBToken:DB$ CopyPermanent | DefinedName$ Wurmcoil Larva
+Oracle:Deathtouch, lifelink\nWhen Wurmcoil Broodmother dies, create a Wurmcoil Engine token and a Wurmcoil Larva token.
