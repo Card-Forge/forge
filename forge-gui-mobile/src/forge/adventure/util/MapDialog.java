@@ -16,12 +16,15 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.archipelago.Archipelago;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.AdventureQuestData;
+import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.scene.ArchipelagoSettingsScene;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.scene.RewardScene;
@@ -324,16 +327,23 @@ public class MapDialog {
             }
             if (E.addItem != null&& (!E.addItem.isEmpty())) { //Gives an item to the player.
                 Current.player().addItem(E.addItem);
+                ArchipelagoData.getInstance().addItem(E.addItem);
             }
             if (E.addLife != 0) { //Gives (positive or negative) life to the player. Cannot go over max health.
                 Current.player().heal(E.addLife);
             }
             if (E.addGold != 0) { //Gives (positive or negative) gold to the player.
-                if (E.addGold > 0) Current.player().giveGold(E.addGold);
+                if (E.addGold > 0) {
+                    Current.player().giveGold(E.addGold);
+                    ArchipelagoData.getInstance().addGold(E.addGold);
+                }
                 else Current.player().takeGold(-E.addGold);
             }
             if (E.addShards != 0) { //Gives (positive or negative) mana shards to the player.
-                if (E.addShards > 0) Current.player().addShards(E.addShards);
+                if (E.addShards > 0) {
+                    Current.player().addShards(E.addShards);
+                    ArchipelagoData.getInstance().addShards(E.addShards);
+                }
                 else Current.player().takeShards(-E.addShards);
             }
             if (E.addMapReputation != 0) {
@@ -416,6 +426,10 @@ public class MapDialog {
             if (E.issueQuest != null && (!E.issueQuest.isEmpty())) {
                 questAccepted = E.issueQuest;
                 emitQuestAccepted();
+            }
+            if (E.openArchipelagoSettings) {
+                ArchipelagoSettingsScene.instance().setConnectStatusLabel(Archipelago.getInstance().isConnected() ? "{FADE=GREEN;GREEN;0.1}Connected!" : "{FADE=RED;RED;0.1}Not Connected...");
+                Forge.switchScene(ArchipelagoSettingsScene.instance());
             }
         }
     }

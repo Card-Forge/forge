@@ -30,7 +30,6 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.github.tommyettinger.textra.TextraButton;
-import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 
 import java.util.EnumSet;
@@ -41,13 +40,7 @@ import forge.adventure.character.CharacterSprite;
 import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.scene.DeckSelectScene;
-import forge.adventure.scene.GameScene;
-import forge.adventure.scene.InventoryScene;
-import forge.adventure.scene.MapViewScene;
-import forge.adventure.scene.QuestLogScene;
-import forge.adventure.scene.Scene;
-import forge.adventure.scene.TileMapScene;
+import forge.adventure.scene.*;
 import forge.adventure.util.AdventureQuestController;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
@@ -73,12 +66,12 @@ public class GameHUD extends Stage {
     private final TypingLabel lifePoints;
     private final TypingLabel money;
     private final TypingLabel shards;
+    private final TypingLabel notificationText = Controls.newTypingLabel("");
     private final TypingLabel enemyCounterText;
     private final Image enemyCounterBackground;
-    private final TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
-    private final TextraButton deckActor, openMapActor, menuActor, logbookActor, inventoryActor, exitToWorldMapActor, bookmarkActor;
+    private final TextraButton deckActor, openMapActor, menuActor, logbookActor, inventoryActor, exitToWorldMapActor, bookmarkActor, apSettingsActor;
     public final UIActor ui;
     private final Touchpad touchpad;
     private final Console console;
@@ -125,7 +118,10 @@ public class GameHUD extends Stage {
         gamehud = ui.findActor("gamehud");
         exitToWorldMapActor = ui.findActor("exittoworldmap");
         bookmarkActor = ui.findActor("bookmark");
+        apSettingsActor = ui.findActor("aptracker");
         dialog = Controls.newDialog("");
+        apSettingsActor.pad(0, 0, 0, 2);
+        apSettingsActor.setVisible(false);
 
         miniMapPlayer = new Image(Forge.getAssets().getTexture(Config.instance().getFile("ui/minimap_player.png")));
         //create touchpad
@@ -157,6 +153,7 @@ public class GameHUD extends Stage {
         ui.onButtonPress("deck", this::openDeck);
         ui.onButtonPress("exittoworldmap", this::exitToWorldMap);
         ui.onButtonPress("bookmark", this::bookmark);
+        ui.onButtonPress("aptracker", this::openApTracker);
         keyCollection = ui.findActor("keyCollection");
         keyCollection.skipToTheEnd();
         lifePoints = ui.findActor("lifePoints");
@@ -246,6 +243,7 @@ public class GameHUD extends Stage {
         menuGroup.addActor(inventoryActor);
         menuGroup.addActor(exitToWorldMapActor);
         menuGroup.addActor(bookmarkActor);
+        menuGroup.addActor(apSettingsActor);
         ui.addActor(menuGroup);
         //AVATAR
         avatarGroup.addActor(avatar);
@@ -338,6 +336,7 @@ public class GameHUD extends Stage {
                     && !(Controls.actorContainsVector(openMapActor, touch)) //not inside openmap button
                     && !(Controls.actorContainsVector(logbookActor, touch)) //not inside stats button
                     && !(Controls.actorContainsVector(inventoryActor, touch)) //not inside inventory button
+                    && !(Controls.actorContainsVector(apSettingsActor, touch)) //not inside apSettings button
                     && !(Controls.actorContainsVector(exitToWorldMapActor, touch)) //not inside exit button
                     && !(Controls.actorContainsVector(bookmarkActor, touch)) //not inside bookmark button
                     && !(Controls.actorContainsVector(abilityButtonMap, touch)) //not inside abilityButtonMap
@@ -581,7 +580,7 @@ public class GameHUD extends Stage {
                     return;
                 if (data.shardsNeeded > Current.player().getShards())
                     return;
-                Current.player().addShards(-data.shardsNeeded);
+                Current.player().takeShards(data.shardsNeeded);
                 ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
                 AdventureQuestController.instance().updateItemUsed(data);
             }, "menu");
@@ -781,6 +780,14 @@ public class GameHUD extends Stage {
                 }
             }
         }
+    }
+
+    private void openApTracker() {
+        if (console.isVisible())
+            return;
+        if (Forge.advFreezePlayerControls)
+            return;
+        Forge.switchScene(ArchipelagoTrackerScene.instance());
     }
 
     private void updateBookmarkActor(boolean value) {
@@ -1093,13 +1100,13 @@ public class GameHUD extends Stage {
         flicker(WorldStage.getInstance().getPlayerSprite());
     }
 
-    public void addNotification(String text) {
+    public void addNotification(String text, float moveDuration, float delayDuration, float alphaDuration) {
         Action preconfigureNotification = new Action() {
             @Override
             public boolean act(float delta) {
                 notificationText.setWrap(false);
+                notificationText.setDefaultToken("{COLOR=BLACK}");
                 notificationText.setText(text);
-                notificationText.setColor(Color.BLACK);
                 notificationText.setWidth(Math.min(notificationText.getPrefWidth(), Forge.isLandscapeMode() ? getWidth() * 0.25f : getWidth() - 25));
                 notificationText.setWrap(true);
                 notificationText.layout();
@@ -1119,19 +1126,23 @@ public class GameHUD extends Stage {
 
         if (Forge.isLandscapeMode()) {
             newNotification = Actions.after(Actions.sequence(preconfigureNotification,
-                    Actions.moveTo(5, 0, 2f),
-                    Actions.delay(10f),
-                    Actions.alpha(0f, 3f),
+                    Actions.moveTo(5, 0, moveDuration),
+                    Actions.delay(delayDuration),
+                    Actions.alpha(0f, alphaDuration),
                     Actions.sizeTo(0, 0)));
         } else {
             newNotification = Actions.after(Actions.sequence(preconfigureNotification,
-                    Actions.moveToAligned(5, getHeight(), Align.topLeft, 2f),
-                    Actions.delay(10f),
-                    Actions.alpha(0f, 3f),
+                    Actions.moveToAligned(5, getHeight(), Align.topLeft, moveDuration),
+                    Actions.delay(delayDuration),
+                    Actions.alpha(0f, alphaDuration),
                     Actions.sizeTo(0, 0)));
         }
 
         notificationPane.addAction(newNotification);
+    }
+
+    public void addNotification(String text) {
+        addNotification(text, 2f, 10f, 3f);
     }
 
     public void clearNotifications() {
@@ -1139,5 +1150,9 @@ public class GameHUD extends Stage {
         notificationPane.setBounds(5, Forge.isLandscapeMode() ? -notificationText.getPrefHeight() : getHeight(), getWidth() * 0.4f, 25);
         notificationPane.setStyle(Controls.getSkin().get("paper", ScrollPane.ScrollPaneStyle.class));
         notificationPane.getColor().a = 0f;
+    }
+
+    public void setApButtonVisibility(boolean visible) {
+        apSettingsActor.setVisible(visible);
     }
 }

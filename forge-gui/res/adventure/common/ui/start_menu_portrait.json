@@ -61,22 +61,31 @@
     },
     {
       "type": "TextButton",
-      "name": "Settings",
-      "text": "tr(lblSettings)",
-      "selectable": true,
-      "width": 118,
+      "name": "ApSettings",
+      "text": "[%120][+APIconSmall]",
+      "width": 38,
       "height": 48,
       "x": 16,
       "yOffset": 8
     },
     {
       "type": "TextButton",
+      "name": "Settings",
+      "text": "tr(lblSettings)",
+      "selectable": true,
+      "width": 119,
+      "height": 48,
+      "x": 16,
+      "yOffset": -48
+    },
+    {
+      "type": "TextButton",
       "name": "Backup",
       "text": "tr(lblData)",
       "selectable": true,
-      "width": 118,
+      "width": 119,
       "height": 48,
-      "x": 134,
+      "x": 135,
       "yOffset": -48
     },
     {

@@ -74,8 +74,9 @@ public final class SItemManagerUtil {
         RATE_2    (FSkinProp.IMG_FAV2,    null, "lbl2starcards"),
         RATE_3    (FSkinProp.IMG_FAV3,    null, "lbl3starcards"),
         RATE_4    (FSkinProp.IMG_FAV4,    null, "lbl4starcards"),
-        RATE_5    (FSkinProp.IMG_FAV5,    null, "lbl5starcards");
+        RATE_5    (FSkinProp.IMG_FAV5,    null, "lbl5starcards"),
 
+        LOCKED    (FSkinProp.ICO_LOCK, null, "lblLockedCards");
 
         public final FSkinProp skinProp;
         public final Predicate<CardRules> predicate;

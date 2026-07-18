@@ -9,6 +9,8 @@ import com.github.tommyettinger.textra.TextraLabel;
 import com.google.common.collect.Lists;
 
 import forge.Forge;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.AdventureDeckEditor;
@@ -157,7 +159,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public final Set<PaperCard> favoriteCards = new HashSet<>();
 
     public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy,
-                       boolean isUsingCustomDeck, DifficultyData difficultyData, AdventureModes adventureMode) {
+                       boolean isUsingCustomDeck, DifficultyData difficultyData, AdventureModes adventureMode, ArchipelagoMode archipelagoMode) {
         clear();
         this.adventureMode = adventureMode;
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
@@ -172,6 +174,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         decks.set(0, deck);
 
         cards.addAllFlat(deck.getAllCardsInASinglePool(true, true).toFlatList());
+        ArchipelagoData archipelagoData = ArchipelagoData.getInstance();
+        for (PaperCard card : cards.toFlatList()) {
+            archipelagoData.addCardUnlockedByName(card.getCardName());
+        }
 
         this.difficultyData.startingLife = difficultyData.startingLife;
         this.difficultyData.startingMoney = difficultyData.startingMoney;
@@ -973,6 +979,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void addReward(Reward reward) {
+        ArchipelagoData archipelagoData = ArchipelagoData.getInstance();
         switch (reward.getType()) {
             case Card:
                 cards.add(reward.getCard());
@@ -981,17 +988,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     autoSellCards.add(reward.getCard());
                     refreshEditor();
                 }
+                archipelagoData.addCardByRarity(reward.getCard().getRarity().toString());
                 break;
             case Gold:
                 addGold(reward.getCount());
                 break;
             case Item:
-                if (reward.getItem() != null)
+                if (reward.getItem() != null) {
                     addItem(reward.getItem().name);
+                }
                 break;
             case CardPack:
                 if (reward.getDeck() != null) {
                     boostersOwned.add(reward.getDeck());
+                    archipelagoData.addPack(reward.getDeck().getName());
                 }
                 break;
             case Life:
@@ -1011,6 +1021,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     private void addGold(int goldCount) {
         gold += goldCount;
+        ArchipelagoData.getInstance().addGold(goldCount);
         onGoldChangeList.emit();
     }
 
@@ -1102,6 +1113,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void addMaxLife(int count) {
         maxLife += count;
         life += count;
+        ArchipelagoData.getInstance().addMaxLife(count);
         onLifeTotalChangeList.emit();
     }
 
@@ -1117,6 +1129,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void addShards(int number) {
+        ArchipelagoData.getInstance().addShards(number);
         takeShards(-number);
     }
 
@@ -1402,6 +1415,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         ItemData item = ItemListData.getItem(name);
         if (item == null)
             return false;
+        ArchipelagoData.getInstance().addItem(name);
         inventoryItems.add(item);
         if (updateEvent)
             AdventureQuestController.instance().updateItemReceived(item);

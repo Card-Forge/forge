@@ -62,6 +62,6 @@
   - [Fantasy Blocks](fantasy-blocks.md)
 
 - [Missing Cards in Forge](Missing-Cards-in-Forge.md)
-  - [Un‐cards, Playtest Cards, and Other Funny Cards](Un‐cards,-Playtest-Cards,-and-Other-Funny-Cards.md)
+  - [Un‐cards, Playtest Cards, and Other Funny Cards](Un-cards,-Playtest-Cards,-and-Other-Funny-Cards.md)
 
 - [Credit & Thanks](Credit-and-Thanks.md)
