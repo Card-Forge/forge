@@ -76,6 +76,9 @@ import java.util.stream.Collectors;
  */
 public class ComputerUtil {
 
+    private static final int COMBAT_TTK_HORIZON = 10;
+    private static final int COMBAT_TTK_SCORE_PER_TURN = 40;
+
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Runnable chooseTargets) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
@@ -2954,13 +2957,8 @@ public class ComputerUtil {
             // non combat check takes life into account here
             rating += opponent.getLife() * 3;
         } else {
-            // TODO: Consider whether the opponent is likely to attack a bigger threat instead.
-            // This is hard to predict for human players and multiplayer politics.
-            int remainingLife = predictNextCombatsRemainingLife(ai, true, true, 0 , null, List.of(opponent));
-            if (remainingLife < ai.getLife()) {
-                int lifeLoss = Math.abs(ai.getLife() - Math.max(-20, remainingLife));
-                rating += lifeLoss * lifeLoss;
-            }
+            // TODO: Weight this by how likely the opponent is to attack this AI rather than another player.
+            rating += getCombatTtkScore(estimateCombatTurnsToKill(opponent, ai));
         }
 
         return rating;
@@ -3176,6 +3174,45 @@ public class ComputerUtil {
         return Integer.MIN_VALUE == AiCache.getCached("aiLifeInDanger", () -> predictNextCombatsRemainingLife(ai, serious, false, payment, null),
                 List.of(AiCache::identity, Objects::equals, Objects::equals), ai, serious, payment);
     }
+
+    /**
+     * Estimates how many identical, combat-only attacks {@code attacker} needs to defeat
+     * {@code defender}. The estimate assumes the defender blocks optimally and the attacker
+     * attacks with every creature that can attack next turn.
+     */
+    public static int estimateCombatTurnsToKill(final Player attacker, final Player defender) {
+        if (attacker == null || defender == null || !attacker.isOpponentOf(defender)
+                || defender.getLife() <= 0 || !defender.canLoseLife() || defender.cantLoseForZeroOrLessLife()) {
+            return Integer.MAX_VALUE;
+        }
+        return AiCache.getCached("estimateCombatTurnsToKill",
+                () -> estimateCombatTurnsToKillChanged(attacker, defender),
+                List.of(AiCache::identity, AiCache::identity), attacker, defender);
+    }
+
+    public static int getCombatTtkScore(final int turnsToKill) {
+        if (turnsToKill < 1 || turnsToKill > COMBAT_TTK_HORIZON) {
+            return 0;
+        }
+        return (COMBAT_TTK_HORIZON - turnsToKill + 1) * COMBAT_TTK_SCORE_PER_TURN;
+    }
+
+    private static int estimateCombatTurnsToKillChanged(final Player attacker, final Player defender) {
+        final Combat combat = new Combat(attacker);
+        for (Card creature : attacker.getCreaturesInPlay()) {
+            if (ComputerUtilCombat.canAttackNextTurn(creature, defender)) {
+                combat.addAttacker(creature, defender);
+            }
+        }
+        if (combat.getAttackers().isEmpty()) {
+            return Integer.MAX_VALUE;
+        }
+
+        new AiBlockController(defender, true).assignBlockersForCombat(combat);
+        final int damage = defender.getLife() - ComputerUtilCombat.lifeThatWouldRemain(defender, combat);
+        return damage > 0 ? (defender.getLife() + damage - 1) / damage : Integer.MAX_VALUE;
+    }
+
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers) {
         return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, ai.getOpponents());
     }
