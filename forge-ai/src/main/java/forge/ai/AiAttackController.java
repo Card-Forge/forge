@@ -221,8 +221,6 @@ public class AiAttackController {
         final Map<Player, Integer> scores = new HashMap<>(opponents.size());
         for (Player opp : opponents) {
             int score = ComputerUtil.evaluateBoardPosition(ai, opp);
-            // Round small differences away so turn order does not decide nearly equal threats.
-            score = Math.round(score / 10f) * 10;
             score += ComputerUtil.getCombatTtkScore(ComputerUtil.estimateCombatTurnsToKill(ai, opp));
             if (forCombatDmg) {
                 if (opp.isMonarch() && ai.canBecomeMonarch()) {
