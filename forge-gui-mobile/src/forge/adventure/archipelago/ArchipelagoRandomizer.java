@@ -360,7 +360,7 @@ public class ArchipelagoRandomizer {
 
     public void sendQueuedLocations() {
         Archipelago AP = Archipelago.getInstance();
-        if (!locationQueue.isEmpty() && AP.checkLocations(locationQueue)) locationQueue.clear();
+        if (!locationQueue.isEmpty() && AP.sendQueuedLocations(locationQueue)) locationQueue.clear();
     }
 
     public void setupAPSettingScene() {
