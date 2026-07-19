@@ -3198,7 +3198,7 @@ public class ComputerUtil {
     }
 
     private static int estimateCombatTurnsToKillChanged(final Player attacker, final Player defender) {
-        final int remainingLife = predictNextCombatsRemainingLife(defender, true, true, 0, null, List.of(attacker), true, false);
+        final int remainingLife = predictNextCombatsRemainingLife(defender, true, true, 0, null, List.of(attacker), true);
         if (remainingLife == Integer.MIN_VALUE) {
             return 1;
         }
@@ -3213,10 +3213,10 @@ public class ComputerUtil {
         return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, ai.getOpponents());
     }
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers, final List<Player> opps) {
-        return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, opps, false, true);
+        return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, opps, false);
     }
     private static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment,
-            final CardCollection excludedBlockers, final List<Player> opps, final boolean checkingOther, final boolean checkNonlethalDanger) {
+            final CardCollection excludedBlockers, final List<Player> opps, final boolean checkingOther) {
         // life won't change
         int remainingLife = Integer.MAX_VALUE;
 
@@ -3258,7 +3258,7 @@ public class ComputerUtil {
             if (serious && ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment)) {
                 return Integer.MIN_VALUE;
             }
-            if (checkNonlethalDanger && !serious && ComputerUtilCombat.lifeInDanger(ai, combat, payment)) {
+            if (!serious && ComputerUtilCombat.lifeInDanger(ai, combat, payment)) {
                 return Integer.MIN_VALUE;
             }
 
