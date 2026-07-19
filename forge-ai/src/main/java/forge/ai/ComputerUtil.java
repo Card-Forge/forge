@@ -76,7 +76,7 @@ import java.util.stream.Collectors;
  */
 public class ComputerUtil {
 
-    private static final int COMBAT_TTK_HORIZON = 10;
+    private static final int COMBAT_TTK_HORIZON = 2;
     private static final int COMBAT_TTK_SCORE_PER_TURN = 40;
 
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Runnable chooseTargets) {

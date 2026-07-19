@@ -218,10 +218,18 @@ public class AiAttackController {
             return Collections.singletonList(opponents.get(0));
         }
 
+        final Map<Player, Integer> threatScores = new HashMap<>(opponents.size());
+        int highestThreat = Integer.MIN_VALUE;
+        for (Player opp : opponents) {
+            final int threatScore = ComputerUtil.evaluateBoardPosition(ai, opp);
+            threatScores.put(opp, threatScore);
+            highestThreat = Math.max(highestThreat, threatScore);
+        }
+
         final Map<Player, Integer> scores = new HashMap<>(opponents.size());
         for (Player opp : opponents) {
-            int score = ComputerUtil.evaluateBoardPosition(ai, opp);
-            score += ComputerUtil.getCombatTtkScore(ComputerUtil.estimateCombatTurnsToKill(ai, opp));
+            final int threatScore = threatScores.get(opp);
+            int score = threatScore + getFinishingBonus(ai, opp, threatScore, highestThreat);
             if (forCombatDmg) {
                 if (opp.isMonarch() && ai.canBecomeMonarch()) {
                     score += 80;
@@ -247,6 +255,12 @@ public class AiAttackController {
         preferences.remove(selected);
         preferences.add(0, selected);
         return preferences;
+    }
+
+    private static int getFinishingBonus(final Player ai, final Player opponent, final int threatScore, final int highestThreat) {
+        final int ttkScore = ComputerUtil.getCombatTtkScore(ComputerUtil.estimateCombatTurnsToKill(ai, opponent));
+        // Preserve weaker opponents as potential checks on a clear leader.
+        return (int) Math.round(ttkScore * Math.exp((threatScore - highestThreat) / DEFENDER_SCORE_TEMPERATURE));
     }
 
     private boolean chooseNextDefender() {
