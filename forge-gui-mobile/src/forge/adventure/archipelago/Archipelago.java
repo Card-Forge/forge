@@ -53,8 +53,13 @@ public class Archipelago {
         }
     }
 
+    // Todo: Still not great. Pls fix.
     public boolean checkLocations(List<Long> ids) {
-        return APClient.checkLocations(ids);
+        if (APClient == null || !APClient.isConnected() || !APClient.checkLocations(ids)) {
+            ArchipelagoRandomizer.getInstance().locationQueue.addAll(ids);
+            return false;
+        }
+        return true;
     }
 
     public void goal() {
