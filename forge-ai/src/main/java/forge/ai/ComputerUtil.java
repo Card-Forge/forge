@@ -3198,7 +3198,10 @@ public class ComputerUtil {
     }
 
     private static int estimateCombatTurnsToKillChanged(final Player attacker, final Player defender) {
-        final int remainingLife = predictNextCombatsRemainingLife(defender, false, true, 0, null, List.of(attacker), true, false);
+        final int remainingLife = predictNextCombatsRemainingLife(defender, true, true, 0, null, List.of(attacker), true, false);
+        if (remainingLife == Integer.MIN_VALUE) {
+            return 1;
+        }
         if (remainingLife == Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
         }
@@ -3213,7 +3216,7 @@ public class ComputerUtil {
         return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, opps, false, true);
     }
     private static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment,
-            final CardCollection excludedBlockers, final List<Player> opps, final boolean checkingOther, final boolean checkDanger) {
+            final CardCollection excludedBlockers, final List<Player> opps, final boolean checkingOther, final boolean checkNonlethalDanger) {
         // life won't change
         int remainingLife = Integer.MAX_VALUE;
 
@@ -3252,10 +3255,10 @@ public class ComputerUtil {
             // examples : Black Vise, The Rack, known direct damage spells in enemy hand, etc
             // If added, might need a parameter to define whether we want to check all threats or combat threats.
 
-            if (checkDanger && serious && ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment)) {
+            if (serious && ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment)) {
                 return Integer.MIN_VALUE;
             }
-            if (checkDanger && !serious && ComputerUtilCombat.lifeInDanger(ai, combat, payment)) {
+            if (checkNonlethalDanger && !serious && ComputerUtilCombat.lifeInDanger(ai, combat, payment)) {
                 return Integer.MIN_VALUE;
             }
 
