@@ -4,9 +4,8 @@ Types:Instant
 K:Kicker:2 W W
 A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgtsDesc$ creature you own | ValidTgts$ Creature.YouOwn | TargetMin$ X | TargetMax$ Y | RememberChanged$ True | SubAbility$ DBChangeZone | SubAbility$ DBDelayedTrigger | StackDescription$ Return {c:Targeted} to your hand. | SpellDescription$ Choose target creature you own. If this spell was kicked, instead choose any number of target creatures you own. Return each chosen creature to your hand.
 SVar:DBDelayedTrigger:DB$ Effect | Triggers$ UpkeepTrig | RememberObjects$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ At the beginning of the next upkeep, create a 4/4 white Bird Soldier creature token with flying for each creature returned to your hand this way.
-SVar:UpkeepTrig:Mode$ Phase | Phase$ Upkeep | Execute$ TrigToken | TriggerDescription$ At the beginning of the next upkeep, create a 4/4 white Bird Soldier creature token with flying for each creature returned to your hand this way.
-SVar:TrigToken:DB$ Token | TokenScript$ w_4_4_bird_soldier_flying | TokenOwner$ You | TokenAmount$ TokenX | SubAbility$ EagleCleanup
-SVar:EagleCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:UpkeepTrig:Mode$ Phase | Phase$ Upkeep | Execute$ TrigToken | OneOff$ True | TriggerDescription$ At the beginning of the next upkeep, create a 4/4 white Bird Soldier creature token with flying for each creature returned to your hand this way.
+SVar:TrigToken:DB$ Token | TokenScript$ w_4_4_bird_soldier_flying | TokenOwner$ You | TokenAmount$ TokenX
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Kicked.0.1
 SVar:Y:Count$Kicked.Z.1
