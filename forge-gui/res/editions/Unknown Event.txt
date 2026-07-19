@@ -350,7 +350,7 @@ UA05c U Power Level Analyzer @
 UA05d U Kibo's Bananamobile @
 UB05 U Phyrexian Chimney Imp @
 UB05a U Fear of Fear Itself @
-UR05 U Joven and Chandler @
+UR05 U P-Joven and Chandler @
 UU05 U Adventurer Beguiler @
 UW05 U Rosewater's Nemesis @
 UW05a U Devoted Mardu @
