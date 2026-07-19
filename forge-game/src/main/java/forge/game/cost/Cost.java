@@ -74,6 +74,9 @@ public class Cost implements Serializable {
         return this.getCostMana() != null;
     }
 
+    public final boolean isFree() {
+        return isOnlyManaCost() && getTotalMana().isZero();
+    }
     public final boolean hasSpecificCostType(Class<? extends CostPart> costType) {
         for (CostPart p : getCostParts()) {
             if (costType.isInstance(p)) {
@@ -863,14 +866,14 @@ public class Cost implements Serializable {
             boolean append = true;
             if (!first) {
                 if (part instanceof CostPartMana) {
-                    cost.insert(0, ", ").insert(0, part.toString());
+                    cost.insert(0, ", ").insert(0, part);
                     append = false;
                 } else {
                     cost.append(", ");
                 }
             }
             if (append) {
-                cost.append(part.toString());
+                cost.append(part);
             }
             first = false;
         }

@@ -657,7 +657,7 @@ public class CardProperty {
                             return false;
                         break;
                     case "LastCastThisTurn":
-                        final List<Card> c = game.getStack().getSpellsCastThisTurn();
+                        final List<Card> c = game.getStack().getSpellCardsCastThisTurn();
                         if (c.isEmpty() || !card.sharesColorWith(c.get(c.size() - 1))) {
                             return false;
                         }
@@ -1846,6 +1846,10 @@ public class CardProperty {
             }
         } else if (property.equals("IsSuspected")) {
             if (!card.isSuspected()) {
+                return false;
+            }
+        } else if (property.equals("IsPrepared")) {
+            if (!card.isPrepared()) {
                 return false;
             }
         } else if (property.equals("IsRemembered")) {

@@ -656,7 +656,6 @@ public class MapStage extends GameStage {
                         //Flow continues into "shop" case with above data overriding base logic.
 
                     case "shop":
-
                         int restockPrice = 0;
                         String shopList = "";
 

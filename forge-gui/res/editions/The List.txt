@@ -1218,6 +1218,7 @@ DD1-19 U Wren's Run Vanquisher @Paolo Parente
 DD1-26 U Wirewood Lodge @Anthony S. Waters
 DD1-33 U Akki Coalflinger @Nottsuo
 DD1-44 U Mogg Fanatic @Brom
+DD1-54 U Boggart Shenanigans @Warren Mahy
 DD1-58 U Goblin Burrows @David Martin
 DD2-6 U Willbender @Eric Peterson
 DD2-10 U Fledgling Mawcor @Kev Walker
@@ -1893,7 +1894,6 @@ EVE-156 R Murkfiend Liege @Carl Critchlow
 EVE-160 C Slippery Bogle @Dave Allsop
 EVE-172 R Scarecrone @Jesper Ejsing
 EVG-1 R Ambush Commander @Lucio Parrillo
-EVG-54 U Boggart Shenanigans @Warren Mahy
 EXO-11 R Oath of Lieges @Mark Zug
 EXO-14 U Pegasus Stampede @Mark Zug
 EXO-17 U Reconnaissance @Val Mayerik

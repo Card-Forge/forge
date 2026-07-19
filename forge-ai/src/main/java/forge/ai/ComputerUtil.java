@@ -844,7 +844,7 @@ public class ComputerUtil {
                         String defined = sub.getParamOrDefault("Defined", "");
                         // Check if this targets the AI (e.g., OppNonRememberedController, TriggeredPlayer)
                         if (defined.contains("OppNon") || defined.contains("Opponent") || defined.contains("TriggeredPlayer")) {
-                            int lifeAmount = AbilityUtils.calculateAmount(host, sub.getParamOrDefault("LifeAmount", "0"), sub);
+                            int lifeAmount = AbilityUtils.calculateAmount(host, sub.getParam("LifeAmount"), sub);
                             if (lifeAmount >= ai.getLife()) {
                                 wouldDieFromNotSacrificing = true;
                             }
@@ -1414,7 +1414,7 @@ public class ComputerUtil {
     }
 
     public static boolean hasACardGivingHaste(final Player ai, final boolean checkOpponentCards) {
-        final CardCollection all = new CardCollection(ai.getCardsIn(Lists.newArrayList(ZoneType.Battlefield, ZoneType.Command)));
+        final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield, ZoneType.Command));
 
         // Special for Anger
         if (!ai.getGame().isCardInPlay("Yixlid Jailer")
@@ -1458,7 +1458,6 @@ public class ComputerUtil {
 
                 final String valid = params.get("ValidCard");
                 if (valid.contains("Creature.YouCtrl") || valid.contains("Other+YouCtrl") ) {
-
                     final SpellAbility sa = t.getOverridingAbility();
                     if (sa != null && sa.getApi() == ApiType.Pump && sa.hasParam("KW")
                             && sa.getParam("KW").contains("Haste")) {
@@ -1492,7 +1491,6 @@ public class ComputerUtil {
                 for (StaticAbility stAb : c.getStaticAbilities()) {
                     if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.hasParam("AddKeyword")
                             && stAb.getParam("AddKeyword").contains("Haste")) {
-
                         final ArrayList<String> affected = Lists.newArrayList(stAb.getParam("Affected").split(","));
                         if (affected.contains("Creature")) {
                             return true;
@@ -2315,6 +2313,11 @@ public class ComputerUtil {
                 return new CardCollection(goodChoices.getFirst());
             }
 
+            Card nearTermThreat = getBestNearTermDiscardThreat(discarder, goodChoices);
+            if (nearTermThreat != null) {
+                return new CardCollection(nearTermThreat);
+            }
+
             if (sa.hasParam("DiscardValid")) {
                 final String validString = sa.getParam("DiscardValid");
                 if (validString.contains("Creature") && !validString.contains("nonCreature")) {
@@ -2372,6 +2375,22 @@ public class ComputerUtil {
         }
 
         return goodChoices.subList(0, max);
+    }
+
+    private static Card getBestNearTermDiscardThreat(Player discarder, CardCollection goodChoices) {
+        int manaSources = ComputerUtilMana.getAvailableManaEstimate(discarder, false);
+        if (CardLists.count(discarder.getCardsIn(ZoneType.Hand), CardPredicates.LANDS_PRODUCING_MANA) > 0) {
+            manaSources++;
+        }
+
+        final int nearTermMana = manaSources + 1;
+        CardCollection nearTermChoices = CardLists.filter(goodChoices,
+                c -> !c.isLand() && c.getCMC() <= nearTermMana);
+        if (nearTermChoices.isEmpty()) {
+            return null;
+        }
+
+        return ComputerUtilCard.getBestAI(nearTermChoices);
     }
 
     public static CardCollection getCardsToDiscardFromFriend(Player aiChooser, Player p, SpellAbility sa, CardCollection validCards, int min, int max) {
@@ -2443,9 +2462,9 @@ public class ComputerUtil {
                 } else if (logic.equals("MostProminentComputerControls")) {
                     chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Battlefield), validTypes);
                 } else if (logic.equals("MostProminentComputerControlsOrOwns")) {
-                    CardCollectionView list = ai.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Hand));
+                    CardCollectionView list = ai.getCardsIn(ZoneType.Battlefield, ZoneType.Hand);
                     if (list.isEmpty()) {
-                        list = ai.getCardsIn(Arrays.asList(ZoneType.Library));
+                        list = ai.getCardsIn(ZoneType.Library);
                     }
                     chosen = ComputerUtilCard.getMostProminentType(list, validTypes);
                 } else if (logic.equals("MostProminentOppControls")) {
@@ -2756,9 +2775,6 @@ public class ComputerUtil {
                         AbilityUtils.calculateAmount(card, ab.getParam("NumDmg"), ab), card, false);
             } else if (ab.getApi() == ApiType.LoseLife) {
                 if (damage == -1) { damage = 0; } // found a damage-dealing spell
-                if (!ab.hasParam("LifeAmount")) {
-                    continue;
-                }
                 damage += AbilityUtils.calculateAmount(card, ab.getParam("LifeAmount"), ab);
             }
             ab = ab.getSubAbility();
@@ -2815,9 +2831,6 @@ public class ComputerUtil {
                 if (!"TriggeredActivator".equals(trigSa.getParam("Defined"))) {
                     continue;
                 }
-                if (!trigSa.hasParam("LifeAmount")) {
-                    continue;
-                }
                 damage += AbilityUtils.calculateAmount(source, trigSa.getParam("LifeAmount"), trigSa);
             }
         }
@@ -2871,9 +2884,6 @@ public class ComputerUtil {
                         AbilityUtils.calculateAmount(source, trigSa.getParam("NumDmg"), trigSa), source, false);
             } else if (trigSa.getApi() == ApiType.LoseLife) {
                 if (!"TriggeredCardController".equals(trigSa.getParam("Defined"))) {
-                    continue;
-                }
-                if (!trigSa.hasParam("LifeAmount")) {
                     continue;
                 }
                 damage += AbilityUtils.calculateAmount(source, trigSa.getParam("LifeAmount"), trigSa);

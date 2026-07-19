@@ -1,0 +1,45 @@
+[metadata]
+Code=HOC
+Date=2026-08-14
+Name=The Hobbit Commander
+Type=Commander
+ScryfallCode=HOC
+
+[cards]
+1 R Fíli and Kíli, Joyous @Dmitry Burmak
+2 R Gandalf, Party Guest @Dmitry Burmak
+3 R Thorin, King of Durin's Folk @Dmitry Burmak
+4 R Bilbo, Fellow Conspirator @Dmitry Burmak
+5 R Bag End Banquet @Dmitry Burmak
+6 R Ori, Plate Stacker @Dmitry Burmak
+7 R Long-Lost Lances @Marta Nael
+8 R Dragon-Cursed Halls @Marta Nael
+9 R Smaug the Impenetrable @Marta Nael
+10 R Bilbo's Burglaring @Marta Nael
+11 R Dragon's Desire @Marta Nael
+12 R Necklace of Girion @Marta Nael
+16 M Galadriel's Dismissal @Rebecca Guay
+17 M Reprieve @Warren Mahy
+19 M Orcish Bowmasters @Ron Spencer
+22 M Call Forth the Tempest @Alex Horley-Orlandelli
+31 M Flame of Anor @Jeff Miracola
+36 M Sauron, the Dark Lord @Mark Zug
+38 M Tom Bombadil @Omar Rayyan
+44 M The One Ring @Dan Frazier
+51 M Rivendell @Mark Poole
+52 M The Shire @Danny Schwartz
+56 M Galadriel's Dismissal @Rebecca Guay
+57 M Reprieve @Warren Mahy
+59 M Orcish Bowmasters @Ron Spencer
+62 M Call Forth the Tempest @Alex Horley-Orlandelli
+71 M Flame of Anor @Jeff Miracola
+76 M Sauron, the Dark Lord @Mark Zug
+78 M Tom Bombadil @Omar Rayyan
+84 M The One Ring @Dan Frazier
+91 M Rivendell @Mark Poole
+92 M The Shire @Danny Schwartz
+93 M Dwarven Warriors @Tomas Duchek
+94 M The Reaver Cleaver @Alexander Mokhov
+95 M Arcane Signet @Anastasia Balakchina
+96 M Mox Amber @Robin Olausson
+97 M Treasure Vault @Pablo Mendoza

@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
@@ -182,14 +183,15 @@ public class PlayEffect extends SpellAbilityEffect {
             return;
         }
 
+        Predicate<SpellAbility> validSA;
         if (sa.hasParam("ValidSA")) {
-            final String valid[] = sa.getParam("ValidSA").split(",");
-            final List<Card> invalid = tgtCards.stream().filter(c -> !IterableUtil.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller, source, sa))).collect(Collectors.toList());
-            if (!invalid.isEmpty())
-                tgtCards.removeAll(invalid);
+            validSA = SpellAbilityPredicates.isValid(sa.getParam("ValidSA").split(","), controller, source, sa);
+            tgtCards.removeIf(c -> AbilityUtils.getSpellsFromPlayEffect(c, controller, CardStateName.Original, false, validSA).isEmpty());
             if (tgtCards.isEmpty()) {
                 return;
             }
+        } else {
+            validSA = null;
         }
 
         int amount = 1;
@@ -283,11 +285,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 state = CardStateName.Backside;
             }
 
-            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, controller, state, !altCost);
-            if (sa.hasParam("ValidSA")) {
-                final String valid[] = sa.getParam("ValidSA").split(",");
-                sas.removeIf(sp -> !sp.isValid(valid, controller , source, sa));
-            }
+            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, controller, state, !altCost, validSA);
 
             if (altCostManaCost) {
                 sas.removeIf(sp -> sp.getPayCosts().getCostMana().getMana().isNoCost());

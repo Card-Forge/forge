@@ -218,6 +218,10 @@ public class StaticAbilityPanharmonicon {
             if (!stAb.matchesValidParam("ValidTurned", runParams.get(AbilityKey.Card))) {
                 return false;
             }
+        } else if (trigMode.equals(TriggerType.LifeGained)) {
+            if (!stAb.matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+                return false;
+            }
         }
 
         return true;

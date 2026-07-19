@@ -88,9 +88,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Revolt")) {
                 this.setRevolt(true);
             }
-            if (value.equals("Desert")) {
-                this.setDesert(true);
-            }
             if (value.equals("Blessing")) {
                 this.setBlessing(true);
             }
@@ -182,7 +179,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (params.containsKey("ConditionZone")) {
-            this.setPresentZone(ZoneType.smartValueOf(params.get("ConditionZone")));
+            this.setPresentZones(ZoneType.listValueOf(params.get("ConditionZone")));
         }
 
         if (params.containsKey("ConditionPlayerDefined")) {
@@ -268,7 +265,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.isMetalcraft() && !activator.hasMetalcraft()) return false;
         if (this.isDelirium() && !activator.hasDelirium()) return false;
         if (this.isRevolt() && !activator.hasRevolt()) return false;
-        if (this.isDesert() && !activator.hasDesert()) return false;
         if (this.isBlessing() && !activator.hasBlessing()) return false;
 
         if (this.kicked && !sa.isKicked()) return false;
@@ -350,18 +346,15 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (getPresentDefined() != null) {
                 list = AbilityUtils.getDefinedObjects(host, getPresentDefined(), sa);
             } else {
-                boolean usedLastState = false;
-                if (sa.isReplacementAbility()) {
-                    if (getPresentZone().equals(ZoneType.Battlefield)) {
-                        list = new FCollection<>(sa.getRootAbility().getLastStateBattlefield());
-                        usedLastState = true;
-                    } else if (getPresentZone().equals(ZoneType.Graveyard)) {
-                        list = new FCollection<>(sa.getRootAbility().getLastStateGraveyard());
-                        usedLastState = true;
+                list = new FCollection<>();
+                for (final ZoneType zone : getPresentZones()) {
+                    if (!sa.isReplacementAbility() || !zone.equals(ZoneType.Battlefield) || !zone.equals(ZoneType.Graveyard)) {
+                        list.addAll(game.getCardsIn(zone));
+                    } else if (zone.equals(ZoneType.Battlefield)) {
+                        list.addAll(sa.getRootAbility().getLastStateBattlefield());
+                    } else if (zone.equals(ZoneType.Graveyard)) {
+                        list.addAll(sa.getRootAbility().getLastStateGraveyard());
                     }
-                }
-                if (!usedLastState) {
-                    list = new FCollection<>(game.getCardsIn(getPresentZone()));
                 }
             }
 
@@ -381,19 +374,15 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (getPresentDefined2() != null) {
                 list = AbilityUtils.getDefinedObjects(host, getPresentDefined2(), sa);
             } else {
-                boolean usedLastState = false;
-                if (sa.isReplacementAbility()) {
-                    //for now, we will always look in the same zone as the other present
-                    if (getPresentZone().equals(ZoneType.Battlefield)) {
-                        list = new FCollection<>(sa.getRootAbility().getLastStateBattlefield());
-                        usedLastState = true;
-                    } else if (getPresentZone().equals(ZoneType.Graveyard)) {
-                        list = new FCollection<>(sa.getRootAbility().getLastStateGraveyard());
-                        usedLastState = true;
+                list = new FCollection<>();
+                for (final ZoneType zone : getPresentZones()) {
+                    if (!sa.isReplacementAbility() || !zone.equals(ZoneType.Battlefield) || !zone.equals(ZoneType.Graveyard)) {
+                        list.addAll(game.getCardsIn(zone));
+                    } else if (zone.equals(ZoneType.Battlefield)) {
+                        list.addAll(sa.getRootAbility().getLastStateBattlefield());
+                    } else if (zone.equals(ZoneType.Graveyard)) {
+                        list.addAll(sa.getRootAbility().getLastStateGraveyard());
                     }
-                }
-                if (!usedLastState) {
-                    list = new FCollection<>(game.getCardsIn(getPresentZone()));
                 }
             }
 
