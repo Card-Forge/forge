@@ -1,0 +1,15 @@
+Name:The Eagles Are Coming!
+ManaCost:1 W
+Types:Instant
+K:Kicker:2 W W
+A:SP$ Pump | ValidTgtsDesc$ creature you own | ValidTgts$ Creature.YouOwn | TargetMin$ X | TargetMax$ X | SubAbility$ DBPump | StackDescription$ None | SpellDescription$ Choose target creature you own.
+SVar:DBPump:DB$ Pump | TgtPrompt$ Select any number of target creatures you own | ValidTgts$ Creature.YouOwn | TargetMin$ 0 | TargetMax$ Y | SubAbility$ DBChangeZone | StackDescription$ None | SpellDescription$ If this spell was kicked, instead choose any number of target creatures you own.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Targeted | RememberChanged$ True | SubAbility$ DBDelayedTrigger | StackDescription$ Return {c:Targeted} to your hand. | SpellDescription$ Return each chosen creature to your hand.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | Execute$ TrigToken | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next upkeep, create a 4/4 white Bird Soldier creature token with flying for each creature returned to your hand this way.
+SVar:TrigToken:DB$ Token | TokenScript$ w_4_4_bird_soldier_flying | TokenOwner$ You | TokenAmount$ TokenX
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Kicked.0.1
+SVar:Y:Count$Valid Creature.YouOwn/Times.Z
+SVar:Z:Count$Kicked.1.0
+SVar:TokenX:DelayTriggerRemembered$Amount
+Oracle:Kicker {2}{W}{W} (You may pay an additional {2}{W}{W} as you cast this spell.)\nChoose target creature you own. If this spell was kicked, instead choose any number of target creatures you own. Return each chosen creature to your hand. At the beginning of the next upkeep, create a 4/4 white Bird Soldier creature token with flying for each creature returned to your hand this way.
