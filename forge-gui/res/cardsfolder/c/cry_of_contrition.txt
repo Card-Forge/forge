@@ -3,4 +3,4 @@ ManaCost:B
 Types:Sorcery
 K:Haunt:TrigDiscard
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
-Oracle:Target player discards a card.\nHaunt (When this spell card is put into a graveyard after resolving, exile it haunting target creature.)\nWhen the creature Cry of Contrition haunts dies, target player discards a card.
+Oracle:Target player discards a card.\nHaunt (When this spell card is put into a graveyard after resolving, exile it haunting target creature.)\nWhen the creature this card haunts dies, target player discards a card.

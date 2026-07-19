@@ -3,5 +3,5 @@ ManaCost:1 B B
 Types:Creature Wall
 PT:3/2
 K:Defender
-A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
-Oracle:Defender (This creature can't attack.)\n{1}{B}: Regenerate Carrion Wall.
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate this creature.
+Oracle:Defender (This creature can't attack.)\n{1}{B}: Regenerate this creature.

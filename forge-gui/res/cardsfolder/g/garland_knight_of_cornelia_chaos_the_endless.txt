@@ -18,6 +18,6 @@ Colors:black,red
 Types:Legendary Creature Demon
 PT:5/5
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Whenever NICKNAME dies, put it on the bottom of its owner's library.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When NICKNAME dies, put it on the bottom of its owner's library.
 SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1
 Oracle:Flying\nWhen Chaos dies, put it on the bottom of its owner's library.

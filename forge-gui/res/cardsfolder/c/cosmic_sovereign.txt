@@ -11,4 +11,4 @@ SVar:DBConjure:DB$ MakeCard | Name$ ChosenName | Conjure$ True | Zone$ Battlefie
 SVar:DBPump:DB$ Animate | Keywords$ Haste | Duration$ Permanent | AtEOT$ Exile | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearNamedCard$ True
 SVar:X:Count$CardPower
-Oracle:Flying, haste\n{R}: This creature gets +1/+0 until end of turn.\nAt the beginning of combat on your turn, conjure a random creature card with mana value X onto the battlefield, where X is this creature's power. That creature gains haste. Exile it at the beginning of the next end step.
+Oracle:Flying, Haste\n{R}: This creature gets +1/+0 until end of turn.\nAt the beginning of combat on your turn, conjure a random creature card with mana value X onto the battlefield, where X is this creature's power. That creature gains haste. Exile it at the beginning of the next end step.

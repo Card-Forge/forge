@@ -3,6 +3,6 @@ ManaCost:B R G
 Types:Creature Human Warrior
 PT:4/2
 K:Haste
-S:Mode$ Continuous | Affected$ Card.Self+ThisTurnEntered | AddKeyword$ Indestructible | Description$ CARDNAME has indestructible as long as it entered this turn.
+S:Mode$ Continuous | Affected$ Card.Self+ThisTurnEntered | AddKeyword$ Indestructible | Description$ This creature has indestructible as long as it entered this turn.
 SVar:PlayMain1:TRUE
-Oracle:Haste\nCrew Captain has indestructible as long as it entered this turn.
+Oracle:Haste\nThis creature has indestructible as long as it entered this turn.

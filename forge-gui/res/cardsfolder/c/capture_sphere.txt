@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Enchantment Aura
 K:Flash
 K:Enchant:Creature
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
-Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nWhen Capture Sphere enters, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nWhen this Aura enters, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.

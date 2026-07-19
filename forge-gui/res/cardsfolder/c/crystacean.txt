@@ -3,4 +3,4 @@ ManaCost:3 U
 Types:Creature Crab
 PT:1/6
 K:Flash
-Oracle:Flash
+Oracle:Flash (You may cast this spell any time you could cast an instant.)

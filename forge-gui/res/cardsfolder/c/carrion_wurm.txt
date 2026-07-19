@@ -2,8 +2,8 @@ Name:Carrion Wurm
 ManaCost:3 B B
 Types:Creature Zombie Wurm
 PT:6/5
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBNoCombatDamage | TriggerDescription$ Whenever CARDNAME attacks or blocks, any player may exile three cards from their graveyard. If a player does, CARDNAME assigns no combat damage this turn.
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DBNoCombatDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, any player may exile three cards from their graveyard. If a player does, CARDNAME assigns no combat damage this turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBNoCombatDamage | TriggerDescription$ Whenever this creature attacks or blocks, any player may exile three cards from their graveyard. If a player does, this creature assigns no combat damage this turn.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DBNoCombatDamage | Secondary$ True | TriggerDescription$ Whenever this creature attacks or blocks, any player may exile three cards from their graveyard. If a player does, this creature assigns no combat damage this turn.
 SVar:DBNoCombatDamage:DB$ Effect | StaticAbilities$ SNoCombatDamage | Duration$ UntilHostLeavesPlayOrEOT | UnlessCost$ ExileFromGrave<3/Card> | UnlessPayer$ Player | UnlessSwitched$ True
 SVar:SNoCombatDamage:Mode$ AssignNoCombatDamage | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE assigns no combat damage this turn.
-Oracle:Whenever Carrion Wurm attacks or blocks, any player may exile three cards from their graveyard. If a player does, Carrion Wurm assigns no combat damage this turn.
+Oracle:Whenever this creature attacks or blocks, any player may exile three cards from their graveyard. If a player does, this creature assigns no combat damage this turn.

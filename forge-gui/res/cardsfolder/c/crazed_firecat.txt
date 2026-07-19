@@ -2,7 +2,7 @@ Name:Crazed Firecat
 ManaCost:5 R R
 Types:Creature Elemental Cat
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFlip | TriggerDescription$ When CARDNAME enters, flip a coin until you lose a flip. Put a +1/+1 counter on CARDNAME for each flip you won.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFlip | TriggerDescription$ When this creature enters, flip a coin until you lose a flip. Put a +1/+1 counter on this creature for each flip you won.
 SVar:TrigFlip:DB$ FlipCoin | FlipUntilYouLose$ True | WinSubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Wins
-Oracle:When Crazed Firecat enters, flip a coin until you lose a flip. Put a +1/+1 counter on Crazed Firecat for each flip you won.
+Oracle:When this creature enters, flip a coin until you lose a flip. Put a +1/+1 counter on this creature for each flip you won.

@@ -8,4 +8,4 @@ SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | RememberDestroyed$ True | SubAb
 SVar:DBToken:DB$ Token | Condition$ Delirium | TokenScript$ g_x_x_ooze | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-Oracle:Destroy up to one target artifact, up to one target creature, and up to one target enchantment.\nDelirium — Then if there are four or more card types among cards in your graveyard, create an X/X green Ooze token, where X is the total mana value of permanents destroyed this way.
+Oracle:Destroy up to one target artifact, up to one target creature, and up to one target enchantment.\nDelirium — Then if there are four or more card types among cards in your graveyard, create an X/X green Ooze creature token, where X is the total mana value of permanents destroyed this way.

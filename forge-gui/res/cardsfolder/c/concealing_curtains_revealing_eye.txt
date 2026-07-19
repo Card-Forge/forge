@@ -3,9 +3,9 @@ ManaCost:B
 Types:Creature Wall
 PT:0/4
 K:Defender
-A:AB$ SetState | Cost$ 2 B | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+A:AB$ SetState | Cost$ 2 B | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform this creature. Activate only as a sorcery.
 AlternateMode:DoubleFaced
-Oracle:Defender\n{2}{B}: Transform Concealing Curtains. Activate only as a sorcery.
+Oracle:Defender\n{2}{B}: Transform this creature. Activate only as a sorcery.
 
 ALTERNATE
 

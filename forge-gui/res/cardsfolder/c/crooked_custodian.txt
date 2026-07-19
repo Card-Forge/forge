@@ -2,6 +2,6 @@ Name:Crooked Custodian
 ManaCost:1 B
 Types:Creature Ogre Rogue
 PT:3/2
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-Oracle:Crooked Custodian enters tapped.
+Oracle:This creature enters tapped.

@@ -3,9 +3,9 @@ ManaCost:3 R
 Types:Creature Human Barbarian
 PT:5/3
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters, you take the initiative.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When this creature enters, you take the initiative.
 SVar:TrigInitiative:DB$ TakeInitiative
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of your library. If you've completed a dungeon, you may play that card this turn without paying its mana cost. Otherwise, you may play that card this turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever this creature attacks, exile the top card of your library. If you've completed a dungeon, you may play that card this turn without paying its mana cost. Otherwise, you may play that card this turn.
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBBranch
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ DBEffect2 | FalseSubAbility$ DBEffect | SubAbility$ DBCleanup
 SVar:DBEffect2:DB$ Effect | StaticAbilities$ STPlay2 | RememberObjects$ Remembered | ForgetOnMoved$ Exile
@@ -15,4 +15,4 @@ SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | Aff
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:DungeonsCompleted$Amount
 SVar:HasAttackEffect:TRUE
-Oracle:Trample\nWhen Caves of Chaos Adventurer enters, you take the initiative.\nWhenever Caves of Chaos Adventurer attacks, exile the top card of your library. If you've completed a dungeon, you may play that card this turn without paying its mana cost. Otherwise, you may play that card this turn.
+Oracle:Trample\nWhen this creature enters, you take the initiative.\nWhenever this creature attacks, exile the top card of your library. If you've completed a dungeon, you may play that card this turn without paying its mana cost. Otherwise, you may play that card this turn.
