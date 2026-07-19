@@ -67,9 +67,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class AiAttackController {
 
-    // A 75-point lead gives a defender roughly a 73% chance of being selected over one alternative.
-    private static final double DEFENDER_SCORE_TEMPERATURE = 75d;
-
     // possible attackers and blockers
     private List<Card> attackers;
     private List<Card> blockers;
@@ -226,10 +223,11 @@ public class AiAttackController {
             highestThreat = Math.max(highestThreat, threatScore);
         }
 
+        final int temperature = AiProfileUtil.getIntProperty(ai, AiProps.MULTIPLAYER_TARGETING_SOFTMAX_TEMPERATURE);
         final Map<Player, Integer> scores = new HashMap<>(opponents.size());
         for (Player opp : opponents) {
             final int threatScore = threatScores.get(opp);
-            int score = threatScore + getFinishingBonus(ai, opp, threatScore, highestThreat);
+            int score = threatScore + getFinishingBonus(ai, opp, threatScore, highestThreat, temperature);
             if (forCombatDmg) {
                 if (opp.isMonarch() && ai.canBecomeMonarch()) {
                     score += 80;
@@ -251,16 +249,17 @@ public class AiAttackController {
         preferences.sort(Comparator.comparingInt(scores::get).reversed());
 
         // Sample the primary target with softmax so near-equal threats do not always draw every attack.
-        final Player selected = Aggregates.itemWithSoftmax(preferences, scores::get, DEFENDER_SCORE_TEMPERATURE);
+        final Player selected = Aggregates.itemWithSoftmax(preferences, scores::get, temperature);
         preferences.remove(selected);
         preferences.add(0, selected);
         return preferences;
     }
 
-    private static int getFinishingBonus(final Player ai, final Player opponent, final int threatScore, final int highestThreat) {
-        final int ttkScore = ComputerUtil.getCombatTtkScore(ComputerUtil.estimateCombatTurnsToKill(ai, opponent));
+    private static int getFinishingBonus(final Player ai, final Player opponent, final int threatScore, final int highestThreat,
+            final int temperature) {
+        final int ttkScore = ComputerUtil.getCombatTtkScore(ai, ComputerUtil.estimateCombatTurnsToKill(ai, opponent));
         // Preserve weaker opponents as potential checks on a clear leader.
-        return (int) Math.round(ttkScore * Math.exp((threatScore - highestThreat) / DEFENDER_SCORE_TEMPERATURE));
+        return (int) Math.round(ttkScore * Math.exp((threatScore - highestThreat) / (double) temperature));
     }
 
     private boolean chooseNextDefender() {

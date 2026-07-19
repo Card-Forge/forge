@@ -76,9 +76,6 @@ import java.util.stream.Collectors;
  */
 public class ComputerUtil {
 
-    private static final int COMBAT_TTK_HORIZON = 2;
-    private static final int COMBAT_TTK_SCORE_PER_TURN = 40;
-
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Runnable chooseTargets) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
@@ -2958,7 +2955,7 @@ public class ComputerUtil {
             rating += opponent.getLife() * 3;
         } else {
             // TODO: Weight this by how likely the opponent is to attack this AI rather than another player.
-            rating += getCombatTtkScore(estimateCombatTurnsToKill(opponent, ai));
+            rating += getCombatTtkScore(ai, estimateCombatTurnsToKill(opponent, ai));
         }
 
         return rating;
@@ -3190,11 +3187,12 @@ public class ComputerUtil {
                 List.of(AiCache::identity, AiCache::identity), attacker, defender);
     }
 
-    public static int getCombatTtkScore(final int turnsToKill) {
-        if (turnsToKill < 1 || turnsToKill > COMBAT_TTK_HORIZON) {
+    public static int getCombatTtkScore(final Player ai, final int turnsToKill) {
+        final int horizon = AiProfileUtil.getIntProperty(ai, AiProps.COMBAT_TTK_HORIZON);
+        if (turnsToKill < 1 || turnsToKill > horizon) {
             return 0;
         }
-        return (COMBAT_TTK_HORIZON - turnsToKill + 1) * COMBAT_TTK_SCORE_PER_TURN;
+        return (horizon - turnsToKill + 1) * AiProfileUtil.getIntProperty(ai, AiProps.COMBAT_TTK_SCORE_PER_TURN);
     }
 
     private static int estimateCombatTurnsToKillChanged(final Player attacker, final Player defender) {
