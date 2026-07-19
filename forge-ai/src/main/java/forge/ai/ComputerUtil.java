@@ -3177,8 +3177,8 @@ public class ComputerUtil {
 
     /**
      * Estimates how many identical, combat-only attacks {@code attacker} needs to defeat
-     * {@code defender}. The estimate assumes the defender blocks optimally and the attacker
-     * attacks with every creature that can attack next turn.
+     * {@code defender}. The estimate uses the next-combat prediction and assumes the board
+     * remains unchanged between attacks.
      */
     public static int estimateCombatTurnsToKill(final Player attacker, final Player defender) {
         if (attacker == null || defender == null || !attacker.isOpponentOf(defender)
@@ -3198,18 +3198,11 @@ public class ComputerUtil {
     }
 
     private static int estimateCombatTurnsToKillChanged(final Player attacker, final Player defender) {
-        final Combat combat = new Combat(attacker);
-        for (Card creature : attacker.getCreaturesInPlay()) {
-            if (ComputerUtilCombat.canAttackNextTurn(creature, defender)) {
-                combat.addAttacker(creature, defender);
-            }
-        }
-        if (combat.getAttackers().isEmpty()) {
+        final int remainingLife = predictNextCombatsRemainingLife(defender, false, true, 0, null, List.of(attacker), true, false);
+        if (remainingLife == Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
         }
-
-        new AiBlockController(defender, true).assignBlockersForCombat(combat);
-        final int damage = defender.getLife() - ComputerUtilCombat.lifeThatWouldRemain(defender, combat);
+        final int damage = defender.getLife() - remainingLife;
         return damage > 0 ? (defender.getLife() + damage - 1) / damage : Integer.MAX_VALUE;
     }
 
@@ -3217,6 +3210,10 @@ public class ComputerUtil {
         return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, ai.getOpponents());
     }
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers, final List<Player> opps) {
+        return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, opps, false, true);
+    }
+    private static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment,
+            final CardCollection excludedBlockers, final List<Player> opps, final boolean checkingOther, final boolean checkDanger) {
         // life won't change
         int remainingLife = Integer.MAX_VALUE;
 
@@ -3247,7 +3244,7 @@ public class ComputerUtil {
                 continue;
             }
             // TODO if it's next turn ignore mustBlockCards
-            AiBlockController block = new AiBlockController(ai, false);
+            AiBlockController block = new AiBlockController(ai, checkingOther);
             // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
             block.assignBlockersForCombat(combat, excludedBlockers);
 
@@ -3255,10 +3252,10 @@ public class ComputerUtil {
             // examples : Black Vise, The Rack, known direct damage spells in enemy hand, etc
             // If added, might need a parameter to define whether we want to check all threats or combat threats.
 
-            if (serious && ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment)) {
+            if (checkDanger && serious && ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment)) {
                 return Integer.MIN_VALUE;
             }
-            if (!serious && ComputerUtilCombat.lifeInDanger(ai, combat, payment)) {
+            if (checkDanger && !serious && ComputerUtilCombat.lifeInDanger(ai, combat, payment)) {
                 return Integer.MIN_VALUE;
             }
 
