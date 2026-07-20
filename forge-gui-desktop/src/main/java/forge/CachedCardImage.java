@@ -13,6 +13,7 @@ public abstract class CachedCardImage implements ImageFetcher.Callback {
     final Iterable<PlayerView> viewers;
     final int width;
     final int height;
+    boolean fetchQueued;
 
     static final SwingImageFetcher fetcher = new SwingImageFetcher();
 
@@ -22,18 +23,40 @@ public abstract class CachedCardImage implements ImageFetcher.Callback {
         this.width = width;
         this.height = height;
         if (ImageCache.isSupportedImageSize(width, height)) {
-            BufferedImage image = ImageCache.getImageNoDefault(card, viewers, width, height);
+            BufferedImage image = ImageCache.getCachedImage(card, viewers, width, height);
             if (image == null) {
-                String key = card.getCurrentState().getImageKey(viewers);
-                Logger.debug("Fetch due to missing key: " + key + " for " + card);
-                fetcher.fetchImage(key, () -> {
-                    // The cache may hold placeholder renders scaled from before the
-                    // download completed; drop them so the real image shows.
-                    ImageCache.clearGeneratedVariants(key);
-                    onImageFetched();
-                });
+                ImageCache.loadImageAsync(card, viewers, width, height, this::onImageLoaded);
+            } else if (ImageCache.isPlaceholderCached(card, viewers, width, height)) {
+                queueOnlineFetch();
             }
         }
+    }
+
+    private void onImageLoaded() {
+        if (ImageCache.isPlaceholderCached(card, viewers, width, height)) {
+            queueOnlineFetch();
+        }
+        onImageFetched();
+    }
+
+    private void queueOnlineFetch() {
+        if (fetchQueued) {
+            return;
+        }
+        fetchQueued = true;
+        final String key = card.getCurrentState().getImageKey(viewers);
+        Logger.debug("Fetch due to missing key: " + key + " for " + card);
+        fetcher.fetchImage(key, () -> {
+            // The cache may hold placeholder renders scaled from before the
+            // download completed; drop them and load the real image.
+            ImageCache.clearGeneratedVariants(key);
+            ImageCache.loadImageAsync(card, viewers, width, height, this::onImageFetched);
+        });
+    }
+
+    /** Cache-only lookup; returns null while the asynchronous load is still in flight. */
+    public BufferedImage getCachedImage() {
+        return ImageCache.getCachedImage(card, viewers, width, height);
     }
 
     public BufferedImage getImage() {
