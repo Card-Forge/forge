@@ -1,0 +1,15 @@
+Name:The Master of Lake-town
+ManaCost:1 B B
+Types:Legendary Creature Human Advisor
+PT:3/2
+K:Deathtouch
+T:Mode$ LifeLost | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever a player loses life, that player mills that many cards. (Damage causes loss of life.)
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ X
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigStoreSVar | TriggerDescription$ When CARDNAME dies, draw a card for each graveyard with seven or more cards in it.
+SVar:DBStoreSVar:DB$ StoreSVar | SVar$ Y | Type$ Number | Expression$ 0 | SubAbility$ DBRepeatEach
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBIncrease | SubAbility$ DBDraw
+SVar:DBIncrease:DB$ StoreSVar | SVar$ Y | Type$ CountSVar | Expression$ Y/Plus.1 | ConditionCheckSVar$ Z | ConditionSVarCompare$ GE7
+SVar:TrigDraw:DB$ Draw | NumCards$ Y
+SVar:X:TriggerCount$LifeAmount
+SVar:Z:Count$ValidGraveyard Card.RememberedPlayerOwn
+Oracle:Deathtouch\nWhenever a player loses life, that player mills that many cards. (Damage causes loss of life.)\nWhen The Master of Lake-Town dies, draw a card for each graveyard with seven or more cards in it.
