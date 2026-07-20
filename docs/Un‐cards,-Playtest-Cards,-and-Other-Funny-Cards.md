@@ -276,7 +276,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) MagicConsecrated Sphinx
 1. (Uk) Moth Herb Elixir
 1. (Uk) Peel Out
-1. (Uk) Where We're Going . . .
+1. (Uk) Where We're Going...
 1. (P) Common Black Removal
 1. (P) Dwarven Confluencer
 1. (P) Flanking Licid

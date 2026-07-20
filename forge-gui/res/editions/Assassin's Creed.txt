@@ -67,7 +67,7 @@ ScryfallCode=ACR
 59 M Kassandra, Eagle Bearer @Anna Steinbauer
 60 U Lydia Frye @Mandy Jurgens
 61 R Mary Read and Anne Bonny @Wangjie Li
-62 R Ratonhnhaké:ton @Greg Staples
+62 R Ratonhnhaké꞉ton @Greg Staples
 63 U Shao Jun @Stephen Stark
 64 R Shaun & Rebecca, Agents @Gintas Galvanauskas
 65 U Shay Cormac @Axel Sauerwald
@@ -155,7 +155,7 @@ ScryfallCode=ACR
 147 R Haytham Kenway @Andreia Ugrai
 148 M Kassandra, Eagle Bearer @Jessie Lam
 149 U Lydia Frye @Bastien L. Deharme
-150 R Ratonhnhaké:ton @Andreia Ugrai
+150 R Ratonhnhaké꞉ton @Andreia Ugrai
 151 U Shao Jun @Andreia Ugrai
 152 R Shaun & Rebecca, Agents @John Stanko
 153 U Shay Cormac @Alex Negrea
@@ -249,7 +249,7 @@ ScryfallCode=ACR
 241 U Lydia Frye @Mandy Jurgens
 242 R Mary Read and Anne Bonny @Wangjie Li
 243 U Mortify @Wangjie Li
-244 R Ratonhnhaké:ton @Greg Staples
+244 R Ratonhnhaké꞉ton @Greg Staples
 245 U Reconstruct History @Néstor Ossandón Leal
 246 U Shao Jun @Stephen Stark
 247 R Shaun & Rebecca, Agents @Gintas Galvanauskas
