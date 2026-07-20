@@ -203,7 +203,6 @@ public class ArchipelagoRandomizer {
                 case GARRUK_DEFEATED -> Archipelago.getInstance().checkLocation(600L);
                 case HYDRA_OF_SHANDALAAR_DEFEATED -> Archipelago.getInstance().checkLocation(601L);
                 case SCARECROW_CAPTAIN_DEFEATED -> Archipelago.getInstance().checkLocation(602L);
-                case BOSS_COLORLESS_DEFEATED -> Archipelago.getInstance().checkLocation(1L);
                 case BOSS_WHITE_DEFEATED -> Archipelago.getInstance().checkLocation(1L);
                 case BOSS_BLUE_DEFEATED -> Archipelago.getInstance().checkLocation(2L);
                 case BOSS_BLACK_DEFEATED -> Archipelago.getInstance().checkLocation(3L);
