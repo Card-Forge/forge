@@ -3,7 +3,8 @@ ManaCost:2 R
 Types:Enchantment Saga
 K:Chapter:4:DBTreasure,DBTreasure,DBTreasure,DBTreasure
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBSac | SpellDescription$ Create a Treasure token. Then if you control four or more Treasures, sacrifice this Saga. If you do, create a 6/6 red Dragon creature token with flying. (A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.)
-SVar:DBSac:DB$ Sacrifice | SacValid$ Self | RememberSacrificed$ True | SubAbility$ DBToken
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self | CheckSVar$ X | SVarCompare$ GE4 | RememberSacrificed$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ r_6_6_dragon_flying | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Treasure.YouCtrl
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III, IV — Create a Treasure token. Then if you control four or more Treasures, sacrifice this Saga. If you do, create a 6/6 red Dragon creature token with flying. (A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.)
