@@ -212,18 +212,17 @@ public class AiAttackController {
     private static List<Player> getPreferredDefenderPlayers(Player ai, boolean forCombatDmg) {
         PlayerCollection opponents = ai.getOpponents();
         if (opponents.size() == 1) {
-            return Collections.singletonList(opponents.get(0));
+            return List.of(opponents.get(0));
         }
 
         final Map<Player, Integer> threatScores = new HashMap<>(opponents.size());
-        int highestThreat = Integer.MIN_VALUE;
         for (Player opp : opponents) {
             final int threatScore = ComputerUtil.evaluateBoardPosition(ai, opp);
             threatScores.put(opp, threatScore);
-            highestThreat = Math.max(highestThreat, threatScore);
         }
+        int highestThreat = Collections.max(threatScores.values());
 
-        final int temperature = AiProfileUtil.getIntProperty(ai, AiProps.MULTIPLAYER_TARGETING_SOFTMAX_TEMPERATURE);
+        final int temperature = AiProfileUtil.getIntProperty(ai, AiProps.MULTIPLAYER_DEFENDER_SOFTMAX_TEMPERATURE);
         final Map<Player, Integer> scores = new HashMap<>(opponents.size());
         for (Player opp : opponents) {
             final int threatScore = threatScores.get(opp);

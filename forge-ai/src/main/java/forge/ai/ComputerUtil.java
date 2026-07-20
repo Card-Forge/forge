@@ -2954,7 +2954,8 @@ public class ComputerUtil {
             // non combat check takes life into account here
             rating += opponent.getLife() * 3;
         } else {
-            // TODO: Weight this by how likely the opponent is to attack this AI rather than another player.
+            // TODO Weight this by how likely the opponent is to attack this AI rather than another player.
+            // This is hard to predict for human players and multiplayer politics.
             rating += getCombatTtkScore(ai, estimateCombatTurnsToKill(opponent, ai));
         }
 
@@ -3220,7 +3221,7 @@ public class ComputerUtil {
 
         // performance shortcut
         // TODO if checking upcoming turn it should be a permanent effect
-        if (ai.cantLoseForZeroOrLessLife()) {
+        if (ai.cantLose()) {
             return remainingLife;
         }
 

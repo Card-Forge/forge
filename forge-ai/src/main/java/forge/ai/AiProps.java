@@ -45,7 +45,8 @@ public enum AiProps {
     RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE ("true"),
     ATTACK_INTO_TRADE_WHEN_TAPPED_OUT ("false"),
     CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA ("0"),
-    MULTIPLAYER_TARGETING_SOFTMAX_TEMPERATURE ("75"),
+    // A 75-point lead gives a defender roughly a 73% chance of being selected over one alternative
+    MULTIPLAYER_DEFENDER_SOFTMAX_TEMPERATURE("75"),
     COMBAT_TTK_HORIZON ("2"),
     COMBAT_TTK_SCORE_PER_TURN ("40"),
     TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK ("true"),
