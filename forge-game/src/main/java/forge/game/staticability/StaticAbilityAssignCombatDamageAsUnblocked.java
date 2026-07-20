@@ -12,7 +12,7 @@ public class StaticAbilityAssignCombatDamageAsUnblocked {
 
     public static boolean assignCombatDamageAsUnblocked(final Card card, final boolean optional)  {
         final Game game = card.getGame();
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+        for (final Card ca : game.getStaticAbilitySourceCards()) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.AssignCombatDamageAsUnblocked)) {
                     continue;

@@ -62,6 +62,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     protected void sort() {
         cardList.sort(COMPARATOR);
+        game.bumpZoneVersion();
     }
 
     public Zone(final ZoneType zone0, Game game0) {
@@ -80,9 +81,13 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return new ZoneView(PlayerView.get(getPlayer()), zoneType);
     }
 
+    // Bumped at every point that mutates cardList, so Game can cache views derived from
+    // the zones. Deliberately not done in onChanged(), which PlayerZone overrides without
+    // calling super.
     public final void reorder(final Card c, final int index) {
         cardList.remove(c);
         cardList.add(index, c);
+        game.bumpZoneVersion();
     }
 
     public final void add(final Card c) {
@@ -146,6 +151,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
                 cardList.add(index, c);
             }
         }
+        game.bumpZoneVersion();
         onChanged();
 
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
@@ -161,6 +167,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     public void remove(final Card c) {
         if (cardList.remove(c)) {
+            game.bumpZoneVersion();
             onChanged();
             game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Removed, c));
         }
@@ -172,6 +179,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             c.setZone(this);
             cardList.add(c);
         }
+        game.bumpZoneVersion();
         onChanged();
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.ComplexUpdate, null));
     }
@@ -179,6 +187,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     public final void removeAllCards(boolean forcedWithoutEvents) {
         if (forcedWithoutEvents) {
             cardList.clear();
+            game.bumpZoneVersion();
         } else {
             for (Card c : cardList) {
                 remove(c);
@@ -260,6 +269,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     public void shuffle() {
         Collections.shuffle(cardList, MyRandom.getRandom());
+        game.bumpZoneVersion();
         onChanged();
     }
 

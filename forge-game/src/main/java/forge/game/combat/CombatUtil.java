@@ -332,22 +332,22 @@ public class CombatUtil {
     }
 
     public static Cost getBlockCost(Game game, Card blocker, Card attacker) {
-        Cost blockCost = new Cost(ManaCost.ZERO, true);
+        // Allocated lazily: hardly any board has an effect that adds a cost to blocking,
+        // and this runs per blocker/attacker pair while blocks are being worked out.
+        Cost blockCost = null;
         // Sort abilities to apply them in proper order
-        boolean noCost = true;
-        for (Card card : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+        for (Card card : game.getStaticAbilitySourceCards()) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 Cost c1 = stAb.getBlockCost(blocker, attacker);
                 if (c1 != null) {
+                    if (blockCost == null) {
+                        blockCost = new Cost(ManaCost.ZERO, true);
+                    }
                     blockCost.add(c1);
-                    noCost = false;
                 }
             }
         }
 
-        if (noCost) {
-            return null;
-        }
         return blockCost;
     }
 
@@ -753,11 +753,17 @@ public class CombatUtil {
         final CardCollection requirementCards = new CardCollection();
         final Player defender = blocker.getController();
         for (final Card attacker : attackers) {
-            if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
+            // Check the block requirement before the block cost. Both skip this attacker,
+            // but getBlockCost walks every static ability in play while
+            // attackerLureSatisfied is a handful of keyword tests - and the common case,
+            // an attacker that places no requirement on this blocker, is skipped by the
+            // latter. Testing the cost first made every combat pay for a full scan of the
+            // board per attacker, per blocker.
+            if (attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker))) {
                 continue;
             }
 
-            if (attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker))) {
+            if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
                 continue;
             }
 

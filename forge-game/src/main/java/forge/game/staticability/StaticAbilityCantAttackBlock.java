@@ -210,7 +210,7 @@ public class StaticAbilityCantAttackBlock {
         if (blocker != null) {
             list.add(blocker);
         }
-        list.addAll(attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
+        list.addAll(attacker.getGame().getStaticAbilitySourceCards());
         for (final Card ca : list) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantBlockBy)) {

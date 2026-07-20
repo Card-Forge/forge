@@ -630,6 +630,34 @@ public class Game {
         return cards;
     }
 
+    // Every static ability check asks for the cards that could be the source of one, and
+    // building that list copies most of the game. Combat evaluation does that thousands of
+    // times between two zone changes, so cache the list against a counter that every zone
+    // mutation bumps.
+    private int zoneVersion;
+    private CardCollectionView staticAbilitySourceCards;
+    private int staticAbilitySourceVersion = -1;
+
+    public synchronized void bumpZoneVersion() {
+        zoneVersion++;
+    }
+
+    /**
+     * The cards that may be the source of a static ability, i.e. those in
+     * {@link ZoneType#STATIC_ABILITIES_SOURCE_ZONES}.
+     * <p>
+     * Unlike {@link #getCardsIn(Iterable)} the returned view is shared rather than freshly
+     * built, so callers must only read it: modifying it corrupts the cache, and it is
+     * stale after the next zone change.
+     */
+    public synchronized CardCollectionView getStaticAbilitySourceCards() {
+        if (staticAbilitySourceCards == null || staticAbilitySourceVersion != zoneVersion) {
+            staticAbilitySourceCards = getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+            staticAbilitySourceVersion = zoneVersion;
+        }
+        return staticAbilitySourceCards;
+    }
+
     public CardCollectionView getCardsInOwnedBy(final Iterable<ZoneType> zones, Player p) {
         CardCollection cards = new CardCollection();
         for (final ZoneType z : zones) {
