@@ -53,8 +53,14 @@ public class Archipelago {
         }
     }
 
-    public boolean checkLocations(List<Long> ids) {
-        return APClient.checkLocations(ids);
+    public void checkLocations(List<Long> ids) {
+        if (APClient == null || !APClient.isConnected() || !APClient.checkLocations(ids)) {
+            ArchipelagoRandomizer.getInstance().locationQueue.addAll(ids);
+        }
+    }
+
+    public boolean sendQueuedLocations(List<Long> ids) {
+        return APClient != null && APClient.isConnected() && APClient.checkLocations(ids);
     }
 
     public void goal() {

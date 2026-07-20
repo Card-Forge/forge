@@ -203,12 +203,11 @@ public class ArchipelagoRandomizer {
                 case GARRUK_DEFEATED -> Archipelago.getInstance().checkLocation(600L);
                 case HYDRA_OF_SHANDALAAR_DEFEATED -> Archipelago.getInstance().checkLocation(601L);
                 case SCARECROW_CAPTAIN_DEFEATED -> Archipelago.getInstance().checkLocation(602L);
-                case BOSS_COLORLESS_DEFEATED -> Archipelago.getInstance().checkLocation(1L);
-                case BOSS_WHITE_DEFEATED -> Archipelago.getInstance().checkLocations(new ArrayList<>(Arrays.asList(2L, 12L)));
-                case BOSS_BLUE_DEFEATED -> Archipelago.getInstance().checkLocations(new ArrayList<>(Arrays.asList(3L, 13L)));
-                case BOSS_BLACK_DEFEATED -> Archipelago.getInstance().checkLocations(new ArrayList<>(Arrays.asList(4L, 14L)));
-                case BOSS_RED_DEFEATED -> Archipelago.getInstance().checkLocations(new ArrayList<>(Arrays.asList(5L, 15L)));
-                case BOSS_GREEN_DEFEATED -> Archipelago.getInstance().checkLocations(new ArrayList<>(Arrays.asList(6L, 16L)));
+                case BOSS_WHITE_DEFEATED -> Archipelago.getInstance().checkLocation(1L);
+                case BOSS_BLUE_DEFEATED -> Archipelago.getInstance().checkLocation(2L);
+                case BOSS_BLACK_DEFEATED -> Archipelago.getInstance().checkLocation(3L);
+                case BOSS_RED_DEFEATED -> Archipelago.getInstance().checkLocation(4L);
+                case BOSS_GREEN_DEFEATED -> Archipelago.getInstance().checkLocation(5L);
                 case WIN_CONDITION_CLEARED -> Archipelago.getInstance().goal();
             }
         }
@@ -360,7 +359,7 @@ public class ArchipelagoRandomizer {
 
     public void sendQueuedLocations() {
         Archipelago AP = Archipelago.getInstance();
-        if (!locationQueue.isEmpty() && AP.checkLocations(locationQueue)) locationQueue.clear();
+        if (!locationQueue.isEmpty() && AP.sendQueuedLocations(locationQueue)) locationQueue.clear();
     }
 
     public void setupAPSettingScene() {
