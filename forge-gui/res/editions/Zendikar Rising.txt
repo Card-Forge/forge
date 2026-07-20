@@ -418,6 +418,7 @@ ScryfallCode=ZNR
 391 U Kargan Warleader @Colin Boyer
 
 [rebalanced]
+A-24 R A-Luminarch Aspirant @Mads Ahm
 A-68 R A-Master of Winds @Yigit Koroglu
 A-105 C A-Hagra Constrictor @Simon Dominic
 A-126 U A-Skyclave Shadowcat @Simon Dominic
@@ -430,6 +431,7 @@ A-198 R A-Oran-Rief Ooze @Daarken
 A-224 U A-Kargan Warleader @Colin Boyer
 A-228 U A-Moss-Pit Skeleton @Bryan Sola
 A-230 M A-Nahiri, Heir of the Ancients @Anna Steinbauer
+A-232 M A-Omnath, Locus of Creation @Chris Rahn
 A-234 R A-Phylath, World Sculptor @Victor Adame Minguez
 A-238 U A-Umara Mystic @Bryan Sola
 A-257 U A-Base Camp @Jokubas Uogintas

@@ -408,6 +408,7 @@ ScryfallCode=STX
 
 [rebalanced]
 A-15 U A-Dueling Coach @Caio Monteiro
+A-41 U A-Divide by Zero @Liiga Smilshkalne
 A-46 U A-Mentor's Guidance @Brian Valeza
 A-56 U A-Symmetry Sage @Jehan Choo
 A-88 U A-Tenured Inkcaster @Jake Murray

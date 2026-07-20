@@ -321,7 +321,9 @@ A-208 C A-Druidic Ritual @Vincent Christiaens
 A-209 R A-Earthquake Dragon @Johan Grenier
 A-210 U A-Emerald Dragon @Diego Gisbert
 A-215 U A-Jade Orb of Dragonkind @Olena Richards
+A-217 R A-Monster Manual @David Gaillet
 A-223 U A-Split the Spoils @Edgar Sánchez Hidalgo
+A-232 R A-Baba Lysaga, Night Witch @Slawomir Maniak
 A-239 U A-Krydle of Baldur's Gate @Bryan Sola
 A-243 M A-Minsc & Boo, Timeless Heroes @Andreas Zafiratos
 A-259 C A-Lantern of Revealing @Eytan Zana

@@ -424,6 +424,7 @@ ScryfallCode=ELD
 
 [rebalanced]
 A-81 U A-Cauldron Familiar @Milivoj Ćeran
+A-125 R A-Fires of Invention @Stanton Feng
 
 [tokens]
 1 w_0_1_goat @Forrest Imel

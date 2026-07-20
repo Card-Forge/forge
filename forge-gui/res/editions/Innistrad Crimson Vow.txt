@@ -438,6 +438,7 @@ A-48 C A-Binding Geist @Campbell White
 A-52 U A-Cobbled Lancer @Igor Kieryluk
 A-58 R A-Dreamshackle Geist @Andreas Zafiratos
 A-62 U A-Gutter Skulker @Viko Menezes
+A-63 R A-Hullbreaker Horror @Svetlin Velinov
 A-66 C A-Lantern Bearer @Zoltan Boros
 A-69 U A-Mischievous Catgeist @Denman Rooke
 A-81 C A-Stitched Assistant @Andrey Kuzinskiy

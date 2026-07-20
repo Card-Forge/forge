@@ -18,6 +18,7 @@ ScryfallCode=HOB
 90 U Burn, Burn, Tree and Fern @Rovina Cai
 93 R Desolation of Smaug @Irvin Rodriguez
 96 M Gandalf, Goblins' Bane @Francisco Miyara
+104 R The Misty Mountains Cold @Rovina Cai
 110 M Smaug the Magnificent @Francisco Miyara
 114 M Thorin, Mountain-king @Javier Charro
 142 C Wood Elves @Andreia Ugrai
