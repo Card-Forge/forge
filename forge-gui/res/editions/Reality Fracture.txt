@@ -43,7 +43,7 @@ ScryfallCode=FRA
 415 M The Theorist, Jace Beleren @Yukie Tajima
 427 M Bloodline Recollector @Cynthia Sheppard
 439 M Enlightened Confidant @James Martin
-443 M The Theorist, Jace Beleren @Oniku Kuitai
+443 M The Theorist, Jace Beleren @ONIKU kuitai
 446 M Craterclaw Colossus @Desmuncubic
 447 M Stingcaster Mage @Ricardo Diseño
 449 M Enlightened Confidant @Jabari Weathers

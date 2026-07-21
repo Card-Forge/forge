@@ -377,6 +377,7 @@ Equipment
 Food:Foods
 Fortification
 Gold
+Heartwood
 Incubator:Incubators
 Infinity
 Junk

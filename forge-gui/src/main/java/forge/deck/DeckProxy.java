@@ -131,6 +131,20 @@ public class DeckProxy implements InventoryItem {
         return directory;
     }
 
+    /** Persists the underlying deck to its storage. Returns false (no-op) for read-only decks (random/precon/quest). */
+    @SuppressWarnings("unchecked")
+    public boolean saveDeck() {
+        if (!(deck instanceof Deck) || storage == null) {
+            return false;
+        }
+        try {
+            ((IStorage<Deck>) storage).add((Deck) deck);
+            return true;
+        } catch (final UnsupportedOperationException e) {
+            return false;
+        }
+    }
+
     public void invalidateCache() {
         color = null;
         colorIdentity = null;
