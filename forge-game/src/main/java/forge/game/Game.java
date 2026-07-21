@@ -35,6 +35,7 @@ import forge.game.event.Event;
 import forge.game.event.GameEventDayTimeChanged;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventGameOutcome;
+import forge.game.event.GameEventPlayerPriority;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -630,6 +631,24 @@ public class Game {
         return cards;
     }
 
+    /** Visits cards in the requested zones without building a combined collection. */
+    public boolean visitCardsIn(final Iterable<ZoneType> zones, final Visitor<Card> visitor) {
+        for (final ZoneType zone : zones) {
+            if (zone == ZoneType.Stack) {
+                if (!visitor.visitAll(getStackZone().getCards())) {
+                    return false;
+                }
+                continue;
+            }
+            for (final Player player : getPlayers()) {
+                if (!visitor.visitAll(player.getCardsIn(zone))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public CardCollectionView getCardsInOwnedBy(final Iterable<ZoneType> zones, Player p) {
         CardCollection cards = new CardCollection();
         for (final ZoneType z : zones) {
@@ -1015,6 +1034,9 @@ public class Game {
      * The events are sent to UI, log and sound system. Network listeners are under development.
      */
     public void fireEvent(final Event event) {
+        if (!(event instanceof GameEventPlayerPriority)) {
+            tracker.markChanged();
+        }
         events.post(event);
     }
     public void subscribeToEvents(final Object subscriber) {

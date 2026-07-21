@@ -107,7 +107,9 @@ public class FogAi extends SpellAbilityAi {
         // Reserve mana to cast this card if it will be likely needed
         if (((game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer()))
                 || (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)))
+                && game.getStack().isEmpty()
                 && (AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT))
+                && ComputerUtilCost.canPayCost(sa, ai, false)
                 && (ComputerUtil.aiLifeInDanger(ai, false, 0))) {
             boolean reserved = ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, true);
             if (reserved) {

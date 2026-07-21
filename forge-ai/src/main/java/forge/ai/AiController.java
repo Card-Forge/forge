@@ -99,6 +99,8 @@ public class AiController {
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
     private volatile boolean timeoutReached;
+    private long cachedPriorityPassVersion = Long.MIN_VALUE;
+    private boolean decisionAborted;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -1356,6 +1358,15 @@ public class AiController {
         // Reset priority mana reservation that's meant to work for one spell only
         memory.clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
 
+        decisionAborted = false;
+        long initialVersion = game.getTracker().getChangeVersion();
+        // Only reuse a completed pass. Chosen actions are never cached, and
+        // any tracked state or game event change forces a normal reevaluation.
+        if (!useSimulation && initialVersion == cachedPriorityPassVersion) {
+            return null;
+        }
+        cachedPriorityPassVersion = Long.MIN_VALUE;
+
         if (useSimulation) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
         }
@@ -1391,7 +1402,12 @@ public class AiController {
             }
         }
 
-        return singleSpellAbilityList(getSpellAbilityToPlay());
+        List<SpellAbility> result = singleSpellAbilityList(getSpellAbilityToPlay());
+        if (result == null && !decisionAborted
+                && initialVersion == game.getTracker().getChangeVersion()) {
+            cachedPriorityPassVersion = initialVersion;
+        }
+        return result;
     }
 
     private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
@@ -1538,7 +1554,8 @@ public class AiController {
             // in a scripted timed fashion.
 
             if (!mustRespond) {
-                saList = ComputerUtilAbility.getSpellAbilities(cards, player); // get the SA list early to check for copy SAs
+                // Get the playable list early to check for copy SAs.
+                saList = ComputerUtilAbility.getSpellAbilities(cards, player, true);
                 if (ComputerUtilAbility.getFirstCopySASpell(saList) == null) {
                     // Nothing to copy the spell with, so do nothing.
                     return null;
@@ -1556,7 +1573,7 @@ public class AiController {
         }
 
         if (saList.isEmpty()) {
-            saList = ComputerUtilAbility.getSpellAbilities(cards, player);
+            saList = ComputerUtilAbility.getSpellAbilities(cards, player, true);
         }
 
         saList.removeIf(spellAbility -> {
@@ -1685,6 +1702,7 @@ public class AiController {
         try {
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            decisionAborted = true;
             e.printStackTrace();
             if (e instanceof TimeoutException) {
                 // log where the eval thread currently is - each timeout doubles as a

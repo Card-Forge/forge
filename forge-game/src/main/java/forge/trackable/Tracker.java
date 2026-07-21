@@ -32,12 +32,26 @@ import forge.trackable.TrackableTypes.TrackableType;
  */
 public class Tracker {
     private int freezeCounter = 0;
+    private volatile long changeVersion = 0;
     private final List<DelayedPropChange> delayedPropChanges = Lists.newArrayList();
 
     private final Table<TrackableType<?>, Integer, Object> objLookups = HashBasedTable.create();
 
     public final boolean isFrozen() {
         return freezeCounter > 0;
+    }
+
+    /**
+     * Returns a monotonic version for actual changes to objects owned by this
+     * tracker. Unlike consumer dirty bits, this is maintained for local games
+     * that do not have a network consumer registered.
+     */
+    public long getChangeVersion() {
+        return changeVersion;
+    }
+
+    public void markChanged() {
+        changeVersion++;
     }
 
     public void freeze() {

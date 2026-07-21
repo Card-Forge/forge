@@ -570,6 +570,9 @@ public class ComputerUtilCard {
         if (Iterables.isEmpty(list)) {
             return null;
         }
+        if (Iterables.size(list) == 1) {
+            return Iterables.get(list, 0);
+        }
         return Aggregates.itemWithMax(list, c -> evaluateRemovalTargetPriority(ai, c));
     }
 

@@ -815,6 +815,12 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
+        try (CardTraitViewCache ignored = CardTraitViewCache.open()) {
+            return declareAttackersWithTraitCache(combat);
+        }
+    }
+
+    private int declareAttackersWithTraitCache(final Combat combat) {
         // something prevents attacking, try another
         if (this.attackers.isEmpty() && ai.getOpponents().size() > 1) {
             final PlayerCollection opps = ai.getOpponents();
@@ -1370,13 +1376,15 @@ public class AiAttackController {
         }
 
         private void calculate(final List<Card> defenders, final Combat combat) {
+            AiCombatEvaluationMatrix combatEvaluation = new AiCombatEvaluationMatrix();
             hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasKeyword(Keyword.ANNIHILATOR);
             // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
             hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") || "Blocked".equals(attacker.getSVar("HasAttackEffect"))
                     || attacker.isWitherDamage() || attacker.hasKeyword(Keyword.LIFELINK) || attacker.hasKeyword(Keyword.AFFLICT);
 
             // contains only the defender's blockers that can actually block the attacker
-            CardCollection validBlockers = CardLists.filter(defenders, defender1 -> CombatUtil.canBlock(attacker, defender1));
+            CardCollection validBlockers = CardLists.filter(defenders,
+                    blocker -> combatEvaluation.canBlockWithoutCombat(attacker, blocker));
 
             canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetCombatDamage() > Aggregates.sum(validBlockers, Card::getNetToughness);
 
@@ -1396,19 +1404,22 @@ public class AiAttackController {
                 // if both isWorthLessThanAllKillers and canKillAllDangerous are false there's nothing more to check
                 if (isWorthLessThanAllKillers || canKillAllDangerous || numberOfPossibleBlockers < 2) {
                     numberOfPossibleBlockers += 1;
-                    if (isWorthLessThanAllKillers && ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)
+                    if (isWorthLessThanAllKillers && combatEvaluation.canDestroyAttacker(
+                            ai, attacker, blocker, combat, false, false)
                             && !(attacker.hasKeyword(Keyword.UNDYING) && attacker.getCounters(CounterEnumType.P1P1) == 0)) {
                         canBeKilledByOne = true; // there is a single creature on the battlefield that can kill the creature
                         // see if the defending creature is of higher or lower
                         // value. We don't want to attack only to lose value
                         if (isWorthLessThanAllKillers && !attacker.hasSVar("SacMe")
-                                && ComputerUtilCard.evaluateCreature(blocker) <= ComputerUtilCard.evaluateCreature(attacker)) {
+                                && combatEvaluation.evaluateCreature(blocker, combat)
+                                <= combatEvaluation.evaluateCreature(attacker, combat)) {
                             isWorthLessThanAllKillers = false;
                         }
                     }
                     // see if this attacking creature can destroy this defender, if
                     // not record that it can't kill everything
-                    if (canKillAllDangerous && !ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, false)) {
+                    if (canKillAllDangerous && !combatEvaluation.canDestroyBlocker(
+                            ai, attacker, blocker, combat, false, false)) {
                         canKillAll = false;
 
                         if (blocker.getSVar("HasCombatEffect").equals("TRUE") || blocker.getSVar("HasBlockEffect").equals("TRUE")
@@ -1445,7 +1456,9 @@ public class AiAttackController {
                 canBeKilledByOne = true;
                 isWorthLessThanAllKillers = false;
                 hasCombatEffect = false;
-            } else if ((canKillAllDangerous || !canBeKilled) && ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker, true)) {
+            } else if ((canKillAllDangerous || !canBeKilled)
+                    && ComputerUtilCard.canBeBlockedProfitably(
+                            defendingOpponent, attacker, true)) {
                 canKillAllDangerous = false;
                 canBeKilled = true;
             }

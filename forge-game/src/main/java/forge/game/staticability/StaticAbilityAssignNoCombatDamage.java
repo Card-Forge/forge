@@ -1,22 +1,23 @@
 package forge.game.staticability;
 
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.zone.ZoneType;
 
 public class StaticAbilityAssignNoCombatDamage {
 
     public static boolean assignNoCombatDamage(final Card card) {
-        CardCollection list = new CardCollection(card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
-        list.add(card);
-        for (final Card ca : list) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(StaticAbilityMode.AssignNoCombatDamage)) {
-                    continue;
-                }
-                if (applyAssignNoCombatDamage(stAb, card)) {
-                    return true;
-                }
+        if (hasAssignNoCombatDamageAbility(card, card)) {
+            return true;
+        }
+        return !card.getGame().visitCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES, ca ->
+                ca == card || !hasAssignNoCombatDamageAbility(ca, card));
+    }
+
+    private static boolean hasAssignNoCombatDamageAbility(final Card source, final Card card) {
+        for (final StaticAbility stAb : source.getStaticAbilities()) {
+            if (stAb.checkConditions(StaticAbilityMode.AssignNoCombatDamage)
+                    && applyAssignNoCombatDamage(stAb, card)) {
+                return true;
             }
         }
         return false;
