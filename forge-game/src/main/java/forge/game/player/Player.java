@@ -63,6 +63,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * <p>
@@ -1374,6 +1375,31 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public final CardCollectionView getCardsIn(final ZoneType zone, final String cardName) {
         return CardLists.filter(getCardsIn(zone), CardPredicates.nameEquals(cardName));
+    }
+
+    public final Stream<Card> streamCardsIn(final ZoneType zoneType) {
+        return streamCardsIn(zoneType, true);
+    }
+    public final Stream<Card> streamCardsIn(final ZoneType zoneType, boolean filterOutPhasedOut) {
+        if (zoneType == ZoneType.Stack) {
+            return game.getStackZone().streamCards().filter(c -> c.getOwner().equals(this));
+        }
+        else if (zoneType == ZoneType.Flashback) {
+            return getCardsActivatableInExternalZones(true).getStream();
+        }
+
+        PlayerZone zone = getZone(zoneType);
+        return zone == null ? Stream.of() : zone.streamCards(filterOutPhasedOut);
+    }
+
+    public final Stream<Card> streamCardsIn(final Iterable<ZoneType> zones) {
+        return streamCardsIn(zones, true);
+    }
+    public final Stream<Card> streamCardsIn(final Iterable<ZoneType> zones, boolean filterOutPhasedOut) {
+        return StreamUtil.stream(zones).flatMap(z -> streamCardsIn(z, filterOutPhasedOut));
+    }
+    public final Stream<Card> streamCardsIn(final ZoneType... zones) {
+        return Stream.of(...zones).flatMap(z -> streamCardsIn(z));
     }
 
     public CardCollectionView getCardsActivatableInExternalZones(boolean includeCommandZone) {

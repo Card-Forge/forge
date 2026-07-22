@@ -17,6 +17,8 @@
  */
 package forge.game.zone;
 
+import java.util.stream.Stream;
+
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -97,6 +99,16 @@ public class PlayerZoneBattlefield extends PlayerZone {
             cards = filteredCollection;
         }
         return cards;
+    }
+
+    @Override
+    public Stream<Card> streamCards(final boolean filter) {
+        Stream<Card> result = super.streamCards(filter);
+        if (filter) {
+            return result.filter(c -> !c.isPhasedOut());
+        }
+
+        return result;
     }
 
     public final CardCollection getMeldedCards() {
