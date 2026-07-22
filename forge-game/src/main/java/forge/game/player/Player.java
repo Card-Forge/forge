@@ -1399,7 +1399,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return StreamUtil.stream(zones).flatMap(z -> streamCardsIn(z, filterOutPhasedOut));
     }
     public final Stream<Card> streamCardsIn(final ZoneType... zones) {
-        return Stream.of(...zones).flatMap(z -> streamCardsIn(z));
+        return Arrays.stream(zones).flatMap(z -> streamCardsIn(z));
     }
 
     public CardCollectionView getCardsActivatableInExternalZones(boolean includeCommandZone) {
