@@ -204,6 +204,8 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
 
         ENFORCE_DECK_LEGALITY ("true"),
         PERFORMANCE_MODE ("false"),
+        /** When false, mana Auto-pay skips hand/command castability dry-runs (faster on low-end devices). */
+        MANA_PAYMENT_CASTABILITY_PROBE ("true"),
         FILTERED_HANDS ("false"),
         MULLIGAN_RULE(MulliganDefs.getDefaultRule().name()),
 

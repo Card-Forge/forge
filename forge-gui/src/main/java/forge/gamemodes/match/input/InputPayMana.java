@@ -377,7 +377,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (supportAutoPay() && !locked) { //prevent AI taking over from double-clicking Auto
             locked = true;
             //use AI utility to automatically pay mana cost if possible
-            final Runnable proc = () -> ComputerUtilMana.payManaCost(manaCost, saPaidFor, player, effect);
+            final Runnable proc = () -> ComputerUtilMana.payManaCostFromPaymentPrompt(manaCost, saPaidFor, player, effect);
             //must run in game thread as certain payment actions can only be automated there
             game.getAction().invoke(() -> {
                 runAsAi(proc);
@@ -443,7 +443,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         Evaluator<CardCollection> proc = new Evaluator<>() {
             @Override
             public CardCollection evaluate() {
-                return ComputerUtilMana.getManaSourcesToPayCost(costCopy, saPaidFor, player, effect);
+                return ComputerUtilMana.getManaSourcesToPayCostForPaymentPrompt(costCopy, saPaidFor, player, effect);
             }
         };
         runAsAi(proc);

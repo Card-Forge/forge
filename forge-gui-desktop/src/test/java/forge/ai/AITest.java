@@ -42,8 +42,10 @@ public class AITest {
         FModel.initialize(null, preferences -> {
             preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
             preferences.setPref(FPref.UI_LANGUAGE, "en-US");
+            preferences.setPref(FPref.MANA_PAYMENT_CASTABILITY_PROBE, true);
             return null;
         });
+        CastabilityProbe.enableForTests();
         initialized = true;
     }
 

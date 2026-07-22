@@ -11,6 +11,7 @@ import forge.Graphics;
 import forge.adventure.data.RewardData;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.ai.CastabilityProbe;
 import forge.assets.ImageCache;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -307,6 +308,9 @@ public class SettingsScene extends UIScene {
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);
         addCheckBox(Forge.getLocalizer().getMessage("cbShowAutoTapPreview"), ForgePreferences.FPref.UI_SHOW_AUTOTAP_PREVIEW);
+        addCheckBox(Forge.getLocalizer().getMessage("cbManaCastabilityProbe"), ForgePreferences.FPref.MANA_PAYMENT_CASTABILITY_PROBE,
+                () -> CastabilityProbe.setDefaultEnabled(
+                        FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.MANA_PAYMENT_CASTABILITY_PROBE)));
         addCheckBox(Forge.getLocalizer().getMessage("lblManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST);
         addCheckBox(Forge.getLocalizer().getMessage("lblPerpetualManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_PERPETUAL_MANA_COST);
         addCheckBox(Forge.getLocalizer().getMessage("lblPowerOrToughness"), ForgePreferences.FPref.UI_OVERLAY_CARD_POWER);
