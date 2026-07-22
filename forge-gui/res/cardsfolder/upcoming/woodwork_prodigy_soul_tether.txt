@@ -13,4 +13,4 @@ Name:Soul Tether
 ManaCost:2 RG
 Types:Sorcery
 A:SP$ Token | TokenScript$ rg_a_heartwood | SpellDescription$ Create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")
-Oracle:Create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or G.")
+Oracle:Create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")
