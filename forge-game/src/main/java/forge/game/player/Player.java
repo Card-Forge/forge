@@ -1385,7 +1385,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return game.getStackZone().streamCards().filter(c -> c.getOwner().equals(this));
         }
         else if (zoneType == ZoneType.Flashback) {
-            return getCardsActivatableInExternalZones(true).getStream();
+            return getCardsActivatableInExternalZones(true).stream();
         }
 
         PlayerZone zone = getZone(zoneType);

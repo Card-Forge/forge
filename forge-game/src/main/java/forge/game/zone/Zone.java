@@ -219,7 +219,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return streamCards(true);
     }
     public Stream<Card> streamCards(final boolean filter) {
-        return cardList.getStream();
+        return cardList.stream();
     }
 
     public final boolean isEmpty() {
