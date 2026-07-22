@@ -56,6 +56,7 @@ import org.tinylog.TaggedLogger;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -789,6 +790,11 @@ public class Game {
         };
         forEachCardInGame(visitor);
         return all;
+    }
+
+    public final Stream<Card> streamCardsIn(final Iterable<ZoneType> zones) {
+        PlayerCollection players = getPlayers();
+        return StreamUtil.stream().flatMap(z -> z == ZoneType.Stack ? getStackZone().streamCards() : players.flatMap(p -> p.streamCardsIn(z)));
     }
 
     public final GameAction getAction() {
