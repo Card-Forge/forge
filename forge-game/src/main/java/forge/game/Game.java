@@ -794,7 +794,7 @@ public class Game {
 
     public final Stream<Card> streamCardsIn(final Iterable<ZoneType> zones) {
         PlayerCollection players = getPlayers();
-        return StreamUtil.stream().flatMap(z -> z == ZoneType.Stack ? getStackZone().streamCards() : players.flatMap(p -> p.streamCardsIn(z)));
+        return StreamUtil.stream(zones).flatMap(z -> z == ZoneType.Stack ? getStackZone().streamCards() : players.stream().flatMap(p -> p.streamCardsIn(z)));
     }
 
     public final GameAction getAction() {

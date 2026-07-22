@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
