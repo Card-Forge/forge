@@ -1,11 +1,15 @@
 package forge.ai.controller;
 
+import forge.ai.ComputerUtilMana;
+import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameSimulator;
 import forge.ai.simulation.Plan;
 import forge.ai.simulation.SimulationTest;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -15,8 +19,76 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-
 public class AutoPaymentTest extends SimulationTest {
+
+    /** Place a spell on the game stack for payment tests (player zones have no Stack). */
+    private Card addSpellOnStack(Game game, String name, Player p) {
+        Card spell = createCard(name, p);
+        spell.setGameTimestamp(game.getNextTimestamp());
+        SpellAbility sa = spell.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        game.getStack().addAndUnfreeze(sa);
+        return spell;
+    }
+
+    @Test
+    public void emitsPaymentPlanWhenDebugEnabled() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCards("Forest", 2, p);
+        Card bear = addSpellOnStack(game, "Grizzly Bears", p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = bear.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        ManaCostBeingPaid mc = new ManaCostBeingPaid(sa.getPayCosts().getCostMana().getMana());
+
+        String prevPlan = System.getProperty("forge.debugManaPayment.plan");
+        try {
+            System.setProperty("forge.debugManaPayment.plan", "true");
+            final CardCollection[] sources = new CardCollection[1];
+            p.runWithController(() -> sources[0] = ComputerUtilMana.getManaSourcesToPayCostForPaymentPrompt(
+                    new ManaCostBeingPaid(mc), sa, p, false),
+                    new PlayerControllerAi(game, p, p.getOriginalLobbyPlayer()));
+            AssertJUnit.assertNotNull(sources[0]);
+            AssertJUnit.assertFalse("Preview should list cards Auto would tap", sources[0].isEmpty());
+            AssertJUnit.assertTrue("Forest should be in payment preview",
+                    sources[0].anyMatch(c -> "Forest".equals(c.getName())));
+        } finally {
+            if (prevPlan == null) {
+                System.clearProperty("forge.debugManaPayment.plan");
+            } else {
+                System.setProperty("forge.debugManaPayment.plan", prevPlan);
+            }
+        }
+    }
+
+    @Test
+    public void canPayManaCostFromHandDoesNotEmitPaymentPlan() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCards("Forest", 2, p);
+        Card bear = addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = bear.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        ManaCostBeingPaid mc = new ManaCostBeingPaid(sa.getPayCosts().getCostMana().getMana());
+
+        String prevPlan = System.getProperty("forge.debugManaPayment.plan");
+        try {
+            System.setProperty("forge.debugManaPayment.plan", "true");
+            AssertJUnit.assertTrue(ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(mc), sa, p, false));
+        } finally {
+            if (prevPlan == null) {
+                System.clearProperty("forge.debugManaPayment.plan");
+            } else {
+                System.setProperty("forge.debugManaPayment.plan", prevPlan);
+            }
+        }
+    }
 
     @Test
     public void dontPayWithAshnodsAltar() {
