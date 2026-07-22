@@ -207,13 +207,10 @@ public class AiAttackController {
             return opponents.get(0);
         }
 
-        Player bestDefender = ai.getWeakestOpponent();
-        int bestScore = Integer.MIN_VALUE;
+        Map<Player, Integer> threatScores = Maps.newHashMap();
         for (Player opp : opponents) {
             final int life = opp.getLife();
             int score = ComputerUtil.evaluateBoardPosition(ai, opp);
-            // round away slightly so a single land drop doesn't mean players with earlier turn order are predictably attacked
-            score = (int) Math.ceil(score / 10) * 10;
             int lowLifeThreshold = Math.min(20, opp.getStartingLife());
             if (life > 0 && life < lowLifeThreshold) {
                 // TODO commander damage
@@ -233,13 +230,14 @@ public class AiAttackController {
                 if (opp.cantLoseForZeroOrLessLife()) {
                     score -= 50;
                 }
-            }
-            if (score > bestScore || (score == bestScore && MyRandom.percentTrue(50))) {
-                bestScore = score;
-                bestDefender = opp;
+                threatScores.put(opp, score);
             }
         }
-        return bestDefender;
+        // round away slightly so a single land drop doesn't mean players with earlier turn order are predictably attacked
+        // grows with game age since by then threat ranges become less narrow
+        int threatLimit = Collections.max(threatScores.values()) - 10 - ai.getGame().getPhaseHandler().getTurn();
+        threatScores.values().removeIf(e -> e < threatLimit);
+        return Aggregates.random(threatScores.keySet());
     }
 
     public static List<Card> sortAttackers(final List<Card> in) {

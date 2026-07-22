@@ -1341,6 +1341,10 @@ public class ComputerUtilMana {
         });
 
         final CardCollection sortedManaSources = new CardCollection();
+        if (manaSources.isEmpty()) {
+            return sortedManaSources;
+        }
+
         final CardCollection otherManaSources = new CardCollection();
         final CardCollection useLastManaSources = new CardCollection();
         final CardCollection colorlessManaSources = new CardCollection();
@@ -1357,9 +1361,7 @@ public class ComputerUtilMana {
         // 2. Search for mana sources that have a certain number of abilities
         // 3. Use lands that produce any color many
         // 4. all other sources (creature, costs, drawback, etc.)
-        // Whether tapping a source could kill us depends only on the player, not on the individual
-        // source, but canLoseLife()/cantLoseForZeroOrLessLife() each run a full-board scan
-        // (static abilities / GameLoss replacement effects). Compute once instead of per source.
+
         final boolean canDieToTapDamage = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
         for (Card card : manaSources) {
             // exclude creature sources that will tap as a part of an attack declaration
