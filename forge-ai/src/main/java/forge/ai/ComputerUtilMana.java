@@ -51,7 +51,7 @@ public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
 
     public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
-        //check copy of cost so it doesn't modify the exist cost being paix
+        //check copy of cost so it doesn't modify the exist cost being paid
         cost = new ManaCostBeingPaid(cost);
         return payManaCost(cost, sa, ai, true, true, effect) != null;
     }
