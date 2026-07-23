@@ -35,6 +35,7 @@ public class SettingsScene extends UIScene {
     TextraButton backButton;
     TextraButton newPlane;
     ScrollPane scrollPane;
+    CheckBox startInAdventure;
 
     SelectBox<String> selectSourcePlane;
     TextField newPlaneName;
@@ -124,6 +125,19 @@ public class SettingsScene extends UIScene {
         settingGroup.add(plane).align(Align.right).pad(2);
         //addLabel(Forge.getLocalizer().getMessage("lblCreate") + Forge.getLocalizer().getMessage("lblWorld"));
         settingGroup.add(newPlane).align(Align.right).pad(2);
+
+        startInAdventure = addSettingField(
+                Forge.getLocalizer().getMessage("lblStartInAdventureMode"),
+                "Adventure".equalsIgnoreCase(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_SELECTOR_MODE)),
+                new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        String startupMode = ((CheckBox) actor).isChecked() ? "Adventure" : "Default";
+                        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_SELECTOR_MODE, startupMode);
+                        FModel.getPreferences().save();
+                        Forge.selector = startupMode;
+                    }
+                });
 
         if (!GuiBase.isAndroid()) {
             SelectBox<String> videomode = Controls.newComboBox(ForgeConstants.VIDEO_MODES, Config.instance().getSettingData().videomode, o -> {
@@ -381,6 +395,15 @@ public class SettingsScene extends UIScene {
         return true;
     }
 
+    @Override
+    public void enter() {
+        startInAdventure.setProgrammaticChangeEvents(false);
+        startInAdventure.setChecked("Adventure".equalsIgnoreCase(
+                FModel.getPreferences().getPref(ForgePreferences.FPref.UI_SELECTOR_MODE)));
+        startInAdventure.setProgrammaticChangeEvents(true);
+        super.enter();
+    }
+
     private void addInputField(String name, ForgePreferences.FPref pref) {
         TextField box = Controls.newTextField("");
         box.setText(FModel.getPreferences().getPref(pref));
@@ -434,12 +457,13 @@ public class SettingsScene extends UIScene {
         settingGroup.add(slide).align(Align.right);
     }
 
-    private void addSettingField(String name, boolean value, ChangeListener change) {
+    private CheckBox addSettingField(String name, boolean value, ChangeListener change) {
         CheckBox box = Controls.newCheckBox("");
         box.setChecked(value);
         box.addListener(change);
         addLabel(name);
         settingGroup.add(box).align(Align.right);
+        return box;
     }
 
     private void addSettingField(String name, int value, ChangeListener change) {
