@@ -1848,6 +1848,10 @@ public class CardProperty {
             if (!card.isSuspected()) {
                 return false;
             }
+        } else if (property.equals("IsPrepared")) {
+            if (!card.isPrepared()) {
+                return false;
+            }
         } else if (property.equals("IsRemembered")) {
             if (!source.isRemembered(card)) {
                 return false;

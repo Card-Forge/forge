@@ -44,7 +44,6 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.Queue;
 
-
 /**
  * Stage to handle tiled maps for points of interests
  */
@@ -164,12 +163,10 @@ public class MapStage extends GameStage {
 
     }
 
-
     Group collisionGroup;
 
     @Override
     public void debugCollision(boolean b) {
-
         if (collisionGroup == null) {
             collisionGroup = new Group();
 
@@ -191,8 +188,6 @@ public class MapStage extends GameStage {
         }
         super.debugCollision(b);
     }
-
-
 
     Array<EntryActor> otherEntries = new Array<>();
     Array<EntryActor> spawnClassified = new Array<>();
@@ -764,7 +759,8 @@ public class MapStage extends GameStage {
     public boolean exitDungeon(boolean defeated, boolean defeatedByBoss) {
         if (mustClearOnExit) {
             mustClearOnExit = false;
-            changes.clearDeletedObjects();
+
+            this.resetMapRecursive(AdventureQuestController.instance().mostRecentPOI.getData().map, new HashSet<>());
         }
 
         AdventureQuestController.instance().updateQuestsLeave();
@@ -782,6 +778,47 @@ public class MapStage extends GameStage {
         return true;
     }
 
+    /**
+     * Recursively clears map objects for the current map and all connected maps to reset the state of the dungeon when exiting from it.
+     * @param currentMap The filename of the map to clear and check for connected maps from.
+     * @param clearedMaps A set of maps that have already been cleared to avoid infinite recursion from circular connections between maps.
+     */
+    private void resetMapRecursive(String currentMap, HashSet<String> clearedMaps) {
+        if (clearedMaps.contains(currentMap)) {
+            return;
+        }
+
+        clearedMaps.add(currentMap);
+
+        // Clear the current map's deleted objects.
+        TileMapScene.instance().getPointOfInterestChanges(currentMap).clearDeletedObjects();
+        
+        TiledMap currentTiledMap = loadMapFile(currentMap);
+        
+        for (MapLayer layer : currentTiledMap.getLayers()) {
+            if (layer.getProperties().containsKey("spriteLayer") || layer instanceof TiledMapTileLayer) {
+                continue;
+            }
+            
+            // Attemps to find connected maps through "entry" type MapObjects and recursively clear them as well.
+            for (MapObject obj : layer.getObjects()) {
+                MapProperties prop = obj.getProperties();
+                String type = prop.get("type", String.class);
+                
+                if (type != null && type.equals("entry")) {
+                    String targetMap = prop.containsKey("teleport") ? prop.get("teleport").toString() : "";
+                    
+                    if (targetMap != null && !targetMap.isEmpty()) {
+                        resetMapRecursive(targetMap, clearedMaps);
+                    }
+                }
+            }
+        }
+    }
+
+    private TiledMap loadMapFile(String mapName) {
+        return new TemplateTmxMapLoader().load(Config.instance().getCommonFilePath(mapName));
+    }
 
     @Override
     public void setWinner(boolean playerWins, boolean isArena) {

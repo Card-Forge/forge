@@ -8,4 +8,4 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select a
 K:TypeCycling:Mountain:1
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Discard
-Oracle:Trample\nWhenever Oliphaunt attacks, another target creature you control gets +2/+0 and gains trample until end of turn.\nMountaincycling {1} ({1}, Discard this card: Search your library for a mountain card, reveal it, put it into your hand, then shuffle.)
+Oracle:Trample\nWhenever Oliphaunt attacks, another target creature you control gets +2/+0 and gains trample until end of turn.\nMountaincycling {1} ({1}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)

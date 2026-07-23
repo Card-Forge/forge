@@ -1,8 +1,72 @@
 [metadata]
 Code=TRK
-Date=2026-11-20
+Date=2026-11-13
 Name=Star Trek
 Type=Expansion
 ScryfallCode=TRK
 
 [cards]
+5 U Brad Boimler, Eager Ensign @Andreas Zafiratos
+13 M Dr. Beverly Crusher @Mattia Rangoni
+34 C Set Phasers to . . . @Elizabeth Peiró
+51 C Consider the Prime Directive @Zoltan Boros
+62 U Highly Illogical @Joel Chaim Holtzman
+64 U Hoshi Sato, Exolinguist @Jason Seiler
+117 U In the Pale Moonlight @Charles Chaisson
+127 R Salt Vampire @Bastien L. Deharme
+138 U Beckett Mariner, Impetuous Ensign @Lucas Durham
+142 M Captain James T. Kirk @Jason Pastrana
+183 U Amok Time @Jason Raish
+187 M Captain Kathryn Janeway @Jason Pastrana
+228 R The City on the Edge of Forever @Peter Diamond
+252 U Seven of Nine @Bastien L. Deharme
+261 M Crystalline Entity @David Álvarez
+273 R U.S.S. Enterprise-D, Galaxy-Class @Pablo Mendoza
+278 R Blood Crypt @Jonas De Ro
+279 R Breeding Pool @Cliff Nielsen
+285 R Godless Shrine @John Thacker
+286 R Hallowed Fountain @Piotr Dura
+289 R Overgrown Tomb @Pavel Kolomeyets
+295 R Sacred Foundry @Jessica Rossier
+298 R Steam Vents @Shahab Alizadeh
+299 R Stomping Ground @Arthur Haas
+301 R Temple Garden @Shahab Alizadeh
+306 R Watery Grave @Raymond Bonilla
+340 M Captain Kathryn Janeway @Gal Or
+343 U Seven of Nine @Gal Or
+366 M Dr. Beverly Crusher @Anna Czeszejko
+386 M Captain Kathryn Janeway @Jurijus Chitrovas
+392 R Hallowed Fountain @Mark Poole
+393 R Watery Grave @Andrew Mar
+394 R Blood Crypt @Jason A. Engle
+395 R Stomping Ground @Daniel Romanovsky
+396 R Temple Garden @Jessica Rossier
+397 R Godless Shrine @Raymond Swanland
+398 R Steam Vents @Chad Weatherford
+399 R Overgrown Tomb @Sam Burley
+400 R Sacred Foundry @Eliz Roxs
+401 R Breeding Pool @Josu Solano
+417 R Salt Vampire @Simon Dominic
+418 M Captain James T. Kirk @Josh Newton
+478 M Crystalline Entity @David Álvarez
+481 R U.S.S. Enterprise-D, Galaxy-Class @Pablo Mendoza
+487 R Hallowed Fountain @Mark Poole
+488 R Watery Grave @Andrew Mar
+489 R Blood Crypt @Jason A. Engle
+490 R Stomping Ground @Daniel Romanovsky
+491 R Temple Garden @Jessica Rossier
+492 R Godless Shrine @Raymond Swanland
+493 R Steam Vents @Chad Weatherford
+494 R Overgrown Tomb @Sam Burley
+495 R Sacred Foundry @Eliz Roxs
+496 R Breeding Pool @Josu Solano
+500 M Dr. Beverly Crusher @Anna Czeszejko
+520 M Captain Kathryn Janeway @Jurijus Chitrovas
+541 R Salt Vampire @Simon Dominic
+542 M Captain James T. Kirk @Josh Newton
+557 R U.S.S. Enterprise-D, Galaxy-Class @Scott Okumura
+1701 M Captain James T. Kirk @Chris Rallis
+1704 M Captain Kathryn Janeway @Lie Setiawan
+
+[tokens]
+1 w_0_1_human_nophasingin @David Álvarez
