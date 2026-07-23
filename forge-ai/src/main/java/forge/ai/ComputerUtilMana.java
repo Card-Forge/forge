@@ -93,11 +93,11 @@ public class ComputerUtilMana {
     }
 
     public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
-        final List<Mana> payment = payManaCost(cost, sa, ai, true, true, effect);
+        final List<SpellAbility> payment = payManaCost(cost, sa, ai, true, true, effect);
         if (payment == null) {
             return null;
         }
-        return new CardCollection(payment.stream().map(Mana::getSourceCard).filter(Objects::nonNull));
+        return new CardCollection(payment.stream().map(s -> s.getHostCard()));
     }
 
     private static Integer scoreManaProducingCard(final Card card) {
@@ -593,7 +593,7 @@ public class ComputerUtilMana {
     }
 
     // returns null if unpayable
-    private static List<Mana> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
+    private static List<SpellAbility> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
         if ((sa.isOffering() && sa.getSacrificedAsOffering() == null) || (sa.isEmerge() && sa.getSacrificedAsEmerge() == null)) {
             // nothing was chosen
             return null;
@@ -628,7 +628,7 @@ public class ComputerUtilMana {
         if (manapool.payManaCostFromPool(cost, sa, test, manaSpentToPay)) {
             CostPayment.handleOfferings(sa, test, cost.isPaid());
             // paid all from floating mana
-            return manaSpentToPay;
+            return paymentList;
         }
 
         int phyLifeToPay = 2;
@@ -812,7 +812,7 @@ public class ComputerUtilMana {
             resetPayment(paymentList);
         }
 
-        return manaSpentToPay;
+        return paymentList;
     }
 
     private static void resetPayment(List<SpellAbility> payments) {
@@ -1341,6 +1341,10 @@ public class ComputerUtilMana {
         });
 
         final CardCollection sortedManaSources = new CardCollection();
+        if (manaSources.isEmpty()) {
+            return sortedManaSources;
+        }
+
         final CardCollection otherManaSources = new CardCollection();
         final CardCollection useLastManaSources = new CardCollection();
         final CardCollection colorlessManaSources = new CardCollection();
@@ -1357,9 +1361,7 @@ public class ComputerUtilMana {
         // 2. Search for mana sources that have a certain number of abilities
         // 3. Use lands that produce any color many
         // 4. all other sources (creature, costs, drawback, etc.)
-        // Whether tapping a source could kill us depends only on the player, not on the individual
-        // source, but canLoseLife()/cantLoseForZeroOrLessLife() each run a full-board scan
-        // (static abilities / GameLoss replacement effects). Compute once instead of per source.
+
         final boolean canDieToTapDamage = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
         for (Card card : manaSources) {
             // exclude creature sources that will tap as a part of an attack declaration

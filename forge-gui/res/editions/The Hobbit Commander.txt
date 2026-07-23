@@ -18,6 +18,7 @@ ScryfallCode=HOC
 10 R Bilbo's Burglaring @Marta Nael
 11 R Dragon's Desire @Marta Nael
 12 R Necklace of Girion @Marta Nael
+15 M The Gaffer @Chuck Lukacs
 16 M Galadriel's Dismissal @Rebecca Guay
 17 M Reprieve @Warren Mahy
 19 M Orcish Bowmasters @Ron Spencer
@@ -25,14 +26,17 @@ ScryfallCode=HOC
 22 M Call Forth the Tempest @Alex Horley-Orlandelli
 23 M Cavern-Hoard Dragon @Jim Pavelec
 25 M Delighted Halfling @Heather Hudson
+26 M Elven Chorus @Stephen L. Walsh
 28 M Aragorn and Arwen, Wed @Heather Hudson
 29 M Aragorn, the Uniter @Paolo Parente
 31 M Flame of Anor @Jeff Miracola
+35 M Saruman of Many Colors @rk post
 36 M Sauron, the Dark Lord @Mark Zug
 38 M Tom Bombadil @Omar Rayyan
 39 M Andúril, Flame of the West @Paolo Parente
 40 M Andúril, Narsil Reforged @Jeff Miracola
 44 M The One Ring @Dan Frazier
+45 M Palantír of Orthanc @Chris Seaman
 48 M Minas Morgul, Dark Fortress @James Bousema
 50 M Mount Doom @James Bousema
 51 M Rivendell @Mark Poole
@@ -40,13 +44,22 @@ ScryfallCode=HOC
 56 M Galadriel's Dismissal @Rebecca Guay
 57 M Reprieve @Warren Mahy
 59 M Orcish Bowmasters @Ron Spencer
+61 M Witch-king, Bringer of Ruin @Carl Critchlow
 62 M Call Forth the Tempest @Alex Horley-Orlandelli
+63 M Cavern-Hoard Dragon @Jim Pavelec
 65 M Delighted Halfling @Heather Hudson
 68 M Aragorn and Arwen, Wed @Heather Hudson
+69 M Aragorn, the Uniter @Paolo Parente
 71 M Flame of Anor @Jeff Miracola
+75 M Saruman of Many Colors @rk post
 76 M Sauron, the Dark Lord @Mark Zug
 78 M Tom Bombadil @Omar Rayyan
+79 M Andúril, Flame of the West @Paolo Parente
+80 M Andúril, Narsil Reforged @Jeff Miracola
 84 M The One Ring @Dan Frazier
+85 M Palantír of Orthanc @Chris Seaman
+88 M Minas Morgul, Dark Fortress @James Bousema
+90 M Mount Doom @James Bousema
 91 M Rivendell @Mark Poole
 92 M The Shire @Danny Schwartz
 93 M Dwarven Warriors @Tomas Duchek
