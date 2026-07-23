@@ -51,7 +51,7 @@ public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
 
     public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
-        //check copy of cost so it doesn't modify the exist cost being paid
+        //check copy of cost so it doesn't modify the exist cost being paix
         cost = new ManaCostBeingPaid(cost);
         return payManaCost(cost, sa, ai, true, true, effect) != null;
     }
@@ -93,11 +93,11 @@ public class ComputerUtilMana {
     }
 
     public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
-        final List<Mana> payment = payManaCost(cost, sa, ai, true, true, effect);
+        final List<SpellAbility> payment = payManaCost(cost, sa, ai, true, true, effect);
         if (payment == null) {
             return null;
         }
-        return new CardCollection(payment.stream().map(Mana::getSourceCard).filter(Objects::nonNull));
+        return new CardCollection(payment.stream().map(s -> s.getHostCard()));
     }
 
     private static Integer scoreManaProducingCard(final Card card) {
@@ -593,7 +593,7 @@ public class ComputerUtilMana {
     }
 
     // returns null if unpayable
-    private static List<Mana> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
+    private static List<SpellAbility> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
         if ((sa.isOffering() && sa.getSacrificedAsOffering() == null) || (sa.isEmerge() && sa.getSacrificedAsEmerge() == null)) {
             // nothing was chosen
             return null;
@@ -628,7 +628,7 @@ public class ComputerUtilMana {
         if (manapool.payManaCostFromPool(cost, sa, test, manaSpentToPay)) {
             CostPayment.handleOfferings(sa, test, cost.isPaid());
             // paid all from floating mana
-            return manaSpentToPay;
+            return paymentList;
         }
 
         int phyLifeToPay = 2;
@@ -812,7 +812,7 @@ public class ComputerUtilMana {
             resetPayment(paymentList);
         }
 
-        return manaSpentToPay;
+        return paymentList;
     }
 
     private static void resetPayment(List<SpellAbility> payments) {
