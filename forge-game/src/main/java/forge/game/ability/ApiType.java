@@ -26,6 +26,7 @@ public enum ApiType {
     AnimateAll (AnimateAllEffect.class),
     Attach (AttachEffect.class),
     Ascend (AscendEffect.class),
+    EnduringStory (EnduringStoryEffect.class),
     AssembleContraption (AssembleContraptionEffect.class),
     AssignGroup (AssignGroupEffect.class),
     Balance (BalanceEffect.class),

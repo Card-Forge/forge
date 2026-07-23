@@ -640,6 +640,21 @@ public class CardFactoryUtil {
 
                 inst.addTrigger(trigger);
             }
+        } else if (keyword.equals("Storied")) {
+            // Storied trigger only for Permanent, as with Ascend
+            if (card.isPermanent()) {
+                final String trig = "Mode$ Always | TriggerZones$ Battlefield"
+                        + " | Secondary$ True | Static$ True | EnduringStory$ False"
+                        + " | IsPresent$ Permanent.YouCtrl+Artifact,Permanent.YouCtrl+Legendary,Permanent.YouCtrl+Saga | PresentCompare$ GE3"
+                        + " | TriggerDescription$ Storied (" + inst.getReminderText() + ")";
+
+                final String effect = "DB$ EnduringStory | Defined$ You";
+
+                final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
+                trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+
+                inst.addTrigger(trigger);
+            }
         } else if (keyword.startsWith("Backup")) {
             final String[] k = keyword.split(":");
             String magnitude = k[1];
