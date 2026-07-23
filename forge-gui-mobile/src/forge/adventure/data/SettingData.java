@@ -12,6 +12,7 @@ public class SettingData {
     public int height;
     public String plane;
     public boolean fullScreen;
+    public boolean borderlessFullScreen;
     public String videomode;
     public String lastActiveSave;
     public Float rewardCardAdj;

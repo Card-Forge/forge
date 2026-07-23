@@ -33,6 +33,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.Lang;
+import forge.util.OperatingSystem;
 import forge.util.Utils;
 
 import java.util.*;
@@ -146,10 +147,34 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     @Override
                     public void select() {
                         super.select();
-                        Config.instance().getSettingData().fullScreen = FModel.getPreferences().getPrefBoolean(FPref.UI_FULLSCREEN_MODE);
+                        boolean value = FModel.getPreferences().getPrefBoolean(FPref.UI_FULLSCREEN_MODE);
+                        Config.instance().getSettingData().fullScreen = value;
+                        if (value && OperatingSystem.isMac()) {
+                            FModel.getPreferences().setPref(FPref.UI_BORDERLESS_FULLSCREEN_MODE, false);
+                            FModel.getPreferences().save();
+                            Config.instance().getSettingData().borderlessFullScreen = false;
+                        }
                         Config.instance().saveSettings();
                     }
                 }, 0);
+            if (OperatingSystem.isMac()) {
+                lstSettings.addItem(new BooleanSetting(FPref.UI_BORDERLESS_FULLSCREEN_MODE,
+                    Forge.getLocalizer().getMessage("lblBorderlessFullScreenMode"),
+                    Forge.getLocalizer().getMessage("nlBorderlessFullScreenMode")) {
+                        @Override
+                        public void select() {
+                            super.select();
+                            boolean value = FModel.getPreferences().getPrefBoolean(FPref.UI_BORDERLESS_FULLSCREEN_MODE);
+                            Config.instance().getSettingData().borderlessFullScreen = value;
+                            if (value) {
+                                FModel.getPreferences().setPref(FPref.UI_FULLSCREEN_MODE, false);
+                                FModel.getPreferences().save();
+                                Config.instance().getSettingData().fullScreen = false;
+                            }
+                            Config.instance().saveSettings();
+                        }
+                    }, 0);
+            }
             lstSettings.addItem(new CustomSelectSetting(FPref.UI_VIDEO_MODE,
                 Forge.getLocalizer().getMessage("lblVideoMode"),
                 Forge.getLocalizer().getMessage("nlVideoMode"),

@@ -17,6 +17,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.sound.SoundSystem;
+import forge.util.OperatingSystem;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,6 +36,8 @@ public class SettingsScene extends UIScene {
     TextraButton backButton;
     TextraButton newPlane;
     ScrollPane scrollPane;
+    CheckBox fullScreen;
+    CheckBox borderlessFullScreen;
 
     SelectBox<String> selectSourcePlane;
     TextField newPlaneName;
@@ -188,10 +191,13 @@ public class SettingsScene extends UIScene {
             settingGroup.add(tooltipAdj).align(Align.right).pad(2);
         }
         if (!GuiBase.isAndroid()) {
-            addSettingField(Forge.getLocalizer().getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
+            fullScreen = addSettingField(Forge.getLocalizer().getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     boolean value = ((CheckBox) actor).isChecked();
+                    if (value && borderlessFullScreen != null) {
+                        borderlessFullScreen.setChecked(false);
+                    }
                     Config.instance().getSettingData().fullScreen = value;
                     Config.instance().saveSettings();
                     //update
@@ -199,6 +205,21 @@ public class SettingsScene extends UIScene {
                     FModel.getPreferences().save();
                 }
             });
+            if (OperatingSystem.isMac()) {
+                borderlessFullScreen = addSettingField(Forge.getLocalizer().getMessage("lblBorderlessFullScreenMode"), Config.instance().getSettingData().borderlessFullScreen, new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        boolean value = ((CheckBox) actor).isChecked();
+                        if (value) {
+                            fullScreen.setChecked(false);
+                        }
+                        Config.instance().getSettingData().borderlessFullScreen = value;
+                        Config.instance().saveSettings();
+                        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_BORDERLESS_FULLSCREEN_MODE, value);
+                        FModel.getPreferences().save();
+                    }
+                });
+            }
         }
         addSettingField(Forge.getLocalizer().getMessage("lblDay") + " | " + Forge.getLocalizer().getMessage("lblNight") + " " + Forge.getLocalizer().getMessage("lblBackgroundImage"), Config.instance().getSettingData().dayNightBG, new ChangeListener() {
             @Override
@@ -434,12 +455,13 @@ public class SettingsScene extends UIScene {
         settingGroup.add(slide).align(Align.right);
     }
 
-    private void addSettingField(String name, boolean value, ChangeListener change) {
+    private CheckBox addSettingField(String name, boolean value, ChangeListener change) {
         CheckBox box = Controls.newCheckBox("");
         box.setChecked(value);
         box.addListener(change);
         addLabel(name);
         settingGroup.add(box).align(Align.right);
+        return box;
     }
 
     private void addSettingField(String name, int value, ChangeListener change) {
