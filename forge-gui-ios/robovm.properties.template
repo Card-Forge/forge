@@ -1,0 +1,19 @@
+#
+# Template for robovm.properties (which is untracked / gitignored).
+#
+# The bundle identifier is developer-specific: register your own App ID and
+# set APP_ID in the untracked .env at the repo root (or export it), then run
+# any pipeline/ios-pipeline.sh command — it generates robovm.properties from
+# this template on first run. Or copy this file to robovm.properties yourself
+# and replace @APP_ID@ with your bundle identifier.
+#
+app.version=1.0
+app.id=@APP_ID@
+app.mainclass=forge.ios.Main
+app.executable=forge.ios.Main
+app.build=1
+app.name=Forge
+
+# Set timezone before JVM initialization to avoid iOS sandbox violations.
+# Placeholder only: Main.java replaces it with the device timezone at startup.
+robovm.jvmArgs=-Duser.timezone=UTC

@@ -8,6 +8,7 @@ import org.tinylog.Logger;
 public class GuiBase {
     private static IGuiBase guiInterface;
     private static boolean isAndroidport = false;
+    private static boolean isIOSport = false;
     private static String adventureDirectory = null;
     private static int androidAPI = 0;
     private static String downloadsDir = "";
@@ -19,6 +20,11 @@ public class GuiBase {
 
     public static void setIsAndroid(boolean value) { isAndroidport = value; }
     public static boolean isAndroid() { return isAndroidport; }
+
+    /** Set by the iOS launcher (forge.ios.Main), mirroring the Android flag above, so shared
+     *  modules can branch on the platform without sniffing libGDX's ApplicationType. */
+    public static void setIsIOS(boolean value) { isIOSport = value; }
+    public static boolean isIOS() { return isIOSport; }
     public static int getAndroidAPILevel() { return androidAPI; }
     public static String getDownloadsDir() {
         return downloadsDir;
