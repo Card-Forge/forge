@@ -28,4 +28,13 @@ public class LangRussian extends Lang {
         return object + " (" + owner + ")";
     }
 
+    // Cyrillic isn't covered by the default UI font (font1.ttf), so route
+    // Russian through the same "needs a custom font" pathway used by the
+    // CJK languages (see FSkinFont.updateFont()). The user must select a
+    // Cyrillic-capable TTF in Settings -> CJK Font before switching to ru-RU.
+    @Override
+    public String getFontFile() {
+        return "Roboto-Bold";
+    }
+
 }
