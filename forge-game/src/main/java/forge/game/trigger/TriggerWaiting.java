@@ -38,7 +38,11 @@ public class TriggerWaiting {
     }
 
     public void setTriggers(final List<Trigger> trigs) {
-        this.triggers = Maps.newHashMap();
+        // Preserve the order of trigs: getTriggers() feeds the order simultaneous triggers are put
+        // on the stack, and a plain HashMap would iterate in hashCode-bucket order, which varies
+        // per JVM run (Trigger.hashCode folds in the identity hash of the Trigger class object).
+        // LinkedHashMap keeps the deterministic zone-walk order from getActiveTrigger.
+        this.triggers = Maps.newLinkedHashMap();
         for (Trigger t : trigs) {
             triggers.put(t, t.getHostCard().getController());
         }
