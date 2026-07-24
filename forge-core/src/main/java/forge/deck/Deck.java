@@ -46,6 +46,10 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("serial")
 public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPool>> {
+    // Pinned to the computed UID from before sleeveArtKey/sleeveArtOffset were added, so decks
+    // serialized into Adventure saves by older builds keep deserializing (new fields default).
+    private static final long serialVersionUID = -8539667316828440829L;
+
     // Crop offset (0..1000 along the slack axis) used when framing this deck's card-art sleeve
     public static final int DEFAULT_SLEEVE_OFFSET = 500;
 
@@ -582,7 +586,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     /** Card image key whose art_crop is this deck's sleeve, or "" to use the built-in sleeve. */
     public String getSleeveArtKey() {
-        return sleeveArtKey;
+        // null when deserialized from a stream written before this field existed
+        return sleeveArtKey == null ? "" : sleeveArtKey;
     }
     public void setSleeveArtKey(final String key) {
         sleeveArtKey = key == null ? "" : key;
