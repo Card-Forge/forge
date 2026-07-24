@@ -26,9 +26,6 @@ import java.util.zip.ZipFile;
  * (java-function-stubs, java.time supply). Every hit is a guaranteed
  * NoClassDefFoundError / NoSuchMethodError if that code path executes on iOS.
  *
- * This replaces the manual CLAUDE.md grep scan: run it after every upstream
- * merge and the output IS the remaining porting workload (usually empty).
- *
  * Usage: MobiVmLinkAudit --rt rt1.jar[,rt2.jar,...] --scan app1.jar[,app2.jar,...]
  * Output: one line per missing member: KIND owner.member(desc) <- count refs [sample referencer]
  */

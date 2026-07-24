@@ -1,9 +1,7 @@
 name: Build iOS IPA
 
 # Full RoboVM AOT build of the iOS app on a macOS runner, producing an
-# UNSIGNED forge-ios.ipa artifact. No certificates, provisioning profiles or
-# jailbreak involved anywhere: users install the unsigned IPA with
-# Sideloadly or AltStore, which re-sign it with their own (free) Apple ID.
+# UNSIGNED forge-ios.ipa artifact.
 #
 # The AOT compile takes ~30-60 minutes on a hosted macOS runner, so this is
 # manual-dispatch / release-time only — the cheap per-PR iOS check is the

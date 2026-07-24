@@ -1,33 +1,10 @@
 #!/bin/bash
 # ios-pipeline.sh — build unmodified upstream Forge for iOS (MobiVM).
 #
-# MobiVM's runtime library is Java-7-era. Instead of hand-backporting modern
-# Java, this pipeline transforms the built jars:
-#   1. JvmDowngrader -c 52 : Java 9-17 surface -> Java 8 bytecode
-#      (records, List.of, String.repeat, switch expressions, concat-indy)
-#   2. MobiVmBridge (src/) : Java 8 library surface missing from MobiVM ->
-#      streamsupport backports + forge.compat + app-supplied java.* classes
-#      (rules in bridge.cfg; java.time = relocated ThreeTen; java.nio.file =
-#      java-supply/)
-#   3. MobiVmLinkAudit     : verifies every java/javax/java8/compat member
-#      reference in the final jars against the real runtime — the report is
-#      the complete porting workload after an upstream merge (usually empty)
-#
-# Usage:
-#   pipeline/ios-pipeline.sh classpath   # transform jars -> tmp/ios-m2 (run
-#                                        #   after every module rebuild/merge)
-#   pipeline/ios-pipeline.sh sim         # build + install + launch simulator
-#   pipeline/ios-pipeline.sh device      # build + sign + install to iPad
-#
 # Typical merge workflow:
 #   git pull && mvn clean install -pl forge-core,forge-game,forge-gui,forge-gui-mobile,forge-ai -DskipTests
 #   pipeline/ios-pipeline.sh classpath   # check the audit report it prints
 #   pipeline/ios-pipeline.sh sim         # or: device
-#
-# App identity: robovm.properties is untracked (developer-specific bundle id)
-# and is generated on first run from robovm.properties.template using APP_ID
-# from your .env. Register your own App ID -- do not ship under someone
-# else's bundle identifier.
 #
 # Machine/developer-specific settings (device UDIDs, signing identity) are
 # NOT stored in this script. Put them in the untracked .env at the repo root
@@ -66,7 +43,6 @@ M2="$HOME/.m2/repository"
 SETTINGS="$ROOT/.mvn/local-settings.xml"
 CP_FILE="$JV/ios-classpath.txt"
 
-# machine/developer-specific settings live in the untracked repo-root .env;
 # explicitly exported environment variables take precedence over .env values
 # (e.g. SIM_UDID=<other-sim> pipeline/ios-pipeline.sh sim)
 _pre_APP_ID="$APP_ID"; _pre_APP_EXEC="$APP_EXEC"; _pre_SIM_UDID="$SIM_UDID"
@@ -536,11 +512,7 @@ EOF
     echo "INSTALLED"
 }
 
-# ------------------------------------------------------------------ CI modes
-# audit: the full transform + link-gate WITHOUT any Apple tooling. Runs on a
-# plain Linux runner in a few minutes and fails (exit 1) when Java code
-# reachable from forge would crash on MobiVM (unbridged jvmdg stub, missing
-# API). This is the per-PR iOS-compatibility check.
+# CI modes audit: the full transform + link-gate WITHOUT any Apple tooling.
 audit() {
     echo "=== install forge modules the iOS classpath resolves against ==="
     # '.' installs the parent POM too — required on a fresh clone, else the
@@ -553,8 +525,7 @@ audit() {
 }
 
 # ipa: full RoboVM AOT build producing an UNSIGNED .ipa (macOS runner; no
-# certificates/profiles required). Users install it via Sideloadly/AltStore,
-# which re-sign with their own Apple ID — no jailbreak involved.
+# certificates/profiles required).
 ipa() {
     echo "=== install forge modules ==="
     # '.' installs the parent POM too — required on a fresh clone, else the

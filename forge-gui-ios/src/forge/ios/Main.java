@@ -246,17 +246,13 @@ public class Main extends IOSApplication.Delegate {
             config.preferredFramesPerSecond = 60;  // Smooth 60 FPS rendering
             config.preventScreenDimming = true;  // Keep screen on during gameplay
 
-            // Detect if running on iPad (UIUserInterfaceIdiomPad = 1)
+            // Detect if running on iPad
             boolean isTablet = org.robovm.apple.uikit.UIDevice.getCurrentDevice().getUserInterfaceIdiom()
                 == org.robovm.apple.uikit.UIUserInterfaceIdiom.Pad;
 
-            // Mark this as the iOS port (mirrors the Android launcher's setIsAndroid) so shared
-            // modules branch on GuiBase.isIOS() instead of sniffing libGDX's ApplicationType.
             forge.gui.GuiBase.setIsIOS(true);
 
-            // Log physical device RAM (MB) for diagnostics. Upstream's getApp no
-            // longer takes a RAM hint (the feature branch's cache-sizing lever);
-            // if jetsam pressure resurfaces, reintroduce via HWInfo.
+            // Log physical device RAM (MB) for diagnostics
             try {
                 long deviceRamMB = NSProcessInfo.getSharedProcessInfo().getPhysicalMemory() / (1024L * 1024L);
                 log("Physical device RAM: " + deviceRamMB + " MB");
@@ -266,14 +262,6 @@ public class Main extends IOSApplication.Delegate {
 
             final ApplicationListener app = Forge.getApp(null, new IOSClipboard(), new IOSAdapter(), assetsDir, false, isTablet, 0);
             IOSApplication iosApp = new IOSApplication(app, config);
-
-            // NOTE: sound effects now play through libGDX Music (AVAudioPlayer) on iOS
-            // (see forge.sound.AudioClip), NOT OpenAL. The OpenAL effects engine that
-            // libGDX auto-initializes is therefore unused; it is permanently suspended
-            // in didBecomeActive so its render cycle can't beat against the AVAudioPlayer
-            // music. The old world-gen sfxEngineControl toggle is intentionally NOT
-            // registered anymore - un-suspending OpenAL would reintroduce the beat, and
-            // AVAudioPlayer effects don't suffer the world-gen mixer-starvation static.
 
             // Re-apply System.out/err redirection - IOSApplication replaces them with FoundationLogPrintStream
             // which doesn't appear in Console.app on iOS 26+
@@ -328,8 +316,7 @@ public class Main extends IOSApplication.Delegate {
         // producing the slow periodic music crackle. Suspending it (alcSuspendContext)
         // stops that render cycle so everything is one clock domain = no beat. Re-applied
         // on every foreground; the first didBecomeActive fires at launch after the audio
-        // device is open. Music (a separate AVAudioPlayer subsystem) is unaffected -
-        // verified previously: suspending OpenAL never stopped the background music.
+        // device is open. Music (a separate AVAudioPlayer subsystem) is unaffected
         try {
             OpenALManager mgr = OpenALManager.sharedInstance();
             String diag;
@@ -359,18 +346,8 @@ public class Main extends IOSApplication.Delegate {
             log("Failed to redirect System.out/err: " + t.getMessage());
         }
 
-        // Raise RLIMIT_NOFILE before anything opens files/sockets. iOS processes default to a
-        // 256-fd soft limit; this app legitimately holds ~80 (card DB, logs, textures in flight)
-        // and image-download bursts open dozens of sockets on top — one spike past the limit and
-        // EVERYTHING degrades at once: texture opens fail (EMFILE surfaces as GdxRuntimeException
-        // "Couldn't load file" -> blank card frames), and even DNS breaks (getaddrinfo needs an
-        // fd -> "Unable to resolve host"). Raising soft to min(hard, OPEN_MAX) is cheap and safe.
         FileDescriptorLimit.raise();
 
-        // Crash reporting — mirrors the desktop launcher's Sentry setup (same project DSN).
-        // Events are only SENT when the user's USE_SENTRY preference allows it
-        // (BugReporter.isSentryEnabled); the init itself is passive. Never let telemetry
-        // setup break app launch.
         try {
             io.sentry.Sentry.init(options -> {
                 // Do NOT scan the classpath for config (desktop leaves this on; on a JVM it's
@@ -385,13 +362,7 @@ public class Main extends IOSApplication.Delegate {
                 options.setEnvironment("iOS");
                 options.setTag("Platform", "iOS/RoboVM");
                 options.setShutdownTimeoutMillis(5000);
-                // The MOBILE project DSN (project 2, like Android's manifest — desktop reports
-                // to project 3), in the HTTPS no-port form: sentry.asgardsrealm.net is served
-                // through a Cloudflare Tunnel, so 443 is the only reachable path — the legacy
-                // ":9000" endpoints in the checked-in sentry.properties files predate the
-                // tunnel and cannot work through it.
-                if (options.getDsn() == null || options.getDsn().isEmpty())
-                    options.setDsn("https://a0b8dbad9b8a49cfa51bf65d462e8dae@sentry.asgardsrealm.net/2");
+                options.setDsn("https://a0b8dbad9b8a49cfa51bf65d462e8dae@sentry.asgardsrealm.net/2");
             });
         } catch (Throwable t) {
             log("Sentry init failed (continuing without crash reporting): " + t.getMessage());
@@ -522,14 +493,7 @@ public class Main extends IOSApplication.Delegate {
 
         @Override
         public void convertToPNG(InputStream input, OutputStream output) throws IOException {
-            // Same rationale as convertToJPEG: pass the bytes through
-            // (upstream's iOS adapter is a no-op here; a copy is strictly safer)
-            byte[] buffer = new byte[IO_BUFFER_SIZE];
-            int bytesRead;
-            while ((bytesRead = input.read(buffer)) != -1) {
-                output.write(buffer, 0, bytesRead);
-            }
-            output.flush();
+            convertToJPEG(input, output);
         }
 
         @Override

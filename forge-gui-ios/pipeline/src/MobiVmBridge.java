@@ -358,12 +358,11 @@ public class MobiVmBridge {
      * only FLAG_MARKERS(2) and FLAG_BRIDGES(4) of LambdaMetafactory.altMetafactory
      * — FLAG_SERIALIZABLE(1) is silently discarded, so a serializable lambda
      * comes out NOT implementing Serializable and the compiler-emitted
-     * `checkcast java/io/Serializable` throws at runtime (first hit: jgrapht
-     * SupplierUtil.<clinit> via GameAction.findStaticAbilityToApply — killed
-     * every game). Convert the ignored bit into an explicit marker interface,
-     * which RoboVM demonstrably honors. Bit 1 is left set: RoboVM ignores it
-     * either way and flags=7 + explicit marker is the (spec-valid) historical
-     * ECJ encoding, so the transformed jars still run on real JVMs.
+     * `checkcast java/io/Serializable` throws at runtime.
+     * Convert the ignored bit into an explicit marker interface,which RoboVM
+     * demonstrably honors. Bit 1 is left set: RoboVM ignores it either way and
+     * flags=7 + explicit marker is the (spec-valid) historical ECJ encoding,
+     * so the transformed jars still run on real JVMs.
      *
      * Arg layout: [samMT, implMH, instMT, flags,
      *              (markerCount, markers...)?, (bridgeCount, bridges...)?]
