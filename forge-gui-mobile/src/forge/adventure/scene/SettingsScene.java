@@ -205,6 +205,7 @@ public class SettingsScene extends UIScene {
                     FModel.getPreferences().save();
                 }
             });
+            // Borderless fullscreen is offered on macOS only until it has been validated on other platforms.
             if (OperatingSystem.isMac()) {
                 borderlessFullScreen = addSettingField(Forge.getLocalizer().getMessage("lblBorderlessFullScreenMode"), Config.instance().getSettingData().borderlessFullScreen, new ChangeListener() {
                     @Override

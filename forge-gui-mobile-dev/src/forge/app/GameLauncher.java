@@ -119,9 +119,11 @@ public class GameLauncher {
         }
 
         boolean fullScreen = Config.instance().getSettingData().fullScreen;
-        boolean macOSBorderlessFullScreen = forge.util.OperatingSystem.isMac()
+        // The borderless window setup below is platform-neutral, but the mode is gated
+        // to macOS for now because it has only been validated there.
+        boolean borderlessFullScreen = forge.util.OperatingSystem.isMac()
                 && Config.instance().getSettingData().borderlessFullScreen;
-        if (macOSBorderlessFullScreen) {
+        if (borderlessFullScreen) {
             Monitor monitor = Lwjgl3ApplicationConfiguration.getPrimaryMonitor();
             DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode(monitor);
             config.setWindowedMode(displayMode.width, displayMode.height);
@@ -139,14 +141,14 @@ public class GameLauncher {
         config.setWindowListener(new Lwjgl3WindowAdapter() {
             @Override
             public void created(Lwjgl3Window window) {
-                if (macOSBorderlessFullScreen) {
+                if (borderlessFullScreen) {
                     MacOSPresentation.setBorderlessVisible(true);
                 }
             }
 
             @Override
             public void iconified(boolean isIconified) {
-                if (macOSBorderlessFullScreen) {
+                if (borderlessFullScreen) {
                     MacOSPresentation.setBorderlessVisible(!isIconified);
                 }
             }
@@ -177,6 +179,17 @@ public class GameLauncher {
         new Lwjgl3Application(start, config);
     }
 
+    /**
+     * Applies the AppKit presentation state (hidden menu bar and Dock, working Cmd-M
+     * minimize) for the borderless fullscreen window, using LWJGL's bundled macOS
+     * ObjC-runtime bindings so no new dependency is required.
+     * <p>
+     * GLFW exposes no API for NSApplication presentation options, and its own
+     * borderless-fullscreen path keeps the window at a level above the menu bar,
+     * which prevents normal use of other applications while the game is visible.
+     * If that gap is ever closed upstream (GLFW -> LWJGL -> libGDX), this bridge
+     * can be removed. Only invoked while borderless fullscreen is active on macOS.
+     */
     private static final class MacOSPresentation {
         // NSApplicationPresentationOptions values from AppKit's NSApplication.h.
         private static final long DEFAULT = 0;
@@ -200,7 +213,10 @@ public class GameLauncher {
         private static final long DISPATCH_SYNC = LibSystem.getLibrary().getFunctionAddress("dispatch_sync_f");
         private static final long MAIN_QUEUE = LibSystem.getLibrary().getFunctionAddress("_dispatch_main_q");
         private static final long PTHREAD_MAIN = LibSystem.getLibrary().getFunctionAddress("pthread_main_np");
-        // The callback signature is the same void (*)(void *) signature required by dispatch_sync_f.
+        // LWJGL ships no libdispatch callback type, so EnumerationMutationHandler is
+        // borrowed here purely because it generates a native callback with the
+        // void (*)(void *) signature that dispatch_sync_f requires; its ObjC
+        // enumeration purpose is irrelevant.
         private static final EnumerationMutationHandler SET_PRESENTATION_OPTIONS_CALLBACK =
                 EnumerationMutationHandler.create(MacOSPresentation::setPresentationOptions);
 

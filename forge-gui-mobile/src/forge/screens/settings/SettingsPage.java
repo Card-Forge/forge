@@ -157,6 +157,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         Config.instance().saveSettings();
                     }
                 }, 0);
+            // Borderless fullscreen is offered on macOS only until it has been validated on other platforms.
             if (OperatingSystem.isMac()) {
                 lstSettings.addItem(new BooleanSetting(FPref.UI_BORDERLESS_FULLSCREEN_MODE,
                     Forge.getLocalizer().getMessage("lblBorderlessFullScreenMode"),
