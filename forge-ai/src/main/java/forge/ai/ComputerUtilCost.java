@@ -385,9 +385,8 @@ public class ComputerUtilCost {
 
                 CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
                 if (differentNames) {
-                    // LinkedHashSet: this list is copied back into typeList and drives which cards
-                    // get sacrificed on a scoring tie, so its order must not depend on Card
-                    // identity hashCode (which varies per JVM run).
+                    // drives which cards get sacrificed on a scoring tie, so its order must not depend on Card
+                    // identity hashCode (which varies per JVM run)
                     final Set<Card> uniqueNameCards = Sets.newLinkedHashSet();
                     for (final Card card : typeList) {
                         // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common

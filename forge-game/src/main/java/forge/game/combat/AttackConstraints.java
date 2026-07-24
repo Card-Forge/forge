@@ -140,10 +140,10 @@ public class AttackConstraints {
         }
 
         // Now try all others (plus empty attack) and count their violations. Iterate the ordered
-        // FCollection rather than asSet(): possible is a LinkedHashMap and the min() below keeps
-        // the first entry on a violation-count tie, so insertion order decides which attack is
-        // chosen. asSet() is a HashSet keyed by attack-config maps whose hashCodes come from Card
-        // identity hashes, i.e. per-JVM-random - which made the AI's attack nondeterministic.
+        // FCollection rather than asSet(): the min() below keeps the first entry on a
+        // violation-count tie, so insertion order decides which attack is chosen instead of a
+        // HashSet keyed by attack-config maps whose hashCodes come from Card identity hashes,
+        // i.e. per-JVM-random - which made the AI's attack nondeterministic.
         final FCollection<Map<Card, GameEntity>> legalAttackers = collectLegalAttackers(reqs, myMax);
         for (final Map<Card, GameEntity> attackMap : legalAttackers) {
             possible.put(attackMap, countViolations(attackMap));

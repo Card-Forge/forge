@@ -5,7 +5,7 @@ name: iOS compatibility gate
 # runner and FAILS when Java code reachable from Forge would crash on device
 # (an unbridged jvmdg stub or an API MobiVM doesn't provide). This catches
 # "modern Java API breaks iOS" regressions on every PR without anyone needing
-# a Mac. The full device build is a separate macOS workflow (ios-build-ipa).
+# a Mac.
 
 on:
   push:

@@ -26,7 +26,7 @@ First run bootstraps third-party jars (JvmDowngrader, streamsupport,
 ThreeTen) into `tmp/jvmdg/` automatically. Device IDs / signing identity are
 env-overridable — see the header of `ios-pipeline.sh`.
 
-## Key facts (hard-won — see git history of feature/ios-jvmdg-pipeline)
+## Key facts
 
 - JvmDowngrader `-c 51` (true Java 7 target) is a dead end: its 8→7 stub
   bodies throw `MissingStubError`. `-c 52` is the mature path; the bridge

@@ -146,20 +146,16 @@
             <classifier>natives-ios</classifier>
         </dependency>
         <!-- Stub java.util.function classes for RoboVM compatibility -->
-        <!-- RoboVM's Comparator references java.util.function but doesn't include it -->
         <dependency>
             <groupId>forge.stubs</groupId>
             <artifactId>java-function-stubs</artifactId>
             <version>1.0</version>
         </dependency>
         <!-- ==== MobiVM modern-Java pipeline supplies (tmp/jvmdg) ====
-             The iOS classpath is produced by tmp/jvmdg/prepare-ios-classpath.sh:
-             JvmDowngrader -c 52 (Java 9-17 -> 8 bytecode) + MobiVmBridge
-             (Java 8 library surface missing from MobiVM's Java-7-era runtime
+             The iOS classpath is produced by JvmDowngrader -c 52 (Java 9-17 -> 8 bytecode)
+             + MobiVmBridge (Java 8 library surface missing from MobiVM's Java-7-era runtime
              -> streamsupport / forge.compat / app-supplied java.* classes).
              Build with -Dmaven.repo.local=<repo>/tmp/ios-m2. -->
-        <!-- streamsupport: real implementations of java.util.function/stream/
-             Optional etc. under java8.*; bridged call sites target these -->
         <dependency>
             <groupId>net.sourceforge.streamsupport</groupId>
             <artifactId>streamsupport</artifactId>
