@@ -41,7 +41,6 @@ public class RecruitEffect extends TokenEffectBase {
         MutableBoolean combatChanged = new MutableBoolean(false);
 
         for (final Player p : getTargetPlayers(sa)) {
-
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
             p.drawCards(1, sa, moveParams);

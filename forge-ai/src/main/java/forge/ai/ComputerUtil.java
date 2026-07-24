@@ -536,7 +536,7 @@ public class ComputerUtil {
 
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
         if (differentNames) {
-            final Set<Card> uniqueNameCards = Sets.newHashSet();
+            final Set<Card> uniqueNameCards = Sets.newLinkedHashSet();
             for (final Card card : typeList) {
                 // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
                 if (!card.hasNoName()) {
