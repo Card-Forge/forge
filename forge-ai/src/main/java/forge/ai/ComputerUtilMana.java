@@ -5,6 +5,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
@@ -1147,7 +1148,12 @@ public class ComputerUtilMana {
      */
     private static ListMultimap<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final ListMultimap<Integer, SpellAbility> manaAbilityMap,
             final ManaCostBeingPaid cost) {
-        ListMultimap<ManaCostShard, SpellAbility> res = ArrayListMultimap.create();
+        // EnumMap-backed so keySet()/entries() iterate in ManaCostShard declaration order rather
+        // than the enum's identity-hash order (which varies per JVM run). sortManaAbilities and
+        // getNextShardToPay walk this keySet, so a nondeterministic order there made the AI's
+        // choice of which source to tap - and thus its whole line of play - nondeterministic.
+        ListMultimap<ManaCostShard, SpellAbility> res =
+                MultimapBuilder.enumKeys(ManaCostShard.class).arrayListValues().build();
 
         if ((cost.getGenericManaAmount() > 0 || cost.hasAnyKind(ManaAtom.OR_2_GENERIC)) && manaAbilityMap.containsKey(ManaAtom.GENERIC)) {
             res.putAll(ManaCostShard.GENERIC, manaAbilityMap.get(ManaAtom.GENERIC));
