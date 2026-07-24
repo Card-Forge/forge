@@ -12,13 +12,9 @@ import forge.util.Lang;
 
 public class EnduringStoryEffect extends SpellAbilityEffect {
 
-    /** Artifacts, legendaries and/or Sagas - a permanent that is more than one of these still counts once. */
+    /** Artifacts, legendaries and/or Sagas - a permanent that is more than one of these still counts once - i.e. historic. */
     public static int countStoried(final Player p) {
-        return CardLists.count(p.getCardsIn(ZoneType.Battlefield), EnduringStoryEffect::isStoried);
-    }
-
-    private static boolean isStoried(final Card c) {
-        return c.isArtifact() || c.getType().isLegendary() || c.getType().hasSubtype("Saga");
+        return CardLists.count(p.getCardsIn(ZoneType.Battlefield), Card::isHistoric);
     }
 
     /* (non-Javadoc)

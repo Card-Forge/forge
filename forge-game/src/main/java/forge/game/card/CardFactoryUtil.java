@@ -645,7 +645,7 @@ public class CardFactoryUtil {
             if (card.isPermanent()) {
                 final String trig = "Mode$ Always | TriggerZones$ Battlefield"
                         + " | Secondary$ True | Static$ True | EnduringStory$ False"
-                        + " | IsPresent$ Permanent.YouCtrl+Artifact,Permanent.YouCtrl+Legendary,Permanent.YouCtrl+Saga | PresentCompare$ GE3"
+                        + " | IsPresent$ Permanent.YouCtrl+Historic | PresentCompare$ GE3"
                         + " | TriggerDescription$ Storied (" + inst.getReminderText() + ")";
 
                 final String effect = "DB$ EnduringStory | Defined$ You";
