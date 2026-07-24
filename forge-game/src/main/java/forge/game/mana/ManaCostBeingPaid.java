@@ -117,8 +117,11 @@ public class ManaCostBeingPaid {
     }
 
     // holds Mana_Part objects
-    // ManaPartColor is stored before ManaPartGeneric
-    private final Map<ManaCostShard, ShardCount> unpaidShards = Maps.newHashMap();
+    // An EnumMap iterates in ManaCostShard declaration order, which is deliberately "least ways to
+    // pay first" (colors before generic, per that enum's own comment). A HashMap iterated in
+    // identity-hash order instead - arbitrary and, because enum hashCode is identity-based, varying
+    // per JVM run, which made mana-source choice (and thus AI play) nondeterministic.
+    private final Map<ManaCostShard, ShardCount> unpaidShards = new EnumMap<>(ManaCostShard.class);
     private Map<String, Integer> xManaCostPaidByColor;
     private byte sunburstMap = 0;
     private int cntX = 0;
