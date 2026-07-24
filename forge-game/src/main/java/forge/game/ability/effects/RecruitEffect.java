@@ -67,10 +67,7 @@ public class RecruitEffect extends TokenEffectBase {
                 if (toBeDiscarded.stream().anyMatch(CardPredicates.NON_LANDS)) {
                     CardZoneTable triggerList = new CardZoneTable();
 
-                    final Card result = TokenInfo.getProtoType("w_1_1_human_soldier.txt", sa, p, false);
-                    result.setTokenSpawningAbility(sa);
-
-                    makeTokenTable(makeTokenTableInternal(p, result, 1), false, triggerList, combatChanged, sa);
+                    makeTokenTable(makeTokenTableInternal(p, "w_1_1_human_soldier", 1, sa), false, triggerList, combatChanged, sa);
 
                     triggerList.triggerChangesZoneAll(game, sa);
 
