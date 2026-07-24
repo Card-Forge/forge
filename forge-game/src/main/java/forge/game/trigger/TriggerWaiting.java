@@ -42,6 +42,7 @@ public class TriggerWaiting {
         // on the stack, and a plain HashMap would iterate in hashCode-bucket order, which varies
         // per JVM run (Trigger.hashCode folds in the identity hash of the Trigger class object).
         // LinkedHashMap keeps the deterministic zone-walk order from getActiveTrigger.
+        // keySet() drives simultaneous-trigger stacking, so preserve collection order.
         this.triggers = Maps.newLinkedHashMap();
         for (Trigger t : trigs) {
             triggers.put(t, t.getHostCard().getController());
