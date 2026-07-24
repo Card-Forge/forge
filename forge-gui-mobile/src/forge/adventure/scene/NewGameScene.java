@@ -400,25 +400,28 @@ public class NewGameScene extends MenuScene {
     private void showDifficultyHelp() {
         DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
         boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
+        String startingEquipment = selectedDifficulty.startItems == null || selectedDifficulty.startItems.length == 0
+                ? "None"
+                : String.join(", ", selectedDifficulty.startItems);
 
         difficultySummary = new DialogData();
         difficultySummary.name = "Summary";
         switch (selectedDifficulty.name) {
             case "Easy":
-                difficultySummary.text = String.format("Difficulty: %s\nFor newer players or those who want a relaxed experience.\nStarter decks are monocolored.\nStarting equipment: Manasight Amulet, Leather Boots", selectedDifficulty.name);
+                difficultySummary.text = String.format("Difficulty: %s\nFor newer players or those who want a relaxed experience.\nStarter decks are monocolored.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
                 break;
             case "Normal":
-                difficultySummary.text = String.format("Difficulty: %s\nHow Adventure Mode is intended to be played.\nStarter decks will include a second color.\nStarting equipment: Leather Boots", selectedDifficulty.name);
+                difficultySummary.text = String.format("Difficulty: %s\nHow Adventure Mode is intended to be played.\nStarter decks will include a second color.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
                 break;
             case "Hard":
                 if (enableGeneticAI) {
-                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nSome enemies will use genetic AI decks.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nSome enemies will use genetic AI decks.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
                 } else {
-                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
                 }
                 break;
             case "Insane":
-                difficultySummary.text = String.format("Difficulty: %s\nFor players who don't want to like the game.\nIdentical to Hard difficulty, but with even less forgiving and rewarding results.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                difficultySummary.text = String.format("Difficulty: %s\nFor players who don't want to like the game.\nIdentical to Hard difficulty, but with even less forgiving and rewarding results.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
                 break;
             default:
                 difficultySummary.text = "((Custom difficulty settings))";

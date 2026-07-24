@@ -4930,7 +4930,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 3,
     "life": 40,
     "rewards": [
       {
@@ -35725,7 +35725,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 1.5,
+    "scale": 1,
     "life": 30,
     "rewards": [
       {
@@ -55696,7 +55696,7 @@
         "addMaxCount": 5
       }
     ],
-    "colors": "BR",
+    "colors": "B",
     "spawnRate": 0
   },
   {

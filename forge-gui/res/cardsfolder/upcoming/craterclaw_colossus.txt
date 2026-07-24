@@ -1,0 +1,11 @@
+Name:Craterclaw Colossus
+ManaCost:4 R R R
+Types:Artifact Creature Beast Construct
+PT:5/5
+K:Haste
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ BehemothPump | TriggerDescription$ When this creature enters, creatures you control gain trample and get +X/+0 until end of turn, where X is the number of artifacts you control.
+SVar:BehemothPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ +X
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:PlayMain1:TRUE
+DeckHints:Type$Artifact
+Oracle:Haste\nWhen this creature enters, creatures you control gain trample and get +X/+0 until end of turn, where X is the number of artifacts you control.

@@ -18,3 +18,4 @@ ScryfallCode=PSPL
 10 M Liliana Vess @Justyna Dura
 11 R Riddles in the Dark @Tomas Duchek
 12 R Elektra, Daughter of the Hand @Alessandra Pisano
+13 M Jace Beleren @Cristi Balanescu

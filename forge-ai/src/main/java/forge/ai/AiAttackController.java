@@ -273,13 +273,7 @@ public class AiAttackController {
         return false;
     }
 
-    /**
-     * <p>
-     * sortAttackers.
-     * </p>
-     *
-     */
-    public final static List<Card> sortAttackers(final List<Card> in) {
+    public static List<Card> sortAttackers(final List<Card> in) {
         final List<Card> result = new ArrayList<>();
 
         // Cards with triggers should come first (for Battle Cry)

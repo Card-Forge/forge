@@ -1,0 +1,10 @@
+Name:Bolg of the North
+ManaCost:3 B R
+Types:Legendary Creature Goblin Soldier
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When NICKNAME enters, you may sacrifice another creature. When you do, NICKNAME deals damage equal to that creature's power to another target creature. If excess damage was dealt this way, amass Goblins X, where X is that excess damage. (Put X +1/+1 counters on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other/another creature> | Execute$ TrigDamage | TriggerDescription$ When you do, NICKNAME deals damage equal to that creature's power to another target creature. If excess damage was dealt this way, amass Goblins X, where X is that excess damage. (Put X +1/+1 counters on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | ExcessSVar$ Excess | SubAbility$ DBAmass
+SVar:DBAmass:DB$ Amass | Type$ Goblin | Num$ Excess | ConditionCheckSVar$ Excess
+SVar:X:Sacrificed$CardPower
+Oracle:When Bolg enters, you may sacrifice another creature. When you do, Bolg deals damage equal to that creature's power to another target creature. If excess damage was dealt this way, amass Goblins X, where X is that excess damage. (Put X +1/+1 counters on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)

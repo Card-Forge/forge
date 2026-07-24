@@ -1,0 +1,19 @@
+Name:Vigorbloom Vanguard
+ManaCost:1 GW
+Types:Creature Troll Druid
+PT:2/2
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Vigilance | Description$ Each creature you control with a +1/+1 counter on it has vigilance.
+AlternateMode:Prepare
+Oracle:This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+Each creature you control with a +1/+1 counter on it has vigilance.
+
+ALTERNATE
+
+Name:Seed Suture
+ManaCost:GW
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife | SpellDescription$ Put a +1/+1 counter on target creature. You gain 1 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+Oracle:Put a +1/+1 counter on target creature. You gain 1 life.

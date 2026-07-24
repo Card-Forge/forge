@@ -1,8 +1,8 @@
 [metadata]
 Code=MBC
-Date=2027-01-01
-Name=Mystery Booster Commander
-Type=Commander
+Date=2026-10-01
+Name=Mystery Booster: Commander Edition
+Type=Draft
 ScryfallCode=MBC
 
 [cards]
