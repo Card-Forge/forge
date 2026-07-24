@@ -112,6 +112,28 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     // wrapped in a List so it can be reused directly
     private List<LandTraitChanges> landTraitChanges = List.of(new LandTraitChanges(this));
 
+    // Trait caches. getReplacementEffects/getStaticAbilities/getTriggers rebuild their list from the
+    // layer system on every call - tens of millions of times per game - and the result is identical
+    // to the previous one over 99.9% of the time. Cache it and drop the cache whenever any input
+    // changes; see Card.invalidateTraitCaches for the invalidation points.
+    private FCollectionView<ReplacementEffect> cachedReplacementsAsRulesHost;
+    private FCollectionView<ReplacementEffect> cachedReplacementsPlain;
+    private FCollectionView<StaticAbility> cachedStaticAbilities;
+    private FCollectionView<Trigger> cachedTraitTriggers;
+
+    /**
+     * Drop every cached trait list; they are rebuilt lazily on next access.
+     * Note: mutating a split state's raw trait lists must invalidate the whole card, because the
+     * Original state merges LeftSplit/RightSplit's lists into its own - hence those mutators call
+     * Card.invalidateTraitCaches() rather than this.
+     */
+    final void invalidateTraitCache() {
+        cachedReplacementsAsRulesHost = null;
+        cachedReplacementsPlain = null;
+        cachedStaticAbilities = null;
+        cachedTraitTriggers = null;
+    }
+
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);
     }
@@ -154,6 +176,9 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public void updateTypes() {
         this.changedType = getType().getTypeWithChanges(card.getChangedCardTypes());
+        // Type drives the Saga/planeswalker/battle ETB-counter replacements, the Adventure/Omen
+        // rules effects and the basic-land mana abilities, so any type change invalidates traits.
+        invalidateTraitCache();
     }
     public void updateTypesForView() {
         view.updateType(this);
@@ -673,6 +698,9 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public final FCollectionView<Trigger> getTriggers() {
+        if (cachedTraitTriggers != null) {
+            return cachedTraitTriggers;
+        }
         FCollection<Trigger> result = new FCollection<>(triggers);
         if (getStateName().equals(CardStateName.Original)) {
             if (getCard().hasState(CardStateName.LeftSplit))
@@ -681,6 +709,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 result.addAll(getCard().getState(CardStateName.RightSplit).triggers);
         }
         card.updateTriggers(result, this);
+        cachedTraitTriggers = result;
         return result;
     }
 
@@ -698,10 +727,14 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public final boolean addTrigger(final Trigger t) {
+        card.invalidateTraitCaches();
         return triggers.add(t);
     }
 
     public final FCollectionView<StaticAbility> getStaticAbilities() {
+        if (cachedStaticAbilities != null) {
+            return cachedStaticAbilities;
+        }
         FCollection<StaticAbility> result = new FCollection<>(staticAbilities);
         if (getStateName().equals(CardStateName.Original)) {
             if (getCard().hasState(CardStateName.LeftSplit))
@@ -710,12 +743,15 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 result.addAll(getCard().getState(CardStateName.RightSplit).staticAbilities);
         }
         card.updateStaticAbilities(result, this);
+        cachedStaticAbilities = result;
         return result;
     }
     public final boolean addStaticAbility(StaticAbility stab) {
+        card.invalidateTraitCaches();
         return staticAbilities.add(stab);
     }
     public final boolean removeStaticAbility(StaticAbility stab) {
+        card.invalidateTraitCaches();
         return staticAbilities.remove(stab);
     }
 
@@ -723,6 +759,13 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return getReplacementEffects(true);
     }
     public FCollectionView<ReplacementEffect> getReplacementEffects(boolean rulesHost) {
+        // rulesHost selects a different result (the global Adventure/Omen rules are appended only
+        // for the rules host), so the two variants are cached separately.
+        final FCollectionView<ReplacementEffect> cached =
+                rulesHost ? cachedReplacementsAsRulesHost : cachedReplacementsPlain;
+        if (cached != null) {
+            return cached;
+        }
         FCollection<ReplacementEffect> result = new FCollection<>(replacementEffects);
         // add Split to Original
         if (getStateName().equals(CardStateName.Original)) {
@@ -754,6 +797,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         card.updateReplacementEffects(result, this, rulesHost);
 
         if (!rulesHost) {
+            cachedReplacementsPlain = result;
             return result;
         }
 
@@ -771,9 +815,11 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             result.add(omenRep);
         }
 
+        cachedReplacementsAsRulesHost = result;
         return result;
     }
     public boolean addReplacementEffect(final ReplacementEffect replacementEffect) {
+        card.invalidateTraitCaches();
         return replacementEffects.add(replacementEffect);
     }
 
@@ -878,6 +924,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setRarity(source.rarity);
         setSetCode(source.setCode);
 
+        card.invalidateTraitCaches();
+
         Trigger dontCopyTr = null;
         if (ctb != null && ctb.hasParam("DoesntHaveThisAbility")) {
             SpellAbility root = ((SpellAbility) ctb).getRootAbility();
@@ -949,6 +997,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public final void addAbilitiesFrom(final CardState source, final boolean lki) {
+        card.invalidateTraitCaches();
         for (SpellAbility sa : source.abilities) {
             if (sa.isIntrinsic() && sa.getApi() != ApiType.PermanentCreature && sa.getApi() != ApiType.PermanentNoncreature) {
                 abilities.add(sa.copy(card, lki));
