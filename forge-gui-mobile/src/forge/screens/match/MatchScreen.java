@@ -836,7 +836,9 @@ public class MatchScreen extends FScreen {
 
     FSkinTexture getBG() {
         if (Forge.isMobileAdventureMode) {
-            return switch (GameScene.instance().getAdventurePlayerLocation(false, true)) {
+            GameScene gameScene = GameScene.instance();
+            String location = gameScene.getAdventurePlayerLocation(false, true);
+            FSkinTexture background = switch (location) {
                 case "green" -> FSkinTexture.ADV_BG_FOREST;
                 case "black" -> FSkinTexture.ADV_BG_SWAMP;
                 case "red" -> FSkinTexture.ADV_BG_MOUNTAIN;
@@ -848,6 +850,11 @@ public class MatchScreen extends FScreen {
                 case "castle" -> FSkinTexture.ADV_BG_CASTLE;
                 default -> FSkinTexture.ADV_BG_COMMON;
             };
+            if (gameScene.getMapPOI() != null) {
+                String biome = gameScene.getBiomeByPosition(gameScene.getMapPOI().getPosition());
+                return background.getRandomAdventureBackground(biome.equals("waste") ? "colorless" : biome);
+            }
+            return background.getRandomAdventureBackground();
         }
         return FSkinTexture.BG_MATCH;
     }
