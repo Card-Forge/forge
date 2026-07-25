@@ -179,6 +179,16 @@ public abstract class SpellAbilityAi {
             return false;
         }
 
+        // An optional trigger must respect the AI's life safety, not just affordability: the
+        // activated path gates pay-life via willPayCosts/checkLifeCost, but the trigger path only
+        // checked canPayCost above. Without this, any "you may pay N life: <effect>" trigger (e.g.
+        // Bringer of the Black Dawn's tutor, Master of Death's return) would pay life it cannot
+        // spare, even into lethal range. Applies to every API; mandatory triggers still fire.
+        if (!mandatory && sa.getPayCosts() != null
+                && !ComputerUtilCost.checkLifeCost(aiPlayer, sa.getPayCosts(), sa.getHostCard(), 4, sa)) {
+            return false;
+        }
+
         // a mandatory SA without target candidates doesn't need to go any deeper
         if (sa.usesTargeting() && mandatory && sa.getTargetRestrictions().getNumCandidates(sa) == 0) {
             return sa.isTargetNumberValid();
