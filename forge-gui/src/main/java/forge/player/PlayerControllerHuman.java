@@ -1583,8 +1583,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final Set<CardView> actionable = Sets.newHashSet();
         if (showActionable) {
             if (paymentMode) {
+                // Snapshot each zone: the payment prompt refreshes on the EDT while the
+                // game thread can remove cards (e.g. Squandered Resources sacrificing a land).
                 for (ZoneType zone : ACTIONABLE_PAYMENT_ZONES) {
-                    for (Card c : player.getCardsIn(zone)) {
+                    for (Card c : player.getCardsIn(zone).threadSafeIterable()) {
                         if (cardHasPlayableManaAbility(c)) {
                             actionable.add(c.getView());
                         }
