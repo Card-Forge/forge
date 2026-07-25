@@ -896,7 +896,7 @@ public abstract class SpellAbilityEffect {
         for (Map.Entry<Player, CardCollectionView> e : toDiscardMap.entrySet()) {
             discardedBefore.put(e.getKey(), Lists.newArrayList(e.getKey().getDiscardedThisTurn()));
             final CardCollection discardedByPlayer = new CardCollection();
-            for (Card card : Lists.newArrayList(e.getValue())) { // without copying will get concurrent modification exception
+            for (Card card : e.getValue()) {
                 if (card == null) { continue; }
                 Card moved = e.getKey().discard(card, sa, effect, params);
                 if (moved != null) {
