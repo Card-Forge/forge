@@ -179,16 +179,6 @@ public abstract class SpellAbilityAi {
             return false;
         }
 
-        // An optional trigger must respect the AI's cost wisdom, not just affordability: canPayCost
-        // above only checks the cost *can* be paid, while the activated path also runs willPayCosts.
-        // Reuse it here so each API applies its own judgment - e.g. Bringer of the Black Dawn's tutor
-        // won't pay 2 life it cannot spare, and discard/sacrifice/counter costs are weighed too,
-        // instead of a single hardcoded life check. Mandatory triggers still fire.
-        if (!mandatory && sa.getPayCosts() != null
-                && !willPayCosts(aiPlayer, sa, sa.getPayCosts(), sa.getHostCard())) {
-            return false;
-        }
-
         // a mandatory SA without target candidates doesn't need to go any deeper
         if (sa.usesTargeting() && mandatory && sa.getTargetRestrictions().getNumCandidates(sa) == 0) {
             return sa.isTargetNumberValid();
