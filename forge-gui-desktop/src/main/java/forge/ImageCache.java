@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -40,6 +41,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.card.CardSplitType;
@@ -80,10 +84,29 @@ public class ImageCache {
     // short prefixes to save memory
 
     private static final Set<String> _missingIconKeys = new HashSet<>();
+    private static final Set<String> _placeholderKeys = ConcurrentHashMap.newKeySet();
+
+    // A single large zone view (e.g. a 500-card library opened by a tutor effect) needs two
+    // entries per card - the decoded original and the scaled copy the panel paints - so the
+    // old 400 cap could not hold even one such view: measured on a 500-card library it
+    // evicted ~700 entries per refresh, meaning every reopen re-decoded and re-rendered
+    // everything. 400 was never a considered choice for that workload, it is just the value
+    // this preference has always defaulted to, so treat it as "unset" and raise it; any other
+    // value is one somebody actually chose and is left alone.
+    private static final int LEGACY_DEFAULT_CACHE_SIZE = 400;
+    private static final int DEFAULT_CACHE_SIZE = 1500;
     private static final LoadingCache<String, BufferedImage> _CACHE = CacheBuilder.newBuilder()
-            .maximumSize(FModel.getPreferences().getPrefInt((FPref.UI_IMAGE_CACHE_MAXIMUM)))
+            .maximumSize(cacheSize())
+            // soft values so memory pressure - not entry count - is what ultimately evicts
+            // images, which is what this class has always documented itself as doing
+            .softValues()
             .expireAfterAccess(15, TimeUnit.MINUTES)
             .build(new ImageLoader());
+
+    private static int cacheSize() {
+        final int configured = FModel.getPreferences().getPrefInt(FPref.UI_IMAGE_CACHE_MAXIMUM);
+        return configured == LEGACY_DEFAULT_CACHE_SIZE ? DEFAULT_CACHE_SIZE : configured;
+    }
     private static final BufferedImage _defaultImage;
     private static final BufferedImage _stars;
     private static final BufferedImage _inv_stars;
@@ -134,10 +157,33 @@ public class ImageCache {
         }
     }
 
+    // Every scaled/rendered variant cached for a base image key, so a downloaded image can
+    // drop exactly its own stale variants. Scanning the whole cache per download instead
+    // would be O(cache) per card on the EDT, which is the cost this class is trying to shed.
+    private static final Multimap<String, String> _variantKeys =
+            Multimaps.synchronizedMultimap(HashMultimap.create());
+
     public static void clear() {
         _CACHE.invalidateAll();
         _missingIconKeys.clear();
+        _placeholderKeys.clear();
+        _variantKeys.clear();
         ImageKeys.clearMissingCards();
+    }
+
+    /**
+     * Drops all scaled/rendered variants cached for the given base image key.
+     * Called when the image fetcher downloads a real image so cached placeholder
+     * renders don't mask it.
+     */
+    public static void clearGeneratedVariants(final String baseKey) {
+        if (StringUtils.isEmpty(baseKey)) {
+            return;
+        }
+        for (final String key : _variantKeys.removeAll(baseKey)) {
+            _CACHE.invalidate(key);
+            _placeholderKeys.remove(key);
+        }
     }
 
     /**
@@ -549,6 +595,11 @@ public class ImageCache {
 
         final BufferedImage cached = _CACHE.getIfPresent(resizedKey);
         if (null != cached) {
+            // A cached placeholder render must not satisfy callers probing for a real
+            // image (they use the miss to decide whether to queue an online fetch).
+            if (!useDefaultImage && _placeholderKeys.contains(resizedKey)) {
+                return null;
+            }
             return cached;
         }
 
@@ -589,9 +640,18 @@ public class ImageCache {
             result = resampler.filter(original, null);
         }
 
-        if (!isPlaceholder) {
-            _CACHE.put(resizedKey, result);
+        // Cache even placeholder renders: re-rendering and re-scaling a full card face for
+        // every card on every refresh makes large zone views (tutor searches through big
+        // libraries) unusably slow. The placeholder keys are tracked so the entries can be
+        // invalidated when the real image finishes downloading (see clearGeneratedVariants)
+        // and so image-presence probes aren't fooled by them.
+        if (isPlaceholder && original != _defaultImage) {
+            _placeholderKeys.add(resizedKey);
+        } else {
+            _placeholderKeys.remove(resizedKey);
         }
+        _CACHE.put(resizedKey, result);
+        _variantKeys.put(key, resizedKey);
         return result;
     }
     /**

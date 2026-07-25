@@ -26,7 +26,12 @@ public abstract class CachedCardImage implements ImageFetcher.Callback {
             if (image == null) {
                 String key = card.getCurrentState().getImageKey(viewers);
                 Logger.debug("Fetch due to missing key: " + key + " for " + card);
-                fetcher.fetchImage(key, this);
+                fetcher.fetchImage(key, () -> {
+                    // The cache may hold placeholder renders scaled from before the
+                    // download completed; drop them so the real image shows.
+                    ImageCache.clearGeneratedVariants(key);
+                    onImageFetched();
+                });
             }
         }
     }
