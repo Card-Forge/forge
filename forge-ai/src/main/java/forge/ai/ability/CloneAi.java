@@ -4,6 +4,7 @@ import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
+import forge.ai.simulation.GameStateEvaluator;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -14,6 +15,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -141,6 +143,23 @@ public class CloneAi extends SpellAbilityAi {
             return true;
         }
 
+        if ("CloneBestLand".equals(sa.getParam("AILogic"))) {
+            final Card host = sa.getHostCard();
+            final Card best = targets.stream()
+                    // evaluateLand scores a land under whoever controls it now, and the copy will be
+                    // ours, so only our own lands are being judged on the board that will apply
+                    .filter(c -> c != host && c.getController() == host.getController())
+                    // copying our own legendary land just makes us sacrifice one of the two
+                    .filter(c -> !c.getType().isLegendary())
+                    .max(Comparator.comparingInt(GameStateEvaluator::evaluateLand))
+                    .orElse(null);
+            if (best == null || GameStateEvaluator.evaluateLand(best) <= GameStateEvaluator.evaluateLand(host)) {
+                return false;
+            }
+            sa.getTargets().add(best);
+            return true;
+        }
+
         // Default:
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things that clone a target. Those can just use
@@ -255,5 +274,16 @@ public class CloneAi extends SpellAbilityAi {
 
         // don't activate during main2 unless this effect is permanent
         return !ph.is(PhaseType.MAIN2) || !sa.hasParam("Duration");
+    }
+
+    @Override
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
+            final String logic) {
+        if ("CloneBestLand".equals(logic)) {
+            // the upgrade is permanent and the cost taps, so wait until the end of the turn before
+            // ours: the mana stays open as a threat until then, and it unlocks in our untap step
+            return super.checkPhaseRestrictions(ai, sa, ph, "AtOppEOT");
+        }
+        return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
 }
