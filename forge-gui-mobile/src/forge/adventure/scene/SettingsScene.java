@@ -310,7 +310,7 @@ public class SettingsScene extends UIScene {
         addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);
-        if (!GuiBase.isAndroid()) {
+        if (!GuiBase.isAndroid() && !GuiBase.isIOS()) {
             addCheckBox(Forge.getLocalizer().getMessage("cbPauseMusicOnFocusLoss"), ForgePreferences.FPref.UI_PAUSE_MUSIC_ON_FOCUS_LOSS);
         }
         addCheckBox(Forge.getLocalizer().getMessage("cbShowAutoTapPreview"), ForgePreferences.FPref.UI_SHOW_AUTOTAP_PREVIEW);
