@@ -6,6 +6,27 @@ With the addition of new planes in Adventure Mode, comes a framework to allow gr
 
 Modding Adventure mode comes in many fashions. From making small changes to a core plane, such as changing the music that plays on the overworld. To something as complex as an entirely new plane. Regardless of your intended goals, the first thing to do is set-up a back-up method. As any changes you haven't had incorporated into the main game, will potentially be lost on each update of Forge. Since this is a Git project, the method that will be recommended by this wiki, and referenced for the future, is simply to create your own git branch, and use a local repository to control all your files. It is also recommended to follow the directions to [set-up IntelliJ](https://github.com/Card-Forge/forge/wiki/IntelliJ-setup), to manage your local files. (Again, this is the method that will be referenced elsewhere in this wiki.) 
 
+### Battle Backgrounds
+
+Adventure planes can provide one or more battle backgrounds in `<plane>/skin/battle_backgrounds/<category>/`. Supported categories are `forest`, `swamp`, `mountain`, `island`, `plains`, `waste`, `common`, `cave`, `dungeon`, and `castle`. Add any number of `.jpg`, `.jpeg`, or `.png` files directly to a category folder. Forge selects one at random for each battle and avoids repeating the previous image when alternatives are available.
+
+Planes can keep these images outside the Forge distribution by declaring them in `<plane>/skin/battle-backgrounds.txt`. Each line contains a path relative to `battle_backgrounds/`, followed by its HTTPS URL:
+
+`forest/forest_01.jpg https://example.com/forest/forest_01.jpg`
+
+Forge automatically downloads missing files to the selected plane's cache. The list is authoritative, so cached images removed from it are also removed. This download does not require a user setting. Local plane images and the existing Adventure backgrounds remain available as fallbacks when a download is incomplete or unavailable.
+
+Point-of-interest categories can also use biome subfolders named `white`, `blue`, `black`, `red`, `green`, or `colorless`, for example `battle_backgrounds/castle/red/`. The first non-empty folder in this order is used:
+
+1. The selected plane's cached category and biome folder.
+2. The current plane's category and biome folder.
+3. The common Adventure assets' category and biome folder.
+4. The selected plane's cached generic category folder.
+5. The current plane's generic category folder.
+6. The common Adventure assets' generic category folder.
+
+Images are not combined between fallback folders. If no rotation folder contains an image, Forge continues to use the existing single-image override, common Adventure image, current skin, or default skin. Existing plane configurations therefore do not need to change.
+
 ### Tools
 
 The following additional tools can also be very useful, or even mandatory, to have for your mod, depending on what all you want to do in your mod/addition.

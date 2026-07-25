@@ -346,6 +346,7 @@ public class Forge implements ApplicationListener {
         getLocalizer().setEnglish(forcedEnglishonCJKMissing);
         FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(null);
+        GuiBase.setAdventureCacheDirectory(null);
         clearScreenStack();
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
@@ -364,6 +365,7 @@ public class Forge implements ApplicationListener {
         startContinuousRendering();
         FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(ForgeConstants.ADVENTURE_COMMON_DIR);
+        GuiBase.setAdventureCacheDirectory(null);
         advStartup = false;
         isMobileAdventureMode = true;
         //force it for adventure mode if the prefs is not updated from boolean value to string value
@@ -818,6 +820,7 @@ public class Forge implements ApplicationListener {
             isMobileAdventureMode = false;
             FSkinTexture.invalidateAdventureTextures();
             GuiBase.setAdventureDirectory(null);
+            GuiBase.setAdventureCacheDirectory(null);
             setCursor(FSkin.getCursor().get(0), "0");
             setAltZoneTabMode(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS));
             Gdx.input.setInputProcessor(getInputProcessor());
