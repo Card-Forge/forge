@@ -27,12 +27,10 @@
       <directory>res</directory>
       <skipPngCrush>true</skipPngCrush>
     </resource>
-    <!-- Icon*.png are consumed by SpringBoard, not libGDX - CgBI is fine there -->
+    <!-- Assets.xcassets (app icon) - RoboVM compiles asset catalogs with actool
+         and merges the resulting CFBundleIcons/CFBundleIconName into Info.plist -->
     <resource>
-      <directory>.</directory>
-      <includes>
-        <include>Icon*.png</include>
-      </includes>
+      <directory>resources</directory>
     </resource>
     <resource>
       <directory>fallback_skin</directory>
