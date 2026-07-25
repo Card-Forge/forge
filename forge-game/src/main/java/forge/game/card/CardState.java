@@ -109,7 +109,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private SpellAbility manifestUp;
     private SpellAbility cloakUp;
 
-    private LandTraitChanges landTraitChanges = new LandTraitChanges(this);
+    private List<LandTraitChanges> landTraitChanges = List.of(new LandTraitChanges(this));
 
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);
@@ -537,7 +537,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         }
     }
 
-    public LandTraitChanges getLandTraitChanges() { return this.landTraitChanges; }
+    public List<LandTraitChanges> getLandTraitChanges() { return this.landTraitChanges; }
 
     record LandTraitChanges(CardState state, Map<MagicColor.Color, SpellAbility> map) implements ICardTraitChanges, IKeywordsChange
     {
