@@ -100,12 +100,12 @@ public class Assets implements Disposable {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
         try {
             //init titleLQ
-            if (GuiBase.isAndroid())
+            if (GuiBase.isMobile())
                 getTexture(Gdx.files.internal("fallback_skin").child(titleFilename));
             else
                 getTexture(Gdx.files.classpath("fallback_skin").child(titleFilename));
             //init transition
-            if (GuiBase.isAndroid())
+            if (GuiBase.isMobile())
                 getTexture(Gdx.files.internal("fallback_skin").child("transition.png"));
             else
                 getTexture(Gdx.files.classpath("fallback_skin").child("transition.png"));
