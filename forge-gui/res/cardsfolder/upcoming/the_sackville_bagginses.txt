@@ -1,0 +1,12 @@
+Name:The Sackville-Bagginses
+ManaCost:1 B
+Types:Legendary Creature Halfling Citizen
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enter, you may sacrifice another creature or artifact. If you do, draw a card and create a Treasure token.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Artifact.Other;Creature.Other/another creature or artifact> | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Permanent.token+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a token, target opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | ValidTgts$ Opponent
+DeckHas:Ability$Sacrifice|Token
+DeckHints:Ability$Sacrifice
+Oracle:When The Sackville-Bagginses enter, you may sacrifice another creature or artifact. If you do, draw a card and create a Treasure token.\nWhenever you sacrifice a token, target opponent loses 1 life.

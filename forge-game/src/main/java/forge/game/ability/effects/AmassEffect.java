@@ -49,25 +49,25 @@ public class AmassEffect extends TokenEffectBase {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        final Player activator = sa.getActivatingPlayer();
+        final Player amasser = getTargetPlayers(sa).get(0);
         final int amount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("Num", "1"), sa);
         final String type = sa.getParam("Type");
 
         // create army token if needed
-        if (!activator.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.isType("Army"))) {
+        if (!amasser.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.isType("Army"))) {
             CardZoneTable triggerList = new CardZoneTable();
             MutableBoolean combatChanged = new MutableBoolean(false);
 
             StringBuilder sb = new StringBuilder("b_0_0_");
             sb.append(sa.getOriginalParam("Type").toLowerCase()).append("_army");
 
-            final Card result = TokenInfo.getProtoType(sb.toString(), sa, activator, false);
+            final Card result = TokenInfo.getProtoType(sb.toString(), sa, amasser, false);
             // need to alter the token to add the Type from the Parameter
             result.setCreatureTypes(Lists.newArrayList(type, "Army"));
             result.setName(type + " Army Token");
             result.setTokenSpawningAbility(sa);
 
-            makeTokenTable(makeTokenTableInternal(activator, result, 1), false, triggerList, combatChanged, sa);
+            makeTokenTable(makeTokenTableInternal(amasser, result, 1), false, triggerList, combatChanged, sa);
 
             triggerList.triggerChangesZoneAll(game, sa);
 
@@ -79,7 +79,7 @@ public class AmassEffect extends TokenEffectBase {
             }
         }
 
-        CardCollectionView tgtCards = CardLists.getType(activator.getCardsIn(ZoneType.Battlefield), "Army");
+        CardCollectionView tgtCards = CardLists.getType(amasser.getCardsIn(ZoneType.Battlefield), "Army");
         if (tgtCards.isEmpty()) {
             return;
         }
@@ -87,18 +87,18 @@ public class AmassEffect extends TokenEffectBase {
         Map<String, Object> params = Maps.newHashMap();
         params.put("CounterType", CounterEnumType.P1P1);
         params.put("Amount", amount);
-        Card tgt = activator.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), false, params);
+        Card tgt = amasser.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), false, params);
 
         if (sa.hasParam("RememberAmass")) {
             source.addRemembered(tgt);
         }
 
         GameEntityCounterTable table = new GameEntityCounterTable();
-        tgt.addCounter(CounterEnumType.P1P1, amount, activator, table);
+        tgt.addCounter(CounterEnumType.P1P1, amount, amasser, table);
         table.replaceCounterEffect(game, sa);
         // 01.44a If it isn’t a [subtype], it becomes a [subtype] in addition to its other types.
         if (!tgt.getType().hasCreatureType(type)) {
-            final Card eff = createEffect(sa, activator, "Amass Effect", source.getImageKey());
+            final Card eff = createEffect(sa, amasser, "Amass Effect", source.getImageKey());
             eff.setRenderForUI(false);
             eff.addRemembered(tgt);
 

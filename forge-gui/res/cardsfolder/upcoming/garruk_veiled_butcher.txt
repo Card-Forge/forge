@@ -1,0 +1,17 @@
+Name:Garruk, Veiled Butcher
+ManaCost:3 B B
+Types:Legendary Planeswalker Garruk
+Loyalty:5
+R:Event$ Moved | ValidLKI$ Creature.OppCtrl | Destination$ Graveyard | ActiveZones$ Battlefield | ReplaceWith$ DBExile | Description$ If a creature an opponent controls would die, exile it instead.
+SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
+A:AB$ Pump | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumAtt$ -4 | NumDef$ -1 | IsCurse$ True | Duration$ UntilYourNextTurn | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | SpellDescription$ Up to one target creature gets -4/-1 until your next turn.
+A:AB$ Sacrifice | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | SacValid$ Creature | Defined$ Player | RememberSacrificed$ True | SubAbility$ DBToken | SpellDescription$ Each player sacrifices a creature of their choice. If you sacrificed a creature this way, create a 4/4 green Beast creature token with trample.
+SVar:DBToken:DB$ Token | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Creature.YouCtrl | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Discard | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Defined$ Opponent | NumCards$ 2 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBStoreSVar | SpellDescription$ Each opponent discards two cards. For each opponent who didn't discard two nonland cards this way, you draw a card.
+SVar:DBStoreSVar:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0 | SubAbility$ DBRepeatEach
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBIncrease | SubAbility$ DBDraw
+SVar:DBIncrease:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1 | ConditionCheckSVar$ Y | ConditionSVarCompare$ LT2
+SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
+SVar:Y:Remembered$Valid Card.nonLand+RememberedPlayerOwn
+Oracle:If a creature an opponent controls would die, exile it instead.\n[+2]: Up to one target creature gets -4/-1 until your next turn.\n[-2]: Each player sacrifices a creature of their choice. If you sacrificed a creature this way, create a 4/4 green Beast creature token with trample.\n[-3]: Each opponent discards two cards. For each opponent who didn't discard two nonland cards this way, you draw a card.

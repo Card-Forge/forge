@@ -417,7 +417,10 @@ public class VLobby implements ILobbyView {
                 panel.setType(type);
                 panel.setPlayerName(slot.getName());
                 panel.setAvatarIndex(slot.getAvatarIndex());
-                panel.setSleeveIndex(slot.getSleeveIndex());
+                final Deck slotDeck = slot.getDeck();
+                panel.setSleeve(slot.getSleeveIndex(),
+                        slotDeck == null ? "" : slotDeck.getSleeveArtKey(),
+                        slotDeck == null ? Deck.DEFAULT_SLEEVE_OFFSET : slotDeck.getSleeveArtOffset());
                 panel.setTeam(slot.getTeam());
                 panel.setIsReady(slot.isReady());
                 panel.setIsDevMode(slot.isDevMode());
@@ -548,8 +551,16 @@ public class VLobby implements ILobbyView {
             playerChangeListener.update(index, getSlot(index));
         }
     }
+    // Re-broadcasts a deck whose card-art sleeve changed, so networked opponents pick up the new sleeve
+    void fireDeckSleeveChange(final int index, final Deck deck) {
+        if (playerChangeListener != null && deck != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(deck));
+        }
+    }
+
     private void fireDeckChangeListener(final int index, final Deck deck) {
         decks[index] = deck;
+        getPlayerPanel(index).refreshSleeveFromDeck(deck);
         if (playerChangeListener != null) {
             playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(deck));
         }

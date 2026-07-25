@@ -258,6 +258,10 @@ public class SettingsScene extends UIScene {
                 RewardData.invalidateCardPool();
             }
         });
+        addCheckBox(Forge.getLocalizer().getMessage("lblEnableUnknownCards") + " (" +
+            Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_UNKNOWN_CARDS, this::restartForge);
+        addCheckBox(Forge.getLocalizer().getMessage("lblEnableNonLegalCards") + " (" +
+            Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_NONLEGAL_CARDS, this::restartForge);
         addSettingField(Forge.getLocalizer().getMessage("lblGenerateLDADecks"), Config.instance().getSettingData().generateLDADecks, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -351,10 +355,6 @@ public class SettingsScene extends UIScene {
             settingGroup.add(borderMask).align(Align.right).pad(2);
 
             addCheckBox(Forge.getLocalizer().getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
-            addCheckBox(Forge.getLocalizer().getMessage("lblEnableUnknownCards") + " (" +
-                Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_UNKNOWN_CARDS, this::restartForge);
-            addCheckBox(Forge.getLocalizer().getMessage("lblEnableNonLegalCards") + " (" +
-                Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_NONLEGAL_CARDS, this::restartForge);
             addCheckBox(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
         }
 

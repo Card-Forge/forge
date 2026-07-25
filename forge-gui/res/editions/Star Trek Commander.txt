@@ -1,6 +1,6 @@
 [metadata]
 Code=TRC
-Date=2026-11-20
+Date=2026-11-13
 Name=Star Trek Commander
 Type=Commander
 ScryfallCode=TRC

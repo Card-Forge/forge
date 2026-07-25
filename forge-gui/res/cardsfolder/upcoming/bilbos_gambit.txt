@@ -1,0 +1,9 @@
+Name:Bilbo's Gambit
+ManaCost:1 W
+Types:Instant
+K:Gift
+SVar:GiftAbility:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ Promised | GiftDescription$ a Treasure
+A:SP$ ChangeZone | ValidTgts$ Card.inZoneStack | TgtZone$ Stack | Origin$ Stack | Destination$ Hand | SubAbility$ DBEffect | SpellDescription$ Return target spell to its owner's hand. If the gift was promised, players can't cast spells this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantBeCast | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ1
+SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player | Description$ Players can't cast spells this turn.
+Oracle:Gift a Treasure (You may promise an opponent a gift as you cast this spell. If you do, they create a Treasure token before its other effects. It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")\nReturn target spell to its owner's hand. If the gift was promised, players can't cast spells this turn.

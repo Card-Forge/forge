@@ -28,11 +28,30 @@
                     <target>17</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.mobidevelop.robovm</groupId>
+                <artifactId>robovm-maven-plugin</artifactId>
+                <version>2.3.24</version>
+                <configuration>
+                    <propertiesFile>robovm.properties</propertiesFile>
+                    <configFile>robovm.xml</configFile>
+                    <iosInfoPList>Info.plist.xml</iosInfoPList>
+                    <iosSkipSigning>true</iosSkipSigning>
+                    <!-- pngcrush/CgBI is disabled per-<resource> in robovm.xml (skipPngCrush);
+                         the plugin <configuration> has no such parameter -->
+                </configuration>
+            </plugin>
         </plugins>
         <resources>
             <resource>
                 <directory>filters</directory>
                 <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>.</directory>
+                <includes>
+                    <include>fallback_skin/**</include>
+                </includes>
             </resource>
         </resources>
         <finalName>forge-ios-${revision}</finalName>
@@ -42,32 +61,137 @@
         <dependency>
             <groupId>forge</groupId>
             <artifactId>forge-core</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>forge</groupId>
             <artifactId>forge-game</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>forge</groupId>
             <artifactId>forge-ai</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>forge</groupId>
             <artifactId>forge-gui</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jupnp</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>forge</groupId>
             <artifactId>forge-gui-mobile</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jupnp</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-robovm</artifactId>
             <version>1.13.5</version>
+        </dependency>
+        <dependency>
+            <!-- iOS backend for gdx-controllers-core (forge-gui-mobile dep):
+                 adventure mode calls Controllers.addListener, which reflectively
+                 instantiates com.badlogic.gdx.controllers.IosControllerManager —
+                 without this jar adventure mode dies at the splash screen with
+                 ClassNotFoundException (also forceLinked in robovm.xml) -->
+            <groupId>com.badlogicgames.gdx-controllers</groupId>
+            <artifactId>gdx-controllers-ios</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-platform</artifactId>
+            <version>1.13.5</version>
+            <classifier>natives-ios</classifier>
+        </dependency>
+        <dependency>
+            <!-- adventure mode uses Box2D physics; without the iOS natives it
+                 dies at the splash with UnsatisfiedLinkError: World.newWorld.
+                 The jar embeds META-INF/robovm/ios/ (xcframework + config) that
+                 RoboVM merges automatically -->
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-box2d-platform</artifactId>
+            <version>1.13.5</version>
+            <classifier>natives-ios</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-freetype</artifactId>
+            <version>1.13.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-freetype-platform</artifactId>
+            <version>1.13.5</version>
+            <classifier>natives-ios</classifier>
+        </dependency>
+        <!-- Stub java.util.function classes for RoboVM compatibility -->
+        <dependency>
+            <groupId>forge.stubs</groupId>
+            <artifactId>java-function-stubs</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <!-- ==== MobiVM modern-Java pipeline supplies (tmp/jvmdg) ====
+             The iOS classpath is produced by JvmDowngrader -c 52 (Java 9-17 -> 8 bytecode)
+             + MobiVmBridge (Java 8 library surface missing from MobiVM's Java-7-era runtime
+             -> streamsupport / forge.compat / app-supplied java.* classes).
+             Build with -Dmaven.repo.local=<repo>/tmp/ios-m2. -->
+        <dependency>
+            <groupId>net.sourceforge.streamsupport</groupId>
+            <artifactId>streamsupport</artifactId>
+            <version>1.7.4</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.streamsupport</groupId>
+            <artifactId>streamsupport-cfuture</artifactId>
+            <version>1.7.4</version>
+        </dependency>
+        <!-- JvmDowngrader runtime stubs (List.of, String.repeat, de-recorded
+             record superclass, ...), bridged for MobiVM -->
+        <dependency>
+            <groupId>xyz.wagyourtail.jvmdowngrader</groupId>
+            <artifactId>jvmdowngrader-java-api</artifactId>
+            <version>1.3.6-mobivm</version>
+        </dependency>
+        <!-- ThreeTen backport relocated to java.time.* (MobiVM has none) -->
+        <dependency>
+            <groupId>forge.stubs</groupId>
+            <artifactId>java-time-supply</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <!-- minimal java.nio.file + java.io.UncheckedIOException supply -->
+        <dependency>
+            <groupId>forge.stubs</groupId>
+            <artifactId>java-nio-supply</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <!-- compile-only: IDeviceAdapter.getUpnpPlatformService signature; the
+             runtime jars stay excluded above (UPnP unused on iOS) -->
+        <dependency>
+            <groupId>org.jupnp</groupId>
+            <artifactId>org.jupnp</artifactId>
+            <version>3.0.3</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
