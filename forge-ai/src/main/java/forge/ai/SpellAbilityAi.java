@@ -179,13 +179,13 @@ public abstract class SpellAbilityAi {
             return false;
         }
 
-        // An optional trigger must respect the AI's life safety, not just affordability: the
-        // activated path gates pay-life via willPayCosts/checkLifeCost, but the trigger path only
-        // checked canPayCost above. Without this, any "you may pay N life: <effect>" trigger (e.g.
-        // Bringer of the Black Dawn's tutor, Master of Death's return) would pay life it cannot
-        // spare, even into lethal range. Applies to every API; mandatory triggers still fire.
+        // An optional trigger must respect the AI's cost wisdom, not just affordability: canPayCost
+        // above only checks the cost *can* be paid, while the activated path also runs willPayCosts.
+        // Reuse it here so each API applies its own judgment - e.g. Bringer of the Black Dawn's tutor
+        // won't pay 2 life it cannot spare, and discard/sacrifice/counter costs are weighed too,
+        // instead of a single hardcoded life check. Mandatory triggers still fire.
         if (!mandatory && sa.getPayCosts() != null
-                && !ComputerUtilCost.checkLifeCost(aiPlayer, sa.getPayCosts(), sa.getHostCard(), 4, sa)) {
+                && !willPayCosts(aiPlayer, sa, sa.getPayCosts(), sa.getHostCard())) {
             return false;
         }
 
