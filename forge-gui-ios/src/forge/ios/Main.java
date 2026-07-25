@@ -24,6 +24,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
 import com.badlogic.gdx.backends.iosrobovm.IOSFiles;
+import com.badlogic.gdx.graphics.glutils.HdpiMode;
 
 import forge.Forge;
 import forge.assets.ImageCache;
@@ -169,6 +170,17 @@ public class Main extends IOSApplication.Delegate {
             // Detect if running on iPad
             boolean isTablet = org.robovm.apple.uikit.UIDevice.getCurrentDevice().getUserInterfaceIdiom()
                 == org.robovm.apple.uikit.UIUserInterfaceIdiom.Pad;
+
+            // The backend defaults to HdpiMode.Logical: getWidth/getHeight report
+            // logical points while getPpcX/getPpcY report physical px/cm, so
+            // forge.util.Utils's finger-size math is inflated by the retina scale
+            // (3x on modern iPhones) and saturates its max clamp — the oversized
+            // in-game prompt buttons. Pixels mode gives Android-identical pixel
+            // units on phones; iPads keep Logical because that layout is
+            // device-verified and must not change.
+            if (!isTablet) {
+                config.hdpiMode = HdpiMode.Pixels;
+            }
 
             forge.gui.GuiBase.setIsIOS(true);
 
