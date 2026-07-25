@@ -9,6 +9,8 @@ import com.google.common.eventbus.Subscribe;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
+import forge.deck.Deck;
+import forge.item.PaperCard;
 import forge.game.*;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSubgameEnd;
@@ -277,6 +279,22 @@ public class HostedMatch {
         for (final Player p : players) {
             p.updateOpponentsForView();
         }
+
+        // Warm the image cache for the players' decks in the background, so zone views
+        // that show many cards at once (e.g. searching a large library) have their
+        // images ready instead of decoding them all on first open. Queued behind the
+        // views opening above: on desktop, switching to the match screen clears the
+        // image cache, which would cancel and discard a preload started any earlier.
+        final Set<PaperCard> deckCards = new LinkedHashSet<>();
+        for (final RegisteredPlayer rp : match.getPlayers()) {
+            final Deck deck = rp.getDeck();
+            if (deck != null) {
+                for (final Entry<PaperCard, Integer> entry : deck.getAllCardsInASinglePool()) {
+                    deckCards.add(entry.getKey());
+                }
+            }
+        }
+        GuiBase.getInterface().invokeInEdtLater(() -> GuiBase.getInterface().preloadCardImages(deckCards));
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions

@@ -25,8 +25,11 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -35,6 +38,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
@@ -58,6 +62,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.SleeveArt;
 import forge.localinstance.properties.ForgePreferences;
@@ -173,12 +178,131 @@ public class ImageCache {
             Multimaps.synchronizedMultimap(HashMultimap.create());
 
     public static void clear() {
+        preloadGeneration.incrementAndGet(); //cancel any in-flight preloading
         _CACHE.invalidateAll();
         _missingIconKeys.clear();
         _placeholderKeys.clear();
         _variantKeys.clear();
         ImageKeys.clearMissingCards();
     }
+
+    private static final AtomicInteger preloadGeneration = new AtomicInteger();
+
+    /**
+     * Decodes the given cards' images into the cache on a single background thread, so
+     * views that show many cards at once (e.g. searching a large library) find them
+     * ready instead of decoding hundreds of images on first open. Best-effort: entries
+     * are softly referenced and may be reclaimed under memory pressure, and preloading
+     * stops when the cache is cleared.
+     */
+    public static void preloadOriginals(final Collection<PaperCard> cards) {
+        final int generation = preloadGeneration.get();
+        // Resolve each card through the same key-transformation the display paths use
+        // (via resolveImageKey), so the warmed cache keys are exactly the ones a zone
+        // view will look up. Resolution touches the card database, so it runs here on
+        // the calling (EDT) thread; only file probing and decoding go to the worker.
+        final List<String> cardKeys = new ArrayList<>(cards.size());
+        final List<String> fileKeys = new ArrayList<>(cards.size());
+        for (final PaperCard pc : cards) {
+            final String cardKey = pc.getImageKey(false);
+            if (StringUtils.isEmpty(cardKey)) {
+                continue;
+            }
+            final ResolvedImageKey resolved = resolveImageKey(cardKey);
+            if (resolved.fileKey != null && !resolved.useArtCrop) {
+                cardKeys.add(cardKey);
+                fileKeys.add(resolved.fileKey);
+            }
+        }
+
+        ThreadUtil.getServicePool().execute(() -> {
+            final List<String> missingCardKeys = new ArrayList<>();
+            for (int i = 0; i < fileKeys.size(); i++) {
+                if (generation != preloadGeneration.get()) {
+                    return; //cache cleared - stop warming
+                }
+                try {
+                    if (!warmCard(fileKeys.get(i), generation)) {
+                        missingCardKeys.add(cardKeys.get(i));
+                    }
+                } catch (final Exception e) {
+                    //best-effort warming; skip any card whose image fails to load
+                }
+            }
+
+            // Cards without a local image can't be warmed - hand them to the online
+            // fetcher (which no-ops if disabled) so they download during the early game
+            // instead of when a zone view first shows them, and warm each image as it
+            // arrives. fetchImage must run on the EDT; reuse CachedCardImage's fetcher
+            // so in-flight downloads are shared with any card panels requesting them.
+            if (!missingCardKeys.isEmpty() && generation == preloadGeneration.get()) {
+                SwingUtilities.invokeLater(() -> {
+                    for (final String cardKey : missingCardKeys) {
+                        if (generation != preloadGeneration.get()) {
+                            return;
+                        }
+                        CachedCardImage.fetcher.fetchImage(cardKey, () -> {
+                            //downloaded: drop cached placeholder variants and warm the real image
+                            clearGeneratedVariants(cardKey);
+                            final ResolvedImageKey resolved = resolveImageKey(cardKey);
+                            if (resolved.fileKey != null && generation == preloadGeneration.get()) {
+                                ThreadUtil.getServicePool().execute(
+                                        () -> warmCard(resolved.fileKey, generation));
+                            }
+                        });
+                    }
+                    // Until (unless) the downloads arrive, the zone view will render these
+                    // as placeholders - pre-render those now, one card per EDT event
+                    // (placeholder rendering shares non-thread-safe statics, so it must
+                    // stay on the EDT), so a search doesn't pay for hundreds of renders.
+                    prerenderPlaceholders(new ArrayDeque<>(missingCardKeys), generation);
+                });
+            }
+        });
+    }
+
+    /**
+     * Draws and caches the card face for each card with no local image, one per EDT event
+     * (FCardImageRenderer shares non-thread-safe statics, so this cannot leave the EDT).
+     * Needs no display size: the render is size-independent and whatever view opens first
+     * resamples it, so this works on the very first match, before any zone view has been
+     * opened to record a size.
+     */
+    private static void prerenderPlaceholders(final Deque<String> queue, final int generation) {
+        if (queue.isEmpty() || generation != preloadGeneration.get()) {
+            return;
+        }
+        final String cardKey = queue.poll();
+        //must pass useDefaultIfNotFound: with no image file on disk the lookup returns early
+        //otherwise, and never reaches the card-face render this is here to prime
+        getOriginalImage(cardKey, true, null);
+        SwingUtilities.invokeLater(() -> prerenderPlaceholders(queue, generation));
+    }
+
+    /**
+     * Decodes one card's image into the cache off the EDT, which is the expensive half of
+     * showing it; whatever size a view later asks for is a resample away. Returns false if
+     * the card has no local image file. Best-effort.
+     */
+    private static boolean warmCard(final String fileKey, final int generation) {
+        try {
+            if (_CACHE.getIfPresent(fileKey) == null) {
+                final File file = ImageKeys.getImageFile(fileKey);
+                if (file == null || !file.isFile()) {
+                    return false;
+                }
+                final BufferedImage image = ImageIO.read(file);
+                if (image == null || generation != preloadGeneration.get()) {
+                    return true;
+                }
+                _CACHE.put(fileKey, image);
+            }
+        } catch (final Exception e) {
+            //best-effort warming
+        }
+        return true;
+    }
+
 
     /**
      * Drops all scaled/rendered variants cached for the given base image key.
@@ -604,12 +728,12 @@ public class ImageCache {
         if (original == null || useArtCrop) {
             if ((ipc != null || cardView != null) && !originalKey.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
                 // Drawing a card face costs ~16ms and, unlike the scaled copy, does not depend
-                // on the size asked for - it always renders at 488x680 times the screen scale
-                // and is resampled afterwards, for about a millisecond. So cache the render
-                // under its own key: a view opening at any size then pays only the resample.
-                // The old comment here declined to cache it because a downloaded image would
-                // be masked by the stale render; registering it as a variant of the base key
-                // means clearGeneratedVariants now drops it exactly as it drops scaled copies.
+                // on the requested display size - it is always rendered at 488x680 (times the
+                // screen scale) and resampled afterwards. So cache the render itself, keyed
+                // separately from any real image: a zone view opening at any size then pays
+                // only the resample, and warming can render these before a size is even known.
+                // Registered as a variant of the base key so that a downloaded image drops it
+                // along with the scaled copies, which is what the old comment here worried about.
                 final String renderKey = originalKey + RENDERED_SUFFIX;
                 final BufferedImage cachedRender = _CACHE.getIfPresent(renderKey);
                 if (cachedRender != null) {
