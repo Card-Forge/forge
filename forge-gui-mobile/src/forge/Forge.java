@@ -491,7 +491,7 @@ public class Forge implements ApplicationListener {
     }
 
     public static void setCursor(TextureRegion textureRegion, String name) {
-        if (GuiBase.isAndroid())
+        if (GuiBase.isMobile())
             return;
         if (isMobileAdventureMode) {
             if (cursorA0 != null && Objects.equals(name, "0")) {
