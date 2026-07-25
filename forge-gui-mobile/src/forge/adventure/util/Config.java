@@ -202,6 +202,12 @@ public class Config {
         return Lang;
     }
 
+    public String getCachePrefix() {
+        String safePlane = getPlane().replaceAll("[^A-Za-z0-9._-]", "_");
+        return ForgeConstants.CACHE_DIR + "adventure" + ForgeConstants.PATH_SEPARATOR
+                + safePlane + ForgeConstants.PATH_SEPARATOR;
+    }
+
     public String getFilePath(String path) {
         return prefix + path;
     }
