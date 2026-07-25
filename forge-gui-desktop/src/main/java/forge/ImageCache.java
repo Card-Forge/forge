@@ -162,6 +162,10 @@ public class ImageCache {
         }
     }
 
+    // Cache key suffix for a drawn card face, kept distinct from the "#WxH" scaled variants
+    // and from any real image file, so all three can coexist and be invalidated together.
+    private static final String RENDERED_SUFFIX = "#rendered";
+
     // Every scaled/rendered variant cached for a base image key, so a downloaded image can
     // drop exactly its own stale variants. Scanning the whole cache per download instead
     // would be O(cache) per card on the EDT, which is the cost this class is trying to shed.
@@ -596,28 +600,37 @@ public class ImageCache {
 
         original = postProcessCardImage(original, setCode, noBorder);
 
-        // No image file exists for the given key so optionally associate with
-        // a default "not available" image, however do not add it to the cache,
-        // as otherwise it's problematic to update if the real image gets fetched.
+        // No image file exists for the given key, so draw the card face instead.
         if (original == null || useArtCrop) {
             if ((ipc != null || cardView != null) && !originalKey.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
-                float screenScale = GuiBase.getInterface().getScreenScale();
-                int width = Math.round(488 * screenScale), height = Math.round(680 * screenScale);
-                BufferedImage art = original;
-                CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;
-                String legalString = null;
-                original = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-                if (art != null) {
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(StaticData.instance().getCardEdition(ipc.getEdition()).getDate());
-                    int year = cal.get(Calendar.YEAR);
-                    legalString = "Illus. " + ipc.getArtist() + "   ©" + year + " WOTC";
+                // Drawing a card face costs ~16ms and, unlike the scaled copy, does not depend
+                // on the size asked for - it always renders at 488x680 times the screen scale
+                // and is resampled afterwards, for about a millisecond. So cache the render
+                // under its own key: a view opening at any size then pays only the resample.
+                // The old comment here declined to cache it because a downloaded image would
+                // be masked by the stale render; registering it as a variant of the base key
+                // means clearGeneratedVariants now drops it exactly as it drops scaled copies.
+                final String renderKey = originalKey + RENDERED_SUFFIX;
+                final BufferedImage cachedRender = _CACHE.getIfPresent(renderKey);
+                if (cachedRender != null) {
+                    original = cachedRender;
+                } else {
+                    final BufferedImage art = original;
+                    float screenScale = GuiBase.getInterface().getScreenScale();
+                    int width = Math.round(488 * screenScale), height = Math.round(680 * screenScale);
+                    CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;
+                    String legalString = null;
+                    original = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+                    if (art != null) {
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(StaticData.instance().getCardEdition(ipc.getEdition()).getDate());
+                        int year = cal.get(Calendar.YEAR);
+                        legalString = "Illus. " + ipc.getArtist() + "   ©" + year + " WOTC";
+                    }
+                    FCardImageRenderer.drawCardImage(original.createGraphics(), card, altState, width, height, art, legalString);
+                    _CACHE.put(renderKey, original);
+                    _variantKeys.put(originalKey, renderKey);
                 }
-                FCardImageRenderer.drawCardImage(original.createGraphics(), card, altState, width, height, art, legalString);
-                // Skip store cache since the rendering speed seems to be fast enough
-                // Also the scaleImage below will already cache re-sized image for CardPanel anyway
-                // if (art != null || !fetcherEnabled)
-                //     _CACHE.put(originalKey, original);
             } else {
                 original = _defaultImage;
             }
