@@ -41,16 +41,24 @@ ScryfallCode=HOB
 90 U Burn, Burn, Tree and Fern @Rovina Cai
 92 R Desert Were-Worm @Aldo Domínguez
 93 R Desolation of Smaug @Irvin Rodriguez
+95 U Dwarven Mauler @Nathaniel Himawan
 96 M Gandalf, Goblins' Bane @Francisco Miyara
+97 U Gandalf, Spark Starter @Javier Charro
 103 R Last Light of Durin's Day @Harkalé Linaï
 104 R The Misty Mountains Cold @Rovina Cai
+105 U Misty Mountains Raider @Tomas Duchek
 110 M Smaug the Magnificent @Francisco Miyara
 114 M Thorin, Mountain-king @Javier Charro
 119 M Beorn the Fierce @Nia Kovalevski
+120 U Beorn's Hospitality @Harkalé Linaï
+122 R Cantankerous Keepers @Ramza Psyru
+124 R Down in the Valley @Rovina Cai
 134 R Part in Friendship @Jarel Threat
+137 R Through the Forest Gate @Leon Tukker
 142 C Wood Elves @Andreia Ugrai
 144 M Bard, King of Dale @Xabi Gaztelua
 145 U Bard the Bowman @Miklós Ligeti
+146 R Bard's Company @Jarel Threat
 147 U Bifur, Melodic Rider @Kieran Yanner
 148 U Bolg of the North @Miklós Ligeti
 150 U The Chief Warg @Tomas Duchek
@@ -72,9 +80,11 @@ ScryfallCode=HOB
 198 L Forest @WFlemming Illustration
 201 R The Great Goblin @Ted Nasmith
 202 U Thorin Oakenshield @Ted Nasmith
+203 U Gandalf, Spark Starter @Ted Nasmith
 205 R The Eagles Are Coming! @Denman Rooke
 207 R The Lonely Mountain @Denman Rooke
 208 R Chief Warg's Company @Denman Rooke
+210 R Bard's Company @Denman Rooke
 214 R Belladonna Took @Kristina Carroll
 216 U Iron Hills Blacksmith @Francisco Badilla
 217 M The Queen of Dale @Ashley Mackenzie
@@ -99,10 +109,12 @@ ScryfallCode=HOB
 247 M The Arkenstone @Tyler Jacobson
 248 R The Lonely Mountain @Tyler Jacobson
 249 M Smaug the Magnificent @Ted Nasmith
+250 R Belladonna Took @Kristina Carroll
 252 U Iron Hills Blacksmith @Francisco Badilla
 253 M The Queen of Dale @Ashley Mackenzie
 254 U Bilbo, Luckwearer @Cory Godbey
 255 M Bilbo, Thief in the Night @Ashley Mackenzie
+256 M Fateful Discovery @Ashley Mackenzie
 258 R Azog, Moria's Ruin @Dibujante Nocturno
 261 R Desert Were-Worm @Dibujante Nocturno
 262 R Desolation of Smaug @Dibujante Nocturno
@@ -121,13 +133,17 @@ ScryfallCode=HOB
 282 R Thranduil, the Elvenking @James Bousema
 283 M The Arkenstone @Tyler Jacobson
 284 R The Lonely Mountain @Tyler Jacobson
+285 R Bilbo's Gambit @Randy Gallegos
 289 R An Unexpected Party @Matt Stewart
 290 M Elrond, Moon-Reader @Christina Kraus
 291 R Great Gilded Boat @Josu Solano
 292 R Riddles in the Dark @Lorenzo Mastroianni
 297 R The Master of Lake-town @Marius Bota
+299 R The Sackville-Bagginses @Denman Rooke
 300 R Supper for Spiders @Michele Giorgi
+302 R Dáin Ironfoot @Tomas Duchek
 308 R Part in Friendship @Jarel Threat
+310 R Through the Forest Gate @Leon Tukker
 312 R Tom, Bert, and William @Leonardo Borazio
 313 L Plains @David Petersen
 314 L Plains @David Petersen
