@@ -1,0 +1,16 @@
+Name:Woodwork Prodigy
+ManaCost:2 RG
+Types:Creature Cat Druid
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ Count$ValidSelf Card.!IsPrepared | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPrepare | TriggerDescription$ At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Soul Tether
+ManaCost:2 RG
+Types:Sorcery
+A:SP$ Token | TokenScript$ rg_a_heartwood | SpellDescription$ Create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")
+Oracle:Create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or G.")

@@ -1,0 +1,8 @@
+Name:Burn, Burn, Tree and Fern
+ManaCost:3 R
+Types:Enchantment Saga
+K:Chapter:4:DBDamage,DBDestroy,DBMana,DBMana
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | NumDmg$ 6 | SpellDescription$ This Saga deals 6 damage to target creature an opponent controls.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl | ValidTgtDesc$ artifact an opponent controls | SpellDescription$ Destroy target artifact an opponent controls.
+SVar:DBMana:DB$ Mana | Produced$ R | SpellDescription$ Add {R}.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — This Saga deals 6 damage to target creature an opponent controls.\nII — Destroy target artifact an opponent controls.\nIII, IV — Add {R}.

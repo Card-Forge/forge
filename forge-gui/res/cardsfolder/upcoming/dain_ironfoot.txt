@@ -1,0 +1,15 @@
+Name:Dáin Ironfoot
+ManaCost:2 W
+Types:Creature Halfling Peasant
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When NICKNAME enters, create a colorless Equipment artifact token named Axe with "Equipped creature gets +1/+0" and equip {2}. When you do, attach it to target creature you control.
+SVar:TrigFood:DB$ Token | TokenScript$ axe | TokenOwner$ You | RememberOriginalTokens$ True | SubAbility$ DBImmediateTrig
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | TriggerAmount$ Remembered$Amount | RememberObjects$ Remembered | RememberEach$ True | Execute$ TrigAttach | SubAbility$ DBCleanup | TriggerDescription$ When you do, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | Object$ DelayTriggerRememberedLKI | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever NICKNAME attacks, each equipped attacking creature gains double strike until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.equipped+attacking | KW$ Double Strike
+SVar:PlayMain1:TRUE
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+Oracle:When Dáin enters, create a colorless Equipment artifact token named Axe with "Equipped creature gets +1/+0" and equip {2}. When you do, attach it to target creature you control.\nWhenever Dáin attacks, each equipped attacking creature gains double strike until end of turn.

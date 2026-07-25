@@ -1,0 +1,9 @@
+Name:The Chief Warg
+ManaCost:2 B G
+Types:Legendary Creature Wolf
+PT:3/3
+K:Menace
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | IsPresent$ Creature.YouCtrl+powerGE4 | NoResolvingCheck$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Ferocious — Whenever you attack while you control a creature with power 4 or greater, you draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:Menace (This creature can’t be blocked except by two or more creatures.)\nFerocious — Whenever you attack while you control a creature with power 4 or greater, you draw a card and lose 1 life.

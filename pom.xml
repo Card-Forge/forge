@@ -69,7 +69,6 @@
         <module>forge-gui-mobile</module>
         <module>forge-gui-mobile-dev</module>
         <module>forge-gui-desktop</module>
-        <module>forge-gui-ios</module>
         <module>forge-lda</module>
         <module>adventure-editor</module>
         <module>forge-gui-android</module>
@@ -368,4 +367,27 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <profiles>
+        <!--
+          The iOS module is intentionally NOT in the default <modules> reactor.
+          It depends on artifacts that are generated locally by the iOS build
+          pipeline (forge-gui-ios/pipeline/ios-pipeline.sh) — streamsupport /
+          jvmdowngrader / ThreeTen-relocated supplies installed into the local
+          repo on first run — which are not published to Maven Central. Leaving
+          it in the default build makes a plain `mvn install` (and CI's normal
+          test-build) fail to resolve those deps.
+
+          The pipeline builds the module directly (cd forge-gui-ios) and never
+          needs the root reactor, so gating it here is transparent to iOS builds.
+          To include it in a reactor build explicitly, activate this profile:
+              mvn -Pios ...
+        -->
+        <profile>
+            <id>ios</id>
+            <modules>
+                <module>forge-gui-ios</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>

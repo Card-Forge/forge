@@ -1,0 +1,8 @@
+Name:The Lonely Mountain
+ManaCost:no cost
+Types:Land Mountain
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless you control an Equipment.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Equipment.YouCtrl | ConditionCompare$ EQ0
+A:AB$ Token | Cost$ 4 R T | TokenScript$ r_2_2_dwarf | SorcerySpeed$ True | ReduceCost$ X | SpellDescription$ Create a 2/2 red Dwarf creature token. This ability costs {1} less to activate for each Equipment you control. Activate only as a sorcery.
+SVar:X:Count$Valid Equipment.YouCtrl
+Oracle:({T}: Add {R}.)\nThis land enters tapped unless you control an Equipment.\n{4}{R}, {T}: Create a 2/2 red Dwarf creature token. This ability costs {1} less to activate for each Equipment you control. Activate only as a sorcery.

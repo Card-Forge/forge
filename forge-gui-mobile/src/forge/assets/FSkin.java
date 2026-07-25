@@ -96,7 +96,7 @@ public class FSkin {
         } else {
             if (!isThemeValid(themeDir, themeName, false)) {
                 System.err.println(themeName + " theme is missing some files to work properly.");
-                final FileHandle def = Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR);
+                final FileHandle def = Assets.getFileHandle(ForgeConstants.DEFAULT_SKINS_DIR);
                 if (def.exists() && def.isDirectory() && isThemeValid(def, "", true)) {
                     FSkinFont.deleteCachedFiles();
                     //use default skin if valid
@@ -109,7 +109,9 @@ public class FSkin {
         }
     }
     private static void useFallbackDir() {
-        preferredDir = GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin") : Gdx.files.classpath("fallback_skin");
+        // iOS and Android both need to use internal() for bundled resources
+        boolean isMobile = GuiBase.isAndroid() || GuiBase.isIOS();
+        preferredDir = isMobile ? Gdx.files.internal("fallback_skin") : Gdx.files.classpath("fallback_skin");
     }
     public static void loadLight(String skinName, final SplashScreen splashScreen,FileHandle prefDir) {
         preferredDir = prefDir;
@@ -130,19 +132,37 @@ public class FSkin {
         Forge.hdbuttons = false;
         Forge.hdstart = false;
         // TODO: the "v2" string should be a property of the default skin.
-        FileHandle v2File = Gdx.files.absolute(ForgeConstants.FONTS_DIR + "v2");
+        // iOS: the bundle is read-only, so the marker file lives in writable local storage
+        FileHandle v2File;
+        if (GuiBase.isIOS()) {
+            v2File = Gdx.files.local("fonts/v2");
+        } else {
+            // Other platforms: the standard location
+            v2File = Assets.getFileHandle(ForgeConstants.FONTS_DIR + "v2");
+        }
+
         if (v2File == null || !v2File.exists()) {
             //delete cached fonts
             FSkinFont.deleteCachedFiles();
             try {
-                v2File.file().createNewFile();
+                if (v2File != null) {
+                    // Ensure parent directory exists
+                    FileHandle parent = v2File.parent();
+                    if (parent != null && !parent.exists()) {
+                        parent.mkdirs();
+                    }
+                    // Create the marker file using libGDX API
+                    v2File.writeString("", false);
+                }
             } catch (Exception e) {
-                e.printStackTrace();
+                // iOS compatibility: Silently ignore if we can't create the marker file
+                // The font cache will be deleted each time, which is safe but less efficient
+                System.err.println("Warning: Could not create font version marker file: " + e.getMessage());
             }
         }
 
         //ensure skins directory exists
-        final FileHandle dir = Gdx.files.absolute(ForgeConstants.CACHE_SKINS_DIR);
+        final FileHandle dir = Assets.getFileHandle(ForgeConstants.CACHE_SKINS_DIR);
         if(preferredDir == null)
         {
             if (!dir.exists() || !dir.isDirectory()) {
@@ -162,7 +182,7 @@ public class FSkin {
                 }
 
                 // Non-default (preferred) skin name and dir.
-                preferredDir = Gdx.files.absolute(preferredName.equalsIgnoreCase("default") ? ForgeConstants.BASE_SKINS_DIR + preferredName : ForgeConstants.CACHE_SKINS_DIR + preferredName);
+                preferredDir = Assets.getFileHandle(preferredName.equalsIgnoreCase("default") ? ForgeConstants.BASE_SKINS_DIR + preferredName : ForgeConstants.CACHE_SKINS_DIR + preferredName);
                 if (!preferredDir.exists() || !preferredDir.isDirectory()) {
                     preferredDir.mkdirs();
                 }
@@ -572,14 +592,14 @@ public class FSkin {
      * Gets a FileHandle for a file within the directory where the default skin files should be stored
      */
     public static FileHandle getDefaultSkinFile(String filename) {
-        return Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR + filename);
+        return Assets.getFileHandle(ForgeConstants.DEFAULT_SKINS_DIR + filename);
     }
 
     /**
      * Gets a FileHandle for a file within the planechase cache directory
      */
     public static FileHandle getCachePlanechaseFile(String filename) {
-        return Gdx.files.absolute(ForgeConstants.CACHE_PLANECHASE_PICS_DIR + filename);
+        return Assets.getFileHandle(ForgeConstants.CACHE_PLANECHASE_PICS_DIR + filename);
     }
 
     public static FileHandle getSkinDir() {
@@ -594,7 +614,7 @@ public class FSkin {
     public static Array<String> getSkinDirectoryNames() {
         final Array<String> mySkins = new Array<>();
 
-        final FileHandle dir = Gdx.files.absolute(ForgeConstants.CACHE_SKINS_DIR);
+        final FileHandle dir = Assets.getFileHandle(ForgeConstants.CACHE_SKINS_DIR);
         for (FileHandle skinFile : dir.list()) {
             String skinName = skinFile.name();
             if (skinName.equalsIgnoreCase(".svn")) { continue; }

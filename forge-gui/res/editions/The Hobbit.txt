@@ -6,36 +6,128 @@ Type=Expansion
 ScryfallCode=HOB
 
 [cards]
+4 R Belladonna Took @Xabi Gaztelua
+5 R Bilbo's Gambit @Randy Gallegos
+11 U Eagle of the Great Shelf @Yuhong Ding
+12 R The Eagles Are Coming! @Zezhou Chen
+16 U Iron Hills Blacksmith @Jarel Threat
+22 U The Mountain-king's Return @Rovina Cai
+24 M The Queen of Dale @Magali Villeneuve
+25 R Roads Go Ever, Ever On @Rovina Cai
+27 U Stone by Sunlight @Kamila Szutenberg
 29 R An Unexpected Party @Matt Stewart
 32 U Bilbo, Luckwearer @Anna Steinbauer
 33 M Bilbo, Thief in the Night @Nia Kovalevski
+36 M Elrond, Moon-Reader @Christina Kraus
+37 U Elven Raft-Steerer @Christina Kraus
+42 R Great Gilded Boat @Josu Solano
+46 R The Lord of the Eagles @Zezhou Chen
+47 U Master's Councillors @Narendra Bintara Adi
+52 U Ravenhill Flock @Irina Nordsol
 53 R Riddles in the Dark @Lorenzo Mastroianni
+55 U Sound the Trumpets @Nereida
+56 U Thranduil's Decree @Javier Charro
+61 R Azog, Moria's Ruin @Miklós Ligeti
+65 U Down, Down to Goblin-town @Rovina Cai
+68 U Gathering of Darkness @Pavel Kolomeyets
+69 U Gnashing of Teeth @Nereida
+70 M Gollum, Riddle Master @Irvin Rodriguez
+72 U Gollum the Abandoned @Andrea Piparo
+77 R The Master of Lake-town @Marius Bota
+78 U Nighthowl Pursuer @Tomas Duchek
+83 R The Sackville-Bagginses @Denman Rooke
+86 R Supper for Spiders @Michele Giorgi
+89 U Bothersome Noisemaker @Andreia Ugrai
+90 U Burn, Burn, Tree and Fern @Rovina Cai
+92 R Desert Were-Worm @Aldo Domínguez
+93 R Desolation of Smaug @Irvin Rodriguez
+96 M Gandalf, Goblins' Bane @Francisco Miyara
+103 R Last Light of Durin's Day @Harkalé Linaï
+104 R The Misty Mountains Cold @Rovina Cai
 110 M Smaug the Magnificent @Francisco Miyara
 114 M Thorin, Mountain-king @Javier Charro
+119 M Beorn the Fierce @Nia Kovalevski
+134 R Part in Friendship @Jarel Threat
 142 C Wood Elves @Andreia Ugrai
+144 M Bard, King of Dale @Xabi Gaztelua
+145 U Bard the Bowman @Miklós Ligeti
+147 U Bifur, Melodic Rider @Kieran Yanner
+148 U Bolg of the North @Miklós Ligeti
+150 U The Chief Warg @Tomas Duchek
+151 R Chief Warg's Company @Jason Kang
+158 R The Great Goblin @Miklós Ligeti
+163 U Silvan Reveler @Bokun An
+165 U Thorin Oakenshield @Francisco Miyara
+167 R Thranduil, the Elvenking @Magali Villeneuve
 169 R Tom, Bert, and William @Leonardo Borazio
 170 M The Arkenstone @Gaboleps
 176 R My Precious @Valera Lutfullina
+177 M Orcrist, Goblin-cleaver @Erikas Perl
+178 R Sting, Bilbo's Sword @Tomas Duchek
+187 R The Lonely Mountain @Leon Tukker
 194 L Plains @WFlemming Illustration
 195 L Island @WFlemming Illustration
 196 L Swamp @WFlemming Illustration
 197 L Mountain @WFlemming Illustration
 198 L Forest @WFlemming Illustration
+201 R The Great Goblin @Ted Nasmith
+202 U Thorin Oakenshield @Ted Nasmith
+205 R The Eagles Are Coming! @Denman Rooke
+207 R The Lonely Mountain @Denman Rooke
+208 R Chief Warg's Company @Denman Rooke
+214 R Belladonna Took @Kristina Carroll
+216 U Iron Hills Blacksmith @Francisco Badilla
+217 M The Queen of Dale @Ashley Mackenzie
+218 U Bilbo, Luckwearer @Cory Godbey
 219 M Bilbo, Thief in the Night @Ashley Mackenzie
+222 R Azog, Moria's Ruin @Dibujante Nocturno
+225 R Desert Were-Worm @Dibujante Nocturno
+226 R Desolation of Smaug @Dibujante Nocturno
+228 R Last Light of Durin's Day @Francisco Badilla
 229 M Smaug the Magnificent @John Tedrick
+230 M Beorn the Fierce @Dibujante Nocturno
 234 M The Arkenstone @Francisco Badilla
 235 R My Precious @Barbara Rosiak
+236 M Orcrist, Goblin-cleaver @Francisco Badilla
+237 R Sting, Bilbo's Sword @Barbara Rosiak
+240 R The Lord of the Eagles @Tyler Jacobson
+241 M Gollum, Riddle Master @Tyler Jacobson
+242 M Gandalf, Goblins' Bane @James Bousema
 243 M Thorin, Mountain-king @James Bousema
+244 M Bard, King of Dale @James Bousema
+246 R Thranduil, the Elvenking @James Bousema
 247 M The Arkenstone @Tyler Jacobson
+248 R The Lonely Mountain @Tyler Jacobson
 249 M Smaug the Magnificent @Ted Nasmith
+252 U Iron Hills Blacksmith @Francisco Badilla
+253 M The Queen of Dale @Ashley Mackenzie
+254 U Bilbo, Luckwearer @Cory Godbey
 255 M Bilbo, Thief in the Night @Ashley Mackenzie
+258 R Azog, Moria's Ruin @Dibujante Nocturno
+261 R Desert Were-Worm @Dibujante Nocturno
+262 R Desolation of Smaug @Dibujante Nocturno
+264 R Last Light of Durin's Day @Francisco Badilla
 265 M Smaug the Magnificent @John Tedrick
+266 M Beorn the Fierce @Dibujante Nocturno
 270 M The Arkenstone @Francisco Badilla
 271 R My Precious @Barbara Rosiak
+272 M Orcrist, Goblin-cleaver @Francisco Badilla
+273 R Sting, Bilbo's Sword @Barbara Rosiak
+276 R The Lord of the Eagles @Tyler Jacobson
+277 M Gollum, Riddle Master @Tyler Jacobson
+278 M Gandalf, Goblins' Bane @James Bousema
 279 M Thorin, Mountain-king @James Bousema
+280 M Bard, King of Dale @James Bousema
+282 R Thranduil, the Elvenking @James Bousema
 283 M The Arkenstone @Tyler Jacobson
+284 R The Lonely Mountain @Tyler Jacobson
 289 R An Unexpected Party @Matt Stewart
+290 M Elrond, Moon-Reader @Christina Kraus
+291 R Great Gilded Boat @Josu Solano
 292 R Riddles in the Dark @Lorenzo Mastroianni
+297 R The Master of Lake-town @Marius Bota
+300 R Supper for Spiders @Michele Giorgi
+308 R Part in Friendship @Jarel Threat
 312 R Tom, Bert, and William @Leonardo Borazio
 313 L Plains @David Petersen
 314 L Plains @David Petersen
@@ -45,7 +137,9 @@ ScryfallCode=HOB
 318 L Plains @David Petersen
 319 L Plains @David Petersen
 320 L Plains @David Petersen
+321 R The Misty Mountains Cold @Rovina Cai
 
 [tokens]
+4 b_0_0_goblin_army @Stanislav Sherbakov
 6 r_2_2_dwarf @Nia Kovalevski
 12 c_a_treasure_sac @Leonardo Santanna

@@ -1,0 +1,10 @@
+Name:Beorn's Hospitality
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Animate | Cost$ 5 G G | Defined$ Self | Types$ Creature,Bear | staticAbilities$ BeornStatic | Duration$ Permanent | SpellDescription$ This enchantment becomes a Bear creature in addition to its other types and gains "This creature's power and toughness are each equal to the number of lands you control." (This effect doesn't end.)
+SVar:BeornStatic:Mode$ Continuous | Affected$ Card.Self | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to the number of lands you control.
+SVar:X:Count$Valid Land.YouCtrl
+DeckHas:Ability$Counters
+Oracle:Landfall — Whenever a land you control enters, put a +1/+1 counter on target creature you control.\n{5}{G}{G}: This enchantment becomes a Bear creature in addition to its other types and gains "This creature's power and toughness are each equal to the number of lands you control." (This effect doesn't end.)
