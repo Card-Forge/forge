@@ -322,7 +322,7 @@ public class Main extends IOSApplication.Delegate {
         // super MUST run first so ObjectAL's audio-session interruption recovery works.
         super.didBecomeActive(application);
         // Permanently suspend the OpenAL effects engine. Sound effects now play through
-        // libGDX Music (AVAudioPlayer) on iOS (see forge.sound.AudioClip), so OpenAL is
+        // libGDX Music (AVAudioPlayer) on iOS (see forge.sound.MusicAudioClip), so OpenAL is
         // unused - but libGDX auto-initializes it, and an ACTIVE OpenAL 3D-mixer render
         // cycle beats against the AVAudioPlayer music/effects (mediaserverd) clock,
         // producing the slow periodic music crackle. Suspending it (alcSuspendContext)

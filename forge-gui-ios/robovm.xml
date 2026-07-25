@@ -95,6 +95,8 @@
     <!-- image pipeline nested classes (hybrid resolver, LRU caches) -->
     <pattern>forge.assets.Assets$*</pattern>
     <pattern>forge.assets.ImageCache$*</pattern>
+    <!-- iOS AVAudioPlayer-backed sound effects -->
+    <pattern>forge.sound.MusicAudioClip</pattern>
     <!-- Sentry crash reporting: the SDK wires integrations/transports via
          reflection and ServiceLoader, which the tree-shaker cannot see.
          Missing classes here historically killed the game thread with
