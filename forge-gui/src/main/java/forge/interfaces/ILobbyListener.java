@@ -9,4 +9,6 @@ public interface ILobbyListener {
     void update(GameLobbyData state, int slot);
     void close();
     ClientGameLobby getLobby();
+
+    default void lobbyAlert(String title, String message) { }
 }
