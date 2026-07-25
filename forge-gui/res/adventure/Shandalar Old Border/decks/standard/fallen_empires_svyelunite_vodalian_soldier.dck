@@ -1,0 +1,26 @@
+[metadata]
+Name=Vodalian Soldier
+[Main]
+17 Island|3ED
+3 Svyelunite Temple|FEM
+4 Vodalian Soldiers|FEM|[31a]
+4 Vodalian Soldiers|FEM|[31b]
+4 Vodalian Soldiers|FEM|[31c]
+4 Vodalian Soldiers|FEM|[31d]
+4 Tidal Courier|APC
+2 Conch Horn|FEM
+2 Coral Helm|ATQ
+2 Fishliver Oil|ARN
+2 Living Armor|DRK
+1 Merseine|FEM|[23a]
+1 Merseine|FEM|[23b]
+1 Merseine|FEM|[23c]
+1 Merseine|FEM|[23d]
+3 Spirit Shield|FEM
+2 Sunken City|DRK
+3 Zelyon Sword|FEM
+
+[StartInBattle_Reference]
+1 Svyelunite Temple|FEM
+1 Coral Reef|HML
+1 Vodalian Soldiers|FEM|[31a]

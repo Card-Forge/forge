@@ -1,0 +1,30 @@
+[metadata]
+Name=Homarid Deep Spawn
+[Main]
+20 Island|3ED
+2 Ancient Tomb|TMP
+8 Deep Spawn|FEM
+2 Wall of Water|3ED
+2 Devouring Deep|LEG
+4 High Tide|FEM|[18c]
+1 Homarid|FEM|[19a]
+1 Homarid|FEM|[19b]
+1 Homarid|FEM|[19c]
+1 Homarid|FEM|[19d]
+3 Homarid Spawning Bed|FEM
+1 Homarid Warrior|FEM|[22a]
+1 Homarid Warrior|FEM|[22b]
+1 Homarid Warrior|FEM|[22c]
+2 Tangle Kelp|DRK
+3 Triassic Egg|LEG
+1 Energy Tap|LEG
+4 Mana Drain|LEG
+1 Awesome Presence|ALL|[23a]
+1 Awesome Presence|ALL|[23b]
+
+[StartInBattle_Reference]
+2 Island|3ED
+1 Seafloor Debris|ODY
+1 Deep Water|DRK
+1 Mystic Decree|HML
+1 Tidal Influence|FEM

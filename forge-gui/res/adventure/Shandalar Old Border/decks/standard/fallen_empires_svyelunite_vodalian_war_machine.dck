@@ -1,0 +1,27 @@
+[metadata]
+Name=Vodalian War Machine
+[Main]
+18 Island|3ED
+3 Svyelunite Temple|FEM
+4 Vodalian War Machine|FEM
+1 Vodalian Soldiers|FEM|[31a]
+1 Vodalian Soldiers|FEM|[31b]
+1 Vodalian Soldiers|FEM|[31c]
+1 Vodalian Soldiers|FEM|[31d]
+4 Vodalian Merchant|INV
+4 Sandbar Merfolk|USG
+4 Merfolk Seer|MIR
+2 Merfolk Looter|7ED
+2 Whirlpool Rider|APC
+4 Tidal Courier|APC
+1 Conch Horn|FEM
+2 Unsummon|3ED
+2 Rescue|UDS
+2 War Chariot|ICE
+3 Lifeline|USG
+1 Ancestral Memories|7ED
+
+
+[StartInBattle_Reference]
+1 Svyelunite Temple|FEM
+1 Vodalian War Machine|FEM

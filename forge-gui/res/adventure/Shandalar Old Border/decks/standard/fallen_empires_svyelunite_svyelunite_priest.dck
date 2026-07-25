@@ -1,0 +1,27 @@
+[metadata]
+Name=Svyelunite Priest
+[Main]
+17 Island|3ED
+4 Svyelunite Temple|FEM
+4 Svyelunite Priest|FEM
+2 Conch Horn|FEM
+2 Dark Maze|HML|[25a]
+2 Dark Maze|HML|[25b]
+4 Lilting Refrain|USG
+2 Arena|PHPR
+2 Echo Chamber|TMP
+2 Ray of Command|ICE
+4 Stinging Barrier|MMQ
+2 Confiscate|7ED
+1 Ring of Renewal|FEM
+2 Counterspell|MMQ
+3 Remove Soul|LEG
+1 Giant Oyster|HML
+2 Glyph of Delusion|LEG
+4 Cunning|EXO
+
+
+[StartInBattle_Reference]
+1 Svyelunite Temple|FEM
+1 Svyelunite Priest|FEM
+1 Squeeze|MMQ

@@ -102121,5 +102121,519 @@
       "ElderDragon"
     ],
     "spawnRate": 0
+  },
+  {
+    "name": "FEM Floodwater Homarid",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/floodwater_homarid_placeholder.atlas",
+    "scale": 0.2,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_floodwater_homarid.dck"
+    ],
+    "ai": "cautious",
+    "speed": 1,
+    "life": 30,
+    "colors": "UW",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Miniboss"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Homarid Deep Spawn",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/deep_spawn_placeholder.atlas",
+    "scale": 0.5,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_deep_spawn.dck"
+    ],
+    "ai": "reckless",
+    "boss": true,
+    "speed": 1,
+    "life": 40,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Deep Spawn|FEM"
+      }
+    ],
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Boss"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Homarid Shaman",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_shaman.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_shaman.dck"
+    ],
+    "ai": "cautious",
+    "speed": 1,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Homarid Spawning Bed",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_spawning_bed_placeholder.atlas",
+    "scale": 0.125,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_spawning_bed.dck"
+    ],
+    "ai": "cautious",
+    "speed": 0.7,
+    "life": 30,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Miniboss"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Homarid Warrior A",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
+    "scale": 0.2,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_warrior_a.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Homarid Green",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_green.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_green.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Homarid Purple",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_purple.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_purple.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Homarid Red",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_red.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_red.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Homarid Yellow",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_yellow.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_yellow.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM River Merfolk",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/river_merfolk_placeholder.atlas",
+    "scale": 0.2,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_river_merfolk.dck"
+    ],
+    "ai": "cautious",
+    "speed": 1,
+    "life": 25,
+    "colors": "UR",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Seasinger",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/seasinger.atlas",
+    "scale": 0.5,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_seasinger.dck"
+    ],
+    "ai": "cautious",
+    "boss": true,
+    "speed": 1,
+    "life": 40,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Seasinger|FEM"
+      }
+    ],
+    "colors": "UB",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Boss"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Svyelunite Priest",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/svyelunite_priest.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_svyelunite_priest.dck"
+    ],
+    "ai": "cautious",
+    "speed": 1,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Viscerid Drone",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/viscerid_drone_placeholder.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_viscerid_drone.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 25,
+    "colors": "UB",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Vodalian Knight",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_knights_placeholder.atlas",
+    "scale": 0.2,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_knight.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Vodalian Mage C",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage.dck"
+    ],
+    "ai": "cautious",
+    "speed": 1,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Vodalian Merchant",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_merchant_placeholder.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_merchant.dck"
+    ],
+    "ai": "cautious",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Vodalian Soldier A",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Vodalian War Machine",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_war_machine_placeholder.atlas",
+    "scale": 0.125,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_war_machine.dck"
+    ],
+    "ai": "reckless",
+    "speed": 0.8,
+    "life": 30,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Miniboss"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Homarid Warrior B",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
+    "scale": 0.2,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_warrior_b.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Homarid Warrior C",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
+    "scale": 0.2,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_warrior_c.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Homarid Warrior 5ED",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
+    "scale": 0.2,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_warrior_5ed.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Vodalian Mage A",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage_a.dck"
+    ],
+    "ai": "cautious",
+    "speed": 1,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Vodalian Mage B",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage_b.dck"
+    ],
+    "ai": "cautious",
+    "speed": 1,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Vodalian Soldier B",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_b.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Vodalian Soldier C",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_c.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Vodalian Soldier D",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.25,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_d.dck"
+    ],
+    "ai": "reckless",
+    "speed": 1,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Standard"
+    ],
+    "spawnRate": 0
   }
 ]

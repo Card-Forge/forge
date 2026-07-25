@@ -1,0 +1,30 @@
+[metadata]
+Name=Vodalian Merchant
+[Main]
+14 Island|MIR
+2 Svyelunite Temple|FEM
+4 Lonely Sandbar|ONS
+2 Remote Isle|USG
+4 Vodalian Merchant|INV
+4 Merfolk Traders|WTH
+3 Sea Scryer|MIR
+1 Arctic Merfolk|PLS
+2 Merfolk Looter|7ED
+1 Conch Horn|FEM
+2 High Tide|FEM|[18a]
+2 High Tide|FEM|[18b]
+1 Bribery|MMQ
+1 Credit Voucher|MMQ
+1 Trade Secrets|ONS
+4 Donate|UDS
+4 Embargo|MMQ
+1 Bamboozle|ODY
+2 Diminishing Returns|ALL
+2 Dream Cache|MIR
+3 Prosperity|VIS
+
+
+[StartInBattle_Reference]
+1 Svyelunite Temple|FEM
+1 Trade Routes|MMQ
+1 Vodalian Merchant|INV

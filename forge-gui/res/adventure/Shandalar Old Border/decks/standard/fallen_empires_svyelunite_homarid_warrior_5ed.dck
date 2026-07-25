@@ -1,0 +1,27 @@
+[metadata]
+Name=Homarid Warrior
+[Main]
+20 Island|3ED
+2 Seafloor Debris|ODY
+4 Homarid Warrior|FEM|[22a]
+4 Homarid Warrior|FEM|[22b]
+4 Homarid Warrior|FEM|[22c]
+4 Homarid Warrior|5ED
+1 Homarid|FEM|[19a]
+1 Homarid|FEM|[19b]
+1 Homarid|FEM|[19c]
+1 Homarid|FEM|[19d]
+4 Water Wurm|DRK
+1 Mystic Might|ICE
+3 Viscerid Armor|ALL
+2 Breaking Wave|INV
+4 Unstable Mutation|3ED
+2 High Tide|FEM|[18c]
+2 Homarid Spawning Bed|FEM
+
+[StartInBattle_Reference]
+1 Sand Silos|FEM
+1 Seafloor Debris|ODY
+1 Tidal Flats|FEM|[27c]
+1 Tidal Influence|FEM
+1 Homarid Warrior|5ED

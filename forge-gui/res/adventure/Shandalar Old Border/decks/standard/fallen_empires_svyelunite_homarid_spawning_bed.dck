@@ -1,0 +1,31 @@
+[metadata]
+Name=Homarid Spawning Bed
+[Main]
+21 Island|3ED
+2 Sand Silos|FEM
+2 Quicksand|VIS
+1 Homarid|FEM|[19a]
+1 Homarid|FEM|[19b]
+1 Homarid|FEM|[19c]
+1 Homarid|FEM|[19d]
+1 Homarid Warrior|FEM|[22a]
+1 Homarid Warrior|FEM|[22b]
+1 Homarid Warrior|FEM|[22c]
+1 Homarid Shaman|FEM
+2 Deep Spawn|FEM
+2 Elder Spawn|LEG
+4 Brine Hag|LEG
+4 Sea Troll|HML
+4 Fog Bank|USG
+2 Wall of Vapor|LEG
+1 Homarid Spawning Bed|FEM
+4 Scent of Brine|UDS
+2 Ray of Command|ICE
+2 Triassic Egg|LEG
+
+[StartInBattle_Reference]
+1 Island|3ED
+1 Sand Silos|FEM
+3 Homarid Spawning Bed|FEM
+1 Tidal Flats|FEM|[27b]
+1 Tidal Influence|FEM

@@ -1,0 +1,25 @@
+[metadata]
+Name=Homarid
+[Main]
+18 Island|3ED
+2 Seafloor Debris|ODY
+2 High Tide|FEM|[18c]
+5 Homarid|FEM|[19a]
+5 Homarid|FEM|[19b]
+5 Homarid|FEM|[19c]
+5 Homarid|FEM|[19d]
+1 Fishliver Oil|ARN
+2 Homarid Spawning Bed|FEM
+1 Riptide|DRK
+2 Tangle Kelp|DRK
+2 Tidal Surge|STH
+4 Unstable Mutation|ARN
+2 Viscerid Armor|ALL|[41a]
+2 Viscerid Armor|ALL|[41b]
+2 Tidal Influence|FEM
+
+[StartInBattle_Reference]
+1 Seafloor Debris|ODY
+1 Tidal Flats|FEM|[27b]
+1 Tidal Influence|FEM
+1 Homarid|FEM|[19b]

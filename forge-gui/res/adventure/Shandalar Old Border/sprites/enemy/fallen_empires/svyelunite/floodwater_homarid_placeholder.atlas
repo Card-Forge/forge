@@ -1,0 +1,32 @@
+floodwater_homarid_placeholder.png
+size: 640,48
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 46, 6
+  size: 16, 16
+Idle
+  xy: 0, 00
+  size: 80, 48
+Idle
+  xy: 80, 00
+  size: 80, 48
+Idle
+  xy: 160, 00
+  size: 80, 48
+Idle
+  xy: 240, 00
+  size: 80, 48
+Idle
+  xy: 320, 00
+  size: 80, 48
+Idle
+  xy: 400, 00
+  size: 80, 48
+Idle
+  xy: 480, 00
+  size: 80, 48
+Idle
+  xy: 560, 00
+  size: 80, 48

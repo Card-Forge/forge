@@ -1,0 +1,36 @@
+[metadata]
+Name=Viscerid Drone
+[Main]
+6 Island|3ED
+12 Swamp|3ED
+2 Bad River|MIR
+2 Polluted Delta|ONS
+1 River Delta|ICE
+1 Salt Marsh|INV
+1 Everglades|VIS
+4 Viscerid Drone|ALL
+1 Homarid|FEM|[19a]
+1 Homarid|FEM|[19b]
+1 Homarid|FEM|[19c]
+1 Homarid|FEM|[19d]
+1 Homarid Warrior|FEM|[22a]
+1 Homarid Warrior|FEM|[22b]
+1 Homarid Warrior|FEM|[22c]
+4 Drowned|DRK
+1 Ensnare|NMS
+1 Flood|DRK
+3 Tangle Kelp|DRK
+2 Viscerid Armor|ALL|[41a]
+2 Viscerid Armor|ALL|[41b]
+1 Marsh Gas|DRK
+1 Land Equilibrium|LEG
+2 Dirtwater Wraith|MIR
+1 Evil Presence|3ED
+3 Spiny Starfish|ALL
+3 Homarid Spawning Bed|FEM
+
+[StartInBattle_Reference]
+1 River Delta|ICE
+1 Tidal Influence|FEM
+1 Undertow|LEG
+1 Viscerid Drone|ALL

@@ -1,0 +1,36 @@
+[metadata]
+Name=Seasinger
+[Main]
+13 Island|3ED
+4 Svyelunite Temple|FEM
+1 Reflecting Pool|TMP
+2 Underground River|ICE
+2 Underground Sea|3ED
+4 Seasinger|FEM
+1 Overtaker|MMQ
+3 Sea Scryer|MIR
+2 Vodalian Hypnotist|INV
+1 Vodalian Illusionist|WTH
+1 Vodalian Mystic|APC
+2 Conch Horn|FEM
+1 Ancestral Memories|7ED
+1 Blue Elemental Blast|3ED
+4 Lilting Refrain|USG
+2 Phantasmal Terrain|3ED
+4 Lingering Mirage|USG
+1 Siren's Call|3ED
+1 Aether Barrier|NMS
+2 Wall of Vapor|LEG
+2 Spirit Shield|FEM
+1 Helm of Obedience|ALL
+1 Jinxed Idol|TMP
+1 Jinxed Ring|STH
+1 Life Chisel|LEG
+1 Mystic Veil|VIS
+1 Control Magic|3ED
+
+[StartInBattle_Reference]
+1 Svyelunite Temple|FEM
+1 Treasure Trove|7ED
+1 Lilting Refrain|USG
+1 Seasinger|FEM

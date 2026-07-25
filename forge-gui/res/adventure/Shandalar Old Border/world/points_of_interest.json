@@ -4405,5 +4405,22 @@
 		"sprite": "Cave",
 		"map": "../Shandalar Old Border/maps/map/lair/riddles_lair.tmx",
 		"radiusFactor": 0.6
+	},
+	{
+		"name": "SvyeluniteTemple",
+		"displayName": "Svyelunite Temple",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
+		"sprite": "FortBlue",
+		"map": "../Shandalar Old Border/maps/map/fallen_empires/svyelunite_temple.tmx",
+		"radiusFactor": 0.6,
+		"questTags": [
+			"SvyeluniteTemple",
+			"FallenEmpires",
+			"BiomeBlue",
+			"Hostile",
+			"Sidequest"
+		]
 	}
 ]

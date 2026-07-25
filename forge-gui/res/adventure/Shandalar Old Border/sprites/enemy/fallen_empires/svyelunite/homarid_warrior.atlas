@@ -1,0 +1,104 @@
+homarid_warrior.png
+size: 640, 400
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Avatar
+  xy: 320, 00
+  size: 16,16
+Idle
+  xy: 00, 00
+  size: 80,80
+Idle
+  xy: 80, 00
+  size: 80,80
+Idle
+  xy: 160, 00
+  size: 80,80
+Idle
+  xy: 240, 00
+  size: 80,80
+Walk
+  xy: 00, 80
+  size: 80,80
+Walk
+  xy: 80, 80
+  size: 80,80
+Walk
+  xy: 160, 80
+  size: 80,80
+Walk
+  xy: 240, 80
+  size: 80,80
+Walk
+  xy: 320, 80
+  size: 80,80
+Walk
+  xy: 400, 80
+  size: 80,80
+Walk
+  xy: 480, 80
+  size: 80,80
+Walk
+  xy: 560, 80
+  size: 80,80
+Attack
+  xy: 00, 160
+  size: 80,80
+Attack
+  xy: 80, 160
+  size: 80,80
+Attack
+  xy: 160, 160
+  size: 80,80
+Attack
+  xy: 240, 160
+  size: 80,80
+Attack
+  xy: 320, 160
+  size: 80,80
+Attack
+  xy: 400, 160
+  size: 80,80
+Attack
+  xy: 480, 160
+  size: 80,80
+Attack
+  xy: 560, 160
+  size: 80,80
+Hit
+  xy: 0, 240
+  size: 80,80
+Hit
+  xy: 80, 240
+  size: 80,80
+Hit
+  xy: 160, 240
+  size: 80,80
+Hit
+  xy: 240, 240
+  size: 80,80
+Death
+  xy: 0, 320
+  size: 80,80
+Death
+  xy: 80, 320
+  size: 80,80
+Death
+  xy: 160, 320
+  size: 80,80
+Death
+  xy: 240, 320
+  size: 80,80
+Death
+  xy: 320, 320
+  size: 80,80
+Death
+  xy: 400, 320
+  size: 80,80
+Death
+  xy: 480, 320
+  size: 80,80
+Death
+  xy: 560, 320
+  size: 80,80

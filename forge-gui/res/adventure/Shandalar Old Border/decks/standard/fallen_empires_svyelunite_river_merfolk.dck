@@ -1,0 +1,31 @@
+[metadata]
+Name=River Merfolk
+[Main]
+14 Island|3ED
+4 Mountain|3ED
+1 Caldera Lake|TMP
+1 Terminal Moraine|PLS
+1 Thawing Glaciers|ALL
+1 Rainbow Vale|FEM
+1 Undiscovered Paradise|VIS
+8 River Merfolk|FEM
+2 Benthic Explorers|ALL|[24a]
+2 Benthic Explorers|ALL|[24b]
+4 Ceta Disciple|APC
+2 Razorfin Hunter|APC
+2 Vodalian Merchant|INV
+1 Whirlpool Warrior|APC
+1 Electric Eel|DRK
+2 Conch Horn|FEM
+1 Baleful Stare|7ED
+1 Land Equilibrium|LEG
+4 Rushing River|PLS
+2 Blood Moon|DRK
+1 Flash Flood|LEG
+2 Spirit Shield|FEM
+2 Zelyon Sword|FEM
+
+[StartInBattle_Reference]
+1 Sheltered Valley|ALL
+1 Raging River|2ED
+1 River Merfolk|FEM

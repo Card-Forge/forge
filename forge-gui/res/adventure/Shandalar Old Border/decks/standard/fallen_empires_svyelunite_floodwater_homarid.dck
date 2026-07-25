@@ -1,0 +1,32 @@
+[metadata]
+Name=Floodwater Homarid
+[Main]
+16 Island|3ED
+2 Plains|3ED
+2 Flooded Strand|ONS
+2 Flood Plain|MIR
+1 Homarid|FEM|[19a]
+1 Homarid|FEM|[19b]
+1 Homarid|FEM|[19c]
+1 Homarid|FEM|[19d]
+1 Homarid Shaman|FEM
+1 Homarid Warrior|FEM
+1 Homarid Spawning Bed|FEM
+1 Submerge|NMS
+4 Psychic Venom|3ED
+4 Spiny Starfish|ALL
+3 Floodwater Dam|ALL
+4 Floodgate|MIR
+3 Sawtooth Loon|PLS
+1 Riptide Crab|INV
+2 Mystic Decree|HML
+4 Unsummon|3ED
+3 Sunken Hope|PLS
+1 Flash Flood|LEG
+1 Sunken Field|PCY
+
+[StartInBattle_Reference]
+1 Flood Plain|MIR
+1 Tidal Influence|FEM
+1 Flooded Woodlands|ICE
+1 Floodwater Dam|ALL

@@ -1,0 +1,31 @@
+[metadata]
+Name=Vodalian Mage
+[Main]
+16 Island|3ED
+3 Coral Atoll|VIS
+1 Svyelunite Temple|FEM
+1 Vodalian Mage|FEM|[30a]
+2 Vodalian Mage|FEM|[30b]
+1 Vodalian Mage|FEM|[30c]
+4 Sea Scryer|MIR
+1 Blue Mana Battery|LEG
+2 Daze|NMS
+1 Ensnare|NMS
+4 Errant Minion|ICE
+1 Force Spike|LEG
+1 Glowing Anemone|MMQ
+4 Gush|MMQ
+2 Mind Stone|WTH
+1 Mana Drain|LEG
+2 Reset|LEG
+4 Rising Waters|NMS
+2 Sapphire Medallion|TMP
+1 Slow Motion|ULG
+2 Snap|ULG
+3 Thwart|MMQ
+1 Tidal Bore|MMQ
+
+[StartInBattle_Reference]
+1 Svyelunite Temple|FEM
+1 Coral Atoll|VIS
+1 Vodalian Mage|FEM|[30a]
