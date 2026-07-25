@@ -3,6 +3,8 @@ package forge.game;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardCopyService;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventSnapshotRestored;
@@ -86,6 +88,12 @@ public class GameSnapshot {
         for (Player p : fromGame.getPlayers()) {
             Player toPlayer = findBy(toGame, p);
             p.copyCommandersToSnapshot(toPlayer, c -> findBy(toGame, c));
+            if (!restore) {
+                // Only wire these while storing: an effect card created after the
+                // snapshot was taken has no counterpart to map on the way back, and
+                // blanking the field there would make the lazy getter build a duplicate.
+                p.copyEffectCardsToSnapshot(toPlayer, c -> findBy(toGame, c));
+            }
             ((PlayerZoneBattlefield) toPlayer.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         toGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
@@ -275,6 +283,11 @@ public class GameSnapshot {
     public void copyGameState(Game fromGame, Game toGame) {
         toGame.setAge(fromGame.getAge());
         toGame.dangerouslySetTimestamp(fromGame.getTimestamp());
+        if (!restore) {
+            // Card copies keep their original ids, so the fresh-id counters have to
+            // move with them or ids handed out later would collide.
+            toGame.dangerouslySyncCardIdCounters(fromGame);
+        }
 
         // TODO countersAddedThisTurn
 
@@ -296,8 +309,8 @@ public class GameSnapshot {
 
         List<UnorderedEntities> unorderedEntities = Lists.newArrayList();
 
-        for(Card fromCard : fromGame.getCardsInGame()) {
-            Card newCard = toGame.findById(fromCard.getId());
+        for(Card fromCard : getCardsToCopy(fromGame)) {
+            Card newCard = findCardById(toGame, fromCard.getId());
             Player toPlayer = findBy(toGame, fromCard.getController());
             ZoneType fromType = fromCard.getZone().getZoneType();
             int zonePosition = 0;
@@ -361,8 +374,49 @@ public class GameSnapshot {
             if (fromCard.getCopiedPermanent() != null) {
                 newCard.setCopiedPermanent(toGame.findById(fromCard.getCopiedPermanent().getId()));
             }
+            if (fromCard.hasMergedCard()) {
+                // Without this the copied Merged zone cards would sit orphaned, and a
+                // commander mutated under this permanent would look like it left the game.
+                CardCollection mergedCards = new CardCollection();
+                for (Card fromMerged : fromCard.getMergedCards()) {
+                    Card newMerged = findCardById(toGame, fromMerged.getId());
+                    if (newMerged == null) {
+                        continue;
+                    }
+                    if (newMerged != newCard) {
+                        newMerged.setMergedToCard(newCard);
+                    }
+                    mergedCards.add(newMerged);
+                }
+                if (!mergedCards.isEmpty()) {
+                    newCard.setMergedCards(mergedCards);
+                }
+            }
             // TODO: Verify that the above relationships are preserved bi-directionally or not.
         }
+    }
+
+    private static CardCollectionView getCardsToCopy(Game game) {
+        CardCollection cards = new CardCollection(game.getCardsInGame());
+        for (Player p : game.getPlayers()) {
+            cards.addAll(p.getZone(ZoneType.Merged).getCards());
+        }
+        return cards;
+    }
+
+    private static Card findCardById(Game game, int id) {
+        Card found = game.findById(id);
+        if (found != null) {
+            return found;
+        }
+        for (Player p : game.getPlayers()) {
+            for (Card c : p.getZone(ZoneType.Merged).getCards()) {
+                if (c.getId() == id) {
+                    return c;
+                }
+            }
+        }
+        return null;
     }
 
     private Card createCardCopy(Game newGame, Player newOwner, Card c) {
@@ -453,7 +507,7 @@ public class GameSnapshot {
     }
 
     private Card findBy(Game toGame, Card fromCard) {
-        return toGame.findById(fromCard.getId());
+        return findCardById(toGame, fromCard.getId());
     }
 
     private Player findBy(Game toGame, Player fromPlayer) {
