@@ -1,5 +1,6 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -31,7 +32,12 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  * Scene to handle settings of the base forge and adventure mode
  */
 public class SettingsScene extends UIScene {
-    private final Table settingGroup;
+    private static final int TAB_COUNT = 4;
+    private static final float TAB_HEIGHT = 24;
+
+    private Table settingGroup;
+    private final Table[] tabTables = new Table[TAB_COUNT];
+    private final TextraButton[] tabButtons = new TextraButton[TAB_COUNT];
     TextraButton backButton;
     TextraButton newPlane;
     ScrollPane scrollPane;
@@ -98,10 +104,15 @@ public class SettingsScene extends UIScene {
     private SettingsScene() {
         super(Forge.isLandscapeMode() ? "ui/settings.json" : "ui/settings_portrait.json");
 
-        settingGroup = new Table();
+        for (int i = 0; i < TAB_COUNT; i++)
+            tabTables[i] = new Table();
         selectSourcePlane = Controls.newComboBox();
         newPlaneName = Controls.newTextField("");
         selectSourcePlane.setItems(Config.instance().getAllAdventures());
+
+        //General tab
+        settingGroup = tabTables[0];
+        addSectionHeader(Forge.getLocalizer().getMessage("lblGeneralSettings"));
         SelectBox plane = Controls.newComboBox(Config.instance().getAllAdventures(), Config.instance().getSettingData().plane, o -> {
             Config.instance().getSettingData().plane = (String) o;
             Config.instance().saveSettings();
@@ -141,7 +152,94 @@ public class SettingsScene extends UIScene {
             });
             addLabel(Forge.getLocalizer().getMessage("lblVideoMode"));
             settingGroup.add(videomode).align(Align.right).pad(2);
+            addSettingField(Forge.getLocalizer().getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    boolean value = ((CheckBox) actor).isChecked();
+                    Config.instance().getSettingData().fullScreen = value;
+                    Config.instance().saveSettings();
+                    //update
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_FULLSCREEN_MODE, Config.instance().getSettingData().fullScreen);
+                    FModel.getPreferences().save();
+                }
+            });
+        } else {
+            addCheckBox(Forge.getLocalizer().getMessage("lblLandscapeMode") + " (" +
+                Forge.getLocalizer().getMessage("lblRestartRequired") + ")",
+                    ForgePreferences.FPref.UI_LANDSCAPE_MODE, () -> {
+                        boolean landscapeMode = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_LANDSCAPE_MODE);
+                        //ensure device able to save off ini file so landscape change takes effect
+                        Forge.getDeviceAdapter().setLandscapeMode(landscapeMode);
+                        if (Forge.isLandscapeMode() != landscapeMode) {
+                            restartForge();
+                        }
+                    });
         }
+        addSectionHeader(Forge.getLocalizer().getMessage("SoundOptions"));
+        addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
+        addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);
+
+        //Display tab
+        settingGroup = tabTables[1];
+        addSectionHeader(Forge.getLocalizer().getMessage("GraphicOptions"));
+        addSettingField(Forge.getLocalizer().getMessage("lblDay") + "/" + Forge.getLocalizer().getMessage("lblNight") + " " + Forge.getLocalizer().getMessage("lblBackgroundImage"), Config.instance().getSettingData().dayNightBG, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean value = ((CheckBox) actor).isChecked();
+                Config.instance().getSettingData().dayNightBG = value;
+                Config.instance().saveSettings();
+                if (value) {
+                    updateBG(true);
+                }
+            }
+        });
+        if (!GuiBase.isAndroid()) {
+            addCheckBox(Forge.getLocalizer().getMessage("lblBattlefieldTextureFiltering"), ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);
+            //addCheckBox(Forge.getLocalizer().getMessage("lblAltZoneTabs"), ForgePreferences.FPref.UI_ALT_PLAYERZONETABS);
+            addCheckBox(Forge.getLocalizer().getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
+            addCheckBox(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
+        }
+        addSectionHeader(Forge.getLocalizer().getMessage("lblCardDisplay"));
+        if (!GuiBase.isAndroid()) {
+            final String[] item = {FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING)};
+            SelectBox<String> borderMask = Controls.newComboBox(new String[]{"Off", "Crop", "Full", "Art"}, item[0], o -> {
+                String mode = (String) o;
+                if (mode == null)
+                    mode = "Crop";
+                item[0] = mode;
+                //update
+                if (!FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING).equalsIgnoreCase(mode)) {
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING, mode);
+                    FModel.getPreferences().save();
+                    Forge.enableUIMask = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+                }
+                ImageCache.getInstance().disposeTextures();
+                return null;
+            });
+            addLabel(Forge.getLocalizer().getMessage("lblBorderMaskOption"));
+            settingGroup.add(borderMask).align(Align.right).pad(2);
+        }
+        addCheckBox(Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
+        addCheckBox(Forge.getLocalizer().getMessage("cbShowAutoTapPreview"), ForgePreferences.FPref.UI_SHOW_AUTOTAP_PREVIEW);
+        addSettingField(Forge.getLocalizer().getMessage("lblPreferEraMatchedTokenArt"), Config.instance().getSettingData().preferEraMatchedTokenArt, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean enabled = ((CheckBox) actor).isChecked();
+                Config.instance().getSettingData().preferEraMatchedTokenArt = enabled;
+                forge.model.FModel.getMagicDb().getAllTokens().setPreferEraMatchedArt(enabled);
+                Config.instance().saveSettings();
+            }
+        });
+        addCheckBox(Forge.getLocalizer().getMessage("cbImageFetcher"), ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
+        addSettingField(Forge.getLocalizer().getMessage("lblUseAllCardVariants"), Config.instance().getSettingData().useAllCardVariants, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().useAllCardVariants = ((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+                RewardData.invalidateCardPool();
+            }
+        });
+        addSectionHeader(Forge.getLocalizer().getMessage("lblShopDisplay"));
         if (Forge.isLandscapeMode()) {
             //different adjustment to landscape
             SelectBox<Float> rewardCardAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 0.95f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().rewardCardAdjLandscape, o -> {
@@ -187,34 +285,10 @@ public class SettingsScene extends UIScene {
             addLabel("Reward/Shop Card Tooltip Ratio");
             settingGroup.add(tooltipAdj).align(Align.right).pad(2);
         }
-        if (!GuiBase.isAndroid()) {
-            addSettingField(Forge.getLocalizer().getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    boolean value = ((CheckBox) actor).isChecked();
-                    Config.instance().getSettingData().fullScreen = value;
-                    Config.instance().saveSettings();
-                    //update
-                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_FULLSCREEN_MODE, Config.instance().getSettingData().fullScreen);
-                    FModel.getPreferences().save();
-                }
-            });
-        }
-        addSettingField(Forge.getLocalizer().getMessage("lblDay") + " | " + Forge.getLocalizer().getMessage("lblNight") + " " + Forge.getLocalizer().getMessage("lblBackgroundImage"), Config.instance().getSettingData().dayNightBG, new ChangeListener() {
+        addSettingField(Forge.getLocalizer().getMessage("lblShowShopOverlay"), Config.instance().getSettingData().showShopOverlay, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                boolean value = ((CheckBox) actor).isChecked();
-                Config.instance().getSettingData().dayNightBG = value;
-                Config.instance().saveSettings();
-                if (value) {
-                    updateBG(true);
-                }
-            }
-        });
-        addSettingField(Forge.getLocalizer().getMessage("lblDisableWinLose"), Config.instance().getSettingData().disableWinLose, new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Config.instance().getSettingData().disableWinLose = ((CheckBox) actor).isChecked();
+                Config.instance().getSettingData().showShopOverlay = ((CheckBox) actor).isChecked();
                 Config.instance().saveSettings();
             }
         });
@@ -226,49 +300,17 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
-        addSettingField(Forge.getLocalizer().getMessage("lblShowShopOverlay"), Config.instance().getSettingData().showShopOverlay, new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Config.instance().getSettingData().showShopOverlay = ((CheckBox) actor).isChecked();
-                Config.instance().saveSettings();
-            }
-        });
-        addSettingField(Forge.getLocalizer().getMessage("lblUseAllCardVariants"), Config.instance().getSettingData().useAllCardVariants, new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Config.instance().getSettingData().useAllCardVariants = ((CheckBox) actor).isChecked();
-                Config.instance().saveSettings();
-                RewardData.invalidateCardPool();
-            }
-        });
-        addSettingField(Forge.getLocalizer().getMessage("lblPreferEraMatchedTokenArt"), Config.instance().getSettingData().preferEraMatchedTokenArt, new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                boolean enabled = ((CheckBox) actor).isChecked();
-                Config.instance().getSettingData().preferEraMatchedTokenArt = enabled;
-                forge.model.FModel.getMagicDb().getAllTokens().setPreferEraMatchedArt(enabled);
-                Config.instance().saveSettings();
-            }
-        });
-        addSettingField(Forge.getLocalizer().getMessage("lblExcludeAlchemyVariants"), Config.instance().getSettingData().excludeAlchemyVariants, new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Config.instance().getSettingData().excludeAlchemyVariants = ((CheckBox) actor).isChecked();
-                Config.instance().saveSettings();
-                RewardData.invalidateCardPool();
-            }
-        });
-        addCheckBox(Forge.getLocalizer().getMessage("lblEnableUnknownCards") + " (" +
-            Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_UNKNOWN_CARDS, this::restartForge);
-        addCheckBox(Forge.getLocalizer().getMessage("lblEnableNonLegalCards") + " (" +
-            Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_NONLEGAL_CARDS, this::restartForge);
-        addSettingField(Forge.getLocalizer().getMessage("lblGenerateLDADecks"), Config.instance().getSettingData().generateLDADecks, new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Config.instance().getSettingData().generateLDADecks = ((CheckBox) actor).isChecked();
-                Config.instance().saveSettings();
-            }
-        });
+        addSectionHeader(Forge.getLocalizer().getMessage("lblCardOverlays"));
+        addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
+        addCheckBox(Forge.getLocalizer().getMessage("lblManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST);
+        addCheckBox(Forge.getLocalizer().getMessage("lblPerpetualManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_PERPETUAL_MANA_COST);
+        addCheckBox(Forge.getLocalizer().getMessage("lblPowerOrToughness"), ForgePreferences.FPref.UI_OVERLAY_CARD_POWER);
+        addCheckBox(Forge.getLocalizer().getMessage("lblCardID"), ForgePreferences.FPref.UI_OVERLAY_CARD_ID);
+        addCheckBox(Forge.getLocalizer().getMessage("lblAbilityIcon"), ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
+
+        //Gameplay tab
+        settingGroup = tabTables[2];
+        addSectionHeader(Forge.getLocalizer().getMessage("lblAdventureOptions"));
         addSettingField(Forge.getLocalizer().getMessage("lbldisableCrackedItems"), Config.instance().getSettingData().disableCrackedItems, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -290,6 +332,36 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
+        addCheckBox(Forge.getLocalizer().getMessage("lblPromptAutoSell"), ForgePreferences.FPref.PROMPT_FOR_AUTOSELL);
+        addCheckBox(Forge.getLocalizer().getMessage("lblAutoSellVariantsCommander"), ForgePreferences.FPref.ADV_COMMANDER_AUTOSELL_VARIANT);
+        addSettingField(Forge.getLocalizer().getMessage("lblGenerateLDADecks"), Config.instance().getSettingData().generateLDADecks, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().generateLDADecks = ((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+            }
+        });
+        addSectionHeader(Forge.getLocalizer().getMessage("lblCardPoolOptions"));
+        addSettingField(Forge.getLocalizer().getMessage("lblExcludeAlchemyVariants"), Config.instance().getSettingData().excludeAlchemyVariants, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().excludeAlchemyVariants = ((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+                RewardData.invalidateCardPool();
+            }
+        });
+        addCheckBox(Forge.getLocalizer().getMessage("lblEnableUnknownCards") + " (" +
+            Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_UNKNOWN_CARDS, this::restartForge);
+        addCheckBox(Forge.getLocalizer().getMessage("lblEnableNonLegalCards") + " (" +
+            Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_NONLEGAL_CARDS, this::restartForge);
+        addSectionHeader(Forge.getLocalizer().getMessage("lblMatchOptions"));
+        addSettingField(Forge.getLocalizer().getMessage("lblDisableWinLose"), Config.instance().getSettingData().disableWinLose, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().disableWinLose = ((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+            }
+        });
         CheckBox cbAnte = addCheckBox(Forge.getLocalizer().getMessage("cbAnte"), ForgePreferences.FPref.UI_ANTE);
         CheckBox cbAnteMatchRarity = addCheckBox(Forge.getLocalizer().getMessage("cbAnteMatchRarity"), ForgePreferences.FPref.UI_ANTE_MATCH_RARITY);
         CheckBox cbAnteIncludeBasicLands = addCheckBox(Forge.getLocalizer().getMessage("cbAnteIncludeBasicLands"), ForgePreferences.FPref.UI_ANTE_INCLUDE_BASIC_LANDS);
@@ -305,60 +377,10 @@ public class SettingsScene extends UIScene {
                 RewardData.invalidateCardPool();
             }
         });
-        addCheckBox(Forge.getLocalizer().getMessage("lblPromptAutoSell"), ForgePreferences.FPref.PROMPT_FOR_AUTOSELL);
-        addCheckBox(Forge.getLocalizer().getMessage("lblAutoSellVariantsCommander"), ForgePreferences.FPref.ADV_COMMANDER_AUTOSELL_VARIANT);
-        addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
-        addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
-        addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);
-        addCheckBox(Forge.getLocalizer().getMessage("cbShowAutoTapPreview"), ForgePreferences.FPref.UI_SHOW_AUTOTAP_PREVIEW);
-        addCheckBox(Forge.getLocalizer().getMessage("lblManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST);
-        addCheckBox(Forge.getLocalizer().getMessage("lblPerpetualManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_PERPETUAL_MANA_COST);
-        addCheckBox(Forge.getLocalizer().getMessage("lblPowerOrToughness"), ForgePreferences.FPref.UI_OVERLAY_CARD_POWER);
-        addCheckBox(Forge.getLocalizer().getMessage("lblCardID"), ForgePreferences.FPref.UI_OVERLAY_CARD_ID);
-        addCheckBox(Forge.getLocalizer().getMessage("lblAbilityIcon"), ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
-        addCheckBox(Forge.getLocalizer().getMessage("cbImageFetcher"), ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
 
-        if (!GuiBase.isAndroid()) {
-            addCheckBox(Forge.getLocalizer().getMessage("lblBattlefieldTextureFiltering"), ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);
-            //addCheckBox(Forge.getLocalizer().getMessage("lblAltZoneTabs"), ForgePreferences.FPref.UI_ALT_PLAYERZONETABS);
-        } else {
-            addCheckBox(Forge.getLocalizer().getMessage("lblLandscapeMode") + " (" +
-                Forge.getLocalizer().getMessage("lblRestartRequired") + ")",
-                    ForgePreferences.FPref.UI_LANDSCAPE_MODE, () -> {
-                        boolean landscapeMode = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_LANDSCAPE_MODE);
-                        //ensure device able to save off ini file so landscape change takes effect
-                        Forge.getDeviceAdapter().setLandscapeMode(landscapeMode);
-                        if (Forge.isLandscapeMode() != landscapeMode) {
-                            restartForge();
-                        }
-                    });
-        }
-
-        addCheckBox(Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
-        if (!GuiBase.isAndroid()) {
-            final String[] item = {FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING)};
-            SelectBox<String> borderMask = Controls.newComboBox(new String[]{"Off", "Crop", "Full", "Art"}, item[0], o -> {
-                String mode = (String) o;
-                if (mode == null)
-                    mode = "Crop";
-                item[0] = mode;
-                //update
-                if (!FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING).equalsIgnoreCase(mode)) {
-                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING, mode);
-                    FModel.getPreferences().save();
-                    Forge.enableUIMask = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
-                }
-                ImageCache.getInstance().disposeTextures();
-                return null;
-            });
-            addLabel(Forge.getLocalizer().getMessage("lblBorderMaskOption"));
-            settingGroup.add(borderMask).align(Align.right).pad(2);
-
-            addCheckBox(Forge.getLocalizer().getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
-            addCheckBox(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
-        }
-
-
+        //Input tab
+        settingGroup = tabTables[3];
+        addSectionHeader(Forge.getLocalizer().getMessage("lblVibrationOptions"));
         addSettingSlider(Forge.getLocalizer().getMessage("lblVibrationIntensity"), ForgePreferences.FPref.UI_VIBRATE_INTENSITY, 0, 100);
         addCheckBox(Forge.getLocalizer().getMessage("lblVibrateAfterLongPress"), ForgePreferences.FPref.UI_VIBRATE_ON_LONG_PRESS);
         addCheckBox(Forge.getLocalizer().getMessage("lblVibrateWhenLosingLife"), ForgePreferences.FPref.UI_VIBRATE_ON_LIFE_LOSS);
@@ -366,15 +388,48 @@ public class SettingsScene extends UIScene {
         addCheckBox(Forge.getLocalizer().getMessage("lblVibrateOnAdventureReward"), ForgePreferences.FPref.UI_VIBRATE_ON_ADVENTURE_REWARD);
         addCheckBox(Forge.getLocalizer().getMessage("lblVibrateOnShopAction"), ForgePreferences.FPref.UI_VIBRATE_ON_SHOP_ACTION);
 
-        settingGroup.row();
         backButton = ui.findActor("return");
         ui.onButtonPress("return", SettingsScene.this::back);
 
         scrollPane = ui.findActor("settings");
-        scrollPane.setActor(settingGroup);
-        addToSelectable(settingGroup);
+        String[] tabNames = {
+                Forge.getLocalizer().getMessage("lblGeneral"),
+                Forge.getLocalizer().getMessage("lblDisplay"),
+                Forge.getLocalizer().getMessage("lblGameplay"),
+                Forge.getLocalizer().getMessage("lblInput")};
+        Table tabsRow = new Table();
+        for (int i = 0; i < TAB_COUNT; i++) {
+            final int index = i;
+            tabButtons[i] = Controls.newTextButton(tabNames[i], () -> selectTab(index));
+            tabsRow.add(tabButtons[i]).width(scrollPane.getWidth() / TAB_COUNT).height(TAB_HEIGHT);
+        }
+        scrollPane.setHeight(scrollPane.getHeight() - TAB_HEIGHT);
+        tabsRow.setBounds(scrollPane.getX(), scrollPane.getY() + scrollPane.getHeight(), scrollPane.getWidth(), TAB_HEIGHT);
+        ui.addActor(tabsRow);
+        selectTab(0);
     }
 
+    private void selectTab(int index) {
+        scrollPane.setActor(tabTables[index]);
+        scrollPane.setScrollY(0);
+        scrollPane.updateVisualScroll();
+        for (int i = 0; i < TAB_COUNT; i++)
+            tabButtons[i].setColor(i == index ? Color.GOLD : Color.WHITE);
+        clearSelectable();
+        for (TextraButton tabButton : tabButtons)
+            addToSelectable(tabButton);
+        addToSelectable(tabTables[index]);
+        if (backButton != null)
+            addToSelectable(backButton);
+    }
+
+    private void addSectionHeader(String name) {
+        TextraLabel label = Controls.newTextraLabel("[%115][GOLD]" + name);
+        label.setAlignment(Align.center);
+        boolean firstSection = !settingGroup.hasChildren();
+        settingGroup.row();
+        settingGroup.add(label).colspan(3).growX().pad(firstSection ? 4 : 14, 2, 2, 2);
+    }
 
     public boolean back() {
         Forge.switchToLast();
