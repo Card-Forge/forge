@@ -23,7 +23,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.SwingUtilities;
 
@@ -286,6 +290,21 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         return null;
     }
 
+    /**
+     * Builds a card id to panel index. Bulk refreshes that would otherwise call
+     * {@link #getCardPanel(int)} once per card - a linear scan each time, so quadratic in
+     * zone size - should build this once and look up in it instead.
+     */
+    public final Map<Integer, CardPanel> buildCardPanelsById() {
+        final Map<Integer, CardPanel> panels = new HashMap<>();
+        for (final CardPanel panel : this.getCardPanels()) {
+            if (panel.getCard() != null) {
+                panels.put(panel.getCard().getId(), panel);
+            }
+        }
+        return panels;
+    }
+
     public final void removeCardPanel(final CardPanel fromPanel) {
         removeCardPanel(fromPanel,true);
     }
@@ -316,8 +335,11 @@ public abstract class CardPanelContainer extends SkinnedPanel {
             return;
         }
 
+        //hashed membership: cardPanels.contains is a linear scan, and this loop runs once
+        //per existing panel, so a large zone view made this quadratic too
+        final Set<CardPanel> retained = new HashSet<>(cardPanels);
         for (final CardPanel p : this.getCardPanels()) {
-            if (!cardPanels.contains(p)) { //dispose of any card panels that have been removed
+            if (!retained.contains(p)) { //dispose of any card panels that have been removed
                 p.dispose();
             }
         }
