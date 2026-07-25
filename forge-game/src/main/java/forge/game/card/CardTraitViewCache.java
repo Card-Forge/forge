@@ -86,10 +86,8 @@ public final class CardTraitViewCache implements AutoCloseable {
 
     public static FCollectionView<Trigger> getCombatTriggers(final Game game,
             final Card combatant) {
-        if (combatant != null) {
-            return getCombatTriggers(combatant);
-        }
-        return getGlobalCombatTriggers(game);
+        return combatant == null ? getGlobalCombatTriggers(game)
+                : getCombatTriggers(combatant);
     }
 
     private static FCollectionView<Trigger> getGlobalCombatTriggers(final Game game) {

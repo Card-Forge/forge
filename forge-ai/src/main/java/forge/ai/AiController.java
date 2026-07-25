@@ -99,8 +99,6 @@ public class AiController {
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
     private volatile boolean timeoutReached;
-    private long cachedPriorityPassVersion = Long.MIN_VALUE;
-    private boolean decisionAborted;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -1358,15 +1356,6 @@ public class AiController {
         // Reset priority mana reservation that's meant to work for one spell only
         memory.clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
 
-        decisionAborted = false;
-        long initialVersion = game.getTracker().getChangeVersion();
-        // Only reuse a completed pass. Chosen actions are never cached, and
-        // any tracked state or game event change forces a normal reevaluation.
-        if (!useSimulation && initialVersion == cachedPriorityPassVersion) {
-            return null;
-        }
-        cachedPriorityPassVersion = Long.MIN_VALUE;
-
         if (useSimulation) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
         }
@@ -1402,12 +1391,7 @@ public class AiController {
             }
         }
 
-        List<SpellAbility> result = singleSpellAbilityList(getSpellAbilityToPlay());
-        if (result == null && !decisionAborted
-                && initialVersion == game.getTracker().getChangeVersion()) {
-            cachedPriorityPassVersion = initialVersion;
-        }
-        return result;
+        return singleSpellAbilityList(getSpellAbilityToPlay());
     }
 
     private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
@@ -1702,7 +1686,6 @@ public class AiController {
         try {
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            decisionAborted = true;
             e.printStackTrace();
             if (e instanceof TimeoutException) {
                 // log where the eval thread currently is - each timeout doubles as a

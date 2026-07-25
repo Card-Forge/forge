@@ -1708,7 +1708,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 // pause slightly longer for spells and abilities on the stack resolving
                 delay = FControlGamePlayback.resolveDelay;
             }
-            if (delay > 0) {
+            if (delay > 0 && !Boolean.getBoolean("forge.game.noPlaybackDelay")) {
                 try {
                     Thread.sleep(delay);
                 } catch (final InterruptedException e) {

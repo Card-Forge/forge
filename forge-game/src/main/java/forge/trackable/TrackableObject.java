@@ -114,13 +114,10 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      * Mark a property as dirty for all registered consumers and increment version.
      */
     private void markDirtyForConsumers(final TrackableProperty key) {
-        if (tracker != null) {
-            tracker.markChanged();
-        }
-        version++;
         if (consumers == null) {
             return;
         }
+        version++;
         for (EnumSet<TrackableProperty> dirtySet : consumers.values()) {
             dirtySet.add(key);
         }

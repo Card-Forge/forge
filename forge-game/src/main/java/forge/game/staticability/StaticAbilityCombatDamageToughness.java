@@ -8,18 +8,18 @@ public class StaticAbilityCombatDamageToughness {
 
     public static boolean combatDamageToughness(final Card card)  {
         final Game game = card.getGame();
-        return !game.visitCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES, ca -> {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CombatDamageToughness)) {
                     continue;
                 }
 
                 if (applyCombatDamageToughnessAbility(stAb, card)) {
-                    return false;
+                    return true;
                 }
             }
-            return true;
-        });
+        }
+        return false;
     }
 
     public static boolean applyCombatDamageToughnessAbility(final StaticAbility stAb, final Card card) {
