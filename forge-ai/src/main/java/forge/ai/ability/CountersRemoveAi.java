@@ -48,6 +48,18 @@ public class CountersRemoveAi extends SpellAbilityAi {
      * @see forge.ai.SpellAbilityAi#checkApiLogic(forge.game.player.Player,
      * forge.game.spellability.SpellAbility)
      */
+    /**
+     * For an X-cost removal, pay for the counters actually worth removing from the chosen
+     * target rather than the maximum X that {@link ComputerUtilCost#setMaxXValue} leaves set
+     * on the ability. Capped by what the AI can afford. No-op when the amount is fixed.
+     */
+    private static void payForCounters(final SpellAbility sa, final boolean xPay, final int affordable,
+            final int countersOnTarget) {
+        if (xPay) {
+            sa.setXManaCostPaid(Math.max(1, Math.min(affordable, countersOnTarget)));
+        }
+    }
+
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final String type = sa.getParam("CounterType");
@@ -166,54 +178,65 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
-            // some rules only for amount = 1
-            if (!xPay) {
-                // do as M1M1 part
-                CardCollection aiList = CardLists.filterControlledBy(list, ai);
+            // These rules used to be skipped whenever the amount was an X cost, which left a
+            // card like Hex Parasite ({X}{B/P}: remove up to X counters) able to do nothing
+            // but break its own Dark Depths or finish a planeswalker. They work for any
+            // amount; what an X cost additionally needs is to pay for just the counters the
+            // chosen target has, rather than leaving the maximum X that setMaxXValue put on
+            // the ability above and emptying the mana pool to remove one counter.
 
-                CardCollection aiM1M1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterEnumType.M1M1));
+            // do as M1M1 part
+            CardCollection aiList = CardLists.filterControlledBy(list, ai);
 
-                CardCollection aiPersistList = CardLists.getKeyword(aiM1M1List, Keyword.PERSIST);
-                if (!aiPersistList.isEmpty()) {
-                    aiM1M1List = aiPersistList;
-                }
+            CardCollection aiM1M1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterEnumType.M1M1));
 
-                if (!aiM1M1List.isEmpty()) {
-                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(aiM1M1List));
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
+            CardCollection aiPersistList = CardLists.getKeyword(aiM1M1List, Keyword.PERSIST);
+            if (!aiPersistList.isEmpty()) {
+                aiM1M1List = aiPersistList;
+            }
 
-                // do as P1P1 part
-                CardCollection aiP1P1List = CardLists.filter(aiList, CardPredicates.hasLessCounter(CounterEnumType.P1P1, amount));
-                CardCollection aiUndyingList = CardLists.getKeyword(aiP1P1List, Keyword.UNDYING);
+            if (!aiM1M1List.isEmpty()) {
+                final Card best = ComputerUtilCard.getBestCreatureAI(aiM1M1List);
+                sa.getTargets().add(best);
+                payForCounters(sa, xPay, amount, best.getCounters(CounterEnumType.M1M1));
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
 
-                if (!aiUndyingList.isEmpty()) {
-                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(aiUndyingList));
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
-  
-                // TODO stun counters with canRemoveCounters check
+            // do as P1P1 part
+            CardCollection aiP1P1List = CardLists.filter(aiList, CardPredicates.hasLessCounter(CounterEnumType.P1P1, amount));
+            CardCollection aiUndyingList = CardLists.getKeyword(aiP1P1List, Keyword.UNDYING);
 
-                // remove P1P1 counters from opposing creatures
-                CardCollection oppP1P1List = CardLists.filter(list,
-                        CardPredicates.CREATURES.and(CardPredicates.isControlledByAnyOf(ai.getOpponents())),
-                        CardPredicates.hasCounter(CounterEnumType.P1P1));
-                if (!oppP1P1List.isEmpty()) {
-                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(oppP1P1List));
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
+            if (!aiUndyingList.isEmpty()) {
+                final Card best = ComputerUtilCard.getBestCreatureAI(aiUndyingList);
+                sa.getTargets().add(best);
+                payForCounters(sa, xPay, amount, best.getCounters(CounterEnumType.P1P1));
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
 
-                // fallback to remove any counter from opponent
-                CardCollection oppList = CardLists.filterControlledBy(list, ai.getOpponents());
-                oppList = CardLists.filter(oppList, CardPredicates.hasCounters());
-                if (!oppList.isEmpty()) {
-                    final Card best = ComputerUtilCard.getBestAI(oppList);
+            // TODO stun counters with canRemoveCounters check
 
-                    for (final CounterType aType : best.getCounters().elementSet()) {
-                        if (!ComputerUtil.isNegativeCounter(aType, best)) {
-                            sa.getTargets().add(best);
-                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                        }
+            // remove P1P1 counters from opposing creatures
+            CardCollection oppP1P1List = CardLists.filter(list,
+                    CardPredicates.CREATURES.and(CardPredicates.isControlledByAnyOf(ai.getOpponents())),
+                    CardPredicates.hasCounter(CounterEnumType.P1P1));
+            if (!oppP1P1List.isEmpty()) {
+                final Card best = ComputerUtilCard.getBestCreatureAI(oppP1P1List);
+                sa.getTargets().add(best);
+                payForCounters(sa, xPay, amount, best.getCounters(CounterEnumType.P1P1));
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
+            // fallback to remove any counter from opponent
+            CardCollection oppList = CardLists.filterControlledBy(list, ai.getOpponents());
+            oppList = CardLists.filter(oppList, CardPredicates.hasCounters());
+            if (!oppList.isEmpty()) {
+                final Card best = ComputerUtilCard.getBestAI(oppList);
+
+                for (final CounterType aType : best.getCounters().elementSet()) {
+                    if (!ComputerUtil.isNegativeCounter(aType, best)) {
+                        sa.getTargets().add(best);
+                        payForCounters(sa, xPay, amount, best.getCounters(aType));
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
             }
