@@ -648,8 +648,7 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
 
-            if(source == null || !source.hasParam("LibraryPosition")
-                    || AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) >= 0) {
+            if (orderedMoveToTopOfLibrary(destinationZone, source)) {
                 //Cards going to the top of a deck are returned in reverse order.
                 Collections.reverse(reordered);
             }
@@ -877,7 +876,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
+    public CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
         return brains.getCardsToDiscard(numDiscard, null, null);
     }
 

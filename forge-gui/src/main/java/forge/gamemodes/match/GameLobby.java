@@ -42,15 +42,11 @@ public abstract class GameLobby implements IHasGameType {
 
     private IUpdateable listener;
 
-    private final boolean allowNetworking;
     private HostedMatch hostedMatch;
     private final HashMap<LobbySlot, IGameController> gameControllers = Maps.newHashMap();
-    protected GameLobby(final boolean allowNetworking) {
-        this.allowNetworking = allowNetworking;
-    }
 
-    public final boolean isAllowNetworking() {
-        return allowNetworking;
+    public boolean isAllowNetworking() {
+        return true;
     }
 
     public final boolean isMatchActive() {
@@ -171,8 +167,8 @@ public abstract class GameLobby implements IHasGameType {
 
     public void addSlot() {
         final int newIndex = getNumberOfSlots();
-        final LobbySlotType type = allowNetworking ? LobbySlotType.OPEN : LobbySlotType.AI;
-        addSlot(new LobbySlot(type, null, newIndex, newIndex, newIndex, false, !allowNetworking, Collections.emptySet()));
+        final LobbySlotType type = isAllowNetworking() ? LobbySlotType.OPEN : LobbySlotType.AI;
+        addSlot(new LobbySlot(type, null, newIndex, newIndex, newIndex, false, !isAllowNetworking(), Collections.emptySet()));
     }
     protected final void addSlot(final LobbySlot slot) {
         if (slot == null) {
@@ -468,6 +464,9 @@ public abstract class GameLobby implements IHasGameType {
                 }
                 lobbyPlayer = GamePlayerUtil.getGuiPlayer(name, avatar, sleeve, setNameNow);
             }
+            final Deck slotDeck = slot.getDeck();
+            lobbyPlayer.setSleeveArtKey(slotDeck == null ? "" : slotDeck.getSleeveArtKey());
+            lobbyPlayer.setSleeveArtOffset(slotDeck == null ? Deck.DEFAULT_SLEEVE_OFFSET : slotDeck.getSleeveArtOffset());
 
             Deck deck = slot.getDeck();
             if (autoGenerateVariant != null) {
@@ -578,6 +577,7 @@ public abstract class GameLobby implements IHasGameType {
         private boolean limitedMode;
         private String activeEventId;
         private boolean activeConformance;
+        private int maximumCommanderBracket = 5; // mirrors DECKGEN_MAXIMUM_COMMANDER_BRACKET default (off)
 
         public GameLobbyData() {
         }
@@ -605,6 +605,12 @@ public abstract class GameLobby implements IHasGameType {
         }
         public void setActiveConformance(final boolean conformance) {
             this.activeConformance = conformance;
+        }
+        public int getMaximumCommanderBracket() {
+            return maximumCommanderBracket;
+        }
+        public void setMaximumCommanderBracket(final int bracket) {
+            this.maximumCommanderBracket = bracket;
         }
     }
 }

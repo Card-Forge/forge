@@ -1,7 +1,0 @@
-Name:Titania, Rugged Rumbler
-ManaCost:2 BG
-Types:Legendary Creature Human Villain
-PT:2/2
-K:AlternateAdditionalCost:Discard<1/Card>:2
-K:Ward:Discard<1/Card>:2
-Oracle:As an additional cost to cast this spell, discard a card or pay {2}.\nWard—Discard a card or pay {2}. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player discards a card or pays {2}.)

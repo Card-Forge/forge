@@ -18,6 +18,8 @@
 package forge.game.cost;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multiset;
+
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -182,10 +184,10 @@ public class CostRemoveCounter extends CostPart {
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         int removed = 0;
-        for (Map.Entry<GameEntity, Map<CounterType, Integer>> e : decision.counterTable.row(Optional.empty()).entrySet()) {
-            for (Map.Entry<CounterType, Integer> v : e.getValue().entrySet()) {
-                removed += v.getValue();
-                e.getKey().subtractCounter(v.getKey(), v.getValue(), ai);
+        for (Map.Entry<GameEntity, Multiset<CounterType>> e : decision.counterTable.row(Optional.empty()).entrySet()) {
+            for (Multiset.Entry<CounterType> v : e.getValue().entrySet()) {
+                removed += v.getCount();
+                e.getKey().subtractCounter(v.getElement(), v.getCount(), ai);
             }
             if (e.getKey() instanceof Card c) {
                 e.getKey().getGame().updateLastStateForCard(c);

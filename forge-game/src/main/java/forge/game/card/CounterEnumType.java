@@ -353,6 +353,8 @@ public enum CounterEnumType implements CounterType {
 
     PREY("PREY", 240, 0, 0, CounterAiCategory.Positive),
 
+    PROMOTION("PROM", 40, 210, 230, CounterAiCategory.Positive),
+
     PUPA("PUPA", 0, 223, 203, CounterAiCategory.Negative),
 
     P0P1("+0/+1", "+0/+1", 96, 226, 23, CounterAiCategory.Positive),
@@ -388,6 +390,8 @@ public enum CounterEnumType implements CounterType {
     ROPE("ROPE", 239, 223, 187, CounterAiCategory.Positive),
 
     RUST("RUST", 255, 181, 116, CounterAiCategory.Negative),
+
+    SAURIAN("SAUR", 120, 203, 161, CounterAiCategory.Positive),
 
     SCREAM("SCREM", 0, 220, 255, CounterAiCategory.Positive),
 

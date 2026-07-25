@@ -1,0 +1,8 @@
+Name:Set Phasers to . . .
+ManaCost:W
+Types:Instant
+A:SP$ Charm | Choices$ DBTap,DBDamage
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | SubAbility$ DBPutCounter | SpellDescription$ Stun — Tap target creature and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumDmg$ 3 | SpellDescription$ Kill — This spell deals 3 damage to target attacking creature.
+Oracle:Choose one —\n• Stun — Tap target creature and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\n• Kill — This spell deals 3 damage to target attacking creature.

@@ -128,7 +128,7 @@ public class CardCollections {
 
     public IStorage<Deck> getCommanderPrecons() {
         if (commanderPrecons == null) {
-            commanderPrecons = new StorageImmediatelySerialized<Deck>("Commander Precon decks",
+            commanderPrecons = new StorageImmediatelySerialized<>("Commander Precon decks",
                     new DeckStorage(new File(ForgeConstants.COMMANDER_PRECON_DIR), ForgeConstants.QUEST_PRECON_DIR));
         }
         return commanderPrecons;

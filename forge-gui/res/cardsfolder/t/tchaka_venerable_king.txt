@@ -1,0 +1,10 @@
+Name:T'Chaka, Venerable King
+ManaCost:G W
+Types:Legendary Creature Human Noble Hero
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When NICKNAME enters, mill three cards, then you may put an artifact or land card from among the milled cards into your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBChangeZone | Defined$ You
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Artifact.IsRemembered,Land.IsRemembered | SelectPrompt$ You may put an artifact or land card from among the milled cards into your hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ BecomeMonarch | Cost$ 3 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Defined$ You | SpellDescription$ You become the monarch. Activate only if you control your commander.
+Oracle:When T'Chaka enters, mill three cards, then you may put an artifact or land card from among the milled cards into your hand.\n{3}, Exile this card from your graveyard: You become the monarch. Activate only if you control your commander.

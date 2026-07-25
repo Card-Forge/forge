@@ -407,6 +407,13 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (s.isEmpty()) {
             return s;
         }
+        // With no hyphen to split on and a first character capitalize would leave alone, the
+        // loop below reassembles the argument unchanged - which is the case for every type name
+        // written the way a card script writes it. Skip the round trip through the StringBuilder.
+        final int first = s.codePointAt(0);
+        if (s.indexOf('-') < 0 && Character.toTitleCase(first) == first) {
+            return s;
+        }
         final StringBuilder sb = new StringBuilder();
         // to handle hyphenated Types
         // TODO checkout WordUtils for this

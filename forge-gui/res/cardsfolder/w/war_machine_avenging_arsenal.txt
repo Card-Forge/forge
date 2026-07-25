@@ -1,0 +1,10 @@
+Name:War Machine, Avenging Arsenal
+ManaCost:4 R
+Types:Legendary Artifact Creature Human Hero
+PT:3/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever NICKNAME attacks, attacking modified creatures you control gain double strike until end of turn. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking+modified+YouCtrl | KW$ Double Strike
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Aura|Equipment & Ability|Counters
+Oracle:Flying\nWhenever War Machine attacks, attacking modified creatures you control gain double strike until end of turn. (Equipment, Auras you control, and counters are modifications.)

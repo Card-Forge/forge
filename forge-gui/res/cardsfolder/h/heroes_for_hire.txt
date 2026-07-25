@@ -1,0 +1,12 @@
+Name:Heroes for Hire
+ManaCost:3 R R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create three Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+A:AB$ Dig | Cost$ Sac<1/Treasure> | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play it this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token
+DeckHints:Type$Treasure
+Oracle:When this enchantment enters, create three Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.")\nSacrifice a Treasure: Exile the top card of your library. You may play it this turn.

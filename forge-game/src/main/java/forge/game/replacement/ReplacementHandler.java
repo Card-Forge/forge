@@ -25,6 +25,7 @@ import forge.game.phase.PhaseType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 
 import forge.game.CardTraitBase;
@@ -41,6 +42,7 @@ import forge.game.ability.ApiType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -86,7 +88,7 @@ public class ReplacementHandler {
 
             // need to apply Counters to check its future state on the battlefield
             @SuppressWarnings("unchecked")
-            Map<Optional<Player>, Map<CounterType, Integer>> etbCounters = (Map<Optional<Player>, Map<CounterType, Integer>>) runParams.get(AbilityKey.CounterMap);
+            Map<Optional<Player>, Multiset<CounterType>> etbCounters = (Map<Optional<Player>, Multiset<CounterType>>) runParams.get(AbilityKey.CounterMap);
             affectedLKI.putEtbCounters(etbCounters);
             preList.add(affectedLKI);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(), preList);
@@ -97,40 +99,53 @@ public class ReplacementHandler {
         final List<ReplacementEffect> possibleReplacers = Lists.newArrayList();
 
         // Round up Static replacement effects
-        game.forEachCardInGame(new Visitor<Card>() {
-            @Override
-            public boolean visit(Card crd) {
-                Card c = preList.get(crd);
-                Zone cardZone = game.getZoneOf(c);
+        game.forEachCardInGame(crd -> {
+            Card c = preList.get(crd);
+            Zone cardZone = game.getZoneOf(c);
 
-                // only when not prelist
-                boolean noLKIstate = c != crd || event != ReplacementType.Moved || c.isImmutable() || runParams.get(AbilityKey.LastStateBattlefield) == null;
-                if (!noLKIstate) {
-                    Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(c);
-                    if (lastState != c) {
-                        // use LKI because it has the right RE from the state before the effect started
-                        c = lastState;
-                        cardZone = lastState.getLastKnownZone();
-                    } else if (cardZone != null && cardZone.is(ZoneType.Battlefield)) {
-                        // no LKI found so it shouldn't apply, this can happen during simultaneous zone changes
-                        return true;
-                    }
-                }
-
-                for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
-                    if (!replacementEffect.hasRun() && !hasRun.contains(replacementEffect)
-                            && (layer == null || replacementEffect.getLayer() == layer)
-                            && replacementEffect.modeCheck(event, runParams)
-                            && !possibleReplacers.contains(replacementEffect)
-                            && replacementEffect.zonesCheck(cardZone)
-                            && replacementEffect.requirementsCheck(game)
-                            && replacementEffect.canReplace(runParams)) {
-                        possibleReplacers.add(replacementEffect);
-                    }
-                }
+            // all tap/untap/produce mana replacements are active from the battlefield or the
+            // command zone (e.g. Ood Sphere); skip other zones - this is a major hot path, as
+            // canTap/canUntap run a cantHappenCheck per mana source per AI cost check, and
+            // groupSourcesByManaColor runs a ProduceMana check per mana ability on top of that
+            // (performance mode only, in case a custom card wants one active from elsewhere)
+            if (Spell.isPerformanceMode()
+                    && (event == ReplacementType.Tap || event == ReplacementType.Untap
+                            || event == ReplacementType.ProduceMana)
+                    && cardZone != null
+                    && cardZone.getZoneType() != ZoneType.Battlefield
+                    && cardZone.getZoneType() != ZoneType.Command) {
                 return true;
             }
 
+            // only when not prelist
+            boolean noLKIstate = c != crd || event != ReplacementType.Moved || c.isImmutable() || runParams.get(AbilityKey.LastStateBattlefield) == null;
+            if (!noLKIstate) {
+                Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(c);
+                if (lastState != c) {
+                    // use LKI because it has the right RE from the state before the effect started
+                    c = lastState;
+                    cardZone = lastState.getLastKnownZone();
+                } else if (cardZone != null && cardZone.is(ZoneType.Battlefield)) {
+                    // no LKI found so it shouldn't apply, this can happen during simultaneous zone changes
+                    return true;
+                }
+            }
+
+            for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
+                if (!replacementEffect.hasRun() && !hasRun.contains(replacementEffect)
+                        && (layer == null || replacementEffect.getLayer() == layer)
+                        && replacementEffect.modeCheck(event, runParams)
+                        && !possibleReplacers.contains(replacementEffect)
+                        && replacementEffect.zonesCheck(cardZone)
+                        && replacementEffect.requirementsCheck(game)
+                        && replacementEffect.canReplace(runParams)) {
+                    possibleReplacers.add(replacementEffect);
+                    if (layer == ReplacementLayer.CantHappen) {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }, affectedCard != null && affectedCard.isInZone(ZoneType.Sideboard));
 
         if (affectedLKI != null) {
@@ -371,7 +386,7 @@ public class ReplacementHandler {
         return ReplacementResult.Replaced;
     }
 
-    private void getPossibleReplaceDamageList(PlayerCollection players, final boolean isCombat, final CardDamageMap damageMap, final SpellAbility cause) {
+    private void getPossibleReplaceDamageList(PlayerCollection players, final boolean isCombat, final CardDamageTable damageMap, final SpellAbility cause) {
         for (Map.Entry<GameEntity, Map<Card, Integer>> et : damageMap.columnMap().entrySet()) {
             final GameEntity target = et.getKey();
             int playerIndex = target instanceof Player ? players.indexOf(((Player) target)) :
@@ -407,7 +422,7 @@ public class ReplacementHandler {
     }
 
     private void runSingleReplaceDamageEffect(ReplacementEffect re, Map<AbilityKey, Object> runParams, Map<ReplacementEffect, List<Map<AbilityKey, Object>>> replaceCandidateMap,
-            Map<ReplacementEffect, List<Map<AbilityKey, Object>>> executedDamageMap, Player decider, final CardDamageMap damageMap, final CardDamageMap preventMap) {
+                                              Map<ReplacementEffect, List<Map<AbilityKey, Object>>> executedDamageMap, Player decider, final CardDamageTable damageMap, final CardDamageTable preventMap) {
         List<Map<AbilityKey, Object>> executedParamList = executedDamageMap.get(re);
         ApiType apiType = re.getOverridingAbility() != null ? re.getOverridingAbility().getApi() : null;
         Card source = (Card) runParams.get(AbilityKey.DamageSource);
@@ -609,8 +624,8 @@ public class ReplacementHandler {
         }
     }
 
-    public void runReplaceDamage(final boolean isCombat, final CardDamageMap damageMap, final CardDamageMap preventMap,
-            final GameEntityCounterTable counterTable, final SpellAbility cause) {
+    public void runReplaceDamage(final boolean isCombat, final CardDamageTable damageMap, final CardDamageTable preventMap,
+                                 final GameEntityCounterTable counterTable, final SpellAbility cause) {
         PlayerCollection players = game.getPlayersInTurnOrder();
         for (int i = 0; i < players.size(); i++) {
             replaceDamageList.add(new HashMap<>());
@@ -740,7 +755,7 @@ public class ReplacementHandler {
                                 if (shieldMap.containsKey(target) && shieldMap.get(target) > 0) {
                                     Integer dividedShieldAmount = shieldMap.get(target);
                                     runParams.put(AbilityKey.DividedShieldAmount, dividedShieldAmount);
-                                    shieldAmount -= (int) dividedShieldAmount;
+                                    shieldAmount -= dividedShieldAmount;
                                 } else {
                                     continue;
                                 }
@@ -913,24 +928,21 @@ public class ReplacementHandler {
      * @return true if there is some resolved fog effect
      */
     public final boolean isPreventCombatDamageThisTurn() {
-        final List<ReplacementEffect> list = Lists.newArrayList();
-        game.forEachCardInGame(new Visitor<Card>() {
-            @Override
-            public boolean visit(Card c) {
-                for (final ReplacementEffect re : c.getReplacementEffects()) {
-                    if (re.getMode() == ReplacementType.DamageDone
-                            && re.getLayer() == ReplacementLayer.Other
-                            && re.hasParam("Prevent") && re.getParam("Prevent").equals("True")
-                            && re.hasParam("IsCombat") && re.getParam("IsCombat").equals("True")
-                            && !re.hasParam("ValidSource") && !re.hasParam("ValidTarget")
-                            && re.zonesCheck(game.getZoneOf(c))) {
-                        list.add(re);
-                    }
+        // a fog effect can only be active from a zone in STATIC_ABILITIES_SOURCE_ZONES
+        // (zonesCheck below rejects other zones), so don't scan libraries and hands
+        for (final Card c : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final ReplacementEffect re : c.getReplacementEffects()) {
+                if (re.getMode() == ReplacementType.DamageDone
+                        && re.getLayer() == ReplacementLayer.Other
+                        && "True".equals(re.getParam("Prevent"))
+                        && "True".equals(re.getParam("IsCombat"))
+                        && !re.hasParam("ValidSource") && !re.hasParam("ValidTarget")
+                        && re.zonesCheck(game.getZoneOf(c))) {
+                    return true;
                 }
-                return true;
             }
-        });
-        return !list.isEmpty();
+        }
+        return false;
     }
 
     public boolean isReplacing() {
