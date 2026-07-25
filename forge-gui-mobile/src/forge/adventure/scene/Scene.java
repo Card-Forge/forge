@@ -13,30 +13,42 @@ import forge.adventure.util.Config;
 public abstract class Scene implements Disposable {
 
     static class SceneControllerListener implements ControllerListener {
+        // On iOS, IosControllerManager fires connected() during Controllers
+        // initialization for already-present controllers — before any scene
+        // exists, so Forge.getCurrentScene() can still be null here.
 
         @Override
         public void connected(Controller controller) {
-            Forge.getCurrentScene().connected(controller);
+            Scene scene = Forge.getCurrentScene();
+            if (scene != null) {
+                scene.connected(controller);
+            }
         }
 
         @Override
         public void disconnected(Controller controller) {
-            Forge.getCurrentScene().disconnected(controller);
+            Scene scene = Forge.getCurrentScene();
+            if (scene != null) {
+                scene.disconnected(controller);
+            }
         }
 
         @Override
         public boolean buttonDown(Controller controller, int i) {
-            return Forge.getCurrentScene().buttonDown(controller, i);
+            Scene scene = Forge.getCurrentScene();
+            return scene != null && scene.buttonDown(controller, i);
         }
 
         @Override
         public boolean buttonUp(Controller controller, int i) {
-            return Forge.getCurrentScene().buttonUp(controller, i);
+            Scene scene = Forge.getCurrentScene();
+            return scene != null && scene.buttonUp(controller, i);
         }
 
         @Override
         public boolean axisMoved(Controller controller, int i, float v) {
-            return Forge.getCurrentScene().axisMoved(controller, i, v);
+            Scene scene = Forge.getCurrentScene();
+            return scene != null && scene.axisMoved(controller, i, v);
         }
     }
 

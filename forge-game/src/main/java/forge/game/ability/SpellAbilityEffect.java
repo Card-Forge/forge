@@ -890,30 +890,29 @@ public abstract class SpellAbilityEffect {
         }
     }
 
-    protected static void discard(SpellAbility sa, final boolean effect, Map<Player, CardCollectionView> discardedMap, Map<AbilityKey, Object> params) {
-        Set<Player> discarders = discardedMap.keySet();
+    protected static void discard(SpellAbility sa, final boolean effect, Map<Player, CardCollectionView> toDiscardMap, Map<AbilityKey, Object> params) {
         Map<Player, List<Card>> discardedBefore = Maps.newHashMap();
-        for (Player p : discarders) {
-            discardedBefore.put(p, Lists.newArrayList(p.getDiscardedThisTurn()));
+        Map<Player, CardCollectionView> discardedMap = Maps.newLinkedHashMap();
+        for (Map.Entry<Player, CardCollectionView> e : toDiscardMap.entrySet()) {
+            discardedBefore.put(e.getKey(), Lists.newArrayList(e.getKey().getDiscardedThisTurn()));
             final CardCollection discardedByPlayer = new CardCollection();
-            for (Card card : Lists.newArrayList(discardedMap.get(p))) { // without copying will get concurrent modification exception
+            for (Card card : e.getValue()) {
                 if (card == null) { continue; }
-                Card moved = p.discard(card, sa, effect, params);
+                Card moved = e.getKey().discard(card, sa, effect, params);
                 if (moved != null) {
                     discardedByPlayer.add(moved);
                 }
             }
-            discardedMap.put(p, discardedByPlayer);
+            discardedMap.put(e.getKey(), discardedByPlayer);
         }
 
-        for (Player p : discarders) {
-            CardCollectionView discardedByPlayer = discardedMap.get(p);
-            if (!discardedByPlayer.isEmpty()) {
-                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
-                runParams.put(AbilityKey.Cards, discardedByPlayer);
+        for (Map.Entry<Player, CardCollectionView> e : discardedMap.entrySet()) {
+            if (!e.getValue().isEmpty()) {
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(e.getKey());
+                runParams.put(AbilityKey.Cards, e.getValue());
                 runParams.put(AbilityKey.Cause, sa);
-                runParams.put(AbilityKey.DiscardedBefore, discardedBefore.get(p));
-                p.getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
+                runParams.put(AbilityKey.DiscardedBefore, discardedBefore.get(e.getKey()));
+                e.getKey().getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
             }
         }
     }

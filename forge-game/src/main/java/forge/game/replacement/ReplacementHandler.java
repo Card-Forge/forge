@@ -103,12 +103,14 @@ public class ReplacementHandler {
             Card c = preList.get(crd);
             Zone cardZone = game.getZoneOf(c);
 
-            // all tap/untap replacements are active from the battlefield or the command zone
-            // (e.g. Ood Sphere); skip other zones - this is a major hot path, as canTap/canUntap
-            // run a cantHappenCheck per mana source per AI cost check
+            // all tap/untap/produce mana replacements are active from the battlefield or the
+            // command zone (e.g. Ood Sphere); skip other zones - this is a major hot path, as
+            // canTap/canUntap run a cantHappenCheck per mana source per AI cost check, and
+            // groupSourcesByManaColor runs a ProduceMana check per mana ability on top of that
             // (performance mode only, in case a custom card wants one active from elsewhere)
             if (Spell.isPerformanceMode()
-                    && (event == ReplacementType.Tap || event == ReplacementType.Untap)
+                    && (event == ReplacementType.Tap || event == ReplacementType.Untap
+                            || event == ReplacementType.ProduceMana)
                     && cardZone != null
                     && cardZone.getZoneType() != ZoneType.Battlefield
                     && cardZone.getZoneType() != ZoneType.Command) {

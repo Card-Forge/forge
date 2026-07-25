@@ -1,4 +1,4 @@
-Name:Raft Security OFficer
+Name:Raft Security Officer
 ManaCost:1 W
 Types:Creature Human Soldier
 PT:1/3
