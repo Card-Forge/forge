@@ -466,12 +466,22 @@ public class Main extends IOSApplication.Delegate {
 
         @Override
         public void restart() {
-            // Not possible on iOS
+            // iOS cannot programmatically relaunch an app, so a restart is an exit
+            // the user completes by reopening Forge. Restart-required settings
+            // (Adventure plane, skin, language, card DB toggles) are saved before
+            // this is called and take effect on the next launch.
+            exit();
         }
 
         @Override
         public void exit() {
-            // Not possible on iOS
+            // Programmatic termination is discouraged by Apple's HIG for App Store
+            // apps; Forge iOS is sideload/TestFlight distributed, and keeping the
+            // process alive here left restart-required settings silently unapplied
+            // (process-lifetime singletons like the adventure plane config can only
+            // be rebuilt by a fresh launch). Revisit if App Store distribution ever
+            // becomes a goal.
+            System.exit(0);
         }
 
         @Override
