@@ -1646,7 +1646,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Dune-BroodAnklet",
       "effect": {
-        "lifeModifier": -4,
+        "lifeModifier": -8,
         "startBattleWithCard": [
           "Dune-Brood Nephilim|GPT"
         ]
@@ -3947,12 +3947,9 @@
     "equipmentSlot": "Neck",
     "iconName": "Liliana'sVeil",
     "effect": {
-      "lifeModifier": -6,
-      "opponent": {
-        "startBattleWithCard": [
-          "Oath of Liliana|EMN"
-        ]
-      }
+      "startBattleWithCard": [
+        "Oath of Liliana"
+      ]
     }
   },
     {
@@ -5110,7 +5107,7 @@
   },
   {
     "name": "Manaforce Mace",
-    "description": "Equip +3. +X/+X equal to domain",
+    "description": "Equip 3. +X/+X equal to domain",
     "equipmentSlot": "Right",
     "iconName": "ManaforceMace",
     "effect": {

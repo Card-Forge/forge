@@ -30,7 +30,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class Match {
-    private static List<PaperCard> removedCards = Lists.newArrayList();
+    private List<PaperCard> removedCards = Lists.newArrayList();
     private final List<RegisteredPlayer> players;
     private final GameRules rules;
     private final String title;
@@ -191,7 +191,7 @@ public class Match {
         return myRemovedAnteCards;
     }
 
-    public static List<PaperCard> getRemovedCards() { return removedCards; }
+    public List<PaperCard> getRemovedCards() { return removedCards; }
 
     public void removeCard(PaperCard c) {
         removedCards.add(c);

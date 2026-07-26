@@ -433,7 +433,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
+    public CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
         return chooseItems(player.getZone(ZoneType.Hand).getCards(), numDiscard);
     }
 

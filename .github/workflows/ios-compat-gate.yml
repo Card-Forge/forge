@@ -1,0 +1,61 @@
+name: iOS compatibility gate
+
+# Fast (~5 min), Apple-free check that the codebase still runs on iOS/MobiVM:
+# runs the JvmDowngrader transform + MobiVmBridge + linkage audit on a Linux
+# runner and FAILS when Java code reachable from Forge would crash on device
+# (an unbridged jvmdg stub or an API MobiVM doesn't provide). This catches
+# "modern Java API breaks iOS" regressions on every PR without anyone needing
+# a Mac.
+
+on:
+  push:
+    paths:
+      - '**/*.java'
+      - '**/pom.xml'
+      - 'forge-gui-ios/**'
+      - '.github/workflows/ios-compat-gate.yml'
+  pull_request:
+    paths:
+      - '**/*.java'
+      - '**/pom.xml'
+      - 'forge-gui-ios/**'
+      - '.github/workflows/ios-compat-gate.yml'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    name: iOS/MobiVM link audit
+    env:
+      # Placeholder bundle id for the untracked robovm.properties; the audit
+      # only compiles/transforms — nothing is signed or installed.
+      APP_ID: forge.ios.ci
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Cache pipeline tool jars
+        uses: actions/cache@v5
+        with:
+          path: tmp/jvmdg/tools
+          key: jvmdg-tools-${{ hashFiles('forge-gui-ios/pipeline/ios-pipeline.sh') }}
+
+      - name: Run iOS compatibility audit
+        run: bash forge-gui-ios/pipeline/ios-pipeline.sh audit
+
+      - name: Upload transform reports
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: ios-audit-reports
+          path: |
+            tmp/jvmdg/work/bridge-report.txt
+            tmp/jvmdg/work/gui-ios-bridge-report.txt
+            tmp/jvmdg/work/audit-report.txt
+          if-no-files-found: ignore

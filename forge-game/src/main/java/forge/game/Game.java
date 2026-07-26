@@ -73,6 +73,7 @@ public class Game {
     private final PlayerCollection allPlayers = new PlayerCollection();
     private final PlayerCollection ingamePlayers = new PlayerCollection();
     private final PlayerCollection lostPlayers = new PlayerCollection();
+    private GameEntityViewMap<Player, PlayerView> playerCache = new GameEntityViewMap<Player, PlayerView>();
 
     private List<Card> activePlanes = null;
 
@@ -259,7 +260,6 @@ public class Game {
         }
     }
 
-    private final GameEntityCache<Player, PlayerView> playerCache = new GameEntityCache<>();
     public Player getPlayer(PlayerView playerView) {
         return playerCache.get(playerView);
     }
@@ -271,10 +271,6 @@ public class Game {
             }
         }
         return null;
-    }
-
-    public void addPlayer(int id, Player player) {
-        playerCache.put(id, player);
     }
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
@@ -346,7 +342,7 @@ public class Game {
             Player pl = factory.createIngamePlayer(this, id == null ? plId++ : id);
             allPlayers.add(pl);
             ingamePlayers.add(pl);
-
+            playerCache.put(pl);
             if (startingLife != -1) {
                 pl.setStartingLife(startingLife);
             } else {
@@ -548,6 +544,16 @@ public class Game {
 
     public void dangerouslySetTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    /**
+     * Snapshot support: aligns this game's fresh-card-id counters with the
+     * source game's, so a copy that preserves original card ids can never
+     * collide with ids handed out for cards created after the copy.
+     */
+    public void dangerouslySyncCardIdCounters(Game from) {
+        this.cardIdCounter = from.cardIdCounter;
+        this.hiddenCardIdCounter = from.hiddenCardIdCounter;
     }
 
     public final GameOutcome getOutcome() {
@@ -1416,7 +1422,7 @@ public class Game {
 
     public boolean isVoid() {
         return getLeftBattlefieldThisTurn().stream().anyMatch(c -> !c.isLand()) ||
-                getStack().getSpellsCastThisTurn().stream().anyMatch(s -> s.getCastSA().isWarp());
+                getStack().getSpellsCastThisTurn().stream().anyMatch(SpellAbility::isWarp);
     }
 
     public int getAITimeout() {

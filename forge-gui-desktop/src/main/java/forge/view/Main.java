@@ -41,7 +41,7 @@ public final class Main {
             options.setShutdownTimeoutMillis(5000);
             // these belong to sentry.properties, but somehow some OS/Zip tool discards it?
             if (options.getDsn() == null || options.getDsn().isEmpty())
-                options.setDsn("https://87bc8d329e49441895502737c069067b@sentry.asgardsrealm.net//3");
+                options.setDsn("https://87bc8d329e49441895502737c069067b@sentry.asgardsrealm.net/3");
         }, true);
 
         // HACK - temporary solution to "Comparison method violates it's general contract!" crash

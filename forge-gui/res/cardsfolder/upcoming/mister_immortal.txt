@@ -1,6 +1,0 @@
-Name:Mister Immortal
-ManaCost:1 G
-Types:Legendary Creature Mutant Hero
-PT:2/1
-A:AB$ ChangeZone | Cost$ 2 G | Origin$ Graveyard,Exile | Destination$ Battlefield | ActivationZone$ Graveyard,Exile | Tapped$ True | SpellDescription$ Return this card from your graveyard or from exile to the battlefield tapped.
-Oracle:{2}{G}: Return this card from your graveyard or from exile to the battlefield tapped.

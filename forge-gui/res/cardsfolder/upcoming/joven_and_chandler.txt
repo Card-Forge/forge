@@ -1,0 +1,9 @@
+Name:Joven and Chandler
+ManaCost:2 R R R
+Types:Legendary Creature Human Rogue
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an artifact is put into a graveyard from the battlefield, put a number of +1/+1 counters equal to that artifact's mana value on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+A:AB$ GainControl | Cost$ R R R T | ValidTgts$ Artifact | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target artifact until end of turn. Untap it. It gains haste until end of turn.
+SVar:X:TriggeredCard$CardManaCost
+Oracle:Whenever an artifact is put into a graveyard from the battlefield, put a number of +1/+1 counters equal to that artifact's mana value on Joven and Chandler.\n{R}{R}{R}, {T}: Gain control of target artifact until end of turn. Untap it. It gains haste until end of turn.

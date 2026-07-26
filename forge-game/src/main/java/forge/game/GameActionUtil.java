@@ -104,7 +104,7 @@ public final class GameActionUtil {
                 lkicheck = true;
             }
 
-            // 601.3e
+            // CR 601.3e
             if (lkicheck) {
                 // double freeze tracker, so it doesn't update view
                 game.getTracker().freeze();
@@ -412,7 +412,7 @@ public final class GameActionUtil {
             lkicheck = true;
         }
 
-        // 601.3e
+        // CR 601.3e
         if (lkicheck) {
             // double freeze tracker, so it doesn't update view
             game.getTracker().freeze();
@@ -480,11 +480,9 @@ public final class GameActionUtil {
               costs.add(new OptionalCostValue(OptionalCost.PromiseGift, cost));
             } else if (keyword.startsWith("Kicker")) {
                 String[] sCosts = TextUtil.split(keyword.substring(6), ':');
-                int numKickers = sCosts.length;
-                for (int j = 0; j < numKickers; j++) {
+                for (int j = 0; j < sCosts.length; j++) {
                     final Cost cost = new Cost(sCosts[j], false);
-                    OptionalCost type = null;
-                    type = j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2;
+                    OptionalCost type = j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2;
                     costs.add(new OptionalCostValue(type, cost));
                 }
             } else if (keyword.equals("Retrace")) {

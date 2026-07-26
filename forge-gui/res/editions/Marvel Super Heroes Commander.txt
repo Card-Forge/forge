@@ -323,7 +323,7 @@ ScryfallCode=MSC
 315 R Methods of the Mighty @David Seeley
 316 R Midnight Angel Armor @Mateus Manhanini
 317 R Monologue Tax @Vilhelmas Banys
-318 R Scourglass @Toni Infante
+318 R Scourglass @Toni Infante ${"flavorName": "Orbital Vibranium Bomb"}
 319 R Promise of Loyalty @Sveta Pikul
 320 R Queen Mother Ramonda @Michael Machira
 321 R Royal Talon Fighter Jet @Sean Vo
@@ -345,7 +345,7 @@ ScryfallCode=MSC
 337 R Spark Double @Immanuela Crovius ${"flavorName": "Loki's Double"}
 338 R Professor Hulk @Leroy Steinmann
 339 R Quantum Misalignment @Alexander Skripnikov
-340 R Raise the Palisade @Arthur Yuan ${"flavorName": "Raise the Repulsor Shields"}
+340 R Raise the Palisade @Arthur Yuan ${"flavorName": "Raise Repulsor Shields"}
 341 R Recurring Insight @Gintas Galvanauskas
 342 R Valeria Richards, Precocious @Justyna Dura
 343 R The Wasp, Winsome Avenger @Raoul Vitale

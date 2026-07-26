@@ -8,6 +8,7 @@ import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
@@ -28,14 +29,53 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
 
 public class Assets implements Disposable {
+    /**
+     * Custom FileHandleResolver for iOS/Android that handles both:
+     * - Absolute paths (for writable cache/Documents files)
+     * - Relative paths (for read-only bundle resources)
+     */
+    private static class HybridFileHandleResolver implements FileHandleResolver {
+        private final AbsoluteFileHandleResolver absoluteResolver = new AbsoluteFileHandleResolver();
+        private final InternalFileHandleResolver internalResolver = new InternalFileHandleResolver();
+
+        @Override
+        public FileHandle resolve(String fileName) {
+            // iOS only: bundle-internal resources must resolve via internal() (the app bundle
+            // lives behind a /var symlink that absolute() fails to realpath inside the sandbox).
+            // All other platforms keep master's absolute-resolver behavior unchanged — Android's
+            // assets are extracted to storage and were always resolved absolutely.
+            if (GuiBase.isIOS() && !fileName.startsWith("/")) {
+                return internalResolver.resolve(fileName);
+            }
+            return absoluteResolver.resolve(fileName);
+        }
+    }
+
+    /**
+     * FileHandle for a resource, mirroring {@link HybridFileHandleResolver} for direct (non-manager)
+     * use — shared by FSkin/FSkinFont. iOS must use internal() with a relative path for bundled
+     * resources (the app bundle lives behind a /var symlink that absolute() fails to realpath inside
+     * the sandbox); only paths under ASSETS_DIR (the read-only bundle) are rerouted, so writable
+     * locations (cache/Documents — downloaded skins, generated .fnt files, planechase pics) keep
+     * absolute(), which works fine in the sandbox. Every other platform keeps absolute() throughout
+     * — Android's assets are extracted to storage and are NOT reachable via internal() APK paths.
+     */
+    static FileHandle getFileHandle(String path) {
+        if (GuiBase.isIOS() && path.startsWith(ForgeConstants.ASSETS_DIR)) {
+            return Gdx.files.internal(path.substring(ForgeConstants.ASSETS_DIR.length()));
+        }
+        return Gdx.files.absolute(path);
+    }
+
     private MemoryTrackingAssetManager manager;
     private HashMap<Integer, FSkinFont> fonts;
-    private HashMap<String, FImageComplex> cardArtCache;
+    private LinkedHashMap<String, FImageComplex> cardArtCache;
     private HashMap<String, FImage> avatarImages;
     private HashMap<String, FSkinImageInterface> manaImages;
     private HashMap<String, FSkinImageInterface> symbolLookup;
@@ -51,6 +91,7 @@ public class Assets implements Disposable {
     private ObjectMap<String, Texture> tmxMap;
     private Texture defaultImage, dummy;
     private TextureParameter textureParameter;
+    private TextureParameter cardTextureParameter;
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
     private Texture holofoil;
@@ -143,8 +184,9 @@ public class Assets implements Disposable {
     }
 
     public MemoryTrackingAssetManager manager() {
-        if (manager == null)
-            manager = new MemoryTrackingAssetManager(new AbsoluteFileHandleResolver());
+        if (manager == null) {
+            manager = new MemoryTrackingAssetManager(new HybridFileHandleResolver());
+        }
         return manager;
     }
 
@@ -154,9 +196,16 @@ public class Assets implements Disposable {
         return fonts;
     }
 
-    public HashMap<String, FImageComplex> cardArtCache() {
+    public LinkedHashMap<String, FImageComplex> cardArtCache() {
+        // LRU-capped: card art entries otherwise accumulate unboundedly over a
+        // long session (memory hygiene on RAM-constrained devices)
         if (cardArtCache == null)
-            cardArtCache = new HashMap<>();
+            cardArtCache = new LinkedHashMap<String, FImageComplex>(100, 0.75f, true) {
+                @Override
+                protected boolean removeEldestEntry(Map.Entry<String, FImageComplex> eldest) {
+                    return size() > 100;
+                }
+            };
         return cardArtCache;
     }
 
@@ -261,6 +310,25 @@ public class Assets implements Disposable {
         return textureParameter;
     }
 
+    // Card images are opaque, so load the bundled (AssetManager) card path as RGB565 (half the RGBA8888
+    // footprint) with no mipmaps (cards are drawn ~1:1). Separate from getTextureFilter() so UI textures that
+    // need alpha/mipmaps are unaffected. Mirrors the RGB565 downscale already applied to the downloaded path.
+    public TextureParameter getCardTextureFilter() {
+        if (cardTextureParameter == null) {
+            cardTextureParameter = new TextureParameter();
+            cardTextureParameter.format = Pixmap.Format.RGB565;
+            cardTextureParameter.genMipMaps = false;
+        }
+        if (Forge.isTextureFilteringEnabled()) {
+            cardTextureParameter.minFilter = Texture.TextureFilter.Linear;
+            cardTextureParameter.magFilter = Texture.TextureFilter.Linear;
+        } else {
+            cardTextureParameter.minFilter = Texture.TextureFilter.Nearest;
+            cardTextureParameter.magFilter = Texture.TextureFilter.Nearest;
+        }
+        return cardTextureParameter;
+    }
+
     public Texture getTexture(FileHandle file) {
         return getTexture(file, true);
     }
@@ -276,6 +344,7 @@ public class Assets implements Disposable {
             System.err.println("Failed to load: " + file + "!. Creating dummy texture.");
             return getDummy();
         }
+
         //internal path can be inside apk or jar..
         if (!FileType.Absolute.equals(file.type()) || file.path().contains("fallback_skin")) {
             Texture f = fallback_skins().get(file.path());
@@ -313,7 +382,7 @@ public class Assets implements Disposable {
 
     public Texture getDefaultImage() {
         if (defaultImage == null) {
-            FileHandle blankImage = Gdx.files.absolute(ForgeConstants.NO_CARD_FILE);
+            FileHandle blankImage = getFileHandle(ForgeConstants.NO_CARD_FILE);
             if (blankImage.exists()) {
                 defaultImage = manager().get(blankImage.path(), Texture.class, false);
                 if (defaultImage != null)
@@ -337,6 +406,7 @@ public class Assets implements Disposable {
         try {
             if (file == null || !file.exists())
                 return;
+
             if (!FileType.Absolute.equals(file.type()))
                 return;
             manager().load(file.path(), Texture.class, parameter);
@@ -420,9 +490,18 @@ public class Assets implements Disposable {
         }
         Music music = manager().get(file.path(), Music.class, false);
         if (music == null) {
-            manager().load(file.path(), Music.class);
-            manager().finishLoadingAsset(file.path());
-            music = manager().get(file.path(), Music.class);
+            // A load failure (unsupported/corrupt file, or audio unavailable) must
+            // not propagate: getMusic is called synchronously from the render loop
+            // (adventure dialog voice), where an uncaught exception kills the app.
+            // Callers already treat null as "no audio".
+            try {
+                manager().load(file.path(), Music.class);
+                manager().finishLoadingAsset(file.path());
+                music = manager().get(file.path(), Music.class);
+            } catch (Exception e) {
+                System.err.println("Failed to load music " + file.path() + ": " + e.getMessage());
+                return null;
+            }
         }
         return music;
     }

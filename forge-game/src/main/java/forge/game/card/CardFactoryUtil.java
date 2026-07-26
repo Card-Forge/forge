@@ -1975,7 +1975,7 @@ public class CardFactoryUtil {
                     costDesc.append(e.getValue().toSimpleString());
 
                     String effect = "DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ " + e.getKey()
-                        + " | UnlessPayer$ TriggeredSourceSAController | SpellDescription$ " + costDesc.toString();
+                        + " | UnlessPayer$ TriggeredSourceSAController | SpellDescription$ " + costDesc;
                     subs.add((AbilitySub)AbilityFactory.getAbility(effect, card));
                 }
 
@@ -2912,10 +2912,7 @@ public class CardFactoryUtil {
             } else {
                 sb.append(" ");
             }
-            // don't use SimpleString there because it does has "and" between cost i don't want that
-            costStr = cost.toString();
-            // but now it has ": " at the end i want to remove
-            sb.append("| CostDesc$ ").append(costStr, 0, costStr.length() - 2);
+            sb.append("| CostDesc$ ").append(cost);
             if (!cost.isOnlyManaCost()) {
                 sb.append(".");
             }

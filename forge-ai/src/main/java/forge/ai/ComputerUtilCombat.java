@@ -2228,9 +2228,18 @@ public class ComputerUtilCombat {
         int restDamage = damage;
 
         restDamage = target.staticReplaceDamage(restDamage, source, isCombat);
-        restDamage = target.staticDamagePrevention(restDamage, possiblePrevention, source, isCombat);
+        restDamage = target.staticDamagePrevention(restDamage, possiblePrevention, source, isCombat,
+                isCombat ? isCombatDamagePreventedThisTurnCached(target.getGame()) : null);
 
         return restDamage;
+    }
+
+    // cached per AI decision (AiCache is cleared in chooseSpellAbilityToPlay);
+    // predictions ask this once per attacker otherwise
+    private static Boolean isCombatDamagePreventedThisTurnCached(final Game game) {
+        return AiCache.getCached("isPreventCombatDamageThisTurn",
+                () -> game.getReplacementHandler().isPreventCombatDamageThisTurn(),
+                List.of(AiCache::identity), game);
     }
 
     public final static boolean dealsFirstStrikeDamage(final Card combatant, final boolean withoutAbilities, final Combat combat) {
@@ -2456,8 +2465,7 @@ public class ComputerUtilCombat {
                 if (exec.getApi() == ApiType.Clone && "Self".equals(exec.getParam("CloneTarget"))
                         && exec.hasParam("ValidTgts") && exec.getParam("ValidTgts").contains("Creature")
                         && exec.getParam("ValidTgts").contains("attacking")) {
-                    // Tilonalli's Skinshifter and potentially other similar cards that can clone other stuff
-                    // while attacking
+                    // Tilonalli's Skinshifter and potentially other similar cards that can clone other stuff while attacking
                     if (exec.getParam("ValidTgts").contains("nonLegendary") && attacker.getType().isLegendary()) {
                         continue;
                     }

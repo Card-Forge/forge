@@ -13,6 +13,7 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 
 import java.util.Collections;
@@ -52,7 +53,7 @@ public class CharmAi extends SpellAbilityAi {
         } else {
             // only randomize if not all possible together
             if (num < choices.size()) {
-                Collections.shuffle(choices);
+                Collections.shuffle(choices, MyRandom.getRandom());
             }
 
             /*

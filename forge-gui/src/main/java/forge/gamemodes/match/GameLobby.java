@@ -464,6 +464,9 @@ public abstract class GameLobby implements IHasGameType {
                 }
                 lobbyPlayer = GamePlayerUtil.getGuiPlayer(name, avatar, sleeve, setNameNow);
             }
+            final Deck slotDeck = slot.getDeck();
+            lobbyPlayer.setSleeveArtKey(slotDeck == null ? "" : slotDeck.getSleeveArtKey());
+            lobbyPlayer.setSleeveArtOffset(slotDeck == null ? Deck.DEFAULT_SLEEVE_OFFSET : slotDeck.getSleeveArtOffset());
 
             Deck deck = slot.getDeck();
             if (autoGenerateVariant != null) {
@@ -574,6 +577,7 @@ public abstract class GameLobby implements IHasGameType {
         private boolean limitedMode;
         private String activeEventId;
         private boolean activeConformance;
+        private int maximumCommanderBracket = 5; // mirrors DECKGEN_MAXIMUM_COMMANDER_BRACKET default (off)
 
         public GameLobbyData() {
         }
@@ -601,6 +605,12 @@ public abstract class GameLobby implements IHasGameType {
         }
         public void setActiveConformance(final boolean conformance) {
             this.activeConformance = conformance;
+        }
+        public int getMaximumCommanderBracket() {
+            return maximumCommanderBracket;
+        }
+        public void setMaximumCommanderBracket(final int bracket) {
+            this.maximumCommanderBracket = bracket;
         }
     }
 }

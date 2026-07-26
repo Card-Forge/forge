@@ -91,6 +91,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbScaleLarger = new OptionsCheckBox(localizer.getMessage("cbScaleLarger"));
     private final JCheckBox cbRenderBlackCardBorders = new OptionsCheckBox(localizer.getMessage("cbRenderBlackCardBorders"));
     private final JCheckBox cbShowActionableHighlights = new OptionsCheckBox(localizer.getMessage("cbShowActionableHighlights"));
+    private final JCheckBox cbShowAutoTapPreview = new OptionsCheckBox(localizer.getMessage("cbShowAutoTapPreview"));
     private final JCheckBox cbShowLinkedExileCards = new OptionsCheckBox(localizer.getMessage("cbShowLinkedExileCards"));
     private final FTextField txtActionableHighlightColor = new FTextField.Builder().ghostText("66CCFF").maxLength(6).build();
     private final JCheckBox cbLargeCardViewers = new OptionsCheckBox(localizer.getMessage("cbLargeCardViewers"));
@@ -412,6 +413,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbShowActionableHighlights, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlShowActionableHighlights")), descriptionConstraints);
+
+        pnlPrefs.add(cbShowAutoTapPreview, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlShowAutoTapPreview")), descriptionConstraints);
 
         pnlPrefs.add(getActionableHighlightColorPanel(), titleConstraints + ", h 26px!");
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlActionableHighlightColor")), descriptionConstraints);
@@ -830,6 +834,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbShowActionableHighlights() {
         return cbShowActionableHighlights;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbShowAutoTapPreview() {
+        return cbShowAutoTapPreview;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
