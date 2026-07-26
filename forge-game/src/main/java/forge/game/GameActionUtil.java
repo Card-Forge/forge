@@ -942,6 +942,20 @@ public final class GameActionUtil {
             // If we're able to restore the whole game state when rolling back an ability don't try to manually roll back
             System.out.println("Restored state from snapshot! Rolled back: " + ability.getHostCard().getName() + " - " + ability.getActivatingPlayer());
 
+            // The snapshot covers the cards, their zones and the mana pool, so the manual
+            // rollback below and its refund would double up on it. The ability is not part of
+            // the snapshot though, and neither is the frozen stack: without the cleanup an
+            // announced value or a chosen target survives into the next attempt to cast the
+            // card, and the stack stays frozen.
+            Card restored = game.getCardState(oldCard, null);
+            if (restored != null) {
+                restored.setCastSA(null);
+                restored.setCastFrom(null);
+            }
+            resetAnnouncedCosts(ability);
+            resetChosenTargets(ability);
+            game.getStack().clearFrozen();
+            game.getTriggerHandler().clearWaitingTriggers();
             return;
         }
 
@@ -962,18 +976,7 @@ public final class GameActionUtil {
             Integer newPosition = zonePosition >= 0 ? Math.min(zonePosition, fromZone.size()) : null;
             fromZone.add(oldCard, newPosition, null, true);
             ability.setHostCard(oldCard);
-            ability.setXManaCostPaid(null);
-            ability.setSpendPhyrexianMana(false);
-            ability.clearPipsToReduce();
-            ability.setPaidLife(0);
-            if (ability.hasParam("Announce")) {
-                for (final String aVar : ability.getParam("Announce").split(",")) {
-                    final String varName = aVar.trim();
-                    if (!varName.equals("X")) {
-                        ability.setSVar(varName, "0");
-                    }
-                }
-            }
+            resetAnnouncedCosts(ability);
             // better safe than sorry approach in case rolled back ability was copy (from addExtraKeywordCost)
             for (SpellAbility sa : oldCard.getSpells()) {
                 sa.setHostCard(oldCard);
@@ -994,6 +997,30 @@ public final class GameActionUtil {
             }
         }
 
+        resetChosenTargets(ability);
+        payment.refundPayment();
+        game.getStack().clearFrozen();
+        game.getTriggerHandler().clearWaitingTriggers();
+    }
+
+    /** Values the player announced or committed to while casting, which a snapshot does not hold. */
+    private static void resetAnnouncedCosts(SpellAbility ability) {
+        ability.setXManaCostPaid(null);
+        ability.setSpendPhyrexianMana(false);
+        ability.clearPipsToReduce();
+        ability.setPaidLife(0);
+        if (ability.hasParam("Announce")) {
+            for (final String aVar : ability.getParam("Announce").split(",")) {
+                final String varName = aVar.trim();
+                if (!varName.equals("X")) {
+                    ability.setSVar(varName, "0");
+                }
+            }
+        }
+    }
+
+    /** Modes and targets picked while casting, likewise not covered by a snapshot. */
+    private static void resetChosenTargets(SpellAbility ability) {
         if (ability.getApi() == ApiType.Charm) {
             // reset chain
             ability.setSubAbility(null);
@@ -1003,9 +1030,6 @@ public final class GameActionUtil {
         ability.clearTargets();
 
         ability.resetOnceResolved();
-        payment.refundPayment();
-        game.getStack().clearFrozen();
-        game.getTriggerHandler().clearWaitingTriggers();
     }
 
 }
