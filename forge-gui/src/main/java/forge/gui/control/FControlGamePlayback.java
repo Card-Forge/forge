@@ -54,9 +54,6 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     private PlaybackSpeed playbackSpeed = PlaybackSpeed.NORMAL;
 
     private void pauseForEvent(final int delay) {
-        if (Boolean.getBoolean("forge.game.noPlaybackDelay")) {
-            return;
-        }
         try {
             Thread.sleep(playbackSpeed.applyModifier(delay));
         } catch (final InterruptedException e) {
