@@ -389,8 +389,8 @@ public class GameSnapshot {
         newCard.setFaceDown(fromCard.isFaceDown());
         newCard.setManifested(fromCard.getManifestedSA());
         newCard.setSickness(fromCard.hasSickness());
-        //newCard.setForetold(fromCard.isForetold());
-        //newCard.setForetoldCostByEffect(fromCard.isForetoldCostByEffect());
+        newCard.setForetold(fromCard.isForetold());
+        newCard.setForetoldCostByEffect(fromCard.isForetoldCostByEffect());
         newCard.setState(fromCard.getCurrentStateName(), false);
     }
 
