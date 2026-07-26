@@ -303,11 +303,6 @@ public class Forge implements ApplicationListener {
         }
     }
 
-    /** Gamepad backends deliver input without OS focus gating; reject when unfocused. */
-    public static boolean shouldAcceptControllerInput() {
-        return hasWindowFocus;
-    }
-
     private static void haltControllerInput() {
         if (!isMobileAdventureMode) {
             return;
@@ -1600,7 +1595,7 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean buttonDown(Controller controller, int buttonIndex) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: "+buttonIndex);
-                    if (!shouldAcceptControllerInput()) {
+                    if (!hasWindowFocus()) {
                         return false;
                     }
                     hasGamepad = true;
@@ -1611,7 +1606,7 @@ public class Forge implements ApplicationListener {
 
                 @Override
                 public boolean buttonUp(Controller controller, int buttonIndex) {
-                    if (!shouldAcceptControllerInput()) {
+                    if (!hasWindowFocus()) {
                         return false;
                     }
                     hasGamepad = true;
@@ -1622,7 +1617,7 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean axisMoved(Controller controller, int axisIndex, float value) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: axis: "+axisIndex+" - "+value);
-                    if (!shouldAcceptControllerInput()) {
+                    if (!hasWindowFocus()) {
                         return false;
                     }
                     hasGamepad = true;

@@ -35,7 +35,7 @@ public abstract class Scene implements Disposable {
 
         @Override
         public boolean buttonDown(Controller controller, int i) {
-            if (!Forge.shouldAcceptControllerInput()) {
+            if (!Forge.hasWindowFocus()) {
                 return false;
             }
             Scene scene = Forge.getCurrentScene();
@@ -44,7 +44,7 @@ public abstract class Scene implements Disposable {
 
         @Override
         public boolean buttonUp(Controller controller, int i) {
-            if (!Forge.shouldAcceptControllerInput()) {
+            if (!Forge.hasWindowFocus()) {
                 return false;
             }
             Scene scene = Forge.getCurrentScene();
@@ -53,7 +53,7 @@ public abstract class Scene implements Disposable {
 
         @Override
         public boolean axisMoved(Controller controller, int i, float v) {
-            if (!Forge.shouldAcceptControllerInput()) {
+            if (!Forge.hasWindowFocus()) {
                 return false;
             }
             Scene scene = Forge.getCurrentScene();
