@@ -2,6 +2,6 @@ Name:Boros Mastiff
 ManaCost:1 W
 Types:Creature Dog
 PT:2/2
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion — Whenever this creature and at least two other creatures attack, this creature gets lifelink until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion — Whenever this creature and at least two other creatures attack, this creature gains lifelink until end of turn.
 SVar:TrigBattalionPump:DB$ Pump | Defined$ Self | KW$ Lifelink
 Oracle:Battalion — Whenever this creature and at least two other creatures attack, this creature gains lifelink until end of turn. (Damage dealt by a creature with lifelink also causes its controller to gain that much life.)

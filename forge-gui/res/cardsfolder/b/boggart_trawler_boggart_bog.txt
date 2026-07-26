@@ -2,7 +2,7 @@ Name:Boggart Trawler
 ManaCost:2 B
 Types:Creature Goblin
 PT:3/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile target player's graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters, exile target player's graveyard.
 SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True
 AlternateMode:Modal
 Oracle:When this creature enters, exile target player's graveyard.

@@ -2,7 +2,7 @@ Name:Bonecrusher Giant
 ManaCost:2 R
 Types:Creature Giant
 PT:4/3
-T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ When this creature becomes the target of a spell, this creature deals 2 damage to that spell's controller.
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever this creature becomes the target of a spell, this creature deals 2 damage to that spell's controller.
 SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ 2
 AlternateMode:Adventure
 Oracle:Whenever this creature becomes the target of a spell, this creature deals 2 damage to that spell's controller.
