@@ -1,7 +1,7 @@
 Name:Celestial Convergence
 ManaCost:2 W W
 Types:Enchantment
-K:etbCounter:OMEN:7
+K:etbCounter:OMEN:7:no Condition:This enchantment enters with seven omen counters on it.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCtr | TriggerDescription$ At the beginning of your upkeep, remove an omen counter from this enchantment. If there are no omen counters on this enchantment, the player with the highest life total wins the game. If two or more players are tied for highest life total, the game is a draw.
 SVar:TrigRemoveCtr:DB$ RemoveCounter | Defined$ Self | CounterType$ OMEN | CounterNum$ 1 | SubAbility$ WinnerDecided
 SVar:WinnerDecided:DB$ WinsGame | Defined$ Player.lifeEQX | ConditionPresent$ Card.Self+counters_EQ0_OMEN | ConditionCheckSVar$ NumHighestLife | ConditionSVarCompare$ LT2 | SubAbility$ GameIsADraw

@@ -2,7 +2,7 @@ Name:Clockwork Beetle
 ManaCost:1
 Types:Artifact Creature Insect
 PT:0/0
-K:etbCounter:P1P1:2
+K:etbCounter:P1P1:2:no Condition:This creature enters with two +1/+1 counters on it.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DelTrig | TriggerDescription$ Whenever this creature attacks or blocks, remove a +1/+1 counter from it at end of combat.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DelTrig | Secondary$ True | TriggerDescription$ Whenever this creature attacks or blocks, remove a +1/+1 counter from it at end of combat.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigRemoveCounter | TriggerDescription$ Remove a +1/+1 counter from This creature.

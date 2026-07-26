@@ -5,7 +5,7 @@ K:Enchant:Creature
 SVar:AttachAILogic:Pump
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck | SpellDescription$ As this Aura enters, choose a color.
-K:etbCounter:SLEIGHT:1
+K:etbCounter:SLEIGHT:1:no Condition:This Aura enters with a sleight counter on it.
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.EnchantedBy | ValidSource$ Card.ChosenColor | Description$ Prevent all damage that would be dealt to enchanted creature by sources of the last chosen color.
 A:AB$ PutCounter | Cost$ X | Defined$ Self | CounterType$ SLEIGHT | CounterNum$ 1 | SubAbility$ ChooseColor | SpellDescription$ Put a sleight counter on this Aura and choose a color. X is the number of sleight counters on this Aura.
 SVar:X:Count$CardCounters.SLEIGHT

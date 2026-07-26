@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Creature Boar Beast
 PT:0/0
 K:Trample
-K:etbCounter:P1P1:4
+K:etbCounter:P1P1:4:no Condition:This creature enters with four +1/+1 counters on it.
 A:AB$ PutCounter | Cost$ T | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on this creature.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DelTrig | TriggerDescription$ Whenever this creature attacks or blocks, remove a +1/+1 counter from it at end of combat.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DelTrig | Secondary$ True | TriggerDescription$ Whenever this creature attacks or blocks, remove a +1/+1 counter from it at end of combat.
