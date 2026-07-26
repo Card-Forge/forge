@@ -6,7 +6,7 @@ SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTg
 SVar:OneEach:PlayerCountPlayers$Amount
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBScry | SpellDescription$ You gain 2 life and scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2
-SVar:DBReturn:DB$ ChangeZone | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | Hidden$ True | ChangeNum$ 2 | Mandatory$ True | RememberChanged$ True | SpellDescription$ Return two cards exiled with NICKNAME to the battlefield under their owners' control and put the rest on the bottom of their owners' libraries.
+SVar:DBReturn:DB$ ChangeZone | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | Hidden$ True | ChangeNum$ 2 | Mandatory$ True | RememberChanged$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Return two cards exiled with NICKNAME to the battlefield under their owners' control and put the rest on the bottom of their owners' libraries.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource+!IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$LifeGain
