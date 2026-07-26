@@ -1,36 +1,24 @@
 package forge.game.player.actions;
 
 import forge.game.GameEntityView;
-import forge.game.card.CardView;
-
-import java.util.regex.Pattern;
+import forge.game.player.PlayerController;
 
 public abstract class PlayerAction {
-    private static final Pattern ENTITY_ID_SUFFIX = Pattern.compile(" \\((\\d+)\\)$");
-
-    private final String name;
-    private final GameEntityView gameEntityView;
+    protected String name;
+    protected GameEntityView gameEntityView = null;
 
     public PlayerAction(GameEntityView cardView) {
         gameEntityView = cardView;
-        name = null;
     }
 
     public PlayerAction(final GameEntityView cardView, final String actionName) {
-        gameEntityView = cardView;
+        this(cardView);
         name = actionName;
     }
 
-    public boolean isSelectionAction() {
-        return false;
-    }
-
-    public boolean isTargetSelectionAction() {
-        return isSelectionAction();
-    }
-
-    public CardView getSelectedCardView() {
-        return null;
+    public void run(PlayerController controller) {
+        // Turn this abstract soon
+        // This should try to replicate the recorded macro action
     }
 
     public GameEntityView getGameEntityView() {
@@ -38,21 +26,12 @@ public abstract class PlayerAction {
     }
 
     public String describe() {
-        final StringBuilder sb = new StringBuilder(name == null ? getClass().getSimpleName() : name);
-        final String entity = describeEntity();
-        if (!entity.isEmpty()) {
-            sb.append(": ").append(entity);
+        final StringBuilder sb = new StringBuilder(getClass().getSimpleName());
+        if (gameEntityView != null) {
+            sb.append("(").append(gameEntityView).append(")");
         }
         appendDetails(sb);
         return sb.toString();
-    }
-
-    protected String describeEntity() {
-        return gameEntityView == null ? "" : describeEntity(gameEntityView);
-    }
-
-    private static String describeEntity(final GameEntityView entity) {
-        return entity == null ? "" : ENTITY_ID_SUFFIX.matcher(String.valueOf(entity)).replaceAll(" $1");
     }
 
     protected void appendDetails(final StringBuilder sb) {

@@ -7,8 +7,4 @@ public class SelectPlayerAction extends PlayerAction {
         super(playerView, "Select player");
     }
 
-    @Override
-    public boolean isSelectionAction() {
-        return true;
-    }
 }
