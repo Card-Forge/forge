@@ -86,6 +86,7 @@ public enum TriggerType {
     Exiled(TriggerExiled.class),
     Exploited(TriggerExploited.class),
     Explores(TriggerExplores.class),
+    FacesDilemma(TriggerFacesDilemma.class),
     Fight(TriggerFight.class),
     FightOnce(TriggerFightOnce.class),
     Firebend(TriggerElementalbend.class),
