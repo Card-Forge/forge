@@ -2846,13 +2846,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         ColorSet identity = ColorSet.fromMask(ci);
         return identity;
     }
-    public ColorSet getNotCommanderColorID() {
-        if (commanders.isEmpty()) {
-            return null;
-        }
-        ColorSet identity = getCommanderColorID();
-        return identity.inverse();
-    }
 
     public int getCommanderCast(Card commander) {
         return commanderCast.getOrDefault(commander, 0);

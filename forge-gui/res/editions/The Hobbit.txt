@@ -25,6 +25,7 @@ ScryfallCode=HOB
 47 U Master's Councillors @Narendra Bintara Adi
 52 U Ravenhill Flock @Irina Nordsol
 53 R Riddles in the Dark @Lorenzo Mastroianni
+54 R Roll-Roll-Roll-Roll @Rovina Cai
 55 U Sound the Trumpets @Nereida
 56 U Thranduil's Decree @Javier Charro
 61 R Azog, Moria's Ruin @Miklós Ligeti
@@ -53,6 +54,7 @@ ScryfallCode=HOB
 120 U Beorn's Hospitality @Harkalé Linaï
 122 R Cantankerous Keepers @Ramza Psyru
 124 R Down in the Valley @Rovina Cai
+125 U Galion, Elvenking's Butler @Jarel Threat
 134 R Part in Friendship @Jarel Threat
 137 R Through the Forest Gate @Leon Tukker
 142 C Wood Elves @Andreia Ugrai
