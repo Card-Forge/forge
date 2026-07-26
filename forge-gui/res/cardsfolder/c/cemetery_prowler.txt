@@ -3,7 +3,7 @@ ManaCost:1 G G
 Types:Creature Wolf
 PT:3/4
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters or attacks, exile a card from a graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever this creature enters or attacks, exile a card from a graveyard.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever this creature enters or attacks, exile a card from a graveyard.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | SelectPrompt$ Select a card in a graveyard | Mandatory$ True | Hidden$ True | AILogic$ ExilePreference:MostProminentNonLandNonExiledOwnType
 S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Amount$ AffectedX | Activator$ You | Description$ Spells you cast cost {1} less to cast for each card type they share with cards exiled with this creature.

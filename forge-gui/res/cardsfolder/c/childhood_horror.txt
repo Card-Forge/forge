@@ -4,5 +4,5 @@ Types:Creature Horror
 PT:2/2
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ Threshold | Description$ Threshold — As long as there are seven or more cards in your graveyard, this creature gets +2/+2 and can't block.
-S:Mode$ CantBlock | ValidCard$ Card.Self | Condition$ Threshold | Secondary$ True | Description$ Enchanted Threshold — As long as there are seven or more cards in your graveyard, this creature gets +2/+2 and can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Condition$ Threshold | Secondary$ True | Description$ Threshold — As long as there are seven or more cards in your graveyard, this creature gets +2/+2 and can't block.
 Oracle:Flying\nThreshold — As long as there are seven or more cards in your graveyard, this creature gets +2/+2 and can't block.
