@@ -28,6 +28,7 @@ ScryfallCode=HOC
 24 M Arwen, Weaver of Hope @Danny Schwartz
 25 M Delighted Halfling @Heather Hudson
 26 M Elven Chorus @Stephen L. Walsh
+27 M Last March of the Ents @Wayne Reynolds
 28 M Aragorn and Arwen, Wed @Heather Hudson
 29 M Aragorn, the Uniter @Paolo Parente
 30 M Arwen, Mortal Queen @Kev Walker
@@ -38,6 +39,7 @@ ScryfallCode=HOC
 38 M Tom Bombadil @Omar Rayyan
 39 M Andúril, Flame of the West @Paolo Parente
 40 M Andúril, Narsil Reforged @Jeff Miracola
+43 M Mithril Coat @Ellie Livingston
 44 M The One Ring @Dan Frazier
 45 M Palantír of Orthanc @Chris Seaman
 48 M Minas Morgul, Dark Fortress @James Bousema
