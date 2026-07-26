@@ -909,7 +909,13 @@ public class AbilityUtils {
     @SuppressWarnings("unchecked")
     public static PlayerCollection getDefinedPlayers(final Card card, final String def, CardTraitBase sa) {
         final PlayerCollection players = new PlayerCollection();
-        final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
+        Player player = null;
+        if (sa instanceof SpellAbility) {
+            player = ((SpellAbility) sa).getActivatingPlayer();
+        }
+        if (player == null) {
+            player = card.getController();
+        }
         final Game game = card == null ? null : card.getGame();
         String changedDef = (def == null) ? "You" : applyAbilityTextChangeEffects(def, sa); // default to Self
         final String[] incR = changedDef.split("\\.", 2);
