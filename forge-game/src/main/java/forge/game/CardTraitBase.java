@@ -503,13 +503,13 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         }
 
         if (params.containsKey("WerewolfTransformCondition")) {
-            if (!game.getStack().getSpellsCastLastTurn().isEmpty()) {
+            if (!game.getStack().getSpellCardsCastLastTurn().isEmpty()) {
                 return false;
             }
         }
 
         if (params.containsKey("WerewolfUntransformCondition")) {
-            final List<Card> casted = game.getStack().getSpellsCastLastTurn();
+            final List<Card> casted = game.getStack().getSpellCardsCastLastTurn();
             if (game.getPlayers().stream().noneMatch(p -> CardLists.count(casted, CardPredicates.isController(p)) > 1)) {
                 return false;
             }

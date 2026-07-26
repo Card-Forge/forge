@@ -17,6 +17,8 @@
  */
 package forge.game.zone;
 
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -71,8 +73,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private boolean frozen = false;
     private boolean bResolving = false;
 
-    private final List<SpellAbility> thisTurnCast = Lists.newArrayList();
-    private List<Card> lastTurnCast = Lists.newArrayList();
+    private final ListMultimap<Player, SpellAbility> thisTurnCast = LinkedListMultimap.create();
+    private final ListMultimap<Player, SpellAbility> thisGameCast = LinkedListMultimap.create();
+    private ListMultimap<Player, SpellAbility> lastTurnCast = LinkedListMultimap.create();
     private final List<SpellAbility> thisTurnActivated = Lists.newArrayList();
 
     private Card curResolvingCard = null;
@@ -101,6 +104,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         primaryAbility = null;
         lastTurnCast.clear();
         thisTurnCast.clear();
+        thisGameCast.clear();
         thisTurnActivated.clear();
         curResolvingCard = null;
         frozenStack.clear();
@@ -363,7 +367,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (sp.isSpell() && !sp.isCopied()) {
             final Card lki = sp.equals(source.getCastSA()) ? source.getCastSA().getHostCard() : CardCopyService.getLKICopy(source);
             runParams.put(AbilityKey.CardLKI, lki);
-            thisTurnCast.add(sp.equals(source.getCastSA()) ? source.getCastSA() : sp.copy(lki, true));
+            SpellAbility spLki = sp.equals(source.getCastSA()) ? source.getCastSA() : sp.copy(lki, true);
+            thisTurnCast.put(sp.getActivatingPlayer(), spLki);
+            thisGameCast.put(sp.getActivatingPlayer(), spLki);
             sp.getActivatingPlayer().addSpellCastThisTurn();
 
             // Add expend mana
@@ -916,14 +922,23 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return false;
     }
 
-    public final List<SpellAbility> getSpellsCastThisTurn() {
+    public final ListMultimap<Player, SpellAbility> getSpellsCastThisTurn() {
         return thisTurnCast;
     }
     public final List<Card> getSpellCardsCastThisTurn() {
-        return thisTurnCast.stream().map(SpellAbility::getHostCard).collect(Collectors.toList());
+        return thisTurnCast.values().stream().map(SpellAbility::getHostCard).collect(Collectors.toList());
     }
-    public final List<Card> getSpellsCastLastTurn() {
+    public final ListMultimap<Player, SpellAbility> getSpellsCastLastTurn() {
         return lastTurnCast;
+    }
+    public final List<Card> getSpellCardsCastLastTurn() {
+        return lastTurnCast.values().stream().map(SpellAbility::getHostCard).collect(Collectors.toList());
+    }
+    public final ListMultimap<Player, SpellAbility> getSpellsCastThisGame() {
+        return thisGameCast;
+    }
+    public final List<Card> getSpellCardsCastThisGame() {
+        return thisGameCast.values().stream().map(SpellAbility::getHostCard).collect(Collectors.toList());
     }
 
     public final void onNextTurn() {
@@ -932,14 +947,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         this.thisTurnActivated.clear();
         active.resetSpellCastSinceBegOfYourLastTurn();
         if (thisTurnCast.isEmpty()) {
-            lastTurnCast = Lists.newArrayList();
+            lastTurnCast = LinkedListMultimap.create();
             return;
         }
         List<Card> thisTurnCastCards = getSpellCardsCastThisTurn();
         for (Player player : game.getPlayers()) {
             player.addSpellCastSinceBegOfYourLastTurn(thisTurnCastCards);
         }
-        lastTurnCast = Lists.newArrayList(thisTurnCastCards);
+        lastTurnCast = LinkedListMultimap.create(thisTurnCast);
         this.thisTurnCast.clear();
         game.updateStackForView();
     }

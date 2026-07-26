@@ -2758,15 +2758,18 @@ public class AbilityUtils {
         }
 
         // Count$ThisTurnCast <Valid>
+        // Count$ThisGameCast <Valid>
         // Count$LastTurnCast <Valid>
         // Count$CastSinceBeginningOfYourLastTurn_<Valid>
-        if (sq[0].startsWith("ThisTurnCast") || sq[0].startsWith("LastTurnCast") 
+        if (sq[0].startsWith("ThisTurnCast") || sq[0].startsWith("ThisGameCast") || sq[0].startsWith("LastTurnCast")
             || sq[0].startsWith("CastSince")) {
             final String[] workingCopy = paidparts[0].split("_");
             final String validFilter = workingCopy[1];
 
-            if (workingCopy[0].contains("This")) {
+            if (workingCopy[0].contains("ThisTurn")) {
                 someCards = CardUtil.getThisTurnCast(validFilter, c, ctb, player);
+            } else if (workingCopy[0].contains("ThisGame")) {
+                someCards = CardUtil.getThisGameCast(validFilter, c, ctb, player);
             } else if (workingCopy[0].contains("SinceBeginningOfYourLastTurn")) {
                 someCards = CardUtil.getCastSinceBeginningOfYourLastTurn(validFilter, c, ctb, player);
             } else {
