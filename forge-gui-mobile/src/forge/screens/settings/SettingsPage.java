@@ -39,6 +39,10 @@ import forge.util.Utils;
 import java.util.*;
 
 public class SettingsPage extends TabPage<SettingsScreen> {
+    private static final String DISPLAY_MODE_WINDOWED = "Windowed";
+    private static final String DISPLAY_MODE_FULLSCREEN = "Fullscreen";
+    private static final String DISPLAY_MODE_BORDERLESS = "Borderless Fullscreen";
+
     private final FTextField txtSearch = add(new FTextField());
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
     private final CustomSelectSetting settingSkins;
@@ -140,42 +144,35 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("lblMinimizeScreenLock"),
                 Forge.getLocalizer().getMessage("nlMinimizeScreenLock")), 0);*/
         } else {
-            //fullscreen
-            lstSettings.addItem(new BooleanSetting(FPref.UI_FULLSCREEN_MODE,
-                Forge.getLocalizer().getMessage("lblFullScreenMode"),
-                Forge.getLocalizer().getMessage("nlFullScreenMode")) {
+            //display mode
+            // Borderless fullscreen is offered on macOS only until it has been validated on other platforms.
+            String[] displayModes = OperatingSystem.isMac()
+                ? new String[]{DISPLAY_MODE_WINDOWED, DISPLAY_MODE_FULLSCREEN, DISPLAY_MODE_BORDERLESS}
+                : new String[]{DISPLAY_MODE_WINDOWED, DISPLAY_MODE_FULLSCREEN};
+            lstSettings.addItem(new CustomSelectSetting(FPref.UI_FULLSCREEN_MODE,
+                Forge.getLocalizer().getMessageorUseDefault("lblDisplayMode", "Display Mode"),
+                Forge.getLocalizer().getMessageorUseDefault("nlDisplayMode", "Select the display mode used at launch."),
+                displayModes) {
                     @Override
-                    public void select() {
-                        super.select();
-                        boolean value = FModel.getPreferences().getPrefBoolean(FPref.UI_FULLSCREEN_MODE);
-                        Config.instance().getSettingData().fullScreen = value;
-                        if (value && OperatingSystem.isMac()) {
-                            FModel.getPreferences().setPref(FPref.UI_BORDERLESS_FULLSCREEN_MODE, false);
-                            FModel.getPreferences().save();
-                            Config.instance().getSettingData().borderlessFullScreen = false;
-                        }
+                    protected String getSelectedValue() {
+                        if (OperatingSystem.isMac() && FModel.getPreferences().getPrefBoolean(FPref.UI_BORDERLESS_FULLSCREEN_MODE))
+                            return DISPLAY_MODE_BORDERLESS;
+                        return FModel.getPreferences().getPrefBoolean(FPref.UI_FULLSCREEN_MODE)
+                            ? DISPLAY_MODE_FULLSCREEN : DISPLAY_MODE_WINDOWED;
+                    }
+
+                    @Override
+                    public void valueChanged(String newValue) {
+                        boolean fullScreenMode = DISPLAY_MODE_FULLSCREEN.equals(newValue);
+                        boolean borderlessFullScreenMode = DISPLAY_MODE_BORDERLESS.equals(newValue);
+                        FModel.getPreferences().setPref(FPref.UI_FULLSCREEN_MODE, fullScreenMode);
+                        FModel.getPreferences().setPref(FPref.UI_BORDERLESS_FULLSCREEN_MODE, borderlessFullScreenMode);
+                        FModel.getPreferences().save();
+                        Config.instance().getSettingData().fullScreen = fullScreenMode;
+                        Config.instance().getSettingData().borderlessFullScreen = borderlessFullScreenMode;
                         Config.instance().saveSettings();
                     }
                 }, 0);
-            // Borderless fullscreen is offered on macOS only until it has been validated on other platforms.
-            if (OperatingSystem.isMac()) {
-                lstSettings.addItem(new BooleanSetting(FPref.UI_BORDERLESS_FULLSCREEN_MODE,
-                    Forge.getLocalizer().getMessage("lblBorderlessFullScreenMode"),
-                    Forge.getLocalizer().getMessage("nlBorderlessFullScreenMode")) {
-                        @Override
-                        public void select() {
-                            super.select();
-                            boolean value = FModel.getPreferences().getPrefBoolean(FPref.UI_BORDERLESS_FULLSCREEN_MODE);
-                            Config.instance().getSettingData().borderlessFullScreen = value;
-                            if (value) {
-                                FModel.getPreferences().setPref(FPref.UI_FULLSCREEN_MODE, false);
-                                FModel.getPreferences().save();
-                                Config.instance().getSettingData().fullScreen = false;
-                            }
-                            Config.instance().saveSettings();
-                        }
-                    }, 0);
-            }
             lstSettings.addItem(new CustomSelectSetting(FPref.UI_VIDEO_MODE,
                 Forge.getLocalizer().getMessage("lblVideoMode"),
                 Forge.getLocalizer().getMessage("nlVideoMode"),
@@ -868,6 +865,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
         }
 
+        protected String getSelectedValue() {
+            if(pref instanceof FPref) {
+                return FModel.getPreferences().getPref((FPref)pref);
+            } else if(pref instanceof ForgeNetPreferences.FNetPref) {
+                return FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref)pref);
+            }
+            return "";
+        }
+
         public void updateOptions(Iterable<String> options0) {
             options.clear();
             if (options0 != null) {
@@ -888,13 +894,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
             private CustomSelectScreen() {
                 super("Select " + label.substring(0, label.length() - 1));
-                if(pref instanceof FPref) {
-                    currentValue = FModel.getPreferences().getPref((FPref) pref);
-                } else if(pref instanceof ForgeNetPreferences.FNetPref) {
-                    currentValue = FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref) pref);
-                } else {
-                    currentValue = null;
-                }
+                currentValue = getSelectedValue();
                 lstOptions = add(new FList<>(options));
                 lstOptions.setListItemRenderer(new FList.DefaultListItemRenderer<String>() {
                     @Override
@@ -943,15 +943,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
         @Override
         public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
-            String value;
-            if(pref instanceof FPref) {
-                value = FModel.getPreferences().getPref((FPref)pref);
-            } else if(pref instanceof ForgeNetPreferences.FNetPref) {
-                value = FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref)pref);
-            } else {
-                value = "";
-            }
-            g.drawText(value, font, color, x, y, w, h, false, Align.right, false);
+            g.drawText(getSelectedValue(), font, color, x, y, w, h, false, Align.right, false);
         }
     }
 
