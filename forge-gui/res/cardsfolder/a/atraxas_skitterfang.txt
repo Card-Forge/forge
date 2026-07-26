@@ -2,7 +2,7 @@ Name:Atraxa's Skitterfang
 ManaCost:3
 Types:Artifact Creature Phyrexian Insect
 PT:2/2
-K:etbCounter:OIL:3
+K:etbCounter:OIL:3:no Condition:This creature enters with three oil counters on it.
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ DBTrigger | TriggerDescription$ At the beginning of combat on your turn, you may remove an oil counter from this creature. When you do, target creature you control gains your choice of flying, vigilance, deathtouch, or lifelink until end of turn.
 SVar:DBTrigger:AB$ ImmediateTrigger | Cost$ SubCounter<1/OIL> | Execute$ TrigPump | TriggerDescription$ When you do, target creature you control gains your choice of flying, vigilance, deathtouch, or lifelink until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select a target creature you control | KWChoice$ Flying,Vigilance,Deathtouch,Lifelink

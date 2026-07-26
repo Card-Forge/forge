@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Phyrexian Demon
 PT:6/6
 K:Flying
-K:etbCounter:OIL:4
+K:etbCounter:OIL:4:no Condition:This creature enters with four oil counters on it.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCtr | TriggerDescription$ At the beginning of your upkeep, remove an oil counter from this creature. Then if it has no oil counters on it, you lose the game.
 SVar:TrigRemoveCtr:DB$ RemoveCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1 | SubAbility$ LoseGame
 SVar:LoseGame:DB$ LosesGame | Defined$ You | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_OIL

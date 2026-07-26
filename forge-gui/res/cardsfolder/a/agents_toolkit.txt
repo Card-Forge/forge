@@ -1,7 +1,7 @@
 Name:Agent's Toolkit
 ManaCost:1 G U
 Types:Artifact Clue
-K:etbCounter:EACH P1P1,Flying,Deathtouch,SHIELD:1:no Condition:CARDNAME enters with a +1/+1 counter, a flying counter, a deathtouch counter, and a shield counter on it.
+K:etbCounter:EACH P1P1,Flying,Deathtouch,SHIELD:1:no Condition:This artifact enters with a +1/+1 counter, a flying counter, a deathtouch counter, and a shield counter on it.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMoveCounter | TriggerDescription$ Whenever a creature you control enters, you may move a counter from this artifact onto that creature.
 SVar:TrigMoveCounter:DB$ MoveCounter | Source$ Self | Defined$ TriggeredCardLKICopy | CounterType$ Any
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | SpellDescription$ Draw a card.

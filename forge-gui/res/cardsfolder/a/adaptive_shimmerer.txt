@@ -3,6 +3,6 @@ ManaCost:5
 Types:Creature Insect
 PT:0/0
 K:Flash
-K:etbCounter:P1P1:3
+K:etbCounter:P1P1:3:no Condition:This creature enters with three +1/+1 counters on it.
 DeckHas:Ability$Counters
 Oracle:Flash\nThis creature enters with three +1/+1 counters on it.

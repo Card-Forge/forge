@@ -2,7 +2,7 @@ Name:Anthroplasm
 ManaCost:2 U U
 Types:Creature Shapeshifter
 PT:0/0
-K:etbCounter:P1P1:2
+K:etbCounter:P1P1:2:no Condition:This creature enters with two +1/+1 counters on it.
 A:AB$ RemoveCounter | Cost$ X T | CounterType$ P1P1 | CounterNum$ All | SpellDescription$ Remove all +1/+1 counters from this creature and put X +1/+1 counters on it. | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$xPaid
