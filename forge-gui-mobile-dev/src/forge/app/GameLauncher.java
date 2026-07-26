@@ -133,12 +133,14 @@ public class GameLauncher {
             public void focusGained() {
                 super.focusGained();
                 SoundSystem.instance.setWindowFocus(true);
+                Forge.setWindowFocus(true);
             }
 
             @Override
             public void focusLost() {
                 super.focusLost();
                 SoundSystem.instance.setWindowFocus(false);
+                Forge.setWindowFocus(false);
             }
         });
 

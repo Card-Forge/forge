@@ -35,18 +35,27 @@ public abstract class Scene implements Disposable {
 
         @Override
         public boolean buttonDown(Controller controller, int i) {
+            if (!Forge.shouldAcceptControllerInput()) {
+                return false;
+            }
             Scene scene = Forge.getCurrentScene();
             return scene != null && scene.buttonDown(controller, i);
         }
 
         @Override
         public boolean buttonUp(Controller controller, int i) {
+            if (!Forge.shouldAcceptControllerInput()) {
+                return false;
+            }
             Scene scene = Forge.getCurrentScene();
             return scene != null && scene.buttonUp(controller, i);
         }
 
         @Override
         public boolean axisMoved(Controller controller, int i, float v) {
+            if (!Forge.shouldAcceptControllerInput()) {
+                return false;
+            }
             Scene scene = Forge.getCurrentScene();
             return scene != null && scene.axisMoved(controller, i, v);
         }

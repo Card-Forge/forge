@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import forge.adventure.scene.*;
 import forge.adventure.stage.MapStage;
+import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
@@ -73,6 +74,7 @@ public class Forge implements ApplicationListener {
     private static ControllerListener controllerListener;
     private static boolean hasGamepad = false;
     private static boolean lastInputWasController = false;
+    private static boolean hasWindowFocus = true;
     public static Texture lastPreview = null;
     protected static SplashScreen splashScreen;
     protected static ClosingScreen closingScreen;
@@ -285,6 +287,33 @@ public class Forge implements ApplicationListener {
             return hasGamepad && isLandscapeMode(); //portrait is not supported for Gamepad
         }
         return false;
+    }
+
+    public static boolean hasWindowFocus() {
+        return hasWindowFocus;
+    }
+
+    public static void setWindowFocus(boolean focused) {
+        if (hasWindowFocus == focused) {
+            return;
+        }
+        hasWindowFocus = focused;
+        if (!focused) {
+            haltControllerInput();
+        }
+    }
+
+    /** Gamepad backends deliver input without OS focus gating; reject when unfocused. */
+    public static boolean shouldAcceptControllerInput() {
+        return hasWindowFocus;
+    }
+
+    private static void haltControllerInput() {
+        if (!isMobileAdventureMode) {
+            return;
+        }
+        WorldStage.getInstance().stop();
+        MapStage.getInstance().stop();
     }
 
     public static boolean lastInputWasController() {
@@ -1056,6 +1085,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void pause() {
+        setWindowFocus(false);
         if (MatchController.getHostedMatch() != null) {
             MatchController.getHostedMatch().pause();
         }
@@ -1063,6 +1093,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resume() {
+        setWindowFocus(true);
         try {
             Texture.setAssetManager(getAssets().manager());
             needsUpdate = true;
@@ -1569,6 +1600,9 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean buttonDown(Controller controller, int buttonIndex) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: "+buttonIndex);
+                    if (!shouldAcceptControllerInput()) {
+                        return false;
+                    }
                     hasGamepad = true;
                     lastInputWasController = true;
                     translateButtons(controller, buttonIndex, true);
@@ -1577,6 +1611,9 @@ public class Forge implements ApplicationListener {
 
                 @Override
                 public boolean buttonUp(Controller controller, int buttonIndex) {
+                    if (!shouldAcceptControllerInput()) {
+                        return false;
+                    }
                     hasGamepad = true;
                     translateButtons(controller, buttonIndex, false);
                     return super.buttonUp(controller, buttonIndex);
@@ -1585,6 +1622,9 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean axisMoved(Controller controller, int axisIndex, float value) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: axis: "+axisIndex+" - "+value);
+                    if (!shouldAcceptControllerInput()) {
+                        return false;
+                    }
                     hasGamepad = true;
                     // Axis deadzone filters joystick drift from counting
                     if (Math.abs(value) > 0.25f) {
