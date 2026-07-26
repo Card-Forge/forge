@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Insect Mutant
 PT:0/0
 K:Flying
-K:etbCounter:P1P1:5
+K:etbCounter:P1P1:5:no Condition:This creature enters with five +1/+1 counters on it.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self+counters_GE1_P1P1 | ReplaceWith$ Counters | PreventionEffect$ True | AlwaysReplace$ True | Description$ If damage would be dealt to this creature while it has a +1/+1 counter on it, prevent that damage, remove that many +1/+1 counters from it, then give each player a rad counter for each +1/+1 counter removed this way.
 SVar:Counters:DB$ RemoveCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ Y | RememberAmount$ True | SubAbility$ DBRadiation
 SVar:DBRadiation:DB$ Radiation | Defined$ Player | Num$ Z | SubAbility$ DBCleanup

@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Human Ninja
 PT:3/3
 K:Ninjutsu:2 B
-K:etbCounter:Menace:1
+K:etbCounter:Menace:1:no Condition:This creature enters with a menace counter on it.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigImmediateTrig | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, you may remove a menace counter from it. When you do, that player reveals their hand and you choose a nonland card from it. Exile that card.
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ SubCounter<1/Menace> | Execute$ TrigReveal | TriggerDescription$ When you do, that player reveals their hand and you choose a nonland card from it. Exile that card.
 SVar:TrigReveal:DB$ RevealHand | Defined$ Spawner>TriggeredTarget | SubAbility$ DBExile

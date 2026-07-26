@@ -2,7 +2,7 @@ Name:Bladed Ambassador
 ManaCost:1 W
 Types:Creature Phyrexian Soldier
 PT:3/1
-K:etbCounter:OIL:1
+K:etbCounter:OIL:1:no Condition:This creature enters with an oil counter on it.
 A:AB$ Pump | Cost$ 1 SubCounter<1/OIL> | KW$ Indestructible | SpellDescription$ This creature gains indestructible until end of turn.
 DeckHas:Ability$Counters
 Oracle:This creature enters with an oil counter on it.\n{1}, Remove an oil counter from this creature: This creature gains indestructible until end of turn.

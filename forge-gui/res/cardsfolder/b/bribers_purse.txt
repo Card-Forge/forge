@@ -1,7 +1,7 @@
 Name:Briber's Purse
 ManaCost:X
 Types:Artifact
-K:etbCounter:GEM:X
+K:etbCounter:GEM:X:no Condition:This artifact enters with X gem counters on it.
 SVar:X:Count$xPaid
 A:AB$ Pump | Cost$ 1 T SubCounter<1/GEM> | ValidTgts$ Creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't attack or block. | SpellDescription$ Target creature can't attack or block this turn.
 SVar:NeedsToPlayVar:Z GE4

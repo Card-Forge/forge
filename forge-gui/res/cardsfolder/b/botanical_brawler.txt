@@ -3,7 +3,7 @@ ManaCost:G W
 Types:Creature Elemental Warrior
 PT:0/0
 K:Trample
-K:etbCounter:P1P1:2
+K:etbCounter:P1P1:2:no Condition:This creature enters with two +1/+1 counters on it.
 T:Mode$ CounterAddedOnce | ValidCard$ Permanent.Other+YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | CounterType$ P1P1 | FirstTime$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more +1/+1 counters are put on another permanent you control, if it's the first time +1/+1 counters have been put on that permanent this turn, put a +1/+1 counter on this creature.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters

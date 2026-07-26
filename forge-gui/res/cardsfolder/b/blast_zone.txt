@@ -1,7 +1,7 @@
 Name:Blast Zone
 ManaCost:no cost
 Types:Land
-K:etbCounter:CHARGE:1
+K:etbCounter:CHARGE:1:no Condition:This land enters with a charge counter on it.
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ PutCounter | Cost$ X X T | CounterType$ CHARGE | CounterNum$ X | SpellDescription$ Put X charge counters on this land.
 SVar:X:Count$xPaid
