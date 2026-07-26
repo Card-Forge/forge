@@ -1,0 +1,8 @@
+Name:Namora, the Sea Queen
+ManaCost:2 U
+Types:Legendary Creature Mutant Merfolk Hero
+PT:2/3
+K:Flying
+A:AB$ PutCounter | Cost$ 5 U | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | PowerUp$ True | SubAbility$ DBToken | SpellDescription$ Put a +1/+1 counter on NICKNAME. Create two 1/1 blue Merfolk creature tokens. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_merfolk | TokenOwner$ You
+Oracle:Flying\nPower-up — {5}{U}: Put a +1/+1 counter on Namora. Create two 1/1 blue Merfolk creature tokens. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)

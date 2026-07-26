@@ -1,0 +1,11 @@
+Name:Elrond, Moon-Reader
+ManaCost:2 U
+Types:Legendary Creature Elf Noble
+PT:3/3
+T:Mode$ AbilityCast | ValidCard$ Creature.inZoneBattlefield | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever you activate an ability of a creature, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+A:AB$ ChangeZone | Cost$ 5 U U | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+YouCtrl+Other | ValidTgtsDesc$ another nonland permanent you control | TargetMin$ 0 | TargetMax$ 2 | RememberChanged$ True | SubAbility$ DelTrig | SpellDescription$ Exile up to two other target nonland permanents you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ RememberedLKI | TriggerDescription$ Return exiled cards to the battlefield. | SubAbility$ DBCleanup
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever you activate an ability of a creature, draw a card. This ability triggers only once each turn.\n{5}{U}{U}: Exile up to two other target nonland permanents you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.

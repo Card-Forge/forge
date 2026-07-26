@@ -1,0 +1,8 @@
+Name:Count Nefaria
+ManaCost:6 B
+Types:Legendary Creature Human Villain
+PT:6/6
+S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 3 | CheckSVar$ X | Description$ This spell costs {3} less to cast if you've sacrificed a permanent this turn.
+K:Flying
+SVar:X:PlayerCountPropertyYou$SacrificedThisTurn Permanent
+Oracle:This spell costs {3} less to cast if you've sacrificed a permanent this turn.\nFlying

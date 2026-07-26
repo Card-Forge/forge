@@ -1,0 +1,7 @@
+Name:Fall to Earth
+ManaCost:4 W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature. Each player gains 3 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ Player | LifeAmount$ 3
+K:TypeCycling:Basic:2
+Oracle:Exile target creature. Each player gains 3 life.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

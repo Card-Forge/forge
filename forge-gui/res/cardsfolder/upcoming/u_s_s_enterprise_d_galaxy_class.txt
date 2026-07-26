@@ -1,0 +1,12 @@
+Name:U.S.S. Enterprise-D, Galaxy-Class
+ManaCost:3
+Types:Legendary Artifact Spacecraft
+PT:4/5
+K:Station:7
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ CHARGE | FirstTime$ True | Execute$ TrigExile | TriggerDescription$ Whenever one or more charge counters are put on NICKNAME for the first time each turn, exile the top card of your library. You may play that card this turn.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE7_CHARGE | AddType$ Creature | AddKeyword$ Flying & Vigilance | Description$ STATION 7+ Flying, vigilance
+Oracle:Whenever one or more charge counters are put on U.S.S. Enterprise-D for the first time each turn, exile the top card of your library. You may play that card this turn.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.)\nSTATION 7+\nFlying, vigilance

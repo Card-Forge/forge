@@ -45,7 +45,6 @@ import forge.screens.workshop.views.VWorkshopCatalog;
 public enum EDocID {
     CARD_PICTURE (),
     CARD_DETAIL (),
-    CARD_ANTES (),
 
     EDITOR_ALLDECKS (VAllDecks.SINGLETON_INSTANCE),
     EDITOR_STATISTICS (VStatistics.SINGLETON_INSTANCE),

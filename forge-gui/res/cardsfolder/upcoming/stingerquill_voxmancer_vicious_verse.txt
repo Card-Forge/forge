@@ -1,0 +1,16 @@
+Name:Stingerquill Voxmancer
+ManaCost:BR
+Types:Creature Goblin Sorcerer
+PT:1/2
+T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ Count$ValidSelf Card.!IsPrepared | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPrepare | TriggerDescription$ At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Vicious Verse
+ManaCost:BR
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target opponent
+Oracle:Vicious Verse deals 1 damage to target opponent.

@@ -26,6 +26,7 @@ import forge.gui.interfaces.IGuiGame;
 import forge.gui.util.SOptionPane;
 import forge.interfaces.IGameController;
 import forge.interfaces.ILobbyListener;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.util.BuildInfo;
@@ -437,6 +438,8 @@ public final class FServerManager implements IHasForgeLog {
     }
 
     public void updateLobbyState() {
+        localLobby.getData().setMaximumCommanderBracket(
+                FModel.getPreferences().getPrefInt(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET));
         final LobbyUpdateEvent event = new LobbyUpdateEvent(localLobby.getData());
         broadcast(event);
     }
@@ -672,14 +675,14 @@ public final class FServerManager implements IHasForgeLog {
     }
 
     private void mapNatPort() {
-        final String localAddress = getLocalAddress();
-        final PortMapping portMapping = new PortMapping(port, localAddress, PortMapping.Protocol.TCP, "Forge");
-        // Shutdown existing UPnP service if already running
-        if (upnpService != null) {
-            upnpService.shutdown();
-        }
-
         try {
+            final String localAddress = getLocalAddress();
+            final PortMapping portMapping = new PortMapping(port, localAddress, PortMapping.Protocol.TCP, "Forge");
+            // Shutdown existing UPnP service if already running
+            if (upnpService != null) {
+                upnpService.shutdown();
+            }
+
             // Create a new UPnP service instance
             upnpService = new UpnpServiceImpl(GuiBase.getInterface().getUpnpPlatformService());
             upnpService.startup();
@@ -699,8 +702,14 @@ public final class FServerManager implements IHasForgeLog {
                     }
                 }
             }, 5000);
-        } catch (Exception e) {
-            netLog.error(e, "UPnP mapping error");
+        } catch (LinkageError | Exception e) {
+            // UPnP port mapping is optional (it makes the host reachable from the
+            // internet; LAN/direct hosting works without it). jupnp is unavailable
+            // on iOS/MobiVM (provided scope, no platform UPnP service), so the
+            // PortMapping/UpnpService classes fail to load - NoClassDefFoundError
+            // is a LinkageError and degrades gracefully instead of killing hosting,
+            // while fatal Errors (OutOfMemoryError etc.) still propagate.
+            netLog.error(e, "UPnP mapping unavailable");
         }
     }
 

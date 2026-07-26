@@ -1,5 +1,6 @@
 package forge.gui.card;
 
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
@@ -340,7 +341,7 @@ public class CardDetailUtil {
             for (final Entry<String, String> e : Sets.union(changedColorWords.entrySet(), changedTypes.entrySet())) {
                 area.append("Text changed: all instances of ");
                 if (e.getKey().equals("Any")) {
-                    if (changedColorWords.containsKey(e.getValue())) {
+                    if (changedColorWords.containsValue(e.getValue())) {
                         area.append("color words");
                     } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
                         area.append("basic land types");
@@ -364,11 +365,11 @@ public class CardDetailUtil {
 
         // counter text
         if (card.getCounters() != null) {
-            for (final Entry<CounterType, Integer> c : card.getCounters().entrySet()) {
-                if (c.getValue() != 0) {
+            for (final Multiset.Entry<CounterType> c : card.getCounters().entrySet()) {
+                if (c.getCount() != 0) {
                     area.append("\n");
-                    area.append(c.getKey().getName()).append(" counters: ");
-                    area.append(c.getValue());
+                    area.append(c.getElement().getName()).append(" counters: ");
+                    area.append(c.getCount());
                 }
             }
         }
@@ -593,6 +594,12 @@ public class CardDetailUtil {
             area.append(StringUtils.join(card.getExiledCards(), ", "));
         }
 
+        // TODO don't print both if identical
+        if (!card.getUntilLeavesBattlefield().isEmpty()) {
+            area.append("\n");
+            area.append("Exiled until this leaves the battlefield: ").append(card.getUntilLeavesBattlefield());
+        }
+
         // Haunt
         if (!card.getHauntedBy().isEmpty()) {
             area.append("\n");
@@ -608,11 +615,6 @@ public class CardDetailUtil {
         if (!card.getEncodedCards().isEmpty()) {
             area.append("\n");
             area.append("Encoded: ").append(card.getEncodedCards());
-        }
-
-        if (!card.getUntilLeavesBattlefield().isEmpty()) {
-            area.append("\n");
-            area.append("Exiled until this leaves the battlefield: ").append(card.getUntilLeavesBattlefield());
         }
 
         // must block

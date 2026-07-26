@@ -1,0 +1,10 @@
+Name:M'Baku, Jabari Chieftain
+ManaCost:1 G G
+Types:Legendary Creature Human Noble Warrior
+PT:4/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigMonarch | TriggerZones$ Battlefield | CheckSVar$ NoMonarch | SVarCompare$ EQ0 | TriggerDescription$ At the beginning of your end step, if there is no monarch, target opponent becomes the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | ValidTgts$ Opponent
+SVar:NoMonarch:PlayerCountPlayers$HasPropertyisMonarch
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ Player.Opponent+isMonarch | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature attacks one of your opponents, if that player is the monarch, that creature gets +1/+1 and gains trample until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | ConditionPlayerDefined$ TriggeredDefendingPlayer | ConditionPlayerContains$ Player.isMonarch | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
+Oracle:At the beginning of your end step, if there is no monarch, target opponent becomes the monarch.\nWhenever a creature attacks one of your opponents, if that player is the monarch, that creature gets +1/+1 and gains trample until end of turn.
