@@ -73,6 +73,8 @@ Need help? Join our vibrant Discord community!
 - 📜 Read the **#rules** and explore the **FAQ**.
 - ❓ Ask your questions in the **#help** channel for assistance.
 
+https://discord.gg/dgX9PRG7v
+
 ---
 
 ## 🤝 Contributing to Forge
