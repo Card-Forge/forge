@@ -76,17 +76,7 @@ public abstract class SpellAbilityAi {
         return canPlayWithoutRestrict(ai, sa);
     }
 
-    protected AiAbilityDecision canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
-        return canPlayWithoutRestrict(ai, sa, true);
-    }
-
-    /**
-     * @param checkCosts whether to apply {@link #willPayCosts} here. The trigger path passes false
-     * and applies it in {@link #doTriggerNoCostWithSubs} instead, so that a trigger whose AI class
-     * overrides {@link #doTriggerNoCost} - and so never arrives here - is still gated exactly once.
-     */
-    private AiAbilityDecision canPlayWithoutRestrict(final Player ai, final SpellAbility sa,
-            final boolean checkCosts) {
+    private AiAbilityDecision canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
 
         if (sa.hasParam("AILogic")) {
@@ -112,7 +102,7 @@ public abstract class SpellAbilityAi {
 
         // needs to be after API logic because needs to check possible X Cost
         final Cost cost = sa.getPayCosts();
-        if (checkCosts && cost != null && !willPayCosts(ai, sa, cost, source)) {
+        if (!sa.isTrigger() && cost != null && !willPayCosts(ai, sa, cost, source)) {
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
 
@@ -184,8 +174,7 @@ public abstract class SpellAbilityAi {
     }
 
     public final boolean doTrigger(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        // this evaluation order is currently intentional as it does more stuff that helps avoiding some crashes
-        if (!ComputerUtilCost.canPayCost(sa, aiPlayer, true) && !mandatory) {
+        if (!mandatory && !(sa instanceof AbilitySub) && !ComputerUtilCost.canPayCost(sa, aiPlayer, true)) {
             return false;
         }
 
@@ -200,19 +189,15 @@ public abstract class SpellAbilityAi {
     public final AiAbilityDecision doTriggerNoCostWithSubs(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         AiAbilityDecision decision = doTriggerNoCost(aiPlayer, sa, mandatory);
 
-        // An optional trigger has to respect the AI's cost wisdom and not just affordability, the
-        // way the activated path does in canPlayWithoutRestrict. It cannot be checked there for a
-        // trigger, because the 109 AI classes that override doTriggerNoCost never reach it, so it
-        // happens here: once for every class, and after the API logic that announces X.
-        if (decision.willingToPlay() && !mandatory && sa.getPayCosts() != null) {
-            if (!willPayCosts(aiPlayer, sa, sa.getPayCosts(), sa.getHostCard())) {
-                return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
-            }
-        }
-
         if (!decision.willingToPlay() && !"Always".equals(sa.getParam("AILogic"))) {
             return decision;
         }
+
+        if (decision.willingToPlay() && !mandatory && sa.getPayCosts() != null &&
+                !willPayCosts(aiPlayer, sa, sa.getPayCosts(), sa.getHostCard())) {
+            return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
+        }
+
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb == null) {
             if (decision.willingToPlay()) {
@@ -238,7 +223,7 @@ public abstract class SpellAbilityAi {
      * Handles the AI decision to play a triggered SpellAbility
      */
     protected AiAbilityDecision doTriggerNoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        AiAbilityDecision decision = canPlayWithoutRestrict(aiPlayer, sa, false);
+        AiAbilityDecision decision = canPlayWithoutRestrict(aiPlayer, sa);
         if (decision.willingToPlay() && (!mandatory || sa.isTargetNumberValid())) {
             // This is a weird check. Why do we care if its not mandatory if we WANT to do it?
             return decision;

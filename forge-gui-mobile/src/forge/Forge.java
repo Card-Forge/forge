@@ -74,7 +74,6 @@ public class Forge implements ApplicationListener {
     private static ControllerListener controllerListener;
     private static boolean hasGamepad = false;
     private static boolean lastInputWasController = false;
-    private static boolean hasWindowFocus = true;
     public static Texture lastPreview = null;
     protected static SplashScreen splashScreen;
     protected static ClosingScreen closingScreen;
@@ -289,15 +288,11 @@ public class Forge implements ApplicationListener {
         return false;
     }
 
-    public static boolean hasWindowFocus() {
-        return hasWindowFocus;
-    }
-
     public static void setWindowFocus(boolean focused) {
-        if (hasWindowFocus == focused) {
+        if (SoundSystem.instance.hasWindowFocus() == focused) {
             return;
         }
-        hasWindowFocus = focused;
+        SoundSystem.instance.setWindowFocus(focused);
         if (!focused) {
             haltControllerInput();
         }
@@ -1595,7 +1590,7 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean buttonDown(Controller controller, int buttonIndex) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: "+buttonIndex);
-                    if (!hasWindowFocus()) {
+                    if (!SoundSystem.instance.hasWindowFocus()) {
                         return false;
                     }
                     hasGamepad = true;
@@ -1606,7 +1601,7 @@ public class Forge implements ApplicationListener {
 
                 @Override
                 public boolean buttonUp(Controller controller, int buttonIndex) {
-                    if (!hasWindowFocus()) {
+                    if (!SoundSystem.instance.hasWindowFocus()) {
                         return false;
                     }
                     hasGamepad = true;
@@ -1617,7 +1612,7 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean axisMoved(Controller controller, int axisIndex, float value) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: axis: "+axisIndex+" - "+value);
-                    if (!hasWindowFocus()) {
+                    if (!SoundSystem.instance.hasWindowFocus()) {
                         return false;
                     }
                     hasGamepad = true;
