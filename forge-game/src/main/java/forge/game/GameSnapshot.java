@@ -298,7 +298,12 @@ public class GameSnapshot {
 
         for(Card fromCard : fromGame.getCardsInGame()) {
             Card newCard = toGame.findById(fromCard.getId());
-            Player toPlayer = findBy(toGame, fromCard.getController());
+            // Zones belong to a player: the controller's battlefield, but the owner's
+            // graveyard, hand and library. Going by the controller alone files a card whose
+            // control has changed under the wrong player, so a stolen creature that died
+            // reappears in the thief's graveyard when the snapshot is used.
+            Player fromZonePlayer = fromCard.getZone().getPlayer();
+            Player toPlayer = findBy(toGame, fromZonePlayer != null ? fromZonePlayer : fromCard.getController());
             ZoneType fromType = fromCard.getZone().getZoneType();
             int zonePosition = 0;
             if (ZoneType.ORDERED_ZONES.contains(fromType)) {
@@ -308,8 +313,9 @@ public class GameSnapshot {
             }
 
             if (newCard == null) {
-                // Storing a game uses this path...
-                newCard = createCardCopy(toGame, toPlayer, fromCard);
+                // Storing a game uses this path... the copy keeps the original owner, which
+                // is not the same player as the one whose zone it currently sits in.
+                newCard = createCardCopy(toGame, findBy(toGame, fromCard.getOwner()), fromCard);
             } else {
                 ZoneType type = newCard.getZone().getZoneType();
                 if (type != fromType) {
