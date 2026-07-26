@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Snow Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-A:AB$ Mana | Cost$ T | Produced$ Combo W G | SpellDescription$ Add {W} or {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo W G | SpellDescription$ Add {G} or {W}.
 Oracle:This land enters tapped.\n{T}: Add {G} or {W}.
