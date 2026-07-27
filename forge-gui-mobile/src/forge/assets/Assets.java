@@ -310,10 +310,13 @@ public class Assets implements Disposable {
         return textureParameter;
     }
 
-    // Card images are opaque, so load the bundled (AssetManager) card path as RGB565 (half the RGBA8888
-    // footprint) with no mipmaps (cards are drawn ~1:1). Separate from getTextureFilter() so UI textures that
-    // need alpha/mipmaps are unaffected. Mirrors the RGB565 downscale already applied to the downloaded path.
+    // Card images are opaque. iOS is native-memory constrained, so there it loads the card path as RGB565
+    // (half the RGBA8888 footprint) with no mipmaps (cards are drawn ~1:1) — mirroring the RGB565 downscale on
+    // the downloaded path. Every other platform keeps the full-quality RGBA8888 + mipmap path (getTextureFilter),
+    // so card textures are not downgraded off iOS. Kept separate so UI textures are unaffected either way.
     public TextureParameter getCardTextureFilter() {
+        if (!GuiBase.isIOS())
+            return getTextureFilter();
         if (cardTextureParameter == null) {
             cardTextureParameter = new TextureParameter();
             cardTextureParameter.format = Pixmap.Format.RGB565;
