@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -626,8 +627,12 @@ public class UIScene extends Scene {
         if (actor == null) return;
         stage.setKeyboardFocus(actor.actor);
         ScrollPane scrollPane = scrollPaneOfActor(actor.actor);
-        if (scrollPane != null) {
-            scrollPane.scrollTo(actor.actor.getX(), actor.actor.getY(), actor.actor.getWidth(), actor.actor.getHeight(), false, false);
+        if (scrollPane != null && scrollPane.getActor() != null) {
+            // scrollTo wants the pane's own widget coordinates, and a selectable can sit deeper than that.
+            // Going via the stage also copes with the selectable being the widget itself, which
+            // localToAscendantCoordinates rejects.
+            Vector2 position = actor.actor.localToActorCoordinates(scrollPane.getActor(), new Vector2());
+            scrollPane.scrollTo(position.x, position.y, actor.actor.getWidth(), actor.actor.getHeight(), false, false);
         }
         actor.onSelect(this);
     }

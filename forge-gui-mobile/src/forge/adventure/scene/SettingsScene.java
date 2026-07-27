@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Align;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
@@ -34,8 +36,12 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class SettingsScene extends UIScene {
     private static final int TAB_COUNT = 4;
     private static final float TAB_HEIGHT = 24;
+    /** Cell padding a setting row spends around its label and its control - keep in step with the pads in addLabel/addControl. */
+    private static final float LABEL_GAP = 11;
 
     private Table settingGroup;
+    private Table settingRow;
+    private Cell<TextraLabel> labelCell;
     private final Table[] tabTables = new Table[TAB_COUNT];
     private final TextraButton[] tabButtons = new TextraButton[TAB_COUNT];
     TextraButton backButton;
@@ -106,6 +112,9 @@ public class SettingsScene extends UIScene {
 
         for (int i = 0; i < TAB_COUNT; i++)
             tabTables[i] = new Table();
+        scrollPane = ui.findActor("settings");
+        // Rows are laid out to the pane's width, so sideways scrolling only ever drags the options out of view.
+        scrollPane.setScrollingDisabled(true, false);
         selectSourcePlane = Controls.newComboBox();
         newPlaneName = Controls.newTextField("");
         selectSourcePlane.setItems(Config.instance().getAllAdventures());
@@ -132,9 +141,8 @@ public class SettingsScene extends UIScene {
             }
         });*/
         addLabel(Forge.getLocalizer().getMessage("lblWorld") + " (" + Forge.getLocalizer().getMessage("lblRestartRequired") + ")");
-        settingGroup.add(plane).align(Align.right).pad(2);
+        addControl(plane);
         //addLabel(Forge.getLocalizer().getMessage("lblCreate") + Forge.getLocalizer().getMessage("lblWorld"));
-        settingGroup.add(newPlane).align(Align.right).pad(2);
 
         if (GuiBase.isAndroid()) {
             addCheckBox(Forge.getLocalizer().getMessage("lblLandscapeMode") + " (" +
@@ -198,7 +206,7 @@ public class SettingsScene extends UIScene {
                 return null;
             });
             addLabel(Forge.getLocalizer().getMessage("lblVideoMode"));
-            settingGroup.add(videomode).align(Align.right).pad(2);
+            addControl(videomode);
             addSettingField(Forge.getLocalizer().getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -246,7 +254,7 @@ public class SettingsScene extends UIScene {
                 return null;
             });
             addLabel(Forge.getLocalizer().getMessage("lblBorderMaskOption"));
-            settingGroup.add(borderMask).align(Align.right).pad(2);
+            addControl(borderMask);
         }
         addCheckBox(Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
         addCheckBox(Forge.getLocalizer().getMessage("cbShowAutoTapPreview"), ForgePreferences.FPref.UI_SHOW_AUTOTAP_PREVIEW);
@@ -272,7 +280,7 @@ public class SettingsScene extends UIScene {
                 return null;
             });
             addLabel("Reward/Shop Card Display Ratio");
-            settingGroup.add(rewardCardAdjLandscape).align(Align.right).pad(2);
+            addControl(rewardCardAdjLandscape);
             SelectBox<Float> tooltipAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 0.95f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().cardTooltipAdjLandscape, o -> {
                 Float val = (Float) o;
                 if (val == null || val == 0f)
@@ -282,7 +290,7 @@ public class SettingsScene extends UIScene {
                 return null;
             });
             addLabel("Reward/Shop Card Tooltip Ratio");
-            settingGroup.add(tooltipAdjLandscape).align(Align.right).pad(2);
+            addControl(tooltipAdjLandscape);
         } else {
             //portrait adjustment
             SelectBox<Float> rewardCardAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().rewardCardAdj, o -> {
@@ -294,7 +302,7 @@ public class SettingsScene extends UIScene {
                 return null;
             });
             addLabel("Reward/Shop Card Display Ratio");
-            settingGroup.add(rewardCardAdj).align(Align.right).pad(2);
+            addControl(rewardCardAdj);
             SelectBox<Float> tooltipAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().cardTooltipAdj, o -> {
                 Float val = (Float) o;
                 if (val == null || val == 0f)
@@ -304,7 +312,7 @@ public class SettingsScene extends UIScene {
                 return null;
             });
             addLabel("Reward/Shop Card Tooltip Ratio");
-            settingGroup.add(tooltipAdj).align(Align.right).pad(2);
+            addControl(tooltipAdj);
         }
         addSettingField(Forge.getLocalizer().getMessage("lblShowShopOverlay"), Config.instance().getSettingData().showShopOverlay, new ChangeListener() {
             @Override
@@ -393,7 +401,6 @@ public class SettingsScene extends UIScene {
         backButton = ui.findActor("return");
         ui.onButtonPress("return", SettingsScene.this::back);
 
-        scrollPane = ui.findActor("settings");
         String[] tabNames = {
                 Forge.getLocalizer().getMessageorUseDefault("lblGeneral", "General"),
                 Forge.getLocalizer().getMessage("lblDisplay"),
@@ -420,7 +427,11 @@ public class SettingsScene extends UIScene {
         clearSelectable();
         for (TextraButton tabButton : tabButtons)
             addToSelectable(tabButton);
-        addToSelectable(tabTables[index]);
+        // Each setting row is its own table, so the controls sit a level below the tab's own cells
+        for (Cell cell : tabTables[index].getCells()) {
+            if (cell.getActor() instanceof Table)
+                addToSelectable((Table) cell.getActor());
+        }
         if (backButton != null)
             addToSelectable(backButton);
     }
@@ -430,7 +441,7 @@ public class SettingsScene extends UIScene {
         label.setAlignment(Align.center);
         boolean firstSection = !settingGroup.hasChildren();
         settingGroup.row();
-        settingGroup.add(label).colspan(3).growX().pad(firstSection ? 4 : 14, 2, 2, 2);
+        settingGroup.add(label).width(contentWidth() - 4).pad(firstSection ? 4 : 14, 2, 2, 2);
     }
 
     public boolean back() {
@@ -450,7 +461,7 @@ public class SettingsScene extends UIScene {
         });
 
         addLabel(name);
-        settingGroup.add(box).align(Align.right);
+        addControl(box);
     }
 
     private CheckBox addCheckBox(String name, ForgePreferences.FPref pref) {
@@ -471,7 +482,7 @@ public class SettingsScene extends UIScene {
         });
 
         addLabel(name);
-        settingGroup.add(box).align(Align.right);
+        addControl(box);
         return box;
     }
 
@@ -488,7 +499,7 @@ public class SettingsScene extends UIScene {
             }
         });
         addLabel(name);
-        settingGroup.add(slide).align(Align.right);
+        addControl(slide);
     }
 
     private void addSettingField(String name, boolean value, ChangeListener change) {
@@ -496,7 +507,7 @@ public class SettingsScene extends UIScene {
         box.setChecked(value);
         box.addListener(change);
         addLabel(name);
-        settingGroup.add(box).align(Align.right);
+        addControl(box);
     }
 
     private void addSettingField(String name, int value, ChangeListener change) {
@@ -504,15 +515,41 @@ public class SettingsScene extends UIScene {
         text.setTextFieldFilter((textField, c) -> Character.isDigit(c));
         text.addListener(change);
         addLabel(name);
-        settingGroup.add(text).align(Align.right);
+        addControl(text);
     }
 
+    /** Starts a new setting row. Its label is sized once {@link #addControl} knows how much room the control needs. */
     void addLabel(String name) {
         TextraLabel label = Controls.newTextraLabel(name);
         label.setWrap(true);
+        settingRow = new Table();
         settingGroup.row().space(5);
-        int w = Forge.isLandscapeMode() ? 160 : 80;
-        settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).width(w).expand();
+        settingGroup.add(settingRow).growX();
+        labelCell = settingRow.add(label).align(Align.left).pad(2, 2, 2, 5).expand();
+    }
+
+    /**
+     * Adds the control for the current row and hands the label every pixel the control does not claim.
+     * Each row is its own table, so a checkbox or a short dropdown wraps its label far later than a wide
+     * dropdown does, instead of every row paying for the widest control on the tab. Label and control
+     * always add up to the pane's content width, so no row can drag the others off the right edge.
+     */
+    private <T extends Actor & Layout> void addControl(T control) {
+        float available = contentWidth() - LABEL_GAP;
+        float controlWidth = Math.min(control.getPrefWidth(), available - (Forge.isLandscapeMode() ? 160 : 80));
+        labelCell.width(available - controlWidth);
+        settingRow.add(control).width(controlWidth).align(Align.right).pad(2);
+    }
+
+    /**
+     * Width the scroll pane leaves for its content, inside the border its background draws. Matches
+     * ScrollPane's own area calculation; no scrollbar width is deducted because the skin's ScrollPaneStyle
+     * draws none - give it one and these rows will need to make room for it.
+     */
+    private float contentWidth() {
+        Drawable background = scrollPane.getStyle().background;
+        return scrollPane.getWidth()
+                - (background == null ? 0 : background.getLeftWidth() + background.getRightWidth());
     }
 
     private void restartForge() {
