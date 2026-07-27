@@ -109,6 +109,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private SpellAbility manifestUp;
     private SpellAbility cloakUp;
 
+    // wrapped in a List so it can be reused directly
     private List<LandTraitChanges> landTraitChanges = List.of(new LandTraitChanges(this));
 
     public CardState(Card card, CardStateName name) {

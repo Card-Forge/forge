@@ -4128,9 +4128,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return changedCardKeywordsByText;
     }
 
-    public Iterable<IKeywordsChange> getChangedCardKeywordsList(final CardState state) {
+    public Iterable<? extends IKeywordsChange> getChangedCardKeywordsList(final CardState state) {
         if (changedCardKeywordsByText.isEmpty() && changedCardKeywordsByWord.isEmpty() && changedCardKeywords.isEmpty()) {
-            return List.copyOf(state.getLandTraitChanges());
+            return state.getLandTraitChanges();
         }
         return Iterables.concat(
             changedCardKeywordsByText.values(), // Layer 3
@@ -4964,9 +4964,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return changedCardTraitsByText.remove(timestamp, staticId) != null;
     }
 
-    public Iterable<ICardTraitChanges> getChangedCardTraitsList(CardState state) {
+    public Iterable<? extends ICardTraitChanges> getChangedCardTraitsList(CardState state) {
         if (changedCardTraitsByText.isEmpty() && changedCardTraits.isEmpty()) {
-            return List.copyOf(state.getLandTraitChanges());
+            return state.getLandTraitChanges();
         }
         return Iterables.<ICardTraitChanges>concat(
             changedCardTraitsByText.values(), // Layer 3
