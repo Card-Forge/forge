@@ -415,6 +415,11 @@ public class GameSnapshot {
                     return c;
                 }
             }
+            for (Card c : ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).getMeldedCards()) {
+                if (c.getId() == id) {
+                    return c;
+                }
+            }
         }
         return null;
     }
