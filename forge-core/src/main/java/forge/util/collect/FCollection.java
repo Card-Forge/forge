@@ -53,14 +53,6 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     private final List<T> list = new ArrayList<>();
 
     /**
-     * Drop the transient set after deserialization; it is rebuilt on demand.
-     */
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
-        set = null;
-    }
-
-    /**
      * Build the {@link Set} representation, if it isn't built already.
      */
     private Set<T> hashed() {
