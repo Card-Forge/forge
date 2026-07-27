@@ -2824,20 +2824,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
-     * Points this player's registration at the object the game now holds for a
-     * commander, after a zone change replaced it with a copy. Keeps the list
-     * order, which decides command zone order for partners and signature spells.
-     */
-    public void replaceCommander(Card oldCommander, Card newCommander) {
-        int index = this.commanders.indexOf(oldCommander);
-        if(index == -1)
-            return;
-        this.commanders.replace(index, newCommander);
-        newCommander.setCommander(true);
-        view.updateCommander(this);
-    }
-
-    /**
      * Toggles whether the commander replacement effect is active.
      * (i.e. the option to send your commander to the command zone when
      * it would otherwise be sent to your library)

@@ -526,12 +526,6 @@ public class GameAction {
             c.setZone(zoneTo);
         }
 
-        if (copied != c && c.isRealCommander()) {
-            // The copy is what the game holds from here on, so the owner's
-            // commander registration has to follow it.
-            c.getOwner().replaceCommander(c, copied);
-        }
-
         if (fromBattlefield) {
             game.addLeftBattlefieldThisTurn(lastKnownInfo);
             // order here is important so it doesn't unattach cards that might have returned from UntilHostLeavesPlay
