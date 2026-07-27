@@ -1,0 +1,104 @@
+deep_spawn.png
+size: 896,480
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 64, 32
+  size: 16, 16
+Idle
+  xy: 0, 0
+  size: 112, 96
+Idle
+  xy: 112, 0
+  size: 112, 96
+Idle
+  xy: 224, 0
+  size: 112, 96
+Idle
+  xy: 336, 0
+  size: 112, 96
+Walk
+  xy: 0, 96
+  size: 112, 96
+Walk
+  xy: 112, 96
+  size: 112, 96
+Walk
+  xy: 224, 96
+  size: 112, 96
+Walk
+  xy: 336, 96
+  size: 112, 96
+Walk
+  xy: 448, 96
+  size: 112, 96
+Walk
+  xy: 560, 96
+  size: 112, 96
+Walk
+  xy: 672, 96
+  size: 112, 96
+Walk
+  xy: 784, 96
+  size: 112, 96
+Attack
+  xy: 0, 192
+  size: 112, 96
+Attack
+  xy: 112, 192
+  size: 112, 96
+Attack
+  xy: 224, 192
+  size: 112, 96
+Attack
+  xy: 336, 192
+  size: 112, 96
+Attack
+  xy: 448, 192
+  size: 112, 96
+Attack
+  xy: 560, 192
+  size: 112, 96
+Attack
+  xy: 672, 192
+  size: 112, 96
+Attack
+  xy: 784, 192
+  size: 112, 96
+Hit
+  xy: 0, 288
+  size: 112, 96
+Hit
+  xy: 112, 288
+  size: 112, 96
+Hit
+  xy: 224, 288
+  size: 112, 96
+Hit
+  xy: 336, 288
+  size: 112, 96
+Death
+  xy: 0, 384
+  size: 112, 96
+Death
+  xy: 112, 384
+  size: 112, 96
+Death
+  xy: 224, 384
+  size: 112, 96
+Death
+  xy: 336, 384
+  size: 112, 96
+Death
+  xy: 448, 384
+  size: 112, 96
+Death
+  xy: 560, 384
+  size: 112, 96
+Death
+  xy: 672, 384
+  size: 112, 96
+Death
+  xy: 784, 384
+  size: 112, 96

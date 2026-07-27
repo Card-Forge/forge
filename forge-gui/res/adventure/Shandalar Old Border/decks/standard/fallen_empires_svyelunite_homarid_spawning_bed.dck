@@ -24,8 +24,7 @@ Name=Homarid Spawning Bed
 2 Triassic Egg|LEG
 
 [StartInBattle_Reference]
-1 Island|3ED
+2 Island|3ED
 1 Sand Silos|FEM
 3 Homarid Spawning Bed|FEM
-1 Tidal Flats|FEM|[27b]
 1 Tidal Influence|FEM

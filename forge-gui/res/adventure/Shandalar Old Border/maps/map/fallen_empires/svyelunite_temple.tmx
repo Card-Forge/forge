@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="65" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="30200">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="65" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="50200">
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
  <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
@@ -256,19 +256,20 @@
 </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="20003" template="../../../../../../common/maps/obj/enemy.tx" x="879.5" y="575.25">
+  <object id="40003" template="../../../../../../common/maps/obj/enemy.tx" x="879.5" y="575.25">
    <properties>
     <property name="Type" value="FEM Floodwater Homarid" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Flood Plain|MIR&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Flooded Woodlands|ICE&quot;, &quot;Floodwater Dam|ALL&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Flood Plain|MIR&quot;, &quot;Flooded Woodlands|ICE&quot;, &quot;Floodwater Dam|ALL&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Floodwater Homarid" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="53,54" />
     <property name="displayNameOverride" value="Floodwater Homarid" />
     <property name="inactive" value="true" type="bool" />
-    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;val&quot;: 1}}, {&quot;deleteMapObject&quot;: 55}, {&quot;deleteMapObject&quot;: -1}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The dam-builder raises both claws. A pressure like deep water fills your skull: \&quot;River stops here... you stop here...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;val&quot;: 1}}, {&quot;deleteMapObject&quot;: 55}, {&quot;deleteMapObject&quot;: 19201}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20004" template="../../../../../../common/maps/obj/enemy.tx" x="974.75" y="368.75">
+  <object id="40004" template="../../../../../../common/maps/obj/enemy.tx" x="974.75" y="368.75">
    <properties>
     <property name="Type" value="FEM Viscerid Drone" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;River Delta|ICE&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Undertow|LEG&quot;, &quot;Viscerid Drone|ALL&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -277,9 +278,11 @@
     <property name="waypoints" value="126,127,128" />
     <property name="displayNameOverride" value="Viscerid Drone" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Viscerid Drone flexes its barbed limbs as dark water drips from its carapace.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20005" template="../../../../../../common/maps/obj/enemy.tx" x="942" y="468.5">
+  <object id="40005" template="../../../../../../common/maps/obj/enemy.tx" x="942" y="468.5">
    <properties>
     <property name="Type" value="FEM Viscerid Drone" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;River Delta|ICE&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Undertow|LEG&quot;, &quot;Viscerid Drone|ALL&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -288,13 +291,15 @@
     <property name="waypoints" value="123,125,124,122" />
     <property name="displayNameOverride" value="Viscerid Drone" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Viscerid Drone flexes its barbed limbs as dark water drips from its carapace.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
   <object id="6" template="../../../../../../common/maps/obj/treasure.tx" x="304.182" y="32.5455" />
   <object id="7" template="../../../../../../common/maps/obj/treasure.tx" x="272" y="32.1818" />
   <object id="8" template="../../../../../../common/maps/obj/manashards.tx" x="384.364" y="79.8182" />
   <object id="9" template="../../../../../../common/maps/obj/entry_up.tx" gid="11343" x="-4.21453" y="675.558" width="47.9849" height="26.938" rotation="41" />
-  <object id="20011" template="../../../../../../common/maps/obj/enemy.tx" x="622.833" y="683.667">
+  <object id="40011" template="../../../../../../common/maps/obj/enemy.tx" x="622.833" y="683.667">
    <properties>
     <property name="Type" value="FEM River Merfolk" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sheltered Valley|ALL&quot;, &quot;Raging River|2ED&quot;, &quot;River Merfolk|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -303,10 +308,11 @@
     <property name="waypoints" value="48,47,48,49,50,51,52,51,50,49" />
     <property name="displayNameOverride" value="River Merfolk" />
     <property name="inactive" value="true" type="bool" />
-    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The River Merfolk sounds a sharp note on its conch horn and levels a coral-tipped spear at you.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20013" template="../../../../../../common/maps/obj/enemy.tx" x="287" y="689">
+  <object id="40013" template="../../../../../../common/maps/obj/enemy.tx" x="287" y="689">
    <properties>
     <property name="Type" value="FEM River Merfolk" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sheltered Valley|ALL&quot;, &quot;Raging River|2ED&quot;, &quot;River Merfolk|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -315,11 +321,12 @@
     <property name="waypoints" value="44,129,130,45,131,132,46,132,131,45,130,129" />
     <property name="displayNameOverride" value="River Merfolk" />
     <property name="inactive" value="true" type="bool" />
-    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The River Merfolk sounds a sharp note on its conch horn and levels a coral-tipped spear at you.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
   <object id="12" template="../../../../../../common/maps/obj/manashards.tx" x="605.5" y="701.5" />
-  <object id="20015" template="../../../../../../common/maps/obj/enemy.tx" x="48" y="78.75" rotation="-90">
+  <object id="40015" template="../../../../../../common/maps/obj/enemy.tx" x="48" y="78.75" rotation="-90">
    <properties>
     <property name="Type" value="FEM Vodalian Merchant" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Trade Routes|MMQ&quot;, &quot;Vodalian Merchant|INV&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -327,9 +334,11 @@
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Vodalian Merchant" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The merchant sighs and secures a waterproof strongbox. \&quot;You have made this negotiation regrettably simple.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20016" template="../../../../../../common/maps/obj/enemy.tx" x="184.25" y="55.75" rotation="0">
+  <object id="40016" template="../../../../../../common/maps/obj/enemy.tx" x="184.25" y="55.75" rotation="0">
    <properties>
     <property name="Type" value="FEM Vodalian War Machine" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Vodalian War Machine|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -338,9 +347,11 @@
     <property name="waypoints" value="106,107" />
     <property name="displayNameOverride" value="Vodalian War Machine" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The great shell-plated machine groans into motion as its crew turns the prow toward you.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20017" template="../../../../../../common/maps/obj/enemy.tx" x="256.5" y="47.5">
+  <object id="40017" template="../../../../../../common/maps/obj/enemy.tx" x="256.5" y="47.5">
    <properties>
     <property name="Type" value="FEM Svyelunite Priest" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Svyelunite Priest|FEM&quot;, &quot;Squeeze|MMQ&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -348,9 +359,11 @@
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Svyelunite Priest" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The priest raises a shell charm. \&quot;Svyelun's tide will wash this defilement from her temple.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20043" template="../../../../../../common/maps/obj/enemy.tx" x="31.4091" y="369.818">
+  <object id="40043" template="../../../../../../common/maps/obj/enemy.tx" x="31.4091" y="369.818">
    <properties>
     <property name="Type" value="FEM Svyelunite Priest" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Svyelunite Priest|FEM&quot;, &quot;Squeeze|MMQ&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -359,19 +372,23 @@
     <property name="waypoints" value="103,104,105" />
     <property name="displayNameOverride" value="Svyelunite Priest" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The priest raises a shell charm. \&quot;Svyelun's tide will wash this defilement from her temple.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20018" template="../../../../../../common/maps/obj/enemy.tx" x="287.5" y="96.25">
+  <object id="40018" template="../../../../../../common/maps/obj/enemy.tx" x="287.5" y="96.25">
    <properties>
     <property name="Type" value="FEM Seasinger" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Treasure Trove|7ED&quot;, &quot;Lilting Refrain|USG&quot;, &quot;Seasinger|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Treasure Trove|7ED&quot;, &quot;Lilting Refrain|USG&quot;, &quot;Seasinger|FEM&quot;, &quot;Island|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Seasinger" />
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Seasinger" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Seasinger's melody turns cold and commanding. \&quot;Kneel, or the sea will teach you obedience.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20019" template="../../../../../../common/maps/obj/enemy.tx" x="343.75" y="71.5">
+  <object id="40019" template="../../../../../../common/maps/obj/enemy.tx" x="343.75" y="71.5">
    <properties>
     <property name="Type" value="FEM Vodalian Mage C" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Atoll|VIS&quot;, &quot;Vodalian Mage|FEM|[30c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -380,9 +397,11 @@
     <property name="waypoints" value="108,109" />
     <property name="displayNameOverride" value="Vodalian Mage" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The mage gathers a sphere of seawater between open palms. \&quot;The current has already chosen your grave.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20020" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="415.25">
+  <object id="40020" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="415.25">
    <properties>
     <property name="Type" value="FEM Vodalian Mage B" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Atoll|VIS&quot;, &quot;Vodalian Mage|FEM|[30b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -391,9 +410,11 @@
     <property name="waypoints" value="91,92,93,92,91,94" />
     <property name="displayNameOverride" value="Vodalian Mage" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The mage gathers a sphere of seawater between open palms. \&quot;The current has already chosen your grave.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20041" template="../../../../../../common/maps/obj/enemy.tx" x="32.25" y="206.5">
+  <object id="40041" template="../../../../../../common/maps/obj/enemy.tx" x="32.25" y="206.5">
    <properties>
     <property name="Type" value="FEM Vodalian Mage A" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Atoll|VIS&quot;, &quot;Vodalian Mage|FEM|[30a]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -402,9 +423,11 @@
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Vodalian Mage" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The mage gathers a sphere of seawater between open palms. \&quot;The current has already chosen your grave.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20021" template="../../../../../../common/maps/obj/enemy.tx" x="433.25" y="69.25">
+  <object id="40021" template="../../../../../../common/maps/obj/enemy.tx" x="433.25" y="69.25">
    <properties>
     <property name="Type" value="FEM Homarid Deep Spawn" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Island|3ED&quot;, &quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Deep Water|DRK&quot;, &quot;Mystic Decree|HML&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -413,9 +436,11 @@
     <property name="waypoints" value="108,111" />
     <property name="displayNameOverride" value="Homarid Deep Spawn" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The ancient Deep Spawn rises until it eclipses the surf. \&quot;Little shore-walker... sink with the old stones...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20031" template="../../../../../../common/maps/obj/enemy.tx" x="781.25" y="141.25">
+  <object id="40031" template="../../../../../../common/maps/obj/enemy.tx" x="781.25" y="141.25">
    <properties>
     <property name="Type" value="FEM Homarid Deep Spawn" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Island|3ED&quot;, &quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Deep Water|DRK&quot;, &quot;Mystic Decree|HML&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -424,42 +449,50 @@
     <property name="waypoints" value="115,119,117,118" />
     <property name="displayNameOverride" value="Homarid Deep Spawn" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The ancient Deep Spawn rises until it eclipses the surf. \&quot;Little shore-walker... sink with the old stones...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20022" template="../../../../../../common/maps/obj/enemy.tx" x="356.75" y="106">
+  <object id="40022" template="../../../../../../common/maps/obj/enemy.tx" x="356.75" y="106">
    <properties>
     <property name="Type" value="FEM Vodalian Knight" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;, &quot;Island|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Vodalian Knight" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="108,110" />
     <property name="displayNameOverride" value="Vodalian Knight" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian Knight draws a curved blade. \&quot;No invader passes while I still draw breath.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20023" template="../../../../../../common/maps/obj/enemy.tx" x="79.5" y="256">
+  <object id="40023" template="../../../../../../common/maps/obj/enemy.tx" x="79.5" y="256">
    <properties>
     <property name="Type" value="FEM Vodalian Knight" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;, &quot;Island|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Vodalian Knight" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="79,78,77,78" />
     <property name="displayNameOverride" value="Vodalian Knight" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian Knight draws a curved blade. \&quot;No invader passes while I still draw breath.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20042" template="../../../../../../common/maps/obj/enemy.tx" x="191.25" y="368.75">
+  <object id="40042" template="../../../../../../common/maps/obj/enemy.tx" x="191.25" y="368.75">
    <properties>
     <property name="Type" value="FEM Vodalian Knight" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;, &quot;Island|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Vodalian Knight" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="80,81,80,79" />
     <property name="displayNameOverride" value="Vodalian Knight" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian Knight draws a curved blade. \&quot;No invader passes while I still draw breath.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20024" template="../../../../../../common/maps/obj/enemy.tx" x="279" y="423">
+  <object id="40024" template="../../../../../../common/maps/obj/enemy.tx" x="279" y="423">
    <properties>
     <property name="Type" value="FEM Vodalian Soldier A" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Soldiers|FEM|[31a]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -468,9 +501,11 @@
     <property name="waypoints" value="89,92,91" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian soldier locks shields with the nearby battle line and advances.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20040" template="../../../../../../common/maps/obj/enemy.tx" x="240.75" y="479">
+  <object id="40040" template="../../../../../../common/maps/obj/enemy.tx" x="240.75" y="479">
    <properties>
     <property name="Type" value="FEM Vodalian Soldier D" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Soldiers|FEM|[31d]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -479,9 +514,11 @@
     <property name="waypoints" value="87,98,87,92" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian soldier locks shields with the nearby battle line and advances.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20039" template="../../../../../../common/maps/obj/enemy.tx" x="81.5" y="495.75">
+  <object id="40039" template="../../../../../../common/maps/obj/enemy.tx" x="81.5" y="495.75">
    <properties>
     <property name="Type" value="FEM Vodalian Soldier C" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Soldiers|FEM|[31c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -490,9 +527,11 @@
     <property name="waypoints" value="93,95,96" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian soldier locks shields with the nearby battle line and advances.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20038" template="../../../../../../common/maps/obj/enemy.tx" x="241.75" y="545">
+  <object id="40038" template="../../../../../../common/maps/obj/enemy.tx" x="241.75" y="545">
    <properties>
     <property name="Type" value="FEM Vodalian Soldier B" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Soldiers|FEM|[31b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
@@ -501,147 +540,175 @@
     <property name="waypoints" value="87,97,98" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian soldier locks shields with the nearby battle line and advances.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20025" template="../../../../../../common/maps/obj/enemy.tx" x="353.25" y="432.75">
+  <object id="40025" template="../../../../../../common/maps/obj/enemy.tx" x="353.25" y="432.75">
    <properties>
     <property name="Type" value="FEM Homarid Green" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid|FEM|[19a]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid|FEM|[19a]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Green" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="89,85,87,86,89" />
     <property name="displayNameOverride" value="Homarid" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Homarid's shell shifts from blue to red as it scuttles forward, pincers snapping in time with the tide.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20033" template="../../../../../../common/maps/obj/enemy.tx" x="431" y="384.75">
+  <object id="40033" template="../../../../../../common/maps/obj/enemy.tx" x="431" y="384.75">
    <properties>
     <property name="Type" value="FEM Homarid Purple" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid|FEM|[19c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid|FEM|[19c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Purple" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="89,82,90" />
     <property name="displayNameOverride" value="Homarid" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Homarid's shell shifts from blue to red as it scuttles forward, pincers snapping in time with the tide.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20034" template="../../../../../../common/maps/obj/enemy.tx" x="704.5" y="305.25">
+  <object id="40034" template="../../../../../../common/maps/obj/enemy.tx" x="704.5" y="305.25">
    <properties>
     <property name="Type" value="FEM Homarid Red" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27a]&quot;, &quot;Homarid|FEM|[19d]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid|FEM|[19d]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Red" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="113,134,133" />
     <property name="displayNameOverride" value="Homarid" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Homarid's shell shifts from blue to red as it scuttles forward, pincers snapping in time with the tide.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20032" template="../../../../../../common/maps/obj/enemy.tx" x="368.25" y="513.25">
+  <object id="40032" template="../../../../../../common/maps/obj/enemy.tx" x="368.25" y="513.25">
    <properties>
     <property name="Type" value="FEM Homarid Yellow" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid|FEM|[19b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid|FEM|[19b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Yellow" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="87,86,88" />
     <property name="displayNameOverride" value="Homarid" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Homarid's shell shifts from blue to red as it scuttles forward, pincers snapping in time with the tide.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20026" template="../../../../../../common/maps/obj/enemy.tx" x="495.75" y="273.25">
+  <object id="40026" template="../../../../../../common/maps/obj/enemy.tx" x="495.75" y="273.25">
    <properties>
     <property name="Type" value="FEM Homarid Warrior A" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Warrior|FEM|[22a]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Warrior|FEM|[22a]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Warrior A" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="83,82,81,82,83,84" />
     <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The armored Homarid lowers its serrated claw and charges without a sound.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20037" template="../../../../../../common/maps/obj/enemy.tx" x="702.5" y="209.5">
+  <object id="40037" template="../../../../../../common/maps/obj/enemy.tx" x="702.5" y="209.5">
    <properties>
     <property name="Type" value="FEM Homarid Warrior 5ED" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27c]&quot;, &quot;Homarid Warrior|5ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Warrior|5ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Warrior 5ED" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="114,84,114,115,116" />
     <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The armored Homarid lowers its serrated claw and charges without a sound.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20036" template="../../../../../../common/maps/obj/enemy.tx" x="558.25" y="511.75">
+  <object id="40036" template="../../../../../../common/maps/obj/enemy.tx" x="558.25" y="511.75">
    <properties>
     <property name="Type" value="FEM Homarid Warrior C" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27a]&quot;, &quot;Homarid Warrior|FEM|[22c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Warrior|FEM|[22c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Warrior C" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="99,101,100,101,102,101,100,101" />
     <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The armored Homarid lowers its serrated claw and charges without a sound.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20035" template="../../../../../../common/maps/obj/enemy.tx" x="576" y="401.25">
+  <object id="40035" template="../../../../../../common/maps/obj/enemy.tx" x="576" y="401.25">
    <properties>
     <property name="Type" value="FEM Homarid Warrior B" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27c]&quot;, &quot;Homarid Warrior|FEM|[22b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Warrior|FEM|[22b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Warrior B" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="99,112" />
     <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The armored Homarid lowers its serrated claw and charges without a sound.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20027" template="../../../../../../common/maps/obj/enemy.tx" x="576.25" y="319.75">
+  <object id="40027" template="../../../../../../common/maps/obj/enemy.tx" x="576.25" y="319.75">
    <properties>
     <property name="Type" value="FEM Homarid Shaman" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Shaman|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Shaman|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Shaman" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="90,113,112,113" />
     <property name="displayNameOverride" value="Homarid Shaman" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Homarid Shaman traces a spiral in the wet sand. The water around your feet begins to climb against gravity.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20074" template="../../../../../../common/maps/obj/enemy.tx" x="640.25" y="431.5">
+  <object id="40074" template="../../../../../../common/maps/obj/enemy.tx" x="640.25" y="431.5">
    <properties>
     <property name="Type" value="FEM Homarid Shaman" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Shaman|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Shaman|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Shaman" />
     <property name="pursueRange" type="int" value="15" />
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Homarid Shaman" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Homarid Shaman traces a spiral in the wet sand. The water around your feet begins to climb against gravity.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20030" template="../../../../../../common/maps/obj/enemy.tx" x="896.75" y="126.25">
+  <object id="40030" template="../../../../../../common/maps/obj/enemy.tx" x="896.75" y="126.25">
    <properties>
     <property name="Type" value="FEM Homarid Shaman" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Shaman|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Shaman|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Shaman" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="120,121" />
     <property name="displayNameOverride" value="Homarid Shaman" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The Homarid Shaman traces a spiral in the wet sand. The water around your feet begins to climb against gravity.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20028" template="../../../../../../common/maps/obj/enemy.tx" x="920" y="56.25">
+  <object id="40028" template="../../../../../../common/maps/obj/enemy.tx" x="920" y="56.25">
    <properties>
     <property name="Type" value="FEM Homarid Spawning Bed" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Spawning Bed" />
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Homarid Spawning Bed" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The spawning mass convulses. Dozens of black eyes open beneath its shell as the surrounding pools begin to boil.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="20029" template="../../../../../../common/maps/obj/enemy.tx" x="969.75" y="72">
+  <object id="40029" template="../../../../../../common/maps/obj/enemy.tx" x="969.75" y="72">
    <properties>
     <property name="Type" value="FEM Homarid Spawning Bed" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Spawning Bed" />
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Homarid Spawning Bed" />
     <property name="inactive" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The spawning mass convulses. Dozens of black eyes open beneath its shell as the surrounding pools begin to boil.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
   <object id="44" template="../../../../../../common/maps/obj/waypoint.tx" x="253" y="693.667" />
@@ -744,219 +811,459 @@
   <object id="132" template="../../../../../../common/maps/obj/waypoint.tx" x="416.5" y="656.5" />
   <object id="133" template="../../../../../../common/maps/obj/waypoint.tx" x="640.5" y="353.5" />
   <object id="134" template="../../../../../../common/maps/obj/waypoint.tx" x="720.75" y="303.5" />
-  <object id="30003" template="../../../../../../common/maps/obj/dialog.tx" x="879.5" y="575.25">
+  <object id="50003" template="../../../../../../common/maps/obj/enemy.tx" x="879.5" y="575.25">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/floodwater_homarid_placeholder.atlas" />
-    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid blocks the dam crossing. Its alien voice rolls through your thoughts: \&quot;Two river-things... cut at our waters... wash them away... then you pass...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;I'll deal with the River Merfolk.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;Not yet.\&quot;&quot;}]}, {&quot;condition&quot;: [{&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&lt;&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;The Homarid taps one pincer against the dam. \&quot;Two river-things... both must drift...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid shifts aside. \&quot;River-things... gone. Our dam... opens for you... ally...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Pass the dam)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 55}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;}], &quot;text&quot;: &quot;The Floodwater Homarid remains beside the opened crossing, watching the current with unreadable black eyes.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="Type" value="FEM Floodwater Homarid" />
+    <property name="enemy" value="FEM Floodwater Homarid" />
+    <property name="displayNameOverride" value="Floodwater Homarid" />
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid blocks the dam crossing. Its alien voice rolls through your thoughts: \&quot;Two river-things... cut at our waters... wash them away... then you pass...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;I'll deal with the River Merfolk.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;Not yet.\&quot;&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&lt;&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;The Homarid taps one pincer against the dam. \&quot;Two river-things... both must drift...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid shifts aside. \&quot;River-things... gone. Our dam... opens for you... ally...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Pass the dam)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 55}, {&quot;deleteMapObject&quot;: 19201}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;}], &quot;text&quot;: &quot;The Floodwater Homarid remains beside the opened crossing, watching the current with unreadable black eyes.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="53,54" />
    </properties>
   </object>
-  <object id="30004" template="../../../../../../common/maps/obj/dialog.tx" x="974.75" y="368.75">
+  <object id="50004" template="../../../../../../common/maps/obj/enemy.tx" x="974.75" y="368.75">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/viscerid_drone_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Viscerid Drone" />
+    <property name="enemy" value="FEM Viscerid Drone" />
+    <property name="displayNameOverride" value="Viscerid Drone" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="126,127,128" />
    </properties>
   </object>
-  <object id="30005" template="../../../../../../common/maps/obj/dialog.tx" x="942" y="468.5">
+  <object id="50005" template="../../../../../../common/maps/obj/enemy.tx" x="942" y="468.5">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/viscerid_drone_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Viscerid Drone" />
+    <property name="enemy" value="FEM Viscerid Drone" />
+    <property name="displayNameOverride" value="Viscerid Drone" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="123,125,124,122" />
    </properties>
   </object>
-  <object id="30011" template="../../../../../../common/maps/obj/dialog.tx" x="622.833" y="683.667">
+  <object id="50011" template="../../../../../../common/maps/obj/enemy.tx" x="622.833" y="683.667">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/river_merfolk_placeholder.atlas" />
-    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The River Merfolk points downstream. \&quot;A Floodwater Homarid has dammed the river and flooded its lower course. Deal with that oversized crustacean and break its hold on the dam.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;We'll clear the river.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;The main battle comes first.\&quot;&quot;}]}, {&quot;condition&quot;: [{&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;\&quot;The Floodwater Homarid still guards its dam. The lower river will remain drowned until it is defeated.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;}], &quot;text&quot;: &quot;\&quot;The current is moving again. You have the gratitude of every Vodalian who depends on this river.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="Type" value="FEM River Merfolk" />
+    <property name="enemy" value="FEM River Merfolk" />
+    <property name="displayNameOverride" value="River Merfolk" />
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The River Merfolk points downstream. \&quot;A Floodwater Homarid has dammed the river and flooded its lower course. Deal with that oversized crustacean and break its hold on the dam.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;We'll clear the river.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;The main battle comes first.\&quot;&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;\&quot;The Floodwater Homarid still guards its dam. The lower river will remain drowned until it is defeated.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;}], &quot;text&quot;: &quot;\&quot;The current is moving again. You have the gratitude of every Vodalian who depends on this river.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="48,47,48,49,50,51,52,51,50,49" />
    </properties>
   </object>
-  <object id="30013" template="../../../../../../common/maps/obj/dialog.tx" x="287" y="689">
+  <object id="50013" template="../../../../../../common/maps/obj/enemy.tx" x="287" y="689">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/river_merfolk_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM River Merfolk" />
+    <property name="enemy" value="FEM River Merfolk" />
+    <property name="displayNameOverride" value="River Merfolk" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="44,129,130,45,131,132,46,132,131,45,130,129" />
    </properties>
   </object>
-  <object id="30015" template="../../../../../../common/maps/obj/dialog.tx" x="48" y="78.75" rotation="-90">
+  <object id="50015" template="../../../../../../common/maps/obj/enemy.tx" x="48" y="78.75" rotation="-90">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_merchant_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian Merchant" />
+    <property name="enemy" value="FEM Vodalian Merchant" />
+    <property name="displayNameOverride" value="Vodalian Merchant" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="30016" template="../../../../../../common/maps/obj/dialog.tx" x="184.25" y="55.75" rotation="0">
+  <object id="50016" template="../../../../../../common/maps/obj/enemy.tx" x="184.25" y="55.75" rotation="0">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_war_machine_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian War Machine" />
+    <property name="enemy" value="FEM Vodalian War Machine" />
+    <property name="displayNameOverride" value="Vodalian War Machine" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="106,107" />
    </properties>
   </object>
-  <object id="30017" template="../../../../../../common/maps/obj/dialog.tx" x="256.5" y="47.5">
+  <object id="50017" template="../../../../../../common/maps/obj/enemy.tx" x="256.5" y="47.5">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/svyelunite_priest.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Svyelunite Priest" />
+    <property name="enemy" value="FEM Svyelunite Priest" />
+    <property name="displayNameOverride" value="Svyelunite Priest" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="30043" template="../../../../../../common/maps/obj/dialog.tx" x="31.4091" y="369.818">
+  <object id="50043" template="../../../../../../common/maps/obj/enemy.tx" x="31.4091" y="369.818">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/svyelunite_priest.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Svyelunite Priest" />
+    <property name="enemy" value="FEM Svyelunite Priest" />
+    <property name="displayNameOverride" value="Svyelunite Priest" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="103,104,105" />
    </properties>
   </object>
-  <object id="30018" template="../../../../../../common/maps/obj/dialog.tx" x="287.5" y="96.25">
+  <object id="50018" template="../../../../../../common/maps/obj/enemy.tx" x="287.5" y="96.25">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/seasinger.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Seasinger" />
+    <property name="enemy" value="FEM Seasinger" />
+    <property name="displayNameOverride" value="Seasinger" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="30019" template="../../../../../../common/maps/obj/dialog.tx" x="343.75" y="71.5">
+  <object id="50019" template="../../../../../../common/maps/obj/enemy.tx" x="343.75" y="71.5">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian Mage C" />
+    <property name="enemy" value="FEM Vodalian Mage C" />
+    <property name="displayNameOverride" value="Vodalian Mage" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="108,109" />
    </properties>
   </object>
-  <object id="30020" template="../../../../../../common/maps/obj/dialog.tx" x="176" y="415.25">
+  <object id="50020" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="415.25">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian Mage B" />
+    <property name="enemy" value="FEM Vodalian Mage B" />
+    <property name="displayNameOverride" value="Vodalian Mage" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="91,92,93,92,91,94" />
    </properties>
   </object>
-  <object id="30041" template="../../../../../../common/maps/obj/dialog.tx" x="32.25" y="206.5">
+  <object id="50041" template="../../../../../../common/maps/obj/enemy.tx" x="32.25" y="206.5">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian Mage A" />
+    <property name="enemy" value="FEM Vodalian Mage A" />
+    <property name="displayNameOverride" value="Vodalian Mage" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="30021" template="../../../../../../common/maps/obj/dialog.tx" x="433.25" y="69.25">
+  <object id="50021" template="../../../../../../common/maps/obj/enemy.tx" x="433.25" y="69.25">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/deep_spawn_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Deep Spawn" />
+    <property name="enemy" value="FEM Homarid Deep Spawn" />
+    <property name="displayNameOverride" value="Homarid Deep Spawn" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="108,111" />
    </properties>
   </object>
-  <object id="30031" template="../../../../../../common/maps/obj/dialog.tx" x="781.25" y="141.25">
+  <object id="50031" template="../../../../../../common/maps/obj/enemy.tx" x="781.25" y="141.25">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/deep_spawn_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Deep Spawn" />
+    <property name="enemy" value="FEM Homarid Deep Spawn" />
+    <property name="displayNameOverride" value="Homarid Deep Spawn" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="115,119,117,118" />
    </properties>
   </object>
-  <object id="30022" template="../../../../../../common/maps/obj/dialog.tx" x="356.75" y="106">
+  <object id="50022" template="../../../../../../common/maps/obj/enemy.tx" x="356.75" y="106">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_knights_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian Knight" />
+    <property name="enemy" value="FEM Vodalian Knight" />
+    <property name="displayNameOverride" value="Vodalian Knight" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="108,110" />
    </properties>
   </object>
-  <object id="30023" template="../../../../../../common/maps/obj/dialog.tx" x="79.5" y="256">
+  <object id="50023" template="../../../../../../common/maps/obj/enemy.tx" x="79.5" y="256">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_knights_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian Knight" />
+    <property name="enemy" value="FEM Vodalian Knight" />
+    <property name="displayNameOverride" value="Vodalian Knight" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="79,78,77,78" />
    </properties>
   </object>
-  <object id="30042" template="../../../../../../common/maps/obj/dialog.tx" x="191.25" y="368.75">
+  <object id="50042" template="../../../../../../common/maps/obj/enemy.tx" x="191.25" y="368.75">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_knights_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian Knight" />
+    <property name="enemy" value="FEM Vodalian Knight" />
+    <property name="displayNameOverride" value="Vodalian Knight" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="80,81,80,79" />
    </properties>
   </object>
-  <object id="30024" template="../../../../../../common/maps/obj/dialog.tx" x="279" y="423">
+  <object id="50024" template="../../../../../../common/maps/obj/enemy.tx" x="279" y="423">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian Soldier A" />
+    <property name="enemy" value="FEM Vodalian Soldier A" />
+    <property name="displayNameOverride" value="Vodalian Soldier" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="89,92,91" />
    </properties>
   </object>
-  <object id="30040" template="../../../../../../common/maps/obj/dialog.tx" x="240.75" y="479">
+  <object id="50040" template="../../../../../../common/maps/obj/enemy.tx" x="240.75" y="479">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian Soldier D" />
+    <property name="enemy" value="FEM Vodalian Soldier D" />
+    <property name="displayNameOverride" value="Vodalian Soldier" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="87,98,87,92" />
    </properties>
   </object>
-  <object id="30039" template="../../../../../../common/maps/obj/dialog.tx" x="81.5" y="495.75">
+  <object id="50039" template="../../../../../../common/maps/obj/enemy.tx" x="81.5" y="495.75">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian Soldier C" />
+    <property name="enemy" value="FEM Vodalian Soldier C" />
+    <property name="displayNameOverride" value="Vodalian Soldier" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="93,95,96" />
    </properties>
   </object>
-  <object id="30038" template="../../../../../../common/maps/obj/dialog.tx" x="241.75" y="545">
+  <object id="50038" template="../../../../../../common/maps/obj/enemy.tx" x="241.75" y="545">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Vodalian Soldier B" />
+    <property name="enemy" value="FEM Vodalian Soldier B" />
+    <property name="displayNameOverride" value="Vodalian Soldier" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="87,97,98" />
    </properties>
   </object>
-  <object id="30025" template="../../../../../../common/maps/obj/dialog.tx" x="353.25" y="432.75">
+  <object id="50025" template="../../../../../../common/maps/obj/enemy.tx" x="353.25" y="432.75">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_green.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Green" />
+    <property name="enemy" value="FEM Homarid Green" />
+    <property name="displayNameOverride" value="Homarid" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="89,85,87,86,89" />
    </properties>
   </object>
-  <object id="30033" template="../../../../../../common/maps/obj/dialog.tx" x="431" y="384.75">
+  <object id="50033" template="../../../../../../common/maps/obj/enemy.tx" x="431" y="384.75">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_purple.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Purple" />
+    <property name="enemy" value="FEM Homarid Purple" />
+    <property name="displayNameOverride" value="Homarid" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="89,82,90" />
    </properties>
   </object>
-  <object id="30034" template="../../../../../../common/maps/obj/dialog.tx" x="704.5" y="305.25">
+  <object id="50034" template="../../../../../../common/maps/obj/enemy.tx" x="704.5" y="305.25">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_red.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Red" />
+    <property name="enemy" value="FEM Homarid Red" />
+    <property name="displayNameOverride" value="Homarid" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="113,134,133" />
    </properties>
   </object>
-  <object id="30032" template="../../../../../../common/maps/obj/dialog.tx" x="368.25" y="513.25">
+  <object id="50032" template="../../../../../../common/maps/obj/enemy.tx" x="368.25" y="513.25">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_yellow.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Yellow" />
+    <property name="enemy" value="FEM Homarid Yellow" />
+    <property name="displayNameOverride" value="Homarid" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="87,86,88" />
    </properties>
   </object>
-  <object id="30026" template="../../../../../../common/maps/obj/dialog.tx" x="495.75" y="273.25">
+  <object id="50026" template="../../../../../../common/maps/obj/enemy.tx" x="495.75" y="273.25">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Warrior A" />
+    <property name="enemy" value="FEM Homarid Warrior A" />
+    <property name="displayNameOverride" value="Homarid Warrior" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="83,82,81,82,83,84" />
    </properties>
   </object>
-  <object id="30037" template="../../../../../../common/maps/obj/dialog.tx" x="702.5" y="209.5">
+  <object id="50037" template="../../../../../../common/maps/obj/enemy.tx" x="702.5" y="209.5">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Warrior 5ED" />
+    <property name="enemy" value="FEM Homarid Warrior 5ED" />
+    <property name="displayNameOverride" value="Homarid Warrior" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="114,84,114,115,116" />
    </properties>
   </object>
-  <object id="30036" template="../../../../../../common/maps/obj/dialog.tx" x="558.25" y="511.75">
+  <object id="50036" template="../../../../../../common/maps/obj/enemy.tx" x="558.25" y="511.75">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Warrior C" />
+    <property name="enemy" value="FEM Homarid Warrior C" />
+    <property name="displayNameOverride" value="Homarid Warrior" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="99,101,100,101,102,101,100,101" />
    </properties>
   </object>
-  <object id="30035" template="../../../../../../common/maps/obj/dialog.tx" x="576" y="401.25">
+  <object id="50035" template="../../../../../../common/maps/obj/enemy.tx" x="576" y="401.25">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Warrior B" />
+    <property name="enemy" value="FEM Homarid Warrior B" />
+    <property name="displayNameOverride" value="Homarid Warrior" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="99,112" />
    </properties>
   </object>
-  <object id="30027" template="../../../../../../common/maps/obj/dialog.tx" x="576.25" y="319.75">
+  <object id="50027" template="../../../../../../common/maps/obj/enemy.tx" x="576.25" y="319.75">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_shaman.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Shaman" />
+    <property name="enemy" value="FEM Homarid Shaman" />
+    <property name="displayNameOverride" value="Homarid Shaman" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="90,113,112,113" />
    </properties>
   </object>
-  <object id="30074" template="../../../../../../common/maps/obj/dialog.tx" x="640.25" y="431.5">
+  <object id="50074" template="../../../../../../common/maps/obj/enemy.tx" x="640.25" y="431.5">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_shaman.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Shaman" />
+    <property name="enemy" value="FEM Homarid Shaman" />
+    <property name="displayNameOverride" value="Homarid Shaman" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="30030" template="../../../../../../common/maps/obj/dialog.tx" x="896.75" y="126.25">
+  <object id="50030" template="../../../../../../common/maps/obj/enemy.tx" x="896.75" y="126.25">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_shaman.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Shaman" />
+    <property name="enemy" value="FEM Homarid Shaman" />
+    <property name="displayNameOverride" value="Homarid Shaman" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="120,121" />
    </properties>
   </object>
-  <object id="30028" template="../../../../../../common/maps/obj/dialog.tx" x="920" y="56.25">
+  <object id="50028" template="../../../../../../common/maps/obj/enemy.tx" x="920" y="56.25">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_spawning_bed_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Spawning Bed" />
+    <property name="enemy" value="FEM Homarid Spawning Bed" />
+    <property name="displayNameOverride" value="Homarid Spawning Bed" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="30029" template="../../../../../../common/maps/obj/dialog.tx" x="969.75" y="72">
+  <object id="50029" template="../../../../../../common/maps/obj/enemy.tx" x="969.75" y="72">
    <properties>
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/homarid_spawning_bed_placeholder.atlas" />
-    <property name="dialog" value="[]" />
+    <property name="Type" value="FEM Homarid Spawning Bed" />
+    <property name="enemy" value="FEM Homarid Spawning Bed" />
+    <property name="displayNameOverride" value="Homarid Spawning Bed" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="9101" template="../../../../../../common/maps/obj/dialog.tx" x="0" y="640" width="80" height="80">
+  <object id="19101" template="../../../../../../common/maps/obj/dialog.tx" x="0" y="640" width="80" height="80">
    <properties>
-    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 20011}, {&quot;deleteMapObject&quot;: 20013}, {&quot;deleteMapObject&quot;: 20015}, {&quot;deleteMapObject&quot;: 20016}, {&quot;deleteMapObject&quot;: 20017}, {&quot;deleteMapObject&quot;: 20043}, {&quot;deleteMapObject&quot;: 20018}, {&quot;deleteMapObject&quot;: 20019}, {&quot;deleteMapObject&quot;: 20020}, {&quot;deleteMapObject&quot;: 20041}, {&quot;deleteMapObject&quot;: 20022}, {&quot;deleteMapObject&quot;: 20023}, {&quot;deleteMapObject&quot;: 20042}, {&quot;deleteMapObject&quot;: 20024}, {&quot;deleteMapObject&quot;: 20040}, {&quot;deleteMapObject&quot;: 20039}, {&quot;deleteMapObject&quot;: 20038}, {&quot;activateMapObject&quot;: 20003}, {&quot;activateMapObject&quot;: 20004}, {&quot;activateMapObject&quot;: 20005}, {&quot;activateMapObject&quot;: 20021}, {&quot;activateMapObject&quot;: 20031}, {&quot;activateMapObject&quot;: 20025}, {&quot;activateMapObject&quot;: 20033}, {&quot;activateMapObject&quot;: 20034}, {&quot;activateMapObject&quot;: 20032}, {&quot;activateMapObject&quot;: 20026}, {&quot;activateMapObject&quot;: 20037}, {&quot;activateMapObject&quot;: 20036}, {&quot;activateMapObject&quot;: 20035}, {&quot;activateMapObject&quot;: 20027}, {&quot;activateMapObject&quot;: 20074}, {&quot;activateMapObject&quot;: 20030}, {&quot;activateMapObject&quot;: 20028}, {&quot;activateMapObject&quot;: 20029}, {&quot;deleteMapObject&quot;: 30003}, {&quot;deleteMapObject&quot;: 30004}, {&quot;deleteMapObject&quot;: 30005}, {&quot;deleteMapObject&quot;: 30021}, {&quot;deleteMapObject&quot;: 30031}, {&quot;deleteMapObject&quot;: 30025}, {&quot;deleteMapObject&quot;: 30033}, {&quot;deleteMapObject&quot;: 30034}, {&quot;deleteMapObject&quot;: 30032}, {&quot;deleteMapObject&quot;: 30026}, {&quot;deleteMapObject&quot;: 30037}, {&quot;deleteMapObject&quot;: 30036}, {&quot;deleteMapObject&quot;: 30035}, {&quot;deleteMapObject&quot;: 30027}, {&quot;deleteMapObject&quot;: 30074}, {&quot;deleteMapObject&quot;: 30030}, {&quot;deleteMapObject&quot;: 30028}, {&quot;deleteMapObject&quot;: 30029}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;deleteMapObject&quot;: 9101}, {&quot;deleteMapObject&quot;: 9102}, {&quot;deleteMapObject&quot;: 9111}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Configured&quot;, &quot;val&quot;: 1}}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 20003}, {&quot;deleteMapObject&quot;: 20004}, {&quot;deleteMapObject&quot;: 20005}, {&quot;deleteMapObject&quot;: 20021}, {&quot;deleteMapObject&quot;: 20031}, {&quot;deleteMapObject&quot;: 20025}, {&quot;deleteMapObject&quot;: 20033}, {&quot;deleteMapObject&quot;: 20034}, {&quot;deleteMapObject&quot;: 20032}, {&quot;deleteMapObject&quot;: 20026}, {&quot;deleteMapObject&quot;: 20037}, {&quot;deleteMapObject&quot;: 20036}, {&quot;deleteMapObject&quot;: 20035}, {&quot;deleteMapObject&quot;: 20027}, {&quot;deleteMapObject&quot;: 20074}, {&quot;deleteMapObject&quot;: 20030}, {&quot;deleteMapObject&quot;: 20028}, {&quot;deleteMapObject&quot;: 20029}, {&quot;activateMapObject&quot;: 20011}, {&quot;activateMapObject&quot;: 20013}, {&quot;activateMapObject&quot;: 20015}, {&quot;activateMapObject&quot;: 20016}, {&quot;activateMapObject&quot;: 20017}, {&quot;activateMapObject&quot;: 20043}, {&quot;activateMapObject&quot;: 20018}, {&quot;activateMapObject&quot;: 20019}, {&quot;activateMapObject&quot;: 20020}, {&quot;activateMapObject&quot;: 20041}, {&quot;activateMapObject&quot;: 20022}, {&quot;activateMapObject&quot;: 20023}, {&quot;activateMapObject&quot;: 20042}, {&quot;activateMapObject&quot;: 20024}, {&quot;activateMapObject&quot;: 20040}, {&quot;activateMapObject&quot;: 20039}, {&quot;activateMapObject&quot;: 20038}, {&quot;deleteMapObject&quot;: 30011}, {&quot;deleteMapObject&quot;: 30013}, {&quot;deleteMapObject&quot;: 30015}, {&quot;deleteMapObject&quot;: 30016}, {&quot;deleteMapObject&quot;: 30017}, {&quot;deleteMapObject&quot;: 30043}, {&quot;deleteMapObject&quot;: 30018}, {&quot;deleteMapObject&quot;: 30019}, {&quot;deleteMapObject&quot;: 30020}, {&quot;deleteMapObject&quot;: 30041}, {&quot;deleteMapObject&quot;: 30022}, {&quot;deleteMapObject&quot;: 30023}, {&quot;deleteMapObject&quot;: 30042}, {&quot;deleteMapObject&quot;: 30024}, {&quot;deleteMapObject&quot;: 30040}, {&quot;deleteMapObject&quot;: 30039}, {&quot;deleteMapObject&quot;: 30038}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;deleteMapObject&quot;: 9101}, {&quot;deleteMapObject&quot;: 9102}, {&quot;deleteMapObject&quot;: 9111}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Configured&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40011}, {&quot;deleteMapObject&quot;: 40013}, {&quot;deleteMapObject&quot;: 40015}, {&quot;deleteMapObject&quot;: 40016}, {&quot;deleteMapObject&quot;: 40017}, {&quot;deleteMapObject&quot;: 40043}, {&quot;deleteMapObject&quot;: 40018}, {&quot;deleteMapObject&quot;: 40019}, {&quot;deleteMapObject&quot;: 40020}, {&quot;deleteMapObject&quot;: 40041}, {&quot;deleteMapObject&quot;: 40022}, {&quot;deleteMapObject&quot;: 40023}, {&quot;deleteMapObject&quot;: 40042}, {&quot;deleteMapObject&quot;: 40024}, {&quot;deleteMapObject&quot;: 40040}, {&quot;deleteMapObject&quot;: 40039}, {&quot;deleteMapObject&quot;: 40038}, {&quot;activateMapObject&quot;: 40003}, {&quot;activateMapObject&quot;: 40004}, {&quot;activateMapObject&quot;: 40005}, {&quot;activateMapObject&quot;: 40021}, {&quot;activateMapObject&quot;: 40031}, {&quot;activateMapObject&quot;: 40025}, {&quot;activateMapObject&quot;: 40033}, {&quot;activateMapObject&quot;: 40034}, {&quot;activateMapObject&quot;: 40032}, {&quot;activateMapObject&quot;: 40026}, {&quot;activateMapObject&quot;: 40037}, {&quot;activateMapObject&quot;: 40036}, {&quot;activateMapObject&quot;: 40035}, {&quot;activateMapObject&quot;: 40027}, {&quot;activateMapObject&quot;: 40074}, {&quot;activateMapObject&quot;: 40030}, {&quot;activateMapObject&quot;: 40028}, {&quot;activateMapObject&quot;: 40029}, {&quot;deleteMapObject&quot;: 50003}, {&quot;deleteMapObject&quot;: 50004}, {&quot;deleteMapObject&quot;: 50005}, {&quot;deleteMapObject&quot;: 50021}, {&quot;deleteMapObject&quot;: 50031}, {&quot;deleteMapObject&quot;: 50025}, {&quot;deleteMapObject&quot;: 50033}, {&quot;deleteMapObject&quot;: 50034}, {&quot;deleteMapObject&quot;: 50032}, {&quot;deleteMapObject&quot;: 50026}, {&quot;deleteMapObject&quot;: 50037}, {&quot;deleteMapObject&quot;: 50036}, {&quot;deleteMapObject&quot;: 50035}, {&quot;deleteMapObject&quot;: 50027}, {&quot;deleteMapObject&quot;: 50074}, {&quot;deleteMapObject&quot;: 50030}, {&quot;deleteMapObject&quot;: 50028}, {&quot;deleteMapObject&quot;: 50029}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;, &quot;val&quot;: 0}}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;val&quot;: 1}}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40011}, {&quot;deleteMapObject&quot;: 40013}, {&quot;deleteMapObject&quot;: 40015}, {&quot;deleteMapObject&quot;: 40016}, {&quot;deleteMapObject&quot;: 40017}, {&quot;deleteMapObject&quot;: 40043}, {&quot;deleteMapObject&quot;: 40018}, {&quot;deleteMapObject&quot;: 40019}, {&quot;deleteMapObject&quot;: 40020}, {&quot;deleteMapObject&quot;: 40041}, {&quot;deleteMapObject&quot;: 40022}, {&quot;deleteMapObject&quot;: 40023}, {&quot;deleteMapObject&quot;: 40042}, {&quot;deleteMapObject&quot;: 40024}, {&quot;deleteMapObject&quot;: 40040}, {&quot;deleteMapObject&quot;: 40039}, {&quot;deleteMapObject&quot;: 40038}, {&quot;activateMapObject&quot;: 40003}, {&quot;activateMapObject&quot;: 40004}, {&quot;activateMapObject&quot;: 40005}, {&quot;activateMapObject&quot;: 40021}, {&quot;activateMapObject&quot;: 40031}, {&quot;activateMapObject&quot;: 40025}, {&quot;activateMapObject&quot;: 40033}, {&quot;activateMapObject&quot;: 40034}, {&quot;activateMapObject&quot;: 40032}, {&quot;activateMapObject&quot;: 40026}, {&quot;activateMapObject&quot;: 40037}, {&quot;activateMapObject&quot;: 40036}, {&quot;activateMapObject&quot;: 40035}, {&quot;activateMapObject&quot;: 40027}, {&quot;activateMapObject&quot;: 40074}, {&quot;activateMapObject&quot;: 40030}, {&quot;activateMapObject&quot;: 40028}, {&quot;activateMapObject&quot;: 40029}, {&quot;deleteMapObject&quot;: 50003}, {&quot;deleteMapObject&quot;: 50004}, {&quot;deleteMapObject&quot;: 50005}, {&quot;deleteMapObject&quot;: 50021}, {&quot;deleteMapObject&quot;: 50031}, {&quot;deleteMapObject&quot;: 50025}, {&quot;deleteMapObject&quot;: 50033}, {&quot;deleteMapObject&quot;: 50034}, {&quot;deleteMapObject&quot;: 50032}, {&quot;deleteMapObject&quot;: 50026}, {&quot;deleteMapObject&quot;: 50037}, {&quot;deleteMapObject&quot;: 50036}, {&quot;deleteMapObject&quot;: 50035}, {&quot;deleteMapObject&quot;: 50027}, {&quot;deleteMapObject&quot;: 50074}, {&quot;deleteMapObject&quot;: 50030}, {&quot;deleteMapObject&quot;: 50028}, {&quot;deleteMapObject&quot;: 50029}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40003}, {&quot;deleteMapObject&quot;: 40004}, {&quot;deleteMapObject&quot;: 40005}, {&quot;deleteMapObject&quot;: 40021}, {&quot;deleteMapObject&quot;: 40031}, {&quot;deleteMapObject&quot;: 40025}, {&quot;deleteMapObject&quot;: 40033}, {&quot;deleteMapObject&quot;: 40034}, {&quot;deleteMapObject&quot;: 40032}, {&quot;deleteMapObject&quot;: 40026}, {&quot;deleteMapObject&quot;: 40037}, {&quot;deleteMapObject&quot;: 40036}, {&quot;deleteMapObject&quot;: 40035}, {&quot;deleteMapObject&quot;: 40027}, {&quot;deleteMapObject&quot;: 40074}, {&quot;deleteMapObject&quot;: 40030}, {&quot;deleteMapObject&quot;: 40028}, {&quot;deleteMapObject&quot;: 40029}, {&quot;activateMapObject&quot;: 40011}, {&quot;activateMapObject&quot;: 40013}, {&quot;activateMapObject&quot;: 40015}, {&quot;activateMapObject&quot;: 40016}, {&quot;activateMapObject&quot;: 40017}, {&quot;activateMapObject&quot;: 40043}, {&quot;activateMapObject&quot;: 40018}, {&quot;activateMapObject&quot;: 40019}, {&quot;activateMapObject&quot;: 40020}, {&quot;activateMapObject&quot;: 40041}, {&quot;activateMapObject&quot;: 40022}, {&quot;activateMapObject&quot;: 40023}, {&quot;activateMapObject&quot;: 40042}, {&quot;activateMapObject&quot;: 40024}, {&quot;activateMapObject&quot;: 40040}, {&quot;activateMapObject&quot;: 40039}, {&quot;activateMapObject&quot;: 40038}, {&quot;deleteMapObject&quot;: 50011}, {&quot;deleteMapObject&quot;: 50013}, {&quot;deleteMapObject&quot;: 50015}, {&quot;deleteMapObject&quot;: 50016}, {&quot;deleteMapObject&quot;: 50017}, {&quot;deleteMapObject&quot;: 50043}, {&quot;deleteMapObject&quot;: 50018}, {&quot;deleteMapObject&quot;: 50019}, {&quot;deleteMapObject&quot;: 50020}, {&quot;deleteMapObject&quot;: 50041}, {&quot;deleteMapObject&quot;: 50022}, {&quot;deleteMapObject&quot;: 50023}, {&quot;deleteMapObject&quot;: 50042}, {&quot;deleteMapObject&quot;: 50024}, {&quot;deleteMapObject&quot;: 50040}, {&quot;deleteMapObject&quot;: 50039}, {&quot;deleteMapObject&quot;: 50038}, {&quot;deleteMapObject&quot;: 19200}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;, &quot;val&quot;: 1}}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;val&quot;: 1}}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40003}, {&quot;deleteMapObject&quot;: 40004}, {&quot;deleteMapObject&quot;: 40005}, {&quot;deleteMapObject&quot;: 40021}, {&quot;deleteMapObject&quot;: 40031}, {&quot;deleteMapObject&quot;: 40025}, {&quot;deleteMapObject&quot;: 40033}, {&quot;deleteMapObject&quot;: 40034}, {&quot;deleteMapObject&quot;: 40032}, {&quot;deleteMapObject&quot;: 40026}, {&quot;deleteMapObject&quot;: 40037}, {&quot;deleteMapObject&quot;: 40036}, {&quot;deleteMapObject&quot;: 40035}, {&quot;deleteMapObject&quot;: 40027}, {&quot;deleteMapObject&quot;: 40074}, {&quot;deleteMapObject&quot;: 40030}, {&quot;deleteMapObject&quot;: 40028}, {&quot;deleteMapObject&quot;: 40029}, {&quot;activateMapObject&quot;: 40011}, {&quot;activateMapObject&quot;: 40013}, {&quot;activateMapObject&quot;: 40015}, {&quot;activateMapObject&quot;: 40016}, {&quot;activateMapObject&quot;: 40017}, {&quot;activateMapObject&quot;: 40043}, {&quot;activateMapObject&quot;: 40018}, {&quot;activateMapObject&quot;: 40019}, {&quot;activateMapObject&quot;: 40020}, {&quot;activateMapObject&quot;: 40041}, {&quot;activateMapObject&quot;: 40022}, {&quot;activateMapObject&quot;: 40023}, {&quot;activateMapObject&quot;: 40042}, {&quot;activateMapObject&quot;: 40024}, {&quot;activateMapObject&quot;: 40040}, {&quot;activateMapObject&quot;: 40039}, {&quot;activateMapObject&quot;: 40038}, {&quot;deleteMapObject&quot;: 50011}, {&quot;deleteMapObject&quot;: 50013}, {&quot;deleteMapObject&quot;: 50015}, {&quot;deleteMapObject&quot;: 50016}, {&quot;deleteMapObject&quot;: 50017}, {&quot;deleteMapObject&quot;: 50043}, {&quot;deleteMapObject&quot;: 50018}, {&quot;deleteMapObject&quot;: 50019}, {&quot;deleteMapObject&quot;: 50020}, {&quot;deleteMapObject&quot;: 50041}, {&quot;deleteMapObject&quot;: 50022}, {&quot;deleteMapObject&quot;: 50023}, {&quot;deleteMapObject&quot;: 50042}, {&quot;deleteMapObject&quot;: 50024}, {&quot;deleteMapObject&quot;: 50040}, {&quot;deleteMapObject&quot;: 50039}, {&quot;deleteMapObject&quot;: 50038}, {&quot;deleteMapObject&quot;: 19200}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}]}]" />
+    <property name="hidden" value="true" type="bool" />
+   </properties>
+  </object>
+  <object id="19200" template="../../../../../../common/maps/obj/dialog.tx" x="560" y="640" width="224" height="80">
+   <properties>
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The River Merfolk points downstream. \&quot;A Floodwater Homarid has dammed the river and flooded its lower course. Deal with that oversized crustacean and break its hold on the dam.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;We'll clear the river.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;The main battle comes first.\&quot;&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;\&quot;The Floodwater Homarid still guards its dam. The lower river will remain drowned until it is defeated.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;}], &quot;text&quot;: &quot;\&quot;The current is moving again. You have the gratitude of every Vodalian who depends on this river.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="hidden" value="true" type="bool" />
+   </properties>
+  </object>
+  <object id="19201" template="../../../../../../common/maps/obj/dialog.tx" x="816" y="496" width="112" height="40">
+   <properties>
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid looms above its barricade of stone and driftwood. The swollen river cannot be crossed while it holds the dam.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Challenge the Floodwater Homarid)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: 40003}]}, {&quot;name&quot;: &quot;(Back away)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid blocks the dam crossing. Its alien voice rolls through your thoughts: \&quot;Two river-things... cut at our waters... wash them away... then you pass...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;I'll deal with the River Merfolk.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;Not yet.\&quot;&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&lt;&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;The Homarid taps one pincer against the dam. \&quot;Two river-things... both must drift...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid shifts aside. \&quot;River-things... gone. Our dam... opens for you... ally...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Pass the dam)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 55}, {&quot;deleteMapObject&quot;: 19201}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;}], &quot;text&quot;: &quot;The Floodwater Homarid remains beside the opened crossing, watching the current with unreadable black eyes.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="hidden" value="true" type="bool" />
+   </properties>
+  </object>
+  <object id="19300" template="../../../../../../common/maps/obj/block.tx" x="0" y="0" width="8" height="672">
+   <properties>
+    <property name="hidden" value="true" type="bool" />
+   </properties>
+  </object>
+  <object id="19301" template="../../../../../../common/maps/obj/block.tx" x="0" y="704" width="8" height="16">
+   <properties>
+    <property name="hidden" value="true" type="bool" />
+   </properties>
+  </object>
+  <object id="19302" template="../../../../../../common/maps/obj/block.tx" x="1032" y="0" width="8" height="720">
+   <properties>
+    <property name="hidden" value="true" type="bool" />
+   </properties>
+  </object>
+  <object id="19303" template="../../../../../../common/maps/obj/block.tx" x="0" y="0" width="1040" height="8">
+   <properties>
+    <property name="hidden" value="true" type="bool" />
+   </properties>
+  </object>
+  <object id="19304" template="../../../../../../common/maps/obj/block.tx" x="0" y="712" width="1040" height="8">
+   <properties>
     <property name="hidden" value="true" type="bool" />
    </properties>
   </object>
@@ -965,9 +1272,9 @@
     <property name="questtype" value="SvyeluniteTempleEntry" />
    </properties>
   </object>
-  <object id="9102" template="../../../../../../common/maps/obj/dialog.tx" x="224" y="688" width="16" height="16">
+  <object id="19102" template="../../../../../../common/maps/obj/dialog.tx" x="224" y="688" width="16" height="16">
    <properties>
-    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 20011}, {&quot;deleteMapObject&quot;: 20013}, {&quot;deleteMapObject&quot;: 20015}, {&quot;deleteMapObject&quot;: 20016}, {&quot;deleteMapObject&quot;: 20017}, {&quot;deleteMapObject&quot;: 20043}, {&quot;deleteMapObject&quot;: 20018}, {&quot;deleteMapObject&quot;: 20019}, {&quot;deleteMapObject&quot;: 20020}, {&quot;deleteMapObject&quot;: 20041}, {&quot;deleteMapObject&quot;: 20022}, {&quot;deleteMapObject&quot;: 20023}, {&quot;deleteMapObject&quot;: 20042}, {&quot;deleteMapObject&quot;: 20024}, {&quot;deleteMapObject&quot;: 20040}, {&quot;deleteMapObject&quot;: 20039}, {&quot;deleteMapObject&quot;: 20038}, {&quot;activateMapObject&quot;: 20003}, {&quot;activateMapObject&quot;: 20004}, {&quot;activateMapObject&quot;: 20005}, {&quot;activateMapObject&quot;: 20021}, {&quot;activateMapObject&quot;: 20031}, {&quot;activateMapObject&quot;: 20025}, {&quot;activateMapObject&quot;: 20033}, {&quot;activateMapObject&quot;: 20034}, {&quot;activateMapObject&quot;: 20032}, {&quot;activateMapObject&quot;: 20026}, {&quot;activateMapObject&quot;: 20037}, {&quot;activateMapObject&quot;: 20036}, {&quot;activateMapObject&quot;: 20035}, {&quot;activateMapObject&quot;: 20027}, {&quot;activateMapObject&quot;: 20074}, {&quot;activateMapObject&quot;: 20030}, {&quot;activateMapObject&quot;: 20028}, {&quot;activateMapObject&quot;: 20029}, {&quot;deleteMapObject&quot;: 30003}, {&quot;deleteMapObject&quot;: 30004}, {&quot;deleteMapObject&quot;: 30005}, {&quot;deleteMapObject&quot;: 30021}, {&quot;deleteMapObject&quot;: 30031}, {&quot;deleteMapObject&quot;: 30025}, {&quot;deleteMapObject&quot;: 30033}, {&quot;deleteMapObject&quot;: 30034}, {&quot;deleteMapObject&quot;: 30032}, {&quot;deleteMapObject&quot;: 30026}, {&quot;deleteMapObject&quot;: 30037}, {&quot;deleteMapObject&quot;: 30036}, {&quot;deleteMapObject&quot;: 30035}, {&quot;deleteMapObject&quot;: 30027}, {&quot;deleteMapObject&quot;: 30074}, {&quot;deleteMapObject&quot;: 30030}, {&quot;deleteMapObject&quot;: 30028}, {&quot;deleteMapObject&quot;: 30029}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;deleteMapObject&quot;: 9101}, {&quot;deleteMapObject&quot;: 9102}, {&quot;deleteMapObject&quot;: 9111}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Configured&quot;, &quot;val&quot;: 1}}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 20003}, {&quot;deleteMapObject&quot;: 20004}, {&quot;deleteMapObject&quot;: 20005}, {&quot;deleteMapObject&quot;: 20021}, {&quot;deleteMapObject&quot;: 20031}, {&quot;deleteMapObject&quot;: 20025}, {&quot;deleteMapObject&quot;: 20033}, {&quot;deleteMapObject&quot;: 20034}, {&quot;deleteMapObject&quot;: 20032}, {&quot;deleteMapObject&quot;: 20026}, {&quot;deleteMapObject&quot;: 20037}, {&quot;deleteMapObject&quot;: 20036}, {&quot;deleteMapObject&quot;: 20035}, {&quot;deleteMapObject&quot;: 20027}, {&quot;deleteMapObject&quot;: 20074}, {&quot;deleteMapObject&quot;: 20030}, {&quot;deleteMapObject&quot;: 20028}, {&quot;deleteMapObject&quot;: 20029}, {&quot;activateMapObject&quot;: 20011}, {&quot;activateMapObject&quot;: 20013}, {&quot;activateMapObject&quot;: 20015}, {&quot;activateMapObject&quot;: 20016}, {&quot;activateMapObject&quot;: 20017}, {&quot;activateMapObject&quot;: 20043}, {&quot;activateMapObject&quot;: 20018}, {&quot;activateMapObject&quot;: 20019}, {&quot;activateMapObject&quot;: 20020}, {&quot;activateMapObject&quot;: 20041}, {&quot;activateMapObject&quot;: 20022}, {&quot;activateMapObject&quot;: 20023}, {&quot;activateMapObject&quot;: 20042}, {&quot;activateMapObject&quot;: 20024}, {&quot;activateMapObject&quot;: 20040}, {&quot;activateMapObject&quot;: 20039}, {&quot;activateMapObject&quot;: 20038}, {&quot;deleteMapObject&quot;: 30011}, {&quot;deleteMapObject&quot;: 30013}, {&quot;deleteMapObject&quot;: 30015}, {&quot;deleteMapObject&quot;: 30016}, {&quot;deleteMapObject&quot;: 30017}, {&quot;deleteMapObject&quot;: 30043}, {&quot;deleteMapObject&quot;: 30018}, {&quot;deleteMapObject&quot;: 30019}, {&quot;deleteMapObject&quot;: 30020}, {&quot;deleteMapObject&quot;: 30041}, {&quot;deleteMapObject&quot;: 30022}, {&quot;deleteMapObject&quot;: 30023}, {&quot;deleteMapObject&quot;: 30042}, {&quot;deleteMapObject&quot;: 30024}, {&quot;deleteMapObject&quot;: 30040}, {&quot;deleteMapObject&quot;: 30039}, {&quot;deleteMapObject&quot;: 30038}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;deleteMapObject&quot;: 9101}, {&quot;deleteMapObject&quot;: 9102}, {&quot;deleteMapObject&quot;: 9111}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Configured&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40011}, {&quot;deleteMapObject&quot;: 40013}, {&quot;deleteMapObject&quot;: 40015}, {&quot;deleteMapObject&quot;: 40016}, {&quot;deleteMapObject&quot;: 40017}, {&quot;deleteMapObject&quot;: 40043}, {&quot;deleteMapObject&quot;: 40018}, {&quot;deleteMapObject&quot;: 40019}, {&quot;deleteMapObject&quot;: 40020}, {&quot;deleteMapObject&quot;: 40041}, {&quot;deleteMapObject&quot;: 40022}, {&quot;deleteMapObject&quot;: 40023}, {&quot;deleteMapObject&quot;: 40042}, {&quot;deleteMapObject&quot;: 40024}, {&quot;deleteMapObject&quot;: 40040}, {&quot;deleteMapObject&quot;: 40039}, {&quot;deleteMapObject&quot;: 40038}, {&quot;activateMapObject&quot;: 40003}, {&quot;activateMapObject&quot;: 40004}, {&quot;activateMapObject&quot;: 40005}, {&quot;activateMapObject&quot;: 40021}, {&quot;activateMapObject&quot;: 40031}, {&quot;activateMapObject&quot;: 40025}, {&quot;activateMapObject&quot;: 40033}, {&quot;activateMapObject&quot;: 40034}, {&quot;activateMapObject&quot;: 40032}, {&quot;activateMapObject&quot;: 40026}, {&quot;activateMapObject&quot;: 40037}, {&quot;activateMapObject&quot;: 40036}, {&quot;activateMapObject&quot;: 40035}, {&quot;activateMapObject&quot;: 40027}, {&quot;activateMapObject&quot;: 40074}, {&quot;activateMapObject&quot;: 40030}, {&quot;activateMapObject&quot;: 40028}, {&quot;activateMapObject&quot;: 40029}, {&quot;deleteMapObject&quot;: 50003}, {&quot;deleteMapObject&quot;: 50004}, {&quot;deleteMapObject&quot;: 50005}, {&quot;deleteMapObject&quot;: 50021}, {&quot;deleteMapObject&quot;: 50031}, {&quot;deleteMapObject&quot;: 50025}, {&quot;deleteMapObject&quot;: 50033}, {&quot;deleteMapObject&quot;: 50034}, {&quot;deleteMapObject&quot;: 50032}, {&quot;deleteMapObject&quot;: 50026}, {&quot;deleteMapObject&quot;: 50037}, {&quot;deleteMapObject&quot;: 50036}, {&quot;deleteMapObject&quot;: 50035}, {&quot;deleteMapObject&quot;: 50027}, {&quot;deleteMapObject&quot;: 50074}, {&quot;deleteMapObject&quot;: 50030}, {&quot;deleteMapObject&quot;: 50028}, {&quot;deleteMapObject&quot;: 50029}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;, &quot;val&quot;: 0}}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;val&quot;: 1}}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40011}, {&quot;deleteMapObject&quot;: 40013}, {&quot;deleteMapObject&quot;: 40015}, {&quot;deleteMapObject&quot;: 40016}, {&quot;deleteMapObject&quot;: 40017}, {&quot;deleteMapObject&quot;: 40043}, {&quot;deleteMapObject&quot;: 40018}, {&quot;deleteMapObject&quot;: 40019}, {&quot;deleteMapObject&quot;: 40020}, {&quot;deleteMapObject&quot;: 40041}, {&quot;deleteMapObject&quot;: 40022}, {&quot;deleteMapObject&quot;: 40023}, {&quot;deleteMapObject&quot;: 40042}, {&quot;deleteMapObject&quot;: 40024}, {&quot;deleteMapObject&quot;: 40040}, {&quot;deleteMapObject&quot;: 40039}, {&quot;deleteMapObject&quot;: 40038}, {&quot;activateMapObject&quot;: 40003}, {&quot;activateMapObject&quot;: 40004}, {&quot;activateMapObject&quot;: 40005}, {&quot;activateMapObject&quot;: 40021}, {&quot;activateMapObject&quot;: 40031}, {&quot;activateMapObject&quot;: 40025}, {&quot;activateMapObject&quot;: 40033}, {&quot;activateMapObject&quot;: 40034}, {&quot;activateMapObject&quot;: 40032}, {&quot;activateMapObject&quot;: 40026}, {&quot;activateMapObject&quot;: 40037}, {&quot;activateMapObject&quot;: 40036}, {&quot;activateMapObject&quot;: 40035}, {&quot;activateMapObject&quot;: 40027}, {&quot;activateMapObject&quot;: 40074}, {&quot;activateMapObject&quot;: 40030}, {&quot;activateMapObject&quot;: 40028}, {&quot;activateMapObject&quot;: 40029}, {&quot;deleteMapObject&quot;: 50003}, {&quot;deleteMapObject&quot;: 50004}, {&quot;deleteMapObject&quot;: 50005}, {&quot;deleteMapObject&quot;: 50021}, {&quot;deleteMapObject&quot;: 50031}, {&quot;deleteMapObject&quot;: 50025}, {&quot;deleteMapObject&quot;: 50033}, {&quot;deleteMapObject&quot;: 50034}, {&quot;deleteMapObject&quot;: 50032}, {&quot;deleteMapObject&quot;: 50026}, {&quot;deleteMapObject&quot;: 50037}, {&quot;deleteMapObject&quot;: 50036}, {&quot;deleteMapObject&quot;: 50035}, {&quot;deleteMapObject&quot;: 50027}, {&quot;deleteMapObject&quot;: 50074}, {&quot;deleteMapObject&quot;: 50030}, {&quot;deleteMapObject&quot;: 50028}, {&quot;deleteMapObject&quot;: 50029}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40003}, {&quot;deleteMapObject&quot;: 40004}, {&quot;deleteMapObject&quot;: 40005}, {&quot;deleteMapObject&quot;: 40021}, {&quot;deleteMapObject&quot;: 40031}, {&quot;deleteMapObject&quot;: 40025}, {&quot;deleteMapObject&quot;: 40033}, {&quot;deleteMapObject&quot;: 40034}, {&quot;deleteMapObject&quot;: 40032}, {&quot;deleteMapObject&quot;: 40026}, {&quot;deleteMapObject&quot;: 40037}, {&quot;deleteMapObject&quot;: 40036}, {&quot;deleteMapObject&quot;: 40035}, {&quot;deleteMapObject&quot;: 40027}, {&quot;deleteMapObject&quot;: 40074}, {&quot;deleteMapObject&quot;: 40030}, {&quot;deleteMapObject&quot;: 40028}, {&quot;deleteMapObject&quot;: 40029}, {&quot;activateMapObject&quot;: 40011}, {&quot;activateMapObject&quot;: 40013}, {&quot;activateMapObject&quot;: 40015}, {&quot;activateMapObject&quot;: 40016}, {&quot;activateMapObject&quot;: 40017}, {&quot;activateMapObject&quot;: 40043}, {&quot;activateMapObject&quot;: 40018}, {&quot;activateMapObject&quot;: 40019}, {&quot;activateMapObject&quot;: 40020}, {&quot;activateMapObject&quot;: 40041}, {&quot;activateMapObject&quot;: 40022}, {&quot;activateMapObject&quot;: 40023}, {&quot;activateMapObject&quot;: 40042}, {&quot;activateMapObject&quot;: 40024}, {&quot;activateMapObject&quot;: 40040}, {&quot;activateMapObject&quot;: 40039}, {&quot;activateMapObject&quot;: 40038}, {&quot;deleteMapObject&quot;: 50011}, {&quot;deleteMapObject&quot;: 50013}, {&quot;deleteMapObject&quot;: 50015}, {&quot;deleteMapObject&quot;: 50016}, {&quot;deleteMapObject&quot;: 50017}, {&quot;deleteMapObject&quot;: 50043}, {&quot;deleteMapObject&quot;: 50018}, {&quot;deleteMapObject&quot;: 50019}, {&quot;deleteMapObject&quot;: 50020}, {&quot;deleteMapObject&quot;: 50041}, {&quot;deleteMapObject&quot;: 50022}, {&quot;deleteMapObject&quot;: 50023}, {&quot;deleteMapObject&quot;: 50042}, {&quot;deleteMapObject&quot;: 50024}, {&quot;deleteMapObject&quot;: 50040}, {&quot;deleteMapObject&quot;: 50039}, {&quot;deleteMapObject&quot;: 50038}, {&quot;deleteMapObject&quot;: 19200}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;, &quot;val&quot;: 1}}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;val&quot;: 1}}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40003}, {&quot;deleteMapObject&quot;: 40004}, {&quot;deleteMapObject&quot;: 40005}, {&quot;deleteMapObject&quot;: 40021}, {&quot;deleteMapObject&quot;: 40031}, {&quot;deleteMapObject&quot;: 40025}, {&quot;deleteMapObject&quot;: 40033}, {&quot;deleteMapObject&quot;: 40034}, {&quot;deleteMapObject&quot;: 40032}, {&quot;deleteMapObject&quot;: 40026}, {&quot;deleteMapObject&quot;: 40037}, {&quot;deleteMapObject&quot;: 40036}, {&quot;deleteMapObject&quot;: 40035}, {&quot;deleteMapObject&quot;: 40027}, {&quot;deleteMapObject&quot;: 40074}, {&quot;deleteMapObject&quot;: 40030}, {&quot;deleteMapObject&quot;: 40028}, {&quot;deleteMapObject&quot;: 40029}, {&quot;activateMapObject&quot;: 40011}, {&quot;activateMapObject&quot;: 40013}, {&quot;activateMapObject&quot;: 40015}, {&quot;activateMapObject&quot;: 40016}, {&quot;activateMapObject&quot;: 40017}, {&quot;activateMapObject&quot;: 40043}, {&quot;activateMapObject&quot;: 40018}, {&quot;activateMapObject&quot;: 40019}, {&quot;activateMapObject&quot;: 40020}, {&quot;activateMapObject&quot;: 40041}, {&quot;activateMapObject&quot;: 40022}, {&quot;activateMapObject&quot;: 40023}, {&quot;activateMapObject&quot;: 40042}, {&quot;activateMapObject&quot;: 40024}, {&quot;activateMapObject&quot;: 40040}, {&quot;activateMapObject&quot;: 40039}, {&quot;activateMapObject&quot;: 40038}, {&quot;deleteMapObject&quot;: 50011}, {&quot;deleteMapObject&quot;: 50013}, {&quot;deleteMapObject&quot;: 50015}, {&quot;deleteMapObject&quot;: 50016}, {&quot;deleteMapObject&quot;: 50017}, {&quot;deleteMapObject&quot;: 50043}, {&quot;deleteMapObject&quot;: 50018}, {&quot;deleteMapObject&quot;: 50019}, {&quot;deleteMapObject&quot;: 50020}, {&quot;deleteMapObject&quot;: 50041}, {&quot;deleteMapObject&quot;: 50022}, {&quot;deleteMapObject&quot;: 50023}, {&quot;deleteMapObject&quot;: 50042}, {&quot;deleteMapObject&quot;: 50024}, {&quot;deleteMapObject&quot;: 50040}, {&quot;deleteMapObject&quot;: 50039}, {&quot;deleteMapObject&quot;: 50038}, {&quot;deleteMapObject&quot;: 19200}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}]}]" />
     <property name="hidden" value="true" type="bool" />
    </properties>
   </object>
@@ -986,9 +1293,9 @@
     <property name="questtype" value="SvyeluniteTempleEntry" />
    </properties>
   </object>
-  <object id="9111" template="../../../../../../common/maps/obj/dialog.tx" x="128" y="544" width="16" height="16">
+  <object id="19111" template="../../../../../../common/maps/obj/dialog.tx" x="128" y="544" width="16" height="16">
    <properties>
-    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 20011}, {&quot;deleteMapObject&quot;: 20013}, {&quot;deleteMapObject&quot;: 20015}, {&quot;deleteMapObject&quot;: 20016}, {&quot;deleteMapObject&quot;: 20017}, {&quot;deleteMapObject&quot;: 20043}, {&quot;deleteMapObject&quot;: 20018}, {&quot;deleteMapObject&quot;: 20019}, {&quot;deleteMapObject&quot;: 20020}, {&quot;deleteMapObject&quot;: 20041}, {&quot;deleteMapObject&quot;: 20022}, {&quot;deleteMapObject&quot;: 20023}, {&quot;deleteMapObject&quot;: 20042}, {&quot;deleteMapObject&quot;: 20024}, {&quot;deleteMapObject&quot;: 20040}, {&quot;deleteMapObject&quot;: 20039}, {&quot;deleteMapObject&quot;: 20038}, {&quot;activateMapObject&quot;: 20003}, {&quot;activateMapObject&quot;: 20004}, {&quot;activateMapObject&quot;: 20005}, {&quot;activateMapObject&quot;: 20021}, {&quot;activateMapObject&quot;: 20031}, {&quot;activateMapObject&quot;: 20025}, {&quot;activateMapObject&quot;: 20033}, {&quot;activateMapObject&quot;: 20034}, {&quot;activateMapObject&quot;: 20032}, {&quot;activateMapObject&quot;: 20026}, {&quot;activateMapObject&quot;: 20037}, {&quot;activateMapObject&quot;: 20036}, {&quot;activateMapObject&quot;: 20035}, {&quot;activateMapObject&quot;: 20027}, {&quot;activateMapObject&quot;: 20074}, {&quot;activateMapObject&quot;: 20030}, {&quot;activateMapObject&quot;: 20028}, {&quot;activateMapObject&quot;: 20029}, {&quot;deleteMapObject&quot;: 30003}, {&quot;deleteMapObject&quot;: 30004}, {&quot;deleteMapObject&quot;: 30005}, {&quot;deleteMapObject&quot;: 30021}, {&quot;deleteMapObject&quot;: 30031}, {&quot;deleteMapObject&quot;: 30025}, {&quot;deleteMapObject&quot;: 30033}, {&quot;deleteMapObject&quot;: 30034}, {&quot;deleteMapObject&quot;: 30032}, {&quot;deleteMapObject&quot;: 30026}, {&quot;deleteMapObject&quot;: 30037}, {&quot;deleteMapObject&quot;: 30036}, {&quot;deleteMapObject&quot;: 30035}, {&quot;deleteMapObject&quot;: 30027}, {&quot;deleteMapObject&quot;: 30074}, {&quot;deleteMapObject&quot;: 30030}, {&quot;deleteMapObject&quot;: 30028}, {&quot;deleteMapObject&quot;: 30029}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;deleteMapObject&quot;: 9101}, {&quot;deleteMapObject&quot;: 9102}, {&quot;deleteMapObject&quot;: 9111}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Configured&quot;, &quot;val&quot;: 1}}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 20003}, {&quot;deleteMapObject&quot;: 20004}, {&quot;deleteMapObject&quot;: 20005}, {&quot;deleteMapObject&quot;: 20021}, {&quot;deleteMapObject&quot;: 20031}, {&quot;deleteMapObject&quot;: 20025}, {&quot;deleteMapObject&quot;: 20033}, {&quot;deleteMapObject&quot;: 20034}, {&quot;deleteMapObject&quot;: 20032}, {&quot;deleteMapObject&quot;: 20026}, {&quot;deleteMapObject&quot;: 20037}, {&quot;deleteMapObject&quot;: 20036}, {&quot;deleteMapObject&quot;: 20035}, {&quot;deleteMapObject&quot;: 20027}, {&quot;deleteMapObject&quot;: 20074}, {&quot;deleteMapObject&quot;: 20030}, {&quot;deleteMapObject&quot;: 20028}, {&quot;deleteMapObject&quot;: 20029}, {&quot;activateMapObject&quot;: 20011}, {&quot;activateMapObject&quot;: 20013}, {&quot;activateMapObject&quot;: 20015}, {&quot;activateMapObject&quot;: 20016}, {&quot;activateMapObject&quot;: 20017}, {&quot;activateMapObject&quot;: 20043}, {&quot;activateMapObject&quot;: 20018}, {&quot;activateMapObject&quot;: 20019}, {&quot;activateMapObject&quot;: 20020}, {&quot;activateMapObject&quot;: 20041}, {&quot;activateMapObject&quot;: 20022}, {&quot;activateMapObject&quot;: 20023}, {&quot;activateMapObject&quot;: 20042}, {&quot;activateMapObject&quot;: 20024}, {&quot;activateMapObject&quot;: 20040}, {&quot;activateMapObject&quot;: 20039}, {&quot;activateMapObject&quot;: 20038}, {&quot;deleteMapObject&quot;: 30011}, {&quot;deleteMapObject&quot;: 30013}, {&quot;deleteMapObject&quot;: 30015}, {&quot;deleteMapObject&quot;: 30016}, {&quot;deleteMapObject&quot;: 30017}, {&quot;deleteMapObject&quot;: 30043}, {&quot;deleteMapObject&quot;: 30018}, {&quot;deleteMapObject&quot;: 30019}, {&quot;deleteMapObject&quot;: 30020}, {&quot;deleteMapObject&quot;: 30041}, {&quot;deleteMapObject&quot;: 30022}, {&quot;deleteMapObject&quot;: 30023}, {&quot;deleteMapObject&quot;: 30042}, {&quot;deleteMapObject&quot;: 30024}, {&quot;deleteMapObject&quot;: 30040}, {&quot;deleteMapObject&quot;: 30039}, {&quot;deleteMapObject&quot;: 30038}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;deleteMapObject&quot;: 9101}, {&quot;deleteMapObject&quot;: 9102}, {&quot;deleteMapObject&quot;: 9111}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Configured&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40011}, {&quot;deleteMapObject&quot;: 40013}, {&quot;deleteMapObject&quot;: 40015}, {&quot;deleteMapObject&quot;: 40016}, {&quot;deleteMapObject&quot;: 40017}, {&quot;deleteMapObject&quot;: 40043}, {&quot;deleteMapObject&quot;: 40018}, {&quot;deleteMapObject&quot;: 40019}, {&quot;deleteMapObject&quot;: 40020}, {&quot;deleteMapObject&quot;: 40041}, {&quot;deleteMapObject&quot;: 40022}, {&quot;deleteMapObject&quot;: 40023}, {&quot;deleteMapObject&quot;: 40042}, {&quot;deleteMapObject&quot;: 40024}, {&quot;deleteMapObject&quot;: 40040}, {&quot;deleteMapObject&quot;: 40039}, {&quot;deleteMapObject&quot;: 40038}, {&quot;activateMapObject&quot;: 40003}, {&quot;activateMapObject&quot;: 40004}, {&quot;activateMapObject&quot;: 40005}, {&quot;activateMapObject&quot;: 40021}, {&quot;activateMapObject&quot;: 40031}, {&quot;activateMapObject&quot;: 40025}, {&quot;activateMapObject&quot;: 40033}, {&quot;activateMapObject&quot;: 40034}, {&quot;activateMapObject&quot;: 40032}, {&quot;activateMapObject&quot;: 40026}, {&quot;activateMapObject&quot;: 40037}, {&quot;activateMapObject&quot;: 40036}, {&quot;activateMapObject&quot;: 40035}, {&quot;activateMapObject&quot;: 40027}, {&quot;activateMapObject&quot;: 40074}, {&quot;activateMapObject&quot;: 40030}, {&quot;activateMapObject&quot;: 40028}, {&quot;activateMapObject&quot;: 40029}, {&quot;deleteMapObject&quot;: 50003}, {&quot;deleteMapObject&quot;: 50004}, {&quot;deleteMapObject&quot;: 50005}, {&quot;deleteMapObject&quot;: 50021}, {&quot;deleteMapObject&quot;: 50031}, {&quot;deleteMapObject&quot;: 50025}, {&quot;deleteMapObject&quot;: 50033}, {&quot;deleteMapObject&quot;: 50034}, {&quot;deleteMapObject&quot;: 50032}, {&quot;deleteMapObject&quot;: 50026}, {&quot;deleteMapObject&quot;: 50037}, {&quot;deleteMapObject&quot;: 50036}, {&quot;deleteMapObject&quot;: 50035}, {&quot;deleteMapObject&quot;: 50027}, {&quot;deleteMapObject&quot;: 50074}, {&quot;deleteMapObject&quot;: 50030}, {&quot;deleteMapObject&quot;: 50028}, {&quot;deleteMapObject&quot;: 50029}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;, &quot;val&quot;: 0}}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;val&quot;: 1}}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40011}, {&quot;deleteMapObject&quot;: 40013}, {&quot;deleteMapObject&quot;: 40015}, {&quot;deleteMapObject&quot;: 40016}, {&quot;deleteMapObject&quot;: 40017}, {&quot;deleteMapObject&quot;: 40043}, {&quot;deleteMapObject&quot;: 40018}, {&quot;deleteMapObject&quot;: 40019}, {&quot;deleteMapObject&quot;: 40020}, {&quot;deleteMapObject&quot;: 40041}, {&quot;deleteMapObject&quot;: 40022}, {&quot;deleteMapObject&quot;: 40023}, {&quot;deleteMapObject&quot;: 40042}, {&quot;deleteMapObject&quot;: 40024}, {&quot;deleteMapObject&quot;: 40040}, {&quot;deleteMapObject&quot;: 40039}, {&quot;deleteMapObject&quot;: 40038}, {&quot;activateMapObject&quot;: 40003}, {&quot;activateMapObject&quot;: 40004}, {&quot;activateMapObject&quot;: 40005}, {&quot;activateMapObject&quot;: 40021}, {&quot;activateMapObject&quot;: 40031}, {&quot;activateMapObject&quot;: 40025}, {&quot;activateMapObject&quot;: 40033}, {&quot;activateMapObject&quot;: 40034}, {&quot;activateMapObject&quot;: 40032}, {&quot;activateMapObject&quot;: 40026}, {&quot;activateMapObject&quot;: 40037}, {&quot;activateMapObject&quot;: 40036}, {&quot;activateMapObject&quot;: 40035}, {&quot;activateMapObject&quot;: 40027}, {&quot;activateMapObject&quot;: 40074}, {&quot;activateMapObject&quot;: 40030}, {&quot;activateMapObject&quot;: 40028}, {&quot;activateMapObject&quot;: 40029}, {&quot;deleteMapObject&quot;: 50003}, {&quot;deleteMapObject&quot;: 50004}, {&quot;deleteMapObject&quot;: 50005}, {&quot;deleteMapObject&quot;: 50021}, {&quot;deleteMapObject&quot;: 50031}, {&quot;deleteMapObject&quot;: 50025}, {&quot;deleteMapObject&quot;: 50033}, {&quot;deleteMapObject&quot;: 50034}, {&quot;deleteMapObject&quot;: 50032}, {&quot;deleteMapObject&quot;: 50026}, {&quot;deleteMapObject&quot;: 50037}, {&quot;deleteMapObject&quot;: 50036}, {&quot;deleteMapObject&quot;: 50035}, {&quot;deleteMapObject&quot;: 50027}, {&quot;deleteMapObject&quot;: 50074}, {&quot;deleteMapObject&quot;: 50030}, {&quot;deleteMapObject&quot;: 50028}, {&quot;deleteMapObject&quot;: 50029}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40003}, {&quot;deleteMapObject&quot;: 40004}, {&quot;deleteMapObject&quot;: 40005}, {&quot;deleteMapObject&quot;: 40021}, {&quot;deleteMapObject&quot;: 40031}, {&quot;deleteMapObject&quot;: 40025}, {&quot;deleteMapObject&quot;: 40033}, {&quot;deleteMapObject&quot;: 40034}, {&quot;deleteMapObject&quot;: 40032}, {&quot;deleteMapObject&quot;: 40026}, {&quot;deleteMapObject&quot;: 40037}, {&quot;deleteMapObject&quot;: 40036}, {&quot;deleteMapObject&quot;: 40035}, {&quot;deleteMapObject&quot;: 40027}, {&quot;deleteMapObject&quot;: 40074}, {&quot;deleteMapObject&quot;: 40030}, {&quot;deleteMapObject&quot;: 40028}, {&quot;deleteMapObject&quot;: 40029}, {&quot;activateMapObject&quot;: 40011}, {&quot;activateMapObject&quot;: 40013}, {&quot;activateMapObject&quot;: 40015}, {&quot;activateMapObject&quot;: 40016}, {&quot;activateMapObject&quot;: 40017}, {&quot;activateMapObject&quot;: 40043}, {&quot;activateMapObject&quot;: 40018}, {&quot;activateMapObject&quot;: 40019}, {&quot;activateMapObject&quot;: 40020}, {&quot;activateMapObject&quot;: 40041}, {&quot;activateMapObject&quot;: 40022}, {&quot;activateMapObject&quot;: 40023}, {&quot;activateMapObject&quot;: 40042}, {&quot;activateMapObject&quot;: 40024}, {&quot;activateMapObject&quot;: 40040}, {&quot;activateMapObject&quot;: 40039}, {&quot;activateMapObject&quot;: 40038}, {&quot;deleteMapObject&quot;: 50011}, {&quot;deleteMapObject&quot;: 50013}, {&quot;deleteMapObject&quot;: 50015}, {&quot;deleteMapObject&quot;: 50016}, {&quot;deleteMapObject&quot;: 50017}, {&quot;deleteMapObject&quot;: 50043}, {&quot;deleteMapObject&quot;: 50018}, {&quot;deleteMapObject&quot;: 50019}, {&quot;deleteMapObject&quot;: 50020}, {&quot;deleteMapObject&quot;: 50041}, {&quot;deleteMapObject&quot;: 50022}, {&quot;deleteMapObject&quot;: 50023}, {&quot;deleteMapObject&quot;: 50042}, {&quot;deleteMapObject&quot;: 50024}, {&quot;deleteMapObject&quot;: 50040}, {&quot;deleteMapObject&quot;: 50039}, {&quot;deleteMapObject&quot;: 50038}, {&quot;deleteMapObject&quot;: 19200}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;, &quot;val&quot;: 1}}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;, &quot;val&quot;: 1}}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_ConfiguredV2&quot;}], &quot;action&quot;: [{&quot;deleteMapObject&quot;: 40003}, {&quot;deleteMapObject&quot;: 40004}, {&quot;deleteMapObject&quot;: 40005}, {&quot;deleteMapObject&quot;: 40021}, {&quot;deleteMapObject&quot;: 40031}, {&quot;deleteMapObject&quot;: 40025}, {&quot;deleteMapObject&quot;: 40033}, {&quot;deleteMapObject&quot;: 40034}, {&quot;deleteMapObject&quot;: 40032}, {&quot;deleteMapObject&quot;: 40026}, {&quot;deleteMapObject&quot;: 40037}, {&quot;deleteMapObject&quot;: 40036}, {&quot;deleteMapObject&quot;: 40035}, {&quot;deleteMapObject&quot;: 40027}, {&quot;deleteMapObject&quot;: 40074}, {&quot;deleteMapObject&quot;: 40030}, {&quot;deleteMapObject&quot;: 40028}, {&quot;deleteMapObject&quot;: 40029}, {&quot;activateMapObject&quot;: 40011}, {&quot;activateMapObject&quot;: 40013}, {&quot;activateMapObject&quot;: 40015}, {&quot;activateMapObject&quot;: 40016}, {&quot;activateMapObject&quot;: 40017}, {&quot;activateMapObject&quot;: 40043}, {&quot;activateMapObject&quot;: 40018}, {&quot;activateMapObject&quot;: 40019}, {&quot;activateMapObject&quot;: 40020}, {&quot;activateMapObject&quot;: 40041}, {&quot;activateMapObject&quot;: 40022}, {&quot;activateMapObject&quot;: 40023}, {&quot;activateMapObject&quot;: 40042}, {&quot;activateMapObject&quot;: 40024}, {&quot;activateMapObject&quot;: 40040}, {&quot;activateMapObject&quot;: 40039}, {&quot;activateMapObject&quot;: 40038}, {&quot;deleteMapObject&quot;: 50011}, {&quot;deleteMapObject&quot;: 50013}, {&quot;deleteMapObject&quot;: 50015}, {&quot;deleteMapObject&quot;: 50016}, {&quot;deleteMapObject&quot;: 50017}, {&quot;deleteMapObject&quot;: 50043}, {&quot;deleteMapObject&quot;: 50018}, {&quot;deleteMapObject&quot;: 50019}, {&quot;deleteMapObject&quot;: 50020}, {&quot;deleteMapObject&quot;: 50041}, {&quot;deleteMapObject&quot;: 50022}, {&quot;deleteMapObject&quot;: 50023}, {&quot;deleteMapObject&quot;: 50042}, {&quot;deleteMapObject&quot;: 50024}, {&quot;deleteMapObject&quot;: 50040}, {&quot;deleteMapObject&quot;: 50039}, {&quot;deleteMapObject&quot;: 50038}, {&quot;deleteMapObject&quot;: 19200}, {&quot;deleteMapObject&quot;: 9100}, {&quot;deleteMapObject&quot;: 9110}, {&quot;deleteMapObject&quot;: 9103}, {&quot;deleteMapObject&quot;: 9112}, {&quot;deleteMapObject&quot;: 9104}, {&quot;deleteMapObject&quot;: 9113}]}]" />
     <property name="hidden" value="true" type="bool" />
    </properties>
   </object>

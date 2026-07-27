@@ -11781,230 +11781,236 @@
 		"name": "The Tides Give, the Tides Take",
 		"description": "Choose a side in the battle for Svyelunite Temple and defeat the opposing faction.",
 		"offerDialog": {
-			"text": "A strange harmonic melody draws you toward two River Merfolk standing waist-deep in nearby water. They sound large conch horns and call for aid against the Homarids attacking Svyelunite Temple. To show the danger facing their people, they raise the severed head of one of the invaders.",
+			"text": "A strange harmonic melody draws you toward two River Merfolk standing waist-deep in nearby water. They sound large conch horns and call for aid against the Homarids attacking Svyelunite Temple. To show the danger facing their people, one of them raises the severed head of an invader.",
 			"options": [
 				{
 					"name": "(Continue)",
-					"text": "A prismatic light flickers in the Homarid's black eye. An alien voice rolls into your thoughts: \"The tides give... The tides take... Their time has passed... Our time has come... Help us wash their bodies away... and their flotsam shall flow to you...\"",
+					"text": "The other River Merfolk speaks while its companion holds the trophy aloft: \"The Homarids have overrun our sacred shore and are tearing Svyelunite Temple apart. Stand with the Vodalians, break their assault, and our priests will reward you from the temple treasury.\"",
 					"options": [
 						{
 							"name": "(Continue)",
-							"text": "The alien presence fades. One of the River Merfolk raises its conch horn and asks: \"Who will come to our aid at Svyelunite Temple?\"",
+							"text": "A prismatic light flickers in the severed Homarid's black eye. An alien voice rolls into your thoughts: \"A counter-offer... The tides give... The tides take... Their time has passed... Our time has come... Help us wash their bodies away... and their flotsam shall flow to you...\"",
 							"options": [
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_Svyelunite_Faction",
-							"not": true
-						},
-						{
-							"checkQuestFlag": "FE_Svyelunite_Completed",
-							"not": true
-						},
-						{
-							"actorID": 9100,
-							"not": true
-						}
-					],
-					"name": "\"I will help the Vodalians defend their temple.\" (Aid the Merfolk)",
-					"action": [
-						{
-							"setQuestFlag": {
-								"key": "FE_Svyelunite_Faction",
-								"val": 1
-							},
-							"issueQuest": "55"
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_Svyelunite_Faction",
-							"not": true
-						},
-						{
-							"checkQuestFlag": "FE_Svyelunite_Completed",
-							"not": true
-						},
-						{
-							"actorID": 9100,
-							"not": true
-						}
-					],
-					"name": "You turn from the heralds and answer the voice in the Homarid head. (Aid the Homarids)",
-					"action": [
-						{
-							"setQuestFlag": {
-								"key": "FE_Svyelunite_Faction",
-								"val": 2
-							},
-							"issueQuest": "55"
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_Svyelunite_Faction",
-							"not": true
-						},
-						{
-							"checkQuestFlag": "FE_Svyelunite_Completed",
-							"not": true
-						},
-						{
-							"actorID": 9100
-						}
-					],
-					"name": "\"I will help the Vodalians defend their temple.\" (Aid the Merfolk)",
-					"action": [
-						{
-							"setQuestFlag": {
-								"key": "FE_Svyelunite_Faction",
-								"val": 1
-							},
-							"issueQuest": "55"
-						},
-						{
-							"deleteMapObject": 9100
-						},
-						{
-							"deleteMapObject": 9110
-						},
-						{
-							"deleteMapObject": 9103
-						},
-						{
-							"deleteMapObject": 9104
-						},
-						{
-							"deleteMapObject": 9112
-						},
-						{
-							"deleteMapObject": 9113
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_Svyelunite_Faction",
-							"not": true
-						},
-						{
-							"checkQuestFlag": "FE_Svyelunite_Completed",
-							"not": true
-						},
-						{
-							"actorID": 9100
-						}
-					],
-					"name": "You turn from the heralds and answer the voice in the Homarid head. (Aid the Homarids)",
-					"action": [
-						{
-							"setQuestFlag": {
-								"key": "FE_Svyelunite_Faction",
-								"val": 2
-							},
-							"issueQuest": "55"
-						},
-						{
-							"deleteMapObject": 9100
-						},
-						{
-							"deleteMapObject": 9110
-						},
-						{
-							"deleteMapObject": 9103
-						},
-						{
-							"deleteMapObject": 9104
-						},
-						{
-							"deleteMapObject": 9112
-						},
-						{
-							"deleteMapObject": 9113
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"getQuestFlag": {
-								"key": "FE_Svyelunite_Faction",
-								"op": "=",
-								"val": 1
-							}
-						},
-						{
-							"checkQuestFlag": "FE_Svyelunite_Completed",
-							"not": true
-						}
-					],
-					"name": "\"I have not forgotten my promise to the Vodalians.\" (Resume Quest)",
-					"action": [
-						{
-							"issueQuest": "55"
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"getQuestFlag": {
-								"key": "FE_Svyelunite_Faction",
-								"op": "=",
-								"val": 2
-							}
-						},
-						{
-							"checkQuestFlag": "FE_Svyelunite_Completed",
-							"not": true
-						}
-					],
-					"name": "The alien tide still calls. You will honor your bargain with the Homarids. (Resume Quest)",
-					"action": [
-						{
-							"issueQuest": "55"
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_Svyelunite_Completed"
-						}
-					],
-					"name": "The battle at Svyelunite Temple has already been decided. (Leave)"
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_Svyelunite_Faction",
-							"not": true
-						},
-						{
-							"actorID": 9100
-						}
-					],
-					"name": "\"This fight is not for me.\" (Decline for now)",
-					"text": "The Merfolk lower their blades while the Homarid presence presses coldly against your thoughts. Neither army will let an uncommitted wanderer cross its battle line, and the approach remains blocked. If you change your mind, return tomorrow and they will hear your answer again."
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_Svyelunite_Faction",
-							"not": true
-						},
-						{
-							"actorID": 9100,
-							"not": true
-						}
-					],
-					"name": "\"Sorry, this fight is not for me. I am allergic to both shellfish and sharp blades.\" (Decline Quest)"
-				}
+								{
+									"name": "(Continue)",
+									"text": "The Merfolk tightens its grip on the Homarid head. \"Do not heed that thing. Will you stand with the defenders of Svyelunite Temple, side with its despoilers, or leave us to our war?\"",
+									"options": [
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												},
+												{
+													"actorID": 9100,
+													"not": true
+												}
+											],
+											"name": "\"I will help the Vodalians defend their temple.\" (Aid the Merfolk)",
+											"action": [
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"val": 1
+													},
+													"issueQuest": "55"
+												}
+											]
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												},
+												{
+													"actorID": 9100,
+													"not": true
+												}
+											],
+											"name": "You turn from the heralds and answer the voice in the Homarid head. (Aid the Homarids)",
+											"action": [
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"val": 2
+													},
+													"issueQuest": "55"
+												}
+											]
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												},
+												{
+													"actorID": 9100
+												}
+											],
+											"name": "\"I will help the Vodalians defend their temple.\" (Aid the Merfolk)",
+											"action": [
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"val": 1
+													},
+													"issueQuest": "55"
+												},
+												{
+													"deleteMapObject": 9100
+												},
+												{
+													"deleteMapObject": 9110
+												},
+												{
+													"deleteMapObject": 9103
+												},
+												{
+													"deleteMapObject": 9104
+												},
+												{
+													"deleteMapObject": 9112
+												},
+												{
+													"deleteMapObject": 9113
+												}
+											]
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												},
+												{
+													"actorID": 9100
+												}
+											],
+											"name": "You turn from the heralds and answer the voice in the Homarid head. (Aid the Homarids)",
+											"action": [
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"val": 2
+													},
+													"issueQuest": "55"
+												},
+												{
+													"deleteMapObject": 9100
+												},
+												{
+													"deleteMapObject": 9110
+												},
+												{
+													"deleteMapObject": 9103
+												},
+												{
+													"deleteMapObject": 9104
+												},
+												{
+													"deleteMapObject": 9112
+												},
+												{
+													"deleteMapObject": 9113
+												}
+											]
+										},
+										{
+											"condition": [
+												{
+													"getQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"op": "=",
+														"val": 1
+													}
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												}
+											],
+											"name": "\"I have not forgotten my promise to the Vodalians.\" (Resume Quest)",
+											"action": [
+												{
+													"issueQuest": "55"
+												}
+											]
+										},
+										{
+											"condition": [
+												{
+													"getQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"op": "=",
+														"val": 2
+													}
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												}
+											],
+											"name": "The alien tide still calls. You will honor your bargain with the Homarids. (Resume Quest)",
+											"action": [
+												{
+													"issueQuest": "55"
+												}
+											]
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed"
+												}
+											],
+											"name": "The battle at Svyelunite Temple has already been decided. (Leave)"
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"actorID": 9100
+												}
+											],
+											"name": "\"This fight is not for me.\" (Decline for now)",
+											"text": "The Merfolk lower their blades while the Homarid presence presses coldly against your thoughts. Neither army will let an uncommitted wanderer cross its battle line, and the approach remains blocked. If you change your mind, return tomorrow and they will hear your answer again."
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"actorID": 9100,
+													"not": true
+												}
+											],
+											"name": "\"Sorry, this fight is not for me. I am allergic to both shellfish and sharp blades.\" (Decline Quest)"
+										}
+									]
+								}
 							]
 						}
 					]
@@ -12035,11 +12041,26 @@
 									"grantRewards": [
 										{
 											"type": "gold",
-											"count": 600
+											"count": 1000
 										},
 										{
 											"type": "shards",
-											"count": 18
+											"count": 25
+										},
+										{
+											"type": "card",
+											"count": 1,
+											"cardName": "Svyelunite Temple|FEM"
+										},
+										{
+											"type": "card",
+											"count": 1,
+											"cardName": "Vodalian Knights|FEM"
+										},
+										{
+											"type": "card",
+											"count": 1,
+											"cardName": "Seasinger|FEM"
 										}
 									],
 									"setQuestFlag": {
@@ -12069,6 +12090,14 @@
 							"action": [
 								{
 									"grantRewards": [
+										{
+											"type": "gold",
+											"count": 1000
+										},
+										{
+											"type": "shards",
+											"count": 25
+										},
 										{
 											"type": "card",
 											"count": 1,
@@ -12123,11 +12152,13 @@
 				"POITags": [
 					"SvyeluniteTemple"
 				],
-				"objective": "Clear",
+				"objective": "MapFlag",
 				"prologue": {},
 				"epilogue": {},
 				"failureDialog": {},
-				"POIToken": ""
+				"POIToken": "",
+				"mapFlag": "FE_Svyelunite_OpponentsDefeated",
+				"mapFlagValue": 18
 			},
 			{
 				"id": 2,
