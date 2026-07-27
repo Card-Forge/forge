@@ -102286,7 +102286,7 @@
       "decks/standard/fallen_empires_svyelunite_homarid_spawning_bed.dck"
     ],
     "ai": "cautious",
-    "speed": 14,
+    "speed": 0,
     "life": 30,
     "colors": "U",
     "questTags": [
@@ -102335,7 +102335,7 @@
       "decks/standard/fallen_empires_svyelunite_homarid_warrior_a.dck"
     ],
     "ai": "reckless",
-    "speed": 20,
+    "speed": 14,
     "life": 20,
     "colors": "U",
     "questTags": [
@@ -102974,7 +102974,7 @@
       "decks/standard/fallen_empires_svyelunite_homarid_warrior_b.dck"
     ],
     "ai": "reckless",
-    "speed": 20,
+    "speed": 14,
     "life": 20,
     "colors": "U",
     "questTags": [
@@ -103015,7 +103015,7 @@
       "decks/standard/fallen_empires_svyelunite_homarid_warrior_c.dck"
     ],
     "ai": "reckless",
-    "speed": 20,
+    "speed": 14,
     "life": 20,
     "colors": "U",
     "questTags": [
@@ -103056,7 +103056,7 @@
       "decks/standard/fallen_empires_svyelunite_homarid_warrior_5ed.dck"
     ],
     "ai": "reckless",
-    "speed": 20,
+    "speed": 14,
     "life": 20,
     "colors": "U",
     "questTags": [

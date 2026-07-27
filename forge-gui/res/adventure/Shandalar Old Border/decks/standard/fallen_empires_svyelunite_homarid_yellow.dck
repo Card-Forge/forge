@@ -20,6 +20,6 @@ Name=Homarid
 
 [StartInBattle_Reference]
 1 Seafloor Debris|ODY
-1 Island|3ED
 1 Tidal Influence|FEM
 1 Homarid|FEM|[19b]
+1 Tidal Flats|FEM|[27b]
