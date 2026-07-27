@@ -435,6 +435,7 @@ public abstract class ImageFetcher {
                     o.onImageFetched();
             }
             currentFetches.remove(destPath);
+            fetching.remove(destPath); // allow re-registration if the download failed or was evicted
         };
         try {
             ThreadUtil.getServicePool().submit(getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));

@@ -25,6 +25,7 @@ import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import forge.ImageCache;
 import forge.ImageKeys;
@@ -138,8 +139,10 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
             return image;
         } else if (displayed instanceof CardStateView) {
             CardStateView card = (CardStateView) displayed;
-            BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), false, card.getCard());
-            if (image == null) {
+            Pair<BufferedImage, Boolean> originalImageInfo = ImageCache.getCardOriginalImageInfo(card.getImageKey(), false);
+            BufferedImage image = originalImageInfo.getLeft();
+            boolean isPlaceholder = originalImageInfo.getRight();
+            if (image == null || isPlaceholder) {
                 GuiBase.getInterface().getImageFetcher().fetchImage(card.getImageKey(), this);
             }
             return FImageUtil.getImage((CardStateView) displayed);
@@ -149,8 +152,10 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
 
     @Override
     public void onImageFetched() {
-        setImage(displayed, mayView, false);
-        repaint();
+        SwingUtilities.invokeLater(() -> {
+            setImage(displayed, mayView, false);
+            repaint();
+        });
     }
 
     private static AutoSizeImageMode getAutoSizeImageMode() {

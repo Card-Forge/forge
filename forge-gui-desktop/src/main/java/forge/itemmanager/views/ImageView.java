@@ -26,6 +26,7 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.CardZoomer;
+import forge.util.ImageFetcher;
 import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
 
@@ -987,11 +988,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @SuppressWarnings("serial")
-    private class CardViewDisplay extends JPanel implements ILocalRepaint {
+    private class CardViewDisplay extends JPanel implements ILocalRepaint, ImageFetcher.Callback {
         boolean showRanking = false;
         private CardViewDisplay() {
             setOpaque(false);
             setFocusable(true);
+        }
+
+        @Override
+        public void onImageFetched() {
+            repaintSelf();
         }
 
         public void setShowRanking(boolean showRanking) {
@@ -1162,7 +1168,28 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final int drawHeight = bounds.height - 2 * borderSize;
             final int imageWidth = Math.round(drawWidth * screenScale);
             final int imageHeight = Math.round(drawHeight * screenScale);
-            BufferedImage img = ImageCache.getImage(item, imageWidth, imageHeight, itemInfo.alt);
+
+            // Use getCardOriginalImageInfo to detect placeholder images so we can
+            // trigger an async fetch for cards not yet on disk.
+            BufferedImage img = null;
+            boolean isPlaceholder = false;
+            if (item instanceof IPaperCard) {
+                org.apache.commons.lang3.tuple.Pair<java.awt.image.BufferedImage, Boolean> imgInfo =
+                        ImageCache.getCardOriginalImageInfo(item.getImageKey(itemInfo.alt), true);
+                img = imgInfo.getLeft();
+                isPlaceholder = imgInfo.getRight();
+                if (isPlaceholder) {
+                    // Image not on disk yet — queue a fetch after paint completes; repaint when it arrives
+                    final String fetchKey = item.getImageKey(itemInfo.alt);
+                    SwingUtilities.invokeLater(() ->
+                            GuiBase.getInterface().getImageFetcher().fetchImage(fetchKey, this));
+                } else if (img != null) {
+                    // Scale the resolved image to the target display dimensions
+                    img = ImageCache.scaleImage(item.getImageKey(itemInfo.alt), imageWidth, imageHeight, true, null);
+                }
+            } else {
+                img = ImageCache.getImage(item, imageWidth, imageHeight, itemInfo.alt);
+            }
 
             if (img != null) {
                 g.drawImage(img, drawX, drawY, drawWidth, drawHeight, null);
@@ -1186,8 +1213,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         BufferedImage cardImage = ImageCache.scaleImage(deckImageKey, bounds.width, bounds.height, false, null);
 
                         if (cardImage == null) {
-                            //draw generic box
+                            //draw generic box while image loads
                             FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_DECK_GENERIC), bounds.x, bounds.y, bounds.width - 2 * cornerSize, bounds.height - 2 * cornerSize);
+                            // trigger async download of the commander/cover card art
+                            if (!deckImageKey.isEmpty()) {
+                                final String fetchKey = deckImageKey;
+                                SwingUtilities.invokeLater(() ->
+                                        GuiBase.getInterface().getImageFetcher().fetchImage(fetchKey, this));
+                            }
                         } else {
                             Image art = null;
                             try {

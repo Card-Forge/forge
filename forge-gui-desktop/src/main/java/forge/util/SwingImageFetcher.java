@@ -2,13 +2,19 @@ package forge.util;
 
 import forge.localinstance.properties.ForgeConstants;
 
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Iterator;
 
 public class SwingImageFetcher extends ImageFetcher {
 
@@ -30,24 +36,21 @@ public class SwingImageFetcher extends ImageFetcher {
 
         private boolean doFetch(String urlToDownload) throws IOException {
             if (disableHostedDownload && urlToDownload.startsWith(ForgeConstants.URL_CARDFORGE)) {
-                // Don't try to download card images from cardforge servers
                 return false;
             }
 
             String newdespath = urlToDownload.contains(".fullborder.jpg") || urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) ?
                     TextUtil.fastReplace(destPath, ".full.jpg", ".fullborder.jpg") : destPath;
             if (!newdespath.contains(".full") && !newdespath.contains(".artcrop") && urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) && !destPath.startsWith(ForgeConstants.CACHE_TOKEN_PICS_DIR))
-                newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); //fix planes/phenomenon for round border options
+                newdespath = newdespath.replace(".jpg", ".fullborder.jpg");
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
             BufferedImage image = ImageIO.read(url);
-            // First, save to a temporary file so that nothing tries to read
-            // a partial download.
+
             File destFile = new File(newdespath + ".tmp");
-            // need to check directory folder for mkdir
             destFile.getParentFile().mkdirs();
-            if (ImageIO.write(image, "jpg", destFile)) {
-                // Now, rename it to the correct name.
+
+            if (writeJpeg(image, destFile, 0.65f)) {
                 if (destFile.renameTo(new File(newdespath))) {
                     System.out.println("Saved image to " + newdespath);
                     SwingUtilities.invokeLater(notifyObservers);
@@ -57,8 +60,7 @@ public class SwingImageFetcher extends ImageFetcher {
                 }
             } else {
                 System.err.println("Failed to save image from " + url + " as jpeg");
-                // try to save image as png instead
-                if (ImageIO.write(image, "png", destFile)) {
+                if (writePng(image, destFile)) {
                     String newPath = newdespath.replace(".jpg", ".png");
                     if (destFile.renameTo(new File(newPath))) {
                         System.out.println("Saved image to " + newPath);
@@ -73,6 +75,35 @@ public class SwingImageFetcher extends ImageFetcher {
             }
 
             return true;
+        }
+
+        private boolean writeJpeg(BufferedImage image, File file, float quality) {
+            try {
+                Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("jpg");
+                if (!writers.hasNext()) return ImageIO.write(image, "jpg", file);
+                ImageWriter writer = writers.next();
+                ImageWriteParam param = writer.getDefaultWriteParam();
+                param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+                param.setCompressionQuality(quality);
+                try (ImageOutputStream ios = ImageIO.createImageOutputStream(new FileOutputStream(file))) {
+                    writer.setOutput(ios);
+                    writer.write(null, new IIOImage(image, null, null), param);
+                }
+                writer.dispose();
+                return true;
+            } catch (IOException e) {
+                System.err.println("JPEG write failed: " + e.getMessage());
+                return false;
+            }
+        }
+
+        private boolean writePng(BufferedImage image, File file) {
+            try {
+                return ImageIO.write(image, "png", file);
+            } catch (IOException e) {
+                System.err.println("PNG write failed: " + e.getMessage());
+                return false;
+            }
         }
 
         private String tofullBorder(String imageurl) {
