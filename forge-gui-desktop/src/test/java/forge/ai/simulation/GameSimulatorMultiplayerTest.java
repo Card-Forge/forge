@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 
 import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
-import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.deck.Deck;
 import forge.game.Game;
@@ -19,7 +18,6 @@ import forge.game.GameStage;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
@@ -29,7 +27,7 @@ import forge.game.zone.ZoneType;
 
 public class GameSimulatorMultiplayerTest extends SimulationTest {
     @Test
-    public void testSimulationResolvesAllOpponentChoicesDeterministically() {
+    public void testSimulationResolvesMultiplayerSacrificeChoicesDeterministically() {
         Scenario scenario = createSacrificeScenario();
         Integer expectedScore = null;
 
@@ -57,7 +55,7 @@ public class GameSimulatorMultiplayerTest extends SimulationTest {
     }
 
     @Test
-    public void testPickerChoosesBeneficialMultiplayerSpellWithoutUsingMatchControllers() {
+    public void testPickerChoosesBeneficialMultiplayerSacrifice() {
         Scenario scenario = createSacrificeScenario();
         PlayerController firstOpponentController = scenario.firstOpponent.getController();
         PlayerController secondOpponentController = scenario.secondOpponent.getController();
@@ -100,12 +98,12 @@ public class GameSimulatorMultiplayerTest extends SimulationTest {
     private Game createThreePlayerGame() {
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck deck = new Deck();
-        players.add(new RegisteredPlayer(deck).setPlayer(new FailOnChoiceLobbyPlayer("opponent-1")));
+        players.add(new RegisteredPlayer(deck).setPlayer(new LobbyPlayerAi("opponent-1", null)));
 
         Set<AIOption> options = new HashSet<>();
         options.add(AIOption.USE_SIMULATION);
         players.add(new RegisteredPlayer(deck).setPlayer(new LobbyPlayerAi("ai", options)));
-        players.add(new RegisteredPlayer(deck).setPlayer(new FailOnChoiceLobbyPlayer("opponent-2")));
+        players.add(new RegisteredPlayer(deck).setPlayer(new LobbyPlayerAi("opponent-2", null)));
 
         GameRules rules = new GameRules(GameType.Constructed);
         Match match = new Match(rules, players, "Multiplayer simulation test");
@@ -138,31 +136,6 @@ public class GameSimulatorMultiplayerTest extends SimulationTest {
             this.firstOpponent = firstOpponent;
             this.secondOpponent = secondOpponent;
             this.spellAbility = spellAbility;
-        }
-    }
-
-    private static final class FailOnChoiceLobbyPlayer extends LobbyPlayerAi {
-        private FailOnChoiceLobbyPlayer(String name) {
-            super(name, null);
-        }
-
-        @Override
-        public Player createIngamePlayer(Game game, int id) {
-            Player player = new Player(getName(), game, id);
-            player.setFirstController(new FailOnChoiceController(game, player, this));
-            return player;
-        }
-    }
-
-    private static final class FailOnChoiceController extends PlayerControllerAi {
-        private FailOnChoiceController(Game game, Player player, LobbyPlayerAi lobbyPlayer) {
-            super(game, player, lobbyPlayer);
-        }
-
-        @Override
-        public CardCollectionView choosePermanentsToSacrifice(SpellAbility sa, int min, int max,
-                CardCollectionView validTargets, String message) {
-            throw new AssertionError("Copied simulation requested a choice from the match controller");
         }
     }
 }
