@@ -52,8 +52,10 @@ public class GameStateEvaluator {
 
         GameCopier copier = new GameCopier(evalGame);
         Game gameCopy = copier.makeCopy(null, aiPlayer);
+        Player aiPlayerCopy = (Player) copier.find(aiPlayer);
 
-        gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE, () -> GameSimulator.resolveStack(gameCopy, aiPlayer.getWeakestOpponent()));
+        gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE,
+                () -> GameSimulator.resolveStack(gameCopy, aiPlayerCopy));
         CombatSimResult result = new CombatSimResult();
         result.copier = copier;
         result.gameCopy = gameCopy;
