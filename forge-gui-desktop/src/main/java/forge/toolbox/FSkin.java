@@ -435,6 +435,10 @@ public class FSkin {
             skinProp = skinProp0;
         }
 
+        public void setColor(final Color color0) {
+            color = color0;
+        }
+
         public static Colors fromSkinProp(final FSkinProp skinProp) {
             for (final Colors c : Colors.values()) {
                 if (c.skinProp == skinProp) {
@@ -1678,9 +1682,74 @@ public class FSkin {
      *
      * @see <a href="http://tips4java.wordpress.com/2008/10/09/uimanager-defaults/">UIManager Defaults</a>
      */
+    // Dark theme palette (Arena-inspired for Commander mode)
+    public static final Color DARK_BG = new Color(26, 26, 46);
+    public static final Color DARK_BG2 = new Color(36, 37, 56);
+    public static final Color DARK_SURFACE = new Color(45, 45, 68);
+    public static final Color DARK_TEXT = new Color(240, 240, 240);
+    public static final Color DARK_BORDER = new Color(74, 74, 106);
+    public static final Color DARK_HOVER = new Color(58, 58, 92);
+    public static final Color DARK_ACTIVE = new Color(255, 90, 90);
+    public static final Color DARK_INACTIVE = new Color(90, 90, 122);
+    public static final Color DARK_ZEBRA = new Color(42, 42, 66);
+    public static final Color DARK_OVERLAY = new Color(0, 0, 0, 128);
+    public static final Color DARK_ORANGE = new Color(247, 147, 26);
+    public static final Color DARK_ORANGE_DIM = new Color(179, 106, 14);
+
+    /**
+     * Applies an Arena-inspired dark theme to all skin colors.
+     * Call after skin is fully loaded. Re-initializes ForgeLookAndFeel
+     * for the given frame.
+     */
+    public static void applyCommanderDarkTheme(final JFrame frame) {
+        Colors.CLR_THEME.setColor(DARK_BG);
+        Colors.CLR_THEME2.setColor(DARK_BG2);
+        Colors.CLR_TEXT.setColor(DARK_TEXT);
+        Colors.CLR_BORDERS.setColor(DARK_BORDER);
+        Colors.CLR_HOVER.setColor(DARK_HOVER);
+        Colors.CLR_ACTIVE.setColor(DARK_ACTIVE);
+        Colors.CLR_INACTIVE.setColor(DARK_INACTIVE);
+        Colors.CLR_ZEBRA.setColor(DARK_ZEBRA);
+        Colors.CLR_OVERLAY.setColor(DARK_OVERLAY);
+        Colors.CLR_PHASE_INACTIVE_ENABLED.setColor(DARK_BORDER);
+        Colors.CLR_PHASE_INACTIVE_DISABLED.setColor(DARK_HOVER);
+        Colors.CLR_PHASE_ACTIVE_ENABLED.setColor(DARK_ORANGE);
+        Colors.CLR_PHASE_ACTIVE_DISABLED.setColor(DARK_ORANGE_DIM);
+        Colors.CLR_COMBAT_TARGETING_ARROW.setColor(DARK_ACTIVE);
+        Colors.CLR_NORMAL_TARGETING_ARROW.setColor(DARK_ORANGE);
+        Colors.CLR_PWATTK_TARGETING_ARROW.setColor(DARK_ACTIVE);
+
+        // Update SkinColor cache directly (skip Colors.updateAll which reads from sprite)
+        for (final SkinColor c : SkinColor.baseColors.values()) {
+            c.updateColor();
+        }
+        for (final SkinColor c : SkinColor.derivedColors.values()) {
+            c.updateColor();
+        }
+
+        // Re-apply look-and-feel to UIManager with new colors
+        ForgeLookAndFeel.reapply(frame);
+    }
+
     private static class ForgeLookAndFeel { //needs to live in FSkin for access to skin colors
         private static boolean onInit = true;
         private static boolean isMetalLafSet = false;
+
+        /**
+         * Re-applies look-and-feel UIManager properties after dark theme color change.
+         * Calls all set*LookAndFeel methods directly, bypassing the onInit guard.
+         */
+        private static void reapply(final JFrame frame) {
+            final ForgeLookAndFeel laf = new ForgeLookAndFeel();
+            laf.setMenusLookAndFeel();
+            laf.setComboBoxLookAndFeel();
+            laf.setTabbedPaneLookAndFeel();
+            laf.setButtonLookAndFeel();
+            laf.setToolTipLookAndFeel();
+            laf.setTextEditLookAndFeel();
+            SwingUtilities.updateComponentTreeUI(frame);
+            frame.repaint();
+        }
 
         private final Color FORE_COLOR = getColor(Colors.CLR_TEXT).color;
         private final Color BACK_COLOR = getColor(Colors.CLR_THEME2).color;

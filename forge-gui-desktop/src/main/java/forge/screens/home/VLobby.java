@@ -666,6 +666,7 @@ public class VLobby implements ILobbyView {
 
         final Object selected = getSchemeDeckLists().get(playerIndex).getSelectedValue();
         final Deck deck = decks[playerIndex];
+        if (deck == null) { return; }
         CardPool schemePool = null;
         if (selected instanceof String) {
             String sel = (String) selected;
@@ -697,6 +698,7 @@ public class VLobby implements ILobbyView {
 
         final Object selected = getPlanarDeckLists().get(playerIndex).getSelectedValue();
         final Deck deck = decks[playerIndex];
+        if (deck == null) { return; }
         CardPool planePool = null;
         if (selected instanceof String) {
             String sel = (String) selected;

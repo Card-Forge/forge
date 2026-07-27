@@ -1,6 +1,7 @@
 package forge.screens.home;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JMenu;
 
@@ -52,6 +53,16 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
         id0.getDoc().populate();
         id0.getDoc().getLayoutControl().update();
         lblSelected = VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(id0);
+        if (lblSelected == null) {
+            Map<EDocID, LblMenuItem> labels = VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels();
+            if (!labels.isEmpty()) {
+                EDocID firstKey = labels.keySet().iterator().next();
+                prefs.setPref(FPref.SUBMENU_CURRENTMENU, firstKey.toString());
+                prefs.save();
+                itemClick(firstKey);
+            }
+            return;
+        }
         lblSelected.setSelected(true);
 
         prefs.setPref(FPref.SUBMENU_CURRENTMENU, id0.toString());
@@ -105,11 +116,14 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
             selected = EDocID.valueOf(FModel.getPreferences().getPref(FPref.SUBMENU_CURRENTMENU));
         } catch (final Exception e) { }
 
-        if (selected != null && VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(selected) != null) {
+        Map<EDocID, LblMenuItem> labels = VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels();
+        if (selected != null && labels.get(selected) != null) {
             itemClick(selected);
-        }
-        else {
-            itemClick(EDocID.HOME_CONSTRUCTED);
+        } else if (!labels.isEmpty()) {
+            EDocID firstAvailable = labels.keySet().iterator().next();
+            FModel.getPreferences().setPref(FPref.SUBMENU_CURRENTMENU, firstAvailable.toString());
+            FModel.getPreferences().save();
+            itemClick(firstAvailable);
         }
     }
 

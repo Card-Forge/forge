@@ -48,6 +48,9 @@ public enum CSubmenuGauntletContests implements ICDoc {
      */
     @Override
     public void initialize() {
+        if ("true".equals(System.getProperty("reforge.commander.mode"))) {
+            return;
+        }
         view.getBtnStart().addActionListener(actStartGame);
 
         view.getLstDecks().initialize();

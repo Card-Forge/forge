@@ -44,6 +44,7 @@ import forge.model.FModel;
 import forge.screens.home.gauntlet.*;
 import forge.screens.home.online.VSubmenuOnlineDecks;
 import forge.screens.home.online.VSubmenuOnlineLobby;
+import forge.screens.home.playcommander.VSubmenuPlayCommander;
 import forge.screens.home.puzzle.VSubmenuPuzzleCreate;
 import forge.screens.home.puzzle.VSubmenuPuzzleSolve;
 //import forge.screens.home.puzzle.VSubmenuTutorial;
@@ -114,39 +115,58 @@ public enum VHomeUI implements IVTopLevelUI {
         pnlSubmenus = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"), true,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        // Add new menu items here (order doesn't matter).
-        allSubmenus.add(VSubmenuConstructed.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuDraft.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuSealed.SINGLETON_INSTANCE);
-        //allSubmenus.add(VSubmenuWinston.SINGLETON_INSTANCE);
+        boolean isCommanderOnly = "true".equals(System.getProperty("reforge.commander.mode"));
 
-        allSubmenus.add(VSubmenuOnlineLobby.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuOnlineDecks.SINGLETON_INSTANCE);
+        if (isCommanderOnly) {
+            FSkin.applyCommanderDarkTheme(FView.SINGLETON_INSTANCE.getFrame());
+            allSubmenus.add(VSubmenuPlayCommander.SINGLETON_INSTANCE);
 
-        allSubmenus.add(VSubmenuQuestStart.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuQuestLoadData.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuQuestDecks.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuDuels.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuChallenges.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuQuestDraft.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuQuestPrefs.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuGauntletCommanderQuick.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuGauntletCommanderBuild.SINGLETON_INSTANCE);
 
-        allSubmenus.add(VSubmenuGauntletQuick.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuGauntletBuild.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuGauntletLoad.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuGauntletContests.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuGauntletCommanderQuick.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuGauntletCommanderBuild.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuOnlineLobby.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuOnlineDecks.SINGLETON_INSTANCE);
 
-        allSubmenus.add(VSubmenuPuzzleSolve.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuPuzzleCreate.SINGLETON_INSTANCE);
-        //allSubmenus.add(VSubmenuTutorial.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuPreferences.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuAchievements.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuAvatars.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuDownloaders.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuReleaseNotes.SINGLETON_INSTANCE);
+        } else {
+            allSubmenus.add(VSubmenuConstructed.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuDraft.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuSealed.SINGLETON_INSTANCE);
+            //allSubmenus.add(VSubmenuWinston.SINGLETON_INSTANCE);
 
-        allSubmenus.add(VSubmenuPreferences.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuAchievements.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuAvatars.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuDownloaders.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuReleaseNotes.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuOnlineLobby.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuOnlineDecks.SINGLETON_INSTANCE);
+
+            allSubmenus.add(VSubmenuQuestStart.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuQuestLoadData.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuQuestDecks.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuDuels.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuChallenges.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuQuestDraft.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuQuestPrefs.SINGLETON_INSTANCE);
+
+            allSubmenus.add(VSubmenuGauntletQuick.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuGauntletBuild.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuGauntletLoad.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuGauntletContests.SINGLETON_INSTANCE);
+
+            allSubmenus.add(VSubmenuGauntletCommanderQuick.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuGauntletCommanderBuild.SINGLETON_INSTANCE);
+
+            allSubmenus.add(VSubmenuPuzzleSolve.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuPuzzleCreate.SINGLETON_INSTANCE);
+            //allSubmenus.add(VSubmenuTutorial.SINGLETON_INSTANCE);
+
+            allSubmenus.add(VSubmenuPreferences.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuAchievements.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuAvatars.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuDownloaders.SINGLETON_INSTANCE);
+            allSubmenus.add(VSubmenuReleaseNotes.SINGLETON_INSTANCE);
+        }
 
         // For each group: init its panel
         final SortedMap<EMenuGroup, JPanel> allGroupPanels = new TreeMap<>();

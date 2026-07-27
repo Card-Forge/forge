@@ -9,10 +9,11 @@ import forge.util.Localizer;
  */
 public enum EMenuGroup {
     SANCTIONED ("lblSanctionedFormats"),
+    PLAY ("lblCommander"),
+    GAUNTLET ("lblGauntlets"),
     ONLINE ("lblOnlineMultiplayer"),
     QUEST ("lblQuestMode"),
     PUZZLE ("lblPuzzleMode"),
-    GAUNTLET ("lblGauntlets"),
     SETTINGS ("lblGameSettings");
 
     private final String strTitle;

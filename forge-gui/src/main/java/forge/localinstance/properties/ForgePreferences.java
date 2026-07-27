@@ -188,6 +188,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         PLAY_ONLINE_SCREEN("Lobby"),
 
         SUBMENU_CURRENTMENU ("CONSTRUCTED"),
+        SUBMENU_PLAY ("true"),
         SUBMENU_SANCTIONED ("true"),
         SUBMENU_ONLINE ("false"),
         SUBMENU_GAUNTLET ("false"),
