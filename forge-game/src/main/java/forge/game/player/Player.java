@@ -2740,19 +2740,25 @@ public class Player extends GameEntity implements Comparable<Player> {
         toPlayer.resetCommanderStats();
         toPlayer.commanders.clear();
         for (final Card c : this.getCommanders()) {
-            Card newCommander = mapper.apply(c);
-            if(newCommander == null)
-                throw new RuntimeException("Unable to find commander in game snapshot: " + c);
+            Card newCommander = mapCommander(c, mapper);
+            if(newCommander == null) {
+                // An unmapped commander leaves the snapshot incomplete, but throwing
+                // here would end the match instead of just the undo it was taken for.
+                System.err.println("Unable to find commander in game snapshot: " + c);
+                continue;
+            }
             toPlayer.commanders.add(newCommander);
             newCommander.setCommander(true);
         }
         for (Map.Entry<Card, Integer> entry : this.commanderCast.entrySet()) {
             //Have to iterate over this separately in case commanders change mid-game.
-            Card commander = mapper.apply(entry.getKey());
+            Card commander = mapCommander(entry.getKey(), mapper);
+            if(commander == null) //Ceased to exist?
+                continue;
             toPlayer.commanderCast.put(commander, entry.getValue());
         }
         for (Map.Entry<Card, Integer> entry : this.getCommanderDamage()) {
-            Card commander = mapper.apply(entry.getKey());
+            Card commander = mapCommander(entry.getKey(), mapper);
             if(commander == null) //Ceased to exist?
                 continue;
             int damage = entry.getValue();
@@ -2762,6 +2768,16 @@ public class Player extends GameEntity implements Comparable<Player> {
             Card commanderEffect = mapper.apply(this.commanderEffect);
             toPlayer.commanderEffect = (DetachedCardEffect) commanderEffect;
         }
+    }
+
+    /**
+     * Commander references are kept across zone changes, each of which can hand
+     * the game a new object for the same card (cast for a mutate cost, bounced
+     * to the command zone, ...), so resolve the card the game is actually
+     * holding before asking a snapshot's map for its counterpart.
+     */
+    private Card mapCommander(Card commander, Function<Card, Card> mapper) {
+        return mapper.apply(game.getCardState(commander));
     }
 
     /**
