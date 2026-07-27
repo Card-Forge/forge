@@ -237,6 +237,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         //FIXME - on mobile gui it allows the card to cast from opponent hands issue #2127, investigate where the bug occurs before this method is called
         spellViewCache = SpellAbilityView.getMap(abilities);
+        if (getPlayer().isControlled() && getPlayer().getControllingPlayer().getController() instanceof PlayerControllerHuman pch) {
+            // need to transfer to original controller or menu selection fails
+            pch.spellViewCache = spellViewCache;
+        }
         for (SpellAbility sa : abilities) {
             sa.getView().updateCanPlay(sa);
         }
@@ -1146,10 +1150,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         GameEntityViewMap<Card, CardView> gameCacheMove = GameEntityView.getMap(cards);
         List<CardView> choices = gameCacheMove.getTrackableKeys();
 
-        boolean topOfDeck = destinationZone.isDeck()
-                && (source == null
-                    || !source.hasParam("LibraryPosition")
-                    || AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) >= 0);
+        boolean topOfDeck = orderedMoveToTopOfLibrary(destinationZone, source);
 
         switch (destinationZone) {
             case Library:
@@ -1582,8 +1583,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final Set<CardView> actionable = Sets.newHashSet();
         if (showActionable) {
             if (paymentMode) {
+                // Snapshot each zone: the payment prompt refreshes on the EDT while the
+                // game thread can remove cards (e.g. Squandered Resources sacrificing a land).
                 for (ZoneType zone : ACTIONABLE_PAYMENT_ZONES) {
-                    for (Card c : player.getCardsIn(zone)) {
+                    for (Card c : player.getCardsIn(zone).threadSafeIterable()) {
                         if (cardHasPlayableManaAbility(c)) {
                             actionable.add(c.getView());
                         }
@@ -2433,7 +2436,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean playTrigger(final Card host, final WrappedAbility wrapperAbility, final boolean isMandatory) {
-        return PlaySpellAbility.playSpellAbilityNoStack(this, player, wrapperAbility);
+        return PlaySpellAbility.playSpellAbilityNoStack(this, player, wrapperAbility, false);
     }
 
     @Override

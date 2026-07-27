@@ -26,6 +26,7 @@ import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.card.CardAvatarImage;
+import forge.card.CardSleeveImage;
 import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
@@ -166,6 +167,10 @@ public class MatchController extends NetworkGuiGame {
     public static FImage getPlayerSleeve(final PlayerView p) {
         if (p == null)
             return FSkinImage.UNKNOWN;
+        final String artKey = p.getSleeveArtKey();
+        if (!StringUtils.isEmpty(artKey)) {
+            return new CardSleeveImage(artKey, p.getSleeveArtOffset()); // card-art sleeve: cover-cropped to the sleeve aspect
+        }
         return new FTextureRegionImage(FSkin.getSleeves().get(p.getSleeveIndex()));
     }
 

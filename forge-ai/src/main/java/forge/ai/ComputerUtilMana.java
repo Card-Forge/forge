@@ -5,6 +5,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
@@ -1365,7 +1366,12 @@ public class ComputerUtilMana {
      */
     private static ListMultimap<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final ListMultimap<Integer, SpellAbility> manaAbilityMap,
             final ManaCostBeingPaid cost) {
-        ListMultimap<ManaCostShard, SpellAbility> res = ArrayListMultimap.create();
+        // EnumMap-backed so keySet()/entries() iterate in ManaCostShard declaration order rather
+        // than the enum's identity-hash order (which varies per JVM run). sortManaAbilities and
+        // getNextShardToPay walk this keySet, so a nondeterministic order there made the AI's
+        // choice of which source to tap - and thus its whole line of play - nondeterministic.
+        ListMultimap<ManaCostShard, SpellAbility> res =
+                MultimapBuilder.enumKeys(ManaCostShard.class).arrayListValues().build();
 
         if ((cost.getGenericManaAmount() > 0 || cost.hasAnyKind(ManaAtom.OR_2_GENERIC)) && manaAbilityMap.containsKey(ManaAtom.GENERIC)) {
             res.putAll(ManaCostShard.GENERIC, manaAbilityMap.get(ManaAtom.GENERIC));
@@ -1559,6 +1565,10 @@ public class ComputerUtilMana {
         });
 
         final CardCollection sortedManaSources = new CardCollection();
+        if (manaSources.isEmpty()) {
+            return sortedManaSources;
+        }
+
         final CardCollection otherManaSources = new CardCollection();
         final CardCollection useLastManaSources = new CardCollection();
         final CardCollection colorlessManaSources = new CardCollection();
@@ -1575,6 +1585,8 @@ public class ComputerUtilMana {
         // 2. Search for mana sources that have a certain number of abilities
         // 3. Use lands that produce any color many
         // 4. all other sources (creature, costs, drawback, etc.)
+
+        final boolean canDieToTapDamage = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
         for (Card card : manaSources) {
             // exclude creature sources that will tap as a part of an attack declaration
             if (card.isCreature()) {
@@ -1586,7 +1598,7 @@ public class ComputerUtilMana {
                 }
             }
             // exclude cards that will deal lethal damage when tapped
-            if (ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()) {
+            if (canDieToTapDamage) {
                 boolean dealsLethalOnTap = false;
                 for (Trigger t : card.getTriggers()) {
                     if (t.getMode() == TriggerType.Taps || t.getMode() == TriggerType.TapsForMana) {

@@ -44,7 +44,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
         }
 
         while (sa.canAddMoreTarget()) {
-            Card choice = null;
+            Card choice;
 
             if (tapList.isEmpty()) {
                 if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
@@ -77,7 +77,9 @@ public abstract class TapAiBase extends SpellAbilityAi {
             }
 
             tapList.remove(choice);
-            sa.getTargets().add(choice);
+            if (sa.canTarget(choice)) {
+                sa.getTargets().add(choice);
+            }
         }
 
         return true;
@@ -90,8 +92,6 @@ public abstract class TapAiBase extends SpellAbilityAi {
      * 
      * @param source
      *            a {@link forge.game.card.Card} object.
-     * @param tgt
-     *            a {@link forge.game.spellability.TargetRestrictions} object.
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
@@ -194,11 +194,13 @@ public abstract class TapAiBase extends SpellAbilityAi {
             }
 
             tapList.remove(choice);
-            sa.getTargets().add(choice);
+            if (sa.canTarget(choice)) {
+                sa.getTargets().add(choice);
+            }
         }
 
         // Nothing was ever targeted, so we need to bail.
-        return sa.getTargets().size() != 0;
+        return !sa.getTargets().isEmpty();
     }
 
     /**
@@ -297,8 +299,6 @@ public abstract class TapAiBase extends SpellAbilityAi {
             }
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-
-        boolean randomReturn = true;
 
         if (sa.usesTargeting()) {
             // target section, maybe pull this out?

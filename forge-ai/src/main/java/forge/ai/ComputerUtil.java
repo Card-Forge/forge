@@ -215,9 +215,9 @@ public class ComputerUtil {
     }
 
     public static final boolean playStack(SpellAbility sa, final Player ai, final Game game) {
-        sa.setActivatingPlayer(ai);
-        if (!ComputerUtilCost.canPayCost(sa, ai, false))
+        if (!ComputerUtilCost.canPayCost(sa, ai, false)) {
             return false;
+        }
 
         final Card source = sa.getHostCard();
 
@@ -249,7 +249,6 @@ public class ComputerUtil {
     }
 
     public static final boolean playNoStack(final Player ai, SpellAbility sa, final Game game, final boolean effect) {
-        sa.setActivatingPlayer(ai);
         // TODO: We should really restrict what doesn't use the Stack
         if (!ComputerUtilCost.canPayCost(sa, ai, effect)) {
             return false;
@@ -536,7 +535,7 @@ public class ComputerUtil {
 
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
         if (differentNames) {
-            final Set<Card> uniqueNameCards = Sets.newHashSet();
+            final Set<Card> uniqueNameCards = Sets.newLinkedHashSet();
             for (final Card card : typeList) {
                 // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
                 if (!card.hasNoName()) {
@@ -3088,12 +3087,11 @@ public class ComputerUtil {
     }
 
     public static int countUsefulCreatures(Player p) {
-        CardCollection creats = p.getCreaturesInPlay();
         int count = 0;
 
-        for (Card c : creats) {
+        for (Card c : p.getCreaturesInPlay()) {
             if (!ComputerUtilCard.isUselessCreature(p, c)) {
-                count ++;
+                count++;
             }
         }
 
@@ -3185,7 +3183,7 @@ public class ComputerUtil {
 
         // performance shortcut
         // TODO if checking upcoming turn it should be a permanent effect
-        if (ai.cantLoseForZeroOrLessLife()) {
+        if (ai.cantLose()) {
             return remainingLife;
         }
 

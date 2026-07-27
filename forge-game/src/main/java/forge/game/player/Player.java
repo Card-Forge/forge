@@ -228,9 +228,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateMaxLandPlay(this);
         view.setDraftNotes(this.getDraftNotes());
         setName(chooseName(name0));
-        if (id0 >= 0) {
-            game.addPlayer(id, this);
-        }
     }
 
     public final AchievementTracker getAchievementTracker() {
@@ -1047,7 +1044,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        // CantTarget static abilities
         if (StaticAbilityCantTarget.cantTarget(this, sa) != null) {
             return false;
         }
@@ -2613,6 +2609,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void updateSleeve() {
         view.updateSleeveIndex(this);
+        view.updateSleeveArtKey(this);
+        view.updateSleeveArtOffset(this);
     }
 
     /**
@@ -2766,6 +2764,31 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
+    /**
+     * Wires this player's field-managed effect cards (keyword, monarch,
+     * initiative, blessing, contraption sprocket, radiation, speed) to their
+     * already-copied counterparts on a snapshot player, the same way
+     * copyCommandersToSnapshot wires commanderEffect. Without this, the
+     * snapshot's lazy getters re-create the effect card on next use while the
+     * copied original sits orphaned in the command zone (visible as duplicate
+     * "Keyword Effects" cards that compound with each copy generation).
+     */
+    public void copyEffectCardsToSnapshot(Player toPlayer, Function<Card, Card> mapper) {
+        toPlayer.keywordEffect = mapEffectCard(keywordEffect, mapper);
+        toPlayer.monarchEffect = mapEffectCard(monarchEffect, mapper);
+        toPlayer.initiativeEffect = mapEffectCard(initiativeEffect, mapper);
+        toPlayer.blessingEffect = mapEffectCard(blessingEffect, mapper);
+        toPlayer.contraptionSprocketEffect = mapEffectCard(contraptionSprocketEffect, mapper);
+        toPlayer.radiationEffect = mapEffectCard(radiationEffect, mapper);
+        toPlayer.speedEffect = mapEffectCard(speedEffect, mapper);
+    }
+
+    private static Card mapEffectCard(Card effect, Function<Card, Card> mapper) {
+        // An effect card in no zone was not part of the copy; leave the
+        // snapshot's field unset so its lazy creation path stays consistent.
+        return effect == null || effect.getZone() == null ? null : mapper.apply(effect);
+    }
+
     public void addCommander(Card commander) {
         assert(this.equals(commander.getOwner())); //Making someone else's card your commander isn't currently supported.
         if(this.commanders.contains(commander))
@@ -2822,13 +2845,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         ColorSet identity = ColorSet.fromMask(ci);
         return identity;
-    }
-    public ColorSet getNotCommanderColorID() {
-        if (commanders.isEmpty()) {
-            return null;
-        }
-        ColorSet identity = getCommanderColorID();
-        return identity.inverse();
     }
 
     public int getCommanderCast(Card commander) {

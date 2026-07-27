@@ -1135,6 +1135,7 @@ public class AiController {
             }
             if (prefCard == null) {
                 prefCard = ComputerUtil.getCardPreference(player, sourceCard, "DiscardCost", validCards);
+                // TODO use DiscardMe:0 instead so each card without is just treated as 1
                 if (prefCard != null && prefCard.hasSVar("DoNotDiscardIfAble")) {
                     prefCard = null;
                 }
