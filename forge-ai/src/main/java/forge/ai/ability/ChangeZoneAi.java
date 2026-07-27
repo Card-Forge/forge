@@ -1018,6 +1018,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
                 // bounce opponent's stuff
                 list = CardLists.filterControlledBy(list, ai.getOpponents());
+                if (!game.getStack().isEmpty()) {
+                    // Avoid "saving" an opponent's permanent that another stack effect is already removing.
+                    for (Player opponent : ai.getOpponents()) {
+                        list.removeAll(ComputerUtil.predictThreatenedObjects(opponent, null));
+                    }
+                }
                 if (!CardLists.getNotType(list, "Land").isEmpty()) {
                     // When bouncing opponents stuff other than lands, don't bounce cards with CMC 0
                     list = CardLists.filter(list, c -> {

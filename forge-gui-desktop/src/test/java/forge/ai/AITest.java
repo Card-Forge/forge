@@ -2,6 +2,7 @@ package forge.ai;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 
@@ -66,12 +67,17 @@ public class AITest {
     }
 
     protected Game initAndCreateThreePlayerGame() {
+        return initAndCreateThreePlayerGame(false);
+    }
+
+    protected Game initAndCreateThreePlayerGame(boolean useSimulation) {
         initAndCreateGame();
 
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("opponent", null)));
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ai", null)));
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ai",
+                useSimulation ? Set.of(AIOption.USE_SIMULATION) : null)));
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ally", null)));
 
         GameRules rules = new GameRules(GameType.Constructed);
