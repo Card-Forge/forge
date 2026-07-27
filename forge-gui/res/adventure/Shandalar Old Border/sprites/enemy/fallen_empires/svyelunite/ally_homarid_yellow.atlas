@@ -1,0 +1,92 @@
+ally_homarid_yellow.png
+size: 128, 56
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 6, 0
+  size: 4, 4
+Idle
+  xy: 0, 0
+  size: 16, 8
+Idle
+  xy: 16, 0
+  size: 16, 8
+Idle
+  xy: 32, 0
+  size: 16, 8
+Idle
+  xy: 48, 0
+  size: 16, 8
+Walk
+  xy: 0, 8
+  size: 16, 8
+Walk
+  xy: 16, 8
+  size: 16, 8
+Walk
+  xy: 32, 8
+  size: 16, 8
+Walk
+  xy: 48, 8
+  size: 16, 8
+Walk
+  xy: 64, 8
+  size: 16, 8
+Walk
+  xy: 80, 8
+  size: 16, 8
+Walk
+  xy: 96, 8
+  size: 16, 8
+Walk
+  xy: 112, 8
+  size: 16, 8
+Attack
+  xy: 0, 16
+  size: 16, 8
+Attack
+  xy: 16, 16
+  size: 16, 8
+Attack
+  xy: 32, 16
+  size: 16, 8
+Attack
+  xy: 48, 16
+  size: 16, 8
+Attack
+  xy: 64, 16
+  size: 16, 8
+Attack
+  xy: 80, 16
+  size: 16, 8
+Attack
+  xy: 96, 16
+  size: 16, 8
+Attack
+  xy: 112, 16
+  size: 16, 8
+Death
+  xy: 0, 48
+  size: 16, 8
+Death
+  xy: 16, 48
+  size: 16, 8
+Death
+  xy: 32, 48
+  size: 16, 8
+Death
+  xy: 48, 48
+  size: 16, 8
+Death
+  xy: 64, 48
+  size: 16, 8
+Death
+  xy: 80, 48
+  size: 16, 8
+Death
+  xy: 96, 48
+  size: 16, 8
+Death
+  xy: 112, 48
+  size: 16, 8

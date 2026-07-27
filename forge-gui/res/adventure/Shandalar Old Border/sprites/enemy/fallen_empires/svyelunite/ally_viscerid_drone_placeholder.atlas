@@ -1,0 +1,11 @@
+ally_viscerid_drone_placeholder.png
+size: 16, 16
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 4, 2
+  size: 4, 4
+Idle
+  xy: 0, 0
+  size: 16, 16

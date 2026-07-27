@@ -15,10 +15,11 @@ Name=Homarid Warrior
 1 Mystic Might|ICE
 3 Viscerid Armor|ALL
 2 Breaking Wave|INV
-4 Unstable Mutation|3ED
+2 Unstable Mutation|3ED
 2 High Tide|FEM|[18c]
 2 Homarid Spawning Bed|FEM
 
+2 Fishliver Oil|ARN
 [StartInBattle_Reference]
 1 Sand Silos|FEM
 1 Seafloor Debris|ODY

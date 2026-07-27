@@ -1,0 +1,17 @@
+ally_river_merfolk_placeholder.png
+size: 64, 16
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 0, 0
+  size: 3, 3
+Idle
+  xy: 0, 3
+  size: 16, 13
+Idle
+  xy: 19, 3
+  size: 16, 13
+Idle
+  xy: 38, 3
+  size: 16, 13

@@ -1,0 +1,104 @@
+ally_deep_spawn.png
+size: 448, 240
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 32, 16
+  size: 8, 8
+Idle
+  xy: 0, 0
+  size: 56, 48
+Idle
+  xy: 56, 0
+  size: 56, 48
+Idle
+  xy: 112, 0
+  size: 56, 48
+Idle
+  xy: 168, 0
+  size: 56, 48
+Walk
+  xy: 0, 48
+  size: 56, 48
+Walk
+  xy: 56, 48
+  size: 56, 48
+Walk
+  xy: 112, 48
+  size: 56, 48
+Walk
+  xy: 168, 48
+  size: 56, 48
+Walk
+  xy: 224, 48
+  size: 56, 48
+Walk
+  xy: 280, 48
+  size: 56, 48
+Walk
+  xy: 336, 48
+  size: 56, 48
+Walk
+  xy: 392, 48
+  size: 56, 48
+Attack
+  xy: 0, 96
+  size: 56, 48
+Attack
+  xy: 56, 96
+  size: 56, 48
+Attack
+  xy: 112, 96
+  size: 56, 48
+Attack
+  xy: 168, 96
+  size: 56, 48
+Attack
+  xy: 224, 96
+  size: 56, 48
+Attack
+  xy: 280, 96
+  size: 56, 48
+Attack
+  xy: 336, 96
+  size: 56, 48
+Attack
+  xy: 392, 96
+  size: 56, 48
+Hit
+  xy: 0, 144
+  size: 56, 48
+Hit
+  xy: 56, 144
+  size: 56, 48
+Hit
+  xy: 112, 144
+  size: 56, 48
+Hit
+  xy: 168, 144
+  size: 56, 48
+Death
+  xy: 0, 192
+  size: 56, 48
+Death
+  xy: 56, 192
+  size: 56, 48
+Death
+  xy: 112, 192
+  size: 56, 48
+Death
+  xy: 168, 192
+  size: 56, 48
+Death
+  xy: 224, 192
+  size: 56, 48
+Death
+  xy: 280, 192
+  size: 56, 48
+Death
+  xy: 336, 192
+  size: 56, 48
+Death
+  xy: 392, 192
+  size: 56, 48

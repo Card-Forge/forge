@@ -1,0 +1,32 @@
+ally_floodwater_homarid_placeholder.png
+size: 128, 10
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 9, 1
+  size: 3, 3
+Idle
+  xy: 0, 0
+  size: 16, 10
+Idle
+  xy: 16, 0
+  size: 16, 10
+Idle
+  xy: 32, 0
+  size: 16, 10
+Idle
+  xy: 48, 0
+  size: 16, 10
+Idle
+  xy: 64, 0
+  size: 16, 10
+Idle
+  xy: 80, 0
+  size: 16, 10
+Idle
+  xy: 96, 0
+  size: 16, 10
+Idle
+  xy: 112, 0
+  size: 16, 10
