@@ -1,105 +1,41 @@
-# ⚔️  Forge: The Magic: The Gathering Rules Engine
+# Reforge Commander
 
-Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
+Reforge Commander is a Commander-focused fork of [Card-Forge/forge](https://github.com/Card-Forge/forge).
 
-[![Test build](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml/badge.svg)](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml)
+It aims to optimize engine performance for large token board states (e.g. Scute Swarm, Krenko), streamline the UI around Commander/EDH gameplay, and maintain zero-conflict upstream synchronization with official Forge card releases.
 
----
-
-## ✨ Introduction
-
-**Forge** is a dynamic and open-source **Rules Engine** tailored for **Magic: The Gathering** enthusiasts. Developed by a community of passionate programmers, Forge allows players to explore the rich universe of MTG through a flexible, engaging platform. 
-
-**Note:** Forge operates independently and is not affiliated with Wizards of the Coast.
+> Note: Reforge Commander operates independently and is not affiliated with Wizards of the Coast or the core Card-Forge development team.
 
 ---
 
-## 🌟 Key Features
+## Core Focus & Differences
 
-- **🌐 Cross-Platform Support:** Play on **Windows, Mac, Linux,** and **Android**.
-- **🔧 Extensible Architecture:** Built in **Java**, Forge encourages developers to contribute by adding features and cards.
-- **🎮 Versatile Gameplay:** Dive into single-player modes or challenge opponents online!
-
----
-
-## 🛠️ Installation Guide
-
-### 📥 Desktop Installation
-1. **Latest Releases:** Download the latest version [here](https://github.com/Card-Forge/forge/releases/latest).
-2. **Snapshot Build:** For the latest development version, grab the `forge-gui-desktop` tarball from our [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots).
-   - **Tip:** Extract to a new folder to prevent version conflicts.
-3. **User Data Management:** Previous players’ data is preserved during upgrades.
-4. **Java Requirement:** Ensure you have **Java 17 or later** installed.
-
-### 📱 Android Installation
-- _(Note: **Android 11** is the minimum requirement with at least **6GB RAM** to run smoothly. You need to enable **"Install unknown apps"** for Forge to initialize and update itself)_
-- Download the **APK** from the [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots). On the first launch, Forge will automatically download all necessary assets.
+- **Token Engine Optimization**: Introduces flyweight token handling (`StackedTokenCard`) and optimized AI state cloning to eliminate lag and timeouts on heavy token battlefields.
+- **UI Streamlining**: Isolates interface submenus to focus directly on Commander matches and deck building.
+- **Java 17 Bytecode Baseline**: Global Maven compiler targeting for cross-platform Java 17+ compatibility.
+- **Upstream Synchronization**: Maintained in structural alignment with `Card-Forge/forge` main repository to merge card scripts and rules updates effortlessly.
 
 ---
 
-## 🎮 Modes of Play
+## Building from Source
 
-Forge offers various exciting gameplay options:
+### Prerequisites
+- JDK 17 or higher
+- Apache Maven 3.9+
 
-### 🌍 Adventure Mode
-Embark on a thrilling single-player journey where you can:
-- Explore an overworld map.
-- Challenge diverse AI opponents.
-- Collect cards and items to boost your abilities.
+### Build Commands
 
-<img width="1282" height="752" alt="Shandalar World" src="https://github.com/user-attachments/assets/9af31471-d688-442f-9418-9807d8635b72" />
+```bash
+# Build complete reactor skipping tests
+mvn clean install -DskipTests
 
-### 🔍 Quest Modes
-Engage in focused gameplay without the overworld exploration—perfect for quick sessions!
-
-<img width="1282" height="752" alt="Quest Duels" src="https://github.com/user-attachments/assets/b9613b1c-e8c3-4320-8044-6922c519aad4" />
-
-### 🤖 AI Formats
-Test your skills against AI in multiple formats:
-- **Sealed**
-- **Draft**
-- **Commander**
-- **Cube**
-
-For comprehensive gameplay instructions, visit our [User Guide](https://github.com/Card-Forge/forge/wiki/User-Guide).
-
-<img width="1282" height="752" alt="Sealed" src="https://github.com/user-attachments/assets/ae603dbd-4421-4753-a333-87cb0a28d772" />
+# Build desktop client module only
+mvn clean install -pl :forge-gui-desktop -am -DskipTests
+```
 
 ---
 
-## 💬 Support & Community
+## License
 
-Need help? Join our vibrant Discord community! 
-- 📜 Read the **#rules** and explore the **FAQ**.
-- ❓ Ask your questions in the **#help** channel for assistance.
+Reforge Commander inherits the original project's license: [GPL-3.0](LICENSE).
 
----
-
-## 🤝 Contributing to Forge
-
-We love community contributions! Interested in helping? Check out our [Contributing Guidelines](CONTRIBUTING.md) for details on how to get started.
-
----
-
-## ℹ️ About Forge
-
-Forge aims to deliver an immersive and customizable Magic: The Gathering experience for fans around the world. 
-
-### 📊 Repository Statistics
-
-| Metric         | Count                                                       |
-|----------------|-------------------------------------------------------------|
-| **⭐ Stars:**   | [![GitHub stars](https://img.shields.io/github/stars/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/stargazers) |
-| **🍴 Forks:**   | [![GitHub forks](https://img.shields.io/github/forks/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/network) |
-| **👥 Contributors:** | [![GitHub contributors](https://img.shields.io/github/contributors/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/graphs/contributors) |
-
----
-
-**📄 License:** [GPL-3.0](LICENSE)
-<div align="center" style="display: flex; align-items: center; justify-content: center;">
-    <div style="margin-left: auto;">
-        <a href="#top">
-            <img src="https://img.shields.io/badge/Back%20to%20Top-000000?style=for-the-badge&logo=github&logoColor=white" alt="Back to Top">
-        </a>
-    </div>
-</div>
