@@ -1,0 +1,18 @@
+Name:Lake-town Mariners
+ManaCost:4 U U
+Types:Creature Human Citizen
+PT:6/5
+K:Vigilance
+K:Ward:2
+AlternateMode:Adventure
+Oracle:Vigilance\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+
+ALTERNATE
+
+Name:Gone Fishing
+ManaCost:3 U
+Types:Sorcery Adventure
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl,Land.YouCtrl | ValidTgtsDesc$ creature or land you control | TargetMin$ 2 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile two target creatures and/or lands you control, then return them to the battlefield under their owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Exile two target creatures and/or lands you control, then return them to the battlefield under their owner's control.
