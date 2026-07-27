@@ -14,6 +14,6 @@ Name:Gleam of Death
 ManaCost:3 U
 Types:Sorcery Adventure
 A:SP$ Mill | NumCards$ 6 | RememberMilled$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Mill six cards, then put all instant and sorcery cards from among them into your hand.
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Instant.IsRemembered,Sorcerer.IsRemembered | Origin$ Graveyard,Exile | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Instant.IsRemembered,Sorcery.IsRemembered | Origin$ Graveyard,Exile | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Mill six cards, then put all instant and sorcery cards from among them into your hand.
