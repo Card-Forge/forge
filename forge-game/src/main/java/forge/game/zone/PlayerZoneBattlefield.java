@@ -99,8 +99,4 @@ public class PlayerZoneBattlefield extends PlayerZone {
         }
         return cards;
     }
-
-    public final CardCollection getMeldedCards() {
-        return meldedCards;
-    }
 }
