@@ -2737,11 +2737,19 @@ public class Player extends GameEntity implements Comparable<Player> {
         //Seems like the rest of the logic for copying players should be in this class too.
         //For now, doing this here can retain the links between commander effects and commanders.
 
+        /**
+         * Commander references are kept across zone changes, each of which can hand
+         * the game a new object for the same card (cast for a mutate cost, bounced
+         * to the command zone, ...), so resolve the card the game is actually
+         * holding before asking a snapshot's map for its counterpart.
+         */
+        Function<Card, Card> mapCommander = c -> mapper.apply(game.getCardState(c));
+
         toPlayer.resetCommanderStats();
         toPlayer.commanders.clear();
         for (final Card c : this.getCommanders()) {
-            Card newCommander = mapCommander(c, mapper);
-            if(newCommander == null) {
+            Card newCommander = mapCommander.apply(c);
+            if (newCommander == null) {
                 // An unmapped commander leaves the snapshot incomplete, but throwing
                 // here would end the match instead of just the undo it was taken for.
                 System.err.println("Unable to find commander in game snapshot: " + c);
@@ -2752,13 +2760,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         for (Map.Entry<Card, Integer> entry : this.commanderCast.entrySet()) {
             //Have to iterate over this separately in case commanders change mid-game.
-            Card commander = mapCommander(entry.getKey(), mapper);
+            Card commander = mapCommander.apply(entry.getKey());
             if(commander == null) //Ceased to exist?
                 continue;
             toPlayer.commanderCast.put(commander, entry.getValue());
         }
         for (Map.Entry<Card, Integer> entry : this.getCommanderDamage()) {
-            Card commander = mapCommander(entry.getKey(), mapper);
+            Card commander = mapCommander.apply(entry.getKey());
             if(commander == null) //Ceased to exist?
                 continue;
             int damage = entry.getValue();
@@ -2768,16 +2776,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             Card commanderEffect = mapper.apply(this.commanderEffect);
             toPlayer.commanderEffect = (DetachedCardEffect) commanderEffect;
         }
-    }
-
-    /**
-     * Commander references are kept across zone changes, each of which can hand
-     * the game a new object for the same card (cast for a mutate cost, bounced
-     * to the command zone, ...), so resolve the card the game is actually
-     * holding before asking a snapshot's map for its counterpart.
-     */
-    private Card mapCommander(Card commander, Function<Card, Card> mapper) {
-        return mapper.apply(game.getCardState(commander));
     }
 
     /**
