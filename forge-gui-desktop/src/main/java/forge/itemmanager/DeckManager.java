@@ -136,10 +136,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     private DeckProxy getRealDeckProxy(final DeckProxy deck) {
-        if (deck instanceof DeckBrowserEntry) {
-            return ((DeckBrowserEntry) deck).getDeckRowProxy();
-        }
-        return deck;
+        return DeckBrowserEntry.unwrap(deck);
     }
 
     @Override
@@ -156,7 +153,6 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     public void setup(final ItemManagerConfig config0) {
         final boolean wasStringOnly = (this.getConfig() == ItemManagerConfig.STRING_ONLY);
         final boolean isStringOnly = (config0 == ItemManagerConfig.STRING_ONLY);
-
         Map<ColumnDef, ItemTableColumn> colOverrides = null;
         if (config0.getCols().containsKey(ColumnDef.DECK_ACTIONS)) {
             colOverrides = new HashMap<>();
@@ -173,8 +169,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             nameColumn.setCellRenderer(new DeckNameCommentRenderer());
             colOverrides.put(ColumnDef.NAME, nameColumn);
         }
-        
+
         super.setup(config0, colOverrides);
+        setImageViewVisible(config0 != ItemManagerConfig.DECK_BROWSER
+                && config0 != ItemManagerConfig.DECK_EDITOR_BROWSER);
 
         if (isStringOnly != wasStringOnly) {
             this.restoreDefaultFilters();
@@ -497,7 +495,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         if (deck != null) {
             CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
         } else {
-            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().newModel();
         }
     }
 
@@ -584,7 +582,6 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                     DeckManager.this.editDeck(deck);
                 }
 
-                listView.getTable().setRowSelectionInterval(row, row);
                 listView.getTable().repaint();
                 e.consume();
             }
@@ -600,10 +597,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             final Rectangle cellBounds = listView.getTable().getCellRect(row, column, false);
             final int x = e.getX() - cellBounds.x;
             if (x >= 0 && x < imgSize) {
-                return "Click to delete this deck";
+                return Localizer.getInstance().getMessage("lblClickToDeleteDeck");
             }
             if (x >= imgSize && x < imgSize * 2) {
-                return "Click to edit this deck";
+                return Localizer.getInstance().getMessage("lblClickToEditDeck");
             }
             return null;
         }

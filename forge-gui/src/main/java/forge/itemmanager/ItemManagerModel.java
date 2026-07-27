@@ -196,9 +196,8 @@ public final class ItemManagerModel<T extends InventoryItem> implements Comparat
 
         private int compareDeckBrowserRows(final Entry<InventoryItem, Integer> arg0, final Entry<InventoryItem, Integer> arg1) {
             if (arg0.getKey() instanceof DeckBrowserEntry || arg1.getKey() instanceof DeckBrowserEntry) {
-                final int sortGroup0 = arg0.getKey() instanceof DeckBrowserEntry ? ((DeckBrowserEntry) arg0.getKey()).getSortGroup() : 3;
-                final int sortGroup1 = arg1.getKey() instanceof DeckBrowserEntry ? ((DeckBrowserEntry) arg1.getKey()).getSortGroup() : 3;
-                return Integer.compare(sortGroup0, sortGroup1);
+                return Integer.compare(DeckBrowserEntry.getSortGroup(arg0.getKey()),
+                        DeckBrowserEntry.getSortGroup(arg1.getKey()));
             }
             return 0;
         }

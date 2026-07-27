@@ -27,7 +27,7 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
     // Fields used with interface IVDoc
     private DragCell parentCell;
     final Localizer localizer = Localizer.getInstance();
-    private final DragTab tab = new DragTab("Deck Browser");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblDeckBrowser"));
 
     private FDeckChooser deckBrowser;
 
@@ -92,6 +92,14 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
 
     public void refreshBrowser() {
         deckBrowser.refreshEditorBrowser();
+    }
+
+    public GameType getEditorGameTypeForCurrentFolder() {
+        return deckBrowser.getEditorGameTypeForCurrentFolder();
+    }
+
+    public void applyEditorSaveTarget() {
+        deckBrowser.applyEditorSaveTarget();
     }
 
     public void setCDetailPicture(final CDetailPicture cDetailPicture) {

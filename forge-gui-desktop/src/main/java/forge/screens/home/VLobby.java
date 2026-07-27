@@ -641,16 +641,9 @@ public class VLobby implements ILobbyView {
     private void selectMainDeck(final FDeckChooser mainChooser, final int playerIndex, final boolean isCommanderDeck) {
         refreshGeneratedDecks = false;
         final DeckType type = mainChooser.getSelectedDeckType();
-        Deck deck = mainChooser.getDeck();
-        // Folders are navigable browser rows, not playable deck selections.
+        final Deck deck = mainChooser.getDeck();
         if (deck == null) {
-            if (!mainChooser.selectFirstPlayableDeck()) {
-                return;
-            }
-            deck = mainChooser.getDeck();
-            if (deck == null) {
-                return;
-            }
+            return;
         }
         final Collection<DeckProxy> selectedDecks = mainChooser.getSelectedDeckProxies();
         if (selectedDecks.isEmpty()) {

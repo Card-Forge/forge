@@ -28,6 +28,7 @@ import forge.Singletons;
 import forge.deck.DeckBase;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
+import forge.game.GameType;
 import forge.gui.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
@@ -75,6 +76,27 @@ public enum CDeckEditorUI implements ICDoc {
 
     public CDetailPicture getCDetailPicture() {
         return cDetailPicture;
+    }
+
+    public void prepareForNewDeck() {
+        final GameType gameType = vAllDecks.getEditorGameTypeForCurrentFolder();
+        if (gameType == null) {
+            return;
+        }
+        if (childController == null || childController.getGameType() != gameType) {
+            setEditorController(new CEditorConstructed(cDetailPicture, gameType));
+        }
+        vAllDecks.applyEditorSaveTarget();
+    }
+
+    public void updatePristineDeckGameType(final GameType gameType) {
+        if (gameType == null || childController == null || childController.getGameType() == gameType) {
+            return;
+        }
+        final DeckController<?> controller = childController.getDeckController();
+        if (controller != null && controller.isPristine()) {
+            setEditorController(new CEditorConstructed(cDetailPicture, gameType));
+        }
     }
 
     /**

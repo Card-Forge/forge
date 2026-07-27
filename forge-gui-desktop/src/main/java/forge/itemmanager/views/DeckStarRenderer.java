@@ -77,7 +77,6 @@ public class DeckStarRenderer extends ItemCellRenderer {
             DeckPreferences prefs = DeckPreferences.getPrefs(deck);
             prefs.setStarCount((prefs.getStarCount() + 1) % 2); //TODO: consider supporting more than 1 star
             update();
-            listView.getTable().setRowSelectionInterval(row, row);
             listView.getTable().repaint();
             e.consume();
         }
@@ -100,11 +99,7 @@ public class DeckStarRenderer extends ItemCellRenderer {
     }
 
     private DeckProxy getFavoriteDeck(final DeckProxy value) {
-        if (value instanceof DeckBrowserEntry) {
-            final DeckBrowserEntry entry = (DeckBrowserEntry) value;
-            return entry.getDeckRowProxy();
-        }
-        return value;
+        return DeckBrowserEntry.unwrap(value);
     }
 
     /*

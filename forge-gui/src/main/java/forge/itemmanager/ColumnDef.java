@@ -57,10 +57,6 @@ public enum ColumnDef {
      */
     NAME("lblName", "lblName", 180, false, SortState.ASC,
             from -> {
-                if (from.getKey() instanceof DeckBrowserEntry) {
-                    DeckBrowserEntry entry = (DeckBrowserEntry) from.getKey();
-                    return String.format("%02d:%s", entry.getSortGroup(), TextUtil.toSortableName(entry.getDisplayName()));
-                }
                 if (from.getKey() instanceof PaperCard) {
                     String spire = ((PaperCard) from.getKey()).getMarkedColors() == null ? "" : ((PaperCard) from.getKey()).getMarkedColors().toString();
                     String sortableName = ((PaperCard)from.getKey()).getSortableName();
@@ -494,18 +490,11 @@ public enum ColumnDef {
     }
 
     private static DeckProxy toDeck(final InventoryItem i) {
-        if (i instanceof DeckBrowserEntry) {
-            DeckBrowserEntry entry = (DeckBrowserEntry) i;
-            return entry.isDeck() ? entry : null;
+        if (!(i instanceof DeckProxy)) {
+            return null;
         }
-        if (i instanceof DeckProxy) {
-            DeckProxy deck = (DeckProxy) i;
-            if (deck.isGeneratedDeck()) {
-                return deck;
-            }
-            return deck.getDeck() == null ? null : deck;
-        }
-        return null;
+        final DeckProxy deck = DeckBrowserEntry.forMetadata((DeckProxy) i);
+        return deck == null || (!deck.isGeneratedDeck() && deck.getDeck() == null) ? null : deck;
     }
 
     private static DeckProxy toNonGeneratedDeck(final InventoryItem i) {
@@ -514,11 +503,7 @@ public enum ColumnDef {
     }
 
     private static DeckProxy toDeckProxy(final InventoryItem i) {
-        if (i instanceof DeckBrowserEntry) {
-            final DeckBrowserEntry entry = (DeckBrowserEntry) i;
-            return entry.getDeckRowProxy();
-        }
-        return i instanceof DeckProxy ? (DeckProxy) i : null;
+        return i instanceof DeckProxy ? DeckBrowserEntry.unwrap((DeckProxy) i) : null;
     }
 
     private static boolean isCommanderDeck(final DeckProxy deck) {

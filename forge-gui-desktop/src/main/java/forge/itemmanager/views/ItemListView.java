@@ -441,6 +441,10 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             if (val != null && renderer != null) {
                 renderer.processMouseEvent(e, ItemListView.this, val, row, col); //give renderer a chance to process the mouse event
             }
+            // Inline controls consume the event so their action does not also select or activate the row.
+            if (e.isConsumed()) {
+                return;
+            }
             try {
                 super.processMouseEvent(e);
             }

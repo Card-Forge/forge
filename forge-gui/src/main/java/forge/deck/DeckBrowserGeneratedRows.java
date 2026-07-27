@@ -7,7 +7,6 @@ import forge.gamemodes.quest.QuestController;
 import forge.itemmanager.IItemManager;
 import forge.model.FModel;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
@@ -50,6 +49,7 @@ public final class DeckBrowserGeneratedRows {
             DeckType.RANDOM_COMMANDER_DECK,
             DeckType.RANDOM_CARDGEN_COMMANDER_DECK);
     private static final Set<DeckType> GENERATED_DECK_TYPES = getGeneratedDeckTypes();
+    private static final Set<DeckType> DECK_OPTION_TYPES = getDeckOptionTypes();
 
     private DeckBrowserGeneratedRows() {
     }
@@ -58,16 +58,31 @@ public final class DeckBrowserGeneratedRows {
         return GENERATED_DECK_TYPES.contains(deckType);
     }
 
-    public static boolean isConstructedListDeckType(final DeckType deckType) {
-        return CONSTRUCTED_LIST_DECK_TYPES.contains(deckType);
+    public static boolean isDeckOptionType(final DeckType deckType) {
+        return DECK_OPTION_TYPES.contains(deckType);
+    }
+
+    public static boolean isColorDeckType(final DeckType deckType) {
+        return deckType == DeckType.COLOR_DECK || RANDOM_COLOR_DECK_TYPE_SET.contains(deckType);
+    }
+
+    public static boolean isArchetypeDeckType(final DeckType deckType) {
+        return RANDOM_ARCHETYPE_DECK_TYPE_SET.contains(deckType);
     }
 
     public static boolean isCommanderGeneratedDeckType(final DeckType deckType) {
         return COMMANDER_GENERATED_DECK_TYPES.contains(deckType);
     }
 
+    public static DeckType getListParentRootType(final DeckType deckType) {
+        if (isCommanderGeneratedDeckType(deckType) || deckType == DeckType.PRECON_COMMANDER_DECK) {
+            return DeckType.COMMANDER_DECK;
+        }
+        return CONSTRUCTED_LIST_DECK_TYPES.contains(deckType) ? DeckType.CUSTOM_DECK : null;
+    }
+
     public static String getDefaultGeneratedParentPath(final DeckType deckType) {
-        if (deckType == DeckType.COLOR_DECK || RANDOM_COLOR_DECK_TYPE_SET.contains(deckType)) {
+        if (isColorDeckType(deckType)) {
             return RANDOM_COLORS_PATH;
         }
         if (RANDOM_ARCHETYPE_DECK_TYPE_SET.contains(deckType)) {
@@ -89,7 +104,7 @@ public final class DeckBrowserGeneratedRows {
         if (RANDOM_PATH.equals(path)) {
             return DeckType.RANDOM_DECK.toString();
         }
-        return lastPathSegment(path);
+        return path == null ? "" : path.substring(path.lastIndexOf('/') + 1);
     }
 
     public static String getGeneratedGroupParentPath(final String path) {
@@ -114,10 +129,11 @@ public final class DeckBrowserGeneratedRows {
     }
 
     public static void addGeneratedGroupRows(final List<DeckProxy> rows, final String path,
-            final IItemManager<DeckProxy> deckManager, final IHasGameType gameTypeProvider,
+        final IItemManager<DeckProxy> deckManager, final IHasGameType gameTypeProvider,
             final boolean isAi, final boolean includeGeneratedOptions) {
         if (RANDOM_PATH.equals(path)) {
-            rows.addAll(wrapGeneratedOptions(RandomDeckGenerator.getRandomDecks(gameTypeProvider, isAi)));
+            rows.addAll(DeckBrowserEntry.fromDeckProxies(
+                    getDeckOptions(DeckType.RANDOM_DECK, deckManager, gameTypeProvider, isAi)));
             rows.add(DeckBrowserEntry.generatedGroup(RANDOM_ARCHETYPE_GROUP_NAME, RANDOM_ARCHETYPES_PATH));
             if (includeGeneratedOptions) {
                 addGeneratedGroupRows(rows, RANDOM_ARCHETYPES_PATH, deckManager, gameTypeProvider, isAi, true);
@@ -128,7 +144,8 @@ public final class DeckBrowserGeneratedRows {
             }
             addGeneratedFolderRows(rows, path, includeGeneratedOptions, deckManager, gameTypeProvider, isAi, DeckType.THEME_DECK);
         } else if (RANDOM_COLORS_PATH.equals(path)) {
-            rows.addAll(wrapGeneratedOptions(ColorDeckGenerator.getColorDecks(deckManager, null, isAi)));
+            rows.addAll(DeckBrowserEntry.fromDeckProxies(
+                    getDeckOptions(DeckType.COLOR_DECK, deckManager, gameTypeProvider, isAi)));
             addGeneratedFolderRows(rows, path, includeGeneratedOptions, deckManager, gameTypeProvider, isAi, RANDOM_COLOR_DECK_TYPES);
         } else if (RANDOM_ARCHETYPES_PATH.equals(path) && FModel.isdeckGenMatrixLoaded()) {
             addGeneratedFolderRows(rows, path, includeGeneratedOptions, deckManager, gameTypeProvider, isAi, RANDOM_ARCHETYPE_DECK_TYPES);
@@ -159,7 +176,7 @@ public final class DeckBrowserGeneratedRows {
                 DeckType.PRECON_COMMANDER_DECK);
     }
 
-    public static void addGeneratedFolderRows(final List<DeckProxy> rows, final String path,
+    private static void addGeneratedFolderRows(final List<DeckProxy> rows, final String path,
             final boolean includeGeneratedOptions, final IItemManager<DeckProxy> deckManager,
             final IHasGameType gameTypeProvider, final boolean isAi, final DeckType... deckTypes) {
         for (final DeckType deckType : deckTypes) {
@@ -173,81 +190,70 @@ public final class DeckBrowserGeneratedRows {
     public static void addGeneratedRows(final List<DeckProxy> rows, final DeckType deckType,
             final IItemManager<DeckProxy> deckManager, final IHasGameType gameTypeProvider, final boolean isAi) {
         if (deckType != null) {
-            rows.addAll(wrapGeneratedOptions(getGeneratedDecks(deckType, deckManager, gameTypeProvider, isAi)));
+            rows.addAll(DeckBrowserEntry.fromDeckProxies(
+                    getDeckOptions(deckType, deckManager, gameTypeProvider, isAi)));
         }
     }
 
-    public static Iterable<DeckProxy> getGeneratedDecks(final DeckType deckType,
+    public static Iterable<DeckProxy> getDeckOptions(final DeckType deckType,
             final IItemManager<DeckProxy> deckManager, final IHasGameType gameTypeProvider, final boolean isAi) {
-        switch (deckType) {
-        case COLOR_DECK:
-            return ColorDeckGenerator.getColorDecks(deckManager, null, isAi);
-        case STANDARD_COLOR_DECK:
-            return ColorDeckGenerator.getColorDecks(deckManager, FModel.getFormats().getStandard().getFilterPrinted(), isAi);
-        case MODERN_COLOR_DECK:
-            return ColorDeckGenerator.getColorDecks(deckManager, FModel.getFormats().getModern().getFilterPrinted(), isAi);
-        case PAUPER_COLOR_DECK:
-            return ColorDeckGenerator.getColorDecks(deckManager, FModel.getFormats().getPauper().getFilterPrinted(), isAi);
-        case STANDARD_CARDGEN_DECK:
-            return getMatrixDecks(FModel.getFormats().getStandard(), isAi);
-        case PIONEER_CARDGEN_DECK:
-            return getMatrixDecks(FModel.getFormats().getPioneer(), isAi);
-        case HISTORIC_CARDGEN_DECK:
-            return getMatrixDecks(FModel.getFormats().getHistoric(), isAi);
-        case MODERN_CARDGEN_DECK:
-            return getMatrixDecks(FModel.getFormats().getModern(), isAi);
-        case LEGACY_CARDGEN_DECK:
-            return getMatrixDecks(FModel.getFormats().get("Legacy"), isAi);
-        case VINTAGE_CARDGEN_DECK:
-            return getMatrixDecks(FModel.getFormats().get("Vintage"), isAi);
-        case PAUPER_CARDGEN_DECK:
-            return getMatrixDecks(FModel.getFormats().getPauper(), isAi);
-        case RANDOM_COMMANDER_DECK:
-            return CommanderDeckGenerator.getCommanderDecks(DeckFormat.Commander, isAi, false);
-        case RANDOM_CARDGEN_COMMANDER_DECK:
-            return FModel.isdeckGenMatrixLoaded()
-                    ? CommanderDeckGenerator.getCommanderDecks(DeckFormat.Commander, isAi, true) : ImmutableList.of();
-        case THEME_DECK:
-            return DeckProxy.getAllThemeDecks();
-        case QUEST_OPPONENT_DECK:
-            return DeckProxy.getAllQuestEventAndChallenges();
-        case PRECONSTRUCTED_DECK:
-            return DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons());
-        case PRECON_COMMANDER_DECK:
-            return DeckProxy.getAllCommanderPreconDecks();
-        case RANDOM_DECK:
-            return RandomDeckGenerator.getRandomDecks(gameTypeProvider, isAi);
-        default:
-            return ImmutableList.of();
-        }
+        return switch (deckType) {
+        case COLOR_DECK -> ColorDeckGenerator.getColorDecks(deckManager, null, isAi);
+        case STANDARD_COLOR_DECK -> ColorDeckGenerator.getColorDecks(
+                deckManager, FModel.getFormats().getStandard().getFilterPrinted(), isAi);
+        case MODERN_COLOR_DECK -> ColorDeckGenerator.getColorDecks(
+                deckManager, FModel.getFormats().getModern().getFilterPrinted(), isAi);
+        case PAUPER_COLOR_DECK -> ColorDeckGenerator.getColorDecks(
+                deckManager, FModel.getFormats().getPauper().getFilterPrinted(), isAi);
+        case STANDARD_CARDGEN_DECK -> getMatrixDecks(FModel.getFormats().getStandard(), isAi);
+        case PIONEER_CARDGEN_DECK -> getMatrixDecks(FModel.getFormats().getPioneer(), isAi);
+        case HISTORIC_CARDGEN_DECK -> getMatrixDecks(FModel.getFormats().getHistoric(), isAi);
+        case MODERN_CARDGEN_DECK -> getMatrixDecks(FModel.getFormats().getModern(), isAi);
+        case LEGACY_CARDGEN_DECK -> getMatrixDecks(FModel.getFormats().get("Legacy"), isAi);
+        case VINTAGE_CARDGEN_DECK -> getMatrixDecks(FModel.getFormats().get("Vintage"), isAi);
+        case PAUPER_CARDGEN_DECK -> getMatrixDecks(FModel.getFormats().getPauper(), isAi);
+        case RANDOM_COMMANDER_DECK -> CommanderDeckGenerator.getCommanderDecks(
+                getCommanderDeckFormat(gameTypeProvider), isAi, false);
+        case RANDOM_CARDGEN_COMMANDER_DECK -> FModel.isdeckGenMatrixLoaded()
+                    ? CommanderDeckGenerator.getCommanderDecks(
+                            getCommanderDeckFormat(gameTypeProvider), isAi, true) : ImmutableList.of();
+        case THEME_DECK -> DeckProxy.getAllThemeDecks();
+        case QUEST_OPPONENT_DECK -> DeckProxy.getAllQuestEventAndChallenges();
+        case PRECONSTRUCTED_DECK -> DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons());
+        case PRECON_COMMANDER_DECK -> DeckProxy.getAllCommanderPreconDecks();
+        case RANDOM_DECK -> RandomDeckGenerator.getRandomDecks(gameTypeProvider, isAi);
+        default -> ImmutableList.of();
+        };
     }
 
     private static Iterable<DeckProxy> getMatrixDecks(final GameFormat format, final boolean isAi) {
         return FModel.isdeckGenMatrixLoaded() ? ArchetypeDeckGenerator.getMatrixDecks(format, isAi) : ImmutableList.of();
     }
 
-    private static List<DeckProxy> wrapGeneratedOptions(final Iterable<DeckProxy> decks) {
-        final List<DeckProxy> entries = new ArrayList<>();
-        for (final DeckProxy deck : decks) {
-            entries.add(DeckBrowserEntry.fromDeckProxy(deck));
+    private static DeckFormat getCommanderDeckFormat(final IHasGameType gameTypeProvider) {
+        if (gameTypeProvider != null && gameTypeProvider.getGameType() != null) {
+            final DeckFormat deckFormat = gameTypeProvider.getGameType().getDeckFormat();
+            if (deckFormat.hasCommander()) {
+                return deckFormat;
+            }
         }
-        return entries;
+        return DeckFormat.Commander;
     }
 
     private static Set<DeckType> getGeneratedDeckTypes() {
         final EnumSet<DeckType> deckTypes = EnumSet.of(DeckType.COLOR_DECK, DeckType.RANDOM_DECK);
         deckTypes.addAll(RANDOM_COLOR_DECK_TYPE_SET);
         deckTypes.addAll(RANDOM_ARCHETYPE_DECK_TYPE_SET);
-        deckTypes.addAll(COMMANDER_GENERATED_DECK_TYPES);
         deckTypes.addAll(GENERATED_RANDOM_PARENT_DECK_TYPES);
         return deckTypes;
     }
 
-    private static String lastPathSegment(final String path) {
-        if (path == null || path.isEmpty()) {
-            return "";
-        }
-        final int idx = path.lastIndexOf('/');
-        return idx < 0 ? path : path.substring(idx + 1);
+    private static Set<DeckType> getDeckOptionTypes() {
+        final EnumSet<DeckType> deckTypes = EnumSet.copyOf(GENERATED_DECK_TYPES);
+        deckTypes.remove(DeckType.RANDOM_DECK);
+        deckTypes.addAll(CONSTRUCTED_LIST_DECK_TYPES);
+        deckTypes.add(DeckType.PRECON_COMMANDER_DECK);
+        return deckTypes;
     }
+
 }

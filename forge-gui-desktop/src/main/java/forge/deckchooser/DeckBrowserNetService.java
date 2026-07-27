@@ -17,45 +17,21 @@ import forge.game.GameType;
 import forge.util.storage.IStorage;
 
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 final class DeckBrowserNetService {
     private interface NetArchiveLoader {
         NetDeckStorageBase selectAndLoad(GameType gameType, String name, boolean forceDownload);
     }
 
-    static final class NetArchiveSpec {
-        final DeckType deckType;
-        final String prefix;
-        private final NetArchiveLoader loader;
+    private record NetArchiveSpec(DeckType deckType, String prefix, NetArchiveLoader loader) {}
 
-        private NetArchiveSpec(final DeckType deckType0, final String prefix0, final NetArchiveLoader loader0) {
-            deckType = deckType0;
-            prefix = prefix0;
-            loader = loader0;
-        }
-    }
+    record LoadedNetFolder(DeckType rootType, NetDeckCategory category) {}
 
-    static final class LoadedNetFolder {
-        final DeckType rootType;
-        final NetDeckCategory category;
-
-        private LoadedNetFolder(final DeckType rootType0, final NetDeckCategory category0) {
-            rootType = rootType0;
-            category = category0;
-        }
-    }
-
-    static final class LoadedArchiveFolder {
-        final DeckType deckType;
-        final IStorage<Deck> category;
-
-        private LoadedArchiveFolder(final DeckType deckType0, final IStorage<Deck> category0) {
-            deckType = deckType0;
-            category = category0;
-        }
-    }
+    record LoadedArchiveFolder(DeckType deckType, IStorage<Deck> category) {}
 
     private static final NetArchiveSpec[] NET_ARCHIVE_SPECS = {
             new NetArchiveSpec(DeckType.NET_ARCHIVE_STANDARD_DECK, NetDeckArchiveStandard.PREFIX, NetDeckArchiveStandard::selectAndLoad),
@@ -73,7 +49,7 @@ final class DeckBrowserNetService {
         return getNetArchiveSpec(deckType) != null;
     }
 
-    NetArchiveSpec getNetArchiveSpec(final String savedDeckType) {
+    private NetArchiveSpec getNetArchiveSpec(final String savedDeckType) {
         if (savedDeckType == null) {
             return null;
         }
@@ -120,6 +96,7 @@ final class DeckBrowserNetService {
         }
 
         for (final NetArchiveSpec spec : NET_ARCHIVE_SPECS) {
+            if (spec.deckType == deckType) { continue; }
             if (findSelectedNetArchiveCategory(gameType, spec.deckType, name) != null) {
                 return new LoadedArchiveFolder(spec.deckType,
                         reloadSelectedNetArchiveCategory(gameType, spec.deckType, name));
@@ -165,7 +142,32 @@ final class DeckBrowserNetService {
 
     void addNetArchiveVirtualFolders(final List<DeckProxy> rows, final String path) {
         for (final NetArchiveSpec spec : NET_ARCHIVE_SPECS) {
-            rows.add(DeckBrowserEntry.netFolder(spec.deckType.toString(), childPath(path, spec.deckType.name()), null, spec.deckType));
+            rows.add(DeckBrowserEntry.netFolder(spec.deckType.toString(),
+                    DeckBrowserLocation.childPath(path, spec.deckType.name()), null, spec.deckType));
+        }
+    }
+
+    void addMissingNetCategoryFolders(final List<DeckProxy> rows, final String path,
+            final IStorage<Deck> folder, final GameType gameType, final boolean includeCachedStorage) {
+        final Set<String> realFolderNames = new HashSet<>();
+        if (folder != null) {
+            for (final IStorage<Deck> subFolder : folder.getFolders()) {
+                realFolderNames.add(subFolder.getName());
+            }
+        }
+
+        final Iterable<NetDeckCategory> categories = NetDeckCategory.getAvailableCategories(gameType);
+        if (categories == null) {
+            return;
+        }
+        for (final NetDeckCategory category : categories) {
+            if (realFolderNames.contains(category.getName())) {
+                continue;
+            }
+            final IStorage<Deck> cached = includeCachedStorage
+                    ? NetDeckCategory.selectAndLoad(gameType, category.getName()) : null;
+            rows.add(DeckBrowserEntry.netFolder(category.getName(),
+                    DeckBrowserLocation.childPath(path, category.getName()), cached, DeckType.NET_DECK));
         }
     }
 
@@ -188,9 +190,5 @@ final class DeckBrowserNetService {
             }
         }
         return null;
-    }
-
-    private static String childPath(final String base, final String name) {
-        return base == null || base.isEmpty() ? name : base + "/" + name;
     }
 }

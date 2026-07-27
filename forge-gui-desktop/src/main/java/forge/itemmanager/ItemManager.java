@@ -286,6 +286,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     public void setViewIndex(final int viewIndex) {
         if (viewIndex < 0 || viewIndex >= this.views.size()) { return; }
         final ItemView<T> view = this.views.get(viewIndex);
+        if (view == this.imageView && !this.imageView.getButton().isVisible()) { return; }
         if (this.currentView == view) { return; }
 
         if (this.config != null) {
@@ -317,6 +318,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.revalidate();
         this.repaint();
         this.focus();
+    }
+
+    protected void setImageViewVisible(final boolean visible) {
+        this.imageView.getButton().setVisible(visible);
+        if (!visible && this.currentView == this.imageView) {
+            this.setViewIndex(0);
+        }
     }
 
     public void setHideViewOptions(final int viewIndex, final boolean hideViewOptions) {
@@ -717,6 +725,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     @Override
     public void setSelectedIndex(final int index) {
         this.currentView.setSelectedIndex(index);
+    }
+
+    public void clearSelection() {
+        this.currentView.clearSelectedItems();
     }
 
     /**
