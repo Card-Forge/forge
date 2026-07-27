@@ -949,6 +949,15 @@ public class ComputerUtilMana {
         return rootMana;
     }
 
+    static boolean choosesColorBeforeMana(final SpellAbility root, final SpellAbility manaSa) {
+        for (SpellAbility current = root; current != null && current != manaSa; current = current.getSubAbility()) {
+            if (current.getApi() == ApiType.ChooseColor) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     static String predictManaForShard(final SpellAbility ma, final Player ai,
             final ManaCostShard toPay, final SpellAbility paidFor, final ManaCostBeingPaid cost,
             final Map<String, Integer> xManaCostPaidByColor) {
@@ -964,6 +973,10 @@ public class ComputerUtilMana {
         }
 
         Card source = ma.getHostCard();
+        if ("Chosen".equals(manaPart.getOrigProduced()) && !source.hasChosenColor()
+                && !choosesColorBeforeMana(ma, manaSa)) {
+            return "";
+        }
         byte[] colors = source.hasChosenColor()
                 ? new byte[] { MagicColor.fromName(source.getChosenColor()) } : MagicColor.WUBRG;
         for (byte color : colors) {

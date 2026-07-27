@@ -69,7 +69,9 @@ final class ManaPaymentPlanner {
     private final Map<Integer, Integer> sourcePaymentScores = new HashMap<>();
     private final Map<Integer, Integer> sourcePotentials = new HashMap<>();
     private final Map<String, List<Mana>> virtualManaCache = new HashMap<>();
+    private final Map<Integer, List<ComboTrigger>> tapsForManaCombos = new HashMap<>();
     private int remainingStates = maxStates;
+    private boolean exhausted;
 
     static Map<Byte, Integer> specifyComboFromActivePayment(final SpellAbility sa, ColorSet colors,
             final int amount, final boolean different) {
@@ -95,12 +97,15 @@ final class ManaPaymentPlanner {
                 }
             }
             if (choice == 0) {
-                return result.isEmpty() ? null : result;
+                if (colors.isColorless()) {
+                    return null;
+                }
+                choice = colors.iterator().next().getColorMask();
             }
             result.merge(choice, 1, Integer::sum);
             remaining.ai_payMana(MagicColor.toShortString(choice), context.ai.getManaPool());
             if (different) {
-                colors = ColorSet.fromMask(colors.getColor() - choice);
+                colors = ColorSet.fromMask(colors.getColor() & ~choice);
             }
         }
         return result;
@@ -111,6 +116,10 @@ final class ManaPaymentPlanner {
         this.checkPlayable = checkPlayable;
         manaAbilities = getManaAbilities(ai, checkPlayable);
         for (SpellAbility ma : manaAbilities) {
+            List<ComboTrigger> combos = getTapsForManaCombos(ma, ai);
+            if (!combos.isEmpty()) {
+                tapsForManaCombos.put(ma.getId(), combos);
+            }
             for (AbilityManaPart manaPart : ma.getAllManaParts()) {
                 originalChoices.putIfAbsent(manaPart, manaPart.getExpressChoice());
             }
@@ -141,14 +150,14 @@ final class ManaPaymentPlanner {
                     || !ma.getPayCosts().hasManaCost() && manaPart != null
                     && (manaPart.isComboMana() || manaPart.isAnyMana())
                     && ma.totalAmountOfManaGenerated(paidFor, true) > 1
-                    || getTapsForManaCombo(ma, ai) != null) {
+                    || !getTapsForManaCombos(ma, ai).isEmpty()) {
                 return true;
             }
         }
-        return manaAbilities.stream().anyMatch(ma ->
+        boolean hasConsolidatingSource = manaAbilities.stream().anyMatch(ma ->
                 ma.totalAmountOfManaGenerated(paidFor, true) == cost.getConvertedManaCost()
-                && Integer.bitCount(getManaAbilityColorMask(ma, paidFor) & MagicColor.ALL_COLORS) > 1)
-                && Arrays.stream(futureColorPips(ai, paidFor), 0, 5)
+                && Integer.bitCount(getManaAbilityColorMask(ma, paidFor) & MagicColor.ALL_COLORS) > 1);
+        return hasConsolidatingSource && Arrays.stream(futureColorPips(ai, paidFor), 0, 5)
                 .filter(pip -> pip > 0).count() > 1;
     }
 
@@ -163,7 +172,7 @@ final class ManaPaymentPlanner {
     }
 
     private Plan findPlan(final ManaCostBeingPaid cost, final SpellAbility sa) {
-        List<State> candidates = findPaymentCandidates(new ManaCostBeingPaid(cost), sa);
+        List<State> candidates = findPaymentCandidates(cost, sa);
         if (candidates == null) {
             return Plan.EXHAUSTED;
         }
@@ -192,7 +201,7 @@ final class ManaPaymentPlanner {
         Set<Integer> greedySourceIds = new HashSet<>();
         greedySources.forEach(source -> greedySourceIds.add(source.getId()));
 
-        List<State> candidates = findPaymentCandidates(new ManaCostBeingPaid(cost), sa);
+        List<State> candidates = findPaymentCandidates(cost, sa);
         if (candidates == null) {
             return null;
         }
@@ -305,7 +314,7 @@ final class ManaPaymentPlanner {
         search.add(new Node(remainingCost, start, 250 * remainingCost.getConvertedManaCost(), startKey));
         List<State> candidates = new ArrayList<>();
 
-        while (!search.isEmpty() && remainingStates-- > 0) {
+        while (!search.isEmpty() && consumeState()) {
             Node node = search.poll();
             State state = node.state;
 
@@ -346,7 +355,8 @@ final class ManaPaymentPlanner {
 
                     for (String produced : predictManaChoicesForShard(ma, ai, toPay, paidFor, cost,
                             cost.getXManaCostPaidByColor())) {
-                        final List<Mana> virtualMana = getVirtualMana(ma, produced, ai, virtualManaCache);
+                        final List<Mana> virtualMana = virtualManaCache.computeIfAbsent(
+                                ma.getId() + "|" + produced, k -> ComputerUtilMana.createVirtualMana(ma, produced, ai));
                         if (!canUseProducedMana(ma, virtualMana, cost, toPay, paidFor, state)) {
                             continue;
                         }
@@ -385,8 +395,16 @@ final class ManaPaymentPlanner {
             }
         }
 
-        // An empty queue proves there is no remaining path; a non-empty queue means the budget expired.
-        return !search.isEmpty() && candidates.isEmpty() ? null : candidates;
+        return exhausted && candidates.isEmpty() ? null : candidates;
+    }
+
+    private boolean consumeState() {
+        if (remainingStates <= 0) {
+            exhausted = true;
+            return false;
+        }
+        remainingStates--;
+        return true;
     }
 
     private int remainingManaPotential(final Set<Integer> usedSources) {
@@ -440,7 +458,7 @@ final class ManaPaymentPlanner {
         Set<String> seen = new HashSet<>();
         search.add(new Node(cost, start, 0, null));
 
-        for (int index = 0; index < search.size(); index++) {
+        for (int index = 0; index < search.size() && consumeState(); index++) {
             Node node = search.get(index);
             ManaCostBeingPaid nodeCost = node.cost;
             State state = node.state;
@@ -476,10 +494,6 @@ final class ManaPaymentPlanner {
         return result;
     }
 
-    static int getManaAbilityColorMask(final SpellAbility ma) {
-        return getManaAbilityColorMask(ma, null);
-    }
-
     static int getManaAbilityColorMask(final SpellAbility ma, final SpellAbility paidFor) {
         SpellAbility manaSa = ComputerUtilMana.getEffectiveManaPartAbility(ma);
         if (manaSa == null) {
@@ -490,9 +504,15 @@ final class ManaPaymentPlanner {
         if (paidFor != null && !m.meetsManaRestrictions(paidFor)) {
             return 0;
         }
-        if (m.isAnyMana() || "Chosen".equals(m.getOrigProduced())) {
+        if (m.isAnyMana()) {
+            return MagicColor.ALL_COLORS;
+        }
+        if ("Chosen".equals(m.getOrigProduced())) {
             Card source = ma.getHostCard();
-            return source.hasChosenColor() ? MagicColor.fromName(source.getChosenColor()) : MagicColor.ALL_COLORS;
+            if (source.hasChosenColor()) {
+                return MagicColor.fromName(source.getChosenColor());
+            }
+            return ComputerUtilMana.choosesColorBeforeMana(ma, manaSa) ? MagicColor.ALL_COLORS : 0;
         }
 
         int mask = 0;
@@ -516,15 +536,32 @@ final class ManaPaymentPlanner {
         return mask;
     }
 
-    private static List<String> predictManaChoicesForShard(final SpellAbility ma, final Player ai,
+    private List<String> predictManaChoicesForShard(final SpellAbility ma, final Player ai,
             final ManaCostShard toPay, final SpellAbility paidFor, final ManaCostBeingPaid cost,
             final Map<String, Integer> xManaCostPaidByColor) {
         String predicted = ComputerUtilMana.predictManaForShard(ma, ai, toPay, paidFor, cost, xManaCostPaidByColor);
-        ComboTrigger triggerCombo = getTapsForManaCombo(ma, ai);
-        if (triggerCombo != null && predicted.contains(triggerCombo.marker)) {
-            List<String> result = new ArrayList<>();
-            for (String choice : comboChoices(triggerCombo)) {
-                result.add(triggerCombo.baseMana + (triggerCombo.baseMana.isEmpty() ? "" : " ") + choice);
+        List<ComboTrigger> triggerCombos = tapsForManaCombos.getOrDefault(ma.getId(), Collections.emptyList());
+        if (!triggerCombos.isEmpty()) {
+            String fixedMana = predicted;
+            for (ComboTrigger combo : triggerCombos) {
+                fixedMana = fixedMana.replace(combo.marker, "");
+            }
+            List<String> result = Collections.singletonList(String.join(" ", TextUtil.split(fixedMana, ' ')));
+            List<String> preferredColors = preferredComboColors(toPay, cost, ai);
+            for (ComboTrigger combo : triggerCombos) {
+                List<String> combined = new ArrayList<>();
+                for (String prefix : result) {
+                    for (String choice : comboChoices(combo, preferredColors)) {
+                        combined.add(prefix + (prefix.isEmpty() ? "" : " ") + choice);
+                        if (combined.size() >= MAX_COMBO_OUTPUTS) {
+                            break;
+                        }
+                    }
+                    if (combined.size() >= MAX_COMBO_OUTPUTS) {
+                        break;
+                    }
+                }
+                result = combined;
             }
             return result;
         }
@@ -561,33 +598,62 @@ final class ManaPaymentPlanner {
         return result;
     }
 
-    private static ComboTrigger getTapsForManaCombo(final SpellAbility manaAbility, final Player ai) {
-        Card source = manaAbility.getHostCard();
+    private static List<ComboTrigger> getTapsForManaCombos(final SpellAbility manaAbility, final Player ai) {
         String baseMana = ComputerUtilMana.predictManaReplacement(manaAbility, ai, ManaCostShard.GENERIC);
-        Map<AbilityKey, Object> params = AbilityKey.mapFromCard(source);
+        Map<AbilityKey, Object> params = AbilityKey.mapFromCard(manaAbility.getHostCard());
         params.put(AbilityKey.Activator, ai);
         params.put(AbilityKey.AbilityMana, manaAbility);
         params.put(AbilityKey.Produced, baseMana);
+        List<ComboTrigger> result = new ArrayList<>();
         for (Trigger trigger : ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, params)) {
             SpellAbility triggerAbility = trigger.ensureAbility();
             if (triggerAbility != null && triggerAbility.getApi() == ApiType.Mana
                     && triggerAbility.getManaPart().isComboMana()) {
                 int amount = AbilityUtils.calculateAmount(triggerAbility.getHostCard(),
                         triggerAbility.getParamOrDefault("Amount", "1"), triggerAbility);
-                return new ComboTrigger(triggerAbility.getManaPart().getOrigProduced(), baseMana,
-                        TextUtil.split(triggerAbility.getManaPart().getComboColors(triggerAbility), ' '), amount);
+                result.add(new ComboTrigger(triggerAbility.getManaPart().getOrigProduced(),
+                        Arrays.asList(TextUtil.split(
+                                triggerAbility.getManaPart().getComboColors(triggerAbility), ' ')), amount));
             }
         }
-        return null;
-    }
-
-    private static List<String> comboChoices(final ComboTrigger combo) {
-        List<String> result = new ArrayList<>();
-        addComboChoices(combo.colors, combo.amount, combo.marker.contains("Different"), new ArrayList<>(), result);
         return result;
     }
 
-    private static void addComboChoices(final String[] colors, final int amount, final boolean different,
+    private static List<String> preferredComboColors(final ManaCostShard toPay,
+            final ManaCostBeingPaid cost, final Player ai) {
+        List<String> result = new ArrayList<>();
+        if (!toPay.isGeneric()) {
+            result.add(MagicColor.toShortString(toPay.getColorMask()));
+        }
+        for (byte color : MagicColor.WUBRG) {
+            String name = MagicColor.toShortString(color);
+            if (cost.needsColor(color, ai.getManaPool()) && !result.contains(name)) {
+                result.add(name);
+            }
+        }
+        return result;
+    }
+
+    private static List<String> comboChoices(final ComboTrigger combo, final List<String> preferredColors) {
+        Set<String> orderedColors = new LinkedHashSet<>(preferredColors);
+        orderedColors.retainAll(combo.colors);
+        orderedColors.addAll(combo.colors);
+        List<String> colors = new ArrayList<>(orderedColors);
+
+        List<String> result = new ArrayList<>();
+        if (!colors.isEmpty() && (!combo.marker.contains("Different") || combo.amount <= colors.size())) {
+            List<String> spread = new ArrayList<>();
+            for (int i = 0; i < combo.amount; i++) {
+                spread.add(colors.get(i % colors.size()));
+            }
+            result.add(String.join(" ", spread));
+        }
+        addComboChoices(colors, combo.amount,
+                combo.marker.contains("Different"), new ArrayList<>(), result);
+        return result;
+    }
+
+    private static void addComboChoices(final List<String> colors, final int amount, final boolean different,
             final List<String> choice, final List<String> result) {
         if (result.size() >= MAX_COMBO_OUTPUTS) {
             return;
@@ -618,12 +684,6 @@ final class ManaPaymentPlanner {
             }
         }
         return "";
-    }
-
-    private static List<Mana> getVirtualMana(final SpellAbility ma, final String produced, final Player ai,
-            final Map<String, List<Mana>> cache) {
-        String key = ma.getId() + "|" + produced;
-        return cache.computeIfAbsent(key, k -> ComputerUtilMana.createVirtualMana(ma, produced, ai));
     }
 
     private boolean canUseProducedMana(final SpellAbility ma, final List<Mana> produced,
@@ -659,7 +719,7 @@ final class ManaPaymentPlanner {
         return false;
     }
 
-    private static AbilityManaPart setExpressChoice(final SpellAbility ma, final String produced) {
+    private AbilityManaPart setExpressChoice(final SpellAbility ma, final String produced) {
         SpellAbility manaSa = ComputerUtilMana.getEffectiveManaPartAbility(ma);
         if (manaSa == null) {
             return null;
@@ -706,7 +766,7 @@ final class ManaPaymentPlanner {
         shards.sort(Comparator.comparingInt(ManaCostShard::getCmc).thenComparing(ManaCostShard::name));
         List<ManaCostShard> result = new ArrayList<>();
         while (!shards.isEmpty()) {
-            ManaCostShard shard = cost.getShardToPayByPriority(shards, forge.card.ColorSet.WUBRG.getColor());
+            ManaCostShard shard = cost.getShardToPayByPriority(shards, ColorSet.WUBRG.getColor());
             if (shard == null) {
                 break;
             }
@@ -755,7 +815,7 @@ final class ManaPaymentPlanner {
                 + "|" + (manaPart == null ? "" : manaPart.getOrigProduced())
                 + "|" + (manaPart == null ? "" : manaPart.getManaRestrictions())
                 + "|" + (manaPart == null ? "" : manaPart.getExtraManaRestriction())
-                + "|" + getManaAbilityColorMask(ma)
+                + "|" + getManaAbilityColorMask(ma, null)
                 + "|" + amount
                 + "|" + score;
     }
@@ -774,17 +834,13 @@ final class ManaPaymentPlanner {
         return cost + "|" + state.pool.key(null) + "|" + used;
     }
 
-    private static String sourceKey(final Card source, final Map<Integer, String> sourceKeys) {
-        return sourceKeys.getOrDefault(source.getId(), "id:" + source.getId());
-    }
-
     private static String manaKey(final Mana mana, final Map<Integer, String> sourceKeys) {
         String color = MagicColor.toShortString(mana.getColor());
         if (!mana.isRestricted()) {
             return color;
         }
         return color + ":" + (sourceKeys == null ? mana.getSourceCard().getName()
-                : sourceKey(mana.getSourceCard(), sourceKeys));
+                : sourceKeys.getOrDefault(mana.getSourceCard().getId(), "id:" + mana.getSourceCard().getId()));
     }
 
     static final class Plan {
@@ -811,29 +867,41 @@ final class ManaPaymentPlanner {
                 final boolean effect, final List<Mana> manaSpentToPay) {
             ManaPool manaPool = ai.getManaPool();
             Map<Card, SpellAbility> resolvedActions = new HashMap<>();
+            List<SpellAbility> replayedActions = new ArrayList<>();
+            List<Mana> originalPool = Lists.newArrayList(manaPool);
+            Cost pendingCost = null;
+            Card pendingSource = null;
+            boolean paid = false;
             activePayment.set(new ManaPaymentContext(cost, ai));
             try {
                 for (Action action : actions) {
                     SpellAbility manaAbility = action.manaAbility;
+                    ManaCostBeingPaid activationCost = ComputerUtilMana.calculateManaCost(
+                            manaAbility.getPayCosts(), manaAbility, ai, true, 0, manaAbility.isTrigger());
+                    List<Mana> activationMana = findMatchingMana(
+                            manaPool, action.activationMana, activationCost, manaAbility, ai);
+                    if (activationMana == null) {
+                        return false;
+                    }
 
                     if (manaAbility.getPayCosts().hasTapCost()) {
                         AiCardMemory.rememberCard(ai, manaAbility.getHostCard(), MemorySet.PAYS_TAP_COST);
                     }
 
-                    final CostPayment pay = new CostPayment(manaAbility.getPayCosts().copyWithNoMana(), manaAbility);
+                    Cost nonManaCost = manaAbility.getPayCosts().copyWithNoMana();
+                    final CostPayment pay = new CostPayment(nonManaCost, manaAbility);
                     if (!pay.payComputerCosts(new AiCostDecision(ai, manaAbility, effect, true))) {
                         return false;
                     }
+                    pendingCost = nonManaCost;
+                    pendingSource = manaAbility.getHostCard();
 
-                    ManaCostBeingPaid activationCost = ComputerUtilMana.calculateManaCost(
-                            manaAbility.getPayCosts(), manaAbility, ai, true, 0, manaAbility.isTrigger());
-                    for (Mana planned : action.activationMana) {
-                        Mana actual = findMatchingMana(manaPool, planned);
-                        if (actual == null || !manaPool.tryPayCostWithMana(manaAbility, activationCost, actual, false)) {
+                    for (Mana actual : activationMana) {
+                        if (!manaPool.tryPayCostWithMana(manaAbility, activationCost, actual, false)) {
                             return false;
                         }
                         manaAbility.getPayingMana().add(actual);
-                        SpellAbility producer = resolvedActions.get(planned.getSourceCard());
+                        SpellAbility producer = resolvedActions.get(actual.getSourceCard());
                         if (producer != null && !manaAbility.getPayingManaAbilities().contains(producer)) {
                             manaAbility.getPayingManaAbilities().add(producer);
                         }
@@ -842,23 +910,72 @@ final class ManaPaymentPlanner {
                         return false;
                     }
 
-                    action.applyChoice();
-                    ai.getGame().getStack().addAndUnfreeze(manaAbility);
+                    String previousChoice = action.applyChoice();
+                    try {
+                        ai.getGame().getStack().addAndUnfreeze(manaAbility);
+                    } finally {
+                        action.restoreChoice(previousChoice);
+                    }
                     resolvedActions.put(manaAbility.getHostCard(), manaAbility);
+                    replayedActions.add(manaAbility);
+                    pendingCost = null;
+                    pendingSource = null;
                 }
-                return manaPool.payManaCostFromPool(cost, sa, false, manaSpentToPay);
+                paid = manaPool.payManaCostFromPool(cost, sa, false, manaSpentToPay);
+                return paid;
             } finally {
+                if (!paid) {
+                    if (pendingCost != null && pendingCost.isUndoable()) {
+                        pendingCost.refundPaidCost(pendingSource);
+                    }
+                    rollback(manaPool, manaSpentToPay, replayedActions, originalPool);
+                }
                 activePayment.remove();
             }
         }
 
-        private static Mana findMatchingMana(final ManaPool manaPool, final Mana planned) {
-            for (Mana actual : manaPool) {
-                if (actual.equals(planned)) {
-                    return actual;
+        private static List<Mana> findMatchingMana(final ManaPool manaPool, final List<Mana> plannedMana,
+                final ManaCostBeingPaid cost, final SpellAbility paidFor, final Player ai) {
+            List<Mana> available = Lists.newArrayList(manaPool);
+            List<Mana> result = new ArrayList<>();
+            ManaCostBeingPaid remaining = new ManaCostBeingPaid(cost);
+            for (Mana planned : plannedMana) {
+                Mana match = null;
+                for (Mana actual : available) {
+                    if (actual.equals(planned) && ComputerUtilMana.canPayWithMana(remaining, actual, paidFor, ai)) {
+                        match = actual;
+                        break;
+                    }
                 }
+                if (match == null) {
+                    return null;
+                }
+                remaining.payMana(match, manaPool);
+                available.remove(match);
+                result.add(match);
             }
-            return null;
+            return remaining.isPaid() ? result : null;
+        }
+
+        private static void rollback(final ManaPool manaPool, final List<Mana> manaSpentToPay,
+                final List<SpellAbility> replayedActions, final List<Mana> originalPool) {
+            manaPool.refundMana(manaSpentToPay);
+            for (int i = replayedActions.size() - 1; i >= 0; i--) {
+                SpellAbility manaAbility = replayedActions.get(i);
+                if (!manaAbility.undo()) {
+                    Cost nonManaCost = manaAbility.getPayCosts().copyWithNoMana();
+                    if (nonManaCost.isUndoable()) {
+                        nonManaCost.refundPaidCost(manaAbility.getHostCard());
+                    }
+                }
+                manaPool.refundMana(manaAbility.getPayingMana());
+                manaAbility.getPayingManaAbilities().clear();
+                manaAbility.getHostCard().getGame().getStack().clearUndoStack(manaAbility);
+            }
+            // Normal undo can reject a mismatched predicted output. Restore the exact pool snapshot
+            // after refunding activation chains so no virtual mana leaks into the real game.
+            manaPool.removeMana(Lists.newArrayList(manaPool));
+            manaPool.addMana(originalPool);
         }
     }
 
@@ -927,7 +1044,7 @@ final class ManaPaymentPlanner {
     private record ManaPaymentContext(ManaCostBeingPaid cost, Player ai) {
     }
 
-    private record ComboTrigger(String marker, String baseMana, String[] colors, int amount) {
+    private record ComboTrigger(String marker, List<String> colors, int amount) {
     }
 
     private record Action(SpellAbility manaAbility, AbilityManaPart manaPart, String expressChoice,
@@ -937,9 +1054,17 @@ final class ManaPaymentPlanner {
             this(manaAbility, manaPart, manaPart == null ? "" : manaPart.getExpressChoice(), activationMana);
         }
 
-        private void applyChoice() {
+        private String applyChoice() {
+            String previous = manaPart == null ? "" : manaPart.getExpressChoice();
             if (manaPart != null && !expressChoice.isEmpty()) {
                 manaPart.setExpressChoice(expressChoice);
+            }
+            return previous;
+        }
+
+        private void restoreChoice(final String previous) {
+            if (manaPart != null) {
+                manaPart.setExpressChoice(previous);
             }
         }
     }
