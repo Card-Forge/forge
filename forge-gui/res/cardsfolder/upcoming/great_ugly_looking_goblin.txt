@@ -14,5 +14,4 @@ Name:Clap! Snap!
 ManaCost:1 B
 Types:Sorcery Adventure
 A:SP$ Amass | Type$ Goblin | Num$ 2 | SpellDescription$ Amass Goblins 2. (Then exile this card. You may cast the creature later from exile.)
-SVar:DBToken:DB$ Token | TokenScript$ role_cursed | TokenOwner$ You | AttachedTo$ Targeted
 Oracle:Amass Goblins 2. (Then exile this card. You may cast the creature later from exile.)
