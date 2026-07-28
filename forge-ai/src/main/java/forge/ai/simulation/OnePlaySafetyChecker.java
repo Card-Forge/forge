@@ -11,7 +11,9 @@ public final class OnePlaySafetyChecker {
         // Forge keeps the parent ability on the stack while it resolves. Score actions offered
         // during that resolution incrementally; priority responses need two full stack-resolution
         // branches and are not supported yet.
+        // Non-stack special actions such as suspend defer their payoff beyond this simulation.
         if (sa == null || CHECKING.get()
+                || (!sa.isSpell() && !sa.isActivatedAbility() && !sa.isLandAbility())
                 || (!player.getGame().getStack().isEmpty()
                 && !player.getGame().getStack().isResolving())) {
             return true;
