@@ -1,3 +1,7 @@
+# Format: <path relative to skin/battle_backgrounds/> <direct HTTPS image URL>
+# Add one JPG, JPEG, or PNG per line. The URL must return the image itself with an image content type.
+# The relative folder selects its pool, including custom enemy, POI, and TMX battleBackground values.
+# This list is authoritative: removing an entry also removes that file from the plane's cache.
 castle/black/castle_black_01.jpg https://oldborder-shandalar.net/adventure-assets/shandalar-old-border/battle-backgrounds/castle/black/castle_black_01.jpg
 castle/blue/castle_blue_01.jpg https://oldborder-shandalar.net/adventure-assets/shandalar-old-border/battle-backgrounds/castle/blue/castle_blue_01.jpg
 castle/colorless/castle_colorless_01.jpg https://oldborder-shandalar.net/adventure-assets/shandalar-old-border/battle-backgrounds/castle/colorless/castle_colorless_01.jpg

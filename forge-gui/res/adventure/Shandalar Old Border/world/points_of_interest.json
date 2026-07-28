@@ -2602,6 +2602,7 @@
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
 		"map": "../Shandalar Old Border/maps/map/magetower/magetower_12_lichsmirror.tmx",
+		"battleBackground": "poi/lichs-tower",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -3727,6 +3728,7 @@
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Slobad",
 		"map": "../Shandalar Old Border/maps/map/minibosses/slobad_factory.tmx",
+		"battleBackground": "poi/squees-factory",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
