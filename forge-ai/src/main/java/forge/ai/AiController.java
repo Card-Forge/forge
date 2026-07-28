@@ -24,6 +24,7 @@ import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.GameStateEvaluator;
+import forge.ai.simulation.OnePlaySafetyChecker;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -1287,7 +1288,17 @@ public class AiController {
             }
         }
 
-        return canPlaySpellOrLandBasic(spell.getHostCard(), spell);
+        AiPlayDecision basicDecision = canPlaySpellOrLandBasic(spell.getHostCard(), spell);
+        if (basicDecision != AiPlayDecision.WillPlay || mandatory) {
+            return basicDecision;
+        }
+
+        SpellAbility abilityToCheck = spell;
+        if (withoutPayingManaCost && !spell.hasParam("WithoutManaCost")) {
+            abilityToCheck = spell.copyWithNoManaCost(player);
+        }
+        return isChosenPlayAcceptable(abilityToCheck)
+                ? AiPlayDecision.WillPlay : AiPlayDecision.CurseEffects;
     }
 
     // declares blockers for given defender in a given combat
@@ -1345,6 +1356,13 @@ public class AiController {
         return Lists.newArrayList(sa);
     }
 
+    private boolean isChosenPlayAcceptable(SpellAbility ability) {
+        if (useSimulation) {
+            return true;
+        }
+        return OnePlaySafetyChecker.isAcceptable(player, ability);
+    }
+
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         AiCache.clear();
         // Reset cached predicted combat, as it may be stale. It will be
@@ -1385,7 +1403,9 @@ public class AiController {
 
                     if (!abilities.isEmpty()) {
                         // TODO extend this logic to evaluate MDFC with both sides land
-                        return abilities;
+                        if (isChosenPlayAcceptable(abilities.get(0))) {
+                            return abilities;
+                        }
                     }
                 }
             }
@@ -1672,6 +1692,10 @@ public class AiController {
 
                 if (opinion != AiPlayDecision.WillPlay)
                     continue;
+
+                if (!isChosenPlayAcceptable(sa)) {
+                    continue;
+                }
 
                 // TODO could continue to try find another with higher rating (weighted by priority ordering)
                 return sa;

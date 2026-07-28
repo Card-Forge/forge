@@ -43,11 +43,6 @@ public class SimulationTest extends AITest {
     }
 
     protected GameSimulator createSimulator(Game game, Player p) {
-        return new GameSimulator(new SimulationController(new Score(0)) {
-            @Override
-            public boolean shouldRecurse() {
-                return false;
-            }
-        }, game, p, null);
+        return new GameSimulator(new SimulationController(new Score(0), 0), game, p, null);
     }
 }

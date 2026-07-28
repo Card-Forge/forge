@@ -141,6 +141,12 @@ public class GameSimulator {
             result = saMatcher(GameActionUtil.getAlternativeCosts(cSa, aiPlayer, true), desc);
         }
 
+        if (result != null && sa.hasParam("WithoutManaCost") && !result.hasParam("WithoutManaCost")) {
+            result = result.copyWithNoManaCost(aiPlayer);
+        }
+        if (result != null) {
+            result.setCastFromPlayEffect(sa.isCastFromPlayEffect());
+        }
         return result;
     }
 
