@@ -137,9 +137,10 @@ public class CdnUuidCacheTest {
 
     @Test
     public void remoteFetch_writesLocalCacheFile() {
-        // After the first successful lookup, the set JSON should be present in localCacheDir.
+        // After the first successful lookup, the set JSON should be present in localCacheDir,
+        // gzip-compressed.
         CdnUuidCache.getCdnUrl(SET, "1", "en", "front", "normal");
-        Assert.assertTrue(new File(localCacheDir, SET + ".json").exists(),
+        Assert.assertTrue(new File(localCacheDir, SET + ".json.gz").exists(),
                 "local cache file should be written after remote fetch");
     }
 

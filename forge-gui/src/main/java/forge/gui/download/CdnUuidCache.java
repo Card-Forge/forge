@@ -9,7 +9,7 @@ import org.tinylog.Logger;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -23,16 +23,26 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * Lazy-loading, thread-safe cache for Scryfall CDN UUIDs.
  *
  * <p>UUID data lives in per-set JSON files hosted in the forge-extras repository.
  * On the first lookup for a set, the cache checks for a local copy under
- * {@code {cacheDir}/cdn_uuid/{setCode}.json}. If absent it fetches the file from
- * forge-extras and writes it locally so subsequent lookups are instant.
+ * {@code {cacheDir}/cdn_uuid/{setCode}.json.gz}. If absent it fetches the file from
+ * forge-extras and writes it locally (gzip-compressed) so subsequent lookups are instant.
  * Returns {@code null} on any failure so callers fall back to the rate-limited
  * Scryfall API or the cardforge server.
+ *
+ * <p>The remote fetch requests {@code Accept-Encoding: gzip}; GitHub's raw content
+ * server honors it (roughly halving transfer size for this UUID-heavy JSON), and
+ * the response is decompressed transparently. The local disk copy is stored
+ * gzip-compressed too, independent of whatever encoding the remote used. Note this
+ * is purely a runtime concern — the JSON files as committed to forge-extras are
+ * kept as plain, sorted text so they stay diffable; gzipping those would make
+ * every regeneration a full-file binary rewrite instead of a minimal diff.
  *
  * <p>Set JSON format:
  * <pre>
@@ -154,7 +164,7 @@ public final class CdnUuidCache {
         String dir = localCacheDirOverride != null
                 ? localCacheDirOverride
                 : ForgeConstants.CACHE_CDN_UUID_DIR;
-        return new File(dir, setCode + ".json");
+        return new File(dir, setCode + ".json.gz");
     }
 
     private static String remoteUrl(String setCode) {
@@ -170,13 +180,18 @@ public final class CdnUuidCache {
         conn.setConnectTimeout(FETCH_TIMEOUT_MS);
         conn.setReadTimeout(FETCH_TIMEOUT_MS);
         conn.setRequestProperty("Accept", "application/json");
+        conn.setRequestProperty("Accept-Encoding", "gzip");
         conn.connect();
         if (conn instanceof HttpURLConnection) {
             int status = ((HttpURLConnection) conn).getResponseCode();
             if (status == 404) return null;
             if (status != 200) throw new Exception("HTTP " + status + " for " + urlStr);
         }
-        try (InputStream is = conn.getInputStream();
+        // Setting Accept-Encoding ourselves means the JDK won't auto-decompress;
+        // only unwrap if the server actually honored it (e.g. file:// URLs never do).
+        boolean gzipped = "gzip".equalsIgnoreCase(conn.getContentEncoding());
+        try (InputStream raw = conn.getInputStream();
+             InputStream is = gzipped ? new GZIPInputStream(raw) : raw;
              BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             StringBuilder sb = new StringBuilder();
             String line;
@@ -191,7 +206,9 @@ public final class CdnUuidCache {
             file.getParentFile().mkdirs();
             Path tmp = Files.createTempFile(file.getParentFile().toPath(), "cdn-", ".tmp");
             try {
-                Files.write(tmp, json.getBytes(StandardCharsets.UTF_8));
+                try (GZIPOutputStream gz = new GZIPOutputStream(Files.newOutputStream(tmp))) {
+                    gz.write(json.getBytes(StandardCharsets.UTF_8));
+                }
                 Files.move(tmp, file.toPath(),
                         StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
             } catch (Exception e) {
@@ -204,7 +221,8 @@ public final class CdnUuidCache {
     }
 
     private static Map<String, Map<String, LangUuids>> parseSetFile(File file) throws Exception {
-        try (FileReader reader = new FileReader(file, StandardCharsets.UTF_8)) {
+        try (InputStream is = new GZIPInputStream(new FileInputStream(file));
+             InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
             return parseSetObject(JsonParser.parseReader(reader).getAsJsonObject());
         }
     }
