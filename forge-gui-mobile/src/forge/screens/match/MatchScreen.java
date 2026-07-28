@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Vector2;
-import forge.adventure.scene.GameScene;
+import forge.adventure.util.AdventureBackgroundResolver;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.card.CardImageRenderer;
@@ -836,25 +836,7 @@ public class MatchScreen extends FScreen {
 
     FSkinTexture getBG() {
         if (Forge.isMobileAdventureMode) {
-            GameScene gameScene = GameScene.instance();
-            String location = gameScene.getAdventurePlayerLocation(false, true);
-            FSkinTexture background = switch (location) {
-                case "green" -> FSkinTexture.ADV_BG_FOREST;
-                case "black" -> FSkinTexture.ADV_BG_SWAMP;
-                case "red" -> FSkinTexture.ADV_BG_MOUNTAIN;
-                case "blue" -> FSkinTexture.ADV_BG_ISLAND;
-                case "white" -> FSkinTexture.ADV_BG_PLAINS;
-                case "waste" -> FSkinTexture.ADV_BG_WASTE;
-                case "cave" -> FSkinTexture.ADV_BG_CAVE;
-                case "dungeon" -> FSkinTexture.ADV_BG_DUNGEON;
-                case "castle" -> FSkinTexture.ADV_BG_CASTLE;
-                default -> FSkinTexture.ADV_BG_COMMON;
-            };
-            if (gameScene.getMapPOI() != null) {
-                String biome = gameScene.getBiomeByPosition(gameScene.getMapPOI().getPosition());
-                return background.getRandomAdventureBackground(biome.equals("waste") ? "colorless" : biome);
-            }
-            return background.getRandomAdventureBackground();
+            return AdventureBackgroundResolver.getBattleBackground();
         }
         return FSkinTexture.BG_MATCH;
     }

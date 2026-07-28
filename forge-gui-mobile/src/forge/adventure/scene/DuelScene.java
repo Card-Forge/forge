@@ -99,6 +99,10 @@ public class DuelScene extends ForgeScene {
         return callbackExit;
     }
 
+    public String getBattleBackground() {
+        return enemy == null ? null : enemy.getBattleBackground();
+    }
+
     public void GameEnd() {
         //TODO: Progress towards applicable Adventure quests also needs to be reported here.
         if (eventData != null)

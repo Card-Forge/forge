@@ -24,6 +24,15 @@ import java.util.stream.Stream;
 
 /**
  * Downloads the battle backgrounds declared by the selected Adventure plane.
+ * Plane authors list one image per line in {@code <plane>/skin/battle-backgrounds.txt}:
+ * <pre>
+ * relative/folder/image.jpg https://example.com/direct/image.jpg
+ * </pre>
+ * The first value is relative to {@code skin/battle_backgrounds/} and must end in
+ * {@code .jpg}, {@code .jpeg}, or {@code .png}. The second value must be a direct
+ * HTTPS image URL whose response has an image content type. Lines beginning with
+ * {@code #} are comments. The list is authoritative, so removing an entry also
+ * removes its cached file.
  */
 public final class AdventureBackgroundDownloader {
     private static final String LIST_PATH = "skin/battle-backgrounds.txt";

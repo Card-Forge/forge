@@ -14,16 +14,33 @@ Planes can keep these images outside the Forge distribution by declaring them in
 
 `forest/forest_01.jpg https://example.com/forest/forest_01.jpg`
 
-Forge automatically downloads missing files to the selected plane's cache. The list is authoritative, so cached images removed from it are also removed. This download does not require a user setting. Local plane images and the existing Adventure backgrounds remain available as fallbacks when a download is incomplete or unavailable.
+The URL must point directly to a JPG, JPEG, or PNG response with an image content type. Lines beginning with `#` are comments. Forge automatically downloads missing files to the selected plane's cache. The list is authoritative, so cached images removed from it are also removed. This download does not require a user setting. Local plane images and the existing Adventure backgrounds remain available as fallbacks when a download is incomplete or unavailable.
 
 Point-of-interest categories can also use biome subfolders named `white`, `blue`, `black`, `red`, `green`, or `colorless`, for example `battle_backgrounds/castle/red/`. The first non-empty folder in this order is used:
 
-1. The selected plane's cached category and biome folder.
-2. The current plane's category and biome folder.
-3. The common Adventure assets' category and biome folder.
-4. The selected plane's cached generic category folder.
-5. The current plane's generic category folder.
-6. The common Adventure assets' generic category folder.
+1. A background set on the individual enemy in a TMX map.
+2. A background set on the enemy archetype.
+3. A background set on the point of interest.
+4. The point-of-interest category and biome folder.
+5. The generic category folder.
+
+Set `battleBackground` to a folder path relative to `battle_backgrounds/`. The same path can be used in `battle-backgrounds.txt`, so local and downloaded backgrounds have identical configuration:
+
+```json
+{ "name": "Goblin Warlord", "battleBackground": "enemy/goblin-warlord" }
+```
+
+```json
+{ "name": "Fallen Empires Castle", "battleBackground": "poi/fallen-empires-castle" }
+```
+
+An individual enemy object in a TMX map can override its archetype with:
+
+```xml
+<property name="battleBackground" value="encounter/ashnod-boss"/>
+```
+
+For each folder above, Forge checks the selected plane's cache, the current plane, and then the common Adventure assets. Folder values are explicit and can contain any number of nested directories.
 
 Images are not combined between fallback folders. If no rotation folder contains an image, Forge continues to use the existing single-image override, common Adventure image, current skin, or default skin. Existing plane configurations therefore do not need to change.
 
