@@ -1,8 +1,10 @@
 package forge.ai.simulation;
 
 import forge.ai.simulation.GameStateEvaluator.Score;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 public final class OnePlaySafetyChecker {
     private static final ThreadLocal<Boolean> CHECKING = ThreadLocal.withInitial(() -> false);
@@ -11,9 +13,7 @@ public final class OnePlaySafetyChecker {
         // Forge keeps the parent ability on the stack while it resolves. Score actions offered
         // during that resolution incrementally; priority responses need two full stack-resolution
         // branches and are not supported yet.
-        // Non-stack special actions such as suspend defer their payoff beyond this simulation.
         if (sa == null || CHECKING.get()
-                || (!sa.isSpell() && !sa.isActivatedAbility() && !sa.isLandAbility())
                 || (!player.getGame().getStack().isEmpty()
                 && !player.getGame().getStack().isResolving())) {
             return true;
@@ -26,6 +26,7 @@ public final class OnePlaySafetyChecker {
             GameSimulator simulator = new GameSimulator(controller, player.getGame(), player, null);
             Score resultScore = simulator.simulateSpellAbility(sa);
             Player simulatedPlayer = (Player) simulator.getGameCopier().find(player);
+            int expectedScoreLoss = expectedCardScoreLoss(player, sa, simulator);
 
             if (simulatedPlayer == null) {
                 return true;
@@ -34,9 +35,23 @@ public final class OnePlaySafetyChecker {
                 return false;
             }
             return resultScore.value == Integer.MIN_VALUE
-                    || resultScore.value >= originalScore.value;
+                    || (long) resultScore.value >= (long) originalScore.value - expectedScoreLoss;
         } finally {
             CHECKING.remove();
         }
+    }
+
+    private static int expectedCardScoreLoss(Player player, SpellAbility sa, GameSimulator simulator) {
+        Card source = sa.getHostCard();
+        if (source == null || !source.isInZone(ZoneType.Hand)) {
+            return 0;
+        }
+        Card simulatedSource = (Card) simulator.getGameCopier().find(source);
+        if (simulatedSource.isInZone(ZoneType.Hand)) {
+            return 0;
+        }
+        // Match GameStateEvaluator: excess cards are worth one point, other hand cards five.
+        return !player.isUnlimitedHandSize()
+                && player.getCardsIn(ZoneType.Hand).size() > player.getMaxHandSize() ? 1 : 5;
     }
 }

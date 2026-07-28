@@ -138,18 +138,27 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
     }
 
     @Test
-    public void testNormalAiAllowsEqualScoreCantrip() {
-        Game game = createGame();
-        Player ai = game.getPlayers().get(1);
+    public void testNormalAiAllowsExpectedCardCost() {
+        Game ritualGame = createGame();
+        Player ritualAi = ritualGame.getPlayers().get(1);
+        addCard("Swamp", ritualAi);
+        addCardToZone("Dark Ritual", ritualAi, ZoneType.Hand);
+        addCardToZone("Dark Confidant", ritualAi, ZoneType.Hand);
+        moveToMain2(ritualGame, ritualAi);
 
-        addCard("Island", ai);
-        Card cantrip = addCardToZone("Reach Through Mists", ai, ZoneType.Hand);
-        fillLibrary(ai, 6);
-        moveToMain2(game, ai);
+        List<SpellAbility> choices = ai(ritualAi).chooseSpellAbilityToPlay();
+        AssertJUnit.assertNotNull("The safety check should allow a useful mana ritual", choices);
+        AssertJUnit.assertEquals("Dark Ritual", choices.get(0).getHostCard().getName());
 
-        List<SpellAbility> choices = ai(ai).chooseSpellAbilityToPlay();
-        AssertJUnit.assertNotNull("The safety check should not veto an equal-score cantrip", choices);
-        AssertJUnit.assertEquals(cantrip, choices.get(0).getHostCard());
+        Game turnGame = createGame();
+        Player turnAi = turnGame.getPlayers().get(1);
+        addCards("Island", 2, turnAi);
+        addCardToZone("Time Walk", turnAi, ZoneType.Hand);
+        moveToMain2(turnGame, turnAi);
+
+        choices = ai(turnAi).chooseSpellAbilityToPlay();
+        AssertJUnit.assertNotNull("The safety check should allow an extra-turn spell", choices);
+        AssertJUnit.assertEquals("Time Walk", choices.get(0).getHostCard().getName());
     }
 
     @Test
