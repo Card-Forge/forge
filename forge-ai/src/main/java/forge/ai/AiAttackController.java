@@ -1726,8 +1726,6 @@ public class AiAttackController {
             i++;
             if (i + refPowerValue >= cre.getCurrentToughness()) {
                 attUnsafe.add(cre);
-            } else {
-                continue;
             }
         }
 
