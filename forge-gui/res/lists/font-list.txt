@@ -1,2 +1,3 @@
 SourceHanSansCN | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/fonts/SourceHanSansCN-Normal.zip
 SourceHanSansJP | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/fonts/SourceHanSansJP-Normal.zip
+SourceHanSansKR | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/fonts/SourceHanSansKR-Normal.zip

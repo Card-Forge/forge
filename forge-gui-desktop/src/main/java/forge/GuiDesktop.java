@@ -138,11 +138,6 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public ISkinImage getCardArt(final PaperCard card) {
-        return null; //TODO
-    }
-
-    @Override
     public ISkinImage getCardArt(final PaperCard card, final boolean backFace) {
         return null; //TODO
     }
@@ -267,11 +262,6 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public void download(final GuiDownloadService service, final Consumer<Boolean> callback) {
         new GuiDownloader(service, callback).show();
-    }
-
-    @Override
-    public void refreshSkin() {
-        //todo refresh skin selector
     }
 
     @Override

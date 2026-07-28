@@ -6,6 +6,7 @@
   - [AI](ai.md)
   - [Network Play](network-play.md)
   - [Advanced search](Advanced-Search.md)
+  - [Advanced Yield Options](Advanced-Yield-Options.md)
 
 - Adventure Mode
 
@@ -29,7 +30,7 @@
 
   - Tutorials
     - [Tutorial 1, Create your first Plane](Adventure/Tutorial-1-Create-your-First-Plane.md)
-    - [Tutorial 2, A New Look (creating your first map.)](Adventure/Tutorial-2-A-New-Look.md)
+    - [Tutorial 2, A New Look (creating your first map)](Adventure/Tutorial-2-A-New-Look.md)
     - [Tutorial 3, Configuration (Configuring your Plane)](Adventure/Tutorial-3-Configuration.md)
 
 - [Card Scripting API](Card-scripting-API/Card-scripting-API.md)
@@ -46,10 +47,12 @@
   - [IntelliJ Setup](Development/IntelliJ-setup/IntelliJ-setup.md)
   - [Snapshots & Releases](Development/Snapshots-and-Releases.md)
   - [Android Builds](Development/Android-Builds.md)
+  - [iOS Builds](Development/iOS-Builds.md)
   - [Dev Mode](Development/DevMode.md)
   - [Ownership](Development/ownership.md)
   - [Docker Container](docker-setup.md)
   - [Network Testing](Development/Network-Testing.md)
+  - [UI Guidelines](Development/UI-Guidelines.md)
 
 - Customization & Themes
   - [Skins](Skins.md)

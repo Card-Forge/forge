@@ -422,7 +422,7 @@
   </object>
   <object id="335" template="../../../../common/maps/obj/shop.tx" x="31.0921" y="140.855" width="16" height="16">
    <properties>
-    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
+    <property name="commonShopList" value="OutlawBoosters"/>
     <property name="mythicShopList" value=""/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>

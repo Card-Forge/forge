@@ -16,7 +16,7 @@ import forge.toolbox.FOptionPane;
 
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
-        Lobby("lblLobby", FSkinImage.FAVICON, OnlineLobbyScreen.class),
+        Lobby("lblPlayOnline", FSkinImage.FAVICON, OnlineLobbyScreen.class),
         Chat("lblChat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class),
         Disconnect("lblDisconnect", FSkinImage.DELETE, null);
 
@@ -84,14 +84,7 @@ public class OnlineMenu extends FPopupMenu {
         }
 
         public void update(){
-            for (OnlineScreen ngs : OnlineScreen.values()) {
-                if (ngs.ordinal() == 2){ //disconect
-                    if (getGameLobby() == null)
-                        ngs.item.setEnabled(false);
-                    else
-                        ngs.item.setEnabled(true);
-                }
-            }
+            Disconnect.item.setEnabled(getGameLobby() != null);
         }
     }
 

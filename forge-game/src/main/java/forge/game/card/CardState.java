@@ -24,7 +24,6 @@ import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
-import forge.game.ForgeScript;
 import forge.game.GameObject;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
@@ -110,7 +109,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private SpellAbility manifestUp;
     private SpellAbility cloakUp;
 
-    private LandTraitChanges landTraitChanges = new LandTraitChanges(this);
+    // wrapped in a List so it can be reused directly
+    private List<LandTraitChanges> landTraitChanges = List.of(new LandTraitChanges(this));
 
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);
@@ -374,8 +374,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         view.updateAttractionLights(this);
     }
 
-    public final Collection<KeywordInterface> getCachedKeywords() {
-        return cachedKeywords.getValues();
+    public final KeywordCollection getCachedKeywords() {
+        return cachedKeywords;
     }
 
     public final Collection<KeywordInterface> getCachedKeyword(final Keyword keyword) {
@@ -404,10 +404,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         for (KeywordInterface k : intrinsicKeyword0) {
             intrinsicKeywords.insert(k.copy(card, lki));
         }
-        updateKeywordsCache();
-    }
-
-    public final void updateKeywordsCache() {
         card.updateKeywordsCache(this);
     }
 
@@ -445,12 +441,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
         }
         return changed;
-    }
-
-    public void addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
-        for (KeywordInterface inst : intrinsicKeywords2) {
-            intrinsicKeywords.insert(inst);
-        }
     }
 
     public final boolean removeIntrinsicKeyword(final String s) {
@@ -548,7 +538,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         }
     }
 
-    public LandTraitChanges getLandTraitChanges() { return this.landTraitChanges; }
+    public List<LandTraitChanges> getLandTraitChanges() { return this.landTraitChanges; }
 
     record LandTraitChanges(CardState state, Map<MagicColor.Color, SpellAbility> map) implements ICardTraitChanges, IKeywordsChange
     {
@@ -754,6 +744,12 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
             result.add(defenseRep);
         }
+        if (type.isSaga() && !hasKeyword(Keyword.READ_AHEAD)) {
+            if (sagaRep == null) {
+                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, true);
+            }
+            result.add(sagaRep);
+        }
 
         card.updateReplacementEffects(result, this, rulesHost);
 
@@ -762,12 +758,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         }
 
         // below are global rules
-        if (type.hasSubtype("Saga") && !hasKeyword(Keyword.READ_AHEAD)) {
-            if (sagaRep == null) {
-                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, false);
-            }
-            result.add(sagaRep);
-        }
         if (type.hasSubtype("Adventure")) {
             if (this.adventureRep == null) {
                 adventureRep = CardFactoryUtil.setupAdventureAbility(this);
@@ -863,6 +853,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setFunctionalVariantName(source.getFunctionalVariantName());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
+        setBasePowerString(source.getBasePowerString());
+        setBaseToughnessString(source.getBaseToughnessString());
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
         setAttractionLights(source.getAttractionLights());
@@ -1030,7 +1022,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
      */
     @Override
     public boolean hasProperty(String property, Player sourceController, Card source, CardTraitBase spellAbility) {
-        return ForgeScript.cardStateHasProperty(this, property, sourceController, source, spellAbility);
+        return CardStateProperty.hasProperty(this, sourceController, source, property, spellAbility);
     }
 
     public ImmutableList<CardTraitBase> getTraits() {
@@ -1044,7 +1036,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public void resetOriginalHost(Card oldHost) {
         for (final CardTraitBase ctb : getTraits()) {
-            if (ctb.isIntrinsic() && ctb.getOriginalHost() != null && ctb.getOriginalHost().equals(oldHost)) {
+            if (ctb.isIntrinsic() && oldHost.equals(ctb.getOriginalHost())) {
                 // only update traits with undesired host or SVar lookup would fail
                 ctb.setCardState(this);
             }
@@ -1114,5 +1106,14 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     @Override
     public String getTranslatedName() {
         return CardTranslation.getTranslatedName(this);
+    }
+
+    public boolean isWorthy() {
+        CardTypeView type = getTypeWithChanges();
+        if (!type.isCreature() || !type.isLegendary() || type.hasSubtype("Villain")) {
+            return false;
+        }
+        ColorSet color = getCard().getColor(this);
+        return color.hasRed() || color.hasWhite();
     }
 }

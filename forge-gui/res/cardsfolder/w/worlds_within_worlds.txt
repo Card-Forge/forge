@@ -1,0 +1,11 @@
+Name:Worlds Within Worlds
+ManaCost:5 G U
+Types:Sorcery
+A:SP$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature | RememberChanged$ True | SubAbility$ DBRepeatPut | SpellDescription$ Exile all creatures. Each player may put any number of creature cards from their hand onto the battlefield. Then put all cards exiled this way into their owners' hands.
+SVar:DBRepeatPut:DB$ RepeatEach | RepeatSubAbility$ DBPut | RepeatPlayers$ Player | SubAbility$ DBChange
+SVar:DBPut:DB$ ChangeZone | DefinedPlayer$ Remembered | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ X
+SVar:X:Count$ValidHand Creature.RememberedPlayerCtrl
+SVar:DBChange:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup | SpellDescription$ Exile CARDNAME.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Exile all creatures. Each player may put any number of creature cards from their hand onto the battlefield. Then put all cards exiled this way into their owners' hands. Exile Worlds Within Worlds.

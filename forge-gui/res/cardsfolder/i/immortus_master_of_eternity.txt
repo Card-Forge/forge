@@ -1,0 +1,11 @@
+Name:Immortus, Master of Eternity
+ManaCost:2 U U
+Types:Legendary Creature Human Hero Villain
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | RestrictValid$ Spell.nonCreature | SpellDescription$ Add {U} for each card you've drawn this turn. Spend this mana only to cast noncreature spells.
+A:AB$ ChangeZoneAll | Cost$ 5 U U | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | PowerUp$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | SpellDescription$ Each player shuffles their hand and graveyard into their library, then draws seven cards. Put a +1/+1 counter on NICKNAME. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$YouDrewThisTurn
+DeckHas:Ability$Counters
+Oracle:{T}: Add {U} for each card you've drawn this turn. Spend this mana only to cast noncreature spells.\nPower-up — {5}{U}{U}: Each player shuffles their hand and graveyard into their library, then draws seven cards. Put a +1/+1 counter on Immortus. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)

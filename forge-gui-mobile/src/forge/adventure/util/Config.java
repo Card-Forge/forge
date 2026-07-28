@@ -60,12 +60,11 @@ public class Config {
 
     private Config() {
         String path = resPath();
-        FilenameFilter planesFilter = (file, s) -> (!s.contains(".") && !s.equals(commonDirectoryName));
+        FilenameFilter planesFilter = (file, s) -> !s.contains(".") && !s.equals(commonDirectoryName);
 
         adventures = new File(GuiBase.isAndroid() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list(planesFilter);
         try {
             settingsData = new Json().fromJson(SettingData.class, new FileHandle(ForgeConstants.USER_ADVENTURE_DIR + "settings.json"));
-
         } catch (Exception e) {
             settingsData = new SettingData();
         }
@@ -102,7 +101,6 @@ public class Config {
         if (settingsData.cardTooltipAdjLandscape == null || settingsData.cardTooltipAdjLandscape == 0f)
             settingsData.cardTooltipAdjLandscape = 1f;
 
-
         //prefix = "forge-gui/res/adventure/Shandalar/";
         prefix = getPlanePath(settingsData.plane);
         commonPrefix = resPath() + "/res/adventure/" + commonDirectoryName + "/";
@@ -120,13 +118,15 @@ public class Config {
             e.printStackTrace();
             configData = new ConfigData();
         }
-
-
     }
 
     private String resPath() {
-
-        return GuiBase.isAndroid() ? ForgeConstants.ASSETS_DIR : Files.exists(Paths.get("./res")) ? "./" : Files.exists(Paths.get("./forge-gui/")) ? "./forge-gui/" : "../forge-gui";
+        // Android/iOS: resources live at ASSETS_DIR (extracted storage / app bundle);
+        // the desktop-relative "./res" probes below never match there
+        if (GuiBase.isAndroid() || GuiBase.isIOS()) {
+            return ForgeConstants.ASSETS_DIR;
+        }
+        return Files.exists(Paths.get("./res")) ? "./" : Files.exists(Paths.get("./forge-gui/")) ? "./forge-gui/" : "../forge-gui";
     }
 
     public String getPlanePath(String plane) {
@@ -139,6 +139,32 @@ public class Config {
 
     public ConfigData getConfigData() {
         return configData;
+    }
+
+    // Push the plane's allowed/restricted editions and restricted token pairs into TokenDb.
+    private void applyTokenEditionFilter() {
+        if (configData == null) return;
+        String[] allowedArr = configData.allowedEditions;
+        String[] restrictedArr = configData.restrictedEditions;
+        String[] restrictedTokensArr = configData.restrictedTokens;
+        Set<String> allowed = (allowedArr == null || allowedArr.length == 0)
+                ? null : new HashSet<>(Arrays.asList(allowedArr));
+        Set<String> restricted = (restrictedArr == null || restrictedArr.length == 0)
+                ? Collections.emptySet() : new HashSet<>(Arrays.asList(restrictedArr));
+        Set<String> restrictedTokens = (restrictedTokensArr == null || restrictedTokensArr.length == 0)
+                ? Collections.emptySet() : new HashSet<>(Arrays.asList(restrictedTokensArr));
+        FModel.getMagicDb().getAllTokens().setRestrictedTokenEntries(restrictedTokens);
+        FModel.getMagicDb().getAllTokens().setPreferEraMatchedArt(
+            settingsData != null && settingsData.preferEraMatchedTokenArt);
+        if (allowed == null && restricted.isEmpty()) {
+            FModel.getMagicDb().getAllTokens().setDefaultEditionFilter(null);
+            return;
+        }
+        FModel.getMagicDb().getAllTokens().setDefaultEditionFilter(edition -> {
+            String code = edition.getCode();
+            if (restricted.contains(code)) return false;
+            return allowed == null || allowed.contains(code);
+        });
     }
 
     public int getBlurDivisor() {
@@ -190,7 +216,6 @@ public class Config {
         String langFile = fileName + "-" + Lang + ext;
 
         for (int iter = 1; iter <= 2; iter++) {
-
             if (Files.exists(Paths.get(langFile))) {
                 System.out.println("Found!");
                 Cache.put(path, new FileHandle(langFile));
@@ -213,17 +238,14 @@ public class Config {
     }
 
     public String[] colorIdNames() {
-
         return configData.colorIdNames;
     }
 
     public String[] colorIds() {
-
         return configData.colorIds;
     }
 
     public String[] starterEditionNames() {
-
         return configData.starterEditionNames;
     }
 
@@ -378,11 +400,9 @@ public class Config {
     }
 
     public void saveSettings() {
-
         Json json = new Json(JsonWriter.OutputType.json);
         FileHandle handle = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure/settings.json");
         handle.writeString(json.prettyPrint(json.toJson(settingsData, SettingData.class)), false);
-
     }
 
     // --- Folder-backed starter deck support ---
@@ -555,6 +575,8 @@ public class Config {
     }
 
     public void loadResources() {
+        AdventureOverrides.instance().load(prefix, FModel.getMagicDb().getEditions(), configData);
+        applyTokenEditionFilter();
         RewardData.getAllCards();//initialize before loading custom cards
         final CardRules.Reader rulesReader = new CardRules.Reader();
         ImageKeys.ADVENTURE_CARD_PICS_DIR = Config.currentConfig.getCommonFilePath(forge.adventure.util.Paths.CUSTOM_CARDS_PICS);// not the cleanest solution

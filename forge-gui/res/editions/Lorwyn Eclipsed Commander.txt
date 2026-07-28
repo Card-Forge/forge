@@ -103,7 +103,7 @@ ScryfallCode=ECC
 95 C Ingot Chewer @Kev Walker
 96 C Smokebraider @Anthony S. Waters
 97 C Abundant Growth @Vincent Proce
-98 M Avenger of Zendikar @Zoltan Boros
+98 M Avenger of Zendikar @Zoltan Boros & Gabor Szikszai
 99 R Bane of Progress @Lars Grant-West
 100 M Cavalier of Thorns @Jehan Choo
 101 R Channeler Initiate @Yongjae Choi

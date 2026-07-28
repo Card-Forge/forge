@@ -430,8 +430,10 @@ public class SaveLoadScene extends UIScene {
     @Override
     public void enter() {
         unselectActors();
-        select(lastSelectedSlot);
         updateFiles();
+        select(lastSelectedSlot);
+        scrollPane.setScrollY(0);
+        scrollPane.updateVisualScroll();
         autoSave.actor.setText(Forge.getLocalizer().getMessage("lblAutoSave"));
         quickSave.actor.setText(Forge.getLocalizer().getMessage("lblQuickSave"));
         if (mode == Modes.NewGamePlus) {

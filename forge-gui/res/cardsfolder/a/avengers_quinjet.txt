@@ -1,0 +1,14 @@
+Name:Avengers Quinjet
+ManaCost:5
+Types:Artifact Vehicle
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever this Vehicle enters or attacks, ABILITY
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever this Vehicle enters or attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBChangeZone,DBReturn
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Hero | Optional$ You | SpellDescription$ You may put a Hero creature card from your hand onto the battlefield.
+SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Creature.Hero+YouOwn | ValidTgtsDesc$ Hero creature card in your graveyard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target Hero creature card from your graveyard to your hand.
+K:Crew:3
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Hero
+Oracle:Flying\nWhenever this Vehicle enters or attacks, choose one —\n• You may put a Hero creature card from your hand onto the battlefield.\n• Return target Hero creature card from your graveyard to your hand.\nCrew 3

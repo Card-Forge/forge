@@ -1,0 +1,6 @@
+Name:Flatman
+ManaCost:3 G
+Types:Legendary Creature Mutant Hero
+PT:1/10
+A:AB$ Pump | PreCostDesc$ Origami-Fu — | Cost$ 2 G | Defined$ Self | AILogic$ SwitchPT | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
+Oracle:Origami-Fu — {2}{G}: Switch Flatman's power and toughness until end of turn.

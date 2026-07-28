@@ -64,7 +64,7 @@ ScryfallCode=AER
 49 R Whir of Invention @Christine Choi
 50 U Wind-Kin Raiders @Shreya Shetty
 51 C Aether Poisoner @Yongjae Choi
-52 C Alley Strangler @Efflam Mercier
+52 C Alley Strangler @Enora Mercier
 53 R Battle at the Bridge @Chris Rallis
 54 C Cruel Finality @Svetlin Velinov
 55 C Daring Demolition @Svetlin Velinov
@@ -167,7 +167,7 @@ ScryfallCode=AER
 152 M Gonti's Aether Heart @Vincent Proce
 153 M Heart of Kiran @Jaime Jones
 154 R Hope of Ghirapur @Lius Lasahido
-155 C Implement of Combustion @Efflam Mercier
+155 C Implement of Combustion @Enora Mercier
 156 C Implement of Examination @Darek Zabrocki
 157 C Implement of Ferocity @Jason Kang
 158 C Implement of Improvement @Kieran Yanner

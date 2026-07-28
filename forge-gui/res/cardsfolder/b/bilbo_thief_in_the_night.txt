@@ -1,0 +1,8 @@
+Name:Bilbo, Thief in the Night
+ManaCost:1 U
+Types:Legendary Creature Halfling Rogue
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Card.!wasCastFromYourHand | Activator$ You | Type$ Spell | Amount$ 1 | Description$ Spells you cast from anywhere other than your hand cost {1} less to cast.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCast | OptionalDecider$ You | TriggerDescription$ Whenever NICKNAME attacks, you may cast an artifact, instant, or sorcery spell from your graveyard. If an instant or sorcery spell cast this way would be put into your graveyard, exile it instead.
+SVar:TrigCast:DB$ Play | ValidZone$ Graveyard | Valid$ Artifact.YouOwn,Instant.YouOwn,Sorcery.YouOwn | ValidSA$ Spell | Controller$ You | Optional$ True | ReplaceGraveyard$ Exile | ReplaceGraveyardValid$ Instant,Sorcery
+Oracle:Spells you cast from anywhere other than your hand cost {1} less to cast.\nWhenever Bilbo attacks, you may cast an artifact, instant, or sorcery spell from your graveyard. If an instant or sorcery spell cast this way would be put into your graveyard, exile it instead.

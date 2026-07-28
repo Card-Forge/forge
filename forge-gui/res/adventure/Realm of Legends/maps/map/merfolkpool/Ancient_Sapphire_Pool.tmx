@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="76">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="77">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -23,7 +23,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9lD0OwjAMhV0x8COxwsR9ehk60bJyIEYmuAV36AlYGajVPtVYeUl/EJ8UpSTte3awIyJSbkWKjcipmUEunOu6fz5383MpsstE9s04ZP16COsT4rjhe15Xf98av3szHhnXh2YR0fZAx3+j+euej/O9aGc9C1BGcrXvxc5bfeBl88+7Pfj6b8S9y7QZr1U7hpD6TxVbN1OBRihnUAViqedbU1/4DTmDqdTE+x/YvFj/2FqeC7RsvmUihlgdj0V9bb/8UtvC7o8QiAf1j5qzd8NQP9sfqud9x9Qx/H0MbB2wXH3vhvoWdy/zDYHzS/UQq2+spzxRp7G7znuw87Y1T3wv3OVbu3JaH09JPeA=
+   eJy9lD0OwjAMhV0x8COxAgs36AaH6GVgorByIEYmuAV36AlYGYhVnuoaO2kB8UlRStK+FwfbRETllGg7IdqFGRTkcxo3z4fXfBsSzTKieRjLrFm3kD4Wm4m/p3X59zn4XcK4Zr4+NLcRbQ109DccP+/pcz4G9cx3AcpIrPK92H2zD7xk/MVrD776G1LvetrMPCda5O29+6geXUj9p4zMG7AKnuv8fT2lYcUM9sZZqu4WUSxf+HW5g0+pHO9/IOPy6kfm8rdAS8ZbJs4Q6xl9YV9ZL7/Ulnj9wwLnQf4j52Rv6Oon64P1tG+fPIa/PoO3DrxYde1adYve6/la4P5SNeTlN9ZTnshTq9d5Ht59y5x3fI++S1t7r7Segoo/Jg==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -77,6 +77,14 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
     <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Insane" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/shop.tx" x="161.139" y="101.348">
+   <properties>
+    <property name="commonShopList" value="ClassicBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

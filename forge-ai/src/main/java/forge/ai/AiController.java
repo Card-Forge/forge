@@ -98,7 +98,7 @@ public class AiController {
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
-    private boolean timeoutReached;
+    private volatile boolean timeoutReached;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -435,6 +435,8 @@ public class AiController {
             }
         }
 
+        landList = ComputerUtilCard.dedupeCards(landList);
+
         landList = CardLists.filter(landList, c -> {
             String name = c.getName();
             CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
@@ -472,8 +474,6 @@ public class AiController {
         if (landList.isEmpty()) {
             return null;
         }
-
-        landList = ComputerUtilCard.dedupeCards(landList);
 
         CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
 
@@ -695,25 +695,17 @@ public class AiController {
         int bestRestriction = Integer.MIN_VALUE;
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
-            SpellAbility currentSA = sa;
             sa.setActivatingPlayer(player);
             // check everything necessary
 
-            AiPlayDecision opinion = canPlayAndPayFor(currentSA);
+            AiPlayDecision opinion = canPlayAndPayFor(sa);
             //PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
             if (opinion == AiPlayDecision.WillPlay) {
-                if (bestSA == null) {
-                    bestSA = currentSA;
-                    bestRestriction = ComputerUtil.counterSpellRestriction(player, currentSA);
-                } else {
-                    // Compare bestSA with this SA
-                    final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, currentSA);
-
-                    if (restrictionLevel > bestRestriction) {
-                        bestRestriction = restrictionLevel;
-                        bestSA = currentSA;
-                    }
+                final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, sa);
+                if (bestSA == null || restrictionLevel > bestRestriction) {
+                    bestRestriction = restrictionLevel;
+                    bestSA = sa;
                 }
             }
         }
@@ -773,26 +765,13 @@ public class AiController {
         return reserveManaSources(sa, phaseType, enemy, true, null);
     }
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy, boolean forNextSpell, SpellAbility exceptForThisSa) {
-        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, player, true, 0, false);
-        CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
-
-        // used for chained spells where two spells need to be cast in succession
-        if (exceptForThisSa != null) {
-            manaSources.removeAll(ComputerUtilMana.getManaSourcesToPayCost(
-                    ComputerUtilMana.calculateManaCost(exceptForThisSa.getPayCosts(), exceptForThisSa, player, true, 0, false),
-                    exceptForThisSa, player));
-        }
-
-        if (manaSources.isEmpty()) {
-            return false;
-        }
-
         AiCardMemory.MemorySet memSet = null;
         if (phaseType == null && forNextSpell) {
             memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL;
         } else if (phaseType != null) {
             switch (phaseType) {
                 case MAIN2:
+                    // TODO bail if profile chance 0 anyway
                     memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
                     break;
                 case COMBAT_DECLARE_BLOCKERS:
@@ -804,6 +783,23 @@ public class AiController {
                             + phaseType.name() + ", reserving until Main 2 instead. Consider adding support for the phase if needed.");
                     memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
                     break;
+            }
+        }
+
+        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, player, true, 0, false);
+        CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player, false);
+
+        if (manaSources == null || manaSources.isEmpty()) {
+            return false;
+        }
+
+        // used for chained spells where two spells need to be cast in succession
+        if (exceptForThisSa != null) {
+            CardCollection exceptSources = ComputerUtilMana.getManaSourcesToPayCost(
+                    ComputerUtilMana.calculateManaCost(exceptForThisSa.getPayCosts(), exceptForThisSa, player, true, 0, false),
+                    exceptForThisSa, player, false);
+            if (exceptSources != null) {
+                manaSources.removeAll(exceptSources);
             }
         }
 
@@ -902,9 +898,7 @@ public class AiController {
             return AiPlayDecision.NeedsToPlayCriteriaNotMet;
         }
 
-        // TODO before suspending some spells try to predict if relevant targets can be expected
         if (sa.getApi() != null) {
-
             String msg = "AiController:canPlaySa: AI checks for if can PlaySa";
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Api", sa.getApi().toString());
@@ -943,6 +937,11 @@ public class AiController {
                     }
                 }
             }
+            // TODO before suspending some spells try to predict if relevant targets can be expected
+            if ((sa.isPlotting() || sa.isForetelling() || sa.isKeyword(Keyword.SUSPEND)) && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                // don't compete with more important SA AI wants to pay before main2
+                return AiPlayDecision.WaitForMain2;
+            }
         }
         if (checkCurseEffects(sa)) {
             return AiPlayDecision.CurseEffects;
@@ -962,7 +961,7 @@ public class AiController {
             return AiPlayDecision.AnotherTime;
         }
         if (sa.usesTargeting()) {
-            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa, true) == 0) {
+            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa) == 0) {
                 return AiPlayDecision.TargetingFailed;
             }
             if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
@@ -1139,6 +1138,7 @@ public class AiController {
             }
             if (prefCard == null) {
                 prefCard = ComputerUtil.getCardPreference(player, sourceCard, "DiscardCost", validCards);
+                // TODO use DiscardMe:0 instead so each card without is just treated as 1
                 if (prefCard != null && prefCard.hasSVar("DoNotDiscardIfAble")) {
                     prefCard = null;
                 }
@@ -1235,11 +1235,6 @@ public class AiController {
     }
 
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
-        if (mode == PlayerActionConfirmMode.ChangeZoneToAltDestination) {
-            System.err.printf("Overriding AI confirmAction decision for %s, defaulting to true.\n", mode);
-            return true;
-        }
-
         ApiType api = sa == null ? null : sa.getApi();
 
         // Abilities without api may also use this routine, However they should provide a unique mode value ?? How could this work?
@@ -1613,7 +1608,7 @@ public class AiController {
                     continue;
                 }
 
-                if (timeoutReached) {
+                if (timeoutReached || Thread.currentThread().isInterrupted()) {
                     timeoutReached = false;
                     break;
                 }
@@ -1681,6 +1676,7 @@ public class AiController {
                 if (opinion != AiPlayDecision.WillPlay)
                     continue;
 
+                // TODO could continue to try find another with higher rating (weighted by priority ordering)
                 return sa;
             }
 
@@ -1692,16 +1688,36 @@ public class AiController {
         try {
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            try {
-                e.printStackTrace();
-                t.stop();
-            } catch (UnsupportedOperationException ex) {
-                // Android and Java 20 dropped support to stop so sadly thread will keep running
-                timeoutReached = true;
-                future.cancel(true);
-                // TODO wait a few more seconds to try and exit at a safe point before letting the engine continue
-                // TODO mark some as skipped to increase chance to find something playable next priority
+            e.printStackTrace();
+            if (e instanceof TimeoutException) {
+                // log where the eval thread currently is - each timeout doubles as a
+                // profiler sample for diagnosing remaining AI slowdowns from user logs
+                StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
+                StackTraceElement[] evalStack = t.getStackTrace();
+                for (int i = 0; i < Math.min(30, evalStack.length); i++) {
+                    sb.append("\n\tat ").append(evalStack[i]);
+                }
+                System.out.println(sb);
             }
+            // ask the eval thread to exit at the next SpellAbility check first: a brutal
+            // Thread.stop() mid-evaluation can leave partially mutated shared state behind
+            timeoutReached = true;
+            future.cancel(true);
+            try {
+                t.join(500);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+            if (t.isAlive()) {
+                // last resort, see #8302: the eval thread may be stuck inside a single
+                // evaluation or an infinite loop and never reach the cooperative exit
+                try {
+                    t.stop();
+                } catch (UnsupportedOperationException | NoSuchMethodError ex) {
+                    // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
+                }
+            }
+            // TODO mark some as skipped to increase chance to find something playable next priority
             return null;
         }
     }
@@ -2172,9 +2188,9 @@ public class AiController {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (aiLogic.equals("AlwaysEven")) {
-            return false; // false is Even
+            return false;
         } else if (aiLogic.equals("AlwaysOdd")) {
-            return true; // true is Odd
+            return true;
         } else if (aiLogic.equals("Random")) {
             return MyRandom.getRandom().nextBoolean();
         } else if (aiLogic.equals("CMCInHand")) {

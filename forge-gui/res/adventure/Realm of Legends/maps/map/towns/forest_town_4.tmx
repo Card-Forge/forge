@@ -50,7 +50,6 @@
   <object id="69" template="../../../../common/maps/obj/shop.tx" x="223.959" y="161.137">
    <properties>
     <property name="commonShopList" value="Legend4Green"/>
-    <property name="shopList" value=""/>
    </properties>
   </object>
   <object id="72" template="../../../../common/maps/obj/shop.tx" x="209.462" y="52.6745">

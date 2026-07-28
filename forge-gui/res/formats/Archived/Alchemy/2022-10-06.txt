@@ -3,4 +3,4 @@ Name:Alchemy (YDMU)
 Type:Archived
 Subtype:Arena
 Effective:2022-10-06
-Sets:ANA, ANB, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, DMU, YDMU
+Sets:ANB, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, DMU, YDMU

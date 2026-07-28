@@ -87,6 +87,11 @@ public class DeckProxy implements InventoryItem {
         return path;
     }
 
+    public String getSourceUrl() {
+        final Deck sourceDeck = getDeck();
+        return sourceDeck == null ? null : sourceDeck.getSourceUrl();
+    }
+
     public CardEdition getEdition() {
         if (edition == null) {
             if (deck instanceof PreconDeck pd) {
@@ -124,6 +129,20 @@ public class DeckProxy implements InventoryItem {
             directory = directory.substring(ForgeConstants.DECK_BASE_DIR.length());
         }
         return directory;
+    }
+
+    /** Persists the underlying deck to its storage. Returns false (no-op) for read-only decks (random/precon/quest). */
+    @SuppressWarnings("unchecked")
+    public boolean saveDeck() {
+        if (!(deck instanceof Deck) || storage == null) {
+            return false;
+        }
+        try {
+            ((IStorage<Deck>) storage).add((Deck) deck);
+            return true;
+        } catch (final UnsupportedOperationException e) {
+            return false;
+        }
     }
 
     public void invalidateCache() {
@@ -344,6 +363,16 @@ public class DeckProxy implements InventoryItem {
         return key;
     }
 
+    public static String getEventTag(Deck deck, String key) {
+        String prefix = key + ":";
+        for (String tag : deck.getTags()) {
+            if (tag.startsWith(prefix)) {
+                return tag.substring(prefix.length());
+            }
+        }
+        return null;
+    }
+
     public Set<GameFormat> getFormats() {
         if (formats == null) {
             formats = FModel.getFormats().getAllFormatsOfDeck(getDeck());
@@ -459,7 +488,7 @@ public class DeckProxy implements InventoryItem {
         return getAllCommanderPreconDecks(null);
     }
     public static Iterable<DeckProxy> getAllCommanderPreconDecks(final Predicate<Deck> filter) {
-        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<>();
         addDecksRecursivelly("Commander Precon", GameType.Commander, result, "", FModel.getDecks().getCommanderPrecons(), filter);
         return result;
     }
@@ -692,6 +721,15 @@ public class DeckProxy implements InventoryItem {
         final IStorage<DeckGroup> draft = FModel.getDecks().getDraft();
         for (final DeckGroup d : draft) {
             decks.add(new DeckProxy(d, "Draft", ((Function<IHasName, Deck>)(Object) (Function<DeckGroup, Deck>) DeckGroup::getHumanDeck), GameType.Draft, draft));
+        }
+        return decks;
+    }
+
+    public static List<DeckProxy> getAllNetworkEventDecks() {
+        final List<DeckProxy> decks = new ArrayList<>();
+        final IStorage<Deck> networkEvent = FModel.getDecks().getNetworkEventDecks();
+        for (final Deck d : networkEvent) {
+            decks.add(new DeckProxy(d, "Event", GameType.Draft, networkEvent));
         }
         return decks;
     }

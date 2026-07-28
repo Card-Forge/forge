@@ -8,11 +8,12 @@ Commander On a Budget | https://github.com/Card-Forge/forge-extras/raw/refs/head
 Commander Quickie | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commanderquickie.zip
 Commander VS | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commandervs.zip
 Community Cup | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/communitycup-commander.zip
-Current Commander 1v1 Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentcommander1v1metagame.zip
 Current Commander Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentcommandermetagame.zip
+Current Duel Commander Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentduelcommandermetagame.zip
 Daily Deck List | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/dailydecks-commander.zip
 Daily Magic Update | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/dailymagicupdate-commander.zip
 Dear Azami | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/dearazami.zip
+EDHREC Average Decks | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/edhrec-average.zip
 EDHREC Columns | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/edhrec.zip
 Fat Stacks | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/fatstacks.zip
 Feature Article | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/feature-commander.zip

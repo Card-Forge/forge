@@ -72,6 +72,7 @@ FoilAlwaysInCommonSlot=False
 58 C Bog Glider @Brian Snõddy
 59 U Chilling Apparition @Ron Spears
 60 R Coffin Puppets @Arnie Swekel
+60s R Coffin Puppets @Glen Angus
 61 C Death Charmer @David Martin
 62 C Despoil @Scott M. Fischer
 63 U Endbringer's Revel @Pete Venters

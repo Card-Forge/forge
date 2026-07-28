@@ -1,0 +1,11 @@
+Name:Hulkling, Burgeoning Bruiser
+ManaCost:2 G
+Types:Legendary Creature Kree Skrull Hero
+PT:2/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl+powerGTY,Creature.Other+YouCtrl+toughnessGTZ | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature you control enters, if it has greater power or toughness than NICKNAME, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X
+SVar:X:TriggeredCard$Valid Creature.powerGTY,Creature.toughnessGTZ
+SVar:Y:Count$CardPower
+SVar:Z:Count$CardToughness
+Oracle:Vigilance\nWhenever another creature you control enters, if it has greater power or toughness than Hulkling, put a +1/+1 counter on Hulkling.

@@ -59,9 +59,17 @@ public class TileMapScene extends HudScene {
         if (map == null)
             return;
         if (nextMap != null) {
-            load(nextMap, nextSpawnPoint);
+            String target = nextMap;
+            int spawn = nextSpawnPoint;
             nextMap = null;
             nextSpawnPoint = 0;
+            try {
+                load(target, spawn);
+            } catch (Exception e) {
+                System.err.println("Error loading map " + target + "...");
+                e.printStackTrace();
+                MapStage.getInstance().exitDungeon(false, false);
+            }
         }
         stage.act(Gdx.graphics.getDeltaTime());
         hud.act(Gdx.graphics.getDeltaTime());

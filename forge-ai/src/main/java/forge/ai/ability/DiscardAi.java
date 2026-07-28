@@ -35,9 +35,8 @@ public class DiscardAi extends SpellAbilityAi {
             final int hand = ai.getCardsIn(ZoneType.Hand).size();
             if (MyRandom.getRandom().nextFloat() < (1.0 / (1 + hand))) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (aiLogic.equals("VolrathsShapeshifter")) {
@@ -140,7 +139,7 @@ public class DiscardAi extends SpellAbilityAi {
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final PlayerCollection opps = ai.getOpponents();
-        Collections.shuffle(opps);
+        Collections.shuffle(opps, MyRandom.getRandom());
         for (Player opp : opps) {
             if (opp.getCardsIn(ZoneType.Hand).isEmpty() && !ComputerUtil.activateForCost(sa, ai)) {
                 continue;
@@ -200,9 +199,8 @@ public class DiscardAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (discardTargetAI(ai, sa)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
         // TODO: check for some extra things
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

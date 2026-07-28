@@ -39,7 +39,6 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
     private TextAlignment textAlignment = TextAlignment.LEFT;
     private SkinFont skinFont;
 
-    // CTR
     public FComboBox() {
         super();
         initialize();

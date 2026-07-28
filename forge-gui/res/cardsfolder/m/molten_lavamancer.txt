@@ -1,0 +1,8 @@
+Name:Molten Lavamancer
+ManaCost:2 R
+Types:Creature Elemental Warlock Villain
+PT:2/3
+K:Prowess
+T:Mode$ DamageDealtOnce | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Opponent | CombatDamage$ False | PlayerTurn$ True | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever a source you control deals noncombat damage to one or more of your opponents during your turn, you create a 1/1 red Elemental creature token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_elemental | TokenOwner$ You
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhenever a source you control deals noncombat damage to one or more of your opponents during your turn, you create a 1/1 red Elemental creature token. This ability triggers only once each turn.

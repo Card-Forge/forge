@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="82">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="83">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -29,7 +29,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztlE1qwkAUx18DNh9UV1H0AkWpLV7EHkdduSxutMWjqOhewd6gl+ii+HGAvsfMn0wegZqkK/HBH8yMmV9+My8h+rsG90RDm41PVOesfXM94iz4d8uOZ6XB+QgvANn6CYh6EVHM97U9op1KxzN8YceK1eQsbVY5ufPQuIrjIzO+KulsHfYmw/HIz32yeY7yu8o6e15/ckf0GiR54+tPz7i1lKc4vudwzHLNWkvmF844zlg8Z6FxvdTRrWmYuGLPvnm8b+fHVbO+m9hPzjvPeWqu6/DCz36wbHc/0NMz9f8ieyz1xJxzkHYAG2cPDuZxLmW42tllC3Og3l30dLNET2lnzcZZoofQX+ixoj2l2Q+1NHvo7Cfe0WrNpBuVZ6KEC++lX/w7VJQtLhJ8g/7T7VbXVb+lHmN3
+   eJztlF1qwkAQx8eA5gPNU1qTC4hiWgrtOXoc7VMfpS9NxaMkou8KeoNeQ/pxgM6wO2QzBHSTPpUO/MFkzf72tzsJwPma9QDmOlsX4AqzcdX1EybH34m+X5drzNK/AKTr5AHcBQARPjd2APYiE0fxiR0JVowpdNaW3JWvXMlxhIz3bjU7g72tcfzEdX/p3AT2rjTPAed/6QA8emUWeH10lFsiPMnxzcKxzrVuLhrPjft8xuSZ+cr1UkezXv3SlfdsmOIaUjX+PFDzm4nc8rxtzlNyTYdbXPs9Mh/S6n5wT2fi/032mGqKnG+v6kDsD688e+bwOJ9LG650NtnEnIl3l3s6btFT0lmy+Sy5h7i/uMea9pRk98Mqe27sJ7+jg1AlDdozuYjL3oXb/DvUlE0uFP4G/abbf/2t+gEsn2Gh
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -42,7 +42,7 @@
   <object id="57" template="../../../../common/maps/obj/collision.tx" x="480" y="0" width="16" height="272"/>
   <object id="58" template="../../../../common/maps/obj/collision.tx" x="-16" y="272" width="512" height="16"/>
   <object id="59" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
-  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="205.874" y="83.0951">
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="225.688" y="82.1724">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;True Conviction&quot;, &quot;Martyr's Bond&quot; ] }"/>
     <property name="enemy" value="General Jarkeld"/>
@@ -73,12 +73,20 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Pearl Medallion&quot;, &quot;editions&quot;: [ &quot;TMP&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="81" template="../../../../common/maps/obj/enemy.tx" x="206.309" y="81.3351">
+  <object id="81" template="../../../../common/maps/obj/enemy.tx" x="226.778" y="80.7964">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;True Conviction&quot; ] }"/>
     <property name="enemy" value="General Jarkeld"/>
     <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Insane" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/shop.tx" x="177.25" y="118.25">
+   <properties>
+    <property name="commonShopList" value="ClassicBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

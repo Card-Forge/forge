@@ -51,7 +51,7 @@
   <object id="64" template="../../../../common/maps/obj/shop.tx" x="161.137" y="211.073">
    <properties>
     <property name="noRestock" type="bool" value="false"/>
-    <property name="shopList" value="Legend"/>
+    <property name="commonShopList" value="Legend"/>
    </properties>
   </object>
   <object id="70" template="../../../../common/maps/obj/shop.tx" x="257.25" y="274.432">

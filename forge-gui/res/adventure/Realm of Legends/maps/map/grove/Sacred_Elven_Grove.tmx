@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="86">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="87">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -20,7 +20,7 @@
  </layer>
  <layer id="5" name="Rooftops" width="30" height="25">
   <data encoding="base64" compression="zlib">
-   eJxjYBgcQIWFgUGRhf72JrAyMMSyooqt5GJgWAXEL7kZGFZz0c8t7kD7PKD4BR3thtm7BmjfWiB+zk0fe32g9nrSyb6BsnclNC29IiFuYWmQkjSAnJ6Q0xUsbcMwjA+iSXEjPrCOC9NuYjGxdq/EEj7Y/EwKJiZN+EDdCAsz5HAjF3sRaS9yPoVhSsKaGHufcmMvFygJa0ryHsg95Ph5DRXKNpDdz6AYX/gjxxGtytOnaO6gZ9k9CkbBKBg4AACHQFvy
+   eJxjYBgcQIWFgUGRhf72JrAyMMSyooqt5GJgWAXEL7kZGFZz0c8t7kD7PKD4BR3thtm7BmjfWiB+zk0fe32g9nrSyb6BsnclNC29IiFuYWmQkjSAnJ6Q0xUsbcMwjA+iSXEjMhDXYWCQ0EHw13Fh2k0sJtZuUBgZA+00QbIXm59JwcSkCR+oG2Fhhhxu5GIvIu1FzqcwTElYE2PvU27s5QIlYU1J3gO5hxw/r6FC2Qay+xkU4wt/5DiiVXn6FM0d9Cy7R8EoGAUDBwC2BlyD
   </data>
  </layer>
  <layer id="7" name="SpriteLayer" width="30" height="25">
@@ -116,7 +116,7 @@ Shooting you a look of rage, the fiery planeswalker decides to comply, and as qu
    </properties>
   </object>
   <object id="64" template="../../../../common/maps/obj/gold.tx" x="164.167" y="70.1667"/>
-  <object id="65" template="../../../../common/maps/obj/gold.tx" x="45.3333" y="181.333"/>
+  <object id="65" template="../../../../common/maps/obj/gold.tx" x="74" y="219.333"/>
   <object id="76" template="../../../../common/maps/obj/dialog.tx" x="224.25" y="359.977" width="114" height="25.5455" visible="1">
    <properties>
     <property name="dialog">[
@@ -190,6 +190,14 @@ Shooting you a look of rage, the fiery planeswalker decides to comply, and as qu
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/shop.tx" x="64.3333" y="181.667">
+   <properties>
+    <property name="commonShopList" value="Elf"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

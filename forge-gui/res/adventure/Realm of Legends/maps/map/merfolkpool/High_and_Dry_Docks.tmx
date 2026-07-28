@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="94">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="95">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -33,7 +33,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AU0BM8W8fAcL2VgeFmK33tTVvPwFDaxsBQBsRXW1HxNRLcUsJLut0wewXbUbFoO+lmkWpvORA/BIb5o3W0tQubvYnAME9aTxs7rrRixmMZ1N7Ha2hjJwgItGPGI8xeXCBDEoKpBZ4A4/LpOkQ4U2JvOQnpOQUYl6nrCdtLKwCz9zGRaZmcvIrP3mQi0rKnBgODlwZ17cUGDjBBMAykAu1Mo5G9C5kRbEYgm4kZUw8MnGZhYNCFYnLtncAB4duzIOwEywPjswxHnKazkm4fDPAC8zA/lrIYZO9ndvx6ybU3mIC52MIYOb4J2fsPqpYRyRxS80MVFvXY7EWPF1iYKTHiNx8kj5xe8OEsNHt7gGmklwPTn/+YGHACkH3/mSBhC/IHSA+Mjwt0yaLytTgZGLQ58fsLG4ClJZC9IDNBGGQvjI0NkwqwlT2w8ECON3z+Jaf8wlb2wOID2V7kuEFPW9jMIKVuwmcvIx7/IgMAPlhuxA==
+   eJxjYBgFo2AU0BM8W8fAcL2VgeFmK33tTVvPwFDaxsBQBsRXW1HxNRLcUsJLut0wewXbUbFoO+lmkWpvORA/BIb5o3W0tQubvYnAME9aTxs7rrRixmMZ1N7Ha2hjJwgItGPGI8xeXCBDEoKpBZ4A4/LpOkQ4U2JvOQnpOQUYl6nrCdtLKwCz9zGRaZmcvIrP3mQi0rKnBgODlwZ17cUGDjBBMAykAu1Mo5G9C5kRbEYgm4kZUw8MnGZhYNCFYnLtncAB4duzIOwEywPjswxHnKazkm4fDPAC8zA/lrIYZO9ndvx6ybU3mIC56GEsrsPAIKFDvL3/oGmDEckcUvNDFVC9MdBOEwL2oscLLMyUGPGbD5JHTi/4cBaavT3ANNLLgenPf0wMOAHIvv9MkLAF+QOkB8bHBbpkUflanAwM2pz4/YUNwNISyF6QmSAMshfGxoZJBdjKHlh4IMcbPv+SU35hK3tg8YFsL3LcVKGlRWxmkFI34bOXEY9/kQEApDlvSA==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -192,5 +192,13 @@ EVERYTHING YE NEED: REST, RECREATION, and REVENGE&quot;,
   <object id="91" template="../../../../common/maps/obj/collision.tx" x="369.5" y="272.459" width="29" height="28.083"/>
   <object id="92" template="../../../../common/maps/obj/collision.tx" x="434" y="432.959" width="29" height="28.083"/>
   <object id="93" template="../../../../common/maps/obj/collision.tx" x="254.833" y="395.959" width="15.3333" height="18.4163"/>
+  <object id="94" template="../../../../common/maps/obj/shop.tx" x="369.318" y="390.643">
+   <properties>
+    <property name="commonShopList" value="Pirate"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

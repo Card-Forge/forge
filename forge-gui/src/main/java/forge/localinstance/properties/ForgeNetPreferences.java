@@ -19,18 +19,18 @@ package forge.localinstance.properties;
 
 
 
-public class ForgeNetPreferences extends PreferencesStore<ForgeNetPreferences.FNetPref> {
+public class ForgeNetPreferences extends AbstractPreferences<ForgeNetPreferences.FNetPref> {
 
     /**
      * Preference identifiers and their default values.
      */
-    public enum FNetPref implements PreferencesStore.IPref {
+    public enum FNetPref implements AbstractPreferences.IPref {
         NET_PORT("36743"),
         UPnP("ASK"),
         NET_BANDWIDTH_LOGGING("false"),
-        NET_MAX_LOG_FILES("10"),
         NET_LOG_CLEANUP_ENABLED("true"),
-        NET_AFK_TIMEOUT("5");
+        NET_AFK_TIMEOUT("5"),
+        NET_LAST_COPIED_URL("");
 
         private final String strDefaultVal;
 
@@ -42,8 +42,6 @@ public class ForgeNetPreferences extends PreferencesStore<ForgeNetPreferences.FN
         public String getDefault() {
             return strDefaultVal;
         }
-
-
     }
 
     /** Instantiates a ForgePreferences object. */
@@ -65,10 +63,4 @@ public class ForgeNetPreferences extends PreferencesStore<ForgeNetPreferences.FN
             return null;
         }
     }
-
-    @Override
-    protected String getPrefDefault(final FNetPref key) {
-        return key.getDefault();
-    }
-
 }

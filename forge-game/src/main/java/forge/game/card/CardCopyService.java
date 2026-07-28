@@ -1,5 +1,6 @@
 package forge.game.card;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.CardStateName;
@@ -255,6 +256,10 @@ public class CardCopyService {
             newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.Secondary, false);
             newCopy.getState(CardStateName.Secondary).copyFrom(copyFrom.getState(CardStateName.Secondary), true);
+        } else if (copyFrom.hasState(CardStateName.PreparedSpell)) {
+            newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
+            newCopy.addAlternateState(CardStateName.PreparedSpell, false);
+            newCopy.getState(CardStateName.PreparedSpell).copyFrom(copyFrom.getState(CardStateName.PreparedSpell), true);
         } else if (copyFrom.isSplitCard()) {
             newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.LeftSplit, false);
@@ -291,15 +296,11 @@ public class CardCopyService {
         newCopy.setBasePower(copyFrom.getCurrentPower());
         newCopy.setBaseToughness(copyFrom.getCurrentToughness());
 
-        // printed P/T
-        newCopy.setBasePowerString(copyFrom.getCurrentState().getBasePowerString());
-        newCopy.setBaseToughnessString(copyFrom.getCurrentState().getBaseToughnessString());
-
         // extra copy PT boost
         newCopy.setPTBoost(copyFrom.getPTBoostTable());
 
         newCopy.copyFrom(copyFrom);
-        newCopy.setCounters(Maps.newHashMap(copyFrom.getCounters()));
+        newCopy.setCounters(HashMultiset.create(copyFrom.getCounters()));
 
         newCopy.setColor(copyFrom.getColor());
         newCopy.setPhasedOut(copyFrom.getPhasedOut());
@@ -372,11 +373,13 @@ public class CardCopyService {
 
         newCopy.setPlotted(copyFrom.isPlotted());
 
+        newCopy.setPrepared(copyFrom.getPrepared());
+
         newCopy.setMeldedWith(getLKICopy(copyFrom.getMeldedWith(), cachedMap));
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {
-            newCopy.getState(s).updateKeywordsCache();
+            newCopy.updateKeywordsCache(newCopy.getState(s));
         }
 
         if (copyFrom.getCastSA() != null) {

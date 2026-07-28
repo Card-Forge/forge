@@ -357,6 +357,12 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
 {
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Urza's Saga&quot;,
+  &quot;editions&quot;: [ &quot;MH2&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
   &quot;cardName&quot;: &quot;Urza's Construction Drone&quot;,
   &quot;editions&quot;: [ &quot;YBRO&quot; ]
 }

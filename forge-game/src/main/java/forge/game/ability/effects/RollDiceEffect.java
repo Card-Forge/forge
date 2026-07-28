@@ -369,8 +369,8 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Card> canIncrementDice = new ArrayList<>();
         for (Card c : xenosquirrels) {
             // Xenosquirrels must have a P1P1 counter on it to remove in order to modify
-            Integer P1P1Counters = c.getCounters().get(CounterEnumType.P1P1);
-            if (P1P1Counters != null && P1P1Counters > 0 && c.canRemoveCounters(CounterEnumType.P1P1)) {
+            int P1P1Counters = c.getCounters(CounterEnumType.P1P1);
+            if (P1P1Counters > 0 && c.canRemoveCounters(CounterEnumType.P1P1)) {
                 canIncrementDice.add(c);
             }
         }
@@ -401,7 +401,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
      */
     @SuppressWarnings("unchecked")
     private static List<Integer> rollAction(int amount, int sides, int ignore, List<Integer> rollsResult, List<Integer> ignored, Map<Player, Integer> ignoreChosenMap, Set<Card> dicePTExchanges, Player player, Map<AbilityKey, Object> repParams) {
-
         repParams.put(AbilityKey.Sides, sides);
         repParams.put(AbilityKey.Number, amount);
         repParams.put(AbilityKey.Ignore, ignore);

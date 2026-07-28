@@ -25,11 +25,11 @@ public class StaticAbilityView extends TrackableObject implements IHasCardView {
     }
 
     public CardView getHostCard() {
-        return get(TrackableProperty.ST_HostCard);
+        return get(TrackableProperty.HostCard);
     }
 
     void updateHostCard(StaticAbility st) {
-        set(TrackableProperty.ST_HostCard, CardView.get(st.getHostCard()));
+        set(TrackableProperty.HostCard, CardView.get(st.getHostCard()));
     }
 
     @Override
@@ -38,10 +38,10 @@ public class StaticAbilityView extends TrackableObject implements IHasCardView {
     }
 
     public String getDescription() {
-        return get(TrackableProperty.ST_Description);
+        return get(TrackableProperty.Description);
     }
 
     void updateDescription(StaticAbility st) {
-        set(TrackableProperty.ST_Description, st.toString());
+        set(TrackableProperty.Description, st.toString());
     }
 }

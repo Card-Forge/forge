@@ -158,7 +158,7 @@ public class PlaySpellAbility {
         // Only human player pays this way
         Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
         if (sourceAbility.hasParam("ShowCurrentCard")) {
-            Iterable<? extends Card> iterable = AbilityUtils.getDefinedCards(source, sourceAbility.getParam("ShowCurrentCard"), sourceAbility);
+            CardCollection iterable = AbilityUtils.getDefinedCards(source, sourceAbility.getParam("ShowCurrentCard"), sourceAbility);
             current = Iterables.getFirst(iterable, null);
         }
 
@@ -202,6 +202,7 @@ public class PlaySpellAbility {
                     || part instanceof CostEnlist
                     || part instanceof CostExileFromStack
                     || part instanceof CostPutCounter
+                    || part instanceof CostPutCounterYou
                     || part instanceof CostRemoveCounter
                     || part instanceof CostRemoveAnyCounter
                     || part instanceof CostMill
@@ -568,10 +569,6 @@ public class PlaySpellAbility {
 
         final PlaySpellAbility req = new PlaySpellAbility(controller, sa);
         req.playAbility(mayChooseNewTargets, true, false);
-    }
-
-    public static boolean playSpellAbilityNoStack(final PlayerController controller, final Player player, final SpellAbility sa) {
-        return playSpellAbilityNoStack(controller, player, sa, false);
     }
 
     public static boolean playSpellAbilityNoStack(final PlayerController controller, final Player player, final SpellAbility sa, boolean useOldTargets) {

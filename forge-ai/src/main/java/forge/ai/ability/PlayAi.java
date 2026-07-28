@@ -21,6 +21,7 @@ import forge.util.MyRandom;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class PlayAi extends SpellAbilityAi {
@@ -159,13 +160,16 @@ public class PlayAi extends SpellAbilityAi {
             state = CardStateName.Original; 
         }
 
+        Predicate<SpellAbility> validSA;
+        if (sa.hasParam("ValidSA")) {
+            validSA = SpellAbilityPredicates.isValid(sa.getParam("ValidSA").split(","), ai, sa.getHostCard(), sa);
+        } else {
+            validSA = null;
+        }
         List<Card> tgtCards = CardLists.filter(options, c -> {
             // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
             // of which spell was the reason for the choice can be used there
-            for (SpellAbility s : AbilityUtils.getSpellsFromPlayEffect(c, ai, state, false)) {
-                if (!sa.matchesValidParam("ValidSA", s)) {
-                    continue;
-                }
+            for (SpellAbility s : AbilityUtils.getSpellsFromPlayEffect(c, ai, state, false, validSA)) {
                 if (s.isLandAbility()) {
                     // might want to run some checks here but it's rare anyway
                     return true;

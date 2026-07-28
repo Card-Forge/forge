@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="79">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="80">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -40,7 +40,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztVkFuAjEM9AX1Fb3QQi+tBBvocZd+C/7TXncpav/FC4hFrHqNEzm7AXHoSJE2iZUhnrEJwCV+6v58XgG8VEpgYbw3/fmn5/y6Aa/E3Pn7uvHnyDzeCjKP94TSXrKc19blvWQ5r23+vLRPeOFQp/c5rN5EbudHlfDCku2V1AW59wneVdhL6bK4gocxz50f37WexzbsabDqEwPmmkYOcrxh/Q0x4P3JBxhXgpvO64IfNaDW5AOKT/nWgpivOnanBatPipe8uXURq0/K52rTr02Kl7xj+xV5GXmx3g6bsB5qk9ZlnY7575OcWg/g67P1MB4J4kx5m3OW4pUgr2h1Q7zXeEuRV5ZKvyfesX5yzWUPI69oWv9+ADxWeX7iOWvDN9c2t3daQXql+j+HpuHUz6f+nk9+PLvzPIbjA8B2ArCbnL8tnIiYhtZ35qvP39uAHMY0vOd35j+G4QQVY239
+   eJztVsFOwzAM9WXiK7gMGDuAtDWDYzvO8B/wDfA/cG3HBP/FF2BrsUg9JzhtmHbgSZGaxsprnp/dAOzjo+7PZxXAZaUEFsZt05+/IufbAXglZg7P68bvI3U8FKSOx4TSXrLs19blvWTZr21+vLRJeGFbp9dDWL1J3A5HlfDCMlhL6Xg/B3iY276PuTcJ3pVfS+VlgTGPyPmUwfsbSOcOx3ut69j6NQ3W/MRAWvPIQY43rN8QA52ffUBxJbh5v877UQPlmn3A8SnfWhDzVRecaRHUJ8dL3tx+FatP1nO17tcmx0vesf2KvUy8VG/btX/va5Pfyzod8++TnFoPCN9f3AzjkWDOlLdDzlK8EuwVrW6Y9y/uUuyVpdLvmXesn1yz38PYK1quP+8ATqs8P4Watf45zG1u77SC85Xq/yG0HE5xPsVznuE4d7t5DF8nAM8TgJfJ7tnCSYjl0HrPvEL9rgdoGMvhMd8z/zEM357QcAM=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -81,7 +81,7 @@
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="56" template="../../../../common/maps/obj/gold.tx" x="415.833" y="144"/>
+  <object id="56" template="../../../../common/maps/obj/gold.tx" x="376.378" y="190.182"/>
   <object id="58" template="../../../../common/maps/obj/collision.tx" x="1.75" y="479" width="482" height="16"/>
   <object id="59" template="../../../../common/maps/obj/collision.tx" x="-1" y="-16.5" width="482" height="16"/>
   <object id="60" template="../../../../common/maps/obj/collision.tx" x="-16" y="-2.5415" width="16" height="502.083"/>
@@ -98,7 +98,7 @@
     <property name="enemy" value="Lyra"/>
    </properties>
   </object>
-  <object id="64" template="../../../../common/maps/obj/manashards.tx" x="436.428" y="145.482"/>
+  <object id="64" template="../../../../common/maps/obj/manashards.tx" x="392.064" y="187.118"/>
   <object id="65" template="../../../../common/maps/obj/enemy.tx" x="96.6667" y="46.6667">
    <properties>
     <property name="defeatDialog">[
@@ -197,6 +197,14 @@ I'm sure you think I'll be easy since I look young. But I think you'll find my p
     <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Insane" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/shop.tx" x="400.75" y="167">
+   <properties>
+    <property name="commonShopList" value="Angel"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

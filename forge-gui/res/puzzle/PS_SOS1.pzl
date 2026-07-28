@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Secrets of Strixhaven #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/04/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Remember that your solution must satisfy all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Daydream;Emeritus of Conflict;Lorehold Charm;Molten Note
+p0battlefield=Practiced Scrollsmith;Aziza, Mage Tower Captain;Thunderdrum Soloist;Plains;Plains;Plains;Mountain;Mountain
+p1life=12
+p1battlefield=Osseous Sticktwister;Living Brain, Mechanical Marvel|Set:SPM

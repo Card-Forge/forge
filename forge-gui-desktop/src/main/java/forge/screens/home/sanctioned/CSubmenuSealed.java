@@ -10,7 +10,6 @@ import javax.swing.SwingUtilities;
 
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.game.GameType;
@@ -22,13 +21,11 @@ import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
-import forge.item.InventoryItem;
 import forge.itemmanager.ItemManagerConfig;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
-import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorLimited;
 import forge.toolbox.FOptionPane;
 
@@ -145,17 +142,16 @@ public enum CSubmenuSealed implements ICDoc {
         SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }
 
-    @SuppressWarnings("unchecked")
-    private <T extends DeckBase> void setupSealed() {
+    private void setupSealed() {
         final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(false);
         if (sealed == null) { return; }
 
-        final ACEditorBase<? extends InventoryItem, T> editor = (ACEditorBase<? extends InventoryItem, T>) new CEditorLimited(
-                FModel.getDecks().getSealed(), FScreen.DECK_EDITOR_SEALED, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
+        final CEditorLimited<DeckGroup> editor = new CEditorLimited<>(
+                FModel.getDecks().getSealed(), DeckGroup::new, FScreen.DECK_EDITOR_SEALED, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
 
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_SEALED);
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editor);
-        editor.getDeckController().setModel((T) sealed);
+        editor.getDeckController().setModel(sealed);
     }
 
     private void fillOpponentComboBox() {

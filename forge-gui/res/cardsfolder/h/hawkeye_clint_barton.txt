@@ -1,0 +1,6 @@
+Name:Hawkeye, Clint Barton
+ManaCost:3 W
+Types:Legendary Creature Human Archer Hero
+PT:3/5
+K:Vigilance
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

@@ -142,7 +142,6 @@ public class RegisteredPlayer {
     		final Set<GameType> appliedVariants, final Deck deck,	              //General vars
     		final Iterable<PaperCard> schemes, final boolean playerIsArchenemy,   //Archenemy specific vars
     		final Iterable<PaperCard> planes, final CardPool vanguardAvatar) {   //Planechase and Vanguard
-
     	RegisteredPlayer start = new RegisteredPlayer(deck);
     	if (appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy) {
     		start.setStartingLife(40); // 904.5: The Archenemy has 40 life.
@@ -166,7 +165,11 @@ public class RegisteredPlayer {
         }
         if (appliedVariants.contains(GameType.Brawl)) {
             start.commanders = deck.getCommanders();
-            start.setStartingLife(start.getStartingLife() + 10);
+            if (playerCount == 2) {
+                start.setStartingLife(start.getStartingLife() + 5);
+            } else {
+                start.setStartingLife(start.getStartingLife() + 10);
+            }
         }
     	if (appliedVariants.contains(GameType.Planechase)) {
             start.planes = planes;

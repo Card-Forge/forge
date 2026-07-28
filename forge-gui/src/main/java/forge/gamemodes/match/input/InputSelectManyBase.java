@@ -9,7 +9,9 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase {
     private static final long serialVersionUID = -2305549394512889450L;
@@ -88,12 +90,10 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
             }
             sb.append("\n").append(getMessage());
             showMessage(sb.toString(), card);
+        } else if (card != null) {
+            showMessage(getMessage(), card);
         } else {
-            if (card != null) { 
-                showMessage(getMessage(), card);
-            } else {
-                showMessage(getMessage());
-            }
+            showMessage(getMessage());
         }
         getController().getGui().updateButtons(getOwner(), hasEnoughTargets(), allowCancel, true);
     }
@@ -124,13 +124,13 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     }
 
     protected void onSelectStateChanged(final GameEntity ge, final boolean newState) {
-        getController().getGui().setHighlighted(GameEntityView.get(ge), newState);
+        getController().getGui().setHighlighted(List.of(GameEntityView.get(ge)), newState);
     }
 
     private void resetUsedToPay() {
-        for (final GameEntity ge : getSelected()) {
-            getController().getGui().setHighlighted(GameEntityView.get(ge), false);
-        }
+        final List<GameEntityView> views = new ArrayList<>();
+        for (final GameEntity ge : getSelected()) views.add(GameEntityView.get(ge));
+        getController().getGui().setHighlighted(views, false);
     }
 
     public final void setCancelAllowed(boolean allow) {

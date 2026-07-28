@@ -9,4 +9,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_map_sac_explore
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token|Sacrifice|Counters & Type$Bird|Artifact|Map & Color$White|Blue
-Oracle:Restless Anchorage enters tapped.\n{T}: Add {W} or {U}\n{1}{W}{U}: Until end of turn, Restless Anchorage becomes a 2/3 white and blue Bird creature with flying. It's still a land.\nWhenever Restless Anchorage attacks, create a Map token.
+Oracle:Restless Anchorage enters tapped.\n{T}: Add {W} or {U}.\n{1}{W}{U}: Until end of turn, Restless Anchorage becomes a 2/3 white and blue Bird creature with flying. It's still a land.\nWhenever Restless Anchorage attacks, create a Map token.

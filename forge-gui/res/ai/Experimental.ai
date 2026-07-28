@@ -163,8 +163,8 @@ ALWAYS_COPY_SPELL_IF_CMC_DIFF=2
 PRIORITY_REDUCTION_FOR_STORM_SPELLS=9
 MIN_COUNT_FOR_STORM_SPELLS=1
 
-# Logic for Strip Mine, Wasteland, Ghost Quarter and other similar sac-destroy lands marked with
-# AILogic$ LandForLand or GhostQuarter.
+# Logic for Strip Mine, Wasteland, and other similar sac-destroy land cards.
+# Ghost Quarter uses AILogic$ GhostQuarter for its replacement-land caution.
 STRIPMINE_MIN_LANDS_IN_HAND_TO_ACTIVATE=1
 STRIPMINE_MIN_LANDS_FOR_NO_TIMING_CHECK=9999
 STRIPMINE_MIN_LANDS_OTB_FOR_NO_TEMPO_CHECK=6

@@ -109,7 +109,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     private static byte calculateColorIdentity(final ICardFace face) {
-        if(face == null)
+        if (face == null)
             return 0; //Still initializing; filled in during supplyPlaceholderFaces
         byte res = face.getColor().getColor();
         boolean isReminder = false;
@@ -150,7 +150,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean isVariant() {
-        if(placeholderFaces != null && (mainPart == null || splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE))
+        if (placeholderFaces != null && (mainPart == null || splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE))
             return false; //Type line isn't fully generated, and we need it to determine if this is a variant type
         CardType t = getType();
         return t.isVanguard() || t.isScheme() || t.isPlane() || t.isPhenomenon()
@@ -212,7 +212,7 @@ public final class CardRules implements ICardCharacteristics {
      * CardDB initialization.
      */
     public String getPreInitName() { //Would make this package private but StaticData needs it.
-        if(this.placeholderFaces == null)
+        if (this.placeholderFaces == null)
             return getName();
         String mainName =  mainPart == null ? placeholderFaces.get(0) : mainPart.getName();
         if (splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
@@ -382,9 +382,7 @@ public final class CardRules implements ICardCharacteristics {
             subtypes.add(type);
         }
 
-        return subtypes.size() == 2 &&
-                subtypes.contains("Time Lord") &&
-                subtypes.contains("Doctor");
+        return subtypes.size() == 2 && subtypes.contains("Time Lord") && subtypes.contains("Doctor");
     }
 
     public boolean canBeOathbreaker() {
@@ -488,16 +486,15 @@ public final class CardRules implements ICardCharacteristics {
         ICardFace mainFace = Objects.requireNonNullElse(mainPart.getFunctionalVariant(variantName), mainPart);
         String mainPartName = mainFace.getDisplayName();
 
-        if(splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
+        if (splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
             ICardFace otherFace = Objects.requireNonNullElse(otherPart.getFunctionalVariant(variantName), otherPart);
             String otherPartName = otherFace.getDisplayName();
             return mainPartName + " // " + otherPartName;
         }
-        else
-            return mainPartName;
+        return mainPartName;
     }
 
-    /* package */ String findOrCreateVariantForFlavorName(String flavorName, String suggestedVariantName) {
+    String findOrCreateVariantForFlavorName(String flavorName, String suggestedVariantName) {
         Objects.requireNonNull(flavorName);
         String[] nameParts = flavorName.trim().split("\\s*//\\s*");
         flavorName = String.join(" // ", nameParts); //Normalize this just in case.
@@ -517,7 +514,7 @@ public final class CardRules implements ICardCharacteristics {
         variantMain.setFlavorName(nameParts[0]);
         ((CardFace) mainPart).assignMissingFieldsToVariant(variantMain);
 
-        if(otherPart != null) {
+        if (otherPart != null) {
             CardFace variantOther = ((CardFace) otherPart).getOrCreateFunctionalVariant(variantName);
             variantOther.setFlavorName(nameParts[1]);
             ((CardFace) otherPart).assignMissingFieldsToVariant(variantOther);
@@ -532,11 +529,11 @@ public final class CardRules implements ICardCharacteristics {
      * A card has placeholder faces if its script uses `CopyFaceFrom` to reference another card.
      * These will be filled in via `supplyPlaceholderFaces` after all scripts have been processed.
      */
-    /* package */ boolean hasPlaceholderFaces() {
+    boolean hasPlaceholderFaces() {
         return this.placeholderFaces != null;
     }
 
-    /* package */ void supplyPlaceholderFaces(Map<String, ICardFace> facesByName) {
+    void supplyPlaceholderFaces(Map<String, ICardFace> facesByName) {
         if(this.placeholderFaces == null)
             return;
         List<ICardFace> newFaceList = new ArrayList<>(this.allFaces);
@@ -854,7 +851,7 @@ public final class CardRules implements ICardCharacteristics {
                     break;
 
                 case 'V':
-                    if("Variant".equals(key)) {
+                    if ("Variant".equals(key)) {
                         if (value == null) value = "";
                         colonPos = value.indexOf(':');
                         if(colonPos <= 0) throw new IllegalArgumentException("Missing variant name");

@@ -926,7 +926,7 @@ public class AttachAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card card = sa.getHostCard();
-        List<GameObject> targets = new ArrayList<>();
+        List<GameObject> targets;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             targets = AbilityUtils.getDefinedObjects(card, sa.getParam("Defined"), sa);
@@ -966,9 +966,8 @@ public class AttachAi extends SpellAbilityAi {
             }
             if (sa.isTargetNumberValid()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         } else if ("Remembered".equals(sa.getParam("Defined")) && sa.getParent() != null
             && sa.getParent().getApi() == ApiType.Token && sa.getParent().hasParam("RememberTokens")) {
             // Living Weapon or similar
