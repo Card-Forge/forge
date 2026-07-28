@@ -436,8 +436,8 @@
 		"displayName": "Church of Valgavoth",
 		"type": "castle",
 		"count": 1,
-		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
-		"sprite": "hall_of_fear",
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Valvagoth's Lair",
 		"map": "../Realm of Legends/maps/map/evilgrove/Church_of_Valgavoth_1.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [

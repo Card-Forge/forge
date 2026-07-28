@@ -1,0 +1,8 @@
+Name:Hoshi Sato, Exolinguist
+ManaCost:4 U
+Types:Legendary Creature Human Scientist
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Federation — When NICKNAME enters, look at the top X cards of your library, where X is the number of creature types among non-Borg creatures you control. Put one of them into your hand and the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ X | NoReveal$ True | RestRandomOrder$ True
+SVar:X:Count$Valid Creature.nonBorg+YouCtrl$CreatureType
+Oracle:Federation — When Hoshi Sato enters, look at the top X cards of your library, where X is the number of creature types among non-Borg creatures you control. Put one of them into your hand and the rest on the bottom of your library in a random order.

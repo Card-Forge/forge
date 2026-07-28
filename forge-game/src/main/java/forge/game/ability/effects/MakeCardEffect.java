@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -150,7 +149,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     while (toMake > 0) {
                         PaperCard pc;
                         if (pack != null) {
-                            pc = Iterables.getLast(IterableUtil.filter(pack, PaperCardPredicates.name(name)));
+                            pc = pack.stream().filter(p -> p.getRules().getMainPart().getName().equals(name)).findAny().get();
                         } else {
                             // Try to get the card in the sa host's current edition
                             String editionCode = sa.getHostCard() != null ? sa.getHostCard().getSetCode() : CardEdition.UNKNOWN_CODE;

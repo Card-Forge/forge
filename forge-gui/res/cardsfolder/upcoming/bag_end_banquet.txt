@@ -1,0 +1,8 @@
+Name:Bag End Banquet
+ManaCost:6
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$
+SVar:TrigFood:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ 3 | TokenOwner$ You
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C} for each Food you control.
+SVar:X:Count$Valid Food.YouCtrl
+Oracle:When this artifact enters, create three Food tokens.\n{T}: Add {C} for each Food you control.

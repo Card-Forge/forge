@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Legendary Creature Human Cleric
 PT:1/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When NICKNAME enters, exile up to one other target creature you control. Return that card to the battlefield under its owner's control at the beginning of the next end step.
-SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.Other+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | ValidTgtDesc$ another creature you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.Other+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | ValidTgtsDesc$ another creature you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerDescription$ Return the exiled card to the battlefield under its owner's control. | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

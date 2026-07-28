@@ -1,0 +1,335 @@
+//Rank|Name|Rarity|Set
+#1|Aurelia, the Warleader|M|MAR
+#2|Cyberdrive Awakener|M|MAR
+#3|Alien Invasion|R|MSH
+#4|Avengers Assemble!|M|MSH
+#5|Captain Marvel, Earth's Protector|M|MSH
+#6|Doctor Doom|M|MSH
+#7|Iron Man Armor|M|MSH
+#8|M.O.D.O.K.|M|MSH
+#9|Monica Rambeau|M|MSH
+#10|Moon Girl and Devil Dinosaur|R|MSH
+#11|Super-Skrull|R|MSH
+#12|Thanos, the Mad Titan|M|MSH
+#13|The Coming of Galactus|M|MSH
+#14|Kang the Conqueror|M|MSH
+#15|Ant-Man, Colony Commander|U|MSH
+#16|Avengers: Under Siege|R|MSH
+#17|Iron Man, Master of Machines|U|MSH
+#18|Leader, Super-Genius|R|MSH
+#19|Mjölnir, Hammer of Thor|M|MSH
+#20|The Astonishing Ant-Man|R|MSH
+#21|Thor, God of Thunder|M|MSH
+#22|Wolverine, Fierce Fighter|R|MSH
+#23|Archangel of Thune|M|MAR
+#24|Final Act|M|MAR
+#25|Sword of Fire and Ice|M|MAR
+#26|Absorbing Man|R|MSH
+#27|Agent Phil Coulson|R|MSH
+#28|Ares, God of War|R|MSH
+#29|Black Widow, Super Spy|M|MSH
+#30|Castle Doom|R|MSH
+#31|Cloak and Dagger, Entwined|R|MSH
+#32|Cosmic Cube|M|MSH
+#33|Daredevil, Man Without Fear|R|MSH
+#34|Earth's Mightiest Heroes|M|MSH
+#35|Elektra, Daughter of the Hand|R|MSH
+#36|Epic Fight|R|MSH
+#37|Heroic Feast|R|MSH
+#38|Kang, Temporal Tyrant|U|MSH
+#39|Quicksilver, Brash Blur|R|MSH
+#40|Super-Adaptoid|R|MSH
+#41|Team Tactics|U|MSH
+#42|The Kingpin of Crime|R|MSH
+#43|The Scarlet Witch|R|MSH
+#44|The Serpent Society|R|MSH
+#45|The Ten Rings|M|MSH
+#46|The Unbeatable Squirrel Girl|R|MSH
+#47|Ultron, Artificial Malevolence|M|MSH
+#48|Winter Soldier, Icy Assassin|R|MSH
+#49|Massacre Girl|M|MAR
+#50|Attuma, Atlantean Warlord|U|MSH
+#51|Avengers Disassembled|R|MSH
+#52|Baron Helmut Zemo|R|MSH
+#53|Bruce Banner|M|MSH
+#54|Captain America, Super-Soldier|M|MSH
+#55|Captain America, Wings of Freedom|R|MSH
+#56|Construct a Cosmic Cube|R|MSH
+#57|Dark Deed|U|MSH
+#58|Doom Reigns Supreme|R|MSH
+#59|Invisible Woman, Sue Storm|U|MSH
+#60|Ironheart, Clever Champion|R|MSH
+#61|Jennifer Walters|M|MSH
+#62|King T'Challa|M|MSH
+#63|Loki, God of Mischief|R|MSH
+#64|Madame Masque|U|MSH
+#65|Ms. Marvel, Kamala Khan|R|MSH
+#66|Multiversal Incursion|M|MSH
+#67|Namor the Sub-Mariner|M|MSH
+#68|Okoye, Dora Milaje Leader|U|MSH
+#69|Origin of the Avengers|R|MSH
+#70|S.H.I.E.L.D. Flying Car|R|MSH
+#71|Secret Invasion|R|MSH
+#72|Storm, Windrider|R|MSH
+#73|Super-Soldier Serum|R|MSH
+#74|The Mighty Thor, Jane Foster|R|MSH
+#75|The Super Hero Civil War|R|MSH
+#76|The Vision|R|MSH
+#77|The Wondrous Wasp|R|MSH
+#78|Thunderbolts Conspiracy|R|MSH
+#79|Tony Stark|M|MSH
+#80|World War Hulk|R|MSH
+#81|Extinction Event|M|MAR
+#82|Simulacrum Synthesizer|M|MAR
+#83|Unnatural Growth|M|MAR
+#84|Warleader's Call|M|MAR
+#85|Abomination, Terrifying Titan|U|MSH
+#86|Agent 13, Sharon Carter|U|MSH
+#87|Agent Maria Hill|U|MSH
+#88|Anthem of Champions|M|MAR
+#89|Atlantis Attacks|C|MSH
+#90|Black Panther, Vanguard|U|MSH
+#91|Blazing Crescendo|C|MSH
+#92|Bullseye, Death Dealer|U|MSH
+#93|Captain America, Living Legend|U|MSH
+#94|Captain America's Shield|R|MSH
+#95|Crossbones, Malicious Mercenary|U|MSH
+#96|Frozen in Ice|C|MSH
+#97|Hawkeye, Master Marksman|R|MSH
+#98|Hellcat, Undying Vigilante|U|MSH
+#99|Hulk, Gamma Goliath|U|MSH
+#100|Human Torch, Johnny Storm|U|MSH
+#101|Iron Fist, Living Weapon|U|MSH
+#102|K'un-Lun Warrior|C|MSH
+#103|Ka-Zar of the Savage Land|U|MSH
+#104|Killmonger, Scourge of Wakanda|U|MSH
+#105|Loki Laufeyson|U|MSH
+#106|Mister Hyde, Monster Within|U|MSH
+#107|Mockingbird, Ace Agent|U|MSH
+#108|Mole Man, Moloid Master|R|MSH
+#109|Moonstone, Harsh Mistress|U|MSH
+#110|Night Nurse, Healer of Heroes|U|MSH
+#111|Patriot, Shield Wielder|U|MSH
+#112|Red Room Recruit|C|MSH
+#113|Rick Jones, Destined Sidekick|U|MSH
+#114|S.H.I.E.L.D. Deployment Drone|C|MSH
+#115|S.H.I.E.L.D. Helicarrier|U|MSH
+#116|Shuri, Wakandan Inventor|U|MSH
+#117|Spider-Man, To the Rescue|U|MSH
+#118|Storm, Force of Nature|M|MAR
+#119|Thor Odinson|U|MSH
+#120|Training Regimen|U|MSH
+#121|Trickster's Stratagem|C|MSH
+#122|Truck Toss|U|MSH
+#123|U.S.Agent, John Walker|U|MSH
+#124|Undercover Skrull|C|MSH
+#125|Visions of Villainy|C|MSH
+#126|White Tiger, Ava Ayala|U|MSH
+#127|Wonder Man, Hollywood Hero|U|MSH
+#128|Baron Strucker, HYDRA Overlord|U|MSH
+#129|Captain America, First Avenger|M|MAR
+#130|Captain Mar-Vell, Space-Born|U|MSH
+#131|Colleen Wing, Street Samurai|U|MSH
+#132|Dauthi Voidwalker|M|MAR
+#133|Escape to the Wilds|M|MAR
+#134|Fin Fang Foom|R|MSH
+#135|Go Nuts!|C|MSH
+#136|Iron Lad, Diverging Destiny|U|MSH
+#137|Iron Man, Titan of Innovation|M|MAR
+#138|Justice, Vance Astrovik|U|MSH
+#139|Klaw, Sonic Subjugator|U|MSH
+#140|Lightning Strike|C|MSH
+#141|Lord of Atlantis|M|MAR
+#142|Luke Cage, Power Man|U|MSH
+#143|Mister Fantastic, Reed Richards|U|MSH
+#144|Monstrous Rage|M|MAR
+#145|Reconnaissance Mission|M|MAR
+#146|Righteous Fury|M|MAR
+#147|Super Villain Lockup|U|MSH
+#148|The Masters of Evil|U|MSH
+#149|Web Up|C|MSH
+#150|A.I.M. Labs|L|MSH
+#151|Armor Wars|R|MSH
+#152|Arnim Zola, Bio-Fanatic|U|MSH
+#153|Asgardian Citadel|L|MSH
+#154|Avengers Hangar|L|MSH
+#155|Birnin Zana Plaza|L|MSH
+#156|Black Widow, Double Agent|U|MSH
+#157|Cruel Alliance|C|MSH
+#158|Dark Fortress|R|MSH
+#159|Fisk Tower|L|MSH
+#160|Gathering Place|R|MSH
+#161|Gleaming Bastion|R|MSH
+#162|H.E.R.B.I.E. Scout Unit|C|MSH
+#163|Hell's Kitchen|L|MSH
+#164|Hidden Lair|R|MSH
+#165|Hour of Defeat|C|MSH
+#166|HULK SMASH!|C|MSH
+#167|HYDRA Troopers|C|MSH
+#168|Los Diablos Missile Base|L|MSH
+#169|Madame Hydra|U|MSH
+#170|Nick Fury, Agent of S.H.I.E.L.D.|R|MSH
+#171|Punishing Punch|U|MSH
+#172|Pym Technologies|L|MSH
+#173|Ravenous Tyrannosaurus|M|MAR
+#174|Red Hulk|U|MSH
+#175|Stark Industries|L|MSH
+#176|Subterranean Cavern|L|MSH
+#177|The Ruinous Wrecking Crew|R|MSH
+#178|Titania, Rugged Rumbler|U|MSH
+#179|Training Compound|R|MSH
+#180|Viv Vision, Teen Synthezoid|U|MSH
+#181|War Machine, Legacy of Iron|U|MSH
+#182|Yellowjacket, Heartless Marauder|U|MSH
+#183|Black Panther, Wakandan King|M|MAR
+#184|Deadly Dispute|M|MAR
+#185|Dig Through Time|M|MAR
+#186|Thirst for Knowledge|U|MSH
+#187|Wolverine, Best There Is|M|MAR
+#188|Beast, Erudite Aerialist|U|MSH
+#189|Death to Our Enemies|U|MSH
+#190|Doc Samson, Super Psychiatrist|U|MSH
+#191|Hercules, Prince of Power|U|MSH
+#192|HYDRA Infiltration|C|MSH
+#193|Kid Loki|U|MSH
+#194|Misty Knight, Hero for Hire|U|MSH
+#195|Rapid Rescue|C|MSH
+#196|Reptil, Dinomorpher|U|MSH
+#197|Robot Domination|U|MSH
+#198|Ronin, Shadow Stalker|U|MSH
+#199|She-Hulk, Jade Defender|U|MSH
+#200|Speed, Young Avenger|U|MSH
+#201|Spider-Woman, Secret Agent|U|MSH
+#202|Swordsman, Sharp Scoundrel|U|MSH
+#203|The Thing, Ben Grimm|U|MSH
+#204|Tigra, Feline Fury|U|MSH
+#205|Wakandan Royal Guard|C|MSH
+#206|Whiplash, Vengeful Engineer|U|MSH
+#207|White Widow, Free Agent|U|MSH
+#208|Aerial Doombot|C|MSH
+#209|Ant-Man's Army|C|MSH
+#210|Borough Backup|C|MSH
+#211|Claim the Kingdom|U|MSH
+#212|Evil's Thrall|U|MSH
+#213|Hawkeye, Young Avenger|U|MSH
+#214|Hire a Crew|C|MSH
+#215|HYDRA Assault Robot|C|MSH
+#216|Kingpin's Enforcers|C|MSH
+#217|Knight of Wundagore|C|MSH
+#218|Kree Sentinel|C|MSH
+#219|Ninja of the Hand|C|MSH
+#220|Pet Avengers|C|MSH
+#221|Powerful Broker|C|MSH
+#222|Repulsor Blast|C|MSH
+#223|Restorative Technique|C|MSH
+#224|Roxxon Brutes|C|MSH
+#225|Savage Land Dinosaur|C|MSH
+#226|Speedball, New Warrior|U|MSH
+#227|Steelshaper's Gift|M|MAR
+#228|Ultron Drone|C|MSH
+#229|Vision of Love|C|MSH
+#230|Widow's Bite|C|MSH
+#231|A.I.M. Scientists|C|MSH
+#232|Agent of Atlas|C|MSH
+#233|Agents of HYDRA|C|MSH
+#234|Atlantean Cavalry|C|MSH
+#235|Bold Biochemist|C|MSH
+#236|Brave Brawler|C|MSH
+#237|Crowd of True Believers|C|MSH
+#238|Falcon, Winged Wonder|U|MSH
+#239|Falcon's Wing Harness|U|MSH
+#240|Futurist Forge|C|MSH
+#241|Giant-Sized Flying Ant|C|MSH
+#242|Grim Reaper, Lethal Legionnaire|U|MSH
+#243|Murdock's Crusade|C|MSH
+#244|Political Triumph|U|MSH
+#245|Quake, Agent of S.H.I.E.L.D.|U|MSH
+#246|Seize the Day|M|MAR
+#247|Take Up the Shield|C|MSH
+#248|Wakandan Drone Flock|C|MSH
+#249|Wiccan, Rising Magician|U|MSH
+#250|Counterspell|M|MAR
+#251|Avengers Tower|U|MSH
+#252|Baxter Building|U|MSH
+#253|Beast Within|M|MAR
+#254|Crimson Operative|C|MSH
+#255|Dependable Quinjet|C|MSH
+#256|Hawkeye's Bow|C|MSH
+#257|Jessica Jones, Private Eye|U|MSH
+#258|A.I.M. Synthoids|C|MSH
+#259|Call Damage Control|C|MSH
+#260|Decoy Ploy|C|MSH
+#261|Depower|C|MSH
+#262|Echo, Perceptive Prodigy|U|MSH
+#263|Giant Growth|C|MSH
+#264|Guerrilla Gorilla|C|MSH
+#265|Hulkling, Burgeoning Bruiser|U|MSH
+#266|I Am Iron Man|C|MSH
+#267|Machinesmith Automaton|C|MSH
+#268|Photon Blast Barrage|U|MSH
+#269|Project Deathlok Soldier|C|MSH
+#270|Pym Particles|U|MSH
+#271|Red Guardian, Super-Soldier|U|MSH
+#272|Serpent Specialist|C|MSH
+#273|Stark Industries Executive|C|MSH
+#274|Stature, Size Shifter|U|MSH
+#275|Stolen Stark Tech|C|MSH
+#276|Sundering Growth|M|MAR
+#277|Super Speed|C|MSH
+#278|Too Evil to Stay Dead|U|MSH
+#279|Unliving Legionnaire|C|MSH
+#280|Volcanic Villain|C|MSH
+#281|We Say Thee Nay!|C|MSH
+#282|Chaos Warp|M|MAR
+#283|Ephemerate|M|MAR
+#284|Force of Vigor|M|MAR
+#285|Light of Promise|M|MAR
+#286|No Mercy|M|MAR
+#287|Path to Exile|M|MAR
+#288|Primal Vigor|M|MAR
+#289|Shang-Chi, Master of Kung Fu|M|MSH
+#290|Taskmaster, Mercenary Mimic|R|MSH
+#291|The Mind Stone|M|MSH
+#292|Vibranium Energy Daggers|C|MSH
+#293|Agents of S.H.I.E.L.D.|C|MSH
+#294|Helicarrier Strike|C|MSH
+#295|Hero in Training|C|MSH
+#296|Kree Commandos|C|MSH
+#297|Panther Pounce|C|MSH
+#298|Raft Security Officer|C|MSH
+#299|Surveillance Room|C|MSH
+#300|Villainous Hideout|U|MSH
+#301|Vision Quest|R|MSH
+#302|Ghost, Spectral Saboteur|U|MSH
+#303|Hex Magic|U|MSH
+#304|Hydraulic Helper|C|MSH
+#305|Rewrite History|U|MSH
+#306|S.H.I.E.L.D. Spy Kit|C|MSH
+#307|Scientist Supreme of A.I.M.|R|MSH
+#308|Super Intelligence|U|MSH
+#309|Super Strength|C|MSH
+#310|Super Suit|C|MSH
+#311|The Sentry, Golden Guardian|R|MSH
+#312|Arc Reactor|R|MSH
+#313|Bedlam|M|MAR
+#314|Concerted Effort|M|MAR
+#315|Defense of the Heart|M|MAR
+#316|Fiery Emancipation|M|MAR
+#317|Fight to the Death|M|MAR
+#318|Final Showdown|M|MAR
+#319|Harbinger of the Seas|M|MAR
+#320|Heroic Intervention|M|MAR
+#321|Horn of Greed|M|MAR
+#322|Mechanized Production|M|MAR
+#323|Narset's Reversal|M|MAR
+#324|Privileged Position|M|MAR
+#325|Return to the Ranks|M|MAR
+#326|Show and Tell|M|MAR
+#327|Steely Resolve|M|MAR
+#328|Teferi's Protection|M|MAR
+#329|Worlds Within Worlds|R|MSH
+#330|Forest|L|MSH
+#331|Island|L|MSH
+#332|Mountain|L|MSH
+#333|Plains|L|MSH
+#334|Swamp|L|MSH

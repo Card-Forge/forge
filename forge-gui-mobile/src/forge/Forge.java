@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import forge.adventure.scene.*;
 import forge.adventure.stage.MapStage;
+import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
@@ -287,6 +288,24 @@ public class Forge implements ApplicationListener {
         return false;
     }
 
+    public static void setWindowFocus(boolean focused) {
+        if (SoundSystem.instance.hasWindowFocus() == focused) {
+            return;
+        }
+        SoundSystem.instance.setWindowFocus(focused);
+        if (!focused) {
+            haltControllerInput();
+        }
+    }
+
+    private static void haltControllerInput() {
+        if (!isMobileAdventureMode) {
+            return;
+        }
+        WorldStage.getInstance().stop();
+        MapStage.getInstance().stop();
+    }
+
     public static boolean lastInputWasController() {
         return lastInputWasController;
     }
@@ -451,6 +470,20 @@ public class Forge implements ApplicationListener {
                         }
                         safeToClose = true;
                         clearTransitionScreen();
+                        if (GuiBase.isIOS()) {
+                            // POST-LOAD memory reclaim (iOS): booting parses ~32k card rules +
+                            // builds ~100k PaperCards + loads skin assets — a large transient
+                            // allocation spike that leaves ~200MB of freed-but-unmapped bytes in
+                            // the GC heap at idle home. Two full GCs return them to iOS (the GC
+                            // needs the second pass to unmap pages the first one freed) —
+                            // device-measured: GC heap 690→492MB before a game starts. Only
+                            // unreachable garbage is collected; iOS-gated because other
+                            // platforms don't sit against a per-process memory ceiling.
+                            FThreads.invokeInBackgroundThread(() -> {
+                                System.gc();
+                                System.gc();
+                            });
+                        }
                     }, takeScreenshot(), false, false, true, false));
                 });
             });
@@ -653,6 +686,21 @@ public class Forge implements ApplicationListener {
         Dscreens.addFirst(front);
     }
 
+    // iOS apps must not programmatically terminate (App Store guideline / HIG),
+    // so the iOS device adapter's exit()/restart() are no-ops. That left the
+    // normal exit flow stuck on the ClosingScreen, forcing the user to swipe the
+    // app away and relaunch. On iOS, return to the main menu instead so the app
+    // stays usable: adventure -> classic home (switchToClassic), classic -> home.
+    private static boolean iOSReturnToMainMenu() {
+        if (!GuiBase.isIOS())
+            return false;
+        if (isMobileAdventureMode)
+            switchToClassic();
+        else
+            openHomeDefault();
+        return true;
+    }
+
     public static void restart(boolean silent) {
         if (exited) {
             return;
@@ -660,6 +708,8 @@ public class Forge implements ApplicationListener {
 
         Consumer<Boolean> callback = result -> {
             if (result) {
+                if (iOSReturnToMainMenu())
+                    return;
                 exited = true;
                 exitAnimation(true);
             }
@@ -686,6 +736,8 @@ public class Forge implements ApplicationListener {
 
         Consumer<Integer> callback = result -> {
             if (result == 0) {
+                if (iOSReturnToMainMenu())
+                    return;
                 exited = true;
                 exitAnimation(false);
             }
@@ -1023,6 +1075,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void pause() {
+        setWindowFocus(false);
         if (MatchController.getHostedMatch() != null) {
             MatchController.getHostedMatch().pause();
         }
@@ -1030,6 +1083,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resume() {
+        setWindowFocus(true);
         try {
             Texture.setAssetManager(getAssets().manager());
             needsUpdate = true;
@@ -1271,7 +1325,18 @@ public class Forge implements ApplicationListener {
         @Override
         public boolean keyTyped(char ch) {
             if (keyInputAdapter != null) {
-                if (ch >= ' ' && ch <= '~') { //only process this event if character is printable
+                if (GuiBase.isIOS()) {
+                    // The iOS software keyboard delivers one keyTyped per tap and
+                    // routes backspace (0x08) / delete (0x7F) through keyTyped
+                    // rather than keyDown. The upstream de-dup below blocked
+                    // repeated characters (e.g. "aa" in "Kaalia") because iOS
+                    // gives no keyUp to reset it, and the printable-only filter
+                    // dropped delete entirely. Pass these straight through; the
+                    // text field handles backspace/delete.
+                    if ((ch >= ' ' && ch <= '~') || ch == '\b' || ch == '\u007F') {
+                        return keyInputAdapter.keyTyped(ch);
+                    }
+                } else if (ch >= ' ' && ch <= '~') { //only process this event if character is printable
                     //prevent firing this event more than once for the same character on the same key down, otherwise it fires too often
                     if (lastKeyTyped != ch || !keyTyped) {
                         keyTyped = true;
@@ -1525,6 +1590,9 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean buttonDown(Controller controller, int buttonIndex) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: "+buttonIndex);
+                    if (!SoundSystem.instance.hasWindowFocus()) {
+                        return false;
+                    }
                     hasGamepad = true;
                     lastInputWasController = true;
                     translateButtons(controller, buttonIndex, true);
@@ -1533,6 +1601,9 @@ public class Forge implements ApplicationListener {
 
                 @Override
                 public boolean buttonUp(Controller controller, int buttonIndex) {
+                    if (!SoundSystem.instance.hasWindowFocus()) {
+                        return false;
+                    }
                     hasGamepad = true;
                     translateButtons(controller, buttonIndex, false);
                     return super.buttonUp(controller, buttonIndex);
@@ -1541,6 +1612,9 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean axisMoved(Controller controller, int axisIndex, float value) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: axis: "+axisIndex+" - "+value);
+                    if (!SoundSystem.instance.hasWindowFocus()) {
+                        return false;
+                    }
                     hasGamepad = true;
                     // Axis deadzone filters joystick drift from counting
                     if (Math.abs(value) > 0.25f) {

@@ -1,0 +1,69 @@
+name: Build iOS IPA
+
+# Full RoboVM AOT build of the iOS app on a macOS runner, producing an
+# UNSIGNED forge-ios.ipa artifact.
+#
+# The AOT compile takes ~30-60 minutes on a hosted macOS runner, so this is
+# manual-dispatch / release-time only — the cheap per-PR iOS check is the
+# separate Linux "iOS compatibility gate" workflow.
+
+on:
+  workflow_dispatch:
+    inputs:
+      bundle_id:
+        description: 'Bundle identifier for the build'
+        required: false
+        default: 'forge.cardforge.ios'
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 120
+    name: RoboVM iOS build (unsigned IPA)
+    env:
+      APP_ID: ${{ github.event.inputs.bundle_id || 'forge.cardforge.ios' }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Cache pipeline tool jars
+        uses: actions/cache@v5
+        with:
+          path: tmp/jvmdg/tools
+          key: jvmdg-tools-${{ hashFiles('forge-gui-ios/pipeline/ios-pipeline.sh') }}
+
+      - name: Cache RoboVM SDK + AOT cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.robovm
+          key: robovm-${{ runner.os }}-${{ hashFiles('forge-gui-ios/pom.xml') }}
+
+      - name: Build unsigned IPA
+        # SKIP_CACHE_CLEAR reuses the (content-hashed, safe) RoboVM AOT cache
+        # restored above — cuts rebuild time dramatically on cache hits.
+        run: SKIP_CACHE_CLEAR=1 bash forge-gui-ios/pipeline/ios-pipeline.sh ipa
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: forge-ios-unsigned-ipa
+          path: forge-gui-ios/target/robovm/*.ipa
+          if-no-files-found: error
+
+      - name: Upload build reports
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: ios-build-reports
+          path: |
+            tmp/jvmdg/work/bridge-report.txt
+            tmp/jvmdg/work/gui-ios-bridge-report.txt
+            tmp/jvmdg/work/audit-report.txt
+          if-no-files-found: ignore

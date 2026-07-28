@@ -1,9 +1,0 @@
-Name:Training Regimen
-ManaCost:3 G
-Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Creatures you control with +1/+1 counters on them have trample.
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a +1/+1 counter on target creature you control.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | CounterType$ P1P1 | CounterNum$ 1
-SVar:PlayMain1:TRUE
-DeckHints:Ability$Counters
-Oracle:Creatures you control with +1/+1 counters on them have trample.\nAt the beginning of combat on your turn, put a +1/+1 counter on target creature you control.

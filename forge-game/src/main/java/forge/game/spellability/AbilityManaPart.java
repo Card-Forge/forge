@@ -66,7 +66,7 @@ import java.util.stream.Collectors;
  * @version $Id$
  */
 public class AbilityManaPart implements java.io.Serializable {
-    /** Constant <code>serialVersionUID=-6816356991224950520L</code>. */
+
     private static final long serialVersionUID = -6816356991224950520L;
 
     private final String origProduced;

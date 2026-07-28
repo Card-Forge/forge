@@ -79,6 +79,9 @@ public class LibGDXImageFetcher extends ImageFetcher {
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             c.setRequestProperty("Accept", "*/*");
             c.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+            // don't let a stalled connection hang the download thread forever
+            c.setConnectTimeout(10000);
+            c.setReadTimeout(30000);
 
             int responseCode = c.getResponseCode();
             String responseMessage = c.getResponseMessage();
@@ -112,6 +115,14 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 }
 
                 is.close();
+            }
+            if (destFile.length() == 0) {
+                // never leave a poisoned 0-byte cache file ("downloaded" but
+                // undisplayable, and never retried because the file exists)
+                System.err.println("  Downloaded 0 bytes, skipping");
+                destFile.delete();
+                c.disconnect();
+                return false;
             }
             destFile.moveTo(new FileHandle(newdespath));
             c.disconnect();
@@ -148,7 +159,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
                     if (success) {
                         break;
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     if (isPlanechaseBG) {
                         System.err.println("Failed to download planechase background [" + destPath + "] image: " + e.getMessage());
                     } else {
@@ -169,8 +180,8 @@ public class LibGDXImageFetcher extends ImageFetcher {
                                 if (success) {
                                     break;
                                 }
-                            } catch (IOException t) {
-                                System.out.println("Failed to download setless token [" + destPath + "]: " + e.getMessage());
+                            } catch (Exception t) {
+                                System.out.println("Failed to download setless token [" + destPath + "]: " + t.getMessage());
                             }
                         }
                     }
@@ -181,6 +192,9 @@ public class LibGDXImageFetcher extends ImageFetcher {
                         throw new RuntimeException(ex);
                     }
                 }
+            }
+            if (!success) {
+                System.err.println("All " + downloadUrls.length + " URLs failed for: " + destPath);
             }
         }
     }

@@ -1,0 +1,11 @@
+Name:Beorn the Fierce
+ManaCost:3 G G
+Types:Legendary Creature Bear Shapeshifter Warrior
+PT:6/6
+K:Trample
+S:Mode$ Continuous | Affected$ Bear.Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Bears you control get +2/+2.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, put a trample counter on up to one target creature you control. It becomes a Bear in addition to its other types. Then if you control three or more Bears, draw two cards.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control | CounterType$ Trample | CounterNum$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Bear | Duration$ Permanent | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | ConditionPresent$ Bear.YouCtrl | ConditionCompare$ GE3
+Oracle:Trample\nOther Bears you control get +2/+2.\nAt the beginning of combat on your turn, put a trample counter on up to one target creature you control. It becomes a Bear in addition to its other types. Then if you control three or more Bears, draw two cards.
