@@ -437,7 +437,7 @@ public class ComputerUtilAbility {
 
             if ((sa.isPlotting() || sa.isForetelling() || sa.isKeyword(Keyword.SUSPEND)) && ai.getTurn() > 10) {
                 // less time in late game, prefer something that affects board right away
-                p -= -1;
+                p -= 1;
             }
 
             return p;
