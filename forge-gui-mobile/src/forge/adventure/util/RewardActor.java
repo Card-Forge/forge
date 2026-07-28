@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -721,8 +722,20 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (img == null)
             return;
         image = img;
-        if (Forge.isTextureFilteringEnabled())
-            image.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+        if (Forge.isTextureFilteringEnabled()) {
+            // ImageCache loads card art without mipmaps (getCardTextureFilter). Applying a mipmap
+            // min filter to those textures makes OpenGL sample missing mip levels → solid black.
+            boolean useMipMaps = false;
+            try {
+                useMipMaps = img.getTextureData() != null && img.getTextureData().useMipMaps();
+            } catch (Exception ignored) {}
+
+            TextureFilter filter = useMipMaps 
+                ? Texture.TextureFilter.MipMapLinearLinear
+                : Texture.TextureFilter.Linear;
+                
+            image.setFilter(filter, Texture.TextureFilter.Linear);
+        }
         if (toolTipImage == null)
             toolTipImage = new RewardImage(processDrawable(image));
         if (GuiBase.isAndroid() || Forge.hasGamepad()) {

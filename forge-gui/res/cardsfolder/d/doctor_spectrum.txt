@@ -1,0 +1,13 @@
+Name:Doctor Spectrum
+ManaCost:3 W W
+Types:Legendary Creature Human Hero
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBPutCounterAll,DBDestroy
+SVar:DBToken:DB$ Token | TokenScript$ c_0_4_wall_defender | SpellDescription$ Create a 0/4 colorless Wall creature token with defender.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Hero.Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each other Hero you control.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
+DeckHas:Ability$Counters|Token
+DeckHints:Type$Hero
+Oracle:Flying\nWhen Doctor Spectrum enters, choose one —\n• Create a 0/4 colorless Wall creature token with defender.\n• Put a +1/+1 counter on each other Hero you control.\n• Destroy target enchantment.

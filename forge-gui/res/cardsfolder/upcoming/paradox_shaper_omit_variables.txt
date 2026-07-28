@@ -1,0 +1,18 @@
+Name:Paradox Shaper
+ManaCost:1 UB
+Types:Creature Octopus Wizard
+PT:1/3
+AlternateMode:Prepare
+T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ Count$ValidSelf Card.!IsPrepared | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPrepare | TriggerDescription$ At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+A:AB$ ChangeZone | Cost$ 2 | ValidTgts$ Card.YouOwn | ValidTgtsDesc$ card in your graveyard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target card from your graveyard on the bottom of your library.
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared.\n{2}: Put target card from your graveyard on the bottom of your library.
+
+ALTERNATE
+
+Name:Omit Variables
+ManaCost:UB
+Types:Sorcery
+A:SP$ Mill | Defined$ You | NumCards$ 3 | SpellDescription$ Mill three cards. (Put the top three cards of your library into your graveyard.)
+Oracle:Mill three cards. (Put the top three cards of your library into your graveyard.)

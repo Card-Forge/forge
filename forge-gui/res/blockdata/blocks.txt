@@ -151,3 +151,4 @@ Avatar: The Last Airbender Jumpstart, -/2/TLA, Meta-Choose(S(TLA Aang)Aang;S(TLA
 Lorwyn Eclipsed, 3/6/ECL, ECL
 Teenage Mutant Ninja Turtles, 3/6/TMT, TMT
 Secrets of Strixhaven, 3/6/SOS, SOS
+Marvel Super Heroes, 3/6/MSH, MSH

@@ -24,7 +24,6 @@ import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
-import forge.game.ForgeScript;
 import forge.game.GameObject;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
@@ -110,7 +109,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private SpellAbility manifestUp;
     private SpellAbility cloakUp;
 
-    private LandTraitChanges landTraitChanges = new LandTraitChanges(this);
+    // wrapped in a List so it can be reused directly
+    private List<LandTraitChanges> landTraitChanges = List.of(new LandTraitChanges(this));
 
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);
@@ -538,7 +538,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         }
     }
 
-    public LandTraitChanges getLandTraitChanges() { return this.landTraitChanges; }
+    public List<LandTraitChanges> getLandTraitChanges() { return this.landTraitChanges; }
 
     record LandTraitChanges(CardState state, Map<MagicColor.Color, SpellAbility> map) implements ICardTraitChanges, IKeywordsChange
     {
@@ -853,6 +853,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setFunctionalVariantName(source.getFunctionalVariantName());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
+        setBasePowerString(source.getBasePowerString());
+        setBaseToughnessString(source.getBaseToughnessString());
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
         setAttractionLights(source.getAttractionLights());
@@ -1020,7 +1022,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
      */
     @Override
     public boolean hasProperty(String property, Player sourceController, Card source, CardTraitBase spellAbility) {
-        return ForgeScript.cardStateHasProperty(this, property, sourceController, source, spellAbility);
+        return CardStateProperty.hasProperty(this, sourceController, source, property, spellAbility);
     }
 
     public ImmutableList<CardTraitBase> getTraits() {

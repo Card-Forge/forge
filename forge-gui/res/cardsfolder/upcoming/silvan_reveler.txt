@@ -1,0 +1,14 @@
+Name:Silvan Reveler
+ManaCost:2 G U
+Types:Creature Elf Citizen
+PT:4/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card, then discard a card. If you discard a land card this way, put it from your graveyard onto the battlefield tapped.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZoneAll | ChangeType$ Land.IsRemembered | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Landfall — Whenever a land you control enters, you may pay {1}{G}{U}. If you do, return this card from your graveyard to your hand.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 G U | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Discard
+Oracle:When this creature enters, draw a card, then discard a card. If you discard a land card this way, put it from your graveyard onto the battlefield tapped.\nLandfall — Whenever a land you control enters, you may pay {1}{G}{U}. If you do, return this card from your graveyard to your hand.

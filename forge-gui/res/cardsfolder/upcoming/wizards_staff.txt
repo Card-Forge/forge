@@ -1,0 +1,8 @@
+Name:Wizard's Staff
+ManaCost:1 U
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Prowess | Description$ Equipped creature has prowess. (Whenever its controller casts a noncreature spell, that creature gets +1/+1 until end of turn.)
+S:Mode$ Panharmonicon | ValidCard$ Creature.EquippedBy | Description$ If an ability of equipped creature triggers, that ability triggers an additional time.
+K:Equip:1:Wizard.YouCtrl:Wizard you control
+K:Equip:3
+Oracle:Equipped creature has prowess. (Whenever its controller casts a noncreature spell, that creature gets +1/+1 until end of turn.)\nIf an ability of equipped creature triggers, that ability triggers an additional time.\nEquip Wizard {1}\nEquip {3}

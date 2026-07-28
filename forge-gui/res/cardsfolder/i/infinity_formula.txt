@@ -1,0 +1,11 @@
+Name:Infinity Formula
+ManaCost:2 W
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When this Equipment enters, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | AddTrigger$ AttackTrigger | AddSVar$ AE | Description$ Equipped creature gets +1/+2 and has "Whenever this creature attacks, you gain 2 life."
+SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever this creature attacks, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+K:Equip:2
+SVar:AE:SVar:HasAttackEffect:TRUE
+Oracle:When this Equipment enters, attach it to target creature you control.\nEquipped creature gets +1/+2 and has "Whenever this creature attacks, you gain 2 life."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

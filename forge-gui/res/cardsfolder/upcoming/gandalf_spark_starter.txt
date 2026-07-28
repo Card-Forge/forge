@@ -1,0 +1,8 @@
+Name:Gandalf, Spark Starter
+ManaCost:4 R R
+Types:Legendary Creature Avatar Wizard
+PT:4/3
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerDescription$ When NICKNAME enters, he deals 3 damage divided as you choose among one, two, or three targets.
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
+Oracle:Reach\nWhen Gandalf enters, he deals 3 damage divided as you choose among one, two, or three targets.

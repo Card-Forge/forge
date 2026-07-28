@@ -1,0 +1,9 @@
+Name:Goliath, Mass Manipulator
+ManaCost:1 G
+Types:Legendary Creature Human Scientist Hero
+PT:2/2
+K:Reach
+A:AB$ PutCounter | Cost$ 4 G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | PowerUp$ True | SubAbility$ DBDraw | SpellDescription$ Put two +1/+1 counters on NICKNAME. Then draw a card for each creature you control with power 4 or greater. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$Valid Creature.powerGE4+YouCtrl
+Oracle:Reach (This creature can block creatures with flying.)\nPower-up — {4}{G}: Put two +1/+1 counters on Goliath. Then draw a card for each creature you control with power 4 or greater. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)

@@ -1,0 +1,11 @@
+Name:Black Panther, Most Dangerous
+ManaCost:2 W
+Types:Legendary Creature Human Warrior Hero
+PT:3/3
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME is dealt damage, he deals that much damage to any other target.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature.Other,Player,Planeswalker.Other,Battle.Other | ValidTgtsDesc$ any other target
+A:AB$ PutCounter | Cost$ 5 W W | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | PowerUp$ True | SubAbility$ DBPumpAll | SpellDescription$ Put two +1/+1 counters on NICKNAME. Other creatures you control get +2/+2 until end of turn. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+YouCtrl | NumAtt$ +2 | NumDef$ +2
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Whenever Black Panther is dealt damage, he deals that much damage to any other target.\nPower-up — {5}{W}{W}: Put two +1/+1 counters on Black Panther. Other creatures you control get +2/+2 until end of turn. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)

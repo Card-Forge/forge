@@ -54,6 +54,6 @@ public sealed interface YieldUpdate extends Serializable
 
     record SeedFromClient(YieldStateSnapshot snapshot) implements YieldUpdate {}
 
-    /** Clears the receiving PCH's saved simultaneous-ability state (both the order map and the remembered-keys set). */
+    /** Clears the receiving PCH's saved simultaneous-ability and replacement-effect ordering state. */
     record ClearAbilityOrders() implements YieldUpdate {}
 }

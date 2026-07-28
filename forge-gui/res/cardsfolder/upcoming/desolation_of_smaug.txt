@@ -1,0 +1,6 @@
+Name:Desolation of Smaug
+ManaCost:2 R R
+Types:Sorcery
+A:SP$ DamageAll | NumDmg$ 3 | ValidCards$ Creature.nonDragon | ValidDescription$ each non-Dragon creature. | SubAbility$ DBMana | SpellDescription$ CARDNAME deals 3 damage to each non-Dragon creature.
+SVar:DBMana:DB$ Mana | Produced$ Combo Any | Amount$ 4 | RestrictValid$ Spell.Dragon | SpellDescription$ Add four mana in any combination of colors. Spend this mana only to cast Dragon spells.
+Oracle:Desolation of Smaug deals 3 damage to each non-Dragon creature.\nAdd four mana in any combination of colors. Spend this mana only to cast Dragon spells.

@@ -1,8 +1,0 @@
-Name:Dependable Quinjet
-ManaCost:3
-Types:Artifact Vehicle
-PT:3/3
-K:Flying
-A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-K:Crew:4
-Oracle:Flying\n{T}: Add one mana of any color.\nCrew 4 (Tap any number of creatures with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
