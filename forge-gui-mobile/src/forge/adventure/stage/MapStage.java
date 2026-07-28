@@ -499,6 +499,10 @@ public class MapStage extends GameStage {
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.nameOverride = dialogObject.toString();
                             }
+                            dialogObject = prop.get("battleBackground"); //Check for battle background override.
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.battleBackground = dialogObject.toString();
+                            }
                             dialogObject = prop.get("effect"); //Check for special effects.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.effect = JSONStringLoader.parse(EffectData.class, dialogObject.toString(), "");
