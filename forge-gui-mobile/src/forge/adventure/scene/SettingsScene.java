@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -40,7 +41,7 @@ public class SettingsScene extends UIScene {
     private static final float LABEL_GAP = 11;
 
     private Table settingGroup;
-    private Table settingRow;
+    private SettingRow settingRow;
     private Cell<TextraLabel> labelCell;
     private final Table[] tabTables = new Table[TAB_COUNT];
     private final TextraButton[] tabButtons = new TextraButton[TAB_COUNT];
@@ -429,11 +430,63 @@ public class SettingsScene extends UIScene {
             addToSelectable(tabButton);
         // Each setting row is its own table, so the controls sit a level below the tab's own cells
         for (Cell cell : tabTables[index].getCells()) {
-            if (cell.getActor() instanceof Table)
-                addToSelectable((Table) cell.getActor());
+            if (!(cell.getActor() instanceof Table))
+                continue;
+            Table row = (Table) cell.getActor();
+            for (Cell rowCell : row.getCells()) {
+                Actor control = rowCell.getActor();
+                if (control != null && !(control instanceof TextraLabel))
+                    addToSelectable(new RowSelectable(control, row));
+            }
         }
         if (backButton != null)
             addToSelectable(backButton);
+    }
+
+    /**
+     * A setting row. It frames itself whenever its control holds keyboard focus, so the selection shows
+     * around the whole row rather than around the widget - and, being derived from focus every frame
+     * rather than set once, it cannot be left behind by anything that moves focus without going through
+     * selectActor, such as a dialog opening over the settings list.
+     */
+    private static class SettingRow extends Table {
+        private final Drawable frame = Controls.getSkin().getDrawable("unpressedFocus10Patch");
+        private Actor control;
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            validate();
+            // drawn rather than set as the table's background, which would fold the frame's minimum
+            // size into the row's preferred size and nudge the row's height on the next layout
+            if (control != null && control.hasKeyboardFocus()) {
+                Color color = getColor();
+                batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
+                frame.draw(batch, getX(), getY(), getWidth(), getHeight());
+            }
+            super.draw(batch, parentAlpha);
+        }
+    }
+
+    /**
+     * Selects a row rather than the widget in it: every row reports the same x, so up/down navigation
+     * reaches rows whose control is wider or narrower than a checkbox instead of walking a single width
+     * of control. Presses, the disabled check and scroll-into-view still go through the control itself.
+     */
+    private static class RowSelectable extends Selectable<Actor> {
+        private final Actor row;
+
+        RowSelectable(Actor control, Actor row) {
+            super(control);
+            this.row = row;
+        }
+
+        @Override
+        public float getX() {
+            float x = 0;
+            for (Actor parent = row; parent != null; parent = parent.getParent())
+                x += parent.getX();
+            return x;
+        }
     }
 
     private void addSectionHeader(String name) {
@@ -522,7 +575,7 @@ public class SettingsScene extends UIScene {
     void addLabel(String name) {
         TextraLabel label = Controls.newTextraLabel(name);
         label.setWrap(true);
-        settingRow = new Table();
+        settingRow = new SettingRow();
         settingGroup.row().space(5);
         settingGroup.add(settingRow).growX();
         labelCell = settingRow.add(label).align(Align.left).pad(2, 2, 2, 5).expand();
@@ -535,9 +588,19 @@ public class SettingsScene extends UIScene {
      * always add up to the pane's content width, so no row can drag the others off the right edge.
      */
     private <T extends Actor & Layout> void addControl(T control) {
+        if (control instanceof CheckBox) {
+            // the row draws the focus frame, so drop the one a focused checkbox would draw inside it -
+            // it is taller than the box and would push the row's height around as the selection moves
+            CheckBox box = (CheckBox) control;
+            CheckBox.CheckBoxStyle style = new CheckBox.CheckBoxStyle(box.getStyle());
+            style.focused = null;
+            style.checkedFocused = null;
+            box.setStyle(style);
+        }
         float available = contentWidth() - LABEL_GAP;
         float controlWidth = Math.min(control.getPrefWidth(), available - (Forge.isLandscapeMode() ? 160 : 80));
         labelCell.width(available - controlWidth);
+        settingRow.control = control;
         settingRow.add(control).width(controlWidth).align(Align.right).pad(2);
     }
 
