@@ -1198,3 +1198,16 @@ OverwhelmingArmor
 BraidwoodLeathers
   xy: 176, 112
   size: 16, 16
+ChallengeDot
+  xy: 401, 31
+  size: 9, 9
+  orig: 9, 9
+  offset: 0, -7
+ChallengeUnknown
+  xy: 421, 32
+  size: 8, 8
+  orig: 8, 16
+  offset: 0, 4
+ClearedX
+  xy: 412, 32
+  size: 9, 9

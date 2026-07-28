@@ -27,6 +27,7 @@ public class PointOfInterestData implements Serializable {
     public String[] questTags = new String[0];
     public DialogData.ActionData.QuestFlag[] questFlagsToActivate = new DialogData.ActionData.QuestFlag[0];
     public String displayName;
+    public String challengeRating;
 
 
 
@@ -67,7 +68,25 @@ public class PointOfInterestData implements Serializable {
         active=other.active;
         questTags = other.questTags.clone();
         displayName= other.displayName;
+        challengeRating=other.challengeRating;
         questFlagsToActivate = other.questFlagsToActivate;
+    }
+
+    public ChallengeRating getChallengeRating() {
+        return ChallengeRating.from(challengeRating);
+    }
+
+    public static boolean hasChallengeRatings() {
+        Array<PointOfInterestData> pointsOfInterest = getAllPointOfInterest();
+        if (pointsOfInterest == null) {
+            return false;
+        }
+        for (PointOfInterestData data : pointsOfInterest) {
+            if (data.getChallengeRating() != null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getDisplayName() {

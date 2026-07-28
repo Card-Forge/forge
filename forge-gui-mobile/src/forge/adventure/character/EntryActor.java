@@ -33,6 +33,10 @@ public class EntryActor extends MapActor{
         this.direction = direction;
     }
 
+    public String getTargetMap() {
+        return targetMap;
+    }
+
     public MapStage getMapStage()
     {
         return stage;

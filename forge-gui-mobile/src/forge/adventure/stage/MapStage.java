@@ -26,6 +26,7 @@ import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.*;
 import forge.adventure.util.*;
@@ -264,6 +265,7 @@ public class MapStage extends GameStage {
             }
         }
         spawn(spawnTargetId);
+        updateClearedState();
 
         if (effect != null && enemies.size() > 0) {
             effectDialog(effect);
@@ -375,8 +377,12 @@ public class MapStage extends GameStage {
             String type = prop.get("type", String.class);
             if (type != null) {
                 int id = prop.get("id", int.class);
-                if (changes.isObjectDeleted(id))
+                if (changes.isObjectDeleted(id)) {
+                    // a deleted enemy proves this map contained one (pre-existing saves rely on this)
+                    if ("enemy".equals(type) && prop.get("enemy") != null && !prop.get("enemy").toString().isEmpty())
+                        changes.markEnemiesSeen();
                     continue;
+                }
 
                 boolean hidden = !obj.isVisible(); //Check if the object is invisible.
 
@@ -400,6 +406,8 @@ public class MapStage extends GameStage {
                         float h = Float.parseFloat(prop.get("height").toString());
 
                         String targetMap = prop.containsKey("teleport")?prop.get("teleport").toString():"";
+                        if (targetMap != null && !targetMap.isEmpty())
+                            changes.addSubMap(targetMap);
                         String direction = prop.containsKey("direction")?prop.get("direction").toString():"";
                         boolean canStillSpawnPlayerThere = (targetMap == null || targetMap.isEmpty() && sourceMap.isEmpty()) ||//if target is null and "from world"
                                 !sourceMap.isEmpty() && targetMap.equals(sourceMap);
@@ -450,6 +458,9 @@ public class MapStage extends GameStage {
                         else if (prop.containsKey("portalState")) {
                             portal.setAnimation(prop.get("portalState").toString());
                         }
+                        // only usable portals count as discovered sub-maps; gated ones are recorded when activated
+                        if (portalTargetMap != null && !portalTargetMap.isEmpty() && "active".equals(portal.getAnimation()))
+                            changes.addSubMap(portalTargetMap);
                         if (prop.containsKey("spawn") && prop.get("spawn").toString().equals("true")) {
                             spawnClassified.add(portal);
                         } else if (validSpawnPoint) {
@@ -757,6 +768,7 @@ public class MapStage extends GameStage {
     }
 
     public boolean exitDungeon(boolean defeated, boolean defeatedByBoss) {
+        GameHUD.getInstance().clearNotifications();
         if (mustClearOnExit) {
             mustClearOnExit = false;
 
@@ -900,6 +912,7 @@ public class MapStage extends GameStage {
 
     public boolean deleteObject(int id) {
         changes.deleteObject(id);
+        boolean removed = false;
         for (int i = 0; i < actors.size; i++) {
             if (actors.get(i).getObjectId() == id && id > 0) {
                 if (actors.get(i).getClass().equals(EnemySprite.class)) {
@@ -907,10 +920,12 @@ public class MapStage extends GameStage {
                 }
                 actors.get(i).remove();
                 actors.removeIndex(i);
-                return true;
+                removed = true;
+                break;
             }
         }
-        return false;
+        updateClearedState();
+        return removed;
     }
 
     public boolean activateMapObject(int id){
@@ -929,8 +944,11 @@ public class MapStage extends GameStage {
 
                     if (thisPortal.getAnimation().equals("active"))
                         thisPortal.setAnimation("closed");
-                    else
+                    else {
                         thisPortal.setAnimation("active");
+                        if (thisPortal.getTargetMap() != null && !thisPortal.getTargetMap().isEmpty())
+                            changes.addSubMap(thisPortal.getTargetMap());
+                    }
                     return true;
                 }
             }
@@ -965,6 +983,44 @@ public class MapStage extends GameStage {
         return count;
     }
 
+    public void updateClearedState() {
+        if (changes == null)
+            return;
+        boolean enemiesPresent = false;
+        boolean remaining = false;
+        boolean bossAlive = false;
+        for (EnemySprite enemy : enemies) {
+            if (enemy.getStage() == null)
+                continue;
+            // dialog-only NPCs (e.g. quest givers) can never be fought or removed
+            if (enemy.dialog != null && enemy.dialog.canShow() && !enemy.dialog.hasBattleOrDeletion())
+                continue;
+            enemiesPresent = true;
+            // effect-carrying enemies are the ones drawn with the in-map crown
+            if (enemy.effect != null)
+                bossAlive = true;
+            // non-boss enemies on respawn maps never stay dead, so they don't block clearing
+            if (!respawnEnemies || enemy.getData().boss)
+                remaining = true;
+        }
+        PointOfInterest rootPoint = TileMapScene.instance().rootPoint;
+        boolean townPoi = rootPoint != null && ("town".equalsIgnoreCase(rootPoint.getData().type)
+                || "capital".equalsIgnoreCase(rootPoint.getData().type));
+        // town clearedness is driven by enemies only; elsewhere uncollected rewards block it
+        if (!remaining && !townPoi) {
+            for (MapActor actor : new Array.ArrayIterator<>(actors)) {
+                if (actor instanceof RewardSprite) {
+                    remaining = true;
+                    break;
+                }
+            }
+        }
+        if (enemiesPresent)
+            changes.markEnemiesSeen();
+        changes.setBossAlive(bossAlive);
+        changes.setCleared(!remaining);
+    }
+
     public Actor getByID(int id) { //Search actor by ID.
         for (MapActor A : new Array.ArrayIterator<>(actors)) {
             if (A.getId() == id)
@@ -983,6 +1039,7 @@ public class MapStage extends GameStage {
             if (!respawnEnemies || currentMob.getData().boss)
                 changes.deleteObject(currentMob.getId());
                 enemies.remove(currentMob);
+            updateClearedState();
         } else {
             currentMob.defeatDialog.activate();
             player.setAnimation(CharacterSprite.AnimationTypes.Idle);
@@ -1119,6 +1176,7 @@ public class MapStage extends GameStage {
                     RS.remove();
                     actors.removeValue(RS, true);
                     changes.deleteObject(RS.getId());
+                    updateClearedState();
                     break;
                 }
             }

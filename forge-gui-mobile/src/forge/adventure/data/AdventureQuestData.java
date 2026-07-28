@@ -237,6 +237,7 @@ public class AdventureQuestData implements Serializable {
                 || "dungeon".equalsIgnoreCase( stage.getTargetPOI().getData().type))){
             //todo: decide how to handle this in "anyPOI" scenarios
             WorldSave.getCurrentSave().getPointOfInterestChanges(stage.getTargetPOI().getID()).clearDeletedObjects();
+            WorldSave.getCurrentSave().resetPointOfInterestClearedState(stage.getTargetPOI());
         }
 
         PointOfInterest temp = stage.getTargetPOI();

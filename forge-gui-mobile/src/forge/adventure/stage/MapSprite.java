@@ -7,10 +7,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.data.BiomeSpriteData;
+import forge.adventure.data.ChallengeRating;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.MapViewScene;
 import forge.adventure.util.Config;
+import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -26,14 +28,32 @@ public class MapSprite extends Actor {
     TextureRegion texture;
     Sprite bookmark = Config.instance().getItemSprite("Star");
     Sprite magnifier = Config.instance().getItemSprite("Magnifier");
-    boolean isCaveDungeon, isOldorVisited, isBookmarked;
+    Sprite challengeDot, challengeUnknown;
+    Sprite clearedX = Config.instance().getItemSprite("ClearedX");
+    boolean isExplorable, isOldorVisited, isBookmarked, isCleared, hasLivingBoss;
+    PointOfInterest point;
+    int clearedStateVersion = -1;
+    TextureRegion crownRegion;
     public MapSprite(Vector2 pos, TextureRegion sprite, PointOfInterest point) {
+        this.point = point;
         if (point != null) {
             PointOfInterestChanges changes = WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID());
             setBookmarked(changes.isBookmarked(), point);
-            isCaveDungeon = "cave".equalsIgnoreCase(point.getData().type) || "dungeon".equalsIgnoreCase(point.getData().type);
+            ChallengeRating challengeRating = point.getData().getChallengeRating();
+            if (challengeRating != null) {
+                Sprite dot = Config.instance().getItemSprite("ChallengeDot");
+                if (dot != null) {
+                    challengeDot = new Sprite(dot);
+                    challengeDot.setColor(challengeRating.getColor());
+                }
+                Sprite unknown = Config.instance().getItemSprite("ChallengeUnknown");
+                if (unknown != null)
+                    challengeUnknown = new Sprite(unknown);
+            }
             if (point.getData().map != null && point.getID() != null) {
-                isOldorVisited = changes.hasDeletedObjects();
+                String type = point.getData().type;
+                isExplorable = !"town".equalsIgnoreCase(type) && !"capital".equalsIgnoreCase(type);
+                isOldorVisited = changes.isVisited() || changes.hasDeletedObjects();
             }
         } else {
             setBookmarked(false, null);
@@ -86,10 +106,41 @@ public class MapSprite extends Actor {
         if (texture == null)
             return;
         batch.draw(texture, getX(), getY());
-        if (isCaveDungeon && !isOldorVisited && magnifier != null) {
+        if (isExplorable && !isOldorVisited && magnifier != null) {
             magnifier.setScale(0.7f, 0.7f);
             magnifier.setPosition(getX() - 7, getY() + 2);
             magnifier.draw(batch, parentAlpha);
+        }
+        if (point != null && clearedStateVersion != PointOfInterestChanges.getClearedStateVersion()) {
+            clearedStateVersion = PointOfInterestChanges.getClearedStateVersion();
+            isCleared = WorldSave.getCurrentSave().isPointOfInterestCleared(point);
+            hasLivingBoss = WorldSave.getCurrentSave().hasLivingBoss(point);
+        }
+        Sprite indicator = null;
+        if (isCleared && clearedX != null) {
+            indicator = clearedX;
+        } else {
+            Sprite challengeIndicator = isOldorVisited ? challengeDot : challengeUnknown;
+            if (challengeIndicator != null && Config.instance().getSettingData().showDungeonDifficultyRatings)
+                indicator = challengeIndicator;
+        }
+        if (indicator != null) {
+            boolean drawCrown = hasLivingBoss && indicator != clearedX;
+            if (isBookmarked) {
+                // centered under the 0.7-scaled star (center at getRight(), height/1.5 + 8) with a 1px
+                // gap; a crown extends 3px above the indicator, so shift down to keep that gap
+                indicator.setPosition(getRight() - 4.5f, getY() + getHeight() / 1.5f - (drawCrown ? 10.6f : 7.6f));
+            } else {
+                indicator.setPosition(
+                        Math.round(getRight() - 4),
+                        Math.round(getY() + getHeight() / 1.5f + 4));
+            }
+            indicator.draw(batch, parentAlpha);
+            if (drawCrown) {
+                if (crownRegion == null)
+                    crownRegion = new TextureRegion(Current.world().getGlobalTexture(), 16, 0, 16, 16);
+                batch.draw(crownRegion, indicator.getX() + 0.5f, indicator.getY() + 4, 8, 8);
+            }
         }
         if (isBookmarked && bookmark != null) {
             bookmark.setScale(0.7f, 0.7f);
