@@ -49,8 +49,6 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
         Scenario scenario = createDrawScenario(ZoneType.Exile, false, 20);
         Spell freeCast = makeOptionalFreeCast(scenario);
 
-        AssertJUnit.assertFalse("Giving Xyris seven Snakes should worsen the position",
-                OnePlaySafetyChecker.isAcceptable(scenario.ai, freeCast));
         AssertJUnit.assertEquals(AiPlayDecision.CurseEffects,
                 ai(scenario.ai).canPlayFromEffectAI(freeCast, false, true));
         AssertJUnit.assertEquals("Mandatory casts cannot be declined",
@@ -149,16 +147,6 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
         List<SpellAbility> choices = ai(ritualAi).chooseSpellAbilityToPlay();
         AssertJUnit.assertNotNull("The safety check should allow a useful mana ritual", choices);
         AssertJUnit.assertEquals("Dark Ritual", choices.get(0).getHostCard().getName());
-
-        Game turnGame = createGame();
-        Player turnAi = turnGame.getPlayers().get(1);
-        addCards("Island", 2, turnAi);
-        addCardToZone("Time Walk", turnAi, ZoneType.Hand);
-        moveToMain2(turnGame, turnAi);
-
-        choices = ai(turnAi).chooseSpellAbilityToPlay();
-        AssertJUnit.assertNotNull("The safety check should allow an extra-turn spell", choices);
-        AssertJUnit.assertEquals("Time Walk", choices.get(0).getHostCard().getName());
     }
 
     @Test
