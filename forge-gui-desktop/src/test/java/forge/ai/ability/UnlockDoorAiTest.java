@@ -1,0 +1,66 @@
+package forge.ai.ability;
+
+import forge.ai.AITest;
+import forge.card.CardStateName;
+import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.player.Player;
+
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
+
+public class UnlockDoorAiTest extends AITest {
+
+    private Card addRoom(Game game, Player p) {
+        return addCard("Bottomless Pool", p);
+    }
+
+    /**
+     * Keys to the House pays {3}, taps and sacrifices itself to "lock or unlock a door of target
+     * Room you control". When every door of the Room is already unlocked the effect can only lock
+     * one, so activating it throws the artifact away to shut off the AI's own Room.
+     */
+    @Test
+    public void doesNotSacrificeItselfJustToLockItsOwnRoom() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        Card room = addRoom(game, ai);
+        room.setUnlockedRooms(java.util.EnumSet.of(CardStateName.LeftSplit, CardStateName.RightSplit));
+
+        addCard("Keys to the House", ai);
+        for (int i = 0; i < 5; i++) {
+            addCard("Island", ai);
+        }
+        game.getAction().checkStateEffects(true);
+
+        playUntilStackClear(game);
+
+        AssertJUnit.assertEquals("Keys to the House should not have been sacrificed", 1,
+                countCardsWithName(game, "Keys to the House"));
+        AssertJUnit.assertTrue("Both doors should still be unlocked",
+                room.getUnlockedRooms().containsAll(
+                        java.util.EnumSet.of(CardStateName.LeftSplit, CardStateName.RightSplit)));
+    }
+
+    /** With a door still locked the ability is worth its cost, so the AI should use it. */
+    @Test
+    public void unlocksARoomWhenADoorIsStillLocked() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        Card room = addRoom(game, ai);
+        room.setUnlockedRooms(java.util.EnumSet.of(CardStateName.LeftSplit));
+
+        addCard("Keys to the House", ai);
+        for (int i = 0; i < 5; i++) {
+            addCard("Island", ai);
+        }
+        game.getAction().checkStateEffects(true);
+
+        playUntilStackClear(game);
+
+        AssertJUnit.assertTrue("AI should have unlocked the remaining door, not locked the open one",
+                room.getUnlockedRooms().contains(CardStateName.RightSplit));
+    }
+}
