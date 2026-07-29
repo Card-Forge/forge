@@ -30,7 +30,6 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     private String DeckName = null;
     private String aiProfile = null;
 
-
     public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isDevMode, final Set<AIOption> aiOptions, final String aiProfile) {
         return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, isArchenemy, isDevMode, aiOptions, aiProfile);
     }
@@ -185,9 +184,6 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     public CardPool getCards() {
         return cards;
     }
-    public Set<AIOption> getAiOptions() {
-        return aiOptions == null ? null : Collections.unmodifiableSet(aiOptions);
-    }
     public String getAvatarVanguard() { return AvatarVanguard; }
     public String getSchemeDeckName() { return SchemeDeckName; }
     public String getPlanarDeckName() { return PlanarDeckName; }
@@ -198,10 +194,13 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.name = name;
     }
 
+    public Set<AIOption> getAiOptions() {
+        return aiOptions == null ? null : Collections.unmodifiableSet(aiOptions);
+    }
+
     public void setAiProfile(String aiProfile) {
         this.aiProfile = aiProfile;
     }
-
     public String getAiProfile() {
         return aiProfile;
     }
