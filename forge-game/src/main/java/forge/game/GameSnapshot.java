@@ -16,6 +16,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 import java.util.Collections;
@@ -345,6 +346,19 @@ public class GameSnapshot {
         Collections.sort(unorderedEntities);
         for(UnorderedEntities ue : unorderedEntities) {
             setCardInCopiedGame(toGame, ue.toPlayer, ue.fromCard, ue.newCard, ue.fromType, ue.zonePosition);
+        }
+
+        // Cards that exist in the game being restored but not in the snapshot: tokens,
+        // copies and effect cards created after it was taken. There is no earlier state to
+        // put them back into, so they leave the game. Without this the loop below looks
+        // them up in the snapshot and dereferences the null it gets back.
+        for (Card extraCard : toGame.getCardsInGame()) {
+            if (fromGame.findById(extraCard.getId()) == null) {
+                Zone zone = extraCard.getZone();
+                if (zone != null) {
+                    zone.remove(extraCard);
+                }
+            }
         }
 
         // This loop happens later to make sure all cards are in the correct zone first
