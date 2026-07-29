@@ -1,0 +1,38 @@
+Name:The Snapstone Wielder
+ManaCost:W U B R G
+Types:Legendary Creature Human Gamer
+PT:5/5
+# Start of Game Ability
+## Condition
+T:Mode$ NewGame | TriggerZones$ Command | Static$ True | Execute$ NoLandsCheck | TriggerDescription$ If CARDNAME is your commander ABILITY
+### Condition logic
+SVar:HasNoLands:Number$0
+SVar:LandCountLibrary:Count$ValidLibrary Land.YouOwn
+SVar:LandCountHand:Count$ValidHand Land.YouOwn/Plus.LandCountLibrary
+SVar:LandCountBattle:Count$ValidBattlefield Land.YouOwn/Plus.LandCountHand
+SVar:LandCountGrave:Count$ValidGraveyard Land.YouOwn/Plus.LandCountBattle
+SVar:LandCountTotal:Count$Valid Land.YouOwn/Plus.LandCountGrave
+SVar:NoLandsCheck:DB$ StoreSVar | SVar$ HasNoLands | Type$ Number | Expression$ 1 | ConditionCheckSVar$ LandCountTotal | ConditionSVarCompare$ EQ0 | SubAbility$ StartingHandSize | SpellDescription$ and your deck contains no land cards,
+## Part 1 (Hand size)
+SVar:DBShuffle:DB$ Shuffle | ConditionCheckSVar$ HasNoLands | SubAbility$ ManaManager
+SVar:StartingHandSize:DB$ ChangeZone | ConditionCheckSVar$ HasNoLands | Origin$ Hand | Destination$ Library | ChangeNum$ 3 | Mandatory$ True | AtRandom$ True | SubAbility$ DBShuffle | SpellDescription$ your starting hand size is four and
+## Part 2 (Mana counters)
+SVar:ManaCount:Count$YourCountersMana
+SVar:SpentCount:Count$ThisTurnActivated_Activated.YouCtrl+Self+inZoneCommand
+SVar:AddManaCounter:DB$ PutCounter | ValidTgts$ You | CounterType$ Mana | CounterNum$ 1
+SVar:ManaManager:DB$ Effect | Name$ Mana Manager | ConditionCheckSVar$ HasNoLands | Triggers$ ManaCounterManager | Abilities$ ManaSpenderManager | Duration$ Permanent | Unique$ True | SpellDescription$ for the rest of the game, at the beginning of your upkeep, you get a mana counter. During each of your turns, you can spend mana of any color equal to the number of mana counters you have. (You want mana on opponent’s turns, you’re on your own. Who needs instant-speed interaction?)
+SVar:ManaCounterManager:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ AddManaCounter | TriggerDescription$ At the beginning of your upkeep, you get a mana counter.
+SVar:ManaSpenderManager:AB$ Mana | Cost$ 0 | CheckSVar$ SpentCount | SVarCompare$ LTManaCount | Produced$ Any | ActivationZone$ Command | PlayerTurn$ True | Static$ True | SpellDescription$ During each of your turns, you can spend mana of any color equal to the number of mana counters you have. (You want mana on opponent’s turns, you’re on your own. Who needs instant-speed interaction?)
+# Repeatable Ability
+## Triggers
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RandoCard | TriggerDescription$ Whenever CARDNAME enters, ABILITY
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ RandoCard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, ABILITY
+## Effects
+SVar:RandoCard:DB$ NameCard | ValidCards$ Card.nonLand | AtRandom$ True | SubAbility$ MakeNamed
+SVar:MakeNamed:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ PlayNamed
+SVar:PlayNamed:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | ZoneRegardless$ True | SubAbility$ CleanCard | SpellDescription$ cast a random nonland Magic card without paying its mana cost.
+# TODO | SpellDescription$ If it has targets, choose the targets at random.
+SVar:CleanCard:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+# AI/Oracle
+AI:RemoveDeck:All
+Oracle:If The Snapstone Wielder is your commander and your deck contains no land cards, your starting hand size is four and for the rest of the game at the beginning of your upkeep, you get a mana counter. During each of your turns, you can spend mana of any color equal to the number of mana counters you have. (You want mana on opponent's turns, you're on your own. Who needs instant-speed interaction?)\nWhenever The Snapstone Wielder enters or attacks, cast a random nonland Magic card without paying its mana cost. If it has targets, choose the targets at random.
