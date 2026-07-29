@@ -179,7 +179,21 @@ public final class CdnUuidCache {
 
         String uuid = (wantBack && uuids.back != null) ? uuids.back : uuids.front;
         String side = wantBack ? "back" : "front";
-        return ScryfallBulkData.cdnUrl(uuid, side, size);
+        return cdnUrl(uuid, side, size);
+    }
+
+    /**
+     * Builds a Scryfall CDN image URL from a card UUID. The CDN ({@code cards.scryfall.io})
+     * is not rate-limited; given a UUID and image size, the URL is fully deterministic:
+     * {@code https://cards.scryfall.io/{size}/{front|back}/{uuid[0]}/{uuid[1]}/{uuid}.jpg}.
+     *
+     * @param uuid  the Scryfall card UUID (e.g. {@code "4e7a547f-..."})
+     * @param side  {@code "front"} or {@code "back"}
+     * @param size  {@code "normal"} or {@code "art_crop"}
+     */
+    public static String cdnUrl(String uuid, String side, String size) {
+        return "https://cards.scryfall.io/" + size + "/" + side
+                + "/" + uuid.charAt(0) + "/" + uuid.charAt(1) + "/" + uuid + ".jpg";
     }
 
     // -------------------------------------------------------------------------

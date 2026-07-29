@@ -62,24 +62,37 @@ public class CdnUuidCacheTest {
         deleteDir(remoteDir);
     }
 
+    // --- CDN URL formula ---
+
+    @Test
+    public void cdnUrl_matchesScryfallFormula() {
+        String uuid = "4e7a547f-d1b0-4f4e-9a99-3c44fc89c048";
+        Assert.assertEquals(
+                CdnUuidCache.cdnUrl(uuid, "front", "normal"),
+                "https://cards.scryfall.io/normal/front/4/e/" + uuid + ".jpg");
+        Assert.assertEquals(
+                CdnUuidCache.cdnUrl(uuid, "back", "art_crop"),
+                "https://cards.scryfall.io/art_crop/back/4/e/" + uuid + ".jpg");
+    }
+
     // --- happy path ---
 
     @Test
     public void englishFront_returnsCorrectCdnUrl() {
         String url = CdnUuidCache.getCdnUrl(SET, "1", "en", "front", "normal");
-        Assert.assertEquals(url, ScryfallBulkData.cdnUrl(UUID_EN, "front", "normal"));
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_EN, "front", "normal"));
     }
 
     @Test
     public void artCropSize_reflectedInUrl() {
         String url = CdnUuidCache.getCdnUrl(SET, "1", "en", "front", "art_crop");
-        Assert.assertEquals(url, ScryfallBulkData.cdnUrl(UUID_EN, "front", "art_crop"));
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_EN, "front", "art_crop"));
     }
 
     @Test
     public void japaneseLang_returnsJaUuid() {
         String url = CdnUuidCache.getCdnUrl(SET, "1", "ja", "front", "normal");
-        Assert.assertEquals(url, ScryfallBulkData.cdnUrl(UUID_JA, "front", "normal"));
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_JA, "front", "normal"));
     }
 
     // --- language fallback ---
@@ -87,13 +100,13 @@ public class CdnUuidCacheTest {
     @Test
     public void unknownLang_fallsBackToEnglish() {
         String url = CdnUuidCache.getCdnUrl(SET, "1", "zz", "front", "normal");
-        Assert.assertEquals(url, ScryfallBulkData.cdnUrl(UUID_EN, "front", "normal"));
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_EN, "front", "normal"));
     }
 
     @Test
     public void cardWithOnlyEn_jaRequestFallsBack() {
         String url = CdnUuidCache.getCdnUrl(SET, "2", "ja", "front", "normal");
-        Assert.assertEquals(url, ScryfallBulkData.cdnUrl(UUID_EN, "front", "normal"));
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_EN, "front", "normal"));
     }
 
     // --- DFC (double-faced cards) ---
@@ -101,20 +114,20 @@ public class CdnUuidCacheTest {
     @Test
     public void dfcDistinctFaces_frontUuid() {
         String url = CdnUuidCache.getCdnUrl(SET_DFC, "1", "en", "front", "normal");
-        Assert.assertEquals(url, ScryfallBulkData.cdnUrl(UUID_FRONT, "front", "normal"));
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_FRONT, "front", "normal"));
     }
 
     @Test
     public void dfcDistinctFaces_backUuid() {
         String url = CdnUuidCache.getCdnUrl(SET_DFC, "1", "en", "back", "normal");
-        Assert.assertEquals(url, ScryfallBulkData.cdnUrl(UUID_BACK, "back", "normal"));
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_BACK, "back", "normal"));
     }
 
     @Test
     public void dfcSameUuid_backRequestStillUsesSharedUuid() {
         // When both faces share the same UUID, back is stored as null internally.
         String url = CdnUuidCache.getCdnUrl(SET_DFC, "2", "en", "back", "normal");
-        Assert.assertEquals(url, ScryfallBulkData.cdnUrl(UUID_FRONT, "back", "normal"));
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_FRONT, "back", "normal"));
     }
 
     @Test
@@ -130,7 +143,7 @@ public class CdnUuidCacheTest {
     @Test
     public void uppercaseSetCode_lowercasedBeforeLookup() {
         String url = CdnUuidCache.getCdnUrl(SET.toUpperCase(), "1", "en", "front", "normal");
-        Assert.assertEquals(url, ScryfallBulkData.cdnUrl(UUID_EN, "front", "normal"));
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_EN, "front", "normal"));
     }
 
     // --- remote fetch writes to local cache ---
@@ -151,7 +164,7 @@ public class CdnUuidCacheTest {
         CdnUuidCache.remoteBaseUrlOverride = "file:///nonexistent-dir/";
         try {
             String url = CdnUuidCache.getCdnUrl(SET, "1", "en", "front", "normal");
-            Assert.assertEquals(url, ScryfallBulkData.cdnUrl(UUID_EN, "front", "normal"),
+            Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_EN, "front", "normal"),
                     "should resolve from local cache even when remote is unavailable");
         } finally {
             CdnUuidCache.remoteBaseUrlOverride = remoteDir.toURI().toURL().toString();

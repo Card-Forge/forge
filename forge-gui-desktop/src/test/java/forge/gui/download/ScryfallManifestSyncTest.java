@@ -110,7 +110,7 @@ public class ScryfallManifestSyncTest {
 
         Assert.assertEquals(merged, 2);
         String url = CdnUuidCache.getCdnUrl("neo", "1", "en", "front", "normal");
-        Assert.assertEquals(url, ScryfallBulkData.cdnUrl("11111111-1111-1111-1111-111111111111", "front", "normal"));
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl("11111111-1111-1111-1111-111111111111", "front", "normal"));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class ScryfallManifestSyncTest {
         ScryfallManifestSync.sync("en", null);
 
         String back = CdnUuidCache.getCdnUrl("neo", "5", "en", "back", "normal");
-        Assert.assertEquals(back, ScryfallBulkData.cdnUrl("33333333-3333-3333-3333-333333333333", "back", "normal"),
+        Assert.assertEquals(back, CdnUuidCache.cdnUrl("33333333-3333-3333-3333-333333333333", "back", "normal"),
                 "manifest-derived entries should assume back shares the front's id");
     }
 
@@ -189,7 +189,7 @@ public class ScryfallManifestSyncTest {
         ScryfallManifestSync.sync("en", null);
 
         String url = CdnUuidCache.getCdnUrl("neo", "1", "en", "front", "normal");
-        Assert.assertEquals(url, ScryfallBulkData.cdnUrl("eeeeeeee-0000-0000-0000-000000000001", "front", "normal"),
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl("eeeeeeee-0000-0000-0000-000000000001", "front", "normal"),
                 "pre-existing entries must win over a manifest-derived guess");
     }
 
@@ -210,7 +210,7 @@ public class ScryfallManifestSyncTest {
         Assert.assertNotNull(CdnUuidCache.getCdnUrl("neo", "1", "en", "front", "normal"),
                 "the earlier language entry must survive a later merge");
         Assert.assertEquals(CdnUuidCache.getCdnUrl("neo", "1", "ja", "front", "normal"),
-                ScryfallBulkData.cdnUrl("22222222-0000-0000-0000-000000000002", "front", "normal"));
+                CdnUuidCache.cdnUrl("22222222-0000-0000-0000-000000000002", "front", "normal"));
     }
 
     @Test
