@@ -87,3 +87,12 @@ ScryfallCode=HOC
 95 M Arcane Signet @Anastasia Balakchina
 96 M Mox Amber @Robin Olausson
 97 M Treasure Vault @Pablo Mendoza
+98 M Bilbo, Unexpected Adventurer @Marius Bota
+99 M Gandalf, Shadow's Foe @Alexander Mokhov
+100 M Thorin, Company's Leader @Eric Deschamps
+101 M Bard, Heir of Girion @Narendra Bintara Adi
+102 M Bolg, Erebor's Reckoning @Denman Rooke
+103 M Chief of the Wilds @Tomas Duchek
+104 M Dáin of the Ancient Halls @Manuel Castañón
+105 M Great Goblin, Foul-Hearted @Yuhong Ding
+106 M Thranduil the Strategist @Justyna Dura
