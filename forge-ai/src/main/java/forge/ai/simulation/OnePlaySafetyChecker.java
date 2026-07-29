@@ -24,9 +24,9 @@ public final class OnePlaySafetyChecker {
             Score originalScore = new GameStateEvaluator().getScoreForGameState(player.getGame(), player);
             SimulationController controller = new SimulationController(originalScore, 0);
             GameSimulator simulator = new GameSimulator(controller, player.getGame(), player, null);
+            // TODO this doesn't respect heuristics shaping for the SA yet (targets etc.)
             Score resultScore = simulator.simulateSpellAbility(sa);
             Player simulatedPlayer = (Player) simulator.getGameCopier().find(player);
-            int expectedScoreLoss = expectedCardScoreLoss(player, sa, simulator);
 
             if (simulatedPlayer == null) {
                 return true;
@@ -35,12 +35,13 @@ public final class OnePlaySafetyChecker {
                 return false;
             }
             return resultScore.value == Integer.MIN_VALUE
-                    || (long) resultScore.value >= (long) originalScore.value - expectedScoreLoss;
+                    || (long) resultScore.value >= (long) originalScore.value - expectedCardScoreLoss(player, sa, simulator);
         } finally {
             CHECKING.remove();
         }
     }
 
+    // sometimes simulation might not see the effect of some heuristics directly, so at least negate any card disadvantage
     private static int expectedCardScoreLoss(Player player, SpellAbility sa, GameSimulator simulator) {
         Card source = sa.getHostCard();
         if (source == null || !source.isInZone(ZoneType.Hand)) {
@@ -51,7 +52,6 @@ public final class OnePlaySafetyChecker {
             return 0;
         }
         // Match GameStateEvaluator: excess cards are worth one point, other hand cards five.
-        return !player.isUnlimitedHandSize()
-                && player.getCardsIn(ZoneType.Hand).size() > player.getMaxHandSize() ? 1 : 5;
+        return !player.isUnlimitedHandSize() && player.getCardsIn(ZoneType.Hand).size() > player.getMaxHandSize() ? 1 : 5;
     }
 }

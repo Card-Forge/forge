@@ -36,7 +36,7 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
 
     private PlayerControllerAi createControllerFor(Player ai) {
         PlayerControllerAi result = new PlayerControllerAi(ai.getGame(), ai, this);
-        result.setUseSimulation(useSimulation);
+        result.getAi().setUseSimulation(useSimulation);
         return result;
     }
 

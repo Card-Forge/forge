@@ -2,6 +2,7 @@ package forge.ai.simulation;
 
 import java.util.List;
 
+import forge.ai.AITest;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -16,7 +17,7 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-public class OnePlaySafetyCheckerTest extends SimulationTest {
+public class OnePlaySafetyCheckerTest extends AITest {
     @Test
     public void testWheelIntoXyrisImpactTremorsReportsLethal() {
         Scenario scenario = createDrawScenario(ZoneType.Hand, true, 6);
@@ -72,7 +73,7 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
     @Test
     public void testAiAvoidsLethalLandPlay() {
-        Game game = createGame();
+        Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         ai.setLife(2, null);
@@ -88,7 +89,7 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
         AssertJUnit.assertFalse("The land simulation should detect lethal Zo-Zu damage",
                 OnePlaySafetyChecker.isAcceptable(ai, ability));
         AssertJUnit.assertNull("The selected land play would kill the AI",
-                controller(ai).chooseSpellAbilityToPlay());
+                ai.getController().chooseSpellAbilityToPlay());
     }
 
     @Test
@@ -115,7 +116,7 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
     @Test
     public void testEvaluationStopsAfterProposedPlay() {
-        Game game = createGame();
+        Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
 
         addCard("Island", ai);
@@ -127,22 +128,20 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
         SpellAbility ability = cantrip.getFirstSpellAbility();
         ability.setActivatingPlayer(ai);
-        GameStateEvaluator.Score originalScore =
-                new GameStateEvaluator().getScoreForGameState(game, ai);
-        GameSimulator simulator =
-                new GameSimulator(new SimulationController(originalScore, 0), game, ai, null);
+        GameStateEvaluator.Score originalScore = new GameStateEvaluator().getScoreForGameState(game, ai);
+        GameSimulator simulator = new GameSimulator(new SimulationController(originalScore, 0), game, ai, null);
         AssertJUnit.assertEquals("A depth-zero simulation must not include the Bear as a follow-up",
                 originalScore.value, simulator.simulateSpellAbility(ability).value);
     }
 
     @Test
     public void testNormalAiAllowsExpectedCardCost() {
-        Game ritualGame = createGame();
-        Player ritualAi = ritualGame.getPlayers().get(1);
+        Game game = initAndCreateGame();
+        Player ritualAi = game.getPlayers().get(1);
         addCard("Swamp", ritualAi);
         addCardToZone("Dark Ritual", ritualAi, ZoneType.Hand);
         addCardToZone("Dark Confidant", ritualAi, ZoneType.Hand);
-        moveToMain2(ritualGame, ritualAi);
+        moveToMain2(game, ritualAi);
 
         List<SpellAbility> choices = ai(ritualAi).chooseSpellAbilityToPlay();
         AssertJUnit.assertNotNull("The safety check should allow a useful mana ritual", choices);
@@ -161,9 +160,8 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
                 evaluateMurderIntoGravePact("Runeclaw Bear", "Shivan Dragon"));
     }
 
-    private boolean evaluateMurderIntoGravePact(
-            String aiCreatureName, String opponentCreatureName) {
-        Game game = createGame();
+    private boolean evaluateMurderIntoGravePact(String aiCreatureName, String opponentCreatureName) {
+        Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
 
@@ -181,7 +179,7 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
     }
 
     private Scenario createDrawScenario(ZoneType zone, boolean impactTremors, int life) {
-        Game game = createGame();
+        Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         ai.setLife(life, null);
@@ -204,7 +202,6 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
     private Spell makeOptionalFreeCast(Scenario scenario) {
         Spell freeCast = (Spell) scenario.drawAbility.copyWithNoManaCost(scenario.ai);
-        freeCast.setActivatingPlayer(scenario.ai);
         freeCast.setCastFromPlayEffect(true);
         return freeCast;
     }
@@ -218,25 +215,13 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
     }
 
     private AiController ai(Player player) {
-        return controller(player).getAi();
-    }
-
-    private PlayerControllerAi controller(Player player) {
-        return (PlayerControllerAi) player.getController();
+        return ((PlayerControllerAi) player.getController()).getAi();
     }
 
     private void fillLibrary(Player player, int count) {
         for (int i = 0; i < count; i++) {
             addCardToZone("Runeclaw Bear", player, ZoneType.Library);
         }
-    }
-
-    private Game createGame() {
-        Game game = initAndCreateGame();
-        game.getPlayers().get(1).setTeam(0);
-        game.getPlayers().get(0).setTeam(1);
-        controller(game.getPlayers().get(1)).setUseSimulation(false);
-        return game;
     }
 
     private void moveToMain2(Game game, Player player) {

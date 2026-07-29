@@ -72,10 +72,6 @@ public class PlayerControllerAi extends PlayerController {
         pilotsNonAggroDeck = deck.getName().contains("Control") || deck.getAverageCMC() > 3;
     }
 
-    public void setUseSimulation(boolean value) {
-        brains.setUseSimulation(value);
-    }
-
     @Override
     public SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
         if (abilities.isEmpty()) {

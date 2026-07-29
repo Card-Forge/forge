@@ -871,7 +871,7 @@ public class ComputerUtil {
 
                         // Run non-mandatory trigger.
                         // These checks only work if the Executing SpellAbility is an Ability_Sub.
-                        if ((exSA instanceof AbilitySub) && !SpellApiToAi.Converter.get(exSA).doTrigger(ai, exSA, false)) {
+                        if (exSA instanceof AbilitySub && !SpellApiToAi.Converter.get(exSA).doTrigger(ai, exSA, false)) {
                             // AI would not run this trigger if given the chance
                             return sacrificed;
                         }
