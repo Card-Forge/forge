@@ -91,4 +91,34 @@ public class UnlockDoorAiTest extends AITest {
         AssertJUnit.assertTrue("AI should have opened the door carrying the unlock trigger",
                 room.getUnlockedRooms().contains(CardStateName.LeftSplit));
     }
+
+    /**
+     * Derelict Attic's unlock trigger draws two cards and loses 2 life, so opening that door at
+     * 2 life kills the AI. Checking that a trigger merely exists is not enough - the AI has to ask
+     * whether it actually wants to run it, which is what doTrigger does.
+     */
+    @Test
+    public void doesNotOpenADoorWhoseTriggerWouldKillIt() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        Card room = addCard("Derelict Attic", ai);
+        room.setUnlockedRooms(java.util.EnumSet.noneOf(CardStateName.class));
+        for (int i = 0; i < 20; i++) {
+            addCardToZone("Swamp", ai, forge.game.zone.ZoneType.Library);
+        }
+
+        addCard("Keys to the House", ai);
+        for (int i = 0; i < 5; i++) {
+            addCard("Island", ai);
+        }
+        ai.setLife(2, null);
+        game.getAction().checkStateEffects(true);
+
+        playUntilStackClear(game);
+
+        AssertJUnit.assertFalse("AI should not have opened the door that would have killed it",
+                room.getUnlockedRooms().contains(CardStateName.LeftSplit));
+        AssertJUnit.assertTrue("AI should still be alive", ai.getLife() > 0);
+    }
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.card.CardStateName;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -47,7 +48,7 @@ public class UnlockDoorAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactGame);
             }
             sa.resetTargets();
-            sa.getTargets().add(bestTarget(targets));
+            sa.getTargets().add(bestTarget(targets, aiPlayer));
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
@@ -74,7 +75,7 @@ public class UnlockDoorAi extends SpellAbilityAi {
                 if (!room.getLockedRooms().contains(state.getStateName())) {
                     continue;
                 }
-                if (unlockingTriggers(room, state.getStateName())) {
+                if (unlockingTriggers(room, state.getStateName(), ai)) {
                     return state;
                 }
                 if (fallback == null) {
@@ -89,10 +90,10 @@ public class UnlockDoorAi extends SpellAbilityAi {
     }
 
     /** Prefer a Room that pays out when opened over one that just changes which half is active. */
-    private static Card bestTarget(CardCollection rooms) {
+    private static Card bestTarget(CardCollection rooms, Player ai) {
         for (Card room : rooms) {
             for (CardStateName stateName : room.getLockedRooms()) {
-                if (room.hasState(stateName) && unlockingTriggers(room, stateName)) {
+                if (room.hasState(stateName) && unlockingTriggers(room, stateName, ai)) {
                     return room;
                 }
             }
@@ -101,16 +102,35 @@ public class UnlockDoorAi extends SpellAbilityAi {
     }
 
     /**
-     * True when opening this particular door would run a "when you unlock this door" trigger.
-     * Those triggers are declared with ThisDoor$ True and only fire for the face they sit on
-     * (see TriggerUnlockDoor.performTest), so the trigger's own state name is what decides it.
+     * True when opening this particular door would run a "when you unlock this door" trigger that
+     * the AI actually wants right now. Those triggers are declared with ThisDoor$ True and only
+     * fire for the face they sit on (see TriggerUnlockDoor.performTest), so the trigger's own state
+     * name is what identifies it.
+     *
+     * Asking the effect's own AI via doTrigger, rather than just checking that a trigger exists,
+     * matters because plenty of Rooms have an unlock trigger that is useless or harmful in the
+     * current state: Cramped Vents deals 6 damage to a creature an opponent controls, which does
+     * nothing with no creatures to hit, and Derelict Attic draws two cards and loses 2 life, which
+     * is lethal at 2 life.
      */
-    private static boolean unlockingTriggers(Card room, CardStateName stateName) {
+    private static boolean unlockingTriggers(Card room, CardStateName stateName, Player ai) {
         if (!room.hasState(stateName)) {
             return false;
         }
         for (Trigger t : room.getState(stateName).getTriggers()) {
-            if (t.getMode() == TriggerType.UnlockDoor && stateName.equals(t.getCardStateName())) {
+            if (t.getMode() != TriggerType.UnlockDoor || !stateName.equals(t.getCardStateName())) {
+                continue;
+            }
+            SpellAbility effect = t.ensureAbility();
+            if (effect == null) {
+                continue;
+            }
+            // the trigger's ability has no activator until it actually fires, and the AI logic
+            // below needs one to work out targets and costs
+            if (effect.getActivatingPlayer() == null) {
+                effect.setActivatingPlayer(ai);
+            }
+            if (SpellApiToAi.Converter.get(effect).doTrigger(ai, effect, false)) {
                 return true;
             }
         }
