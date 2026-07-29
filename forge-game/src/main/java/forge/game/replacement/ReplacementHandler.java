@@ -284,8 +284,6 @@ public class ReplacementHandler {
      */
     private ReplacementResult executeReplacement(final Map<AbilityKey, Object> runParams,
         final ReplacementEffect replacementEffect, final Player decider) {
-        SpellAbility effectSA = null;
-
         Card host = replacementEffect.getHostCard();
         // AlternateState for OriginsPlaneswalker
         // FaceDown for cards like Necropotence
@@ -294,7 +292,7 @@ public class ReplacementHandler {
         }
 
         // TODO: the source of replacement effect should be the source of the original effect
-        effectSA = replacementEffect.ensureAbility();
+        SpellAbility effectSA = replacementEffect.ensureAbility();
         if (effectSA != null) {
             SpellAbility tailend = effectSA;
             do {
@@ -303,7 +301,7 @@ public class ReplacementHandler {
                 tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
                 tailend.setReplacingObjectsFrom(runParams, AbilityKey.InternalTriggerTable, AbilityKey.SimultaneousETB);
                 tailend = tailend.getSubAbility();
-            } while(tailend != null);
+            } while (tailend != null);
 
             effectSA.setLastStateBattlefield((CardCollectionView) Objects.requireNonNullElse(runParams.get(AbilityKey.LastStateBattlefield), game.getLastStateBattlefield()));
             effectSA.setLastStateGraveyard((CardCollectionView) Objects.requireNonNullElse(runParams.get(AbilityKey.LastStateGraveyard), game.getLastStateGraveyard()));
@@ -317,10 +315,8 @@ public class ReplacementHandler {
         // Decider gets to choose whether or not to apply the replacement.
         if (replacementEffect.hasParam("Optional")) {
             Player optDecider = decider;
-            if (replacementEffect.hasParam("OptionalDecider") && effectSA != null) {
-                effectSA.setActivatingPlayer(host.getController());
-                optDecider = AbilityUtils.getDefinedPlayers(host,
-                        replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
+            if (replacementEffect.hasParam("OptionalDecider")) {
+                optDecider = AbilityUtils.getDefinedPlayers(host, replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
             String name = Objects.requireNonNullElse(host.getRenderForUI() ? host.getCardForUi() : null, host).getTranslatedName();
@@ -353,7 +349,7 @@ public class ReplacementHandler {
         }
 
         if ("True".equals(replacementEffect.getParam("Skip"))) {
-            return ReplacementResult.Skipped; // Event is skipped.
+            return ReplacementResult.Skipped;
         }
         Player player = host.getController();
 
@@ -361,6 +357,7 @@ public class ReplacementHandler {
             ApiType apiType = effectSA.getApi();
             if (replacementEffect.getMode() != ReplacementType.DamageDone ||
                 (apiType == ApiType.ReplaceDamage || apiType == ApiType.ReplaceSplitDamage || apiType == ApiType.ReplaceEffect)) {
+                effectSA.setActivatingPlayer(host.getController());
                 player.getController().playSpellAbilityNoStack(effectSA, true);
             } else {
                 // The SA if buffered, but replacement result should be set to Replaced

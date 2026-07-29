@@ -441,7 +441,7 @@ public final class FServerManager implements IHasForgeLog {
         localLobby.getData().setMaximumCommanderBracket(
                 FModel.getPreferences().getPrefInt(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET));
         final LobbyUpdateEvent event = new LobbyUpdateEvent(localLobby.getData());
-        broadcast(event);
+        broadcastTo(event, IterableUtil.filter(clients.values(), RemoteClient::hasValidSlot));
     }
 
     public void updateSlot(final int index, final UpdateLobbyPlayerEvent event) {
@@ -968,7 +968,8 @@ public final class FServerManager implements IHasForgeLog {
             final RemoteClient client = new RemoteClient(ctx.channel());
             clients.put(ctx.channel(), client);
             netLog.info("Client connected to server at {}", ctx.channel().remoteAddress());
-            updateLobbyState();
+            // No lobby state before login: a bare TCP connect should not draw
+            // lobby traffic, and the state includes every slot's decklist.
             super.channelActive(ctx);
         }
 
@@ -1049,6 +1050,19 @@ public final class FServerManager implements IHasForgeLog {
                     }
                 }
             } else if (msg instanceof UpdateLobbyPlayerEvent event) {
+                // A peer that has not completed login owns no slot; applying
+                // its update would index the lobby with UNASSIGNED_SLOT.
+                if (!client.hasValidSlot()) {
+                    netLog.warn("Ignoring lobby update from unregistered peer at {}",
+                            ctx.channel().remoteAddress());
+                    return;
+                }
+                // Clients may configure their own seat, not the server-owned
+                // state that decides who occupies it.
+                if (event.clearServerOwnedFields()) {
+                    netLog.warn("Rejecting server-owned lobby fields from slot {} ({}) at {}",
+                            client.getIndex(), client.getUsername(), ctx.channel().remoteAddress());
+                }
                 localLobby.applyToSlot(client.getIndex(), event);
                 if (event.getName() != null) {
                     String oldName = client.getUsername();

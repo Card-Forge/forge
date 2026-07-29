@@ -760,9 +760,6 @@ public class Game {
             if (!visitor.visitAll(player.getZone(ZoneType.Battlefield).getCards(false))) {
                 return;
             }
-            if (!visitor.visitAll(((PlayerZoneBattlefield)player.getZone(ZoneType.Battlefield)).getMeldedCards())) {
-                return;
-            }
             if (!visitor.visitAll(player.getZone(ZoneType.Exile).getCards())) {
                 return;
             }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.utils.Disposable;
 import forge.Forge;
 import forge.adventure.util.Config;
+import forge.sound.SoundSystem;
 
 /**
  * Base class for all rendered scenes
@@ -35,18 +36,27 @@ public abstract class Scene implements Disposable {
 
         @Override
         public boolean buttonDown(Controller controller, int i) {
+            if (!SoundSystem.instance.hasWindowFocus()) {
+                return false;
+            }
             Scene scene = Forge.getCurrentScene();
             return scene != null && scene.buttonDown(controller, i);
         }
 
         @Override
         public boolean buttonUp(Controller controller, int i) {
+            if (!SoundSystem.instance.hasWindowFocus()) {
+                return false;
+            }
             Scene scene = Forge.getCurrentScene();
             return scene != null && scene.buttonUp(controller, i);
         }
 
         @Override
         public boolean axisMoved(Controller controller, int i, float v) {
+            if (!SoundSystem.instance.hasWindowFocus()) {
+                return false;
+            }
             Scene scene = Forge.getCurrentScene();
             return scene != null && scene.axisMoved(controller, i, v);
         }

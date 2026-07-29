@@ -1,0 +1,7 @@
+Name:Wilderland Scrounger
+ManaCost:4 G
+Types:Creature Wolf
+PT:3/6
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | IsPresent$ Creature.YouCtrl+powerGE4 | NoResolvingCheck$ True | Execute$ TrigPutCounterAll | TriggerZones$ Battlefield | TriggerDescription$ Ferocious — Whenever this creature attacks while you control a creature with power 4 or greater, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Ferocious — Whenever this creature attacks while you control a creature with power 4 or greater, put a +1/+1 counter on each creature you control.

@@ -328,6 +328,9 @@ public class SoundSystem {
         invalidateSoundCache();
     }
 
+    public boolean hasWindowFocus() {
+        return hasWindowFocus;
+    }
     public void setWindowFocus(boolean hasWindowFocus) {
         this.hasWindowFocus = hasWindowFocus;
         updatePlayPause();
