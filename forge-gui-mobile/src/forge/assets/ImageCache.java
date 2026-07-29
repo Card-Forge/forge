@@ -79,8 +79,8 @@ public class ImageCache {
     // so on a RAM-constrained device this is the single biggest native ceiling and the per-turn ratchet over a
     // long game. Lowered from 120 on <=4GB devices in initCache() (from Forge.totalDeviceRAM).
     private static int downloadedTextureCacheMax = 120;
-    // Longest-side cap (px) applied to downloaded card images before GPU upload; battlefield draws thumbnails and
-    // this keeps zoom acceptable while cutting the decoded RGBA/565 footprint. See downscaleCardPixmap().
+    // Longest-side cap (px) applied to downloaded card images before GPU upload; battlefield draws thumbnails so
+    // full-res Scryfall images (680×936) don't need to be retained at full size. See downscaleCardPixmap().
     private static final int MAX_CARD_TEX_DIM = 512;
 
     // iOS fix: Keep Pixmaps alive - iOS Texture requires Pixmap to stay in memory
@@ -449,18 +449,15 @@ public class ImageCache {
         return Forge.getAssets().manager().get(path, Texture.class, false);
     }
 
-    // Downscale a decoded card image to at most MAX_CARD_TEX_DIM on its longest side and convert to RGB565
-    // (card art is opaque). Cuts the resident Pixmap+Texture footprint ~4-8x vs full-res RGBA8888 while keeping
-    // zoom acceptable. Returns src unchanged if already small enough and RGB565; otherwise a new Pixmap (and
-    // disposes src). Any failure falls back to the original so the card still renders.
+    // Downscale a decoded card image to at most MAX_CARD_TEX_DIM on its longest side. Returns src unchanged
+    // if already small enough; otherwise a new Pixmap (and disposes src). Any failure falls back to original.
     private static Pixmap downscaleCardPixmap(Pixmap src) {
         try {
             int w = src.getWidth();
             int h = src.getHeight();
             int maxSide = Math.max(w, h);
             boolean needScale = maxSide > MAX_CARD_TEX_DIM;
-            boolean needFormat = src.getFormat() != Pixmap.Format.RGB565;
-            if (!needScale && !needFormat) {
+            if (!needScale) {
                 return src;
             }
             int nw = w;
@@ -470,7 +467,7 @@ public class ImageCache {
                 nw = Math.max(1, Math.round(w * s));
                 nh = Math.max(1, Math.round(h * s));
             }
-            Pixmap dst = new Pixmap(nw, nh, Pixmap.Format.RGB565);
+            Pixmap dst = new Pixmap(nw, nh, Pixmap.Format.RGBA8888);
             dst.setFilter(Pixmap.Filter.BiLinear);
             dst.drawPixmap(src, 0, 0, w, h, 0, 0, nw, nh);
             src.dispose();
@@ -527,9 +524,7 @@ public class ImageCache {
                     fis.read(imageBytes);
                     fis.close();
 
-                    // Decode the downloaded JPEG, then downscale + convert to RGB565 (card art is opaque) to
-                    // bound native memory: battlefield cards render as thumbnails, so keeping a full-res
-                    // RGBA8888 Pixmap+Texture pair (~5MB/card) is the main per-turn memory ratchet on iOS.
+                    // Decode the downloaded JPEG and downscale if needed (battlefield cards render as thumbnails).
                     Pixmap raw = new Pixmap(imageBytes, 0, imageBytes.length);
                     Pixmap pixmap = downscaleCardPixmap(raw);
 
@@ -564,11 +559,9 @@ public class ImageCache {
 
         // Only use AssetManager for bundled assets (not downloaded images)
         if (!isDownloadedImage) {
-            //load to assetmanager with the card texture parameter (RGB565 on iOS to bound native memory,
-            //full-quality RGBA8888 elsewhere - see Assets.getCardTextureFilter())
             try {
                 if (Forge.getAssets().manager().get(fileName, Texture.class, false) == null) {
-                    Forge.getAssets().manager().load(fileName, Texture.class, Forge.getAssets().getCardTextureFilter());
+                    Forge.getAssets().manager().load(fileName, Texture.class, Forge.getAssets().getTextureFilter());
                     Forge.getAssets().manager().finishLoadingAsset(fileName);
                     counter += 1;
                     // a texture just became available for a card that may already be

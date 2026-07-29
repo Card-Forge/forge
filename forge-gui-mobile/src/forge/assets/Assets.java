@@ -310,27 +310,6 @@ public class Assets implements Disposable {
         return textureParameter;
     }
 
-    // Card images are opaque. iOS is native-memory constrained, so there it loads the card path as RGB565
-    // (half the RGBA8888 footprint) with no mipmaps (cards are drawn ~1:1) — mirroring the RGB565 downscale on
-    // the downloaded path. Every other platform keeps the full-quality RGBA8888 + mipmap path (getTextureFilter),
-    // so card textures are not downgraded off iOS. Kept separate so UI textures are unaffected either way.
-    public TextureParameter getCardTextureFilter() {
-        if (!GuiBase.isIOS())
-            return getTextureFilter();
-        if (cardTextureParameter == null) {
-            cardTextureParameter = new TextureParameter();
-            cardTextureParameter.format = Pixmap.Format.RGB565;
-            cardTextureParameter.genMipMaps = false;
-        }
-        if (Forge.isTextureFilteringEnabled()) {
-            cardTextureParameter.minFilter = Texture.TextureFilter.Linear;
-            cardTextureParameter.magFilter = Texture.TextureFilter.Linear;
-        } else {
-            cardTextureParameter.minFilter = Texture.TextureFilter.Nearest;
-            cardTextureParameter.magFilter = Texture.TextureFilter.Nearest;
-        }
-        return cardTextureParameter;
-    }
 
     public Texture getTexture(FileHandle file) {
         return getTexture(file, true);
