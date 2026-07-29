@@ -302,7 +302,7 @@ public class GameCopier {
         }
         if (USE_FROM_PAPER_CARD && !c.isImmutable() && c.getPaperCard() != null) {
             Card newCard;
-            if (PRUNE_HIDDEN_INFO && !c.getView().canBeShownTo(aiPlayer.getView())) {
+            if (PRUNE_HIDDEN_INFO && aiPlayer != null && !c.getView().canBeShownTo(aiPlayer.getView())) {
                 // TODO also check REVEALED_CARDS memory
                 newCard = new Card(c.getId(), hidden_info_card, newGame);
                 newCard.setOwner(newOwner);
