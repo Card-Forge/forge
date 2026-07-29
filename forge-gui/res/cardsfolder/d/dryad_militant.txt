@@ -2,6 +2,6 @@ Name:Dryad Militant
 ManaCost:GW
 Types:Creature Dryad Soldier
 PT:2/1
-R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Instant,Sorcery | ReplaceWith$ Exile | Description$ If an instant or sorcery would be put in a graveyard from anywhere, exile it instead.
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Instant,Sorcery | ReplaceWith$ Exile | Description$ If an instant or sorcery card would be put into a graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
-Oracle:If an instant or sorcery card would be put into a graveyard from anywhere, exile it instead.
+Oracle:({G/W} can be paid with either {G} or {W}.)\nIf an instant or sorcery card would be put into a graveyard from anywhere, exile it instead.

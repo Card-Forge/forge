@@ -3,7 +3,7 @@ ManaCost:X W B G
 Types:Artifact Creature Phyrexian Hydra
 PT:*/*
 K:Indestructible
-K:etbCounter:OIL:X
+K:etbCounter:OIL:X:no Condition:CARDNAME enters with X oil counters on it.
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to twice the number of oil counters on it.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters, conjure a card named Darksteel Ingot and a card named Darksteel Plate into your hand.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Names$ Darksteel Ingot,Darksteel Plate | Zone$ Hand

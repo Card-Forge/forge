@@ -3,4 +3,4 @@ ManaCost:G
 Types:Creature Human Druid
 PT:1/1
 A:AB$ Destroy | Cost$ G T Sac<1/CARDNAME> | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
-Oracle:{G}, {T}, Sacrifice Druid Lyrist: Destroy target enchantment.
+Oracle:{G}, {T}, Sacrifice this creature: Destroy target enchantment.

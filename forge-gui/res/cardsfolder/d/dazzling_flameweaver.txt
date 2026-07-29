@@ -9,4 +9,4 @@ SVar:TrigConjure:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Blad
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card until the end of your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Menace\nWard — Pay 3 life.\nWhenever one or more creatures you control deal combat damage to a player, conjure a random card from Dazzling Flameweaver's spellbook into exile. You may play that card until the end of your next turn.
+Oracle:Menace\nWard—Pay 3 life.\nWhenever one or more creatures you control deal combat damage to a player, conjure a random card from Dazzling Flameweaver's spellbook into exile. You may play that card until the end of your next turn.

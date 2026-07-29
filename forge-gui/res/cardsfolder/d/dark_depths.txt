@@ -1,7 +1,7 @@
 Name:Dark Depths
 ManaCost:no cost
 Types:Legendary Snow Land
-K:etbCounter:ICE:10
+K:etbCounter:ICE:10:no Condition:CARDNAME enters with ten ice counters on it.
 A:AB$ RemoveCounter | Cost$ 3 | CounterType$ ICE | CounterNum$ 1 | SpellDescription$ Remove an ice counter from CARDNAME.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_EQ0_ICE | Execute$ TrigToken | TriggerDescription$ When CARDNAME has no ice counters on it, sacrifice it. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible.
 SVar:TrigToken:AB$ Token | TokenScript$ marit_lage | TokenOwner$ You | Cost$ Mandatory Sac<1/CARDNAME>

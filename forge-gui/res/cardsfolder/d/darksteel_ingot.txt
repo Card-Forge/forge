@@ -3,4 +3,4 @@ ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 K:Indestructible
-Oracle:Indestructible\n{T}: Add one mana of any color.
+Oracle:Indestructible (Effects that say "destroy" don't destroy this artifact.)\n{T}: Add one mana of any color.

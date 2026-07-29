@@ -2,5 +2,5 @@ Name:Dutiful Thrull
 ManaCost:W
 Types:Creature Thrull
 PT:1/1
-A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-Oracle:{B}: Regenerate Dutiful Thrull.
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate this creature.
+Oracle:{B}: Regenerate this creature.

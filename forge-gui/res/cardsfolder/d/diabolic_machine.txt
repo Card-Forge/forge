@@ -2,5 +2,5 @@ Name:Diabolic Machine
 ManaCost:7
 Types:Artifact Creature Construct
 PT:4/4
-A:AB$ Regenerate | Cost$ 3 | SpellDescription$ Regenerate CARDNAME.
-Oracle:{3}: Regenerate Diabolic Machine.
+A:AB$ Regenerate | Cost$ 3 | SpellDescription$ Regenerate this creature.
+Oracle:{3}: Regenerate this creature.
