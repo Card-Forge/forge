@@ -211,7 +211,7 @@ public class GameCopier {
         LobbyPlayer lp = p.getPlayer();
         if (!(lp instanceof LobbyPlayerAi)) {
             // TODO should probably also override them if they're normal AI
-            lp = new LobbyPlayerAi(p.getPlayer().getName(), Sets.newHashSet(AIOption.USE_SIMULATION));
+            lp = new LobbyPlayerAi(p.getPlayer().getName(), Sets.newHashSet(AIOption.USE_FULL_SIMULATION));
         }
         clone.setPlayer(lp);
         return clone;

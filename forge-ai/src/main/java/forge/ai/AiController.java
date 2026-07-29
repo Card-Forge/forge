@@ -94,7 +94,7 @@ public class AiController {
     private final AiCardMemory memory;
     private Combat predictedCombat;
     private Combat predictedCombatNextTurn;
-    private boolean useSimulation;
+    private AIOption simMode;
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
     private boolean useLivingEnd;
@@ -108,12 +108,14 @@ public class AiController {
         simPicker = new SpellAbilityPicker(game, player);
     }
 
-    public boolean usesSimulation() {
-        return this.useSimulation;
+    public boolean usesHybridSimulation() {
+        return simMode == AIOption.USE_HYBRID_SIMULATION;
     }
-
-    public void setUseSimulation(boolean value) {
-        this.useSimulation = value;
+    public boolean usesFullSimulation() {
+        return simMode == AIOption.USE_FULL_SIMULATION;
+    }
+    public void setUseSimulation(AIOption mode) {
+        simMode = mode;
     }
 
     public int getAttackAggression() {
@@ -1360,7 +1362,7 @@ public class AiController {
     }
 
     private boolean isChosenPlayAcceptable(SpellAbility ability) {
-        if (useSimulation) {
+        if (usesFullSimulation() || !usesHybridSimulation()) {
             return true;
         }
         return OnePlaySafetyChecker.isAcceptable(player, ability);
@@ -1377,7 +1379,7 @@ public class AiController {
         // Reset priority mana reservation that's meant to work for one spell only
         memory.clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
 
-        if (useSimulation) {
+        if (usesFullSimulation()) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
         }
 
@@ -2124,7 +2126,7 @@ public class AiController {
     public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) {
         Map<DeckSection, List<? extends PaperCard>> complaints = new HashMap<>();
         // When using simulation, AI should be able to figure out most cards.
-        if (!useSimulation) {
+        if (!usesFullSimulation()) {
             complaints = myDeck.getUnplayableAICards().unplayable;
         }
         return complaints;
@@ -2239,7 +2241,7 @@ public class AiController {
 
     public Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa,
                                                    CardCollection fetchList, Player player2, Player decider) {
-        if (useSimulation) {
+        if (usesFullSimulation()) {
             return simPicker.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
         }
 

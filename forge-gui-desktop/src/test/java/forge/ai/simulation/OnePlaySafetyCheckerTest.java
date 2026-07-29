@@ -2,7 +2,6 @@ package forge.ai.simulation;
 
 import java.util.List;
 
-import forge.ai.AITest;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -17,7 +16,8 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-public class OnePlaySafetyCheckerTest extends AITest {
+public class OnePlaySafetyCheckerTest extends SimulationTest {
+
     @Test
     public void testWheelIntoXyrisImpactTremorsReportsLethal() {
         Scenario scenario = createDrawScenario(ZoneType.Hand, true, 6);
@@ -73,7 +73,7 @@ public class OnePlaySafetyCheckerTest extends AITest {
 
     @Test
     public void testAiAvoidsLethalLandPlay() {
-        Game game = initAndCreateGame();
+        Game game = initAndCreateGame(true);
         Player ai = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         ai.setLife(2, null);
@@ -116,7 +116,7 @@ public class OnePlaySafetyCheckerTest extends AITest {
 
     @Test
     public void testEvaluationStopsAfterProposedPlay() {
-        Game game = initAndCreateGame();
+        Game game = initAndCreateGame(true);
         Player ai = game.getPlayers().get(1);
 
         addCard("Island", ai);
@@ -136,7 +136,7 @@ public class OnePlaySafetyCheckerTest extends AITest {
 
     @Test
     public void testNormalAiAllowsExpectedCardCost() {
-        Game game = initAndCreateGame();
+        Game game = initAndCreateGame(true);
         Player ritualAi = game.getPlayers().get(1);
         addCard("Swamp", ritualAi);
         addCardToZone("Dark Ritual", ritualAi, ZoneType.Hand);
@@ -161,7 +161,7 @@ public class OnePlaySafetyCheckerTest extends AITest {
     }
 
     private boolean evaluateMurderIntoGravePact(String aiCreatureName, String opponentCreatureName) {
-        Game game = initAndCreateGame();
+        Game game = initAndCreateGame(true);
         Player ai = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
 
@@ -179,7 +179,7 @@ public class OnePlaySafetyCheckerTest extends AITest {
     }
 
     private Scenario createDrawScenario(ZoneType zone, boolean impactTremors, int life) {
-        Game game = initAndCreateGame();
+        Game game = initAndCreateGame(true);
         Player ai = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         ai.setLife(life, null);

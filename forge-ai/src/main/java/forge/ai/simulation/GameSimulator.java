@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 
+import forge.ai.AIOption;
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
@@ -285,7 +286,7 @@ public class GameSimulator {
     public static void resolveStack(final Game game, final Player opponent) {
         // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
         PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
-        sim.getAi().setUseSimulation(true);
+        sim.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
         opponent.runWithController(() -> {
             final Set<Card> allAffectedCards = new HashSet<>();
             game.getAction().checkStateEffects(false, allAffectedCards);
