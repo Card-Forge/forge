@@ -8,8 +8,11 @@ import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameObject;
 import forge.game.card.Card;
+import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.util.collect.FCollectionView;
@@ -144,10 +147,51 @@ public class GameSimulator {
         if (result != null && sa.hasParam("WithoutManaCost") && !result.hasParam("WithoutManaCost")) {
             result = result.copyWithNoManaCost(aiPlayer);
         }
+        if (result != null && sa.getOptionalCosts().iterator().hasNext()) {
+            List<OptionalCostValue> optionalCosts = GameActionUtil.getOptionalCostValues(result);
+            optionalCosts.removeIf(cost -> !sa.isOptionalCostPaid(cost.getType()));
+            result = GameActionUtil.addOptionalCosts(result, optionalCosts);
+        }
         if (result != null) {
+            copyKeywordChoices(sa, result);
             result.setCastFromPlayEffect(sa.isCastFromPlayEffect());
+            result.setXManaCostPaid(sa.getXManaCostPaid());
+            copyChosenModes(sa, result);
         }
         return result;
+    }
+
+    private static void copyKeywordChoices(SpellAbility source, SpellAbility destination) {
+        if (source.getOptionalKeywords().isEmpty()) {
+            return;
+        }
+        for (KeywordInterface keyword : destination.getHostCard().getKeywords()) {
+            if (source.hasOptionalKeywordAmount(keyword)) {
+                destination.setOptionalKeywordAmount(
+                        keyword, source.getOptionalKeywordAmount(keyword));
+            }
+        }
+    }
+
+    private static void copyChosenModes(SpellAbility source, SpellAbility destination) {
+        if (source.getChosenList() == null) {
+            return;
+        }
+        List<AbilitySub> choices = destination.getAdditionalAbilityList("Choices");
+        List<AbilitySub> chosen = new ArrayList<>();
+        for (AbilitySub sourceMode : source.getChosenList()) {
+            AbilitySub mode = choices.stream()
+                    .filter(choice -> Objects.equals(
+                            choice.getParam("SpellDescription"),
+                            sourceMode.getParam("SpellDescription")))
+                    .findFirst()
+                    .orElse(null);
+            if (mode == null) {
+                return;
+            }
+            chosen.add(mode);
+        }
+        destination.setChosenList(chosen);
     }
 
     private SpellAbility saMatcher(Iterable<SpellAbility> candidates, String desc) {
@@ -192,22 +236,6 @@ public class GameSimulator {
 
             debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
             sa.setActivatingPlayer(aiPlayer);
-            SpellAbility origSaOrSubSa = origSa;
-            SpellAbility saOrSubSa = sa;
-            do {
-                if (origSaOrSubSa.usesTargeting()) {
-                    final boolean divided = origSaOrSubSa.isDividedAsYouChoose();
-                    for (final GameObject o : origSaOrSubSa.getTargets()) {
-                        final GameObject target = copier.find(o);
-                        saOrSubSa.getTargets().add(target);
-                        if (divided) {
-                            saOrSubSa.addDividedAllocation(target, origSaOrSubSa.getDividedValue(o));
-                        }
-                    }
-                }
-                origSaOrSubSa = origSaOrSubSa.getSubAbility();
-                saOrSubSa = saOrSubSa.getSubAbility();
-            } while (saOrSubSa != null);
 
             if (debugPrint && !sa.getAllTargetChoices().isEmpty()) {
                 debugPrint("Targets: ");
@@ -223,6 +251,8 @@ public class GameSimulator {
                 if (interceptor != null) {
                     interceptor.announceX(playingSa);
                     interceptor.chooseTargets(playingSa, GameSimulator.this);
+                } else {
+                    copyTargets(origSa, playingSa);
                 }
             });
             if (!success) {
@@ -231,7 +261,6 @@ public class GameSimulator {
         }
 
         if (resolve) {
-            // TODO: Support multiple opponents.
             Player opponent = aiPlayer.getWeakestOpponent();
             resolveStack(simGame, opponent);
         }
@@ -266,8 +295,28 @@ public class GameSimulator {
         return score;
     }
 
+    private void copyTargets(SpellAbility source, SpellAbility destination) {
+        for (SpellAbility sourceAbility = source, destinationAbility = destination;
+                sourceAbility != null && destinationAbility != null;
+                sourceAbility = sourceAbility.getSubAbility(),
+                        destinationAbility = destinationAbility.getSubAbility()) {
+            if (!sourceAbility.usesTargeting()) {
+                continue;
+            }
+            for (GameObject object : sourceAbility.getTargets()) {
+                GameObject target = copier.find(object);
+                destinationAbility.getTargets().add(target);
+                if (sourceAbility.isDividedAsYouChoose()) {
+                    destinationAbility.addDividedAllocation(
+                            target, sourceAbility.getDividedValue(object));
+                }
+            }
+        }
+    }
+
     public static void resolveStack(final Game game, final Player opponent) {
-        // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
+        // GameCopier gives every copied player an AI controller. Override the selected
+        // opponent only to enable simulation-specific decisions while resolving the stack.
         PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
         sim.setUseSimulation(true);
         opponent.runWithController(() -> {
