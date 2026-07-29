@@ -6,11 +6,14 @@ import java.util.Map;
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
+import forge.card.CardStateName;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardState;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 /**
@@ -19,6 +22,9 @@ import forge.game.zone.ZoneType;
  * UnlockDoorEffect), so pointing it at a fully unlocked Room shuts off one of your own Rooms.
  * Keys to the House pays {3}, taps and sacrifices itself for that ability, so doing it for nothing
  * also throws away a permanent.
+ *
+ * Most Rooms carry a "when you unlock this door" trigger on each face, so where there is a choice
+ * the AI prefers a door that actually pays out over one that only changes which half is active.
  */
 public class UnlockDoorAi extends SpellAbilityAi {
 
@@ -41,7 +47,7 @@ public class UnlockDoorAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactGame);
             }
             sa.resetTargets();
-            sa.getTargets().add(targets.getFirst());
+            sa.getTargets().add(bestTarget(targets));
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
@@ -56,19 +62,59 @@ public class UnlockDoorAi extends SpellAbilityAi {
 
     /**
      * With one door locked the effect offers both doors and locks whichever one is still open, so
-     * pick the locked door to make sure the ability opens a Room instead of closing one.
+     * pick a locked door to make sure the ability opens a Room instead of closing one. Where more
+     * than one door is locked, prefer one whose face has an unlock trigger to run.
      */
     @Override
     public CardState chooseCardState(Player ai, SpellAbility sa, List<CardState> faces,
             Map<String, Object> params) {
         if (isLockOrUnlock(sa) && params != null && params.get("Object") instanceof Card room) {
+            CardState fallback = null;
             for (CardState state : faces) {
-                if (room.getLockedRooms().contains(state.getStateName())) {
+                if (!room.getLockedRooms().contains(state.getStateName())) {
+                    continue;
+                }
+                if (unlockingTriggers(room, state.getStateName())) {
                     return state;
                 }
+                if (fallback == null) {
+                    fallback = state;
+                }
+            }
+            if (fallback != null) {
+                return fallback;
             }
         }
         return faces.isEmpty() ? null : faces.get(0);
+    }
+
+    /** Prefer a Room that pays out when opened over one that just changes which half is active. */
+    private static Card bestTarget(CardCollection rooms) {
+        for (Card room : rooms) {
+            for (CardStateName stateName : room.getLockedRooms()) {
+                if (room.hasState(stateName) && unlockingTriggers(room, stateName)) {
+                    return room;
+                }
+            }
+        }
+        return rooms.getFirst();
+    }
+
+    /**
+     * True when opening this particular door would run a "when you unlock this door" trigger.
+     * Those triggers are declared with ThisDoor$ True and only fire for the face they sit on
+     * (see TriggerUnlockDoor.performTest), so the trigger's own state name is what decides it.
+     */
+    private static boolean unlockingTriggers(Card room, CardStateName stateName) {
+        if (!room.hasState(stateName)) {
+            return false;
+        }
+        for (Trigger t : room.getState(stateName).getTriggers()) {
+            if (t.getMode() == TriggerType.UnlockDoor && stateName.equals(t.getCardStateName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean isLockOrUnlock(SpellAbility sa) {
@@ -76,7 +122,7 @@ public class UnlockDoorAi extends SpellAbilityAi {
     }
 
     private static boolean hasLockedDoor(Card c) {
-        for (var stateName : c.getLockedRooms()) {
+        for (CardStateName stateName : c.getLockedRooms()) {
             if (c.hasState(stateName)) {
                 return true;
             }

@@ -63,4 +63,32 @@ public class UnlockDoorAiTest extends AITest {
         AssertJUnit.assertTrue("AI should have unlocked the remaining door, not locked the open one",
                 room.getUnlockedRooms().contains(CardStateName.RightSplit));
     }
+
+    /**
+     * With both doors locked there is a choice to make. Bottomless Pool (the LeftSplit face) has a
+     * "when you unlock this door" trigger that bounces a creature; Locker Room (RightSplit) only
+     * has a combat damage trigger, so opening it pays out nothing right now. The AI should take
+     * the door that actually does something.
+     */
+    @Test
+    public void prefersTheDoorWithAnUnlockTrigger() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        Card room = addRoom(game, ai);
+        room.setUnlockedRooms(java.util.EnumSet.noneOf(CardStateName.class));
+
+        addCard("Keys to the House", ai);
+        for (int i = 0; i < 5; i++) {
+            addCard("Island", ai);
+        }
+        // something for the unlock trigger to target
+        addCard("Grizzly Bears", game.getPlayers().get(0));
+        game.getAction().checkStateEffects(true);
+
+        playUntilStackClear(game);
+
+        AssertJUnit.assertTrue("AI should have opened the door carrying the unlock trigger",
+                room.getUnlockedRooms().contains(CardStateName.LeftSplit));
+    }
 }
