@@ -3,6 +3,7 @@ package forge.assets;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -521,7 +522,13 @@ public class FSkinFont {
         final Array<String> allCJKFonts = new Array<>();
 
         allCJKFonts.add("None");
-        for (String dirPath : new String[]{ForgeConstants.FONTS_DIR, ForgeConstants.COMMON_FONTS_DIR}) {
+
+        final List<String> fonts = List.of(
+                ForgeConstants.FONTS_DIR,
+                ForgeConstants.COMMON_FONTS_DIR
+        );
+
+        for (String dirPath : fonts) {
             final FileHandle dir = Gdx.files.absolute(dirPath);
             for (FileHandle fontFile : dir.list()) {
                 String fontName = fontFile.name();
