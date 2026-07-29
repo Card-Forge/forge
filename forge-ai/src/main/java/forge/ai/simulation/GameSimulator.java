@@ -27,6 +27,20 @@ public class GameSimulator {
     private Score origScore;
     private SpellAbilityChoicesIterator interceptor;
 
+    // Verifying that the copied game scores identically to the original costs a second full
+    // evaluation (with debug string building enabled) for every simulator that gets constructed.
+    // That's worth paying for in development and in the test suite, where a game copy bug should
+    // fail loudly, but not in a shipped game where it only slows the AI down. Assertions are
+    // enabled by Maven Surefire, so the check still runs for every test.
+    private static final boolean CHECK_GAME_COPY_SCORE = areAssertionsEnabled();
+
+    @SuppressWarnings("AssertWithSideEffects")
+    private static boolean areAssertionsEnabled() {
+        boolean enabled = false;
+        assert enabled = true;
+        return enabled;
+    }
+
     public GameSimulator(SimulationController controller, Game origGame, Player origAiPlayer, PhaseType advanceToPhase) {
         this.controller = controller;
         copier = new GameCopier(origGame);
@@ -41,7 +55,7 @@ public class GameSimulator {
         debugPrint = false;
         origScore = eval.getScoreForGameState(origGame, origAiPlayer);
 
-        if (advanceToPhase == null) {
+        if (advanceToPhase == null && CHECK_GAME_COPY_SCORE) {
             ensureGameCopyScoreMatches(origGame, origAiPlayer);
         }
 
