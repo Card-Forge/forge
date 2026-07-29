@@ -119,6 +119,8 @@ public class UnlockDoorAiTest extends AITest {
 
         AssertJUnit.assertFalse("AI should not have opened the door that would have killed it",
                 room.getUnlockedRooms().contains(CardStateName.LeftSplit));
+        AssertJUnit.assertTrue("AI should have opened the harmless Widow's Walk half instead",
+                room.getUnlockedRooms().contains(CardStateName.RightSplit));
         AssertJUnit.assertTrue("AI should still be alive", ai.getLife() > 0);
     }
 }

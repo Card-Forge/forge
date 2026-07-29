@@ -64,59 +64,66 @@ public class UnlockDoorAi extends SpellAbilityAi {
     /**
      * With one door locked the effect offers both doors and locks whichever one is still open, so
      * pick a locked door to make sure the ability opens a Room instead of closing one. Where more
-     * than one door is locked, prefer one whose face has an unlock trigger to run.
+     * than one door is locked, open the most useful one.
      */
     @Override
     public CardState chooseCardState(Player ai, SpellAbility sa, List<CardState> faces,
             Map<String, Object> params) {
         if (isLockOrUnlock(sa) && params != null && params.get("Object") instanceof Card room) {
-            CardState fallback = null;
+            CardState best = null;
+            int bestRank = Integer.MAX_VALUE;
             for (CardState state : faces) {
                 if (!room.getLockedRooms().contains(state.getStateName())) {
                     continue;
                 }
-                if (unlockingTriggers(room, state.getStateName(), ai)) {
-                    return state;
-                }
-                if (fallback == null) {
-                    fallback = state;
+                int rank = rankDoor(room, state.getStateName(), ai);
+                if (rank < bestRank) {
+                    bestRank = rank;
+                    best = state;
                 }
             }
-            if (fallback != null) {
-                return fallback;
+            if (best != null) {
+                return best;
             }
         }
         return faces.isEmpty() ? null : faces.get(0);
     }
 
-    /** Prefer a Room that pays out when opened over one that just changes which half is active. */
+    /** Prefer a Room with a door actually worth opening over one that only swaps which half is active. */
     private static Card bestTarget(CardCollection rooms, Player ai) {
+        Card best = null;
+        int bestRank = Integer.MAX_VALUE;
         for (Card room : rooms) {
             for (CardStateName stateName : room.getLockedRooms()) {
-                if (room.hasState(stateName) && unlockingTriggers(room, stateName, ai)) {
-                    return room;
+                if (!room.hasState(stateName)) {
+                    continue;
+                }
+                int rank = rankDoor(room, stateName, ai);
+                if (rank < bestRank) {
+                    bestRank = rank;
+                    best = room;
                 }
             }
         }
-        return rooms.getFirst();
+        return best != null ? best : rooms.getFirst();
     }
 
     /**
-     * True when opening this particular door would run a "when you unlock this door" trigger that
-     * the AI actually wants right now. Those triggers are declared with ThisDoor$ True and only
-     * fire for the face they sit on (see TriggerUnlockDoor.performTest), so the trigger's own state
-     * name is what identifies it.
+     * How much we want to open a particular door, lower being better:
+     *   0 - it has a "when you unlock this door" trigger the AI wants to run right now
+     *   1 - it has no unlock trigger, so opening it just turns the other half on
+     *   2 - it has an unlock trigger the AI does not want, so opening it is actively bad
      *
-     * Asking the effect's own AI via doTrigger, rather than just checking that a trigger exists,
-     * matters because plenty of Rooms have an unlock trigger that is useless or harmful in the
-     * current state: Cramped Vents deals 6 damage to a creature an opponent controls, which does
-     * nothing with no creatures to hit, and Derelict Attic draws two cards and loses 2 life, which
-     * is lethal at 2 life.
+     * The last case is the reason this is ranked rather than a boolean. Derelict Attic's trigger
+     * draws two cards and loses 2 life, which is lethal at 2 life, so that door has to lose to the
+     * Widow's Walk half rather than merely fail to win. Note that Card.getLockedRooms returns a
+     * HashSet, so relying on iteration order to break ties is not reproducible between runs.
      */
-    private static boolean unlockingTriggers(Card room, CardStateName stateName, Player ai) {
+    private static int rankDoor(Card room, CardStateName stateName, Player ai) {
         if (!room.hasState(stateName)) {
-            return false;
+            return 1;
         }
+        int rank = 1;
         for (Trigger t : room.getState(stateName).getTriggers()) {
             if (t.getMode() != TriggerType.UnlockDoor || !stateName.equals(t.getCardStateName())) {
                 continue;
@@ -125,16 +132,15 @@ public class UnlockDoorAi extends SpellAbilityAi {
             if (effect == null) {
                 continue;
             }
-            // the trigger's ability has no activator until it actually fires, and the AI logic
-            // below needs one to work out targets and costs
-            if (effect.getActivatingPlayer() == null) {
-                effect.setActivatingPlayer(ai);
-            }
+            // a trigger's ability has no activator until it actually fires, and the AI logic below
+            // needs one to work out targets and costs
+            effect.setActivatingPlayer(ai);
             if (SpellApiToAi.Converter.get(effect).doTrigger(ai, effect, false)) {
-                return true;
+                return 0;
             }
+            rank = 2;
         }
-        return false;
+        return rank;
     }
 
     private static boolean isLockOrUnlock(SpellAbility sa) {
