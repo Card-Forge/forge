@@ -30,7 +30,7 @@
 
   - Tutorials
     - [Tutorial 1, Create your first Plane](Adventure/Tutorial-1-Create-your-First-Plane.md)
-    - [Tutorial 2, A New Look (creating your first map.)](Adventure/Tutorial-2-A-New-Look.md)
+    - [Tutorial 2, A New Look (creating your first map)](Adventure/Tutorial-2-A-New-Look.md)
     - [Tutorial 3, Configuration (Configuring your Plane)](Adventure/Tutorial-3-Configuration.md)
 
 - [Card Scripting API](Card-scripting-API/Card-scripting-API.md)

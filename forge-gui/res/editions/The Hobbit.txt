@@ -21,6 +21,7 @@ ScryfallCode=HOB
 36 M Elrond, Moon-Reader @Christina Kraus
 37 U Elven Raft-Steerer @Christina Kraus
 42 R Great Gilded Boat @Josu Solano
+44 U Lake-town Mariners @Wei Guan
 46 R The Lord of the Eagles @Zezhou Chen
 47 U Master's Councillors @Narendra Bintara Adi
 52 U Ravenhill Flock @Irina Nordsol
@@ -28,12 +29,17 @@ ScryfallCode=HOB
 54 R Roll-Roll-Roll-Roll @Rovina Cai
 55 U Sound the Trumpets @Nereida
 56 U Thranduil's Decree @Javier Charro
+59 R Wizard's Staff @Gaboleps
 61 R Azog, Moria's Ruin @Miklós Ligeti
+64 U Desolation Prowler @Harkalé Linaï
 65 U Down, Down to Goblin-town @Rovina Cai
 68 U Gathering of Darkness @Pavel Kolomeyets
 69 U Gnashing of Teeth @Nereida
 70 M Gollum, Riddle Master @Irvin Rodriguez
 72 U Gollum the Abandoned @Andrea Piparo
+74 U Great Ugly-Looking Goblin @Jason Kang
+75 R Head of the Hunt @Andrea Piparo
+76 M Inside Information @Sean Vo
 77 R The Master of Lake-town @Marius Bota
 78 U Nighthowl Pursuer @Tomas Duchek
 83 R The Sackville-Bagginses @Denman Rooke
@@ -55,9 +61,11 @@ ScryfallCode=HOB
 122 R Cantankerous Keepers @Ramza Psyru
 124 R Down in the Valley @Rovina Cai
 125 U Galion, Elvenking's Butler @Jarel Threat
+129 U Mirkwood Pathmaker @Sean Vo
 134 R Part in Friendship @Jarel Threat
 137 R Through the Forest Gate @Leon Tukker
 142 C Wood Elves @Andreia Ugrai
+143 U Woodland Weavemaster @Nia Kovalevski
 144 M Bard, King of Dale @Xabi Gaztelua
 145 U Bard the Bowman @Miklós Ligeti
 146 R Bard's Company @Jarel Threat
@@ -83,6 +91,7 @@ ScryfallCode=HOB
 201 R The Great Goblin @Ted Nasmith
 202 U Thorin Oakenshield @Ted Nasmith
 203 U Gandalf, Spark Starter @Ted Nasmith
+204 R Glamdring, Foe-hammer @Ted Nasmith
 205 R The Eagles Are Coming! @Denman Rooke
 207 R The Lonely Mountain @Denman Rooke
 208 R Chief Warg's Company @Denman Rooke
@@ -93,6 +102,7 @@ ScryfallCode=HOB
 218 U Bilbo, Luckwearer @Cory Godbey
 219 M Bilbo, Thief in the Night @Ashley Mackenzie
 222 R Azog, Moria's Ruin @Dibujante Nocturno
+224 R Head of the Hunt @Benjamin Ee
 225 R Desert Were-Worm @Dibujante Nocturno
 226 R Desolation of Smaug @Dibujante Nocturno
 228 R Last Light of Durin's Day @Francisco Badilla
@@ -118,6 +128,7 @@ ScryfallCode=HOB
 255 M Bilbo, Thief in the Night @Ashley Mackenzie
 256 M Fateful Discovery @Ashley Mackenzie
 258 R Azog, Moria's Ruin @Dibujante Nocturno
+260 R Head of the Hunt @Benjamin Ee
 261 R Desert Were-Worm @Dibujante Nocturno
 262 R Desolation of Smaug @Dibujante Nocturno
 264 R Last Light of Durin's Day @Francisco Badilla
@@ -140,10 +151,13 @@ ScryfallCode=HOB
 290 M Elrond, Moon-Reader @Christina Kraus
 291 R Great Gilded Boat @Josu Solano
 292 R Riddles in the Dark @Lorenzo Mastroianni
+294 R Wizard's Staff @Gaboleps
+296 M Inside Information @Sean Vo
 297 R The Master of Lake-town @Marius Bota
 299 R The Sackville-Bagginses @Denman Rooke
 300 R Supper for Spiders @Michele Giorgi
 302 R Dáin Ironfoot @Tomas Duchek
+306 R Cantankerous Keepers @Ramza Psyru
 308 R Part in Friendship @Jarel Threat
 310 R Through the Forest Gate @Leon Tukker
 312 R Tom, Bert, and William @Leonardo Borazio

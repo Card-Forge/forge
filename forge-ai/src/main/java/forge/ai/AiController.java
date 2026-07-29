@@ -898,9 +898,7 @@ public class AiController {
             return AiPlayDecision.NeedsToPlayCriteriaNotMet;
         }
 
-        // TODO before suspending some spells try to predict if relevant targets can be expected
         if (sa.getApi() != null) {
-
             String msg = "AiController:canPlaySa: AI checks for if can PlaySa";
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Api", sa.getApi().toString());
@@ -938,6 +936,11 @@ public class AiController {
                         return AiPlayDecision.CantPlayAi;
                     }
                 }
+            }
+            // TODO before suspending some spells try to predict if relevant targets can be expected
+            if ((sa.isPlotting() || sa.isForetelling() || sa.isKeyword(Keyword.SUSPEND)) && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                // don't compete with more important SA AI wants to pay before main2
+                return AiPlayDecision.WaitForMain2;
             }
         }
         if (checkCurseEffects(sa)) {

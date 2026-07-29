@@ -65,9 +65,8 @@ public class ConniveAi extends SpellAbilityAi {
         }
         if (!sa.usesTargeting() || (!sa.getTargets().isEmpty() && sa.isTargetNumberValid())) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     @Override
