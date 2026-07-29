@@ -88,6 +88,69 @@ public final class CdnUuidCache {
     /** Clears the in-memory cache. Package-private for unit tests only. */
     static void clearCacheForTesting() { setCache.clear(); }
 
+    /** The directory local set caches live in, honoring the test override. Package-private for {@link ScryfallManifestSync}. */
+    static String cacheDir() {
+        return localCacheDirOverride != null ? localCacheDirOverride : ForgeConstants.CACHE_CDN_UUID_DIR;
+    }
+
+    /**
+     * Deletes every locally cached CDN UUID set file and clears the in-memory cache.
+     * Exposed as a user-facing "clear CDN image cache" action: a set whose local
+     * copy predates a Scryfall image update (or was cached before it had any image
+     * at all) stays stale until re-fetched, and this is the simplest way to force
+     * that without per-file expiry bookkeeping.
+     */
+    public static void clearCache() {
+        setCache.clear();
+        File dir = new File(cacheDir());
+        File[] files = dir.listFiles();
+        if (files == null) return;
+        for (File f : files) {
+            //noinspection ResultOfMethodCallIgnored
+            f.delete();
+        }
+    }
+
+    /**
+     * Merges externally-sourced (setCode → collectorNumber → lang → uuid) entries into
+     * the on-disk cache, creating or updating {@code {cacheDir}/{setCode}.json.gz}.
+     * Used by {@link ScryfallManifestSync} when a user builds/refreshes their own
+     * lookup data straight from the Scryfall API instead of (or in addition to)
+     * forge-extras.
+     *
+     * <p>Existing entries are never overwritten: forge-extras/CLI-sourced data can
+     * record a double-faced card's distinct front/back UUIDs (a real but rare case),
+     * while a manifest-derived entry only ever has a single UUID (see
+     * {@link ScryfallManifestSync}) — merging must fill gaps, not degrade precision.
+     */
+    static synchronized void mergeSetEntries(String setCode, Map<String, Map<String, String>> newEntries) {
+        File file = localCacheFile(setCode);
+        JsonObject merged = new JsonObject();
+        if (file.exists()) {
+            try (InputStream is = new GZIPInputStream(new FileInputStream(file));
+                 InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
+                merged = JsonParser.parseReader(reader).getAsJsonObject();
+            } catch (Exception e) {
+                Logger.warn("CdnUuidCache: corrupt local cache {}, rebuilding: {}", file, e.getMessage());
+            }
+        }
+
+        for (Map.Entry<String, Map<String, String>> cnEntry : newEntries.entrySet()) {
+            String cn = cnEntry.getKey();
+            JsonObject langObj = merged.has(cn) && merged.get(cn).isJsonObject()
+                    ? merged.getAsJsonObject(cn) : new JsonObject();
+            for (Map.Entry<String, String> langEntry : cnEntry.getValue().entrySet()) {
+                if (!langObj.has(langEntry.getKey())) {
+                    langObj.addProperty(langEntry.getKey(), langEntry.getValue());
+                }
+            }
+            if (langObj.size() > 0) merged.add(cn, langObj);
+        }
+
+        writeLocalCache(file, merged.toString());
+        setCache.remove(setCode); // force a re-read of the freshly-written file on next lookup
+    }
+
     /**
      * Returns the Scryfall CDN image URL for a given card face, or {@code null}
      * if no UUID data is available.
@@ -161,10 +224,7 @@ public final class CdnUuidCache {
     }
 
     private static File localCacheFile(String setCode) {
-        String dir = localCacheDirOverride != null
-                ? localCacheDirOverride
-                : ForgeConstants.CACHE_CDN_UUID_DIR;
-        return new File(dir, setCode + ".json.gz");
+        return new File(cacheDir(), setCode + ".json.gz");
     }
 
     private static String remoteUrl(String setCode) {
