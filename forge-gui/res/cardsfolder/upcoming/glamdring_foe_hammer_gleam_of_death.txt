@@ -1,0 +1,19 @@
+Name:Glamdring, Foe-hammer
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ X | Description$ Instant and sorcery spells you cast cost {X} less to cast, where X is equipped creature's power.
+K:Equip:2
+AlternateMode:Adventure
+SVar:X:Equipped$CardPower
+DeckHints:Type$Instant|Sorcery
+Oracle:Instant and sorcery spells you cast cost {X} less to cast, where X is equipped creature's power.
+
+ALTERNATE
+
+Name:Gleam of Death
+ManaCost:3 U
+Types:Sorcery Adventure
+A:SP$ Mill | NumCards$ 6 | RememberMilled$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Mill six cards, then put all instant and sorcery cards from among them into your hand.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Instant.IsRemembered,Sorcery.IsRemembered | Origin$ Graveyard,Exile | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Mill six cards, then put all instant and sorcery cards from among them into your hand.

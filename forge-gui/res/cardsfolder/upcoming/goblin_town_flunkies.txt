@@ -1,0 +1,9 @@
+Name:Goblin-town Flunkies
+ManaCost:1 R
+Types:Creature Goblin Soldier
+PT:1/1
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBAmass | TriggerDescription$ When this creature enters, amass Goblins 1. (Put a +1/+1 counter on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)
+SVar:DBAmass:DB$ Amass | Type$ Goblin | Num$ 1
+DeckHas:Ability$Counters|Token
+Oracle:Haste\nWhen this creature enters, amass Goblins 1. (Put a +1/+1 counter on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)

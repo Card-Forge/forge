@@ -127,6 +127,31 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.aiProfile = aiProfile;
     }
 
+    /**
+     * Clear the fields a remote client has no business setting, returning
+     * whether any were present. Slot type is server-owned lifecycle state
+     * ({@code connectPlayer} sets REMOTE, {@code disconnectPlayer} OPEN) and
+     * the AI fields configure AI slots, which a REMOTE slot is not; the client
+     * UI offers none of them, so this is a no-op for honest traffic.
+     *
+     * <p>Left alone deliberately: {@code isDevMode} and {@code isArchenemy},
+     * which clients do set legitimately today — whether they should be able to
+     * is a game-design question, not a protocol-authorization one.
+     *
+     * <p>In place rather than into a copy: the event is freshly deserialized
+     * and never re-broadcast, and a field-by-field copy would silently drop any
+     * field added later.
+     */
+    public boolean clearServerOwnedFields() {
+        if (type == null && aiOptions == null && aiProfile == null) {
+            return false;
+        }
+        type = null;
+        aiOptions = null;
+        aiProfile = null;
+        return true;
+    }
+
     public LobbySlotType getType() {
         return type;
     }
@@ -167,6 +192,11 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     public String getSchemeDeckName() { return SchemeDeckName; }
     public String getPlanarDeckName() { return PlanarDeckName; }
     public String getDeckName() { return DeckName; }
+
+    /** Lets the server replace a client-supplied name with a sanitised one. */
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public void setAiProfile(String aiProfile) {
         this.aiProfile = aiProfile;
