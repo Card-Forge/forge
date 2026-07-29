@@ -57,7 +57,7 @@ public class SimulationController {
     }
 
     public boolean shouldRecurse() {
-        return bestScore.value != Integer.MAX_VALUE && getRecursionDepth() < maxDepth;
+        return !GameStateEvaluator.isWinning(bestScore.value) && getRecursionDepth() < maxDepth;
     }
 
     public Plan.Decision getLastDecision() {
