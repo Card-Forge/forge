@@ -19,6 +19,7 @@ package forge.screens.deckeditor;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
@@ -38,6 +39,7 @@ import forge.deck.DeckRecognizer.Token.TokenKey;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gui.CardPicturePanel;
+import forge.gui.FThreads;
 import forge.item.PaperCard;
 import forge.screens.deckeditor.controllers.CDeckEditor;
 import forge.screens.deckeditor.controllers.CStatisticsImporter;
@@ -172,6 +174,13 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     );
     private static final int PADDING_TOKEN_MSG_LENGTH = 45;
 
+    private final FLabel deckUrlLabel = new FLabel.Builder()
+            .text(Localizer.getInstance().getMessage("lblDeckUrlLabel"))
+            .fontSize(14).build();
+    private final FTextField txtDeckUrl = new FTextField.Builder()
+            .ghostText(Localizer.getInstance().getMessage("nlDeckUrlGhostText")).build();
+    private final FButton btnLoadUrl = new FButton(Localizer.getInstance().getMessage("lblLoad"));
+
     private final FHtmlViewer htmlOutput = new FHtmlViewer();
     private final FScrollPane scrollInput = new FScrollPane(this.txtInput, false);
     private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput, false);
@@ -243,6 +252,12 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         this.statsView = new VStatisticsImporter(this.controller.currentGameFormatAllowsCommander());
         this.cStatsView = new CStatisticsImporter(this.statsView);
         initUIComponents(g, currentDeckIsNotEmpty);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                txtInput.requestFocusInWindow();
+            }
+        });
     }
 
     private void initUIComponents(CDeckEditor<TModel> g, boolean currentDeckIsNotEmpty) {
@@ -274,6 +289,10 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         // Action Listeners
         // ----------------
         this.txtInput.getDocument().addDocumentListener(new OnChangeTextUpdate());
+
+        // == A.1 Deck URL toolbar (above the Card List)
+        this.btnLoadUrl.addActionListener(e -> loadFromUrl());
+        this.txtDeckUrl.addActionListener(e -> loadFromUrl());
 
         // == B. Scroll Output (Decklist)
         this.scrollOutput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(),
@@ -541,13 +560,61 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
 
         // === ASSEMBLING ALL PANELS TOGETHER
         // ==================================
-        this.add(this.scrollInput, "cell 0 0, w 40%, growy, pushy, spany 2");
+        JPanel urlPanel = new JPanel(new MigLayout("insets 0 0 0 5, gap 5, fillx"));
+        urlPanel.setOpaque(false);
+        urlPanel.add(this.deckUrlLabel, "ax left");
+        urlPanel.add(this.txtDeckUrl, "growx, pushx, h 28!");
+        urlPanel.add(this.btnLoadUrl, "w 80!, h 28!, ax right");
+
+        JPanel inputColumn = new JPanel(new MigLayout("insets 0, gap 5, fill, wrap 1"));
+        inputColumn.setOpaque(false);
+        inputColumn.add(urlPanel, "growx, h 32!");
+        inputColumn.add(this.scrollInput, "grow, push");
+
+        this.add(inputColumn, "cell 0 0, w 40%, growy, pushy, spany 2");
         this.add(this.scrollOutput, "cell 1 0, w 60%, growy, pushy, spany 2");
         this.add(statsPanel, "cell 2 0, w 480:510:550, growy, pushy, ax c");
         this.add(cardPreview, "cell 2 1, w 480:510:550, h 65%, growy, pushy, ax c");
         this.add(closedOptsPanel, "cell 0 2, left, w 100%, h 25!, spanx 3, hidemode 3");
         this.add(optionsPanel, "cell 0 2, left, w 100%, spanx 3, hidemode 3");
         this.add(cmdPanel, "cell 0 3, w 100%, spanx 3");
+    }
+
+    private void loadFromUrl() {
+        final String url = this.txtDeckUrl.getText().trim();
+        if (url.isEmpty()) {
+            return;
+        }
+        if (!this.txtInput.getText().trim().isEmpty()
+                && !FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("nlConfirmReplaceCardList"))) {
+            return;
+        }
+        setUrlControlsEnabled(false, Localizer.getInstance().getMessage("lblLoadingEllipsis"));
+        FThreads.invokeInBackgroundThread(() -> {
+            String deckText = null;
+            String error = null;
+            try {
+                deckText = controller.getDeckTextFromUrl(url);
+            } catch (IOException ex) {
+                error = ex.getMessage();
+            }
+            final String resultText = deckText;
+            final String errorMsg = error;
+            FThreads.invokeInEdtLater(() -> {
+                setUrlControlsEnabled(true, Localizer.getInstance().getMessage("lblLoad"));
+                if (errorMsg != null) {
+                    FOptionPane.showErrorDialog(errorMsg, Localizer.getInstance().getMessage("lblUnableToLoadDeckUrl"));
+                } else {
+                    txtInput.setText(resultText);
+                }
+            });
+        });
+    }
+
+    private void setUrlControlsEnabled(final boolean enabled, final String buttonText) {
+        this.txtDeckUrl.setEnabled(enabled);
+        this.btnLoadUrl.setEnabled(enabled);
+        this.btnLoadUrl.setText(buttonText);
     }
 
     private void activateCardPreview(HyperlinkEvent e) {
