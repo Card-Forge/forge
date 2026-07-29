@@ -88,6 +88,7 @@ public class GameCopier {
         for (int i = 0; i < origGame.getPlayers().size(); i++) {
             Player origPlayer = origGame.getPlayers().get(i);
             Player newPlayer = newGame.getPlayer(origPlayer.getId());
+            newPlayer.setTeam(origPlayer.getTeam());
             newPlayer.setLife(origPlayer.getLife(), null);
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
