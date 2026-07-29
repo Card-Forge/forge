@@ -3,7 +3,7 @@ ManaCost:X G
 Types:Legendary Creature Mutant Hero
 PT:1/1
 K:Vigilance
-K:etbCounter:P1P1:X:no Condition:CARDNAME enters with X +1/+1 counters on it.
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters with X +1/+1 counters on her.
 SVar:X:Count$xPaid
 A:AB$ PutCounter | Cost$ 1 G T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 DeckHas:Ability$Counters
