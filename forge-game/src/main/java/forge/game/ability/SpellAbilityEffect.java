@@ -897,7 +897,7 @@ public abstract class SpellAbilityEffect {
             discardedBefore.put(e.getKey(), Lists.newArrayList(e.getKey().getDiscardedThisTurn()));
             final CardCollection discardedByPlayer = new CardCollection();
             // iterate a copy: the view may be a live zone list (e.g. whole hand) that discard() mutates
-            for (Card card : Lists.newArrayList(e.getValue())) {
+            for (Card card : e.getValue().threadSafeIterable()) {
                 if (card == null) { continue; }
                 Card moved = e.getKey().discard(card, sa, effect, params);
                 if (moved != null) {

@@ -18,6 +18,7 @@ ScryfallCode=HOC
 10 R Bilbo's Burglaring @Marta Nael
 11 R Dragon's Desire @Marta Nael
 12 R Necklace of Girion @Marta Nael
+14 M Flowering of the White Tree @Omar Rayyan
 15 M The Gaffer @Chuck Lukacs
 16 M Galadriel's Dismissal @Rebecca Guay
 17 M Reprieve @Warren Mahy
@@ -39,14 +40,17 @@ ScryfallCode=HOC
 38 M Tom Bombadil @Omar Rayyan
 39 M Andúril, Flame of the West @Paolo Parente
 40 M Andúril, Narsil Reforged @Jeff Miracola
+41 M Bilbo's Ring @Mark Poole
 43 M Mithril Coat @Ellie Livingston
 44 M The One Ring @Dan Frazier
 45 M Palantír of Orthanc @Chris Seaman
+46 M Relic of Sauron @Warren Mahy
 48 M Minas Morgul, Dark Fortress @James Bousema
 49 M Minas Tirith @Martina Pilcerova
 50 M Mount Doom @James Bousema
 51 M Rivendell @Mark Poole
 52 M The Shire @Danny Schwartz
+54 M Flowering of the White Tree @Omar Rayyan
 55 M The Gaffer @Chuck Lukacs
 56 M Galadriel's Dismissal @Rebecca Guay
 57 M Reprieve @Warren Mahy
@@ -54,8 +58,10 @@ ScryfallCode=HOC
 61 M Witch-king, Bringer of Ruin @Carl Critchlow
 62 M Call Forth the Tempest @Alex Horley-Orlandelli
 63 M Cavern-Hoard Dragon @Jim Pavelec
+64 M Arwen, Weaver of Hope @Danny Schwartz
 65 M Delighted Halfling @Heather Hudson
 66 M Elven Chorus @Stephen L. Walsh
+67 M Last March of the Ents @Wayne Reynolds
 68 M Aragorn and Arwen, Wed @Heather Hudson
 69 M Aragorn, the Uniter @Paolo Parente
 70 M Arwen, Mortal Queen @Kev Walker
@@ -66,8 +72,11 @@ ScryfallCode=HOC
 78 M Tom Bombadil @Omar Rayyan
 79 M Andúril, Flame of the West @Paolo Parente
 80 M Andúril, Narsil Reforged @Jeff Miracola
+81 M Bilbo's Ring @Mark Poole
+83 M Mithril Coat @Ellie Livingston
 84 M The One Ring @Dan Frazier
 85 M Palantír of Orthanc @Chris Seaman
+86 M Relic of Sauron @Warren Mahy
 88 M Minas Morgul, Dark Fortress @James Bousema
 89 M Minas Tirith @Martina Pilcerova
 90 M Mount Doom @James Bousema
