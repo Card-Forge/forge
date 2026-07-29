@@ -117,7 +117,11 @@ public class AiDeckStatistics {
             return fromCards(cardlist);
         }
 
-        return fromDeck(deck, player);
+        // These statistics are a pure function of the decklist, which doesn't change during a game.
+        // Simulation copies share the same Deck instance (see GameCopier.clonePlayer), so caching on
+        // it also avoids rebuilding every card of the deck for each simulated state that gets scored.
+        return AiCache.getCached("aiDeckStatistics", () -> fromDeck(deck, player),
+                List.of(AiCache::identity), deck);
     }
 
 }
