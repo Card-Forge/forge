@@ -117,26 +117,41 @@ public class GameStateEvaluator {
     private Score getScoreForGameStateImpl(Game game, Player aiPlayer) {
         // TODO: try and reuse evaluateBoardPosition
         int handScore = 0;
+        int myCards = 0;
+        int alliedCards = 0;
+        int opponentCards = 0;
         int alliedLife = 0;
         int alliedPlayers = 0;
+        int allies = 0;
         int opponentLife = 0;
         int opponents = 0;
         for (Player player : game.getPlayers()) {
             int cards = player.getCardsIn(ZoneType.Hand).size();
             if (player.isOpponentOf(aiPlayer)) {
                 handScore -= 4 * cards;
+                opponentCards += cards;
                 opponentLife += player.getLife();
-                debugPrint("  Opponent " + (++opponents) + ": " + cards
-                        + " cards, " + player.getLife() + " life");
+                debugPrint("  Opponent " + (++opponents) + " life: -" + player.getLife());
             } else {
                 int fullValueCards = player.isUnlimitedHandSize()
                         ? cards : min(cards, player.getMaxHandSize());
                 handScore += cards + 4 * fullValueCards;
                 alliedLife += player.getLife();
-                debugPrint("  Ally " + (++alliedPlayers) + ": " + cards
-                        + " cards, " + player.getLife() + " life");
+                alliedPlayers++;
+                if (player == aiPlayer) {
+                    myCards = cards;
+                    debugPrint("  My life: " + player.getLife());
+                } else {
+                    alliedCards += cards;
+                    debugPrint("  Ally " + (++allies) + " life: " + player.getLife());
+                }
             }
         }
+        debugPrint("My cards in hand: " + myCards);
+        if (allies > 0) {
+            debugPrint("Allied cards in hand: " + alliedCards);
+        }
+        debugPrint("Their cards in hand: " + opponentCards);
         // TODO weight cards in hand more if opponent has discard or if we have looting or can bluff a trick
         int score = handScore + 2 * alliedLife / alliedPlayers;
         if (opponents > 0) {
