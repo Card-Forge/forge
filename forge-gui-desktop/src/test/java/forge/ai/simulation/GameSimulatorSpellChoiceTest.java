@@ -12,13 +12,13 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.keyword.Keyword;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class GameSimulatorSpellChoiceTest extends SimulationTest {
+
     @Test
     public void testPreservesKickerChoice() {
         Game game = createGame();
@@ -175,8 +175,7 @@ public class GameSimulatorSpellChoiceTest extends SimulationTest {
 
     private Game createGame() {
         Game game = initAndCreateGame();
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, game.getPlayers().get(1));
-        game.getAction().checkStateEffects(true);
+        moveToMain2(game, game.getPlayers().get(1));
         return game;
     }
 
@@ -214,9 +213,4 @@ public class GameSimulatorSpellChoiceTest extends SimulationTest {
         CharmEffect.chainAbilities(ability, modes);
     }
 
-    private void fillLibrary(Player player, int count) {
-        for (int i = 0; i < count; i++) {
-            addCardToZone("Runeclaw Bear", player, ZoneType.Library);
-        }
-    }
 }

@@ -10,7 +10,6 @@ import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -216,17 +215,6 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
     private AiController ai(Player player) {
         return ((PlayerControllerAi) player.getController()).getAi();
-    }
-
-    private void fillLibrary(Player player, int count) {
-        for (int i = 0; i < count; i++) {
-            addCardToZone("Runeclaw Bear", player, ZoneType.Library);
-        }
-    }
-
-    private void moveToMain2(Game game, Player player) {
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, player);
-        game.getAction().checkStateEffects(true);
     }
 
     private static final class Scenario {

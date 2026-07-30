@@ -50,8 +50,7 @@ final class SpellAbilityChoiceCopier {
                 GameObject destinationTarget = gameObjectMapper.apply(sourceTarget);
                 destinationAbility.getTargets().add(destinationTarget);
                 if (sourceAbility.isDividedAsYouChoose()) {
-                    destinationAbility.addDividedAllocation(
-                            destinationTarget, sourceAbility.getDividedValue(sourceTarget));
+                    destinationAbility.addDividedAllocation(destinationTarget, sourceAbility.getDividedValue(sourceTarget));
                 }
             }
         }
@@ -68,8 +67,7 @@ final class SpellAbilityChoiceCopier {
             for (KeywordInterface destinationKeyword : destination.getHostCard().getKeywords()) {
                 if (sourceKeyword.getKeyword() == destinationKeyword.getKeyword()
                         && Objects.equals(sourceKeyword.getOriginal(), destinationKeyword.getOriginal())) {
-                    destination.setOptionalKeywordAmount(
-                            destinationKeyword, source.getOptionalKeywordAmount(sourceKeyword));
+                    destination.setOptionalKeywordAmount(destinationKeyword, source.getOptionalKeywordAmount(sourceKeyword));
                     break;
                 }
             }
@@ -88,8 +86,7 @@ final class SpellAbilityChoiceCopier {
                     .filter(choice -> Objects.equals(
                             choice.getParam("SpellDescription"),
                             sourceMode.getParam("SpellDescription")))
-                    .findFirst()
-                    .orElse(null);
+                    .findFirst().orElse(null);
             if (destinationMode == null) {
                 return false;
             }
