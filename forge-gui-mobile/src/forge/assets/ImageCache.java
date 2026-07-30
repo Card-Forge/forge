@@ -564,8 +564,8 @@ public class ImageCache {
 
         // Only use AssetManager for bundled assets (not downloaded images)
         if (!isDownloadedImage) {
-            //load to assetmanager - card images are opaque, so use the RGB565 card parameter (half the RGBA8888
-            //footprint) to bound the bundled-texture memory that grows over a long game (cardsLoaded climb)
+            //load to assetmanager with the card texture parameter (RGB565 on iOS to bound native memory,
+            //full-quality RGBA8888 elsewhere - see Assets.getCardTextureFilter())
             try {
                 if (Forge.getAssets().manager().get(fileName, Texture.class, false) == null) {
                     Forge.getAssets().manager().load(fileName, Texture.class, Forge.getAssets().getCardTextureFilter());

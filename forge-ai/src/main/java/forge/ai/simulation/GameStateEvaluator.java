@@ -68,13 +68,31 @@ public class GameStateEvaluator {
         return str;
     }
 
+    // Winning and losing are still the extremes of the range, but a win twenty turns from now is
+    // worth less than a win this turn, and a loss we can put off is better than one we cannot.
+    // GameSimulator returns Integer.MIN_VALUE to mean "this line could not be simulated", so the
+    // very bottom of the range is left alone and a real loss is scored just above it.
+    private static final int GAME_OVER_TURN_PENALTY = 1000;
+    private static final int MAX_DISCOUNTED_TURNS = 1000000;
+
+    /** True for any score that means the AI has won, however far off that win is. */
+    public static boolean isWinning(int score) {
+        return score > Integer.MAX_VALUE - (long) MAX_DISCOUNTED_TURNS * GAME_OVER_TURN_PENALTY;
+    }
+
     private Score getScoreForGameOver(Game game, Player aiPlayer) {
+        // a game long enough to overflow the discount is not one we can reason about anyway
+        int turn = Math.min(Math.max(game.getPhaseHandler().getTurn(), 0), MAX_DISCOUNTED_TURNS);
         if (game.getOutcome().getWinningTeam() == aiPlayer.getTeam() ||
                 game.getOutcome().isWinner(aiPlayer.getRegisteredPlayer())) {
-            return new Score(Integer.MAX_VALUE);
+            // prefer winning sooner
+            // TODO should consider recursion depth for the less complex combos more likely to succeed
+            return new Score(Integer.MAX_VALUE - turn * GAME_OVER_TURN_PENALTY);
         }
 
-        return new Score(Integer.MIN_VALUE);
+        // prefer losing later, staying clear of MIN_VALUE so a loss is never mistaken for a
+        // failed simulation
+        return new Score(Integer.MIN_VALUE + 1 + turn * GAME_OVER_TURN_PENALTY);
     }
 
     public Score getScoreForGameState(Game game, Player aiPlayer) {

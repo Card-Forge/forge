@@ -188,6 +188,17 @@ public class AITest {
         return c;
     }
 
+    protected void fillLibrary(Player player, int count) {
+        for (int i = 0; i < count; i++) {
+            addCardToZone("Runeclaw Bear", player, ZoneType.Library);
+        }
+    }
+
+    protected void moveToMain2(Game game, Player player) {
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, player);
+        game.getAction().checkStateEffects(true);
+    }
+
     protected void playUntilStackClear(Game game) {
         do {
             game.getPhaseHandler().mainLoopStep();
