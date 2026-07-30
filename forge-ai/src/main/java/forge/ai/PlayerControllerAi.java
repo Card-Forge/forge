@@ -454,7 +454,9 @@ public class PlayerControllerAi extends PlayerController {
         if (host.hasAlternateState()) {
             host = host.getGame().getCardState(host);
         }
-        effectSA.setActivatingPlayer(host.getController());
+        if (effectSA != null) {
+            effectSA.setActivatingPlayer(host.getController());
+        }
         return brains.aiShouldRun(replacementEffect, effectSA, host, affected);
     }
 
