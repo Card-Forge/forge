@@ -44,6 +44,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -836,7 +837,7 @@ public class PlayerControllerAi extends PlayerController {
                 sa.resolve();
             }
         } else {
-            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerRunnable(sa));
+            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerAction(sa));
         }
         return true;
     }
@@ -846,11 +847,10 @@ public class PlayerControllerAi extends PlayerController {
      * defers the human choice from canPlayAI (worker thread with possibly low timeout)
      * to handlePlayingSpellAbility (game thread, no timeout).
      */
-    private Runnable getDeferredTargetingPlayerRunnable(SpellAbility sa) {
-        SpellAbility root = sa;
+    private Consumer<SpellAbility> getDeferredTargetingPlayerAction(SpellAbility sa) {
         while (sa != null) {
             if (sa.hasParam("TargetingPlayer") && sa.getTargetingPlayer() != null) {
-                return () -> {
+                return root -> {
                     SpellAbility cur = root;
                     while (cur != null) {
                         if (cur.hasParam("TargetingPlayer") && cur.getTargetingPlayer() != null) {
@@ -1604,6 +1604,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
+        if (sa.hasOptionalKeywordAmount(keyword)) {
+            return Math.min(sa.getOptionalKeywordAmount(keyword), max);
+        }
         // TODO: improve the logic depending on the keyword and the playability of the cost-modified SA (enough targets present etc.)
         if (keyword.getKeyword() == Keyword.CASUALTY
                 && "true".equalsIgnoreCase(sa.getHostCard().getSVar("AINoCasualtyPayment"))) {
