@@ -35,7 +35,6 @@ public class GameStateEvaluator {
 
     private static class CombatSimResult {
         public GameCopier copier;
-        public Game gameCopy;
     }
     private CombatSimResult simulateUpcomingCombatThisTurn(final Game evalGame, final Player aiPlayer) {
         PhaseType phase = evalGame.getPhaseHandler().getPhase();
@@ -56,7 +55,6 @@ public class GameStateEvaluator {
         gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE, () -> GameSimulator.resolveStack(gameCopy, aiPlayer.getWeakestOpponent()));
         CombatSimResult result = new CombatSimResult();
         result.copier = copier;
-        result.gameCopy = gameCopy;
         return result;
     }
 
@@ -110,9 +108,9 @@ public class GameStateEvaluator {
         if (result != null) {
             Player aiPlayerCopy = (Player) result.copier.find(aiPlayer);
             if (!aiPlayerCopy.isInGame()) {
-                return getTerminalScore(result.gameCopy, aiPlayerCopy);
+                return getTerminalScore(result.copier.getCopiedGame(), aiPlayerCopy);
             }
-            return getScoreForGameStateImpl(result.gameCopy, aiPlayerCopy);
+            return getScoreForGameStateImpl(result.copier.getCopiedGame(), aiPlayerCopy);
         }
         return getScoreForGameStateImpl(game, aiPlayer);
     }

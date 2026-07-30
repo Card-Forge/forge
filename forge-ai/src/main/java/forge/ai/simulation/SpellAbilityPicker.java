@@ -31,8 +31,8 @@ public class SpellAbilityPicker {
     private Plan plan;
     private int numSimulations;
 
-    public SpellAbilityPicker(Game game, Player player) {
-        this.game = game;
+    public SpellAbilityPicker(Player player) {
+        this.game = player.getGame();
         this.player = player;
     }
 
