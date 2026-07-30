@@ -72,6 +72,29 @@ public class PlayerZoneBattlefield extends PlayerZone {
     }
 
     /**
+     * Attempts to merge the given token into an existing stack, or creates a new
+     * stack entry if no compatible stack exists. The individual Card is removed
+     * from cardList so it won't appear as a distinct game object, but the Card
+     * reference itself remains valid for any bookkeeping that already holds it.
+     *
+     * @return true if the token was stacked (either merged or created new stack)
+     */
+    public final boolean tryStackToken(Card c) {
+        if (c == null || c.getGamePieceType() != GamePieceType.TOKEN) return false;
+        for (StackedTokenCard stack : stackedTokens) {
+            if (stack.canMerge(c)) {
+                cardList.remove(c);
+                stack.addQuantity(1);
+                return true;
+            }
+        }
+        // No compatible stack — start a new one
+        cardList.remove(c);
+        stackedTokens.add(new StackedTokenCard(c, 1));
+        return true;
+    }
+
+    /**
      * Materializes any stacked tokens into individual Card objects in cardList.
      * Call this before any read that requires distinct Card references.
      */

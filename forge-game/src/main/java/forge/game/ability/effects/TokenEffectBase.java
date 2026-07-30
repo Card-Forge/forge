@@ -169,6 +169,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     triggerList.put(ZoneType.None, ZoneType.None, moved);
                     continue;
                 }
+                // Stack identical tokens at creation time to avoid memory bloat
+                if (moved.getZone() instanceof PlayerZoneBattlefield) {
+                    ((PlayerZoneBattlefield) moved.getZone()).tryStackToken(moved);
+                }
                 triggerList.put(ZoneType.None, moved.getZone().getZoneType(), moved);
 
                 triggerList.addToken(lki, creator.getNumTokenCreatedThisTurn() == 0);
