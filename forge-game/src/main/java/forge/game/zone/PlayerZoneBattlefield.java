@@ -6,37 +6,33 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game.zone;
 
+import forge.card.GamePieceType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.StackedTokenCard;
 import forge.game.player.Player;
 
-/**
- * <p>
- * PlayerZoneComesIntoPlay class.
- * </p>
- * 
- * @author Forge
+import java.util.ArrayList;
+import java.util.List;
 
- * @version $Id$
- */
 public class PlayerZoneBattlefield extends PlayerZone {
-    /** Constant <code>serialVersionUID=5750837078903423978L</code>. */
     private static final long serialVersionUID = 5750837078903423978L;
 
     private boolean trigger = true;
     private CardCollection meldedCards = new CardCollection();
+    private final List<StackedTokenCard> stackedTokens = new ArrayList<>();
 
     public PlayerZoneBattlefield(final ZoneType zone, final Player player) {
         super(zone, player);
@@ -52,7 +48,6 @@ public class PlayerZoneBattlefield extends PlayerZone {
         meldedCards.remove(c);
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void add(final Card c, final Integer position, final Card latestState) {
         if (c == null) {
@@ -62,7 +57,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
         super.add(c, position, latestState);
 
         if (trigger) {
-            c.setSickness(true); // summoning sickness
+            c.setSickness(true);
         }
     }
 
@@ -71,33 +66,82 @@ public class PlayerZoneBattlefield extends PlayerZone {
     }
 
     @Override
-    public final CardCollectionView getCards(final boolean filter) {
-        // Battlefield filters out Phased Out cards by default. Needs to call
-        // getCards(false) to get Phased Out cards
+    public final void removeAllCards(boolean forcedWithoutEvents) {
+        expandStacks();
+        super.removeAllCards(forcedWithoutEvents);
+    }
 
-        CardCollectionView cards = super.getCards(false);
-        if (!filter) {
-            return cards;
+    @Override
+    public final int size() {
+        int count = cardList.size();
+        for (StackedTokenCard stack : stackedTokens) {
+            count += stack.getQuantity();
         }
+        return count;
+    }
 
-        boolean hasFilteredCard = false;
-        for (Card c : cards) {
-            if (c.isPhasedOut()) {
-                hasFilteredCard = true;
-                break;
+    /**
+     * Materializes any stacked tokens into individual Card objects in cardList.
+     * Call this before any read that requires distinct Card references.
+     */
+    public final void expandStacks() {
+        if (stackedTokens.isEmpty()) return;
+        for (StackedTokenCard stack : stackedTokens) {
+            if (stack.isEmpty()) continue;
+            // promoteAll returns individual copies; add them to cardList
+            cardList.addAll(stack.promoteAll());
+        }
+        stackedTokens.clear();
+    }
+
+    /**
+     * Compresses groups of identical tokens into StackedTokenCard entries.
+     * Run after batch token creation to defer Card object allocation.
+     *
+     * expandStacks() must be called before any operation that iterates cards
+     * and expects distinct Card references (targeting, destruction, events).
+     */
+    public final void compressTokens() {
+        CardCollection toRemove = new CardCollection();
+        for (Card c : cardList) {
+            if (c.getGamePieceType() != GamePieceType.TOKEN || c.isPhasedOut()) {
+                continue;
             }
-        }
-
-        if (hasFilteredCard) {
-            CardCollection filteredCollection = new CardCollection();
-            for (Card c : cards) {
-                if (!c.isPhasedOut()) {
-                    filteredCollection.add(c);
+            boolean merged = false;
+            for (StackedTokenCard stack : stackedTokens) {
+                if (stack.canMerge(c)) {
+                    stack.addQuantity(1);
+                    toRemove.add(c);
+                    merged = true;
+                    break;
                 }
             }
-            cards = filteredCollection;
+            if (!merged) {
+                stackedTokens.add(new StackedTokenCard(c, 1));
+                toRemove.add(c);
+            }
         }
-        return cards;
+        cardList.removeAll(toRemove);
+    }
+
+    /**
+     * Expands stacks before returning cards to ensure the engine sees distinct references.
+     * Without this, mass-removal and trigger systems would malfunction on stacked tokens.
+     */
+    @Override
+    public final CardCollectionView getCards(final boolean filter) {
+        expandStacks();
+        return super.getCards(filter);
+    }
+
+    @Override
+    public java.util.Iterator<Card> iterator() {
+        expandStacks();
+        return super.iterator();
+    }
+
+    public final List<StackedTokenCard> getStackedTokens() {
+        return stackedTokens;
     }
 
     public final CardCollection getMeldedCards() {

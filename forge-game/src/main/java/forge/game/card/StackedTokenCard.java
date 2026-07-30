@@ -28,9 +28,8 @@
  */
 package forge.game.card;
 
-import forge.game.Game;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
+
 import forge.card.GamePieceType;
 
 import java.util.ArrayList;
@@ -128,20 +127,20 @@ public class StackedTokenCard {
     /**
      * Materializes {@code count} individual Card objects from this stack.
      * The stack quantity is reduced by {@code count}. The returned cards are
-     * independent copies of the prototype, each with a fresh card ID.
+     * independent copies of the prototype with fresh card IDs, but are NOT
+     * placed in any zone. The caller is responsible for zone placement.
      *
      * <p>Call this when an effect needs to differentiate individual tokens — e.g.,
      * targeting a single token, dealing damage to specific creatures, etc.</p>
      *
      * @param count how many cards to promote; must be <= quantity.
-     * @return list of freshly materialized Card objects placed in the same zone as prototype.
+     * @return list of freshly materialized Card objects (not yet in any zone).
      */
     public List<Card> promote(final int count) {
         if (count < 1 || count > quantity) {
             throw new IllegalArgumentException("StackedTokenCard.promote: count " + count + " out of bounds [1," + quantity + "]");
         }
 
-        final Game game = prototype.getGame();
         final Player owner = prototype.getOwner();
         final Player controller = prototype.getController();
         final long timestamp = prototype.getGameTimestamp();
@@ -156,8 +155,6 @@ public class StackedTokenCard {
             }
             copy.setGameTimestamp(timestamp);
             copy.setGamePieceType(GamePieceType.TOKEN);
-            // Place the materialized card in the battlefield zone directly
-            owner.getZone(ZoneType.Battlefield).add(copy);
             promoted.add(copy);
         }
 

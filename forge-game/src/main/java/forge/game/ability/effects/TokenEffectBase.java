@@ -27,6 +27,8 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
+import forge.game.zone.PlayerZoneBattlefield;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 public abstract class TokenEffectBase extends SpellAbilityEffect {
@@ -216,6 +218,14 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 if (sa.hasParam("CleanupForEach")) {
                     moved.removeRemembered(prototype.getRemembered());
                 }
+            }
+        }
+
+        // Compress identical tokens into stacks on each player's battlefield
+        for (Player p : game.getPlayers()) {
+            Zone bf = p.getZone(ZoneType.Battlefield);
+            if (bf instanceof PlayerZoneBattlefield) {
+                ((PlayerZoneBattlefield) bf).compressTokens();
             }
         }
 
