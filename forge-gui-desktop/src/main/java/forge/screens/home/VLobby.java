@@ -14,7 +14,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.ai.AIOption;
 import forge.deck.*;
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
@@ -425,7 +424,7 @@ public class VLobby implements ILobbyView {
                 panel.setIsReady(slot.isReady());
                 panel.setIsDevMode(slot.isDevMode());
                 panel.setIsArchenemy(slot.isArchenemy());
-                panel.setUseAiSimulation(slot.getAiOptions().contains(AIOption.USE_SIMULATION));
+                panel.setUseAiSimulation(slot.getAiOptions());
                 panel.setMayEdit(lobby.mayEdit(i));
                 panel.setMayControl(lobby.mayControl(i));
                 panel.setMayRemove(lobby.mayRemove(i));

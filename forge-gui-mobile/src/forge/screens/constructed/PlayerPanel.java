@@ -1083,7 +1083,7 @@ public class PlayerPanel extends FContainer {
 
     public Set<AIOption> getAiOptions() {
         return isSimulatedAi()
-                ? ImmutableSet.of(AIOption.USE_SIMULATION)
+                ? ImmutableSet.of(AIOption.USE_FULL_SIMULATION)
                 : Collections.emptySet();
     }
     private boolean isSimulatedAi() {

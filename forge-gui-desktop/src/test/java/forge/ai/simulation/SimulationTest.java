@@ -24,12 +24,15 @@ import forge.model.FModel;
 public class SimulationTest extends AITest {
 
     public Game initAndCreateGame() {
+        return initAndCreateGame(false);
+    }
+    public Game initAndCreateGame(boolean hybrid) {
         // need to be done after FModel.initialize, or the Localizer isn't loaded yet
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
         Set<AIOption> options = new HashSet<>();
-        options.add(AIOption.USE_SIMULATION);
+        options.add(hybrid ? AIOption.USE_HYBRID_SIMULATION : AIOption.USE_FULL_SIMULATION);
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", options)));
         GameRules rules = new GameRules(GameType.Constructed);
         Match match = new Match(rules, players, "Test");
@@ -43,11 +46,6 @@ public class SimulationTest extends AITest {
     }
 
     protected GameSimulator createSimulator(Game game, Player p) {
-        return new GameSimulator(new SimulationController(new Score(0)) {
-            @Override
-            public boolean shouldRecurse() {
-                return false;
-            }
-        }, game, p, null);
+        return new GameSimulator(new SimulationController(new Score(0), 0), game, p, null);
     }
 }
