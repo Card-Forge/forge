@@ -1,19 +1,22 @@
 # Reforge Commander
 
-Reforge Commander is a Commander-focused fork of [Card-Forge/forge](https://github.com/Card-Forge/forge).
+Reforge Commander is a **modern, Commander-first** fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). It strips the bloated multi-mode surface area of upstream Forge to deliver a fast, clean client optimized for playing Commander with friends.
 
-It aims to optimize engine performance for large token board states (e.g. Scute Swarm, Krenko), streamline the UI around Commander/EDH gameplay, and maintain zero-conflict upstream synchronization with official Forge card releases.
+Target: a new user should build a deck and start a game in under two minutes. An expert should be able to customize everything.
 
-> Note: Reforge Commander operates independently and is not affiliated with Wizards of the Coast or the core Card-Forge development team.
+> Note: Reforge Commander operates independently and is not affiliated with Wizards of the Coast.
 
 ---
 
-## Core Focus & Differences
+## Core Focus
 
-- **Token Engine Optimization**: Introduces flyweight token handling (`StackedTokenCard`) and optimized AI state cloning to eliminate lag and timeouts on heavy token battlefields.
-- **UI Streamlining**: Isolates interface submenus to focus directly on Commander matches and deck building.
-- **Java 17 Bytecode Baseline**: Global Maven compiler targeting for cross-platform Java 17+ compatibility.
-- **Upstream Synchronization**: Maintained in structural alignment with `Card-Forge/forge` main repository to merge card scripts and rules updates effortlessly.
+- **Commander-first UX**: The entire UI is optimized around Commander/EDH. Non-Commander modes are hidden. Smart defaults reduce setup friction.
+- **Multiplayer-first**: Playing with friends is the primary flow. AI games exist but the UX prioritizes lobby, invites, and match setup.
+- **Performance at scale**: Flyweight token engine (`StackedTokenCard`) keeps large board states (Scute Swarm, Krenko) snappy. O(1) memory for identical token populations.
+- **Personalization without clutter**: Powerful deck tools, theme options, and preference knobs for power users — surfaced only when needed.
+- **Upstream-compatible**: Additive-only code changes. Card scripts and rules updates merge cleanly from `Card-Forge/forge`.
+
+> **Note:** The flyweight optimization class exists but is not yet wired into the game engine. See [Development Status](docs/development.md) for the integration roadmap.
 
 ---
 
@@ -31,7 +34,16 @@ mvn clean install -DskipTests
 
 # Build desktop client module only
 mvn clean install -pl :forge-gui-desktop -am -DskipTests
+
+# Run Reforge Commander directly from source
+mvn -P run-commander exec:java -pl :forge-gui-desktop
 ```
+
+---
+
+## Development Status
+
+See [docs/development.md](docs/development.md) for the full roadmap, known gaps, and priority fixes.
 
 ---
 
