@@ -7,4 +7,4 @@ SVar:QuickSpell:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | Caster$
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-Oracle:{T}: Add {C}.\n{1}, {T}, Sacrifice Emergence Zone: You may cast spells this turn as though they had flash.
+Oracle:{T}: Add {C}.\n{1}, {T}, Sacrifice this land: You may cast spells this turn as though they had flash.
