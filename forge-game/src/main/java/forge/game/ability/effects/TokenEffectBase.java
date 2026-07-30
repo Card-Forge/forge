@@ -221,14 +221,6 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             }
         }
 
-        // Compress identical tokens into stacks on each player's battlefield
-        for (Player p : game.getPlayers()) {
-            Zone bf = p.getZone(ZoneType.Battlefield);
-            if (bf instanceof PlayerZoneBattlefield) {
-                ((PlayerZoneBattlefield) bf).compressTokens();
-            }
-        }
-
         if (sa.hasParam("AtEOT")) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), allTokens);
         }

@@ -46,7 +46,7 @@ import forge.util.MyRandom;
 public class Zone implements java.io.Serializable, Iterable<Card> {
     private static final long serialVersionUID = -5687652485777639176L;
 
-    private final CardCollection cardList = new CardCollection();
+    protected final CardCollection cardList = new CardCollection();
     protected final ZoneType zoneType;
     protected final Game game;
 
@@ -176,7 +176,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.ComplexUpdate, null));
     }
 
-    public final void removeAllCards(boolean forcedWithoutEvents) {
+    public void removeAllCards(boolean forcedWithoutEvents) {
         if (forcedWithoutEvents) {
             cardList.clear();
         } else {

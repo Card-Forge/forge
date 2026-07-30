@@ -66,18 +66,9 @@ public class PlayerZoneBattlefield extends PlayerZone {
     }
 
     @Override
-    public final void removeAllCards(boolean forcedWithoutEvents) {
-        expandStacks();
+    public void removeAllCards(boolean forcedWithoutEvents) {
+        stackedTokens.clear();
         super.removeAllCards(forcedWithoutEvents);
-    }
-
-    @Override
-    public final int size() {
-        int count = cardList.size();
-        for (StackedTokenCard stack : stackedTokens) {
-            count += stack.getQuantity();
-        }
-        return count;
     }
 
     /**
