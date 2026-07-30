@@ -1,12 +1,12 @@
 package forge.ai.simulation;
 
 
+import forge.ai.AIOption;
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.GameActionUtil;
-import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -155,6 +155,10 @@ public class GameSimulator {
             result = saMatcher(GameActionUtil.getAlternativeCosts(cSa, aiPlayer, true), desc);
         }
 
+        if (result != null) {
+            result = SpellAbilityChoiceCopier.copyCastChoices(sa, result, aiPlayer);
+        }
+
         return result;
     }
 
@@ -200,37 +204,21 @@ public class GameSimulator {
 
             debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
             sa.setActivatingPlayer(aiPlayer);
-            SpellAbility origSaOrSubSa = origSa;
-            SpellAbility saOrSubSa = sa;
-            do {
-                if (origSaOrSubSa.usesTargeting()) {
-                    final boolean divided = origSaOrSubSa.isDividedAsYouChoose();
-                    for (final GameObject o : origSaOrSubSa.getTargets()) {
-                        final GameObject target = copier.find(o);
-                        saOrSubSa.getTargets().add(target);
-                        if (divided) {
-                            saOrSubSa.addDividedAllocation(target, origSaOrSubSa.getDividedValue(o));
-                        }
-                    }
-                }
-                origSaOrSubSa = origSaOrSubSa.getSubAbility();
-                saOrSubSa = saOrSubSa.getSubAbility();
-            } while (saOrSubSa != null);
 
-            if (debugPrint && !sa.getAllTargetChoices().isEmpty()) {
-                debugPrint("Targets: ");
-                for (TargetChoices target : sa.getAllTargetChoices()) {
-                    System.out.print(target);
-                }
-                System.out.println();
-            }
-            final SpellAbility playingSa = sa;
-            // Is this right?
             simGame.copyLastState();
-            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, () -> {
+            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, playingSa -> {
                 if (interceptor != null) {
                     interceptor.announceX(playingSa);
                     interceptor.chooseTargets(playingSa, GameSimulator.this);
+                } else {
+                    SpellAbilityChoiceCopier.copyTargets(origSa, playingSa, copier::find);
+                }
+                if (debugPrint && !playingSa.getAllTargetChoices().isEmpty()) {
+                    debugPrint("Targets: ");
+                    for (TargetChoices target : playingSa.getAllTargetChoices()) {
+                        System.out.print(target);
+                    }
+                    System.out.println();
                 }
             });
             if (!success) {
@@ -277,7 +265,7 @@ public class GameSimulator {
     public static void resolveStack(final Game game, final Player opponent) {
         // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
         PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
-        sim.setUseSimulation(true);
+        sim.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
         opponent.runWithController(() -> {
             final Set<Card> allAffectedCards = new HashSet<>();
             game.getAction().checkStateEffects(false, allAffectedCards);
