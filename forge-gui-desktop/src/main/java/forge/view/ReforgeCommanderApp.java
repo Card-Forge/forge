@@ -7,6 +7,7 @@
  */
 package forge.view;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import forge.GuiDesktop;
 import forge.Singletons;
 import forge.error.ExceptionHandler;
@@ -25,6 +26,9 @@ public final class ReforgeCommanderApp {
 
         // Flag application as running in Reforge Commander mode
         System.setProperty("reforge.commander.mode", "true");
+
+        // Apply FlatLaf dark theme before any Swing components are created
+        FlatDarkLaf.setup();
 
         // Setup desktop GUI interface
         GuiBase.setInterface(new GuiDesktop());

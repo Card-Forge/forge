@@ -483,6 +483,11 @@ try {
             <artifactId>imageio-jpeg</artifactId>
             <version>3.12.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.7.2</version>
+        </dependency>
     </dependencies>
 
     <profiles>
