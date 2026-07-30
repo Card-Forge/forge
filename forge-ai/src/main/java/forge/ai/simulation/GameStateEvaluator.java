@@ -119,7 +119,7 @@ public class GameStateEvaluator {
 
     private Score getScoreForGameStateImpl(Game game, Player aiPlayer) {
         // TODO: try and reuse evaluateBoardPosition
-        int handScore = 0;
+        int score = 0;
         int aiCards = 0;
         int teammateCards = 0;
         int opponentCards = 0;
@@ -131,14 +131,14 @@ public class GameStateEvaluator {
         for (Player player : game.getPlayers()) {
             int cards = player.getCardsIn(ZoneType.Hand).size();
             if (player.isOpponentOf(aiPlayer)) {
-                handScore -= 4 * cards;
+                score -= 4 * cards;
                 opponentCards += cards;
                 opponentLife += player.getLife();
                 debugPrint("  Opponent " + (++opponents) + " life: -" + player.getLife());
             } else {
                 int fullValueCards = player.isUnlimitedHandSize()
                         ? cards : min(cards, player.getMaxHandSize());
-                handScore += cards + 4 * fullValueCards;
+                score += cards + 4 * fullValueCards;
                 teamLife += player.getLife();
                 teamPlayers++;
                 if (player == aiPlayer) {
@@ -156,18 +156,17 @@ public class GameStateEvaluator {
         }
         debugPrint("Their cards in hand: " + opponentCards);
         // TODO weight cards in hand more if opponent has discard or if we have looting or can bluff a trick
-        int score = handScore + 2 * teamLife / teamPlayers;
+        score += 2 * teamLife / teamPlayers;
         if (opponents > 0) {
             score -= 2 * opponentLife / opponents;
         }
 
         // evaluate mana base quality
         AiDeckStatistics statistics = AiDeckStatistics.fromPlayer(aiPlayer);
-        int availableManaScore = evalManaBase(game, aiPlayer, statistics);
+        int availableManaScore = evalManaBase(aiPlayer, statistics, false);
         int strategicManaScore = aiPlayer.getCardsIn(ZoneType.Battlefield, false).stream()
-                .anyMatch(c -> c.isPhasedOut() && phasesInNormally(c)
-                        && !c.getManaAbilities().isEmpty())
-                ? evalManaBase(game, aiPlayer, statistics, true) : availableManaScore;
+                .anyMatch(c -> c.isPhasedOut() && phasesInNormally(c) && !c.getManaAbilities().isEmpty())
+                ? evalManaBase(aiPlayer, statistics, true) : availableManaScore;
         int availableScore = score + availableManaScore;
         score += strategicManaScore;
         // TODO deal with opponents. Do we want to use perfect information to evaluate their manabase?
@@ -186,10 +185,10 @@ public class GameStateEvaluator {
                 continue;
             }
             int value = evalCard(game, aiPlayer, c);
-            int availableValue = phasedOut ? 0 : value;
+            int availableValue = value;
             // To make the AI hold-off on playing creatures before MAIN2 if they give no other benefits,
             // keep track of the score while treating summon sick creatures as having a value of 0.
-            if (gamePhase.isBefore(PhaseType.MAIN2) && c.isSick() && c.getController() == aiPlayer) {
+            if (phasedOut || (gamePhase.isBefore(PhaseType.MAIN2) && c.isSick() && c.getController() == aiPlayer)) {
                 availableValue = 0;
             }
             String str = cardToString(c);
@@ -207,11 +206,7 @@ public class GameStateEvaluator {
         return new Score(score, availableScore);
     }
 
-    public int evalManaBase(Game game, Player player, AiDeckStatistics statistics) {
-        return evalManaBase(game, player, statistics, false);
-    }
-
-    private int evalManaBase(Game game, Player player, AiDeckStatistics statistics, boolean includeNormalPhasing) {
+    private int evalManaBase(Player player, AiDeckStatistics statistics, boolean includeNormalPhasing) {
         // TODO should these be fixed quantities or should they be linear out of like 1000/(desired - total)?
         int value = 0;
         // get the colors of mana we can produce and the maximum number of pips
@@ -221,8 +216,7 @@ public class GameStateEvaluator {
 
         // Strategic evaluation includes lands guaranteed to phase in normally; availability does not.
         for (Card c : player.getCardsIn(ZoneType.Battlefield, false)) {
-            if (c.isPhasedOut()
-                    && (!includeNormalPhasing || !phasesInNormally(c))) {
+            if (c.isPhasedOut() && (!includeNormalPhasing || !phasesInNormally(c))) {
                 continue;
             }
             int max_produced = 0;
