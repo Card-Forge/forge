@@ -78,3 +78,4 @@ ScryfallCode=HOC
 95 M Arcane Signet @Anastasia Balakchina
 96 M Mox Amber @Robin Olausson
 97 M Treasure Vault @Pablo Mendoza
+100 M Thorin, Company's Leader @Eric Deschamps
