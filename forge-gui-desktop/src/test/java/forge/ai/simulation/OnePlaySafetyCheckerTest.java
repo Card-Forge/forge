@@ -148,6 +148,41 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
     }
 
     @Test
+    public void testAllowsNormalPhasingRescue() {
+        Game game = initAndCreateGame(true);
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Plains", 4, ai);
+        Card dragon = addCard("Shivan Dragon", ai);
+        // Keep Convoke's tap choice from affecting this phasing-only assertion.
+        dragon.setTapped(true);
+        Card concealment = addCardToZone("Clever Concealment", ai, ZoneType.Hand);
+        moveToMain2(game, ai);
+
+        SpellAbility ability = concealment.getFirstSpellAbility();
+        ability.setActivatingPlayer(ai);
+        ability.getTargets().add(dragon);
+        AssertJUnit.assertTrue("A guaranteed phase-in should retain strategic value",
+                OnePlaySafetyChecker.isAcceptable(ai, ability));
+    }
+
+    @Test
+    public void testRejectsOublietteOnOwnCreature() {
+        Game game = initAndCreateGame(true);
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Swamp", 3, ai);
+        addCard("Shivan Dragon", ai);
+        Card oubliette = addCardToZone("Oubliette", ai, ZoneType.Hand);
+        moveToMain2(game, ai);
+
+        SpellAbility ability = oubliette.getFirstSpellAbility();
+        ability.setActivatingPlayer(ai);
+        AssertJUnit.assertFalse("A contingent phase-in should remain a strategic loss",
+                OnePlaySafetyChecker.isAcceptable(ai, ability));
+    }
+
+    @Test
     public void testScoreRejectsBadRemovalIntoGravePact() {
         AssertJUnit.assertFalse("Trading the AI's best creature for Serra Angel is a regression",
                 evaluateMurderIntoGravePact("Blightsteel Colossus", "Serra Angel"));

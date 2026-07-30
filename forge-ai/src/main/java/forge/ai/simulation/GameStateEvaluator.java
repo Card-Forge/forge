@@ -68,6 +68,15 @@ public class GameStateEvaluator {
         return str;
     }
 
+    private static boolean phasesInNormally(Card card) {
+        if (card.isWontPhaseInNormal()) {
+            return false;
+        }
+        Card attachedTo = card.getAttachedTo();
+        return card.isDirectlyPhasedOut()
+                || attachedTo != null && phasesInNormally(attachedTo);
+    }
+
     // Winning and losing are still the extremes of the range, but a win twenty turns from now is
     // worth less than a win this turn, and a loss we can put off is better than one we cannot.
     // GameSimulator returns Integer.MIN_VALUE to mean "this line could not be simulated", so the
@@ -80,11 +89,10 @@ public class GameStateEvaluator {
         return score > Integer.MAX_VALUE - (long) MAX_DISCOUNTED_TURNS * GAME_OVER_TURN_PENALTY;
     }
 
-    private Score getScoreForGameOver(Game game, Player aiPlayer) {
+    private Score getTerminalScore(Game game, boolean won) {
         // a game long enough to overflow the discount is not one we can reason about anyway
         int turn = Math.min(Math.max(game.getPhaseHandler().getTurn(), 0), MAX_DISCOUNTED_TURNS);
-        if (game.getOutcome().getWinningTeam() == aiPlayer.getTeam() ||
-                game.getOutcome().isWinner(aiPlayer.getRegisteredPlayer())) {
+        if (won) {
             // prefer winning sooner
             // TODO should consider recursion depth for the less complex combos more likely to succeed
             return new Score(Integer.MAX_VALUE - turn * GAME_OVER_TURN_PENALTY);
@@ -95,12 +103,18 @@ public class GameStateEvaluator {
         return new Score(Integer.MIN_VALUE + 1 + turn * GAME_OVER_TURN_PENALTY);
     }
 
+    private Score getScoreForGameOver(Game game, Player aiPlayer) {
+        boolean won = game.getOutcome().getWinningTeam() == aiPlayer.getTeam()
+                || game.getOutcome().isWinner(aiPlayer.getRegisteredPlayer());
+        return getTerminalScore(game, won);
+    }
+
     public Score getScoreForGameState(Game game, Player aiPlayer) {
-        if (aiPlayer.hasLost()) {
-            return new Score(Integer.MIN_VALUE);
-        }
         if (game.isGameOver()) {
             return getScoreForGameOver(game, aiPlayer);
+        }
+        if (!aiPlayer.isInGame()) {
+            return getTerminalScore(game, aiPlayer.hasWon());
         }
 
         CombatSimResult result = simulateUpcomingCombatThisTurn(game, aiPlayer);
@@ -117,12 +131,12 @@ public class GameStateEvaluator {
     private Score getScoreForGameStateImpl(Game game, Player aiPlayer) {
         // TODO: try and reuse evaluateBoardPosition
         int handScore = 0;
-        int myCards = 0;
-        int alliedCards = 0;
+        int aiCards = 0;
+        int teammateCards = 0;
         int opponentCards = 0;
-        int alliedLife = 0;
-        int alliedPlayers = 0;
-        int allies = 0;
+        int teamLife = 0;
+        int teamPlayers = 0;
+        int teammates = 0;
         int opponentLife = 0;
         int opponents = 0;
         for (Player player : game.getPlayers()) {
@@ -136,30 +150,37 @@ public class GameStateEvaluator {
                 int fullValueCards = player.isUnlimitedHandSize()
                         ? cards : min(cards, player.getMaxHandSize());
                 handScore += cards + 4 * fullValueCards;
-                alliedLife += player.getLife();
-                alliedPlayers++;
+                teamLife += player.getLife();
+                teamPlayers++;
                 if (player == aiPlayer) {
-                    myCards = cards;
+                    aiCards = cards;
                     debugPrint("  My life: " + player.getLife());
                 } else {
-                    alliedCards += cards;
-                    debugPrint("  Ally " + (++allies) + " life: " + player.getLife());
+                    teammateCards += cards;
+                    debugPrint("  Ally " + (++teammates) + " life: " + player.getLife());
                 }
             }
         }
-        debugPrint("My cards in hand: " + myCards);
-        if (allies > 0) {
-            debugPrint("Allied cards in hand: " + alliedCards);
+        debugPrint("My cards in hand: " + aiCards);
+        if (teammates > 0) {
+            debugPrint("Allied cards in hand: " + teammateCards);
         }
         debugPrint("Their cards in hand: " + opponentCards);
         // TODO weight cards in hand more if opponent has discard or if we have looting or can bluff a trick
-        int score = handScore + 2 * alliedLife / alliedPlayers;
+        int score = handScore + 2 * teamLife / teamPlayers;
         if (opponents > 0) {
             score -= 2 * opponentLife / opponents;
         }
 
         // evaluate mana base quality
-        score += evalManaBase(game, aiPlayer, AiDeckStatistics.fromPlayer(aiPlayer));
+        AiDeckStatistics statistics = AiDeckStatistics.fromPlayer(aiPlayer);
+        int availableManaScore = evalManaBase(game, aiPlayer, statistics);
+        int strategicManaScore = aiPlayer.getCardsIn(ZoneType.Battlefield, false).stream()
+                .anyMatch(c -> c.isPhasedOut() && phasesInNormally(c)
+                        && !c.getManaAbilities().isEmpty())
+                ? evalManaBase(game, aiPlayer, statistics, true) : availableManaScore;
+        int availableScore = score + availableManaScore;
+        score += strategicManaScore;
         // TODO deal with opponents. Do we want to use perfect information to evaluate their manabase?
         //int opponentManaScore = 0;
         //for (Player opponent : aiPlayer.getOpponents()) {
@@ -169,26 +190,26 @@ public class GameStateEvaluator {
 
         // TODO evaluate holding mana open for counterspells
 
-        int summonSickScore = score;
         PhaseType gamePhase = game.getPhaseHandler().getPhase();
         for (Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
+            boolean phasedOut = c.isPhasedOut();
+            if (phasedOut && !phasesInNormally(c)) {
+                continue;
+            }
             int value = evalCard(game, aiPlayer, c);
-            int summonSickValue = value;
+            int availableValue = phasedOut ? 0 : value;
             // To make the AI hold-off on playing creatures before MAIN2 if they give no other benefits,
             // keep track of the score while treating summon sick creatures as having a value of 0.
-            if (gamePhase.isBefore(PhaseType.MAIN2) && c.isSick() && c.getController() == aiPlayer) {
-                summonSickValue = 0;
+            if (gamePhase.isBefore(PhaseType.MAIN2) && c.isSick()
+                    && c.getController() == aiPlayer) {
+                availableValue = 0;
             }
             String str = cardToString(c);
-            if (!c.getController().isOpponentOf(aiPlayer)) {
-                debugPrint("  Battlefield: " + str + " = " + value);
-                score += value;
-                summonSickScore += summonSickValue;
-            } else {
-                debugPrint("  Battlefield: " + str + " = -" + value);
-                score -= value;
-                summonSickScore -= summonSickValue;
-            }
+            int multiplier = c.getController().isOpponentOf(aiPlayer) ? -1 : 1;
+            debugPrint("  Battlefield: " + str + " = "
+                    + (multiplier < 0 ? "-" : "") + value);
+            score += multiplier * value;
+            availableScore += multiplier * availableValue;
             String nonAbilityText = c.getNonAbilityText();
             if (!nonAbilityText.isEmpty()) {
                 debugPrint("    "+nonAbilityText.replaceAll("CARDNAME", c.getName()));
@@ -196,10 +217,15 @@ public class GameStateEvaluator {
         }
 
         debugPrint("Score = " + score);
-        return new Score(score, summonSickScore);
+        return new Score(score, availableScore);
     }
 
     public int evalManaBase(Game game, Player player, AiDeckStatistics statistics) {
+        return evalManaBase(game, player, statistics, false);
+    }
+
+    private int evalManaBase(Game game, Player player, AiDeckStatistics statistics,
+            boolean includeNormalPhasing) {
         // TODO should these be fixed quantities or should they be linear out of like 1000/(desired - total)?
         int value = 0;
         // get the colors of mana we can produce and the maximum number of pips
@@ -207,8 +233,12 @@ public class GameStateEvaluator {
         // this logic taken from ManaCost.getColorShardCounts()
         int[] counts = new int[6]; // in WUBRGC order
 
-        // Mana-base quality is long-term, so include lands that will phase back in.
+        // Strategic evaluation includes lands guaranteed to phase in normally; availability does not.
         for (Card c : player.getCardsIn(ZoneType.Battlefield, false)) {
+            if (c.isPhasedOut()
+                    && (!includeNormalPhasing || !phasesInNormally(c))) {
+                continue;
+            }
             int max_produced = 0;
             for (SpellAbility m: c.getManaAbilities()) {
                 m.setActivatingPlayer(c.getController());
@@ -322,27 +352,29 @@ public class GameStateEvaluator {
     }
 
     public static class Score {
+        /** Long-term value, including permanents guaranteed to phase in normally. */
         public final int value;
-        public final int summonSickValue;
+        /** Value currently available for mana, abilities, and the next combat. */
+        public final int availableValue;
         
         public Score(int value) {
             this.value = value;
-            this.summonSickValue = value;
+            this.availableValue = value;
         }
 
-        public Score(int value, int summonSickValue) {
+        public Score(int value, int availableValue) {
             this.value = value;
-            this.summonSickValue = summonSickValue;
+            this.availableValue = availableValue;
         }
 
         public boolean equals(Score other) {
             if (other == null)
                 return false;
-            return value == other.value && summonSickValue == other.summonSickValue;
+            return value == other.value && availableValue == other.availableValue;
         }
 
         public String toString() {
-            return value + (summonSickValue != value ? " (ss " + summonSickValue + ")" :"");
+            return value + (availableValue != value ? " (available " + availableValue + ")" : "");
         }
     }
 }
