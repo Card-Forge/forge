@@ -106,6 +106,7 @@ ScryfallCode=HOB
 167 R Thranduil, the Elvenking @Magali Villeneuve
 169 R Tom, Bert, and William @Leonardo Borazio
 170 M The Arkenstone @Gaboleps
+171 U The Black Arrow @Kevin Sidharta
 172 U Dwarven Mattock @Nino Is
 176 R My Precious @Valera Lutfullina
 177 M Orcrist, Goblin-cleaver @Erikas Perl
