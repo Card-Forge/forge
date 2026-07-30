@@ -1,0 +1,9 @@
+Name:Dreaded Bat-Cloud
+ManaCost:4 B
+Types:Creature Bat
+PT:4/2
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone$ All | CheckSVar$ X | Description$ This spell costs {3} less to cast if a creature died this turn.
+SVar:X:Count$Morbid.1.0
+K:Flying
+K:Deathtouch
+Oracle:This spell costs {3} less to cast if a creature died this turn.\nFlying, deathtouch
