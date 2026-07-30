@@ -86,6 +86,7 @@ public class GameStateEvaluator {
         if (game.getOutcome().getWinningTeam() == aiPlayer.getTeam() ||
                 game.getOutcome().isWinner(aiPlayer.getRegisteredPlayer())) {
             // prefer winning sooner
+            // TODO should consider recursion depth for the less complex combos more likely to succeed
             return new Score(Integer.MAX_VALUE - turn * GAME_OVER_TURN_PENALTY);
         }
 
