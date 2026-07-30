@@ -31,6 +31,7 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.util.BuildInfo;
 import forge.util.IterableUtil;
+import forge.util.LogSafe;
 import forge.util.Localizer;
 import forge.localinstance.properties.ForgeNetPreferences;
 
@@ -78,6 +79,74 @@ public final class FServerManager implements IHasForgeLog {
     private final Map<Channel, RemoteClient> clients = new ConcurrentHashMap<>();
     private final Map<String, RemoteClient> disconnectedClients = new ConcurrentHashMap<>();
     private final Map<String, Timer> reconnectTimers = new ConcurrentHashMap<>();
+
+    // Abuse limits. Read per call rather than into constants so a test can vary
+    // them: Integer.getInteger in a static initialiser fixes the value at
+    // class-load, and surefire shares one JVM across the suite.
+    //
+    // Every accepted channel allocates a RemoteClient and a decoder before the
+    // peer has proved anything, so the connection caps sit far above the 8 seats
+    // a pod can hold — enough that reconnect churn or a stray probe cannot lock
+    // anyone out.
+    private static int maxConnections() {
+        return Integer.getInteger("forge.net.maxConnections", 64);
+    }
+    private static int maxConnectionsPerHost() {
+        return Integer.getInteger("forge.net.maxConnectionsPerHost", 16);
+    }
+    /** A peer that has not logged in by now is not here to play. */
+    private static int loginDeadlineSeconds() {
+        return Integer.getInteger("forge.net.loginDeadlineSeconds", 60);
+    }
+    /** Names are echoed into chat and logs; bound them at intake. */
+    private static int maxNameLength() {
+        return Integer.getInteger("forge.net.maxNameLength", 64);
+    }
+
+    private static String hostOf(final SocketAddress address) {
+        if (address instanceof InetSocketAddress inet) {
+            final InetAddress host = inet.getAddress();
+            return host == null ? inet.getHostString() : host.getHostAddress();
+        }
+        return String.valueOf(address);
+    }
+
+    /** Whether this channel is allowed to become a client at all. */
+    private boolean admitConnection(final ChannelHandlerContext ctx) {
+        if (clients.size() >= maxConnections()) {
+            netLog.warn("Refusing connection from {}: server at {} connections",
+                    ctx.channel().remoteAddress(), clients.size());
+            return false;
+        }
+        final String host = hostOf(ctx.channel().remoteAddress());
+        final long fromSameHost = clients.values().stream()
+                .filter(c -> host.equals(hostOf(c.getRemoteAddress())))
+                .count();
+        if (fromSameHost >= maxConnectionsPerHost()) {
+            netLog.warn("Refusing connection from {}: {} already open from that host",
+                    ctx.channel().remoteAddress(), fromSameHost);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Close a channel that connects and then says nothing. Without this a peer
+     * can sit in the accepted-but-unregistered state indefinitely, holding a
+     * connection slot and a decoder for free.
+     */
+    private void scheduleLoginDeadline(final ChannelHandlerContext ctx) {
+        final int deadline = loginDeadlineSeconds();
+        afkExecutor.schedule(() -> {
+            final RemoteClient client = clients.get(ctx.channel());
+            if (client != null && !client.hasValidSlot()) {
+                netLog.warn("Closing {}: no login within {}s",
+                        ctx.channel().remoteAddress(), deadline);
+                ctx.close();
+            }
+        }, deadline, TimeUnit.SECONDS);
+    }
+
     private boolean isHosting = false;
     private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -437,6 +506,13 @@ public final class FServerManager implements IHasForgeLog {
         this.draftHandler = handler;
     }
 
+    /**
+     * Push lobby state to every client that has completed login. Deliberately
+     * not a plain broadcast: {@code GameLobbyData} carries each slot's
+     * {@link forge.deck.Deck}, so an unauthenticated peer would receive every
+     * decklist in the lobby. A joining client gets its first update from the
+     * login path, once {@code connectPlayer} has given it a slot.
+     */
     public void updateLobbyState() {
         localLobby.getData().setMaximumCommanderBracket(
                 FModel.getPreferences().getPrefInt(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET));
@@ -924,11 +1000,18 @@ public final class FServerManager implements IHasForgeLog {
                 return; // Consumed — arrival resets IdleStateHandler read timer
             }
             if (msg instanceof MessageEvent) {
-                final String text = ((MessageEvent) msg).getMessage();
-                if (text != null && text.startsWith("/")) {
+                final String raw = ((MessageEvent) msg).getMessage();
+                if (raw != null && raw.startsWith("/")) {
                     return; // Suppress slash commands from remote clients
                 }
                 final RemoteClient client = clients.get(ctx.channel());
+                if (client == null) {
+                    return;
+                }
+                // Strip control characters before echoing to other players: a
+                // carriage return lets one player paint fake system lines in
+                // everyone else's chat pane.
+                final String text = LogSafe.forDisplay(raw);
                 String username = client.getUsername();
                 // Append (Host) indicator for the host player
                 if (client.getIndex() == 0) {
@@ -965,11 +1048,17 @@ public final class FServerManager implements IHasForgeLog {
     private class RegisterClientHandler extends ChannelInboundHandlerAdapter {
         @Override
         public void channelActive(final ChannelHandlerContext ctx) throws Exception {
+            if (!admitConnection(ctx)) {
+                ctx.close();
+                return;
+            }
             final RemoteClient client = new RemoteClient(ctx.channel());
             clients.put(ctx.channel(), client);
             netLog.info("Client connected to server at {}", ctx.channel().remoteAddress());
-            // No lobby state before login: a bare TCP connect should not draw
-            // lobby traffic, and the state includes every slot's decklist.
+            // No lobby state here: this peer has not logged in, and the state
+            // includes every slot's decklist. It receives its first update from
+            // the login path once it holds a slot.
+            scheduleLoginDeadline(ctx);
             super.channelActive(ctx);
         }
 
@@ -977,7 +1066,13 @@ public final class FServerManager implements IHasForgeLog {
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
             if (msg instanceof LoginEvent event) {
-                final String username = event.getUsername();
+                // Sanitise once, here, and use the result everywhere. The name
+                // is echoed into chat and into log lines, so a newline in it
+                // forges log records and fake system messages. It is also the
+                // key for disconnectedClients, so cleaning it at the single
+                // point of intake keeps the parked key and the reconnect
+                // lookup in agreement.
+                final String username = LogSafe.forDisplay(event.getUsername(), maxNameLength());
                 client.setUsername(username);
 
                 // Check if this is a reconnecting player
@@ -1020,14 +1115,14 @@ public final class FServerManager implements IHasForgeLog {
                     netLog.info("[Reconnect] Player reconnected: {}", username);
                 } else {
                     // Normal login flow
-                    final int index = localLobby.connectPlayer(event.getUsername(), event.getAvatarIndex(), event.getSleeveIndex());
+                    final int index = localLobby.connectPlayer(username, event.getAvatarIndex(), event.getSleeveIndex());
                     if (index == -1) {
                         ctx.close();
                     } else {
                         client.setIndex(index);
                         client.setLibgdx(event.isLibgdx());
                         if (index > 0) {
-                            broadcast(new MessageEvent(String.format("%s joined the lobby.", event.getUsername())));
+                            broadcast(new MessageEvent(String.format("%s joined the lobby.", username)));
                             broadcastTo(new MessageEvent(formatAfkTimeoutMessage()),
                                     Collections.singleton(client));
                         }
@@ -1038,12 +1133,12 @@ public final class FServerManager implements IHasForgeLog {
                             broadcast(MessageEvent.warning(String.format(
                                 "Warning: Could not determine %s's Forge version. "
                                 + "Please use the same version as the host to avoid network compatibility issues.",
-                                event.getUsername())));
+                                username)));
                         } else if (!clientVersion.equals(hostVersion)) {
                             broadcast(MessageEvent.warning(String.format(
                                 "Warning: %s is using Forge version %s (host: %s). "
                                 + "Please use the same version as the host to avoid network compatibility issues.",
-                                event.getUsername(), clientVersion, hostVersion)));
+                                username, clientVersion, hostVersion)));
                         }
                         broadcast(event);
                         updateLobbyState();
@@ -1063,10 +1158,14 @@ public final class FServerManager implements IHasForgeLog {
                     netLog.warn("Rejecting server-owned lobby fields from slot {} ({}) at {}",
                             client.getIndex(), client.getUsername(), ctx.channel().remoteAddress());
                 }
+                // Clean the name before it reaches the slot, not just before it
+                // reaches our own record of the client: the slot name is what
+                // every peer renders and what broadcastReadyState echoes.
+                final String newName = LogSafe.forDisplay(event.getName(), maxNameLength());
+                event.setName(newName);
                 localLobby.applyToSlot(client.getIndex(), event);
-                if (event.getName() != null) {
-                    String oldName = client.getUsername();
-                    String newName = event.getName();
+                if (newName != null) {
+                    final String oldName = client.getUsername();
                     if (!newName.equals(oldName)) {
                         client.setUsername(newName);
                         broadcast(new MessageEvent(String.format("%s changed their name to %s", oldName, newName)));
