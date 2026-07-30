@@ -78,6 +78,9 @@ public class GameStateEvaluator {
     }
 
     public Score getScoreForGameState(Game game, Player aiPlayer) {
+        if (aiPlayer.hasLost()) {
+            return new Score(Integer.MIN_VALUE);
+        }
         if (game.isGameOver()) {
             return getScoreForGameOver(game, aiPlayer);
         }
@@ -94,37 +97,33 @@ public class GameStateEvaluator {
     }
 
     private Score getScoreForGameStateImpl(Game game, Player aiPlayer) {
-        int score = 0;
-        // TODO: more than 2 players
         // TODO: try and reuse evaluateBoardPosition
-        int myCards = 0;
-        int theirCards = 0;
-        for (Card c : game.getCardsIn(ZoneType.Hand)) {
-            if (c.getController() == aiPlayer) {
-                myCards++;
+        int handScore = 0;
+        int alliedLife = 0;
+        int alliedPlayers = 0;
+        int opponentLife = 0;
+        int opponents = 0;
+        for (Player player : game.getPlayers()) {
+            int cards = player.getCardsIn(ZoneType.Hand).size();
+            if (player.isOpponentOf(aiPlayer)) {
+                handScore -= 4 * cards;
+                opponentLife += player.getLife();
+                debugPrint("  Opponent " + (++opponents) + ": " + cards
+                        + " cards, " + player.getLife() + " life");
             } else {
-                theirCards++;
+                int fullValueCards = player.isUnlimitedHandSize()
+                        ? cards : min(cards, player.getMaxHandSize());
+                handScore += cards + 4 * fullValueCards;
+                alliedLife += player.getLife();
+                debugPrint("  Ally " + (++alliedPlayers) + ": " + cards
+                        + " cards, " + player.getLife() + " life");
             }
         }
-        debugPrint("My cards in hand: " + myCards);
-        debugPrint("Their cards in hand: " + theirCards);
-        if (!aiPlayer.isUnlimitedHandSize() && myCards > aiPlayer.getMaxHandSize()) {
-            // Count excess cards for less.
-            score += myCards - aiPlayer.getMaxHandSize();
-            myCards = aiPlayer.getMaxHandSize();
-        }
         // TODO weight cards in hand more if opponent has discard or if we have looting or can bluff a trick
-        score += 5 * myCards - 4 * theirCards;
-        debugPrint("  My life: " + aiPlayer.getLife());
-        score += 2 * aiPlayer.getLife();
-        int opponentIndex = 1;
-        int opponentLife = 0;
-        for (Player opponent : aiPlayer.getOpponents()) {
-            debugPrint("  Opponent " + opponentIndex + " life: -" + opponent.getLife());
-            opponentLife += opponent.getLife();
-            opponentIndex++;
+        int score = handScore + 2 * alliedLife / alliedPlayers;
+        if (opponents > 0) {
+            score -= 2 * opponentLife / opponents;
         }
-        score -= 2* opponentLife / (game.getPlayers().size() - 1);
 
         // evaluate mana base quality
         score += evalManaBase(game, aiPlayer, AiDeckStatistics.fromPlayer(aiPlayer));
@@ -139,7 +138,7 @@ public class GameStateEvaluator {
 
         int summonSickScore = score;
         PhaseType gamePhase = game.getPhaseHandler().getPhase();
-        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+        for (Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
             int value = evalCard(game, aiPlayer, c);
             int summonSickValue = value;
             // To make the AI hold-off on playing creatures before MAIN2 if they give no other benefits,
@@ -148,7 +147,7 @@ public class GameStateEvaluator {
                 summonSickValue = 0;
             }
             String str = cardToString(c);
-            if (c.getController() == aiPlayer) {
+            if (!c.getController().isOpponentOf(aiPlayer)) {
                 debugPrint("  Battlefield: " + str + " = " + value);
                 score += value;
                 summonSickScore += summonSickValue;
@@ -175,7 +174,8 @@ public class GameStateEvaluator {
         // this logic taken from ManaCost.getColorShardCounts()
         int[] counts = new int[6]; // in WUBRGC order
 
-        for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
+        // Mana-base quality is long-term, so include lands that will phase back in.
+        for (Card c : player.getCardsIn(ZoneType.Battlefield, false)) {
             int max_produced = 0;
             for (SpellAbility m: c.getManaAbilities()) {
                 m.setActivatingPlayer(c.getController());
