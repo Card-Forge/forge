@@ -2,7 +2,8 @@ package forge.screens.home;
 
 import forge.ai.AiProfileUtil;
 import forge.deckchooser.FDeckChooser;
-import java.awt.Graphics;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -14,13 +15,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.ImmutableSet;
 
 import forge.ImageCache;
 import forge.Singletons;
@@ -80,7 +77,7 @@ public class PlayerPanel extends FPanel {
     private final FTextField txtPlayerName = new FTextField.Builder().build();
     private FRadioButton radioHuman;
     private FRadioButton radioAi;
-    private JCheckBoxMenuItem radioAiUseSimulation;
+    private JPopupMenu radioAiUseSimulation;
     private FRadioButton radioOpen;
     private FCheckBox chkReady;
 
@@ -392,15 +389,26 @@ public class PlayerPanel extends FPanel {
     }
 
     public Set<AIOption> getAiOptions() {
-        return isSimulatedAi()
-                ? ImmutableSet.of(AIOption.USE_SIMULATION)
-                : Collections.emptySet();
+        if (radioAi.isSelected()) {
+            for (int i = 0; i < radioAiUseSimulation.getComponentCount(); i++) {
+                if (((JRadioButtonMenuItem) radioAiUseSimulation.getComponent(i)).isSelected()) {
+                    if (i == 0) {
+                        break;
+                    }
+                    if (i == 1) {
+                        return Set.of(AIOption.USE_HYBRID_SIMULATION);
+                    }
+                    if (i == 2) {
+                        return Set.of(AIOption.USE_FULL_SIMULATION);
+                    }
+                }
+            }
+        }
+        return Collections.emptySet();
     }
-    private boolean isSimulatedAi() {
-        return radioAi.isSelected() && radioAiUseSimulation.isSelected();
-    }
-    public void setUseAiSimulation(final boolean useSimulation) {
-        radioAiUseSimulation.setSelected(useSimulation);
+    public void setUseAiSimulation(Set<AIOption> options) {
+        ((JRadioButtonMenuItem) radioAiUseSimulation.getComponent(options.contains(AIOption.USE_FULL_SIMULATION) ? 2 : options.contains(AIOption.USE_HYBRID_SIMULATION) ? 1 : 0))
+                .setSelected(true);
     }
 
     public boolean isArchenemy() {
@@ -562,11 +570,21 @@ public class PlayerPanel extends FPanel {
         radioAi = new FRadioButton(localizer.getMessage("lblAI"));
         radioOpen = new FRadioButton(localizer.getMessage("lblOpen"));
 
-        final JPopupMenu menu = new  JPopupMenu();
-        radioAiUseSimulation = new JCheckBoxMenuItem(localizer.getMessage("lblUseSimulation"));
-        menu.add(radioAiUseSimulation);
-        radioAiUseSimulation.addActionListener(e -> lobby.firePlayerChangeListener(index));
-        radioAi.setComponentPopupMenu(menu);
+        final ButtonGroup group = new ButtonGroup();
+        radioAiUseSimulation = new JPopupMenu();
+        JRadioButtonMenuItem item = new JRadioButtonMenuItem("Heuristics");
+        item.addActionListener(e -> lobby.firePlayerChangeListener(index));
+        group.add(item);
+        radioAiUseSimulation.add(item);
+        item = new JRadioButtonMenuItem(localizer.getMessage("lblUseSimulation") + " (Hybrid)");
+        item.addActionListener(e -> lobby.firePlayerChangeListener(index));
+        group.add(item);
+        radioAiUseSimulation.add(item);
+        item = new JRadioButtonMenuItem(localizer.getMessage("lblUseSimulation"));
+        item.addActionListener(e -> lobby.firePlayerChangeListener(index));
+        group.add(item);
+        radioAiUseSimulation.add(item);
+        radioAi.setComponentPopupMenu(radioAiUseSimulation);
 
         radioHuman.addMouseListener(radioMouseAdapter(radioHuman, LobbySlotType.LOCAL));
         radioAi.addMouseListener   (radioMouseAdapter(radioAi,    LobbySlotType.AI));

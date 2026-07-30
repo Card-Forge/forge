@@ -859,7 +859,7 @@ public class AiAttackController {
         boolean simAI = false;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            simAI = aic.usesSimulation();
+            simAI = aic.usesFullSimulation();
             if (!simAI) {
                 playAggro = aic.getBoolProperty(AiProps.PLAY_AGGRO);
                 chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
