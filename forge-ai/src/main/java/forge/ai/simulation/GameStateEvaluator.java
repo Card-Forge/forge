@@ -88,39 +88,29 @@ public class GameStateEvaluator {
         return score > Integer.MAX_VALUE - (long) MAX_DISCOUNTED_TURNS * GAME_OVER_TURN_PENALTY;
     }
 
-    private Score getTerminalScore(Game game, boolean won) {
+    private Score getTerminalScore(Game game, Player ai) {
         // a game long enough to overflow the discount is not one we can reason about anyway
-        int turn = Math.min(Math.max(game.getPhaseHandler().getTurn(), 0), MAX_DISCOUNTED_TURNS);
-        if (won) {
+        int turn = Math.min(game.getPhaseHandler().getTurn(), MAX_DISCOUNTED_TURNS);
+        if (ai.hasWon()) {
             // prefer winning sooner
             // TODO should consider recursion depth for the less complex combos more likely to succeed
             return new Score(Integer.MAX_VALUE - turn * GAME_OVER_TURN_PENALTY);
         }
 
-        // prefer losing later, staying clear of MIN_VALUE so a loss is never mistaken for a
-        // failed simulation
+        // prefer losing later, staying clear of MIN_VALUE so a loss is never mistaken for a failed simulation
         return new Score(Integer.MIN_VALUE + 1 + turn * GAME_OVER_TURN_PENALTY);
     }
 
-    private Score getScoreForGameOver(Game game, Player aiPlayer) {
-        boolean won = game.getOutcome().getWinningTeam() == aiPlayer.getTeam()
-                || game.getOutcome().isWinner(aiPlayer.getRegisteredPlayer());
-        return getTerminalScore(game, won);
-    }
-
     public Score getScoreForGameState(Game game, Player aiPlayer) {
-        if (game.isGameOver()) {
-            return getScoreForGameOver(game, aiPlayer);
-        }
         if (!aiPlayer.isInGame()) {
-            return getTerminalScore(game, aiPlayer.hasWon());
+            return getTerminalScore(game, aiPlayer);
         }
 
         CombatSimResult result = simulateUpcomingCombatThisTurn(game, aiPlayer);
         if (result != null) {
             Player aiPlayerCopy = (Player) result.copier.find(aiPlayer);
-            if (result.gameCopy.isGameOver()) {
-                return getScoreForGameOver(result.gameCopy, aiPlayerCopy);
+            if (!aiPlayerCopy.isInGame()) {
+                return getTerminalScore(result.gameCopy, aiPlayerCopy);
             }
             return getScoreForGameStateImpl(result.gameCopy, aiPlayerCopy);
         }
