@@ -30,8 +30,7 @@ public class SimulationController {
         final int targetScore;
         final int scoreDelta;
 
-        public CachedEffect(GameObject hostCard, SpellAbility sa, GameObject target,
-                int targetScore, int scoreDelta) {
+        public CachedEffect(GameObject hostCard, SpellAbility sa, GameObject target, int targetScore, int scoreDelta) {
             this.hostCard = hostCard;
             this.sa = sa.toString();
             this.target = target;
@@ -235,8 +234,7 @@ public class SimulationController {
                     int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2]);
                     if (cardScore == effect.targetScore) {
                         Score currentScore = getCurrentScore();
-                        return new Score(currentScore.value + effect.scoreDelta,
-                                currentScore.availableValue + effect.scoreDelta);
+                        return new Score(currentScore.value + effect.scoreDelta, currentScore.availableValue + effect.scoreDelta);
                     }
                 }
             }
@@ -251,21 +249,18 @@ public class SimulationController {
         if (!currentStack.isEmpty()) {
             Plan.Decision d = currentStack.get(currentStack.size() - 1);
             int scoreDelta = score.value - d.initialScore.value;
-            int availableScoreDelta =
-                    score.availableValue - d.initialScore.availableValue;
+            int availableScoreDelta = score.availableValue - d.initialScore.availableValue;
             // Needed to make sure below is only executed when target decisions are ended.
             // Also, only cache negative effects - so that in those cases we don't need to
             // recurse.
-            if (scoreDelta <= 0 && scoreDelta == availableScoreDelta
-                    && d.targets != null) {
+            if (scoreDelta <= 0 && scoreDelta == availableScoreDelta && d.targets != null) {
                 // FIXME: Support more than one target in this logic.
                 GameObject[] hostAndTarget = currentHostAndTarget;
                 if (currentHostAndTarget != null) {
                     GameStateEvaluator evaluator = new GameStateEvaluator();
                     Player player = sa.getActivatingPlayer();
                     int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2]);
-                    effectCache.add(new CachedEffect(hostAndTarget[0], sa, hostAndTarget[1],
-                            cardScore, scoreDelta));
+                    effectCache.add(new CachedEffect(hostAndTarget[0], sa, hostAndTarget[1], cardScore, scoreDelta));
                     cached = " (added to cache)";
                 }
             }

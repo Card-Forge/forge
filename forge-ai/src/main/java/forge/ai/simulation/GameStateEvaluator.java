@@ -73,8 +73,7 @@ public class GameStateEvaluator {
             return false;
         }
         Card attachedTo = card.getAttachedTo();
-        return card.isDirectlyPhasedOut()
-                || attachedTo != null && phasesInNormally(attachedTo);
+        return card.isDirectlyPhasedOut() || attachedTo != null && phasesInNormally(attachedTo);
     }
 
     // Winning and losing are still the extremes of the range, but a win twenty turns from now is
@@ -200,14 +199,12 @@ public class GameStateEvaluator {
             int availableValue = phasedOut ? 0 : value;
             // To make the AI hold-off on playing creatures before MAIN2 if they give no other benefits,
             // keep track of the score while treating summon sick creatures as having a value of 0.
-            if (gamePhase.isBefore(PhaseType.MAIN2) && c.isSick()
-                    && c.getController() == aiPlayer) {
+            if (gamePhase.isBefore(PhaseType.MAIN2) && c.isSick() && c.getController() == aiPlayer) {
                 availableValue = 0;
             }
             String str = cardToString(c);
             int multiplier = c.getController().isOpponentOf(aiPlayer) ? -1 : 1;
-            debugPrint("  Battlefield: " + str + " = "
-                    + (multiplier < 0 ? "-" : "") + value);
+            debugPrint("  Battlefield: " + str + " = " + (multiplier < 0 ? "-" : "") + value);
             score += multiplier * value;
             availableScore += multiplier * availableValue;
             String nonAbilityText = c.getNonAbilityText();
@@ -224,8 +221,7 @@ public class GameStateEvaluator {
         return evalManaBase(game, player, statistics, false);
     }
 
-    private int evalManaBase(Game game, Player player, AiDeckStatistics statistics,
-            boolean includeNormalPhasing) {
+    private int evalManaBase(Game game, Player player, AiDeckStatistics statistics, boolean includeNormalPhasing) {
         // TODO should these be fixed quantities or should they be linear out of like 1000/(desired - total)?
         int value = 0;
         // get the colors of mana we can produce and the maximum number of pips

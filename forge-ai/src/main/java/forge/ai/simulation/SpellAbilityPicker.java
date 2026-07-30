@@ -186,8 +186,7 @@ public class SpellAbilityPicker {
         }
 
         long execTime = System.currentTimeMillis() - startTime;
-        print("BEST: " + abilityToString(bestSa) + " SCORE: "
-                + bestSaValue.availableValue + " TIME: " + execTime);
+        print("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue.availableValue + " TIME: " + execTime);
         this.bestScore = bestSaValue;
         return bestSa;
     }

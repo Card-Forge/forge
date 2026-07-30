@@ -148,20 +148,28 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
     }
 
     @Test
-    public void testAllowsNormalPhasingRescue() {
+    public void testAllowsWideBoardPhasingRescue() {
         Game game = initAndCreateGame(true);
         Player ai = game.getPlayers().get(1);
 
         addCards("Plains", 4, ai);
-        Card dragon = addCard("Shivan Dragon", ai);
+        Card[] creatures = {
+                addCard("Shivan Dragon", ai),
+                addCard("Serra Angel", ai),
+                addCard("Runeclaw Bear", ai)
+        };
         // Keep Convoke's tap choice from affecting this phasing-only assertion.
-        dragon.setTapped(true);
+        for (Card creature : creatures) {
+            creature.setTapped(true);
+        }
         Card concealment = addCardToZone("Clever Concealment", ai, ZoneType.Hand);
         moveToMain2(game, ai);
 
         SpellAbility ability = concealment.getFirstSpellAbility();
         ability.setActivatingPlayer(ai);
-        ability.getTargets().add(dragon);
+        for (Card creature : creatures) {
+            ability.getTargets().add(creature);
+        }
         AssertJUnit.assertTrue("A guaranteed phase-in should retain strategic value",
                 OnePlaySafetyChecker.isAcceptable(ai, ability));
     }
