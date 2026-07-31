@@ -23,6 +23,7 @@ ScryfallCode=HOC
 15 M The Gaffer @Chuck Lukacs
 16 M Galadriel's Dismissal @Rebecca Guay
 17 M Reprieve @Warren Mahy
+18 M Raise the Palisade @Doug Kovacs
 19 M Orcish Bowmasters @Ron Spencer
 20 M Witch-king of Angmar @Eric Velhagen
 21 M Witch-king, Bringer of Ruin @Carl Critchlow
