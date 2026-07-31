@@ -1,0 +1,7 @@
+Name:Ori, Keeper of Songs
+ManaCost:2 W
+Types:Legendary Creature Dwarf Bard
+PT:3/3
+K:Storied
+S:Mode$ Continuous | Affected$ Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Vigilance | Condition$ EnduringStory | Description$ As long as you have an enduring story, NICKNAME gets +1/+0 and has vigilance.
+Oracle:Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.)\nAs long as you have an enduring story, Ori gets +1/+0 and has vigilance.
