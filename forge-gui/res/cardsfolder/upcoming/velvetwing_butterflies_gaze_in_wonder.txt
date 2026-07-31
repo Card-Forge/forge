@@ -1,4 +1,4 @@
-Name:Velvetwings Butterflies
+Name:Velvetwing Butterflies
 ManaCost:2 W
 Types:Creature Insect
 PT:2/2
