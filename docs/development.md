@@ -82,7 +82,7 @@ The `fetching.remove(destPath)` fix, JPEG quality optimization, and EDT dispatch
 
 ## 5. UX Overhaul (Commander-First)
 
-**Status: Early. Lobby and deck chooser still follow upstream patterns.**
+**Status: 5a done (smart defaults, precon fallback). Lobby still follows upstream patterns for the rest.**
 
 ### Goals
 
@@ -303,7 +303,7 @@ Card images must never be a failure point:
 |----------|------|--------|-------|
 | P0 | 1a — Wire StackedTokenCard into CardFactory | 2-3 days | Unlocks entire flyweight feature |
 | P0 | 1g — Route promotion through game engine, not raw zone add | 1 day | Prevents game-logic-skipping bugs |
-| P0 | 5a — Smart default game setup: reduce clicks to start a Commander game | 2 days | Core UX goal |
+| P0 | 5a — Smart default game setup: reduce clicks to start a Commander game | 2 days | Core UX goal — **DONE: first deck auto-selected and applied, precon fallback for fresh installs** |
 | P0 | 6a — FlatLaf integration (`FlatLaf.setup()`) | 1 hour | Instant visual modernization |
 | P1 | 1b — Zone tracking for stacked tokens | 2-3 days | Enables all downstream consumers |
 | P1 | 1d — GameCopier flyweight support | 1 day | AI performance benefit |

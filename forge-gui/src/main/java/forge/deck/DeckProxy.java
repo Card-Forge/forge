@@ -472,6 +472,10 @@ public class DeckProxy implements InventoryItem {
     public static Iterable<DeckProxy> getAllCommanderDecks(final Predicate<Deck> filter) {
         final List<DeckProxy> result = new ArrayList<>();
         addDecksRecursivelly("Commander", GameType.Commander, result, "", FModel.getDecks().getCommander(), filter);
+        if (result.isEmpty()) {
+            // Fresh installs have no user decks yet; fall back to bundled precons so a game can start immediately.
+            addDecksRecursivelly("Commander Precon", GameType.Commander, result, "", FModel.getDecks().getCommanderPrecons(), filter);
+        }
         return result;
     }
 
