@@ -1,5 +1,9 @@
 name: Build iOS IPA
 
+permissions:
+  contents: read
+  actions: write
+
 # Full RoboVM AOT build of the iOS app on a macOS runner, producing an
 # UNSIGNED forge-ios.ipa artifact.
 #

@@ -7,6 +7,10 @@ name: iOS compatibility gate
 # "modern Java API breaks iOS" regressions on every PR without anyone needing
 # a Mac.
 
+permissions:
+  contents: read
+  actions: write
+
 on:
   push:
     paths:

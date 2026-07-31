@@ -627,7 +627,8 @@ public class DeckRecognizer {
         Matcher m = p.matcher(line);
 
         while (m.find()) {
-            line = line.replaceAll(m.group(), "").trim();
+            // REFORGE COMMANDER: literal replace (was replaceAll) — matched URL text must not be re-parsed as a regex (java/regex-injection)
+            line = line.replace(m.group(), "").trim();
         }
         if (line.endsWith("()"))
             return line.substring(0, line.length()-2);
