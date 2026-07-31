@@ -1,0 +1,10 @@
+Name:Kíli the Resourceful
+ManaCost:1 W
+Types:Legendary Creature Dwarf Scout
+PT:1/2
+K:Storied
+S:Mode$ AlternativeCost | ValidSA$ Activated.Equip | ValidPlayer$ You | Cost$ 0 | Condition$ EnduringStory | CheckSVar$ X | SVarCompare$ EQ0 | Description$ As long as you have an enduring story, you may pay {0} rather than pay the equip cost of the first equip ability you activate each turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dwarf.Other+YouCtrl,Equipment.Other+YouCtrl | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever another Dwarf or Equipment you control enters, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+SVar:X:Count$ThisTurnActivated_Activated.Equip+YouCtrl
+Oracle:Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.)\nAs long as you have an enduring story, you may pay {0} rather than pay the equip cost of the first equip ability you activate each turn.\nWhenever another Dwarf or Equipment you control enters, draw a card. This ability triggers only once each turn.

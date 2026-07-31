@@ -1,0 +1,9 @@
+Name:Fíli the Pathfinder
+ManaCost:3 W
+Types:Legendary Creature Dwarf Scout
+PT:2/2
+K:Storied
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Condition$ EnduringStory | Description$ As long as you have an enduring story, creatures you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Dwarf.!token+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME or another nontoken Dwarf you control enters, create a 2/2 red Dwarf creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ r_2_2_dwarf | TokenOwner$ You
+Oracle:Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.)\nAs long as you have an enduring story, creatures you control get +1/+1.\nWhenever Fíli or another nontoken Dwarf you control enters, create a 2/2 red Dwarf creature token.
