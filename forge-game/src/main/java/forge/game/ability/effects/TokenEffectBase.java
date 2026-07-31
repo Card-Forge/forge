@@ -28,7 +28,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.PlayerZoneBattlefield;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 public abstract class TokenEffectBase extends SpellAbilityEffect {
