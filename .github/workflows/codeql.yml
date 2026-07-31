@@ -1,0 +1,62 @@
+# Customized advanced CodeQL setup for Reforge-Commander.
+#
+# Matrix trimmed to what the repo actually ships: Java (the product, via Maven
+# autobuild so the classpath resolves and duplicate-class noise disappears) and
+# GitHub Actions YAML. The other detected languages (.tsx map data, .py dev
+# tools, one stray .h) are not analyzed.
+name: "CodeQL Advanced"
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  schedule:
+    - cron: '44 4 * * 6'
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      # required for all workflows
+      security-events: write
+      # required to fetch internal or private CodeQL packs
+      packages: read
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - language: actions
+          build-mode: none
+        - language: java-kotlin
+          # autobuild compiles via Maven, matching the Java 17 toolchain of
+          # test-build.yaml, so CodeQL sees the real classpath instead of
+          # buildless extraction (which filtered 50 duplicate classes).
+          build-mode: autobuild
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Java 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: 'maven'
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v4
+      with:
+        languages: ${{ matrix.language }}
+        build-mode: ${{ matrix.build-mode }}
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v4
+      with:
+        category: "/language:${{matrix.language}}"
