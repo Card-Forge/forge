@@ -2,6 +2,6 @@ Name:Seven of Nine
 ManaCost:2 U B
 Types:Legendary Artifact Creature Human Scientist
 PT:2/4
-T:Mode$ FacesDilemma | ValidPlayer$ You | Execute$ TrigDraw | TriggerDescription$ Whenever you face a dilemma, draw a card.
+T:Mode$ FacesDilemma | ValidPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you face a dilemma, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ 1
 Oracle:Whenever you face a dilemma, draw a card.

@@ -16,6 +16,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 import java.util.Collections;
@@ -347,6 +348,19 @@ public class GameSnapshot {
             setCardInCopiedGame(toGame, ue.toPlayer, ue.fromCard, ue.newCard, ue.fromType, ue.zonePosition);
         }
 
+        // Cards that exist in the game being restored but not in the snapshot: tokens,
+        // copies and effect cards created after it was taken. There is no earlier state to
+        // put them back into, so they leave the game. Without this the loop below looks
+        // them up in the snapshot and dereferences the null it gets back.
+        for (Card extraCard : toGame.getCardsInGame()) {
+            if (fromGame.findById(extraCard.getId()) == null) {
+                Zone zone = extraCard.getZone();
+                if (zone != null) {
+                    zone.remove(extraCard);
+                }
+            }
+        }
+
         // This loop happens later to make sure all cards are in the correct zone first
         for (Card newCard : toGame.getCardsIn(ZoneType.Battlefield)) {
             Card fromCard = fromGame.findById(newCard.getId());
@@ -359,6 +373,10 @@ public class GameSnapshot {
                     newAttachedTo.addAttachedCard(newCard);
                 }
             }
+            // Melded or not, the front half has to point at what the snapshot had — the two
+            // halves are one permanent, and a stale link outlives the meld otherwise.
+            newCard.setMeldedWith(fromCard.getMeldedWith() == null ? null
+                    : toGame.findById(fromCard.getMeldedWith().getId()));
             if (fromCard.getCloneOrigin() != null) {
                 newCard.setCloneOrigin(toGame.findById(fromCard.getCloneOrigin().getId()));
             }
@@ -436,7 +454,20 @@ public class GameSnapshot {
         if (fromType.equals(ZoneType.Stack)) {
             toGame.getStackZone().add(newCard);
             newCard.setZone(toGame.getStackZone());
+        } else if (isMelded(fromCard)) {
+            // The back half of a meld lives in the battlefield zone but in its own
+            // collection rather than the card list. Putting it in the list instead would
+            // leave it on the battlefield as a permanent of its own.
+            PlayerZoneBattlefield battlefield = (PlayerZoneBattlefield) toPlayer.getZone(ZoneType.Battlefield);
+            if (newCard.getZone() == null) {
+                newCard.setZone(battlefield);
+            }
+            battlefield.addToMelded(newCard);
         } else {
+            // It may have been melded in the state we are leaving behind.
+            if (toPlayer.getZone(ZoneType.Battlefield) instanceof PlayerZoneBattlefield battlefield) {
+                battlefield.removeFromMelded(newCard);
+            }
             toPlayer.getZone(fromType).add(newCard);
             newCard.setZone(toPlayer.getZone(fromType));
         }
@@ -450,7 +481,14 @@ public class GameSnapshot {
         newCard.setSickness(fromCard.hasSickness());
         //newCard.setForetold(fromCard.isForetold());
         //newCard.setForetoldCostByEffect(fromCard.isForetoldCostByEffect());
+        newCard.setBackSide(fromCard.isBackSide());
         newCard.setState(fromCard.getCurrentStateName(), false);
+    }
+
+    /** The back half of a meld: on the battlefield, but held apart from its card list. */
+    private static boolean isMelded(Card c) {
+        return c.getZone() instanceof PlayerZoneBattlefield battlefield
+                && battlefield.getMeldedCards().contains(c);
     }
 
     private static SpellAbility findSAInCard(SpellAbility sa, Card c) {

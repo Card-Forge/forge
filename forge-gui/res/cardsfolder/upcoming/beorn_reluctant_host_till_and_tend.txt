@@ -1,0 +1,16 @@
+Name:Beorn, Reluctant Host
+ManaCost:4 G
+Types:Legendary Creature Human Bear Shapeshifter
+PT:5/5
+K:Trample
+AlternateMode:Adventure
+Oracle:Trample
+
+ALTERNATE
+
+Name:Till and Tend
+ManaCost:1 G
+Types:Sorcery Adventure
+A:SP$ Effect | StaticAbilities$ Exploration | AILogic$ Always | SpellDescription$ You may play an additional land this turn. (Then exile this card. You may cast the creature later from exile.)
+SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land this turn.
+Oracle:You may play an additional land this turn. (Then exile this card. You may cast the creature later from exile.)

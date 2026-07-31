@@ -1,0 +1,14 @@
+Name:Gandalf, Shadow's Foe
+ManaCost:5 U U
+Types:Legendary Creature - Avatar Wizard
+PT:3/4
+K:Vigilance
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When NICKNAME enters, exile up to three target lands you control, then return them to the battlefield tapped under their owner's control.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Land.YouCtrl | ValidTgtsDesc$ land you control | TargetMin$ 0 | TargetMax$ 3 | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Tapped$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigDraw | TriggerDescription$ Landfall — Whenever a land you control enters, draw a card and put a +1/+1 counter on NICKNAME.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Vigilance\nWhen Gandalf enters, exile up to three target lands you control, then return them to the battlefield tapped under their owner's control.\nLandfall — Whenever a land you control enters, draw a card and put a +1/+1 counter on Gandalf.

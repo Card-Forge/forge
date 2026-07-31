@@ -1027,7 +1027,7 @@ public class DamageDealAi extends DamageAiBase {
     public static Pair<SpellAbility, Integer> getDamagingSAToChain(Player ai, SpellAbility sa, String damage) {
         if (!ai.getController().isAI()) {
             return null; // should only work for the actual AI player
-        } else if (((PlayerControllerAi)ai.getController()).getAi().usesSimulation()) {
+        } else if (((PlayerControllerAi)ai.getController()).getAi().usesFullSimulation()) {
             // simulated AI shouldn't use paired decisions, it tries to find complex decisions on its own
             return null;
         }
