@@ -3,6 +3,8 @@ name: Sync upstream forge
 on:
   schedule:
     - cron: '0 6 * * *'
+  push:
+    branches: [master]
   workflow_dispatch:
 
 permissions:
