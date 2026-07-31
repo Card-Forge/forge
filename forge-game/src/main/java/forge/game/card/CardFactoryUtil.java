@@ -649,7 +649,7 @@ public class CardFactoryUtil {
                         + " | TriggerDescription$ Storied (" + inst.getReminderText() + ")";
 
                 final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
-                trigger.setOverridingAbility(new AbilityStatic(card, Cost.Zero, null) {
+                final SpellAbility gainStory = new AbilityStatic(card, Cost.Zero, null) {
                     @Override
                     public Cost getPayCosts() {
                         // AiController.doTrigger only runs an API-less trigger when it recognises a
@@ -662,10 +662,13 @@ public class CardFactoryUtil {
                     public void resolve() {
                         final Player p = getActivatingPlayer();
                         if (p != null && p.isInGame()) {
-                            p.setEnduringStory(true, getHostCard().getSetCode());
+                            p.setEnduringStory(true, getOriginalHost().getSetCode());
                         }
                     }
-                });
+                };
+                // as AbilityFactory would have done, so getOriginalHost resolves on a copied trait
+                gainStory.setCardState(card.getCurrentState());
+                trigger.setOverridingAbility(gainStory);
 
                 inst.addTrigger(trigger);
             }
