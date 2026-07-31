@@ -9,6 +9,9 @@ permissions:
   contents: write
   pull-requests: write
 
+env:
+  GH_TOKEN: ${{ github.token }}
+
 concurrency:
   group: sync-upstream
   cancel-in-progress: false
@@ -25,30 +28,33 @@ jobs:
         run: |
           git remote add upstream https://github.com/Card-Forge/forge.git
           git fetch upstream master
+          git fetch origin sync/upstream || true
 
       - name: Check backlog
         id: behind
-        run: |
-          count=$(git rev-list --count HEAD..upstream/master)
-          echo "behind=$count" >> "$GITHUB_OUTPUT"
-          echo "upstream is $count commits ahead of us"
+        run: echo "behind=$(git rev-list --count master..upstream/master)" >> "$GITHUB_OUTPUT"
 
       - name: Merge upstream into sync branch
         if: steps.behind.outputs.behind > 0
         run: |
           git config user.name "Reforge"
           git config user.email "dev@reforge-commander.dev"
-          git checkout -b sync/upstream
+          if [ "$(git rev-parse --verify origin/sync/upstream 2>/dev/null)" ]; then
+            git checkout -b sync/upstream origin/sync/upstream
+          else
+            git checkout -b sync/upstream master
+          fi
+          git merge --no-edit master
           git merge --no-edit upstream/master
           if [ -n "$(git ls-files -u)" ]; then
             echo "::error::Merge conflicts with upstream. Resolve manually:"
-            echo "::error::  git fetch upstream && git checkout -b sync/upstream master && git merge upstream/master"
+            echo "::error::  git fetch upstream && git checkout -b sync/upstream origin/sync/upstream && git merge upstream/master"
             exit 1
           fi
 
       - name: Push sync branch
         if: steps.behind.outputs.behind > 0
-        run: git push --force origin sync/upstream
+        run: git push origin sync/upstream
 
       - name: Open pull request
         if: steps.behind.outputs.behind > 0
