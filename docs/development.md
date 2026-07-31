@@ -17,26 +17,28 @@ Reforge Commander transforms upstream Forge — a clunky but extremely feature-r
 
 ## Current Phase: Early Integration
 
-Architecture choices (additive-only changes, system property gating, upstream-agnostic layering) are sound. The signature flyweight exists but is not wired into the game engine. The UI isolates Commander modes but still mirrors upstream patterns rather than a ground-up redesign. This document tracks known gaps, planned fixes, and verification criteria.
+Architecture choices (additive-only changes, system property gating, upstream-agnostic layering) are sound. The signature flyweight is wired into token creation (1a) with battlefield-zone tracking (1b partial) and verified promotion via `CardCopyService` (1f). The UI isolates Commander modes but still mirrors upstream patterns rather than a ground-up redesign. This document tracks known gaps, planned fixes, and verification criteria.
 
 ---
 
 ## 1. StackedTokenCard — Flyweight Integration
 
-**Status: Actively planned. Class exists but is NOT wired into any game path.**
+**Status: Wired at token-creation time (1a), battlefield-zone tracking (1b partial), `CardCopyService` promotion verified (1f). Static eval, copier, relaxed merge, engine-path promotion, and benchmark remain.**
 
 ### Required Fixes
 
-| # | Gap | Impact | Fix |
-|---|-----|--------|-----|
-| 1a | `StackedTokenCard` is never instantiated by the game engine | Zero performance benefit from flyweight today | `CardFactory` must produce `StackedTokenCard` when creating identical tokens instead of individual `Card` objects |
-| 1b | Zone management (`Zone`) does not understand stacked tokens | Game state, counting, filtering all ignore stacks | Add `StackedTokenCard` tracking alongside `Card` tracking in `Zone`. All `getCards()` and predicate methods must include or expand stacked entries |
-| 1c | Static ability checking ignores stacks | No performance gain from batched static evaluation | `StaticAbility` resolver must accept a count parameter or recognize `StackedTokenCard` to evaluate once for N tokens |
-| 1d | `GameCopier` snapshots individual cards | AI state cloning copies O(N) cards instead of O(1) stacks | `GameCopier` must copy `StackedTokenCard` as an opaque flyweight rather than materializing individual cards |
-| 1e | `canMerge()` is conservative — blocks on counters and tapped state | Misses optimization opportunities for tokens with some modifications | Relax `canMerge()` after confirming game rules allow: summoning sickness is identity-irrelevant, temporary pumps from static abilities should not block merge |
-| 1f | `promote()` assumes `CardCopyService` exists with the right API | Verify `CardCopyService.copyCard()` exists and correctly creates independent copies with fresh card IDs | Audit `CardCopyService`; if it does not exist, build a card copy method in `StackedTokenCard` directly |
-| 1g | Promotion places cards directly on battlefield via `owner.getZone(ZoneType.Battlefield).add(copy)` | Bypasses zone-change rules (ETB triggers, replacement effects, state-based actions) | Route promoted tokens through the game engine's normal `moveToZone` / `moveTo` path, not raw zone add |
-| 1h | Benchmark constructs raw `Card` objects manually, not through real token creation | Benchmark results are irrelevant to actual game performance | Rewrite benchmark to go through Forge's real token resolution — preferably a scripted game scenario (e.g., cast `Secure the Wastes` for X) |
+Status legend: `DONE` / `PARTIAL` / open. Code carries `// doc:<item> <STATUS>` markers; CI's `doc-status` job verifies markers match this table.
+
+| # | Gap | Impact | Fix | Status |
+|---|-----|--------|-----|--------|
+| 1a | `StackedTokenCard` is never instantiated by the game engine | Zero performance benefit from flyweight today | Wire stack creation into `TokenEffectBase.makeTokenTable()` → `PlayerZoneBattlefield.tryStackToken()` at move-to-play time | **DONE** — `TokenEffectBase.java:172-174`, `PlayerZoneBattlefield.java:82` |
+| 1b | Zone management (`Zone`) does not understand stacked tokens | Game state, counting, filtering all ignore stacks | Add `StackedTokenCard` tracking alongside `Card` tracking in the battlefield zone; `getCards()`/`iterator()` expand stacks first | **PARTIAL** — battlefield zone only (`PlayerZoneBattlefield.java:101,146,152`); other zones unaffected |
+| 1c | Static ability checking ignores stacks | No performance gain from batched static evaluation | `StaticAbility` resolver must accept a count parameter or recognize `StackedTokenCard` to evaluate once for N tokens | |
+| 1d | `GameCopier` snapshots individual cards | AI state cloning copies O(N) cards instead of O(1) stacks | `GameCopier` must copy `StackedTokenCard` as an opaque flyweight rather than materializing individual cards | |
+| 1e | `canMerge()` is conservative — blocks on counters and tapped state | Misses optimization opportunities for tokens with some modifications | Relax `canMerge()` after confirming game rules allow: summoning sickness is identity-irrelevant, temporary pumps from static abilities should not block merge | |
+| 1f | `promote()` assumes `CardCopyService` exists with the right API | Verify `CardCopyService.copyCard()` exists and correctly creates independent copies with fresh card IDs | Audit `CardCopyService`; if it does not exist, build a card copy method in `StackedTokenCard` directly | **DONE** — `CardCopyService.copyCard(true)` verified and used in `promote()` (`StackedTokenCard.java:150`) |
+| 1g | Promotion places cards directly on battlefield via `owner.getZone(ZoneType.Battlefield).add(copy)` | Bypasses zone-change rules (ETB triggers, replacement effects, state-based actions) | Route promoted tokens through the game engine's normal `moveToZone` / `moveTo` path, not raw zone add | |
+| 1h | Benchmark constructs raw `Card` objects manually, not through real token creation | Benchmark results are irrelevant to actual game performance | Rewrite benchmark to go through Forge's real token resolution — preferably a scripted game scenario (e.g., cast `Secure the Wastes` for X) | |
 
 ### Verification
 
@@ -264,7 +266,7 @@ The progressive slowdown during long sessions is the most frequently reported up
 
 ### Token Performance (StackedTokenCard Wiring)
 
-Covered in Section 1. Reiterate: this is the single most impactful performance improvement available. Without it, the app cannot handle token-generating commanders (Krenko, Scute Swarm, Chatterfang) — which are among the most popular Commander decks.
+Covered in Section 1 (1a/1b partial done). Reiterate: the remaining wiring (1c static-eval batching, 1d GameCopier, 1g engine-path promotion) is the single most impactful performance improvement available. Without it, the app cannot handle token-generating commanders (Krenko, Scute Swarm, Chatterfang) — which are among the most popular Commander decks.
 
 ### Long-Session Stability
 
@@ -301,11 +303,11 @@ Card images must never be a failure point:
 
 | Priority | Item | Effort | Value |
 |----------|------|--------|-------|
-| P0 | 1a — Wire StackedTokenCard into CardFactory | 2-3 days | Unlocks entire flyweight feature |
+| P0 | 1a — Wire StackedTokenCard into CardFactory | 2-3 days | Unlocks entire flyweight feature — **DONE: wired at token-creation time in `TokenEffectBase.makeTokenTable()`** |
 | P0 | 1g — Route promotion through game engine, not raw zone add | 1 day | Prevents game-logic-skipping bugs |
 | P0 | 5a — Smart default game setup: reduce clicks to start a Commander game | 2 days | Core UX goal — **DONE: first deck auto-selected and applied, precon fallback for fresh installs** |
-| P0 | 6a — FlatLaf integration (`FlatLaf.setup()`) | 1 hour | Instant visual modernization |
-| P1 | 1b — Zone tracking for stacked tokens | 2-3 days | Enables all downstream consumers |
+| P0 | 6a — FlatLaf integration (`FlatLaf.setup()`) | 1 hour | Instant visual modernization — **DONE: FlatLaf 3.7.2 applied in `ReforgeCommanderApp.main()`** |
+| P1 | 1b — Zone tracking for stacked tokens | 2-3 days | Enables all downstream consumers — **PARTIAL: battlefield zone tracks stacks; other zones open** |
 | P1 | 1d — GameCopier flyweight support | 1 day | AI performance benefit |
 | P1 | 2b — Reduce VSubmenuPlayCommander duplication | 0.5 day | Maintainability |
 | P1 | 5b — Simplify lobby: prefill Commander variant, suggest deck, hide unused slots | 1 day | Core UX goal |

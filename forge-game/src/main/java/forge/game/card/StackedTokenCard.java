@@ -147,7 +147,7 @@ public class StackedTokenCard {
 
         List<Card> promoted = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
-            Card copy = new CardCopyService(prototype).copyCard(true);
+            Card copy = new CardCopyService(prototype).copyCard(true); // doc:1f DONE
             copy.getStates().forEach(cs -> copy.getState(cs).resetOriginalHost(prototype));
             copy.setOwner(owner);
             if (owner != controller) {

@@ -79,7 +79,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
      *
      * @return true if the token was stacked (either merged or created new stack)
      */
-    public final boolean tryStackToken(Card c) {
+    public final boolean tryStackToken(Card c) { // doc:1b PARTIAL
         if (c == null || c.getGamePieceType() != GamePieceType.TOKEN) return false;
         for (StackedTokenCard stack : stackedTokens) {
             if (stack.canMerge(c)) {
