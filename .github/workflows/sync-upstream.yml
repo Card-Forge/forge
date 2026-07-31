@@ -72,7 +72,16 @@ jobs:
 
       - name: Wait for CI
         if: steps.behind.outputs.behind > 0
-        run: gh pr checks ${{ steps.pr.outputs.number }} --watch --interval 20
+        run: |
+          PR=${{ steps.pr.outputs.number }}
+          HEAD=$(gh pr view "$PR" --json headRefOid --jq .headRefOid)
+          for i in $(seq 1 30); do
+            N=$(gh api "repos/${{ github.repository }}/commits/$HEAD/check-runs" --jq '.total_count' 2>/dev/null || echo 0)
+            [ "$N" -gt 0 ] && break
+            echo "waiting for CI checks to register... (${i}/30)"
+            sleep 20
+          done
+          gh pr checks "$PR" --watch --interval 20
 
       - name: Merge
         if: steps.behind.outputs.behind > 0
