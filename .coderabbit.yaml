@@ -1,0 +1,11 @@
+language: "en-US"
+reviews:
+  profile: "quiet"
+  incremental_reviews: true
+  single_comment: true
+  disable_suggestions: true
+  poem: false
+  review_status: false
+  sequence_diagrams: false
+chat:
+  auto_reply: false
