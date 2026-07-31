@@ -59,7 +59,7 @@ jobs:
           mvn -U -B -P android-test-build verify -e -T 1C -Dandroid.sdk.path=$ANDROID_SDK_ROOT -Dandroid.buildToolsVersion=35.0.0 -Dmaven.test.skip=true
 
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: forge-android-apk
           path: forge-gui-android/target/*-signed-aligned.apk
