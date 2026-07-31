@@ -571,10 +571,6 @@ public class PlaySpellAbility {
         req.playAbility(mayChooseNewTargets, true, false);
     }
 
-    public static boolean playSpellAbilityNoStack(final PlayerController controller, final Player player, final SpellAbility sa) {
-        return playSpellAbilityNoStack(controller, player, sa, false);
-    }
-
     public static boolean playSpellAbilityNoStack(final PlayerController controller, final Player player, final SpellAbility sa, boolean useOldTargets) {
         sa.setActivatingPlayer(player);
 

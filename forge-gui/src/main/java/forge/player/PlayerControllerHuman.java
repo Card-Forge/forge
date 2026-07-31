@@ -3,6 +3,7 @@ package forge.player;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
+import forge.ai.AIOption;
 import forge.ai.AvailableActions;
 import forge.game.GameState;
 import forge.ai.PlayerControllerAi;
@@ -2412,7 +2413,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean playTrigger(final Card host, final WrappedAbility wrapperAbility, final boolean isMandatory) {
-        return PlaySpellAbility.playSpellAbilityNoStack(this, player, wrapperAbility);
+        return PlaySpellAbility.playSpellAbilityNoStack(this, player, wrapperAbility, false);
     }
 
     @Override
@@ -3647,7 +3648,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         public void askAI(boolean useSimulation) {
             PlayerControllerAi ai = new PlayerControllerAi(player.getGame(), player, player.getOriginalLobbyPlayer());
-            ai.setUseSimulation(useSimulation);
+            ai.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
             player.runWithController(() -> {
                 List<SpellAbility> sas = ai.chooseSpellAbilityToPlay();
                 SpellAbility chosen = sas == null ? null : sas.get(0);

@@ -456,6 +456,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 return true;
             }
         }
+        if (isActivatedAbility() && hasParam("AlternateCost")) {
+            for (SpellAbility alt : GameActionUtil.getAdditionalCostSpell(this)) {
+                if (alt != this && alt.canPlay()) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 

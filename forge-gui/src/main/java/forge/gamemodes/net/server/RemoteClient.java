@@ -10,6 +10,7 @@ import forge.util.IHasForgeLog;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 
+import java.net.SocketAddress;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public final class RemoteClient implements IToClient, IHasForgeLog {
@@ -58,6 +59,12 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
      */
     public boolean hasValidSlot() {
         return index >= 0;
+    }
+
+    /** Remote peer address, for admission limits and logging. */
+    public SocketAddress getRemoteAddress() {
+        final Channel ch = channel;
+        return ch == null ? null : ch.remoteAddress();
     }
 
     /** Encodes synchronously on the caller's thread. Returns null on failure (logged). */
