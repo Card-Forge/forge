@@ -27,3 +27,11 @@ jobs:
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
           mvn -U -B clean test
+
+  docs:
+    runs-on: ubuntu-latest
+    name: doc-status
+    steps:
+      - uses: actions/checkout@v3
+      - name: Verify roadmap statuses match code markers
+        run: bash tools/doc-status.sh
