@@ -71,10 +71,6 @@ jobs:
           fi
           echo "number=$pr" >> "$GITHUB_OUTPUT"
 
-      - name: Enable auto-merge
-        if: steps.behind.outputs.behind > 0
-        run: gh pr merge ${{ steps.pr.outputs.number }} --merge --auto
-
       - name: Wait for CI
         if: steps.behind.outputs.behind > 0
         run: |
@@ -87,3 +83,11 @@ jobs:
             sleep 20
           done
           gh pr checks "$PR" --watch --interval 20
+
+      - name: Merge pull request
+        if: steps.behind.outputs.behind > 0
+        run: |
+          PR=${{ steps.pr.outputs.number }}
+          # ponytail: auto-merge needs the repo-level "Allow auto-merge" setting;
+          # fall back to a direct merge (safe after Wait for CI) when absent.
+          gh pr merge "$PR" --merge --auto || gh pr merge "$PR" --merge
