@@ -280,6 +280,15 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
+        // A zone restriction means the activator's own zone. CR 109.5: a card outside the
+        // battlefield has no controller, so the "you" in "your graveyard" is its owner.
+        // Shaman's Trance makes every graveyard count as the activator's.
+        if (sa.isSpell() && activator != c.getOwner() && this.getZone() != null
+                && !(this.getZone() == ZoneType.Graveyard
+                        && activator.hasKeyword("Shaman's Trance"))) {
+            return false;
+        }
+
         return true;
     }
 
