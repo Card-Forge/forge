@@ -28,13 +28,13 @@ jobs:
 
       - name: Fetch upstream
         run: |
-          git remote add upstream https://github.com/Card-Forge/forge.git
-          git fetch upstream master
+          git remote add forge https://github.com/Card-Forge/forge.git
+          git fetch forge master
           git fetch origin sync/upstream || true
 
       - name: Check backlog
         id: behind
-        run: echo "behind=$(git rev-list --count master..upstream/master)" >> "$GITHUB_OUTPUT"
+        run: echo "behind=$(git rev-list --count master..forge/master)" >> "$GITHUB_OUTPUT"
 
       - name: Merge upstream into sync branch
         if: steps.behind.outputs.behind > 0
@@ -47,10 +47,10 @@ jobs:
             git checkout -b sync/upstream master
           fi
           git merge --no-edit master
-          git merge --no-edit upstream/master
+          git merge --no-edit forge/master
           if [ -n "$(git ls-files -u)" ]; then
             echo "::error::Merge conflicts with upstream. Resolve manually:"
-            echo "::error::  git fetch upstream && git checkout -b sync/upstream origin/sync/upstream && git merge upstream/master"
+            echo "::error::  git fetch forge && git checkout -b sync/upstream origin/sync/upstream && git merge forge/master"
             exit 1
           fi
 
