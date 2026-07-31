@@ -651,14 +651,6 @@ public class CardFactoryUtil {
                 final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
                 final SpellAbility gainStory = new AbilityStatic(card, Cost.Zero, null) {
                     @Override
-                    public Cost getPayCosts() {
-                        // AiController.doTrigger only runs an API-less trigger when it recognises a
-                        // free one, and it compares against the Cost.Zero instance. Copying the
-                        // trigger onto each card would otherwise replace it with an equal copy.
-                        return Cost.Zero;
-                    }
-
-                    @Override
                     public void resolve() {
                         final Player p = getActivatingPlayer();
                         if (p != null && p.isInGame()) {
