@@ -1,0 +1,74 @@
+name: Sync upstream forge
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch upstream
+        run: |
+          git remote add upstream https://github.com/Card-Forge/forge.git
+          git fetch upstream master
+          git fetch origin sync/upstream || true
+
+      - name: Check backlog
+        id: behind
+        run: echo "behind=$(git rev-list --count master..upstream/master)" >> "$GITHUB_OUTPUT"
+
+      - name: Merge upstream into sync branch
+        if: steps.behind.outputs.behind > 0
+        run: |
+          git config user.name "Reforge"
+          git config user.email "dev@reforge-commander.dev"
+          if [ "$(git rev-parse --verify origin/sync/upstream 2>/dev/null)" ]; then
+            git checkout -b sync/upstream origin/sync/upstream
+          else
+            git checkout -b sync/upstream master
+          fi
+          git merge --no-edit master
+          git merge --no-edit upstream/master
+          if [ -n "$(git ls-files -u)" ]; then
+            echo "::error::Merge conflicts with upstream. Resolve manually:"
+            echo "::error::  git fetch upstream && git checkout -b sync/upstream origin/sync/upstream && git merge upstream/master"
+            exit 1
+          fi
+
+      - name: Push sync branch
+        if: steps.behind.outputs.behind > 0
+        run: git push origin sync/upstream
+
+      - name: Open pull request
+        if: steps.behind.outputs.behind > 0
+        id: pr
+        run: |
+          pr=$(gh pr list --base master --head sync/upstream --state open --json number --jq '.[0].number')
+          if [ -z "$pr" ]; then
+            pr=$(gh pr create --base master --head sync/upstream \
+              --title "chore: sync with upstream forge (${{ steps.behind.outputs.behind }} commits)" \
+              --body "Automated sync from Card-Forge/forge master. Merges only after CI passes.")
+          fi
+          echo "number=$pr" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for CI
+        if: steps.behind.outputs.behind > 0
+        run: gh pr checks ${{ steps.pr.outputs.number }} --watch --interval 20
+
+      - name: Merge
+        if: steps.behind.outputs.behind > 0
+        run: gh pr merge ${{ steps.pr.outputs.number }} --merge
