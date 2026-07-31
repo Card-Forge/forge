@@ -196,7 +196,15 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 try {
                     final ZipEntry entry = entries.nextElement();
 
-                    final String path = destFolder + File.separator + entry.getName();
+                    final String entryName = entry.getName();
+                    // REFORGE COMMANDER: zip-slip guard — reject entries that escape destFolder via .. or absolute paths (java/zipslip)
+                    final Path destDir = Paths.get(destFolder);
+                    final Path destPath = destDir.resolve(entryName).normalize();
+                    if (!destPath.startsWith(destDir)) {
+                        failedCount++;
+                        continue;
+                    }
+                    final String path = destPath.toString();
                     if (entry.isDirectory()) {
                         new File(path).mkdir();
                         if (progressBar != null)
