@@ -648,10 +648,24 @@ public class CardFactoryUtil {
                         + " | IsPresent$ Permanent.YouCtrl+Historic | PresentCompare$ GE3"
                         + " | TriggerDescription$ Storied (" + inst.getReminderText() + ")";
 
-                final String effect = "DB$ EnduringStory | Defined$ You";
-
                 final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
-                trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+                trigger.setOverridingAbility(new AbilityStatic(card, Cost.Zero, null) {
+                    @Override
+                    public Cost getPayCosts() {
+                        // AiController.doTrigger only runs an API-less trigger when it recognises a
+                        // free one, and it compares against the Cost.Zero instance. Copying the
+                        // trigger onto each card would otherwise replace it with an equal copy.
+                        return Cost.Zero;
+                    }
+
+                    @Override
+                    public void resolve() {
+                        final Player p = getActivatingPlayer();
+                        if (p != null && p.isInGame()) {
+                            p.setEnduringStory(true, getHostCard().getSetCode());
+                        }
+                    }
+                });
 
                 inst.addTrigger(trigger);
             }
