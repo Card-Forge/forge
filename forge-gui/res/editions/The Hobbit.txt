@@ -12,6 +12,7 @@ ScryfallCode=HOB
 12 R The Eagles Are Coming! @Zezhou Chen
 14 R Fíli the Pathfinder @Valera Lutfullina
 16 U Iron Hills Blacksmith @Jarel Threat
+17 R Kíli the Resourceful @Yuhong Ding
 22 U The Mountain-king's Return @Rovina Cai
 23 C Ori, Keeper of Songs @Yigit Koroglu
 24 M The Queen of Dale @Magali Villeneuve
@@ -61,6 +62,7 @@ ScryfallCode=HOB
 83 R The Sackville-Bagginses @Denman Rooke
 86 R Supper for Spiders @Michele Giorgi
 87 R Balin, Loremaster @Colin Boyer
+88 U Bombur, Gentle Dreamer @Eric Deschamps
 89 U Bothersome Noisemaker @Andreia Ugrai
 90 U Burn, Burn, Tree and Fern @Rovina Cai
 91 R Dáin Ironfoot @Tomas Duchek
@@ -75,7 +77,10 @@ ScryfallCode=HOB
 103 R Last Light of Durin's Day @Harkalé Linaï
 104 R The Misty Mountains Cold @Rovina Cai
 105 U Misty Mountains Raider @Tomas Duchek
+106 C Óin the Brave @Colin Boyer
+107 C Pinecone Strike @Javier Charro
 110 M Smaug the Magnificent @Francisco Miyara
+113 R Stone-Giant of High Pass @Miklós Ligeti
 114 M Thorin, Mountain-king @Javier Charro
 117 R Bejeweled Warg @John Di Giovanni
 118 C Beorn, Reluctant Host @Javier Charro
@@ -93,6 +98,7 @@ ScryfallCode=HOB
 132 U Old Fat Spider @Lorenzo Mastroianni
 133 C Ordinary Bear @Andrea Piparo
 134 R Part in Friendship @Jarel Threat
+135 C Quarrel @Denman Rooke
 136 R Radagast of Rhosgobel @Anna Podedworna
 137 R Through the Forest Gate @Leon Tukker
 138 U Troll Negotiations @Wero Gallo
@@ -155,7 +161,6 @@ ScryfallCode=HOB
 201 R The Great Goblin @Ted Nasmith
 202 U Thorin Oakenshield @Ted Nasmith
 203 U Gandalf, Spark Starter @Ted Nasmith
-204 R Glamdring, Foe-hammer @Ted Nasmith
 205 R The Eagles Are Coming! @Denman Rooke
 207 R The Lonely Mountain @Denman Rooke
 208 R Chief Warg's Company @Denman Rooke
@@ -163,6 +168,59 @@ ScryfallCode=HOB
 212 R Dáin's Company @Denman Rooke
 213 R Thranduil's Company @Denman Rooke
 214 R Belladonna Took @Kristina Carroll
+216 U Iron Hills Blacksmith @Francisco Badilla
+217 M The Queen of Dale @Ashley Mackenzie
+218 U Bilbo, Luckwearer @Cory Godbey
+219 M Bilbo, Thief in the Night @Ashley Mackenzie
+220 M Fateful Discovery @Ashley Mackenzie
+221 R Most Decrepit Old Bird @Andrea Radeck
+222 R Azog, Moria's Ruin @Dibujante Nocturno
+223 U Great Ugly-Looking Goblin @Andrea Radeck
+224 R Head of the Hunt @Benjamin Ee
+225 R Desert Were-Worm @Dibujante Nocturno
+226 R Desolation of Smaug @Dibujante Nocturno
+227 U Glóin the Mighty @Francisco Badilla
+228 R Last Light of Durin's Day @Francisco Badilla
+176 R My Precious @Valera Lutfullina
+177 M Orcrist, Goblin-cleaver @Erikas Perl
+178 R Sting, Bilbo's Sword @Tomas Duchek
+179 U Thrór's Map @Gaboleps
+180 C Well-Worn Spatula @Gaboleps
+181 R Elven Passage @Shahab Alizadeh
+182 C Elvenking's Halls @Leon Tukker
+183 C Goblin-town @Sean Vo
+184 C Hobbit Hole @Shahab Alizadeh
+185 C Iron Hills @Marina Ortega Lorente
+186 C Lake-town @Marina Ortega Lorente
+187 R The Lonely Mountain @Leon Tukker
+188 C Mirkwood @Leon Tukker
+189 L Plains @Chris Cold
+190 L Island @Kamila Szutenberg
+191 L Swamp @Erikas Perl
+192 L Mountain @Shahab Alizadeh
+193 L Forest @Kamila Szutenberg
+194 L Plains @WFlemming Illustration
+195 L Island @WFlemming Illustration
+196 L Swamp @WFlemming Illustration
+197 L Mountain @WFlemming Illustration
+198 L Forest @WFlemming Illustration
+199 U Troop of Ponies @Ted Nasmith
+200 C Rage into the Valley @Ted Nasmith
+201 R The Great Goblin @Ted Nasmith
+202 U Thorin Oakenshield @Ted Nasmith
+203 U Gandalf, Spark Starter @Ted Nasmith
+204 R Glamdring, Foe-hammer @Ted Nasmith
+205 R The Eagles Are Coming! @Denman Rooke
+206 U Dreaded Bat-Cloud @Denman Rooke
+207 R The Lonely Mountain @Denman Rooke
+208 R Chief Warg's Company @Denman Rooke
+209 C Thorin's Last Stand @Denman Rooke
+210 R Bard's Company @Denman Rooke
+211 R Bolg's Company @Denman Rooke
+212 R Dáin's Company @Denman Rooke
+213 R Thranduil's Company @Denman Rooke
+214 R Belladonna Took @Kristina Carroll
+215 U Bofur, Reliable Guardian @Cory Godbey
 216 U Iron Hills Blacksmith @Francisco Badilla
 217 M The Queen of Dale @Ashley Mackenzie
 218 U Bilbo, Luckwearer @Cory Godbey
@@ -186,6 +244,7 @@ ScryfallCode=HOB
 236 M Orcrist, Goblin-cleaver @Francisco Badilla
 237 R Sting, Bilbo's Sword @Barbara Rosiak
 238 R Elven Passage @Kristina Carroll
+239 M Gleaming Splendor @James Bousema
 240 R The Lord of the Eagles @Tyler Jacobson
 241 M Gollum, Riddle Master @Tyler Jacobson
 242 M Gandalf, Goblins' Bane @James Bousema
@@ -197,6 +256,7 @@ ScryfallCode=HOB
 248 R The Lonely Mountain @Tyler Jacobson
 249 M Smaug the Magnificent @Ted Nasmith
 250 R Belladonna Took @Kristina Carroll
+251 U Bofur, Reliable Guardian @Cory Godbey
 252 U Iron Hills Blacksmith @Francisco Badilla
 253 M The Queen of Dale @Ashley Mackenzie
 254 U Bilbo, Luckwearer @Cory Godbey
@@ -231,22 +291,32 @@ ScryfallCode=HOB
 283 M The Arkenstone @Tyler Jacobson
 284 R The Lonely Mountain @Tyler Jacobson
 285 R Bilbo's Gambit @Randy Gallegos
+286 R Fíli the Pathfinder @Valera Lutfullina
+287 R Kíli the Resourceful @Yuhong Ding
+288 R Settle the Wreckage @Chris Cold
 289 R An Unexpected Party @Matt Stewart
 290 M Elrond, Moon-Reader @Christina Kraus
 291 R Great Gilded Boat @Josu Solano
 292 R Riddles in the Dark @Lorenzo Mastroianni
+293 R Uncover the Moon-Letters @Leon Tukker
 294 R Wizard's Staff @Gaboleps
+295 R Along the Crooked Way @Bruce Brenneise
 296 M Inside Information @Sean Vo
 297 R The Master of Lake-town @Marius Bota
 298 R Rhovanion Rampager @Kevin Sidharta
 299 R The Sackville-Bagginses @Denman Rooke
 300 R Supper for Spiders @Michele Giorgi
+301 R Balin, Loremaster @Colin Boyer
 302 R Dáin Ironfoot @Tomas Duchek
 303 R Getaway Barrel @Pablo Mendoza
+304 R Stone-Giant of High Pass @Miklós Ligeti
+305 R Bejeweled Warg @John Di Giovanni
 306 R Cantankerous Keepers @Ramza Psyru
 307 R Gigantic Big Bear @Xabi Gaztelua
 308 R Part in Friendship @Jarel Threat
+309 R Radagast of Rhosgobel @Anna Podedworna
 310 R Through the Forest Gate @Leon Tukker
+311 R Dwalin, Weaponmaster @Marco Teixeira
 312 R Tom, Bert, and William @Leonardo Borazio
 313 L Plains @David Petersen
 314 L Plains @David Petersen
@@ -259,6 +329,16 @@ ScryfallCode=HOB
 321 R The Misty Mountains Cold @Rovina Cai
 
 [tokens]
+1 w_4_4_bird_soldier_flying @Leesha Hannigan
+2 w_1_1_human_soldier @Jarel Threat
+3 b_0_0_goblin_army @Stanislav Sherbakov
 4 b_0_0_goblin_army @Stanislav Sherbakov
+5 r_6_6_dragon_flying @Nino Is
 6 r_2_2_dwarf @Nia Kovalevski
+7 g_2_2_bear @Leesha Hannigan
+8 g_1_1_elf @Hristo D. Chukov
+9 g_2_2_wolf @Nathaniel Himawan
+10 axe @Nathaniel Himawan
+11 stone_boulder @Kamila Szutenberg
 12 c_a_treasure_sac @Leonardo Santanna
+13 c_a_treasure_sac @Kamila Szutenberg
