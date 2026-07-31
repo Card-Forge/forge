@@ -2,5 +2,5 @@ Name:Gust-Skimmer
 ManaCost:2
 Types:Artifact Creature Insect
 PT:2/1
-A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
-Oracle:{U}: Gust-Skimmer gains flying until end of turn.
+A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Flying | SpellDescription$ This creature gains flying until end of turn.
+Oracle:{U}: This creature gains flying until end of turn.

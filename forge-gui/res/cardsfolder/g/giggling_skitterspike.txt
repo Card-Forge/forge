@@ -3,12 +3,12 @@ ManaCost:4
 Types:Artifact Creature Toy
 PT:1/1
 K:Indestructible
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, blocks, or becomes the target of a spell, it deals damage equal to its power to each opponent.
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks, blocks, or becomes the target of a spell, it deals damage equal to its power to each opponent.
-T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ TrigDealDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks, blocks, or becomes the target of a spell, it deals damage equal to its power to each opponent.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever this creature attacks, blocks, or becomes the target of a spell, it deals damage equal to its power to each opponent.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamage | Secondary$ True | TriggerDescription$ Whenever this creature attacks, blocks, or becomes the target of a spell, it deals damage equal to its power to each opponent.
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ TrigDealDamage | Secondary$ True | TriggerDescription$ Whenever this creature attacks, blocks, or becomes the target of a spell, it deals damage equal to its power to each opponent.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ X
 A:AB$ PutCounter | Cost$ 5 | Monstrosity$ 5
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
-Oracle:Indestructible\nWhenever Giggling Skitterspike attacks, blocks, or becomes the target of a spell, it deals damage equal to its power to each opponent.\n{5}: Monstrosity 5. (If this creature isn't monstrous, put five +1/+1 counters on it and it becomes monstrous.)
+Oracle:Indestructible\nWhenever this creature attacks, blocks, or becomes the target of a spell, it deals damage equal to its power to each opponent.\n{5}: Monstrosity 5. (If this creature isn't monstrous, put five +1/+1 counters on it and it becomes monstrous.)
