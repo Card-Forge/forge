@@ -3,6 +3,6 @@ ManaCost:G W
 Types:Creature Cat
 PT:3/3
 A:AB$ PutCounter | Cost$ 3 G W | Monstrosity$ 1
-S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Hexproof & Indestructible | Description$ As long as CARDNAME is monstrous, it has hexproof and indestructible.
+S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Hexproof & Indestructible | Description$ As long as this creature is monstrous, it has hexproof and indestructible.
 DeckHas:Ability$Counters
-Oracle:{3}{G}{W}: Monstrosity 1. (If this creature isn't monstrous, put a +1/+1 counter on it and it becomes monstrous.)\nAs long as Fleecemane Lion is monstrous, it has hexproof and indestructible.
+Oracle:{3}{G}{W}: Monstrosity 1. (If this creature isn't monstrous, put a +1/+1 counter on it and it becomes monstrous.)\nAs long as this creature is monstrous, it has hexproof and indestructible.

@@ -3,9 +3,9 @@ ManaCost:3 U
 Types:Creature Wall
 PT:0/5
 K:Defender
-T:Mode$ Always | IsPresent$ Card.Self+withFlying | Execute$ Sacrifice | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME has flying, sacrifice it.
+T:Mode$ Always | IsPresent$ Card.Self+withFlying | Execute$ Sacrifice | TriggerZones$ Battlefield | TriggerDescription$ When this creature has flying, sacrifice it.
 SVar:Sacrifice:DB$ Sacrifice
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigDamage | TriggerDescription$ When CARDNAME leaves the battlefield, it deals damage equal to half the number of Islands you control, rounded down, to each nonblue creature without flying.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigDamage | TriggerDescription$ When this creature leaves the battlefield, it deals damage to each nonblue creature without flying equal to half the number of Islands you control, rounded down.
 SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.nonBlue+withoutFlying | NumDmg$ X
 SVar:X:Count$Valid Island.YouCtrl/HalfDown
-Oracle:Defender (This creature can't attack.)\nWhen Floodgate has flying, sacrifice it.\nWhen Floodgate leaves the battlefield, it deals damage equal to half the number of Islands you control, rounded down, to each nonblue creature without flying.
+Oracle:Defender\nWhen this creature has flying, sacrifice it.\nWhen this creature leaves the battlefield, it deals damage to each nonblue creature without flying equal to half the number of Islands you control, rounded down.

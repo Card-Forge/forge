@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Bat
 PT:2/1
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | IsPresent$ Artifact.YouCtrl | Description$ CARDNAME gets +1/+0 as long as you control an artifact.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | IsPresent$ Artifact.YouCtrl | Description$ This creature gets +1/+0 as long as you control an artifact.
 SVar:BuffedBy:Artifact
-Oracle:Flying\nFoundry Screecher gets +1/+0 as long as you control an artifact.
+Oracle:Flying\nThis creature gets +1/+0 as long as you control an artifact.

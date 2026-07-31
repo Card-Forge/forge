@@ -1,9 +1,9 @@
 Name:Five-Alarm Fire
 ManaCost:1 R R
 Types:Enchantment
-T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage, put a blaze counter on CARDNAME.
+T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage, put a blaze counter on this enchantment.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ BLAZE | CounterNum$ 1
 A:AB$ DealDamage | Cost$ SubCounter<5/BLAZE> | ValidTgts$ Any | NumDmg$ 5 | SpellDescription$ It deals 5 damage to any target.
 DeckHas:Ability$Counters
 DeckHints:Ability$Proliferate
-Oracle:Whenever a creature you control deals combat damage, put a blaze counter on Five-Alarm Fire.\nRemove five blaze counters from Five-Alarm Fire: It deals 5 damage to any target.
+Oracle:Whenever a creature you control deals combat damage, put a blaze counter on this enchantment.\nRemove five blaze counters from this enchantment: It deals 5 damage to any target.

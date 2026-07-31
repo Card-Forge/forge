@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:4/4
 K:Trample
 K:Evoke:4 R
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target land.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature enters, destroy target land.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land
 SVar:NeedsToPlayEvoked:Land.OppCtrl
-Oracle:Trample\nWhen Faultgrinder enters, destroy target land.\nEvoke {4}{R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)
+Oracle:Trample\nWhen this creature enters, destroy target land.\nEvoke {4}{R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)

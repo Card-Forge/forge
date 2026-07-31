@@ -4,5 +4,5 @@ Types:Creature Cat Dragon
 PT:4/4
 K:Improvise
 K:Flying
-A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
-Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nFlying\n{1}{R}: Freejam Regent gets +2/+0 until end of turn.
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ This creature gets +2/+0 until end of turn.
+Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nFlying\n{1}{R}: This creature gets +2/+0 until end of turn.

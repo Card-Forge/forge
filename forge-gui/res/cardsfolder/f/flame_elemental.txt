@@ -5,4 +5,4 @@ PT:3/2
 A:AB$ DealDamage | Cost$ R T Sac<1/CARDNAME> | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ It deals damage equal to its power to target creature.
 SVar:X:Sacrificed$CardPower
 DeckHas:Ability$Sacrifice
-Oracle:{R}, {T}, Sacrifice Flame Elemental: It deals damage equal to its power to target creature.
+Oracle:{R}, {T}, Sacrifice this creature: It deals damage equal to its power to target creature.
