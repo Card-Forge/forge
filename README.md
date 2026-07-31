@@ -35,6 +35,11 @@ Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
 - _(Note: **Android 11** is the minimum requirement with at least **6GB RAM** to run smoothly. You need to enable **"Install unknown apps"** for Forge to initialize and update itself)_
 - Download the **APK** from the [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots). On the first launch, Forge will automatically download all necessary assets.
 
+### 📱 iOS Installation (early stage)
+- Build the **IPA** according to Wiki
+- No jailbreak needed, only developer mode
+- Connect your device to a PC to self-sign and upload the app file, multiple tools exist e.g. [Sideloadly](https://sideloadly.io)
+
 ---
 
 ## 🎮 Modes of Play

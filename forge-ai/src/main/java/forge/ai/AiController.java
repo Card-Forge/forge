@@ -24,6 +24,7 @@ import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.GameStateEvaluator;
+import forge.ai.simulation.OnePlaySafetyChecker;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -93,7 +94,7 @@ public class AiController {
     private final AiCardMemory memory;
     private Combat predictedCombat;
     private Combat predictedCombatNextTurn;
-    private boolean useSimulation;
+    private AIOption simMode;
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
     private boolean useLivingEnd;
@@ -107,12 +108,14 @@ public class AiController {
         simPicker = new SpellAbilityPicker(game, player);
     }
 
-    public boolean usesSimulation() {
-        return this.useSimulation;
+    public boolean usesHybridSimulation() {
+        return simMode == AIOption.USE_HYBRID_SIMULATION;
     }
-
-    public void setUseSimulation(boolean value) {
-        this.useSimulation = value;
+    public boolean usesFullSimulation() {
+        return simMode == AIOption.USE_FULL_SIMULATION;
+    }
+    public void setUseSimulation(AIOption mode) {
+        simMode = mode;
     }
 
     public int getAttackAggression() {
@@ -898,9 +901,7 @@ public class AiController {
             return AiPlayDecision.NeedsToPlayCriteriaNotMet;
         }
 
-        // TODO before suspending some spells try to predict if relevant targets can be expected
         if (sa.getApi() != null) {
-
             String msg = "AiController:canPlaySa: AI checks for if can PlaySa";
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Api", sa.getApi().toString());
@@ -938,6 +939,11 @@ public class AiController {
                         return AiPlayDecision.CantPlayAi;
                     }
                 }
+            }
+            // TODO before suspending some spells try to predict if relevant targets can be expected
+            if ((sa.isPlotting() || sa.isForetelling() || sa.isKeyword(Keyword.SUSPEND)) && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                // don't compete with more important SA AI wants to pay before main2
+                return AiPlayDecision.WaitForMain2;
             }
         }
         if (checkCurseEffects(sa)) {
@@ -1287,7 +1293,17 @@ public class AiController {
             }
         }
 
-        return canPlaySpellOrLandBasic(spell.getHostCard(), spell);
+        AiPlayDecision basicDecision = canPlaySpellOrLandBasic(spell.getHostCard(), spell);
+        if (basicDecision != AiPlayDecision.WillPlay || mandatory) {
+            return basicDecision;
+        }
+
+        SpellAbility abilityToCheck = spell;
+        if (withoutPayingManaCost && !spell.hasParam("WithoutManaCost")) {
+            abilityToCheck = spell.copyWithNoManaCost(player);
+        }
+        return isChosenPlayAcceptable(abilityToCheck)
+                ? AiPlayDecision.WillPlay : AiPlayDecision.CurseEffects;
     }
 
     // declares blockers for given defender in a given combat
@@ -1345,6 +1361,13 @@ public class AiController {
         return Lists.newArrayList(sa);
     }
 
+    private boolean isChosenPlayAcceptable(SpellAbility ability) {
+        if (usesFullSimulation() || !usesHybridSimulation()) {
+            return true;
+        }
+        return OnePlaySafetyChecker.isAcceptable(player, ability);
+    }
+
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         AiCache.clear();
         // Reset cached predicted combat, as it may be stale. It will be
@@ -1356,7 +1379,7 @@ public class AiController {
         // Reset priority mana reservation that's meant to work for one spell only
         memory.clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
 
-        if (useSimulation) {
+        if (usesFullSimulation()) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
         }
 
@@ -1385,7 +1408,9 @@ public class AiController {
 
                     if (!abilities.isEmpty()) {
                         // TODO extend this logic to evaluate MDFC with both sides land
-                        return abilities;
+                        if (isChosenPlayAcceptable(abilities.get(0))) {
+                            return abilities;
+                        }
                     }
                 }
             }
@@ -1673,6 +1698,10 @@ public class AiController {
                 if (opinion != AiPlayDecision.WillPlay)
                     continue;
 
+                if (!isChosenPlayAcceptable(sa)) {
+                    continue;
+                }
+
                 // TODO could continue to try find another with higher rating (weighted by priority ordering)
                 return sa;
             }
@@ -1753,7 +1782,7 @@ public class AiController {
             return doTrigger(((WrappedAbility) sa).getWrappedAbility(), mandatory);
         if (sa.getApi() != null)
             return SpellApiToAi.Converter.get(sa).doTrigger(player, sa, mandatory);
-        if (sa.getPayCosts() == Cost.Zero && !sa.usesTargeting()) {
+        if (sa.getPayCosts().isFree() && !sa.usesTargeting()) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;
         }
@@ -2097,7 +2126,7 @@ public class AiController {
     public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) {
         Map<DeckSection, List<? extends PaperCard>> complaints = new HashMap<>();
         // When using simulation, AI should be able to figure out most cards.
-        if (!useSimulation) {
+        if (!usesFullSimulation()) {
             complaints = myDeck.getUnplayableAICards().unplayable;
         }
         return complaints;
@@ -2212,7 +2241,7 @@ public class AiController {
 
     public Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa,
                                                    CardCollection fetchList, Player player2, Player decider) {
-        if (useSimulation) {
+        if (usesFullSimulation()) {
             return simPicker.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
         }
 

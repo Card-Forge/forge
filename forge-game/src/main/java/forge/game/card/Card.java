@@ -1846,6 +1846,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (!Keyword.smartValueOf(counterType.toString().split(":")[0]).isMultipleRedundant()) {
                 result.putParam("KeywordMultiplier", String.valueOf(getCounters(counterType)));
             }
+        } else if (counterType.is(CounterEnumType.HONE)) {
+            // Each hone counter on an Equipment grants +1/+0 to the equipped creature.
+            // The amount reads the live counter count, so it stays correct as counters change.
+            result = counterTypeKeywordStatic.computeIfAbsent(counterType, ct -> {
+                StaticAbility stAb = StaticAbility.create("Mode$ Continuous | EffectZone$ Battlefield | Affected$ Creature.EquippedBy | AddPower$ HoneCounters"
+                        + " | Description$ Equipped creature gets +1/+0 for each hone counter on this Equipment.", this, currentState, true);
+                stAb.setSVar("HoneCounters", "Count$CardCounters.HONE");
+                return stAb;
+            });
         } else {
             return false;
         }
@@ -3407,6 +3416,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean hasRemoveIntrinsic() {
+        if (changedCardTypes.isEmpty()) {
+            return false;
+        }
         // only Layer 4 are affected, and it's never intrinsic
         return changedCardTypes.values().stream().anyMatch(ICardChangedType::isRemoveLandTypes);
     }
@@ -4116,11 +4128,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return changedCardKeywordsByText;
     }
 
-    public Iterable<IKeywordsChange> getChangedCardKeywordsList(final CardState state) {
+    public Iterable<? extends IKeywordsChange> getChangedCardKeywordsList(final CardState state) {
+        if (changedCardKeywordsByText.isEmpty() && changedCardKeywordsByWord.isEmpty() && changedCardKeywords.isEmpty()) {
+            return state.getLandTraitChanges();
+        }
         return Iterables.concat(
             changedCardKeywordsByText.values(), // Layer 3
             ImmutableList.of(changedCardKeywordsByWord), // Layer 3
-            ImmutableList.of(state.getLandTraitChanges()), // Layer 4
+            state.getLandTraitChanges(), // Layer 4
             changedCardKeywords.values() // Layer 6
         );
     }
@@ -4949,10 +4964,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return changedCardTraitsByText.remove(timestamp, staticId) != null;
     }
 
-    public Iterable<ICardTraitChanges> getChangedCardTraitsList(CardState state) {
+    public Iterable<? extends ICardTraitChanges> getChangedCardTraitsList(CardState state) {
+        if (changedCardTraitsByText.isEmpty() && changedCardTraits.isEmpty()) {
+            return state.getLandTraitChanges();
+        }
         return Iterables.<ICardTraitChanges>concat(
             changedCardTraitsByText.values(), // Layer 3
-            ImmutableList.of(state.getLandTraitChanges()), // Layer 4
+            state.getLandTraitChanges(), // Layer 4
             changedCardTraits.values() // Layer 6
         );
     }

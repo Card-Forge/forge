@@ -254,7 +254,33 @@ public class FTextField extends FDisplayObject implements ITextField {
 
             @Override
             public boolean keyTyped(char ch) {
+                // iOS fix: the software keyboard delivers backspace/delete through
+                // keyTyped as \b (0x08) or 0x7F, not as a keyDown with
+                // Keys.BACKSPACE. Without this, pressing delete inserts a control
+                // character instead of deleting (the delete key does nothing in the
+                // Settings search field). Mirror the keyDown BACKSPACE handling.
+                if (ch == '\b' || ch == '\u007F') {
+                    if (text.length() > 0) {
+                        if (selLength == 0) { //delete previous character if selection empty
+                            if (selStart > 0) {
+                                selStart--;
+                            }
+                            selLength = 1;
+                        }
+                        insertText("");
+                        if (changedHandler != null) { //live-filter search fields as characters are removed
+                            changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
+                        }
+                    }
+                    return true;
+                }
+                if (ch < ' ') { //ignore other control characters
+                    return false;
+                }
                 insertText(String.valueOf(ch));
+                if (changedHandler != null) { //live-filter search fields as characters are typed
+                    changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
+                }
                 return true;
             }
 

@@ -12,8 +12,9 @@ import java.util.List;
 
 public class SimulationController {
     private static boolean DEBUG = false;
-    private static int MAX_DEPTH = 3;
+    private static final int DEFAULT_MAX_DEPTH = 3;
 
+    private final int maxDepth;
     private List<Plan.Decision> currentStack;
     private List<Score> scoreStack;
     private List<GameSimulator> simulatorStack;
@@ -39,6 +40,11 @@ public class SimulationController {
     }
 
     public SimulationController(Score score) {
+        this(score, DEFAULT_MAX_DEPTH);
+    }
+
+    public SimulationController(Score score, int maxDepth) {
+        this.maxDepth = maxDepth;
         bestScore = score;
         scoreStack = new ArrayList<>();
         scoreStack.add(score);
@@ -51,7 +57,7 @@ public class SimulationController {
     }
 
     public boolean shouldRecurse() {
-        return bestScore.value != Integer.MAX_VALUE && getRecursionDepth() < MAX_DEPTH;
+        return !GameStateEvaluator.isWinning(bestScore.value) && getRecursionDepth() < maxDepth;
     }
 
     public Plan.Decision getLastDecision() {
