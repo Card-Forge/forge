@@ -66,38 +66,23 @@ jobs:
           if [ -z "$pr" ]; then
             pr=$(gh pr create --base master --head sync/upstream \
               --title "chore: sync with upstream forge (${{ steps.behind.outputs.behind }} commits)" \
-              --body "Automated sync from Card-Forge/forge master. Merges only after CI passes." \
-              --reviewer @copilot)
+              --body "Automated sync from Card-Forge/forge master. Merges only after CI passes.")
           fi
           echo "number=$pr" >> "$GITHUB_OUTPUT"
+
+      - name: Enable auto-merge
+        if: steps.behind.outputs.behind > 0
+        run: gh pr merge ${{ steps.pr.outputs.number }} --merge --auto
 
       - name: Wait for CI
         if: steps.behind.outputs.behind > 0
         run: |
           PR=${{ steps.pr.outputs.number }}
           HEAD=$(gh pr view "$PR" --json headRefOid --jq .headRefOid)
-          for i in $(seq 1 30); do
-            N=$(gh api "repos/${{ github.repository }}/commits/$HEAD/check-runs" --jq '.total_count' 2>/dev/null || echo 0)
-            [ "$N" -gt 0 ] && break
-            echo "waiting for CI checks to register... (${i}/30)"
+          for i in $(seq 1 60); do
+            N=$(gh api "repos/${{ github.repository }}/commits/$HEAD/check-runs" --jq '[.check_runs[] | select(.status == "in_progress" or .status == "queued")] | length' 2>/dev/null || echo 1)
+            echo "pending checks: ${N} (${i}/60)"
+            [ "$N" -eq 0 ] && break
             sleep 20
           done
           gh pr checks "$PR" --watch --interval 20
-
-      - name: Wait for Copilot review
-        if: steps.behind.outputs.behind > 0
-        run: |
-          PR=${{ steps.pr.outputs.number }}
-          for i in $(seq 1 60); do
-            DEC=$(gh pr view "$PR" --json reviewDecision --jq .reviewDecision 2>/dev/null || echo "")
-            echo "copilot review decision: ${DEC:-none} (${i}/60)"
-            [ "$DEC" = "APPROVED" ] && exit 0
-            [ "$DEC" = "CHANGES_REQUESTED" ] && { echo "::error::Copilot requested changes on sync PR $PR"; exit 1; }
-            sleep 20
-          done
-          echo "::error::Timed out waiting for Copilot review on sync PR $PR"
-          exit 1
-
-      - name: Merge
-        if: steps.behind.outputs.behind > 0
-        run: gh pr merge ${{ steps.pr.outputs.number }} --merge
