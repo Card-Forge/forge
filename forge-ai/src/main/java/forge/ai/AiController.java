@@ -1782,7 +1782,7 @@ public class AiController {
             return doTrigger(((WrappedAbility) sa).getWrappedAbility(), mandatory);
         if (sa.getApi() != null)
             return SpellApiToAi.Converter.get(sa).doTrigger(player, sa, mandatory);
-        if (sa.getPayCosts() == Cost.Zero && !sa.usesTargeting()) {
+        if (sa.getPayCosts().isFree() && !sa.usesTargeting()) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;
         }
