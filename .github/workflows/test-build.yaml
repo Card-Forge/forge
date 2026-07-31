@@ -15,7 +15,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # ponytail: docs/tools/workflow-only changes cannot break the Java suite;
+      # skip the (tens of minutes) Maven run but still report success so the
+      # ruleset's required "Test with Java 17/21" checks stay satisfied.
+      - name: Detect code changes
+        id: code
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            code:
+              - '**'
+              - '!docs/**'
+              - '!tools/**'
+              - '!.github/**'
+              - '!**/*.md'
+
       - name: Setup java
+        if: steps.code.outputs.code == 'true'
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
@@ -23,9 +39,11 @@ jobs:
           cache: 'maven'
 
       - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
+        if: steps.code.outputs.code == 'true'
         run: command -v Xvfb >/dev/null 2>&1 || { sudo apt update && sudo apt install -y xvfb; }
 
       - name: Run tests in virtual framebuffer
+        if: steps.code.outputs.code == 'true'
         run: |
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
