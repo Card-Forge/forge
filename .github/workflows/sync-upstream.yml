@@ -77,9 +77,13 @@ jobs:
           PR=${{ steps.pr.outputs.number }}
           HEAD=$(gh pr view "$PR" --json headRefOid --jq .headRefOid)
           for i in $(seq 1 60); do
-            N=$(gh api "repos/${{ github.repository }}/commits/$HEAD/check-runs" --jq '[.check_runs[] | select(.status == "in_progress" or .status == "queued")] | length' 2>/dev/null || echo 1)
-            echo "pending checks: ${N} (${i}/60)"
-            [ "$N" -eq 0 ] && break
+            # The branch was just pushed: check-runs may not be registered yet,
+            # so wait until at least one exists AND none are pending.
+            DATA=$(gh api "repos/${{ github.repository }}/commits/$HEAD/check-runs" 2>/dev/null || echo '{"total_count":1,"check_runs":[{"status":"in_progress"}]}')
+            TOTAL=$(echo "$DATA" | jq '.total_count')
+            PEND=$(echo "$DATA" | jq '[.check_runs[] | select(.status == "in_progress" or .status == "queued")] | length')
+            echo "check-runs: ${TOTAL}, pending: ${PEND} (${i}/60)"
+            [ "$TOTAL" -gt 0 ] && [ "$PEND" -eq 0 ] && break
             sleep 20
           done
           gh pr checks "$PR" --watch --interval 20
