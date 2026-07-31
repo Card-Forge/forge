@@ -1,9 +1,13 @@
 # Customized advanced CodeQL setup for Reforge-Commander.
 #
 # Matrix trimmed to what the repo actually ships: Java (the product, via Maven
-# autobuild so the classpath resolves and duplicate-class noise disappears) and
-# GitHub Actions YAML. The other detected languages (.tsx map data, .py dev
-# tools, one stray .h) are not analyzed.
+# autobuild so the classpath resolves and duplicate-class noise disappears).
+# The other detected languages (.tsx map data, .py dev tools, one stray .h)
+# are not analyzed.
+#
+# NOTE: 'actions' must stay in the matrix: the Condom ruleset's code_scanning
+# rule compares PR heads against every configuration on master and blocks
+# merges of PRs that remove one. ~1-2 min no-op scan, non-negotiable.
 name: "CodeQL Advanced"
 
 on:
