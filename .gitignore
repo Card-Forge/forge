@@ -100,3 +100,7 @@ __pycache__
 # EDHREC commander matrix tool intermediates
 forge-gui/tools/build
 forge-gui-ios/robovm.properties
+
+# GitHub PAT — never commit
+github_pat*
+GitHub pat
