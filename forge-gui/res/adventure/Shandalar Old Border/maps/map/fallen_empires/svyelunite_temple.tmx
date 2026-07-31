@@ -918,21 +918,21 @@
   <object id="50022" template="../../../../../../common/maps/obj/dialog.tx" x="356.75" y="106" width="16" height="16">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_knights_placeholder.atlas" />
+    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_knights.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
   <object id="50023" template="../../../../../../common/maps/obj/dialog.tx" x="79.5" y="256" width="16" height="16">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_knights_placeholder.atlas" />
+    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_knights.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
   <object id="50042" template="../../../../../../common/maps/obj/dialog.tx" x="191.25" y="368.75" width="16" height="16">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_knights_placeholder.atlas" />
+    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_knights.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>

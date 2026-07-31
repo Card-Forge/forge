@@ -102739,7 +102739,7 @@
   },
   {
     "name": "FEM Vodalian Knight",
-    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_knights_placeholder.atlas",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_knights.atlas",
     "scale": 0.2,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_knight.dck"
