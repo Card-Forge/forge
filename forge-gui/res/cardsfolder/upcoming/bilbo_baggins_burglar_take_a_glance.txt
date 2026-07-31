@@ -1,0 +1,16 @@
+Name:Bilbo Baggins, Burglar
+ManaCost:2 U
+Types:Legendary Creature Halfling Rogue
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+AlternateMode:Adventure
+Oracle:When Bilbo Baggins enters, draw a card.
+
+ALTERNATE
+
+Name:Take a Glance
+ManaCost:U
+Types:Sorcery Adventure
+A:SP$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Scry 2. (Then exile this card. You may cast the creature later from exile.)

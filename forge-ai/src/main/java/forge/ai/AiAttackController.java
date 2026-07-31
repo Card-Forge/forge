@@ -859,7 +859,7 @@ public class AiAttackController {
         boolean simAI = false;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            simAI = aic.usesSimulation();
+            simAI = aic.usesFullSimulation();
             if (!simAI) {
                 playAggro = aic.getBoolProperty(AiProps.PLAY_AGGRO);
                 chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
@@ -1239,10 +1239,15 @@ public class AiAttackController {
                 && ComputerUtil.countUsefulCreatures(ai) > ComputerUtil.countUsefulCreatures(defendingOpponent)
                 && ai.getLife() > defendingOpponent.getLife()
                 && !ComputerUtilCombat.lifeInDanger(ai, combat) // this isn't really doing anything unless the attacking player in combat isn't the AI (which currently isn't used like that)
-                && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0) || tradeIfTappedOut
-                && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0) || MyRandom.percentTrue(extraChanceIfOppHasMana)
+                // our own mana: ATTACK_INTO_TRADE_WHEN_TAPPED_OUT lets us swing while tapped out,
+                // otherwise we want mana open so we can bluff or use a trick
+                && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0 || tradeIfTappedOut)
+                // the opponent's mana: safe when they're tapped out, otherwise take the extra roll
+                // for the risk of walking into a trick
+                && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0
+                        || MyRandom.percentTrue(extraChanceIfOppHasMana))
                 && (!tradeIfLowerLifePressure || (ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() <
-                defendingOpponent.getLifeLostThisTurn() + defendingOpponent.getLifeLostThisTurn()))) {
+                defendingOpponent.getLifeLostLastTurn() + defendingOpponent.getLifeLostThisTurn()))) {
             aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
         } else if (ratioDiff >= 0 && this.attackers.size() > 1) {
             aiAggression = 3; // attack expecting to make good trades or damage player.
@@ -1726,8 +1731,6 @@ public class AiAttackController {
             i++;
             if (i + refPowerValue >= cre.getCurrentToughness()) {
                 attUnsafe.add(cre);
-            } else {
-                continue;
             }
         }
 

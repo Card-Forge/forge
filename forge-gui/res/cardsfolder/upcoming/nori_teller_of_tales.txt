@@ -1,0 +1,7 @@
+Name:Nori, Teller of Tales
+ManaCost:1 RW
+Types:Legendary Creature Dwarf Bard
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, target attacking creature gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+attacking | TgtPrompt$ Select target attacking creature you control | KW$ First Strike
+Oracle:Whenever CARDNAME attacks, target attacking creature gains first strike until end of turn.
