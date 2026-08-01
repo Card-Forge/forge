@@ -100,12 +100,26 @@ public class PlayerZoneBattlefield extends PlayerZone {
      */
     public final void expandStacks() {
         if (stackedTokens.isEmpty()) return;
-        for (StackedTokenCard stack : stackedTokens) {
-            if (stack.isEmpty()) continue;
-            // promoteAll returns individual copies; add them to cardList
-            cardList.addAll(stack.promoteAll());
-        }
+        // Snapshot + clear first so events fired below cannot re-enter
+        // expandStacks() while the stacks are still pending.
+        List<StackedTokenCard> stacks = new ArrayList<>(stackedTokens);
         stackedTokens.clear();
+        final boolean oldTrigger = trigger;
+        trigger = false; // promote() already carried over the prototype's entry state // doc:1g DONE
+        try {
+            for (StackedTokenCard stack : stacks) {
+                if (stack.isEmpty()) continue;
+                // Route promoted copies through Zone.add() so zone-change events
+                // and view refreshes fire. NOT moveToPlay: these permanents already
+                // entered (and triggered) before stacking — a second move would
+                // double-fire ETB. // doc:1g DONE
+                for (Card copy : stack.promoteAll()) {
+                    add(copy);
+                }
+            }
+        } finally {
+            trigger = oldTrigger;
+        }
     }
 
     /**
