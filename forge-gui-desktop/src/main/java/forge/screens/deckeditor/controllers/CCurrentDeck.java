@@ -106,13 +106,13 @@ public enum CCurrentDeck implements ICDoc {
     public void update() {
     }
 
-    @SuppressWarnings("unchecked")
     private void newDeck() {
         if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen(), true)) { return; }
+        CDeckEditorUI.SINGLETON_INSTANCE.prepareForNewDeck();
 
         try {
             SwingUtilities.invokeLater(() -> {
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
+                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().newModel();
                 VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().requestFocusInWindow();
             });
         } catch (final Exception ex) {

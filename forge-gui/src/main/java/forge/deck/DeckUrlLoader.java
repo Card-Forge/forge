@@ -147,7 +147,7 @@ public final class DeckUrlLoader {
         }
     }
 
-    private static StorageImmediatelySerialized<Deck> getStorage() {
+    public static StorageImmediatelySerialized<Deck> getStorage() {
         return new StorageImmediatelySerialized<>("URL decks",
                 new DeckStorage(new File(ForgeConstants.DECK_BASE_DIR + URL_DECK_DIR_NAME + ForgeConstants.PATH_SEPARATOR),
                         ForgeConstants.DECK_BASE_DIR));

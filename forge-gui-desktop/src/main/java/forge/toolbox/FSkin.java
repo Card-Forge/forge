@@ -1126,7 +1126,7 @@ public class FSkin {
     private static int currentSkinIndex;
     private static String preferredDir;
     private static String preferredName;
-    private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck, bimOldFoils,
+    private static BufferedImage bimDefaultSprite, bimFavIcon, bimGear, bimPreferredSprite, bimFoils, bimQuestDraftDeck, bimOldFoils,
     bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimPhyrexian, bimColorlessHybrid, bimDefaultSleeve,
             bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark, bimDefaultDraftRank, bimAttractionLights,
             bimZoneIcons;
@@ -1248,7 +1248,7 @@ public class FSkin {
         }
 
         final Localizer localizer = Localizer.getInstance();
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("splash.loading.processingimagesprites") + ": ", 21);
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("splash.loading.processingimagesprites") + ": ", 22);
 
         // Grab and test various sprite files.
         final String defaultDir = ForgeConstants.DEFAULT_SKINS_DIR;
@@ -1274,6 +1274,7 @@ public class FSkin {
         final File f20 = new File(defaultDir + ForgeConstants.SPRITE_DRAFTRANKS_FILE);
         final File f21 = new File(defaultDir + ForgeConstants.SPRITE_ATTRACTION_LIGHTS_FILE);
         final File f22 = new File(defaultDir + ForgeConstants.SPRITE_ZONE_FILE);
+        final File f23 = new File(defaultDir + ForgeConstants.SPRITE_GEAR_FILE);
 
         try {
             int p = 0;
@@ -1316,6 +1317,8 @@ public class FSkin {
             bimQuestDraftDeck = ImageIO.read(f8);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimFavIcon = ImageIO.read(f9);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimGear = ImageIO.read(f23);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             if (f5.exists()) { bimPreferredAvatars = ImageIO.read(f5); }
 
@@ -1365,6 +1368,9 @@ public class FSkin {
                     break;
                 case FAVICON:
                     setImage(prop, bimFavIcon);
+                    break;
+                case GEAR:
+                    setImage(prop, bimGear);
                     break;
                 case ABILITY:
                     setImage(prop, bimAbilities);
