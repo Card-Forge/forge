@@ -104,10 +104,16 @@ public class StackedTokenPromotionTest extends AITest {
         PlayerZoneBattlefield battlefield = (PlayerZoneBattlefield) p1.getZone(ZoneType.Battlefield);
 
         int enteredTurn = 0;
+        List<Card> tokens = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             Card token = makeToken(game, p1);
             battlefield.add(token);
             enteredTurn = token.getTurnInZone();
+            tokens.add(token);
+        }
+        // Stack after all adds: each add() fires a view update that expands any
+        // pending stack, so the merge must happen in a separate phase.
+        for (Card token : tokens) {
             assertTrue(battlefield.tryStackToken(token));
         }
         assertEquals("three identical tokens must merge into one stack", 1, battlefield.getStackedTokens().size());
