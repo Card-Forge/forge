@@ -67,6 +67,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_RANDOM_FOIL ("false"),
         UI_AVATARS ("0,1"),
         UI_SLEEVES ("0,1"),
+        UI_PLAYER_MATS ("SLATE,OCEAN,FOREST,CRIMSON,AMBER,VIOLET,MOSS,WINE"),
         UI_SLEEVE_ART_LIBRARY (""),
         UI_SHOW_CARD_OVERLAYS ("true"),
         UI_OVERLAY_CARD_NAME ("true"),
@@ -282,6 +283,8 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_ZONE_DOCK_ZONES_OTHER(""),
 
         CHAT_WINDOW_LOC(""),
+        PROMPT_WINDOW_LOC(""),
+        STACK_WINDOW_LOC(""),
 
         CONSTRUCTED_P1_DECK_STATE(""),
         CONSTRUCTED_P2_DECK_STATE(""),

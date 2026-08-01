@@ -771,6 +771,83 @@ public class FSkin {
         return icon;
     }
 
+    private static final Map<String, SkinImage> tintedIcons = new HashMap<>();
+
+    /**
+     * A copy of an icon recoloured to the given colour, keeping its shading.
+     * <p>
+     * Hue is replaced outright; saturation and brightness are scaled against the
+     * most saturated and the brightest pixel of {@code reference}, so that its
+     * strongest tone lands exactly on {@code tint} and nothing clips. Greys stay
+     * grey. Pass the same reference across a related set of images — all the
+     * states of a button, say — so the differences between them survive.
+     * <p>
+     * Tinted copies are built once and are not rebuilt when the skin changes.
+     */
+    public static SkinImage getTintedIcon(final FSkinProp s0, final FSkinProp reference, final Color tint) {
+        final String key = s0.name() + "|" + reference.name() + "|" + tint.getRGB();
+        SkinImage tinted = tintedIcons.get(key);
+        if (tinted == null) {
+            tinted = new SkinImage(tintImage(
+                    toBufferedImage(getIcon(s0).image), toBufferedImage(getIcon(reference).image), tint));
+            tintedIcons.put(key, tinted);
+        }
+        return tinted;
+    }
+
+    private static BufferedImage toBufferedImage(final Image image) {
+        if (image instanceof BufferedImage) {
+            return (BufferedImage) image;
+        }
+        final BufferedImage copy = new BufferedImage(
+                image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        final Graphics2D g2d = copy.createGraphics();
+        g2d.drawImage(image, 0, 0, null);
+        g2d.dispose();
+        return copy;
+    }
+
+    private static BufferedImage tintImage(final BufferedImage src, final BufferedImage reference, final Color tint) {
+        final float[] target = Color.RGBtoHSB(tint.getRed(), tint.getGreen(), tint.getBlue(), null);
+        final float[] peak = peakSaturationAndBrightness(reference);
+        final float satScale = peak[0] > 0 ? target[1] / peak[0] : 0;
+        final float briScale = peak[1] > 0 ? target[2] / peak[1] : 1;
+
+        final BufferedImage out = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        final float[] hsb = new float[3];
+        for (int y = 0; y < src.getHeight(); y++) {
+            for (int x = 0; x < src.getWidth(); x++) {
+                final int argb = src.getRGB(x, y);
+                Color.RGBtoHSB((argb >> 16) & 0xFF, (argb >> 8) & 0xFF, argb & 0xFF, hsb);
+                final int rgb = Color.HSBtoRGB(target[0],
+                        Math.min(1f, hsb[1] * satScale), Math.min(1f, hsb[2] * briScale));
+                out.setRGB(x, y, (argb & 0xFF000000) | (rgb & 0xFFFFFF));
+            }
+        }
+        return out;
+    }
+
+    /**
+     * The highest saturation and the highest brightness found among an image's
+     * opaque pixels — the tones a tint colour is matched to. Taking them
+     * separately matters: the brightest pixel of a gradient is usually a washed
+     * out highlight, and anchoring saturation to it oversaturates everything.
+     */
+    private static float[] peakSaturationAndBrightness(final BufferedImage image) {
+        float maxSat = 0, maxBri = 0;
+        final float[] hsb = new float[3];
+        for (int y = 0; y < image.getHeight(); y++) {
+            for (int x = 0; x < image.getWidth(); x++) {
+                final int argb = image.getRGB(x, y);
+                if ((argb >>> 24) == 0) { continue; }
+                Color.RGBtoHSB((argb >> 16) & 0xFF, (argb >> 8) & 0xFF, argb & 0xFF, hsb);
+                maxSat = Math.max(maxSat, hsb[1]);
+                maxBri = Math.max(maxBri, hsb[2]);
+            }
+        }
+        return new float[] {maxSat, maxBri};
+    }
+
     public static class SkinIcon extends SkinImage {
         private static final Map<FSkinProp, SkinIcon> icons = new HashMap<>();
 

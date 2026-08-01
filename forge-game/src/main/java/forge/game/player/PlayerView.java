@@ -99,6 +99,14 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.SleeveArtKey, p.getLobbyPlayer().getSleeveArtKey());
     }
 
+    /** Key of the play mat drawn under this player's battlefield. May be empty. */
+    public String getMatKey() {
+        return get(TrackableProperty.MatKey);
+    }
+    void updateMatKey(Player p) {
+        set(TrackableProperty.MatKey, p.getLobbyPlayer().getMatKey());
+    }
+
     public int getSleeveArtOffset() {
         final Integer offset = get(TrackableProperty.SleeveArtOffset);
         return offset == null ? 500 : offset;

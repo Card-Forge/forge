@@ -59,6 +59,29 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
     private boolean hovered = false;
     private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
     private KeyAdapter klEnter;
+    private Color tint;
+
+    /**
+     * Recolours the button, keeping the skin's gradient and the differences
+     * between its up/hover/pressed/disabled states. Null restores the skin's
+     * own colour.
+     */
+    public void setTint(final Color tint0) {
+        tint = tint0;
+        if (toggle) {
+            setToggled(true);
+        } else if (!isEnabled()) {
+            setEnabled(false);
+        } else {
+            resetImg();
+        }
+        repaintSelf();
+    }
+
+    private SkinImage img(final FSkinProp prop) {
+        return tint == null ? FSkin.getIcon(prop)
+                : FSkin.getTintedIcon(prop, FSkinProp.IMG_BTN_UP_CENTER, tint);
+    }
 
     /**
      * Instantiates a new FButton.
@@ -77,9 +100,9 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
         this.setContentAreaFilled(false);
         this.setMargin(new Insets(0, 25, 0, 25));
         this.setFont(FSkin.getBoldFont(14));
-        this.imgL = FSkin.getIcon(FSkinProp.IMG_BTN_UP_LEFT);
-        this.imgM = FSkin.getIcon(FSkinProp.IMG_BTN_UP_CENTER);
-        this.imgR = FSkin.getIcon(FSkinProp.IMG_BTN_UP_RIGHT);
+        this.imgL = img(FSkinProp.IMG_BTN_UP_LEFT);
+        this.imgM = img(FSkinProp.IMG_BTN_UP_CENTER);
+        this.imgR = img(FSkinProp.IMG_BTN_UP_RIGHT);
 
         if ((this.imgL != null) && (this.imgM != null) && (this.imgR != null)) {
             this.allImagesPresent = true;
@@ -115,9 +138,9 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
             @Override
             public void mousePressed(final MouseEvent evt) {
                 if (isToggled() || !isEnabled()) { return; }
-                imgL = FSkin.getIcon(FSkinProp.IMG_BTN_DOWN_LEFT);
-                imgM = FSkin.getIcon(FSkinProp.IMG_BTN_DOWN_CENTER);
-                imgR = FSkin.getIcon(FSkinProp.IMG_BTN_DOWN_RIGHT);
+                imgL = img(FSkinProp.IMG_BTN_DOWN_LEFT);
+                imgM = img(FSkinProp.IMG_BTN_DOWN_CENTER);
+                imgR = img(FSkinProp.IMG_BTN_DOWN_RIGHT);
                 repaintSelf();
             }
 
@@ -151,27 +174,27 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
 
     private void resetImg() {
         if (hovered) {
-            imgL = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_LEFT);
-            imgM = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_CENTER);
-            imgR = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_RIGHT);
+            imgL = img(FSkinProp.IMG_BTN_OVER_LEFT);
+            imgM = img(FSkinProp.IMG_BTN_OVER_CENTER);
+            imgR = img(FSkinProp.IMG_BTN_OVER_RIGHT);
         }
         else if (isFocusOwner()) {
-            imgL = FSkin.getIcon(FSkinProp.IMG_BTN_FOCUS_LEFT);
-            imgM = FSkin.getIcon(FSkinProp.IMG_BTN_FOCUS_CENTER);
-            imgR = FSkin.getIcon(FSkinProp.IMG_BTN_FOCUS_RIGHT);
+            imgL = img(FSkinProp.IMG_BTN_FOCUS_LEFT);
+            imgM = img(FSkinProp.IMG_BTN_FOCUS_CENTER);
+            imgR = img(FSkinProp.IMG_BTN_FOCUS_RIGHT);
         } else {
-            imgL = FSkin.getIcon(FSkinProp.IMG_BTN_UP_LEFT);
-            imgM = FSkin.getIcon(FSkinProp.IMG_BTN_UP_CENTER);
-            imgR = FSkin.getIcon(FSkinProp.IMG_BTN_UP_RIGHT);
+            imgL = img(FSkinProp.IMG_BTN_UP_LEFT);
+            imgM = img(FSkinProp.IMG_BTN_UP_CENTER);
+            imgR = img(FSkinProp.IMG_BTN_UP_RIGHT);
         }
     }
 
     @Override
     public void setEnabled(final boolean b0) {
         if (!b0) {
-            imgL = FSkin.getIcon(FSkinProp.IMG_BTN_DISABLED_LEFT);
-            imgM = FSkin.getIcon(FSkinProp.IMG_BTN_DISABLED_CENTER);
-            imgR = FSkin.getIcon(FSkinProp.IMG_BTN_DISABLED_RIGHT);
+            imgL = img(FSkinProp.IMG_BTN_DISABLED_LEFT);
+            imgM = img(FSkinProp.IMG_BTN_DISABLED_CENTER);
+            imgR = img(FSkinProp.IMG_BTN_DISABLED_RIGHT);
         }
         else {
             resetImg();
@@ -193,17 +216,17 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
     /** @param b0 &emsp; boolean. */
     public void setToggled(final boolean b0) {
         if (b0) {
-            imgL = FSkin.getIcon(FSkinProp.IMG_BTN_TOGGLE_LEFT);
-            imgM = FSkin.getIcon(FSkinProp.IMG_BTN_TOGGLE_CENTER);
-            imgR = FSkin.getIcon(FSkinProp.IMG_BTN_TOGGLE_RIGHT);
+            imgL = img(FSkinProp.IMG_BTN_TOGGLE_LEFT);
+            imgM = img(FSkinProp.IMG_BTN_TOGGLE_CENTER);
+            imgR = img(FSkinProp.IMG_BTN_TOGGLE_RIGHT);
         }
         else if (isEnabled()) {
             resetImg();
         }
         else {
-            imgL = FSkin.getIcon(FSkinProp.IMG_BTN_DISABLED_LEFT);
-            imgM = FSkin.getIcon(FSkinProp.IMG_BTN_DISABLED_CENTER);
-            imgR = FSkin.getIcon(FSkinProp.IMG_BTN_DISABLED_RIGHT);
+            imgL = img(FSkinProp.IMG_BTN_DISABLED_LEFT);
+            imgM = img(FSkinProp.IMG_BTN_DISABLED_CENTER);
+            imgR = img(FSkinProp.IMG_BTN_DISABLED_RIGHT);
         }
         this.toggle = b0;
         repaintSelf();

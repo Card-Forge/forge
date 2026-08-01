@@ -17,6 +17,7 @@
  */
 package forge.screens.match.views;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.KeyAdapter;
@@ -52,6 +53,9 @@ import net.miginfocom.swing.MigLayout;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public class VPrompt implements IVDoc<CPrompt> {
+
+    /** Colour of the prompt's buttons and of the border pulse that goes with them. */
+    public static final Color ACCENT = new Color(0xFB, 0x94, 0x49);
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -98,6 +102,8 @@ public class VPrompt implements IVDoc<CPrompt> {
 
         btnOK.addKeyListener(buttonKeyAdapter);
         btnCancel.addKeyListener(buttonKeyAdapter);
+        btnOK.setTint(ACCENT);
+        btnCancel.setTint(ACCENT);
 
         tarMessage.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tarMessage.setMargin(new Insets(3, 3, 3, 3));
@@ -118,8 +124,17 @@ public class VPrompt implements IVDoc<CPrompt> {
      */
     @Override
     public void populate() {
+        populateInto(parentCell.getBody());
+    }
+
+    /**
+     * Lays the prompt's controls out into the given container. Used both for the
+     * docked cell and for {@link FloatingPrompt}, so the two share one layout and
+     * one set of component instances.
+     */
+    public void populateInto(final JPanel container) {
     	ForgePreferences prefs = FModel.getPreferences();
-        JPanel container = parentCell.getBody();
+        container.removeAll();
 
         // wrap   : 2 columns required for btnOk and btnCancel.
         container.setLayout(new MigLayout("wrap 2, gap 0px!, insets 1px 1px 3px 1px"));
@@ -140,6 +155,8 @@ public class VPrompt implements IVDoc<CPrompt> {
 
         container.add(btnOK, constraints);
         container.add(btnCancel, constraints);
+        container.revalidate();
+        container.repaint();
     }
 
     /* (non-Javadoc)

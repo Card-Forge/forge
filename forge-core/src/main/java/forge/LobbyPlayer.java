@@ -17,6 +17,7 @@ public abstract class LobbyPlayer {
     private String avatarCardImageKey;
     private String sleeveArtKey = "";
     private int sleeveArtOffset = 500;
+    private String matKey = "";
 
     public LobbyPlayer(String name) {
         this.name = name;
@@ -75,6 +76,14 @@ public abstract class LobbyPlayer {
     }
     public void setAvatarCardImageKey(String avatarImageKey0) {
         this.avatarCardImageKey = avatarImageKey0;
+    }
+
+    // empty means the player hasn't chosen a mat; the GUI picks a default
+    public String getMatKey() {
+        return matKey == null ? "" : matKey;
+    }
+    public void setMatKey(String matKey0) {
+        this.matKey = matKey0 == null ? "" : matKey0;
     }
 
     // empty means fall back to the built-in sleeveIndex

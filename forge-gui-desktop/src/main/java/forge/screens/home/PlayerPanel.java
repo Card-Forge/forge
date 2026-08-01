@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.Collections;
@@ -32,6 +33,8 @@ import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
+import forge.PlayerMat;
+import forge.screens.match.views.PlayerMatPanel;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
@@ -70,9 +73,15 @@ public class PlayerPanel extends FPanel {
     private final FLabel nameRandomiser;
     private final FLabel avatarLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
     private final FLabel sleeveLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
+    /** Avatar (80) + gap (5) + sleeve (58); the mat spans this beneath them. */
+    private static final int IDENTITY_WIDTH = 143;
+
+    //FLabel paints a fixed skin gradient when opaque, so the swatch is the mat panel itself
+    private final PlayerMatPanel matSwatch = new PlayerMatPanel();
     private int avatarIndex, sleeveIndex;
     private String sleeveArtKey = "";
     private int sleeveArtOffset = Deck.DEFAULT_SLEEVE_OFFSET;
+    private PlayerMat mat = PlayerMat.SLATE;
 
     private final FTextField txtPlayerName = new FTextField.Builder().build();
     private FRadioButton radioHuman;
@@ -136,10 +145,18 @@ public class PlayerPanel extends FPanel {
         this.add(closeBtn, "w 20, h 20, pos (container.w-20) 0");
 
         createAvatar();
-        this.add(avatarLabel, "cell 0 0, spany 2, split 2, width 80px, height 80px");
-
         createSleeve();
-        this.add(sleeveLabel, "width 58px, height 80px, gapleft 5px");
+        createMat();
+
+        // Avatar, sleeve and mat travel together in their own panel so the mat can
+        // sit under the other two at full width without disturbing the cell
+        // arithmetic the team / AI-picker rows below depend on.
+        final JPanel pnlIdentity = new JPanel(new MigLayout("insets 0, gap 5px, wrap 2"));
+        pnlIdentity.setOpaque(false);
+        pnlIdentity.add(avatarLabel, "width 80px, height 80px");
+        pnlIdentity.add(sleeveLabel, "width 58px, height 80px");
+        pnlIdentity.add(matSwatch, "span 2, width " + IDENTITY_WIDTH + "px, height 34px");
+        this.add(pnlIdentity, "cell 0 0, spany 2");
 
         createNameEditor();
         this.add(lobby.newLabel(localizer.getMessage("lblName") +":"), "w 40px, h 30px, gaptop 5px");
@@ -719,6 +736,95 @@ public class PlayerPanel extends FPanel {
                 lobby.updateAvatarPrefs();
             }
         });
+    }
+
+    /**
+     * The play mat drawn under this player's battlefield during a match. Stored
+     * per seat in {@link FPref#UI_PLAYER_MATS}; {@code HostedMatch} reads it when
+     * the lobby player hasn't been given one explicitly.
+     */
+    private void createMat() {
+        final String[] currentPrefs = FModel.getPreferences().getPref(FPref.UI_PLAYER_MATS).split(",");
+        setMat(index < currentPrefs.length
+                ? PlayerMat.fromKeyOrDefault(currentPrefs[index].trim())
+                : PlayerMat.SLATE);
+
+        matSwatch.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        matSwatch.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        matSwatch.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (!mayEdit) { return; }
+                lobby.changePlayerFocus(index);
+                showMatMenu();
+            }
+        });
+    }
+
+    private void showMatMenu() {
+        final JPopupMenu menu = new JPopupMenu();
+        for (final PlayerMat option : PlayerMat.values()) {
+            final JMenuItem item = new JMenuItem(option.getLabel());
+            item.setIcon(new MatSwatchIcon(option));
+            item.addActionListener(e -> {
+                setMat(option);
+                persistMat();
+            });
+            menu.add(item);
+        }
+        menu.show(matSwatch, 0, matSwatch.getHeight());
+    }
+
+    private void setMat(final PlayerMat mat0) {
+        mat = mat0 == null ? PlayerMat.SLATE : mat0;
+        matSwatch.setMat(mat);
+        matSwatch.setToolTipText(localizer.getMessage("lblSelectMat") + " (" + mat.getLabel() + ")");
+    }
+
+    public PlayerMat getMat() {
+        return mat;
+    }
+
+    /** Writes this seat's choice back into the CSV preference, leaving other seats alone. */
+    private void persistMat() {
+        final ForgePreferences prefs = FModel.getPreferences();
+        final String[] current = prefs.getPref(FPref.UI_PLAYER_MATS).split(",");
+        final int size = Math.max(current.length, index + 1);
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            if (i > 0) { sb.append(','); }
+            if (i == index) {
+                sb.append(mat.name());
+            } else {
+                sb.append(i < current.length && !current[i].trim().isEmpty()
+                        ? current[i].trim() : PlayerMat.DEFAULT_KEY);
+            }
+        }
+        prefs.setPref(FPref.UI_PLAYER_MATS, sb.toString());
+        prefs.save();
+    }
+
+    /** Small colour chip shown next to each entry in the mat menu. */
+    private static class MatSwatchIcon implements Icon {
+        private static final int W = 24, H = 14;
+        private final PlayerMat mat;
+
+        MatSwatchIcon(final PlayerMat mat0) { mat = mat0; }
+
+        @Override public int getIconWidth() { return W; }
+        @Override public int getIconHeight() { return H; }
+
+        @Override
+        public void paintIcon(final Component c, final Graphics g, final int x, final int y) {
+            if (mat.isTransparent()) {
+                g.setColor(FSkin.getColor(FSkin.Colors.CLR_INACTIVE).getColor());
+            } else {
+                g.setColor(new Color(mat.getRgb()));
+            }
+            g.fillRect(x, y, W, H);
+            g.setColor(FSkin.getColor(FSkin.Colors.CLR_BORDERS).getColor());
+            g.drawRect(x, y, W - 1, H - 1);
+        }
     }
 
     private void createSleeve() {

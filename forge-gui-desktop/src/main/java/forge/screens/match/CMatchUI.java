@@ -882,6 +882,9 @@ public final class CMatchUI
             btn2.setEnabled(actualEnable2);
             btn1.setFocusable(actualEnable1 && actualFocus1);
             btn2.setFocusable(actualEnable2 && !actualFocus1);
+            // Show or hide the floating prompt before focusing, so the button
+            // being focused is already on screen.
+            getCPrompt().setInputRequired(actualEnable1 || actualEnable2);
             // ensure we don't steal focus from an overlay
             if (toFocus != null && !FNetOverlay.SINGLETON_INSTANCE.getTxtInput().hasFocus() ) {
                 toFocus.requestFocus(); // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
@@ -943,6 +946,9 @@ public final class CMatchUI
         FloatingZone.registerZoneDocs(this, getLocalPlayers());
         SLayoutIO.loadLayout(null);
         FloatingZone.pruneUnparentedDocks();
+        //loadLayout re-docks every registered doc, so pull the floating ones back out
+        getCPrompt().undockPrompt();
+        getCStack().undockStack();
         view.populate();
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final PlayerView p : sortedPlayers) {
@@ -964,6 +970,8 @@ public final class CMatchUI
     @Override
     public void finishGame() {
         FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
+        getCPrompt().closeFloatingPrompt();
+        getCStack().closeFloatingStack();
         if (isNetGame()) {
             writeMatchPreferences();
         }

@@ -47,7 +47,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.views.VField;
-import forge.screens.match.views.VStack.StackInstanceTextArea;
+import forge.screens.match.views.VStack.StackItemPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.FView;
@@ -129,7 +129,7 @@ public class TargetingOverlay {
         cardPanels.clear();
         cardsVisualized.clear();
 
-        final StackInstanceTextArea activeStackItem = matchUI.getCStack().getView().getHoveredItem();
+        final StackItemPanel activeStackItem = matchUI.getCStack().getView().getHoveredItem();
 
         switch (matchUI.getCDock().getArcState()) {
             case OFF:
@@ -191,11 +191,11 @@ public class TargetingOverlay {
 
         //draw arrow connecting active item on stack
         if (activeStackItem != null) {
-            Point itemLocOnScreen = activeStackItem.getLocationOnScreen();
+            Point itemLocOnScreen = activeStackItem.getArcOrigin();
             if (itemLocOnScreen != null) {
-                itemLocOnScreen.x += StackInstanceTextArea.CARD_WIDTH * CardPanel.TARGET_ORIGIN_FACTOR_X + StackInstanceTextArea.PADDING - locOnScreen.getX();
-                itemLocOnScreen.y += StackInstanceTextArea.CARD_HEIGHT * CardPanel.TARGET_ORIGIN_FACTOR_Y + StackInstanceTextArea.PADDING - locOnScreen.getY();
-    
+                itemLocOnScreen.x -= locOnScreen.x;
+                itemLocOnScreen.y -= locOnScreen.y;
+
                 StackItemView instance = activeStackItem.getItem();
                 PlayerView activator = instance.getActivatingPlayer();
                 while (instance != null) {
@@ -333,7 +333,7 @@ public class TargetingOverlay {
             return;
         }
 
-        final StackInstanceTextArea activeStackItem = matchUI.getCStack().getView().getHoveredItem();
+        final StackItemPanel activeStackItem = matchUI.getCStack().getView().getHoveredItem();
 
         if (activeStackItem != null) {
             // Add event listeners to the stack item to repaint on mouse
@@ -365,11 +365,11 @@ public class TargetingOverlay {
             }
             final Map<Integer, Point> endpoints = getCardEndpoints();
             Point locOnScreen = this.getPanel().getLocationOnScreen();
-            Point itemLocOnScreen = activeStackItem.getLocationOnScreen();
+            Point itemLocOnScreen = activeStackItem.getArcOrigin();
             if (itemLocOnScreen != null) {
-                itemLocOnScreen.x += StackInstanceTextArea.CARD_WIDTH * CardPanel.TARGET_ORIGIN_FACTOR_X + StackInstanceTextArea.PADDING - locOnScreen.getX();
-                itemLocOnScreen.y += StackInstanceTextArea.CARD_HEIGHT * CardPanel.TARGET_ORIGIN_FACTOR_Y + StackInstanceTextArea.PADDING - locOnScreen.getY();
-    
+                itemLocOnScreen.x -= locOnScreen.x;
+                itemLocOnScreen.y -= locOnScreen.y;
+
                 StackItemView instance = activeStackItem.getItem();
                 PlayerView activator = instance.getActivatingPlayer();
                 while (instance != null) {

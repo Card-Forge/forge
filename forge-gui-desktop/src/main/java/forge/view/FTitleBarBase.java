@@ -94,6 +94,19 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
 
     public abstract void setTitle(String title);
     public abstract void setIconImage(Image image);
+
+    /** Hides the close button, for windows the user isn't allowed to dismiss. */
+    public void setCloseButtonVisible(boolean visible) {
+        btnClose.setVisible(visible);
+    }
+
+    /** Puts a window-specific control at the right-hand end of the title bar. */
+    public void addRightControl(final java.awt.Component control) {
+        add(control);
+        layout.putConstraint(SpringLayout.EAST, control, -3, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.SOUTH, control, -3, SpringLayout.SOUTH, this);
+    }
+
     public void setUpdaterVisibility() {
         if (btnUpdateShortcut != null)
             btnUpdateShortcut.updateVisibility();

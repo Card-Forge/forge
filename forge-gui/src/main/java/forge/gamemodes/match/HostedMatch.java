@@ -7,6 +7,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import com.google.common.eventbus.Subscribe;
 import forge.LobbyPlayer;
+import forge.PlayerMat;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
 import forge.game.*;
@@ -190,6 +191,7 @@ public class HostedMatch {
         final FCollectionView<Player> players = game.getPlayers();
         final String[] avatarIndices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
         final String[] sleeveIndices = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
+        final String[] matKeys = FModel.getPreferences().getPref(FPref.UI_PLAYER_MATS).split(",");
         final GameView gameView = getGameView();
 
         humanCount = 0;
@@ -216,6 +218,11 @@ public class HostedMatch {
                 }
             }
             p.updateSleeve();
+            if (p.getLobbyPlayer().getMatKey().isEmpty()) {
+                p.getLobbyPlayer().setMatKey(iPlayer < matKeys.length
+                        ? matKeys[iPlayer].trim() : PlayerMat.DEFAULT_KEY);
+            }
+            p.updateMat();
 
             if (p.getController() instanceof PlayerControllerHuman humanController) {
                 final IGuiGame gui = guis.get(p.getRegisteredPlayer());

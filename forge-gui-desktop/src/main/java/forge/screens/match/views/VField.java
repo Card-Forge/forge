@@ -27,6 +27,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import forge.PlayerMat;
 import forge.deck.CommanderBracketCalculator;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -74,6 +75,7 @@ public class VField implements IVDoc<CField> {
 
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
+    private final PlayerMatPanel matPanel = new PlayerMatPanel();
     private final PlayArea tabletop;
     private final SkinnedPanel avatarArea = new SkinnedPanel();
 
@@ -157,6 +159,12 @@ public class VField implements IVDoc<CField> {
 
         scroller.setViewportView(this.tabletop);
 
+        // The scroll pane and its viewport are transparent, so the mat behind
+        // them shows through under the cards.
+        matPanel.setLayout(new MigLayout("insets 0, gap 0, fill"));
+        matPanel.add(scroller, "grow, push");
+        updateMat();
+
         updateDetails();
     }
 
@@ -167,8 +175,14 @@ public class VField implements IVDoc<CField> {
 
         pnl.add(avatarArea, "w 10%!, h 35%!");
         pnl.add(phaseIndicator, "w 5%!, h 100%!, span 1 2");
-        pnl.add(scroller, "w 85%!, h 100%!, span 1 2, wrap");
+        pnl.add(matPanel, "w 85%!, h 100%!, span 1 2, wrap");
         pnl.add(detailsPanel, "w 10%!, h 64%!, gapleft 1px");
+    }
+
+    /** Re-reads this player's chosen mat and repaints the play surface. */
+    public void updateMat() {
+        matPanel.setMat(player == null
+                ? PlayerMat.SLATE : PlayerMat.fromKeyOrDefault(player.getMatKey()));
     }
 
     @Override
@@ -336,6 +350,10 @@ public class VField implements IVDoc<CField> {
     }
 
     public void updateDetails() {
+        // The mat key arrives with the player view, which may land after this
+        // field was constructed, so re-read it on refresh.
+        updateMat();
+
         // Update life total
         final int life = player.getLife();
         lblLife.setText(String.valueOf(life));

@@ -30,17 +30,22 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
+import javax.swing.Timer;
 
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.gui.FThreads;
+import forge.gui.framework.DragCell;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
+import forge.gui.framework.SRearrangingUtil;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.views.FloatingPrompt;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
+import forge.view.FView;
 
 /**
  * Controls the prompt panel in the match UI.
@@ -48,11 +53,99 @@ import forge.toolbox.FSkin;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public class CPrompt implements ICDoc {
+    /**
+     * How long the prompt stays up after the game stops asking for input. The
+     * engine briefly disables both buttons between consecutive priority passes;
+     * without this the window would blink on and off several times a turn.
+     */
+    private static final int HIDE_DELAY_MS = 350;
+
     private final CMatchUI matchUI;
     private final VPrompt view;
+
+    private FloatingPrompt floatingPrompt;
+    private Timer hideTimer;
+
     public CPrompt(final CMatchUI matchUI) {
         this.matchUI = matchUI;
         this.view = new VPrompt(this);
+    }
+
+    /** Lazily creates the floating prompt window and lays the controls into it. */
+    private FloatingPrompt getFloatingPrompt() {
+        if (floatingPrompt == null) {
+            floatingPrompt = new FloatingPrompt();
+            view.populateInto(floatingPrompt.getContentPanel());
+        }
+        return floatingPrompt;
+    }
+
+    /**
+     * Called whenever the set of enabled prompt buttons changes. Shows the
+     * floating prompt while the game is waiting on the local player, and hides
+     * it again (after a short delay) once it isn't.
+     */
+    public void setInputRequired(final boolean required) {
+        FThreads.assertExecutedByEdt(true);
+        if (hideTimer != null) {
+            hideTimer.stop();
+            hideTimer = null;
+        }
+        if (required) {
+            final FloatingPrompt prompt = getFloatingPrompt();
+            if (!prompt.isVisible()) {
+                prompt.setVisible(true);
+            }
+            prompt.toFront();
+            prompt.setPulsing(true);
+        } else if (floatingPrompt != null && floatingPrompt.isVisible()) {
+            floatingPrompt.setPulsing(false);
+            hideTimer = new Timer(HIDE_DELAY_MS, e -> {
+                hideTimer.stop();
+                hideTimer = null;
+                if (!matchUI.isInputButtonEnabled()) {
+                    floatingPrompt.setVisible(false);
+                }
+            });
+            hideTimer.setRepeats(false);
+            hideTimer.start();
+        }
+    }
+
+    /**
+     * Pulls the prompt out of whatever dock cell the saved layout put it in, so
+     * it exists only as the floating window. Collapses the cell if the prompt
+     * was the only thing in it, mirroring how floating zones undock.
+     */
+    public void undockPrompt() {
+        final DragCell cell = view.getParentCell();
+        if (cell != null) {
+            cell.removeDoc(view);
+            view.setParentCell(null);
+            if (cell.getDocs().isEmpty()) {
+                SRearrangingUtil.fillGap(cell);
+                FView.SINGLETON_INSTANCE.removeDragCell(cell);
+            }
+        }
+        // Always re-populate: docking calls VPrompt.populate(), which reparents
+        // the shared button/message instances into the cell body. Adding them to
+        // the floating window's panel moves them back.
+        final FloatingPrompt prompt = getFloatingPrompt();
+        view.populateInto(prompt.getContentPanel());
+    }
+
+    /** Tears the floating prompt down at the end of a match. */
+    public void closeFloatingPrompt() {
+        if (hideTimer != null) {
+            hideTimer.stop();
+            hideTimer = null;
+        }
+        if (floatingPrompt != null) {
+            floatingPrompt.setPulsing(false);
+            floatingPrompt.setVisible(false);
+            floatingPrompt.dispose();
+            floatingPrompt = null;
+        }
     }
 
     public final CMatchUI getMatchUI() {
@@ -153,13 +246,30 @@ public class CPrompt implements ICDoc {
      * Invoke a flashing animation on the prompt.
      */
     public void remind() {
-        SDisplayUtil.remind(view);
+        if (isFloating()) {
+            floatingPrompt.flash(5, 80);
+        } else {
+            SDisplayUtil.remind(view);
+        }
     }
 
     public void alert() {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_REMIND_ON_PRIORITY)) {
-            SDisplayUtil.remind(view, 15, 30);
+            if (isFloating()) {
+                floatingPrompt.flash(15, 30);
+            } else {
+                SDisplayUtil.remind(view, 15, 30);
+            }
         }
+    }
+
+    /**
+     * True when the prompt lives in the floating window rather than a dock cell.
+     * {@link SDisplayUtil#remind} dereferences the parent cell, so it must not be
+     * called once the prompt has been undocked.
+     */
+    private boolean isFloating() {
+        return floatingPrompt != null && view.getParentCell() == null;
     }
 
     @Override

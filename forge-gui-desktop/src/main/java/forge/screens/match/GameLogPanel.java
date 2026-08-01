@@ -198,7 +198,7 @@ public class GameLogPanel extends JPanel {
         return tar;
     }
 
-    /** A log entry with an inline miniature card image, following VStack's StackInstanceTextArea pattern. */
+    /** A log entry with an inline miniature card image, following VStack's StackItemPanel pattern. */
     private final class LogEntryTextArea extends SkinnedTextArea {
         private static final int PADDING = 3;
         private static final int CARD_WIDTH = 50;
