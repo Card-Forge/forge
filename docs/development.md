@@ -23,7 +23,7 @@ Architecture choices (additive-only changes, system property gating, upstream-ag
 
 ## 1. StackedTokenCard — Flyweight Integration
 
-**Status: Wired at token-creation time (1a), battlefield-zone tracking (1b partial), `CardCopyService` promotion verified (1f). Static eval, copier, relaxed merge, engine-path promotion, and benchmark remain.**
+**Status: Wired at token-creation time (1a), battlefield-zone tracking (1b partial), `CardCopyService` promotion verified (1f), engine-path promotion (1g). Static eval, copier, relaxed merge, and benchmark remain.**
 
 ### Required Fixes
 
@@ -37,7 +37,7 @@ Status legend: `DONE` / `PARTIAL` / open. Code carries `// doc:<item> <STATUS>` 
 | 1d | `GameCopier` snapshots individual cards | AI state cloning copies O(N) cards instead of O(1) stacks | `GameCopier` must copy `StackedTokenCard` as an opaque flyweight rather than materializing individual cards | |
 | 1e | `canMerge()` is conservative — blocks on counters and tapped state | Misses optimization opportunities for tokens with some modifications | Relax `canMerge()` after confirming game rules allow: summoning sickness is identity-irrelevant, temporary pumps from static abilities should not block merge | |
 | 1f | `promote()` assumes `CardCopyService` exists with the right API | Verify `CardCopyService.copyCard()` exists and correctly creates independent copies with fresh card IDs | Audit `CardCopyService`; if it does not exist, build a card copy method in `StackedTokenCard` directly | **DONE** — `CardCopyService.copyCard(true)` verified and used in `promote()` (`StackedTokenCard.java:150`) |
-| 1g | Promotion places cards directly on battlefield via `owner.getZone(ZoneType.Battlefield).add(copy)` | Bypasses zone-change rules (ETB triggers, replacement effects, state-based actions) | Route promoted tokens through the game engine's normal `moveToZone` / `moveTo` path, not raw zone add | |
+| 1g | Promotion places cards directly on battlefield via `owner.getZone(ZoneType.Battlefield).add(copy)` | Bypasses zone-change rules (ETB triggers, replacement effects, state-based actions) | Route promoted tokens through the game engine's normal `moveToZone` / `moveTo` path, not raw zone add | **DONE** — `expandStacks()` now routes copies through `Zone.add()` (events + view refresh) with the prototype's entry bookkeeping carried over in `promote()`; NOT `moveToPlay`, which would double-fire ETB (`StackedTokenCard.java:159-163`, `PlayerZoneBattlefield.java:101-124`) |
 | 1h | Benchmark constructs raw `Card` objects manually, not through real token creation | Benchmark results are irrelevant to actual game performance | Rewrite benchmark to go through Forge's real token resolution — preferably a scripted game scenario (e.g., cast `Secure the Wastes` for X) | |
 
 ### Verification
@@ -266,7 +266,7 @@ The progressive slowdown during long sessions is the most frequently reported up
 
 ### Token Performance (StackedTokenCard Wiring)
 
-Covered in Section 1 (1a/1b partial done). Reiterate: the remaining wiring (1c static-eval batching, 1d GameCopier, 1g engine-path promotion) is the single most impactful performance improvement available. Without it, the app cannot handle token-generating commanders (Krenko, Scute Swarm, Chatterfang) — which are among the most popular Commander decks.
+Covered in Section 1 (1a/1g done, 1b partial). Reiterate: the remaining wiring (1c static-eval batching, 1d GameCopier) is the single most impactful performance improvement available. Without it, the app cannot handle token-generating commanders (Krenko, Scute Swarm, Chatterfang) — which are among the most popular Commander decks.
 
 ### Long-Session Stability
 
@@ -304,7 +304,7 @@ Card images must never be a failure point:
 | Priority | Item | Effort | Value |
 |----------|------|--------|-------|
 | P0 | 1a — Wire StackedTokenCard into CardFactory | 2-3 days | Unlocks entire flyweight feature — **DONE: wired at token-creation time in `TokenEffectBase.makeTokenTable()`** |
-| P0 | 1g — Route promotion through game engine, not raw zone add | 1 day | Prevents game-logic-skipping bugs |
+| P0 | 1g — Route promotion through game engine, not raw zone add | 1 day | Prevents game-logic-skipping bugs — **DONE: `expandStacks()` routes promoted copies through `Zone.add()` with prototype entry state carried over** |
 | P0 | 5a — Smart default game setup: reduce clicks to start a Commander game | 2 days | Core UX goal — **DONE: first deck auto-selected and applied, precon fallback for fresh installs** |
 | P0 | 6a — FlatLaf integration (`FlatLaf.setup()`) | 1 hour | Instant visual modernization — **DONE: FlatLaf 3.7.2 applied in `ReforgeCommanderApp.main()`** |
 | P1 | 1b — Zone tracking for stacked tokens | 2-3 days | Enables all downstream consumers — **PARTIAL: battlefield zone tracks stacks; other zones open** |
