@@ -81,6 +81,14 @@ public class TokenAi extends SpellAbilityAi {
             return pwPlus || sa.getSubAbility() != null;
         }
 
+        // A converge card counts its colors in a second SVar, because X is already the mana cost -
+        // so X is not the token count and the block below will not announce it, but it is still
+        // what buys the colors that count (e.g. Sweep the Skies)
+        if (!tokenHasX && source.hasConverge() && "Count$xPaid".equals(sa.getSVar("X"))) {
+            ComputerUtilMana.setXForBestConverge(sa, ai,
+                    ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()));
+        }
+
         // X-cost spells
         if (tokenHasX) {
             int x = AbilityUtils.calculateAmount(sa.getHostCard(), tokenAmount, sa);

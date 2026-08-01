@@ -85,6 +85,25 @@ public class ComputerUtilMana {
         return 0;
     }
 
+    /**
+     * Announce X on a converge or sunburst card, where its only job is to buy colors: the least X
+     * that still reaches the most of them. Returns the number of colors that will be paid.
+     */
+    public static int setXForBestConverge(final SpellAbility sa, final Player ai, final int maxX) {
+        int bestX = 0;
+        int bestColors = 0;
+        for (int i = 0; i <= maxX; i++) {
+            sa.setXManaCostPaid(i);
+            int colors = getConvergeCount(sa, ai);
+            if (colors > bestColors) {
+                bestColors = colors;
+                bestX = i;
+            }
+        }
+        sa.setXManaCostPaid(bestX);
+        return bestColors;
+    }
+
     // Does not check if mana sources can be used right now, just checks for potential chance.
     public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
         if (ai == null || sa == null)

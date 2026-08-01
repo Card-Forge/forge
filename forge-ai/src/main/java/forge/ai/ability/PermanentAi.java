@@ -79,17 +79,7 @@ public class PermanentAi extends SpellAbilityAi {
         if (mana.countX() > 0) {
             final int xPay = ComputerUtilCost.setMaxXValue(sa, ai, false);
             if (source.hasConverge()) {
-                int nColors = ComputerUtilMana.getConvergeCount(sa, ai);
-                for (int i = 1; i <= xPay; i++) {
-                    sa.setXManaCostPaid(i);
-                    int newColors = ComputerUtilMana.getConvergeCount(sa, ai);
-                    if (newColors > nColors) {
-                        nColors = newColors;
-                    } else {
-                        sa.setXManaCostPaid(i - 1);
-                        break;
-                    }
-                }
+                ComputerUtilMana.setXForBestConverge(sa, ai, xPay);
             } else if (xPay <= 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
