@@ -815,7 +815,7 @@ public class DeckRecognizer {
             return Token.CardInInvalidSet(pc, cardCount, cardRequestHasSetCode);
 
         DeckSection tokenSection = getTokenSection(deckSecFromCardLine, referenceSection, pc);
-        if (isBannedInFormat(pc))
+        if (isBannedInFormat(pc, tokenSection))
             return Token.LimitedCard(pc, cardCount, tokenSection, LimitedCardType.BANNED, cardRequestHasSetCode);
 
         if (isRestrictedInFormat(pc, cardCount))
@@ -845,8 +845,14 @@ public class DeckRecognizer {
         // is not supported, but other possibilities exist (e.g. Commander card in Constructed
         // could potentially go in Main)
         DeckSection matchedSection = DeckSection.matchingSection(card);
-        // If it's a commander candidate, put it there.
-        if (matchedSection == DeckSection.Main && this.isAllowed(DeckSection.Commander) && DeckSection.Commander.validate(card))
+        // If it's a commander candidate, put it there. Use the stricter "traditional commander"
+        // test here (not DeckSection.Commander.validate, which now accepts any creature so that
+        // non-legendary Pauper Commander commanders load from an explicit [Commander] section):
+        // a header-less list can't tell which of many creatures is the commander, so only
+        // auto-promote legendary commanders / planeswalkers / signature spells.
+        if (matchedSection == DeckSection.Main && this.isAllowed(DeckSection.Commander)
+                && (card.getRules().canBeCommander() || card.getRules().getType().isPlaneswalker()
+                    || card.getRules().canBeOathbreaker() || card.getRules().canBeSignatureSpell()))
             return DeckSection.Commander;
         if (this.isAllowed(matchedSection))
             return matchedSection;
@@ -876,9 +882,21 @@ public class DeckRecognizer {
         }
     }
 
-    private boolean isBannedInFormat(PaperCard pc) {
-        return (this.gameFormatBannedCards != null && this.gameFormatBannedCards.contains(pc.getName())) ||
-                (this.deckFormat != null && !this.deckFormat.isLegalCard(pc));
+    private boolean isBannedInFormat(PaperCard pc, DeckSection section) {
+        if (this.gameFormatBannedCards != null && this.gameFormatBannedCards.contains(pc.getName())) {
+            return true;
+        }
+        if (this.deckFormat == null) {
+            return false;
+        }
+        if (section == DeckSection.Commander) {
+            // Command-zone cards follow the commander rule (or the signature-spell rule for
+            // Oathbreaker), not the main-deck rule — e.g. a Pauper Commander's commander is an
+            // uncommon, which is intentionally not a legal main-deck ("commons only") card.
+            return !(this.deckFormat.isLegalCommander(pc)
+                    || (this.deckFormat.hasSignatureSpell() && pc.getRules().canBeSignatureSpell()));
+        }
+        return !this.deckFormat.isLegalCard(pc);
     }
 
     private boolean isRestrictedInFormat(PaperCard pc, int cardCount) {

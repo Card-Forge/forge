@@ -636,8 +636,19 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
      * The Class OnChangeTextUpdate.
      */
     protected class OnChangeTextUpdate implements DocumentListener {
+        private boolean parseScheduled = false;
         private void onChange() {
-            parseAndDisplay();
+            // Defer parsing to after the current event batch so the text component repaints the
+            // just-pasted/typed text first (parsing a large paste synchronously on the EDT would
+            // otherwise hold up the paint until it finishes). Coalesce bursts into a single parse.
+            if (parseScheduled) {
+                return;
+            }
+            parseScheduled = true;
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                parseScheduled = false;
+                parseAndDisplay();
+            });
         }
 
         @Override

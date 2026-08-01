@@ -338,7 +338,7 @@ public class PlayerPanel extends FPanel {
         final boolean isOathbreaker = lobby.hasVariant(GameType.Oathbreaker);
         final boolean isTinyLeaders = lobby.hasVariant(GameType.TinyLeaders);
         final boolean isBrawl = lobby.hasVariant(GameType.Brawl);
-        final boolean isCommanderApplied = mayEdit && (lobby.hasVariant(GameType.Commander) || isOathbreaker || isTinyLeaders || isBrawl);
+        final boolean isCommanderApplied = mayEdit && (lobby.hasVariant(GameType.Commander) || isOathbreaker || isTinyLeaders || isBrawl || lobby.hasVariant(GameType.PauperCommander));
         final boolean isPlanechaseApplied = mayEdit && lobby.hasVariant(GameType.Planechase);
         final boolean isVanguardApplied = mayEdit && lobby.hasVariant(GameType.Vanguard);
         final boolean isArchenemyApplied = mayEdit && lobby.hasVariant(GameType.Archenemy);
@@ -536,6 +536,7 @@ public class PlayerPanel extends FPanel {
                     lobby.hasVariant(GameType.Oathbreaker) ? GameType.Oathbreaker :
                     lobby.hasVariant(GameType.TinyLeaders) ? GameType.TinyLeaders :
                     lobby.hasVariant(GameType.Brawl) ? GameType.Brawl :
+                    lobby.hasVariant(GameType.PauperCommander) ? GameType.PauperCommander :
                     GameType.Commander);
             cmdDeckSelectorBtn.requestFocusInWindow();
             lobby.changePlayerFocus(index);
