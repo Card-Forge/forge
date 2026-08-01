@@ -102125,7 +102125,7 @@
   {
     "name": "FEM Floodwater Homarid",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/floodwater_homarid_placeholder.atlas",
-    "scale": 0.2,
+    "scale": 0.3,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_floodwater_homarid.dck"
     ],
@@ -102174,7 +102174,7 @@
   {
     "name": "FEM Homarid Deep Spawn",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/deep_spawn.atlas",
-    "scale": 0.5,
+    "scale": 0.75,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_deep_spawn.dck"
     ],
@@ -102232,7 +102232,7 @@
   {
     "name": "FEM Homarid Shaman",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_shaman.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_shaman.dck"
     ],
@@ -102281,7 +102281,7 @@
   {
     "name": "FEM Homarid Spawning Bed",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_spawning_bed_placeholder.atlas",
-    "scale": 0.125,
+    "scale": 0.1875,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_spawning_bed.dck"
     ],
@@ -102330,7 +102330,7 @@
   {
     "name": "FEM Homarid Warrior A",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
-    "scale": 0.2,
+    "scale": 0.3,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_warrior_a.dck"
     ],
@@ -102371,7 +102371,7 @@
   {
     "name": "FEM Homarid Green",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_green.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_green.dck"
     ],
@@ -102412,7 +102412,7 @@
   {
     "name": "FEM Homarid Purple",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_purple.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_purple.dck"
     ],
@@ -102453,7 +102453,7 @@
   {
     "name": "FEM Homarid Red",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_red.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_red.dck"
     ],
@@ -102494,7 +102494,7 @@
   {
     "name": "FEM Homarid Yellow",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_yellow.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_yellow.dck"
     ],
@@ -102535,7 +102535,7 @@
   {
     "name": "FEM River Merfolk",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/river_merfolk_placeholder.atlas",
-    "scale": 0.2,
+    "scale": 0.3,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_river_merfolk.dck"
     ],
@@ -102584,7 +102584,7 @@
   {
     "name": "FEM Seasinger",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/seasinger.atlas",
-    "scale": 0.5,
+    "scale": 0.75,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_seasinger.dck"
     ],
@@ -102642,7 +102642,7 @@
   {
     "name": "FEM Svyelunite Priest",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/svyelunite_priest.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_svyelunite_priest.dck"
     ],
@@ -102691,7 +102691,7 @@
   {
     "name": "FEM Viscerid Drone",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/viscerid_drone_placeholder.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_viscerid_drone.dck"
     ],
@@ -102740,7 +102740,7 @@
   {
     "name": "FEM Vodalian Knight",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_knights.atlas",
-    "scale": 0.2,
+    "scale": 0.3,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_knight.dck"
     ],
@@ -102789,7 +102789,7 @@
   {
     "name": "FEM Vodalian Mage C",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_mage.dck"
     ],
@@ -102838,7 +102838,7 @@
   {
     "name": "FEM Vodalian Merchant",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_merchant_placeholder.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_merchant.dck"
     ],
@@ -102879,7 +102879,7 @@
   {
     "name": "FEM Vodalian Soldier A",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_soldier.dck"
     ],
@@ -102920,7 +102920,7 @@
   {
     "name": "FEM Vodalian War Machine",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_war_machine_placeholder.atlas",
-    "scale": 0.125,
+    "scale": 0.1875,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_war_machine.dck"
     ],
@@ -102969,7 +102969,7 @@
   {
     "name": "FEM Homarid Warrior B",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
-    "scale": 0.2,
+    "scale": 0.3,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_warrior_b.dck"
     ],
@@ -103010,7 +103010,7 @@
   {
     "name": "FEM Homarid Warrior C",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
-    "scale": 0.2,
+    "scale": 0.3,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_warrior_c.dck"
     ],
@@ -103051,7 +103051,7 @@
   {
     "name": "FEM Homarid Warrior 5ED",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
-    "scale": 0.2,
+    "scale": 0.3,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_warrior_5ed.dck"
     ],
@@ -103092,7 +103092,7 @@
   {
     "name": "FEM Vodalian Mage A",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_mage_a.dck"
     ],
@@ -103141,7 +103141,7 @@
   {
     "name": "FEM Vodalian Mage B",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_mage_b.dck"
     ],
@@ -103190,7 +103190,7 @@
   {
     "name": "FEM Vodalian Soldier B",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_soldier_b.dck"
     ],
@@ -103231,7 +103231,7 @@
   {
     "name": "FEM Vodalian Soldier C",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_soldier_c.dck"
     ],
@@ -103272,7 +103272,7 @@
   {
     "name": "FEM Vodalian Soldier D",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
-    "scale": 0.25,
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_soldier_d.dck"
     ],

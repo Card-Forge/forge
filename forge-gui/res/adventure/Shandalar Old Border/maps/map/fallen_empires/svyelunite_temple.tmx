@@ -6,6 +6,7 @@
  <tileset firstgid="22017" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
  <tileset firstgid="38401" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx" />
  <tileset firstgid="40193" source="../../../../../../common/maps/tileset/FarmFood.tsx" />
+ <tileset firstgid="50000" source="../../tileset/svyelunite_allies.tsx" />
  <layer id="1" name="Ground" width="65" height="45">
   <data encoding="csv">
 175,175,175,175,175,175,175,1430,12063,12063,175,175,1430,1904,5248,5248,5248,5248,5248,5248,5248,5248,5245,4612,4454,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,13350,13350,1610626067,2,2,2,2,13717,13717,13717,13717,13717,
@@ -810,248 +811,213 @@
   <object id="132" template="../../../../../../common/maps/obj/waypoint.tx" x="416.5" y="656.5" />
   <object id="133" template="../../../../../../common/maps/obj/waypoint.tx" x="640.5" y="353.5" />
   <object id="134" template="../../../../../../common/maps/obj/waypoint.tx" x="720.75" y="303.5" />
-  <object id="50003" template="../../../../../../common/maps/obj/dialog.tx" x="879.5" y="575.25" width="16" height="16">
+  <object id="50003" template="../../../../../../common/maps/obj/dialog.tx" x="879.5" y="575.25" type="dialog" gid="50001" width="24" height="14">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_floodwater_homarid_placeholder.atlas" />
     <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid blocks the dam crossing. Its alien voice rolls through your thoughts: \&quot;Two river-things... cut at our waters... wash them away... then you pass...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;I'll deal with the River Merfolk.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;Not yet.\&quot;&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&lt;&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;The Homarid taps one pincer against the dam. \&quot;Two river-things... both must drift...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid shifts aside. \&quot;River-things... gone. Our dam... opens for you... ally...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Pass the dam)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 55}, {&quot;deleteMapObject&quot;: 19201}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;}], &quot;text&quot;: &quot;The Floodwater Homarid remains beside the opened crossing, watching the current with unreadable black eyes.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
    </properties>
   </object>
-  <object id="50004" template="../../../../../../common/maps/obj/dialog.tx" x="974.75" y="368.75" width="16" height="16">
+  <object id="50004" template="../../../../../../common/maps/obj/dialog.tx" x="974.75" y="368.75" type="dialog" gid="50012" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_viscerid_drone_placeholder.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50005" template="../../../../../../common/maps/obj/dialog.tx" x="942" y="468.5" width="16" height="16">
+  <object id="50005" template="../../../../../../common/maps/obj/dialog.tx" x="942" y="468.5" type="dialog" gid="50012" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_viscerid_drone_placeholder.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50011" template="../../../../../../common/maps/obj/dialog.tx" x="622.833" y="683.667" width="16" height="16">
+  <object id="50011" template="../../../../../../common/maps/obj/dialog.tx" x="622.833" y="683.667" type="dialog" gid="50009" width="24" height="19">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_river_merfolk_placeholder.atlas" />
     <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The River Merfolk points downstream. \&quot;A Floodwater Homarid has dammed the river and flooded its lower course. Deal with that oversized crustacean and break its hold on the dam.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;We'll clear the river.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;The main battle comes first.\&quot;&quot;}]}]" />
    </properties>
   </object>
-  <object id="50013" template="../../../../../../common/maps/obj/dialog.tx" x="287" y="689" width="16" height="16">
+  <object id="50013" template="../../../../../../common/maps/obj/dialog.tx" x="287" y="689" type="dialog" gid="50009" width="24" height="19">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_river_merfolk_placeholder.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50015" template="../../../../../../common/maps/obj/dialog.tx" x="48" y="78.75" width="16" height="16" rotation="-90">
+  <object id="50015" template="../../../../../../common/maps/obj/dialog.tx" x="48" y="78.75" rotation="-90" type="dialog" gid="50015" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_merchant_placeholder.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50016" template="../../../../../../common/maps/obj/dialog.tx" x="184.25" y="55.75" width="16" height="16" rotation="0">
+  <object id="50016" template="../../../../../../common/maps/obj/dialog.tx" x="184.25" y="55.75" rotation="0" type="dialog" gid="50017" width="24" height="18">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_war_machine_placeholder.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50017" template="../../../../../../common/maps/obj/dialog.tx" x="256.5" y="47.5" width="16" height="16">
+  <object id="50017" template="../../../../../../common/maps/obj/dialog.tx" x="256.5" y="47.5" type="dialog" gid="50011" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_svyelunite_priest.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50043" template="../../../../../../common/maps/obj/dialog.tx" x="31.4091" y="369.818" width="16" height="16">
+  <object id="50043" template="../../../../../../common/maps/obj/dialog.tx" x="31.4091" y="369.818" type="dialog" gid="50011" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_svyelunite_priest.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50018" template="../../../../../../common/maps/obj/dialog.tx" x="287.5" y="96.25" width="16" height="16">
+  <object id="50018" template="../../../../../../common/maps/obj/dialog.tx" x="287.5" y="96.25" type="dialog" gid="50010" width="48" height="36">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_seasinger.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50019" template="../../../../../../common/maps/obj/dialog.tx" x="343.75" y="71.5" width="16" height="16">
+  <object id="50019" template="../../../../../../common/maps/obj/dialog.tx" x="343.75" y="71.5" type="dialog" gid="50014" width="18" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_mage_placeholder.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50020" template="../../../../../../common/maps/obj/dialog.tx" x="176" y="415.25" width="16" height="16">
+  <object id="50020" template="../../../../../../common/maps/obj/dialog.tx" x="176" y="415.25" type="dialog" gid="50014" width="18" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_mage_placeholder.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50041" template="../../../../../../common/maps/obj/dialog.tx" x="32.25" y="206.5" width="16" height="16">
+  <object id="50041" template="../../../../../../common/maps/obj/dialog.tx" x="32.25" y="206.5" type="dialog" gid="50014" width="18" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_mage_placeholder.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50021" template="../../../../../../common/maps/obj/dialog.tx" x="433.25" y="69.25" width="16" height="16">
+  <object id="50021" template="../../../../../../common/maps/obj/dialog.tx" x="433.25" y="69.25" type="dialog" gid="50000" width="84" height="72">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_deep_spawn.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50031" template="../../../../../../common/maps/obj/dialog.tx" x="781.25" y="141.25" width="16" height="16">
+  <object id="50031" template="../../../../../../common/maps/obj/dialog.tx" x="781.25" y="141.25" type="dialog" gid="50000" width="84" height="72">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_deep_spawn.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50022" template="../../../../../../common/maps/obj/dialog.tx" x="356.75" y="106" width="16" height="16">
+  <object id="50022" template="../../../../../../common/maps/obj/dialog.tx" x="356.75" y="106" type="dialog" gid="50013" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_knights.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50023" template="../../../../../../common/maps/obj/dialog.tx" x="79.5" y="256" width="16" height="16">
+  <object id="50023" template="../../../../../../common/maps/obj/dialog.tx" x="79.5" y="256" type="dialog" gid="50013" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_knights.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50042" template="../../../../../../common/maps/obj/dialog.tx" x="191.25" y="368.75" width="16" height="16">
+  <object id="50042" template="../../../../../../common/maps/obj/dialog.tx" x="191.25" y="368.75" type="dialog" gid="50013" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_knights.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50024" template="../../../../../../common/maps/obj/dialog.tx" x="279" y="423" width="16" height="16">
+  <object id="50024" template="../../../../../../common/maps/obj/dialog.tx" x="279" y="423" type="dialog" gid="50016" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_soldier.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50040" template="../../../../../../common/maps/obj/dialog.tx" x="240.75" y="479" width="16" height="16">
+  <object id="50040" template="../../../../../../common/maps/obj/dialog.tx" x="240.75" y="479" type="dialog" gid="50016" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_soldier.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50039" template="../../../../../../common/maps/obj/dialog.tx" x="81.5" y="495.75" width="16" height="16">
+  <object id="50039" template="../../../../../../common/maps/obj/dialog.tx" x="81.5" y="495.75" type="dialog" gid="50016" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_soldier.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50038" template="../../../../../../common/maps/obj/dialog.tx" x="241.75" y="545" width="16" height="16">
+  <object id="50038" template="../../../../../../common/maps/obj/dialog.tx" x="241.75" y="545" type="dialog" gid="50016" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_vodalian_soldier.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50025" template="../../../../../../common/maps/obj/dialog.tx" x="353.25" y="432.75" width="16" height="16">
+  <object id="50025" template="../../../../../../common/maps/obj/dialog.tx" x="353.25" y="432.75" type="dialog" gid="50002" width="24" height="12">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_green.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50033" template="../../../../../../common/maps/obj/dialog.tx" x="431" y="384.75" width="16" height="16">
+  <object id="50033" template="../../../../../../common/maps/obj/dialog.tx" x="431" y="384.75" type="dialog" gid="50003" width="24" height="12">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_purple.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50034" template="../../../../../../common/maps/obj/dialog.tx" x="704.5" y="305.25" width="16" height="16">
+  <object id="50034" template="../../../../../../common/maps/obj/dialog.tx" x="704.5" y="305.25" type="dialog" gid="50004" width="24" height="12">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_red.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50032" template="../../../../../../common/maps/obj/dialog.tx" x="368.25" y="513.25" width="16" height="16">
+  <object id="50032" template="../../../../../../common/maps/obj/dialog.tx" x="368.25" y="513.25" type="dialog" gid="50008" width="24" height="12">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_yellow.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50026" template="../../../../../../common/maps/obj/dialog.tx" x="495.75" y="273.25" width="16" height="16">
+  <object id="50026" template="../../../../../../common/maps/obj/dialog.tx" x="495.75" y="273.25" type="dialog" gid="50007" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_warrior.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50037" template="../../../../../../common/maps/obj/dialog.tx" x="702.5" y="209.5" width="16" height="16">
+  <object id="50037" template="../../../../../../common/maps/obj/dialog.tx" x="702.5" y="209.5" type="dialog" gid="50007" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_warrior.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50036" template="../../../../../../common/maps/obj/dialog.tx" x="558.25" y="511.75" width="16" height="16">
+  <object id="50036" template="../../../../../../common/maps/obj/dialog.tx" x="558.25" y="511.75" type="dialog" gid="50007" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_warrior.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50035" template="../../../../../../common/maps/obj/dialog.tx" x="576" y="401.25" width="16" height="16">
+  <object id="50035" template="../../../../../../common/maps/obj/dialog.tx" x="576" y="401.25" type="dialog" gid="50007" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_warrior.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50027" template="../../../../../../common/maps/obj/dialog.tx" x="576.25" y="319.75" width="16" height="16">
+  <object id="50027" template="../../../../../../common/maps/obj/dialog.tx" x="576.25" y="319.75" type="dialog" gid="50005" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_shaman.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50074" template="../../../../../../common/maps/obj/dialog.tx" x="640.25" y="431.5" width="16" height="16">
+  <object id="50074" template="../../../../../../common/maps/obj/dialog.tx" x="640.25" y="431.5" type="dialog" gid="50005" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_shaman.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50030" template="../../../../../../common/maps/obj/dialog.tx" x="896.75" y="126.25" width="16" height="16">
+  <object id="50030" template="../../../../../../common/maps/obj/dialog.tx" x="896.75" y="126.25" type="dialog" gid="50005" width="24" height="24">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_shaman.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50028" template="../../../../../../common/maps/obj/dialog.tx" x="920" y="56.25" width="16" height="16">
+  <object id="50028" template="../../../../../../common/maps/obj/dialog.tx" x="920" y="56.25" type="dialog" gid="50006" width="24" height="12">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_spawning_bed_placeholder.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
-  <object id="50029" template="../../../../../../common/maps/obj/dialog.tx" x="969.75" y="72" width="16" height="16">
+  <object id="50029" template="../../../../../../common/maps/obj/dialog.tx" x="969.75" y="72" type="dialog" gid="50006" width="24" height="12">
    <properties>
     <property name="hidden" value="false" type="bool" />
-    <property name="sprite" value="sprites/enemy/fallen_empires/svyelunite/ally_homarid_spawning_bed_placeholder.atlas" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
    </properties>
   </object>
