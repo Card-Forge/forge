@@ -17,7 +17,6 @@
  */
 package forge.game.spellability;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -232,7 +231,16 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (sa.isSpell()) {
                 final CardPlayOption o = c.mayPlay(sa.getMayPlay());
                 if (o == null || sa.isCastFromPlayEffect()) {
-                    return this.getZone() == null || (cardZone != null && cardZone.is(this.getZone()));
+                    if (this.getZone() != null) {
+                        return cardZone != null && cardZone.is(this.getZone());
+                    }
+                    // A cleared zone means a grant is what allows this, so for someone else's card
+                    // some grant has to reach the zone it is in. The card here is a copy and has
+                    // no play options left, so they come off the real one.
+                    if (sa.isCastFromPlayEffect() || activator == c.getOwner()) {
+                        return true;
+                    }
+                    return hasZoneGrantor(activator.getGame().getCardState(c, null), activator);
                 } else if (o.getPlayer() == activator) {
                     Map<String,String> params = sa.getMayPlay().getMapParams();
 
@@ -240,19 +248,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     // need special permissions for that. If WotC ever prints a card that forbids casting
                     // cards from hand, this may become relevant.
                     if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())) {
-                        final List<CardPlayOption> opts = c.mayPlay(activator);
-                        boolean hasOtherGrantor = false;
-                        for (CardPlayOption opt : opts) {
-                            if (opt.grantsZonePermissions()) {
-                                hasOtherGrantor = true;
-                                break;
-                            }
-                        }
                         if (cardZone.is(ZoneType.Graveyard) && sa.isAftermath()) {
                             // Special exclusion for Aftermath, useful for e.g. As Foretold
                             return true;
                         }
-                        if (!hasOtherGrantor) {
+                        if (!hasZoneGrantor(c, activator)) {
                             return false;
                         }
                     }
@@ -280,16 +280,29 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        // A zone restriction means the activator's own zone. CR 109.5: a card outside the
-        // battlefield has no controller, so the "you" in "your graveyard" is its owner.
-        // Shaman's Trance makes every graveyard count as the activator's.
-        if (sa.isSpell() && activator != c.getOwner() && this.getZone() != null
+        // Reaching here means the card is in a zone of the restricted type, and that has to be
+        // the activator's own. CR 109.5: a card outside the battlefield has no controller, so the
+        // "you" in "your graveyard" is its owner. Shaman's Trance makes every graveyard theirs.
+        if (sa.isSpell() && activator != c.getOwner()
                 && !(this.getZone() == ZoneType.Graveyard
                         && activator.hasKeyword("Shaman's Trance"))) {
             return false;
         }
 
         return true;
+    }
+
+    /** Whether any play option the activator has on this card reaches the zone it is in. */
+    private static boolean hasZoneGrantor(final Card c, final Player activator) {
+        if (c == null) {
+            return false;
+        }
+        for (CardPlayOption opt : c.mayPlay(activator)) {
+            if (opt.grantsZonePermissions()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
