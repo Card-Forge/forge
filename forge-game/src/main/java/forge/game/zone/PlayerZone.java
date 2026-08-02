@@ -76,9 +76,24 @@ public class PlayerZone extends Zone {
 
     private final Player player;
 
+    // Added for roadmap item 1b: view refresh runs battlefields' getCards(),
+    // which expands pending token stacks. Toggling this true around a burst of
+    // zone changes lets the stacks survive until the burst completes and the
+    // first real read. View-only suppression: events and engine logic still fire.
+    private boolean suppressViewUpdate = false;
+
     public PlayerZone(final ZoneType zone, final Player inPlayer) {
         super(zone, inPlayer.getGame());
         player = inPlayer;
+    }
+
+    /**
+     * Returns the previous value so callers can restore it in a finally block.
+     */
+    public final boolean setSuppressViewUpdate(final boolean v) { // doc:1b DONE
+        boolean old = suppressViewUpdate;
+        suppressViewUpdate = v;
+        return old;
     }
 
     @Override
@@ -86,7 +101,9 @@ public class PlayerZone extends Zone {
         if (getZoneType() == ZoneType.Hand && player.getController().isOrderedZone()) {
             sort();
         }
-        player.updateZoneForView(this);
+        if (!suppressViewUpdate) {
+            player.updateZoneForView(this);
+        }
     }
 
     public final Player getPlayer() {

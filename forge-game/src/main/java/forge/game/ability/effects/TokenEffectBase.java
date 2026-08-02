@@ -115,6 +115,20 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             Player controller = prototype.getController();
             int cellAmount = c.getValue();
 
+            // doc:1b DONE. Every token's moveToPlay() fires a view refresh whose
+            // getCards() expands pending stacks. Suppress it for the whole burst
+            // so tryStackToken() below merges against the surviving stack and
+            // the batch is materialized only on the first real read afterwards.
+            // ponytail: collateral-tracking ceiling — if redirected to another
+            // player's battlefield, that zone isn't suppressed here; acceptable
+            // for normal token creation.
+            boolean suppressRestore = false;
+            PlayerZoneBattlefield bf = null;
+            if (controller.getZone(ZoneType.Battlefield) instanceof PlayerZoneBattlefield) {
+                bf = (PlayerZoneBattlefield) controller.getZone(ZoneType.Battlefield);
+                suppressRestore = bf.setSuppressViewUpdate(true);
+            }
+            try {
             for (int i = 0; i < cellAmount; i++) {
                 Card tok = new CardCopyService(prototype).copyCard(true);
                 // disconnect from prototype
@@ -220,6 +234,11 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
 
                 if (sa.hasParam("CleanupForEach")) {
                     moved.removeRemembered(prototype.getRemembered());
+                }
+            }
+            } finally {
+                if (bf != null) {
+                    bf.setSuppressViewUpdate(suppressRestore);
                 }
             }
         }
