@@ -78,11 +78,36 @@ public class ComputerUtilMana {
      * Return the number of colors used for payment for Converge
      */
     public static int getConvergeCount(final SpellAbility sa, final Player ai) {
+        return ColorSet.fromMask(getConvergeColors(sa, ai)).countColors();
+    }
+
+    /**
+     * Return the colors that would be used for payment, as a color mask.
+     */
+    public static byte getConvergeColors(final SpellAbility sa, final Player ai) {
         ManaCostBeingPaid cost = calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false);
         if (payManaCost(cost, sa, ai, true, true, false) != null) {
-            return cost.getSunburst();
+            return cost.getColorsPaid();
         }
         return 0;
+    }
+
+    /**
+     * Announce X on a converge or sunburst card, where its only job is to buy colors: the least X
+     * that still reaches the most of them.
+     */
+    public static void setXForBestConverge(final SpellAbility sa, final Player ai, final int maxX) {
+        int bestX = 0;
+        int bestColors = 0;
+        for (int i = 0; i <= maxX; i++) {
+            sa.setXManaCostPaid(i);
+            int colors = getConvergeCount(sa, ai);
+            if (colors > bestColors) {
+                bestColors = colors;
+                bestX = i;
+            }
+        }
+        sa.setXManaCostPaid(bestX);
     }
 
     // Does not check if mana sources can be used right now, just checks for potential chance.
