@@ -46,47 +46,14 @@ Attack
   xy: 0, 64
   size: 64,32
 Attack
-  xy: 64, 64
-  size: 64,32
-Attack
   xy: 128, 64
-  size: 64,32
-Attack
-  xy: 192, 64
-  size: 64,32
-Attack
-  xy: 256, 64
   size: 64,32
 Attack
   xy: 320, 64
   size: 64,32
 Attack
-  xy: 384, 64
-  size: 64,32
-Attack
   xy: 448, 64
   size: 64,32
-Death
-  xy: 0,192
-  size: 64, 32
-Death
-  xy: 64,192
-  size: 64, 32
-Death
-  xy: 128,192
-  size: 64, 32
-Death
-  xy: 192,192
-  size: 64, 32
-Death
-  xy: 256,192
-  size: 64, 32
-Death
-  xy: 320,192
-  size: 64, 32
-Death
-  xy: 384,192
-  size: 64, 32
 Death
   xy: 448,192
   size: 64, 32

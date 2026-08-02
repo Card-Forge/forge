@@ -46,22 +46,10 @@ Attack
   xy: 0, 96
   size: 56, 48
 Attack
-  xy: 56, 96
-  size: 56, 48
-Attack
   xy: 112, 96
   size: 56, 48
 Attack
-  xy: 168, 96
-  size: 56, 48
-Attack
-  xy: 224, 96
-  size: 56, 48
-Attack
   xy: 280, 96
-  size: 56, 48
-Attack
-  xy: 336, 96
   size: 56, 48
 Attack
   xy: 392, 96
@@ -77,27 +65,6 @@ Hit
   size: 56, 48
 Hit
   xy: 168, 144
-  size: 56, 48
-Death
-  xy: 0, 192
-  size: 56, 48
-Death
-  xy: 56, 192
-  size: 56, 48
-Death
-  xy: 112, 192
-  size: 56, 48
-Death
-  xy: 168, 192
-  size: 56, 48
-Death
-  xy: 224, 192
-  size: 56, 48
-Death
-  xy: 280, 192
-  size: 56, 48
-Death
-  xy: 336, 192
   size: 56, 48
 Death
   xy: 392, 192

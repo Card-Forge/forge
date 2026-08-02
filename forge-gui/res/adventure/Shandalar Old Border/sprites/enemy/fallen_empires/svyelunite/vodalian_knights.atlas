@@ -46,22 +46,10 @@ Attack
   xy: 00, 160
   size: 80,80
 Attack
-  xy: 80, 160
-  size: 80,80
-Attack
   xy: 160, 160
   size: 80,80
 Attack
-  xy: 240, 160
-  size: 80,80
-Attack
-  xy: 320, 160
-  size: 80,80
-Attack
   xy: 400, 160
-  size: 80,80
-Attack
-  xy: 480, 160
   size: 80,80
 Attack
   xy: 560, 160
