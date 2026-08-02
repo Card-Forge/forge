@@ -862,10 +862,11 @@ public class AiController {
             return;
         }
         if (sa.costHasManaX()) {
-            // announce X first - on these cards it is what buys the colors being measured
+            // on these cards X is what buys the colors, so announcing it settles them too
             ComputerUtilCost.setMaxXValue(sa, player, sa.isTrigger());
+        } else {
+            sa.setPredictedPayingColors(ComputerUtilMana.getConvergeColors(sa, player));
         }
-        sa.setPredictedPayingColors(ComputerUtilMana.getConvergeColors(sa, player));
     }
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
