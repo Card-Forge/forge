@@ -44,7 +44,6 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
-import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -822,7 +821,6 @@ public class AiController {
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         final Card host = sa.getHostCard();
         Card altHost = host;
-        boolean lentConverge = false;
 
         if (sa instanceof Spell sp) {
             altHost = sp.canPlayFromHost();
@@ -830,7 +828,7 @@ public class AiController {
                 return AiPlayDecision.CantPlaySa;
             }
             altHost.setCastSA(sa);
-            lentConverge = predictConvergePayment(sa, altHost);
+            predictConvergePayment(sa, altHost);
         } else if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
@@ -848,9 +846,7 @@ public class AiController {
 
         if (sa.isSpell()) {
             altHost.setCastSA(null);
-            if (lentConverge) {
-                sa.getPayingMana().clear();
-            }
+            sa.setPredictedPayingColors((byte) 0);
         }
 
         return decision;
@@ -859,23 +855,17 @@ public class AiController {
     /**
      * Converge counts the colors actually spent, which nothing has yet - so Count$Converge would
      * report zero and the AI would size every converge effect as if it were empty. The cast SA is
-     * already borrowed above for the same reason; lend it the payment it is about to make too.
+     * already borrowed above for the same reason; tell it which colors it is about to spend too.
      */
-    private boolean predictConvergePayment(final SpellAbility sa, final Card host) {
+    private void predictConvergePayment(final SpellAbility sa, final Card host) {
         if (!host.hasConverge() || !sa.getPayingMana().isEmpty()) {
-            return false;
+            return;
         }
         if (sa.costHasManaX()) {
             // announce X first - on these cards it is what buys the colors being measured
             ComputerUtilCost.setMaxXValue(sa, player, sa.isTrigger());
         }
-        final byte colors = ComputerUtilMana.getConvergeColors(sa, player);
-        for (byte color : MagicColor.WUBRG) {
-            if ((colors & color) != 0) {
-                sa.getPayingMana().add(new Mana(color, host, null, player));
-            }
-        }
-        return !sa.getPayingMana().isEmpty();
+        sa.setPredictedPayingColors(ComputerUtilMana.getConvergeColors(sa, player));
     }
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
