@@ -23,7 +23,7 @@ Architecture choices (additive-only changes, system property gating, upstream-ag
 
 ## 1. StackedTokenCard — Flyweight Integration
 
-**Status: Wired at token-creation time (1a), battlefield-zone tracking (1b partial), `CardCopyService` promotion verified (1f), engine-path promotion (1g). Static eval, copier, relaxed merge, and benchmark remain.**
+**Status: Wired at token-creation time (1a), battlefield-zone tracking (1b partial), `CardCopyService` promotion verified (1f), engine-path promotion (1g), real-path benchmark (1h). Static eval, copier, and relaxed merge remain.**
 
 ### Required Fixes
 
@@ -38,7 +38,7 @@ Status legend: `DONE` / `PARTIAL` / open. Code carries `// doc:<item> <STATUS>` 
 | 1e | `canMerge()` is conservative — blocks on counters and tapped state | Misses optimization opportunities for tokens with some modifications | Relax `canMerge()` after confirming game rules allow: summoning sickness is identity-irrelevant, temporary pumps from static abilities should not block merge | |
 | 1f | `promote()` assumes `CardCopyService` exists with the right API | Verify `CardCopyService.copyCard()` exists and correctly creates independent copies with fresh card IDs | Audit `CardCopyService`; if it does not exist, build a card copy method in `StackedTokenCard` directly | **DONE** — `CardCopyService.copyCard(true)` verified and used in `promote()` (`StackedTokenCard.java:150`) |
 | 1g | Promotion places cards directly on battlefield via `owner.getZone(ZoneType.Battlefield).add(copy)` | Bypasses zone-change rules (ETB triggers, replacement effects, state-based actions) | Route promoted tokens through the game engine's normal `moveToZone` / `moveTo` path, not raw zone add | **DONE** — `expandStacks()` now routes copies through `Zone.add()` (events + view refresh) with the prototype's entry bookkeeping carried over in `promote()`; NOT `moveToPlay`, which would double-fire ETB (`StackedTokenCard.java:159-163`, `PlayerZoneBattlefield.java:101-124`) |
-| 1h | Benchmark constructs raw `Card` objects manually, not through real token creation | Benchmark results are irrelevant to actual game performance | Rewrite benchmark to go through Forge's real token resolution — preferably a scripted game scenario (e.g., cast `Secure the Wastes` for X) | |
+| 1h | Benchmark constructs raw `Card` objects manually, not through real token creation | Benchmark results are irrelevant to actual game performance | Rewrite benchmark to go through Forge's real token resolution — preferably a scripted game scenario (e.g., cast `Secure the Wastes` for X) | **DONE** — `TokenBenchmarkTest` now enters tokens exactly like `TokenEffectBase.makeTokenTable` (zone entry + `tryStackToken`) and clones through the real `GameCopier`; it prints the honest flyweight ledger (stacks vs materialized) per batch, which exposes that stacks are expanded by the next zone entry's view refresh (`TokenBenchmarkTest.java`) |
 
 ### Verification
 
@@ -337,7 +337,7 @@ Card images must never be a failure point:
 | P2 | 9b — Long-session stability (log buffer, timer cleanup) | 1 day | Reliability |
 | P2 | 9c — 4+ player board layout scaling | 3-4 days | Multiplayer Commander |
 | P2 | 9d — "Focus on active player" toggle | 2 days | 4-player UX |
-| P3 | 1h — Real-game benchmark | 1 day | Accurate performance measurement |
+| P3 | 1h — Real-game benchmark | 1 day | Accurate performance measurement — **DONE: benchmark runs through the real entry path + `GameCopier`** |
 | P3 | 2e — Localize lblCommander in all 10 locales | 0.5 day | i18n completeness |
 | P3 | 4b — Upstream sync documentation | 0.5 day | Process |
 | P3 | 7e — Banked timeout system (3 tokens of fast-play budget) | 2 days | Competitive pacing |
