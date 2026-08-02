@@ -1,9 +1,9 @@
 Name:Havenwood Battleground
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
 AI:RemoveDeck:All
-Oracle:Havenwood Battleground enters tapped.\n{T}: Add {G}.\n{T}, Sacrifice Havenwood Battleground: Add {G}{G}.
+Oracle:This land enters tapped.\n{T}: Add {G}.\n{T}, Sacrifice this land: Add {G}{G}.

@@ -3,8 +3,8 @@ ManaCost:2 W
 Types:Creature Dwarf Cleric
 PT:3/3
 K:Myriad
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TapOneEach | TriggerDescription$ Whenever CARDNAME attacks, for each opponent, tap up to one target creature that player controls.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TapOneEach | TriggerDescription$ Whenever this creature attacks, for each opponent, tap up to one target creature that player controls.
 SVar:TapOneEach:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose one target creature that each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:HasAttackEffect:TRUE
-Oracle:Myriad\nWhenever Hammers of Moradin attacks, for each opponent, tap up to one target creature that player controls.
+Oracle:Myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\nWhenever this creature attacks, for each opponent, tap up to one target creature that player controls.

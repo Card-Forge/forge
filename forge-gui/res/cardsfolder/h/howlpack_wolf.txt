@@ -2,8 +2,8 @@ Name:Howlpack Wolf
 ManaCost:2 R
 Types:Creature Wolf
 PT:3/3
-S:Mode$ CantBlock | ValidCard$ Card.Self | IsPresent$ Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | PresentCompare$ EQ0 | Description$ CARDNAME can't block unless you control another Wolf or Werewolf.
+S:Mode$ CantBlock | ValidCard$ Card.Self | IsPresent$ Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | PresentCompare$ EQ0 | Description$ This creature can't block unless you control another Wolf or Werewolf.
 SVar:BuffedBy:Wolf,Werewolf
 AI:RemoveDeck:Random
 DeckHints:Type$Wolf|Werewolf
-Oracle:Howlpack Wolf can't block unless you control another Wolf or Werewolf.
+Oracle:This creature can't block unless you control another Wolf or Werewolf.

@@ -3,13 +3,13 @@ ManaCost:3 G
 Types:Creature Human Werewolf
 PT:2/2
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-A:AB$ ChangeZone | Cost$ 1 G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SorcerySpeed$ True | RememberChanged$ True | SubAbility$ DBUntap | StackDescription$ You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap CARDNAME. | SpellDescription$ You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap CARDNAME. Activate only as a sorcery.
+A:AB$ ChangeZone | Cost$ 1 G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SorcerySpeed$ True | RememberChanged$ True | SubAbility$ DBUntap | StackDescription$ You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap this creature. | SpellDescription$ You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap this creature. Activate only as a sorcery.
 SVar:DBUntap:DB$ Untap | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Wolf,Werewolf | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Daybound
 DeckHints:Type$Wolf|Werewolf
 AlternateMode:DoubleFaced
-Oracle:This spell can't be countered.\n{1}{G}, {T}: You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap Howlpack Piper. Activate only as a sorcery.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+Oracle:This spell can't be countered.\n{1}{G}, {T}: You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap this creature. Activate only as a sorcery.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
 
 ALTERNATE
 

@@ -4,7 +4,7 @@ Types:Creature Human Knight
 PT:4/2
 K:Haste
 K:Battle cry
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ When CARDNAME attacks, creatures with power 1 or less can't block this turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever this creature attacks, creatures with power 1 or less can't block this turn.
 SVar:TrigEffect:DB$ Effect | StaticAbilities$ KWPump
 SVar:KWPump:Mode$ Continuous | Affected$ Creature.powerLE1 | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures with power 1 or less can't block this turn.
-Oracle:Haste\nBattle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nWhenever Hero of Oxid Ridge attacks, creatures with power 1 or less can't block this turn.
+Oracle:Haste\nBattle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nWhenever this creature attacks, creatures with power 1 or less can't block this turn.
