@@ -251,7 +251,7 @@ public class GameSimulator {
         controller.possiblyCacheResult(score, origSa);
         if (controller.shouldRecurse() && !simGame.isGameOver()) {
             controller.push(sa, score, this);
-            SpellAbilityPicker sim = new SpellAbilityPicker(simGame, aiPlayer);
+            SpellAbilityPicker sim = new SpellAbilityPicker(aiPlayer);
             SpellAbility nextSa = sim.chooseSpellAbilityToPlay(controller);
             if (nextSa != null) {
                 score = sim.getScoreForChosenAbility();
