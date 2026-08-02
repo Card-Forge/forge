@@ -910,7 +910,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public ColorSet getPayingColors() {
-        byte colors = predictedPayingColors;
+        if (payingMana.isEmpty()) {
+            return ColorSet.fromMask(predictedPayingColors);
+        }
+        byte colors = 0;
         for (Mana m : payingMana) {
             colors |= m.getColor();
         }
@@ -918,9 +921,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     /**
-     * Colors this spell is expected to be paid with, for deciding whether to cast it at all. Set
-     * while nothing has been spent yet, so that the color a card reads off its own payment
-     * (Converge, ManaColorsPaid, ManaSpent) can be answered before the payment exists.
+     * Colors this spell is expected to be paid with, for deciding whether to cast it at all. Only
+     * consulted while nothing has been spent, so that the color a card reads off its own payment
+     * (Converge, ManaColorsPaid, ManaSpent) can be answered before the payment exists; once any
+     * real mana is spent that is what counts.
      */
     public final void setPredictedPayingColors(byte colors) {
         predictedPayingColors = colors;
