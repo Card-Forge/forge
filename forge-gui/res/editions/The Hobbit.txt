@@ -6,49 +6,94 @@ Type=Expansion
 ScryfallCode=HOB
 
 [cards]
+1 C Long-Bodied Grey Dog @Anna Podedworna
+2 C Old Thrush @Francisco Miyara
+3 U Troop of Ponies @Christina Kraus
 4 R Belladonna Took @Xabi Gaztelua
 5 R Bilbo's Gambit @Randy Gallegos
+6 U Bofur, Reliable Guardian @Kieran Yanner
+7 U Celebrate the Mountain-king @Tomas Duchek
+8 U Dáin, Lord of the Iron Hills @Tomas Duchek
+9 C Dwarven Provisioner @Randy Gallegos
+10 C Dwarven Shortsword @Manuel Castañón
 11 U Eagle of the Great Shelf @Yuhong Ding
 12 R The Eagles Are Coming! @Zezhou Chen
+13 C Esgaroth Garrison @Leonardo Santanna
+14 R Fíli the Pathfinder @Valera Lutfullina
+15 M Gleaming Splendor @Kekai Kotaki
 16 U Iron Hills Blacksmith @Jarel Threat
+17 R Kíli the Resourceful @Yuhong Ding
+18 C Lake-town Lookout @Irina Nordsol
+19 U Lake-town Toymaker @Marina Ortega Lorente
+20 C Magnificent End @Yuhong Ding
+21 C Moment of Glory @Jarel Threat
 22 U The Mountain-king's Return @Rovina Cai
 23 C Ori, Keeper of Songs @Yigit Koroglu
 24 M The Queen of Dale @Magali Villeneuve
 25 R Roads Go Ever, Ever On @Rovina Cai
+26 R Settle the Wreckage @Chris Cold
 27 U Stone by Sunlight @Kamila Szutenberg
+28 C Thorin's Last Stand @John Di Giovanni
 29 R An Unexpected Party @Matt Stewart
+30 C Velvetwing Butterflies @Xabi Gaztelua
+31 C Vow to Erebor @Andreia Ugrai
 32 U Bilbo, Luckwearer @Anna Steinbauer
 33 M Bilbo, Thief in the Night @Nia Kovalevski
 34 C Bilbo Baggins, Burglar @Kieran Yanner
+35 C Confusticate and Bebother @Colin Boyer
 36 M Elrond, Moon-Reader @Christina Kraus
 37 U Elven Raft-Steerer @Christina Kraus
+38 C Elvenking's Harper @Irina Nordsol
+39 C Enchanted River's Grasp @Javier Charro
 40 M Fateful Discovery @Irvin Rodriguez
+41 C Gandalf, Wandering Wizard @Irvin Rodriguez
 42 R Great Gilded Boat @Josu Solano
+43 C Lakeshore Apothecary @Wei Guan
 44 U Lake-town Mariners @Wei Guan
+45 C Long Lake Nuisance @Kevin Sidharta
 46 R The Lord of the Eagles @Zezhou Chen
 47 U Master's Councillors @Narendra Bintara Adi
+48 C Mirkwood Meditator @Francisco Miyara
 49 R Most Decrepit Old Bird @Josu Solano
+50 U Old Fat Spider Can't See Me @Rovina Cai
+51 C Plunder the Trollshaws @Alexander Mokhov
 52 U Ravenhill Flock @Irina Nordsol
 53 R Riddles in the Dark @Lorenzo Mastroianni
 54 R Roll-Roll-Roll-Roll @Rovina Cai
 55 U Sound the Trumpets @Nereida
 56 U Thranduil's Decree @Javier Charro
+57 R Uncover the Moon-Letters @Leon Tukker
+58 C Uneasy Partings @Javier Charro
 59 R Wizard's Staff @Gaboleps
+60 R Along the Crooked Way @Bruce Brenneise
 61 R Azog, Moria's Ruin @Miklós Ligeti
+62 C Bilbo's Deadly Slice @Henry Peters
+63 C Crude Bent Blade @Russell Dongjun Lu
 64 U Desolation Prowler @Harkalé Linaï
 65 U Down, Down to Goblin-town @Rovina Cai
+66 U Dreaded Bat-Cloud @Andreia Ugrai
+67 C Front Porch Sentries @Stanislav Sherbakov
 68 U Gathering of Darkness @Pavel Kolomeyets
 69 U Gnashing of Teeth @Nereida
 70 M Gollum, Riddle Master @Irvin Rodriguez
 71 C Gollum, Silent Slinker @Miklós Ligeti
 72 U Gollum the Abandoned @Andrea Piparo
+73 C Great Fierce Bee @Leesha Hannigan
 74 U Great Ugly-Looking Goblin @Jason Kang
 75 R Head of the Hunt @Andrea Piparo
 76 M Inside Information @Sean Vo
 77 R The Master of Lake-town @Marius Bota
 78 U Nighthowl Pursuer @Tomas Duchek
+79 C Rage into the Valley @Antonio José Manzanedo
+80 C Ravening Warg @Adrián Rodríguez Pérez
+81 C Reverent Howl @Antonio José Manzanedo
+82 R Rhovanion Rampager @Kevin Sidharta
 83 R The Sackville-Bagginses @Denman Rooke
+84 C Stir Up Trouble @Andreia Ugrai
+85 C Stony-Voiced Goblins @Marius Bota
 86 R Supper for Spiders @Michele Giorgi
+87 R Balin, Loremaster @Colin Boyer
+88 U Bombur, Gentle Dreamer @Eric Deschamps
 89 U Bothersome Noisemaker @Andreia Ugrai
 90 U Burn, Burn, Tree and Fern @Rovina Cai
 91 R Dáin Ironfoot @Tomas Duchek
@@ -60,26 +105,47 @@ ScryfallCode=HOB
 97 U Gandalf, Spark Starter @Javier Charro
 98 R Getaway Barrel @Pablo Mendoza
 99 U Glóin the Mighty @Colin Boyer
+100 C Goblin-town Flunkies @Jason Kang
+101 C Gundabad Opportunist @Michele Giorgi
+102 C Iron Hills Stalwart @Michele Giorgi
 103 R Last Light of Durin's Day @Harkalé Linaï
 104 R The Misty Mountains Cold @Rovina Cai
 105 U Misty Mountains Raider @Tomas Duchek
+106 C Óin the Brave @Colin Boyer
+107 C Pinecone Strike @Javier Charro
+108 C Ragged Short Spear @Miklós Ligeti
+109 C Smaug, the Great Calamity @Chris Cold
 110 M Smaug the Magnificent @Francisco Miyara
+111 C Smaug's Fury @Andrea Piparo
+112 U Snowslope Hunter @Adrián Rodríguez Pérez
+113 R Stone-Giant of High Pass @Miklós Ligeti
 114 M Thorin, Mountain-king @Javier Charro
+115 C Tidings of War @Pavel Kolomeyets
+116 C Attercop @Michele Giorgi
+117 R Bejeweled Warg @John Di Giovanni
 118 C Beorn, Reluctant Host @Javier Charro
 119 M Beorn the Fierce @Nia Kovalevski
 120 U Beorn's Hospitality @Harkalé Linaï
+121 C Boughside Wanderers @Irina Nordsol
 122 R Cantankerous Keepers @Ramza Psyru
 123 M Dancing from Dark to Dawn @Leesha Hannigan
 124 R Down in the Valley @Rovina Cai
 125 U Galion, Elvenking's Butler @Jarel Threat
 126 R Gigantic Big Bear @Xabi Gaztelua
+127 C Guardian of the Halls @Andreia Ugrai
 128 C Little Bear @Tomas Duchek
 129 U Mirkwood Pathmaker @Sean Vo
 130 U Nasty Little Rabbit @Harkalé Linaï
+131 R The Notary Hobbits @Jarel Threat
 132 U Old Fat Spider @Lorenzo Mastroianni
 133 C Ordinary Bear @Andrea Piparo
 134 R Part in Friendship @Jarel Threat
+135 C Quarrel @Denman Rooke
+136 R Radagast of Rhosgobel @Anna Podedworna
 137 R Through the Forest Gate @Leon Tukker
+138 U Troll Negotiations @Wero Gallo
+139 C Warg Tactics @Adrián Rodríguez Pérez
+140 C Wargling @Adrián Rodríguez Pérez
 141 U Wilderland Scrounger @Tomas Duchek
 142 C Wood Elves @Andreia Ugrai
 143 U Woodland Weavemaster @Nia Kovalevski
@@ -88,10 +154,12 @@ ScryfallCode=HOB
 146 R Bard's Company @Jarel Threat
 147 U Bifur, Melodic Rider @Kieran Yanner
 148 U Bolg of the North @Miklós Ligeti
+149 R Bolg's Company @Michele Giorgi
 150 U The Chief Warg @Tomas Duchek
 151 R Chief Warg's Company @Jason Kang
 152 R Dáin's Company @Erikas Perl
 153 C Duskwatch Hunter @Samuele Bandini
+154 R Dwalin, Weaponmaster @Marco Teixeira
 155 U Eagle's Rescue @Ramza Psyru
 156 U Fearsome Goblin Pair @Michele Giorgi
 157 C Goblin Plate Mail @Miklós Ligeti
@@ -103,14 +171,21 @@ ScryfallCode=HOB
 163 U Silvan Reveler @Bokun An
 164 R Smaug, Wicked Worm @Antonio José Manzanedo
 165 U Thorin Oakenshield @Francisco Miyara
+166 U Thranduil, Sindarin Liege @Justyna Dura
 167 R Thranduil, the Elvenking @Magali Villeneuve
+168 R Thranduil's Company @Irina Nordsol
 169 R Tom, Bert, and William @Leonardo Borazio
 170 M The Arkenstone @Gaboleps
+171 U The Black Arrow @Kevin Sidharta
 172 U Dwarven Mattock @Nino Is
+173 C Giant's Boulder @Miklós Ligeti
+174 R Glamdring, Foe-hammer @Chris Cold
+175 U Key to the Side-Door @Nathaniel Himawan
 176 R My Precious @Valera Lutfullina
 177 M Orcrist, Goblin-cleaver @Erikas Perl
 178 R Sting, Bilbo's Sword @Tomas Duchek
 179 U Thrór's Map @Gaboleps
+180 C Well-Worn Spatula @Gaboleps
 181 R Elven Passage @Shahab Alizadeh
 182 C Elvenking's Halls @Leon Tukker
 183 C Goblin-town @Sean Vo
@@ -129,16 +204,23 @@ ScryfallCode=HOB
 196 L Swamp @WFlemming Illustration
 197 L Mountain @WFlemming Illustration
 198 L Forest @WFlemming Illustration
+199 U Troop of Ponies @Ted Nasmith
+200 C Rage into the Valley @Ted Nasmith
 201 R The Great Goblin @Ted Nasmith
 202 U Thorin Oakenshield @Ted Nasmith
 203 U Gandalf, Spark Starter @Ted Nasmith
 204 R Glamdring, Foe-hammer @Ted Nasmith
 205 R The Eagles Are Coming! @Denman Rooke
+206 U Dreaded Bat-Cloud @Denman Rooke
 207 R The Lonely Mountain @Denman Rooke
 208 R Chief Warg's Company @Denman Rooke
+209 C Thorin's Last Stand @Denman Rooke
 210 R Bard's Company @Denman Rooke
+211 R Bolg's Company @Denman Rooke
 212 R Dáin's Company @Denman Rooke
+213 R Thranduil's Company @Denman Rooke
 214 R Belladonna Took @Kristina Carroll
+215 U Bofur, Reliable Guardian @Cory Godbey
 216 U Iron Hills Blacksmith @Francisco Badilla
 217 M The Queen of Dale @Ashley Mackenzie
 218 U Bilbo, Luckwearer @Cory Godbey
@@ -155,11 +237,14 @@ ScryfallCode=HOB
 229 M Smaug the Magnificent @John Tedrick
 230 M Beorn the Fierce @Dibujante Nocturno
 231 M Dancing from Dark to Dawn @Francisco Badilla
+232 R The Notary Hobbits @Ashley Mackenzie
+233 U Thranduil, Sindarin Liege @Cory Godbey
 234 M The Arkenstone @Francisco Badilla
 235 R My Precious @Barbara Rosiak
 236 M Orcrist, Goblin-cleaver @Francisco Badilla
 237 R Sting, Bilbo's Sword @Barbara Rosiak
 238 R Elven Passage @Kristina Carroll
+239 M Gleaming Splendor @James Bousema
 240 R The Lord of the Eagles @Tyler Jacobson
 241 M Gollum, Riddle Master @Tyler Jacobson
 242 M Gandalf, Goblins' Bane @James Bousema
@@ -171,6 +256,7 @@ ScryfallCode=HOB
 248 R The Lonely Mountain @Tyler Jacobson
 249 M Smaug the Magnificent @Ted Nasmith
 250 R Belladonna Took @Kristina Carroll
+251 U Bofur, Reliable Guardian @Cory Godbey
 252 U Iron Hills Blacksmith @Francisco Badilla
 253 M The Queen of Dale @Ashley Mackenzie
 254 U Bilbo, Luckwearer @Cory Godbey
@@ -187,6 +273,8 @@ ScryfallCode=HOB
 265 M Smaug the Magnificent @John Tedrick
 266 M Beorn the Fierce @Dibujante Nocturno
 267 M Dancing from Dark to Dawn @Francisco Badilla
+268 R The Notary Hobbits @Ashley Mackenzie
+269 U Thranduil, Sindarin Liege @Cory Godbey
 270 M The Arkenstone @Francisco Badilla
 271 R My Precious @Barbara Rosiak
 272 M Orcrist, Goblin-cleaver @Francisco Badilla
@@ -203,21 +291,32 @@ ScryfallCode=HOB
 283 M The Arkenstone @Tyler Jacobson
 284 R The Lonely Mountain @Tyler Jacobson
 285 R Bilbo's Gambit @Randy Gallegos
+286 R Fíli the Pathfinder @Valera Lutfullina
+287 R Kíli the Resourceful @Yuhong Ding
+288 R Settle the Wreckage @Chris Cold
 289 R An Unexpected Party @Matt Stewart
 290 M Elrond, Moon-Reader @Christina Kraus
 291 R Great Gilded Boat @Josu Solano
 292 R Riddles in the Dark @Lorenzo Mastroianni
+293 R Uncover the Moon-Letters @Leon Tukker
 294 R Wizard's Staff @Gaboleps
+295 R Along the Crooked Way @Bruce Brenneise
 296 M Inside Information @Sean Vo
 297 R The Master of Lake-town @Marius Bota
+298 R Rhovanion Rampager @Kevin Sidharta
 299 R The Sackville-Bagginses @Denman Rooke
 300 R Supper for Spiders @Michele Giorgi
+301 R Balin, Loremaster @Colin Boyer
 302 R Dáin Ironfoot @Tomas Duchek
 303 R Getaway Barrel @Pablo Mendoza
+304 R Stone-Giant of High Pass @Miklós Ligeti
+305 R Bejeweled Warg @John Di Giovanni
 306 R Cantankerous Keepers @Ramza Psyru
 307 R Gigantic Big Bear @Xabi Gaztelua
 308 R Part in Friendship @Jarel Threat
+309 R Radagast of Rhosgobel @Anna Podedworna
 310 R Through the Forest Gate @Leon Tukker
+311 R Dwalin, Weaponmaster @Marco Teixeira
 312 R Tom, Bert, and William @Leonardo Borazio
 313 L Plains @David Petersen
 314 L Plains @David Petersen
@@ -230,6 +329,16 @@ ScryfallCode=HOB
 321 R The Misty Mountains Cold @Rovina Cai
 
 [tokens]
+1 w_4_4_bird_soldier_flying @Leesha Hannigan
+2 w_1_1_human_soldier @Jarel Threat
+3 b_0_0_goblin_army @Stanislav Sherbakov
 4 b_0_0_goblin_army @Stanislav Sherbakov
+5 r_6_6_dragon_flying @Nino Is
 6 r_2_2_dwarf @Nia Kovalevski
+7 g_2_2_bear @Leesha Hannigan
+8 g_1_1_elf @Hristo D. Chukov
+9 g_2_2_wolf @Nathaniel Himawan
+10 axe @Nathaniel Himawan
+11 stone_boulder @Kamila Szutenberg
 12 c_a_treasure_sac @Leonardo Santanna
+13 c_a_treasure_sac @Kamila Szutenberg

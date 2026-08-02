@@ -1,0 +1,17 @@
+Name:Gollum, Silent Slinker
+ManaCost:3 B
+Types:Legendary Creature Halfling Horror
+PT:4/3
+K:Menace
+DeckHas:Ability$Counters
+AlternateMode:Adventure
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)
+
+ALTERNATE
+
+Name:Meager Meal
+ManaCost:B
+Types:Sorcery Adventure
+A:SP$ PutCounter | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | SubAbility$ DBGainLife | SpellDescription$ Put a +1/+1 counter on up to one target creature. Target player gains 2 life. (Then exile this card. You may cast the creature later from exile.)
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | ValidTgts$ Player
+Oracle:Put a +1/+1 counter on up to one target creature. Target player gains 2 life. (Then exile this card. You may cast the creature later from exile.)

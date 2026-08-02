@@ -234,8 +234,7 @@ public class SimulationController {
                     int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2]);
                     if (cardScore == effect.targetScore) {
                         Score currentScore = getCurrentScore();
-                        // TODO: summonSick score?
-                        return new Score(currentScore.value + effect.scoreDelta, currentScore.summonSickValue);
+                        return new Score(currentScore.value + effect.scoreDelta, currentScore.availableValue + effect.scoreDelta);
                     }
                 }
             }
@@ -250,10 +249,11 @@ public class SimulationController {
         if (!currentStack.isEmpty()) {
             Plan.Decision d = currentStack.get(currentStack.size() - 1);
             int scoreDelta = score.value - d.initialScore.value;
+            int availableScoreDelta = score.availableValue - d.initialScore.availableValue;
             // Needed to make sure below is only executed when target decisions are ended.
             // Also, only cache negative effects - so that in those cases we don't need to
             // recurse.
-            if (scoreDelta <= 0 && d.targets != null) {
+            if (scoreDelta <= 0 && scoreDelta == availableScoreDelta && d.targets != null) {
                 // FIXME: Support more than one target in this logic.
                 GameObject[] hostAndTarget = currentHostAndTarget;
                 if (currentHostAndTarget != null) {
