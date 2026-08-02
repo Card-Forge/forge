@@ -105,7 +105,7 @@ public class AiController {
         player = computerPlayer;
         game = game0;
         memory = new AiCardMemory();
-        simPicker = new SpellAbilityPicker(game, player);
+        simPicker = new SpellAbilityPicker(player);
     }
 
     public boolean usesHybridSimulation() {
@@ -801,21 +801,16 @@ public class AiController {
             CardCollection exceptSources = ComputerUtilMana.getManaSourcesToPayCost(
                     ComputerUtilMana.calculateManaCost(exceptForThisSa.getPayCosts(), exceptForThisSa, player, true, 0, false),
                     exceptForThisSa, player, false);
-            if (exceptSources != null) {
-                manaSources.removeAll(exceptSources);
+            // the other spell needs these too, so they usually can't be promised to both
+            if (exceptSources != null && !exceptSources.isEmpty() && manaSources.removeAll(exceptSources) && manaSources.isEmpty()) {
+                return false;
             }
         }
 
-        // This is a simplification, since one mana source can produce more than one mana,
-        // but should work in most circumstances to ensure safety in whatever the AI is using this for.
-        if (manaSources.size() >= cost.getConvertedManaCost()) {
-            for (Card c : manaSources) {
-                memory.rememberCard(c, memSet);
-            }
-            return true;
+        for (Card c : manaSources) {
+            memory.rememberCard(c, memSet);
         }
-
-        return false;
+        return true;
     }
 
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
@@ -1782,7 +1777,7 @@ public class AiController {
             return doTrigger(((WrappedAbility) sa).getWrappedAbility(), mandatory);
         if (sa.getApi() != null)
             return SpellApiToAi.Converter.get(sa).doTrigger(player, sa, mandatory);
-        if (sa.getPayCosts() == Cost.Zero && !sa.usesTargeting()) {
+        if (sa.getPayCosts().isFree() && !sa.usesTargeting()) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;
         }
