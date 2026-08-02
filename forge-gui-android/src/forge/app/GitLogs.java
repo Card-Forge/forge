@@ -54,10 +54,16 @@ public class GitLogs {
             InputStream inputStream = url.openStream();
             List<AtomReader.Entry> entries = new AtomReader().parse(inputStream);
             for (AtomReader.Entry entry : entries) {
-                if (entry.link != null) {
+                // Reforge: parse the tag from a release link (last path segment),
+                // independent of the repo name, unlike upstream's lastIndexOf("forge").
+                if (entry.link != null && entry.link.contains("/releases/")) {
                     try {
                         String val = entry.link;
-                        tag = val.substring(val.lastIndexOf("forge"));
+                        int q = val.indexOf('?');
+                        if (q != -1) {
+                            val = val.substring(0, q);
+                        }
+                        tag = val.substring(val.lastIndexOf('/') + 1);
                         break;
                     } catch (Exception e) {
                         e.printStackTrace();
