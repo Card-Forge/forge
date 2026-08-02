@@ -128,12 +128,17 @@ public class CharacterSprite extends MapActor {
     }
 
     public void setAnimation(AnimationTypes type) {
-        if (currentAnimationType != type) {
+        Animation<TextureRegion> animation = getAnimation(type, currentAnimationDir);
+        if (animation == null) {
+            return;
+        }
+
+        if (currentAnimationType != type || currentAnimation != animation || isOneShotAnimation(type)) {
             currentAnimationType = type;
+            currentAnimation = animation;
             if (isOneShotAnimation(type)) {
                 timer = 0.0f;
             }
-            updateAnimation();
         }
     }
 
@@ -142,16 +147,18 @@ public class CharacterSprite extends MapActor {
      * Uses the supplied fallback when the atlas does not define that animation.
      */
     public float getAnimationDuration(AnimationTypes type, float fallbackDuration) {
+        Animation<TextureRegion> animation = getAnimation(type, currentAnimationDir);
+        return animation == null ? fallbackDuration : animation.getAnimationDuration();
+    }
+
+    private Animation<TextureRegion> getAnimation(AnimationTypes type, AnimationDirections direction) {
         HashMap<AnimationDirections, Animation<TextureRegion>> dirs = animations.get(type);
         if (dirs == null || dirs.isEmpty()) {
-            return fallbackDuration;
+            return null;
         }
 
-        Animation<TextureRegion> animation = dirs.get(currentAnimationDir);
-        if (animation == null) {
-            animation = dirs.get(AnimationDirections.Right);
-        }
-        return animation == null ? fallbackDuration : animation.getAnimationDuration();
+        Animation<TextureRegion> animation = dirs.get(direction);
+        return animation == null ? dirs.get(AnimationDirections.Right) : animation;
     }
 
     private boolean isOneShotAnimation(AnimationTypes type) {
@@ -161,23 +168,13 @@ public class CharacterSprite extends MapActor {
     }
 
     private void updateAnimation() {
-        AnimationTypes aniType = currentAnimationType;
-        AnimationDirections aniDir = currentAnimationDir;
-        if (!animations.containsKey(aniType)) {
-            aniType = AnimationTypes.Idle;
+        Animation<TextureRegion> animation = getAnimation(currentAnimationType, currentAnimationDir);
+        if (animation == null) {
+            animation = getAnimation(AnimationTypes.Idle, currentAnimationDir);
         }
-        if (!animations.containsKey(aniType)) {
-            return;
+        if (animation != null) {
+            currentAnimation = animation;
         }
-        HashMap<AnimationDirections, Animation<TextureRegion>> dirs = animations.get(aniType);
-
-        if (!dirs.containsKey(aniDir)) {
-            aniDir = AnimationDirections.Right;
-        }
-        if (!dirs.containsKey(aniDir)) {
-            return;
-        }
-        currentAnimation = dirs.get(aniDir);
     }
 
     public void setDirection(AnimationDirections dir) {
