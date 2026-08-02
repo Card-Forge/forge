@@ -837,11 +837,13 @@ public class PlayerControllerAi extends PlayerController {
         if (sa.isLandAbility()) {
             if (sa.canPlay()) {
                 sa.resolve();
+                return true;
             }
-        } else {
-            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerAction(sa));
+            return false;
         }
-        return true;
+        // Must return the real result: always-true made PhaseHandler treat failed equips/spells as
+        // successful plays, so the AI re-chose the same SA until "AI looped too much".
+        return ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerAction(sa));
     }
 
     /**
