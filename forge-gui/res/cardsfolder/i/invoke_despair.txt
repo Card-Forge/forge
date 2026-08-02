@@ -1,7 +1,7 @@
 Name:Invoke Despair
 ManaCost:1 B B B B
 Types:Sorcery
-A:SP$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBLoseLifeC | StackDescription$ REP Target opponent_{p:Targeted} | SpellDescription$ Target opponent sacrifices a creature.
+A:SP$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBLoseLifeC | StackDescription$ REP Target opponent_{p:Targeted} | SpellDescription$ Target opponent sacrifices a creature of their choice.
 SVar:DBLoseLifeC:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 2 | SubAbility$ DBDrawC | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | StackDescription$ REP you draw_{p:You} draws | SpellDescription$ If they can't, they lose 2 life and you draw a card.
 SVar:DBDrawC:DB$ Draw | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanC | StackDescription$ None
 SVar:DBCleanC:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSacrificeE
@@ -14,4 +14,4 @@ SVar:DBLoseLifeP:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 2 | SubAbility$ 
 SVar:DBDrawP:DB$ Draw | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanP | StackDescription$ None
 SVar:DBCleanP:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-Oracle:Target opponent sacrifices a creature. If they can't, they lose 2 life and you draw a card. Then repeat this process for an enchantment and a planeswalker.
+Oracle:Target opponent sacrifices a creature of their choice. If they can't, they lose 2 life and you draw a card. Then repeat this process for an enchantment and a planeswalker.

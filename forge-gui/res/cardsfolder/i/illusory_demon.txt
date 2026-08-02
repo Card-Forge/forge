@@ -3,7 +3,7 @@ ManaCost:1 U B
 Types:Creature Demon Illusion
 PT:4/3
 K:Flying
-T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you cast a spell, sacrifice CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you cast a spell, sacrifice this creature.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
 AI:RemoveDeck:All
-Oracle:Flying\nWhen you cast a spell, sacrifice Illusory Demon.
+Oracle:Flying\nWhen you cast a spell, sacrifice this creature.
