@@ -41,7 +41,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility outlastSA = findSAWithPrefix(herald, "Outlast");
         AssertJUnit.assertNotNull(outlastSA);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(outlastSA).value;
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
@@ -84,7 +84,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility outlastSA = findSAWithPrefix(herald, "Outlast");
         AssertJUnit.assertNotNull(outlastSA);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(outlastSA).value;
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
@@ -108,7 +108,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(1, lion.getAmountOfKeyword(Keyword.HEXPROOF));
         AssertJUnit.assertEquals(1, lion.getAmountOfKeyword(Keyword.INDESTRUCTIBLE));
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         Game simGame = sim.getSimulatedGameState();
         Card lionCopy = findCardWithName(simGame, lionCardName);
         AssertJUnit.assertTrue(lionCopy.isMonstrous());
@@ -129,7 +129,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertEquals(1, bear.getAmountOfKeyword(Keyword.SHROUD));
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
         AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword(Keyword.SHROUD));
@@ -148,7 +148,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertEquals(1, bear.getAmountOfKeyword(Keyword.LIFELINK));
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
         AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword(Keyword.LIFELINK));
@@ -170,7 +170,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility playMerchantSa = c.getSpellAbilities().get(0);
         playMerchantSa.setActivatingPlayer(p);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int origScore = sim.getScoreForOrigGame().value;
         int score = sim.simulateSpellAbility(playMerchantSa).value;
         AssertJUnit.assertTrue(String.format("score=%d vs. origScore=%d", score, origScore), score > origScore);
@@ -196,7 +196,7 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertEquals(20, game.getPlayers().get(0).getLife());
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         Game simGame = sim.getSimulatedGameState();
 
         SpellAbility unmorphSA = findSAWithPrefix(ripper, "Morph — Reveal a black card");
@@ -219,7 +219,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p1);
+        GameSimulator sim = createSimulator(p1);
         Game simGame = sim.getSimulatedGameState();
 
         SpellAbility fractureSa = fractureP1.getSpellAbilities().get(0);
@@ -249,7 +249,7 @@ public class GameSimulationTest extends SimulationTest {
         minusTwo.setActivatingPlayer(p);
         AssertJUnit.assertTrue(minusTwo.canPlay());
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(minusTwo);
         Game simGame = sim.getSimulatedGameState();
         Card vampireToken = findCardWithName(simGame, "Vampire Token");
@@ -294,7 +294,7 @@ public class GameSimulationTest extends SimulationTest {
         minusFour.setActivatingPlayer(p);
         AssertJUnit.assertTrue(minusFour.canPlay());
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(minusFour);
         Game simGame = sim.getSimulatedGameState();
         Card simBear = findCardWithName(simGame, bearCardName);
@@ -320,7 +320,7 @@ public class GameSimulationTest extends SimulationTest {
 
         SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(manifestSA);
         Game simGame = sim.getSimulatedGameState();
         Card manifestedCreature = findCardWithName(simGame, "");
@@ -332,7 +332,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(2, manifestedCreature.getNetPower());
         AssertJUnit.assertFalse(manifestedCreature.hasKeyword(Keyword.FLYING));
 
-        GameSimulator sim2 = createSimulator(simGame, simGame.getPlayers().get(1));
+        GameSimulator sim2 = createSimulator(simGame.getPlayers().get(1));
         Game simGame2 = sim2.getSimulatedGameState();
         manifestedCreature = findCardWithName(simGame2, "");
         unmanifestSA = findSAWithPrefix(manifestedCreature.getAllPossibleAbilities(simGame2.getPlayers().get(1), false),
@@ -365,7 +365,7 @@ public class GameSimulationTest extends SimulationTest {
 
         SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(manifestSA);
         Game simGame = sim.getSimulatedGameState();
         Card manifestedCreature = findCardWithName(simGame, "");
@@ -392,7 +392,7 @@ public class GameSimulationTest extends SimulationTest {
 
         SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(manifestSA);
         Game simGame = sim.getSimulatedGameState();
         Card manifestedCreature = findCardWithName(simGame, "");
@@ -421,7 +421,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility becomeDragonSA = findSAWithPrefix(sarkhan, "+1");
         AssertJUnit.assertNotNull(becomeDragonSA);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(becomeDragonSA);
         Game simGame = sim.getSimulatedGameState();
         Card sarkhanSim = findCardWithName(simGame, sarkhanCardName);
@@ -456,7 +456,7 @@ public class GameSimulationTest extends SimulationTest {
 
         MultiTargetSelector selector = new MultiTargetSelector(sa, null);
         while (selector.selectNextTargets()) {
-            GameSimulator sim = createSimulator(game, p);
+            GameSimulator sim = createSimulator(p);
             sim.simulateSpellAbility(sa);
             Game simGame = sim.getSimulatedGameState();
             Card thopterSim = findCardWithName(simGame, ornithoperCardName);
@@ -487,7 +487,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertNotNull(sa);
         sa.setActivatingPlayer(p);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         boltSA.getTargets().add(p);
         sim.simulateSpellAbility(sa);
         sim.simulateSpellAbility(boltSA);
@@ -541,7 +541,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertNotNull(sa);
         sa.getTargets().add(depths);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(sa);
         Game simGame = sim.getSimulatedGameState();
 
@@ -567,7 +567,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertNotNull(sa);
         sa.getTargets().add(thespian);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(sa);
         Game simGame = sim.getSimulatedGameState();
         Card thespianSim = findCardWithName(simGame, "Thespian's Stage");
@@ -590,7 +590,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility dashSA = findSAWithPrefix(berserkerCard, "Dash");
         AssertJUnit.assertNotNull(dashSA);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(dashSA).value;
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
@@ -604,7 +604,7 @@ public class GameSimulationTest extends SimulationTest {
 
         SpellAbility pumpSA = findSAWithPrefix(berserker, "{R}: CARDNAME gets +1/+0 until end of turn.");
         AssertJUnit.assertNotNull(pumpSA);
-        GameSimulator sim2 = createSimulator(simGame, (Player) sim.getGameCopier().find(p));
+        GameSimulator sim2 = createSimulator((Player) sim.getGameCopier().find(p));
         sim2.simulateSpellAbility(pumpSA);
         Game simGame2 = sim2.getSimulatedGameState();
 
@@ -628,7 +628,7 @@ public class GameSimulationTest extends SimulationTest {
 
         SpellAbility callTheScionsSA = callTheScionsCard.getSpellAbilities().get(0);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(callTheScionsSA).value;
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
@@ -671,7 +671,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(3, giant.getNetToughness());
         AssertJUnit.assertEquals(0, giant.getDamage());
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         shockSA.setTargetCard(giant);
         sim.simulateSpellAbility(shockSA);
         Game simGame = sim.getSimulatedGameState();
@@ -713,7 +713,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p1);
+        GameSimulator sim = createSimulator(p1);
         ignitionSA.setTargetCard(kalitas);
         sim.simulateSpellAbility(ignitionSA);
         Game simGame = sim.getSimulatedGameState();
@@ -766,7 +766,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p1);
+        GameSimulator sim = createSimulator(p1);
         ignitionSA.setTargetCard(kalitas);
         sim.simulateSpellAbility(ignitionSA);
         Game simGame = sim.getSimulatedGameState();
@@ -826,7 +826,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p1);
+        GameSimulator sim = createSimulator(p1);
         ignitionSA.setTargetCard(kalitas);
         sim.simulateSpellAbility(ignitionSA);
         Game simGame = sim.getSimulatedGameState();
@@ -892,7 +892,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p1);
+        GameSimulator sim = createSimulator(p1);
 
         sim.simulateSpellAbility(coneSA);
         Game simGame = sim.getSimulatedGameState();
@@ -920,7 +920,7 @@ public class GameSimulationTest extends SimulationTest {
         // second pard with Everlasting Torment
         addCard(tormentName, p2);
 
-        GameSimulator sim2 = createSimulator(game, p1);
+        GameSimulator sim2 = createSimulator(p1);
 
         sim2.simulateSpellAbility(coneSA);
         Game simGame2 = sim2.getSimulatedGameState();
@@ -956,7 +956,7 @@ public class GameSimulationTest extends SimulationTest {
         // third pard with Melira prevents wither
         addCard(meliraName, p2);
 
-        GameSimulator sim3 = createSimulator(game, p1);
+        GameSimulator sim3 = createSimulator(p1);
 
         sim3.simulateSpellAbility(coneSA);
         Game simGame3 = sim3.getSimulatedGameState();
@@ -1010,7 +1010,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(3, lilianaInPlay.getNetToughness());
 
         SpellAbility playLiliana = lilianaInHand.getSpellAbilities().get(0);
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(playLiliana);
         Game simGame = sim.getSimulatedGameState();
         AssertJUnit.assertNull(findCardWithName(simGame, lilianaCardName));
@@ -1040,7 +1040,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(0, p.getCounters(CounterEnumType.ENERGY));
 
         SpellAbility playTurtle = turtleCard.getSpellAbilities().get(0);
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(playTurtle);
         Game simGame = sim.getSimulatedGameState();
         Player simP = simGame.getPlayer(p.getId());
@@ -1067,7 +1067,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(p1.getManaPool().isEmpty());
 
         SpellAbility playRitual = darkRitualCard.getSpellAbilities().get(0);
-        GameSimulator sim = createSimulator(game, p1);
+        GameSimulator sim = createSimulator(p1);
         sim.simulateSpellAbility(playRitual);
         Game simGame = sim.getSimulatedGameState();
 
@@ -1079,7 +1079,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility playDarkConfidant2 = darkConfidantCard2.getSpellAbilities().get(0);
         Card deathriteCard2 = (Card) sim.getGameCopier().find(deathriteCard);
 
-        GameSimulator sim2 = createSimulator(simGame, simP1);
+        GameSimulator sim2 = createSimulator(simP1);
         sim2.simulateSpellAbility(playDarkConfidant2);
         Game sim2Game = sim2.getSimulatedGameState();
         Player sim2P = sim2Game.getPlayer(simP1.getId());
@@ -1089,7 +1089,7 @@ public class GameSimulationTest extends SimulationTest {
         Card deathriteCard3 = (Card) sim2.getGameCopier().find(deathriteCard2);
         SpellAbility playDeathriteCard3 = deathriteCard3.getSpellAbilities().get(0);
 
-        GameSimulator sim3 = createSimulator(sim2Game, sim2P);
+        GameSimulator sim3 = createSimulator(sim2P);
         sim3.simulateSpellAbility(playDeathriteCard3);
         Game sim3Game = sim3.getSimulatedGameState();
         Player sim3P = sim3Game.getPlayer(sim2P.getId());
@@ -1135,7 +1135,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(2, bear.getNetToughness());
         AssertJUnit.assertEquals(0, bear.getDamage());
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         enKorSA.setTargetCard(bear);
         shockSA.setTargetCard(enKor);
         sim.simulateSpellAbility(enKorSA);
@@ -1197,7 +1197,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(2, bear.getNetToughness());
         AssertJUnit.assertEquals(0, bear.getDamage());
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         preventSA.setTargetCard(razia);
         preventSA.getSubAbility().setTargetCard(bear);
         greetingSA.setTargetCard(razia);
@@ -1262,7 +1262,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(4, elemental.getNetToughness());
         AssertJUnit.assertEquals(0, elemental.getDamage());
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         preventSA.setTargetCard(razia);
         preventSA.getSubAbility().setTargetCard(elemental);
         shockSA1.setTargetCard(razia);
@@ -1310,7 +1310,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility wrathSA = wrathOfGod.getFirstSpellAbility();
         AssertJUnit.assertNotNull(wrathSA);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(wrathSA).value;
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
@@ -1346,7 +1346,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertNotNull(electrifySA);
         electrifySA.setTargetCard(goblin2);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(fatalPushSA).value;
         AssertJUnit.assertTrue(score > 0);
         AssertJUnit.assertEquals(2, countCardsWithName(sim.getSimulatedGameState(), "Zombie Token"));
@@ -1561,7 +1561,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility goblinSA = goblin.getFirstSpellAbility();
         AssertJUnit.assertNotNull(goblinSA);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(goblinSA).value;
         AssertJUnit.assertTrue(score > 0);
 
@@ -1593,7 +1593,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility wrathSA = wrathOfGod.getFirstSpellAbility();
         AssertJUnit.assertNotNull(wrathSA);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(wrathSA).value;
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
@@ -1623,7 +1623,7 @@ public class GameSimulationTest extends SimulationTest {
 
         SpellAbility secondSA = second.getFirstSpellAbility();
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(secondSA).value;
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
@@ -1654,7 +1654,7 @@ public class GameSimulationTest extends SimulationTest {
 
         SpellAbility armageddonSA = armageddon.getFirstSpellAbility();
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(armageddonSA).value;
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
@@ -1693,7 +1693,7 @@ public class GameSimulationTest extends SimulationTest {
 
         SpellAbility armageddonSA = armageddon.getFirstSpellAbility();
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(armageddonSA).value;
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
@@ -1732,7 +1732,7 @@ public class GameSimulationTest extends SimulationTest {
 
         SpellAbility armageddonSA = armageddon.getFirstSpellAbility();
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(armageddonSA).value;
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
@@ -1775,7 +1775,7 @@ public class GameSimulationTest extends SimulationTest {
 
         cytoSA.getTargets().add(outlaw);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(cytoSA).value;
 
         AssertJUnit.assertTrue(score > 0);
@@ -1883,7 +1883,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility gideonSA = gideon.getFirstSpellAbility();
         SpellAbility sparkDoubleSA = sparkDouble.getFirstSpellAbility();
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(gideonSA);
         sim.simulateSpellAbility(sparkDoubleSA);
 
@@ -1917,7 +1917,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility cytoSA = cytoshape.getFirstSpellAbility();
         cytoSA.getTargets().add(tgtLand);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(vituSA);
         sim.simulateSpellAbility(cytoSA);
 
@@ -1943,7 +1943,7 @@ public class GameSimulationTest extends SimulationTest {
         Card ooze = addCardToZone("Necrotic Ooze", p, ZoneType.Hand);
 
         SpellAbility oozeSA = ooze.getFirstSpellAbility();
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(oozeSA);
 
         Card oozeOTB = findCardWithName(sim.getSimulatedGameState(), "Necrotic Ooze");
@@ -1969,7 +1969,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility saAnimate = animate.getFirstSpellAbility();
         saAnimate.getTargets().add(epo);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(saAnimate);
 
         Card epoOTB = findCardWithName(sim.getSimulatedGameState(), "Epochrasite");
@@ -2005,7 +2005,7 @@ public class GameSimulationTest extends SimulationTest {
 
         // Clone Jushi first
         saDimirClone.getTargets().add(jushi);
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(saDimirClone).value;
         AssertJUnit.assertTrue(score > 0);
 
@@ -2021,7 +2021,7 @@ public class GameSimulationTest extends SimulationTest {
 
         // make new simulator so new SpellAbility is found
         Game simGame = sim.getSimulatedGameState();
-        sim = createSimulator(simGame, p);
+        sim = createSimulator(p);
 
         Player copiedPlayer = (Player) sim.getGameCopier().find(p);
         int handSize = copiedPlayer.getCardsIn(ZoneType.Hand).size();
@@ -2041,7 +2041,7 @@ public class GameSimulationTest extends SimulationTest {
 
         // make new simulator so new SpellAbility is found
         simGame = sim.getSimulatedGameState();
-        sim = createSimulator(simGame, p);
+        sim = createSimulator(p);
 
         // bear = (Card)sim.getGameCopier().find(bear);
 
@@ -2115,7 +2115,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p0);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p0);
+        GameSimulator sim = createSimulator(p0);
         Game simGame = sim.getSimulatedGameState();
 
         SpellAbility actSA = actOfTreason.getSpellAbilities().get(0);
@@ -2153,7 +2153,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility playSa = c.getSpellAbilities().get(0);
         playSa.setActivatingPlayer(p);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int origScore = sim.getScoreForOrigGame().value;
         int score = sim.simulateSpellAbility(playSa).value;
         AssertJUnit.assertTrue(String.format("score=%d vs. origScore=%d", score, origScore), score > origScore);
@@ -2188,7 +2188,7 @@ public class GameSimulationTest extends SimulationTest {
         playSa.getTargets().add(cardWaywardServant);
         playSa.getTargets().add(cardRagingGoblin);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int origScore = sim.getScoreForOrigGame().value;
         int score = sim.simulateSpellAbility(playSa).value;
         AssertJUnit.assertTrue(String.format("score=%d vs. origScore=%d", score, origScore), score > origScore);
@@ -2227,7 +2227,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(pyroSA);
         Game simGame = sim.getSimulatedGameState();
         Card simPolukranos = findCardWithName(simGame, polukranosCardName);
@@ -2271,7 +2271,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p2);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p2);
+        GameSimulator sim = createSimulator(p2);
         alphaBrawlSA.setTargetCard(nishoba);
         sim.simulateSpellAbility(alphaBrawlSA);
         Game simGame = sim.getSimulatedGameState();
@@ -2337,7 +2337,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertNotNull(saGlarecaster);
         saGlarecaster.getTargets().add(p2);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(saGlarecaster).value;
         AssertJUnit.assertTrue(score > 0);
         sim.simulateSpellAbility(infernoSA);
@@ -2370,7 +2370,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(mowuSA);
         Game simGame = sim.getSimulatedGameState();
 
@@ -2399,7 +2399,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(corpsejackSA);
         Game simGame = sim.getSimulatedGameState();
 
@@ -2434,7 +2434,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(everSA);
         Game simGame = sim.getSimulatedGameState();
 
@@ -2472,7 +2472,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(genesisSA);
         Game simGame = sim.getSimulatedGameState();
 
@@ -2501,7 +2501,7 @@ public class GameSimulationTest extends SimulationTest {
 
         SpellAbility transformSA = findSAWithPrefix(heliod, "{3}{U/P}: Transform");
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         AssertJUnit.assertNotNull(transformSA);
         sim.simulateSpellAbility(transformSA);
 
@@ -2541,7 +2541,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility fizzleSA = fizzle.getFirstSpellAbility();
         fizzleSA.getTargets().add(bear);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         game = sim.getSimulatedGameState();
 
         sim.simulateSpellAbility(destroySA, false);
@@ -2565,7 +2565,7 @@ public class GameSimulationTest extends SimulationTest {
         addCard("Vedalken Orrery", opp);
         Card control = addCardToZone("Mind Control", opp, ZoneType.Hand);
 
-        GameSimulator sim = createSimulator(game, opp);
+        GameSimulator sim = createSimulator(opp);
         game = sim.getSimulatedGameState();
 
         SpellAbility controlSA = control.getFirstSpellAbility();
@@ -2578,7 +2578,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility confiscateSA = confiscate.getFirstSpellAbility();
         confiscateSA.getTargets().add(control);
 
-        sim = createSimulator(game, p);
+        sim = createSimulator(p);
         game = sim.getSimulatedGameState();
         bear = findCardWithName(game, "Bear Cub");
 
@@ -2627,7 +2627,7 @@ public class GameSimulationTest extends SimulationTest {
         List<SpellAbility> sas = spell.getAllPossibleAbilities(p, true);
         SpellAbility blitz = sas.get(1);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         game = sim.getSimulatedGameState();
         sim.simulateSpellAbility(blitz);
         spell = findCardWithName(game, "Serra Angel");
@@ -2670,7 +2670,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility playVoloSA = c.getFirstSpellAbility();
         playVoloSA.setActivatingPlayer(p);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(playVoloSA);
         Game simGame = sim.getSimulatedGameState();
 
@@ -2836,7 +2836,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility woundSA = woundCard.getFirstSpellAbility();
         woundSA.setActivatingPlayer(p);
         woundSA.getTargets().add(cadet);
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(woundSA);
         Game simGame = sim.getSimulatedGameState();
         AssertJUnit.assertEquals(1, findCardWithName(simGame, cadetName).getCounters(CounterEnumType.M1M1));
@@ -2846,7 +2846,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility growthSA = growthCard.getFirstSpellAbility();
         growthSA.setActivatingPlayer(p);
         growthSA.getTargets().add(cadet);
-        sim = createSimulator(game, p);
+        sim = createSimulator(p);
         sim.simulateSpellAbility(growthSA);
         simGame = sim.getSimulatedGameState();
         AssertJUnit.assertEquals(1, findCardWithName(simGame, cadetName).getCounters(CounterEnumType.P1P1));
