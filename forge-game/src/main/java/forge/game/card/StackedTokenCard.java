@@ -155,6 +155,12 @@ public class StackedTokenCard {
             }
             copy.setGameTimestamp(timestamp);
             copy.setGamePieceType(GamePieceType.TOKEN);
+            // The prototype already entered the battlefield through the engine
+            // path (moveToPlay) before stacking, so carry its zone-entry
+            // bookkeeping over to avoid re-triggering entry. // doc:1g DONE
+            copy.setTurnInZone(prototype.getTurnInZone());
+            copy.setTurnInController(prototype.getTurnInController());
+            copy.setSickness(prototype.hasSickness());
             promoted.add(copy);
         }
 
