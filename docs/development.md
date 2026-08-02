@@ -58,7 +58,7 @@ Status legend: `DONE` / `PARTIAL` / open. Code carries `// doc:<item> <STATUS>` 
 | # | Gap | Impact | Fix |
 |---|-----|--------|-----|
 | 2a | `Colors` enum mutation via `setColor()` is unconventional — enum values are logically constant per JVM convention | Fragile if any code caches a `Colors` reference before the theme is applied | Either (a) store theme colors in a separate lookup that `Colors` delegates to, or (b) accept the simplification with a `ponytail:` comment acknowledging the ceiling |
-| 2b | `VSubmenuPlayCommander` duplicates lobby layout from `VSubmenuConstructed` | 104 lines of near-identical code; upstream changes to lobby must be mirrored | Refactor to reuse `VSubmenuConstructed` with `GameType.Commander` pre-selected, or extract a shared base |
+| 2b | ~~`VSubmenuPlayCommander` duplicates lobby layout from `VSubmenuConstructed`~~ **DONE** | ~~104 lines of near-identical code; upstream changes to lobby must be mirrored~~ | Extracted `VSubmenuConstructed.populateLobby()` shared static method; `VSubmenuPlayCommander.populate()` delegates to it (VSubmenuPlayCommander.java:79, VSubmenuConstructed.java:121) |
 | 2c | `EMenuGroup` reorder (PLAY before GAUNTLET) will conflict on upstream merge | Increases maintenance cost of sync | Either (a) append PLAY at the end of the enum to minimize diff, or (b) keep the reorder and document the merge conflict expected |
 | 2d | `ForgePreferences.SUBMENU_PLAY` is added but unused | Dead preference key | Remove or connect to a feature toggle |
 | 2e | `lblCommander` localization string may not exist in all 10 locale files | Fallback to missing key = raw key string displayed in UI | Add `lblCommander=Commander` to all locale files, or document as acceptable fallback |
@@ -309,7 +309,7 @@ Card images must never be a failure point:
 | P0 | 6a — FlatLaf integration (`FlatLaf.setup()`) | 1 hour | Instant visual modernization — **DONE: FlatLaf 3.7.2 applied in `ReforgeCommanderApp.main()`** |
 | P1 | 1b — Zone tracking for stacked tokens | 2-3 days | Enables all downstream consumers — **DONE: stacks survive burst via view-refresh suppression** |
 | P1 | 1d — GameCopier flyweight support | 1 day | AI performance benefit |
-| P1 | 2b — Reduce VSubmenuPlayCommander duplication | 0.5 day | Maintainability |
+| P1 | ~~2b — Reduce VSubmenuPlayCommander duplication~~ **DONE** | 0.5 day | Maintainability |
 | P1 | 5b — Simplify lobby: prefill Commander variant, suggest deck, hide unused slots | 1 day | Core UX goal |
 | P1 | 5e — Game log implementation | 2-3 days | Essential feature missing from every client |
 | P1 | 5d — Playable card highlighting | 2 days | Reduces "what can I do?" cognitive load |
