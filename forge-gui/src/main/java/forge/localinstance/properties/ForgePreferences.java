@@ -127,6 +127,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_ALLOW_ESC_TO_END_TURN ("false"),
         UI_ALT_PLAYERINFOLAYOUT ("false"),
         UI_ALT_PLAYERZONETABS ("false"),
+        UI_AUTO_CALL_COIN_FLIP ("true"),
         YIELD_INTERRUPT_ON_ATTACKERS ("true"),
         YIELD_INTERRUPT_ON_OPPONENT_SPELL ("true"),
         YIELD_INTERRUPT_ON_TARGETING ("false"),
