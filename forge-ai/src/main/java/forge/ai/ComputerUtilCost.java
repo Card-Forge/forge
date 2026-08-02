@@ -738,7 +738,7 @@ public class ComputerUtilCost {
             // on a converge or sunburst card X only buys colors, so the useful announcement is the
             // least X that reaches the most of them rather than all the mana the AI can find. The
             // return value still reports what it could afford.
-            sa.setPredictedPayingColors(ComputerUtilMana.setXForBestConverge(sa, ai, x));
+            ComputerUtilMana.setXForBestConverge(sa, ai, x);
         }
         return x;
     }
