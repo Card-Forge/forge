@@ -118,7 +118,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         populateLobby(vLobby);
     }
 
-    static void populateLobby(final VLobby lobby) {
+    public static void populateLobby(final VLobby lobby) {
         final JPanel container = VHomeUI.SINGLETON_INSTANCE.getPnlDisplay();
 
         container.removeAll();
