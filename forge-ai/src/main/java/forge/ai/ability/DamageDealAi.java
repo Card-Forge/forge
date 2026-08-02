@@ -254,11 +254,11 @@ public class DamageDealAi extends DamageAiBase {
 
         // test what happens if we chain this to another damaging spell
         if (chainDmg != null) {
-            int extraDmg = chainDmg.getValue();
-            boolean willTargetIfChained = damageTargetAI(ai, sa, dmg + extraDmg, false);
-            if (!willTargetIfChained) {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed); // won't play it even in chain
-            } else if (willTargetIfChained && chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
+            if (!damageTargetAI(ai, sa, dmg + chainDmg.getValue(), false)) {
+                // won't play it even in chain
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+            if (chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
                 // we're trying to chain a pump spell to a damage spell targeting a player, that won't work
                 // so run an additional check to ensure that we want to cast the current spell separately
                 sa.resetTargets();
