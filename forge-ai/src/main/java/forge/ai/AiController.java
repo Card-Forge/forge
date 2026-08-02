@@ -105,7 +105,7 @@ public class AiController {
         player = computerPlayer;
         game = game0;
         memory = new AiCardMemory();
-        simPicker = new SpellAbilityPicker(game, player);
+        simPicker = new SpellAbilityPicker(player);
     }
 
     public boolean usesHybridSimulation() {
