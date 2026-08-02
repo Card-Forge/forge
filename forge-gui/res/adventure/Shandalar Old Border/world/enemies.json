@@ -102280,8 +102280,8 @@
   },
   {
     "name": "FEM Homarid Spawning Bed",
-    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_spawning_bed_placeholder.atlas",
-    "scale": 0.1875,
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_spawning_bed.atlas",
+    "scale": 0.3,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_homarid_spawning_bed.dck"
     ],
