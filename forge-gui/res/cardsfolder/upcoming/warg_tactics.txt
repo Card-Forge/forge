@@ -1,0 +1,9 @@
+Name:Warg Tactics
+ManaCost:2 G
+Types:Instant
+A:SP$ Charm | Choices$ DBDestroy,DBPutCounter
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | ValidTgtsDesc$ creature you control | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control. It gains trample and hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample & Hexproof
+DeckHas:Ability$Counters
+Oracle:Choose one —\n• Destroy target creature with flying.\n• Put a +1/+1 counter on target creature you control. It gains trample and hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)

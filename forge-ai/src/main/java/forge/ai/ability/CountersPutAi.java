@@ -558,7 +558,7 @@ public class CountersPutAi extends CountersAi {
                         }
                         if (source != null && !source.isSpell() || increasesCharmOutcome // does not cost a card or can buff charm for no expense
                                 || ph.getTurn() - source.getTurnInZone() >= game.getPlayers().size() * 2) {
-                            if (abCost == Cost.Zero || ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai)) {
+                            if (abCost.isFree() || ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai)) {
                                 // only use at opponent EOT unless it is free
                                 choice = chooseBoonTarget(list, type);
                             }

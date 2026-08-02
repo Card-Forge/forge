@@ -1,0 +1,15 @@
+Name:Bofur, Reliable Guardian
+ManaCost:W
+Types:Legendary Creature Dwarf Scout
+PT:1/1
+K:Lifelink
+AlternateMode:Adventure
+Oracle:Lifelink
+
+ALTERNATE
+
+Name:Concerted Care
+ManaCost:1 W
+Types:Instant Adventure
+A:SP$ Pump | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | ValidTgtsDesc$ artifact or creature you control | KW$ Hexproof & Indestructible | SpellDescription$ Target artifact or creature you control gains hexproof and indestructible until end of turn. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Target artifact or creature you control gains hexproof and indestructible until end of turn. (Then exile this card. You may cast the creature later from exile.)
