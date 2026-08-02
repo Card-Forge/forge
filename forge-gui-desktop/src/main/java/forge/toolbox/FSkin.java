@@ -111,6 +111,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
+import forge.localinstance.skin.ReforgeTheme;
 import forge.model.FModel;
 import forge.util.Localizer;
 import forge.util.OperatingSystem;
@@ -1678,46 +1679,19 @@ public class FSkin {
     }
 
     /**
-     * Sets the look and feel of the GUI based on the selected Forge theme.
-     *
-     * @see <a href="http://tips4java.wordpress.com/2008/10/09/uimanager-defaults/">UIManager Defaults</a>
-     */
-    // Dark theme palette (Arena-inspired for Commander mode)
-    public static final Color DARK_BG = new Color(26, 26, 46);
-    public static final Color DARK_BG2 = new Color(36, 37, 56);
-    public static final Color DARK_SURFACE = new Color(45, 45, 68);
-    public static final Color DARK_TEXT = new Color(240, 240, 240);
-    public static final Color DARK_BORDER = new Color(74, 74, 106);
-    public static final Color DARK_HOVER = new Color(58, 58, 92);
-    public static final Color DARK_ACTIVE = new Color(255, 90, 90);
-    public static final Color DARK_INACTIVE = new Color(90, 90, 122);
-    public static final Color DARK_ZEBRA = new Color(42, 42, 66);
-    public static final Color DARK_OVERLAY = new Color(0, 0, 0, 128);
-    public static final Color DARK_ORANGE = new Color(247, 147, 26);
-    public static final Color DARK_ORANGE_DIM = new Color(179, 106, 14);
-
-    /**
-     * Applies an Arena-inspired dark theme to all skin colors.
+     * Applies the shared Reforge Commander dark palette (see
+     * {@code forge.localinstance.skin.ReforgeTheme}) to all skin colors.
      * Call after skin is fully loaded. Re-initializes ForgeLookAndFeel
      * for the given frame.
      */
     public static void applyCommanderDarkTheme(final JFrame frame) {
-        Colors.CLR_THEME.setColor(DARK_BG);
-        Colors.CLR_THEME2.setColor(DARK_BG2);
-        Colors.CLR_TEXT.setColor(DARK_TEXT);
-        Colors.CLR_BORDERS.setColor(DARK_BORDER);
-        Colors.CLR_HOVER.setColor(DARK_HOVER);
-        Colors.CLR_ACTIVE.setColor(DARK_ACTIVE);
-        Colors.CLR_INACTIVE.setColor(DARK_INACTIVE);
-        Colors.CLR_ZEBRA.setColor(DARK_ZEBRA);
-        Colors.CLR_OVERLAY.setColor(DARK_OVERLAY);
-        Colors.CLR_PHASE_INACTIVE_ENABLED.setColor(DARK_BORDER);
-        Colors.CLR_PHASE_INACTIVE_DISABLED.setColor(DARK_HOVER);
-        Colors.CLR_PHASE_ACTIVE_ENABLED.setColor(DARK_ORANGE);
-        Colors.CLR_PHASE_ACTIVE_DISABLED.setColor(DARK_ORANGE_DIM);
-        Colors.CLR_COMBAT_TARGETING_ARROW.setColor(DARK_ACTIVE);
-        Colors.CLR_NORMAL_TARGETING_ARROW.setColor(DARK_ORANGE);
-        Colors.CLR_PWATTK_TARGETING_ARROW.setColor(DARK_ACTIVE);
+        for (final Map.Entry<FSkinProp, Integer> override : ReforgeTheme.OVERRIDES.entrySet()) {
+            final Colors c = Colors.fromSkinProp(override.getKey());
+            if (c != null) {
+                final int argb = override.getValue();
+                c.setColor(new Color((argb >> 16) & 0xFF, (argb >> 8) & 0xFF, argb & 0xFF, (argb >> 24) & 0xFF));
+            }
+        }
 
         // Update SkinColor cache directly (skip Colors.updateAll which reads from sprite)
         for (final SkinColor c : SkinColor.baseColors.values()) {

@@ -563,6 +563,7 @@ public class FSkin {
 
         // Run through enums and load their coords.
         FSkinColor.updateAll();
+        FSkinColor.applyReforgeTheme();
 
         // Images loaded; can start UI init.
         loaded = true;

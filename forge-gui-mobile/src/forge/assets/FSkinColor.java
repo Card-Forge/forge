@@ -1,10 +1,12 @@
 package forge.assets;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.badlogic.gdx.graphics.Color;
 
 import forge.localinstance.skin.FSkinProp;
+import forge.localinstance.skin.ReforgeTheme;
 import forge.screens.match.TargetingOverlay;
 
 public class FSkinColor {
@@ -282,5 +284,24 @@ public class FSkinColor {
 
     public float getAlpha() {
         return color.a;
+    }
+
+    /**
+     * REFORGE COMMANDER EXTENSION
+     * Overlays the shared Commander palette (@link forge.localinstance.skin.ReforgeTheme)
+     * on the base skin colors. Call after updateAll, so desktop and mobile stay in sync.
+     */
+    public static void applyReforgeTheme() {
+        for (final Map.Entry<FSkinProp, Integer> override : ReforgeTheme.OVERRIDES.entrySet()) {
+            final Colors c = Colors.fromSkinProp(override.getKey());
+            if (c != null) {
+                final int argb = override.getValue();
+                c.setColor(new Color(
+                        ((argb >> 16) & 0xFF) / 255f,
+                        ((argb >> 8) & 0xFF) / 255f,
+                        (argb & 0xFF) / 255f,
+                        ((argb >> 24) & 0xFF) / 255f));
+            }
+        }
     }
 }
