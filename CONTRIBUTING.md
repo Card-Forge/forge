@@ -1,6 +1,4 @@
-# Contributing to Forge
-
-[Official repo](https://github.com/Card-Forge/forge.git).
+# Contributing
 
 ## Contents
 
@@ -77,12 +75,6 @@ Card scripting resources are found in the forge-gui/res/ path.
 
 - Art files need to be copyright-free and they should be in the public domain. Credits and attribution should be included in [Credit and Thanks](https://github.com/Card-Forge/forge/wiki/Credit-and-Thanks).
 - If your contribution adds new UI elements consider the [UI guidelines](https://github.com/Card-Forge/forge/wiki/UI-Guidelines).
-
-## Using AI coding agents
-
-If you use an AI agent (e.g. Claude Code, OpenAI Codex) to substantially code a contribution to Forge please identify this when you make a pull request, either by including the coding agent as a co-author or by noting in the body of the request.
-
-Agents have a tendency to add unnecessary new unit or wiring tests to the CI suite. This should be avoided unless necessary to catch potential future integration regressions.
 
 ## Project Hierarchy
 
