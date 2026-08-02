@@ -51,7 +51,7 @@ Status legend: `DONE` / `PARTIAL` / open. Code carries `// doc:<item> <STATUS>` 
 
 ## 2. Commander UI — Dark Theme & Menu Isolation
 
-**Status: Functional. Some implementation details should be hardened.**
+**Status: Functional. Palette is shared cross-platform (2f done). Some implementation details should be hardened.**
 
 ### Required Fixes
 
@@ -62,6 +62,7 @@ Status legend: `DONE` / `PARTIAL` / open. Code carries `// doc:<item> <STATUS>` 
 | 2c | `EMenuGroup` reorder (PLAY before GAUNTLET) will conflict on upstream merge | Increases maintenance cost of sync | Either (a) append PLAY at the end of the enum to minimize diff, or (b) keep the reorder and document the merge conflict expected |
 | 2d | `ForgePreferences.SUBMENU_PLAY` is added but unused | Dead preference key | Remove or connect to a feature toggle |
 | 2e | `lblCommander` localization string may not exist in all 10 locale files | Fallback to missing key = raw key string displayed in UI | Add `lblCommander=Commander` to all locale files, or document as acceptable fallback |
+| 2f | Palette is desktop-only (`applyCommanderDarkTheme` in `FSkin.java`); mobile stays on stock skin colors | Desktop and Android UIs drift apart as colors change | Shared `ReforgeTheme` in `forge-gui` (`FSkinProp`->ARGB map); both `FSkin.applyCommanderDarkTheme()` (desktop) and `FSkinColor.applyReforgeTheme()` (mobile) read it; single source, no per-platform porting needed | **DONE** |
 
 ---
 
