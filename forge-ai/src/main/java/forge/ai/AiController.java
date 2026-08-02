@@ -801,19 +801,12 @@ public class AiController {
             CardCollection exceptSources = ComputerUtilMana.getManaSourcesToPayCost(
                     ComputerUtilMana.calculateManaCost(exceptForThisSa.getPayCosts(), exceptForThisSa, player, true, 0, false),
                     exceptForThisSa, player, false);
-            if (exceptSources != null && !exceptSources.isEmpty()) {
-                // the other spell needs these too, so they can't be promised to both
-                if (manaSources.removeAll(exceptSources) && manaSources.isEmpty()) {
-                    return false;
-                }
+            // the other spell needs these too, so they usually can't be promised to both
+            if (exceptSources != null && !exceptSources.isEmpty() && manaSources.removeAll(exceptSources) && manaSources.isEmpty()) {
+                return false;
             }
         }
 
-        // getManaSourcesToPayCost returns the sources of a payment it already worked out, and null
-        // when the cost can't be paid at all, so reaching here means the cost is covered. Counting
-        // those cards against the cost was both unnecessary and wrong, since one source can make
-        // several mana - and it never rejected anything anyway, because planning the payment leaves
-        // the ManaCostBeingPaid fully paid, so getConvertedManaCost() had already dropped to zero.
         for (Card c : manaSources) {
             memory.rememberCard(c, memSet);
         }
