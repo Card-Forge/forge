@@ -9,7 +9,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
-import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -75,18 +74,9 @@ public class PumpAllAi extends PumpAiBase {
 
         if (sa.isCurse()) {
             if (defense < 0) { // try to destroy creatures
-                comp = CardLists.filter(comp, c -> {
-                    if (c.getNetToughness() <= -defense) {
-                        return true; // can kill indestructible creatures
-                    }
-                    return ComputerUtilCombat.getDamageToKill(c, false) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE);
-                }); // leaves all creatures that will be destroyed
-                human = CardLists.filter(human, c -> {
-                    if (c.getNetToughness() <= -defense) {
-                        return true; // can kill indestructible creatures
-                    }
-                    return ComputerUtilCombat.getDamageToKill(c, false) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE);
-                }); // leaves all creatures that will be destroyed
+                // leaves all creatures that will be destroyed
+                comp = CardLists.filter(comp, c -> diesToCurse(c, defense));
+                human = CardLists.filter(human, c -> diesToCurse(c, defense));
             } // -X/-X end
             else if (power < 0) { // -X/-0
                 if (phase.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
