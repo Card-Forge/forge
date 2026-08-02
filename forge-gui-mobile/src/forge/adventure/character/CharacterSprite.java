@@ -130,8 +130,34 @@ public class CharacterSprite extends MapActor {
     public void setAnimation(AnimationTypes type) {
         if (currentAnimationType != type) {
             currentAnimationType = type;
+            if (isOneShotAnimation(type)) {
+                timer = 0.0f;
+            }
             updateAnimation();
         }
+    }
+
+    /**
+     * Returns the duration of an animation in the sprite's current direction.
+     * Uses the supplied fallback when the atlas does not define that animation.
+     */
+    public float getAnimationDuration(AnimationTypes type, float fallbackDuration) {
+        HashMap<AnimationDirections, Animation<TextureRegion>> dirs = animations.get(type);
+        if (dirs == null || dirs.isEmpty()) {
+            return fallbackDuration;
+        }
+
+        Animation<TextureRegion> animation = dirs.get(currentAnimationDir);
+        if (animation == null) {
+            animation = dirs.get(AnimationDirections.Right);
+        }
+        return animation == null ? fallbackDuration : animation.getAnimationDuration();
+    }
+
+    private boolean isOneShotAnimation(AnimationTypes type) {
+        return type == AnimationTypes.Attack
+                || type == AnimationTypes.Death
+                || type == AnimationTypes.Hit;
     }
 
     private void updateAnimation() {
@@ -249,7 +275,7 @@ public class CharacterSprite extends MapActor {
         if (currentAnimationType.equals(AnimationTypes.Wake)) {
             currentFrame = currentAnimation.getKeyFrame(wakeTimer, false);
         } else {
-            currentFrame = currentAnimation.getKeyFrame(timer, true);
+            currentFrame = currentAnimation.getKeyFrame(timer, !isOneShotAnimation(currentAnimationType));
         }
 
         float scale = 1f;

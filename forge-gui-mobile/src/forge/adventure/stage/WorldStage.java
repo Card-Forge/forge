@@ -121,7 +121,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER, mob.getData().boss ? 400 : 200);
                     Forge.advFreezePlayerControls = true;
                     player.clearCollisionHeight();
-                    startPause(0.8f, () -> {
+                    float attackDuration = Math.max(
+                            player.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f),
+                            mob.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f));
+                    startPause(attackDuration, () -> {
                         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
                         DuelScene duelScene = DuelScene.instance();
@@ -164,13 +167,16 @@ public class WorldStage extends GameStage implements SaveFileContent {
             currentMob.clearCollisionHeight();
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
+            float attackDuration = Math.max(1f,
+                    player.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 1f));
             currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
                     currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
                     currentMob.resetCollisionHeight();
-                    startPause(0.3f, () -> {
+                    float deathDuration = currentMob.getAnimationDuration(CharacterSprite.AnimationTypes.Death, 0.3f);
+                    startPause(deathDuration, () -> {
                         RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
                         WorldStage.this.removeEnemy(currentMob);
                         AdventureQuestController.instance().updateQuestsWin(currentMob);
@@ -179,12 +185,15 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         currentMob = null;
                     });
                 }
-            }, 1f);
+            }, attackDuration);
         } else {
             currentMob.clearCollisionHeight();
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            startPause(0.5f, () -> {
+            float resultAnimationDuration = Math.max(
+                    player.getAnimationDuration(CharacterSprite.AnimationTypes.Hit, 0.5f),
+                    currentMob.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.5f));
+            startPause(resultAnimationDuration, () -> {
                 currentMob.resetCollisionHeight();
                 boolean defeated = Current.player().defeated();
                 AdventureQuestController.instance().updateQuestsLose(currentMob);
