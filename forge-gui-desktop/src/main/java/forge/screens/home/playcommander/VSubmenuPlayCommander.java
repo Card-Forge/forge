@@ -1,8 +1,5 @@
 package forge.screens.home.playcommander;
 
-import javax.swing.JPanel;
-
-import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LocalLobby;
@@ -11,10 +8,9 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
-import forge.screens.home.VHomeUI;
 import forge.screens.home.VLobby;
+import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.util.Localizer;
-import net.miginfocom.swing.MigLayout;
 
 public enum VSubmenuPlayCommander implements IVSubmenu<CSubmenuPlayCommander> {
 
@@ -80,25 +76,6 @@ public enum VSubmenuPlayCommander implements IVSubmenu<CSubmenuPlayCommander> {
 
     @Override
     public void populate() {
-        final JPanel container = VHomeUI.SINGLETON_INSTANCE.getPnlDisplay();
-        container.removeAll();
-        container.setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
-        container.add(vLobby.getLblTitle(), "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
-
-        for (final FDeckChooser fdc : vLobby.getDeckChoosers()) {
-            fdc.populate();
-        }
-
-        container.add(vLobby.getConstructedFrame(), "gap 20px 20px 20px 0px, push, grow");
-        container.add(vLobby.getPanelStart(), "gap 0 0 3.5%! 3.5%!, ax center");
-
-        if (container.isShowing()) {
-            container.validate();
-            container.repaint();
-        }
-
-        if (!vLobby.getPlayerPanels().isEmpty()) {
-            vLobby.changePlayerFocus(0);
-        }
+        VSubmenuConstructed.populateLobby(vLobby); // doc:2b DONE
     }
 }

@@ -115,26 +115,30 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
      */
     @Override
     public void populate() {
+        populateLobby(vLobby);
+    }
+
+    static void populateLobby(final VLobby lobby) {
         final JPanel container = VHomeUI.SINGLETON_INSTANCE.getPnlDisplay();
 
         container.removeAll();
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
-        container.add(vLobby.getLblTitle(), "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
+        container.add(lobby.getLblTitle(), "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
 
-        for (final FDeckChooser fdc : vLobby.getDeckChoosers()) {
+        for (final FDeckChooser fdc : lobby.getDeckChoosers()) {
             fdc.populate();
         }
 
-        container.add(vLobby.getConstructedFrame(), "gap 20px 20px 20px 0px, push, grow");
-        container.add(vLobby.getPanelStart(), "gap 0 0 3.5%! 3.5%!, ax center");
+        container.add(lobby.getConstructedFrame(), "gap 20px 20px 20px 0px, push, grow");
+        container.add(lobby.getPanelStart(), "gap 0 0 3.5%! 3.5%!, ax center");
 
         if (container.isShowing()) {
             container.validate();
             container.repaint();
         }
 
-        if (!vLobby.getPlayerPanels().isEmpty()) {
-            vLobby.changePlayerFocus(0);
+        if (!lobby.getPlayerPanels().isEmpty()) {
+            lobby.changePlayerFocus(0);
         }
     }
 }
