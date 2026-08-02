@@ -103309,5 +103309,176 @@
         "count": 1
       }
     ]
+  },
+  {
+    "name": "FEM Ally Seasinger",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/seasinger.atlas",
+    "scale": 0.6,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_seasinger.dck"
+    ],
+    "ai": "cautious",
+    "speed": 12,
+    "life": 40,
+    "colors": "UB",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Mage A",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage_a.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Mage B",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage_b.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Mage C",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage_placeholder.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Merchant",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_merchant_placeholder.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_merchant.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Soldier A",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Soldier B",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_b.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Soldier C",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_c.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Soldier D",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_d.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
   }
 ]

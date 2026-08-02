@@ -6,7 +6,6 @@
  <tileset firstgid="22017" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
  <tileset firstgid="38401" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx" />
  <tileset firstgid="40193" source="../../../../../../common/maps/tileset/FarmFood.tsx" />
- <tileset firstgid="50000" source="../../tileset/svyelunite_allies.tsx" />
  <layer id="1" name="Ground" width="65" height="45">
   <data encoding="csv">
 175,175,175,175,175,175,175,1430,12063,12063,175,175,1430,1904,5248,5248,5248,5248,5248,5248,5248,5248,5245,4612,4454,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,13350,13350,1610626067,2,2,2,2,13717,13717,13717,13717,13717,
@@ -278,7 +277,6 @@
     <property name="waypoints" value="126,127,128" />
     <property name="displayNameOverride" value="Viscerid Drone" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Viscerid Drone flexes its barbed limbs as dark water drips from its carapace.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -291,7 +289,6 @@
     <property name="waypoints" value="123,125,124,122" />
     <property name="displayNameOverride" value="Viscerid Drone" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Viscerid Drone flexes its barbed limbs as dark water drips from its carapace.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -308,7 +305,6 @@
     <property name="waypoints" value="48,47,48,49,50,51,52,51,50,49" />
     <property name="displayNameOverride" value="River Merfolk" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The River Merfolk sounds a sharp note on its conch horn and levels a coral-tipped spear at you.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -321,7 +317,6 @@
     <property name="waypoints" value="44,129,130,45,131,132,46,132,131,45,130,129" />
     <property name="displayNameOverride" value="River Merfolk" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The River Merfolk sounds a sharp note on its conch horn and levels a coral-tipped spear at you.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -334,7 +329,6 @@
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Vodalian Merchant" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The merchant sighs and secures a waterproof strongbox. \&quot;You have made this negotiation regrettably simple.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -359,7 +353,6 @@
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Svyelunite Priest" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The priest raises a shell charm. \&quot;Svyelun's tide will wash this defilement from her temple.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -372,7 +365,6 @@
     <property name="waypoints" value="103,104,105" />
     <property name="displayNameOverride" value="Svyelunite Priest" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The priest raises a shell charm. \&quot;Svyelun's tide will wash this defilement from her temple.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -397,7 +389,6 @@
     <property name="waypoints" value="108,109" />
     <property name="displayNameOverride" value="Vodalian Mage" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The mage gathers a sphere of seawater between open palms. \&quot;The current has already chosen your grave.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -410,7 +401,6 @@
     <property name="waypoints" value="91,92,93,92,91,94" />
     <property name="displayNameOverride" value="Vodalian Mage" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The mage gathers a sphere of seawater between open palms. \&quot;The current has already chosen your grave.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -423,7 +413,6 @@
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Vodalian Mage" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The mage gathers a sphere of seawater between open palms. \&quot;The current has already chosen your grave.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -462,7 +451,6 @@
     <property name="waypoints" value="108,110" />
     <property name="displayNameOverride" value="Vodalian Knight" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian Knight lowers a three-pronged trident. \&quot;No invader passes while I still draw breath.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -475,7 +463,6 @@
     <property name="waypoints" value="79,78,77,78" />
     <property name="displayNameOverride" value="Vodalian Knight" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian Knight lowers a three-pronged trident. \&quot;No invader passes while I still draw breath.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -488,7 +475,6 @@
     <property name="waypoints" value="80,81,80,79" />
     <property name="displayNameOverride" value="Vodalian Knight" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian Knight lowers a three-pronged trident. \&quot;No invader passes while I still draw breath.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -501,7 +487,6 @@
     <property name="waypoints" value="89,92,91" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian soldier locks shields with the nearby battle line and advances.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -514,7 +499,6 @@
     <property name="waypoints" value="87,98,87,92" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian soldier locks shields with the nearby battle line and advances.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -527,7 +511,6 @@
     <property name="waypoints" value="93,95,96" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian soldier locks shields with the nearby battle line and advances.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -540,7 +523,6 @@
     <property name="waypoints" value="87,97,98" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Vodalian soldier locks shields with the nearby battle line and advances.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -553,7 +535,6 @@
     <property name="waypoints" value="89,85,87,86,89" />
     <property name="displayNameOverride" value="Homarid" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Green light ripples across the Homarid's shell as it plants both claws in the wet sand and prepares to spring.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -566,7 +547,6 @@
     <property name="waypoints" value="89,82,90" />
     <property name="displayNameOverride" value="Homarid" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The purple-shelled Homarid circles sideways, testing your guard with a slow rhythm of snapping pincers.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -579,7 +559,6 @@
     <property name="waypoints" value="113,134,133" />
     <property name="displayNameOverride" value="Homarid" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Homarid's shell shifts from blue to red as it scuttles forward, pincers snapping in time with the tide.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -592,7 +571,6 @@
     <property name="waypoints" value="87,86,88" />
     <property name="displayNameOverride" value="Homarid" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The yellow-shelled Homarid raises its claws as foam gathers around its many feet.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -605,7 +583,6 @@
     <property name="waypoints" value="83,82,81,82,83,84" />
     <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The armored Homarid lowers its serrated claw and charges without a sound.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -618,7 +595,6 @@
     <property name="waypoints" value="114,84,114,115,116" />
     <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The armored Homarid lowers its serrated claw and charges without a sound.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -631,7 +607,6 @@
     <property name="waypoints" value="99,101,100,101,102,101,100,101" />
     <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The armored Homarid lowers its serrated claw and charges without a sound.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -644,7 +619,6 @@
     <property name="waypoints" value="99,112" />
     <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The armored Homarid lowers its serrated claw and charges without a sound.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -657,7 +631,6 @@
     <property name="waypoints" value="90,113,112,113" />
     <property name="displayNameOverride" value="Homarid Shaman" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Homarid Shaman traces a spiral in the wet sand. The water around your feet begins to climb against gravity.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -670,7 +643,6 @@
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Homarid Shaman" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Homarid Shaman traces a spiral in the wet sand. The water around your feet begins to climb against gravity.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -683,7 +655,6 @@
     <property name="waypoints" value="120,121" />
     <property name="displayNameOverride" value="Homarid Shaman" />
     <property name="inactive" value="true" type="bool" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Homarid Shaman traces a spiral in the wet sand. The water around your feet begins to climb against gravity.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
@@ -811,214 +782,417 @@
   <object id="132" template="../../../../../../common/maps/obj/waypoint.tx" x="416.5" y="656.5" />
   <object id="133" template="../../../../../../common/maps/obj/waypoint.tx" x="640.5" y="353.5" />
   <object id="134" template="../../../../../../common/maps/obj/waypoint.tx" x="720.75" y="303.5" />
-  <object id="50003" template="../../../../../../common/maps/obj/dialog.tx" x="879.5" y="575.25" type="dialog" gid="50001" width="24" height="14">
+  <object id="50003" template="../../../../../../common/maps/obj/enemy.tx" x="879.5" y="575.25">
    <properties>
-    <property name="hidden" value="false" type="bool" />
-    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid blocks the dam crossing. Its alien voice rolls through your thoughts: \&quot;Two river-things... cut at our waters... wash them away... then you pass...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;I'll deal with the River Merfolk.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;Not yet.\&quot;&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&lt;&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;The Homarid taps one pincer against the dam. \&quot;Two river-things... both must drift...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid shifts aside. \&quot;River-things... gone. Our dam... opens for you... ally...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Pass the dam)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 55}, {&quot;deleteMapObject&quot;: 19201}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;}], &quot;text&quot;: &quot;The Floodwater Homarid remains beside the opened crossing, watching the current with unreadable black eyes.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="Type" value="FEM Floodwater Homarid" />
+    <property name="enemy" value="FEM Floodwater Homarid" />
+    <property name="displayNameOverride" value="Floodwater Homarid" />
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid blocks the dam crossing. Its alien voice rolls through your thoughts: \&quot;Two river-things... cut at our waters... wash them away... then you pass...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;I'll deal with the River Merfolk.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;Not yet.\&quot;&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&lt;&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;The Homarid taps one pincer against the dam. \&quot;Two river-things... both must drift...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid shifts aside. \&quot;River-things... gone. Our dam... opens for you... ally...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Pass the dam)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 55}, {&quot;deleteMapObject&quot;: 19201}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;}], &quot;text&quot;: &quot;The Floodwater Homarid remains beside the opened crossing, watching the current with unreadable black eyes.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="133,134,116,115,114,113,112" />
    </properties>
   </object>
-  <object id="50004" template="../../../../../../common/maps/obj/dialog.tx" x="974.75" y="368.75" type="dialog" gid="50012" width="24" height="24">
+  <object id="50004" template="../../../../../../common/maps/obj/enemy.tx" x="974.75" y="368.75">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Viscerid Drone" />
+    <property name="enemy" value="FEM Viscerid Drone" />
+    <property name="displayNameOverride" value="Viscerid Drone" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="126,127,128" />
    </properties>
   </object>
-  <object id="50005" template="../../../../../../common/maps/obj/dialog.tx" x="942" y="468.5" type="dialog" gid="50012" width="24" height="24">
+  <object id="50005" template="../../../../../../common/maps/obj/enemy.tx" x="942" y="468.5">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Viscerid Drone" />
+    <property name="enemy" value="FEM Viscerid Drone" />
+    <property name="displayNameOverride" value="Viscerid Drone" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="123,125,124,122" />
    </properties>
   </object>
-  <object id="50011" template="../../../../../../common/maps/obj/dialog.tx" x="622.833" y="683.667" type="dialog" gid="50009" width="24" height="19">
+  <object id="50011" template="../../../../../../common/maps/obj/enemy.tx" x="622.833" y="683.667">
    <properties>
-    <property name="hidden" value="false" type="bool" />
-    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The River Merfolk points downstream. \&quot;A Floodwater Homarid has dammed the river and flooded its lower course. Deal with that oversized crustacean and break its hold on the dam.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;We'll clear the river.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;The main battle comes first.\&quot;&quot;}]}]" />
+    <property name="Type" value="FEM River Merfolk" />
+    <property name="enemy" value="FEM River Merfolk" />
+    <property name="displayNameOverride" value="River Merfolk" />
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The River Merfolk points downstream. \&quot;A Floodwater Homarid has dammed the river and flooded its lower course. Deal with that oversized crustacean and break its hold on the dam.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;We'll clear the river.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;The main battle comes first.\&quot;&quot;}]}, {&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="48,47,48,49,50,51,52,51,50,49" />
    </properties>
   </object>
-  <object id="50013" template="../../../../../../common/maps/obj/dialog.tx" x="287" y="689" type="dialog" gid="50009" width="24" height="19">
+  <object id="50013" template="../../../../../../common/maps/obj/enemy.tx" x="287" y="689">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM River Merfolk" />
+    <property name="enemy" value="FEM River Merfolk" />
+    <property name="displayNameOverride" value="River Merfolk" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="44,129,130,45,131,132,46,132,131,45,130,129" />
    </properties>
   </object>
-  <object id="50015" template="../../../../../../common/maps/obj/dialog.tx" x="48" y="78.75" rotation="-90" type="dialog" gid="50015" width="24" height="24">
+  <object id="50015" template="../../../../../../common/maps/obj/enemy.tx" x="48" y="78.75" rotation="-90">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Ally Vodalian Merchant" />
+    <property name="enemy" value="FEM Ally Vodalian Merchant" />
+    <property name="displayNameOverride" value="Vodalian Merchant" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="50016" template="../../../../../../common/maps/obj/dialog.tx" x="184.25" y="55.75" rotation="0" type="dialog" gid="50017" width="24" height="18">
+  <object id="50016" template="../../../../../../common/maps/obj/enemy.tx" x="184.25" y="55.75" rotation="0">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Vodalian War Machine" />
+    <property name="enemy" value="FEM Vodalian War Machine" />
+    <property name="displayNameOverride" value="Vodalian War Machine" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="106,107" />
    </properties>
   </object>
-  <object id="50017" template="../../../../../../common/maps/obj/dialog.tx" x="256.5" y="47.5" type="dialog" gid="50011" width="24" height="24">
+  <object id="50017" template="../../../../../../common/maps/obj/enemy.tx" x="256.5" y="47.5">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Svyelunite Priest" />
+    <property name="enemy" value="FEM Svyelunite Priest" />
+    <property name="displayNameOverride" value="Svyelunite Priest" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="50043" template="../../../../../../common/maps/obj/dialog.tx" x="31.4091" y="369.818" type="dialog" gid="50011" width="24" height="24">
+  <object id="50043" template="../../../../../../common/maps/obj/enemy.tx" x="31.4091" y="369.818">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Svyelunite Priest" />
+    <property name="enemy" value="FEM Svyelunite Priest" />
+    <property name="displayNameOverride" value="Svyelunite Priest" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="103,104,105" />
    </properties>
   </object>
-  <object id="50018" template="../../../../../../common/maps/obj/dialog.tx" x="287.5" y="96.25" type="dialog" gid="50010" width="48" height="36">
+  <object id="50018" template="../../../../../../common/maps/obj/enemy.tx" x="287.5" y="96.25">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Ally Seasinger" />
+    <property name="enemy" value="FEM Ally Seasinger" />
+    <property name="displayNameOverride" value="Seasinger" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="50019" template="../../../../../../common/maps/obj/dialog.tx" x="343.75" y="71.5" type="dialog" gid="50014" width="18" height="24">
+  <object id="50019" template="../../../../../../common/maps/obj/enemy.tx" x="343.75" y="71.5">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Ally Vodalian Mage C" />
+    <property name="enemy" value="FEM Ally Vodalian Mage C" />
+    <property name="displayNameOverride" value="Vodalian Mage" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="108,109" />
    </properties>
   </object>
-  <object id="50020" template="../../../../../../common/maps/obj/dialog.tx" x="176" y="415.25" type="dialog" gid="50014" width="18" height="24">
+  <object id="50020" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="415.25">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Ally Vodalian Mage B" />
+    <property name="enemy" value="FEM Ally Vodalian Mage B" />
+    <property name="displayNameOverride" value="Vodalian Mage" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="91,92,93,92,91,94" />
    </properties>
   </object>
-  <object id="50041" template="../../../../../../common/maps/obj/dialog.tx" x="32.25" y="206.5" type="dialog" gid="50014" width="18" height="24">
+  <object id="50041" template="../../../../../../common/maps/obj/enemy.tx" x="32.25" y="206.5">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Ally Vodalian Mage A" />
+    <property name="enemy" value="FEM Ally Vodalian Mage A" />
+    <property name="displayNameOverride" value="Vodalian Mage" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="50021" template="../../../../../../common/maps/obj/dialog.tx" x="433.25" y="69.25" type="dialog" gid="50000" width="84" height="72">
+  <object id="50021" template="../../../../../../common/maps/obj/enemy.tx" x="433.25" y="69.25">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Deep Spawn" />
+    <property name="enemy" value="FEM Homarid Deep Spawn" />
+    <property name="displayNameOverride" value="Homarid Deep Spawn" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="108,111" />
    </properties>
   </object>
-  <object id="50031" template="../../../../../../common/maps/obj/dialog.tx" x="781.25" y="141.25" type="dialog" gid="50000" width="84" height="72">
+  <object id="50031" template="../../../../../../common/maps/obj/enemy.tx" x="781.25" y="141.25">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Deep Spawn" />
+    <property name="enemy" value="FEM Homarid Deep Spawn" />
+    <property name="displayNameOverride" value="Homarid Deep Spawn" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="115,119,117,118" />
    </properties>
   </object>
-  <object id="50022" template="../../../../../../common/maps/obj/dialog.tx" x="356.75" y="106" type="dialog" gid="50013" width="24" height="24">
+  <object id="50022" template="../../../../../../common/maps/obj/enemy.tx" x="356.75" y="106">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Vodalian Knight" />
+    <property name="enemy" value="FEM Vodalian Knight" />
+    <property name="displayNameOverride" value="Vodalian Knight" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="108,110" />
    </properties>
   </object>
-  <object id="50023" template="../../../../../../common/maps/obj/dialog.tx" x="79.5" y="256" type="dialog" gid="50013" width="24" height="24">
+  <object id="50023" template="../../../../../../common/maps/obj/enemy.tx" x="79.5" y="256">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Vodalian Knight" />
+    <property name="enemy" value="FEM Vodalian Knight" />
+    <property name="displayNameOverride" value="Vodalian Knight" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="79,78,77,78" />
    </properties>
   </object>
-  <object id="50042" template="../../../../../../common/maps/obj/dialog.tx" x="191.25" y="368.75" type="dialog" gid="50013" width="24" height="24">
+  <object id="50042" template="../../../../../../common/maps/obj/enemy.tx" x="191.25" y="368.75">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Vodalian Knight" />
+    <property name="enemy" value="FEM Vodalian Knight" />
+    <property name="displayNameOverride" value="Vodalian Knight" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="80,81,80,79" />
    </properties>
   </object>
-  <object id="50024" template="../../../../../../common/maps/obj/dialog.tx" x="279" y="423" type="dialog" gid="50016" width="24" height="24">
+  <object id="50024" template="../../../../../../common/maps/obj/enemy.tx" x="279" y="423">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Ally Vodalian Soldier A" />
+    <property name="enemy" value="FEM Ally Vodalian Soldier A" />
+    <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="89,92,91" />
    </properties>
   </object>
-  <object id="50040" template="../../../../../../common/maps/obj/dialog.tx" x="240.75" y="479" type="dialog" gid="50016" width="24" height="24">
+  <object id="50040" template="../../../../../../common/maps/obj/enemy.tx" x="240.75" y="479">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Ally Vodalian Soldier D" />
+    <property name="enemy" value="FEM Ally Vodalian Soldier D" />
+    <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="87,98,87,92" />
    </properties>
   </object>
-  <object id="50039" template="../../../../../../common/maps/obj/dialog.tx" x="81.5" y="495.75" type="dialog" gid="50016" width="24" height="24">
+  <object id="50039" template="../../../../../../common/maps/obj/enemy.tx" x="81.5" y="495.75">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Ally Vodalian Soldier C" />
+    <property name="enemy" value="FEM Ally Vodalian Soldier C" />
+    <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="93,95,96" />
    </properties>
   </object>
-  <object id="50038" template="../../../../../../common/maps/obj/dialog.tx" x="241.75" y="545" type="dialog" gid="50016" width="24" height="24">
+  <object id="50038" template="../../../../../../common/maps/obj/enemy.tx" x="241.75" y="545">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Ally Vodalian Soldier B" />
+    <property name="enemy" value="FEM Ally Vodalian Soldier B" />
+    <property name="displayNameOverride" value="Vodalian Soldier" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="87,97,98" />
    </properties>
   </object>
-  <object id="50025" template="../../../../../../common/maps/obj/dialog.tx" x="353.25" y="432.75" type="dialog" gid="50002" width="24" height="12">
+  <object id="50025" template="../../../../../../common/maps/obj/enemy.tx" x="353.25" y="432.75">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Green" />
+    <property name="enemy" value="FEM Homarid Green" />
+    <property name="displayNameOverride" value="Homarid" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="89,85,87,86,89" />
    </properties>
   </object>
-  <object id="50033" template="../../../../../../common/maps/obj/dialog.tx" x="431" y="384.75" type="dialog" gid="50003" width="24" height="12">
+  <object id="50033" template="../../../../../../common/maps/obj/enemy.tx" x="431" y="384.75">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Purple" />
+    <property name="enemy" value="FEM Homarid Purple" />
+    <property name="displayNameOverride" value="Homarid" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="89,82,90" />
    </properties>
   </object>
-  <object id="50034" template="../../../../../../common/maps/obj/dialog.tx" x="704.5" y="305.25" type="dialog" gid="50004" width="24" height="12">
+  <object id="50034" template="../../../../../../common/maps/obj/enemy.tx" x="704.5" y="305.25">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Red" />
+    <property name="enemy" value="FEM Homarid Red" />
+    <property name="displayNameOverride" value="Homarid" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="113,134,133" />
    </properties>
   </object>
-  <object id="50032" template="../../../../../../common/maps/obj/dialog.tx" x="368.25" y="513.25" type="dialog" gid="50008" width="24" height="12">
+  <object id="50032" template="../../../../../../common/maps/obj/enemy.tx" x="368.25" y="513.25">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Yellow" />
+    <property name="enemy" value="FEM Homarid Yellow" />
+    <property name="displayNameOverride" value="Homarid" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="87,86,88" />
    </properties>
   </object>
-  <object id="50026" template="../../../../../../common/maps/obj/dialog.tx" x="495.75" y="273.25" type="dialog" gid="50007" width="24" height="24">
+  <object id="50026" template="../../../../../../common/maps/obj/enemy.tx" x="495.75" y="273.25">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Warrior A" />
+    <property name="enemy" value="FEM Homarid Warrior A" />
+    <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="83,82,81,82,83,84" />
    </properties>
   </object>
-  <object id="50037" template="../../../../../../common/maps/obj/dialog.tx" x="702.5" y="209.5" type="dialog" gid="50007" width="24" height="24">
+  <object id="50037" template="../../../../../../common/maps/obj/enemy.tx" x="702.5" y="209.5">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Warrior 5ED" />
+    <property name="enemy" value="FEM Homarid Warrior 5ED" />
+    <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="114,84,114,115,116" />
    </properties>
   </object>
-  <object id="50036" template="../../../../../../common/maps/obj/dialog.tx" x="558.25" y="511.75" type="dialog" gid="50007" width="24" height="24">
+  <object id="50036" template="../../../../../../common/maps/obj/enemy.tx" x="558.25" y="511.75">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Warrior C" />
+    <property name="enemy" value="FEM Homarid Warrior C" />
+    <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="99,101,100,101,102,101,100,101" />
    </properties>
   </object>
-  <object id="50035" template="../../../../../../common/maps/obj/dialog.tx" x="576" y="401.25" type="dialog" gid="50007" width="24" height="24">
+  <object id="50035" template="../../../../../../common/maps/obj/enemy.tx" x="576" y="401.25">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Warrior B" />
+    <property name="enemy" value="FEM Homarid Warrior B" />
+    <property name="displayNameOverride" value="Homarid Warrior" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="99,112" />
    </properties>
   </object>
-  <object id="50027" template="../../../../../../common/maps/obj/dialog.tx" x="576.25" y="319.75" type="dialog" gid="50005" width="24" height="24">
+  <object id="50027" template="../../../../../../common/maps/obj/enemy.tx" x="576.25" y="319.75">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Shaman" />
+    <property name="enemy" value="FEM Homarid Shaman" />
+    <property name="displayNameOverride" value="Homarid Shaman" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="90,113,112,113" />
    </properties>
   </object>
-  <object id="50074" template="../../../../../../common/maps/obj/dialog.tx" x="640.25" y="431.5" type="dialog" gid="50005" width="24" height="24">
+  <object id="50074" template="../../../../../../common/maps/obj/enemy.tx" x="640.25" y="431.5">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Shaman" />
+    <property name="enemy" value="FEM Homarid Shaman" />
+    <property name="displayNameOverride" value="Homarid Shaman" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="50030" template="../../../../../../common/maps/obj/dialog.tx" x="896.75" y="126.25" type="dialog" gid="50005" width="24" height="24">
+  <object id="50030" template="../../../../../../common/maps/obj/enemy.tx" x="896.75" y="126.25">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Shaman" />
+    <property name="enemy" value="FEM Homarid Shaman" />
+    <property name="displayNameOverride" value="Homarid Shaman" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
+    <property name="waypoints" value="120,121" />
    </properties>
   </object>
-  <object id="50028" template="../../../../../../common/maps/obj/dialog.tx" x="920" y="56.25" type="dialog" gid="50006" width="24" height="12">
+  <object id="50028" template="../../../../../../common/maps/obj/enemy.tx" x="920" y="56.25">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Spawning Bed" />
+    <property name="enemy" value="FEM Homarid Spawning Bed" />
+    <property name="displayNameOverride" value="Homarid Spawning Bed" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="50029" template="../../../../../../common/maps/obj/dialog.tx" x="969.75" y="72" type="dialog" gid="50006" width="24" height="12">
+  <object id="50029" template="../../../../../../common/maps/obj/enemy.tx" x="969.75" y="72">
    <properties>
-    <property name="hidden" value="false" type="bool" />
+    <property name="Type" value="FEM Homarid Spawning Bed" />
+    <property name="enemy" value="FEM Homarid Spawning Bed" />
+    <property name="displayNameOverride" value="Homarid Spawning Bed" />
     <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="threatRange" value="0" type="int" />
+    <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
   <object id="19101" template="../../../../../../common/maps/obj/dialog.tx" x="0" y="640" width="80" height="80">
@@ -1029,7 +1203,7 @@
   </object>
   <object id="19201" template="../../../../../../common/maps/obj/dialog.tx" x="816" y="496" width="112" height="40">
    <properties>
-    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid looms above its barricade of stone and driftwood. The swollen river cannot be crossed while it holds the dam.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Challenge the Floodwater Homarid)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: 40003}]}, {&quot;name&quot;: &quot;(Back away)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid blocks the dam crossing. Its alien voice rolls through your thoughts: \&quot;Two river-things... cut at our waters... wash them away... then you pass...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;I'll deal with the River Merfolk.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;Not yet.\&quot;&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&lt;&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;The Homarid taps one pincer against the dam. \&quot;Two river-things... both must drift...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid shifts aside. \&quot;River-things... gone. Our dam... opens for you... ally...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Pass the dam)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 55}, {&quot;deleteMapObject&quot;: 19201}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;}], &quot;text&quot;: &quot;The Floodwater Homarid remains beside the opened crossing, watching the current with unreadable black eyes.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid looms above its barricade of stone and driftwood. The swollen river cannot be crossed while it holds the dam.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Challenge the Floodwater Homarid)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: 40003}]}, {&quot;name&quot;: &quot;(Back away)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid blocks the dam crossing. Its alien voice rolls through your thoughts: \&quot;Two river-things... cut at our waters... wash them away... then you pass...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;I'll deal with the River Merfolk.\&quot;&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamTask&quot;, &quot;val&quot;: 1}}]}, {&quot;name&quot;: &quot;\&quot;Not yet.\&quot;&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&lt;&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;The Homarid taps one pincer against the dam. \&quot;Two river-things... both must drift...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamTask&quot;}, {&quot;getMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_RiverMerfolkDefeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;The Floodwater Homarid shifts aside. \&quot;River-things... gone. Our dam... opens for you... ally...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Pass the dam)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 55}, {&quot;deleteMapObject&quot;: 19201}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_DamCleared&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_Svyelunite_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_Svyelunite_DamCleared&quot;}], &quot;text&quot;: &quot;The Floodwater Homarid remains beside the opened crossing, watching the current with unreadable black eyes.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;action&quot;: [{}]}]" />
     <property name="hidden" value="true" type="bool" />
    </properties>
   </object>
