@@ -1,7 +1,7 @@
 [metadata]
 Code=HOC
 Date=2026-08-14
-Name=The Hobbit Commander
+Name=The Hobbit Eternal
 Type=Commander
 ScryfallCode=HOC
 
