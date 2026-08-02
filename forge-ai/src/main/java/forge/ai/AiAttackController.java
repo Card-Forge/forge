@@ -187,6 +187,15 @@ public class AiAttackController {
         this.blockers.remove(blocker);
     }
 
+    /**
+     * Counterpart to removeBlocker, for asking what an attack looks like without one of our own
+     * creatures - one that is about to die to something we are considering casting, say.
+     */
+    public void removeAttacker(Card attacker) {
+        this.myList.remove(attacker);
+        this.attackers.remove(attacker);
+    }
+
     private boolean canAttackWrapper(final Card attacker, final GameEntity defender) {
         if (nextTurn) {
             return CombatUtil.canAttackNextTurn(attacker, defender);
