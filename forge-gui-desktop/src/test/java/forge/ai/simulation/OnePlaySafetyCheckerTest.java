@@ -10,7 +10,6 @@ import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -149,6 +148,49 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
     }
 
     @Test
+    public void testAllowsWideBoardPhasingRescue() {
+        Game game = initAndCreateGame(true);
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Plains", 4, ai);
+        Card[] creatures = {
+                addCard("Shivan Dragon", ai),
+                addCard("Serra Angel", ai),
+                addCard("Runeclaw Bear", ai)
+        };
+        // Keep Convoke's tap choice from affecting this phasing-only assertion.
+        for (Card creature : creatures) {
+            creature.setTapped(true);
+        }
+        Card concealment = addCardToZone("Clever Concealment", ai, ZoneType.Hand);
+        moveToMain2(game, ai);
+
+        SpellAbility ability = concealment.getFirstSpellAbility();
+        ability.setActivatingPlayer(ai);
+        for (Card creature : creatures) {
+            ability.getTargets().add(creature);
+        }
+        AssertJUnit.assertTrue("A guaranteed phase-in should retain strategic value",
+                OnePlaySafetyChecker.isAcceptable(ai, ability));
+    }
+
+    @Test
+    public void testRejectsOublietteOnOwnCreature() {
+        Game game = initAndCreateGame(true);
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Swamp", 3, ai);
+        addCard("Shivan Dragon", ai);
+        Card oubliette = addCardToZone("Oubliette", ai, ZoneType.Hand);
+        moveToMain2(game, ai);
+
+        SpellAbility ability = oubliette.getFirstSpellAbility();
+        ability.setActivatingPlayer(ai);
+        AssertJUnit.assertFalse("A contingent phase-in should remain a strategic loss",
+                OnePlaySafetyChecker.isAcceptable(ai, ability));
+    }
+
+    @Test
     public void testScoreRejectsBadRemovalIntoGravePact() {
         AssertJUnit.assertFalse("Trading the AI's best creature for Serra Angel is a regression",
                 evaluateMurderIntoGravePact("Blightsteel Colossus", "Serra Angel"));
@@ -216,17 +258,6 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
     private AiController ai(Player player) {
         return ((PlayerControllerAi) player.getController()).getAi();
-    }
-
-    private void fillLibrary(Player player, int count) {
-        for (int i = 0; i < count; i++) {
-            addCardToZone("Runeclaw Bear", player, ZoneType.Library);
-        }
-    }
-
-    private void moveToMain2(Game game, Player player) {
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, player);
-        game.getAction().checkStateEffects(true);
     }
 
     private static final class Scenario {
