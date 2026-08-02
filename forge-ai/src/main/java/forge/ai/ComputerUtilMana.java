@@ -112,7 +112,18 @@ public class ComputerUtilMana {
             }
         }
         sa.setXManaCostPaid(bestX);
+        rememberExpectedPayingColors(ai, sa, bestColors);
         return bestColors;
+    }
+
+    /**
+     * Park what this spell would be paid with on the AI, where the rules side can ask for it
+     * through PlayerController rather than the AI having to write it onto the spell.
+     */
+    private static void rememberExpectedPayingColors(final Player ai, final SpellAbility sa, final byte colors) {
+        if (ai != null && ai.getController() instanceof PlayerControllerAi controller) {
+            controller.getAi().setExpectedPayingColors(sa, colors);
+        }
     }
 
     // Does not check if mana sources can be used right now, just checks for potential chance.
