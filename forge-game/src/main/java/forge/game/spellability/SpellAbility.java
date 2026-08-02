@@ -130,6 +130,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     protected ApiType api = null;
     private List<Mana> payingMana = Lists.newArrayList();
+    private byte predictedPayingColors = 0;
     private List<SpellAbility> paidAbilities = Lists.newArrayList();
     private Integer xManaCostPaid = null;
     private TreeBasedTable<String, Boolean, CardCollection> paidLists = TreeBasedTable.create();
@@ -909,11 +910,20 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public ColorSet getPayingColors() {
-        byte colors = 0;
+        byte colors = predictedPayingColors;
         for (Mana m : payingMana) {
             colors |= m.getColor();
         }
         return ColorSet.fromMask(colors);
+    }
+
+    /**
+     * Colors this spell is expected to be paid with, for deciding whether to cast it at all. Set
+     * while nothing has been spent yet, so that the color a card reads off its own payment
+     * (Converge, ManaColorsPaid, ManaSpent) can be answered before the payment exists.
+     */
+    public final void setPredictedPayingColors(byte colors) {
+        predictedPayingColors = colors;
     }
 
     public List<SpellAbility> getPayingManaAbilities() {
