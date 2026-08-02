@@ -465,6 +465,7 @@ Vraska
 Vronos
 Will
 Windgrace
+Worzel
 Wrenn
 Xenagos
 Yanggu
