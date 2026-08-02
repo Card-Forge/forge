@@ -93,6 +93,10 @@ public class PlayerProperty {
             if (!player.hasBlessing()) {
                 return false;
             }
+        } else if (property.equals("hasEnduringStory")) {
+            if (!player.hasEnduringStory()) {
+                return false;
+            }
         } else if (property.equals("CanBeEnchantedBy")) {
             if (!player.canBeAttached(source, null)) {
                 return false;
