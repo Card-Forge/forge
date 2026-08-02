@@ -208,7 +208,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     cp = CardCopyService.getLKICopy(c);
                 }
 
-                cp.animateBestow(!cp.isLKI());
+                cp.animateBestow(false);
             }
         }
 
@@ -229,51 +229,29 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
             if (sa.isSpell()) {
-                final CardPlayOption o = c.mayPlay(sa.getMayPlay());
+                final CardPlayOption o = sa.getMayPlayOption();
                 if (o == null || sa.isCastFromPlayEffect()) {
-                    if (this.getZone() != null) {
-                        return cardZone != null && cardZone.is(this.getZone());
-                    }
-                    // A cleared zone means a grant is what allows this, so for someone else's card
-                    // some grant has to reach the zone it is in. The card here is a copy and has
-                    // no play options left, so they come off the real one.
-                    if (sa.isCastFromPlayEffect() || activator == c.getOwner()) {
-                        return true;
-                    }
-                    return hasZoneGrantor(activator.getGame().getCardState(c, null), activator);
+                    return this.getZone() == null || (cardZone != null && cardZone.is(this.getZone()));
                 } else if (o.getPlayer() == activator) {
-                    Map<String,String> params = sa.getMayPlay().getMapParams();
-
                     // NOTE: this assumes that it's always possible to cast cards from hand and you don't
                     // need special permissions for that. If WotC ever prints a card that forbids casting
                     // cards from hand, this may become relevant.
-                    if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())) {
-                        if (cardZone.is(ZoneType.Graveyard) && sa.isAftermath()) {
-                            // Special exclusion for Aftermath, useful for e.g. As Foretold
-                            return true;
-                        }
-                        if (!hasZoneGrantor(c, activator)) {
-                            return false;
-                        }
+                    if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())
+                            && !c.mayPlay(activator).stream().anyMatch(opt -> opt.grantsZonePermissions())) {
+                        return false;
                     }
 
+                    Map<String,String> params = sa.getMayPlay().getMapParams();
                     if (params.containsKey("Affected")) {
                         if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), o.getAbility())) {
                             return false;
                         }
                     }
-
                     if (params.containsKey("ValidSA")) {
                         if (!sa.isValid(params.get("ValidSA").split(","), activator, o.getHost(), o.getAbility())) {
                             return false;
                         }
                     }
-
-                    // TODO: this is an exception for Aftermath. Needs to be somehow generalized.
-                    if (this.getZone() != ZoneType.Graveyard && sa.isAftermath() && sa.getCardState() != null) {
-                        return false;
-                    }
-
                     return true;
                 }
             }
@@ -284,25 +262,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         // the activator's own. CR 109.5: a card outside the battlefield has no controller, so the
         // "you" in "your graveyard" is its owner. Shaman's Trance makes every graveyard theirs.
         if (sa.isSpell() && activator != c.getOwner()
-                && !(this.getZone() == ZoneType.Graveyard
-                        && activator.hasKeyword("Shaman's Trance"))) {
+                && !(this.getZone() == ZoneType.Graveyard && activator.hasKeyword("Shaman's Trance"))) {
             return false;
         }
 
         return true;
-    }
-
-    /** Whether any play option the activator has on this card reaches the zone it is in. */
-    private static boolean hasZoneGrantor(final Card c, final Player activator) {
-        if (c == null) {
-            return false;
-        }
-        for (CardPlayOption opt : c.mayPlay(activator)) {
-            if (opt.grantsZonePermissions()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
