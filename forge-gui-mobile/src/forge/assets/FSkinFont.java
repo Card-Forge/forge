@@ -543,11 +543,8 @@ public class FSkinFont {
         return allCJKFonts;
     }
 
-    // Fonts required by a Lang (see Lang#getFontFile) are normally fetched by the user via
-    // Settings -> Files -> Download CJK Fonts into FONTS_DIR (device cache). Some languages'
-    // required font is instead already bundled with the app under COMMON_FONTS_DIR (e.g.
-    // Russian's Roboto-Bold, also used directly by CardRenderer) - no download needed, so
-    // fall back to that read-only location rather than requiring it be re-downloaded/copied.
+    //fall back to COMMON_FONTS_DIR for fonts bundled with the app (e.g. Roboto-Bold for Russian),
+    //vs FONTS_DIR for user-downloaded CJK fonts
     public static FileHandle resolveCjkFontFile(String ttfName) {
         FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
         if (ttfFile.exists()) { return ttfFile; }

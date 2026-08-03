@@ -37,12 +37,8 @@ public class LangRussian extends Lang {
         return "Roboto-Bold";
     }
 
-    // Desktop (GuiUtils.newFont) uses this character to test whether font1.ttf can render
-    // the active locale's script; on failure it falls back to the system's default Swing
-    // font instead of font1.ttf. Every CJK Lang subclass already overrides this (see
-    // LangChinese/LangJapanese/LangKorean) - Russian was missing it, so font1.ttf's "can
-    // display ' '" trivially passed and desktop kept rendering Cyrillic UI text with a font
-    // that has no Cyrillic glyphs at all, leaving most non-card text unreadable there.
+    // desktop's font1.ttf-can-render-script probe (GuiUtils.newFont); unset here like
+    // the CJK langs, it silently passed and left Cyrillic UI text unreadable
     @Override
     public char canDisplayCheck() {
         return 'Р';

@@ -73,9 +73,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     Lang lang = Lang.initInstance(newValue);
                     String requiredFont = lang.getFontFile();
                     if (requiredFont != null) {
-                        // some languages' required font ships bundled with the app (see
-                        // FSkinFont#resolveCjkFontFile) and needs no user download - apply it
-                        // automatically instead of blocking the language switch
+                        //bundled fonts (e.g. Russian) need no download, apply directly
                         if (FSkinFont.resolveCjkFontFile(requiredFont).exists()) {
                             prefs.setPref(FPref.UI_CJK_FONT, requiredFont);
                             prefs.save();
