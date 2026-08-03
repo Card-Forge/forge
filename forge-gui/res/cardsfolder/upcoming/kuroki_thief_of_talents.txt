@@ -1,0 +1,12 @@
+Name:Kuroki, Thief of Talents
+ManaCost:4 B
+Types:Legendary Creature Spirit
+PT:4/4
+K:Menace
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReveal | TriggerDescription$ At the beginning of your end step, target opponent may draw four cards. If they do, look at that player's hand and you may cast a spell from their hand without paying its mana cost. If they don't, put two +1/+1 counters on NICKNAME.
+SVar:TrigReveal:DB$ RevealHand | ValidTgt$ Opponent | UnlessCost$ Draw<4/Player.targetedBy> | UnlessPayer$ Player.targetedBy | UnlessSwitched$ True | Look$ True | RememberRevealed$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.ControlledBy Player.targetedBy | ValidZone$ Hand | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Menace\nAt the beginning of your end step, target opponent may draw four cards. If they do, look at that player's hand and you may cast a spell from their hand without paying its mana cost. If they don't, put two +1/+1 counters on Kuroki.
