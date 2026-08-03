@@ -19,6 +19,21 @@ Reforge Commander transforms upstream Forge — a clunky but extremely feature-r
 
 Architecture choices (additive-only changes, system property gating, upstream-agnostic layering) are sound. The signature flyweight is wired into token creation (1a) with battlefield-zone tracking surviving batch creation (1b) and verified promotion via `CardCopyService` (1f). The UI isolates Commander modes but still mirrors upstream patterns rather than a ground-up redesign. This document tracks known gaps, planned fixes, and verification criteria.
 
+## v1 Milestone — "Playable Commander, Done"
+
+A new user can build a deck and play a complete Commander game against AI with no friction. An expert gets deep customization. This is the release bar.
+
+| Requirement | Items | Status |
+|-------------|-------|--------|
+| Flyweight O(1) delivered in real play | 1c (static-eval batching), 1d (GameCopier flyweight) | open |
+| Core UX: lobby, game log, playable card highlighting | 5b, 5d, 5e | open |
+| Stable 4-player pod layout | 9c | open |
+| No progressive degradation in 3+ hour games | 9a (singleton lifecycle), 9b (log buffer, timer cleanup) | open |
+| Dark theme applied | 6a | **DONE** |
+| Commander-only mode works | 2b, 2e | **DONE** (2b), open (2e) |
+
+Post-v1: multiplayer online (Section 8), advanced board UX (Section 7 polish), mobile parity enhancements (Section 10).
+
 ---
 
 ## 1. StackedTokenCard — Flyweight Integration
@@ -228,29 +243,22 @@ Tokens must scale efficiently:
 
 ## 8. Multiplayer Architecture
 
-**Status: Current P2P implementation is unreliable. Requires redesign.**
+**Status: Descope to P2. Local/hot-seat Commander covers the core flow. Online play is a value-add after v1.**
 
-### Architectural Decision
+### Current state
 
-Move from P2P to client-server model. A dedicated server binary handles game logic and state validation. Clients are pure views that render state and forward input. This prevents cheating, enables spectators, and allows game history recording.
+P2P implementation exists but is unreliable. A full client-server rewrite is a significant product pivot — upstream Forge's own netplay is weak. This is deferred until the core engine claims (O(1) tokens) and UX are delivered.
 
-### Required Components
+### Future scope (P2, post-v1)
 
 | Component | Description | Priority |
 |-----------|-------------|----------|
-| Matchmaking lobby | Browse active games by format, player count, bracket. Create / join. | P1 |
-| Server-authoritative game state | All game logic runs server-side. Client cannot modify state. | P1 |
-| Spectator mode | Join a running game as observer. See everything or per-role restrict. | P2 |
+| Server-authoritative game state | All game logic runs server-side. Client cannot modify state. | P2 |
+| Matchmaking lobby | Browse active games by format, player count. Create / join. | P2 |
+| Spectator mode | Join a running game as observer. | P2 |
 | Replay system | Record complete game actions. Replay with seek controls. | P2 |
-| Chat | Per-game and per-lobby chat. Preset phrases for safety. Private messages. | P2 |
-| Deck validation on connect | Server validates deck legality before game start (format, bracket, color identity). | P1 |
-
-### Multiplayer UI Flow (New)
-
-1. Main screen: three options — **Quick Play** (1v1 AI, immediate), **Local Game** (hot-seat or friends on same machine), **Online Game** (server browser)
-2. Online: server list → create or join → deck selection → ready → start
-3. Deck visibility: opt-in toggle to show opponents your commander/deck before mulligan
-4. Ready check: all players must toggle ready before host can start
+| Chat | Per-game chat with preset phrases. | P2 |
+| Deck validation on connect | Server validates deck legality before game start. | P2 |
 
 ---
 
@@ -346,8 +354,8 @@ Desktop (`forge-gui-desktop`, Swing/FlatLaf) and mobile (`forge-gui-mobile`, LiG
 | P1 | 7a — Tiered priority system (auto-pass through full control) | 3-4 days | Core gameplay UX |
 | P1 | 7b — Phase strip with clickable stops | 2 days | Table-stakes feature |
 | P1 | 7d — Token stacking with count badge (visual only) | 1 day | Essential for token-heavy board states |
-| P1 | 8a — Server-authoritative multiplayer (client-server) | 2-3 weeks | Largest single feature, unlocks matchmaking |
-| P1 | 8c — Deck validation on server connect | 2 days | Match integrity |
+| P2 | 8a — Server-authoritative multiplayer (client-server) | 2-3 weeks | Post-v1. Unlocks matchmaking and online play |
+| P2 | 8c — Deck validation on server connect | 2 days | Post-v1. Match integrity |
 | P1 | 9a — Singleton lifecycle audit for memory leaks | 2 days | Long-session stability |
 | P1 | 9e — Card image bundling + cache fallback chain | 2 days | First-launch experience |
 | P2 | 1e — Relax canMerge() for real-world scenarios | 0.5 day | More merge opportunities |
