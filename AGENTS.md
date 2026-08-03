@@ -35,6 +35,20 @@ Commander-first fork of [Card-Forge/forge](https://github.com/Card-Forge/forge).
 - **Close stale issues.** If something you filed is no longer relevant (e.g., descope decided, upstream fixed it),
   close it with a comment explaining why.
 
+## Code review feedback loop
+
+- **After every push, check CodeRabbit's review on the PR.** `gh pr view <n> --comments` (and `gh api
+  repos/{owner}/{repo}/pulls/<n>/comments` for inline notes) lists review comments; the summary is also emailed
+  to the PR author. Sometimes the bot reports it is out of free quota — ignore that and move on; a later review
+  will land on the next push.
+- **Apply worthwhile suggestions.** Anything that fixes a bug, tightens docs, or removes cruft gets applied on the
+  same branch. Filter: skip opinions on taste only, skip anything that would violate the additive-only rule or the
+  no-comments rule unless the suggestion fixes a real inconsistency.
+- **Close the loop.** If a suggestion reveals a real bug you can't fix now, file a GitHub issue (tagged `bug` +
+  scope), reference it in a reply to the CodeRabbit thread, and continue. Resolve the thread once addressed.
+- **Don't chase perfection.** It is a personal project: a suggestion that would take more effort than the code it
+  comments on is a candidate for a `ponytail:` note or a skip.
+
 ## Docs to keep current
 
 - `docs/development.md` — the roadmap + status matrix. Section tables have a `Status` column; keep it truthful.

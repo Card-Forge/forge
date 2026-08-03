@@ -101,19 +101,6 @@ public class StackedTokenCard {
     }
 
     /**
-     * Removes {@code count} tokens from this stack without materializing them.
-     * Used when tokens are destroyed simultaneously (e.g., Wrath of God).
-     *
-     * @param count how many to remove; must be <= quantity.
-     */
-    public void removeQuantity(final int count) {
-        if (count < 1 || count > quantity) {
-            throw new IllegalArgumentException("StackedTokenCard.removeQuantity: count " + count + " out of bounds [1," + quantity + "]");
-        }
-        this.quantity -= count;
-    }
-
-    /**
      * Returns {@code true} if the stack is exhausted and should be removed from the zone.
      */
     public boolean isEmpty() {
@@ -201,8 +188,9 @@ public class StackedTokenCard {
      * Returns {@code true} if the given Card is structurally identical to this stack's prototype,
      * i.e., another token of the same kind could be merged into this stack.
      *
-     * <p>Identical means: same name, same power/toughness, same type line, same controller,
-     * same keywords, and NOT modified by any pump or counters effect.</p>
+     * <p>Identical means: same name, same controller, same base P/T, both untapped,
+     * both counter-free. Type line and keyword differences are not checked
+     * (documented gap — see 1e relaxation in development.md).</p>
      *
      * @param candidate the token Card to test for compatibility.
      * @return true if the candidate can be safely aggregated into this stack.
@@ -223,11 +211,10 @@ public class StackedTokenCard {
         if (candidate.getBaseToughness() != prototype.getBaseToughness()) {
             return false;
         }
-        // If the candidate has any individual counters or pump modifications it cannot merge
-        if (!candidate.getCounters().isEmpty()) {
+        if (!candidate.getCounters().isEmpty() || !prototype.getCounters().isEmpty()) {
             return false;
         }
-        if (candidate.isTapped()) {
+        if (candidate.isTapped() || prototype.isTapped()) {
             return false;
         }
         return true;

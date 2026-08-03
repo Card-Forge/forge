@@ -18,6 +18,8 @@ Reforge classes extend upstream classes rather than modifying them. Every Reforg
 
 These upstream files are modified directly by Reforge (not extended). A future upstream refactor of any of these will produce a merge conflict. Re-verify this list periodically against `git diff upstream/master..master --name-only`.
 
+> **Why direct edits exist despite the additive-only rule:** the rule governs *new* Reforge code. These are pre-existing modifications made before the rule was adopted; extending the upstream class was not possible for the integration points (e.g. the zone entry path in `TokenEffectBase`, the static-eval loop in `GameAction`). Each is minimized and isolated. New work should still prefer a `REFORGE COMMANDER EXTENSION` class; refactor any table row into an extension class opportunistically.
+
 | Upstream file | Why touched | Reforge items |
 |---------------|-------------|---------------|
 | `forge-game/src/main/java/forge/game/card/TokenEffectBase.java` | Token burst suppression wrapper + `tryStackToken` wiring | 1a, 1b |
@@ -30,7 +32,6 @@ These upstream files are modified directly by Reforge (not extended). A future u
 | `forge-gui-desktop/src/main/java/forge/screens/home/VHomeUI.java` | `reforge.commander.mode` menu gating | commander-mode |
 | `forge-gui-desktop/src/main/java/forge/screens/home/EMenuGroup.java` | Reorder PLAY before GAUNTLET | 2c (sync-conflict risk) |
 | `forge-gui-desktop/src/main/java/forge/gui/GuiDesktop.java` | Commander-mode init | commander-mode |
-| `forge-gui-desktop/src/main/java/forge/util/ForgePreferences.java` | `SUBMENU_PLAY` dead key | 2d |
 | `forge-gui-desktop/pom.xml` | FlatLaf dependency | 6a |
 | Root `pom.xml` | Java 17 enforcement | build |
 

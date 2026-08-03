@@ -123,36 +123,6 @@ public class PlayerZoneBattlefield extends PlayerZone {
     }
 
     /**
-     * Compresses groups of identical tokens into StackedTokenCard entries.
-     * Run after batch token creation to defer Card object allocation.
-     *
-     * expandStacks() must be called before any operation that iterates cards
-     * and expects distinct Card references (targeting, destruction, events).
-     */
-    public final void compressTokens() {
-        CardCollection toRemove = new CardCollection();
-        for (Card c : cardList) {
-            if (c.getGamePieceType() != GamePieceType.TOKEN || c.isPhasedOut()) {
-                continue;
-            }
-            boolean merged = false;
-            for (StackedTokenCard stack : stackedTokens) {
-                if (stack.canMerge(c)) {
-                    stack.addQuantity(1);
-                    toRemove.add(c);
-                    merged = true;
-                    break;
-                }
-            }
-            if (!merged) {
-                stackedTokens.add(new StackedTokenCard(c, 1));
-                toRemove.add(c);
-            }
-        }
-        cardList.removeAll(toRemove);
-    }
-
-    /**
      * Expands stacks before returning cards to ensure the engine sees distinct references.
      * Without this, mass-removal and trigger systems would malfunction on stacked tokens.
      */
