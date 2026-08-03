@@ -1,175 +1,175 @@
 package forge.adventure.util;
 
+import com.badlogic.gdx.files.FileHandle;
+import forge.assets.Assets;
 import forge.assets.FSkinTexture;
 import forge.gui.GuiBase;
 import forge.util.BuildInfo;
+import forge.util.FileUtil;
 import forge.util.ThreadUtil;
-import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.AtomicMoveNotSupportedException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Stream;
 
-/**
- * Downloads the battle backgrounds declared by the selected Adventure plane. A
- * plane can list images directly in {@code <plane>/skin/battle-backgrounds.txt}:
- * <pre>
- * relative/folder/image.jpg https://example.com/direct/image.jpg
- * </pre>
- * or refer to a remote index containing paths relative to the index URL:
- * <pre>
- * {@literal @manifest} https://example.com/battle-backgrounds/index.txt
- * </pre>
- * Remote indexes are cached so a temporary server failure does not remove
- * previously downloaded backgrounds. The combined list is authoritative.
- */
+/** Downloads the images listed by an Adventure plane's remote battle-background index. */
 public final class AdventureBackgroundDownloader {
     private static final String LIST_PATH = "skin/battle-backgrounds.txt";
     private static final String CACHE_PATH = "skin/battle_backgrounds";
-    private static final String MANIFEST_PREFIX = "@manifest";
-    private static final Set<String> RUNNING = ConcurrentHashMap.newKeySet();
+    private static final String INDEX_CACHE_PREFIX = ".remote-index-";
+    private static final Set<String> RUNNING = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
     private AdventureBackgroundDownloader() {
     }
 
     public static void start() {
         Config config = Config.instance();
-        File listFile = new File(config.getFilePath(LIST_PATH));
-        if (!listFile.isFile() || !RUNNING.add(listFile.getAbsolutePath())) {
+        FileHandle listFile = Assets.getFileHandle(config.getFilePath(LIST_PATH));
+        String listPath = listFile.path();
+        if (!listFile.exists() || listFile.isDirectory() || !RUNNING.add(listPath)) {
             return;
         }
 
-        String cachePrefix = config.getCachePrefix();
+        File cacheRoot = new File(config.getCachePrefix(), CACHE_PATH);
         ThreadUtil.invokeInGameThread(() -> {
             boolean changed = false;
             try {
-                changed = sync(listFile, new File(cachePrefix, CACHE_PATH).toPath());
+                changed = sync(listFile, cacheRoot);
             } catch (Exception e) {
                 System.err.println("Failed to sync Adventure battle backgrounds: " + e.getMessage());
             } finally {
-                RUNNING.remove(listFile.getAbsolutePath());
+                RUNNING.remove(listPath);
             }
             if (changed) {
-                GuiBase.getInterface().invokeInEdtLater(FSkinTexture::refreshAdventureBackgroundFiles);
+                GuiBase.getInterface().invokeInEdtLater(FSkinTexture::invalidateAdventureTextures);
             }
         });
     }
 
-    private static boolean sync(File listFile, Path cacheRoot) throws IOException {
-        Path normalizedRoot = cacheRoot.toAbsolutePath().normalize();
-        Set<Path> expected = new HashSet<>();
+    private static boolean sync(FileHandle listFile, File cacheRoot) throws IOException {
+        File normalizedRoot = cacheRoot.getCanonicalFile();
+        URL indexUrl = requireHttps(readIndexUrl(listFile));
+        Set<File> expected = new HashSet<>();
         boolean changed = false;
 
-        for (Pair<String, String> entry : readEntries(listFile, normalizedRoot)) {
-            Path target = normalizedRoot.resolve(entry.getLeft().replace('\\', '/')).normalize();
-            if (!target.startsWith(normalizedRoot) || !isImage(target)) {
-                System.err.println("Ignoring invalid Adventure background path: " + entry.getLeft());
-                continue;
+        for (String path : readIndex(indexUrl, normalizedRoot)) {
+            File target = new File(normalizedRoot, path).getCanonicalFile();
+            if (!target.getPath().startsWith(normalizedRoot.getPath() + File.separator)) {
+                throw new IOException("Invalid Adventure background path " + path);
             }
             expected.add(target);
-            if (!Files.isRegularFile(target) || Files.size(target) == 0) {
-                changed |= download(entry.getRight(), target);
+            if (!target.isFile() || target.length() == 0) {
+                changed |= download(new URL(indexUrl, path.replace(" ", "%20")), target);
             }
         }
+        return cleanCache(normalizedRoot, expected) || changed;
+    }
 
-        if (Files.isDirectory(normalizedRoot)) {
-            try (Stream<Path> files = Files.walk(normalizedRoot)) {
-                for (Path file : (Iterable<Path>) files.filter(Files::isRegularFile)
-                        .filter(AdventureBackgroundDownloader::isImage)::iterator) {
-                    if (!expected.contains(file.toAbsolutePath().normalize())) {
-                        Files.deleteIfExists(file);
-                        changed = true;
-                    }
+    private static boolean cleanCache(File directory, Set<File> expected) throws IOException {
+        File[] files = directory.listFiles();
+        if (files == null) {
+            return false;
+        }
+        boolean changed = false;
+        for (File file : files) {
+            if (file.isDirectory()) {
+                changed |= cleanCache(file, expected);
+            } else if (isImage(file.getName()) && !expected.contains(file.getCanonicalFile())) {
+                if (!file.delete()) {
+                    throw new IOException("Could not delete cached background " + file);
                 }
+                changed = true;
             }
         }
         return changed;
     }
 
-    private static List<Pair<String, String>> readEntries(File listFile, Path cacheRoot) throws IOException {
-        List<Pair<String, String>> entries = new ArrayList<>();
-        for (String line : Files.readAllLines(listFile.toPath(), StandardCharsets.UTF_8)) {
+    private static String readIndexUrl(FileHandle listFile) throws IOException {
+        for (String line : listFile.readString(StandardCharsets.UTF_8.name()).split("\\r?\\n")) {
             String value = line.trim();
-            if (value.isEmpty() || value.startsWith("#")) {
-                continue;
-            }
-            String[] parts = value.split("\\s+", 2);
-            if (MANIFEST_PREFIX.equals(parts[0])) {
-                if (parts.length == 2) {
-                    entries.addAll(readManifest(parts[1], cacheRoot));
-                }
-            } else if (parts.length == 2) {
-                entries.add(Pair.of(parts[0].replace("%20", " "), parts[1]));
-            } else {
-                int fileName = value.lastIndexOf('/') + 1;
-                entries.add(Pair.of(value.substring(fileName).replace("%20", " "), value));
+            if (!value.isEmpty() && !value.startsWith("#")) {
+                return value;
             }
         }
-        return entries;
+        throw new IOException("No battle background index URL in " + listFile);
     }
 
-    private static List<Pair<String, String>> readManifest(String source, Path cacheRoot) {
-        Path cached = cacheRoot.resolve(".remote-index-"
-                + Integer.toUnsignedString(source.hashCode(), 16) + ".txt");
+    private static List<String> readIndex(URL source, File cacheRoot) throws IOException {
+        File cached = new File(cacheRoot, INDEX_CACHE_PREFIX
+                + Integer.toUnsignedString(source.toString().hashCode(), 16) + ".txt");
+        File temporary = new File(cached.getPath() + ".tmp");
         try {
-            URL manifestUrl = requireHttps(source);
-            List<String> lines = readLines(manifestUrl);
-            List<Pair<String, String>> entries = parseManifest(lines, manifestUrl);
-            writeAtomically(cached, lines);
+            copy(source, temporary);
+            List<String> entries = parseIndex(FileUtil.readFile(temporary));
+            new FileHandle(temporary).moveTo(new FileHandle(cached));
             return entries;
         } catch (Exception e) {
-            System.err.println("Failed to download Adventure background index " + source + ": " + e.getMessage());
-            try {
-                if (Files.isRegularFile(cached)) {
-                    return parseManifest(Files.readAllLines(cached, StandardCharsets.UTF_8), new URL(source));
-                }
-            } catch (Exception cachedError) {
-                System.err.println("Failed to read cached Adventure background index: " + cachedError.getMessage());
+            temporary.delete();
+            if (cached.isFile()) {
+                System.err.println("Failed to update Adventure background index; using cached copy: " + e.getMessage());
+                return parseIndex(FileUtil.readFile(cached));
             }
-            return new ArrayList<>();
+            throw new IOException("No usable Adventure background index", e);
         }
     }
 
-    private static List<Pair<String, String>> parseManifest(List<String> lines, URL manifestUrl) throws IOException {
-        List<Pair<String, String>> entries = new ArrayList<>();
+    private static List<String> parseIndex(List<String> lines) throws IOException {
+        List<String> entries = new ArrayList<>();
         for (String line : lines) {
-            String value = line.trim();
+            String value = line.trim().replace('\\', '/');
             if (value.isEmpty() || value.startsWith("#")) {
                 continue;
             }
-            String[] parts = value.split("\\s+", 2);
-            String imagePath = parts[0].replace("%20", " ");
-            String imageUrl = parts.length == 1 ? new URL(manifestUrl, parts[0]).toString() : parts[1];
-            Path relativePath = new File(imagePath).toPath().normalize();
-            if (relativePath.isAbsolute() || relativePath.startsWith("..") || !isImage(relativePath)) {
-                throw new IOException("Invalid background path " + imagePath);
+            if (!isRelativePath(value) || !isImage(value)) {
+                throw new IOException("Invalid Adventure background path " + value);
             }
-            requireHttps(imageUrl);
-            entries.add(Pair.of(imagePath, imageUrl));
+            entries.add(value);
         }
         return entries;
     }
 
-    private static List<String> readLines(URL url) throws IOException {
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    private static boolean isRelativePath(String path) {
+        if (path.startsWith("/") || path.indexOf(':') >= 0) {
+            return false;
+        }
+        for (String part : path.split("/")) {
+            if ("..".equals(part)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean download(URL source, File target) {
+        File temporary = new File(target.getPath() + ".tmp");
         try {
-            connection.setRequestProperty("Accept", "text/plain");
+            copy(source, temporary);
+            new FileHandle(temporary).moveTo(new FileHandle(target));
+            System.out.println("Downloaded Adventure battle background: " + target);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Failed to download Adventure battle background " + source + ": " + e.getMessage());
+            temporary.delete();
+            return false;
+        }
+    }
+
+    private static void copy(URL source, File target) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) source.openConnection();
+        try {
+            connection.setRequestProperty("Accept", "*/*");
             connection.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
             connection.setConnectTimeout(10000);
             connection.setReadTimeout(30000);
@@ -180,72 +180,29 @@ public final class AdventureBackgroundDownloader {
             if (contentType != null && contentType.toLowerCase(Locale.ROOT).startsWith("text/html")) {
                 throw new IOException("Unexpected content type " + contentType);
             }
-            List<String> lines = new ArrayList<>();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream(), StandardCharsets.UTF_8))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    lines.add(line);
+
+            if (!FileUtil.ensureDirectoryExists(target.getParentFile())) {
+                throw new IOException("Could not create cache directory " + target.getParent());
+            }
+            try (InputStream input = connection.getInputStream();
+                 OutputStream output = new FileOutputStream(target)) {
+                byte[] buffer = new byte[8192];
+                int count;
+                while ((count = input.read(buffer)) != -1) {
+                    output.write(buffer, 0, count);
                 }
             }
-            return lines;
+            if (target.length() == 0) {
+                throw new IOException("Downloaded file is empty");
+            }
         } finally {
             connection.disconnect();
         }
     }
 
-    private static void writeAtomically(Path target, List<String> lines) throws IOException {
-        Path temporary = target.resolveSibling(target.getFileName() + ".tmp");
-        Files.createDirectories(target.getParent());
-        Files.write(temporary, lines, StandardCharsets.UTF_8);
-        moveAtomically(temporary, target);
-    }
-
-    private static boolean download(String source, Path target) {
-        Path temporary = target.resolveSibling(target.getFileName() + ".tmp");
-        HttpURLConnection connection = null;
-        try {
-            URL url = requireHttps(source);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("Accept", "image/*");
-            connection.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
-            connection.setConnectTimeout(10000);
-            connection.setReadTimeout(30000);
-            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new IOException("HTTP " + connection.getResponseCode());
-            }
-            String contentType = connection.getContentType();
-            if (contentType != null && !contentType.toLowerCase(Locale.ROOT).startsWith("image/")) {
-                throw new IOException("Unexpected content type " + contentType);
-            }
-
-            Files.createDirectories(target.getParent());
-            try (InputStream input = connection.getInputStream()) {
-                Files.copy(input, temporary, StandardCopyOption.REPLACE_EXISTING);
-            }
-            if (Files.size(temporary) == 0) {
-                throw new IOException("Downloaded file is empty");
-            }
-            moveAtomically(temporary, target);
-            System.out.println("Downloaded Adventure battle background: " + target);
-            return true;
-        } catch (Exception e) {
-            System.err.println("Failed to download Adventure battle background " + source + ": " + e.getMessage());
-            try {
-                Files.deleteIfExists(temporary);
-            } catch (IOException ignored) {
-            }
-            return false;
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
-    }
-
-    private static boolean isImage(Path path) {
-        String name = path.getFileName().toString().toLowerCase(Locale.ROOT);
-        return name.endsWith(".jpg") || name.endsWith(".jpeg") || name.endsWith(".png");
+    private static boolean isImage(String name) {
+        String lowerCaseName = name.toLowerCase(Locale.ROOT);
+        return lowerCaseName.endsWith(".jpg") || lowerCaseName.endsWith(".jpeg") || lowerCaseName.endsWith(".png");
     }
 
     private static URL requireHttps(String source) throws IOException {
@@ -254,13 +211,5 @@ public final class AdventureBackgroundDownloader {
             throw new IOException("Only HTTPS background URLs are supported");
         }
         return url;
-    }
-
-    private static void moveAtomically(Path source, Path target) throws IOException {
-        try {
-            Files.move(source, target, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
-        } catch (AtomicMoveNotSupportedException e) {
-            Files.move(source, target, StandardCopyOption.REPLACE_EXISTING);
-        }
     }
 }

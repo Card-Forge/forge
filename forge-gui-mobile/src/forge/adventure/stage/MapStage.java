@@ -235,7 +235,7 @@ public class MapStage extends GameStage {
         if (MP.get("dungeonEffect") != null && !MP.get("dungeonEffect").toString().isEmpty()) {
             effect = JSONStringLoader.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
         }
-        battleBackground = MP.get("battleBackground") == null ? null : MP.get("battleBackground").toString();
+        battleBackground = MP.get("battleBackground", String.class);
         if (MP.get("respawnEnemies") != null && MP.get("respawnEnemies") instanceof Boolean && (Boolean) MP.get("respawnEnemies")) {
             respawnEnemies = true;
         } else {
