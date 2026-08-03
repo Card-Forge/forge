@@ -1095,7 +1095,12 @@ public class GameAction {
             dependencies = HashBasedTable.create();
         }
 
-        game.forEachCardInGame(c -> {
+        // REFORGE COMMANDER EXTENSION — static-eval batching (1c)
+        // Use unexpanded battlefield to keep stacked tokens as prototype
+        // references (O(S) stacks) instead of materializing O(N) individual cards.
+        // ponytail: duplicates forEachCardInGame iteration order; upgrade to a
+        // withStacks flag on forEachCardInGame if more callers need this.
+        game.forEachCardInGameUnexpanded(c -> {
             // need to get Card from preList if able
             final Card co = preList.get(c);
             for (StaticAbility stAb : co.getStaticAbilities()) {
@@ -1112,7 +1117,7 @@ public class GameAction {
                 }
             }
             return true;
-        }, true);
+        });
 
         staticAbilities.sort(effectOrder);
 

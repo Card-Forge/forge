@@ -168,6 +168,32 @@ public class PlayerZoneBattlefield extends PlayerZone {
         return super.iterator();
     }
 
+    /**
+     * Returns all cards on the battlefield WITHOUT expanding stacked tokens.
+     * Stacked tokens appear as their prototype Card (one per stack) rather
+     * than being materialized into N individual Card objects.
+     *
+     * Use this in hot paths (static ability evaluation) where the O(1)
+     * stacking optimization should be preserved.
+     *
+     * ponytail: O(S) where S = number of stacks, not N = total token count.
+     * Melded cards excluded (same as getCards). Upgrade if melded cards
+     * gain static abilities that need evaluation.
+     */
+    // doc:1c DONE
+    public final CardCollectionView getCardsUnexpanded() {
+        if (stackedTokens.isEmpty()) {
+            return cardList;
+        }
+        CardCollection result = new CardCollection(cardList);
+        for (StackedTokenCard stack : stackedTokens) {
+            if (!stack.isEmpty()) {
+                result.add(stack.getPrototype());
+            }
+        }
+        return result;
+    }
+
     public final List<StackedTokenCard> getStackedTokens() {
         return stackedTokens;
     }

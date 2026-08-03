@@ -25,7 +25,7 @@ A new user can build a deck and play a complete Commander game against AI with n
 
 | Requirement | Items | Status |
 |-------------|-------|--------|
-| Flyweight O(1) delivered in real play | 1c (static-eval batching), 1d (GameCopier flyweight) | open |
+| Flyweight O(1) delivered in real play | 1c (static-eval batching) **DONE**, 1d (GameCopier flyweight) | open |
 | Core UX: lobby, game log, playable card highlighting | 5b, 5d, 5e | open |
 | Stable 4-player pod layout | 9c | open |
 | No progressive degradation in 3+ hour games | 9a (singleton lifecycle), 9b (log buffer, timer cleanup) | open |
@@ -48,7 +48,7 @@ Status legend: `DONE` / `PARTIAL` / open. Code carries `// doc:<item> <STATUS>` 
 |---|-----|--------|-----|--------|
 | 1a | `StackedTokenCard` is never instantiated by the game engine | Zero performance benefit from flyweight today | Wire stack creation into `TokenEffectBase.makeTokenTable()` → `PlayerZoneBattlefield.tryStackToken()` at move-to-play time | **DONE** — `TokenEffectBase.java:172-174`, `PlayerZoneBattlefield.java:82` |
 | 1b | Zone management (`Zone`) does not understand stacked tokens | Game state, counting, filtering all ignore stacks | Add `StackedTokenCard` tracking alongside `Card` tracking in the battlefield zone; `getCards()`/`iterator()` expand stacks first | **DONE** — `PlayerZoneBattlefield` stacks survive a burst of `add()` calls via view-refresh suppression during `TokenEffectBase` token creation (`PlayerZone.java:85`, `TokenEffectBase.java:112-125`); first real read materializes all at once |
-| 1c | Static ability checking ignores stacks | No performance gain from batched static evaluation | `StaticAbility` resolver must accept a count parameter or recognize `StackedTokenCard` to evaluate once for N tokens | |
+| 1c | Static ability checking ignores stacks | No performance gain from batched static evaluation | `StaticAbility` resolver must accept a count parameter or recognize `StackedTokenCard` to evaluate once for N tokens | **DONE** — `checkStaticAbilities()` now uses `forEachCardInGameUnexpanded()` which iterates stacked prototypes without materializing O(N) cards; continuous effects apply to prototype and are inherited by promoted copies via `CardCopyService` (`Game.java:777`, `GameAction.java:1098`, `PlayerZoneBattlefield.java:171`) |
 | 1d | `GameCopier` snapshots individual cards | AI state cloning copies O(N) cards instead of O(1) stacks | `GameCopier` must copy `StackedTokenCard` as an opaque flyweight rather than materializing individual cards | |
 | 1e | `canMerge()` is conservative — blocks on counters and tapped state | Misses optimization opportunities for tokens with some modifications | Relax `canMerge()` after confirming game rules allow: summoning sickness is identity-irrelevant, temporary pumps from static abilities should not block merge | |
 | 1f | `promote()` assumes `CardCopyService` exists with the right API | Verify `CardCopyService.copyCard()` exists and correctly creates independent copies with fresh card IDs | Audit `CardCopyService`; if it does not exist, build a card copy method in `StackedTokenCard` directly | **DONE** — `CardCopyService.copyCard(true)` verified and used in `promote()` (`StackedTokenCard.java:150`) |
@@ -275,7 +275,7 @@ The progressive slowdown during long sessions is the most frequently reported up
 
 ### Token Performance (StackedTokenCard Wiring)
 
-Covered in Section 1 (1a/1g/1b done). Reiterate: the remaining wiring (1c static-eval batching, 1d GameCopier) is the single most impactful performance improvement available. Without it, the app cannot handle token-generating commanders (Krenko, Scute Swarm, Chatterfang) — which are among the most popular Commander decks.
+Covered in Section 1 (1a/1g/1b/1c done). The remaining wiring (1d GameCopier) is the last piece needed for full O(1) token performance. Without 1d, AI state cloning still copies O(N) cards.
 
 ### Long-Session Stability
 
@@ -345,7 +345,7 @@ Desktop (`forge-gui-desktop`, Swing/FlatLaf) and mobile (`forge-gui-mobile`, LiG
 | P0 | 5a — Smart default game setup: reduce clicks to start a Commander game | 2 days | Core UX goal — **DONE: first deck auto-selected and applied, precon fallback for fresh installs** |
 | P0 | 6a — FlatLaf integration (`FlatLaf.setup()`) | 1 hour | Instant visual modernization — **DONE: FlatLaf 3.7.2 applied in `ReforgeCommanderApp.main()`** |
 | P1 | 1b — Zone tracking for stacked tokens | 2-3 days | Enables all downstream consumers — **DONE: stacks survive burst via view-refresh suppression** |
-| P1 | 1c — Static-eval batching (count param for StaticAbility resolver) | 2-3 days | Single most impactful remaining perf win — O(1) static eval for N identical tokens |
+| P1 | ~~1c — Static-eval batching (count param for StaticAbility resolver)~~ **DONE** | 2-3 days | Single most impactful remaining perf win — O(1) static eval for N identical tokens — **DONE: `forEachCardInGameUnexpanded()` iterates stacked prototypes; continuous effects applied to prototype, inherited by promoted copies** |
 | P1 | 1d — GameCopier flyweight support | 1 day | AI performance benefit — O(1) clone instead of O(N) card copy |
 | P1 | ~~2b — Reduce VSubmenuPlayCommander duplication~~ **DONE** | 0.5 day | Maintainability |
 | P1 | 5b — Simplify lobby: prefill Commander variant, suggest deck, hide unused slots | 1 day | Core UX goal |
