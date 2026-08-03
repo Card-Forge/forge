@@ -4,7 +4,7 @@
 import json, os
 
 # Set this to the current Forge editions folder (under res)
-EDITIONS_FOLDER = "./editions"
+EDITIONS_FOLDER = "../res/editions"
 
 # Load the editions and map Scryfall codes to the set codes used in Forge
 set_map = {}
