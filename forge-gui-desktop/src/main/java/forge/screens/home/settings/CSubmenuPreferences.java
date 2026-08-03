@@ -16,7 +16,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeNetPreferences;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.properties.PreferencesStore;
+import forge.localinstance.properties.IPreferences;
 import forge.menus.LayoutMenu;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -110,6 +110,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbScaleLarger(), FPref.UI_SCALE_LARGER));
         lstControls.add(Pair.of(view.getCbRenderBlackCardBorders(), FPref.UI_RENDER_BLACK_BORDERS));
         lstControls.add(Pair.of(view.getCbShowActionableHighlights(), FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS));
+        lstControls.add(Pair.of(view.getCbShowAutoTapPreview(), FPref.UI_SHOW_AUTOTAP_PREVIEW));
         lstControls.add(Pair.of(view.getCbShowLinkedExileCards(), FPref.UI_SHOW_LINKED_EXILE_CARDS));
         lstControls.add(Pair.of(view.getCbLargeCardViewers(), FPref.UI_LARGE_CARD_VIEWERS));
         lstControls.add(Pair.of(view.getCbSmallDeckViewer(), FPref.UI_SMALL_DECK_VIEWER));
@@ -695,7 +696,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
     }
 
-    private <E> FComboBox<E> createComboBox(final E[] items, final PreferencesStore.IPref setting) {
+    private <E> FComboBox<E> createComboBox(final E[] items, final IPreferences.IPref setting) {
         final FComboBox<E> comboBox = new FComboBox<>(items);
         addComboBoxListener(comboBox, setting);
         return comboBox;
@@ -703,7 +704,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private <E> FComboBox<E> createLocalizedComboBox(
             final E[] localizedItems,
-            final PreferencesStore.IPref setting,
+            final IPreferences.IPref setting,
             final Map<E, String> mapping) {
 
         //Step 1: Create the combo box
@@ -716,7 +717,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
 
-    private <E> void addComboBoxListener(final FComboBox<E> comboBox, final PreferencesStore.IPref setting) {
+    private <E> void addComboBoxListener(final FComboBox<E> comboBox, final IPreferences.IPref setting) {
         comboBox.addItemListener(e -> {
             final E selectedType = comboBox.getSelectedItem();
             if (setting instanceof ForgePreferences.FPref) {
@@ -732,7 +733,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private <E> void addLocalizedComboBoxListener(
             final FComboBox<E> comboBox,
-            final PreferencesStore.IPref setting,
+            final IPreferences.IPref setting,
             final Map<E, String> mapping) {
 
         comboBox.addItemListener(e -> {

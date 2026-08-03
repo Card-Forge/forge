@@ -1,9 +1,0 @@
-Name:Captain America's Shield
-ManaCost:2
-Types:Artifact Equipment
-K:Indestructible
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 8 | AddKeyword$ Vigilance | Description$ Equipped creature gets +0/+8 and has vigilance.
-T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigTap | TriggerDescription$ Whenever equipped creature attacks, tap target creature defending player controls.
-SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | ValidTgtsDesc$ creature defending player controls
-K:Equip:2
-Oracle:Indestructible\nEquipped creature gets +0/+8 and has vigilance.\nWhenever equipped creature attacks, tap target creature defending player controls.\nEquip {2}

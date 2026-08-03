@@ -1,0 +1,8 @@
+Name:Óin the Brave
+ManaCost:1 R
+Types:Legendary Creature Dwarf Warrior
+PT:1/3
+K:Storied
+S:Mode$ Continuous | Affected$ Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Haste | Condition$ EnduringStory | Description$ As long as you have an enduring story, NICKNAME gets +1/+0 and has haste.
+A:AB$ Draw | Cost$ 1 T Discard<1/Card> | SpellDescription$ Draw a card.
+Oracle:Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.)\nAs long as you have an enduring story, Óin gets +1/+0 and has haste.\n{1}, {T}, Discard a card: Draw a card.

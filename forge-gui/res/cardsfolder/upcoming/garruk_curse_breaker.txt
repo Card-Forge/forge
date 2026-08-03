@@ -1,0 +1,12 @@
+Name:Garruk, Curse Breaker
+ManaCost:3 G G
+Types:Legendary Planeswalker Garruk
+Loyalty:5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE4+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control with power 4 or greater enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ Untap | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Land | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Untap up to two target lands.
+A:AB$ Token | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TokenScript$ g_4_4_beast_trample | TokenOwner$ You | SpellDescription$ Create a 4/4 green Beast creature token with trample.
+A:AB$ Effect | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Triggers$ AttackTrigger | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, whenever one or more creatures attack one of your opponents, those creatures get +2/+2 and gain trample until end of turn.
+SVar:TrigAttack:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature | AttackedTarget$ Opponent | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures attack one of your opponents, those creatures get +2/+2 and gain trample until end of turn.
+SVar:TrigPumpAll:DB$ Pump | Defined$ TriggeredAttackers | NumAtt$ +2 | NumDef$ +2 | KW$ Trample
+Oracle:Whenever a creature you control with power 4 or greater enters, draw a card.\n[+2]: Untap up to two target lands.\n[-3]: Create a 4/4 green Beast creature token with trample.\n[-4]: Until your next turn, whenever one or more creatures attack one of your opponents, those creatures get +2/+2 and gain trample until end of turn.

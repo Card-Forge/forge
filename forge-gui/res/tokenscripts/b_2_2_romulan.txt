@@ -1,0 +1,6 @@
+Name:Romulan Token
+ManaCost:no cost
+PT:2/2
+Colors:black
+Types:Creature Romulan
+Oracle:

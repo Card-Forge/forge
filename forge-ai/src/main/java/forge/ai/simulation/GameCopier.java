@@ -12,6 +12,7 @@ import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCloneStates;
 import forge.game.card.CardCopyService;
+import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
@@ -87,6 +88,7 @@ public class GameCopier {
         for (int i = 0; i < origGame.getPlayers().size(); i++) {
             Player origPlayer = origGame.getPlayers().get(i);
             Player newPlayer = newGame.getPlayer(origPlayer.getId());
+            newPlayer.setTeam(origPlayer.getTeam());
             newPlayer.setLife(origPlayer.getLife(), null);
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
@@ -95,9 +97,11 @@ public class GameCopier {
             newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
             newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
             newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
-            newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
+            newPlayer.setCounters(HashMultiset.create(origPlayer.getCounters()));
             newPlayer.setSpeed(origPlayer.getSpeed());
-            newPlayer.setBlessing(origPlayer.hasBlessing(), null);
+            // Blessing state travels with the copied command-zone effect card
+            // (wired via copyEffectCardsToSnapshot below); calling setBlessing
+            // here would create a second effect card the zone copy duplicates.
             newPlayer.setDescended(origPlayer.getDescended());
             newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
             newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
@@ -127,6 +131,7 @@ public class GameCopier {
         for (Player origPlayer : playerMap.keySet()) {
             Player newPlayer = playerMap.get(origPlayer);
             origPlayer.copyCommandersToSnapshot(newPlayer, gameObjectMap::map);
+            origPlayer.copyEffectCardsToSnapshot(newPlayer, gameObjectMap::map);
             ((PlayerZoneBattlefield) newPlayer.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
@@ -207,13 +212,18 @@ public class GameCopier {
         LobbyPlayer lp = p.getPlayer();
         if (!(lp instanceof LobbyPlayerAi)) {
             // TODO should probably also override them if they're normal AI
-            lp = new LobbyPlayerAi(p.getPlayer().getName(), Sets.newHashSet(AIOption.USE_SIMULATION));
+            lp = new LobbyPlayerAi(p.getPlayer().getName(), Sets.newHashSet(AIOption.USE_FULL_SIMULATION));
         }
         clone.setPlayer(lp);
         return clone;
     }
 
     private void copyGameState(Game newGame, Player aiPlayer) {
+        // Copied cards keep their original ids (id order is AI-visible via
+        // Card.compareTo and id-keyed collections; renumbering makes forked
+        // games deterministically diverge from the mainline). Sync the fresh-id
+        // counters first so ids created during or after the copy cannot collide.
+        newGame.dangerouslySyncCardIdCounters(origGame);
         newGame.EXPERIMENTAL_RESTORE_SNAPSHOT = origGame.EXPERIMENTAL_RESTORE_SNAPSHOT;
         newGame.AI_TIMEOUT = origGame.AI_TIMEOUT;
         newGame.AI_CAN_USE_TIMEOUT = origGame.AI_CAN_USE_TIMEOUT;
@@ -287,18 +297,18 @@ public class GameCopier {
     private static final boolean USE_FROM_PAPER_CARD = true;
     private Card createCardCopy(Game newGame, Player newOwner, Card c, Player aiPlayer) {
         if (c.isToken() && !c.isImmutable()) {
-            Card result = new TokenInfo(c).makeOneToken(newOwner);
+            Card result = new TokenInfo(c).makeOneToken(newOwner, c.getId());
             new CardCopyService(c).copyCopiableCharacteristics(result, null, null);
             return result;
         }
         if (USE_FROM_PAPER_CARD && !c.isImmutable() && c.getPaperCard() != null) {
             Card newCard;
-            if (PRUNE_HIDDEN_INFO && !c.getView().canBeShownTo(aiPlayer.getView())) {
+            if (PRUNE_HIDDEN_INFO && aiPlayer != null && !c.getView().canBeShownTo(aiPlayer.getView())) {
                 // TODO also check REVEALED_CARDS memory
-                newCard = new Card(newGame.nextCardId(), hidden_info_card, newGame);
+                newCard = new Card(c.getId(), hidden_info_card, newGame);
                 newCard.setOwner(newOwner);
             } else {
-                newCard = Card.fromPaperCard(c.getPaperCard(), newOwner);
+                newCard = CardFactory.getCard(c.getPaperCard(), newOwner, c.getId(), newGame);
             }
             newCard.setCommander(c.isCommander());
             return newCard;
@@ -310,9 +320,10 @@ public class GameCopier {
         // be needed. Once the below code accurately copies the card, remove the USE_FROM_PAPER_CARD code path.
         Card newCard;
         if (c instanceof DetachedCardEffect)
-            newCard = new DetachedCardEffect((DetachedCardEffect) c, newGame, true);
+            newCard = new DetachedCardEffect((DetachedCardEffect) c, newGame, false);
         else
-            newCard = new Card(newGame.nextCardId(), c.getPaperCard(), newGame);
+            newCard = new Card(c.getId(), c.getPaperCard(), newGame);
+        newCard.setGamePieceType(c.getGamePieceType());
         newCard.setOwner(newOwner);
         newCard.setName(c.getName());
         newCard.setCommander(c.isCommander());
@@ -409,9 +420,9 @@ public class GameCopier {
                 newCard.addCloneState(e.getValue().copy(newCard, true), e.getKey());
             }
 
-            Map<CounterType, Integer> counters = c.getCounters();
+            Multiset<CounterType> counters = c.getCounters();
             if (!counters.isEmpty()) {
-                newCard.setCounters(Maps.newHashMap(counters));
+                newCard.setCounters(HashMultiset.create(counters));
             }
             if (c.hasChosenPlayer()) {
                 newCard.setChosenPlayer(playerMap.get(c.getChosenPlayer()));
@@ -433,6 +444,19 @@ public class GameCopier {
 
             newCard.setSVars(c.getSVars());
             newCard.copyChangedSVarsFrom(c);
+        }
+
+        if (zone == ZoneType.Exile && c.isFaceDown()) {
+            // Face-down exile state (foretell, "exile face down" effects) must
+            // survive the copy: cards rebuilt from their paper card default to
+            // face up, leaking hidden information into the copied game.
+            newCard.turnFaceDownNoUpdate();
+            if (c.isForetold()) {
+                newCard.setForetold(true);
+                if (c.isForetoldCostByEffect()) {
+                    newCard.setForetoldCostByEffect(true);
+                }
+            }
         }
 
         if (zone == ZoneType.Stack) {

@@ -456,6 +456,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 return true;
             }
         }
+        if (isActivatedAbility() && hasParam("AlternateCost")) {
+            for (SpellAbility alt : GameActionUtil.getAdditionalCostSpell(this)) {
+                if (alt != this && alt.canPlay()) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -592,6 +599,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isBoast() {
         return this.hasParam("Boast");
+    }
+    public boolean isMonstrosity() {
+        return this.hasParam("Monstrosity");
     }
     public boolean isExhaust() {
         return this.hasParam("Exhaust");
@@ -1238,7 +1248,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.replacingObjects = AbilityKey.newMap();
             }
 
-            clone.setPayCosts(getPayCosts().copy());
+            clone.setPayCosts(getPayCosts() == Cost.Zero ? Cost.Zero : getPayCosts().copy());
             if (manaPart != null) {
                 clone.manaPart = new AbilityManaPart(clone, mapParams);
             }

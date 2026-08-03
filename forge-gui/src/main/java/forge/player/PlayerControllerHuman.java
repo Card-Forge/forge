@@ -3,8 +3,9 @@ package forge.player;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
+import forge.ai.AIOption;
 import forge.ai.AvailableActions;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.ai.PlayerControllerAi;
 import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.card.*;
@@ -212,31 +213,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities,
                                          final ITriggerEvent triggerEvent) {
-        // make sure another human player can't choose opponents cards just because he might see them
-        if (triggerEvent != null && !hostCard.isInPlay() && !hostCard.getOwner().equals(player) &&
-                !hostCard.getController().equals(player) &&
-                // If player cast Shaman's Trance, they can play spells from any Graveyard (if other effects allow it to be cast)
-                (!player.hasKeyword("Shaman's Trance") || !hostCard.isInZone(ZoneType.Graveyard))) {
-            boolean noPermission = true;
-            for (CardPlayOption o : hostCard.mayPlay(player)) {
-                if (o.grantsZonePermissions()) {
-                    noPermission = false;
-                    break;
-                }
-            }
-            for (SpellAbility sa : hostCard.getAllSpellAbilities()) {
-                if (sa.hasParam("Activator")
-                        && player.isValid(sa.getParam("Activator"), hostCard.getController(), hostCard, sa)) {
-                    noPermission = false;
-                    break;
-                }
-            }
-            if (noPermission) {
-                return null;
-            }
-        }
-        //FIXME - on mobile gui it allows the card to cast from opponent hands issue #2127, investigate where the bug occurs before this method is called
         spellViewCache = SpellAbilityView.getMap(abilities);
+        if (getPlayer().isControlled() && getPlayer().getControllingPlayer().getController() instanceof PlayerControllerHuman pch) {
+            // need to transfer to original controller or menu selection fails
+            pch.spellViewCache = spellViewCache;
+        }
         for (SpellAbility sa : abilities) {
             sa.getView().updateCanPlay(sa);
         }
@@ -1146,10 +1127,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         GameEntityViewMap<Card, CardView> gameCacheMove = GameEntityView.getMap(cards);
         List<CardView> choices = gameCacheMove.getTrackableKeys();
 
-        boolean topOfDeck = destinationZone.isDeck()
-                && (source == null
-                    || !source.hasParam("LibraryPosition")
-                    || AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) >= 0);
+        boolean topOfDeck = orderedMoveToTopOfLibrary(destinationZone, source);
 
         switch (destinationZone) {
             case Library:
@@ -1301,6 +1279,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Mana chooseManaFromPool(final List<Mana> manaChoices) {
         if (!isFullControl(FullControlFlag.ChooseManaPoolShard))
             return manaChoices.get(0);
+        // TODO check if there are any special properties?
         final List<String> options = Lists.newArrayList();
         for (int i = 0; i < manaChoices.size(); i++) {
             final Mana m = manaChoices.get(i);
@@ -1562,35 +1541,58 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /** Push the actionable-card set to the GUI. Payment mode falls back to the
      *  "playable mana ability" predicate; non-payment reuses {@link #cachedActionableCards}. */
     public void pushActionableCards(boolean paymentMode) {
-        if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
+        pushActionableCards(paymentMode, null);
+    }
+
+    /** Weighted push: actionable cards get strength 1; {@code emphasized} cards (the AI's
+     *  auto-tap plan) are raised to strength 2 by adding them a second time, so the GUI can
+     *  render them more prominently. Each pref layer is gated independently. */
+    public void pushActionableCards(boolean paymentMode, Iterable<CardView> emphasized) {
+        final boolean showActionable = yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
+        final boolean showAutoTap = emphasized != null
+                && yieldController.getBoolPref(FPref.UI_SHOW_AUTOTAP_PREVIEW);
+
+        if (!showActionable && !showAutoTap) {
             getGui().clearWeaklySelectable();
             return;
         }
 
-        if (paymentMode) {
-            final Set<CardView> result = Sets.newHashSet();
-            for (ZoneType zone : ACTIONABLE_PAYMENT_ZONES) {
-                for (Card c : player.getCardsIn(zone)) {
-                    if (cardHasPlayableManaAbility(c)) {
-                        result.add(c.getView());
+        final Set<CardView> actionable = Sets.newHashSet();
+        if (showActionable) {
+            if (paymentMode) {
+                // Snapshot each zone: the payment prompt refreshes on the EDT while the
+                // game thread can remove cards (e.g. Squandered Resources sacrificing a land).
+                for (ZoneType zone : ACTIONABLE_PAYMENT_ZONES) {
+                    for (Card c : player.getCardsIn(zone).threadSafeIterable()) {
+                        if (cardHasPlayableManaAbility(c)) {
+                            actionable.add(c.getView());
+                        }
                     }
                 }
+            } else if (cachedActionableCards != null) {
+                // Reuse the priority-time scan; recompute if neither APINA nor highlights triggered it.
+                actionable.addAll(cachedActionableCards);
+            } else {
+                actionable.addAll(AvailableActions.collectActionable(getPlayer(), computeAvailableActionsBudgetMs(getPlayer())));
             }
-            getGui().setWeaklySelectable(result);
-            return;
         }
 
-        // Reuse the priority-time scan; recompute if neither APINA nor highlights triggered it.
-        Set<CardView> actionable = cachedActionableCards;
-        if (actionable == null) {
-            actionable = AvailableActions.collectActionable(getPlayer(), computeAvailableActionsBudgetMs(getPlayer()));
+        final List<CardView> weighted = Lists.newArrayList(actionable);
+        if (showAutoTap) {
+            for (CardView cv : emphasized) {
+                // Bring each auto-tap card to strength 2 regardless of the actionable layer.
+                if (!actionable.contains(cv)) {
+                    weighted.add(cv);
+                }
+                weighted.add(cv);
+            }
         }
-        getGui().setWeaklySelectable(actionable);
+        getGui().setWeaklySelectable(weighted);
     }
 
     private boolean cardHasPlayableManaAbility(Card c) {
         for (SpellAbility sa : c.getAllPossibleAbilities(player, true)) {
-            if (sa.isManaAbility() && sa.canPlay()) return true;
+            if (sa.isManaAbility()) return true;
         }
         return false;
     }
@@ -1736,7 +1738,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
+    public CardCollectionView chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
         final int max = player.getMaxHandSize();
 
         if (getGui().isLibgdxPort()) {
@@ -2411,7 +2413,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean playTrigger(final Card host, final WrappedAbility wrapperAbility, final boolean isMandatory) {
-        return PlaySpellAbility.playSpellAbilityNoStack(this, player, wrapperAbility);
+        return PlaySpellAbility.playSpellAbilityNoStack(this, player, wrapperAbility, false);
     }
 
     @Override
@@ -2915,12 +2917,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         private GameState createGameStateObject() {
-            return new GameState() {
-                @Override
-                public IPaperCard getPaperCard(final String cardName, final String setCode, final int artID) {
-                    return FModel.getMagicDb().getCommonCards().getCard(cardName, setCode, artID);
-                }
-            };
+            return new GameState();
         }
 
         /*
@@ -3047,7 +3044,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             final Card card = gameCacheCounters.get(cv);
 
-            final List<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
+            final List<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().elementSet())
                     : CounterType.getValues();
 
             final CounterType counter = getGui().oneOrNone(localizer.getMessage("lblWhichTypeofCounter"), counters);
@@ -3651,7 +3648,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         public void askAI(boolean useSimulation) {
             PlayerControllerAi ai = new PlayerControllerAi(player.getGame(), player, player.getOriginalLobbyPlayer());
-            ai.setUseSimulation(useSimulation);
+            ai.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
             player.runWithController(() -> {
                 List<SpellAbility> sas = ai.chooseSpellAbilityToPlay();
                 SpellAbility chosen = sas == null ? null : sas.get(0);

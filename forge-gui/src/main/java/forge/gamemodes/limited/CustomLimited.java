@@ -21,6 +21,7 @@ import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.item.SealedTemplate;
 import forge.model.FModel;
@@ -121,7 +122,16 @@ public class CustomLimited extends DeckBase {
         cd.numPlayers = data.getInt("NumPlayers");
         cd.customRankingsFile = data.get("CustomRankings", "rankings_cubecobra.txt");
         final Deck deckCube = cubes.get(data.get("DeckFile"));
-        cd.cardPool = deckCube == null ? ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class) : deckCube.getMain();
+        if (deckCube == null) {
+            cd.cardPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class);
+        } else {
+            // Include conspiracy cards (e.g. Backup Plan) in the draft pool alongside regular cards
+            CardPool pool = new CardPool(deckCube.getMain());
+            if (deckCube.has(DeckSection.Conspiracy)) {
+                pool.addAll(deckCube.get(DeckSection.Conspiracy));
+            }
+            cd.cardPool = pool;
+        }
 
         return cd;
     }

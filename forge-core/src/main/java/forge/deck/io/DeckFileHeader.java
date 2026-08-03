@@ -17,6 +17,7 @@
  */
 package forge.deck.io;
 
+import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.util.FileSection;
 import org.apache.commons.lang3.StringUtils;
@@ -46,6 +47,8 @@ public class DeckFileHeader {
     public static final String KEY_CARDS = "KeyCards";
     public static final String DECK_HASH = "DeckHash";
     public static final String COMMANDER_BRACKET = "CommanderBracket";
+    public static final String SLEEVE_ART = "SleeveArt";
+    public static final String SLEEVE_OFFSET = "SleeveOffset";
 
     /** The Constant COMMENT. */
     public static final String COMMENT = "Comment";
@@ -70,6 +73,9 @@ public class DeckFileHeader {
     private final boolean intendedForAi;
     private final String aiHints;
 
+    private final String sleeveArtKey;
+    private final int sleeveArtOffset;
+
     public boolean isIntendedForAi() {
         return intendedForAi;
     }
@@ -88,6 +94,8 @@ public class DeckFileHeader {
         this.aiHints = kvPairs.get(DeckFileHeader.AI_HINTS);
         this.deckHash = kvPairs.get(DeckFileHeader.DECK_HASH);
         this.commanderBracket = parseCommanderBracket(kvPairs.get(DeckFileHeader.COMMANDER_BRACKET));
+        this.sleeveArtKey = kvPairs.get(DeckFileHeader.SLEEVE_ART);
+        this.sleeveArtOffset = kvPairs.getInt(DeckFileHeader.SLEEVE_OFFSET, Deck.DEFAULT_SLEEVE_OFFSET);
 
         this.tags = new TreeSet<>();
         
@@ -180,5 +188,13 @@ public class DeckFileHeader {
 
     public final Integer getCommanderBracket() {
         return commanderBracket;
+    }
+
+    public final String getSleeveArtKey() {
+        return sleeveArtKey;
+    }
+
+    public final int getSleeveArtOffset() {
+        return sleeveArtOffset;
     }
 }

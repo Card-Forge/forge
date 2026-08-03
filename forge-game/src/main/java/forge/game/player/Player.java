@@ -101,7 +101,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int landsPlayedThisTurn;
     private int landsPlayedLastTurn;
     private int numPowerSurgeLands;
-    private int spellsCastThisTurn;
     private int spellsCastThisGame;
     private int spellsCastLastTurn;
     private List<Card> spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
@@ -192,6 +191,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Card monarchEffect;
     private Card initiativeEffect;
     private Card blessingEffect;
+    private Card enduringStoryEffect;
     private Card contraptionSprocketEffect;
     private Card radiationEffect;
     private Card keywordEffect;
@@ -229,9 +229,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateMaxLandPlay(this);
         view.setDraftNotes(this.getDraftNotes());
         setName(chooseName(name0));
-        if (id0 >= 0) {
-            game.addPlayer(id, this);
-        }
     }
 
     public final AchievementTracker getAchievementTracker() {
@@ -947,13 +944,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    public void setCounters(Map<CounterType, Integer> allCounters) {
+    public void setCounters(Multiset<CounterType> allCounters) {
         counters = allCounters;
         view.updateCounters(this);
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
 
         // create Radiation Effect for GameState
-        if (counters.getOrDefault(CounterEnumType.RAD, 0) > 0) {
+        if (counters.count(CounterEnumType.RAD) > 0) {
             this.createRadiationEffect(null);
         } else {
             this.removeRadiationEffect();
@@ -1048,7 +1045,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        // CantTarget static abilities
         if (StaticAbilityCantTarget.cantTarget(this, sa) != null) {
             return false;
         }
@@ -1365,7 +1361,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         return result;
     }
-    public final CardCollectionView getCardsIn(final ZoneType[] zones) {
+    public final CardCollectionView getCardsIn(final ZoneType... zones) {
         final CardCollection result = new CardCollection();
         for (final ZoneType z : zones) {
             result.addAll(getCardsIn(z));
@@ -2089,10 +2085,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardLists.count(getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS) >= 3;
     }
 
-    public final boolean hasDesert() {
-        return getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)).anyMatch(CardPredicates.isType("Desert"));
-    }
-
     public final boolean hasThreshold() {
         return getZone(ZoneType.Graveyard).size() >= 7;
     }
@@ -2129,7 +2121,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasSurge() {
-        return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), getYourTeam()).isEmpty();
+        PlayerCollection team = getYourTeam();
+        return game.getStack().getSpellsCastThisTurn().stream().anyMatch(sp -> team.contains(sp.getActivatingPlayer()));
     }
 
     public final boolean hasBloodthirst() {
@@ -2303,7 +2296,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final List<Card> getSpellsCastSinceBegOfYourLastTurn() {
-        List<Card> all = new ArrayList<>(game.getStack().getSpellsCastThisTurn());
+        List<Card> all = new ArrayList<>(game.getStack().getSpellCardsCastThisTurn());
         all.addAll(spellsCastSinceBeginningOfLastTurn);
         return all;
     }
@@ -2315,21 +2308,15 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final int getSpellsCastThisTurn() {
-        return spellsCastThisTurn;
+        return (int) getGame().getStack().getSpellsCastThisTurn().stream().filter(sp -> this.equals(sp.getActivatingPlayer())).count();
     }
     public final int getSpellsCastLastTurn() {
         return spellsCastLastTurn;
     }
     public final void addSpellCastThisTurn() {
-        spellsCastThisTurn++;
         spellsCastThisGame++;
         achievementTracker.spellsCast++;
-        if (spellsCastThisTurn > achievementTracker.maxStormCount) {
-            achievementTracker.maxStormCount = spellsCastThisTurn;
-        }
-    }
-    public final void resetSpellsCastThisTurn() {
-        spellsCastThisTurn = 0;
+        achievementTracker.maxStormCount = Math.max(achievementTracker.maxStormCount, getSpellsCastThisTurn());
     }
     public final void setSpellsCastLastTurn(int num) {
         spellsCastLastTurn = num;
@@ -2502,7 +2489,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetVenturedThisTurn();
         setDescended(0);
         setSpellsCastLastTurn(getSpellsCastThisTurn());
-        resetSpellsCastThisTurn();
         setLifeLostLastTurn(getLifeLostThisTurn());
         setLifeLostThisTurn(0);
         setLifeGainedThisTurn(0);
@@ -2624,6 +2610,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void updateSleeve() {
         view.updateSleeveIndex(this);
+        view.updateSleeveArtKey(this);
+        view.updateSleeveArtOffset(this);
     }
 
     /**
@@ -2750,22 +2738,36 @@ public class Player extends GameEntity implements Comparable<Player> {
         //Seems like the rest of the logic for copying players should be in this class too.
         //For now, doing this here can retain the links between commander effects and commanders.
 
+        /**
+         * Commander references are kept across zone changes, each of which can hand
+         * the game a new object for the same card (cast for a mutate cost, bounced
+         * to the command zone, ...), so resolve the card the game is actually
+         * holding before asking a snapshot's map for its counterpart.
+         */
+        Function<Card, Card> mapCommander = c -> mapper.apply(game.getCardState(c));
+
         toPlayer.resetCommanderStats();
         toPlayer.commanders.clear();
         for (final Card c : this.getCommanders()) {
-            Card newCommander = mapper.apply(c);
-            if(newCommander == null)
-                throw new RuntimeException("Unable to find commander in game snapshot: " + c);
+            Card newCommander = mapCommander.apply(c);
+            if (newCommander == null) {
+                // An unmapped commander leaves the snapshot incomplete, but throwing
+                // here would end the match instead of just the undo it was taken for.
+                System.err.println("Unable to find commander in game snapshot: " + c);
+                continue;
+            }
             toPlayer.commanders.add(newCommander);
             newCommander.setCommander(true);
         }
         for (Map.Entry<Card, Integer> entry : this.commanderCast.entrySet()) {
             //Have to iterate over this separately in case commanders change mid-game.
-            Card commander = mapper.apply(entry.getKey());
+            Card commander = mapCommander.apply(entry.getKey());
+            if(commander == null) //Ceased to exist?
+                continue;
             toPlayer.commanderCast.put(commander, entry.getValue());
         }
         for (Map.Entry<Card, Integer> entry : this.getCommanderDamage()) {
-            Card commander = mapper.apply(entry.getKey());
+            Card commander = mapCommander.apply(entry.getKey());
             if(commander == null) //Ceased to exist?
                 continue;
             int damage = entry.getValue();
@@ -2775,6 +2777,32 @@ public class Player extends GameEntity implements Comparable<Player> {
             Card commanderEffect = mapper.apply(this.commanderEffect);
             toPlayer.commanderEffect = (DetachedCardEffect) commanderEffect;
         }
+    }
+
+    /**
+     * Wires this player's field-managed effect cards (keyword, monarch,
+     * initiative, blessing, contraption sprocket, radiation, speed) to their
+     * already-copied counterparts on a snapshot player, the same way
+     * copyCommandersToSnapshot wires commanderEffect. Without this, the
+     * snapshot's lazy getters re-create the effect card on next use while the
+     * copied original sits orphaned in the command zone (visible as duplicate
+     * "Keyword Effects" cards that compound with each copy generation).
+     */
+    public void copyEffectCardsToSnapshot(Player toPlayer, Function<Card, Card> mapper) {
+        toPlayer.keywordEffect = mapEffectCard(keywordEffect, mapper);
+        toPlayer.monarchEffect = mapEffectCard(monarchEffect, mapper);
+        toPlayer.initiativeEffect = mapEffectCard(initiativeEffect, mapper);
+        toPlayer.blessingEffect = mapEffectCard(blessingEffect, mapper);
+        toPlayer.enduringStoryEffect = mapEffectCard(enduringStoryEffect, mapper);
+        toPlayer.contraptionSprocketEffect = mapEffectCard(contraptionSprocketEffect, mapper);
+        toPlayer.radiationEffect = mapEffectCard(radiationEffect, mapper);
+        toPlayer.speedEffect = mapEffectCard(speedEffect, mapper);
+    }
+
+    private static Card mapEffectCard(Card effect, Function<Card, Card> mapper) {
+        // An effect card in no zone was not part of the copy; leave the
+        // snapshot's field unset so its lazy creation path stays consistent.
+        return effect == null || effect.getZone() == null ? null : mapper.apply(effect);
     }
 
     public void addCommander(Card commander) {
@@ -2833,13 +2861,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         ColorSet identity = ColorSet.fromMask(ci);
         return identity;
-    }
-    public ColorSet getNotCommanderColorID() {
-        if (commanders.isEmpty()) {
-            return null;
-        }
-        ColorSet identity = getCommanderColorID();
-        return identity.inverse();
     }
 
     public int getCommanderCast(Card commander) {
@@ -3662,6 +3683,40 @@ public class Player extends GameEntity implements Comparable<Player> {
         } else {
             com.remove(blessingEffect);
             blessingEffect = null;
+        }
+
+        this.updateZoneForView(com);
+    }
+
+    public boolean hasEnduringStory() {
+        return enduringStoryEffect != null;
+    }
+    public void setEnduringStory(boolean story, String setCode) {
+        // no need to change
+        if ((enduringStoryEffect != null) == story) {
+            return;
+        }
+
+        final PlayerZone com = getZone(ZoneType.Command);
+
+        if (story) {
+            enduringStoryEffect = new Card(game.nextCardId(), null, game);
+            enduringStoryEffect.setOwner(this);
+            enduringStoryEffect.setName("An Enduring Story");
+            enduringStoryEffect.setGamePieceType(GamePieceType.EFFECT);
+            if (setCode != null) {
+                enduringStoryEffect.setSetCode(setCode);
+            }
+
+            enduringStoryEffect.updateStateForView();
+
+            com.add(enduringStoryEffect);
+
+            // as with the city's blessing, continuous effects are reapplied once it is gained
+            game.getAction().checkStaticAbilities();
+        } else {
+            com.remove(enduringStoryEffect);
+            enduringStoryEffect = null;
         }
 
         this.updateZoneForView(com);

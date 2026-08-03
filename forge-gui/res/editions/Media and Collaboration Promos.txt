@@ -95,11 +95,13 @@ ScryfallCode=PMEI
 2026-5 M Gishath, Sun's Avatar @Zack Stella
 2026-6 R Warstorm Surge @Ryan Stegman & Arthur Hesli
 2026-7 R Counterspell @Hannibal King
-2026-9 R Hulking Raptor @Néstor Ossandón Leal
 2026-08 R Appa, Aang's Companion @Kieran Yanner
+2026-9 R Hulking Raptor @Néstor Ossandón Leal
 2026-10 R The Goose Mother @Jesper Ejsing
 2026-11 R Zetalpa, Primal Dawn @Chris Rallis
 2026-12 R Turtle Lair @Marina Ortega Lorente
 2026-13 R Command Tower @Victor Adame Minguez
 2026-14 R Loki, God of Mischief @Eric Deschamps
 2026-15 R Shuri, Wakandan Inventor @Kevin Glint
+2026-16 R Captain America, Living Legend @Miguel Mercado
+2026-17 R Sazh's Chocobo @Domenico Cava

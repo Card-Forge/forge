@@ -160,6 +160,20 @@ public class DeckProxy implements InventoryItem {
         return directory;
     }
 
+    /** Persists the underlying deck to its storage. Returns false (no-op) for read-only decks (random/precon/quest). */
+    @SuppressWarnings("unchecked")
+    public boolean saveDeck() {
+        if (!(deck instanceof Deck) || storage == null) {
+            return false;
+        }
+        try {
+            ((IStorage<Deck>) storage).add((Deck) deck);
+            return true;
+        } catch (final UnsupportedOperationException e) {
+            return false;
+        }
+    }
+
     public void invalidateCache() {
         color = null;
         colorIdentity = null;
@@ -503,7 +517,7 @@ public class DeckProxy implements InventoryItem {
         return getAllCommanderPreconDecks(null);
     }
     public static Iterable<DeckProxy> getAllCommanderPreconDecks(final Predicate<Deck> filter) {
-        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<>();
         addDecksRecursivelly("Commander Precon", GameType.Commander, result, "", FModel.getDecks().getCommanderPrecons(), filter);
         return result;
     }
