@@ -24,7 +24,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/** Downloads the images listed by an Adventure plane's remote battle-background index. */
+/** Downloads relative image paths from the HTTPS URL in {@code skin/battle-backgrounds.txt}. */
 public final class AdventureBackgroundDownloader {
     private static final String LIST_PATH = "skin/battle-backgrounds.txt";
     private static final String CACHE_PATH = "skin/battle_backgrounds";
