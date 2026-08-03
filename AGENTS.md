@@ -17,6 +17,18 @@ Commander-first fork of [Card-Forge/forge](https://github.com/Card-Forge/forge).
 - **Never push to master.** Branch protection ruleset "Condom" requires: two Test build checks (Java 17/21), CodeQL,
   and Copilot review. All changes land via PR.
 
+## GitHub issues workflow
+
+- **Start every session by checking open issues.** Run `gh issue list` (or use the GitHub MCP tools) to see known
+  problems, planned work, and open questions. This is the backlog — don't re-discover what's already filed.
+- **Document problems as issues, not just conversation.** If you find a bug, a docs inconsistency, a missing feature,
+  or a governance gap during your work — create a GitHub issue immediately. Don't leave it as a conversation note
+  that evaporates when the session ends. Title format: `type(scope): short summary` matching commit style.
+- **Reference issues in PRs.** When a PR fixes an issue, mention it in the PR body (`Fixes #N`). This auto-closes
+  the issue on merge and keeps the backlog clean.
+- **Close stale issues.** If something you filed is no longer relevant (e.g., descope decided, upstream fixed it),
+  close it with a comment explaining why.
+
 ## Docs to keep current
 
 - `docs/development.md` — the roadmap + status matrix. Section tables have a `Status` column; keep it truthful.
