@@ -432,11 +432,6 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         return data;
     }
 
-    public String getBattleBackground() {
-        return battleBackground == null || battleBackground.isEmpty()
-                ? data.battleBackground : battleBackground;
-    }
-
     public void overrideDeck(String deckPath) {
         data.deck = new String[1];
         data.deck[0] = deckPath;

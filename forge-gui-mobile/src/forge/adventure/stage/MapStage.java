@@ -67,6 +67,8 @@ public class MapStage extends GameStage {
     //Map properties.
     //These maps are defined as embedded properties within the Tiled maps.
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
+    private String battleBackground;       //Optional battle background folder for this map or floor.
+    private String currentMap;
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
 
     public InputEvent eventTouchDown, eventTouchUp;
@@ -88,6 +90,8 @@ public class MapStage extends GameStage {
     public void clearIsInMap() {
         isInMap = false;
         effect = null; //Reset effect so battles outside the dungeon don't use the last visited dungeon's effects.
+        battleBackground = null;
+        currentMap = null;
         preventEscape = false;
         GameHUD.getInstance().showHideMap(true);
     }
@@ -202,6 +206,7 @@ public class MapStage extends GameStage {
         gdxWorld = new World(new Vector2(0, 0),false);
         isLoadingMatch = false;
         isInMap = true;
+        currentMap = targetMap;
         GameHUD.getInstance().showHideMap(false);
         this.tiledMap = map;
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
@@ -230,6 +235,7 @@ public class MapStage extends GameStage {
         if (MP.get("dungeonEffect") != null && !MP.get("dungeonEffect").toString().isEmpty()) {
             effect = JSONStringLoader.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
         }
+        battleBackground = MP.get("battleBackground") == null ? null : MP.get("battleBackground").toString();
         if (MP.get("respawnEnemies") != null && MP.get("respawnEnemies") instanceof Boolean && (Boolean) MP.get("respawnEnemies")) {
             respawnEnemies = true;
         } else {
@@ -1177,6 +1183,14 @@ public class MapStage extends GameStage {
 
     public boolean isInMap() {
         return isInMap;
+    }
+
+    public String getBattleBackground() {
+        return battleBackground;
+    }
+
+    public String getCurrentMap() {
+        return currentMap;
     }
 
     public void onBeginLeavingDungeon() {
