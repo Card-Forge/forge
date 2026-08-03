@@ -1,5 +1,9 @@
 # Upstream Sync Process
 
+> **Personal project.** This sync exists so my fork can keep pulling card scripts and rules fixes from
+> upstream while I keep my own changes additive-only. It is not a community maintainer workflow and
+> carries no guarantees. See the [README](../README.md) for the project disclaimer.
+
 ## How sync works
 
 A daily GitHub Action (`.github/workflows/sync-upstream.yml`) pulls from `Card-Forge/forge` at 06:00 UTC and opens a PR when the merge is green. The required checks (Java 17/21 tests, CodeQL, doc-status, platform-parity) must pass before merge.

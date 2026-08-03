@@ -1,5 +1,9 @@
 # Reforge Commander — Development Status & Roadmap
 
+> **Personal project.** This roadmap is for my own use and is not a commitment to anyone. The code is
+> largely AI-generated and may contain bugs; use it at your own risk, no responsibility is taken.
+> This is a fork of upstream Forge — see the [README](../README.md) and [upstream-sync](upstream-sync.md).
+
 ## Product Vision
 
 Reforge Commander transforms upstream Forge — a clunky but extremely feature-rich general MTG client — into a **modern, Commander-first application**:

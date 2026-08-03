@@ -1,5 +1,11 @@
 # Contributing
 
+> [!WARNING]
+> **This is a personal project.** Contributions are welcome, but nothing is guaranteed. I work on this in
+> my spare time and answer issues/PRs as and when I feel like it — not on any schedule, and maybe not at
+> all. A contribution may be reviewed, merged, rewritten, ignored, or rejected. There is no team, no
+> support channel, and no maintenance commitment. If that's fine with you, please read on and have fun.
+
 ## Contents
 
 - [Requirements / Tools](#requirements--tools)

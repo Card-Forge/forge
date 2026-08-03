@@ -1,12 +1,32 @@
 # Reforge Commander
 
-Reforge Commander is a **modern, Commander-first** fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). It strips the bloated multi-mode surface area of upstream Forge to deliver a fast, clean client optimized for playing Commander with friends.
-
-Target: a new user should build a deck and start a game in under two minutes. An expert should be able to customize everything.
-
-> Note: Reforge Commander operates independently and is not affiliated with Wizards of the Coast.
+> [!WARNING]
+> **This is a personal project, not a community one.**
+>
+> Reforge Commander is a private fork of [Card-Forge/forge](https://github.com/Card-Forge/forge) that I
+> built to play Magic: The Gathering Commander with friends. It is **not** a general-use release, and it
+> is **not** a supported community fork of the original project with the same rules and standards.
+>
+> - **AI-generated code.** Most of the code here was written with AI assistance. It probably contains
+>   bugs or errors. Expect the unexpected.
+> - **Use at your own risk.** The project is provided as-is, with no warranty of any kind. I take no
+>   responsibility for anything that happens as a result of building, running, or using it.
+> - **Not affiliated** with the Forge project/team or with Wizards of the Coast. Don't confuse this with
+>   the original Forge project or expect it to follow their standards.
+> - **Contributions are welcome, but nothing is guaranteed.** You may open issues or pull requests, and
+>   I may or may not get to them. There is no review schedule, no merge promise, and no maintenance
+>   commitment.
 
 ---
+
+## What it is
+
+Reforge Commander is a **modern, Commander-first** fork of [Card-Forge/forge](https://github.com/Card-Forge/forge).
+It strips the bloated multi-mode surface area of upstream Forge to deliver a fast, clean client optimized
+for playing Commander with friends.
+
+Target: a new user should build a deck and start a game in under two minutes. An expert should be able to
+customize everything.
 
 ## Core Focus
 
@@ -43,8 +63,8 @@ mvn -P run-commander exec:java -pl :forge-gui-desktop
 
 See [docs/development.md](docs/development.md) for the full roadmap, known gaps, and priority fixes.
 
-### 📱 iOS Installation (early stage)
-- Build the **IPA** according to Wiki
+### iOS Installation (early stage)
+- Build the **IPA** according to the wiki
 - No jailbreak needed, only developer mode
 - Connect your device to a PC to self-sign and upload the app file, multiple tools exist e.g. [Sideloadly](https://sideloadly.io)
 
@@ -53,4 +73,3 @@ See [docs/development.md](docs/development.md) for the full roadmap, known gaps,
 ## License
 
 Reforge Commander inherits the original project's license: [GPL-3.0](LICENSE).
-

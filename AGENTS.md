@@ -1,5 +1,11 @@
 # AGENTS.md — Reforge Commander
 
+> **Personal project.** Not a community fork and not affiliated with the Forge team or Wizards of the
+> Coast. The code is largely AI-generated and may contain bugs. It is provided as-is; anyone who uses it
+> does so at their own risk and no responsibility is taken for anything resulting from its use.
+> Contributions are welcome but nothing is guaranteed. The engineering rules below exist to keep the
+> upstream sync conflict-free — they do not imply community standards or support.
+
 Commander-first fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). Java 17+, Maven multi-module
 (`forge-game`, `forge-gui`, `forge-gui-desktop`, `forge-gui-ios`). GUI runs under the FlatLaf dark theme in
 `ReforgeCommanderApp.main()`.
