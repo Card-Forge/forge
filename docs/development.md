@@ -337,7 +337,8 @@ Desktop (`forge-gui-desktop`, Swing/FlatLaf) and mobile (`forge-gui-mobile`, LiG
 | P0 | 5a — Smart default game setup: reduce clicks to start a Commander game | 2 days | Core UX goal — **DONE: first deck auto-selected and applied, precon fallback for fresh installs** |
 | P0 | 6a — FlatLaf integration (`FlatLaf.setup()`) | 1 hour | Instant visual modernization — **DONE: FlatLaf 3.7.2 applied in `ReforgeCommanderApp.main()`** |
 | P1 | 1b — Zone tracking for stacked tokens | 2-3 days | Enables all downstream consumers — **DONE: stacks survive burst via view-refresh suppression** |
-| P1 | 1d — GameCopier flyweight support | 1 day | AI performance benefit |
+| P1 | 1c — Static-eval batching (count param for StaticAbility resolver) | 2-3 days | Single most impactful remaining perf win — O(1) static eval for N identical tokens |
+| P1 | 1d — GameCopier flyweight support | 1 day | AI performance benefit — O(1) clone instead of O(N) card copy |
 | P1 | ~~2b — Reduce VSubmenuPlayCommander duplication~~ **DONE** | 0.5 day | Maintainability |
 | P1 | 5b — Simplify lobby: prefill Commander variant, suggest deck, hide unused slots | 1 day | Core UX goal |
 | P1 | 5e — Game log implementation | 2-3 days | Essential feature missing from every client |
