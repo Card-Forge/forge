@@ -1095,17 +1095,29 @@ public class GameAction {
             dependencies = HashBasedTable.create();
         }
 
-        // REFORGE COMMANDER EXTENSION — static-eval batching (1c)
-        // Use unexpanded battlefield to keep stacked tokens as prototype
-        // references (O(S) stacks) instead of materializing O(N) individual cards.
-        // ponytail: duplicates forEachCardInGame iteration order; upgrade to a
-        // withStacks flag on forEachCardInGame if more callers need this.
+        // ponytail: unexpanded battlefield keeps stacked tokens as prototype refs, O(S) stacks not O(N) cards.
+        // doc:1c DONE
+        // A stacked-token prototype stands for N identical tokens; replicate its continuous
+        // abilities N-fold (distinct instances via copy) so the effect applies once per token. // doc:55 DONE
+        final Map<Card, Integer> stackQuantity = Maps.newHashMap();
+        for (final Player p : game.getPlayers()) {
+            final PlayerZone bfZone = p.getZone(ZoneType.Battlefield);
+            if (bfZone instanceof PlayerZoneBattlefield) {
+                for (final StackedTokenCard stack : ((PlayerZoneBattlefield) bfZone).getStackedTokens()) {
+                    stackQuantity.put(stack.getPrototype(), stack.getQuantity());
+                }
+            }
+        }
         game.forEachCardInGameUnexpanded(c -> {
             // need to get Card from preList if able
             final Card co = preList.get(c);
+            final int copies = stackQuantity.getOrDefault(c, 1);
             for (StaticAbility stAb : co.getStaticAbilities()) {
                 if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
                     staticAbilities.add(stAb);
+                    for (int i = 1; i < copies; i++) {
+                        staticAbilities.add(stAb.copy(co, false));
+                    }
                 }
             }
             if (!co.getStaticCommandList().isEmpty()) {
@@ -1114,6 +1126,9 @@ public class GameAction {
             for (StaticAbility stAb : co.getHiddenStaticAbilities()) {
                 if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
                     staticAbilities.add(stAb);
+                    for (int i = 1; i < copies; i++) {
+                        staticAbilities.add(stAb.copy(co, false));
+                    }
                 }
             }
             return true;

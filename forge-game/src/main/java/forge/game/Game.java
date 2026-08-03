@@ -776,18 +776,9 @@ public class Game {
         visitor.visitAll(getStackZone().getCards());
     }
 
-    /**
-     * Like {@link #forEachCardInGame(Visitor, boolean)} but does NOT expand
-     * stacked tokens on the battlefield zone. Stacked tokens appear as their
-     * prototype Card (one per stack) rather than being materialized into
-     * N individual Card objects.
-     *
-     * Use this in hot paths (static ability evaluation) where the O(1)
-     * stacking optimization should be preserved.
-     *
-     * ponytail: copies zone iteration order from forEachCardInGame.
-     * Upgrade to a withStacks flag on forEachCardInGame if more callers need this.
-     */
+    /** Like {@link #forEachCardInGame(Visitor, boolean)} but leaves stacked tokens as one prototype per stack. */
+    // ponytail: copies zone iteration order from forEachCardInGame; sideboard excluded like the default there.
+    // Upgrade to a withStacks flag on forEachCardInGame if more callers need this.
     // doc:1c DONE
     public void forEachCardInGameUnexpanded(Visitor<Card> visitor) {
         for (final Player player : getPlayers()) {
@@ -811,9 +802,6 @@ public class Game {
                 return;
             }
             if (!visitor.visitAll(player.getCardsIn(ZoneType.PART_OF_COMMAND_ZONE))) {
-                return;
-            }
-            if (!visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
                 return;
             }
             if (!visitor.visitAll(player.getInboundTokens())) {
