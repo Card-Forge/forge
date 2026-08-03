@@ -33,6 +33,7 @@ public interface IItemSerializer<T> extends IItemReader<T> {
      */
     void save(T unit);
 
+    /** Updates metadata without rewriting the full item when the format supports it. */
     default boolean saveMetadata(T unit) { return false; }
 
     /**

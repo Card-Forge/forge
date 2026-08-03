@@ -79,6 +79,7 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
 
     @Override
     public boolean saveMetadata(final Deck deck) {
+        // Do not invoke the full serializer here: it can reorder cards in an otherwise untouched user deck.
         final File file = makeFileFor(deck);
         if (!file.exists()) {
             return false;

@@ -93,6 +93,7 @@ public class DeckProxy implements InventoryItem {
     }
 
     public boolean canSaveDeckMetadata() {
+        // Generated decks have no stable backing file; bundled precons are Forge data rather than user data.
         return storage != null && deck instanceof Deck && !isGeneratedDeck() && !isPreconstructedDeck();
     }
 
@@ -101,15 +102,14 @@ public class DeckProxy implements InventoryItem {
     }
 
     public boolean isCommanderDeck() {
-        final Deck sourceDeck = getDeck();
+        return isCommanderDeck(getDeck());
+    }
+
+    public boolean isCommanderDeck(final Deck sourceDeck) {
         final DeckFormat format = sourceDeck == null ? null : sourceDeck.getDeckFormat();
-        return format != null && format.hasCommander()
-                || sourceDeck != null && sourceDeck.has(DeckSection.Commander)
-                || "Commander".equals(deckType)
-                || "Commander Precon".equals(deckType)
-                || "Oathbreaker".equals(deckType)
-                || "Brawl".equals(deckType)
-                || "Tiny Leaders".equals(deckType);
+        return format != null && format.hasCommander() || sourceDeck != null && sourceDeck.has(DeckSection.Commander)
+                || "Commander".equals(deckType) || "Commander Precon".equals(deckType) || "Oathbreaker".equals(deckType)
+                || "Brawl".equals(deckType) || "Tiny Leaders".equals(deckType);
     }
 
     public String getPath() {

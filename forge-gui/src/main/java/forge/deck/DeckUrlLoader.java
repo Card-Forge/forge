@@ -19,7 +19,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -217,7 +216,7 @@ public final class DeckUrlLoader {
     }
 
     static Map<?, ?> readJsonObject(final String requestUrl, final String providerName) throws IOException {
-        final Object parsed = new JsonParser(readUrl(requestUrl, providerName)).parse();
+        final Object parsed = JsonUtil.parse(readUrl(requestUrl, providerName));
         if (parsed instanceof Map<?, ?> root) {
             return root;
         }
@@ -250,192 +249,6 @@ public final class DeckUrlLoader {
             }
         }
         return defaultValue;
-    }
-
-    private static final class JsonParser {
-        private final String input;
-        private int pos;
-
-        private JsonParser(final String input) {
-            this.input = input;
-        }
-
-        private Object parse() throws IOException {
-            final Object value = parseValue();
-            skipWhitespace();
-            if (pos != input.length()) {
-                throw error("Unexpected trailing JSON content");
-            }
-            return value;
-        }
-
-        private Object parseValue() throws IOException {
-            skipWhitespace();
-            if (pos >= input.length()) {
-                throw error("Unexpected end of JSON");
-            }
-            return switch (input.charAt(pos)) {
-                case '{' -> parseObject();
-                case '[' -> parseArray();
-                case '"' -> parseString();
-                case 't' -> parseLiteral("true", Boolean.TRUE);
-                case 'f' -> parseLiteral("false", Boolean.FALSE);
-                case 'n' -> parseLiteral("null", null);
-                default -> parseNumber();
-            };
-        }
-
-        private Map<String, Object> parseObject() throws IOException {
-            expect('{');
-            final Map<String, Object> map = new LinkedHashMap<>();
-            skipWhitespace();
-            if (peek('}')) {
-                pos++;
-                return map;
-            }
-            do {
-                skipWhitespace();
-                final String key = parseString();
-                skipWhitespace();
-                expect(':');
-                map.put(key, parseValue());
-                skipWhitespace();
-            } while (consume(','));
-            expect('}');
-            return map;
-        }
-
-        private List<Object> parseArray() throws IOException {
-            expect('[');
-            final List<Object> list = new ArrayList<>();
-            skipWhitespace();
-            if (peek(']')) {
-                pos++;
-                return list;
-            }
-            do {
-                list.add(parseValue());
-                skipWhitespace();
-            } while (consume(','));
-            expect(']');
-            return list;
-        }
-
-        private String parseString() throws IOException {
-            expect('"');
-            final StringBuilder out = new StringBuilder();
-            while (pos < input.length()) {
-                final char c = input.charAt(pos++);
-                if (c == '"') {
-                    return out.toString();
-                }
-                if (c != '\\') {
-                    out.append(c);
-                    continue;
-                }
-                if (pos >= input.length()) {
-                    throw error("Unterminated escape sequence");
-                }
-                final char escaped = input.charAt(pos++);
-                switch (escaped) {
-                    case '"', '\\', '/' -> out.append(escaped);
-                    case 'b' -> out.append('\b');
-                    case 'f' -> out.append('\f');
-                    case 'n' -> out.append('\n');
-                    case 'r' -> out.append('\r');
-                    case 't' -> out.append('\t');
-                    case 'u' -> out.append(parseUnicodeEscape());
-                    default -> throw error("Invalid escape sequence");
-                }
-            }
-            throw error("Unterminated string");
-        }
-
-        private char parseUnicodeEscape() throws IOException {
-            if (pos + 4 > input.length()) {
-                throw error("Invalid unicode escape");
-            }
-            try {
-                final char value = (char) Integer.parseInt(input.substring(pos, pos + 4), 16);
-                pos += 4;
-                return value;
-            } catch (final NumberFormatException ex) {
-                throw error("Invalid unicode escape");
-            }
-        }
-
-        private Object parseNumber() throws IOException {
-            final int start = pos;
-            if (peek('-')) {
-                pos++;
-            }
-            while (pos < input.length() && Character.isDigit(input.charAt(pos))) {
-                pos++;
-            }
-            if (peek('.')) {
-                pos++;
-                while (pos < input.length() && Character.isDigit(input.charAt(pos))) {
-                    pos++;
-                }
-            }
-            if (peek('e') || peek('E')) {
-                pos++;
-                if (peek('+') || peek('-')) {
-                    pos++;
-                }
-                while (pos < input.length() && Character.isDigit(input.charAt(pos))) {
-                    pos++;
-                }
-            }
-            if (start == pos) {
-                throw error("Expected JSON value");
-            }
-            final String number = input.substring(start, pos);
-            try {
-                return number.contains(".") || number.contains("e") || number.contains("E")
-                        ? Double.parseDouble(number)
-                        : Long.parseLong(number);
-            } catch (final NumberFormatException ex) {
-                throw error("Invalid number");
-            }
-        }
-
-        private Object parseLiteral(final String literal, final Object value) throws IOException {
-            if (!input.startsWith(literal, pos)) {
-                throw error("Invalid JSON literal");
-            }
-            pos += literal.length();
-            return value;
-        }
-
-        private void skipWhitespace() {
-            while (pos < input.length() && Character.isWhitespace(input.charAt(pos))) {
-                pos++;
-            }
-        }
-
-        private void expect(final char expected) throws IOException {
-            if (!peek(expected)) {
-                throw error("Expected '" + expected + "'");
-            }
-            pos++;
-        }
-
-        private boolean consume(final char expected) {
-            if (peek(expected)) {
-                pos++;
-                return true;
-            }
-            return false;
-        }
-
-        private boolean peek(final char expected) {
-            return pos < input.length() && input.charAt(pos) == expected;
-        }
-
-        private IOException error(final String message) {
-            return new IOException(message + " at position " + pos + ".");
-        }
     }
 
     private DeckUrlLoader() {

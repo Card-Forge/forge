@@ -13,45 +13,46 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
 
 import forge.util.BuildInfo;
-import forge.util.JsonUtil;
 
 final class CommanderBracketApiClient {
     private static final String API_URL = "https://mtg-assistant.up.railway.app/decks/analyze-complete";
     private static final int CONNECT_TIMEOUT_MILLIS = 10000;
     private static final int READ_TIMEOUT_MILLIS = 45000;
     private static final long MIN_REQUEST_INTERVAL_MILLIS = 1500L;
+    private static final int MAX_REQUEST_ATTEMPTS = 3;
 
     private final ResultHandler resultHandler;
-    private final Consumer<CommanderBracketService.BracketUpdate> updateListener;
-    private final Map<String, CommanderBracketService.RemoteResult> memoryCache = new ConcurrentHashMap<>();
+    private final Consumer<DeckProxy> updateListener;
+    private final BooleanSupplier apiEnabled;
+    private final Map<String, CommanderBracketResult> memoryCache = new ConcurrentHashMap<>();
     private final Map<String, Long> failureCooldowns = new ConcurrentHashMap<>();
     private final Set<String> inFlight = ConcurrentHashMap.newKeySet();
     private final Set<String> active = ConcurrentHashMap.newKeySet();
     private final PriorityQueue<ApiRequest> queue = new PriorityQueue<>();
     private final AtomicLong sequence = new AtomicLong();
-    private final Thread worker;
     private long nextRequestTimeMillis = 0L;
 
-    CommanderBracketApiClient(final ResultHandler resultHandler,
-                              final Consumer<CommanderBracketService.BracketUpdate> updateListener) {
+    CommanderBracketApiClient(final ResultHandler resultHandler, final Consumer<DeckProxy> updateListener, final BooleanSupplier apiEnabled) {
         this.resultHandler = resultHandler;
         this.updateListener = updateListener;
-        worker = new Thread(this::processQueue, "CommanderBracket API");
+        this.apiEnabled = apiEnabled;
+        // A single worker both prioritizes explicit views and guarantees that requests cannot run concurrently.
+        final Thread worker = new Thread(this::processQueue, "CommanderBracket API");
         worker.setDaemon(true);
         worker.start();
     }
 
-    CommanderBracketService.RemoteResult getCachedResult(final String deckHash) {
+    CommanderBracketResult getCachedResult(final String deckHash) {
         return memoryCache.get(deckHash);
     }
 
-    boolean enqueue(final Deck deck, final DeckProxy deckProxy, final String decklist, final String deckHash,
-                    final Priority priority) {
+    boolean enqueue(final Deck deck, final DeckProxy deckProxy, final String decklist, final String deckHash, final Priority priority) {
         if (memoryCache.containsKey(deckHash) || isCoolingDown(deckHash)) {
             return false;
         }
@@ -93,25 +94,37 @@ final class CommanderBracketApiClient {
 
             boolean requeued = false;
             try {
+                if (!apiEnabled.getAsBoolean()) {
+                    continue;
+                }
                 active.add(request.deckHash);
-                updateListener.accept(new CommanderBracketService.BracketUpdate(request.deckHash));
+                updateListener.accept(request.deckProxy);
                 throttle();
-                final CommanderBracketService.RemoteResult result = postDeck(request.decklist, request.deckHash);
+                if (!apiEnabled.getAsBoolean()) {
+                    continue;
+                }
+                final CommanderBracketResult result = postDeck(request.decklist, request.deckHash);
                 failureCooldowns.remove(request.deckHash);
                 memoryCache.put(request.deckHash, result);
                 resultHandler.accept(request.deck, request.deckProxy, result);
             }
             catch (final RetryAfterException e) {
                 nextRequestTimeMillis = Math.max(nextRequestTimeMillis, System.currentTimeMillis() + e.retryAfterMillis);
-                requeue(request);
-                requeued = true;
+                if (request.attempt < MAX_REQUEST_ATTEMPTS && apiEnabled.getAsBoolean()) {
+                    requeue(request.nextAttempt(sequence.incrementAndGet()));
+                    requeued = true;
+                }
+                else {
+                    failureCooldowns.put(request.deckHash, nextRequestTimeMillis);
+                }
             }
             catch (final Exception ignored) {
                 failureCooldowns.put(request.deckHash, System.currentTimeMillis() + 15L * 60L * 1000L);
             }
             finally {
-                active.remove(request.deckHash);
-                updateListener.accept(new CommanderBracketService.BracketUpdate(request.deckHash));
+                if (active.remove(request.deckHash)) {
+                    updateListener.accept(request.deckProxy);
+                }
                 if (!requeued) {
                     inFlight.remove(request.deckHash);
                 }
@@ -119,19 +132,19 @@ final class CommanderBracketApiClient {
         }
     }
 
-    private void promoteQueuedRequest(final Deck deck, final DeckProxy deckProxy, final String decklist,
-                                      final String deckHash, final Priority priority) {
+    private void promoteQueuedRequest(final Deck deck, final DeckProxy deckProxy, final String decklist, final String deckHash, final Priority priority) {
         if (priority != Priority.HIGH) {
             return;
         }
         synchronized (queue) {
-            final ApiRequest queued = queue.stream()
-                    .filter(request -> request.deckHash.equals(deckHash) && request.priority == Priority.LOW)
-                    .findFirst()
-                    .orElse(null);
+            final ApiRequest queued = queue.stream().filter(request -> request.deckHash.equals(deckHash) && request.priority == Priority.LOW).findFirst().orElse(null);
             if (queued != null) {
                 queue.remove(queued);
-                queue.add(new ApiRequest(deck, deckProxy, decklist, deckHash, Priority.HIGH, sequence.incrementAndGet()));
+                // A view of the same deck may supply a temporary proxy; retain the queued proxy when it can persist the result.
+                final boolean preserveQueuedDeck = queued.deckProxy != null && queued.deckProxy.canSaveDeckMetadata()
+                        && (deckProxy == null || !deckProxy.canSaveDeckMetadata());
+                queue.add(new ApiRequest(preserveQueuedDeck ? queued.deck : deck, preserveQueuedDeck ? queued.deckProxy : deckProxy,
+                        decklist, deckHash, Priority.HIGH, sequence.incrementAndGet(), queued.attempt));
                 queue.notifyAll();
             }
         }
@@ -165,7 +178,7 @@ final class CommanderBracketApiClient {
         nextRequestTimeMillis = System.currentTimeMillis() + MIN_REQUEST_INTERVAL_MILLIS;
     }
 
-    private CommanderBracketService.RemoteResult postDeck(final String decklist, final String deckHash) throws IOException {
+    private CommanderBracketResult postDeck(final String decklist, final String deckHash) throws IOException {
         final HttpURLConnection connection = (HttpURLConnection)new URL(API_URL).openConnection();
         try {
             connection.setConnectTimeout(CONNECT_TIMEOUT_MILLIS);
@@ -177,10 +190,8 @@ final class CommanderBracketApiClient {
 
             final String commander = firstCommanderName(decklist);
             final String escapedDecklist = JsonUtil.escape(decklist);
-            final String payload = commander == null
-                    ? "{\"decklist\":\"" + escapedDecklist + "\"}"
-                    : "{\"decklist\":\"" + escapedDecklist + "\",\"commander\":\""
-                    + JsonUtil.escape(commander) + "\"}";
+            final String payload = commander == null ? "{\"decklist\":\"" + escapedDecklist + "\"}"
+                    : "{\"decklist\":\"" + escapedDecklist + "\",\"commander\":\"" + JsonUtil.escape(commander) + "\"}";
             try (OutputStream out = connection.getOutputStream()) {
                 out.write(payload.getBytes(StandardCharsets.UTF_8));
             }
@@ -194,7 +205,7 @@ final class CommanderBracketApiClient {
             if (status >= 400) {
                 throw new IOException("CommanderBracket API error " + status + ": " + body);
             }
-            return CommanderBracketService.RemoteResult.fromResponse(deckHash, body);
+            return CommanderBracketResult.fromResponse(deckHash, body);
         }
         finally {
             connection.disconnect();
@@ -251,25 +262,17 @@ final class CommanderBracketApiClient {
     }
 
     interface ResultHandler {
-        void accept(Deck deck, DeckProxy deckProxy, CommanderBracketService.RemoteResult result);
+        void accept(Deck deck, DeckProxy deckProxy, CommanderBracketResult result);
     }
 
-    private static final class ApiRequest implements Comparable<ApiRequest> {
-        private final Deck deck;
-        private final DeckProxy deckProxy;
-        private final String decklist;
-        private final String deckHash;
-        private final Priority priority;
-        private final long sequence;
+    private record ApiRequest(Deck deck, DeckProxy deckProxy, String decklist, String deckHash, Priority priority, long sequence,
+            int attempt) implements Comparable<ApiRequest> {
+        private ApiRequest(final Deck deck, final DeckProxy deckProxy, final String decklist, final String deckHash, final Priority priority, final long sequence) {
+            this(deck, deckProxy, decklist, deckHash, priority, sequence, 1);
+        }
 
-        private ApiRequest(final Deck deck, final DeckProxy deckProxy, final String decklist, final String deckHash,
-                           final Priority priority, final long sequence) {
-            this.deck = deck;
-            this.deckProxy = deckProxy;
-            this.decklist = decklist;
-            this.deckHash = deckHash;
-            this.priority = priority;
-            this.sequence = sequence;
+        private ApiRequest nextAttempt(final long nextSequence) {
+            return new ApiRequest(deck, deckProxy, decklist, deckHash, priority, nextSequence, attempt + 1);
         }
 
         @Override

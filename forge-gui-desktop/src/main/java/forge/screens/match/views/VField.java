@@ -457,8 +457,7 @@ public class VField implements IVDoc<CField> {
             return null;
         }
 
-        commanderBracketTooltipLine = Localizer.getInstance().getMessage("lblBracket")
-                + ": " + CommanderBracketService.getBestAvailableBracket(deck);
+        commanderBracketTooltipLine = Localizer.getInstance().getMessage("lblBracket") + ": " + CommanderBracketService.getBestAvailableBracket(deck);
         return commanderBracketTooltipLine;
     }
 

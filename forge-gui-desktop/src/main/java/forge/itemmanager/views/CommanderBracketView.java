@@ -36,6 +36,7 @@ public final class CommanderBracketView extends CommanderBracketTextView<DeckPro
     }
 
     private Deck getMaterializedDeck(final DeckProxy deck) {
+        // Some proxies generate a new deck on access; timer refreshes must continue analyzing the same instance.
         if (deck != materializedProxy) {
             materializedProxy = deck;
             materializedDeck = deck.getDeck();

@@ -1,16 +1,16 @@
-package forge.util;
+package forge.deck;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class JsonUtil {
+final class JsonUtil {
     private JsonUtil() {
     }
 
-    public static Object parse(final String text) throws IOException {
+    static Object parse(final String text) throws IOException {
         final Parser parser = new Parser(text);
         final Object value = parser.readValue();
         parser.skipWhitespace();
@@ -20,7 +20,7 @@ public final class JsonUtil {
         return value;
     }
 
-    public static String escape(final String value) {
+    static String escape(final String value) {
         final StringBuilder sb = new StringBuilder();
         for (int i = 0; i < value.length(); i++) {
             final char c = value.charAt(i);
@@ -71,7 +71,7 @@ public final class JsonUtil {
 
         private Map<String, Object> readObject() throws IOException {
             index++;
-            final Map<String, Object> result = new HashMap<>();
+            final Map<String, Object> result = new LinkedHashMap<>();
             skipWhitespace();
             if (peek('}')) {
                 index++;

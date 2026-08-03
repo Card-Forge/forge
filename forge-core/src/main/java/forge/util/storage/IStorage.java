@@ -32,6 +32,7 @@ public interface IStorage<T> extends Iterable<T>, IHasName {
     int size();
     void add(T item);
     void add(String name, T item);
+    /** Updates metadata without rewriting the full stored item when supported. */
     default boolean saveMetadata(T item) { return false; }
     void delete(String deckName);
     IStorage<IStorage<T>> getFolders();

@@ -27,7 +27,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -60,8 +59,7 @@ abstract class CommanderBracketTextView<T extends InventoryItem> extends ItemVie
         this.attributionLabel.setText(getAttributionHtml());
         this.attributionLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.attributionLabel.setBorder(new EmptyBorder(0, 8, 8, 8));
-        this.attributionLabel.setToolTipText("<html>" + localizer.getMessage("lblCommanderBracketExplore")
-                + "<br>" + ATTRIBUTION_URL + "</html>");
+        this.attributionLabel.setToolTipText("<html>" + localizer.getMessage("lblCommanderBracketExplore") + "<br>" + ATTRIBUTION_URL + "</html>");
         this.attributionLabel.setVisible(false);
         this.attributionLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -167,11 +165,11 @@ abstract class CommanderBracketTextView<T extends InventoryItem> extends ItemVie
 
     @Override
     protected void onSetSelectedIndices(final Iterable<Integer> indices) {
-        final List<Integer> indexList = new ArrayList<>();
+        selectedIndex = -1;
         for (final Integer index : indices) {
-            indexList.add(index);
+            selectedIndex = index;
+            break;
         }
-        selectedIndex = indexList.isEmpty() ? -1 : indexList.get(0);
         updateText();
         onSelectionChange();
     }
@@ -195,8 +193,9 @@ abstract class CommanderBracketTextView<T extends InventoryItem> extends ItemVie
 
     protected final void updateText() {
         final String text = getText();
-        final boolean hasAttribution = text.contains(getAttributionLabel());
-        textArea.setText(stripAttribution(text));
+        final String attribution = getAttributionLabel();
+        final boolean hasAttribution = text.contains(attribution);
+        textArea.setText(stripAttribution(text, attribution));
         attributionLabel.setVisible(hasAttribution);
         textArea.setCaretPosition(0);
         updateRefreshTimer();
@@ -208,6 +207,7 @@ abstract class CommanderBracketTextView<T extends InventoryItem> extends ItemVie
         return false;
     }
 
+    // Swing otherwise sizes the wrapped text against its unconstrained preferred width and clips it in narrower views.
     private final class BracketPanel extends FPanel implements Scrollable {
         private BracketPanel() {
             super(new BorderLayout());
@@ -266,17 +266,15 @@ abstract class CommanderBracketTextView<T extends InventoryItem> extends ItemVie
     }
 
     private String getAttributionHtml() {
-        return "<html>" + localizer.getMessage("lblCommanderBracketPoweredBy")
-                + " <font color=\"" + LINK_COLOR + "\"><u>"
-                + localizer.getMessage("lblCommanderBracketSiteName")
-                + "</u></font></html>";
+        return "<html>" + localizer.getMessage("lblCommanderBracketPoweredBy") + " <font color=\"" + LINK_COLOR + "\"><u>"
+                + localizer.getMessage("lblCommanderBracketSiteName") + "</u></font></html>";
     }
 
-    private String stripAttribution(final String text) {
+    private static String stripAttribution(final String text, final String attribution) {
         final StringBuilder result = new StringBuilder();
         final String[] lines = text.split("\\R", -1);
         for (final String line : lines) {
-            if (getAttributionLabel().equals(line.trim())) {
+            if (attribution.equals(line.trim())) {
                 continue;
             }
             if (result.length() > 0) {
