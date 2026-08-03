@@ -35,8 +35,9 @@ A new user can build a deck and play a complete Commander game against AI with n
 | No progressive degradation in 3+ hour games | 9a (singleton lifecycle), 9b (log buffer, timer cleanup) | open |
 | Dark theme applied | 6a | **DONE** |
 | Commander-only mode works | 2b, 2e | **DONE** (2b), open (2e) |
+| Infinite loops end in a declared draw, never a hang | 11a-11e (stack limit, RepeatEffect, trigger count, fingerprint, dialog) | open |
 
-Post-v1: multiplayer online (Section 8), advanced board UX (Section 7 polish), mobile parity enhancements (Section 10).
+Post-v1: multiplayer online (Section 8), advanced board UX (Section 7 polish), mobile parity enhancements (Section 10), loop shortcuts & paper-rules protocol (11f-11i).
 
 ---
 
@@ -340,6 +341,46 @@ Desktop (`forge-gui-desktop`, Swing/FlatLaf) and mobile (`forge-gui-mobile`, LiG
 
 ---
 
+## 11. Infinite Loop Handling
+
+**Status: Planned. Tracked as issue [#44](https://github.com/Aderon3D/Reforge-Commander/issues/44) with sub-issues #45–#53. Nothing implemented yet.**
+
+The goal is the first digital MTG engine that handles infinite loops the way paper does (CR 732): correctly, intuitively, and performant. No digital engine gets this right today — MTGO's detection is buggy (Amalia 2024), XMage's draw-vote is exploitable (Issue #6212), MTGA freezes. With token-heavy strategies viable (1c DONE), loops are no longer an edge case.
+
+### Current Forge safety valves (keep, they're the safety net)
+
+- **Stack > 999 → draw** (`MagicStack.java:261`) — fires after 1000+ entries
+- **AI priority loop > 999** (`PhaseHandler.java:1039`) — human unbounded
+- **Waiting triggers > 9999** (`TriggerHandler.java:248`) — OOM guard
+- **State trigger dedup** (`TriggerHandler.java:364`) — CR 603.2b/c
+- **RepeatEffect MaxRepeat** (`RepeatEffect.java:23`) — Helm of Obedience `break` TODO unresolved
+
+Missing: no game-state fingerprinting, no repeat detection, no shortcut mechanism.
+
+### Required Fixes
+
+| # | Gap | Fix | Issue | Milestone |
+|---|-----|-----|-------|-----------|
+| 11a | Stack limit is 999, no explicit loop-draw declaration | Lower to 500; add `loopDraw()` declaration + game-over "infinite loop" message | #45 | v1 |
+| 11b | `RepeatEffect` Helm of Obedience case does `break` instead of declaring a draw (TODO at line 41) | Replace with `intentionalDraw()` + `GameEndReason.Draw`; add default `maxRepeat` | #46 | v1 |
+| 11c | Trigger chain loops (A→B→A) not caught by per-trigger dedup | Track trigger fire counts per turn in `TriggerHandler`; prompt draw declaration past a threshold | #47 | v1 |
+| 11d | No detection that game state is *repeating* — the reliable loop signal | `GameStateFingerprint` hashed after each resolution; 3 consecutive identical fingerprints = loop | #48 | v1 |
+| 11e | No player-facing flow when a loop is found | Loop-detected dialog: Declare Draw / Break Loop / Continue (max 5); mandatory loops skip dialog → immediate draw; AI breaks or draws autonomously | #49 | v1 |
+| 11f | Deterministic loops (e.g. Umbral Mantle) require manual iteration with full UI cost | `RepeatNExecutor`: "Repeat N times" executed server-side with fingerprint verification + Esc interrupt; AI computes outcome mathematically | #50 | v2 |
+| 11g | Repetitive triggers require manual response each time | Auto-yield system (MTGO-style): yield this trigger / this turn / all from card / all of type; "Manage Yields" panel | #51 | v2 |
+| 11h | No digital equivalent of paper shortcut proposal (CR 720) | `ShortcutManager`: declare loop + count → opponents accept/lower/interrupt/object; mandatory loop objection → draw | #52 | v3 |
+| 11i | Slow-play stalls (esp. while others loop) | Priority/turn/shortcut timers with auto-pass; 3 consecutive timeouts → draw | #53 | v3 |
+
+### Verification
+
+- Mandatory infinite loop (Scalelord Reckoner mirror) → draw, not hang, in < 3 cycles of 11d
+- Optional loop with a break → dialog appears, "Break Loop" works
+- Deterministic loop → "Repeat 1000 times" executes without UI lag, interruptible
+- No regression: legitimate long chains (Dragonstorm, Splinter Twin) still resolve
+- All games ending in loop-draw show an explicit reason, not a plain "you lost"
+
+---
+
 ## Priority Matrix
 
 | Priority | Item | Effort | Value |
@@ -387,3 +428,12 @@ Desktop (`forge-gui-desktop`, Swing/FlatLaf) and mobile (`forge-gui-mobile`, LiG
 | P3 | 4b — Upstream sync documentation | 0.5 day | Process |
 | P3 | 7e — Banked timeout system (3 tokens of fast-play budget) | 2 days | Competitive pacing |
 | P3 | 8e — Lobby chat with preset phrases | 2 days | Communication |
+| P1 | 11a — Stack limit 500 + loop-draw declaration (#45) | 0.5 day | First safety win; explicit loop draw instead of generic game-over |
+| P1 | 11b — RepeatEffect draw declaration, Helm of Obedience (#46) | 0.5 day | Fixes known TODO; mandatory loop ends as draw |
+| P1 | 11c — State trigger fire-count detection (#47) | 1 day | Catches trigger chains (A→B→A) the stack limit misses |
+| P1 | 11d — Game state fingerprinting (#48) | 2-3 days | The core detection: consecutive repeats = loop. Novel vs every other engine |
+| P1 | 11e — Loop-detected dialog + AI loop breaking (#49) | 2-3 days | Player-facing loop UX; mandatory loops → immediate draw |
+| P2 | 11f — Repeat-N shortcut for deterministic loops (#50) | 3-4 days | "Do this 1000 times" executed server-side, interruptible |
+| P2 | 11g — Auto-yield system (#51) | 3-4 days | MTGO-style trigger yields; kills repetitive-trigger fatigue |
+| P3 | 11h — CR 720 shortcut proposal protocol (#52) | 1-2 weeks | Paper-grade loop declaration with accept/lower/interrupt/object |
+| P3 | 11i — Slow-play timer + AFK draw (#53) | 3-4 days | Auto-pass on timeout; 3 timeouts → draw |
