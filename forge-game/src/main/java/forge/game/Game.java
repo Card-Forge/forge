@@ -775,6 +775,54 @@ public class Game {
         }
         visitor.visitAll(getStackZone().getCards());
     }
+
+    /**
+     * Like {@link #forEachCardInGame(Visitor, boolean)} but does NOT expand
+     * stacked tokens on the battlefield zone. Stacked tokens appear as their
+     * prototype Card (one per stack) rather than being materialized into
+     * N individual Card objects.
+     *
+     * Use this in hot paths (static ability evaluation) where the O(1)
+     * stacking optimization should be preserved.
+     *
+     * ponytail: copies zone iteration order from forEachCardInGame.
+     * Upgrade to a withStacks flag on forEachCardInGame if more callers need this.
+     */
+    // doc:1c DONE
+    public void forEachCardInGameUnexpanded(Visitor<Card> visitor) {
+        for (final Player player : getPlayers()) {
+            if (!visitor.visitAll(player.getZone(ZoneType.Graveyard).getCards())) {
+                return;
+            }
+            if (!visitor.visitAll(player.getZone(ZoneType.Hand).getCards())) {
+                return;
+            }
+            if (!visitor.visitAll(player.getZone(ZoneType.Library).getCards())) {
+                return;
+            }
+            // Unexpanded: stacked tokens stay as prototype references
+            final PlayerZone bfZone = player.getZone(ZoneType.Battlefield);
+            if (!visitor.visitAll(bfZone instanceof PlayerZoneBattlefield
+                    ? ((PlayerZoneBattlefield) bfZone).getCardsUnexpanded()
+                    : bfZone.getCards())) {
+                return;
+            }
+            if (!visitor.visitAll(player.getZone(ZoneType.Exile).getCards())) {
+                return;
+            }
+            if (!visitor.visitAll(player.getCardsIn(ZoneType.PART_OF_COMMAND_ZONE))) {
+                return;
+            }
+            if (!visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
+                return;
+            }
+            if (!visitor.visitAll(player.getInboundTokens())) {
+                return;
+            }
+        }
+        visitor.visitAll(getStackZone().getCards());
+    }
+
     public CardCollectionView getCardsInGame() {
         final CardCollection all = new CardCollection();
         Visitor<Card> visitor = new Visitor<Card>() {

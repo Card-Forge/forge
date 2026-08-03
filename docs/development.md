@@ -1,5 +1,9 @@
 # Reforge Commander — Development Status & Roadmap
 
+> **Personal project.** This roadmap is for my own use and is not a commitment to anyone. The code is
+> largely AI-generated and may contain bugs; use it at your own risk, no responsibility is taken.
+> This is a fork of upstream Forge — see the [README](../README.md) and [upstream-sync](upstream-sync.md).
+
 ## Product Vision
 
 Reforge Commander transforms upstream Forge — a clunky but extremely feature-rich general MTG client — into a **modern, Commander-first application**:
@@ -19,6 +23,22 @@ Reforge Commander transforms upstream Forge — a clunky but extremely feature-r
 
 Architecture choices (additive-only changes, system property gating, upstream-agnostic layering) are sound. The signature flyweight is wired into token creation (1a) with battlefield-zone tracking surviving batch creation (1b) and verified promotion via `CardCopyService` (1f). The UI isolates Commander modes but still mirrors upstream patterns rather than a ground-up redesign. This document tracks known gaps, planned fixes, and verification criteria.
 
+## v1 Milestone — "Playable Commander, Done"
+
+A new user can build a deck and play a complete Commander game against AI with no friction. An expert gets deep customization. This is the release bar.
+
+| Requirement | Items | Status |
+|-------------|-------|--------|
+| Flyweight O(1) delivered in real play | 1c (static-eval batching) **DONE**, 1d (GameCopier flyweight) | open |
+| Core UX: lobby, game log, playable card highlighting | 5b, 5d, 5e | open |
+| Stable 4-player pod layout | 9c | open |
+| No progressive degradation in 3+ hour games | 9a (singleton lifecycle), 9b (log buffer, timer cleanup) | open |
+| Dark theme applied | 6a | **DONE** |
+| Commander-only mode works | 2b, 2e | **DONE** (2b), open (2e) |
+| Infinite loops end in a declared draw, never a hang | 11a-11e (stack limit, RepeatEffect, trigger count, fingerprint, dialog) | open |
+
+Post-v1: multiplayer online (Section 8), advanced board UX (Section 7 polish), mobile parity enhancements (Section 10), loop shortcuts & paper-rules protocol (11f-11i).
+
 ---
 
 ## 1. StackedTokenCard — Flyweight Integration
@@ -33,7 +53,7 @@ Status legend: `DONE` / `PARTIAL` / open. Code carries `// doc:<item> <STATUS>` 
 |---|-----|--------|-----|--------|
 | 1a | `StackedTokenCard` is never instantiated by the game engine | Zero performance benefit from flyweight today | Wire stack creation into `TokenEffectBase.makeTokenTable()` → `PlayerZoneBattlefield.tryStackToken()` at move-to-play time | **DONE** — `TokenEffectBase.java:172-174`, `PlayerZoneBattlefield.java:82` |
 | 1b | Zone management (`Zone`) does not understand stacked tokens | Game state, counting, filtering all ignore stacks | Add `StackedTokenCard` tracking alongside `Card` tracking in the battlefield zone; `getCards()`/`iterator()` expand stacks first | **DONE** — `PlayerZoneBattlefield` stacks survive a burst of `add()` calls via view-refresh suppression during `TokenEffectBase` token creation (`PlayerZone.java:85`, `TokenEffectBase.java:112-125`); first real read materializes all at once |
-| 1c | Static ability checking ignores stacks | No performance gain from batched static evaluation | `StaticAbility` resolver must accept a count parameter or recognize `StackedTokenCard` to evaluate once for N tokens | |
+| 1c | Static ability checking ignores stacks | No performance gain from batched static evaluation | `StaticAbility` resolver must accept a count parameter or recognize `StackedTokenCard` to evaluate once for N tokens | **DONE** — `checkStaticAbilities()` now uses `forEachCardInGameUnexpanded()` which iterates stacked prototypes without materializing O(N) cards; continuous effects apply to prototype and are inherited by promoted copies via `CardCopyService` (`Game.java:777`, `GameAction.java:1098`, `PlayerZoneBattlefield.java:171`) |
 | 1d | `GameCopier` snapshots individual cards | AI state cloning copies O(N) cards instead of O(1) stacks | `GameCopier` must copy `StackedTokenCard` as an opaque flyweight rather than materializing individual cards | |
 | 1e | `canMerge()` is conservative — blocks on counters and tapped state | Misses optimization opportunities for tokens with some modifications | Relax `canMerge()` after confirming game rules allow: summoning sickness is identity-irrelevant, temporary pumps from static abilities should not block merge | |
 | 1f | `promote()` assumes `CardCopyService` exists with the right API | Verify `CardCopyService.copyCard()` exists and correctly creates independent copies with fresh card IDs | Audit `CardCopyService`; if it does not exist, build a card copy method in `StackedTokenCard` directly | **DONE** — `CardCopyService.copyCard(true)` verified and used in `promote()` (`StackedTokenCard.java:150`) |
@@ -228,29 +248,22 @@ Tokens must scale efficiently:
 
 ## 8. Multiplayer Architecture
 
-**Status: Current P2P implementation is unreliable. Requires redesign.**
+**Status: Descope to P2. Local/hot-seat Commander covers the core flow. Online play is a value-add after v1.**
 
-### Architectural Decision
+### Current state
 
-Move from P2P to client-server model. A dedicated server binary handles game logic and state validation. Clients are pure views that render state and forward input. This prevents cheating, enables spectators, and allows game history recording.
+P2P implementation exists but is unreliable. A full client-server rewrite is a significant product pivot — upstream Forge's own netplay is weak. This is deferred until the core engine claims (O(1) tokens) and UX are delivered.
 
-### Required Components
+### Future scope (P2, post-v1)
 
 | Component | Description | Priority |
 |-----------|-------------|----------|
-| Matchmaking lobby | Browse active games by format, player count, bracket. Create / join. | P1 |
-| Server-authoritative game state | All game logic runs server-side. Client cannot modify state. | P1 |
-| Spectator mode | Join a running game as observer. See everything or per-role restrict. | P2 |
+| Server-authoritative game state | All game logic runs server-side. Client cannot modify state. | P2 |
+| Matchmaking lobby | Browse active games by format, player count. Create / join. | P2 |
+| Spectator mode | Join a running game as observer. | P2 |
 | Replay system | Record complete game actions. Replay with seek controls. | P2 |
-| Chat | Per-game and per-lobby chat. Preset phrases for safety. Private messages. | P2 |
-| Deck validation on connect | Server validates deck legality before game start (format, bracket, color identity). | P1 |
-
-### Multiplayer UI Flow (New)
-
-1. Main screen: three options — **Quick Play** (1v1 AI, immediate), **Local Game** (hot-seat or friends on same machine), **Online Game** (server browser)
-2. Online: server list → create or join → deck selection → ready → start
-3. Deck visibility: opt-in toggle to show opponents your commander/deck before mulligan
-4. Ready check: all players must toggle ready before host can start
+| Chat | Per-game chat with preset phrases. | P2 |
+| Deck validation on connect | Server validates deck legality before game start. | P2 |
 
 ---
 
@@ -267,7 +280,7 @@ The progressive slowdown during long sessions is the most frequently reported up
 
 ### Token Performance (StackedTokenCard Wiring)
 
-Covered in Section 1 (1a/1g/1b done). Reiterate: the remaining wiring (1c static-eval batching, 1d GameCopier) is the single most impactful performance improvement available. Without it, the app cannot handle token-generating commanders (Krenko, Scute Swarm, Chatterfang) — which are among the most popular Commander decks.
+Covered in Section 1 (1a/1g/1b/1c done). The remaining wiring (1d GameCopier) is the last piece needed for full O(1) token performance. Without 1d, AI state cloning still copies O(N) cards.
 
 ### Long-Session Stability
 
@@ -328,6 +341,46 @@ Desktop (`forge-gui-desktop`, Swing/FlatLaf) and mobile (`forge-gui-mobile`, LiG
 
 ---
 
+## 11. Infinite Loop Handling
+
+**Status: Planned. Tracked as issue [#44](https://github.com/Aderon3D/Reforge-Commander/issues/44) with sub-issues #45–#53. Nothing implemented yet.**
+
+The goal is the first digital MTG engine that handles infinite loops the way paper does (CR 732): correctly, intuitively, and performant. No digital engine gets this right today — MTGO's detection is buggy (Amalia 2024), XMage's draw-vote is exploitable (Issue #6212), MTGA freezes. With token-heavy strategies viable (1c DONE), loops are no longer an edge case.
+
+### Current Forge safety valves (keep, they're the safety net)
+
+- **Stack > 999 → draw** (`MagicStack.java:261`) — fires after 1000+ entries
+- **AI priority loop > 999** (`PhaseHandler.java:1039`) — human unbounded
+- **Waiting triggers > 9999** (`TriggerHandler.java:248`) — OOM guard
+- **State trigger dedup** (`TriggerHandler.java:364`) — CR 603.2b/c
+- **RepeatEffect MaxRepeat** (`RepeatEffect.java:23`) — Helm of Obedience `break` TODO unresolved
+
+Missing: no game-state fingerprinting, no repeat detection, no shortcut mechanism.
+
+### Required Fixes
+
+| # | Gap | Fix | Issue | Milestone |
+|---|-----|-----|-------|-----------|
+| 11a | Stack limit is 999, no explicit loop-draw declaration | Lower to 500; add `loopDraw()` declaration + game-over "infinite loop" message | #45 | v1 |
+| 11b | `RepeatEffect` Helm of Obedience case does `break` instead of declaring a draw (TODO at line 41) | Replace with `intentionalDraw()` + `GameEndReason.Draw`; add default `maxRepeat` | #46 | v1 |
+| 11c | Trigger chain loops (A→B→A) not caught by per-trigger dedup | Track trigger fire counts per turn in `TriggerHandler`; prompt draw declaration past a threshold | #47 | v1 |
+| 11d | No detection that game state is *repeating* — the reliable loop signal | `GameStateFingerprint` hashed after each resolution; 3 consecutive identical fingerprints = loop | #48 | v1 |
+| 11e | No player-facing flow when a loop is found | Loop-detected dialog: Declare Draw / Break Loop / Continue (max 5); mandatory loops skip dialog → immediate draw; AI breaks or draws autonomously | #49 | v1 |
+| 11f | Deterministic loops (e.g. Umbral Mantle) require manual iteration with full UI cost | `RepeatNExecutor`: "Repeat N times" executed server-side with fingerprint verification + Esc interrupt; AI computes outcome mathematically | #50 | v2 |
+| 11g | Repetitive triggers require manual response each time | Auto-yield system (MTGO-style): yield this trigger / this turn / all from card / all of type; "Manage Yields" panel | #51 | v2 |
+| 11h | No digital equivalent of paper shortcut proposal (CR 720) | `ShortcutManager`: declare loop + count → opponents accept/lower/interrupt/object; mandatory loop objection → draw | #52 | v3 |
+| 11i | Slow-play stalls (esp. while others loop) | Priority/turn/shortcut timers with auto-pass; 3 consecutive timeouts → draw | #53 | v3 |
+
+### Verification
+
+- Mandatory infinite loop (Scalelord Reckoner mirror) → draw, not hang, in < 3 cycles of 11d
+- Optional loop with a break → dialog appears, "Break Loop" works
+- Deterministic loop → "Repeat 1000 times" executes without UI lag, interruptible
+- No regression: legitimate long chains (Dragonstorm, Splinter Twin) still resolve
+- All games ending in loop-draw show an explicit reason, not a plain "you lost"
+
+---
+
 ## Priority Matrix
 
 | Priority | Item | Effort | Value |
@@ -337,7 +390,7 @@ Desktop (`forge-gui-desktop`, Swing/FlatLaf) and mobile (`forge-gui-mobile`, LiG
 | P0 | 5a — Smart default game setup: reduce clicks to start a Commander game | 2 days | Core UX goal — **DONE: first deck auto-selected and applied, precon fallback for fresh installs** |
 | P0 | 6a — FlatLaf integration (`FlatLaf.setup()`) | 1 hour | Instant visual modernization — **DONE: FlatLaf 3.7.2 applied in `ReforgeCommanderApp.main()`** |
 | P1 | 1b — Zone tracking for stacked tokens | 2-3 days | Enables all downstream consumers — **DONE: stacks survive burst via view-refresh suppression** |
-| P1 | 1c — Static-eval batching (count param for StaticAbility resolver) | 2-3 days | Single most impactful remaining perf win — O(1) static eval for N identical tokens |
+| P1 | ~~1c — Static-eval batching (count param for StaticAbility resolver)~~ **DONE** | 2-3 days | Single most impactful remaining perf win — O(1) static eval for N identical tokens — **DONE: `forEachCardInGameUnexpanded()` iterates stacked prototypes; continuous effects applied to prototype, inherited by promoted copies** |
 | P1 | 1d — GameCopier flyweight support | 1 day | AI performance benefit — O(1) clone instead of O(N) card copy |
 | P1 | ~~2b — Reduce VSubmenuPlayCommander duplication~~ **DONE** | 0.5 day | Maintainability |
 | P1 | 5b — Simplify lobby: prefill Commander variant, suggest deck, hide unused slots | 1 day | Core UX goal |
@@ -346,8 +399,8 @@ Desktop (`forge-gui-desktop`, Swing/FlatLaf) and mobile (`forge-gui-mobile`, LiG
 | P1 | 7a — Tiered priority system (auto-pass through full control) | 3-4 days | Core gameplay UX |
 | P1 | 7b — Phase strip with clickable stops | 2 days | Table-stakes feature |
 | P1 | 7d — Token stacking with count badge (visual only) | 1 day | Essential for token-heavy board states |
-| P1 | 8a — Server-authoritative multiplayer (client-server) | 2-3 weeks | Largest single feature, unlocks matchmaking |
-| P1 | 8c — Deck validation on server connect | 2 days | Match integrity |
+| P2 | 8a — Server-authoritative multiplayer (client-server) | 2-3 weeks | Post-v1. Unlocks matchmaking and online play |
+| P2 | 8c — Deck validation on server connect | 2 days | Post-v1. Match integrity |
 | P1 | 9a — Singleton lifecycle audit for memory leaks | 2 days | Long-session stability |
 | P1 | 9e — Card image bundling + cache fallback chain | 2 days | First-launch experience |
 | P2 | 1e — Relax canMerge() for real-world scenarios | 0.5 day | More merge opportunities |
@@ -375,3 +428,12 @@ Desktop (`forge-gui-desktop`, Swing/FlatLaf) and mobile (`forge-gui-mobile`, LiG
 | P3 | 4b — Upstream sync documentation | 0.5 day | Process |
 | P3 | 7e — Banked timeout system (3 tokens of fast-play budget) | 2 days | Competitive pacing |
 | P3 | 8e — Lobby chat with preset phrases | 2 days | Communication |
+| P1 | 11a — Stack limit 500 + loop-draw declaration (#45) | 0.5 day | First safety win; explicit loop draw instead of generic game-over |
+| P1 | 11b — RepeatEffect draw declaration, Helm of Obedience (#46) | 0.5 day | Fixes known TODO; mandatory loop ends as draw |
+| P1 | 11c — State trigger fire-count detection (#47) | 1 day | Catches trigger chains (A→B→A) the stack limit misses |
+| P1 | 11d — Game state fingerprinting (#48) | 2-3 days | The core detection: consecutive repeats = loop. Novel vs every other engine |
+| P1 | 11e — Loop-detected dialog + AI loop breaking (#49) | 2-3 days | Player-facing loop UX; mandatory loops → immediate draw |
+| P2 | 11f — Repeat-N shortcut for deterministic loops (#50) | 3-4 days | "Do this 1000 times" executed server-side, interruptible |
+| P2 | 11g — Auto-yield system (#51) | 3-4 days | MTGO-style trigger yields; kills repetitive-trigger fatigue |
+| P3 | 11h — CR 720 shortcut proposal protocol (#52) | 1-2 weeks | Paper-grade loop declaration with accept/lower/interrupt/object |
+| P3 | 11i — Slow-play timer + AFK draw (#53) | 3-4 days | Auto-pass on timeout; 3 timeouts → draw |
