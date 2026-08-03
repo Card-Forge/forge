@@ -6,16 +6,6 @@ With the addition of new planes in Adventure Mode, comes a framework to allow gr
 
 Modding Adventure mode comes in many fashions. From making small changes to a core plane, such as changing the music that plays on the overworld. To something as complex as an entirely new plane. Regardless of your intended goals, the first thing to do is set-up a back-up method. As any changes you haven't had incorporated into the main game, will potentially be lost on each update of Forge. Since this is a Git project, the method that will be recommended by this wiki, and referenced for the future, is simply to create your own git branch, and use a local repository to control all your files. It is also recommended to follow the directions to [set-up IntelliJ](https://github.com/Card-Forge/forge/wiki/IntelliJ-setup), to manage your local files. (Again, this is the method that will be referenced elsewhere in this wiki.) 
 
-### Battle Backgrounds
-
-Add any number of JPG, JPEG, or PNG files to `<plane>/skin/battle_backgrounds/<folder>/`; Forge randomly selects one per battle and avoids immediate repeats. Category folders are `forest`, `swamp`, `mountain`, `island`, `plains`, `waste`, `common`, `cave`, `dungeon`, and `castle`, optionally followed by a `white`, `blue`, `black`, `red`, `green`, or `colorless` biome folder.
-
-For hosted art, put one HTTPS index URL in `<plane>/skin/battle-backgrounds.txt`. Each non-comment index line is an image path relative to the index and `skin/battle_backgrounds/`.
-
-Automatic folders are checked from most to least specific: `encounter/<poi>/<enemy>`, `enemy/<enemy>`, `map/<poi>/<map>`, `map/<map>`, `poi/<poi>`, `<category>/<biome>`, and `<category>`. Canonical JSON names and map paths are lowercased and converted to hyphenated path segments.
-
-An explicit `battleBackground` folder on a TMX enemy, enemy definition, TMX map, or point of interest takes priority at that scope. For every candidate folder Forge checks the plane cache, plane files, then common files. Remote index failures use the last cached index, and missing folders continue through the existing Adventure skin fallbacks.
-
 ### Tools
 
 The following additional tools can also be very useful, or even mandatory, to have for your mod, depending on what all you want to do in your mod/addition.
