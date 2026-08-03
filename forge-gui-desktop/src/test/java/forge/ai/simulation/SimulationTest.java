@@ -45,7 +45,7 @@ public class SimulationTest extends AITest {
         return game;
     }
 
-    protected GameSimulator createSimulator(Game game, Player p) {
-        return new GameSimulator(new SimulationController(new Score(0), 0), game, p, null);
+    protected GameSimulator createSimulator(Player p) {
+        return new GameSimulator(new SimulationController(new Score(0), 0), p.getGame(), p, null);
     }
 }

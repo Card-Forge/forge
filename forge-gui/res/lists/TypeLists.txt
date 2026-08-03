@@ -395,6 +395,7 @@ Ajani
 Aminatou
 Angrath
 Arlinn
+Arzakon
 Ashiok
 Bahamut
 Basri
@@ -465,6 +466,7 @@ Vraska
 Vronos
 Will
 Windgrace
+Worzel
 Wrenn
 Xenagos
 Yanggu
