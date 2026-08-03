@@ -1,4 +1,6 @@
 /*
+ * REFORGE COMMANDER EXTENSION
+ *
  * Reforge Commander Main Entry Point
  *
  * Dedicated application entry point for Reforge Commander.

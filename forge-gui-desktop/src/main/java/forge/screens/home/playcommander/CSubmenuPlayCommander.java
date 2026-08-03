@@ -1,3 +1,8 @@
+/*
+ * REFORGE COMMANDER EXTENSION
+ *
+ * Controller for the Commander play submenu.
+ */
 package forge.screens.home.playcommander;
 
 import java.util.ArrayList;

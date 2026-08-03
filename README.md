@@ -12,11 +12,9 @@ Target: a new user should build a deck and start a game in under two minutes. An
 
 - **Commander-first UX**: The entire UI is optimized around Commander/EDH. Non-Commander modes are hidden. Smart defaults reduce setup friction.
 - **Multiplayer-first**: Playing with friends is the primary flow. AI games exist but the UX prioritizes lobby, invites, and match setup.
-- **Performance at scale**: Flyweight token engine (`StackedTokenCard`) keeps large board states (Scute Swarm, Krenko) snappy. O(1) memory for identical token populations.
+- **Performance at scale**: Flyweight token engine (`StackedTokenCard`) is wired into token creation. Static-eval batching (1c) and GameCopier flyweight (1d) still needed to deliver the full O(1) win in real play. See [Development Status](docs/development.md).
 - **Personalization without clutter**: Powerful deck tools, theme options, and preference knobs for power users — surfaced only when needed.
 - **Upstream-compatible**: Additive-only code changes. Card scripts and rules updates merge cleanly from `Card-Forge/forge`.
-
-> **Note:** The flyweight optimization class exists but is not yet wired into the game engine. See [Development Status](docs/development.md) for the integration roadmap.
 
 ---
 
