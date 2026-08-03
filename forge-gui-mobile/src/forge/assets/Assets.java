@@ -66,7 +66,7 @@ public class Assets implements Disposable {
      * absolute(), which works fine in the sandbox. Every other platform keeps absolute() throughout
      * — Android's assets are extracted to storage and are NOT reachable via internal() APK paths.
      */
-    static FileHandle getFileHandle(String path) {
+    public static FileHandle getFileHandle(String path) {
         if (GuiBase.isIOS() && path.startsWith(ForgeConstants.ASSETS_DIR)) {
             return Gdx.files.internal(path.substring(ForgeConstants.ASSETS_DIR.length()));
         }

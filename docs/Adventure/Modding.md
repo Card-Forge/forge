@@ -8,72 +8,13 @@ Modding Adventure mode comes in many fashions. From making small changes to a co
 
 ### Battle Backgrounds
 
-Adventure planes can provide one or more battle backgrounds in `<plane>/skin/battle_backgrounds/<category>/`. Supported categories are `forest`, `swamp`, `mountain`, `island`, `plains`, `waste`, `common`, `cave`, `dungeon`, and `castle`. Add any number of `.jpg`, `.jpeg`, or `.png` files directly to a category folder. Forge selects one at random for each battle and avoids repeating the previous image when alternatives are available.
+Add any number of JPG, JPEG, or PNG files to `<plane>/skin/battle_backgrounds/<folder>/`; Forge randomly selects one per battle and avoids immediate repeats. Category folders are `forest`, `swamp`, `mountain`, `island`, `plains`, `waste`, `common`, `cave`, `dungeon`, and `castle`, optionally followed by a `white`, `blue`, `black`, `red`, `green`, or `colorless` biome folder.
 
-Planes can keep these images outside the Forge distribution by declaring them in `<plane>/skin/battle-backgrounds.txt`. For a small collection, each line can contain a path relative to `battle_backgrounds/`, followed by its direct HTTPS URL:
+For hosted art, put one HTTPS index URL in `<plane>/skin/battle-backgrounds.txt`. Each non-comment index line is an image path relative to the index and `skin/battle_backgrounds/`.
 
-`forest/forest_01.jpg https://example.com/forest/forest_01.jpg`
+Automatic folders are checked from most to least specific: `encounter/<poi>/<enemy>`, `enemy/<enemy>`, `map/<poi>/<map>`, `map/<map>`, `poi/<poi>`, `<category>/<biome>`, and `<category>`. Canonical JSON names and map paths are lowercased and converted to hyphenated path segments.
 
-Larger collections can keep a single URL in the plane and publish a remote index:
-
-`@manifest https://example.com/battle-backgrounds/index.txt`
-
-Each non-comment line in the remote index is an image path relative to both the index URL and `battle_backgrounds/`:
-
-`forest/forest_01.jpg`
-
-The URL must use HTTPS. Image responses must be JPG, JPEG, or PNG content. Forge downloads missing files to the selected plane's cache when Adventure starts. It caches the most recent valid remote index, so a temporary server failure keeps the last known collection available. The combined local and remote list is authoritative, so removing an image path also removes its cached image. This does not require a user setting. Local plane images and the existing Adventure backgrounds remain available when a download is incomplete or unavailable.
-
-Point-of-interest categories can also use biome subfolders named `white`, `blue`, `black`, `red`, `green`, or `colorless`, for example `battle_backgrounds/castle/red/`. The first non-empty folder in this order is used:
-
-1. An explicit background on the individual enemy object in a TMX map.
-2. The automatic encounter folder for the point of interest and enemy.
-3. An explicit background on the enemy archetype.
-4. The automatic enemy folder.
-5. An explicit map or floor background in the TMX map properties.
-6. The automatic map folder within the current point of interest.
-7. The automatic shared map folder.
-8. An explicit background on the point of interest.
-9. The automatic point-of-interest folder.
-10. The point-of-interest category and biome folder.
-11. The generic category folder.
-
-Automatic folders use the canonical `name` values from `points_of_interest.json` and `enemies.json`, not `displayName` or `nameOverride`. Names are lowercased, accents and apostrophes are removed, and other runs of punctuation or whitespace become `-`. For example, `Lich's Mirror` and `Lich` resolve to:
-
-- `encounter/lichs-mirror/lich/`
-- `enemy/lich/`
-- `poi/lichs-mirror/`
-
-Map paths are made relative to `maps/map/`, the `.tmx` extension is removed, and each path segment uses the same naming rule. A battle in `maps/map/magetower/floor_2.tmx` at `Lich's Mirror` checks both:
-
-- `map/lichs-mirror/magetower/floor-2/`
-- `map/magetower/floor-2/`
-
-Automatic matching needs no JSON or TMX changes. To override it, set `battleBackground` to a folder path relative to `battle_backgrounds/`. The same path can be used in a local file list or remote index, so local and downloaded backgrounds have identical configuration:
-
-```json
-{ "name": "Goblin Warlord", "battleBackground": "enemy/goblin-warlord" }
-```
-
-```json
-{ "name": "Fallen Empires Castle", "battleBackground": "poi/fallen-empires-castle" }
-```
-
-An individual enemy object in a TMX map can override its archetype with:
-
-```xml
-<property name="battleBackground" value="encounter/ashnod-boss"/>
-```
-
-A TMX map can override every battle on that map or floor with a map property:
-
-```xml
-<property name="battleBackground" value="map/ashnods-tower/foundry"/>
-```
-
-For each folder above, Forge checks the selected plane's cache, the current plane, and then the common Adventure assets. Folder values are explicit and can contain any number of nested directories.
-
-Images are not combined between fallback folders. If no rotation folder contains an image, Forge continues to use the existing single-image override, common Adventure image, current skin, or default skin. Existing plane configurations therefore do not need to change.
+An explicit `battleBackground` folder on a TMX enemy, enemy definition, TMX map, or point of interest takes priority at that scope. For every candidate folder Forge checks the plane cache, plane files, then common files. Remote index failures use the last cached index, and missing folders continue through the existing Adventure skin fallbacks.
 
 ### Tools
 
