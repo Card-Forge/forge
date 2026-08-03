@@ -1098,7 +1098,7 @@ public class GameAction {
         // ponytail: unexpanded battlefield keeps stacked tokens as prototype refs, O(S) stacks not O(N) cards.
         // doc:1c DONE
         // A stacked-token prototype stands for N identical tokens; replicate its continuous
-        // abilities N-fold (distinct instances via copy) so the effect applies once per token. // doc:55 DONE
+        // abilities N-fold (distinct instances via copy) so the effect applies once per token.
         final Map<Card, Integer> stackQuantity = Maps.newHashMap();
         for (final Player p : game.getPlayers()) {
             final PlayerZone bfZone = p.getZone(ZoneType.Battlefield);
