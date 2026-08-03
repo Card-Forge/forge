@@ -1,3 +1,9 @@
+/*
+ * REFORGE COMMANDER EXTENSION
+ *
+ * Commander-specific play submenu. Wraps a LocalLobby locked to GameType.Commander
+ * and delegates populate() to the shared VSubmenuConstructed.populateLobby().
+ */
 package forge.screens.home.playcommander;
 
 import forge.game.GameType;

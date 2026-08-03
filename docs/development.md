@@ -120,7 +120,7 @@ The `fetching.remove(destPath)` fix, JPEG quality optimization, and EDT dispatch
 
 ## 6. UI Technology Stack
 
-**Status: Not started. Current app uses raw Swing Metal L&F with a custom dark navy theming override in `FSkin.java`.**
+**Status: FlatLaf 3.7.2 applied (6a done). Dark theme wired via `ReforgeTheme` desktop + `FSkinColor.applyReforgeTheme()` mobile. SVG icons, custom window decorations, and font bundling remain.**
 
 The fastest path to a modern look requires zero rewrite of existing components. The entire GUI modernization can be achieved through a LookAndFeel switch plus custom painting on key panels.
 
@@ -300,6 +300,34 @@ Card images must never be a failure point:
 
 ---
 
+## 10. Platform Parity (Desktop ↔ Mobile)
+
+Desktop (`forge-gui-desktop`, Swing/FlatLaf) and mobile (`forge-gui-mobile`, LiGDX) are separate UI toolkits with **no** shared rendering, so full visual parity is not automatic. What we *can* keep in sync automatically is the **shared data/config layer** both renderers consume (colors, strings, mode availability). This section tracks the remaining desktop→mobile divergence and the guard that keeps it honest.
+
+**Status: Palette is shared (2f done). Mobile already offers Commander via the Constructed lobby's Variants selector (10a — not a gap). Parity guard in place (10c); Commander-defaulting on mobile is an optional enhancement (10b).**
+
+### Desktop-only features and their mobile disposition
+
+| Desktop feature | Mobile status | Action |
+|-----------------|---------------|--------|
+| FlatLaf dark L&F + `applyCommanderDarkTheme` | N/A — Li renders its own | Skip (no analog) |
+| Commander palette (`ReforgeTheme`, shared `forge-gui`) | **Shared** — mobile `FSkinColor.applyReforgeTheme()` | DONE (2f, PR #36) |
+| `VSubmenuPlayCommander` / `CSubmenuPlayCommander` Swing lobby | **Already offered** — `LobbyScreen` Variants selector (`GameType.Commander`) | DONE (10a — no gap) |
+| `ReforgeCommanderApp.main` entry + `reforge.commander.mode` gate | No entry-point analog | N/A for a general client |
+| Desktop home-mode whitelist (hide Quest/Draft/Puzzle/Planar/Gauntlet/Adventure) | Mobile `NewGameMenu` keeps all modes | Optional polish (10b) — mobile is a general client, don't hide modes |
+| `EMenuGroup`/`EDocID`/`LblMenuItem`-based home menu tree | LiGDX `HomeScreen`/`FMenuBar` scene-graph | No analog — spawned by shared engine, N/A |
+| `VLobby` NPE guards, `GauntletIO`, engine additions | Shared `forge-game`/`forge-gui` | Already shared |
+
+### Required Fixes
+
+| # | Gap | Impact | Fix | Status |
+|---|-----|--------|-----|--------|
+| 10a | (false gap) mobile had no dedicated Commander menu item | — | Mobile already starts Commander via Constructed → Variants → `GameType.Commander` in `LobbyScreen` | **N/A** |
+| 10b | Mobile doesn't default the lobby to Commander | Commander-first feel on a fresh Android client | Default `LobbyScreen` variant selection to `GameType.Commander` for new installs | optional |
+| 10c | No recurring check that desktop & mobile Reforge features stay in sync | A feature added to one platform can silently miss the other | `tools/platform-parity.sh` manifest guard wired into CI; a capability listed for both platforms fails CI if either implementation is missing | **DONE** |
+
+---
+
 ## Priority Matrix
 
 | Priority | Item | Effort | Value |
@@ -339,6 +367,9 @@ Card images must never be a failure point:
 | P2 | 9c — 4+ player board layout scaling | 3-4 days | Multiplayer Commander |
 | P2 | 9d — "Focus on active player" toggle | 2 days | 4-player UX |
 | P3 | 1h — Real-game benchmark | 1 day | Accurate performance measurement — **DONE: benchmark runs through the real entry path + `GameCopier`** |
+| P1 | 10a — Mobile Commander lobby entry | 1 day | Desktop↔mobile feature parity |
+| P1 | 10b — Mobile Commander-mode mode whitelist | 0.5 day | Commander-first brand on Android |
+| P1 | 10c — Platform-parity sync guard in CI | 0.5 day | Prevents silent desktop/mobile drift — **DONE: `tools/platform-parity.sh` wired into `test-build.yaml`** |
 | P3 | 2e — Localize lblCommander in all 10 locales | 0.5 day | i18n completeness |
 | P3 | 4b — Upstream sync documentation | 0.5 day | Process |
 | P3 | 7e — Banked timeout system (3 tokens of fast-play budget) | 2 days | Competitive pacing |
