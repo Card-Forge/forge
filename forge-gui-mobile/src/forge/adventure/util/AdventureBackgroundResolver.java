@@ -1,12 +1,16 @@
 package forge.adventure.util;
 
+import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.GameScene;
+import forge.adventure.stage.MapStage;
 import forge.assets.FSkinTexture;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Resolves Adventure battle backgrounds from the most specific configured folder
@@ -24,9 +28,25 @@ public final class AdventureBackgroundResolver {
                 : gameScene.getBiomeByPosition(pointOfInterest.getPosition());
 
         List<String> preferredFolders = new ArrayList<>();
-        addIfPresent(preferredFolders, DuelScene.instance().getBattleBackground());
+        EnemySprite enemy = DuelScene.instance().getEnemy();
+        String pointName = pointOfInterest == null ? null : pointOfInterest.getData().name;
+        if (enemy != null) {
+            addIfPresent(preferredFolders, enemy.battleBackground);
+            addNamedFolder(preferredFolders, "encounter", pointName, enemy.getData().name);
+            addIfPresent(preferredFolders, enemy.getData().battleBackground);
+            addNamedFolder(preferredFolders, "enemy", enemy.getData().name);
+        }
+
+        MapStage mapStage = MapStage.getInstance();
+        if (mapStage.isInMap()) {
+            addIfPresent(preferredFolders, mapStage.getBattleBackground());
+            String mapName = mapName(mapStage.getCurrentMap());
+            addMapFolder(preferredFolders, pointName, mapName);
+            addMapFolder(preferredFolders, null, mapName);
+        }
         if (pointOfInterest != null) {
             addIfPresent(preferredFolders, pointOfInterest.getData().battleBackground);
+            addNamedFolder(preferredFolders, "poi", pointName);
         }
 
         return getLocationBackground(location).getRandomAdventureBackground(
@@ -38,6 +58,61 @@ public final class AdventureBackgroundResolver {
         if (background != null && !background.isEmpty()) {
             backgrounds.add(background);
         }
+    }
+
+    private static void addNamedFolder(List<String> backgrounds, String type, String... names) {
+        StringBuilder folder = new StringBuilder(type);
+        for (String name : names) {
+            String slug = slug(name);
+            if (slug.isEmpty()) {
+                return;
+            }
+            folder.append('/').append(slug);
+        }
+        backgrounds.add(folder.toString());
+    }
+
+    private static void addMapFolder(List<String> backgrounds, String pointName, String mapName) {
+        if (mapName.isEmpty()) {
+            return;
+        }
+        String pointSlug = slug(pointName);
+        backgrounds.add("map/" + (pointSlug.isEmpty() ? "" : pointSlug + "/") + mapName);
+    }
+
+    private static String slug(String value) {
+        if (value == null) {
+            return "";
+        }
+        return Normalizer.normalize(value, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "")
+                .replaceAll("['‘’ʼ]", "")
+                .toLowerCase(Locale.ROOT)
+                .replaceAll("[^a-z0-9]+", "-")
+                .replaceAll("(^-+|-+$)", "");
+    }
+
+    private static String mapName(String path) {
+        if (path == null) {
+            return "";
+        }
+        String value = path.replace('\\', '/');
+        int mapRoot = value.indexOf("maps/map/");
+        if (mapRoot >= 0) {
+            value = value.substring(mapRoot + "maps/map/".length());
+        }
+        value = value.replaceFirst("(?i)\\.tmx$", "");
+        StringBuilder name = new StringBuilder();
+        for (String segment : value.split("/")) {
+            String slug = slug(segment);
+            if (!slug.isEmpty()) {
+                if (name.length() > 0) {
+                    name.append('/');
+                }
+                name.append(slug);
+            }
+        }
+        return name.toString();
     }
 
     private static FSkinTexture getLocationBackground(String location) {
