@@ -95,7 +95,6 @@
 ]</property>
     <property name="effect">{ "startBattleWithCard": [ "Goblin Spy|INV", "Goblin War Drums|FEM", "Mountain|UGL", "Mountain|UGL" ] }</property>
     <property name="enemy" value="Slobad" />
-    <property name="battleBackground" value="encounter/squee-goblin-nabob" />
     <property name="threatRange" type="int" value="100" />
     <property name="waypoints" value="92,93,95,94" />
    <property name="speedModifier" type="float" value="20" /></properties>

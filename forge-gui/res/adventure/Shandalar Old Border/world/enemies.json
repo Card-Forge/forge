@@ -12417,7 +12417,6 @@
     "name": "Construct",
     "nameOverride": "Rustic Construct",
     "sprite": "sprites/enemy/construct/golem_3.atlas",
-    "battleBackground": "enemy/rustic-construct",
     "deck": [
       "decks/standard/artificer.dck",
       "decks/standard/rustic_construct.dck"
@@ -41383,7 +41382,6 @@
   {
     "name": "Lich",
     "sprite": "sprites/enemy/undead/lich_2.atlas",
-    "battleBackground": "enemy/lich",
     "deck": [
       "decks/standard/lich.dck"
     ],

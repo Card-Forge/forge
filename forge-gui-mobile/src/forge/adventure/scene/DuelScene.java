@@ -99,8 +99,8 @@ public class DuelScene extends ForgeScene {
         return callbackExit;
     }
 
-    public String getBattleBackground() {
-        return enemy == null ? null : enemy.getBattleBackground();
+    public EnemySprite getEnemy() {
+        return enemy;
     }
 
     public void GameEnd() {
