@@ -58,3 +58,14 @@ PLA043 C That's Enough Slices @
 PLA044 C The Command Zone @
 PLA045 C The Pro Tour @
 PLA046 C Year-End Review @
+
+[PlanarTypes]
+Amsterdam
+Blind Eternities
+Bloomburrow
+Chicago
+Duskmourn
+Hell
+Las Vegas
+MagicCon
+Thunder Junction
