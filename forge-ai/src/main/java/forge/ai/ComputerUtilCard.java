@@ -212,6 +212,81 @@ public class ComputerUtilCard {
     }
 
     /**
+     * How many cards a player cannot currently pay for, in hand or as an ability on their
+     * permanents, would become payable if they also had this land.
+     */
+    public static int getColorFixingNeed(final Player benefits, final Card candidate) {
+        if (benefits == null || candidate == null) {
+            return 0;
+        }
+        final byte have = ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(benefits, (List<Card>) null)).getColor();
+        final byte with = ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(benefits, candidate)).getColor();
+        if (have == with) {
+            return 0;
+        }
+
+        int unblocked = 0;
+        for (Card c : benefits.getCardsIn(ZoneType.Hand)) {
+            if (unblocksWith(c.getManaCost(), have, with)) {
+                unblocked++;
+            }
+        }
+        for (Card c : benefits.getCardsIn(ZoneType.Battlefield)) {
+            for (SpellAbility ab : c.getAllSpellAbilities()) {
+                if (ab.isManaAbility() || ab.getPayCosts() == null || ab.getPayCosts().getCostMana() == null) {
+                    continue;
+                }
+                if (unblocksWith(ab.getPayCosts().getCostMana().getMana(), have, with)) {
+                    unblocked++;
+                }
+            }
+        }
+        return unblocked;
+    }
+
+    private static boolean unblocksWith(final ManaCost cost, final byte have, final byte with) {
+        return cost != null && !cost.isNoCost() && !cost.canBePaidWithAvailable(have)
+                && cost.canBePaidWithAvailable(with);
+    }
+
+    /**
+     * The candidate that best covers colors the player receiving the land is short of, or null when
+     * none of them stands out - so this never decides while it is blind, and the caller keeps
+     * whatever it was already doing. A player choosing for an opponent wants the least helpful one.
+     */
+    public static Card getBestLandToGainAI(final Player benefits, final List<Card> candidates, final boolean hostile) {
+        return pickStandout(candidates, c -> getColorFixingNeed(benefits, c), hostile);
+    }
+
+    /** the single best candidate by this measure, or null if the measure cannot separate them */
+    private static Card pickStandout(final List<Card> candidates, final Function<Card, Integer> score,
+            final boolean invert) {
+        if (candidates.isEmpty()) {
+            return null;
+        }
+        final List<Card> best = bestBy(candidates, score, invert);
+        return best.size() == candidates.size() ? null : best.get(0);
+    }
+
+    /** every candidate tied for the best score, or the whole list when the measure sees no difference */
+    private static List<Card> bestBy(final List<Card> candidates, final Function<Card, Integer> score,
+            final boolean invert) {
+        List<Card> best = Lists.newArrayList();
+        int bestScore = Integer.MIN_VALUE;
+        for (Card c : candidates) {
+            int s = invert ? -score.apply(c) : score.apply(c);
+            if (s > bestScore) {
+                bestScore = s;
+                best.clear();
+                best.add(c);
+            } else if (s == bestScore) {
+                best.add(c);
+            }
+        }
+        return best;
+    }
+
+    /**
      * <p>
      * getBestLandAI.
      * </p>
@@ -220,6 +295,10 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestLandAI(final Iterable<Card> list) {
+        return getBestLandAI(null, list);
+    }
+
+    public static Card getBestLandAI(final Player benefits, final Iterable<Card> list) {
         final List<Card> land = CardLists.filter(list, CardPredicates.LANDS);
         if (land.isEmpty()) {
             return null;
@@ -249,7 +328,12 @@ public class ComputerUtilCard {
                 }
             }
 
-            return Aggregates.random(nbLand);
+            // a colour we are short of first, then raw land value, and only then give up and guess
+            Card ranked = getBestLandToGainAI(benefits, nbLand, false);
+            if (ranked == null) {
+                ranked = pickStandout(nbLand, landEvaluator::apply, false);
+            }
+            return ranked != null ? ranked : Aggregates.random(nbLand);
         }
 
         // if no non-basic lands, target the least represented basic land type
