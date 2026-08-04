@@ -265,11 +265,6 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void refreshSkin() {
-        //todo refresh skin selector
-    }
-
-    @Override
     public void copyToClipboard(final String text) {
         final StringSelection ss = new StringSelection(text);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);

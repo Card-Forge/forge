@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Fin Fang Foom
+Title=Fin Fang Foom
+Icon=Fin Fang Foom.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Idris_Killen_-_Izzet_Lessons_(Standard,_#2924439).dck
+Deck Type=constructed
+
+[Main]
+4 Gran-Gran
+4 Monument to Endurance
+4 Abandon Attachments
+4 Accumulate Wisdom
+4 Combustion Technique
+4 Firebending Lesson
+3 It'll Quench Ya!
+2 Consult the Star Charts
+1 Three Steps Ahead
+2 Boomerang Basics
+2 Iroh's Demonstration
+4 Artist's Talent
+6 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+2 Mountain
+1 Agna Qel'a
+1 Stormcarved Coast
+[Sideboard]
+3 Stormchaser's Talent
+2 Disdainful Stroke
+2 Flashfreeze
+2 Slagstorm
+2 Spell Pierce
+1 Annul
+1 Boomerang Basics
+1 Broadside Barrage
+1 Emeritus of Ideation

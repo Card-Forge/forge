@@ -1,7 +1,6 @@
 package forge.game.card.token;
 
 import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ImageKeys;
 import forge.StaticData;
@@ -15,7 +14,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -156,7 +154,6 @@ public class TokenInfo {
     public Card makeOneToken(final Player controller) {
         return makeOneToken(controller, controller.getGame().nextCardId());
     }
-
     public Card makeOneToken(final Player controller, int id) {
         final Game game = controller.getGame();
         final Card c = toCard(game, id);
@@ -209,7 +206,7 @@ public class TokenInfo {
             final boolean nameGenerated = result.getName().endsWith(" Token");
             boolean typeChanged = false;
 
-            if (!Iterables.isEmpty(type.getSubtypes())) {
+            if (!type.getSubtypes().isEmpty()) {
                 for (final Map.Entry<String, String> e : typeMap.entrySet()) {
                     if (type.hasSubtype(e.getKey())) {
                         type.remove(e.getKey());
@@ -234,41 +231,7 @@ public class TokenInfo {
         List<String> toAdd = Lists.newArrayList();
         for (final KeywordInterface k : result.getCurrentState().getIntrinsicKeywords()) {
             final String o = k.getOriginal();
-            // only Modifiable should go there
-            if (!CardUtil.isKeywordModifiable(o)) {
-                continue;
-            }
-            String r = o;
-            // replace types
-            for (final Map.Entry<String, String> e : typeMap.entrySet()) {
-                final String key = e.getKey();
-                final String pkey = CardType.getPluralType(key);
-                final String value = e.getValue();
-                final String pvalue = CardType.getPluralType(e.getValue());
-                r = r.replaceAll(pkey, pvalue);
-                r = r.replaceAll(key, value);
-            }
-            // replace color words
-            for (final Map.Entry<String, String> e : colorMap.entrySet()) {
-                final String vName = e.getValue();
-                final String vCaps = StringUtils.capitalize(vName);
-                final String vLow = vName.toLowerCase();
-                if ("Any".equals(e.getKey())) {
-                    for (final byte c : MagicColor.WUBRG) {
-                        final String cName = MagicColor.toLongString(c);
-                        final String cNameCaps = StringUtils.capitalize(cName);
-                        final String cNameLow = cName.toLowerCase();
-                        r = r.replaceAll(cNameCaps, vCaps);
-                        r = r.replaceAll(cNameLow, vLow);
-                    }
-                } else {
-                    final String cName = e.getKey();
-                    final String cNameCaps = StringUtils.capitalize(cName);
-                    final String cNameLow = cName.toLowerCase();
-                    r = r.replaceAll(cNameCaps, vCaps);
-                    r = r.replaceAll(cNameLow, vLow);
-                }
-            }
+            String r = AbilityUtils.applyKeywordTextChangeEffects(o, colorMap, typeMap);
             if (!r.equals(o)) {
                 toRemove.add(k);
                 toAdd.add(r);

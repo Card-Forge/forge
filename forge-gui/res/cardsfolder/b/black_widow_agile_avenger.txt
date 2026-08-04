@@ -1,0 +1,9 @@
+Name:Black Widow, Agile Avenger
+ManaCost:1 R W
+Types:Legendary Creature Human Spy Hero
+PT:2/2
+K:Menace
+T:Mode$ Drawn | ValidPlayer$ Opponent | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent draws their second card each turn, put a +1/+1 counter on NICKNAME and you draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+Oracle:Menace\nWhenever an opponent draws their second card each turn, put a +1/+1 counter on Black Widow and you draw a card.

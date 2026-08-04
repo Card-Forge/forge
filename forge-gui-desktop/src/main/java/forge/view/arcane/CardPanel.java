@@ -44,6 +44,8 @@ import java.util.Map;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import com.google.common.collect.Multiset;
+
 import forge.CachedCardImage;
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -103,6 +105,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         ZoneType.Flashback, new Color(80, 20, 100)
     );
     private static final Color DEFAULT_ZONE_COLOR = new Color(60, 60, 80);
+    private static final Color GHOST_TINT = new Color(90, 120, 175, 110);
 
     private final CMatchUI matchUI;
     private CardView card;
@@ -118,6 +121,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private OutlinedLabel damageText;
     private OutlinedLabel cardIdText;
     private boolean displayEnabled = true;
+    private boolean ghost; // faded stand-in for a card this permanent holds in exile
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
@@ -318,6 +322,15 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
         final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
 
+        // Yellow glow for cards that Auto would tap to pay (weak-selectable strength >= 2)
+        if (isPreferenceEnabled(FPref.UI_SHOW_AUTOTAP_PREVIEW) && matchUI.getWeakSelectableStrength(getCard()) >= 2) {
+            for (int layer = 2; layer >= 1; layer--) {
+                g2d.setColor(new Color(1f, 1f, 0f, 0.14f * layer));
+                final int n = Math.max(1, Math.round(layer * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+                g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n, cornerSize + n);
+            }
+        }
+
         // Magenta outline for when card is chosen
         if (matchUI.isHighlighted(getCard())) {
             g2d.setColor(Color.magenta);
@@ -375,11 +388,36 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             }
         }
 
-        if (matchUI.isSelectable(getCard())) { // White border for selectable cards to further highlight them
-            g2d.setColor(Color.WHITE);
-            final int ins = 1;
-            g2d.fillRoundRect(cardXOffset+ins, cardYOffset+ins, cardWidth-ins*2, cardHeight-ins*2, cornerSize-ins, cornerSize-ins);
+        // Inner highlight: white for fully selectable cards, the configured colour for
+        // actionable (weakly selectable) ones. With black borders enabled this sits in the
+        // border gap as a 1px inset; with borders disabled the card image fills the whole
+        // panel and would cover an inset, so draw it as an outset (like the frames above).
+        Color innerBorder = null;
+        if (matchUI.isSelectable(getCard())) {
+            innerBorder = Color.WHITE;
+        } else if (isPreferenceEnabled(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS) && matchUI.isWeaklySelectable(getCard())) {
+            innerBorder = parseActionableHighlightColor();
         }
+        if (innerBorder != null) {
+            g2d.setColor(innerBorder);
+            if (noBorderPref && !isSelected) {
+                final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+                g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n, cornerSize + n);
+            } else {
+                final int ins = 1;
+                g2d.fillRoundRect(cardXOffset + ins, cardYOffset + ins, cardWidth - ins * 2, cardHeight - ins * 2, cornerSize - ins, cornerSize - ins);
+            }
+        }
+    }
+
+    /** Pref is normalized to 6 hex chars on the write side; this just parses,
+     *  falling back to the FPref default if the stored value is malformed. */
+    private static Color parseActionableHighlightColor() {
+        String s = forge.model.FModel.getPreferences().getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR);
+        try {
+            if (s != null && s.length() == 6) return new Color(Integer.parseInt(s, 16));
+        } catch (NumberFormatException ignored) {}
+        return new Color(Integer.parseInt(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR.getDefault(), 16));
     }
 
     private void drawManaCost(final Graphics g, final ManaCost cost, final int deltaY) {
@@ -412,7 +450,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                             FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset, cardWidth, cardHeight);
                 }
             }
-
         }
         displayIconOverlay(g, canShow);
         if (groupCount >= 2) {
@@ -648,7 +685,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         if (card.getCounters() != null && !card.getCounters().isEmpty()) {
-
             switch (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE))) {
                 case OLD_WHEN_SMALL:
                 case TEXT:
@@ -662,7 +698,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     drawCounterTabs(g);
                     break;
             }
-
         }
 
         if(card.getMarkerText() != null) {
@@ -719,6 +754,17 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 }
             }
         }
+        if (ghost) {
+            drawGhostOverlay(g);
+        }
+    }
+
+    private void drawGhostOverlay(final Graphics g) {
+        final Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        final int cornerSize = Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
+        g2d.setColor(GHOST_TINT);
+        g2d.fillRoundRect(cardXOffset, cardYOffset, cardWidth, cardHeight, cornerSize, cornerSize);
     }
 
     private void drawZoneBanner(final Graphics g) {
@@ -762,10 +808,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         FontMetrics largeFontMetrics = g.getFontMetrics(largeCounterFont);
 
         if (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE)) == CounterDisplayType.OLD_WHEN_SMALL) {
-            int maxCounters = 0;
-            for (Integer numberOfCounters : card.getCounters().values()) {
-                maxCounters = Math.max(maxCounters, numberOfCounters);
-            }
+            int maxCounters = card.getCounters().entrySet().stream().mapToInt(Multiset.Entry::getCount).max().orElse(0);
 
             if (counterBoxBaseWidth + largeFontMetrics.stringWidth(String.valueOf(maxCounters)) > cardWidth) {
                 drawCounterImage(g);
@@ -774,9 +817,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
 
-        for (Map.Entry<CounterType, Integer> counterEntry :  new HashSet<>(card.getCounters().entrySet())) {
-            final CounterType counter = counterEntry.getKey();
-            final int numberOfCounters = counterEntry.getValue();
+        for (Multiset.Entry<CounterType> counterEntry : new HashSet<>(card.getCounters().entrySet())) {
+            final CounterType counter = counterEntry.getElement();
+            final int numberOfCounters = counterEntry.getCount();
             final int counterBoxRealWidth = counterBoxBaseWidth + largeFontMetrics.stringWidth(String.valueOf(numberOfCounters));
 
             final int counterYOffset;
@@ -815,14 +858,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             drawVerticallyCenteredString(g, String.valueOf(numberOfCounters), numberBounds, largeCounterFont, largeFontMetrics);
 
         }
-
     }
 
     private void drawCounterImage(final Graphics g) {
-        int counters = 0;
-        for (final Integer i : card.getCounters().values()) {
-            counters += i;
-        }
+        int counters = card.getCounters().size();
 
         final int yCounters = (cardYOffset + cardHeight) - (cardHeight / 3) - 40;
 
@@ -990,7 +1029,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // Card name overlay
         titleText.setText(CardTranslation.getTranslatedName(card.getCurrentState().getName()));
         // Screen readers can't tell if a card is tapped.
-        if (isPreferenceEnabled(FPref.UI_SR_OPTIMIZE)) {
+        if (isPreferenceEnabled(FPref.UI_SCREENREADER_OPTIMIZE)) {
                 if (this.isTapped()) {
                     titleText.getAccessibleContext().setAccessibleDescription("tapped");
                 } else {
@@ -1074,6 +1113,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     public final List<CardPanel> getAttachedPanels() {
         return attachedPanels;
+    }
+
+    public final boolean isGhost() {
+        return ghost;
+    }
+    public final void setGhost(final boolean ghost0) {
+        ghost = ghost0;
     }
 
     public final List<CardPanel> getStack() {

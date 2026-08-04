@@ -1,14 +1,16 @@
 package forge.game.event;
 
-import forge.game.mana.Mana;
+import java.util.Set;
+
+import forge.card.MagicColor;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.util.Lang;
 
-public record GameEventManaPool(PlayerView player, EventValueChangeType mode, byte manaColor) implements GameEvent {
+public record GameEventManaPool(PlayerView player, EventValueChangeType mode, Set<MagicColor.Color> colors) implements GameEvent {
 
-    public GameEventManaPool(Player player, EventValueChangeType mode, Mana mana) {
-        this(PlayerView.get(player), mode, mana != null ? mana.getColor() : (byte) 0);
+    public GameEventManaPool(Player player, EventValueChangeType mode, Set<MagicColor.Color> colors) {
+        this(PlayerView.get(player), mode, colors);
     }
 
     @Override
@@ -26,7 +28,7 @@ public record GameEventManaPool(PlayerView player, EventValueChangeType mode, by
         switch (mode) {
         case Added:
         case Removed:
-            sb.append(" - ").append(manaColor);
+            sb.append(" - ").append(colors);
             break;
         default:
             break;

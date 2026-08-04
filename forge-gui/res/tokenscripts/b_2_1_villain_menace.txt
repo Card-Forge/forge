@@ -1,0 +1,7 @@
+Name:Villain Token
+ManaCost:no cost
+Colors:black
+Types:Creature Villain
+PT:2/1
+K:Menace
+Oracle:Menace

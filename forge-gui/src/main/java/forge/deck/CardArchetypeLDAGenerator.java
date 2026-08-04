@@ -36,7 +36,6 @@ public final class CardArchetypeLDAGenerator {
         return true;
     }
 
-    /** Try to load matrix .dat files, otherwise check for deck folders and build .dat, otherwise return false **/
     public static boolean initializeFormat(String format){
         List<Archetype> lda = CardThemedLDAIO.loadRawLDA(format);
         Map<String,List<List<Pair<String, Double>>>> formatMap = CardThemedLDAIO.loadLDA(format);
@@ -70,7 +69,6 @@ public final class CardArchetypeLDAGenerator {
     }
 
     public static Map<String,List<List<Pair<String, Double>>>> loadFormat(List<Archetype> lda) throws Exception{
-
         List<List<Pair<String, Double>>> topics = new ArrayList<>();
         Set<String> cards = new HashSet<>();
         for (int t = 0; t < lda.size(); ++t) {

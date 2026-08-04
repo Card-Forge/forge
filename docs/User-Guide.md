@@ -62,15 +62,9 @@
 
 Most people who have problems setting up Forge, do not have Java setup properly. If you are having trouble, open your terminal/command line and run `java --version`. That number should be 17 or higher.
 
-The memory requirements for Forge have fluctuated over time. The default
-setting on your computer for the Java heap space may not be enough to
-prevent the above problems. If you launch Forge by double-clicking the
-jar files directly you could eventually receive a **java heap space
-error**.
+The memory requirements for Forge have fluctuated over time. The default  setting on your computer for the Java heap space may not be enough to prevent the above problems. If you launch Forge by double-clicking the jar files directly you could eventually receive a **java heap space error**.
 
-We have created several scripts that will launch Forge with a greater
-allotment of system resources. (We do this by passing `-Xmx1024m` as
-an argument to the Java VM.)
+We have created several scripts that will launch Forge with a greater allotment of system resources. (We do this by passing `-Xmx1024m` as an argument to the Java VM.)
 
 If you plan to eventually download all card images make sure you have several gigabytes of free drive space.
 
@@ -111,8 +105,8 @@ This might be different in OSX or Linux systems (file permission related).
     * If the command file doesn't appear to do anything, you'll need to [modify the permissions to be executable.](https://support.apple.com/guide/terminal/make-a-file-executable-apdd100908f-06b3-4e63-8a87-32e71241bab4/mac) (This is a temporary bug in the build process.)
     * Additionally OSX needs to have a JRE AND a JDK installed because reasons.
 
-### Android
-* Sideload/Install "forge...apk"
+### Android / iOS
+* Sideload/Install "forge...apk/ipa"
 * Run Forge
 
 # User data migration
@@ -256,7 +250,7 @@ The match screen is divided into resizable panels. The numbers below identify ea
 3. **Player field tabs** — switch between opponents' fields in multiplayer; the (N new) indicator highlights cards that have changed since you last viewed that field. See [Sort Player Fields in Turn Order](#sort-player-fields-in-turn-order) for ordering options.
 4. **Card Detail** — selected card's text and metadata.
 5. **Opponent's field** — same layout as your own field (items 6-10 describe its components).
-6. **Avatar and life total** — left-click to target the player, hover to see more info including Commander damage.
+6. **Avatar and life total** — left-click to target the player, hover to see more info including Commander damage and, when a Commander bracket cap is active, estimated Commander bracket.
 7. **Zone buttons** — hand, library, graveyard, exile, command, and sideboard with live counts; click to view, right-click for display options. See [Viewing cards in different zones](#viewing-cards-in-different-zones) for details.
 8. **Turn Phases** — click any pip to toggle a priority stop in that phase; right-click to yield to that phase.
 9. **Mana pool** — floating mana; click a symbol to spend it during cost payment.

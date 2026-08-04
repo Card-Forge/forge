@@ -92,7 +92,7 @@ ScryfallCode=40K
 84 R Screamer-Killer @David Auden Nash
 85 U Seeker of Slaanesh @Games Workshop
 86 U Aberrant @Games Workshop
-87 R Biophagus @Teodora Dumitriu
+87 R Biophagus @Thea Dumitriu
 88 R Bone Sabres @David Auden Nash
 89 R Broodlord @Mathias Kollros
 90 R Clamavus @Adrián Rodríguez Pérez
@@ -254,7 +254,7 @@ ScryfallCode=40K
 246 R Mystic Forge @Rafater
 247 R Sculpting Steel @Pierre Loyvet
 248 U Skullclamp @Helge C. Balzer
-249 U Sol Ring @Teodora Dumitriu
+249 U Sol Ring @Thea Dumitriu
 250 U Sol Ring @Kekai Kotaki
 251 U Sol Ring @Oleg Shekhovtsov
 252 U Sol Ring @Lucas Terryn
@@ -272,7 +272,7 @@ ScryfallCode=40K
 264 U Arcane Sanctum @Games Workshop
 265 U Ash Barrens @Sergei Leoluch Panin
 266 U Barren Moor @Rafater
-267 C Cave of Temptation @Teodora Dumitriu
+267 C Cave of Temptation @Thea Dumitriu
 268 R Choked Estuary @Lixin Yin
 269 R Cinder Glade @Sergio Cosmai
 270 C Command Tower @Logan Feliciano
@@ -298,7 +298,7 @@ ScryfallCode=40K
 290 R Prairie Stream @Henry Peters
 291 U Reliquary Tower @Lucas Terryn
 292 C Rugged Highlands @Oleg Shekhovtsov
-293 C Scoured Barrens @Teodora Dumitriu
+293 C Scoured Barrens @Thea Dumitriu
 294 R Skycloud Expanse @Kamila Szutenberg
 295 R Sunken Hollow @Calder Moore
 296 C Swiftwater Cliffs @David Álvarez

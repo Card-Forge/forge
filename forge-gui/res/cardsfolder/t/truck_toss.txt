@@ -1,0 +1,6 @@
+Name:Truck Toss
+ManaCost:2 R R
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Vehicle.YouCtrl | Description$ This spell costs {2} less to cast if you control a Vehicle.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+Oracle:This spell costs {2} less to cast if you control a Vehicle.\nTruck Toss deals 4 damage to any target.

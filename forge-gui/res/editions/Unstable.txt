@@ -302,3 +302,10 @@ ScryfallCode=UST
 18 c_a_clue_draw @John Avon
 19 c_x_x_a_construct @Matt Gaser
 20 c_1_1_a_gnome @Dmitry Burmak
+
+[CreatureTypes]
+Brainiac:Brainiacs
+Cyborg:Cyborgs
+Killbot:Killbots
+[ArtifactTypes]
+Contraption:Contraptions

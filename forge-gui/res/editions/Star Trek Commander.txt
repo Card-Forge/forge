@@ -1,9 +1,19 @@
 [metadata]
 Code=TRC
-Date=2026-11-20
+Date=2026-11-13
 Name=Star Trek Commander
 Type=Commander
 ScryfallCode=TRC
 
 [cards]
 85 M Captain Kirk, Boldly Going @Josh Newton
+192 R Operations Officer @Ioannis Fiore
+193 M Picard, Steadfast Captain @Mark Spears
+194 M Spock, Logical Choice @Bastien Jez
+195 R Trelane, Squire of Gothos @Joel Chaim Holtzman
+196 R Bio-Asset Allocator @Björn Barends
+197 M Borg Queen, Perfection Manifest @PINDURSKI
+198 M Kirk, Enterprising Captain @Nathaniel Himawan
+199 R Klingon Strike Force @Fahmi Fauzi
+200 M Benjamin Sisko, Besieged @Josu Hernaiz
+201 R Tenacious Tosk @Filipe Pagliuso

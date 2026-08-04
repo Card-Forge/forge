@@ -106,3 +106,6 @@ ScryfallCode=UGL
 92 r_1_1_goblin @Pete Venters
 93 g_2_2_sheep @Kev Walker
 94 g_1_1_squirrel @Ron Spencer
+
+[CreatureTypes]
+Cow:Cows

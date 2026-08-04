@@ -209,7 +209,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 if (!oppList.isEmpty()) {
                     final Card best = ComputerUtilCard.getBestAI(oppList);
 
-                    for (final CounterType aType : best.getCounters().keySet()) {
+                    for (final CounterType aType : best.getCounters().elementSet()) {
                         if (!ComputerUtil.isNegativeCounter(aType, best)) {
                             sa.getTargets().add(best);
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

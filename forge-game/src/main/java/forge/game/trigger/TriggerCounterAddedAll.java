@@ -50,7 +50,8 @@ public class TriggerCounterAddedAll extends Trigger {
     private Map<GameEntity, Integer> filterTable(GameEntityCounterTable table) {
         CounterType counterType = CounterType.getType(getParam("CounterType"));
         String valid = getParam("Valid");
+        String validSource = getParam("ValidSource");
 
-        return table.filterTable(counterType, valid, getHostCard(), this);
+        return table.filterTable(counterType, valid, validSource, getHostCard(), this);
     }
 }

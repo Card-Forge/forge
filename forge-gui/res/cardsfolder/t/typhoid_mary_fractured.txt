@@ -1,0 +1,12 @@
+Name:Typhoid Mary, Fractured
+ManaCost:1 B R
+Types:Legendary Creature Mutant Villain
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | CharmNum$ 1 | Choices$ DBToken,DBDraw,DBDrain | Random$ Compare | RandomCompareSVar$ Y | RandomCompare$ LT1 | SubAbility$ DBCharm | AdditionalDescription$ . If you discarded a card this turn, you choose one instead.
+SVar:Y:PlayerCountPropertyYou$CardsDiscardedThisTurn
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Mary — Create a Treasure token.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Typhoid Mary — Draw a card.
+SVar:DBDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Bloody Mary — Each opponent loses 2 life and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Whenever Typhoid Mary attacks, choose one at random. If you discarded a card this turn, you choose one instead.\n• Mary — Create a Treasure token.\n• Typhoid Mary — Draw a card.\n• Bloody Mary — Each opponent loses 2 life and you gain 2 life.

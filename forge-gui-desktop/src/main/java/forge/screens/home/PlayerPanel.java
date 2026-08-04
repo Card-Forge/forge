@@ -2,27 +2,28 @@ package forge.screens.home;
 
 import forge.ai.AiProfileUtil;
 import forge.deckchooser.FDeckChooser;
-import java.awt.Graphics;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.ImmutableSet;
-
+import forge.ImageCache;
 import forge.Singletons;
 import forge.ai.AIOption;
+import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.match.LobbySlot;
@@ -70,11 +71,13 @@ public class PlayerPanel extends FPanel {
     private final FLabel avatarLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
     private final FLabel sleeveLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
     private int avatarIndex, sleeveIndex;
+    private String sleeveArtKey = "";
+    private int sleeveArtOffset = Deck.DEFAULT_SLEEVE_OFFSET;
 
     private final FTextField txtPlayerName = new FTextField.Builder().build();
     private FRadioButton radioHuman;
     private FRadioButton radioAi;
-    private JCheckBoxMenuItem radioAiUseSimulation;
+    private JPopupMenu radioAiUseSimulation;
     private FRadioButton radioOpen;
     private FCheckBox chkReady;
 
@@ -113,20 +116,18 @@ public class PlayerPanel extends FPanel {
     private FDeckChooser deckChooser;
 
     private final VLobby lobby;
-    public PlayerPanel(final VLobby lobby, final boolean allowNetworking, final int index, final LobbySlot slot, final boolean mayEdit, final boolean mayControl) {
-        super();
-
+    public PlayerPanel(final VLobby lobby, final int index, final LobbySlot slot, final boolean mayEdit, final boolean mayControl) {
         this.lobby = lobby;
         this.index = index;
         this.mayEdit = mayEdit;
         this.mayControl = mayControl;
-        this.allowNetworking = allowNetworking;
+        this.allowNetworking = lobby.getLobby().isAllowNetworking();
 
         this.deckLabel = lobby.newLabel(localizer.getMessage("lblDeck") + ":");
         this.scmLabel = lobby.newLabel(localizer.getMessage("lblSchemeDeck") + ":");
         this.cmdLabel = lobby.newLabel(localizer.getMessage("lblCommanderDeck") + ":");
-        this.pchLabel =  lobby.newLabel(localizer.getMessage("lblPlanarDeck") + ":");
-        this.vgdLabel =  lobby.newLabel(localizer.getMessage("lblVanguard") + ":");
+        this.pchLabel = lobby.newLabel(localizer.getMessage("lblPlanarDeck") + ":");
+        this.vgdLabel = lobby.newLabel(localizer.getMessage("lblVanguard") + ":");
 
         setLayout(new MigLayout("insets 10px, gap 5px"));
 
@@ -135,11 +136,10 @@ public class PlayerPanel extends FPanel {
         this.add(closeBtn, "w 20, h 20, pos (container.w-20) 0");
 
         createAvatar();
-        this.add(avatarLabel, "spany 2, width 80px, height 80px");
+        this.add(avatarLabel, "cell 0 0, spany 2, split 2, width 80px, height 80px");
 
-        /*TODO Layout and Override for PC*/
-        //createSleeve();
-        //this.add(sleeveLabel, "spany 2, width 60px, height 80px");
+        createSleeve();
+        this.add(sleeveLabel, "width 58px, height 80px, gapleft 5px");
 
         createNameEditor();
         this.add(lobby.newLabel(localizer.getMessage("lblName") +":"), "w 40px, h 30px, gaptop 5px");
@@ -180,8 +180,8 @@ public class PlayerPanel extends FPanel {
             this.add(chkReady, "cell 5 4, ax left, sx 2, wrap");
         }
 
-        this.add(deckLabel, variantBtnConstraints + ", cell 0 5, sx 2, ax right");
-        this.add(deckBtn, variantBtnConstraints + ", cell 2 5, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
+        this.add(deckLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
+        this.add(deckBtn, variantBtnConstraints + ", cell 2 3, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
 
         addHandlersDeckSelector();
 
@@ -229,8 +229,12 @@ public class PlayerPanel extends FPanel {
         avatarLabel.repaintSelf();
 
         sleeveLabel.setEnabled(mayEdit);
-        sleeveLabel.setIcon(FSkin.getSleeves().get(type == LobbySlotType.OPEN ? -1 : sleeveIndex));
-        sleeveLabel.repaintSelf();
+        if (type != LobbySlotType.OPEN && sleeveArtKey != null && !sleeveArtKey.isEmpty()) {
+            showCardArtOnSleeveLabel(sleeveArtKey);
+        } else {
+            sleeveLabel.setIcon(FSkin.getSleeves().get(type == LobbySlotType.OPEN ? -1 : sleeveIndex));
+            sleeveLabel.repaintSelf();
+        }
 
         txtPlayerName.setEnabled(mayEdit);
         txtPlayerName.setText(type == LobbySlotType.OPEN ? StringUtils.EMPTY : playerName);
@@ -322,101 +326,11 @@ public class PlayerPanel extends FPanel {
         }
     };
 
-    private final FMouseAdapter avatarMouseListener = new FMouseAdapter() {
-        @Override public void onLeftClick(final MouseEvent e) {
-            if (!avatarLabel.isEnabled()) {
-                return;
-            }
-
-            final FLabel avatar = (FLabel)e.getSource();
-
-            lobby.changePlayerFocus(index);
-            avatar.requestFocusInWindow();
-
-            final AvatarSelector aSel = new AvatarSelector(playerName, avatarIndex, lobby.getUsedAvatars());
-            for (final FLabel lbl : aSel.getSelectables()) {
-                lbl.setCommand((UiCommand) () -> {
-                    setAvatarIndex(Integer.parseInt(lbl.getName().substring(11)));
-                    aSel.setVisible(false);
-                });
-            }
-
-            aSel.setVisible(true);
-            aSel.dispose();
-
-            if (index < 2) {
-                lobby.updateAvatarPrefs();
-            }
-
-            lobby.firePlayerChangeListener(index);
-        }
-
-        @Override public void onRightClick(final MouseEvent e) {
-            if (!avatarLabel.isEnabled()) {
-                return;
-            }
-
-            lobby.changePlayerFocus(index);
-            avatarLabel.requestFocusInWindow();
-
-            setRandomAvatar();
-
-            if (index < 2) {
-                lobby.updateAvatarPrefs();
-            }
-        }
-    };
-
     /** Listens to sleeve buttons and gives the appropriate player focus. */
     private final FocusAdapter sleeveFocusListener = new FocusAdapter() {
         @Override
         public void focusGained(final FocusEvent e) {
             lobby.changePlayerFocus(index);
-        }
-    };
-
-    private final FMouseAdapter sleeveMouseListener = new FMouseAdapter() {
-        @Override public void onLeftClick(final MouseEvent e) {
-            if (!sleeveLabel.isEnabled()) {
-                return;
-            }
-
-            final FLabel sleeve = (FLabel)e.getSource();
-
-            lobby.changePlayerFocus(index);
-            sleeve.requestFocusInWindow();
-
-            final SleeveSelector sSel = new SleeveSelector(playerName, sleeveIndex, lobby.getUsedSleeves());
-            for (final FLabel lbl : sSel.getSelectables()) {
-                lbl.setCommand((UiCommand) () -> {
-                    setSleeveIndex(Integer.parseInt(lbl.getName().substring(11)));
-                    sSel.setVisible(false);
-                });
-            }
-
-            sSel.setVisible(true);
-            sSel.dispose();
-
-            if (index < 2) {
-                lobby.updateSleevePrefs();
-            }
-
-            lobby.firePlayerChangeListener(index);
-        }
-
-        @Override public void onRightClick(final MouseEvent e) {
-            if (!sleeveLabel.isEnabled()) {
-                return;
-            }
-
-            lobby.changePlayerFocus(index);
-            sleeveLabel.requestFocusInWindow();
-
-            setRandomSleeve();
-
-            if (index < 2) {
-                lobby.updateSleevePrefs();
-            }
         }
     };
 
@@ -475,15 +389,26 @@ public class PlayerPanel extends FPanel {
     }
 
     public Set<AIOption> getAiOptions() {
-        return isSimulatedAi()
-                ? ImmutableSet.of(AIOption.USE_SIMULATION)
-                : Collections.emptySet();
+        if (radioAi.isSelected()) {
+            for (int i = 0; i < radioAiUseSimulation.getComponentCount(); i++) {
+                if (((JRadioButtonMenuItem) radioAiUseSimulation.getComponent(i)).isSelected()) {
+                    if (i == 0) {
+                        break;
+                    }
+                    if (i == 1) {
+                        return Set.of(AIOption.USE_HYBRID_SIMULATION);
+                    }
+                    if (i == 2) {
+                        return Set.of(AIOption.USE_FULL_SIMULATION);
+                    }
+                }
+            }
+        }
+        return Collections.emptySet();
     }
-    private boolean isSimulatedAi() {
-        return radioAi.isSelected() && radioAiUseSimulation.isSelected();
-    }
-    public void setUseAiSimulation(final boolean useSimulation) {
-        radioAiUseSimulation.setSelected(useSimulation);
+    public void setUseAiSimulation(Set<AIOption> options) {
+        ((JRadioButtonMenuItem) radioAiUseSimulation.getComponent(options.contains(AIOption.USE_FULL_SIMULATION) ? 2 : options.contains(AIOption.USE_HYBRID_SIMULATION) ? 1 : 0))
+                .setSelected(true);
     }
 
     public boolean isArchenemy() {
@@ -645,11 +570,21 @@ public class PlayerPanel extends FPanel {
         radioAi = new FRadioButton(localizer.getMessage("lblAI"));
         radioOpen = new FRadioButton(localizer.getMessage("lblOpen"));
 
-        final JPopupMenu menu = new  JPopupMenu();
-        radioAiUseSimulation = new JCheckBoxMenuItem(localizer.getMessage("lblUseSimulation"));
-        menu.add(radioAiUseSimulation);
-        radioAiUseSimulation.addActionListener(e -> lobby.firePlayerChangeListener(index));
-        radioAi.setComponentPopupMenu(menu);
+        final ButtonGroup group = new ButtonGroup();
+        radioAiUseSimulation = new JPopupMenu();
+        JRadioButtonMenuItem item = new JRadioButtonMenuItem("Heuristics");
+        item.addActionListener(e -> lobby.firePlayerChangeListener(index));
+        group.add(item);
+        radioAiUseSimulation.add(item);
+        item = new JRadioButtonMenuItem(localizer.getMessage("lblUseSimulation") + " (Hybrid)");
+        item.addActionListener(e -> lobby.firePlayerChangeListener(index));
+        group.add(item);
+        radioAiUseSimulation.add(item);
+        item = new JRadioButtonMenuItem(localizer.getMessage("lblUseSimulation"));
+        item.addActionListener(e -> lobby.firePlayerChangeListener(index));
+        group.add(item);
+        radioAiUseSimulation.add(item);
+        radioAi.setComponentPopupMenu(radioAiUseSimulation);
 
         radioHuman.addMouseListener(radioMouseAdapter(radioHuman, LobbySlotType.LOCAL));
         radioAi.addMouseListener   (radioMouseAdapter(radioAi,    LobbySlotType.AI));
@@ -753,21 +688,134 @@ public class PlayerPanel extends FPanel {
 
         avatarLabel.setToolTipText(localizer.getMessage("ttlblAvatar"));
         avatarLabel.addFocusListener(avatarFocusListener);
-        avatarLabel.addMouseListener(avatarMouseListener);
+        avatarLabel.setCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            avatarLabel.requestFocusInWindow();
+
+            final AvatarSelector aSel = new AvatarSelector(playerName, avatarIndex, lobby.getUsedAvatars());
+            for (final FLabel lbl : aSel.getSelectables()) {
+                lbl.setCommand((UiCommand) () -> {
+                    setAvatarIndex(Integer.parseInt(lbl.getName().substring(11)));
+                    aSel.setVisible(false);
+                });
+            }
+
+            aSel.setVisible(true);
+            aSel.dispose();
+
+            if (index < 2) {
+                lobby.updateAvatarPrefs();
+            }
+
+            lobby.firePlayerChangeListener(index);
+        });
+        avatarLabel.setRightClickCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            avatarLabel.requestFocusInWindow();
+
+            setRandomAvatar();
+
+            if (index < 2) {
+                lobby.updateAvatarPrefs();
+            }
+        });
     }
 
     private void createSleeve() {
         final String[] currentPrefs = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
         if (index < currentPrefs.length) {
-            sleeveIndex = Integer.parseInt(currentPrefs[index]);
-            sleeveLabel.setIcon(FSkin.getSleeves().get(sleeveIndex));
+            // card-art sleeve, if any, arrives via refreshSleeveFromDeck once a deck is selected
+            setSleeve(Integer.parseInt(currentPrefs[index]), "", Deck.DEFAULT_SLEEVE_OFFSET);
         } else {
             setRandomSleeve(false);
         }
 
         sleeveLabel.setToolTipText("L-click: Select sleeve. R-click: Randomize sleeve.");
         sleeveLabel.addFocusListener(sleeveFocusListener);
-        sleeveLabel.addMouseListener(sleeveMouseListener);
+        sleeveLabel.setCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            sleeveLabel.requestFocusInWindow();
+
+            final SleeveSelector sSel = new SleeveSelector(playerName, sleeveIndex, sleeveArtKey, lobby.getUsedSleeves());
+            sSel.setVisible(true);
+            sSel.dispose();
+
+            if (sSel.getResultArtKey() != null) {
+                applyCardArtSleeve(sSel.getResultArtKey(), sSel.getResultOffset());
+                persistSleeveToDeck(sSel.getResultArtKey(), sSel.getResultOffset());
+            } else if (sSel.getResultIndex() >= 0) {
+                setSleeveIndex(sSel.getResultIndex());
+                persistSleeveToDeck("", Deck.DEFAULT_SLEEVE_OFFSET);
+            }
+
+            if (index < 2) {
+                lobby.updateSleevePrefs();
+            }
+
+            lobby.firePlayerChangeListener(index);
+        });
+        sleeveLabel.setRightClickCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            sleeveLabel.requestFocusInWindow();
+
+            setRandomSleeve();
+            persistSleeveToDeck("", Deck.DEFAULT_SLEEVE_OFFSET);
+
+            if (index < 2) {
+                lobby.updateSleevePrefs();
+            }
+        });
+    }
+
+    private void applyCardArtSleeve(final String key, final int offset) {
+        setSleeveArtKey(key);
+        sleeveArtOffset = offset;
+        showCardArtOnSleeveLabel(key);
+    }
+
+    /** Updates the sleeve display from a deck's stored card-art sleeve, or the built-in sleeve if it has none. */
+    public void refreshSleeveFromDeck(final Deck deck) {
+        final String artKey = deck == null ? "" : deck.getSleeveArtKey();
+        if (artKey != null && !artKey.isEmpty()) {
+            sleeveArtKey = artKey;
+            sleeveArtOffset = deck.getSleeveArtOffset();
+            showCardArtOnSleeveLabel(artKey);
+        } else {
+            sleeveArtKey = "";
+            sleeveArtOffset = Deck.DEFAULT_SLEEVE_OFFSET;
+            sleeveLabel.setIcon(FSkin.getSleeves().get(sleeveIndex));
+            sleeveLabel.repaintSelf();
+        }
+    }
+
+    // Writes the chosen sleeve onto the currently selected deck and saves it (no-op for read-only decks)
+    private void persistSleeveToDeck(final String key, final int offset) {
+        final FDeckChooser chooser = getDeckChooser();
+        if (chooser == null) {
+            return;
+        }
+        final DeckProxy proxy = chooser.getLstDecks().getSelectedItem();
+        if (proxy == null) {
+            return;
+        }
+        final Deck deck = proxy.getDeck();
+        if (deck == null) {
+            return;
+        }
+        deck.setSleeveArtKey(key);
+        deck.setSleeveArtOffset(offset);
+        proxy.saveDeck();
+        lobby.fireDeckSleeveChange(index, deck);
+    }
+
+    private void showCardArtOnSleeveLabel(final String key) {
+        final BufferedImage art = ImageCache.getSleeveArtCropped(key, sleeveArtOffset);
+        if (art != null) {
+            sleeveLabel.setIcon(new FSkin.UnskinnedIcon(art));
+            sleeveLabel.repaintSelf();
+        } else {
+            ImageCache.fetchSleeveArt(key, () -> showCardArtOnSleeveLabel(key));
+        }
     }
 
     /** Applies a random avatar, avoiding avatars already used. */
@@ -836,9 +884,25 @@ public class PlayerPanel extends FPanel {
     }
     public void setSleeveIndex(final int sleeveIndex0) {
         sleeveIndex = sleeveIndex0;
+        sleeveArtKey = ""; // picking a built-in sleeve clears any card-art sleeve
+        sleeveArtOffset = Deck.DEFAULT_SLEEVE_OFFSET;
         final SkinImage icon = FSkin.getSleeves().get(sleeveIndex);
         sleeveLabel.setIcon(icon);
         sleeveLabel.repaintSelf();
+    }
+
+    public void setSleeveArtKey(final String key) {
+        sleeveArtKey = key == null ? "" : key;
+    }
+
+    /** Applies a sleeve from slot data: built-in index, then card-art key (with its icon) if present. */
+    public void setSleeve(final int index, final String artKey, final int artOffset) {
+        setSleeveIndex(index);
+        if (artKey != null && !artKey.isEmpty()) {
+            setSleeveArtKey(artKey);
+            sleeveArtOffset = artOffset;
+            showCardArtOnSleeveLabel(artKey);
+        }
     }
 
     public int getTeam() {

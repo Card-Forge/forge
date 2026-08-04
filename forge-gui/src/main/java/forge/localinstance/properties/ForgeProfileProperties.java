@@ -75,8 +75,6 @@ public class ForgeProfileProperties {
         decksDir    = getDir(props, DECKS_DIR_KEY, userDir + "decks" + File.separator);
         decksConstructedDir = getDir(props, DECKS_CONSTRUCTED_DIR_KEY, decksDir + "constructed" + File.separator);
 
-
-        //ensure directories exist
         FileUtil.ensureDirectoryExists(userDir);
         FileUtil.ensureDirectoryExists(cacheDir);
         FileUtil.ensureDirectoryExists(cardPicsDir);
@@ -159,6 +157,14 @@ public class ForgeProfileProperties {
     // returns a pair <userDir, cacheDir>
     private static Pair<String, String> getDefaultDirs() {
         if (!GuiBase.getInterface().isRunningOnDesktop()) { //special case for mobile devices
+            // iOS: Main.java points these at the writable Documents sandbox; the
+            // assets dir is the read-only app bundle, so deriving data/cache from
+            // it would make every write (image cache, prefs) fail on device
+            String iosUserDir = System.getProperty("forge.ios.userDir");
+            String iosCacheDir = System.getProperty("forge.ios.cacheDir");
+            if (iosUserDir != null && iosCacheDir != null) {
+                return Pair.of(iosUserDir, iosCacheDir);
+            }
             final String assetsDir = ForgeConstants.ASSETS_DIR;
             return Pair.of(assetsDir + "data" + File.separator, assetsDir + "cache" + File.separator);
         }

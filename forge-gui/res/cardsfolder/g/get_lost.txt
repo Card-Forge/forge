@@ -1,7 +1,7 @@
 Name:Get Lost
 ManaCost:1 W
 Types:Instant
-A:SP$ Destroy | ValidTgts$ Creature,Enchantment,Planeswalker | TgtPrompt$ Select target creature, enchantment, or planeswalker | SubAbility$ DBToken | SpellDescription$ Destroy target creature, enchantment, or planeswalker. Its controller creates two Map tokens. (They're artifacts with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")
+A:SP$ Destroy | ValidTgts$ Creature,Enchantment,Planeswalker | TgtPrompt$ Select target creature, enchantment, or planeswalker | SubAbility$ DBToken | SpellDescription$ Destroy target creature, enchantment, or planeswalker. Its controller creates two Map tokens. (They're artifacts with "{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.")
 SVar:DBToken:DB$ Token | TokenScript$ c_a_map_sac_explore | TokenOwner$ TargetedController | TokenAmount$ 2
 DeckHas:Ability$Token|Sacrifice & Type$Artifact|Map
-Oracle:Destroy target creature, enchantment, or planeswalker. Its controller creates two Map tokens. (They're artifacts with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")
+Oracle:Destroy target creature, enchantment, or planeswalker. Its controller creates two Map tokens. (They're artifacts with "{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.")

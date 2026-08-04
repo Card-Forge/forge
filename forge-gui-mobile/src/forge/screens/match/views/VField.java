@@ -65,7 +65,7 @@ public class VField extends FContainer {
             clear();
 
             FCollectionView<CardView> battlefield = player.getBattlefield();
-            if (battlefield == null) {
+            if (battlefield.isEmpty()) {
                 return;
             }
             Iterable<CardView> model = MatchController.instance.isNetGame()

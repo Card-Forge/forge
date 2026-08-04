@@ -211,7 +211,7 @@ public enum CounterEnumType implements CounterType {
 
     HIT("HIT", 255, 245, 195, CounterAiCategory.Positive),
 
-    HONE("HONE", 51, 227, 255, CounterAiCategory.Positive),
+    HONE("HONE", 35, 235, 240, CounterAiCategory.Positive),
 
     HOPE("HOPE", 232, 245, 245, CounterAiCategory.Positive),
 
@@ -245,6 +245,8 @@ public enum CounterEnumType implements CounterType {
 
     INTERVENTION("INTRV", 205, 203, 105, CounterAiCategory.Positive),
 
+    INVASION("INVAS", 235, 120, 60, CounterAiCategory.Positive),
+    
     INVITATION("INVIT", 205, 0, 26, CounterAiCategory.Positive),
 
     ISOLATION("ISOLT", 250, 190, 0, CounterAiCategory.Positive),
@@ -351,6 +353,8 @@ public enum CounterEnumType implements CounterType {
 
     PREY("PREY", 240, 0, 0, CounterAiCategory.Positive),
 
+    PROMOTION("PROM", 40, 210, 230, CounterAiCategory.Positive),
+
     PUPA("PUPA", 0, 223, 203, CounterAiCategory.Negative),
 
     P0P1("+0/+1", "+0/+1", 96, 226, 23, CounterAiCategory.Positive),
@@ -369,11 +373,13 @@ public enum CounterEnumType implements CounterType {
 
     RALLY("RALLY", 25, 230, 225, CounterAiCategory.Positive),
 
+    REFINE("RFIN", 51, 227, 255, CounterAiCategory.Positive),
+
+    REJECTION("REJECT", 212, 235, 242, CounterAiCategory.Positive),
+
     RELEASE("RELEASE", 200, 210, 50, CounterAiCategory.Positive),
 
     REPRIEVE("REPR", 240, 120, 50, CounterAiCategory.Positive),
-
-    REJECTION("REJECT", 212, 235, 242, CounterAiCategory.Positive),
 
     REV("REV", 255, 108, 111, CounterAiCategory.Positive),
 
@@ -386,6 +392,8 @@ public enum CounterEnumType implements CounterType {
     ROPE("ROPE", 239, 223, 187, CounterAiCategory.Positive),
 
     RUST("RUST", 255, 181, 116, CounterAiCategory.Negative),
+
+    SAURIAN("SAUR", 120, 203, 161, CounterAiCategory.Positive),
 
     SCREAM("SCREM", 0, 220, 255, CounterAiCategory.Positive),
 

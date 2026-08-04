@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Higgins
+Title=Higgins
+Icon=Higgins.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Alex_Campbell_-_Jeskai_Control_(Standard,_#2924470).dck
+Deck Type=constructed
+
+[Main]
+4 Tablet of Discovery
+4 Consult the Star Charts
+4 Jeskai Revelation
+4 Thunder Magic
+2 Broadside Barrage
+2 Flashback
+2 Swallowed by Leviathan
+1 Abrade
+1 Essence Scatter
+1 Into the Flood Maw
+1 Sear
+1 Traumatic Critique
+4 Stock Up
+2 Pyroclasm
+1 Impractical Joke
+4 Great Hall of the Biblioplex
+4 Riverpyre Verge
+4 Steam Vents
+3 Island
+2 Hallowed Fountain
+2 Mountain
+2 Petrified Hamlet
+2 Stormcarved Coast
+2 Sundown Pass
+1 Mistrise Village
+[Sideboard]
+3 Flashfreeze
+2 Emeritus of Ideation
+2 Ghost Vacuum
+2 Spell Pierce
+1 Annul
+1 Broadside Barrage
+1 Disdainful Stroke
+1 Impractical Joke
+1 Petrified Hamlet
+1 Slagstorm

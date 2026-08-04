@@ -29,8 +29,7 @@ public class VZoneDisplay extends VCardDisplayArea {
     @Override
     public void update() {
         FCollectionView<CardView> cards = player.getCards(zoneType);
-        refreshCardPanels(cards != null && MatchController.instance.isNetGame()
-                ? cards.threadSafeIterable() : cards);
+        refreshCardPanels(MatchController.instance.isNetGame() ? cards.threadSafeIterable() : cards);
     }
 
     @Override

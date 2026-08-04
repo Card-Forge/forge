@@ -1413,6 +1413,61 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH), "(F)");
     }
 
+    @Test
+    public void testMatchFoilCardRequestMoxfieldFormat() {
+        // card-set-collnr, as exported via Moxfield's "Copy for Moxfield"
+        String foilRequest = "4 Aspect of Hydra (BNG) 117 *F*";
+        Pattern target = DeckRecognizer.CARD_SET_COLLNO_PATTERN;
+        Matcher matcher = target.matcher(foilRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "4");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Aspect of Hydra "); // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "BNG");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "117");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH), "*F*");
+
+        // etched foil marker
+        foilRequest = "4 Aspect of Hydra (BNG) 117 *E*";
+        matcher = target.matcher(foilRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH), "*E*");
+
+        // card-set
+        foilRequest = "4 Aspect of Hydra [BNG] *F*";
+        target = DeckRecognizer.CARD_SET_PATTERN;
+        matcher = target.matcher(foilRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "4");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Aspect of Hydra "); // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "BNG");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH), "*F*");
+
+        // card-only
+        foilRequest = "4 Aspect of Hydra *F*";
+        target = DeckRecognizer.CARD_ONLY_PATTERN;
+        matcher = target.matcher(foilRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "4");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Aspect of Hydra "); // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH), "*F*");
+    }
+
+    @Test
+    public void testMoxfieldFoilCardLineIsImportedAsFoil() {
+        // full line as exported via Moxfield's "Copy for Moxfield" (issue #11005)
+        DeckRecognizer recognizer = new DeckRecognizer();
+        Token cardToken = recognizer.recogniseCardToken("4 Power Sink (TMP) 78 *F*", null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        PaperCard tokenCard = cardToken.getCard();
+        assertEquals(cardToken.getQuantity(), 4);
+        assertEquals(tokenCard.getName(), "Power Sink");
+        assertEquals(tokenCard.getEdition(), "TMP");
+        assertEquals(tokenCard.getCollectorNumber(), "78");
+        assertTrue(tokenCard.isFoil());
+    }
+
     /*
      * =================================================== TOKEN/CARD PARSING:
      * Collector Number and Art Index

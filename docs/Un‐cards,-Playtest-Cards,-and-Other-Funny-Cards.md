@@ -180,7 +180,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Myojin of Night's Reach and Grim Betrayal
 1. (Uk) Tarkir Charm
 1. (Uk) Jeska and Kamahl
-1. (Uk) Joven and Chandler
+1. (Uk) P-Joven and Chandler
 1. (Uk) Norin and Feldon
 1. (Uk) Kamigawa Charm
 1. (Uk) Chatterstorm and Awaken the Woods

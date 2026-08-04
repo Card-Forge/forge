@@ -1,0 +1,9 @@
+Name:The Masters of Evil
+ManaCost:5 B
+Types:Legendary Creature Human Villain
+PT:5/6
+S:Mode$ Continuous | Affected$ Card.Villain+Other+YouCtrl | AddPower$ 2 | AddToughness$ 1 | Description$ Other Villains you control get +2/+1.
+A:AB$ ChangeZone | ActivationZone$ Hand | Cost$ 1 B Discard<1/CARDNAME/this card> | Origin$ Library | Destination$ Hand | ChangeType$ Plan | SpellDescription$ Search your library for a Plan card, reveal it, put it into your hand, then shuffle.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Villain
+Oracle:Other Villains you control get +2/+1.\n{1}{B}, Discard this card: Search your library for a Plan card, reveal it, put it into your hand, then shuffle.

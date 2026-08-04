@@ -600,11 +600,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     @Override
     public void update(final boolean fullUpdate) {
         int playerCount = lobby.getNumberOfSlots();
-
-        updateVariantSelection();
-
         final boolean allowNetworking = lobby.isAllowNetworking();
 
+        updateVariantSelection();
         setStartButtonAvailability();
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
@@ -619,7 +617,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     isNewPanel = !panel.isVisible();
                 }
                 else {
-                    panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
+                    panel = new PlayerPanel(this, i, slot, lobby.mayEdit(i), lobby.hasControl());
                     // Register before initialize: deck-chooser populate fires onSelectionChange synchronously, which can recurse into updateDeck(i).
                     playerPanels.add(panel);
                     playersScroll.add(panel);
@@ -640,7 +638,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 if (type != LobbySlotType.AI) {
                     panel.setPlayerName(slot.getName());
                     panel.setAvatarIndex(slot.getAvatarIndex());
-                    panel.setSleeveIndex(slot.getSleeveIndex());
+                    final Deck slotDeck = slot.getDeck();
+                    panel.setSleeve(slot.getSleeveIndex(),
+                            slotDeck == null ? "" : slotDeck.getSleeveArtKey(),
+                            slotDeck == null ? Deck.DEFAULT_SLEEVE_OFFSET : slotDeck.getSleeveArtOffset());
                 } else {
                     //AI: this one overrides the setplayername if blank
                     if (panel.getPlayerName().isEmpty())
@@ -653,7 +654,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 panel.setIsReady(slot.isReady());
                 panel.setIsDevMode(slot.isDevMode());
                 panel.setIsArchenemy(slot.isArchenemy());
-                panel.setUseAiSimulation(slot.getAiOptions().contains(AIOption.USE_SIMULATION));
+                panel.setUseAiSimulation(slot.getAiOptions().contains(AIOption.USE_FULL_SIMULATION));
                 panel.setMayEdit(lobby.mayEdit(i));
                 panel.setMayControl(lobby.mayControl(i));
                 panel.setMayRemove(lobby.mayRemove(i));
@@ -793,6 +794,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
 
         decks[playerIndex] = playerDeck;
+        playerPanels.get(playerIndex).refreshSleeveFromDeck(playerDeck);
         if (playerChangeListener != null) {
             playerChangeListener.update(playerIndex, UpdateLobbyPlayerEvent.deckUpdate(playerDeck));
             playerChangeListener.update(playerIndex, UpdateLobbyPlayerEvent.setDeckSchemePlaneVanguard(TextUtil.fastReplace(deckName," Generated Deck", ""), SchemeDeckName, PlanarDeckname, VanguardAvatar));
@@ -814,6 +816,13 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     void updateSleeve(final int index, final int sleeveIndex) {
         if (playerChangeListener != null) {
             playerChangeListener.update(index, UpdateLobbyPlayerEvent.sleeveUpdate(sleeveIndex));
+        }
+    }
+
+    // Re-broadcasts a deck whose card-art sleeve changed, so networked opponents pick up the new sleeve
+    void updateDeckSleeve(final int index, final Deck deck) {
+        if (playerChangeListener != null && deck != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(deck));
         }
     }
 

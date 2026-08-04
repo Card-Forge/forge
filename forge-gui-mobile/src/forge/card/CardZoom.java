@@ -175,9 +175,8 @@ public class CardZoom extends FOverlay {
             flipIconBounds = null;
         }
         if (currentCard != null) {
-            if (currentCard.getMergedCardsCollection() != null)
-                if (currentCard.getMergedCardsCollection().size() > 0)
-                    mutateIconBounds = new Rectangle();
+            if (!currentCard.getMergedCardsCollection().isEmpty())
+                mutateIconBounds = new Rectangle();
         }
         showAltState = false;
         specialize.setVisible(
