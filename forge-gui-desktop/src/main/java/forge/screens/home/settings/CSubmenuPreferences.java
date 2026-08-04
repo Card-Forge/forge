@@ -206,6 +206,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeDefaultFontSizeComboBox();
         initializeCardArtFormatComboBox();
         initializeCardArtPreference();
+        initializeCardDownloadLanguageComboBox();
         initializeAutoUpdaterComboBox();
         initializeServerUPnPComboBox();
         initializeMulliganRuleComboBox();
@@ -417,6 +418,29 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createComboBox(updatePaths, updatePreference);
         final String selectedItem = this.prefs.getPref(updatePreference);
         panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeCardDownloadLanguageComboBox() {
+        // Step 1: Define the localized display names and their mapping to Scryfall language codes
+        final Map<String, String> cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
+        final String[] localizedOptions = cardLangMapping.keySet().toArray(new String[0]);
+
+        // Step 2: Get the preference key
+        final FPref cardLangPreference = FPref.UI_CARD_DOWNLOAD_LANG;
+
+        // Step 3: Create the combo box with localized display names, saving the Scryfall code
+        final FComboBoxPanel<String> panel = this.view.getCbpCardDownloadLangComboBoxPanel();
+        final FComboBox<String> comboBox = createLocalizedComboBox(localizedOptions, cardLangPreference, cardLangMapping);
+
+        // Step 4: Pre-select the display name matching the saved Scryfall code (default: English/"en")
+        final String savedCode = this.prefs.getPref(cardLangPreference);
+        final String selectedDisplayName = cardLangMapping.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(savedCode))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse("English");
+
+        panel.setComboBox(comboBox, selectedDisplayName);
     }
 
     private void initializeServerUPnPComboBox() {

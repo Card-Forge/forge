@@ -7,6 +7,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
+import forge.util.CardLanguageIndex;
 import forge.util.ImageUtil;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -94,7 +95,9 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
             if (edition != null) {
                 String scryfallCode = edition.getScryfallCode();
                 if (!StringUtils.isBlank(scryfallCode)) {
-                    String langCode = edition.getCardsLangCode();
+                    ImageUtil.ScryfallCardLocator locator = ImageUtil.resolveScryfallLocator(c, face, scryfallCode);
+                    String langCode = CardLanguageIndex.resolvePreferredLangCode(
+                            locator.setCode, locator.collectorNumber, edition.getCardsLangCode());
                     String path = ImageUtil.getScryfallDownloadUrl(c, face, scryfallCode, langCode, false);
                     if (path != null) {
                         return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + path;

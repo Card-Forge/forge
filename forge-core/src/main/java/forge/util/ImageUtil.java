@@ -206,7 +206,26 @@ public class ImageUtil {
         return getImageRelativePath(cp, face, true, true);
     }
 
-    public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop) {
+    /**
+     * The Scryfall set code, collector number, and face param ("" / "&face=front" / "&face=back")
+     * that a given (card, face) combination resolves to, after accounting for Forge-specific
+     * quirks (Planechase set remapping, funny-card "F" prefix, Specialize color suffixes, Meld
+     * back faces, alt-face markers). This is the exact key Scryfall itself uses to file the
+     * printing, so it also doubles as the lookup key into {@link CardLanguageIndex}.
+     */
+    public static final class ScryfallCardLocator {
+        public final String setCode;
+        public final String collectorNumber;
+        public final String faceParam;
+
+        private ScryfallCardLocator(String setCode, String collectorNumber, String faceParam) {
+            this.setCode = setCode;
+            this.collectorNumber = collectorNumber;
+            this.faceParam = faceParam;
+        }
+    }
+
+    public static ScryfallCardLocator resolveScryfallLocator(PaperCard cp, String face, String setCode) {
         final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F\\d+");
         String editionCode;
         if (setCode != null && !setCode.isEmpty())
@@ -225,12 +244,11 @@ public class ImageUtil {
             editionCode = "opc2";
             cardCollectorNumber = cardCollectorNumber.substring("OPC2".length());
         }
-        
+
         if (funnyCardCollectorNumberPattern.matcher(cardCollectorNumber).matches()) {
             cardCollectorNumber = cardCollectorNumber.substring(1);
         }
 
-        String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
 
         if (cp.getRules().getSplitType() == CardSplitType.Meld) {
@@ -257,8 +275,14 @@ public class ImageUtil {
             cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
         }
 
-        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, encodeUtf8(cardCollectorNumber),
-                langCode, versionParam, faceParam);
+        return new ScryfallCardLocator(editionCode, cardCollectorNumber, faceParam);
+    }
+
+    public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop) {
+        ScryfallCardLocator locator = resolveScryfallLocator(cp, face, setCode);
+        String versionParam = useArtCrop ? "art_crop" : "normal";
+        return String.format("%s/%s/%s?format=image&version=%s%s", locator.setCode, encodeUtf8(locator.collectorNumber),
+                langCode, versionParam, locator.faceParam);
     }
 
     public static String getScryfallTokenDownloadUrl(String collectorNumber, String setCode, String langCode, String faceParam) {
