@@ -211,7 +211,7 @@ public enum CounterEnumType implements CounterType {
 
     HIT("HIT", 255, 245, 195, CounterAiCategory.Positive),
 
-    HONE("HONE", 51, 227, 255, CounterAiCategory.Positive),
+    HONE("HONE", 35, 235, 240, CounterAiCategory.Positive),
 
     HOPE("HOPE", 232, 245, 245, CounterAiCategory.Positive),
 
@@ -373,11 +373,13 @@ public enum CounterEnumType implements CounterType {
 
     RALLY("RALLY", 25, 230, 225, CounterAiCategory.Positive),
 
+    REFINE("RFIN", 51, 227, 255, CounterAiCategory.Positive),
+
+    REJECTION("REJECT", 212, 235, 242, CounterAiCategory.Positive),
+
     RELEASE("RELEASE", 200, 210, 50, CounterAiCategory.Positive),
 
     REPRIEVE("REPR", 240, 120, 50, CounterAiCategory.Positive),
-
-    REJECTION("REJECT", 212, 235, 242, CounterAiCategory.Positive),
 
     REV("REV", 255, 108, 111, CounterAiCategory.Positive),
 
