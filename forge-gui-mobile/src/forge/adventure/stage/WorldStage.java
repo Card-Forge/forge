@@ -122,8 +122,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     Forge.advFreezePlayerControls = true;
                     player.clearCollisionHeight();
                     float attackDuration = Math.max(
-                            player.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f),
-                            mob.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f));
+                            player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f),
+                            mob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f));
                     startPause(attackDuration, () -> {
                         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
@@ -168,14 +168,14 @@ public class WorldStage extends GameStage implements SaveFileContent {
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             float attackDuration = Math.max(1f,
-                    player.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 1f));
+                    player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 1f));
             currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
                     currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
                     currentMob.resetCollisionHeight();
-                    float deathDuration = currentMob.getAnimationDuration(CharacterSprite.AnimationTypes.Death, 0.3f);
+                    float deathDuration = currentMob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Death, 0.3f);
                     startPause(deathDuration, () -> {
                         RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
                         WorldStage.this.removeEnemy(currentMob);
@@ -191,8 +191,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
             float resultAnimationDuration = Math.max(
-                    player.getAnimationDuration(CharacterSprite.AnimationTypes.Hit, 0.5f),
-                    currentMob.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.5f));
+                    player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Hit, 0.5f),
+                    currentMob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.5f));
             startPause(resultAnimationDuration, () -> {
                 currentMob.resetCollisionHeight();
                 boolean defeated = Current.player().defeated();

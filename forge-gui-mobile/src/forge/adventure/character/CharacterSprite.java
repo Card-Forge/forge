@@ -16,6 +16,7 @@ import java.util.HashMap;
  */
 
 public class CharacterSprite extends MapActor {
+    private static final float MAX_ACTION_ANIMATION_DURATION = 5f;
     private final HashMap<AnimationTypes, HashMap<AnimationDirections, Animation<TextureRegion>>> animations = new HashMap<>();
     float timer;
     private Animation<TextureRegion> currentAnimation = null;
@@ -143,12 +144,13 @@ public class CharacterSprite extends MapActor {
     }
 
     /**
-     * Returns the duration of an animation in the sprite's current direction.
+     * Returns the capped duration of an action animation in the sprite's current direction.
      * Uses the supplied fallback when the atlas does not define that animation.
      */
-    public float getAnimationDuration(AnimationTypes type, float fallbackDuration) {
+    public float getActionAnimationDuration(AnimationTypes type, float fallbackDuration) {
         Animation<TextureRegion> animation = getAnimation(type, currentAnimationDir);
-        return animation == null ? fallbackDuration : animation.getAnimationDuration();
+        float duration = animation == null ? fallbackDuration : animation.getAnimationDuration();
+        return Math.min(duration, MAX_ACTION_ANIMATION_DURATION);
     }
 
     private Animation<TextureRegion> getAnimation(AnimationTypes type, AnimationDirections direction) {

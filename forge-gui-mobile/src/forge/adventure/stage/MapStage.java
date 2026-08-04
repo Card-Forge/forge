@@ -829,14 +829,14 @@ public class MapStage extends GameStage {
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             float attackDuration = Math.max(1f,
-                    player.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 1f));
+                    player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 1f));
             currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
                     currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
                     currentMob.resetCollisionHeight();
-                    float deathDuration = currentMob.getAnimationDuration(CharacterSprite.AnimationTypes.Death, 0.3f);
+                    float deathDuration = currentMob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Death, 0.3f);
                     startPause(deathDuration, () -> {
                         MapStage.this.getReward();
                         AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
@@ -851,8 +851,8 @@ public class MapStage extends GameStage {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
             float resultAnimationDuration = Math.max(
-                    player.getAnimationDuration(CharacterSprite.AnimationTypes.Hit, 0.3f),
-                    currentMob.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.3f));
+                    player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Hit, 0.3f),
+                    currentMob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.3f));
             startPause(resultAnimationDuration, () -> {
                 player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
@@ -1152,8 +1152,8 @@ public class MapStage extends GameStage {
         Forge.advFreezePlayerControls = true;
         player.clearCollisionHeight();
         float attackDuration = Math.max(
-                player.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f),
-                mob.getAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f));
+                player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f),
+                mob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f));
         startPause(attackDuration, () -> {
             if (started)
                 return;

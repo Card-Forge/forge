@@ -658,7 +658,7 @@ public abstract class GameStage extends Stage {
             PlayerSprite playerSprite = getPlayerSprite();
             playerSprite.setAnimation(CharacterSprite.AnimationTypes.Death);
             playerSprite.playEffect(Paths.EFFECT_BLOOD, 0.5f);
-            float deathDuration = playerSprite.getAnimationDuration(CharacterSprite.AnimationTypes.Death, 1f);
+            float deathDuration = playerSprite.getActionAnimationDuration(CharacterSprite.AnimationTypes.Death, 1f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
@@ -682,7 +682,7 @@ public abstract class GameStage extends Stage {
         PlayerSprite playerSprite = getPlayerSprite();
         playerSprite.setAnimation(CharacterSprite.AnimationTypes.Hit);
         playerSprite.playEffect(Paths.EFFECT_BLOOD, 0.5f);
-        float hitDuration = playerSprite.getAnimationDuration(CharacterSprite.AnimationTypes.Hit, 1f);
+        float hitDuration = playerSprite.getActionAnimationDuration(CharacterSprite.AnimationTypes.Hit, 1f);
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
