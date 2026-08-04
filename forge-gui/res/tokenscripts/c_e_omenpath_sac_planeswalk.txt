@@ -1,0 +1,5 @@
+Name:Omenpath
+ManaCost:no cost
+Types:Enchantment
+A:AB$ Planeswalk | Cost$ Sac<1/CARDNAME/this enchantment> | SorcerySpeed$ True | SpellDescription$ Planeswalk. Activate only as a sorcery.
+Oracle:Sacrifice this enchantment: Planeswalk. Activate only as a sorcery.

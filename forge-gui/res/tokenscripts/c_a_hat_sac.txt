@@ -1,0 +1,5 @@
+Name:Hat Token
+ManaCost:no cost
+Types:Artifact
+A:AB$ Token | Cost$ 1 T Sac<1/CARDNAME/this token> | TokenScript$ w_1_1_rabbit | SpellDescription$ Create a 1/1 white Rabbit creature token.
+Oracle:{1}, {T}, Sacrifice this artifact: Create a 1/1 white Rabbit creature token.

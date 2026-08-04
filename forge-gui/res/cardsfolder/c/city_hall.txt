@@ -1,0 +1,14 @@
+Name:City Hall
+ManaCost:no cost
+Types:Plane Chicago
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When you planeswalk here, you become the Monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigChoice | TriggerDescription$ Whenever Chaos ensues, each player may create two tapped Treasure tokens. Each player who does can't attack you during their next turn.
+SVar:TrigChoice:DB$ GenericChoice | Defined$ Player | TempRemember$ Chooser | Choices$ Create,DontCreate | ShowChoice$ ExceptSelf | SubAbility$ DBToken | StackDescription$ None
+SVar:Create:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ MadeTreasure | SpellDescription$ Create two tapped Treasure tokens.
+SVar:DontCreate:DB$ Pump | Defined$ Remembered | SpellDescription$ Don't create Treasure tokens.
+SVar:DBToken:DB$ Token | TokenOwner$ Player.NotedForMadeTreasure | TokenAmount$ 2 | TokenTapped$ True | TokenScript$ c_a_treasure_sac | RememberObjects$ Player.NotedForMadeTreasure | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | EffectOwner$ Remembered | RememberObjects$ You | StaticAbilities$ STCantAttack | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup
+SVar:STCantAttack:Mode$ CantAttack | ValidCard$ Creature.YouCtrl | Target$ Player.IsRemembered | Description$ Creatures controlled by that player can't attack you.
+SVar:DBCleanup:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ MadeTreasure
+Oracle:When you planeswalk here, you become the Monarch.\nWhenever Chaos ensues, each player may create two tapped Treasure tokens. Each player who does can't attack you during their next turn.
