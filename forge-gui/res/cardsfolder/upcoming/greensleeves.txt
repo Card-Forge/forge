@@ -7,7 +7,6 @@ A:AB$ Mill | Cost$ SubCounter<3/LOYALTY> | NumCards$ 3 | RememberMilled$ True | 
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Permanent.IsRemembered | Origin$ Graveyard,Exile | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ AnimateAll | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | Power$ 8 | Toughness$ 8 | Keywords$ Trample | AILogic$ CreatureAdvantage | SpellDescription$ Until end of turn, creatures you control have base power and toughness 8/8 and gain trample.
-t the rest on the bottom of your library in a random order.
 Text:CARDNAME can be your commander.
 DeckHas:Ability$Token
 Oracle:[+2]: Create a Giant Badger token. (It's a {1}{G}{G} 2/2 Badger creature with "Whenever this token blocks, it gets +2/+2 until end of turn.")\n[-3]: Mill three cards. Put all permanent cards from among them into your hand.\n[-8]: Until end of turn, creatures you control have base power and toughness 8/8 and gain trample.\nGreensleeves can be your commander.
