@@ -97,7 +97,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
                 if (!StringUtils.isBlank(scryfallCode)) {
                     ImageUtil.ScryfallCardLocator locator = ImageUtil.resolveScryfallLocator(c, face, scryfallCode);
                     String langCode = CardLanguageIndex.resolvePreferredLangCode(
-                            locator.setCode, locator.collectorNumber, edition.getCardsLangCode());
+                            locator.setCode(), locator.collectorNumber(), edition.getCardsLangCode());
                     String path = ImageUtil.getScryfallDownloadUrl(c, face, scryfallCode, langCode, false);
                     if (path != null) {
                         return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + path;

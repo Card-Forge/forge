@@ -213,16 +213,7 @@ public class ImageUtil {
      * back faces, alt-face markers). This is the exact key Scryfall itself uses to file the
      * printing, so it also doubles as the lookup key into {@link CardLanguageIndex}.
      */
-    public static final class ScryfallCardLocator {
-        public final String setCode;
-        public final String collectorNumber;
-        public final String faceParam;
-
-        private ScryfallCardLocator(String setCode, String collectorNumber, String faceParam) {
-            this.setCode = setCode;
-            this.collectorNumber = collectorNumber;
-            this.faceParam = faceParam;
-        }
+    public record ScryfallCardLocator(String setCode, String collectorNumber, String faceParam) {
     }
 
     public static ScryfallCardLocator resolveScryfallLocator(PaperCard cp, String face, String setCode) {
@@ -281,8 +272,8 @@ public class ImageUtil {
     public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop) {
         ScryfallCardLocator locator = resolveScryfallLocator(cp, face, setCode);
         String versionParam = useArtCrop ? "art_crop" : "normal";
-        return String.format("%s/%s/%s?format=image&version=%s%s", locator.setCode, encodeUtf8(locator.collectorNumber),
-                langCode, versionParam, locator.faceParam);
+        return String.format("%s/%s/%s?format=image&version=%s%s", locator.setCode(), encodeUtf8(locator.collectorNumber()),
+                langCode, versionParam, locator.faceParam());
     }
 
     public static String getScryfallTokenDownloadUrl(String collectorNumber, String setCode, String langCode, String faceParam) {

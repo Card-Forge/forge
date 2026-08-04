@@ -88,7 +88,7 @@ public abstract class ImageFetcher {
         String preferredLangCode = CardLanguageIndex.getPreferredCardLangCode();
         if (preferredLangCode != null && !preferredLangCode.equalsIgnoreCase(defaultLangCode)) {
             ImageUtil.ScryfallCardLocator locator = ImageUtil.resolveScryfallLocator(card, face, setCode);
-            if (CardLanguageIndex.instance().isAvailableInLanguage(locator.setCode, locator.collectorNumber, preferredLangCode)) {
+            if (CardLanguageIndex.instance().isAvailableInLanguage(locator.setCode(), locator.collectorNumber(), preferredLangCode)) {
                 addUniqueScryfallUrl(card, face, useArtCrop, setCode, preferredLangCode, downloadUrls);
             }
         }
@@ -172,7 +172,7 @@ public abstract class ImageFetcher {
                     String setCode = ed.getScryfallCode();
                     ImageUtil.ScryfallCardLocator locator = ImageUtil.resolveScryfallLocator(pc, "", setCode);
                     String langCode = CardLanguageIndex.resolvePreferredLangCode(
-                            locator.setCode, locator.collectorNumber, ed.getCardsLangCode());
+                            locator.setCode(), locator.collectorNumber(), ed.getCardsLangCode());
                     downloadUrls.add("PLANECHASEBG:" + ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, "", setCode, langCode, true));
                     FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
                     File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, getPlanechaseFilename(cardName));
