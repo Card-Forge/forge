@@ -1,6 +1,7 @@
 package forge.ai;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.IdentityHashMap;
@@ -29,7 +30,9 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.MagicColor.Constant;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -212,78 +215,108 @@ public class ComputerUtilCard {
     }
 
     /**
-     * How many cards a player cannot currently pay for, in hand or as an ability on their
-     * permanents, would become payable if they also had this land.
+     * Score per pip of progress, and per first source of a color. Matches the scale the land
+     * scoring in AiController already uses, so {@link #getColorFixingValue} can be added to it.
      */
-    public static int getColorFixingNeed(final Player benefits, final Card candidate) {
-        if (benefits == null || candidate == null) {
-            return 0;
-        }
-        final byte have = ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(benefits, (List<Card>) null)).getColor();
-        final byte with = ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(benefits, candidate)).getColor();
-        if (have == with) {
+    public static final int COLOR_FIXING_WEIGHT = 50;
+
+    /**
+     * How much closer these extra sources get the player to paying for what they are holding,
+     * counted in pips across their hand and the abilities on their permanents. Counting pips
+     * rather than whole cards means a second source of a color is credited for the double-pip
+     * costs a single source cannot pay, and a first source is credited for the progress it makes.
+     */
+    private static int fixingNeed(final Player benefits, final int[] have, final int[] with) {
+        if (Arrays.equals(have, with)) {
             return 0;
         }
 
-        int unblocked = 0;
+        int progress = 0;
         for (Card c : benefits.getCardsIn(ZoneType.Hand)) {
-            if (unblocksWith(c.getManaCost(), have, with)) {
-                unblocked++;
-            }
+            progress += progressOn(c.getManaCost(), have, with);
         }
         for (Card c : benefits.getCardsIn(ZoneType.Battlefield)) {
-            for (SpellAbility ab : c.getAllSpellAbilities()) {
-                if (ab.isManaAbility() || ab.getPayCosts() == null || ab.getPayCosts().getCostMana() == null) {
+            // only what can actually be activated from here: getAllSpellAbilities would also hand
+            // back the permanent's own casting cost, and the far face of an MDFC or Adventure
+            for (SpellAbility ab : c.getNonManaAbilities()) {
+                if (!ab.isActivatedAbility() || ab.getPayCosts() == null
+                        || ab.getPayCosts().getCostMana() == null) {
                     continue;
                 }
-                if (unblocksWith(ab.getPayCosts().getCostMana().getMana(), have, with)) {
-                    unblocked++;
-                }
+                progress += progressOn(ab.getPayCosts().getCostMana().getMana(), have, with);
             }
         }
-        return unblocked;
-    }
-
-    private static boolean unblocksWith(final ManaCost cost, final byte have, final byte with) {
-        return cost != null && !cost.isNoCost() && !cost.canBePaidWithAvailable(have)
-                && cost.canBePaidWithAvailable(with);
+        return progress;
     }
 
     /**
-     * The candidate that best covers colors the player receiving the land is short of, or null when
-     * none of them stands out - so this never decides while it is blind, and the caller keeps
-     * whatever it was already doing. A player choosing for an opponent wants the least helpful one.
+     * What this land is worth to the player's mana overall: what it makes payable, plus the depth
+     * it adds in colors they are thin on. The single number every caller ranks lands by.
      */
-    public static Card getBestLandToGainAI(final Player benefits, final List<Card> candidates, final boolean hostile) {
-        return pickStandout(candidates, c -> getColorFixingNeed(benefits, c), hostile);
-    }
-
-    /** the single best candidate by this measure, or null if the measure cannot separate them */
-    private static Card pickStandout(final List<Card> candidates, final Function<Card, Integer> score,
-            final boolean invert) {
-        if (candidates.isEmpty()) {
-            return null;
+    public static int getColorFixingValue(final Player benefits, final Card candidate) {
+        if (benefits == null || candidate == null) {
+            return 0;
         }
-        final List<Card> best = bestBy(candidates, score, invert);
-        return best.size() == candidates.size() ? null : best.get(0);
+        // counted once and shared: both halves ask the same two questions of the board
+        final int[] have = ComputerUtilCost.getManaSourceCounts(benefits, null);
+        final int[] with = ComputerUtilCost.getManaSourceCounts(benefits, candidate);
+        return COLOR_FIXING_WEIGHT * fixingNeed(benefits, have, with) + depthValue(have, with);
     }
 
-    /** every candidate tied for the best score, or the whole list when the measure sees no difference */
-    private static List<Card> bestBy(final List<Card> candidates, final Function<Card, Integer> score,
-            final boolean invert) {
-        List<Card> best = Lists.newArrayList();
-        int bestScore = Integer.MIN_VALUE;
-        for (Card c : candidates) {
-            int s = invert ? -score.apply(c) : score.apply(c);
-            if (s > bestScore) {
-                bestScore = s;
-                best.clear();
-                best.add(c);
-            } else if (s == bestScore) {
-                best.add(c);
+    /**
+     * Depth this land adds beyond anything it unblocks outright. A second source of a color is
+     * worth having even when nothing needs it yet - it is what lets two spells of that color be
+     * cast in a turn - so this falls off as sources accumulate.
+     */
+    private static int depthValue(final int[] have, final int[] with) {
+        int value = 0;
+        for (int i = 0; i < have.length; i++) {
+            if (with[i] > have[i]) {
+                // 1/(x+1) for diminishing returns, matching the land scoring this replaces
+                value += ((with[i] - have[i]) * COLOR_FIXING_WEIGHT) / (have[i] + 1);
             }
         }
-        return best;
+        return value;
+    }
+
+    /**
+     * How many more sources of a color this cost still wants. Zero once it is castable; two for a
+     * {@code BB} cost off a board with no black, so that a first black source is credited with the
+     * progress it makes rather than only the source that finally completes it.
+     */
+    private static int shortfall(final ManaCost cost, final int[] counts) {
+        if (cost == null || cost.isNoCost()) {
+            return 0;
+        }
+        byte mask = 0;
+        for (int i = 0; i < counts.length; i++) {
+            if (counts[i] > 0) {
+                mask |= ManaAtom.MANATYPES[i];
+            }
+        }
+        int[] need = new int[counts.length];
+        int missing = 0;
+        for (ManaCostShard shard : cost) {
+            if (shard.isPhyrexian()) {
+                continue;
+            }
+            int index = shard.isMonoColor() && !shard.isOr2Generic()
+                    ? ManaAtom.getIndexFromName(MagicColor.toShortString(shard.getColorMask())) : -1;
+            if (index != -1) {
+                need[index]++;               // a plain colored pip wants a source of its own
+            } else if (!shard.canBePaidWithManaOfColor(mask)) {
+                missing++;                   // hybrid and generic keep the looser check
+            }
+        }
+        for (int i = 0; i < need.length; i++) {
+            missing += Math.max(0, need[i] - counts[i]);
+        }
+        return missing;
+    }
+
+    /** pips of progress this land makes towards a cost, never negative */
+    private static int progressOn(final ManaCost cost, final int[] have, final int[] with) {
+        return Math.max(0, shortfall(cost, have) - shortfall(cost, with));
     }
 
     /**
@@ -328,12 +361,9 @@ public class ComputerUtilCard {
                 }
             }
 
-            // a colour we are short of first, then raw land value, and only then give up and guess
-            Card ranked = getBestLandToGainAI(benefits, nbLand, false);
-            if (ranked == null) {
-                ranked = pickStandout(nbLand, landEvaluator::apply, false);
-            }
-            return ranked != null ? ranked : Aggregates.random(nbLand);
+            // a colour we are short of outranks raw land value; ties fall through to it
+            return Aggregates.itemWithMax(nbLand,
+                    c -> getColorFixingValue(benefits, c) + landEvaluator.apply(c));
         }
 
         // if no non-basic lands, target the least represented basic land type

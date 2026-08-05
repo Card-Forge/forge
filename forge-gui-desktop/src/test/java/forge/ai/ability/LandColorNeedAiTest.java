@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-
 import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
@@ -14,25 +12,25 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNull;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Land searches used to pick by list order, so a fetchland that had settled on the right colour
- * still chose its second colour arbitrarily. The candidates are ranked by the colours the player
- * receiving the land is actually short of.
+ * still chose its second colour arbitrarily. Both the play and the search path now rank candidates
+ * by what the colours they add would let us pay for, plus depth in the colours we are thin on.
  */
 public class LandColorNeedAiTest extends AITest {
 
     /** two duals sharing the searched-for type, differing in the colour beside it */
-    private List<Card> twoDuals(Player owner) {
-        return Lists.newArrayList(
-                addCardToZone("Tundra", owner, ZoneType.Library),         // Plains Island
-                addCardToZone("Underground Sea", owner, ZoneType.Library) // Island Swamp
-        );
+    private Card[] twoDuals(Player owner) {
+        return new Card[] {
+                addCardToZone("Tundra", owner, ZoneType.Library),          // Plains Island
+                addCardToZone("Underground Sea", owner, ZoneType.Library)  // Island Swamp
+        };
     }
 
     @Test
-    public void picksTheColorTheHandIsWaitingOn() {
+    public void scoresTheColorTheHandIsWaitingOn() {
         Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
 
@@ -42,12 +40,24 @@ public class LandColorNeedAiTest extends AITest {
         addCardToZone("Ravenous Chupacabra", ai, ZoneType.Hand);
         game.getAction().checkStateEffects(true);
 
-        Card chosen = ComputerUtilCard.getBestLandToGainAI(ai, twoDuals(ai), false);
-        assertEquals("Underground Sea", chosen.getName());
+        Card[] duals = twoDuals(ai);
+        int white = ComputerUtilCard.getColorFixingValue(ai, duals[0]);
+        int black = ComputerUtilCard.getColorFixingValue(ai, duals[1]);
+        assertTrue("black unblocks the hand, white does not", black > white);
+
+        // whether our sources happen to be tapped says nothing about which colours the board can
+        // make, so holding the land drop until main 2 must not change the answer
+        for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            c.setTapped(true);
+        }
+        game.getAction().checkStateEffects(true);
+        assertEquals("tapping out must not change the measure",
+                white, ComputerUtilCard.getColorFixingValue(ai, duals[0]));
+        assertEquals(black, ComputerUtilCard.getColorFixingValue(ai, duals[1]));
     }
 
     @Test
-    public void picksTheOtherColorWhenTheHandChanges() {
+    public void scoresTheOtherColorWhenTheHandChanges() {
         Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
 
@@ -56,37 +66,72 @@ public class LandColorNeedAiTest extends AITest {
         addCardToZone("Swords to Plowshares", ai, ZoneType.Hand);
         game.getAction().checkStateEffects(true);
 
-        Card chosen = ComputerUtilCard.getBestLandToGainAI(ai, twoDuals(ai), false);
-        assertEquals("Tundra", chosen.getName());
+        Card[] duals = twoDuals(ai);
+        assertTrue("now it is white we are waiting on",
+                ComputerUtilCard.getColorFixingValue(ai, duals[0])
+                        > ComputerUtilCard.getColorFixingValue(ai, duals[1]));
     }
 
+    /** a permanent has already been paid for, so it must not make its own colours look needed */
     @Test
-    public void anOpponentChoosingGivesTheLeastUsefulLand() {
+    public void aResolvedPermanentDoesNotLookLikeDemand() {
         Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
 
         addCards("Island", 3, ai);
-        addCardToZone("Sign in Blood", ai, ZoneType.Hand);
-        addCardToZone("Ravenous Chupacabra", ai, ZoneType.Hand);
+        // already resolved, so neither its casting cost nor its Adventure half is waiting on a
+        // colour - a permanent must not make its own colours look needed
+        addCard("Bonecrusher Giant", ai);
         game.getAction().checkStateEffects(true);
 
-        Card chosen = ComputerUtilCard.getBestLandToGainAI(ai, twoDuals(ai), true);
-        assertEquals("Tundra", chosen.getName());
-    }
+        // nothing is in hand, so a Mountain is worth depth on one new colour and nothing else.
+        // If the Giant's casting cost or its Adventure half counted, this would be far higher.
+        assertEquals("only depth on the new colour, no demand from the Giant",
+                ComputerUtilCard.COLOR_FIXING_WEIGHT,
+                ComputerUtilCard.getColorFixingValue(ai, addCardToZone("Mountain", ai, ZoneType.Library)));
 
-    /** with nothing to separate them the caller keeps whatever it was already doing */
-    @Test
-    public void staysOutOfTheWayWhenItCannotTell() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(1);
-
-        addCards("Island", 3, ai);
-        game.getAction().checkStateEffects(true);
-
-        List<Card> identical = Lists.newArrayList(
+        // and with no player to ask, ranking falls through to land value rather than a coin flip
+        assertEquals("Raffine's Tower", ComputerUtilCard.getBestLandAI(null, Lists.newArrayList(
                 addCardToZone("Tundra", ai, ZoneType.Library),
-                addCardToZone("Tundra", ai, ZoneType.Library));
-        assertNull(ComputerUtilCard.getBestLandToGainAI(ai, identical, false));
+                addCardToZone("Raffine's Tower", ai, ZoneType.Library))).getName());
+    }
+
+    /**
+     * A colour mask cannot tell one source of a colour from two, so it thinks {@code BB} is
+     * payable off a single Swamp. Counting pips is what makes the second source worth having.
+     */
+    @Test
+    public void aSecondSourceCountsForDoublePips() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Island", 3, ai);
+        addCards("Swamp", 1, ai);                           // one black source only
+        addCardToZone("Sign in Blood", ai, ZoneType.Hand);  // BB, so it wants a second
+        game.getAction().checkStateEffects(true);
+
+        assertTrue("a second black source is progress towards BB, a fourth blue source is not",
+                ComputerUtilCard.getColorFixingValue(ai, addCardToZone("Swamp", ai, ZoneType.Library))
+                        > ComputerUtilCard.getColorFixingValue(ai, addCardToZone("Island", ai, ZoneType.Library)));
+    }
+
+    /** with nothing waiting on a colour, depth still prefers the colours we are thin on */
+    @Test
+    public void depthPrefersTheColorWeAreThinnestOn() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Island", 3, ai);
+        addCards("Plains", 1, ai);
+        game.getAction().checkStateEffects(true); // empty hand: nothing to unblock at all
+
+        int firstSwamp = ComputerUtilCard.getColorFixingValue(ai, addCardToZone("Swamp", ai, ZoneType.Library));
+        int secondPlains = ComputerUtilCard.getColorFixingValue(ai, addCardToZone("Plains", ai, ZoneType.Library));
+        int fourthIsland = ComputerUtilCard.getColorFixingValue(ai, addCardToZone("Island", ai, ZoneType.Library));
+
+        assertTrue("a colour we have none of beats a second source", firstSwamp > secondPlains);
+        assertTrue("and a second source still beats a fourth", secondPlains > fourthIsland);
+        assertTrue("but a fourth is not worthless", fourthIsland > 0);
     }
 
     /**
@@ -117,20 +162,5 @@ public class LandColorNeedAiTest extends AITest {
         assertEquals("fetched the land that unblocks our hand",
                 1, countCardsWithName(game, "Underground Sea"));
         assertEquals(0, countCardsWithName(game, "Tundra"));
-    }
-
-    /** callers with no player to ask still get land value instead of a coin flip */
-    @Test
-    public void fallsBackToLandValueWithNoPlayer() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(1);
-
-        List<Card> mixed = Lists.newArrayList(
-                addCardToZone("Tundra", ai, ZoneType.Library),
-                addCardToZone("Raffine's Tower", ai, ZoneType.Library)); // triome, produces more colours
-
-        assertNull("nothing to say without a player to ask",
-                ComputerUtilCard.getBestLandToGainAI(null, mixed, false));
-        assertEquals("Raffine's Tower", ComputerUtilCard.getBestLandAI(null, mixed).getName());
     }
 }
