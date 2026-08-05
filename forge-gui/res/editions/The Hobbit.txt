@@ -4,8 +4,6 @@ Date=2026-08-14
 Name=The Hobbit
 Type=Expansion
 ScryfallCode=HOB
-DoublePick=WhenPodSizeIs4
-RecommendedPodSize=4
 #https://mtgscribe.com/2026/07/21/the-hobbit-play-booster-fact-sheet/
 BoosterSlots=Common,Common-Scene,Uncommon,Uncommon-Special,RareMythic,Land,Wildcard,WildcardFoil
 Booster=6 Common, 1 Common-Scene, 2 Uncommon, 1 Uncommon-Special, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
