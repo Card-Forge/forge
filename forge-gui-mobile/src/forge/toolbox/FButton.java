@@ -265,79 +265,43 @@ public class FButton extends FDisplayObject implements IButton {
         float w = getWidth();
         float h = getHeight();
 
-        float cornerButtonWidth = w / 2;
-        float cornerButtonHeight = h * 1.5f;
-        float cornerTextOffsetX = cornerButtonWidth / 2;
-        float cornerTextOffsetY = (cornerButtonHeight - h) / 2;
+        FSkinColor backgroundColor = FSkinColor.getStandardColor(38, 43, 48);
 
-        if (imgL.getTextureRegion() == null) {
-            //handle rendering buttons before textures loaded
-            FLabel.drawButtonBackground(g, w, h, imgL == FSkinImage.BTN_DOWN_LEFT);
-        } else {
-            //determine images to draw and text alignment based on which corner button is in (if any)
-            FSkinImage btnOverL = hdbuttonskin() ? FSkinImage.HDBTN_OVER_LEFT : FSkinImage.BTN_OVER_LEFT;
-            FSkinImage btnOverC = hdbuttonskin() ? FSkinImage.HDBTN_OVER_CENTER : FSkinImage.BTN_OVER_CENTER;
-            FSkinImage btnOverR = hdbuttonskin() ? FSkinImage.HDBTN_OVER_RIGHT : FSkinImage.BTN_OVER_RIGHT;
-            if (Forge.isMobileAdventureMode) {
-                btnOverL = FSkinImage.ADV_BTN_OVER_LEFT;
-                btnOverC = FSkinImage.ADV_BTN_OVER_CENTER;
-                btnOverR = FSkinImage.ADV_BTN_OVER_RIGHT;
-            }
-            switch (corner) {
-                case None:
-                    if (w > 2 * h) {
-                        g.drawImage(isHovered() && !pressed ? btnOverL : imgL, 0, 0, h, h);
-                        g.drawImage(isHovered() && !pressed ? btnOverC : imgM, h, 0, w - (2 * h), h);
-                        g.drawImage(isHovered() && !pressed ? btnOverR : imgR, w - h, 0, h, h);
-                    }
-                    else {
-                        g.drawImage(isHovered() && !pressed ? btnOverL : imgL, 0, 0, cornerButtonWidth, h);
-                        g.drawImage(isHovered() && !pressed ? btnOverR : imgR, cornerButtonWidth, 0, w - cornerButtonWidth, h);
-                    }
-                    x += PADDING;
-                    w -= 2 * PADDING;
-                    break;
-                case BottomLeft:
-                    g.startClip(x, y, w, h);
-                    g.drawImage(isHovered() && !pressed ? btnOverC : imgM, 0, 0, cornerButtonWidth, cornerButtonHeight);
-                    g.drawImage(isHovered() && !pressed ? btnOverR : imgR, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
-                    g.endClip();
-                    w -= cornerTextOffsetX;
-                    y += cornerTextOffsetY;
-                    h -= cornerTextOffsetY;
-                    break;
-                case BottomRight:
-                    g.startClip(x, y, w, h);
-                    g.drawImage(isHovered() && !pressed ? btnOverL : imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
-                    g.drawImage(isHovered() && !pressed ? btnOverC : imgM, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
-                    g.endClip();
-                    x += cornerTextOffsetX;
-                    w -= cornerTextOffsetX;
-                    y += cornerTextOffsetY;
-                    h -= cornerTextOffsetY;
-                    break;
-                case BottomMiddle:
-                    g.startClip(x, y, w, h);
-                    cornerButtonWidth = w / 3;
-                    cornerTextOffsetX = cornerButtonWidth / 2;
-                    g.drawImage(isHovered() && !pressed ? btnOverL : imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
-                    g.drawImage(isHovered() && !pressed ? btnOverC : imgM, cornerButtonWidth, 0, w - 2 * cornerButtonWidth, cornerButtonHeight);
-                    g.drawImage(isHovered() && !pressed ? btnOverR : imgR, w - cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
-                    g.endClip();
-                    x += cornerTextOffsetX / 2;
-                    w -= cornerTextOffsetX;
-                    y += cornerTextOffsetY;
-                    h -= cornerTextOffsetY;
-                    break;
-            }
+        if (pressed || isToggled()) {
+            backgroundColor = FSkinColor.getStandardColor(58, 64, 70);
+        }
+        else if (isHovered()) {
+            backgroundColor = FSkinColor.getStandardColor(48, 54, 60);
         }
 
+        if (!isEnabled()) {
+            backgroundColor = FSkinColor.getStandardColor(32, 36, 40);
+        }
+
+        g.fillRect(backgroundColor, x, y, w, h);
+
+        x += PADDING;
+        w -= 2 * PADDING;
+
         String displayText = text;
+
         if (!StringUtils.isEmpty(displayText)) {
             if (corner == Corner.BottomLeft || corner == Corner.BottomRight) {
-                displayText = displayText.replaceFirst(" ", "\n"); //allow second word to wrap if corner button
+                displayText = displayText.replaceFirst(" ", "\n");
             }
-            g.drawText(displayText, font, foreColor, x, y, w, h, false, Align.center, true);
+
+            g.drawText(
+                displayText,
+                font,
+                foreColor,
+                x,
+                y,
+                w,
+                h,
+                false,
+                Align.center,
+                true
+            );
         }
     }
 
