@@ -110,7 +110,7 @@ public class FSkin {
     }
     private static void useFallbackDir() {
         // iOS and Android both need to use internal() for bundled resources
-        boolean isMobile = GuiBase.isAndroid() || GuiBase.isIOS();
+        boolean isMobile = GuiBase.isMobile();
         preferredDir = isMobile ? Gdx.files.internal("fallback_skin") : Gdx.files.classpath("fallback_skin");
     }
     public static void loadLight(String skinName, final SplashScreen splashScreen,FileHandle prefDir) {
