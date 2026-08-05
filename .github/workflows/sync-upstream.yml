@@ -57,7 +57,10 @@ jobs:
 
       - name: Push sync branch
         if: steps.behind.outputs.behind > 0
-        run: git push origin sync/upstream
+        id: push
+        run: |
+          git push origin sync/upstream
+          echo "head=$(git rev-parse sync/upstream)" >> "$GITHUB_OUTPUT"
 
       - name: Open pull request
         if: steps.behind.outputs.behind > 0
@@ -74,19 +77,29 @@ jobs:
       - name: Wait for CI
         if: steps.behind.outputs.behind > 0
         run: |
-          PR=${{ steps.pr.outputs.number }}
-          HEAD=$(gh pr view "$PR" --json headRefOid --jq .headRefOid)
+          HEAD=${{ steps.push.outputs.head }}
           for i in $(seq 1 60); do
             # The branch was just pushed: check-runs may not be registered yet,
             # so wait until at least one exists AND none are pending.
-            DATA=$(gh api "repos/${{ github.repository }}/commits/$HEAD/check-runs" 2>/dev/null || echo '{"total_count":1,"check_runs":[{"status":"in_progress"}]}')
+            # Poll the exact pushed SHA (not gh pr view) to avoid reading a
+            # stale headRefOid while the new commit's checks are still queued.
+            DATA=$(gh api "repos/${{ github.repository }}/commits/$HEAD/check-runs" 2>/dev/null || echo '{"total_count":0,"check_runs":[]}')
             TOTAL=$(echo "$DATA" | jq '.total_count')
             PEND=$(echo "$DATA" | jq '[.check_runs[] | select(.status == "in_progress" or .status == "queued")] | length')
             echo "check-runs: ${TOTAL}, pending: ${PEND} (${i}/60)"
-            [ "$TOTAL" -gt 0 ] && [ "$PEND" -eq 0 ] && break
+            if [ "$TOTAL" -gt 0 ] && [ "$PEND" -eq 0 ]; then
+              FAIL=$(echo "$DATA" | jq '[.check_runs[] | select(.conclusion == "failure" or .conclusion == "cancelled" or .conclusion == "timed_out" or .conclusion == "action_required")] | length')
+              if [ "$FAIL" -gt 0 ]; then
+                echo "::error::CI checks failed on $HEAD"
+                echo "$DATA" | jq -r '.check_runs[] | "\(.name): \(.conclusion)"'
+                exit 1
+              fi
+              exit 0
+            fi
             sleep 20
           done
-          gh pr checks "$PR" --watch --interval 20
+          echo "::error::Timed out waiting for CI checks on $HEAD"
+          exit 1
 
       - name: Merge pull request
         if: steps.behind.outputs.behind > 0

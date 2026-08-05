@@ -17,7 +17,7 @@ cleaner, faster client — nothing more.
 
 - Not related in any way with Wizards of the Coast.
 - Inherits Forge's open-source engine, released under the GNU Public License.
-- Supports up to 8 players, each assigned to human or AI control. Decks can be imported, user-created
+- Supports up to 8 players, each assigned to human or AI control (local hot-seat; online multiplayer is work-in-progress). Decks can be imported, user-created
   with the Deck Editor, or automatically generated.
 - Over 99% of all cards in Magic's existence are available (see [Missing Cards](Missing-Cards-in-Forge.md)),
   with the missing ones mostly being pointless to implement in context or impossible.

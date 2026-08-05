@@ -37,13 +37,13 @@ A new user can build a deck and play a complete Commander game against AI with n
 | Commander-only mode works | 2b, 2e | **DONE** (2b), open (2e) |
 | Infinite loops end in a declared draw, never a hang | 11a-11e (stack limit, RepeatEffect, trigger count, fingerprint, dialog) | open |
 
-Post-v1: multiplayer online (Section 8), advanced board UX (Section 7 polish), mobile parity enhancements (Section 10), loop shortcuts & paper-rules protocol (11f-11i).
+Post-v1: multiplayer online (Section 8), advanced board UX (Section 7 polish), loop shortcuts & paper-rules protocol (11f-11i). Mobile parity (Section 10) is in-scope for v1: 10a already offered, 10c guard **DONE**, 10b optional.
 
 ---
 
 ## 1. StackedTokenCard — Flyweight Integration
 
-**Status: Wired at token-creation time (1a), battlefield-zone tracking surviving batch creation (1b), `CardCopyService` promotion verified (1f), engine-path promotion (1g), real-path benchmark (1h). Static eval, copier, and relaxed merge remain.**
+**Status: Wired at token-creation time (1a), battlefield-zone tracking surviving batch creation (1b), static-eval batching (1c), `CardCopyService` promotion verified (1f), engine-path promotion (1g), real-path benchmark (1h). GameCopier and relaxed merge remain.**
 
 ### Required Fixes
 
@@ -53,7 +53,7 @@ Status legend: `DONE` / `PARTIAL` / open. Code carries `// doc:<item> <STATUS>` 
 |---|-----|--------|-----|--------|
 | 1a | `StackedTokenCard` is never instantiated by the game engine | Zero performance benefit from flyweight today | Wire stack creation into `TokenEffectBase.makeTokenTable()` → `PlayerZoneBattlefield.tryStackToken()` at move-to-play time | **DONE** — `TokenEffectBase.java:172-174`, `PlayerZoneBattlefield.java:82` |
 | 1b | Zone management (`Zone`) does not understand stacked tokens | Game state, counting, filtering all ignore stacks | Add `StackedTokenCard` tracking alongside `Card` tracking in the battlefield zone; `getCards()`/`iterator()` expand stacks first | **DONE** — `PlayerZoneBattlefield` stacks survive a burst of `add()` calls via view-refresh suppression during `TokenEffectBase` token creation (`PlayerZone.java:85`, `TokenEffectBase.java:112-125`); first real read materializes all at once |
-| 1c | Static ability checking ignores stacks | No performance gain from batched static evaluation | `StaticAbility` resolver must accept a count parameter or recognize `StackedTokenCard` to evaluate once for N tokens | **DONE** — `checkStaticAbilities()` now uses `forEachCardInGameUnexpanded()` which iterates stacked prototypes without materializing O(N) cards; continuous effects apply to prototype and are inherited by promoted copies via `CardCopyService` (`Game.java:777`, `GameAction.java:1098`, `PlayerZoneBattlefield.java:171`) |
+| 1c | Static ability checking ignores stacks | No performance gain from batched static evaluation | `StaticAbility` resolver must accept a count parameter or recognize `StackedTokenCard` to evaluate once for N tokens | **DONE** — `checkStaticAbilities()` now uses `forEachCardInGameUnexpanded()` which iterates stacked prototypes without materializing O(N) cards; continuous effects apply to prototype and are inherited by promoted copies via `CardCopyService` (`Game.java:777`, `GameAction.java:1098`, `PlayerZoneBattlefield.java:171`). Caveat: the apply-phase loop (`GameAction.java:1223`) still calls `getCardsIn(Battlefield)` which materializes pending stacks on every full static check — see issue #58 |
 | 1d | `GameCopier` snapshots individual cards | AI state cloning copies O(N) cards instead of O(1) stacks | `GameCopier` must copy `StackedTokenCard` as an opaque flyweight rather than materializing individual cards | |
 | 1e | `canMerge()` is conservative — blocks on counters and tapped state | Misses optimization opportunities for tokens with some modifications | Relax `canMerge()` after confirming game rules allow: summoning sickness is identity-irrelevant, temporary pumps from static abilities should not block merge | |
 | 1f | `promote()` assumes `CardCopyService` exists with the right API | Verify `CardCopyService.copyCard()` exists and correctly creates independent copies with fresh card IDs | Audit `CardCopyService`; if it does not exist, build a card copy method in `StackedTokenCard` directly | **DONE** — `CardCopyService.copyCard(true)` verified and used in `promote()` (`StackedTokenCard.java:150`) |
@@ -80,7 +80,6 @@ Status legend: `DONE` / `PARTIAL` / open. Code carries `// doc:<item> <STATUS>` 
 | 2a | `Colors` enum mutation via `setColor()` is unconventional — enum values are logically constant per JVM convention | Fragile if any code caches a `Colors` reference before the theme is applied | Either (a) store theme colors in a separate lookup that `Colors` delegates to, or (b) accept the simplification with a `ponytail:` comment acknowledging the ceiling |
 | 2b | ~~`VSubmenuPlayCommander` duplicates lobby layout from `VSubmenuConstructed`~~ **DONE** | ~~104 lines of near-identical code; upstream changes to lobby must be mirrored~~ | Extracted `VSubmenuConstructed.populateLobby()` shared static method; `VSubmenuPlayCommander.populate()` delegates to it (VSubmenuPlayCommander.java:79, VSubmenuConstructed.java:121) |
 | 2c | `EMenuGroup` reorder (PLAY before GAUNTLET) will conflict on upstream merge | Increases maintenance cost of sync | Either (a) append PLAY at the end of the enum to minimize diff, or (b) keep the reorder and document the merge conflict expected |
-| 2d | `ForgePreferences.SUBMENU_PLAY` is added but unused | Dead preference key | Remove or connect to a feature toggle |
 | 2e | `lblCommander` localization string may not exist in all 10 locale files | Fallback to missing key = raw key string displayed in UI | Add `lblCommander=Commander` to all locale files, or document as acceptable fallback |
 | 2f | Palette is desktop-only (`applyCommanderDarkTheme` in `FSkin.java`); mobile stays on stock skin colors | Desktop and Android UIs drift apart as colors change | Shared `ReforgeTheme` in `forge-gui` (`FSkinProp`->ARGB map); both `FSkin.applyCommanderDarkTheme()` (desktop) and `FSkinColor.applyReforgeTheme()` (mobile) read it; single source, no per-platform porting needed | **DONE** |
 
@@ -262,7 +261,7 @@ P2P implementation exists but is unreliable. A full client-server rewrite is a s
 | Matchmaking lobby | Browse active games by format, player count. Create / join. | P2 |
 | Spectator mode | Join a running game as observer. | P2 |
 | Replay system | Record complete game actions. Replay with seek controls. | P2 |
-| Chat | Per-game chat with preset phrases. | P2 |
+| Chat | Per-game chat with preset phrases. | P3 |
 | Deck validation on connect | Server validates deck legality before game start. | P2 |
 
 ---
@@ -390,7 +389,7 @@ Missing: no game-state fingerprinting, no repeat detection, no shortcut mechanis
 | P0 | 5a — Smart default game setup: reduce clicks to start a Commander game | 2 days | Core UX goal — **DONE: first deck auto-selected and applied, precon fallback for fresh installs** |
 | P0 | 6a — FlatLaf integration (`FlatLaf.setup()`) | 1 hour | Instant visual modernization — **DONE: FlatLaf 3.7.2 applied in `ReforgeCommanderApp.main()`** |
 | P1 | 1b — Zone tracking for stacked tokens | 2-3 days | Enables all downstream consumers — **DONE: stacks survive burst via view-refresh suppression** |
-| P1 | ~~1c — Static-eval batching (count param for StaticAbility resolver)~~ **DONE** | 2-3 days | Single most impactful remaining perf win — O(1) static eval for N identical tokens — **DONE: `forEachCardInGameUnexpanded()` iterates stacked prototypes; continuous effects applied to prototype, inherited by promoted copies** |
+| P1 | ~~1c — Static-eval batching (count param for StaticAbility resolver)~~ **DONE** | 2-3 days | Single most impactful remaining perf win — O(S) traversal across S non-empty stacks (vs O(N) materialized tokens) — **DONE: `forEachCardInGameUnexpanded()` iterates stacked prototypes; continuous effects applied to prototype, inherited by promoted copies** |
 | P1 | 1d — GameCopier flyweight support | 1 day | AI performance benefit — O(1) clone instead of O(N) card copy |
 | P1 | ~~2b — Reduce VSubmenuPlayCommander duplication~~ **DONE** | 0.5 day | Maintainability |
 | P1 | 5b — Simplify lobby: prefill Commander variant, suggest deck, hide unused slots | 1 day | Core UX goal |

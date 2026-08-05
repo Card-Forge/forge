@@ -31,6 +31,9 @@ public final class ForgeConstants {
     public static final String GITHUB_FORGE_URL                 = "https://github.com/Aderon3D/Reforge-Commander/";
     public static final String GITHUB_RELEASES_ATOM             = GITHUB_FORGE_URL + "releases.atom";
     public static final String GITHUB_COMMITS_ATOM              = GITHUB_FORGE_URL + "commits/master.atom";
+    // ponytail: daily-snapshots releases are not published for the fork, so the
+    // desktop auto-updater silently no-ops. If desktop updates are wanted, publish
+    // matching releases or revert this URL to upstream.
     public static final String GITHUB_SNAPSHOT_URL              = GITHUB_FORGE_URL + "releases/download/daily-snapshots/";
     public static final String NETWORK_PLAY_WIKI_URL            = GITHUB_FORGE_URL + "wiki/network-play";
     public static final String RELEASE_URL                      = "https://releases.cardforge.org/";

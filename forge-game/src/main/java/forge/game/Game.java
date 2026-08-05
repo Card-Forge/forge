@@ -776,18 +776,9 @@ public class Game {
         visitor.visitAll(getStackZone().getCards());
     }
 
-    /**
-     * Like {@link #forEachCardInGame(Visitor, boolean)} but does NOT expand
-     * stacked tokens on the battlefield zone. Stacked tokens appear as their
-     * prototype Card (one per stack) rather than being materialized into
-     * N individual Card objects.
-     *
-     * Use this in hot paths (static ability evaluation) where the O(1)
-     * stacking optimization should be preserved.
-     *
-     * ponytail: copies zone iteration order from forEachCardInGame.
-     * Upgrade to a withStacks flag on forEachCardInGame if more callers need this.
-     */
+    /** Like {@link #forEachCardInGame(Visitor, boolean)} but leaves stacked tokens as one prototype per stack. */
+    // ponytail: copies zone iteration order from forEachCardInGame; sideboard excluded like the default there.
+    // Upgrade to a withStacks flag on forEachCardInGame if more callers need this.
     // doc:1c DONE
     public void forEachCardInGameUnexpanded(Visitor<Card> visitor) {
         for (final Player player : getPlayers()) {
@@ -811,9 +802,6 @@ public class Game {
                 return;
             }
             if (!visitor.visitAll(player.getCardsIn(ZoneType.PART_OF_COMMAND_ZONE))) {
-                return;
-            }
-            if (!visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
                 return;
             }
             if (!visitor.visitAll(player.getInboundTokens())) {
@@ -924,8 +912,6 @@ public class Game {
                 pl.revealFaceDownCards();
             }
         }
-
-        // TODO free any mindslaves
 
         for (Card c : cards) {
             // CR 800.4d if card is controlled by opponent, LTB should trigger
@@ -1048,6 +1034,11 @@ public class Game {
 
         ingamePlayers.remove(p);
         lostPlayers.add(p);
+
+        // free any mindslaves
+        for (Player pl : getPlayers()) {
+            pl.removeController(p);
+        }
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
@@ -1259,8 +1250,7 @@ public class Game {
         resetNumPiledGuessedSA();
         clearLeftBattlefieldThisTurn();
         clearLeftGraveyardThisTurn();
-        clearCounterAddedThisTurn();
-        clearCounterRemovedThisTurn();
+        clearCountersThisTurn();
         clearGlobalDamageHistory();
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
@@ -1331,8 +1321,9 @@ public class Game {
         return result;
     }
 
-    public void clearCounterAddedThisTurn() {
+    public void clearCountersThisTurn() {
         countersAddedThisTurn.clear();
+        countersRemovedThisTurn.clear();
     }
 
     public void addCounterRemovedThisTurn(CounterType cType, Card card, Integer value) {
@@ -1350,10 +1341,6 @@ public class Game {
             }
         }
         return result;
-    }
-
-    public void clearCounterRemovedThisTurn() {
-        countersRemovedThisTurn.clear();
     }
 
     /**

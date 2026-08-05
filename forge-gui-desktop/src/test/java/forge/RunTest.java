@@ -23,7 +23,7 @@ public class RunTest {
      * </p>
      */
     @Test(timeOut = 1000, enabled = false)
-    void test() {
+    public void test() {
         Card c;
         //final CardFactoryInterface cf = Singletons.getModel().getCardFactory();
         // ********* test Card

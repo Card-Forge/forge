@@ -123,36 +123,6 @@ public class PlayerZoneBattlefield extends PlayerZone {
     }
 
     /**
-     * Compresses groups of identical tokens into StackedTokenCard entries.
-     * Run after batch token creation to defer Card object allocation.
-     *
-     * expandStacks() must be called before any operation that iterates cards
-     * and expects distinct Card references (targeting, destruction, events).
-     */
-    public final void compressTokens() {
-        CardCollection toRemove = new CardCollection();
-        for (Card c : cardList) {
-            if (c.getGamePieceType() != GamePieceType.TOKEN || c.isPhasedOut()) {
-                continue;
-            }
-            boolean merged = false;
-            for (StackedTokenCard stack : stackedTokens) {
-                if (stack.canMerge(c)) {
-                    stack.addQuantity(1);
-                    toRemove.add(c);
-                    merged = true;
-                    break;
-                }
-            }
-            if (!merged) {
-                stackedTokens.add(new StackedTokenCard(c, 1));
-                toRemove.add(c);
-            }
-        }
-        cardList.removeAll(toRemove);
-    }
-
-    /**
      * Expands stacks before returning cards to ensure the engine sees distinct references.
      * Without this, mass-removal and trigger systems would malfunction on stacked tokens.
      */
@@ -168,18 +138,9 @@ public class PlayerZoneBattlefield extends PlayerZone {
         return super.iterator();
     }
 
-    /**
-     * Returns all cards on the battlefield WITHOUT expanding stacked tokens.
-     * Stacked tokens appear as their prototype Card (one per stack) rather
-     * than being materialized into N individual Card objects.
-     *
-     * Use this in hot paths (static ability evaluation) where the O(1)
-     * stacking optimization should be preserved.
-     *
-     * ponytail: O(S) where S = number of stacks, not N = total token count.
-     * Melded cards excluded (same as getCards). Upgrade if melded cards
-     * gain static abilities that need evaluation.
-     */
+    /** All battlefield cards WITHOUT expanding stacked tokens: one prototype Card per stack, not N cards. */
+    // ponytail: O(S) where S = number of stacks, not N = total token count.
+    // Melded cards excluded (same as getCards). Upgrade if melded cards gain static abilities needing evaluation.
     // doc:1c DONE
     public final CardCollectionView getCardsUnexpanded() {
         if (stackedTokens.isEmpty()) {
