@@ -19,7 +19,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProtectAi extends SpellAbilityAi {
