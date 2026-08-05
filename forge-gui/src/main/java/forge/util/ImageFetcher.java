@@ -13,6 +13,7 @@ import forge.model.FModel;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public abstract class ImageFetcher {
@@ -20,8 +21,66 @@ public abstract class ImageFetcher {
     // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     private static final HashMap<String, String> langCodeMap = new HashMap<>();
     protected static final boolean disableHostedDownload = true;
-    protected static Date scryfallCooldownTime = null;
+    protected static volatile Date scryfallCooldownTime = null;
     private static final HashSet<String> fetching = new HashSet<>();
+
+    /** Minimum gap between Scryfall requests, matching what GuiDownloadService already keeps. */
+    private static final long SCRYFALL_MIN_INTERVAL_MS = 100;
+    private static final long SCRYFALL_COOLDOWN_MINUTES = 5;
+    private static final Object scryfallPacing = new Object();
+    private static long lastScryfallRequest = 0;
+
+    protected static boolean isScryfall(final String url) {
+        return url != null && url.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD);
+    }
+
+    /**
+     * Whether we are still backing off after Scryfall rate limited us. Clears the cooldown once it
+     * has expired, so callers can simply skip the fetch while this returns true.
+     */
+    protected static boolean inScryfallCooldown(final String url) {
+        if (!isScryfall(url)) {
+            return false;
+        }
+        final Date cooldown = scryfallCooldownTime;
+        if (cooldown == null) {
+            return false;
+        }
+        if (cooldown.after(new Date())) {
+            System.err.println("Currently in cooldown period for scryfall downloads. Skipping download attempt for: " + url);
+            return true;
+        }
+        scryfallCooldownTime = null;
+        return false;
+    }
+
+    /** Record that Scryfall returned 429, so we stop asking for a while. */
+    protected static void noteScryfallRateLimited() {
+        scryfallCooldownTime = new Date(System.currentTimeMillis()
+                + TimeUnit.MINUTES.toMillis(SCRYFALL_COOLDOWN_MINUTES));
+    }
+
+    /**
+     * Space Scryfall requests out. Downloads run on a work stealing pool, so without this a screen
+     * full of missing images asks for all of them at once. Called from the download task, never the
+     * EDT.
+     */
+    protected static void paceScryfall(final String url) {
+        if (!isScryfall(url)) {
+            return;
+        }
+        synchronized (scryfallPacing) {
+            final long wait = lastScryfallRequest + SCRYFALL_MIN_INTERVAL_MS - System.currentTimeMillis();
+            if (wait > 0) {
+                try {
+                    Thread.sleep(wait);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            lastScryfallRequest = System.currentTimeMillis();
+        }
+    }
 
     static {
         langCodeMap.put("en-US", "en");

@@ -16,7 +16,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class LibGDXImageFetcher extends ImageFetcher {
@@ -56,15 +55,8 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 return false;
             }
 
-            if (scryfallCooldownTime != null && urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD)) {
-                // Don't try to download card images from scryfall if we've been rate limited
-                if (scryfallCooldownTime.after(new Date())) {
-                    System.err.println("Currently in cooldown period for scryfall downloads. Skipping download attempt for: " + urlToDownload);
-                    return false;
-                } else {
-                    // Cooldown period has expired, reset the cooldown time
-                    scryfallCooldownTime = null;
-                }
+            if (inScryfallCooldown(urlToDownload)) {
+                return false;
             }
 
             String newdespath = urlToDownload.contains(".fullborder.") || urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) ?
@@ -91,8 +83,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 if (responseCode == 429) {
                     System.err.println("Device has been rate limited. Adding reduction of download attempts for this device.");
                     Sentry.captureMessage("Device has been rate limited. Adding reduction of download attempts for this device. " + urlToDownload);
-                    // Don't try to download from scryfall for 5 minutes
-                    scryfallCooldownTime = new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
+                    noteScryfallRateLimited();
                 }
 
                 return false;
