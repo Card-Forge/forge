@@ -213,10 +213,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     if (point == collidingPoint) {
                         continue;
                     }
+                    WorldSave.getCurrentSave().getPointOfInterestChanges(point.getPointOfInterest().getID()).visit();
+                    point.getMapSprite().checkOut();
                     WorldSave.getCurrentSave().autoSave();
                     loadPOI(point.getPointOfInterest());
-                    point.getMapSprite().checkOut();
-                    WorldSave.getCurrentSave().getPointOfInterestChanges(point.getPointOfInterest().getID()).visit();
                     return true;
                 } else {
                     if (point == collidingPoint) {

@@ -433,6 +433,35 @@ public class MapDialog {
         return false;
     }
 
+    public boolean hasBattleOrDeletion() {
+        if (data == null) return false;
+        for (DialogData dialog : data) {
+            if (hasBattleOrDeletion(dialog)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasBattleOrDeletion(DialogData dialog) {
+        if (dialog == null) return false;
+        if (dialog.action != null) {
+            for (DialogData.ActionData action : dialog.action) {
+                if (action != null && (action.deleteMapObject != 0 || action.battleWithActorID != 0)) {
+                    return true;
+                }
+            }
+        }
+        if (dialog.options != null) {
+            for (DialogData option : dialog.options) {
+                if (hasBattleOrDeletion(option)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean isConditionOk(DialogData.ConditionData[] data) {
         if (data == null) return true;
         AdventurePlayer player = Current.player();

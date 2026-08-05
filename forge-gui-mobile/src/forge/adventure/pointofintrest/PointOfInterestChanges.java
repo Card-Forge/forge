@@ -21,6 +21,11 @@ public class PointOfInterestChanges implements SaveFileContent  {
     private final java.util.Map<Integer, Integer> reputation = new HashMap<>();
     private Boolean isBookmarked;
     private Boolean isVisited;
+    private Boolean isCleared;
+    private Boolean enemiesSeen;
+    private Boolean bossAlive;
+    private final HashSet<String> subMaps = new HashSet<>();
+    private static int clearedStateVersion;
 
     public static class Map extends HashMap<String,PointOfInterestChanges> implements SaveFileContent {
         @Override
@@ -69,6 +74,13 @@ public class PointOfInterestChanges implements SaveFileContent  {
         }
         isBookmarked = (Boolean) data.readObject("isBookmarked");
         isVisited = (Boolean) data.readObject("isVisited");
+        isCleared = data.containsKey("isCleared") ? (Boolean) data.readObject("isCleared") : null;
+        enemiesSeen = data.containsKey("enemiesSeen") ? (Boolean) data.readObject("enemiesSeen") : null;
+        bossAlive = data.containsKey("bossAlive") ? (Boolean) data.readObject("bossAlive") : null;
+        subMaps.clear();
+        if (data.containsKey("subMaps"))
+            subMaps.addAll((HashSet<String>) data.readObject("subMaps"));
+        clearedStateVersion++;
     }
 
     @Override
@@ -81,6 +93,10 @@ public class PointOfInterestChanges implements SaveFileContent  {
         data.storeObject("reputation", reputation);
         data.storeObject("isBookmarked", isBookmarked);
         data.storeObject("isVisited", isVisited);
+        data.storeObject("isCleared", isCleared);
+        data.storeObject("enemiesSeen", enemiesSeen);
+        data.storeObject("bossAlive", bossAlive);
+        data.storeObject("subMaps", subMaps);
         return data;
     }
 
@@ -177,6 +193,47 @@ public class PointOfInterestChanges implements SaveFileContent  {
     public void clearDeletedObjects() {
         // reset map when assigning as a quest target that needs enemies
         deletedObjects.clear();
+        setCleared(false);
+    }
+    public boolean isCleared() {
+        if (isCleared == null)
+            return false;
+        return isCleared;
+    }
+    public void setCleared(boolean val) {
+        if (isCleared == null || isCleared != val)
+            clearedStateVersion++;
+        isCleared = val;
+    }
+    public boolean hasSeenEnemies() {
+        if (enemiesSeen == null)
+            return false;
+        return enemiesSeen;
+    }
+    public boolean isBossAlive() {
+        if (bossAlive == null)
+            return false;
+        return bossAlive;
+    }
+    public void setBossAlive(boolean val) {
+        if (bossAlive == null || bossAlive != val)
+            clearedStateVersion++;
+        bossAlive = val;
+    }
+    public void markEnemiesSeen() {
+        if (enemiesSeen == null || !enemiesSeen)
+            clearedStateVersion++;
+        enemiesSeen = true;
+    }
+    public void addSubMap(String targetMap) {
+        if (subMaps.add(targetMap))
+            clearedStateVersion++;
+    }
+    public HashSet<String> getSubMaps() {
+        return subMaps;
+    }
+    public static int getClearedStateVersion() {
+        return clearedStateVersion;
     }
     public boolean isVisited() {
         if (isVisited ==null)

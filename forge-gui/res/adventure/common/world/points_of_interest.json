@@ -1,6 +1,7 @@
 [
 	{
 		"name": "Aerie",
+		"challengeRating": "low",
 		"displayName": "Aerie",
 		"type": "dungeon",
 		"count": 1,
@@ -17,6 +18,7 @@
 	},
 	{
 		"name": "BarbarianCamp",
+		"challengeRating": "low",
 		"displayName": "Barbarian Camp",
 		"type": "dungeon",
 		"count": 2,
@@ -33,6 +35,7 @@
 	},
 	{
 		"name": "BarbarianCamp1",
+		"challengeRating": "low",
 		"displayName": "Barbarian Camp",
 		"type": "dungeon",
 		"count": 2,
@@ -49,6 +52,7 @@
 	},
 	{
 		"name": "KorEncampment",
+		"challengeRating": "medium",
 		"displayName": "Kor Outpost",
 		"type": "dungeon",
 		"count": 1,
@@ -66,6 +70,7 @@
 	},
 	{
 		"name": "BarbarianCamp2",
+		"challengeRating": "low",
 		"displayName": "Barbarian Camp",
 		"type": "dungeon",
 		"count": 2,
@@ -82,6 +87,7 @@
 	},
 	{
 		"name": "BarbarianCamp3",
+		"challengeRating": "medium",
 		"displayName": "Barbarian Camp",
 		"type": "dungeon",
 		"count": 2,
@@ -98,6 +104,7 @@
 	},
 	{
 		"name": "BarbarianCamp4",
+		"challengeRating": "low",
 		"displayName": "Barbarian Camp",
 		"type": "dungeon",
 		"count": 2,
@@ -114,6 +121,7 @@
 	},
 	{
 		"name": "BarbarianCamp5",
+		"challengeRating": "low",
 		"displayName": "Barbarian Camp",
 		"type": "dungeon",
 		"count": 2,
@@ -130,6 +138,7 @@
 	},
 	{
 		"name": "Black Castle",
+		"challengeRating": "veryHard",
 		"displayName": "Black Castle",
 		"type": "castle",
 		"count": 1,
@@ -157,6 +166,7 @@
 	},
 	{
 		"name": "Blue Castle",
+		"challengeRating": "veryHard",
 		"displayName": "Blue Castle",
 		"type": "castle",
 		"count": 1,
@@ -184,6 +194,7 @@
 	},
 	{
 		"name": "FortBlue1",
+		"challengeRating": "medium",
 		"displayName": "Pirate Fort",
 		"type": "dungeon",
 		"count": 1,
@@ -200,6 +211,7 @@
 	},
 	{
 		"name": "FortBlue2",
+		"challengeRating": "medium",
 		"displayName": "River Crossing",
 		"type": "dungeon",
 		"count": 1,
@@ -216,6 +228,7 @@
 	},
 	{
 		"name": "FortBlue3",
+		"challengeRating": "medium",
 		"displayName": "Esper Manufactory",
 		"type": "dungeon",
 		"count": 1,
@@ -232,6 +245,7 @@
 	},
 	{
 		"name": "DemonTower",
+		"challengeRating": "medium",
 		"displayName": "Hidden Treasure-room",
 		"type": "dungeon",
 		"count": 1,
@@ -247,6 +261,7 @@
 	},
 	{
 		"name": "FortBlue4",
+		"challengeRating": "medium",
 		"displayName": "Cloud Fort",
 		"type": "dungeon",
 		"count": 1,
@@ -263,6 +278,7 @@
 	},
 	{
 		"name": "FortBlue5",
+		"challengeRating": "medium",
 		"displayName": "Sea Temple",
 		"type": "dungeon",
 		"count": 1,
@@ -279,6 +295,7 @@
 	},
 	{
 		"name": "Castle",
+		"challengeRating": "low",
 		"displayName": "Von Gant's Fortress",
 		"type": "dungeon",
 		"count": 1,
@@ -296,6 +313,7 @@
 	},
 	{
 		"name": "Castle1",
+		"challengeRating": "medium",
 		"displayName": "Fort",
 		"type": "dungeon",
 		"count": 2,
@@ -313,6 +331,7 @@
 	},
 	{
 		"name": "Castle2",
+		"challengeRating": "medium",
 		"displayName": "Pharaoh's Fort",
 		"type": "dungeon",
 		"count": 1,
@@ -330,6 +349,7 @@
 	},
 	{
 		"name": "Castle3",
+		"challengeRating": "low",
 		"displayName": "Levilain's Farm",
 		"type": "dungeon",
 		"count": 1,
@@ -347,6 +367,7 @@
 	},
 	{
 		"name": "CatLairG",
+		"challengeRating": "low",
 		"displayName": "Leonin Camp",
 		"type": "dungeon",
 		"count": 1,
@@ -363,6 +384,7 @@
 	},
 	{
 		"name": "CatLairG1",
+		"challengeRating": "low",
 		"displayName": "Tiger Forest",
 		"type": "dungeon",
 		"count": 1,
@@ -379,6 +401,7 @@
 	},
 	{
 		"name": "CatLairG2",
+		"challengeRating": "medium",
 		"displayName": "Chimera Lair",
 		"type": "dungeon",
 		"count": 1,
@@ -395,6 +418,7 @@
 	},
 	{
 		"name": "CatLairW",
+		"challengeRating": "low",
 		"displayName": "Lion's Den",
 		"type": "dungeon",
 		"count": 1,
@@ -412,6 +436,7 @@
 	},
 	{
 		"name": "CatLairW1",
+		"challengeRating": "low",
 		"displayName": "Leonin Camp",
 		"type": "dungeon",
 		"count": 1,
@@ -429,6 +454,7 @@
 	},
 	{
 		"name": "CatLairW2",
+		"challengeRating": "low",
 		"displayName": "Leonin Sphinx",
 		"type": "dungeon",
 		"count": 1,
@@ -446,6 +472,7 @@
 	},
 	{
 		"name": "CaveB",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -462,6 +489,7 @@
 	},
 	{
 		"name": "CaveZombie",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -477,6 +505,7 @@
 	},
 	{
 		"name": "CaveKobold",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -492,6 +521,7 @@
 	},
 	{
 		"name": "CaveReptile",
+		"challengeRating": "hard",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -507,6 +537,7 @@
 	},
 	{
 		"name": "CaveTroll",
+		"challengeRating": "hard",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -522,6 +553,7 @@
 	},
 	{
 		"name": "CaveLarge1",
+		"challengeRating": "hard",
 		"displayName": "Forgotten Cave",
 		"type": "cave",
 		"count": 1,
@@ -551,6 +583,7 @@
 	},
 	{
 		"name": "CaveB2",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -567,6 +600,7 @@
 	},
 	{
 		"name": "CaveB3",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -583,6 +617,7 @@
 	},
 	{
 		"name": "CaveB4",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -599,6 +634,7 @@
 	},
 	{
 		"name": "CaveB5",
+		"challengeRating": "low",
 		"displayName": "Flooded Cave",
 		"type": "cave",
 		"count": 1,
@@ -615,6 +651,7 @@
 	},
 	{
 		"name": "CaveB6",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -631,6 +668,7 @@
 	},
 	{
 		"name": "CaveB8",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -647,6 +685,7 @@
 	},
 	{
 		"name": "CaveBA",
+		"challengeRating": "low",
 		"displayName": "Deep Caverns",
 		"type": "cave",
 		"count": 1,
@@ -663,6 +702,7 @@
 	},
 	{
 		"name": "CaveC",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -693,6 +733,7 @@
 	},
 	{
 		"name": "CaveC2",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -709,6 +750,7 @@
 	},
 	{
 		"name": "CaveC3",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -725,6 +767,7 @@
 	},
 	{
 		"name": "CaveC4",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -741,6 +784,7 @@
 	},
 	{
 		"name": "CaveC5",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -757,6 +801,7 @@
 	},
 	{
 		"name": "CaveC6",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -773,6 +818,7 @@
 	},
 	{
 		"name": "CaveC7",
+		"challengeRating": "medium",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -789,6 +835,7 @@
 	},
 	{
 		"name": "CaveC8",
+		"challengeRating": "low",
 		"displayName": "Flooded Cave",
 		"type": "cave",
 		"count": 1,
@@ -805,6 +852,7 @@
 	},
 	{
 		"name": "CaveC9",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -821,6 +869,7 @@
 	},
 	{
 		"name": "CaveCA",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -837,6 +886,7 @@
 	},
 	{
 		"name": "CaveCB",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -853,6 +903,7 @@
 	},
 	{
 		"name": "CaveCD",
+		"challengeRating": "low",
 		"displayName": "Deep Caverns",
 		"type": "cave",
 		"count": 1,
@@ -869,6 +920,7 @@
 	},
 	{
 		"name": "CaveCE",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -885,6 +937,7 @@
 	},
 	{
 		"name": "CaveG",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -915,6 +968,7 @@
 	},
 	{
 		"name": "CaveG2",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -931,6 +985,7 @@
 	},
 	{
 		"name": "CaveG3",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -947,6 +1002,7 @@
 	},
 	{
 		"name": "CaveG4",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -963,6 +1019,7 @@
 	},
 	{
 		"name": "CaveG5",
+		"challengeRating": "low",
 		"displayName": "Flooded Cave",
 		"type": "cave",
 		"count": 1,
@@ -979,6 +1036,7 @@
 	},
 	{
 		"name": "CaveG6",
+		"challengeRating": "medium",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -995,6 +1053,7 @@
 	},
 	{
 		"name": "CaveG9",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1011,6 +1070,7 @@
 	},
 	{
 		"name": "CaveGB",
+		"challengeRating": "low",
 		"displayName": "Deep Caverns",
 		"type": "cave",
 		"count": 1,
@@ -1027,6 +1087,7 @@
 	},
 	{
 		"name": "CaveCerodon",
+		"challengeRating": "medium",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1044,6 +1105,7 @@
 	},
 	{
 		"name": "CaveEldrazi",
+		"challengeRating": "medium",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1060,6 +1122,7 @@
 	},
 	{
 		"name": "CaveAmphin",
+		"challengeRating": "low",
 		"displayName": "Flooded Cave",
 		"type": "cave",
 		"count": 1,
@@ -1077,6 +1140,7 @@
 	},
 	{
 		"name": "CaveRat",
+		"challengeRating": "medium",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1108,6 +1172,7 @@
 	},
 	{
 		"name": "CaveU1",
+		"challengeRating": "low",
 		"displayName": "Flooded Cave",
 		"type": "cave",
 		"count": 1,
@@ -1124,6 +1189,7 @@
 	},
 	{
 		"name": "CaveU2",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1140,6 +1206,7 @@
 	},
 	{
 		"name": "CaveU3",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1156,6 +1223,7 @@
 	},
 	{
 		"name": "CaveU4",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1172,6 +1240,7 @@
 	},
 	{
 		"name": "CaveR",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1202,6 +1271,7 @@
 	},
 	{
 		"name": "CaveR3",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1218,6 +1288,7 @@
 	},
 	{
 		"name": "CaveR4",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1234,6 +1305,7 @@
 	},
 	{
 		"name": "CaveR5",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1250,6 +1322,7 @@
 	},
 	{
 		"name": "CaveR6",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1266,6 +1339,7 @@
 	},
 	{
 		"name": "CaveR7",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1282,6 +1356,7 @@
 	},
 	{
 		"name": "CaveR8",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1298,6 +1373,7 @@
 	},
 	{
 		"name": "CaveR9",
+		"challengeRating": "medium",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1314,6 +1390,7 @@
 	},
 	{
 		"name": "CaveRA",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 2,
@@ -1330,6 +1407,7 @@
 	},
 	{
 		"name": "CaveRB",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 2,
@@ -1346,6 +1424,7 @@
 	},
 	{
 		"name": "CaveRC",
+		"challengeRating": "medium",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 2,
@@ -1362,6 +1441,7 @@
 	},
 	{
 		"name": "CaveRE",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1378,6 +1458,7 @@
 	},
 	{
 		"name": "CaveRG",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1394,6 +1475,7 @@
 	},
 	{
 		"name": "CaveRH",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1410,6 +1492,7 @@
 	},
 	{
 		"name": "CaveRJ",
+		"challengeRating": "low",
 		"displayName": "Deep Caverns",
 		"type": "cave",
 		"count": 1,
@@ -1426,6 +1509,7 @@
 	},
 	{
 		"name": "CaveW",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1456,6 +1540,7 @@
 	},
 	{
 		"name": "CaveW2",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1472,6 +1557,7 @@
 	},
 	{
 		"name": "CaveW3",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1488,6 +1574,7 @@
 	},
 	{
 		"name": "CaveW4",
+		"challengeRating": "medium",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1504,6 +1591,7 @@
 	},
 	{
 		"name": "CaveW5",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1520,6 +1608,7 @@
 	},
 	{
 		"name": "CaveW6",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -1536,6 +1625,7 @@
 	},
 	{
 		"name": "Emrakul",
+		"challengeRating": "veryHard",
 		"displayName": "Emrakul's Castle",
 		"type": "castle",
 		"count": 1,
@@ -1556,6 +1646,7 @@
 	},
 	{
 		"name": "CopperhostForest",
+		"challengeRating": "low",
 		"displayName": "Copper Host Forest",
 		"type": "dungeon",
 		"count": 2,
@@ -1566,6 +1657,7 @@
 	},
 	{
 		"name": "Crawlspace",
+		"challengeRating": "low",
 		"displayName": "Blue Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -1589,6 +1681,7 @@
 	},
 	{
 		"name": "DjinnPalace",
+		"challengeRating": "medium",
 		"displayName": "Djinn's Palace",
 		"type": "dungeon",
 		"count": 1,
@@ -1603,6 +1696,7 @@
 	},
 	{
 		"name": "DjinnPalace1",
+		"challengeRating": "medium",
 		"displayName": "Djinn's Palace",
 		"type": "dungeon",
 		"count": 1,
@@ -1617,6 +1711,7 @@
 	},
 	{
 		"name": "Dream Halls",
+		"challengeRating": "low",
 		"displayName": "Blue Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -1632,6 +1727,7 @@
 	},
 	{
 		"name": "DrossOutpost",
+		"challengeRating": "low",
 		"displayName": "Dross Outpost",
 		"type": "dungeon",
 		"count": 2,
@@ -1648,6 +1744,7 @@
 	},
 	{
 		"name": "ElfTown",
+		"challengeRating": "low",
 		"displayName": "Secluded Elven Encampment",
 		"type": "dungeon",
 		"count": 2,
@@ -1664,6 +1761,7 @@
 	},
 	{
 		"name": "EvilGrove",
+		"challengeRating": "low",
 		"displayName": "Undead Grove",
 		"type": "cave",
 		"count": 1,
@@ -1680,6 +1778,7 @@
 	},
 	{
 		"name": "EvilGrove1",
+		"challengeRating": "low",
 		"displayName": "Malicious Artificer's Grove",
 		"type": "cave",
 		"count": 1,
@@ -1696,6 +1795,7 @@
 	},
 	{
 		"name": "EvilGrove2",
+		"challengeRating": "low",
 		"displayName": "Grove of the Dark Titan",
 		"type": "cave",
 		"count": 1,
@@ -1712,6 +1812,7 @@
 	},
 	{
 		"name": "EvilGrove3",
+		"challengeRating": "hard",
 		"displayName": "Cursed Forest",
 		"type": "cave",
 		"count": 1,
@@ -1728,6 +1829,7 @@
 	},
 	{
 		"name": "EvilGrove4",
+		"challengeRating": "medium",
 		"displayName": "Neverglades National Park",
 		"type": "cave",
 		"count": 2,
@@ -1744,6 +1846,7 @@
 	},
 	{
 		"name": "EvilGrove5",
+		"challengeRating": "medium",
 		"displayName": "Black Dragon Mountain",
 		"type": "cave",
 		"count": 2,
@@ -1760,6 +1863,7 @@
 	},
 	{
 		"name": "EvilGrove6",
+		"challengeRating": "low",
 		"displayName": "Shade's Lair",
 		"type": "cave",
 		"count": 2,
@@ -1776,6 +1880,7 @@
 	},
 	{
 		"name": "Factory",
+		"challengeRating": "low",
 		"displayName": "Autonomous Factory",
 		"type": "dungeon",
 		"count": 2,
@@ -1792,6 +1897,7 @@
 	},
 	{
 		"name": "Factory1",
+		"challengeRating": "low",
 		"displayName": "Autonomous Factory",
 		"type": "dungeon",
 		"count": 2,
@@ -1808,6 +1914,7 @@
 	},
 	{
 		"name": "Factory2",
+		"challengeRating": "low",
 		"displayName": "Autonomous Factory",
 		"type": "dungeon",
 		"count": 2,
@@ -1824,6 +1931,7 @@
 	},
 	{
 		"name": "Factory3",
+		"challengeRating": "low",
 		"displayName": "Autonomous Factory",
 		"type": "dungeon",
 		"count": 2,
@@ -1912,6 +2020,7 @@
 	},
 	{
 		"name": "Fort",
+		"challengeRating": "low",
 		"displayName": "The Frozen Ruins",
 		"type": "dungeon",
 		"count": 1,
@@ -1922,6 +2031,7 @@
 	},
 	{
 		"name": "Fort1",
+		"challengeRating": "low",
 		"displayName": "Tundra Fort",
 		"type": "dungeon",
 		"count": 1,
@@ -1938,6 +2048,7 @@
 	},
 	{
 		"name": "Fort2",
+		"challengeRating": "medium",
 		"displayName": "Mages' Fort",
 		"type": "dungeon",
 		"count": 1,
@@ -1954,6 +2065,7 @@
 	},
 	{
 		"name": "FortMultilevel",
+		"challengeRating": "medium",
 		"displayName": "Cultists' Outpost",
 		"type": "dungeon",
 		"count": 1,
@@ -1970,6 +2082,7 @@
 	},
 	{
 		"name": "Fort3",
+		"challengeRating": "low",
 		"displayName": "Mercenary Barracks",
 		"type": "dungeon",
 		"count": 1,
@@ -1986,6 +2099,7 @@
 	},
 	{
 		"name": "Fort4",
+		"challengeRating": "low",
 		"displayName": "Putrid Fort",
 		"type": "dungeon",
 		"count": 1,
@@ -2002,6 +2116,7 @@
 	},
 	{
 		"name": "Fort5",
+		"challengeRating": "low",
 		"displayName": "Mind Slaver's Encampment",
 		"type": "dungeon",
 		"count": 2,
@@ -2018,6 +2133,7 @@
 	},
 	{
 		"name": "Fort6",
+		"challengeRating": "low",
 		"displayName": "Necromancer's Study",
 		"type": "dungeon",
 		"count": 1,
@@ -2034,6 +2150,7 @@
 	},
 	{
 		"name": "Fort7",
+		"challengeRating": "low",
 		"displayName": "Logging Camp",
 		"type": "dungeon",
 		"count": 2,
@@ -2050,6 +2167,7 @@
 	},
 	{
 		"name": "Fort8",
+		"challengeRating": "low",
 		"displayName": "Satyr Grove",
 		"type": "dungeon",
 		"count": 2,
@@ -2066,6 +2184,7 @@
 	},
 	{
 		"name": "Fort9",
+		"challengeRating": "low",
 		"displayName": "Beastmaster's Study",
 		"type": "dungeon",
 		"count": 2,
@@ -2082,6 +2201,7 @@
 	},
 	{
 		"name": "FurnaceBase",
+		"challengeRating": "low",
 		"displayName": "Furnace Host Base",
 		"type": "dungeon",
 		"count": 2,
@@ -2098,6 +2218,7 @@
 	},
 	{
 		"name": "Garruk Forest",
+		"challengeRating": "hard",
 		"displayName": "Garruk's Forest",
 		"type": "sidebossmoderate",
 		"count": 1,
@@ -2113,6 +2234,7 @@
 	},
 	{
 		"name": "GitaxianLab",
+		"challengeRating": "low",
 		"displayName": "Gitaxian Laboratory",
 		"type": "dungeon",
 		"count": 2,
@@ -2129,6 +2251,7 @@
 	},
 	{
 		"name": "Green Castle",
+		"challengeRating": "veryHard",
 		"displayName": "Green Castle",
 		"type": "castle",
 		"count": 1,
@@ -2156,6 +2279,7 @@
 	},
 	{
 		"name": "Graveyard",
+		"challengeRating": "medium",
 		"displayName": "Graveyard",
 		"type": "dungeon",
 		"count": 1,
@@ -2171,6 +2295,7 @@
 	},
 	{
 		"name": "Graveyard1",
+		"challengeRating": "medium",
 		"displayName": "Graveyard",
 		"type": "dungeon",
 		"count": 1,
@@ -2186,6 +2311,7 @@
 	},
 	{
 		"name": "Graveyard2",
+		"challengeRating": "medium",
 		"displayName": "Graveyard",
 		"type": "dungeon",
 		"count": 1,
@@ -2201,6 +2327,7 @@
 	},
 	{
 		"name": "Graveyard3",
+		"challengeRating": "medium",
 		"displayName": "Graveyard",
 		"type": "dungeon",
 		"count": 1,
@@ -2216,6 +2343,7 @@
 	},
 	{
 		"name": "Graveyard4",
+		"challengeRating": "medium",
 		"displayName": "Graveyard",
 		"type": "dungeon",
 		"count": 1,
@@ -2231,6 +2359,7 @@
 	},
 	{
 		"name": "Grolnoks Bog",
+		"challengeRating": "hard",
 		"displayName": "Grolnok's Bog",
 		"type": "sidebossmoderate",
 		"count": 1,
@@ -2246,6 +2375,7 @@
 	},
 	{
 		"name": "Grove",
+		"challengeRating": "hard",
 		"displayName": "The Honey Cove",
 		"type": "cave",
 		"count": 1,
@@ -2262,6 +2392,7 @@
 	},
 	{
 		"name": "Grove1",
+		"challengeRating": "low",
 		"displayName": "Wolf's Nest",
 		"type": "cave",
 		"count": 1,
@@ -2278,6 +2409,7 @@
 	},
 	{
 		"name": "Grove2",
+		"challengeRating": "medium",
 		"displayName": "Dinosaur Crater",
 		"type": "cave",
 		"count": 3,
@@ -2294,6 +2426,7 @@
 	},
 	{
 		"name": "Grove3",
+		"challengeRating": "low",
 		"displayName": "Simian's City",
 		"type": "cave",
 		"count": 1,
@@ -2310,6 +2443,7 @@
 	},
 	{
 		"name": "Grove4",
+		"challengeRating": "medium",
 		"displayName": "Grove of the Forest Titan",
 		"type": "cave",
 		"count": 1,
@@ -2326,6 +2460,7 @@
 	},
 	{
 		"name": "Grove5",
+		"challengeRating": "low",
 		"displayName": "Overgrown Ruins",
 		"type": "cave",
 		"count": 1,
@@ -2342,6 +2477,7 @@
 	},
 	{
 		"name": "Grove6",
+		"challengeRating": "low",
 		"displayName": "Long Forgotten Temple",
 		"type": "cave",
 		"count": 2,
@@ -2358,6 +2494,7 @@
 	},
 	{
 		"name": "Grove7",
+		"challengeRating": "hard",
 		"displayName": "The Lake of the Hydra",
 		"type": "sidebosshard",
 		"count": 1,
@@ -2374,6 +2511,7 @@
 	},
 	{
 		"name": "Grove8",
+		"challengeRating": "medium",
 		"displayName": "Corrupted Forest",
 		"type": "cave",
 		"count": 1,
@@ -2390,6 +2528,7 @@
 	},
 	{
 		"name": "GroveBamboo",
+		"challengeRating": "low",
 		"displayName": "Bamboo Grove",
 		"type": "cave",
 		"count": 1,
@@ -2406,6 +2545,7 @@
 	},
 	{
 		"name": "GroveGreenDragon",
+		"challengeRating": "medium",
 		"displayName": "Grove of the Green Dragon",
 		"type": "cave",
 		"count": 1,
@@ -2422,6 +2562,7 @@
 	},
 	{
 		"name": "GroveFaerieDragon",
+		"challengeRating": "low",
 		"displayName": "Grove of the Faerie Dragon",
 		"type": "cave",
 		"count": 1,
@@ -2510,6 +2651,7 @@
 	},
 	{
 		"name": "Jacehold",
+		"challengeRating": "hard",
 		"displayName": "Jace's Holdout",
 		"type": "sidebossmoderate",
 		"count": 1,
@@ -2525,6 +2667,7 @@
 	},
 	{
 		"name": "Kavu Lair",
+		"challengeRating": "low",
 		"displayName": "Cave",
 		"type": "cave",
 		"count": 1,
@@ -2540,6 +2683,7 @@
 	},
 	{
 		"name": "Kiora Island",
+		"challengeRating": "hard",
 		"displayName": "Kiora's Island",
 		"type": "sidebosseasy",
 		"count": 1,
@@ -2556,6 +2700,7 @@
 	},
 	{
 		"name": "Lavaforge Kobold",
+		"challengeRating": "medium",
 		"displayName": "Lava Forge",
 		"type": "dungeon",
 		"count": 1,
@@ -2571,6 +2716,7 @@
 	},
 	{
 		"name": "LavaForge1",
+		"challengeRating": "hard",
 		"displayName": "Lava Forge",
 		"type": "dungeon",
 		"count": 1,
@@ -2588,6 +2734,7 @@
 	},
 	{
 		"name": "LavaForge2",
+		"challengeRating": "medium",
 		"displayName": "Lava Forge",
 		"type": "dungeon",
 		"count": 1,
@@ -2605,6 +2752,7 @@
 	},
 	{
 		"name": "Lich's Mirror",
+		"challengeRating": "low",
 		"displayName": "Black Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -2620,6 +2768,7 @@
 	},
 	{
 		"name": "MageTowerC",
+		"challengeRating": "low",
 		"displayName": "Red Tower",
 		"type": "dungeon",
 		"count": 2,
@@ -2637,6 +2786,7 @@
 	},
 	{
 		"name": "MageTowerC2",
+		"challengeRating": "low",
 		"displayName": "Black Tower",
 		"type": "dungeon",
 		"count": 2,
@@ -2654,6 +2804,7 @@
 	},
 	{
 		"name": "MageTowerC3",
+		"challengeRating": "low",
 		"displayName": "Red Tower",
 		"type": "dungeon",
 		"count": 2,
@@ -2671,6 +2822,7 @@
 	},
 	{
 		"name": "MageTowerC4",
+		"challengeRating": "medium",
 		"displayName": "White Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -2688,6 +2840,7 @@
 	},
 	{
 		"name": "MageTowerC5",
+		"challengeRating": "low",
 		"displayName": "Green Tower",
 		"type": "dungeon",
 		"count": 2,
@@ -2705,6 +2858,7 @@
 	},
 	{
 		"name": "MageTowerC6",
+		"challengeRating": "low",
 		"displayName": "Black Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -2722,6 +2876,7 @@
 	},
 	{
 		"name": "MageTower7Church",
+		"challengeRating": "medium",
 		"displayName": "White Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -2739,6 +2894,7 @@
 	},
 	{
 		"name": "MageTowerC8",
+		"challengeRating": "medium",
 		"displayName": "Blue Tower",
 		"type": "dungeon",
 		"count": 2,
@@ -2756,6 +2912,7 @@
 	},
 	{
 		"name": "MageTowerX",
+		"challengeRating": "low",
 		"displayName": "Blue Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -2772,6 +2929,7 @@
 	},
 	{
 		"name": "MageTowerCE",
+		"challengeRating": "low",
 		"displayName": "Blue Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -2789,6 +2947,7 @@
 	},
 	{
 		"name": "MageTowerU",
+		"challengeRating": "low",
 		"displayName": "Blue Tower",
 		"type": "dungeon",
 		"count": 2,
@@ -2806,6 +2965,7 @@
 	},
 	{
 		"name": "MageTowerU1",
+		"challengeRating": "low",
 		"displayName": "Black Tower",
 		"type": "dungeon",
 		"count": 2,
@@ -2823,6 +2983,7 @@
 	},
 	{
 		"name": "MageTowerU2",
+		"challengeRating": "low",
 		"displayName": "Red Tower",
 		"type": "dungeon",
 		"count": 2,
@@ -2840,6 +3001,7 @@
 	},
 	{
 		"name": "MageTowerU3",
+		"challengeRating": "medium",
 		"displayName": "White Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -2857,6 +3019,7 @@
 	},
 	{
 		"name": "MageTowerU4",
+		"challengeRating": "low",
 		"displayName": "Green Tower",
 		"type": "dungeon",
 		"count": 2,
@@ -2874,6 +3037,7 @@
 	},
 	{
 		"name": "MageTowerU5",
+		"challengeRating": "low",
 		"displayName": "Black Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -2891,6 +3055,7 @@
 	},
 	{
 		"name": "MageTowerU7",
+		"challengeRating": "medium",
 		"displayName": "Blue Tower",
 		"type": "dungeon",
 		"count": 2,
@@ -2908,6 +3073,7 @@
 	},
 	{
 		"name": "MageTowerUD",
+		"challengeRating": "low",
 		"displayName": "Black Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -2925,6 +3091,7 @@
 	},
 	{
 		"name": "MageTowerRats",
+		"challengeRating": "low",
 		"displayName": "Black Tower",
 		"type": "dungeon",
 		"count": 1,
@@ -2942,6 +3109,7 @@
 	},
 	{
 		"name": "Maze",
+		"challengeRating": "hard",
 		"displayName": "Maze",
 		"type": "dungeon",
 		"count": 2,
@@ -2958,6 +3126,7 @@
 	},
 	{
 		"name": "Maze1",
+		"challengeRating": "low",
 		"displayName": "Maze",
 		"type": "dungeon",
 		"count": 2,
@@ -2974,6 +3143,7 @@
 	},
 	{
 		"name": "Maze2",
+		"challengeRating": "low",
 		"displayName": "Maze",
 		"type": "dungeon",
 		"count": 2,
@@ -2990,6 +3160,7 @@
 	},
 	{
 		"name": "Maze3",
+		"challengeRating": "low",
 		"displayName": "Maze",
 		"type": "dungeon",
 		"count": 1,
@@ -3006,6 +3177,7 @@
 	},
 	{
 		"name": "MerfolkPool",
+		"challengeRating": "low",
 		"displayName": "Merfolk Pool",
 		"type": "cave",
 		"count": 3,
@@ -3021,6 +3193,7 @@
 	},
 	{
 		"name": "MerfolkPool5",
+		"challengeRating": "medium",
 		"displayName": "Homarid Island",
 		"type": "cave",
 		"count": 1,
@@ -3035,6 +3208,7 @@
 	},
 	{
 		"name": "MerfolkPool1",
+		"challengeRating": "low",
 		"displayName": "Merfolk Pool",
 		"type": "cave",
 		"count": 3,
@@ -3050,6 +3224,7 @@
 	},
 	{
 		"name": "MerfolkPool2",
+		"challengeRating": "low",
 		"displayName": "Merfolk Pool",
 		"type": "cave",
 		"count": 3,
@@ -3065,6 +3240,7 @@
 	},
 	{
 		"name": "MerfolkPool3",
+		"challengeRating": "medium",
 		"displayName": "Merfolk Pool",
 		"type": "cave",
 		"count": 3,
@@ -3080,6 +3256,7 @@
 	},
 	{
 		"name": "MerfolkPool4",
+		"challengeRating": "medium",
 		"displayName": "Merfolk Pool",
 		"type": "cave",
 		"count": 3,
@@ -3095,6 +3272,7 @@
 	},
 	{
 		"name": "Monastery",
+		"challengeRating": "medium",
 		"displayName": "Monastery",
 		"type": "dungeon",
 		"count": 3,
@@ -3111,6 +3289,7 @@
 	},
 	{
 		"name": "Monastery1",
+		"challengeRating": "low",
 		"displayName": "Monastery",
 		"type": "dungeon",
 		"count": 5,
@@ -3127,6 +3306,7 @@
 	},
 	{
 		"name": "Monastery2",
+		"challengeRating": "low",
 		"displayName": "Monastery",
 		"type": "dungeon",
 		"count": 5,
@@ -3143,6 +3323,7 @@
 	},
 	{
 		"name": "Monastery3",
+		"challengeRating": "low",
 		"displayName": "Monastery",
 		"type": "dungeon",
 		"count": 5,
@@ -3159,6 +3340,7 @@
 	},
 	{
 		"name": "Monastery4",
+		"challengeRating": "low",
 		"displayName": "Monastery",
 		"type": "dungeon",
 		"count": 5,
@@ -3247,6 +3429,7 @@
 	},
 	{
 		"name": "Nahiri Encampment",
+		"challengeRating": "hard",
 		"displayName": "Nahiri's Encampment",
 		"type": "sidebossmoderate",
 		"count": 1,
@@ -3274,6 +3457,7 @@
 	},
 	{
 		"name": "NestW",
+		"challengeRating": "low",
 		"displayName": "Nest",
 		"type": "cave",
 		"count": 3,
@@ -3289,6 +3473,7 @@
 	},
 	{
 		"name": "NestU",
+		"challengeRating": "low",
 		"displayName": "Nest",
 		"type": "cave",
 		"count": 3,
@@ -3314,6 +3499,7 @@
 	},
 	{
 		"name": "OrthodoxyBasilica",
+		"challengeRating": "low",
 		"displayName": "Orthodoxy Basilica",
 		"type": "dungeon",
 		"count": 2,
@@ -3402,6 +3588,7 @@
 	},
 	{
 		"name": "Quest_APortalToNowhere",
+		"challengeRating": "low",
 		"displayName": "Ghost Town",
 		"type": "dungeon",
 		"count": 1,
@@ -3421,6 +3608,7 @@
 	},
 	{
 		"name": "Quest_BanditCave",
+		"challengeRating": "low",
 		"displayName": "Bandit Cave",
 		"type": "dungeon",
 		"count": 1,
@@ -3440,6 +3628,7 @@
 	},
 	{
 		"name": "Quest_DigSite",
+		"challengeRating": "low",
 		"displayName": "Archaeological Dig",
 		"type": "dungeon",
 		"count": 1,
@@ -3459,6 +3648,7 @@
 	},
 	{
 		"name": "Quest_FrostbittenCavern",
+		"challengeRating": "low",
 		"displayName": "Frostbitten Cavern",
 		"type": "dungeon",
 		"count": 1,
@@ -3478,6 +3668,7 @@
 	},
 	{
 		"name": "Quest_LibraryOfVarsil",
+		"challengeRating": "medium",
 		"displayName": "The Library Of Varsil",
 		"type": "dungeon",
 		"count": 1,
@@ -3497,6 +3688,7 @@
 	},
 	{
 		"name": "Quest_PrimalJungle",
+		"challengeRating": "low",
 		"displayName": "Primal Jungle",
 		"type": "dungeon",
 		"count": 1,
@@ -3516,6 +3708,7 @@
 	},
 	{
 		"name": "Quest_ShardMines",
+		"challengeRating": "medium",
 		"displayName": "Cidryl Shard Mines",
 		"type": "dungeon",
 		"count": 1,
@@ -3535,6 +3728,7 @@
 	},
 	{
 		"name": "Red Castle",
+		"challengeRating": "veryHard",
 		"displayName": "Red Castle",
 		"type": "castle",
 		"count": 1,
@@ -3562,6 +3756,7 @@
 	},
 	{
 		"name": "SkullCaveR",
+		"challengeRating": "medium",
 		"displayName": "Skull Cave",
 		"type": "cave",
 		"count": 1,
@@ -3579,6 +3774,7 @@
 	},
 	{
 		"name": "SkullCaveR1",
+		"challengeRating": "medium",
 		"displayName": "Skull Cave",
 		"type": "cave",
 		"count": 1,
@@ -3596,6 +3792,7 @@
 	},
 	{
 		"name": "SkullCaveR2",
+		"challengeRating": "medium",
 		"displayName": "Skull Cave",
 		"type": "cave",
 		"count": 2,
@@ -3613,6 +3810,7 @@
 	},
 	{
 		"name": "SnowAbbey",
+		"challengeRating": "low",
 		"displayName": "Snow Abbey",
 		"type": "dungeon",
 		"count": 1,
@@ -3630,6 +3828,7 @@
 	},
 	{
 		"name": "SnowAbbey1",
+		"challengeRating": "low",
 		"displayName": "Snow Abbey",
 		"type": "dungeon",
 		"count": 1,
@@ -3647,6 +3846,7 @@
 	},
 	{
 		"name": "SnowAbbey2",
+		"challengeRating": "low",
 		"displayName": "Snow Abbey",
 		"type": "dungeon",
 		"count": 1,
@@ -3678,6 +3878,7 @@
 	},
 	{
 		"name": "Slimefoots Lair",
+		"challengeRating": "hard",
 		"displayName": "Slimefoot's Lair",
 		"type": "sidebossmoderate",
 		"count": 1,
@@ -3694,6 +3895,7 @@
 	},
 	{
 		"name": "Slime Cave",
+		"challengeRating": "hard",
 		"displayName": "Slime Hive",
 		"type": "sidebosseasy",
 		"count": 1,
@@ -3709,6 +3911,7 @@
 		},
 	{
 		"name": "Camel Cave",
+		"challengeRating": "medium",
 		"displayName": "Strange Desert",
 		"type": "sidebosseasy",
 		"count": 1,
@@ -3724,6 +3927,7 @@
 	},
 	{
 		"name": "Scarecrow Farm",
+		"challengeRating": "hard",
 		"displayName": "Scarecrow Farm",
 		"type": "sidebossmoderate",
 		"count": 1,
@@ -3739,6 +3943,7 @@
 	},
 	{
 		"name": "Slobads Factory",
+		"challengeRating": "hard",
 		"displayName": "Slobad's Factory",
 		"type": "sidebosseasy",
 		"count": 1,
@@ -3755,6 +3960,7 @@
 	},
 	{
 		"name": "Skep",
+		"challengeRating": "hard",
 		"displayName": "Skep",
 		"type": "sidebossmoderate",
 		"count": 1,
@@ -3770,6 +3976,7 @@
 	},
 	{
 		"name": "SkullCaveB",
+		"challengeRating": "medium",
 		"displayName": "Skull Cave",
 		"type": "cave",
 		"count": 1,
@@ -3787,6 +3994,7 @@
 	},
 	{
 		"name": "SkullCaveB1",
+		"challengeRating": "medium",
 		"displayName": "Skull Cave",
 		"type": "cave",
 		"count": 1,
@@ -3804,6 +4012,7 @@
 	},
 	{
 		"name": "SkullCaveB2",
+		"challengeRating": "medium",
 		"displayName": "Skull Cave",
 		"type": "cave",
 		"count": 1,
@@ -3902,6 +4111,7 @@
 	},
 	{
 		"name": "Teferi Hideout",
+		"challengeRating": "hard",
 		"displayName": "Teferi's Hideout",
 		"type": "sidebosseasy",
 		"count": 1,
@@ -3918,6 +4128,7 @@
 	},
 	{
 		"name": "Temple of Chandra",
+		"challengeRating": "veryHard",
 		"displayName": "Temple of Chandra",
 		"type": "dungeon",
 		"count": 1,
@@ -3942,6 +4153,7 @@
 	},
 	{
 		"name": "Temple of Liliana",
+		"challengeRating": "veryHard",
 		"displayName": "Temple of Liliana",
 		"type": "dungeon",
 		"count": 1,
@@ -3974,6 +4186,7 @@
 	},
 	{
 		"name": "Tibalts Fortress",
+		"challengeRating": "hard",
 		"displayName": "Tibalt's Fortress",
 		"type": "sidebossmoderate",
 		"count": 1,
@@ -3989,6 +4202,7 @@
 	},
 	{
 		"name": "UnhallowedAbbey",
+		"challengeRating": "veryHard",
 		"displayName": "Unhallowed Abbey",
 		"type": "sidebosshard",
 		"count": 1,
@@ -4002,6 +4216,7 @@
 	},
 	{
 		"name": "VampireCastle",
+		"challengeRating": "medium",
 		"displayName": "Vampire Castle",
 		"type": "dungeon",
 		"count": 2,
@@ -4019,6 +4234,7 @@
 	},
 	{
 		"name": "VampireCastle1",
+		"challengeRating": "medium",
 		"displayName": "Vampire Castle",
 		"type": "dungeon",
 		"count": 2,
@@ -4036,6 +4252,7 @@
 	},
 	{
 		"name": "VampireCastle2",
+		"challengeRating": "medium",
 		"displayName": "Vampire Castle",
 		"type": "dungeon",
 		"count": 2,
@@ -4053,6 +4270,7 @@
 	},
 	{
 		"name": "VampireCastle3",
+		"challengeRating": "hard",
 		"displayName": "Vampire Dungeon",
 		"type": "sidebosshard",
 		"count": 1,
@@ -4117,6 +4335,7 @@
 	},
 	{
 		"name": "White Castle",
+		"challengeRating": "veryHard",
 		"displayName": "White Castle",
 		"type": "castle",
 		"count": 1,
@@ -4143,6 +4362,7 @@
 	},
 	{
 		"name": "WurmPond",
+		"challengeRating": "hard",
 		"displayName": "Wurm Pond",
 		"type": "cave",
 		"count": 1,
@@ -4157,6 +4377,7 @@
 	},
 	{
 		"name": "Xiras Hive",
+		"challengeRating": "hard",
 		"displayName": "Xira's Hive",
 		"type": "sidebosseasy",
 		"count": 1,
@@ -4173,6 +4394,7 @@
 	},
 	{
 		"name": "YuleTown",
+		"challengeRating": "low",
 		"type": "cave",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -4186,6 +4408,7 @@
 	},
 	{
 		"name": "Zedruu City",
+		"challengeRating": "hard",
 		"displayName": "Zedruu City",
 		"type": "sidebossmoderate",
 		"count": 1,
@@ -4203,6 +4426,7 @@
 	},
 	{
 		"name": "Zombie Town",
+		"challengeRating": "low",
 		"displayName": "Shallowgrave",
 		"type": "dungeon",
 		"count": 1,

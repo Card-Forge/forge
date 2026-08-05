@@ -1700,3 +1700,16 @@ SirDonovansAmulet
 LandscapeSketchbook
   xy:80,672
   size:16,16
+ClearedX
+  xy: 401, 33
+  size: 9, 9
+ChallengeDot
+  xy: 412, 33
+  size: 9, 9
+  orig: 9, 9
+  offset: 0, -7
+ChallengeUnknown
+  xy: 422, 33
+  size: 8, 8
+  orig: 8, 16
+  offset: 0, 4
