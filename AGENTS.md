@@ -35,6 +35,23 @@ Commander-first fork of [Card-Forge/forge](https://github.com/Card-Forge/forge).
 - **Close stale issues.** If something you filed is no longer relevant (e.g., descope decided, upstream fixed it),
   close it with a comment explaining why.
 
+## Release builds & versioning
+
+- Build releases only via `build_release.ps1` at the repo root. It stamps every zip with a
+  unique BuildId (`<Version>-yyyyMMdd-HHmmss`) so builds are always distinguishable; never
+  hand-assemble a distribution.
+- Version scheme (package track, semver): `MAJOR.MINOR.PATCH[-suffix]-<BuildId>`. `0.x` =
+  pre-1.0; bump MINOR per user-visible milestone (multiplayer overhaul = `0.2.0`); bump PATCH
+  per bugfix build; `-alpha` → `-beta` → `1.0.0`. The jar's ENGINE version stays upstream's
+  `2.0.14-SNAPSHOT-<BuildId>` (what the logs report).
+- Pass `-Note "one-line summary"` for each build's changes; it lands in `BUILDINFO.txt`
+  (inside the zip) and `dist\RELEASES.md` (the changelog — treat it as the source of truth).
+- Never overwrite old zips. Each build is a new unique zip; `ReforgeCommander-latest.zip`
+  is only a convenience pointer to the newest one.
+- Debugging a player's issue: identify their build via the zip name, `BUILDINFO.txt`, or the
+  `APP: Forge v.2.0.14-SNAPSHOT-<BuildId>` line in their network-debug log, then match it to
+  `dist\RELEASES.md` before reasoning about what code they are running.
+
 ## Docs to keep current
 
 - `docs/development.md` — the roadmap + status matrix. Section tables have a `Status` column; keep it truthful.
