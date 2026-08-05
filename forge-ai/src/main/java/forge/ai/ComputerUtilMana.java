@@ -78,11 +78,51 @@ public class ComputerUtilMana {
      * Return the number of colors used for payment for Converge
      */
     public static int getConvergeCount(final SpellAbility sa, final Player ai) {
+        return ColorSet.fromMask(getConvergeColors(sa, ai)).countColors();
+    }
+
+    /**
+     * Return the colors that would be used for payment, as a color mask.
+     */
+    public static byte getConvergeColors(final SpellAbility sa, final Player ai) {
         ManaCostBeingPaid cost = calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false);
         if (payManaCost(cost, sa, ai, true, true, false) != null) {
-            return cost.getSunburst();
+            return cost.getColorsPaid();
         }
         return 0;
+    }
+
+    /**
+     * Announce X on a converge or sunburst card, where its only job is to buy colors: the least X
+     * that still reaches the most of them. Returns the colors the announced X buys.
+     */
+    public static byte setXForBestConverge(final SpellAbility sa, final Player ai, final int maxX) {
+        int bestX = 0;
+        int bestCount = 0;
+        byte bestColors = 0;
+        for (int i = 0; i <= maxX; i++) {
+            sa.setXManaCostPaid(i);
+            byte colors = getConvergeColors(sa, ai);
+            int count = ColorSet.fromMask(colors).countColors();
+            if (count > bestCount) {
+                bestCount = count;
+                bestColors = colors;
+                bestX = i;
+            }
+        }
+        sa.setXManaCostPaid(bestX);
+        rememberExpectedPayingColors(ai, sa, bestColors);
+        return bestColors;
+    }
+
+    /**
+     * Park what this spell would be paid with on the AI, where the rules side can ask for it
+     * through PlayerController rather than the AI having to write it onto the spell.
+     */
+    private static void rememberExpectedPayingColors(final Player ai, final SpellAbility sa, final byte colors) {
+        if (ai != null && ai.getController() instanceof PlayerControllerAi controller) {
+            controller.getAi().setExpectedPayingColors(sa, colors);
+        }
     }
 
     // Does not check if mana sources can be used right now, just checks for potential chance.

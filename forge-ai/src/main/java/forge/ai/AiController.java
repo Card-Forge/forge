@@ -100,6 +100,8 @@ public class AiController {
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
     private volatile boolean timeoutReached;
+    private SpellAbility expectedPayingColorsSa;
+    private byte expectedPayingColors;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -816,6 +818,9 @@ public class AiController {
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         final Card host = sa.getHostCard();
         Card altHost = host;
+        // an evaluation can reach another one, so hand back whatever the outer spell was expecting
+        final SpellAbility outerColorsSa = expectedPayingColorsSa;
+        final byte outerColors = expectedPayingColors;
 
         if (sa instanceof Spell sp) {
             altHost = sp.canPlayFromHost();
@@ -823,6 +828,7 @@ public class AiController {
                 return AiPlayDecision.CantPlaySa;
             }
             altHost.setCastSA(sa);
+            predictConvergePayment(sa, altHost);
         } else if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
@@ -840,9 +846,42 @@ public class AiController {
 
         if (sa.isSpell()) {
             altHost.setCastSA(null);
+            setExpectedPayingColors(outerColorsSa, outerColors);
         }
 
         return decision;
+    }
+
+    /**
+     * Converge counts the colors actually spent, which nothing has yet - so Count$Converge would
+     * report zero and the AI would size every converge effect as if it were empty. Work out what
+     * this spell would be paid with, so the card can be asked about its own payment while we are
+     * still deciding whether to cast it.
+     */
+    private void predictConvergePayment(final SpellAbility sa, final Card host) {
+        if (!host.hasConverge() || !sa.getPayingMana().isEmpty()) {
+            return;
+        }
+        if (sa.costHasManaX()) {
+            // on these cards X is what buys the colors, so announcing it settles them too
+            ComputerUtilCost.setMaxXValue(sa, player, sa.isTrigger());
+        } else {
+            setExpectedPayingColors(sa, ComputerUtilMana.getConvergeColors(sa, player));
+        }
+    }
+
+    /**
+     * Remember what a spell we have not paid for yet would be paid with. Answered back through
+     * PlayerController, so the prediction never has to be parked on the spell itself.
+     */
+    public void setExpectedPayingColors(final SpellAbility sa, final byte colors) {
+        expectedPayingColorsSa = sa;
+        expectedPayingColors = colors;
+    }
+
+    public byte getExpectedPayingColors(final SpellAbility sa) {
+        // deliberately identity - the answer is only good for the exact spell it was worked out for
+        return sa == expectedPayingColorsSa ? expectedPayingColors : 0;
     }
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
@@ -1373,6 +1412,10 @@ public class AiController {
 
         // Reset priority mana reservation that's meant to work for one spell only
         memory.clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
+
+        // Same for what a spell was expected to be paid with, which is only good while we are
+        // deciding on that one spell
+        setExpectedPayingColors(null, (byte) 0);
 
         if (usesFullSimulation()) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
