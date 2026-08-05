@@ -274,7 +274,7 @@ public class NewGameScene extends MenuScene {
         // Check if the UI has Archipelago elements loaded
         if (enableArchipelago != null) {
             isArchipelagoSupported = true;
-            enableArchipelago.setTextList(new String[]{"Disabled", "Enabled", "Archipelago"});
+            enableArchipelago.setTextList(new String[]{"Disabled", "Enabled"});
             archipelagoHelp.addListener(new ClickListener() {
                 public void clicked(InputEvent e, float x, float y) {
                     archipelagoHelp();
