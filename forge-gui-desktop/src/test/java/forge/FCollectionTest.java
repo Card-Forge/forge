@@ -15,7 +15,7 @@ public class FCollectionTest {
      * Just a quick test for FCollection.
      */
     /*@Test
-    void testBadIteratorLogic() {
+    public void testBadIteratorLogic() {
         List<Card> cards = new ArrayList<>();
         for (int i = 1; i < 5; i++)
             cards.add(new Card(i, null));
@@ -27,7 +27,7 @@ public class FCollectionTest {
     }
 
     /*@Test
-    void testBadIteratorLogicTwo() {
+    public void testBadIteratorLogicTwo() {
         List<Card> cards = new ArrayList<>();
         for (int i = 1; i <= 10; i++)
             cards.add(new Card(i, null));
@@ -42,7 +42,7 @@ public class FCollectionTest {
     }*/// Commented out since we use synchronized collection and it doesn't support modification while iteration
 
     @Test
-    void testCompletableFuture() {
+    public void testCompletableFuture() {
         List<Card> cards = new ArrayList<>();
         for (int i = 1; i < 5; i++)
             cards.add(new Card(i, null));

@@ -136,7 +136,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    void testGetAllCardsOfaGivenNameAndPrintedInSets() {
+    public void testGetAllCardsOfaGivenNameAndPrintedInSets() {
         List<String> allowedSets = new ArrayList<>(Arrays.asList(this.editionsCounterspell));
         Predicate<PaperCard> printedInSets = (Predicate<PaperCard>) this.cardDb.wasPrintedInSets(allowedSets);
         List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCardsNoAlt(this.cardNameCounterspell, printedInSets);
@@ -160,7 +160,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    void testGetAllCardsOfaGivenNameAndLegalInSets() {
+    public void testGetAllCardsOfaGivenNameAndLegalInSets() {
         List<String> allowedSets = new ArrayList<>(Arrays.asList(this.editionsCounterspell));
         Predicate<PaperCard> legalInSets = (Predicate<PaperCard>) this.cardDb.isLegal(allowedSets);
         List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCardsNoAlt(this.cardNameCounterspell, legalInSets);
@@ -2280,7 +2280,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    void testCardRequestWithSetCodeAllInLowercase() {
+    public void testCardRequestWithSetCodeAllInLowercase() {
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         PaperCard counterSpellCard = this.cardDb.getCard(this.cardNameCounterspell, "tmp");
@@ -2307,7 +2307,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    void testThatWithCardPreferenceSetAndNoRequestForSpecificEditionAlwaysReturnsPreferredArt() {
+    public void testThatWithCardPreferenceSetAndNoRequestForSpecificEditionAlwaysReturnsPreferredArt() {
         String cardRequest = CardDb.CardRequest.compose("Island", "MIR", 3);
         PaperCard islandCard = this.cardDb.getCard(cardRequest);
         assertNotNull(islandCard);
@@ -2345,7 +2345,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    void testGetDualAndDoubleCards() {
+    public void testGetDualAndDoubleCards() {
         String fireAndIce = "Fire // Ice";
         PaperCard fireAndIceCard = this.cardDb.getCard(fireAndIce);
         assertNotNull(fireAndIceCard);
