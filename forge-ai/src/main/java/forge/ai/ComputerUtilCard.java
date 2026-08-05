@@ -30,7 +30,6 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.MagicColor.Constant;
-import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
@@ -257,9 +256,10 @@ public class ComputerUtilCard {
         if (benefits == null || candidate == null) {
             return 0;
         }
-        // counted once and shared: both halves ask the same two questions of the board
-        final int[] have = ComputerUtilCost.getManaSourceCounts(benefits, null);
-        final int[] with = ComputerUtilCost.getManaSourceCounts(benefits, candidate);
+        // one pass over the battlefield; the candidate only ever adds to what is already there
+        final int[] have = ComputerUtilCost.getManaSourceCounts(benefits);
+        final int[] with = have.clone();
+        ComputerUtilCost.addManaSources(candidate, with);
         return COLOR_FIXING_WEIGHT * fixingNeed(benefits, have, with) + depthValue(have, with);
     }
 
@@ -289,9 +289,9 @@ public class ComputerUtilCard {
             return 0;
         }
         byte mask = 0;
-        for (int i = 0; i < counts.length; i++) {
-            if (counts[i] > 0) {
-                mask |= ManaAtom.MANATYPES[i];
+        for (MagicColor.Color color : MagicColor.Color.values()) {
+            if (counts[color.ordinal()] > 0) {
+                mask |= color.getColorMask();
             }
         }
         int[] need = new int[counts.length];
@@ -300,10 +300,9 @@ public class ComputerUtilCard {
             if (shard.isPhyrexian()) {
                 continue;
             }
-            int index = shard.isMonoColor() && !shard.isOr2Generic()
-                    ? ManaAtom.getIndexFromName(MagicColor.toShortString(shard.getColorMask())) : -1;
-            if (index != -1) {
-                need[index]++;               // a plain colored pip wants a source of its own
+            if (shard.isMonoColor() && !shard.isOr2Generic()) {
+                // a plain colored pip wants a source of its own
+                need[MagicColor.Color.fromByte(shard.getColorMask()).ordinal()]++;
             } else if (!shard.canBePaidWithManaOfColor(mask)) {
                 missing++;                   // hybrid and generic keep the looser check
             }

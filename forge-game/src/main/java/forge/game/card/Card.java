@@ -3351,19 +3351,27 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return false;
     }
 
-    public final boolean canProduceSameManaTypeWith(final Card c) {
-        if (getManaAbilities().isEmpty()) {
-            return false;
-        }
+    /** Every color this card could produce, walking its mana abilities once. */
+    public final Set<String> getProducibleColors() {
         Set<String> colors = new HashSet<>();
-        for (final SpellAbility ab : c.getManaAbilities()) {
+        for (final SpellAbility ab : getManaAbilities()) {
+            // as getMaxManaProduced does: without an activating player each canProduce falls into
+            // a much more expensive path, and this is hot enough for that to matter
+            ab.setActivatingPlayer(getController());
             if (ab.getApi() == ApiType.ManaReflected) {
                 colors.addAll(CardUtil.getReflectableManaColors(ab));
             } else {
                 colors = CardUtil.canProduce(6, ab, colors);
             }
         }
-        return canProduceColorMana(colors);
+        return colors;
+    }
+
+    public final boolean canProduceSameManaTypeWith(final Card c) {
+        if (getManaAbilities().isEmpty()) {
+            return false;
+        }
+        return canProduceColorMana(c.getProducibleColors());
     }
 
     public final int getMaxManaProduced() {

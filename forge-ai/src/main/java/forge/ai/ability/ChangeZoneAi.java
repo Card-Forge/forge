@@ -542,15 +542,22 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // chooser's. No card in the pool currently chooses for another player here, so rather
         // than guess at that case it is left on the existing behaviour untouched.
         if (!decider.isOpponentOf(owner)) {
-            int most = 0; // only worth narrowing for lands that improve the mana at all
-            for (Card c : list) {
-                most = Math.max(most, ComputerUtilCard.getColorFixingValue(owner, c));
-            }
             // narrow to the lands worth the most, then let the basic-type spread and the
             // dual-land preference below break the tie as they already did
-            if (most > 0) {
-                final int best = most;
-                list = CardLists.filter(list, c -> ComputerUtilCard.getColorFixingValue(owner, c) == best);
+            final List<Card> best = new ArrayList<>();
+            int most = 0; // only worth narrowing for lands that improve the mana at all
+            for (Card c : list) {
+                final int value = ComputerUtilCard.getColorFixingValue(owner, c);
+                if (value > most) {
+                    most = value;
+                    best.clear();
+                }
+                if (value == most && most > 0) {
+                    best.add(c);
+                }
+            }
+            if (!best.isEmpty()) {
+                list = best;
             }
         }
 
