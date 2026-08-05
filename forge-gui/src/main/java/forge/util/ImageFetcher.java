@@ -374,6 +374,41 @@ public abstract class ImageFetcher {
         setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
     }
 
+    /**
+     * Fetch the Scryfall art-crop image for a card image key and cache it as the player's deck
+     * sleeve. Forces art_crop regardless of the user's UI_CARD_ART_FORMAT preference and caches
+     * under CACHE_SLEEVE_PICS_DIR keyed by a hash of the image key.
+     */
+    public void fetchSleeveArt(final String sleeveArtKey, final Callback callback) {
+        FThreads.assertExecutedByEdt(true);
+
+        if (sleeveArtKey == null || sleeveArtKey.length() < 2 || !sleeveArtKey.startsWith(ImageKeys.CARD_PREFIX)) {
+            return;
+        }
+        // Not gated on UI_ENABLE_ONLINE_IMAGE_FETCHER: that suppresses passive auto-download of card
+        // art, but choosing a card-art sleeve is an explicit request, so fetch even when it's off
+        final PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(sleeveArtKey);
+        if (paperCard == null || paperCard.getRules().isCustom() || paperCard.getArtist().isEmpty()) {
+            return;
+        }
+        if (paperCard.getCollectorNumber().equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+            return;
+        }
+        final File destFile = new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(sleeveArtKey));
+        if (destFile.exists()) {
+            return;
+        }
+        final ArrayList<String> downloadUrls = new ArrayList<>();
+        final String imagePath = ImageUtil.getImageRelativePath(paperCard, "", true, false);
+        final boolean hasSetLookup = ImageKeys.hasSetLookup(imagePath);
+        getScryfallDownloadURL(paperCard, "", true, hasSetLookup, null, downloadUrls);
+        if (downloadUrls.isEmpty()) {
+            return;
+        }
+        FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_SLEEVE_PICS_DIR);
+        setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
+    }
+
     private void setupObserver(final String destPath, final Callback callback, final ArrayList<String> downloadUrls) {
         // Note: No synchronization is needed here because this is executed on
         // EDT thread (see assert on top) and so is the notification of observers.

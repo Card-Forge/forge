@@ -41,14 +41,14 @@ import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
 public class TriggerHandler {
-    private final Set<TriggerType> suppressedModes = Collections.synchronizedSet(EnumSet.noneOf(TriggerType.class));
+    private final Set<TriggerType> suppressedModes = EnumSet.noneOf(TriggerType.class);
     private boolean allSuppressed = false;
-    private final List<Trigger> activeTriggers = Collections.synchronizedList(new ArrayList<>());
+    private final List<Trigger> activeTriggers = new ArrayList<>();
 
-    private final List<Trigger> delayedTriggers = Collections.synchronizedList(new ArrayList<>());
-    private final List<Trigger> thisTurnDelayedTriggers = Collections.synchronizedList(new ArrayList<>());
-    private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
-    private final List<TriggerWaiting> waitingTriggers = Collections.synchronizedList(new ArrayList<>());
+    private final List<Trigger> delayedTriggers = new ArrayList<>();
+    private final List<Trigger> thisTurnDelayedTriggers = new ArrayList<>();
+    private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = ArrayListMultimap.create();
+    private final List<TriggerWaiting> waitingTriggers = new ArrayList<>();
     private final Game game;
 
     public TriggerHandler(final Game gameState) {

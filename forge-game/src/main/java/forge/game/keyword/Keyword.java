@@ -181,6 +181,7 @@ public enum Keyword {
     START_YOUR_ENGINES("Start your engines", SimpleKeyword.class, true, "If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4."),
     STARTING_INTENSITY("Starting intensity", KeywordWithAmount.class, true, ""),
     STATION("Station", KeywordWithAmount.class, false, "Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It’s an artifact creature at %d+."),
+    STORIED("Storied", SimpleKeyword.class, true, "If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game."),
     STORM("Storm", SimpleKeyword.class, false, "When you cast this spell, copy it for each other spell that was cast before it this turn. You may choose new targets for the copies."),
     STRIVE("Strive", KeywordWithCost.class, false, "CARDNAME costs %s more to cast for each target beyond the first."),
     SUNBURST("Sunburst", SimpleKeyword.class, false, "This enters with either a +1/+1 or charge counter on it for each color of mana spent to cast it based on whether it's a creature."),

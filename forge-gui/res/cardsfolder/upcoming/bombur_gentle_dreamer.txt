@@ -1,0 +1,8 @@
+Name:Bombur, Gentle Dreamer
+ManaCost:2 R
+Types:Legendary Creature Dwarf Bard
+PT:5/3
+K:Storied
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | CheckSVar$ X | Description$ NICKNAME doesn't untap during your untap step unless you have an enduring story.
+SVar:X:Count$EnduringStory.0.1
+Oracle:Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.)\nBombur doesn't untap during your untap step unless you have an enduring story.

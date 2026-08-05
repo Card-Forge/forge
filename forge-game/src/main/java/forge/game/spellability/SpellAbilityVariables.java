@@ -22,6 +22,7 @@ import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -89,8 +90,8 @@ public class SpellAbilityVariables implements Cloneable {
     private boolean delirium = false;
     private boolean hellbent = false;
     private boolean revolt = false;
-    private boolean desert = false;
     private boolean blessing = false;
+    private boolean enduringStory = false;
     private boolean solved = false;
 
     /** The s is present. */
@@ -112,7 +113,7 @@ public class SpellAbilityVariables implements Cloneable {
     private String playerContains = null;
 
     /** The present zone. */
-    private ZoneType presentZone = ZoneType.Battlefield;
+    private List<ZoneType> presentZones = List.of(ZoneType.Battlefield);
 
     /** The svar to check. */
     private String sVarToCheck = null;
@@ -321,8 +322,8 @@ public class SpellAbilityVariables implements Cloneable {
     public void setDelirium(boolean delirium) {  this.delirium = delirium; }
 
     public void setRevolt(final boolean bRevolt) { revolt = bRevolt; }
-    public void setDesert(final boolean bDesert) { desert = bDesert; }
     public void setBlessing(final boolean bBlessing) { blessing = bBlessing; }
+    public void setEnduringStory(final boolean bStory) { enduringStory = bStory; }
     public void setSolved(final boolean bSolved) { solved = bSolved; }
 
     /** Optional Costs */
@@ -376,8 +377,8 @@ public class SpellAbilityVariables implements Cloneable {
      *
      * @return the present zone
      */
-    public final ZoneType getPresentZone() {
-        return this.presentZone;
+    public final List<ZoneType> getPresentZones() {
+        return this.presentZones;
     }
 
     /**
@@ -386,8 +387,8 @@ public class SpellAbilityVariables implements Cloneable {
      * @param presentZone
      *            the new present zone
      */
-    public final void setPresentZone(final ZoneType presentZone) {
-        this.presentZone = presentZone;
+    public final void setPresentZones(final List<ZoneType> presentZones) {
+        this.presentZones = presentZones;
     }
 
     /**
@@ -512,8 +513,9 @@ public class SpellAbilityVariables implements Cloneable {
 
     public final boolean isRevolt() {     return this.revolt;  }
 
-    public final boolean isDesert() {     return this.desert;  }
     public final boolean isBlessing() {     return this.blessing;  }
+
+    public final boolean isEnduringStory() {     return this.enduringStory;  }
 
     public final boolean isSolved() {     return this.solved;  }
 

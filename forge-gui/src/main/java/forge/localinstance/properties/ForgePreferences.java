@@ -25,12 +25,12 @@ import forge.MulliganDefs;
 import forge.game.GameLogEntryType;
 import forge.game.GameLogVerbosity;
 
-public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
+public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref> {
 
     /**
      * Preference identifiers and their default values.
      */
-    public enum FPref implements PreferencesStore.IPref {
+    public enum FPref implements AbstractPreferences.IPref {
         PLAYER_NAME (""),
 
         // Desktop only
@@ -67,6 +67,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_RANDOM_FOIL ("false"),
         UI_AVATARS ("0,1"),
         UI_SLEEVES ("0,1"),
+        UI_SLEEVE_ART_LIBRARY (""),
         UI_SHOW_CARD_OVERLAYS ("true"),
         UI_OVERLAY_CARD_NAME ("true"),
         UI_OVERLAY_CARD_POWER ("true"),
@@ -95,6 +96,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SCALE_LARGER ("true"),
         UI_RENDER_BLACK_BORDERS ("true"),
         UI_SHOW_ACTIONABLE_HIGHLIGHTS ("false"),
+        UI_SHOW_AUTOTAP_PREVIEW ("false"),
         UI_ACTIONABLE_HIGHLIGHT_COLOR ("66CCFF"),
         UI_SHOW_LINKED_EXILE_CARDS ("true"),
         UI_LARGE_CARD_VIEWERS ("false"),
@@ -150,7 +152,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
         UI_DEFAULT_FONT_SIZE("12"),
         UI_CARD_ART_FORMAT("Full"),
-    	UI_SELECT_FROM_CARD_DISPLAYS("true"),
+        UI_SELECT_FROM_CARD_DISPLAYS("true"),
         UI_SWITCH_STATES_DECKVIEW("Switch back on hover"),
         UI_ORDER_HAND("false"),
         UI_HAND_MAX_CARDS_PER_ROW("0"),
@@ -343,7 +345,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_PANELTABS("17 84"),
         SHORTCUT_CARDOVERLAYS("17 79"),
 
-        LAST_IMPORTED_CUBE_ID("");
+        LAST_IMPORTED_CUBE_ID(""),
+
+        ADV_DISPLAY_PRICE_IN_REWARD_SCREEN("true");
 
         private final String strDefaultVal;
 
@@ -455,11 +459,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         catch (final Exception e) {
             return null;
         }
-    }
-
-    @Override
-    protected String getPrefDefault(final FPref key) {
-        return key.getDefault();
     }
 
     // one for normal mode, one for quest mode

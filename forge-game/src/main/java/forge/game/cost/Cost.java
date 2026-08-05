@@ -74,6 +74,9 @@ public class Cost implements Serializable {
         return this.getCostMana() != null;
     }
 
+    public final boolean isFree() {
+        return isOnlyManaCost() && getTotalMana().isZero();
+    }
     public final boolean hasSpecificCostType(Class<? extends CostPart> costType) {
         for (CostPart p : getCostParts()) {
             if (costType.isInstance(p)) {
@@ -316,6 +319,11 @@ public class Cost implements Serializable {
             final String target = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             final String description = splitStr.length > 3 ? splitStr[3] : null;
             return new CostPutCounter(splitStr[0], CounterType.getType(splitStr[1]), target, description);
+        }
+
+        if (parse.startsWith("AddCounterYou<")) {
+            final String[] splitStr = abCostParse(parse, 2);
+            return new CostPutCounterYou(splitStr[0], CounterType.getType(splitStr[1]));
         }
 
         // While no card has "PayLife<2> PayLife<3> there might be a card that
@@ -858,14 +866,14 @@ public class Cost implements Serializable {
             boolean append = true;
             if (!first) {
                 if (part instanceof CostPartMana) {
-                    cost.insert(0, ", ").insert(0, part.toString());
+                    cost.insert(0, ", ").insert(0, part);
                     append = false;
                 } else {
                     cost.append(", ");
                 }
             }
             if (append) {
-                cost.append(part.toString());
+                cost.append(part);
             }
             first = false;
         }

@@ -54,6 +54,10 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         Spell.performanceMode=performanceMode;
     }
 
+    public static boolean isPerformanceMode() {
+        return performanceMode;
+    }
+
     private boolean castFaceDown = false;
 
     public Spell(final Card sourceCard, final Cost abCost) {
@@ -161,6 +165,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
 
             source.forceTurnFaceUp();
+            source.setLKICMC(-1);
+            source.setLKICMC(source.getCMC());
             lkicheck = true;
         }
 

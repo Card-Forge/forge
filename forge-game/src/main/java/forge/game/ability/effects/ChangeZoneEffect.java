@@ -902,10 +902,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         boolean mandatory = sa.hasParam("Mandatory");
         Map<Player, HiddenOriginChoices> hiddenChoices = Maps.newHashMap();
 
-        List<Player> fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
+        List<Player> fetchers = AbilityUtils.getDefinedPlayers(source, sa.getParam("DefinedPlayer"), sa);
         Player chooser = null;
         if (sa.hasParam("Chooser")) {
-            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(source, sa.getParam("Chooser"), sa);
             if (!choosers.isEmpty()) {
                 chooser = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
             }
@@ -1534,7 +1534,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 "While you're searching your library, you may cast CARDNAME from your library.");
         decider.getController().tempShowCards(canCastWhileSearching);
         for (final Card tgtCard : canCastWhileSearching) {
-            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, decider, CardStateName.Original, true);
+            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, decider, CardStateName.Original, true, null);
             if (sas.isEmpty()) {
                 continue;
             }

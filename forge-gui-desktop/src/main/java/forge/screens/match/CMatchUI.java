@@ -42,7 +42,7 @@ import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.StaticData;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.card.CardStateName;
 import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
@@ -346,7 +346,7 @@ public final class CMatchUI
         if (!isInGame() || getCurrentPlayer() == null) {
             return;
         }
-        final Deck deck = getGameView().getDeck(getCurrentPlayer());
+        final Deck deck = getDeckForPlayer(getCurrentPlayer());
         if (deck != null) {
             FDeckViewer.show(deck);
         }

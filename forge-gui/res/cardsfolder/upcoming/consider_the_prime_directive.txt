@@ -1,0 +1,9 @@
+Name:Consider the Prime Directive
+ManaCost:2 U
+Types:Instant
+A:SP$ Charm | Choices$ DBCounter,DBTap
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SpellDescription$ Interfere — Counter target spell unless its controller pays {3}.
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | SubAbility$ DBPutCounter | SpellDescription$ Observe — Tap up to one target creature and put a stun counter on it. Draw a card. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+Oracle:Choose one —\n• Interfere — Counter target spell unless its controller pays {3}.\n• Observe — Tap up to one target creature and put a stun counter on it. Draw a card. (If a permanent with a stun counter would become untapped, remove one from it instead.)

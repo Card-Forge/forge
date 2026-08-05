@@ -1,0 +1,7 @@
+Name:Spock, Logical Choice
+ManaCost:3 U U
+Types:Legendary Creature Vulcan Human Scientist
+PT:3/5
+K:Vigilance
+A:AB$ Draw | Cost$ T | SpellDescription$ Draw a card.
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\n{T}: Draw a card.

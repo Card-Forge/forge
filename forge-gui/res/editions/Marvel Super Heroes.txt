@@ -110,7 +110,7 @@ Replace=.025F fromSheet("MSH city chaos")+
 29 C Panther Pounce @Le Vuong
 30 U Patriot, Shield Wielder @Vlad Petruchik
 31 U Political Triumph @Monztre
-32 U Quake, Agent of S.H.I.E.L.D. @Josu Solano
+32 U Quake, Agent of S.H.I.E.L.D. @Solan
 33 C Raft Security Officer @Bartek Fedyczak
 34 U Red Guardian, Super-Soldier @Lee Woo-chul
 35 R The Sentry, Golden Guardian @Alexander Skripnikov
@@ -380,10 +380,10 @@ Replace=.025F fromSheet("MSH city chaos")+
 297 M Avengers Assemble! @Steve Ellis
 298 R Origin of the Avengers @Tyler Walpole
 299 R Super-Soldier Serum @Tyler Walpole
-300 M Multiversal Incursion @Jim Cheung
+300 M Multiversal Incursion @Jim Cheung & Jay David Ramos
 301 R Secret Invasion @Veronica Fish
 302 R Avengers Disassembled @Roberta Ingranata
-303 M Mjölnir, Hammer of Thor @Jim Cheung
+303 M Mjölnir, Hammer of Thor @Jim Cheung & Jay David Ramos
 304 R World War Hulk @Steve Ellis
 305 R Armor Wars @Andrew Griffith
 306 R Avengers: Under Siege @Andrew Griffith
@@ -391,19 +391,19 @@ Replace=.025F fromSheet("MSH city chaos")+
 308 R The Super Hero Civil War @Roberta Ingranata
 309 R Vision Quest @Roberta Ingranata
 310 R Arc Reactor @Steve Ellis
-311 R Captain America's Shield @Jim Cheung
+311 R Captain America's Shield @Jim Cheung & Jay David Ramos
 312 M Cosmic Cube @Jim Cheung & Jay David Ramos
-313 M The Ten Rings @Jim Cheung
+313 M The Ten Rings @Jim Cheung & Jay David Ramos
 314 R Nick Fury, Agent of S.H.I.E.L.D. @Annie Wu
 315 U Baron Strucker, HYDRA Overlord @Annie Wu
 316 M Captain America, Super-Soldier @Annie Wu
 317 R Captain America's Shield @Annie Wu
 318 U Madame Hydra @Annie Wu
 319 U Arnim Zola, Bio-Fanatic @Annie Wu
-320 U Mister Fantastic, Reed Richards @Leinil Francis Yu
-321 U Human Torch, Johnny Storm @Leinil Francis Yu
-322 U The Thing, Ben Grimm @Leinil Francis Yu
-323 U Invisible Woman, Sue Storm @Leinil Francis Yu
+320 U Mister Fantastic, Reed Richards @Leinil Francis Yu & Sunny Gho
+321 U Human Torch, Johnny Storm @Leinil Francis Yu & Sunny Gho
+322 U The Thing, Ben Grimm @Leinil Francis Yu & Sunny Gho
+323 U Invisible Woman, Sue Storm @Leinil Francis Yu & Sunny Gho
 324 R Daredevil, Man Without Fear @Kev Walker
 325 U Bullseye, Death Dealer @Kev Walker
 326 R Elektra, Daughter of the Hand @Kev Walker
@@ -432,25 +432,25 @@ Replace=.025F fromSheet("MSH city chaos")+
 349 M Earth's Mightiest Heroes @Johan Grenier
 350 M Tony Stark @Chris Bachalo & Johan Grenier
 351 R Epic Fight @Johan Grenier
-352 M Captain America, Super-Soldier @Jim Cheung
+352 M Captain America, Super-Soldier @Jim Cheung & Jay David Ramos
 353 R Captain America, Wings of Freedom @Elena Casagrande
 354 M Captain Marvel, Earth's Protector @Swayart
 355 M Jennifer Walters @Trevor Hairsine
 356 M Monica Rambeau @Trevor Hairsine
-357 R Nick Fury, Agent of S.H.I.E.L.D. @Leinil Francis Yu
+357 R Nick Fury, Agent of S.H.I.E.L.D. @Leinil Francis Yu & Sunny Gho
 358 R The Sentry, Golden Guardian @Todd Nauck
-359 M Bruce Banner @Jim Cheung
+359 M Bruce Banner @Jim Cheung & Jay David Ramos
 360 R Ironheart, Clever Champion @Kael Ngu
 361 R Ms. Marvel, Kamala Khan @Roberta Ingranata
 362 M Namor the Sub-Mariner @Todd Nauck
-363 M Tony Stark @Jim Cheung
+363 M Tony Stark @Jim Cheung & Jay David Ramos
 364 M Black Widow, Super Spy @Todd Nauck
 365 M Doctor Doom @Leonardo Vincent (Levinky)
-366 R Elektra, Daughter of the Hand @Leinil Francis Yu
+366 R Elektra, Daughter of the Hand @Leinil Francis Yu & Sunny Gho
 367 R Hawkeye, Master Marksman @Todd Nauck
 368 R The Scarlet Witch @Swayart
-369 M Thor, God of Thunder @Leinil Francis Yu
-370 M Shang-Chi, Master of Kung Fu @Leinil Francis Yu
+369 M Thor, God of Thunder @Leinil Francis Yu & Sunny Gho
+370 M Shang-Chi, Master of Kung Fu @Leinil Francis Yu & Sunny Gho
 371 R The Unbeatable Squirrel Girl @Swayart
 372 R Daredevil, Man Without Fear @Trevor Hairsine
 373 M King T'Challa @John Tyler Christopher
@@ -476,7 +476,7 @@ Replace=.025F fromSheet("MSH city chaos")+
 393 M Black Widow, Super Spy @Emanuela Lupacchino & Neeraj Menon
 394 M Doctor Doom @Larry Lieber & Vince Colletta
 395 R Elektra, Daughter of the Hand @Mike Deodato Jr.
-396 M Shang-Chi, Master of Kung Fu @Jim Cheung
+396 M Shang-Chi, Master of Kung Fu @Jim Cheung & Laura Martin
 397 R The Astonishing Ant-Man @Bob Layton
 398 R Daredevil, Man Without Fear @Jack Kirby
 399 M King T'Challa @Jack Kirby

@@ -1,0 +1,11 @@
+Name:Stardew Valley
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Token | Cost$ 2 T tapXType<1/Creature> | TokenScript$ c_a_food_sac | SpellDescription$ Create a Food token.
+A:AB$ Draw | Cost$ 3 T | SorcerySpeed$ True | SubAbility$ DBChoosePlayer | SpellDescription$ Choose target permanent you control. Draw a card, then another player of your choice may gain control of that permanent. Activate only as a sorcery.
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Other | ChoiceTitle$ Choose another player | AILogic$ Random | SubAbility$ DBGiveControl
+SVar:DBGiveControl:DB$ GainControl | ValidTgts$ Permanent.YouCtrl | ValidTgtDesc$ permanent you control | NewController$ ChosenPlayer | Optional$ True | AILogic$ DonateTargetPerm | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
+DeckHas:Ability$Token & Type$Artifact
+Oracle:{T}: Add {C}.\n{2}, {T}, Tap an untapped creature you control: Create a Food token.\n{3}, {T}: Choose target permanent you control. Draw a card, then another player of your choice may gain control of that permanent. Activate only as a sorcery.

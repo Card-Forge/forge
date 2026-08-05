@@ -1,7 +1,6 @@
 package forge.ai;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.IdentityHashMap;
@@ -233,7 +232,7 @@ public class ComputerUtilCard {
             // TODO - Improve ranking various non-basic lands depending on context
 
             // Urza's Mine/Tower/Power Plant
-            final CardCollectionView aiAvailable = nbLand.get(0).getController().getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Hand));
+            final CardCollectionView aiAvailable = nbLand.get(0).getController().getCardsIn(ZoneType.Battlefield, ZoneType.Hand);
             if (IterableUtil.any(list, CardPredicates.nameEquals("Urza's Mine"))) {
                 if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Mine")).isEmpty()) {
                     return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Mine")).getFirst();
@@ -292,7 +291,6 @@ public class ComputerUtilCard {
     public static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal) {
         return evaluateLandRemovalPriority(ai, land, removal, true);
     }
-
     private static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal,
             final boolean includeLandDestruction) {
         if (land == null || !land.isLand()) {
@@ -325,7 +323,7 @@ public class ComputerUtilCard {
                 // Usually low priority: Homeward Path matters if the AI has
                 // stolen creatures that it could lose, but otherwise it is
                 // mostly just a colorless land with a narrow political button.
-                if (aiControlsStolenCreature(ai)) {
+                if (ai.getCreaturesInPlay().anyMatch(c -> c.getOwner() != ai)) {
                     score += 100;
                 } else {
                     score = Math.max(0, score - 50);
@@ -425,15 +423,6 @@ public class ComputerUtilCard {
     private static boolean isHomewardPathAbility(final SpellAbility ability) {
         return ability.getApi() == ApiType.GainControlVariant
                 && "GainControlOwns".equals(ability.getParam("AILogic"));
-    }
-
-    private static boolean aiControlsStolenCreature(final Player ai) {
-        for (Card creature : ai.getCreaturesInPlay()) {
-            if (!creature.getOwner().equals(ai)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private static boolean isLandAnimationAbility(final SpellAbility ability) {
@@ -1473,7 +1462,7 @@ public class ComputerUtilCard {
 
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            simAI = aic.usesSimulation();
+            simAI = aic.usesFullSimulation();
             if (!simAI) {
                 holdCombatTricks = aic.getBoolProperty(AiProps.TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
                 chanceToHoldCombatTricks = aic.getIntProperty(AiProps.CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
@@ -1755,13 +1744,13 @@ public class ComputerUtilCard {
                     }
                 }
 
-                float value = 1.0f * (pumpedDmg - dmg);
+                float value = pumpedDmg - dmg;
                 if (c == sa.getHostCard() && power > 0) {
                     int divisor = sa.getPayCosts().getTotalMana().getCMC();
                     if (divisor <= 0) {
                         divisor = 1;
                     }
-                    value *= power / divisor;
+                    value *= (float) power / divisor;
                 } else {
                     value /= opp.getLife();
                 }
