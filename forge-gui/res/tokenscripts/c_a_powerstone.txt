@@ -2,5 +2,5 @@ Name:Powerstone Token
 ManaCost:no cost
 Colors:colorless
 Types:Artifact Powerstone
-A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ CantCastNonArtifactSpells | SpellDescription$ Add {C}. This mana can't be spent to cast a nonartifact spell.
+A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ CantCast Spell.!Artifact | SpellDescription$ Add {C}. This mana can't be spent to cast a nonartifact spell.
 Oracle:{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.

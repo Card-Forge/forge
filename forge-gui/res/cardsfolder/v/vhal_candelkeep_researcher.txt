@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Legendary Creature Human Wizard
 PT:2/3
 K:Vigilance
-A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | RestrictValid$ CantCastSpellFromHand | SpellDescription$ Add an amount of {C} equal to CARDNAME's toughness. This mana can't be spent to cast spells from your hand.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | RestrictValid$ CantCast FromHand | SpellDescription$ Add an amount of {C} equal to CARDNAME's toughness. This mana can't be spent to cast spells from your hand.
 SVar:X:Count$CardToughness
 K:Choose a Background
 AI:RemoveDeck:Random
