@@ -37,7 +37,6 @@ public enum AiPlayDecision {
     CostNotAcceptable,
     LifeInDanger,
     WouldDestroyLegend,
-    WouldDestroyOtherPlaneswalker,
     WouldBecomeZeroToughnessCreature,
     WouldDestroyWorldEnchantment,
     BadEtbEffects,

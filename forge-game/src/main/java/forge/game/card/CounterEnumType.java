@@ -313,6 +313,8 @@ public enum CounterEnumType implements CounterType {
 
     NEST("NEST", 80, 80, 50, CounterAiCategory.Positive),
 
+    ODOR("ODOR", 130, 140, 85, CounterAiCategory.Positive),
+
     OIL("OIL", 99, 102, 106, CounterAiCategory.Positive),
 
     OMEN("OMEN", 255, 178, 120, CounterAiCategory.Positive),
