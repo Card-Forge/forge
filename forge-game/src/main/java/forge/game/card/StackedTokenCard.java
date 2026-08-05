@@ -188,9 +188,8 @@ public class StackedTokenCard {
      * Returns {@code true} if the given Card is structurally identical to this stack's prototype,
      * i.e., another token of the same kind could be merged into this stack.
      *
-     * <p>Identical means: same name, same controller, same base P/T, both untapped,
-     * both counter-free. Type line and keyword differences are not checked
-     * (documented gap — see 1e relaxation in development.md).</p>
+     * <p>Identical means: same name, same controller, same owner, same base P/T, both untapped,
+     * both counter-free, same type line (core types, supertypes, subtypes), and same keywords.</p>
      *
      * @param candidate the token Card to test for compatibility.
      * @return true if the candidate can be safely aggregated into this stack.
@@ -205,6 +204,9 @@ public class StackedTokenCard {
         if (candidate.getController() != prototype.getController()) {
             return false;
         }
+        if (candidate.getOwner() != prototype.getOwner()) {
+            return false;
+        }
         if (candidate.getBasePower() != prototype.getBasePower()) {
             return false;
         }
@@ -215,6 +217,21 @@ public class StackedTokenCard {
             return false;
         }
         if (candidate.isTapped() || prototype.isTapped()) {
+            return false;
+        }
+        if (!candidate.sharesAllCardTypesWith(prototype)) {
+            return false;
+        }
+        if (!prototype.sharesAllCardTypesWith(candidate)) {
+            return false;
+        }
+        if (!candidate.getType().getSubtypes().equals(prototype.getType().getSubtypes())) {
+            return false;
+        }
+        if (!candidate.getType().getSupertypes().equals(prototype.getType().getSupertypes())) {
+            return false;
+        }
+        if (!candidate.getKeywords().equals(prototype.getKeywords())) {
             return false;
         }
         return true;
