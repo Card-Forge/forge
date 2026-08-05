@@ -412,25 +412,6 @@ Replace=.033F fromSheet("HOB journey")+
 12 c_a_treasure_sac @Leonardo Santanna
 13 c_a_treasure_sac @Kamila Szutenberg
 
-182 C Elvenking's Halls @Leon Tukker
-183 C Goblin-town @Sean Vo
-184 C Hobbit Hole @Shahab Alizadeh
-185 C Iron Hills @Marina Ortega Lorente
-186 C Lake-town @Marina Ortega Lorente
-187 R The Lonely Mountain @Leon Tukker
-188 C Mirkwood @Leon Tukker
-189 L Plains @Chris Cold
-190 L Island @Kamila Szutenberg
-191 L Swamp @Erikas Perl
-192 L Mountain @Shahab Alizadeh
-193 L Forest @Kamila Szutenberg
-194 L Plains @WFlemming Illustration
-195 L Island @WFlemming Illustration
-196 L Swamp @WFlemming Illustration
-197 L Mountain @WFlemming Illustration
-198 L Forest @WFlemming Illustration
-
-
 [journey]
 1 Plains|HOB|[194]
 1 Island|HOB|[195]
