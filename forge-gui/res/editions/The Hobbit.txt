@@ -63,8 +63,8 @@ Replace=0.00131F Rare:fromSheet("HOB bookcover")
 Replace=0.00098F Mythic:fromSheet("HOB bookcover")
 
 [Land]
-Base=BasicLand:!fromSheet("HOB basic frame"):!fromSheet("HOB journey")
-Replace=.1F BasicLand:!fromSheet("HOB basic frame"):!fromSheet("HOB journey")+
+Base=BasicLand:fromSheet("HOB dual basic")
+Replace=.1F BasicLand:fromSheet("HOB dual basic")+
 Replace=.267F BasicLand:fromSheet("HOB basic frame")
 Replace=.067F BasicLand:fromSheet("HOB basic frame")+
 Replace=.133F fromSheet("HOB journey")
@@ -397,6 +397,40 @@ Replace=.033F fromSheet("HOB journey")+
 320 L Plains @David Petersen
 321 R The Misty Mountains Cold @Rovina Cai
 
+[tokens]
+1 w_4_4_bird_soldier_flying @Leesha Hannigan
+2 w_1_1_human_soldier @Jarel Threat
+3 b_0_0_goblin_army @Stanislav Sherbakov
+4 b_0_0_goblin_army @Stanislav Sherbakov
+5 r_6_6_dragon_flying @Nino Is
+6 r_2_2_dwarf @Nia Kovalevski
+7 g_2_2_bear @Leesha Hannigan
+8 g_1_1_elf @Hristo D. Chukov
+9 g_2_2_wolf @Nathaniel Himawan
+10 axe @Nathaniel Himawan
+11 stone_boulder @Kamila Szutenberg
+12 c_a_treasure_sac @Leonardo Santanna
+13 c_a_treasure_sac @Kamila Szutenberg
+
+182 C Elvenking's Halls @Leon Tukker
+183 C Goblin-town @Sean Vo
+184 C Hobbit Hole @Shahab Alizadeh
+185 C Iron Hills @Marina Ortega Lorente
+186 C Lake-town @Marina Ortega Lorente
+187 R The Lonely Mountain @Leon Tukker
+188 C Mirkwood @Leon Tukker
+189 L Plains @Chris Cold
+190 L Island @Kamila Szutenberg
+191 L Swamp @Erikas Perl
+192 L Mountain @Shahab Alizadeh
+193 L Forest @Kamila Szutenberg
+194 L Plains @WFlemming Illustration
+195 L Island @WFlemming Illustration
+196 L Swamp @WFlemming Illustration
+197 L Mountain @WFlemming Illustration
+198 L Forest @WFlemming Illustration
+
+
 [journey]
 1 Plains|HOB|[194]
 1 Island|HOB|[195]
@@ -410,6 +444,13 @@ Replace=.033F fromSheet("HOB journey")+
 1 Swamp|HOB|[191]
 1 Mountain|HOB|[192]
 1 Forest|HOB|[193]
+
+[dual basic]
+1 Elvenking's Halls|HOB|[182]
+1 Goblin-town|HOB|[183]
+1 Iron Hills|HOB|[185]
+1 Lake-town|HOB|[186]
+1 Mirkwood|HOB|[188]
 
 [scene]
 1 Troop of Ponies|HOB|[199]
@@ -467,17 +508,4 @@ Replace=.033F fromSheet("HOB journey")+
 1 The Arkenstone|HOB|[247]
 1 The Lonely Mountain|HOB|[248]
 
-[tokens]
-1 w_4_4_bird_soldier_flying @Leesha Hannigan
-2 w_1_1_human_soldier @Jarel Threat
-3 b_0_0_goblin_army @Stanislav Sherbakov
-4 b_0_0_goblin_army @Stanislav Sherbakov
-5 r_6_6_dragon_flying @Nino Is
-6 r_2_2_dwarf @Nia Kovalevski
-7 g_2_2_bear @Leesha Hannigan
-8 g_1_1_elf @Hristo D. Chukov
-9 g_2_2_wolf @Nathaniel Himawan
-10 axe @Nathaniel Himawan
-11 stone_boulder @Kamila Szutenberg
-12 c_a_treasure_sac @Leonardo Santanna
-13 c_a_treasure_sac @Kamila Szutenberg
+
