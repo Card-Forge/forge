@@ -37,7 +37,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertNull(sa.getTargetCard());
@@ -59,7 +59,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertEquals(bearCard, sa.getTargetCard());
@@ -81,7 +81,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertTrue(sa.isLandAbility());
         AssertJUnit.assertEquals(mountain, sa.getHostCard());
@@ -108,7 +108,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(tatyova, sa.getHostCard());
 
@@ -137,7 +137,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         // Expected: All creatures get -2/-2 to kill the bear.
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(spell.getSpellAbilities().get(0), sa);
         AssertJUnit.assertEquals("Dromar's Charm -> Target creature gets -2/-2 until end of turn.",
@@ -158,7 +158,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         // Expected: Gain 5 life, since other modes aren't helpful.
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(spell.getSpellAbilities().get(0), sa);
         AssertJUnit.assertEquals("Dromar's Charm -> You gain 5 life.", picker.getPlan().getDecisions().get(0).modesStr);
@@ -180,7 +180,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         // Expected: 2x 1 damage to each creature, 1x 2 damage to each opponent.
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(spell.getSpellAbilities().get(0), sa);
 
@@ -206,7 +206,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         // Expected: 3x 2 damage to each opponent.
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(spell.getSpellAbilities().get(0), sa);
 
@@ -231,7 +231,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(spell.getSpellAbilities().get(0), sa);
         AssertJUnit.assertEquals(bear, sa.getTargetCard());
@@ -264,7 +264,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         AssertJUnit.assertEquals(10, darkDepths.getCounters(ice));
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(cropRotation.getSpellAbilities().get(0), sa);
         // Expected: Sac a Forest to get an Urborg.
@@ -295,7 +295,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         // ensure that the tapland is paid
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(desired, sa.getHostCard());
     }
@@ -314,7 +314,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         // ensure that the tapland is played
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(desired, sa.getHostCard());
     }
@@ -334,7 +334,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         // ensure that the tron land is played
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(desired, sa.getHostCard());
     }
@@ -350,7 +350,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         // ensure that the land is played
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(desired, sa.getHostCard());
     }
@@ -371,7 +371,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         // ensure that the basic land is played
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(desired, sa.getHostCard());
     }
@@ -395,7 +395,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         // ensure that the land is played
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(desired, sa.getTargetCard());
     }
@@ -454,7 +454,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
             GameStateEvaluator.Score s = new GameStateEvaluator().getScoreForGameState(game, p);
             System.out.println("Starting score: " + s);
-            SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+            SpellAbilityPicker picker = new SpellAbilityPicker(p);
             List<SpellAbility> candidateSAs = picker.getCandidateSpellsAndAbilities();
             for (int i = 0; i < candidateSAs.size(); i++) {
                 SpellAbility sa = candidateSAs.get(i);
@@ -499,7 +499,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         // 1. Play Abbot.
         // 2. Play land exiled by Abbot.
         // 3. Play Bolt targeting opponent.
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(abbot.getSpellAbilities().get(0), sa);
         Plan plan = picker.getPlan();
@@ -528,7 +528,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         // Expected plan:
         // 1. Play Abbot.
         // 3. Play Bolt exiled by Abbot.
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(abbot.getSpellAbilities().get(0), sa);
         Plan plan = picker.getPlan();
@@ -555,7 +555,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         AssertJUnit.assertNull(picker.chooseSpellAbilityToPlay(null));
 
         game.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_BEGIN);
@@ -603,7 +603,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertEquals(furor.getSpellAbilities().get(0), sa);
@@ -626,7 +626,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertEquals("Destroy target nonblack creature.", sa.toString());
@@ -668,7 +668,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertEquals("Chaos Warp", sa.getHostCard().getName());
@@ -687,7 +687,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNull(sa);
         AssertJUnit.assertEquals(0, picker.getNumSimulations());
@@ -705,7 +705,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         // Only one land drop should be simulated, since the cards are identical.
@@ -726,7 +726,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertEquals(expectedTarget, sa.getTargetCard());
@@ -749,7 +749,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         // Expected: Runeclaw Bear fights Flying Men
@@ -770,7 +770,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
          picker.chooseSpellAbilityToPlay(null);
         // Only mode "Creatures with power 3 or less can't block this turn" should be simulated.
         AssertJUnit.assertEquals(1, picker.getNumSimulations());
@@ -788,7 +788,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         picker.chooseSpellAbilityToPlay(null);
         // TODO: Ideally, this would be 0 simulations, but we currently only determine there are no
         // valid modes in SpellAbilityChoicesIterator, which runs already when we're simulating.
@@ -812,7 +812,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         MultiTargetSelector.Targets targets = picker.getPlan().getSelectedDecision().targets;
@@ -837,7 +837,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNull(sa);
     }
@@ -857,7 +857,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         MultiTargetSelector.Targets targets = picker.getPlan().getSelectedDecision().targets;
@@ -876,7 +876,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         addCard("Flying Men", p);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
 
-        final SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        final SpellAbilityPicker picker = new SpellAbilityPicker(p);
         Runnable assertPickIsGoblinBombardmentTargetingOpponent = () -> {
             game.getAction().checkStateEffects(true);
             SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
@@ -934,7 +934,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
         game.getAction().checkStateEffects(true);
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, ai);
+        SpellAbilityPicker picker = new SpellAbilityPicker(ai);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
 
         AssertJUnit.assertNotNull(sa);
