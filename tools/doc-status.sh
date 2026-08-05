@@ -12,7 +12,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DOC="$ROOT/docs/development.md"
 fail=0
 
-markers=$(grep -rhoE '// doc:[0-9a-z]+ (DONE|PARTIAL)' "$ROOT"/forge-game "$ROOT"/forge-gui 2>/dev/null \
+markers=$(grep -rhoE '// doc:[0-9a-z]+ (DONE|PARTIAL)' "$ROOT"/forge-game "$ROOT"/forge-gui "$ROOT"/forge-gui-desktop 2>/dev/null \
     | sed 's|.*// doc:||' | sort -u)
 
 if [ -z "$markers" ]; then

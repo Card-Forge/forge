@@ -64,7 +64,7 @@ mvn -P run-commander exec:java -pl :forge-gui-desktop
 See [docs/development.md](docs/development.md) for the full roadmap, known gaps, and priority fixes.
 
 ### iOS Installation (early stage)
-- Build the **IPA** according to the wiki
+- Build the **IPA** according to the [iOS Builds guide](docs/Development/iOS-Builds.md)
 - No jailbreak needed, only developer mode
 - Connect your device to a PC to self-sign and upload the app file, multiple tools exist e.g. [Sideloadly](https://sideloadly.io)
 

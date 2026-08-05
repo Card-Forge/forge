@@ -1095,11 +1095,36 @@ public class GameAction {
             dependencies = HashBasedTable.create();
         }
 
-        // REFORGE COMMANDER EXTENSION — static-eval batching (1c)
-        // Use unexpanded battlefield to keep stacked tokens as prototype
-        // references (O(S) stacks) instead of materializing O(N) individual cards.
-        // ponytail: duplicates forEachCardInGame iteration order; upgrade to a
-        // withStacks flag on forEachCardInGame if more callers need this.
+        // ponytail: unexpanded battlefield keeps stacked tokens as prototype refs, O(S) stacks not O(N) cards.
+        // doc:1c DONE
+        // A stacked-token prototype stands for N identical tokens. The affected-cards side
+        // (StaticAbilityContinuous.getAffectedCards) already expands stacks via getCardsIn(Battlefield),
+        // but the source collection below only visits the prototype once, so a continuous ability
+        // would apply once per stack instead of once per token. Materialize stacks carrying a
+        // continuous ability up front so each token contributes its own registered ability
+        // and the effect applies once per token even on the first check.
+        for (final Player p : game.getPlayers()) {
+            final PlayerZone bfZone = p.getZone(ZoneType.Battlefield);
+            if (bfZone instanceof PlayerZoneBattlefield) {
+                final PlayerZoneBattlefield bf = (PlayerZoneBattlefield) bfZone;
+                for (final StackedTokenCard stack : bf.getStackedTokens()) {
+                    final Card proto = stack.getPrototype();
+                    boolean continuous = false;
+                    for (final StaticAbility stAb : proto.getStaticAbilities()) {
+                        if (stAb.checkMode(StaticAbilityMode.Continuous)) { continuous = true; break; }
+                    }
+                    if (!continuous) {
+                        for (final StaticAbility stAb : proto.getHiddenStaticAbilities()) {
+                            if (stAb.checkMode(StaticAbilityMode.Continuous)) { continuous = true; break; }
+                        }
+                    }
+                    if (continuous) {
+                        bf.expandStacks();
+                        break;
+                    }
+                }
+            }
+        }
         game.forEachCardInGameUnexpanded(c -> {
             // need to get Card from preList if able
             final Card co = preList.get(c);
