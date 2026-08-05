@@ -1,3 +1,11 @@
+/*
+ * REFORGE COMMANDER EXTENSION
+ *
+ * Regression test for PowerMock/Mockito compatibility.
+ *
+ * Guards against accidental mockito-core version bumps that would break PowerMock 2.0.9
+ * (required for suppressing ForgeConstants static initialization in tests).
+ */
 package forge;
 
 import org.testng.annotations.Test;
