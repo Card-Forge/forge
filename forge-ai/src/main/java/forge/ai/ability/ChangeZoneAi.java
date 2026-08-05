@@ -538,16 +538,20 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a {@link forge.game.card.Card} object.
      */
     private static Card basicManaFixing(final Player decider, final Player owner, List<Card> list) { // Search for a Basic Land
-        // the land ends up with its owner, so the choice is made from their side of the table - and
-        // an opponent doing the choosing wants the least helpful land instead
-        final boolean hostile = decider.isOpponentOf(owner);
-
-        // a colour they are actually waiting on beats evening out their basic types, so ask that
-        // first - the type count below cannot tell a colour that is missing from one that is merely
-        // uncommon, and several lands of the right type carry different colours beside it
-        final Card needed = ComputerUtilCard.getBestLandToGainAI(owner, list, hostile);
-        if (needed != null) {
-            return needed;
+        // the land ends up with its owner, so the colours that matter are theirs, not the
+        // chooser's. No card in the pool currently chooses for another player here, so rather
+        // than guess at that case it is left on the existing behaviour untouched.
+        if (!decider.isOpponentOf(owner)) {
+            int most = 0; // only worth narrowing for lands that improve the mana at all
+            for (Card c : list) {
+                most = Math.max(most, ComputerUtilCard.getColorFixingValue(owner, c));
+            }
+            // narrow to the lands worth the most, then let the basic-type spread and the
+            // dual-land preference below break the tie as they already did
+            if (most > 0) {
+                final int best = most;
+                list = CardLists.filter(list, c -> ComputerUtilCard.getColorFixingValue(owner, c) == best);
+            }
         }
 
         final CardCollectionView combined = CardCollection.combine(owner.getCardsIn(ZoneType.Battlefield), owner.getCardsIn(ZoneType.Hand));
@@ -562,12 +566,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // Which basic land is least available from hand and play, that I still
         // have in my deck
-        int minSize = hostile ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        int minSize = Integer.MAX_VALUE;
         String minType = null;
 
         for (String b : basics) {
             final int num = CardLists.getType(combined, b).size();
-            if (hostile ? num > minSize : num < minSize) {
+            if (num < minSize) {
                 minType = b;
                 minSize = num;
             }

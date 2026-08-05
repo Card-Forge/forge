@@ -639,7 +639,53 @@ public class ComputerUtilCost {
         return getAvailableManaColors(ai, Lists.newArrayList(additionalLand));
     }
     public static Set<String> getAvailableManaColors(Player ai, List<Card> additionalLands) {
-        CardCollection cardsToConsider = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.UNTAPPED);
+        return manaColors(ai, additionalLands, true);
+    }
+
+    /**
+     * Which colors the board could produce given time, ignoring what happens to be tapped right
+     * now. That is what choosing a land cares about, where {@link #getAvailableManaColors} answers
+     * the different question of what can be paid for this turn.
+     */
+    public static Set<String> getProducibleManaColors(Player ai, Card additionalLand) {
+        return manaColors(ai, additionalLand == null ? null : Lists.newArrayList(additionalLand), false);
+    }
+
+    /** WUBRGC, matching the index order callers use for these counts */
+    private static final String[] MANA_SHORT_NAMES = { "W", "U", "B", "R", "G", "C" };
+
+    /**
+     * How many sources of each color the player could produce, in WUBRGC order, optionally counting
+     * one extra card. Unlike {@link #getProducibleManaColors} this keeps the count rather than the
+     * set, which is what tells a second source of a color from a first.
+     */
+    public static int[] getManaSourceCounts(Player ai, Card additional) {
+        CardCollection cardsToConsider = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
+        if (additional != null) {
+            cardsToConsider.add(additional);
+        }
+
+        int[] counts = new int[MANA_SHORT_NAMES.length];
+        for (Card c : cardsToConsider) {
+            for (SpellAbility m : c.getManaAbilities()) {
+                m.setActivatingPlayer(c.getController());
+                for (int i = 0; i < MANA_SHORT_NAMES.length; i++) {
+                    // canProduce rather than reading the produced string: it is what understands
+                    // "any colour" and a choice of colours, which Command Tower and the like need
+                    if (m.canProduce(MANA_SHORT_NAMES[i])) {
+                        counts[i] += 1;
+                    }
+                }
+            }
+        }
+        return counts;
+    }
+
+    private static Set<String> manaColors(Player ai, List<Card> additionalLands, boolean untappedOnly) {
+        CardCollection cardsToConsider = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
+        if (untappedOnly) {
+            cardsToConsider = CardLists.filter(cardsToConsider, CardPredicates.UNTAPPED);
+        }
         Set<String> colorsAvailable = Sets.newHashSet();
 
         if (additionalLands != null) {
