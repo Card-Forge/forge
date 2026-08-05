@@ -12,5 +12,5 @@ ALTERNATE
 Name:Vicious Verse
 ManaCost:BR
 Types:Sorcery
-A:SP$ DealDamage | ValidTgts$ Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target opponent
+A:SP$ DealDamage | ValidTgts$ Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target opponent.
 Oracle:Vicious Verse deals 1 damage to target opponent.
