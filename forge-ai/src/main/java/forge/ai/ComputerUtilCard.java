@@ -810,6 +810,10 @@ public class ComputerUtilCard {
         return eval;
     }
 
+    public static int evaluateLand(final Card c) {
+        return landEvaluator.apply(c);
+    }
+
     public static int evaluatePermanentList(final CardCollectionView list) {
         int value = 0;
         for (int i = 0; i < list.size(); i++) {
