@@ -3355,9 +3355,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final Set<String> getProducibleColors() {
         Set<String> colors = new HashSet<>();
         for (final SpellAbility ab : getManaAbilities()) {
-            // as getMaxManaProduced does: without an activating player each canProduce falls into
-            // a much more expensive path, and this is hot enough for that to matter
-            ab.setActivatingPlayer(getController());
+            // Without an activating player each canProduce falls into a much more expensive path,
+            // and this is hot enough for that to matter. Only fill it in when it is missing, so a
+            // payment simulation that has already set a payer keeps it.
+            if (ab.getActivatingPlayer() == null) {
+                ab.setActivatingPlayer(getController());
+            }
             if (ab.getApi() == ApiType.ManaReflected) {
                 colors.addAll(CardUtil.getReflectableManaColors(ab));
             } else {
