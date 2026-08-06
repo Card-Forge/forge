@@ -78,4 +78,30 @@ public class ConvergePredictionTest extends AITest {
         assertNotNull("the AI cast Chamber Sentry", sentry);
         assertEquals("sunburst counted all five colours", 5, sentry.getNetToughness());
     }
+
+    /**
+     * DrawAi used to override calculateAmount for Count$Converge because it read zero before
+     * anything had been paid. It reads the prediction now, so the override is gone and the spell
+     * still has to size itself correctly.
+     */
+    @Test
+    public void convergeSizesADrawSpellWithoutTheAiOverride() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        for (String l : new String[]{"Plains", "Island", "Swamp", "Mountain", "Forest"}) {
+            addCard(l, ai);
+        }
+        fillLibrary(ai, 20);
+        // 2B, so the best it can do is black plus two other colours
+        addCardToZone("Painful Truths", ai, ZoneType.Hand);
+
+        final int lifeBefore = ai.getLife();
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+        game.getAction().checkStateEffects(true);
+        gameLoopUntilNextPhase(game);
+
+        assertEquals("drew one card per colour spent", 3, ai.getCardsIn(ZoneType.Hand).size());
+        assertEquals("and paid the same in life", 3, lifeBefore - ai.getLife());
+    }
 }
