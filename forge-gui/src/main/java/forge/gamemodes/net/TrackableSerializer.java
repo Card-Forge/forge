@@ -137,6 +137,13 @@ public final class TrackableSerializer implements IHasForgeLog {
             Object resolved = tracker.getObj(trackableTypeFor(ref.typeTag()), ref.id());
             if (resolved == null) {
                 netLog.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag(), ref.id());
+                if (ref.typeTag() == TYPE_CARD_VIEW) {
+                    // Tracker divergence: the receiver's tracker no longer holds this
+                    // CardView, but the game may still contain the card. A detached
+                    // CardView lets findByView locate it by id instead of the selection
+                    // being dropped with a null (which soft-locks the waiting input).
+                    return new CardView(ref.id(), tracker);
+                }
             }
             return resolved;
         }
