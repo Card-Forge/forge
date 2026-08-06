@@ -75,13 +75,6 @@ public class ComputerUtilMana {
     }
 
     /**
-     * Return the number of colors used for payment for Converge
-     */
-    public static int getConvergeCount(final SpellAbility sa, final Player ai) {
-        return ColorSet.fromMask(getConvergeColors(sa, ai)).countColors();
-    }
-
-    /**
      * Return the colors that would be used for payment, as a color mask.
      */
     public static byte getConvergeColors(final SpellAbility sa, final Player ai) {

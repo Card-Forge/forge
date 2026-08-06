@@ -84,9 +84,6 @@ public class TokenAi extends SpellAbilityAi {
         // X-cost spells
         if (tokenHasX) {
             int x = AbilityUtils.calculateAmount(source, tokenAmount, sa);
-            if (source.getSVar("X").equals("Count$Converge")) {
-                x = ComputerUtilMana.getConvergeCount(sa, ai);
-            }
             if (sa.getSVar("X").equals("Count$xPaid")) {
                 x = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             }
