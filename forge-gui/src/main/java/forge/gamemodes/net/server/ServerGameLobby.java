@@ -56,7 +56,10 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
 
     public ServerGameLobby() {
         addSlot(new LobbySlot(LobbySlotType.LOCAL, localName(), localAvatarIndices()[0], localSleeveIndices()[0],0, true, false, Collections.emptySet()));
+        // REFORGE COMMANDER EXTENSION — rooms open with 3 joinable slots (+ host) so early guests are never refused
         addSlot(new LobbySlot(LobbySlotType.OPEN, null, -1, -1, 1, false, false, Collections.emptySet()));
+        addSlot(new LobbySlot(LobbySlotType.OPEN, null, -1, -1, 2, false, false, Collections.emptySet()));
+        addSlot(new LobbySlot(LobbySlotType.OPEN, null, -1, -1, 3, false, false, Collections.emptySet()));
     }
 
     /**

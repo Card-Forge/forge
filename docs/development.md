@@ -43,7 +43,7 @@ Post-v1: multiplayer online (Section 8), advanced board UX (Section 7 polish), l
 
 ## 1. StackedTokenCard — Flyweight Integration
 
-**Status: Wired at token-creation time (1a), battlefield-zone tracking surviving batch creation (1b), static-eval batching (1c), `CardCopyService` promotion verified (1f), engine-path promotion (1g), real-path benchmark (1h). GameCopier and relaxed merge remain.**
+**Status: Wired at token-creation time (1a), battlefield-zone tracking surviving batch creation (1b), static-eval batching (1c), `CardCopyService` promotion verified (1f), engine-path promotion (1g), real-path benchmark (1h), selective-fold at durable capture sites (1i). GameCopier and relaxed merge remain.**
 
 ### Required Fixes
 
@@ -59,6 +59,7 @@ Status legend: `DONE` / `PARTIAL` / open. Code carries `// doc:<item> <STATUS>` 
 | 1f | `promote()` assumes `CardCopyService` exists with the right API | Verify `CardCopyService.copyCard()` exists and correctly creates independent copies with fresh card IDs | Audit `CardCopyService`; if it does not exist, build a card copy method in `StackedTokenCard` directly | **DONE** — `CardCopyService.copyCard(true)` verified and used in `promote()` (`StackedTokenCard.java:150`) |
 | 1g | Promotion places cards directly on battlefield via `owner.getZone(ZoneType.Battlefield).add(copy)` | Bypasses zone-change rules (ETB triggers, replacement effects, state-based actions) | Route promoted tokens through the game engine's normal `moveToZone` / `moveTo` path, not raw zone add | **DONE** — `expandStacks()` now routes copies through `Zone.add()` (events + view refresh) with the prototype's entry bookkeeping carried over in `promote()`; NOT `moveToPlay`, which would double-fire ETB (`StackedTokenCard.java:159-163`, `PlayerZoneBattlefield.java:101-124`) |
 | 1h | Benchmark constructs raw `Card` objects manually, not through real token creation | Benchmark results are irrelevant to actual game performance | Rewrite benchmark to go through Forge's real token resolution — preferably a scripted game scenario (e.g., cast `Secure the Wastes` for X) | **DONE** — `TokenBenchmarkTest` now enters tokens exactly like `TokenEffectBase.makeTokenTable` (zone entry + `tryStackToken`) and clones through the real `GameCopier`; it prints the honest flyweight ledger (stacks vs materialized) per batch, which exposes that stacks are expanded by the next zone entry's view refresh (`TokenBenchmarkTest.java`) |
+| 1i | `tryStackToken()` runs before capture sites — tokens with durable refs become ghost cards | Tokens referenced by `RememberTokens`, `AtEOT`, `addToCombat`, etc. are removed from zone but still referenced downstream | Selective-fold: add `boolean referenced` flag at top of per-token loop, set true at each durable capture site, defer `tryStackToken()` to end of loop, gate on `!referenced` | **DONE** — `TokenEffectBase.java:243-246` selective-fold at durable capture sites (issue #57) |
 
 ### Verification
 
@@ -420,6 +421,7 @@ Missing: no game-state fingerprinting, no repeat detection, no shortcut mechanis
 | P2 | 9c — 4+ player board layout scaling | 3-4 days | Multiplayer Commander |
 | P2 | 9d — "Focus on active player" toggle | 2 days | 4-player UX |
 | P3 | 1h — Real-game benchmark | 1 day | Accurate performance measurement — **DONE: benchmark runs through the real entry path + `GameCopier`** |
+| P1 | 1i — Selective-fold at durable capture sites (#57) | 1 day | Prevents ghost cards: tokens with RememberTokens/AtEOT/addToCombat refs become invisible on battlefield — **DONE: `boolean referenced` flag gates `tryStackToken()` at loop end** |
 | P1 | 10a — Mobile Commander lobby entry | 1 day | Desktop↔mobile feature parity |
 | P1 | 10b — Mobile Commander-mode mode whitelist | 0.5 day | Commander-first brand on Android |
 | P1 | 10c — Platform-parity sync guard in CI | 0.5 day | Prevents silent desktop/mobile drift — **DONE: `tools/platform-parity.sh` wired into `test-build.yaml`** |

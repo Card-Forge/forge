@@ -40,22 +40,13 @@ public class TestMethodVisibilityRegressionTest {
     }
 
     @Test
-    public void testCardRequestTestComposeCardRequestWithCardNameAndFoilIsPublic() throws NoSuchMethodException {
-        assertMethodIsPublic(CardRequestTest.class, "testComposeCardRequestWithCardNameAndFoil");
+    public void testCardRequestTestComposeCardRequestWithCardNameAndFoilIsPublic() {
+        assertAllTestAnnotatedMethodsArePublic(CardRequestTest.class);
     }
 
     @Test
-    public void testCardDbCardMockTestCaseMethodsArePublic() throws NoSuchMethodException {
-        String[] methodNames = {
-                "testGetAllCardsOfaGivenNameAndPrintedInSets",
-                "testGetAllCardsOfaGivenNameAndLegalInSets",
-                "testCardRequestWithSetCodeAllInLowercase",
-                "testThatWithCardPreferenceSetAndNoRequestForSpecificEditionAlwaysReturnsPreferredArt",
-                "testGetDualAndDoubleCards"
-        };
-        for (String methodName : methodNames) {
-            assertMethodIsPublic(CardDbCardMockTestCase.class, methodName);
-        }
+    public void testCardDbCardMockTestCaseMethodsArePublic() {
+        assertAllTestAnnotatedMethodsArePublic(CardDbCardMockTestCase.class);
     }
 
     @Test

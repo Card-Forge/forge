@@ -14,7 +14,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SwingImageFetcher extends ImageFetcher {
 
@@ -24,6 +27,7 @@ public class SwingImageFetcher extends ImageFetcher {
     }
 
     private static class SwingDownloadTask implements Runnable {
+        private static final AtomicInteger TMP_COUNTER = new AtomicInteger();
         private final String[] downloadUrls;
         private final String destPath;
         private final Runnable notifyObservers;
@@ -45,28 +49,39 @@ public class SwingImageFetcher extends ImageFetcher {
                 newdespath = newdespath.replace(".jpg", ".fullborder.jpg");
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
-            BufferedImage image = ImageIO.read(url);
+            File targetFile = new File(newdespath);
+            if (targetFile.exists() && targetFile.length() > 0) {
+                System.out.println("Image already cached: " + newdespath);
+                SwingUtilities.invokeLater(notifyObservers);
+                return true;
+            }
 
-            File destFile = new File(newdespath + ".tmp");
+            BufferedImage image = ImageIO.read(url);
+            if (image == null) {
+                System.err.println("ImageIO returned null for " + url);
+                return false;
+            }
+
+            File destFile = new File(newdespath + ".tmp" + TMP_COUNTER.incrementAndGet());
             destFile.getParentFile().mkdirs();
 
             if (writeJpeg(image, destFile, 0.65f)) {
-                if (destFile.renameTo(new File(newdespath))) {
+                if (moveWithRetry(destFile, new File(newdespath))) {
                     System.out.println("Saved image to " + newdespath);
                     SwingUtilities.invokeLater(notifyObservers);
                 } else {
-                    System.err.println("Failed to rename image to " + newdespath);
+                    System.err.println("Failed to move image to " + newdespath);
                     return false;
                 }
             } else {
                 System.err.println("Failed to save image from " + url + " as jpeg");
                 if (writePng(image, destFile)) {
                     String newPath = newdespath.replace(".jpg", ".png");
-                    if (destFile.renameTo(new File(newPath))) {
+                    if (moveWithRetry(destFile, new File(newPath))) {
                         System.out.println("Saved image to " + newPath);
                         SwingUtilities.invokeLater(notifyObservers);
                     } else {
-                        System.err.println("Failed to rename image to " + newPath);
+                        System.err.println("Failed to move image to " + newPath);
                     }
                 } else {
                     System.err.println("Failed to save image from " + url + " as png");
@@ -75,6 +90,36 @@ public class SwingImageFetcher extends ImageFetcher {
             }
 
             return true;
+        }
+
+        private static boolean moveWithRetry(File source, File target) {
+            IOException lastError = null;
+            for (int attempt = 0; attempt < 10; attempt++) {
+                try {
+                    Files.move(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    return true;
+                } catch (IOException e) {
+                    lastError = e;
+                    try {
+                        Thread.sleep(100L * (attempt + 1));
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                        return false;
+                    }
+                }
+            }
+            try {
+                Files.copy(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                try {
+                    Files.deleteIfExists(source.toPath());
+                } catch (IOException ignored) {
+                }
+                return true;
+            } catch (IOException e) {
+                lastError = e;
+            }
+            System.err.println("moveWithRetry failed for " + target + ": " + (lastError != null ? lastError.getMessage() : "unknown"));
+            return false;
         }
 
         private boolean writeJpeg(BufferedImage image, File file, float quality) {

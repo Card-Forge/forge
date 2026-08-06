@@ -232,7 +232,7 @@ public class CardRequestTest {
     }
 
     @Test
-    void isFoilCardNameMethod() {
+    public void isFoilCardNameMethod() {
         assertTrue(CardRequest.isFoilCardName("Counterspell+"));
         assertFalse(CardRequest.isFoilCardName("Counterspell"));
         assertTrue(CardRequest.isFoilCardName("   Counterspell+    "));
