@@ -21,7 +21,7 @@ Reforge Commander transforms upstream Forge — a clunky but extremely feature-r
 
 ## Current Phase: Early Integration
 
-Architecture choices (additive-only changes, system property gating, upstream-agnostic layering) are sound. The signature flyweight is wired into token creation (1a) with battlefield-zone tracking surviving batch creation (1b) and verified promotion via `CardCopyService` (1f). The UI isolates Commander modes but still mirrors upstream patterns rather than a ground-up redesign. This document tracks known gaps, planned fixes, and verification criteria.
+Architecture choices (upstream-merge preference for new code, system property gating, upstream-agnostic layering) are sound. The signature flyweight is wired into token creation (1a) with battlefield-zone tracking surviving batch creation (1b) and verified promotion via `CardCopyService` (1f). The UI isolates Commander modes but still mirrors upstream patterns rather than a ground-up redesign. This document tracks known gaps, planned fixes, and verification criteria.
 
 ## v1 Milestone — "Playable Commander, Done"
 

@@ -1,7 +1,7 @@
 # Upstream Sync Process
 
 > **Personal project.** This sync exists so my fork can keep pulling card scripts and rules fixes from
-> upstream while I keep my own changes additive-only. It is not a community maintainer workflow and
+> upstream while I keep my own changes merge-friendly. It is not a community maintainer workflow and
 > carries no guarantees. See the [README](../README.md) for the project disclaimer.
 
 ## How sync works
@@ -10,15 +10,22 @@ A daily GitHub Action (`.github/workflows/sync-upstream.yml`) pulls from `Card-F
 
 **Never** add a remote literally named `upstream` to any workflow — it makes `gh pr create` misattribute the repo.
 
-## Additive-only rule
+## Upstream-merge preference (soft constraint)
 
-Reforge classes extend upstream classes rather than modifying them. Every Reforge class carries a `REFORGE COMMANDER EXTENSION` header. Code markers use `// doc:<item> <STATUS>` format.
+New Reforge code should extend upstream classes rather than modifying them; every Reforge class carries a
+`REFORGE COMMANDER EXTENSION` header. This is a *preference*, not a prohibition: a small, clearly-marked direct
+edit to an upstream file is acceptable when it's the minimal correct change and a workaround would cost more than
+the resulting merge friction. The table below tracks which upstream files currently carry direct Reforge edits so a
+future upstream refactor of any of them is known to risk a merge conflict.
 
 ## Touched upstream files (sync-conflict risk)
 
 These upstream files are modified directly by Reforge (not extended). A future upstream refactor of any of these will produce a merge conflict. Re-verify this list periodically against `git diff upstream/master..master --name-only`.
 
-> **Why direct edits exist despite the additive-only rule:** the rule governs *new* Reforge code. These are pre-existing modifications made before the rule was adopted; extending the upstream class was not possible for the integration points (e.g. the zone entry path in `TokenEffectBase`, the static-eval loop in `GameAction`). Each is minimized and isolated. New work should still prefer a `REFORGE COMMANDER EXTENSION` class; refactor any table row into an extension class opportunistically.
+> **Why direct edits exist:** these are pre-existing modifications made before the preference was adopted; extending
+> the upstream class was not possible for the integration points (e.g. the zone entry path in `TokenEffectBase`, the
+> static-eval loop in `GameAction`). Each is minimized and isolated. New work should still prefer a
+> `REFORGE COMMANDER EXTENSION` class; refactor any table row into an extension class opportunistically.
 
 | Upstream file | Why touched | Reforge items |
 |---------------|-------------|---------------|
