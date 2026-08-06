@@ -4,7 +4,6 @@ import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.ai.simulation.GameStateEvaluator;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -15,7 +14,6 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -140,15 +138,12 @@ public class CloneAi extends SpellAbilityAi {
 
         if ("CloneBestLand".equals(sa.getParam("AILogic"))) {
             final Card host = sa.getHostCard();
-            final Card best = targets.stream()
-                    // evaluateLand scores a land under whoever controls it now, and the copy will be
-                    // ours, so only our own lands are being judged on the board that will apply
-                    .filter(c -> c != host && c.getController() == host.getController())
-                    // copying our own legendary land just makes us sacrifice one of the two
-                    .filter(c -> !c.getType().isLegendary())
-                    .max(Comparator.comparingInt(GameStateEvaluator::evaluateLand))
-                    .orElse(null);
-            if (best == null || GameStateEvaluator.evaluateLand(best) <= GameStateEvaluator.evaluateLand(host)) {
+            // a land is scored under whoever controls it now and the copy arrives under ours, so
+            // only our own lands are judged on the board that will apply; copying our own
+            // legendary land just makes us sacrifice one of the two
+            final Card best = ComputerUtilCard.getBestLandToPlayAI(CardLists.filter(targets,
+                    c -> c != host && c.getController() == host.getController() && !c.getType().isLegendary()));
+            if (best == null || ComputerUtilCard.evaluateLand(best) <= ComputerUtilCard.evaluateLand(host)) {
                 return false;
             }
             sa.getTargets().add(best);
