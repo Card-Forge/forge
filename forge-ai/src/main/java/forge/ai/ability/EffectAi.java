@@ -69,7 +69,7 @@ public class EffectAi extends SpellAbilityAi {
                 // making everything unblockable is only worth a loyalty point if the swing it
                 // enables actually wins, so hold it until the attack would be lethal
                 if (!phase.isPlayerTurn(ai) || phase.getPhase().isAfter(PhaseType.MAIN1)
-                        || !unblockedAttackIsLethal(ai)) {
+                        || !ComputerUtilCombat.unblockedAttackIsLethal(ai)) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 randomReturn = true;
@@ -843,23 +843,6 @@ public class EffectAi extends SpellAbilityAi {
             subAbility = subAbility.getSubAbility();
         }
 
-        return false;
-    }
-
-    /**
-     * Whether attacking with everything available would kill an opponent outright if none of it
-     * could be blocked - the only situation in which "creatures can't be blocked this turn" is
-     * worth spending loyalty on.
-     */
-    private static boolean unblockedAttackIsLethal(final Player ai) {
-        for (final Player opp : ai.getOpponents()) {
-            final CardCollection attackers = CardLists.filter(ai.getCreaturesInPlay(),
-                    c -> CombatUtil.canAttack(c, opp));
-            if (!opp.cantLoseForZeroOrLessLife()
-                    && ComputerUtilCombat.sumDamageIfUnblocked(attackers, opp) >= opp.getLife()) {
-                return true;
-            }
-        }
         return false;
     }
 

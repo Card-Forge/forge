@@ -251,6 +251,34 @@ public class ComputerUtilCombat {
         return sum;
     }
 
+    /**
+     * Whether swinging with everything that can attack would kill one of the AI's opponents
+     * outright if none of it could be blocked.
+     */
+    public static boolean unblockedAttackIsLethal(final Player ai) {
+        if (ai.cantWin()) {
+            return false;
+        }
+        for (final Player opp : ai.getOpponents()) {
+            if (unblockedAttackIsLethal(ai, opp)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean unblockedAttackIsLethal(final Player ai, final Player opp) {
+        if (opp.cantLoseForZeroOrLessLife()) {
+            return false;
+        }
+        final CardCollection attackers = CardLists.filter(ai.getCreaturesInPlay(), c -> CombatUtil.canAttack(c, opp));
+        if (attackers.isEmpty() || sumDamageIfUnblocked(attackers, opp) < opp.getLife()) {
+            return false;
+        }
+        // last, because it walks the battlefield, external zones and card memory
+        return !ComputerUtil.hasAFogEffect(opp, ai, true);
+    }
+
     // Returns the number of poison counters unblocked attackers would deal
     /**
      * <p>

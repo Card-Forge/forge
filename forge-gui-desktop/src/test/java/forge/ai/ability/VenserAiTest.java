@@ -24,11 +24,13 @@ public class VenserAiTest extends AITest {
 
     @Test
     public void goesUnblockableOnlyForLethal() {
-        assertTrue("18 power against 18 life should swing for the win", wouldGoUnblockable(18));
-        assertFalse("18 power against 19 life is not worth a loyalty point", wouldGoUnblockable(19));
+        assertTrue("18 power against 18 life should swing for the win", wouldGoUnblockable(18, null));
+        assertFalse("18 power against 19 life is not worth a loyalty point", wouldGoUnblockable(19, null));
+        assertFalse("a swing the opponent can Fog away is not lethal",
+                wouldGoUnblockable(18, "Kami of False Hope"));
     }
 
-    private boolean wouldGoUnblockable(int oppLife) {
+    private boolean wouldGoUnblockable(int oppLife, String oppExtra) {
         Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
         Player opp = game.getPlayers().get(0);
@@ -37,6 +39,9 @@ public class VenserAiTest extends AITest {
         venser.setCounters(CounterEnumType.LOYALTY, 5);
         addCards("Colossal Dreadmaw", 3, ai); // 18 power
         addCards("Colossal Dreadmaw", 2, opp); // blockers, which stop mattering
+        if (oppExtra != null) {
+            addCard(oppExtra, opp);
+        }
         opp.setLife(oppLife, null);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
