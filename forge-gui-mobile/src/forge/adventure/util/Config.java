@@ -123,7 +123,7 @@ public class Config {
     private String resPath() {
         // Android/iOS: resources live at ASSETS_DIR (extracted storage / app bundle);
         // the desktop-relative "./res" probes below never match there
-        if (GuiBase.isAndroid() || GuiBase.isIOS()) {
+        if (GuiBase.isMobile()) {
             return ForgeConstants.ASSETS_DIR;
         }
         return Files.exists(Paths.get("./res")) ? "./" : Files.exists(Paths.get("./forge-gui/")) ? "./forge-gui/" : "../forge-gui";

@@ -416,9 +416,11 @@ Ellywick
 Elminster
 Elspeth
 Estrid
+Feroz
 Freyalise
 Garruk
 Gideon
+Greensleeves
 Grist
 Guff
 Huatli
@@ -458,6 +460,7 @@ Tasha
 Teferi
 Teyo
 Tezzeret
+Thomil
 Tibalt
 Tyvar
 Ugin

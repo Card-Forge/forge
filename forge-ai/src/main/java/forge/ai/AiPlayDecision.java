@@ -36,8 +36,8 @@ public enum AiPlayDecision {
     TargetingFailed,
     CostNotAcceptable,
     LifeInDanger,
-    WouldDestroyLegend,
     WouldBecomeZeroToughnessCreature,
+    WouldDestroyLegend,
     WouldDestroyWorldEnchantment,
     BadEtbEffects,
     CurseEffects;
