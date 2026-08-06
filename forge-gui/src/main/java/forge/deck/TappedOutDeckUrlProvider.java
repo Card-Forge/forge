@@ -10,10 +10,12 @@ import java.util.regex.Pattern;
 
 final class TappedOutDeckUrlProvider implements DeckUrlProvider {
     private static final Pattern DECK_URL = Pattern.compile("(?i)(?:^|/)mtg-decks/([^/?#]+)/?");
-    private static final Pattern CARD_LINE = Pattern.compile("^(\\d+)x?\\s+(.+?)(?:\\s+\\(([A-Z0-9_]{2,7})\\)\\s+\\S+)?$");
-    private static final Pattern TITLE = Pattern.compile("(?is)<title>\\s*(.*?)\\s*(?:\\([^<]*MTG Deck\\))?\\s*</title>");
-    private static final Pattern OG_TITLE = Pattern.compile("(?is)<meta\\s+property=\"og:title\"\\s+content=\"(?:MTG Deck:\\s*)?(.*?)\"\\s*/?>");
-    private static final Pattern MTGA_EXPORT = Pattern.compile("(?is)<textarea\\b[^>]*id=\"mtga-textarea\"[^>]*>(.*?)</textarea>");
+    private static final Pattern CARD_LINE = Pattern.compile("^(\\d+)x?\\s++(.+?)(?:\\s++\\(([A-Z0-9_]{2,7})\\)\\s++\\S+)?$");
+    private static final Pattern TITLE = Pattern.compile("(?is)<title>\\s*+([^<]*?)\\s*+(?:\\([^<]*+MTG Deck\\))?+\\s*+</title>");
+    private static final Pattern OG_TITLE = Pattern.compile("(?is)<meta\\s++property=\"og:title\"\\s++content=\"(?:MTG Deck:\\s*+)?+([^\"]*+)\"\\s*+/?>");
+    private static final String MTGA_TEXTAREA_ID = "id=\"mtga-textarea\"";
+    private static final String MTGA_TEXTAREA_CLOSE = "</textarea>";
+    private static final String MTGA_TEXTAREA_OPEN = "<textarea";
     private static final String PROVIDER_NAME = "TappedOut";
     private static final Localizer localizer = Localizer.getInstance();
 
@@ -41,8 +43,8 @@ final class TappedOutDeckUrlProvider implements DeckUrlProvider {
     }
 
     static String toImportText(final String html) throws IOException {
-        final Matcher matcher = MTGA_EXPORT.matcher(html);
-        if (!matcher.find()) {
+        final String deckText = extractMtgaTextarea(html);
+        if (deckText == null) {
             throw new IOException(localizer.getMessage("lblDeckUrlUnexpectedResponse", PROVIDER_NAME));
         }
 
@@ -50,7 +52,7 @@ final class TappedOutDeckUrlProvider implements DeckUrlProvider {
         final StringBuilder commanders = new StringBuilder();
         final StringBuilder sideboard = new StringBuilder();
         StringBuilder currentSection = null;
-        for (final String line : StringEscapeUtils.unescapeHtml4(matcher.group(1)).split("\\R")) {
+        for (final String line : StringEscapeUtils.unescapeHtml4(deckText).split("\\R")) {
             final String trimmed = line.trim();
             if ("Commander".equalsIgnoreCase(trimmed)) {
                 currentSection = commanders;
@@ -91,6 +93,26 @@ final class TappedOutDeckUrlProvider implements DeckUrlProvider {
             return pageTitle;
         }
         return deckSlug.replace('-', ' ').trim();
+    }
+
+    static String extractMtgaTextarea(final String html) {
+        final int idIndex = html.indexOf(MTGA_TEXTAREA_ID);
+        if (idIndex < 0) {
+            return null;
+        }
+        final int open = html.lastIndexOf(MTGA_TEXTAREA_OPEN, idIndex);
+        if (open < 0) {
+            return null;
+        }
+        final int openEnd = html.indexOf('>', open);
+        if (openEnd < 0 || openEnd <= idIndex) {
+            return null;
+        }
+        final int close = html.indexOf(MTGA_TEXTAREA_CLOSE, openEnd);
+        if (close < 0) {
+            return null;
+        }
+        return html.substring(openEnd + 1, close);
     }
 
     private static void appendCardLine(final StringBuilder out, final String line) {

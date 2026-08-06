@@ -12,8 +12,8 @@ import java.util.regex.Pattern;
 
 final class MtgGoldfishDeckUrlProvider implements DeckUrlProvider {
     private static final Pattern DECK_URL = Pattern.compile("(?i)(?:^|/)deck/(\\d+)(?:[/?#]|$)");
-    private static final Pattern CARD_LINE = Pattern.compile("^(\\d+)\\s+(.+)$");
-    private static final Pattern TITLE = Pattern.compile("(?is)<title>\\s*(.*?)\\s*(?:-\\s*Original Deck)?\\s*</title>");
+    private static final Pattern CARD_LINE = Pattern.compile("^(\\d++)\\s++(.++)$");
+    private static final Pattern TITLE = Pattern.compile("(?is)<title>\\s*+([^<]*?)\\s*+(?:-\\s*+Original Deck)?+\\s*+</title>");
     private static final Pattern FORMAT = inputValuePattern("deck_input_format");
     private static final Pattern COMMANDER = inputValuePattern("deck_input_commander");
     private static final Pattern COMMANDER_ALT = inputValuePattern("deck_input_commander_alt");
@@ -125,6 +125,6 @@ final class MtgGoldfishDeckUrlProvider implements DeckUrlProvider {
     }
 
     private static Pattern inputValuePattern(final String inputId) {
-        return Pattern.compile("(?is)<input\\b[^>]*\\bid=\"" + Pattern.quote(inputId) + "\"[^>]*\\bvalue=\"([^\"]*)\"[^>]*>");
+        return Pattern.compile("(?is)<input\\b[^>]*+\\bid=\"" + Pattern.quote(inputId) + "\"[^>]*+\\bvalue=\"([^\"]*)\"[^>]*+>");
     }
 }

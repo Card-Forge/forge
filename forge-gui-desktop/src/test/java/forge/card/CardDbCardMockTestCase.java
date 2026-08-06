@@ -2289,7 +2289,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    void prepareTestCaseForSetPreferredArtTest() {
+    public void prepareTestCaseForSetPreferredArtTest() {
         String setCode = this.editionsCounterspell[0];
         int artIndex = 4; // non-existing
         String cardRequest = CardDb.CardRequest.compose(this.cardNameCounterspell, setCode, artIndex);
@@ -2298,7 +2298,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    void setPreferredArtForCard() {
+    public void setPreferredArtForCard() {
         String cardName = "Mountain";
         String setCode = "3ED";
         int artIndex = 5;
