@@ -24,7 +24,7 @@
  *   of Card objects are materialized from the prototype and removed from the stack.
  * - The class does NOT extend Card. It is a separate entity managed by the zone.
  * - Upstream compatibility: zero changes to any existing Forge class are required
- *   to introduce this class. Integration hooks are additive only.
+ *   to introduce this class. Integration hooks are additive where possible.
  */
 package forge.game.card;
 
