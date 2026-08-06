@@ -34,7 +34,7 @@ customize everything.
 - **Multiplayer-first**: Playing with friends is the primary flow. AI games exist but the UX prioritizes lobby, invites, and match setup.
 - **Performance at scale**: Flyweight token engine (`StackedTokenCard`) is wired into token creation. Static-eval batching (1c) and GameCopier flyweight (1d) still needed to deliver the full O(1) win in real play. See [Development Status](docs/development.md).
 - **Personalization without clutter**: Powerful deck tools, theme options, and preference knobs for power users — surfaced only when needed.
-- **Upstream-compatible**: Additive-only code changes. Card scripts and rules updates merge cleanly from `Card-Forge/forge`.
+- **Upstream-compatible**: New code prefers extending upstream classes to stay mergeable with `Card-Forge/forge`; direct edits to upstream files are allowed when a small, marked change beats a fragile workaround.
 
 ---
 

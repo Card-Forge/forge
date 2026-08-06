@@ -10,11 +10,14 @@ Commander-first fork of [Card-Forge/forge](https://github.com/Card-Forge/forge).
 (`forge-game`, `forge-gui`, `forge-gui-desktop`, `forge-gui-ios`). GUI runs under the FlatLaf dark theme in
 `ReforgeCommanderApp.main()`.
 
-## Non-negotiable rules
+## Rules
 
-- **Additive-only changes to upstream files.** Never modify an existing Forge class when a new class can extend it.
-  Reforge classes are marked with a "REFORGE COMMANDER EXTENSION" header. This is what keeps the automated upstream
-  sync conflict-free.
+- **Prefer additive changes to upstream files (soft constraint).** Prefer extending an existing Forge class over
+  modifying it; when a genuine upstream change is required, a direct edit is allowed as long as it's small and
+  clearly marked with a `REFORGE COMMANDER EXTENSION` header. This is not a prohibition — it's a nod to keeping merges
+  with `Card-Forge/forge` conflict-free. Weigh upstream compatibility against the cost of a workaround; a correct
+  minimal direct edit beats a fragile inheritance dance. When you do modify an upstream file, keep the diff minimal
+  and isolated so it survives upstream syncs.
 - **No comments unless they earn their place.** When a deliberate simplification has a known ceiling, use a
   `ponytail:` comment naming the ceiling and the upgrade path.
 - **Roadmap status lives in code markers, not prose.** Completed/partial work carries `// doc:<item> <STATUS>`
@@ -59,8 +62,8 @@ Commander-first fork of [Card-Forge/forge](https://github.com/Card-Forge/forge).
   to the PR author. Sometimes the bot reports it is out of free quota — ignore that and move on; a later review
   will land on the next push.
 - **Apply worthwhile suggestions.** Anything that fixes a bug, tightens docs, or removes cruft gets applied on the
-  same branch. Filter: skip opinions on taste only, skip anything that would violate the additive-only rule or the
-  no-comments rule unless the suggestion fixes a real inconsistency.
+  same branch. Filter: skip opinions on taste only, skip anything that would introduce needless churn in an upstream
+  file or violate the no-comments rule unless the suggestion fixes a real inconsistency.
 - **Close the loop.** If a suggestion reveals a real bug you can't fix now, file a GitHub issue (tagged `bug` +
   scope), reference it in a reply to the CodeRabbit thread, and continue. Resolve the thread once addressed.
 - **Don't chase perfection.** It is a personal project: a suggestion that would take more effort than the code it
