@@ -1443,14 +1443,20 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filterControlledBy(list, prefPlayer);
         }
 
-        // If there are no preferred cards, and not mandatory bail out
-        if (logic == null || prefList.isEmpty()) {
+        final boolean keepsAttachedCardTapped = isAuraSpell(sa) && attachSource.getReplacementEffects()
+                .anyMatch(re -> re.getMode().equals(ReplacementType.Untap)
+                        && re.getLayer().equals(ReplacementLayer.CantHappen));
+
+        // If there are no preferred cards or no applicable logic, bail out unless mandatory
+        if ((logic == null && !keepsAttachedCardTapped) || prefList.isEmpty()) {
             return chooseUnpreferred(mandatory, list);
         }
 
         // Preferred list has at least one card in it to make to the actual Logic
         Card c = null;
-        if ("GainControl".equals(logic)) {
+        if (keepsAttachedCardTapped) {
+            c = attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
+        } else if ("GainControl".equals(logic)) {
             c = attachAIControlPreference(sa, prefList, mandatory, attachSource);
         } else if ("Curse".equals(logic)) {
             c = attachAICursePreference(sa, prefList, mandatory, attachSource, ai);
@@ -1468,12 +1474,6 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAISpecificCardPreference(sa, prefList, mandatory, attachSource);
         } else if ("HighestEvaluation".equals(logic)) {
             c = attachAIHighestEvaluationPreference(prefList);
-        }
-
-        if (isAuraSpell(sa)) {
-            if (attachSource.getReplacementEffects().anyMatch(re -> re.getMode().equals(ReplacementType.Untap) && re.getLayer().equals(ReplacementLayer.CantHappen))) {
-                c = attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
-            }
         }
 
         // Consider exceptional cases which break the normal evaluation rules
