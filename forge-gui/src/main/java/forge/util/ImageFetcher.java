@@ -34,24 +34,29 @@ public abstract class ImageFetcher {
         return url != null && url.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD);
     }
 
-    /**
-     * Whether we are still backing off after Scryfall rate limited us. Clears the cooldown once it
-     * has expired, so callers can simply skip the fetch while this returns true.
-     */
-    protected static boolean inScryfallCooldown(final String url) {
-        if (!isScryfall(url)) {
-            return false;
-        }
+    /** Whether we are still backing off after Scryfall rate limited us. Clears an expired cooldown. */
+    protected static boolean scryfallCoolingDown() {
         final Date cooldown = scryfallCooldownTime;
         if (cooldown == null) {
             return false;
         }
         if (cooldown.after(new Date())) {
-            System.err.println("Currently in cooldown period for scryfall downloads. Skipping download attempt for: " + url);
             return true;
         }
         scryfallCooldownTime = null;
         return false;
+    }
+
+    /**
+     * Whether this particular download should be skipped because we are backing off Scryfall, so
+     * callers can simply skip the fetch while this returns true.
+     */
+    protected static boolean inScryfallCooldown(final String url) {
+        if (!isScryfall(url) || !scryfallCoolingDown()) {
+            return false;
+        }
+        System.err.println("Currently in cooldown period for scryfall downloads. Skipping download attempt for: " + url);
+        return true;
     }
 
     /** Record that Scryfall returned 429, so we stop asking for a while. */
@@ -469,6 +474,13 @@ public abstract class ImageFetcher {
     }
 
     private void setupObserver(final String destPath, final Callback callback, final ArrayList<String> downloadUrls) {
+        // Skip before registering rather than inside the download task: nothing removes a path from
+        // the in-flight set below, so a fetch registered during the cooldown would never be retried
+        // once the cooldown lifts. Only when every candidate is Scryfall - otherwise another source
+        // may still serve it.
+        if (scryfallCoolingDown() && downloadUrls.stream().allMatch(ImageFetcher::isScryfall)) {
+            return;
+        }
         // Note: No synchronization is needed here because this is executed on
         // EDT thread (see assert on top) and so is the notification of observers.
         HashSet<Callback> observers = currentFetches.get(destPath);
