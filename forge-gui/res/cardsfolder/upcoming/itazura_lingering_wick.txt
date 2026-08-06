@@ -7,7 +7,7 @@ SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 3 | ChangeNum$ All | Destination
 SVar:DBChooseNumber:DB$ ChooseNumber | Defined$ Opponent | Secretly$ True | Highest$ DBPump | AILogic$ HighestLoseLife | SubAbility$ DBChoosePlayer
 SVar:DBPump:DB$ Pump | NoteCards$ Remembered | NoteCardsFor$ Highest
 SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ Opponent | Choices$ Player.NotedForHighest | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ ChosenNumber | SubAbility$ DBPlay
+SVar:DBDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ Count$ChosenNumber | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | ValidZone$ Exile | Valid$ Card.IsRemembered+nonLand | Controller$ ChosenPlayer | WithoutManaCost$ True | Optional$ True | ForgetPlayed$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Hidden$ True | ChangeType$ Card.IsRemembered | ChangeNum$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
