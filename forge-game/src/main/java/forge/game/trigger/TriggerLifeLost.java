@@ -22,6 +22,7 @@ import java.util.Map;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Expressions;
 import forge.util.Localizer;
 
 /**
@@ -60,6 +61,16 @@ public class TriggerLifeLost extends Trigger {
 
         if (hasParam("FirstTime")) {
             if (!(boolean) runParams.get(AbilityKey.FirstTime)) {
+                return false;
+            }
+        }
+
+        if (hasParam("LifeAmount")) {
+            final String fullParam = getParam("LifeAmount");
+            final String operator = fullParam.substring(0, 2);
+            int operand = Integer.parseInt(fullParam.substring(2));
+            final int actualAmount = (Integer) runParams.get(AbilityKey.LifeAmount);
+            if (!Expressions.compare(actualAmount, operator, operand)) {
                 return false;
             }
         }
