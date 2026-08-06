@@ -198,11 +198,7 @@ public class DrawAi extends SpellAbilityAi {
 
             if (sa.hasParam("NumCards")) {
                 String numDrawStr = sa.getParam("NumCards");
-                if (numDrawStr.equals("X") && sa.getSVar(numDrawStr).equals("Count$Converge")) {
-                    numDraw = ComputerUtilMana.getConvergeCount(sa, ai);
-                } else {
-                    numDraw = AbilityUtils.calculateAmount(source, numDrawStr, sa);
-                }
+                numDraw = AbilityUtils.calculateAmount(source, numDrawStr, sa);
             }
             int numDiscard = 1;
             if (sub.hasParam("NumCards")) {
@@ -274,8 +270,6 @@ public class DrawAi extends SpellAbilityAi {
                     assumeSafeX = true;
                 }
                 xPaid = true;
-            } else if (sa.getSVar(num).equals("Count$Converge")) {
-                numCards = ComputerUtilMana.getConvergeCount(sa, ai);
             }
         }
 
