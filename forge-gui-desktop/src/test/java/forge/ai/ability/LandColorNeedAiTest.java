@@ -4,14 +4,19 @@ import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
 
+import java.util.List;
+
 import forge.ai.AITest;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
 /**
@@ -139,6 +144,33 @@ public class LandColorNeedAiTest extends AITest {
         assertTrue("a colour we have none of beats a second source", firstSwamp > secondPlains);
         assertTrue("and a second source still beats a fourth", secondPlains > fourthIsland);
         assertTrue("but a fourth is not worthless", fourthIsland > 0);
+    }
+
+    /**
+     * Every caller runs getAvailableManaColors through ColorSet.fromNames, which keeps only colour
+     * names - so a source whose script says {@code Produced$ Any} used to contribute nothing, and
+     * a board of nothing but City of Brass read as unable to cast anything coloured.
+     */
+    @Test
+    public void anyColorSourcesOfferEveryColor() {
+        assertTrue("an any-colour source offers white", canPayWhiteOff("City of Brass"));
+        assertTrue(canPayWhiteOff("Mana Confluence"));
+        // and it still says no when the colour really is absent
+        assertFalse("a blue source does not offer white", canPayWhiteOff("Island"));
+    }
+
+    private boolean canPayWhiteOff(String landName) {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        for (int i = 0; i < 3; i++) {
+            addCard(landName, ai).setSickness(false);
+        }
+        Card swords = addCardToZone("Swords to Plowshares", ai, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+
+        ColorSet available = ColorSet.fromNames(
+                ComputerUtilCost.getAvailableManaColors(ai, (List<Card>) null));
+        return swords.getManaCost().canBePaidWithAvailable(available.getColor());
     }
 
     /**
