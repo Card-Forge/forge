@@ -58,6 +58,7 @@ Bringer:Bringers
 Brushwagg:Brushwaggs
 Camarid:Camarids
 C'tan:C'tan
+Caitian:Caitians
 Camel:Camels
 Capybara:Capybaras
 Caribou:Caribous
