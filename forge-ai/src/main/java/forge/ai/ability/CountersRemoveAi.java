@@ -48,18 +48,6 @@ public class CountersRemoveAi extends SpellAbilityAi {
      * @see forge.ai.SpellAbilityAi#checkApiLogic(forge.game.player.Player,
      * forge.game.spellability.SpellAbility)
      */
-    /**
-     * For an X-cost removal, pay for the counters actually worth removing from the chosen
-     * target rather than the maximum X that {@link ComputerUtilCost#setMaxXValue} leaves set
-     * on the ability. Capped by what the AI can afford. No-op when the amount is fixed.
-     */
-    private static void payForCounters(final SpellAbility sa, final boolean xPay, final int affordable,
-            final int countersOnTarget) {
-        if (xPay) {
-            sa.setXManaCostPaid(Math.max(1, Math.min(affordable, countersOnTarget)));
-        }
-    }
-
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final String type = sa.getParam("CounterType");
@@ -76,6 +64,19 @@ public class CountersRemoveAi extends SpellAbilityAi {
         }
 
         return super.checkApiLogic(ai, sa);
+    }
+
+    /**
+     * Take this target, and for an X cost pay for the counters on it rather than the maximum
+     * {@link ComputerUtilCost#setMaxXValue} left on the ability.
+     */
+    private static AiAbilityDecision takeTarget(final SpellAbility sa, final Card target,
+            final boolean xPay, final int affordable, final int countersOnTarget) {
+        sa.getTargets().add(target);
+        if (xPay) {
+            sa.setXManaCostPaid(Math.min(affordable, countersOnTarget));
+        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private AiAbilityDecision doTgt(Player ai, SpellAbility sa, boolean mandatory) {
@@ -178,13 +179,6 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
-            // These rules used to be skipped whenever the amount was an X cost, which left a
-            // card like Hex Parasite ({X}{B/P}: remove up to X counters) able to do nothing
-            // but break its own Dark Depths or finish a planeswalker. They work for any
-            // amount; what an X cost additionally needs is to pay for just the counters the
-            // chosen target has, rather than leaving the maximum X that setMaxXValue put on
-            // the ability above and emptying the mana pool to remove one counter.
-
             // do as M1M1 part
             CardCollection aiList = CardLists.filterControlledBy(list, ai);
 
@@ -197,9 +191,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
             if (!aiM1M1List.isEmpty()) {
                 final Card best = ComputerUtilCard.getBestCreatureAI(aiM1M1List);
-                sa.getTargets().add(best);
-                payForCounters(sa, xPay, amount, best.getCounters(CounterEnumType.M1M1));
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                return takeTarget(sa, best, xPay, amount, best.getCounters(CounterEnumType.M1M1));
             }
 
             // do as P1P1 part
@@ -208,9 +200,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
             if (!aiUndyingList.isEmpty()) {
                 final Card best = ComputerUtilCard.getBestCreatureAI(aiUndyingList);
-                sa.getTargets().add(best);
-                payForCounters(sa, xPay, amount, best.getCounters(CounterEnumType.P1P1));
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                return takeTarget(sa, best, xPay, amount, best.getCounters(CounterEnumType.P1P1));
             }
 
             // TODO stun counters with canRemoveCounters check
@@ -221,9 +211,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                     CardPredicates.hasCounter(CounterEnumType.P1P1));
             if (!oppP1P1List.isEmpty()) {
                 final Card best = ComputerUtilCard.getBestCreatureAI(oppP1P1List);
-                sa.getTargets().add(best);
-                payForCounters(sa, xPay, amount, best.getCounters(CounterEnumType.P1P1));
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                return takeTarget(sa, best, xPay, amount, best.getCounters(CounterEnumType.P1P1));
             }
 
             // fallback to remove any counter from opponent
@@ -234,9 +222,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
                 for (final CounterType aType : best.getCounters().elementSet()) {
                     if (!ComputerUtil.isNegativeCounter(aType, best)) {
-                        sa.getTargets().add(best);
-                        payForCounters(sa, xPay, amount, best.getCounters(aType));
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        return takeTarget(sa, best, xPay, amount, best.getCounters(aType));
                     }
                 }
             }
