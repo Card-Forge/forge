@@ -130,6 +130,7 @@ Goblin:Goblins
 God:Gods
 Golem:Golems
 Gorgon:Gorgons
+Gorn:Gorns
 Graveborn:Graveborn
 Gremlin:Gremlins
 Griffin:Griffins
