@@ -6,7 +6,7 @@
 5. Use this maven command: `mvn android:deploy-apk android:run`
 6. Look at the emulator (or device), it should say "Waiting for debugger to connect".
 7. CRTL+SHIFT+A in IntelliJ and type in `attach android` and click on "Attach Debugger to Android Process".
-8. Tick "Show all processes" and you should be able to pick `forge.app` from the list and click "Okay".
+8. Tick "Show all processes" and you should be able to pick `dev.reforge.commander` from the list and click "Okay".
 9. Ready to debug  
 
 Profile XML for debugging:

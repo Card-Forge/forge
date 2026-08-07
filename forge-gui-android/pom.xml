@@ -711,7 +711,7 @@
             <!-- test build signed with embedded debug.keystore from uber-signer -->
             <id>android-dev-build</id>
             <properties>
-                <app.id.dev>forge.app.dev</app.id.dev>
+                <app.id.dev>dev.reforge.commander.dev</app.id.dev>
                 <packaging.type>apk</packaging.type>
             </properties>
             <build>

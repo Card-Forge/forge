@@ -139,7 +139,7 @@ public class Forge implements ApplicationListener {
                 clipboard = clipboard0;
                 deviceAdapter = deviceAdapter0;
                 //obb directory on android uses the package name as entrypoint
-                GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app"));
+                GuiBase.setUsingAppDirectory(assetDir0.contains("dev.reforge.commander"));
                 GuiBase.setInterface(new GuiMobile(assetDir0));
                 isPortraitMode = androidOrientation;
                 isTabletDevice = isTablet;

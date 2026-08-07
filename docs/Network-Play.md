@@ -286,7 +286,7 @@ Forge writes detailed network logs during online multiplayer games. These are se
 | **Windows** | `%APPDATA%/Forge/networklogs/` |
 | **macOS** | `~/Library/Application Support/Forge/networklogs/` |
 | **Linux** | `~/.forge/networklogs/` |
-| **Android** | `Android/data/forge.app/files/Forge/networklogs/` (typically not browsable without a file manager — use the in-app export below) |
+| **Android** | `Android/data/dev.reforge.commander/files/Forge/networklogs/` (typically not browsable without a file manager — use the in-app export below) |
 
 On **Desktop**, you can open this folder directly from the Forge game menu: **Online > Open Network Logs**.
 

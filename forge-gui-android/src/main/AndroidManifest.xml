@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="forge.app">
+    package="dev.reforge.commander">
 
     <uses-sdk
         android:minSdkVersion="26"
@@ -92,7 +92,7 @@
             android:exported="false"/>
         <provider
                 android:name="de.cketti.fileprovider.PublicFileProvider"
-                android:authorities="com.mydomain.publicfileprovider"
+                android:authorities="dev.reforge.commander.publicfileprovider"
                 android:exported="true">
 
             <meta-data

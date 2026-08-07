@@ -1,4 +1,4 @@
-package forge.app;
+package dev.reforge.commander;
 
 import android.util.Xml;
 import org.xmlpull.v1.XmlPullParser;
