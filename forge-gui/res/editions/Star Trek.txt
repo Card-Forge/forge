@@ -90,16 +90,16 @@ ScryfallCode=TRK
 299 R Stomping Ground @Arthur Haas
 301 R Temple Garden @Shahab Alizadeh
 306 R Watery Grave @Raymond Bonilla
-317 C Plains @Bastien Grivet
-318 C Plains @Leon Tukker
-319 C Island @Bastien Grivet
-320 C Island @Leon Tukker
-321 C Swamp @Bastien Grivet
-322 C Swamp @Leon Tukker
-323 C Mountain @Bastien Grivet
-324 C Mountain @Leon Tukker
-325 C Forest @Bastien Grivet
-326 C Forest @Leon Tukker
+317 L Plains @Bastien Grivet
+318 L Plains @Leon Tukker
+319 L Island @Bastien Grivet
+320 L Island @Leon Tukker
+321 L Swamp @Bastien Grivet
+322 L Swamp @Leon Tukker
+323 L Mountain @Bastien Grivet
+324 L Mountain @Leon Tukker
+325 L Forest @Bastien Grivet
+326 L Forest @Leon Tukker
 340 M Captain Kathryn Janeway @Gal Or
 343 U Seven of Nine @Gal Or
 366 M Dr. Beverly Crusher @Anna Czeszejko
