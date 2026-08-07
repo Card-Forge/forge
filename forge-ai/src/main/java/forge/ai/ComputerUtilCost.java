@@ -648,10 +648,12 @@ public class ComputerUtilCost {
         }
 
         for (Card c : cardsToConsider) {
-            for (SpellAbility sa : c.getManaAbilities()) {
-                if (sa.getManaPart() != null) {
-                    colorsAvailable.add(sa.getManaPart().getOrigProduced());
-                }
+            // the raw Produced$ is a script string, and every caller runs this through
+            // ColorSet.fromNames, which drops anything that is not a colour name - so an "Any"
+            // source used to contribute nothing at all
+            colorsAvailable.addAll(c.getProducibleColors());
+            if (colorsAvailable.size() == MagicColor.Constant.COLORS_AND_COLORLESS.size()) {
+                break; // nothing left for a further source to add
             }
         }
 
