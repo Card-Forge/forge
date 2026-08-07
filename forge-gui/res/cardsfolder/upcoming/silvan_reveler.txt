@@ -1,7 +1,7 @@
 Name:Silvan Reveler
 ManaCost:2 G U
 Types:Creature Elf Citizen
-PT:4/3
+PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card, then discard a card. If you discard a land card this way, put it from your graveyard onto the battlefield tapped.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBReturn
