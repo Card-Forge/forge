@@ -9,7 +9,7 @@ SVar:DBPump:DB$ Pump | NoteCards$ Remembered | NoteCardsFor$ Highest
 SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ Opponent | Choices$ Player.NotedForHighest | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ Count$ChosenNumber | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | ValidZone$ Exile | Valid$ Card.IsRemembered+nonLand | Controller$ ChosenPlayer | WithoutManaCost$ True | Optional$ True | ForgetPlayed$ True | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Hidden$ True | ChangeType$ Card.IsRemembered | ChangeNum$ 1 | SubAbility$ DBCleanup
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Hidden$ True | ChangeType$ Card.IsRemembered | ChangeNum$ 1 | Mandatory$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token|Sacrifice
 Oracle:At the beginning of your upkeep, exile the top three cards of your library. Each opponent secretly chooses a number 0 or greater. Then those numbers are revealed. Choose an opponent with the highest number. Itazura deals that much damage to them, then they may cast a spell from among those cards without paying its mana cost. You put a card from among them that wasn't cast this way into your hand.
