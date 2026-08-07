@@ -3,6 +3,7 @@ package forge.player;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
+import forge.ai.AIOption;
 import forge.ai.AvailableActions;
 import forge.game.GameState;
 import forge.ai.PlayerControllerAi;
@@ -212,31 +213,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities,
                                          final ITriggerEvent triggerEvent) {
-        // make sure another human player can't choose opponents cards just because he might see them
-        if (triggerEvent != null && !hostCard.isInPlay() && !hostCard.getOwner().equals(player) &&
-                !hostCard.getController().equals(player) &&
-                // If player cast Shaman's Trance, they can play spells from any Graveyard (if other effects allow it to be cast)
-                (!player.hasKeyword("Shaman's Trance") || !hostCard.isInZone(ZoneType.Graveyard))) {
-            boolean noPermission = true;
-            for (CardPlayOption o : hostCard.mayPlay(player)) {
-                if (o.grantsZonePermissions()) {
-                    noPermission = false;
-                    break;
-                }
-            }
-            for (SpellAbility sa : hostCard.getAllSpellAbilities()) {
-                if (sa.hasParam("Activator")
-                        && player.isValid(sa.getParam("Activator"), hostCard.getController(), hostCard, sa)) {
-                    noPermission = false;
-                    break;
-                }
-            }
-            if (noPermission) {
-                return null;
-            }
-        }
-        //FIXME - on mobile gui it allows the card to cast from opponent hands issue #2127, investigate where the bug occurs before this method is called
         spellViewCache = SpellAbilityView.getMap(abilities);
+        if (getPlayer().isControlled() && getPlayer().getControllingPlayer().getController() instanceof PlayerControllerHuman pch) {
+            // need to transfer to original controller or menu selection fails
+            pch.spellViewCache = spellViewCache;
+        }
         for (SpellAbility sa : abilities) {
             sa.getView().updateCanPlay(sa);
         }
@@ -1579,8 +1560,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final Set<CardView> actionable = Sets.newHashSet();
         if (showActionable) {
             if (paymentMode) {
+                // Snapshot each zone: the payment prompt refreshes on the EDT while the
+                // game thread can remove cards (e.g. Squandered Resources sacrificing a land).
                 for (ZoneType zone : ACTIONABLE_PAYMENT_ZONES) {
-                    for (Card c : player.getCardsIn(zone)) {
+                    for (Card c : player.getCardsIn(zone).threadSafeIterable()) {
                         if (cardHasPlayableManaAbility(c)) {
                             actionable.add(c.getView());
                         }
@@ -2430,7 +2413,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean playTrigger(final Card host, final WrappedAbility wrapperAbility, final boolean isMandatory) {
-        return PlaySpellAbility.playSpellAbilityNoStack(this, player, wrapperAbility);
+        return PlaySpellAbility.playSpellAbilityNoStack(this, player, wrapperAbility, false);
     }
 
     @Override
@@ -3665,7 +3648,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         public void askAI(boolean useSimulation) {
             PlayerControllerAi ai = new PlayerControllerAi(player.getGame(), player, player.getOriginalLobbyPlayer());
-            ai.setUseSimulation(useSimulation);
+            ai.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
             player.runWithController(() -> {
                 List<SpellAbility> sas = ai.chooseSpellAbilityToPlay();
                 SpellAbility chosen = sas == null ? null : sas.get(0);

@@ -909,7 +909,13 @@ public class AbilityUtils {
     @SuppressWarnings("unchecked")
     public static PlayerCollection getDefinedPlayers(final Card card, final String def, CardTraitBase sa) {
         final PlayerCollection players = new PlayerCollection();
-        final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
+        Player player = null;
+        if (sa instanceof SpellAbility) {
+            player = ((SpellAbility) sa).getActivatingPlayer();
+        }
+        if (player == null) {
+            player = card.getController();
+        }
         final Game game = card == null ? null : card.getGame();
         String changedDef = (def == null) ? "You" : applyAbilityTextChangeEffects(def, sa); // default to Self
         final String[] incR = changedDef.split("\\.", 2);
@@ -2057,6 +2063,9 @@ public class AbilityUtils {
         if (sq[0].equals("CardToughness")) {
             return doXMath(c.getNetToughness(), expr, c, ctb);
         }
+        if (sq[0].equals("CardBaseToughness")) {
+            return doXMath(c.getCurrentToughness(), expr, c, ctb);
+        }
         if (sq[0].equals("CardSumPT")) {
             return doXMath(c.getNetPower() + c.getNetToughness(), expr, c, ctb);
         }
@@ -2716,7 +2725,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].startsWith("PlanarDiceSpecialActionThisTurn")) {
-            return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
+            return doXMath(game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn(), expr, c, ctb);
         }
 
         if (sq[0].equals("TotalTurns")) {
@@ -2780,7 +2789,7 @@ public class AbilityUtils {
                     activated++;
                 }
             }
-            return activated;
+            return doXMath(activated, s, c, ctb);
         }
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>

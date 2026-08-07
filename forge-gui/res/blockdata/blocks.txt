@@ -152,3 +152,4 @@ Lorwyn Eclipsed, 3/6/ECL, ECL
 Teenage Mutant Ninja Turtles, 3/6/TMT, TMT
 Secrets of Strixhaven, 3/6/SOS, SOS
 Marvel Super Heroes, 3/6/MSH, MSH
+The Hobbit, 3/6/HOB, HOB

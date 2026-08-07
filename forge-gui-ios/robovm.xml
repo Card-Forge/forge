@@ -2,16 +2,42 @@
   <executableName>${app.executable}</executableName>
   <mainClass>${app.mainclass}</mainClass>
   <os>ios</os>
-  <arch>thumbv7</arch>
+  <arch>arm64</arch>
   <resources>
+    <!-- skipPngCrush: RoboVM runs Apple's `pngcrush -iphone` on every bundled .png for
+         DEVICE builds (not simulator), converting them to CgBI format = BGRA byte order +
+         premultiplied alpha. libGDX decodes with stb_image, which does NOT un-swap CgBI,
+         so every blue skin sprite/logo renders yellow on a physical device (and pixel-
+         sampled FSkinColor theme colors are corrupted the same way). These PNGs are only
+         ever read by libGDX, never by UIKit, so crushing buys nothing - skip it.
+         NOTE: skipPngCrush is only honored here, per-resource; the robovm-maven-plugin
+         <configuration> has no such parameter (it gets silently ignored there). -->
     <resource>
       <directory>../forge-gui</directory>
       <includes>
         <include>res/**</include>
       </includes>
+      <excludes>
+        <!-- Exclude individual card .txt files - they are bundled in cardsfolder.zip for faster installs -->
+        <exclude>res/cardsfolder/*/*.txt</exclude>
+      </excludes>
+      <skipPngCrush>true</skipPngCrush>
     </resource>
     <resource>
       <directory>res</directory>
+      <skipPngCrush>true</skipPngCrush>
+    </resource>
+    <!-- Icon*.png are consumed by SpringBoard, not libGDX - CgBI is fine there -->
+    <resource>
+      <directory>.</directory>
+      <includes>
+        <include>Icon*.png</include>
+      </includes>
+    </resource>
+    <resource>
+      <directory>fallback_skin</directory>
+      <targetPath>fallback_skin</targetPath>
+      <skipPngCrush>true</skipPngCrush>
     </resource>
   </resources>
   <target>ios</target>
@@ -30,15 +56,66 @@
     <pattern>org.apache.harmony.security.provider.crypto.CryptoProvider</pattern>
     <pattern>org.apache.xalan.processor.TransformerFactoryImpl</pattern>
     <pattern>java.util.logging.**</pattern>
-    <pattern>com.esotericsoftware.minlog.Log</pattern>
     <pattern>com.badlogic.gdx.**</pattern>
+    <!-- adventure ui_skin.json references TenPatchDrawable by NAME (libGDX skin
+         JSON deserialization) — invisible to RoboVM's reachability analysis -->
+    <pattern>com.ray3k.tenpatch.**</pattern>
+    <!-- XStream serialization support -->
+    <pattern>com.thoughtworks.xstream.**</pattern>
+    <pattern>java.io.ObjectInputStream</pattern>
+    <pattern>java.io.ObjectOutputStream</pattern>
+    <pattern>java.io.ObjectStreamClass</pattern>
+    <pattern>java.io.ObjectStreamField</pattern>
+    <!-- LZ4 compression for multiplayer networking -->
+    <pattern>net.jpountz.lz4.**</pattern>
+    <pattern>net.jpountz.xxhash.**</pattern>
+    <!-- Netty networking for multiplayer -->
+    <pattern>io.netty.**</pattern>
+    <!-- Forge network event classes for serialization -->
+    <pattern>forge.gamemodes.net.**</pattern>
+    <pattern>forge.gamemodes.match.LobbySlot</pattern>
+    <pattern>forge.gamemodes.match.LobbySlotType</pattern>
+    <!-- os_log wrapper for iOS 26+ logging -->
+    <pattern>forge.ios.ForgeOSLog</pattern>
+    <pattern>forge.ios.OSLogPrintStream</pattern>
+    <!-- reflectively accessed by MemProbe for on-device RSS/heap measurement -->
+    <pattern>org.robovm.rt.GC</pattern>
+    <!-- ==== MobiVM modern-Java pipeline (tmp/jvmdg) ====
+         streamsupport backports (bridged java.util.function/stream/Optional
+         call sites), JvmDowngrader runtime stubs (List.of/String.repeat/
+         record superclass), relocated java.time (ThreeTen), java.nio.file
+         supply, and forge.compat rewrite targets. All reached only via
+         rewritten bytecode, so the tree-shaker cannot see some of them. -->
+    <pattern>java8.**</pattern>
+    <pattern>xyz.wagyourtail.jvmdg.**</pattern>
+    <pattern>java.time.**</pattern>
+    <pattern>java.nio.file.**</pattern>
+    <pattern>java.io.UncheckedIOException</pattern>
+    <pattern>forge.compat.**</pattern>
+    <!-- image pipeline nested classes (hybrid resolver, LRU caches) -->
+    <pattern>forge.assets.Assets$*</pattern>
+    <pattern>forge.assets.ImageCache$*</pattern>
+    <!-- Sentry crash reporting: the SDK wires integrations/transports via
+         reflection and ServiceLoader, which the tree-shaker cannot see.
+         Missing classes here historically killed the game thread with
+         NoClassDefFoundError on shared telemetry call sites. -->
+    <pattern>io.sentry.**</pattern>
   </forceLinkClasses>
+  <frameworkPaths>
+    <path>libs</path>
+  </frameworkPaths>
   <libs>
-    <lib>libs/libgdx.a</lib>
-    <lib>libs/libObjectAL.a</lib>
-    <lib>libs/libgdx-freetype.a</lib>
+    <lib>libs/libForgeOSLog.a</lib>
   </libs>
+  <exportedSymbols>
+    <symbol>forge_os_log_public</symbol>
+    <symbol>forge_os_log_info</symbol>
+    <symbol>forge_os_log_debug</symbol>
+    <symbol>forge_os_log_error</symbol>
+  </exportedSymbols>
   <frameworks>
+    <framework>gdx</framework>
+    <framework>ObjectAL</framework>
     <framework>UIKit</framework>
     <framework>OpenGLES</framework>
     <framework>QuartzCore</framework>
@@ -46,5 +123,7 @@
     <framework>OpenAL</framework>
     <framework>AudioToolbox</framework>
     <framework>AVFoundation</framework>
+    <!-- gdx-controllers-ios (adventure mode gamepad support) uses GCController -->
+    <framework>GameController</framework>
   </frameworks>
 </config>

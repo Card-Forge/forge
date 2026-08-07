@@ -328,8 +328,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 Localizer.getInstance().getMessage("lblSelectToExile", Lang.getNumeral(nTypes)));
             inp.setCancelAllowed(true);
             inp.showAndWait();
-            if (inp.hasCancelled() || 
-                !Expressions.compare(AbilityUtils.countCardTypesFromList(list, false), "GE", nTypes)) {
+            if (inp.hasCancelled() ||
+                !Expressions.compare(AbilityUtils.countCardTypesFromList(inp.getSelected(), false), "GE", nTypes)) {
                     return null;
             }
             return PaymentDecision.card(inp.getSelected());
