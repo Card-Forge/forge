@@ -344,6 +344,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         SHORTCUT_SHOWHOTKEYS("72"),
         SHORTCUT_PANELTABS("17 84"),
         SHORTCUT_CARDOVERLAYS("17 79"),
+        SHORTCUT_MAXIMIZE_CELL("17 32"),
 
         LAST_IMPORTED_CUBE_ID(""),
 

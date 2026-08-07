@@ -10,5 +10,5 @@ public class SLayoutConstants {
     public static final int HEAD_H = 20;
 
     /** Thickness of resize border in drag panel. */
-    public static final int BORDER_T = 5;
+    public static final int BORDER_T = 10;
 }

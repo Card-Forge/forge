@@ -1,6 +1,9 @@
 package forge.gui.framework;
 
 import java.awt.Container;
+import java.awt.KeyboardFocusManager;
+import java.awt.KeyEventDispatcher;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -61,6 +64,7 @@ public final class SRearrangingUtil {
     private static final MouseListener MAD_REARRANGE = new MouseAdapter() {
         @Override
         public void mousePressed(final MouseEvent e) {
+            if (e.getButton() == MouseEvent.BUTTON3) { SRearrangingUtil.cancelRearrange(); return; }
             SRearrangingUtil.startRearrange(e);
         }
 
@@ -77,6 +81,18 @@ public final class SRearrangingUtil {
         }
     };
 
+    /** True while a rearrange drag is in progress (for Esc/RMB cancel). */
+    private static boolean rearranging;
+
+    /** Esc aborts a rearrange drag, discarding any preview drop target. */
+    private static final KeyEventDispatcher ESC_CANCEL = e -> { // doc:12b DONE
+        if (e.getID() == KeyEvent.KEY_PRESSED && e.getKeyCode() == KeyEvent.VK_ESCAPE && rearranging) {
+            cancelRearrange();
+            return true;
+        }
+        return false;
+    };
+
     /**
      * Initiates a rearranging of cells or tabs.<br>
      * - Sets up source cell<br>
@@ -87,6 +103,8 @@ public final class SRearrangingUtil {
         cellSrc = (DragCell) ((Container) e.getSource()).getParent().getParent();
         docsToMove.clear();
         dropzone = Dropzone.NONE;
+        rearranging = true;
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(ESC_CANCEL);
 
         // Save selected tab in case this tab will be dragged.
         srcSelectedDoc = cellSrc.getSelected();
@@ -221,6 +239,11 @@ public final class SRearrangingUtil {
         pnlPreview.setVisible(false);
         pnlPreview.setBounds(0, 0, 0, 0);
 
+        if (rearranging) {
+            rearranging = false;
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(ESC_CANCEL);
+        }
+
         // Source and target are the same?
         if (dropzone.equals(Dropzone.NONE) || (cellTarget.equals(cellSrc) && cellSrc.getDocs().size() == 1))
         {
@@ -308,6 +331,17 @@ public final class SRearrangingUtil {
         updateBorders();
 
         SLayoutIO.saveLayout(null);
+    }
+
+    /** Aborts a rearrange drag, discarding the preview without moving anything. */
+    private static void cancelRearrange() {
+        if (!rearranging) { return; }
+        MouseUtil.resetCursor();
+        pnlPreview.setVisible(false);
+        pnlPreview.setBounds(0, 0, 0, 0);
+        rearranging = false;
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(ESC_CANCEL);
+        dropzone = Dropzone.NONE; // endRearrange()'s NONE path then restores selection without moving anything
     }
 
     /** The gap created by displaced panels must be filled.

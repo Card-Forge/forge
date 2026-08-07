@@ -50,7 +50,9 @@ jobs:
         run: |
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
-          mvn -U -B clean test
+          # ponytail: no -U — all modules are in the reactor, no external SNAPSHOTS,
+          # so -U only re-reads maven-metadata each run and defeats the maven cache.
+          mvn -B clean test
 
   docs:
     runs-on: ubuntu-latest
