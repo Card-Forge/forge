@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>forge</groupId>
+        <artifactId>forge</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>forge-scryfall-uuid-map</artifactId>
+    <packaging>jar</packaging>
+    <name>Forge Scryfall UUID Map Builder</name>
+    <description>
+        Standalone tool that parses a Scryfall bulk JSON file and writes one JSON file per
+        card print: {outputDir}/{setCode}/{collectorNumber}.json mapping language codes to
+        Scryfall UUIDs. Used to generate the res/cdn_uuid assets shipped with Forge.
+    </description>
+
+    <dependencies>
+        <!-- JSON streaming for bulk data parsing -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>forge-scryfall-uuid-map-${revision}</finalName>
+        <plugins>
+            <!-- Pre-configure mainClass so `mvn exec:java -Dexec.args="..."` works without specifying it -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <mainClass>forge.scryfall.uuidmap.Main</mainClass>
+                </configuration>
+            </plugin>
+
+            <!-- Produce a self-contained executable fat JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>forge.scryfall.uuidmap.Main</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
