@@ -307,6 +307,7 @@ Surrakar:Surrakars
 Symbiote:Symbiotes
 Synth:Synths
 Survivor:Survivors
+Talosian:Talosians
 Tellarite:Tellarites
 Tentacle:Tentacles
 Tetravite:Tetravites
