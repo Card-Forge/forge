@@ -45,6 +45,11 @@ public class LandColorNeedAiTest extends AITest {
         int black = ComputerUtilCard.getColorFixingValue(ai, duals[1]);
         assertTrue("black unblocks the hand, white does not", black > white);
 
+        // and that is what ranking picks: the two duals are worth the same as lands, so the
+        // colour we are waiting on is the only thing separating them
+        assertEquals("Underground Sea",
+                ComputerUtilCard.getBestLandAI(ai, Lists.newArrayList(duals)).getName());
+
         // whether our sources happen to be tapped says nothing about which colours the board can
         // make, so holding the land drop until main 2 must not change the answer
         for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
@@ -105,12 +110,14 @@ public class LandColorNeedAiTest extends AITest {
         Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
 
-        addCards("Island", 3, ai);
-        addCards("Swamp", 1, ai);                           // one black source only
-        addCardToZone("Sign in Blood", ai, ZoneType.Hand);  // BB, so it wants a second
+        // one of each, so depth alone cannot tell the two candidates apart and only the pip
+        // counting can - a colour mask would call BB payable off the single Swamp
+        addCards("Island", 1, ai);
+        addCards("Swamp", 1, ai);
+        addCardToZone("Sign in Blood", ai, ZoneType.Hand);  // BB, so it wants a second black
         game.getAction().checkStateEffects(true);
 
-        assertTrue("a second black source is progress towards BB, a fourth blue source is not",
+        assertTrue("a second black source is progress towards BB, a second blue source is not",
                 ComputerUtilCard.getColorFixingValue(ai, addCardToZone("Swamp", ai, ZoneType.Library))
                         > ComputerUtilCard.getColorFixingValue(ai, addCardToZone("Island", ai, ZoneType.Library)));
     }
