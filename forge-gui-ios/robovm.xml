@@ -93,6 +93,8 @@
     <!-- image pipeline nested classes (hybrid resolver, LRU caches) -->
     <pattern>forge.assets.Assets$*</pattern>
     <pattern>forge.assets.ImageCache$*</pattern>
+    <!-- iOS downloaded-card TextureData (supplied to the AssetManager via TextureParameter) -->
+    <pattern>forge.assets.CardTextureData</pattern>
     <!-- iOS AVAudioPlayer-backed sound effects -->
     <pattern>forge.sound.MusicAudioClip</pattern>
     <!-- Sentry crash reporting: the SDK wires integrations/transports via
