@@ -1424,22 +1424,16 @@ public class AttachAi extends SpellAbilityAi {
             return attachAIInstantReequipPreference(sa, attachSource);
         }
 
-        Player prefPlayer;
-        if ("Pump".equals(logic) || "Animate".equals(logic) || "Curiosity".equals(logic) || "MoveTgtAura".equals(logic)
-                || "MoveAllAuras".equals(logic)) {
-            prefPlayer = ai;
-        } else {
-            prefPlayer = AiAttackController.choosePreferredDefenderPlayer(ai);
-        }
-
-        // Some ChangeType cards are beneficial, and PrefPlayer should be
-        // changed to represent that
-        final List<Card> prefList;
-
-        if ("Reanimate".equals(logic) || "SpecificCard".equals(logic)) {
-            // Reanimate or SpecificCard aren't so restrictive
-            prefList = list;
-        } else {
+        // Some ChangeType cards are beneficial, and PrefPlayer should be changed to represent that
+        List<Card> prefList = list;
+        if (!"Reanimate".equals(logic) && !"SpecificCard".equals(logic)) {
+            Player prefPlayer;
+            if ("Pump".equals(logic) || "Animate".equals(logic) || "Curiosity".equals(logic) || "MoveTgtAura".equals(logic)
+                    || "MoveAllAuras".equals(logic)) {
+                prefPlayer = ai;
+            } else {
+                prefPlayer = AiAttackController.choosePreferredDefenderPlayer(ai);
+            }
             prefList = CardLists.filterControlledBy(list, prefPlayer);
         }
 
@@ -1642,7 +1636,7 @@ public class AttachAi extends SpellAbilityAi {
         return !sa.getHostCard().isEquipment() || !ComputerUtilCard.isUselessCreature(ai, c);
     }
 
-    public static Card doPumpOrCurseAILogic(final Player ai, final SpellAbility sa, final List<Card> list, final String type) {
+    private static Card doPumpOrCurseAILogic(final Player ai, final SpellAbility sa, final List<Card> list, final String type) {
         Card chosen = null;
 
         List<Card> aiType = CardLists.filter(list, c -> {
@@ -1672,7 +1666,6 @@ public class AttachAi extends SpellAbilityAi {
 
         return chosen;
     }
-
 
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
