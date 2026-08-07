@@ -325,13 +325,15 @@ public class GameSnapshot {
                 // Storing a game uses this path...
                 newCard = createCardCopy(toGame, toPlayer, fromCard);
             } else {
-                ZoneType type = newCard.getZone().getZoneType();
-                if (type != fromType) {
-                    if (type.equals(ZoneType.Stack)) {
-                        toGame.getStackZone().remove(newCard);
-                    } else {
-                        toPlayer.getZone(type).remove(newCard);
-                    }
+                // Take it out of wherever it currently is, unless that is already the zone
+                // it is going into. Comparing zone types alone misses a move between two
+                // players' battlefields — a creature stolen after the snapshot was taken
+                // then ends up in both of them.
+                Zone currentZone = newCard.getZone();
+                Zone targetZone = fromType.equals(ZoneType.Stack)
+                        ? toGame.getStackZone() : toPlayer.getZone(fromType);
+                if (currentZone != null && currentZone != targetZone) {
+                    currentZone.remove(newCard);
                 }
             }
 
@@ -479,6 +481,13 @@ public class GameSnapshot {
         newCard.setFaceDown(fromCard.isFaceDown());
         newCard.setManifested(fromCard.getManifestedSA());
         newCard.setSickness(fromCard.hasSickness());
+        // Who controls a card is state of its own. A creature stolen after the snapshot was
+        // taken stays with the thief otherwise: its zone is corrected, but the card still
+        // names the thief as controller, so it keeps playing for them.
+        Player fromController = findBy(toGame, fromCard.getController());
+        if (fromController != null && fromController != newCard.getController()) {
+            newCard.setController(fromController, toGame.getNextTimestamp());
+        }
         //newCard.setForetold(fromCard.isForetold());
         //newCard.setForetoldCostByEffect(fromCard.isForetoldCostByEffect());
         newCard.setBackSide(fromCard.isBackSide());
