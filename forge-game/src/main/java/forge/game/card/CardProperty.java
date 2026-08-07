@@ -1472,8 +1472,7 @@ public class CardProperty {
             if (!card.hasCounters()) {
                 return false;
             }
-        }
-        else if (property.startsWith("counters")) {
+        } else if (property.startsWith("counters")) {
             // syntax example: counters_GE9_P1P1 or counters_LT12_TIME
             final String[] splitProperty = property.split("_");
             final String strNum = splitProperty[1].substring(2);
