@@ -239,12 +239,12 @@ public final class SResizingUtil {
         dX = (int) e.getLocationOnScreen().getX() - evtX;
         evtX = (int) e.getLocationOnScreen().getX();
 
+        int candidateEdgeX;
         if (e.isControlDown()) { // snap the dragged edge to a quarter-cell grid
-            final int newEdge = snapGrid * Math.round((curEdgeX + dX) / (float) snapGrid);
-            dX = newEdge - curEdgeX;
-            curEdgeX = newEdge;
+            candidateEdgeX = snapGrid * Math.round((curEdgeX + dX) / (float) snapGrid);
+            dX = candidateEdgeX - curEdgeX;
         } else {
-            curEdgeX += dX;
+            candidateEdgeX = curEdgeX + dX;
         }
 
         boolean leftLock = false;
@@ -260,6 +260,8 @@ public final class SResizingUtil {
 
         if (dX < 0 && leftLock) { return; }
         if (dX > 0 && rightLock) { return; }
+
+        curEdgeX = candidateEdgeX;
 
         for (final DragCell t : LEFT_PANELS) {
             t.setBounds(t.getX(), t.getY(), t.getW() + dX, t.getH());
@@ -277,12 +279,12 @@ public final class SResizingUtil {
         dY = (int) e.getLocationOnScreen().getY() - evtY;
         evtY = (int) e.getLocationOnScreen().getY();
 
+        int candidateEdgeY;
         if (e.isControlDown()) { // snap the dragged edge to a quarter-cell grid
-            final int newEdge = snapGrid * Math.round((curEdgeY + dY) / (float) snapGrid);
-            dY = newEdge - curEdgeY;
-            curEdgeY = newEdge;
+            candidateEdgeY = snapGrid * Math.round((curEdgeY + dY) / (float) snapGrid);
+            dY = candidateEdgeY - curEdgeY;
         } else {
-            curEdgeY += dY;
+            candidateEdgeY = curEdgeY + dY;
         }
 
         boolean topLock = false;
@@ -298,6 +300,8 @@ public final class SResizingUtil {
 
         if (dY < 0 && topLock) { return; }
         if (dY > 0 && bottomLock) { return; }
+
+        curEdgeY = candidateEdgeY;
 
         for (final DragCell t : TOP_PANELS) {
             t.setBounds(t.getX(), t.getY(), t.getW(), t.getH() + dY);
@@ -514,7 +518,7 @@ public final class SResizingUtil {
             for (final DragCell cell : cells) {
                 savedMaximizeBounds.put(cell, cell.getRoughBounds());
                 if (cell.equals(target)) { cell.setRoughBounds(new RectangleOfDouble(0, 0, 1, 1)); }
-                else { cell.setRoughBounds(new RectangleOfDouble(0, 0, 0, 0)); } // ponytail: zero-size hide, revisit if overlaps leak
+                else { cell.setRoughBounds(new RectangleOfDouble(0, 0, 0, 0)); } // Hide by setting zero-size bounds; explicit visibility management handles non-maximized cells
             }
         }
         resizeWindow();
