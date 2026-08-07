@@ -49,9 +49,14 @@ import io.netty.handler.timeout.IdleStateHandler;
 
 import org.jupnp.UpnpService;
 import org.jupnp.UpnpServiceImpl;
+import org.jupnp.controlpoint.ActionCallback;
+import org.jupnp.model.action.ActionInvocation;
 import org.jupnp.model.meta.Device;
+import org.jupnp.model.meta.RemoteDevice;
+import org.jupnp.model.meta.Service;
+import org.jupnp.model.message.UpnpResponse;
+import org.jupnp.registry.DefaultRegistryListener;
 import org.jupnp.registry.Registry;
-import org.jupnp.support.igd.PortMappingListener;
 import org.jupnp.support.model.PortMapping;
 
 import java.io.BufferedReader;
@@ -768,14 +773,10 @@ public final class FServerManager implements IHasForgeLog {
             // Trigger device discovery
             upnpService.getControlPoint().search();
 
-            // If no IGD responds within 5 seconds, report failure
             new Timer("upnp-timeout", true).schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if (!listener.isCompleted()) {
-                        listener.setCompleted();
-                        onUPnPResult(false);
-                    }
+                    listener.finishDiscovery();
                 }
             }, 5000);
         } catch (LinkageError | Exception e) {
@@ -799,38 +800,122 @@ public final class FServerManager implements IHasForgeLog {
     }
 
     /**
-     * Extends jupnp's PortMappingListener to report mapping success or failure.
-     * The superclass runs port mapping actions synchronously inside deviceAdded(),
-     * so by the time super.deviceAdded() returns, the result is known.
+     * Custom registry listener that handles UPnP port mapping.
+     * DefaultRegistryListener is used because jUPnP's PortMappingListener only
+     * accepts IGD v1 devices and creates port arguments as ui2 values.
+     * Use String inputs for port arguments to work around router XML descriptors
+     * that specify ui4 instead of ui2 for port data types
      */
-    private class ForgePortMappingListener extends PortMappingListener {
-        private volatile boolean completed = false;
+    private class ForgePortMappingListener extends DefaultRegistryListener {
+        private final PortMapping portMapping;
+        private final Set<Service<?, ?>> attemptedServices = new HashSet<>();
+        private final Set<Service<?, ?>> activeServices = new HashSet<>();
+        private boolean completed;
 
         ForgePortMappingListener(PortMapping portMapping) {
-            super(portMapping);
+            this.portMapping = portMapping;
         }
 
         @Override
         public synchronized void deviceAdded(Registry registry, Device device) {
-            super.deviceAdded(registry, device);
-            if (!completed && !activePortMappings.isEmpty()) {
-                completed = true;
-                UPnPMapped = true;
-                onUPnPResult(true);
+            if (completed) {
+                return;
+            }
+            final Service<?, ?> connectionService = UpnpPortMappingSupport.findConnectionService(device);
+            if (connectionService == null) {
+                netLog.debug("UPnP device ignored (no compatible IGD WAN service): {}", describeDevice(device));
+                return;
+            }
+            if (!attemptedServices.add(connectionService)) {
+                netLog.debug("UPnP gateway candidate already attempted: {}", describeDevice(device));
+                return;
+            }
+
+            netLog.info("UPnP gateway candidate discovered: {} using {}", describeDevice(device), connectionService.getServiceType());
+            addPortMapping(registry, connectionService);
+        }
+
+        /** Attempts to create the mapping on a discovered WAN connection service. */
+        private void addPortMapping(final Registry registry, final Service<?, ?> service) {
+            try {
+                final ActionInvocation<?> invocation = UpnpPortMappingSupport.createInvocation(service, portMapping, true);
+				
+                new ActionCallback(invocation, registry.getUpnpService().getControlPoint()) {
+                    @Override
+                    public void success(final ActionInvocation invocation) {
+                        synchronized (ForgePortMappingListener.this) {
+                            activeServices.add(service);
+                            if (!completed) {
+                                completed = true;
+                                UPnPMapped = true;
+                                onUPnPResult(true);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void failure(final ActionInvocation invocation, final UpnpResponse response, final String defaultMessage) {
+                        netLog.warn("UPnP gateway candidate rejected the mapping: {}", defaultMessage);
+                    }
+                }.run();
+            } catch (final RuntimeException e) {
+                netLog.error(e, "UPnP mapping action could not be created");
             }
         }
 
         @Override
-        protected void handleFailureMessage(String message) {
-            super.handleFailureMessage(message);
+        public synchronized void deviceRemoved(final Registry registry, final Device device) {
+            for (final Service<?, ?> service : device.findServices()) {
+                activeServices.remove(service);
+            }
+        }
+
+        @Override
+        public synchronized void beforeShutdown(final Registry registry) {
+            for (final Service<?, ?> service : new ArrayList<>(activeServices)) {
+                try {
+                    final ActionInvocation<?> invocation = UpnpPortMappingSupport.createInvocation(service, portMapping, false);
+                    new ActionCallback(invocation, registry.getUpnpService().getControlPoint()) {
+                        @Override
+                        public void success(final ActionInvocation invocation) {
+                            netLog.info("UPnP port mapping removed from {}", service.getServiceType());
+                        }
+
+                        @Override
+                        public void failure(final ActionInvocation invocation, final UpnpResponse response,  final String defaultMessage) {
+                            netLog.warn("UPnP port mapping could not be removed: {}", defaultMessage);
+                        }
+                    }.run();
+                } catch (final RuntimeException e) {
+                    netLog.error(e, "UPnP delete mapping action could not be created");
+                }
+            }
+            activeServices.clear();
+        }
+
+        /** Reports failure when discovery ends without a successful mapping. */
+        synchronized void finishDiscovery() {
             if (!completed) {
                 completed = true;
                 onUPnPResult(false);
             }
         }
 
-        boolean isCompleted() { return completed; }
-        void setCompleted() { completed = true; }
+        /** Formats the relevant device details for UPnP diagnostic messages. */
+        private String describeDevice(final Device<?, ?, ?> device) {
+            String address = "unknown address";
+            if (device instanceof RemoteDevice) {
+                final URL descriptorUrl = ((RemoteDevice) device).getIdentity().getDescriptorURL();
+                if (descriptorUrl != null) {
+                    address = descriptorUrl.getHost();
+                }
+            }
+            
+            final String name = device.getDetails() == null
+                ? device.getDisplayString()
+                : device.getDetails().getFriendlyName();
+            return String.format("%s [%s] at %s", name, device.getType(), address);
+        }
     }
 
     // --- Reconnection helper methods ---
