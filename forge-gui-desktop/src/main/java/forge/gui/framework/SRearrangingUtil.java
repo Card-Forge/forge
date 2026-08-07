@@ -2,7 +2,7 @@ package forge.gui.framework;
 
 import java.awt.Container;
 import java.awt.KeyboardFocusManager;
-import java.awt.KeyboardFocusManager.KeyEventDispatcher;
+import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

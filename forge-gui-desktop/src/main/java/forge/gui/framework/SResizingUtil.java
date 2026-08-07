@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
-import java.awt.KeyboardFocusManager.KeyEventDispatcher;
 
 import javax.swing.JPanel;
 
