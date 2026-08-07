@@ -34,6 +34,8 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoUtil;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.RewardScene;
@@ -108,6 +110,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private boolean shouldDisplayText = false;
     private boolean isDragging = false;
     private boolean isNew = false;
+    private ArchipelagoData archipelagoData = ArchipelagoData.getInstance();
 
     @Override
     public void dispose() {
@@ -827,8 +830,16 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 float iw = item.getWidth() * 4;
                 float ih = item.getHeight() * 4;
                 batch.draw(item, pw / 2f - iw / 2f, (ph / 2f - ih / 2f), iw, ih);
-            } else
+            } else {
                 batch.draw(item, pw / 4f, ph / 4f, pw / 2f, ph / 2f);
+
+                if (reward != null && reward.getDeck() != null && reward.getDeck().getComment() != null) {
+                    if (!archipelagoData.isSetUnlocked(reward.getDeck().getComment())){
+                        ArchipelagoUtil.drawLockedCardOverlay(batch, getWidth()/2, ph/2f, pw, ph/2f);
+                    }
+                }
+            }
+
         }
         if (itemText != null) {
             itemText.setWrap(true);
@@ -1191,6 +1202,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 TextureRegion icon = FSkinImage.ADV_FLIPICON.getTextureRegion();
                 float scale = getHeight() / 4f;
                 batch.draw(icon, getOriginX() - scale / 2f, getOriginY() - scale / 2f, scale, scale);
+            }
+            if (!archipelagoData.checkCardUnlocked(reward.getCard())) {
+                ArchipelagoUtil.drawLockedCardOverlay(batch, x, -getHeight() / 2, width, getHeight());
             }
         }
     }

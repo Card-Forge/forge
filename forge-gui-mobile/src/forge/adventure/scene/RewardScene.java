@@ -13,6 +13,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.archipelago.*;
 import forge.adventure.character.ShopActor;
 import forge.haptic.HapticEngine;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -321,6 +322,7 @@ public class RewardScene extends UIScene {
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
         // Merge Gold and Shards rewards into single entries
+        ArchipelagoMode archipelagoMode = ArchipelagoData.getInstance().getArchipelagoMode();
         int totalGold = 0;
         int totalShards = 0;
         Array<Reward> others = new Array<>();
@@ -534,7 +536,14 @@ public class RewardScene extends UIScene {
                     lastRowXAdjust = ((numberOfColumns * cardWidth) - (lastRowCount * cardWidth)) / 2;
             }
 
-            RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
+            RewardActor actor;
+
+            if (archipelagoMode != ArchipelagoMode.disabled) {
+                if (type == Type.Loot && reward.getType() == Reward.Type.Item && reward.getItem().equipmentSlot != null && !reward.getItem().equipmentSlot.isEmpty()) {
+                    reward = LocalRandomizer.getInstance().takeSingleEquipmentOutOfRemainingPool();
+                }
+            }
+            actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
 
             actor.setBounds(lastRowXAdjust + xOff + cardWidth * (i % numberOfColumns) + spacing, yOff + cardHeight * currentRow + spacing, cardWidth - spacing * 2, cardHeight - spacing * 2);
 
