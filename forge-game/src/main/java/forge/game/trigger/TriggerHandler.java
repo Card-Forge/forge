@@ -46,6 +46,7 @@ public class TriggerHandler {
     private final List<Trigger> activeTriggers = new ArrayList<>();
 
     private final List<Trigger> delayedTriggers = new ArrayList<>();
+    private final List<Trigger> nextTurnDelayedTriggers = new ArrayList<>();
     private final List<Trigger> thisTurnDelayedTriggers = new ArrayList<>();
     private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = ArrayListMultimap.create();
     private final List<TriggerWaiting> waitingTriggers = new ArrayList<>();
@@ -59,8 +60,24 @@ public class TriggerHandler {
         delayedTriggers.add(trig);
     }
 
+    public final List<Trigger> getScheduledDelayedTriggers() {
+        List<Trigger> result = new ArrayList<>(delayedTriggers);
+        result.addAll(nextTurnDelayedTriggers);
+        return result;
+    }
+
+    public final void registerNextTurnDelayedTrigger(final Trigger trig) {
+        nextTurnDelayedTriggers.add(trig);
+        game.getCleanup().addUntil(() -> {
+            if (nextTurnDelayedTriggers.remove(trig)) {
+                registerThisTurnDelayedTrigger(trig);
+            }
+        });
+    }
+
     public final void clearDelayedTrigger() {
         delayedTriggers.clear();
+        nextTurnDelayedTriggers.clear();
     }
 
     public final void registerThisTurnDelayedTrigger(final Trigger trig) {
@@ -74,13 +91,8 @@ public class TriggerHandler {
     }
 
     public final void clearDelayedTrigger(final Card card) {
-        final List<Trigger> deltrigs = new ArrayList<>(delayedTriggers);
-
-        for (final Trigger trigger : deltrigs) {
-            if (trigger.getHostCard().equals(card)) {
-                delayedTriggers.remove(trigger);
-            }
-        }
+        delayedTriggers.removeIf(trigger -> trigger.getHostCard().equals(card));
+        nextTurnDelayedTriggers.removeIf(trigger -> trigger.getHostCard().equals(card));
     }
 
     public final void registerPlayerDefinedDelayedTrigger(final Player player, final Trigger trig) {
@@ -591,13 +603,9 @@ public class TriggerHandler {
     }
 
     public void onPlayerLost(Player p) {
-        List<Trigger> lost = new ArrayList<>(delayedTriggers);
-        for (Trigger t : lost) {
-            // CR 800.4d trigger controller lost game
-            if (p.equals(t.getSpawningAbility().getActivatingPlayer())) {
-                delayedTriggers.remove(t);
-            }
-        }
+        // CR 800.4d trigger controller lost game
+        delayedTriggers.removeIf(t -> p.equals(t.getSpawningAbility().getActivatingPlayer()));
+        nextTurnDelayedTriggers.removeIf(t -> p.equals(t.getSpawningAbility().getActivatingPlayer()));
         // run all ChangesZone
         runWaitingTriggers();
     }
