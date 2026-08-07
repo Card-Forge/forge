@@ -1,6 +1,7 @@
 package forge.gamemodes.net;
 
 import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 import forge.trackable.TrackableTypes;
 import forge.trackable.Tracker;
 import org.testng.Assert;
@@ -47,5 +48,89 @@ public class TrackableSerializerResolveTest {
                 new TrackableSerializer.IdRef(TrackableSerializer.TYPE_PLAYER_VIEW, 2), tracker);
 
         Assert.assertNull(resolved, "Unresolvable PlayerView keeps the historical null contract");
+    }
+
+    @Test
+    public void testUnresolvableCardViewFallbackUsesSameTracker() {
+        final Tracker tracker = new Tracker();
+
+        final Object resolved = TrackableSerializer.resolve(
+                new TrackableSerializer.IdRef(TrackableSerializer.TYPE_CARD_VIEW, 42), tracker);
+
+        Assert.assertTrue(resolved instanceof CardView);
+        Assert.assertSame(((CardView) resolved).getTracker(), tracker,
+                "The detached fallback CardView must be wired to the same Tracker instance "
+                        + "so later property lookups behave consistently");
+    }
+
+    @Test
+    public void testUnresolvableCardViewFallbackCreatesFreshInstanceEachCall() {
+        final Tracker tracker = new Tracker();
+        final TrackableSerializer.IdRef ref =
+                new TrackableSerializer.IdRef(TrackableSerializer.TYPE_CARD_VIEW, 7);
+
+        final Object first = TrackableSerializer.resolve(ref, tracker);
+        final Object second = TrackableSerializer.resolve(ref, tracker);
+
+        Assert.assertNotSame(first, second,
+                "Each unresolved lookup must produce its own detached CardView, not a cached singleton");
+    }
+
+    @Test
+    public void testUnresolvableCardViewIdRefWithZeroIdFallsBack() {
+        final Tracker tracker = new Tracker();
+
+        final Object resolved = TrackableSerializer.resolve(
+                new TrackableSerializer.IdRef(TrackableSerializer.TYPE_CARD_VIEW, 0), tracker);
+
+        Assert.assertTrue(resolved instanceof CardView);
+        Assert.assertEquals(((CardView) resolved).getId(), 0);
+    }
+
+    @Test
+    public void testUnresolvableCardViewIdRefWithNegativeIdFallsBack() {
+        final Tracker tracker = new Tracker();
+
+        final Object resolved = TrackableSerializer.resolve(
+                new TrackableSerializer.IdRef(TrackableSerializer.TYPE_CARD_VIEW, -1), tracker);
+
+        Assert.assertTrue(resolved instanceof CardView, "Fallback must apply regardless of id sign");
+        Assert.assertEquals(((CardView) resolved).getId(), -1);
+    }
+
+    @Test
+    public void testUnknownTypeTagDoesNotTriggerCardViewFallback() {
+        final Tracker tracker = new Tracker();
+        final byte unknownTag = (byte) 99;
+
+        final Object resolved = TrackableSerializer.resolve(
+                new TrackableSerializer.IdRef(unknownTag, 5), tracker);
+
+        Assert.assertNull(resolved,
+                "The CardView fallback must be gated on TYPE_CARD_VIEW specifically, "
+                        + "not applied to arbitrary/unknown type tags");
+    }
+
+    @Test
+    public void testResolvablePlayerViewIdRefStillReturnsTrackedObject() {
+        final Tracker tracker = new Tracker();
+        final PlayerView player = new PlayerView(3, tracker);
+        tracker.putObj(TrackableTypes.PlayerViewType, 3, player);
+
+        final Object resolved = TrackableSerializer.resolve(
+                new TrackableSerializer.IdRef(TrackableSerializer.TYPE_PLAYER_VIEW, 3), tracker);
+
+        Assert.assertSame(resolved, player,
+                "The new CardView fallback branch must not affect resolvable PlayerView lookups");
+    }
+
+    @Test
+    public void testNonIdRefObjectPassesThroughUnchanged() {
+        final Tracker tracker = new Tracker();
+        final String plain = "not-an-idref";
+
+        final Object resolved = TrackableSerializer.resolve(plain, tracker);
+
+        Assert.assertSame(resolved, plain, "Objects that are not IdRef/EventCardRef must pass through unchanged");
     }
 }
