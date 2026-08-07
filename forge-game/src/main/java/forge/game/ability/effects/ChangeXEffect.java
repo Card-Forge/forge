@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.spellability.SpellAbility;
 
@@ -17,13 +18,14 @@ public class ChangeXEffect extends SpellAbilityEffect {
         final List<SpellAbility> sas = getTargetSpells(sa);
 
         for (final SpellAbility tgtSA : sas) {
+            int value = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Value"), sa);
             // for Unbound Flourishing, can't go over SpellAbilityStackInstances because the x is in cast SA copy
             SpellAbility castSA = tgtSA.getHostCard().getCastSA();
-            if (castSA != null && tgtSA.equals(castSA) && castSA.getXManaCostPaid() != null) {
-                castSA.setXManaCostPaid(castSA.getXManaCostPaid() * 2);
+            if (tgtSA.equals(castSA) && castSA.getXManaCostPaid() != null) {
+                castSA.setXManaCostPaid(value);
             }
             if (tgtSA.getXManaCostPaid() != null) {
-                tgtSA.setXManaCostPaid(tgtSA.getXManaCostPaid() * 2);
+                tgtSA.setXManaCostPaid(value);
             }
         }
     }
