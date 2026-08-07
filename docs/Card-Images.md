@@ -33,7 +33,7 @@ Card images are stored in `pics/cards`, and tokens in `pics/tokens`, in the Cach
 
 - **Windows** - `C:\Users\<username>\appdata\local\forge\Cache\`
   - You'll need to enable hidden folders.
-- **Android 11+** - `Internal Storage/Android/obb/forge.app/Forge/cache/`   
+- **Android 11+** - `Internal Storage/Android/obb/dev.reforge.commander/Forge/cache/`   
   - *_NOTE: You need a third party File Manager to access the obb folder and allow storage access permission_*
 - **Android 8 to 10** - `Internal Storage/Forge/cache/`
 - **Linux** - `/home/<username>/.cache/forge/`

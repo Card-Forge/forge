@@ -1,4 +1,4 @@
-package forge.app;
+package dev.reforge.commander;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -110,7 +110,7 @@ public class Main extends AndroidApplication {
 
     // The package name the resources are compiled under (stable across dev/prod).
     // If you ever change the base app package, update this constant once.
-    private static final String RES_PKG_FALLBACK = "forge.app";
+    private static final String RES_PKG_FALLBACK = "dev.reforge.commander";
 
     private int resId(String type, String name) {
         // 1) Try fully-qualified with *runtime* package
@@ -803,7 +803,7 @@ public class Main extends AndroidApplication {
                     return true;
                 } else {
                     Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
-                    intent.setData(PublicFileProvider.getUriForFile(getContext(), "com.mydomain.publicfileprovider", new File(filename)));
+                    intent.setData(PublicFileProvider.getUriForFile(getContext(), "dev.reforge.commander.publicfileprovider", new File(filename)));
                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     startActivity(intent);
                     return true;

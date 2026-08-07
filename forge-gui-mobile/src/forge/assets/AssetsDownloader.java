@@ -66,8 +66,10 @@ public class AssetsDownloader {
         Date snapsTimestamp = null, buildTimeStamp = null;
 
         String message;
-        boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
-        if (connectedToInternet) {
+        // REFORGE COMMANDER EXTENSION: the fork publishes no APK releases, so the app
+        // self-update check (releaseTag -> installer download) only runs on desktop.
+        // ponytail: if we ever publish releases, gate both platforms on an explicit flag.
+        if (connectedToInternet && !GuiBase.isAndroid()) {
             //currently for desktop/mobile-dev release on github
             final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_ATOM);
             try {

@@ -1,4 +1,4 @@
-package forge.app;
+package dev.reforge.commander;
 
 import android.app.Activity;
 import android.content.Intent;

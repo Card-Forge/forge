@@ -1,4 +1,4 @@
-package forge.app;
+package dev.reforge.commander;
 
 import forge.util.TextUtil;
 import org.apache.commons.text.StringEscapeUtils;
