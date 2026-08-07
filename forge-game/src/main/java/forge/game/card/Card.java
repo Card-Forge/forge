@@ -3355,9 +3355,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final Set<String> getProducibleColors() {
         Set<String> colors = new HashSet<>();
         for (final SpellAbility ab : getManaAbilities()) {
-            // Without an activating player each canProduce falls into a much more expensive path,
-            // and this is hot enough for that to matter. Only fill it in when it is missing, so a
-            // payment simulation that has already set a payer keeps it.
+            // without an activating player canProduce falls into a much more expensive path, so
+            // fill it in - but only when missing, so a payment simulation keeps the payer it set
             if (ab.getActivatingPlayer() == null) {
                 ab.setActivatingPlayer(getController());
             }
@@ -3365,6 +3364,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 colors.addAll(CardUtil.getReflectableManaColors(ab));
             } else {
                 colors = CardUtil.canProduce(6, ab, colors);
+            }
+            if (colors.size() == MagicColor.Constant.COLORS_AND_COLORLESS.size()) {
+                break; // nothing left for a further ability to add
             }
         }
         return colors;
