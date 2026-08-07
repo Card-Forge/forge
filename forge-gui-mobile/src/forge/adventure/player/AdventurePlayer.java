@@ -25,6 +25,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
+import forge.item.AdventurePaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.sound.SoundEffectType;
@@ -169,11 +170,18 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         // Sanity Check make sure the number is not insane and make sure it is at least 20
         this.maxDeckCount = Math.max(Math.min(this.maxDeckCount, 99), 20);
 
+        CardPool pool = new  CardPool();
+        CardPool playerPool = startingDeck.getAllCardsInASinglePool(true, true);
+        for (Map.Entry<PaperCard, Integer> entry : playerPool) {
+            pool.add(new AdventurePaperCard(entry.getKey(), entry.getKey().getMarkedFlags()), entry.getValue());
+        }
+
+        startingDeck.putSection(DeckSection.Main, pool);
         clearDecks(); // Reset the empty decks to now already have the commander in the command zone.
         deck = startingDeck;
         decks.set(0, deck);
 
-        cards.addAllFlat(deck.getAllCardsInASinglePool(true, true).toFlatList());
+        cards.addAllFlat(pool.toFlatList());
         if (archipelagoMode != ArchipelagoMode.disabled) {
             ArchipelagoData archipelagoData = ArchipelagoData.getInstance();
             for (PaperCard card : cards.toFlatList()) {
@@ -709,7 +717,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         // Use false to skip loadout switching during load (equippedItems already loaded correctly above)
         setSelectedDeckSlot(data.readInt("selectedDeckIndex"), false);
         CardPool cardPool = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("cards")));
-        cards.addAll(cardPool.getFilteredPool(isValid));
+        CardPool adventureCardPool = new CardPool();
+        CardPool playerPool = cardPool.getFilteredPool(isValid);
+        for (int i = 0; i < playerPool.countAll(); i++) {
+            adventureCardPool.add(new AdventurePaperCard(playerPool.get(i), playerPool.get(i).getMarkedFlags()));
+        }
+        cards.addAll(adventureCardPool);
         unsupportedCards.addAll(cardPool.getFilteredPool(isUnsupported).toFlatList());
 
         if (data.containsKey("newCards")) {
@@ -746,7 +759,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
                 int remainingSellableCopies = totalCopies - noSellCopies;
 
-                PaperCard noSellVersion = item.getNoSellVersion();
+                AdventurePaperCard noSellVersion = new AdventurePaperCard(item.getNoSellVersion(), item.getNoSellVersion().getMarkedFlags());
                 cards.add(noSellVersion, noSellCopies);
 
                 System.out.printf("Converted legacy noSellCards item - %s (%d / %d copies)%n", item, noSellCopies, totalCopies);
@@ -771,19 +784,25 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (data.containsKey("autoSellCards")) {
             PaperCard[] items = (PaperCard[]) data.readObject("autoSellCards");
             for (PaperCard pc : items) {
-                if (isUnsupported.test(pc))
-                    unsupportedCards.add(pc);
+                AdventurePaperCard apc = (pc instanceof AdventurePaperCard)
+                        ? (AdventurePaperCard) pc
+                        : new AdventurePaperCard(pc, pc.getMarkedFlags());
+                if (isUnsupported.test(apc))
+                    unsupportedCards.add(apc);
                 else
-                    autoSellCards.add(pc);
+                    autoSellCards.add(apc);
             }
         }
         if (data.containsKey("favoriteCards")) {
             PaperCard[] items = (PaperCard[]) data.readObject("favoriteCards");
             for (PaperCard pc : items) {
-                if (isUnsupported.test(pc))
-                    unsupportedCards.add(pc);
+                AdventurePaperCard fapc = (pc instanceof AdventurePaperCard)
+                        ? (AdventurePaperCard) pc
+                        : new AdventurePaperCard(pc, pc.getMarkedFlags());
+                if (isUnsupported.test(fapc))
+                    unsupportedCards.add(fapc);
                 else
-                    favoriteCards.add(pc);
+                    favoriteCards.add(fapc);
             }
         }
 
@@ -971,23 +990,27 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void addCard(PaperCard card, int amount) {
-        cards.add(card, amount);
-        newCards.add(card, amount);
+        AdventurePaperCard adventurePaperCard = new AdventurePaperCard(card, card.getMarkedFlags());
+        cards.add(adventurePaperCard, amount);
+        newCards.add(adventurePaperCard, amount);
     }
 
     public void addCards(ItemPool<PaperCard> cardPool) {
-        cards.addAll(cardPool);
-        newCards.addAll(cardPool);
+        for (Map.Entry<PaperCard, Integer> p : cardPool) {
+            cards.add(new AdventurePaperCard(p.getKey(), p.getKey().getMarkedFlags()), p.getValue());
+            newCards.add(new AdventurePaperCard(p.getKey(), p.getKey().getMarkedFlags()), p.getValue());
+        }
     }
 
     public void addReward(Reward reward) {
         ArchipelagoData archipelagoData = ArchipelagoData.getInstance();
         switch (reward.getType()) {
             case Card:
-                cards.add(reward.getCard());
-                newCards.add(reward.getCard());
+                AdventurePaperCard adventurePaperCard = new AdventurePaperCard(reward.getCard(), reward.getCard().getMarkedFlags());
+                cards.add(adventurePaperCard);
+                newCards.add(adventurePaperCard);
                 if (reward.isAutoSell()) {
-                    autoSellCards.add(reward.getCard());
+                    autoSellCards.add(adventurePaperCard);
                     refreshEditor();
                 }
                 archipelagoData.addCardByRarity(reward.getCard().getRarity().toString());
@@ -1618,7 +1641,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public ItemPool<PaperCard> getAutoSellCards() {
-        return autoSellCards;
+        ItemPool<PaperCard> result = new ItemPool<>(PaperCard.class);
+
+        for (Map.Entry<PaperCard, Integer> e : autoSellCards) {
+            result.add(e.getKey(), e.getValue());
+        }
+
+        return result;
     }
 
     /**

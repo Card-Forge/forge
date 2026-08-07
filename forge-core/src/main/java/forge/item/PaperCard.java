@@ -64,7 +64,6 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     private transient String displayName;
     private transient String sortableName;
     private transient boolean hasFlavorName;
-    private transient boolean isLocked;
 
     @Override
     public String getName() {
@@ -533,14 +532,6 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     @Override
     public List<ICardFace> getAllFaces() {
         return this.rules.getAllFaces().stream().map(this::getVariantForFace).collect(Collectors.toList());
-    }
-
-    public boolean isLocked() {
-        return isLocked;
-    }
-
-    public void setLocked(boolean locked) {
-        isLocked = locked;
     }
 
     private ICardFace getVariantForFace(ICardFace face) {
