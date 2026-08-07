@@ -114,8 +114,11 @@ public final class TrackableSerializer implements IHasForgeLog {
     }
 
     /**
-     * Resolves {@link IdRef} and {@link EventCardRef} markers back to
-     * TrackableObjects from the given Tracker.
+     * Resolves serialized reference markers using the supplied tracker.
+     *
+     * @param obj     the object or serialized reference to resolve
+     * @param tracker the tracker used to locate referenced objects
+     * @return the resolved object, a detached card view for unresolved card references, or the original object when it is not a supported reference
      */
     static Object resolve(Object obj, Tracker tracker) {
         if (obj instanceof EventCardRef ref) {
