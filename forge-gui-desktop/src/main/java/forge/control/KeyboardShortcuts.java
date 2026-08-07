@@ -22,6 +22,7 @@ import forge.Singletons;
 import forge.game.spellability.StackItemView;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
+import forge.gui.framework.SResizingUtil;
 import forge.localinstance.properties.ForgePreferences;
 import forge.gamemodes.match.YieldController;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -252,6 +253,14 @@ public class KeyboardShortcuts {
             }
         };
 
+        final Action actMaximizeCell = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                SResizingUtil.toggleMaximize();
+            }
+        };
+
         final Action actYieldOptions = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -293,6 +302,7 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_SHOWHOTKEYS, localizer.getMessage("lblSHORTCUT_SHOWHOTKEYS"), actShowHotkeys, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_PANELTABS, localizer.getMessage("lblSHORTCUT_PANELTABS"), actPanelTabs, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CARDOVERLAYS, localizer.getMessage("lblSHORTCUT_CARDOVERLAYS"), actCardOverlays, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_MAXIMIZE_CELL, localizer.getMessage("lblSHORTCUT_MAXIMIZE_CELL"), actMaximizeCell, am, im));
         cachedShortcuts = list;
         return list;
     } // End initMatchShortcuts()

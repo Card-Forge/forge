@@ -395,7 +395,7 @@ Java classes should include a `/* REFORGE COMMANDER EXTENSION` header comment.
 | # | Gap | Impact | Fix | Status |
 |---|-----|--------|-----|--------|
 | 12a | No zone presets; stock `match.xml` only places `FIELD_0`/`FIELD_1`, so 3-4 player pods leave battlefields unplaced | Field windows don't respect the board when 2+ opponents join | `ReforgeMatchLayoutPresets` (canonical layout for 2..8 players in `SLayoutIO` XML schema) + "Battlefield Layout" menu in `CSubmenuPlayCommander` | **DONE** — presets + canonical layouts shipped; hot-swap open |
-| 12b | Resize/move feel clunky (`MouseUtil.lockCursor()`, 5px edge hit-zones, no cancel) | Drag-to-resize fights the user at the edges | Thick hit-zones (8-12px), remove `lockCursor()`, `Esc`/RMB cancel, `Ctrl`-snap, `Shift`-linked edges, `Ctrl+Space` maximize/restore in `SResizingUtil`/`SRearrangingUtil` | open |
+| 12b | Resize/move feel clunky (`MouseUtil.lockCursor()`, 5px edge hit-zones, no cancel) | Drag-to-resize fights the user at the edges | Thick hit-zones (8-12px), remove `lockCursor()`, `Esc`/RMB cancel, `Ctrl`-snap, `Shift`-linked edges, `Ctrl+Space` maximize/restore in `SResizingUtil`/`SRearrangingUtil` | **DONE** |
 | 12c | No card animations — cards appear/disappear instantly | Board state changes are hard to follow, especially in multiplayer | Play splash (1.5s center-screen), token spawn fade-in, card death fade-out, stack resolve slide, glow pulse for playable cards via `Animation` framework | open |
 | 12d | Card zoom requires wheel/click, no hover feedback | Players don't read cards they don't hover | 500ms hover delay → zoom overlay, board-aware positioning (avoids covering hand/battlefield), priority pulse via `SDisplayUtil.remind()` | open |
 | 12e | Keyboard shortcuts limited — no card selection, no maximize | Power users forced to mouse | `Ctrl+1..9` battlefield card selection (existing `hotkeyDigit` infra), `Ctrl+Space` maximize/restore, `F2` toggle digit badges | open |
@@ -461,7 +461,7 @@ Java classes should include a `/* REFORGE COMMANDER EXTENSION` header comment.
 | P3 | 11h — CR 720 shortcut proposal protocol (#52) | 1-2 weeks | Paper-grade loop declaration with accept/lower/interrupt/object |
 | P3 | 11i — Slow-play timer + AFK draw (#53) | 3-4 days | Auto-pass on timeout; 3 timeouts → draw |
 | P2 | 12a — Field layout presets + player-count arrangements (#88) | 1-2 days | Fixes unplaced battlefields at 3+ players — **DONE: presets + canonical layouts shipped** |
-| P1 | 12b — Smooth docking (thick hit-zones, snap, Esc-cancel, maximize) (#88) | 2-3 days | Clunky resize is top playtester complaint; upstream classes now editable |
+| P1 | 12b — Smooth docking (thick hit-zones, snap, Esc-cancel, maximize) (#88) | 2-3 days | Clunky resize is top playtester complaint — **DONE: shrink + Cancel + maximize shipped** |
 | P1 | 12c — Card animations (play splash, spawn/death fade, glow pulse) (#88) | 2-3 days | Board state changes hard to follow; Animation framework already exists |
 | P1 | 12d — Hover zoom + board-aware positioning (#88) | 1-2 days | Players don't read cards; 500ms hover delay → zoom overlay |
 | P2 | 12e — Keyboard shortcuts expansion (Ctrl+digit, maximize, F2) (#88) | 1-2 days | Power users forced to mouse; hotkeyDigit infra unused |
