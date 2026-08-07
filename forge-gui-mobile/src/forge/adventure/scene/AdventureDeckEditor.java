@@ -24,6 +24,7 @@ import forge.deck.*;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gui.FThreads;
+import forge.item.AdventurePaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.*;
@@ -96,7 +97,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             ArchipelagoData apData = ArchipelagoData.getInstance();
             if (apData.getArchipelagoMode() != ArchipelagoMode.disabled) {
                 for (Map.Entry<PaperCard, Integer> card : pool) {
-                    card.getKey().setLocked(!apData.checkCardUnlocked(card.getKey()));
+                    ((AdventurePaperCard)card.getKey()).setLocked(!apData.checkCardUnlocked(card.getKey()));
                 }
             }
             return pool;
