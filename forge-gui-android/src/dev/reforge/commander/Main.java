@@ -803,7 +803,7 @@ public class Main extends AndroidApplication {
                     return true;
                 } else {
                     Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
-                    intent.setData(PublicFileProvider.getUriForFile(getContext(), "dev.reforge.commander.dev.publicfileprovider", new File(filename)));
+                    intent.setData(PublicFileProvider.getUriForFile(getContext(), getPackageName() + ".publicfileprovider", new File(filename)));
                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     startActivity(intent);
                     return true;
