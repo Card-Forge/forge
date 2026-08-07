@@ -226,7 +226,10 @@ public class UntapAi extends SpellAbilityAi {
                 choice = detectPriorityUntapTargets(untapList);
 
                 if (choice == null) {
-                    if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
+                    if ("PoolExtraMana".equals(sa.getParam("AILogic"))) {
+                        // untapping was decided on to reach a spell, so untap what makes the mana
+                        choice = ComputerUtilCard.getBestLandAI(CardLists.filter(untapList, CardPredicates.LANDS_PRODUCING_MANA));
+                    } else if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
                         choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
                     } else if (!sa.getPayCosts().hasManaCost() || sa.isTrigger()
                             || "Always".equals(sa.getParam("AILogic"))) {
@@ -433,50 +436,82 @@ public class UntapAi extends SpellAbilityAi {
         });
 
         // TODO: currently limited to Main 2, somehow improve to let the AI use this SA at other time?
-        if (ph.is(PhaseType.MAIN2, ai)) {
-            for (Card c : playable) {
-                for (SpellAbility ab : c.getBasicSpells()) {
-                    if (!ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
-                        // TODO: Currently limited to predicting something that can be paid with any color,
-                        // can ideally be improved to work by color.
-                        ManaCostBeingPaid reduced = new ManaCostBeingPaid(ab.getPayCosts().getCostMana().getManaCostFor(ab));
-                        reduced.decreaseShard(ManaCostShard.GENERIC, untappingCards.size());
-                        if (ComputerUtilMana.canPayManaCost(reduced, ab, ai, false)) {
-                            CardCollection manaLandsTapped = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                                    CardPredicates.LANDS_PRODUCING_MANA, CardPredicates.TAPPED);
-                            manaLandsTapped = CardLists.getValidCards(manaLandsTapped, sa.getParam("ValidTgts"), ai, source, null);
+        if (ph.is(PhaseType.MAIN2, ai) && untapReachesASpell(ai, playable, untappingCards.size())) {
+            CardCollection manaLandsTapped = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                    CardPredicates.LANDS_PRODUCING_MANA, CardPredicates.TAPPED);
+            manaLandsTapped = CardLists.getValidCards(manaLandsTapped, sa.getParam("ValidTgts"), ai, source, null);
 
-                            if (!manaLandsTapped.isEmpty()) {
-                                // already have a tapped land, so agree to proceed with untapping it
-                                return true;
-                            }
+            if (!manaLandsTapped.isEmpty()) {
+                // already have a tapped land, so agree to proceed with untapping it
+                return true;
+            }
 
-                            // pool one additional mana by tapping a land to try to ramp to something
-                            CardCollection manaLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                                    CardPredicates.LANDS_PRODUCING_MANA, CardPredicates.CAN_TAP);
-                            manaLands = CardLists.getValidCards(manaLands, sa.getParam("ValidTgts"), ai, source, null);
+            // pool one additional mana by tapping a land to try to ramp to something
+            CardCollection manaLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                    CardPredicates.LANDS_PRODUCING_MANA, CardPredicates.CAN_TAP);
+            manaLands = CardLists.getValidCards(manaLands, sa.getParam("ValidTgts"), ai, source, null);
 
-                            if (manaLands.isEmpty()) {
-                                // nothing to untap
-                                return false;
-                            }
+            if (manaLands.isEmpty()) {
+                // nothing to untap
+                return false;
+            }
 
-                            Card landToPool = manaLands.getFirst();
-                            SpellAbility manaAb = landToPool.getManaAbilities().getFirst();
+            Card landToPool = manaLands.getFirst();
+            SpellAbility manaAb = landToPool.getManaAbilities().getFirst();
 
-                            ComputerUtil.playNoStack(ai, manaAb, game, false);
+            ComputerUtil.playNoStack(ai, manaAb, game, false);
 
-                            return true;
-                        }
-                    }
+            return true;
+        }
+
+        // past declare blockers during the opponent's turn and right before our turn, untapping is
+        // worth it for something we can hold up, e.g. a removal spell or burn spell we can't pay for
+        // yet - the lands untap on their own next turn, so it buys nothing beyond that
+        return ph.getNextTurn() == ai
+                && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))
+                && holdsSomethingToCast(ai, inHand);
+    }
+
+    /**
+     * True when we are holding anything we could cast at this moment's timing - on an opponent's
+     * turn, that means something we can hold up mana for. Deliberately does not ask whether we can
+     * pay for it: this runs on every step past declare blockers, so it stays off the mana solver.
+     */
+    private static boolean holdsSomethingToCast(final Player ai, final Iterable<Card> hand) {
+        for (Card c : hand) {
+            for (SpellAbility ab : c.getBasicSpells()) {
+                ab.setActivatingPlayer(ai);
+                if (ab.getPayCosts().getCostMana() != null && ab.canCastTiming(ai)) {
+                    return true;
                 }
             }
         }
+        return false;
+    }
 
-        // no harm in doing this past declare blockers during the opponent's turn and right before our turn,
-        // maybe we'll serendipitously untap into something like a removal spell or burn spell that'll help
-        return ph.getNextTurn() == ai
-                && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS));
+    /**
+     * True when {@code extraGeneric} more mana would reach a castable spell in {@code hand} that we
+     * cannot pay for right now, i.e. reusing that many tapped sources closes the gap on something.
+     * Timing is asked of the spell itself, so on an opponent's turn only what we can hold up counts.
+     */
+    private static boolean untapReachesASpell(final Player ai, final Iterable<Card> hand, final int extraGeneric) {
+        for (Card c : hand) {
+            for (SpellAbility ab : c.getBasicSpells()) {
+                ab.setActivatingPlayer(ai);
+                if (ab.getPayCosts().getCostMana() == null || !ab.canCastTiming(ai)
+                        || ComputerUtilMana.canPayManaCost(ab, ai, 0, false)) {
+                    continue;
+                }
+                // TODO: Currently limited to predicting something that can be paid with any color,
+                // can ideally be improved to work by color.
+                ManaCostBeingPaid reduced = new ManaCostBeingPaid(ab.getPayCosts().getCostMana().getManaCostFor(ab));
+                reduced.decreaseShard(ManaCostShard.GENERIC, extraGeneric);
+                if (ComputerUtilMana.canPayManaCost(reduced, ab, ai, false)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
