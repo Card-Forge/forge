@@ -443,7 +443,19 @@ public class Main extends IOSApplication.Delegate {
 
         @Override
         public String getVersionString() {
-            return "0.0";
+            // RoboVM AOT-links everything into one native binary with no runtime JAR manifest, so
+            // BuildInfo.getVersionString() (manifest Implementation-Version) resolves to "GIT" on iOS.
+            // Read the app bundle's own version instead — the iOS analog of Android's PackageManager
+            // versionName. CFBundleShortVersionString is the marketing version; CFBundleVersion is the
+            // (monotonic, per-upload) App Store build number.
+            try {
+                NSBundle b = NSBundle.getMainBundle();
+                String version = b.getInfoDictionaryObject("CFBundleShortVersionString").toString();
+                String build = b.getInfoDictionaryObject("CFBundleVersion").toString();
+                return version + " (" + build + ")";
+            } catch (Exception e) {
+                return "0.0";
+            }
         }
 
         @Override
