@@ -213,45 +213,33 @@ public class ComputerUtilCard {
         return cardStream.max(Comparator.comparing(Card::getCMC)).orElse(null);
     }
 
-    /**
-     * Score per pip of progress, and per first source of a color. Matches the scale the land
-     * scoring in AiController already uses, so {@link #getColorFixingValue} can be added to it.
-     */
+    /** Score per source fixed, on the scale AiController's land scoring already uses. */
     public static final int COLOR_FIXING_WEIGHT = 50;
 
-    /**
-     * How much closer these extra sources get the player to paying for what they are holding,
-     * counted in pips across their hand and the abilities on their permanents. Counting pips
-     * rather than whole cards means a second source of a color is credited for the double-pip
-     * costs a single source cannot pay, and a first source is credited for the progress it makes.
-     */
-    private static int fixingNeed(final Player benefits, final int[] have, final int[] with) {
+    /** How many missing sources these extra ones supply across the player's hand and board. */
+    private static int countSourcesFixed(final Player benefits, final int[] have, final int[] with) {
         if (Arrays.equals(have, with)) {
             return 0;
         }
 
-        int progress = 0;
+        int fixed = 0;
         for (Card c : benefits.getCardsIn(ZoneType.Hand)) {
-            progress += progressOn(c.getManaCost(), have, with);
+            fixed += countSourcesFixed(c.getManaCost(), have, with);
         }
         for (Card c : benefits.getCardsIn(ZoneType.Battlefield)) {
-            // only what can actually be activated from here: getAllSpellAbilities would also hand
-            // back the permanent's own casting cost, and the far face of an MDFC or Adventure
+            // only what can be activated from here, not the permanent's own casting cost
             for (SpellAbility ab : c.getNonManaAbilities()) {
                 if (!ab.isActivatedAbility() || ab.getPayCosts() == null
                         || ab.getPayCosts().getCostMana() == null) {
                     continue;
                 }
-                progress += progressOn(ab.getPayCosts().getCostMana().getMana(), have, with);
+                fixed += countSourcesFixed(ab.getPayCosts().getCostMana().getMana(), have, with);
             }
         }
-        return progress;
+        return fixed;
     }
 
-    /**
-     * What this land is worth to the player's mana overall: what it makes payable, plus the depth
-     * it adds in colors they are thin on. The single number every caller ranks lands by.
-     */
+    /** What this land is worth to the player's mana: what it makes payable, plus spare depth. */
     public static int getColorFixingValue(final Player benefits, final Card candidate) {
         if (benefits == null || candidate == null) {
             return 0;
@@ -260,15 +248,11 @@ public class ComputerUtilCard {
         final int[] have = ComputerUtilCost.getManaSourceCounts(benefits);
         final int[] with = have.clone();
         ComputerUtilCost.addManaSources(candidate, with);
-        return COLOR_FIXING_WEIGHT * fixingNeed(benefits, have, with) + depthValue(have, with);
+        return COLOR_FIXING_WEIGHT * countSourcesFixed(benefits, have, with) + evaluateSpareSources(have, with);
     }
 
-    /**
-     * Depth this land adds beyond anything it unblocks outright. A second source of a color is
-     * worth having even when nothing needs it yet - it is what lets two spells of that color be
-     * cast in a turn - so this falls off as sources accumulate.
-     */
-    private static int depthValue(final int[] have, final int[] with) {
+    /** Value of a spare source of a color nothing needs yet, falling off as sources accumulate. */
+    private static int evaluateSpareSources(final int[] have, final int[] with) {
         int value = 0;
         for (int i = 0; i < have.length; i++) {
             if (with[i] > have[i]) {
@@ -279,12 +263,8 @@ public class ComputerUtilCard {
         return value;
     }
 
-    /**
-     * How many more sources of a color this cost still wants. Zero once it is castable; two for a
-     * {@code BB} cost off a board with no black, so that a first black source is credited with the
-     * progress it makes rather than only the source that finally completes it.
-     */
-    private static int shortfall(final ManaCost cost, final int[] counts) {
+    /** How many more colored sources this cost still wants; zero once it is castable. */
+    private static int countMissingSources(final ManaCost cost, final int[] counts) {
         if (cost == null || cost.isNoCost()) {
             return 0;
         }
@@ -313,9 +293,9 @@ public class ComputerUtilCard {
         return missing;
     }
 
-    /** pips of progress this land makes towards a cost, never negative */
-    private static int progressOn(final ManaCost cost, final int[] have, final int[] with) {
-        return Math.max(0, shortfall(cost, have) - shortfall(cost, with));
+    /** How many of one cost's missing sources these extra ones supply, never negative. */
+    private static int countSourcesFixed(final ManaCost cost, final int[] have, final int[] with) {
+        return Math.max(0, countMissingSources(cost, have) - countMissingSources(cost, with));
     }
 
     /**
