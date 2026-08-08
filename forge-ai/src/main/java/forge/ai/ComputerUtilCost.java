@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import forge.card.MagicColor;
 import forge.game.GameObject;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -647,14 +648,39 @@ public class ComputerUtilCost {
         }
 
         for (Card c : cardsToConsider) {
-            for (SpellAbility sa : c.getManaAbilities()) {
-                if (sa.getManaPart() != null) {
-                    colorsAvailable.add(sa.getManaPart().getOrigProduced());
-                }
+            // the raw Produced$ is a script string, and every caller runs this through
+            // ColorSet.fromNames, which drops anything that is not a colour name - so an "Any"
+            // source used to contribute nothing at all
+            colorsAvailable.addAll(c.getProducibleColors());
+            if (colorsAvailable.size() == MagicColor.Constant.COLORS_AND_COLORLESS.size()) {
+                break; // nothing left for a further source to add
             }
         }
 
         return colorsAvailable;
+    }
+
+    /**
+     * How many sources of each color the player's board could produce, indexed by
+     * {@link MagicColor.Color#ordinal()}. Counted per card rather than per ability, since a land
+     * with two mana abilities still only taps once.
+     */
+    public static int[] getManaSourceCounts(Player ai) {
+        int[] counts = new int[MagicColor.Color.values().length];
+        for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            addManaSources(c, counts);
+        }
+        return counts;
+    }
+
+    /** Adds what one card could produce to counts from {@link #getManaSourceCounts}. */
+    public static void addManaSources(Card c, int[] counts) {
+        final Set<String> producible = c.getProducibleColors();
+        for (MagicColor.Color color : MagicColor.Color.values()) {
+            if (producible.contains(color.getName())) {
+                counts[color.ordinal()] += 1;
+            }
+        }
     }
 
     public static boolean isFreeCastAllowedByPermanent(Player player, String altCost) {
