@@ -328,6 +328,7 @@ Varmint:Varmints
 Vedalken:Vedalkens
 Villain:Villains
 Volver:Volvers
+Vorta:Vorta
 Vulcan:Vulcans
 Wall:Walls
 Warlock:Warlocks
