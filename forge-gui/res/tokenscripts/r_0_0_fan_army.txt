@@ -1,0 +1,6 @@
+Name:Fan Army Token
+ManaCost:no cost
+Colors:red
+Types:Creature Fan Army
+PT:0/0
+Oracle:

@@ -129,7 +129,7 @@ public enum CounterEnumType implements CounterType {
 
     DOOM("DOOM", 255, 104, 118, CounterAiCategory.Negative),
 
-    DREAD ("DREAD", 205, 170, 240, CounterAiCategory.Positive),
+    DREAD ("DREAD", 205, 170, 240, CounterAiCategory.Neutral),
 
     DREAM("DREAM", 190, 189, 255, CounterAiCategory.Positive),
 
@@ -194,6 +194,8 @@ public enum CounterEnumType implements CounterType {
     GEM("GEM", 255, 99, 251, CounterAiCategory.Positive),
 
     GHOSTFORM("GHSTF", 223, 0, 254, CounterAiCategory.Neutral),
+
+    GLASS("GLASS", 219, 225, 227, CounterAiCategory.Negative),
 
     GLYPH("GLYPH", 184, 202, 199, CounterAiCategory.Positive),
 
@@ -407,6 +409,8 @@ public enum CounterEnumType implements CounterType {
 
     SHRED("SHRED", 255, 165, 152, CounterAiCategory.Positive),
 
+    SHY("SHY", 232, 178, 199, CounterAiCategory.Neutral),
+
     SILVER("SILVER", 192, 192, 192, CounterAiCategory.Positive),
 
     SKEWER("SKEWER", 202, 192, 156, CounterAiCategory.Positive),
@@ -492,6 +496,8 @@ public enum CounterEnumType implements CounterType {
     ENERGY("ENRGY", CounterAiCategory.Positive),
 
     EXPERIENCE("EXP", CounterAiCategory.Positive),
+
+    POINT("POINT", CounterAiCategory.Positive),
 
     POISON("POISN", CounterAiCategory.Negative),
 

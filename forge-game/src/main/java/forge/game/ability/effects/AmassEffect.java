@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
@@ -34,13 +35,14 @@ public class AmassEffect extends TokenEffectBase {
         final Card card = sa.getHostCard();
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Num", "1"), sa);
         final String type = sa.getParam("Type");
+        final String color = sa.getParamOrDefault("Color", "black");
 
         sb.append(CardType.getPluralType(type)).append(" ").append(amount).append(" (Put ");
 
         sb.append(Lang.nounWithNumeral(amount, "+1/+1 counter"));
 
         // TODO fix reminder after CR
-        sb.append("on an Army you control. If you don't control one, create a 0/0 black " + type + " Army creature token first.)");
+        sb.append("on an Army you control. If you don't control one, create a 0/0 " + color + " " + type + " Army creature token first.)");
 
         return sb.toString();
     }
@@ -52,13 +54,16 @@ public class AmassEffect extends TokenEffectBase {
         final Player amasser = getTargetPlayers(sa).get(0);
         final int amount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("Num", "1"), sa);
         final String type = sa.getParam("Type");
+        final String color = sa.getParamOrDefault("Color", "black");
 
         // create army token if needed
         if (!amasser.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.isType("Army"))) {
             CardZoneTable triggerList = new CardZoneTable();
             MutableBoolean combatChanged = new MutableBoolean(false);
 
-            StringBuilder sb = new StringBuilder("b_0_0_");
+            // Color defaults to black per CR 701.47a; Color$ lets a card override it (e.g. a red Army token)
+            StringBuilder sb = new StringBuilder(ColorSet.fromNames(color.split(",")).toString().toLowerCase());
+            sb.append("_0_0_");
             sb.append(sa.getOriginalParam("Type").toLowerCase()).append("_army");
 
             final Card result = TokenInfo.getProtoType(sb.toString(), sa, amasser, false);

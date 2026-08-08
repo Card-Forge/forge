@@ -1,0 +1,13 @@
+Name:No Way Out
+ManaCost:no cost
+Types:Plane Duskmourn
+K:etbCounter:DREAD:3:no Condition:CARDNAME enters with three dread counters.
+R:Event$ Planeswalk | IsPresent$ Card.Self+counters_GE1_DREAD | ReplaceWith$ Chaos | Description$ You can never leave — If a player would planeswalk while CARDNAME has dread counters, chaos ensues instead.
+SVar:Chaos:DB$ ChaosEnsues
+T:Mode$ PlanarDice | TriggerZones$ Command | Execute$ TrigManifest | TriggerDescription$ Whenever you roll the planar die, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigManifest:DB$ ManifestDread
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigRepeat | TriggerDescription$ Whenever Chaos ensues, each player may turn a face-down permanent they control face up. Remove a dread counter from CARDNAME.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBFlip | SubAbility$ DBRemoveCounter
+SVar:DBFlip:DB$ SetState | Mode$ TurnFaceUp | ValidTgts$ Permanent.faceDown+RememberedPlayerCtrl | TargetMin$ 0 | TargetMax$ 1
+SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ DREAD | CounterNum$ 1
+Oracle:No Way Out enters with three dread counters.\nYou can never leave — If a player would planeswalk while this plane has dread counters, chaos ensues instead.\nWhenever you roll the planar die, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever Chaos ensures each player may turn a face-down permanent they control face-up. Remove a dread counter from this plane.

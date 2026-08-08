@@ -1,0 +1,11 @@
+Name:Shy Town
+ManaCost:no cost
+Types:Plane Chicago
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ Whenever you planeswalk here and whenever chaos ensues, for each opponent, put a shy counter on up to one target creature they control. That creature becomes a Coward in addition to its other types.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigRepeat | TriggerDescription$ Whenever you planeswalk here and whenever chaos ensues, for each opponent, put a shy counter on up to one target creature they control. That creature becomes a Coward in addition to its other types.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | ValidTgts$ Creature.RememberedPlayerCtrl | TargetMin$ 0 | TargetMax$ 1 | CounterType$ SHY | CounterNum$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Coward | Duration$ Permanent
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ DBWarrior | TriggerDescription$ At the beginning of your upkeep, create a 2/2 red Warrior creature token with haste and "Cowards can't block Warriors."
+SVar:DBWarrior:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_2_warrior_haste_coward | TokenOwner$ You
+Oracle:Whenever you planeswalk here and whenever chaos ensues, for each opponent, put a shy counter on up to one target creature they control. That creature becomes a Coward in addition to its other types.\nAt the beginning of your upkeep, create a 2/2 red Warrior creature token with haste and "Cowards can't block Warriors."

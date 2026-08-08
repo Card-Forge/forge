@@ -1,0 +1,19 @@
+Name:Asmoranomardicadaistinaculdacar's Kitchen
+ManaCost:no cost
+Types:Plane Hell
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever you planeswalk here and whenever a creature enters under your control, create a Food token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Secondary$ True | Execute$ TrigToken | TriggerDescription$ Whenever you planeswalk here and whenever a creature enters under your control, create a Food token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, target opponent loses that much life.
+SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X
+SVar:X:TriggerCount$LifeAmount
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever Chaos ensues, you may sacrifice any number of artifacts or creatures. Draw that many cards and lose that much life.
+SVar:RolledChaos:DB$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Artifact,Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDraw
+SVar:SacX:Count$Valid Artifact.YouCtrl,Creature.YouCtrl
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ DrawX | SubAbility$ DBLoseLife2
+SVar:DrawX:Remembered$Amount
+SVar:DBLoseLife2:DB$ LoseLife | Defined$ You | LifeAmount$ DrawX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|Sacrifice|Draw|LifeGain & Type$Food
+DeckHints:Type$Food
+Oracle:Whenever you planeswalk here and whenever a creature enters under your control, create a Food token.\nWhenever you gain life, target opponent loses that much life.\nWhenever Chaos ensues, you may sacrifice any number of artifacts or creatures. Draw that many cards and lose that much life.

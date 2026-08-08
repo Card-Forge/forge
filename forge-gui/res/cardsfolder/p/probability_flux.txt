@@ -1,0 +1,10 @@
+Name:Probability Flux
+ManaCost:no cost
+Types:Phenomenon
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ Until your next turn, if a player would roll one or more dice, instead they roll that many dice plus one and ignore one. (Then planeswalk away from this phenomenon.)
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ RepRollDice | Duration$ UntilYourNextTurn | SubAbility$ PWAway
+SVar:RepRollDice:Event$ RollDice | ValidPlayer$ Player | ReplaceWith$ PlusRoll | Description$ If a player would roll one or more dice, instead they roll that many dice plus one and ignore one.
+SVar:PlusRoll:DB$ ReplaceEffect | VarName$ Number | VarValue$ ReplaceCount$Number/Plus.1 | SubAbility$ IgnoreOne
+SVar:IgnoreOne:DB$ ReplaceEffect | VarName$ Ignore | VarValue$ ReplaceCount$Ignore/Plus.1
+SVar:PWAway:DB$ Planeswalk
+Oracle:Until your next turn, if a player would roll one or more dice, instead they roll that many dice plus one and ignore one.
