@@ -309,6 +309,7 @@ Survivor:Survivors
 Tentacle:Tentacles
 Tetravite:Tetravites
 Thalakos:Thalakoses
+Tholian:Tholians
 Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
