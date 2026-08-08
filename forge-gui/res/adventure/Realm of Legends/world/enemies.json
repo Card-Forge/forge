@@ -63377,10 +63377,10 @@
     "spawnRate": 0
   },
   {
-    "name": "Autumn Willow",
+    "name": "Kaysa",
     "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
-      "decks/legends/autumn_willow.dck"
+      "decks/legends/kaysa.dck"
     ],
     "ai": "",
     "speed": 45,

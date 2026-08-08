@@ -487,6 +487,8 @@ public enum CounterEnumType implements CounterType {
 
     // Player Counters
 
+    CONTRACT("CTRCT", CounterAiCategory.Neutral),
+
     ENERGY("ENRGY", CounterAiCategory.Positive),
 
     EXPERIENCE("EXP", CounterAiCategory.Positive),

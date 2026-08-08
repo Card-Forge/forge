@@ -107,3 +107,5 @@ ScryfallCode=PMEI
 2026-16 R Captain America, Living Legend @Miguel Mercado
 2026-17 R Sazh's Chocobo @Domenico Cava
 2026-18 R Dáin Ironfoot @Denman Rooke
+2026-19 R Avengers Tower @Arthur Yuan
+2026-20 R Bone Shredder @Ron Spencer
