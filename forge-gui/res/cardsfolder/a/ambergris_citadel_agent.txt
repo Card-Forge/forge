@@ -53,7 +53,7 @@ SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigPump | TriggerDescri
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -X | NumDef$ -X | IsCurse$ True
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
 SVar:HasAttackEffect:TRUE
-Oracle:Haste\nWhenever Ambergris, Agent of Law Tyranny attacks, you may discard your hand and draw two cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the number of cards you've discarded this turn.
+Oracle:Haste\nWhenever Ambergris, Agent of Tyranny attacks, you may discard your hand and draw two cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the number of cards you've discarded this turn.
 
 SPECIALIZE:RED
 
@@ -66,7 +66,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Bat
 SVar:TrigDamage:AB$ DamageAll | Cost$ Discard<1/Hand> Draw<2/You> | NumDmg$ X | ValidPlayers$ Opponent
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
 SVar:HasAttackEffect:TRUE
-Oracle:Haste\nWhenever Ambergris, Agent of Destruction attacks, you may discard your hand and draw two cards. If you do, NICKNAME deals X damage to each opponent, where X is the number of cards you've discarded this turn.
+Oracle:Haste\nWhenever Ambergris, Agent of Destruction attacks, you may discard your hand and draw two cards. If you do, Ambergris deals X damage to each opponent, where X is the number of cards you've discarded this turn.
 
 SPECIALIZE:GREEN
 

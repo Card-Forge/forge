@@ -1,7 +1,7 @@
 Name:Astral Cornucopia
 ManaCost:X X X
 Types:Artifact
-K:etbCounter:CHARGE:X
+K:etbCounter:CHARGE:X:no Condition:This artifact enters with X charge counters on it.
 SVar:X:Count$xPaid
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ Y | SpellDescription$ Choose a color. Add one mana of that color for each charge counter on this artifact.
 SVar:Y:Count$CardCounters.CHARGE

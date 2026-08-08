@@ -2,9 +2,9 @@ Name:Ascendant Packleader
 ManaCost:G
 Types:Creature Wolf
 PT:2/1
-K:etbCounter:P1P1:1:IsPresent$ Permanent.YouCtrl+cmcGE4:CARDNAME enters with a +1/+1 counter on it if you control a permanent with mana value 4 or greater.
-T:Mode$ SpellCast | ValidCard$ Card.cmcGE4 | ValidActivatingPlayer$ You | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 4 or greater, put a +1/+1 counter on CARDNAME.
+K:etbCounter:P1P1:1:IsPresent$ Permanent.YouCtrl+cmcGE4:This creature enters with a +1/+1 counter on it if you control a permanent with mana value 4 or greater.
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE4 | ValidActivatingPlayer$ You | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 4 or greater, put a +1/+1 counter on this creature.
 SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Permanent.cmcGE4
 DeckHas:Ability$Counters
-Oracle:Ascendant Packleader enters with a +1/+1 counter on it if you control a permanent with mana value 4 or greater.\nWhenever you cast a spell with mana value 4 or greater, put a +1/+1 counter on Ascendant Packleader.
+Oracle:This creature enters with a +1/+1 counter on it if you control a permanent with mana value 4 or greater.\nWhenever you cast a spell with mana value 4 or greater, put a +1/+1 counter on this creature.

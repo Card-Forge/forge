@@ -3,8 +3,8 @@ ManaCost:8
 Types:Artifact Creature Golem
 PT:0/0
 K:Modular:6
-T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on each creature with modular you control.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on each creature you control with modular.
 SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+withModular | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 DeckNeeds:Keyword$Modular
-Oracle:At the beginning of your upkeep, put a +1/+1 counter on each creature with modular you control.\nModular 6 (This creature enters with six +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
+Oracle:At the beginning of your upkeep, put a +1/+1 counter on each creature you control with modular.\nModular 6 (This creature enters with six +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
