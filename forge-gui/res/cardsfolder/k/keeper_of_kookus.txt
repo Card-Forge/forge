@@ -2,6 +2,6 @@ Name:Keeper of Kookus
 ManaCost:R
 Types:Creature Goblin
 PT:1/1
-A:AB$ Protection | Cost$ R | Defined$ Self | Gains$ red | SpellDescription$ CARDNAME gains protection from red until end of turn.
+A:AB$ Pump | Cost$ R | Defined$ Self | KW$ Protection from red | SpellDescription$ CARDNAME gains protection from red until end of turn.
 DeckHints:Name$Kookus
 Oracle:{R}: Keeper of Kookus gains protection from red until end of turn.

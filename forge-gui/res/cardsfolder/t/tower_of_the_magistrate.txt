@@ -2,5 +2,5 @@ Name:Tower of the Magistrate
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Protection | Cost$ 1 T | ValidTgts$ Creature | Gains$ Artifact | SpellDescription$ Target creature gains protection from artifacts until end of turn.
+A:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature | KW$ Protection:Artifact | SpellDescription$ Target creature gains protection from artifacts until end of turn.
 Oracle:{T}: Add {C}.\n{1}, {T}: Target creature gains protection from artifacts until end of turn.

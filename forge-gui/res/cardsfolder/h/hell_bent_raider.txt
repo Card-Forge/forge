@@ -4,6 +4,6 @@ Types:Creature Human Barbarian
 PT:2/2
 K:First Strike
 K:Haste
-A:AB$ Protection | Cost$ Discard<1/Random> | Gains$ white | SpellDescription$ CARDNAME gains protection from white until end of turn.
+A:AB$ Pump | Cost$ Discard<1/Random> | Defined$ Self | KW$ Protection from white | SpellDescription$ CARDNAME gains protection from white until end of turn.
 AI:RemoveDeck:All
 Oracle:First strike, haste\nDiscard a card at random: Hell-Bent Raider gains protection from white until end of turn.

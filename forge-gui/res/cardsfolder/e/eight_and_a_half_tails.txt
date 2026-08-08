@@ -2,7 +2,7 @@ Name:Eight-and-a-Half-Tails
 ManaCost:W W
 Types:Legendary Creature Fox Cleric
 PT:2/2
-A:AB$ Protection | Cost$ 1 W | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Gains$ white | SpellDescription$ Target permanent you control gains protection from white until end of turn.
+A:AB$ Pump | Cost$ 1 W | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | KW$ Protection from white | SpellDescription$ Target permanent you control gains protection from white until end of turn.
 A:AB$ Animate | Cost$ 1 | Colors$ White | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | SpellDescription$ Target spell or permanent becomes white until end of turn.
 AI:RemoveDeck:All
 DeckHints:Name$Pious Kitsune
