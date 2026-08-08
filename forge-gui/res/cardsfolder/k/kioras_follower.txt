@@ -2,6 +2,5 @@ Name:Kiora's Follower
 ManaCost:G U
 Types:Creature Merfolk
 PT:2/2
-A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent. | SpellDescription$ Untap another target permanent.
-AI:RemoveDeck:All
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent. | AILogic$ PoolExtraMana | SpellDescription$ Untap another target permanent.
 Oracle:{T}: Untap another target permanent.
