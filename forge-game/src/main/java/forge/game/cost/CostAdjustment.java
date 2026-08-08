@@ -105,6 +105,194 @@ public class CostAdjustment {
         return result;
     }
 
+    /**
+     * Previews the controller-free, deterministic subset of this class's cost-adjustment rules.
+     *
+     * <p>The preview uses copies of both the {@link Cost} and {@link ManaCostBeingPaid}. It never
+     * invokes a {@link forge.game.player.PlayerController}, pays a cost, or changes a game object.
+     * A mechanic which would require a payment or ordering choice is represented explicitly in the
+     * returned result.</p>
+     */
+    public static CostAdjustmentPreview preview(final Cost cost, final SpellAbility sa, final Player payer,
+            final boolean effect) {
+        return preview(cost, sa, payer, effect, null, null);
+    }
+
+    /**
+     * Previews a cost after an already-determined X value has been applied to the local mana-cost copy.
+     */
+    public static CostAdjustmentPreview preview(final Cost cost, final SpellAbility sa, final Player payer,
+            final boolean effect, final Integer xManaCostPaid, final String xColor) {
+        if (cost == null) {
+            return CostAdjustmentPreview.adjusted(new Cost(ManaCost.ZERO, false), new ManaCostBeingPaid(ManaCost.ZERO));
+        }
+        if (sa.isSpell() && sa.isCastFaceDown() && !sa.getHostCard().isFaceDown()) {
+            return CostAdjustmentPreview.unsupported(CostAdjustmentPreview.Reason.FACE_DOWN_STATE);
+        }
+
+        final Cost adjustedCost = cost.copy();
+        final Card host = sa.getHostCard();
+        if (!effect && sa.isSpell() && host.isCommander() && host.getCastFrom() != null
+                && ZoneType.Command.equals(host.getCastFrom().getZoneType())) {
+            final int tax = payer.getCommanderCast(host) * 2;
+            if (tax > 0) {
+                adjustedCost.add(new Cost(ManaCost.get(tax), false));
+            }
+        }
+
+        final CardCollection adjustmentCards = getAdjustmentCards(payer.getGame(), host);
+        final List<StaticAbility> raiseAbilities = Lists.newArrayList();
+        for (final Card card : adjustmentCards) {
+            for (final StaticAbility staticAbility : card.getStaticAbilities()) {
+                if (staticAbility.checkMode(StaticAbilityMode.RaiseCost) && checkRequirement(sa, staticAbility)) {
+                    raiseAbilities.add(staticAbility);
+                }
+            }
+        }
+        if (sa.hasParam("RaiseCost") || raiseAbilities.size() > 1) {
+            return CostAdjustmentPreview.unsupported(CostAdjustmentPreview.Reason.DYNAMIC_COST);
+        }
+        if (!raiseAbilities.isEmpty()) {
+            final StaticAbility raise = raiseAbilities.get(0);
+            if (!isFixedRaiseCost(raise)) {
+                return CostAdjustmentPreview.unsupported(CostAdjustmentPreview.Reason.DYNAMIC_COST);
+            }
+            applyRaiseCostAbility(adjustedCost, sa, raise);
+        }
+
+        final CostPartMana manaPart = adjustedCost.getCostMana();
+        if (manaPart == null) {
+            return CostAdjustmentPreview.adjusted(adjustedCost, new ManaCostBeingPaid(ManaCost.ZERO));
+        }
+        final ManaCostBeingPaid adjustedMana = new ManaCostBeingPaid(manaPart.getManaCostFor(sa));
+        if (xManaCostPaid != null) {
+            adjustedMana.setXManaCostPaid(xManaCostPaid, xColor);
+        }
+        if (effect || sa.isTrigger() || sa.isReplacementAbility()) {
+            return CostAdjustmentPreview.adjusted(adjustedCost, adjustedMana);
+        }
+        if (manaPart.getAmountOfX() > 0 && xManaCostPaid == null && hasManaAdjustment(adjustmentCards, sa)) {
+            return CostAdjustmentPreview.unsupported(CostAdjustmentPreview.Reason.DYNAMIC_COST);
+        }
+        final CostAdjustmentPreview preview = previewManaCost(adjustedCost, adjustedMana, sa, payer, adjustmentCards);
+        return preview;
+    }
+
+    private static CostAdjustmentPreview previewManaCost(final Cost adjustedCost, final ManaCostBeingPaid manaCost,
+            final SpellAbility sa, final Player payer, final CardCollection adjustmentCards) {
+        final Card host = sa.getHostCard();
+        if (sa.hasParam("ReduceCost") || sa.isPowerUp() || !sa.getPipsToReduce().isEmpty()) {
+            return CostAdjustmentPreview.unsupported(CostAdjustmentPreview.Reason.DYNAMIC_COST);
+        }
+        if (sa.isSpell()) {
+            if (sa.isOffering()) {
+                return CostAdjustmentPreview.choiceRequired(CostAdjustmentPreview.Reason.OFFERING);
+            }
+            if (sa.isEmerge()) {
+                return CostAdjustmentPreview.choiceRequired(CostAdjustmentPreview.Reason.EMERGE);
+            }
+            if (host.hasKeyword(Keyword.ASSIST)) {
+                return CostAdjustmentPreview.choiceRequired(CostAdjustmentPreview.Reason.ASSIST);
+            }
+            if (host.hasKeyword(Keyword.DELVE)) {
+                return CostAdjustmentPreview.choiceRequired(CostAdjustmentPreview.Reason.DELVE);
+            }
+            if (host.hasKeyword(Keyword.CONVOKE)) {
+                return CostAdjustmentPreview.choiceRequired(CostAdjustmentPreview.Reason.CONVOKE);
+            }
+            if (host.hasKeyword(Keyword.IMPROVISE)) {
+                return CostAdjustmentPreview.choiceRequired(CostAdjustmentPreview.Reason.IMPROVISE);
+            }
+        }
+        if (sa.hasParam("TapCreaturesForMana")) {
+            return CostAdjustmentPreview.choiceRequired(CostAdjustmentPreview.Reason.TAP_CREATURES_FOR_MANA);
+        }
+        if (sa.getMaxWaterbend() != null && sa.getMaxWaterbend() > 0) {
+            return CostAdjustmentPreview.choiceRequired(CostAdjustmentPreview.Reason.WATERBEND);
+        }
+
+        final List<StaticAbility> reduceAbilities = Lists.newArrayList();
+        final List<StaticAbility> setAbilities = Lists.newArrayList();
+        for (final Card card : adjustmentCards) {
+            for (final StaticAbility staticAbility : card.getStaticAbilities()) {
+                if (staticAbility.checkMode(StaticAbilityMode.ReduceCost) && checkRequirement(sa, staticAbility)) {
+                    reduceAbilities.add(staticAbility);
+                } else if (staticAbility.checkMode(StaticAbilityMode.SetCost) && checkRequirement(sa, staticAbility)) {
+                    setAbilities.add(staticAbility);
+                }
+            }
+        }
+        if (reduceAbilities.size() > 1) {
+            return CostAdjustmentPreview.choiceRequired(CostAdjustmentPreview.Reason.REDUCTION_ORDER);
+        }
+        if (setAbilities.size() > 1) {
+            return CostAdjustmentPreview.unsupported(CostAdjustmentPreview.Reason.DYNAMIC_COST);
+        }
+        if (!reduceAbilities.isEmpty()) {
+            final StaticAbility reduction = reduceAbilities.get(0);
+            if (reduction.hasParam("UpTo")) {
+                return CostAdjustmentPreview.choiceRequired(CostAdjustmentPreview.Reason.VARIABLE_REDUCTION);
+            }
+            if (!isFixedGenericReduction(reduction)) {
+                return CostAdjustmentPreview.unsupported(CostAdjustmentPreview.Reason.DYNAMIC_COST);
+            }
+            manaCost.decreaseGenericMana(applyReduceCostAbility(reduction, sa, manaCost, 0));
+        }
+        if (!setAbilities.isEmpty()) {
+            final StaticAbility setCost = setAbilities.get(0);
+            if (!isFixedSetCost(setCost)) {
+                return CostAdjustmentPreview.unsupported(CostAdjustmentPreview.Reason.DYNAMIC_COST);
+            }
+            applySetCostAbility(setCost, sa, manaCost);
+        }
+        return CostAdjustmentPreview.adjusted(adjustedCost, manaCost);
+    }
+
+    private static boolean hasManaAdjustment(final CardCollection adjustmentCards, final SpellAbility sa) {
+        if (sa.hasParam("ReduceCost") || sa.isPowerUp() || !sa.getPipsToReduce().isEmpty()) {
+            return true;
+        }
+        for (final Card card : adjustmentCards) {
+            for (final StaticAbility staticAbility : card.getStaticAbilities()) {
+                if ((staticAbility.checkMode(StaticAbilityMode.ReduceCost)
+                        || staticAbility.checkMode(StaticAbilityMode.SetCost)) && checkRequirement(sa, staticAbility)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean isFixedRaiseCost(final StaticAbility staticAbility) {
+        if (!staticAbility.hasParam("Amount")) {
+            return true;
+        }
+        return switch (staticAbility.getParam("Amount")) {
+            case "Escalate", "Strive", "Spree", "Tiered" -> false;
+            default -> true;
+        };
+    }
+
+    private static boolean isFixedGenericReduction(final StaticAbility staticAbility) {
+        return staticAbility.hasParam("Amount") && StringUtils.isNumeric(staticAbility.getParam("Amount"))
+                && !staticAbility.hasParam("Color") && !staticAbility.hasParam("Relative")
+                && !staticAbility.hasParam("MinMana");
+    }
+
+    private static boolean isFixedSetCost(final StaticAbility staticAbility) {
+        return staticAbility.hasParam("Amount") && StringUtils.isNumeric(staticAbility.getParam("Amount"));
+    }
+
+    private static CardCollection getAdjustmentCards(final Game game, final Card host) {
+        final CardCollection cards = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
+        cards.addAll(game.getCardsIn(ZoneType.Stack));
+        cards.addAll(game.getCardsIn(ZoneType.Command));
+        if (!cards.contains(host)) {
+            cards.add(host);
+        }
+        return cards;
+    }
+
     private static void applyRaiseCostAbility(final Cost cost, final SpellAbility sa, final StaticAbility st) {
         final Card hostCard = st.getHostCard();
 

@@ -32,6 +32,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostEnlist;
 import forge.game.cost.CostExert;
+import forge.game.decision.PriorityActionDiagnostics;
 import forge.game.event.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -1053,7 +1054,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 }
                 game.stashGameState();
 
+                final PriorityActionDiagnostics.Capture priorityCapture = PriorityActionDiagnostics.capture(pPlayerPriority);
+                final long nativeCallbackStartedAtNanos = PriorityActionDiagnostics.startNativeCallback();
                 chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
+                PriorityActionDiagnostics.recordNativeCallback(priorityCapture, chosenSa, nativeCallbackStartedAtNanos);
 
                 // this needs to come after chosenSa so it sees you conceding on own turn
                 if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {

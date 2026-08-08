@@ -26,6 +26,7 @@ import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.game.spellability.AbilityManaPart;
 import forge.util.IterableUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -483,6 +484,28 @@ public class ManaCostBeingPaid {
         byte outColor = pool.getPossibleColorUses(inColor);
         return tryPayMana(inColor, IterableUtil.filter(unpaidShards.keySet(), predCanBePaid), outColor) != null;
     }
+
+    /**
+     * Returns every distinct unpaid-cost state reachable by applying one mana unit. This is a pure helper:
+     * it copies this cost and does not remove mana from a pool or modify the supplied mana ability.
+     *
+     * <p>The caller owns resource selection. This method intentionally exposes alternatives instead of using
+     * {@link #getShardToPayByPriority(Iterable, byte)}, whose heuristic ordering is unsuitable for an
+     * existential legality query.</p>
+     */
+    public final List<ManaCostBeingPaid> getPaymentVariants(final byte manaColor, final boolean snow,
+            final AbilityManaPart manaAbility, final ManaPool pool) {
+        final List<ManaCostBeingPaid> variants = new ArrayList<>();
+        for (final ManaCostShard shard : unpaidShards.keySet()) {
+            if (!canBePaidWith(shard, manaColor, snow, manaAbility, pool, xManaCostPaidByColor)) {
+                continue;
+            }
+            final ManaCostBeingPaid variant = new ManaCostBeingPaid(this);
+            variant.payManaForShard(manaColor, shard, pool);
+            variants.add(variant);
+        }
+        return variants;
+    }
     
     public final ManaCostShard payManaViaConvoke(final byte color) {
         Predicate<ManaCostShard> predCanBePaid = ms -> !ms.isSnow() && !ms.isColorless() && ms.canBePaidWithManaOfColor(color);
@@ -535,6 +558,25 @@ public class ManaCostBeingPaid {
         return chosenShard;
     }
 
+    private void payManaForShard(final byte colorMask, final ManaCostShard shard, final ManaPool pool) {
+        final ShardCount sc = unpaidShards.get(shard);
+        if (sc != null && sc.xCount > 0) {
+            sc.xCount--;
+            final String color = MagicColor.toShortString(colorMask);
+            if (xManaCostPaidByColor == null) {
+                xManaCostPaidByColor = Maps.newHashMap();
+            }
+            xManaCostPaidByColor.merge(color, 1, Integer::sum);
+        }
+
+        decreaseShard(shard, 1);
+        final byte possibleUses = pool.getPossibleColorUses(colorMask);
+        if (shard.isOr2Generic() && (0 == (shard.getColorMask() & possibleUses))) {
+            increaseGenericMana(1);
+        }
+        sunburstMap |= colorMask;
+    }
+
     private static int getPayPriority(final ManaCostShard bill, final byte paymentColor) {
         if (bill == ManaCostShard.GENERIC) {
             return 2;
@@ -561,25 +603,32 @@ public class ManaCostBeingPaid {
     }
 
     private static boolean canBePaidWith(final ManaCostShard shard, final Mana mana, final ManaPool pool, Map<String, Integer> xManaCostPaidByColor) {
-        if (shard.isSnow() && !mana.isSnow()) {
+        return canBePaidWith(shard, mana.getColor(), mana.isSnow(), mana.getManaAbility(), pool, xManaCostPaidByColor);
+    }
+
+    private static boolean canBePaidWith(final ManaCostShard shard, final byte manaColor, final boolean snow,
+            final AbilityManaPart manaAbility, final ManaPool pool, final Map<String, Integer> xManaCostPaidByColor) {
+        if (shard.isSnow() && !snow) {
             return false;
         }
-        if (mana.isRestricted() && !mana.getManaAbility().meetsManaShardRestrictions(shard, mana.getColor())) {
+
+        final boolean restricted = manaAbility != null
+                && (!manaAbility.getManaRestrictions().isEmpty() || !manaAbility.getExtraManaRestriction().isEmpty());
+        if (restricted && !manaAbility.meetsManaShardRestrictions(shard, manaColor)) {
         	return false;
         }
 
         // snow can be paid for any color
-        if (shard.getColorMask() != 0 && mana.isSnow() && pool.isSnowForColor()) {
+        if (shard.getColorMask() != 0 && snow && pool.isSnowForColor()) {
             return true;
         }
 
         // Check Colored X and see if the color is already used
-        if (shard == ManaCostShard.COLORED_X && !canColoredXShardBePaidByColor(MagicColor.toShortString(mana.getColor()), xManaCostPaidByColor)) {
+        if (shard == ManaCostShard.COLORED_X && !canColoredXShardBePaidByColor(MagicColor.toShortString(manaColor), xManaCostPaidByColor)) {
             return false;
         }
 
-        byte color = mana.getColor();
-        return pool.canPayForShardWithColor(shard, color);
+        return pool.canPayForShardWithColor(shard, manaColor);
     }
 
     public final void addManaCost(final ManaCost extra) {
