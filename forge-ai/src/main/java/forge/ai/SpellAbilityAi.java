@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntity;
+import forge.game.ability.IHasForgeParams;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
 import forge.game.card.CardState;
@@ -36,7 +37,12 @@ import forge.util.collect.FCollectionView;
  * <p>
  * The three main methods are canPlayAI(), chkAIDrawback and doTriggerAINoCost.
  */
-public abstract class SpellAbilityAi {
+public abstract class SpellAbilityAi implements IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AIActivateLast", "AIBidMax", "AICheckSVar", "AILifeThreshold", "AILogic",
+        "AIManaPref", "AIMaxTgtsCount", "AIPhyrexianPayment", "AIRespondsToOwnAbility",
+        "AISVarCompare", "AITgts", "AITgtsStrict", "AIXMax", "UnlessAI",
+    };
 
     public Predicate<Card> CREATURE_OR_TAP_ABILITY = c -> {
         if (c.isCreature()) {
