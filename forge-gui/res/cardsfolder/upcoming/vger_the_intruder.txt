@@ -10,5 +10,4 @@ SVar:DBRevealHand:DB$ RevealHand | ValidTgts$ Opponent | Look$ True | SubAbility
 SVar:DBDraw:DB$ Draw
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | IsCurse$ True | Duration$ UntilYourNextTurn | SpellDescription$ Creatures your opponents control get -1/-0 until your next turn.
 SVar:HasAttackEffect:TRUE
-Oracle:Flying
-Whenever V'Ger enters or attacks, choose one —\n• Look at target opponent's hand, then draw a card.\n• Creatures your opponents control get -1/-0 until your next turn.
+Oracle:Flying\nWhenever V'Ger enters or attacks, choose one —\n• Look at target opponent's hand, then draw a card.\n• Creatures your opponents control get -1/-0 until your next turn.
