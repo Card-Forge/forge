@@ -4,4 +4,4 @@ Types:Creature Phyrexian Bat
 PT:2/2
 K:Flying
 A:AB$ Discard | Cost$ Sac<1/CARDNAME> 4 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
-Oracle:Flying\n{4}{B}, Sacrifice Dementia Bat: Target player discards two cards.
+Oracle:Flying\n{4}{B}, Sacrifice this creature: Target player discards two cards.

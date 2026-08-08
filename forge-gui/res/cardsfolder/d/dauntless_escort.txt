@@ -4,4 +4,4 @@ Types:Creature Rhino Soldier
 PT:3/3
 A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SpellDescription$ Creatures you control gain indestructible until end of turn.
 AI:RemoveDeck:All
-Oracle:Sacrifice Dauntless Escort: Creatures you control gain indestructible until end of turn.
+Oracle:Sacrifice this creature: Creatures you control gain indestructible until end of turn.

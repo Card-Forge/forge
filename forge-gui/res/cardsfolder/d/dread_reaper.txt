@@ -3,6 +3,6 @@ ManaCost:3 B B B
 Types:Creature Horror
 PT:6/5
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters, you lose 5 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When this creature enters, you lose 5 life.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 5
-Oracle:Flying\nWhen Dread Reaper enters, you lose 5 life.
+Oracle:Flying\nWhen this creature enters, you lose 5 life.

@@ -3,8 +3,8 @@ ManaCost:2 W
 Types:Creature Human Soldier
 PT:1/1
 K:First Strike
-T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigBolster | TriggerDescription$ Whenever CARDNAME attacks, bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigBolster | TriggerDescription$ Whenever this creature attacks, bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
 SVar:TrigBolster:DB$ PutCounter | Bolster$ 1
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters
-Oracle:First strike\nWhenever Dromoka Captain attacks, bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
+Oracle:First strike\nWhenever this creature attacks, bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)

@@ -1,8 +1,8 @@
 Name:Darkmoss Bridge
 ManaCost:no cost
 Types:Artifact Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:Indestructible
 A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
-Oracle:Darkmoss Bridge enters tapped.\nIndestructible\n{T}: Add {B} or {G}.
+Oracle:This land enters tapped.\nIndestructible\n{T}: Add {B} or {G}.

@@ -3,5 +3,5 @@ ManaCost:2 R
 Types:Creature Human Nomad
 PT:2/2
 K:Landwalk:Desert
-R:Event$ DamageDone | Prevent$ True | ValidSource$ Desert | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by Deserts.
-Oracle:Desertwalk\nPrevent all damage that would be dealt to Desert Nomads by Deserts.
+R:Event$ DamageDone | Prevent$ True | ValidSource$ Desert | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to this creature by Deserts.
+Oracle:Desertwalk\nPrevent all damage that would be dealt to this creature by Deserts.

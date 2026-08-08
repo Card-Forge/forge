@@ -2,7 +2,7 @@ Name:Dystopia
 ManaCost:1 B B
 Types:Enchantment
 K:Cumulative upkeep:PayLife<1>:Pay 1 life.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a green or white permanent.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a green or white permanent of their choice.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Permanent.Green,Permanent.White | Defined$ TriggeredPlayer | SpellDescription$ Sacrifice a green or white permanent.
 AI:RemoveDeck:Random
-Oracle:Cumulative upkeep—Pay 1 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of each player's upkeep, that player sacrifices a green or white permanent.
+Oracle:Cumulative upkeep—Pay 1 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of each player's upkeep, that player sacrifices a green or white permanent of their choice.

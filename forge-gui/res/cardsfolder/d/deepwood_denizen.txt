@@ -6,4 +6,4 @@ K:Vigilance
 A:AB$ Draw | Cost$ 5 G T | Defined$ You | NumCards$ 1 | ReduceCost$ X | SpellDescription$ Draw a card. This ability costs {1} less to activate for each +1/+1 counter on creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl$CardCounters.P1P1
 DeckHints:Ability$Counters
-Oracle:Vigilance\n{5}{G}, {T}: Draw a card. This ability costs {1} less to activate for each +1/+1 counter on creatures you control.
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\n{5}{G}, {T}: Draw a card. This ability costs {1} less to activate for each +1/+1 counter on creatures you control.

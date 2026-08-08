@@ -2,5 +2,5 @@ Name:Disciple of the Old Ways
 ManaCost:1 G
 Types:Creature Human Warrior
 PT:2/2
-A:AB$ Pump | Cost$ R | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
-Oracle:{R}: Disciple of the Old Ways gains first strike until end of turn.
+A:AB$ Pump | Cost$ R | Defined$ Self | KW$ First Strike | SpellDescription$ This creature gains first strike until end of turn.
+Oracle:{R}: This creature gains first strike until end of turn.
