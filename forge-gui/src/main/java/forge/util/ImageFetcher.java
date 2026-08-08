@@ -9,6 +9,7 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.*;
@@ -71,16 +72,21 @@ public abstract class ImageFetcher {
 
     private void addScryfallUrl(PaperCard card, String face, boolean useArtCrop, ArrayList<String> downloadUrls) {
         CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
-        if (edition == null) {
-            return;
-        }
+        if (edition == null) return;
 
         String setCode = edition.getScryfallCode();
         String langCode = edition.getCardsLangCode();
-        String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop);
-        if (!downloadUrls.contains(primaryUrl)) {
-            downloadUrls.add(primaryUrl);
+
+        // Prefer CDN (no rate limit) when a UUID JSON file exists in the assets.
+        if (!StringUtils.isBlank(setCode)) {
+            String size = useArtCrop ? "art_crop" : "normal";
+            String cdnUrl = forge.gui.download.CdnUuidCache.getCdnUrl(
+                    setCode, card.getCollectorNumber(), langCode, face, size);
+            if (cdnUrl != null && !downloadUrls.contains(cdnUrl)) downloadUrls.add(cdnUrl);
         }
+
+        String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop);
+        if (!downloadUrls.contains(primaryUrl)) downloadUrls.add(primaryUrl);
     }
 
     protected boolean shouldTryScryfallSetLookupCandidate(PaperCard requestedCard, PaperCard candidate) {
