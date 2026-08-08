@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -103,8 +104,9 @@ public class VZone implements IVDoc<CZone> {
             } else if (zone == ZoneType.Flashback) {
                 cardList.sort(FloatingZone.ZONE_ORDER_COMPARATOR);
             }
+            final Map<Integer, CardPanel> panelsById = cardArea.buildCardPanelsById();
             for (final CardView card : cardList) {
-                CardPanel cardPanel = cardArea.getCardPanel(card.getId());
+                CardPanel cardPanel = panelsById.get(card.getId());
                 if (cardPanel == null) {
                     cardPanel = new CardPanel(matchUI, card);
                     cardPanel.setDisplayEnabled(true);

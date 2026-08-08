@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class ImageKeys {
     public static final String CARD_PREFIX           = "c:";
@@ -50,7 +51,7 @@ public final class ImageKeys {
     private static Map<String, Boolean> editionImageLookup = new HashMap<>();
 
     private static Map<String, Set<String>> editionAlias = new HashMap<>();
-    private static Set<String> toFind = new HashSet<>();
+    private static Set<String> toFind = ConcurrentHashMap.newKeySet();
 
     private static boolean isLibGDXPort = false;
 
@@ -91,14 +92,18 @@ public final class ImageKeys {
         return tokenKey.substring(ImageKeys.TOKEN_PREFIX.length());
     }
 
-    private static final Map<String, File> cachedCards = new HashMap<>(50000);
-    public static HashSet<String> missingCards = new HashSet<>();
+    private static final Map<String, File> cachedCards = new ConcurrentHashMap<>(50000);
+    public static Set<String> missingCards = ConcurrentHashMap.newKeySet();
     public static void clearMissingCards() {
         missingCards.clear();
     }
     public static File getCachedCardsFile(String key) {
         return cachedCards.get(key);
     }
+    // cachedCards, missingCards and toFind are concurrent collections so background image
+    // loaders can resolve files while the EDT does the same; a racing duplicate findFile
+    // probe is harmless (both threads store the same result). The slow disk probing runs
+    // without holding any lock so it can never stall the EDT.
     public static File getImageFile(String key) {
         if (StringUtils.isEmpty(key))
             return null;
@@ -412,7 +417,7 @@ public final class ImageKeys {
     public static boolean hasImage(PaperCard pc) {
         return hasImage(pc, false);
     }
-    public static boolean hasImage(PaperCard pc, boolean update) {
+    public static synchronized boolean hasImage(PaperCard pc, boolean update) {
         Boolean editionHasImage = editionImageLookup.get(pc.getEdition());
         if (editionHasImage == null) {
             String setFolder = getSetFolder(pc.getEdition());

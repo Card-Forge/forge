@@ -234,7 +234,10 @@ public class GameLogPanel extends JPanel {
         @Override
         public void paintComponent(final Graphics g) {
             super.paintComponent(g);
-            final BufferedImage img = cachedImage.getImage();
+            BufferedImage img = cachedImage.getCachedImage();
+            if (img == null) {
+                img = cachedImage.getImage();
+            }
             if (img != null) {
                 ((Graphics2D) g).drawImage(img, null, PADDING, PADDING);
             }

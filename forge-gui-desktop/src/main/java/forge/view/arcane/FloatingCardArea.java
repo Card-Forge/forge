@@ -25,12 +25,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import forge.Singletons;
 import forge.game.card.CardView;
+import forge.gui.FThreads;
 import forge.gui.framework.SDisplayUtil;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -183,15 +186,42 @@ public abstract class FloatingCardArea extends CardArea {
         getWindow().setSize(mainFrame.getWidth() / 5, mainFrame.getHeight() / 2);
     }
 
+    private boolean refreshPending;
+
     protected void refresh() {
+        //refreshPending is plain state guarding a Swing rebuild, so this must stay single-threaded
+        FThreads.assertExecutedByEdt(true);
         if (!getWindow().isVisible()) { return; } //don't refresh while window hidden
-        doRefresh();
+        //coalesce bursts of refresh calls (e.g. many cards changing zones at once) into
+        //a single rebuild - rebuilding a large zone view is expensive
+        if (refreshPending) { return; }
+        refreshPending = true;
+        SwingUtilities.invokeLater(() -> {
+            refreshPending = false;
+            if (getWindow().isVisible()) {
+                doRefresh();
+            }
+        });
+    }
+
+    /**
+     * Runs a coalesced refresh immediately. Callers that look a panel up by card id right
+     * after a zone change need the panels current now, not at the end of the event queue.
+     */
+    protected void flushPendingRefresh() {
+        if (refreshPending) {
+            refreshPending = false; //the queued invokeLater becomes a no-op
+            if (getWindow().isVisible()) {
+                doRefresh();
+            }
+        }
     }
 
     protected void doRefresh() {
+        final Map<Integer, CardPanel> panelsById = buildCardPanelsById();
         List<CardPanel> cardPanels = new ArrayList<>();
         for (final CardView card : getCards()) {
-            CardPanel cardPanel = getCardPanel(card.getId());
+            CardPanel cardPanel = panelsById.get(card.getId());
             if (cardPanel == null) {
                 cardPanel = new CardPanel(getMatchUI(), card);
                 cardPanel.setDisplayEnabled(true);

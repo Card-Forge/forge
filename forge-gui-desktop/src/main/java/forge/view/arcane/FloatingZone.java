@@ -67,7 +67,6 @@ import forge.toolbox.FTextField;
 import forge.toolbox.MouseTriggerEvent;
 import forge.toolbox.special.PlayerDetailsPanel;
 import forge.util.Localizer;
-import forge.util.StreamUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.view.FView;
@@ -255,6 +254,9 @@ public class FloatingZone extends FloatingCardArea {
             }
         }
         final FloatingZone window = _init(matchUI, card.getController(), card.getZone());
+        //card-move animation and targeting look panels up right after a zone change, so they
+        //need any coalesced refresh applied now rather than at the end of the event queue
+        window.flushPendingRefresh();
         return window.getCardPanel(card.getId());
     }
 
@@ -630,10 +632,11 @@ public class FloatingZone extends FloatingCardArea {
 
     @Override
     protected void doRefresh() {
+        final Map<Integer, CardPanel> panelsById = buildCardPanelsById();
         List<CardPanel> cardPanels = new ArrayList<>();
 
         for (final CardView card : getCards()) {
-            CardPanel cardPanel = getCardPanel(card.getId());
+            CardPanel cardPanel = panelsById.get(card.getId());
             if (cardPanel == null) {
                 cardPanel = new CardPanel(getMatchUI(), card);
                 cardPanel.setDisplayEnabled(true);
@@ -664,7 +667,9 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     private void updatePromptVisibility() {
-        final boolean show = StreamUtil.stream(getCards()).anyMatch(c -> getMatchUI().isSelectable(c));
+        //iterate the freshly built panels rather than re-copying, re-sorting and re-filtering
+        //the whole zone a second time via getCards()
+        final boolean show = getCardPanels().stream().anyMatch(p -> getMatchUI().isSelectable(p.getCard()));
         final String prompt = show ? getMatchUI().getPromptMessage() : null;
         if (prompt != null && !prompt.isEmpty()) {
             promptLabel.setText(FSkin.encodeSymbols(prompt, false));
