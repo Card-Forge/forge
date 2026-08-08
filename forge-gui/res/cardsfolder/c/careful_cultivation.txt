@@ -9,4 +9,4 @@ SVar:ABManaGG:AB$ Mana | Cost$ T | Amount$ 2 | Produced$ G | SpellDescription$ A
 A:AB$ Token | PrecostDesc$ Channel — | Cost$ 1 G Discard<1/CARDNAME> | ActivationZone$ Hand | TokenScript$ g_1_1_human_monk_g | SpellDescription$ Create a 1/1 green Human Monk creature token with "{T}: Add {G}."
 DeckHas:Ability$Token|Discard & Type$Human
 DeckHints:Type$Artifact|Creature|Vehicle
-Oracle:Enchant artifact or creature\nAs long as enchanted permanent is a creature, it gets +1/+3 and has reach and "{T}: Add {G}{G}."\nChannel — {1}{G}, Discard Careful Cultivation: Create a 1/1 green Human Monk creature token with "{T}: Add {G}."
+Oracle:Enchant artifact or creature\nAs long as enchanted permanent is a creature, it gets +1/+3 and has reach and "{T}: Add {G}{G}."\nChannel — {1}{G}, Discard this card: Create a 1/1 green Human Monk creature token with "{T}: Add {G}."

@@ -2,5 +2,5 @@ Name:Craven Knight
 ManaCost:1 B
 Types:Creature Human Knight
 PT:2/2
-S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
-Oracle:Craven Knight can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ This creature can't block.
+Oracle:This creature can't block.

@@ -2,11 +2,11 @@ Name:Catapult Fodder
 ManaCost:2 B
 Types:Creature Zombie
 PT:1/5
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+powerLTtoughness | PresentCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of combat on your turn, if you control three or more creatures that each have toughness greater than their power, transform CARDNAME.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+powerLTtoughness | PresentCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of combat on your turn, if you control three or more creatures that each have toughness greater than their power, transform this creature.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:PlayMain1:TRUE
 AlternateMode:DoubleFaced
-Oracle:At the beginning of combat on your turn, if you control three or more creatures that each have toughness greater than their power, transform Catapult Fodder.
+Oracle:At the beginning of combat on your turn, if you control three or more creatures that each have toughness greater than their power, transform this creature.
 
 ALTERNATE
 

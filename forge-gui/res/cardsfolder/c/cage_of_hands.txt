@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
 S:Mode$ CantAttack,CantBlock | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't attack or block.
-A:AB$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-Oracle:Enchant creature\nEnchanted creature can't attack or block.\n{1}{W}: Return Cage of Hands to its owner's hand.
+A:AB$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return this Aura to its owner's hand.
+Oracle:Enchant creature\nEnchanted creature can't attack or block.\n{1}{W}: Return this Aura to its owner's hand.

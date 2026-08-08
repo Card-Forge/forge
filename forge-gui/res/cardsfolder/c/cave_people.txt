@@ -2,8 +2,8 @@ Name:Cave People
 ManaCost:1 R R
 Types:Creature Human
 PT:1/4
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/-2 until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, it gets +1/-2 until end of turn.
 A:AB$ Pump | Cost$ 1 R R T | ValidTgts$ Creature | KW$ Landwalk:Mountain | SpellDescription$ Target creature gains mountainwalk until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ -2
 DeckHas:Keyword$Landwalk:Mountain
-Oracle:Whenever Cave People attacks, it gets +1/-2 until end of turn.\n{1}{R}{R}, {T}: Target creature gains mountainwalk until end of turn. (It can't be blocked as long as defending player controls a Mountain.)
+Oracle:Whenever this creature attacks, it gets +1/-2 until end of turn.\n{1}{R}{R}, {T}: Target creature gains mountainwalk until end of turn. (It can't be blocked as long as defending player controls a Mountain.)

@@ -3,5 +3,5 @@ ManaCost:5 U
 Types:Creature Illusion Dragon
 PT:5/4
 K:Flying
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
-Oracle:Flying\nCloud Dragon can block only creatures with flying.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ This creature can block only creatures with flying.
+Oracle:Flying\nThis creature can block only creatures with flying.

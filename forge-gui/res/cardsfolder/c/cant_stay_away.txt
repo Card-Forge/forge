@@ -7,4 +7,4 @@ SVar:ReplaceDies:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield |
 SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
 K:Flashback:3 W B
 DeckHas:Ability$Graveyard
-Oracle:Return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains "If this creature would die, exile it instead."\nFlashback {3}{W}{B}
+Oracle:Return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains "If this creature would die, exile it instead."\nFlashback {3}{W}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

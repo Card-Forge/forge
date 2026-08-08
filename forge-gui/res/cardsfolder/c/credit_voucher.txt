@@ -8,4 +8,4 @@ SVar:Y:Remembered$Amount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-Oracle:{2}, {T}, Sacrifice Credit Voucher: Shuffle any number of cards from your hand into your library, then draw that many cards.
+Oracle:{2}, {T}, Sacrifice this artifact: Shuffle any number of cards from your hand into your library, then draw that many cards.

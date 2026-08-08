@@ -1,6 +1,6 @@
 Name:Contaminated Aquifer
 ManaCost:no cost
 Types:Land Island Swamp
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-Oracle:({T}: Add {U} or {B}.)\nContaminated Aquifer enters tapped.
+Oracle:({T}: Add {U} or {B}.)\nThis land enters tapped.

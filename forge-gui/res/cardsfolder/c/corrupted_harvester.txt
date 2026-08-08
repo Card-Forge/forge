@@ -2,7 +2,7 @@ Name:Corrupted Harvester
 ManaCost:4 B B
 Types:Creature Phyrexian Horror
 PT:6/3
-A:AB$ Regenerate | Cost$ B Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
+A:AB$ Regenerate | Cost$ B Sac<1/Creature> | SpellDescription$ Regenerate this creature.
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE5+powerLE3+toughnessLE4
 AI:RemoveDeck:Random
-Oracle:{B}, Sacrifice a creature: Regenerate Corrupted Harvester.
+Oracle:{B}, Sacrifice a creature: Regenerate this creature.

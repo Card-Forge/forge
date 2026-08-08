@@ -5,4 +5,4 @@ A:AB$ Draw | Cost$ 1 U Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a 
 A:AB$ Draw | Cost$ 1 U Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-Oracle:{1}{U}, Discard a card: Draw a card.\n{1}{U}, Sacrifice Compulsion: Draw a card.
+Oracle:{1}{U}, Discard a card: Draw a card.\n{1}{U}, Sacrifice this enchantment: Draw a card.

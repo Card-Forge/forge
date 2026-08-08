@@ -1,9 +1,9 @@
 Name:Citadel Gate
 ManaCost:no cost
 Types:Land Gate
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | Exclude$ white | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters, choose a color other than white.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | Exclude$ white | AILogic$ MostProminentInComputerDeck | SpellDescription$ As this land enters, choose a color other than white.
 A:AB$ Mana | Cost$ T | Produced$ Combo W Chosen | SpellDescription$ Add {W} or one mana of the chosen color.
-Oracle:Citadel Gate enters tapped.\nAs Citadel Gate enters, choose a color other than white.\n{T}: Add {W} or one mana of the chosen color.
+Oracle:This land enters tapped.\nAs this land enters, choose a color other than white.\n{T}: Add {W} or one mana of the chosen color.

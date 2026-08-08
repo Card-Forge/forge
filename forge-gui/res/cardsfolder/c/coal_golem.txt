@@ -6,4 +6,4 @@ A:AB$ Mana | Cost$ 3 Sac<1/CARDNAME> | Produced$ R | Amount$ 3 | SpellDescriptio
 AI:RemoveDeck:Random
 DeckHas:Ability$Sacrifice
 DeckNeeds:Color$Red
-Oracle:{3}, Sacrifice Coal Golem: Add {R}{R}{R}.
+Oracle:{3}, Sacrifice this creature: Add {R}{R}{R}.
