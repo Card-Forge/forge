@@ -22,6 +22,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -87,7 +88,9 @@ public enum VHomeUI implements IVTopLevelUI {
     private final SkinColor l00 = clrTheme.stepColor(0);
 
     private final List<IVSubmenu<? extends ICDoc>> allSubmenus = new ArrayList<>();
-    private final Map<EDocID, LblMenuItem> allSubmenuLabels = new HashMap<>();
+    // REFORGE COMMANDER EXTENSION: LinkedHashMap keeps insertion (= submenu) order,
+    // so CHomeUI's first-label fallback is deterministic (Play Commander in commander mode)
+    private final Map<EDocID, LblMenuItem> allSubmenuLabels = new LinkedHashMap<>();
     private final Map<EMenuGroup, LblGroup> allGroupLabels = new HashMap<>();
 
     private final PnlMenu pnlMenu = new PnlMenu();
