@@ -18,6 +18,7 @@ import forge.gui.reforge.ReforgeMatchLayoutPresets;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.screens.home.CLobby;
+import forge.screens.home.sanctioned.ConstructedGameMenu;
 import forge.toolbox.FOptionPane;
 
 public enum CSubmenuPlayCommander implements ICDoc, IMenuProvider {
@@ -45,6 +46,9 @@ public enum CSubmenuPlayCommander implements ICDoc, IMenuProvider {
     @Override
     public List<JMenu> getMenus() {
         final List<JMenu> menus = new ArrayList<>();
+        // reuses the shared deck-gen toggles (Singleton/Artifacts/Remove Small Creatures);
+        // a Commander-specific deck-gen menu can replace this if the rules ever diverge
+        menus.add(ConstructedGameMenu.getMenu());
         final JMenu layoutMenu = new JMenu("Battlefield Layout");
         for (int n = 2; n <= ReforgeMatchLayoutPresets.MAX_PLAYERS; n++) {
             final int players = n;
