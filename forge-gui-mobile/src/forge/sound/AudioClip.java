@@ -31,16 +31,13 @@ public class AudioClip implements IAudioClip {
     // at class load, so it can't strand effects on the suspended OpenAL engine.
     private Sound clip;
 
+    public static IAudioClip createClip(File file) {
+        if (file == null) return null;
+        return createClip(file.getPath());
+    }
     public static IAudioClip createClip(String filename) {
         FileHandle fileHandle = Gdx.files.absolute(filename);
         if (!fileHandle.exists()) { return null; }
-        return GuiBase.isIOS() ? new MusicAudioClip(fileHandle) : new AudioClip(fileHandle);
-    }
-
-    public static IAudioClip createClip(File file) {
-        if(file == null) return null;
-        FileHandle fileHandle = Gdx.files.absolute(file.getPath());
-        if(!fileHandle.exists()) return null;
         return GuiBase.isIOS() ? new MusicAudioClip(fileHandle) : new AudioClip(fileHandle);
     }
 

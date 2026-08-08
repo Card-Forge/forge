@@ -93,7 +93,7 @@ public class ImageCache {
         // iOS: every card texture is now a manager-owned image whose whole lifecycle the AssetManager owns
         // (see CardTextureData). Keep the old downloaded ceiling (48 on <=~4GB devices, else 120) as the unified
         // resident cap so the card set doesn't balloon toward cacheSize (300) — decoded cards are hundreds of MB
-        // of native memory and the main per-turn ratchet over a long game. Non-iOS keeps cacheSize.
+        // of native memory and the main per-turn ratchet over a long game.
         if (GuiBase.isIOS()) {
             boolean lowRam = Forge.totalDeviceRAM > 0 && Forge.totalDeviceRAM <= 4500;
             maxCardCapacity = lowRam ? 48 : 120;
@@ -362,8 +362,6 @@ public class ImageCache {
     private Texture getAsset(File file) {
         if (file == null)
             return null;
-        // The absolute path is the AssetManager key on every platform — downloaded iOS cards included
-        // (see loadAsset / CardTextureData), which is why the parallel downloaded-texture cache is gone.
         return Forge.getAssets().manager().get(file.getPath(), Texture.class, false);
     }
 
@@ -378,10 +376,6 @@ public class ImageCache {
         if (check != null)
             return check;
 
-        // The absolute path is the AssetManager key on every platform. iOS downloaded card images decode
-        // through CardTextureData (java.io byte read + 512 downscale, supplied via the TextureParameter);
-        // every other image uses the stock file decode. Either way the AssetManager owns the whole
-        // lifecycle — no bypass, no parallel cache, no path rewriting.
         String fileName = file.getPath();
 
         if (!others) {
@@ -435,7 +429,7 @@ public class ImageCache {
         if (isDownloadedCardImage(fileName)) {
             TextureParameter p = new TextureParameter();
             p.textureData = new CardTextureData(fileName);
-            p.minFilter = Texture.TextureFilter.Linear; // matches the old setFilter(Linear, Linear)
+            p.minFilter = Texture.TextureFilter.Linear;
             p.magFilter = Texture.TextureFilter.Linear;
             return p;
         }
@@ -520,7 +514,7 @@ public class ImageCache {
     // The path key for a texture, derived from the manager-owned TextureData: CardTextureData for iOS
     // downloaded cards, FileTextureData for everything loaded from a file. Both resolve to the same
     // absolute path loadAsset keyed updateImageRecord by, so border lookups match. Non-file textures
-    // fall back to toString() (unchanged).
+    // fall back to toString().
     private String getTextureKey(Texture t) {
         if (t == null) return null;
         TextureData d = t.getTextureData();
