@@ -39,6 +39,18 @@ public abstract class ImageFetcher {
 
     private HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
 
+    /** @return the base "/cards/" URL of the currently selected card image API. */
+    public static String getCardArtApiBaseUrl() {
+        return FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_USE_ALTERNATE_CARD_ART_API)
+                ? ForgeConstants.URL_PIC_CARDFORGE_NET_API_DOWNLOAD
+                : ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD;
+    }
+
+    /** Builds a full download URL from a path produced by {@link ImageUtil#getScryfallDownloadUrl}. */
+    public static String buildCardArtApiUrl(String path) {
+        return getCardArtApiBaseUrl() + path;
+    }
+
     private String getScryfallDownloadURL(PaperCard c, String face, boolean useArtCrop, boolean hasSetLookup, String imagePath, ArrayList<String> downloadUrls) {
         StaticData data = StaticData.instance();
         CardEdition edition = data.getEditions().get(c.getEdition());
@@ -64,7 +76,7 @@ public abstract class ImageFetcher {
         } else {
             addScryfallUrl(c, face, useArtCrop, downloadUrls);
             String setCode = edition.getScryfallCode();
-            downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(c, face, setCode, "", useArtCrop));
+            downloadUrls.add(buildCardArtApiUrl(ImageUtil.getScryfallDownloadUrl(c, face, setCode, "", useArtCrop)));
         }
         return null;
     }
@@ -77,7 +89,7 @@ public abstract class ImageFetcher {
 
         String setCode = edition.getScryfallCode();
         String langCode = edition.getCardsLangCode();
-        String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop);
+        String primaryUrl = buildCardArtApiUrl(ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop));
         if (!downloadUrls.contains(primaryUrl)) {
             downloadUrls.add(primaryUrl);
         }
@@ -151,7 +163,7 @@ public abstract class ImageFetcher {
                 if (ed != null) {
                     String setCode = ed.getScryfallCode();
                     String langCode = ed.getCardsLangCode();
-                    downloadUrls.add("PLANECHASEBG:" + ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, "", setCode, langCode, true));
+                    downloadUrls.add("PLANECHASEBG:" + buildCardArtApiUrl(ImageUtil.getScryfallDownloadUrl(pc, "", setCode, langCode, true)));
                     FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
                     File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, getPlanechaseFilename(cardName));
                     if (destFile.exists())
@@ -327,7 +339,7 @@ public abstract class ImageFetcher {
                 String tokenCode = edition.getTokensCode();
                 String langCode = edition.getCardsLangCode();
                 // Just assume the CNr from the token image is valid
-                downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tempdata[2], tokenCode, langCode, face));
+                downloadUrls.add(buildCardArtApiUrl(ImageUtil.getScryfallTokenDownloadUrl(tempdata[2], tokenCode, langCode, face)));
             } else if (!allTokens.isEmpty()) {
                 // This loop is going to try to download all the arts until it finds one
                 // This is a bit wrong since it _should_ just be trying to get the one with the appropriate collector number
@@ -345,7 +357,7 @@ public abstract class ImageFetcher {
                         continue;
                     }
 
-                    downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tis.collectorNumber(), tokenCode, langCode, face));
+                    downloadUrls.add(buildCardArtApiUrl(ImageUtil.getScryfallTokenDownloadUrl(tis.collectorNumber(), tokenCode, langCode, face)));
                 }
             }
 
