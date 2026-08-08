@@ -5,7 +5,7 @@ A:SP$ ChangeZone | ValidTgts$ Creature.nonArtifact+YouCtrl | TgtPrompt$ Select t
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Replacements$ ETBAddCounter | Duration$ Perpetual | SubAbility$ DBReturn | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains "This creature enters with an additional shield counter on it."
 SVar:ETBAddCounter:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated | Description$ This creature enters with an additional shield counter on it.
 SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ SHIELD
-SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Then return that card to the battlefield under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Then return that card to the battlefield under its owner's control. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
-Oracle:Exile target nonartifact creature you control. It perpetually gains "This creature enters with an additional shield counter on it." Then return that card to the battlefield under its owner's control.
+Oracle:Exile target nonartifact creature you control. It perpetually gains "This creature enters with an additional shield counter on it." Then return that card to the battlefield under its owner's control. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)

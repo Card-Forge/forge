@@ -3,4 +3,4 @@ ManaCost:1 G
 Types:Creature Beast
 PT:3/1
 K:Vigilance
-Oracle:Vigilance
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

@@ -2,14 +2,14 @@ Name:Bloodsworn Squire
 ManaCost:3 B
 Types:Creature Vampire Soldier
 PT:3/3
-A:AB$ Pump | Cost$ 1 B Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn.
+A:AB$ Pump | Cost$ 1 B Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ This creature gains indestructible until end of turn.
 SVar:DBTap:DB$ Tap | Defined$ Self | SubAbility$ DBTransform | StackDescription$ SpellDescription | SpellDescription$ Tap it.
-SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionPresent$ Creature.YouOwn | ConditionCompare$ GE4 | ConditionZone$ Graveyard | StackDescription$ SpellDescription | SpellDescription$ Then if there are four or more creature cards in your graveyard, transform CARDNAME.
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionPresent$ Creature.YouOwn | ConditionCompare$ GE4 | ConditionZone$ Graveyard | StackDescription$ SpellDescription | SpellDescription$ Then if there are four or more creature cards in your graveyard, transform this creature.
 SVar:AIPreference:DiscardCost$Creature
 DeckHas:Ability$Discard
 DeckHints:Ability$Graveyard
 AlternateMode:DoubleFaced
-Oracle:{1}{B}, Discard a card: Bloodsworn Squire gains indestructible until end of turn. Tap it. Then if there are four or more creature cards in your graveyard, transform Bloodsworn Squire. (Damage and effects that say "destroy" don't destroy it.)
+Oracle:{1}{B}, Discard a card: This creature gains indestructible until end of turn. Tap it. Then if there are four or more creature cards in your graveyard, transform this creature. (Damage and effects that say "destroy" don't destroy it.)
 
 ALTERNATE
 
@@ -20,7 +20,7 @@ Types:Creature Vampire Knight
 PT:*/*
 S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in your graveyard.
 SVar:X:Count$ValidGraveyard Creature.YouOwn
-A:AB$ Pump | Cost$ 1 B Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn.
+A:AB$ Pump | Cost$ 1 B Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ This creature gains indestructible until end of turn.
 SVar:DBTap:DB$ Tap | Defined$ Self | StackDescription$ SpellDescription | SpellDescription$ Tap it.
 SVar:AIPreference:DiscardCost$Creature
-Oracle:Bloodsworn Knight's power and toughness are each equal to the number of creature cards in your graveyard.\n{1}{B}, Discard a card: Bloodsworn Knight gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it.)
+Oracle:Bloodsworn Knight's power and toughness are each equal to the number of creature cards in your graveyard.\n{1}{B}, Discard a card: This creature gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it.)

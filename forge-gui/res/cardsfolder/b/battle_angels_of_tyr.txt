@@ -4,7 +4,7 @@ Types:Creature Angel Knight
 PT:4/4
 K:Flying
 K:Myriad
-T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigDraw | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card if that player has more cards in hand than each other player. Then you create a Treasure token if that player controls more lands than each other player. Then you gain 3 life if that player has more life than each other player.
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigDraw | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card if that player has more cards in hand than each other player. Then you create a Treasure token if that player controls more lands than each other player. Then you gain 3 life if that player has more life than each other player.
 SVar:TrigDraw:DB$ Draw | ConditionCheckSVar$ NumInHand | ConditionSVarCompare$ GTMostInHand | SubAbility$ DBTreasure
 SVar:DBTreasure:DB$ Token | ConditionCheckSVar$ NumLands | ConditionSVarCompare$ GTMostLands | TokenScript$ c_a_treasure_sac | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | ConditionCheckSVar$ NumLife | ConditionSVarCompare$ GTMostLife | LifeAmount$ 3
@@ -15,4 +15,4 @@ SVar:MostLands:PlayerCountDefinedNonTriggeredTarget$HighestValid Land.YouCtrl
 SVar:NumLife:TriggeredTarget$LifeTotal
 SVar:MostLife:PlayerCountDefinedNonTriggeredTarget$HighestLifeTotal
 DeckHas:Ability$Token|Sacrifice|LifeGain
-Oracle:Flying, myriad\nWhenever Battle Angels of Tyr deals combat damage to a player, draw a card if that player has more cards in hand than each other player. Then you create a Treasure token if that player controls more lands than each other player. Then you gain 3 life if that player has more life than each other player.
+Oracle:Flying, myriad\nWhenever this creature deals combat damage to a player, draw a card if that player has more cards in hand than each other player. Then you create a Treasure token if that player controls more lands than each other player. Then you gain 3 life if that player has more life than each other player.

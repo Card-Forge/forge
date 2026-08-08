@@ -2,5 +2,5 @@ Name:Blinking Spirit
 ManaCost:3 W
 Types:Creature Spirit
 PT:2/2
-A:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-Oracle:{0}: Return Blinking Spirit to its owner's hand.
+A:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return this creature to its owner's hand.
+Oracle:{0}: Return this creature to its owner's hand.

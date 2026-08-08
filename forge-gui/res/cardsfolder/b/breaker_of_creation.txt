@@ -8,4 +8,4 @@ K:Hexproof:Card.nonColorless:each color
 K:Annihilator:2
 DeckHas:Ability$LifeGain
 DeckHints:Color$Colorless
-Oracle:When you cast this spell, you gain 1 life for each colorless permanent you control.\nHexproof from each color\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)
+Oracle:When you cast this spell, you gain 1 life for each colorless permanent you control.\nHexproof from each color\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)

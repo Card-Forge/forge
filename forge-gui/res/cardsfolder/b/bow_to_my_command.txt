@@ -1,7 +1,7 @@
 Name:Bow to My Command
 ManaCost:no cost
 Types:Ongoing Scheme
-T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseOpponent | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose an opponent. Creatures the chosen player controls can't attack you or planeswalkers you control.
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseOpponent | TriggerZones$ Command | TriggerDescription$ As you set this scheme in motion, choose an opponent. Creatures the chosen player controls can't attack you or planeswalkers you control.
 SVar:ChooseOpponent:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SubAbility$ CantAttackEffect
 SVar:CantAttackEffect:DB$ Effect | StaticAbilities$ STCantAttack | Triggers$ TrigAbandoned | RememberObjects$ Self | Duration$ Permanent
 SVar:TrigAbandoned:Mode$ Abandoned | ValidCard$ Card.IsRemembered | Execute$ EffectCleanup | Static$ True

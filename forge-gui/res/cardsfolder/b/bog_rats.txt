@@ -2,5 +2,5 @@ Name:Bog Rats
 ManaCost:B
 Types:Creature Rat
 PT:1/1
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Wall | Description$ CARDNAME can't be blocked by Walls.
-Oracle:Bog Rats can't be blocked by Walls.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Wall | Description$ This creature can't be blocked by Walls.
+Oracle:This creature can't be blocked by Walls.
