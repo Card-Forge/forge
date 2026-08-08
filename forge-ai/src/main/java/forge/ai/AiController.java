@@ -970,7 +970,7 @@ public class AiController {
             return OnePlaySafetyChecker.isAcceptable(player, sa) ? AiPlayDecision.WillPlay : AiPlayDecision.CurseEffects;
         }
 
-        if (!sa.isSpell() || usesFullSimulation()) {
+        if ((!sa.isSpell() && !sa.isLandAbility()) || usesFullSimulation()) {
             return AiPlayDecision.WillPlay;
         }
 
