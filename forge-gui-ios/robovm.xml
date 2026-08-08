@@ -27,12 +27,10 @@
       <directory>res</directory>
       <skipPngCrush>true</skipPngCrush>
     </resource>
-    <!-- Icon*.png are consumed by SpringBoard, not libGDX - CgBI is fine there -->
+    <!-- Assets.xcassets (app icon) - RoboVM compiles asset catalogs with actool
+         and merges the resulting CFBundleIcons/CFBundleIconName into Info.plist -->
     <resource>
-      <directory>.</directory>
-      <includes>
-        <include>Icon*.png</include>
-      </includes>
+      <directory>resources</directory>
     </resource>
     <resource>
       <directory>fallback_skin</directory>
@@ -95,6 +93,10 @@
     <!-- image pipeline nested classes (hybrid resolver, LRU caches) -->
     <pattern>forge.assets.Assets$*</pattern>
     <pattern>forge.assets.ImageCache$*</pattern>
+    <!-- iOS downloaded-card TextureData (supplied to the AssetManager via TextureParameter) -->
+    <pattern>forge.assets.CardTextureData</pattern>
+    <!-- iOS AVAudioPlayer-backed sound effects -->
+    <pattern>forge.sound.MusicAudioClip</pattern>
     <!-- Sentry crash reporting: the SDK wires integrations/transports via
          reflection and ServiceLoader, which the tree-shaker cannot see.
          Missing classes here historically killed the game thread with
