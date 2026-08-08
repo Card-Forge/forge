@@ -53,6 +53,12 @@
     <pattern>org.apache.harmony.security.provider.cert.DRLCertFactory</pattern>
     <pattern>org.apache.harmony.security.provider.crypto.CryptoProvider</pattern>
     <pattern>org.apache.xalan.processor.TransformerFactoryImpl</pattern>
+    <!-- Xalan picks its output serializer by name: SerializerFactory reads the class from
+         org/apache/xml/serializer/output_{xml,html,text}.properties and Class.forName()s it,
+         which the tree-shaker can't see. Without this every XmlUtil.saveDocument() call fails with
+         WrappedRuntimeException: ToXMLStream — achievements plus the card/deck/item-view
+         preference writers, so none of them persisted on iOS. -->
+    <pattern>org.apache.xml.serializer.**</pattern>
     <pattern>java.util.logging.**</pattern>
     <pattern>com.badlogic.gdx.**</pattern>
     <!-- adventure ui_skin.json references TenPatchDrawable by NAME (libGDX skin
