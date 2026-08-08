@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in an opponent's graveyard | ValidTgts$ Card.OppOwn
 A:AB$ Destroy | Cost$ 2 Sac<2/Human> | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
 DeckHints:Type$Human
-Oracle:Other Humans you control get +1/+1.\nWhenever General Kudro of Drannith or another Human you control enters, exile target card from an opponent's graveyard.\n{2}, Sacrifice two Humans: Destroy target creature with power 4 or greater.
+Oracle:Other Humans you control get +1/+1.\nWhenever General Kudro or another Human you control enters, exile target card from an opponent's graveyard.\n{2}, Sacrifice two Humans: Destroy target creature with power 4 or greater.

@@ -3,8 +3,8 @@ ManaCost:3 G
 Types:Creature Human Shaman
 PT:2/2
 K:Riot
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature you control gets +X/+0 until end of turn, where X is CARDNAME's power.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, another target creature you control gets +X/+0 until end of turn, where X is this creature's power.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | NumAtt$ +X
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters
-Oracle:Riot (This creature enters with your choice of a +1/+1 counter or haste.)\nWhenever Gruul Beastmaster attacks, another target creature you control gets +X/+0 until end of turn, where X is Gruul Beastmaster's power.
+Oracle:Riot (This creature enters with your choice of a +1/+1 counter or haste.)\nWhenever this creature attacks, another target creature you control gets +X/+0 until end of turn, where X is this creature's power.

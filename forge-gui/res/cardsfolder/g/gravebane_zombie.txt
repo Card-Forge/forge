@@ -2,6 +2,6 @@ Name:Gravebane Zombie
 ManaCost:3 B
 Types:Creature Zombie
 PT:3/2
-R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ ToLibrary | Description$ If CARDNAME would die, put CARDNAME on top of its owner's library instead.
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ ToLibrary | Description$ If this creature would die, put it on top of its owner's library instead.
 SVar:ToLibrary:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Defined$ ReplacedCard
-Oracle:If Gravebane Zombie would die, put Gravebane Zombie on top of its owner's library instead.
+Oracle:If this creature would die, put it on top of its owner's library instead.

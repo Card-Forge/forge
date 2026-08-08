@@ -2,5 +2,5 @@ Name:Gorilla Chieftain
 ManaCost:2 G G
 Types:Creature Ape
 PT:3/3
-A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
-Oracle:{1}{G}: Regenerate Gorilla Chieftain.
+A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate this creature.
+Oracle:{1}{G}: Regenerate this creature.

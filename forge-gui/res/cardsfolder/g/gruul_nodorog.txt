@@ -2,5 +2,5 @@ Name:Gruul Nodorog
 ManaCost:4 G G
 Types:Creature Beast
 PT:4/4
-A:AB$ Pump | Cost$ R | Defined$ Self | KW$ Menace | SpellDescription$ CARDNAME gains menace until end of turn.
-Oracle:{R}: Gruul Nodorog gains menace until end of turn. (It can't be blocked except by two or more creatures.)
+A:AB$ Pump | Cost$ R | Defined$ Self | KW$ Menace | SpellDescription$ This creature gains menace until end of turn.
+Oracle:{R}: This creature gains menace until end of turn. (It can't be blocked except by two or more creatures.)

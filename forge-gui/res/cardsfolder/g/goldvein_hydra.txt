@@ -5,10 +5,10 @@ PT:0/0
 K:Vigilance
 K:Trample
 K:Haste
-K:etbCounter:P1P1:X
+K:etbCounter:P1P1:X:no Condition:This creature enters with X +1/+1 counters on it.
 SVar:X:Count$xPaid
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a number of tapped Treasure tokens equal to its power.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a number of tapped Treasure tokens equal to its power.
 SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ c_a_treasure_sac | TokenTapped$ True | TokenOwner$ TriggeredCardController
 SVar:Y:TriggeredCard$CardPower
 DeckHas:Ability$Counters|Token
-Oracle:Vigilance, trample, haste\nGoldvein Hydra enters with X +1/+1 counters on it.\nWhen Goldvein Hydra dies, create a number of tapped Treasure tokens equal to its power.
+Oracle:Vigilance, trample, haste\nThis creature enters with X +1/+1 counters on it.\nWhen this creature dies, create a number of tapped Treasure tokens equal to its power.

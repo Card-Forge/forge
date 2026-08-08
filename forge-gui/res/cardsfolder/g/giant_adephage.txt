@@ -3,7 +3,7 @@ ManaCost:5 G G
 Types:Creature Insect
 PT:7/7
 K:Trample
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a token that's a copy of CARDNAME.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, create a token that's a copy of this creature.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self
 DeckHas:Ability$Token
-Oracle:Trample\nWhenever Giant Adephage deals combat damage to a player, create a token that's a copy of Giant Adephage.
+Oracle:Trample\nWhenever this creature deals combat damage to a player, create a token that's a copy of this creature.

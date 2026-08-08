@@ -13,7 +13,7 @@ ALTERNATE
 Name:Age-Graced Chapel
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo W B | SpellDescription$ Add {W} or {B}.
-Oracle:Age-Graced Chapel enters tapped.\n{T}: Add {W} or {B}.
+Oracle:This land enters tapped.\n{T}: Add {W} or {B}.

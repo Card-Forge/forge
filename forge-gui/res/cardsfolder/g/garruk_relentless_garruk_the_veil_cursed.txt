@@ -2,14 +2,14 @@ Name:Garruk Relentless
 ManaCost:3 G
 Types:Legendary Planeswalker Garruk
 Loyalty:3
-T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_LE2_LOYALTY | Execute$ TrigTransform | TriggerDescription$ When CARDNAME has two or fewer loyalty counters on him, transform him.
-A:AB$ DealDamage | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Creature | NumDmg$ 3 | SubAbility$ DamageThis | Planeswalker$ True | SpellDescription$ CARDNAME deals 3 damage to target creature. That creature deals damage equal to its power to him.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_LE2_LOYALTY | Execute$ TrigTransform | TriggerDescription$ When NICKNAME has two or fewer loyalty counters on him, transform him.
+A:AB$ DealDamage | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Creature | NumDmg$ 3 | SubAbility$ DamageThis | Planeswalker$ True | SpellDescription$ NICKNAME deals 3 damage to target creature. That creature deals damage equal to its power to him.
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenScript$ g_2_2_wolf | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 2/2 green Wolf creature token.
 SVar:DamageThis:DB$ DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
 SVar:Y:Targeted$CardPower
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
-Oracle:When Garruk Relentless has two or fewer loyalty counters on him, transform him.\n[0]: Garruk Relentless deals 3 damage to target creature. That creature deals damage equal to its power to him.\n[0]: Create a 2/2 green Wolf creature token.
+Oracle:When Garruk has two or fewer loyalty counters on him, transform him.\n[0]: Garruk deals 3 damage to target creature. That creature deals damage equal to its power to him.\n[0]: Create a 2/2 green Wolf creature token.
 
 ALTERNATE
 

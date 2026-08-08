@@ -2,9 +2,9 @@ Name:Gravecrawler
 ManaCost:B
 Types:Creature Zombie
 PT:2/1
-S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
-S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | IsPresent$ Zombie.YouCtrl | Description$ You may cast CARDNAME from your graveyard as long as you control a Zombie.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ This creature can't block.
+S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | IsPresent$ Zombie.YouCtrl | Description$ You may cast this card from your graveyard as long as you control a Zombie.
 SVar:SacMe:3
 SVar:DiscardMe:3
 DeckHints:Type$Zombie
-Oracle:Gravecrawler can't block.\nYou may cast Gravecrawler from your graveyard as long as you control a Zombie.
+Oracle:This creature can't block.\nYou may cast this card from your graveyard as long as you control a Zombie.
