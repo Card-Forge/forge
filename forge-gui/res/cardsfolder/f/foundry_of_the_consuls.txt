@@ -4,4 +4,4 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Token | Cost$ 5 T Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 2 | TokenScript$ c_1_1_a_thopter_flying | SpellDescription$ Create two 1/1 colorless Thopter artifact creature tokens with flying.
 DeckHas:Ability$Mana.Colorless|Token
-Oracle:{T}: Add {C}.\n{5}, {T}, Sacrifice Foundry of the Consuls: Create two 1/1 colorless Thopter artifact creature tokens with flying.
+Oracle:{T}: Add {C}.\n{5}, {T}, Sacrifice this land: Create two 1/1 colorless Thopter artifact creature tokens with flying.

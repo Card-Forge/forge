@@ -2,6 +2,6 @@ Name:Fists of Flame
 ManaCost:1 R
 Types:Instant
 A:SP$ Draw | SubAbility$ DBPump | SpellDescription$ Draw a card.
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Trample | NumAtt$ +X | StackDescription$ REP target creature_{c:Targeted} | SpellDescription$ Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Trample | NumAtt$ +X | StackDescription$ REP target creature_{c:Targeted} | SpellDescription$ Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.)
 SVar:X:Count$YouDrewThisTurn
-Oracle:Draw a card. Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn.
+Oracle:Draw a card. Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.)

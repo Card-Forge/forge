@@ -2,8 +2,8 @@ Name:Favored of Iroas
 ManaCost:2 W
 Types:Creature Human Soldier
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Constellation — Whenever an enchantment you control enters, CARDNAME gains double strike until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Constellation — Whenever an enchantment you control enters, this creature gains double strike until end of turn. (It deals both first-strike and regular combat damage.)
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Double Strike
 SVar:BuffedBy:Enchantment
 DeckNeeds:Type$Enchantment
-Oracle:Constellation — Whenever an enchantment you control enters, Favored of Iroas gains double strike until end of turn.
+Oracle:Constellation — Whenever an enchantment you control enters, this creature gains double strike until end of turn. (It deals both first-strike and regular combat damage.)
