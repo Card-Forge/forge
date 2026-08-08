@@ -370,7 +370,7 @@ public class Main extends IOSApplication.Delegate {
                 // DNS). There is no external config on iOS anyway: the DSN is set right here.
                 options.setEnableExternalConfiguration(false);
                 options.setDebugMetaLoader(io.sentry.internal.debugmeta.NoOpDebugMetaLoader.getInstance());
-                options.setRelease(forge.util.BuildInfo.getVersionString());
+                options.setRelease(getVersionString());
                 options.setEnvironment("iOS");
                 options.setTag("Platform", "iOS/RoboVM");
                 options.setShutdownTimeoutMillis(5000);
@@ -443,19 +443,7 @@ public class Main extends IOSApplication.Delegate {
 
         @Override
         public String getVersionString() {
-            // RoboVM AOT-links everything into one native binary with no runtime JAR manifest, so
-            // BuildInfo.getVersionString() (manifest Implementation-Version) resolves to "GIT" on iOS.
-            // Read the app bundle's own version instead — the iOS analog of Android's PackageManager
-            // versionName. CFBundleShortVersionString is the marketing version; CFBundleVersion is the
-            // (monotonic, per-upload) App Store build number.
-            try {
-                NSBundle b = NSBundle.getMainBundle();
-                String version = b.getInfoDictionaryObject("CFBundleShortVersionString").toString();
-                String build = b.getInfoDictionaryObject("CFBundleVersion").toString();
-                return version + " (" + build + ")";
-            } catch (Exception e) {
-                return "0.0";
-            }
+            return Main.getVersionString();
         }
 
         @Override
@@ -570,6 +558,22 @@ public class Main extends IOSApplication.Delegate {
         @Override
         public void requestFileAcces() {
 
+        }
+    }
+
+    private static String getVersionString() {
+        // RoboVM AOT-links everything into one native binary with no runtime JAR manifest, so
+        // BuildInfo.getVersionString() (manifest Implementation-Version) resolves to "GIT" on iOS.
+        // Read the app bundle's own version instead — the iOS analog of Android's PackageManager
+        // versionName. CFBundleShortVersionString is the marketing version; CFBundleVersion is the
+        // (monotonic, per-upload) App Store build number.
+        try {
+            NSBundle b = NSBundle.getMainBundle();
+            String version = b.getInfoDictionaryObject("CFBundleShortVersionString").toString();
+            String build = b.getInfoDictionaryObject("CFBundleVersion").toString();
+            return version + " (" + build + ")";
+        } catch (Exception e) {
+            return "0.0";
         }
     }
 }
