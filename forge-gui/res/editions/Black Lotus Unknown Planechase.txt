@@ -61,6 +61,9 @@ PLA046 C Year-End Review @
 
 [CreatureTypes]
 Fan:Fans
+[EnchantmentTypes]
+Entropy
+Omenpath
 [PlanarTypes]
 Amsterdam
 Blind Eternities
