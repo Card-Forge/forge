@@ -1269,7 +1269,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             HiddenOriginChoices choices = new HiddenOriginChoices();
-            choices.searchedLibrary = searchedLibrary;
+            // The loop below recovers the player from the map key, so it only ever sees the
+            // searched library's owner and cannot tell whose search this was.
+            choices.searchedOwnLibrary = searchedLibrary && decider.equals(player);
             choices.shuffleMandatory = shuffleMandatory;
             choices.chosenCards = chosenCards;
             choices.libraryPos = libraryPos;
@@ -1287,7 +1289,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
 
         for (Player player : hiddenChoices.keySet()) {
-            boolean searchedLibrary = hiddenChoices.get(player).searchedLibrary;
+            boolean searchedOwnLibrary = hiddenChoices.get(player).searchedOwnLibrary;
             boolean shuffleMandatory = hiddenChoices.get(player).shuffleMandatory;
             CardCollection chosenCards = hiddenChoices.get(player).chosenCards;
             int libraryPos = hiddenChoices.get(player).libraryPos;
@@ -1300,7 +1302,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 Card movedCard;
                 final Zone originZone = game.getZoneOf(c);
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
+                moveParams.put(AbilityKey.FoundSearchingLibrary, searchedOwnLibrary);
                 AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
                 if (destination == null) {
@@ -1553,7 +1555,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
     private static class HiddenOriginChoices {
         boolean shuffleMandatory;
-        boolean searchedLibrary;
+        boolean searchedOwnLibrary;
         CardCollection chosenCards;
         int libraryPos;
         List<ZoneType> origin;
