@@ -2,6 +2,6 @@ Name:Hematite Golem
 ManaCost:4
 Types:Artifact Creature Golem
 PT:1/4
-A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ This creature gets +2/+0 until end of turn.
 DeckNeeds:Color$Red
-Oracle:{1}{R}: Hematite Golem gets +2/+0 until end of turn.
+Oracle:{1}{R}: This creature gets +2/+0 until end of turn.

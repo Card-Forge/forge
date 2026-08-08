@@ -2,6 +2,6 @@ Name:Havoc Jester
 ManaCost:4 R
 Types:Creature Devil
 PT:5/5
-T:Mode$ Sacrificed | ValidCard$ Permanent.YouCtrl | Execute$ TrigDealDamage | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice a permanent, CARDNAME deals 1 damage to any target.
+T:Mode$ Sacrificed | ValidCard$ Permanent.YouCtrl | Execute$ TrigDealDamage | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice a permanent, this creature deals 1 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
-Oracle:Whenever you sacrifice a permanent, Havoc Jester deals 1 damage to any target.
+Oracle:Whenever you sacrifice a permanent, this creature deals 1 damage to any target.

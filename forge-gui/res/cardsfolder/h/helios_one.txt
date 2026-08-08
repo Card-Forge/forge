@@ -7,4 +7,4 @@ A:AB$ Destroy | Cost$ 3 T PayEnergy<X> Sac<1/CARDNAME> | ValidTgts$ Permanent.no
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 DeckHas:Ability$Counters|Sacrifice
-Oracle:{T}: Add {C}.\n{1}, {T}: You get {E} (an energy counter).\n{3}, {T}, Pay X {E}, Sacrifice HELIOS One: Destroy target nonland permanent with mana value X. Activate only as a sorcery.
+Oracle:{T}: Add {C}.\n{1}, {T}: You get {E} (an energy counter).\n{3}, {T}, Pay X {E}, Sacrifice this land: Destroy target nonland permanent with mana value X. Activate only as a sorcery.

@@ -3,8 +3,8 @@ ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this Aura enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't attack.
 S:Mode$ CantBlock | ValidCard$ Creature.EnchantedBy+Black | Description$ Enchanted creature can't block if it's black.
-Oracle:Enchant creature\nWhen Hobble enters, draw a card.\nEnchanted creature can't attack.\nEnchanted creature can't block if it's black.
+Oracle:Enchant creature\nWhen this Aura enters, draw a card.\nEnchanted creature can't attack.\nEnchanted creature can't block if it's black.

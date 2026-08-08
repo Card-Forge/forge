@@ -3,10 +3,10 @@ ManaCost:2 G
 Types:Creature Human Warrior
 PT:1/1
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Human you control enters, put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Human you control enters, put a +1/+1 counter on this creature.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is CARDNAME's power.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is this creature's power.
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters
 DeckNeeds:Type$Human
-Oracle:Vigilance\nWhenever another Human you control enters, put a +1/+1 counter on Heronblade Elite.\n{T}: Add X mana of any one color, where X is Heronblade Elite's power.
+Oracle:Vigilance\nWhenever another Human you control enters, put a +1/+1 counter on this creature.\n{T}: Add X mana of any one color, where X is this creature's power.

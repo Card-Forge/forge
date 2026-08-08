@@ -9,4 +9,4 @@ SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtProm
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters
-Oracle:First strike, reach\nAt the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is Halana and Alena's power. That creature gains haste until end of turn.
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nReach (This creature can block creatures with flying.)\nAt the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is Halana and Alena's power. That creature gains haste until end of turn.

@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Damage | Description$ Enchanted creature has "{T}: This creature deals 1 damage to any target."
-A:AB$ ChangeZone | Cost$ 1 U | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+A:AB$ ChangeZone | Cost$ 1 U | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return this Aura to its owner's hand.
 SVar:Damage:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:NonStackingAttachEffect:True
-Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals 1 damage to any target."\n{1}{U}: Return Hypervolt Grasp to its owner's hand.
+Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals 1 damage to any target."\n{1}{U}: Return this Aura to its owner's hand.

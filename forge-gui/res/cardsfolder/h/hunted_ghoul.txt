@@ -2,5 +2,5 @@ Name:Hunted Ghoul
 ManaCost:B
 Types:Creature Zombie
 PT:1/2
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.Human | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block Humans.
-Oracle:Hunted Ghoul can't block Humans.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Human | ValidBlocker$ Creature.Self | Description$ This creature can't block Humans.
+Oracle:This creature can't block Humans.
