@@ -106,19 +106,27 @@ public class PlayerZoneBattlefield extends PlayerZone {
         stackedTokens.clear();
         final boolean oldTrigger = trigger;
         trigger = false; // promote() already carried over the prototype's entry state // doc:1g DONE
+        // REFORGE COMMANDER EXTENSION
+        // Each add(copy) below fires updateZoneForView → the view re-reads the whole
+        // battlefield (O(K²) for K copies). Suppress per-copy refreshes like the
+        // TokenEffectBase burst pattern and push one refresh at the end; zone-change
+        // events still fire either way.
+        final boolean viewWasSuppressed = setSuppressViewUpdate(true);
         try {
             for (StackedTokenCard stack : stacks) {
                 if (stack.isEmpty()) continue;
                 // Route promoted copies through Zone.add() so zone-change events
-                // and view refreshes fire. NOT moveToPlay: these permanents already
-                // entered (and triggered) before stacking — a second move would
-                // double-fire ETB. // doc:1g DONE
+                // fire; single final view refresh below replaces the per-copy ones.
                 for (Card copy : stack.promoteAll()) {
                     add(copy);
                 }
             }
         } finally {
             trigger = oldTrigger;
+            setSuppressViewUpdate(viewWasSuppressed);
+            if (!viewWasSuppressed) {
+                getPlayer().updateZoneForView(this);
+            }
         }
     }
 
