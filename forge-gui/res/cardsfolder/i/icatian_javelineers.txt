@@ -2,8 +2,8 @@ Name:Icatian Javelineers
 ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
-K:etbCounter:JAVELIN:1
+K:etbCounter:JAVELIN:1:no Condition:This creature enters with a javelin counter on it.
 A:AB$ DealDamage | Cost$ T SubCounter<1/JAVELIN> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ It deals 1 damage to any target.
 DeckHas:Ability$Counters
 DeckHints:Ability$Proliferate
-Oracle:Icatian Javelineers enters with a javelin counter on it.\n{T}, Remove a javelin counter from Icatian Javelineers: It deals 1 damage to any target.
+Oracle:This creature enters with a javelin counter on it.\n{T}, Remove a javelin counter from this creature: It deals 1 damage to any target.

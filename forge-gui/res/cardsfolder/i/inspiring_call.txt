@@ -1,9 +1,9 @@
 Name:Inspiring Call
 ManaCost:2 G
 Types:Instant
-A:SP$ Draw | NumCards$ X | SubAbility$ DBPumpAll | SpellDescription$ Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn.
+A:SP$ Draw | NumCards$ X | SubAbility$ DBPumpAll | SpellDescription$ Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)
 SVar:X:Count$Valid Creature.YouCtrl+counters_GE1_P1P1
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+counters_GE1_P1P1 | KW$ Indestructible
 AI:RemoveDeck:Random
 DeckNeeds:Ability$Counters
-Oracle:Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn.
+Oracle:Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)

@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever enchanted creature becomes tapped, CARDNAME deals 2 damage to that creature's controller.
+T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever enchanted creature becomes tapped, this Aura deals 2 damage to that creature's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
-Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, Insolence deals 2 damage to that creature's controller.
+Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, this Aura deals 2 damage to that creature's controller.

@@ -2,6 +2,6 @@ Name:Ironwill Forger
 ManaCost:3 W
 Types:Creature Orc Artificer
 PT:3/3
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Execute$ TrigPump | TriggerDescription$ Lieutenant — At the beginning of combat on your turn, if your control your commander, target nonlegendary creature you control gains myriad until end of turn.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Execute$ TrigPump | TriggerDescription$ Lieutenant — At the beginning of combat on your turn, if you control your commander, target nonlegendary creature you control gains myriad until end of turn. (Whenever it attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+nonLegendary | TgtPrompt$ Select target nonlegendary creature you control | KW$ Myriad
-Oracle:Lieutenant — At the beginning of combat on your turn, if your control your commander, target nonlegendary creature you control gains myriad until end of turn.
+Oracle:Lieutenant — At the beginning of combat on your turn, if you control your commander, target nonlegendary creature you control gains myriad until end of turn. (Whenever it attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
