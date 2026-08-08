@@ -80,6 +80,9 @@ public class PumpAi extends PumpAiBase {
             if (ph.getPhase().isAfter(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE) || !ph.inCombat()) {
                 return false;
             }
+        } else if (logic.equals("Weld")) {
+            // nothing is gained by welding early, so hold it to the last moment before our turn
+            return super.checkPhaseRestrictions(ai, sa, ph, "AtOppEOT");
         }
         return super.checkPhaseRestrictions(ai, sa, ph);
     }
@@ -233,6 +236,8 @@ public class PumpAi extends PumpAiBase {
         } else if (aiLogic.startsWith("Donate")) {
             // Donate step 1 - try to target an opponent, preferably one who does not have a donate target yet
             return SpecialCardAi.Donate.considerTargetingOpponent(ai, sa);
+        } else if ("Weld".equals(aiLogic)) {
+            return doWeldLogic(ai, sa);
         } else if (aiLogic.equals("InfernoOfTheStarMounts")) {
             int numRedMana = ComputerUtilMana.determineLeftoverMana(new SpellAbility.EmptySa(source), ai, "R", false);
             int currentPower = source.getNetPower();
@@ -345,6 +350,55 @@ public class PumpAi extends PumpAiBase {
         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
+    /**
+     * Goblin Welder: the artifact targeted here is sacrificed and the artifact card targeted by the
+     * sub-ability replaces it, both belonging to the same player. Worth doing when that trade is an
+     * upgrade for us, or a downgrade for an opponent.
+     */
+    private AiAbilityDecision doWeldLogic(final Player ai, final SpellAbility sa) {
+        final SpellAbility returnSa = sa.getSubAbility();
+        if (returnSa == null) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        sa.resetTargets();
+        final CardCollection targetable = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+
+        final List<Player> welders = Lists.newArrayList(ai);
+        welders.addAll(ai.getOpponents());
+        for (final Player p : welders) {
+            final boolean ours = p == ai;
+            final CardCollection board = CardLists.filter(targetable, CardPredicates.isController(p));
+            final Card sacrificed = ours ? weldSacrifice(ai, sa, board)
+                    : ComputerUtilCard.getBestRemovalTargetAI(ai, board);
+            if (sacrificed == null) {
+                continue;
+            }
+
+            // once the parent target is set the sub-ability can choose what comes back, so what is
+            // weighed here is what will actually be targeted
+            sa.getTargets().add(sacrificed);
+            if (pumpMandatoryTarget(ai, returnSa)) {
+                final Card returned = returnSa.getTargetCard();
+                // upgrading ourselves, or leaving an opponent with the lesser artifact
+                if (ours ? returned.getCMC() > sacrificed.getCMC() : sacrificed.getCMC() > returned.getCMC()) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
+            sa.resetTargets();
+            returnSa.resetTargets();
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+    }
+
+    private static Card weldSacrifice(final Player ai, final SpellAbility sa, final CardCollection board) {
+        // anything already marked as expendable goes first, since mana value alone cannot tell a
+        // Sol Ring apart from a Chromatic Star
+        final Card expendable = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "SacCost", board, sa);
+        return expendable != null ? expendable : ComputerUtilCard.getWorstAI(board);
+    }
+
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory,
                               boolean immediately) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
@@ -419,6 +473,10 @@ public class PumpAi extends PumpAiBase {
                     return true;
                 }
                 return false;
+            } else if (sa.getParam("AILogic").equals("Weld")) {
+                // the parent has already settled whose artifact is going away, and the graveyard it
+                // has to come out of: best from our own, cheapest from theirs
+                return pumpMandatoryTarget(ai, sa);
             } else if (sa.getParam("AILogic").equals("SameName")) {
                 return doSameNameLogic(ai, sa);
             } else if (sa.getParam("AILogic").equals("SacOneEach")) {
