@@ -102,6 +102,7 @@ public final class ForgeConstants {
     public static final String SKIN_DIR                     = "skin" + PATH_SEPARATOR;
     public static final String ADVENTURE_COMMON_MUSIC_DIR   = ADVENTURE_COMMON_DIR + "music" + PATH_SEPARATOR;
     public static final String LANG_DIR                     = RES_DIR + "languages" + PATH_SEPARATOR;
+    public static final String CARD_LANGUAGES_FILE          = LANG_DIR + "card_languages.txt";
     public static final String EFFECTS_DIR                  = RES_DIR + "effects" + PATH_SEPARATOR;
     public static final String PUZZLE_DIR                   = RES_DIR + "puzzle" + PATH_SEPARATOR;
     public static final String TUTORIAL_DIR                 = RES_DIR + "tutorial" + PATH_SEPARATOR;
@@ -394,6 +395,29 @@ public final class ForgeConstants {
                 localizer.getMessage("lblNever"), "NEVER"
         );
     }
+
+    /**
+     * Languages in which Magic cards have been officially printed in significant
+     * volume and are indexed by Scryfall. See https://scryfall.com/docs/api/languages
+     * Key = display name shown in the UI, Value = Scryfall language code used in image URLs.
+     * LinkedHashMap preserves insertion order so English stays first/default in the dropdown.
+     */
+    public static Map<String, String> getScryfallCardLanguageMapping() {
+        final java.util.LinkedHashMap<String, String> map = new java.util.LinkedHashMap<>();
+        map.put("English", "en");
+        map.put("Spanish", "es");
+        map.put("French", "fr");
+        map.put("German", "de");
+        map.put("Italian", "it");
+        map.put("Portuguese", "pt");
+        map.put("Japanese", "ja");
+        map.put("Korean", "ko");
+        map.put("Russian", "ru");
+        map.put("Chinese Simplified", "zhs");
+        map.put("Chinese Traditional", "zht");
+        return map;
+    }
+
 
     public enum CounterDisplayLocation {
 
