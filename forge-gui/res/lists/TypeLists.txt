@@ -344,6 +344,7 @@ Wombat:Wombats
 Worm:Worms
 Wraith:Wraiths
 Wurm:Wurms
+Xindi:Xindi
 Yeti:Yetis
 Zombie:Zombies
 Zubera:Zuberas
