@@ -5,6 +5,7 @@ Name=Commander 2011
 Code2=COM
 Type=Commander
 ScryfallCode=CMD
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 U Artisan of Kozilek @Jason Felix
@@ -98,7 +99,7 @@ ScryfallCode=CMD
 89 R Mortivore @Anthony S. Waters
 90 U Nantuko Husk @Carl Critchlow
 91 U Nemesis Trap @Ryan Pancoast
-92 U Nezumi Graverobber @Jim Nelson
+92 U Nezumi Graverobber @Jim Nelson ${"lang": "en"}
 93 R Patron of the Nezumi @Kev Walker
 94 U Razorjaw Oni @Carl Critchlow
 95 R Reiver Demon @Brom

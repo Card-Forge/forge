@@ -9,6 +9,7 @@ BoosterSlots=Common,Common-Borderless,Uncommon,RareMythic,Land,Wildcard,Wildcard
 Booster=6 Common, 1 Common-Borderless, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
+CardLang=en,es,fr,de,it,ja
 
 [Common]
 Base=Common:!fromSheet("TLA allied lands"):fromSheet("TLA cards")
@@ -371,116 +372,116 @@ Replace=0.025F BasicLand:fromSheet("TLA appa basic")+
 290 L Mountain @Lorenzo Lanfranconi
 291 L Forest @Luc Courtois
 292 L Plains @Maojin Lee
-293 L Island @Slawek Fedorczuk
-294 L Swamp @Robin Olausson
-295 L Mountain @Maojin Lee
-296 L Forest @Slawek Fedorczuk
+293 L Island @Slawek Fedorczuk ${"lang": "en"}
+294 L Swamp @Robin Olausson ${"lang": "en"}
+295 L Mountain @Maojin Lee ${"lang": "en"}
+296 L Forest @Slawek Fedorczuk ${"lang": "en"}
 
 [borderless]
-297 M Fated Firepower @Claudiu-Antoniu Magherusan
-298 R Aang, Swift Savior @Claudiu-Antoniu Magherusan
-299 U Fire Nation Attacks @Claudiu-Antoniu Magherusan
-300 U Crashing Wave @Claudiu-Antoniu Magherusan
-301 U Combustion Technique @Toni Infante
-302 R Zuko, Conflicted @Toni Infante
-303 R Azula, Cunning Usurper @Toni Infante
-304 R Aang, at the Crossroads @Toni Infante
-305 R Katara, the Fearless @Toni Infante
-306 U Dai Li Agents @Toni Infante
-307 R Earthbender Ascension @Dominik Mayer
-308 M Avatar Aang @Dominik Mayer
-309 M Sozin's Comet @Dominik Mayer
-310 R Waterbender Ascension @Dominik Mayer
-311 M Ozai, the Phoenix King @Dominik Mayer
-312 R Firebender Ascension @Dominik Mayer
-313 R Fire Lord Azula @Dominik Mayer
-314 R The Last Agni Kai @Dominik Mayer
-315 R Fire Lord Zuko @Dominik Mayer
-316 M Appa, Steadfast Guardian @Ilse Gort
-317 R Momo, Friendly Flier @Filip Burburan
-318 R Tiger-Seal @Andrea Piparo
-319 R The Unagi of Kyoshi Island @Antonio José Manzanedo
-320 M Wan Shi Tong, Librarian @Andrea Piparo
-321 R The Fire Nation Drill @Ben Hill
-322 M Koh, the Face Stealer @Antonio José Manzanedo
-323 M Phoenix Fleet Airship @Ben Hill
-324 R Raven Eagle @Vincent Coviello
-325 R Ran and Shaw @Antonio José Manzanedo
-326 M Badgermole Cub @Filip Burburan
-327 R Diligent Zookeeper @Andrea Piparo
-328 R The Lion-Turtle @Filip Burburan
-329 M The Walls of Ba Sing Se @Ben Hill
-330 M White Lotus Tile @Antonio José Manzanedo
-331 M United Front @JungShan
-332 M Sozin's Comet @JungShan
-333 R Avatar Destiny @Flavio Girón
-334 R Fire Lord Azula @JungShan
-335 M Ozai, the Phoenix King @Sidharth Chaturvedi
-354 M The Legend of Yangchen @Sija Hong
-355 M The Legend of Kuruk @Barbara Rosiak
-356 M The Rise of Sozin @Barbara Rosiak
-357 M The Legend of Roku @Barbara Rosiak
-358 M The Legend of Kyoshi @Sija Hong
-359 R Aang, Swift Savior @Flavio Girón
-360 R Fire Lord Zuko @Flavio Girón
-361 R Katara, the Fearless @Flavio Girón
-362 R Toph, the First Metalbender @Flavio Girón
-363 M Avatar Aang @Bryan Konietzko
+297 M Fated Firepower @Claudiu-Antoniu Magherusan ${"lang": "en"}
+298 R Aang, Swift Savior @Claudiu-Antoniu Magherusan ${"lang": "en"}
+299 U Fire Nation Attacks @Claudiu-Antoniu Magherusan ${"lang": "en"}
+300 U Crashing Wave @Claudiu-Antoniu Magherusan ${"lang": "en"}
+301 U Combustion Technique @Toni Infante ${"lang": "en"}
+302 R Zuko, Conflicted @Toni Infante ${"lang": "en"}
+303 R Azula, Cunning Usurper @Toni Infante ${"lang": "en"}
+304 R Aang, at the Crossroads @Toni Infante ${"lang": "en"}
+305 R Katara, the Fearless @Toni Infante ${"lang": "en"}
+306 U Dai Li Agents @Toni Infante ${"lang": "en"}
+307 R Earthbender Ascension @Dominik Mayer ${"lang": "en"}
+308 M Avatar Aang @Dominik Mayer ${"lang": "en"}
+309 M Sozin's Comet @Dominik Mayer ${"lang": "en"}
+310 R Waterbender Ascension @Dominik Mayer ${"lang": "en"}
+311 M Ozai, the Phoenix King @Dominik Mayer ${"lang": "en"}
+312 R Firebender Ascension @Dominik Mayer ${"lang": "en"}
+313 R Fire Lord Azula @Dominik Mayer ${"lang": "en"}
+314 R The Last Agni Kai @Dominik Mayer ${"lang": "en"}
+315 R Fire Lord Zuko @Dominik Mayer ${"lang": "en"}
+316 M Appa, Steadfast Guardian @Ilse Gort ${"lang": "en"}
+317 R Momo, Friendly Flier @Filip Burburan ${"lang": "en"}
+318 R Tiger-Seal @Andrea Piparo ${"lang": "en"}
+319 R The Unagi of Kyoshi Island @Antonio José Manzanedo ${"lang": "en"}
+320 M Wan Shi Tong, Librarian @Andrea Piparo ${"lang": "en"}
+321 R The Fire Nation Drill @Ben Hill ${"lang": "en"}
+322 M Koh, the Face Stealer @Antonio José Manzanedo ${"lang": "en"}
+323 M Phoenix Fleet Airship @Ben Hill ${"lang": "en"}
+324 R Raven Eagle @Vincent Coviello ${"lang": "en"}
+325 R Ran and Shaw @Antonio José Manzanedo ${"lang": "en"}
+326 M Badgermole Cub @Filip Burburan ${"lang": "en"}
+327 R Diligent Zookeeper @Andrea Piparo ${"lang": "en"}
+328 R The Lion-Turtle @Filip Burburan ${"lang": "en"}
+329 M The Walls of Ba Sing Se @Ben Hill ${"lang": "en"}
+330 M White Lotus Tile @Antonio José Manzanedo ${"lang": "en"}
+331 M United Front @JungShan ${"lang": "en"}
+332 M Sozin's Comet @JungShan ${"lang": "en"}
+333 R Avatar Destiny @Flavio Girón ${"lang": "en"}
+334 R Fire Lord Azula @JungShan ${"lang": "en"}
+335 M Ozai, the Phoenix King @Sidharth Chaturvedi ${"lang": "en"}
+354 M The Legend of Yangchen @Sija Hong ${"lang": "en"}
+355 M The Legend of Kuruk @Barbara Rosiak ${"lang": "en"}
+356 M The Rise of Sozin @Barbara Rosiak ${"lang": "en"}
+357 M The Legend of Roku @Barbara Rosiak ${"lang": "en"}
+358 M The Legend of Kyoshi @Sija Hong ${"lang": "en"}
+359 R Aang, Swift Savior @Flavio Girón ${"lang": "en"}
+360 R Fire Lord Zuko @Flavio Girón ${"lang": "en"}
+361 R Katara, the Fearless @Flavio Girón ${"lang": "en"}
+362 R Toph, the First Metalbender @Flavio Girón ${"lang": "en"}
+363 M Avatar Aang @Bryan Konietzko ${"lang": "en"}
 
 [showcase]
-336 R Aang's Iceberg @Brigitte Roka & Clifton Stommel
-337 M Secret of Bloodbending @Barbara Rosiak
-338 R Yue, the Moon Spirit @Barbara Rosiak
-339 R Foggy Swamp Visions @Sija Hong
-340 R Obsessive Pursuit @Sija Hong
-341 M Fated Firepower @Brigitte Roka
-342 R Firebending Student @Ina Wong
-343 R Redirect Lightning @Perci Chen
-344 R The Earth King @Brigitte Roka & Clifton Stommel
-345 R Great Divide Guide @Shane Beresford
-346 R Aang, at the Crossroads @Brigitte Roka & Clifton Stommel
-347 R Aang, Swift Savior @Shane Beresford & Perci Chen
-348 M Bumi, Unleashed @Brigitte Roka
-349 R Iroh, Grand Lotus @Dalton Pencarinha
-350 R Katara, the Fearless @Barbara Rosiak
-351 R Katara, Water Tribe's Hope @Chun Lo
-352 R Sokka, Tenacious Tactician @Faustine Dumontier
-353 R Toph, the First Metalbender @Barbara Rosiak
+336 R Aang's Iceberg @Brigitte Roka & Clifton Stommel ${"lang": "en"}
+337 M Secret of Bloodbending @Barbara Rosiak ${"lang": "en"}
+338 R Yue, the Moon Spirit @Barbara Rosiak ${"lang": "en"}
+339 R Foggy Swamp Visions @Sija Hong ${"lang": "en"}
+340 R Obsessive Pursuit @Sija Hong ${"lang": "en"}
+341 M Fated Firepower @Brigitte Roka ${"lang": "en"}
+342 R Firebending Student @Ina Wong ${"lang": "en"}
+343 R Redirect Lightning @Perci Chen ${"lang": "en"}
+344 R The Earth King @Brigitte Roka & Clifton Stommel ${"lang": "en"}
+345 R Great Divide Guide @Shane Beresford ${"lang": "en"}
+346 R Aang, at the Crossroads @Brigitte Roka & Clifton Stommel ${"lang": "en"}
+347 R Aang, Swift Savior @Shane Beresford & Perci Chen ${"lang": "en"}
+348 M Bumi, Unleashed @Brigitte Roka ${"lang": "en"}
+349 R Iroh, Grand Lotus @Dalton Pencarinha ${"lang": "en"}
+350 R Katara, the Fearless @Barbara Rosiak ${"lang": "en"}
+351 R Katara, Water Tribe's Hope @Chun Lo ${"lang": "en"}
+352 R Sokka, Tenacious Tactician @Faustine Dumontier ${"lang": "en"}
+353 R Toph, the First Metalbender @Barbara Rosiak ${"lang": "en"}
 
 [extended art]
-364 R Airbender Ascension @Shiren
-365 R Avatar's Wrath @Ainezu
-366 R Hakoda, Selfless Commander @Rafater
-367 R South Pole Voyager @Tition
-368 R Suki, Courageous Rescuer @Tky
-369 R The Mechanist, Aerial Artisan @Le Vuong
-370 R Spirit Water Revival @Enishi
-371 R Ty Lee, Chi Blocker @Gemi
-372 R Boiling Rock Rioter @Airi Yoshihisa
-373 R Day of Black Sun @Matteo Bassini
-374 R Mai, Scornful Striker @Hori Airi
-375 R Wartime Protestors @Yosuke Adachi
-376 R Zhao, the Moon Slayer @Toraji
-377 R Earthen Ally @Boell Oyino
-378 R Elemental Teachings @Yoshioka
-379 R Beifong's Bounty Hunters @Alexandr Leskinen
-380 R Earth King's Lieutenant @Nathaniel Himawan
-381 R Iroh, Tea Master @Brian Yuen
-382 R Sandbender Scavengers @Alexander Forssberg
-383 R Sokka, Bold Boomeranger @Toni Infante
-384 R Toph, Hardheaded Teacher @Ruwen Liu
-385 M Planetarium of Wan Shi Tong @Robin Olausson
-386 R Abandoned Air Temple @Dom Lay
-387 R Agna Qel'a @Dom Lay
-388 R Ba Sing Se @Andreas Rocha
-389 R Fire Nation Palace @Awanqi (Angela Wang)
-390 R Jasmine Dragon Tea Shop @Leanna Crossan
-391 R Realm of Koh @Andreas Rocha
-392 R Secret Tunnel @Alexander Forssberg
+364 R Airbender Ascension @Shiren ${"lang": "en"}
+365 R Avatar's Wrath @Ainezu ${"lang": "en"}
+366 R Hakoda, Selfless Commander @Rafater ${"lang": "en"}
+367 R South Pole Voyager @Tition ${"lang": "en"}
+368 R Suki, Courageous Rescuer @Tky ${"lang": "en"}
+369 R The Mechanist, Aerial Artisan @Le Vuong ${"lang": "en"}
+370 R Spirit Water Revival @Enishi ${"lang": "en"}
+371 R Ty Lee, Chi Blocker @Gemi ${"lang": "en"}
+372 R Boiling Rock Rioter @Airi Yoshihisa ${"lang": "en"}
+373 R Day of Black Sun @Matteo Bassini ${"lang": "en"}
+374 R Mai, Scornful Striker @Hori Airi ${"lang": "en"}
+375 R Wartime Protestors @Yosuke Adachi ${"lang": "en"}
+376 R Zhao, the Moon Slayer @Toraji ${"lang": "en"}
+377 R Earthen Ally @Boell Oyino ${"lang": "en"}
+378 R Elemental Teachings @Yoshioka ${"lang": "en"}
+379 R Beifong's Bounty Hunters @Alexandr Leskinen ${"lang": "en"}
+380 R Earth King's Lieutenant @Nathaniel Himawan ${"lang": "en"}
+381 R Iroh, Tea Master @Brian Yuen ${"lang": "en"}
+382 R Sandbender Scavengers @Alexander Forssberg ${"lang": "en"}
+383 R Sokka, Bold Boomeranger @Toni Infante ${"lang": "en"}
+384 R Toph, Hardheaded Teacher @Ruwen Liu ${"lang": "en"}
+385 M Planetarium of Wan Shi Tong @Robin Olausson ${"lang": "en"}
+386 R Abandoned Air Temple @Dom Lay ${"lang": "en"}
+387 R Agna Qel'a @Dom Lay ${"lang": "en"}
+388 R Ba Sing Se @Andreas Rocha ${"lang": "en"}
+389 R Fire Nation Palace @Awanqi (Angela Wang) ${"lang": "en"}
+390 R Jasmine Dragon Tea Shop @Leanna Crossan ${"lang": "en"}
+391 R Realm of Koh @Andreas Rocha ${"lang": "en"}
+392 R Secret Tunnel @Alexander Forssberg ${"lang": "en"}
 
 [promo]
-393 R Firebending Student @Airi Yoshihisa
-394 R Momo, Friendly Flier @Ryota Murayama
+393 R Firebending Student @Airi Yoshihisa ${"lang": "en"}
+394 R Momo, Friendly Flier @Ryota Murayama ${"lang": "en"}
 
 [scene cards]
 1 Fated Firepower|TLA|[297]

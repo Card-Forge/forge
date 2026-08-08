@@ -9,6 +9,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 #BoosterBox=36 Boosters, 1 fromSheet('KHM buy a box')+
 FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 ScryfallCode=KHM
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 C Axgard Braggart @Svetlin Velinov
@@ -298,14 +299,14 @@ ScryfallCode=KHM
 285 C Snow-Covered Forest @Omar Rayyan
 
 [borderless]
-286 M Valki, God of Lies @Grzegorz Rutkowski
+286 M Valki, God of Lies @Grzegorz Rutkowski ${"lang": "en"}
 287 M Tyvar Kell @Johannes Voss
 288 M Kaya the Inexorable @Livia Prima
 289 M Niko Aris @Sara Winters
-290 R Barkchannel Pathway @Grady Frederick
-291 R Blightstep Pathway @Johannes Voss
-292 R Darkbore Pathway @Alayna Danner
-293 R Hengegate Pathway @Alayna Danner
+290 R Barkchannel Pathway @Grady Frederick ${"lang": "en"}
+291 R Blightstep Pathway @Johannes Voss ${"lang": "en"}
+292 R Darkbore Pathway @Alayna Danner ${"lang": "en"}
+293 R Hengegate Pathway @Alayna Danner ${"lang": "en"}
 294 M Starnheim Unleashed @Rudy Siswanto
 295 M Alrund's Epiphany @Volkan Baǵa
 296 M Haunting Voyage @Randy Vargas
@@ -313,26 +314,26 @@ ScryfallCode=KHM
 298 M Battle Mammoth @Nicholas Gregory
 
 [showcase]
-299 M Halvar, God of Battle @Milivoj Ćeran
-300 R Reidane, God of the Worthy @Andy Brase
+299 M Halvar, God of Battle @Milivoj Ćeran ${"lang": "en"}
+300 R Reidane, God of the Worthy @Andy Brase ${"lang": "en"}
 301 R Sigrid, God-Favored @Dibujante Nocturno
-302 M Alrund, God of the Cosmos @Richard Luong
-303 R Cosima, God of the Voyage @Andy Brase
+302 M Alrund, God of the Cosmos @Richard Luong ${"lang": "en"}
+303 R Cosima, God of the Voyage @Andy Brase ${"lang": "en"}
 304 U Inga Rune-Eyes @Nico Delort
 305 M Orvar, the All-Form @DZO
-306 R Egon, God of Death @Jeff Miracola
-307 R Tergrid, God of Fright @Richard Luong
-308 M Valki, God of Lies @Jeff Miracola
+306 R Egon, God of Death @Jeff Miracola ${"lang": "en"}
+307 R Tergrid, God of Fright @Richard Luong ${"lang": "en"}
+308 M Valki, God of Lies @Jeff Miracola ${"lang": "en"}
 309 R Varragoth, Bloodsky Sire @Ian Miller
 310 R Arni Brokenbrow @Milivoj Ćeran
-311 R Birgi, God of Storytelling @Richard Luong
+311 R Birgi, God of Storytelling @Richard Luong ${"lang": "en"}
 312 R Magda, Brazen Outlaw @DZO
-313 M Toralf, God of Fury @Matt Stikker
-314 M Esika, God of the Tree @Collin Estrada
+313 M Toralf, God of Fury @Matt Stikker ${"lang": "en"}
+314 M Esika, God of the Tree @Collin Estrada ${"lang": "en"}
 315 R Esika's Chariot @WolfSkullJack
 316 U Fynn, the Fangbearer @rishxxv
-317 R Jorn, God of Winter @WolfSkullJack
-318 R Kolvori, God of Kinship @Dibujante Nocturno
+317 R Jorn, God of Winter @WolfSkullJack ${"lang": "en"}
+318 R Kolvori, God of Kinship @Dibujante Nocturno ${"lang": "en"}
 319 R Toski, Bearer of Secrets @Andy Brase
 320 M Vorinclex, Monstrous Raider @Richard Luong
 321 U Aegar, the Freezing Flame @WolfSkullJack
@@ -347,49 +348,49 @@ ScryfallCode=KHM
 330 R Sarulf, Realm Eater @Dibujante Nocturno
 331 U Svella, Ice Shaper @DZO
 332 U Vega, the Watcher @DZO
-333 M Vorinclex, Monstrous Raider @Daarken
+333 M Vorinclex, Monstrous Raider @Daarken ${"lang": "ph"}
 
 [extended art]
-334 R Doomskar @Piotr Dura
-335 R Glorious Protector @PINDURSKI
-336 R Rally the Ranks @Lie Setiawan
-337 M Resplendent Marshal @Ryan Pancoast
-338 R Righteous Valkyrie @Chris Rahn
-339 R Runeforge Champion @Andrey Kuzinskiy
-340 R Search for Glory @Kieran Yanner
-341 R Ascendant Spirit @Lie Setiawan
-342 R Cosmos Charger @Nils Hamm
-343 R Cyclone Summoner @Andrey Kuzinskiy
-344 R Graven Lore @Svetlin Velinov
-345 R Icebreaker Kraken @Chris Cold
-346 R Mystic Reflection @YW Tang
-347 R Reflections of Littjara @Aaron Miller
-348 R Blood on the Snow @Martina Fačková
-349 M Burning-Rune Demon @Andrew Mar
-350 R Crippling Fear @Néstor Ossandón Leal
-351 R Draugr Necromancer @David Rapoza
-352 R Dream Devourer @David Rapoza
-353 M Eradicator Valkyrie @Tyler Jacobson
-354 R Rise of the Dread Marn @Titus Lunter
-355 R Skemfar Avenger @Randy Vargas
-356 R Calamity Bearer @Simon Dominic
-357 R Dragonkin Berserker @Lie Setiawan
-358 M Goldspan Dragon @Andrew Mar
-359 R Reckless Crew @Izzy
-360 R Tibalt's Trickery @Anna Podedworna
-361 R Tundra Fumarole @Simon Dominic
-362 R Blessing of Frost @Mila Pesic
-363 R Elvish Warmaster @Alexander Mokhov
-364 R In Search of Greatness @Ilse Gort
-365 R Old-Growth Troll @Jesper Ejsing
-366 R Realmwalker @Zack Stella
-367 R Immersturm Predator @Nicholas Gregory
-368 R Cosmos Elixir @Volkan Baǵa
-369 R Maskwood Nexus @Jason A. Engle
-370 R Pyre of Heroes @Piotr Dura
-371 R Faceless Haven @Titus Lunter
-372 R Tyrite Sanctum @Volkan Baǵa
-373 R The World Tree @Anastasia Ovchinnikova
+334 R Doomskar @Piotr Dura ${"lang": "en|es|fr|de|it|ja"}
+335 R Glorious Protector @PINDURSKI ${"lang": "en|es|fr|de|it|ja"}
+336 R Rally the Ranks @Lie Setiawan ${"lang": "en|es|fr|de|it|ja"}
+337 M Resplendent Marshal @Ryan Pancoast ${"lang": "en|es|fr|de|it|ja"}
+338 R Righteous Valkyrie @Chris Rahn ${"lang": "en|es|fr|de|it|ja"}
+339 R Runeforge Champion @Andrey Kuzinskiy ${"lang": "en|es|fr|de|it|ja"}
+340 R Search for Glory @Kieran Yanner ${"lang": "en|es|fr|de|it|ja"}
+341 R Ascendant Spirit @Lie Setiawan ${"lang": "en|es|fr|de|it|ja"}
+342 R Cosmos Charger @Nils Hamm ${"lang": "en|es|fr|de|it|ja"}
+343 R Cyclone Summoner @Andrey Kuzinskiy ${"lang": "en|es|fr|de|it|ja"}
+344 R Graven Lore @Svetlin Velinov ${"lang": "en|es|fr|de|it|ja"}
+345 R Icebreaker Kraken @Chris Cold ${"lang": "en|es|fr|de|it|ja"}
+346 R Mystic Reflection @YW Tang ${"lang": "en|es|fr|de|it|ja"}
+347 R Reflections of Littjara @Aaron Miller ${"lang": "en|es|fr|de|it|ja"}
+348 R Blood on the Snow @Martina Fačková ${"lang": "en|es|fr|de|it|ja"}
+349 M Burning-Rune Demon @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+350 R Crippling Fear @Néstor Ossandón Leal ${"lang": "en|es|fr|de|it|ja"}
+351 R Draugr Necromancer @David Rapoza ${"lang": "en|es|fr|de|it|ja"}
+352 R Dream Devourer @David Rapoza ${"lang": "en|es|fr|de|it|ja"}
+353 M Eradicator Valkyrie @Tyler Jacobson ${"lang": "en|es|fr|de|it|ja"}
+354 R Rise of the Dread Marn @Titus Lunter ${"lang": "en|es|fr|de|it|ja"}
+355 R Skemfar Avenger @Randy Vargas ${"lang": "en|es|fr|de|it|ja"}
+356 R Calamity Bearer @Simon Dominic ${"lang": "en|es|fr|de|it|ja"}
+357 R Dragonkin Berserker @Lie Setiawan ${"lang": "en|es|fr|de|it|ja"}
+358 M Goldspan Dragon @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+359 R Reckless Crew @Izzy ${"lang": "en|es|fr|de|it|ja"}
+360 R Tibalt's Trickery @Anna Podedworna ${"lang": "en|es|fr|de|it|ja"}
+361 R Tundra Fumarole @Simon Dominic ${"lang": "en|es|fr|de|it|ja"}
+362 R Blessing of Frost @Mila Pesic ${"lang": "en|es|fr|de|it|ja"}
+363 R Elvish Warmaster @Alexander Mokhov ${"lang": "en|es|fr|de|it|ja"}
+364 R In Search of Greatness @Ilse Gort ${"lang": "en|es|fr|de|it|ja"}
+365 R Old-Growth Troll @Jesper Ejsing ${"lang": "en|es|fr|de|it|ja"}
+366 R Realmwalker @Zack Stella ${"lang": "en|es|fr|de|it|ja"}
+367 R Immersturm Predator @Nicholas Gregory ${"lang": "en|es|fr|de|it|ja"}
+368 R Cosmos Elixir @Volkan Baǵa ${"lang": "en|es|fr|de|it|ja"}
+369 R Maskwood Nexus @Jason A. Engle ${"lang": "en|es|fr|de|it|ja"}
+370 R Pyre of Heroes @Piotr Dura ${"lang": "en|es|fr|de|it|ja"}
+371 R Faceless Haven @Titus Lunter ${"lang": "en|es|fr|de|it|ja"}
+372 R Tyrite Sanctum @Volkan Baǵa ${"lang": "en|es|fr|de|it|ja"}
+373 R The World Tree @Anastasia Ovchinnikova ${"lang": "en|es|fr|de|it|ja"}
 
 [precon product]
 374 R Valkyrie Harbinger @Tran Nguyen
@@ -422,14 +423,14 @@ ScryfallCode=KHM
 399 R Realmwalker @Igor Kieryluk
 
 [promo]
-400 R Reflections of Littjara @Cristi Balanescu
-401 U Usher of the Fallen @Anastasia Ovchinnikova
-402 C Strategic Planning @Donato Giancola
-403 U Poison the Cup @Colin Boyer
-404 C Frost Bite @Caio Monteiro
-405 C Masked Vandal @Jason A. Engle
-406 M Vorinclex, Monstrous Raider @Richard Whitters
-407 M Vorinclex, Monstrous Raider @Richard Whitters
+400 R Reflections of Littjara @Cristi Balanescu ${"lang": "en"}
+401 U Usher of the Fallen @Anastasia Ovchinnikova ${"lang": "en"}
+402 C Strategic Planning @Donato Giancola ${"lang": "en"}
+403 U Poison the Cup @Colin Boyer ${"lang": "en"}
+404 C Frost Bite @Caio Monteiro ${"lang": "en"}
+405 C Masked Vandal @Jason A. Engle ${"lang": "en"}
+406 M Vorinclex, Monstrous Raider @Richard Whitters ${"lang": "en"}
+407 M Vorinclex, Monstrous Raider @Richard Whitters ${"lang": "en"}
 
 [rebalanced]
 A-40 M A-Alrund, God of the Cosmos @Kieran Yanner

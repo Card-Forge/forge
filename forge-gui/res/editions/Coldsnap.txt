@@ -9,6 +9,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 FatPackExtraSlots=40 BasicLands
 ScryfallCode=CSP
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 R Adarkar Valkyrie @Jeremy Jarvis

@@ -9,6 +9,7 @@ BoosterBox=24
 FoilChanceInBooster=100
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=A25
+CardLang=en,ja,zhs
 
 [cards]
 1 C Act of Heroism @Magali Villeneuve

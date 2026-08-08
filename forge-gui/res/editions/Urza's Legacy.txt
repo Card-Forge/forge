@@ -9,6 +9,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ScryfallCode=ULG
+CardLang=en,es,fr,de,it,pt,ja,zht
 
 [cards]
 1 C Angelic Curator @Greg Staples

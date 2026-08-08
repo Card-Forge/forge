@@ -4,6 +4,7 @@ Date=2016-04-08
 Name=Welcome Deck 2016
 Type=Starter
 ScryfallCode=W16
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 R Aegis Angel @Aleksi Briclot

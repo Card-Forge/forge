@@ -9,6 +9,7 @@ BoosterMustContain=Legendary Creature
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 ScryfallCode=DMU
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 M Karn, Living Legacy @Chris Rahn
@@ -342,49 +343,49 @@ ScryfallCode=DMU
 325 U Vohar, Vodalian Desecrator @Nino Vecia
 326 U Zar Ojanen, Scion of Efrava @Eshpur
 327 M Zur, Eternal Schemer @Dan Mumford
-328 R Danitha, Benalia's Hope @Barbara Rosiak
-329 R Braids, Arisen Nightmare @Dibujante Nocturno
-330 R The Raven Man @David Curtis
-331 M Sheoldred, the Apocalypse @Joe Esposito
-332 R Squee, Dubious Monarch @Daniel Lieske
-333 U Aron, Benalia's Ruin @Jody Clark
-334 R Astor, Bearer of Blades @Ivan Shavrin
-335 U Baird, Argivian Recruiter @Barbara Rosiak
-336 U Balmor, Battlemage Captain @Nino Vecia
-337 U Bortuk Bonerattle @Justin Hernandez & Alexis Hernandez
-338 U Elas il-Kor, Sadistic Pilgrim @Joe Esposito
-339 R Ertai Resurrected @Justin Hernandez & Alexis Hernandez
-340 U Garna, Bloodfist of Keld @Benjamin Ee
-341 R Ivy, Gleeful Spellthief @Eshpur
-342 R Jhoira, Ageless Innovator @Lisa Heidhoff
-343 M Jodah, the Unifier @Barbara Rosiak
-344 R King Darien XLVIII @Jody Clark
-345 U Lagomos, Hand of Hatred @Joe Esposito
-346 R Meria, Scholar of Antiquity @Carly Mazur
-347 U Nael, Avizoa Aeronaut @Lisa Heidhoff
-348 U Najal, the Storm Runner @Serena Malyon
-349 R Nemata, Primeval Warden @Bastien Grivet
-350 U Queen Allenal of Ruadach @Carly Mazur
-351 U Radha, Coalition Warlord @Carly Mazur
-352 U Raff, Weatherlight Stalwart @Ivan Shavrin
-353 R Ratadrabik of Urborg @Nino Vecia
-354 M Rith, Liberated Primeval @Roman Kuteynikov
-355 R Rivaz of the Claw @Eugene Frost
-356 U Rona, Sheoldred's Faithful @Nino Vecia
-357 U Rulik Mons, Warren Chief @Roman Kuteynikov
-358 M Shanna, Purifying Blade @Jody Clark
-359 M Sol'Kanar the Tainted @Lisa Heidhoff
-360 M Soul of Windgrace @Ivan Shavrin
-361 R Stenn, Paranoid Partisan @Tyler Crook
-362 U Tatyova, Steward of Tides @Lisa Heidhoff
-363 U Tori D'Avenant, Fury Rider @Jody Clark
-364 U Tura Kennerüd, Skyknight @Benjamin Ee
-365 U Uurg, Spawn of Turg @Eugene Frost
-366 U Vohar, Vodalian Desecrator @Nino Vecia
-367 U Zar Ojanen, Scion of Efrava @Eshpur
-368 M Zur, Eternal Schemer @Dan Mumford
-369 M Sheoldred, the Apocalypse @Chris Rahn
-370 M Ajani, Sleeper Agent @Victor Adame Minguez
+328 R Danitha, Benalia's Hope @Barbara Rosiak ${"lang": "en|fr|de|ja|zhs"}
+329 R Braids, Arisen Nightmare @Dibujante Nocturno ${"lang": "en|fr|de|ja|zhs"}
+330 R The Raven Man @David Curtis ${"lang": "en|fr|de|ja|zhs"}
+331 M Sheoldred, the Apocalypse @Joe Esposito ${"lang": "en|fr|de|ja|zhs"}
+332 R Squee, Dubious Monarch @Daniel Lieske ${"lang": "en|fr|de|ja|zhs"}
+333 U Aron, Benalia's Ruin @Jody Clark ${"lang": "en|fr|de|ja|zhs"}
+334 R Astor, Bearer of Blades @Ivan Shavrin ${"lang": "en|fr|de|ja|zhs"}
+335 U Baird, Argivian Recruiter @Barbara Rosiak ${"lang": "en|fr|de|ja|zhs"}
+336 U Balmor, Battlemage Captain @Nino Vecia ${"lang": "en|fr|de|ja|zhs"}
+337 U Bortuk Bonerattle @Justin Hernandez & Alexis Hernandez ${"lang": "en|fr|de|ja|zhs"}
+338 U Elas il-Kor, Sadistic Pilgrim @Joe Esposito ${"lang": "en|fr|de|ja|zhs"}
+339 R Ertai Resurrected @Justin Hernandez & Alexis Hernandez ${"lang": "en|fr|de|ja|zhs"}
+340 U Garna, Bloodfist of Keld @Benjamin Ee ${"lang": "en|fr|de|ja|zhs"}
+341 R Ivy, Gleeful Spellthief @Eshpur ${"lang": "en|fr|de|ja|zhs"}
+342 R Jhoira, Ageless Innovator @Lisa Heidhoff ${"lang": "en|fr|de|ja|zhs"}
+343 M Jodah, the Unifier @Barbara Rosiak ${"lang": "en|fr|de|ja|zhs"}
+344 R King Darien XLVIII @Jody Clark ${"lang": "en|fr|de|ja|zhs"}
+345 U Lagomos, Hand of Hatred @Joe Esposito ${"lang": "en|fr|de|ja|zhs"}
+346 R Meria, Scholar of Antiquity @Carly Mazur ${"lang": "en|fr|de|ja|zhs"}
+347 U Nael, Avizoa Aeronaut @Lisa Heidhoff ${"lang": "en|fr|de|ja|zhs"}
+348 U Najal, the Storm Runner @Serena Malyon ${"lang": "en|fr|de|ja|zhs"}
+349 R Nemata, Primeval Warden @Bastien Grivet ${"lang": "en|fr|de|ja|zhs"}
+350 U Queen Allenal of Ruadach @Carly Mazur ${"lang": "en|fr|de|ja|zhs"}
+351 U Radha, Coalition Warlord @Carly Mazur ${"lang": "en|fr|de|ja|zhs"}
+352 U Raff, Weatherlight Stalwart @Ivan Shavrin ${"lang": "en|fr|de|ja|zhs"}
+353 R Ratadrabik of Urborg @Nino Vecia ${"lang": "en|fr|de|ja|zhs"}
+354 M Rith, Liberated Primeval @Roman Kuteynikov ${"lang": "en|fr|de|ja|zhs"}
+355 R Rivaz of the Claw @Eugene Frost ${"lang": "en|fr|de|ja|zhs"}
+356 U Rona, Sheoldred's Faithful @Nino Vecia ${"lang": "en|fr|de|ja|zhs"}
+357 U Rulik Mons, Warren Chief @Roman Kuteynikov ${"lang": "en|fr|de|ja|zhs"}
+358 M Shanna, Purifying Blade @Jody Clark ${"lang": "en|fr|de|ja|zhs"}
+359 M Sol'Kanar the Tainted @Lisa Heidhoff ${"lang": "en|fr|de|ja|zhs"}
+360 M Soul of Windgrace @Ivan Shavrin ${"lang": "en|fr|de|ja|zhs"}
+361 R Stenn, Paranoid Partisan @Tyler Crook ${"lang": "en|fr|de|ja|zhs"}
+362 U Tatyova, Steward of Tides @Lisa Heidhoff ${"lang": "en|fr|de|ja|zhs"}
+363 U Tori D'Avenant, Fury Rider @Jody Clark ${"lang": "en|fr|de|ja|zhs"}
+364 U Tura Kennerüd, Skyknight @Benjamin Ee ${"lang": "en|fr|de|ja|zhs"}
+365 U Uurg, Spawn of Turg @Eugene Frost ${"lang": "en|fr|de|ja|zhs"}
+366 U Vohar, Vodalian Desecrator @Nino Vecia ${"lang": "en|fr|de|ja|zhs"}
+367 U Zar Ojanen, Scion of Efrava @Eshpur ${"lang": "en|fr|de|ja|zhs"}
+368 M Zur, Eternal Schemer @Dan Mumford ${"lang": "en|fr|de|ja|zhs"}
+369 M Sheoldred, the Apocalypse @Chris Rahn ${"lang": "ph"}
+370 M Ajani, Sleeper Agent @Victor Adame Minguez ${"lang": "ph"}
 371 M Ajani, Sleeper Agent @Victor Adame Minguez
 
 [borderless]
@@ -401,64 +402,64 @@ ScryfallCode=DMU
 382 R Yavimaya Coast @Mark Poole
 
 [extended art]
-383 R Anointed Peacekeeper @Tia Masic
-384 R Archangel of Wrath @Miguel Mercado
-385 R Defiler of Faith @Magali Villeneuve
-386 R Guardian of New Benalia @Ernanda Souza
-387 R Leyline Binding @Cristi Balanescu
-388 M Serra Paragon @Heonhwa
-389 R Temporary Lockdown @Bryan Sola
-390 R Valiant Veteran @Néstor Ossandón Leal
-391 R Academy Loremaster @Marcela Medeiros
-392 R Aether Channeler @Caio Monteiro
-393 R Defiler of Dreams @Ryan Pancoast
-394 R Haughty Djinn @Mike Jordana
-395 R Silver Scrutiny @Donato Giancola
-396 M Sphinx of Clear Skies @Valera Lutfullina
-397 M Vesuvan Duplimancy @Wylie Beckert
-398 R Vodalian Hexcatcher @Dmitry Burmak
-399 R Vodalian Mindsinger @Steve Prescott
-400 R Defiler of Flesh @Mathias Kollros
-401 R Drag to the Bottom @Nino Is
-402 R Evolved Sleeper @Jason A. Engle
-403 R Shadow-Rite Priest @Michael C. Hayes
-404 R Stronghold Arena @Alexander Mokhov
-405 R Chaotic Transformation @Joseph Meehan
-406 R Defiler of Instinct @Steven Belledin
-407 R Keldon Flamesage @Jason A. Engle
-408 R Radha's Firebrand @Ângelo Bortolini
-409 R Rundvelt Hordemaster @Bruno Biazotto
-410 M Shivan Devastator @Brent Hollowell
-411 R Temporal Firestorm @Néstor Ossandón Leal
-412 R Defiler of Vigor @Chase Stone
-413 R Herd Migration @Eric Deschamps
-414 R Leaf-Crowned Visionary @Anna Steinbauer
-415 R Llanowar Greenwidow @Jokubas Uogintas
-416 R Llanowar Loamspeaker @Zara Alfonso
-417 R Quirion Beastcaller @Valera Lutfullina
-418 M Silverback Elder @Alexander Mokhov
-419 R Threats Undetected @Randy Vargas
-420 R Urborg Lhurgoyf @Andrey Kuzinskiy
-421 R Plaza of Heroes @Gabor Szikszai
-422 R Thran Portal @Sarah Finnigan
-423 R Serra Redeemer @Joshua Raphael
-424 R Cosmic Epiphany @Eli Minaya
-425 R Tyrannical Pitlord @Donato Giancola
-426 R Ragefire Hellkite @Xavier Ribeiro
-427 R Briar Hydra @Caio Monteiro
+383 R Anointed Peacekeeper @Tia Masic ${"lang": "en|fr|de|ja|zhs"}
+384 R Archangel of Wrath @Miguel Mercado ${"lang": "en|fr|de|ja|zhs"}
+385 R Defiler of Faith @Magali Villeneuve ${"lang": "en|fr|de|ja|zhs"}
+386 R Guardian of New Benalia @Ernanda Souza ${"lang": "en|fr|de|ja|zhs"}
+387 R Leyline Binding @Cristi Balanescu ${"lang": "en|fr|de|ja|zhs"}
+388 M Serra Paragon @Heonhwa ${"lang": "en|fr|de|ja|zhs"}
+389 R Temporary Lockdown @Bryan Sola ${"lang": "en|fr|de|ja|zhs"}
+390 R Valiant Veteran @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+391 R Academy Loremaster @Marcela Medeiros ${"lang": "en|fr|de|ja|zhs"}
+392 R Aether Channeler @Caio Monteiro ${"lang": "en|fr|de|ja|zhs"}
+393 R Defiler of Dreams @Ryan Pancoast ${"lang": "en|fr|de|ja|zhs"}
+394 R Haughty Djinn @Mike Jordana ${"lang": "en|fr|de|ja|zhs"}
+395 R Silver Scrutiny @Donato Giancola ${"lang": "en|fr|de|ja|zhs"}
+396 M Sphinx of Clear Skies @Valera Lutfullina ${"lang": "en|fr|de|ja|zhs"}
+397 M Vesuvan Duplimancy @Wylie Beckert ${"lang": "en|fr|de|ja|zhs"}
+398 R Vodalian Hexcatcher @Dmitry Burmak ${"lang": "en|fr|de|ja|zhs"}
+399 R Vodalian Mindsinger @Steve Prescott ${"lang": "en|fr|de|ja|zhs"}
+400 R Defiler of Flesh @Mathias Kollros ${"lang": "en|fr|de|ja|zhs"}
+401 R Drag to the Bottom @Nino Is ${"lang": "en|fr|de|ja|zhs"}
+402 R Evolved Sleeper @Jason A. Engle ${"lang": "en|fr|de|ja|zhs"}
+403 R Shadow-Rite Priest @Michael C. Hayes ${"lang": "en|fr|de|ja|zhs"}
+404 R Stronghold Arena @Alexander Mokhov ${"lang": "en|fr|de|ja|zhs"}
+405 R Chaotic Transformation @Joseph Meehan ${"lang": "en|fr|de|ja|zhs"}
+406 R Defiler of Instinct @Steven Belledin ${"lang": "en|fr|de|ja|zhs"}
+407 R Keldon Flamesage @Jason A. Engle ${"lang": "en|fr|de|ja|zhs"}
+408 R Radha's Firebrand @Ângelo Bortolini ${"lang": "en|fr|de|ja|zhs"}
+409 R Rundvelt Hordemaster @Bruno Biazotto ${"lang": "en|fr|de|ja|zhs"}
+410 M Shivan Devastator @Brent Hollowell ${"lang": "en|fr|de|ja|zhs"}
+411 R Temporal Firestorm @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+412 R Defiler of Vigor @Chase Stone ${"lang": "en|fr|de|ja|zhs"}
+413 R Herd Migration @Eric Deschamps ${"lang": "en|fr|de|ja|zhs"}
+414 R Leaf-Crowned Visionary @Anna Steinbauer ${"lang": "en|fr|de|ja|zhs"}
+415 R Llanowar Greenwidow @Jokubas Uogintas ${"lang": "en|fr|de|ja|zhs"}
+416 R Llanowar Loamspeaker @Zara Alfonso ${"lang": "en|fr|de|ja|zhs"}
+417 R Quirion Beastcaller @Valera Lutfullina ${"lang": "en|fr|de|ja|zhs"}
+418 M Silverback Elder @Alexander Mokhov ${"lang": "en|fr|de|ja|zhs"}
+419 R Threats Undetected @Randy Vargas ${"lang": "en|fr|de|ja|zhs"}
+420 R Urborg Lhurgoyf @Andrey Kuzinskiy ${"lang": "en|fr|de|ja|zhs"}
+421 R Plaza of Heroes @Gabor Szikszai ${"lang": "en|fr|de|ja|zhs"}
+422 R Thran Portal @Sarah Finnigan ${"lang": "en|fr|de|ja|zhs"}
+423 R Serra Redeemer @Joshua Raphael ${"lang": "en|fr|de|ja|zhs"}
+424 R Cosmic Epiphany @Eli Minaya ${"lang": "en|fr|de|ja|zhs"}
+425 R Tyrannical Pitlord @Donato Giancola ${"lang": "en|fr|de|ja|zhs"}
+426 R Ragefire Hellkite @Xavier Ribeiro ${"lang": "en|fr|de|ja|zhs"}
+427 R Briar Hydra @Caio Monteiro ${"lang": "en|fr|de|ja|zhs"}
 
 [buy a box]
 428 R Llanowar Loamspeaker @Volkan Baǵa
 
 [promo]
-429 R Herd Migration @Antonio José Manzanedo
+429 R Herd Migration @Antonio José Manzanedo ${"lang": "en|fr|de"}
 430 U Resolute Reinforcements @Billy Christian
 431 U Micromancer @Ernanda Souza
 432 U Cut Down @Dominik Mayer
 433 C Lightning Strike @Marta Nael
 434 U Nishoba Brawler @Valera Lutfullina
-435 M Sheoldred, the Apocalypse @Richard Whitters
-436 M Sheoldred, the Apocalypse @Richard Whitters
+435 M Sheoldred, the Apocalypse @Richard Whitters ${"lang": "en"}
+436 M Sheoldred, the Apocalypse @Richard Whitters ${"lang": "en"}
 
 [rebalanced]
 A-1 M A-Karn, Living Legacy @Chris Rahn

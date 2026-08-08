@@ -9,6 +9,7 @@ Booster=6 Common, 2 UncommonRare
 BoosterBox=60
 Foil=NotSupported
 ScryfallCode=HML
+CardLang=en,es,fr,de,it,pt
 
 [cards]
 1 U Abbey Gargoyles @Christopher Rush
@@ -82,7 +83,7 @@ ScryfallCode=HML
 56 U Sengir Autocrat @David A. Cherry
 57a C Sengir Bats @Dan Frazier
 57b C Sengir Bats @Dan Frazier
-58 R Timmerian Fiends @Mike Kimble
+58 R Timmerian Fiends @Mike Kimble ${"lang": "en|es|fr|de|it"}
 59a C Torture @Mark Tedin
 59b C Torture @Mark Tedin
 60 R Veldrane of Sengir @Susan Van Camp

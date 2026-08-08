@@ -4,6 +4,7 @@ Date=2025-09-26
 Name=Marvel's Spider-Man Eternal
 Type=Expansion
 ScryfallCode=SPE
+CardLang=en,fr,de,ja
 
 [cards]
 1 C Amateur Hero @Anthony Devine

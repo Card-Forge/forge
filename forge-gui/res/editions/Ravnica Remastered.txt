@@ -5,6 +5,7 @@ Name=Ravnica Remastered
 Type=Reprint
 Booster=10 Common:!fromSheet("RVR Mana Fixing"):fromsheet("RVR cards"), 3 Uncommon:!fromSheet("RVR Mana Fixing"):fromSheet("RVR cards"), 1 RareMythic:fromSheet("RVR cards"), 1 fromSheet("RVR Mana Fixing")
 ScryfallCode=RVR
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 M Karn, the Great Creator @Wisnu Tan
@@ -38,7 +39,7 @@ ScryfallCode=RVR
 29 C Syndicate Messenger @Viktor Titov
 30 U To Arms! @Aleksi Briclot
 31 R Tomik, Distinguished Advokist @Johannes Voss
-32 R Unbreakable Formation @Matt Stewart
+32 R Unbreakable Formation @Matt Stewart ${"lang": "en|es|de|it|pt|ja|zhs"}
 33 U Urbis Protector @Steve Argyle
 34 U Aetherplasm @Nottsuo
 35 M Bruvac the Grandiloquent @Ekaterina Burmak
@@ -151,7 +152,7 @@ ScryfallCode=RVR
 142 U Fungal Rebirth @Nicholas Gregory
 143 C Gather Courage @Brian Despain
 144 R Golgari Grave-Troll @Greg Hildebrandt
-145 C Greater Mossdog @Chippy
+145 C Greater Mossdog @Chippy ${"lang": "en|es|fr|de|pt|ja|zhs"}
 146 M Guardian Project @Chris Rallis
 147 C Horncaller's Chant @Eric Velhagen
 148 R Life from the Loam @Sung Choi
@@ -224,9 +225,9 @@ ScryfallCode=RVR
 215 R Rakdos, Lord of Riots @Vincent Proce
 216 M Ral Zarek @Eric Deschamps
 217 U Rhythm of the Wild @Maxime Minard
-218 R Savra, Queen of the Golgari @Aurore Folny
+218 R Savra, Queen of the Golgari @Aurore Folny ${"lang": "en|fr|de|it|pt|ja|zhs"}
 219 C Scab-Clan Mauler @Liam Sharp
-220 U Selesnya Evangel @Tiffany Turrill
+220 U Selesnya Evangel @Tiffany Turrill ${"lang": "en|es|de|it|pt|ja|zhs"}
 221 U Selesnya Guildmage @Mark Zug
 222 U Sharktocrab @Jehan Choo
 223 U Simic Guildmage @Aleksi Briclot
@@ -256,7 +257,7 @@ ScryfallCode=RVR
 247 R Response // Resurgence @Daarken
 248 R Assure // Assemble @Jason A. Engle
 249 R Repudiate // Replicate @Victor Adame Minguez
-250 U Azorius Signet @Raoul Vitale
+250 U Azorius Signet @Raoul Vitale ${"lang": "en|fr|de|it|pt|ja|zhs"}
 251 U Boros Signet @Greg Hildebrandt
 252 R Bottled Cloister @Luca Zontini
 253 R Chromatic Lantern @Jung Park
@@ -300,16 +301,16 @@ ScryfallCode=RVR
 291 R Watery Grave @Rob Alexander
 
 [borderless]
-292 R Blood Crypt @Jonas De Ro
-293 R Breeding Pool @Yeong-Hao Han
-294 R Godless Shrine @Cliff Childs
-295 R Hallowed Fountain @Yeong-Hao Han
-296 R Overgrown Tomb @Svetlin Velinov
-297 R Sacred Foundry @Chris Ostrowski
-298 R Steam Vents @Yeong-Hao Han
-299 R Stomping Ground @Cliff Childs
-300 R Temple Garden @Alayna Danner
-301 R Watery Grave @Svetlin Velinov
+292 R Blood Crypt @Jonas De Ro ${"lang": "en|ja|zhs"}
+293 R Breeding Pool @Yeong-Hao Han ${"lang": "en|ja|zhs"}
+294 R Godless Shrine @Cliff Childs ${"lang": "en|ja|zhs"}
+295 R Hallowed Fountain @Yeong-Hao Han ${"lang": "en|ja|zhs"}
+296 R Overgrown Tomb @Svetlin Velinov ${"lang": "en|ja|zhs"}
+297 R Sacred Foundry @Chris Ostrowski ${"lang": "en|ja|zhs"}
+298 R Steam Vents @Yeong-Hao Han ${"lang": "en|ja|zhs"}
+299 R Stomping Ground @Cliff Childs ${"lang": "en|ja|zhs"}
+300 R Temple Garden @Alayna Danner ${"lang": "en|ja|zhs"}
+301 R Watery Grave @Svetlin Velinov ${"lang": "en|ja|zhs"}
 416 M Divine Visitation @Yuichi Murakami
 417 R Tomik, Distinguished Advokist @Yakotakos
 418 M Bruvac the Grandiloquent @Ai Nanahira
@@ -338,16 +339,16 @@ ScryfallCode=RVR
 441 R Teysa, Orzhov Scion @Fuzichoco
 442 R Chromatic Lantern @Dai-XT
 443 M Cloudstone Curio @Yumi Ozuno
-444 M Domri Rade @Susumu Kuroi
-445 M Ral Zarek @Fukuzo Katsura
+444 M Domri Rade @Susumu Kuroi ${"lang": "en"}
+445 M Ral Zarek @Fukuzo Katsura ${"lang": "en"}
 
 [retro frame]
-302 R Blazing Archon @Zoltan Boros & Gabor Szikszai
+302 R Blazing Archon @Zoltan Boros & Gabor Szikszai ${"lang": "en|es|fr|de|pt|ja|zhs"}
 303 R Blind Obedience @Seb McKinnon
 304 U Condemn @Daren Bader
 305 U Devouring Light @Pete Venters
-306 M Divine Visitation @Cristi Balanescu
-307 C Faith's Fetters @Chippy
+306 M Divine Visitation @Cristi Balanescu ${"lang": "en|es|fr|de|pt|ja|zhs"}
+307 C Faith's Fetters @Chippy ${"lang": "en|es|fr|de|pt|ja|zhs"}
 308 R Ghostway @Jim Murray
 309 M Bruvac the Grandiloquent @Ekaterina Burmak
 310 C Cloudfin Raptor @Maxime Minard
@@ -403,7 +404,7 @@ ScryfallCode=RVR
 360 R Cindervines @Mark Behm
 361 C Coiling Oracle @Mark Zug
 362 U Crackling Drake @Victor Adame Minguez
-363 R Deathrite Shaman @Steve Argyle
+363 R Deathrite Shaman @Steve Argyle ${"lang": "en|es|fr|it|pt|ja|zhs"}
 364 U Debt to the Deathless @Seb McKinnon
 365 R Dreadbore @Wayne Reynolds
 366 U Frilled Mystic @Randy Vargas
@@ -414,8 +415,8 @@ ScryfallCode=RVR
 371 R Lazav, the Multifarious @Yongjae Choi
 372 U Lightning Helix @Kev Walker
 373 M Master of Cruelties @Chase Stone
-374 U Mayhem Devil @Dmitry Burmak
-375 R Mindleech Mass @Kev Walker
+374 U Mayhem Devil @Dmitry Burmak ${"lang": "en|es|de|it|pt|ja|zhs"}
+375 R Mindleech Mass @Kev Walker ${"lang": "en|es|de|it|pt|ja|zhs"}
 376 R Niv-Mizzet, Parun @Svetlin Velinov
 377 R Prime Speaker Zegana @Willian Murai
 378 U Putrefy @Jim Nelson
@@ -438,8 +439,8 @@ ScryfallCode=RVR
 395 R Sword of the Paruns @Greg Hildebrandt
 396 C Azorius Guildgate @Drew Baker
 397 R Blood Crypt @Rob Alexander
-398 C Boros Guildgate @Titus Lunter
-399 R Breeding Pool @Rob Alexander
+398 C Boros Guildgate @Titus Lunter ${"lang": "en|fr|de|it|pt|ja|zhs"}
+399 R Breeding Pool @Rob Alexander ${"lang": "en|fr|de|it|pt|ja|zhs"}
 400 C Dimir Guildgate @Cliff Childs
 401 R Godless Shrine @Rob Alexander
 402 C Golgari Guildgate @Eytan Zana
@@ -455,28 +456,28 @@ ScryfallCode=RVR
 412 R Steam Vents @Rob Alexander
 413 R Stomping Ground @Rob Alexander
 414 R Temple Garden @Rob Alexander
-415 R Watery Grave @Rob Alexander
-446 R Rest in Peace @Alexandre Honoré
-447 U Sphere of Safety @Slawomir Maniak
-448 U Aetherize @Alexandre Honoré
-449 M Enter the Infinite @Jake Murray
-450 R Gigantoplasm @Kev Walker
-451 U Narcomoeba @Howard Lyon
-452 U Turnabout @Dan Murayama Scott
-453 U Creeping Chill @Wisnu Tan
-454 U Darkblast @Randy Gallegos
-455 R Pack Rat @Kev Walker
-456 U Shattering Spree @Pat Lee
-457 U Perilous Forays @Steve Ellis
-458 U Wilderness Reclamation @Tyler Walpole
-459 M Niv-Mizzet Reborn @Raymond Swanland
-460 C Shambling Shell @Joel Thomas
-461 R Supreme Verdict @Sam Burley
-462 U Magewright's Stone @Carl Critchlow
-463 R Pithing Needle @Anthony Palumbo
-464 R Karn's Bastion @Adam Paquette
-465 M Maze's End @Cliff Childs
-466 R Thespian's Stage @John Avon
+415 R Watery Grave @Rob Alexander ${"lang": "en|es|de|it|pt|ja|zhs"}
+446 R Rest in Peace @Alexandre Honoré ${"lang": "en|ja|zhs"}
+447 U Sphere of Safety @Slawomir Maniak ${"lang": "en|ja|zhs"}
+448 U Aetherize @Alexandre Honoré ${"lang": "en|ja|zhs"}
+449 M Enter the Infinite @Jake Murray ${"lang": "en|ja|zhs"}
+450 R Gigantoplasm @Kev Walker ${"lang": "en|ja|zhs"}
+451 U Narcomoeba @Howard Lyon ${"lang": "en|ja|zhs"}
+452 U Turnabout @Dan Murayama Scott ${"lang": "en|ja|zhs"}
+453 U Creeping Chill @Wisnu Tan ${"lang": "en|ja|zhs"}
+454 U Darkblast @Randy Gallegos ${"lang": "en|ja|zhs"}
+455 R Pack Rat @Kev Walker ${"lang": "en|ja|zhs"}
+456 U Shattering Spree @Pat Lee ${"lang": "en|ja|zhs"}
+457 U Perilous Forays @Steve Ellis ${"lang": "en|ja|zhs"}
+458 U Wilderness Reclamation @Tyler Walpole ${"lang": "en|ja|zhs"}
+459 M Niv-Mizzet Reborn @Raymond Swanland ${"lang": "en|ja|zhs"}
+460 C Shambling Shell @Joel Thomas ${"lang": "en|ja|zhs"}
+461 R Supreme Verdict @Sam Burley ${"lang": "en|ja|zhs"}
+462 U Magewright's Stone @Carl Critchlow ${"lang": "en|ja|zhs"}
+463 R Pithing Needle @Anthony Palumbo ${"lang": "en|ja|zhs"}
+464 R Karn's Bastion @Adam Paquette ${"lang": "en|ja|zhs"}
+465 M Maze's End @Cliff Childs ${"lang": "en|ja|zhs"}
+466 R Thespian's Stage @John Avon ${"lang": "en|ja|zhs"}
 467 R Niv-Mizzet, the Firemind @Todd Lockwood
 
 [Mana Fixing]

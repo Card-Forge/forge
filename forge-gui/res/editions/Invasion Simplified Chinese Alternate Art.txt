@@ -4,9 +4,10 @@ Date=2000-10-02
 Name=Invasion Simplified Chinese Alternate Art
 Type=Promo
 ScryfallCode=INV
+CardLang=en,es,fr,de,it,pt,ja,zhs,zht
 
 [cards]
-124s C Soul Burn @Andrew Goldhawk
-124★ C Soul Burn @Andrew Goldhawk
-134s C Urborg Skeleton @Tom Wänerstrand
-134★ C Urborg Skeleton @Tom Wänerstrand
+124s C Soul Burn @Andrew Goldhawk ${"lang": "zhs"}
+124★ C Soul Burn @Andrew Goldhawk ${"lang": "en"}
+134s C Urborg Skeleton @Tom Wänerstrand ${"lang": "zhs"}
+134★ C Urborg Skeleton @Tom Wänerstrand ${"lang": "en"}

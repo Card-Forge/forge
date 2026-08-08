@@ -4,6 +4,7 @@ Date=2010-03-19
 Name=Duel Decks: Phyrexia vs. the Coalition
 Type=Duel_Deck
 ScryfallCode=DDE
+CardLang=en,ja
 
 [cards]
 1 M Phyrexian Negator @Jim Murray

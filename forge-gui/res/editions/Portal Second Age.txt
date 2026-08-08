@@ -9,6 +9,7 @@ BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
 ScryfallCode=P02
+CardLang=en,es,fr,de,it,pt,ja
 
 [cards]
 1 U Alaborn Cavalier @Kev Walker

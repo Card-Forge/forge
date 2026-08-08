@@ -8,6 +8,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 FoilAlwaysInCommonSlot=False
 ScryfallCode=SOK
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 U Aether Shockwave @Stephen Tappin
@@ -36,7 +37,7 @@ ScryfallCode=SOK
 24 R Promise of Bunrei @Stephen Tappin
 25 R Pure Intentions @Randy Gallegos
 26 R Reverence @Ittoku
-27 R Rune-Tail, Kitsune Ascendant @Randy Gallegos
+27 R Rune-Tail, Kitsune Ascendant @Randy Gallegos ${"lang": "en"}
 28 C Shinen of Stars' Light @Jeremy Jarvis
 29 C Spiritual Visit @Pete Venters
 30 C Torii Watchward @Jeff Miracola
@@ -44,7 +45,7 @@ ScryfallCode=SOK
 32 C Cut the Earthly Bond @Jeff Miracola
 33 C Descendant of Soramaro @Brian Despain
 34 C Dreamcatcher @Mark Tedin
-35 R Erayo, Soratami Ascendant @Matt Cavotta
+35 R Erayo, Soratami Ascendant @Matt Cavotta ${"lang": "en"}
 36 R Eternal Dominion @Shishizaru
 37 U Evermind @Matt Thompson
 38 C Freed from the Real @Scott M. Fischer
@@ -87,7 +88,7 @@ ScryfallCode=SOK
 75 C Kami of Empty Graves @Greg Hildebrandt
 76 U Kemuri-Onna @Ittoku
 77 U Kiku's Shadow @Pete Venters
-78 R Kuon, Ogre Ascendant @Hideaki Takamura
+78 R Kuon, Ogre Ascendant @Hideaki Takamura ${"lang": "en"}
 79 C Kuro's Taken @Puddnhead
 80 U Locust Miser @Alan Pollack
 81 R Maga, Traitor to Mortals @Jim Murray
@@ -112,7 +113,7 @@ ScryfallCode=SOK
 100 C Glitterfang @Ron Spencer
 101 U Godo's Irregulars @Greg Hildebrandt
 102 R Hidetsugu's Second Rite @Jeff Miracola
-103 R Homura, Human Ascendant @Kev Walker
+103 R Homura, Human Ascendant @Kev Walker ${"lang": "en"}
 104 R Iizuka the Ruthless @Darrell Riche
 105 C Inner Fire @Christopher Moeller
 106 C Into the Fray @Paolo Parente
@@ -154,7 +155,7 @@ ScryfallCode=SOK
 142 R Reki, the History of Kamigawa @Edward P. Beard, Jr.
 143 C Rending Vines @Dan Frazier
 144 C Sakura-Tribe Scout @Darrell Riche
-145 R Sasaya, Orochi Ascendant @Christopher Moeller
+145 R Sasaya, Orochi Ascendant @Christopher Moeller ${"lang": "en"}
 146 R Seed the Land @Anthony S. Waters
 147 U Seek the Horizon @Eric Polak
 148 R Sekki, Seasons' Guide @Kev Walker

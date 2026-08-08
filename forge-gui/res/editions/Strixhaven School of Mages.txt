@@ -9,6 +9,7 @@ CollectorBooster=2 Uncommon:fromSheet("STA cards")+, 2 RareMythic:fromSheet("STA
 Prerelease=6 Boosters, 1 RareMythic+
 FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 ScryfallCode=STX
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 C Environmental Sciences @Jokubas Uogintas
@@ -289,8 +290,8 @@ ScryfallCode=STX
 
 [borderless]
 276 M Professor Onyx @Kieran Yanner
-277 M Mila, Crafty Companion @Yongjae Choi
-278 M Rowan, Scholar of Sparks @Anna Steinbauer
+277 M Mila, Crafty Companion @Yongjae Choi ${"lang": "en"}
+278 M Rowan, Scholar of Sparks @Anna Steinbauer ${"lang": "en"}
 279 M Kasmina, Enigma Sage @Ryan Pancoast
 
 [showcase]
@@ -301,87 +302,87 @@ ScryfallCode=STX
 284 M Tanazir Quandrix @Kekai Kotaki
 
 [extended art]
-285 M Mascot Exhibition @Randy Vargas
-286 R Wandering Archaic @Wayne Reynolds
-287 R Academic Probation @Cristi Balanescu
-288 R Devastating Mastery @Jake Murray
-289 R Elite Spellbinder @Ryan Pancoast
-290 R Leonin Lightscribe @Steven Belledin
-291 M Mavinda, Students' Advocate @Wesley Burt
-292 R Semester's End @Alayna Danner
-293 R Sparring Regimen @Tomasz Jedruszek
-294 R Strict Proctor @Jokubas Uogintas
-295 R Archmage Emeritus @Caio Monteiro
-296 R Dream Strix @YW Tang
-297 R Ingenious Mastery @Cristi Balanescu
-298 R Multiple Choice @Campbell White
-299 R Teachings of the Archaics @Lius Lasahido
-300 R Tempted by the Oriq @Billy Christian
-301 R Baleful Mastery @Chris Cold
-302 R Callous Bloodmage @Jokubas Uogintas
-303 R Confront the Past @Kieran Yanner
-304 R Oriq Loremage @JiHun Lee
-305 R Poet's Quill @Anna Fehr
-306 R Sedgemoor Witch @Igor Kieryluk
-307 R Conspiracy Theorist @Svetlin Velinov
-308 M Crackle with Power @Micah Epstein
-309 R Draconic Intervention @Johan Grenier
-310 R Efreet Flamepainter @Marta Nael
-311 R Fervent Mastery @Sean Sevestre
-312 R Illuminate History @Jokubas Uogintas
-313 R Retriever Phoenix @Karl Kopinski
-314 R Accomplished Alchemist @Randy Vargas
-315 R Basic Conjuration @Randy Vargas
-316 R Dragonsguard Elite @David Rapoza
-317 M Ecological Appreciation @Lie Setiawan
-318 R Exponential Growth @Izzy
-319 R Gnarled Professor @Simon Dominic
-320 R Verdant Mastery @Cristi Balanescu
-321 R Augmenter Pugilist @Volkan Baǵa
-322 M Blex, Vexing Pest @Ekaterina Burmak
-323 M Extus, Oriq Overlord @Chase Stone & Kekai Kotaki
-324 R Flamescroll Celebrant @Uriah Voth
-325 M Jadzi, Oracle of Arcavios @Chris Rahn
-326 R Kianne, Dean of Substance @Ryan Pancoast
-327 R Pestilent Cauldron @Dan Murayama Scott
-328 R Plargg, Dean of Chaos @Bryan Sola
-329 R Selfless Glyphweaver @Johannes Voss
-330 R Shaile, Dean of Radiance @Yongjae Choi
-331 R Torrent Sculptor @Slawomir Maniak
-332 R Uvilda, Dean of Perfection @Jason Rainville
-333 R Valentin, Dean of the Vein @Jesper Ejsing
-334 R Blade Historian @Cristi Balanescu
-335 M Blot Out the Sky @Olena Richards
-336 M Body of Research @Antonio José Manzanedo
-337 R Culling Ritual @Lorenzo Mastroianni
-338 R Culmination of Studies @Bryan Sola
-339 R Daemogoth Titan @Chris Cold
-340 R Double Major @Suzanne Helmigh
-341 R Dramatic Finale @Steve Argyle
-342 R Elemental Expressionist @Zack Stella
-343 M Harness Infinity @Seb McKinnon
-344 M Hofri Ghostforge @Daarken
-345 R Lorehold Command @Jason Rainville
-346 M Magma Opus @Liiga Smilshkalne
-347 R Manifestation Sage @Darren Tan
-348 R Prismari Command @Johannes Voss
-349 R Quandrix Command @Viktor Titov
-350 R Radiant Scrollwielder @Campbell White
-351 R Rushed Rebirth @Jason Kang
-352 R Silverquill Command @Bryan Sola
-353 R Silverquill Silencer @Zezhou Chen
-354 R Vanishing Verse @Chris Seaman
-355 R Venerable Warsinger @Jokubas Uogintas
-356 R Witherbloom Command @Dmitry Burmak
-357 R Codie, Vociferous Codex @Daniel Ljunggren
-358 R Strixhaven Stadium @Piotr Dura
-359 R The Biblioplex @Piotr Dura
-360 R Frostboil Snarl @Sam Burley
-361 R Furycalm Snarl @Sam Burley
-362 R Hall of Oracles @Piotr Dura
-363 R Necroblossom Snarl @Sam Burley
-364 R Shineshadow Snarl @Sam Burley
-365 R Vineglimmer Snarl @Sam Burley
+285 M Mascot Exhibition @Randy Vargas ${"lang": "en|es|fr|de|it|ja"}
+286 R Wandering Archaic @Wayne Reynolds ${"lang": "en"}
+287 R Academic Probation @Cristi Balanescu ${"lang": "en|es|fr|de|it|ja"}
+288 R Devastating Mastery @Jake Murray ${"lang": "en|es|fr|de|it|ja"}
+289 R Elite Spellbinder @Ryan Pancoast ${"lang": "en|es|fr|de|it|ja"}
+290 R Leonin Lightscribe @Steven Belledin ${"lang": "en|es|fr|de|it|ja"}
+291 M Mavinda, Students' Advocate @Wesley Burt ${"lang": "en|es|fr|de|it|ja"}
+292 R Semester's End @Alayna Danner ${"lang": "en|es|fr|de|it|ja"}
+293 R Sparring Regimen @Tomasz Jedruszek ${"lang": "en|es|fr|de|it|ja"}
+294 R Strict Proctor @Jokubas Uogintas ${"lang": "en|es|fr|de|it|ja"}
+295 R Archmage Emeritus @Caio Monteiro ${"lang": "en|es|fr|de|it|ja"}
+296 R Dream Strix @YW Tang ${"lang": "en|es|fr|de|it|ja"}
+297 R Ingenious Mastery @Cristi Balanescu ${"lang": "en|es|fr|de|it|ja"}
+298 R Multiple Choice @Campbell White ${"lang": "en|es|fr|de|it|ja"}
+299 R Teachings of the Archaics @Lius Lasahido ${"lang": "en|es|fr|de|it|ja"}
+300 R Tempted by the Oriq @Billy Christian ${"lang": "en|es|fr|de|it|ja"}
+301 R Baleful Mastery @Chris Cold ${"lang": "en|es|fr|de|it|ja"}
+302 R Callous Bloodmage @Jokubas Uogintas ${"lang": "en|es|fr|de|it|ja"}
+303 R Confront the Past @Kieran Yanner ${"lang": "en|es|fr|de|it|ja"}
+304 R Oriq Loremage @JiHun Lee ${"lang": "en|es|fr|de|it|ja"}
+305 R Poet's Quill @Anna Fehr ${"lang": "en|es|fr|de|it|ja"}
+306 R Sedgemoor Witch @Igor Kieryluk ${"lang": "en|es|fr|de|it|ja"}
+307 R Conspiracy Theorist @Svetlin Velinov ${"lang": "en|es|fr|de|it|ja"}
+308 M Crackle with Power @Micah Epstein ${"lang": "en|es|fr|de|it|ja"}
+309 R Draconic Intervention @Johan Grenier ${"lang": "en|es|fr|de|it|ja"}
+310 R Efreet Flamepainter @Marta Nael ${"lang": "en|es|fr|de|it|ja"}
+311 R Fervent Mastery @Sean Sevestre ${"lang": "en|es|fr|de|it|ja"}
+312 R Illuminate History @Jokubas Uogintas ${"lang": "en|es|fr|de|it|ja"}
+313 R Retriever Phoenix @Karl Kopinski ${"lang": "en|es|fr|de|it|ja"}
+314 R Accomplished Alchemist @Randy Vargas ${"lang": "en|es|fr|de|it|ja"}
+315 R Basic Conjuration @Randy Vargas ${"lang": "en|es|fr|de|it|ja"}
+316 R Dragonsguard Elite @David Rapoza ${"lang": "en|es|fr|de|it|ja"}
+317 M Ecological Appreciation @Lie Setiawan ${"lang": "en|es|fr|de|it|ja"}
+318 R Exponential Growth @Izzy ${"lang": "en|es|fr|de|it|ja"}
+319 R Gnarled Professor @Simon Dominic ${"lang": "en|es|fr|de|it|ja"}
+320 R Verdant Mastery @Cristi Balanescu ${"lang": "en|es|fr|de|it|ja"}
+321 R Augmenter Pugilist @Volkan Baǵa ${"lang": "en"}
+322 M Blex, Vexing Pest @Ekaterina Burmak ${"lang": "en"}
+323 M Extus, Oriq Overlord @Chase Stone & Kekai Kotaki ${"lang": "en"}
+324 R Flamescroll Celebrant @Uriah Voth ${"lang": "en"}
+325 M Jadzi, Oracle of Arcavios @Chris Rahn ${"lang": "en"}
+326 R Kianne, Dean of Substance @Ryan Pancoast ${"lang": "en"}
+327 R Pestilent Cauldron @Dan Murayama Scott ${"lang": "en"}
+328 R Plargg, Dean of Chaos @Bryan Sola ${"lang": "en"}
+329 R Selfless Glyphweaver @Johannes Voss ${"lang": "en"}
+330 R Shaile, Dean of Radiance @Yongjae Choi ${"lang": "en"}
+331 R Torrent Sculptor @Slawomir Maniak ${"lang": "en"}
+332 R Uvilda, Dean of Perfection @Jason Rainville ${"lang": "en"}
+333 R Valentin, Dean of the Vein @Jesper Ejsing ${"lang": "en"}
+334 R Blade Historian @Cristi Balanescu ${"lang": "en|es|fr|de|it|ja"}
+335 M Blot Out the Sky @Olena Richards ${"lang": "en|es|fr|de|it|ja"}
+336 M Body of Research @Antonio José Manzanedo ${"lang": "en|es|fr|de|it|ja"}
+337 R Culling Ritual @Lorenzo Mastroianni ${"lang": "en|es|fr|de|it|ja"}
+338 R Culmination of Studies @Bryan Sola ${"lang": "en|es|fr|de|it|ja"}
+339 R Daemogoth Titan @Chris Cold ${"lang": "en|es|fr|de|it|ja"}
+340 R Double Major @Suzanne Helmigh ${"lang": "en|es|fr|de|it|ja"}
+341 R Dramatic Finale @Steve Argyle ${"lang": "en|es|fr|de|it|ja"}
+342 R Elemental Expressionist @Zack Stella ${"lang": "en|es|fr|de|it|ja"}
+343 M Harness Infinity @Seb McKinnon ${"lang": "en|es|fr|de|it|ja"}
+344 M Hofri Ghostforge @Daarken ${"lang": "en|es|fr|de|it|ja"}
+345 R Lorehold Command @Jason Rainville ${"lang": "en|es|fr|de|it|ja"}
+346 M Magma Opus @Liiga Smilshkalne ${"lang": "en|es|fr|de|it|ja"}
+347 R Manifestation Sage @Darren Tan ${"lang": "en|es|fr|de|it|ja"}
+348 R Prismari Command @Johannes Voss ${"lang": "en|es|fr|de|it|ja"}
+349 R Quandrix Command @Viktor Titov ${"lang": "en|es|fr|de|it|ja"}
+350 R Radiant Scrollwielder @Campbell White ${"lang": "en|es|fr|de|it|ja"}
+351 R Rushed Rebirth @Jason Kang ${"lang": "en|es|fr|de|it|ja"}
+352 R Silverquill Command @Bryan Sola ${"lang": "en|es|fr|de|it|ja"}
+353 R Silverquill Silencer @Zezhou Chen ${"lang": "en|es|fr|de|it|ja"}
+354 R Vanishing Verse @Chris Seaman ${"lang": "en|es|fr|de|it|ja"}
+355 R Venerable Warsinger @Jokubas Uogintas ${"lang": "en|es|fr|de|it|ja"}
+356 R Witherbloom Command @Dmitry Burmak ${"lang": "en|es|fr|de|it|ja"}
+357 R Codie, Vociferous Codex @Daniel Ljunggren ${"lang": "en|es|fr|de|it|ja"}
+358 R Strixhaven Stadium @Piotr Dura ${"lang": "en|es|fr|de|it|ja"}
+359 R The Biblioplex @Piotr Dura ${"lang": "en|es|fr|de|it|ja"}
+360 R Frostboil Snarl @Sam Burley ${"lang": "en|es|fr|de|it|ja"}
+361 R Furycalm Snarl @Sam Burley ${"lang": "en|es|fr|de|it|ja"}
+362 R Hall of Oracles @Piotr Dura ${"lang": "en|es|fr|de|it|ja"}
+363 R Necroblossom Snarl @Sam Burley ${"lang": "en|es|fr|de|it|ja"}
+364 R Shineshadow Snarl @Sam Burley ${"lang": "en|es|fr|de|it|ja"}
+365 R Vineglimmer Snarl @Sam Burley ${"lang": "en|es|fr|de|it|ja"}
 
 [precon product]
 366 L Plains @Jonas De Ro
@@ -399,7 +400,7 @@ ScryfallCode=STX
 376 R Dragonsguard Elite @Daarken
 
 [promo]
-377 R Archmage Emeritus @Micah Epstein
+377 R Archmage Emeritus @Micah Epstein ${"lang": "en|es|fr|de|it|ru"}
 378 U Fracture @Miranda Meeks
 379 U Expressive Iteration @Anastasia Ovchinnikova
 380 U Mortality Spear @PINDURSKI

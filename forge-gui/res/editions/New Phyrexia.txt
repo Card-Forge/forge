@@ -10,6 +10,7 @@ FatPackExtraSlots=40 BasicLands
 ChaosDraftThemes=MIRRODIN
 ScryfallCode=NPH
 TokenFallbackCode=MBS
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs,zht
 
 [cards]
 1 M Karn Liberated @Jason Chan

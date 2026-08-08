@@ -10,6 +10,7 @@ FatPack=6
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ScryfallCode=APC
+CardLang=en,es,fr,de,it,pt,ja,zhs,zht
 
 [cards]
 1 C Angelfire Crusader @Edward P. Beard, Jr.
@@ -139,11 +140,11 @@ ScryfallCode=APC
 125 C Temporal Spring @John Matson
 126 R Vindicate @Brian Snõddy
 127 R Yavimaya's Embrace @Eric Peterson
-128 U Fire // Ice @David Martin & Franz Vohwinkel
-129 U Illusion // Reality @John Avon & David Martin
-130 U Life // Death @Anthony S. Waters & Edward P. Beard, Jr.
-131 U Night // Day @Christopher Moeller & Anthony S. Waters
-132 U Order // Chaos @Tim Hildebrandt
+128 U Fire // Ice @David Martin & Franz Vohwinkel ${"lang": "en|es|pt|ja|zhs|zht"}
+129 U Illusion // Reality @John Avon & David Martin ${"lang": "en|es|pt|ja|zhs|zht"}
+130 U Life // Death @Anthony S. Waters & Edward P. Beard, Jr. ${"lang": "en|es|pt|ja|zhs|zht"}
+131 U Night // Day @Christopher Moeller & Anthony S. Waters ${"lang": "en|es|pt|ja|zhs|zht"}
+132 U Order // Chaos @Tim Hildebrandt ${"lang": "en|es|pt|ja|zhs|zht"}
 133 U Brass Herald @Daren Bader
 134 U Dodecapod @John Howe
 135 U Dragon Arch @Dana Knutson

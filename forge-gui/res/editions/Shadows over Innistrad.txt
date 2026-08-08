@@ -10,6 +10,7 @@ FatPackExtraSlots=80 BasicLands
 ChanceReplaceCommonWith=.125F dfc:RareMythic
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=SOI
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 R Always Watching @Chase Stone

@@ -9,6 +9,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
+CardLang=en,es,fr,de,it,pt,ja,zhs,zht
 
 [cards]
 1 C Aura Blast @Ron Walotsky
@@ -85,7 +86,7 @@ FoilAlwaysInCommonSlot=False
 72 C Slingshot Goblin @Jeff Easley
 73 U Strafe @Jim Nelson
 74 R Tahngarth, Talruum Hero @Dave Dorman
-74★ R Tahngarth, Talruum Hero @Kev Walker
+74★ R Tahngarth, Talruum Hero @Kev Walker ${"lang": "en|es|it|pt|ja|zhs|zht"}
 75 U Thunderscape Battlemage @Mike Ploog
 76 C Thunderscape Familiar @Daren Bader
 77 U Alpha Kavu @Matt Cavotta
@@ -119,7 +120,7 @@ FoilAlwaysInCommonSlot=False
 105 U Dromar's Charm @David Martin
 106 R Eladamri's Call @Kev Walker
 107 R Ertai, the Corrupted @Mark Tedin
-107★ R Ertai, the Corrupted @Kev Walker
+107★ R Ertai, the Corrupted @Kev Walker ${"lang": "en|es|it|pt|ja|zhs|zht"}
 108 U Fleetfoot Panther @Mark Brill
 109 C Gerrard's Command @Roger Raupp
 110 C Horned Kavu @Michael Sutfin
@@ -145,8 +146,8 @@ FoilAlwaysInCommonSlot=False
 130 R Urza's Guilt @Paolo Parente
 131 R Draco @Sam Wood
 132 U Mana Cylix @Donato Giancola
-133 R Skyship Weatherlight @Mark Tedin
-133★ R Skyship Weatherlight @Kev Walker
+133 R Skyship Weatherlight @Mark Tedin ${"lang": "en|es|de|it|pt|ja|zhs|zht"}
+133★ R Skyship Weatherlight @Kev Walker ${"lang": "en|es|it|pt|ja|zhs|zht"}
 134 U Star Compass @Donato Giancola
 135 U Stratadon @Brian Snõddy
 136 U Crosis's Catacombs @Edward P. Beard, Jr.

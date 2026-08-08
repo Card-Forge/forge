@@ -9,6 +9,7 @@ FatPack=10
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=RAVNICA
 ScryfallCode=RNA
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 M Angel of Grace @Ryan Yee
@@ -272,19 +273,19 @@ ScryfallCode=RNA
 259 R Stomping Ground @James Paick
 
 [precon product]
-260 L Plains @Titus Lunter
-261 L Island @Eytan Zana
-262 L Swamp @Adam Paquette
-263 L Mountain @Jonas De Ro
-264 L Forest @Eytan Zana
-265 M Dovin, Architect of Law @Kieran Yanner
-266 C Elite Arrester @Randy Vargas
-267 R Dovin's Dismissal @Kieran Yanner
-268 U Dovin's Automaton @Adam Paquette
-269 M Domri, City Smasher @Eric Deschamps
-270 C Ragefire @Randy Vargas
-271 U Charging War Boar @Izzy
-272 R Domri's Nodorog @Svetlin Velinov
+260 L Plains @Titus Lunter ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+261 L Island @Eytan Zana ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+262 L Swamp @Adam Paquette ${"lang": "en"}
+263 L Mountain @Jonas De Ro ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+264 L Forest @Eytan Zana ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+265 M Dovin, Architect of Law @Kieran Yanner ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+266 C Elite Arrester @Randy Vargas ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+267 R Dovin's Dismissal @Kieran Yanner ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+268 U Dovin's Automaton @Adam Paquette ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+269 M Domri, City Smasher @Eric Deschamps ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+270 C Ragefire @Randy Vargas ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+271 U Charging War Boar @Izzy ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+272 R Domri's Nodorog @Svetlin Velinov ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
 
 [buy a box]
 273 M The Haunt of Hightower @Lius Lasahido

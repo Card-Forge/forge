@@ -4,6 +4,7 @@ Date=2021-07-23
 Name=Dungeons & Dragons: Adventures in the Forgotten Realms Commander
 Type=Commander
 ScryfallCode=AFC
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs,zht
 
 [cards]
 1 M Galea, Kindler of Hope @Johannes Voss
@@ -279,62 +280,62 @@ ScryfallCode=AFC
 271 C Thriving Moor @Titus Lunter
 272 U Vitu-Ghazi, the City-Tree @Martina Pilcerova
 273 U Zhalfirin Void @Chase Stone
-274 R Fey Steed @Jonathan Kuo
-275 R Holy Avenger @Milivoj Ćeran
-276 R Immovable Rod @Jakub Kasper
-277 R Mantle of the Ancients @Denman Rooke
-278 R Radiant Solar @Alexander Mokhov
-279 R Revivify @Caio Monteiro
-280 R Robe of Stars @Olena Richards
-281 R Thorough Investigation @Aaron J. Riley
-282 R Valiant Endeavor @Antonio José Manzanedo
-283 R Arcane Endeavor @Justyna Dura
-284 R Diviner's Portent @Lie Setiawan
-285 R Minn, Wily Illusionist @Dmitry Burmak
-286 R Netherese Puzzle-Ward @Ralph Horsley
-287 R Phantom Steed @Brian Valeza
-288 R Rod of Absorption @Svetlin Velinov
-289 R Winged Boots @Kim Sokol
-290 R Bag of Devouring @Sean Murray
-291 R Danse Macabre @Randy Vargas
-292 R Death Tyrant @Nicholas Gregory
-293 R Grave Endeavor @YW Tang
-294 R Grim Hireling @Tomas Duchek
-295 R Hellish Rebuke @Heonhwa
-296 R Lorcan, Warlock Collector @Andrew Mar
-297 R Wand of Orcus @Andrew Mar
-298 R Berserker's Frenzy @Caio Monteiro
-299 R Chaos Dragon @Grzegorz Rutkowski
-300 R Fiendlash @Antonio José Manzanedo
-301 R Maddening Hex @Bryan Sola
-302 R Reckless Endeavor @Billy Christian
-303 R Share the Spoils @Sidharth Chaturvedi
-304 R Vengeful Ancestor @Svetlin Velinov
-305 R Wild-Magic Sorcerer @Aaron J. Riley
-306 R Bag of Tricks @Jakub Kasper
-307 R Belt of Giant Strength @Viko Menezes
-308 R Druid of Purification @Jake Murray
-309 R Indomitable Might @Svetlin Velinov
-310 R Neverwinter Hydra @Lucas Graciano
-311 R Song of Inspiration @Lie Setiawan
-312 R Wild Endeavor @Uriah Voth
-313 R Catti-brie of Mithral Hall @Lius Lasahido
-314 R Dragonborn Champion @Andrey Kuzinskiy
-315 R Extract Brain @Nicholas Gregory
-316 R Fevered Suspicion @Rudy Siswanto
-317 M Galea, Kindler of Hope @Johannes Voss
-318 R Hurl Through Hell @Olena Richards
-319 M Karazikar, the Eye Tyrant @Jason A. Engle
-320 M Klauth, Unrivaled Ancient @Andrew Mar
-321 R Klauth's Will @Olivier Bernard
-322 R Midnight Pathlighter @PINDURSKI
-323 M Nihiloor @Chris Rallis
-324 M Prosper, Tome-Bound @Yongjae Choi
-325 R Ride the Avalanche @Andrew Mar
-326 M Sefris of the Hidden Ways @Ryan Pancoast
-327 M Storvald, Frost Giant Jarl @Campbell White
-328 M Vrondiss, Rage of Ancients @Svetlin Velinov
-329 R Wulfgar of Icewind Dale @Aleksi Briclot
+274 R Fey Steed @Jonathan Kuo ${"lang": "en|es|fr|de|it|ja"}
+275 R Holy Avenger @Milivoj Ćeran ${"lang": "en|es|fr|de|it|ja"}
+276 R Immovable Rod @Jakub Kasper ${"lang": "en|es|fr|de|it|ja"}
+277 R Mantle of the Ancients @Denman Rooke ${"lang": "en|es|fr|de|it|ja"}
+278 R Radiant Solar @Alexander Mokhov ${"lang": "en|es|fr|de|it|ja"}
+279 R Revivify @Caio Monteiro ${"lang": "en|es|fr|de|it|ja"}
+280 R Robe of Stars @Olena Richards ${"lang": "en|es|fr|de|it|ja"}
+281 R Thorough Investigation @Aaron J. Riley ${"lang": "en|es|fr|de|it|ja"}
+282 R Valiant Endeavor @Antonio José Manzanedo ${"lang": "en|es|fr|de|it|ja"}
+283 R Arcane Endeavor @Justyna Dura ${"lang": "en|es|fr|de|it|ja"}
+284 R Diviner's Portent @Lie Setiawan ${"lang": "en|es|fr|de|it|ja"}
+285 R Minn, Wily Illusionist @Dmitry Burmak ${"lang": "en|es|fr|de|it|ja"}
+286 R Netherese Puzzle-Ward @Ralph Horsley ${"lang": "en|es|fr|de|it|ja"}
+287 R Phantom Steed @Brian Valeza ${"lang": "en|es|fr|de|it|ja"}
+288 R Rod of Absorption @Svetlin Velinov ${"lang": "en|es|fr|de|it|ja"}
+289 R Winged Boots @Kim Sokol ${"lang": "en|es|fr|de|it|ja"}
+290 R Bag of Devouring @Sean Murray ${"lang": "en|es|fr|de|it|ja"}
+291 R Danse Macabre @Randy Vargas ${"lang": "en|es|fr|de|it|ja"}
+292 R Death Tyrant @Nicholas Gregory ${"lang": "en|es|fr|de|it|ja"}
+293 R Grave Endeavor @YW Tang ${"lang": "en|es|fr|de|it|ja"}
+294 R Grim Hireling @Tomas Duchek ${"lang": "en|es|fr|de|it|ja"}
+295 R Hellish Rebuke @Heonhwa ${"lang": "en|es|fr|de|it|ja"}
+296 R Lorcan, Warlock Collector @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+297 R Wand of Orcus @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+298 R Berserker's Frenzy @Caio Monteiro ${"lang": "en|es|fr|de|it|ja"}
+299 R Chaos Dragon @Grzegorz Rutkowski ${"lang": "en|es|fr|de|it|ja"}
+300 R Fiendlash @Antonio José Manzanedo ${"lang": "en|es|fr|de|it|ja"}
+301 R Maddening Hex @Bryan Sola ${"lang": "en|es|fr|de|it|ja"}
+302 R Reckless Endeavor @Billy Christian ${"lang": "en|es|fr|de|it|ja"}
+303 R Share the Spoils @Sidharth Chaturvedi ${"lang": "en|es|fr|de|it|ja"}
+304 R Vengeful Ancestor @Svetlin Velinov ${"lang": "en|es|fr|de|it|ja"}
+305 R Wild-Magic Sorcerer @Aaron J. Riley ${"lang": "en|es|fr|de|it|ja"}
+306 R Bag of Tricks @Jakub Kasper ${"lang": "en|es|fr|de|it|ja"}
+307 R Belt of Giant Strength @Viko Menezes ${"lang": "en|es|fr|de|it|ja"}
+308 R Druid of Purification @Jake Murray ${"lang": "en|es|fr|de|it|ja"}
+309 R Indomitable Might @Svetlin Velinov ${"lang": "en|es|fr|de|it|ja"}
+310 R Neverwinter Hydra @Lucas Graciano ${"lang": "en|es|fr|de|it|ja"}
+311 R Song of Inspiration @Lie Setiawan ${"lang": "en|es|fr|de|it|ja"}
+312 R Wild Endeavor @Uriah Voth ${"lang": "en|es|fr|de|it|ja"}
+313 R Catti-brie of Mithral Hall @Lius Lasahido ${"lang": "en|es|fr|de|it|ja"}
+314 R Dragonborn Champion @Andrey Kuzinskiy ${"lang": "en|es|fr|de|it|ja"}
+315 R Extract Brain @Nicholas Gregory ${"lang": "en|es|fr|de|it|ja"}
+316 R Fevered Suspicion @Rudy Siswanto ${"lang": "en|es|fr|de|it|ja"}
+317 M Galea, Kindler of Hope @Johannes Voss ${"lang": "en|es|fr|de|it|ja"}
+318 R Hurl Through Hell @Olena Richards ${"lang": "en|es|fr|de|it|ja"}
+319 M Karazikar, the Eye Tyrant @Jason A. Engle ${"lang": "en|es|fr|de|it|ja"}
+320 M Klauth, Unrivaled Ancient @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+321 R Klauth's Will @Olivier Bernard ${"lang": "en|es|fr|de|it|ja"}
+322 R Midnight Pathlighter @PINDURSKI ${"lang": "en|es|fr|de|it|ja"}
+323 M Nihiloor @Chris Rallis ${"lang": "en|es|fr|de|it|ja"}
+324 M Prosper, Tome-Bound @Yongjae Choi ${"lang": "en|es|fr|de|it|ja"}
+325 R Ride the Avalanche @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+326 M Sefris of the Hidden Ways @Ryan Pancoast ${"lang": "en|es|fr|de|it|ja"}
+327 M Storvald, Frost Giant Jarl @Campbell White ${"lang": "en|es|fr|de|it|ja"}
+328 M Vrondiss, Rage of Ancients @Svetlin Velinov ${"lang": "en|es|fr|de|it|ja"}
+329 R Wulfgar of Icewind Dale @Aleksi Briclot ${"lang": "en|es|fr|de|it|ja"}
 330 U Dragonspeaker Shaman @Kev Walker
 331 U Lightning Greaves @Jeremy Jarvis
 

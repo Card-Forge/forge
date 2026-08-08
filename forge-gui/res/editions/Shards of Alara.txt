@@ -8,6 +8,7 @@ Booster=10 Common:fromsheet("ALA cards"), 3 Uncommon:fromSheet("ALA cards"), 1 R
 FatPack=8
 FatPackExtraSlots=40 BasicLands
 ScryfallCode=ALA
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 C Akrasan Squire @Todd Lockwood
@@ -261,7 +262,7 @@ ScryfallCode=ALA
 249 L Forest @Michael Komarck
 
 [showcase]
-250 M Rafiq of the Many @Meel Tamphanon
+250 M Rafiq of the Many @Meel Tamphanon ${"lang": "en"}
 
 [tokens]
 1 w_1_1_soldier @Alan Pollack

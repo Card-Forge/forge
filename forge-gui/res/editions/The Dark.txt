@@ -9,6 +9,7 @@ Booster=6 Common, 2 UncommonRare
 BoosterBox=60
 Foil=NotSupported
 ScryfallCode=DRK
+CardLang=en,it
 
 [cards]
 1 U Angry Mob @Drew Tucker

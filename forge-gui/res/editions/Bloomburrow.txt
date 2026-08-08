@@ -10,6 +10,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 
 #Numbers from https://mtgscribe.com/2024/07/14/play-booster-fact-sheet-bloomburrow/
+CardLang=en,es,fr,de,it,ja
 [Common]
 Base=Common:fromSheet("BLB cards")
 
@@ -295,26 +296,26 @@ Replace=.012F RareMythic:fromSheet("BLB cards")
 259 U Rockface Village @Thomas Stoop
 260 R Three Tree City @Grady Frederick
 261 C Uncharted Haven @Adam Paquette
-262 L Plains @Carlos Palma Cruchaga
-263 L Plains @Carlos Palma Cruchaga
-264 L Plains @Carlos Palma Cruchaga
-265 L Plains @Carlos Palma Cruchaga
-266 L Island @Rob Rey
-267 L Island @Rob Rey
-268 L Island @Rob Rey
-269 L Island @Rob Rey
-270 L Swamp @John Thacker
-271 L Swamp @John Thacker
-272 L Swamp @John Thacker
-273 L Swamp @John Thacker
-274 L Mountain @Andrew Theophilopoulos
-275 L Mountain @Andrew Theophilopoulos
-276 L Mountain @Andrew Theophilopoulos
-277 L Mountain @Andrew Theophilopoulos
-278 L Forest @David Robert Hovey
-279 L Forest @David Robert Hovey
-280 L Forest @David Robert Hovey
-281 L Forest @David Robert Hovey
+262 L Plains @Carlos Palma Cruchaga ${"lang": "en"}
+263 L Plains @Carlos Palma Cruchaga ${"lang": "en"}
+264 L Plains @Carlos Palma Cruchaga ${"lang": "en"}
+265 L Plains @Carlos Palma Cruchaga ${"lang": "en"}
+266 L Island @Rob Rey ${"lang": "en"}
+267 L Island @Rob Rey ${"lang": "en"}
+268 L Island @Rob Rey ${"lang": "en"}
+269 L Island @Rob Rey ${"lang": "en"}
+270 L Swamp @John Thacker ${"lang": "en"}
+271 L Swamp @John Thacker ${"lang": "en"}
+272 L Swamp @John Thacker ${"lang": "en"}
+273 L Swamp @John Thacker ${"lang": "en"}
+274 L Mountain @Andrew Theophilopoulos ${"lang": "en"}
+275 L Mountain @Andrew Theophilopoulos ${"lang": "en"}
+276 L Mountain @Andrew Theophilopoulos ${"lang": "en"}
+277 L Mountain @Andrew Theophilopoulos ${"lang": "en"}
+278 L Forest @David Robert Hovey ${"lang": "en"}
+279 L Forest @David Robert Hovey ${"lang": "en"}
+280 L Forest @David Robert Hovey ${"lang": "en"}
+281 L Forest @David Robert Hovey ${"lang": "en"}
 
 [borderless]
 282 M Season of the Burrow @Edgar Sánchez Hidalgo
@@ -330,25 +331,25 @@ Replace=.012F RareMythic:fromSheet("BLB cards")
 292 R Sunspine Lynx @Crystal Sully
 293 M Lumra, Bellow of the Woods @Allen Douglas
 294 M Ygra, Eater of All @Ilse Gort
-337 R Three Tree City @Andrew Mar
-338 R Three Tree City @Andrew Mar
-339 R Three Tree City @Andrew Mar
-340 R Three Tree City @Andrew Mar
+337 R Three Tree City @Andrew Mar ${"lang": "en"}
+338 R Three Tree City @Andrew Mar ${"lang": "en"}
+339 R Three Tree City @Andrew Mar ${"lang": "en"}
+340 R Three Tree City @Andrew Mar ${"lang": "en"}
 341 M Ral, Crackling Wit @Scott M. Fischer
 342 M Lumra, Bellow of the Woods @Mitsuhiro Arita
-343 M Lumra, Bellow of the Woods @Mitsuhiro Arita
-344 R Alania, Divergent Storm @Issei Murakami
-345 R Baylen, the Haymaker @Kemonomichi
-346 R Camellia, the Seedmiser @M I N A T O
-347 R Clement, the Worrywort @Issei Murakami
-348 R Finneas, Ace Archer @O-G Osahune
-349 R Gev, Scaled Scorch @Taro Yamazaki
-350 R Kastral, the Windcrested @Noki
-351 R Mabel, Heir to Cragflame @Airi Yoshihisa
-352 R Muerra, Trash Tactician @Taro Yamazaki
-353 M Ral, Crackling Wit @Atsushi Furusawa
-354 R Vren, the Relentless @MAMEZAWA
-355 R Zoraline, Cosmos Caller @Taro Yamazaki
+343 M Lumra, Bellow of the Woods @Mitsuhiro Arita ${"lang": "en|ja"}
+344 R Alania, Divergent Storm @Issei Murakami ${"lang": "en|ja"}
+345 R Baylen, the Haymaker @Kemonomichi ${"lang": "en|ja"}
+346 R Camellia, the Seedmiser @M I N A T O ${"lang": "en|ja"}
+347 R Clement, the Worrywort @Issei Murakami ${"lang": "en|ja"}
+348 R Finneas, Ace Archer @O-G Osahune ${"lang": "en|ja"}
+349 R Gev, Scaled Scorch @Taro Yamazaki ${"lang": "en|ja"}
+350 R Kastral, the Windcrested @Noki ${"lang": "en|ja"}
+351 R Mabel, Heir to Cragflame @Airi Yoshihisa ${"lang": "en|ja"}
+352 R Muerra, Trash Tactician @Taro Yamazaki ${"lang": "en|ja"}
+353 M Ral, Crackling Wit @Atsushi Furusawa ${"lang": "en|ja"}
+354 R Vren, the Relentless @MAMEZAWA ${"lang": "en|ja"}
+355 R Zoraline, Cosmos Caller @Taro Yamazaki ${"lang": "en|ja"}
 
 [showcase]
 295 R Dawn's Truce @Mariah Tekulve
@@ -395,19 +396,19 @@ Replace=.012F RareMythic:fromSheet("BLB cards")
 336 R Mabel, Heir to Cragflame @David Petersen
 
 [extended art]
-356 R Essence Channeler @Wylie Beckert
-357 R Kitnap @Irina Nordsol
-358 R Wishing Well @Steven Belledin
-359 R Iridescent Vinelasher @Aaron Miller
-360 R Byway Barterer @Ryan Pancoast
-361 R Hearthborn Battler @Zoltan Boros
-362 R Fecund Greenshell @Kisung Koh
-363 R Pawpatch Recruit @Johan Grenier
-364 R Thornvault Forager @Mark Behm
-365 R Dreamdew Entrancer @Zoltan Boros
-366 R Lunar Convocation @Pavel Kolomeyets
-367 R Fabled Passage @Adam Paquette
-368 R Fountainport @Leon Tukker
+356 R Essence Channeler @Wylie Beckert ${"lang": "en|fr|de|ja"}
+357 R Kitnap @Irina Nordsol ${"lang": "en|fr|de|ja"}
+358 R Wishing Well @Steven Belledin ${"lang": "en|fr|de|ja"}
+359 R Iridescent Vinelasher @Aaron Miller ${"lang": "en|fr|de|ja"}
+360 R Byway Barterer @Ryan Pancoast ${"lang": "en|fr|de|ja"}
+361 R Hearthborn Battler @Zoltan Boros ${"lang": "en|fr|de|ja"}
+362 R Fecund Greenshell @Kisung Koh ${"lang": "en|fr|de|ja"}
+363 R Pawpatch Recruit @Johan Grenier ${"lang": "en|fr|de|ja"}
+364 R Thornvault Forager @Mark Behm ${"lang": "en|fr|de|ja"}
+365 R Dreamdew Entrancer @Zoltan Boros ${"lang": "en|fr|de|ja"}
+366 R Lunar Convocation @Pavel Kolomeyets ${"lang": "en|fr|de|ja"}
+367 R Fabled Passage @Adam Paquette ${"lang": "en|fr|de|ja"}
+368 R Fountainport @Leon Tukker ${"lang": "en|fr|de|ja"}
 
 [precon product]
 369 L Plains @Piotr Dura
@@ -435,12 +436,12 @@ Replace=.012F RareMythic:fromSheet("BLB cards")
 397 C Swiftwater Cliffs @Eytan Zana
 
 [promo]
-381 U Hop to It @Eelis Kyttanen
-382 U Shoreline Looter @PINDURSKI
-383 U Fell @A. M. Sartor
-384 U Wear Down @Iris Compiet
-385 U Stormcatch Mentor @Manuel Castañón
-386 R Thundertrap Trainer @Jesper Ejsing
+381 U Hop to It @Eelis Kyttanen ${"lang": "en|ja"}
+382 U Shoreline Looter @PINDURSKI ${"lang": "en|ja"}
+383 U Fell @A. M. Sartor ${"lang": "en|ja"}
+384 U Wear Down @Iris Compiet ${"lang": "en|ja"}
+385 U Stormcatch Mentor @Manuel Castañón ${"lang": "en|ja"}
+386 R Thundertrap Trainer @Jesper Ejsing ${"lang": "en|fr|de"}
 
 [rebalanced]
 A-138 U A-Heartfire Hero @Jakub Kasper

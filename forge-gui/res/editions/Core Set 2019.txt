@@ -9,6 +9,7 @@ ChaosDraftThemes=CORE_SET
 FatPack=10
 FatPackExtraSlots=80 BasicLands
 ScryfallCode=M19
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 U Aegis of the Heavens @Anthony Palumbo

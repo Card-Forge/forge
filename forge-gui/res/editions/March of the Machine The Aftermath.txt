@@ -5,6 +5,7 @@ Name=March of the Machine: The Aftermath
 Type=Expansion
 ScryfallCode=MAT
 BoosterBox=0
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 U Coppercoat Vanguard @Bruno Biazotto
@@ -78,10 +79,10 @@ BoosterBox=0
 67 U Kolaghan Warmonger @Domenico Cava
 68 R Plargg and Nassari @Dominik Mayer
 69 U Reckless Handling @Aenami
-70 U Animist's Might @Paolo Parente
-71 R Leyline Immersion @Mark Zug
-72 M Nissa, Resurgent Animist @Adam Rex
-73 R Open the Way @Daren Bader
+70 U Animist's Might @Paolo Parente ${"lang": "en|es|fr|de|it|pt|zhs"}
+71 R Leyline Immersion @Mark Zug ${"lang": "en|es|fr|de|it|pt|zhs"}
+72 M Nissa, Resurgent Animist @Adam Rex ${"lang": "en|es|fr|de|it|pt|zhs"}
+73 R Open the Way @Daren Bader ${"lang": "en|es|fr|de|it|pt|zhs"}
 74 R Tranquil Frillback @Yeong-Hao Han
 75 U Undercity Upheaval @Julie Dillon
 76 M Calix, Guided by Fate @Jason A. Engle
@@ -91,7 +92,7 @@ BoosterBox=0
 80 U Feast of the Victorious Dead @Matt Stikker
 81 U Gold-Forged Thopteryx @Yeong-Hao Han
 82 R Jirina, Dauntless General @Justine Mara Andersen
-83 R Jolrael, Voice of Zhalfir @Scott M. Fischer
+83 R Jolrael, Voice of Zhalfir @Scott M. Fischer ${"lang": "en|es|fr|de|it|pt|zhs"}
 84 R The Kenriths' Royal Funeral @Aaron Miller
 85 M Kiora, Sovereign of the Deep @Dominik Mayer
 86 M Nahiri, Forged in Fury @Dominik Mayer
@@ -107,7 +108,7 @@ BoosterBox=0
 96 M Sarkhan, Soul Aflame @Domenico Cava
 97 R Sigarda, Font of Blessings @Sami Makkonen
 98 M Tyvar the Bellicose @Richard Luong
-99 M Karn, Legacy Reforged @Daren Bader
+99 M Karn, Legacy Reforged @Daren Bader ${"lang": "en|es|fr|de|it|pt|zhs"}
 100 R Drannith Ruins @Steve Ellis
 
 [etched]
@@ -163,89 +164,89 @@ BoosterBox=0
 150 R Drannith Ruins @Martin de Diego Sádaba
 
 [extended art]
-151 R Deification @Maxime Minard
-152 R Metropolis Reformer @Ryan Pancoast
-153 R Spark Rupture @Viko Menezes
-154 R Tazri, Stalwart Survivor @Manuel Castañón
-155 R Training Grounds @A. M. Sartor
-156 R Vesuvan Drifter @Julia Metzger
-157 R Ayara's Oathsworn @Johann Bodin
-158 R Urborg Scavengers @Svetlin Velinov
-159 R Arni Metalbrow @Tyler Jacobson
-160 R Plargg and Nassari @Yigit Koroglu
-161 R Leyline Immersion @Wisnu Tan
-162 M Nissa, Resurgent Animist @Tuan Duong Chu
-163 R Open the Way @Livia Prima
-164 R Tranquil Frillback @Caio Monteiro
-165 M Calix, Guided by Fate @PINDURSKI
-166 R Danitha, New Benalia's Light @Randy Vargas
-167 R Jirina, Dauntless General @Cristi Balanescu
-168 R Jolrael, Voice of Zhalfir @Lorenzo Mastroianni
-169 R The Kenriths' Royal Funeral @Manuel Castañón
-170 M Kiora, Sovereign of the Deep @Chris Rallis
-171 M Nahiri, Forged in Fury @Marta Nael
-172 R Nahiri's Resolve @Alexey Kruglov
-173 M Narset, Enlightened Exile @Marie Magny
-174 R Nashi, Moon's Legacy @Patrik Hell
-175 R Niv-Mizzet, Supreme @Joshua Raphael
-176 M Ob Nixilis, Captive Kingpin @Zezhou Chen
-177 R Pia Nalaar, Consul of Revival @Marta Nael
-178 R Rebuild the City @Sergey Glushakov
-179 R Rocco, Street Chef @Bram Sels
-180 M Samut, Vizier of Naktamun @Jarel Threat
-181 M Sarkhan, Soul Aflame @Eric Wilkerson
-182 R Sigarda, Font of Blessings @Justyna Dura
-183 M Tyvar the Bellicose @Jarel Threat
-184 M Karn, Legacy Reforged @Grzegorz Rutkowski
-185 R Drannith Ruins @Martin de Diego Sádaba
+151 R Deification @Maxime Minard ${"lang": "en|ja|zhs"}
+152 R Metropolis Reformer @Ryan Pancoast ${"lang": "en|ja|zhs"}
+153 R Spark Rupture @Viko Menezes ${"lang": "en|ja|zhs"}
+154 R Tazri, Stalwart Survivor @Manuel Castañón ${"lang": "en|ja|zhs"}
+155 R Training Grounds @A. M. Sartor ${"lang": "en|ja|zhs"}
+156 R Vesuvan Drifter @Julia Metzger ${"lang": "en|ja|zhs"}
+157 R Ayara's Oathsworn @Johann Bodin ${"lang": "en|ja|zhs"}
+158 R Urborg Scavengers @Svetlin Velinov ${"lang": "en|ja|zhs"}
+159 R Arni Metalbrow @Tyler Jacobson ${"lang": "en|ja|zhs"}
+160 R Plargg and Nassari @Yigit Koroglu ${"lang": "en|ja|zhs"}
+161 R Leyline Immersion @Wisnu Tan ${"lang": "en|ja|zhs"}
+162 M Nissa, Resurgent Animist @Tuan Duong Chu ${"lang": "en|ja|zhs"}
+163 R Open the Way @Livia Prima ${"lang": "en|ja|zhs"}
+164 R Tranquil Frillback @Caio Monteiro ${"lang": "en|ja|zhs"}
+165 M Calix, Guided by Fate @PINDURSKI ${"lang": "en|ja|zhs"}
+166 R Danitha, New Benalia's Light @Randy Vargas ${"lang": "en|ja|zhs"}
+167 R Jirina, Dauntless General @Cristi Balanescu ${"lang": "en|ja|zhs"}
+168 R Jolrael, Voice of Zhalfir @Lorenzo Mastroianni ${"lang": "en|ja|zhs"}
+169 R The Kenriths' Royal Funeral @Manuel Castañón ${"lang": "en|ja|zhs"}
+170 M Kiora, Sovereign of the Deep @Chris Rallis ${"lang": "en|ja|zhs"}
+171 M Nahiri, Forged in Fury @Marta Nael ${"lang": "en|ja|zhs"}
+172 R Nahiri's Resolve @Alexey Kruglov ${"lang": "en|ja|zhs"}
+173 M Narset, Enlightened Exile @Marie Magny ${"lang": "en|ja|zhs"}
+174 R Nashi, Moon's Legacy @Patrik Hell ${"lang": "en|ja|zhs"}
+175 R Niv-Mizzet, Supreme @Joshua Raphael ${"lang": "en|ja|zhs"}
+176 M Ob Nixilis, Captive Kingpin @Zezhou Chen ${"lang": "en|ja|zhs"}
+177 R Pia Nalaar, Consul of Revival @Marta Nael ${"lang": "en|ja|zhs"}
+178 R Rebuild the City @Sergey Glushakov ${"lang": "en|ja|zhs"}
+179 R Rocco, Street Chef @Bram Sels ${"lang": "en|ja|zhs"}
+180 M Samut, Vizier of Naktamun @Jarel Threat ${"lang": "en|ja|zhs"}
+181 M Sarkhan, Soul Aflame @Eric Wilkerson ${"lang": "en|ja|zhs"}
+182 R Sigarda, Font of Blessings @Justyna Dura ${"lang": "en|ja|zhs"}
+183 M Tyvar the Bellicose @Jarel Threat ${"lang": "en|ja|zhs"}
+184 M Karn, Legacy Reforged @Grzegorz Rutkowski ${"lang": "en|ja|zhs"}
+185 R Drannith Ruins @Martin de Diego Sádaba ${"lang": "en|ja|zhs"}
 
 [etched]
-186 U Coppercoat Vanguard @Steve Ellis
-187 R Deification @Jason A. Engle
-188 U Harnessed Snubhorn @Jody Clark
-189 R Metropolis Reformer @Samy Halim
-190 R Tazri, Stalwart Survivor @Dominik Mayer
-191 U Filter Out @Jody Clark
-192 U Tolarian Contempt @Eshpur
-193 R Training Grounds @John Severin Brassell
-194 R Vesuvan Drifter @Serena Malyon
-195 R Ayara's Oathsworn @Chris Seaman
-196 U Blot Out @Koji Nishino
-197 U Death-Rattle Oni @Azur
-198 U Markov Baron @Xiaobotong
-199 R Urborg Scavengers @Nino Vecia
-200 R Arni Metalbrow @Richard Luong
-201 U Kolaghan Warmonger @Domenico Cava
-202 R Plargg and Nassari @Dominik Mayer
-203 U Reckless Handling @Aenami
-204 R Tranquil Frillback @Yeong-Hao Han
-205 U Undercity Upheaval @Julie Dillon
-206 M Calix, Guided by Fate @Jason A. Engle
-207 U Campus Renovation @Anato Finnstark
-208 U Cosmic Rebirth @DZO
-209 R Danitha, New Benalia's Light @Eshpur
-210 U Feast of the Victorious Dead @Matt Stikker
-211 U Gold-Forged Thopteryx @Yeong-Hao Han
-212 R Jirina, Dauntless General @Justine Mara Andersen
-213 R The Kenriths' Royal Funeral @Aaron Miller
-214 M Kiora, Sovereign of the Deep @Dominik Mayer
-215 M Nahiri, Forged in Fury @Dominik Mayer
-216 R Nahiri's Resolve @Bastien Grivet
-217 M Narset, Enlightened Exile @Domenico Cava
-218 R Nashi, Moon's Legacy @TAPIOCA
-219 R Niv-Mizzet, Supreme @Isis
-220 M Ob Nixilis, Captive Kingpin @Krharts
-221 R Pia Nalaar, Consul of Revival @Yeong-Hao Han
-222 R Rebuild the City @Shawn Pagels
-223 R Rocco, Street Chef @Jack Hughes
-224 M Samut, Vizier of Naktamun @Daniel Ljunggren
-225 M Sarkhan, Soul Aflame @Domenico Cava
-226 R Sigarda, Font of Blessings @Sami Makkonen
-227 M Tyvar the Bellicose @Richard Luong
-228 R Drannith Ruins @Steve Ellis
+186 U Coppercoat Vanguard @Steve Ellis ${"lang": "en|ja|zhs"}
+187 R Deification @Jason A. Engle ${"lang": "en|ja|zhs"}
+188 U Harnessed Snubhorn @Jody Clark ${"lang": "en|ja|zhs"}
+189 R Metropolis Reformer @Samy Halim ${"lang": "en|ja|zhs"}
+190 R Tazri, Stalwart Survivor @Dominik Mayer ${"lang": "en|ja|zhs"}
+191 U Filter Out @Jody Clark ${"lang": "en|ja|zhs"}
+192 U Tolarian Contempt @Eshpur ${"lang": "en|ja|zhs"}
+193 R Training Grounds @John Severin Brassell ${"lang": "en|ja|zhs"}
+194 R Vesuvan Drifter @Serena Malyon ${"lang": "en|ja|zhs"}
+195 R Ayara's Oathsworn @Chris Seaman ${"lang": "en|ja|zhs"}
+196 U Blot Out @Koji Nishino ${"lang": "en|ja|zhs"}
+197 U Death-Rattle Oni @Azur ${"lang": "en|ja|zhs"}
+198 U Markov Baron @Xiaobotong ${"lang": "en|ja|zhs"}
+199 R Urborg Scavengers @Nino Vecia ${"lang": "en|ja|zhs"}
+200 R Arni Metalbrow @Richard Luong ${"lang": "en|ja|zhs"}
+201 U Kolaghan Warmonger @Domenico Cava ${"lang": "en|ja|zhs"}
+202 R Plargg and Nassari @Dominik Mayer ${"lang": "en|ja|zhs"}
+203 U Reckless Handling @Aenami ${"lang": "en|ja|zhs"}
+204 R Tranquil Frillback @Yeong-Hao Han ${"lang": "en|ja|zhs"}
+205 U Undercity Upheaval @Julie Dillon ${"lang": "en|ja|zhs"}
+206 M Calix, Guided by Fate @Jason A. Engle ${"lang": "en|ja|zhs"}
+207 U Campus Renovation @Anato Finnstark ${"lang": "en|ja|zhs"}
+208 U Cosmic Rebirth @DZO ${"lang": "en|ja|zhs"}
+209 R Danitha, New Benalia's Light @Eshpur ${"lang": "en|ja|zhs"}
+210 U Feast of the Victorious Dead @Matt Stikker ${"lang": "en|ja|zhs"}
+211 U Gold-Forged Thopteryx @Yeong-Hao Han ${"lang": "en|ja|zhs"}
+212 R Jirina, Dauntless General @Justine Mara Andersen ${"lang": "en|ja|zhs"}
+213 R The Kenriths' Royal Funeral @Aaron Miller ${"lang": "en|ja|zhs"}
+214 M Kiora, Sovereign of the Deep @Dominik Mayer ${"lang": "en|ja|zhs"}
+215 M Nahiri, Forged in Fury @Dominik Mayer ${"lang": "en|ja|zhs"}
+216 R Nahiri's Resolve @Bastien Grivet ${"lang": "en|ja|zhs"}
+217 M Narset, Enlightened Exile @Domenico Cava ${"lang": "en|ja|zhs"}
+218 R Nashi, Moon's Legacy @TAPIOCA ${"lang": "en|ja|zhs"}
+219 R Niv-Mizzet, Supreme @Isis ${"lang": "en|ja|zhs"}
+220 M Ob Nixilis, Captive Kingpin @Krharts ${"lang": "en|ja|zhs"}
+221 R Pia Nalaar, Consul of Revival @Yeong-Hao Han ${"lang": "en|ja|zhs"}
+222 R Rebuild the City @Shawn Pagels ${"lang": "en|ja|zhs"}
+223 R Rocco, Street Chef @Jack Hughes ${"lang": "en|ja|zhs"}
+224 M Samut, Vizier of Naktamun @Daniel Ljunggren ${"lang": "en|ja|zhs"}
+225 M Sarkhan, Soul Aflame @Domenico Cava ${"lang": "en|ja|zhs"}
+226 R Sigarda, Font of Blessings @Sami Makkonen ${"lang": "en|ja|zhs"}
+227 M Tyvar the Bellicose @Richard Luong ${"lang": "en|ja|zhs"}
+228 R Drannith Ruins @Steve Ellis ${"lang": "en|ja|zhs"}
 
 [promo]
-229 R Spark Rupture @Scott M. Fischer
+229 R Spark Rupture @Scott M. Fischer ${"lang": "en"}
 
 [buy a box]
 230 R Jolrael, Voice of Zhalfir @Ernanda Souza

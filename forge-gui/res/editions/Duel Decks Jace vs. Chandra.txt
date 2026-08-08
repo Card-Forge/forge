@@ -4,10 +4,11 @@ Date=2008-11-07
 Name=Duel Decks: Jace vs. Chandra
 Type=Duel_Deck
 ScryfallCode=DD2
+CardLang=en,ja
 
 [cards]
-1 M Jace Beleren @Kev Walker
-1★ M Jace Beleren @Yoshino Himori
+1 M Jace Beleren @Kev Walker ${"lang": "en"}
+1★ M Jace Beleren @Yoshino Himori ${"lang": "ja"}
 2 C Martyr of Frost @Wayne England
 3 C Fathom Seer @Ralph Horsley
 4 C Voidmage Apprentice @Jim Nelson
@@ -40,8 +41,8 @@ ScryfallCode=DD2
 31 L Island @Scott Bailey
 32 L Island @Donato Giancola
 33 L Island @Christopher Moeller
-34 M Chandra Nalaar @Kev Walker
-34★ M Chandra Nalaar @Yoshino Himori
+34 M Chandra Nalaar @Kev Walker ${"lang": "en"}
+34★ M Chandra Nalaar @Yoshino Himori ${"lang": "ja"}
 35 C Flamekin Brawler @Daren Bader
 36 C Fireslinger @Jeff Reitz
 37 C Soulbright Flamekin @Kev Walker

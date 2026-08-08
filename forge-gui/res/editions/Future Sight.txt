@@ -8,6 +8,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 FatPackExtraSlots=40 BasicLands TSP
 ScryfallCode=FUT
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 R Angel of Salvation @D. Alexander Gregory
@@ -57,8 +58,8 @@ ScryfallCode=FUT
 45 C Unblinking Bleb @Shishizaru
 46 R Venser, Shaper Savant @Aleksi Briclot
 47 C Venser's Diffusion @Hideaki Takamura
-48 U Arcanum Wings @Carl Frank
-49 C Blind Phantasm @Khang Le
+48 U Arcanum Wings @Carl Frank ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
+49 C Blind Phantasm @Khang Le ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
 50 U Bonded Fetch @Brandon Kitkouski
 51 R Linessa, Zephyr Mage @Jim Murray
 52 C Logic Knot @Glen Angus
@@ -89,7 +90,7 @@ ScryfallCode=FUT
 77 U Skirk Ridge Exhumer @Michael Phillippi
 78 R Slaughter Pact @Kev Walker
 79 U Stronghold Rats @Brandon Kitkouski
-80 R Bitter Ordeal @Daarken
+80 R Bitter Ordeal @Daarken ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
 81 R Bridge from Below @Greg Hildebrandt & Tim Hildebrandt
 82 C Death Rattle @Vance Kovacs
 83 C Deepcavern Imp @Scott Altmann
@@ -151,7 +152,7 @@ ScryfallCode=FUT
 139 R Summoner's Pact @Chippy
 140 U Utopia Mycon @Anthony S. Waters
 141 C Wrap in Vigor @John Donahue
-142 R Baru, Fist of Krosa @Lucio Parrillo
+142 R Baru, Fist of Krosa @Lucio Parrillo ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
 143 U Centaur Omenreader @Justin Sweet
 144 C Edge of Autumn @Jean-Sébastien Rossbach
 145 U Imperiosaur @Lars Grant-West

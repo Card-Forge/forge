@@ -4,6 +4,7 @@ Date=2018-08-10
 Name=Commander 2018
 Type=Commander
 ScryfallCode=C18
+CardLang=en,es,fr,de,it,pt,ja
 
 [cards]
 1 R Boreas Charger @Christine Choi
@@ -139,7 +140,7 @@ ScryfallCode=C18
 131 R Bear Umbra @Howard Lyon
 132 R Boon Satyr @Wesley Burt
 133 C Borderland Explorer @Lucas Graciano
-134 R Budoka Gardener @Kev Walker
+134 R Budoka Gardener @Kev Walker ${"lang": "en"}
 135 R Centaur Vinecrasher @Robbie Trevino
 136 U Consign to Dust @Andreas Rocha
 137 R Creeping Renaissance @Tomasz Jedruszek

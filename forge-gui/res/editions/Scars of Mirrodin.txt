@@ -9,6 +9,7 @@ FatPack=8
 FatPackExtraSlots=40 BasicLands
 ChaosDraftThemes=MIRRODIN
 ScryfallCode=SOM
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs,zht
 
 [cards]
 1 U Abuna Acolyte @Igor Kieryluk

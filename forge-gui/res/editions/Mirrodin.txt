@@ -10,6 +10,7 @@ FatPack=6
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=MIRRODIN
 ScryfallCode=MRD
+CardLang=en,es,fr,de,it,pt,ja,zhs,zht
 
 [cards]
 1 U Altar's Light @Daren Bader
@@ -298,23 +299,23 @@ ScryfallCode=MRD
 284 U Stalking Stones @David Day
 285 C Tree of Tales @John Avon
 286 C Vault of Whispers @Rob Alexander
-287 L Plains @Mark Tedin
+287 L Plains @Mark Tedin ${"lang": "en|es|fr|it|pt|zhs|zht"}
 288 L Plains @Rob Alexander
-289 L Plains @Martina Pilcerova
-290 L Plains @John Avon
-291 L Island @Mark Tedin
-292 L Island @Rob Alexander
-293 L Island @Martina Pilcerova
-294 L Island @John Avon
-295 L Swamp @Mark Tedin
-296 L Swamp @Rob Alexander
-297 L Swamp @Martina Pilcerova
-298 L Swamp @John Avon
-299 L Mountain @Mark Tedin
-300 L Mountain @Rob Alexander
-301 L Mountain @Martina Pilcerova
-302 L Mountain @John Avon
-303 L Forest @Mark Tedin
-304 L Forest @Rob Alexander
-305 L Forest @Martina Pilcerova
-306 L Forest @John Avon
+289 L Plains @Martina Pilcerova ${"lang": "en|fr|de|it|pt|ja|zhs|zht"}
+290 L Plains @John Avon ${"lang": "en|zhs|zht"}
+291 L Island @Mark Tedin ${"lang": "en|zhs|zht"}
+292 L Island @Rob Alexander ${"lang": "en|zhs|zht"}
+293 L Island @Martina Pilcerova ${"lang": "en|zhs|zht"}
+294 L Island @John Avon ${"lang": "en|zhs|zht"}
+295 L Swamp @Mark Tedin ${"lang": "en|zhs|zht"}
+296 L Swamp @Rob Alexander ${"lang": "en|zhs|zht"}
+297 L Swamp @Martina Pilcerova ${"lang": "en|zhs|zht"}
+298 L Swamp @John Avon ${"lang": "en|zhs|zht"}
+299 L Mountain @Mark Tedin ${"lang": "en|zhs|zht"}
+300 L Mountain @Rob Alexander ${"lang": "en|zhs|zht"}
+301 L Mountain @Martina Pilcerova ${"lang": "en|zhs|zht"}
+302 L Mountain @John Avon ${"lang": "en|zhs|zht"}
+303 L Forest @Mark Tedin ${"lang": "en|zhs|zht"}
+304 L Forest @Rob Alexander ${"lang": "en|zhs|zht"}
+305 L Forest @Martina Pilcerova ${"lang": "en|zhs|zht"}
+306 L Forest @John Avon ${"lang": "en|zhs|zht"}

@@ -10,6 +10,7 @@ FatPack=8
 FatPackExtraSlots=40 BasicLands SHM
 ScryfallCode=EVE
 TokenFallbackCode=SHM
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 R Archon of Justice @Jason Chan

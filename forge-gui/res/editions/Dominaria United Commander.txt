@@ -4,6 +4,7 @@ Date=2022-09-09
 Name=Dominaria United Commander
 Type=Commander
 ScryfallCode=DMC
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 M Dihada, Binder of Wills @Néstor Ossandón Leal
@@ -54,54 +55,54 @@ ScryfallCode=DMC
 46 U Tor Wauki the Younger @Karl Kopinski
 47 M Torsten, Founder of Benalia @Volkan Baǵa
 48 R Xira, the Golden Sting @Mila Pesic
-49 M Dihada, Binder of Wills @Néstor Ossandón Leal
-50 M Jared Carthalion @Manuel Castañón
-51 R Ayesha Tanaka, Armorer @Aurore Folny
-52 R The Ever-Changing 'Dane @Campbell White
-53 U General Marhault Elsdragon @Heonhwa
-54 R Hazezon, Shaper of Sand @Bryan Sola
-55 U Jasmine Boreal of the Seven @Bastien L. Deharme
-56 M Jedit Ojanen, Mercenary @Ilse Gort
-57 M The Lady of Otaria @Scott Murphy
-58 R Ohabi Caleria @Néstor Ossandón Leal
-59 R Orca, Siege Demon @Daarken
-60 U Ramirez DePietro, Pillager @Anna Steinbauer
-61 R Ramses, Assassin Lord @Manuel Castañón
-62 R Rasputin, the Oneiromancer @Matt Stewart
-63 R Rohgahh, Kher Keep Overlord @Chris Seaman
-64 R Stangg, Echo Warrior @Randy Vargas
-65 M Sivitri, Dragon Master @Livia Prima
-66 M Tetsuo, Imperial Champion @Lius Lasahido
-67 U Tobias, Doomed Conqueror @Dmitry Burmak
-68 U Tor Wauki the Younger @Karl Kopinski
-69 M Torsten, Founder of Benalia @Volkan Baǵa
-70 R Xira, the Golden Sting @Mila Pesic
-71 R Historian's Boon @Irina Nordsol
-72 R Robaran Mercenaries @Chuck Lukacs
-73 R Emperor Mihail II @PINDURSKI
-74 R Activated Sleeper @Mathias Kollros
-75 R Rosnakht, Heir of Rohgahh @Chris Seaman
-76 R Baru, Wurmspeaker @Andrew Mar
-77 M Greensleeves, Maro-Sorcerer @Tuan Duong Chu
-78 M Jenson Carthalion, Druid Exile @Livia Prima
-79 M Shanid, Sleepers' Scourge @Ryan Pancoast
-80 M The Mana Rig @Zoltan Boros
-81 R Zeriam, Golden Wind @John Tedrick
-82 R Moira, Urborg Haunt @Marta Nael
-83 R Mana Cannons @Sidharth Chaturvedi
-84 R The Reaver Cleaver @Yigit Koroglu
-85 R Bladewing, Deathless Tyrant @Antonio José Manzanedo
-86 R Cadric, Soul Kindler @Joseph Weston
-87 R Fallaji Wayfarer @Victor Adame Minguez
-88 R Iridian Maelstrom @Justyna Dura
-89 R Primeval Spawn @Filip Burburan
-90 R Two-Headed Hellkite @Fajareka Setiawan
-91 R Unite the Coalition @Néstor Ossandón Leal
-92 R Verrak, Warped Sengir @Alix Branwyn
-93 R Gerrard's Hourglass Pendant @Sam Burley
-94 R Obsidian Obelisk @Andrew Mar
-95 R The Peregrine Dynamo @Zoltan Boros
-96 R Tiller Engine @Alexander Mokhov
+49 M Dihada, Binder of Wills @Néstor Ossandón Leal ${"lang": "en"}
+50 M Jared Carthalion @Manuel Castañón ${"lang": "en"}
+51 R Ayesha Tanaka, Armorer @Aurore Folny ${"lang": "en"}
+52 R The Ever-Changing 'Dane @Campbell White ${"lang": "en"}
+53 U General Marhault Elsdragon @Heonhwa ${"lang": "en"}
+54 R Hazezon, Shaper of Sand @Bryan Sola ${"lang": "en"}
+55 U Jasmine Boreal of the Seven @Bastien L. Deharme ${"lang": "en"}
+56 M Jedit Ojanen, Mercenary @Ilse Gort ${"lang": "en"}
+57 M The Lady of Otaria @Scott Murphy ${"lang": "en"}
+58 R Ohabi Caleria @Néstor Ossandón Leal ${"lang": "en"}
+59 R Orca, Siege Demon @Daarken ${"lang": "en"}
+60 U Ramirez DePietro, Pillager @Anna Steinbauer ${"lang": "en"}
+61 R Ramses, Assassin Lord @Manuel Castañón ${"lang": "en"}
+62 R Rasputin, the Oneiromancer @Matt Stewart ${"lang": "en"}
+63 R Rohgahh, Kher Keep Overlord @Chris Seaman ${"lang": "en"}
+64 R Stangg, Echo Warrior @Randy Vargas ${"lang": "en"}
+65 M Sivitri, Dragon Master @Livia Prima ${"lang": "en"}
+66 M Tetsuo, Imperial Champion @Lius Lasahido ${"lang": "en"}
+67 U Tobias, Doomed Conqueror @Dmitry Burmak ${"lang": "en"}
+68 U Tor Wauki the Younger @Karl Kopinski ${"lang": "en"}
+69 M Torsten, Founder of Benalia @Volkan Baǵa ${"lang": "en"}
+70 R Xira, the Golden Sting @Mila Pesic ${"lang": "en"}
+71 R Historian's Boon @Irina Nordsol ${"lang": "en|fr|de|ja|zhs"}
+72 R Robaran Mercenaries @Chuck Lukacs ${"lang": "en|fr|de|ja|zhs"}
+73 R Emperor Mihail II @PINDURSKI ${"lang": "en|fr|de|ja|zhs"}
+74 R Activated Sleeper @Mathias Kollros ${"lang": "en|fr|de|ja|zhs"}
+75 R Rosnakht, Heir of Rohgahh @Chris Seaman ${"lang": "en|fr|de|ja|zhs"}
+76 R Baru, Wurmspeaker @Andrew Mar ${"lang": "en|fr|de|ja|zhs"}
+77 M Greensleeves, Maro-Sorcerer @Tuan Duong Chu ${"lang": "en|fr|de|ja|zhs"}
+78 M Jenson Carthalion, Druid Exile @Livia Prima ${"lang": "en|fr|de|ja|zhs"}
+79 M Shanid, Sleepers' Scourge @Ryan Pancoast ${"lang": "en|fr|de|ja|zhs"}
+80 M The Mana Rig @Zoltan Boros ${"lang": "en|fr|de|ja|zhs"}
+81 R Zeriam, Golden Wind @John Tedrick ${"lang": "en|fr|de|ja|zhs"}
+82 R Moira, Urborg Haunt @Marta Nael ${"lang": "en|fr|de|ja|zhs"}
+83 R Mana Cannons @Sidharth Chaturvedi ${"lang": "en|fr|de|ja|zhs"}
+84 R The Reaver Cleaver @Yigit Koroglu ${"lang": "en|fr|de|ja|zhs"}
+85 R Bladewing, Deathless Tyrant @Antonio José Manzanedo ${"lang": "en|fr|de|ja|zhs"}
+86 R Cadric, Soul Kindler @Joseph Weston ${"lang": "en|fr|de|ja|zhs"}
+87 R Fallaji Wayfarer @Victor Adame Minguez ${"lang": "en|fr|de|ja|zhs"}
+88 R Iridian Maelstrom @Justyna Dura ${"lang": "en|fr|de|ja|zhs"}
+89 R Primeval Spawn @Filip Burburan ${"lang": "en|fr|de|ja|zhs"}
+90 R Two-Headed Hellkite @Fajareka Setiawan ${"lang": "en|fr|de|ja|zhs"}
+91 R Unite the Coalition @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+92 R Verrak, Warped Sengir @Alix Branwyn ${"lang": "en|fr|de|ja|zhs"}
+93 R Gerrard's Hourglass Pendant @Sam Burley ${"lang": "en|fr|de|ja|zhs"}
+94 R Obsidian Obelisk @Andrew Mar ${"lang": "en|fr|de|ja|zhs"}
+95 R The Peregrine Dynamo @Zoltan Boros ${"lang": "en|fr|de|ja|zhs"}
+96 R Tiller Engine @Alexander Mokhov ${"lang": "en|fr|de|ja|zhs"}
 97 R Anafenza, Kin-Tree Spirit @Ryan Yee
 98 M The Circle of Loyalty @Bastien L. Deharme
 99 R Day of Destiny @Daren Bader

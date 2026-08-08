@@ -4,6 +4,7 @@ Date=2013-03-15
 Name=Duel Decks: Sorin vs. Tibalt
 Type=Duel_Deck
 ScryfallCode=DDK
+CardLang=en,ja
 
 [cards]
 1 M Sorin, Lord of Innistrad @Chase Stone

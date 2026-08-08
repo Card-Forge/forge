@@ -8,6 +8,7 @@ BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
 ScryfallCode=POR
+CardLang=en,es,fr,de,ja,zhs,zht
 
 [cards]
 1 R Alabaster Dragon @Ted Naifeh
@@ -39,7 +40,7 @@ ScryfallCode=POR
 27 R Spiritual Guardian @Terese Nielsen
 28 C Spotted Griffin @William Simpson
 29 U Starlight @John Avon
-30 U Starlit Angel @Rebecca Guay
+30 U Starlit Angel @Rebecca Guay ${"lang": "en|es|fr|de|ja|zht"}
 31 C Steadfastness @Kev Walker
 32 R Stern Marshal @D. Alexander Gregory
 33 R Temporary Truce @Mike Raabe
@@ -66,7 +67,7 @@ ScryfallCode=POR
 54 R Exhaustion @DiTerlizzi
 55 U Flux @Ted Naifeh
 56 C Giant Octopus @John Matson
-57 C Horned Turtle @Adrian Smith
+57 C Horned Turtle @Adrian Smith ${"lang": "en|es|fr|de|ja|zht"}
 58 U Ingenious Thief @Dan Frazier
 59 U Man-o'-War @Una Fricker
 60 C Merfolk of the Pearl Trident @DiTerlizzi
@@ -75,12 +76,12 @@ ScryfallCode=POR
 63 C Owl Familiar @Janine Johnston
 64 U Personal Tutor @D. Alexander Gregory
 65 R Phantom Warrior @Dan Frazier
-66 R Prosperity @Phil Foglio
+66 R Prosperity @Phil Foglio ${"lang": "en|es|fr|de|ja|zht"}
 67 C Snapping Drake @Christopher Rush
 68 C Sorcerous Sight @Kaja Foglio
 69 C Storm Crow @Una Fricker
 70 C Symbol of Unsummoning @Adam Rex
-71 R Taunt @Phil Foglio
+71 R Taunt @Phil Foglio ${"lang": "en|es|fr|de|ja|zht"}
 72 U Theft of Dreams @Adam Rex
 73 R Thing from the Deep @Paolo Parente
 74 C Tidal Surge @Douglas Shuler
@@ -89,7 +90,7 @@ ScryfallCode=POR
 77 C Wind Drake @Zina Saunders
 78 U Withering Gaze @Scott M. Fischer
 79 U Arrogant Vampire @Zina Saunders
-80 U Assassin's Blade @John Matson
+80 U Assassin's Blade @John Matson ${"lang": "en|es|fr|de|ja|zht"}
 81 C Bog Imp @Christopher Rush
 82 C Bog Raiders @Steve Luke
 83 U Bog Wraith @Ted Naifeh
@@ -116,18 +117,18 @@ ScryfallCode=POR
 104 U Noxious Toad @Adrian Smith
 105 C Python @Alan Rabinowitz
 106 U Rain of Tears @Eric Peterson
-107 C Raise Dead @Charles Gillespie
+107 C Raise Dead @Charles Gillespie ${"lang": "en|es|fr|de|ja|zht"}
 108 R Serpent Assassin @Roger Raupp
 109 C Serpent Warrior @Roger Raupp
 110 C Skeletal Crocodile @Mike Dringenberg
 111 C Skeletal Snake @John Matson
 112 C Soul Shred @Alan Rabinowitz
 113 C Undying Beast @Steve Luke
-114 U Vampiric Feast @D. Alexander Gregory
+114 U Vampiric Feast @D. Alexander Gregory ${"lang": "en|es|fr|de|ja|zht"}
 115 C Vampiric Touch @Zina Saunders
 116 U Virtue's Ruin @Mike Dringenberg
-117 R Wicked Pact @Adam Rex
-118 U Blaze @Gerry Grace
+117 R Wicked Pact @Adam Rex ${"lang": "en|es|fr|de|ja|zht"}
+118 U Blaze @Gerry Grace ${"lang": "en|es|fr|de|ja|zht"}
 119 U Boiling Seas @Tom Wänerstrand
 120 C Burning Cloak @Scott M. Fischer
 121 C Craven Giant @Ron Spencer
@@ -143,7 +144,7 @@ ScryfallCode=POR
 131 C Goblin Bully @Pete Venters
 132 C Highland Giant @Ron Spencer
 133 C Hill Giant @Randy Gallegos
-134 U Hulking Cyclops @Paolo Parente
+134 U Hulking Cyclops @Paolo Parente ${"lang": "en|es|fr|de|ja|zht"}
 135 C Hulking Goblin @Pete Venters
 136 R Last Chance @Hannibal King
 137 C Lava Axe @Adrian Smith
@@ -173,9 +174,9 @@ ScryfallCode=POR
 161 R Charging Rhino @Una Fricker
 162 U Deep Wood @Paolo Parente
 163 C Elite Cat Warrior @Eric Peterson
-164 C Elven Cache @Rebecca Guay
+164 C Elven Cache @Rebecca Guay ${"lang": "en|es|fr|de|ja|zht"}
 165 C Elvish Ranger @DiTerlizzi
-166 C Fruition @Steve Luke
+166 C Fruition @Steve Luke ${"lang": "en|es|fr|de|ja|zht"}
 167 C Giant Spider @Randy Gallegos
 168 C Gorilla Warrior @John Matson
 169 C Grizzly Bears @Zina Saunders
@@ -205,67 +206,67 @@ ScryfallCode=POR
 193 C Willow Dryad @D. Alexander Gregory
 194 U Winter's Grasp @Paolo Parente
 195 R Wood Elves @Rebecca Guay
-196 L Plains @Douglas Shuler
-196s L Plains @Jack Wei
-197 L Plains @Douglas Shuler
-197s L Plains @Jack Wei
-198 L Plains @Douglas Shuler
-198s L Plains @Jack Wei
-199 L Plains @Douglas Shuler
-199s L Plains @Jack Wei
-200 L Island @Eric Peterson
-200s L Island @库雪明
-201 L Island @Eric Peterson
-201s L Island @库雪明
-202 L Island @Eric Peterson
-202s L Island @库雪明
-203 L Island @Eric Peterson
-203s L Island @库雪明
+196 L Plains @Douglas Shuler ${"lang": "en|es|fr|de|ja|zht"}
+196s L Plains @Jack Wei ${"lang": "zhs"}
+197 L Plains @Douglas Shuler ${"lang": "en|es|fr|de|ja|zht"}
+197s L Plains @Jack Wei ${"lang": "zhs"}
+198 L Plains @Douglas Shuler ${"lang": "en|es|fr|de|ja|zht"}
+198s L Plains @Jack Wei ${"lang": "zhs"}
+199 L Plains @Douglas Shuler ${"lang": "en|es|fr|de|ja|zht"}
+199s L Plains @Jack Wei ${"lang": "zhs"}
+200 L Island @Eric Peterson ${"lang": "en|es|fr|de|ja|zht"}
+200s L Island @库雪明 ${"lang": "zhs"}
+201 L Island @Eric Peterson ${"lang": "en|es|fr|de|ja|zht"}
+201s L Island @库雪明 ${"lang": "zhs"}
+202 L Island @Eric Peterson ${"lang": "en|es|fr|de|ja|zht"}
+202s L Island @库雪明 ${"lang": "zhs"}
+203 L Island @Eric Peterson ${"lang": "en|es|fr|de|ja|zht"}
+203s L Island @库雪明 ${"lang": "zhs"}
 204 L Swamp @Romas Kukalis
 205 L Swamp @Romas Kukalis
 206 L Swamp @Romas Kukalis
 207 L Swamp @Romas Kukalis
-208 L Mountain @Brian Durfee
-208s L Mountain @康羽
-209 L Mountain @Brian Durfee
-209s L Mountain @康羽
-210 L Mountain @Brian Durfee
-210s L Mountain @康羽
-211 L Mountain @Brian Durfee
-211s L Mountain @康羽
-212 L Forest @John Avon
-212s L Forest @李铁
-213 L Forest @John Avon
-213s L Forest @李铁
-214 L Forest @John Avon
-214s L Forest @李铁
-215 L Forest @John Avon
-215s L Forest @李铁
+208 L Mountain @Brian Durfee ${"lang": "en|es|fr|de|ja|zht"}
+208s L Mountain @康羽 ${"lang": "zhs"}
+209 L Mountain @Brian Durfee ${"lang": "en|es|fr|de|ja|zht"}
+209s L Mountain @康羽 ${"lang": "zhs"}
+210 L Mountain @Brian Durfee ${"lang": "en|es|fr|de|ja|zht"}
+210s L Mountain @康羽 ${"lang": "zhs"}
+211 L Mountain @Brian Durfee ${"lang": "en|es|fr|de|ja|zht"}
+211s L Mountain @康羽 ${"lang": "zhs"}
+212 L Forest @John Avon ${"lang": "en|es|fr|de|ja|zht"}
+212s L Forest @李铁 ${"lang": "zhs"}
+213 L Forest @John Avon ${"lang": "en|es|fr|de|ja|zht"}
+213s L Forest @李铁 ${"lang": "zhs"}
+214 L Forest @John Avon ${"lang": "en|es|fr|de|ja|zht"}
+214s L Forest @李铁 ${"lang": "zhs"}
+215 L Forest @John Avon ${"lang": "en|es|fr|de|ja|zht"}
+215s L Forest @李铁 ${"lang": "zhs"}
 
 [alternate art]
-6d C Armored Pegasus @Andrew Robinson
-30s U Starlit Angel @徐晓鸣
-38† C Warrior's Charge @Ted Naifeh
-46d C Cloud Pirates @Phil Foglio
-57s C Horned Turtle @Wang Yuqun
-66s R Prosperity @李有良
-67d C Snapping Drake @Christopher Rush
-69d C Storm Crow @Una Fricker
-71s R Taunt @杨钊
-80s U Assassin's Blade @徐晓鸣
-93d C Feral Shadow @Colin MacNeil
-96† C Hand of Death @John Coulthart
-107s C Raise Dead @李尤松
-114s U Vampiric Feast @王峰
-117s R Wicked Pact @杨光恒
-118† U Blaze @Gerry Grace
-118†s U Blaze @David A. Cherry
-118s U Blaze @David A. Cherry
-134s U Hulking Cyclops @Lin Yan
-145† C Raging Goblin @Pete Venters
-158† U Anaconda @Andrew Robinson
-160d U Bull Hippo @Roger Raupp
-163† C Elite Cat Warrior @Eric Peterson
-164s C Elven Cache @张艺娜
-166s C Fruition @Wang Yuqun
-173† C Monstrous Growth @Dan Frazier
+6d C Armored Pegasus @Andrew Robinson ${"lang": "en"}
+30s U Starlit Angel @徐晓鸣 ${"lang": "zhs"}
+38† C Warrior's Charge @Ted Naifeh ${"lang": "en|es|fr|de|ja"}
+46d C Cloud Pirates @Phil Foglio ${"lang": "en"}
+57s C Horned Turtle @Wang Yuqun ${"lang": "zhs"}
+66s R Prosperity @李有良 ${"lang": "zhs"}
+67d C Snapping Drake @Christopher Rush ${"lang": "en"}
+69d C Storm Crow @Una Fricker ${"lang": "en"}
+71s R Taunt @杨钊 ${"lang": "zhs"}
+80s U Assassin's Blade @徐晓鸣 ${"lang": "zhs"}
+93d C Feral Shadow @Colin MacNeil ${"lang": "en"}
+96† C Hand of Death @John Coulthart ${"lang": "en|es|fr|de|ja"}
+107s C Raise Dead @李尤松 ${"lang": "zhs"}
+114s U Vampiric Feast @王峰 ${"lang": "zhs"}
+117s R Wicked Pact @杨光恒 ${"lang": "zhs"}
+118† U Blaze @Gerry Grace ${"lang": "en|es|fr|de|ja"}
+118†s U Blaze @David A. Cherry ${"lang": "zhs"}
+118s U Blaze @David A. Cherry ${"lang": "zhs"}
+134s U Hulking Cyclops @Lin Yan ${"lang": "zhs"}
+145† C Raging Goblin @Pete Venters ${"lang": "en|es|fr|de|ja"}
+158† U Anaconda @Andrew Robinson ${"lang": "en|es|fr|de|ja"}
+160d U Bull Hippo @Roger Raupp ${"lang": "en"}
+163† C Elite Cat Warrior @Eric Peterson ${"lang": "en|es|fr|de|ja"}
+164s C Elven Cache @张艺娜 ${"lang": "zhs"}
+166s C Fruition @Wang Yuqun ${"lang": "zhs"}
+173† C Monstrous Growth @Dan Frazier ${"lang": "en|es|fr|de|ja"}

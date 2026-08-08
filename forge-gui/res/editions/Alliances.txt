@@ -9,6 +9,7 @@ Booster=8 Common, 3 Uncommon, 1 Rare
 BoosterBox=45
 Foil=NotSupported
 ScryfallCode=ALL
+CardLang=en,es,fr,de,it,pt
 
 [cards]
 1a C Carrier Pigeons @Pat Lewis

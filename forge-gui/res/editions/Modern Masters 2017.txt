@@ -9,6 +9,7 @@ BoosterBox=24
 FoilChanceInBooster=100
 ChaosDraftThemes=MASTERS_SET;GRAVEYARD_MATTERS
 ScryfallCode=MM3
+CardLang=en,ja,zhs
 
 [cards]
 1 C Attended Knight @Seb McKinnon

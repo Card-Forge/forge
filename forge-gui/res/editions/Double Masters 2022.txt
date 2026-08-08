@@ -9,6 +9,7 @@ Foil=NotSupported
 DoublePick=FirstPick
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=2X2
+CardLang=en,fr,de,ja,zhs
 
 [cards]
 1 M Emrakul, the Aeons Torn @Mark Tedin
@@ -345,11 +346,11 @@ ScryfallCode=2X2
 332 C Cryptic Spires @Sam Burley
 
 [borderless]
-333 M Liliana, the Last Hope @Scott M. Fischer
-334 M Wrenn and Six @Donato Giancola
-335 M Emrakul, the Aeons Torn @Kev Walker
-336 M Kozilek, Butcher of Truth @Ian Miller
-337 M Ulamog, the Infinite Gyre @Thomas M. Baxa
+333 M Liliana, the Last Hope @Scott M. Fischer ${"lang": "en"}
+334 M Wrenn and Six @Donato Giancola ${"lang": "en"}
+335 M Emrakul, the Aeons Torn @Kev Walker ${"lang": "en"}
+336 M Kozilek, Butcher of Truth @Ian Miller ${"lang": "en"}
+337 M Ulamog, the Infinite Gyre @Thomas M. Baxa ${"lang": "en"}
 338 M Emiel the Blessed @Martina Pilcerova
 339 U Flickerwisp @Thomas M. Baxa
 340 U Mentor of the Meek @Alex Horley-Orlandelli
@@ -587,15 +588,15 @@ ScryfallCode=2X2
 570 R City of Brass @Kirsten Zirngibl
 571 R Forbidden Orchard @Daniel Ljunggren
 572 R Pillar of the Paruns @Dany Orizio
-573 M Liliana, the Last Hope @Scott M. Fischer
-574 M Wrenn and Six @Donato Giancola
-575 M Emrakul, the Aeons Torn @Kev Walker
-576 M Kozilek, Butcher of Truth @Ian Miller
-577 M Ulamog, the Infinite Gyre @Thomas M. Baxa
+573 M Liliana, the Last Hope @Scott M. Fischer ${"lang": "en"}
+574 M Wrenn and Six @Donato Giancola ${"lang": "en"}
+575 M Emrakul, the Aeons Torn @Kev Walker ${"lang": "en"}
+576 M Kozilek, Butcher of Truth @Ian Miller ${"lang": "en"}
+577 M Ulamog, the Infinite Gyre @Thomas M. Baxa ${"lang": "en"}
 
 [promo]
-578 R Weathered Wayfarer @Dermot Power
-579 R Bring to Light @Mark Poole
+578 R Weathered Wayfarer @Dermot Power ${"lang": "en"}
+579 R Bring to Light @Mark Poole ${"lang": "en"}
 
 [spire]
 1 Cryptic Spires|2X2

@@ -5,7 +5,7 @@ Name=Classic Sixth Edition Simplified Chinese Alternate Art
 Type=Promo
 Border=White
 ScryfallCode=6ED
-CardLang=zhs
+CardLang=en,es,fr,de,it,pt,ja,zhs,zht
 
 [cards]
-123s C Drudge Skeletons @Carl Critchlow
+123s C Drudge Skeletons @Carl Critchlow ${"lang": "zhs"}

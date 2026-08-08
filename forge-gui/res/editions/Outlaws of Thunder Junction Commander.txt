@@ -4,6 +4,7 @@ Date=2024-04-19
 Name=Outlaws of Thunder Junction Commander
 Type=Commander
 ScryfallCode=OTC
+CardLang=en,es,fr,de,ja,zhs
 
 [cards]
 1 M Gonti, Canny Acquisitor @Anna Podedworna
@@ -46,42 +47,42 @@ ScryfallCode=OTC
 38 R Dream-Thief's Bandana @Danny Schwartz
 39 R Leyline Dowser @Diana Cearley
 40 R Cactus Preserve @Jonas De Ro
-41 M Eris, Roar of the Storm @Aurore Folny
-42 M Felix Five-Boots @Chris Rahn
-43 M Kirri, Talented Sprout @Simon Dominic
-44 M Vihaan, Goldwaker @Magali Villeneuve
-45 R Angel of Indemnity @Denman Rooke
-46 R Angelic Sell-Sword @Ekaterina Burmak
-47 R Sand Scout @Olena Richards
-48 R We Ride at Dawn @Miguel Mercado
-49 R Arcane Heist @Anna Pavleeva
-50 R Forger's Foundry @Rockey Chen
-51 R Lock and Load @Anastasia Ovchinnikova
-52 R Smirking Spelljacker @Borja Pindado
-53 R Thunderclap Drake @Kaitlyn McCulley
-54 R Back in Town @Greg Staples
-55 R Charred Graverobber @Matt Stewart
-56 R Discreet Retreat @Ben Wootten
-57 R Heartless Conscription @Eli Minaya
-58 R Orochi Soul-Reaver @Bram Sels
-59 R Thieving Varmint @Néstor Ossandón Leal
-60 R Cataclysmic Prospecting @PINDURSKI
-61 R Crackling Spellslinger @Marta Nael
-62 R Dead Before Sunrise @Alix Branwyn
-63 R Elemental Eruption @Andrea Piparo
-64 R Embrace the Unknown @Quintin Gleim
-65 R Pyretic Charge @Slawomir Maniak
-66 R Smoldering Stagecoach @Billy Christian
-67 R Dune Chanter @Dmitry Burmak
-68 R Rumbleweed @Filip Burburan
-69 R Savvy Trader @Scott Murphy
-70 R Tower Winder @Kekai Kotaki
-71 R Vengeful Regrowth @Olivier Bernard
-72 R Graywater's Fixer @Caio Monteiro
-73 R Bounty Board @Matt Stewart
-74 R Dream-Thief's Bandana @Danny Schwartz
-75 R Leyline Dowser @Diana Cearley
-76 R Cactus Preserve @Jonas De Ro
+41 M Eris, Roar of the Storm @Aurore Folny ${"lang": "en|fr|de|ja|zhs"}
+42 M Felix Five-Boots @Chris Rahn ${"lang": "en|fr|de|ja|zhs"}
+43 M Kirri, Talented Sprout @Simon Dominic ${"lang": "en|fr|de|ja|zhs"}
+44 M Vihaan, Goldwaker @Magali Villeneuve ${"lang": "en|fr|de|ja|zhs"}
+45 R Angel of Indemnity @Denman Rooke ${"lang": "en|fr|de|ja|zhs"}
+46 R Angelic Sell-Sword @Ekaterina Burmak ${"lang": "en|fr|de|ja|zhs"}
+47 R Sand Scout @Olena Richards ${"lang": "en|fr|de|ja|zhs"}
+48 R We Ride at Dawn @Miguel Mercado ${"lang": "en|fr|de|ja|zhs"}
+49 R Arcane Heist @Anna Pavleeva ${"lang": "en|fr|de|ja|zhs"}
+50 R Forger's Foundry @Rockey Chen ${"lang": "en|fr|de|ja|zhs"}
+51 R Lock and Load @Anastasia Ovchinnikova ${"lang": "en|fr|de|ja|zhs"}
+52 R Smirking Spelljacker @Borja Pindado ${"lang": "en|fr|de|ja|zhs"}
+53 R Thunderclap Drake @Kaitlyn McCulley ${"lang": "en|fr|de|ja|zhs"}
+54 R Back in Town @Greg Staples ${"lang": "en|fr|de|ja|zhs"}
+55 R Charred Graverobber @Matt Stewart ${"lang": "en|fr|de|ja|zhs"}
+56 R Discreet Retreat @Ben Wootten ${"lang": "en|fr|de|ja|zhs"}
+57 R Heartless Conscription @Eli Minaya ${"lang": "en|fr|de|ja|zhs"}
+58 R Orochi Soul-Reaver @Bram Sels ${"lang": "en|fr|de|ja|zhs"}
+59 R Thieving Varmint @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+60 R Cataclysmic Prospecting @PINDURSKI ${"lang": "en|fr|de|ja|zhs"}
+61 R Crackling Spellslinger @Marta Nael ${"lang": "en|fr|de|ja|zhs"}
+62 R Dead Before Sunrise @Alix Branwyn ${"lang": "en|fr|de|ja|zhs"}
+63 R Elemental Eruption @Andrea Piparo ${"lang": "en|fr|de|ja|zhs"}
+64 R Embrace the Unknown @Quintin Gleim ${"lang": "en|fr|de|ja|zhs"}
+65 R Pyretic Charge @Slawomir Maniak ${"lang": "en|fr|de|ja|zhs"}
+66 R Smoldering Stagecoach @Billy Christian ${"lang": "en|fr|de|ja|zhs"}
+67 R Dune Chanter @Dmitry Burmak ${"lang": "en|fr|de|ja|zhs"}
+68 R Rumbleweed @Filip Burburan ${"lang": "en|fr|de|ja|zhs"}
+69 R Savvy Trader @Scott Murphy ${"lang": "en|fr|de|ja|zhs"}
+70 R Tower Winder @Kekai Kotaki ${"lang": "en|fr|de|ja|zhs"}
+71 R Vengeful Regrowth @Olivier Bernard ${"lang": "en|fr|de|ja|zhs"}
+72 R Graywater's Fixer @Caio Monteiro ${"lang": "en|fr|de|ja|zhs"}
+73 R Bounty Board @Matt Stewart ${"lang": "en|fr|de|ja|zhs"}
+74 R Dream-Thief's Bandana @Danny Schwartz ${"lang": "en|fr|de|ja|zhs"}
+75 R Leyline Dowser @Diana Cearley ${"lang": "en|fr|de|ja|zhs"}
+76 R Cactus Preserve @Jonas De Ro ${"lang": "en|fr|de|ja|zhs"}
 77 M Oblivion Sower @Jaime Jones
 78 U Angel of the Ruins @Viko Menezes
 79 R Council's Judgment @Kev Walker
@@ -193,7 +194,7 @@ ScryfallCode=OTC
 185 U Young Pyromancer @Cynthia Sheppard
 186 M Ancient Greenwarden @Grzegorz Rutkowski
 187 M Avenger of Zendikar @Zoltan Boros & Gabor Szikszai
-188 M Cazur, Ruthless Stalker @Daarken
+188 M Cazur, Ruthless Stalker @Daarken ${"lang": "en"}
 189 U Crawling Sensation @Christopher Moeller
 190 C Eccentric Farmer @Tyler Walpole
 191 C Elvish Rejuvenator @Winona Nelson
@@ -235,7 +236,7 @@ ScryfallCode=OTC
 227 R Galvanic Iteration @Johann Bodin
 228 C Goblin Electromancer @Svetlin Velinov
 229 R Hazezon, Shaper of Sand @Bryan Sola
-230 R Heaven // Earth @Jonas De Ro
+230 R Heaven // Earth @Jonas De Ro ${"lang": "en|es|fr|de|zhs"}
 231 R Hostage Taker @Wayne Reynolds
 232 R Kaza, Roil Chaser @Ekaterina Burmak
 233 R Life Insurance @Brian Valeza
@@ -252,7 +253,7 @@ ScryfallCode=OTC
 244 U Third Path Iconoclast @Manuel Castañón
 245 C Thrilling Discovery @Campbell White
 246 U Trygon Predator @Jack Wang
-247 M Ukkima, Stalking Shadow @Daarken
+247 M Ukkima, Stalking Shadow @Daarken ${"lang": "en"}
 248 M Veyran, Voice of Duality @Mathias Kollros
 249 R Villainous Wealth @Erica Yang
 250 U Wreck and Rebuild @Ben Hill

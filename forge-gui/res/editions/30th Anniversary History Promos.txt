@@ -4,6 +4,7 @@ Date=2022-09-09
 Name=30th Anniversary History Promos
 Type=Promo
 ScryfallCode=P30H
+CardLang=en,ja
 
 [cards]
 1 R Serra Angel @Hisashi Momose

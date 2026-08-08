@@ -10,6 +10,7 @@ FatPackExtraSlots=80 BasicLands RTR
 ChaosDraftThemes=RAVNICA
 ScryfallCode=GTC
 TokenFallbackCode=RTR
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 C Aerial Maneuver @Scott Chou
@@ -81,7 +82,7 @@ TokenFallbackCode=RTR
 67 C Gutter Skulk @Mark Winters
 68 C Horror of the Dim @Jack Wang
 69 U Illness in the Ranks @Nils Hamm
-70 U Killing Glare @Peter Mohrbacher
+70 U Killing Glare @Peter Mohrbacher ${"lang": "en"}
 71 M Lord of the Void @Chris Rahn
 72 U Mental Vapors @Mark Winters
 73 C Midnight Recovery @Peter Mohrbacher

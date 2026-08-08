@@ -4,6 +4,7 @@ Date=2023-02-10
 Name=Phyrexia: All Will Be One Commander
 Type=Commander
 ScryfallCode=ONC
+CardLang=en,es,fr,de,it,pt,ja
 
 [cards]
 1 M Ixhel, Scion of Atraxa @Campbell White
@@ -34,36 +35,36 @@ ScryfallCode=ONC
 26 R Tangleweave Armor @Johann Bodin
 27 R Lux Artillery @Jason Kang
 28 M Urtet, Remnant of Memnarch @Simon Dominic
-29 M Ixhel, Scion of Atraxa @Campbell White
-30 M Neyali, Suns' Vanguard @Bryan Sola
-31 R Skyhunter Strike Force @Slawomir Maniak
-32 R Mirage Mockery @Anna Pavleeva
-33 R Synthesis Pod @Campbell White
-34 R Monumental Corruption @Sergey Glushakov
-35 M Chiss-Goria, Forge Tyrant @Svetlin Velinov
-36 R Tangleweave Armor @Johann Bodin
-37 M Ixhel, Scion of Atraxa @Campbell White
-38 M Neyali, Suns' Vanguard @Bryan Sola
-39 M Otharri, Suns' Glory @Marta Nael
-40 M Vishgraz, the Doomhive @Andrew Mar
-41 R Lux Artillery @Jason Kang
-42 R Urtet, Remnant of Memnarch @Simon Dominic
-43 R Clever Concealment @Alexey Kruglov
-44 R Glimmer Lens @Sidharth Chaturvedi
-45 R Kemba's Banner @Wisnu Tan
-46 R Norn's Choirmaster @Jason A. Engle
-47 R Norn's Decree @Néstor Ossandón Leal
-48 R Staff of the Storyteller @Dan Murayama Scott
-49 R Geth's Summons @Johann Bodin
-50 R Phyresis Outbreak @Matthew G. Lewis
-51 R Goldwardens' Gambit @Manuel Castañón
-52 R Hexplate Wallbreaker @Aaron Miller
-53 R Roar of Resistance @Lie Setiawan
-54 R Vulshok Factory @Cristi Balanescu
-55 R Contaminant Grafter @Lars Grant-West
-56 R Glissa's Retriever @Josu Hernaiz
-57 R Wurmquake @Xavier Ribeiro
-58 R Glistening Sphere @Tuan Duong Chu
+29 M Ixhel, Scion of Atraxa @Campbell White ${"lang": "en"}
+30 M Neyali, Suns' Vanguard @Bryan Sola ${"lang": "en"}
+31 R Skyhunter Strike Force @Slawomir Maniak ${"lang": "en|fr|de|ja|zhs"}
+32 R Mirage Mockery @Anna Pavleeva ${"lang": "en|fr|de|ja|zhs"}
+33 R Synthesis Pod @Campbell White ${"lang": "en|fr|de|ja|zhs"}
+34 R Monumental Corruption @Sergey Glushakov ${"lang": "en|fr|de|ja|zhs"}
+35 M Chiss-Goria, Forge Tyrant @Svetlin Velinov ${"lang": "en|fr|de|ja|zhs"}
+36 R Tangleweave Armor @Johann Bodin ${"lang": "en|fr|de|ja|zhs"}
+37 M Ixhel, Scion of Atraxa @Campbell White ${"lang": "en|fr|de|ja|zhs"}
+38 M Neyali, Suns' Vanguard @Bryan Sola ${"lang": "en|fr|de|ja|zhs"}
+39 M Otharri, Suns' Glory @Marta Nael ${"lang": "en|fr|de|ja|zhs"}
+40 M Vishgraz, the Doomhive @Andrew Mar ${"lang": "en|fr|de|ja|zhs"}
+41 R Lux Artillery @Jason Kang ${"lang": "en|fr|de|ja|zhs"}
+42 R Urtet, Remnant of Memnarch @Simon Dominic ${"lang": "en|fr|de|ja|zhs"}
+43 R Clever Concealment @Alexey Kruglov ${"lang": "en|fr|de|ja|zhs"}
+44 R Glimmer Lens @Sidharth Chaturvedi ${"lang": "en|fr|de|ja|zhs"}
+45 R Kemba's Banner @Wisnu Tan ${"lang": "en|fr|de|ja|zhs"}
+46 R Norn's Choirmaster @Jason A. Engle ${"lang": "en|fr|de|ja|zhs"}
+47 R Norn's Decree @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+48 R Staff of the Storyteller @Dan Murayama Scott ${"lang": "en|fr|de|ja|zhs"}
+49 R Geth's Summons @Johann Bodin ${"lang": "en|fr|de|ja|zhs"}
+50 R Phyresis Outbreak @Matthew G. Lewis ${"lang": "en|fr|de|ja|zhs"}
+51 R Goldwardens' Gambit @Manuel Castañón ${"lang": "en|fr|de|ja|zhs"}
+52 R Hexplate Wallbreaker @Aaron Miller ${"lang": "en|fr|de|ja|zhs"}
+53 R Roar of Resistance @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+54 R Vulshok Factory @Cristi Balanescu ${"lang": "en|fr|de|ja|zhs"}
+55 R Contaminant Grafter @Lars Grant-West ${"lang": "en|fr|de|ja|zhs"}
+56 R Glissa's Retriever @Josu Hernaiz ${"lang": "en|fr|de|ja|zhs"}
+57 R Wurmquake @Xavier Ribeiro ${"lang": "en|fr|de|ja|zhs"}
+58 R Glistening Sphere @Tuan Duong Chu ${"lang": "en|fr|de|ja|zhs"}
 59 U Battle Screech @Randy Gallegos
 60 R Call the Coppercoats @Cristi Balanescu
 61 R Collective Effort @Eric Deschamps

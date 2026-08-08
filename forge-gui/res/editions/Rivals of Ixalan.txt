@@ -10,6 +10,7 @@ FatPackExtraSlots=80 BasicLands
 TreatAsSmallSet=true
 ScryfallCode=RIX
 TokenFallbackCode=XLN
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 U Baffling End @Mathias Kollros

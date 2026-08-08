@@ -4,6 +4,7 @@ Date=2015-01-17
 Name=Ugin's Fate
 Type=Promo
 ScryfallCode=UGIN
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 M Ugin, the Spirit Dragon @Chris Rahn

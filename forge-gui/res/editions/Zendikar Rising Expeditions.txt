@@ -4,6 +4,7 @@ Date=2020-09-25
 Name=Zendikar Rising Expeditions
 Type=Collector_Edition
 ScryfallCode=ZNE
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 M Flooded Strand @Adam Paquette

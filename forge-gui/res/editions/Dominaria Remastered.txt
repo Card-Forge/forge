@@ -9,6 +9,7 @@ BoosterMustContain=Legendary Creature
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 ScryfallCode=DMR
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 C Auramancer @Rebecca Guay
@@ -217,16 +218,16 @@ ScryfallCode=DMR
 204 U Tiana, Ship's Caretaker @Eric Deschamps
 205 R Xira Arien @Simon Dominic
 206 R Zur the Enchanter @Pete Venters
-207 U Stand // Deliver @David Martin
-208 U Spite // Malice @David Martin
-209 U Pain // Suffering @David Martin
-210 U Assault // Battery @Ben Thompson
-211 U Wax // Wane @Ben Thompson
-212 U Order // Chaos @Tim Hildebrandt
-213 U Illusion // Reality @John Avon & David Martin
-214 U Night // Day @Christopher Moeller & Anthony S. Waters
-215 U Fire // Ice @David Martin & Franz Vohwinkel
-216 U Life // Death @Anthony S. Waters & Scott Murphy
+207 U Stand // Deliver @David Martin ${"lang": "en"}
+208 U Spite // Malice @David Martin ${"lang": "en"}
+209 U Pain // Suffering @David Martin ${"lang": "en"}
+210 U Assault // Battery @Ben Thompson ${"lang": "en"}
+211 U Wax // Wane @Ben Thompson ${"lang": "en"}
+212 U Order // Chaos @Tim Hildebrandt ${"lang": "en"}
+213 U Illusion // Reality @John Avon & David Martin ${"lang": "en"}
+214 U Night // Day @Christopher Moeller & Anthony S. Waters ${"lang": "en"}
+215 U Fire // Ice @David Martin & Franz Vohwinkel ${"lang": "en"}
+216 U Life // Death @Anthony S. Waters & Scott Murphy ${"lang": "en"}
 217 R Crawlspace @Zoltan Boros
 218 R Cryptic Gateway @David Martin
 219 U Damping Sphere @Adam Paquette

@@ -7,6 +7,7 @@ Booster=13 Common:fromSheet("CMR cards"), 3 fromSheet("CMR Non-Legendary Uncommo
 Foil=NotSupported
 DoublePick=Always
 ScryfallCode=CMR
+CardLang=en,es,fr,de,it,pt,ja,zhs,zht
 
 [cards]
 1 S The Prismatic Piper @Seb McKinnon
@@ -459,7 +460,7 @@ ScryfallCode=CMR
 446 C Growth Spiral @Seb McKinnon
 447 R Master Warcraft @Zoltan Boros & Gabor Szikszai
 448 R Murkfiend Liege @Carl Critchlow
-449 R Response // Resurgence @Daarken
+449 R Response // Resurgence @Daarken ${"lang": "en"}
 450 U Sharktocrab @Jehan Choo
 451 U Simic Charm @Zoltan Boros
 452 R Simic Sky Swallower @rk post
@@ -631,114 +632,114 @@ ScryfallCode=CMR
 614 R Zara, Renegade Recruiter @Chris Rallis
 
 [extended art]
-615 R Akroma's Will @Antonio José Manzanedo
-616 M Archon of Coronation @Antonio José Manzanedo
-617 R Armored Skyhunter @Denman Rooke
-618 R Austere Command @Anna Steinbauer
-619 R Court of Grace @Denman Rooke
-620 U Generous Gift @Kev Walker
-621 R Keeper of the Accord @Denman Rooke
-622 R Promise of Tomorrow @Seb McKinnon
-623 U Return to Dust @Wayne Reynolds
-624 M Seraphic Greatsword @Craig J Spearing
-625 R Slash the Ranks @Svetlin Velinov
-626 R Soul of Eternity @Yigit Koroglu
-627 U Swords to Plowshares @Sam Wolfe Connelly
-628 M Triumphant Reckoning @Svetlin Velinov
-629 R Amphin Mutineer @Nicholas Gregory
-630 C Arcane Denial @Xi Zhang
-631 R Body of Knowledge @Clint Cearley
-632 C Counterspell @Zack Stella
-633 R Court of Cunning @Yeong-Hao Han
-634 U Fact or Fiction @Matt Cavotta
-635 R Hullbreacher @Sidharth Chaturvedi
-636 R Laboratory Drudge @Milivoj Ćeran
-637 M Mana Drain @Raymond Swanland
-638 M Mnemonic Deluge @Chris Rallis
-639 U Mulldrifter @Eric Fortune
-640 C Preordain @Svetlin Velinov
-641 R Sakashima's Protege @Tyler Walpole
-642 R Sakashima's Will @Volkan Baǵa
-643 M Sphinx of the Second Sun @Antonio José Manzanedo
-644 R Wrong Turn @Filip Burburan
-645 R Court of Ambition @Ravenna Tran
-646 U Cuombajj Witches @Seb McKinnon
-647 R Elvish Dreadlord @Randy Vargas
-648 C Fleshbag Marauder @Mark Zug
-649 R Necrotic Hex @Nils Hamm
-650 R Nightshade Harvester @PINDURSKI
-651 R Opposition Agent @Scott Murphy
-652 R Plague Reaver @Nicholas Gregory
-653 M Profane Transfusion @Vincent Proce
-654 R Rakshasa Debaser @Yigit Koroglu
-655 R Szat's Will @Sidharth Chaturvedi
-656 M Vampiric Tutor @Raymond Swanland
-657 U Victimize @Craig J Spearing
-658 C Viscera Seer @John Stanko
-659 U Abrade @Jonas De Ro
-660 R Aurora Phoenix @Caio Monteiro
-661 R Blasphemous Act @Daarken
-662 R Coercive Recruiter @Randy Vargas
-663 R Court of Ire @Alexander Forssberg
-664 R Emberwilde Captain @Tyler Walpole
-665 R Flamekin Herald @Johan Grenier
-666 M Hellkite Courser @Caio Monteiro
-667 U Humble Defector @Slawomir Maniak
-668 R Jeska's Will @Izzy
-669 M Port Razer @Craig J Spearing
-670 M Soulfire Eruption @Andrey Kuzinskiy
-671 C Temur Battle Rage @Jaime Jones
-672 R Wheel of Misfortune @J.P. Targete
-673 U Acidic Slime @Karl Kopinski
-674 M Apex Devastator @Svetlin Velinov
-675 R Biowaste Blob @Simon Dominic
-676 R Court of Bounty @Milivoj Ćeran
-677 R Dawnglade Regent @YW Tang
-678 C Fyndhorn Elves @Igor Kieryluk
-679 R Immaculate Magistrate @Jim Nelson
-680 R Kamahl's Will @Nicholas Gregory
-681 C Kodama's Reach @John Avon
-682 R Magus of the Order @Tomasz Jedruszek
-683 M Reshape the Earth @Adam Paquette
-684 R Rootweaver Druid @Lie Setiawan
-685 R Sweet-Gum Recluse @Jehan Choo
-686 U Three Visits @Yeong-Hao Han
-687 U Boros Charm @Zoltan Boros
-688 C Coiling Oracle @Mark Zug
-689 U Arcane Signet @Dan Murayama Scott
-690 R Bladegriff Prototype @Johann Bodin
-691 U Burnished Hart @Yeong-Hao Han
-692 M Commander's Plate @Volkan Baǵa
-693 C Commander's Sphere @Ryan Alexander Lee
-694 R Horizon Stone @Noah Bradley
-695 M Jeweled Lotus @Alayna Danner
-696 R Nevinyrral's Disk @Steve Argyle
-697 M Phyrexian Triniform @Adam Paquette
-698 R Rings of Brighthearth @Howard Lyon
-699 M Scroll Rack @Heather Hudson
-700 U Sol Ring @Mike Bierek
-701 R Staff of Domination @Ben Thompson
-702 U Swiftfoot Boots @Svetlin Velinov
-703 U Thought Vessel @rk post
-704 R Command Beacon @Jonas De Ro
-705 C Command Tower @Ryan Yee
-706 U Myriad Landscape @Richard Wright
-707 C Opal Palace @Andreas Rocha
-708 C Path of Ancestry @Alayna Danner
-709 R Rejuvenating Springs @Alayna Danner
-710 U Reliquary Tower @Jesper Ejsing
-711 R Spectator Seating @Ravenna Tran
-712 C Terramorphic Expanse @Dan Murayama Scott
-713 R Training Center @Daniel Ljunggren
-714 R Undergrowth Stadium @Yeong-Hao Han
-715 R Vault of Champions @Cliff Childs
-716 R War Room @Milivoj Ćeran
+615 R Akroma's Will @Antonio José Manzanedo ${"lang": "en|fr|de|ja"}
+616 M Archon of Coronation @Antonio José Manzanedo ${"lang": "en|fr|de|ja"}
+617 R Armored Skyhunter @Denman Rooke ${"lang": "en|fr|de|ja"}
+618 R Austere Command @Anna Steinbauer ${"lang": "en|fr|de|ja"}
+619 R Court of Grace @Denman Rooke ${"lang": "en|fr|de|ja"}
+620 U Generous Gift @Kev Walker ${"lang": "en|fr|de|ja"}
+621 R Keeper of the Accord @Denman Rooke ${"lang": "en|fr|de|ja"}
+622 R Promise of Tomorrow @Seb McKinnon ${"lang": "en|fr|de|ja"}
+623 U Return to Dust @Wayne Reynolds ${"lang": "en|fr|de|ja"}
+624 M Seraphic Greatsword @Craig J Spearing ${"lang": "en|fr|de|ja"}
+625 R Slash the Ranks @Svetlin Velinov ${"lang": "en|fr|de|ja"}
+626 R Soul of Eternity @Yigit Koroglu ${"lang": "en|fr|de|ja"}
+627 U Swords to Plowshares @Sam Wolfe Connelly ${"lang": "en|fr|de|ja"}
+628 M Triumphant Reckoning @Svetlin Velinov ${"lang": "en|fr|de|ja"}
+629 R Amphin Mutineer @Nicholas Gregory ${"lang": "en|fr|de|ja"}
+630 C Arcane Denial @Xi Zhang ${"lang": "en|fr|de|ja"}
+631 R Body of Knowledge @Clint Cearley ${"lang": "en|fr|de|ja"}
+632 C Counterspell @Zack Stella ${"lang": "en|fr|de|ja"}
+633 R Court of Cunning @Yeong-Hao Han ${"lang": "en|fr|de|ja"}
+634 U Fact or Fiction @Matt Cavotta ${"lang": "en|fr|de|ja"}
+635 R Hullbreacher @Sidharth Chaturvedi ${"lang": "en|fr|de|ja"}
+636 R Laboratory Drudge @Milivoj Ćeran ${"lang": "en|fr|de|ja"}
+637 M Mana Drain @Raymond Swanland ${"lang": "en|fr|de|ja"}
+638 M Mnemonic Deluge @Chris Rallis ${"lang": "en|fr|de|ja"}
+639 U Mulldrifter @Eric Fortune ${"lang": "en|fr|de|ja"}
+640 C Preordain @Svetlin Velinov ${"lang": "en|fr|de|ja"}
+641 R Sakashima's Protege @Tyler Walpole ${"lang": "en|fr|de|ja"}
+642 R Sakashima's Will @Volkan Baǵa ${"lang": "en|fr|de|ja"}
+643 M Sphinx of the Second Sun @Antonio José Manzanedo ${"lang": "en|fr|de|ja"}
+644 R Wrong Turn @Filip Burburan ${"lang": "en|fr|de|ja"}
+645 R Court of Ambition @Ravenna Tran ${"lang": "en|fr|de|ja"}
+646 U Cuombajj Witches @Seb McKinnon ${"lang": "en|fr|de|ja"}
+647 R Elvish Dreadlord @Randy Vargas ${"lang": "en|fr|de|ja"}
+648 C Fleshbag Marauder @Mark Zug ${"lang": "en|fr|de|ja"}
+649 R Necrotic Hex @Nils Hamm ${"lang": "en|fr|de|ja"}
+650 R Nightshade Harvester @PINDURSKI ${"lang": "en|fr|de|ja"}
+651 R Opposition Agent @Scott Murphy ${"lang": "en|fr|de|ja"}
+652 R Plague Reaver @Nicholas Gregory ${"lang": "en|fr|de|ja"}
+653 M Profane Transfusion @Vincent Proce ${"lang": "en|fr|de|ja"}
+654 R Rakshasa Debaser @Yigit Koroglu ${"lang": "en|fr|de|ja"}
+655 R Szat's Will @Sidharth Chaturvedi ${"lang": "en|fr|de|ja"}
+656 M Vampiric Tutor @Raymond Swanland ${"lang": "en|fr|de|ja"}
+657 U Victimize @Craig J Spearing ${"lang": "en|fr|de|ja"}
+658 C Viscera Seer @John Stanko ${"lang": "en|fr|de|ja"}
+659 U Abrade @Jonas De Ro ${"lang": "en|fr|de|ja"}
+660 R Aurora Phoenix @Caio Monteiro ${"lang": "en|fr|de|ja"}
+661 R Blasphemous Act @Daarken ${"lang": "en|fr|de|ja"}
+662 R Coercive Recruiter @Randy Vargas ${"lang": "en|fr|de|ja"}
+663 R Court of Ire @Alexander Forssberg ${"lang": "en|fr|de|ja"}
+664 R Emberwilde Captain @Tyler Walpole ${"lang": "en|fr|de|ja"}
+665 R Flamekin Herald @Johan Grenier ${"lang": "en|fr|de|ja"}
+666 M Hellkite Courser @Caio Monteiro ${"lang": "en|fr|de|ja"}
+667 U Humble Defector @Slawomir Maniak ${"lang": "en|fr|de|ja"}
+668 R Jeska's Will @Izzy ${"lang": "en|fr|de|ja"}
+669 M Port Razer @Craig J Spearing ${"lang": "en|fr|de|ja"}
+670 M Soulfire Eruption @Andrey Kuzinskiy ${"lang": "en|fr|de|ja"}
+671 C Temur Battle Rage @Jaime Jones ${"lang": "en|fr|de|ja"}
+672 R Wheel of Misfortune @J.P. Targete ${"lang": "en|fr|de|ja"}
+673 U Acidic Slime @Karl Kopinski ${"lang": "en|fr|de|ja"}
+674 M Apex Devastator @Svetlin Velinov ${"lang": "en|fr|de|ja"}
+675 R Biowaste Blob @Simon Dominic ${"lang": "en|fr|de|ja"}
+676 R Court of Bounty @Milivoj Ćeran ${"lang": "en|fr|de|ja"}
+677 R Dawnglade Regent @YW Tang ${"lang": "en|fr|de|ja"}
+678 C Fyndhorn Elves @Igor Kieryluk ${"lang": "en|fr|de|ja"}
+679 R Immaculate Magistrate @Jim Nelson ${"lang": "en|fr|de|ja"}
+680 R Kamahl's Will @Nicholas Gregory ${"lang": "en|fr|de|ja"}
+681 C Kodama's Reach @John Avon ${"lang": "en|fr|de|ja"}
+682 R Magus of the Order @Tomasz Jedruszek ${"lang": "en|fr|de|ja"}
+683 M Reshape the Earth @Adam Paquette ${"lang": "en|fr|de|ja"}
+684 R Rootweaver Druid @Lie Setiawan ${"lang": "en|fr|de|ja"}
+685 R Sweet-Gum Recluse @Jehan Choo ${"lang": "en|fr|de|ja"}
+686 U Three Visits @Yeong-Hao Han ${"lang": "en|fr|de|ja"}
+687 U Boros Charm @Zoltan Boros ${"lang": "en|fr|de|ja"}
+688 C Coiling Oracle @Mark Zug ${"lang": "en|fr|de|ja"}
+689 U Arcane Signet @Dan Murayama Scott ${"lang": "en|fr|de|ja"}
+690 R Bladegriff Prototype @Johann Bodin ${"lang": "en|fr|de|ja"}
+691 U Burnished Hart @Yeong-Hao Han ${"lang": "en|fr|de|ja"}
+692 M Commander's Plate @Volkan Baǵa ${"lang": "en|fr|de|ja"}
+693 C Commander's Sphere @Ryan Alexander Lee ${"lang": "en|fr|de|ja"}
+694 R Horizon Stone @Noah Bradley ${"lang": "en|fr|de|ja"}
+695 M Jeweled Lotus @Alayna Danner ${"lang": "en|fr|de|ja"}
+696 R Nevinyrral's Disk @Steve Argyle ${"lang": "en|fr|de|ja"}
+697 M Phyrexian Triniform @Adam Paquette ${"lang": "en|fr|de|ja"}
+698 R Rings of Brighthearth @Howard Lyon ${"lang": "en|fr|de|ja"}
+699 M Scroll Rack @Heather Hudson ${"lang": "en|fr|de|ja"}
+700 U Sol Ring @Mike Bierek ${"lang": "en|fr|de|ja"}
+701 R Staff of Domination @Ben Thompson ${"lang": "en|fr|de|ja"}
+702 U Swiftfoot Boots @Svetlin Velinov ${"lang": "en|fr|de|ja"}
+703 U Thought Vessel @rk post ${"lang": "en|fr|de|ja"}
+704 R Command Beacon @Jonas De Ro ${"lang": "en|fr|de|ja"}
+705 C Command Tower @Ryan Yee ${"lang": "en|fr|de|ja"}
+706 U Myriad Landscape @Richard Wright ${"lang": "en|fr|de|ja"}
+707 C Opal Palace @Andreas Rocha ${"lang": "en|fr|de|ja"}
+708 C Path of Ancestry @Alayna Danner ${"lang": "en|fr|de|ja"}
+709 R Rejuvenating Springs @Alayna Danner ${"lang": "en|fr|de|ja"}
+710 U Reliquary Tower @Jesper Ejsing ${"lang": "en|fr|de|ja"}
+711 R Spectator Seating @Ravenna Tran ${"lang": "en|fr|de|ja"}
+712 C Terramorphic Expanse @Dan Murayama Scott ${"lang": "en|fr|de|ja"}
+713 R Training Center @Daniel Ljunggren ${"lang": "en|fr|de|ja"}
+714 R Undergrowth Stadium @Yeong-Hao Han ${"lang": "en|fr|de|ja"}
+715 R Vault of Champions @Cliff Childs ${"lang": "en|fr|de|ja"}
+716 R War Room @Milivoj Ćeran ${"lang": "en|fr|de|ja"}
 
 [buy a box]
-721 M Mana Confluence @Titus Lunter
+721 M Mana Confluence @Titus Lunter ${"lang": "en"}
 
 [promo]
-722 R Sengir, the Dark Baron @Pete Venters
+722 R Sengir, the Dark Baron @Pete Venters ${"lang": "en"}
 
 [Foils]
 The Prismatic Piper+|CMR

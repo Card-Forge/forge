@@ -4,6 +4,7 @@ Date=2016-11-11
 Name=Commander 2016
 Type=Commander
 ScryfallCode=C16
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 R Duelist's Heritage @Lake Hurwitz

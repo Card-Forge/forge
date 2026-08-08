@@ -5,6 +5,7 @@ Name=Commander 2013
 Code2=C13
 Type=Commander
 ScryfallCode=C13
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 R Act of Authority @Véronique Meignaud
@@ -124,7 +125,7 @@ ScryfallCode=C13
 115 R Magus of the Arena @Thomas M. Baxa
 116 R Mass Mutiny @Carl Critchlow
 117 R Molten Disaster @Ittoku
-118 U Rough // Tumble @Luca Zontini
+118 U Rough // Tumble @Luca Zontini ${"lang": "en"}
 119 U Slice and Dice @Mark Brill
 120 U Spitebellows @Larry MacDougall
 121 R Stalking Vengeance @Anthony S. Waters

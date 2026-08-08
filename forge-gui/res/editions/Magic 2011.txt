@@ -9,6 +9,7 @@ FatPack=8
 FatPackExtraSlots=40 BasicLands
 ChaosDraftThemes=CORE_SET
 ScryfallCode=M11
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs,zht
 
 [cards]
 1 M Ajani Goldmane @Aleksi Briclot

@@ -8,6 +8,7 @@ Booster=9 Common:!dfc:!fromSheet("LCI lands"):fromsheet("LCI cards"), 3 Uncommon
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 ScryfallCode=LCI
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 R Abuelo's Awakening @Eelis Kyttanen
@@ -73,7 +74,7 @@ ScryfallCode=LCI
 61 R Kitesail Larcenist @Sidharth Chaturvedi
 62 U Lodestone Needle @José Parodi
 63 R Malcolm, Alluring Scoundrel @Fesbra
-64 C Marauding Brinefang @John Tedrick
+64 C Marauding Brinefang @John Tedrick ${"lang": "en|es|fr|de|pt|ja|zhs"}
 65 U Merfolk Cave-Diver @Fesbra
 66 C Oaken Siren @Lars Grant-West
 67 M Ojer Pakpatiq, Deepest Epoch @Chris Rahn
@@ -198,7 +199,7 @@ ScryfallCode=LCI
 186 U Glimpse the Core @Francisco Miyara
 187 U Glowcap Lantern @Irina Nordsol
 188 R Growing Rites of Itlimoc @Josu Hernaiz
-189 M Huatli, Poet of Unity @Tyler Jacobson
+189 M Huatli, Poet of Unity @Tyler Jacobson ${"lang": "en"}
 190 C Huatli's Final Strike @Marta Nael
 191 R Hulking Raptor @Néstor Ossandón Leal
 192 C In the Presence of Ages @Steve Prescott
@@ -275,7 +276,7 @@ ScryfallCode=LCI
 263 U Swashbuckler's Whip @Irina Nordsol
 264 R Tarrian's Soulcleaver @Nereida
 265 R Threefold Thunderhulk @Xavier Ribeiro
-266 R Throne of the Grim Captain @Tiffany Turrill
+266 R Throne of the Grim Captain @Tiffany Turrill ${"lang": "en"}
 267 R Treasure Map @Néstor Ossandón Leal
 268 C Captivating Cave @Lorenzo Lanfranconi
 269 M Cavern of Souls @Alayna Danner
@@ -325,18 +326,18 @@ ScryfallCode=LCI
 311 M Vito, Fanatic of Aclazotz @WolfSkullJack
 312 U Zoyowa Lava-Tongue @Richard Luong
 313 R Throne of the Grim Captain @Rafal Wechterowicz
-314 M Ojer Taq, Deepest Foundation @Clint Lockwood & Josu Hernaiz
-315 M Ojer Pakpatiq, Deepest Epoch @Clint Lockwood & Viko Menezes
-316 M Aclazotz, Deepest Betrayal @Clint Lockwood & Viko Menezes
-317 M Ojer Axonil, Deepest Might @Clint Lockwood & Viko Menezes
-318 M Ojer Kaslem, Deepest Growth @Clint Lockwood & Eddie Mendoza
+314 M Ojer Taq, Deepest Foundation @Clint Lockwood & Josu Hernaiz ${"lang": "en"}
+315 M Ojer Pakpatiq, Deepest Epoch @Clint Lockwood & Viko Menezes ${"lang": "en"}
+316 M Aclazotz, Deepest Betrayal @Clint Lockwood & Viko Menezes ${"lang": "en"}
+317 M Ojer Axonil, Deepest Might @Clint Lockwood & Viko Menezes ${"lang": "en"}
+318 M Ojer Kaslem, Deepest Growth @Clint Lockwood & Eddie Mendoza ${"lang": "en"}
 319 M The Ancient One @Clint Lockwood
-410a M Cavern of Souls @Pedro Correa
-410b M Cavern of Souls @Pedro Correa
-410c M Cavern of Souls @Pedro Correa
-410d M Cavern of Souls @Pedro Correa
-410e M Cavern of Souls @Pedro Correa
-410f M Cavern of Souls @Pedro Correa
+410a M Cavern of Souls @Pedro Correa ${"lang": "en"}
+410b M Cavern of Souls @Pedro Correa ${"lang": "en"}
+410c M Cavern of Souls @Pedro Correa ${"lang": "en"}
+410d M Cavern of Souls @Pedro Correa ${"lang": "en"}
+410e M Cavern of Souls @Pedro Correa ${"lang": "en"}
+410f M Cavern of Souls @Pedro Correa ${"lang": "en"}
 
 [borderless]
 320 U Belligerent Yearling @Sidharth Chaturvedi
@@ -358,9 +359,9 @@ ScryfallCode=LCI
 336 M Bloodletter of Aclazotz @Bene Rohlmann
 337 R Bringer of the Last Gift @Psydrian
 338 R Starving Revenant @Jorge Gutierrez Garcia
-339 M Huatli, Poet of Unity @LeDania
+339 M Huatli, Poet of Unity @LeDania ${"lang": "en"}
 340 M The Skullspore Nexus @Mónica Robles Corzo
-341 R Kellan, Daring Traveler @Jorge Gutierrez Garcia
+341 R Kellan, Daring Traveler @Jorge Gutierrez Garcia ${"lang": "en"}
 342 R Molten Collapse @Mónica Robles Corzo
 343 R Wail of the Forgotten @Bene Rohlmann
 344 R Roaming Throne @LeDania
@@ -374,46 +375,46 @@ ScryfallCode=LCI
 352 M Quintorius Kand @Psydrian
 
 [extended art]
-353 R Abuelo's Awakening @Eelis Kyttanen
-354 R Fabrication Foundry @Racrufi
-355 R Kutzil's Flanker @Michele Giorgi
-356 R Sanguine Evangelist @Zezhou Chen
-357 R Thousand Moons Smithy @Manuel Castañón
-358 R Unstable Glyphbridge @Bastien Grivet
-359 R Warden of the Inner Sky @Raoul Vitale
-360 R Braided Net @Diego Gisbert
-361 R Deeproot Pilgrimage @Rémi Jacquot
-362 M The Enigma Jewel @Martin de Diego Sádaba
-363 R The Everflowing Well @David Álvarez
-364 R Kitesail Larcenist @Sidharth Chaturvedi
-365 R Subterranean Schooner @Svetlin Velinov
-366 R Corpses of the Lost @Izzy
-367 R Preacher of the Schism @Donato Giancola
-368 R Queen's Bay Paladin @Slawomir Maniak
-369 R Souls of the Lost @Nils Hamm
-370 R Stalactite Stalker @Olivier Bernard
-371 R Tarrian's Journal @Randy Gallegos
-372 R Terror Tide @Brock Grossman
-373 R Brass's Tunnel-Grinder @Cristi Balanescu
-374 R Dire Flail @Anthony Devine
-375 R Hit the Mother Lode @Diego Gisbert
-376 R Magmatic Galleon @Cristi Balanescu
-377 R Poetic Ingenuity @Kieran Yanner
-378 R Bedrock Tortoise @Maxime Minard
-379 R Cosmium Confluence @Kasia 'Kafis' Zielińska
-380 R Growing Rites of Itlimoc @Josu Hernaiz
-381 R Intrepid Paleontologist @Irina Nordsol
-382 R Jadelight Spelunker @Izzy
-383 R Sentinel of the Nameless City @Josu Hernaiz
-384 R The Belligerent @Bruce Brenneise
-385 R Deepfathom Echo @Matt Stewart
-386 R Squirming Emergence @Simon Dominic
-387 R Matzalantli, the Great Door @Piotr Dura
-388 M The Millennium Calendar @Zoltan Boros
-389 R Tarrian's Soulcleaver @Nereida
-390 R Threefold Thunderhulk @Xavier Ribeiro
-391 R Treasure Map @Néstor Ossandón Leal
-392 R Sunken Citadel @Matteo Bassini
+353 R Abuelo's Awakening @Eelis Kyttanen ${"lang": "en|fr|de|ja|zhs"}
+354 R Fabrication Foundry @Racrufi ${"lang": "en|fr|de|ja|zhs"}
+355 R Kutzil's Flanker @Michele Giorgi ${"lang": "en|fr|de|ja|zhs"}
+356 R Sanguine Evangelist @Zezhou Chen ${"lang": "en|fr|de|ja|zhs"}
+357 R Thousand Moons Smithy @Manuel Castañón ${"lang": "en"}
+358 R Unstable Glyphbridge @Bastien Grivet ${"lang": "en"}
+359 R Warden of the Inner Sky @Raoul Vitale ${"lang": "en|fr|de|ja|zhs"}
+360 R Braided Net @Diego Gisbert ${"lang": "en"}
+361 R Deeproot Pilgrimage @Rémi Jacquot ${"lang": "en|fr|de|ja|zhs"}
+362 M The Enigma Jewel @Martin de Diego Sádaba ${"lang": "en"}
+363 R The Everflowing Well @David Álvarez ${"lang": "en"}
+364 R Kitesail Larcenist @Sidharth Chaturvedi ${"lang": "en|fr|de|ja|zhs"}
+365 R Subterranean Schooner @Svetlin Velinov ${"lang": "en|fr|de|ja|zhs"}
+366 R Corpses of the Lost @Izzy ${"lang": "en|fr|de|ja|zhs"}
+367 R Preacher of the Schism @Donato Giancola ${"lang": "en|fr|de|ja|zhs"}
+368 R Queen's Bay Paladin @Slawomir Maniak ${"lang": "en|fr|de|ja|zhs"}
+369 R Souls of the Lost @Nils Hamm ${"lang": "en|fr|de|ja|zhs"}
+370 R Stalactite Stalker @Olivier Bernard ${"lang": "en|fr|de|ja|zhs"}
+371 R Tarrian's Journal @Randy Gallegos ${"lang": "en"}
+372 R Terror Tide @Brock Grossman ${"lang": "en|fr|de|ja|zhs"}
+373 R Brass's Tunnel-Grinder @Cristi Balanescu ${"lang": "en"}
+374 R Dire Flail @Anthony Devine ${"lang": "en"}
+375 R Hit the Mother Lode @Diego Gisbert ${"lang": "en|fr|de|ja|zhs"}
+376 R Magmatic Galleon @Cristi Balanescu ${"lang": "en|fr|de|ja|zhs"}
+377 R Poetic Ingenuity @Kieran Yanner ${"lang": "en|fr|de|ja|zhs"}
+378 R Bedrock Tortoise @Maxime Minard ${"lang": "en|fr|de|ja|zhs"}
+379 R Cosmium Confluence @Kasia 'Kafis' Zielińska ${"lang": "en|fr|de|ja|zhs"}
+380 R Growing Rites of Itlimoc @Josu Hernaiz ${"lang": "en"}
+381 R Intrepid Paleontologist @Irina Nordsol ${"lang": "en|fr|de|ja|zhs"}
+382 R Jadelight Spelunker @Izzy ${"lang": "en|fr|de|ja|zhs"}
+383 R Sentinel of the Nameless City @Josu Hernaiz ${"lang": "en|fr|de|ja|zhs"}
+384 R The Belligerent @Bruce Brenneise ${"lang": "en|fr|de|ja|zhs"}
+385 R Deepfathom Echo @Matt Stewart ${"lang": "en|fr|de|ja|zhs"}
+386 R Squirming Emergence @Simon Dominic ${"lang": "en|fr|de|ja|zhs"}
+387 R Matzalantli, the Great Door @Piotr Dura ${"lang": "en"}
+388 M The Millennium Calendar @Zoltan Boros ${"lang": "en|fr|de|ja|zhs"}
+389 R Tarrian's Soulcleaver @Nereida ${"lang": "en|fr|de|ja|zhs"}
+390 R Threefold Thunderhulk @Xavier Ribeiro ${"lang": "en|fr|de|ja|zhs"}
+391 R Treasure Map @Néstor Ossandón Leal ${"lang": "en"}
+392 R Sunken Citadel @Matteo Bassini ${"lang": "en|fr|de|ja|zhs"}
 
 [bundle]
 393 L Plains @Carlos Palma Cruchaga
@@ -429,7 +430,7 @@ ScryfallCode=LCI
 
 [promo]
 403 R Jadelight Spelunker @Ovidio Cartagena
-404 R Hit the Mother Lode @Bram Sels
+404 R Hit the Mother Lode @Bram Sels ${"lang": "en|fr|de"}
 405 U Spyglass Siren @David Astruga
 406 U Deep-Cavern Bat @Campbell White
 407 U Geological Appraiser @Alix Branwyn

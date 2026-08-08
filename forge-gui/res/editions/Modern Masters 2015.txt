@@ -9,6 +9,7 @@ BoosterBox=24
 FoilChanceInBooster=100
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=MM2
+CardLang=en,ja,zhs
 
 [cards]
 1 R All Is Dust @Jason Felix

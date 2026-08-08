@@ -10,6 +10,7 @@ FatPack=10
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=RAVNICA;GRAVEYARD_MATTERS
 ScryfallCode=GRN
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 C Blade Instructor @Zoltan Boros
@@ -254,26 +255,26 @@ ScryfallCode=GRN
 240 C Selesnya Locket @Winona Nelson
 241 U Silent Dart @Yeong-Hao Han
 242 U Wand of Vertebrae @Volkan Baǵa
-243 C Boros Guildgate @Titus Lunter
-244 C Boros Guildgate @Titus Lunter
-245 C Dimir Guildgate @Cliff Childs
-246 C Dimir Guildgate @Cliff Childs
+243 C Boros Guildgate @Titus Lunter ${"lang": "en"}
+244 C Boros Guildgate @Titus Lunter ${"lang": "en"}
+245 C Dimir Guildgate @Cliff Childs ${"lang": "en"}
+246 C Dimir Guildgate @Cliff Childs ${"lang": "en"}
 247 C Gateway Plaza @Jedd Chevrier
-248 C Golgari Guildgate @Eytan Zana
-249 C Golgari Guildgate @Eytan Zana
+248 C Golgari Guildgate @Eytan Zana ${"lang": "en"}
+249 C Golgari Guildgate @Eytan Zana ${"lang": "en"}
 250 R Guildmages' Forum @Adam Paquette
-251 C Izzet Guildgate @Kirsten Zirngibl
-252 C Izzet Guildgate @Kirsten Zirngibl
+251 C Izzet Guildgate @Kirsten Zirngibl ${"lang": "en"}
+252 C Izzet Guildgate @Kirsten Zirngibl ${"lang": "en"}
 253 R Overgrown Tomb @Yeong-Hao Han
 254 R Sacred Foundry @Adam Paquette
-255 C Selesnya Guildgate @Dimitar Marinski
-256 C Selesnya Guildgate @Dimitar Marinski
+255 C Selesnya Guildgate @Dimitar Marinski ${"lang": "en"}
+256 C Selesnya Guildgate @Dimitar Marinski ${"lang": "en"}
 257 R Steam Vents @Jonas De Ro
 258 R Temple Garden @Titus Lunter
 259 R Watery Grave @Cliff Childs
 
 [precon product]
-260 L Plains @Richard Wright
+260 L Plains @Richard Wright ${"lang": "en"}
 261 L Island @Richard Wright
 262 L Swamp @Richard Wright
 263 L Mountain @Richard Wright

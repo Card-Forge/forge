@@ -5,6 +5,7 @@ Name=Global Series Jiang Yanggu & Mu Yanling
 Type=Duel_Deck
 ScryfallCode=GS1
 TokensCode=GS1
+CardLang=en,zhs
 
 [cards]
 1 M Mu Yanling @林玄泰

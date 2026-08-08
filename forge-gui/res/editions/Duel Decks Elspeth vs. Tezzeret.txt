@@ -4,6 +4,7 @@ Date=2010-09-03
 Name=Duel Decks: Elspeth vs. Tezzeret
 Type=Duel_Deck
 ScryfallCode=DDF
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 M Elspeth, Knight-Errant @Igor Kieryluk

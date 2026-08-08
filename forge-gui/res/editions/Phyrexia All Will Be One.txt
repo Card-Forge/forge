@@ -8,6 +8,7 @@ Booster=10 Common:fromsheet("ONE cards"), 3 Uncommon:fromSheet("ONE cards"), 1 R
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 ScryfallCode=ONE
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 U Against All Odds @Rudy Siswanto
@@ -276,11 +277,11 @@ ScryfallCode=ONE
 264 L Swamp @Alayna Danner
 265 L Mountain @Alayna Danner
 266 L Forest @Alayna Danner
-267 L Plains @Mark Riddick
-268 L Island @Mark Riddick
-269 L Swamp @Mark Riddick
-270 L Mountain @Mark Riddick
-271 L Forest @Mark Riddick
+267 L Plains @Mark Riddick ${"lang": "ph"}
+268 L Island @Mark Riddick ${"lang": "ph"}
+269 L Swamp @Mark Riddick ${"lang": "ph"}
+270 L Mountain @Mark Riddick ${"lang": "ph"}
+271 L Forest @Mark Riddick ${"lang": "ph"}
 
 [precon product]
 272 L Plains @Sergey Glushakov
@@ -337,108 +338,108 @@ ScryfallCode=ONE
 322 R Ovika, Enigma Goliath @Dominik Mayer
 323 R Ria Ivor, Bane of Bladehold @Ravenna Tran
 324 R Venser, Corpse Puppet @Dominik Mayer
-325 M Jace, the Perfected Mind @Chase Stone
-326 M Vraska, Betrayal's Sting @Chase Stone
-327 M Nissa, Ascended Animist @Chase Stone
-328 M Lukka, Bound to Ruin @Chase Stone
-329 M Nahiri, the Unforgiving @Chase Stone
+325 M Jace, the Perfected Mind @Chase Stone ${"lang": "ph"}
+326 M Vraska, Betrayal's Sting @Chase Stone ${"lang": "ph"}
+327 M Nissa, Ascended Animist @Chase Stone ${"lang": "ph"}
+328 M Lukka, Bound to Ruin @Chase Stone ${"lang": "ph"}
+329 M Nahiri, the Unforgiving @Chase Stone ${"lang": "ph"}
 330 R Kemba, Kha Enduring @Izumi Tomoki
 331 R Thrun, Breaker of Silence @Yuki Fujisawa
 332 R Jor Kadeen, First Goldwarden @Sansyu
 333 R Melira, the Living Cure @Miyuki Aramaki
 334 R Graaz, Unstoppable Juggernaut @kutay
-345 M Elesh Norn, Mother of Machines @Pedro Potier
-346 M Mondrak, Glory Dominus @rishxxv
-347 M Phyrexian Vindicator @DZO
-348 M Ichormoon Gauntlet @Cabrol
-349 M Tekuthal, Inquiry Dominus @Alejandro Mirabal
-350 M Drivnod, Carnage Dominus @Thomas M. Baxa
-351 M Phyrexian Obliterator @Pedro Potier
-352 M All Will Be One @Alejandro Mirabal
-353 M Capricious Hellraiser @Steve Ellis
-354 M Solphim, Mayhem Dominus @rishxxv
-355 M Tyrranax Rex @Phil Stone
-356 M Zopandrel, Hunger Dominus @Steve Ellis
-357 M Atraxa, Grand Unifier @Thomas M. Baxa
-358 M Staff of Compleation @Joshua Alvarado
-359 M Sword of Forge and Frontier @Phil Stone
-360 M Jace, the Perfected Mind @Joshua Alvarado
-361 M Vraska, Betrayal's Sting @Scott M. Fischer
-362 M Nissa, Ascended Animist @Cabrol
-363 M Lukka, Bound to Ruin @DZO
-364 M Nahiri, the Unforgiving @Scott M. Fischer
-365 L Plains @Dan Mumford
-366 L Island @Evan Cagle
-367 L Swamp @Daria Khlebnikova
-368 L Mountain @Indra Nugroho
-369 L Forest @Alayna Danner
-414 M Elesh Norn, Mother of Machines @Martina Fačková
+345 M Elesh Norn, Mother of Machines @Pedro Potier ${"lang": "en"}
+346 M Mondrak, Glory Dominus @rishxxv ${"lang": "en"}
+347 M Phyrexian Vindicator @DZO ${"lang": "en"}
+348 M Ichormoon Gauntlet @Cabrol ${"lang": "en"}
+349 M Tekuthal, Inquiry Dominus @Alejandro Mirabal ${"lang": "en"}
+350 M Drivnod, Carnage Dominus @Thomas M. Baxa ${"lang": "en"}
+351 M Phyrexian Obliterator @Pedro Potier ${"lang": "en"}
+352 M All Will Be One @Alejandro Mirabal ${"lang": "en"}
+353 M Capricious Hellraiser @Steve Ellis ${"lang": "en"}
+354 M Solphim, Mayhem Dominus @rishxxv ${"lang": "en"}
+355 M Tyrranax Rex @Phil Stone ${"lang": "en"}
+356 M Zopandrel, Hunger Dominus @Steve Ellis ${"lang": "en"}
+357 M Atraxa, Grand Unifier @Thomas M. Baxa ${"lang": "en"}
+358 M Staff of Compleation @Joshua Alvarado ${"lang": "en"}
+359 M Sword of Forge and Frontier @Phil Stone ${"lang": "en"}
+360 M Jace, the Perfected Mind @Joshua Alvarado ${"lang": "en"}
+361 M Vraska, Betrayal's Sting @Scott M. Fischer ${"lang": "en"}
+362 M Nissa, Ascended Animist @Cabrol ${"lang": "en"}
+363 M Lukka, Bound to Ruin @DZO ${"lang": "en"}
+364 M Nahiri, the Unforgiving @Scott M. Fischer ${"lang": "en"}
+365 L Plains @Dan Mumford ${"lang": "ph"}
+366 L Island @Evan Cagle ${"lang": "ph"}
+367 L Swamp @Daria Khlebnikova ${"lang": "ph"}
+368 L Mountain @Indra Nugroho ${"lang": "ph"}
+369 L Forest @Alayna Danner ${"lang": "ph"}
+414 M Elesh Norn, Mother of Machines @Martina Fačková ${"lang": "ph"}
 415 M Elesh Norn, Mother of Machines @Junji Ito
 
 [etched]
-417 U Bladed Ambassador @Ravenna Tran
-418 M Elesh Norn, Mother of Machines @Martina Fačková
-419 M Elesh Norn, Mother of Machines @Junji Ito
-420 M Elesh Norn, Mother of Machines @Dominik Mayer
-421 M Elesh Norn, Mother of Machines @Richard Whitters
-422 R The Eternal Wanderer @Kento Matsuura
-423 R Kemba, Kha Enduring @Izumi Tomoki
-424 M Mondrak, Glory Dominus @Flavio Girón
-425 M Phyrexian Vindicator @Shikee
-426 C Sinew Dancer @Kekai Kotaki
-427 R Skrelv, Defector Mite @Sidharth Chaturvedi
-428 M Jace, the Perfected Mind @Showichi Furumi
-429 M Jace, the Perfected Mind @Chase Stone
-430 C Quicksilver Fisher @Sidharth Chaturvedi
-431 M Tekuthal, Inquiry Dominus @Dominik Mayer
-432 U Thrummingbird @Flavio Girón
-433 R Unctus, Grand Metatect @Sidharth Chaturvedi
-434 R Archfiend of the Dross @Sidharth Chaturvedi
-435 U Blightbelly Rat @Flavio Girón
-436 C Bonepicker Skirge @Flavio Girón
-437 M Drivnod, Carnage Dominus @Dominik Mayer
-438 R Geth, Thane of Contracts @Flavio Girón
-439 R Karumonix, the Rat King @Flavio Girón
-440 M Phyrexian Obliterator @Yu-ki Nishimoto
-441 R Vraan, Executioner Thane @Shikee
-442 M Vraska, Betrayal's Sting @Sansyu
-443 M Vraska, Betrayal's Sting @Chase Stone
-444 M Capricious Hellraiser @Kekai Kotaki
-445 U Furnace Punisher @Flavio Girón
-446 R Koth, Fire of Resistance @Ai Nanahira
-447 C Sawblade Scamp @Flavio Girón
-448 R Slobad, Iron Goblin @Dominik Mayer
-449 M Solphim, Mayhem Dominus @Dominik Mayer
-450 U Urabrask's Anointer @JungShan
-451 U Cankerbloom @Ravenna Tran
-452 R Evolved Spinoderm @Ravenna Tran
-453 M Nissa, Ascended Animist @Chase Stone
-454 M Nissa, Ascended Animist @Gou Tanabe
-455 C Rustvine Cultivator @JungShan
-456 R Thrun, Breaker of Silence @Yuki Fujisawa
-457 M Tyrranax Rex @Flavio Girón
-458 M Zopandrel, Hunger Dominus @Dominik Mayer
-459 M Atraxa, Grand Unifier @Anato Finnstark
-460 R Ezuri, Stalker of Spheres @JungShan
-461 R Glissa Sunslayer @Ravenna Tran
-462 R Jor Kadeen, First Goldwarden @Sansyu
-463 R Kaito, Dancing Shadow @Kento Matsuura
-464 R Kaya, Intangible Slayer @Showichi Furumi
-465 R Kethek, Crucible Goliath @Flavio Girón
-466 M Lukka, Bound to Ruin @Chase Stone
-467 M Lukka, Bound to Ruin @Yuki Fujisawa
-468 R Malcator, Purity Overseer @Dominik Mayer
-469 R Melira, the Living Cure @Miyuki Aramaki
-470 R Migloz, Maze Crusher @Dominik Mayer
-471 M Nahiri, the Unforgiving @Hiro Usuda
-472 M Nahiri, the Unforgiving @Chase Stone
-473 U Necrogen Rotpriest @Dominik Mayer
-474 R Ovika, Enigma Goliath @Dominik Mayer
-475 R Ria Ivor, Bane of Bladehold @Ravenna Tran
-476 R Tyvar, Jubilant Brawler @Iinuma Yuuki
-477 R Venser, Corpse Puppet @Dominik Mayer
-478 R Graaz, Unstoppable Juggernaut @kutay
-479 U Myr Convert @JungShan
+417 U Bladed Ambassador @Ravenna Tran ${"lang": "en"}
+418 M Elesh Norn, Mother of Machines @Martina Fačková ${"lang": "ph"}
+419 M Elesh Norn, Mother of Machines @Junji Ito ${"lang": "en"}
+420 M Elesh Norn, Mother of Machines @Dominik Mayer ${"lang": "en"}
+421 M Elesh Norn, Mother of Machines @Richard Whitters ${"lang": "en"}
+422 R The Eternal Wanderer @Kento Matsuura ${"lang": "en"}
+423 R Kemba, Kha Enduring @Izumi Tomoki ${"lang": "en"}
+424 M Mondrak, Glory Dominus @Flavio Girón ${"lang": "en"}
+425 M Phyrexian Vindicator @Shikee ${"lang": "en"}
+426 C Sinew Dancer @Kekai Kotaki ${"lang": "en"}
+427 R Skrelv, Defector Mite @Sidharth Chaturvedi ${"lang": "en"}
+428 M Jace, the Perfected Mind @Showichi Furumi ${"lang": "en"}
+429 M Jace, the Perfected Mind @Chase Stone ${"lang": "ph"}
+430 C Quicksilver Fisher @Sidharth Chaturvedi ${"lang": "en"}
+431 M Tekuthal, Inquiry Dominus @Dominik Mayer ${"lang": "en"}
+432 U Thrummingbird @Flavio Girón ${"lang": "en"}
+433 R Unctus, Grand Metatect @Sidharth Chaturvedi ${"lang": "en"}
+434 R Archfiend of the Dross @Sidharth Chaturvedi ${"lang": "en"}
+435 U Blightbelly Rat @Flavio Girón ${"lang": "en"}
+436 C Bonepicker Skirge @Flavio Girón ${"lang": "en"}
+437 M Drivnod, Carnage Dominus @Dominik Mayer ${"lang": "en"}
+438 R Geth, Thane of Contracts @Flavio Girón ${"lang": "en"}
+439 R Karumonix, the Rat King @Flavio Girón ${"lang": "en"}
+440 M Phyrexian Obliterator @Yu-ki Nishimoto ${"lang": "en"}
+441 R Vraan, Executioner Thane @Shikee ${"lang": "en"}
+442 M Vraska, Betrayal's Sting @Sansyu ${"lang": "en"}
+443 M Vraska, Betrayal's Sting @Chase Stone ${"lang": "ph"}
+444 M Capricious Hellraiser @Kekai Kotaki ${"lang": "en"}
+445 U Furnace Punisher @Flavio Girón ${"lang": "en"}
+446 R Koth, Fire of Resistance @Ai Nanahira ${"lang": "en"}
+447 C Sawblade Scamp @Flavio Girón ${"lang": "en"}
+448 R Slobad, Iron Goblin @Dominik Mayer ${"lang": "en"}
+449 M Solphim, Mayhem Dominus @Dominik Mayer ${"lang": "en"}
+450 U Urabrask's Anointer @JungShan ${"lang": "en"}
+451 U Cankerbloom @Ravenna Tran ${"lang": "en"}
+452 R Evolved Spinoderm @Ravenna Tran ${"lang": "en"}
+453 M Nissa, Ascended Animist @Chase Stone ${"lang": "ph"}
+454 M Nissa, Ascended Animist @Gou Tanabe ${"lang": "en"}
+455 C Rustvine Cultivator @JungShan ${"lang": "en"}
+456 R Thrun, Breaker of Silence @Yuki Fujisawa ${"lang": "en"}
+457 M Tyrranax Rex @Flavio Girón ${"lang": "en"}
+458 M Zopandrel, Hunger Dominus @Dominik Mayer ${"lang": "en"}
+459 M Atraxa, Grand Unifier @Anato Finnstark ${"lang": "en"}
+460 R Ezuri, Stalker of Spheres @JungShan ${"lang": "en"}
+461 R Glissa Sunslayer @Ravenna Tran ${"lang": "en"}
+462 R Jor Kadeen, First Goldwarden @Sansyu ${"lang": "en"}
+463 R Kaito, Dancing Shadow @Kento Matsuura ${"lang": "en"}
+464 R Kaya, Intangible Slayer @Showichi Furumi ${"lang": "en"}
+465 R Kethek, Crucible Goliath @Flavio Girón ${"lang": "en"}
+466 M Lukka, Bound to Ruin @Chase Stone ${"lang": "ph"}
+467 M Lukka, Bound to Ruin @Yuki Fujisawa ${"lang": "en"}
+468 R Malcator, Purity Overseer @Dominik Mayer ${"lang": "en"}
+469 R Melira, the Living Cure @Miyuki Aramaki ${"lang": "en"}
+470 R Migloz, Maze Crusher @Dominik Mayer ${"lang": "en"}
+471 M Nahiri, the Unforgiving @Hiro Usuda ${"lang": "en"}
+472 M Nahiri, the Unforgiving @Chase Stone ${"lang": "ph"}
+473 U Necrogen Rotpriest @Dominik Mayer ${"lang": "en"}
+474 R Ovika, Enigma Goliath @Dominik Mayer ${"lang": "en"}
+475 R Ria Ivor, Bane of Bladehold @Ravenna Tran ${"lang": "en"}
+476 R Tyvar, Jubilant Brawler @Iinuma Yuuki ${"lang": "en"}
+477 R Venser, Corpse Puppet @Dominik Mayer ${"lang": "en"}
+478 R Graaz, Unstoppable Juggernaut @kutay ${"lang": "en"}
+479 U Myr Convert @JungShan ${"lang": "en"}
 
 [borderless]
 335 R The Eternal Wanderer @Kento Matsuura
@@ -456,46 +457,46 @@ ScryfallCode=ONE
 372 R Darkslick Shores @Daria Khlebnikova
 373 R Razorverge Thicket @Jokubas Uogintas
 374 R Seachrome Coast @Jokubas Uogintas
-416 M Elesh Norn, Mother of Machines @Richard Whitters
+416 M Elesh Norn, Mother of Machines @Richard Whitters ${"lang": "en"}
 
 [extended art]
-375 R Norn's Wellspring @Jonas De Ro
-376 R Skrelv's Hive @Heonhwa
-377 R White Sun's Twilight @Julian Kok Joon Wen
-378 R Blade of Shared Souls @Volkan Baǵa
-379 R Blue Sun's Twilight @Piotr Dura
-380 R Encroaching Mycosynth @Martin de Diego Sádaba
-381 R Mercurial Spelldancer @Marcela Bolívar
-382 R Mindsplice Apparatus @Ovidio Cartagena
-383 R Black Sun's Twilight @Jonas De Ro
-384 R Phyrexian Arena @Martina Fačková
-385 R Dragonwing Glider @Andreas Zafiratos
-386 R Red Sun's Twilight @Julian Kok Joon Wen
-387 R Urabrask's Forge @Lie Setiawan
-388 R Vindictive Flamestoker @Xavier Ribeiro
-389 R Bloated Contaminator @Johann Bodin
-390 R Conduit of Worlds @Jokubas Uogintas
-391 R Green Sun's Twilight @Yeong-Hao Han
-392 R Venerated Rotpriest @Brian Valeza
-393 R Argentum Masticore @Zack Stella
-394 R The Filigree Sylex @Leanna Crossan
-395 R Mirran Safehouse @Piotr Dura
-396 R Monument to Perfection @Igor Kieryluk
-397 R Soulless Jailer @Donato Giancola
-398 R Tablet of Compleation @Martin de Diego Sádaba
-399 R Zenith Chronicler @Johann Bodin
-400 R Mirrex @Adam Burn
-401 R The Monumental Facade @Bruce Brenneise
-402 R The Mycosynth Gardens @Andrew Mar
-403 R The Seedcore @Kasia 'Kafis' Zielińska
-409 R Mite Overseer @Néstor Ossandón Leal
-410 R Serum Sovereign @Chris Rallis
-411 R Kinzu of the Bleak Coven @Andreas Zafiratos
-412 R Rhuk, Hexgold Nabber @Andrea De Dominicis
-413 R Goliath Hatchery @Simon Dominic
+375 R Norn's Wellspring @Jonas De Ro ${"lang": "en|fr|de|ja|zhs"}
+376 R Skrelv's Hive @Heonhwa ${"lang": "en|fr|de|ja|zhs"}
+377 R White Sun's Twilight @Julian Kok Joon Wen ${"lang": "en|fr|de|ja|zhs"}
+378 R Blade of Shared Souls @Volkan Baǵa ${"lang": "en|fr|de|ja|zhs"}
+379 R Blue Sun's Twilight @Piotr Dura ${"lang": "en|fr|de|ja|zhs"}
+380 R Encroaching Mycosynth @Martin de Diego Sádaba ${"lang": "en|fr|de|ja|zhs"}
+381 R Mercurial Spelldancer @Marcela Bolívar ${"lang": "en|fr|de|ja|zhs"}
+382 R Mindsplice Apparatus @Ovidio Cartagena ${"lang": "en|fr|de|ja|zhs"}
+383 R Black Sun's Twilight @Jonas De Ro ${"lang": "en|fr|de|ja|zhs"}
+384 R Phyrexian Arena @Martina Fačková ${"lang": "en|fr|de|ja|zhs"}
+385 R Dragonwing Glider @Andreas Zafiratos ${"lang": "en|fr|de|ja|zhs"}
+386 R Red Sun's Twilight @Julian Kok Joon Wen ${"lang": "en|fr|de|ja|zhs"}
+387 R Urabrask's Forge @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+388 R Vindictive Flamestoker @Xavier Ribeiro ${"lang": "en|fr|de|ja|zhs"}
+389 R Bloated Contaminator @Johann Bodin ${"lang": "en|fr|de|ja|zhs"}
+390 R Conduit of Worlds @Jokubas Uogintas ${"lang": "en|fr|de|ja|zhs"}
+391 R Green Sun's Twilight @Yeong-Hao Han ${"lang": "en|fr|de|ja|zhs"}
+392 R Venerated Rotpriest @Brian Valeza ${"lang": "en|fr|de|ja|zhs"}
+393 R Argentum Masticore @Zack Stella ${"lang": "en|fr|de|ja|zhs"}
+394 R The Filigree Sylex @Leanna Crossan ${"lang": "en|fr|de|ja|zhs"}
+395 R Mirran Safehouse @Piotr Dura ${"lang": "en|fr|de|ja|zhs"}
+396 R Monument to Perfection @Igor Kieryluk ${"lang": "en|fr|de|ja|zhs"}
+397 R Soulless Jailer @Donato Giancola ${"lang": "en|fr|de|ja|zhs"}
+398 R Tablet of Compleation @Martin de Diego Sádaba ${"lang": "en|fr|de|ja|zhs"}
+399 R Zenith Chronicler @Johann Bodin ${"lang": "en|fr|de|ja|zhs"}
+400 R Mirrex @Adam Burn ${"lang": "en|fr|de|ja|zhs"}
+401 R The Monumental Facade @Bruce Brenneise ${"lang": "en|fr|de|ja|zhs"}
+402 R The Mycosynth Gardens @Andrew Mar ${"lang": "en|fr|de|ja|zhs"}
+403 R The Seedcore @Kasia 'Kafis' Zielińska ${"lang": "en|fr|de|ja|zhs"}
+409 R Mite Overseer @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+410 R Serum Sovereign @Chris Rallis ${"lang": "en|fr|de|ja|zhs"}
+411 R Kinzu of the Bleak Coven @Andreas Zafiratos ${"lang": "en|fr|de|ja|zhs"}
+412 R Rhuk, Hexgold Nabber @Andrea De Dominicis ${"lang": "en|fr|de|ja|zhs"}
+413 R Goliath Hatchery @Simon Dominic ${"lang": "en|fr|de|ja|zhs"}
 
 [buy a box]
-284 R Green Sun's Twilight @Piotr Dura
+284 R Green Sun's Twilight @Piotr Dura ${"lang": "en"}
 
 [promo]
 277 U Ossification @Nino Vecia
@@ -503,8 +504,8 @@ ScryfallCode=ONE
 279 U Sheoldred's Edict @Helge C. Balzer
 280 U Bladehold War-Whip @Tony Foti
 281 U Slaughter Singer @Adam Burn
-282 R Karumonix, the Rat King @Jason A. Engle
-283 R Phyrexian Arena @Martina Fačková
+282 R Karumonix, the Rat King @Jason A. Engle ${"lang": "en"}
+283 R Phyrexian Arena @Martina Fačková ${"lang": "ph"}
 
 [tokens]
 1 w_2_2_cat @April Prime

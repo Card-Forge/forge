@@ -10,6 +10,7 @@ FatPack=6
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ScryfallCode=INV
+CardLang=en,es,fr,de,it,pt,ja,zhs,zht
 
 [cards]
 1 R Alabaster Leech @Edward P. Beard, Jr.
@@ -135,7 +136,7 @@ ScryfallCode=INV
 121 U Reckless Spite @Chippy
 122 C Recover @Nelson DeCastro
 123 C Scavenged Weaponry @Alan Pollack
-124 C Soul Burn @Andrew Goldhawk
+124 C Soul Burn @Andrew Goldhawk ${"lang": "en|es|fr|de|it|pt|ja|zht"}
 125 R Spreading Plague @Scott Bailey
 126 C Tainted Well @Val Mayerik
 127 U Trench Wurm @Wayne England
@@ -303,11 +304,11 @@ ScryfallCode=INV
 289 C Wings of Hope @Wayne England
 290 C Yavimaya Barbarian @Don Hazeltine
 291 U Yavimaya Kavu @Greg Staples
-292 U Stand // Deliver @David Martin
-293 U Spite // Malice @David Martin
-294 U Pain // Suffering @David Martin
-295 U Assault // Battery @Ben Thompson
-296 U Wax // Wane @Ben Thompson
+292 U Stand // Deliver @David Martin ${"lang": "en|es|it|pt|ja|zhs|zht"}
+293 U Spite // Malice @David Martin ${"lang": "en|es|it|pt|ja|zhs|zht"}
+294 U Pain // Suffering @David Martin ${"lang": "en|es|it|pt|ja|zhs|zht"}
+295 U Assault // Battery @Ben Thompson ${"lang": "en|es|it|pt|ja|zhs|zht"}
+296 U Wax // Wane @Ben Thompson ${"lang": "en|es|fr|it|pt|ja|zhs|zht"}
 297 U Alloy Golem @Greg Staples
 298 U Bloodstone Cameo @Tony Szczudlo
 299 U Chromatic Sphere @Luca Zontini

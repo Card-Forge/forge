@@ -5,13 +5,14 @@ Name=Year of the Ox 2021
 Type=Promo
 ScryfallCode=PL21
 TokensCode=PL21
+CardLang=en,ja,zhs,zht
 
 [cards]
 1 M Moraug, Fury of Akoum @Rudy Siswanto
-1★ R Sethron, Hurloon General @Fiona Hsieh
+1★ R Sethron, Hurloon General @Fiona Hsieh ${"lang": "en|zhs"}
 2 M Ox of Agonas @Lie Setiawan
-3 M Angrath, the Flame-Chained @Song Qijin
-4 R Tahngarth, First Mate @Song Qijin
+3 M Angrath, the Flame-Chained @Song Qijin ${"lang": "en|ja"}
+4 R Tahngarth, First Mate @Song Qijin ${"lang": "en|ja"}
 
 [tokens]
 2★ r_2_3_minotaur @Fiona Hsieh

@@ -10,6 +10,7 @@ FatPack=6
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=MIRRODIN
 ScryfallCode=5DN
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 C Abuna's Chant @John Matson

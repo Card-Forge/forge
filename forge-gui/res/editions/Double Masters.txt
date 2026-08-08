@@ -9,6 +9,7 @@ Foil=NotSupported
 DoublePick=FirstPick
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=2XM
+CardLang=en,fr,de,ja,zhs
 
 [cards]
 1 M Karn Liberated @Jason Chan
@@ -347,58 +348,58 @@ ScryfallCode=2XM
 [borderless]
 333 M Karn Liberated @Mark Tedin
 334 M Jace, the Mind Sculptor @Jason Chan
-335 M Avacyn, Angel of Hope @Randy Vargas
-336 R Council's Judgment @Jeff Simpson
+335 M Avacyn, Angel of Hope @Randy Vargas ${"lang": "en|fr|de|zhs"}
+336 R Council's Judgment @Jeff Simpson ${"lang": "en|fr|de|ja"}
 337 R Stoneforge Mystic @Dan Dos Santos
 338 R Brainstorm @Ron Spencer
-339 R Cyclonic Rift @Chuck Lukacs
-340 M Force of Will @Scott M. Fischer
-341 R Phyrexian Metamorph @Thomas M. Baxa
-342 M Dark Confidant @Mark Zug
-343 R Fatal Push @Eric Velhagen
-344 R Thoughtseize @Chuck Lukacs
-345 R Toxic Deluge @Richard Kane Ferguson
-346 R Blood Moon @Jim Pavelec
-347 R Goblin Guide @Mark Zug
-348 M Sneak Attack @Mark Zug
-349 R Crop Rotation @Mark Poole
-350 M Doubling Season @Ron Spencer
-351 R Exploration @Mark Poole
-352 R Noble Hierarch @Greg Staples
-353 M Atraxa, Praetors' Voice @Kev Walker
-354 M Kaalia of the Vast @Scott M. Fischer
-355 R Meddling Mage @Jeff Simpson
-356 M Batterskull @rk post
-357 M Blightsteel Colossus @Wayne Reynolds
-358 M Chrome Mox @Franz Vohwinkel
-359 R Expedition Map @Scott Murphy
-360 R Lightning Greaves @Mark Zug
-361 M Mana Crypt @Ron Spencer
-362 M Mox Opal @Martina Pilcerova
-363 M Sword of Body and Mind @Steve Prescott
-364 M Sword of Feast and Famine @Thomas M. Baxa
-365 M Sword of Fire and Ice @Dan Dos Santos
-366 M Sword of Light and Shadow @Kev Walker
-367 M Sword of War and Peace @Franz Vohwinkel
-368 M Wurmcoil Engine @Carl Critchlow
-369 R Academy Ruins @John Avon
-370 R Urza's Mine @Mark Tedin
-371 R Urza's Power Plant @Mark Tedin
-372 R Urza's Tower @Mark Tedin
+339 R Cyclonic Rift @Chuck Lukacs ${"lang": "en"}
+340 M Force of Will @Scott M. Fischer ${"lang": "en"}
+341 R Phyrexian Metamorph @Thomas M. Baxa ${"lang": "en"}
+342 M Dark Confidant @Mark Zug ${"lang": "en"}
+343 R Fatal Push @Eric Velhagen ${"lang": "en"}
+344 R Thoughtseize @Chuck Lukacs ${"lang": "en"}
+345 R Toxic Deluge @Richard Kane Ferguson ${"lang": "en"}
+346 R Blood Moon @Jim Pavelec ${"lang": "en"}
+347 R Goblin Guide @Mark Zug ${"lang": "en"}
+348 M Sneak Attack @Mark Zug ${"lang": "en"}
+349 R Crop Rotation @Mark Poole ${"lang": "en"}
+350 M Doubling Season @Ron Spencer ${"lang": "en"}
+351 R Exploration @Mark Poole ${"lang": "en"}
+352 R Noble Hierarch @Greg Staples ${"lang": "en"}
+353 M Atraxa, Praetors' Voice @Kev Walker ${"lang": "en"}
+354 M Kaalia of the Vast @Scott M. Fischer ${"lang": "en"}
+355 R Meddling Mage @Jeff Simpson ${"lang": "en"}
+356 M Batterskull @rk post ${"lang": "en"}
+357 M Blightsteel Colossus @Wayne Reynolds ${"lang": "en"}
+358 M Chrome Mox @Franz Vohwinkel ${"lang": "en"}
+359 R Expedition Map @Scott Murphy ${"lang": "en"}
+360 R Lightning Greaves @Mark Zug ${"lang": "en"}
+361 M Mana Crypt @Ron Spencer ${"lang": "en"}
+362 M Mox Opal @Martina Pilcerova ${"lang": "en"}
+363 M Sword of Body and Mind @Steve Prescott ${"lang": "en"}
+364 M Sword of Feast and Famine @Thomas M. Baxa ${"lang": "en"}
+365 M Sword of Fire and Ice @Dan Dos Santos ${"lang": "en"}
+366 M Sword of Light and Shadow @Kev Walker ${"lang": "en"}
+367 M Sword of War and Peace @Franz Vohwinkel ${"lang": "en"}
+368 M Wurmcoil Engine @Carl Critchlow ${"lang": "en"}
+369 R Academy Ruins @John Avon ${"lang": "en"}
+370 R Urza's Mine @Mark Tedin ${"lang": "en"}
+371 R Urza's Power Plant @Mark Tedin ${"lang": "en"}
+372 R Urza's Tower @Mark Tedin ${"lang": "en"}
 
 [buy a box]
-373 L Plains @John Avon
-374 L Plains @Noah Bradley
-375 L Island @John Avon
-376 L Island @Noah Bradley
-377 L Swamp @John Avon
-378 L Swamp @Noah Bradley
-379 L Mountain @John Avon
-380 L Mountain @Noah Bradley
-381 L Forest @John Avon
-382 L Forest @Noah Bradley
-383 R Wrath of God @Thomas M. Baxa
-384 R Chord of Calling @Scott M. Fischer
+373 L Plains @John Avon ${"lang": "en"}
+374 L Plains @Noah Bradley ${"lang": "en"}
+375 L Island @John Avon ${"lang": "en"}
+376 L Island @Noah Bradley ${"lang": "en"}
+377 L Swamp @John Avon ${"lang": "en"}
+378 L Swamp @Noah Bradley ${"lang": "en"}
+379 L Mountain @John Avon ${"lang": "en"}
+380 L Mountain @Noah Bradley ${"lang": "en"}
+381 L Forest @John Avon ${"lang": "en"}
+382 L Forest @Noah Bradley ${"lang": "en"}
+383 R Wrath of God @Thomas M. Baxa ${"lang": "en"}
+384 R Chord of Calling @Scott M. Fischer ${"lang": "en"}
 
 [Foils]
 # Commons

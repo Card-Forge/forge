@@ -4,6 +4,7 @@ Date=2026-06-26
 Name=Marvel Super Heroes Commander
 Type=Commander
 ScryfallCode=MSC
+CardLang=en,fr,de,ja
 
 [cards]
 1 M Invisible Woman @Erikas Perl
@@ -196,10 +197,10 @@ ScryfallCode=MSC
 188 R Taunt from the Rampart @Thomas Chamberlain-Keen
 189 U Terminate @Lordigan
 190 R Whirlwind of Thought @Viktor Fetsch
-191 U Arcane Signet @Jason Smith
-192 U Arcane Signet @Vilhelmas Banys
-193 U Arcane Signet @Ioannis Fiore
-194 U Arcane Signet @Rafater
+191 U Arcane Signet @Jason Smith ${"lang": "en"}
+192 U Arcane Signet @Vilhelmas Banys ${"lang": "en"}
+193 U Arcane Signet @Ioannis Fiore ${"lang": "en"}
+194 U Arcane Signet @Rafater ${"lang": "en"}
 195 R Chromatic Lantern @Rytis Sabaliauskas
 196 R Coveted Jewel @Eric Wilkerson
 197 R Currency Converter @Néstor Ossandón Leal
@@ -216,10 +217,10 @@ ScryfallCode=MSC
 208 R Progenitor's Icon @Jonas De Ro
 209 U Relic of Legends @Milivoj Ćeran
 210 R Skullclamp @Lordigan
-211 U Sol Ring @Myles Wohl
-212 U Sol Ring @Pace Wilder
-213 U Sol Ring @Alexander Gering
-214 U Sol Ring @Randy Gallegos
+211 U Sol Ring @Myles Wohl ${"lang": "en"}
+212 U Sol Ring @Pace Wilder ${"lang": "en"}
+213 U Sol Ring @Alexander Gering ${"lang": "en"}
+214 U Sol Ring @Randy Gallegos ${"lang": "en"}
 215 R Solemn Simulacrum @Flavio Greco Paglia
 216 U Swiftfoot Boots @Immanuela Crovius
 217 U Talisman of Conviction @Uzuri
@@ -238,10 +239,10 @@ ScryfallCode=MSC
 230 R Cinder Glade @Pace Wilder
 231 R Clifftop Retreat @Arthur Yuan
 232 R Coastal Peak @Jonas De Ro
-233 C Command Tower @Leon Tukker
-234 C Command Tower @Paulius Daščioras
-235 C Command Tower @Lordigan
-236 C Command Tower @Rockey Chen
+233 C Command Tower @Leon Tukker ${"lang": "en"}
+234 C Command Tower @Paulius Daščioras ${"lang": "en"}
+235 C Command Tower @Lordigan ${"lang": "en"}
+236 C Command Tower @Rockey Chen ${"lang": "en"}
 237 U Crumbling Necropolis @Shahab Alizadeh
 238 R Dragonskull Summit @Jonas De Ro
 239 R Drowned Catacomb @Jonas De Ro
@@ -863,15 +864,15 @@ ScryfallCode=MSC
 872 L Plains @Domenico Cava
 873 L Plains @Jurijus Chitrovas
 874 C Spider-Gwen, Free Spirit @Lie Setiawan
-875 M Invisible Woman @Erikas Perl
-876 M Mister Fantastic @Gintas Galvanauskas
-877 M Human Torch @Vilhelmas Banys
-878 M The Thing @Darius Zablockis
-879 M Captain America, Team Leader @Mark Spears
-880 M Doctor Doom, King of Latveria @Nathaniel Himawan
-881 M T'Challa, the Black Panther @Eli Minaya
-882 U Rescue, Pepper Potts @Julia Vasilyeva
-883 R Thor, Asgard's Avenger @Wayne Reynolds
+875 M Invisible Woman @Erikas Perl ${"lang": "en"}
+876 M Mister Fantastic @Gintas Galvanauskas ${"lang": "en"}
+877 M Human Torch @Vilhelmas Banys ${"lang": "en"}
+878 M The Thing @Darius Zablockis ${"lang": "en"}
+879 M Captain America, Team Leader @Mark Spears ${"lang": "en"}
+880 M Doctor Doom, King of Latveria @Nathaniel Himawan ${"lang": "en"}
+881 M T'Challa, the Black Panther @Eli Minaya ${"lang": "en"}
+882 U Rescue, Pepper Potts @Julia Vasilyeva ${"lang": "en"}
+883 R Thor, Asgard's Avenger @Wayne Reynolds ${"lang": "en"}
 
 [tokens]
 2 c_3_2_shapeshifter_changeling @Lixin Yin

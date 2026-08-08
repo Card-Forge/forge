@@ -4,6 +4,7 @@ Date=2006-07-21
 Name=Coldsnap Theme Decks
 Type=Boxed_Set
 ScryfallCode=CST
+CardLang=en,es,fr,de,it,pt,ja
 
 [cards]
 8 U Kjeldoran Home Guard @Andi Rusu

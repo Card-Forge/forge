@@ -10,6 +10,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
 ChaosDraftThemes=CORE_SET
 ScryfallCode=6ED
+CardLang=en,es,fr,de,it,pt,ja,zhs,zht
 
 [cards]
 1 R Animate Wall @Richard Kane Ferguson
@@ -134,7 +135,7 @@ ScryfallCode=6ED
 120 R Derelor @Anson Maddocks
 121 R Doomsday @Adrian Smith
 122 U Dread of Night @Richard Thomas
-123 C Drudge Skeletons @Ian Miller
+123 C Drudge Skeletons @Ian Miller ${"lang": "en|es|fr|de|it|pt|ja|zht"}
 124 C Dry Spell @Brian Snõddy
 125 C Enfeeblement @John Bolton
 126 U Evil Eye of Orms-by-Gore @George Pratt

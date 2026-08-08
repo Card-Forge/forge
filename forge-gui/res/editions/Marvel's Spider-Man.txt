@@ -11,6 +11,7 @@ BoosterSlots=Common,Common-Borderless,Uncommon,RareMythic,Land,Wildcard,Wildcard
 Booster=6 Common, 1 Common-Borderless, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
+CardLang=en,es,fr,de,it,ja
 
 [Common]
 Base=Common:fromSheet("SPM cards")
@@ -303,67 +304,67 @@ Replace=0.05F BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")
 229 R Mary Jane Watson @Roberta Ingranata
 230 R Spider-Woman, Stunning Savior @Roberta Ingranata
 231 R The Spot, Living Portal @Tyler Walpole
-232 M Peter Parker @Jack Kirby & Steve Ditko
-233 M Eddie Brock @Todd McFarlane & Bob Sharen
-234 M Miles Morales @Sara Pichelli & Justin Ponsor
-242 M The Soul Stone @Madeline Boni
+232 M Peter Parker @Jack Kirby & Steve Ditko ${"lang": "en"}
+233 M Eddie Brock @Todd McFarlane & Bob Sharen ${"lang": "en"}
+234 M Miles Morales @Sara Pichelli & Justin Ponsor ${"lang": "en"}
+242 M The Soul Stone @Madeline Boni ${"lang": "en"}
 
 [etched]
-235 R Spectacular Spider-Man @Roberta Ingranata
-236 R Spectacular Spider-Man @Roberta Ingranata
-237 R Spectacular Spider-Man @Roberta Ingranata
-238 R Spectacular Spider-Man @Roberta Ingranata
-239 R Spectacular Spider-Man @Roberta Ingranata
-240 R Spectacular Spider-Man @Roberta Ingranata
-241 R Spectacular Spider-Man @Roberta Ingranata
+235 R Spectacular Spider-Man @Roberta Ingranata ${"lang": "en"}
+236 R Spectacular Spider-Man @Roberta Ingranata ${"lang": "en"}
+237 R Spectacular Spider-Man @Roberta Ingranata ${"lang": "en"}
+238 R Spectacular Spider-Man @Roberta Ingranata ${"lang": "en"}
+239 R Spectacular Spider-Man @Roberta Ingranata ${"lang": "en"}
+240 R Spectacular Spider-Man @Roberta Ingranata ${"lang": "en"}
+241 R Spectacular Spider-Man @Roberta Ingranata ${"lang": "en"}
 
 [extended art]
-243 M The Soul Stone @Leinil Francis Yu & Sunny Gho
-244 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal
-245 R Arachne, Psionic Weaver @Steve Argyle
-246 R Friendly Neighborhood @Pablo Mendoza
-247 R Rent Is Due @Gal Or
-248 R With Great Power . . . @E. M. Gist
-249 R Hide on the Ceiling @Fariba Khamseh
-250 R Hydro-Man, Fluid Felon @Borja Pindado
-251 M Impostor Syndrome @Javier Charro
-252 R Lady Octopus, Inspired Inventor @Fariba Khamseh
-253 R Mysterio, Master of Illusion @Alexander Gering
-254 R Spider-Sense @Borja Pindado
-255 R Agent Venom @Kevin Sidharta
-256 M Gwenom, Remorseless @Lordigan
-257 R Morlun, Devourer of Spiders @Randy Gallegos
-258 R Parker Luck @Raoul Vitale
-259 R Villainous Wrath @InHyuk Lee
-260 R Electro, Assaulting Battery @Piotr Dura
-261 R J. Jonah Jameson @Paolo Rivera
-262 R Shadow of the Goblin @Pavel Kolomeyets
-263 M Spider-Verse @Alexander Gering
-264 R Spinneret and Spiderling @Le Vuong
-265 R Lizard, Connors's Curse @Steve Prescott
-266 R Sandman, Shifting Scoundrel @Bartek Fedyczak
-267 R Strength of Will @Ryan Pancoast
-268 M Web of Life and Destiny @Jonas De Ro
-269 R Biorganic Carapace @David Álvarez
-270 R Cheering Crowd @Kim Sokol
-271 M Cosmic Spider-Man @Zoltan Boros
-272 R Jackal, Genius Geneticist @Pavel Kolomeyets
-273 R Kraven the Hunter @Greg Staples
-274 M Mister Negative @Thanh Tuấn
-275 R Superior Spider-Man @Carlos Dattoli
-276 R Ultimate Green Goblin @Jesper Ejsing
-277 R Doc Ock's Tentacles @David Álvarez
-278 R Interdimensional Web Watch @Toni Infante
-279 R Iron Spider, Stark Upgrade @Kevin Glint
-280 R Peter Parker's Camera @Lixin Yin
-281 R Rocket-Powered Goblin Glider @Pavel Kolomeyets
-282 R Oscorp Industries @Bastien Grivet
-283 R Urban Retreat @Jonas De Ro
+243 M The Soul Stone @Leinil Francis Yu & Sunny Gho ${"lang": "en"}
+244 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal ${"lang": "en|fr|de|ja"}
+245 R Arachne, Psionic Weaver @Steve Argyle ${"lang": "en|fr|de|ja"}
+246 R Friendly Neighborhood @Pablo Mendoza ${"lang": "en|fr|de|ja"}
+247 R Rent Is Due @Gal Or ${"lang": "en|fr|de|ja"}
+248 R With Great Power . . . @E. M. Gist ${"lang": "en|fr|de|ja"}
+249 R Hide on the Ceiling @Fariba Khamseh ${"lang": "en|fr|de|ja"}
+250 R Hydro-Man, Fluid Felon @Borja Pindado ${"lang": "en|fr|de|ja"}
+251 M Impostor Syndrome @Javier Charro ${"lang": "en|fr|de|ja"}
+252 R Lady Octopus, Inspired Inventor @Fariba Khamseh ${"lang": "en|fr|de|ja"}
+253 R Mysterio, Master of Illusion @Alexander Gering ${"lang": "en|fr|de|ja"}
+254 R Spider-Sense @Borja Pindado ${"lang": "en|fr|de|ja"}
+255 R Agent Venom @Kevin Sidharta ${"lang": "en|fr|de|ja"}
+256 M Gwenom, Remorseless @Lordigan ${"lang": "en|fr|de|ja"}
+257 R Morlun, Devourer of Spiders @Randy Gallegos ${"lang": "en|fr|de|ja"}
+258 R Parker Luck @Raoul Vitale ${"lang": "en|fr|de|ja"}
+259 R Villainous Wrath @InHyuk Lee ${"lang": "en|fr|de|ja"}
+260 R Electro, Assaulting Battery @Piotr Dura ${"lang": "en|fr|de|ja"}
+261 R J. Jonah Jameson @Paolo Rivera ${"lang": "en|fr|de|ja"}
+262 R Shadow of the Goblin @Pavel Kolomeyets ${"lang": "en|fr|de|ja"}
+263 M Spider-Verse @Alexander Gering ${"lang": "en|fr|de|ja"}
+264 R Spinneret and Spiderling @Le Vuong ${"lang": "en|fr|de|ja"}
+265 R Lizard, Connors's Curse @Steve Prescott ${"lang": "en|fr|de|ja"}
+266 R Sandman, Shifting Scoundrel @Bartek Fedyczak ${"lang": "en|fr|de|ja"}
+267 R Strength of Will @Ryan Pancoast ${"lang": "en|fr|de|ja"}
+268 M Web of Life and Destiny @Jonas De Ro ${"lang": "en|fr|de|ja"}
+269 R Biorganic Carapace @David Álvarez ${"lang": "en|fr|de|ja"}
+270 R Cheering Crowd @Kim Sokol ${"lang": "en|fr|de|ja"}
+271 M Cosmic Spider-Man @Zoltan Boros ${"lang": "en|fr|de|ja"}
+272 R Jackal, Genius Geneticist @Pavel Kolomeyets ${"lang": "en|fr|de|ja"}
+273 R Kraven the Hunter @Greg Staples ${"lang": "en|fr|de|ja"}
+274 M Mister Negative @Thanh Tuấn ${"lang": "en|fr|de|ja"}
+275 R Superior Spider-Man @Carlos Dattoli ${"lang": "en|fr|de|ja"}
+276 R Ultimate Green Goblin @Jesper Ejsing ${"lang": "en|fr|de|ja"}
+277 R Doc Ock's Tentacles @David Álvarez ${"lang": "en|fr|de|ja"}
+278 R Interdimensional Web Watch @Toni Infante ${"lang": "en|fr|de|ja"}
+279 R Iron Spider, Stark Upgrade @Kevin Glint ${"lang": "en|fr|de|ja"}
+280 R Peter Parker's Camera @Lixin Yin ${"lang": "en|fr|de|ja"}
+281 R Rocket-Powered Goblin Glider @Pavel Kolomeyets ${"lang": "en|fr|de|ja"}
+282 R Oscorp Industries @Bastien Grivet ${"lang": "en|fr|de|ja"}
+283 R Urban Retreat @Jonas De Ro ${"lang": "en|fr|de|ja"}
 
 [promo]
-284 R Spider-Sense @David Álvarez
-285 R Radioactive Spider @Toni Infante
-286 M Gwenom, Remorseless @Jesper Ejsing
+284 R Spider-Sense @David Álvarez ${"lang": "en|ja"}
+285 R Radioactive Spider @Toni Infante ${"lang": "en|fr|de"}
+286 M Gwenom, Remorseless @Jesper Ejsing ${"lang": "en"}
 
 [allied lands]
 1 Ominous Asylum|SPM

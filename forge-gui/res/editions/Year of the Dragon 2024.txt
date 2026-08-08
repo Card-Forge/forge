@@ -5,6 +5,7 @@ Name=Year of the Dragon 2024
 Type=Promo
 ScryfallCode=PL24
 TokensCode=PL24
+CardLang=en,ja,zhs
 
 [cards]
 1 R Dragonlord's Servant @Song Qijin

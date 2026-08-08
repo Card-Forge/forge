@@ -9,6 +9,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ScryfallCode=UDS
+CardLang=en,es,fr,de,it,pt,ja,zht
 
 [cards]
 1 R Academy Rector @Heather Hudson

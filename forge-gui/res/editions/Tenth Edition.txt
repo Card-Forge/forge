@@ -9,6 +9,7 @@ FatPack=6
 FatPackExtraSlots=40 BasicLands
 ChaosDraftThemes=CORE_SET
 ScryfallCode=10E
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 U Ancestor's Chosen @Pete Venters
@@ -374,26 +375,26 @@ ScryfallCode=10E
 361 U Treetop Village @Rob Alexander
 362 R Underground River @Andrew Goldhawk
 363 R Yavimaya Coast @Anthony S. Waters
-364 L Plains @Rob Alexander
+364 L Plains @Rob Alexander ${"lang": "en|es|fr|de|it|pt|ru|zhs"}
 365 L Plains @John Avon
 366 L Plains @Greg Staples
 367 L Plains @Richard Wright
 368 L Island @Donato Giancola
-369 L Island @John Avon
+369 L Island @John Avon ${"lang": "en|es|fr|de|it|pt|ru|zhs"}
 370 L Island @Martina Pilcerova
-371 L Island @Stephan Martiniere
+371 L Island @Stephan Martiniere ${"lang": "en|es|fr|ja|ru|zhs"}
 372 L Swamp @John Avon
 373 L Swamp @Ron Spencer
-374 L Swamp @Jim Nelson
-375 L Swamp @Richard Wright
-376 L Mountain @John Avon
-377 L Mountain @Glen Angus
-378 L Mountain @John Avon
-379 L Mountain @Stephan Martiniere
-380 L Forest @Anthony S. Waters
-381 L Forest @John Avon
-382 L Forest @Rob Alexander
-383 L Forest @Stephan Martiniere
+374 L Swamp @Jim Nelson ${"lang": "en|es|fr|de|it|pt|ru|zhs"}
+375 L Swamp @Richard Wright ${"lang": "en|fr|de|it|ja"}
+376 L Mountain @John Avon ${"lang": "en|de|it|pt|ja|ru|zhs"}
+377 L Mountain @Glen Angus ${"lang": "en"}
+378 L Mountain @John Avon ${"lang": "en"}
+379 L Mountain @Stephan Martiniere ${"lang": "en"}
+380 L Forest @Anthony S. Waters ${"lang": "en"}
+381 L Forest @John Avon ${"lang": "en"}
+382 L Forest @Rob Alexander ${"lang": "en"}
+383 L Forest @Stephan Martiniere ${"lang": "en"}
 
 [tokens]
 1 w_1_1_soldier @Paolo Parente

@@ -9,6 +9,7 @@ FatPack=9
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=RAVNICA;GRAVEYARD_MATTERS
 ScryfallCode=RTR
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 M Angel of Serenity @Aleksi Briclot

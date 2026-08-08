@@ -4,6 +4,7 @@ Date=2024-06-14
 Name=Modern Horizons 3 Commander
 Type=Commander
 ScryfallCode=M3C
+CardLang=en,fr,de,ja
 
 [cards]
 1 M Disa the Restless @Jana Schirmer
@@ -128,22 +129,22 @@ ScryfallCode=M3C
 133 R Sunken Palace @Julian Kok Joon Wen
 134 R Talon Gates of Madara @Steven Belledin
 135 R Trenchpost @Carlos Palma Cruchaga
-136 M Azlask, the Swelling Scourge @Cosmin Podar
-137 M Cayth, Famed Mechanist @Boell Oyino
-138 M Coram, the Undertaker @Zara H
-139 M Disa the Restless @Boell Oyino
-140 M Jyoti, Moag Ancient @Alex Stone
-141 M Omo, Queen of Vesuva @Chun Lo
-142 M Satya, Aetherflux Genius @Cosmin Podar
-143 M Ulalek, Fused Atrocity @Cosmin Podar
-144 M Disa the Restless @Jana Schirmer
-145 M Omo, Queen of Vesuva @Alex Brock
-146 M Satya, Aetherflux Genius @Aaron Miller
-147 M Ulalek, Fused Atrocity @Alex Konstad
-148 M Disa the Restless @Jana Schirmer
-149 M Omo, Queen of Vesuva @Alex Brock
-150 M Satya, Aetherflux Genius @Aaron Miller
-151 M Ulalek, Fused Atrocity @Alex Konstad
+136 M Azlask, the Swelling Scourge @Cosmin Podar ${"lang": "en"}
+137 M Cayth, Famed Mechanist @Boell Oyino ${"lang": "en"}
+138 M Coram, the Undertaker @Zara H ${"lang": "en"}
+139 M Disa the Restless @Boell Oyino ${"lang": "en"}
+140 M Jyoti, Moag Ancient @Alex Stone ${"lang": "en"}
+141 M Omo, Queen of Vesuva @Chun Lo ${"lang": "en"}
+142 M Satya, Aetherflux Genius @Cosmin Podar ${"lang": "en"}
+143 M Ulalek, Fused Atrocity @Cosmin Podar ${"lang": "en"}
+144 M Disa the Restless @Jana Schirmer ${"lang": "en"}
+145 M Omo, Queen of Vesuva @Alex Brock ${"lang": "en"}
+146 M Satya, Aetherflux Genius @Aaron Miller ${"lang": "en"}
+147 M Ulalek, Fused Atrocity @Alex Konstad ${"lang": "en"}
+148 M Disa the Restless @Jana Schirmer ${"lang": "en"}
+149 M Omo, Queen of Vesuva @Alex Brock ${"lang": "en"}
+150 M Satya, Aetherflux Genius @Aaron Miller ${"lang": "en"}
+151 M Ulalek, Fused Atrocity @Alex Konstad ${"lang": "en"}
 152 M All Is Dust @Jason Felix
 153 U Artisan of Kozilek @Jason Felix
 154 R Elder Deep-Fiend @Jason Felix

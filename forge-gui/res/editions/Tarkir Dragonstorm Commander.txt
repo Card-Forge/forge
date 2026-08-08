@@ -4,6 +4,7 @@ Date=2025-04-11
 Name=Tarkir: Dragonstorm Commander
 Type=Commander
 ScryfallCode=TDC
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 M Betor, Ancestor's Voice @Lius Lasahido
@@ -56,46 +57,46 @@ ScryfallCode=TDC
 48 R Steward of the Harvest @Marie Magny
 49 R Will of the Sultai @Cristi Balanescu
 50 R Colossal Grave-Reaver @Bryan Sola
-51 R Ainok Strike Leader @Alexander Mokhov
-52 R Aligned Heart @Aurore Folny
-53 R Ironwill Forger @Konstantin Porubov
-54 R Protector of the Wastes @Zezhou Chen
-55 R Reunion of the House @Quintin Gleim
-56 R Tempest Technique @Nino Vecia
-57 R Will of the Mardu @Tuan Duong Chu
-58 R Adaptive Training Post @Ben Maier
-59 R Deceptive Frostkite @Josu Solano
-60 R Diviner of Mist @Lorenzo Mastroianni
-61 R Hammerhead Tyrant @Xavier Ribeiro
-62 R Transcendent Dragon @Diego Gisbert
-63 R Voracious Bibliophile @Camille Alquier
-64 R Will of the Temur @Irina Nordsol
-65 R Afterlife from the Loam @Johann Bodin
-66 R Bone Devourer @Diana Franco
-67 R Jaws of Defeat @Andreas Zafiratos
-68 R Teval's Judgment @Alix Branwyn
-69 R Tip the Scales @Volkan Baǵa
-70 R Welcome the Dead @Ioannis Fiore
-71 R Will of the Abzan @Yigit Koroglu
-72 R Within Range @Hector Ortiz
-73 R Caldera Pyremaw @Johann Bodin
-74 R Goldlust Triad @Arif Wijaya
-75 R Infantry Shield @Xabi Gaztelua
-76 R Parapet Thrasher @Cristi Balanescu
-77 R Redoubled Stormsinger @Filipe Pagliuso
-78 R Thundermane Dragon @Slawomir Maniak
-79 R Transforming Flourish @Xavier Ribeiro
-80 R Will of the Jeskai @Jessica Fong
-81 R Zenith Festival @Ben Wootten
-82 R Arbor Adherent @Christina Kraus
-83 R Become the Avalanche @Slawomir Maniak
-84 R Broodcaller Scourge @Loïc Canavaggia
-85 R Canopy Gargantuan @John Tedrick
-86 R Floral Evoker @Monztre
-87 R Rampart Architect @Eelis Kyttanen
-88 R Steward of the Harvest @Marie Magny
-89 R Will of the Sultai @Cristi Balanescu
-90 R Colossal Grave-Reaver @Bryan Sola
+51 R Ainok Strike Leader @Alexander Mokhov ${"lang": "en|fr|de|ja"}
+52 R Aligned Heart @Aurore Folny ${"lang": "en|fr|de|ja"}
+53 R Ironwill Forger @Konstantin Porubov ${"lang": "en|fr|de|ja"}
+54 R Protector of the Wastes @Zezhou Chen ${"lang": "en|fr|de|ja"}
+55 R Reunion of the House @Quintin Gleim ${"lang": "en|fr|de|ja"}
+56 R Tempest Technique @Nino Vecia ${"lang": "en|fr|de|ja"}
+57 R Will of the Mardu @Tuan Duong Chu ${"lang": "en|fr|de|ja"}
+58 R Adaptive Training Post @Ben Maier ${"lang": "en|fr|de|ja"}
+59 R Deceptive Frostkite @Josu Solano ${"lang": "en|fr|de|ja"}
+60 R Diviner of Mist @Lorenzo Mastroianni ${"lang": "en|fr|de|ja"}
+61 R Hammerhead Tyrant @Xavier Ribeiro ${"lang": "en|fr|de|ja"}
+62 R Transcendent Dragon @Diego Gisbert ${"lang": "en|fr|de|ja"}
+63 R Voracious Bibliophile @Camille Alquier ${"lang": "en|fr|de|ja"}
+64 R Will of the Temur @Irina Nordsol ${"lang": "en|fr|de|ja"}
+65 R Afterlife from the Loam @Johann Bodin ${"lang": "en|fr|de|ja"}
+66 R Bone Devourer @Diana Franco ${"lang": "en|fr|de|ja"}
+67 R Jaws of Defeat @Andreas Zafiratos ${"lang": "en|fr|de|ja"}
+68 R Teval's Judgment @Alix Branwyn ${"lang": "en|fr|de|ja"}
+69 R Tip the Scales @Volkan Baǵa ${"lang": "en|fr|de|ja"}
+70 R Welcome the Dead @Ioannis Fiore ${"lang": "en|fr|de|ja"}
+71 R Will of the Abzan @Yigit Koroglu ${"lang": "en|fr|de|ja"}
+72 R Within Range @Hector Ortiz ${"lang": "en|fr|de|ja"}
+73 R Caldera Pyremaw @Johann Bodin ${"lang": "en|fr|de|ja"}
+74 R Goldlust Triad @Arif Wijaya ${"lang": "en|fr|de|ja"}
+75 R Infantry Shield @Xabi Gaztelua ${"lang": "en|fr|de|ja"}
+76 R Parapet Thrasher @Cristi Balanescu ${"lang": "en|fr|de|ja"}
+77 R Redoubled Stormsinger @Filipe Pagliuso ${"lang": "en|fr|de|ja"}
+78 R Thundermane Dragon @Slawomir Maniak ${"lang": "en|fr|de|ja"}
+79 R Transforming Flourish @Xavier Ribeiro ${"lang": "en|fr|de|ja"}
+80 R Will of the Jeskai @Jessica Fong ${"lang": "en|fr|de|ja"}
+81 R Zenith Festival @Ben Wootten ${"lang": "en|fr|de|ja"}
+82 R Arbor Adherent @Christina Kraus ${"lang": "en|fr|de|ja"}
+83 R Become the Avalanche @Slawomir Maniak ${"lang": "en|fr|de|ja"}
+84 R Broodcaller Scourge @Loïc Canavaggia ${"lang": "en|fr|de|ja"}
+85 R Canopy Gargantuan @John Tedrick ${"lang": "en|fr|de|ja"}
+86 R Floral Evoker @Monztre ${"lang": "en|fr|de|ja"}
+87 R Rampart Architect @Eelis Kyttanen ${"lang": "en|fr|de|ja"}
+88 R Steward of the Harvest @Marie Magny ${"lang": "en|fr|de|ja"}
+89 R Will of the Sultai @Cristi Balanescu ${"lang": "en|fr|de|ja"}
+90 R Colossal Grave-Reaver @Bryan Sola ${"lang": "en|fr|de|ja"}
 91 R Vanquish the Horde @Johann Bodin
 92 R Narset's Reversal @Nathaniel Himawan
 93 R Gravecrawler @Danny Schwartz
@@ -110,9 +111,9 @@ ScryfallCode=TDC
 102 U Lightning Greaves @Michael Komarck
 103 U Skullclamp @Igor Krstic
 104 U Temple of the Dragon Queen @Alexandr Leskinen
-105 U Arcane Signet @Racrufi
-106 U Sol Ring @Leon Tukker
-107 C Command Tower @Marina Ortega Lorente
+105 U Arcane Signet @Racrufi ${"lang": "en"}
+106 U Sol Ring @Leon Tukker ${"lang": "en"}
+107 C Command Tower @Marina Ortega Lorente ${"lang": "en"}
 108 R Adeline, Resplendent Cathar @Bryan Sola
 109 M Angel of Invention @Volkan Baǵa
 110 R Baldin, Century Herdmaster @Zoltan Boros
@@ -238,7 +239,7 @@ ScryfallCode=TDC
 230 R Scourge of the Throne @Michael Komarck
 231 C Shiny Impetus @Filipe Pagliuso
 232 R Siege-Gang Commander @Aaron Miller
-233 M Skarrgan Hellkite @Svetlin Velinov
+233 M Skarrgan Hellkite @Svetlin Velinov ${"lang": "en|fr|de|it|ja"}
 234 R Spit Flame @Chris Rahn
 235 U Storm-Kiln Artist @Manuel Castañón
 236 R Storm's Wrath @Yeong-Hao Han

@@ -5,6 +5,7 @@ Name=Ravnica Allegiance Guild Kit
 Type=Boxed_Set
 ScryfallCode=GK2
 TokenFallbackCode=RNA
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 M Isperia, Supreme Judge @Lucas Graciano
@@ -32,8 +33,8 @@ TokenFallbackCode=RNA
 23 U Azorius Keyrune @Daniel Ljunggren
 24 U Azorius Signet @Raoul Vitale
 25 U Azorius Chancery @John Avon
-26 L Plains @Alayna Danner
-27 L Island @Alayna Danner
+26 L Plains @Alayna Danner ${"lang": "en"}
+27 L Island @Alayna Danner ${"lang": "en"}
 28 R Teysa, Orzhov Scion @Sara Winters
 29 U Belfry Spirit @Daren Bader
 30 U Martyred Rusalka @Alex Horley-Orlandelli
@@ -56,8 +57,8 @@ TokenFallbackCode=RNA
 47 U Vizkopa Guildmage @Tyler Jacobson
 48 C Orzhov Signet @Martina Pilcerova
 49 C Orzhov Basilica @John Avon
-50 L Plains @Ravenna Tran
-51 L Swamp @Ravenna Tran
+50 L Plains @Ravenna Tran ${"lang": "en"}
+51 L Swamp @Ravenna Tran ${"lang": "en"}
 52 M Rakdos, Lord of Riots @Yigit Koroglu
 53 U Crypt Champion @Pete Venters
 54 U Thrill-Kill Assassin @Tyler Jacobson
@@ -84,8 +85,8 @@ TokenFallbackCode=RNA
 75 U Rakdos Keyrune @Daniel Ljunggren
 76 U Rakdos Signet @Martina Pilcerova
 77 C Rakdos Carnarium @John Avon
-78 L Swamp @Dimitar Marinski
-79 L Mountain @Dimitar Marinski
+78 L Swamp @Dimitar Marinski ${"lang": "en"}
+79 L Mountain @Dimitar Marinski ${"lang": "en"}
 80 R Ruric Thar, the Unbowed @Jason A. Engle
 81 R Skarrgan Firebird @Kev Walker
 82 R Birds of Paradise @Marcelo Vignali
@@ -111,8 +112,8 @@ TokenFallbackCode=RNA
 102 C Zhur-Taa Swine @Yeong-Hao Han
 103 U Gruul Signet @Efrem Palacios
 104 C Gruul Turf @John Avon
-105 L Mountain @James Paick
-106 L Forest @James Paick
+105 L Mountain @James Paick ${"lang": "en"}
+106 L Forest @James Paick ${"lang": "en"}
 107 R Zegana, Utopian Speaker @Ekaterina Burmak
 108 C Cloudfin Raptor @Peter Mohrbacher
 109 U Rapid Hybridization @Jack Wang
@@ -138,8 +139,8 @@ TokenFallbackCode=RNA
 129 U Zameck Guildmage @Chase Stone
 130 U Simic Signet @Mike Sass
 131 U Simic Growth Chamber @John Avon
-132 L Island @Yeong-Hao Han
-133 L Forest @Yeong-Hao Han
+132 L Island @Yeong-Hao Han ${"lang": "en"}
+133 L Forest @Yeong-Hao Han ${"lang": "en"}
 
 [tokens]
 1 wu_1_1_bird_flying @Shishizaru

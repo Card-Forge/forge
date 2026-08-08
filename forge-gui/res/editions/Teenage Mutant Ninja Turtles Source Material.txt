@@ -3,6 +3,7 @@ Code=PZA
 Date=2026-03-06
 Name=Teenage Mutant Ninja Turtles Source Material
 Type=Collector_Edition
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 M Path to Exile @Kevin Eastman

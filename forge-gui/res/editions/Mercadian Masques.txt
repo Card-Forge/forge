@@ -11,6 +11,7 @@ FatPack=6
 FatPackExtraSlots=30 BasicLands
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
+CardLang=en,es,fr,de,it,pt,ja,zht
 
 [cards]
 1 U Afterlife @Brian Snõddy

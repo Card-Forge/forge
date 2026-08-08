@@ -4,6 +4,7 @@ Date=2024-07-05
 Name=Assassin's Creed
 Type=Draft
 ScryfallCode=ACR
+CardLang=en,es,fr,de,it,ja,zhs
 
 [cards]
 1 M The Capitoline Triad @Syd Mills
@@ -67,7 +68,7 @@ ScryfallCode=ACR
 59 M Kassandra, Eagle Bearer @Anna Steinbauer
 60 U Lydia Frye @Mandy Jurgens
 61 R Mary Read and Anne Bonny @Wangjie Li
-62 R Ratonhnhaké:ton @Greg Staples
+62 R Ratonhnhaké:ton @Greg Staples ${"lang": "en"}
 63 U Shao Jun @Stephen Stark
 64 R Shaun & Rebecca, Agents @Gintas Galvanauskas
 65 U Shay Cormac @Axel Sauerwald
@@ -155,163 +156,163 @@ ScryfallCode=ACR
 147 R Haytham Kenway @Andreia Ugrai
 148 M Kassandra, Eagle Bearer @Jessie Lam
 149 U Lydia Frye @Bastien L. Deharme
-150 R Ratonhnhaké:ton @Andreia Ugrai
+150 R Ratonhnhaké:ton @Andreia Ugrai ${"lang": "en"}
 151 U Shao Jun @Andreia Ugrai
 152 R Shaun & Rebecca, Agents @John Stanko
 153 U Shay Cormac @Alex Negrea
 154 R Sigurd, Jarl of Ravensthorpe @Jessie Lam
-155 R Caduceus, Staff of Hermes @Evan Shipard
-156 R Rest in Peace @Rimas Valeikis
-157 R What Must Be Done @Syd Mills
-158 R Crystal Skull, Isu Spyglass @Thanh Tuấn
-159 R Desynchronization @Lie Setiawan
-160 M Temporal Trespass @Borja Pindado
-161 R Black Market Connections @Filipe Pagliuso
-162 R Conspiracy @Allen Morris
-163 R Cover of Darkness @Paulius Daščioras
-164 R Royal Assassin @Vilhelmas Banys
-165 R The Spear of Leonidas @Narendra Bintara Adi
-166 R Assassin's Trophy @Erikas Perl
-167 R Jackdaw @Evan Shipard
-168 R The Animus @Néstor Ossandón Leal
-169 R Excalibur, Sword of Eden @Thanh Tuấn
-170 R Mjölnir, Storm Hammer @L J Koh
-171 R Abstergo Entertainment @Alexander Gering
-172 M The Capitoline Triad @Syd Mills
-173 R Caduceus, Staff of Hermes @Evan Shipard
-174 U Distract the Guards @Torgeir Fjereide
-175 U Haystack @Xabi Gaztelua
-176 U Hookblade @Thanh Tuấn
-177 R Layla Hassan @Michael MacRae
-178 U Path to Exile @Kim Sokol
-179 U Reconnaissance @Mandy Jurgens
-180 R Rest in Peace @Rimas Valeikis
-181 R Senu, Keen-Eyed Protector @Michael MacRae
-182 U Tax Collector @Miklós Ligeti
-183 U Templar Knight @Daniel Correia
-184 R What Must Be Done @Syd Mills
-185 U Assassin Gauntlet @Paulius Daščioras
-186 U Become Anonymous @Alice Xia Zhang
-187 U Coastal Piracy @Wei Guan
-188 R Crystal Skull, Isu Spyglass @Thanh Tuấn
-189 R Desynchronization @Lie Setiawan
-190 U Eagle Vision @Kim Sokol
-191 U Escape Detection @Justyna Dura
-192 R Evie Frye @Lie Setiawan
-193 M Leonardo da Vinci @Wangjie Li
-194 U Loyal Inventor @Gintas Galvanauskas
-195 U Propaganda @Erikas Perl
-196 M Temporal Trespass @Borja Pindado
-197 U Assassin Initiate @Mandy Jurgens
-198 R Black Market Connections @Filipe Pagliuso
-199 U Chain Assassination @Filipe Pagliuso
-200 R Conspiracy @Allen Morris
-201 R Cover of Darkness @Paulius Daščioras
-202 R Desmond Miles @Julia Vasilyeva
-203 M Ezio Auditore da Firenze @Fajareka Setiawan
-204 U Fatal Push @Lie Setiawan
-205 U Go for the Throat @Torgeir Fjereide
-206 U Hemlock Vial @Daniel Correia
-207 R Jacob Frye @Lie Setiawan
-208 U Murder @Lixin Yin
-209 U Petty Larceny @Fajareka Setiawan
-210 U Phantom Blade @Craig J Spearing
-211 U Restart Sequence @Lie Setiawan
-212 U Roshan, Hidden Magister @Marta Nael
-213 R Royal Assassin @Vilhelmas Banys
-214 U Alexios, Deimos of Kosmos @Bartek Fedyczak
-215 U Cathartic Reunion @Syd Mills
-216 U Hidden Footblade @Néstor Ossandón Leal
-217 U Monastery Raid @Alexandre Honoré
-218 U Overpowering Attack @Kim Sokol
-219 R The Spear of Leonidas @Narendra Bintara Adi
-220 R Aveline de Grandpré @Aurore Folny
-221 U Hunter's Bow @Miklós Ligeti
-222 U Palazzo Archers @Miklós Ligeti
-223 U Viewpoint Synchronization @Daniel Correia
-224 U Adéwalé, Breaker of Chains @Justyna Dura
-225 M Altaïr Ibn-La'Ahad @Axel Sauerwald
-226 U Arbaaz Mir @Wangjie Li
-227 U Arno Dorian @Narendra Bintara Adi
-228 R Assassin's Trophy @Erikas Perl
-229 R Aya of Alexandria @JB Casacop
-230 R Basim Ibn Ishaq @JB Casacop
-231 R Bayek of Siwa @JB Casacop
-232 U Bleeding Effect @Néstor Ossandón Leal
-233 M Cleopatra, Exiled Pharaoh @Mandy Jurgens
-234 M Edward Kenway @Borja Pindado
-235 M Eivor, Wolf-Kissed @Justyna Dura
-236 U Ezio, Brash Novice @Elizabeth Peiró
-237 R Havi, the All-Father @Daniel Correia
-238 R Haytham Kenway @Vilhelmas Banys
-239 R Jackdaw @Evan Shipard
-240 M Kassandra, Eagle Bearer @Anna Steinbauer
-241 U Lydia Frye @Mandy Jurgens
-242 R Mary Read and Anne Bonny @Wangjie Li
-243 U Mortify @Wangjie Li
-244 R Ratonhnhaké:ton @Greg Staples
-245 U Reconstruct History @Néstor Ossandón Leal
-246 U Shao Jun @Stephen Stark
-247 R Shaun & Rebecca, Agents @Gintas Galvanauskas
-248 U Shay Cormac @Axel Sauerwald
-249 R Sigurd, Jarl of Ravensthorpe @Alexander Gering
-250 R Sokrates, Athenian Teacher @Alice Xia Zhang
-251 U Terminate @Fajareka Setiawan
-252 U Adrestia @Mintautas Šukys
-253 R The Animus @Néstor Ossandón Leal
-254 M Apple of Eden, Isu Relic @L J Koh
-255 U Brotherhood Regalia @Xabi Gaztelua
-256 R Excalibur, Sword of Eden @Thanh Tuấn
-257 U Hidden Blade @L J Koh
-258 R Mjölnir, Storm Hammer @L J Koh
-259 U Smoke Bomb @Borja Pindado
-260 M Staff of Eden, Vault's Key @L J Koh
-261 M Sword of Feast and Famine @Thanh Tuấn
-262 M Sword of Light and Shadow @Borja Pindado
-263 U Towering Viewpoint @Lixin Yin
-264 M Yggdrasil, Rebirth Engine @Rytis Sabaliauskas
-265 R Abstergo Entertainment @Alexander Gering
-266 U Brotherhood Headquarters @Narendra Bintara Adi
-267 M Ezio Auditore da Firenze @Luisa J. Preissler
-268 M Altaïr Ibn-La'Ahad @Alex Negrea
-269 M Edward Kenway @Alex Negrea
-270 M Eivor, Wolf-Kissed @Jessie Lam
-271 M Kassandra, Eagle Bearer @Jessie Lam
-272 M Cleopatra, Exiled Pharaoh @Néstor Ossandón Leal
-273 R Sokrates, Athenian Teacher @JB Casacop
-274 M Eivor, Battle-Ready @Fajareka Setiawan
-275 M Ezio, Blade of Vengeance @Jake Murray
-276 C Battlefield Improvisation @Mintautas Šukys
-277 C Detained by Legionnaires @Néstor Ossandón Leal
-278 R Escarpment Fortress @Vaigintas Pakenis
-279 U Keen-Eyed Raven @Alexandre Honoré
-280 U Settlement Blacksmith @Daniel Correia
-281 U Assassin Den @Jurijus Chitrovas
-282 U Brotherhood Spy @Jurijus Chitrovas
-283 C Hookblade Veteran @Borja Pindado
-284 C Tranquilize @Thanh Tuấn
-285 U Brotherhood Ambushers @Alexandre Honoré
-286 C Brotherhood Patriarch @Néstor Ossandón Leal
-287 C Merciless Harlequin @Lixin Yin
-288 U Poison-Blade Mentor @Xabi Gaztelua
-289 C Headsplitter @L J Koh
-290 U Labyrinth Adversary @Narendra Bintara Adi
-291 C Misthios's Fury @Allen Morris
-292 C Spartan Veteran @Bartek Fedyczak
-293 R Surtr, Fiery Jötun @Evan Shipard
-294 R Achilles Davenport @Josu Solano
-295 R Auditore Ambush @Julia Vasilyeva
-296 U Bureau Headmaster @Thanh Tuấn
-297 R Raven Clan War-Axe @Kim Sokol
-298 R Rooftop Bypass @Pablo Mendoza
-299 C Hired Blade @Elizabeth Peiró
-300 U Stone Quarry @Piotr Dura
-301 U Submerged Boneyard @Alexandre Honoré
-302 L Plains @Borja Pindado
-303 L Island @Alexandre Honoré
-304 L Swamp @Wangjie Li
-305 L Mountain @Jeremy Paillotin
-306 R Royal Assassin @Wei Guan
+155 R Caduceus, Staff of Hermes @Evan Shipard ${"lang": "en|fr|de|ja|zhs"}
+156 R Rest in Peace @Rimas Valeikis ${"lang": "en|fr|de|ja|zhs"}
+157 R What Must Be Done @Syd Mills ${"lang": "en|fr|de|ja|zhs"}
+158 R Crystal Skull, Isu Spyglass @Thanh Tuấn ${"lang": "en|fr|de|ja|zhs"}
+159 R Desynchronization @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+160 M Temporal Trespass @Borja Pindado ${"lang": "en|fr|de|ja|zhs"}
+161 R Black Market Connections @Filipe Pagliuso ${"lang": "en|fr|de|ja|zhs"}
+162 R Conspiracy @Allen Morris ${"lang": "en|fr|de|ja|zhs"}
+163 R Cover of Darkness @Paulius Daščioras ${"lang": "en|fr|de|ja|zhs"}
+164 R Royal Assassin @Vilhelmas Banys ${"lang": "en|fr|de|ja|zhs"}
+165 R The Spear of Leonidas @Narendra Bintara Adi ${"lang": "en|fr|de|ja|zhs"}
+166 R Assassin's Trophy @Erikas Perl ${"lang": "en|fr|de|ja|zhs"}
+167 R Jackdaw @Evan Shipard ${"lang": "en|fr|de|ja|zhs"}
+168 R The Animus @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+169 R Excalibur, Sword of Eden @Thanh Tuấn ${"lang": "en|fr|de|ja|zhs"}
+170 R Mjölnir, Storm Hammer @L J Koh ${"lang": "en|fr|de|ja|zhs"}
+171 R Abstergo Entertainment @Alexander Gering ${"lang": "en|fr|de|ja|zhs"}
+172 M The Capitoline Triad @Syd Mills ${"lang": "en|fr|de|ja|zhs"}
+173 R Caduceus, Staff of Hermes @Evan Shipard ${"lang": "en|fr|de|ja|zhs"}
+174 U Distract the Guards @Torgeir Fjereide ${"lang": "en|fr|de|ja|zhs"}
+175 U Haystack @Xabi Gaztelua ${"lang": "en|fr|de|ja|zhs"}
+176 U Hookblade @Thanh Tuấn ${"lang": "en|fr|de|ja|zhs"}
+177 R Layla Hassan @Michael MacRae ${"lang": "en|fr|de|ja|zhs"}
+178 U Path to Exile @Kim Sokol ${"lang": "en|fr|de|ja|zhs"}
+179 U Reconnaissance @Mandy Jurgens ${"lang": "en|fr|de|ja|zhs"}
+180 R Rest in Peace @Rimas Valeikis ${"lang": "en|fr|de|ja|zhs"}
+181 R Senu, Keen-Eyed Protector @Michael MacRae ${"lang": "en|fr|de|ja|zhs"}
+182 U Tax Collector @Miklós Ligeti ${"lang": "en|fr|de|ja|zhs"}
+183 U Templar Knight @Daniel Correia ${"lang": "en|fr|de|ja|zhs"}
+184 R What Must Be Done @Syd Mills ${"lang": "en|fr|de|ja|zhs"}
+185 U Assassin Gauntlet @Paulius Daščioras ${"lang": "en|fr|de|ja|zhs"}
+186 U Become Anonymous @Alice Xia Zhang ${"lang": "en|fr|de|ja|zhs"}
+187 U Coastal Piracy @Wei Guan ${"lang": "en|fr|de|ja|zhs"}
+188 R Crystal Skull, Isu Spyglass @Thanh Tuấn ${"lang": "en|fr|de|ja|zhs"}
+189 R Desynchronization @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+190 U Eagle Vision @Kim Sokol ${"lang": "en|fr|de|ja|zhs"}
+191 U Escape Detection @Justyna Dura ${"lang": "en|fr|de|ja|zhs"}
+192 R Evie Frye @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+193 M Leonardo da Vinci @Wangjie Li ${"lang": "en|fr|de|ja|zhs"}
+194 U Loyal Inventor @Gintas Galvanauskas ${"lang": "en|fr|de|ja|zhs"}
+195 U Propaganda @Erikas Perl ${"lang": "en|fr|de|ja|zhs"}
+196 M Temporal Trespass @Borja Pindado ${"lang": "en|fr|de|ja|zhs"}
+197 U Assassin Initiate @Mandy Jurgens ${"lang": "en|fr|de|ja|zhs"}
+198 R Black Market Connections @Filipe Pagliuso ${"lang": "en|fr|de|ja|zhs"}
+199 U Chain Assassination @Filipe Pagliuso ${"lang": "en|fr|de|ja|zhs"}
+200 R Conspiracy @Allen Morris ${"lang": "en|fr|de|ja|zhs"}
+201 R Cover of Darkness @Paulius Daščioras ${"lang": "en|fr|de|ja|zhs"}
+202 R Desmond Miles @Julia Vasilyeva ${"lang": "en|fr|de|ja|zhs"}
+203 M Ezio Auditore da Firenze @Fajareka Setiawan ${"lang": "en|fr|de|ja|zhs"}
+204 U Fatal Push @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+205 U Go for the Throat @Torgeir Fjereide ${"lang": "en|fr|de|ja|zhs"}
+206 U Hemlock Vial @Daniel Correia ${"lang": "en|fr|de|ja|zhs"}
+207 R Jacob Frye @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+208 U Murder @Lixin Yin ${"lang": "en|fr|de|ja|zhs"}
+209 U Petty Larceny @Fajareka Setiawan ${"lang": "en|fr|de|ja|zhs"}
+210 U Phantom Blade @Craig J Spearing ${"lang": "en|fr|de|ja|zhs"}
+211 U Restart Sequence @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+212 U Roshan, Hidden Magister @Marta Nael ${"lang": "en|fr|de|ja|zhs"}
+213 R Royal Assassin @Vilhelmas Banys ${"lang": "en|fr|de|ja|zhs"}
+214 U Alexios, Deimos of Kosmos @Bartek Fedyczak ${"lang": "en|fr|de|ja|zhs"}
+215 U Cathartic Reunion @Syd Mills ${"lang": "en|fr|de|ja|zhs"}
+216 U Hidden Footblade @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+217 U Monastery Raid @Alexandre Honoré ${"lang": "en|fr|de|ja|zhs"}
+218 U Overpowering Attack @Kim Sokol ${"lang": "en|fr|de|ja|zhs"}
+219 R The Spear of Leonidas @Narendra Bintara Adi ${"lang": "en|fr|de|ja|zhs"}
+220 R Aveline de Grandpré @Aurore Folny ${"lang": "en|fr|de|ja|zhs"}
+221 U Hunter's Bow @Miklós Ligeti ${"lang": "en|fr|de|ja|zhs"}
+222 U Palazzo Archers @Miklós Ligeti ${"lang": "en|fr|de|ja|zhs"}
+223 U Viewpoint Synchronization @Daniel Correia ${"lang": "en|fr|de|ja|zhs"}
+224 U Adéwalé, Breaker of Chains @Justyna Dura ${"lang": "en|fr|de|ja|zhs"}
+225 M Altaïr Ibn-La'Ahad @Axel Sauerwald ${"lang": "en|fr|de|ja|zhs"}
+226 U Arbaaz Mir @Wangjie Li ${"lang": "en|fr|de|ja|zhs"}
+227 U Arno Dorian @Narendra Bintara Adi ${"lang": "en|fr|de|ja|zhs"}
+228 R Assassin's Trophy @Erikas Perl ${"lang": "en|fr|de|ja|zhs"}
+229 R Aya of Alexandria @JB Casacop ${"lang": "en|fr|de|ja|zhs"}
+230 R Basim Ibn Ishaq @JB Casacop ${"lang": "en|fr|de|ja|zhs"}
+231 R Bayek of Siwa @JB Casacop ${"lang": "en|fr|de|ja|zhs"}
+232 U Bleeding Effect @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+233 M Cleopatra, Exiled Pharaoh @Mandy Jurgens ${"lang": "en|fr|de|ja|zhs"}
+234 M Edward Kenway @Borja Pindado ${"lang": "en|fr|de|ja|zhs"}
+235 M Eivor, Wolf-Kissed @Justyna Dura ${"lang": "en|fr|de|ja|zhs"}
+236 U Ezio, Brash Novice @Elizabeth Peiró ${"lang": "en|fr|de|ja|zhs"}
+237 R Havi, the All-Father @Daniel Correia ${"lang": "en|fr|de|ja|zhs"}
+238 R Haytham Kenway @Vilhelmas Banys ${"lang": "en|fr|de|ja|zhs"}
+239 R Jackdaw @Evan Shipard ${"lang": "en|fr|de|ja|zhs"}
+240 M Kassandra, Eagle Bearer @Anna Steinbauer ${"lang": "en|fr|de|ja|zhs"}
+241 U Lydia Frye @Mandy Jurgens ${"lang": "en|fr|de|ja|zhs"}
+242 R Mary Read and Anne Bonny @Wangjie Li ${"lang": "en|fr|de|ja|zhs"}
+243 U Mortify @Wangjie Li ${"lang": "en|fr|de|ja|zhs"}
+244 R Ratonhnhaké:ton @Greg Staples ${"lang": "en"}
+245 U Reconstruct History @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+246 U Shao Jun @Stephen Stark ${"lang": "en|fr|de|ja|zhs"}
+247 R Shaun & Rebecca, Agents @Gintas Galvanauskas ${"lang": "en|fr|de|ja|zhs"}
+248 U Shay Cormac @Axel Sauerwald ${"lang": "en|fr|de|ja|zhs"}
+249 R Sigurd, Jarl of Ravensthorpe @Alexander Gering ${"lang": "en|fr|de|ja|zhs"}
+250 R Sokrates, Athenian Teacher @Alice Xia Zhang ${"lang": "en|fr|de|ja|zhs"}
+251 U Terminate @Fajareka Setiawan ${"lang": "en|fr|de|ja|zhs"}
+252 U Adrestia @Mintautas Šukys ${"lang": "en|fr|de|ja|zhs"}
+253 R The Animus @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+254 M Apple of Eden, Isu Relic @L J Koh ${"lang": "en|fr|de|ja|zhs"}
+255 U Brotherhood Regalia @Xabi Gaztelua ${"lang": "en|fr|de|ja|zhs"}
+256 R Excalibur, Sword of Eden @Thanh Tuấn ${"lang": "en|fr|de|ja|zhs"}
+257 U Hidden Blade @L J Koh ${"lang": "en|fr|de|ja|zhs"}
+258 R Mjölnir, Storm Hammer @L J Koh ${"lang": "en|fr|de|ja|zhs"}
+259 U Smoke Bomb @Borja Pindado ${"lang": "en|fr|de|ja|zhs"}
+260 M Staff of Eden, Vault's Key @L J Koh ${"lang": "en|fr|de|ja|zhs"}
+261 M Sword of Feast and Famine @Thanh Tuấn ${"lang": "en|fr|de|ja|zhs"}
+262 M Sword of Light and Shadow @Borja Pindado ${"lang": "en|fr|de|ja|zhs"}
+263 U Towering Viewpoint @Lixin Yin ${"lang": "en|fr|de|ja|zhs"}
+264 M Yggdrasil, Rebirth Engine @Rytis Sabaliauskas ${"lang": "en|fr|de|ja|zhs"}
+265 R Abstergo Entertainment @Alexander Gering ${"lang": "en|fr|de|ja|zhs"}
+266 U Brotherhood Headquarters @Narendra Bintara Adi ${"lang": "en|fr|de|ja|zhs"}
+267 M Ezio Auditore da Firenze @Luisa J. Preissler ${"lang": "en"}
+268 M Altaïr Ibn-La'Ahad @Alex Negrea ${"lang": "en"}
+269 M Edward Kenway @Alex Negrea ${"lang": "en"}
+270 M Eivor, Wolf-Kissed @Jessie Lam ${"lang": "en"}
+271 M Kassandra, Eagle Bearer @Jessie Lam ${"lang": "en"}
+272 M Cleopatra, Exiled Pharaoh @Néstor Ossandón Leal ${"lang": "grc"}
+273 R Sokrates, Athenian Teacher @JB Casacop ${"lang": "grc"}
+274 M Eivor, Battle-Ready @Fajareka Setiawan ${"lang": "en|es|fr|de|it"}
+275 M Ezio, Blade of Vengeance @Jake Murray ${"lang": "en|es|fr|de|it"}
+276 C Battlefield Improvisation @Mintautas Šukys ${"lang": "en|es|fr|de|it"}
+277 C Detained by Legionnaires @Néstor Ossandón Leal ${"lang": "en|es|fr|de|it"}
+278 R Escarpment Fortress @Vaigintas Pakenis ${"lang": "en|es|fr|de|it"}
+279 U Keen-Eyed Raven @Alexandre Honoré ${"lang": "en|es|fr|de|it"}
+280 U Settlement Blacksmith @Daniel Correia ${"lang": "en|es|fr|de|it"}
+281 U Assassin Den @Jurijus Chitrovas ${"lang": "en|es|fr|de|it"}
+282 U Brotherhood Spy @Jurijus Chitrovas ${"lang": "en|es|fr|de|it"}
+283 C Hookblade Veteran @Borja Pindado ${"lang": "en|es|fr|de|it"}
+284 C Tranquilize @Thanh Tuấn ${"lang": "en|es|fr|de|it"}
+285 U Brotherhood Ambushers @Alexandre Honoré ${"lang": "en|es|fr|de|it"}
+286 C Brotherhood Patriarch @Néstor Ossandón Leal ${"lang": "en|es|fr|de|it"}
+287 C Merciless Harlequin @Lixin Yin ${"lang": "en|es|fr|de|it"}
+288 U Poison-Blade Mentor @Xabi Gaztelua ${"lang": "en|es|fr|de|it"}
+289 C Headsplitter @L J Koh ${"lang": "en|es|fr|de|it"}
+290 U Labyrinth Adversary @Narendra Bintara Adi ${"lang": "en|es|fr|de|it"}
+291 C Misthios's Fury @Allen Morris ${"lang": "en|es|fr|de|it"}
+292 C Spartan Veteran @Bartek Fedyczak ${"lang": "en|es|fr|de|it"}
+293 R Surtr, Fiery Jötun @Evan Shipard ${"lang": "en|es|fr|de|it"}
+294 R Achilles Davenport @Josu Solano ${"lang": "en|es|fr|de|it"}
+295 R Auditore Ambush @Julia Vasilyeva ${"lang": "en|es|fr|de|it"}
+296 U Bureau Headmaster @Thanh Tuấn ${"lang": "en|es|fr|de|it"}
+297 R Raven Clan War-Axe @Kim Sokol ${"lang": "en|es|fr|de|it"}
+298 R Rooftop Bypass @Pablo Mendoza ${"lang": "en|es|fr|de|it"}
+299 C Hired Blade @Elizabeth Peiró ${"lang": "en|es|fr|de|it"}
+300 U Stone Quarry @Piotr Dura ${"lang": "en|es|fr|de|it"}
+301 U Submerged Boneyard @Alexandre Honoré ${"lang": "en|es|fr|de|it"}
+302 L Plains @Borja Pindado ${"lang": "en|es|fr|de|it"}
+303 L Island @Alexandre Honoré ${"lang": "en|es|fr|de|it"}
+304 L Swamp @Wangjie Li ${"lang": "en|es|fr|de|it"}
+305 L Mountain @Jeremy Paillotin ${"lang": "en|es|fr|de|it"}
+306 R Royal Assassin @Wei Guan ${"lang": "en|fr|de"}
 307 R Hidden Blade @Evyn Fong
 
 [tokens]

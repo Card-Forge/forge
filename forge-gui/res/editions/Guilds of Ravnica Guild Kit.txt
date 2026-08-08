@@ -5,6 +5,7 @@ Name=Guilds of Ravnica Guild Kit
 Type=Boxed_Set
 ScryfallCode=GK1
 TokenFallbackCode=GRN
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 R Etrata, the Silencer @Igor Kieryluk

@@ -10,6 +10,7 @@ FatPack=10
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=RAVNICA
 ScryfallCode=WAR
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 R Karn, the Great Creator @Wisnu Tan
@@ -264,71 +265,71 @@ ScryfallCode=WAR
 250 L Plains @Jonas De Ro
 251 L Plains @Adam Paquette
 252 L Plains @Richard Wright
-253 L Island @Adam Paquette
-254 L Island @Richard Wright
+253 L Island @Adam Paquette ${"lang": "en|es|fr|de|it|pt|ja|ko|zhs|zht"}
+254 L Island @Richard Wright ${"lang": "en|fr|de|it|pt|ja|ko|ru|zht"}
 255 L Island @Kirsten Zirngibl
 256 L Swamp @Titus Lunter
 257 L Swamp @Adam Paquette
 258 L Swamp @Richard Wright
 259 L Mountain @Titus Lunter
 260 L Mountain @Adam Paquette
-261 L Mountain @Richard Wright
-262 L Forest @Jonas De Ro
+261 L Mountain @Richard Wright ${"lang": "en|es|fr|de|it|ja|ru|zhs|zht"}
+262 L Forest @Jonas De Ro ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zht"}
 263 L Forest @Titus Lunter
 264 L Forest @Richard Wright
 
 [promo]
-1★ R Karn, the Great Creator @Naochika Morishita
-2★ R Ugin, the Ineffable @Maekawa Yuichi
-13★ M Gideon Blackblade @Tada
-32★ U Teyo, the Shieldmage @Foo Midori
-37★ U The Wanderer @Norikatsu Miyoshi
-54★ R Jace, Wielder of Mysteries @Takayama Toshiaki
-56★ U Kasmina, Enigmatic Mentor @Mid
-61★ U Narset, Parter of Veils @Foo Midori
-83★ U Davriel, Rogue Shadowmage @Hagiya Kaoru
-97★ M Liliana, Dreadhorde General @Yoshitaka Amano
-100★ U Ob Nixilis, the Hate-Twisted @Sansyu
-119★ R Chandra, Fire Artisan @Ryota-H
-135★ U Jaya, Venerated Firemage @Maekawa Yuichi
-143★ R Sarkhan the Masterless @Lack
-146★ U Tibalt, Rakish Instigator @Clover.K
-150★ U Arlinn, Voice of the Pack @D-suzuki
-164★ U Jiang Yanggu, Wildcrafter @Daisuke Izuka
-169★ R Nissa, Who Shakes the World @Hitowa
-180★ R Vivien, Champion of the Wilds @Hisashi Momose
-184★ R Ajani, the Greathearted @Miho Midorikawa
-191★ R Domri, Anarch of Bolas @Raita Kazama
-207★ M Nicol Bolas, Dragon-God @Kaida Yuji
-211★ R Ral, Storm Conduit @Naochika Morishita
-217★ R Sorin, Vengeful Bloodlord @Yukie Tajima
-220★ R Tamiyo, Collector of Tales @Fuzichoco
-221★ R Teferi, Time Raveler @Shishizaru
-227★ U Angrath, Captain of Chaos @Sansyu
-228★ U Ashiok, Dream Render @Hozan Shinomaru
-229★ U Dovin, Hand of Control @Nablange
-230★ U Huatli, the Sun's Heart @Mikio Masuda
-231★ U Kaya, Bane of the Dead @Mid
-232★ U Kiora, Behemoth Beckoner @Yamamoto Akifumi
-233★ U Nahiri, Storm of Stone @Yukie Tajima
-234★ U Saheeli, Sublime Artificer @Hisashi Momose
-235★ U Samut, Tyrant Smasher @Norikatsu Miyoshi
-236★ U Vraska, Swarm's Eminence @Ryota Murayama
+1★ R Karn, the Great Creator @Naochika Morishita ${"lang": "ja"}
+2★ R Ugin, the Ineffable @Maekawa Yuichi ${"lang": "ja"}
+13★ M Gideon Blackblade @Tada ${"lang": "ja"}
+32★ U Teyo, the Shieldmage @Foo Midori ${"lang": "ja"}
+37★ U The Wanderer @Norikatsu Miyoshi ${"lang": "ja"}
+54★ R Jace, Wielder of Mysteries @Takayama Toshiaki ${"lang": "ja"}
+56★ U Kasmina, Enigmatic Mentor @Mid ${"lang": "ja"}
+61★ U Narset, Parter of Veils @Foo Midori ${"lang": "ja"}
+83★ U Davriel, Rogue Shadowmage @Hagiya Kaoru ${"lang": "ja"}
+97★ M Liliana, Dreadhorde General @Yoshitaka Amano ${"lang": "ja"}
+100★ U Ob Nixilis, the Hate-Twisted @Sansyu ${"lang": "ja"}
+119★ R Chandra, Fire Artisan @Ryota-H ${"lang": "ja"}
+135★ U Jaya, Venerated Firemage @Maekawa Yuichi ${"lang": "ja"}
+143★ R Sarkhan the Masterless @Lack ${"lang": "ja"}
+146★ U Tibalt, Rakish Instigator @Clover.K ${"lang": "ja"}
+150★ U Arlinn, Voice of the Pack @D-suzuki ${"lang": "ja"}
+164★ U Jiang Yanggu, Wildcrafter @Daisuke Izuka ${"lang": "ja"}
+169★ R Nissa, Who Shakes the World @Hitowa ${"lang": "ja"}
+180★ R Vivien, Champion of the Wilds @Hisashi Momose ${"lang": "ja"}
+184★ R Ajani, the Greathearted @Miho Midorikawa ${"lang": "ja"}
+191★ R Domri, Anarch of Bolas @Raita Kazama ${"lang": "ja"}
+207★ M Nicol Bolas, Dragon-God @Kaida Yuji ${"lang": "ja"}
+211★ R Ral, Storm Conduit @Naochika Morishita ${"lang": "ja"}
+217★ R Sorin, Vengeful Bloodlord @Yukie Tajima ${"lang": "ja"}
+220★ R Tamiyo, Collector of Tales @Fuzichoco ${"lang": "ja"}
+221★ R Teferi, Time Raveler @Shishizaru ${"lang": "ja"}
+227★ U Angrath, Captain of Chaos @Sansyu ${"lang": "ja"}
+228★ U Ashiok, Dream Render @Hozan Shinomaru ${"lang": "ja"}
+229★ U Dovin, Hand of Control @Nablange ${"lang": "ja"}
+230★ U Huatli, the Sun's Heart @Mikio Masuda ${"lang": "ja"}
+231★ U Kaya, Bane of the Dead @Mid ${"lang": "ja"}
+232★ U Kiora, Behemoth Beckoner @Yamamoto Akifumi ${"lang": "ja"}
+233★ U Nahiri, Storm of Stone @Yukie Tajima ${"lang": "ja"}
+234★ U Saheeli, Sublime Artificer @Hisashi Momose ${"lang": "ja"}
+235★ U Samut, Tyrant Smasher @Norikatsu Miyoshi ${"lang": "ja"}
+236★ U Vraska, Swarm's Eminence @Ryota Murayama ${"lang": "ja"}
 
 [precon product]
-265 M Gideon, the Oathsworn @Kieran Yanner
-266 C Desperate Lunge @Deruchenko Alexander
-267 R Gideon's Battle Cry @Zoltan Boros
-268 U Gideon's Company @Milivoj Ćeran
-269 C Orzhov Guildgate @Cliff Childs
-270 M Jace, Arcane Strategist @Kieran Yanner
-271 C Guildpact Informant @Randy Gallegos
-272 U Jace's Projection @Darek Zabrocki
-273 R Jace's Ruse @Clint Cearley
-274 C Simic Guildgate @Adam Paquette
+265 M Gideon, the Oathsworn @Kieran Yanner ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zhs"}
+266 C Desperate Lunge @Deruchenko Alexander ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zhs"}
+267 R Gideon's Battle Cry @Zoltan Boros ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zhs"}
+268 U Gideon's Company @Milivoj Ćeran ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zhs"}
+269 C Orzhov Guildgate @Cliff Childs ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zhs"}
+270 M Jace, Arcane Strategist @Kieran Yanner ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zhs"}
+271 C Guildpact Informant @Randy Gallegos ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zhs"}
+272 U Jace's Projection @Darek Zabrocki ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zhs"}
+273 R Jace's Ruse @Clint Cearley ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zhs"}
+274 C Simic Guildgate @Adam Paquette ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zhs"}
 
 [buy a box]
-275 M Tezzeret, Master of the Bridge @Chase Stone
+275 M Tezzeret, Master of the Bridge @Chase Stone ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zhs"}
 
 [rebalanced]
 A-221 R A-Teferi, Time Raveler @Chris Rallis

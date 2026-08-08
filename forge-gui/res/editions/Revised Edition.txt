@@ -10,6 +10,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
 ChaosDraftThemes=CORE_SET
 ScryfallCode=3ED
+CardLang=en,fr,de,it
 
 [cards]
 1 R Animate Wall @Dan Frazier
@@ -118,7 +119,7 @@ ScryfallCode=3ED
 104 R Demonic Hordes @Jesper Myrfors
 105 U Demonic Tutor @Douglas Shuler
 106 C Drain Life @Douglas Shuler
-107 C Drudge Skeletons @Sandra Everingham
+107 C Drudge Skeletons @Sandra Everingham ${"lang": "en|fr|it"}
 108 R El-Hajjâj @Dameon Willich
 109 C Erg Raiders @Dameon Willich
 110 U Evil Presence @Sandra Everingham

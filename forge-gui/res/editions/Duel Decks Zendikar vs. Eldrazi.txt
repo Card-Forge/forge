@@ -5,6 +5,7 @@ Name=Duel Decks: Zendikar vs. Eldrazi
 Type=Duel_Deck
 ScryfallCode=DDP
 TokensCode=DDP
+CardLang=en,ja
 
 [cards]
 1 M Avenger of Zendikar @Aleksi Briclot

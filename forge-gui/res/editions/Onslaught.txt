@@ -11,6 +11,7 @@ FatPackExtraSlots=30 BasicLands
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ScryfallCode=ONS
+CardLang=en,es,fr,de,it,pt,ja,zhs,zht
 
 [cards]
 1 U Akroma's Blessing @Adam Rex

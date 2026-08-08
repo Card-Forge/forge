@@ -4,6 +4,7 @@ Date=2022-11-18
 Name=The Brothers' War Commander
 Type=Commander
 ScryfallCode=BRC
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 M Mishra, Eminent One @Randy Vargas
@@ -32,45 +33,45 @@ ScryfallCode=BRC
 24 M Rootpath Purifier @Justyna Dura
 25 M Titania, Nature's Force @Heonhwa
 26 R The Archimandrite @Cristi Balanescu
-27 R Staff of Titania @Samuel Perin
+27 R Staff of Titania @Samuel Perin ${"lang": "en"}
 28 R Urza's Workshop @Alexander Forssberg
-29 L Plains @Raymond Bonilla
-30 L Plains @Jorge Jacinto
-31 L Island @Eddie Mendoza
-32 L Island @Lucas Staniec
-33 L Swamp @Sam Burley
-34 L Swamp @Robin Olausson
-35 L Mountain @Bruce Brenneise
-36 L Mountain @Victor Harmatiuk
+29 L Plains @Raymond Bonilla ${"lang": "en"}
+30 L Plains @Jorge Jacinto ${"lang": "en"}
+31 L Island @Eddie Mendoza ${"lang": "en"}
+32 L Island @Lucas Staniec ${"lang": "en"}
+33 L Swamp @Sam Burley ${"lang": "en"}
+34 L Swamp @Robin Olausson ${"lang": "en"}
+35 L Mountain @Bruce Brenneise ${"lang": "en"}
+36 L Mountain @Victor Harmatiuk ${"lang": "en"}
 39 M Mishra, Eminent One @Randy Vargas
 40 M Urza, Chief Artificer @Bartłomiej Gaweł
-41 R Disciple of Caelus Nin @Steve Argyle
-42 M Tawnos, Solemn Survivor @Matt Stewart
-43 R Sardian Avenger @Joseph Weston
-44 M Rootpath Purifier @Justyna Dura
-45 M Titania, Nature's Force @Heonhwa
-46 R The Archimandrite @Cristi Balanescu
-47 M Ashnod the Uncaring @Kieran Yanner
-48 M Mishra, Eminent One @Randy Vargas
-49 M Urza, Chief Artificer @Bartłomiej Gaweł
-50 R Staff of Titania @Samuel Perin
-51 R Urza's Workshop @Alexander Forssberg
-52 R Sanwell, Avenger Ace @Josu Hernaiz
-53 R Scholar of New Horizons @Randy Vargas
-54 R Glint Raker @Lars Grant-West
-55 R March of Progress @Ben Wootten
-56 R Terisiare's Devastation @Bram Sels
-57 R Wire Surgeons @Josu Hernaiz
-58 R Wreck Hunter @Josu Hernaiz
-59 R Blast-Furnace Hellkite @Aldo Domínguez
-60 R Farid, Enterprising Salvager @Bruno Biazotto
-61 R Hexavus @Mark Tedin
-62 R Kayla's Music Box @Aaron Miller
-63 R Machine God's Effigy @Martin de Diego Sádaba
-64 R Scavenged Brawler @Craig J Spearing
-65 R Smelting Vat @Robin Olausson
-66 R Thopter Shop @Craig J Spearing
-67 R Wondrous Crucible @Evan Shipard
+41 R Disciple of Caelus Nin @Steve Argyle ${"lang": "en|fr|de|ja|zhs"}
+42 M Tawnos, Solemn Survivor @Matt Stewart ${"lang": "en|fr|de|ja|zhs"}
+43 R Sardian Avenger @Joseph Weston ${"lang": "en|fr|de|ja|zhs"}
+44 M Rootpath Purifier @Justyna Dura ${"lang": "en|fr|de|ja|zhs"}
+45 M Titania, Nature's Force @Heonhwa ${"lang": "en|fr|de|ja|zhs"}
+46 R The Archimandrite @Cristi Balanescu ${"lang": "en|fr|de|ja|zhs"}
+47 M Ashnod the Uncaring @Kieran Yanner ${"lang": "en|fr|de|ja|zhs"}
+48 M Mishra, Eminent One @Randy Vargas ${"lang": "en|fr|de|ja|zhs"}
+49 M Urza, Chief Artificer @Bartłomiej Gaweł ${"lang": "en|fr|de|ja|zhs"}
+50 R Staff of Titania @Samuel Perin ${"lang": "en|de"}
+51 R Urza's Workshop @Alexander Forssberg ${"lang": "en|fr|de|ja|zhs"}
+52 R Sanwell, Avenger Ace @Josu Hernaiz ${"lang": "en|fr|de|ja|zhs"}
+53 R Scholar of New Horizons @Randy Vargas ${"lang": "en|fr|de|ja|zhs"}
+54 R Glint Raker @Lars Grant-West ${"lang": "en|fr|de|ja|zhs"}
+55 R March of Progress @Ben Wootten ${"lang": "en|fr|de|ja|zhs"}
+56 R Terisiare's Devastation @Bram Sels ${"lang": "en|fr|de|ja|zhs"}
+57 R Wire Surgeons @Josu Hernaiz ${"lang": "en|fr|de|ja|zhs"}
+58 R Wreck Hunter @Josu Hernaiz ${"lang": "en|fr|de|ja|zhs"}
+59 R Blast-Furnace Hellkite @Aldo Domínguez ${"lang": "en|fr|de|ja|zhs"}
+60 R Farid, Enterprising Salvager @Bruno Biazotto ${"lang": "en|fr|de|ja|zhs"}
+61 R Hexavus @Mark Tedin ${"lang": "en|fr|de|ja|zhs"}
+62 R Kayla's Music Box @Aaron Miller ${"lang": "en|fr|de|ja|zhs"}
+63 R Machine God's Effigy @Martin de Diego Sádaba ${"lang": "en|fr|de|ja|zhs"}
+64 R Scavenged Brawler @Craig J Spearing ${"lang": "en|fr|de|ja|zhs"}
+65 R Smelting Vat @Robin Olausson ${"lang": "en|fr|de|ja|zhs"}
+66 R Thopter Shop @Craig J Spearing ${"lang": "en|fr|de|ja|zhs"}
+67 R Wondrous Crucible @Evan Shipard ${"lang": "en|fr|de|ja|zhs"}
 68 R Angel of the Ruins @Viko Menezes
 69 R Austere Command @Anna Steinbauer
 70 R Bronze Guardian @Grzegorz Rutkowski
@@ -115,7 +116,7 @@ ScryfallCode=BRC
 109 R Marionette Master @James Ryman
 110 M Noxious Gearhulk @Lius Lasahido
 111 U Abrade @Jonas De Ro
-112 R Audacious Reshapers @Justyna Dura
+112 R Audacious Reshapers @Justyna Dura ${"lang": "en|de"}
 113 R Blasphemous Act @Daarken
 114 R Chaos Warp @Trevor Claxton
 115 R Cursed Mirror @David Gaillet
@@ -187,7 +188,7 @@ ScryfallCode=BRC
 181 R Darkwater Catacombs @Monte Michael Moore
 182 U Dimir Aqueduct @John Avon
 183 C Drossforge Bridge @Raoul Vitale
-184 C Evolving Wilds @Steven Belledin
+184 C Evolving Wilds @Steven Belledin ${"lang": "en|de"}
 185 R Exotic Orchard @Steven Belledin
 186 C Goldmire Bridge @Aaron Miller
 187 C Great Furnace @Raymond Bonilla

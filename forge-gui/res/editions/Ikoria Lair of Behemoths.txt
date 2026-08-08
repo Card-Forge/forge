@@ -7,6 +7,7 @@ BoosterCovers=3
 Booster=10 Common:fromSheet("IKO cards"):!fromSheet("IKO Lands"), 3 Uncommon:fromSheet("IKO cards"), 1 RareMythic:fromSheet("IKO cards"), 1 fromSheet("IKO Lands")
 Prerelease=6 Boosters, 1 RareMythic+
 FatPackExtraSlots=20 BasicLands, 20 BasicLands+
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 C Adaptive Shimmerer @Jason Felix
@@ -289,110 +290,110 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 275y M Zilortha, Strength Incarnate @Chase Stone
 
 [borderless]
-276 M Lukka, Coppercoat Outcast @Kieran Yanner
-277 M Vivien, Monsters' Advocate @Kev Walker
-278 M Narset of the Ancient Way @Kev Walker
+276 M Lukka, Coppercoat Outcast @Kieran Yanner ${"lang": "en"}
+277 M Vivien, Monsters' Advocate @Kev Walker ${"lang": "en"}
+278 M Narset of the Ancient Way @Kev Walker ${"lang": "en"}
 
 [showcase]
-279 R Cubwarden @Denis Medri
-280 U Huntmaster Liger @Steve Ellis
-281 U Majestic Auricorn @Steve Ellis
-282 C Vulpikeet @Justine Mara Andersen
-283 U Archipelagore @Kev Walker
-284 C Dreamtail Heron @Tomasz Jedruszek
-285 U Pouncing Shoreshark @Daniel Warren Johnson
-286 R Sea-Dasher Octopus @Antonio Bravo
-287 C Cavern Whisperer @Steve Ellis
-288 U Chittering Harvester @Carl Critchlow
-289 R Dirge Bat @Kev Walker
-290 U Insatiable Hemophage @Steve Ellis
-291 C Cloudpiercer @Steve Ellis
-292 R Everquill Phoenix @Daniel Warren Johnson
-293 U Porcuparrot @Denis Medri
-294 U Auspicious Starrix @Justine Mara Andersen
-295 R Gemrazer @Andrew Huerta
-296 U Glowstone Recluse @Denis Medri
-297 C Migratory Greathorn @Kev Walker
-298 U Boneyard Lurker @Carl Critchlow
-299 M Brokkos, Apex of Forever @Daniel Warren Johnson
-300 M Illuna, Apex of Wishes @Justine Mara Andersen
-301 U Lore Drakkis @Andrew Huerta
-302 U Necropanther @Kev Walker
-303 M Nethroi, Apex of Death @Tomasz Jedruszek
-304 U Parcelbeast @Justine Mara Andersen
-305 U Regal Leosaur @Tomasz Jedruszek
-306 M Snapdax, Apex of the Hunt @Andrew Huerta
-307 U Trumpeting Gnarr @Justine Mara Andersen
-308 M Vadrok, Apex of Thunder @Tomasz Jedruszek
-309 R Indatha Triome @Robbie Trevino
-310 R Ketria Triome @Robbie Trevino
-311 R Raugrin Triome @Robbie Trevino
-312 R Savai Triome @Robbie Trevino
-313 R Zagoth Triome @Robbie Trevino
+279 R Cubwarden @Denis Medri ${"lang": "en"}
+280 U Huntmaster Liger @Steve Ellis ${"lang": "en"}
+281 U Majestic Auricorn @Steve Ellis ${"lang": "en"}
+282 C Vulpikeet @Justine Mara Andersen ${"lang": "en"}
+283 U Archipelagore @Kev Walker ${"lang": "en"}
+284 C Dreamtail Heron @Tomasz Jedruszek ${"lang": "en"}
+285 U Pouncing Shoreshark @Daniel Warren Johnson ${"lang": "en"}
+286 R Sea-Dasher Octopus @Antonio Bravo ${"lang": "en"}
+287 C Cavern Whisperer @Steve Ellis ${"lang": "en"}
+288 U Chittering Harvester @Carl Critchlow ${"lang": "en"}
+289 R Dirge Bat @Kev Walker ${"lang": "en"}
+290 U Insatiable Hemophage @Steve Ellis ${"lang": "en"}
+291 C Cloudpiercer @Steve Ellis ${"lang": "en"}
+292 R Everquill Phoenix @Daniel Warren Johnson ${"lang": "en"}
+293 U Porcuparrot @Denis Medri ${"lang": "en"}
+294 U Auspicious Starrix @Justine Mara Andersen ${"lang": "en"}
+295 R Gemrazer @Andrew Huerta ${"lang": "en"}
+296 U Glowstone Recluse @Denis Medri ${"lang": "en"}
+297 C Migratory Greathorn @Kev Walker ${"lang": "en"}
+298 U Boneyard Lurker @Carl Critchlow ${"lang": "en"}
+299 M Brokkos, Apex of Forever @Daniel Warren Johnson ${"lang": "en"}
+300 M Illuna, Apex of Wishes @Justine Mara Andersen ${"lang": "en"}
+301 U Lore Drakkis @Andrew Huerta ${"lang": "en"}
+302 U Necropanther @Kev Walker ${"lang": "en"}
+303 M Nethroi, Apex of Death @Tomasz Jedruszek ${"lang": "en"}
+304 U Parcelbeast @Justine Mara Andersen ${"lang": "en"}
+305 U Regal Leosaur @Tomasz Jedruszek ${"lang": "en"}
+306 M Snapdax, Apex of the Hunt @Andrew Huerta ${"lang": "en"}
+307 U Trumpeting Gnarr @Justine Mara Andersen ${"lang": "en"}
+308 M Vadrok, Apex of Thunder @Tomasz Jedruszek ${"lang": "en"}
+309 R Indatha Triome @Robbie Trevino ${"lang": "en"}
+310 R Ketria Triome @Robbie Trevino ${"lang": "en"}
+311 R Raugrin Triome @Robbie Trevino ${"lang": "en"}
+312 R Savai Triome @Robbie Trevino ${"lang": "en"}
+313 R Zagoth Triome @Robbie Trevino ${"lang": "en"}
 
 [extended art]
-314 R Drannith Magistrate @Kieran Yanner
-315 R Lavabrink Venturer @Zoltan Boros
-316 M Luminous Broodmoth @Lie Setiawan
-317 R Mythos of Snapdax @Seb McKinnon
-318 R Mythos of Illuna @Seb McKinnon
-319 R Shark Typhoon @Caio Monteiro
-320 R Voracious Greatshark @Mathias Kollros
-321 R Extinction Event @Filip Burburan
-322 R Hunted Nightmare @Antonio José Manzanedo
-323 R Mythos of Nethroi @Seb McKinnon
-324 R Mythos of Vadrok @Seb McKinnon
-325 R Unpredictable Cyclone @Noah Bradley
-326 R Yidaro, Wandering Monster @Jesper Ejsing
-327 R Colossification @Johan Grenier
-328 R Kogla, the Titan Ape @Chris Rahn
-329 R Mythos of Brokkos @Seb McKinnon
-330 M Chevill, Bane of Monsters @Yongjae Choi
-331 R Death's Oasis @Grzegorz Rutkowski
-332 R Eerie Ultimatum @Jason A. Engle
-333 R Emergent Ultimatum @Zack Stella
-334 R Frondland Felidar @Steve Prescott
-335 M General Kudro of Drannith @Ryan Pancoast
-336 R Genesis Ultimatum @Jason Rainville
-337 R Inspired Ultimatum @Tyler Jacobson
-338 M Kinnan, Bonder Prodigy @Jason Rainville
-339 R Labyrinth Raptor @Daarken
-340 R Offspring's Revenge @Daarken
-341 R Quartzwood Crasher @Antonio José Manzanedo
-342 M Rielle, the Everwise @Yongjae Choi
-343 R Ruinous Ultimatum @Chase Stone
-344 R Skycat Sovereign @Slawomir Maniak
-345 R Slitherwisp @Yigit Koroglu
-346 R Song of Creation @Noah Bradley
-347 R Titans' Nest @Cliff Childs
-348 R Whirlwind of Thought @Bram Sels
-349 M Winota, Joiner of Forces @Magali Villeneuve
-350 M Fiend Artisan @Yigit Koroglu
-351 R Gyruda, Doom of Depths @Tyler Jacobson
-352 R Jegantha, the Wellspring @Chris Rahn
-353 R Kaheera, the Orphanguard @Ryan Pancoast
-354 R Keruga, the Macrosage @Dan Murayama Scott
-355 R Lurrus of the Dream-Den @Slawomir Maniak
-356 R Lutri, the Spellchaser @Lie Setiawan
-357 R Obosh, the Preypiercer @Daarken
-358 R Umori, the Collector @Jehan Choo
-359 R Yorion, Sky Nomad @Steven Belledin
-360 R Zirda, the Dawnwaker @Jesper Ejsing
-361 R Crystalline Giant @Jason Rainville
-362 R The Ozolith @Sam Burley
-363 R Bonders' Enclave @Cliff Childs
+314 R Drannith Magistrate @Kieran Yanner ${"lang": "en"}
+315 R Lavabrink Venturer @Zoltan Boros ${"lang": "en"}
+316 M Luminous Broodmoth @Lie Setiawan ${"lang": "en"}
+317 R Mythos of Snapdax @Seb McKinnon ${"lang": "en"}
+318 R Mythos of Illuna @Seb McKinnon ${"lang": "en"}
+319 R Shark Typhoon @Caio Monteiro ${"lang": "en"}
+320 R Voracious Greatshark @Mathias Kollros ${"lang": "en"}
+321 R Extinction Event @Filip Burburan ${"lang": "en"}
+322 R Hunted Nightmare @Antonio José Manzanedo ${"lang": "en"}
+323 R Mythos of Nethroi @Seb McKinnon ${"lang": "en"}
+324 R Mythos of Vadrok @Seb McKinnon ${"lang": "en"}
+325 R Unpredictable Cyclone @Noah Bradley ${"lang": "en"}
+326 R Yidaro, Wandering Monster @Jesper Ejsing ${"lang": "en"}
+327 R Colossification @Johan Grenier ${"lang": "en"}
+328 R Kogla, the Titan Ape @Chris Rahn ${"lang": "en"}
+329 R Mythos of Brokkos @Seb McKinnon ${"lang": "en"}
+330 M Chevill, Bane of Monsters @Yongjae Choi ${"lang": "en"}
+331 R Death's Oasis @Grzegorz Rutkowski ${"lang": "en"}
+332 R Eerie Ultimatum @Jason A. Engle ${"lang": "en"}
+333 R Emergent Ultimatum @Zack Stella ${"lang": "en"}
+334 R Frondland Felidar @Steve Prescott ${"lang": "en"}
+335 M General Kudro of Drannith @Ryan Pancoast ${"lang": "en"}
+336 R Genesis Ultimatum @Jason Rainville ${"lang": "en"}
+337 R Inspired Ultimatum @Tyler Jacobson ${"lang": "en"}
+338 M Kinnan, Bonder Prodigy @Jason Rainville ${"lang": "en"}
+339 R Labyrinth Raptor @Daarken ${"lang": "en"}
+340 R Offspring's Revenge @Daarken ${"lang": "en"}
+341 R Quartzwood Crasher @Antonio José Manzanedo ${"lang": "en"}
+342 M Rielle, the Everwise @Yongjae Choi ${"lang": "en"}
+343 R Ruinous Ultimatum @Chase Stone ${"lang": "en"}
+344 R Skycat Sovereign @Slawomir Maniak ${"lang": "en"}
+345 R Slitherwisp @Yigit Koroglu ${"lang": "en"}
+346 R Song of Creation @Noah Bradley ${"lang": "en"}
+347 R Titans' Nest @Cliff Childs ${"lang": "en"}
+348 R Whirlwind of Thought @Bram Sels ${"lang": "en"}
+349 M Winota, Joiner of Forces @Magali Villeneuve ${"lang": "en"}
+350 M Fiend Artisan @Yigit Koroglu ${"lang": "en"}
+351 R Gyruda, Doom of Depths @Tyler Jacobson ${"lang": "en"}
+352 R Jegantha, the Wellspring @Chris Rahn ${"lang": "en"}
+353 R Kaheera, the Orphanguard @Ryan Pancoast ${"lang": "en"}
+354 R Keruga, the Macrosage @Dan Murayama Scott ${"lang": "en"}
+355 R Lurrus of the Dream-Den @Slawomir Maniak ${"lang": "en"}
+356 R Lutri, the Spellchaser @Lie Setiawan ${"lang": "en"}
+357 R Obosh, the Preypiercer @Daarken ${"lang": "en"}
+358 R Umori, the Collector @Jehan Choo ${"lang": "en"}
+359 R Yorion, Sky Nomad @Steven Belledin ${"lang": "en"}
+360 R Zirda, the Dawnwaker @Jesper Ejsing ${"lang": "en"}
+361 R Crystalline Giant @Jason Rainville ${"lang": "en"}
+362 R The Ozolith @Sam Burley ${"lang": "en"}
+363 R Bonders' Enclave @Cliff Childs ${"lang": "en"}
 
 [promo]
-364 R Colossification @Mathias Kollros
-365 U Flourishing Fox @Ilse Gort
-366 U Heartless Act @Ryan Pancoast
-367 C Forbidden Friendship @Jakub Kasper
-368 U Migration Path @Grzegorz Rutkowski
-369 U Sprite Dragon @Gabor Szikszai
+364 R Colossification @Mathias Kollros ${"lang": "en"}
+365 U Flourishing Fox @Ilse Gort ${"lang": "en"}
+366 U Heartless Act @Ryan Pancoast ${"lang": "en"}
+367 C Forbidden Friendship @Jakub Kasper ${"lang": "en"}
+368 U Migration Path @Grzegorz Rutkowski ${"lang": "en"}
+369 U Sprite Dragon @Gabor Szikszai ${"lang": "en"}
 370 U Huntmaster Liger @Slawomir Maniak ${"flavorName": "King Caesar, Ancient Guardian"}
 371 M Luminous Broodmoth @Nick Southam ${"flavorName": "Mothra, Supersonic Queen"}
 372 U Pollywog Symbiote @Simon Dominic ${"flavorName": "Babygodzilla, Ruin Reborn"}
-373 U Void Beckoner @Zezhou Chen ${"flavorName": "Spacegodzilla, Death Corona"}
+373 U Void Beckoner @Zezhou Chen ${"flavorname": "Spacegodzilla, Death Corona", "lang": "en"}
 373A U Void Beckoner @Zezhou Chen ${"flavorName": "Spacegodzilla, Void Invader"}
 374 R Everquill Phoenix @JOZ ${"flavorName": "Destoroyah, Perfect Lifeform"}
 375 R Yidaro, Wandering Monster @Yigit Koroglu ${"flavorName": "Godzilla, Doom Inevitable"}
@@ -403,11 +404,11 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 380 M Nethroi, Apex of Death @Torstein Nordstrand ${"flavorName": "Biollante, Plant Beast Form"}
 381 M Snapdax, Apex of the Hunt @YW Tang ${"flavorName": "King Caesar, Awoken Titan"}
 382 U Sprite Dragon @Simon Dominic ${"flavorName": "Dorat, the Perfect Pet"}
-383 M Vadrok, Apex of Thunder @Johann Bodin ${"flavorName": "Rodan, Titan of Winged Fury"}
+383 M Vadrok, Apex of Thunder @Johann Bodin ${"flavorname": "Rodan, Titan of Winged Fury", "lang": "en"}
 384 R Gyruda, Doom of Depths @Jesper Ejsing ${"flavorName": "Gigan, Cyberclaw Terror"}
-385 C Mysterious Egg @Yoroikoji ${"flavorName": "Mothra's Great Cocoon"}
-386 R Dirge Bat @Kohei Hayama ${"flavorName": "Battra, Dark Destroyer"}
-387 R Crystalline Giant @Kotakan ${"flavorName": "Mechagodzilla, the Weapon"}
+385 C Mysterious Egg @Yoroikoji ${"flavorname": "Mothra's Great Cocoon", "lang": "ja"}
+386 R Dirge Bat @Kohei Hayama ${"flavorname": "Battra, Dark Destroyer", "lang": "ja"}
+387 R Crystalline Giant @Kotakan ${"flavorname": "Mechagodzilla, the Weapon", "lang": "ja"}
 
 [rebalanced]
 A-216 M A-Winota, Joiner of Forces @Magali Villeneuve

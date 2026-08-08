@@ -4,6 +4,7 @@ Date=2024-04-19
 Name=The Big Score
 Type=Expansion
 ScryfallCode=BIG
+CardLang=en,fr,de,ja,zhs
 
 [cards]
 1 M Collector's Cage @Bartek Fedyczak
@@ -68,11 +69,11 @@ ScryfallCode=BIG
 58 M Transmutation Font @David Astruga
 59 M Fomori Vault @Pablo Rivera
 60 M Tarnation Vista @Artur Nakhodkin
-61 M Vaultborn Tyrant @Simon Dominic
-62 M Loot, the Key to Everything @Gaboleps
-63 M Lotus Ring @Ben Hill
-64 M Sword of Wealth and Power @Artur Nakhodkin
-65 M Tarnation Vista @Artur Nakhodkin
+61 M Vaultborn Tyrant @Simon Dominic ${"lang": "en"}
+62 M Loot, the Key to Everything @Gaboleps ${"lang": "en"}
+63 M Lotus Ring @Ben Hill ${"lang": "en"}
+64 M Sword of Wealth and Power @Artur Nakhodkin ${"lang": "en"}
+65 M Tarnation Vista @Artur Nakhodkin ${"lang": "en"}
 
 [extended art]
 66 M Collector's Cage @Bartek Fedyczak

@@ -10,6 +10,7 @@ BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard
 Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 Wildcard+
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
+CardLang=en,es,fr,de,it,ja
 
 [Common]
 Base=Common:fromSheet("DSK cards")
@@ -390,31 +391,31 @@ Replace=.078F RareMythic:fromSheet("DSK cards")
 365 R Winter, Misanthropic Guide @Sam Wolfe Connelly
 366 R Zimone, All-Questioning @Sam Wolfe Connelly
 367 R Marvin, Murderous Mimic @Sam Wolfe Connelly
-386 M Enduring Innocence @Kawasumi
-387 M Overlord of the Mistmoors @Takeuchi Moto
-388 M Enduring Curiosity @D-suzuki
-389 M Overlord of the Floodpits @Sansyu
-390 M Enduring Tenacity @TAPIOCA
-391 M Overlord of the Balemurk @Mikio Masuda
-392 M Enduring Courage @Nuisuke
-393 M Overlord of the Boilerbilges @akio
-394 M Enduring Vitality @Issei Murakami
-395 M Overlord of the Hauntwoods @Aogachou
-396 M Enduring Innocence @Kawasumi
-397 M Overlord of the Mistmoors @Takeuchi Moto
-398 M Enduring Curiosity @D-suzuki
-399 M Overlord of the Floodpits @Sansyu
-400 M Enduring Tenacity @TAPIOCA
-401 M Overlord of the Balemurk @Mikio Masuda
-402 M Enduring Courage @Nuisuke
-403 M Overlord of the Boilerbilges @akio
-404 M Enduring Vitality @Issei Murakami
-405 M Overlord of the Hauntwoods @Aogachou
-406 M The Wandering Rescuer @Vance Kelly
-407 M Valgavoth, Terror Eater @Pig Hands
-408 M Tyvar, the Pummeler @Richard Luong
-409 M Kaito, Bane of Nightmares @Richard Luong
-410 M Niko, Light of Hope @Vance Kelly
+386 M Enduring Innocence @Kawasumi ${"lang": "en|ja"}
+387 M Overlord of the Mistmoors @Takeuchi Moto ${"lang": "en|ja"}
+388 M Enduring Curiosity @D-suzuki ${"lang": "en|ja"}
+389 M Overlord of the Floodpits @Sansyu ${"lang": "en|ja"}
+390 M Enduring Tenacity @TAPIOCA ${"lang": "en|ja"}
+391 M Overlord of the Balemurk @Mikio Masuda ${"lang": "en|ja"}
+392 M Enduring Courage @Nuisuke ${"lang": "en|ja"}
+393 M Overlord of the Boilerbilges @akio ${"lang": "en|ja"}
+394 M Enduring Vitality @Issei Murakami ${"lang": "en|ja"}
+395 M Overlord of the Hauntwoods @Aogachou ${"lang": "en|ja"}
+396 M Enduring Innocence @Kawasumi ${"lang": "en|ja"}
+397 M Overlord of the Mistmoors @Takeuchi Moto ${"lang": "en|ja"}
+398 M Enduring Curiosity @D-suzuki ${"lang": "en|ja"}
+399 M Overlord of the Floodpits @Sansyu ${"lang": "en|ja"}
+400 M Enduring Tenacity @TAPIOCA ${"lang": "en|ja"}
+401 M Overlord of the Balemurk @Mikio Masuda ${"lang": "en|ja"}
+402 M Enduring Courage @Nuisuke ${"lang": "en|ja"}
+403 M Overlord of the Boilerbilges @akio ${"lang": "en|ja"}
+404 M Enduring Vitality @Issei Murakami ${"lang": "en|ja"}
+405 M Overlord of the Hauntwoods @Aogachou ${"lang": "en|ja"}
+406 M The Wandering Rescuer @Vance Kelly ${"lang": "en"}
+407 M Valgavoth, Terror Eater @Pig Hands ${"lang": "en"}
+408 M Tyvar, the Pummeler @Richard Luong ${"lang": "en"}
+409 M Kaito, Bane of Nightmares @Richard Luong ${"lang": "en"}
+410 M Niko, Light of Hope @Vance Kelly ${"lang": "en"}
 
 [borderless]
 328 M Kaito, Bane of Nightmares @Marta Nael
@@ -442,37 +443,37 @@ Replace=.078F RareMythic:fromSheet("DSK cards")
 350 R Undead Sprinter @John Thacker
 
 [extended art]
-368 R Enduring Innocence @Liiga Smilshkalne
-369 R Leyline of Hope @Sergey Glushakov
-370 M Overlord of the Mistmoors @Steven Belledin
-371 R Enduring Curiosity @Julie Dillon
-372 R Leyline of Transformation @Sergey Glushakov
-373 M Overlord of the Floodpits @Abz J Harding
-374 R Enduring Tenacity @Isis
-375 R Grievous Wound @Martina Fačková
-376 R Leyline of the Void @Sergey Glushakov
-377 M Overlord of the Balemurk @Babs Webb
-378 R Enduring Courage @Yigit Koroglu
-379 R Leyline of Resonance @Sergey Glushakov
-380 M Overlord of the Boilerbilges @Helge C. Balzer
-381 R Enduring Vitality @Valera Lutfullina
-382 R Leyline of Mutation @Sergey Glushakov
-383 M Overlord of the Hauntwoods @Tiffany Turrill
-384 R Twitching Doll @Warren Mahy
-385 R Dissection Tools @Diana Franco
+368 R Enduring Innocence @Liiga Smilshkalne ${"lang": "en|fr|de|ja"}
+369 R Leyline of Hope @Sergey Glushakov ${"lang": "en|fr|de|ja"}
+370 M Overlord of the Mistmoors @Steven Belledin ${"lang": "en|fr|de|ja"}
+371 R Enduring Curiosity @Julie Dillon ${"lang": "en|fr|de|ja"}
+372 R Leyline of Transformation @Sergey Glushakov ${"lang": "en|fr|de|ja"}
+373 M Overlord of the Floodpits @Abz J Harding ${"lang": "en|fr|de|ja"}
+374 R Enduring Tenacity @Isis ${"lang": "en|fr|de|ja"}
+375 R Grievous Wound @Martina Fačková ${"lang": "en|fr|de|ja"}
+376 R Leyline of the Void @Sergey Glushakov ${"lang": "en|fr|de|ja"}
+377 M Overlord of the Balemurk @Babs Webb ${"lang": "en|fr|de|ja"}
+378 R Enduring Courage @Yigit Koroglu ${"lang": "en|fr|de|ja"}
+379 R Leyline of Resonance @Sergey Glushakov ${"lang": "en|fr|de|ja"}
+380 M Overlord of the Boilerbilges @Helge C. Balzer ${"lang": "en|fr|de|ja"}
+381 R Enduring Vitality @Valera Lutfullina ${"lang": "en|fr|de|ja"}
+382 R Leyline of Mutation @Sergey Glushakov ${"lang": "en|fr|de|ja"}
+383 M Overlord of the Hauntwoods @Tiffany Turrill ${"lang": "en|fr|de|ja"}
+384 R Twitching Doll @Warren Mahy ${"lang": "en|fr|de|ja"}
+385 R Dissection Tools @Diana Franco ${"lang": "en|fr|de|ja"}
 
 [promo]
-411 U Shardmage's Rescue @Jarel Threat
-412 U Valgavoth's Faithful @Jodie Muir
-413 U Pyroclasm @Néstor Ossandón Leal
-414 U Drag to the Roots @Deruchenko Alexander
-415 U Inquisitive Glimmer @Julie Dillon
+411 U Shardmage's Rescue @Jarel Threat ${"lang": "en|ja"}
+412 U Valgavoth's Faithful @Jodie Muir ${"lang": "en|ja"}
+413 U Pyroclasm @Néstor Ossandón Leal ${"lang": "en|ja"}
+414 U Drag to the Roots @Deruchenko Alexander ${"lang": "en|ja"}
+415 U Inquisitive Glimmer @Julie Dillon ${"lang": "en|ja"}
 
 [bundle]
-416 R Grievous Wound @Fajareka Setiawan
+416 R Grievous Wound @Fajareka Setiawan ${"lang": "en|fr|de"}
 
 [buy a box]
-417 R Twitching Doll @John Tedrick
+417 R Twitching Doll @John Tedrick ${"lang": "en|ja"}
 
 [rebalanced]
 A-143 R A-Leyline of Resonance @Sergey Glushakov

@@ -6,6 +6,7 @@ Type=Draft
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 fromSheet("BBD RareMythicDistribution"), 1 BasicLand
 ScryfallCode=BBD
+CardLang=en,ja,zhs
 
 [cards]
 1 M Will Kenrith @Anna Steinbauer
@@ -264,8 +265,8 @@ ScryfallCode=BBD
 254 L Forest @Titus Lunter
 
 [etched]
-255 M Will Kenrith @Anna Steinbauer
-256 M Rowan Kenrith @Anna Steinbauer
+255 M Will Kenrith @Anna Steinbauer ${"lang": "en"}
+256 M Rowan Kenrith @Anna Steinbauer ${"lang": "en"}
 
 [RareMythicDistribution]
 1 Will Kenrith|BBD|[1]

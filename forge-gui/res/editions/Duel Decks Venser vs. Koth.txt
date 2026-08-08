@@ -4,6 +4,7 @@ Date=2012-03-30
 Name=Duel Decks: Venser vs. Koth
 Type=Duel_Deck
 ScryfallCode=DDI
+CardLang=en,ja
 
 [cards]
 1 M Venser, the Sojourner @Eric Deschamps

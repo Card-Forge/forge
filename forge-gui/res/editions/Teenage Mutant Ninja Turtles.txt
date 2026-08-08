@@ -11,6 +11,7 @@ BoosterSlots=Common,Common-SourceMaterial,Common-Scene,Uncommon,LegendaryTurtle,
 Booster=5 Common, 1 Common-SourceMaterial, 1 Common-Scene, 2 Uncommon, 1 LegendaryTurtle, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
+CardLang=en,es,fr,de,it,ja
 
 [Common]
 Base=Common:fromSheet("TMT cards"):!fromSheet("TMT legendary turtles")
@@ -339,75 +340,75 @@ Replace=0.08 fromSheet("TMT rooftop lands")+
 255 L Swamp @Gaboleps
 256 L Mountain @Gaboleps
 257 L Forest @Gaboleps
-301 M Leonardo, Sewer Samurai @Kevin Eastman
-302 M Donatello, Mutant Mechanic @Kevin Eastman
-303 M Raphael, Ninja Destroyer @Kevin Eastman
-304 M Michelangelo, Improviser @Kevin Eastman
-305 L Plains @BEMOCS
-306 L Island @BEMOCS
-307 L Swamp @BEMOCS
-308 L Mountain @BEMOCS
-309 L Forest @BEMOCS
-310 L Plains @Gaboleps
-311 L Island @Gaboleps
-312 L Swamp @Gaboleps
-313 L Mountain @Gaboleps
-314 L Forest @Gaboleps
-315 L Plains @Sylvain Sarrailh
-316 L Island @Sylvain Sarrailh
-317 L Swamp @Sylvain Sarrailh
-318 L Mountain @Sylvain Sarrailh
-319 L Forest @Sylvain Sarrailh
+301 M Leonardo, Sewer Samurai @Kevin Eastman ${"lang": "en"}
+302 M Donatello, Mutant Mechanic @Kevin Eastman ${"lang": "en"}
+303 M Raphael, Ninja Destroyer @Kevin Eastman ${"lang": "en"}
+304 M Michelangelo, Improviser @Kevin Eastman ${"lang": "en"}
+305 L Plains @BEMOCS ${"lang": "en"}
+306 L Island @BEMOCS ${"lang": "en"}
+307 L Swamp @BEMOCS ${"lang": "en"}
+308 L Mountain @BEMOCS ${"lang": "en"}
+309 L Forest @BEMOCS ${"lang": "en"}
+310 L Plains @Gaboleps ${"lang": "en"}
+311 L Island @Gaboleps ${"lang": "en"}
+312 L Swamp @Gaboleps ${"lang": "en"}
+313 L Mountain @Gaboleps ${"lang": "en"}
+314 L Forest @Gaboleps ${"lang": "en"}
+315 L Plains @Sylvain Sarrailh ${"lang": "en"}
+316 L Island @Sylvain Sarrailh ${"lang": "en"}
+317 L Swamp @Sylvain Sarrailh ${"lang": "en"}
+318 L Mountain @Sylvain Sarrailh ${"lang": "en"}
+319 L Forest @Sylvain Sarrailh ${"lang": "en"}
 
 [extended art]
-258 R Agent Bishop, Man in Black @Adrián Rodríguez Pérez
-259 R Prehistoric Pet @Jakob Eirich
-260 R Turncoat Kunoichi @Manuel Castañón
-261 R Turtles Forever @Devin Elle Kurtz
-262 R Kitsune, Dragon's Daughter @Robin Har
-263 M Turtles in Time @Inkognit
-264 R Armaggon, Future Shark @Mathias Kollros
-265 R Madame Null, Power Broker @Irina Nordsol
-266 R Rat King, Verminister @Miklós Ligeti
-267 R Savanti Romero, Time's Exile @Michele Giorgi
-268 R Shark Shredder, Killer Clone @Nicholas Gregory
-269 R South Wind Avatar @InHyuk Lee
-270 R Improvised Arsenal @Leanna Crossan
-271 R Ravenous Robots @Kevin Sidharta
-272 R Leatherhead, Swamp Stalker @Lie Setiawan
-273 R Mutagen Man, Living Ooze @Ignatius Budi
-274 R Transdimensional Bovine @Lius Lasahido
-275 R Turtle Power! @Hokyoung Kim
-276 R Chrome Dome @Mathias Kollros
-277 R The Ooze @Gabriel Tanko
-278 R Turtle Van @Jakob Eirich
-279 R Weather Maker @Florent Lebrun
-280 R Northampton Farm @Marina Ortega Lorente
+258 R Agent Bishop, Man in Black @Adrián Rodríguez Pérez ${"lang": "en|fr|de|ja"}
+259 R Prehistoric Pet @Jakob Eirich ${"lang": "en|fr|de|ja"}
+260 R Turncoat Kunoichi @Manuel Castañón ${"lang": "en|fr|de|ja"}
+261 R Turtles Forever @Devin Elle Kurtz ${"lang": "en"}
+262 R Kitsune, Dragon's Daughter @Robin Har ${"lang": "en"}
+263 M Turtles in Time @Inkognit ${"lang": "en"}
+264 R Armaggon, Future Shark @Mathias Kollros ${"lang": "en"}
+265 R Madame Null, Power Broker @Irina Nordsol ${"lang": "en|fr|de|ja"}
+266 R Rat King, Verminister @Miklós Ligeti ${"lang": "en"}
+267 R Savanti Romero, Time's Exile @Michele Giorgi ${"lang": "en"}
+268 R Shark Shredder, Killer Clone @Nicholas Gregory ${"lang": "en"}
+269 R South Wind Avatar @InHyuk Lee ${"lang": "en"}
+270 R Improvised Arsenal @Leanna Crossan ${"lang": "en|fr|de|ja"}
+271 R Ravenous Robots @Kevin Sidharta ${"lang": "en"}
+272 R Leatherhead, Swamp Stalker @Lie Setiawan ${"lang": "en"}
+273 R Mutagen Man, Living Ooze @Ignatius Budi ${"lang": "en"}
+274 R Transdimensional Bovine @Lius Lasahido ${"lang": "en"}
+275 R Turtle Power! @Hokyoung Kim ${"lang": "en"}
+276 R Chrome Dome @Mathias Kollros ${"lang": "en"}
+277 R The Ooze @Gabriel Tanko ${"lang": "en"}
+278 R Turtle Van @Jakob Eirich ${"lang": "en"}
+279 R Weather Maker @Florent Lebrun ${"lang": "en"}
+280 R Northampton Farm @Marina Ortega Lorente ${"lang": "en"}
 
 [showcase]
-281 M Leonardo, Cutting Edge @A4Mitsuori
-282 M April O'Neil, Hacktivist @Ryo Kamei
-283 M Donatello, Gadget Master @Kotakan
-284 M Turtles in Time @Sansyu
-285 M Super Shredder @Inuchiyo Meimaru
-286 M Casey Jones, Vigilante @Koji Nishino
-287 M Raphael, the Nightwatcher @Dai-XT
-288 M Michelangelo, Weirdness to 11 @O-G Osahune
-289 M Dark Leo & Shredder @Yukke Morita
-290 M Krang, Utrom Warlord @Taka-F
-291 M Leonardo, Cutting Edge @A4Mitsuori
-292 M April O'Neil, Hacktivist @Ryo Kamei
-293 M Donatello, Gadget Master @Kotakan
-294 M Turtles in Time @Sansyu
-295 M Super Shredder @Inuchiyo Meimaru
-296 M Casey Jones, Vigilante @Koji Nishino
-297 M Raphael, the Nightwatcher @Dai-XT
-298 M Michelangelo, Weirdness to 11 @O-G Osahune
-299 M Dark Leo & Shredder @Yukke Morita
-300 M Krang, Utrom Warlord @Taka-F
+281 M Leonardo, Cutting Edge @A4Mitsuori ${"lang": "en"}
+282 M April O'Neil, Hacktivist @Ryo Kamei ${"lang": "en"}
+283 M Donatello, Gadget Master @Kotakan ${"lang": "en"}
+284 M Turtles in Time @Sansyu ${"lang": "en"}
+285 M Super Shredder @Inuchiyo Meimaru ${"lang": "en"}
+286 M Casey Jones, Vigilante @Koji Nishino ${"lang": "en"}
+287 M Raphael, the Nightwatcher @Dai-XT ${"lang": "en"}
+288 M Michelangelo, Weirdness to 11 @O-G Osahune ${"lang": "en"}
+289 M Dark Leo & Shredder @Yukke Morita ${"lang": "en"}
+290 M Krang, Utrom Warlord @Taka-F ${"lang": "en"}
+291 M Leonardo, Cutting Edge @A4Mitsuori ${"lang": "en"}
+292 M April O'Neil, Hacktivist @Ryo Kamei ${"lang": "en"}
+293 M Donatello, Gadget Master @Kotakan ${"lang": "en"}
+294 M Turtles in Time @Sansyu ${"lang": "en"}
+295 M Super Shredder @Inuchiyo Meimaru ${"lang": "en"}
+296 M Casey Jones, Vigilante @Koji Nishino ${"lang": "en"}
+297 M Raphael, the Nightwatcher @Dai-XT ${"lang": "en"}
+298 M Michelangelo, Weirdness to 11 @O-G Osahune ${"lang": "en"}
+299 M Dark Leo & Shredder @Yukke Morita ${"lang": "en"}
+300 M Krang, Utrom Warlord @Taka-F ${"lang": "en"}
 
 [promo]
-320 R Shark Shredder, Killer Clone @Adam Volker
+320 R Shark Shredder, Killer Clone @Adam Volker ${"lang": "en"}
 
 [tokens]
 2 w_2_2_dinosaur_soldier @Filipe Pagliuso

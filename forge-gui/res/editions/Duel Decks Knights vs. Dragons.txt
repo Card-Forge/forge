@@ -4,6 +4,7 @@ Date=2011-04-01
 Name=Duel Decks: Knights vs. Dragons
 Type=Duel_Deck
 ScryfallCode=DDG
+CardLang=en,es,fr,de,it
 
 [cards]
 1 M Knight of the Reliquary @Wayne Reynolds
@@ -53,24 +54,24 @@ ScryfallCode=DDG
 45 L Forest @Larry Elmore
 46 L Forest @Michael Komarck
 47 M Bogardan Hellkite @Wayne Reynolds
-48 C Cinder Wall @Anthony S. Waters
-49 C Skirk Prospector @Doug Chaffee
+48 C Cinder Wall @Anthony S. Waters ${"lang": "en"}
+49 C Skirk Prospector @Doug Chaffee ${"lang": "en"}
 50 U Bloodmark Mentor @Dave Allsop
-51 C Fire-Belly Changeling @Randy Gallegos
-52 C Mudbutton Torchrunner @Steve Ellis
-53 U Dragonspeaker Shaman @Kev Walker
-54 U Dragon Whelp @Steven Belledin
-55 U Henge Guardian @Chippy
-56 R Voracious Dragon @Dominick Domingo
-57 C Bogardan Rager @Clint Langley
-58 R Mordant Dragon @Scott Chou
-59 R Kilnmouth Dragon @Carl Critchlow
-60 R Shivan Hellkite @Kev Walker
-61 R Thunder Dragon @Chris Rahn
-62 C Armillary Sphere @Franz Vohwinkel
-63 U Dragon's Claw @Alan Pollack
-64 U Breath of Darigaaz @Greg Hildebrandt & Tim Hildebrandt
-65 C Dragon Fodder @Jaime Jones
+51 C Fire-Belly Changeling @Randy Gallegos ${"lang": "en"}
+52 C Mudbutton Torchrunner @Steve Ellis ${"lang": "en"}
+53 U Dragonspeaker Shaman @Kev Walker ${"lang": "en"}
+54 U Dragon Whelp @Steven Belledin ${"lang": "en"}
+55 U Henge Guardian @Chippy ${"lang": "en"}
+56 R Voracious Dragon @Dominick Domingo ${"lang": "en"}
+57 C Bogardan Rager @Clint Langley ${"lang": "en"}
+58 R Mordant Dragon @Scott Chou ${"lang": "en"}
+59 R Kilnmouth Dragon @Carl Critchlow ${"lang": "en"}
+60 R Shivan Hellkite @Kev Walker ${"lang": "en"}
+61 R Thunder Dragon @Chris Rahn ${"lang": "en"}
+62 C Armillary Sphere @Franz Vohwinkel ${"lang": "en"}
+63 U Dragon's Claw @Alan Pollack ${"lang": "en"}
+64 U Breath of Darigaaz @Greg Hildebrandt & Tim Hildebrandt ${"lang": "en"}
+65 C Dragon Fodder @Jaime Jones ${"lang": "en"}
 66 U Punishing Fire @Greg Staples
 67 C Spitting Earth @Michael Koelsch
 68 U Captive Flame @Keith Garletts

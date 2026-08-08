@@ -13,6 +13,7 @@ TreatAsSmallSet=true
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=HOU
 TokenFallbackCode=AKH
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 C Act of Heroism @Magali Villeneuve
@@ -171,7 +172,7 @@ TokenFallbackCode=AKH
 154 R Reason // Believe @Daarken
 155 R Grind // Dust @Josh Hass
 156 R Refuse // Cooperate @Yongjae Choi
-157 R Driven // Despair @Winona Nelson
+157 R Driven // Despair @Winona Nelson ${"lang": "en|ru|zht"}
 158 R Abandoned Sarcophagus @Daarken
 159 U Crook of Condemnation @Ben Maier
 160 U Dagger of the Worthy @Tommy Arnold

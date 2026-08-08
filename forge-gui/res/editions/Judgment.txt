@@ -11,6 +11,7 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=JUD
+CardLang=en,es,fr,de,it,pt,ja,zhs,zht
 
 [cards]
 1 U Ancestor's Chosen @Pete Venters

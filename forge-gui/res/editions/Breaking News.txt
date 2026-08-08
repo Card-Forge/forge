@@ -4,6 +4,7 @@ Date=2024-04-19
 Name=Breaking News
 Type=Collector_Edition
 ScryfallCode=OTP
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 R Fell the Mighty @Magnus Jansson
@@ -71,21 +72,21 @@ ScryfallCode=OTP
 63 M Mindslaver @Gossip Goblin
 64 R Unlicensed Hearse @Sean Murray
 65 R Dust Bowl @Yohann Schepacz
-66 M Leyline Binding @Yohann Schepacz
-67 M Mana Drain @Florey
-68 M Mindbreak Trap @Arik Roper
-69 M Overwhelming Forces @Willem Hampson
-70 M Thoughtseize @William Tempest
-71 M Crackle with Power @Mark A. Nelson
-72 M Indomitable Creativity @Tyler Crook
-73 M Force of Vigor @Adam Volker
-74 M Anguished Unmaking @Arik Roper
-75 M Crime // Punishment @William Tempest
-76 M Fractured Identity @Yohann Schepacz
-77 M Oko, Thief of Crowns @Michael Walsh
-78 M Contagion Engine @Magnus Jansson
-79 M Grindstone @Alejandro Mirabal
-80 M Mindslaver @Gossip Goblin
+66 M Leyline Binding @Yohann Schepacz ${"lang": "en"}
+67 M Mana Drain @Florey ${"lang": "en"}
+68 M Mindbreak Trap @Arik Roper ${"lang": "en"}
+69 M Overwhelming Forces @Willem Hampson ${"lang": "en"}
+70 M Thoughtseize @William Tempest ${"lang": "en"}
+71 M Crackle with Power @Mark A. Nelson ${"lang": "en"}
+72 M Indomitable Creativity @Tyler Crook ${"lang": "en"}
+73 M Force of Vigor @Adam Volker ${"lang": "en"}
+74 M Anguished Unmaking @Arik Roper ${"lang": "en"}
+75 M Crime // Punishment @William Tempest ${"lang": "en"}
+76 M Fractured Identity @Yohann Schepacz ${"lang": "en"}
+77 M Oko, Thief of Crowns @Michael Walsh ${"lang": "en"}
+78 M Contagion Engine @Magnus Jansson ${"lang": "en"}
+79 M Grindstone @Alejandro Mirabal ${"lang": "en"}
+80 M Mindslaver @Gossip Goblin ${"lang": "en"}
 
 [tokens]
 1 rw_2_1_human_cleric_lifelink_haste @Suzanne Helmigh

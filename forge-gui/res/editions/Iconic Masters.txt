@@ -8,6 +8,7 @@ Booster=11 Common, 3 Uncommon, 1 RareMythic
 FoilChanceInBooster=100
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=IMA
+CardLang=en,ja,zhs
 
 [cards]
 1 C Scion of Ugin @Cliff Childs
