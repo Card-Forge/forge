@@ -1,11 +1,12 @@
 package forge.assets;
 
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Locale;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
@@ -14,6 +15,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
+import forge.util.Aggregates;
 import forge.util.ImageFetcher;
 
 public enum FSkinTexture implements FImage {
@@ -93,6 +95,14 @@ public enum FSkinTexture implements FImage {
     private static List<String> planechaseString;
     private boolean isloaded = false;
     private boolean hasError = false;
+    private FileHandle[] adventureBackgroundFiles;
+    private FileHandle adventureBackgroundFile;
+    private String adventureBackgroundFolderKey;
+    private static final FileHandle[] NO_FILES = new FileHandle[0];
+    private static final FilenameFilter IMAGE_FILES = (dir, name) -> {
+        String lowerCaseName = name.toLowerCase(Locale.ROOT);
+        return lowerCaseName.endsWith(".jpg") || lowerCaseName.endsWith(".jpeg") || lowerCaseName.endsWith(".png");
+    };
 
     FSkinTexture(String filename0, boolean repeat0, boolean isPlanechaseBG0) {
         filename = filename0;
@@ -130,10 +140,149 @@ public enum FSkinTexture implements FImage {
 
     public static void invalidateAdventureTextures() {
         for (FSkinTexture texture : ADVENTURE_BACKGROUNDS) {
-            texture.isloaded = false;
-            texture.texture = null;
-            texture.hasError = false;
+            texture.unloadAdventureBackground();
+            texture.adventureBackgroundFiles = null;
+            texture.adventureBackgroundFolderKey = null;
         }
+    }
+
+    private void unloadAdventureBackground() {
+        if (adventureBackgroundFile != null) {
+            String path = adventureBackgroundFile.path();
+            if (Forge.getAssets().manager().isLoaded(path)) {
+                Forge.getAssets().manager().unload(path);
+            } else {
+                Texture cached = Forge.getAssets().fallback_skins().remove(path);
+                if (cached != null) {
+                    cached.dispose();
+                }
+            }
+        }
+        adventureBackgroundFile = null;
+        texture = null;
+        isloaded = false;
+        hasError = false;
+    }
+
+    private String getAdventureBackgroundName() {
+        int extensionIndex = filename.lastIndexOf('.');
+        return extensionIndex < 0 || !filename.startsWith("adv_bg_") ? ""
+                : filename.substring("adv_bg_".length(), extensionIndex);
+    }
+
+    private static String normalizeAdventureBackgroundFolder(String folder) {
+        if (folder == null) {
+            return null;
+        }
+        String normalized = folder.trim().replace('\\', '/');
+        while (normalized.startsWith("./")) {
+            normalized = normalized.substring(2);
+        }
+        while (normalized.endsWith("/")) {
+            normalized = normalized.substring(0, normalized.length() - 1);
+        }
+        if (normalized.isEmpty() || normalized.startsWith("/")) {
+            return null;
+        }
+        for (String part : normalized.split("/")) {
+            if (part.equals("..")) {
+                return null;
+            }
+        }
+        return normalized;
+    }
+
+    private List<String> getAdventureBackgroundFolders(String subdirectory, List<String> preferredFolders) {
+        String backgroundName = getAdventureBackgroundName();
+        if (backgroundName.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<String> folders = new ArrayList<>();
+        if (preferredFolders != null) {
+            for (String preferredFolder : preferredFolders) {
+                String folder = normalizeAdventureBackgroundFolder(preferredFolder);
+                if (folder != null && !folders.contains(folder)) {
+                    folders.add(folder);
+                }
+            }
+        }
+        String normalizedSubdirectory = normalizeAdventureBackgroundFolder(subdirectory);
+        if (normalizedSubdirectory != null) {
+            folders.add(backgroundName + ForgeConstants.PATH_SEPARATOR + normalizedSubdirectory);
+        }
+        if (!folders.contains(backgroundName)) {
+            folders.add(backgroundName);
+        }
+        return folders;
+    }
+
+    private void loadAdventureBackgroundFiles(List<String> backgroundFolders) {
+        String adventureDirectory = GuiBase.getAdventureDirectory();
+        if (backgroundFolders.isEmpty() || adventureDirectory == null || adventureDirectory.isEmpty()) {
+            adventureBackgroundFiles = NO_FILES;
+            return;
+        }
+
+        for (String folder : backgroundFolders) {
+            String relativePath = ForgeConstants.SKIN_DIR + "battle_backgrounds"
+                    + ForgeConstants.PATH_SEPARATOR + folder;
+            for (String root : new String[]{GuiBase.getAdventureCacheDirectory(),
+                    adventureDirectory, ForgeConstants.ADVENTURE_COMMON_DIR}) {
+                if (root == null || root.isEmpty()) {
+                    continue;
+                }
+                FileHandle[] files = Assets.getFileHandle(root + relativePath).list(IMAGE_FILES);
+                if (files.length > 0) {
+                    adventureBackgroundFiles = files;
+                    return;
+                }
+            }
+        }
+        adventureBackgroundFiles = NO_FILES;
+    }
+
+    /**
+     * Tries each preferred folder before the category's biome and generic folders.
+     */
+    public FSkinTexture getRandomAdventureBackground(String subdirectory, List<String> preferredFolders) {
+        List<String> backgroundFolders = getAdventureBackgroundFolders(subdirectory, preferredFolders);
+        String backgroundFolderKey = String.join("\n", backgroundFolders);
+        if (!backgroundFolderKey.equals(adventureBackgroundFolderKey)) {
+            if (adventureBackgroundFolderKey != null) {
+                unloadAdventureBackground();
+            }
+            adventureBackgroundFolderKey = backgroundFolderKey;
+            adventureBackgroundFiles = null;
+        }
+        if (adventureBackgroundFiles == null) {
+            loadAdventureBackgroundFiles(backgroundFolders);
+        }
+        if (adventureBackgroundFiles.length == 0) {
+            return this;
+        }
+
+        FileHandle selectedFile;
+        do {
+            selectedFile = Aggregates.random(adventureBackgroundFiles);
+        } while (adventureBackgroundFiles.length > 1 && adventureBackgroundFile != null
+                && selectedFile.equals(adventureBackgroundFile));
+        if (selectedFile.equals(adventureBackgroundFile)) {
+            return this;
+        }
+
+        unloadAdventureBackground();
+        try {
+            texture = Forge.getAssets().getTexture(selectedFile, false);
+            if (texture != null) {
+                adventureBackgroundFile = selectedFile;
+                isloaded = true;
+            }
+        } catch (final Exception e) {
+            System.err.println("Failed to load adventure background: " + selectedFile);
+            e.printStackTrace();
+        }
+        return this;
     }
 
     private FileHandle getAdventureBackgroundFile() {
@@ -142,16 +291,24 @@ public enum FSkinTexture implements FImage {
             return null;
         }
 
+        String adventureCacheDirectory = GuiBase.getAdventureCacheDirectory();
+        if (adventureCacheDirectory != null && !adventureCacheDirectory.isEmpty()) {
+            FileHandle cachedFile = Assets.getFileHandle(adventureCacheDirectory + ForgeConstants.SKIN_DIR + filename);
+            if (cachedFile.exists()) {
+                return cachedFile;
+            }
+        }
+
         // Check adventure-specific skin directory first
         String adventureSkinPath = adventureDirectory + ForgeConstants.SKIN_DIR + filename;
-        FileHandle adventureFile = Gdx.files.absolute(adventureSkinPath);
+        FileHandle adventureFile = Assets.getFileHandle(adventureSkinPath);
         if (adventureFile.exists()) {
             return adventureFile;
         }
 
         // Check common adventure skin directory
         String commonSkinPath = ForgeConstants.ADVENTURE_COMMON_DIR + ForgeConstants.SKIN_DIR + filename;
-        FileHandle commonFile = Gdx.files.absolute(commonSkinPath);
+        FileHandle commonFile = Assets.getFileHandle(commonSkinPath);
         if (commonFile.exists()) {
             return commonFile;
         }
