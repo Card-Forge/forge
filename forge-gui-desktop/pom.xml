@@ -331,7 +331,7 @@ try {
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-testng-common</artifactId>
-            <version>${revision}</version>
+            <version>2.0.9</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.beust</groupId>
@@ -371,7 +371,7 @@ try {
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-testng</artifactId>
-            <version>${revision}</version>
+            <version>2.0.9</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -383,7 +383,7 @@ try {
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-core</artifactId>
-            <version>${revision}</version>
+            <version>2.0.9</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -399,7 +399,7 @@ try {
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-mockito2</artifactId>
-            <version>${revision}</version>
+            <version>2.0.9</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -411,7 +411,7 @@ try {
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-support</artifactId>
-            <version>${revision}</version>
+            <version>2.0.9</version>
             <scope>test</scope>
         </dependency>
         <dependency>
