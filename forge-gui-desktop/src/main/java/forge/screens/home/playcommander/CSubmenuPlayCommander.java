@@ -43,6 +43,11 @@ public enum CSubmenuPlayCommander implements ICDoc, IMenuProvider {
         lobby.initialize();
     }
 
+    /**
+     * Builds the Commander play submenu menus, including constructed-game options and battlefield layout presets.
+     *
+     * @return the menus available in the Commander play submenu
+     */
     @Override
     public List<JMenu> getMenus() {
         final List<JMenu> menus = new ArrayList<>();
