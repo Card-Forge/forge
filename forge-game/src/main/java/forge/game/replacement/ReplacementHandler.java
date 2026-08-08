@@ -42,7 +42,6 @@ import forge.game.ability.ApiType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.AbilitySub;
-import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -51,6 +50,9 @@ import forge.util.TextUtil;
 import forge.util.Visitor;
 
 public class ReplacementHandler {
+    private static final Set<ReplacementType> ZONE_RESTRICTED_EVENTS =
+            EnumSet.of(ReplacementType.Tap, ReplacementType.Untap, ReplacementType.ProduceMana);
+
     private final Game game;
 
     private Set<ReplacementEffect> hasRun = Sets.newHashSet();
@@ -103,17 +105,12 @@ public class ReplacementHandler {
             Card c = preList.get(crd);
             Zone cardZone = game.getZoneOf(c);
 
-            // all tap/untap/produce mana replacements are active from the battlefield or the
-            // command zone (e.g. Ood Sphere); skip other zones - this is a major hot path, as
-            // canTap/canUntap run a cantHappenCheck per mana source per AI cost check, and
-            // groupSourcesByManaColor runs a ProduceMana check per mana ability on top of that
-            // (performance mode only, in case a custom card wants one active from elsewhere)
-            if (Spell.isPerformanceMode()
-                    && (event == ReplacementType.Tap || event == ReplacementType.Untap
-                            || event == ReplacementType.ProduceMana)
-                    && cardZone != null
-                    && cardZone.getZoneType() != ZoneType.Battlefield
-                    && cardZone.getZoneType() != ZoneType.Command) {
+            // a tap/untap/produce mana replacement can only be active from a zone in
+            // STATIC_ABILITIES_SOURCE_ZONES (zonesCheck below rejects the rest), so don't scan
+            // libraries and hands - canTap/canUntap run a cantHappenCheck per mana source per AI
+            // cost check, and groupSourcesByManaColor a ProduceMana check per mana ability
+            if (ZONE_RESTRICTED_EVENTS.contains(event) && cardZone != null
+                    && !ZoneType.STATIC_ABILITIES_SOURCE_ZONES.contains(cardZone.getZoneType())) {
                 return true;
             }
 
