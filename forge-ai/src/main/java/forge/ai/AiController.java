@@ -1518,13 +1518,6 @@ public class AiController {
     }
 
     private SpellAbility getSpellAbilityToPlay() {
-        if (skipped != null) {
-            //FIXME: this is for failed SA to skip temporarily, don't know why AI computation for mana fails, maybe due to auto mana compute?
-            for (SpellAbility sa : skipped) {
-                //System.out.println("Unskip: " + sa.toString() + " (" +  sa.getHostCard().getName() + ").");
-                sa.setSkip(false);
-            }
-        }
         CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
         cards = ComputerUtilCard.dedupeCards(cards);
         List<SpellAbility> saList = Lists.newArrayList();
@@ -1550,6 +1543,7 @@ public class AiController {
                 saList = ComputerUtilAbility.getSpellAbilities(cards, player); // get the SA list early to check for copy SAs
                 if (ComputerUtilAbility.getFirstCopySASpell(saList) == null) {
                     // Nothing to copy the spell with, so do nothing.
+                    clearSkippedSpellAbilities();
                     return null;
                 }
             }
@@ -1573,20 +1567,36 @@ public class AiController {
             // TODO allow when experimental profile?
             return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
         });
-        //removed skipped SA
+        // Keep failed SAs skipped for this priority sequence. Unskip only when passing so a later
+        // priority (new mana / board state) can retry — unskipping every choose caused equip loops.
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
-        if (!skipped.isEmpty())
+        if (!skipped.isEmpty()) {
             saList.removeAll(skipped);
+        }
         //update LivingEndPlayer
         useLivingEnd = IterableUtil.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"));
 
         SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
 
         if (topOwnedByAI && !mustRespond && chosenSa != ComputerUtilAbility.getFirstCopySASpell(saList)) {
+            clearSkippedSpellAbilities();
             return null; // not planning to copy the spell and not marked as something the AI would respond to
         }
 
+        if (chosenSa == null) {
+            clearSkippedSpellAbilities();
+        }
         return chosenSa;
+    }
+
+    private void clearSkippedSpellAbilities() {
+        if (skipped == null || skipped.isEmpty()) {
+            return;
+        }
+        for (SpellAbility sa : skipped) {
+            sa.setSkip(false);
+        }
+        skipped.clear();
     }
 
     private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
