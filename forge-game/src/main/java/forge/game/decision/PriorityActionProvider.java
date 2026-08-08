@@ -100,13 +100,23 @@ public final class PriorityActionProvider {
      * This is a diagnostic coverage check; it does not apply the ability.
      */
     public boolean contains(final DecisionRequest request, final SpellAbility ability) {
+        return findCandidate(request, ability) != null;
+    }
+
+    /**
+     * Finds the generated candidate matching Forge's selected ability without regenerating the request.
+     *
+     * <p>This is diagnostic correlation only. It neither applies the ability nor performs another legality or
+     * payment-feasibility assessment.</p>
+     */
+    LegalCandidate findCandidate(final DecisionRequest request, final SpellAbility ability) {
         if (ability == null) {
             return request.getCandidates().stream()
-                    .anyMatch(candidate -> candidate.getKind() == PriorityActionKind.PASS);
+                    .filter(candidate -> candidate.getKind() == PriorityActionKind.PASS).findFirst().orElse(null);
         }
         final String key = semanticKey(classify(ability), ability.getHostCard(), ability);
         return request.getCandidates().stream()
-                .anyMatch(candidate -> candidate.getSemanticKey().equals(key));
+                .filter(candidate -> candidate.getSemanticKey().equals(key)).findFirst().orElse(null);
     }
 
     private static List<Card> actionSources(final Player player) {

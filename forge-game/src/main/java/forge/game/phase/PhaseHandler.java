@@ -1080,7 +1080,14 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     final Zone originZone = saHost.getZone();
                     final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
 
-                    if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
+                    final boolean played;
+                    PriorityActionDiagnostics.beginAction(priorityCapture, sa, chosenSa.size());
+                    try {
+                        played = pPlayerPriority.getController().playChosenSpellAbility(sa);
+                    } finally {
+                        PriorityActionDiagnostics.endAction();
+                    }
+                    if (played) {
                         // 117.3c If a player has priority when they cast a spell, activate an ability, [play a land]
                         // that player receives priority afterward.
                         pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
