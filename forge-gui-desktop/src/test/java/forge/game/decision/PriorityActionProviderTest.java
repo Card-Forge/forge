@@ -227,6 +227,21 @@ public class PriorityActionProviderTest extends AITest {
     }
 
     @Test
+    public void generatedRequestCanReturnTheMappedCandidateWithoutRegeneratingPriorityActions() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final Card bolt = addCardToZone("Lightning Bolt", player, ZoneType.Hand);
+        addCard("Mountain", player);
+        final SpellAbility forgeChoice = bolt.getAllPossibleAbilities(player, true).get(0);
+        final DecisionRequest request = provider.createPriorityRequest(player);
+
+        final LegalCandidate candidate = provider.findCandidate(request, forgeChoice);
+
+        assertEquals(candidate.getKind(), PriorityActionKind.CAST_SPELL);
+        assertEquals(candidate.getSourceCardId(), bolt.getId());
+    }
+
+    @Test
     public void unrelatedOpponentHandInformationDoesNotChangeTheRequest() {
         final Game game = initAndCreateGame();
         final Player player = game.getPlayers().get(1);

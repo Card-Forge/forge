@@ -19,6 +19,8 @@ import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
+import forge.game.decision.DownstreamCallbackFamily;
+import forge.game.decision.PriorityActionDiagnostics;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -58,6 +60,11 @@ public class PlayerControllerAi extends PlayerController {
     private final AiController brains;
 
     private boolean pilotsNonAggroDeck = false;
+
+    private static int countRange(final int min, final int max) {
+        final long size = (long) max - min + 1L;
+        return size > 0L && size <= Integer.MAX_VALUE ? (int) size : -1;
+    }
 
     public PlayerControllerAi(Game game, Player p, LobbyPlayer lp) {
         super(game, p, lp);
@@ -241,6 +248,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Integer announceRequirements(SpellAbility ability, int min, int max, String announce) {
+        PriorityActionDiagnostics.recordDownstreamCallback("X".equalsIgnoreCase(announce)
+                        ? DownstreamCallbackFamily.X_VALUE : DownstreamCallbackFamily.OTHER,
+                countRange(min, max), min == max);
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
         if (ability.getApi() != null) {
             switch (ability.getApi()) {
@@ -384,6 +394,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, List<String> options, Card cardToShow, Map<String, Object> params) {
+        PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.CONFIRMATION, 2, false);
         return getAi().confirmAction(sa, mode, message, params);
     }
 
@@ -445,6 +456,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean confirmPayment(CostPart costPart, String prompt, SpellAbility sa) {
+        PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.CONFIRMATION, 2, false);
         return brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method)
     }
 
@@ -1019,6 +1031,8 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> possible, int min, int num, boolean allowRepeat) {
+        final Boolean forced = !allowRepeat && min == num && num == possible.size() ? Boolean.TRUE : null;
+        PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.MODE, possible.size(), forced);
         List<AbilitySub> result = brains.chooseModeForAbility(sa, possible, min, num, allowRepeat);
         if (result != null) {
             return result;
@@ -1228,6 +1242,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean effect) {
+        PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.PAYMENT, -1, null);
         return ComputerUtilMana.payManaCost(new Cost(toPay, effect), player, sa, effect);
     }
 
@@ -1241,6 +1256,8 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView chooseCardsForCost(CardCollectionView optionList, SpellAbility sa, CostPartWithList cpl, int amount, boolean isOptional, String prompt) {
+        final Boolean forced = !isOptional && optionList.size() == amount ? Boolean.TRUE : null;
+        PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.CARD_SELECTION, optionList.size(), forced);
         assert(false);
         //Untested placeholder. The AI does not currently pay like this.
         return cpl.accept(new AiCostDecision(player, sa, true)).cards;
@@ -1248,6 +1265,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean applyManaToCost(ManaCostBeingPaid toPay, SpellAbility ability, String prompt, ManaConversionMatrix matrix, boolean effect) {
+        PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.PAYMENT, -1, null);
         assert(false);
         //Untested placeholder. The AI does not currently pay like this.
         return ComputerUtilMana.payManaCost(toPay, ability, player, effect);
@@ -1356,6 +1374,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
+        PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.TARGET, -1, null);
         return brains.doTrigger(currentAbility, true);
     }
 
@@ -1601,6 +1620,10 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen, List<OptionalCostValue> optionalCostValues) {
+        if (!optionalCostValues.isEmpty()) {
+            PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.OTHER,
+                    optionalCostValues.size(), null);
+        }
         return SpellApiToAi.Converter.get(chosen).chooseOptionalCosts(player, chosen, optionalCostValues);
     }
 
