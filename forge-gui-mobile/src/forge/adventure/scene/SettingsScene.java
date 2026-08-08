@@ -9,6 +9,7 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.data.RewardData;
+import forge.adventure.data.SettingData;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.assets.ImageCache;
@@ -17,6 +18,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.sound.SoundSystem;
+import forge.util.OperatingSystem;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,6 +33,10 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  * Scene to handle settings of the base forge and adventure mode
  */
 public class SettingsScene extends UIScene {
+    private static final String DISPLAY_MODE_WINDOWED = "Windowed";
+    private static final String DISPLAY_MODE_FULLSCREEN = "Fullscreen";
+    private static final String DISPLAY_MODE_BORDERLESS = "Borderless Fullscreen";
+
     private final Table settingGroup;
     TextraButton backButton;
     TextraButton newPlane;
@@ -188,17 +194,26 @@ public class SettingsScene extends UIScene {
             settingGroup.add(tooltipAdj).align(Align.right).pad(2);
         }
         if (!GuiBase.isAndroid()) {
-            addSettingField(Forge.getLocalizer().getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    boolean value = ((CheckBox) actor).isChecked();
-                    Config.instance().getSettingData().fullScreen = value;
+            // Borderless fullscreen is offered on macOS only until it has been validated on other platforms.
+            String[] displayModes = OperatingSystem.isMac()
+                    ? new String[]{DISPLAY_MODE_WINDOWED, DISPLAY_MODE_FULLSCREEN, DISPLAY_MODE_BORDERLESS}
+                    : new String[]{DISPLAY_MODE_WINDOWED, DISPLAY_MODE_FULLSCREEN};
+            SelectBox<String> displayMode = Controls.newComboBox(displayModes, currentDisplayMode(), o -> {
+                boolean fullScreenMode = DISPLAY_MODE_FULLSCREEN.equals(o);
+                boolean borderlessFullScreenMode = DISPLAY_MODE_BORDERLESS.equals(o);
+                SettingData settings = Config.instance().getSettingData();
+                if (settings.fullScreen != fullScreenMode || settings.borderlessFullScreen != borderlessFullScreenMode) {
+                    settings.fullScreen = fullScreenMode;
+                    settings.borderlessFullScreen = borderlessFullScreenMode;
                     Config.instance().saveSettings();
-                    //update
-                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_FULLSCREEN_MODE, Config.instance().getSettingData().fullScreen);
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_FULLSCREEN_MODE, fullScreenMode);
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_BORDERLESS_FULLSCREEN_MODE, borderlessFullScreenMode);
                     FModel.getPreferences().save();
                 }
+                return null;
             });
+            addLabel(Forge.getLocalizer().getMessageorUseDefault("lblDisplayMode", "Display Mode"));
+            settingGroup.add(displayMode).align(Align.right).pad(2);
         }
         addSettingField(Forge.getLocalizer().getMessage("lblDay") + " | " + Forge.getLocalizer().getMessage("lblNight") + " " + Forge.getLocalizer().getMessage("lblBackgroundImage"), Config.instance().getSettingData().dayNightBG, new ChangeListener() {
             @Override
@@ -441,6 +456,13 @@ public class SettingsScene extends UIScene {
         box.addListener(change);
         addLabel(name);
         settingGroup.add(box).align(Align.right);
+    }
+
+    private String currentDisplayMode() {
+        SettingData settings = Config.instance().getSettingData();
+        if (OperatingSystem.isMac() && settings.borderlessFullScreen)
+            return DISPLAY_MODE_BORDERLESS;
+        return settings.fullScreen ? DISPLAY_MODE_FULLSCREEN : DISPLAY_MODE_WINDOWED;
     }
 
     private void addSettingField(String name, int value, ChangeListener change) {

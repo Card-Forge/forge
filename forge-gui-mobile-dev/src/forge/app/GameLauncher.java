@@ -2,9 +2,11 @@ package forge.app;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Graphics.DisplayMode;
+import com.badlogic.gdx.Graphics.Monitor;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
@@ -13,7 +15,13 @@ import forge.Forge;
 import forge.adventure.util.Config;
 import io.sentry.protocol.Device;
 import io.sentry.protocol.OperatingSystem;
+import org.lwjgl.system.JNI;
 import org.lwjgl.system.Configuration;
+import org.lwjgl.system.MemoryStack;
+import org.lwjgl.system.MemoryUtil;
+import org.lwjgl.system.macosx.EnumerationMutationHandler;
+import org.lwjgl.system.macosx.LibSystem;
+import org.lwjgl.system.macosx.ObjCRuntime;
 import oshi.SystemInfo;
 
 import java.nio.file.Files;
@@ -110,7 +118,18 @@ public class GameLauncher {
             int tmp = windowHeight; windowHeight = windowWidth; windowWidth = tmp;
         }
 
-        if (Config.instance().getSettingData().fullScreen) {
+        boolean fullScreen = Config.instance().getSettingData().fullScreen;
+        // The borderless window setup below is platform-neutral, but the mode is gated
+        // to macOS for now because it has only been validated there.
+        boolean borderlessFullScreen = forge.util.OperatingSystem.isMac()
+                && Config.instance().getSettingData().borderlessFullScreen;
+        if (borderlessFullScreen) {
+            Monitor monitor = Lwjgl3ApplicationConfiguration.getPrimaryMonitor();
+            DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode(monitor);
+            config.setWindowedMode(displayMode.width, displayMode.height);
+            config.setWindowPosition(monitor.virtualX, monitor.virtualY);
+            config.setDecorated(false);
+        } else if (fullScreen) {
             config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
             config.setAutoIconify(true);
             config.setHdpiMode(HdpiMode.Logical);
@@ -120,6 +139,20 @@ public class GameLauncher {
         }
         config.setTitle("Forge - " + versionString);
         config.setWindowListener(new Lwjgl3WindowAdapter() {
+            @Override
+            public void created(Lwjgl3Window window) {
+                if (borderlessFullScreen) {
+                    MacOSPresentation.setBorderlessVisible(true);
+                }
+            }
+
+            @Override
+            public void iconified(boolean isIconified) {
+                if (borderlessFullScreen) {
+                    MacOSPresentation.setBorderlessVisible(!isIconified);
+                }
+            }
+
             @Override
             public boolean closeRequested() {
                 //use the device adpater to exit properly
@@ -144,6 +177,88 @@ public class GameLauncher {
         config.setHdpiMode(HdpiMode.Logical);
 
         new Lwjgl3Application(start, config);
+    }
+
+    /**
+     * Applies the AppKit presentation state (hidden menu bar and Dock, working Cmd-M
+     * minimize) for the borderless fullscreen window, using LWJGL's bundled macOS
+     * ObjC-runtime bindings so no new dependency is required.
+     * <p>
+     * GLFW exposes no API for NSApplication presentation options, and its own
+     * borderless-fullscreen path keeps the window at a level above the menu bar,
+     * which prevents normal use of other applications while the game is visible.
+     * If that gap is ever closed upstream (GLFW -> LWJGL -> libGDX), this bridge
+     * can be removed. Only invoked while borderless fullscreen is active on macOS.
+     */
+    private static final class MacOSPresentation {
+        // NSApplicationPresentationOptions values from AppKit's NSApplication.h.
+        private static final long DEFAULT = 0;
+        private static final long HIDE_DOCK = 1L << 1;
+        private static final long HIDE_MENU_BAR = 1L << 3;
+        private static final long OBJC_MSG_SEND = ObjCRuntime.getLibrary().getFunctionAddress("objc_msgSend");
+        private static final long NS_APPLICATION = ObjCRuntime.objc_getClass("NSApplication");
+        private static final long NS_MENU = ObjCRuntime.objc_getClass("NSMenu");
+        private static final long NS_STRING = ObjCRuntime.objc_getClass("NSString");
+        private static final long SHARED_APPLICATION = ObjCRuntime.sel_registerName("sharedApplication");
+        private static final long SET_PRESENTATION_OPTIONS = ObjCRuntime.sel_registerName("setPresentationOptions:");
+        private static final long MAIN_MENU = ObjCRuntime.sel_registerName("mainMenu");
+        private static final long WINDOWS_MENU = ObjCRuntime.sel_registerName("windowsMenu");
+        private static final long SET_WINDOWS_MENU = ObjCRuntime.sel_registerName("setWindowsMenu:");
+        private static final long ALLOC = ObjCRuntime.sel_registerName("alloc");
+        private static final long INIT_WITH_TITLE = ObjCRuntime.sel_registerName("initWithTitle:");
+        private static final long ADD_ITEM = ObjCRuntime.sel_registerName("addItemWithTitle:action:keyEquivalent:");
+        private static final long SET_SUBMENU = ObjCRuntime.sel_registerName("setSubmenu:");
+        private static final long PERFORM_MINIATURIZE = ObjCRuntime.sel_registerName("performMiniaturize:");
+        private static final long STRING_WITH_UTF8 = ObjCRuntime.sel_registerName("stringWithUTF8String:");
+        private static final long DISPATCH_SYNC = LibSystem.getLibrary().getFunctionAddress("dispatch_sync_f");
+        private static final long MAIN_QUEUE = LibSystem.getLibrary().getFunctionAddress("_dispatch_main_q");
+        private static final long PTHREAD_MAIN = LibSystem.getLibrary().getFunctionAddress("pthread_main_np");
+        // LWJGL ships no libdispatch callback type, so EnumerationMutationHandler is
+        // borrowed here purely because it generates a native callback with the
+        // void (*)(void *) signature that dispatch_sync_f requires; its ObjC
+        // enumeration purpose is irrelevant.
+        private static final EnumerationMutationHandler SET_PRESENTATION_OPTIONS_CALLBACK =
+                EnumerationMutationHandler.create(MacOSPresentation::setPresentationOptions);
+
+        private static void setBorderlessVisible(boolean visible) {
+            long options = visible ? HIDE_DOCK | HIDE_MENU_BAR : DEFAULT;
+            if (JNI.invokeI(PTHREAD_MAIN) != 0) {
+                setPresentationOptions(options);
+            } else {
+                JNI.invokePPPV(MAIN_QUEUE, options, SET_PRESENTATION_OPTIONS_CALLBACK.address(), DISPATCH_SYNC);
+            }
+        }
+
+        private static void setPresentationOptions(long options) {
+            long application = JNI.invokePPJ(NS_APPLICATION, SHARED_APPLICATION, OBJC_MSG_SEND);
+            if (options != DEFAULT) {
+                ensureMinimizeMenu(application);
+            }
+            JNI.invokePPPV(application, SET_PRESENTATION_OPTIONS, options, OBJC_MSG_SEND);
+        }
+
+        private static void ensureMinimizeMenu(long application) {
+            if (JNI.invokePPJ(application, WINDOWS_MENU, OBJC_MSG_SEND) != 0) {
+                return;
+            }
+            try (MemoryStack stack = MemoryStack.stackPush()) {
+                long empty = createString(stack, "");
+                long windowTitle = createString(stack, "Window");
+                long minimizeTitle = createString(stack, "Minimize");
+                long minimizeKey = createString(stack, "m");
+                long mainMenu = JNI.invokePPJ(application, MAIN_MENU, OBJC_MSG_SEND);
+                long windowMenu = JNI.invokePPPP(JNI.invokePPJ(NS_MENU, ALLOC, OBJC_MSG_SEND), INIT_WITH_TITLE,
+                        windowTitle, OBJC_MSG_SEND);
+                long windowMenuItem = JNI.invokePPPPPP(mainMenu, ADD_ITEM, windowTitle, 0, empty, OBJC_MSG_SEND);
+                JNI.invokePPPV(windowMenuItem, SET_SUBMENU, windowMenu, OBJC_MSG_SEND);
+                JNI.invokePPPV(application, SET_WINDOWS_MENU, windowMenu, OBJC_MSG_SEND);
+                JNI.invokePPPPPP(windowMenu, ADD_ITEM, minimizeTitle, PERFORM_MINIATURIZE, minimizeKey, OBJC_MSG_SEND);
+            }
+        }
+
+        private static long createString(MemoryStack stack, String value) {
+            return JNI.invokePPPP(NS_STRING, STRING_WITH_UTF8, MemoryUtil.memAddress(stack.UTF8(value)), OBJC_MSG_SEND);
+        }
     }
 
     private static float getPrimaryScreenAspect() {
