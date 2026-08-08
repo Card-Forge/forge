@@ -371,6 +371,7 @@ public class CardFactory {
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
 
+        c.getCurrentState().setNonAbilityText(face.getNonAbilityText());
         c.getCurrentState().setOracleText(face.getOracleText());
 
         // Super and 'middle' types should use enums.
