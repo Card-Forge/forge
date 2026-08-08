@@ -3,4 +3,4 @@ ManaCost:C
 Types:Kindred Instant Eldrazi
 A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Protection from each color | SpellDescription$ Target creature you control gains protection from each color until end of turn.
 K:Overload:4 C
-Oracle:Target creature you control gains protection from each color until end of turn.\nOverload {4}{C}
+Oracle:Target creature you control gains protection from each color until end of turn.\nOverload {4}{C} (You may cast this spell for its overload cost. If you do, change "target" in its text to "each.")

@@ -3,4 +3,4 @@ ManaCost:U
 Types:Enchantment Creature Spirit
 PT:1/2
 A:AB$ Draw | Cost$ 6 U Sac<1/CARDNAME> | NumCards$ 3 | SpellDescription$ Draw three cards.
-Oracle:{6}{U}, Sacrifice Eidolon of Philosophy: Draw three cards.
+Oracle:{6}{U}, Sacrifice this creature: Draw three cards.
