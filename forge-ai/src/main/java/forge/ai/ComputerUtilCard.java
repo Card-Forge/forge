@@ -3,13 +3,13 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -560,6 +560,9 @@ public class ComputerUtilCard {
         if (Iterables.isEmpty(list)) {
             return null;
         }
+        if (Iterables.size(list) == 1) {
+            return Iterables.get(list, 0);
+        }
         return Aggregates.itemWithMax(list, c -> evaluateRemovalTargetPriority(ai, c));
     }
 
@@ -597,7 +600,13 @@ public class ComputerUtilCard {
         if (Iterables.size(list) == 1) {
             return Iterables.get(list, 0);
         }
-        return Aggregates.itemWithMax(IterableUtil.filter(list, CardPredicates.CREATURES), ComputerUtilCard.creatureEvaluator);
+        return Aggregates.itemWithMax(IterableUtil.filter(
+                list, CardPredicates.CREATURES), ComputerUtilCard.creatureEvaluator);
+    }
+
+    static Card getBestCreatureAI(final Iterable<Card> list,
+            final ToIntFunction<Card> evaluator) {
+        return getCreatureWithExtremeValue(list, evaluator, true);
     }
 
     /**
@@ -625,7 +634,27 @@ public class ComputerUtilCard {
         if (Iterables.size(list) == 1) {
             return Iterables.get(list, 0);
         }
-        return Aggregates.itemWithMin(IterableUtil.filter(list, CardPredicates.CREATURES), ComputerUtilCard.creatureEvaluator);
+        return Aggregates.itemWithMin(IterableUtil.filter(
+                list, CardPredicates.CREATURES), ComputerUtilCard.creatureEvaluator);
+    }
+
+    static Card getWorstCreatureAI(final Iterable<Card> list,
+            final ToIntFunction<Card> evaluator) {
+        return getCreatureWithExtremeValue(list, evaluator, false);
+    }
+
+    private static Card getCreatureWithExtremeValue(final Iterable<Card> list,
+            final ToIntFunction<Card> evaluator, final boolean best) {
+        Card result = null;
+        int extreme = best ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        for (Card card : list) {
+            int value = evaluator.applyAsInt(card);
+            if (best ? value > extreme : value < extreme) {
+                result = card;
+                extreme = value;
+            }
+        }
+        return result;
     }
 
     // For ability of Oracle en-Vec, return the first card that are going to attack next turn
@@ -735,9 +764,18 @@ public class ComputerUtilCard {
         return null;
     }
 
+    public static ToIntFunction<Card> getCachedCreatureEvaluator() {
+        return getCachedCreatureEvaluator(true);
+    }
+
+    public static ToIntFunction<Card> getCachedCreatureEvaluator(
+            final boolean considerManaValue) {
+        return AiCache.memoizeIdentityInt(
+                card -> evaluateCreature(card, true, considerManaValue));
+    }
+
     public static Comparator<Card> getCachedCreatureComparator() {
-        Map<Card, Integer> cache = new IdentityHashMap<>();
-        return Comparator.comparing(c -> cache.computeIfAbsent(c, creatureEvaluator));
+        return Comparator.comparingInt(getCachedCreatureEvaluator());
     }
     public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = (a, b) -> {
         // TODO ideally we could reuse the value from the previous pass with false
