@@ -101,9 +101,12 @@ public class DeltaSyncManager implements IHasForgeLog {
      * New objects are registered with this consumer and sent in full.
      * Existing objects only send properties dirty for THIS consumer.
      *
-     * <p>Must be called on the game thread. All delta collection and checksum
-     * computation runs single-threaded — no locks, snapshots, or volatile
-     * barriers needed.
+     * <p>Intended to run on the game thread, but in practice also entered from
+     * the EDT (reveal/rollback dialogs via RemoteClientGuiGame.syncAndSend) and
+     * from netty threads (reconnect handshake). Reads of the tracker's
+     * delayed-prop queue are therefore synchronized (see issue #11535); the
+     * rest of the walk is unsynchronized and still assumes game state is not
+     * mutated mid-collection.
      */
     public DeltaPacket collectDeltas(GameView gameView) {
         Map<Integer, Map<TrackableProperty, Object>> objectDeltas = new HashMap<>();
@@ -302,8 +305,9 @@ public class DeltaSyncManager implements IHasForgeLog {
      * to the props map or marked dirty while frozen, but network
      * clients need them in the same delta as their accompanying events.
      *
-     * This is safe because speculative freeze brackets (which call clearDelayed()) and real freeze brackets are disjoint
-     * — speculative brackets always start from freezeCounter == 0 and complete before any sync point where delta collection occurs.
+     * getDelayedPropsFor takes a synchronized snapshot: delta collection can run on
+     * the EDT concurrently with game-thread freeze brackets mutating the queue
+     * (issue #11535 — this used to throw ConcurrentModificationException here).
      */
     private void mergeDelayedProps(TrackableObject obj, Map<TrackableProperty, Object> delta, Set<TrackableProperty> dirtyProps) {
         Tracker tracker = obj.getTracker();

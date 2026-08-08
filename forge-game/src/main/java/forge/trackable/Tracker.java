@@ -26,9 +26,12 @@ import forge.trackable.TrackableTypes.TrackableType;
  * engine effect into a single coherent post-effect snapshot. {@link #flush()} drains the
  * queue without leaving the frozen state.
  *
- * <p><b>Thread safety.</b> Not thread-safe — game thread only. The {@code unfreeze}
- * replay walks TrackableObjects and triggers consumer notifications; running it from
- * another thread corrupts consumer dirty-bit state.
+ * <p><b>Thread safety.</b> Owned by the game thread — freezing, unfreezing and object
+ * lookups must stay there. The {@code unfreeze} replay walks TrackableObjects and
+ * triggers consumer notifications; running it from another thread corrupts consumer
+ * dirty-bit state. The delayed-prop queue itself is synchronized internally, because
+ * the netplay delta sync reads it through {@link #getDelayedPropsFor} from outside the
+ * game thread (see issue #11535).
  */
 public class Tracker {
     private int freezeCounter = 0;
@@ -60,14 +63,21 @@ public class Tracker {
     }
 
     public void unfreeze() {
-        if (!isFrozen() || --freezeCounter > 0 || delayedPropChanges.isEmpty()) {
+        if (!isFrozen() || --freezeCounter > 0) {
             return;
         }
+        final List<DelayedPropChange> toApply;
+        synchronized (delayedPropChanges) {
+            if (delayedPropChanges.isEmpty()) {
+                return;
+            }
+            toApply = Lists.newArrayList(delayedPropChanges);
+            delayedPropChanges.clear();
+        }
         //after being unfrozen, ensure all changes delayed during freeze are now applied
-        for (final DelayedPropChange change : delayedPropChanges) {
+        for (final DelayedPropChange change : toApply) {
             change.object.set(change.prop, change.value);
         }
-        delayedPropChanges.clear();
     }
 
     public void flush() {
@@ -80,27 +90,34 @@ public class Tracker {
     }
 
     public void addDelayedPropChange(final TrackableObject object, final TrackableProperty prop, final Object value) {
-        delayedPropChanges.add(new DelayedPropChange(object, prop, value));
+        synchronized (delayedPropChanges) {
+            delayedPropChanges.add(new DelayedPropChange(object, prop, value));
+        }
     }
 
     public void clearDelayed() {
-        delayedPropChanges.clear();
+        synchronized (delayedPropChanges) {
+            delayedPropChanges.clear();
+        }
     }
 
     /**
      * Read-only peek at delayed property changes queued for a specific object.
+     * Safe to call from outside the game thread (see issue #11535).
      */
     public Map<TrackableProperty, Object> getDelayedPropsFor(TrackableObject obj) {
-        if (delayedPropChanges.isEmpty()) {
-            return Collections.emptyMap();
-        }
-        Map<TrackableProperty, Object> result = new EnumMap<>(TrackableProperty.class);
-        for (DelayedPropChange change : delayedPropChanges) {
-            if (change.object == obj) {
-                result.put(change.prop, change.value);
+        synchronized (delayedPropChanges) {
+            if (delayedPropChanges.isEmpty()) {
+                return Collections.emptyMap();
             }
+            Map<TrackableProperty, Object> result = new EnumMap<>(TrackableProperty.class);
+            for (DelayedPropChange change : delayedPropChanges) {
+                if (change.object == obj) {
+                    result.put(change.prop, change.value);
+                }
+            }
+            return result;
         }
-        return result;
     }
 
     private class DelayedPropChange {
