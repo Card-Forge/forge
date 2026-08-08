@@ -136,6 +136,20 @@ public class CloneAi extends SpellAbilityAi {
             return true;
         }
 
+        if ("CloneBestLand".equals(sa.getParam("AILogic"))) {
+            final Card host = sa.getHostCard();
+            // a land is scored under whoever controls it now and the copy arrives under ours, so
+            // only our own lands are judged on the board that will apply; copying our own
+            // legendary land just makes us sacrifice one of the two
+            final Card best = ComputerUtilCard.getBestLandToPlayAI(CardLists.filter(targets,
+                    c -> c != host && c.getController() == host.getController() && !c.getType().isLegendary()));
+            if (best == null || ComputerUtilCard.evaluateLand(best) <= ComputerUtilCard.evaluateLand(host)) {
+                return false;
+            }
+            sa.getTargets().add(best);
+            return true;
+        }
+
         // Default:
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things that clone a target. Those can just use
@@ -250,5 +264,16 @@ public class CloneAi extends SpellAbilityAi {
 
         // don't activate during main2 unless this effect is permanent
         return !ph.is(PhaseType.MAIN2) || !sa.hasParam("Duration");
+    }
+
+    @Override
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
+            final String logic) {
+        if ("CloneBestLand".equals(logic)) {
+            // the upgrade is permanent and the cost taps, so wait until the end of the turn before
+            // ours: the mana stays open as a threat until then, and it unlocks in our untap step
+            return super.checkPhaseRestrictions(ai, sa, ph, "AtOppEOT");
+        }
+        return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
 }
