@@ -8,6 +8,7 @@ BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
 ScryfallCode=USG
+CardLang=en,es,fr,de,it,pt,ja,ko,zhs,zht
 
 [cards]
 1 U Absolute Grace @Jeff Miracola
@@ -128,8 +129,8 @@ ScryfallCode=USG
 116 C Befoul @Pete Venters
 117 U Bereavement @Andrew Goldhawk
 118 C Blood Vassal @Chippy
-119 C Bog Raiders @Carl Critchlow
-119s C Bog Raiders @Carl Critchlow
+119 C Bog Raiders @Carl Critchlow ${"lang": "en|es|fr|de|it|pt|ja|ko|zht"}
+119s C Bog Raiders @Carl Critchlow ${"lang": "zhs"}
 120 C Breach @Greg Staples
 121 C Cackling Fiend @Brian Despain
 122 C Carrion Beetles @Ron Spencer
@@ -140,8 +141,8 @@ ScryfallCode=USG
 127 C Dark Ritual @Tom Fleming
 128 R Darkest Hour @Heather Hudson
 129 C Despondency @D. Alexander Gregory
-130 U Diabolic Servitude @Scott M. Fischer
-130s U Diabolic Servitude @Scott M. Fischer
+130 U Diabolic Servitude @Scott M. Fischer ${"lang": "en|es|fr|de|it|pt|ja|ko|zht"}
+130s U Diabolic Servitude @Scott M. Fischer ${"lang": "zhs"}
 131 R Discordant Dirge @Carl Critchlow
 132 C Duress @Lawrence Snelly
 133 R Eastern Paladin @Carl Critchlow
@@ -150,12 +151,12 @@ ScryfallCode=USG
 136 U Flesh Reaver @Pete Venters
 137 C Hollow Dogs @Jeff Miracola
 138 R Ill-Gotten Gains @Greg Staples
-139 C Looming Shade @Vincent Evans
-139s C Looming Shade @Vincent Evans
+139 C Looming Shade @Vincent Evans ${"lang": "en|es|fr|de|it|pt|ja|ko|zht"}
+139s C Looming Shade @Vincent Evans ${"lang": "zhs"}
 140 R Lurking Evil @Scott Kirschner
 141 U Mana Leech @Mark A. Nelson
-142 U No Rest for the Wicked @Carl Critchlow
-142s U No Rest for the Wicked @Carl Critchlow
+142 U No Rest for the Wicked @Carl Critchlow ${"lang": "en|es|fr|de|it|pt|ja|ko|zht"}
+142s U No Rest for the Wicked @Carl Critchlow ${"lang": "zhs"}
 143 R Oppression @Pete Venters
 144 U Order of Yawgmoth @Chippy
 145 U Parasitic Bond @Scott Kirschner
@@ -176,10 +177,10 @@ ScryfallCode=USG
 160 U Spined Fluke @Mark A. Nelson
 161 R Tainted Aether @Thomas M. Baxa
 162 C Unnerve @Terese Nielsen
-163 C Unworthy Dead @Carl Critchlow
-163s C Unworthy Dead @Carl Critchlow
+163 C Unworthy Dead @Carl Critchlow ${"lang": "en|es|fr|de|it|pt|ja|ko|zht"}
+163s C Unworthy Dead @Carl Critchlow ${"lang": "zhs"}
 164 U Vampiric Embrace @Thomas M. Baxa
-164s U Vampiric Embrace @Thomas M. Baxa
+164s U Vampiric Embrace @Thomas M. Baxa ${"lang": "zhs"}
 165 R Vebulid @Ron Spencer
 166 U Victimize @Val Mayerik
 167 U Vile Requiem @Carl Critchlow
@@ -202,8 +203,8 @@ ScryfallCode=USG
 184 C Falter @Mike Raabe
 185 R Fault Line @Ron Spencer
 186 C Fiery Mantle @Bob Eggleton
-187 U Fire Ants @Tom Fleming
-187s U Fire Ants @Tom Fleming
+187 U Fire Ants @Tom Fleming ${"lang": "en|es|fr|de|it|pt|ja|ko|zht"}
+187s U Fire Ants @Tom Fleming ${"lang": "zhs"}
 188 R Gamble @Andrew Goldhawk
 189 U Goblin Cadets @Jerry Tiritilli
 190 U Goblin Lackey @Jerry Tiritilli

@@ -8,6 +8,7 @@ Booster=9 Common:fromsheet("BRO cards"), 3 Uncommon:fromSheet("BRO cards"), 1 Ra
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 ScryfallCode=BRO
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 C Aeronaut Cavalry @Lorenzo Mastroianni
@@ -172,7 +173,7 @@ ScryfallCode=BRO
 160 U Heavyweight Demolisher @Svetlin Velinov
 161 C Mishra's Juggernaut @Steve Prescott
 162 U Mishra's Research Desk @Matt Stewart
-163 R Phyrexian Dragon Engine @Chris Rahn
+163 R Phyrexian Dragon Engine @Chris Rahn ${"lang": "en"}
 164 C Scrapwork Mutt @Sidharth Chaturvedi
 165 M Skitterbeam Battalion @Leon Tukker
 166 U Alloy Animist @Kim Sokol
@@ -247,7 +248,7 @@ ScryfallCode=BRO
 235 C Goblin Firebomb @Noah Thatcher
 236 U Levitating Statue @Artur Nakhodkin
 237 R Liberator, Urza's Battlethopter @Ekaterina Burmak
-238 R The Mightstone and Weakstone @Ryan Pancoast
+238 R The Mightstone and Weakstone @Ryan Pancoast ${"lang": "en"}
 239 C Mine Worker @Raoul Vitale
 240 M Portal to Phyrexia @Svetlin Velinov
 241 C Power Plant Worker @Aaron Miller
@@ -265,7 +266,7 @@ ScryfallCode=BRO
 253 U Thran Power Suit @Raf Kayupov
 254 R Thran Spider @Joshua Cairos
 255 C Tower Worker @Gaboleps
-256 R Argoth, Sanctum of Nature @Cristi Balanescu
+256 R Argoth, Sanctum of Nature @Cristi Balanescu ${"lang": "en"}
 257 R Battlefield Forge @Thomas Stoop
 258 R Blast Zone @Jorge Jacinto
 259 R Brushland @Thomas Stoop
@@ -316,89 +317,89 @@ ScryfallCode=BRO
 300 R Underground River @Rob Alexander
 
 [extended art]
-301 M In the Trenches @Daarken
-302 R Kayla's Command @Dominik Mayer
-303 R Kayla's Reconstruction @Nicholas Elias
-304 R Loran of the Third Path @Steven Belledin
-305 M Myrel, Shield of Argive @Ryan Pancoast
-306 R Siege Veteran @Darren Tan
-307 R Soul Partition @Kekai Kotaki
-308 R Tocasia's Welcome @Johan Grenier
-309 R Autonomous Assembler @Slawomir Maniak
-310 M Platoon Dispenser @Leon Tukker
-311 R Steel Seraph @Denys Tsiperko
-312 M Urza's Sylex @Joseph Meehan
-313 R Drafna, Founder of Lat-Nam @Lie Setiawan
-314 M Hurkyl, Master Wizard @Randy Vargas
-315 R Hurkyl's Final Meditation @Nephelomancer
-316 M One with the Multiverse @Liiga Smilshkalne
-317 R Skystrike Officer @Diego Gisbert
-318 R Urza's Command @Dominik Mayer
-319 M Arcane Proxy @Kekai Kotaki
-320 M Surge Engine @Daarken
-321 R The Temporal Anchor @Kekai Kotaki
-322 R Terisian Mindbreaker @Steve Prescott
-323 R Ashnod, Flesh Mechanist @Howard Lyon
-324 R Diabolic Intent @Dan Murayama Scott
-325 R Fateful Handoff @Gaboleps
-326 M Gix, Yawgmoth Praetor @Anna Podedworna
-327 R Gix's Command @Dominik Mayer
-328 R Gixian Puppeteer @Bastien L. Deharme
-329 R Hostile Negotiations @David Auden Nash
-330 R Misery's Shadow @Igor Kieryluk
-331 R Painful Quandary @David Palumbo
-332 M Phyrexian Fleshgorger @Steve Prescott
-333 R Razorlash Transmogrant @Kekai Kotaki
-334 R Transmogrant's Crown @Nino Vecia
-335 R Brotherhood's End @Bryan Sola
-336 M Draconic Destiny @Justin Hernandez & Alexis Hernandez
-337 R Feldon, Ronom Excavator @Howard Lyon
-338 R Mechanized Warfare @Robin Olausson
-339 R Mishra's Command @Dominik Mayer
-340 R Over the Top @Cristi Balanescu
-341 R Tyrant of Kher Ridges @Karl Kopinski
-342 R Visions of Phyrexia @Dominik Mayer
-343 M Skitterbeam Battalion @Leon Tukker
-344 M Awaken the Woods @Bryan Sola
-345 R Fade from History @Alessandra Pisano
-346 R Fauna Shaman @Nicholas Elias
-347 R Gwenna, Eyes of Gaea @Steve Prescott
-348 R Teething Wurmlet @Jesper Ejsing
-349 R Titania's Command @Dominik Mayer
-350 R Perennial Behemoth @Wayne Reynolds
-351 M Rootwire Amalgam @Leon Tukker
-352 R Simian Simulacrum @Randy Vargas
-353 R Deathbloom Ritualist @Taras Susak
-354 R Hajar, Loyal Bodyguard @Joshua Raphael
-355 R Harbin, Vanguard Aviator @Kieran Yanner
-356 R Legions to Ashes @Artur Nakhodkin
-357 R Queen Kayla bin-Kroog @Cristi Balanescu
-358 M Sarinth Greatwurm @Jesper Ejsing
-359 R Tawnos, the Toymaker @Livia Prima
-360 R Tocasia, Dig Site Mentor @Lie Setiawan
-361 M Bladecoil Serpent @Joshua Cairos
-362 M Clay Champion @Leon Tukker
-363 M Cityscape Leveler @Leon Tukker
-364 R Liberator, Urza's Battlethopter @Ekaterina Burmak
-365 M Portal to Phyrexia @Svetlin Velinov
-366 R The Stasis Coffin @Artur Nakhodkin
-367 R The Stone Brain @Irina Nordsol
-368 R Thran Spider @Joshua Cairos
-369 R Blast Zone @Jorge Jacinto
-370 R Fortified Beachhead @Christian Dimitrov
-371 R Hall of Tagsin @Christian Dimitrov
-372 R Mishra's Foundry @Leon Tukker
-373 R Rescue Retriever @Jesper Ejsing
-374 R Geology Enthusiast @Fajareka Setiawan
-375 R Terror Ballista @Leon Tukker
-376 R Artificer's Dragon @Leon Tukker
-377 R Woodcaller Automaton @Ryan Pancoast
+301 M In the Trenches @Daarken ${"lang": "en|fr|de|ja|zhs"}
+302 R Kayla's Command @Dominik Mayer ${"lang": "en|fr|de|ja|zhs"}
+303 R Kayla's Reconstruction @Nicholas Elias ${"lang": "en|fr|de|ja|zhs"}
+304 R Loran of the Third Path @Steven Belledin ${"lang": "en|fr|de|ja|zhs"}
+305 M Myrel, Shield of Argive @Ryan Pancoast ${"lang": "en|fr|de|ja|zhs"}
+306 R Siege Veteran @Darren Tan ${"lang": "en|fr|de|ja|zhs"}
+307 R Soul Partition @Kekai Kotaki ${"lang": "en|fr|de|ja|zhs"}
+308 R Tocasia's Welcome @Johan Grenier ${"lang": "en|fr|de|ja|zhs"}
+309 R Autonomous Assembler @Slawomir Maniak ${"lang": "en|fr|de|ja|zhs"}
+310 M Platoon Dispenser @Leon Tukker ${"lang": "en|fr|de|ja|zhs"}
+311 R Steel Seraph @Denys Tsiperko ${"lang": "en|fr|de|ja|zhs"}
+312 M Urza's Sylex @Joseph Meehan ${"lang": "en|fr|de|ja|zhs"}
+313 R Drafna, Founder of Lat-Nam @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+314 M Hurkyl, Master Wizard @Randy Vargas ${"lang": "en|fr|de|ja|zhs"}
+315 R Hurkyl's Final Meditation @Nephelomancer ${"lang": "en|fr|de|ja|zhs"}
+316 M One with the Multiverse @Liiga Smilshkalne ${"lang": "en|fr|de|ja|zhs"}
+317 R Skystrike Officer @Diego Gisbert ${"lang": "en|fr|de|ja|zhs"}
+318 R Urza's Command @Dominik Mayer ${"lang": "en|fr|de|ja|zhs"}
+319 M Arcane Proxy @Kekai Kotaki ${"lang": "en|fr|de|ja|zhs"}
+320 M Surge Engine @Daarken ${"lang": "en|fr|de|ja|zhs"}
+321 R The Temporal Anchor @Kekai Kotaki ${"lang": "en|fr|de|ja|zhs"}
+322 R Terisian Mindbreaker @Steve Prescott ${"lang": "en|fr|de|ja|zhs"}
+323 R Ashnod, Flesh Mechanist @Howard Lyon ${"lang": "en|fr|de|ja|zhs"}
+324 R Diabolic Intent @Dan Murayama Scott ${"lang": "en|fr|de|ja|zhs"}
+325 R Fateful Handoff @Gaboleps ${"lang": "en|fr|de|ja|zhs"}
+326 M Gix, Yawgmoth Praetor @Anna Podedworna ${"lang": "en|fr|de|ja|zhs"}
+327 R Gix's Command @Dominik Mayer ${"lang": "en|fr|de|ja|zhs"}
+328 R Gixian Puppeteer @Bastien L. Deharme ${"lang": "en|fr|de|ja|zhs"}
+329 R Hostile Negotiations @David Auden Nash ${"lang": "en|fr|de|ja|zhs"}
+330 R Misery's Shadow @Igor Kieryluk ${"lang": "en|fr|de|ja|zhs"}
+331 R Painful Quandary @David Palumbo ${"lang": "en|fr|de|ja|zhs"}
+332 M Phyrexian Fleshgorger @Steve Prescott ${"lang": "en|fr|de|ja|zhs"}
+333 R Razorlash Transmogrant @Kekai Kotaki ${"lang": "en|fr|de|ja|zhs"}
+334 R Transmogrant's Crown @Nino Vecia ${"lang": "en|fr|de|ja|zhs"}
+335 R Brotherhood's End @Bryan Sola ${"lang": "en|fr|de|ja|zhs"}
+336 M Draconic Destiny @Justin Hernandez & Alexis Hernandez ${"lang": "en|fr|de|ja|zhs"}
+337 R Feldon, Ronom Excavator @Howard Lyon ${"lang": "en|fr|de|ja|zhs"}
+338 R Mechanized Warfare @Robin Olausson ${"lang": "en|fr|de|ja|zhs"}
+339 R Mishra's Command @Dominik Mayer ${"lang": "en|fr|de|ja|zhs"}
+340 R Over the Top @Cristi Balanescu ${"lang": "en|fr|de|ja|zhs"}
+341 R Tyrant of Kher Ridges @Karl Kopinski ${"lang": "en|fr|de|ja|zhs"}
+342 R Visions of Phyrexia @Dominik Mayer ${"lang": "en|fr|de|ja|zhs"}
+343 M Skitterbeam Battalion @Leon Tukker ${"lang": "en|fr|de|ja|zhs"}
+344 M Awaken the Woods @Bryan Sola ${"lang": "en|fr|de|ja|zhs"}
+345 R Fade from History @Alessandra Pisano ${"lang": "en|fr|de|ja|zhs"}
+346 R Fauna Shaman @Nicholas Elias ${"lang": "en|fr|de|ja|zhs"}
+347 R Gwenna, Eyes of Gaea @Steve Prescott ${"lang": "en|fr|de|ja|zhs"}
+348 R Teething Wurmlet @Jesper Ejsing ${"lang": "en|fr|de|ja|zhs"}
+349 R Titania's Command @Dominik Mayer ${"lang": "en|fr|de|ja|zhs"}
+350 R Perennial Behemoth @Wayne Reynolds ${"lang": "en|fr|de|ja|zhs"}
+351 M Rootwire Amalgam @Leon Tukker ${"lang": "en|fr|de|ja|zhs"}
+352 R Simian Simulacrum @Randy Vargas ${"lang": "en|fr|de|ja|zhs"}
+353 R Deathbloom Ritualist @Taras Susak ${"lang": "en|fr|de|ja|zhs"}
+354 R Hajar, Loyal Bodyguard @Joshua Raphael ${"lang": "en|fr|de|ja|zhs"}
+355 R Harbin, Vanguard Aviator @Kieran Yanner ${"lang": "en|fr|de|ja|zhs"}
+356 R Legions to Ashes @Artur Nakhodkin ${"lang": "en|fr|de|ja|zhs"}
+357 R Queen Kayla bin-Kroog @Cristi Balanescu ${"lang": "en|fr|de|ja|zhs"}
+358 M Sarinth Greatwurm @Jesper Ejsing ${"lang": "en|fr|de|ja|zhs"}
+359 R Tawnos, the Toymaker @Livia Prima ${"lang": "en|fr|de|ja|zhs"}
+360 R Tocasia, Dig Site Mentor @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+361 M Bladecoil Serpent @Joshua Cairos ${"lang": "en|fr|de|ja|zhs"}
+362 M Clay Champion @Leon Tukker ${"lang": "en|fr|de|ja|zhs"}
+363 M Cityscape Leveler @Leon Tukker ${"lang": "en|fr|de|ja|zhs"}
+364 R Liberator, Urza's Battlethopter @Ekaterina Burmak ${"lang": "en|fr|de|ja|zhs"}
+365 M Portal to Phyrexia @Svetlin Velinov ${"lang": "en|fr|de|ja|zhs"}
+366 R The Stasis Coffin @Artur Nakhodkin ${"lang": "en|fr|de|ja|zhs"}
+367 R The Stone Brain @Irina Nordsol ${"lang": "en|fr|de|ja|zhs"}
+368 R Thran Spider @Joshua Cairos ${"lang": "en|fr|de|ja|zhs"}
+369 R Blast Zone @Jorge Jacinto ${"lang": "en|fr|de|ja|zhs"}
+370 R Fortified Beachhead @Christian Dimitrov ${"lang": "en|fr|de|ja|zhs"}
+371 R Hall of Tagsin @Christian Dimitrov ${"lang": "en|fr|de|ja|zhs"}
+372 R Mishra's Foundry @Leon Tukker ${"lang": "en|fr|de|ja|zhs"}
+373 R Rescue Retriever @Jesper Ejsing ${"lang": "en|fr|de|ja|zhs"}
+374 R Geology Enthusiast @Fajareka Setiawan ${"lang": "en|fr|de|ja|zhs"}
+375 R Terror Ballista @Leon Tukker ${"lang": "en|fr|de|ja|zhs"}
+376 R Artificer's Dragon @Leon Tukker ${"lang": "en|fr|de|ja|zhs"}
+377 R Woodcaller Automaton @Ryan Pancoast ${"lang": "en|fr|de|ja|zhs"}
 
 [buy a box]
 378 R Mishra's Foundry @Leon Tukker
 
 [promo]
-379 R Queen Kayla bin-Kroog @Howard Lyon
+379 R Queen Kayla bin-Kroog @Howard Lyon ${"lang": "en|fr|de"}
 380 U Lay Down Arms @Liiga Smilshkalne
 381 U Flow of Knowledge @Tuan Duong Chu
 382 U Corrupt @Julie Dillon

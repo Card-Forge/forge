@@ -10,6 +10,7 @@ FatPackExtraSlots=70 BasicLands ISD
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=DKA
 TokenFallbackCode=ISD
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 M Archangel's Light @Volkan Baǵa

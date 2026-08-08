@@ -11,6 +11,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 # TDM Prereleases are actually 5 + a seeded faction booster. We'll figure that out later
 #FactionBooster=8 Common, 2 Uncommon, 1 UncommonTriland, 1 FactionLand, 1 Wildcard, 1 MythicRare
 BoosterBox=30
+CardLang=en,es,fr,de,it,ja
 
 [Common]
 Base=Common:!fromSheet("TDM gain lands"):fromSheet("TDM cards")
@@ -50,7 +51,7 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 2 R Anafenza, Unyielding Lineage @Matt Stewart
 3 C Arashin Sunshield @Inkognit
 4 C Bearer of Glory @Joshua Cairos
-5 R Clarion Conqueror @Nathaniel Himawan
+5 R Clarion Conqueror @Nathaniel Himawan ${"lang": "en|fr|de|it|ja"}
 6 C Coordinated Maneuver @Wisnu Tan
 7 U Dalkovan Packbeasts @Constantin Marin
 8 U Descendant of Storms @Lie Setiawan
@@ -96,7 +97,7 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 48 C Humbling Elder @Yohann Schepacz
 49 C Iceridge Serpent @Brian Valeza
 50 U Kishla Trawlers @Iris Compiet
-51 R Marang River Regent @John Tedrick
+51 R Marang River Regent @John Tedrick ${"lang": "en|fr"}
 52 R Naga Fleshcrafter @Valera Lutfullina
 53 C Ringing Strike Mastery @Alexandre Honoré
 54 C Riverwalk Technique @Julia Metzger
@@ -135,7 +136,7 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 87 M Rot-Curse Rakshasa @Chris Rahn
 88 U Salt Road Skirmish @Arif Wijaya
 89 C Sandskitter Outrider @Arif Wijaya
-90 R Scavenger Regent @John Tedrick
+90 R Scavenger Regent @John Tedrick ${"lang": "en|fr"}
 91 R The Sibsig Ceremony @Eli Minaya
 92 R Sidisi, Regent of the Mire @Diana Franco
 93 R Sinkhole Surveyor @Warren Mahy
@@ -181,7 +182,7 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 133 U Zurgo's Vanguard @Michele Giorgi
 134 C Ainok Wayfarer @Filipe Pagliuso
 135 U Attuned Hunter @Scott Murphy
-136 R Bloomvine Regent @Johann Bodin
+136 R Bloomvine Regent @Johann Bodin ${"lang": "en"}
 137 C Champion of Dusan @Bastien L. Deharme
 138 M Craterhoof Behemoth @Magali Villeneuve
 139 U Dragon Sniper @David Auden Nash
@@ -334,11 +335,11 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 286 L Forest @Valera Lutfullina
 
 [full art]
-287 L Plains @Ron Spencer
-288 L Island @Ron Spencer
-289 L Swamp @Ron Spencer
-290 L Mountain @Ron Spencer
-291 L Forest @Ron Spencer
+287 L Plains @Ron Spencer ${"lang": "en|fr|de|ja"}
+288 L Island @Ron Spencer ${"lang": "en|fr|de|ja"}
+289 L Swamp @Ron Spencer ${"lang": "en|fr|de|ja"}
+290 L Mountain @Ron Spencer ${"lang": "en|fr|de|ja"}
+291 L Forest @Ron Spencer ${"lang": "en|fr|de|ja"}
 
 [showcase]
 292 C Riling Dawnbreaker @Jarel Threat
@@ -426,28 +427,28 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 374 M Ureni, the Song Unending @Andrey Kuzinskiy
 375 R Yathan Roadwatcher @Kevin Glint
 376 R Zurgo, Thunder's Decree @Chuck Lukacs
-377 R Clarion Conqueror @Crystal Sully
+377 R Clarion Conqueror @Crystal Sully ${"lang": "en|fr|de|it|ja"}
 377☇ R Clarion Conqueror @Crystal Sully
-378 R Marang River Regent @Brian Valeza
+378 R Marang River Regent @Brian Valeza ${"lang": "en"}
 378☇ R Marang River Regent @Brian Valeza
-379 R Scavenger Regent @Allen Douglas
+379 R Scavenger Regent @Allen Douglas ${"lang": "en"}
 379☇ R Scavenger Regent @Allen Douglas
 380 R Magmatic Hellkite @Alison Johnstun
 380☇ R Magmatic Hellkite @Alison Johnstun
-381 R Bloomvine Regent @Brooklyn Smith
+381 R Bloomvine Regent @Brooklyn Smith ${"lang": "en"}
 381☇ R Bloomvine Regent @Brooklyn Smith
 382 M Ugin, Eye of the Storms @Antonio José Manzanedo
 382☇ M Ugin, Eye of the Storms @Antonio José Manzanedo
-399 M Ugin, Eye of the Storms @Joshua Raphael
-400 M Clarion Conqueror @Nathaniel Himawan
-401 M Elspeth, Storm Slayer @Ekaterina Burmak
-402 M Dracogenesis @Kai Carpenter
-403 M Sarkhan, Dragon Ascendant @Billy Christian
-404 M Craterhoof Behemoth @Magali Villeneuve
-405 M All-Out Assault @Joshua Cairos
-406 M Death Begets Life @Justin Hernandez & Alexis Hernandez
-407 M Narset, Jeskai Waymaster @Randy Vargas
-408 M Skirmish Rhino @James Bousema
+399 M Ugin, Eye of the Storms @Joshua Raphael ${"lang": "en|ja"}
+400 M Clarion Conqueror @Nathaniel Himawan ${"lang": "en|ja"}
+401 M Elspeth, Storm Slayer @Ekaterina Burmak ${"lang": "en|ja"}
+402 M Dracogenesis @Kai Carpenter ${"lang": "en|ja"}
+403 M Sarkhan, Dragon Ascendant @Billy Christian ${"lang": "en|ja"}
+404 M Craterhoof Behemoth @Magali Villeneuve ${"lang": "en|ja"}
+405 M All-Out Assault @Joshua Cairos ${"lang": "en|ja"}
+406 M Death Begets Life @Justin Hernandez & Alexis Hernandez ${"lang": "en|ja"}
+407 M Narset, Jeskai Waymaster @Randy Vargas ${"lang": "en|ja"}
+408 M Skirmish Rhino @James Bousema ${"lang": "en|ja"}
 
 [borderless]
 383 R Awaken the Honored Dead @Flavio Greco Paglia
@@ -468,26 +469,26 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 398 M Elspeth, Storm Slayer @Jeremy Wilson
 
 [etched]
-409 M Ugin, Eye of the Storms @Joshua Raphael
-410 M Clarion Conqueror @Nathaniel Himawan
-411 M Elspeth, Storm Slayer @Ekaterina Burmak
-412 M Dracogenesis @Kai Carpenter
-413 M Sarkhan, Dragon Ascendant @Billy Christian
-414 M Craterhoof Behemoth @Magali Villeneuve
-415 M All-Out Assault @Joshua Cairos
-416 M Death Begets Life @Justin Hernandez & Alexis Hernandez
-417 M Narset, Jeskai Waymaster @Randy Vargas
-418 M Skirmish Rhino @James Bousema
+409 M Ugin, Eye of the Storms @Joshua Raphael ${"lang": "en"}
+410 M Clarion Conqueror @Nathaniel Himawan ${"lang": "en"}
+411 M Elspeth, Storm Slayer @Ekaterina Burmak ${"lang": "en"}
+412 M Dracogenesis @Kai Carpenter ${"lang": "en"}
+413 M Sarkhan, Dragon Ascendant @Billy Christian ${"lang": "en"}
+414 M Craterhoof Behemoth @Magali Villeneuve ${"lang": "en"}
+415 M All-Out Assault @Joshua Cairos ${"lang": "en"}
+416 M Death Begets Life @Justin Hernandez & Alexis Hernandez ${"lang": "en"}
+417 M Narset, Jeskai Waymaster @Randy Vargas ${"lang": "en"}
+418 M Skirmish Rhino @James Bousema ${"lang": "en"}
 
 [promo]
-419 M Mox Jasper @Dan Frazier
-420 U Static Snare @Yohann Schepacz
-421 U Roiling Dragonstorm @Gaboleps
-422 U Strategic Betrayal @Flavio Greco Paglia
-423 U Channeled Dragonfire @Jorge Jacinto
-424 U Encroaching Dragonstorm @Marco Gorlei
-425 R Temur Battlecrier @Valera Lutfullina
-426 R Qarsi Revenant @Diana Franco
+419 M Mox Jasper @Dan Frazier ${"lang": "en"}
+420 U Static Snare @Yohann Schepacz ${"lang": "en|ja"}
+421 U Roiling Dragonstorm @Gaboleps ${"lang": "en|ja"}
+422 U Strategic Betrayal @Flavio Greco Paglia ${"lang": "en|ja"}
+423 U Channeled Dragonfire @Jorge Jacinto ${"lang": "en|ja"}
+424 U Encroaching Dragonstorm @Marco Gorlei ${"lang": "en|ja"}
+425 R Temur Battlecrier @Valera Lutfullina ${"lang": "en|fr|de"}
+426 R Qarsi Revenant @Diana Franco ${"lang": "en|ja"}
 
 [rebalanced]
 A-103 R A-Cori-Steel Cutter @Xabi Gaztelua

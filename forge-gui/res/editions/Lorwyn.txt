@@ -8,6 +8,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 FatPackExtraSlots=40 BasicLands
 ScryfallCode=LRW
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 R Ajani Goldmane @Aleksi Briclot
@@ -301,11 +302,11 @@ ScryfallCode=LRW
 289 L Island @Rob Alexander
 290 L Swamp @Fred Fields
 291 L Swamp @Ron Spears
-292 L Swamp @Wayne Reynolds
+292 L Swamp @Wayne Reynolds ${"lang": "en|fr|pt|ja"}
 293 L Swamp @Steve Prescott
 294 L Mountain @Larry MacDougall
 295 L Mountain @Martina Pilcerova
-296 L Mountain @Wayne Reynolds
+296 L Mountain @Wayne Reynolds ${"lang": "en|fr|de|it|ja"}
 297 L Mountain @Darrell Riche
 298 L Forest @Omar Rayyan
 299 L Forest @Rob Alexander

@@ -5,6 +5,7 @@ Name=Duel Decks: Nissa vs. Ob Nixilis
 Type=Duel_Deck
 ScryfallCode=DDR
 TokensCode=DDR
+CardLang=en,ja
 
 [cards]
 1 M Nissa, Voice of Zendikar @Raymond Swanland

@@ -9,6 +9,7 @@ BoosterBox=30
 # https://mtgscribe.com/2025/05/11/final-fantasy-play-booster-fact-sheet/
 BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,WildcardFoil
 Booster=6 Common,1 Common-Guest,3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 AnyLand
+CardLang=en,es,fr,de,it,ja
 
 [Common]
 Base=Common:!fromSheet("FIN dual lands"):fromSheet("FIN cards")
@@ -493,165 +494,165 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 577 M Y'shtola Rhul @Yusuke Mogi
 
 [extended art]
-421 R Ultima, Origin of Oblivion @Russell Dongjun Lu
-422 U Adelbert Steiner @Lorenzo Mastroianni
-423 R Aerith Gainsborough @Nakamura8
-424 U Ambrosia Whiteheart @Fajareka Setiawan
-425 U Ashe, Princess of Dalmasca @Yumi Yaoshida
-426 R Beatrix, Loyal General @Bachzim
-427 M Cloud, Midgar Mercenary @Kazto Furuya
-428 R Dion, Bahamut's Dominant @Kevin Glint
-429 U G'raha Tia @Narendra Bintara Adi
-430 R Minwu, White Mage @Josu Hernaiz
-431 R Rosa, Resolute White Mage @Christian Angel
-432 U Snow Villiers @Fariba Khamseh
-433 R Stiltzkin, Moogle Merchant @Hendry Iwanaga
-434 R Venat, Heart of Hydaelyn @Colin Boyer
-435 U Zack Fair @Yoshio Sugiura
-436 R Edgar, King of Figaro @Jake Murray
-437 M Gogo, Master of Mimicry @Thea Dumitriu
-438 R Jill, Shiva's Dominant @Arif Wijaya
-439 R Matoya, Archon Elder @Luisa J. Preissler
-440 U Quistis Trepe @Touge369
-441 R Ultimecia, Temporal Threat @Bachzim
-442 U Ultros, Obnoxious Octopus @Domenico Cava
-443 M Y'shtola Rhul @Immanuela Crovius
-444 R Ardyn, the Usurper @Russell Dongjun Lu
-445 R Cecil, Dark Knight @Josu Hernaiz
-446 U Fang, Fearless l'Cie @Simon Dominic
-447 U Gaius van Baelsar @Nino Is
-448 R Jecht, Reluctant Guardian @Michael MacRae
-449 R Kain, Traitorous Dragoon @Russell Dongjun Lu
-450 U Reno and Rude @Maji
-451 M Sephiroth, Fabled SOLDIER @Wisnu Tan
-452 R Seymour Flux @K-SUWABE
-453 U Sidequest: Hunt the Mark @Nino Is & Joshua Raphael
-454 R Vincent Valentine @Norikatsu Miyoshi
-455 R Zenos yae Galvus @Alexander Mokhov
-456 R Zodiark, Umbral God @AKAGI
-457 U Barret Wallace @Patrik Hell
-458 M Clive, Ifrit's Dominant @Nino Is
-459 R Firion, Wild Rose Warrior @Elizabeth Peiró
-460 U Freya Crescent @Nereida
-461 R Gilgamesh, Master-at-Arms @Lorenzo Mastroianni
-462 R Lightning, Security Sergeant @Ramza Psyru
-463 U Prompto Argentum @Billy Christian
-464 U Queen Brahne @Lorenzo Mastroianni
-465 R Raubahn, Bull of Ala Mhigo @Julia Vasilyeva
-466 R Seifer Almasy @Kotetsu Kinoshita
-467 R Vaan, Street Thief @Jake Murray
-468 R Zell Dincht @Kevin Sidharta
-469 R Bartz and Boko @Ryuichi Sakuma
-470 U Diamond Weapon @Esuthio
-471 U Quina, Qu Gourmet @Fajareka Setiawan
-472 R Sazh Katzroy @Colin Boyer
-473 R Tifa Lockhart @Laurel Austin
-474 U Torgal, A Fine Hound @Narendra Bintara Adi
-475 U Vanille, Cheerful l'Cie @Simon Dominic
-476 M Absolute Virtue @Toni Infante
-477 R Balthier and Fran @Arif Wijaya
-478 U Black Waltz No. 3 @Lordigan
-479 R Choco, Seeker of Paradise @Miho Midorikawa
-480 U Cid, Timeless Artificer @Lius Lasahido
-481 U Cloud of Darkness @Fariba Khamseh
-482 M Cloud, Planet's Champion @Magali Villeneuve
-483 M Emet-Selch, Unsundered @Néstor Ossandón Leal
-484 U The Emperor of Palamecia @Heonhwa
-485 U Exdeath, Void Warlock @Jessica Fong
-486 U Garland, Knight of Cornelia @Billy Christian
-487 U Garnet, Princess of Alexandria @Daniel Correia
-488 U Giott, King of the Dwarves @Ben Wootten
-489 U Gladiolus Amicitia @Gal Or
-490 R Golbez, Crystal Collector @Bachzim
-491 R Hope Estheim @Fariba Khamseh
-492 U Ignis Scientia @Mingchen Shen
-493 R Jenova, Ancient Calamity @Ignatius Budi
-494 R Joshua, Phoenix's Dominant @Lius Lasahido
-495 U Judge Magister Gabranth @Josu Hernaiz
-496 M Kefka, Court Mage @Xui Ton
-497 R Kuja, Genome Sorcerer @Joshua Raphael
-498 M Lightning, Army of One @Shiyu
-499 U Locke Cole @AKAGI
-500 R Noctis, Prince of Lucis @Jeremy Chong
-501 U Omega, Heartless Evolution @Josu Solano
-502 U Rinoa Heartilly @Francesca Resta
-503 U Rufus Shinra @Ittoku
-504 U Rydia, Summoner of Mist @Yumi Yaoshida
-505 M Sephiroth, Planet's Heir @Magali Villeneuve
-506 R Serah Farron @Carissa Susilo
-507 U Shantotto, Tactician Magician @Joshua Raphael
-508 R Sin, Spira's Punishment @John Tedrick
-509 R Squall, SeeD Mercenary @Yuu Fujiki
-510 R Tellah, Great Sage @Yumi Yaoshida
-511 M Terra, Magical Adept @Clare Wong
-512 U Tidus, Blitzball Star @Nakamura8
-513 U Ultimecia, Time Sorceress @Mikio Masuda
-514 M Vivi Ornitier @Toni Infante
-515 R The Wandering Minstrel @Thanh Tuấn
-516 R Xande, Dark Mage @Joseph Weston
-517 M Yuna, Hope of Spira @NINNIN
-518 U Zidane, Tantalus Thief @Eiji Kaneda
+421 R Ultima, Origin of Oblivion @Russell Dongjun Lu ${"lang": "en|fr|de|ja"}
+422 U Adelbert Steiner @Lorenzo Mastroianni ${"lang": "en|fr|de|ja"}
+423 R Aerith Gainsborough @Nakamura8 ${"lang": "en|fr|de|ja"}
+424 U Ambrosia Whiteheart @Fajareka Setiawan ${"lang": "en|fr|de|ja"}
+425 U Ashe, Princess of Dalmasca @Yumi Yaoshida ${"lang": "en|fr|de|ja"}
+426 R Beatrix, Loyal General @Bachzim ${"lang": "en|fr|de|ja"}
+427 M Cloud, Midgar Mercenary @Kazto Furuya ${"lang": "en|fr|de|ja"}
+428 R Dion, Bahamut's Dominant @Kevin Glint ${"lang": "en|fr|de|ja"}
+429 U G'raha Tia @Narendra Bintara Adi ${"lang": "en|fr|de|ja"}
+430 R Minwu, White Mage @Josu Hernaiz ${"lang": "en|fr|de|ja"}
+431 R Rosa, Resolute White Mage @Christian Angel ${"lang": "en|fr|de|ja"}
+432 U Snow Villiers @Fariba Khamseh ${"lang": "en|fr|de|ja"}
+433 R Stiltzkin, Moogle Merchant @Hendry Iwanaga ${"lang": "en|fr|de|ja"}
+434 R Venat, Heart of Hydaelyn @Colin Boyer ${"lang": "en|fr|de|ja"}
+435 U Zack Fair @Yoshio Sugiura ${"lang": "en|fr|de|ja"}
+436 R Edgar, King of Figaro @Jake Murray ${"lang": "en|fr|de|ja"}
+437 M Gogo, Master of Mimicry @Thea Dumitriu ${"lang": "en|fr|de|ja"}
+438 R Jill, Shiva's Dominant @Arif Wijaya ${"lang": "en|fr|de|ja"}
+439 R Matoya, Archon Elder @Luisa J. Preissler ${"lang": "en|fr|de|ja"}
+440 U Quistis Trepe @Touge369 ${"lang": "en|fr|de|ja"}
+441 R Ultimecia, Temporal Threat @Bachzim ${"lang": "en|fr|de|ja"}
+442 U Ultros, Obnoxious Octopus @Domenico Cava ${"lang": "en|fr|de|ja"}
+443 M Y'shtola Rhul @Immanuela Crovius ${"lang": "en|fr|de|ja"}
+444 R Ardyn, the Usurper @Russell Dongjun Lu ${"lang": "en|fr|de|ja"}
+445 R Cecil, Dark Knight @Josu Hernaiz ${"lang": "en|fr|de|ja"}
+446 U Fang, Fearless l'Cie @Simon Dominic ${"lang": "en|fr|de|ja"}
+447 U Gaius van Baelsar @Nino Is ${"lang": "en|fr|de|ja"}
+448 R Jecht, Reluctant Guardian @Michael MacRae ${"lang": "en|fr|de|ja"}
+449 R Kain, Traitorous Dragoon @Russell Dongjun Lu ${"lang": "en|fr|de|ja"}
+450 U Reno and Rude @Maji ${"lang": "en|fr|de|ja"}
+451 M Sephiroth, Fabled SOLDIER @Wisnu Tan ${"lang": "en|fr|de|ja"}
+452 R Seymour Flux @K-SUWABE ${"lang": "en|fr|de|ja"}
+453 U Sidequest: Hunt the Mark @Nino Is & Joshua Raphael ${"lang": "en|fr|de|ja"}
+454 R Vincent Valentine @Norikatsu Miyoshi ${"lang": "en|fr|de|ja"}
+455 R Zenos yae Galvus @Alexander Mokhov ${"lang": "en|fr|de|ja"}
+456 R Zodiark, Umbral God @AKAGI ${"lang": "en|fr|de|ja"}
+457 U Barret Wallace @Patrik Hell ${"lang": "en|fr|de|ja"}
+458 M Clive, Ifrit's Dominant @Nino Is ${"lang": "en|fr|de|ja"}
+459 R Firion, Wild Rose Warrior @Elizabeth Peiró ${"lang": "en|fr|de|ja"}
+460 U Freya Crescent @Nereida ${"lang": "en|fr|de|ja"}
+461 R Gilgamesh, Master-at-Arms @Lorenzo Mastroianni ${"lang": "en|fr|de|ja"}
+462 R Lightning, Security Sergeant @Ramza Psyru ${"lang": "en|fr|de|ja"}
+463 U Prompto Argentum @Billy Christian ${"lang": "en|fr|de|ja"}
+464 U Queen Brahne @Lorenzo Mastroianni ${"lang": "en|fr|de|ja"}
+465 R Raubahn, Bull of Ala Mhigo @Julia Vasilyeva ${"lang": "en|fr|de|ja"}
+466 R Seifer Almasy @Kotetsu Kinoshita ${"lang": "en|fr|de|ja"}
+467 R Vaan, Street Thief @Jake Murray ${"lang": "en|fr|de|ja"}
+468 R Zell Dincht @Kevin Sidharta ${"lang": "en|fr|de|ja"}
+469 R Bartz and Boko @Ryuichi Sakuma ${"lang": "en|fr|de|ja"}
+470 U Diamond Weapon @Esuthio ${"lang": "en|fr|de|ja"}
+471 U Quina, Qu Gourmet @Fajareka Setiawan ${"lang": "en|fr|de|ja"}
+472 R Sazh Katzroy @Colin Boyer ${"lang": "en|fr|de|ja"}
+473 R Tifa Lockhart @Laurel Austin ${"lang": "en|fr|de|ja"}
+474 U Torgal, A Fine Hound @Narendra Bintara Adi ${"lang": "en|fr|de|ja"}
+475 U Vanille, Cheerful l'Cie @Simon Dominic ${"lang": "en|fr|de|ja"}
+476 M Absolute Virtue @Toni Infante ${"lang": "en|fr|de|ja"}
+477 R Balthier and Fran @Arif Wijaya ${"lang": "en|fr|de|ja"}
+478 U Black Waltz No. 3 @Lordigan ${"lang": "en|fr|de|ja"}
+479 R Choco, Seeker of Paradise @Miho Midorikawa ${"lang": "en|fr|de|ja"}
+480 U Cid, Timeless Artificer @Lius Lasahido ${"lang": "en|fr|de|ja"}
+481 U Cloud of Darkness @Fariba Khamseh ${"lang": "en|fr|de|ja"}
+482 M Cloud, Planet's Champion @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+483 M Emet-Selch, Unsundered @Néstor Ossandón Leal ${"lang": "en|fr|de|ja"}
+484 U The Emperor of Palamecia @Heonhwa ${"lang": "en|fr|de|ja"}
+485 U Exdeath, Void Warlock @Jessica Fong ${"lang": "en|fr|de|ja"}
+486 U Garland, Knight of Cornelia @Billy Christian ${"lang": "en|fr|de|ja"}
+487 U Garnet, Princess of Alexandria @Daniel Correia ${"lang": "en|fr|de|ja"}
+488 U Giott, King of the Dwarves @Ben Wootten ${"lang": "en|fr|de|ja"}
+489 U Gladiolus Amicitia @Gal Or ${"lang": "en|fr|de|ja"}
+490 R Golbez, Crystal Collector @Bachzim ${"lang": "en|fr|de|ja"}
+491 R Hope Estheim @Fariba Khamseh ${"lang": "en|fr|de|ja"}
+492 U Ignis Scientia @Mingchen Shen ${"lang": "en|fr|de|ja"}
+493 R Jenova, Ancient Calamity @Ignatius Budi ${"lang": "en|fr|de|ja"}
+494 R Joshua, Phoenix's Dominant @Lius Lasahido ${"lang": "en|fr|de|ja"}
+495 U Judge Magister Gabranth @Josu Hernaiz ${"lang": "en|fr|de|ja"}
+496 M Kefka, Court Mage @Xui Ton ${"lang": "en|fr|de|ja"}
+497 R Kuja, Genome Sorcerer @Joshua Raphael ${"lang": "en|fr|de|ja"}
+498 M Lightning, Army of One @Shiyu ${"lang": "en|fr|de|ja"}
+499 U Locke Cole @AKAGI ${"lang": "en|fr|de|ja"}
+500 R Noctis, Prince of Lucis @Jeremy Chong ${"lang": "en|fr|de|ja"}
+501 U Omega, Heartless Evolution @Josu Solano ${"lang": "en|fr|de|ja"}
+502 U Rinoa Heartilly @Francesca Resta ${"lang": "en|fr|de|ja"}
+503 U Rufus Shinra @Ittoku ${"lang": "en|fr|de|ja"}
+504 U Rydia, Summoner of Mist @Yumi Yaoshida ${"lang": "en|fr|de|ja"}
+505 M Sephiroth, Planet's Heir @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+506 R Serah Farron @Carissa Susilo ${"lang": "en|fr|de|ja"}
+507 U Shantotto, Tactician Magician @Joshua Raphael ${"lang": "en|fr|de|ja"}
+508 R Sin, Spira's Punishment @John Tedrick ${"lang": "en|fr|de|ja"}
+509 R Squall, SeeD Mercenary @Yuu Fujiki ${"lang": "en|fr|de|ja"}
+510 R Tellah, Great Sage @Yumi Yaoshida ${"lang": "en|fr|de|ja"}
+511 M Terra, Magical Adept @Clare Wong ${"lang": "en|fr|de|ja"}
+512 U Tidus, Blitzball Star @Nakamura8 ${"lang": "en|fr|de|ja"}
+513 U Ultimecia, Time Sorceress @Mikio Masuda ${"lang": "en|fr|de|ja"}
+514 M Vivi Ornitier @Toni Infante ${"lang": "en|fr|de|ja"}
+515 R The Wandering Minstrel @Thanh Tuấn ${"lang": "en|fr|de|ja"}
+516 R Xande, Dark Mage @Joseph Weston ${"lang": "en|fr|de|ja"}
+517 M Yuna, Hope of Spira @NINNIN ${"lang": "en|fr|de|ja"}
+518 U Zidane, Tantalus Thief @Eiji Kaneda ${"lang": "en|fr|de|ja"}
 
 [etched]
-519 R Aerith Gainsborough @Syutsuri
-520 M Cloud, Midgar Mercenary @Maji
-521 R Dion, Bahamut's Dominant @Maji
-522 M Gogo, Master of Mimicry @Ryuichi Sakuma
-523 R Jill, Shiva's Dominant @Rika Suzuki
-524 R Ardyn, the Usurper @Rorubei
-525 R Cecil, Dark Knight @Misei Ito
-526 U Fang, Fearless l'Cie @ikeda_cpt
-527 M Sephiroth, Fabled SOLDIER @Maji
-528 R Vincent Valentine @Murakami Hisashi
-529 R Zenos yae Galvus @Susumu Kuroi
-530 M Clive, Ifrit's Dominant @Murakami Hisashi
-531 R Firion, Wild Rose Warrior @Kato Ayaka
-532 U Prompto Argentum @Kato Ayaka
-533 R Raubahn, Bull of Ala Mhigo @Penekor
-534 R Seifer Almasy @Rika Suzuki
-535 R Vaan, Street Thief @Kato Ayaka
-536 R Tifa Lockhart @Yoshiro Ambe
-537 U Vanille, Cheerful l'Cie @ikeda_cpt
-538 R Balthier and Fran @S. Makimura
-539 M Emet-Selch, Unsundered @Rorubei
-540 R Golbez, Crystal Collector @Tetsu Kurosawa
-541 R Hope Estheim @Shiyu
-542 R Joshua, Phoenix's Dominant @Susumu Kuroi
-543 M Kefka, Court Mage @Rorubei
-544 R Kuja, Genome Sorcerer @Masateru Ikeda & Robert Cornelius
-545 M Lightning, Army of One @Koji Nishino
-546 R Noctis, Prince of Lucis @Kato Ayaka
-547 R Squall, SeeD Mercenary @Kato Ayaka
-548 R The Wandering Minstrel @Penekor
-549 M Yuna, Hope of Spira @osamu
-550 U Zidane, Tantalus Thief @Canata Katana
-551 M Traveling Chocobo @Toni Infante
-551a M Traveling Chocobo @Toni Infante
-551b M Traveling Chocobo @Toni Infante
-551c M Traveling Chocobo @Toni Infante
-551d M Traveling Chocobo @Toni Infante
-551f M Traveling Chocobo @Toni Infante
-564 M Cloud, Midgar Mercenary @Inuchiyo Meimaru
-565 R Stiltzkin, Moogle Merchant @Yukihiro Maruo
-566 R A Realm Reborn @Susumu Kuroi
-567 R Tifa Lockhart @Yoshiro Ambe
-568 M Traveling Chocobo @Ishikawa Kenta
-569 R Choco, Seeker of Paradise @Kemonomichi
-570 M Vivi Ornitier @Ryanroro
-571 M Yuna, Hope of Spira @Yuichi Murakami
-572 L Plains @Jonas De Ro
-573 L Island @Eddie Mendoza
-574 L Swamp @Domenico Cava
-575 L Mountain @Domenico Cava
-576 L Forest @Leon Tukker
-578 U Phoenix Down @John Severin Brassell
-579 C White Auracite @Magali Villeneuve
-580 U Zack Fair @Yoshio Sugiura
-581 R Astrologian's Planisphere @Josephine Chang
-582 C Sage's Nouliths @Justyna Dura
-583 U Circle of Power @Josephine Chang
-584 U Barret Wallace @Patrik Hell
-585 C Laughing Mad @RARE ENGINE
+519 R Aerith Gainsborough @Syutsuri ${"lang": "en|fr|de|ja"}
+520 M Cloud, Midgar Mercenary @Maji ${"lang": "en|fr|de|ja"}
+521 R Dion, Bahamut's Dominant @Maji ${"lang": "en|fr|de|ja"}
+522 M Gogo, Master of Mimicry @Ryuichi Sakuma ${"lang": "en|fr|de|ja"}
+523 R Jill, Shiva's Dominant @Rika Suzuki ${"lang": "en|fr|de|ja"}
+524 R Ardyn, the Usurper @Rorubei ${"lang": "en|fr|de|ja"}
+525 R Cecil, Dark Knight @Misei Ito ${"lang": "en|fr|de|ja"}
+526 U Fang, Fearless l'Cie @ikeda_cpt ${"lang": "en|fr|de|ja"}
+527 M Sephiroth, Fabled SOLDIER @Maji ${"lang": "en|fr|de|ja"}
+528 R Vincent Valentine @Murakami Hisashi ${"lang": "en|fr|de|ja"}
+529 R Zenos yae Galvus @Susumu Kuroi ${"lang": "en|fr|de|ja"}
+530 M Clive, Ifrit's Dominant @Murakami Hisashi ${"lang": "en|fr|de|ja"}
+531 R Firion, Wild Rose Warrior @Kato Ayaka ${"lang": "en|fr|de|ja"}
+532 U Prompto Argentum @Kato Ayaka ${"lang": "en|fr|de|ja"}
+533 R Raubahn, Bull of Ala Mhigo @Penekor ${"lang": "en|fr|de|ja"}
+534 R Seifer Almasy @Rika Suzuki ${"lang": "en|fr|de|ja"}
+535 R Vaan, Street Thief @Kato Ayaka ${"lang": "en|fr|de|ja"}
+536 R Tifa Lockhart @Yoshiro Ambe ${"lang": "en|fr|de|ja"}
+537 U Vanille, Cheerful l'Cie @ikeda_cpt ${"lang": "en|fr|de|ja"}
+538 R Balthier and Fran @S. Makimura ${"lang": "en|fr|de|ja"}
+539 M Emet-Selch, Unsundered @Rorubei ${"lang": "en|fr|de|ja"}
+540 R Golbez, Crystal Collector @Tetsu Kurosawa ${"lang": "en|fr|de|ja"}
+541 R Hope Estheim @Shiyu ${"lang": "en|fr|de|ja"}
+542 R Joshua, Phoenix's Dominant @Susumu Kuroi ${"lang": "en|fr|de|ja"}
+543 M Kefka, Court Mage @Rorubei ${"lang": "en|fr|de|ja"}
+544 R Kuja, Genome Sorcerer @Masateru Ikeda & Robert Cornelius ${"lang": "en|fr|de|ja"}
+545 M Lightning, Army of One @Koji Nishino ${"lang": "en|fr|de|ja"}
+546 R Noctis, Prince of Lucis @Kato Ayaka ${"lang": "en|fr|de|ja"}
+547 R Squall, SeeD Mercenary @Kato Ayaka ${"lang": "en|fr|de|ja"}
+548 R The Wandering Minstrel @Penekor ${"lang": "en|fr|de|ja"}
+549 M Yuna, Hope of Spira @osamu ${"lang": "en|fr|de|ja"}
+550 U Zidane, Tantalus Thief @Canata Katana ${"lang": "en|fr|de|ja"}
+551 M Traveling Chocobo @Toni Infante ${"lang": "ja"}
+551a M Traveling Chocobo @Toni Infante ${"lang": "en"}
+551b M Traveling Chocobo @Toni Infante ${"lang": "en"}
+551c M Traveling Chocobo @Toni Infante ${"lang": "en"}
+551d M Traveling Chocobo @Toni Infante ${"lang": "en"}
+551f M Traveling Chocobo @Toni Infante ${"lang": "en"}
+564 M Cloud, Midgar Mercenary @Inuchiyo Meimaru ${"lang": "en"}
+565 R Stiltzkin, Moogle Merchant @Yukihiro Maruo ${"lang": "en"}
+566 R A Realm Reborn @Susumu Kuroi ${"lang": "en"}
+567 R Tifa Lockhart @Yoshiro Ambe ${"lang": "en"}
+568 M Traveling Chocobo @Ishikawa Kenta ${"lang": "en"}
+569 R Choco, Seeker of Paradise @Kemonomichi ${"lang": "en"}
+570 M Vivi Ornitier @Ryanroro ${"lang": "en"}
+571 M Yuna, Hope of Spira @Yuichi Murakami ${"lang": "en"}
+572 L Plains @Jonas De Ro ${"lang": "en|ja"}
+573 L Island @Eddie Mendoza ${"lang": "en|ja"}
+574 L Swamp @Domenico Cava ${"lang": "en|ja"}
+575 L Mountain @Domenico Cava ${"lang": "en|ja"}
+576 L Forest @Leon Tukker ${"lang": "en|ja"}
+578 U Phoenix Down @John Severin Brassell ${"lang": "en|ja"}
+579 C White Auracite @Magali Villeneuve ${"lang": "en|ja"}
+580 U Zack Fair @Yoshio Sugiura ${"lang": "en|ja"}
+581 R Astrologian's Planisphere @Josephine Chang ${"lang": "en|ja"}
+582 C Sage's Nouliths @Justyna Dura ${"lang": "en|ja"}
+583 U Circle of Power @Josephine Chang ${"lang": "en|ja"}
+584 U Barret Wallace @Patrik Hell ${"lang": "en|ja"}
+585 C Laughing Mad @RARE ENGINE ${"lang": "en|ja"}
 
 [jumpstart]
 552 M Cloud, Planet's Champion @Magali Villeneuve

@@ -9,6 +9,7 @@ BoosterBox=36
 BoosterCovers=3
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=MH2
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 U Abiding Grace @Ravenna Tran
@@ -222,7 +223,7 @@ ScryfallCode=MH2
 209 U Prophetic Titan @Slawomir Maniak
 210 U Rakdos Headliner @Ekaterina Burmak
 211 U Ravenous Squirrel @Dan Murayama Scott
-212 U Road // Ruin @Johann Bodin
+212 U Road // Ruin @Johann Bodin ${"lang": "en|de|it|ko"}
 213 C Storm God's Oracle @Pauline Voss
 214 R Sythis, Harvest's Hand @Ryan Yee
 215 C Terminal Agony @Lucas Graciano
@@ -302,7 +303,7 @@ ScryfallCode=MH2
 287 M Titania, Protector of Argoth @Magali Villeneuve
 288 U Yavimaya Elder @Matt Cavotta
 289 R Chainer, Nightmare Adept @Steve Prescott
-290 R Fire // Ice @Dan Murayama Scott
+290 R Fire // Ice @Dan Murayama Scott ${"lang": "en"}
 291 M Mirari's Wake @Volkan Baǵa
 292 R Shardless Agent @Izzy
 293 R Sterling Grove @Seb McKinnon
@@ -392,7 +393,7 @@ ScryfallCode=MH2
 373 U Prophetic Titan @Slawomir Maniak
 374 U Rakdos Headliner @Ekaterina Burmak
 375 U Ravenous Squirrel @Dan Murayama Scott
-376 U Road // Ruin @Johann Bodin
+376 U Road // Ruin @Johann Bodin ${"lang": "en|es|fr|it|pt|ja|ru|zht"}
 377 R Sythis, Harvest's Hand @Ryan Yee
 378 R Dermotaxi @Mark Zug
 379 M Kaldra Compleat @Vincent Proce
@@ -462,45 +463,45 @@ ScryfallCode=MH2
 441 R Yavimaya, Cradle of Growth @Sarah Finnigan
 
 [extended art]
-442 R Out of Time @Tobias Kwan
-443 R Resurgent Belief @Cliff Childs
-444 R Sanctifier en-Vec @Michael C. Hayes
-445 R Timeless Dragon @Anastasia Ovchinnikova
-446 R Inevitable Betrayal @Franz Vohwinkel
-447 R Rishadan Dockhand @Manuel Castañón
-448 R Suspend @Lake Hurwitz
-449 R Damn @Lucas Graciano
-450 R Dauthi Voidwalker @Sidharth Chaturvedi
-451 R Necrogoyf @Nicholas Gregory
-452 R Profane Tutor @Richard Kane Ferguson
-453 R Unmarked Grave @James Paick
-454 R Bloodbraid Marauder @Kari Christensen
-455 R Breya's Apprentice @Aleksi Briclot
-456 R Calibrated Blast @Evan Shipard
-457 R Chef's Kiss @Iain McCaig
-458 R Glimpse of Tomorrow @Jokubas Uogintas
-459 R Aeve, Progenitor Ooze @Andrew Mar
-460 R Chitterspitter @Jason Felix
-461 R Gaea's Will @Lucas Graciano
-462 R Sanctum Weaver @Kimonas Theodossiou
-463 R Asmoranomardicadaistinaculdacar @Ryan Pancoast
-464 R Carth the Lion @Donato Giancola
-465 R Master of Death @John Stanko
-466 R Piru, the Volatile @Greg Staples
-467 R Territorial Kavu @E. M. Gist
-468 R Yusri, Fortune's Flame @Steven Belledin
-469 R Academy Manufactor @Campbell White
-470 R Diamond Lion @Howard Lyon
-471 R Nettlecyst @Vincent Proce
-472 R Sol Talisman @Volkan Baǵa
-473 R Void Mirror @Colin Boyer
-474 R Zabaz, the Glimmerwasp @Jason Felix
-475 R Arid Mesa @Raymond Swanland
-476 R Marsh Flats @Izzy
-477 R Misty Rainforest @Shelly Wan
-478 R Scalding Tarn @Philip Straub
-479 R Verdant Catacombs @Vance Kovacs
-480 R Yavimaya, Cradle of Growth @Sarah Finnigan
+442 R Out of Time @Tobias Kwan ${"lang": "en|es|fr|de|it|ja"}
+443 R Resurgent Belief @Cliff Childs ${"lang": "en|es|fr|de|it|ja"}
+444 R Sanctifier en-Vec @Michael C. Hayes ${"lang": "en|es|fr|de|it|ja"}
+445 R Timeless Dragon @Anastasia Ovchinnikova ${"lang": "en|es|fr|de|it|ja"}
+446 R Inevitable Betrayal @Franz Vohwinkel ${"lang": "en|es|fr|de|it|ja"}
+447 R Rishadan Dockhand @Manuel Castañón ${"lang": "en|es|fr|de|it|ja"}
+448 R Suspend @Lake Hurwitz ${"lang": "en|es|fr|de|it|ja"}
+449 R Damn @Lucas Graciano ${"lang": "en|es|fr|de|it|ja"}
+450 R Dauthi Voidwalker @Sidharth Chaturvedi ${"lang": "en|es|fr|de|it|ja"}
+451 R Necrogoyf @Nicholas Gregory ${"lang": "en|es|fr|de|it|ja"}
+452 R Profane Tutor @Richard Kane Ferguson ${"lang": "en|es|fr|de|it|ja"}
+453 R Unmarked Grave @James Paick ${"lang": "en|es|fr|de|it|ja"}
+454 R Bloodbraid Marauder @Kari Christensen ${"lang": "en|es|fr|de|it|ja"}
+455 R Breya's Apprentice @Aleksi Briclot ${"lang": "en|es|fr|de|it|ja"}
+456 R Calibrated Blast @Evan Shipard ${"lang": "en|es|fr|de|it|ja"}
+457 R Chef's Kiss @Iain McCaig ${"lang": "en|es|fr|de|it|ja"}
+458 R Glimpse of Tomorrow @Jokubas Uogintas ${"lang": "en|es|fr|de|it|ja"}
+459 R Aeve, Progenitor Ooze @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+460 R Chitterspitter @Jason Felix ${"lang": "en|es|fr|de|it|ja"}
+461 R Gaea's Will @Lucas Graciano ${"lang": "en|es|fr|de|it|ja"}
+462 R Sanctum Weaver @Kimonas Theodossiou ${"lang": "en|es|fr|de|it|ja"}
+463 R Asmoranomardicadaistinaculdacar @Ryan Pancoast ${"lang": "en|es|fr|de|it|ja"}
+464 R Carth the Lion @Donato Giancola ${"lang": "en|es|fr|de|it|ja"}
+465 R Master of Death @John Stanko ${"lang": "en|es|fr|de|it|ja"}
+466 R Piru, the Volatile @Greg Staples ${"lang": "en|es|fr|de|it|ja"}
+467 R Territorial Kavu @E. M. Gist ${"lang": "en|es|fr|de|it|ja"}
+468 R Yusri, Fortune's Flame @Steven Belledin ${"lang": "en|es|fr|de|it|ja"}
+469 R Academy Manufactor @Campbell White ${"lang": "en|es|fr|de|it|ja"}
+470 R Diamond Lion @Howard Lyon ${"lang": "en|es|fr|de|it|ja"}
+471 R Nettlecyst @Vincent Proce ${"lang": "en|es|fr|de|it|ja"}
+472 R Sol Talisman @Volkan Baǵa ${"lang": "en|es|fr|de|it|ja"}
+473 R Void Mirror @Colin Boyer ${"lang": "en|es|fr|de|it|ja"}
+474 R Zabaz, the Glimmerwasp @Jason Felix ${"lang": "en|es|fr|de|it|ja"}
+475 R Arid Mesa @Raymond Swanland ${"lang": "en|es|fr|de|it|ja"}
+476 R Marsh Flats @Izzy ${"lang": "en|es|fr|de|it|ja"}
+477 R Misty Rainforest @Shelly Wan ${"lang": "en|es|fr|de|it|ja"}
+478 R Scalding Tarn @Philip Straub ${"lang": "en|es|fr|de|it|ja"}
+479 R Verdant Catacombs @Vance Kovacs ${"lang": "en|es|fr|de|it|ja"}
+480 R Yavimaya, Cradle of Growth @Sarah Finnigan ${"lang": "en|es|fr|de|it|ja"}
 
 [bundle]
 481 L Plains @Eric Peterson
@@ -518,7 +519,7 @@ ScryfallCode=MH2
 491 M Sanctum Prelate @Michael C. Hayes
 
 [promo]
-492 R Yusri, Fortune's Flame @Evyn Fong
+492 R Yusri, Fortune's Flame @Evyn Fong ${"lang": "en|es|fr|de|it|ru"}
 
 [Lands]
 19 Arid Mesa|MH2|1

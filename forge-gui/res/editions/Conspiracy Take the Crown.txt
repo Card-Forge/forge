@@ -7,6 +7,7 @@ BoosterCovers=3
 Booster=10 Common:!fromSheet("CN2 Draft Matters"), 3 Uncommon:!fromSheet("CN2 Draft Matters"), 1 RareMythic:!fromSheet("CN2 Draft Matters"):fromSheet("CN2 cards"), 1 fromSheet("CN2 Draft Matters")
 AdditionalSheetForFoils=fromSheet("CN2 Foil Kaya")
 ScryfallCode=CN2
+CardLang=en,ja,zhs
 
 [cards]
 1 C Adriana's Valor @Lius Lasahido

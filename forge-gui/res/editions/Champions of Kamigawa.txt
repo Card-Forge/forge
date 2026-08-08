@@ -8,10 +8,11 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 FoilAlwaysInCommonSlot=False
 ScryfallCode=CHK
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 C Blessed Breath @Tsutomu Kawade
-2 U Bushi Tenderfoot @Mark Zug
+2 U Bushi Tenderfoot @Mark Zug ${"lang": "en"}
 3 C Cage of Hands @Mark Tedin
 4 C Call to Glory @Wayne Reynolds
 5 U Candles' Glow @Alan Pollack
@@ -37,7 +38,7 @@ ScryfallCode=CHK
 25 C Kitsune Blademaster @Keith Garletts
 26 C Kitsune Diviner @Pete Venters
 27 C Kitsune Healer @Michael Sutfin
-28 R Kitsune Mystic @Jim Murray
+28 R Kitsune Mystic @Jim Murray ${"lang": "en"}
 29 C Kitsune Riftwalker @Pete Venters
 30 R Konda, Lord of Eiganjo @John Bolton
 31 U Konda's Hatamoto @Lars Grant-West
@@ -79,7 +80,7 @@ ScryfallCode=CHK
 67 C Hisoka's Defiance @Greg Hildebrandt
 68 C Hisoka's Guard @Wayne England
 69 U Honden of Seeing Winds @Martina Pilcerova
-70 R Jushi Apprentice @Glen Angus
+70 R Jushi Apprentice @Glen Angus ${"lang": "en"}
 71 C Kami of Twisted Reflection @Mark Tedin
 72 R Keiga, the Tide Star @Ittoku
 73 C Lifted by Clouds @Darrell Riche
@@ -102,7 +103,7 @@ ScryfallCode=CHK
 90 U Soratami Savant @Jim Nelson
 91 U Soratami Seer @Glen Angus
 92 U Squelch @Matt Cavotta
-93 U Student of Elements @Ittoku
+93 U Student of Elements @Ittoku ${"lang": "en|de"}
 94 R Swirl the Mists @Arnie Swekel
 95 C Teller of Tales @Jim Murray
 96 C Thoughtbind @Rob Alexander
@@ -138,9 +139,9 @@ ScryfallCode=CHK
 126 R Myojin of Night's Reach @Kev Walker
 127 U Nezumi Bone-Reader @Dan Murayama Scott
 128 C Nezumi Cutthroat @Carl Critchlow
-129 U Nezumi Graverobber @Jim Nelson
+129 U Nezumi Graverobber @Jim Nelson ${"lang": "en"}
 130 C Nezumi Ronin @Scott M. Fischer
-131 R Nezumi Shortfang @Daren Bader
+131 R Nezumi Shortfang @Daren Bader ${"lang": "en|de"}
 132 R Night Dealings @Darrell Riche
 133 R Night of Souls' Betrayal @Greg Staples
 134 U Numai Outcast @Adam Rex
@@ -162,15 +163,15 @@ ScryfallCode=CHK
 150 C Wicked Akuba @Ittoku
 151 C Akki Avalanchers @Matt Thompson
 152 U Akki Coalflinger @Nottsuo
-153 R Akki Lavarunner @Matt Cavotta
+153 R Akki Lavarunner @Matt Cavotta ${"lang": "en"}
 154 C Akki Rockspeaker @David Martin
 155 U Akki Underminer @Thomas M. Baxa
 156 C Battle-Mad Ronin @Wayne England
 157 R Ben-Ben, Akki Hermit @Greg Staples
 158 U Blind with Anger @Dave Dorman
 159 U Blood Rites @Paolo Parente
-160a U Brothers Yamazaki @Ron Spears
-160b U Brothers Yamazaki @Ron Spears
+160a U Brothers Yamazaki @Ron Spears ${"lang": "en|de|it|ja"}
+160b U Brothers Yamazaki @Ron Spears ${"lang": "en"}
 161 C Brutal Deceiver @Jon Foster
 162 C Crushing Pain @Carl Critchlow
 163 C Desperate Ritual @Darrell Riche
@@ -183,7 +184,7 @@ ScryfallCode=CHK
 170 U Hanabi Blast @Paolo Parente
 171 C Hearth Kami @Luca Zontini
 172 U Honden of Infinite Rage @John Avon
-173 U Initiate of Blood @Carl Critchlow
+173 U Initiate of Blood @Carl Critchlow ${"lang": "en"}
 174 C Kami of Fire's Roar @Dave Dorman
 175 R Kiki-Jiki, Mirror Breaker @Pete Venters
 176 R Kumano, Master Yamabushi @Adam Rex
@@ -212,7 +213,7 @@ ScryfallCode=CHK
 199 C Yamabushi's Storm @Wayne England
 200 R Zo-Zu the Punisher @Matt Cavotta
 201 R Azusa, Lost but Seeking @Todd Lockwood
-202 R Budoka Gardener @Kev Walker
+202 R Budoka Gardener @Kev Walker ${"lang": "en"}
 203 C Burr Grafter @Heather Hudson
 204 C Commune with Nature @Edward P. Beard, Jr.
 205 R Dosan the Falling Leaf @Mark Zug
@@ -243,7 +244,7 @@ ScryfallCode=CHK
 230 R Nature's Will @Mitch Cotie
 231 U Orbweaver Kumo @Dan Murayama Scott
 232 C Order of the Sacred Bell @Carl Critchlow
-233 U Orochi Eggwatcher @Dan Murayama Scott
+233 U Orochi Eggwatcher @Dan Murayama Scott ${"lang": "en"}
 234 C Orochi Leafcaller @Joel Thomas
 235 C Orochi Ranger @Greg Hildebrandt
 236 C Orochi Sustainer @rk post
@@ -309,7 +310,7 @@ ScryfallCode=CHK
 296 L Swamp @Jim Nelson
 297 L Swamp @Jim Nelson
 298 L Swamp @Jim Nelson
-299 L Mountain @John Avon
+299 L Mountain @John Avon ${"lang": "en|es|fr|de|pt|ja|zhs"}
 300 L Mountain @John Avon
 301 L Mountain @John Avon
 302 L Mountain @John Avon

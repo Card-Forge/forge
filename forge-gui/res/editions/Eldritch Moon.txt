@@ -12,6 +12,7 @@ TreatAsSmallSet=true
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=EMN
 TokenFallbackCode=SOI
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 U Abundant Maw @Greg Staples

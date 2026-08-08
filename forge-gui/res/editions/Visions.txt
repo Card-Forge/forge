@@ -8,6 +8,7 @@ BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
 ScryfallCode=VIS
+CardLang=en,es,fr,de,it,pt,ja,ko,zht
 
 [cards]
 1 R Archangel @Christopher Rush

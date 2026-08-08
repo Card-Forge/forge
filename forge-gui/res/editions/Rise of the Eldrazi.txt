@@ -9,6 +9,7 @@ FatPack=8
 FatPackExtraSlots=40 BasicLands
 ScryfallCode=ROE
 TokenFallbackCode=WWK
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 M All Is Dust @Jason Felix

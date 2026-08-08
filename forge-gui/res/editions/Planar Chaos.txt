@@ -8,6 +8,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 FatPackExtraSlots=40 BasicLands TSP
 ScryfallCode=PLC
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 C Aven Riftwatcher @Don Hazeltine

@@ -8,6 +8,7 @@ Booster=10 Common:fromSheet("M20 cards"):!fromSheet("M20 Lands"), 3 Uncommon:fro
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=CORE_SET
 ScryfallCode=M20
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 C Aerial Assault @Dan Murayama Scott
@@ -274,8 +275,8 @@ ScryfallCode=M20
 262 L Plains @Zoltan Boros & Gabor Szikszai
 263 L Plains @Nils Hamm
 264 L Plains @Andreas Rocha
-265 L Island @John Avon
-266 L Island @Babyson Chen & Uzhen Lin
+265 L Island @John Avon ${"lang": "en|es|fr|de|it|ja|ko|zhs|zht"}
+266 L Island @Babyson Chen & Uzhen Lin ${"lang": "en|fr|de|it|pt|ja|ko|ru|zht"}
 267 L Island @Cliff Childs
 268 L Island @Andreas Rocha
 269 L Swamp @Mike Bierek
@@ -285,7 +286,7 @@ ScryfallCode=M20
 273 L Mountain @Sam Burley
 274 L Mountain @Karl Kopinski
 275 L Mountain @Adam Paquette
-276 L Mountain @Andreas Rocha
+276 L Mountain @Andreas Rocha ${"lang": "en|fr|de|it|pt|ja|ko|zht"}
 277 L Forest @Volkan Baǵa
 278 L Forest @Steven Belledin
 279 L Forest @Jim Nelson

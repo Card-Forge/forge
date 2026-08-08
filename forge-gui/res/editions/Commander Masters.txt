@@ -4,9 +4,10 @@ Date=2023-08-04
 Name=Commander Masters
 Type=Commander
 ScryfallCode=CMM
+CardLang=en,es,fr,de,pt,ja,zhs
 
 [cards]
-1 S The Prismatic Piper @Seb McKinnon
+1 S The Prismatic Piper @Seb McKinnon ${"lang": "en|fr|de|ja|zhs"}
 2 M Kozilek, the Great Distortion @Aleksi Briclot
 3 M Morophon, the Boundless @Victor Adame Minguez
 4 U Pathrazer of Ulamog @Austin Hsu
@@ -208,240 +209,240 @@ ScryfallCode=CMM
 200 R Wretched Confluence @Kieran Yanner
 201 U Yahenni, Undying Partisan @Lius Lasahido
 202 U Yargle, Glutton of Urborg @Jehan Choo
-203 C Abrade @Jonas De Ro
-204 U Anax, Hardened in the Forge @Eric Deschamps
-205 R Ashling the Pilgrim @Wayne Reynolds
-206 R Avatar of Slaughter @Jason A. Engle
-207 M Balefire Dragon @Eric Deschamps
-208 C Blood Aspirant @Tyler Walpole
-209 U Captain Ripley Vance @Mathias Kollros
-210 C Champion of the Flame @Wayne Reynolds
-211 C Crimson Fleet Commodore @Sidharth Chaturvedi
-212 C Cyclops Electromancer @Jason Felix
-213 R Daretti, Scrap Savant @Dan Murayama Scott
-214 R Deflecting Swat @Izzy
-215 R Disrupt Decorum @Sidharth Chaturvedi
-216 R Divergent Transformations @Kev Walker
-217 C Dragon Fodder @Volkan Baǵa
-218 R Drakuseth, Maw of Flames @Grzegorz Rutkowski
-219 C Dwarven Hammer @Raoul Vitale
-220 C Faithless Looting @Karl Kopinski
-221 U Fiendlash @Antonio José Manzanedo
-222 R Fiery Confluence @Kieran Yanner
-223 C Fists of Flame @Steve Argyle
-224 U Frontier Warmonger @Livia Prima
-225 U Furious Rise @Chase Stone
-226 C Gargadon @Chris Seaman
+203 C Abrade @Jonas De Ro ${"lang": "en|es|de|pt|ja|zhs"}
+204 U Anax, Hardened in the Forge @Eric Deschamps ${"lang": "en|es|de|pt|ja|zhs"}
+205 R Ashling the Pilgrim @Wayne Reynolds ${"lang": "en|es|de|pt|ja|zhs"}
+206 R Avatar of Slaughter @Jason A. Engle ${"lang": "en|es|de|pt|ja|zhs"}
+207 M Balefire Dragon @Eric Deschamps ${"lang": "en|es|de|pt|ja|zhs"}
+208 C Blood Aspirant @Tyler Walpole ${"lang": "en|es|de|pt|ja|zhs"}
+209 U Captain Ripley Vance @Mathias Kollros ${"lang": "en|es|de|pt|ja|zhs"}
+210 C Champion of the Flame @Wayne Reynolds ${"lang": "en|es|de|pt|ja|zhs"}
+211 C Crimson Fleet Commodore @Sidharth Chaturvedi ${"lang": "en|es|de|pt|ja|zhs"}
+212 C Cyclops Electromancer @Jason Felix ${"lang": "en|es|de|pt|ja|zhs"}
+213 R Daretti, Scrap Savant @Dan Murayama Scott ${"lang": "en|es|de|pt|ja|zhs"}
+214 R Deflecting Swat @Izzy ${"lang": "en|es|de|pt|ja|zhs"}
+215 R Disrupt Decorum @Sidharth Chaturvedi ${"lang": "en|es|de|pt|ja|zhs"}
+216 R Divergent Transformations @Kev Walker ${"lang": "en|es|de|pt|ja|zhs"}
+217 C Dragon Fodder @Volkan Baǵa ${"lang": "en|es|de|pt|ja|zhs"}
+218 R Drakuseth, Maw of Flames @Grzegorz Rutkowski ${"lang": "en|es|de|pt|ja|zhs"}
+219 C Dwarven Hammer @Raoul Vitale ${"lang": "en|es|de|pt|ja|zhs"}
+220 C Faithless Looting @Karl Kopinski ${"lang": "en|es|de|pt|ja|zhs"}
+221 U Fiendlash @Antonio José Manzanedo ${"lang": "en|es|de|pt|ja|zhs"}
+222 R Fiery Confluence @Kieran Yanner ${"lang": "en|es|de|pt|ja|zhs"}
+223 C Fists of Flame @Steve Argyle ${"lang": "en|es|de|pt|ja|zhs"}
+224 U Frontier Warmonger @Livia Prima ${"lang": "en|es|de|pt|ja|zhs"}
+225 U Furious Rise @Chase Stone ${"lang": "en|es|de|pt|ja|zhs"}
+226 C Gargadon @Chris Seaman ${"lang": "en|es|de|pt|ja|zhs"}
 227 R Godo, Bandit Warlord @Paolo Parente
-228 R Grenzo, Havoc Raiser @Svetlin Velinov
-229 C Guttersnipe @Mathias Kollros
-230 U Havoc Jester @Jason A. Engle
-231 R Heartless Hidetsugu @Carl Critchlow
-232 R Hellkite Charger @Jaime Jones
-233 U Hoarding Dragon @Matt Cavotta
-234 C Impulsive Pilferer @Jakub Kasper
-235 R Inferno Titan @Kev Walker
-236 M Insurrection @Mark Zug
-237 U Kazuul, Tyrant of the Cliffs @Paul Bonner
-238 R Krenko, Mob Boss @Karl Kopinski
-239 C Living Lightning @Caio Monteiro
-240 U Loyal Apprentice @Joe Slucher
-241 R Magus of the Wheel @Carl Frank
-242 C Makeshift Munitions @Filip Burburan
-243 U Meteoric Mace @Randy Vargas
-244 M Neheb, the Eternal @Chris Rahn
-245 R Nesting Dragon @Jehan Choo
-246 M Purphoros, God of the Forge @Eric Deschamps
-247 U Rakka Mar @Jason Chan
-248 C Rapacious Dragon @Johan Grenier
-249 C Rapacious One @Jason A. Engle
-250 U Ravaging Blaze @Aleksi Briclot
-251 U Rorix Bladewing @Clint Cearley
-252 M Savage Beating @Matt Thompson
-253 R Scourge of the Throne @Michael Komarck
-254 U Skyline Despot @Lucas Graciano
-255 U Slice and Dice @Jeremy Wilson
-256 C Spikeshot Goblin @Alan Pollack
-257 C Spitebellows @Brent Hollowell
-258 U Squee, Goblin Nabob @Greg Staples
-259 R Star of Extinction @Chris Rahn
-260 U Storm-Kiln Artist @Manuel Castañón
-261 U Subira, Tulzidi Caravanner @Leesha Hannigan
-262 C Sulfurous Blast @Jeff Miracola
-263 R Tempt with Vengeance @Ryan Barger
-264 C Temur Battle Rage @Jaime Jones
-265 R Treasure Nabber @Alex Konstad
-266 U Valduk, Keeper of the Flame @Victor Adame Minguez
-267 U Vandalblast @Seb McKinnon
-268 U Zada, Hedron Grinder @Chris Rallis
-269 C Abundant Harvest @Iris Compiet
-270 U Acidic Slime @Karl Kopinski
-271 U Animal Magnetism @Ron Spears
-272 R Arachnogenesis @Johannes Voss
-273 U Armorcraft Judge @David Palumbo
-274 R Azusa, Lost but Seeking @Winona Nelson
-275 U Beanstalk Giant @Jason A. Engle
-276 R Bloodspore Thrinax @Ralph Horsley
-277 C Broken Wings @Ekaterina Burmak
-278 C Courage in Crisis @Micah Epstein
-279 C Crash of Rhino Beetles @Mike Burns
-280 M Craterhoof Behemoth @Chris Rahn
-281 C Crawling Infestation @Khurrum
-282 C Deadly Recluse @Warren Mahy
-283 M Doubling Season @Chuck Lukacs
-284 C Elvish Mystic @Wesley Burt
-285 C Entourage of Trest @Anthony Palumbo
-286 U Eternal Witness @Chris Rahn
-287 R Ezuri's Predation @Uriah Voth
-288 C Fierce Empath @Johann Bodin
-289 M Finale of Devastation @Bayard Wu
-290 R Freyalise, Llanowar's Fury @Adam Paquette
-291 U Fungal Plots @Even Amundsen
-292 R Ghalta, Primal Hunger @Chase Stone
-293 U Goreclaw, Terror of Qal Sisma @Svetlin Velinov
-294 M The Great Henge @Adam Paquette
-295 R Heroic Intervention @James Ryman
-296 U Hunter's Insight @Jim Murray
-297 C Ilysian Caryatid @Winona Nelson
-298 U Jade Mage @Milivoj Ćeran
-299 R Jolrael, Mwonvuli Recluse @Izzy
-300 C Kodama's Reach @John Avon
-301 C Kozilek's Predator @Steve Argyle
-302 C Krosan Tusker @Kev Walker
-303 R Lifeblood Hydra @Alex Horley-Orlandelli
-304 U Loyal Guardian @Robbie Trevino
-305 U Molimo, Maro-Sorcerer @Mark Zug
-306 U Mowu, Loyal Companion @Kimonas Theodossiou
-307 U Nemata, Grove Guardian @John Avon
-308 R Obscuring Haze @Campbell White
-309 R Ohran Frostfang @Torstein Nordstrand
-310 M Omnath, Locus of Mana @Mike Bierek
-311 U Oviya Pashiri, Sage Lifecrafter @Magali Villeneuve
-312 C Pollenbright Druid @Matt Stewart
-313 U Predatory Rampage @Wayne England
-314 C Ram Through @Zoltan Boros
-315 U Rampaging Brontodon @Lars Grant-West
-316 R Regal Behemoth @Jakub Kasper
-317 U Rishkar, Peema Renegade @Todd Lockwood
-318 C Rot Shambler @Yeong-Hao Han
-319 R Sakiko, Mother of Summer @Livia Prima
-320 M Selvala, Heart of the Wilds @Tyler Jacobson
-321 C Skyshroud Claim @Anna Steinbauer
-322 C Skysnare Spider @Filip Burburan
-323 C Snakeskin Veil @Matt Stewart
-324 R Song of the Dryads @Lars Grant-West
-325 R Stonehoof Chieftain @Camille Alquier
-326 U Surrak, the Hunt Caller @Wesley Burt
-327 R Tooth and Nail @Greg Hildebrandt
-328 C Tuskguard Captain @Aaron Miller
-329 R Verdant Confluence @Kieran Yanner
-330 U Verdeloth the Ancient @Daren Bader
-331 R Wayward Swordtooth @Chris Rahn
-332 U Wildwood Scourge @Bryan Sola
-333 U Yedora, Grave Gardener @Svetlin Velinov
-334 R Yisan, the Wanderer Bard @Chase Stone
-335 U Akiri, Fearless Voyager @Ekaterina Burmak
-336 U Aryel, Knight of Windgrace @Grzegorz Rutkowski
-337 R Experiment Kraj @Mark Tedin
-338 R Gisela, Blade of Goldnight @Jason Chan
-339 U Hamza, Guardian of Arashin @Wisnu Tan
-340 R Hanna, Ship's Navigator @Chris Rallis
-341 U Judith, the Scourge Diva @Wesley Burt
-342 R Karador, Ghost Chieftain @Todd Lockwood
-343 R Kykar, Wind's Fury @G-host Lee
-344 R Maelstrom Wanderer @Victor Adame Minguez
-345 U Melek, Izzet Paragon @Jason Chan
-346 R Meren of Clan Nel Toth @Mark Winters
-347 R Mirri, Weatherlight Duelist @Magali Villeneuve
-348 R Mizzix of the Izmagnus @Cliff Childs
-349 R Nekusar, the Mindrazer @Mark Winters
-350 R Queen Marchesa @Kieran Yanner
-351 U Raff Capashen, Ship's Mage @John Stanko
-352 R Rafiq of the Many @Michael Komarck
-353 M The Scarab God @Lius Lasahido
-354 R Sek'Kuar, Deathkeeper @Jesper Ejsing
-355 R Sidisi, Brood Tyrant @Karl Kopinski
-356 U Slimefoot, the Stowaway @Alex Konstad
-357 U Taigam, Sidisi's Hand @Simon Dominic
-358 U Tatyova, Benthic Druid @Mathias Kollros
-359 R Teysa Karlov @Magali Villeneuve
-360 U Tuya Bearclaw @Lius Lasahido
-361 M The Ur-Dragon @Jaime Jones
-362 R Xantcha, Sleeper Agent @Mark Winters
-363 R Yennett, Cryptic Sovereign @Chris Rahn
-364 R Yuriko, the Tiger's Shadow @Yongjae Choi
-365 R Zacama, Primal Calamity @Jaime Jones
-366 R Zilortha, Strength Incarnate @Chase Stone
-367 U Arcane Signet @Dan Murayama Scott
-368 U Ashnod's Altar @Greg Staples
-369 U Assault Suit @James Paick
-370 C Bonder's Ornament @Lindsey Look
-371 R Boompile @Filip Burburan
-372 C Brass Knuckles @Yeong-Hao Han
-373 U Burnished Hart @Yeong-Hao Han
-374 C Campfire @Edgar Sánchez Hidalgo
-375 R Champion's Helm @Alan Pollack
-376 R Chromatic Lantern @Jung Park
-377 C Commander's Sphere @Ryan Alexander Lee
-378 C Darksteel Ingot @Martina Pilcerova
-379 R Emerald Medallion @Daniel Ljunggren
-380 C Explorer's Scope @Vincent Proce
-381 M Extraplanar Lens @Lars Grant-West
-382 U Fellwar Stone @John Avon
-383 C Firemind Vessel @Ravenna Tran
-384 U Forebear's Blade @Scott Murphy
-385 C Foundry Inspector @Jason A. Engle
-386 U Geode Golem @Yeong-Hao Han
-387 R Gilded Lotus @Volkan Baǵa
-388 R Hammer of Nazahn @Victor Adame Minguez
-389 C Haunted Cloak @Volkan Baǵa
-390 C Heart-Piercer Bow @Franz Vohwinkel
-391 U Hero's Blade @Aaron Miller
-392 R Idol of Oblivion @Piotr Dura
-393 M The Immortal Sun @Kieran Yanner
-394 R Inspiring Statuary @Kirsten Zirngibl
-395 R Jet Medallion @Daniel Ljunggren
-396 M Jeweled Lotus @Alayna Danner
-397 C Letter of Acceptance @Daniel Ljunggren
-398 U Lightning Greaves @Michael Komarck
-399 U Meteor Golem @Samuel Perin
-400 C Myr Sire @Jaime Jones
-401 R Pearl Medallion @Daniel Ljunggren
-402 C Pilgrim's Eye @Dan Murayama Scott
-403 C Prismatic Lens @Scott Murphy
-404 C Prophetic Prism @Daniel Ljunggren
-405 R Ruby Medallion @Daniel Ljunggren
-406 U Sandstone Oracle @Eric Deschamps
-407 R Sapphire Medallion @Daniel Ljunggren
-408 R Scytheclaw @James Paick
-409 U Shimmer Myr @Jana Schirmer & Johannes Voss
-410 U Sol Ring @Mike Bierek
-411 U Spectral Searchlight @Martina Pilcerova
-412 C Staunch Throneguard @Volkan Baǵa
-413 R Sword of the Animist @Daniel Ljunggren
-414 U Thought Vessel @rk post
-415 U Thran Dynamo @Ron Spears
-416 C Unstable Obelisk @William Wu
-417 C Vial of Dragonfire @Franz Vohwinkel
-418 C Vulshok Battlegear @Kevin Dobler
-419 C Ash Barrens @Jonas De Ro
-420 C Command Tower @Ryan Yee
-421 U Myriad Landscape @Richard Wright
-422 C Opal Palace @John Avon
-423 C Path of Ancestry @Alayna Danner
-424 R Rejuvenating Springs @Alayna Danner
-425 U Reliquary Tower @Jesper Ejsing
-426 U Rogue's Passage @Christine Choi
-427 R Spectator Seating @Ravenna Tran
-428 C Terramorphic Expanse @Andreas Rocha
-429 C Thriving Bluff @Johannes Voss
-430 C Thriving Grove @Ravenna Tran
-431 C Thriving Heath @Alayna Danner
-432 C Thriving Isle @Jonas De Ro
-433 C Thriving Moor @Titus Lunter
-434 R Training Center @Daniel Ljunggren
-435 R Undergrowth Stadium @Yeong-Hao Han
-436 R Vault of Champions @Cliff Childs
+228 R Grenzo, Havoc Raiser @Svetlin Velinov ${"lang": "en|es|de|pt|ja|zhs"}
+229 C Guttersnipe @Mathias Kollros ${"lang": "en|es|de|pt|ja|zhs"}
+230 U Havoc Jester @Jason A. Engle ${"lang": "en|es|de|pt|ja|zhs"}
+231 R Heartless Hidetsugu @Carl Critchlow ${"lang": "en|es|de|pt|ja|zhs"}
+232 R Hellkite Charger @Jaime Jones ${"lang": "en|es|de|pt|ja|zhs"}
+233 U Hoarding Dragon @Matt Cavotta ${"lang": "en|es|de|pt|ja|zhs"}
+234 C Impulsive Pilferer @Jakub Kasper ${"lang": "en|es|de|pt|ja|zhs"}
+235 R Inferno Titan @Kev Walker ${"lang": "en|es|de|pt|ja|zhs"}
+236 M Insurrection @Mark Zug ${"lang": "en|es|de|pt|ja|zhs"}
+237 U Kazuul, Tyrant of the Cliffs @Paul Bonner ${"lang": "en|es|de|pt|ja|zhs"}
+238 R Krenko, Mob Boss @Karl Kopinski ${"lang": "en|es|de|pt|ja|zhs"}
+239 C Living Lightning @Caio Monteiro ${"lang": "en|es|de|pt|ja|zhs"}
+240 U Loyal Apprentice @Joe Slucher ${"lang": "en|es|de|pt|ja|zhs"}
+241 R Magus of the Wheel @Carl Frank ${"lang": "en|es|de|pt|ja|zhs"}
+242 C Makeshift Munitions @Filip Burburan ${"lang": "en|es|de|pt|ja|zhs"}
+243 U Meteoric Mace @Randy Vargas ${"lang": "en|es|de|pt|ja|zhs"}
+244 M Neheb, the Eternal @Chris Rahn ${"lang": "en|es|de|pt|ja|zhs"}
+245 R Nesting Dragon @Jehan Choo ${"lang": "en|es|de|pt|ja|zhs"}
+246 M Purphoros, God of the Forge @Eric Deschamps ${"lang": "en|es|de|pt|ja|zhs"}
+247 U Rakka Mar @Jason Chan ${"lang": "en|es|de|pt|ja|zhs"}
+248 C Rapacious Dragon @Johan Grenier ${"lang": "en|es|de|pt|ja|zhs"}
+249 C Rapacious One @Jason A. Engle ${"lang": "en|es|de|pt|ja|zhs"}
+250 U Ravaging Blaze @Aleksi Briclot ${"lang": "en|es|de|pt|ja|zhs"}
+251 U Rorix Bladewing @Clint Cearley ${"lang": "en|es|de|pt|ja|zhs"}
+252 M Savage Beating @Matt Thompson ${"lang": "en|es|de|pt|ja|zhs"}
+253 R Scourge of the Throne @Michael Komarck ${"lang": "en|es|de|pt|ja|zhs"}
+254 U Skyline Despot @Lucas Graciano ${"lang": "en|es|de|pt|ja|zhs"}
+255 U Slice and Dice @Jeremy Wilson ${"lang": "en|es|de|pt|ja|zhs"}
+256 C Spikeshot Goblin @Alan Pollack ${"lang": "en|es|de|pt|ja|zhs"}
+257 C Spitebellows @Brent Hollowell ${"lang": "en|es|de|pt|ja|zhs"}
+258 U Squee, Goblin Nabob @Greg Staples ${"lang": "en|es|de|pt|ja|zhs"}
+259 R Star of Extinction @Chris Rahn ${"lang": "en|es|de|pt|ja|zhs"}
+260 U Storm-Kiln Artist @Manuel Castañón ${"lang": "en|es|de|pt|ja|zhs"}
+261 U Subira, Tulzidi Caravanner @Leesha Hannigan ${"lang": "en|es|de|pt|ja|zhs"}
+262 C Sulfurous Blast @Jeff Miracola ${"lang": "en|es|de|pt|ja|zhs"}
+263 R Tempt with Vengeance @Ryan Barger ${"lang": "en|es|de|pt|ja|zhs"}
+264 C Temur Battle Rage @Jaime Jones ${"lang": "en|es|de|pt|ja|zhs"}
+265 R Treasure Nabber @Alex Konstad ${"lang": "en|es|de|pt|ja|zhs"}
+266 U Valduk, Keeper of the Flame @Victor Adame Minguez ${"lang": "en|es|de|pt|ja|zhs"}
+267 U Vandalblast @Seb McKinnon ${"lang": "en|es|de|pt|ja|zhs"}
+268 U Zada, Hedron Grinder @Chris Rallis ${"lang": "en|es|de|pt|ja|zhs"}
+269 C Abundant Harvest @Iris Compiet ${"lang": "en|es|de|pt|ja|zhs"}
+270 U Acidic Slime @Karl Kopinski ${"lang": "en|es|de|pt|ja|zhs"}
+271 U Animal Magnetism @Ron Spears ${"lang": "en|es|de|pt|ja|zhs"}
+272 R Arachnogenesis @Johannes Voss ${"lang": "en|es|de|pt|ja|zhs"}
+273 U Armorcraft Judge @David Palumbo ${"lang": "en|es|de|pt|ja|zhs"}
+274 R Azusa, Lost but Seeking @Winona Nelson ${"lang": "en|es|de|pt|ja|zhs"}
+275 U Beanstalk Giant @Jason A. Engle ${"lang": "en|es|de|pt|ja|zhs"}
+276 R Bloodspore Thrinax @Ralph Horsley ${"lang": "en|es|de|pt|ja|zhs"}
+277 C Broken Wings @Ekaterina Burmak ${"lang": "en|es|de|pt|ja|zhs"}
+278 C Courage in Crisis @Micah Epstein ${"lang": "en|es|de|pt|ja|zhs"}
+279 C Crash of Rhino Beetles @Mike Burns ${"lang": "en|es|de|pt|ja|zhs"}
+280 M Craterhoof Behemoth @Chris Rahn ${"lang": "en|es|de|pt|ja|zhs"}
+281 C Crawling Infestation @Khurrum ${"lang": "en|es|de|pt|ja|zhs"}
+282 C Deadly Recluse @Warren Mahy ${"lang": "en|es|de|pt|ja|zhs"}
+283 M Doubling Season @Chuck Lukacs ${"lang": "en|es|de|pt|ja|zhs"}
+284 C Elvish Mystic @Wesley Burt ${"lang": "en|es|de|pt|ja|zhs"}
+285 C Entourage of Trest @Anthony Palumbo ${"lang": "en|es|de|pt|ja|zhs"}
+286 U Eternal Witness @Chris Rahn ${"lang": "en|es|de|pt|ja|zhs"}
+287 R Ezuri's Predation @Uriah Voth ${"lang": "en|es|de|pt|ja|zhs"}
+288 C Fierce Empath @Johann Bodin ${"lang": "en|es|de|pt|ja|zhs"}
+289 M Finale of Devastation @Bayard Wu ${"lang": "en|es|de|pt|ja|zhs"}
+290 R Freyalise, Llanowar's Fury @Adam Paquette ${"lang": "en|es|de|pt|ja|zhs"}
+291 U Fungal Plots @Even Amundsen ${"lang": "en|es|de|pt|ja|zhs"}
+292 R Ghalta, Primal Hunger @Chase Stone ${"lang": "en|es|de|pt|ja|zhs"}
+293 U Goreclaw, Terror of Qal Sisma @Svetlin Velinov ${"lang": "en|es|de|pt|ja|zhs"}
+294 M The Great Henge @Adam Paquette ${"lang": "en|es|de|pt|ja|zhs"}
+295 R Heroic Intervention @James Ryman ${"lang": "en|es|de|pt|ja|zhs"}
+296 U Hunter's Insight @Jim Murray ${"lang": "en|es|de|pt|ja|zhs"}
+297 C Ilysian Caryatid @Winona Nelson ${"lang": "en|es|de|pt|ja|zhs"}
+298 U Jade Mage @Milivoj Ćeran ${"lang": "en|es|de|pt|ja|zhs"}
+299 R Jolrael, Mwonvuli Recluse @Izzy ${"lang": "en|es|de|pt|ja|zhs"}
+300 C Kodama's Reach @John Avon ${"lang": "en|es|de|pt|ja|zhs"}
+301 C Kozilek's Predator @Steve Argyle ${"lang": "en|es|de|pt|ja|zhs"}
+302 C Krosan Tusker @Kev Walker ${"lang": "en|es|de|pt|ja|zhs"}
+303 R Lifeblood Hydra @Alex Horley-Orlandelli ${"lang": "en|es|de|pt|ja|zhs"}
+304 U Loyal Guardian @Robbie Trevino ${"lang": "en|es|de|pt|ja|zhs"}
+305 U Molimo, Maro-Sorcerer @Mark Zug ${"lang": "en|es|de|pt|ja|zhs"}
+306 U Mowu, Loyal Companion @Kimonas Theodossiou ${"lang": "en|es|de|pt|ja|zhs"}
+307 U Nemata, Grove Guardian @John Avon ${"lang": "en|es|de|pt|ja|zhs"}
+308 R Obscuring Haze @Campbell White ${"lang": "en|es|de|pt|ja|zhs"}
+309 R Ohran Frostfang @Torstein Nordstrand ${"lang": "en|es|de|pt|ja|zhs"}
+310 M Omnath, Locus of Mana @Mike Bierek ${"lang": "en|es|de|pt|ja|zhs"}
+311 U Oviya Pashiri, Sage Lifecrafter @Magali Villeneuve ${"lang": "en|es|de|pt|ja|zhs"}
+312 C Pollenbright Druid @Matt Stewart ${"lang": "en|es|de|pt|ja|zhs"}
+313 U Predatory Rampage @Wayne England ${"lang": "en|es|de|pt|ja|zhs"}
+314 C Ram Through @Zoltan Boros ${"lang": "en|es|de|pt|ja|zhs"}
+315 U Rampaging Brontodon @Lars Grant-West ${"lang": "en|es|de|pt|ja|zhs"}
+316 R Regal Behemoth @Jakub Kasper ${"lang": "en|es|de|pt|ja|zhs"}
+317 U Rishkar, Peema Renegade @Todd Lockwood ${"lang": "en|es|de|pt|ja|zhs"}
+318 C Rot Shambler @Yeong-Hao Han ${"lang": "en|es|de|pt|ja|zhs"}
+319 R Sakiko, Mother of Summer @Livia Prima ${"lang": "en|es|de|pt|ja|zhs"}
+320 M Selvala, Heart of the Wilds @Tyler Jacobson ${"lang": "en|es|de|pt|ja|zhs"}
+321 C Skyshroud Claim @Anna Steinbauer ${"lang": "en|es|de|pt|ja|zhs"}
+322 C Skysnare Spider @Filip Burburan ${"lang": "en|es|de|pt|ja|zhs"}
+323 C Snakeskin Veil @Matt Stewart ${"lang": "en|es|de|pt|ja|zhs"}
+324 R Song of the Dryads @Lars Grant-West ${"lang": "en|es|de|pt|ja|zhs"}
+325 R Stonehoof Chieftain @Camille Alquier ${"lang": "en|es|de|pt|ja|zhs"}
+326 U Surrak, the Hunt Caller @Wesley Burt ${"lang": "en|es|de|pt|ja|zhs"}
+327 R Tooth and Nail @Greg Hildebrandt ${"lang": "en|es|de|pt|ja|zhs"}
+328 C Tuskguard Captain @Aaron Miller ${"lang": "en|es|de|pt|ja|zhs"}
+329 R Verdant Confluence @Kieran Yanner ${"lang": "en|es|de|pt|ja|zhs"}
+330 U Verdeloth the Ancient @Daren Bader ${"lang": "en|es|de|pt|ja|zhs"}
+331 R Wayward Swordtooth @Chris Rahn ${"lang": "en|es|de|pt|ja|zhs"}
+332 U Wildwood Scourge @Bryan Sola ${"lang": "en|es|de|pt|ja|zhs"}
+333 U Yedora, Grave Gardener @Svetlin Velinov ${"lang": "en|es|de|pt|ja|zhs"}
+334 R Yisan, the Wanderer Bard @Chase Stone ${"lang": "en|es|de|pt|ja|zhs"}
+335 U Akiri, Fearless Voyager @Ekaterina Burmak ${"lang": "en|es|de|pt|ja|zhs"}
+336 U Aryel, Knight of Windgrace @Grzegorz Rutkowski ${"lang": "en|es|de|pt|ja|zhs"}
+337 R Experiment Kraj @Mark Tedin ${"lang": "en|es|de|pt|ja|zhs"}
+338 R Gisela, Blade of Goldnight @Jason Chan ${"lang": "en|es|de|pt|ja|zhs"}
+339 U Hamza, Guardian of Arashin @Wisnu Tan ${"lang": "en|es|de|pt|ja|zhs"}
+340 R Hanna, Ship's Navigator @Chris Rallis ${"lang": "en|es|de|pt|ja|zhs"}
+341 U Judith, the Scourge Diva @Wesley Burt ${"lang": "en|es|de|pt|ja|zhs"}
+342 R Karador, Ghost Chieftain @Todd Lockwood ${"lang": "en|es|de|pt|ja|zhs"}
+343 R Kykar, Wind's Fury @G-host Lee ${"lang": "en|es|de|pt|ja|zhs"}
+344 R Maelstrom Wanderer @Victor Adame Minguez ${"lang": "en|es|de|pt|ja|zhs"}
+345 U Melek, Izzet Paragon @Jason Chan ${"lang": "en|es|de|pt|ja|zhs"}
+346 R Meren of Clan Nel Toth @Mark Winters ${"lang": "en|es|de|pt|ja|zhs"}
+347 R Mirri, Weatherlight Duelist @Magali Villeneuve ${"lang": "en|es|de|pt|ja|zhs"}
+348 R Mizzix of the Izmagnus @Cliff Childs ${"lang": "en|es|de|pt|ja|zhs"}
+349 R Nekusar, the Mindrazer @Mark Winters ${"lang": "en|es|de|pt|ja|zhs"}
+350 R Queen Marchesa @Kieran Yanner ${"lang": "en|es|de|pt|ja|zhs"}
+351 U Raff Capashen, Ship's Mage @John Stanko ${"lang": "en|es|de|pt|ja|zhs"}
+352 R Rafiq of the Many @Michael Komarck ${"lang": "en|es|de|pt|ja|zhs"}
+353 M The Scarab God @Lius Lasahido ${"lang": "en|es|de|pt|ja|zhs"}
+354 R Sek'Kuar, Deathkeeper @Jesper Ejsing ${"lang": "en|es|de|pt|ja|zhs"}
+355 R Sidisi, Brood Tyrant @Karl Kopinski ${"lang": "en|es|de|pt|ja|zhs"}
+356 U Slimefoot, the Stowaway @Alex Konstad ${"lang": "en|es|de|pt|ja|zhs"}
+357 U Taigam, Sidisi's Hand @Simon Dominic ${"lang": "en|es|de|pt|ja|zhs"}
+358 U Tatyova, Benthic Druid @Mathias Kollros ${"lang": "en|es|de|pt|ja|zhs"}
+359 R Teysa Karlov @Magali Villeneuve ${"lang": "en|es|de|pt|ja|zhs"}
+360 U Tuya Bearclaw @Lius Lasahido ${"lang": "en|es|de|pt|ja|zhs"}
+361 M The Ur-Dragon @Jaime Jones ${"lang": "en|es|de|pt|ja|zhs"}
+362 R Xantcha, Sleeper Agent @Mark Winters ${"lang": "en|es|de|pt|ja|zhs"}
+363 R Yennett, Cryptic Sovereign @Chris Rahn ${"lang": "en|es|de|pt|ja|zhs"}
+364 R Yuriko, the Tiger's Shadow @Yongjae Choi ${"lang": "en|es|de|pt|ja|zhs"}
+365 R Zacama, Primal Calamity @Jaime Jones ${"lang": "en|es|de|pt|ja|zhs"}
+366 R Zilortha, Strength Incarnate @Chase Stone ${"lang": "en|es|de|pt|ja|zhs"}
+367 U Arcane Signet @Dan Murayama Scott ${"lang": "en|es|de|pt|ja|zhs"}
+368 U Ashnod's Altar @Greg Staples ${"lang": "en|es|de|pt|ja|zhs"}
+369 U Assault Suit @James Paick ${"lang": "en|es|de|pt|ja|zhs"}
+370 C Bonder's Ornament @Lindsey Look ${"lang": "en|es|de|pt|ja|zhs"}
+371 R Boompile @Filip Burburan ${"lang": "en|es|de|pt|ja|zhs"}
+372 C Brass Knuckles @Yeong-Hao Han ${"lang": "en|es|de|pt|ja|zhs"}
+373 U Burnished Hart @Yeong-Hao Han ${"lang": "en|es|de|pt|ja|zhs"}
+374 C Campfire @Edgar Sánchez Hidalgo ${"lang": "en|es|de|pt|ja|zhs"}
+375 R Champion's Helm @Alan Pollack ${"lang": "en|es|de|pt|ja|zhs"}
+376 R Chromatic Lantern @Jung Park ${"lang": "en|es|de|pt|ja|zhs"}
+377 C Commander's Sphere @Ryan Alexander Lee ${"lang": "en|es|de|pt|ja|zhs"}
+378 C Darksteel Ingot @Martina Pilcerova ${"lang": "en|es|de|pt|ja|zhs"}
+379 R Emerald Medallion @Daniel Ljunggren ${"lang": "en|es|de|pt|ja|zhs"}
+380 C Explorer's Scope @Vincent Proce ${"lang": "en|es|de|pt|ja|zhs"}
+381 M Extraplanar Lens @Lars Grant-West ${"lang": "en|es|de|pt|ja|zhs"}
+382 U Fellwar Stone @John Avon ${"lang": "en|es|de|pt|ja|zhs"}
+383 C Firemind Vessel @Ravenna Tran ${"lang": "en|es|de|pt|ja|zhs"}
+384 U Forebear's Blade @Scott Murphy ${"lang": "en|es|de|pt|ja|zhs"}
+385 C Foundry Inspector @Jason A. Engle ${"lang": "en|es|de|pt|ja|zhs"}
+386 U Geode Golem @Yeong-Hao Han ${"lang": "en|es|de|pt|ja|zhs"}
+387 R Gilded Lotus @Volkan Baǵa ${"lang": "en|es|de|pt|ja|zhs"}
+388 R Hammer of Nazahn @Victor Adame Minguez ${"lang": "en|es|de|pt|ja|zhs"}
+389 C Haunted Cloak @Volkan Baǵa ${"lang": "en|es|de|pt|ja|zhs"}
+390 C Heart-Piercer Bow @Franz Vohwinkel ${"lang": "en|es|de|pt|ja|zhs"}
+391 U Hero's Blade @Aaron Miller ${"lang": "en|es|de|pt|ja|zhs"}
+392 R Idol of Oblivion @Piotr Dura ${"lang": "en|es|de|pt|ja|zhs"}
+393 M The Immortal Sun @Kieran Yanner ${"lang": "en|es|de|pt|ja|zhs"}
+394 R Inspiring Statuary @Kirsten Zirngibl ${"lang": "en|es|de|pt|ja|zhs"}
+395 R Jet Medallion @Daniel Ljunggren ${"lang": "en|es|de|pt|ja|zhs"}
+396 M Jeweled Lotus @Alayna Danner ${"lang": "en|es|de|pt|ja|zhs"}
+397 C Letter of Acceptance @Daniel Ljunggren ${"lang": "en|es|de|pt|ja|zhs"}
+398 U Lightning Greaves @Michael Komarck ${"lang": "en|es|de|pt|ja|zhs"}
+399 U Meteor Golem @Samuel Perin ${"lang": "en|es|de|pt|ja|zhs"}
+400 C Myr Sire @Jaime Jones ${"lang": "en|es|de|pt|ja|zhs"}
+401 R Pearl Medallion @Daniel Ljunggren ${"lang": "en|es|de|pt|ja|zhs"}
+402 C Pilgrim's Eye @Dan Murayama Scott ${"lang": "en|es|de|pt|ja|zhs"}
+403 C Prismatic Lens @Scott Murphy ${"lang": "en|es|de|pt|ja|zhs"}
+404 C Prophetic Prism @Daniel Ljunggren ${"lang": "en|es|de|pt|ja|zhs"}
+405 R Ruby Medallion @Daniel Ljunggren ${"lang": "en|es|de|pt|ja|zhs"}
+406 U Sandstone Oracle @Eric Deschamps ${"lang": "en|es|de|pt|ja|zhs"}
+407 R Sapphire Medallion @Daniel Ljunggren ${"lang": "en|es|de|pt|ja|zhs"}
+408 R Scytheclaw @James Paick ${"lang": "en|es|de|pt|ja|zhs"}
+409 U Shimmer Myr @Jana Schirmer & Johannes Voss ${"lang": "en|es|de|pt|ja|zhs"}
+410 U Sol Ring @Mike Bierek ${"lang": "en|es|de|pt|ja|zhs"}
+411 U Spectral Searchlight @Martina Pilcerova ${"lang": "en|es|de|pt|ja|zhs"}
+412 C Staunch Throneguard @Volkan Baǵa ${"lang": "en|es|de|pt|ja|zhs"}
+413 R Sword of the Animist @Daniel Ljunggren ${"lang": "en|es|de|pt|ja|zhs"}
+414 U Thought Vessel @rk post ${"lang": "en|es|de|pt|ja|zhs"}
+415 U Thran Dynamo @Ron Spears ${"lang": "en|es|de|pt|ja|zhs"}
+416 C Unstable Obelisk @William Wu ${"lang": "en|es|de|pt|ja|zhs"}
+417 C Vial of Dragonfire @Franz Vohwinkel ${"lang": "en|es|de|pt|ja|zhs"}
+418 C Vulshok Battlegear @Kevin Dobler ${"lang": "en|es|de|pt|ja|zhs"}
+419 C Ash Barrens @Jonas De Ro ${"lang": "en|es|de|pt|ja|zhs"}
+420 C Command Tower @Ryan Yee ${"lang": "en|es|de|pt|ja|zhs"}
+421 U Myriad Landscape @Richard Wright ${"lang": "en|es|de|pt|ja|zhs"}
+422 C Opal Palace @John Avon ${"lang": "en|es|de|pt|ja|zhs"}
+423 C Path of Ancestry @Alayna Danner ${"lang": "en|es|de|pt|ja|zhs"}
+424 R Rejuvenating Springs @Alayna Danner ${"lang": "en|es|de|pt|ja|zhs"}
+425 U Reliquary Tower @Jesper Ejsing ${"lang": "en|es|de|pt|ja|zhs"}
+426 U Rogue's Passage @Christine Choi ${"lang": "en|es|de|pt|ja|zhs"}
+427 R Spectator Seating @Ravenna Tran ${"lang": "en|es|de|pt|ja|zhs"}
+428 C Terramorphic Expanse @Andreas Rocha ${"lang": "en|es|de|pt|ja|zhs"}
+429 C Thriving Bluff @Johannes Voss ${"lang": "en|es|de|pt|ja|zhs"}
+430 C Thriving Grove @Ravenna Tran ${"lang": "en|es|de|pt|ja|zhs"}
+431 C Thriving Heath @Alayna Danner ${"lang": "en|es|de|pt|ja|zhs"}
+432 C Thriving Isle @Jonas De Ro ${"lang": "en|es|de|pt|ja|zhs"}
+433 C Thriving Moor @Titus Lunter ${"lang": "en|es|de|pt|ja|zhs"}
+434 R Training Center @Daniel Ljunggren ${"lang": "en|es|de|pt|ja|zhs"}
+435 R Undergrowth Stadium @Yeong-Hao Han ${"lang": "en|es|de|pt|ja|zhs"}
+436 R Vault of Champions @Cliff Childs ${"lang": "en|es|de|pt|ja|zhs"}
 437 L Plains @Alayna Danner
 438 L Plains @Rebecca Guay
 439 L Plains @Mark Poole
@@ -709,369 +710,369 @@ ScryfallCode=CMM
 701 R Obscuring Haze @Daren Bader
 702 M Jeweled Lotus @Olena Richards
 703 U Sol Ring @Mark Poole
-704 M Zhulodok, Void Gorger @Lius Lasahido
-705 M Anikthea, Hand of Erebos @Magali Villeneuve
-706 M Commodore Guff @Matt Stewart
-707 M Sliver Gravemother @Chris Rahn
-708 M Omarthis, Ghostfire Initiate @Brent Hollowell
-709 M Leori, Sparktouched Hunter @John Tedrick
-710 M Narci, Fable Singer @Miranda Meeks
-711 M Rukarumel, Biologist @Fariba Khamseh
-712 R Abstruse Archaic @Hristo D. Chukov
-713 R Calamity of the Titans @Svetlin Velinov
-714 R Desecrate Reality @Eli Minaya
-715 R Flayer of Loyalties @John Tedrick
-716 R Rise of the Eldrazi @Eli Minaya
-717 R Skittering Cicada @Denis Zhbankov
-718 R Ugin's Mastery @David Astruga
-719 R Battle at the Helvault @Alix Branwyn
-720 R Boon of the Spirit Realm @Gaboleps
-721 R Gatewatch Beacon @Deruchenko Alexander
-722 R Onakke Oathkeeper @Arash Radkia
-723 R Ondu Spiritdancer @Tran Nguyen
-724 R Regal Sliver @Victor Adame Minguez
-725 R Teyo, Geometric Tactician @Kieran Yanner
-726 R Sparkshaper Visionary @Svetlin Velinov
-727 R Taunting Sliver @Maxime Minard
-728 R Titan of Littjara @Aldo Domínguez
-729 R Vronos, Masked Inquisitor @Ekaterina Burmak
-730 R Cacophony Unleashed @Deruchenko Alexander
-731 R Demon of Fate's Design @Fajareka Setiawan
-732 R Ghoulish Impetus @Steve Ellis
-733 R Lazotep Sliver @Maxime Minard
-734 R Capricious Sliver @Brent Hollowell
-735 R Chandra, Legacy of Fire @Chris Rahn
-736 R Descendants' Fury @Aldo Domínguez
-737 R Guff Rewrites History @Matt Stewart
-738 R Jaya's Phoenix @Justyna Dura
-739 R Composer of Spring @Gaboleps
-740 R For the Ancestors @Hristo D. Chukov
-741 R Hatchery Sliver @Svetlin Velinov
-742 R Nyxborn Behemoth @Néstor Ossandón Leal
-743 R Darksteel Monolith @Sergey Glushakov
-744 R Abstruse Archaic @Hristo D. Chukov
-745 R Calamity of the Titans @Svetlin Velinov
-746 R Desecrate Reality @Eli Minaya
-747 R Flayer of Loyalties @John Tedrick
-748 M Omarthis, Ghostfire Initiate @Brent Hollowell
-749 R Rise of the Eldrazi @Eli Minaya
-750 R Skittering Cicada @Denis Zhbankov
-751 R Ugin's Mastery @David Astruga
-752 M Zhulodok, Void Gorger @Lius Lasahido
-753 R Boon of the Spirit Realm @Gaboleps
-754 R Gatewatch Beacon @Deruchenko Alexander
-755 R Onakke Oathkeeper @Arash Radkia
-756 R Ondu Spiritdancer @Tran Nguyen
-757 R Regal Sliver @Victor Adame Minguez
-758 R Sparkshaper Visionary @Svetlin Velinov
-759 R Taunting Sliver @Maxime Minard
-760 R Titan of Littjara @Aldo Domínguez
-761 R Cacophony Unleashed @Deruchenko Alexander
-762 R Demon of Fate's Design @Fajareka Setiawan
-763 R Ghoulish Impetus @Steve Ellis
-764 R Lazotep Sliver @Maxime Minard
-765 R Capricious Sliver @Brent Hollowell
-766 R Descendants' Fury @Aldo Domínguez
-767 R Guff Rewrites History @Matt Stewart
-768 R Jaya's Phoenix @Justyna Dura
-769 R Composer of Spring @Gaboleps
-770 R For the Ancestors @Hristo D. Chukov
-771 R Hatchery Sliver @Svetlin Velinov
-772 R Nyxborn Behemoth @Néstor Ossandón Leal
-773 M Anikthea, Hand of Erebos @Magali Villeneuve
-774 M Leori, Sparktouched Hunter @John Tedrick
-775 M Narci, Fable Singer @Miranda Meeks
-776 M Rukarumel, Biologist @Fariba Khamseh
-777 M Sliver Gravemother @Chris Rahn
-778 R Darksteel Monolith @Sergey Glushakov
-779 M Zhulodok, Void Gorger @Lius Lasahido
-780 M Anikthea, Hand of Erebos @Magali Villeneuve
-781 M Commodore Guff @Matt Stewart
-782 M Sliver Gravemother @Chris Rahn
-783 L Plains @Sam Burley
-784 L Plains @Sam Burley
-785 L Plains @Jonas De Ro
-786 L Plains @Kev Walker
-787 L Plains @Richard Wright
-788 L Island @Adam Paquette
-789 L Island @Kev Walker
-790 L Island @Eytan Zana
-791 L Swamp @Sam Burley
-792 L Swamp @Sam Burley
-793 L Swamp @Kev Walker
-794 L Mountain @Jonas De Ro
-795 L Mountain @Adam Paquette
-796 L Mountain @Kev Walker
-797 L Forest @Sam Burley
-798 L Forest @Sam Burley
-799 L Forest @Kev Walker
-800 M All Is Dust @Jason Felix
-801 U Artisan of Kozilek @Jason Felix
-802 U Bane of Bala Ged @Chase Stone
-803 R Endbringer @Vincent Proce
-804 R Endless One @Jason Felix
-805 R It That Betrays @Alexander Mokhov
-806 R Matter Reshaper @Chris Rahn
-807 U Not of This World @Izzy
-808 M Oblivion Sower @Jaime Jones
-809 U Spatial Contortion @Daarken
-810 U Titan's Presence @Slawomir Maniak
-811 R Ugin, the Ineffable @Daarken
-812 U Warping Wail @Jason Felix
-813 M Ajani Steadfast @Chris Rahn
-814 R Archon of Sun's Grace @Matt Stewart
-815 R Bonescythe Sliver @Lius Lasahido
-816 U Cast Out @Magali Villeneuve
-817 R Cleansing Nova @Marta Nael
-818 U Constricting Sliver @Loïc Canavaggia
-819 M Deploy the Gatewatch @Wesley Burt
-820 M Elspeth, Sun's Champion @Tyler Jacobson
-821 R Felidar Retreat @Ralph Horsley
-822 M Gideon Jura @Aleksi Briclot
-823 R Grasp of Fate @Lie Setiawan
-824 U Grateful Apparition @Izzy
-825 R Harsh Mercy @John Matson
-826 M Heliod, God of the Sun @Jaime Jones
-827 U Love Song of Night and Day @Eli Minaya
-828 R Mesa Enchantress @Randy Gallegos
-829 R Norn's Annex @James Paick
-830 R Oath of Gideon @Wesley Burt
-831 C Omen of the Sun @Piotr Dura
-832 U Oreskos Explorer @Winona Nelson
-833 R Promise of Loyalty @Sara Winters
-834 R Semester's End @Alayna Danner
-835 C Sentinel Sliver @Lucas Graciano
-836 R Sigil of the Empty Throne @Cyril Van Der Haegen
-837 C Sinew Sliver @Steven Belledin
-838 C Spirited Companion @Ilse Gort
-839 R Starfield Mystic @Eric Deschamps
-840 M Starfield of Nyx @Tyler Jacobson
-841 U Swords to Plowshares @Sam Wolfe Connelly
-842 R Urza's Ruinous Blast @Slawomir Maniak
-843 U The Wanderer @Wesley Burt
-844 R Deepglow Skate @Jason Kang
-845 U Diffusion Sliver @Campbell White
-846 C Distant Melody @Omar Rayyan
-847 U Flux Channeler @Heonhwa
-848 U Fog Bank @Howard Lyon
-849 R Galerider Sliver @Campbell White
-850 M Jace Beleren @Aleksi Briclot
-851 M Jace, Architect of Thought @Jaime Jones
-852 M Jace, Mirror Mage @Tyler Jacobson
-853 U Narset, Parter of Veils @Magali Villeneuve
-854 R Oath of Jace @Wesley Burt
-855 U Shifting Sliver @Darrell Riche
-856 R Spark Double @Eric Deschamps
-857 R Synapse Sliver @Thomas M. Baxa
-858 U Thrummingbird @Efrem Palacios
-859 U Windfall @Scott Murphy
-860 C Winged Sliver @Anthony S. Waters
-861 C Clot Sliver @Jeff Laubenstein
-862 R Crippling Fear @Néstor Ossandón Leal
-863 C Crypt Sliver @Michele Giorgi
-864 R Cunning Rhetoric @Chris Rallis
-865 R Doomwake Giant @Kev Walker
-866 R Dreadhorde Invasion @Stanton Feng
-867 U The Eldest Reborn @Ravenna Tran
-868 M Erebos, Bleak-Hearted @Chase Stone
-869 C Mindwrack Harpy @Deruchenko Alexander
-870 R Syphon Sliver @Johann Bodin
-871 U Blade Sliver @Alexandre Honoré
-872 R Blasphemous Act @Daarken
-873 C Blur Sliver @Ben Wootten
-874 C Bonesplitter Sliver @Dany Orizio
-875 M Chandra, Awakened Inferno @Chris Rahn
-876 M Chandra, Torch of Defiance @Magali Villeneuve
-877 C Cleaving Sliver @David Gaillet
-878 U Hollowhead Sliver @Johan Grenier
-879 R Repeated Reverberation @Izzy
-880 R Sarkhan the Masterless @Kieran Yanner
-881 R Spiteful Sliver @Johann Bodin
-882 C Striking Sliver @Aaron J. Riley
-883 C Two-Headed Sliver @Raoul Vitale
-884 R Abundance @Rebecca Guay
-885 R Arasta of the Endless Web @Sam Rowan
-886 U The Binding of the Titans @Adam Paquette
-887 R Brood Sliver @Ron Spears
-888 R Courser of Kruphix @Eric Deschamps
-889 C Cultivate @Anthony Palumbo
-890 U Destiny Spinner @Livia Prima
-891 R Dryad of the Ilysian Grove @Scott Murphy
-892 R Eidolon of Blossoms @Min Yum
-893 R Enchantress's Presence @Rebecca Guay
-894 C Farseek @Martina Pilcerova
-895 C Font of Fertility @Jack Wang
-896 C Gemhide Sliver @Alayna Danner
-897 C Greater Tanuki @Ilse Gort
-898 R Herald of the Pantheon @Jason A. Engle
-899 C Khalni Heart Expedition @Jason Chan
-900 U Manaweft Sliver @Franz Vohwinkel
-901 R Megantic Sliver @Campbell White
-902 R The Mending of Dominaria @Adam Paquette
-903 U Might Sliver @Jeff Miracola
-904 C Nature's Lore @Julie Dillon
-905 U Nessian Wanderer @Matt Stewart
-906 C Omen of the Hunt @Piotr Dura
-907 C Quick Sliver @John Avon
-908 C Rampant Growth @Steven Belledin
-909 R Realmwalker @Zack Stella
-910 R Sanctum Weaver @Kimonas Theodossiou
-911 R Sandwurm Convergence @Slawomir Maniak
-912 R Setessan Champion @Emrah Elmasli
-913 U Three Visits @Yeong-Hao Han
-914 U Venom Sliver @Uriah Voth
-915 R Verduran Enchantress @Rob Alexander
-916 R Battle for Bretagard @Igor Kieryluk
-917 U Binding the Old Gods @Victor Adame Minguez
-918 M Calix, Destiny's Hand @Magali Villeneuve
-919 R Cloudshredder Sliver @Filip Burburan
-920 U Crystalline Sliver @Allen Williams
-921 R Culling Ritual @Lorenzo Mastroianni
-922 R Decimate @Zoltan Boros
-923 U Firewake Sliver @Alexandre Honoré
-924 U Harmonic Sliver @Luca Zontini
-925 U Hibernation Sliver @Scott Kirschner
-926 U Jukai Naturalist @Anna Steinbauer
-927 U Lavabelly Sliver @Mark Behm
-928 M Mirari's Wake @Volkan Baǵa
-929 M Nahiri, the Harbinger @Aleksi Briclot
-930 M Narset of the Ancient Way @Yongjae Choi
-931 M Narset, Enlightened Master @Magali Villeneuve
-932 U Necrotic Sliver @Dave Allsop
-933 U Nyx Weaver @Jack Wang
-934 R Oath of Teferi @Wesley Burt
-935 U Saheeli, Sublime Artificer @Wesley Burt
-936 U Satyr Enchanter @Sidharth Chaturvedi
-937 M Sliver Hivelord @Aleksi Briclot
-938 R Sythis, Harvest's Hand @Ryan Yee
-939 U Wall of Denial @Howard Lyon
-940 R Ancient Stone Idol @Josh Hass
-941 U Azorius Signet @Greg Hildebrandt
-942 U Boros Signet @Mike Sass
-943 M The Chain Veil @Volkan Baǵa
-944 C Crashing Drawbridge @Mark Behm
-945 U Dreamstone Hedron @Eric Deschamps
-946 R Duplicant @Thomas M. Baxa
-947 R Endless Atlas @Titus Lunter
-948 U Everflowing Chalice @Steve Argyle
-949 U Fireshrieker @Christopher Moeller
-950 M Forsaken Monument @Piotr Dura
-951 R Hangarback Walker @Daarken
-952 U Hedron Archive @Craig J Spearing
-953 U Herald's Horn @Jason Felix
-954 U Honor-Worn Shaku @Tony Szczudlo
-955 R Icon of Ancestry @Chris Seaman
-956 R Investigator's Journal @Yeong-Hao Han
-957 U Izzet Signet @Raoul Vitale
-958 M Kaldra Compleat @Vincent Proce
-959 R Mazemind Tome @Randy Gallegos
-960 R Metalwork Colossus @Jaime Jones
-961 C Mind Stone @Adam Rex
-962 R Mirage Mirror @Craig J Spearing
-963 R Myriad Construct @Chase Stone
-964 R Mystic Forge @Titus Lunter
-965 R Nevinyrral's Disk @Steve Argyle
-966 C Ornithopter of Paradise @Raoul Vitale
-967 U Palladium Myr @Alan Pollack
-968 M Perilous Vault @Sam Burley
-969 M Phyrexian Triniform @Adam Paquette
-970 U Pillar of Origins @Dimitar Marinski
-971 C Scaretiller @Jakub Kasper
-972 R Silent Arbiter @Mark Zug
-973 R Solemn Simulacrum @Donato Giancola
-974 M Soul of New Phyrexia @Daarken
-975 R Steel Hellkite @James Paick
-976 R Stonecoil Serpent @Mark Poole
-977 U Suspicious Bookcase @Josu Hernaiz
-978 U Talisman of Conviction @Lindsey Look
-979 U Talisman of Creativity @Lindsey Look
-980 U Talisman of Progress @Mike Dringenberg
-981 R Transmogrifying Wand @Aaron Miller
-982 R Vanquisher's Banner @Milivoj Ćeran
-983 C Wayfarer's Bauble @Darrell Riche
-984 U Worn Powerstone @Henry G. Higginbotham
-985 U Arcane Lighthouse @Igor Kieryluk
-986 R Arch of Orazca @Titus Lunter
-987 R Blast Zone @Jorge Jacinto
-988 R Bonders' Enclave @Cliff Childs
-989 R Canopy Vista @Adam Paquette
-990 R Cascade Bluffs @Brandon Kitkouski
-991 R Cinder Glade @Adam Paquette
-992 U Eldrazi Temple @James Paick
-993 R Exotic Orchard @Steven Belledin
-994 U Flood Plain @Pat Lewis
-995 C Forge of Heroes @Titus Lunter
-996 R Fortified Village @Cliff Childs
-997 U Frontier Bivouac @Titus Lunter
-998 R Frostboil Snarl @Sam Burley
-999 R Furycalm Snarl @Sam Burley
-1000 R Geier Reach Sanitarium @Cliff Childs
-1001 C Golgari Rot Farm @John Avon
-1002 U Grasslands @John Avon
-1003 U Guildless Commons @Cliff Childs
-1004 U Interplanar Beacon @Adam Paquette
-1005 R Irrigated Farmland @Jonas De Ro
-1006 U Jungle Shrine @Wayne Reynolds
-1007 R Karn's Bastion @Adam Paquette
-1008 U Krosan Verge @Ruxing Gao
-1009 U Mage-Ring Network @Jung Park
-1010 M Mirrorpool @Cliff Childs
-1011 R Mobilized District @Jedd Chevrier
-1012 U Mountain Valley @Kari Johnson
-1013 R Mystic Gate @Fred Fields
-1014 U Mystic Monastery @Florian de Gesincourt
-1015 R Necroblossom Snarl @Sam Burley
-1016 U Nomad Outpost @Kamila Szutenberg
-1017 U Opulent Palace @Adam Paquette
-1018 U Orzhov Basilica @John Avon
-1019 R Port Town @Kamila Szutenberg
-1020 R Prairie Stream @Adam Paquette
-1021 U Rocky Tar Pit @Jeff Miracola
-1022 R Rugged Prairie @Fred Fields
-1023 R Ruins of Oran-Rief @Jason Felix
-1024 U Sandsteppe Citadel @Sam Burley
-1025 U Savage Lands @John Avon
-1026 R Scattered Groves @Christine Choi
-1027 R Scavenger Grounds @Steven Belledin
-1028 R Sea Gate Wreckage @Zack Stella
-1029 U Seaside Citadel @Volkan Baǵa
-1030 U Secluded Courtyard @Sam Burley
-1031 C Selesnya Sanctuary @John Avon
-1032 R Sheltered Thicket @Sung Choi
-1033 R Shineshadow Snarl @Sam Burley
-1034 R Shrine of the Forsaken Gods @Daniel Ljunggren
-1035 R Skycloud Expanse @Sam Burley
-1036 R Smoldering Marsh @Adam Paquette
-1037 R Sungrass Prairie @Ron Spencer
-1038 R Sunken Hollow @Adam Paquette
-1039 U Tainted Field @Don Hazeltine
-1040 U Tainted Wood @Rob Alexander
-1041 R Temple of Enlightenment @Piotr Dura
-1042 R Temple of Epiphany @Adam Paquette
-1043 R Temple of Malady @Titus Lunter
-1044 R Temple of Plenty @Chris Ostrowski
-1045 R Temple of Silence @Adam Paquette
-1046 U Temple of the False God @James Zapata
-1047 R Temple of Triumph @Piotr Dura
-1048 U Tomb of the Spirit Dragon @Sam Burley
-1049 R Tyrite Sanctum @Volkan Baǵa
-1050 U Unclaimed Territory @Dimitar Marinski
-1051 C Urza's Mine @Brian Snõddy
-1052 C Urza's Power Plant @Brian Snõddy
-1053 C Urza's Tower @Brian Snõddy
-1054 R War Room @Milivoj Ćeran
-1055 C Wastes @Jason Felix
-1056 C Wastes @Raymond Swanland
-1057 M Kozilek, the Great Distortion @Grant Griffin
-1058 M Morophon, the Boundless @Jack Hughes
-1059 M Ulamog, the Ceaseless Hunger @Cosmin Podar
-1060 M Urza, Lord High Artificer @Grant Griffin
-1061 M Mikaeus, the Unhallowed @Benjamin Ee
-1062 M Neheb, the Eternal @Alex Stone
-1063 M Omnath, Locus of Mana @Alex Dos Diaz
-1064 M Selvala, Heart of the Wilds @Jack Hughes
-1065 M The Ur-Dragon @Tyler Walpole
-1066 M Jeweled Lotus @Olena Richards
+704 M Zhulodok, Void Gorger @Lius Lasahido ${"lang": "en|fr|de|ja"}
+705 M Anikthea, Hand of Erebos @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+706 M Commodore Guff @Matt Stewart ${"lang": "en|fr|de|ja"}
+707 M Sliver Gravemother @Chris Rahn ${"lang": "en|fr|de|ja"}
+708 M Omarthis, Ghostfire Initiate @Brent Hollowell ${"lang": "en|fr|de|ja"}
+709 M Leori, Sparktouched Hunter @John Tedrick ${"lang": "en|fr|de|ja"}
+710 M Narci, Fable Singer @Miranda Meeks ${"lang": "en|fr|de|ja"}
+711 M Rukarumel, Biologist @Fariba Khamseh ${"lang": "en|fr|de|ja"}
+712 R Abstruse Archaic @Hristo D. Chukov ${"lang": "en|fr|de|ja"}
+713 R Calamity of the Titans @Svetlin Velinov ${"lang": "en|fr|de|ja"}
+714 R Desecrate Reality @Eli Minaya ${"lang": "en|fr|de|ja"}
+715 R Flayer of Loyalties @John Tedrick ${"lang": "en|fr|de|ja"}
+716 R Rise of the Eldrazi @Eli Minaya ${"lang": "en|fr|de|ja"}
+717 R Skittering Cicada @Denis Zhbankov ${"lang": "en|fr|de|ja"}
+718 R Ugin's Mastery @David Astruga ${"lang": "en|fr|de|ja"}
+719 R Battle at the Helvault @Alix Branwyn ${"lang": "en|fr|de|ja"}
+720 R Boon of the Spirit Realm @Gaboleps ${"lang": "en|fr|de|ja"}
+721 R Gatewatch Beacon @Deruchenko Alexander ${"lang": "en|fr|de|ja"}
+722 R Onakke Oathkeeper @Arash Radkia ${"lang": "en|fr|de|ja"}
+723 R Ondu Spiritdancer @Tran Nguyen ${"lang": "en|fr|de|ja"}
+724 R Regal Sliver @Victor Adame Minguez ${"lang": "en|fr|de|ja"}
+725 R Teyo, Geometric Tactician @Kieran Yanner ${"lang": "en|fr|de|ja"}
+726 R Sparkshaper Visionary @Svetlin Velinov ${"lang": "en|fr|de|ja"}
+727 R Taunting Sliver @Maxime Minard ${"lang": "en|fr|de|ja"}
+728 R Titan of Littjara @Aldo Domínguez ${"lang": "en|fr|de|ja"}
+729 R Vronos, Masked Inquisitor @Ekaterina Burmak ${"lang": "en|fr|de|ja"}
+730 R Cacophony Unleashed @Deruchenko Alexander ${"lang": "en|fr|de|ja"}
+731 R Demon of Fate's Design @Fajareka Setiawan ${"lang": "en|fr|de|ja"}
+732 R Ghoulish Impetus @Steve Ellis ${"lang": "en|fr|de|ja"}
+733 R Lazotep Sliver @Maxime Minard ${"lang": "en|fr|de|ja"}
+734 R Capricious Sliver @Brent Hollowell ${"lang": "en|fr|de|ja"}
+735 R Chandra, Legacy of Fire @Chris Rahn ${"lang": "en|fr|de|ja"}
+736 R Descendants' Fury @Aldo Domínguez ${"lang": "en|fr|de|ja"}
+737 R Guff Rewrites History @Matt Stewart ${"lang": "en|fr|de|ja"}
+738 R Jaya's Phoenix @Justyna Dura ${"lang": "en|fr|de|ja"}
+739 R Composer of Spring @Gaboleps ${"lang": "en|fr|de|ja"}
+740 R For the Ancestors @Hristo D. Chukov ${"lang": "en|fr|de|ja"}
+741 R Hatchery Sliver @Svetlin Velinov ${"lang": "en|fr|de|ja"}
+742 R Nyxborn Behemoth @Néstor Ossandón Leal ${"lang": "en|fr|de|ja"}
+743 R Darksteel Monolith @Sergey Glushakov ${"lang": "en|fr|de|ja"}
+744 R Abstruse Archaic @Hristo D. Chukov ${"lang": "en|fr|de|ja|zhs"}
+745 R Calamity of the Titans @Svetlin Velinov ${"lang": "en|fr|de|ja|zhs"}
+746 R Desecrate Reality @Eli Minaya ${"lang": "en|fr|de|ja|zhs"}
+747 R Flayer of Loyalties @John Tedrick ${"lang": "en|fr|de|ja|zhs"}
+748 M Omarthis, Ghostfire Initiate @Brent Hollowell ${"lang": "en|fr|de|ja|zhs"}
+749 R Rise of the Eldrazi @Eli Minaya ${"lang": "en|fr|de|ja|zhs"}
+750 R Skittering Cicada @Denis Zhbankov ${"lang": "en|fr|de|ja|zhs"}
+751 R Ugin's Mastery @David Astruga ${"lang": "en|fr|de|ja|zhs"}
+752 M Zhulodok, Void Gorger @Lius Lasahido ${"lang": "en|fr|de|ja|zhs"}
+753 R Boon of the Spirit Realm @Gaboleps ${"lang": "en|fr|de|ja|zhs"}
+754 R Gatewatch Beacon @Deruchenko Alexander ${"lang": "en|fr|de|ja|zhs"}
+755 R Onakke Oathkeeper @Arash Radkia ${"lang": "en|fr|de|ja|zhs"}
+756 R Ondu Spiritdancer @Tran Nguyen ${"lang": "en|fr|de|ja|zhs"}
+757 R Regal Sliver @Victor Adame Minguez ${"lang": "en|fr|de|ja|zhs"}
+758 R Sparkshaper Visionary @Svetlin Velinov ${"lang": "en|fr|de|ja|zhs"}
+759 R Taunting Sliver @Maxime Minard ${"lang": "en|fr|de|ja|zhs"}
+760 R Titan of Littjara @Aldo Domínguez ${"lang": "en|fr|de|ja|zhs"}
+761 R Cacophony Unleashed @Deruchenko Alexander ${"lang": "en|fr|de|ja|zhs"}
+762 R Demon of Fate's Design @Fajareka Setiawan ${"lang": "en|fr|de|ja|zhs"}
+763 R Ghoulish Impetus @Steve Ellis ${"lang": "en|fr|de|ja|zhs"}
+764 R Lazotep Sliver @Maxime Minard ${"lang": "en|fr|de|ja|zhs"}
+765 R Capricious Sliver @Brent Hollowell ${"lang": "en|fr|de|ja|zhs"}
+766 R Descendants' Fury @Aldo Domínguez ${"lang": "en|fr|de|ja|zhs"}
+767 R Guff Rewrites History @Matt Stewart ${"lang": "en|fr|de|ja|zhs"}
+768 R Jaya's Phoenix @Justyna Dura ${"lang": "en|fr|de|ja|zhs"}
+769 R Composer of Spring @Gaboleps ${"lang": "en|fr|de|ja|zhs"}
+770 R For the Ancestors @Hristo D. Chukov ${"lang": "en|fr|de|ja|zhs"}
+771 R Hatchery Sliver @Svetlin Velinov ${"lang": "en|fr|de|ja|zhs"}
+772 R Nyxborn Behemoth @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+773 M Anikthea, Hand of Erebos @Magali Villeneuve ${"lang": "en|fr|de|ja|zhs"}
+774 M Leori, Sparktouched Hunter @John Tedrick ${"lang": "en|fr|de|ja|zhs"}
+775 M Narci, Fable Singer @Miranda Meeks ${"lang": "en|fr|de|ja|zhs"}
+776 M Rukarumel, Biologist @Fariba Khamseh ${"lang": "en|fr|de|ja|zhs"}
+777 M Sliver Gravemother @Chris Rahn ${"lang": "en|fr|de|ja|zhs"}
+778 R Darksteel Monolith @Sergey Glushakov ${"lang": "en|fr|de|ja|zhs"}
+779 M Zhulodok, Void Gorger @Lius Lasahido ${"lang": "en|fr|de|ja"}
+780 M Anikthea, Hand of Erebos @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+781 M Commodore Guff @Matt Stewart ${"lang": "en|fr|de|ja"}
+782 M Sliver Gravemother @Chris Rahn ${"lang": "en|fr|de|ja"}
+783 L Plains @Sam Burley ${"lang": "en|fr|de|ja"}
+784 L Plains @Sam Burley ${"lang": "en|fr|de|ja"}
+785 L Plains @Jonas De Ro ${"lang": "en|fr|de|ja"}
+786 L Plains @Kev Walker ${"lang": "en|fr|de|ja"}
+787 L Plains @Richard Wright ${"lang": "en|fr|de|ja"}
+788 L Island @Adam Paquette ${"lang": "en|fr|de|ja"}
+789 L Island @Kev Walker ${"lang": "en|fr|de|ja"}
+790 L Island @Eytan Zana ${"lang": "en|fr|de|ja"}
+791 L Swamp @Sam Burley ${"lang": "en|fr|de|ja"}
+792 L Swamp @Sam Burley ${"lang": "en|fr|de|ja"}
+793 L Swamp @Kev Walker ${"lang": "en|fr|de|ja"}
+794 L Mountain @Jonas De Ro ${"lang": "en|fr|de|ja"}
+795 L Mountain @Adam Paquette ${"lang": "en|fr|de|ja"}
+796 L Mountain @Kev Walker ${"lang": "en|fr|de|ja"}
+797 L Forest @Sam Burley ${"lang": "en|fr|de|ja"}
+798 L Forest @Sam Burley ${"lang": "en|fr|de|ja"}
+799 L Forest @Kev Walker ${"lang": "en|fr|de|ja"}
+800 M All Is Dust @Jason Felix ${"lang": "en|fr|de|ja"}
+801 U Artisan of Kozilek @Jason Felix ${"lang": "en|fr|de|ja"}
+802 U Bane of Bala Ged @Chase Stone ${"lang": "en|fr|de|ja"}
+803 R Endbringer @Vincent Proce ${"lang": "en|fr|de|ja"}
+804 R Endless One @Jason Felix ${"lang": "en|fr|de|ja"}
+805 R It That Betrays @Alexander Mokhov ${"lang": "en|fr|de|ja"}
+806 R Matter Reshaper @Chris Rahn ${"lang": "en|fr|de|ja"}
+807 U Not of This World @Izzy ${"lang": "en|fr|de|ja"}
+808 M Oblivion Sower @Jaime Jones ${"lang": "en|fr|de|ja"}
+809 U Spatial Contortion @Daarken ${"lang": "en|fr|de|ja"}
+810 U Titan's Presence @Slawomir Maniak ${"lang": "en|fr|de|ja"}
+811 R Ugin, the Ineffable @Daarken ${"lang": "en|fr|de|ja"}
+812 U Warping Wail @Jason Felix ${"lang": "en|fr|de|ja"}
+813 M Ajani Steadfast @Chris Rahn ${"lang": "en|fr|de|ja"}
+814 R Archon of Sun's Grace @Matt Stewart ${"lang": "en|fr|de|ja"}
+815 R Bonescythe Sliver @Lius Lasahido ${"lang": "en|fr|de|ja"}
+816 U Cast Out @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+817 R Cleansing Nova @Marta Nael ${"lang": "en|fr|de|ja"}
+818 U Constricting Sliver @Loïc Canavaggia ${"lang": "en|fr|de|ja"}
+819 M Deploy the Gatewatch @Wesley Burt ${"lang": "en|fr|de|ja"}
+820 M Elspeth, Sun's Champion @Tyler Jacobson ${"lang": "en|fr|de|ja"}
+821 R Felidar Retreat @Ralph Horsley ${"lang": "en|fr|de|ja"}
+822 M Gideon Jura @Aleksi Briclot ${"lang": "en|fr|de|ja"}
+823 R Grasp of Fate @Lie Setiawan ${"lang": "en|fr|de|ja"}
+824 U Grateful Apparition @Izzy ${"lang": "en|fr|de|ja"}
+825 R Harsh Mercy @John Matson ${"lang": "en|fr|de|ja"}
+826 M Heliod, God of the Sun @Jaime Jones ${"lang": "en|fr|de|ja"}
+827 U Love Song of Night and Day @Eli Minaya ${"lang": "en|fr|de|ja"}
+828 R Mesa Enchantress @Randy Gallegos ${"lang": "en|fr|de|ja"}
+829 R Norn's Annex @James Paick ${"lang": "en|fr|de|ja"}
+830 R Oath of Gideon @Wesley Burt ${"lang": "en|fr|de|ja"}
+831 C Omen of the Sun @Piotr Dura ${"lang": "en|fr|de|ja"}
+832 U Oreskos Explorer @Winona Nelson ${"lang": "en|fr|de|ja"}
+833 R Promise of Loyalty @Sara Winters ${"lang": "en|fr|de|ja"}
+834 R Semester's End @Alayna Danner ${"lang": "en|fr|de|ja"}
+835 C Sentinel Sliver @Lucas Graciano ${"lang": "en|fr|de|ja"}
+836 R Sigil of the Empty Throne @Cyril Van Der Haegen ${"lang": "en|fr|de|ja"}
+837 C Sinew Sliver @Steven Belledin ${"lang": "en|fr|de|ja"}
+838 C Spirited Companion @Ilse Gort ${"lang": "en|fr|de|ja"}
+839 R Starfield Mystic @Eric Deschamps ${"lang": "en|fr|de|ja"}
+840 M Starfield of Nyx @Tyler Jacobson ${"lang": "en|fr|de|ja"}
+841 U Swords to Plowshares @Sam Wolfe Connelly ${"lang": "en|fr|de|ja"}
+842 R Urza's Ruinous Blast @Slawomir Maniak ${"lang": "en|fr|de|ja"}
+843 U The Wanderer @Wesley Burt ${"lang": "en|fr|de|ja"}
+844 R Deepglow Skate @Jason Kang ${"lang": "en|fr|de|ja"}
+845 U Diffusion Sliver @Campbell White ${"lang": "en|fr|de|ja"}
+846 C Distant Melody @Omar Rayyan ${"lang": "en|fr|de|ja"}
+847 U Flux Channeler @Heonhwa ${"lang": "en|fr|de|ja"}
+848 U Fog Bank @Howard Lyon ${"lang": "en|fr|de|ja"}
+849 R Galerider Sliver @Campbell White ${"lang": "en|fr|de|ja"}
+850 M Jace Beleren @Aleksi Briclot ${"lang": "en|fr|de|ja"}
+851 M Jace, Architect of Thought @Jaime Jones ${"lang": "en|fr|de|ja"}
+852 M Jace, Mirror Mage @Tyler Jacobson ${"lang": "en|fr|de|ja"}
+853 U Narset, Parter of Veils @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+854 R Oath of Jace @Wesley Burt ${"lang": "en|fr|de|ja"}
+855 U Shifting Sliver @Darrell Riche ${"lang": "en|fr|de|ja"}
+856 R Spark Double @Eric Deschamps ${"lang": "en|fr|de|ja"}
+857 R Synapse Sliver @Thomas M. Baxa ${"lang": "en|fr|de|ja"}
+858 U Thrummingbird @Efrem Palacios ${"lang": "en|fr|de|ja"}
+859 U Windfall @Scott Murphy ${"lang": "en|fr|de|ja"}
+860 C Winged Sliver @Anthony S. Waters ${"lang": "en|fr|de|ja"}
+861 C Clot Sliver @Jeff Laubenstein ${"lang": "en|fr|de|ja"}
+862 R Crippling Fear @Néstor Ossandón Leal ${"lang": "en|fr|de|ja"}
+863 C Crypt Sliver @Michele Giorgi ${"lang": "en|fr|de|ja"}
+864 R Cunning Rhetoric @Chris Rallis ${"lang": "en|fr|de|ja"}
+865 R Doomwake Giant @Kev Walker ${"lang": "en|fr|de|ja"}
+866 R Dreadhorde Invasion @Stanton Feng ${"lang": "en|fr|de|ja"}
+867 U The Eldest Reborn @Ravenna Tran ${"lang": "en|fr|de|ja"}
+868 M Erebos, Bleak-Hearted @Chase Stone ${"lang": "en|fr|de|ja"}
+869 C Mindwrack Harpy @Deruchenko Alexander ${"lang": "en|fr|de|ja"}
+870 R Syphon Sliver @Johann Bodin ${"lang": "en|fr|de|ja"}
+871 U Blade Sliver @Alexandre Honoré ${"lang": "en|fr|de|ja"}
+872 R Blasphemous Act @Daarken ${"lang": "en|fr|de|ja"}
+873 C Blur Sliver @Ben Wootten ${"lang": "en|fr|de|ja"}
+874 C Bonesplitter Sliver @Dany Orizio ${"lang": "en|fr|de|ja"}
+875 M Chandra, Awakened Inferno @Chris Rahn ${"lang": "en|fr|de|ja"}
+876 M Chandra, Torch of Defiance @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+877 C Cleaving Sliver @David Gaillet ${"lang": "en|fr|de|ja"}
+878 U Hollowhead Sliver @Johan Grenier ${"lang": "en|fr|de|ja"}
+879 R Repeated Reverberation @Izzy ${"lang": "en|fr|de|ja"}
+880 R Sarkhan the Masterless @Kieran Yanner ${"lang": "en|fr|de|ja"}
+881 R Spiteful Sliver @Johann Bodin ${"lang": "en|fr|de|ja"}
+882 C Striking Sliver @Aaron J. Riley ${"lang": "en|fr|de|ja"}
+883 C Two-Headed Sliver @Raoul Vitale ${"lang": "en|fr|de|ja"}
+884 R Abundance @Rebecca Guay ${"lang": "en|fr|de|ja"}
+885 R Arasta of the Endless Web @Sam Rowan ${"lang": "en|fr|de|ja"}
+886 U The Binding of the Titans @Adam Paquette ${"lang": "en|fr|de|ja"}
+887 R Brood Sliver @Ron Spears ${"lang": "en|fr|de|ja"}
+888 R Courser of Kruphix @Eric Deschamps ${"lang": "en|fr|de|ja"}
+889 C Cultivate @Anthony Palumbo ${"lang": "en|fr|de|ja"}
+890 U Destiny Spinner @Livia Prima ${"lang": "en|fr|de|ja"}
+891 R Dryad of the Ilysian Grove @Scott Murphy ${"lang": "en|fr|de|ja"}
+892 R Eidolon of Blossoms @Min Yum ${"lang": "en|fr|de|ja"}
+893 R Enchantress's Presence @Rebecca Guay ${"lang": "en|fr|de|ja"}
+894 C Farseek @Martina Pilcerova ${"lang": "en|fr|de|ja"}
+895 C Font of Fertility @Jack Wang ${"lang": "en|fr|de|ja"}
+896 C Gemhide Sliver @Alayna Danner ${"lang": "en|fr|de|ja"}
+897 C Greater Tanuki @Ilse Gort ${"lang": "en|fr|de|ja"}
+898 R Herald of the Pantheon @Jason A. Engle ${"lang": "en|fr|de|ja"}
+899 C Khalni Heart Expedition @Jason Chan ${"lang": "en|fr|de|ja"}
+900 U Manaweft Sliver @Franz Vohwinkel ${"lang": "en|fr|de|ja"}
+901 R Megantic Sliver @Campbell White ${"lang": "en|fr|de|ja"}
+902 R The Mending of Dominaria @Adam Paquette ${"lang": "en|fr|de|ja"}
+903 U Might Sliver @Jeff Miracola ${"lang": "en|fr|de|ja"}
+904 C Nature's Lore @Julie Dillon ${"lang": "en|fr|de|ja"}
+905 U Nessian Wanderer @Matt Stewart ${"lang": "en|fr|de|ja"}
+906 C Omen of the Hunt @Piotr Dura ${"lang": "en|fr|de|ja"}
+907 C Quick Sliver @John Avon ${"lang": "en|fr|de|ja"}
+908 C Rampant Growth @Steven Belledin ${"lang": "en|fr|de|ja"}
+909 R Realmwalker @Zack Stella ${"lang": "en|fr|de|ja"}
+910 R Sanctum Weaver @Kimonas Theodossiou ${"lang": "en|fr|de|ja"}
+911 R Sandwurm Convergence @Slawomir Maniak ${"lang": "en|fr|de|ja"}
+912 R Setessan Champion @Emrah Elmasli ${"lang": "en|fr|de|ja"}
+913 U Three Visits @Yeong-Hao Han ${"lang": "en|fr|de|ja"}
+914 U Venom Sliver @Uriah Voth ${"lang": "en|fr|de|ja"}
+915 R Verduran Enchantress @Rob Alexander ${"lang": "en|fr|de|ja"}
+916 R Battle for Bretagard @Igor Kieryluk ${"lang": "en|fr|de|ja"}
+917 U Binding the Old Gods @Victor Adame Minguez ${"lang": "en|fr|de|ja"}
+918 M Calix, Destiny's Hand @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+919 R Cloudshredder Sliver @Filip Burburan ${"lang": "en|fr|de|ja"}
+920 U Crystalline Sliver @Allen Williams ${"lang": "en|fr|de|ja"}
+921 R Culling Ritual @Lorenzo Mastroianni ${"lang": "en|fr|de|ja"}
+922 R Decimate @Zoltan Boros ${"lang": "en|fr|de|ja"}
+923 U Firewake Sliver @Alexandre Honoré ${"lang": "en|fr|de|ja"}
+924 U Harmonic Sliver @Luca Zontini ${"lang": "en|fr|de|ja"}
+925 U Hibernation Sliver @Scott Kirschner ${"lang": "en|fr|de|ja"}
+926 U Jukai Naturalist @Anna Steinbauer ${"lang": "en|fr|de|ja"}
+927 U Lavabelly Sliver @Mark Behm ${"lang": "en|fr|de|ja"}
+928 M Mirari's Wake @Volkan Baǵa ${"lang": "en|fr|de|ja"}
+929 M Nahiri, the Harbinger @Aleksi Briclot ${"lang": "en|fr|de|ja"}
+930 M Narset of the Ancient Way @Yongjae Choi ${"lang": "en|fr|de|ja"}
+931 M Narset, Enlightened Master @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+932 U Necrotic Sliver @Dave Allsop ${"lang": "en|fr|de|ja"}
+933 U Nyx Weaver @Jack Wang ${"lang": "en|fr|de|ja"}
+934 R Oath of Teferi @Wesley Burt ${"lang": "en|fr|de|ja"}
+935 U Saheeli, Sublime Artificer @Wesley Burt ${"lang": "en|fr|de|ja"}
+936 U Satyr Enchanter @Sidharth Chaturvedi ${"lang": "en|fr|de|ja"}
+937 M Sliver Hivelord @Aleksi Briclot ${"lang": "en|fr|de|ja"}
+938 R Sythis, Harvest's Hand @Ryan Yee ${"lang": "en|fr|de|ja"}
+939 U Wall of Denial @Howard Lyon ${"lang": "en|fr|de|ja"}
+940 R Ancient Stone Idol @Josh Hass ${"lang": "en|fr|de|ja"}
+941 U Azorius Signet @Greg Hildebrandt ${"lang": "en|fr|de|ja"}
+942 U Boros Signet @Mike Sass ${"lang": "en|fr|de|ja"}
+943 M The Chain Veil @Volkan Baǵa ${"lang": "en|fr|de|ja"}
+944 C Crashing Drawbridge @Mark Behm ${"lang": "en|fr|de|ja"}
+945 U Dreamstone Hedron @Eric Deschamps ${"lang": "en|fr|de|ja"}
+946 R Duplicant @Thomas M. Baxa ${"lang": "en|fr|de|ja"}
+947 R Endless Atlas @Titus Lunter ${"lang": "en|fr|de|ja"}
+948 U Everflowing Chalice @Steve Argyle ${"lang": "en|fr|de|ja"}
+949 U Fireshrieker @Christopher Moeller ${"lang": "en|fr|de|ja"}
+950 M Forsaken Monument @Piotr Dura ${"lang": "en|fr|de|ja"}
+951 R Hangarback Walker @Daarken ${"lang": "en|fr|de|ja"}
+952 U Hedron Archive @Craig J Spearing ${"lang": "en|fr|de|ja"}
+953 U Herald's Horn @Jason Felix ${"lang": "en|fr|de|ja"}
+954 U Honor-Worn Shaku @Tony Szczudlo ${"lang": "en|fr|de|ja"}
+955 R Icon of Ancestry @Chris Seaman ${"lang": "en|fr|de|ja"}
+956 R Investigator's Journal @Yeong-Hao Han ${"lang": "en|fr|de|ja"}
+957 U Izzet Signet @Raoul Vitale ${"lang": "en|fr|de|ja"}
+958 M Kaldra Compleat @Vincent Proce ${"lang": "en|fr|de|ja"}
+959 R Mazemind Tome @Randy Gallegos ${"lang": "en|fr|de|ja"}
+960 R Metalwork Colossus @Jaime Jones ${"lang": "en|fr|de|ja"}
+961 C Mind Stone @Adam Rex ${"lang": "en|fr|de|ja"}
+962 R Mirage Mirror @Craig J Spearing ${"lang": "en|fr|de|ja"}
+963 R Myriad Construct @Chase Stone ${"lang": "en|fr|de|ja"}
+964 R Mystic Forge @Titus Lunter ${"lang": "en|fr|de|ja"}
+965 R Nevinyrral's Disk @Steve Argyle ${"lang": "en|fr|de|ja"}
+966 C Ornithopter of Paradise @Raoul Vitale ${"lang": "en|fr|de|ja"}
+967 U Palladium Myr @Alan Pollack ${"lang": "en|fr|de|ja"}
+968 M Perilous Vault @Sam Burley ${"lang": "en|fr|de|ja"}
+969 M Phyrexian Triniform @Adam Paquette ${"lang": "en|fr|de|ja"}
+970 U Pillar of Origins @Dimitar Marinski ${"lang": "en|fr|de|ja"}
+971 C Scaretiller @Jakub Kasper ${"lang": "en|fr|de|ja"}
+972 R Silent Arbiter @Mark Zug ${"lang": "en|fr|de|ja"}
+973 R Solemn Simulacrum @Donato Giancola ${"lang": "en|fr|de|ja"}
+974 M Soul of New Phyrexia @Daarken ${"lang": "en|fr|de|ja"}
+975 R Steel Hellkite @James Paick ${"lang": "en|fr|de|ja"}
+976 R Stonecoil Serpent @Mark Poole ${"lang": "en|fr|de|ja"}
+977 U Suspicious Bookcase @Josu Hernaiz ${"lang": "en|fr|de|ja"}
+978 U Talisman of Conviction @Lindsey Look ${"lang": "en|fr|de|ja"}
+979 U Talisman of Creativity @Lindsey Look ${"lang": "en|fr|de|ja"}
+980 U Talisman of Progress @Mike Dringenberg ${"lang": "en|fr|de|ja"}
+981 R Transmogrifying Wand @Aaron Miller ${"lang": "en|fr|de|ja"}
+982 R Vanquisher's Banner @Milivoj Ćeran ${"lang": "en|fr|de|ja"}
+983 C Wayfarer's Bauble @Darrell Riche ${"lang": "en|fr|de|ja"}
+984 U Worn Powerstone @Henry G. Higginbotham ${"lang": "en|fr|de|ja"}
+985 U Arcane Lighthouse @Igor Kieryluk ${"lang": "en|fr|de|ja"}
+986 R Arch of Orazca @Titus Lunter ${"lang": "en|fr|de|ja"}
+987 R Blast Zone @Jorge Jacinto ${"lang": "en|fr|de|ja"}
+988 R Bonders' Enclave @Cliff Childs ${"lang": "en|fr|de|ja"}
+989 R Canopy Vista @Adam Paquette ${"lang": "en|fr|de|ja"}
+990 R Cascade Bluffs @Brandon Kitkouski ${"lang": "en|fr|de|ja"}
+991 R Cinder Glade @Adam Paquette ${"lang": "en|fr|de|ja"}
+992 U Eldrazi Temple @James Paick ${"lang": "en|fr|de|ja"}
+993 R Exotic Orchard @Steven Belledin ${"lang": "en|fr|de|ja"}
+994 U Flood Plain @Pat Lewis ${"lang": "en|fr|de|ja"}
+995 C Forge of Heroes @Titus Lunter ${"lang": "en|fr|de|ja"}
+996 R Fortified Village @Cliff Childs ${"lang": "en|fr|de|ja"}
+997 U Frontier Bivouac @Titus Lunter ${"lang": "en|fr|de|ja"}
+998 R Frostboil Snarl @Sam Burley ${"lang": "en|fr|de|ja"}
+999 R Furycalm Snarl @Sam Burley ${"lang": "en|fr|de|ja"}
+1000 R Geier Reach Sanitarium @Cliff Childs ${"lang": "en|fr|de|ja"}
+1001 C Golgari Rot Farm @John Avon ${"lang": "en|fr|de|ja"}
+1002 U Grasslands @John Avon ${"lang": "en|fr|de|ja"}
+1003 U Guildless Commons @Cliff Childs ${"lang": "en|fr|de|ja"}
+1004 U Interplanar Beacon @Adam Paquette ${"lang": "en|fr|de|ja"}
+1005 R Irrigated Farmland @Jonas De Ro ${"lang": "en|fr|de|ja"}
+1006 U Jungle Shrine @Wayne Reynolds ${"lang": "en|fr|de|ja"}
+1007 R Karn's Bastion @Adam Paquette ${"lang": "en|fr|de|ja"}
+1008 U Krosan Verge @Ruxing Gao ${"lang": "en|fr|de|ja"}
+1009 U Mage-Ring Network @Jung Park ${"lang": "en|fr|de|ja"}
+1010 M Mirrorpool @Cliff Childs ${"lang": "en|fr|de|ja"}
+1011 R Mobilized District @Jedd Chevrier ${"lang": "en|fr|de|ja"}
+1012 U Mountain Valley @Kari Johnson ${"lang": "en|fr|de|ja"}
+1013 R Mystic Gate @Fred Fields ${"lang": "en|fr|de|ja"}
+1014 U Mystic Monastery @Florian de Gesincourt ${"lang": "en|fr|de|ja"}
+1015 R Necroblossom Snarl @Sam Burley ${"lang": "en|fr|de|ja"}
+1016 U Nomad Outpost @Kamila Szutenberg ${"lang": "en|fr|de|ja"}
+1017 U Opulent Palace @Adam Paquette ${"lang": "en|fr|de|ja"}
+1018 U Orzhov Basilica @John Avon ${"lang": "en|fr|de|ja"}
+1019 R Port Town @Kamila Szutenberg ${"lang": "en|fr|de|ja"}
+1020 R Prairie Stream @Adam Paquette ${"lang": "en|fr|de|ja"}
+1021 U Rocky Tar Pit @Jeff Miracola ${"lang": "en|fr|de|ja"}
+1022 R Rugged Prairie @Fred Fields ${"lang": "en|fr|de|ja"}
+1023 R Ruins of Oran-Rief @Jason Felix ${"lang": "en|fr|de|ja"}
+1024 U Sandsteppe Citadel @Sam Burley ${"lang": "en|fr|de|ja"}
+1025 U Savage Lands @John Avon ${"lang": "en|fr|de|ja"}
+1026 R Scattered Groves @Christine Choi ${"lang": "en|fr|de|ja"}
+1027 R Scavenger Grounds @Steven Belledin ${"lang": "en|fr|de|ja"}
+1028 R Sea Gate Wreckage @Zack Stella ${"lang": "en|fr|de|ja"}
+1029 U Seaside Citadel @Volkan Baǵa ${"lang": "en|fr|de|ja"}
+1030 U Secluded Courtyard @Sam Burley ${"lang": "en|fr|de|ja"}
+1031 C Selesnya Sanctuary @John Avon ${"lang": "en|fr|de|ja"}
+1032 R Sheltered Thicket @Sung Choi ${"lang": "en|fr|de|ja"}
+1033 R Shineshadow Snarl @Sam Burley ${"lang": "en|fr|de|ja"}
+1034 R Shrine of the Forsaken Gods @Daniel Ljunggren ${"lang": "en|fr|de|ja"}
+1035 R Skycloud Expanse @Sam Burley ${"lang": "en|fr|de|ja"}
+1036 R Smoldering Marsh @Adam Paquette ${"lang": "en|fr|de|ja"}
+1037 R Sungrass Prairie @Ron Spencer ${"lang": "en|fr|de|ja"}
+1038 R Sunken Hollow @Adam Paquette ${"lang": "en|fr|de|ja"}
+1039 U Tainted Field @Don Hazeltine ${"lang": "en|fr|de|ja"}
+1040 U Tainted Wood @Rob Alexander ${"lang": "en|fr|de|ja"}
+1041 R Temple of Enlightenment @Piotr Dura ${"lang": "en|fr|de|ja"}
+1042 R Temple of Epiphany @Adam Paquette ${"lang": "en|fr|de|ja"}
+1043 R Temple of Malady @Titus Lunter ${"lang": "en|fr|de|ja"}
+1044 R Temple of Plenty @Chris Ostrowski ${"lang": "en|fr|de|ja"}
+1045 R Temple of Silence @Adam Paquette ${"lang": "en|fr|de|ja"}
+1046 U Temple of the False God @James Zapata ${"lang": "en|fr|de|ja"}
+1047 R Temple of Triumph @Piotr Dura ${"lang": "en|fr|de|ja"}
+1048 U Tomb of the Spirit Dragon @Sam Burley ${"lang": "en|fr|de|ja"}
+1049 R Tyrite Sanctum @Volkan Baǵa ${"lang": "en|fr|de|ja"}
+1050 U Unclaimed Territory @Dimitar Marinski ${"lang": "en|fr|de|ja"}
+1051 C Urza's Mine @Brian Snõddy ${"lang": "en|fr|de|ja"}
+1052 C Urza's Power Plant @Brian Snõddy ${"lang": "en|fr|de|ja"}
+1053 C Urza's Tower @Brian Snõddy ${"lang": "en|fr|de|ja"}
+1054 R War Room @Milivoj Ćeran ${"lang": "en|fr|de|ja"}
+1055 C Wastes @Jason Felix ${"lang": "en|fr|de|ja"}
+1056 C Wastes @Raymond Swanland ${"lang": "en|fr|de|ja"}
+1057 M Kozilek, the Great Distortion @Grant Griffin ${"lang": "en|fr|de|ja|zhs"}
+1058 M Morophon, the Boundless @Jack Hughes ${"lang": "en|fr|de|ja|zhs"}
+1059 M Ulamog, the Ceaseless Hunger @Cosmin Podar ${"lang": "en|fr|de|ja|zhs"}
+1060 M Urza, Lord High Artificer @Grant Griffin ${"lang": "en|fr|de|ja|zhs"}
+1061 M Mikaeus, the Unhallowed @Benjamin Ee ${"lang": "en|fr|de|ja|zhs"}
+1062 M Neheb, the Eternal @Alex Stone ${"lang": "en|fr|de|ja|zhs"}
+1063 M Omnath, Locus of Mana @Alex Dos Diaz ${"lang": "en|fr|de|ja|zhs"}
+1064 M Selvala, Heart of the Wilds @Jack Hughes ${"lang": "en|fr|de|ja|zhs"}
+1065 M The Ur-Dragon @Tyler Walpole ${"lang": "en|fr|de|ja|zhs"}
+1066 M Jeweled Lotus @Olena Richards ${"lang": "en|fr|de|ja|zhs"}
 1067 R Disrupt Decorum @Ron Spencer
 
 [tokens]

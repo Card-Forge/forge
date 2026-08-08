@@ -4,6 +4,7 @@ Date=2021-09-24
 Name=Innistrad: Midnight Hunt Commander
 Type=Commander
 ScryfallCode=MIC
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs,zht
 
 [cards]
 1 M Leinore, Autumn Sovereign @Fariba Khamseh
@@ -44,44 +45,44 @@ ScryfallCode=MIC
 36 R Visions of Ruin @Andrew Mar
 37 R Visions of Dominance @Andrew Mar
 38 M Lynde, Cheerful Tormentor @Anna Steinbauer
-39 M Leinore, Autumn Sovereign @Fariba Khamseh
-40 M Wilhelt, the Rotcleaver @Chris Rallis
-41 M Eloise, Nephalia Sleuth @Jarel Threat
-42 M Kyler, Sigardian Emissary @Dmitry Burmak
-43 R Celestial Judgment @Alexander Mokhov
-44 R Curse of Conformity @Chris Cold
-45 R Moorland Rescuer @Justyna Dura
-46 R Sigarda's Vanguard @Martina Fačková
-47 R Stalwart Pathlighter @Sidharth Chaturvedi
-48 R Wall of Mourning @Kasia 'Kafis' Zielińska
-49 R Cleaver Skaab @Johann Bodin
-50 R Curse of Unbinding @Sebastian Giacobino
-51 R Drown in Dreams @Olena Richards
-52 R Empty the Laboratory @Tuan Duong Chu
-53 R Hordewing Skaab @Sidharth Chaturvedi
-54 R Shadow Kin @Irvin Rodriguez
-55 R Crowded Crypt @Jarel Threat
-56 R Curse of the Restless Dead @Brian Valeza
-57 R Ghouls' Night Out @Fajareka Setiawan
-58 M Gorex, the Tombshell @Wisnu Tan
-59 R Prowling Geistcatcher @Lie Setiawan
-60 R Ravenous Rotbelly @Nils Hamm
-61 R Tomb Tyrant @Chris Cold
-62 R Celebrate the Harvest @Eelis Kyttanen
-63 R Curse of Clinging Webs @Marie Magny
-64 R Heronblade Elite @Yigit Koroglu
-65 M Kurbis, Harvest Celebrant @Irvin Rodriguez
-66 R Ruinous Intrusion @Johann Bodin
-67 R Sigardian Zealot @Justyna Dura
-68 R Somberwald Beastmaster @Marta Nael
-69 M Avacyn's Memorial @Kasia 'Kafis' Zielińska
-70 R Visions of Glory @Alexander Mokhov
-71 R Visions of Duplicity @Alexander Mokhov
-72 R Visions of Dread @Andrew Mar
-73 R Curse of Obsession @Irvin Rodriguez
-74 R Visions of Ruin @Andrew Mar
-75 R Visions of Dominance @Andrew Mar
-76 M Lynde, Cheerful Tormentor @Anna Steinbauer
+39 M Leinore, Autumn Sovereign @Fariba Khamseh ${"lang": "en|es|fr|de|it|ja"}
+40 M Wilhelt, the Rotcleaver @Chris Rallis ${"lang": "en|es|fr|de|it|ja"}
+41 M Eloise, Nephalia Sleuth @Jarel Threat ${"lang": "en|es|fr|de|it|ja"}
+42 M Kyler, Sigardian Emissary @Dmitry Burmak ${"lang": "en|es|fr|de|it|ja"}
+43 R Celestial Judgment @Alexander Mokhov ${"lang": "en|es|fr|de|it|ja"}
+44 R Curse of Conformity @Chris Cold ${"lang": "en|es|fr|de|it|ja"}
+45 R Moorland Rescuer @Justyna Dura ${"lang": "en|es|fr|de|it|ja"}
+46 R Sigarda's Vanguard @Martina Fačková ${"lang": "en|es|fr|de|it|ja"}
+47 R Stalwart Pathlighter @Sidharth Chaturvedi ${"lang": "en|es|fr|de|it|ja"}
+48 R Wall of Mourning @Kasia 'Kafis' Zielińska ${"lang": "en|es|fr|de|it|ja"}
+49 R Cleaver Skaab @Johann Bodin ${"lang": "en|es|fr|de|it|ja"}
+50 R Curse of Unbinding @Sebastian Giacobino ${"lang": "en|es|fr|de|it|ja"}
+51 R Drown in Dreams @Olena Richards ${"lang": "en|es|fr|de|it|ja"}
+52 R Empty the Laboratory @Tuan Duong Chu ${"lang": "en|es|fr|de|it|ja"}
+53 R Hordewing Skaab @Sidharth Chaturvedi ${"lang": "en|es|fr|de|it|ja"}
+54 R Shadow Kin @Irvin Rodriguez ${"lang": "en|es|fr|de|it|ja"}
+55 R Crowded Crypt @Jarel Threat ${"lang": "en|es|fr|de|it|ja"}
+56 R Curse of the Restless Dead @Brian Valeza ${"lang": "en|es|fr|de|it|ja"}
+57 R Ghouls' Night Out @Fajareka Setiawan ${"lang": "en|es|fr|de|it|ja"}
+58 M Gorex, the Tombshell @Wisnu Tan ${"lang": "en|es|fr|de|it|ja"}
+59 R Prowling Geistcatcher @Lie Setiawan ${"lang": "en|es|fr|de|it|ja"}
+60 R Ravenous Rotbelly @Nils Hamm ${"lang": "en|es|fr|de|it|ja"}
+61 R Tomb Tyrant @Chris Cold ${"lang": "en|es|fr|de|it|ja"}
+62 R Celebrate the Harvest @Eelis Kyttanen ${"lang": "en|es|fr|de|it|ja"}
+63 R Curse of Clinging Webs @Marie Magny ${"lang": "en|es|fr|de|it|ja"}
+64 R Heronblade Elite @Yigit Koroglu ${"lang": "en|es|fr|de|it|ja"}
+65 M Kurbis, Harvest Celebrant @Irvin Rodriguez ${"lang": "en|es|fr|de|it|ja"}
+66 R Ruinous Intrusion @Johann Bodin ${"lang": "en|es|fr|de|it|ja"}
+67 R Sigardian Zealot @Justyna Dura ${"lang": "en|es|fr|de|it|ja"}
+68 R Somberwald Beastmaster @Marta Nael ${"lang": "en|es|fr|de|it|ja"}
+69 M Avacyn's Memorial @Kasia 'Kafis' Zielińska ${"lang": "en|es|fr|de|it|ja"}
+70 R Visions of Glory @Alexander Mokhov ${"lang": "en|es|fr|de|it|ja"}
+71 R Visions of Duplicity @Alexander Mokhov ${"lang": "en|es|fr|de|it|ja"}
+72 R Visions of Dread @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+73 R Curse of Obsession @Irvin Rodriguez ${"lang": "en|es|fr|de|it|ja"}
+74 R Visions of Ruin @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+75 R Visions of Dominance @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+76 M Lynde, Cheerful Tormentor @Anna Steinbauer ${"lang": "en|es|fr|de|it|ja"}
 77 U Abzan Falconer @Steven Belledin
 78 C Ainok Bond-Kin @Chris Rahn
 79 R Angel of Glory's Rise @Andrew Mar

@@ -8,9 +8,10 @@ BoosterCovers=5
 Booster=10 Common:fromSheet("AFR cards"), 3 Uncommon:fromSheet("AFR cards"), 1 RareMythic:fromSheet("AFR cards"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
 FatPackExtraSlots=20 BasicLands, 20 BasicLands+
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
-1 C +2 Mace @Jarel Threat
+1 C +2 Mace @Jarel Threat ${"lang": "en"}
 2 C Arborea Pegasus @Justyna Dura
 3 U Blink Dog @Oriana Menendez
 4 M The Book of Exalted Deeds @Daniel Ljunggren
@@ -285,11 +286,11 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 273 L Swamp @Adam Paquette
 274 L Mountain @Piotr Dura
 275 L Mountain @Sarah Finnigan
-276 L Mountain @Titus Lunter
-277 L Mountain @Adam Paquette
+276 L Mountain @Titus Lunter ${"lang": "en|es|fr|de|it|pt|ja|ko|ru|zht"}
+277 L Mountain @Adam Paquette ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
 278 L Forest @Piotr Dura
 279 L Forest @Sarah Finnigan
-280 L Forest @Titus Lunter
+280 L Forest @Titus Lunter ${"lang": "en|es|fr|de|it|ja|ko|ru|zhs|zht"}
 281 L Forest @Adam Paquette
 
 [borderless]
@@ -374,54 +375,54 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 358 R Treasure Vault @Erol Otus
 
 [extended art]
-359 M The Book of Exalted Deeds @Daniel Ljunggren
-360 R Dancing Sword @Wisnu Tan
-361 R Flumph @Brian Valeza
-362 R Guardian of Faith @Brian Valeza
-363 R Loyal Warhound @Dmitry Burmak
-364 R Teleportation Circle @Chris Cold
-365 R The Blackstaff of Waterdeep @Anna Steinbauer
-366 M Demilich @Daniel Zrom
-367 R Grazilaxx, Illithid Scholar @Alexander Mokhov
-368 R Tasha's Hideous Laughter @Ilse Gort
-369 R True Polymorph @Steve Prescott
-370 R Wizard's Spellbook @Iris Compiet
-371 R Yuan-Ti Malison @Oriana Menendez
-372 M Acererak the Archlich @Andrey Kuzinskiy
-373 R Asmodeus the Archfiend @Aleksi Briclot
-374 M The Book of Vile Darkness @Daniel Ljunggren
-375 R Forsworn Paladin @Lorenzo Mastroianni
-376 R Sphere of Annihilation @Jason Felix
-377 R Vorpal Sword @Caio Monteiro
-378 M Flameskull @Xavier Ribeiro
-379 R Hobgoblin Bandit Lord @Mark Zug
-380 R Meteor Swarm @Olivier Bernard
-381 R Orb of Dragonkind @Brian Valeza
-382 R Wish @Ekaterina Burmak
-383 R Circle of Dreams Druid @Sam Guay
-384 R Froghemoth @Brent Hollowell
-385 R Instrument of the Bards @Randy Gallegos
-386 R Long Rest @Chris Seaman
-387 R Werewolf Pack Leader @Miranda Meeks
-388 R Orcus, Prince of Undeath @Andrew Mar
-389 R Skeletal Swarming @Svetlin Velinov
-390 R Triumphant Adventurer @Alexander Mokhov
-391 M Xanathar, Guild Kingpin @Kieran Yanner
-392 M The Deck of Many Things @Volkan Baǵa
-393 R Eye of Vecna @Irina Nordsol
-394 R Hand of Vecna @Irina Nordsol
-395 R Treasure Chest @Dan Murayama Scott
+359 M The Book of Exalted Deeds @Daniel Ljunggren ${"lang": "en|es|fr|de|it|ja"}
+360 R Dancing Sword @Wisnu Tan ${"lang": "en|es|fr|de|it|ja"}
+361 R Flumph @Brian Valeza ${"lang": "en|es|fr|de|it|ja"}
+362 R Guardian of Faith @Brian Valeza ${"lang": "en|es|fr|de|it|ja"}
+363 R Loyal Warhound @Dmitry Burmak ${"lang": "en|es|fr|de|it|ja"}
+364 R Teleportation Circle @Chris Cold ${"lang": "en|es|fr|de|it|ja"}
+365 R The Blackstaff of Waterdeep @Anna Steinbauer ${"lang": "en|es|fr|de|it|ja"}
+366 M Demilich @Daniel Zrom ${"lang": "en|es|fr|de|it|ja"}
+367 R Grazilaxx, Illithid Scholar @Alexander Mokhov ${"lang": "en|es|fr|de|it|ja"}
+368 R Tasha's Hideous Laughter @Ilse Gort ${"lang": "en|es|fr|de|it|ja"}
+369 R True Polymorph @Steve Prescott ${"lang": "en|es|fr|de|it|ja"}
+370 R Wizard's Spellbook @Iris Compiet ${"lang": "en|es|fr|de|it|ja"}
+371 R Yuan-Ti Malison @Oriana Menendez ${"lang": "en|es|fr|de|it|ja"}
+372 M Acererak the Archlich @Andrey Kuzinskiy ${"lang": "en|es|fr|de|it|ja"}
+373 R Asmodeus the Archfiend @Aleksi Briclot ${"lang": "en|es|fr|de|it|ja"}
+374 M The Book of Vile Darkness @Daniel Ljunggren ${"lang": "en|es|fr|de|it|ja"}
+375 R Forsworn Paladin @Lorenzo Mastroianni ${"lang": "en|es|fr|de|it|ja"}
+376 R Sphere of Annihilation @Jason Felix ${"lang": "en|es|fr|de|it|ja"}
+377 R Vorpal Sword @Caio Monteiro ${"lang": "en|es|fr|de|it|ja"}
+378 M Flameskull @Xavier Ribeiro ${"lang": "en|es|fr|de|it|ja"}
+379 R Hobgoblin Bandit Lord @Mark Zug ${"lang": "en|es|fr|de|it|ja"}
+380 R Meteor Swarm @Olivier Bernard ${"lang": "en|es|fr|de|it|ja"}
+381 R Orb of Dragonkind @Brian Valeza ${"lang": "en|es|fr|de|it|ja"}
+382 R Wish @Ekaterina Burmak ${"lang": "en|es|fr|de|it|ja"}
+383 R Circle of Dreams Druid @Sam Guay ${"lang": "en|es|fr|de|it|ja"}
+384 R Froghemoth @Brent Hollowell ${"lang": "en|es|fr|de|it|ja"}
+385 R Instrument of the Bards @Randy Gallegos ${"lang": "en|es|fr|de|it|ja"}
+386 R Long Rest @Chris Seaman ${"lang": "en|es|fr|de|it|ja"}
+387 R Werewolf Pack Leader @Miranda Meeks ${"lang": "en|es|fr|de|it|ja"}
+388 R Orcus, Prince of Undeath @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+389 R Skeletal Swarming @Svetlin Velinov ${"lang": "en|es|fr|de|it|ja"}
+390 R Triumphant Adventurer @Alexander Mokhov ${"lang": "en|es|fr|de|it|ja"}
+391 M Xanathar, Guild Kingpin @Kieran Yanner ${"lang": "en|es|fr|de|it|ja"}
+392 M The Deck of Many Things @Volkan Baǵa ${"lang": "en|es|fr|de|it|ja"}
+393 R Eye of Vecna @Irina Nordsol ${"lang": "en|es|fr|de|it|ja"}
+394 R Hand of Vecna @Irina Nordsol ${"lang": "en|es|fr|de|it|ja"}
+395 R Treasure Chest @Dan Murayama Scott ${"lang": "en|es|fr|de|it|ja"}
 
 [buy a box]
 396 R Vorpal Sword @Alessandra Pisano
 
 [promo]
-397 R Treasure Chest @Scott Murphy
-398 U Portable Hole @John Stanko
-399 C You Find the Villains' Lair @Gabor Szikszai
-400 U Power Word Kill @Izzy
-401 U Magic Missile @PINDURSKI
-402 U Prosperous Innkeeper @Eric Deschamps
+397 R Treasure Chest @Scott Murphy ${"lang": "en|es|fr|de|it|ru"}
+398 U Portable Hole @John Stanko ${"lang": "en"}
+399 C You Find the Villains' Lair @Gabor Szikszai ${"lang": "en"}
+400 U Power Word Kill @Izzy ${"lang": "en"}
+401 U Magic Missile @PINDURSKI ${"lang": "en"}
+402 U Prosperous Innkeeper @Eric Deschamps ${"lang": "en"}
 
 [rebalanced]
 A-7 U A-Cloister Gargoyle @Mark Zug

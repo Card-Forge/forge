@@ -4,6 +4,7 @@ Date=2022-11-18
 Name=The Brothers' War Retro Artifacts
 Type=Collector_Edition
 ScryfallCode=BRR
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 R Adaptive Automaton @Igor Kieryluk

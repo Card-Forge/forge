@@ -9,6 +9,7 @@ FatPack=9
 FatPackExtraSlots=70 BasicLands
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=ISD
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 C Abbey Griffin @Jaime Jones

@@ -10,6 +10,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
+CardLang=en,es,fr,de,it,pt,ja,zht
 
 [cards]
 1 U Abolish @Kev Walker
@@ -71,8 +72,8 @@ FoilAlwaysInCommonSlot=False
 57 R Bog Elemental @Glen Angus
 58 C Bog Glider @Brian Snõddy
 59 U Chilling Apparition @Ron Spears
-60 R Coffin Puppets @Arnie Swekel
-60s R Coffin Puppets @Glen Angus
+60 R Coffin Puppets @Arnie Swekel ${"lang": "en|es|fr|de|it|pt"}
+60s R Coffin Puppets @Glen Angus ${"lang": "zhs|zht"}
 61 C Death Charmer @David Martin
 62 C Despoil @Scott M. Fischer
 63 U Endbringer's Revel @Pete Venters

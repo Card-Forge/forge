@@ -11,6 +11,7 @@ AdditionalSheetForFoils=fromSheet("EXP special slot")
 AdditionalSetUnlockedInQuest=EXP
 ScryfallCode=OGW
 TokenFallbackCode=BFZ
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 R Deceiver of Form @Viktor Titov
@@ -195,10 +196,10 @@ TokenFallbackCode=BFZ
 180 U Tranquil Expanse @Cliff Childs
 181 C Unknown Shores @Jung Park
 182 R Wandering Fumarole @Florian de Gesincourt
-183 C Wastes @Jason Felix
-183a C Wastes @Jason Felix
-184 C Wastes @Raymond Swanland
-184a C Wastes @Raymond Swanland
+183 C Wastes @Jason Felix ${"lang": "en|ko|zht"}
+183a C Wastes @Jason Felix ${"lang": "en"}
+184 C Wastes @Raymond Swanland ${"lang": "en"}
+184a C Wastes @Raymond Swanland ${"lang": "en"}
 
 [tokens]
 1 c_1_1_eldrazi_scion_sac @Izzy

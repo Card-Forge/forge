@@ -10,6 +10,7 @@ FatPackExtraSlots=40 BasicLands RAV
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=RAVNICA
 ScryfallCode=DIS
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 C Aurora Eidolon @Justin Sweet

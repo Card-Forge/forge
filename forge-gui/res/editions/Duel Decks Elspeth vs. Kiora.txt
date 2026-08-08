@@ -5,6 +5,7 @@ Name=Duel Decks: Elspeth vs. Kiora
 Type=Duel_Deck
 ScryfallCode=DDO
 TokensCode=DDO
+CardLang=en,ja
 
 [cards]
 1 M Elspeth, Sun's Champion @Tyler Jacobson

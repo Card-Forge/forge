@@ -4,6 +4,7 @@ Date=2023-11-17
 Name=Jurassic World Collection
 Type=Promo
 ScryfallCode=REX
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 R Don't Move @Inkognit
@@ -38,25 +39,25 @@ ScryfallCode=REX
 25☇ L Forest @Yeong-Hao Han
 26 C Command Tower @Xabi Gaztelua
 26☇ C Command Tower @Xabi Gaztelua
-27 R Don't Move @Inkognit
-28 R Cresting Mosasaurus @Chris Rallis
-29 R Spitting Dilophosaurus @Francisco Badilla
-30 R Hunting Velociraptor @Caio Monteiro
-31 R Life Finds a Way @Inkognit
-32 R Savage Order @Jesper Ejsing
-33 R Blue, Loyal Raptor @Maaz Ali Khan
-34 R Compy Swarm @Izzy
-35 R Ellie and Alan, Paleontologists @Zoltan Boros
-36 R Grim Giganotosaurus @Daren Bader
-37 R Henry Wu, InGen Geneticist @Justin Cornell
-38 R Ian Malcolm, Chaotician @Caio Monteiro
-39 R Indominus Rex, Alpha @Miro Petrov
-40 R Indoraptor, the Perfect Hybrid @Daren Bader
-41 R Owen Grady, Raptor Trainer @Jaroslav Kosmina
-42 R Permission Denied @Leonardo Santanna
-43 R Ravenous Tyrannosaurus @Raymond Swanland
-44 R Swooping Pteranodon @Slawomir Maniak
-45 R Dino DNA @Leonardo Santanna
+27 R Don't Move @Inkognit ${"lang": "en"}
+28 R Cresting Mosasaurus @Chris Rallis ${"lang": "en"}
+29 R Spitting Dilophosaurus @Francisco Badilla ${"lang": "en"}
+30 R Hunting Velociraptor @Caio Monteiro ${"lang": "en"}
+31 R Life Finds a Way @Inkognit ${"lang": "en"}
+32 R Savage Order @Jesper Ejsing ${"lang": "en"}
+33 R Blue, Loyal Raptor @Maaz Ali Khan ${"lang": "en"}
+34 R Compy Swarm @Izzy ${"lang": "en"}
+35 R Ellie and Alan, Paleontologists @Zoltan Boros ${"lang": "en"}
+36 R Grim Giganotosaurus @Daren Bader ${"lang": "en"}
+37 R Henry Wu, InGen Geneticist @Justin Cornell ${"lang": "en"}
+38 R Ian Malcolm, Chaotician @Caio Monteiro ${"lang": "en"}
+39 R Indominus Rex, Alpha @Miro Petrov ${"lang": "en"}
+40 R Indoraptor, the Perfect Hybrid @Daren Bader ${"lang": "en"}
+41 R Owen Grady, Raptor Trainer @Jaroslav Kosmina ${"lang": "en"}
+42 R Permission Denied @Leonardo Santanna ${"lang": "en"}
+43 R Ravenous Tyrannosaurus @Raymond Swanland ${"lang": "en"}
+44 R Swooping Pteranodon @Slawomir Maniak ${"lang": "en"}
+45 R Dino DNA @Leonardo Santanna ${"lang": "en"}
 
 [tokens]
 1 g_3_3_dinosaur_trample @Jaroslav Kosmina

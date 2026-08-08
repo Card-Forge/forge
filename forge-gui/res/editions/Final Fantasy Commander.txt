@@ -4,16 +4,17 @@ Date=2025-06-13
 Name=Final Fantasy Commander
 Type=Commander
 ScryfallCode=FIC
+CardLang=en,es,fr,de,it,ja
 
 [cards]
-1 M Celes, Rune Knight @Néstor Ossandón Leal
-2 M Cloud, Ex-SOLDIER @Justyna Dura
-3 M G'raha Tia, Scion Reborn @YASUNARI HIRASAKA
-4 M Terra, Herald of Hope @Marta Nael
-5 M Tidus, Yuna's Guardian @Nijihayashi
-6 M Tifa, Martial Artist @Yumi Yaoshida
-7 M Y'shtola, Night's Blessed @Magali Villeneuve
-8 M Yuna, Grand Summoner @Kevin Glint
+1 M Celes, Rune Knight @Néstor Ossandón Leal ${"lang": "en|fr|de|ja"}
+2 M Cloud, Ex-SOLDIER @Justyna Dura ${"lang": "en|fr|de|ja"}
+3 M G'raha Tia, Scion Reborn @YASUNARI HIRASAKA ${"lang": "en|fr|de|ja"}
+4 M Terra, Herald of Hope @Marta Nael ${"lang": "en|fr|de|ja"}
+5 M Tidus, Yuna's Guardian @Nijihayashi ${"lang": "en|fr|de|ja"}
+6 M Tifa, Martial Artist @Yumi Yaoshida ${"lang": "en|fr|de|ja"}
+7 M Y'shtola, Night's Blessed @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+8 M Yuna, Grand Summoner @Kevin Glint ${"lang": "en|fr|de|ja"}
 9 R Alisaie Leveilleur @Justyna Dura
 10 R Auron, Venerated Guardian @Colin Boyer
 11 R Champions from Beyond @Darius Zablockis
@@ -106,134 +107,134 @@ ScryfallCode=FIC
 98 R Conformer Shuriken @Nakamura8
 99 R The Warring Triad @Norikatsu Miyoshi
 100 R Wrecking Ball Arm @Norikatsu Miyoshi
-101 R Champions from Beyond @Darius Zablockis
-102 R Chocobo Knights @Néstor Ossandón Leal
-103 R Cloud's Limit Break @Billy Christian
-104 R Coin of Fate @Kotetsu Kinoshita
-105 R Dancer's Chakrams @Domco.
-106 R Helitrooper @HAIKEI
-107 R Protection Magic @Mikio Masuda
-108 R SOLDIER Military Program @Yoshio Sugiura
-109 R Summoner's Sending @Yumi Yaoshida
-110 R Ultimate Magic: Holy @Ashley Mackenzie
-111 R Blitzball Stadium @Piotr Dura
-112 R Blue Mage's Cane @Eglė Mosakaitė
-113 R Observed Stasis @Toni Infante
-114 R Espers to Magicite @AKAGI
-115 R Eye of Nidhogg @Erion Makuo
-116 R The Falcon, Airship Restored @Kotakan
-117 R Reaper's Scythe @Colin Boyer
-118 R Rejoin the Fight @YASUNARI HIRASAKA
-119 R Transpose @Toni Infante
-120 R Snort @ikeda_cpt
-121 R Ultimate Magic: Meteor @Ashley Mackenzie
-122 R Lifestream's Blessing @Kotakan
-123 R Sphere Grid @KOHEI YAMADA
-124 R Summoning Materia @Ryu Fujinaka
-125 R Yuna's Decision @Yuu Fujiki
-126 R Yuna's Whistle @Norikatsu Miyoshi
-127 R Conformer Shuriken @Nakamura8
-128 R Wrecking Ball Arm @Norikatsu Miyoshi
-129 R Alisaie Leveilleur @Justyna Dura
-130 R Auron, Venerated Guardian @Colin Boyer
-131 R Cid, Freeflier Pilot @Billy Christian
-132 R Cyan, Vengeful Samurai @Christian Angel
-133 R Elena, Turk Recruit @Magali Villeneuve
-134 R Gatta and Luzzu @Takeuchi Moto
-135 R General Leo Cristophe @Lee Woo-chul
-136 R Heidegger, Shinra Executive @Danciao
-137 R Lord Jyscal Guado @Takeuchi Moto
-138 R Tataru Taru @Livia Prima
-139 R Thancred Waters @Wisnu Tan
-140 R Alphinaud Leveilleur @Justyna Dura
-141 R Hermes, Overseer of Elpis @Darius Zablockis
-142 R Hraesvelgr of the First Brood @Néstor Ossandón Leal
-143 R Lulu, Stern Guardian @Arou
-144 R O'aka, Traveling Merchant @Fang Xinyu
-145 R Rikku, Resourceful Guardian @Yoichi Ito
-146 R Fandaniel, Telophoroi Ascian @Paulius Daščioras
-147 R Interceptor, Shadow's Hound @Sansyu
-148 R Shadow, Mysterious Assassin @Wisnu Tan
-149 R Siegfried, Famed Swordsman @Crystal Fae
-150 R Avalanche of Sector 7 @Arif Wijaya
-151 R Cait Sith, Fortune Teller @Kevin Sidharta
-152 R Gau, Feral Youth @Eglė Mosakaitė
-153 R Gogo, Mysterious Mime @Lee Woo-chul
-154 R Sabin, Master Monk @Kevin Glint
-155 R Strago and Relm @Darius Zablockis
-156 R Umaro, Raging Yeti @Norikatsu Miyoshi
-157 R Vincent, Vengeful Atoner @Lius Lasahido
-158 R Yuffie, Materia Hunter @Touge369
-159 R Bugenhagen, Wise Elder @Racrufi
-160 R Maester Seymour @Norikatsu Miyoshi
-161 R Professor Hojo @Danciao
-162 R Tromell, Seymour's Butler @Kotetsu Kinoshita
-163 R Aerith, Last Ancient @Marta Nael
-164 R Ardbert, Warrior of Darkness @Thanh Tuấn
-165 R Banon, the Returners' Leader @Daniel Landerman
-166 R Barret, Avalanche Leader @Jana Schirmer & Matthias Verhasselt
-167 M Celes, Rune Knight @Néstor Ossandón Leal
-168 M Cloud, Ex-SOLDIER @Justyna Dura
-169 R Edgar, Master Machinist @Immanuela Crovius
-170 R Emet-Selch of the Third Seat @Magali Villeneuve
-171 R Estinien Varlineau @Fang Xinyu
-172 M G'raha Tia, Scion Reborn @YASUNARI HIRASAKA
-173 R Hildibrand Manderville @AKAGI
-174 R Kefka, Dancing Mad @Anton Solovianchyk
-175 R Kimahri, Valiant Guardian @Christian Angel
-176 R Krile Baldesion @Jason Kiantoro
-177 R Locke, Treasure Hunter @AKAGI
-178 R Lyse Hext @Ramza Psyru
-179 R Mog, Moogle Warrior @OTUMAMI
-180 R Papalymo Totolymo @Immanuela Crovius
-181 R Red XIII, Proud Warrior @Anna Podedworna
-182 R Sephiroth, Fallen Hero @Ittoku
-183 R Setzer, Wandering Gambler @Norikatsu Miyoshi
-184 R Shelinda, Yevon Acolyte @Shiren
-185 R Sin, Unending Cataclysm @Aldo Domínguez
-186 M Terra, Herald of Hope @Marta Nael
-187 M Tidus, Yuna's Guardian @Nijihayashi
-188 M Tifa, Martial Artist @Yumi Yaoshida
-189 R Urianger Augurelt @Vilhelmas Banys
-190 R Wakka, Devoted Guardian @Kieran Yanner
-191 M Y'shtola, Night's Blessed @Magali Villeneuve
-192 M Yuna, Grand Summoner @Kevin Glint
-193 R The Warring Triad @Norikatsu Miyoshi
-194 R Summon: Good King Mog XII @Minoru
-195 R Summon: Ixion @Yoshiya
-196 R Summon: Yojimbo @Hisashi Momose
-197 R Summon: Valefor @Maiko Aoji
-198 R Summon: Esper Valigarmanda @TAKUMI
-199 R Summon: Kujata @Yoshiya
-200 R Summon: Magus Sisters @Karo ARAI
-201 M Celes, Rune Knight @ikeda_cpt
-202 M Cloud, Ex-SOLDIER @S. Makimura
-203 M G'raha Tia, Scion Reborn @Domco.
-204 M Terra, Herald of Hope @Misei Ito
-205 M Tidus, Yuna's Guardian @Ryanroro
-206 M Tifa, Martial Artist @Robert Cornelius
-207 M Y'shtola, Night's Blessed @Nakamura8
-208 M Yuna, Grand Summoner @Mai Okuma
-209 M Celes, Rune Knight @ikeda_cpt
-210 M Cloud, Ex-SOLDIER @S. Makimura
-211 M G'raha Tia, Scion Reborn @Domco.
-212 M Terra, Herald of Hope @Misei Ito
-213 M Tidus, Yuna's Guardian @Ryanroro
-214 M Tifa, Martial Artist @Robert Cornelius
-215 M Y'shtola, Night's Blessed @Nakamura8
-216 M Yuna, Grand Summoner @Mai Okuma
-217 U Secret Rendezvous @Yuu Fujiki
-218 U Secret Rendezvous @Yuu Fujiki
-219 U Secret Rendezvous @Yuu Fujiki
-220 M Celes, Rune Knight @Néstor Ossandón Leal
-221 M Cloud, Ex-SOLDIER @Justyna Dura
-222 M G'raha Tia, Scion Reborn @YASUNARI HIRASAKA
-223 M Terra, Herald of Hope @Marta Nael
-224 M Tidus, Yuna's Guardian @Nijihayashi
-225 M Tifa, Martial Artist @Yumi Yaoshida
-226 M Y'shtola, Night's Blessed @Magali Villeneuve
-227 M Yuna, Grand Summoner @Kevin Glint
-228 R Herald's Horn @O-G Osahune
+101 R Champions from Beyond @Darius Zablockis ${"lang": "en|fr|de|ja"}
+102 R Chocobo Knights @Néstor Ossandón Leal ${"lang": "en|fr|de|ja"}
+103 R Cloud's Limit Break @Billy Christian ${"lang": "en|fr|de|ja"}
+104 R Coin of Fate @Kotetsu Kinoshita ${"lang": "en|fr|de|ja"}
+105 R Dancer's Chakrams @Domco. ${"lang": "en|fr|de|ja"}
+106 R Helitrooper @HAIKEI ${"lang": "en|fr|de|ja"}
+107 R Protection Magic @Mikio Masuda ${"lang": "en|fr|de|ja"}
+108 R SOLDIER Military Program @Yoshio Sugiura ${"lang": "en|fr|de|ja"}
+109 R Summoner's Sending @Yumi Yaoshida ${"lang": "en|fr|de|ja"}
+110 R Ultimate Magic: Holy @Ashley Mackenzie ${"lang": "en|fr|de|ja"}
+111 R Blitzball Stadium @Piotr Dura ${"lang": "en|fr|de|ja"}
+112 R Blue Mage's Cane @Eglė Mosakaitė ${"lang": "en|fr|de|ja"}
+113 R Observed Stasis @Toni Infante ${"lang": "en|fr|de|ja"}
+114 R Espers to Magicite @AKAGI ${"lang": "en|fr|de|ja"}
+115 R Eye of Nidhogg @Erion Makuo ${"lang": "en|fr|de|ja"}
+116 R The Falcon, Airship Restored @Kotakan ${"lang": "en|fr|de|ja"}
+117 R Reaper's Scythe @Colin Boyer ${"lang": "en|fr|de|ja"}
+118 R Rejoin the Fight @YASUNARI HIRASAKA ${"lang": "en|fr|de|ja"}
+119 R Transpose @Toni Infante ${"lang": "en|fr|de|ja"}
+120 R Snort @ikeda_cpt ${"lang": "en|fr|de|ja"}
+121 R Ultimate Magic: Meteor @Ashley Mackenzie ${"lang": "en|fr|de|ja"}
+122 R Lifestream's Blessing @Kotakan ${"lang": "en|fr|de|ja"}
+123 R Sphere Grid @KOHEI YAMADA ${"lang": "en|fr|de|ja"}
+124 R Summoning Materia @Ryu Fujinaka ${"lang": "en|fr|de|ja"}
+125 R Yuna's Decision @Yuu Fujiki ${"lang": "en|fr|de|ja"}
+126 R Yuna's Whistle @Norikatsu Miyoshi ${"lang": "en|fr|de|ja"}
+127 R Conformer Shuriken @Nakamura8 ${"lang": "en|fr|de|ja"}
+128 R Wrecking Ball Arm @Norikatsu Miyoshi ${"lang": "en|fr|de|ja"}
+129 R Alisaie Leveilleur @Justyna Dura ${"lang": "en|fr|de|ja"}
+130 R Auron, Venerated Guardian @Colin Boyer ${"lang": "en|fr|de|ja"}
+131 R Cid, Freeflier Pilot @Billy Christian ${"lang": "en|fr|de|ja"}
+132 R Cyan, Vengeful Samurai @Christian Angel ${"lang": "en|fr|de|ja"}
+133 R Elena, Turk Recruit @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+134 R Gatta and Luzzu @Takeuchi Moto ${"lang": "en|fr|de|ja"}
+135 R General Leo Cristophe @Lee Woo-chul ${"lang": "en|fr|de|ja"}
+136 R Heidegger, Shinra Executive @Danciao ${"lang": "en|fr|de|ja"}
+137 R Lord Jyscal Guado @Takeuchi Moto ${"lang": "en|fr|de|ja"}
+138 R Tataru Taru @Livia Prima ${"lang": "en|fr|de|ja"}
+139 R Thancred Waters @Wisnu Tan ${"lang": "en|fr|de|ja"}
+140 R Alphinaud Leveilleur @Justyna Dura ${"lang": "en|fr|de|ja"}
+141 R Hermes, Overseer of Elpis @Darius Zablockis ${"lang": "en|fr|de|ja"}
+142 R Hraesvelgr of the First Brood @Néstor Ossandón Leal ${"lang": "en|fr|de|ja"}
+143 R Lulu, Stern Guardian @Arou ${"lang": "en|fr|de|ja"}
+144 R O'aka, Traveling Merchant @Fang Xinyu ${"lang": "en|fr|de|ja"}
+145 R Rikku, Resourceful Guardian @Yoichi Ito ${"lang": "en|fr|de|ja"}
+146 R Fandaniel, Telophoroi Ascian @Paulius Daščioras ${"lang": "en|fr|de|ja"}
+147 R Interceptor, Shadow's Hound @Sansyu ${"lang": "en|fr|de|ja"}
+148 R Shadow, Mysterious Assassin @Wisnu Tan ${"lang": "en|fr|de|ja"}
+149 R Siegfried, Famed Swordsman @Crystal Fae ${"lang": "en|fr|de|ja"}
+150 R Avalanche of Sector 7 @Arif Wijaya ${"lang": "en|fr|de|ja"}
+151 R Cait Sith, Fortune Teller @Kevin Sidharta ${"lang": "en|fr|de|ja"}
+152 R Gau, Feral Youth @Eglė Mosakaitė ${"lang": "en|fr|de|ja"}
+153 R Gogo, Mysterious Mime @Lee Woo-chul ${"lang": "en|fr|de|ja"}
+154 R Sabin, Master Monk @Kevin Glint ${"lang": "en|fr|de|ja"}
+155 R Strago and Relm @Darius Zablockis ${"lang": "en|fr|de|ja"}
+156 R Umaro, Raging Yeti @Norikatsu Miyoshi ${"lang": "en|fr|de|ja"}
+157 R Vincent, Vengeful Atoner @Lius Lasahido ${"lang": "en|fr|de|ja"}
+158 R Yuffie, Materia Hunter @Touge369 ${"lang": "en|fr|de|ja"}
+159 R Bugenhagen, Wise Elder @Racrufi ${"lang": "en|fr|de|ja"}
+160 R Maester Seymour @Norikatsu Miyoshi ${"lang": "en|fr|de|ja"}
+161 R Professor Hojo @Danciao ${"lang": "en|fr|de|ja"}
+162 R Tromell, Seymour's Butler @Kotetsu Kinoshita ${"lang": "en|fr|de|ja"}
+163 R Aerith, Last Ancient @Marta Nael ${"lang": "en|fr|de|ja"}
+164 R Ardbert, Warrior of Darkness @Thanh Tuấn ${"lang": "en|fr|de|ja"}
+165 R Banon, the Returners' Leader @Daniel Landerman ${"lang": "en|fr|de|ja"}
+166 R Barret, Avalanche Leader @Jana Schirmer & Matthias Verhasselt ${"lang": "en|fr|de|ja"}
+167 M Celes, Rune Knight @Néstor Ossandón Leal ${"lang": "en|fr|de|ja"}
+168 M Cloud, Ex-SOLDIER @Justyna Dura ${"lang": "en|fr|de|ja"}
+169 R Edgar, Master Machinist @Immanuela Crovius ${"lang": "en|fr|de|ja"}
+170 R Emet-Selch of the Third Seat @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+171 R Estinien Varlineau @Fang Xinyu ${"lang": "en|fr|de|ja"}
+172 M G'raha Tia, Scion Reborn @YASUNARI HIRASAKA ${"lang": "en|fr|de|ja"}
+173 R Hildibrand Manderville @AKAGI ${"lang": "en|fr|de|ja"}
+174 R Kefka, Dancing Mad @Anton Solovianchyk ${"lang": "en|fr|de|ja"}
+175 R Kimahri, Valiant Guardian @Christian Angel ${"lang": "en|fr|de|ja"}
+176 R Krile Baldesion @Jason Kiantoro ${"lang": "en|fr|de|ja"}
+177 R Locke, Treasure Hunter @AKAGI ${"lang": "en|fr|de|ja"}
+178 R Lyse Hext @Ramza Psyru ${"lang": "en|fr|de|ja"}
+179 R Mog, Moogle Warrior @OTUMAMI ${"lang": "en|fr|de|ja"}
+180 R Papalymo Totolymo @Immanuela Crovius ${"lang": "en|fr|de|ja"}
+181 R Red XIII, Proud Warrior @Anna Podedworna ${"lang": "en|fr|de|ja"}
+182 R Sephiroth, Fallen Hero @Ittoku ${"lang": "en|fr|de|ja"}
+183 R Setzer, Wandering Gambler @Norikatsu Miyoshi ${"lang": "en|fr|de|ja"}
+184 R Shelinda, Yevon Acolyte @Shiren ${"lang": "en|fr|de|ja"}
+185 R Sin, Unending Cataclysm @Aldo Domínguez ${"lang": "en|fr|de|ja"}
+186 M Terra, Herald of Hope @Marta Nael ${"lang": "en|fr|de|ja"}
+187 M Tidus, Yuna's Guardian @Nijihayashi ${"lang": "en|fr|de|ja"}
+188 M Tifa, Martial Artist @Yumi Yaoshida ${"lang": "en|fr|de|ja"}
+189 R Urianger Augurelt @Vilhelmas Banys ${"lang": "en|fr|de|ja"}
+190 R Wakka, Devoted Guardian @Kieran Yanner ${"lang": "en|fr|de|ja"}
+191 M Y'shtola, Night's Blessed @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+192 M Yuna, Grand Summoner @Kevin Glint ${"lang": "en|fr|de|ja"}
+193 R The Warring Triad @Norikatsu Miyoshi ${"lang": "en|fr|de|ja"}
+194 R Summon: Good King Mog XII @Minoru ${"lang": "en|fr|de|ja"}
+195 R Summon: Ixion @Yoshiya ${"lang": "en|fr|de|ja"}
+196 R Summon: Yojimbo @Hisashi Momose ${"lang": "en|fr|de|ja"}
+197 R Summon: Valefor @Maiko Aoji ${"lang": "en|fr|de|ja"}
+198 R Summon: Esper Valigarmanda @TAKUMI ${"lang": "en|fr|de|ja"}
+199 R Summon: Kujata @Yoshiya ${"lang": "en|fr|de|ja"}
+200 R Summon: Magus Sisters @Karo ARAI ${"lang": "en|fr|de|ja"}
+201 M Celes, Rune Knight @ikeda_cpt ${"lang": "en|fr|de|ja"}
+202 M Cloud, Ex-SOLDIER @S. Makimura ${"lang": "en|fr|de|ja"}
+203 M G'raha Tia, Scion Reborn @Domco. ${"lang": "en|fr|de|ja"}
+204 M Terra, Herald of Hope @Misei Ito ${"lang": "en|fr|de|ja"}
+205 M Tidus, Yuna's Guardian @Ryanroro ${"lang": "en|fr|de|ja"}
+206 M Tifa, Martial Artist @Robert Cornelius ${"lang": "en|fr|de|ja"}
+207 M Y'shtola, Night's Blessed @Nakamura8 ${"lang": "en|fr|de|ja"}
+208 M Yuna, Grand Summoner @Mai Okuma ${"lang": "en|fr|de|ja"}
+209 M Celes, Rune Knight @ikeda_cpt ${"lang": "en|fr|de|ja"}
+210 M Cloud, Ex-SOLDIER @S. Makimura ${"lang": "en|fr|de|ja"}
+211 M G'raha Tia, Scion Reborn @Domco. ${"lang": "en|fr|de|ja"}
+212 M Terra, Herald of Hope @Misei Ito ${"lang": "en|fr|de|ja"}
+213 M Tidus, Yuna's Guardian @Ryanroro ${"lang": "en|fr|de|ja"}
+214 M Tifa, Martial Artist @Robert Cornelius ${"lang": "en|fr|de|ja"}
+215 M Y'shtola, Night's Blessed @Nakamura8 ${"lang": "en|fr|de|ja"}
+216 M Yuna, Grand Summoner @Mai Okuma ${"lang": "en|fr|de|ja"}
+217 U Secret Rendezvous @Yuu Fujiki ${"lang": "en|fr|de|ja"}
+218 U Secret Rendezvous @Yuu Fujiki ${"lang": "en|fr|de|ja"}
+219 U Secret Rendezvous @Yuu Fujiki ${"lang": "en|fr|de|ja"}
+220 M Celes, Rune Knight @Néstor Ossandón Leal ${"lang": "en|ja"}
+221 M Cloud, Ex-SOLDIER @Justyna Dura ${"lang": "en|ja"}
+222 M G'raha Tia, Scion Reborn @YASUNARI HIRASAKA ${"lang": "en|ja"}
+223 M Terra, Herald of Hope @Marta Nael ${"lang": "en|ja"}
+224 M Tidus, Yuna's Guardian @Nijihayashi ${"lang": "en|ja"}
+225 M Tifa, Martial Artist @Yumi Yaoshida ${"lang": "en|ja"}
+226 M Y'shtola, Night's Blessed @Magali Villeneuve ${"lang": "en|ja"}
+227 M Yuna, Grand Summoner @Kevin Glint ${"lang": "en|ja"}
+228 R Herald's Horn @O-G Osahune ${"lang": "en|ja"}
 229 U Angel of the Ruins @Nereida
 230 R Archaeomancer's Map @Erikas Perl
 231 R Austere Command @Dan Watson
@@ -447,48 +448,48 @@ ScryfallCode=FIC
 439 R Underground River @Shahab Alizadeh
 440 R Vineglimmer Snarl @Mauricio Calle
 441 C Wooded Ridgeline @Hristo D. Chukov
-442 R Garland, Royal Kidnapper @David Rapoza
-443 R The Destined Warrior @David Rapoza
-444 R The Destined White Mage @David Rapoza
-445 R Chaos Shrine's Black Crystal @David Rapoza
-446 R The Destined Thief @David Rapoza
-447 R The Destined Black Mage @David Rapoza
-448 R Edea, Possessed Sorceress @Lius Lasahido
-449 R Fated Clash @Lius Lasahido
-450 R Rinoa, Angel Wing @Lius Lasahido
-451 R Seifer, Balamb Rival @Lius Lasahido
-452 R Duelist's Flame @Lius Lasahido
-453 R Squall, Gunblade Duelist @Lius Lasahido
-454 R Brilliant Wings @Erion Makuo
-455 R Judgment of Alexander @Erion Makuo
-456 R Mega Flare @Erion Makuo
-457 R Amarant Coral @Erion Makuo
-458 R Vivi's Persistence @Erion Makuo
-459 R Search for Dagger @Erion Makuo
-460 R Noctis, Heir Apparent @Winona Nelson
-461 R Fishing Gear @Winona Nelson
-462 R Chocobo Camp @Winona Nelson
-463 R Flash Photography @Winona Nelson
-464 R Campsite Cuisine @Winona Nelson
-465 R Warrior's Resolve @Winona Nelson
-466 R Tataru Taru @Domco.
-467 R Lulu, Stern Guardian @Hiromu
-468 R Rikku, Resourceful Guardian @Ayuko
-469 M Snapcaster Mage @Canata Katana
-470 R Yuffie, Materia Hunter @Nijihayashi
-471 R Aerith, Last Ancient @MiDQN
-472 R Barret, Avalanche Leader @Dai-XT
-473 R Emet-Selch of the Third Seat @Kuregure
-474 R Estinien Varlineau @Yakotakos
-475 R Locke, Treasure Hunter @Kato Ayaka
-476 R Mog, Moogle Warrior @Rorubei
-477 R Wakka, Devoted Guardian @Dai-XT
-478 L Plains @Fuzichoco
-479 L Island @Ai Nanahira
-480 L Swamp @Ryuichi Sakuma
-481 L Mountain @Nao Miyoshi
-482 L Forest @ZOUNOSE
-483 R Birds of Paradise @Takotto ${"flavorName": "Paradise Chocobo"}
+442 R Garland, Royal Kidnapper @David Rapoza ${"lang": "en"}
+443 R The Destined Warrior @David Rapoza ${"lang": "en"}
+444 R The Destined White Mage @David Rapoza ${"lang": "en"}
+445 R Chaos Shrine's Black Crystal @David Rapoza ${"lang": "en"}
+446 R The Destined Thief @David Rapoza ${"lang": "en"}
+447 R The Destined Black Mage @David Rapoza ${"lang": "en"}
+448 R Edea, Possessed Sorceress @Lius Lasahido ${"lang": "en"}
+449 R Fated Clash @Lius Lasahido ${"lang": "en"}
+450 R Rinoa, Angel Wing @Lius Lasahido ${"lang": "en"}
+451 R Seifer, Balamb Rival @Lius Lasahido ${"lang": "en"}
+452 R Duelist's Flame @Lius Lasahido ${"lang": "en"}
+453 R Squall, Gunblade Duelist @Lius Lasahido ${"lang": "en"}
+454 R Brilliant Wings @Erion Makuo ${"lang": "en"}
+455 R Judgment of Alexander @Erion Makuo ${"lang": "en"}
+456 R Mega Flare @Erion Makuo ${"lang": "en"}
+457 R Amarant Coral @Erion Makuo ${"lang": "en"}
+458 R Vivi's Persistence @Erion Makuo ${"lang": "en"}
+459 R Search for Dagger @Erion Makuo ${"lang": "en"}
+460 R Noctis, Heir Apparent @Winona Nelson ${"lang": "en"}
+461 R Fishing Gear @Winona Nelson ${"lang": "en"}
+462 R Chocobo Camp @Winona Nelson ${"lang": "en"}
+463 R Flash Photography @Winona Nelson ${"lang": "en"}
+464 R Campsite Cuisine @Winona Nelson ${"lang": "en"}
+465 R Warrior's Resolve @Winona Nelson ${"lang": "en"}
+466 R Tataru Taru @Domco. ${"lang": "en"}
+467 R Lulu, Stern Guardian @Hiromu ${"lang": "en"}
+468 R Rikku, Resourceful Guardian @Ayuko ${"lang": "en"}
+469 M Snapcaster Mage @Canata Katana ${"lang": "en"}
+470 R Yuffie, Materia Hunter @Nijihayashi ${"lang": "en"}
+471 R Aerith, Last Ancient @MiDQN ${"lang": "en"}
+472 R Barret, Avalanche Leader @Dai-XT ${"lang": "en"}
+473 R Emet-Selch of the Third Seat @Kuregure ${"lang": "en"}
+474 R Estinien Varlineau @Yakotakos ${"lang": "en"}
+475 R Locke, Treasure Hunter @Kato Ayaka ${"lang": "en"}
+476 R Mog, Moogle Warrior @Rorubei ${"lang": "en"}
+477 R Wakka, Devoted Guardian @Dai-XT ${"lang": "en"}
+478 L Plains @Fuzichoco ${"lang": "en"}
+479 L Island @Ai Nanahira ${"lang": "en"}
+480 L Swamp @Ryuichi Sakuma ${"lang": "en"}
+481 L Mountain @Nao Miyoshi ${"lang": "en"}
+482 L Forest @ZOUNOSE ${"lang": "en"}
+483 R Birds of Paradise @Takotto ${"flavorname": "Paradise Chocobo", "lang": "en"}
 484 C Command Tower @Anthony Devine
 485 C Command Tower @Eduardo Francisco
 486 C Command Tower @Jonas De Ro

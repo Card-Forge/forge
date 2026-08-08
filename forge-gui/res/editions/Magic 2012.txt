@@ -9,6 +9,7 @@ FatPack=9
 FatPackExtraSlots=40 BasicLands
 ChaosDraftThemes=CORE_SET
 ScryfallCode=M12
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 R Aegis Angel @Aleksi Briclot

@@ -10,6 +10,7 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 #, 1 Pack Leader+|M21|3
 ChaosDraftThemes=CORE_SET
 ScryfallCode=M21
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 M Ugin, the Spirit Dragon @Raymond Swanland
@@ -274,26 +275,26 @@ ScryfallCode=M21
 260 L Plains @John Avon
 261 L Plains @Nils Hamm
 262 L Plains @Andreas Rocha
-263 L Island @Cliff Childs
-264 L Island @Jonas De Ro
-265 L Island @Andreas Rocha
+263 L Island @Cliff Childs ${"lang": "en|es|fr|de|ja|ru|zhs|zht"}
+264 L Island @Jonas De Ro ${"lang": "en|fr|de|it|pt|ja|ko|zht"}
+265 L Island @Andreas Rocha ${"lang": "en|es|fr|de|pt|ru|zhs|zht"}
 266 L Swamp @Mike Bierek
 267 L Swamp @Cliff Childs
 268 L Swamp @Christine Choi
 269 L Mountain @Cliff Childs
-270 L Mountain @Jonas De Ro
+270 L Mountain @Jonas De Ro ${"lang": "en|fr|de|it|ja|ko|zht"}
 271 L Mountain @Andreas Rocha
 272 L Forest @Volkan Baǵa
 273 L Forest @Steven Belledin
-274 L Forest @Jonas De Ro
+274 L Forest @Jonas De Ro ${"lang": "en|es|de|pt|ru|zhs|zht"}
 
 [alternate art]
-275 M Teferi, Master of Time @Yongjae Choi
-276 M Teferi, Master of Time @Yongjae Choi
-277 M Teferi, Master of Time @Yongjae Choi
+275 M Teferi, Master of Time @Yongjae Choi ${"lang": "en"}
+276 M Teferi, Master of Time @Yongjae Choi ${"lang": "en"}
+277 M Teferi, Master of Time @Yongjae Choi ${"lang": "en"}
 
 [buy a box]
-278 M Rin and Seri, Inseparable @Leesha Hannigan
+278 M Rin and Seri, Inseparable @Leesha Hannigan ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
 
 [borderless]
 279 M Ugin, the Spirit Dragon @Ryan Pancoast
@@ -316,9 +317,9 @@ ScryfallCode=M21
 288 R Basri's Lieutenant @Matt Stewart
 289 U Basri's Solidarity @Paul Scott Canavan
 290 M Teferi, Master of Time @Yongjae Choi
-291 M Teferi, Master of Time @Yongjae Choi
-292 M Teferi, Master of Time @Yongjae Choi
-293 M Teferi, Master of Time @Yongjae Choi
+291 M Teferi, Master of Time @Yongjae Choi ${"lang": "en"}
+292 M Teferi, Master of Time @Yongjae Choi ${"lang": "en"}
+293 M Teferi, Master of Time @Yongjae Choi ${"lang": "en"}
 294 R Teferi's Ageless Insight @Kieran Yanner
 295 C Teferi's Protege @Bram Sels
 296 U Teferi's Tutelage @Ilse Gort
@@ -335,7 +336,7 @@ ScryfallCode=M21
 307 R Garruk's Harbinger @Lie Setiawan
 308 U Garruk's Uprising @Wisnu Tan
 309 L Plains @Jonas De Ro
-310 L Island @Jonas De Ro
+310 L Island @Jonas De Ro ${"lang": "en|fr|de|it|pt|ja|ko|zht"}
 311 L Swamp @Jonas De Ro
 312 L Mountain @Jonas De Ro
 313 L Forest @Jonas De Ro
@@ -363,66 +364,66 @@ ScryfallCode=M21
 339 C Wildwood Patrol @Dan Murayama Scott
 
 [extended art]
-340 M Baneslayer Angel @Greg Staples
-341 R Glorious Anthem @Raymond Swanland
-342 R Idol of Endurance @Kim Sokol
-343 M Mangara, the Diplomat @Howard Lyon
-344 R Nine Lives @Paul Scott Canavan
-345 R Pack Leader @Rudy Siswanto
-346 R Runed Halo @Steve Prescott
-347 R Speaker of the Heavens @Randy Vargas
-348 R Barrin, Tolarian Archmage @Ryan Pancoast
-349 M Discontinuity @Volkan Baǵa
-350 R Ghostly Pilferer @Craig J Spearing
-351 R Pursued Whale @Jonathan Kuo
-352 R See the Truth @Ekaterina Burmak
-353 R Shacklegeist @Igor Kieryluk
-354 R Stormwing Entity @Caroline Gariba
-355 R Sublime Epiphany @Lindsey Look
-356 R Demonic Embrace @Sidharth Chaturvedi
-357 R Hooded Blightfang @Uriah Voth
-358 R Kaervek, the Spiteful @Daarken
-359 R Necromentia @Mila Pesic
-360 R Peer into the Abyss @Izzy
-361 R Thieves' Guild Enforcer @Evyn Fong
-362 R Vito, Thorn of the Dusk Rose @Lie Setiawan
-363 R Brash Taunter @Svetlin Velinov
-364 R Conspicuous Snoop @Zoltan Boros
-365 R Double Vision @Heonhwa
-366 M Fiery Emancipation @Alexander Forssberg
-367 R Gadrak, the Crown-Scourge @Daarken
-368 R Subira, Tulzidi Caravanner @Leesha Hannigan
-369 M Terror of the Peaks @Andrey Kuzinskiy
-370 R Transmogrify @Craig J Spearing
-371 R Volcanic Salvo @Torstein Nordstrand
-372 R Azusa, Lost but Seeking @Winona Nelson
-373 M Elder Gargaroth @Nicholas Gregory
-374 R Feline Sovereign @Dan Murayama Scott
-375 R Heroic Intervention @James Ryman
-376 R Jolrael, Mwonvuli Recluse @Izzy
-377 R Primal Might @Randy Vargas
-378 R Sporeweb Weaver @Slawomir Maniak
-379 R Niambi, Esteemed Speaker @Eric Deschamps
-380 R Radha, Heart of Keld @Chris Rahn
-381 R Sanctum of All @Johannes Voss
-382 M Chromatic Orrery @Volkan Baǵa
-383 R Mazemind Tome @Randy Gallegos
-384 R Sparkhunter Masticore @Randy Vargas
-385 R Animal Sanctuary @Alayna Danner
-386 R Fabled Passage @Howard Lyon
-387 R Temple of Epiphany @Adam Paquette
-388 R Temple of Malady @Titus Lunter
-389 R Temple of Mystery @Piotr Dura
-390 R Temple of Silence @Adam Paquette
-391 R Temple of Triumph @Piotr Dura
+340 M Baneslayer Angel @Greg Staples ${"lang": "en|fr|ja"}
+341 R Glorious Anthem @Raymond Swanland ${"lang": "en|fr|ja"}
+342 R Idol of Endurance @Kim Sokol ${"lang": "en|fr|ja"}
+343 M Mangara, the Diplomat @Howard Lyon ${"lang": "en|fr|ja"}
+344 R Nine Lives @Paul Scott Canavan ${"lang": "en|fr|ja"}
+345 R Pack Leader @Rudy Siswanto ${"lang": "en|fr|ja"}
+346 R Runed Halo @Steve Prescott ${"lang": "en|fr|ja"}
+347 R Speaker of the Heavens @Randy Vargas ${"lang": "en|fr|ja"}
+348 R Barrin, Tolarian Archmage @Ryan Pancoast ${"lang": "en|fr|ja"}
+349 M Discontinuity @Volkan Baǵa ${"lang": "en|fr|ja"}
+350 R Ghostly Pilferer @Craig J Spearing ${"lang": "en|fr|ja"}
+351 R Pursued Whale @Jonathan Kuo ${"lang": "en|fr|ja"}
+352 R See the Truth @Ekaterina Burmak ${"lang": "en|fr|ja"}
+353 R Shacklegeist @Igor Kieryluk ${"lang": "en|fr|ja"}
+354 R Stormwing Entity @Caroline Gariba ${"lang": "en|fr|ja"}
+355 R Sublime Epiphany @Lindsey Look ${"lang": "en|fr|ja"}
+356 R Demonic Embrace @Sidharth Chaturvedi ${"lang": "en|fr|ja"}
+357 R Hooded Blightfang @Uriah Voth ${"lang": "en|fr|ja"}
+358 R Kaervek, the Spiteful @Daarken ${"lang": "en|fr|ja"}
+359 R Necromentia @Mila Pesic ${"lang": "en|fr|ja"}
+360 R Peer into the Abyss @Izzy ${"lang": "en|fr|ja"}
+361 R Thieves' Guild Enforcer @Evyn Fong ${"lang": "en|fr|ja"}
+362 R Vito, Thorn of the Dusk Rose @Lie Setiawan ${"lang": "en|fr|ja"}
+363 R Brash Taunter @Svetlin Velinov ${"lang": "en|fr|ja"}
+364 R Conspicuous Snoop @Zoltan Boros ${"lang": "en|fr|ja"}
+365 R Double Vision @Heonhwa ${"lang": "en|fr|ja"}
+366 M Fiery Emancipation @Alexander Forssberg ${"lang": "en|fr|ja"}
+367 R Gadrak, the Crown-Scourge @Daarken ${"lang": "en|fr|ja"}
+368 R Subira, Tulzidi Caravanner @Leesha Hannigan ${"lang": "en|fr|ja"}
+369 M Terror of the Peaks @Andrey Kuzinskiy ${"lang": "en|fr|ja"}
+370 R Transmogrify @Craig J Spearing ${"lang": "en|fr|ja"}
+371 R Volcanic Salvo @Torstein Nordstrand ${"lang": "en|fr|ja"}
+372 R Azusa, Lost but Seeking @Winona Nelson ${"lang": "en|fr|ja"}
+373 M Elder Gargaroth @Nicholas Gregory ${"lang": "en|fr|ja"}
+374 R Feline Sovereign @Dan Murayama Scott ${"lang": "en|fr|ja"}
+375 R Heroic Intervention @James Ryman ${"lang": "en|fr|ja"}
+376 R Jolrael, Mwonvuli Recluse @Izzy ${"lang": "en|fr|ja"}
+377 R Primal Might @Randy Vargas ${"lang": "en|fr|ja"}
+378 R Sporeweb Weaver @Slawomir Maniak ${"lang": "en|fr|ja"}
+379 R Niambi, Esteemed Speaker @Eric Deschamps ${"lang": "en|fr|ja"}
+380 R Radha, Heart of Keld @Chris Rahn ${"lang": "en|fr|ja"}
+381 R Sanctum of All @Johannes Voss ${"lang": "en|fr|ja"}
+382 M Chromatic Orrery @Volkan Baǵa ${"lang": "en|fr|ja"}
+383 R Mazemind Tome @Randy Gallegos ${"lang": "en|fr|ja"}
+384 R Sparkhunter Masticore @Randy Vargas ${"lang": "en|fr|ja"}
+385 R Animal Sanctuary @Alayna Danner ${"lang": "en|fr|ja"}
+386 R Fabled Passage @Howard Lyon ${"lang": "en|fr|ja"}
+387 R Temple of Epiphany @Adam Paquette ${"lang": "en|fr|ja"}
+388 R Temple of Malady @Titus Lunter ${"lang": "en|fr|ja"}
+389 R Temple of Mystery @Piotr Dura ${"lang": "en|fr|ja"}
+390 R Temple of Silence @Adam Paquette ${"lang": "en|fr|ja"}
+391 R Temple of Triumph @Piotr Dura ${"lang": "en|fr|ja"}
 
 [promo]
-392 R Pack Leader @Ilse Gort
-393 U Selfless Savior @Ralph Horsley
-394 C Frantic Inventory @Aaron Miller
-395 U Eliminate @Chris Cold
-396 U Heartfire Immolator @Donato Giancola
-397 C Llanowar Visionary @Cristi Balanescu
+392 R Pack Leader @Ilse Gort ${"lang": "en"}
+393 U Selfless Savior @Ralph Horsley ${"lang": "en"}
+394 C Frantic Inventory @Aaron Miller ${"lang": "en"}
+395 U Eliminate @Chris Cold ${"lang": "en"}
+396 U Heartfire Immolator @Donato Giancola ${"lang": "en"}
+397 C Llanowar Visionary @Cristi Balanescu ${"lang": "en"}
 
 [Lands]
 6 Bloodfell Caves|M21

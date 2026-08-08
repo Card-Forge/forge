@@ -4,6 +4,7 @@ Date=2025-11-21
 Name=Avatar: The Last Airbender Eternal
 Type=Expansion
 ScryfallCode=TLE
+CardLang=en,fr,de,ja
 
 [cards]
 1 M Brought Back @Viacom
@@ -278,61 +279,61 @@ ScryfallCode=TLE
 209 M Toph, Earthbending Master @Phima
 
 [promo]
-265 R Aang, Air Nomad @Jinho Bae
-266 C Aang's Defense @Jo Cordisco
-267 C Aardvark Sloth @Ionomycin
-268 U Appa, Aang's Companion @Kieran Yanner
-269 U Katara, Heroic Healer @Pauline Voss
-270 U Momo, Rambunctious Rascal @Tomoyo Asatani
-271 C Path to Redemption @Hokyoung Kim
-272 C Razor Rings @Norikatsu Miyoshi
-273 C Sledding Otter-Penguin @Maojin Lee
-274 U Sokka, Wolf Cove's Protector @Kinota Eishi
-275 C Tundra Wall @Slawek Fedorczuk
-276 C Wolf Cove Villager @Gemi
-277 C Capital Guard @Nathaniel Himawan
-278 C Dragon Moose @Daniel Romanovsky
-279 C Explosive Shot @Slawek Fedorczuk
-280 C Fire Nation Soldier @Boell Oyino
-281 U Fire Nation's Conquest @Eduardo Francisco
-282 U Iroh, Firebending Instructor @Eilene Cherie
-283 C Komodo Rhino @Alexander Forssberg
-284 C Run Amok @Hristo D. Chukov
-285 C Warship Scout @Brandon L. Hunt
-286 U Zhao, the Seething Flame @Rafater
-287 R Zuko, Avatar Hunter @Rafater
-288 C Zuko's Offense @Jo Cordisco
-289 L Mountain @Salvatorre Zee Yazzie
-290 L Mountain @Salvatorre Zee Yazzie
-291 L Mountain @Salvatorre Zee Yazzie
-292 L Mountain @Salvatorre Zee Yazzie
-293 L Mountain @Salvatorre Zee Yazzie
-294 L Mountain @Salvatorre Zee Yazzie
-295 L Mountain @Salvatorre Zee Yazzie
-296 L Mountain @Salvatorre Zee Yazzie
-297 L Plains @Slawek Fedorczuk
-298 L Plains @Slawek Fedorczuk
-299 L Plains @Slawek Fedorczuk
-300 L Plains @Slawek Fedorczuk
-301 L Plains @Slawek Fedorczuk
-302 L Plains @Slawek Fedorczuk
-303 L Plains @Slawek Fedorczuk
-304 L Plains @Slawek Fedorczuk
+265 R Aang, Air Nomad @Jinho Bae ${"lang": "en"}
+266 C Aang's Defense @Jo Cordisco ${"lang": "en"}
+267 C Aardvark Sloth @Ionomycin ${"lang": "en"}
+268 U Appa, Aang's Companion @Kieran Yanner ${"lang": "en"}
+269 U Katara, Heroic Healer @Pauline Voss ${"lang": "en"}
+270 U Momo, Rambunctious Rascal @Tomoyo Asatani ${"lang": "en"}
+271 C Path to Redemption @Hokyoung Kim ${"lang": "en"}
+272 C Razor Rings @Norikatsu Miyoshi ${"lang": "en"}
+273 C Sledding Otter-Penguin @Maojin Lee ${"lang": "en"}
+274 U Sokka, Wolf Cove's Protector @Kinota Eishi ${"lang": "en"}
+275 C Tundra Wall @Slawek Fedorczuk ${"lang": "en"}
+276 C Wolf Cove Villager @Gemi ${"lang": "en"}
+277 C Capital Guard @Nathaniel Himawan ${"lang": "en"}
+278 C Dragon Moose @Daniel Romanovsky ${"lang": "en"}
+279 C Explosive Shot @Slawek Fedorczuk ${"lang": "en"}
+280 C Fire Nation Soldier @Boell Oyino ${"lang": "en"}
+281 U Fire Nation's Conquest @Eduardo Francisco ${"lang": "en"}
+282 U Iroh, Firebending Instructor @Eilene Cherie ${"lang": "en"}
+283 C Komodo Rhino @Alexander Forssberg ${"lang": "en"}
+284 C Run Amok @Hristo D. Chukov ${"lang": "en"}
+285 C Warship Scout @Brandon L. Hunt ${"lang": "en"}
+286 U Zhao, the Seething Flame @Rafater ${"lang": "en"}
+287 R Zuko, Avatar Hunter @Rafater ${"lang": "en"}
+288 C Zuko's Offense @Jo Cordisco ${"lang": "en"}
+289 L Mountain @Salvatorre Zee Yazzie ${"lang": "en"}
+290 L Mountain @Salvatorre Zee Yazzie ${"lang": "en"}
+291 L Mountain @Salvatorre Zee Yazzie ${"lang": "en"}
+292 L Mountain @Salvatorre Zee Yazzie ${"lang": "en"}
+293 L Mountain @Salvatorre Zee Yazzie ${"lang": "en"}
+294 L Mountain @Salvatorre Zee Yazzie ${"lang": "en"}
+295 L Mountain @Salvatorre Zee Yazzie ${"lang": "en"}
+296 L Mountain @Salvatorre Zee Yazzie ${"lang": "en"}
+297 L Plains @Slawek Fedorczuk ${"lang": "en"}
+298 L Plains @Slawek Fedorczuk ${"lang": "en"}
+299 L Plains @Slawek Fedorczuk ${"lang": "en"}
+300 L Plains @Slawek Fedorczuk ${"lang": "en"}
+301 L Plains @Slawek Fedorczuk ${"lang": "en"}
+302 L Plains @Slawek Fedorczuk ${"lang": "en"}
+303 L Plains @Slawek Fedorczuk ${"lang": "en"}
+304 L Plains @Slawek Fedorczuk ${"lang": "en"}
 
 [bundle]
-305 R Enlightened Tutor @Brigitte Roka & Clifton Stommel
-306 R Flawless Maneuver @Irina Nordsol
-307 R Fierce Guardianship @Ina Wong
-308 R Mystical Tutor @Shane Beresford
-309 R Deadly Rollick @Irina Nordsol
-310 R Entomb @Shane Beresford
-311 R Deflecting Swat @Patrick Gañas
-312 R Gamble @Irina Nordsol
-313 R Obscuring Haze @Perci Chen
-314 R Worldly Tutor @Shane Beresford
-315 R Arcane Signet @Shane Beresford
-316 R Sol Ring @Barbara Rosiak
-317 R Swiftfoot Boots @Barbara Rosiak
+305 R Enlightened Tutor @Brigitte Roka & Clifton Stommel ${"lang": "en"}
+306 R Flawless Maneuver @Irina Nordsol ${"lang": "en"}
+307 R Fierce Guardianship @Ina Wong ${"lang": "en"}
+308 R Mystical Tutor @Shane Beresford ${"lang": "en"}
+309 R Deadly Rollick @Irina Nordsol ${"lang": "en"}
+310 R Entomb @Shane Beresford ${"lang": "en"}
+311 R Deflecting Swat @Patrick Gañas ${"lang": "en"}
+312 R Gamble @Irina Nordsol ${"lang": "en"}
+313 R Obscuring Haze @Perci Chen ${"lang": "en"}
+314 R Worldly Tutor @Shane Beresford ${"lang": "en"}
+315 R Arcane Signet @Shane Beresford ${"lang": "en"}
+316 R Sol Ring @Barbara Rosiak ${"lang": "en"}
+317 R Swiftfoot Boots @Barbara Rosiak ${"lang": "en"}
 
 [tokens]
 1 marit_lage @Viacom

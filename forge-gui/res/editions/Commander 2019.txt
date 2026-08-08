@@ -4,6 +4,7 @@ Date=2019-08-23
 Name=Commander 2019
 Type=Commander
 ScryfallCode=C19
+CardLang=en,es,fr,de,it,pt,ja,ru
 
 [cards]
 1 U Cliffside Rescuer @Caio Monteiro

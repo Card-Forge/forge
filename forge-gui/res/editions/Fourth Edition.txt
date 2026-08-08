@@ -10,6 +10,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
 ChaosDraftThemes=CORE_SET
 ScryfallCode=4ED
+CardLang=en,es,fr,de,it,pt,ja
 
 [cards]
 1 C Alabaster Potion @Harold McNeill
@@ -236,7 +237,7 @@ ScryfallCode=4ED
 222 R Smoke @Jesper Myrfors
 223 U Stone Giant @Dameon Willich
 224 C Stone Rain @Daniel Gelon
-225 R Tempest Efreet @NéNé Thomas
+225 R Tempest Efreet @NéNé Thomas ${"lang": "en|es|fr|de|it|ja"}
 226 C The Brute @Mark Poole
 227 U Tunnel @Dan Frazier
 228 U Uthden Troll @Douglas Shuler
@@ -278,7 +279,7 @@ ScryfallCode=4ED
 264 C Nafs Asp @Christopher Rush
 265 C Pradesh Gypsies @Quinton Hoover
 266 U Radjan Spirit @Christopher Rush
-267 R Rebirth @Mark Tedin
+267 R Rebirth @Mark Tedin ${"lang": "en|es|fr|de|it|ja"}
 268 C Regeneration @Quinton Hoover
 269 C Sandstorm @Brian Snõddy
 270 C Scryb Sprites @Amy Weber
@@ -314,7 +315,7 @@ ScryfallCode=4ED
 300 R Blue Mana Battery @Amy Weber
 301 R Bottle of Suleiman @Jesper Myrfors
 302 U Brass Man @Christopher Rush
-303 R Bronze Tablet @Tom Wänerstrand
+303 R Bronze Tablet @Tom Wänerstrand ${"lang": "en|es|fr|de|it|ja"}
 304 U Celestial Prism @Amy Weber
 305 C Clay Statue @Jesper Myrfors
 306 R Clockwork Avian @Randy Asplund-Faith

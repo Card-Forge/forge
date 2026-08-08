@@ -4,6 +4,7 @@ Date=2023-09-08
 Name=Wilds of Eldraine: Enchanting Tales
 Type=Collector_Edition
 ScryfallCode=WOT
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 R Blind Obedience @Olena Richards
@@ -69,43 +70,43 @@ ScryfallCode=WOT
 61 U Season of Growth @Maël Ollivier-Henry
 62 R Unnatural Growth @Francoyovich
 63 U Utopia Sprawl @Sylvain Sarrailh
-64 M Greater Auramancy @Mai Okuma
-65 R Karmic Justice @Yakotakos
-66 M Land Tax @Jintetsu
-67 M Smothering Tithe @Daisuke Tatsuma
-68 R As Foretold @Yuichi Murakami
-69 M Kindred Discovery @Yuchi Yuki
-70 M Omniscience @Yakotakos
-71 M Rhystic Study @Fuzichoco
-72 M Bitterblossom @I☆LA
-73 M Grave Pact @BODAX
-74 M Necropotence @Kuregure
-75 R Polluted Bonds @Yuichi Murakami
-76 R Aggravated Assault @zizero
-77 M Blood Moon @Esuthio
-78 M Repercussion @Moopic
-79 M Sneak Attack @Canata Katana
-80 M Defense of the Heart @Hisashi Momose
-81 M Doubling Season @Kemonomichi
-82 R Nature's Will @Dai-XT
-83 M Parallel Lives @BODAX
-84 M Greater Auramancy @Mai Okuma
-85 R Karmic Justice @Yakotakos
-86 M Land Tax @Jintetsu
-87 M Smothering Tithe @Daisuke Tatsuma
-88 R As Foretold @Yuichi Murakami
-89 M Kindred Discovery @Yuchi Yuki
-90 M Omniscience @Yakotakos
-91 M Rhystic Study @Fuzichoco
-92 M Bitterblossom @I☆LA
-93 M Grave Pact @BODAX
-94 M Necropotence @Kuregure
-95 R Polluted Bonds @Yuichi Murakami
-96 R Aggravated Assault @zizero
-97 M Blood Moon @Esuthio
-98 M Repercussion @Moopic
-99 M Sneak Attack @Canata Katana
-100 M Defense of the Heart @Hisashi Momose
-101 M Doubling Season @Kemonomichi
-102 R Nature's Will @Dai-XT
-103 M Parallel Lives @BODAX
+64 M Greater Auramancy @Mai Okuma ${"lang": "en|ja"}
+65 R Karmic Justice @Yakotakos ${"lang": "en|ja"}
+66 M Land Tax @Jintetsu ${"lang": "en|ja"}
+67 M Smothering Tithe @Daisuke Tatsuma ${"lang": "en|ja"}
+68 R As Foretold @Yuichi Murakami ${"lang": "en|ja"}
+69 M Kindred Discovery @Yuchi Yuki ${"lang": "en|ja"}
+70 M Omniscience @Yakotakos ${"lang": "en|ja"}
+71 M Rhystic Study @Fuzichoco ${"lang": "en|ja"}
+72 M Bitterblossom @I☆LA ${"lang": "en|ja"}
+73 M Grave Pact @BODAX ${"lang": "en|ja"}
+74 M Necropotence @Kuregure ${"lang": "en|ja"}
+75 R Polluted Bonds @Yuichi Murakami ${"lang": "en|ja"}
+76 R Aggravated Assault @zizero ${"lang": "en|ja"}
+77 M Blood Moon @Esuthio ${"lang": "en|ja"}
+78 M Repercussion @Moopic ${"lang": "en|ja"}
+79 M Sneak Attack @Canata Katana ${"lang": "en|ja"}
+80 M Defense of the Heart @Hisashi Momose ${"lang": "en|ja"}
+81 M Doubling Season @Kemonomichi ${"lang": "en|ja"}
+82 R Nature's Will @Dai-XT ${"lang": "en|ja"}
+83 M Parallel Lives @BODAX ${"lang": "en|ja"}
+84 M Greater Auramancy @Mai Okuma ${"lang": "en"}
+85 R Karmic Justice @Yakotakos ${"lang": "en"}
+86 M Land Tax @Jintetsu ${"lang": "en"}
+87 M Smothering Tithe @Daisuke Tatsuma ${"lang": "en"}
+88 R As Foretold @Yuichi Murakami ${"lang": "en"}
+89 M Kindred Discovery @Yuchi Yuki ${"lang": "en"}
+90 M Omniscience @Yakotakos ${"lang": "en"}
+91 M Rhystic Study @Fuzichoco ${"lang": "en"}
+92 M Bitterblossom @I☆LA ${"lang": "en"}
+93 M Grave Pact @BODAX ${"lang": "en"}
+94 M Necropotence @Kuregure ${"lang": "en"}
+95 R Polluted Bonds @Yuichi Murakami ${"lang": "en"}
+96 R Aggravated Assault @zizero ${"lang": "en"}
+97 M Blood Moon @Esuthio ${"lang": "en"}
+98 M Repercussion @Moopic ${"lang": "en"}
+99 M Sneak Attack @Canata Katana ${"lang": "en"}
+100 M Defense of the Heart @Hisashi Momose ${"lang": "en"}
+101 M Doubling Season @Kemonomichi ${"lang": "en"}
+102 R Nature's Will @Dai-XT ${"lang": "en"}
+103 M Parallel Lives @BODAX ${"lang": "en"}

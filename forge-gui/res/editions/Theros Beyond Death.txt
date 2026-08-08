@@ -10,6 +10,7 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 #, 1 Arasta of the Endless Web+|THB|3
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=THB
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 U Alseid of Life's Bounty @Magali Villeneuve
@@ -268,22 +269,22 @@ ScryfallCode=THB
 254 L Forest @Sam Burley
 
 [borderless]
-255 M Elspeth, Sun's Nemesis @Chuck Lukacs
-256 M Ashiok, Nightmare Muse @Chuck Lukacs
-257 M Calix, Destiny's Hand @Chuck Lukacs
+255 M Elspeth, Sun's Nemesis @Chuck Lukacs ${"lang": "en"}
+256 M Ashiok, Nightmare Muse @Chuck Lukacs ${"lang": "en"}
+257 M Calix, Destiny's Hand @Chuck Lukacs ${"lang": "en"}
 
 [showcase]
-258 U Daxos, Blessed by the Sun @Jason A. Engle
-259 M Heliod, Sun-Crowned @Jason A. Engle
-260 U Callaphe, Beloved of the Sea @Jason A. Engle
-261 M Thassa, Deep-Dwelling @Jason A. Engle
-262 M Erebos, Bleak-Hearted @Jason A. Engle
-263 U Tymaret, Chosen from Death @Jason A. Engle
-264 U Anax, Hardened in the Forge @Jason A. Engle
-265 M Purphoros, Bronze-Blooded @Jason A. Engle
-266 M Nylea, Keen-Eyed @Jason A. Engle
-267 U Renata, Called to the Hunt @Jason A. Engle
-268 M Klothys, God of Destiny @Jason A. Engle
+258 U Daxos, Blessed by the Sun @Jason A. Engle ${"lang": "en"}
+259 M Heliod, Sun-Crowned @Jason A. Engle ${"lang": "en"}
+260 U Callaphe, Beloved of the Sea @Jason A. Engle ${"lang": "en"}
+261 M Thassa, Deep-Dwelling @Jason A. Engle ${"lang": "en"}
+262 M Erebos, Bleak-Hearted @Jason A. Engle ${"lang": "en"}
+263 U Tymaret, Chosen from Death @Jason A. Engle ${"lang": "en"}
+264 U Anax, Hardened in the Forge @Jason A. Engle ${"lang": "en"}
+265 M Purphoros, Bronze-Blooded @Jason A. Engle ${"lang": "en"}
+266 M Nylea, Keen-Eyed @Jason A. Engle ${"lang": "en"}
+267 U Renata, Called to the Hunt @Jason A. Engle ${"lang": "en"}
+268 M Klothys, God of Destiny @Jason A. Engle ${"lang": "en"}
 
 [buy a box]
 269 M Athreos, Shroud-Veiled @Igor Kieryluk
@@ -319,68 +320,68 @@ ScryfallCode=THB
 297 R Treeshaker Chimera @Vincent Proce
 
 [extended art]
-298 R Archon of Sun's Grace @Matt Stewart
-299 R Eidolon of Obstruction @Jason Rainville
-300 R Heliod's Intervention @Daarken
-301 R Idyllic Tutor @Jaime Jones
-302 R Shatter the Sky @Bayard Wu
-303 R Taranika, Akroan Veteran @Eric Deschamps
-304 R Ashiok's Erasure @Zezhou Chen
-305 R Nadir Kraken @Dan Murayama Scott
-306 R Protean Thaumaturge @Izzy
-307 R Thassa's Intervention @Zack Stella
-308 R Thassa's Oracle @Jesper Ejsing
-309 R Thryx, the Sudden Storm @Mathias Kollros
-310 R Wavebreak Hippocamp @Caio Monteiro
-311 R Aphemia, the Cacophony @Lucas Graciano
-312 R Eat to Extinction @Vincent Proce
-313 R Erebos's Intervention @Mathias Kollros
-314 R Gravebreaker Lamia @Lius Lasahido
-315 R Nightmare Shepherd @Tyler Jacobson
-316 R Treacherous Blessing @Marco Teixeira
-317 R Woe Strider @John Thacker
-318 M Ox of Agonas @Lie Setiawan
-319 R Phoenix of Ash @Svetlin Velinov
-320 R Purphoros's Intervention @Aleksi Briclot
-321 R Storm Herald @Aleksi Briclot
-322 R Storm's Wrath @Yeong-Hao Han
-323 R Tectonic Giant @Slawomir Maniak
-324 R Underworld Breach @Lie Setiawan
-325 R Arasta of the Endless Web @Sam Rowan
-326 R Dryad of the Ilysian Grove @Scott Murphy
-327 R Mantle of the Wolf @Simon Dominic
-328 R Nessian Boar @Zoltan Boros
-329 R Nylea's Intervention @Zezhou Chen
-330 M Nyxbloom Ancient @Filip Burburan
-331 R Setessan Champion @Emrah Elmasli
-332 R Allure of the Unknown @Seb McKinnon
-333 R Atris, Oracle of Half-Truths @Bastien L. Deharme
-334 R Bronzehide Lion @Alayna Danner
-335 R Dalakos, Crafter of Wonders @Ryan Pancoast
-336 R Dream Trawler @Jesper Ejsing
-337 R Enigmatic Incarnation @PINDURSKI
-338 R Gallia of the Endless Dance @Johannes Voss
-339 R Haktos the Unscarred @Ryan Pancoast
-340 M Kroxa, Titan of Death's Hunger @Vincent Proce
-341 R Kunoros, Hound of Athreos @Zezhou Chen
-342 M Polukranos, Unchained @Chris Rahn
-343 M Uro, Titan of Nature's Wrath @Vincent Proce
-344 R Nyx Lotus @Raoul Vitale
-345 R Shadowspear @Yeong-Hao Han
-346 R Labyrinth of Skophos @Jonas De Ro
-347★ R Temple of Abandon @Adam Paquette
-348 R Temple of Deceit @Jonas De Ro
-349 R Temple of Enlightenment @Piotr Dura
-350 R Temple of Malice @Jonas De Ro
-351 R Temple of Plenty @Chris Ostrowski
+298 R Archon of Sun's Grace @Matt Stewart ${"lang": "en"}
+299 R Eidolon of Obstruction @Jason Rainville ${"lang": "en"}
+300 R Heliod's Intervention @Daarken ${"lang": "en"}
+301 R Idyllic Tutor @Jaime Jones ${"lang": "en"}
+302 R Shatter the Sky @Bayard Wu ${"lang": "en"}
+303 R Taranika, Akroan Veteran @Eric Deschamps ${"lang": "en"}
+304 R Ashiok's Erasure @Zezhou Chen ${"lang": "en"}
+305 R Nadir Kraken @Dan Murayama Scott ${"lang": "en"}
+306 R Protean Thaumaturge @Izzy ${"lang": "en"}
+307 R Thassa's Intervention @Zack Stella ${"lang": "en"}
+308 R Thassa's Oracle @Jesper Ejsing ${"lang": "en"}
+309 R Thryx, the Sudden Storm @Mathias Kollros ${"lang": "en"}
+310 R Wavebreak Hippocamp @Caio Monteiro ${"lang": "en"}
+311 R Aphemia, the Cacophony @Lucas Graciano ${"lang": "en"}
+312 R Eat to Extinction @Vincent Proce ${"lang": "en"}
+313 R Erebos's Intervention @Mathias Kollros ${"lang": "en"}
+314 R Gravebreaker Lamia @Lius Lasahido ${"lang": "en"}
+315 R Nightmare Shepherd @Tyler Jacobson ${"lang": "en"}
+316 R Treacherous Blessing @Marco Teixeira ${"lang": "en"}
+317 R Woe Strider @John Thacker ${"lang": "en"}
+318 M Ox of Agonas @Lie Setiawan ${"lang": "en"}
+319 R Phoenix of Ash @Svetlin Velinov ${"lang": "en"}
+320 R Purphoros's Intervention @Aleksi Briclot ${"lang": "en"}
+321 R Storm Herald @Aleksi Briclot ${"lang": "en"}
+322 R Storm's Wrath @Yeong-Hao Han ${"lang": "en"}
+323 R Tectonic Giant @Slawomir Maniak ${"lang": "en"}
+324 R Underworld Breach @Lie Setiawan ${"lang": "en"}
+325 R Arasta of the Endless Web @Sam Rowan ${"lang": "en"}
+326 R Dryad of the Ilysian Grove @Scott Murphy ${"lang": "en"}
+327 R Mantle of the Wolf @Simon Dominic ${"lang": "en"}
+328 R Nessian Boar @Zoltan Boros ${"lang": "en"}
+329 R Nylea's Intervention @Zezhou Chen ${"lang": "en"}
+330 M Nyxbloom Ancient @Filip Burburan ${"lang": "en"}
+331 R Setessan Champion @Emrah Elmasli ${"lang": "en"}
+332 R Allure of the Unknown @Seb McKinnon ${"lang": "en"}
+333 R Atris, Oracle of Half-Truths @Bastien L. Deharme ${"lang": "en"}
+334 R Bronzehide Lion @Alayna Danner ${"lang": "en"}
+335 R Dalakos, Crafter of Wonders @Ryan Pancoast ${"lang": "en"}
+336 R Dream Trawler @Jesper Ejsing ${"lang": "en"}
+337 R Enigmatic Incarnation @PINDURSKI ${"lang": "en"}
+338 R Gallia of the Endless Dance @Johannes Voss ${"lang": "en"}
+339 R Haktos the Unscarred @Ryan Pancoast ${"lang": "en"}
+340 M Kroxa, Titan of Death's Hunger @Vincent Proce ${"lang": "en"}
+341 R Kunoros, Hound of Athreos @Zezhou Chen ${"lang": "en"}
+342 M Polukranos, Unchained @Chris Rahn ${"lang": "en"}
+343 M Uro, Titan of Nature's Wrath @Vincent Proce ${"lang": "en"}
+344 R Nyx Lotus @Raoul Vitale ${"lang": "en"}
+345 R Shadowspear @Yeong-Hao Han ${"lang": "en"}
+346 R Labyrinth of Skophos @Jonas De Ro ${"lang": "en"}
+347★ R Temple of Abandon @Adam Paquette ${"lang": "en"}
+348 R Temple of Deceit @Jonas De Ro ${"lang": "en"}
+349 R Temple of Enlightenment @Piotr Dura ${"lang": "en"}
+350 R Temple of Malice @Jonas De Ro ${"lang": "en"}
+351 R Temple of Plenty @Chris Ostrowski ${"lang": "en"}
 
 [promo]
-352 R Arasta of the Endless Web @Jesper Ejsing
-353 U Alseid of Life's Bounty @Magali Villeneuve
-354 C Thirst for Meaning @Brian Valeza
-355 U Gray Merchant of Asphodel @Scott Murphy
-356 C Thrill of Possibility @Izzy
-357 U Wolfwillow Haven @Jakub Kasper
+352 R Arasta of the Endless Web @Jesper Ejsing ${"lang": "en"}
+353 U Alseid of Life's Bounty @Magali Villeneuve ${"lang": "en"}
+354 C Thirst for Meaning @Brian Valeza ${"lang": "en"}
+355 U Gray Merchant of Asphodel @Scott Murphy ${"lang": "en"}
+356 C Thrill of Possibility @Izzy ${"lang": "en"}
+357 U Wolfwillow Haven @Jakub Kasper ${"lang": "en"}
 
 [Commons]
 Captivating Unicorn|THB|1

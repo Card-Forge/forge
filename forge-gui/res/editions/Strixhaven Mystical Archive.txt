@@ -4,6 +4,7 @@ Date=2021-04-23
 Name=Strixhaven Mystical Archive
 Type=Collector_Edition
 ScryfallCode=STA
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 M Approach of the Second Sun @Minttu Hynninen
@@ -69,66 +70,66 @@ ScryfallCode=STA
 61 R Growth Spiral @Barbara Rosiak
 62 R Lightning Helix @Minttu Hynninen
 63 R Putrefy @Minttu Hynninen
-64 M Approach of the Second Sun @Nagano
-65 M Day of Judgment @Maiko Yoshizawa
-66 U Defiant Strike @Amayagido
-67 U Divine Gambit @Kiritada
-68 R Ephemerate @Yumeko
-69 R Gift of Estates @Yaya
-70 R Gods Willing @Tada
-71 R Mana Tithe @Magane Okuda
-72 U Revitalize @Yaomojun
-73 R Swords to Plowshares @Nagano
-74 M Teferi's Protection @So-Taro
-75 M Blue Sun's Zenith @Ezoi
-76 R Brainstorm @Ayako Ishiguro
-77 R Compulsive Research @Tomohito
-78 R Counterspell @Rindo Karasuba
-79 R Memory Lapse @Yumeko
-80 M Mind's Desire @Yaya
-81 U Negate @Koji Nishino
-82 U Opt @Rien.
-83 U Strategic Planning @Hatori Kyoka
-84 R Tezzeret's Gambit @Tomohito
-85 M Time Warp @Shie Nanahara
-86 U Whirlwind Denial @Aogachou
-87 U Agonizing Remorse @Maiko Aoji
-88 M Crux of Fate @Kota Nakatsubo
-89 R Dark Ritual @Rien.
-90 M Demonic Tutor @Sumie Okazu
-91 R Doom Blade @Rindo Karasuba
-92 U Duress @Romiy
-93 U Eliminate @Karuta Shiki
-94 R Inquisition of Kozilek @Yuka Oka
-95 R Sign in Blood @Kaoru Yukishiro
-96 M Tainted Pact @Yusuke Katekari
-97 R Tendrils of Agony @Daken
-98 U Village Rites @Hagiya Kaoru
-99 M Chaos Warp @Hisashi Momose
-100 U Claim the Firstborn @Norikatsu Miyoshi
-101 R Faithless Looting @Shiro Yayoi
-102 R Grapeshot @Hatori Kyoka
-103 M Increasing Vengeance @D-suzuki
-104 U Infuriate @Yangyang & Xiaji
-105 R Lightning Bolt @Ezoi
-106 M Mizzix's Mastery @Hiro Suda
-107 U Shock @Ryanroro
-108 R Stone Rain @Tobihachi
-109 U Thrill of Possibility @Ayako Ishiguro
-110 R Urza's Rage @Maiko Aoji
-111 R Abundant Harvest @Yuka Sakuma
-112 U Adventurous Impulse @Sakura Tomo
-113 M Channel @Shie Nanahara
-114 U Cultivate @Uichi Ukumo
-115 R Harmonize @Yuka Sakuma
-116 R Krosan Grip @Norikatsu Miyoshi
-117 M Natural Order @Ayami Nakashima
-118 M Primal Command @Kukka
-119 R Regrowth @Romiy
-120 U Snakeskin Veil @Yuhki Takeuchi
-121 R Weather the Storm @Kukka
-122 R Despark @Kiritada
-123 R Electrolyze @Hatori Kyoka
-124 R Growth Spiral @Karuta Shiki
-125 R Lightning Helix @Daken
-126 R Putrefy @Magane Okuda
+64 M Approach of the Second Sun @Nagano ${"lang": "ja"}
+65 M Day of Judgment @Maiko Yoshizawa ${"lang": "ja"}
+66 U Defiant Strike @Amayagido ${"lang": "ja"}
+67 U Divine Gambit @Kiritada ${"lang": "ja"}
+68 R Ephemerate @Yumeko ${"lang": "ja"}
+69 R Gift of Estates @Yaya ${"lang": "ja"}
+70 R Gods Willing @Tada ${"lang": "ja"}
+71 R Mana Tithe @Magane Okuda ${"lang": "ja"}
+72 U Revitalize @Yaomojun ${"lang": "ja"}
+73 R Swords to Plowshares @Nagano ${"lang": "ja"}
+74 M Teferi's Protection @So-Taro ${"lang": "ja"}
+75 M Blue Sun's Zenith @Ezoi ${"lang": "ja"}
+76 R Brainstorm @Ayako Ishiguro ${"lang": "ja"}
+77 R Compulsive Research @Tomohito ${"lang": "ja"}
+78 R Counterspell @Rindo Karasuba ${"lang": "ja"}
+79 R Memory Lapse @Yumeko ${"lang": "ja"}
+80 M Mind's Desire @Yaya ${"lang": "ja"}
+81 U Negate @Koji Nishino ${"lang": "ja"}
+82 U Opt @Rien. ${"lang": "ja"}
+83 U Strategic Planning @Hatori Kyoka ${"lang": "ja"}
+84 R Tezzeret's Gambit @Tomohito ${"lang": "ja"}
+85 M Time Warp @Shie Nanahara ${"lang": "ja"}
+86 U Whirlwind Denial @Aogachou ${"lang": "ja"}
+87 U Agonizing Remorse @Maiko Aoji ${"lang": "ja"}
+88 M Crux of Fate @Kota Nakatsubo ${"lang": "ja"}
+89 R Dark Ritual @Rien. ${"lang": "ja"}
+90 M Demonic Tutor @Sumie Okazu ${"lang": "ja"}
+91 R Doom Blade @Rindo Karasuba ${"lang": "ja"}
+92 U Duress @Romiy ${"lang": "ja"}
+93 U Eliminate @Karuta Shiki ${"lang": "ja"}
+94 R Inquisition of Kozilek @Yuka Oka ${"lang": "ja"}
+95 R Sign in Blood @Kaoru Yukishiro ${"lang": "ja"}
+96 M Tainted Pact @Yusuke Katekari ${"lang": "ja"}
+97 R Tendrils of Agony @Daken ${"lang": "ja"}
+98 U Village Rites @Hagiya Kaoru ${"lang": "ja"}
+99 M Chaos Warp @Hisashi Momose ${"lang": "ja"}
+100 U Claim the Firstborn @Norikatsu Miyoshi ${"lang": "ja"}
+101 R Faithless Looting @Shiro Yayoi ${"lang": "ja"}
+102 R Grapeshot @Hatori Kyoka ${"lang": "ja"}
+103 M Increasing Vengeance @D-suzuki ${"lang": "ja"}
+104 U Infuriate @Yangyang & Xiaji ${"lang": "ja"}
+105 R Lightning Bolt @Ezoi ${"lang": "ja"}
+106 M Mizzix's Mastery @Hiro Suda ${"lang": "ja"}
+107 U Shock @Ryanroro ${"lang": "ja"}
+108 R Stone Rain @Tobihachi ${"lang": "ja"}
+109 U Thrill of Possibility @Ayako Ishiguro ${"lang": "ja"}
+110 R Urza's Rage @Maiko Aoji ${"lang": "ja"}
+111 R Abundant Harvest @Yuka Sakuma ${"lang": "ja"}
+112 U Adventurous Impulse @Sakura Tomo ${"lang": "ja"}
+113 M Channel @Shie Nanahara ${"lang": "ja"}
+114 U Cultivate @Uichi Ukumo ${"lang": "ja"}
+115 R Harmonize @Yuka Sakuma ${"lang": "ja"}
+116 R Krosan Grip @Norikatsu Miyoshi ${"lang": "ja"}
+117 M Natural Order @Ayami Nakashima ${"lang": "ja"}
+118 M Primal Command @Kukka ${"lang": "ja"}
+119 R Regrowth @Romiy ${"lang": "ja"}
+120 U Snakeskin Veil @Yuhki Takeuchi ${"lang": "ja"}
+121 R Weather the Storm @Kukka ${"lang": "ja"}
+122 R Despark @Kiritada ${"lang": "ja"}
+123 R Electrolyze @Hatori Kyoka ${"lang": "ja"}
+124 R Growth Spiral @Karuta Shiki ${"lang": "ja"}
+125 R Lightning Helix @Daken ${"lang": "ja"}
+126 R Putrefy @Magane Okuda ${"lang": "ja"}

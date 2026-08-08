@@ -4,6 +4,7 @@ Date=2022-02-25
 Name=Year of the Tiger 2022
 Type=Promo
 ScryfallCode=PL22
+CardLang=en,ja,zhs,zht
 
 [cards]
 1 R Temur Sabertooth @TSWCK

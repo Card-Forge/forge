@@ -4,6 +4,7 @@ Date=2020-09-25
 Name=Zendikar Rising Commander
 Type=Commander
 ScryfallCode=ZNC
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 M Anowon, the Ruin Thief @Magali Villeneuve
@@ -12,8 +13,8 @@ ScryfallCode=ZNC
 4 R Enigma Thief @Victor Adame Minguez
 5 R Whispersteel Dagger @Svetlin Velinov
 6 R Geode Rager @Caio Monteiro
-7 M Anowon, the Ruin Thief @Magali Villeneuve
-8 M Obuun, Mul Daya Ancestor @Chris Rallis
+7 M Anowon, the Ruin Thief @Magali Villeneuve ${"lang": "en"}
+8 M Obuun, Mul Daya Ancestor @Chris Rallis ${"lang": "en"}
 9 U Abzan Falconer @Steven Belledin
 10 M Admonition Angel @Steve Argyle
 11 U Banishing Light @Willian Murai
@@ -107,7 +108,7 @@ ScryfallCode=ZNC
 99 R Silumgar's Command @Nils Hamm
 100 U Soul Manipulation @Carl Critchlow
 101 R Spinal Embrace @Donato Giancola
-102 U Struggle // Survive @Eric Deschamps
+102 U Struggle // Survive @Eric Deschamps ${"lang": "en|es|de|it"}
 103 R Sygg, River Cutthroat @Jeremy Enecio
 104 U Sylvan Reclamation @Seb McKinnon
 105 U Treacherous Terrain @Titus Lunter

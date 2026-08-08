@@ -9,6 +9,7 @@ FatPack=9
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=KTK
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 U Abzan Battle Priest @Chris Rahn

@@ -8,6 +8,7 @@ Booster=9 Common:fromsheet("WOE cards"), 3 Uncommon:fromSheet("WOE cards"), 1 Un
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 ScryfallCode=WOE
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 R Archon of the Wild Rose @Chris Rahn
@@ -288,30 +289,30 @@ ScryfallCode=WOE
 276 L Forest @Adam Paquette
 
 [showcase]
-277 M Virtue of Loyalty @Keith Garletts
-278 R Horned Loch-Whale @Nils Hamm
-279 M Virtue of Knowledge @Josu Hernaiz
-280 R Gumdrop Poisoner @Allen Williams
-281 M Virtue of Persistence @Allen Williams
-282 M Virtue of Courage @Nils Hamm
-283 R Bramble Familiar @Alayna Danner
-284 M Virtue of Strength @Danny Schwartz
-285 M Beluna Grandsquall @Kev Walker
-286 R Cruel Somnophage @Kev Walker
-287 R Decadent Dragon @Aaron Miller
-288 R Devouring Sugarmaw @Kev Walker
-289 R Elusive Otter @Andrea Sipl
-290 R Heartflame Duelist @Allen Williams
-291 M Kellan, the Fae-Blooded @Omar Rayyan
-292 R Mosswood Dreadknight @Keith Garletts
-293 R Pollen-Shield Hare @Greg Hildebrandt
-294 R Questing Druid @Greg Hildebrandt
-295 R Scalding Viper @Omar Rayyan
-296 R Twining Twins @Alayna Danner
+277 M Virtue of Loyalty @Keith Garletts ${"lang": "en"}
+278 R Horned Loch-Whale @Nils Hamm ${"lang": "en"}
+279 M Virtue of Knowledge @Josu Hernaiz ${"lang": "en"}
+280 R Gumdrop Poisoner @Allen Williams ${"lang": "en"}
+281 M Virtue of Persistence @Allen Williams ${"lang": "en"}
+282 M Virtue of Courage @Nils Hamm ${"lang": "en"}
+283 R Bramble Familiar @Alayna Danner ${"lang": "en"}
+284 M Virtue of Strength @Danny Schwartz ${"lang": "en"}
+285 M Beluna Grandsquall @Kev Walker ${"lang": "en"}
+286 R Cruel Somnophage @Kev Walker ${"lang": "en"}
+287 R Decadent Dragon @Aaron Miller ${"lang": "en"}
+288 R Devouring Sugarmaw @Kev Walker ${"lang": "en"}
+289 R Elusive Otter @Andrea Sipl ${"lang": "en"}
+290 R Heartflame Duelist @Allen Williams ${"lang": "en"}
+291 M Kellan, the Fae-Blooded @Omar Rayyan ${"lang": "en"}
+292 R Mosswood Dreadknight @Keith Garletts ${"lang": "en"}
+293 R Pollen-Shield Hare @Greg Hildebrandt ${"lang": "en"}
+294 R Questing Druid @Greg Hildebrandt ${"lang": "en"}
+295 R Scalding Viper @Omar Rayyan ${"lang": "en"}
+296 R Twining Twins @Alayna Danner ${"lang": "en"}
 
 [borderless]
 297 M Ashiok, Wicked Manipulator @Serena Malyon
-298 M Kellan, the Fae-Blooded @Andreas Zafiratos
+298 M Kellan, the Fae-Blooded @Andreas Zafiratos ${"lang": "en"}
 299 M Eriette of the Charmed Apple @Zach Alexander
 300 M Rowan, Scion of War @Abigail Larson
 301 M Talion, the Kindly Lord @Olena Richards
@@ -340,58 +341,58 @@ ScryfallCode=WOE
 322 R Wildwood Mentor @Piotr Foksowicz
 
 [extended art]
-323 R Archon of the Wild Rose @Chris Rahn
-324 R Expel the Interlopers @Andreas Zafiratos
-325 M Moonshaker Cavalry @Aldo Domínguez
-326 R Regal Bunnicorn @Ilse Gort
-327 R Spellbook Vendor @Scott Murphy
-328 R A Tale for the Ages @Julie Dillon
-329 R Werefox Bodyguard @Néstor Ossandón Leal
-330 M Asinine Antics @Brent Hollowell
-331 R Extraordinary Journey @Volkan Baǵa
-332 R Farsight Ritual @Randy Gallegos
-333 R Ingenious Prodigy @Brian Valeza
-334 R Sleep-Cursed Faerie @Heonhwa
-335 R Talion's Messenger @Marta Nael
-336 M Beseech the Mirror @Cynthia Sheppard
-337 R The End @Donato Giancola
-338 R Lich-Knights' Conquest @Denis Zhbankov
-339 R Lord Skitter, Sewer King @Jesper Ejsing
-340 R Lord Skitter's Blessing @Joseph Weston
-341 R Rankle's Prank @Tyler Walpole
-342 R Specter of Mortality @Daarken
-343 R Spiteful Hexmage @Anna Steinbauer
-344 R Tangled Colony @Filip Burburan
-345 R Charming Scoundrel @Caroline Gariba
-346 R Food Fight @Filipe Pagliuso
-347 R Goddric, Cloaked Reveler @Jason A. Engle
-348 R Imodane, the Pyrohammer @Chris Rahn
-349 R Raging Battle Mouse @Rudy Siswanto
-350 M Realm-Scorcher Hellkite @Billy Christian
-351 R Redcap Gutter-Dweller @Alexey Kruglov
-352 R Rotisserie Elemental @Leonardo Santanna
-353 R Song of Totentanz @Randy Gallegos
-354 M Blossoming Tortoise @Simon Dominic
-355 R Elvish Archivist @Mila Pesic
-356 R Feral Encounter @Fajareka Setiawan
-357 R Gruff Triplets @Fajareka Setiawan
-358 R Sentinel of Lost Lore @Cristi Balanescu
-359 R Thunderous Debut @Aldo Domínguez
-360 M Agatha of the Vile Cauldron @Jason A. Engle
-361 R Faunsbane Troll @Artur Nakhodkin
-362 R The Goose Mother @Jesper Ejsing
-363 M Hylda of the Icy Crown @Ekaterina Burmak
-364 R Likeness Looter @Ben Hill
-365 R Yenna, Redtooth Regent @Justyna Dura
-366 M Agatha's Soul Cauldron @Jason A. Engle
-367 R Hylda's Crown of Winter @Volkan Baǵa
-368 R The Irencrag @Adam Paquette
-369 R Syr Ginger, the Meal Ender @Michal Ivan
-370 R Lady of Laughter @Kai Carpenter
-371 R Faerie Slumber Party @Lie Setiawan
-372 R Malevolent Witchkite @Donato Giancola
-373 R Ogre Chitterlord @Piotr Foksowicz
-374 R Wildwood Mentor @Piotr Foksowicz
+323 R Archon of the Wild Rose @Chris Rahn ${"lang": "en|fr|de|ja|zhs"}
+324 R Expel the Interlopers @Andreas Zafiratos ${"lang": "en|fr|de|ja|zhs"}
+325 M Moonshaker Cavalry @Aldo Domínguez ${"lang": "en|fr|de|ja|zhs"}
+326 R Regal Bunnicorn @Ilse Gort ${"lang": "en|fr|de|ja|zhs"}
+327 R Spellbook Vendor @Scott Murphy ${"lang": "en|fr|de|ja|zhs"}
+328 R A Tale for the Ages @Julie Dillon ${"lang": "en|fr|de|ja|zhs"}
+329 R Werefox Bodyguard @Néstor Ossandón Leal ${"lang": "en|fr|de|ja|zhs"}
+330 M Asinine Antics @Brent Hollowell ${"lang": "en|fr|de|ja|zhs"}
+331 R Extraordinary Journey @Volkan Baǵa ${"lang": "en|fr|de|ja|zhs"}
+332 R Farsight Ritual @Randy Gallegos ${"lang": "en|fr|de|ja|zhs"}
+333 R Ingenious Prodigy @Brian Valeza ${"lang": "en|fr|de|ja|zhs"}
+334 R Sleep-Cursed Faerie @Heonhwa ${"lang": "en|fr|de|ja|zhs"}
+335 R Talion's Messenger @Marta Nael ${"lang": "en|fr|de|ja|zhs"}
+336 M Beseech the Mirror @Cynthia Sheppard ${"lang": "en|fr|de|ja|zhs"}
+337 R The End @Donato Giancola ${"lang": "en|fr|de|ja|zhs"}
+338 R Lich-Knights' Conquest @Denis Zhbankov ${"lang": "en|fr|de|ja|zhs"}
+339 R Lord Skitter, Sewer King @Jesper Ejsing ${"lang": "en|fr|de|ja|zhs"}
+340 R Lord Skitter's Blessing @Joseph Weston ${"lang": "en|fr|de|ja|zhs"}
+341 R Rankle's Prank @Tyler Walpole ${"lang": "en|fr|de|ja|zhs"}
+342 R Specter of Mortality @Daarken ${"lang": "en|fr|de|ja|zhs"}
+343 R Spiteful Hexmage @Anna Steinbauer ${"lang": "en|fr|de|ja|zhs"}
+344 R Tangled Colony @Filip Burburan ${"lang": "en|fr|de|ja|zhs"}
+345 R Charming Scoundrel @Caroline Gariba ${"lang": "en|fr|de|ja|zhs"}
+346 R Food Fight @Filipe Pagliuso ${"lang": "en|fr|de|ja|zhs"}
+347 R Goddric, Cloaked Reveler @Jason A. Engle ${"lang": "en|fr|de|ja|zhs"}
+348 R Imodane, the Pyrohammer @Chris Rahn ${"lang": "en|fr|de|ja|zhs"}
+349 R Raging Battle Mouse @Rudy Siswanto ${"lang": "en|fr|de|ja|zhs"}
+350 M Realm-Scorcher Hellkite @Billy Christian ${"lang": "en|fr|de|ja|zhs"}
+351 R Redcap Gutter-Dweller @Alexey Kruglov ${"lang": "en|fr|de|ja|zhs"}
+352 R Rotisserie Elemental @Leonardo Santanna ${"lang": "en|fr|de|ja|zhs"}
+353 R Song of Totentanz @Randy Gallegos ${"lang": "en|fr|de|ja|zhs"}
+354 M Blossoming Tortoise @Simon Dominic ${"lang": "en|fr|de|ja|zhs"}
+355 R Elvish Archivist @Mila Pesic ${"lang": "en|fr|de|ja|zhs"}
+356 R Feral Encounter @Fajareka Setiawan ${"lang": "en|fr|de|ja|zhs"}
+357 R Gruff Triplets @Fajareka Setiawan ${"lang": "en|fr|de|ja|zhs"}
+358 R Sentinel of Lost Lore @Cristi Balanescu ${"lang": "en|fr|de|ja|zhs"}
+359 R Thunderous Debut @Aldo Domínguez ${"lang": "en|fr|de|ja|zhs"}
+360 M Agatha of the Vile Cauldron @Jason A. Engle ${"lang": "en|fr|de|ja|zhs"}
+361 R Faunsbane Troll @Artur Nakhodkin ${"lang": "en|fr|de|ja|zhs"}
+362 R The Goose Mother @Jesper Ejsing ${"lang": "en|fr|de|ja|zhs"}
+363 M Hylda of the Icy Crown @Ekaterina Burmak ${"lang": "en|fr|de|ja|zhs"}
+364 R Likeness Looter @Ben Hill ${"lang": "en|fr|de|ja|zhs"}
+365 R Yenna, Redtooth Regent @Justyna Dura ${"lang": "en|fr|de|ja|zhs"}
+366 M Agatha's Soul Cauldron @Jason A. Engle ${"lang": "en|fr|de|ja|zhs"}
+367 R Hylda's Crown of Winter @Volkan Baǵa ${"lang": "en|fr|de|ja|zhs"}
+368 R The Irencrag @Adam Paquette ${"lang": "en|fr|de|ja|zhs"}
+369 R Syr Ginger, the Meal Ender @Michal Ivan ${"lang": "en|fr|de|ja|zhs"}
+370 R Lady of Laughter @Kai Carpenter ${"lang": "en|fr|de|ja|zhs"}
+371 R Faerie Slumber Party @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+372 R Malevolent Witchkite @Donato Giancola ${"lang": "en|fr|de|ja|zhs"}
+373 R Ogre Chitterlord @Piotr Foksowicz ${"lang": "en|fr|de|ja|zhs"}
+374 R Wildwood Mentor @Piotr Foksowicz ${"lang": "en|fr|de|ja|zhs"}
 
 [promo]
 375 U Stroke of Midnight @Julia Metzger
@@ -399,7 +400,7 @@ ScryfallCode=WOE
 377 U Faerie Dreamthief @Randy Vargas
 378 C Torch the Tower @Uriah Voth
 379 U Tanglespan Lookout @Dmitry Burmak
-380 R Lich-Knights' Conquest @Kristina Carroll
+380 R Lich-Knights' Conquest @Kristina Carroll ${"lang": "en|fr|de"}
 
 [buy a box]
 381 R Expel the Interlopers @Awanqi (Angela Wang)

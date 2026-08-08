@@ -8,6 +8,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 FatPack=8
 FatPackExtraSlots=40 BasicLands
 ScryfallCode=ZEN
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 R Armament Master @Steven Belledin
@@ -239,46 +240,46 @@ ScryfallCode=ZEN
 227 C Turntimber Grove @Rob Alexander
 228 R Valakut, the Molten Pinnacle @Kieran Yanner
 229 R Verdant Catacombs @Vance Kovacs
-230 L Plains @John Avon
-230a L Plains @John Avon
-231 L Plains @Jung Park
-231a L Plains @Jung Park
-232 L Plains @Véronique Meignaud
-232a L Plains @Véronique Meignaud
-233 L Plains @Vincent Proce
-233a L Plains @Vincent Proce
-234 L Island @John Avon
-234a L Island @John Avon
-235 L Island @Jung Park
-235a L Island @Jung Park
-236 L Island @Véronique Meignaud
-236a L Island @Véronique Meignaud
-237 L Island @Vincent Proce
-237a L Island @Vincent Proce
-238 L Swamp @John Avon
-238a L Swamp @John Avon
-239 L Swamp @Jung Park
-239a L Swamp @Jung Park
-240 L Swamp @Véronique Meignaud
-240a L Swamp @Véronique Meignaud
-241 L Swamp @Vincent Proce
-241a L Swamp @Vincent Proce
-242 L Mountain @John Avon
-242a L Mountain @John Avon
-243 L Mountain @Jung Park
-243a L Mountain @Jung Park
-244 L Mountain @Véronique Meignaud
-244a L Mountain @Véronique Meignaud
-245 L Mountain @Vincent Proce
-245a L Mountain @Vincent Proce
-246 L Forest @John Avon
-246a L Forest @John Avon
-247 L Forest @Jung Park
-247a L Forest @Jung Park
-248 L Forest @Véronique Meignaud
-248a L Forest @Véronique Meignaud
-249 L Forest @Vincent Proce
-249a L Forest @Vincent Proce
+230 L Plains @John Avon ${"lang": "en|fr|de|pt"}
+230a L Plains @John Avon ${"lang": "en"}
+231 L Plains @Jung Park ${"lang": "en"}
+231a L Plains @Jung Park ${"lang": "en"}
+232 L Plains @Véronique Meignaud ${"lang": "en"}
+232a L Plains @Véronique Meignaud ${"lang": "en"}
+233 L Plains @Vincent Proce ${"lang": "en"}
+233a L Plains @Vincent Proce ${"lang": "en"}
+234 L Island @John Avon ${"lang": "en"}
+234a L Island @John Avon ${"lang": "en"}
+235 L Island @Jung Park ${"lang": "en"}
+235a L Island @Jung Park ${"lang": "en"}
+236 L Island @Véronique Meignaud ${"lang": "en"}
+236a L Island @Véronique Meignaud ${"lang": "en"}
+237 L Island @Vincent Proce ${"lang": "en"}
+237a L Island @Vincent Proce ${"lang": "en"}
+238 L Swamp @John Avon ${"lang": "en"}
+238a L Swamp @John Avon ${"lang": "en"}
+239 L Swamp @Jung Park ${"lang": "en"}
+239a L Swamp @Jung Park ${"lang": "en"}
+240 L Swamp @Véronique Meignaud ${"lang": "en"}
+240a L Swamp @Véronique Meignaud ${"lang": "en"}
+241 L Swamp @Vincent Proce ${"lang": "en"}
+241a L Swamp @Vincent Proce ${"lang": "en"}
+242 L Mountain @John Avon ${"lang": "en"}
+242a L Mountain @John Avon ${"lang": "en"}
+243 L Mountain @Jung Park ${"lang": "en"}
+243a L Mountain @Jung Park ${"lang": "en"}
+244 L Mountain @Véronique Meignaud ${"lang": "en"}
+244a L Mountain @Véronique Meignaud ${"lang": "en"}
+245 L Mountain @Vincent Proce ${"lang": "en"}
+245a L Mountain @Vincent Proce ${"lang": "en"}
+246 L Forest @John Avon ${"lang": "en"}
+246a L Forest @John Avon ${"lang": "en"}
+247 L Forest @Jung Park ${"lang": "en"}
+247a L Forest @Jung Park ${"lang": "en"}
+248 L Forest @Véronique Meignaud ${"lang": "en"}
+248a L Forest @Véronique Meignaud ${"lang": "en"}
+249 L Forest @Vincent Proce ${"lang": "en"}
+249a L Forest @Vincent Proce ${"lang": "en"}
 
 [tokens]
 1 w_4_4_angel_flying @Adi Granov

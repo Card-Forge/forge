@@ -4,12 +4,13 @@ Date=2025-08-01
 Name=Edge of Eternities Commander
 Type=Commander
 ScryfallCode=EOC
+CardLang=en,es,fr,de,it,ja
 
 [cards]
-1 M Hearthhull, the Worldseed @Daniel Ljunggren
-2 M Inspirit, Flagship Vessel @Titus Lunter
-3 M Kilo, Apogee Mind @Tuan Duong Chu
-4 M Szarel, Genesis Shepherd @Matt Stewart
+1 M Hearthhull, the Worldseed @Daniel Ljunggren ${"lang": "en|fr|de|ja"}
+2 M Inspirit, Flagship Vessel @Titus Lunter ${"lang": "en|fr|de|ja"}
+3 M Kilo, Apogee Mind @Tuan Duong Chu ${"lang": "en|fr|de|ja"}
+4 M Szarel, Genesis Shepherd @Matt Stewart ${"lang": "en|fr|de|ja"}
 5 R Patrolling Peacemaker @Michal Ivan
 6 R Insight Engine @Gaboleps
 7 R Uthros Research Craft @Piotr Dura
@@ -30,26 +31,26 @@ ScryfallCode=EOC
 22 R Glittering Massif @Cristi Balanescu
 23 R Radiant Summit @Marco Gorlei
 24 R Vernal Fen @Titus Lunter
-25 R Patrolling Peacemaker @Michal Ivan
-26 R Insight Engine @Gaboleps
-27 R Uthros Research Craft @Piotr Dura
-28 R Eumidian Wastewaker @Mathias Kollros
-29 R Depthshaker Titan @PINDURSKI
-30 R Evendo Brushrazer @Igor Grechanyi
-31 R Long-Range Sensor @Artur Treffner
-32 R Planetary Annihilation @Cristi Balanescu
-33 R Baloth Prime @Joshua Raphael
-34 R Exploration Broodship @Borja Pindado
-35 R Horizon Explorer @Filip Burburan
-36 R Scouring Swarm @Diana Franco
-37 R Moxite Refinery @Nadia Hurianova
-38 R Solar Array @Sergey Glushakov
-39 R Surge Conductor @Alexandr Leskinen
-40 R Eumidian Hatchery @Valera Lutfullina
-41 R Festering Thicket @Jakob Eirich
-42 R Glittering Massif @Cristi Balanescu
-43 R Radiant Summit @Marco Gorlei
-44 R Vernal Fen @Titus Lunter
+25 R Patrolling Peacemaker @Michal Ivan ${"lang": "en|fr|de|ja"}
+26 R Insight Engine @Gaboleps ${"lang": "en|fr|de|ja"}
+27 R Uthros Research Craft @Piotr Dura ${"lang": "en|fr|de|ja"}
+28 R Eumidian Wastewaker @Mathias Kollros ${"lang": "en|fr|de|ja"}
+29 R Depthshaker Titan @PINDURSKI ${"lang": "en|fr|de|ja"}
+30 R Evendo Brushrazer @Igor Grechanyi ${"lang": "en|fr|de|ja"}
+31 R Long-Range Sensor @Artur Treffner ${"lang": "en|fr|de|ja"}
+32 R Planetary Annihilation @Cristi Balanescu ${"lang": "en|fr|de|ja"}
+33 R Baloth Prime @Joshua Raphael ${"lang": "en|fr|de|ja"}
+34 R Exploration Broodship @Borja Pindado ${"lang": "en|fr|de|ja"}
+35 R Horizon Explorer @Filip Burburan ${"lang": "en|fr|de|ja"}
+36 R Scouring Swarm @Diana Franco ${"lang": "en|fr|de|ja"}
+37 R Moxite Refinery @Nadia Hurianova ${"lang": "en|fr|de|ja"}
+38 R Solar Array @Sergey Glushakov ${"lang": "en|fr|de|ja"}
+39 R Surge Conductor @Alexandr Leskinen ${"lang": "en|fr|de|ja"}
+40 R Eumidian Hatchery @Valera Lutfullina ${"lang": "en|fr|de|ja"}
+41 R Festering Thicket @Jakob Eirich ${"lang": "en|fr|de|ja"}
+42 R Glittering Massif @Cristi Balanescu ${"lang": "en|fr|de|ja"}
+43 R Radiant Summit @Marco Gorlei ${"lang": "en|fr|de|ja"}
+44 R Vernal Fen @Titus Lunter ${"lang": "en|fr|de|ja"}
 45 U Swords to Plowshares @Nadia Hurianova
 46 R Swan Song @Lorenzo Mastroianni
 47 U Tezzeret's Gambit @Bryan Sola

@@ -9,6 +9,7 @@ FatPack=8
 FatPackExtraSlots=40 BasicLands ZEN
 ScryfallCode=WWK
 TokenFallbackCode=ZEN
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 M Admonition Angel @Steve Argyle

@@ -4,6 +4,7 @@ Date=2022-10-14
 Name=Game Night: Free-for-All
 Type=Multiplayer
 ScryfallCode=GN3
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 M Zamriel, Seraph of Steel @Chris Rallis

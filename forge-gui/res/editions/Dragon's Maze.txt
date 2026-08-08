@@ -10,6 +10,7 @@ FatPackExtraSlots=80 BasicLands RTR
 ChaosDraftThemes=RAVNICA
 ScryfallCode=DGM
 TokenFallbackCode=GTC
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 C Boros Mastiff @Kev Walker
@@ -132,21 +133,21 @@ TokenFallbackCode=GTC
 118 U Woodlot Crawler @Greg Staples
 119 R Zhur-Taa Ancient @Adam Paquette
 120 C Zhur-Taa Druid @Mark Winters
-121 U Alive // Well @Nils Hamm
-122 U Armed // Dangerous @David Palumbo
-123 R Beck // Call @Adam Paquette
-124 R Breaking // Entering @Mathias Kollros
-125 R Catch // Release @Kev Walker
-126 U Down // Dirty @Svetlin Velinov
-127 U Far // Away @Greg Staples
-128 R Flesh // Blood @Lucas Graciano
-129 U Give // Take @Steve Prescott
-130 U Profit // Loss @Kev Walker
-131 U Protect // Serve @Ryan Barger
-132 R Ready // Willing @Zoltan Boros
-133 U Toil // Trouble @Nils Hamm
-134 U Turn // Burn @Ryan Barger
-135 U Wear // Tear @Ryan Pancoast
+121 U Alive // Well @Nils Hamm ${"lang": "en"}
+122 U Armed // Dangerous @David Palumbo ${"lang": "en"}
+123 R Beck // Call @Adam Paquette ${"lang": "en"}
+124 R Breaking // Entering @Mathias Kollros ${"lang": "en"}
+125 R Catch // Release @Kev Walker ${"lang": "en"}
+126 U Down // Dirty @Svetlin Velinov ${"lang": "en"}
+127 U Far // Away @Greg Staples ${"lang": "en"}
+128 R Flesh // Blood @Lucas Graciano ${"lang": "en"}
+129 U Give // Take @Steve Prescott ${"lang": "en"}
+130 U Profit // Loss @Kev Walker ${"lang": "en"}
+131 U Protect // Serve @Ryan Barger ${"lang": "en"}
+132 R Ready // Willing @Zoltan Boros ${"lang": "en"}
+133 U Toil // Trouble @Nils Hamm ${"lang": "en"}
+134 U Turn // Burn @Ryan Barger ${"lang": "en"}
+135 U Wear // Tear @Ryan Pancoast ${"lang": "en"}
 136 C Azorius Cluestone @Raoul Vitale
 137 C Boros Cluestone @Raoul Vitale
 138 C Dimir Cluestone @Raoul Vitale

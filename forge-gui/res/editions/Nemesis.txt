@@ -11,6 +11,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
+CardLang=en,es,fr,de,it,pt,ja,zht
 
 [cards]
 1 U Angelic Favor @Paolo Parente

@@ -9,6 +9,7 @@ BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,BasicLand,Wildcard,Wildcard
 Booster=6 Common,1 Common-Guest,3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
+CardLang=en,es,fr,de,it,ja
 
 [Common]
 Base=Common:fromSheet("EOE cards"):!BasicLand
@@ -228,7 +229,7 @@ Replace=0.04F BasicLand:fromSheet("EOE borderless")+
 174 C Blooming Stinger @Alexandre Honoré
 175 U Broodguard Elite @Paolo Parente
 176 U Close Encounter @Inkognit
-177† C Diplomatic Relations @Néstor Ossandón Leal
+177† C Diplomatic Relations @Néstor Ossandón Leal ${"lang": "en"}
 178 C Drix Fatemaker @Anna Pavleeva
 179 U Edge Rover @Francisco Badilla
 180 U Eumidian Terrabotanist @Loïc Canavaggia
@@ -330,16 +331,16 @@ Replace=0.04F BasicLand:fromSheet("EOE borderless")+
 276 L Forest @Julian Kok Joon Wen
 
 [borderless]
-277 M Adagia, Windswept Bastion @Piotr Dura
-278 R Breeding Pool @Chris Ostrowski
-279 M Evendo, Waking Haven @Piotr Dura
-280 R Godless Shrine @Chris Ostrowski
-281 M Kavaron, Memorial World @Piotr Dura
-282 R Sacred Foundry @Chris Ostrowski
-283 R Stomping Ground @Chris Ostrowski
-284 M Susur Secundi, Void Altar @Piotr Dura
-285 M Uthros, Titanic Godcore @Piotr Dura
-286 R Watery Grave @Chris Ostrowski
+277 M Adagia, Windswept Bastion @Piotr Dura ${"lang": "en|fr|de|it|ja"}
+278 R Breeding Pool @Chris Ostrowski ${"lang": "en|fr|de|it|ja"}
+279 M Evendo, Waking Haven @Piotr Dura ${"lang": "en|fr|de|it|ja"}
+280 R Godless Shrine @Chris Ostrowski ${"lang": "en|fr|de|it|ja"}
+281 M Kavaron, Memorial World @Piotr Dura ${"lang": "en|fr|de|it|ja"}
+282 R Sacred Foundry @Chris Ostrowski ${"lang": "en|fr|de|it|ja"}
+283 R Stomping Ground @Chris Ostrowski ${"lang": "en|fr|de|it|ja"}
+284 M Susur Secundi, Void Altar @Piotr Dura ${"lang": "en|fr|de|it|ja"}
+285 M Uthros, Titanic Godcore @Piotr Dura ${"lang": "en|fr|de|it|ja"}
+286 R Watery Grave @Chris Ostrowski ${"lang": "en|fr|de|it|ja"}
 287 M Tezzeret, Cruel Captain @Magali Villeneuve
 288 R Astelli Reclaimer @Benjamin Ee
 289 R Haliya, Guided by Light @Eleonor Piteira
@@ -370,95 +371,95 @@ Replace=0.04F BasicLand:fromSheet("EOE borderless")+
 314 R Mutinous Massacre @Jack Hughes
 315 R Space-Time Anomaly @Princess Hidir
 316 R Secluded Starforge @Jaime A. Zuverza
-367 L Plains @Adam Paquette
-368 L Island @Adam Paquette
-369 L Swamp @Adam Paquette
-370 L Mountain @Adam Paquette
-371 L Forest @Adam Paquette
-372 M Adagia, Windswept Bastion @Piotr Dura
-373 R Breeding Pool @Chris Ostrowski
-374 M Evendo, Waking Haven @Piotr Dura
-375 R Godless Shrine @Chris Ostrowski
-376 M Kavaron, Memorial World @Piotr Dura
-377 R Sacred Foundry @Chris Ostrowski
-378 R Stomping Ground @Chris Ostrowski
-379 M Susur Secundi, Void Altar @Piotr Dura
-380 M Uthros, Titanic Godcore @Piotr Dura
-381 R Watery Grave @Chris Ostrowski
+367 L Plains @Adam Paquette ${"lang": "en"}
+368 L Island @Adam Paquette ${"lang": "en"}
+369 L Swamp @Adam Paquette ${"lang": "en"}
+370 L Mountain @Adam Paquette ${"lang": "en"}
+371 L Forest @Adam Paquette ${"lang": "en"}
+372 M Adagia, Windswept Bastion @Piotr Dura ${"lang": "en"}
+373 R Breeding Pool @Chris Ostrowski ${"lang": "en"}
+374 M Evendo, Waking Haven @Piotr Dura ${"lang": "en"}
+375 R Godless Shrine @Chris Ostrowski ${"lang": "en"}
+376 M Kavaron, Memorial World @Piotr Dura ${"lang": "en"}
+377 R Sacred Foundry @Chris Ostrowski ${"lang": "en"}
+378 R Stomping Ground @Chris Ostrowski ${"lang": "en"}
+379 M Susur Secundi, Void Altar @Piotr Dura ${"lang": "en"}
+380 M Uthros, Titanic Godcore @Piotr Dura ${"lang": "en"}
+381 R Watery Grave @Chris Ostrowski ${"lang": "en"}
 
 [extended art]
-317 R Anticausal Vestige @Chase Stone
-318 M Exalted Sunborn @Scott M. Fischer
-319 R Hardlight Containment @Dominik Mayer
-320 R Lightstall Inquisitor @Arif Wijaya
-321 R Lumen-Class Frigate @Zezhou Chen
-322 R Pinnacle Starcage @Leon Tukker
-323 R The Seriema @Sergey Glushakov
-324 R Sunstar Chaplain @Valera Lutfullina
-325 R Consult the Star Charts @Antonio José Manzanedo
-326 R Emissary Escort @Igor Grechanyi
-327 R Moonlit Meditation @Liiga Smilshkalne
-328 R Starfield Vocalist @Nathaniel Himawan
-329 R Synthesizer Labship @Adrián Rodríguez Pérez
-330 M Weftwalking @Rovina Cai
-331 R Chorale of the Void @Alix Branwyn
-332 R Entropic Battlecruiser @Josiah "Jo" Cameron
-333 R Requiem Monolith @Warren Mahy
-334 R Sunset Saboteur @Mirko Failoni
-335 R Zero Point Ballad @David Astruga
-336 R Memorial Vault @Javier Charro
-337 R Pain for All @Dmitry Burmak
-338 R Terminal Velocity @Xabi Gaztelua
-339 R Warmaker Gunship @Julian Kok Joon Wen
-340 R Bioengineered Future @Constantin Marin
-341 M Famished Worldsire @Kev Walker
-342 R Frenzied Baloth @Diana Franco
-343 R Icetill Explorer @Warren Mahy
-344 R Loading Zone @Matt Stewart
-345 M Ouroboroid @Samuel Perin
-346 R Sledge-Class Seedship @Leon Tukker
-347 R Biotech Specialist @Alexandre Honoré
-348 R Infinite Guideline Station @Piotr Dura
-349 R Pinnacle Emissary @Alejandro Pacheco
-350 R Singularity Rupture @Liiga Smilshkalne
-351 M Dawnsire, Sunstar Dreadnought @Jaime Jones
-352 M The Dominion Bracelet @Nathaniel Himawan
-353 M The Endstone @Ryan Pancoast
-354 R The Eternity Elevator @Josu Solano
-355 R Extinguisher Battleship @Danny Schwartz
-356 R Thrumming Hivepool @Rob Rey
+317 R Anticausal Vestige @Chase Stone ${"lang": "en|fr|de|ja"}
+318 M Exalted Sunborn @Scott M. Fischer ${"lang": "en|fr|de|ja"}
+319 R Hardlight Containment @Dominik Mayer ${"lang": "en|fr|de|ja"}
+320 R Lightstall Inquisitor @Arif Wijaya ${"lang": "en|fr|de|ja"}
+321 R Lumen-Class Frigate @Zezhou Chen ${"lang": "en|fr|de|ja"}
+322 R Pinnacle Starcage @Leon Tukker ${"lang": "en|fr|de|ja"}
+323 R The Seriema @Sergey Glushakov ${"lang": "en|fr|de|ja"}
+324 R Sunstar Chaplain @Valera Lutfullina ${"lang": "en|fr|de|ja"}
+325 R Consult the Star Charts @Antonio José Manzanedo ${"lang": "en|fr|de|ja"}
+326 R Emissary Escort @Igor Grechanyi ${"lang": "en|fr|de|ja"}
+327 R Moonlit Meditation @Liiga Smilshkalne ${"lang": "en|fr|de|ja"}
+328 R Starfield Vocalist @Nathaniel Himawan ${"lang": "en|fr|de|ja"}
+329 R Synthesizer Labship @Adrián Rodríguez Pérez ${"lang": "en|fr|de|ja"}
+330 M Weftwalking @Rovina Cai ${"lang": "en|fr|de|ja"}
+331 R Chorale of the Void @Alix Branwyn ${"lang": "en|fr|de|ja"}
+332 R Entropic Battlecruiser @Josiah "Jo" Cameron ${"lang": "en|fr|de|ja"}
+333 R Requiem Monolith @Warren Mahy ${"lang": "en|fr|de|ja"}
+334 R Sunset Saboteur @Mirko Failoni ${"lang": "en|fr|de|ja"}
+335 R Zero Point Ballad @David Astruga ${"lang": "en|fr|de|ja"}
+336 R Memorial Vault @Javier Charro ${"lang": "en|fr|de|ja"}
+337 R Pain for All @Dmitry Burmak ${"lang": "en|fr|de|ja"}
+338 R Terminal Velocity @Xabi Gaztelua ${"lang": "en|fr|de|ja"}
+339 R Warmaker Gunship @Julian Kok Joon Wen ${"lang": "en|fr|de|ja"}
+340 R Bioengineered Future @Constantin Marin ${"lang": "en|fr|de|ja"}
+341 M Famished Worldsire @Kev Walker ${"lang": "en|fr|de|ja"}
+342 R Frenzied Baloth @Diana Franco ${"lang": "en|fr|de|ja"}
+343 R Icetill Explorer @Warren Mahy ${"lang": "en|fr|de|ja"}
+344 R Loading Zone @Matt Stewart ${"lang": "en|fr|de|ja"}
+345 M Ouroboroid @Samuel Perin ${"lang": "en|fr|de|ja"}
+346 R Sledge-Class Seedship @Leon Tukker ${"lang": "en|fr|de|ja"}
+347 R Biotech Specialist @Alexandre Honoré ${"lang": "en|fr|de|ja"}
+348 R Infinite Guideline Station @Piotr Dura ${"lang": "en|fr|de|ja"}
+349 R Pinnacle Emissary @Alejandro Pacheco ${"lang": "en|fr|de|ja"}
+350 R Singularity Rupture @Liiga Smilshkalne ${"lang": "en|fr|de|ja"}
+351 M Dawnsire, Sunstar Dreadnought @Jaime Jones ${"lang": "en|fr|de|ja"}
+352 M The Dominion Bracelet @Nathaniel Himawan ${"lang": "en|fr|de|ja"}
+353 M The Endstone @Ryan Pancoast ${"lang": "en|fr|de|ja"}
+354 R The Eternity Elevator @Josu Solano ${"lang": "en|fr|de|ja"}
+355 R Extinguisher Battleship @Danny Schwartz ${"lang": "en|fr|de|ja"}
+356 R Thrumming Hivepool @Rob Rey ${"lang": "en|fr|de|ja"}
 
 [showcase]
-357 M Anticausal Vestige @Nottsuo
-358 M Exalted Sunborn @Makoron
-359 M Starfield Vocalist @nina
-360 M Sothera, the Supervoid @Mateusz Urbanowicz
-361 M Devastating Onslaught @Naochika Morishita
-362 M Icetill Explorer @Raimaru
-363 M Mutinous Massacre @Aogachou
-364 M The Dominion Bracelet @Mai Minamiura
-365 M The Endstone @Hidetaka Tenjin
-366 M Secluded Starforge @Makoto Yukimura
-382 M Sothera, the Supervoid @Micha Huigen
-383 M Anticausal Vestige @Nottsuo
-384 M Exalted Sunborn @Makoron
-385 M Starfield Vocalist @nina
-386 M Sothera, the Supervoid @Mateusz Urbanowicz
-387 M Devastating Onslaught @Naochika Morishita
-388 M Icetill Explorer @Raimaru
-389 M Mutinous Massacre @Aogachou
-390 M The Dominion Bracelet @Mai Minamiura
-391 M The Endstone @Hidetaka Tenjin
-392 M Secluded Starforge @Makoto Yukimura
+357 M Anticausal Vestige @Nottsuo ${"lang": "en|ja"}
+358 M Exalted Sunborn @Makoron ${"lang": "en|ja"}
+359 M Starfield Vocalist @nina ${"lang": "en|ja"}
+360 M Sothera, the Supervoid @Mateusz Urbanowicz ${"lang": "en|ja"}
+361 M Devastating Onslaught @Naochika Morishita ${"lang": "en|ja"}
+362 M Icetill Explorer @Raimaru ${"lang": "en|ja"}
+363 M Mutinous Massacre @Aogachou ${"lang": "en|ja"}
+364 M The Dominion Bracelet @Mai Minamiura ${"lang": "en|ja"}
+365 M The Endstone @Hidetaka Tenjin ${"lang": "en|ja"}
+366 M Secluded Starforge @Makoto Yukimura ${"lang": "en|ja"}
+382 M Sothera, the Supervoid @Micha Huigen ${"lang": "en"}
+383 M Anticausal Vestige @Nottsuo ${"lang": "en"}
+384 M Exalted Sunborn @Makoron ${"lang": "en"}
+385 M Starfield Vocalist @nina ${"lang": "en"}
+386 M Sothera, the Supervoid @Mateusz Urbanowicz ${"lang": "en"}
+387 M Devastating Onslaught @Naochika Morishita ${"lang": "en"}
+388 M Icetill Explorer @Raimaru ${"lang": "en"}
+389 M Mutinous Massacre @Aogachou ${"lang": "en"}
+390 M The Dominion Bracelet @Mai Minamiura ${"lang": "en"}
+391 M The Endstone @Hidetaka Tenjin ${"lang": "en"}
+392 M Secluded Starforge @Makoto Yukimura ${"lang": "en"}
 
 [promo]
-393 U Starfield Shepherd @Marta Nael
-394 U Annul @Carlos Palma Cruchaga
-395 U Umbral Collar Zealot @Dmitry Burmak
-396 U Kavaron Harrier @Hardy Fowler
-397 U Pull Through the Weft @Andrew Mar
-398 R Singularity Rupture @Néstor Ossandón Leal
-399 R Emissary Escort @Lius Lasahido
+393 U Starfield Shepherd @Marta Nael ${"lang": "en|ja"}
+394 U Annul @Carlos Palma Cruchaga ${"lang": "en|ja"}
+395 U Umbral Collar Zealot @Dmitry Burmak ${"lang": "en|ja"}
+396 U Kavaron Harrier @Hardy Fowler ${"lang": "en|ja"}
+397 U Pull Through the Weft @Andrew Mar ${"lang": "en|ja"}
+398 R Singularity Rupture @Néstor Ossandón Leal ${"lang": "en|ja"}
+399 R Emissary Escort @Lius Lasahido ${"lang": "en|fr|de"}
 
 [special guests]
 1 Warping Wail|SPG

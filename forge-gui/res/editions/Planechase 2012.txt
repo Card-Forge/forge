@@ -4,6 +4,7 @@ Date=2012-06-01
 Name=Planechase 2012
 Type=Multiplayer
 ScryfallCode=PC2
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 U Armored Griffin @Brad Rigney

@@ -4,6 +4,7 @@ Date=2026-01-23
 Name=Lorwyn Eclipsed Commander
 Type=Commander
 ScryfallCode=ECC
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 M Ashling, the Limitless @Kai Carpenter
@@ -30,26 +31,26 @@ ScryfallCode=ECC
 22 R Abundant Countryside @Iris Compiet
 23 R Rain-Slicked Copse @Adam Paquette
 24 R Sodden Verdure @Raymond Bonilla
-25 R Belonging @Danny Schwartz
-26 R Subterfuge @Ilse Gort
-27 R Aberrant Return @Aaron Miller
-28 R Eventide's Shadow @Jabari Weathers
-29 R Grave Venerations @Omar Rayyan
-30 R Lamentation @Lars Grant-West
-31 R Oft-Nabbed Goat @Mariah Tekulve
-32 R Sinister Gnarlbark @Olivier Bernard
-33 R Impulsivity @Alex Konstad
-34 R Village Pillagers @Paolo Parente
-35 R Elemental Spectacle @Aldo Domínguez
-36 R Ferrafor, Young Yew @Jesper Ejsing
-37 R Jubilation @Vincent Christiaens
-38 R Puca's Covenant @Daria Aksenova
-39 R Springleaf Parade @Cory Godbey
-40 R Dread Tiller @Steven Belledin
-41 R Wickersmith's Tools @Paolo Parente
-42 R Abundant Countryside @Iris Compiet
-43 R Rain-Slicked Copse @Adam Paquette
-44 R Sodden Verdure @Raymond Bonilla
+25 R Belonging @Danny Schwartz ${"lang": "en|fr|de|ja"}
+26 R Subterfuge @Ilse Gort ${"lang": "en|fr|de|ja"}
+27 R Aberrant Return @Aaron Miller ${"lang": "en|fr|de|ja"}
+28 R Eventide's Shadow @Jabari Weathers ${"lang": "en|fr|de|ja"}
+29 R Grave Venerations @Omar Rayyan ${"lang": "en|fr|de|ja"}
+30 R Lamentation @Lars Grant-West ${"lang": "en|fr|de|ja"}
+31 R Oft-Nabbed Goat @Mariah Tekulve ${"lang": "en|fr|de|ja"}
+32 R Sinister Gnarlbark @Olivier Bernard ${"lang": "en|fr|de|ja"}
+33 R Impulsivity @Alex Konstad ${"lang": "en|fr|de|ja"}
+34 R Village Pillagers @Paolo Parente ${"lang": "en|fr|de|ja"}
+35 R Elemental Spectacle @Aldo Domínguez ${"lang": "en|fr|de|ja"}
+36 R Ferrafor, Young Yew @Jesper Ejsing ${"lang": "en|fr|de|ja"}
+37 R Jubilation @Vincent Christiaens ${"lang": "en|fr|de|ja"}
+38 R Puca's Covenant @Daria Aksenova ${"lang": "en|fr|de|ja"}
+39 R Springleaf Parade @Cory Godbey ${"lang": "en|fr|de|ja"}
+40 R Dread Tiller @Steven Belledin ${"lang": "en|fr|de|ja"}
+41 R Wickersmith's Tools @Paolo Parente ${"lang": "en|fr|de|ja"}
+42 R Abundant Countryside @Iris Compiet ${"lang": "en|fr|de|ja"}
+43 R Rain-Slicked Copse @Adam Paquette ${"lang": "en|fr|de|ja"}
+44 R Sodden Verdure @Raymond Bonilla ${"lang": "en|fr|de|ja"}
 45 C Distant Melody @Warren Mahy
 46 U Blowfly Infestation @Caio Monteiro
 47 U Hoarder's Greed @Mariah Tekulve
@@ -60,12 +61,12 @@ ScryfallCode=ECC
 52 R Ignoble Hierarch @Victor Adame Minguez
 53 R Faeburrow Elder @Mark Zug
 54 U Fire Covenant @Jeff Miracola
-55 U Arcane Signet @Raymond Bonilla
-56 U Arcane Signet @Alessandra Pisano
-57 U Sol Ring @Daria Aksenova
-58 U Sol Ring @Daria Aksenova
-59 C Command Tower @Ron Spears
-60 C Command Tower @Randy Gallegos
+55 U Arcane Signet @Raymond Bonilla ${"lang": "en"}
+56 U Arcane Signet @Alessandra Pisano ${"lang": "en"}
+57 U Sol Ring @Daria Aksenova ${"lang": "en"}
+58 U Sol Ring @Daria Aksenova ${"lang": "en"}
+59 C Command Tower @Ron Spears ${"lang": "en"}
+60 C Command Tower @Randy Gallegos ${"lang": "en"}
 61 R Festering Thicket @Zoltan Boros
 62 U Secluded Courtyard @Alayna Danner
 63 R Vernal Fen @Adam Paquette

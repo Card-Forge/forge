@@ -4,6 +4,7 @@ Date=2021-11-19
 Name=Innistrad: Crimson Vow Commander
 Type=Commander
 ScryfallCode=VOC
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs,zht
 
 [cards]
 1 M Millicent, Restless Revenant @Denman Rooke
@@ -36,52 +37,52 @@ ScryfallCode=VOC
 28 R Scion of Opulence @Chris Rallis
 29 R Disorder in the Court @Zoltan Boros
 30 R Sinister Waltz @Jason Rainville
-31 R Breathkeeper Seraph @Alexander Mokhov
-32 M Wedding Ring @Olena Richards
-33 R Imperious Mindbreaker @Olivier Bernard
-34 R Doom Weaver @Helge C. Balzer
-35 R Mirage Phalanx @Scott Murphy
-36 R Hollowhenge Overlord @Milivoj Ćeran
-37 R Thundering Mightmare @Lorenzo Mastroianni
-38 M Umbris, Fear Manifest @Daarken
-39 M Millicent, Restless Revenant @Denman Rooke
-40 M Strefan, Maurer Progenitor @Chris Rallis
-41 M Donal, Herald of Wings @Wayne Reynolds
-42 M Timothar, Baron of Bats @Jason A. Engle
-43 R Drogskol Reinforcements @Antonio José Manzanedo
-44 R Haunted Library @Justyna Dura
-45 R Priest of the Blessed Graf @Irina Nordsol
-46 R Rhoda, Geist Avenger @Randy Vargas
-47 R Storm of Souls @Liiga Smilshkalne
-48 R Sudden Salvation @Cristi Balanescu
-49 R Breath of the Sleepless @Robin Olausson
-50 R Ethereal Investigator @Sean Murray
-51 R Haunting Imitation @Liiga Smilshkalne
-52 R Occult Epiphany @Jason Rainville
-53 R Spectral Arcanist @Johan Grenier
-54 R Timin, Youthful Geist @Randy Vargas
-55 R Crossway Troublemakers @Aaron J. Riley
-56 R Glass-Cast Heart @Alayna Danner
-57 R Kamber, the Plunderer @Andrey Kuzinskiy
-58 R Olivia's Wrath @Néstor Ossandón Leal
-59 R Predators' Hour @Tomas Duchek
-60 R Shadowgrange Archfiend @Oleksandr Kozachenko
-61 R Arterial Alchemy @Caio Monteiro
-62 R Imposing Grandeur @Mila Pesic
-63 R Laurine, the Diversion @Andrey Kuzinskiy
-64 R Markov Enforcer @Wisnu Tan
-65 R Midnight Arsonist @Campbell White
-66 R Scion of Opulence @Chris Rallis
-67 R Disorder in the Court @Zoltan Boros
-68 R Sinister Waltz @Jason Rainville
-69 R Breathkeeper Seraph @Alexander Mokhov
-70 M Wedding Ring @Olena Richards
-71 R Imperious Mindbreaker @Olivier Bernard
-72 R Doom Weaver @Helge C. Balzer
-73 R Mirage Phalanx @Scott Murphy
-74 R Hollowhenge Overlord @Milivoj Ćeran
-75 R Thundering Mightmare @Lorenzo Mastroianni
-76 M Umbris, Fear Manifest @Daarken
+31 R Breathkeeper Seraph @Alexander Mokhov ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+32 M Wedding Ring @Olena Richards ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+33 R Imperious Mindbreaker @Olivier Bernard ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+34 R Doom Weaver @Helge C. Balzer ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+35 R Mirage Phalanx @Scott Murphy ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+36 R Hollowhenge Overlord @Milivoj Ćeran ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+37 R Thundering Mightmare @Lorenzo Mastroianni ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+38 M Umbris, Fear Manifest @Daarken ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs"}
+39 M Millicent, Restless Revenant @Denman Rooke ${"lang": "en|fr|de|ja"}
+40 M Strefan, Maurer Progenitor @Chris Rallis ${"lang": "en|fr|de|ja"}
+41 M Donal, Herald of Wings @Wayne Reynolds ${"lang": "en|fr|de|ja"}
+42 M Timothar, Baron of Bats @Jason A. Engle ${"lang": "en|fr|de|ja"}
+43 R Drogskol Reinforcements @Antonio José Manzanedo ${"lang": "en|fr|de|ja"}
+44 R Haunted Library @Justyna Dura ${"lang": "en|fr|de|ja"}
+45 R Priest of the Blessed Graf @Irina Nordsol ${"lang": "en|fr|de|ja"}
+46 R Rhoda, Geist Avenger @Randy Vargas ${"lang": "en|fr|de|ja"}
+47 R Storm of Souls @Liiga Smilshkalne ${"lang": "en|fr|de|ja"}
+48 R Sudden Salvation @Cristi Balanescu ${"lang": "en|fr|de|ja"}
+49 R Breath of the Sleepless @Robin Olausson ${"lang": "en|fr|de|ja"}
+50 R Ethereal Investigator @Sean Murray ${"lang": "en|fr|de|ja"}
+51 R Haunting Imitation @Liiga Smilshkalne ${"lang": "en|fr|de|ja"}
+52 R Occult Epiphany @Jason Rainville ${"lang": "en|fr|de|ja"}
+53 R Spectral Arcanist @Johan Grenier ${"lang": "en|fr|de|ja"}
+54 R Timin, Youthful Geist @Randy Vargas ${"lang": "en|fr|de|ja"}
+55 R Crossway Troublemakers @Aaron J. Riley ${"lang": "en|fr|de|ja"}
+56 R Glass-Cast Heart @Alayna Danner ${"lang": "en|fr|de|ja"}
+57 R Kamber, the Plunderer @Andrey Kuzinskiy ${"lang": "en|fr|de|ja"}
+58 R Olivia's Wrath @Néstor Ossandón Leal ${"lang": "en|fr|de|ja"}
+59 R Predators' Hour @Tomas Duchek ${"lang": "en|fr|de|ja"}
+60 R Shadowgrange Archfiend @Oleksandr Kozachenko ${"lang": "en|fr|de|ja"}
+61 R Arterial Alchemy @Caio Monteiro ${"lang": "en|fr|de|ja"}
+62 R Imposing Grandeur @Mila Pesic ${"lang": "en|fr|de|ja"}
+63 R Laurine, the Diversion @Andrey Kuzinskiy ${"lang": "en|fr|de|ja"}
+64 R Markov Enforcer @Wisnu Tan ${"lang": "en|fr|de|ja"}
+65 R Midnight Arsonist @Campbell White ${"lang": "en|fr|de|ja"}
+66 R Scion of Opulence @Chris Rallis ${"lang": "en|fr|de|ja"}
+67 R Disorder in the Court @Zoltan Boros ${"lang": "en|fr|de|ja"}
+68 R Sinister Waltz @Jason Rainville ${"lang": "en|fr|de|ja"}
+69 R Breathkeeper Seraph @Alexander Mokhov ${"lang": "en|fr|de|ja"}
+70 M Wedding Ring @Olena Richards ${"lang": "en|fr|de|ja"}
+71 R Imperious Mindbreaker @Olivier Bernard ${"lang": "en|fr|de|ja"}
+72 R Doom Weaver @Helge C. Balzer ${"lang": "en|fr|de|ja"}
+73 R Mirage Phalanx @Scott Murphy ${"lang": "en|fr|de|ja"}
+74 R Hollowhenge Overlord @Milivoj Ćeran ${"lang": "en|fr|de|ja"}
+75 R Thundering Mightmare @Lorenzo Mastroianni ${"lang": "en|fr|de|ja"}
+76 M Umbris, Fear Manifest @Daarken ${"lang": "en|fr|de|ja"}
 77 R Angel of Flight Alabaster @Howard Lyon
 78 R Benevolent Offering @Ryan Yee
 79 R Boreas Charger @Christine Choi

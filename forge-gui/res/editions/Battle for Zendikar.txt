@@ -10,6 +10,7 @@ FatPackExtraSlots=80 BasicLands
 AdditionalSheetForFoils=fromSheet("EXP cards")
 AdditionalSetUnlockedInQuest=EXP
 ScryfallCode=BFZ
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 U Bane of Bala Ged @Chase Stone
@@ -261,56 +262,56 @@ ScryfallCode=BFZ
 247 R Smoldering Marsh @Adam Paquette
 248 U Spawning Bed @Jason Felix
 249 R Sunken Hollow @Adam Paquette
-250 L Plains @Noah Bradley
-250a L Plains @Noah Bradley
-251 L Plains @Sam Burley
-251a L Plains @Sam Burley
-252 L Plains @Adam Paquette
-252a L Plains @Adam Paquette
-253 L Plains @Vincent Proce
-253a L Plains @Vincent Proce
-254 L Plains @Tianhua X
-254a L Plains @Tianhua X
-255 L Island @Noah Bradley
-255a L Island @Noah Bradley
-256 L Island @Sam Burley
-256a L Island @Sam Burley
-257 L Island @Adam Paquette
-257a L Island @Adam Paquette
-258 L Island @Vincent Proce
-258a L Island @Vincent Proce
-259 L Island @Tianhua X
-259a L Island @Tianhua X
-260 L Swamp @Noah Bradley
-260a L Swamp @Noah Bradley
-261 L Swamp @Sam Burley
-261a L Swamp @Sam Burley
-262 L Swamp @Adam Paquette
-262a L Swamp @Adam Paquette
-263 L Swamp @Jung Park
-263a L Swamp @Jung Park
-264 L Swamp @Tianhua X
-264a L Swamp @Tianhua X
-265 L Mountain @Noah Bradley
-265a L Mountain @Noah Bradley
-266 L Mountain @Sam Burley
-266a L Mountain @Sam Burley
-267 L Mountain @Véronique Meignaud
-267a L Mountain @Véronique Meignaud
-268 L Mountain @Adam Paquette
-268a L Mountain @Adam Paquette
-269 L Mountain @Tianhua X
-269a L Mountain @Tianhua X
-270 L Forest @Noah Bradley
-270a L Forest @Noah Bradley
-271 L Forest @Sam Burley
-271a L Forest @Sam Burley
-272 L Forest @Adam Paquette
-272a L Forest @Adam Paquette
-273 L Forest @Vincent Proce
-273a L Forest @Vincent Proce
-274 L Forest @Tianhua X
-274a L Forest @Tianhua X
+250 L Plains @Noah Bradley ${"lang": "en|fr|de|zht"}
+250a L Plains @Noah Bradley ${"lang": "en"}
+251 L Plains @Sam Burley ${"lang": "en|de|ja"}
+251a L Plains @Sam Burley ${"lang": "en"}
+252 L Plains @Adam Paquette ${"lang": "en"}
+252a L Plains @Adam Paquette ${"lang": "en"}
+253 L Plains @Vincent Proce ${"lang": "en"}
+253a L Plains @Vincent Proce ${"lang": "en"}
+254 L Plains @Tianhua X ${"lang": "en"}
+254a L Plains @Tianhua X ${"lang": "en"}
+255 L Island @Noah Bradley ${"lang": "en"}
+255a L Island @Noah Bradley ${"lang": "en"}
+256 L Island @Sam Burley ${"lang": "en"}
+256a L Island @Sam Burley ${"lang": "en"}
+257 L Island @Adam Paquette ${"lang": "en"}
+257a L Island @Adam Paquette ${"lang": "en"}
+258 L Island @Vincent Proce ${"lang": "en"}
+258a L Island @Vincent Proce ${"lang": "en"}
+259 L Island @Tianhua X ${"lang": "en"}
+259a L Island @Tianhua X ${"lang": "en"}
+260 L Swamp @Noah Bradley ${"lang": "en"}
+260a L Swamp @Noah Bradley ${"lang": "en"}
+261 L Swamp @Sam Burley ${"lang": "en"}
+261a L Swamp @Sam Burley ${"lang": "en"}
+262 L Swamp @Adam Paquette ${"lang": "en"}
+262a L Swamp @Adam Paquette ${"lang": "en"}
+263 L Swamp @Jung Park ${"lang": "en"}
+263a L Swamp @Jung Park ${"lang": "en"}
+264 L Swamp @Tianhua X ${"lang": "en"}
+264a L Swamp @Tianhua X ${"lang": "en"}
+265 L Mountain @Noah Bradley ${"lang": "en"}
+265a L Mountain @Noah Bradley ${"lang": "en"}
+266 L Mountain @Sam Burley ${"lang": "en"}
+266a L Mountain @Sam Burley ${"lang": "en"}
+267 L Mountain @Véronique Meignaud ${"lang": "en"}
+267a L Mountain @Véronique Meignaud ${"lang": "en"}
+268 L Mountain @Adam Paquette ${"lang": "en"}
+268a L Mountain @Adam Paquette ${"lang": "en"}
+269 L Mountain @Tianhua X ${"lang": "en"}
+269a L Mountain @Tianhua X ${"lang": "en"}
+270 L Forest @Noah Bradley ${"lang": "en"}
+270a L Forest @Noah Bradley ${"lang": "en"}
+271 L Forest @Sam Burley ${"lang": "en"}
+271a L Forest @Sam Burley ${"lang": "en"}
+272 L Forest @Adam Paquette ${"lang": "en"}
+272a L Forest @Adam Paquette ${"lang": "en"}
+273 L Forest @Vincent Proce ${"lang": "en"}
+273a L Forest @Vincent Proce ${"lang": "en"}
+274 L Forest @Tianhua X ${"lang": "en"}
+274a L Forest @Tianhua X ${"lang": "en"}
 
 [tokens]
 1 c_10_10_eldrazi @Jack Wang

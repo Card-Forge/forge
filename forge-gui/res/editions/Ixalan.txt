@@ -8,6 +8,7 @@ Booster=10 Common:fromSheet("XLN cards"), 3 Uncommon:fromSheet("XLN cards"), 1 R
 FatPack=10
 FatPackExtraSlots=80 BasicLands
 ScryfallCode=XLN
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 U Adanto Vanguard @Anna Steinbauer

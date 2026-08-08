@@ -4,6 +4,7 @@ Date=2022-12-02
 Name=Jumpstart 2022
 Type=Draft
 ScryfallCode=J22
+CardLang=en,es,fr,de,it,ja,zhs
 
 [cards]
 1 R Agrus Kos, Eternal Soldier @Victor Adame Minguez
@@ -836,7 +837,7 @@ ScryfallCode=J22
 828 U Urza's Factory @Mark Tedin
 829 C Urza's Mine @Brian Snõddy
 830 C Urza's Power Plant @Brian Snõddy
-831 C Urza's Tower @Brian Snõddy
+831 C Urza's Tower @Brian Snõddy ${"lang": "en|es|de|it|zhs"}
 832 C Warped Landscape @Cliff Childs
 833 C Snow-Covered Island @Piotr Dura
 834 L Wastes @Jason Felix

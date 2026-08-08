@@ -11,6 +11,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 #, 1 Charix; the Raging Isle+|ZNR|3
 ScryfallCode=ZNR
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 U Allied Assault @Josh Hass
@@ -279,9 +280,9 @@ ScryfallCode=ZNR
 264 R Riverglide Pathway @Kieran Yanner
 265 R Throne of Makindi @Igor Kieryluk
 266 L Plains @Sam Burley
-267 L Plains @Adam Paquette
+267 L Plains @Adam Paquette ${"lang": "en|fr|de|it|pt|ja|ko|ru|zhs|zht"}
 268 L Plains @Chris Rahn
-269 L Island @Adam Paquette
+269 L Island @Adam Paquette ${"lang": "en|fr|de|it|pt|ja|ko|ru|zhs|zht"}
 270 L Island @Anna Steinbauer
 271 L Island @Tianhua X
 272 L Swamp @Sam Burley
@@ -290,7 +291,7 @@ ScryfallCode=ZNR
 275 L Mountain @Sam Burley
 276 L Mountain @Adam Paquette
 277 L Mountain @Chase Stone
-278 L Forest @Sam Burley
+278 L Forest @Sam Burley ${"lang": "en|es|fr|de|it|pt|ja|ru|zhs|zht"}
 279 L Forest @Adam Paquette
 280 L Forest @Tianhua X
 
@@ -298,12 +299,12 @@ ScryfallCode=ZNR
 281 M Jace, Mirror Mage @David Rapoza
 282 M Nahiri, Heir of the Ancients @David Rapoza
 283 M Nissa of Shadowed Boughs @David Rapoza
-284 R Branchloft Pathway @Grady Frederick
-285 R Brightclimb Pathway @Donato Giancola
-286 R Clearwater Pathway @Johannes Voss
-287 R Cragcrown Pathway @Sam Burley
-288 R Needleverge Pathway @Noah Bradley
-289 R Riverglide Pathway @Johan Grenier
+284 R Branchloft Pathway @Grady Frederick ${"lang": "en"}
+285 R Brightclimb Pathway @Donato Giancola ${"lang": "en"}
+286 R Clearwater Pathway @Johannes Voss ${"lang": "en"}
+287 R Cragcrown Pathway @Sam Burley ${"lang": "en"}
+288 R Needleverge Pathway @Noah Bradley ${"lang": "en"}
+289 R Riverglide Pathway @Johan Grenier ${"lang": "en"}
 
 [showcase]
 290 U Canyon Jerboa @Dominik Mayer
@@ -321,7 +322,7 @@ ScryfallCode=ZNR
 302 C Spitfire Lagac @Dominik Mayer
 303 R Valakut Exploration @Aenami
 304 C Canopy Baloth @Dominik Mayer
-305 R Kazandu Mammoth @Finnian MacManus
+305 R Kazandu Mammoth @Finnian MacManus ${"lang": "en"}
 306 C Kazandu Nectarpot @Daniel Lieske
 307 R Lotus Cobra @Bastien Grivet
 308 R Scute Swarm @Roman Kuteynikov
@@ -332,90 +333,90 @@ ScryfallCode=ZNR
 313 R Phylath, World Sculptor @Pascal Blanché
 
 [extended art]
-314 M Angel of Destiny @Ryan Pancoast
-315 R Archon of Emeria @Ryan Pancoast
-316 R Archpriest of Iona @Denman Rooke
-317 M Emeria's Call @Matt Stewart
-318 R Legion Angel @PINDURSKI
-319 R Luminarch Aspirant @Mads Ahm
-320 R Maul of the Skyclaves @Joseph Meehan
-321 R Ondu Inversion @James Paick
-322 R Skyclave Apparition @Donato Giancola
-323 R Squad Commander @Ekaterina Burmak
-324 M Tazri, Beacon of Unity @Chris Rahn
-325 R Charix, the Raging Isle @Viktor Titov
-326 R Confounding Conundrum @Bryan Sola
-327 R Coralhelm Chronicler @Lie Setiawan
-328 R Glasspool Mimic @Johan Grenier
-329 R Inscription of Insight @Zoltan Boros
-330 R Maddening Cacophony @Magali Villeneuve
-331 R Master of Winds @Yigit Koroglu
-332 R Nimble Trapfinder @Caio Monteiro
-333 M Sea Gate Restoration @Adam Paquette
-334 M Sea Gate Stormcaller @Anna Steinbauer
-335 R Thieving Skydiver @Kieran Yanner
-336 M Agadeem's Awakening @Dmitry Burmak
-337 R Coveted Prize @Lie Setiawan
-338 M Drana, the Last Bloodchief @Tyler Jacobson
-339 R Hagra Mauling @Victor Adame Minguez
-340 R Inscription of Ruin @Zoltan Boros
-341 R Nighthawk Scavenger @Heonhwa
-342 R Nullpriest of Oblivion @Yongjae Choi
-343 M Scourge of the Skyclaves @Chase Stone
-344 R Shadows' Verdict @Lius Lasahido
-345 R Soul Shatter @Wylie Beckert
-346 R Taborax, Hope's Demise @G-host Lee
-347 R Kargan Intimidator @Kieran Yanner
-348 M Leyline Tyrant @Chase Stone
-349 R Magmatic Channeler @Bryan Sola
-350 R Nahiri's Lithoforming @Campbell White
-351 R Relic Robber @Slawomir Maniak
-352 R Roiling Vortex @Campbell White
-353 R Shatterskull Charger @Lius Lasahido
-354 M Shatterskull Smashing @Adam Paquette
-355 R Valakut Awakening @Campbell White
-356 R Wayward Guide-Beast @Filip Burburan
-357 M Ancient Greenwarden @Grzegorz Rutkowski
-358 M Ashaya, Soul of the Wild @Chase Stone
-359 R Cragplate Baloth @Jesper Ejsing
-360 R Inscription of Abundance @Zoltan Boros
-361 R Oran-Rief Ooze @Daarken
-362 R Swarm Shambler @Nicholas Gregory
-363 R Tajuru Paragon @Cristi Balanescu
-364 M Turntimber Symbiosis @Randy Vargas
-365 R Akiri, Fearless Voyager @Ekaterina Burmak
-366 R Grakmaw, Skyclave Ravager @Filip Burburan
-367 R Kaza, Roil Chaser @Ekaterina Burmak
-368 R Linvala, Shield of Sea Gate @Wayne Reynolds
-369 R Orah, Skyclave Hierophant @Heonhwa
-370 R Verazol, the Split Current @Daarken
-371 R Yasharn, Implacable Earth @G-host Lee
-372 R Zagras, Thief of Heartbeats @Anna Steinbauer
-373 R Zareth San, the Trickster @Zack Stella
-374 M Forsaken Monument @Piotr Dura
-375 M Lithoform Engine @Colin Boyer
-376 R Myriad Construct @Chase Stone
-377 R Skyclave Relic @Daniel Ljunggren
-378 R Crawling Barrens @Jonas De Ro
-379 R Throne of Makindi @Igor Kieryluk
+314 M Angel of Destiny @Ryan Pancoast ${"lang": "en|fr|de|ja"}
+315 R Archon of Emeria @Ryan Pancoast ${"lang": "en|fr|de|ja"}
+316 R Archpriest of Iona @Denman Rooke ${"lang": "en|fr|de|ja"}
+317 M Emeria's Call @Matt Stewart ${"lang": "en"}
+318 R Legion Angel @PINDURSKI ${"lang": "en|fr|de|ja"}
+319 R Luminarch Aspirant @Mads Ahm ${"lang": "en|fr|de|ja"}
+320 R Maul of the Skyclaves @Joseph Meehan ${"lang": "en|fr|de|ja"}
+321 R Ondu Inversion @James Paick ${"lang": "en"}
+322 R Skyclave Apparition @Donato Giancola ${"lang": "en|fr|de|ja"}
+323 R Squad Commander @Ekaterina Burmak ${"lang": "en|fr|de|ja"}
+324 M Tazri, Beacon of Unity @Chris Rahn ${"lang": "en|fr|de|ja"}
+325 R Charix, the Raging Isle @Viktor Titov ${"lang": "en|fr|de|ja"}
+326 R Confounding Conundrum @Bryan Sola ${"lang": "en|fr|de|ja"}
+327 R Coralhelm Chronicler @Lie Setiawan ${"lang": "en|fr|de|ja"}
+328 R Glasspool Mimic @Johan Grenier ${"lang": "en"}
+329 R Inscription of Insight @Zoltan Boros ${"lang": "en|fr|de|ja"}
+330 R Maddening Cacophony @Magali Villeneuve ${"lang": "en|fr|de|ja"}
+331 R Master of Winds @Yigit Koroglu ${"lang": "en|fr|de|ja"}
+332 R Nimble Trapfinder @Caio Monteiro ${"lang": "en|fr|de|ja"}
+333 M Sea Gate Restoration @Adam Paquette ${"lang": "en"}
+334 M Sea Gate Stormcaller @Anna Steinbauer ${"lang": "en|fr|de|ja"}
+335 R Thieving Skydiver @Kieran Yanner ${"lang": "en|fr|de|ja"}
+336 M Agadeem's Awakening @Dmitry Burmak ${"lang": "en"}
+337 R Coveted Prize @Lie Setiawan ${"lang": "en|fr|de|ja"}
+338 M Drana, the Last Bloodchief @Tyler Jacobson ${"lang": "en|fr|de|ja"}
+339 R Hagra Mauling @Victor Adame Minguez ${"lang": "en"}
+340 R Inscription of Ruin @Zoltan Boros ${"lang": "en|fr|de|ja"}
+341 R Nighthawk Scavenger @Heonhwa ${"lang": "en|fr|de|ja"}
+342 R Nullpriest of Oblivion @Yongjae Choi ${"lang": "en|fr|de|ja"}
+343 M Scourge of the Skyclaves @Chase Stone ${"lang": "en|fr|de|ja"}
+344 R Shadows' Verdict @Lius Lasahido ${"lang": "en|fr|de|ja"}
+345 R Soul Shatter @Wylie Beckert ${"lang": "en|fr|de|ja"}
+346 R Taborax, Hope's Demise @G-host Lee ${"lang": "en|fr|de|ja"}
+347 R Kargan Intimidator @Kieran Yanner ${"lang": "en|fr|de|ja"}
+348 M Leyline Tyrant @Chase Stone ${"lang": "en|fr|de|ja"}
+349 R Magmatic Channeler @Bryan Sola ${"lang": "en|fr|de|ja"}
+350 R Nahiri's Lithoforming @Campbell White ${"lang": "en|fr|de|ja"}
+351 R Relic Robber @Slawomir Maniak ${"lang": "en|fr|de|ja"}
+352 R Roiling Vortex @Campbell White ${"lang": "en|fr|de|ja"}
+353 R Shatterskull Charger @Lius Lasahido ${"lang": "en|fr|de|ja"}
+354 M Shatterskull Smashing @Adam Paquette ${"lang": "en"}
+355 R Valakut Awakening @Campbell White ${"lang": "en"}
+356 R Wayward Guide-Beast @Filip Burburan ${"lang": "en|fr|de|ja"}
+357 M Ancient Greenwarden @Grzegorz Rutkowski ${"lang": "en|fr|de|ja"}
+358 M Ashaya, Soul of the Wild @Chase Stone ${"lang": "en|fr|de|ja"}
+359 R Cragplate Baloth @Jesper Ejsing ${"lang": "en|fr|de|ja"}
+360 R Inscription of Abundance @Zoltan Boros ${"lang": "en|fr|de|ja"}
+361 R Oran-Rief Ooze @Daarken ${"lang": "en|fr|de|ja"}
+362 R Swarm Shambler @Nicholas Gregory ${"lang": "en|fr|de|ja"}
+363 R Tajuru Paragon @Cristi Balanescu ${"lang": "en|fr|de|ja"}
+364 M Turntimber Symbiosis @Randy Vargas ${"lang": "en"}
+365 R Akiri, Fearless Voyager @Ekaterina Burmak ${"lang": "en|fr|de|ja"}
+366 R Grakmaw, Skyclave Ravager @Filip Burburan ${"lang": "en|fr|de|ja"}
+367 R Kaza, Roil Chaser @Ekaterina Burmak ${"lang": "en|fr|de|ja"}
+368 R Linvala, Shield of Sea Gate @Wayne Reynolds ${"lang": "en|fr|de|ja"}
+369 R Orah, Skyclave Hierophant @Heonhwa ${"lang": "en|fr|de|ja"}
+370 R Verazol, the Split Current @Daarken ${"lang": "en|fr|de|ja"}
+371 R Yasharn, Implacable Earth @G-host Lee ${"lang": "en|fr|de|ja"}
+372 R Zagras, Thief of Heartbeats @Anna Steinbauer ${"lang": "en|fr|de|ja"}
+373 R Zareth San, the Trickster @Zack Stella ${"lang": "en|fr|de|ja"}
+374 M Forsaken Monument @Piotr Dura ${"lang": "en|fr|de|ja"}
+375 M Lithoform Engine @Colin Boyer ${"lang": "en|fr|de|ja"}
+376 R Myriad Construct @Chase Stone ${"lang": "en|fr|de|ja"}
+377 R Skyclave Relic @Daniel Ljunggren ${"lang": "en|fr|de|ja"}
+378 R Crawling Barrens @Jonas De Ro ${"lang": "en|fr|de|ja"}
+379 R Throne of Makindi @Igor Kieryluk ${"lang": "en|fr|de|ja"}
 
 [precon product]
-380 L Plains @Adam Paquette
+380 L Plains @Adam Paquette ${"lang": "en|fr|de|it|pt|ja|ko|ru|zhs|zht"}
 381 L Island @Tianhua X
 382 L Swamp @Adam Paquette
 383 L Mountain @Sam Burley
 384 L Forest @Adam Paquette
 
 [buy a box]
-385 R Orah, Skyclave Hierophant @Anna Steinbauer
+385 R Orah, Skyclave Hierophant @Anna Steinbauer ${"lang": "en"}
 
 [promo]
-386 R Charix, the Raging Isle @Kekai Kotaki
-387 C Into the Roil @Campbell White
-388 U Bloodchief's Thirst @Jason Rainville
-389 C Roil Eruption @Campbell White
-390 U Roiling Regrowth @Jonas De Ro
-391 U Kargan Warleader @Colin Boyer
+386 R Charix, the Raging Isle @Kekai Kotaki ${"lang": "en"}
+387 C Into the Roil @Campbell White ${"lang": "en"}
+388 U Bloodchief's Thirst @Jason Rainville ${"lang": "en"}
+389 C Roil Eruption @Campbell White ${"lang": "en"}
+390 U Roiling Regrowth @Jonas De Ro ${"lang": "en"}
+391 U Kargan Warleader @Colin Boyer ${"lang": "en"}
 
 [rebalanced]
 A-68 R A-Master of Winds @Yigit Koroglu

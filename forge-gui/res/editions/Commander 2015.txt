@@ -5,6 +5,7 @@ Name=Commander 2015
 Code2=C15
 Type=Commander
 ScryfallCode=C15
+CardLang=en,es,fr,de,it,ja,zhs
 
 [cards]
 1 R Bastion Protector @Victor Adame Minguez

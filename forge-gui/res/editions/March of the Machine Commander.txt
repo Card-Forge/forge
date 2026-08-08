@@ -4,6 +4,7 @@ Date=2023-04-21
 Name=March of the Machine Commander
 Type=Commander
 ScryfallCode=MOC
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 M Bright-Palm, Soul Awakener @Mila Pesic
@@ -85,60 +86,60 @@ ScryfallCode=MOC
 77 R Rowan's Talent @Pauline Voss
 78 R Vivien's Talent @Eli Minaya
 79 M Begin the Invasion @Campbell White
-80 R Elspeth's Talent @Jeremy Wilson
-81 R Firemane Commando @Andrew Mar
-82 R Teferi's Talent @Dominik Mayer
-83 M Infernal Sovereign @Chris Rallis
-84 R Liliana's Talent @A. M. Sartor
-85 R Rowan's Talent @Pauline Voss
-86 R Vivien's Talent @Eli Minaya
-87 M Begin the Invasion @Campbell White
-88 M Bright-Palm, Soul Awakener @Mila Pesic
-89 M Brimaz, Blight of Oreskos @Uriah Voth
-90 M Elenda and Azor @Randy Vargas
-91 M Gimbal, Gremlin Prodigy @Fajareka Setiawan
-92 M Kasla, the Broken Halo @Martina Fačková
-93 M Moira and Teshar @Josh Hass
-94 M Rashmi and Ragavan @Joshua Cairos
-95 M Saint Traft and Rem Karolus @Lucas Graciano
-96 M Shalai and Hallar @Mila Pesic
-97 M Sidar Jabari of Zhalfir @Simon Dominic
-98 R Chivalric Alliance @Jim Pavelec
-99 R Conjurer's Mantle @Fiona Hsieh
-100 R Darksteel Splicer @Steven Belledin
-101 R Excise the Imperfect @Denis Zhbankov
-102 R Filigree Vector @Lorenzo Mastroianni
-103 R Guardian Scalelord @Victor Adame Minguez
-104 R Nesting Dovehawk @Alessandra Pisano
-105 R Path of the Ghosthunter @Eli Minaya
-106 R Vulpine Harvester @Brent Hollowell
-107 R Wand of the Worldsoul @Alessandra Pisano
-108 R Deluxe Dragster @Gabor Szikszai
-109 R Herald of Hoofbeats @Randy Vargas
-110 R Path of the Enigma @Jeremy Wilson
-111 R Schema Thief @Artur Treffner
-112 R Blight Titan @Martin de Diego Sádaba
-113 R Exsanguinator Cavalry @Quintin Gleim
-114 R Locthwain Lancer @Lars Grant-West
-115 R Path of the Schemer @Josu Hernaiz
-116 R Dance with Calamity @Fajareka Setiawan
-117 R Death-Greeter's Champion @Jason Rainville
-118 R Hedron Detonator @Caroline Gariba
-119 R Mirror-Style Master @Chris Rallis
-120 R Pain Distributor @Olivier Bernard
-121 R Path of the Pyromancer @Dominik Mayer
-122 R Uncivil Unrest @Lorenzo Mastroianni
-123 R Conclave Sledge-Captain @Ilse Gort
-124 R Emergent Woodwurm @Mathias Kollros
-125 R Path of the Animist @Liiga Smilshkalne
-126 R Sandsteppe War Riders @Kekai Kotaki
-127 R Cutthroat Negotiator @Lucas Graciano
-128 R Flockchaser Phantom @Lorenzo Mastroianni
-129 R Mistmeadow Vanisher @Iris Compiet
-130 R Vodalian Wave-Knight @Olivier Bernard
-131 R Wildfire Awakener @Andrew Mar
-132 R Bitterthorn, Nissa's Animus @Titus Lunter
-133 R Ichor Elixir @Warren Mahy
+80 R Elspeth's Talent @Jeremy Wilson ${"lang": "en|fr|de|ja|zhs"}
+81 R Firemane Commando @Andrew Mar ${"lang": "en|fr|de|ja|zhs"}
+82 R Teferi's Talent @Dominik Mayer ${"lang": "en|fr|de|ja|zhs"}
+83 M Infernal Sovereign @Chris Rallis ${"lang": "en|fr|de|ja|zhs"}
+84 R Liliana's Talent @A. M. Sartor ${"lang": "en|fr|de|ja|zhs"}
+85 R Rowan's Talent @Pauline Voss ${"lang": "en|fr|de|ja|zhs"}
+86 R Vivien's Talent @Eli Minaya ${"lang": "en|fr|de|ja|zhs"}
+87 M Begin the Invasion @Campbell White ${"lang": "en|fr|de|ja|zhs"}
+88 M Bright-Palm, Soul Awakener @Mila Pesic ${"lang": "en|fr|de|ja|zhs"}
+89 M Brimaz, Blight of Oreskos @Uriah Voth ${"lang": "en|fr|de|ja|zhs"}
+90 M Elenda and Azor @Randy Vargas ${"lang": "en|fr|de|ja|zhs"}
+91 M Gimbal, Gremlin Prodigy @Fajareka Setiawan ${"lang": "en|fr|de|ja|zhs"}
+92 M Kasla, the Broken Halo @Martina Fačková ${"lang": "en|fr|de|ja|zhs"}
+93 M Moira and Teshar @Josh Hass ${"lang": "en|fr|de|ja|zhs"}
+94 M Rashmi and Ragavan @Joshua Cairos ${"lang": "en|fr|de|ja|zhs"}
+95 M Saint Traft and Rem Karolus @Lucas Graciano ${"lang": "en|fr|de|ja|zhs"}
+96 M Shalai and Hallar @Mila Pesic ${"lang": "en|fr|de|ja|zhs"}
+97 M Sidar Jabari of Zhalfir @Simon Dominic ${"lang": "en|fr|de|ja|zhs"}
+98 R Chivalric Alliance @Jim Pavelec ${"lang": "en|fr|de|ja|zhs"}
+99 R Conjurer's Mantle @Fiona Hsieh ${"lang": "en|fr|de|ja|zhs"}
+100 R Darksteel Splicer @Steven Belledin ${"lang": "en|fr|de|ja|zhs"}
+101 R Excise the Imperfect @Denis Zhbankov ${"lang": "en|fr|de|ja|zhs"}
+102 R Filigree Vector @Lorenzo Mastroianni ${"lang": "en|fr|de|ja|zhs"}
+103 R Guardian Scalelord @Victor Adame Minguez ${"lang": "en|fr|de|ja|zhs"}
+104 R Nesting Dovehawk @Alessandra Pisano ${"lang": "en|fr|de|ja|zhs"}
+105 R Path of the Ghosthunter @Eli Minaya ${"lang": "en|fr|de|ja|zhs"}
+106 R Vulpine Harvester @Brent Hollowell ${"lang": "en|fr|de|ja|zhs"}
+107 R Wand of the Worldsoul @Alessandra Pisano ${"lang": "en|fr|de|ja|zhs"}
+108 R Deluxe Dragster @Gabor Szikszai ${"lang": "en|fr|de|ja|zhs"}
+109 R Herald of Hoofbeats @Randy Vargas ${"lang": "en|fr|de|ja|zhs"}
+110 R Path of the Enigma @Jeremy Wilson ${"lang": "en|fr|de|ja|zhs"}
+111 R Schema Thief @Artur Treffner ${"lang": "en|fr|de|ja|zhs"}
+112 R Blight Titan @Martin de Diego Sádaba ${"lang": "en|fr|de|ja|zhs"}
+113 R Exsanguinator Cavalry @Quintin Gleim ${"lang": "en|fr|de|ja|zhs"}
+114 R Locthwain Lancer @Lars Grant-West ${"lang": "en|fr|de|ja|zhs"}
+115 R Path of the Schemer @Josu Hernaiz ${"lang": "en|fr|de|ja|zhs"}
+116 R Dance with Calamity @Fajareka Setiawan ${"lang": "en|fr|de|ja|zhs"}
+117 R Death-Greeter's Champion @Jason Rainville ${"lang": "en|fr|de|ja|zhs"}
+118 R Hedron Detonator @Caroline Gariba ${"lang": "en|fr|de|ja|zhs"}
+119 R Mirror-Style Master @Chris Rallis ${"lang": "en|fr|de|ja|zhs"}
+120 R Pain Distributor @Olivier Bernard ${"lang": "en|fr|de|ja|zhs"}
+121 R Path of the Pyromancer @Dominik Mayer ${"lang": "en|fr|de|ja|zhs"}
+122 R Uncivil Unrest @Lorenzo Mastroianni ${"lang": "en|fr|de|ja|zhs"}
+123 R Conclave Sledge-Captain @Ilse Gort ${"lang": "en|fr|de|ja|zhs"}
+124 R Emergent Woodwurm @Mathias Kollros ${"lang": "en|fr|de|ja|zhs"}
+125 R Path of the Animist @Liiga Smilshkalne ${"lang": "en|fr|de|ja|zhs"}
+126 R Sandsteppe War Riders @Kekai Kotaki ${"lang": "en|fr|de|ja|zhs"}
+127 R Cutthroat Negotiator @Lucas Graciano ${"lang": "en|fr|de|ja|zhs"}
+128 R Flockchaser Phantom @Lorenzo Mastroianni ${"lang": "en|fr|de|ja|zhs"}
+129 R Mistmeadow Vanisher @Iris Compiet ${"lang": "en|fr|de|ja|zhs"}
+130 R Vodalian Wave-Knight @Olivier Bernard ${"lang": "en|fr|de|ja|zhs"}
+131 R Wildfire Awakener @Andrew Mar ${"lang": "en|fr|de|ja|zhs"}
+132 R Bitterthorn, Nissa's Animus @Titus Lunter ${"lang": "en|fr|de|ja|zhs"}
+133 R Ichor Elixir @Warren Mahy ${"lang": "en|fr|de|ja|zhs"}
 134 M Bright-Palm, Soul Awakener @Mila Pesic
 135 M Brimaz, Blight of Oreskos @Uriah Voth
 136 M Gimbal, Gremlin Prodigy @Fajareka Setiawan
@@ -298,7 +299,7 @@ ScryfallCode=MOC
 290 R Aid from the Cowl @Viktor Titov
 291 U Armorcraft Judge @David Palumbo
 292 U Brawn @Matt Cavotta
-293 R Champion of Lambholt @Christopher Moeller
+293 R Champion of Lambholt @Christopher Moeller ${"lang": "en"}
 294 C Crack Open @Yeong-Hao Han
 295 C Cultivate @Anthony Palumbo
 296 C Fertilid @Wayne Reynolds
@@ -333,7 +334,7 @@ ScryfallCode=MOC
 325 U Enduring Scalelord @Clint Cearley
 326 U Good-Fortune Unicorn @Kee Lo
 327 U Hamza, Guardian of Arashin @Wisnu Tan
-328 R Heaven // Earth @Jonas De Ro
+328 R Heaven // Earth @Jonas De Ro ${"lang": "en"}
 329 U Improbable Alliance @Zoltan Boros
 330 U Juniper Order Ranger @Greg Hildebrandt
 331 U Knight of the Last Breath @Milivoj Ćeran
@@ -344,11 +345,11 @@ ScryfallCode=MOC
 336 U Migratory Route @Winona Nelson
 337 U Mortify @Anthony Palumbo
 338 U Saheeli, Sublime Artificer @Wesley Burt
-339 U Struggle // Survive @Eric Deschamps
+339 U Struggle // Survive @Eric Deschamps ${"lang": "en"}
 340 R Time Wipe @Svetlin Velinov
 341 R Utter End @Mark Winters
 342 M Vona, Butcher of Magan @Volkan Baǵa
-343 U Wear // Tear @Ryan Pancoast
+343 U Wear // Tear @Ryan Pancoast ${"lang": "en"}
 344 R Whirlwind of Thought @Bram Sels
 345 U Wintermoor Commander @Tyler Jacobson
 346 R Academy Manufactor @Campbell White

@@ -9,6 +9,7 @@ FatPack=6
 FatPackExtraSlots=40 BasicLands LRW
 ScryfallCode=MOR
 TokenFallbackCode=LRW
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 C Ballyrush Banneret @Ralph Horsley

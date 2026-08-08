@@ -11,6 +11,7 @@ FatPack=10
 FatPackExtraSlots=80 BasicLands KLD
 AdditionalSetUnlockedInQuest=MPS_KLD
 ScryfallCode=AER
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 U Aerial Modification @Jung Park

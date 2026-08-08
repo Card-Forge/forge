@@ -5,6 +5,7 @@ Date=2013-09-06
 Name=Duel Decks: Heroes vs. Monsters
 Type=Duel_Deck
 ScryfallCode=DDL
+CardLang=en,ja
 
 [cards]
 1 M Sun Titan @Karl Kopinski

@@ -4,6 +4,7 @@ Date=2024-11-15
 Name=Foundations Jumpstart
 Type=Draft
 ScryfallCode=J25
+CardLang=en,es,fr,de,it,ja
 
 [cards]
 1 U Dawnwing Marshal @Aldo Domínguez
@@ -77,8 +78,8 @@ ScryfallCode=J25
 69 R Taborax, Hope's Demise @Takeuchi Moto
 70 R Vilis, Broker of Blood @Takeuchi Moto
 71 R Vito, Thorn of the Dusk Rose @Susumu Kuroi
-72 U Brothers Yamazaki @Dai-XT
-73 U Brothers Yamazaki @Dai-XT
+72 U Brothers Yamazaki @Dai-XT ${"lang": "en"}
+73 U Brothers Yamazaki @Dai-XT ${"lang": "en"}
 74 R Lathliss, Dragon Queen @M.Matsumoto
 75 R Rionya, Fire Dancer @Taranboman
 76 R Zada, Hedron Grinder @Takotto
@@ -294,7 +295,7 @@ ScryfallCode=J25
 286 U Augur of Bolas @Alex Konstad
 287 C Aven Reedstalker @Scott Murphy
 288 U Azure Drake @Janine Johnston
-289 C Blink of an Eye @Igor Kieryluk
+289 C Blink of an Eye @Igor Kieryluk ${"lang": "en|fr|de|it|ja"}
 290 C Breaching Hippocamp @Christopher Burdett
 291 U Brineborn Cutthroat @Caio Monteiro
 292 C Bury in Books @Zoltan Boros
@@ -329,7 +330,7 @@ ScryfallCode=J25
 321 C Locked in the Cemetery @Tran Nguyen
 322 R Lord of the Unreal @Jason Chan
 323 C Majestic Metamorphosis @Ben Hill
-324 C Malcator's Watcher @Jason A. Engle
+324 C Malcator's Watcher @Jason A. Engle ${"lang": "en|fr|de|it|ja"}
 325 C Malfunction @Izzy
 326 C Merfolk Pupil @Caroline Gariba
 327 C Moon-Circuit Hacker @Tia Masic
@@ -538,7 +539,7 @@ ScryfallCode=J25
 531 M Combat Celebrant @Chris Rallis
 532 U Coordinated Assault @John Severin Brassell
 533 C Crimson Wisps @Jim Nelson
-534 C Cyclops Electromancer @Jason Felix
+534 C Cyclops Electromancer @Jason Felix ${"lang": "en|es|de|it|ja"}
 535 C Daybreak Combatants @Joshua Raphael
 536 C Dragon Hatchling @David Palumbo
 537 U Dragon Whelp @Jokubas Uogintas
@@ -600,7 +601,7 @@ ScryfallCode=J25
 593 M Sarkhan, Fireblood @Grzegorz Rutkowski
 594 C Sarkhan's Rage @Chris Rahn
 595 C Satyr Hoplite @Mark Zug
-596 C Scavenged Blade @Antonio José Manzanedo
+596 C Scavenged Blade @Antonio José Manzanedo ${"lang": "en|fr|de|it|ja"}
 597 R Scion of Opulence @Chris Rallis
 598 C Shock @Jon Foster
 599 U Soul Sear @Mathias Kollros
@@ -611,7 +612,7 @@ ScryfallCode=J25
 604 U Trial of Zeal @Svetlin Velinov
 605 U Trueheart Twins @Matt Stewart
 606 U Twinferno @Justyna Dura
-607 U Uncaged Fury @Jason Kang
+607 U Uncaged Fury @Jason Kang ${"lang": "en|fr|de|it|ja"}
 608 U Unleash Fury @Izzy
 609 C Unstoppable Ogre @Xavier Ribeiro
 610 C Vampiric Fury @Matt Stewart
@@ -659,7 +660,7 @@ ScryfallCode=J25
 652 C Druid of the Anima @Jim Murray
 653 C Duskshell Crawler @Yeong-Hao Han
 654 U Dwynen's Elite @Lius Lasahido
-655 R Elvish Archdruid @Karl Kopinski
+655 R Elvish Archdruid @Karl Kopinski ${"lang": "en|es|fr|it|ja"}
 656 C Fierce Witchstalker @Nicholas Gregory
 657 C For the Family @Kieran Yanner
 658 U Fungal Plots @Even Amundsen

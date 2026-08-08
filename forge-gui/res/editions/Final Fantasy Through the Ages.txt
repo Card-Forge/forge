@@ -4,6 +4,7 @@ Date=2025-06-13
 Name=Final Fantasy: Through the Ages
 Type=Collector_Edition
 ScryfallCode=FCA
+CardLang=en,ja
 
 [cards]
 1 R Adeline, Resplendent Cathar @Yoshitaka Amano ${"flavorName": "Hero of Light"}

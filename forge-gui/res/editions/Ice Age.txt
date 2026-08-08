@@ -8,6 +8,7 @@ BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
 ScryfallCode=ICE
+CardLang=en,es,fr,de,it,pt
 
 [cards]
 1 C Adarkar Unicorn @Quinton Hoover
@@ -317,7 +318,7 @@ ScryfallCode=ICE
 305 U Wings of Aesthir @Edward P. Beard, Jr.
 306 U Adarkar Sentinel @Melissa A. Benson
 307 R Aegis of the Meek @Allen Williams
-308 R Amulet of Quoz @Dan Frazier
+308 R Amulet of Quoz @Dan Frazier ${"lang": "en|es|fr|de|it"}
 309 U Arcum's Sleigh @Tom Wänerstrand
 310 U Arcum's Weathervane @Tom Wänerstrand
 311 U Arcum's Whistle @Quinton Hoover

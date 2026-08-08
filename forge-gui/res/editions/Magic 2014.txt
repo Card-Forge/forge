@@ -9,6 +9,7 @@ FatPack=9
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=CORE_SET
 ScryfallCode=M14
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 M Ajani, Caller of the Pride @D. Alexander Gregory

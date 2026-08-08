@@ -4,6 +4,7 @@ Date=2020-04-17
 Name=Commander 2020
 Type=Commander
 ScryfallCode=C20
+CardLang=en,es,fr,de,it,pt,ja,ru
 
 [cards]
 1 M Trynn, Champion of Freedom @Jesper Ejsing
@@ -217,7 +218,7 @@ ScryfallCode=C20
 209 U Despark @Slawomir Maniak
 210 R Djinn Illuminatus @Carl Critchlow
 211 R Duneblast @Ryan Alexander Lee
-212 R Find // Finality @Tomasz Jedruszek
+212 R Find // Finality @Tomasz Jedruszek ${"lang": "en"}
 213 U Garna, the Bloodflame @Winona Nelson
 214 R Gaze of Granite @Nils Hamm
 215 C Grisly Salvage @Dave Kendall

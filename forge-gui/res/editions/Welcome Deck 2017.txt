@@ -4,6 +4,7 @@ Date=2017-04-15
 Name=Welcome Deck 2017
 Type=Starter
 ScryfallCode=W17
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 C Divine Verdict @Kev Walker

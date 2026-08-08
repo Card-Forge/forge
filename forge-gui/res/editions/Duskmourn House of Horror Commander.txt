@@ -4,16 +4,17 @@ Date=2024-09-27
 Name=Duskmourn: House of Horror Commander
 Type=Commander
 ScryfallCode=DSC
+CardLang=en,es,fr,de,it,ja
 
 [cards]
-1 M Aminatou, Veil Piercer @David Palumbo
-2 M Kianne, Corrupted Memory @Mila Pesic
-3 M The Lord of Pain @Greg Staples
-4 M The Master of Keys @Wisnu Tan
-5 M Rendmaw, Creaking Nest @Ryan Pancoast
-6 M Valgavoth, Harrower of Souls @Chris Cold
-7 M Winter, Cynical Opportunist @Andrey Kuzinskiy
-8 M Zimone, Mystery Unraveler @Mila Pesic
+1 M Aminatou, Veil Piercer @David Palumbo ${"lang": "en|fr|de|ja"}
+2 M Kianne, Corrupted Memory @Mila Pesic ${"lang": "en|fr|de|ja"}
+3 M The Lord of Pain @Greg Staples ${"lang": "en|fr|de|ja"}
+4 M The Master of Keys @Wisnu Tan ${"lang": "en|fr|de|ja"}
+5 M Rendmaw, Creaking Nest @Ryan Pancoast ${"lang": "en|fr|de|ja"}
+6 M Valgavoth, Harrower of Souls @Chris Cold ${"lang": "en|fr|de|ja"}
+7 M Winter, Cynical Opportunist @Andrey Kuzinskiy ${"lang": "en|fr|de|ja"}
+8 M Zimone, Mystery Unraveler @Mila Pesic ${"lang": "en|fr|de|ja"}
 9 R Redress Fate @Julie Dillon
 10 R Secret Arcade // Dusty Parlor @Arthur Yuan
 11 R Soaring Lightbringer @Michele Giorgi
@@ -46,33 +47,33 @@ ScryfallCode=DSC
 38 R Phenomenon Investigators @Viko Menezes
 39 R Giggling Skitterspike @Nino Is
 40 R Séance Board @Robin Olausson
-41 R Redress Fate @Julie Dillon
-42 R Soaring Lightbringer @Michele Giorgi
-43 R Fear of Sleep Paralysis @Joshua Raphael
-44 R Glitch Interpreter @Miguel Mercado
-45 R They Came from the Pipes @Andreas Zafiratos
-46 R Zimone's Hypothesis @Crystal Fae
-47 R Ancient Cellarspawn @Alexandre Honoré
-48 R Deluge of Doom @Nereida
-49 R Demonic Covenant @L.A. Draws
-50 R Into the Pit @Greg Staples
-51 R Metamorphosis Fanatic @Andreas Zafiratos
-52 R Persistent Constrictor @Steve Ellis
-53 R Sadistic Shell Game @Karl Kopinski
-54 R Suspended Sentence @L.A. Draws
-55 R Barbflare Gremlin @Matt Stewart
-56 R Gleeful Arsonist @Nereida
-57 R Star Athlete @Andrey Kuzinskiy
-58 R Curator Beastie @Nils Hamm
-59 R Demolisher Spawn @Nino Is
-60 R Disorienting Choice @Mirko Failoni
-61 R Formless Genesis @Mark Poole
-62 R Shriekwood Devourer @David Astruga
-63 R Ursine Monstrosity @Carlos Palma Cruchaga
-64 R Convert to Slime @L.A. Draws
-65 R Phenomenon Investigators @Viko Menezes
-66 R Giggling Skitterspike @Nino Is
-67 R Séance Board @Robin Olausson
+41 R Redress Fate @Julie Dillon ${"lang": "en|fr|de|ja"}
+42 R Soaring Lightbringer @Michele Giorgi ${"lang": "en|fr|de|ja"}
+43 R Fear of Sleep Paralysis @Joshua Raphael ${"lang": "en|fr|de|ja"}
+44 R Glitch Interpreter @Miguel Mercado ${"lang": "en|fr|de|ja"}
+45 R They Came from the Pipes @Andreas Zafiratos ${"lang": "en|fr|de|ja"}
+46 R Zimone's Hypothesis @Crystal Fae ${"lang": "en|fr|de|ja"}
+47 R Ancient Cellarspawn @Alexandre Honoré ${"lang": "en|fr|de|ja"}
+48 R Deluge of Doom @Nereida ${"lang": "en|fr|de|ja"}
+49 R Demonic Covenant @L.A. Draws ${"lang": "en|fr|de|ja"}
+50 R Into the Pit @Greg Staples ${"lang": "en|fr|de|ja"}
+51 R Metamorphosis Fanatic @Andreas Zafiratos ${"lang": "en|fr|de|ja"}
+52 R Persistent Constrictor @Steve Ellis ${"lang": "en|fr|de|ja"}
+53 R Sadistic Shell Game @Karl Kopinski ${"lang": "en|fr|de|ja"}
+54 R Suspended Sentence @L.A. Draws ${"lang": "en|fr|de|ja"}
+55 R Barbflare Gremlin @Matt Stewart ${"lang": "en|fr|de|ja"}
+56 R Gleeful Arsonist @Nereida ${"lang": "en|fr|de|ja"}
+57 R Star Athlete @Andrey Kuzinskiy ${"lang": "en|fr|de|ja"}
+58 R Curator Beastie @Nils Hamm ${"lang": "en|fr|de|ja"}
+59 R Demolisher Spawn @Nino Is ${"lang": "en|fr|de|ja"}
+60 R Disorienting Choice @Mirko Failoni ${"lang": "en|fr|de|ja"}
+61 R Formless Genesis @Mark Poole ${"lang": "en|fr|de|ja"}
+62 R Shriekwood Devourer @David Astruga ${"lang": "en|fr|de|ja"}
+63 R Ursine Monstrosity @Carlos Palma Cruchaga ${"lang": "en|fr|de|ja"}
+64 R Convert to Slime @L.A. Draws ${"lang": "en|fr|de|ja"}
+65 R Phenomenon Investigators @Viko Menezes ${"lang": "en|fr|de|ja"}
+66 R Giggling Skitterspike @Nino Is ${"lang": "en|fr|de|ja"}
+67 R Séance Board @Robin Olausson ${"lang": "en|fr|de|ja"}
 68 R Mesa Enchantress @Eelis Kyttanen
 69 U Moon-Blessed Cleric @Mark Poole
 70 R Terminus @Jarel Threat
@@ -373,12 +374,12 @@ ScryfallCode=DSC
 365 C Your Nightmares Are Delicious @Lars Grant-West
 366 C Your Own Face Mocks You @Dominik Mayer
 367 C Your Plans Mean Nothing @Fernando Falcone
-368 M Crypt Ghast @Tim Jacobus
-369 M Damn @Tim Jacobus
-370 M Exhume @Tim Jacobus
-371 M Archon of Cruelty @James Bousema
-372 M Goryo's Vengeance @Martin Ansin
-373 M Living Death @Josh Newton
+368 M Crypt Ghast @Tim Jacobus ${"lang": "en"}
+369 M Damn @Tim Jacobus ${"lang": "en"}
+370 M Exhume @Tim Jacobus ${"lang": "en"}
+371 M Archon of Cruelty @James Bousema ${"lang": "en"}
+372 M Goryo's Vengeance @Martin Ansin ${"lang": "en"}
+373 M Living Death @Josh Newton ${"lang": "en"}
 
 [tokens]
 1 c_x_x_shapeshifter_changeling_deathtouch @Carlos Palma Cruchaga

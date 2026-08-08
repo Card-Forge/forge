@@ -4,6 +4,7 @@ Date=2021-04-23
 Name=Commander 2021
 Type=Commander
 ScryfallCode=C21
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs,zht
 
 [cards]
 1 M Breena, the Demagogue @Simon Dominic
@@ -224,7 +225,7 @@ ScryfallCode=C21
 216 M Epic Experiment @Dan Murayama Scott
 217 R Gaze of Granite @Nils Hamm
 218 R Gluttonous Troll @Joe Slucher
-219 U Incubation // Incongruity @Mike Bierek
+219 U Incubation // Incongruity @Mike Bierek ${"lang": "en"}
 220 R Jor Kadeen, the Prevailer @Austin Hsu
 221 M Kaseto, Orochi Archmage @Aaron Miller
 222 U Leyline Prowler @YW Tang
@@ -333,86 +334,86 @@ ScryfallCode=C21
 325 R Temple of Silence @Adam Paquette
 326 U Temple of the False God @James Zapata
 327 R Temple of Triumph @Piotr Dura
-328 M Breena, the Demagogue @Simon Dominic
-329 M Felisa, Fang of Silverquill @Sara Winters
-330 M Veyran, Voice of Duality @Mathias Kollros
-331 M Zaffai, Thunder Conductor @Dmitry Burmak
-332 M Gyome, Master Chef @Steve Prescott
-333 M Willowdusk, Essence Seer @Jesper Ejsing
-334 M Alibou, Ancient Witness @Matt Stewart
-335 M Osgir, the Reconstructor @Victor Adame Minguez
-336 M Adrix and Nev, Twincasters @Andrew Mar
-337 M Esix, Fractal Bloom @Chase Stone
-338 R Angel of the Ruins @Viko Menezes
-339 R Archaeomancer's Map @Ovidio Cartagena
-340 R Bronze Guardian @Grzegorz Rutkowski
-341 R Combat Calligrapher @Joseph Weston
-342 R Digsite Engineer @Zoltan Boros
-343 R Excavation Technique @Francisco Miyara
-344 R Guardian Archon @Scott M. Fischer
-345 R Losheel, Clockwork Scholar @Daniel Zrom
-346 R Monologue Tax @Justine Cruz
-347 R Nils, Discipline Enforcer @Magali Villeneuve
-348 R Promise of Loyalty @Sara Winters
-349 R Scholarship Sponsor @Tomas Duchek
-350 R Commander's Insight @Mike Jordana
-351 R Curiosity Crafter @Rudy Siswanto
-352 R Dazzling Sphinx @Oriana Menendez
-353 R Deekah, Fractal Theorist @Donato Giancola
-354 R Inspiring Refrain @Izzy
-355 R Muse Vortex @Kieran Yanner
-356 R Octavia, Living Thesis @Simon Dominic
-357 R Perplexing Test @Fariba Khamseh
-358 R Replication Technique @Viko Menezes
-359 R Sly Instigator @Justine Cruz
-360 R Spawning Kraken @Kev Walker
-361 R Theoretical Duplication @Anna Christenson
-362 R Author of Shadows @Alex Brock
-363 R Blight Mound @Oriana Menendez
-364 R Bold Plagiarist @Miguel Mercado
-365 R Cunning Rhetoric @Chris Rallis
-366 R Essence Pulse @Kieran Yanner
-367 R Fain, the Broker @Lius Lasahido
-368 R Incarnation Technique @Alexander Mokhov
-369 R Keen Duelist @Lindsey Look
-370 R Marshland Bloodcaster @Jodie Muir
-371 R Stinging Study @Kieran Yanner
-372 R Tivash, Gloom Summoner @Kieran Yanner
-373 R Veinwitch Coven @Caio Monteiro
-374 R Audacious Reshapers @Justyna Dura
-375 R Battlemage's Bracers @David Gaillet
-376 R Creative Technique @Gaboleps
-377 R Cursed Mirror @David Gaillet
-378 R Fiery Encore @Justyna Dura
-379 R Inferno Project @Olivier Bernard
-380 R Laelia, the Blade Reforged @Wisnu Tan
-381 R Radiant Performer @Alessandra Pisano
-382 R Rionya, Fire Dancer @Heonhwa
-383 R Rousing Refrain @Izzy
-384 R Ruin Grinder @Hector Ortiz
-385 R Surge to Victory @Grzegorz Rutkowski
-386 R Blossoming Bogbeast @Aaron Miller
-387 R Ezzaroot Channeler @Kieran Yanner
-388 R Fractal Harness @Yeong-Hao Han
-389 R Guardian Augmenter @Uros Sljivic
-390 R Healing Technique @Michele Parisi
-391 R Paradox Zone @Ryan Yee
-392 R Pest Infestation @Brian Valeza
-393 R Ruxa, Patient Professor @Ilse Gort
-394 R Sequence Engine @Aaron Miller
-395 R Sproutback Trudge @Filip Burburan
-396 R Trudge Garden @Adam Paquette
-397 R Yedora, Grave Gardener @Svetlin Velinov
-398 R Inkshield @Jarel Threat
-399 R Oversimplify @Liiga Smilshkalne
-400 R Reinterpret @Olena Richards
-401 R Revival Experiment @Jeremy Wilson
-402 R Wake the Past @Yeong-Hao Han
-403 R Elementalist's Palette @Alessandra Pisano
-404 R Geometric Nexus @Jonas De Ro
-405 R Tempting Contract @Tomas Duchek
-406 R Triplicate Titan @Andrew Mar
-407 R Witch's Clinic @Piotr Dura
+328 M Breena, the Demagogue @Simon Dominic ${"lang": "en|es|fr|de|it|ja"}
+329 M Felisa, Fang of Silverquill @Sara Winters ${"lang": "en|es|fr|de|it|ja"}
+330 M Veyran, Voice of Duality @Mathias Kollros ${"lang": "en|es|fr|de|it|ja"}
+331 M Zaffai, Thunder Conductor @Dmitry Burmak ${"lang": "en|es|fr|de|it|ja"}
+332 M Gyome, Master Chef @Steve Prescott ${"lang": "en|es|fr|de|it|ja"}
+333 M Willowdusk, Essence Seer @Jesper Ejsing ${"lang": "en|es|fr|de|it|ja"}
+334 M Alibou, Ancient Witness @Matt Stewart ${"lang": "en|es|fr|de|it|ja"}
+335 M Osgir, the Reconstructor @Victor Adame Minguez ${"lang": "en|es|fr|de|it|ja"}
+336 M Adrix and Nev, Twincasters @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+337 M Esix, Fractal Bloom @Chase Stone ${"lang": "en|es|fr|de|it|ja"}
+338 R Angel of the Ruins @Viko Menezes ${"lang": "en|es|fr|de|it|ja"}
+339 R Archaeomancer's Map @Ovidio Cartagena ${"lang": "en|es|fr|de|it|ja"}
+340 R Bronze Guardian @Grzegorz Rutkowski ${"lang": "en|es|fr|de|it|ja"}
+341 R Combat Calligrapher @Joseph Weston ${"lang": "en|es|fr|de|it|ja"}
+342 R Digsite Engineer @Zoltan Boros ${"lang": "en|es|fr|de|it|ja"}
+343 R Excavation Technique @Francisco Miyara ${"lang": "en|es|fr|de|it|ja"}
+344 R Guardian Archon @Scott M. Fischer ${"lang": "en|es|fr|de|it|ja"}
+345 R Losheel, Clockwork Scholar @Daniel Zrom ${"lang": "en|es|fr|de|it|ja"}
+346 R Monologue Tax @Justine Cruz ${"lang": "en|es|fr|de|it|ja"}
+347 R Nils, Discipline Enforcer @Magali Villeneuve ${"lang": "en|es|fr|de|it|ja"}
+348 R Promise of Loyalty @Sara Winters ${"lang": "en|es|fr|de|it|ja"}
+349 R Scholarship Sponsor @Tomas Duchek ${"lang": "en|es|fr|de|it|ja"}
+350 R Commander's Insight @Mike Jordana ${"lang": "en|es|fr|de|it|ja"}
+351 R Curiosity Crafter @Rudy Siswanto ${"lang": "en|es|fr|de|it|ja"}
+352 R Dazzling Sphinx @Oriana Menendez ${"lang": "en|es|fr|de|it|ja"}
+353 R Deekah, Fractal Theorist @Donato Giancola ${"lang": "en|es|fr|de|it|ja"}
+354 R Inspiring Refrain @Izzy ${"lang": "en|es|fr|de|it|ja"}
+355 R Muse Vortex @Kieran Yanner ${"lang": "en|es|fr|de|it|ja"}
+356 R Octavia, Living Thesis @Simon Dominic ${"lang": "en|es|fr|de|it|ja"}
+357 R Perplexing Test @Fariba Khamseh ${"lang": "en|es|fr|de|it|ja"}
+358 R Replication Technique @Viko Menezes ${"lang": "en|es|fr|de|it|ja"}
+359 R Sly Instigator @Justine Cruz ${"lang": "en|es|fr|de|it|ja"}
+360 R Spawning Kraken @Kev Walker ${"lang": "en|es|fr|de|it|ja"}
+361 R Theoretical Duplication @Anna Christenson ${"lang": "en|es|fr|de|it|ja"}
+362 R Author of Shadows @Alex Brock ${"lang": "en|es|fr|de|it|ja"}
+363 R Blight Mound @Oriana Menendez ${"lang": "en|es|fr|de|it|ja"}
+364 R Bold Plagiarist @Miguel Mercado ${"lang": "en|es|fr|de|it|ja"}
+365 R Cunning Rhetoric @Chris Rallis ${"lang": "en|es|fr|de|it|ja"}
+366 R Essence Pulse @Kieran Yanner ${"lang": "en|es|fr|de|it|ja"}
+367 R Fain, the Broker @Lius Lasahido ${"lang": "en|es|fr|de|it|ja"}
+368 R Incarnation Technique @Alexander Mokhov ${"lang": "en|es|fr|de|it|ja"}
+369 R Keen Duelist @Lindsey Look ${"lang": "en|es|fr|de|it|ja"}
+370 R Marshland Bloodcaster @Jodie Muir ${"lang": "en|es|fr|de|it|ja"}
+371 R Stinging Study @Kieran Yanner ${"lang": "en|es|fr|de|it|ja"}
+372 R Tivash, Gloom Summoner @Kieran Yanner ${"lang": "en|es|fr|de|it|ja"}
+373 R Veinwitch Coven @Caio Monteiro ${"lang": "en|es|fr|de|it|ja"}
+374 R Audacious Reshapers @Justyna Dura ${"lang": "en|es|fr|de|it|ja"}
+375 R Battlemage's Bracers @David Gaillet ${"lang": "en|es|fr|de|it|ja"}
+376 R Creative Technique @Gaboleps ${"lang": "en|es|fr|de|it|ja"}
+377 R Cursed Mirror @David Gaillet ${"lang": "en|es|fr|de|it|ja"}
+378 R Fiery Encore @Justyna Dura ${"lang": "en|es|fr|de|it|ja"}
+379 R Inferno Project @Olivier Bernard ${"lang": "en|es|fr|de|it|ja"}
+380 R Laelia, the Blade Reforged @Wisnu Tan ${"lang": "en|es|fr|de|it|ja"}
+381 R Radiant Performer @Alessandra Pisano ${"lang": "en|es|fr|de|it|ja"}
+382 R Rionya, Fire Dancer @Heonhwa ${"lang": "en|es|fr|de|it|ja"}
+383 R Rousing Refrain @Izzy ${"lang": "en|es|fr|de|it|ja"}
+384 R Ruin Grinder @Hector Ortiz ${"lang": "en|es|fr|de|it|ja"}
+385 R Surge to Victory @Grzegorz Rutkowski ${"lang": "en|es|fr|de|it|ja"}
+386 R Blossoming Bogbeast @Aaron Miller ${"lang": "en|es|fr|de|it|ja"}
+387 R Ezzaroot Channeler @Kieran Yanner ${"lang": "en|es|fr|de|it|ja"}
+388 R Fractal Harness @Yeong-Hao Han ${"lang": "en|es|fr|de|it|ja"}
+389 R Guardian Augmenter @Uros Sljivic ${"lang": "en|es|fr|de|it|ja"}
+390 R Healing Technique @Michele Parisi ${"lang": "en|es|fr|de|it|ja"}
+391 R Paradox Zone @Ryan Yee ${"lang": "en|es|fr|de|it|ja"}
+392 R Pest Infestation @Brian Valeza ${"lang": "en|es|fr|de|it|ja"}
+393 R Ruxa, Patient Professor @Ilse Gort ${"lang": "en|es|fr|de|it|ja"}
+394 R Sequence Engine @Aaron Miller ${"lang": "en|es|fr|de|it|ja"}
+395 R Sproutback Trudge @Filip Burburan ${"lang": "en|es|fr|de|it|ja"}
+396 R Trudge Garden @Adam Paquette ${"lang": "en|es|fr|de|it|ja"}
+397 R Yedora, Grave Gardener @Svetlin Velinov ${"lang": "en|es|fr|de|it|ja"}
+398 R Inkshield @Jarel Threat ${"lang": "en|es|fr|de|it|ja"}
+399 R Oversimplify @Liiga Smilshkalne ${"lang": "en|es|fr|de|it|ja"}
+400 R Reinterpret @Olena Richards ${"lang": "en|es|fr|de|it|ja"}
+401 R Revival Experiment @Jeremy Wilson ${"lang": "en|es|fr|de|it|ja"}
+402 R Wake the Past @Yeong-Hao Han ${"lang": "en|es|fr|de|it|ja"}
+403 R Elementalist's Palette @Alessandra Pisano ${"lang": "en|es|fr|de|it|ja"}
+404 R Geometric Nexus @Jonas De Ro ${"lang": "en|es|fr|de|it|ja"}
+405 R Tempting Contract @Tomas Duchek ${"lang": "en|es|fr|de|it|ja"}
+406 R Triplicate Titan @Andrew Mar ${"lang": "en|es|fr|de|it|ja"}
+407 R Witch's Clinic @Piotr Dura ${"lang": "en|es|fr|de|it|ja"}
 408 C Tranquil Thicket @Heather Hudson
 409 R Yavimaya Coast @Anthony S. Waters
 

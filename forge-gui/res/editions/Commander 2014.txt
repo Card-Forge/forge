@@ -4,6 +4,7 @@ Date=2014-11-07
 Name=Commander 2014
 Type=Commander
 ScryfallCode=C14
+CardLang=en,es,fr,de,it,ja,zhs
 
 [cards]
 1 R Angel of the Dire Hour @Jack Wang

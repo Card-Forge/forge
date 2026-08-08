@@ -4,6 +4,7 @@ Date=2024-02-09
 Name=Murders at Karlov Manor Commander
 Type=Commander
 ScryfallCode=MKC
+CardLang=en,fr,de,it,ja
 
 [cards]
 1 M Kaust, Eyes of the Glade @Volkan Baǵa
@@ -54,10 +55,10 @@ ScryfallCode=MKC
 46 R Ransom Note @Gaboleps
 47 R Ransom Note @Gaboleps
 48 R Ransom Note @Gaboleps
-49 M Kaust, Eyes of the Glade @Volkan Baǵa
-50 M Mirko, Obsessive Theorist @Heonhwa
-51 M Morska, Undersea Sleuth @Ekaterina Burmak
-52 M Nelly Borca, Impulsive Accuser @James Ryman
+49 M Kaust, Eyes of the Glade @Volkan Baǵa ${"lang": "en"}
+50 M Mirko, Obsessive Theorist @Heonhwa ${"lang": "en"}
+51 M Morska, Undersea Sleuth @Ekaterina Burmak ${"lang": "en"}
+52 M Nelly Borca, Impulsive Accuser @James Ryman ${"lang": "en"}
 53 R Ugin's Mastery @David Astruga
 54 R Aerial Extortionist @Deruchenko Alexander
 55 R Angel of the Ruins @Viko Menezes
@@ -98,13 +99,13 @@ ScryfallCode=MKC
 90 U Wall of Omens @James Paick
 91 R Welcoming Vampire @Lorenzo Mastroianni
 92 R Windborn Muse @Adam Rex
-93 R Winds of Rath @Drew Tucker
+93 R Winds of Rath @Drew Tucker ${"lang": "en|de|it|ja"}
 94 R Alandra, Sky Dreamer @Caroline Gariba
 95 R Amphin Mutineer @Nicholas Gregory
 96 C Brainstorm @Willian Murai
 97 R Confirm Suspicions @David Gaillet
-98 C Consider @Zezhou Chen
-99 C Curate @Ryan Valle
+98 C Consider @Zezhou Chen ${"lang": "en|fr|it|ja"}
+99 C Curate @Ryan Valle ${"lang": "en|fr|it|ja"}
 100 C Deep Analysis @Daren Bader
 101 M Dream Eater @Daarken
 102 U Enhanced Surveillance @Grzegorz Rutkowski
@@ -121,7 +122,7 @@ ScryfallCode=MKC
 113 U Nightveil Sprite @Uriah Voth
 114 U Ongoing Investigation @Bud Cook
 115 C Otherworldly Gaze @Chris Cold
-116 R Phyrexian Metamorph @Jana Schirmer & Johannes Voss
+116 R Phyrexian Metamorph @Jana Schirmer & Johannes Voss ${"lang": "en|fr|it|ja"}
 117 R Shimmer Dragon @Lie Setiawan
 118 M Sphinx of the Second Sun @Antonio José Manzanedo
 119 R Teferi's Ageless Insight @Kieran Yanner
@@ -160,7 +161,7 @@ ScryfallCode=MKC
 152 R Etali, Primal Storm @Raymond Swanland
 153 M Fiendish Duo @Lucas Graciano
 154 R Frontier Warmonger @Livia Prima
-155 R Imperial Hellkite @Matt Cavotta
+155 R Imperial Hellkite @Matt Cavotta ${"lang": "en|fr|de|it"}
 156 R Jeska's Will @Izzy
 157 R Kazuul, Tyrant of the Cliffs @Paul Bonner
 158 M Neheb, the Eternal @Chris Rahn
@@ -178,7 +179,7 @@ ScryfallCode=MKC
 170 U Graf Mole @Lars Grant-West
 171 M Hooded Hydra @Chase Stone
 172 R Hornet Queen @Martina Pilcerova
-173 R Jolrael, Mwonvuli Recluse @Izzy
+173 R Jolrael, Mwonvuli Recluse @Izzy ${"lang": "en|fr|de|it"}
 174 R Killer Service @Simon Dominic
 175 R Krosan Cloudscraper @Ron Spears
 176 R Krosan Colossus @Kev Walker
@@ -217,8 +218,8 @@ ScryfallCode=MKC
 209 R Disorder in the Court @Zoltan Boros
 210 M Esix, Fractal Bloom @Chase Stone
 211 M Gisela, Blade of Goldnight @Jason Chan
-212 R Hydroid Krasis @Jason Felix
-213 M Koma, Cosmos Serpent @Jesper Ejsing
+212 R Hydroid Krasis @Jason Felix ${"lang": "en|fr|de|ja"}
+213 M Koma, Cosmos Serpent @Jesper Ejsing ${"lang": "en|fr|de|ja"}
 214 M Lazav, the Multifarious @Yongjae Choi
 215 R Lonis, Cryptozoologist @Andrew Mar
 216 R Master of Death @John Stanko
@@ -259,7 +260,7 @@ ScryfallCode=MKC
 251 U Boros Garrison @John Avon
 252 R Canopy Vista @Adam Paquette
 253 R Castle Ardenvale @Volkan Baǵa
-254 R Choked Estuary @Vincent Proce
+254 R Choked Estuary @Vincent Proce ${"lang": "en|fr|de|it"}
 255 R Cinder Glade @Adam Paquette
 256 C Command Tower @Ryan Yee
 257 R Darkwater Catacombs @Monte Michael Moore
@@ -292,7 +293,7 @@ ScryfallCode=MKC
 284 U Rogue's Passage @Christine Choi
 285 C Sacred Peaks @Kamila Szutenberg
 286 R Scattered Groves @Christine Choi
-287 R Scavenger Grounds @Steven Belledin
+287 R Scavenger Grounds @Steven Belledin ${"lang": "en|fr|de|ja"}
 288 U Seaside Citadel @Volkan Baǵa
 289 C Secluded Steppe @Heather Hudson
 290 U Selesnya Sanctuary @John Avon
@@ -313,57 +314,57 @@ ScryfallCode=MKC
 305 U Temple of the False God @James Zapata
 306 R Temple of Triumph @Piotr Dura
 307 R Throne of the High City @Titus Lunter
-308 C Tocasia's Dig Site @Nadia Hurianova
-309 C Tranquil Thicket @Heather Hudson
-310 R War Room @Milivoj Ćeran
+308 C Tocasia's Dig Site @Nadia Hurianova ${"lang": "en|fr|de|ja"}
+309 C Tranquil Thicket @Heather Hudson ${"lang": "en|fr|it|ja"}
+310 R War Room @Milivoj Ćeran ${"lang": "en|fr|de|ja"}
 311 U Zoetic Cavern @Lars Grant-West
-312 M Duskana, the Rage Mother @Samuel Perin
-313 M Feather, Radiant Arbiter @Dan Dos Santos
-314 M Kaust, Eyes of the Glade @Volkan Baǵa
-315 M Marvo, Deep Operative @John Tedrick
-316 M Mirko, Obsessive Theorist @Heonhwa
-317 M Morska, Undersea Sleuth @Ekaterina Burmak
-318 M Nelly Borca, Impulsive Accuser @James Ryman
-319 M Sophia, Dogged Detective @Campbell White
-320 R Armed with Proof @Serena Malyon
-321 R Immortal Obligation @Nino Vecia
-322 R Merchant of Truth @Carissa Susilo
-323 R Otherworldly Escort @Artur Treffner
-324 R Redemption Arc @Dominik Mayer
-325 R Serene Sleuth @Fay Dalton
-326 R Trouble in Pairs @Fay Dalton
-327 R True Identity @Chris Seaman
-328 R Unexplained Absence @Rockey Chen
-329 R Veiled Ascension @Domenico Cava
-330 R Copy Catchers @Edgar Sánchez Hidalgo
-331 R Detective of the Month @Stella Spente
-332 R Final-Word Phantom @Anthony Devine
-333 R Follow the Bodies @Alfven Ato
-334 R Tangletrove Kelp @Erikas Perl
-335 R Watcher of Hours @Daniel Romanovsky
-336 R Charnel Serenade @Alex Stone
-337 R Eye of Duskmantle @Anthony Devine
-338 R Foreboding Steamboat @Josu Solano
-339 R Unshakable Tail @Sean Murray
-340 R Boltbender @Lars Grant-West
-341 R Havoc Eater @David Szabo
-342 R Hot Pursuit @Michele Giorgi
-343 R Mob Verdict @Domenico Cava
-344 R Prisoner's Dilemma @Serena Malyon
-345 R Showstopping Surprise @David Palumbo
-346 R Tesak, Judith's Hellhound @Anna Podedworna
-347 R Experiment Twelve @Michele Giorgi
-348 R Innocuous Researcher @Simon Dominic
-349 R On the Trail @Erikas Perl
-350 R Printlifter Ooze @David Szabo
-351 R Counterpoint @Brian Valeza
-352 R Knowledge Is Power @Fay Dalton
-353 R Take the Bait @Johan Grenier
-354 R Panoptic Projektor @Alfven Ato
-355 R Ransom Note @Gaboleps
-356 R Ransom Note @Gaboleps
-357 R Ransom Note @Gaboleps
-358 R Ransom Note @Gaboleps
+312 M Duskana, the Rage Mother @Samuel Perin ${"lang": "en|fr|de|ja|zhs"}
+313 M Feather, Radiant Arbiter @Dan Dos Santos ${"lang": "en|fr|de|ja|zhs"}
+314 M Kaust, Eyes of the Glade @Volkan Baǵa ${"lang": "en|fr|de|ja|zhs"}
+315 M Marvo, Deep Operative @John Tedrick ${"lang": "en|fr|de|ja|zhs"}
+316 M Mirko, Obsessive Theorist @Heonhwa ${"lang": "en|fr|de|ja|zhs"}
+317 M Morska, Undersea Sleuth @Ekaterina Burmak ${"lang": "en|fr|de|ja|zhs"}
+318 M Nelly Borca, Impulsive Accuser @James Ryman ${"lang": "en|fr|de|ja|zhs"}
+319 M Sophia, Dogged Detective @Campbell White ${"lang": "en|fr|de|ja|zhs"}
+320 R Armed with Proof @Serena Malyon ${"lang": "en|fr|de|ja|zhs"}
+321 R Immortal Obligation @Nino Vecia ${"lang": "en|fr|de|ja|zhs"}
+322 R Merchant of Truth @Carissa Susilo ${"lang": "en|fr|de|ja|zhs"}
+323 R Otherworldly Escort @Artur Treffner ${"lang": "en|fr|de|ja|zhs"}
+324 R Redemption Arc @Dominik Mayer ${"lang": "en|fr|de|ja|zhs"}
+325 R Serene Sleuth @Fay Dalton ${"lang": "en|fr|de|ja|zhs"}
+326 R Trouble in Pairs @Fay Dalton ${"lang": "en|fr|de|ja|zhs"}
+327 R True Identity @Chris Seaman ${"lang": "en|fr|de|ja|zhs"}
+328 R Unexplained Absence @Rockey Chen ${"lang": "en|fr|de|ja|zhs"}
+329 R Veiled Ascension @Domenico Cava ${"lang": "en|fr|de|ja|zhs"}
+330 R Copy Catchers @Edgar Sánchez Hidalgo ${"lang": "en|fr|de|ja|zhs"}
+331 R Detective of the Month @Stella Spente ${"lang": "en|fr|de|ja|zhs"}
+332 R Final-Word Phantom @Anthony Devine ${"lang": "en|fr|de|ja|zhs"}
+333 R Follow the Bodies @Alfven Ato ${"lang": "en|fr|de|ja|zhs"}
+334 R Tangletrove Kelp @Erikas Perl ${"lang": "en|fr|de|ja|zhs"}
+335 R Watcher of Hours @Daniel Romanovsky ${"lang": "en|fr|de|ja|zhs"}
+336 R Charnel Serenade @Alex Stone ${"lang": "en|fr|de|ja|zhs"}
+337 R Eye of Duskmantle @Anthony Devine ${"lang": "en|fr|de|ja|zhs"}
+338 R Foreboding Steamboat @Josu Solano ${"lang": "en|fr|de|ja|zhs"}
+339 R Unshakable Tail @Sean Murray ${"lang": "en|fr|de|ja|zhs"}
+340 R Boltbender @Lars Grant-West ${"lang": "en|fr|de|ja|zhs"}
+341 R Havoc Eater @David Szabo ${"lang": "en|fr|de|ja|zhs"}
+342 R Hot Pursuit @Michele Giorgi ${"lang": "en|fr|de|ja|zhs"}
+343 R Mob Verdict @Domenico Cava ${"lang": "en|fr|de|ja|zhs"}
+344 R Prisoner's Dilemma @Serena Malyon ${"lang": "en|fr|de|ja|zhs"}
+345 R Showstopping Surprise @David Palumbo ${"lang": "en|fr|de|ja|zhs"}
+346 R Tesak, Judith's Hellhound @Anna Podedworna ${"lang": "en|fr|de|ja|zhs"}
+347 R Experiment Twelve @Michele Giorgi ${"lang": "en|fr|de|ja|zhs"}
+348 R Innocuous Researcher @Simon Dominic ${"lang": "en|fr|de|ja|zhs"}
+349 R On the Trail @Erikas Perl ${"lang": "en|fr|de|ja|zhs"}
+350 R Printlifter Ooze @David Szabo ${"lang": "en|fr|de|ja|zhs"}
+351 R Counterpoint @Brian Valeza ${"lang": "en|fr|de|ja|zhs"}
+352 R Knowledge Is Power @Fay Dalton ${"lang": "en|fr|de|ja|zhs"}
+353 R Take the Bait @Johan Grenier ${"lang": "en|fr|de|ja|zhs"}
+354 R Panoptic Projektor @Alfven Ato ${"lang": "en|fr|de|ja|zhs"}
+355 R Ransom Note @Gaboleps ${"lang": "en|fr|de|ja|zhs"}
+356 R Ransom Note @Gaboleps ${"lang": "en|fr|de|ja|zhs"}
+357 R Ransom Note @Gaboleps ${"lang": "en|fr|de|ja|zhs"}
+358 R Ransom Note @Gaboleps ${"lang": "en|fr|de|ja|zhs"}
 
 [tokens]
 1 c_10_10_eldrazi @Jack Wang

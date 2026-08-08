@@ -10,6 +10,7 @@ FatPackExtraSlots=30 BasicLands
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=RAVNICA
 ScryfallCode=RAV
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 U Auratouched Mage @Jeff Miracola
@@ -300,21 +301,21 @@ ScryfallCode=RAV
 286 R Watery Grave @Rob Alexander
 287 L Plains @Stephan Martiniere
 288 L Plains @Christopher Moeller
-289 L Plains @Anthony S. Waters
+289 L Plains @Anthony S. Waters ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
 290 L Plains @Richard Wright
 291 L Island @Stephan Martiniere
 292 L Island @Christopher Moeller
-293 L Island @Anthony S. Waters
+293 L Island @Anthony S. Waters ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
 294 L Island @Richard Wright
 295 L Swamp @Stephan Martiniere
-296 L Swamp @Christopher Moeller
-297 L Swamp @Anthony S. Waters
-298 L Swamp @Richard Wright
-299 L Mountain @Stephan Martiniere
-300 L Mountain @Christopher Moeller
-301 L Mountain @Anthony S. Waters
-302 L Mountain @Richard Wright
-303 L Forest @Stephan Martiniere
-304 L Forest @Christopher Moeller
-305 L Forest @Anthony S. Waters
-306 L Forest @Richard Wright
+296 L Swamp @Christopher Moeller ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
+297 L Swamp @Anthony S. Waters ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
+298 L Swamp @Richard Wright ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
+299 L Mountain @Stephan Martiniere ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
+300 L Mountain @Christopher Moeller ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
+301 L Mountain @Anthony S. Waters ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
+302 L Mountain @Richard Wright ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
+303 L Forest @Stephan Martiniere ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
+304 L Forest @Christopher Moeller ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
+305 L Forest @Anthony S. Waters ${"lang": "en|es|fr|de|it|pt|ja|zhs"}
+306 L Forest @Richard Wright ${"lang": "en|es|fr|de|it|pt|ja|zhs"}

@@ -8,6 +8,7 @@ Booster=10 Common:fromSheet("MH1 cards"), 3 Uncommon:fromSheet("MH1 cards"), 1 R
 BoosterBox=24
 ChaosDraftThemes=MASTERS_SET;GRAVEYARD_MATTERS
 ScryfallCode=MH1
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 M Morophon, the Boundless @Victor Adame Minguez

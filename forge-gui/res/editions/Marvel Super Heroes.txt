@@ -9,6 +9,7 @@ BoosterSlots=Common,Common-Scene,Common-SourceMaterial,Uncommon,UncommonScene,Ra
 Booster=5 Common, 1 Common-Scene, 1 Common-SourceMaterial, 2 Uncommon, 1 UncommonScene, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
+CardLang=en,es,fr,de,it,ja
 
 [Common]
 Base=Common:fromSheet("MSH cards")
@@ -465,77 +466,77 @@ Replace=.025F fromSheet("MSH city chaos")+
 382 R Gleaming Bastion @David Álvarez
 383 R Hidden Lair @David Álvarez
 384 R Training Compound @David Álvarez
-385 M The Mind Stone @Madeline Boni
-386 M The Mind Stone @Leinil Francis Yu & Sunny Gho
-387 M Captain America, Super-Soldier @Jack Kirby & John Romita Sr.
-388 M Jennifer Walters @John Buscema & Chic Stone
-389 R Nick Fury, Agent of S.H.I.E.L.D. @Marie Severin
-390 M Bruce Banner @Jack Kirby & Paul Reinman
-391 M Namor the Sub-Mariner @John Buscema & Sol Brodsky
-392 M Tony Stark @Johnny Craig
-393 M Black Widow, Super Spy @Emanuela Lupacchino & Neeraj Menon
-394 M Doctor Doom @Larry Lieber & Vince Colletta
-395 R Elektra, Daughter of the Hand @Mike Deodato Jr.
-396 M Shang-Chi, Master of Kung Fu @Jim Cheung & Laura Martin
-397 R The Astonishing Ant-Man @Bob Layton
-398 R Daredevil, Man Without Fear @Jack Kirby
-399 M King T'Challa @Jack Kirby
-400 M Thanos, the Mad Titan @Jen Bartel
-401 M Ultron, Artificial Malevolence @Sal Buscema & Sam Grainger
+385 M The Mind Stone @Madeline Boni ${"lang": "en"}
+386 M The Mind Stone @Leinil Francis Yu & Sunny Gho ${"lang": "en"}
+387 M Captain America, Super-Soldier @Jack Kirby & John Romita Sr. ${"lang": "en"}
+388 M Jennifer Walters @John Buscema & Chic Stone ${"lang": "en"}
+389 R Nick Fury, Agent of S.H.I.E.L.D. @Marie Severin ${"lang": "en"}
+390 M Bruce Banner @Jack Kirby & Paul Reinman ${"lang": "en"}
+391 M Namor the Sub-Mariner @John Buscema & Sol Brodsky ${"lang": "en"}
+392 M Tony Stark @Johnny Craig ${"lang": "en"}
+393 M Black Widow, Super Spy @Emanuela Lupacchino & Neeraj Menon ${"lang": "en"}
+394 M Doctor Doom @Larry Lieber & Vince Colletta ${"lang": "en"}
+395 R Elektra, Daughter of the Hand @Mike Deodato Jr. ${"lang": "en"}
+396 M Shang-Chi, Master of Kung Fu @Jim Cheung & Laura Martin ${"lang": "en"}
+397 R The Astonishing Ant-Man @Bob Layton ${"lang": "en"}
+398 R Daredevil, Man Without Fear @Jack Kirby ${"lang": "en"}
+399 M King T'Challa @Jack Kirby ${"lang": "en"}
+400 M Thanos, the Mad Titan @Jen Bartel ${"lang": "en"}
+401 M Ultron, Artificial Malevolence @Sal Buscema & Sam Grainger ${"lang": "en"}
 
 [extended art]
-402 R Agent Phil Coulson @Marc Aspinall
-403 M Kang the Conqueror @Peter Scanlan
-404 R S.H.I.E.L.D. Flying Car @Paulius Daščioras
-405 R Baron Helmut Zemo @Wero Gallo
-406 R Construct a Cosmic Cube @Eugene Maslovski
-407 R Doom Reigns Supreme @Alexander Gering
-408 M M.O.D.O.K. @Simon Dominic
-409 R Super-Skrull @Zoltan Boros
-410 R Thunderbolts Conspiracy @Lucio Parrillo
-411 R Fin Fang Foom @Filipe Pagliuso
-412 R Quicksilver, Brash Blur @Michael MacRae
-413 M Earth's Mightiest Heroes @Steve Morris
-414 R Heroic Feast @Javier Charro
-415 R Mole Man, Moloid Master @Michele Giorgi
-416 R Absorbing Man @Nathaniel Himawan
-417 R Alien Invasion @Björn Barends
-418 R Ares, God of War @Fesbra
-419 R Cloak and Dagger, Entwined @Rimas Valeikis
-420 R The Mighty Thor, Jane Foster @Victor Adame Minguez
-421 R Moon Girl and Devil Dinosaur @Zezhou Chen
-422 R The Ruinous Wrecking Crew @Kevin Sidharta
-423 R Scientist Supreme of A.I.M. @Gal Or
-424 R The Serpent Society @Rimas Valeikis
-425 R Taskmaster, Mercenary Mimic @Riccardo Federici
-426 R Worlds Within Worlds @Michael MacRae
-427 M Iron Man Armor @Javier Charro
-428 R Super-Adaptoid @John Tyler Christopher
-429 R Castle Doom @Nino Is
-431 R The Scarlet Witch @Julia Vasilyeva
-432 R Daredevil, Man Without Fear @Eric Deschamps
-433 L Plains @Marc Aspinall
-434 L Plains @Sylvia Liu
-435 L Island @Marc Aspinall
-436 L Island @Sylvia Liu
-437 L Swamp @Marc Aspinall
-438 L Swamp @Sylvia Liu
-439 L Mountain @Marc Aspinall
-440 L Mountain @Sylvia Liu
-441 L Forest @Marc Aspinall
-442 L Forest @Sylvia Liu
-443 U Captain Mar-Vell, Space-Born @Gintas Galvanauskas
-444 U Patriot, Shield Wielder @Vlad Petruchik
-445 U Mister Fantastic, Reed Richards @Rimas Valeikis
-446 U Baron Strucker, HYDRA Overlord @InHyuk Lee
-447 U Moonstone, Harsh Mistress @Grace Zhu
-448 U Speed, Young Avenger @Tyler Walpole
-449 U Captain America, Living Legend @Smirtouille
-450 U Kang, Temporal Tyrant @David Szabo
-451 U Madame Hydra @Pauline Voss
-452 U Avengers Tower @Arthur Yuan
-453 U Baxter Building @Paulius Daščioras
-454 U Villainous Hideout @Paulius Daščioras
+402 R Agent Phil Coulson @Marc Aspinall ${"lang": "en|fr|de|ja"}
+403 M Kang the Conqueror @Peter Scanlan ${"lang": "en|fr|de|ja"}
+404 R S.H.I.E.L.D. Flying Car @Paulius Daščioras ${"lang": "en|fr|de|ja"}
+405 R Baron Helmut Zemo @Wero Gallo ${"lang": "en|fr|de|ja"}
+406 R Construct a Cosmic Cube @Eugene Maslovski ${"lang": "en|fr|de|ja"}
+407 R Doom Reigns Supreme @Alexander Gering ${"lang": "en|fr|de|ja"}
+408 M M.O.D.O.K. @Simon Dominic ${"lang": "en|fr|de|ja"}
+409 R Super-Skrull @Zoltan Boros ${"lang": "en|fr|de|ja"}
+410 R Thunderbolts Conspiracy @Lucio Parrillo ${"lang": "en|fr|de|ja"}
+411 R Fin Fang Foom @Filipe Pagliuso ${"lang": "en|fr|de|ja"}
+412 R Quicksilver, Brash Blur @Michael MacRae ${"lang": "en|fr|de|ja"}
+413 M Earth's Mightiest Heroes @Steve Morris ${"lang": "en|fr|de|ja"}
+414 R Heroic Feast @Javier Charro ${"lang": "en|fr|de|ja"}
+415 R Mole Man, Moloid Master @Michele Giorgi ${"lang": "en|fr|de|ja"}
+416 R Absorbing Man @Nathaniel Himawan ${"lang": "en|fr|de|ja"}
+417 R Alien Invasion @Björn Barends ${"lang": "en|fr|de|ja"}
+418 R Ares, God of War @Fesbra ${"lang": "en|fr|de|ja"}
+419 R Cloak and Dagger, Entwined @Rimas Valeikis ${"lang": "en|fr|de|ja"}
+420 R The Mighty Thor, Jane Foster @Victor Adame Minguez ${"lang": "en|fr|de|ja"}
+421 R Moon Girl and Devil Dinosaur @Zezhou Chen ${"lang": "en|fr|de|ja"}
+422 R The Ruinous Wrecking Crew @Kevin Sidharta ${"lang": "en|fr|de|ja"}
+423 R Scientist Supreme of A.I.M. @Gal Or ${"lang": "en|fr|de|ja"}
+424 R The Serpent Society @Rimas Valeikis ${"lang": "en|fr|de|ja"}
+425 R Taskmaster, Mercenary Mimic @Riccardo Federici ${"lang": "en|fr|de|ja"}
+426 R Worlds Within Worlds @Michael MacRae ${"lang": "en|fr|de|ja"}
+427 M Iron Man Armor @Javier Charro ${"lang": "en|fr|de|ja"}
+428 R Super-Adaptoid @John Tyler Christopher ${"lang": "en|fr|de|ja"}
+429 R Castle Doom @Nino Is ${"lang": "en|fr|de|ja"}
+431 R The Scarlet Witch @Julia Vasilyeva ${"lang": "en|fr|de"}
+432 R Daredevil, Man Without Fear @Eric Deschamps ${"lang": "en"}
+433 L Plains @Marc Aspinall ${"lang": "en"}
+434 L Plains @Sylvia Liu ${"lang": "en"}
+435 L Island @Marc Aspinall ${"lang": "en"}
+436 L Island @Sylvia Liu ${"lang": "en"}
+437 L Swamp @Marc Aspinall ${"lang": "en"}
+438 L Swamp @Sylvia Liu ${"lang": "en"}
+439 L Mountain @Marc Aspinall ${"lang": "en"}
+440 L Mountain @Sylvia Liu ${"lang": "en"}
+441 L Forest @Marc Aspinall ${"lang": "en"}
+442 L Forest @Sylvia Liu ${"lang": "en"}
+443 U Captain Mar-Vell, Space-Born @Gintas Galvanauskas ${"lang": "en"}
+444 U Patriot, Shield Wielder @Vlad Petruchik ${"lang": "en"}
+445 U Mister Fantastic, Reed Richards @Rimas Valeikis ${"lang": "en"}
+446 U Baron Strucker, HYDRA Overlord @InHyuk Lee ${"lang": "en"}
+447 U Moonstone, Harsh Mistress @Grace Zhu ${"lang": "en"}
+448 U Speed, Young Avenger @Tyler Walpole ${"lang": "en"}
+449 U Captain America, Living Legend @Smirtouille ${"lang": "en"}
+450 U Kang, Temporal Tyrant @David Szabo ${"lang": "en"}
+451 U Madame Hydra @Pauline Voss ${"lang": "en"}
+452 U Avengers Tower @Arthur Yuan ${"lang": "en"}
+453 U Baxter Building @Paulius Daščioras ${"lang": "en"}
+454 U Villainous Hideout @Paulius Daščioras ${"lang": "en"}
 
 [basic frame]
 1 Plains|MSH|[287]

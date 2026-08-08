@@ -4,6 +4,7 @@ Date=2023-11-17
 Name=The Lost Caverns of Ixalan Commander
 Type=Commander
 ScryfallCode=LCC
+CardLang=en,es,fr,de,it,pt,ja
 
 [cards]
 1 M Admiral Brass, Unsinkable @Jason Rainville
@@ -15,65 +16,65 @@ ScryfallCode=LCC
 7 M Wayta, Trainer Prodigy @Magali Villeneuve
 8 M Xolatoyac, the Smiling Flood @Campbell White
 9 R Illustrious Wanderglyph @Erikas Perl
-10 R Altar of the Wretched @Helge C. Balzer
-11 R Ore-Rich Stalactite @Tomek Larek
+10 R Altar of the Wretched @Helge C. Balzer ${"lang": "en"}
+11 R Ore-Rich Stalactite @Tomek Larek ${"lang": "en"}
 12 R Contest of Claws @Cristi Balanescu
-13 R Tetzin, Gnome Champion @Kekai Kotaki
+13 R Tetzin, Gnome Champion @Kekai Kotaki ${"lang": "en"}
 14 R Xavier Sal, Infested Captain @Bryan Sola
-15 M Eye of Ojer Taq @Erikas Perl
-16 M Paleontologist's Pick-Axe @Ernanda Souza
+15 M Eye of Ojer Taq @Erikas Perl ${"lang": "en"}
+16 M Paleontologist's Pick-Axe @Ernanda Souza ${"lang": "en"}
 17 M Admiral Brass, Unsinkable @Michael Walsh
 18 M Clavileño, First of the Blessed @Chun Lo
 19 M Hakbal of the Surging Soul @Anditya Dita
 20 M Pantlaza, Sun-Favored @Sidharth Chaturvedi
-21 R Illustrious Wanderglyph @Erikas Perl
-22 R Altar of the Wretched @Helge C. Balzer
-23 R Ore-Rich Stalactite @Tomek Larek
-24 R Contest of Claws @Cristi Balanescu
-25 M Admiral Brass, Unsinkable @Jason Rainville
-26 M Carmen, Cruel Skymarcher @Randy Vargas
-27 M Clavileño, First of the Blessed @Matt Stewart
-28 M Don Andres, the Renegade @Daarken
-29 M Hakbal of the Surging Soul @Tyler Walpole
-30 M Pantlaza, Sun-Favored @Sam Burley
-31 R Tetzin, Gnome Champion @Kekai Kotaki
-32 M Wayta, Trainer Prodigy @Magali Villeneuve
-33 R Xavier Sal, Infested Captain @Bryan Sola
-34 M Xolatoyac, the Smiling Flood @Campbell White
-35 M Eye of Ojer Taq @Erikas Perl
-36 M Paleontologist's Pick-Axe @Ernanda Souza
-37 R Bronzebeak Foragers @Brian Valeza
-38 R Charismatic Conqueror @Bram Sels
-39 R Elenda's Hierophant @Miranda Meeks
-40 R From the Rubble @Ryan Valle
-41 R March of the Canonized @Dominik Mayer
-42 R Redemption Choir @Michele Giorgi
-43 R The Indomitable @Samuel Perin
-44 R Mist Dancer @Christina Kraus
-45 R Ripples of Potential @Sam Hogg
-46 R Storm Fleet Negotiator @Nino Vecia
-47 R Wave Goodbye @Sam Hogg
-48 R Dusk Legion Sergeant @Igor Kieryluk
-49 R Francisco, Fowl Marauder @Rudy Siswanto
-50 R The Grim Captain's Locker @Bruce Brenneise
-51 R Master of Dark Rites @Igor Kieryluk
-52 R Promise of Aclazotz @Lixin Yin
-53 R Skeleton Crew @Camille Alquier
-54 R Broadside Bombardiers @Tomek Larek
-55 R Gemcutter Buccaneer @Helge C. Balzer
-56 R Wrathful Raptors @April Prime
-57 R Bygone Marvels @Constantin Marin
-58 R Curious Altisaur @Simon Dominic
-59 R Deeproot Historian @Stella Spente
-60 R Dinosaur Egg @Alessandra Pisano
-61 R Scion of Calamity @Crystal Sully
-62 R Sunfrill Imitator @Brian Valeza
-63 R Topography Tracker @Lindsey Look
-64 R Tributary Instructor @Christina Kraus
-65 R Order of Sacred Dusk @Bartek Fedyczak
-66 R Singer of Swift Rivers @Gabor Szikszai
-67 R Arm-Mounted Anchor @Nino Vecia
-68 R Progenitor's Icon @Stella Spente
+21 R Illustrious Wanderglyph @Erikas Perl ${"lang": "en|fr|de|ja|zhs"}
+22 R Altar of the Wretched @Helge C. Balzer ${"lang": "en"}
+23 R Ore-Rich Stalactite @Tomek Larek ${"lang": "en"}
+24 R Contest of Claws @Cristi Balanescu ${"lang": "en|fr|de|ja|zhs"}
+25 M Admiral Brass, Unsinkable @Jason Rainville ${"lang": "en|fr|de|ja|zhs"}
+26 M Carmen, Cruel Skymarcher @Randy Vargas ${"lang": "en|fr|de|ja|zhs"}
+27 M Clavileño, First of the Blessed @Matt Stewart ${"lang": "en|fr|de|ja|zhs"}
+28 M Don Andres, the Renegade @Daarken ${"lang": "en|fr|de|ja|zhs"}
+29 M Hakbal of the Surging Soul @Tyler Walpole ${"lang": "en|fr|de|ja|zhs"}
+30 M Pantlaza, Sun-Favored @Sam Burley ${"lang": "en|fr|de|ja|zhs"}
+31 R Tetzin, Gnome Champion @Kekai Kotaki ${"lang": "en"}
+32 M Wayta, Trainer Prodigy @Magali Villeneuve ${"lang": "en|fr|de|ja|zhs"}
+33 R Xavier Sal, Infested Captain @Bryan Sola ${"lang": "en|fr|de|ja|zhs"}
+34 M Xolatoyac, the Smiling Flood @Campbell White ${"lang": "en|fr|de|ja|zhs"}
+35 M Eye of Ojer Taq @Erikas Perl ${"lang": "en"}
+36 M Paleontologist's Pick-Axe @Ernanda Souza ${"lang": "en"}
+37 R Bronzebeak Foragers @Brian Valeza ${"lang": "en|fr|de|ja|zhs"}
+38 R Charismatic Conqueror @Bram Sels ${"lang": "en|fr|de|ja|zhs"}
+39 R Elenda's Hierophant @Miranda Meeks ${"lang": "en|fr|de|ja|zhs"}
+40 R From the Rubble @Ryan Valle ${"lang": "en|fr|de|ja|zhs"}
+41 R March of the Canonized @Dominik Mayer ${"lang": "en|fr|de|ja|zhs"}
+42 R Redemption Choir @Michele Giorgi ${"lang": "en|fr|de|ja|zhs"}
+43 R The Indomitable @Samuel Perin ${"lang": "en|fr|de|ja|zhs"}
+44 R Mist Dancer @Christina Kraus ${"lang": "en|fr|de|ja|zhs"}
+45 R Ripples of Potential @Sam Hogg ${"lang": "en|fr|de|ja|zhs"}
+46 R Storm Fleet Negotiator @Nino Vecia ${"lang": "en|fr|de|ja|zhs"}
+47 R Wave Goodbye @Sam Hogg ${"lang": "en|fr|de|ja|zhs"}
+48 R Dusk Legion Sergeant @Igor Kieryluk ${"lang": "en|fr|de|ja|zhs"}
+49 R Francisco, Fowl Marauder @Rudy Siswanto ${"lang": "en|fr|de|ja|zhs"}
+50 R The Grim Captain's Locker @Bruce Brenneise ${"lang": "en|fr|de|ja|zhs"}
+51 R Master of Dark Rites @Igor Kieryluk ${"lang": "en|fr|de|ja|zhs"}
+52 R Promise of Aclazotz @Lixin Yin ${"lang": "en"}
+53 R Skeleton Crew @Camille Alquier ${"lang": "en|fr|de|ja|zhs"}
+54 R Broadside Bombardiers @Tomek Larek ${"lang": "en|fr|de|ja|zhs"}
+55 R Gemcutter Buccaneer @Helge C. Balzer ${"lang": "en|fr|de|ja|zhs"}
+56 R Wrathful Raptors @April Prime ${"lang": "en|fr|de|ja|zhs"}
+57 R Bygone Marvels @Constantin Marin ${"lang": "en|fr|de|ja|zhs"}
+58 R Curious Altisaur @Simon Dominic ${"lang": "en|fr|de|ja|zhs"}
+59 R Deeproot Historian @Stella Spente ${"lang": "en|fr|de|ja|zhs"}
+60 R Dinosaur Egg @Alessandra Pisano ${"lang": "en|fr|de|ja|zhs"}
+61 R Scion of Calamity @Crystal Sully ${"lang": "en|fr|de|ja|zhs"}
+62 R Sunfrill Imitator @Brian Valeza ${"lang": "en|fr|de|ja|zhs"}
+63 R Topography Tracker @Lindsey Look ${"lang": "en|fr|de|ja|zhs"}
+64 R Tributary Instructor @Christina Kraus ${"lang": "en|fr|de|ja|zhs"}
+65 R Order of Sacred Dusk @Bartek Fedyczak ${"lang": "en|fr|de|ja|zhs"}
+66 R Singer of Swift Rivers @Gabor Szikszai ${"lang": "en|fr|de|ja|zhs"}
+67 R Arm-Mounted Anchor @Nino Vecia ${"lang": "en|fr|de|ja|zhs"}
+68 R Progenitor's Icon @Stella Spente ${"lang": "en|fr|de|ja|zhs"}
 69 R Bronzebeak Foragers @Brian Valeza
 70 R Charismatic Conqueror @Bram Sels
 71 R Elenda's Hierophant @Miranda Meeks
@@ -89,7 +90,7 @@ ScryfallCode=LCC
 81 R Francisco, Fowl Marauder @Rudy Siswanto
 82 R The Grim Captain's Locker @Bruce Brenneise
 83 R Master of Dark Rites @Igor Kieryluk
-84 R Promise of Aclazotz @Lixin Yin
+84 R Promise of Aclazotz @Lixin Yin ${"lang": "en"}
 85 R Skeleton Crew @Camille Alquier
 86 R Broadside Bombardiers @Tomek Larek
 87 R Gemcutter Buccaneer @Helge C. Balzer
@@ -126,10 +127,10 @@ ScryfallCode=LCC
 118 U Thought Vessel @Julie Dillon
 119 U Whispersilk Cloak @Julian Kok Joon Wen
 120 U Worn Powerstone @Chris Ostrowski
-121 M Admiral Brass, Unsinkable @Jason Rainville
-122 M Clavileño, First of the Blessed @Matt Stewart
-123 M Hakbal of the Surging Soul @Tyler Walpole
-124 M Pantlaza, Sun-Favored @Sam Burley
+121 M Admiral Brass, Unsinkable @Jason Rainville ${"lang": "en"}
+122 M Clavileño, First of the Blessed @Matt Stewart ${"lang": "en"}
+123 M Hakbal of the Surging Soul @Tyler Walpole ${"lang": "en"}
+124 M Pantlaza, Sun-Favored @Sam Burley ${"lang": "en"}
 125 R Akroma's Will @Antonio José Manzanedo
 126 R Austere Command @Anna Steinbauer
 127 U Bellowing Aegisaur @Craig J Spearing
@@ -152,7 +153,7 @@ ScryfallCode=LCC
 144 C Azure Fleet Admiral @Sidharth Chaturvedi
 145 R Benthic Biomancer @Daarken
 146 R Bident of Thassa @Yeong-Hao Han
-147 R Commit // Memory @Ryan Alexander Lee
+147 R Commit // Memory @Ryan Alexander Lee ${"lang": "en"}
 148 R Coralhelm Commander @Jaime Jones
 149 R Corsair Captain @Victor Adame Minguez
 150 R Curse of the Swine @James Ryman

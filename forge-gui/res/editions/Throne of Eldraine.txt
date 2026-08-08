@@ -10,6 +10,7 @@ FatPack=10
 FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 #, 1 Piper of the Swarm+|ELD|3
 ScryfallCode=ELD
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 R Acclaimed Contender @David Gaillet
@@ -160,7 +161,7 @@ ScryfallCode=ELD
 146 C Thrill of Possibility @Steve Argyle
 147 R Torbran, Thane of Red Fell @Grzegorz Rutkowski
 148 C Weaselback Redcap @Grzegorz Rutkowski
-149 U Beanstalk Giant @Jason A. Engle
+149 U Beanstalk Giant @Jason A. Engle ${"lang": "en|es|fr|de|it|pt|ja|ko|zhs|zht"}
 150 C Curious Pair @Daarken
 151 U Edgewall Innkeeper @Matt Stewart
 152 R Feasting Troll King @Nicholas Gregory
@@ -283,41 +284,41 @@ ScryfallCode=ELD
 269 L Forest @Adam Paquette
 
 [borderless]
-270 M Garruk, Cursed Huntsman @Dmitry Burmak
-271 M Oko, Thief of Crowns @Wesley Burt
-272 M The Royal Scions @Howard Lyon
+270 M Garruk, Cursed Huntsman @Dmitry Burmak ${"lang": "en"}
+271 M Oko, Thief of Crowns @Wesley Burt ${"lang": "en"}
+272 M The Royal Scions @Howard Lyon ${"lang": "en"}
 
 [showcase]
-273 C Ardenvale Tactician @Aaron Miller
-274 C Faerie Guidemother @Chuck Lukacs
-275 R Giant Killer @Shawn Wood
-276 C Lonesome Unicorn @Alayna Danner
-277 M Realm-Cloaked Giant @Alayna Danner
-278 U Shepherd of the Flock @Craig J Spearing
-279 C Silverflame Squire @Josu Hernaiz
-280 U Animating Faerie @Chris Seaman
-281 M Brazen Borrower @Iris Compiet
-282 R Fae of Wishes @Wylie Beckert
-283 U Hypnotic Sprite @Ravenna Tran
-284 C Merfolk Secretkeeper @Allen Williams
-285 C Queen of Ice @Allen Williams
-286 U Foulmire Knight @Rebecca On
-287 R Murderous Rider @Ravenna Tran
-288 U Order of Midnight @Seb McKinnon
-289 C Reaper of Night @Olena Richards
-290 C Smitten Swordmaster @Shawn Wood
-291 R Bonecrusher Giant @John Severin Brassell
-292 U Embereth Shieldbreaker @Jeremy Wilson
-293 C Merchant of the Vale @John Severin Brassell
-294 C Rimrock Knight @Josu Hernaiz
-295 U Beanstalk Giant @Nick Southam
-296 C Curious Pair @Josu Hernaiz
-297 U Flaxen Intruder @Omar Rayyan
-298 C Garenbrig Carver @Craig J Spearing
-299 R Lovestruck Beast @Tyler Walpole
-300 C Rosethorn Acolyte @Wylie Beckert
-301 C Tuinvale Treefolk @James Arnold
-302 U Oakhame Ranger @Omar Rayyan
+273 C Ardenvale Tactician @Aaron Miller ${"lang": "en"}
+274 C Faerie Guidemother @Chuck Lukacs ${"lang": "en"}
+275 R Giant Killer @Shawn Wood ${"lang": "en"}
+276 C Lonesome Unicorn @Alayna Danner ${"lang": "en"}
+277 M Realm-Cloaked Giant @Alayna Danner ${"lang": "en"}
+278 U Shepherd of the Flock @Craig J Spearing ${"lang": "en"}
+279 C Silverflame Squire @Josu Hernaiz ${"lang": "en"}
+280 U Animating Faerie @Chris Seaman ${"lang": "en"}
+281 M Brazen Borrower @Iris Compiet ${"lang": "en"}
+282 R Fae of Wishes @Wylie Beckert ${"lang": "en"}
+283 U Hypnotic Sprite @Ravenna Tran ${"lang": "en"}
+284 C Merfolk Secretkeeper @Allen Williams ${"lang": "en"}
+285 C Queen of Ice @Allen Williams ${"lang": "en"}
+286 U Foulmire Knight @Rebecca On ${"lang": "en"}
+287 R Murderous Rider @Ravenna Tran ${"lang": "en"}
+288 U Order of Midnight @Seb McKinnon ${"lang": "en"}
+289 C Reaper of Night @Olena Richards ${"lang": "en"}
+290 C Smitten Swordmaster @Shawn Wood ${"lang": "en"}
+291 R Bonecrusher Giant @John Severin Brassell ${"lang": "en"}
+292 U Embereth Shieldbreaker @Jeremy Wilson ${"lang": "en"}
+293 C Merchant of the Vale @John Severin Brassell ${"lang": "en"}
+294 C Rimrock Knight @Josu Hernaiz ${"lang": "en"}
+295 U Beanstalk Giant @Nick Southam ${"lang": "en"}
+296 C Curious Pair @Josu Hernaiz ${"lang": "en"}
+297 U Flaxen Intruder @Omar Rayyan ${"lang": "en"}
+298 C Garenbrig Carver @Craig J Spearing ${"lang": "en"}
+299 R Lovestruck Beast @Tyler Walpole ${"lang": "en"}
+300 C Rosethorn Acolyte @Wylie Beckert ${"lang": "en"}
+301 C Tuinvale Treefolk @James Arnold ${"lang": "en"}
+302 U Oakhame Ranger @Omar Rayyan ${"lang": "en"}
 
 [buy a box]
 303 M Kenrith, the Returned King @Kieran Yanner
@@ -333,94 +334,94 @@ ScryfallCode=ELD
 311 U Bramblefort Fink @Uriah Voth
 312 R Oko's Hospitality @Deruchenko Alexander
 313 C Thornwood Falls @Ravenna Tran
-314 R Mace of the Valiant @Aaron Miller
-315 R Silverwing Squadron @Johannes Voss
-316 R Faerie Formation @Ryan Yee
-317 R Shimmer Dragon @Lie Setiawan
-318 R Workshop Elders @Iain McCaig
-319 R Chittering Witch @Winona Nelson
-320 R Taste of Death @Chris Rallis
-321 R Embereth Skyblazer @Daarken
-322 R Steelbane Hydra @Nicholas Gregory
-323 R Thorn Mammoth @Svetlin Velinov
-324 M Alela, Artful Provocateur @Grzegorz Rutkowski
-325 R Banish into Fable @Colin Boyer
-326 M Chulane, Teller of Tales @Victor Adame Minguez
-327 R Gluttonous Troll @Joe Slucher
-328 R Knights' Charge @Paul Scott Canavan
-329 M Korvold, Fae-Cursed King @Wisnu Tan
-330 M Syr Gwyn, Hero of Ashvale @Lie Setiawan
-331 C Arcane Signet @Dan Murayama Scott
-332 R Tome of Legends @Mila Pesic
-333 C Command Tower @Evan Shipard
+314 R Mace of the Valiant @Aaron Miller ${"lang": "en"}
+315 R Silverwing Squadron @Johannes Voss ${"lang": "en"}
+316 R Faerie Formation @Ryan Yee ${"lang": "en"}
+317 R Shimmer Dragon @Lie Setiawan ${"lang": "en"}
+318 R Workshop Elders @Iain McCaig ${"lang": "en"}
+319 R Chittering Witch @Winona Nelson ${"lang": "en"}
+320 R Taste of Death @Chris Rallis ${"lang": "en"}
+321 R Embereth Skyblazer @Daarken ${"lang": "en"}
+322 R Steelbane Hydra @Nicholas Gregory ${"lang": "en"}
+323 R Thorn Mammoth @Svetlin Velinov ${"lang": "en"}
+324 M Alela, Artful Provocateur @Grzegorz Rutkowski ${"lang": "en"}
+325 R Banish into Fable @Colin Boyer ${"lang": "en"}
+326 M Chulane, Teller of Tales @Victor Adame Minguez ${"lang": "en"}
+327 R Gluttonous Troll @Joe Slucher ${"lang": "en"}
+328 R Knights' Charge @Paul Scott Canavan ${"lang": "en"}
+329 M Korvold, Fae-Cursed King @Wisnu Tan ${"lang": "en"}
+330 M Syr Gwyn, Hero of Ashvale @Lie Setiawan ${"lang": "en"}
+331 C Arcane Signet @Dan Murayama Scott ${"lang": "en"}
+332 R Tome of Legends @Mila Pesic ${"lang": "en"}
+333 C Command Tower @Evan Shipard ${"lang": "en"}
 
 [extended art]
-334 R Acclaimed Contender @David Gaillet
-335 R Charming Prince @Randy Vargas
-336 M The Circle of Loyalty @Bastien L. Deharme
-337 R Happily Ever After @Matt Stewart
-338 M Harmonious Archon @Anastasia Ovchinnikova
-339 R Hushbringer @Bastien L. Deharme
-340 R Linden, the Steadfast Queen @Ryan Pancoast
-341 R Worthy Knight @Yongjae Choi
-342 R Emry, Lurker of the Loch @Livia Prima
-343 R Folio of Fancies @Colin Boyer
-344 R Gadwick, the Wizened @Colin Boyer
-345 M The Magic Mirror @Anastasia Ovchinnikova
-346 R Midnight Clock @Alexander Forssberg
-347 R Mirrormade @Volkan Baǵa
-348 R Stolen by the Fae @Ryan Alexander Lee
-349 R Vantress Gargoyle @Cristi Balanescu
-350 R Ayara, First of Locthwain @Ryan Pancoast
-351 R Blacklance Paragon @Victor Adame Minguez
-352 M The Cauldron of Eternity @Tomasz Jedruszek
-353 R Clackbridge Troll @Svetlin Velinov
-354 R Oathsworn Knight @Svetlin Velinov
-355 R Piper of the Swarm @Irina Nordsol
-356 M Rankle, Master of Pranks @Dmitry Burmak
-357 R Wishclaw Talisman @Daarken
-358 R Witch's Vengeance @Titus Lunter
-359 M Embercleave @Joe Slucher
-360 R Fervent Champion @Steve Argyle
-361 R Fires of Invention @Stanton Feng
-362 R Irencrag Feat @Yongjae Choi
-363 R Irencrag Pyromancer @Jason Rainville
-364 R Opportunistic Dragon @Chris Rahn
-365 M Robber of the Rich @Paul Scott Canavan
-366 R Sundering Stroke @Stanton Feng
-367 R Torbran, Thane of Red Fell @Grzegorz Rutkowski
-368 R Feasting Troll King @Nicholas Gregory
-369 R Gilded Goose @Lindsey Look
-370 M The Great Henge @Adam Paquette
-371 R Once Upon a Time @Matt Stewart
-372 M Questing Beast @Igor Kieryluk
-373 R Return of the Wildspeaker @Chris Rallis
-374 R Wicked Wolf @Tomasz Jedruszek
-375 R Wildborn Preserver @Lius Lasahido
-376 R Yorvo, Lord of Garenbrig @Zack Stella
-377 R Dance of the Manse @Yeong-Hao Han
-378 R Doom Foretold @Daniel Ljunggren
-379 R Escape to the Wilds @Chris Ostrowski
-380 R Faeburrow Elder @Raoul Vitale
-381 R Lochmere Serpent @Sam Burley
-382 M Outlaws' Merriment @Suzanne Helmigh
-383 R Stormfist Crusader @Chris Rallis
-384 R Sorcerous Spyglass @Aaron Miller
-385 R Stonecoil Serpent @Mark Poole
-386 R Castle Ardenvale @Volkan Baǵa
-387 R Castle Embereth @Jaime Jones
-388 R Castle Garenbrig @Adam Paquette
-389 R Castle Locthwain @Titus Lunter
-390 R Castle Vantress @John Avon
-391 R Fabled Passage @Howard Lyon
+334 R Acclaimed Contender @David Gaillet ${"lang": "en"}
+335 R Charming Prince @Randy Vargas ${"lang": "en"}
+336 M The Circle of Loyalty @Bastien L. Deharme ${"lang": "en"}
+337 R Happily Ever After @Matt Stewart ${"lang": "en"}
+338 M Harmonious Archon @Anastasia Ovchinnikova ${"lang": "en"}
+339 R Hushbringer @Bastien L. Deharme ${"lang": "en"}
+340 R Linden, the Steadfast Queen @Ryan Pancoast ${"lang": "en"}
+341 R Worthy Knight @Yongjae Choi ${"lang": "en"}
+342 R Emry, Lurker of the Loch @Livia Prima ${"lang": "en"}
+343 R Folio of Fancies @Colin Boyer ${"lang": "en"}
+344 R Gadwick, the Wizened @Colin Boyer ${"lang": "en"}
+345 M The Magic Mirror @Anastasia Ovchinnikova ${"lang": "en"}
+346 R Midnight Clock @Alexander Forssberg ${"lang": "en"}
+347 R Mirrormade @Volkan Baǵa ${"lang": "en"}
+348 R Stolen by the Fae @Ryan Alexander Lee ${"lang": "en"}
+349 R Vantress Gargoyle @Cristi Balanescu ${"lang": "en"}
+350 R Ayara, First of Locthwain @Ryan Pancoast ${"lang": "en"}
+351 R Blacklance Paragon @Victor Adame Minguez ${"lang": "en"}
+352 M The Cauldron of Eternity @Tomasz Jedruszek ${"lang": "en"}
+353 R Clackbridge Troll @Svetlin Velinov ${"lang": "en"}
+354 R Oathsworn Knight @Svetlin Velinov ${"lang": "en"}
+355 R Piper of the Swarm @Irina Nordsol ${"lang": "en"}
+356 M Rankle, Master of Pranks @Dmitry Burmak ${"lang": "en"}
+357 R Wishclaw Talisman @Daarken ${"lang": "en"}
+358 R Witch's Vengeance @Titus Lunter ${"lang": "en"}
+359 M Embercleave @Joe Slucher ${"lang": "en"}
+360 R Fervent Champion @Steve Argyle ${"lang": "en"}
+361 R Fires of Invention @Stanton Feng ${"lang": "en"}
+362 R Irencrag Feat @Yongjae Choi ${"lang": "en"}
+363 R Irencrag Pyromancer @Jason Rainville ${"lang": "en"}
+364 R Opportunistic Dragon @Chris Rahn ${"lang": "en"}
+365 M Robber of the Rich @Paul Scott Canavan ${"lang": "en"}
+366 R Sundering Stroke @Stanton Feng ${"lang": "en"}
+367 R Torbran, Thane of Red Fell @Grzegorz Rutkowski ${"lang": "en"}
+368 R Feasting Troll King @Nicholas Gregory ${"lang": "en"}
+369 R Gilded Goose @Lindsey Look ${"lang": "en"}
+370 M The Great Henge @Adam Paquette ${"lang": "en"}
+371 R Once Upon a Time @Matt Stewart ${"lang": "en"}
+372 M Questing Beast @Igor Kieryluk ${"lang": "en"}
+373 R Return of the Wildspeaker @Chris Rallis ${"lang": "en"}
+374 R Wicked Wolf @Tomasz Jedruszek ${"lang": "en"}
+375 R Wildborn Preserver @Lius Lasahido ${"lang": "en"}
+376 R Yorvo, Lord of Garenbrig @Zack Stella ${"lang": "en"}
+377 R Dance of the Manse @Yeong-Hao Han ${"lang": "en"}
+378 R Doom Foretold @Daniel Ljunggren ${"lang": "en"}
+379 R Escape to the Wilds @Chris Ostrowski ${"lang": "en"}
+380 R Faeburrow Elder @Raoul Vitale ${"lang": "en"}
+381 R Lochmere Serpent @Sam Burley ${"lang": "en"}
+382 M Outlaws' Merriment @Suzanne Helmigh ${"lang": "en"}
+383 R Stormfist Crusader @Chris Rallis ${"lang": "en"}
+384 R Sorcerous Spyglass @Aaron Miller ${"lang": "en"}
+385 R Stonecoil Serpent @Mark Poole ${"lang": "en"}
+386 R Castle Ardenvale @Volkan Baǵa ${"lang": "en"}
+387 R Castle Embereth @Jaime Jones ${"lang": "en"}
+388 R Castle Garenbrig @Adam Paquette ${"lang": "en"}
+389 R Castle Locthwain @Titus Lunter ${"lang": "en"}
+390 R Castle Vantress @John Avon ${"lang": "en"}
+391 R Fabled Passage @Howard Lyon ${"lang": "en"}
 
 [promo]
-392 R Piper of the Swarm @Jesper Ejsing
-393 U Glass Casket @Anastasia Ovchinnikova
-394 U Slaying Fire @Heonhwa
-395 U Kenrith's Transformation @Kimonas Theodossiou
-396 U Improbable Alliance @Zoltan Boros
-397 U Inspiring Veteran @Scott Murphy
+392 R Piper of the Swarm @Jesper Ejsing ${"lang": "en"}
+393 U Glass Casket @Anastasia Ovchinnikova ${"lang": "en"}
+394 U Slaying Fire @Heonhwa ${"lang": "en"}
+395 U Kenrith's Transformation @Kimonas Theodossiou ${"lang": "en"}
+396 U Improbable Alliance @Zoltan Boros ${"lang": "en"}
+397 U Inspiring Veteran @Scott Murphy ${"lang": "en"}
 
 [rebalanced]
 A-81 U A-Cauldron Familiar @Milivoj Ćeran

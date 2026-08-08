@@ -9,6 +9,7 @@ BoosterMustContain=Legendary Creature
 FatPack=10
 FatPackExtraSlots=80 BasicLands
 ScryfallCode=DOM
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 M Karn, Scion of Urza @Chase Stone

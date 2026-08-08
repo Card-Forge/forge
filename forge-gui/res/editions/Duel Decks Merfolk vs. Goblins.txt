@@ -4,6 +4,7 @@ Date=2017-10-24
 Name=Duel Decks: Merfolk vs. Goblins
 Type=Duel_Deck
 ScryfallCode=DDT
+CardLang=en,ja
 
 [cards]
 1 M Master of Waves @Svetlin Velinov

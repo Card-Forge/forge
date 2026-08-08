@@ -6,6 +6,7 @@ Type=Expansion
 ScryfallCode=MID
 Booster=10 Common:fromSheet("MID cards"), 3 Uncommon:fromSheet("MID cards"), 1 RareMythic:fromSheet("MID cards"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
+CardLang=en,es,fr,de,it,pt,ja,ko,ru,zhs,zht
 
 [cards]
 1 R Adeline, Resplendent Cathar @Bryan Sola
@@ -191,60 +192,60 @@ Prerelease=6 Boosters, 1 RareMythic+
 181 U Deathbonnet Sprout @Filip Burburan
 182 U Defend the Celestus @Andrey Kuzinskiy
 183 U Dryad's Revival @Mila Pesic
-184 C Duel for Dominance @Ryan Pancoast
-185 C Eccentric Farmer @Tyler Walpole
-186 C Harvesttide Sentry @Livia Prima
-187 U Hound Tamer @Randy Vargas
-188 C Howl of the Hunt @Josu Hernaiz
-189 C Might of the Old Ways @Zezhou Chen
-190 U Outland Liberator @Randy Vargas
-191 C Path to the Festival @Darek Zabrocki
-192 C Pestilent Wolf @Oriana Menendez
-193 C Plummet @Nicholas Gregory
-194 M Primal Adversary @Ilse Gort
-195 C Return to Nature @Kim Sokol
-196 U Rise of the Ants @Nicholas Gregory
-197 R Saryth, the Viper's Fang @Igor Kieryluk
-198 C Shadowbeast Sighting @Piotr Foksowicz
-199 C Snarling Wolf @Ilse Gort
-200 R Storm the Festival @Yigit Koroglu
-201 C Tapping at the Window @Nils Hamm
-202 C Timberland Guide @Zoltan Boros
-203 C Tireless Hauler @Forrest Imel
-204 R Tovolar's Huntmaster @Cristi Balanescu
-205 U Turn the Earth @Alayna Danner
-206 R Unnatural Growth @Svetlin Velinov
-207 R Willow Geist @Ryan Yee
-208 M Wrenn and Seven @Heonhwa
-209 R Angelfire Ignition @Yeong-Hao Han
-210 U Arcane Infusion @Jason Felix
-211 M Arlinn, the Pack's Hope @Anna Steinbauer
-212 U Bladestitched Skaab @Dave Kendall
-213 R Can't Stay Away @Milivoj Ćeran
-214 U Corpse Cobble @Ravenna Tran
-215 R Croaking Counterpart @Yeong-Hao Han
-216 U Dawnhart Wardens @Joshua Raphael
-217 R Dennick, Pious Apprentice @Chris Rallis
-218 U Devoted Grafkeeper @Raoul Vitale
-219 R Dire-Strain Rampage @Darek Zabrocki
-220 U Diregraf Rebirth @Irina Nordsol
-221 U Faithful Mending @Caroline Gariba
-222 U Fleshtaker @Kev Walker
-223 R Florian, Voldaren Scion @Justine Cruz
-224 R Galvanic Iteration @Johann Bodin
-225 R Ghoulcaller's Harvest @Anna Steinbauer
-226 U Grizzly Ghoul @Vincent Proce
-227 R Hallowed Respite @Jason A. Engle
-228 U Hungry for More @Bastien L. Deharme
-229 U Join the Dance @Raoul Vitale
-230 R Katilda, Dawnhart Prime @Bryan Sola
-231 U Kessig Naturalist @Johan Grenier
-232 R Liesa, Forgotten Archangel @Dmitry Burmak
-233 R Ludevic, Necrogenius @Ryan Pancoast
-234 R Old Stickfingers @Jehan Choo
-235 R Rem Karolus, Stalwart Slayer @Francisco Miyara
-236 R Rite of Harmony @Rovina Cai
-237 U Rite of Oblivion @Martina Pilcerova
+184 C Duel for Dominance @Ryan Pancoast ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+185 C Eccentric Farmer @Tyler Walpole ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+186 C Harvesttide Sentry @Livia Prima ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+187 U Hound Tamer @Randy Vargas ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+188 C Howl of the Hunt @Josu Hernaiz ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+189 C Might of the Old Ways @Zezhou Chen ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+190 U Outland Liberator @Randy Vargas ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+191 C Path to the Festival @Darek Zabrocki ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+192 C Pestilent Wolf @Oriana Menendez ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+193 C Plummet @Nicholas Gregory ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+194 M Primal Adversary @Ilse Gort ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+195 C Return to Nature @Kim Sokol ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+196 U Rise of the Ants @Nicholas Gregory ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+197 R Saryth, the Viper's Fang @Igor Kieryluk ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+198 C Shadowbeast Sighting @Piotr Foksowicz ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+199 C Snarling Wolf @Ilse Gort ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+200 R Storm the Festival @Yigit Koroglu ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+201 C Tapping at the Window @Nils Hamm ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+202 C Timberland Guide @Zoltan Boros ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+203 C Tireless Hauler @Forrest Imel ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+204 R Tovolar's Huntmaster @Cristi Balanescu ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+205 U Turn the Earth @Alayna Danner ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+206 R Unnatural Growth @Svetlin Velinov ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+207 R Willow Geist @Ryan Yee ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+208 M Wrenn and Seven @Heonhwa ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+209 R Angelfire Ignition @Yeong-Hao Han ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+210 U Arcane Infusion @Jason Felix ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+211 M Arlinn, the Pack's Hope @Anna Steinbauer ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+212 U Bladestitched Skaab @Dave Kendall ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+213 R Can't Stay Away @Milivoj Ćeran ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+214 U Corpse Cobble @Ravenna Tran ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+215 R Croaking Counterpart @Yeong-Hao Han ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+216 U Dawnhart Wardens @Joshua Raphael ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+217 R Dennick, Pious Apprentice @Chris Rallis ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+218 U Devoted Grafkeeper @Raoul Vitale ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+219 R Dire-Strain Rampage @Darek Zabrocki ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+220 U Diregraf Rebirth @Irina Nordsol ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+221 U Faithful Mending @Caroline Gariba ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+222 U Fleshtaker @Kev Walker ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+223 R Florian, Voldaren Scion @Justine Cruz ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+224 R Galvanic Iteration @Johann Bodin ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+225 R Ghoulcaller's Harvest @Anna Steinbauer ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+226 U Grizzly Ghoul @Vincent Proce ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+227 R Hallowed Respite @Jason A. Engle ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+228 U Hungry for More @Bastien L. Deharme ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+229 U Join the Dance @Raoul Vitale ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+230 R Katilda, Dawnhart Prime @Bryan Sola ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+231 U Kessig Naturalist @Johan Grenier ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+232 R Liesa, Forgotten Archangel @Dmitry Burmak ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+233 R Ludevic, Necrogenius @Ryan Pancoast ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+234 R Old Stickfingers @Jehan Choo ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+235 R Rem Karolus, Stalwart Slayer @Francisco Miyara ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+236 R Rite of Harmony @Rovina Cai ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
+237 U Rite of Oblivion @Martina Pilcerova ${"lang": "en|es|fr|de|it|pt|ko|ru|zhs|zht"}
 238 U Rootcoil Creeper @Iris Compiet
 239 U Sacred Fire @Svetlin Velinov
 240 M Sigarda, Champion of Light @Howard Lyon
@@ -298,7 +299,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 
 [borderless]
 278 M Wrenn and Seven @Bram Sels
-279 M Arlinn, the Pack's Hope @Eric Deschamps
+279 M Arlinn, the Pack's Hope @Eric Deschamps ${"lang": "en"}
 280 M Teferi, Who Slows the Sunset @Francisco Miyara
 281 R Deserted Beach @Piotr Dura
 282 R Haunted Ridge @Piotr Dura
@@ -307,41 +308,41 @@ Prerelease=6 Boosters, 1 RareMythic+
 285 R Shipwreck Marsh @Steven Belledin
 
 [showcase]
-286 R Brutal Cathar @Steve Ellis
-287 C Candlegrove Witch @Brigitte Roka
-288 R Suspicious Stowaway @Joshua Alvarado
-289 U Baneblade Scoundrel @Andrea De Dominicis
-290 R Graveyard Trespasser @Tyler Crook
-291 C Shady Traveler @Joshua Alvarado
-292 U Fangblade Brigand @Sami Makkonen
-293 C Harvesttide Infiltrator @Sami Makkonen
-294 R Reckless Stormseeker @Michael Walsh
-295 U Spellrune Painter @Michael Walsh
-296 C Tavern Ruffian @Michael Walsh
-297 U Village Watch @Andrea De Dominicis
-298 C Bird Admirer @Joshua Alvarado
-299 U Burly Breaker @Sami Makkonen
-300 U Dawnhart Mentor @Antonio Bravo
-301 C Dawnhart Rejuvenator @Cabrol
-302 U Hound Tamer @Cabrol
-303 U Outland Liberator @Brigitte Roka
-304 R Saryth, the Viper's Fang @Tyler Crook
-305 C Tireless Hauler @Steve Ellis
-306 R Tovolar's Huntmaster @Andrea De Dominicis
-307 M Arlinn, the Pack's Hope @Emma Rios
-308 U Dawnhart Wardens @Antonio Bravo
-309 R Katilda, Dawnhart Prime @Tyler Crook
-310 U Kessig Naturalist @Rafael Albuquerque
-311 R Tovolar, Dire Overlord @Michael Walsh
+286 R Brutal Cathar @Steve Ellis ${"lang": "en"}
+287 C Candlegrove Witch @Brigitte Roka ${"lang": "en"}
+288 R Suspicious Stowaway @Joshua Alvarado ${"lang": "en"}
+289 U Baneblade Scoundrel @Andrea De Dominicis ${"lang": "en"}
+290 R Graveyard Trespasser @Tyler Crook ${"lang": "en"}
+291 C Shady Traveler @Joshua Alvarado ${"lang": "en"}
+292 U Fangblade Brigand @Sami Makkonen ${"lang": "en"}
+293 C Harvesttide Infiltrator @Sami Makkonen ${"lang": "en"}
+294 R Reckless Stormseeker @Michael Walsh ${"lang": "en"}
+295 U Spellrune Painter @Michael Walsh ${"lang": "en"}
+296 C Tavern Ruffian @Michael Walsh ${"lang": "en"}
+297 U Village Watch @Andrea De Dominicis ${"lang": "en"}
+298 C Bird Admirer @Joshua Alvarado ${"lang": "en"}
+299 U Burly Breaker @Sami Makkonen ${"lang": "en"}
+300 U Dawnhart Mentor @Antonio Bravo ${"lang": "en"}
+301 C Dawnhart Rejuvenator @Cabrol ${"lang": "en"}
+302 U Hound Tamer @Cabrol ${"lang": "en"}
+303 U Outland Liberator @Brigitte Roka ${"lang": "en"}
+304 R Saryth, the Viper's Fang @Tyler Crook ${"lang": "en"}
+305 C Tireless Hauler @Steve Ellis ${"lang": "en"}
+306 R Tovolar's Huntmaster @Andrea De Dominicis ${"lang": "en"}
+307 M Arlinn, the Pack's Hope @Emma Rios ${"lang": "en"}
+308 U Dawnhart Wardens @Antonio Bravo ${"lang": "en"}
+309 R Katilda, Dawnhart Prime @Tyler Crook ${"lang": "en"}
+310 U Kessig Naturalist @Rafael Albuquerque ${"lang": "en"}
+311 R Tovolar, Dire Overlord @Michael Walsh ${"lang": "en"}
 312 R Adeline, Resplendent Cathar @rishxxv
 313 M Lier, Disciple of the Drowned @Evan Cagle
 314 R Gisa, Glorious Resurrector @Cabrol
 315 R Jadar, Ghoulcaller of Nephalia @DZO
-316 M Jerren, Corrupted Bishop @Andrew Mar
-317 R Dennick, Pious Apprentice @Paul Jackson
+316 M Jerren, Corrupted Bishop @Andrew Mar ${"lang": "en"}
+317 R Dennick, Pious Apprentice @Paul Jackson ${"lang": "en"}
 318 R Florian, Voldaren Scion @DZO
 319 R Liesa, Forgotten Archangel @Evan Cagle
-320 R Ludevic, Necrogenius @Milivoj Ćeran
+320 R Ludevic, Necrogenius @Milivoj Ćeran ${"lang": "en"}
 321 R Old Stickfingers @DZO
 322 R Rem Karolus, Stalwart Slayer @Andy Brase
 323 M Sigarda, Champion of Light @N.C. Winters
@@ -349,66 +350,66 @@ Prerelease=6 Boosters, 1 RareMythic+
 325 R Vadrik, Astral Archmage @Evan Cagle
 
 [extended art]
-326 R Curse of Silence @Irina Nordsol
-327 M Enduring Angel @Irina Nordsol
-328 R Fateful Absence @Eric Deschamps
-329 M Intrepid Adversary @Viktor Titov
-330 R Sigarda's Splendor @Howard Lyon
-331 M Sigardian Savior @David Rapoza
-332 R Sungold Sentinel @Marta Nael
-333 R Vanquish the Horde @Grzegorz Rutkowski
-334 R Curse of Surveillance @Igor Kieryluk
-335 R Grafted Identity @Manuel Castañón
-336 R Malevolent Hermit @Daarken
-337 R Memory Deluge @Lake Hurwitz
-338 R Patrician Geist @Marta Nael
-339 M Poppet Stitcher @Simon Dominic
-340 R Sludge Monster @Svetlin Velinov
-341 M Spectral Adversary @Uriah Voth
-342 R Triskaidekaphile @Slawomir Maniak
-343 R Bloodline Culling @Liiga Smilshkalne
-344 R Champion of the Perished @Kekai Kotaki
-345 R Curse of Leeches @Uriah Voth
-346 M Lord of the Forsaken @Kekai Kotaki
-347 R Mask of Griselbrand @Jason Felix
-348 M The Meathook Massacre @Chris Seaman
-349 R Slaughter Specialist @Kari Christensen
-350 M Tainted Adversary @Tuan Duong Chu
-351 M Bloodthirsty Adversary @Heonhwa
-352 R Burn Down the House @Campbell White
-353 R Curse of Shaken Faith @Campbell White
-354 R Falkenrath Pit Fighter @Anna Fehr
-355 R Geistflame Reservoir @Anna Christenson
-356 R Light Up the Night @Wei Wei
-357 M Moonveil Regent @Joshua Raphael
-358 R Smoldering Egg @Simon Dominic
-359 M Sunstreak Phoenix @Brian Valeza
-360 R Augur of Autumn @Billy Christian
-361 R Briarbridge Tracker @Mathias Kollros
-362 M Consuming Blob @Simon Dominic
-363 M Primal Adversary @Ilse Gort
-364 R Storm the Festival @Yigit Koroglu
-365 R Unnatural Growth @Svetlin Velinov
-366 R Willow Geist @Ryan Yee
-367 R Angelfire Ignition @Yeong-Hao Han
-368 R Can't Stay Away @Milivoj Ćeran
-369 R Croaking Counterpart @Yeong-Hao Han
-370 R Dire-Strain Rampage @Darek Zabrocki
-371 R Galvanic Iteration @Johann Bodin
-372 R Ghoulcaller's Harvest @Anna Steinbauer
-373 R Hallowed Respite @Jason A. Engle
-374 R Rite of Harmony @Rovina Cai
-375 R Siphon Insight @Livia Prima
-376 R Wake to Slaughter @Chris Cold
-377 R The Celestus @Jonas De Ro
-378 R Pithing Needle @Ovidio Cartagena
-379 M Hostile Hostel @Daniel Ljunggren
+326 R Curse of Silence @Irina Nordsol ${"lang": "en|es|fr|de|it|ja"}
+327 M Enduring Angel @Irina Nordsol ${"lang": "en"}
+328 R Fateful Absence @Eric Deschamps ${"lang": "en|es|fr|de|it|ja"}
+329 M Intrepid Adversary @Viktor Titov ${"lang": "en|es|fr|de|it|ja"}
+330 R Sigarda's Splendor @Howard Lyon ${"lang": "en|es|fr|de|it|ja"}
+331 M Sigardian Savior @David Rapoza ${"lang": "en|es|fr|de|it|ja"}
+332 R Sungold Sentinel @Marta Nael ${"lang": "en|es|fr|de|it|ja"}
+333 R Vanquish the Horde @Grzegorz Rutkowski ${"lang": "en|es|fr|de|it|ja"}
+334 R Curse of Surveillance @Igor Kieryluk ${"lang": "en|es|fr|de|it|ja"}
+335 R Grafted Identity @Manuel Castañón ${"lang": "en|es|fr|de|it|ja"}
+336 R Malevolent Hermit @Daarken ${"lang": "en"}
+337 R Memory Deluge @Lake Hurwitz ${"lang": "en|es|fr|de|it|ja"}
+338 R Patrician Geist @Marta Nael ${"lang": "en|es|fr|de|it|ja"}
+339 M Poppet Stitcher @Simon Dominic ${"lang": "en"}
+340 R Sludge Monster @Svetlin Velinov ${"lang": "en|es|fr|de|it|ja"}
+341 M Spectral Adversary @Uriah Voth ${"lang": "en|es|fr|de|it|ja"}
+342 R Triskaidekaphile @Slawomir Maniak ${"lang": "en|es|fr|de|it|ja"}
+343 R Bloodline Culling @Liiga Smilshkalne ${"lang": "en|es|fr|de|it|ja"}
+344 R Champion of the Perished @Kekai Kotaki ${"lang": "en|es|fr|de|it|ja"}
+345 R Curse of Leeches @Uriah Voth ${"lang": "en"}
+346 M Lord of the Forsaken @Kekai Kotaki ${"lang": "en|es|fr|de|it|ja"}
+347 R Mask of Griselbrand @Jason Felix ${"lang": "en|es|fr|de|it|ja"}
+348 M The Meathook Massacre @Chris Seaman ${"lang": "en|es|fr|de|it|ja"}
+349 R Slaughter Specialist @Kari Christensen ${"lang": "en|es|fr|de|it|ja"}
+350 M Tainted Adversary @Tuan Duong Chu ${"lang": "en|es|fr|de|it|ja"}
+351 M Bloodthirsty Adversary @Heonhwa ${"lang": "en|es|fr|de|it|ja"}
+352 R Burn Down the House @Campbell White ${"lang": "en|es|fr|de|it|ja"}
+353 R Curse of Shaken Faith @Campbell White ${"lang": "en|es|fr|de|it|ja"}
+354 R Falkenrath Pit Fighter @Anna Fehr ${"lang": "en|es|fr|de|it|ja"}
+355 R Geistflame Reservoir @Anna Christenson ${"lang": "en|es|fr|de|it|ja"}
+356 R Light Up the Night @Wei Wei ${"lang": "en|es|fr|de|it|ja"}
+357 M Moonveil Regent @Joshua Raphael ${"lang": "en|es|fr|de|it|ja"}
+358 R Smoldering Egg @Simon Dominic ${"lang": "en"}
+359 M Sunstreak Phoenix @Brian Valeza ${"lang": "en|es|fr|de|it|ja"}
+360 R Augur of Autumn @Billy Christian ${"lang": "en|es|fr|de|it|ja"}
+361 R Briarbridge Tracker @Mathias Kollros ${"lang": "en|es|fr|de|it|ja"}
+362 M Consuming Blob @Simon Dominic ${"lang": "en|es|fr|de|it|ja"}
+363 M Primal Adversary @Ilse Gort ${"lang": "en|es|fr|de|it|ja"}
+364 R Storm the Festival @Yigit Koroglu ${"lang": "en|es|fr|de|it|ja"}
+365 R Unnatural Growth @Svetlin Velinov ${"lang": "en|es|fr|de|it|ja"}
+366 R Willow Geist @Ryan Yee ${"lang": "en|es|fr|de|it|ja"}
+367 R Angelfire Ignition @Yeong-Hao Han ${"lang": "en|es|fr|de|it|ja"}
+368 R Can't Stay Away @Milivoj Ćeran ${"lang": "en|es|fr|de|it|ja"}
+369 R Croaking Counterpart @Yeong-Hao Han ${"lang": "en|es|fr|de|it|ja"}
+370 R Dire-Strain Rampage @Darek Zabrocki ${"lang": "en|es|fr|de|it|ja"}
+371 R Galvanic Iteration @Johann Bodin ${"lang": "en|es|fr|de|it|ja"}
+372 R Ghoulcaller's Harvest @Anna Steinbauer ${"lang": "en|es|fr|de|it|ja"}
+373 R Hallowed Respite @Jason A. Engle ${"lang": "en|es|fr|de|it|ja"}
+374 R Rite of Harmony @Rovina Cai ${"lang": "en|es|fr|de|it|ja"}
+375 R Siphon Insight @Livia Prima ${"lang": "en|es|fr|de|it|ja"}
+376 R Wake to Slaughter @Chris Cold ${"lang": "en|es|fr|de|it|ja"}
+377 R The Celestus @Jonas De Ro ${"lang": "en|es|fr|de|it|ja"}
+378 R Pithing Needle @Ovidio Cartagena ${"lang": "en|es|fr|de|it|ja"}
+379 M Hostile Hostel @Daniel Ljunggren ${"lang": "en"}
 
 [buy a box]
 385 R Champion of the Perished @Daarken
 
 [promo]
-386 R Triskaidekaphile @Mathias Kollros
+386 R Triskaidekaphile @Mathias Kollros ${"lang": "en|es|fr|de|it|ru"}
 387 U Gavony Dawnguard @Micah Epstein
 388 C Consider @Zezhou Chen
 389 U Infernal Grasp @Naomi Baker

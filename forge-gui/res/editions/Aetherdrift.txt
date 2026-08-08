@@ -11,6 +11,7 @@ BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,WildcardFo
 Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 WildcardFoil+
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
+CardLang=en,es,fr,de,it,ja
 
 [Common]
 Base=Common:!fromSheet("DFT gain lands"):fromSheet("DFT cards")
@@ -422,56 +423,56 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 373 R Sunbillow Verge @Darrell Riche
 374 R Wastewood Verge @Kev Walker
 375 R Willowrush Verge @Carl Critchlow
-376 M The Aetherspark @Dominik Mayer
+376 M The Aetherspark @Dominik Mayer ${"lang": "en"}
 
 [extended art]
-377 R Perilous Snare @Chris Seaman
-378 R Spectacular Pileup @Zezhou Chen
-379 M Mu Yanling, Wind Rider @Justyna Dura
-380 R Repurposing Bay @William Tempest
-381 R Riverchurn Monument @Anthony Devine
-382 R Unstoppable Plan @Borja Pindado
-383 R Cursecloth Wrappings @Dominik Mayer
-384 R Quag Feast @Loïc Canavaggia
-385 R Count on Luck @Michal Ivan
-386 R Full Throttle @Benjamin Ee
-387 R Afterburner Expert @April Prime
-388 M March of the World Ooze @Helge C. Balzer
-389 R Regal Imperiosaur @Stephanie Cheung
-390 R Explosive Getaway @Caio Monteiro
-391 M Loot, the Pathfinder @Ernanda Souza
-392 M Mimeoplasm, Revered One @Ron Spencer
-393 R Marketback Walker @Svetlin Velinov
-394 R Monument to Endurance @Victor Sales
-395 M Radiant Lotus @Bruce Brenneise
-396 R Muraganda Raceway @Brian Valeza
-424 U Amonkhet Raceway @Titus Lunter
-425 C Avishkar Raceway @Titus Lunter
-426 R Muraganda Raceway @Titus Lunter
+377 R Perilous Snare @Chris Seaman ${"lang": "en|fr|de|ja"}
+378 R Spectacular Pileup @Zezhou Chen ${"lang": "en|fr|de|ja"}
+379 M Mu Yanling, Wind Rider @Justyna Dura ${"lang": "en|fr|de|ja"}
+380 R Repurposing Bay @William Tempest ${"lang": "en|fr|de|ja"}
+381 R Riverchurn Monument @Anthony Devine ${"lang": "en|fr|de|ja"}
+382 R Unstoppable Plan @Borja Pindado ${"lang": "en|fr|de|ja"}
+383 R Cursecloth Wrappings @Dominik Mayer ${"lang": "en|fr|de|ja"}
+384 R Quag Feast @Loïc Canavaggia ${"lang": "en|fr|de|ja"}
+385 R Count on Luck @Michal Ivan ${"lang": "en|fr|de|ja"}
+386 R Full Throttle @Benjamin Ee ${"lang": "en|fr|de|ja"}
+387 R Afterburner Expert @April Prime ${"lang": "en|fr|de|ja"}
+388 M March of the World Ooze @Helge C. Balzer ${"lang": "en|fr|de|ja"}
+389 R Regal Imperiosaur @Stephanie Cheung ${"lang": "en|fr|de|ja"}
+390 R Explosive Getaway @Caio Monteiro ${"lang": "en|fr|de|ja"}
+391 M Loot, the Pathfinder @Ernanda Souza ${"lang": "en|fr|de|ja"}
+392 M Mimeoplasm, Revered One @Ron Spencer ${"lang": "en|fr|de|ja"}
+393 R Marketback Walker @Svetlin Velinov ${"lang": "en|fr|de|ja"}
+394 R Monument to Endurance @Victor Sales ${"lang": "en|fr|de|ja"}
+395 M Radiant Lotus @Bruce Brenneise ${"lang": "en|fr|de|ja"}
+396 R Muraganda Raceway @Brian Valeza ${"lang": "en|fr|de|ja"}
+424 U Amonkhet Raceway @Titus Lunter ${"lang": "en"}
+425 C Avishkar Raceway @Titus Lunter ${"lang": "en"}
+426 R Muraganda Raceway @Titus Lunter ${"lang": "en"}
 
 [showcase]
-397 M Salvation Engine @Mai Minamiura
-398 M Spectacular Pileup @JIN-E YAMAMOTO
-399 M Mu Yanling, Wind Rider @D-suzuki
-400 M Cursecloth Wrappings @BARON UEDA
-401 M Chandra, Spark Hunter @jbstyle.
-402 M March of the World Ooze @Raimaru
-403 M Explosive Getaway @TSCR
-404 M Loot, the Pathfinder @Tetsu Kurosawa
-405 M Mimeoplasm, Revered One @SH11NA
-406 M Radiant Lotus @Tomoyuki Mizufune
+397 M Salvation Engine @Mai Minamiura ${"lang": "en|ja"}
+398 M Spectacular Pileup @JIN-E YAMAMOTO ${"lang": "en|ja"}
+399 M Mu Yanling, Wind Rider @D-suzuki ${"lang": "en|ja"}
+400 M Cursecloth Wrappings @BARON UEDA ${"lang": "en|ja"}
+401 M Chandra, Spark Hunter @jbstyle. ${"lang": "en|ja"}
+402 M March of the World Ooze @Raimaru ${"lang": "en|ja"}
+403 M Explosive Getaway @TSCR ${"lang": "en|ja"}
+404 M Loot, the Pathfinder @Tetsu Kurosawa ${"lang": "en|ja"}
+405 M Mimeoplasm, Revered One @SH11NA ${"lang": "en|ja"}
+406 M Radiant Lotus @Tomoyuki Mizufune ${"lang": "en|ja"}
 
 [etched]
-407 M Salvation Engine @Mai Minamiura
-408 M Spectacular Pileup @JIN-E YAMAMOTO
-409 M Mu Yanling, Wind Rider @D-suzuki
-410 M Cursecloth Wrappings @BARON UEDA
-411 M Chandra, Spark Hunter @jbstyle.
-412 M March of the World Ooze @Raimaru
-413 M Explosive Getaway @TSCR
-414 M Loot, the Pathfinder @Tetsu Kurosawa
-415 M Mimeoplasm, Revered One @SH11NA
-416 M Radiant Lotus @Tomoyuki Mizufune
+407 M Salvation Engine @Mai Minamiura ${"lang": "en"}
+408 M Spectacular Pileup @JIN-E YAMAMOTO ${"lang": "en"}
+409 M Mu Yanling, Wind Rider @D-suzuki ${"lang": "en"}
+410 M Cursecloth Wrappings @BARON UEDA ${"lang": "en"}
+411 M Chandra, Spark Hunter @jbstyle. ${"lang": "en"}
+412 M March of the World Ooze @Raimaru ${"lang": "en"}
+413 M Explosive Getaway @TSCR ${"lang": "en"}
+414 M Loot, the Pathfinder @Tetsu Kurosawa ${"lang": "en"}
+415 M Mimeoplasm, Revered One @SH11NA ${"lang": "en"}
+416 M Radiant Lotus @Tomoyuki Mizufune ${"lang": "en"}
 427 R Basri, Tomorrow's Champion @Kai Carpenter
 428 R Bulwark Ox @Brent Hollowell
 429 R Guardian Sunmare @Christina Kraus
@@ -601,13 +602,13 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 553 M Sab-Sunen, Luxa Embodied @Benjamin Ee
 
 [promo]
-417 U Tune Up @Chris Rallis
-418 U Gastal Raider @Lorenzo Mastroianni
-419 U Marauding Mako @Alix Branwyn
-420 U Skyserpent Seeker @Johan Grenier
-421 U Voyage Home @Hardy Fowler
-422 R Lumbering Worldwagon @Adam Volker
-423 R Lifecraft Engine @José Parodi
+417 U Tune Up @Chris Rallis ${"lang": "en|ja"}
+418 U Gastal Raider @Lorenzo Mastroianni ${"lang": "en|ja"}
+419 U Marauding Mako @Alix Branwyn ${"lang": "en|ja"}
+420 U Skyserpent Seeker @Johan Grenier ${"lang": "en|ja"}
+421 U Voyage Home @Hardy Fowler ${"lang": "en|ja"}
+422 R Lumbering Worldwagon @Adam Volker ${"lang": "en|fr|de"}
+423 R Lifecraft Engine @José Parodi ${"lang": "en|ja"}
 
 [gain lands]
 1 Bloodfell Caves|DFT

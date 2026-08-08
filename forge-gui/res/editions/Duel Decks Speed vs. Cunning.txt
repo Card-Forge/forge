@@ -5,6 +5,7 @@ Name=Duel Decks: Speed vs. Cunning
 Type=Duel_Deck
 ScryfallCode=DDN
 TokensCode=DDN
+CardLang=en,ja
 
 [cards]
 1 M Zurgo Helmsmasher @Ryan Alexander Lee

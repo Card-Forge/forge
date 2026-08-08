@@ -8,6 +8,7 @@ Booster=8 Common:!dfc:!fromSheet("MOM lands"):fromsheet("MOM cards"), 2 Uncommon
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 ScryfallCode=MOM
+CardLang=en,es,fr,de,it,pt,ja,zhs
 
 [cards]
 1 M Invasion of Ravnica @Leon Tukker
@@ -26,7 +27,7 @@ ScryfallCode=MOM
 14 C Enduring Bondwarden @Kim Sokol
 15 C Golden-Scale Aeronaut @Javier Charro
 16 R Guardian of Ghirapur @Cynthia Sheppard
-17 R Heliod, the Radiant Dawn @Victor Adame Minguez
+17 R Heliod, the Radiant Dawn @Victor Adame Minguez ${"lang": "en|es|fr|de|it|pt|zhs"}
 18 C Infected Defector @Nino Vecia
 19 C Inspired Charge @Vladimir Krisetskiy
 20 U Invasion of Belenon @Antonio José Manzanedo
@@ -74,7 +75,7 @@ ScryfallCode=MOM
 62 U Invasion of Kamigawa @Kekai Kotaki
 63 R Invasion of Segovia @Edgar Sánchez Hidalgo
 64 U Invasion of Vryn @Leon Tukker
-65 M Jin-Gitaxias @Ekaterina Burmak
+65 M Jin-Gitaxias @Ekaterina Burmak ${"lang": "en|es|fr|de|it|pt|zhs"}
 66 C Meeting of Minds @Milivoj Ćeran
 67 C Moment of Truth @Rovina Cai
 68 C Negate @Viko Menezes
@@ -84,7 +85,7 @@ ScryfallCode=MOM
 72 C Order of the Mirror @Andrew Mar
 73 C Preening Champion @Alix Branwyn
 74 C Protocol Knight @Volkan Baǵa
-75 R Rona, Herald of Invasion @Victor Adame Minguez
+75 R Rona, Herald of Invasion @Victor Adame Minguez ${"lang": "en|es|de|pt|ja|zhs"}
 76 C Saiba Cryptomancer @Aaron J. Riley
 77 R See Double @Marc Simonetti
 78 U Skyclave Aerialist @Michal Ivan
@@ -99,7 +100,7 @@ ScryfallCode=MOM
 87 C Zhalfirin Shapecraft @Aldo Domínguez
 88 C Aetherblade Agent @Alexander Mokhov
 89 R Archpriest of Shadows @Fariba Khamseh
-90 R Ayara, Widow of the Realm @Anna Podedworna
+90 R Ayara, Widow of the Realm @Anna Podedworna ${"lang": "en|es|fr|de|it|ja|zhs"}
 91 C Bladed Battle-Fan @Colin Boyer
 92 U Blightreaper Thallid @Marta Nael
 93 R Bloated Processor @Brock Grossman
@@ -134,7 +135,7 @@ ScryfallCode=MOM
 122 R Pile On @Javier Charro
 123 U Render Inert @Yigit Koroglu
 124 U Scorn-Blade Berserker @Tuan Duong Chu
-125 M Sheoldred @Ryan Pancoast
+125 M Sheoldred @Ryan Pancoast ${"lang": "en|es|de|it|zhs"}
 126 C Tenured Oilcaster @Francisco Miyara
 127 C Traumatic Revelation @Cristi Balanescu
 128 C Unseal the Necropolis @Isis
@@ -209,7 +210,7 @@ ScryfallCode=MOM
 197 C Overgrown Pest @Eelis Kyttanen
 198 R Ozolith, the Shattered Spire @Daarken
 199 C Placid Rottentail @Filip Burburan
-200 R Polukranos Reborn @David Auden Nash
+200 R Polukranos Reborn @David Auden Nash ${"lang": "en|es|fr|de|pt|zhs"}
 201 C Portent Tracker @Caroline Gariba
 202 U Ravenous Sailback @Andrew Mar
 203 U Sandstalker Moloch @Donato Giancola
@@ -222,7 +223,7 @@ ScryfallCode=MOM
 210 C Timberland Ancient @Pavel Kolomeyets
 211 R Tribute to the World Tree @Kristina Carroll
 212 C Vengeant Earth @Jonas De Ro
-213 M Vorinclex @Daarken
+213 M Vorinclex @Daarken ${"lang": "en|es|fr|de|pt|zhs"}
 214 C War Historian @Ryan Valle
 215 C Wary Thespian @Billy Christian
 216 C Wildwood Escort @Taras Susak
@@ -303,16 +304,16 @@ ScryfallCode=MOM
 291 L Forest @Henry Peters
 
 [showcase]
-292 M Elesh Norn @Kekai Kotaki
-293 R Heliod, the Radiant Dawn @Jason A. Engle
-294 M Jin-Gitaxias @Dominik Mayer
-295 R Rona, Herald of Invasion @Daniel Lieske
-296 R Ayara, Widow of the Realm @Josu Hernaiz
-297 M Sheoldred @Dominik Mayer
-298 R Etali, Primal Conqueror @Yeong-Hao Han
-299 M Urabrask @Kekai Kotaki
-300 R Polukranos Reborn @Jason A. Engle
-301 M Vorinclex @Flavio Girón
+292 M Elesh Norn @Kekai Kotaki ${"lang": "en|es|it|ja|zhs"}
+293 R Heliod, the Radiant Dawn @Jason A. Engle ${"lang": "en|fr|de|zhs"}
+294 M Jin-Gitaxias @Dominik Mayer ${"lang": "en|es|fr|pt|ja|zhs"}
+295 R Rona, Herald of Invasion @Daniel Lieske ${"lang": "en|fr|it|pt|zhs"}
+296 R Ayara, Widow of the Realm @Josu Hernaiz ${"lang": "en|es|fr|pt|zhs"}
+297 M Sheoldred @Dominik Mayer ${"lang": "en|fr|it|pt|ja"}
+298 R Etali, Primal Conqueror @Yeong-Hao Han ${"lang": "en|fr|it|ja"}
+299 M Urabrask @Kekai Kotaki ${"lang": "en|fr|it|ja"}
+300 R Polukranos Reborn @Jason A. Engle ${"lang": "en|it|ja"}
+301 M Vorinclex @Flavio Girón ${"lang": "en|it|ja"}
 302 R Baral and Kari Zev @Magali Villeneuve
 303 M Borborygmos and Fblthp @Justin Hernandez & Alexis Hernandez
 304 R Djeru and Hazoret @Igor Kieryluk
@@ -336,11 +337,11 @@ ScryfallCode=MOM
 320 M Archangel Elspeth @Denys Tsiperko
 321 M Chandra, Hope's Beacon @Randy Vargas
 322 M Wrenn and Realmbreaker @Jehan Choo
-338 M Elesh Norn @Ryan Pancoast
-339 M Jin-Gitaxias @Julian Kok Joon Wen
-340 M Sheoldred @Camille Alquier
-341 M Urabrask @José Parodi
-342 M Vorinclex @Joseph Weston
+338 M Elesh Norn @Ryan Pancoast ${"lang": "en"}
+339 M Jin-Gitaxias @Julian Kok Joon Wen ${"lang": "en"}
+340 M Sheoldred @Camille Alquier ${"lang": "en"}
+341 M Urabrask @José Parodi ${"lang": "en"}
+342 M Vorinclex @Joseph Weston ${"lang": "en"}
 
 [jumpstart]
 323 R Essence of Orthodoxy @Oriana Menendez
@@ -360,44 +361,44 @@ ScryfallCode=MOM
 337 R Surrak and Goreclaw @Lucas Graciano
 
 [extended art]
-343 R Boon-Bringer Valkyrie @Heonhwa
-344 R Dusk Legion Duelist @Ryan Valle
-345 R Guardian of Ghirapur @Cynthia Sheppard
-346 R Knight-Errant of Eos @Kevin Sidharta
-347 M Monastery Mentor @Brian Valeza
-348 R Progenitor Exarch @Marie Magny
-349 R Sunfall @Kasia 'Kafis' Zielińska
-350 R Chrome Host Seedshark @Donato Giancola
-351 R Complete the Circuit @Eelis Kyttanen
-352 R Faerie Mastermind @Joshua Raphael
-353 R See Double @Marc Simonetti
-354 R Transcendent Message @Liiga Smilshkalne
-355 R Zephyr Singer @Lie Setiawan
-356 R Archpriest of Shadows @Fariba Khamseh
-357 R Bloated Processor @Brock Grossman
-358 R Breach the Multiverse @Liiga Smilshkalne
-359 R Grafted Butcher @Zack Stella
-360 R Hoarding Broodlord @Filip Burburan
-361 R Pile On @Javier Charro
-362 R Bloodfeather Phoenix @Rudy Siswanto
-363 R City on Fire @Jake Murray
-364 R Into the Fire @Grzegorz Rutkowski
-365 R Nahiri's Warcrafting @Zara Alfonso
-366 R Rampaging Raptor @Denys Tsiperko
-367 R Voldaren Thrillseeker @Viko Menezes
-368 R Ancient Imperiosaur @Piotr Foksowicz
-369 R Deeproot Wayfinder @Anna Pavleeva
-370 R Doomskar Warrior @Chris Rallis
-371 R Glistening Dawn @Chris Ostrowski
-372 R Ozolith, the Shattered Spire @Daarken
-373 R Tribute to the World Tree @Kristina Carroll
-374 R Realmbreaker, the Invasion Tree @Kekai Kotaki
-375 M Sword of Once and Future @Joshua Cairos
-376 R Essence of Orthodoxy @Oriana Menendez
-377 R Interdisciplinary Mascot @Mathias Kollros
-378 R Terror of Towashi @Lius Lasahido
-379 R Orthion, Hero of Lavabrink @Aaron Miller
-380 R Surrak and Goreclaw @Lucas Graciano
+343 R Boon-Bringer Valkyrie @Heonhwa ${"lang": "en|fr|de|ja|zhs"}
+344 R Dusk Legion Duelist @Ryan Valle ${"lang": "en|fr|de|ja|zhs"}
+345 R Guardian of Ghirapur @Cynthia Sheppard ${"lang": "en|fr|de|ja|zhs"}
+346 R Knight-Errant of Eos @Kevin Sidharta ${"lang": "en|fr|de|ja|zhs"}
+347 M Monastery Mentor @Brian Valeza ${"lang": "en|fr|de|ja|zhs"}
+348 R Progenitor Exarch @Marie Magny ${"lang": "en|fr|de|ja|zhs"}
+349 R Sunfall @Kasia 'Kafis' Zielińska ${"lang": "en|fr|de|ja|zhs"}
+350 R Chrome Host Seedshark @Donato Giancola ${"lang": "en|fr|de|ja|zhs"}
+351 R Complete the Circuit @Eelis Kyttanen ${"lang": "en|fr|de|ja|zhs"}
+352 R Faerie Mastermind @Joshua Raphael ${"lang": "en|fr|de|ja|zhs"}
+353 R See Double @Marc Simonetti ${"lang": "en|fr|de|ja|zhs"}
+354 R Transcendent Message @Liiga Smilshkalne ${"lang": "en|fr|de|ja|zhs"}
+355 R Zephyr Singer @Lie Setiawan ${"lang": "en|fr|de|ja|zhs"}
+356 R Archpriest of Shadows @Fariba Khamseh ${"lang": "en|fr|de|ja|zhs"}
+357 R Bloated Processor @Brock Grossman ${"lang": "en|fr|de|ja|zhs"}
+358 R Breach the Multiverse @Liiga Smilshkalne ${"lang": "en|fr|de|ja|zhs"}
+359 R Grafted Butcher @Zack Stella ${"lang": "en|fr|de|ja|zhs"}
+360 R Hoarding Broodlord @Filip Burburan ${"lang": "en|fr|de|ja|zhs"}
+361 R Pile On @Javier Charro ${"lang": "en|fr|de|ja|zhs"}
+362 R Bloodfeather Phoenix @Rudy Siswanto ${"lang": "en|fr|de|ja|zhs"}
+363 R City on Fire @Jake Murray ${"lang": "en|fr|de|ja|zhs"}
+364 R Into the Fire @Grzegorz Rutkowski ${"lang": "en|fr|de|ja|zhs"}
+365 R Nahiri's Warcrafting @Zara Alfonso ${"lang": "en|fr|de|ja|zhs"}
+366 R Rampaging Raptor @Denys Tsiperko ${"lang": "en|fr|de|ja|zhs"}
+367 R Voldaren Thrillseeker @Viko Menezes ${"lang": "en|fr|de|ja|zhs"}
+368 R Ancient Imperiosaur @Piotr Foksowicz ${"lang": "en|fr|de|ja|zhs"}
+369 R Deeproot Wayfinder @Anna Pavleeva ${"lang": "en|fr|de|ja|zhs"}
+370 R Doomskar Warrior @Chris Rallis ${"lang": "en|fr|de|ja|zhs"}
+371 R Glistening Dawn @Chris Ostrowski ${"lang": "en|fr|de|ja|zhs"}
+372 R Ozolith, the Shattered Spire @Daarken ${"lang": "en|fr|de|ja|zhs"}
+373 R Tribute to the World Tree @Kristina Carroll ${"lang": "en|fr|de|ja|zhs"}
+374 R Realmbreaker, the Invasion Tree @Kekai Kotaki ${"lang": "en|fr|de|ja|zhs"}
+375 M Sword of Once and Future @Joshua Cairos ${"lang": "en|fr|de|ja|zhs"}
+376 R Essence of Orthodoxy @Oriana Menendez ${"lang": "en|fr|de|ja|zhs"}
+377 R Interdisciplinary Mascot @Mathias Kollros ${"lang": "en|fr|de|ja|zhs"}
+378 R Terror of Towashi @Lius Lasahido ${"lang": "en|fr|de|ja|zhs"}
+379 R Orthion, Hero of Lavabrink @Aaron Miller ${"lang": "en|fr|de|ja|zhs"}
+380 R Surrak and Goreclaw @Lucas Graciano ${"lang": "en|fr|de|ja|zhs"}
 
 [promo]
 381 U Norn's Inquisitor @Denis Zhbankov
@@ -405,7 +406,7 @@ ScryfallCode=MOM
 383 U Kami of Whispered Hopes @Filipe Pagliuso
 384 U Botanical Brawler @Jesper Ejsing
 385 U Halo Forager @Kevin Sidharta
-386 R Ghalta and Mavren @Betty Jiang
+386 R Ghalta and Mavren @Betty Jiang ${"lang": "en|fr|de"}
 
 [buy a box]
 387 R Omnath, Locus of All @Helge C. Balzer

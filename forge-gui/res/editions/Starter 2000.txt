@@ -7,6 +7,7 @@ Type=Starter
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ScryfallCode=S00
+CardLang=en,es,fr,de,it,pt
 
 [cards]
 1 C Angelic Blessing @Mark Zug

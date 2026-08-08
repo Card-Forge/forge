@@ -5,6 +5,7 @@ Name=Duel Decks: Blessed vs. Cursed
 Type=Duel_Deck
 ScryfallCode=DDQ
 TokensCode=DDQ
+CardLang=en,ja
 
 [cards]
 1 M Geist of Saint Traft @Daarken

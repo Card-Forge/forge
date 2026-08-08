@@ -6,6 +6,7 @@ Type=Expansion
 ScryfallCode=TSB
 BoosterBox=0
 FatPack=0
+CardLang=en,es,fr,de,it,pt,ja,ru,zhs
 
 [cards]
 1 S Akroma, Angel of Wrath @Ron Spears
