@@ -1081,7 +1081,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
 
                     final boolean played;
-                    PriorityActionDiagnostics.beginAction(priorityCapture, sa);
+                    PriorityActionDiagnostics.beginAction(priorityCapture, sa, chosenSa.size());
                     try {
                         played = pPlayerPriority.getController().playChosenSpellAbility(sa);
                     } finally {

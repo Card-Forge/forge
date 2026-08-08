@@ -22,7 +22,7 @@ public final class PriorityActionDiagnostics {
 
     private static final String HEADER = "event_type,process_id,decision_sequence_id,subdecision_index,"
             + "top_level_candidate_kind,top_level_source,downstream_callback_family,forced_if_known,"
-            + "turn,phase,player,candidate_count,pass_present,pass_with_alternatives,request_generation_ns,"
+            + "turn,phase,player,downstream_player,candidate_count,pass_present,pass_with_alternatives,request_generation_ns,"
             + "native_callback_ns,selection_mapping,feasibility_result,unsupported_reason,feasibility_ns,"
             + "adjustment_status,adjustment_reason,adjustment_preview_ns";
     private static final String OUTPUT_PATH = System.getProperty(OUTPUT_PATH_PROPERTY, "");
@@ -78,8 +78,8 @@ public final class PriorityActionDiagnostics {
     }
 
     /** Opens a correlation scope immediately before Forge announces the selected non-pass action. */
-    public static void beginAction(final Capture capture, final SpellAbility selected) {
-        if (capture == null || selected == null) {
+    public static void beginAction(final Capture capture, final SpellAbility selected, final int selectedAbilityCount) {
+        if (capture == null || selected == null || !isSingleActionSelection(selectedAbilityCount)) {
             return;
         }
         final LegalCandidate candidate = selectedCandidate(capture.request, List.of(selected));
@@ -97,9 +97,13 @@ public final class PriorityActionDiagnostics {
         }
     }
 
+    static boolean isSingleActionSelection(final int selectedAbilityCount) {
+        return selectedAbilityCount == 1;
+    }
+
     /** Records an existing downstream controller callback while a selected action is being announced. */
     public static void recordDownstreamCallback(final DownstreamCallbackFamily family, final int candidateCount,
-            final Boolean forcedIfKnown) {
+            final Boolean forcedIfKnown, final Player downstreamPlayer) {
         if (!ENABLED) {
             return;
         }
@@ -112,7 +116,8 @@ public final class PriorityActionDiagnostics {
             EVENTS.add(formatContinuationRecord("DOWNSTREAM", PROCESS_ID, continuation.getDecisionSequenceId(),
                     continuation.nextSubdecisionIndex(), continuation.getTopLevelCandidateKind(),
                     continuation.getTopLevelSource(), family, forcedIfKnown, active.capture.turn,
-                    active.capture.phase, active.capture.player, candidateCount));
+                    active.capture.phase, active.capture.player,
+                    downstreamPlayer == null ? "" : downstreamPlayer.getName(), candidateCount));
         }
     }
 
@@ -155,7 +160,7 @@ public final class PriorityActionDiagnostics {
         return formatRow("PRIORITY", Long.toString(PROCESS_ID), candidate == null ? "" : capture.request.getRequestId(),
                 candidate == null ? "" : 0, candidate == null ? "" : candidate.getKind(),
                 candidate == null ? "" : topLevelSource(candidate), "", Boolean.toString(capture.request.isForced()),
-                capture.turn, capture.phase, capture.player, capture.request.getCandidates().size(), "true",
+                capture.turn, capture.phase, capture.player, "", capture.request.getCandidates().size(), "true",
                 Boolean.toString(capture.request.getCandidates().size() > 1), capture.generationNanos,
                 nativeCallbackNanos, mapping, "", "", "", "", "", "");
     }
@@ -163,10 +168,10 @@ public final class PriorityActionDiagnostics {
     static String formatContinuationRecord(final String eventType, final long processId, final long decisionSequenceId,
             final int subdecisionIndex, final PriorityActionKind topLevelKind, final String topLevelSource,
             final DownstreamCallbackFamily family, final Boolean forcedIfKnown, final int turn, final String phase,
-            final String player, final int candidateCount) {
+            final String player, final String downstreamPlayer, final int candidateCount) {
         return formatRow(eventType, processId, decisionSequenceId, subdecisionIndex, topLevelKind, topLevelSource,
-                family, forcedIfKnown, turn, phase, player, candidateCount, "", "", "", "", "", "", "", "", "",
-                "", "");
+                family, forcedIfKnown, turn, phase, player, downstreamPlayer, candidateCount, "", "", "", "", "", "", "", "",
+                "", "", "");
     }
 
     static String formatFeasibilityRecord(final long processId, final int turn, final int playerIndex,
@@ -191,7 +196,7 @@ public final class PriorityActionDiagnostics {
             final PriorityCostFeasibility.UnsupportedReason unsupportedReason, final long durationNanos,
             final forge.game.cost.CostAdjustmentPreview.Status adjustmentStatus,
             final forge.game.cost.CostAdjustmentPreview.Reason adjustmentReason, final long adjustmentPreviewNanos) {
-        return formatRow("FEASIBILITY", processId, "", "", "", "", "", "", turn, phase, player, "", "", "",
+        return formatRow("FEASIBILITY", processId, "", "", "", "", "", "", turn, phase, player, "", "", "", "",
                 "", "", "", result, unsupportedReason, durationNanos, adjustmentStatus, adjustmentReason,
                 adjustmentPreviewNanos);
     }
