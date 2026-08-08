@@ -160,8 +160,7 @@ public class SpellAbilityProperty {
             return sa.getSpendPhyrexianMana() > 0;
         } else if (property.startsWith("ManaSpentBy")) {
             String[] k = property.split(" ", 2);
-            String def = k[1].substring(0, 2);
-            PlayerCollection spenders = AbilityUtils.getDefinedPlayers(source, def, spellAbility);
+            PlayerCollection spenders = AbilityUtils.getDefinedPlayers(source, k[1], spellAbility);
             return sa.getPayingMana().stream().anyMatch(m -> spenders.contains(m.getPlayer()));
         } else if (property.startsWith("ManaSpent")) {
             String[] k = property.split(" ", 2);
