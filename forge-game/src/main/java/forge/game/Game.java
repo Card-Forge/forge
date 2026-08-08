@@ -1005,6 +1005,7 @@ public class Game {
         }
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
+        runParams.put(AbilityKey.LastStateBattlefield, triggerList.getLastStateBattlefield());
         getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
 
         getTriggerHandler().onPlayerLost(p);
