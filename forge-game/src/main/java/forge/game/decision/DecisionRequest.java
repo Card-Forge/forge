@@ -14,46 +14,52 @@ public final class DecisionRequest {
     private final ModeDecisionContext modeContext;
     private final CardSelectionContext cardSelectionContext;
     private final AttackDeclarationContext attackContext;
+    private final BlockDeclarationContext blockContext;
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates) {
-        this(requestId, decisionType, candidates, null, null, null, null, null, null);
+        this(requestId, decisionType, candidates, null, null, null, null, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final TargetDecisionContext targetContext) {
-        this(requestId, decisionType, candidates, targetContext, null, null, null, null, null);
+        this(requestId, decisionType, candidates, targetContext, null, null, null, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final PaymentDecisionContext paymentContext) {
-        this(requestId, decisionType, candidates, null, paymentContext, null, null, null, null);
+        this(requestId, decisionType, candidates, null, paymentContext, null, null, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final XDecisionContext xContext) {
-        this(requestId, decisionType, candidates, null, null, xContext, null, null, null);
+        this(requestId, decisionType, candidates, null, null, xContext, null, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final ModeDecisionContext modeContext) {
-        this(requestId, decisionType, candidates, null, null, null, modeContext, null, null);
+        this(requestId, decisionType, candidates, null, null, null, modeContext, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final CardSelectionContext cardSelectionContext) {
-        this(requestId, decisionType, candidates, null, null, null, null, cardSelectionContext, null);
+        this(requestId, decisionType, candidates, null, null, null, null, cardSelectionContext, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final AttackDeclarationContext attackContext) {
-        this(requestId, decisionType, candidates, null, null, null, null, null, attackContext);
+        this(requestId, decisionType, candidates, null, null, null, null, null, attackContext, null);
+    }
+
+    DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
+            final BlockDeclarationContext blockContext) {
+        this(requestId, decisionType, candidates, null, null, null, null, null, null, blockContext);
     }
 
     private DecisionRequest(final long requestId, final DecisionType decisionType,
             final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
             final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
             final ModeDecisionContext modeContext, final CardSelectionContext cardSelectionContext,
-            final AttackDeclarationContext attackContext) {
+            final AttackDeclarationContext attackContext, final BlockDeclarationContext blockContext) {
         this.requestId = requestId;
         this.decisionType = Objects.requireNonNull(decisionType);
         this.candidates = List.copyOf(candidates);
@@ -63,6 +69,7 @@ public final class DecisionRequest {
         this.modeContext = modeContext;
         this.cardSelectionContext = cardSelectionContext;
         this.attackContext = attackContext;
+        this.blockContext = blockContext;
         if (this.candidates.isEmpty()) {
             throw new IllegalArgumentException("A DecisionRequest must contain at least one legal candidate");
         }
@@ -101,6 +108,12 @@ public final class DecisionRequest {
         }
         if (decisionType != DecisionType.ATTACK && attackContext != null) {
             throw new IllegalArgumentException("Only ATTACK DecisionRequests may contain attack context");
+        }
+        if (decisionType == DecisionType.BLOCK && blockContext == null) {
+            throw new IllegalArgumentException("A BLOCK DecisionRequest requires block context");
+        }
+        if (decisionType != DecisionType.BLOCK && blockContext != null) {
+            throw new IllegalArgumentException("Only BLOCK DecisionRequests may contain block context");
         }
     }
 
@@ -147,6 +160,11 @@ public final class DecisionRequest {
     /** ATTACK-only metadata for one atomic turn-based declaration step. */
     public AttackDeclarationContext getAttackContext() {
         return attackContext;
+    }
+
+    /** BLOCK-only metadata for one atomic turn-based declaration step. */
+    public BlockDeclarationContext getBlockContext() {
+        return blockContext;
     }
 
     public boolean isForced() {
