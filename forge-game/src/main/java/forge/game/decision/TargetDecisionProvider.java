@@ -71,6 +71,9 @@ public final class TargetDecisionProvider {
         }
 
         final List<TargetPrototype> prototypes = legalTargetPrototypes(ability, choosingPlayer);
+        if (!canCompleteMinimumTargets(ability, prototypes)) {
+            return Generation.invalidTargeting(System.nanoTime() - startedAtNanos);
+        }
         final List<LegalCandidate> candidates = new ArrayList<>();
         for (final TargetPrototype prototype : prototypes) {
             candidates.add(LegalCandidate.target(candidates.size(), prototype.kind(), prototype.target(),
@@ -138,7 +141,8 @@ public final class TargetDecisionProvider {
         if (target instanceof Card card && !legalCardCandidates(ability, choosingPlayer).cards().contains(card)) {
             return false;
         }
-        if (target instanceof Player && ability.getTargets().contains(target)) {
+        if (target instanceof Player && (ability.getTargets().contains(target)
+                || legalCardCandidates(ability, choosingPlayer).mustTargetObligationActive())) {
             return false;
         }
         return ability.canTarget(target);
@@ -159,7 +163,7 @@ public final class TargetDecisionProvider {
             }
             // The generic human target input toggles a player already chosen for this group; it cannot add it twice.
             if (target instanceof Player && (ability.getTargets().contains(target)
-                    || cardCandidates.mustTargetFiltered())) {
+                    || cardCandidates.mustTargetObligationActive())) {
                 continue;
             }
             final TargetPrototype prototype = cardOrPlayerPrototype(ability, choosingPlayer, target);
@@ -189,9 +193,14 @@ public final class TargetDecisionProvider {
     /** Uses the same MustTarget filtering boundary as PlayerControllerHuman for an isolated target group. */
     private static CardCandidates legalCardCandidates(final SpellAbility ability, final Player choosingPlayer) {
         final List<Card> cards = new ArrayList<>(CardUtil.getValidCardsToTarget(ability));
-        final boolean mustTargetFiltered = canFilterMustTarget(ability)
-                && StaticAbilityMustTarget.filterMustTargetCards(choosingPlayer, cards, ability);
-        return new CardCandidates(new HashSet<>(cards), mustTargetFiltered);
+        final boolean canFilter = canFilterMustTarget(ability);
+        if (canFilter) {
+            StaticAbilityMustTarget.filterMustTargetCards(choosingPlayer, cards, ability);
+        }
+        final boolean mustTargetObligationActive = canFilter
+                && choosingPlayer.equals(ability.getHostCard().getController())
+                && !StaticAbilityMustTarget.meetsMustTargetRestriction(ability.getRootAbility());
+        return new CardCandidates(new HashSet<>(cards), mustTargetObligationActive);
     }
 
     /** PlayerControllerHuman defers MustTarget filtering until final validation when another group targets. */
@@ -259,15 +268,42 @@ public final class TargetDecisionProvider {
         throw new UnsupportedTargetDecisionException(ability, "target group is not reachable from its root ability");
     }
 
+    /** Mirrors TargetSelection's minimum-target preflight before exposing an atomic decision. */
+    private static boolean canCompleteMinimumTargets(final SpellAbility ability,
+            final List<TargetPrototype> prototypes) {
+        final int remainingMinimum = ability.getMinTargets() - ability.getTargets().size();
+        if (remainingMinimum <= 0) {
+            return true;
+        }
+        if (prototypes.size() < remainingMinimum) {
+            return false;
+        }
+        final TargetRestrictions restrictions = ability.getTargetRestrictions();
+        if (!restrictions.isDifferentControllers() && !restrictions.isForEachPlayer()) {
+            return true;
+        }
+        final Set<Player> controllers = new HashSet<>();
+        for (final Card selected : ability.getTargets().getTargetCards()) {
+            controllers.add(selected.getController());
+        }
+        for (final TargetPrototype prototype : prototypes) {
+            if (prototype.target() instanceof Card card) {
+                controllers.add(card.getController());
+            }
+        }
+        return controllers.size() >= ability.getMinTargets();
+    }
+
     private static PriorityCostFeasibility.Assessment reassessCost(final SpellAbility ability) {
-        return new PriorityCostFeasibility().assessPayment(ability.getActivatingPlayer(), ability);
+        final SpellAbility rootAbility = ability.getRootAbility();
+        return new PriorityCostFeasibility().assessPayment(rootAbility.getActivatingPlayer(), rootAbility);
     }
 
     private record TargetPrototype(TargetCandidateKind kind, GameObject target, int entityId, String name,
             ZoneType zone, String semanticKey) {
     }
 
-    private record CardCandidates(Set<Card> cards, boolean mustTargetFiltered) {
+    private record CardCandidates(Set<Card> cards, boolean mustTargetObligationActive) {
     }
 
     /** Result for one atomic target operation. Only {@link Status#DECISION} contains a request. */

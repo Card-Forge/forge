@@ -12,9 +12,12 @@ human controller nor the AI controller.
 
 `TargetRestrictions.getAllCandidates(SpellAbility)` supplies the current card/player candidates. The provider uses
 the same `CardUtil.getValidCardsToTarget` operation as Forge's human target input to remove cards already chosen in
-the current group. For an isolated group it also uses Forge's `StaticAbilityMustTarget` filter; with multiple target
-groups it matches the human controller by deferring that global check until Forge's final validation. `SpellAbility`
-then remains the legality authority: `canTarget(GameObject)` re-evaluates card/player legality against the live
+the current group. Before exposing a request it mirrors `TargetSelection`'s minimum-completion preflight: enough
+remaining candidates must exist, and `TargetsWithDifferentControllers` / `TargetsForEachPlayer` must have enough
+distinct card controllers. For an isolated group it also uses Forge's `StaticAbilityMustTarget` filter and its final
+restriction predicate, so an active MustTarget obligation suppresses player targets even when filtering removed no
+cards. With multiple target groups it matches the human controller by deferring that global check until Forge's final
+validation. `SpellAbility` then remains the legality authority: `canTarget(GameObject)` re-evaluates card/player legality against the live
 `TargetChoices`, and `canTargetSpellAbility(SpellAbility)` does the same for stack spells. `TargetChoices.add(...)`
 is the only application operation used by the provider. Forge re-checks target legality while resolving the stack
 object (`MagicStack.hasFizzled`).
@@ -42,9 +45,10 @@ Cards must be legally identifiable through Forge's `CardView` for the actual tar
 may be selected but whose identity may not be shown has an empty exported name. Unrelated hidden-zone changes do
 not participate in target candidate generation.
 
-After the provider completes a group, it runs the existing side-effect-free `PriorityCostFeasibility` preview so a
-caller can discard an obsolete pre-target estimate. Forge remains authoritative and recalculates adjusted cost again
-in `CostPayment` immediately before payment. FRL-02B does not add a PAYMENT decision.
+After the provider completes a group, it runs the existing side-effect-free `PriorityCostFeasibility` preview against
+the cost-bearing root ability and its activating player, never the `Cost.Zero` target sub-ability. A caller can then
+discard an obsolete pre-target estimate. Forge remains authoritative and recalculates adjusted cost again in
+`CostPayment` immediately before payment. FRL-02B does not add a PAYMENT decision.
 
 The `setupTargets()` hook is intentionally diagnostic-only: it observes a live generic target operation without
 replacing its human or AI controller. An external-controller callback/sink is deferred, so the provider is consumed

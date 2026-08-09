@@ -111,6 +111,21 @@ public class TargetDecisionProviderTest extends AITest {
     }
 
     @Test
+    public void activeMustTargetObligationExcludesPlayerTargetsEvenWhenNoCardWasRemoved() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final SpellAbility ability = targetAbility("Shock", chooser);
+        final Card flagbearer = addCard("Standard Bearer", opponent);
+
+        final DecisionRequest request = decision(ability, chooser);
+
+        assertEquals(targetCardIds(request), List.of(flagbearer.getId()));
+        assertEquals(request.getCandidates().stream()
+                .filter(candidate -> candidate.getTargetKind() == TargetCandidateKind.TARGET_PLAYER).count(), 0L);
+    }
+
+    @Test
     public void noLegalRequiredTargetIsExplicitlyNonContinuable() {
         final Game game = initAndCreateGame();
         final Player chooser = game.getPlayers().get(1);
@@ -196,6 +211,55 @@ public class TargetDecisionProviderTest extends AITest {
         assertEquals(ability.getTargets().size(), 2);
         assertTrue(ability.getTargets().contains(firstTarget));
         assertTrue(ability.getTargets().contains(secondTarget));
+    }
+
+    @Test
+    public void completedTargetSubAbilityReassessesTheRootSpellCost() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final SpellAbility rootAbility = targetAbility("Arc Trail", chooser);
+        final Card firstTarget = addCard("Runeclaw Bear", opponent);
+        final Card secondTarget = addCard("Llanowar Elves", opponent);
+
+        final DecisionRequest firstRequest = decision(rootAbility, chooser);
+        provider.apply(firstRequest, candidateFor(firstRequest, firstTarget));
+        final SpellAbility targetSubAbility = rootAbility.getSubAbility();
+        final DecisionRequest secondRequest = decision(targetSubAbility, chooser);
+        final TargetDecisionProvider.Generation completed = provider.apply(secondRequest,
+                candidateFor(secondRequest, secondTarget));
+
+        assertEquals(completed.getStatus(), TargetDecisionProvider.Status.COMPLETE);
+        assertEquals(completed.getCostFeasibility().getResult(), PriorityCostFeasibility.Result.UNPAYABLE);
+    }
+
+    @Test
+    public void requiredMultiTargetWithTooFewCandidatesIsInvalidBeforeAnyDecision() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final SpellAbility ability = targetAbility("Incriminate", chooser);
+        addCard("Runeclaw Bear", opponent);
+
+        final TargetDecisionProvider.Generation generation = provider.generateTargetRequest(ability, chooser, null);
+
+        assertEquals(generation.getStatus(), TargetDecisionProvider.Status.INVALID_TARGETING);
+        assertNull(generation.getRequest());
+    }
+
+    @Test
+    public void differentControllerMinimumRequiresDistinctControllersBeforeAnyDecision() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final SpellAbility ability = targetAbility("Modify Memory", chooser);
+        addCard("Runeclaw Bear", opponent);
+        addCard("Llanowar Elves", opponent);
+
+        final TargetDecisionProvider.Generation generation = provider.generateTargetRequest(ability, chooser, null);
+
+        assertEquals(generation.getStatus(), TargetDecisionProvider.Status.INVALID_TARGETING);
+        assertNull(generation.getRequest());
     }
 
     @Test
