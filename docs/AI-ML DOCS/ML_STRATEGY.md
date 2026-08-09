@@ -2,7 +2,7 @@
 
 **Status:** Provisional / Accepted for implementation planning
 **Date:** 2026-08-08
-**Revision:** 3 — decision decomposition, termination semantics, FRL-00.5 measurement contract, benchmark matchup policy, engineering timebox, compute-provider portability
+**Revision:** 4 — decision decomposition, termination semantics, FRL-00.5 measurement contract, benchmark matchup policy, engineering timebox, compute-provider portability, FRL-00.5 findings
 **Scope:** Initial ForgeRL 1v1 research environment
 
 ## Purpose
@@ -156,6 +156,79 @@ Initial policy:
 This table is an initial architectural policy, not a complete inventory of Forge callbacks.
 
 Every actual `PlayerController` decision type must eventually be classified explicitly.
+
+### Rationale: generalization, not current infeasibility
+
+The initial decision decomposition policy is not based only on the candidate counts observed in the current two-deck slice.
+
+FRL-00.5 found relatively small observed structures in the benchmark workloads:
+
+```text
+ATTACK
+eligible attackers:
+max 6 proactive
+max 8 reactive
+
+BLOCK
+eligible blockers:
+max 4
+
+ORDER
+items:
+max 3 proactive
+max 4 reactive
+```
+
+For this restricted slice, complete enumeration of some of these outcomes could be computationally feasible.
+
+Nevertheless, the initial ForgeRL design retains sequential decomposition for:
+
+```text
+ATTACK
+BLOCK
+ORDER
+PAYMENT where needed
+```
+
+because the architecture must remain stable as board sizes and card pools grow.
+
+The primary rationale is therefore:
+
+> **generalization across variable and potentially much larger decision structures, rather than evidence that enumeration is already infeasible in the initial benchmark.**
+
+For example:
+
+```text
+8 eligible attackers
+→ at most 256 subsets
+
+15 eligible attackers
+→ 32,768 subsets
+```
+
+A policy trained to score incremental choices such as:
+
+```text
+ADD_ATTACKER(card)
+DONE
+```
+
+can reuse the same action semantics across both situations.
+
+A policy whose candidate vocabulary consists of complete attacker subsets would instead encounter rapidly changing, largely unseen compound candidates as board size grows.
+
+Therefore decomposition is selected where it provides:
+
+```text
+stable action semantics
+bounded candidate-set growth
+better transfer across board sizes
+reusable card/entity representations
+```
+
+even if enumeration would have been affordable in the current controlled slice.
+
+This remains an empirical architectural decision and may be revisited for specific bounded decision families where whole-action enumeration proves materially better.
 
 ## 3.2 Attacker Selection
 
@@ -913,9 +986,227 @@ Also measure `GameCopier` latency where practical for future search evaluation.
 
 The benchmark must distinguish proactive from reactive workloads where possible.
 
+## 14.7 FRL-00.5 Process-Scaling Result
+
+FRL-00.5 measured the following approximate aggregate Forge-native callback throughput:
+
+```text
+1 worker     267 callbacks/s
+2 workers    388 callbacks/s
+4 workers    542 callbacks/s
+6 workers    548 callbacks/s
+
+6 workers,
+ActiveProcessorCount=1
+              571 callbacks/s
+
+6 workers,
+ActiveProcessorCount=2
+              584 callbacks/s
+
+8 workers    489 callbacks/s
+```
+
+The correct interpretation is:
+
+```text
+multi-process scaling = MODERATE
+```
+
+not linear or near-linear.
+
+The practical scaling knee on the benchmark machine is approximately:
+
+```text
+4-6 JVM workers
+```
+
+Six workers produce roughly twice the throughput of one worker, not six times the throughput.
+
+Eight workers already reduce aggregate throughput.
+
+Therefore ForgeAI should not assume that adding actors will continue increasing environment throughput proportionally.
+
+The measured result supports a small asynchronous actor pool, but does not by itself establish distributed actor throughput as the dominant ML optimization target.
+
+## 14.8 JVM Processor Visibility
+
+FRL-00.5 found only a modest throughput change from constraining JVM processor visibility.
+
+At six workers:
+
+```text
+Default
+~548 callbacks/s
+~1.15 GB mean RSS/worker
+
+ActiveProcessorCount=1
+~571 callbacks/s
+~510 MB mean RSS/worker
+
+ActiveProcessorCount=2
+~584 callbacks/s
+~1.38 GB mean RSS/worker
+```
+
+The primary architectural value of:
+
+```text
+-XX:ActiveProcessorCount=1
+```
+
+is therefore currently **memory/resource isolation**, not a major throughput improvement.
+
+It may leave substantially more host RAM available for:
+
+```text
+replay
+learner process
+IPC buffers
+dataset caching
+```
+
+while sacrificing little Forge throughput relative to the highest measured configuration.
+
+No value is yet designated as the production default.
+
+The measurement must be repeated with the real ForgeRL controller and learner workload before fixing JVM worker settings.
+
+Note that the observed RSS values are not monotonic in processor visibility. This should be re-checked before any value is treated as a resource guarantee.
+
+## 14.9 FRL-00.5 Trajectory-Size Measurements Are Diagnostics Only
+
+The FRL-00.5 compressed callback-size measurements must be labeled:
+
+```text
+CALLBACK METADATA ONLY
+NOT A REPLAY BUFFER ESTIMATE
+```
+
+because they do not contain:
+
+```text
+Observation
+LegalCandidate identities/features
+history/event representation
+recurrent sequence context
+```
+
+No replay-capacity conclusion may be drawn from those byte counts.
+
 ---
 
 # 15. Decision After FRL-00.5
+
+FRL-00.5 materially reduced uncertainty but did not yet select the production learner.
+
+Measured findings:
+
+```text
+Forge native execution:
+faster than initially feared
+
+multi-process scaling:
+useful but moderate
+
+future atomic agent-step rate:
+unknown
+
+replay value:
+unknown
+
+priority-action candidate structure:
+unknown
+```
+
+The prior assumption that Forge would make PPO obviously unaffordable is therefore rejected.
+
+PPO remains a fully viable baseline and potential production learner.
+
+FRL-00.5 does **not** show that replay is mandatory.
+
+It also does **not** show that asynchronous actor scaling is sufficient to prefer IMPALA/V-trace.
+
+Current status:
+
+```text
+PPO
+    viable
+
+R2D2 / replay
+    still a serious challenger
+
+IMPALA / V-trace
+    potentially useful,
+    but actor scaling is only moderate
+
+replay-capable actor-critic
+    interesting combined hypothesis,
+    not selected
+```
+
+The next algorithm decision must wait for measurements from the real atomic ForgeRL interface.
+
+## 15.1 Throughput Interpretation
+
+Using the highest native callback throughput measured by FRL-00.5:
+
+```text
+~584 callbacks/s
+```
+
+ten million native callbacks correspond to only several hours of aggregate Forge execution.
+
+This is substantially faster than the pre-benchmark expectation.
+
+However:
+
+```text
+Forge callback
+!=
+atomic ML decision
+```
+
+and existing callback measurements include Forge's current AI/controller behavior rather than the future external-policy path.
+
+Therefore callback throughput must not be used directly as an RL sample-throughput estimate.
+
+In particular, the project must still measure:
+
+```text
+atomic DecisionRequests/sec
+observation encoding cost
+legal-candidate encoding cost
+IPC cost
+policy inference cost
+learner contention
+```
+
+before deciding whether PPO's on-policy sample use is economically unacceptable.
+
+## 15.2 Current Scaling Classification
+
+For the decision matrix, FRL-00.5 currently places local execution closer to:
+
+```text
+interaction cost:
+UNKNOWN / apparently moderate
+
+process scaling:
+MODERATE
+```
+
+rather than confidently assigning ForgeAI to:
+
+```text
+expensive interaction
++
+good scaling
+```
+
+The algorithm matrix in Section 15.3 remains useful, but the final quadrant assignment is deferred until atomic ForgeRL measurements exist.
+
+## 15.3 Reference Decision Matrix
 
 Interpret the throughput benchmark as a two-axis matrix.
 
@@ -1012,6 +1303,26 @@ The exact decks must be selected from known-good Forge-compatible decks and docu
 
 If the initial two-deck environment cannot exercise these behaviors, its results must be labeled as a limited proactive benchmark rather than evidence of general Magic gameplay competence.
 
+## 16.1 FRL-00.5 Reactive-Workload Caveat
+
+The FRL-00.5 reactive workload is useful evidence that interactive Magic produces more callbacks and higher tail latency:
+
+```text
+~33% more callbacks/game
+higher p95/p99 callback latency
+roughly half the games/hour
+```
+
+However, it must not be treated as an upper bound on realistic reactive/control workload.
+
+The current Forge heuristic is itself limited in complex reactive play.
+
+Therefore:
+
+> **FRL-00.5 establishes that reactive workloads are measurably more expensive in the tested slice; it does not establish the maximum cost of strong reactive Magic play.**
+
+Future model evaluation must retain a proactive-vs-reactive workload split rather than collapsing both into one throughput or strength number.
+
 ---
 
 # 17. Engineering Timebox
@@ -1070,16 +1381,39 @@ Vanilla Forge baseline
         ↓
 
 FRL-00.5
-Throughput + decision-surface benchmark
+Forge-native throughput
++ decision-surface benchmark
+        ✅ PASS
 
         ↓
 
-FRL-01+
-Algorithm-neutral ForgeRL environment
+FRL-01A
+Priority Legal-Action Boundary
++ first real DecisionRequest
++ priority candidate measurements
 
         ↓
 
-RandomLegalPolicy completes full games
+FRL-01B+
+remaining algorithm-neutral
+decision boundaries
+
+        ↓
+
+RandomLegalPolicy
+completes representative full games
+
+        ↓
+
+REAL ForgeRL benchmark
+
+atomic agent decisions/sec
+observation bytes/decision
+candidate bytes/decision
+trajectory bytes/decision
+IPC latency
+inference latency
+learner contention
 
         ↓
 
@@ -1091,7 +1425,7 @@ Behavior Cloning
 
         ↓
 
-Controlled online-RL bake-off
+Online RL bake-off
 
         ↓
 
@@ -1114,6 +1448,81 @@ Multi-deck/card generalization
 
 Optional information-safe search
 ```
+
+## 18.1 FRL-01A — Priority Legal-Action Boundary
+
+The first ForgeRL environment task should focus specifically on the dominant unresolved decision surface:
+
+```text
+PRIORITY_ACTION
+```
+
+FRL-00.5 observed that priority-related callbacks account for the majority of measured controller callbacks, while their general legal candidate set remains unavailable through the existing instrumentation.
+
+FRL-01A should determine and expose:
+
+```text
+all legal top-level actions for the acting player
+
+PASS
+
+playable land actions
+
+castable spells
+
+activatable abilities
+
+other priority actions where applicable
+```
+
+from the correct player-perspective game state.
+
+It must distinguish:
+
+```text
+PASS is the only legal choice
+```
+
+from:
+
+```text
+PASS while alternatives exist
+```
+
+The latter remains a genuine strategic policy decision.
+
+FRL-01A must also decide, and document, which activations count as top-level priority alternatives. Mana abilities in particular are rarely meaningful as standalone priority choices; if they are exposed at top level, most priority windows will be classified as non-forced and the measured decision rate will be dominated by them. If they are hidden at top level, payment decomposition in Section 3.5 must reintroduce them.
+
+FRL-01A should directly measure:
+
+```text
+priority requests/game
+
+candidate-count:
+mean
+median
+p90
+p95
+p99
+max
+
+forced priority requests
+
+PASS with alternatives
+
+priority DecisionRequests/sec
+
+encoded bytes per priority candidate
+```
+
+This measurement is part of implementation, not a separate FRL-00.6 benchmark.
+
+The purpose is simultaneously to:
+
+1. establish the first real `DecisionRequest`,
+2. solve the largest unresolved action-interface boundary,
+3. measure the callback→agent-step transformation,
+4. establish the first real ML-facing throughput number.
 
 ---
 
