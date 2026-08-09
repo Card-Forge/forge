@@ -1,6 +1,8 @@
 package forge.game.decision;
 
 import forge.game.player.Player;
+import forge.game.mana.ManaConversionMatrix;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.spellability.SpellAbility;
 
 import java.io.BufferedWriter;
@@ -24,12 +26,16 @@ public final class PriorityActionDiagnostics {
             + "top_level_candidate_kind,top_level_source,downstream_callback_family,forced_if_known,"
             + "turn,phase,player,downstream_player,candidate_count,pass_present,pass_with_alternatives,request_generation_ns,"
             + "native_callback_ns,selection_mapping,feasibility_result,unsupported_reason,feasibility_ns,"
-            + "adjustment_status,adjustment_reason,adjustment_preview_ns,target_group_index,target_status,done_present";
+            + "adjustment_status,adjustment_reason,adjustment_preview_ns,target_group_index,target_status,done_present,"
+            + "payment_stage,payer_id,remaining_cost_summary,payment_status,payment_unsupported_reason,"
+            + "payment_candidate_kinds";
+    private static final int COLUMN_COUNT = 33;
     private static final String OUTPUT_PATH = System.getProperty(OUTPUT_PATH_PROPERTY, "");
     private static final boolean ENABLED = !OUTPUT_PATH.isBlank();
     private static final long PROCESS_ID = ProcessHandle.current().pid();
     private static final PriorityActionProvider PROVIDER = ENABLED ? new PriorityActionProvider() : null;
     private static final TargetDecisionProvider TARGET_PROVIDER = ENABLED ? new TargetDecisionProvider() : null;
+    private static final PaymentDecisionProvider PAYMENT_PROVIDER = ENABLED ? new PaymentDecisionProvider() : null;
     private static final List<String> EVENTS = ENABLED ? new ArrayList<>() : null;
     private static final ThreadLocal<ActiveContinuation> ACTIVE_CONTINUATION = ENABLED ? new ThreadLocal<>() : null;
 
@@ -119,6 +125,57 @@ public final class PriorityActionDiagnostics {
                     continuation.getTopLevelSource(), family, forcedIfKnown, active.capture.turn,
                     active.capture.phase, active.capture.player,
                     downstreamPlayer == null ? "" : downstreamPlayer.getName(), candidateCount));
+        }
+    }
+
+    /** Counts Forge controller entry callbacks without allocating an agent subdecision index. */
+    public static void recordRawPaymentCallback(final Player payer) {
+        if (!ENABLED) {
+            return;
+        }
+        final ActiveContinuation active = ACTIVE_CONTINUATION.get();
+        synchronized (EVENTS) {
+            EVENTS.add(formatRow("PAYMENT_CALLBACK", PROCESS_ID,
+                    active == null ? "" : active.continuation.getDecisionSequenceId(), "",
+                    active == null ? "" : active.continuation.getTopLevelCandidateKind(),
+                    active == null ? "" : active.continuation.getTopLevelSource(), DecisionType.PAYMENT, "",
+                    payer.getGame().getPhaseHandler().getTurn(), payer.getGame().getPhaseHandler().getPhase(),
+                    active == null ? "" : active.capture.player, payer.getName(), "", "", "", "", "", "",
+                    "", "", "", "", "", "", "", "", ""));
+        }
+    }
+
+    /** Records one neutral atomic request from the live Forge payment state. */
+    public static void recordPaymentRequest(final ManaCostBeingPaid cost, final SpellAbility ability,
+            final Player payer, final ManaConversionMatrix matrix) {
+        if (!ENABLED) {
+            return;
+        }
+        final ActiveContinuation active = ACTIVE_CONTINUATION.get();
+        final ActionContinuation continuation = active == null ? null : active.continuation;
+        final PaymentDecisionProvider.Generation generation = PAYMENT_PROVIDER.generatePaymentRequest(cost,
+                ability, payer, matrix, continuation);
+        final DecisionRequest request = generation.getRequest();
+        final PaymentDecisionContext context = request == null ? null : request.getPaymentContext();
+        final String eventType = request == null ? "PAYMENT_STATE" : "PAYMENT";
+        final String candidateKinds = request == null ? "" : request.getCandidates().stream()
+                .map(candidate -> candidate.getPaymentKind().name()).distinct().sorted()
+                .reduce((left, right) -> left + "+" + right).orElse("");
+        synchronized (EVENTS) {
+            EVENTS.add(formatRow(eventType, PROCESS_ID,
+                    context != null ? context.getDecisionSequenceId()
+                            : active == null ? "" : active.continuation.getDecisionSequenceId(),
+                    context == null ? "" : context.getSubdecisionIndex(),
+                    active == null ? "" : active.continuation.getTopLevelCandidateKind(),
+                    active == null ? "" : active.continuation.getTopLevelSource(), DecisionType.PAYMENT,
+                    request == null ? "" : request.isForced(), payer.getGame().getPhaseHandler().getTurn(),
+                    payer.getGame().getPhaseHandler().getPhase(), active == null ? "" : active.capture.player,
+                    payer.getName(), request == null ? 0 : request.getCandidates().size(), "", "",
+                    generation.getRequestGenerationNanos(), "", "", "",
+                    generation.getUnsupportedReason(), "", "", "", "", "", "", "",
+                    context == null ? "" : context.getPaymentStage(), payer.getId(),
+                    context == null ? cost.toString(false, payer.getManaPool()) : context.getRemainingCostSummary(),
+                    generation.getStatus(), generation.getUnsupportedReason(), candidateKinds));
         }
     }
 
@@ -275,11 +332,11 @@ public final class PriorityActionDiagnostics {
 
     private static String formatRow(final Object... values) {
         final StringBuilder row = new StringBuilder();
-        for (int index = 0; index < values.length; index++) {
+        for (int index = 0; index < Math.max(COLUMN_COUNT, values.length); index++) {
             if (index > 0) {
                 row.append(',');
             }
-            final Object value = values[index];
+            final Object value = index < values.length ? values[index] : "";
             final String text = value == null ? "" : value.toString();
             if (text.indexOf(',') >= 0 || text.indexOf('"') >= 0 || text.indexOf('\n') >= 0 || text.indexOf('\r') >= 0) {
                 row.append('"').append(text.replace("\"", "\"\"")).append('"');

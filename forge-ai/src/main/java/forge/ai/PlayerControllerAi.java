@@ -1242,7 +1242,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean effect) {
-        PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.PAYMENT, -1, null, player);
+        PriorityActionDiagnostics.recordRawPaymentCallback(player);
         return ComputerUtilMana.payManaCost(new Cost(toPay, effect), player, sa, effect);
     }
 
@@ -1265,7 +1265,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean applyManaToCost(ManaCostBeingPaid toPay, SpellAbility ability, String prompt, ManaConversionMatrix matrix, boolean effect) {
-        PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.PAYMENT, -1, null, player);
+        PriorityActionDiagnostics.recordRawPaymentCallback(player);
         assert(false);
         //Untested placeholder. The AI does not currently pay like this.
         return ComputerUtilMana.payManaCost(toPay, ability, player, effect);

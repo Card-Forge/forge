@@ -23,6 +23,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
+import forge.game.decision.PriorityActionDiagnostics;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
@@ -644,6 +645,18 @@ public class ComputerUtilMana {
         // Loop over mana needed
         while (!cost.isPaid()) {
             while (!cost.isPaid() && !manapool.isEmpty()) {
+                boolean hasCompatibleFloating = false;
+                for (final Mana mana : manapool) {
+                    if (mana.meetsManaRestrictions(sa)
+                            && sa.allowsPayingWithShard(mana.getSourceCard(), mana.getColor())
+                            && cost.isNeeded(mana, manapool)) {
+                        hasCompatibleFloating = true;
+                        break;
+                    }
+                }
+                if (!test && hasCompatibleFloating) {
+                    PriorityActionDiagnostics.recordPaymentRequest(cost, sa, ai, manapool);
+                }
                 boolean found = false;
                 for (byte color : ManaAtom.MANATYPES) {
                     if (manapool.tryPayCostWithColor(color, sa, cost, manaSpentToPay)) {
@@ -766,6 +779,7 @@ public class ComputerUtilMana {
                 // remove to prevent re-usage since resources don't get consumed
                 sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
             } else {
+                PriorityActionDiagnostics.recordPaymentRequest(cost, sa, ai, manapool);
                 final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
                 if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment, effect, true))) {
                     saList.remove(saPayment);

@@ -61,4 +61,17 @@ public class ManaConversionMatrix {
         Arrays.fill(colorRestrictionMatrix, ManaAtom.ALL_MANA_TYPES);
         snowForColor = false;
     }
+
+    /** Returns whether this matrix has Forge's default one-color-to-itself semantics. */
+    public boolean isIdentity() {
+        if (snowForColor || !Arrays.equals(colorConversionMatrix, identityMatrix)) {
+            return false;
+        }
+        for (final byte restriction : colorRestrictionMatrix) {
+            if (restriction != ManaAtom.ALL_MANA_TYPES) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

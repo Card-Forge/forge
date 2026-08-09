@@ -14,7 +14,7 @@ public class PriorityActionDiagnosticsTest {
                 3, "MAIN1", "Ada", "Bea", 5);
 
         final String[] fields = row.split(",", -1);
-        assertEquals(fields.length, 27);
+        assertEquals(fields.length, 33);
         assertEquals(fields[0], "DOWNSTREAM");
         assertEquals(fields[1], "42");
         assertEquals(fields[2], "481");
@@ -45,7 +45,7 @@ public class PriorityActionDiagnosticsTest {
                 CostAdjustmentPreview.Status.CHOICE_REQUIRED, CostAdjustmentPreview.Reason.REDUCTION_ORDER, 45L);
 
         final String[] fields = row.split(",", -1);
-        assertEquals(fields.length, 27);
+        assertEquals(fields.length, 33);
         assertEquals(fields[0], "FEASIBILITY");
         assertEquals(fields[18], "UNSUPPORTED");
         assertEquals(fields[19], "COST_ADJUSTMENT_CHOICE_REQUIRED");
@@ -62,7 +62,7 @@ public class PriorityActionDiagnosticsTest {
                 0, TargetDecisionProvider.Status.DECISION, true, 123L, null);
 
         final String[] fields = row.split(",", -1);
-        assertEquals(fields.length, 27);
+        assertEquals(fields.length, 33);
         assertEquals(fields[0], "TARGET");
         assertEquals(fields[1], "42");
         assertEquals(fields[2], "481");

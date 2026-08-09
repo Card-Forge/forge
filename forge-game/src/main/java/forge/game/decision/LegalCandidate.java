@@ -3,6 +3,7 @@ package forge.game.decision;
 import forge.card.CardStateName;
 import forge.game.GameObject;
 import forge.game.card.Card;
+import forge.game.mana.Mana;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -29,6 +30,8 @@ public final class LegalCandidate {
     private final String targetName;
     private final ZoneType targetZone;
     private final GameObject target;
+    private final PaymentCandidateKind paymentKind;
+    private final Mana mana;
 
     private LegalCandidate(final int candidateId, final PriorityActionKind kind, final Card source,
             final SpellAbility spellAbility, final String semanticKey) {
@@ -46,6 +49,8 @@ public final class LegalCandidate {
         this.targetName = "";
         this.targetZone = null;
         this.target = null;
+        this.paymentKind = null;
+        this.mana = null;
     }
 
     private LegalCandidate(final int candidateId, final TargetCandidateKind targetKind, final GameObject target,
@@ -64,6 +69,28 @@ public final class LegalCandidate {
         this.targetName = Objects.requireNonNull(targetName);
         this.targetZone = targetZone;
         this.target = target;
+        this.paymentKind = null;
+        this.mana = null;
+    }
+
+    private LegalCandidate(final int candidateId, final PaymentCandidateKind paymentKind, final Card source,
+            final SpellAbility spellAbility, final Mana mana, final String semanticKey) {
+        this.candidateId = candidateId;
+        this.kind = null;
+        this.sourceCardId = source == null ? -1 : source.getId();
+        this.sourceName = source == null ? "" : source.getName();
+        this.sourceZone = source == null || source.getZone() == null ? null : source.getZone().getZoneType();
+        this.sourceState = source == null ? null : source.getCurrentStateName();
+        this.abilityDescription = spellAbility == null ? "" : spellAbility.getDescription();
+        this.semanticKey = Objects.requireNonNull(semanticKey);
+        this.spellAbility = spellAbility;
+        this.targetKind = null;
+        this.targetEntityId = -1;
+        this.targetName = "";
+        this.targetZone = null;
+        this.target = null;
+        this.paymentKind = Objects.requireNonNull(paymentKind);
+        this.mana = mana;
     }
 
     static LegalCandidate pass(final int candidateId) {
@@ -86,6 +113,17 @@ public final class LegalCandidate {
         return new LegalCandidate(candidateId, TargetCandidateKind.DONE, null, -1, "", null, "DONE");
     }
 
+    static LegalCandidate paymentSource(final int candidateId, final Card source,
+            final SpellAbility manaAbility, final String semanticKey) {
+        return new LegalCandidate(candidateId, PaymentCandidateKind.ACTIVATE_MANA_SOURCE, source,
+                manaAbility, null, semanticKey);
+    }
+
+    static LegalCandidate floatingMana(final int candidateId, final Mana mana, final String semanticKey) {
+        return new LegalCandidate(candidateId, PaymentCandidateKind.USE_FLOATING_MANA, mana.getSourceCard(),
+                null, mana, semanticKey);
+    }
+
     public int getCandidateId() {
         return candidateId;
     }
@@ -97,6 +135,11 @@ public final class LegalCandidate {
     /** The TARGET candidate kind, or {@code null} when this candidate is a priority action. */
     public TargetCandidateKind getTargetKind() {
         return targetKind;
+    }
+
+    /** The PAYMENT candidate kind, or {@code null} for another decision family. */
+    public PaymentCandidateKind getPaymentKind() {
+        return paymentKind;
     }
 
     /** Stable Forge entity or stack-instance identifier for a TARGET candidate; {@code -1} for DONE. */
@@ -145,5 +188,9 @@ public final class LegalCandidate {
 
     GameObject getTarget() {
         return target;
+    }
+
+    Mana getMana() {
+        return mana;
     }
 }
