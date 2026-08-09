@@ -81,6 +81,10 @@ For a branch without `TargetingPlayer`, it uses the root activating player, matc
 semantics. An unresolved explicit `TargetingPlayer`, divided/random targeting, hidden targets, and coupled target
 sets without a completion proof are unsupported. Mandatory target groups with no legal target are removed.
 
+For v0, targeting is supported only on the candidate mode itself. Any deeper sub-ability that uses targeting is
+classified as `UNSUPPORTED_MODE_TARGET_COMPLETION`: `makePossibleOptions` does not guarantee callback-prepared
+target-text changes for those detached nested groups, and MODE does not mutate or recreate their restrictions.
+
 The MODE-specific enumeration uses the current callback-prepared Forge restrictions through `canTarget` and does
 not call `TargetRestrictions.getAllCandidates`, avoiding a second `applyTargetTextChanges` mutation. The normal
 TARGET request path retains its existing behavior.
@@ -98,10 +102,13 @@ shared root X/payment domain belongs to the accepted FRL-02D support slice.
 For explicit X-before-MODE cards, the already announced root X remains authoritative. The Confront the Past
 fixture sets X before MODE and verifies it is unchanged after generation.
 
-Candidate-specific TARGET completion stays separate. Non-X roots use `PriorityCostFeasibility` only as
-side-effect-free shared-cost/payability evidence; this is not claimed as proof of every FRL-02C implementation
-detail and adds no PAYMENT capability. ModeCost, Spree, Tiered, Pawprint, and other per-mode cost semantics are
-unsupported.
+Candidate-specific TARGET completion stays separate. Non-X roots first use `PriorityCostFeasibility` for
+side-effect-free shared-cost/payability evidence, then call the request-free
+`PaymentDecisionProvider.assessFuturePaymentSupport`. That classifier reuses the accepted FRL-02C mana-source
+collector and cost preview on copied state, including its ProduceMana-replacement and other capability gates. It
+allocates no request or continuation index and mutates no live mana ability or pool. A known PAYMENT capability
+failure produces `MODE_STATE / MODE_PAYMENT_SUPPORT`; no new PAYMENT capability is added. ModeCost, Spree,
+Tiered, Pawprint, and other per-mode cost semantics remain unsupported.
 
 ## Apply and Forge chaining
 
@@ -140,7 +147,9 @@ CanRepeatModes = false
 no ModeCost
 no Spree/Tiered/Pawprint
 no unresolved TargetingPlayer
-provable target completion
+provable top-level mode target completion
+no targeted nested sub-ability
+no ChoiceRestriction
 shared supported root cost
 ```
 
@@ -162,10 +171,12 @@ Primary real-card fixtures are Invoke the Firemind, Izzet Charm, and Confront th
 | MinCharmNum not one | `UNSUPPORTED` |
 | CanRepeatModes | `UNSUPPORTED` |
 | ModeCost, Spree, Tiered, Pawprint | `UNSUPPORTED` |
+| ChoiceRestriction | `UNSUPPORTED` |
 | Unresolved TargetingPlayer | `UNSUPPORTED_MODE_TARGET_COMPLETION` |
+| Targeting below the top-level mode | `UNSUPPORTED_MODE_TARGET_COMPLETION` |
 | Coupled/divided/random/hidden target completion without proof | `UNSUPPORTED_MODE_TARGET_COMPLETION` |
 | Future X/payment domain outside FRL-02D | `MODE_X_PAYMENT_DOMAIN` |
-| Shared non-X payment feasibility outside controlled support | `MODE_PAYMENT_SUPPORT` |
+| Shared non-X payment or FRL-02C capability outside controlled support | `MODE_PAYMENT_SUPPORT` |
 
 No subset/multiset enumeration, multi-step MODE solver, confirmation, card selection, target search, payment
 extension, combat decomposition, or AI mode scoring was added.
@@ -175,7 +186,7 @@ extension, combat decomposition, or AI mode scoring was added.
 The focused decision suite passed:
 
 ```text
-142 tests, 0 failures, 0 errors, 0 skipped
+146 tests, 0 failures, 0 errors, 0 skipped
 ```
 
 It includes the MODE fixtures plus the complete existing ActionContinuation, PRIORITY_ACTION, TARGET, X_VALUE,
@@ -190,7 +201,9 @@ MODE coverage includes original ordinals after filtering, deterministic keys, fo
 mandatory-target failure with a null root sub-chain, Invoke MODE-before-X, Confront X-before-MODE, continuation
 identity, public/private candidate fields, Forge-owned chaining, stale ordinal and stale target rejection,
 hidden-hand differential, purity, chooser/optional/random/Entwine/copy boundaries, multi/repeat rejection, and
-Spree/Pawprint/ModeCost rejection.
+Spree/Pawprint/ModeCost rejection. Review regressions additionally cover a real Izzet Charm, Island, Mountain,
+and Contamination state; nested detached targeting rejection; ChoiceRestriction rejection without continuation
+consumption, and side-effect-free future PAYMENT classification.
 
 Source inspection confirms the MODE provider contains no `SpellApiToAi`, `ComputerUtil`, `AILogic`,
 `makePossibleOptions`, `generateTargetRequest`, or `generateXRequest` call.
@@ -207,25 +220,27 @@ Izzet Guild Kit vs Dimir Guild Kit: 10 games, seed 20260810, result 3-7
 | Matchup | Raw MODE callbacks | Neutral MODE requests | Forced | Strategic | Unsupported MODE states |
 |---|---:|---:|---:|---:|---:|
 | Dead and Alive vs Air Forces | 0 | 0 | 0 | 0 | 0 |
-| Izzet Guild Kit vs Dimir Guild Kit | 2 | 1 | 1 | 0 | 1 |
+| Izzet Guild Kit vs Dimir Guild Kit | 2 | 0 | 0 | 0 | 2 |
 
-The Guild run naturally observed Izzet Charm: one callback-supplied mode remained, producing forced `MODE|2`.
-It also observed Invoke the Firemind with two raw modes; its live shared future X/payment domain was outside the
-accepted slice and produced `MODE_STATE / MODE_X_PAYMENT_DOMAIN`, not an unsafe request. AI was not modified to
+The Guild run naturally observed Izzet Charm with one callback-supplied mode. Its current mana-source state was
+outside the accepted FRL-02C boundary and produced `MODE_STATE / MODE_PAYMENT_SUPPORT`; the later PAYMENT
+diagnostic independently observed `VARIABLE_MANA_OUTPUT`. Invoke the Firemind had two raw modes, but its live
+shared future X/payment domain was outside the accepted slice and produced
+`MODE_STATE / MODE_X_PAYMENT_DOMAIN`. Neither case exported an unsafe request, and AI was not modified to
 manufacture callbacks.
 
 The CSV continuation evidence is:
 
 ```text
-Izzet Charm: PRIORITY_ACTION 0 -> MODE_CALLBACK no index -> MODE 1 -> PAYMENT 2
+Izzet Charm: PRIORITY_ACTION 0 -> MODE_CALLBACK no index -> MODE_STATE no index -> PAYMENT 1
 Invoke:      PRIORITY_ACTION 0 -> MODE_CALLBACK no index -> MODE_STATE no index -> PAYMENT 1
 ```
 
 Raw CSVs are outside the repository:
 
 ```text
-C:\Users\chris\AppData\Local\Temp\frl02e-dead-air-20260809.csv
-C:\Users\chris\AppData\Local\Temp\frl02e-izzet-dimir-20260810.csv
+C:\Users\chris\AppData\Local\Temp\frl02e-review-dead-air-20260809.csv
+C:\Users\chris\AppData\Local\Temp\frl02e-review-izzet-dimir-20260810.csv
 ```
 
 ## MODE generation performance
@@ -235,20 +250,20 @@ After 20 warmups, 180 generations of the three-candidate fixture measured:
 
 | Metric | Value |
 |---|---:|
-| generation p50 | 0.683 ms |
-| generation p95 | 1.111 ms |
-| generation p99 | 1.351 ms |
+| generation p50 | 0.906 ms |
+| generation p95 | 1.664 ms |
+| generation p99 | 2.173 ms |
 | candidate mean | 2.0 |
 | candidate p50 | 2 |
 | candidate p95 | 3 |
 | candidate max | 3 |
 | rule/legality probes per request | 2, 3, 4 |
-| downstream completion probes per request | 2, 3, 4 |
+| downstream completion probes per request | 3, 3, 5 |
 
-The benchmark's sole supported request had one candidate, two rule probes, two downstream probes, and 2.128 ms
-generation time. The unsupported Invoke state had three rule probes, three downstream probes, and 5.850 ms
-generation time. These are MODE candidate-generation measurements, not Forge callback latency, candidate encoding
-latency, policy inference latency, or ForgeRL throughput.
+The benchmark's unsupported Izzet state had two rule probes, three downstream probes, and 3.303 ms generation
+time. The unsupported Invoke state had three rule probes, three downstream probes, and 6.670 ms generation time.
+These are MODE candidate-generation measurements, not Forge callback latency, candidate encoding latency, policy
+inference latency, or ForgeRL throughput.
 
 ## Files changed
 
@@ -260,10 +275,12 @@ forge-game/src/main/java/forge/game/decision/DecisionType.java
 forge-game/src/main/java/forge/game/decision/LegalCandidate.java
 forge-game/src/main/java/forge/game/decision/ModeDecisionContext.java
 forge-game/src/main/java/forge/game/decision/ModeDecisionProvider.java
+forge-game/src/main/java/forge/game/decision/PaymentDecisionProvider.java
 forge-game/src/main/java/forge/game/decision/PriorityActionDiagnostics.java
 forge-game/src/main/java/forge/game/decision/TargetDecisionProvider.java
 forge-game/src/main/java/forge/game/decision/XDecisionProvider.java
 forge-gui-desktop/src/test/java/forge/game/decision/ModeDecisionProviderTest.java
+forge-gui-desktop/src/test/java/forge/game/decision/PaymentDecisionProviderTest.java
 forge-gui-desktop/src/test/java/forge/game/decision/PriorityActionDiagnosticsTest.java
 docs/AI-ML DOCS/FRL_02E_MODE_REPORT.md
 docs/superpowers/plans/2026-08-09-frl-02e-mode-boundary.md

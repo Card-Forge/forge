@@ -260,6 +260,68 @@ public class ModeDecisionProviderTest extends AITest {
     }
 
     @Test
+    public void paymentCapabilityRejectsRelevantProduceManaReplacement() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        addCard("Island", chooser);
+        addCard("Mountain", chooser);
+        addCard("Contamination", chooser);
+        final SpellAbility izzet = spell(addCardToZone("Izzet Charm", chooser, ZoneType.Hand));
+        izzet.setActivatingPlayer(chooser);
+        final AbilitySub draw = izzet.getAdditionalAbilityList("Choices").get(2);
+
+        final ModeDecisionProvider.Generation generation = provider.generateModeRequest(izzet, List.of(draw),
+                1, 1, false, chooser, null);
+
+        assertEquals(generation.getStatus(), ModeDecisionProvider.Status.UNSUPPORTED);
+        assertEquals(generation.getUnsupportedReason(), ModeDecisionProvider.UnsupportedReason.MODE_PAYMENT_SUPPORT);
+        assertNull(generation.getRequest());
+    }
+
+    @Test
+    public void nestedTargetedModeBranchIsConservativelyUnsupported() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        addCard("Grizzly Bears", opponent);
+        final SpellAbility izzet = supportedIzzet(chooser);
+        final AbilitySub draw = izzet.getAdditionalAbilityList("Choices").get(2);
+        final AbilitySub nestedTarget = (AbilitySub) izzet.getAdditionalAbilityList("Choices").get(1).copy(chooser);
+        draw.setSubAbility(nestedTarget);
+
+        final ModeDecisionProvider.Generation generation = provider.generateModeRequest(izzet, List.of(draw),
+                1, 1, false, chooser, null);
+
+        assertEquals(generation.getStatus(), ModeDecisionProvider.Status.UNSUPPORTED);
+        assertEquals(generation.getUnsupportedReason(),
+                ModeDecisionProvider.UnsupportedReason.MODE_TARGET_COMPLETION);
+        assertNull(generation.getRequest());
+        assertNull(izzet.getSubAbility());
+    }
+
+    @Test
+    public void choiceRestrictionIsUnsupportedWithoutConsumingContinuationIndex() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final ActionContinuation continuation = new ActionContinuation(481L,
+                PriorityActionKind.CAST_SPELL, "choice restriction sequence");
+        final SpellAbility restricted = supportedIzzet(chooser);
+        restricted.getMapParams().put("ChoiceRestriction", "ThisTurn");
+
+        final ModeDecisionProvider.Generation rejected = provider.generateModeRequest(restricted,
+                restricted.getAdditionalAbilityList("Choices"), 1, 1, false, chooser, continuation);
+        final SpellAbility supported = supportedIzzet(chooser);
+        final AbilitySub draw = supported.getAdditionalAbilityList("Choices").get(2);
+        final DecisionRequest request = provider.generateModeRequest(supported, List.of(draw),
+                1, 1, false, chooser, continuation).getRequest();
+
+        assertEquals(rejected.getStatus(), ModeDecisionProvider.Status.UNSUPPORTED);
+        assertEquals(rejected.getUnsupportedReason(), ModeDecisionProvider.UnsupportedReason.UNSUPPORTED_SHAPE);
+        assertNull(rejected.getRequest());
+        assertEquals(request.getModeContext().getSubdecisionIndex(), Integer.valueOf(1));
+    }
+
+    @Test
     public void applyReturnsLiveModeAndLeavesForgeChainingAuthoritative() {
         final Game game = initAndCreateGame();
         final Player chooser = game.getPlayers().get(1);
@@ -387,7 +449,7 @@ public class ModeDecisionProviderTest extends AITest {
 
         assertEquals(candidateCounts, List.of(1, 2, 3));
         assertEquals(ruleProbes, List.of(2, 3, 4));
-        assertEquals(downstreamProbes, List.of(2, 3, 4));
+        assertEquals(downstreamProbes, List.of(3, 3, 5));
     }
 
     private static void addMetrics(final ModeDecisionProvider.Generation generation,

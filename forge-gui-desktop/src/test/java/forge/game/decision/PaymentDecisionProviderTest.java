@@ -441,6 +441,24 @@ public class PaymentDecisionProviderTest extends AITest {
     }
 
     @Test
+    public void futurePaymentSupportAssessmentReusesReplacementGateWithoutMutatingLiveManaAbility() {
+        final PaymentFixture fixture = fixture("Lightning Bolt", "Mountain");
+        addCard("Contamination", fixture.payer());
+        final SpellAbility liveManaAbility = fixture.sources().get(0).getManaAbilities().get(0);
+        final Player activatingPlayerBefore = liveManaAbility.getActivatingPlayer();
+
+        final PaymentDecisionProvider.SupportAssessment assessment = provider.assessFuturePaymentSupport(
+                fixture.ability(), fixture.payer());
+
+        assertEquals(assessment.getStatus(), PaymentDecisionProvider.SupportStatus.UNSUPPORTED);
+        assertEquals(assessment.getUnsupportedReason(),
+                PaymentDecisionProvider.UnsupportedReason.MANA_PRODUCTION_REPLACEMENT);
+        assertSame(liveManaAbility.getActivatingPlayer(), activatingPlayerBefore);
+        assertFalse(fixture.sources().get(0).isTapped());
+        assertTrue(fixture.payer().getManaPool().isEmpty());
+    }
+
+    @Test
     public void dynamicManaAmountIsNotClassifiedFromOrigProducedAlone() {
         final PaymentFixture fixture = fixture("Dark Banishing", "Everflowing Chalice");
 

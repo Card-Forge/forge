@@ -31,6 +31,7 @@ public final class ModeDecisionProvider {
     private final TargetDecisionProvider targetProvider = new TargetDecisionProvider();
     private final XDecisionProvider xProvider = new XDecisionProvider();
     private final PriorityCostFeasibility paymentFeasibility = new PriorityCostFeasibility();
+    private final PaymentDecisionProvider paymentProvider = new PaymentDecisionProvider();
     private long nextRequestId;
 
     public Generation generateModeRequest(final SpellAbility root, final List<AbilitySub> possible,
@@ -102,6 +103,10 @@ public final class ModeDecisionProvider {
                 return Assessment.status(Status.UNSUPPORTED, UnsupportedReason.MODE_TARGET_COMPLETION,
                         possible.size() + 1, downstreamProbes);
             }
+            if (hasNestedTargeting(mode)) {
+                return Assessment.status(Status.UNSUPPORTED, UnsupportedReason.MODE_TARGET_COMPLETION,
+                        possible.size() + 1, downstreamProbes);
+            }
             downstreamProbes++;
             final TargetDecisionProvider.CompletionAssessment target =
                     targetProvider.assessBranchCompletion(mode, root.getActivatingPlayer());
@@ -138,6 +143,16 @@ public final class ModeDecisionProvider {
                 return Assessment.status(Status.UNSUPPORTED, UnsupportedReason.MODE_PAYMENT_SUPPORT,
                         possible.size() + 1, downstreamProbes);
             }
+            downstreamProbes++;
+            final PaymentDecisionProvider.SupportAssessment support =
+                    paymentProvider.assessFuturePaymentSupport(root, root.getActivatingPlayer());
+            if (support.getStatus() == PaymentDecisionProvider.SupportStatus.INVALID_PAYMENT) {
+                return Assessment.status(Status.INVALID_MODE, null, possible.size() + 1, downstreamProbes);
+            }
+            if (support.getStatus() != PaymentDecisionProvider.SupportStatus.SUPPORTED) {
+                return Assessment.status(Status.UNSUPPORTED, UnsupportedReason.MODE_PAYMENT_SUPPORT,
+                        possible.size() + 1, downstreamProbes);
+            }
         }
         return new Assessment(Status.DECISION, null, List.copyOf(candidates), possible.size() + 1,
                 downstreamProbes);
@@ -146,6 +161,7 @@ public final class ModeDecisionProvider {
     private static boolean isSupportedShape(final SpellAbility root, final List<AbilitySub> possible,
             final int min, final int num, final boolean allowRepeat, final Player choosingPlayer) {
         if (root.isTrigger() || root.hasParam("Optional") || root.hasParam("Chooser")
+                || root.hasParam("ChoiceRestriction")
                 || root.hasParam("Random") || root.hasParam("Pawprint") || min != 1 || num != 1 || allowRepeat
                 || root.getActivatingPlayer() == null || !root.getActivatingPlayer().equals(choosingPlayer)
                 || root.getSubAbility() != null || root.getHostCard().hasKeyword(Keyword.SPREE)
@@ -172,6 +188,17 @@ public final class ModeDecisionProvider {
             }
         }
         return -1;
+    }
+
+    private static boolean hasNestedTargeting(final AbilitySub mode) {
+        SpellAbility current = mode.getSubAbility();
+        while (current != null) {
+            if (current.usesTargeting()) {
+                return true;
+            }
+            current = current.getSubAbility();
+        }
+        return false;
     }
 
     private record Assessment(Status status, UnsupportedReason unsupportedReason,
