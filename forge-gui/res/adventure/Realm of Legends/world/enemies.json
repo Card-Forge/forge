@@ -62928,6 +62928,94 @@
     "spawnRate": 0
   },
   {
+    "name": "Istvan",
+    "sprite": "sprites/enemy/humanoid/human/warrior/caribou_elite.atlas",
+    "deck": [
+      "decks/legends/istvan.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Murderer's Axe"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Istvan, Butcher of Eln"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      }
+    ],
+    "colors": "B",
+    "spawnRate": 0
+  },
+  {
     "name": "Withengar",
     "sprite": "sprites/enemy/fiend/abyssalbaron.atlas",
     "deck": [

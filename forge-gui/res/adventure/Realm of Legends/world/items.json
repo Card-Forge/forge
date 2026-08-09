@@ -1640,6 +1640,17 @@
      ]
     }
   },
+  {
+    "name": "Murderer's Axe",
+    "description": "Equip - discard. Gives +2/+2.",
+    "equipmentSlot": "Right",
+    "iconName": "Murderer'sAxe",
+    "effect": {
+      "startBattleWithCard": [
+        "Murderer's Axe|SOI"
+      ]
+    }
+  },
     {
       "name": "Dune-Brood Anklet",
       "description": "3/3 that gives a 1/1 for each land on attack",
