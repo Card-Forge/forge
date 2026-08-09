@@ -26,6 +26,7 @@ import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.cost.CostPayment;
+import forge.game.decision.PriorityActionDiagnostics;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventManaPool;
 import forge.game.phase.PhaseType;
@@ -249,6 +250,51 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return false;
     }
 
+    /**
+     * Returns whether the exact floating-mana resource is still present.
+     * Mana.equals intentionally collapses some same-color resources, which is
+     * unsuitable for request-local payment candidate revalidation.
+     */
+    public boolean containsManaInstance(final Mana target) {
+        for (final Mana mana : floatingMana.get(target.getColor())) {
+            if (mana == target) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Pays with one exact floating-mana resource rather than the first equal/color match. */
+    public boolean tryPayCostWithManaInstance(final SpellAbility saPaidFor,
+            final ManaCostBeingPaid manaCost, final Mana target,
+            final List<Mana> manaSpentToPay) {
+        if (!target.meetsManaRestrictions(saPaidFor)
+                || !saPaidFor.allowsPayingWithShard(target.getSourceCard(), target.getColor())
+                || !manaCost.isNeeded(target, this)) {
+            return false;
+        }
+
+        final Iterator<Mana> lane = floatingMana.get(target.getColor()).iterator();
+        boolean removed = false;
+        while (lane.hasNext()) {
+            if (lane.next() == target) {
+                lane.remove();
+                removed = true;
+                break;
+            }
+        }
+        if (!removed) {
+            return false;
+        }
+
+        owner.updateManaForView();
+        owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed,
+                EnumSet.of(MagicColor.Color.fromByte(target.getColor()))));
+        manaCost.payMana(target, this);
+        manaSpentToPay.add(target);
+        return true;
+    }
+
     public boolean tryPayCostWithMana(final SpellAbility sa, ManaCostBeingPaid manaCost, final Mana mana, boolean test) {
         if (!manaCost.isNeeded(mana, this)) {
             return false;
@@ -347,6 +393,9 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 // get a mana of this type from floating, bail if none available
                 final Mana mana = CostPayment.getMana(owner, part, sa, hasConverge ? cost.getColorsPaid() : -1, cost.getXManaCostPaidByColor());
                 if (mana != null) {
+                    if (!test) {
+                        PriorityActionDiagnostics.recordPaymentRequest(cost, sa, owner, this);
+                    }
                     if (tryPayCostWithMana(sa, cost, mana, test)) {
                         manaSpentToPay.add(mana);
                     }

@@ -11,6 +11,7 @@ import forge.game.GameActionUtil;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardCollection;
+import forge.game.decision.PriorityActionDiagnostics;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.PlaySpellAbility;
 import forge.game.player.Player;
@@ -196,6 +197,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     public void useManaFromPool(byte colorCode) {
         // find the matching mana in pool.
+        PriorityActionDiagnostics.recordPaymentRequest(manaCost, saPaidFor, player, player.getManaPool());
         if (player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost, saPaidFor.getPayingMana())) {
             // Record paying mana from pool here
             getController().macros().addRememberedAction(new PayManaFromPoolAction(colorCode));
@@ -330,6 +332,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         locked = true;
         game.getAction().invoke(() -> {
+            PriorityActionDiagnostics.recordPaymentRequest(manaCost, saPaidFor, player, player.getManaPool());
             if (PlaySpellAbility.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
                 final List<AbilityManaPart> manaAbilities = chosen.getAllManaParts();
                 boolean restrictionsMet = true;

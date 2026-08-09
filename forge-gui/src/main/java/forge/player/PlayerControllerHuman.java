@@ -25,6 +25,7 @@ import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
+import forge.game.decision.PriorityActionDiagnostics;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventPlayerStatsChanged;
 import forge.game.keyword.Keyword;
@@ -2622,11 +2623,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean payManaCost(final ManaCost toPay, final CostPartMana costPartMana, final SpellAbility sa,
                                final String prompt, ManaConversionMatrix matrix, final boolean effect) {
+        PriorityActionDiagnostics.recordRawPaymentCallback(player);
         return PlaySpellAbility.payManaCost(this, toPay, costPartMana, sa, player, prompt, matrix, effect);
     }
 
     @Override
     public boolean applyManaToCost(ManaCostBeingPaid toPay, SpellAbility ability, String prompt, ManaConversionMatrix matrix, boolean effect) {
+        PriorityActionDiagnostics.recordRawPaymentCallback(player);
         InputPayMana inpPayment = new InputPayManaOfCostPayment(this, toPay, ability, player, matrix, effect);
         inpPayment.setMessagePrefix(prompt);
         inpPayment.showAndWait();
