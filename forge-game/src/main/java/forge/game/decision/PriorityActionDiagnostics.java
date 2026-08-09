@@ -1,6 +1,8 @@
 package forge.game.decision;
 
 import forge.game.player.Player;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.spellability.AbilitySub;
@@ -12,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,8 +34,10 @@ public final class PriorityActionDiagnostics {
             + "payment_stage,payer_id,remaining_cost_summary,payment_status,payment_unsupported_reason,"
             + "payment_candidate_kinds,x_raw_min,x_raw_max,x_candidate_min,x_candidate_max,x_status,"
             + "x_unsupported_reason,x_variable,mode_status,mode_rule_legality_probes,"
-            + "mode_downstream_completion_probes,mode_original_ordinals";
-    private static final int COLUMN_COUNT = 44;
+            + "mode_downstream_completion_probes,mode_original_ordinals,selection_adapter,selection_game_id,"
+            + "selection_session_id,selection_step_index,selection_status,selection_reason,selection_selected_count,"
+            + "selection_remaining_count,selection_initial_count,selection_candidate_shrinkage";
+    private static final int COLUMN_COUNT = 54;
     private static final String OUTPUT_PATH = System.getProperty(OUTPUT_PATH_PROPERTY, "");
     private static final boolean ENABLED = !OUTPUT_PATH.isBlank();
     private static final long PROCESS_ID = ProcessHandle.current().pid();
@@ -41,6 +46,8 @@ public final class PriorityActionDiagnostics {
     private static final PaymentDecisionProvider PAYMENT_PROVIDER = ENABLED ? new PaymentDecisionProvider() : null;
     private static final XDecisionProvider X_PROVIDER = ENABLED ? new XDecisionProvider() : null;
     private static final ModeDecisionProvider MODE_PROVIDER = ENABLED ? new ModeDecisionProvider() : null;
+    private static final DiscardCardSelectionAdapter DISCARD_SELECTION_ADAPTER = ENABLED
+            ? new DiscardCardSelectionAdapter() : null;
     private static final List<String> EVENTS = ENABLED ? new ArrayList<>() : null;
     private static final ThreadLocal<ActiveContinuation> ACTIVE_CONTINUATION = ENABLED ? new ThreadLocal<>() : null;
 
@@ -346,6 +353,86 @@ public final class PriorityActionDiagnostics {
         }
     }
 
+    /** Snapshots the narrow discard callback before invoking the unchanged Forge controller. */
+    public static DiscardSelectionCapture captureDiscardSelection(final Player chooser, final Player affectedPlayer,
+            final SpellAbility ability, final CardCollection validCards, final int min, final int max,
+            final CardCollectionView visibleToChooser) {
+        if (!ENABLED) {
+            return null;
+        }
+        try {
+            final DiscardCardSelectionAdapter.Capture adapterCapture = DISCARD_SELECTION_ADAPTER.begin(chooser,
+                    affectedPlayer, ability, validCards, min, max, visibleToChooser);
+            return new DiscardSelectionCapture(adapterCapture, chooser.getGame().getId(),
+                    chooser.getGame().getPhaseHandler().getTurn(),
+                    String.valueOf(chooser.getGame().getPhaseHandler().getPhase()), chooser.getName(),
+                    affectedPlayer.getName(), validCards.size());
+        } catch (final RuntimeException ex) {
+            return null;
+        }
+    }
+
+    /** Replays the controller's returned set only for diagnostics and never changes or rejects that result. */
+    public static void recordDiscardSelection(final DiscardSelectionCapture capture,
+            final CardCollectionView controllerResult, final long callbackStartedAtNanos) {
+        if (capture == null) {
+            return;
+        }
+        try {
+            final long nativeNanos = callbackStartedAtNanos == 0L ? 0L
+                    : System.nanoTime() - callbackStartedAtNanos;
+            final DiscardCardSelectionAdapter.Capture adapterCapture = capture.adapterCapture;
+            synchronized (EVENTS) {
+                EVENTS.add(formatDiscardSelectionRecord("CARD_SELECTION_DISCARD_CALLBACK", PROCESS_ID,
+                        capture.gameId, adapterCapture.getSelectionSessionId() < 0 ? null
+                                : adapterCapture.getSelectionSessionId(), null, false, capture.turn, capture.phase,
+                        capture.chooser, capture.affectedPlayer, capture.initialCandidateCount, 0L, nativeNanos,
+                        adapterCapture.getStatus(), adapterCapture.getReason(), 0, capture.initialCandidateCount,
+                        capture.initialCandidateCount, 0));
+            }
+            if (adapterCapture.getStatus() != DiscardCardSelectionAdapter.Status.SUPPORTED) {
+                return;
+            }
+            final DiscardCardSelectionAdapter.Replay replay = DISCARD_SELECTION_ADAPTER.replay(adapterCapture,
+                    controllerResult);
+            synchronized (EVENTS) {
+                for (final DiscardCardSelectionAdapter.ReplayStep step : replay.getSteps()) {
+                    final DecisionRequest request = step.getRequest();
+                    final CardSelectionContext context = request.getCardSelectionContext();
+                    final int remaining = (int) request.getCandidates().stream()
+                            .filter(candidate -> candidate.getCardSelectionKind()
+                                    == CardSelectionCandidateKind.SELECT_CARD).count();
+                    EVENTS.add(formatDiscardSelectionRecord("CARD_SELECTION", PROCESS_ID, context.getGameId(),
+                            context.getSelectionSessionId(), context.getSelectionStepIndex(), request.isForced(),
+                            capture.turn, capture.phase, capture.chooser, capture.affectedPlayer,
+                            request.getCandidates().size(), step.getGenerationNanos(), 0L,
+                            CardSelectionDecisionProvider.Status.DECISION, null, context.getSelectedCards().size(),
+                            remaining, capture.initialCandidateCount, capture.initialCandidateCount - remaining));
+                }
+                if (replay.getStatus() != DiscardCardSelectionAdapter.ReplayStatus.COMPLETE) {
+                    EVENTS.add(formatDiscardSelectionRecord("CARD_SELECTION_STATE", PROCESS_ID,
+                            adapterCapture.getGameId(), adapterCapture.getSelectionSessionId(), null, false,
+                            capture.turn, capture.phase, capture.chooser, capture.affectedPlayer, 0, 0L, 0L,
+                            replay.getStatus(), replay.getReason(), controllerResult == null ? 0
+                                    : controllerResult.size(), 0, capture.initialCandidateCount,
+                            capture.initialCandidateCount));
+                }
+            }
+        } catch (final RuntimeException ex) {
+            try {
+                synchronized (EVENTS) {
+                    EVENTS.add(formatDiscardSelectionRecord("CARD_SELECTION_STATE", PROCESS_ID,
+                            capture.gameId, null, null, false, capture.turn, capture.phase, capture.chooser,
+                            capture.affectedPlayer, 0, 0L, 0L,
+                            DiscardCardSelectionAdapter.ReplayStatus.MAPPING_FAILED, "DIAGNOSTIC_EXCEPTION", 0, 0,
+                            capture.initialCandidateCount, capture.initialCandidateCount));
+                }
+            } catch (final RuntimeException ignored) {
+                // Diagnostics must never alter the Forge callback result or resolution path.
+            }
+        }
+    }
+
     private static LegalCandidate selectedCandidate(final DecisionRequest request, final List<SpellAbility> selected) {
         if (selected == null) {
             return PROVIDER.findCandidate(request, null);
@@ -433,6 +520,37 @@ public final class PriorityActionDiagnostics {
                 generationNanos, "", "", "", unsupportedReason, "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", "", "", "", "", "", status, ruleLegalityProbes,
                 downstreamCompletionProbes, originalOrdinals);
+    }
+
+    static String formatDiscardSelectionRecord(final String eventType, final long processId, final int gameId,
+            final Long selectionSessionId, final Integer selectionStepIndex, final boolean forced, final int turn,
+            final String phase, final String chooser, final String affectedPlayer, final int candidateCount,
+            final long generationNanos, final long nativeCallbackNanos, final Object status, final Object reason,
+            final int selectedCount, final int remainingCount, final int initialCount, final int candidateShrinkage) {
+        final Object[] values = new Object[COLUMN_COUNT];
+        Arrays.fill(values, "");
+        values[0] = eventType;
+        values[1] = processId;
+        values[6] = DecisionType.CARD_SELECTION;
+        values[7] = forced;
+        values[8] = turn;
+        values[9] = phase;
+        values[10] = chooser;
+        values[11] = affectedPlayer;
+        values[12] = candidateCount;
+        values[15] = generationNanos;
+        values[16] = nativeCallbackNanos;
+        values[44] = "DISCARD";
+        values[45] = gameId < 0 ? "" : gameId;
+        values[46] = selectionSessionId;
+        values[47] = selectionStepIndex;
+        values[48] = status;
+        values[49] = reason;
+        values[50] = selectedCount;
+        values[51] = remainingCount;
+        values[52] = initialCount;
+        values[53] = candidateShrinkage;
+        return formatRow(values);
     }
 
     static String formatFeasibilityRecord(final long processId, final int turn, final int playerIndex,
@@ -533,6 +651,29 @@ public final class PriorityActionDiagnostics {
         private ActiveContinuation(final Capture capture, final ActionContinuation continuation) {
             this.capture = capture;
             this.continuation = continuation;
+        }
+    }
+
+    /** Opaque pre-controller state for one resolution-time discard callback. */
+    public static final class DiscardSelectionCapture {
+        private final DiscardCardSelectionAdapter.Capture adapterCapture;
+        private final int gameId;
+        private final int turn;
+        private final String phase;
+        private final String chooser;
+        private final String affectedPlayer;
+        private final int initialCandidateCount;
+
+        private DiscardSelectionCapture(final DiscardCardSelectionAdapter.Capture adapterCapture, final int gameId,
+                final int turn, final String phase, final String chooser, final String affectedPlayer,
+                final int initialCandidateCount) {
+            this.adapterCapture = adapterCapture;
+            this.gameId = gameId;
+            this.turn = turn;
+            this.phase = phase;
+            this.chooser = chooser;
+            this.affectedPlayer = affectedPlayer;
+            this.initialCandidateCount = initialCandidateCount;
         }
     }
 }

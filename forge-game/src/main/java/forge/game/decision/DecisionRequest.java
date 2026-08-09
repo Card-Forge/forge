@@ -12,35 +12,41 @@ public final class DecisionRequest {
     private final PaymentDecisionContext paymentContext;
     private final XDecisionContext xContext;
     private final ModeDecisionContext modeContext;
+    private final CardSelectionContext cardSelectionContext;
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates) {
-        this(requestId, decisionType, candidates, null, null, null, null);
+        this(requestId, decisionType, candidates, null, null, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final TargetDecisionContext targetContext) {
-        this(requestId, decisionType, candidates, targetContext, null, null, null);
+        this(requestId, decisionType, candidates, targetContext, null, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final PaymentDecisionContext paymentContext) {
-        this(requestId, decisionType, candidates, null, paymentContext, null, null);
+        this(requestId, decisionType, candidates, null, paymentContext, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final XDecisionContext xContext) {
-        this(requestId, decisionType, candidates, null, null, xContext, null);
+        this(requestId, decisionType, candidates, null, null, xContext, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final ModeDecisionContext modeContext) {
-        this(requestId, decisionType, candidates, null, null, null, modeContext);
+        this(requestId, decisionType, candidates, null, null, null, modeContext, null);
+    }
+
+    DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
+            final CardSelectionContext cardSelectionContext) {
+        this(requestId, decisionType, candidates, null, null, null, null, cardSelectionContext);
     }
 
     private DecisionRequest(final long requestId, final DecisionType decisionType,
             final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
             final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
-            final ModeDecisionContext modeContext) {
+            final ModeDecisionContext modeContext, final CardSelectionContext cardSelectionContext) {
         this.requestId = requestId;
         this.decisionType = Objects.requireNonNull(decisionType);
         this.candidates = List.copyOf(candidates);
@@ -48,6 +54,7 @@ public final class DecisionRequest {
         this.paymentContext = paymentContext;
         this.xContext = xContext;
         this.modeContext = modeContext;
+        this.cardSelectionContext = cardSelectionContext;
         if (this.candidates.isEmpty()) {
             throw new IllegalArgumentException("A DecisionRequest must contain at least one legal candidate");
         }
@@ -74,6 +81,12 @@ public final class DecisionRequest {
         }
         if (decisionType != DecisionType.MODE && modeContext != null) {
             throw new IllegalArgumentException("Only MODE DecisionRequests may contain mode context");
+        }
+        if (decisionType == DecisionType.CARD_SELECTION && cardSelectionContext == null) {
+            throw new IllegalArgumentException("A CARD_SELECTION DecisionRequest requires card-selection context");
+        }
+        if (decisionType != DecisionType.CARD_SELECTION && cardSelectionContext != null) {
+            throw new IllegalArgumentException("Only CARD_SELECTION DecisionRequests may contain card-selection context");
         }
     }
 
@@ -110,6 +123,11 @@ public final class DecisionRequest {
     /** MODE-only metadata constructed from Forge's live callback state. */
     public ModeDecisionContext getModeContext() {
         return modeContext;
+    }
+
+    /** CARD_SELECTION-only callback/session metadata. */
+    public CardSelectionContext getCardSelectionContext() {
+        return cardSelectionContext;
     }
 
     public boolean isForced() {
