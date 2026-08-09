@@ -1374,7 +1374,6 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
-        PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.TARGET, -1, null, player);
         return brains.doTrigger(currentAbility, true);
     }
 

@@ -1,6 +1,7 @@
 package forge.game.decision;
 
 import forge.card.CardStateName;
+import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -23,6 +24,11 @@ public final class LegalCandidate {
     private final String abilityDescription;
     private final String semanticKey;
     private final SpellAbility spellAbility;
+    private final TargetCandidateKind targetKind;
+    private final int targetEntityId;
+    private final String targetName;
+    private final ZoneType targetZone;
+    private final GameObject target;
 
     private LegalCandidate(final int candidateId, final PriorityActionKind kind, final Card source,
             final SpellAbility spellAbility, final String semanticKey) {
@@ -35,6 +41,29 @@ public final class LegalCandidate {
         this.abilityDescription = spellAbility == null ? "" : spellAbility.getDescription();
         this.semanticKey = Objects.requireNonNull(semanticKey);
         this.spellAbility = spellAbility;
+        this.targetKind = null;
+        this.targetEntityId = -1;
+        this.targetName = "";
+        this.targetZone = null;
+        this.target = null;
+    }
+
+    private LegalCandidate(final int candidateId, final TargetCandidateKind targetKind, final GameObject target,
+            final int targetEntityId, final String targetName, final ZoneType targetZone, final String semanticKey) {
+        this.candidateId = candidateId;
+        this.kind = null;
+        this.sourceCardId = -1;
+        this.sourceName = "";
+        this.sourceZone = null;
+        this.sourceState = null;
+        this.abilityDescription = "";
+        this.semanticKey = Objects.requireNonNull(semanticKey);
+        this.spellAbility = null;
+        this.targetKind = Objects.requireNonNull(targetKind);
+        this.targetEntityId = targetEntityId;
+        this.targetName = Objects.requireNonNull(targetName);
+        this.targetZone = targetZone;
+        this.target = target;
     }
 
     static LegalCandidate pass(final int candidateId) {
@@ -46,12 +75,42 @@ public final class LegalCandidate {
         return new LegalCandidate(candidateId, kind, source, spellAbility, semanticKey);
     }
 
+    static LegalCandidate target(final int candidateId, final TargetCandidateKind targetKind,
+            final GameObject target, final int targetEntityId, final String targetName, final ZoneType targetZone,
+            final String semanticKey) {
+        return new LegalCandidate(candidateId, targetKind, target, targetEntityId, targetName, targetZone,
+                semanticKey);
+    }
+
+    static LegalCandidate done(final int candidateId) {
+        return new LegalCandidate(candidateId, TargetCandidateKind.DONE, null, -1, "", null, "DONE");
+    }
+
     public int getCandidateId() {
         return candidateId;
     }
 
     public PriorityActionKind getKind() {
         return kind;
+    }
+
+    /** The TARGET candidate kind, or {@code null} when this candidate is a priority action. */
+    public TargetCandidateKind getTargetKind() {
+        return targetKind;
+    }
+
+    /** Stable Forge entity or stack-instance identifier for a TARGET candidate; {@code -1} for DONE. */
+    public int getTargetEntityId() {
+        return targetEntityId;
+    }
+
+    /** Player-visible target name, omitted for a legally targetable face-down object. */
+    public String getTargetName() {
+        return targetName;
+    }
+
+    public ZoneType getTargetZone() {
+        return targetZone;
     }
 
     /** Forge's in-game card identifier, not a Java object identity or global action identifier. */
@@ -82,5 +141,9 @@ public final class LegalCandidate {
 
     SpellAbility getSpellAbility() {
         return spellAbility;
+    }
+
+    GameObject getTarget() {
+        return target;
     }
 }

@@ -24,11 +24,12 @@ public final class PriorityActionDiagnostics {
             + "top_level_candidate_kind,top_level_source,downstream_callback_family,forced_if_known,"
             + "turn,phase,player,downstream_player,candidate_count,pass_present,pass_with_alternatives,request_generation_ns,"
             + "native_callback_ns,selection_mapping,feasibility_result,unsupported_reason,feasibility_ns,"
-            + "adjustment_status,adjustment_reason,adjustment_preview_ns";
+            + "adjustment_status,adjustment_reason,adjustment_preview_ns,target_group_index,target_status,done_present";
     private static final String OUTPUT_PATH = System.getProperty(OUTPUT_PATH_PROPERTY, "");
     private static final boolean ENABLED = !OUTPUT_PATH.isBlank();
     private static final long PROCESS_ID = ProcessHandle.current().pid();
     private static final PriorityActionProvider PROVIDER = ENABLED ? new PriorityActionProvider() : null;
+    private static final TargetDecisionProvider TARGET_PROVIDER = ENABLED ? new TargetDecisionProvider() : null;
     private static final List<String> EVENTS = ENABLED ? new ArrayList<>() : null;
     private static final ThreadLocal<ActiveContinuation> ACTIVE_CONTINUATION = ENABLED ? new ThreadLocal<>() : null;
 
@@ -121,6 +122,62 @@ public final class PriorityActionDiagnostics {
         }
     }
 
+    /**
+     * Observes Forge's generic target-selection boundary after it has resolved the actual targeting player.
+     * This is deliberately best-effort diagnostics: unsupported target semantics are recorded, never allowed
+     * to alter the existing human or AI controller path.
+     */
+    public static void recordTargetRequest(final SpellAbility ability, final Player choosingPlayer) {
+        if (!ENABLED) {
+            return;
+        }
+        final ActiveContinuation active = ACTIVE_CONTINUATION.get();
+        final ActionContinuation continuation = active == null ? null : active.continuation;
+        final long startedAtNanos = System.nanoTime();
+        try {
+            final TargetDecisionProvider.Generation generation = TARGET_PROVIDER.generateTargetRequest(ability,
+                    choosingPlayer, continuation);
+            final DecisionRequest request = generation.getRequest();
+            final TargetDecisionContext context = request == null ? null : request.getTargetContext();
+            final int turn = active == null ? ability.getHostCard().getGame().getPhaseHandler().getTurn()
+                    : active.capture.turn;
+            final String phase = active == null
+                    ? String.valueOf(ability.getHostCard().getGame().getPhaseHandler().getPhase())
+                    : active.capture.phase;
+            final String player = active == null || active.capture.player == null
+                    ? ability.getActivatingPlayer().getName() : active.capture.player;
+            final String topLevelSource = active == null ? "" : active.continuation.getTopLevelSource();
+            final PriorityActionKind topLevelKind = active == null ? null
+                    : active.continuation.getTopLevelCandidateKind();
+            final boolean donePresent = request != null && request.getCandidates().stream()
+                    .anyMatch(candidate -> candidate.getTargetKind() == TargetCandidateKind.DONE);
+            synchronized (EVENTS) {
+                EVENTS.add(formatTargetRecord(PROCESS_ID, context == null ? null : context.getDecisionSequenceId(),
+                        context == null ? null : context.getSubdecisionIndex(), topLevelKind, topLevelSource,
+                        request != null && request.isForced(), turn, phase, player, choosingPlayer.getName(),
+                        request == null ? 0 : request.getCandidates().size(),
+                        context == null ? -1 : context.getTargetGroupIndex(), generation.getStatus(), donePresent,
+                        generation.getRequestGenerationNanos(), null));
+            }
+        } catch (final UnsupportedTargetDecisionException e) {
+            final int turn = active == null ? ability.getHostCard().getGame().getPhaseHandler().getTurn()
+                    : active.capture.turn;
+            final String phase = active == null
+                    ? String.valueOf(ability.getHostCard().getGame().getPhaseHandler().getPhase())
+                    : active.capture.phase;
+            final String player = active == null || active.capture.player == null
+                    ? ability.getActivatingPlayer().getName() : active.capture.player;
+            synchronized (EVENTS) {
+                EVENTS.add(formatTargetRecord(PROCESS_ID, active == null ? null
+                                : active.continuation.getDecisionSequenceId(), null,
+                        active == null ? null : active.continuation.getTopLevelCandidateKind(),
+                        active == null ? "" : active.continuation.getTopLevelSource(), false, turn, phase, player,
+                        choosingPlayer.getName(), 0, -1, null, false, System.nanoTime() - startedAtNanos,
+                        "UNSUPPORTED_TARGET_SEMANTICS"));
+            }
+        }
+    }
+
     private static LegalCandidate selectedCandidate(final DecisionRequest request, final List<SpellAbility> selected) {
         if (selected == null) {
             return PROVIDER.findCandidate(request, null);
@@ -162,7 +219,7 @@ public final class PriorityActionDiagnostics {
                 candidate == null ? "" : topLevelSource(candidate), "", Boolean.toString(capture.request.isForced()),
                 capture.turn, capture.phase, capture.player, "", capture.request.getCandidates().size(), "true",
                 Boolean.toString(capture.request.getCandidates().size() > 1), capture.generationNanos,
-                nativeCallbackNanos, mapping, "", "", "", "", "", "");
+                nativeCallbackNanos, mapping, "", "", "", "", "", "", "", "", "");
     }
 
     static String formatContinuationRecord(final String eventType, final long processId, final long decisionSequenceId,
@@ -171,7 +228,18 @@ public final class PriorityActionDiagnostics {
             final String player, final String downstreamPlayer, final int candidateCount) {
         return formatRow(eventType, processId, decisionSequenceId, subdecisionIndex, topLevelKind, topLevelSource,
                 family, forcedIfKnown, turn, phase, player, downstreamPlayer, candidateCount, "", "", "", "", "", "", "", "",
-                "", "", "");
+                "", "", "", "", "", "");
+    }
+
+    static String formatTargetRecord(final long processId, final Long decisionSequenceId,
+            final Integer subdecisionIndex, final PriorityActionKind topLevelKind, final String topLevelSource,
+            final boolean forced, final int turn, final String phase, final String player, final String choosingPlayer,
+            final int candidateCount, final int targetGroupIndex, final TargetDecisionProvider.Status status,
+            final boolean donePresent, final long generationNanos, final String unsupportedReason) {
+        return formatRow("TARGET", processId, decisionSequenceId, subdecisionIndex, topLevelKind, topLevelSource,
+                DecisionType.TARGET, forced, turn, phase, player, choosingPlayer, candidateCount, "", "",
+                generationNanos, "", "", "", unsupportedReason, "", "", "", "", targetGroupIndex,
+                status, donePresent);
     }
 
     static String formatFeasibilityRecord(final long processId, final int turn, final int playerIndex,
@@ -198,7 +266,7 @@ public final class PriorityActionDiagnostics {
             final forge.game.cost.CostAdjustmentPreview.Reason adjustmentReason, final long adjustmentPreviewNanos) {
         return formatRow("FEASIBILITY", processId, "", "", "", "", "", "", turn, phase, player, "", "", "", "",
                 "", "", "", result, unsupportedReason, durationNanos, adjustmentStatus, adjustmentReason,
-                adjustmentPreviewNanos);
+                adjustmentPreviewNanos, "", "", "");
     }
 
     private static String topLevelSource(final LegalCandidate candidate) {

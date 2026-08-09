@@ -49,6 +49,7 @@ import forge.game.ability.ApiType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostTap;
+import forge.game.decision.PriorityActionDiagnostics;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -2148,6 +2149,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 // don't set targeting player when forceful target,
                 // "targeting player controls" should not be reset when the spell is copied
                 currentAbility.setTargetingPlayer(targetingPlayer);
+                PriorityActionDiagnostics.recordTargetRequest(currentAbility, targetingPlayer);
                 if (!targetingPlayer.getController().chooseTargetsFor(currentAbility)) {
                     return false;
                 }
