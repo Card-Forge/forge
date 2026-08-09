@@ -164,6 +164,7 @@ Jellyfish:Jellyfishes
 Juggernaut:Juggernauts
 Kangaroo:Kangaroos
 Kavu:Kavu
+Kelpien:Kelpiens
 Kirin:Kirins
 Kithkin:Kithkin
 Klingon:Klingons
