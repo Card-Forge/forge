@@ -172,6 +172,10 @@ Stable attacker identity is exactly `(cardId, gameTimestamp)`. Public fields con
 controller identity; Java object identity and card name alone are never semantic identity. Candidates are sorted by
 their deterministic semantic key.
 
+Public ATTACK candidates, assignments, and contexts contain neutral value identities only. Mutable Forge `Card`,
+`GameEntity`, `Player`, and `Combat` references remain private to the session/provider/application layer and are
+resolved internally only when revalidating or applying a completed declaration.
+
 ## DONE and session lifecycle
 
 The session has one outstanding request maximum and an explicit terminal state:
@@ -275,8 +279,8 @@ Both runs used the packaged Forge artifact, unchanged AI behavior, and the reque
 
 | Matchup | Result | Raw callbacks | Supported | Unsupported | Synthetic requests | Forced | Strategic | Steps/callback | Eligible attackers mean / p50 / p95 / max | Candidates mean / p50 / p95 / max | Generation p50 / p95 / p99 |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|
-| Dead and Alive vs Air Forces | 7-3 | 122 | 122 | 0 | 239 | 70 | 169 | 1.959 / 2 / 3 / 4 | 1.703 / 2 / 3 / 4 | 2.059 / 2 / 4 / 5 | 48.2 / 144.6 / 198.5 us |
-| Izzet Guild Kit vs Dimir Guild Kit | 5-5 | 81 | 81 | 0 | 175 | 44 | 131 | 2.160 / 2 / 4 / 4 | 1.977 / 2 / 3 / 6 | 2.246 / 2 / 4 / 7 | 65.2 / 162.8 / 206.4 us |
+| Dead and Alive vs Air Forces | 7-3 | 122 | 122 | 0 | 239 | 70 | 169 | 1.959 / 2 / 3 / 4 | 1.615 / 1 / 3 / 4 | 2.059 / 2 / 4 / 5 | 47.3 / 144.6 / 214.0 us |
+| Izzet Guild Kit vs Dimir Guild Kit | 3-7 | 81 | 81 | 0 | 175 | 44 | 131 | 2.160 / 2 / 4 / 4 | 1.840 / 2 / 3 / 6 | 2.246 / 2 / 4 / 7 | 72.6 / 177.4 / 350.8 us |
 
 Generation metrics exclude native AI callback time. Candidate shrinkage across sequential steps was mean/max
 `0.644 / 3` for Dead/Air and `0.731 / 3` for Izzet/Dimir. The benchmark JVM also printed pre-existing
@@ -288,7 +292,7 @@ Raw benchmark CSVs are retained outside tracked source files under `C:\forgeAI\t
 ## Verification
 
 ```text
-focused forge.game.decision.*Test suite: 186 tests, 0 failures, 0 errors, 0 skipped
+focused forge.game.decision.*Test suite: 188 tests, 0 failures, 0 errors, 0 skipped
 package build: mvn -pl forge-gui-desktop -am -DskipTests package -> BUILD SUCCESS
 git diff --check: PASS
 enabled diagnostic integration: PASS
@@ -334,6 +338,7 @@ forge-game/src/main/java/forge/game/phase/PhaseHandler.java
 forge-gui-desktop/src/test/java/forge/game/decision/AttackDeclarationAdapterTest.java
 forge-gui-desktop/src/test/java/forge/game/decision/AttackDeclarationDecisionProviderTest.java
 forge-gui-desktop/src/test/java/forge/game/decision/AttackDeclarationDiagnosticsIntegrationTest.java
+forge-gui-desktop/src/test/java/forge/game/decision/AttackDeclarationPublicApiTest.java
 forge-gui-desktop/src/test/java/forge/game/decision/PriorityActionDiagnosticsTest.java
 docs/AI-ML DOCS/FRL_02G_ATTACK_REPORT.md
 ```

@@ -119,8 +119,10 @@ public final class AttackDeclarationDecisionProvider {
             }
         }
 
+        final AttackDeclarationDefender defenderIdentity = new AttackDeclarationDefender(defender.getId(),
+                defender.getName(), defender instanceof Player ? "PLAYER" : defender.getClass().getSimpleName());
         final AttackDeclarationSession session = new AttackDeclarationSession(nextSessionId++, attackingPlayer,
-                whoDeclares, combat, new AttackDeclarationDefender(defender), possible);
+                whoDeclares, combat, defenderIdentity, defender, possible);
         return SessionStart.ready(session);
     }
 

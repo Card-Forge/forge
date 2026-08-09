@@ -31,6 +31,7 @@ public final class AttackDeclarationSession {
     private final Player whoDeclares;
     private final Combat combat;
     private final AttackDeclarationDefender soleDefender;
+    private final GameEntity soleDefenderEntity;
     private final Map<String, Card> eligibleCards;
     private final Map<String, AttackDeclarationCard> eligibleIdentities;
     private final Map<String, AttackDeclarationAssignment> selectedAssignments = new LinkedHashMap<>();
@@ -41,24 +42,29 @@ public final class AttackDeclarationSession {
     private List<AttackDeclarationAssignment> completedAssignments = List.of();
 
     AttackDeclarationSession(final long attackSessionId, final Player attackingPlayer, final Player whoDeclares,
-            final Combat combat, final AttackDeclarationDefender soleDefender, final Iterable<Card> eligibleCards) {
-        this(attackSessionId, attackingPlayer, whoDeclares, combat, soleDefender, eligibleCards, false);
+            final Combat combat, final AttackDeclarationDefender soleDefender, final GameEntity soleDefenderEntity,
+            final Iterable<Card> eligibleCards) {
+        this(attackSessionId, attackingPlayer, whoDeclares, combat, soleDefender, soleDefenderEntity, eligibleCards,
+                false);
     }
 
     private AttackDeclarationSession(final long attackSessionId, final Player attackingPlayer, final Player whoDeclares,
-            final Combat combat, final AttackDeclarationDefender soleDefender, final Iterable<Card> eligibleCards,
-            final boolean allowPremutatedCombat) {
+            final Combat combat, final AttackDeclarationDefender soleDefender, final GameEntity soleDefenderEntity,
+            final Iterable<Card> eligibleCards, final boolean allowPremutatedCombat) {
         this.attackSessionId = attackSessionId;
         this.gameId = attackingPlayer.getGame().getId();
         this.attackingPlayer = attackingPlayer;
         this.whoDeclares = whoDeclares;
         this.combat = combat;
         this.soleDefender = soleDefender;
+        this.soleDefenderEntity = soleDefenderEntity;
         this.allowPremutatedCombat = allowPremutatedCombat;
         this.eligibleCards = new LinkedHashMap<>();
         this.eligibleIdentities = new LinkedHashMap<>();
         for (final Card card : eligibleCards) {
-            final AttackDeclarationCard identity = new AttackDeclarationCard(card);
+            final AttackDeclarationCard identity = new AttackDeclarationCard(card.getId(), card.getGameTimestamp(),
+                    card.getName(), card.getZone() == null ? null : card.getZone().getZoneType(),
+                    card.getController() == null ? -1 : card.getController().getId());
             this.eligibleCards.put(identity.identityKey(), card);
             this.eligibleIdentities.put(identity.identityKey(), identity);
         }
@@ -66,7 +72,7 @@ public final class AttackDeclarationSession {
 
     AttackDeclarationSession copyForReplay() {
         return new AttackDeclarationSession(attackSessionId, attackingPlayer, whoDeclares, combat, soleDefender,
-                eligibleCards.values(), true);
+                soleDefenderEntity, eligibleCards.values(), true);
     }
 
     public long getAttackSessionId() {
@@ -77,15 +83,15 @@ public final class AttackDeclarationSession {
         return gameId;
     }
 
-    public Player getAttackingPlayer() {
+    Player getAttackingPlayer() {
         return attackingPlayer;
     }
 
-    public Player getWhoDeclares() {
+    Player getWhoDeclares() {
         return whoDeclares;
     }
 
-    public Combat getCombat() {
+    Combat getCombat() {
         return combat;
     }
 
@@ -158,7 +164,7 @@ public final class AttackDeclarationSession {
             return false;
         }
         final GameEntity currentDefender = liveDefender();
-        if (currentDefender != soleDefender.getLiveEntity() || !(currentDefender instanceof Player)
+        if (currentDefender != soleDefenderEntity || !(currentDefender instanceof Player)
                 || !((Player) currentDefender).isOpponentOf(attackingPlayer)
                 || currentDefender.getId() != soleDefender.getEntityId()) {
             return false;
@@ -206,6 +212,10 @@ public final class AttackDeclarationSession {
                 .findFirst().orElse(null);
     }
 
+    GameEntity liveDefenderEntity() {
+        return soleDefenderEntity;
+    }
+
     Map<Card, GameEntity> resolveAssignments() {
         final Map<Card, GameEntity> result = new LinkedHashMap<>();
         for (final AttackDeclarationAssignment assignment : selectedAssignments.values()) {
@@ -213,7 +223,7 @@ public final class AttackDeclarationSession {
             if (live == null) {
                 return null;
             }
-            result.put(live, soleDefender.getLiveEntity());
+            result.put(live, soleDefenderEntity);
         }
         return result;
     }

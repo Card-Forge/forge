@@ -55,8 +55,10 @@ public class AttackDeclarationAdapterTest extends AITest {
 
         assertEquals(replay.getStatus(), AttackDeclarationAdapter.ReplayStatus.COMPLETE);
         assertEquals(replay.getSteps().size(), 3);
-        assertSame(replay.getCompletedAssignments().get(0).getCard().getLiveCard(), first);
-        assertSame(replay.getCompletedAssignments().get(1).getCard().getLiveCard(), second);
+        assertEquals(replay.getCompletedAssignments().get(0).getCard().getCardId(), first.getId());
+        assertEquals(replay.getCompletedAssignments().get(0).getCard().getGameTimestamp(), first.getGameTimestamp());
+        assertEquals(replay.getCompletedAssignments().get(1).getCard().getCardId(), second.getId());
+        assertEquals(replay.getCompletedAssignments().get(1).getCard().getGameTimestamp(), second.getGameTimestamp());
         assertEquals(aiResult.size(), 2);
         assertSame(aiResult.keySet().iterator().next(), second);
         assertTrue(combat.getAttackers().isEmpty());

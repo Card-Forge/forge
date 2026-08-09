@@ -40,9 +40,12 @@ public class AttackDeclarationDecisionProviderTest extends AITest {
         assertEquals(generation.getRequest().getAttackContext().getAttackStepIndex(), 0);
         assertNull(generation.getRequest().getAttackContext().getDecisionSequenceId());
         assertNull(generation.getRequest().getAttackContext().getActionSubdecisionIndex());
-        assertSame(generation.getRequest().getCandidates().stream()
+        final AttackDeclarationCard identity = generation.getRequest().getCandidates().stream()
                 .filter(candidate -> candidate.getAttackKind() == AttackDeclarationCandidateKind.ADD_ATTACKER)
-                .findFirst().orElseThrow().getAttackCard().getLiveCard(), creature);
+                .findFirst().orElseThrow().getAttackCard();
+        assertEquals(identity.getCardId(), creature.getId());
+        assertEquals(identity.getGameTimestamp(), creature.getGameTimestamp());
+        assertEquals(identity.getControllerId(), attacker.getId());
     }
 
     @Test

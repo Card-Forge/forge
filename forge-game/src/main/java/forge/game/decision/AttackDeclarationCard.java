@@ -1,6 +1,5 @@
 package forge.game.decision;
 
-import forge.game.card.Card;
 import forge.game.zone.ZoneType;
 
 import java.util.Objects;
@@ -12,15 +11,14 @@ public final class AttackDeclarationCard {
     private final String visibleName;
     private final ZoneType zone;
     private final int controllerId;
-    private final Card liveCard;
 
-    AttackDeclarationCard(final Card card) {
-        this.cardId = card.getId();
-        this.gameTimestamp = card.getGameTimestamp();
-        this.visibleName = card.getName();
-        this.zone = card.getZone() == null ? null : card.getZone().getZoneType();
-        this.controllerId = card.getController() == null ? -1 : card.getController().getId();
-        this.liveCard = card;
+    AttackDeclarationCard(final int cardId, final long gameTimestamp, final String visibleName,
+            final ZoneType zone, final int controllerId) {
+        this.cardId = cardId;
+        this.gameTimestamp = gameTimestamp;
+        this.visibleName = Objects.requireNonNull(visibleName);
+        this.zone = zone;
+        this.controllerId = controllerId;
     }
 
     public int getCardId() {
@@ -41,10 +39,6 @@ public final class AttackDeclarationCard {
 
     public int getControllerId() {
         return controllerId;
-    }
-
-    public Card getLiveCard() {
-        return liveCard;
     }
 
     String identityKey() {

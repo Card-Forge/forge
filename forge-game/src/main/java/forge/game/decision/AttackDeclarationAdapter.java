@@ -36,9 +36,10 @@ public final class AttackDeclarationAdapter {
         }
         final List<AttackDeclarationCard> selected = new ArrayList<>();
         for (final Map.Entry<Card, GameEntity> entry : actualAssignments.entrySet()) {
-            final AttackDeclarationCard identity = identities.get(new AttackDeclarationCard(entry.getKey()).identityKey());
+            final String identityKey = entry.getKey().getId() + "|" + entry.getKey().getGameTimestamp();
+            final AttackDeclarationCard identity = identities.get(identityKey);
             if (identity == null || captured.liveCard(identity) != entry.getKey()
-                    || entry.getValue() != captured.getSoleDefenderIdentity().getLiveEntity()) {
+                    || entry.getValue() != captured.liveDefenderEntity()) {
                 return Replay.failure(ReplayStatus.MAPPING_FAILED);
             }
             selected.add(identity);
