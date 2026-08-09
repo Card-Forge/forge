@@ -220,6 +220,7 @@ Ooze:Oozes
 Orb:Orbs
 Orc:Orcs
 Orgg:Orggs
+Orion:Orions
 Otter:Otters
 Ouphe:Ouphes
 Ox:Oxen
