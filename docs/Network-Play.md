@@ -68,6 +68,7 @@
 > [!TIP]
 > - The first two steps of the [**Quick Start**](#quick-start) are still required  
 > - The **Host** and **Client** will join with the last defined player name  
+
 > [!CAUTION]  
 > - A **Client** will fail to join if the **Host** hasn't added a player for them in advance   
 > - Automatic UPnP isn't currently supported with command line arguments so the host must make sure to have configured port forwarding in advance  
