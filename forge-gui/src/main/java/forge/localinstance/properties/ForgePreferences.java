@@ -188,8 +188,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         PLAY_ONLINE_SCREEN("Lobby"),
 
         SUBMENU_CURRENTMENU ("CONSTRUCTED"),
-        // REFORGE COMMANDER EXTENSION: upstream removed SUBMENU_PLAY, the fork's
-        // EMenuGroup.PLAY (Commander menu) still builds this key at runtime.
+        // REFORGE COMMANDER EXTENSION
         SUBMENU_PLAY ("true"),
         SUBMENU_SANCTIONED ("true"),
         SUBMENU_ONLINE ("false"),
