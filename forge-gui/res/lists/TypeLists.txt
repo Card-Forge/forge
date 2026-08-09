@@ -315,6 +315,7 @@ Tellarite:Tellarites
 Tentacle:Tentacles
 Tetravite:Tetravites
 Thalakos:Thalakoses
+Tholian:Tholians
 Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
@@ -334,6 +335,7 @@ Varmint:Varmints
 Vedalken:Vedalkens
 Villain:Villains
 Volver:Volvers
+Vorta:Vorta
 Vulcan:Vulcans
 Wall:Walls
 Warlock:Warlocks
@@ -349,6 +351,7 @@ Wombat:Wombats
 Worm:Worms
 Wraith:Wraiths
 Wurm:Wurms
+Xindi:Xindi
 Yeti:Yetis
 Zombie:Zombies
 Zubera:Zuberas
