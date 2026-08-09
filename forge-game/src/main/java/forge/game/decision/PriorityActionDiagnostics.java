@@ -28,14 +28,16 @@ public final class PriorityActionDiagnostics {
             + "native_callback_ns,selection_mapping,feasibility_result,unsupported_reason,feasibility_ns,"
             + "adjustment_status,adjustment_reason,adjustment_preview_ns,target_group_index,target_status,done_present,"
             + "payment_stage,payer_id,remaining_cost_summary,payment_status,payment_unsupported_reason,"
-            + "payment_candidate_kinds";
-    private static final int COLUMN_COUNT = 33;
+            + "payment_candidate_kinds,x_raw_min,x_raw_max,x_candidate_min,x_candidate_max,x_status,"
+            + "x_unsupported_reason,x_variable";
+    private static final int COLUMN_COUNT = 40;
     private static final String OUTPUT_PATH = System.getProperty(OUTPUT_PATH_PROPERTY, "");
     private static final boolean ENABLED = !OUTPUT_PATH.isBlank();
     private static final long PROCESS_ID = ProcessHandle.current().pid();
     private static final PriorityActionProvider PROVIDER = ENABLED ? new PriorityActionProvider() : null;
     private static final TargetDecisionProvider TARGET_PROVIDER = ENABLED ? new TargetDecisionProvider() : null;
     private static final PaymentDecisionProvider PAYMENT_PROVIDER = ENABLED ? new PaymentDecisionProvider() : null;
+    private static final XDecisionProvider X_PROVIDER = ENABLED ? new XDecisionProvider() : null;
     private static final List<String> EVENTS = ENABLED ? new ArrayList<>() : null;
     private static final ThreadLocal<ActiveContinuation> ACTIVE_CONTINUATION = ENABLED ? new ThreadLocal<>() : null;
 
@@ -142,6 +144,58 @@ public final class PriorityActionDiagnostics {
                     payer.getGame().getPhaseHandler().getTurn(), payer.getGame().getPhaseHandler().getPhase(),
                     active == null ? "" : active.capture.player, payer.getName(), "", "", "", "", "", "",
                     "", "", "", "", "", "", "", "", ""));
+        }
+    }
+
+    /** Records the raw Forge callback separately from any completion-safe neutral X request. */
+    public static void recordXAnnouncement(final SpellAbility ability, final Player choosingPlayer,
+            final int rawMin, final int rawMax) {
+        if (!ENABLED) {
+            return;
+        }
+        final ActiveContinuation active = ACTIVE_CONTINUATION.get();
+        final ActionContinuation continuation = active == null ? null : active.continuation;
+        final int turn = ability.getHostCard().getGame().getPhaseHandler().getTurn();
+        final String phase = String.valueOf(ability.getHostCard().getGame().getPhaseHandler().getPhase());
+        final String player = active == null ? choosingPlayer.getName() : active.capture.player;
+        synchronized (EVENTS) {
+            EVENTS.add(formatXRecord("X_CALLBACK", PROCESS_ID,
+                    continuation == null ? null : continuation.getDecisionSequenceId(), null,
+                    continuation == null ? null : continuation.getTopLevelCandidateKind(),
+                    continuation == null ? "" : continuation.getTopLevelSource(), false, turn, phase, player,
+                    choosingPlayer.getName(), 0, 0L, rawMin, rawMax, null, null, null, null));
+        }
+
+        final XDecisionProvider.Generation generation;
+        try {
+            generation = X_PROVIDER.generateXRequest(ability, choosingPlayer, continuation);
+        } catch (final RuntimeException ex) {
+            synchronized (EVENTS) {
+                EVENTS.add(formatXRecord("X_STATE", PROCESS_ID,
+                        continuation == null ? null : continuation.getDecisionSequenceId(), null,
+                        continuation == null ? null : continuation.getTopLevelCandidateKind(),
+                        continuation == null ? "" : continuation.getTopLevelSource(), false, turn, phase, player,
+                        choosingPlayer.getName(), 0, 0L, rawMin, rawMax, null, null,
+                        XDecisionProvider.Status.UNSUPPORTED, "DIAGNOSTIC_EXCEPTION"));
+            }
+            return;
+        }
+        final DecisionRequest request = generation.getRequest();
+        final XDecisionContext context = request == null ? null : request.getXContext();
+        final Integer candidateMin = request == null ? null : request.getCandidates().get(0).getXValue();
+        final Integer candidateMax = request == null ? null
+                : request.getCandidates().get(request.getCandidates().size() - 1).getXValue();
+        synchronized (EVENTS) {
+            EVENTS.add(formatXRecord(request == null ? "X_STATE" : "X_VALUE", PROCESS_ID,
+                    context == null ? continuation == null ? null : continuation.getDecisionSequenceId()
+                            : context.getDecisionSequenceId(),
+                    context == null ? null : context.getSubdecisionIndex(),
+                    continuation == null ? null : continuation.getTopLevelCandidateKind(),
+                    continuation == null ? "" : continuation.getTopLevelSource(),
+                    request != null && request.isForced(), turn, phase, player, choosingPlayer.getName(),
+                    request == null ? 0 : request.getCandidates().size(), generation.getGenerationNanos(),
+                    rawMin, rawMax, candidateMin, candidateMax, generation.getStatus(),
+                    generation.getUnsupportedReason()));
         }
     }
 
@@ -297,6 +351,18 @@ public final class PriorityActionDiagnostics {
                 DecisionType.TARGET, forced, turn, phase, player, choosingPlayer, candidateCount, "", "",
                 generationNanos, "", "", "", unsupportedReason, "", "", "", "", targetGroupIndex,
                 status, donePresent);
+    }
+
+    static String formatXRecord(final String eventType, final long processId, final Long decisionSequenceId,
+            final Integer subdecisionIndex, final PriorityActionKind topLevelKind, final String topLevelSource,
+            final boolean forced, final int turn, final String phase, final String player, final String choosingPlayer,
+            final int candidateCount, final long generationNanos, final int rawMin, final int rawMax,
+            final Integer candidateMin, final Integer candidateMax, final XDecisionProvider.Status status,
+            final Object unsupportedReason) {
+        return formatRow(eventType, processId, decisionSequenceId, subdecisionIndex, topLevelKind, topLevelSource,
+                DecisionType.X_VALUE, forced, turn, phase, player, choosingPlayer, candidateCount, "", "",
+                generationNanos, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+                "", rawMin, rawMax, candidateMin, candidateMax, status, unsupportedReason, "X");
     }
 
     static String formatFeasibilityRecord(final long processId, final int turn, final int playerIndex,

@@ -248,9 +248,10 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Integer announceRequirements(SpellAbility ability, int min, int max, String announce) {
-        PriorityActionDiagnostics.recordDownstreamCallback("X".equalsIgnoreCase(announce)
-                        ? DownstreamCallbackFamily.X_VALUE : DownstreamCallbackFamily.OTHER,
-                countRange(min, max), min == max, player);
+        if (!"X".equalsIgnoreCase(announce)) {
+            PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.OTHER,
+                    countRange(min, max), min == max, player);
+        }
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
         if (ability.getApi() != null) {
             switch (ability.getApi()) {

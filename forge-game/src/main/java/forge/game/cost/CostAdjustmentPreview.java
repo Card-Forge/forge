@@ -31,25 +31,33 @@ public final class CostAdjustmentPreview {
     private final Reason reason;
     private final Cost adjustedCost;
     private final ManaCostBeingPaid adjustedManaCost;
+    private final Long maximumGenericReductionAllowance;
 
     private CostAdjustmentPreview(final Status status, final Reason reason, final Cost adjustedCost,
-            final ManaCostBeingPaid adjustedManaCost) {
+            final ManaCostBeingPaid adjustedManaCost, final Long maximumGenericReductionAllowance) {
         this.status = status;
         this.reason = reason;
         this.adjustedCost = adjustedCost;
         this.adjustedManaCost = adjustedManaCost;
+        this.maximumGenericReductionAllowance = maximumGenericReductionAllowance;
     }
 
     static CostAdjustmentPreview adjusted(final Cost cost, final ManaCostBeingPaid manaCost) {
-        return new CostAdjustmentPreview(Status.ADJUSTED, null, cost.copy(), new ManaCostBeingPaid(manaCost));
+        return adjusted(cost, manaCost, 0L);
+    }
+
+    static CostAdjustmentPreview adjusted(final Cost cost, final ManaCostBeingPaid manaCost,
+            final Long maximumGenericReductionAllowance) {
+        return new CostAdjustmentPreview(Status.ADJUSTED, null, cost.copy(), new ManaCostBeingPaid(manaCost),
+                maximumGenericReductionAllowance);
     }
 
     static CostAdjustmentPreview choiceRequired(final Reason reason) {
-        return new CostAdjustmentPreview(Status.CHOICE_REQUIRED, reason, null, null);
+        return new CostAdjustmentPreview(Status.CHOICE_REQUIRED, reason, null, null, null);
     }
 
     static CostAdjustmentPreview unsupported(final Reason reason) {
-        return new CostAdjustmentPreview(Status.UNSUPPORTED, reason, null, null);
+        return new CostAdjustmentPreview(Status.UNSUPPORTED, reason, null, null, null);
     }
 
     public Status getStatus() {
@@ -70,5 +78,16 @@ public final class CostAdjustmentPreview {
 
     public boolean hasAdjustedManaCost() {
         return adjustedManaCost != null;
+    }
+
+    public boolean hasMaximumGenericReductionAllowance() {
+        return maximumGenericReductionAllowance != null;
+    }
+
+    public long getMaximumGenericReductionAllowance() {
+        if (maximumGenericReductionAllowance == null) {
+            throw new IllegalStateException("No complete generic-reduction allowance is available");
+        }
+        return maximumGenericReductionAllowance;
     }
 }

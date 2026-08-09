@@ -245,7 +245,29 @@ public class CostAdjustment {
             }
             applySetCostAbility(setCost, sa, manaCost);
         }
-        return CostAdjustmentPreview.adjusted(adjustedCost, manaCost);
+        return CostAdjustmentPreview.adjusted(adjustedCost, manaCost,
+                maximumGenericReductionAllowance(adjustmentCards));
+    }
+
+    /**
+     * Returns a conservative bound across the complete X domain, or {@code null} when the active public
+     * adjustment state contains a reduction whose maximum cannot be proven by the fixed preview model.
+     */
+    private static Long maximumGenericReductionAllowance(final CardCollection adjustmentCards) {
+        long allowance = 0L;
+        for (final Card card : adjustmentCards) {
+            for (final StaticAbility staticAbility : card.getStaticAbilities()) {
+                if (!staticAbility.checkMode(StaticAbilityMode.ReduceCost)) {
+                    continue;
+                }
+                if (!isFixedGenericReduction(staticAbility) || staticAbility.hasParam("UpTo")) {
+                    return null;
+                }
+                final long amount = Long.parseLong(staticAbility.getParam("Amount"));
+                allowance = allowance > Long.MAX_VALUE - amount ? Long.MAX_VALUE : allowance + amount;
+            }
+        }
+        return allowance;
     }
 
     private static boolean hasManaAdjustment(final CardCollection adjustmentCards, final SpellAbility sa) {

@@ -400,6 +400,51 @@ public class TargetDecisionProviderTest extends AITest {
     }
 
     @Test
+    public void pureCompletionPreflightDoesNotMutateTargetsOrConsumeContinuationIdentity() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final SpellAbility ability = targetAbility("Dark Banishing", chooser);
+        addCard("Runeclaw Bear", opponent);
+        final ActionContinuation continuation = new ActionContinuation(481L,
+                PriorityActionKind.CAST_SPELL, "42:Dark Banishing");
+
+        final TargetDecisionProvider.CompletionAssessment assessment = provider.assessCompletion(ability);
+        final DecisionRequest request = provider.generateTargetRequest(ability, chooser, continuation).getRequest();
+
+        assertEquals(assessment.getStatus(), TargetDecisionProvider.CompletionStatus.COMPLETE);
+        assertEquals(ability.getTargets().size(), 0);
+        assertEquals(request.getTargetContext().getSubdecisionIndex(), 1);
+    }
+
+    @Test
+    public void pureCompletionPreflightReportsImpossibleMandatoryTarget() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final SpellAbility ability = targetAbility("Dark Banishing", chooser);
+        addCard("Walking Corpse", opponent);
+
+        assertEquals(provider.assessCompletion(ability).getStatus(),
+                TargetDecisionProvider.CompletionStatus.INVALID_TARGETING);
+        assertEquals(ability.getTargets().size(), 0);
+    }
+
+    @Test
+    public void pureCompletionPreflightDoesNotInventUnresolvedTargetingPlayer() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final SpellAbility ability = targetAbility("Dark Banishing", chooser);
+        ability.getMapParams().put("TargetingPlayer", "Opponent");
+
+        final TargetDecisionProvider.CompletionAssessment assessment = provider.assessCompletion(ability);
+
+        assertEquals(assessment.getStatus(), TargetDecisionProvider.CompletionStatus.UNSUPPORTED);
+        assertEquals(assessment.getUnsupportedReason(), "TARGETING_PLAYER_CHOICE_REQUIRED");
+        assertNull(ability.getTargetingPlayer());
+    }
+
+    @Test
     public void dividedTargetSemanticsFailLoudlyUntilTheirAllocationDecisionExists() {
         final Game game = initAndCreateGame();
         final Player chooser = game.getPlayers().get(1);

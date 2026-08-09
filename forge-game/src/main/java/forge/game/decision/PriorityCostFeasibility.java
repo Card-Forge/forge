@@ -4,6 +4,8 @@ import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
+import forge.game.GameActionUtil;
+import forge.game.ability.AbilityKey;
 import forge.game.cost.Cost;
 import forge.game.cost.CostAdjustment;
 import forge.game.cost.CostAdjustmentPreview;
@@ -12,6 +14,8 @@ import forge.game.cost.CostTap;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -19,7 +23,9 @@ import forge.game.zone.ZoneType;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -47,7 +53,48 @@ public final class PriorityCostFeasibility {
         MANA_SOURCE_COST,
         DYNAMIC_MANA_PRODUCTION,
         MANA_RESTRICTION,
+        MANA_SOURCE_ALTERNATIVE_COST,
+        MANA_PRODUCTION_REPLACEMENT,
         SEARCH_LIMIT_EXCEEDED
+    }
+
+    public enum CapacityResult {
+        SUPPORTED,
+        UNSUPPORTED
+    }
+
+    /** Complete, cost-independent mana capacity for the fixed-output support slice. */
+    public static final class CapacityAssessment {
+        private final CapacityResult result;
+        private final long maximumManaUnits;
+        private final UnsupportedReason unsupportedReason;
+
+        private CapacityAssessment(final CapacityResult result, final long maximumManaUnits,
+                final UnsupportedReason unsupportedReason) {
+            this.result = result;
+            this.maximumManaUnits = maximumManaUnits;
+            this.unsupportedReason = unsupportedReason;
+        }
+
+        public CapacityResult getResult() {
+            return result;
+        }
+
+        public long getMaximumManaUnits() {
+            return maximumManaUnits;
+        }
+
+        public UnsupportedReason getUnsupportedReason() {
+            return unsupportedReason;
+        }
+
+        private static CapacityAssessment supported(final long maximumManaUnits) {
+            return new CapacityAssessment(CapacityResult.SUPPORTED, maximumManaUnits, null);
+        }
+
+        private static CapacityAssessment unsupported(final UnsupportedReason reason) {
+            return new CapacityAssessment(CapacityResult.UNSUPPORTED, 0L, reason);
+        }
     }
 
     /** Immutable tri-state result of one feasibility query. */
@@ -134,13 +181,47 @@ public final class PriorityCostFeasibility {
      * Determines whether at least one complete payment exists under this deliberately bounded model.
      */
     public Assessment assessPayment(final Player payer, final SpellAbility ability) {
-        // Ability discovery normally prepares this field. Keep the query usable for a directly supplied,
-        // otherwise unprepared ability without performing any payment or game-state mutation.
-        if (ability.getActivatingPlayer() == null) {
-            ability.setActivatingPlayer(payer);
+        final SpellAbility root = ability.getRootAbility();
+        final SpellAbility probe = preparedProbe(root, payer);
+        final Cost originalCost = probe.getPayCosts();
+        final XValue xValue = determineExistentialX(originalCost, probe);
+        return assessPayment(payer, probe, originalCost, xValue);
+    }
+
+    /** Determines whether the prepared root action has a complete supported payment for exactly {@code x}. */
+    public Assessment assessPaymentAtX(final Player payer, final SpellAbility ability, final int x) {
+        if (x < 0) {
+            throw new IllegalArgumentException("x must be non-negative");
         }
-        final Cost originalCost = ability.getPayCosts();
-        final XValue xValue = determineExistentialX(originalCost, ability);
+        final SpellAbility root = ability.getRootAbility();
+        final SpellAbility probe = preparedProbe(root, payer);
+        final Cost originalCost = probe.getPayCosts();
+        return assessPayment(payer, probe, originalCost, new XValue(x, null));
+    }
+
+    /** Returns the complete cost-independent capacity of all currently available fixed-output resources. */
+    public CapacityAssessment assessManaCapacity(final Player payer, final SpellAbility ability) {
+        final SpellAbility probe = preparedProbe(ability.getRootAbility(), payer);
+        if (hasPlayableAlternativeManaActivation(payer)) {
+            return CapacityAssessment.unsupported(UnsupportedReason.MANA_SOURCE_ALTERNATIVE_COST);
+        }
+        final ManaInventory inventory = getManaInventory(payer, probe, true);
+        if (inventory.unsupportedReason() != null) {
+            return CapacityAssessment.unsupported(inventory.unsupportedReason());
+        }
+        final Map<String, Integer> largestBundleBySource = new HashMap<>();
+        for (final ShadowManaSource source : inventory.sources()) {
+            largestBundleBySource.merge(source.sourceKey(), source.bundle().size(), Math::max);
+        }
+        long maximum = inventory.floatingMana().size();
+        for (final int bundleSize : largestBundleBySource.values()) {
+            maximum += bundleSize;
+        }
+        return CapacityAssessment.supported(maximum);
+    }
+
+    private Assessment assessPayment(final Player payer, final SpellAbility ability, final Cost originalCost,
+            final XValue xValue) {
         final long adjustmentStartedAtNanos = System.nanoTime();
         final CostAdjustmentPreview adjustment = CostAdjustment.preview(originalCost, ability, payer, false,
                 xValue.value(), ability.getXColor());
@@ -185,7 +266,7 @@ public final class PriorityCostFeasibility {
 
         final ManaCostBeingPaid unpaid = adjustment.getAdjustedManaCost();
 
-        final ManaInventory inventory = getManaInventory(payer, ability);
+        final ManaInventory inventory = getManaInventory(payer, ability, false);
         final Search search = new Search(payer, ability, inventory);
         if (search.findAnyPayment(unpaid, inventory.floatingMana(), new HashSet<>())) {
             return Assessment.payable().withAdjustmentPreview(adjustment, adjustmentDurationNanos);
@@ -197,6 +278,17 @@ public final class PriorityCostFeasibility {
         return (inventory.unsupportedReason() == null
                 ? Assessment.unpayable() : Assessment.unsupported(inventory.unsupportedReason()))
                 .withAdjustmentPreview(adjustment, adjustmentDurationNanos);
+    }
+
+    private static SpellAbility preparedProbe(final SpellAbility root, final Player payer) {
+        if (root.getActivatingPlayer() != null) {
+            return root;
+        }
+        final SpellAbility copy = root.copy(payer);
+        if (copy == null) {
+            throw new IllegalArgumentException("Unable to create a side-effect-free prepared ability probe");
+        }
+        return copy;
     }
 
     private static boolean hasNonManaXCost(final Cost cost) {
@@ -233,7 +325,8 @@ public final class PriorityCostFeasibility {
         return new XValue(manaPart.getXMin(), null);
     }
 
-    private static ManaInventory getManaInventory(final Player payer, final SpellAbility ability) {
+    private static ManaInventory getManaInventory(final Player payer, final SpellAbility ability,
+            final boolean requireCompleteFixedOutput) {
         final List<ShadowMana> floating = new ArrayList<>();
         for (final Mana mana : payer.getManaPool()) {
             floating.add(ShadowMana.fromFloating(mana));
@@ -245,7 +338,7 @@ public final class PriorityCostFeasibility {
             if (!payer.equals(card.getController()) || card.isTapped()) {
                 continue;
             }
-            final SourceOptions sourceOptions = getSourceOptions(card, payer, ability);
+            final SourceOptions sourceOptions = getSourceOptions(card, payer, ability, requireCompleteFixedOutput);
             sources.addAll(sourceOptions.sources());
             if (unsupportedReason == null) {
                 unsupportedReason = sourceOptions.unsupportedReason();
@@ -256,23 +349,45 @@ public final class PriorityCostFeasibility {
         return new ManaInventory(List.copyOf(floating), List.copyOf(sources), unsupportedReason);
     }
 
-    private static SourceOptions getSourceOptions(final Card card, final Player payer, final SpellAbility ability) {
+    private static SourceOptions getSourceOptions(final Card card, final Player payer, final SpellAbility ability,
+            final boolean requireCompleteFixedOutput) {
         final List<ShadowManaSource> result = new ArrayList<>();
         UnsupportedReason unsupportedReason = null;
         int index = 0;
         for (final SpellAbility manaAbility : card.getManaAbilities()) {
-            manaAbility.setActivatingPlayer(payer);
-            if (!manaAbility.canPlay()) {
+            final SpellAbility probeAbility = manaAbility.copy(payer);
+            if (probeAbility == null) {
+                unsupportedReason = chooseReason(unsupportedReason, UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
                 index++;
                 continue;
             }
-            if (!isTapOnlyManaAbility(manaAbility)) {
+            if (!probeAbility.canPlay()) {
+                index++;
+                continue;
+            }
+            if (!isTapOnlyManaAbility(probeAbility)) {
                 unsupportedReason = chooseReason(unsupportedReason, UnsupportedReason.MANA_SOURCE_COST);
                 index++;
                 continue;
             }
-            final List<AbilityManaPart> manaParts = manaAbility.getAllManaParts();
+            if (requireCompleteFixedOutput && probeAbility.getSubAbility() != null) {
+                unsupportedReason = chooseReason(unsupportedReason, UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
+                index++;
+                continue;
+            }
+            final List<AbilityManaPart> manaParts = probeAbility.getAllManaParts();
             if (manaParts.size() != 1) {
+                unsupportedReason = chooseReason(unsupportedReason, UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
+                index++;
+                continue;
+            }
+            if (requireCompleteFixedOutput && hasProduceManaReplacement(probeAbility, manaParts.get(0), payer)) {
+                unsupportedReason = chooseReason(unsupportedReason,
+                        UnsupportedReason.MANA_PRODUCTION_REPLACEMENT);
+                index++;
+                continue;
+            }
+            if (requireCompleteFixedOutput && manaParts.get(0).isComboMana()) {
                 unsupportedReason = chooseReason(unsupportedReason, UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
                 index++;
                 continue;
@@ -292,6 +407,36 @@ public final class PriorityCostFeasibility {
             index++;
         }
         return new SourceOptions(List.copyOf(result), unsupportedReason);
+    }
+
+    private static boolean hasPlayableAlternativeManaActivation(final Player payer) {
+        for (final Card card : payer.getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (final SpellAbility liveAbility : card.getManaAbilities()) {
+                final SpellAbility baseProbe = liveAbility.copy(payer);
+                if (baseProbe == null) {
+                    continue;
+                }
+                for (final SpellAbility alternative
+                        : GameActionUtil.getAlternativeCosts(baseProbe, payer, false)) {
+                    if (alternative.isManaAbility() && alternative.canPlay(true)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasProduceManaReplacement(final SpellAbility manaAbility,
+            final AbilityManaPart part, final Player payer) {
+        final Card source = manaAbility.getHostCard();
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(source);
+        runParams.put(AbilityKey.Mana, part.getOrigProduced());
+        runParams.put(AbilityKey.Player, payer);
+        runParams.put(AbilityKey.AbilityMana, manaAbility.getRootAbility());
+        runParams.put(AbilityKey.Activator, payer);
+        return !source.getGame().getReplacementHandler().getReplacementList(
+                ReplacementType.ProduceMana, runParams, ReplacementLayer.Other).isEmpty();
     }
 
     private static UnsupportedReason chooseReason(final UnsupportedReason current, final UnsupportedReason candidate) {
