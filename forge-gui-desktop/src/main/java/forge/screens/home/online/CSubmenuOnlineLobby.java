@@ -77,6 +77,18 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         FThreads.invokeInBackgroundThread(() -> join(url));
     }
 
+    /**
+     * Programmatic entry point to join a game hosted at the given server URL
+     * (e.g. "ipaddress:port"), used by the command-line "join" mode.
+     * Reuses the same join logic as {@link #joinGame()} but with the URL supplied
+     * directly instead of prompting for it.
+     */
+    public void joinServer(final String url) {
+        if (url == null || url.isEmpty()) { return; }
+
+        FThreads.invokeInBackgroundThread(() -> join(url));
+    }
+
     private void host() {
         SwingUtilities.invokeLater(() -> {
             SOverlayUtils.startGameOverlay(Localizer.getInstance().getMessage("lblStartingServer"));

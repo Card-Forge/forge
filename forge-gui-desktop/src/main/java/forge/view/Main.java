@@ -85,6 +85,29 @@ public final class Main {
                 System.out.println("Dedicated server mode.\nNot implemented.");
                 break;
 
+            case "join":
+                Singletons.initializeOnce(true);
+                Singletons.getControl().initialize();
+                JoinMatch.join(args.length > 1 ? args[1] : "");
+                return;
+
+            case "host":
+                Singletons.initializeOnce(true);
+                Singletons.getControl().initialize();
+
+                int port = forge.model.FModel.getNetPreferences()
+                        .getPrefInt(forge.localinstance.properties.ForgeNetPreferences.FNetPref.NET_PORT);
+                if (args.length > 1) {
+                    try {
+                        port = Integer.parseInt(args[1].trim());
+                    } catch (final NumberFormatException e) {
+                        System.out.println("Invalid port '" + args[1] + "'. Using default port " + port + ".");
+                    }
+                }
+
+                HostMatch.host(port);
+                return;
+
             default:
                 System.out.println("Unknown mode.\nKnown mode is 'sim', 'parse' ");
                 break;
