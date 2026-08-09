@@ -55,7 +55,6 @@ public final class PaymentDecisionProvider {
         Objects.requireNonNull(remainingCost);
         Objects.requireNonNull(ability);
         Objects.requireNonNull(payer);
-        Objects.requireNonNull(matrix);
         if (remainingCost.isPaid()) {
             return Generation.complete(System.nanoTime() - startedAtNanos);
         }
@@ -132,7 +131,7 @@ public final class PaymentDecisionProvider {
 
     private static PrototypeResult collectPrototypes(final ManaCostBeingPaid remainingCost,
             final SpellAbility ability, final Player payer, final ManaConversionMatrix matrix) {
-        if (matrix != payer.getManaPool() && !matrix.isIdentity()) {
+        if (matrix != null && matrix != payer.getManaPool() && !matrix.isIdentity()) {
             return PrototypeResult.unsupported(UnsupportedReason.MANA_CONVERSION_MATRIX);
         }
         for (final ManaCostShard shard : remainingCost.getUnpaidShards()) {

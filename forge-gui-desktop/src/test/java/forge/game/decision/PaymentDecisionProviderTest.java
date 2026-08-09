@@ -370,6 +370,35 @@ public class PaymentDecisionProviderTest extends AITest {
     }
 
     @Test
+    public void nullMatrixUsesOrdinaryNoExtraMatrixCandidateSemantics() {
+        final PaymentFixture fixture = fixture("Lightning Bolt", "Mountain", "Mountain");
+        final DecisionRequest identityRequest = provider.generatePaymentRequest(
+                fixture.remaining(), fixture.ability(), fixture.payer(), identityMatrix(), null).getRequest();
+
+        final PaymentDecisionProvider.Generation nullGeneration = provider.generatePaymentRequest(
+                fixture.remaining(), fixture.ability(), fixture.payer(), null, null);
+
+        assertEquals(nullGeneration.getStatus(), PaymentDecisionProvider.Status.DECISION);
+        assertEquals(keys(nullGeneration.getRequest()), keys(identityRequest));
+        assertEquals(nullGeneration.getRequest().isForced(), identityRequest.isForced());
+        assertNull(nullGeneration.getRequest().getPaymentContext().getMatrix());
+    }
+
+    @Test
+    public void applyingRequestWithNullMatrixCompletesThroughForge() {
+        final PaymentFixture fixture = fixture("Lightning Bolt", "Mountain");
+        final DecisionRequest request = provider.generatePaymentRequest(
+                fixture.remaining(), fixture.ability(), fixture.payer(), null, null).getRequest();
+
+        final PaymentDecisionProvider.Generation result = provider.apply(
+                request, request.getCandidates().get(0));
+
+        assertEquals(result.getStatus(), PaymentDecisionProvider.Status.COMPLETE);
+        assertTrue(fixture.sources().get(0).isTapped());
+        assertTrue(fixture.remaining().isPaid());
+    }
+
+    @Test
     public void effectiveMatrixAlreadyAppliedToLivePoolIsUsedForLegality() {
         final PaymentFixture fixture = fixture("Lightning Bolt", "Island");
         fixture.payer().getManaPool().adjustColorReplacement(

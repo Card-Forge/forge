@@ -35,9 +35,11 @@ decision boundary. The AI path uses `ComputerUtilMana`; it is observed diagnosti
 the neutral provider.
 
 Forge Human applies an extra `ManaConversionMatrix` to the payer's live pool before payment and
-`CostPartMana.payAsDecided` restores the prior matrix afterward. The neutral provider therefore supports the effective
-matrix already installed on that live pool (and identity extras), but rejects a distinct non-identity extra matrix as
-`MANA_CONVERSION_MATRIX`; it does not reproduce conversion rules. Human source discovery also expands
+`CostPartMana.payAsDecided` restores the prior matrix afterward. A null matrix means Forge's normal "no additional
+matrix" contract and is preserved through request application/regeneration. The neutral provider uses the effective
+matrix already installed on the live pool, supports identity extras, but rejects a distinct non-identity extra matrix
+as `MANA_CONVERSION_MATRIX`; it neither synthesizes an identity matrix nor reproduces conversion rules. Human source
+discovery also expands
 `GameActionUtil.getAlternativeCosts`. A playable alternative activation is rejected as
 `MANA_SOURCE_ALTERNATIVE_COST` rather than silently omitted.
 
@@ -188,12 +190,12 @@ Commands:
 ```text
 mvn -pl forge-gui-desktop -am "-Dtest=forge.game.decision.PaymentDecisionProviderTest" \
   "-Dsurefire.failIfNoSpecifiedTests=false" test
-# 29 tests, 0 failures/errors/skips
+# 31 tests, 0 failures/errors/skips
 
 mvn -pl forge-gui-desktop -am \
   "-Dtest=forge.game.decision.*Test,forge.game.cost.CostAdjustmentPreviewTest,forge.game.mana.ManaRefundServiceTest" \
   "-Dsurefire.failIfNoSpecifiedTests=false" test
-# 101 tests, 0 failures/errors/skips
+# 103 tests, 0 failures/errors/skips
 
 mvn -pl forge-gui-desktop -am -DskipTests package
 # BUILD SUCCESS
@@ -202,10 +204,10 @@ mvn -pl forge-gui-desktop -am -DskipTests package
 The focused suite covers exact floating identity, one/two sources, forced/strategic status, deterministic ordering,
 fixed bundles, variable-output unsupported, tapped/consumed exclusion, partial regeneration, completion/invalid,
 stale and foreign candidate rejection, continuation/payer/root/live cost, hidden information, and Phyrexian failure.
-The review regressions additionally cover both an already-applied live conversion matrix and a distinct non-identity
-extra matrix, a Piracy-style alternative mana activation, a `Contamination` ProduceMana replacement, dynamic
-`Amount` production, and a non-mana sub-ability. Every unsupported case returns its structured reason instead of a
-false `INVALID_PAYMENT` or incomplete request.
+The review regressions additionally cover null/no-extra matrix generation and application, both an already-applied
+live conversion matrix and a distinct non-identity extra matrix, a Piracy-style alternative mana activation, a
+`Contamination` ProduceMana replacement, dynamic `Amount` production, and a non-mana sub-ability. Every unsupported
+case returns its structured reason instead of a false `INVALID_PAYMENT` or incomplete request.
 Compilation also enforces the module boundary: `forge-game` cannot depend on the downstream `forge-ai` module.
 
 ## 16. Controlled benchmark
