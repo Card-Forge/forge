@@ -122,6 +122,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             // ponytail: collateral-tracking ceiling — if redirected to another
             // player's battlefield, that zone isn't suppressed here; acceptable
             // for normal token creation.
+            // REFORGE COMMANDER FIX (token lag): the suppressed refreshes were
+            // never replayed — the token stayed invisible until some unrelated
+            // later event refreshed the battlefield view. Push a single refresh
+            // after the burst, honoring nested suppression like expandStacks().
             boolean suppressRestore = false;
             PlayerZoneBattlefield bf = null;
             if (controller.getZone(ZoneType.Battlefield) instanceof PlayerZoneBattlefield) {
@@ -253,6 +257,14 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             } finally {
                 if (bf != null) {
                     bf.setSuppressViewUpdate(suppressRestore);
+                    // REFORGE COMMANDER FIX: the burst earlier suppressed every
+                    // per-token refresh; replay them as one push so the new
+                    // tokens appear immediately instead of after the next
+                    // unrelated zone change. If an outer burst already had us
+                    // suppressed (suppressRestore true), that owner pushes.
+                    if (!suppressRestore) {
+                        bf.getPlayer().updateZoneForView(bf);
+                    }
                 }
             }
         }
