@@ -180,7 +180,9 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
 
         AUTO_UPDATE("none"),
         USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
-        CHECK_SNAPSHOT_AT_STARTUP("true"),
+        // REFORGE COMMANDER EXTENSION: no daily-snapshot release exists for this
+        // fork, so the startup snapshot check would 404 on every launch.
+        CHECK_SNAPSHOT_AT_STARTUP("false"),
         MAX_LOG_FILES("10"), // applied per category: up to N forge.*.log backups AND N network log entries
 
         NEW_GAME_SCREEN("Constructed"),
