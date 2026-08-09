@@ -33,6 +33,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     private final FGameClient client;
     private final IGuiGame gui;
     private Tracker tracker;
+    // GameView id the tracker was built for; each game restarts card ids at 1.
+    private int trackedGameId;
 
     public GameClientHandler(final FGameClient client) {
         super(true);
@@ -75,8 +77,9 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
         switch (protocolMethod) {
             case setGameView:
                 if (args.length > 0 && args[0] instanceof GameView gameView) {
-                    if (this.tracker == null) {
+                    if (this.tracker == null || gameView.getId() != trackedGameId) {
                         this.tracker = new Tracker();
+                        trackedGameId = gameView.getId();
                         // Encoder uses the tracker to emit IdRef for client→server CardView args
                         // (presence check only — stale detection is server-only).
                         // Ephemerals absent from the tracker serialize as full objects in both directions.

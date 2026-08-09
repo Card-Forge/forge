@@ -197,6 +197,12 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
         if (codecTracker == null || ch == null) {
             return;
         }
+        // Swap on the event loop so it lands between decoded frames: a message the
+        // client sent against the previous game must not resolve against the new one.
+        if (!ch.eventLoop().inEventLoop()) {
+            ch.eventLoop().execute(() -> applyCodecTracker(ch));
+            return;
+        }
         CompatibleObjectEncoder encoder = ch.pipeline().get(CompatibleObjectEncoder.class);
         if (encoder != null) {
             encoder.setTracker(codecTracker);
