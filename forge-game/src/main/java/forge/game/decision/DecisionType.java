@@ -6,5 +6,6 @@ public enum DecisionType {
     MODE,
     X_VALUE,
     TARGET,
-    PAYMENT
+    PAYMENT,
+    CARD_SELECTION
 }

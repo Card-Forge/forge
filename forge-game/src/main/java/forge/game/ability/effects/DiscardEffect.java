@@ -17,6 +17,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
+import forge.game.decision.PriorityActionDiagnostics;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerPredicates;
@@ -261,7 +262,18 @@ public class DiscardEffect extends SpellAbilityEffect {
                 // Reveal/Look modes disclose dPHand to the chooser; non-valid revealed cards should remain visible during the choice.
                 final boolean revealed = mode.startsWith("Reveal") || mode.startsWith("Look");
                 final CardCollectionView visibleToChooser = revealed ? dPHand : validCards;
-                toBeDiscarded = max == 0 ? CardCollection.EMPTY : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max, visibleToChooser);
+                if (max == 0) {
+                    toBeDiscarded = CardCollection.EMPTY;
+                } else {
+                    final PriorityActionDiagnostics.DiscardSelectionCapture selectionCapture =
+                            PriorityActionDiagnostics.captureDiscardSelection(chooser, p, sa, validCards,
+                                    min, max, visibleToChooser);
+                    final long callbackStartedAtNanos = PriorityActionDiagnostics.startNativeCallback();
+                    toBeDiscarded = chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards,
+                            min, max, visibleToChooser);
+                    PriorityActionDiagnostics.recordDiscardSelection(selectionCapture, toBeDiscarded,
+                            callbackStartedAtNanos);
+                }
 
                 if (toBeDiscarded.isEmpty()) {
                     continue;
