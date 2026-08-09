@@ -13,40 +13,47 @@ public final class DecisionRequest {
     private final XDecisionContext xContext;
     private final ModeDecisionContext modeContext;
     private final CardSelectionContext cardSelectionContext;
+    private final AttackDeclarationContext attackContext;
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates) {
-        this(requestId, decisionType, candidates, null, null, null, null, null);
+        this(requestId, decisionType, candidates, null, null, null, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final TargetDecisionContext targetContext) {
-        this(requestId, decisionType, candidates, targetContext, null, null, null, null);
+        this(requestId, decisionType, candidates, targetContext, null, null, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final PaymentDecisionContext paymentContext) {
-        this(requestId, decisionType, candidates, null, paymentContext, null, null, null);
+        this(requestId, decisionType, candidates, null, paymentContext, null, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final XDecisionContext xContext) {
-        this(requestId, decisionType, candidates, null, null, xContext, null, null);
+        this(requestId, decisionType, candidates, null, null, xContext, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final ModeDecisionContext modeContext) {
-        this(requestId, decisionType, candidates, null, null, null, modeContext, null);
+        this(requestId, decisionType, candidates, null, null, null, modeContext, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final CardSelectionContext cardSelectionContext) {
-        this(requestId, decisionType, candidates, null, null, null, null, cardSelectionContext);
+        this(requestId, decisionType, candidates, null, null, null, null, cardSelectionContext, null);
+    }
+
+    DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
+            final AttackDeclarationContext attackContext) {
+        this(requestId, decisionType, candidates, null, null, null, null, null, attackContext);
     }
 
     private DecisionRequest(final long requestId, final DecisionType decisionType,
             final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
             final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
-            final ModeDecisionContext modeContext, final CardSelectionContext cardSelectionContext) {
+            final ModeDecisionContext modeContext, final CardSelectionContext cardSelectionContext,
+            final AttackDeclarationContext attackContext) {
         this.requestId = requestId;
         this.decisionType = Objects.requireNonNull(decisionType);
         this.candidates = List.copyOf(candidates);
@@ -55,6 +62,7 @@ public final class DecisionRequest {
         this.xContext = xContext;
         this.modeContext = modeContext;
         this.cardSelectionContext = cardSelectionContext;
+        this.attackContext = attackContext;
         if (this.candidates.isEmpty()) {
             throw new IllegalArgumentException("A DecisionRequest must contain at least one legal candidate");
         }
@@ -87,6 +95,12 @@ public final class DecisionRequest {
         }
         if (decisionType != DecisionType.CARD_SELECTION && cardSelectionContext != null) {
             throw new IllegalArgumentException("Only CARD_SELECTION DecisionRequests may contain card-selection context");
+        }
+        if (decisionType == DecisionType.ATTACK && attackContext == null) {
+            throw new IllegalArgumentException("An ATTACK DecisionRequest requires attack context");
+        }
+        if (decisionType != DecisionType.ATTACK && attackContext != null) {
+            throw new IllegalArgumentException("Only ATTACK DecisionRequests may contain attack context");
         }
     }
 
@@ -128,6 +142,11 @@ public final class DecisionRequest {
     /** CARD_SELECTION-only callback/session metadata. */
     public CardSelectionContext getCardSelectionContext() {
         return cardSelectionContext;
+    }
+
+    /** ATTACK-only metadata for one atomic turn-based declaration step. */
+    public AttackDeclarationContext getAttackContext() {
+        return attackContext;
     }
 
     public boolean isForced() {

@@ -3,6 +3,9 @@ package forge.game.decision;
 import forge.game.player.Player;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.Card;
+import forge.game.combat.Combat;
+import forge.game.GameEntity;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.spellability.AbilitySub;
@@ -16,6 +19,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Optional, diagnostic-only trace for priority requests and their observed announcement callbacks.
@@ -48,6 +52,8 @@ public final class PriorityActionDiagnostics {
     private static final ModeDecisionProvider MODE_PROVIDER = ENABLED ? new ModeDecisionProvider() : null;
     private static final DiscardCardSelectionAdapter DISCARD_SELECTION_ADAPTER = ENABLED
             ? new DiscardCardSelectionAdapter() : null;
+    private static final AttackDeclarationAdapter ATTACK_DECLARATION_ADAPTER = ENABLED
+            ? new AttackDeclarationAdapter() : null;
     private static final List<String> EVENTS = ENABLED ? new ArrayList<>() : null;
     private static final ThreadLocal<ActiveContinuation> ACTIVE_CONTINUATION = ENABLED ? new ThreadLocal<>() : null;
 
@@ -433,6 +439,96 @@ public final class PriorityActionDiagnostics {
         }
     }
 
+    /** Snapshots the narrow turn-based ATTACK boundary before the unchanged Forge controller callback. */
+    public static AttackDeclarationCapture captureAttackDeclaration(final Player whoDeclares,
+            final Player attackingPlayer, final Combat combat) {
+        if (!ENABLED) {
+            return null;
+        }
+        try {
+            final AttackDeclarationAdapter.Capture adapterCapture = ATTACK_DECLARATION_ADAPTER.begin(whoDeclares,
+                    attackingPlayer, combat);
+            final int initialCandidateCount = adapterCapture.getStatus() == AttackDeclarationAdapter.Status.SUPPORTED
+                    ? adapterCapture.getSession().getEligibleIdentities().size() : 0;
+            return new AttackDeclarationCapture(adapterCapture, attackingPlayer.getGame().getId(),
+                    attackingPlayer.getGame().getPhaseHandler().getTurn(),
+                    String.valueOf(attackingPlayer.getGame().getPhaseHandler().getPhase()), whoDeclares.getName(),
+                    attackingPlayer.getName(), initialCandidateCount);
+        } catch (final RuntimeException ex) {
+            return null;
+        }
+    }
+
+    /** Replays the unchanged controller's final declaration for diagnostics only. */
+    public static void recordAttackDeclaration(final AttackDeclarationCapture capture, final Combat combat,
+            final long callbackStartedAtNanos) {
+        if (capture == null) {
+            return;
+        }
+        try {
+            final long nativeNanos = callbackStartedAtNanos == 0L ? 0L
+                    : System.nanoTime() - callbackStartedAtNanos;
+            final AttackDeclarationAdapter.Capture adapterCapture = capture.adapterCapture;
+            synchronized (EVENTS) {
+                EVENTS.add(formatAttackDeclarationRecord("ATTACK_CALLBACK", PROCESS_ID, capture.gameId,
+                        adapterCapture.getStatus() == AttackDeclarationAdapter.Status.SUPPORTED
+                                ? adapterCapture.getSession().getAttackSessionId() : null,
+                        null, false, capture.turn, capture.phase, capture.declaringPlayer,
+                        capture.attackingPlayer, capture.initialCandidateCount, 0L, nativeNanos,
+                        adapterCapture.getStatus(), adapterCapture.getReason(), combat.getAttackers().size(),
+                        capture.initialCandidateCount, capture.initialCandidateCount, 0));
+            }
+            if (adapterCapture.getStatus() != AttackDeclarationAdapter.Status.SUPPORTED) {
+                synchronized (EVENTS) {
+                    EVENTS.add(formatAttackDeclarationRecord("ATTACK_STATE", PROCESS_ID, capture.gameId,
+                            null, null, false, capture.turn, capture.phase, capture.declaringPlayer,
+                            capture.attackingPlayer, 0, 0L, 0L, adapterCapture.getStatus(), adapterCapture.getReason(),
+                            combat.getAttackers().size(), 0, capture.initialCandidateCount,
+                            capture.initialCandidateCount));
+                }
+                return;
+            }
+            final Map<Card, GameEntity> actualAssignments = combat.getAttackersAndDefenders();
+            final AttackDeclarationAdapter.Replay replay = ATTACK_DECLARATION_ADAPTER.replay(adapterCapture,
+                    actualAssignments);
+            synchronized (EVENTS) {
+                for (final AttackDeclarationAdapter.ReplayStep step : replay.getSteps()) {
+                    final DecisionRequest request = step.getRequest();
+                    final AttackDeclarationContext context = request.getAttackContext();
+                    final int remaining = (int) request.getCandidates().stream()
+                            .filter(candidate -> candidate.getAttackKind()
+                                    == AttackDeclarationCandidateKind.ADD_ATTACKER).count();
+                    EVENTS.add(formatAttackDeclarationRecord("ATTACK", PROCESS_ID, context.getGameId(),
+                            context.getAttackSessionId(), context.getAttackStepIndex(), request.isForced(),
+                            capture.turn, capture.phase, capture.declaringPlayer, capture.attackingPlayer,
+                            request.getCandidates().size(), step.getGenerationNanos(), 0L,
+                            AttackDeclarationDecisionProvider.Status.DECISION, null,
+                            context.getSelectedAssignments().size(), remaining, capture.initialCandidateCount,
+                            capture.initialCandidateCount - remaining));
+                }
+                if (replay.getStatus() != AttackDeclarationAdapter.ReplayStatus.COMPLETE) {
+                    EVENTS.add(formatAttackDeclarationRecord("ATTACK_STATE", PROCESS_ID, capture.gameId,
+                            adapterCapture.getSession().getAttackSessionId(), null, false, capture.turn,
+                            capture.phase, capture.declaringPlayer, capture.attackingPlayer, 0, 0L, 0L,
+                            replay.getStatus(), replay.getReason(), actualAssignments.size(), 0,
+                            capture.initialCandidateCount, capture.initialCandidateCount));
+                }
+            }
+        } catch (final RuntimeException ex) {
+            try {
+                synchronized (EVENTS) {
+                    EVENTS.add(formatAttackDeclarationRecord("ATTACK_STATE", PROCESS_ID, capture.gameId,
+                            null, null, false, capture.turn, capture.phase, capture.declaringPlayer,
+                            capture.attackingPlayer, 0, 0L, 0L,
+                            AttackDeclarationAdapter.ReplayStatus.MAPPING_FAILED, "DIAGNOSTIC_EXCEPTION",
+                            0, 0, capture.initialCandidateCount, capture.initialCandidateCount));
+                }
+            } catch (final RuntimeException ignored) {
+                // Diagnostics must never alter Forge's combat declaration or resolution.
+            }
+        }
+    }
+
     private static LegalCandidate selectedCandidate(final DecisionRequest request, final List<SpellAbility> selected) {
         if (selected == null) {
             return PROVIDER.findCandidate(request, null);
@@ -553,6 +649,37 @@ public final class PriorityActionDiagnostics {
         return formatRow(values);
     }
 
+    static String formatAttackDeclarationRecord(final String eventType, final long processId, final int gameId,
+            final Long selectionSessionId, final Integer selectionStepIndex, final boolean forced, final int turn,
+            final String phase, final String declaringPlayer, final String attackingPlayer, final int candidateCount,
+            final long generationNanos, final long nativeCallbackNanos, final Object status, final Object reason,
+            final int selectedCount, final int remainingCount, final int initialCount, final int candidateShrinkage) {
+        final Object[] values = new Object[COLUMN_COUNT];
+        Arrays.fill(values, "");
+        values[0] = eventType;
+        values[1] = processId;
+        values[6] = DecisionType.ATTACK;
+        values[7] = forced;
+        values[8] = turn;
+        values[9] = phase;
+        values[10] = declaringPlayer;
+        values[11] = attackingPlayer;
+        values[12] = candidateCount;
+        values[15] = generationNanos;
+        values[16] = nativeCallbackNanos;
+        values[44] = "ATTACK";
+        values[45] = gameId < 0 ? "" : gameId;
+        values[46] = selectionSessionId;
+        values[47] = selectionStepIndex;
+        values[48] = status;
+        values[49] = reason;
+        values[50] = selectedCount;
+        values[51] = remainingCount;
+        values[52] = initialCount;
+        values[53] = candidateShrinkage;
+        return formatRow(values);
+    }
+
     static String formatFeasibilityRecord(final long processId, final int turn, final int playerIndex,
             final PriorityCostFeasibility.Result result,
             final PriorityCostFeasibility.UnsupportedReason unsupportedReason, final long durationNanos,
@@ -651,6 +778,29 @@ public final class PriorityActionDiagnostics {
         private ActiveContinuation(final Capture capture, final ActionContinuation continuation) {
             this.capture = capture;
             this.continuation = continuation;
+        }
+    }
+
+    /** Opaque pre-controller state for one turn-based ATTACK callback. */
+    public static final class AttackDeclarationCapture {
+        private final AttackDeclarationAdapter.Capture adapterCapture;
+        private final int gameId;
+        private final int turn;
+        private final String phase;
+        private final String declaringPlayer;
+        private final String attackingPlayer;
+        private final int initialCandidateCount;
+
+        private AttackDeclarationCapture(final AttackDeclarationAdapter.Capture adapterCapture, final int gameId,
+                final int turn, final String phase, final String declaringPlayer, final String attackingPlayer,
+                final int initialCandidateCount) {
+            this.adapterCapture = adapterCapture;
+            this.gameId = gameId;
+            this.turn = turn;
+            this.phase = phase;
+            this.declaringPlayer = declaringPlayer;
+            this.attackingPlayer = attackingPlayer;
+            this.initialCandidateCount = initialCandidateCount;
         }
     }
 
