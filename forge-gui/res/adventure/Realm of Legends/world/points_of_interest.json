@@ -456,6 +456,18 @@
 			"Story"]
 	},
 	{
+		"name": "Isolated Hut",
+		"displayName": "Isolated Hut",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building198",
+		"map": "../Realm of Legends/maps/map/evilgrove/Isolated_Hut.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Gitrog Bog",
 		"displayName": "Gitrog Bog",
 		"type": "castle",
