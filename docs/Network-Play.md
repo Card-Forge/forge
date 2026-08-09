@@ -67,7 +67,7 @@
 # Command Line Launch
 > [!TIP]
 > - The first two steps of the [**Quick Start**](#quick-start) are still required  
-> - The **Host** and **Client** will join with the last defined player name  
+> - The **Host** and **Client** will join with the last defined player name from preferences or prompt for a player name if the value is empty e.g. first launch  
 
 > [!CAUTION]  
 > - A **Client** will fail to join if the **Host** hasn't added a player for them in advance   

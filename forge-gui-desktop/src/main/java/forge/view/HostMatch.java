@@ -50,6 +50,7 @@ public final class HostMatch {
      * @param port the local port to bind the server to
      */
     public static void host(final int port) {
+        NetConnectUtil.ensurePlayerName();
         SwingUtilities.invokeLater(() -> {
             try {
                 System.out.println("[HostMatch] moving to network lobby screen...");

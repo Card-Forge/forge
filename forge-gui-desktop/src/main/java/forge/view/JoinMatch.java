@@ -21,6 +21,7 @@ import forge.gui.FThreads;
 import forge.gui.framework.EDocID;
 import forge.screens.home.CHomeUI;
 import forge.screens.home.online.CSubmenuOnlineLobby;
+import forge.gamemodes.net.NetConnectUtil;
 
 /**
  * Command-line "join" mode launcher.
@@ -47,6 +48,8 @@ public final class JoinMatch {
             System.out.println("No server URL supplied. Usage: forge join ipaddress:port");
             return;
         }
+
+        NetConnectUtil.ensurePlayerName();
 
         // Navigate to and prepare the online lobby screen, then join the server.
         // Done on the EDT since it manipulates Swing state and mirrors the
