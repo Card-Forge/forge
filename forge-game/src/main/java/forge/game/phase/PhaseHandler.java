@@ -677,7 +677,15 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.DeclareBlocker, repRunParams);
                     if (repres == ReplacementResult.NotReplaced) {
                         // If not replaced, run normal declare blockers
-                        whoDeclaresBlockers.getController().declareBlockers(p, combat);
+                        final PriorityActionDiagnostics.BlockDeclarationCapture blockCapture =
+                                PriorityActionDiagnostics.captureBlockDeclaration(whoDeclaresBlockers, p, combat);
+                        final long blockCallbackStartedAtNanos = PriorityActionDiagnostics.startNativeCallback();
+                        try {
+                            whoDeclaresBlockers.getController().declareBlockers(p, combat);
+                        } finally {
+                            PriorityActionDiagnostics.recordBlockDeclaration(blockCapture, combat,
+                                    blockCallbackStartedAtNanos);
+                        }
                     }
                 }
             }

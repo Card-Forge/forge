@@ -43,6 +43,9 @@ public final class LegalCandidate {
     private final AttackDeclarationCandidateKind attackKind;
     private final AttackDeclarationCard attackCard;
     private final AttackDeclarationDefender attackDefender;
+    private final BlockDeclarationCandidateKind blockKind;
+    private final BlockDeclarationCard blockCard;
+    private final BlockDeclarationCard blockAttacker;
 
     private LegalCandidate(final int candidateId, final PriorityActionKind kind, final Card source,
             final SpellAbility spellAbility, final String semanticKey) {
@@ -72,6 +75,9 @@ public final class LegalCandidate {
         this.attackKind = null;
         this.attackCard = null;
         this.attackDefender = null;
+        this.blockKind = null;
+        this.blockCard = null;
+        this.blockAttacker = null;
     }
 
     private LegalCandidate(final int candidateId, final TargetCandidateKind targetKind, final GameObject target,
@@ -102,6 +108,9 @@ public final class LegalCandidate {
         this.attackKind = null;
         this.attackCard = null;
         this.attackDefender = null;
+        this.blockKind = null;
+        this.blockCard = null;
+        this.blockAttacker = null;
     }
 
     private LegalCandidate(final int candidateId, final PaymentCandidateKind paymentKind, final Card source,
@@ -132,6 +141,9 @@ public final class LegalCandidate {
         this.attackKind = null;
         this.attackCard = null;
         this.attackDefender = null;
+        this.blockKind = null;
+        this.blockCard = null;
+        this.blockAttacker = null;
     }
 
     private LegalCandidate(final int candidateId, final int xValue) {
@@ -161,6 +173,9 @@ public final class LegalCandidate {
         this.attackKind = null;
         this.attackCard = null;
         this.attackDefender = null;
+        this.blockKind = null;
+        this.blockCard = null;
+        this.blockAttacker = null;
     }
 
     private LegalCandidate(final int candidateId, final int modeOrdinal, final AbilitySub mode) {
@@ -190,6 +205,9 @@ public final class LegalCandidate {
         this.attackKind = null;
         this.attackCard = null;
         this.attackDefender = null;
+        this.blockKind = null;
+        this.blockCard = null;
+        this.blockAttacker = null;
     }
 
     private LegalCandidate(final int candidateId, final CardSelectionCandidateKind cardSelectionKind,
@@ -221,6 +239,9 @@ public final class LegalCandidate {
         this.attackKind = null;
         this.attackCard = null;
         this.attackDefender = null;
+        this.blockKind = null;
+        this.blockCard = null;
+        this.blockAttacker = null;
     }
 
     private LegalCandidate(final int candidateId, final AttackDeclarationCandidateKind attackKind,
@@ -253,6 +274,44 @@ public final class LegalCandidate {
         this.mode = null;
         this.cardSelectionKind = null;
         this.cardSelectionCard = null;
+        this.blockKind = null;
+        this.blockCard = null;
+        this.blockAttacker = null;
+    }
+
+    private LegalCandidate(final int candidateId, final BlockDeclarationCandidateKind blockKind,
+            final BlockDeclarationCard blockCard, final BlockDeclarationCard blockAttacker) {
+        this.candidateId = candidateId;
+        this.kind = null;
+        this.sourceCardId = -1;
+        this.sourceName = "";
+        this.sourceZone = null;
+        this.sourceState = null;
+        this.abilityDescription = "";
+        this.semanticKey = blockKind == BlockDeclarationCandidateKind.DONE
+                ? "DONE" : blockKind.name() + "|" + (blockCard == null ? "" : blockCard.identityKey())
+                        + (blockAttacker == null ? "" : "|" + blockAttacker.identityKey());
+        this.spellAbility = null;
+        this.targetKind = null;
+        this.targetEntityId = -1;
+        this.targetName = "";
+        this.targetZone = null;
+        this.target = null;
+        this.paymentKind = null;
+        this.mana = null;
+        this.xValue = null;
+        this.modeOrdinal = null;
+        this.modeDescription = "";
+        this.modeUsesTargeting = false;
+        this.mode = null;
+        this.cardSelectionKind = null;
+        this.cardSelectionCard = null;
+        this.attackKind = null;
+        this.attackCard = null;
+        this.attackDefender = null;
+        this.blockKind = Objects.requireNonNull(blockKind);
+        this.blockCard = blockCard;
+        this.blockAttacker = blockAttacker;
     }
 
     private static boolean branchUsesTargeting(final SpellAbility first) {
@@ -322,6 +381,20 @@ public final class LegalCandidate {
         return new LegalCandidate(candidateId, AttackDeclarationCandidateKind.DONE, null, null);
     }
 
+    static LegalCandidate chooseBlocker(final int candidateId, final BlockDeclarationCard blocker) {
+        return new LegalCandidate(candidateId, BlockDeclarationCandidateKind.CHOOSE_BLOCKER, blocker, null);
+    }
+
+    static LegalCandidate chooseAttacker(final int candidateId, final BlockDeclarationCard blocker,
+            final BlockDeclarationCard attacker) {
+        return new LegalCandidate(candidateId, BlockDeclarationCandidateKind.CHOOSE_ATTACKER_FOR_BLOCKER,
+                blocker, attacker);
+    }
+
+    static LegalCandidate blockDone(final int candidateId) {
+        return new LegalCandidate(candidateId, BlockDeclarationCandidateKind.DONE, null, null);
+    }
+
     public int getCandidateId() {
         return candidateId;
     }
@@ -381,6 +454,21 @@ public final class LegalCandidate {
     /** Visible stable defender identity for ADD_ATTACKER, otherwise {@code null}. */
     public AttackDeclarationDefender getAttackDefender() {
         return attackDefender;
+    }
+
+    /** BLOCK candidate kind, otherwise {@code null}. */
+    public BlockDeclarationCandidateKind getBlockKind() {
+        return blockKind;
+    }
+
+    /** Stable blocker identity for BLOCK candidates, otherwise {@code null}. */
+    public BlockDeclarationCard getBlockerCard() {
+        return blockCard;
+    }
+
+    /** Stable attacker identity for CHOOSE_ATTACKER_FOR_BLOCKER candidates, otherwise {@code null}. */
+    public BlockDeclarationCard getBlockAttackerCard() {
+        return blockAttacker;
     }
 
     /** Stable Forge entity or stack-instance identifier for a TARGET candidate; {@code -1} for DONE. */

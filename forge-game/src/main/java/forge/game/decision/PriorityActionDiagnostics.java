@@ -40,8 +40,8 @@ public final class PriorityActionDiagnostics {
             + "x_unsupported_reason,x_variable,mode_status,mode_rule_legality_probes,"
             + "mode_downstream_completion_probes,mode_original_ordinals,selection_adapter,selection_game_id,"
             + "selection_session_id,selection_step_index,selection_status,selection_reason,selection_selected_count,"
-            + "selection_remaining_count,selection_initial_count,selection_candidate_shrinkage";
-    private static final int COLUMN_COUNT = 54;
+            + "selection_remaining_count,selection_initial_count,selection_candidate_shrinkage,selection_stage";
+    private static final int COLUMN_COUNT = 55;
     private static final String OUTPUT_PATH = System.getProperty(OUTPUT_PATH_PROPERTY, "");
     private static final boolean ENABLED = !OUTPUT_PATH.isBlank();
     private static final long PROCESS_ID = ProcessHandle.current().pid();
@@ -54,6 +54,8 @@ public final class PriorityActionDiagnostics {
             ? new DiscardCardSelectionAdapter() : null;
     private static final AttackDeclarationAdapter ATTACK_DECLARATION_ADAPTER = ENABLED
             ? new AttackDeclarationAdapter() : null;
+    private static final BlockDeclarationAdapter BLOCK_DECLARATION_ADAPTER = ENABLED
+            ? new BlockDeclarationAdapter() : null;
     private static final List<String> EVENTS = ENABLED ? new ArrayList<>() : null;
     private static final ThreadLocal<ActiveContinuation> ACTIVE_CONTINUATION = ENABLED ? new ThreadLocal<>() : null;
 
@@ -529,6 +531,103 @@ public final class PriorityActionDiagnostics {
         }
     }
 
+    /** Snapshots the narrow turn-based BLOCK boundary before the unchanged Forge controller callback. */
+    public static BlockDeclarationCapture captureBlockDeclaration(final Player whoDeclares,
+            final Player defendingPlayer, final Combat combat) {
+        if (!ENABLED) {
+            return null;
+        }
+        try {
+            final BlockDeclarationAdapter.Capture adapterCapture = BLOCK_DECLARATION_ADAPTER.begin(whoDeclares,
+                    defendingPlayer, combat);
+            final int initialCandidateCount = adapterCapture.getStatus() == BlockDeclarationAdapter.Status.SUPPORTED
+                    ? adapterCapture.getSession().getInitialEligibleBlockerCount() + 1 : 0;
+            return new BlockDeclarationCapture(adapterCapture, defendingPlayer.getGame().getId(),
+                    defendingPlayer.getGame().getPhaseHandler().getTurn(),
+                    String.valueOf(defendingPlayer.getGame().getPhaseHandler().getPhase()), whoDeclares.getName(),
+                    defendingPlayer.getName(), initialCandidateCount, null);
+        } catch (final RuntimeException ex) {
+            return new BlockDeclarationCapture(null, defendingPlayer.getGame().getId(),
+                    defendingPlayer.getGame().getPhaseHandler().getTurn(),
+                    String.valueOf(defendingPlayer.getGame().getPhaseHandler().getPhase()), whoDeclares.getName(),
+                    defendingPlayer.getName(), 0, "DIAGNOSTIC_EXCEPTION");
+        }
+    }
+
+    /** Replays the unchanged controller's final declaration for diagnostics only. */
+    public static void recordBlockDeclaration(final BlockDeclarationCapture capture, final Combat combat,
+            final long callbackStartedAtNanos) {
+        if (capture == null) {
+            return;
+        }
+        final long nativeNanos = callbackStartedAtNanos == 0L ? 0L
+                : System.nanoTime() - callbackStartedAtNanos;
+        final int actualAssignmentCount = blockAssignmentCount(combat);
+        try {
+            final BlockDeclarationAdapter.Capture adapterCapture = capture.adapterCapture;
+            final Object callbackStatus = adapterCapture == null ? BlockDeclarationAdapter.Status.UNSUPPORTED
+                    : adapterCapture.getStatus();
+            final Object callbackReason = adapterCapture == null ? capture.captureReason : adapterCapture.getReason();
+            final Long sessionId = adapterCapture != null && adapterCapture.getSession() != null
+                    ? adapterCapture.getSession().getBlockSessionId() : null;
+            synchronized (EVENTS) {
+                EVENTS.add(formatBlockDeclarationRecord("BLOCK_CALLBACK", PROCESS_ID, capture.gameId, sessionId,
+                        null, false, capture.turn, capture.phase, capture.declaringPlayer,
+                        capture.defendingPlayer, capture.initialCandidateCount, 0L, nativeNanos, callbackStatus,
+                        callbackReason, actualAssignmentCount, capture.initialCandidateCount,
+                        capture.initialCandidateCount, 0));
+            }
+            if (adapterCapture == null || adapterCapture.getStatus() != BlockDeclarationAdapter.Status.SUPPORTED) {
+                synchronized (EVENTS) {
+                    EVENTS.add(formatBlockDeclarationRecord("BLOCK_STATE", PROCESS_ID, capture.gameId, sessionId,
+                            null, false, capture.turn, capture.phase, capture.declaringPlayer,
+                            capture.defendingPlayer, 0, 0L, 0L, callbackStatus, callbackReason,
+                            actualAssignmentCount, 0, capture.initialCandidateCount,
+                            capture.initialCandidateCount));
+                }
+                return;
+            }
+
+            final BlockDeclarationAdapter.Replay replay = BLOCK_DECLARATION_ADAPTER.replay(adapterCapture, combat);
+            synchronized (EVENTS) {
+                for (final BlockDeclarationAdapter.ReplayStep step : replay.getSteps()) {
+                    final DecisionRequest request = step.getRequest();
+                    final BlockDeclarationContext context = request.getBlockContext();
+                    final int remaining = (int) request.getCandidates().stream()
+                            .filter(candidate -> candidate.getBlockKind()
+                                    == BlockDeclarationCandidateKind.CHOOSE_BLOCKER).count();
+                    EVENTS.add(formatBlockDeclarationRecord("BLOCK", PROCESS_ID, context.getGameId(),
+                            context.getBlockSessionId(), context.getBlockStepIndex(), request.isForced(),
+                            capture.turn, capture.phase, capture.declaringPlayer, capture.defendingPlayer,
+                            request.getCandidates().size(), step.getGenerationNanos(), 0L,
+                            BlockDeclarationDecisionProvider.Status.DECISION, null,
+                            context.getSelectedAssignments().size(), remaining, capture.initialCandidateCount,
+                            Math.max(0, capture.initialCandidateCount - remaining), context.getBlockStage()));
+                }
+                if (replay.getStatus() != BlockDeclarationAdapter.ReplayStatus.COMPLETE) {
+                    EVENTS.add(formatBlockDeclarationRecord("BLOCK_STATE", PROCESS_ID, capture.gameId, sessionId,
+                            null, false, capture.turn, capture.phase, capture.declaringPlayer,
+                            capture.defendingPlayer, 0, 0L, 0L, replay.getStatus(), replay.getReason(),
+                            actualAssignmentCount, 0, capture.initialCandidateCount,
+                            capture.initialCandidateCount));
+                }
+            }
+        } catch (final RuntimeException ex) {
+            try {
+                synchronized (EVENTS) {
+                    EVENTS.add(formatBlockDeclarationRecord("BLOCK_STATE", PROCESS_ID, capture.gameId, null,
+                            null, false, capture.turn, capture.phase, capture.declaringPlayer,
+                            capture.defendingPlayer, 0, 0L, 0L,
+                            BlockDeclarationAdapter.ReplayStatus.MAPPING_FAILED, "DIAGNOSTIC_EXCEPTION",
+                            actualAssignmentCount, 0, capture.initialCandidateCount,
+                            capture.initialCandidateCount));
+                }
+            } catch (final RuntimeException ignored) {
+                // Diagnostics must never alter Forge's combat declaration or resolution.
+            }
+        }
+    }
+
     private static LegalCandidate selectedCandidate(final DecisionRequest request, final List<SpellAbility> selected) {
         if (selected == null) {
             return PROVIDER.findCandidate(request, null);
@@ -537,6 +636,17 @@ public final class PriorityActionDiagnostics {
             return null;
         }
         return PROVIDER.findCandidate(request, selected.get(0));
+    }
+
+    private static int blockAssignmentCount(final Combat combat) {
+        if (combat == null) {
+            return 0;
+        }
+        int result = 0;
+        for (final Card attacker : combat.getAttackers()) {
+            result += combat.getBlockers(attacker).size();
+        }
+        return result;
     }
 
     private static String selectionMapping(final DecisionRequest request, final List<SpellAbility> selected,
@@ -680,6 +790,50 @@ public final class PriorityActionDiagnostics {
         return formatRow(values);
     }
 
+    static String formatBlockDeclarationRecord(final String eventType, final long processId, final int gameId,
+            final Long selectionSessionId, final Integer selectionStepIndex, final boolean forced, final int turn,
+            final String phase, final String declaringPlayer, final String defendingPlayer, final int candidateCount,
+            final long generationNanos, final long nativeCallbackNanos, final Object status, final Object reason,
+            final int selectedCount, final int remainingCount, final int initialCount, final int candidateShrinkage) {
+        return formatBlockDeclarationRecord(eventType, processId, gameId, selectionSessionId, selectionStepIndex,
+                forced, turn, phase, declaringPlayer, defendingPlayer, candidateCount, generationNanos,
+                nativeCallbackNanos, status, reason, selectedCount, remainingCount, initialCount,
+                candidateShrinkage, null);
+    }
+
+    static String formatBlockDeclarationRecord(final String eventType, final long processId, final int gameId,
+            final Long selectionSessionId, final Integer selectionStepIndex, final boolean forced, final int turn,
+            final String phase, final String declaringPlayer, final String defendingPlayer, final int candidateCount,
+            final long generationNanos, final long nativeCallbackNanos, final Object status, final Object reason,
+            final int selectedCount, final int remainingCount, final int initialCount, final int candidateShrinkage,
+            final Object blockStage) {
+        final Object[] values = new Object[COLUMN_COUNT];
+        Arrays.fill(values, "");
+        values[0] = eventType;
+        values[1] = processId;
+        values[6] = DecisionType.BLOCK;
+        values[7] = forced;
+        values[8] = turn;
+        values[9] = phase;
+        values[10] = declaringPlayer;
+        values[11] = defendingPlayer;
+        values[12] = candidateCount;
+        values[15] = generationNanos;
+        values[16] = nativeCallbackNanos;
+        values[44] = "BLOCK";
+        values[45] = gameId < 0 ? "" : gameId;
+        values[46] = selectionSessionId;
+        values[47] = selectionStepIndex;
+        values[48] = status;
+        values[49] = reason;
+        values[50] = selectedCount;
+        values[51] = remainingCount;
+        values[52] = initialCount;
+        values[53] = candidateShrinkage;
+        values[54] = blockStage;
+        return formatRow(values);
+    }
+
     static String formatFeasibilityRecord(final long processId, final int turn, final int playerIndex,
             final PriorityCostFeasibility.Result result,
             final PriorityCostFeasibility.UnsupportedReason unsupportedReason, final long durationNanos,
@@ -801,6 +955,31 @@ public final class PriorityActionDiagnostics {
             this.declaringPlayer = declaringPlayer;
             this.attackingPlayer = attackingPlayer;
             this.initialCandidateCount = initialCandidateCount;
+        }
+    }
+
+    /** Opaque pre-controller state for one turn-based BLOCK callback. */
+    public static final class BlockDeclarationCapture {
+        private final BlockDeclarationAdapter.Capture adapterCapture;
+        private final int gameId;
+        private final int turn;
+        private final String phase;
+        private final String declaringPlayer;
+        private final String defendingPlayer;
+        private final int initialCandidateCount;
+        private final String captureReason;
+
+        private BlockDeclarationCapture(final BlockDeclarationAdapter.Capture adapterCapture, final int gameId,
+                final int turn, final String phase, final String declaringPlayer, final String defendingPlayer,
+                final int initialCandidateCount, final String captureReason) {
+            this.adapterCapture = adapterCapture;
+            this.gameId = gameId;
+            this.turn = turn;
+            this.phase = phase;
+            this.declaringPlayer = declaringPlayer;
+            this.defendingPlayer = defendingPlayer;
+            this.initialCandidateCount = initialCandidateCount;
+            this.captureReason = captureReason;
         }
     }
 

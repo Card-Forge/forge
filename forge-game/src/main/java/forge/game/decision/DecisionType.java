@@ -8,5 +8,6 @@ public enum DecisionType {
     TARGET,
     PAYMENT,
     CARD_SELECTION,
-    ATTACK
+    ATTACK,
+    BLOCK
 }
