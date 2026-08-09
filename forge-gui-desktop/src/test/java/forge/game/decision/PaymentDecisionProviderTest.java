@@ -41,7 +41,7 @@ public class PaymentDecisionProviderTest extends AITest {
                 spell.getPayCosts().getCostMana().getManaCostFor(spell));
 
         final PaymentDecisionProvider.Generation generation = provider.generatePaymentRequest(
-                remaining, spell, payer, new ManaConversionMatrix(), null);
+                remaining, spell, payer, identityMatrix(), null);
         final DecisionRequest request = generation.getRequest();
 
         assertEquals(request.getDecisionType(), DecisionType.PAYMENT);
@@ -184,7 +184,7 @@ public class PaymentDecisionProviderTest extends AITest {
                 PriorityActionKind.CAST_SPELL, "Lightning Bolt");
 
         final DecisionRequest request = provider.generatePaymentRequest(fixture.remaining(), fixture.ability(),
-                fixture.payer(), new ManaConversionMatrix(), continuation).getRequest();
+                fixture.payer(), identityMatrix(), continuation).getRequest();
 
         assertEquals(request.getPaymentContext().getPayerId(), fixture.payer().getId());
         assertEquals(request.getPaymentContext().getDecisionSequenceId(), Long.valueOf(481L));
@@ -240,7 +240,7 @@ public class PaymentDecisionProviderTest extends AITest {
         final ActionContinuation continuation = new ActionContinuation(481L,
                 PriorityActionKind.CAST_SPELL, "Dark Banishing");
         final DecisionRequest first = provider.generatePaymentRequest(fixture.remaining(), fixture.ability(),
-                fixture.payer(), new ManaConversionMatrix(), continuation).getRequest();
+                fixture.payer(), identityMatrix(), continuation).getRequest();
         final LegalCandidate selected = first.getCandidates().get(0);
 
         final PaymentDecisionProvider.Generation result = provider.apply(first, selected);
@@ -295,7 +295,7 @@ public class PaymentDecisionProviderTest extends AITest {
         sub.setActivatingPlayer(fixture.payer());
 
         final DecisionRequest request = provider.generatePaymentRequest(fixture.remaining(), sub,
-                fixture.payer(), new ManaConversionMatrix(), null).getRequest();
+                fixture.payer(), identityMatrix(), null).getRequest();
 
         assertEquals(request.getPaymentContext().getRemainingCostSummary(), "{2}{B}");
         assertSame(request.getPaymentContext().getAbility(), fixture.ability());
@@ -347,12 +347,90 @@ public class PaymentDecisionProviderTest extends AITest {
         final PaymentFixture supported = fixture("Lightning Bolt", "Mountain");
 
         assertEquals(provider.generatePaymentRequest(unsupported.remaining(), unsupported.ability(),
-                unsupported.payer(), new ManaConversionMatrix(), continuation).getStatus(),
+                unsupported.payer(), identityMatrix(), continuation).getStatus(),
                 PaymentDecisionProvider.Status.UNSUPPORTED);
         final DecisionRequest request = provider.generatePaymentRequest(supported.remaining(), supported.ability(),
-                supported.payer(), new ManaConversionMatrix(), continuation).getRequest();
+                supported.payer(), identityMatrix(), continuation).getRequest();
 
         assertEquals(request.getPaymentContext().getSubdecisionIndex(), Integer.valueOf(1));
+    }
+
+    @Test
+    public void nonIdentityExtraManaMatrixIsExplicitlyUnsupportedInsteadOfFalseInvalid() {
+        final PaymentFixture fixture = fixture("Lightning Bolt", "Island");
+        final ManaConversionMatrix matrix = identityMatrix();
+        matrix.adjustColorReplacement((byte) ManaAtom.BLUE, (byte) ManaAtom.RED, true);
+
+        final PaymentDecisionProvider.Generation generation = provider.generatePaymentRequest(
+                fixture.remaining(), fixture.ability(), fixture.payer(), matrix, null);
+
+        assertEquals(generation.getStatus(), PaymentDecisionProvider.Status.UNSUPPORTED);
+        assertEquals(generation.getUnsupportedReason(),
+                PaymentDecisionProvider.UnsupportedReason.MANA_CONVERSION_MATRIX);
+    }
+
+    @Test
+    public void effectiveMatrixAlreadyAppliedToLivePoolIsUsedForLegality() {
+        final PaymentFixture fixture = fixture("Lightning Bolt", "Island");
+        fixture.payer().getManaPool().adjustColorReplacement(
+                (byte) ManaAtom.BLUE, (byte) ManaAtom.RED, true);
+
+        final PaymentDecisionProvider.Generation generation = provider.generatePaymentRequest(
+                fixture.remaining(), fixture.ability(), fixture.payer(), fixture.payer().getManaPool(), null);
+
+        assertEquals(generation.getStatus(), PaymentDecisionProvider.Status.DECISION);
+        assertEquals(generation.getRequest().getCandidates().size(), 1);
+        assertEquals(generation.getRequest().getCandidates().get(0).getPaymentKind(),
+                PaymentCandidateKind.ACTIVATE_MANA_SOURCE);
+    }
+
+    @Test
+    public void playableAlternativeManaActivationIsNotSilentlyOmitted() {
+        final PaymentFixture fixture = fixture("Unsummon");
+        final Player opponent = fixture.payer().getGame().getPlayers().get(0);
+        addCard("Island", opponent);
+        fixture.payer().addChangedKeywords(List.of("Piracy"), null,
+                fixture.payer().getGame().getNextTimestamp(), 0L);
+
+        final PaymentDecisionProvider.Generation generation = generate(fixture);
+
+        assertEquals(generation.getStatus(), PaymentDecisionProvider.Status.UNSUPPORTED);
+        assertEquals(generation.getUnsupportedReason(),
+                PaymentDecisionProvider.UnsupportedReason.MANA_SOURCE_ALTERNATIVE_COST);
+    }
+
+    @Test
+    public void produceManaReplacementIsUnsupportedBeforePrintedOutputIsExported() {
+        final PaymentFixture fixture = fixture("Lightning Bolt", "Mountain");
+        addCard("Contamination", fixture.payer());
+
+        final PaymentDecisionProvider.Generation generation = generate(fixture);
+
+        assertEquals(generation.getStatus(), PaymentDecisionProvider.Status.UNSUPPORTED);
+        assertEquals(generation.getUnsupportedReason(),
+                PaymentDecisionProvider.UnsupportedReason.MANA_PRODUCTION_REPLACEMENT);
+    }
+
+    @Test
+    public void dynamicManaAmountIsNotClassifiedFromOrigProducedAlone() {
+        final PaymentFixture fixture = fixture("Dark Banishing", "Everflowing Chalice");
+
+        final PaymentDecisionProvider.Generation generation = generate(fixture);
+
+        assertEquals(generation.getStatus(), PaymentDecisionProvider.Status.UNSUPPORTED);
+        assertEquals(generation.getUnsupportedReason(),
+                PaymentDecisionProvider.UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
+    }
+
+    @Test
+    public void nonManaSubAbilityOnSourceIsExplicitlyUnsupported() {
+        final PaymentFixture fixture = fixture("Lightning Bolt", "Barbarian Ring");
+
+        final PaymentDecisionProvider.Generation generation = generate(fixture);
+
+        assertEquals(generation.getStatus(), PaymentDecisionProvider.Status.UNSUPPORTED);
+        assertEquals(generation.getUnsupportedReason(),
+                PaymentDecisionProvider.UnsupportedReason.NONTRIVIAL_MANA_SUBABILITY);
     }
 
     private PaymentFixture fixture(final String spellName, final String... sources) {
@@ -372,7 +450,13 @@ public class PaymentDecisionProviderTest extends AITest {
 
     private PaymentDecisionProvider.Generation generate(final PaymentFixture fixture) {
         return provider.generatePaymentRequest(fixture.remaining(), fixture.ability(), fixture.payer(),
-                new ManaConversionMatrix(), null);
+                identityMatrix(), null);
+    }
+
+    private static ManaConversionMatrix identityMatrix() {
+        final ManaConversionMatrix matrix = new ManaConversionMatrix();
+        matrix.restoreColorReplacements();
+        return matrix;
     }
 
     private DecisionRequest decision(final PaymentFixture fixture) {

@@ -2,6 +2,8 @@ package forge.game.decision;
 
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
+import forge.game.GameActionUtil;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostTap;
@@ -10,6 +12,8 @@ import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.PlaySpellAbility;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -35,7 +39,12 @@ public final class PaymentDecisionProvider {
         COMPLEX_MANA_SOURCE_COST,
         MULTIPLE_MANA_PARTS,
         PHYREXIAN_MANA,
-        SNOW_MANA_PROVENANCE
+        SNOW_MANA_PROVENANCE,
+        MANA_CONVERSION_MATRIX,
+        MANA_SOURCE_ALTERNATIVE_COST,
+        MANA_PRODUCTION_REPLACEMENT,
+        DYNAMIC_MANA_PRODUCTION,
+        NONTRIVIAL_MANA_SUBABILITY
     }
 
     private long nextRequestId;
@@ -51,7 +60,7 @@ public final class PaymentDecisionProvider {
             return Generation.complete(System.nanoTime() - startedAtNanos);
         }
 
-        final PrototypeResult prototypeResult = collectPrototypes(remainingCost, ability, payer);
+        final PrototypeResult prototypeResult = collectPrototypes(remainingCost, ability, payer, matrix);
         if (prototypeResult.unsupportedReason() != null) {
             return Generation.unsupported(prototypeResult.unsupportedReason(),
                     System.nanoTime() - startedAtNanos);
@@ -93,7 +102,7 @@ public final class PaymentDecisionProvider {
 
         final PaymentDecisionContext context = request.getPaymentContext();
         final PrototypeResult current = collectPrototypes(context.getRemainingCost(), context.getAbility(),
-                context.getPayer());
+                context.getPayer(), context.getMatrix());
         if (current.unsupportedReason() != null) {
             throw new IllegalStateException("Payment state became unsupported: " + current.unsupportedReason());
         }
@@ -122,7 +131,10 @@ public final class PaymentDecisionProvider {
     }
 
     private static PrototypeResult collectPrototypes(final ManaCostBeingPaid remainingCost,
-            final SpellAbility ability, final Player payer) {
+            final SpellAbility ability, final Player payer, final ManaConversionMatrix matrix) {
+        if (matrix != payer.getManaPool() && !matrix.isIdentity()) {
+            return PrototypeResult.unsupported(UnsupportedReason.MANA_CONVERSION_MATRIX);
+        }
         for (final ManaCostShard shard : remainingCost.getUnpaidShards()) {
             if (shard.isPhyrexian()) {
                 return PrototypeResult.unsupported(UnsupportedReason.PHYREXIAN_MANA);
@@ -130,6 +142,9 @@ public final class PaymentDecisionProvider {
             if (shard.isSnow()) {
                 return PrototypeResult.unsupported(UnsupportedReason.SNOW_MANA_PROVENANCE);
             }
+        }
+        if (hasPlayableAlternativeManaActivation(payer)) {
+            return PrototypeResult.unsupported(UnsupportedReason.MANA_SOURCE_ALTERNATIVE_COST);
         }
         final List<CandidatePrototype> prototypes = floatingManaPrototypes(remainingCost, ability, payer);
         final List<Card> cards = new ArrayList<>(payer.getCardsIn(ZoneType.Battlefield));
@@ -150,6 +165,16 @@ public final class PaymentDecisionProvider {
                     return PrototypeResult.unsupported(UnsupportedReason.MULTIPLE_MANA_PARTS);
                 }
                 final AbilityManaPart part = parts.get(0);
+                if (hasProduceManaReplacement(manaAbility, part, payer)) {
+                    return PrototypeResult.unsupported(UnsupportedReason.MANA_PRODUCTION_REPLACEMENT);
+                }
+                if (manaAbility.getSubAbility() != null) {
+                    return PrototypeResult.unsupported(UnsupportedReason.NONTRIVIAL_MANA_SUBABILITY);
+                }
+                if (manaAbility.hasParam("Amount")
+                        && !manaAbility.getParam("Amount").matches("\\d+")) {
+                    return PrototypeResult.unsupported(UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
+                }
                 if (!productionCouldAdvance(part, remainingCost, ability, payer)) {
                     abilityIndex++;
                     continue;
@@ -168,6 +193,35 @@ public final class PaymentDecisionProvider {
         }
         prototypes.sort(Comparator.comparing(CandidatePrototype::semanticKey));
         return PrototypeResult.supported(prototypes);
+    }
+
+    private static boolean hasPlayableAlternativeManaActivation(final Player payer) {
+        final List<Card> cards = new ArrayList<>(payer.getGame().getCardsIn(ZoneType.Battlefield));
+        cards.sort(Comparator.comparingInt(Card::getId).thenComparingLong(Card::getGameTimestamp));
+        for (final Card card : cards) {
+            for (final SpellAbility baseAbility : card.getManaAbilities()) {
+                for (final SpellAbility alternative
+                        : GameActionUtil.getAlternativeCosts(baseAbility, payer, false)) {
+                    alternative.setActivatingPlayer(payer);
+                    if (alternative.isManaAbility() && alternative.canPlay(true)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasProduceManaReplacement(final SpellAbility manaAbility,
+            final AbilityManaPart part, final Player payer) {
+        final Card source = manaAbility.getHostCard();
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(source);
+        runParams.put(AbilityKey.Mana, part.getOrigProduced());
+        runParams.put(AbilityKey.Player, payer);
+        runParams.put(AbilityKey.AbilityMana, manaAbility.getRootAbility());
+        runParams.put(AbilityKey.Activator, payer);
+        return !source.getGame().getReplacementHandler().getReplacementList(
+                ReplacementType.ProduceMana, runParams, ReplacementLayer.Other).isEmpty();
     }
 
     private static List<CandidatePrototype> floatingManaPrototypes(final ManaCostBeingPaid remainingCost,

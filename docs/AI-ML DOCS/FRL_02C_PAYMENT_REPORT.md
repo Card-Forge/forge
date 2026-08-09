@@ -34,6 +34,13 @@ The human path enters `InputPayManaOfCostPayment`, discovers live Forge mana abi
 decision boundary. The AI path uses `ComputerUtilMana`; it is observed diagnostically but never imported or called by
 the neutral provider.
 
+Forge Human applies an extra `ManaConversionMatrix` to the payer's live pool before payment and
+`CostPartMana.payAsDecided` restores the prior matrix afterward. The neutral provider therefore supports the effective
+matrix already installed on that live pool (and identity extras), but rejects a distinct non-identity extra matrix as
+`MANA_CONVERSION_MATRIX`; it does not reproduce conversion rules. Human source discovery also expands
+`GameActionUtil.getAlternativeCosts`. A playable alternative activation is rejected as
+`MANA_SOURCE_ALTERNATIVE_COST` rather than silently omitted.
+
 Non-mana `CostPart` instances execute in Forge's cost-part order through `CostPayment`. Tap, sacrifice, discard,
 life, counter, exile, and similar selection semantics are not reimplemented here.
 
@@ -71,6 +78,8 @@ kept private and is never exported as policy semantics.
 
 `PAYMENT_MANA_OUTPUT` remains an evidence-based future stage: fixed outputs are supported as one source action;
 variable outputs return structured `VARIABLE_MANA_OUTPUT` instead of invoking Human/AI choice code.
+Before calling output fixed, the v0 predicate also rejects relevant `ProduceMana` replacements, dynamic `Amount`, and
+nontrivial sub-abilities. Printed `AbilityManaPart.origProduced` is never treated as proof in those cases.
 
 ## 5. Example sequences
 
@@ -166,10 +175,11 @@ return `UNSUPPORTED`; a stale selection throws before mutation. Intentional Huma
 ## 14. Unsupported payment mechanics
 
 Structured provider reasons currently cover variable mana output, complex/non-tap source activation costs,
-multiple mana parts, Phyrexian mana, and snow provenance. Strategic non-mana selections, Convoke, Delve, Improvise,
-Assist, Offering, Emerge, Waterbend, dynamic `Special` mana, controller-dependent cost order, and replacement-driven
-complex payment remain outside v0 unless a smaller mechanism is separately proven. `AUTO_PAY` is absent because the
-Human button delegates to `ComputerUtilMana`.
+multiple mana parts, Phyrexian mana, snow provenance, a distinct non-identity extra conversion matrix, playable
+alternative mana activation costs, relevant `ProduceMana` replacements, dynamic mana amounts, and nontrivial mana
+sub-abilities. Strategic non-mana selections, Convoke, Delve, Improvise, Assist, Offering, Emerge, Waterbend,
+dynamic `Special` mana, and controller-dependent cost order remain outside v0 unless a smaller mechanism is
+separately proven. `AUTO_PAY` is absent because the Human button delegates to `ComputerUtilMana`.
 
 ## 15. Tests
 
@@ -178,12 +188,12 @@ Commands:
 ```text
 mvn -pl forge-gui-desktop -am "-Dtest=forge.game.decision.PaymentDecisionProviderTest" \
   "-Dsurefire.failIfNoSpecifiedTests=false" test
-# 23 tests, 0 failures/errors/skips
+# 29 tests, 0 failures/errors/skips
 
 mvn -pl forge-gui-desktop -am \
   "-Dtest=forge.game.decision.*Test,forge.game.cost.CostAdjustmentPreviewTest,forge.game.mana.ManaRefundServiceTest" \
   "-Dsurefire.failIfNoSpecifiedTests=false" test
-# 95 tests, 0 failures/errors/skips
+# 101 tests, 0 failures/errors/skips
 
 mvn -pl forge-gui-desktop -am -DskipTests package
 # BUILD SUCCESS
@@ -192,11 +202,16 @@ mvn -pl forge-gui-desktop -am -DskipTests package
 The focused suite covers exact floating identity, one/two sources, forced/strategic status, deterministic ordering,
 fixed bundles, variable-output unsupported, tapped/consumed exclusion, partial regeneration, completion/invalid,
 stale and foreign candidate rejection, continuation/payer/root/live cost, hidden information, and Phyrexian failure.
+The review regressions additionally cover both an already-applied live conversion matrix and a distinct non-identity
+extra matrix, a Piracy-style alternative mana activation, a `Contamination` ProduceMana replacement, dynamic
+`Amount` production, and a non-mana sub-ability. Every unsupported case returns its structured reason instead of a
+false `INVALID_PAYMENT` or incomplete request.
 Compilation also enforces the module boundary: `forge-game` cannot depend on the downstream `forge-ai` module.
 
 ## 16. Controlled benchmark
 
-Both accepted matchups completed ten seeded games through the packaged Forge artifact:
+Both accepted matchups were rerun after the review fixes and completed ten seeded games through the packaged Forge
+artifact:
 
 ```text
 Dead and Alive vs Air Forces: seed 20260809, result 7-3
@@ -205,7 +220,9 @@ Izzet Guild Kit vs Dimir Guild Kit: seed 20260810, result 5-5
 
 The Guild run logged the pre-existing FRL-01A partial feasibility exceptions for `Invoke the Firemind` and
 `Direct Current` (`COST_ADJUSTMENT_CHOICE_REQUIRED`) while completing all games. Payment metrics are the table in
-section 10. Raw CSVs were retained outside the repository in the OS temporary directory.
+section 10. The new matrix/alternative/replacement/dynamic/sub-ability gates produced no additional unsupported states
+in these seeded deck states, so the callback and candidate counts remained unchanged. Raw CSVs were retained outside
+the repository in the OS temporary directory.
 
 ## 17. Performance
 
@@ -213,12 +230,15 @@ Supported request generation over both benchmarks:
 
 | Percentile | Time |
 |---|---:|
-| p50 | 133.4 us |
-| p95 | 312.6 us |
-| p99 | 477.3 us |
+| p50 | 274.8 us |
+| p95 | 616.0 us |
+| p99 | 829.8 us |
 
 Generation performs no game copy, complete-combination enumeration, search, AI evaluation, or observation
-serialization.
+serialization. The conservative review gates roughly doubled measured request-generation latency versus the prior
+PR head, principally because each live request now proves that no playable alternative activation or relevant
+ProduceMana replacement is being hidden. The measured p99 remains below 1 ms in these controlled runs; no RL
+throughput claim is inferred from it.
 
 ## 18. Continuation invariant
 
