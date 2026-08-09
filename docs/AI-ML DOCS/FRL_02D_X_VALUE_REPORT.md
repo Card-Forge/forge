@@ -10,8 +10,9 @@
 
 FRL-02D establishes `DecisionType.X_VALUE` and a completion-safe, deterministic candidate list for the fixed-output
 mana slice. Forge remains authoritative for announcement bounds, cost adjustment, target legality, payment legality,
-and applying the chosen X. An understood state with no legal X is `INVALID_X`; derived, copied, wrapper, and already
-announced X produce no neutral request.
+and applying the chosen X. An understood state with no legal X is `INVALID_X`. An X request exists exactly when Forge
+reaches the player X announcement boundary; a pre-existing `XManaCostPaid` value does not suppress that callback or
+the neutral request. Derived X and copied/wrapper abilities that Forge never announces produce no neutral request.
 
 ## Forge ordering and Invoke the Firemind
 
@@ -103,8 +104,10 @@ Unsupported capability boundaries are:
 - unresolved target chooser, X-dependent target completion, or target completion without a pure oracle;
 - unsupported specific-X payment feasibility.
 
-Derived, copied, wrapper, and already-announced X are `NOT_APPLICABLE`, not unsupported. Cancellation remains Forge's
-authoritative rollback behavior and is not an X candidate.
+Derived X and copied/wrapper abilities that Forge never announces are `NOT_APPLICABLE`, not unsupported. A value
+already stored in `XManaCostPaid` is replaced if Forge reaches another real player-X callback; explicit Charm
+announcement ordering remains authoritative through Forge's local `needX=false`, so no second callback is generated.
+Cancellation remains Forge's authoritative rollback behavior and is not an X candidate.
 
 ## Tests
 
@@ -116,14 +119,15 @@ mvn -pl forge-gui-desktop -am \
   -Dsurefire.failIfNoSpecifiedTests=false test
 ```
 
-Result: 117 tests passed, 0 failures, 0 errors. Packaging with
+Result: 120 tests passed, 0 failures, 0 errors. Packaging with
 `mvn -pl forge-gui-desktop -am -DskipTests package` succeeded.
 
 The fixtures cover X=0, forced and strategic X, `XMin`, `XMax`, `AnnounceMax`, Invoke's selected modes, insufficient
 mana, fixed reduction/increase, announced-X propagation, root-over-sub authority, derived/copied X, stale rejection,
 deterministic identity, continuation identity, hidden-hand differential, non-mana X, unsafe unbounded inventory,
-adjustment choice, pure target completion, unresolved target chooser, dynamic `Amount` production, and the absence of
-any forge-ai dependency from the forge-game X provider.
+adjustment choice, pure target completion, unresolved target chooser, dynamic `Amount` production, pre-existing X
+replacement, copy/wrapper suppression, explicit Charm `needX` callback ordering, and the absence of any forge-ai
+dependency from the forge-game X provider.
 
 The key off-color fixture uses two Islands, one Mountain, and five Forests for Invoke. It proves `S=8` and exports
 exactly `X=0..5`; deriving capacity from an X=0 PAYMENT request would have incorrectly stopped at three resources.
@@ -165,8 +169,8 @@ Real neutral Invoke fixtures produced candidate counts `[1, 3, 6, 3]`:
 | minimum candidate value | 0 |
 | maximum candidate value | 5 |
 
-After 20 warmups, 180 generations of the six-candidate off-color fixture measured p50 23.887 ms, p95 27.430 ms,
-and p99 29.920 ms. These are request-generation measurements, not RL throughput. The cost is expected because each
+After 20 warmups, 180 generations of the six-candidate off-color fixture measured p50 29.066 ms, p95 41.422 ms,
+and p99 49.227 ms. These are request-generation measurements, not RL throughput. The cost is expected because each
 integer receives a complete supported payment search. The observed maximum X list (6) is below FRL-02C PAYMENT's
 observed maximum candidate list (11); no bucketing or compression is introduced.
 

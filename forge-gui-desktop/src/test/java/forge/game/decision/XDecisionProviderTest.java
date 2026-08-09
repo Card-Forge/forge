@@ -8,6 +8,8 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostAdjustment;
 import forge.game.cost.CostAdjustmentPreview;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
+import forge.game.player.PlaySpellAbility;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -17,12 +19,19 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import java.lang.reflect.Method;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertThrows;
 import static org.testng.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class XDecisionProviderTest extends AITest {
     private final XDecisionProvider provider = new XDecisionProvider();
@@ -143,6 +152,43 @@ public class XDecisionProviderTest extends AITest {
     }
 
     @Test
+    public void preexistingXDoesNotSuppressARealForgeAnnouncement() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = invoke(player, 0);
+        addCard("Island", player);
+        addCard("Island", player);
+        addCard("Mountain", player);
+        addCard("Forest", player);
+
+        final List<String> withoutOldX = keys(decision(invoke, player, null));
+        invoke.setXManaCostPaid(9);
+
+        final XDecisionProvider.Generation generation = provider.generateXRequest(invoke, player, null);
+
+        assertEquals(generation.getStatus(), XDecisionProvider.Status.DECISION);
+        assertEquals(keys(generation.getRequest()), withoutOldX);
+        assertEquals(invoke.getXManaCostPaid(), Integer.valueOf(9));
+    }
+
+    @Test
+    public void applyingCandidateReplacesPreexistingForgeX() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = invoke(player, 0);
+        addCard("Island", player);
+        addCard("Island", player);
+        addCard("Mountain", player);
+        addCard("Forest", player);
+        invoke.setXManaCostPaid(9);
+
+        final DecisionRequest request = decision(invoke, player, null);
+        provider.apply(request, request.getCandidates().get(1));
+
+        assertEquals(invoke.getXManaCostPaid(), Integer.valueOf(1));
+    }
+
+    @Test
     public void staleCandidateIsRejectedBeforeMutation() {
         final Game game = initAndCreateGame();
         final Player player = game.getPlayers().get(1);
@@ -193,18 +239,41 @@ public class XDecisionProviderTest extends AITest {
     }
 
     @Test
-    public void derivedAndCopiedXDoNotCreateAgentRequests() {
+    public void derivedCopiedAndWrapperXDoNotCreateAgentRequests() {
         final Game game = initAndCreateGame();
         final Player player = game.getPlayers().get(1);
         final SpellAbility derived = invoke(player, 0);
         derived.setSVar("X", "Count$Valid Creature.YouCtrl");
         final SpellAbility copied = invoke(player, 0);
         copied.setCopied(true);
+        final SpellAbility wrapper = mock(SpellAbility.class);
+        when(wrapper.getRootAbility()).thenReturn(wrapper);
+        when(wrapper.isWrapper()).thenReturn(true);
 
         assertEquals(provider.generateXRequest(derived, player, null).getStatus(),
                 XDecisionProvider.Status.NOT_APPLICABLE);
         assertEquals(provider.generateXRequest(copied, player, null).getStatus(),
                 XDecisionProvider.Status.NOT_APPLICABLE);
+        assertEquals(provider.generateXRequest(wrapper, player, null).getStatus(),
+                XDecisionProvider.Status.NOT_APPLICABLE);
+    }
+
+    @Test
+    public void explicitCharmAnnouncementUsesForgeNeedXToPreventASecondCallback() throws Exception {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility charm = spell(addCardToZone("Kozilek's Command", player, ZoneType.Hand));
+        charm.setActivatingPlayer(player);
+        final PlayerController controller = mock(PlayerController.class);
+        when(controller.announceRequirements(eq(charm), anyInt(), anyInt(), eq("X"))).thenReturn(2);
+        final PlaySpellAbility play = new PlaySpellAbility(controller, charm);
+        final Method announceValuesLikeX = PlaySpellAbility.class.getDeclaredMethod("announceValuesLikeX");
+        announceValuesLikeX.setAccessible(true);
+
+        assertTrue((Boolean) announceValuesLikeX.invoke(play));
+
+        verify(controller, times(1)).announceRequirements(eq(charm), anyInt(), anyInt(), eq("X"));
+        assertEquals(charm.getXManaCostPaid(), Integer.valueOf(2));
     }
 
     @Test

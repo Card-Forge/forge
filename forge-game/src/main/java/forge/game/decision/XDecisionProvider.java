@@ -79,7 +79,7 @@ public final class XDecisionProvider {
         Objects.requireNonNull(suppliedAbility);
         Objects.requireNonNull(choosingPlayer);
         final SpellAbility ability = suppliedAbility.getRootAbility();
-        if (ability.isCopied() || ability.isWrapper() || ability.getXManaCostPaid() != null) {
+        if (ability.isCopied() || ability.isWrapper()) {
             return Domain.status(Status.NOT_APPLICABLE, null);
         }
         final Cost cost = ability.getPayCosts();
