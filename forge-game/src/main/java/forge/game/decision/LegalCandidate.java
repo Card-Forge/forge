@@ -40,6 +40,9 @@ public final class LegalCandidate {
     private final AbilitySub mode;
     private final CardSelectionCandidateKind cardSelectionKind;
     private final CardSelectionCard cardSelectionCard;
+    private final AttackDeclarationCandidateKind attackKind;
+    private final AttackDeclarationCard attackCard;
+    private final AttackDeclarationDefender attackDefender;
 
     private LegalCandidate(final int candidateId, final PriorityActionKind kind, final Card source,
             final SpellAbility spellAbility, final String semanticKey) {
@@ -66,6 +69,9 @@ public final class LegalCandidate {
         this.mode = null;
         this.cardSelectionKind = null;
         this.cardSelectionCard = null;
+        this.attackKind = null;
+        this.attackCard = null;
+        this.attackDefender = null;
     }
 
     private LegalCandidate(final int candidateId, final TargetCandidateKind targetKind, final GameObject target,
@@ -93,6 +99,9 @@ public final class LegalCandidate {
         this.mode = null;
         this.cardSelectionKind = null;
         this.cardSelectionCard = null;
+        this.attackKind = null;
+        this.attackCard = null;
+        this.attackDefender = null;
     }
 
     private LegalCandidate(final int candidateId, final PaymentCandidateKind paymentKind, final Card source,
@@ -120,6 +129,9 @@ public final class LegalCandidate {
         this.mode = null;
         this.cardSelectionKind = null;
         this.cardSelectionCard = null;
+        this.attackKind = null;
+        this.attackCard = null;
+        this.attackDefender = null;
     }
 
     private LegalCandidate(final int candidateId, final int xValue) {
@@ -146,6 +158,9 @@ public final class LegalCandidate {
         this.mode = null;
         this.cardSelectionKind = null;
         this.cardSelectionCard = null;
+        this.attackKind = null;
+        this.attackCard = null;
+        this.attackDefender = null;
     }
 
     private LegalCandidate(final int candidateId, final int modeOrdinal, final AbilitySub mode) {
@@ -172,6 +187,9 @@ public final class LegalCandidate {
         this.mode = mode;
         this.cardSelectionKind = null;
         this.cardSelectionCard = null;
+        this.attackKind = null;
+        this.attackCard = null;
+        this.attackDefender = null;
     }
 
     private LegalCandidate(final int candidateId, final CardSelectionCandidateKind cardSelectionKind,
@@ -200,6 +218,41 @@ public final class LegalCandidate {
         this.mode = null;
         this.cardSelectionKind = Objects.requireNonNull(cardSelectionKind);
         this.cardSelectionCard = cardSelectionCard;
+        this.attackKind = null;
+        this.attackCard = null;
+        this.attackDefender = null;
+    }
+
+    private LegalCandidate(final int candidateId, final AttackDeclarationCandidateKind attackKind,
+            final AttackDeclarationCard attackCard, final AttackDeclarationDefender attackDefender) {
+        this.candidateId = candidateId;
+        this.kind = null;
+        this.sourceCardId = -1;
+        this.sourceName = "";
+        this.sourceZone = null;
+        this.sourceState = null;
+        this.abilityDescription = "";
+        this.attackKind = Objects.requireNonNull(attackKind);
+        this.attackCard = attackCard;
+        this.attackDefender = attackDefender;
+        this.semanticKey = attackKind == AttackDeclarationCandidateKind.DONE
+                ? "DONE" : "ADD_ATTACKER|" + attackCard.getCardId() + "|"
+                        + attackCard.getGameTimestamp() + "|" + attackDefender.identityKey();
+        this.spellAbility = null;
+        this.targetKind = null;
+        this.targetEntityId = -1;
+        this.targetName = "";
+        this.targetZone = null;
+        this.target = null;
+        this.paymentKind = null;
+        this.mana = null;
+        this.xValue = null;
+        this.modeOrdinal = null;
+        this.modeDescription = "";
+        this.modeUsesTargeting = false;
+        this.mode = null;
+        this.cardSelectionKind = null;
+        this.cardSelectionCard = null;
     }
 
     private static boolean branchUsesTargeting(final SpellAbility first) {
@@ -260,6 +313,15 @@ public final class LegalCandidate {
         return new LegalCandidate(candidateId, CardSelectionCandidateKind.DONE, null);
     }
 
+    static LegalCandidate addAttacker(final int candidateId, final AttackDeclarationCard card,
+            final AttackDeclarationDefender defender) {
+        return new LegalCandidate(candidateId, AttackDeclarationCandidateKind.ADD_ATTACKER, card, defender);
+    }
+
+    static LegalCandidate attackDone(final int candidateId) {
+        return new LegalCandidate(candidateId, AttackDeclarationCandidateKind.DONE, null, null);
+    }
+
     public int getCandidateId() {
         return candidateId;
     }
@@ -304,6 +366,21 @@ public final class LegalCandidate {
     /** Visible stable card identity for SELECT_CARD, otherwise {@code null}. */
     public CardSelectionCard getCardSelectionCard() {
         return cardSelectionCard;
+    }
+
+    /** ATTACK candidate kind, otherwise {@code null}. */
+    public AttackDeclarationCandidateKind getAttackKind() {
+        return attackKind;
+    }
+
+    /** Visible stable attacker identity for ADD_ATTACKER, otherwise {@code null}. */
+    public AttackDeclarationCard getAttackCard() {
+        return attackCard;
+    }
+
+    /** Visible stable defender identity for ADD_ATTACKER, otherwise {@code null}. */
+    public AttackDeclarationDefender getAttackDefender() {
+        return attackDefender;
     }
 
     /** Stable Forge entity or stack-instance identifier for a TARGET candidate; {@code -1} for DONE. */

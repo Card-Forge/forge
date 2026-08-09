@@ -166,4 +166,28 @@ public class PriorityActionDiagnosticsTest {
         assertEquals(fields[45], "");
         assertEquals(fields[46], "");
     }
+
+    @Test
+    public void attackRecordsUseTurnBasedSessionColumnsWithoutActionContinuation() {
+        final String row = PriorityActionDiagnostics.formatAttackDeclarationRecord(
+                "ATTACK", 42L, 19, 7L, 1, false, 3, "COMBAT_DECLARE_ATTACKERS", "Ada", "Ada", 2,
+                123L, 456L, AttackDeclarationDecisionProvider.Status.DECISION, null, 1, 1, 2, 1);
+
+        final String[] fields = row.split(",", -1);
+        assertEquals(fields.length, 54);
+        assertEquals(fields[0], "ATTACK");
+        assertEquals(fields[2], "");
+        assertEquals(fields[3], "");
+        assertEquals(fields[6], "ATTACK");
+        assertEquals(fields[16], "456");
+        assertEquals(fields[44], "ATTACK");
+        assertEquals(fields[45], "19");
+        assertEquals(fields[46], "7");
+        assertEquals(fields[47], "1");
+        assertEquals(fields[48], "DECISION");
+        assertEquals(fields[50], "1");
+        assertEquals(fields[51], "1");
+        assertEquals(fields[52], "2");
+        assertEquals(fields[53], "1");
+    }
 }

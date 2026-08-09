@@ -542,7 +542,15 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     return;
                 }
 
-                whoDeclares.getController().declareAttackers(playerTurn, combat);
+                final PriorityActionDiagnostics.AttackDeclarationCapture attackCapture =
+                        PriorityActionDiagnostics.captureAttackDeclaration(whoDeclares, playerTurn, combat);
+                final long attackCallbackStartedAtNanos = PriorityActionDiagnostics.startNativeCallback();
+                try {
+                    whoDeclares.getController().declareAttackers(playerTurn, combat);
+                } finally {
+                    PriorityActionDiagnostics.recordAttackDeclaration(attackCapture, combat,
+                            attackCallbackStartedAtNanos);
+                }
                 combat.removeAbsentCombatants();
 
                 success = CombatUtil.validateAttackers(combat);

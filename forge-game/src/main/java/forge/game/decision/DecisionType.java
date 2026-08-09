@@ -7,5 +7,6 @@ public enum DecisionType {
     X_VALUE,
     TARGET,
     PAYMENT,
-    CARD_SELECTION
+    CARD_SELECTION,
+    ATTACK
 }
