@@ -58,6 +58,21 @@ public final class XDecisionProvider {
         return Generation.of(Status.DECISION, null, request, System.nanoTime() - startedAtNanos);
     }
 
+    /**
+     * Assesses only the shared future X/payment domain for a mode-before-X root. It deliberately skips unresolved
+     * mode and TARGET checks and never constructs a request or changes announced X.
+     */
+    public DomainAssessment assessFutureXPaymentDomain(final SpellAbility ability, final Player payer) {
+        Objects.requireNonNull(ability);
+        Objects.requireNonNull(payer);
+        final Player activatingPlayer = ability.getRootAbility().getActivatingPlayer();
+        if (activatingPlayer == null || !activatingPlayer.equals(payer)) {
+            return new DomainAssessment(Status.UNSUPPORTED, UnsupportedReason.PAYMENT_PAYER_UNKNOWN, 0);
+        }
+        final Domain domain = assessDomain(ability, payer, false, false);
+        return new DomainAssessment(domain.status(), domain.unsupportedReason(), domain.candidates().size());
+    }
+
     /** Revalidates the complete domain before changing Forge's announced-X state. */
     public void apply(final DecisionRequest request, final LegalCandidate candidate) {
         Objects.requireNonNull(request);
@@ -76,6 +91,11 @@ public final class XDecisionProvider {
     }
 
     private Domain assessDomain(final SpellAbility suppliedAbility, final Player choosingPlayer) {
+        return assessDomain(suppliedAbility, choosingPlayer, true, true);
+    }
+
+    private Domain assessDomain(final SpellAbility suppliedAbility, final Player choosingPlayer,
+            final boolean requireResolvedMode, final boolean assessTargetCompletion) {
         Objects.requireNonNull(suppliedAbility);
         Objects.requireNonNull(choosingPlayer);
         final SpellAbility ability = suppliedAbility.getRootAbility();
@@ -86,7 +106,8 @@ public final class XDecisionProvider {
         if (!requiresPlayerX(ability, cost)) {
             return Domain.status(Status.NOT_APPLICABLE, null);
         }
-        if (!ability.getAdditionalAbilityList("Choices").isEmpty() && ability.getSubAbility() == null) {
+        if (requireResolvedMode && !ability.getAdditionalAbilityList("Choices").isEmpty()
+                && ability.getSubAbility() == null) {
             return Domain.status(Status.UNSUPPORTED, UnsupportedReason.UNRESOLVED_MODE);
         }
         if (cost == null || hasNonManaX(cost)) {
@@ -104,17 +125,19 @@ public final class XDecisionProvider {
         if (manaParts.size() != 1 || manaParts.get(0).getAmountOfX() <= 0) {
             return Domain.status(Status.UNSUPPORTED, UnsupportedReason.UNSUPPORTED_X_COST);
         }
-        if (hasXDependentTargeting(ability)) {
+        if (assessTargetCompletion && hasXDependentTargeting(ability)) {
             return Domain.status(Status.UNSUPPORTED, UnsupportedReason.TARGET_COMPLETION_X_DEPENDENT);
         }
-        final TargetDecisionProvider.CompletionAssessment target = targetProvider.assessCompletion(ability);
-        if (target.getStatus() == TargetDecisionProvider.CompletionStatus.INVALID_TARGETING) {
-            return Domain.status(Status.INVALID_X, null);
-        }
-        if (target.getStatus() == TargetDecisionProvider.CompletionStatus.UNSUPPORTED) {
-            final UnsupportedReason reason = "TARGETING_PLAYER_CHOICE_REQUIRED".equals(target.getUnsupportedReason())
-                    ? UnsupportedReason.TARGETING_PLAYER_CHOICE_REQUIRED : UnsupportedReason.TARGET_COMPLETION;
-            return Domain.status(Status.UNSUPPORTED, reason);
+        if (assessTargetCompletion) {
+            final TargetDecisionProvider.CompletionAssessment target = targetProvider.assessCompletion(ability);
+            if (target.getStatus() == TargetDecisionProvider.CompletionStatus.INVALID_TARGETING) {
+                return Domain.status(Status.INVALID_X, null);
+            }
+            if (target.getStatus() == TargetDecisionProvider.CompletionStatus.UNSUPPORTED) {
+                final UnsupportedReason reason = "TARGETING_PLAYER_CHOICE_REQUIRED".equals(target.getUnsupportedReason())
+                        ? UnsupportedReason.TARGETING_PLAYER_CHOICE_REQUIRED : UnsupportedReason.TARGET_COMPLETION;
+                return Domain.status(Status.UNSUPPORTED, reason);
+            }
         }
 
         final Range<Integer> bounds = AbilityUtils.getAnnouncementBounds(ability, "X");
@@ -188,7 +211,7 @@ public final class XDecisionProvider {
                 || ability.hasParam("AnnounceMax") && !ability.getParam("AnnounceMax").matches("\\d+");
     }
 
-    private static boolean hasXDependentTargeting(final SpellAbility root) {
+    static boolean hasXDependentTargeting(final SpellAbility root) {
         SpellAbility current = root;
         while (current != null) {
             if (current.usesTargeting()) {
@@ -216,6 +239,32 @@ public final class XDecisionProvider {
             List<LegalCandidate> candidates) {
         private static Domain status(final Status status, final UnsupportedReason reason) {
             return new Domain(status, reason, 0, 0, List.of());
+        }
+    }
+
+    /** Request-free result of the shared X/payment-domain classifier. */
+    public static final class DomainAssessment {
+        private final Status status;
+        private final UnsupportedReason unsupportedReason;
+        private final int candidateCount;
+
+        private DomainAssessment(final Status status, final UnsupportedReason unsupportedReason,
+                final int candidateCount) {
+            this.status = status;
+            this.unsupportedReason = unsupportedReason;
+            this.candidateCount = candidateCount;
+        }
+
+        public Status getStatus() {
+            return status;
+        }
+
+        public UnsupportedReason getUnsupportedReason() {
+            return unsupportedReason;
+        }
+
+        public int getCandidateCount() {
+            return candidateCount;
         }
     }
 

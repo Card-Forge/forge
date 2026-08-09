@@ -3,6 +3,7 @@ package forge.game.decision;
 import forge.game.player.Player;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 
 import java.io.BufferedWriter;
@@ -29,8 +30,9 @@ public final class PriorityActionDiagnostics {
             + "adjustment_status,adjustment_reason,adjustment_preview_ns,target_group_index,target_status,done_present,"
             + "payment_stage,payer_id,remaining_cost_summary,payment_status,payment_unsupported_reason,"
             + "payment_candidate_kinds,x_raw_min,x_raw_max,x_candidate_min,x_candidate_max,x_status,"
-            + "x_unsupported_reason,x_variable";
-    private static final int COLUMN_COUNT = 40;
+            + "x_unsupported_reason,x_variable,mode_status,mode_rule_legality_probes,"
+            + "mode_downstream_completion_probes,mode_original_ordinals";
+    private static final int COLUMN_COUNT = 44;
     private static final String OUTPUT_PATH = System.getProperty(OUTPUT_PATH_PROPERTY, "");
     private static final boolean ENABLED = !OUTPUT_PATH.isBlank();
     private static final long PROCESS_ID = ProcessHandle.current().pid();
@@ -38,6 +40,7 @@ public final class PriorityActionDiagnostics {
     private static final TargetDecisionProvider TARGET_PROVIDER = ENABLED ? new TargetDecisionProvider() : null;
     private static final PaymentDecisionProvider PAYMENT_PROVIDER = ENABLED ? new PaymentDecisionProvider() : null;
     private static final XDecisionProvider X_PROVIDER = ENABLED ? new XDecisionProvider() : null;
+    private static final ModeDecisionProvider MODE_PROVIDER = ENABLED ? new ModeDecisionProvider() : null;
     private static final List<String> EVENTS = ENABLED ? new ArrayList<>() : null;
     private static final ThreadLocal<ActiveContinuation> ACTIVE_CONTINUATION = ENABLED ? new ThreadLocal<>() : null;
 
@@ -196,6 +199,60 @@ public final class PriorityActionDiagnostics {
                     request == null ? 0 : request.getCandidates().size(), generation.getGenerationNanos(),
                     rawMin, rawMax, candidateMin, candidateMax, generation.getStatus(),
                     generation.getUnsupportedReason()));
+        }
+    }
+
+    /** Records the raw Forge MODE callback and, separately, any supported neutral MODE request. */
+    public static void recordModeCallback(final SpellAbility ability, final List<AbilitySub> possible,
+            final int min, final int num, final boolean allowRepeat, final Player choosingPlayer) {
+        if (!ENABLED) {
+            return;
+        }
+        final ActiveContinuation active = ACTIVE_CONTINUATION.get();
+        final ActionContinuation continuation = active == null ? null : active.continuation;
+        final int turn = ability.getHostCard().getGame().getPhaseHandler().getTurn();
+        final String phase = String.valueOf(ability.getHostCard().getGame().getPhaseHandler().getPhase());
+        final String player = active == null ? ability.getActivatingPlayer().getName() : active.capture.player;
+        final boolean callbackForced = !allowRepeat && min == num && num == 1 && possible.size() == 1;
+        synchronized (EVENTS) {
+            EVENTS.add(formatModeRecord("MODE_CALLBACK", PROCESS_ID,
+                    continuation == null ? null : continuation.getDecisionSequenceId(), null,
+                    continuation == null ? null : continuation.getTopLevelCandidateKind(),
+                    continuation == null ? "" : continuation.getTopLevelSource(), callbackForced,
+                    turn, phase, player, choosingPlayer.getName(), possible.size(), 0L, null, null, 0, 0, ""));
+        }
+
+        final ModeDecisionProvider.Generation generation;
+        try {
+            generation = MODE_PROVIDER.generateModeRequest(ability, possible, min, num, allowRepeat,
+                    choosingPlayer, continuation);
+        } catch (final RuntimeException ex) {
+            synchronized (EVENTS) {
+                EVENTS.add(formatModeRecord("MODE_STATE", PROCESS_ID,
+                        continuation == null ? null : continuation.getDecisionSequenceId(), null,
+                        continuation == null ? null : continuation.getTopLevelCandidateKind(),
+                        continuation == null ? "" : continuation.getTopLevelSource(), false,
+                        turn, phase, player, choosingPlayer.getName(), 0, 0L,
+                        ModeDecisionProvider.Status.UNSUPPORTED, "DIAGNOSTIC_EXCEPTION", 0, 0, ""));
+            }
+            return;
+        }
+        final DecisionRequest request = generation.getRequest();
+        final ModeDecisionContext context = request == null ? null : request.getModeContext();
+        final String ordinals = request == null ? "" : request.getCandidates().stream()
+                .map(candidate -> Integer.toString(candidate.getModeOrdinal()))
+                .reduce((left, right) -> left + "+" + right).orElse("");
+        synchronized (EVENTS) {
+            EVENTS.add(formatModeRecord(request == null ? "MODE_STATE" : "MODE", PROCESS_ID,
+                    context == null ? continuation == null ? null : continuation.getDecisionSequenceId()
+                            : context.getDecisionSequenceId(),
+                    context == null ? null : context.getSubdecisionIndex(),
+                    continuation == null ? null : continuation.getTopLevelCandidateKind(),
+                    continuation == null ? "" : continuation.getTopLevelSource(),
+                    request != null && request.isForced(), turn, phase, player, choosingPlayer.getName(),
+                    request == null ? 0 : request.getCandidates().size(), generation.getGenerationNanos(),
+                    generation.getStatus(), generation.getUnsupportedReason(), generation.getRuleLegalityProbes(),
+                    generation.getDownstreamCompletionProbes(), ordinals));
         }
     }
 
@@ -363,6 +420,19 @@ public final class PriorityActionDiagnostics {
                 DecisionType.X_VALUE, forced, turn, phase, player, choosingPlayer, candidateCount, "", "",
                 generationNanos, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", rawMin, rawMax, candidateMin, candidateMax, status, unsupportedReason, "X");
+    }
+
+    static String formatModeRecord(final String eventType, final long processId, final Long decisionSequenceId,
+            final Integer subdecisionIndex, final PriorityActionKind topLevelKind, final String topLevelSource,
+            final boolean forced, final int turn, final String phase, final String player, final String choosingPlayer,
+            final int candidateCount, final long generationNanos, final ModeDecisionProvider.Status status,
+            final Object unsupportedReason, final int ruleLegalityProbes, final int downstreamCompletionProbes,
+            final String originalOrdinals) {
+        return formatRow(eventType, processId, decisionSequenceId, subdecisionIndex, topLevelKind, topLevelSource,
+                DecisionType.MODE, forced, turn, phase, player, choosingPlayer, candidateCount, "", "",
+                generationNanos, "", "", "", unsupportedReason, "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "", status, ruleLegalityProbes,
+                downstreamCompletionProbes, originalOrdinals);
     }
 
     static String formatFeasibilityRecord(final long processId, final int turn, final int playerIndex,

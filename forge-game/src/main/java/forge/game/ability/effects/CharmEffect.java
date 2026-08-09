@@ -14,6 +14,7 @@ import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.decision.PriorityActionDiagnostics;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
@@ -267,6 +268,7 @@ public class CharmEffect extends SpellAbilityEffect {
             sa.setChoosingPlayer(chooser);
         }
 
+        PriorityActionDiagnostics.recordModeCallback(sa, choices, min, num, canRepeat, chooser);
         List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, choices, min, num, canRepeat);
         chainAbilities(sa, chosen);
 

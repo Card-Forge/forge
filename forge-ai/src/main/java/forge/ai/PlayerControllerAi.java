@@ -1032,8 +1032,6 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> possible, int min, int num, boolean allowRepeat) {
-        final Boolean forced = !allowRepeat && min == num && num == possible.size() ? Boolean.TRUE : null;
-        PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.MODE, possible.size(), forced, player);
         List<AbilitySub> result = brains.chooseModeForAbility(sa, possible, min, num, allowRepeat);
         if (result != null) {
             return result;

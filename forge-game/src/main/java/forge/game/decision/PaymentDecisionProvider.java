@@ -6,6 +6,8 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
+import forge.game.cost.CostAdjustment;
+import forge.game.cost.CostAdjustmentPreview;
 import forge.game.cost.CostTap;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
@@ -27,6 +29,12 @@ import java.util.Objects;
 
 /** Generates sequential PAYMENT requests from Forge's live remaining-cost state. */
 public final class PaymentDecisionProvider {
+    public enum SupportStatus {
+        SUPPORTED,
+        INVALID_PAYMENT,
+        UNSUPPORTED
+    }
+
     public enum Status {
         DECISION,
         COMPLETE,
@@ -48,6 +56,35 @@ public final class PaymentDecisionProvider {
     }
 
     private long nextRequestId;
+
+    /**
+     * Request-free classifier for whether the current root can later enter the accepted FRL-02C PAYMENT slice.
+     * It uses copied cost and mana-ability state and never creates a request or changes the live mana pool.
+     */
+    public SupportAssessment assessFuturePaymentSupport(final SpellAbility ability, final Player payer) {
+        Objects.requireNonNull(ability);
+        Objects.requireNonNull(payer);
+        final SpellAbility root = ability.getRootAbility();
+        if (root.getActivatingPlayer() == null || !root.getActivatingPlayer().equals(payer)) {
+            throw new IllegalArgumentException("Future PAYMENT payer must be the root activating player");
+        }
+        final CostAdjustmentPreview adjustment = CostAdjustment.preview(root.getPayCosts(), root, payer,
+                false, root.getXManaCostPaid(), root.getXColor());
+        if (adjustment.getStatus() != CostAdjustmentPreview.Status.ADJUSTED
+                || !adjustment.hasAdjustedManaCost()) {
+            return SupportAssessment.unsupported(null);
+        }
+        final ManaCostBeingPaid remaining = adjustment.getAdjustedManaCost();
+        if (remaining.isPaid()) {
+            return SupportAssessment.supported();
+        }
+        final PrototypeResult prototypes = collectPrototypes(remaining, root, payer, payer.getManaPool(), true);
+        if (prototypes.unsupportedReason() != null) {
+            return SupportAssessment.unsupported(prototypes.unsupportedReason());
+        }
+        return prototypes.prototypes().isEmpty()
+                ? SupportAssessment.invalid() : SupportAssessment.supported();
+    }
 
     public Generation generatePaymentRequest(final ManaCostBeingPaid remainingCost, final SpellAbility ability,
             final Player payer, final ManaConversionMatrix matrix, final ActionContinuation continuation) {
@@ -131,6 +168,12 @@ public final class PaymentDecisionProvider {
 
     private static PrototypeResult collectPrototypes(final ManaCostBeingPaid remainingCost,
             final SpellAbility ability, final Player payer, final ManaConversionMatrix matrix) {
+        return collectPrototypes(remainingCost, ability, payer, matrix, false);
+    }
+
+    private static PrototypeResult collectPrototypes(final ManaCostBeingPaid remainingCost,
+            final SpellAbility ability, final Player payer, final ManaConversionMatrix matrix,
+            final boolean sideEffectFree) {
         if (matrix != null && matrix != payer.getManaPool() && !matrix.isIdentity()) {
             return PrototypeResult.unsupported(UnsupportedReason.MANA_CONVERSION_MATRIX);
         }
@@ -153,8 +196,17 @@ public final class PaymentDecisionProvider {
                 continue;
             }
             int abilityIndex = 0;
-            for (final SpellAbility manaAbility : card.getManaAbilities()) {
-                manaAbility.setActivatingPlayer(payer);
+            for (final SpellAbility liveManaAbility : card.getManaAbilities()) {
+                final SpellAbility manaAbility;
+                if (sideEffectFree) {
+                    manaAbility = liveManaAbility.copy(payer);
+                    if (manaAbility == null) {
+                        return PrototypeResult.unsupported(UnsupportedReason.NONTRIVIAL_MANA_SUBABILITY);
+                    }
+                } else {
+                    liveManaAbility.setActivatingPlayer(payer);
+                    manaAbility = liveManaAbility;
+                }
                 if (!manaAbility.canPlay()) {
                     abilityIndex++;
                     continue;
@@ -192,6 +244,37 @@ public final class PaymentDecisionProvider {
         }
         prototypes.sort(Comparator.comparing(CandidatePrototype::semanticKey));
         return PrototypeResult.supported(prototypes);
+    }
+
+    /** Immutable outcome of a request-free future PAYMENT capability check. */
+    public static final class SupportAssessment {
+        private final SupportStatus status;
+        private final UnsupportedReason unsupportedReason;
+
+        private SupportAssessment(final SupportStatus status, final UnsupportedReason unsupportedReason) {
+            this.status = status;
+            this.unsupportedReason = unsupportedReason;
+        }
+
+        private static SupportAssessment supported() {
+            return new SupportAssessment(SupportStatus.SUPPORTED, null);
+        }
+
+        private static SupportAssessment invalid() {
+            return new SupportAssessment(SupportStatus.INVALID_PAYMENT, null);
+        }
+
+        private static SupportAssessment unsupported(final UnsupportedReason reason) {
+            return new SupportAssessment(SupportStatus.UNSUPPORTED, reason);
+        }
+
+        public SupportStatus getStatus() {
+            return status;
+        }
+
+        public UnsupportedReason getUnsupportedReason() {
+            return unsupportedReason;
+        }
     }
 
     private static boolean hasPlayableAlternativeManaActivation(final Player payer) {

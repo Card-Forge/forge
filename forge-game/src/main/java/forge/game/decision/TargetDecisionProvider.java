@@ -4,6 +4,7 @@ import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
@@ -48,14 +49,30 @@ public final class TargetDecisionProvider {
      */
     public CompletionAssessment assessCompletion(final SpellAbility ability) {
         Objects.requireNonNull(ability);
-        SpellAbility current = ability.getRootAbility();
+        return assessChainCompletion(ability.getRootAbility(), null);
+    }
+
+    /**
+     * Purely checks a detached candidate mode and its own sub-chain without climbing to or attaching it to the root.
+     */
+    public CompletionAssessment assessBranchCompletion(final AbilitySub candidateMode,
+            final Player rootActivatingPlayer) {
+        Objects.requireNonNull(candidateMode);
+        Objects.requireNonNull(rootActivatingPlayer);
+        return assessChainCompletion(candidateMode, rootActivatingPlayer);
+    }
+
+    private CompletionAssessment assessChainCompletion(final SpellAbility first,
+            final Player defaultChoosingPlayer) {
+        SpellAbility current = first;
         while (current != null) {
             if (current.usesTargeting()) {
                 if (current.hasParam("TargetingPlayer") && current.getTargetingPlayer() == null) {
                     return CompletionAssessment.unsupported("TARGETING_PLAYER_CHOICE_REQUIRED");
                 }
                 final Player choosingPlayer = current.getTargetingPlayer() == null
-                        ? current.getActivatingPlayer() : current.getTargetingPlayer();
+                        ? defaultChoosingPlayer == null ? current.getActivatingPlayer() : defaultChoosingPlayer
+                        : current.getTargetingPlayer();
                 if (choosingPlayer == null) {
                     return CompletionAssessment.unsupported("TARGET_CHOOSER_UNKNOWN");
                 }
@@ -69,7 +86,8 @@ public final class TargetDecisionProvider {
                     final int minTargets = current.getMinTargets();
                     rejectRequiredCoupledMultiTargetingWithoutCompletionOracle(current,
                             current.getTargets().size(), minTargets);
-                    if (!canCompleteMinimumTargets(current, legalTargetPrototypes(current, choosingPlayer))) {
+                    if (!canCompleteMinimumTargets(current, legalTargetPrototypes(current, choosingPlayer,
+                            defaultChoosingPlayer == null))) {
                         return CompletionAssessment.invalidTargeting();
                     }
                 } catch (final UnsupportedTargetDecisionException ex) {
@@ -117,7 +135,7 @@ public final class TargetDecisionProvider {
             return Generation.complete(reassessCost(ability), System.nanoTime() - startedAtNanos);
         }
 
-        final List<TargetPrototype> prototypes = legalTargetPrototypes(ability, choosingPlayer);
+        final List<TargetPrototype> prototypes = legalTargetPrototypes(ability, choosingPlayer, true);
         if (!canCompleteMinimumTargets(ability, prototypes)) {
             return Generation.invalidTargeting(System.nanoTime() - startedAtNanos);
         }
@@ -199,12 +217,14 @@ public final class TargetDecisionProvider {
     }
 
     private static List<TargetPrototype> legalTargetPrototypes(final SpellAbility ability,
-            final Player choosingPlayer) {
+            final Player choosingPlayer, final boolean applyTargetTextChanges) {
         final TargetRestrictions restrictions = ability.getTargetRestrictions();
         final Map<String, TargetPrototype> candidates = new LinkedHashMap<>();
         final CardCandidates cardCandidates = legalCardCandidates(ability, choosingPlayer);
 
-        for (final GameObject target : restrictions.getAllCandidates(ability)) {
+        final List<? extends GameObject> forgeCandidates = applyTargetTextChanges
+                ? restrictions.getAllCandidates(ability) : currentCandidatesWithoutTextMutation(ability);
+        for (final GameObject target : forgeCandidates) {
             if (target instanceof Card card && card.getZone() != null && card.getZone().is(ZoneType.Stack)) {
                 continue;
             }
@@ -241,6 +261,23 @@ public final class TargetDecisionProvider {
         final List<TargetPrototype> result = new ArrayList<>(candidates.values());
         result.sort(Comparator.comparing(TargetPrototype::semanticKey));
         return result;
+    }
+
+    /** The MODE callback has already applied Forge's target text changes while filtering {@code possible}. */
+    private static List<GameObject> currentCandidatesWithoutTextMutation(final SpellAbility ability) {
+        final List<GameObject> candidates = new ArrayList<>();
+        for (final Player player : ability.getHostCard().getGame().getPlayers()) {
+            if (ability.canTarget(player)) {
+                candidates.add(player);
+            }
+        }
+        for (final Card card : ability.getHostCard().getGame().getCardsIn(
+                ability.getTargetRestrictions().getZone())) {
+            if (ability.canTarget(card)) {
+                candidates.add(card);
+            }
+        }
+        return candidates;
     }
 
     /** Uses the same MustTarget filtering boundary as PlayerControllerHuman for an isolated target group. */

@@ -5,6 +5,7 @@ import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.AbilitySub;
 import forge.game.zone.ZoneType;
 
 import java.util.Objects;
@@ -33,6 +34,10 @@ public final class LegalCandidate {
     private final PaymentCandidateKind paymentKind;
     private final Mana mana;
     private final Integer xValue;
+    private final Integer modeOrdinal;
+    private final String modeDescription;
+    private final boolean modeUsesTargeting;
+    private final AbilitySub mode;
 
     private LegalCandidate(final int candidateId, final PriorityActionKind kind, final Card source,
             final SpellAbility spellAbility, final String semanticKey) {
@@ -53,6 +58,10 @@ public final class LegalCandidate {
         this.paymentKind = null;
         this.mana = null;
         this.xValue = null;
+        this.modeOrdinal = null;
+        this.modeDescription = "";
+        this.modeUsesTargeting = false;
+        this.mode = null;
     }
 
     private LegalCandidate(final int candidateId, final TargetCandidateKind targetKind, final GameObject target,
@@ -74,6 +83,10 @@ public final class LegalCandidate {
         this.paymentKind = null;
         this.mana = null;
         this.xValue = null;
+        this.modeOrdinal = null;
+        this.modeDescription = "";
+        this.modeUsesTargeting = false;
+        this.mode = null;
     }
 
     private LegalCandidate(final int candidateId, final PaymentCandidateKind paymentKind, final Card source,
@@ -95,6 +108,10 @@ public final class LegalCandidate {
         this.paymentKind = Objects.requireNonNull(paymentKind);
         this.mana = mana;
         this.xValue = null;
+        this.modeOrdinal = null;
+        this.modeDescription = "";
+        this.modeUsesTargeting = false;
+        this.mode = null;
     }
 
     private LegalCandidate(final int candidateId, final int xValue) {
@@ -115,6 +132,45 @@ public final class LegalCandidate {
         this.paymentKind = null;
         this.mana = null;
         this.xValue = xValue;
+        this.modeOrdinal = null;
+        this.modeDescription = "";
+        this.modeUsesTargeting = false;
+        this.mode = null;
+    }
+
+    private LegalCandidate(final int candidateId, final int modeOrdinal, final AbilitySub mode) {
+        this.candidateId = candidateId;
+        this.kind = null;
+        this.sourceCardId = mode.getHostCard().getId();
+        this.sourceName = mode.getHostCard().getName();
+        this.sourceZone = mode.getHostCard().getZone() == null ? null : mode.getHostCard().getZone().getZoneType();
+        this.sourceState = mode.getHostCard().getCurrentStateName();
+        this.abilityDescription = mode.getDescription();
+        this.semanticKey = "MODE|" + modeOrdinal;
+        this.spellAbility = null;
+        this.targetKind = null;
+        this.targetEntityId = -1;
+        this.targetName = "";
+        this.targetZone = null;
+        this.target = null;
+        this.paymentKind = null;
+        this.mana = null;
+        this.xValue = null;
+        this.modeOrdinal = modeOrdinal;
+        this.modeDescription = mode.getParamOrDefault("SpellDescription", mode.getDescription());
+        this.modeUsesTargeting = branchUsesTargeting(mode);
+        this.mode = mode;
+    }
+
+    private static boolean branchUsesTargeting(final SpellAbility first) {
+        SpellAbility current = first;
+        while (current != null) {
+            if (current.usesTargeting()) {
+                return true;
+            }
+            current = current.getSubAbility();
+        }
+        return false;
     }
 
     static LegalCandidate pass(final int candidateId) {
@@ -152,6 +208,10 @@ public final class LegalCandidate {
         return new LegalCandidate(candidateId, value);
     }
 
+    static LegalCandidate mode(final int candidateId, final int modeOrdinal, final AbilitySub mode) {
+        return new LegalCandidate(candidateId, modeOrdinal, mode);
+    }
+
     public int getCandidateId() {
         return candidateId;
     }
@@ -173,6 +233,19 @@ public final class LegalCandidate {
     /** Announced X value for X_VALUE candidates, otherwise {@code null}. */
     public Integer getXValue() {
         return xValue;
+    }
+
+    /** Original zero-based position in the root Choices list, otherwise {@code null}. */
+    public Integer getModeOrdinal() {
+        return modeOrdinal;
+    }
+
+    public String getModeDescription() {
+        return modeDescription;
+    }
+
+    public boolean isModeUsesTargeting() {
+        return modeUsesTargeting;
     }
 
     /** Stable Forge entity or stack-instance identifier for a TARGET candidate; {@code -1} for DONE. */
@@ -225,5 +298,9 @@ public final class LegalCandidate {
 
     Mana getMana() {
         return mana;
+    }
+
+    AbilitySub getMode() {
+        return mode;
     }
 }

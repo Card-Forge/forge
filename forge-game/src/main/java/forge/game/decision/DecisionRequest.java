@@ -11,35 +11,43 @@ public final class DecisionRequest {
     private final TargetDecisionContext targetContext;
     private final PaymentDecisionContext paymentContext;
     private final XDecisionContext xContext;
+    private final ModeDecisionContext modeContext;
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates) {
-        this(requestId, decisionType, candidates, null, null, null);
+        this(requestId, decisionType, candidates, null, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final TargetDecisionContext targetContext) {
-        this(requestId, decisionType, candidates, targetContext, null, null);
+        this(requestId, decisionType, candidates, targetContext, null, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final PaymentDecisionContext paymentContext) {
-        this(requestId, decisionType, candidates, null, paymentContext, null);
+        this(requestId, decisionType, candidates, null, paymentContext, null, null);
     }
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
             final XDecisionContext xContext) {
-        this(requestId, decisionType, candidates, null, null, xContext);
+        this(requestId, decisionType, candidates, null, null, xContext, null);
+    }
+
+    DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
+            final ModeDecisionContext modeContext) {
+        this(requestId, decisionType, candidates, null, null, null, modeContext);
     }
 
     private DecisionRequest(final long requestId, final DecisionType decisionType,
             final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
-            final PaymentDecisionContext paymentContext, final XDecisionContext xContext) {
+            final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
+            final ModeDecisionContext modeContext) {
         this.requestId = requestId;
         this.decisionType = Objects.requireNonNull(decisionType);
         this.candidates = List.copyOf(candidates);
         this.targetContext = targetContext;
         this.paymentContext = paymentContext;
         this.xContext = xContext;
+        this.modeContext = modeContext;
         if (this.candidates.isEmpty()) {
             throw new IllegalArgumentException("A DecisionRequest must contain at least one legal candidate");
         }
@@ -60,6 +68,12 @@ public final class DecisionRequest {
         }
         if (decisionType != DecisionType.X_VALUE && xContext != null) {
             throw new IllegalArgumentException("Only X_VALUE DecisionRequests may contain X context");
+        }
+        if (decisionType == DecisionType.MODE && modeContext == null) {
+            throw new IllegalArgumentException("A MODE DecisionRequest requires mode context");
+        }
+        if (decisionType != DecisionType.MODE && modeContext != null) {
+            throw new IllegalArgumentException("Only MODE DecisionRequests may contain mode context");
         }
     }
 
@@ -91,6 +105,11 @@ public final class DecisionRequest {
     /** X_VALUE-only metadata constructed from Forge's live announcement state. */
     public XDecisionContext getXContext() {
         return xContext;
+    }
+
+    /** MODE-only metadata constructed from Forge's live callback state. */
+    public ModeDecisionContext getModeContext() {
+        return modeContext;
     }
 
     public boolean isForced() {
