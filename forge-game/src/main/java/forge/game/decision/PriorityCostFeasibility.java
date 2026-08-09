@@ -365,6 +365,15 @@ public final class PriorityCostFeasibility {
                 index++;
                 continue;
             }
+            // Amount is part of Forge's production multiplicity, but the shadow inventory currently models
+            // only the tokens encoded by OrigProduced. Treat every Amount-bearing source as dynamic until
+            // that multiplicity can be represented exactly; otherwise capacity and specific-X payment can
+            // both undercount sources such as Everflowing Chalice.
+            if (probeAbility.hasParam("Amount")) {
+                unsupportedReason = chooseReason(unsupportedReason, UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
+                index++;
+                continue;
+            }
             if (!isTapOnlyManaAbility(probeAbility)) {
                 unsupportedReason = chooseReason(unsupportedReason, UnsupportedReason.MANA_SOURCE_COST);
                 index++;

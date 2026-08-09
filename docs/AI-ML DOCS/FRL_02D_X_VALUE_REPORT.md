@@ -44,9 +44,14 @@ upper = min(rawMax, floor((S + R) / k))
 ```
 
 `S` is cost-independent. It includes off-color sources that cannot advance the colored base cost at X=0 but can pay
-generic X later. Alternative mana activations, production replacements, variable output, nontrivial mana
-sub-abilities, and complex source costs make the inventory incomplete and therefore return
+generic X later. Alternative mana activations, production replacements, variable output, any mana ability carrying
+an `Amount` parameter, nontrivial mana sub-abilities, and complex source costs make the inventory incomplete and therefore return
 `UNSUPPORTED_FINITE_DOMAIN`.
+
+`Amount` is a separate Forge production-multiplicity input and is not encoded by `AbilityManaPart.getOrigProduced()`.
+The v0 shadow inventory therefore rejects every playable `Amount`-bearing mana ability as
+`DYNAMIC_MANA_PRODUCTION` before constructing static bundles. This applies to both capacity and specific-X payment;
+it prevents sources such as a multi-counter Everflowing Chalice from being silently modeled as one mana.
 
 `R` scans the public cost-adjustment authority for every potentially relevant fixed generic reducer, not merely the
 reduction applied at `rawMin`. It overestimates safely by including currently inactive fixed reducers. Any reducer
@@ -90,7 +95,8 @@ Unsupported capability boundaries are:
 - unresolved mode whose choice precedes X;
 - non-mana X or unsupported/multiple X mana structure;
 - nonnumeric/dynamic `XMax` or `AnnounceMax` in the information-safe v0 slice;
-- incomplete fixed mana inventory, including alternative activation or ProduceMana replacement;
+- incomplete fixed mana inventory, including alternative activation, ProduceMana replacement, or mana-source
+  `Amount` multiplicity;
 - unprovable domain-wide reduction allowance;
 - cost-adjustment choice or unsupported adjustment;
 - unknown payment payer;
@@ -110,17 +116,21 @@ mvn -pl forge-gui-desktop -am \
   -Dsurefire.failIfNoSpecifiedTests=false test
 ```
 
-Result: 114 tests passed, 0 failures, 0 errors. Packaging with
+Result: 117 tests passed, 0 failures, 0 errors. Packaging with
 `mvn -pl forge-gui-desktop -am -DskipTests package` succeeded.
 
 The fixtures cover X=0, forced and strategic X, `XMin`, `XMax`, `AnnounceMax`, Invoke's selected modes, insufficient
 mana, fixed reduction/increase, announced-X propagation, root-over-sub authority, derived/copied X, stale rejection,
 deterministic identity, continuation identity, hidden-hand differential, non-mana X, unsafe unbounded inventory,
-adjustment choice, pure target completion, unresolved target chooser, and the absence of any forge-ai dependency from
-the forge-game X provider.
+adjustment choice, pure target completion, unresolved target chooser, dynamic `Amount` production, and the absence of
+any forge-ai dependency from the forge-game X provider.
 
 The key off-color fixture uses two Islands, one Mountain, and five Forests for Invoke. It proves `S=8` and exports
 exactly `X=0..5`; deriving capacity from an X=0 PAYMENT request would have incorrectly stopped at three resources.
+
+The real Everflowing Chalice regression gives the source five charge counters. Capacity returns
+`UNSUPPORTED / DYNAMIC_MANA_PRODUCTION`, `assessPaymentAtX(..., 5)` returns `UNSUPPORTED` rather than `UNPAYABLE`,
+and the X provider returns `UNSUPPORTED_FINITE_DOMAIN` with no truncated request.
 
 ## Controlled benchmarks
 
@@ -155,8 +165,8 @@ Real neutral Invoke fixtures produced candidate counts `[1, 3, 6, 3]`:
 | minimum candidate value | 0 |
 | maximum candidate value | 5 |
 
-After 20 warmups, 180 generations of the six-candidate off-color fixture measured p50 23.357 ms, p95 38.280 ms,
-and p99 43.171 ms. These are request-generation measurements, not RL throughput. The cost is expected because each
+After 20 warmups, 180 generations of the six-candidate off-color fixture measured p50 23.887 ms, p95 27.430 ms,
+and p99 29.920 ms. These are request-generation measurements, not RL throughput. The cost is expected because each
 integer receives a complete supported payment search. The observed maximum X list (6) is below FRL-02C PAYMENT's
 observed maximum candidate list (11); no bucketing or compression is introduced.
 

@@ -3,6 +3,7 @@ package forge.game.decision;
 import forge.ai.AITest;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostAdjustment;
 import forge.game.cost.CostAdjustmentPreview;
@@ -220,6 +221,25 @@ public class XDecisionProviderTest extends AITest {
         birds.setSickness(false);
         assertEquals(provider.generateXRequest(dynamic, player, null).getUnsupportedReason(),
                 XDecisionProvider.UnsupportedReason.UNSUPPORTED_FINITE_DOMAIN);
+    }
+
+    @Test
+    public void invokeWithDynamicAmountManaSourceDoesNotExportATruncatedDomain() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = invoke(player, 0);
+        addCard("Island", player);
+        addCard("Island", player);
+        addCard("Mountain", player);
+        final Card chalice = addCard("Everflowing Chalice", player);
+        chalice.setCounters(CounterEnumType.CHARGE, 5);
+
+        final XDecisionProvider.Generation generation = provider.generateXRequest(invoke, player, null);
+
+        assertEquals(generation.getStatus(), XDecisionProvider.Status.UNSUPPORTED);
+        assertEquals(generation.getUnsupportedReason(),
+                XDecisionProvider.UnsupportedReason.UNSUPPORTED_FINITE_DOMAIN);
+        assertNull(generation.getRequest());
     }
 
     @Test

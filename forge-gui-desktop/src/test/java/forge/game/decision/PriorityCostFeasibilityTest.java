@@ -5,6 +5,7 @@ import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
@@ -305,6 +306,43 @@ public class PriorityCostFeasibilityTest extends AITest {
 
         assertEquals(capacity.getResult(), PriorityCostFeasibility.CapacityResult.UNSUPPORTED);
         assertEquals(capacity.getUnsupportedReason(),
+                PriorityCostFeasibility.UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
+    }
+
+    @Test
+    public void dynamicAmountManaSourceCannotClaimACompleteCapacity() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = spell(addCardToZone("Invoke the Firemind", player, ZoneType.Hand));
+        invoke.setActivatingPlayer(player);
+        final Card chalice = addCard("Everflowing Chalice", player);
+        chalice.setCounters(CounterEnumType.CHARGE, 5);
+
+        final PriorityCostFeasibility.CapacityAssessment capacity =
+                feasibility.assessManaCapacity(player, invoke);
+
+        assertEquals(capacity.getResult(), PriorityCostFeasibility.CapacityResult.UNSUPPORTED);
+        assertEquals(capacity.getUnsupportedReason(),
+                PriorityCostFeasibility.UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
+    }
+
+    @Test
+    public void specificXDoesNotTreatDynamicAmountProductionAsOneMana() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = spell(addCardToZone("Invoke the Firemind", player, ZoneType.Hand));
+        invoke.setActivatingPlayer(player);
+        addCard("Island", player);
+        addCard("Island", player);
+        addCard("Mountain", player);
+        final Card chalice = addCard("Everflowing Chalice", player);
+        chalice.setCounters(CounterEnumType.CHARGE, 5);
+
+        final PriorityCostFeasibility.Assessment assessment =
+                feasibility.assessPaymentAtX(player, invoke, 5);
+
+        assertResult(PriorityCostFeasibility.Result.UNSUPPORTED, assessment);
+        assertEquals(assessment.getUnsupportedReason(),
                 PriorityCostFeasibility.UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
     }
 
