@@ -5,10 +5,13 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -76,6 +79,43 @@ public class TargetDecisionProviderTest extends AITest {
         assertEquals(candidate.getTargetZone(), ZoneType.Stack);
         assertEquals(provider.apply(request, candidate).getStatus(), TargetDecisionProvider.Status.COMPLETE);
         assertEquals(ability.getTargets().getFirstTargetedSpell(), pendingSpell);
+    }
+
+    @Test
+    public void sequentialMultiStackTargetingDoesNotReofferAnAlreadyChosenSpell() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final SpellAbility ability = targetAbility("Counterspell", chooser);
+        ability.setTargetRestrictions(new TargetRestrictions(Map.of(
+                "ValidTgts", "Card",
+                "TargetMin", "0",
+                "TargetMax", "2",
+                "TgtZone", "Stack")));
+        final Card firstCard = addCardToZone("Runeclaw Bear", opponent, ZoneType.Hand);
+        final SpellAbility firstSpell = firstCard.getFirstSpellAbility();
+        firstSpell.setActivatingPlayer(opponent);
+        game.getStackZone().add(firstCard);
+        game.getStack().add(firstSpell);
+        final SpellAbilityStackInstance firstInstance = stackInstanceFor(game, firstCard);
+        final Card secondCard = addCardToZone("Llanowar Elves", opponent, ZoneType.Hand);
+        final SpellAbility secondSpell = secondCard.getFirstSpellAbility();
+        secondSpell.setActivatingPlayer(opponent);
+        game.getStackZone().add(secondCard);
+        game.getStack().add(secondSpell);
+        final SpellAbilityStackInstance secondInstance = stackInstanceFor(game, secondCard);
+
+        final DecisionRequest firstRequest = decision(ability, chooser);
+        final TargetDecisionProvider.Generation afterFirst = provider.apply(firstRequest,
+                stackCandidateFor(firstRequest, firstInstance));
+        final DecisionRequest secondRequest = afterFirst.getRequest();
+
+        assertFalse(hasTargetEntity(secondRequest, firstInstance.getId()));
+        assertTrue(hasTargetEntity(secondRequest, secondInstance.getId()));
+        final TargetDecisionProvider.Generation completed = provider.apply(secondRequest,
+                stackCandidateFor(secondRequest, secondInstance));
+        assertEquals(completed.getStatus(), TargetDecisionProvider.Status.COMPLETE);
+        assertEquals(ability.getTargets().size(), 2);
     }
 
     @Test
@@ -191,7 +231,7 @@ public class TargetDecisionProviderTest extends AITest {
         final Game game = initAndCreateGame();
         final Player chooser = game.getPlayers().get(1);
         final Player opponent = game.getPlayers().get(0);
-        final SpellAbility ability = targetAbility("Incriminate", chooser);
+        final SpellAbility ability = targetAbility("Jagged Lightning", chooser);
         final Card firstTarget = addCard("Runeclaw Bear", opponent);
         final Card secondTarget = addCard("Llanowar Elves", opponent);
         final Card thirdTarget = addCard("Grizzly Bears", opponent);
@@ -238,13 +278,25 @@ public class TargetDecisionProviderTest extends AITest {
         final Game game = initAndCreateGame();
         final Player chooser = game.getPlayers().get(1);
         final Player opponent = game.getPlayers().get(0);
-        final SpellAbility ability = targetAbility("Incriminate", chooser);
+        final SpellAbility ability = targetAbility("Jagged Lightning", chooser);
         addCard("Runeclaw Bear", opponent);
 
         final TargetDecisionProvider.Generation generation = provider.generateTargetRequest(ability, chooser, null);
 
         assertEquals(generation.getStatus(), TargetDecisionProvider.Status.INVALID_TARGETING);
         assertNull(generation.getRequest());
+    }
+
+    @Test
+    public void requiredCoupledMultiTargetRestrictionFailsLoudlyWithoutAForgeCompletionOracle() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final SpellAbility ability = targetAbility("Secret Tunnel", chooser);
+        addCard("Runeclaw Bear", chooser);
+        addCard("Llanowar Elves", chooser);
+
+        assertThrows(UnsupportedTargetDecisionException.class,
+                () -> provider.generateTargetRequest(ability, chooser, null));
     }
 
     @Test
@@ -392,6 +444,27 @@ public class TargetDecisionProviderTest extends AITest {
                 .filter(candidate -> candidate.getTargetEntityId() == target.getId())
                 .findFirst()
                 .orElseThrow();
+    }
+
+    private static SpellAbilityStackInstance stackInstanceFor(final Game game, final Card sourceCard) {
+        for (final SpellAbilityStackInstance instance : game.getStack()) {
+            if (instance.getSourceCard() == sourceCard) {
+                return instance;
+            }
+        }
+        throw new AssertionError("Expected source card to have a Forge stack instance");
+    }
+
+    private static LegalCandidate stackCandidateFor(final DecisionRequest request,
+            final SpellAbilityStackInstance target) {
+        return request.getCandidates().stream()
+                .filter(candidate -> candidate.getTargetKind() == TargetCandidateKind.TARGET_STACK_OBJECT)
+                .filter(candidate -> candidate.getTargetEntityId() == target.getId())
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("Expected stack target " + target.getId()
+                        + " among " + request.getCandidates().stream()
+                        .filter(candidate -> candidate.getTargetKind() == TargetCandidateKind.TARGET_STACK_OBJECT)
+                        .map(LegalCandidate::getTargetEntityId).toList()));
     }
 
     private static boolean hasTargetEntity(final DecisionRequest request, final int entityId) {

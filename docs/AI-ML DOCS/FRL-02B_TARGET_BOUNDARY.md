@@ -12,8 +12,9 @@ human controller nor the AI controller.
 
 `TargetRestrictions.getAllCandidates(SpellAbility)` supplies the current card/player candidates. The provider uses
 the same `CardUtil.getValidCardsToTarget` operation as Forge's human target input to remove cards already chosen in
-the current group. Before exposing a request it mirrors `TargetSelection`'s minimum-completion preflight: enough
-remaining candidates must exist, and `TargetsWithDifferentControllers` / `TargetsForEachPlayer` must have enough
+the current group, and removes an already chosen stack `SpellAbility` by its live `TargetChoices` membership.
+Before exposing a request it mirrors `TargetSelection`'s minimum-completion preflight: enough remaining candidates
+must exist, and `TargetsWithDifferentControllers` / `TargetsForEachPlayer` must have enough
 distinct card controllers. For an isolated group it also uses Forge's `StaticAbilityMustTarget` filter and its final
 restriction predicate, so an active MustTarget obligation suppresses player targets even when filtering removed no
 cards. With multiple target groups it matches the human controller by deferring that global check until Forge's final
@@ -35,9 +36,12 @@ appears only when Forge reports that the current minimum is complete and the max
 no generic `CANCEL` candidate: Forge's target-controller cancellation contracts are not uniform.
 
 An empty candidate set before the minimum is met produces `INVALID_TARGETING`, rather than a request, an automatic
-selection, or an AI fallback. Divided-target allocation, hidden/unidentifiable card targets, and unknown target
-entity types fail with `UnsupportedTargetDecisionException` rather than being silently omitted. Random-target groups
-are Forge-owned randomness rather than player choices and are likewise explicitly unsupported.
+selection, or an AI fallback. Required multi-target groups coupled through same-controller, creature/card type,
+mana value, name, toughness, or total-CMC/power restrictions are explicitly unsupported until Forge offers a
+side-effect-free completion oracle; the provider does not simulate choices or recreate those rules. Divided-target
+allocation, hidden/unidentifiable card targets, and unknown target entity types fail with
+`UnsupportedTargetDecisionException` rather than being silently omitted. Random-target groups are Forge-owned
+randomness rather than player choices and are likewise explicitly unsupported.
 
 ## Information and downstream cost safety
 

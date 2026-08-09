@@ -66,6 +66,7 @@ public final class TargetDecisionProvider {
         if (selectedTargetCount > maxTargets) {
             throw new UnsupportedTargetDecisionException(ability, "current target count exceeds Forge maximum");
         }
+        rejectRequiredCoupledMultiTargetingWithoutCompletionOracle(ability, selectedTargetCount, minTargets);
         if (selectedTargetCount == maxTargets) {
             return Generation.complete(reassessCost(ability), System.nanoTime() - startedAtNanos);
         }
@@ -131,6 +132,9 @@ public final class TargetDecisionProvider {
             return false;
         }
         if (candidate.getTargetKind() == TargetCandidateKind.TARGET_STACK_OBJECT) {
+            if (ability.getTargets().contains(target)) {
+                return false;
+            }
             for (final SpellAbilityStackInstance instance : ability.getHostCard().getGame().getStack()) {
                 if (instance.getId() == candidate.getTargetEntityId() && instance.getSpellAbility() == target) {
                     return ability.canTargetSpellAbility(instance.getSpellAbility());
@@ -172,6 +176,9 @@ public final class TargetDecisionProvider {
         if (restrictions.getZone().contains(ZoneType.Stack)) {
             for (final SpellAbilityStackInstance instance : ability.getHostCard().getGame().getStack()) {
                 final SpellAbility target = instance.getSpellAbility();
+                if (ability.getTargets().contains(target)) {
+                    continue;
+                }
                 if (!ability.canTargetSpellAbility(target)) {
                     continue;
                 }
@@ -292,6 +299,30 @@ public final class TargetDecisionProvider {
             }
         }
         return controllers.size() >= ability.getMinTargets();
+    }
+
+    /**
+     * Forge exposes no side-effect-free completion oracle for these restrictions. Counting current candidates
+     * cannot prove that every atomic choice can reach the required minimum, so a policy request would be unsound.
+     */
+    private static void rejectRequiredCoupledMultiTargetingWithoutCompletionOracle(final SpellAbility ability,
+            final int selectedTargetCount, final int minTargets) {
+        if (minTargets <= 1 || selectedTargetCount >= minTargets) {
+            return;
+        }
+        final TargetRestrictions restrictions = ability.getTargetRestrictions();
+        if (restrictions.isSameController()
+                || restrictions.isWithoutSameCreatureType()
+                || restrictions.isWithSameCreatureType()
+                || restrictions.isWithSameCardType()
+                || restrictions.isDifferentCMC()
+                || restrictions.isDifferentNames()
+                || restrictions.isEqualToughness()
+                || ability.hasParam("MaxTotalTargetCMC")
+                || ability.hasParam("MaxTotalTargetPower")) {
+            throw new UnsupportedTargetDecisionException(ability,
+                    "required coupled multi-target restriction has no side-effect-free Forge completion oracle");
+        }
     }
 
     private static PriorityCostFeasibility.Assessment reassessCost(final SpellAbility ability) {
