@@ -109,7 +109,7 @@ public final class Main {
                 return;
 
             default:
-                System.out.println("Unknown mode.\nKnown mode is 'sim', 'parse' ");
+                System.out.println("Unknown mode.\nKnown mode is 'sim', 'parse', 'host', 'join' ");
                 break;
         }
 
