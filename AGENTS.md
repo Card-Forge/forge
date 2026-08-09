@@ -40,6 +40,14 @@ Commander-first fork of [Card-Forge/forge](https://github.com/Card-Forge/forge).
 
 ## Release builds & versioning
 
+- **Always build with `clean`; never reuse a polluted `target/`.** The VS Code Java
+  language server (JDT) may write `.class` stubs containing `Unresolved compilation
+  problems` into `target/classes` when files change; `mvn package` without `clean`
+  silently bundles them and the game crashes instantly at startup (`GuiDesktop.<init>`).
+  Rebuild with `mvn -pl forge-gui-desktop -am clean package -Dmaven.test.skip=true`
+  (`-Dmaven.test.skip=true`, not `-DskipTests`: the legacy
+  `PlanarConquestGeneraterGA` test fails test-compile). `run_reforge_commander.ps1`
+  now scans the jar for the poison marker and refuses to launch a poisoned jar.
 - Build releases only via `build_release.ps1` at the repo root. It stamps every zip with a
   unique BuildId (`<Version>-yyyyMMdd-HHmmss`) so builds are always distinguishable; never
   hand-assemble a distribution.
