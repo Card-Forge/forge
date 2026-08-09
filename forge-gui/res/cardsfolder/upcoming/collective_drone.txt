@@ -1,0 +1,8 @@
+Name:Collective Drone
+ManaCost:1 B
+Types:Artifact Creature Borg
+PT:*/2
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of artifact creatures you control.
+SVar:X:Count$Valid Creature.Artifact+YouCtrl
+DeckHas:Ability$Token
+Oracle:Collective Drone's power is equal to the number of artifact creatures you control.
