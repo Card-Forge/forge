@@ -33,7 +33,53 @@ public final class TargetDecisionProvider {
         INVALID_TARGETING
     }
 
+    public enum CompletionStatus {
+        COMPLETE,
+        INVALID_TARGETING,
+        UNSUPPORTED
+    }
+
     private long nextRequestId;
+
+    /**
+     * Purely checks whether every currently known target group can reach its mandatory minimum.
+     * It deliberately does not create requests, allocate continuation indices, choose a targeting
+     * player, change TargetChoices, or revisit cost adjustment.
+     */
+    public CompletionAssessment assessCompletion(final SpellAbility ability) {
+        Objects.requireNonNull(ability);
+        SpellAbility current = ability.getRootAbility();
+        while (current != null) {
+            if (current.usesTargeting()) {
+                if (current.hasParam("TargetingPlayer") && current.getTargetingPlayer() == null) {
+                    return CompletionAssessment.unsupported("TARGETING_PLAYER_CHOICE_REQUIRED");
+                }
+                final Player choosingPlayer = current.getTargetingPlayer() == null
+                        ? current.getActivatingPlayer() : current.getTargetingPlayer();
+                if (choosingPlayer == null) {
+                    return CompletionAssessment.unsupported("TARGET_CHOOSER_UNKNOWN");
+                }
+                if (current.isDividedAsYouChoose()) {
+                    return CompletionAssessment.unsupported("DIVIDED_TARGET_ALLOCATION");
+                }
+                if (current.getTargetRestrictions().isRandomTarget()) {
+                    return CompletionAssessment.unsupported("RANDOM_TARGETING");
+                }
+                try {
+                    final int minTargets = current.getMinTargets();
+                    rejectRequiredCoupledMultiTargetingWithoutCompletionOracle(current,
+                            current.getTargets().size(), minTargets);
+                    if (!canCompleteMinimumTargets(current, legalTargetPrototypes(current, choosingPlayer))) {
+                        return CompletionAssessment.invalidTargeting();
+                    }
+                } catch (final UnsupportedTargetDecisionException ex) {
+                    return CompletionAssessment.unsupported("TARGET_COMPLETION_NOT_PROVABLE");
+                }
+            }
+            current = current.getSubAbility();
+        }
+        return CompletionAssessment.complete();
+    }
 
     /**
      * Creates the next atomic target request for one live target group. A {@code null} continuation explicitly
@@ -335,6 +381,36 @@ public final class TargetDecisionProvider {
     }
 
     private record CardCandidates(Set<Card> cards, boolean mustTargetObligationActive) {
+    }
+
+    public static final class CompletionAssessment {
+        private final CompletionStatus status;
+        private final String unsupportedReason;
+
+        private CompletionAssessment(final CompletionStatus status, final String unsupportedReason) {
+            this.status = status;
+            this.unsupportedReason = unsupportedReason;
+        }
+
+        private static CompletionAssessment complete() {
+            return new CompletionAssessment(CompletionStatus.COMPLETE, null);
+        }
+
+        private static CompletionAssessment invalidTargeting() {
+            return new CompletionAssessment(CompletionStatus.INVALID_TARGETING, null);
+        }
+
+        private static CompletionAssessment unsupported(final String reason) {
+            return new CompletionAssessment(CompletionStatus.UNSUPPORTED, reason);
+        }
+
+        public CompletionStatus getStatus() {
+            return status;
+        }
+
+        public String getUnsupportedReason() {
+            return unsupportedReason;
+        }
     }
 
     /** Result for one atomic target operation. Only {@link Status#DECISION} contains a request. */

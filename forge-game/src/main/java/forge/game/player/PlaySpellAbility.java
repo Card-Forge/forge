@@ -30,6 +30,7 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
 import forge.game.cost.*;
+import forge.game.decision.PriorityActionDiagnostics;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaPool;
@@ -749,6 +750,11 @@ public class PlaySpellAbility {
                 final String varName = aVar.trim();
                 Range<Integer> range = AbilityUtils.getAnnouncementBounds(ability, varName);
 
+                if ("X".equalsIgnoreCase(varName)) {
+                    PriorityActionDiagnostics.recordXAnnouncement(ability, controller.getPlayer(),
+                            range.getMinimum(), range.getMaximum());
+                }
+
                 final Integer value = controller.announceRequirements(ability, range.getMinimum(), range.getMaximum(), varName);
                 if (value == null) {
                     return false;
@@ -771,6 +777,8 @@ public class PlaySpellAbility {
                 boolean replacedXshard = ability.isSpell() && ability.getHostCard().getManaCost().countX() > 0 && !cost.hasXInAnyCostPart();
                 if (("Count$xPaid".equals(sVar) && !replacedXshard) || sVar.isEmpty()) {
                     Range<Integer> range = AbilityUtils.getAnnouncementBounds(ability, "X");
+                    PriorityActionDiagnostics.recordXAnnouncement(ability, controller.getPlayer(),
+                            range.getMinimum(), range.getMaximum());
                     final Integer value = controller.announceRequirements(ability, range.getMinimum(), range.getMaximum(), "X");
                     if (value == null) {
                         return false;

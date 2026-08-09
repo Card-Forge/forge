@@ -32,6 +32,7 @@ public final class LegalCandidate {
     private final GameObject target;
     private final PaymentCandidateKind paymentKind;
     private final Mana mana;
+    private final Integer xValue;
 
     private LegalCandidate(final int candidateId, final PriorityActionKind kind, final Card source,
             final SpellAbility spellAbility, final String semanticKey) {
@@ -51,6 +52,7 @@ public final class LegalCandidate {
         this.target = null;
         this.paymentKind = null;
         this.mana = null;
+        this.xValue = null;
     }
 
     private LegalCandidate(final int candidateId, final TargetCandidateKind targetKind, final GameObject target,
@@ -71,6 +73,7 @@ public final class LegalCandidate {
         this.target = target;
         this.paymentKind = null;
         this.mana = null;
+        this.xValue = null;
     }
 
     private LegalCandidate(final int candidateId, final PaymentCandidateKind paymentKind, final Card source,
@@ -91,6 +94,27 @@ public final class LegalCandidate {
         this.target = null;
         this.paymentKind = Objects.requireNonNull(paymentKind);
         this.mana = mana;
+        this.xValue = null;
+    }
+
+    private LegalCandidate(final int candidateId, final int xValue) {
+        this.candidateId = candidateId;
+        this.kind = null;
+        this.sourceCardId = -1;
+        this.sourceName = "";
+        this.sourceZone = null;
+        this.sourceState = null;
+        this.abilityDescription = "";
+        this.semanticKey = "X|" + xValue;
+        this.spellAbility = null;
+        this.targetKind = null;
+        this.targetEntityId = -1;
+        this.targetName = "";
+        this.targetZone = null;
+        this.target = null;
+        this.paymentKind = null;
+        this.mana = null;
+        this.xValue = xValue;
     }
 
     static LegalCandidate pass(final int candidateId) {
@@ -124,6 +148,10 @@ public final class LegalCandidate {
                 null, mana, semanticKey);
     }
 
+    static LegalCandidate xValue(final int candidateId, final int value) {
+        return new LegalCandidate(candidateId, value);
+    }
+
     public int getCandidateId() {
         return candidateId;
     }
@@ -140,6 +168,11 @@ public final class LegalCandidate {
     /** The PAYMENT candidate kind, or {@code null} for another decision family. */
     public PaymentCandidateKind getPaymentKind() {
         return paymentKind;
+    }
+
+    /** Announced X value for X_VALUE candidates, otherwise {@code null}. */
+    public Integer getXValue() {
+        return xValue;
     }
 
     /** Stable Forge entity or stack-instance identifier for a TARGET candidate; {@code -1} for DONE. */

@@ -3,15 +3,19 @@ package forge.game.decision;
 import forge.ai.AITest;
 import forge.card.mana.ManaAtom;
 import forge.game.Game;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.cost.CostAdjustmentPreview;
 import forge.game.zone.ZoneType;
 import org.testng.annotations.Test;
 
+import java.util.Map;
 import java.util.function.Predicate;
 
 import static org.testng.Assert.assertEquals;
@@ -192,15 +196,17 @@ public class PriorityCostFeasibilityTest extends AITest {
         final int lifeBefore = player.getLife();
         final boolean tappedBefore = mountain.isTapped();
         final int handBefore = player.getCardsIn(ZoneType.Hand).size();
-        final PriorityCostFeasibility.Assessment first = assess(player, spell(bolt));
-        final PriorityCostFeasibility.Assessment second = assess(player, spell(bolt));
+        final SpellAbility ability = spell(bolt);
+        final Player activatingPlayerBefore = ability.getActivatingPlayer();
+        final PriorityCostFeasibility.Assessment first = assess(player, ability);
+        final PriorityCostFeasibility.Assessment second = assess(player, ability);
 
         assertEquals(second, first);
         assertEquals(player.getManaPool().totalMana(), manaBefore);
         assertEquals(player.getLife(), lifeBefore);
         assertEquals(mountain.isTapped(), tappedBefore);
         assertEquals(player.getCardsIn(ZoneType.Hand).size(), handBefore);
-        assertEquals(spell(bolt).getActivatingPlayer(), player);
+        assertEquals(ability.getActivatingPlayer(), activatingPlayerBefore);
     }
 
     @Test
@@ -247,6 +253,134 @@ public class PriorityCostFeasibilityTest extends AITest {
         assertEquals(assessment.getUnsupportedReason(), PriorityCostFeasibility.UnsupportedReason.COST_ADJUSTMENT_CHOICE_REQUIRED);
         assertEquals(assessment.getAdjustmentStatus(), CostAdjustmentPreview.Status.CHOICE_REQUIRED);
         assertTrue(assessment.getAdjustmentPreviewNanos() >= 0L);
+    }
+
+    @Test
+    public void specificXUsesAllCostIndependentFixedManaCapacityIncludingOffColorSources() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = spell(addCardToZone("Invoke the Firemind", player, ZoneType.Hand));
+        invoke.setActivatingPlayer(player);
+        addCard("Island", player);
+        addCard("Island", player);
+        addCard("Mountain", player);
+        for (int index = 0; index < 5; index++) {
+            addCard("Forest", player);
+        }
+
+        final PriorityCostFeasibility.CapacityAssessment capacity = feasibility.assessManaCapacity(player, invoke);
+
+        assertEquals(capacity.getResult(), PriorityCostFeasibility.CapacityResult.SUPPORTED);
+        assertEquals(capacity.getMaximumManaUnits(), 8L);
+        assertResult(PriorityCostFeasibility.Result.PAYABLE,
+                feasibility.assessPaymentAtX(player, invoke, 5));
+        assertResult(PriorityCostFeasibility.Result.UNPAYABLE,
+                feasibility.assessPaymentAtX(player, invoke, 6));
+    }
+
+    @Test
+    public void capacityCountsTheLargestFixedBundleOncePerSource() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility ability = spell(addCardToZone("Divination", player, ZoneType.Hand));
+        ability.setActivatingPlayer(player);
+        addCard("Dimir Aqueduct", player);
+        addCard("Island", player);
+
+        final PriorityCostFeasibility.CapacityAssessment capacity = feasibility.assessManaCapacity(player, ability);
+
+        assertEquals(capacity.getResult(), PriorityCostFeasibility.CapacityResult.SUPPORTED);
+        assertEquals(capacity.getMaximumManaUnits(), 3L);
+    }
+
+    @Test
+    public void incompleteManaInventoryCannotClaimACompleteCapacity() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility ability = spell(addCardToZone("Lightning Bolt", player, ZoneType.Hand));
+        ability.setActivatingPlayer(player);
+        final Card birds = addCard("Birds of Paradise", player);
+        birds.setSickness(false);
+
+        final PriorityCostFeasibility.CapacityAssessment capacity = feasibility.assessManaCapacity(player, ability);
+
+        assertEquals(capacity.getResult(), PriorityCostFeasibility.CapacityResult.UNSUPPORTED);
+        assertEquals(capacity.getUnsupportedReason(),
+                PriorityCostFeasibility.UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
+    }
+
+    @Test
+    public void dynamicAmountManaSourceCannotClaimACompleteCapacity() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = spell(addCardToZone("Invoke the Firemind", player, ZoneType.Hand));
+        invoke.setActivatingPlayer(player);
+        final Card chalice = addCard("Everflowing Chalice", player);
+        chalice.setCounters(CounterEnumType.CHARGE, 5);
+
+        final PriorityCostFeasibility.CapacityAssessment capacity =
+                feasibility.assessManaCapacity(player, invoke);
+
+        assertEquals(capacity.getResult(), PriorityCostFeasibility.CapacityResult.UNSUPPORTED);
+        assertEquals(capacity.getUnsupportedReason(),
+                PriorityCostFeasibility.UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
+    }
+
+    @Test
+    public void specificXDoesNotTreatDynamicAmountProductionAsOneMana() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = spell(addCardToZone("Invoke the Firemind", player, ZoneType.Hand));
+        invoke.setActivatingPlayer(player);
+        addCard("Island", player);
+        addCard("Island", player);
+        addCard("Mountain", player);
+        final Card chalice = addCard("Everflowing Chalice", player);
+        chalice.setCounters(CounterEnumType.CHARGE, 5);
+
+        final PriorityCostFeasibility.Assessment assessment =
+                feasibility.assessPaymentAtX(player, invoke, 5);
+
+        assertResult(PriorityCostFeasibility.Result.UNSUPPORTED, assessment);
+        assertEquals(assessment.getUnsupportedReason(),
+                PriorityCostFeasibility.UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
+    }
+
+    @Test
+    public void specificXAssessmentUsesRootCostInsteadOfZeroCostSubAbility() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = spell(addCardToZone("Invoke the Firemind", player, ZoneType.Hand));
+        invoke.setActivatingPlayer(player);
+        final AbilitySub sub = new AbilitySub(ApiType.Draw, invoke.getHostCard(), null, Map.of());
+        sub.setParent(invoke);
+        sub.setActivatingPlayer(player);
+        addCard("Island", player);
+        addCard("Island", player);
+        addCard("Mountain", player);
+
+        assertResult(PriorityCostFeasibility.Result.UNPAYABLE,
+                feasibility.assessPaymentAtX(player, sub, 1));
+    }
+
+    @Test
+    public void specificXAssessmentDoesNotMutateRootManaAbilitiesOrManaPool() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = spell(addCardToZone("Invoke the Firemind", player, ZoneType.Hand));
+        invoke.setActivatingPlayer(player);
+        final Card island = addCard("Island", player);
+        final SpellAbility manaAbility = firstManaAbility(island);
+        final Player manaActivatorBefore = manaAbility.getActivatingPlayer();
+        final int poolBefore = player.getManaPool().totalMana();
+
+        feasibility.assessPaymentAtX(player, invoke, 0);
+
+        assertEquals(invoke.getActivatingPlayer(), player);
+        assertEquals(invoke.getXManaCostPaid(), null);
+        assertEquals(manaAbility.getActivatingPlayer(), manaActivatorBefore);
+        assertEquals(player.getManaPool().totalMana(), poolBefore);
+        assertEquals(island.isTapped(), false);
     }
 
     private PriorityCostFeasibility.Assessment assess(final Player player, final SpellAbility ability) {

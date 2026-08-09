@@ -14,7 +14,7 @@ public class PriorityActionDiagnosticsTest {
                 3, "MAIN1", "Ada", "Bea", 5);
 
         final String[] fields = row.split(",", -1);
-        assertEquals(fields.length, 33);
+        assertEquals(fields.length, 40);
         assertEquals(fields[0], "DOWNSTREAM");
         assertEquals(fields[1], "42");
         assertEquals(fields[2], "481");
@@ -45,7 +45,7 @@ public class PriorityActionDiagnosticsTest {
                 CostAdjustmentPreview.Status.CHOICE_REQUIRED, CostAdjustmentPreview.Reason.REDUCTION_ORDER, 45L);
 
         final String[] fields = row.split(",", -1);
-        assertEquals(fields.length, 33);
+        assertEquals(fields.length, 40);
         assertEquals(fields[0], "FEASIBILITY");
         assertEquals(fields[18], "UNSUPPORTED");
         assertEquals(fields[19], "COST_ADJUSTMENT_CHOICE_REQUIRED");
@@ -62,7 +62,7 @@ public class PriorityActionDiagnosticsTest {
                 0, TargetDecisionProvider.Status.DECISION, true, 123L, null);
 
         final String[] fields = row.split(",", -1);
-        assertEquals(fields.length, 33);
+        assertEquals(fields.length, 40);
         assertEquals(fields[0], "TARGET");
         assertEquals(fields[1], "42");
         assertEquals(fields[2], "481");
@@ -75,5 +75,23 @@ public class PriorityActionDiagnosticsTest {
         assertEquals(fields[24], "0");
         assertEquals(fields[25], "DECISION");
         assertEquals(fields[26], "true");
+    }
+
+    @Test
+    public void xRecordsSeparateRawBoundsFromNeutralCandidateSummary() {
+        final String row = PriorityActionDiagnostics.formatXRecord("X_VALUE", 42L, 481L, 1,
+                PriorityActionKind.CAST_SPELL, "42:Invoke the Firemind", true, 3, "MAIN1", "Ada", "Ada",
+                1, 123L, 0, Integer.MAX_VALUE, 0, 0, XDecisionProvider.Status.DECISION, null);
+
+        final String[] fields = row.split(",", -1);
+        assertEquals(fields.length, 40);
+        assertEquals(fields[0], "X_VALUE");
+        assertEquals(fields[6], "X_VALUE");
+        assertEquals(fields[33], "0");
+        assertEquals(fields[34], Integer.toString(Integer.MAX_VALUE));
+        assertEquals(fields[35], "0");
+        assertEquals(fields[36], "0");
+        assertEquals(fields[37], "DECISION");
+        assertEquals(fields[39], "X");
     }
 }

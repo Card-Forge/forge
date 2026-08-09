@@ -143,6 +143,52 @@ public class CostAdjustmentPreviewTest extends AITest {
         assertEquals(preview.getAdjustedManaCost().toManaCost(), actualAdjustedMana(ability, player));
     }
 
+    @Test
+    public void fixedReductionAllowanceIsDomainWideRatherThanAppliedAtOneX() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = spell(addCardToZone("Invoke the Firemind", player, ZoneType.Hand));
+        invoke.setActivatingPlayer(player);
+        addCard("Goblin Electromancer", player);
+
+        final CostAdjustmentPreview atZero = CostAdjustment.preview(invoke.getPayCosts(), invoke, player,
+                false, 0, invoke.getXColor());
+        final CostAdjustmentPreview atFive = CostAdjustment.preview(invoke.getPayCosts(), invoke, player,
+                false, 5, invoke.getXColor());
+
+        assertEquals(atZero.getMaximumGenericReductionAllowance(), 1L);
+        assertEquals(atFive.getMaximumGenericReductionAllowance(), 1L);
+    }
+
+    @Test
+    public void fixedCostIncreaseDoesNotCreateReductionAllowance() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility bolt = spell(addCardToZone("Lightning Bolt", player, ZoneType.Hand));
+        bolt.setActivatingPlayer(player);
+        addCard("Thorn of Amethyst", player);
+
+        final CostAdjustmentPreview preview = CostAdjustment.preview(bolt.getPayCosts(), bolt, player, false);
+
+        assertEquals(preview.getMaximumGenericReductionAllowance(), 0L);
+    }
+
+    @Test
+    public void reductionChoiceDoesNotExposeAnUnderstatedAllowance() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final SpellAbility invoke = spell(addCardToZone("Invoke the Firemind", player, ZoneType.Hand));
+        invoke.setActivatingPlayer(player);
+        addCard("Goblin Electromancer", player);
+        addCard("Goblin Electromancer", player);
+
+        final CostAdjustmentPreview preview = CostAdjustment.preview(invoke.getPayCosts(), invoke, player,
+                false, 0, invoke.getXColor());
+
+        assertEquals(preview.getStatus(), CostAdjustmentPreview.Status.CHOICE_REQUIRED);
+        assertFalse(preview.hasMaximumGenericReductionAllowance());
+    }
+
     private static ManaCost manaCost(final SpellAbility ability) {
         return ability.getPayCosts().getCostMana().getManaCostFor(ability);
     }
