@@ -22,6 +22,7 @@ Advisor:Advisors
 Aetherborn:Aetherborn
 Alien:Aliens
 Ally:Allies
+Andorian:Andorians
 Angel:Angels
 Antelope:Antelopes
 Ape:Apes
