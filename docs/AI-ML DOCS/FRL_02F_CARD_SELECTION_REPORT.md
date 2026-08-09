@@ -113,6 +113,17 @@ Thus exact-two selection has no subset enumeration and no trailing DONE request.
 `DONE` plus a selectable card is strategic. `min = 0, max = 0` completes immediately, while an empty
 `min = 0, max > 0` domain produces one forced DONE request.
 
+### Terminal session lifecycle
+
+Each session has at most one outstanding synthetic request. `generateNext` first returns the stored terminal
+result for a completed session; while a request is outstanding it instead returns
+`STALE_SELECTION / REQUEST_OUTSTANDING` before allocating a step index or continuation subdecision index.
+
+On a legal `DONE`, and when `SELECT_CARD` reaches `max`, the provider consumes the active request, snapshots the
+completed `CardCollection`, marks the session terminal, and returns `COMPLETE`. Reapplying an old request then
+fails request ownership. Repeated `generateNext` calls return the terminal result without reopening the callback,
+allocating a new request, or consuming another continuation index.
+
 ## Completion and mutation safety
 
 Applying `SELECT_CARD` only appends a stable identity to private session state. It does not remove a card from
@@ -220,7 +231,7 @@ No prerequisite blocker was encountered.
 The complete focused FRL decision suite passed after the final implementation changes:
 
 ```text
-163 tests, 0 failures, 0 errors, 0 skipped
+166 tests, 0 failures, 0 errors, 0 skipped
 ```
 
 The dedicated final Forge discard-path regression also passed (`5` integration tests total). A second run with
@@ -233,7 +244,8 @@ BUILD SUCCESS
 ```
 
 `git diff --check` passed. Tests cover the real Izzet script, exact-two construction, duplicate names, no partial
-mutation, no repeat selection, deterministic identities/order, forced and DONE semantics, invalid domains,
+mutation, terminal/session-request ownership, no repeat selection, deterministic identities/order, forced and DONE
+semantics, invalid domains,
 timestamp staleness, same-name non-substitution, chooser/affected separation, visible supersets, hidden rejection,
 normal Forge discard movement, null resolution continuation, shared selection identity, legacy cost separation,
 diagnostic fail-open behavior, and generation instrumentation.

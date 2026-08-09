@@ -62,6 +62,9 @@ public class CardSelectionDecisionProviderTest extends AITest {
         assertEquals(complete.getSelectedCards().size(), 2);
         assertSame(complete.getSelectedCards().get(0), first);
         assertSame(complete.getSelectedCards().get(1), second);
+        assertTrue(start.getSession().isCompleted());
+        assertEquals(provider.generateNext(start.getSession(), null).getStatus(),
+                CardSelectionDecisionProvider.Status.COMPLETE);
     }
 
     @Test
@@ -109,6 +112,67 @@ public class CardSelectionDecisionProviderTest extends AITest {
         final CardSelectionDecisionProvider.Generation zero = provider.generateNext(zeroStart.getSession(), null);
         assertEquals(zero.getStatus(), CardSelectionDecisionProvider.Status.COMPLETE);
         assertTrue(zero.getSelectedCards().isEmpty());
+        assertTrue(zeroStart.getSession().isCompleted());
+        assertEquals(provider.generateNext(zeroStart.getSession(), null).getStatus(),
+                CardSelectionDecisionProvider.Status.COMPLETE);
+    }
+
+    @Test
+    public void doneTerminatesTheSessionAndCannotBeAppliedTwice() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final SpellAbility source = spell(addCardToZone("Izzet Charm", chooser, ZoneType.Hand));
+        source.setActivatingPlayer(chooser);
+        final Card first = addCardToZone("Island", chooser, ZoneType.Hand);
+        final Card second = addCardToZone("Mountain", chooser, ZoneType.Hand);
+        final CardCollection valid = new CardCollection(List.of(first, second));
+        final ActionContinuation continuation = new ActionContinuation(93L,
+                PriorityActionKind.CAST_SPELL, "selection");
+        final CardSelectionDecisionProvider.SessionStart start = provider.beginSession(chooser, chooser, source,
+                valid, 0, 2, valid);
+        final CardSelectionDecisionProvider.Generation initial = provider.generateNext(start.getSession(), continuation);
+        final LegalCandidate done = initial.getRequest().getCandidates().stream()
+                .filter(candidate -> candidate.getCardSelectionKind() == CardSelectionCandidateKind.DONE)
+                .findFirst().orElseThrow();
+
+        final CardSelectionDecisionProvider.Generation complete = provider.apply(initial.getRequest(), done);
+        final CardSelectionDecisionProvider.Generation afterDone = provider.generateNext(start.getSession(), continuation);
+        final CardSelectionDecisionProvider.Generation reapplied = provider.apply(initial.getRequest(), done);
+
+        assertEquals(complete.getStatus(), CardSelectionDecisionProvider.Status.COMPLETE);
+        assertTrue(start.getSession().isCompleted());
+        assertEquals(afterDone.getStatus(), CardSelectionDecisionProvider.Status.COMPLETE);
+        assertNull(afterDone.getRequest());
+        assertEquals(continuation.nextSubdecisionIndex(), 2);
+        assertEquals(reapplied.getStatus(), CardSelectionDecisionProvider.Status.STALE_SELECTION);
+        assertEquals(reapplied.getReason(), CardSelectionDecisionProvider.Reason.REQUEST_OWNERSHIP);
+    }
+
+    @Test
+    public void secondGenerationIsRejectedWhileTheFirstRequestIsOutstanding() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final SpellAbility source = spell(addCardToZone("Izzet Charm", chooser, ZoneType.Hand));
+        source.setActivatingPlayer(chooser);
+        final Card first = addCardToZone("Island", chooser, ZoneType.Hand);
+        final Card second = addCardToZone("Mountain", chooser, ZoneType.Hand);
+        final CardCollection valid = new CardCollection(List.of(first, second));
+        final ActionContinuation continuation = new ActionContinuation(92L,
+                PriorityActionKind.CAST_SPELL, "selection");
+        final CardSelectionDecisionProvider.SessionStart start = provider.beginSession(chooser, chooser, source,
+                valid, 2, 2, valid);
+        final CardSelectionDecisionProvider.Generation initial = provider.generateNext(start.getSession(), continuation);
+        final CardSelectionDecisionProvider.Generation duplicate = provider.generateNext(start.getSession(), continuation);
+
+        assertEquals(initial.getRequest().getCardSelectionContext().getSelectionStepIndex(), 0);
+        assertEquals(initial.getRequest().getCardSelectionContext().getActionSubdecisionIndex(), Integer.valueOf(1));
+        assertEquals(duplicate.getStatus(), CardSelectionDecisionProvider.Status.STALE_SELECTION);
+        assertEquals(duplicate.getReason(), CardSelectionDecisionProvider.Reason.REQUEST_OUTSTANDING);
+        assertNull(duplicate.getRequest());
+        final DecisionRequest afterApply = provider.apply(initial.getRequest(), candidateFor(initial.getRequest(), first))
+                .getRequest();
+        assertEquals(afterApply.getCardSelectionContext().getSelectionStepIndex(), 1);
+        assertEquals(afterApply.getCardSelectionContext().getActionSubdecisionIndex(), Integer.valueOf(2));
     }
 
     @Test

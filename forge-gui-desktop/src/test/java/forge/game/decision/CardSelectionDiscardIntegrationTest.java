@@ -55,6 +55,29 @@ public class CardSelectionDiscardIntegrationTest extends AITest {
     }
 
     @Test
+    public void optionalDiagnosticReplayCompletesThroughDoneWithoutChangingTheControllerResult() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final SpellAbility izzet = spell(addCardToZone("Izzet Charm", chooser, ZoneType.Hand));
+        izzet.setActivatingPlayer(chooser);
+        final SpellAbility discard = izzet.getAdditionalAbilityList("Choices").get(2).getSubAbility();
+        final Card selectable = addCardToZone("Island", chooser, ZoneType.Hand);
+        final CardCollection valid = new CardCollection(selectable);
+        final CardCollection aiResult = new CardCollection();
+
+        final DiscardCardSelectionAdapter.Capture capture = adapter.begin(chooser, chooser, discard,
+                valid, 0, 1, valid);
+        final DiscardCardSelectionAdapter.Replay replay = adapter.replay(capture, aiResult);
+
+        assertEquals(replay.getStatus(), DiscardCardSelectionAdapter.ReplayStatus.COMPLETE);
+        assertEquals(replay.getSteps().size(), 1);
+        assertEquals(replay.getSteps().get(0).getRequest().getCandidates().size(), 2);
+        assertTrue(replay.getCompletedCards().isEmpty());
+        assertTrue(aiResult.isEmpty());
+        assertTrue(chooser.getCardsIn(ZoneType.Hand).contains(selectable));
+    }
+
+    @Test
     public void v0AdapterRejectsUnverifiedDiscardShapesWithoutAClaimedSession() {
         final Game game = initAndCreateGame();
         final Player chooser = game.getPlayers().get(1);

@@ -13,6 +13,8 @@ import java.util.Map;
 
 /** Callback-local state for composing atomic card choices without mutating Forge game state. */
 public final class CardSelectionSession {
+    private static final long NO_ACTIVE_REQUEST = -1L;
+
     private final long selectionSessionId;
     private final int gameId;
     private final Player chooser;
@@ -25,7 +27,9 @@ public final class CardSelectionSession {
     private final List<CardSelectionCard> visibleCards;
     private final List<CardSelectionCard> selectedIdentities = new ArrayList<>();
     private int nextStepIndex;
-    private long activeRequestId = -1;
+    private long activeRequestId = NO_ACTIVE_REQUEST;
+    private boolean completed;
+    private CardCollection completedCards;
 
     CardSelectionSession(final long selectionSessionId, final Player chooser, final Player affectedPlayer,
             final SpellAbility source, final int min, final int max, final Iterable<Card> validCards,
@@ -141,11 +145,37 @@ public final class CardSelectionSession {
         return nextStepIndex++;
     }
 
+    boolean isCompleted() {
+        return completed;
+    }
+
+    boolean hasActiveRequest() {
+        return activeRequestId != NO_ACTIVE_REQUEST;
+    }
+
     void setActiveRequestId(final long requestId) {
         activeRequestId = requestId;
     }
 
     boolean ownsActiveRequest(final long requestId) {
         return activeRequestId == requestId;
+    }
+
+    boolean consumeActiveRequest(final long requestId) {
+        if (!ownsActiveRequest(requestId)) {
+            return false;
+        }
+        activeRequestId = NO_ACTIVE_REQUEST;
+        return true;
+    }
+
+    void markCompleted(final CardCollection cards) {
+        completedCards = new CardCollection(cards);
+        completed = true;
+        activeRequestId = NO_ACTIVE_REQUEST;
+    }
+
+    CardCollection getCompletedCards() {
+        return completedCards;
     }
 }

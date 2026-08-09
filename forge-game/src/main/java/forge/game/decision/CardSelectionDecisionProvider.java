@@ -31,6 +31,7 @@ public final class CardSelectionDecisionProvider {
         HIDDEN_SELECTABLE_CARD,
         LIVE_STATE_CHANGED,
         REQUEST_OWNERSHIP,
+        REQUEST_OUTSTANDING,
         ILLEGAL_CANDIDATE
     }
 
@@ -74,6 +75,13 @@ public final class CardSelectionDecisionProvider {
     public Generation generateNext(final CardSelectionSession session, final ActionContinuation continuation) {
         Objects.requireNonNull(session);
         final long startedAtNanos = System.nanoTime();
+        if (session.isCompleted()) {
+            return Generation.complete(session.getCompletedCards(), System.nanoTime() - startedAtNanos);
+        }
+        if (session.hasActiveRequest()) {
+            return Generation.failure(Status.STALE_SELECTION, Reason.REQUEST_OUTSTANDING,
+                    System.nanoTime() - startedAtNanos);
+        }
         if (!session.revalidate()) {
             return Generation.failure(Status.STALE_SELECTION, Reason.LIVE_STATE_CHANGED,
                     System.nanoTime() - startedAtNanos);
@@ -129,6 +137,7 @@ public final class CardSelectionDecisionProvider {
             if (session.getSelectedIdentities().size() < session.getMin()) {
                 return Generation.failure(Status.STALE_SELECTION, Reason.ILLEGAL_CANDIDATE, 0L);
             }
+            session.consumeActiveRequest(request.getRequestId());
             return complete(session, System.nanoTime());
         }
         if (candidate.getCardSelectionKind() != CardSelectionCandidateKind.SELECT_CARD
@@ -136,15 +145,23 @@ public final class CardSelectionDecisionProvider {
                 || !session.select(candidate.getCardSelectionCard())) {
             return Generation.failure(Status.STALE_SELECTION, Reason.ILLEGAL_CANDIDATE, 0L);
         }
+        session.consumeActiveRequest(request.getRequestId());
+        if (session.getSelectedIdentities().size() == session.getMax()) {
+            return complete(session, System.nanoTime());
+        }
         return generateNext(session, context.getContinuation());
     }
 
     private static Generation complete(final CardSelectionSession session, final long startedAtNanos) {
+        if (session.isCompleted()) {
+            return Generation.complete(session.getCompletedCards(), System.nanoTime() - startedAtNanos);
+        }
         final CardCollection selected = session.selectedLiveCards();
         if (selected == null) {
             return Generation.failure(Status.STALE_SELECTION, Reason.LIVE_STATE_CHANGED,
                     System.nanoTime() - startedAtNanos);
         }
+        session.markCompleted(selected);
         return Generation.complete(selected, System.nanoTime() - startedAtNanos);
     }
 
