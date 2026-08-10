@@ -14,27 +14,29 @@ Architecture authority: `docs/AI-ML DOCS/ML_STRATEGY.md`
 
 Determinism and safety authority: `docs/AI-ML DOCS/FRL_02K0_DETERMINISM_GATE_REPORT.md`
 
-Primary recommendation: `NO_SAFE_V0_YET`
+Primary recommendation after A2: `NO_SAFE_V0_YET`
 
 The cleanest future candidate is `OPTIONAL_TRIGGER_NO_COST`, but it is not ready for implementation. Its callback semantics are clean only after the engine-owned seam, trigger provenance, public triggering-object context, static/delayed exclusions, and fail-closed visibility rules are specified and tested.
 
 ## 0. Checkpoint and scope
 
-The requested checkpoint was reverified before the audit:
+The original A1 checkpoint and the A2 rebase are both retained here. The A1 audit started from the K0 base; A2 rebased the unpushed audit branch onto the docs-only `origin/master` update without changing the other worktrees.
 
 | Check | Result |
 |---|---|
 | Expected branch | `frl/02k-confirmation-boundary` |
 | Actual branch | `frl/02k-confirmation-boundary` |
-| Expected audit base / HEAD | `c8835a22bf3de062980c368b4a9d55a1fc6d47b4` |
-| Actual HEAD | `c8835a22bf3de062980c368b4a9d55a1fc6d47b4` |
+| A1 audit base | `c8835a22bf3de062980c368b4a9d55a1fc6d47b4` |
+| A2 pre-rebase HEAD | `b4d6f4abf578d8727b681c09ed83b1edcf2cab92` |
+| A2 `origin/master` | `266f44a7cae8f9cc7379a8429a137c5fc7c483bb` |
+| A2 rebased HEAD before new work | `7c2ae5e2770832d7c21f1a9f3b58669d105d6681` |
 | Starting worktree | clean |
 | Starting `git diff --check` | pass |
 | Production implementation changes at start | none |
 
-`origin/master` no longer equals the historical checkpoint: it is `266f44a7cae8f9cc7379a8429a137c5fc7c483bb`, one separate docs-only commit (`docs: update ML strategy`) ahead of `c8835a22...`. That commit changes only `docs/AI-ML DOCS/ML_STRATEGY.md`. The audit worktree was not rebased, reset, or modified to absorb that remote drift. The original `C:\forgeAI` checkout and `C:\forgeAI-determinism-gate` worktree were not touched.
+`origin/master` no longer equals the historical checkpoint: it is `266f44a7cae8f9cc7379a8429a137c5fc7c483bb`, one separate docs-only commit (`docs: update ML strategy`) ahead of `c8835a22...`. That commit changes only `docs/AI-ML DOCS/ML_STRATEGY.md`. A1 intentionally did not absorb that remote drift; A2 rebased the isolated audit branch onto the exact docs-only commit. The original `C:\forgeAI` checkout and `C:\forgeAI-determinism-gate` worktree were not touched.
 
-This audit does not add `DecisionType.CONFIRMATION`, `DecisionRequest.CONFIRMATION`, `LegalCandidate`, `ConfirmationContext`, `ConfirmationDecisionProvider`, `ConfirmationAdapter`, or any other production boundary. The only repository source addition is the focused test-only evidence fixture listed in the verification section.
+This audit does not add `DecisionType.CONFIRMATION`, `DecisionRequest.CONFIRMATION`, `LegalCandidate`, `ConfirmationContext`, `ConfirmationDecisionProvider`, `ConfirmationAdapter`, or any other production boundary. A2 adds only focused test-only evidence; production implementation remains absent.
 
 Evidence labels used below:
 
@@ -582,7 +584,10 @@ The post-report verification completed as follows:
 
 | Gate | Result |
 |---|---|
-| Expanded FRL-02K0 decision/determinism selection | 287 tests: 287 passed, 0 failed, 0 errors, 0 skipped; module split `forge-game=12`, `forge-ai=20`, `forge-gui-desktop=255` |
+| K0/base regression before the audit fixture | 286 tests: 286 passed, 0 failed, 0 errors, 0 skipped |
+| Pre-A2 expanded audit selection | 287 tests: 287 passed, 0 failed, 0 errors, 0 skipped; module split `forge-game=12`, `forge-ai=20`, `forge-gui-desktop=255` |
+| Post-A2 expanded selection | 288 tests: 288 passed, 0 failed, 0 errors, 0 skipped; one additional A2 test selection |
+| Focused A2 boundary plus trigger-life gate | 4 tests: 4 passed, 0 failed, 0 errors, 0 skipped |
 | `FullGameCollectorNeutralityTest` | 1 passed, 0 failed/errors/skipped |
 | `WorkerIsolationSmokeTest` | 1 passed, 0 failed/errors/skipped |
 | `mvn -pl forge-gui-desktop -am -DskipTests package` | `BUILD SUCCESS`; assembled jar and `forge.exe` created |
@@ -708,3 +713,288 @@ The normal mandatory-trigger path is engine-owned. The no-cost optional trigger 
 This report records an architecture decision only.
 
 **STOP: do not implement the selected adapter yet. Wait for architecture review.**
+
+## 23. FRL-02K-A2 — authority correction and optional-trigger closure
+
+### 23.1 Authority correction
+
+`ML_STRATEGY.md` is now Revision 10. The strategy records the following separate states:
+
+| Milestone | State |
+|---|---|
+| `FRL-02K0` determinism/safety gate | `PASS` |
+| `FRL-02K` attribution audit | `PASS` |
+| `FRL-02K` semantic adapter closure | `OPEN` |
+| `FRL-02K` production implementation | `OPEN` |
+
+The strategy no longer says that CONFIRMATION is complete or that all boundaries are complete through CONFIRMATION. Its architecture statement is now that CONFIRMATION is not one homogeneous callback family: normal mandatory triggers are engine-owned and produce no request; optional no-cost normal triggers are the candidate future adapter; nonzero-cost optional triggers belong to the cost/payment lifecycle; and action, bid, replacement, static-application, and binary callbacks remain separate semantic families.
+
+The roadmap now sequences `FRL-02K0 PASS` → `FRL-02K attribution audit PASS` → `FRL-02K semantic adapter closure OPEN` → `CONFIRMATION implementation` → `ORDER Attribution Audit` → modern `DAMAGE_ASSIGNMENT` → `Runtime Gap Audit` → `Gap Closure / PAYMENT` → `Zero-Unsupported Gate` → `RandomLegalPolicy`. The Revision-9 discoveries about ORDER, the modern DAMAGE_ASSIGNMENT information barrier, PAYMENT being PARTIAL, DECISION_TRACE_V2 being closed, teacher-label coverage being PARTIAL, and the zero-unsupported gate are preserved.
+
+### 23.2 Evidence-count correction
+
+The labels are deliberately separated:
+
+| Evidence label | Test count | Meaning |
+|---|---:|---|
+| K0/base regression | 286 | exact pre-audit baseline |
+| pre-A2 audit branch | 287 | K0 plus the original A1 boundary fixture |
+| post-A2 expanded selection | 288 | pre-A2 selection plus the A2 context/neutrality fixture |
+
+`287` is not the exact-master K0 baseline. No passing evidence was changed; only its label was corrected.
+
+### 23.3 Exact reconciliation of all 26 reactive trigger callbacks
+
+The final fresh-JVM reactive run used the packaged artifact and the exact controlled workload (`Izzet Guild Kit` vs `Dimir Guild Kit`, seed `20260810`, ten games). The audit-only JDI probe reported:
+
+```text
+RESOLVE_OCCURRENCES=26
+CALLBACK_OCCURRENCES=26
+HELPER_OCCURRENCES=0
+captureError=null for every occurrence
+```
+
+All 26 had immediate caller `WrappedAbility.resolve`, `wrapper.isMandatory() == false`, `static == false`, and `spawningAbility == false`. `continuation=ABSENT` in the metrics-enabled run for every occurrence. The strict v0 classifier treats `intrinsic == false` as untrusted generated/copied/granted provenance even when the visible object shape is otherwise simple.
+
+The exact bucket sum is:
+
+| Bucket | Count | Agent-required? | RandomLegalPolicy blocker? | Reason |
+|---|---:|---|---|---|
+| `NORMAL_OPTIONAL_NO_COST_PUBLIC` | 0 | — | — | no occurrence satisfies both public-context and trusted intrinsic-provenance admission |
+| `NORMAL_OPTIONAL_NO_COST_CONTEXT_UNSUPPORTED` | 22 | Yes, if the trigger remains in the external policy slice | Yes | `CardLKI` and/or opaque `SpellAbility`/collection context cannot be projected safely |
+| `COST_BEARING_OPTIONAL` | 1 | Not as generic confirmation | Yes, as payment coverage | `PayLife<3>` belongs to the later payment decision, not a duplicate accept/decline request |
+| `STATIC_OPTIONAL` | 0 | — | — | none reached `confirmTrigger` in this workload; static uses another lifecycle |
+| `DELAYED_OPTIONAL` | 0 | — | — | no delayed marker reached the seam |
+| `GENERATED_OR_COPIED_OPTIONAL` | 3 | Yes if admitted at all; v0 rejects | Yes | visible `DamageDone` objects, but `intrinsic == false` makes provenance fail closed |
+| `HIDDEN_SOURCE` | 0 | — | — | no hidden source was observed in these 26 entries |
+| `HIDDEN_TRIGGERING_OBJECT` | 0 | — | — | no object was classified as hidden; LKI/opaque objects are in the context-unsupported bucket |
+| `OTHER` | 0 | — | — | no remainder |
+| **Total** | **26** |  |  | **invariant holds** |
+
+Therefore the narrow correct optional-no-cost adapter coverage is **`0 / 26`** for this controlled run. The 22 context-unsupported and 3 nonintrinsic occurrences remain unresolved external-policy cases; the one cost-bearing occurrence is a separate PAYMENT blocker. No mandatory trigger was among these 26, so no engine-owned mandatory case is counted as a RandomLegalPolicy blocker.
+
+The per-occurrence record below exports only public source categories, public seat identities, safe type categories, and rejection reasons. Hidden card/object values are intentionally not copied into the report.
+
+| # | Game / turn / phase | Acting / decider | Source (zone, visibility) | Mode / API | Optional / wrapper / decider | Provenance / definition candidate | Cost | Triggering-object categories | Continuation | Native result | Bucket |
+|---:|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | 1 / 10 / MAIN2 | seat 1 / seat 1 | Blood Operative (battlefield, public) | ChangesZone / ChangeZone | true / false / true | intrinsic / ChangesZone#0 | absent | Card + CardLKI (reject LKI) | absent | true | context unsupported |
+| 2 | 1 / 16 / MAIN1 | seat 1 / seat 1 | Blood Operative (graveyard, public) | Surveil / ChangeZone | true / false / false | intrinsic / Surveil#1 | `PayLife<3>` | public Player | absent | false | cost-bearing |
+| 3 | 1 / 16 / COMBAT_DAMAGE | seat 1 / seat 1 | Lazav, Dimir Mastermind (battlefield, public) | ChangesZone / Clone | true / false / true | intrinsic / Clone#0 | absent | Card + CardLKI (reject LKI) | absent | true | context unsupported |
+| 4 | 2 / 12 / COMBAT_DAMAGE | seat 1 / seat 1 | Nightveil Specter (battlefield, public) | DamageDone / Play | true / false / true | nonintrinsic / DamageDone#1 | absent | public Player/Card + numeric value | absent | true | generated/copied |
+| 5 | 2 / 13 / MAIN1 | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | false | context unsupported |
+| 6 | 2 / 15 / MAIN1 | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | false | context unsupported |
+| 7 | 2 / 16 / MAIN2 | seat 1 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | true | context unsupported |
+| 8 | 2 / 16 / MAIN2 | seat 1 / seat 1 | Blood Operative (graveyard, public) | ChangesZone / ChangeZone | true / false / true | intrinsic / ChangesZone#0 | absent | Card + CardLKI (reject LKI) | absent | true | context unsupported |
+| 9 | 2 / 17 / MAIN2 | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | false | context unsupported |
+| 10 | 3 / 25 / COMBAT_DAMAGE | seat 1 / seat 1 | Tibor and Lumia (battlefield, public) | DamageDone / Play | true / false / true | nonintrinsic / DamageDone#2 | absent | public Player/Card + numeric value | absent | true | generated/copied |
+| 11 | 3 / 29 / COMBAT_DAMAGE | seat 1 / seat 1 | Tibor and Lumia (battlefield, public) | DamageDone / Play | true / false / true | nonintrinsic / DamageDone#2 | absent | public Player/Card + numeric value | absent | true | generated/copied |
+| 12 | 4 / 9 / MAIN1 | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | false | context unsupported |
+| 13 | 4 / 15 / MAIN2 | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | false | context unsupported |
+| 14 | 4 / 15 / MAIN2 | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | false | context unsupported |
+| 15 | 4 / 15 / MAIN2 | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | false | context unsupported |
+| 16 | 4 / 15 / MAIN2 | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | false | context unsupported |
+| 17 | 4 / 17 / UPKEEP | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | true | context unsupported |
+| 18 | 4 / 17 / UPKEEP | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | true | context unsupported |
+| 19 | 4 / 17 / UPKEEP | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | true | context unsupported |
+| 20 | 4 / 17 / UPKEEP | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | true | context unsupported |
+| 21 | 5 / 21 / UPKEEP | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | true | context unsupported |
+| 22 | 5 / 23 / DRAW | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | false | context unsupported |
+| 23 | 5 / 23 / MAIN1 | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | false | context unsupported |
+| 24 | 5 / 27 / DRAW | seat 0 / seat 0 | Gelectrode (battlefield, public) | SpellCast / Untap | true / false / true | intrinsic / SpellCast#0 | absent | public Player/Card + CardLKI + opaque ability/collection | absent | false | context unsupported |
+| 25 | 6 / 14 / MAIN1 | seat 1 / seat 1 | Lazav, Dimir Mastermind (battlefield, public) | ChangesZone / Clone | true / false / true | intrinsic / Clone#0 | absent | Card + CardLKI (reject LKI) | absent | true | context unsupported |
+| 26 | 6 / 14 / MAIN1 | seat 1 / seat 1 | Lazav, Dimir Mastermind (battlefield, public) | ChangesZone / Clone | true / false / true | intrinsic / Clone#0 | absent | Card + CardLKI (reject LKI) | absent | true | context unsupported |
+
+The table's `optional / wrapper / decider` columns are, in order, `isOptionalTrigger / isMandatory / OptionalDecider`. `acting` is the current Forge phase player; `decider` is the callback controller. This distinction matters in occurrence 7, where a trigger controlled by seat 0 resolves while seat 1 is the active phase player.
+
+### 23.4 Stable trigger-definition identity
+
+`Trigger.getId()` remains rejected as canonical training identity. Its allocation is object-lifecycle dependent, reset/copy behavior is not a semantic definition contract, and generated/delayed/copy paths can preserve or recreate IDs in ways that are not cross-run provenance. `hashCode()`, `toString()`, localized `TriggerDescription`, and Java object identity are also rejected.
+
+The narrow identity needed for a future v0 candidate is a definition key with these components:
+
+```text
+host-card semantic definition (set code + canonical card name)
++ card-state name
++ ordinal in the ordered intrinsic trigger-definition collection
++ trigger mode
++ intrinsic/static flags
++ sorted normalized original parameter key/value pairs,
+   excluding localized/descriptive TriggerDescription
+```
+
+This is a semantic definition identity, not an instance identity. The audit probe captured the ordinal and normalized parameter-key set from the source trigger and the focused fixture confirmed identical ordered definition keys for two independent `Luminous Angel` instances. Two fresh one-game JVM probes with the same seed produced identical safe occurrence output (`SHA-256 31549D3D0C15FFA6C08D79615D60CD15B390EB492F4EBF06A9ED4226F2610D` in both runs), including definition ordinals and modes. That is sufficient evidence for the admitted ordinary intrinsic slice, not a universal proof for generated or granted provenance. The future adapter must fail closed when the host/state/ordinal/normalized definition cannot be established.
+
+### 23.5 Trace-local occurrence identity
+
+Definition identity does not identify a firing. The future seam therefore needs a trace-local monotonic `occurrenceIndex` allocated in engine occurrence order:
+
+```text
+occurrenceIndex = 1, 2, 3, ... within one decision trace/session
+```
+
+It distinguishes repeated firings of the same source and definition, including different public triggering objects. It is not a semantic candidate ID and must not use PID, wall-clock time, random values, `Trigger.getId()`, or Java identity. The final ten-game probe allocated exactly 26 ordered occurrences; the two fresh same-seed one-game JVM outputs were byte-identical, proving the proposed ordering for the focused controlled fixture while preserving a fail-closed boundary for unsupported provenance.
+
+### 23.6 Triggering-object context
+
+The observed `AbilityKey` union was:
+
+```text
+Activator, Card, CardLKI, Cause, CurrentCastSpells,
+CurrentStormCount, DamageAmount, DefendingPlayer, LifeAmount,
+Player, Source, SpellAbility, SpellAbilityTargets, Target
+```
+
+The context audit classifies these as follows:
+
+| AbilityKey / runtime category | Decision relevance in observed slice | Public encoding allowed for v0 | Result |
+|---|---|---|---|
+| `Player` / `Activator` / `Target` / `DefendingPlayer` → `Player` | can select controller, target, or opponent | public seat/player identity | allowed when Forge visibility says public |
+| `Card` / `Source` → visible `Card` | can distinguish the source or public spell/card | public card definition plus a trace-local public instance identity; the probe's `(card id, game timestamp)` is diagnostic only, not canonical training identity | allowed only after visibility and provenance checks |
+| `CardLKI` | carries last-known-information/runtime provenance, and may not be safely reconstructible as a public semantic object | none; do not export its identity | fail closed |
+| `SpellAbility` | may contain targets, choices, and hidden source information | none; do not expose the runtime object | fail closed |
+| `SpellAbilityTargets` / `CurrentCastSpells` → collection/runtime objects | potentially decision-relevant but not a stable neutral value in the observed callback | none; no universal collection serialization | fail closed |
+| `DamageAmount`, `LifeAmount`, `CurrentStormCount` → numeric values | relevant only if the admitted trigger definition actually branches on them | typed bounded scalar, only when proven decision-relevant and public | not sufficient to admit the surrounding occurrence |
+| `Cause == null` | no value to encode | absent | allowed as absence |
+
+The future public DTO must contain typed neutral records only; it must not contain `Card`, `Player`, `SpellAbility`, `Trigger`, `GameEntity`, or LKI objects. The A2 focused test demonstrates anti-aliasing: the same public source and definition combined with two different public triggering players produce distinct conceptual contexts. It also compares a state fingerprint before/after projection and records zero audit-RNG draws. The test's card id/timestamp string is only a local diagnostic encoding; a production/training identity would need an independently approved public instance identity or a trace-local public ordinal.
+
+There were no strict `NORMAL_OPTIONAL_NO_COST_PUBLIC` occurrences in the 26-run after provenance filtering. The three apparently public `DamageDone` occurrences are deliberately not admitted because `intrinsic == false`; the test does not silently turn public object shape into trusted provenance.
+
+### 23.7 Hidden-information boundary
+
+Visibility uses Forge's existing view semantics (`CardView.canBeShownTo` and `canFaceDownBeShownTo`) rather than a new audit-local rule. A v0 source/object is safe only when the decider can legitimately see it and its semantic identity is public. Ordinary visible battlefield, graveyard, or stack cards can be candidates after the definition/provenance checks; the decider and public triggering players can be represented by public seat identity.
+
+The focused test proves fail-closed behavior for an opponent library card, an opponent face-down source, and a hidden triggering-card position. Their identity is not written into the neutral output. Opponent hand/library cards, face-down cards, hidden spell-ability sources, hidden LKI, and any object whose visibility cannot be proven are unsupported. Emblems, immutable effects, command-zone objects, and delayed/generated sources are also outside this v0 unless a future seam proves a public stable source and definition; source-card visibility alone is not enough.
+
+### 23.8 ActionContinuation
+
+The direct continuation checks are now closed for ordinary trigger resolution:
+
+```text
+metrics-enabled ten-game JDI run: continuation PRESENT = 0 / 26
+focused accepted optional trigger: active continuation calls = 0
+focused declined optional trigger: active continuation calls = 0
+non-null ordinary trigger continuations: 0
+```
+
+The no-metrics repeat probe reports the diagnostic store as disabled, which is not an active continuation; it never reports `PRESENT`. The future trigger request must not carry priority-action continuation metadata. A non-null continuation at this seam remains an integrity warning and blocks v0 until explained.
+
+### 23.9 Exact admission predicate
+
+The future `OPTIONAL_TRIGGER_NO_COST` classifier must run at the engine-owned seam immediately around `WrappedAbility.resolve` and admit only when every predicate is true:
+
+```text
+decider != null
+AND !wrapper.isMandatory()
+AND normal non-static stack-trigger lifecycle
+AND source is an ordinary publicly visible intrinsic host
+AND stable card-state/definition identity is available
+AND trigger occurrence index is available
+AND existing Forge classification says the trigger is optional
+AND no nonzero Cost parameter is present
+AND Cost=="0" is handled only according to the existing TriggerHandler branch order
+AND every decision-relevant triggering object has an approved public typed encoding
+AND no CardLKI, opaque SpellAbility/collection, hidden object, or unstable provenance exists
+AND ActionContinuation is absent
+```
+
+The predicate must reuse Forge's existing trigger classification; it must not create a second cost parser, inspect localized descriptions, consult AI heuristics, or export `AutoYieldStore` state. `Cost` absent, mandatory cost, `Cost == "0"`, and nonzero optional cost are not interchangeable: `OptionalDecider` is tested first, and the existing `TriggerHandler` branch order determines whether a zero-cost form is optional or mandatory. Nonzero cost is always excluded from this generic adapter.
+
+The exact cost cases are:
+
+| Forge shape | Existing classification used by the future predicate |
+|---|---|
+| Cost absent, no `OptionalDecider` | mandatory wrapper; no `confirmTrigger` request |
+| Cost present, parsed payment mandatory | mandatory wrapper; no `confirmTrigger` request |
+| `Cost == "0"`, no `OptionalDecider` | mandatory branch by the existing string/mandatory-cost check; no request |
+| `OptionalDecider` plus `Cost == "0"` | `OptionalDecider` branch wins first; optional trigger semantics remain, but the v0 predicate still requires the normal public/provenance/context checks |
+| nonzero `Cost` | optional cost-bearing path; exclude from generic confirmation and defer to PAYMENT |
+
+No new parser is introduced by A2.
+
+### 23.10 Excluded lifecycles and call-site contamination
+
+| Lifecycle / call site | A2 disposition | Reason |
+|---|---|---|
+| normal mandatory trigger | engine-owned; no request | `TriggerHandler` leaves `decider == null`; `WrappedAbility.resolve` calls no controller confirmation |
+| normal optional no-cost trigger | candidate only | direct boolean semantics are clean, but the 26 controlled occurrences had no admitted strict-v0 member |
+| nonzero-cost optional trigger | exclude; PAYMENT | `confirmTrigger` is procedural entry into cost handling; decline belongs to payment/cost mechanics |
+| `Cost == "0"` | follow existing branch order | do not infer rule optionality from the string alone |
+| static trigger | exclude | static paths use `playTrigger`, not ordinary stack `WrappedAbility.resolve` confirmation |
+| delayed/player-defined delayed | exclude by default | provenance and source identity are not yet stable/publicly complete |
+| generated/granted/copied/nonintrinsic | exclude by default | A2 observed three `intrinsic == false` public-shaped cases; provenance is not trusted |
+| hidden source/object | exclude | Forge visibility cannot prove a safe neutral identity |
+| `PlayerControllerAi.chooseContraptionsToCrank` | exclude structurally | it directly calls `confirmTrigger(new WrappedAbility(...))` and does not pass through the `WrappedAbility.resolve` admission seam |
+
+The `confirmTrigger` method itself is therefore not the instrumentation boundary. The authoritative future location is the engine-owned `WrappedAbility.resolve` branch around `decider.getController().confirmTrigger(this)`.
+
+### 23.11 Exactly-once seam proof
+
+The audit-only JDI harness captured prospective facts at the `WrappedAbility.resolve` call boundary, then captured the native boolean at the return line. In the ten-game run it observed 26 resolve entries, 26 callback entries, 26 native results, no helper entries, and no capture errors. The focused `Luminous Angel` fixture observed exactly one callback for acceptance and exactly one for decline, with the effect occurring only for `true`.
+
+This seam has one native callback and one result after the callback. The future adapter can therefore use:
+
+```text
+prospective request facts
+→ one native confirmTrigger callback
+→ observe the returned boolean
+```
+
+without a second `doTrigger`, result replay, target reset, RNG draw, or game-state mutation. A helper invocation cannot satisfy the admission predicate because the required `WrappedAbility.resolve` call frame is absent.
+
+### 23.12 Neutrality evidence
+
+The A2 context/visibility test passed with:
+
+```text
+ForgeStateFingerprint before == after
+DeterminismAuditRandom draw count = 0
+```
+
+for the public and rejected projections. The runtime JDI probe used getter-only observation and did not alter the workload; the fresh repeat outputs were identical. Exceptions in the prospective projection are treated as unsupported rather than converted into a request. This is evidence for the test-only classifier shape, not production adapter implementation.
+
+### 23.13 Controlled-v0 blocker ledger
+
+| Callback / lifecycle | Current controlled count | Classification for RandomLegalPolicy |
+|---|---:|---|
+| optional no-cost trigger | 26 raw; 0 admitted | `DEFERRED_BUT_BLOCKING` — strict context/provenance closure still has no admitted occurrence |
+| cost-bearing trigger | 1 raw | `OTHER_DECISION_TYPE` / `DEFERRED_BUT_BLOCKING` — PAYMENT owns the real decline path |
+| `confirmAction` | 8 reactive, 0 proactive | `DEFERRED_BUT_BLOCKING` — heterogeneous caller-owned modes |
+| `confirmPayment` | 0 / 0 | `DEFERRED_BUT_BLOCKING` if reached; not measured as current blocker |
+| `chooseBinary` | 2 / 0 | `OTHER_DECISION_TYPE` — domain-specific binary choices |
+| `payCostToPreventEffect` | 5 / 24 | `OTHER_DECISION_TYPE` / `DEFERRED_BUT_BLOCKING` — payment/prevention |
+| `confirmBidAction` | 0 / 0 | `NOT_REACHED`; separate BID family |
+| `confirmReplacementEffect` | 0 / 0 | `NOT_REACHED`; separate REPLACEMENT family |
+| `confirmStaticApplication` | 0 / 0 | `NOT_REACHED`; separate static/combat family |
+| `chooseFlipResult`, `payCostDuringRoll`, `payCombatCost` | 0 / 0 | `NOT_REACHED`; separate families |
+| mandatory normal triggers | not a callback count | `ENGINE_OWNED`; no RandomLegalPolicy blocker |
+
+The current confirmation-like RandomLegalPolicy blockers are therefore not solved globally by trigger analysis: 8 `confirmAction`, 2 `chooseBinary`, 5 reactive / 24 proactive prevention payments, the one cost-bearing trigger's payment path, and the unresolved strict optional-trigger context/provenance cases remain separate work.
+
+### 23.14 DECISION_TRACE_V2 compatibility
+
+No schema expansion is required. If a future closure admits an occurrence, the existing trace contract is sufficient:
+
+```text
+REQUEST: DecisionType.CONFIRMATION
+legalCandidates: [ACCEPT, DECLINE]
+RESULT: CHOSEN
+```
+
+The candidate order is stable (`ACCEPT`, then `DECLINE`). Mandatory triggers produce no request. No `DECISION_TRACE_V3` is proposed. A2 generated no production request and therefore does not add `DecisionType.CONFIRMATION`.
+
+### 23.15 A2 verdict
+
+The architecture closure conditions are not all satisfied for a production v0 adapter. The exact remaining blockers are:
+
+```text
+22 / 26: CardLKI and/or opaque runtime context cannot be publicly encoded safely
+3 / 26: visible object shape but intrinsic provenance is false/untrusted
+1 / 26: nonzero Cost belongs to PAYMENT, not generic confirmation
+```
+
+The mandatory-trigger, helper-contamination, ActionContinuation, exactly-once seam, visibility fail-closed, state-neutrality, RNG-neutrality, and DECISION_TRACE_V2 questions are answered, but the strict candidate coverage is still zero in the controlled workload.
+
+**A2 architecture verdict: `NO_SAFE_V0_YET`.**
+
+This remains an audit-only decision. Do not implement `DecisionType.CONFIRMATION`, `ConfirmationDecisionProvider`, or any production adapter until architecture review explicitly approves a narrower admitted trigger shape and its context contract.
