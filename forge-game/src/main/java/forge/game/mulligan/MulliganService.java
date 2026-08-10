@@ -8,6 +8,7 @@ import forge.MulliganDefs;
 import forge.StaticData;
 import forge.game.Game;
 import forge.game.GameType;
+import forge.game.decision.MulliganDiagnostics;
 import forge.game.player.Player;
 
 public class MulliganService {
@@ -21,9 +22,13 @@ public class MulliganService {
     }
 
     public void perform() {
-        initializeMulligans();
-        runPlayerMulligans();
-        runPostMulligans();
+        try {
+            initializeMulligans();
+            runPlayerMulligans();
+            runPostMulligans();
+        } finally {
+            MulliganDiagnostics.global().endMulliganProcess(game);
+        }
     }
 
     private void initializeMulligans() {
@@ -76,11 +81,16 @@ public class MulliganService {
 
                 Player p = mulligan.getPlayer();
 
-                boolean keep = !mulligan.canMulligan() ||
-                        p.getController().mulliganKeepHand(
-                                firstPlayer,
-                                mulligan.tuckCardsDuringMulligan()
-                        );
+                final boolean canMulligan = mulligan.canMulligan();
+                final boolean keep;
+                if (!canMulligan) {
+                    MulliganDiagnostics.global().recordForcedKeep(p, firstPlayer,
+                            mulligan.tuckCardsDuringMulligan());
+                    keep = true;
+                } else {
+                    keep = p.getController().mulliganKeepHand(firstPlayer,
+                            mulligan.tuckCardsDuringMulligan());
+                }
 
                 if (game.isGameOver()) {
                     // conceded during mulligan prompt

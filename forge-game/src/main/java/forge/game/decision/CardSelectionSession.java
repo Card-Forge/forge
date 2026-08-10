@@ -19,6 +19,7 @@ public final class CardSelectionSession {
     private final int gameId;
     private final Player chooser;
     private final Player affectedPlayer;
+    private final CardSelectionAdapter selectionAdapter;
     private final SpellAbility source;
     private final int min;
     private final int max;
@@ -32,12 +33,14 @@ public final class CardSelectionSession {
     private CardCollection completedCards;
 
     CardSelectionSession(final long selectionSessionId, final Player chooser, final Player affectedPlayer,
-            final SpellAbility source, final int min, final int max, final Iterable<Card> validCards,
+            final CardSelectionAdapter selectionAdapter, final SpellAbility source,
+            final int min, final int max, final Iterable<Card> validCards,
             final List<CardSelectionCard> visibleCards) {
         this.selectionSessionId = selectionSessionId;
         this.gameId = chooser.getGame().getId();
         this.chooser = chooser;
         this.affectedPlayer = affectedPlayer;
+        this.selectionAdapter = selectionAdapter;
         this.source = source;
         this.min = min;
         this.max = max;
@@ -69,6 +72,10 @@ public final class CardSelectionSession {
 
     SpellAbility getSource() {
         return source;
+    }
+
+    CardSelectionAdapter getSelectionAdapter() {
+        return selectionAdapter;
     }
 
     int getMin() {
