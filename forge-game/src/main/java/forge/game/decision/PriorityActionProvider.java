@@ -1,9 +1,14 @@
 package forge.game.decision;
 
 import forge.game.card.Card;
+import forge.game.card.CardPlayOption;
+import forge.game.ability.AbilityUtils;
 import forge.game.GameActionUtil;
 import forge.game.ability.ApiType;
+import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.spellability.OptionalCost;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -79,20 +84,107 @@ public final class PriorityActionProvider {
      * the later discard, sacrifice, target, or payment resource.
      */
     private static List<SpellAbility> topLevelAbilities(final Card card, final Player player) {
+        final Map<Integer, SpellAbility> liveAbilities = new LinkedHashMap<>();
+        for (final SpellAbility ability : card.getAllSpellAbilities()) {
+            liveAbilities.putIfAbsent(ability.getId(), ability);
+        }
+        for (final SpellAbility ability : card.getSpellAbilities()) {
+            liveAbilities.putIfAbsent(ability.getId(), ability);
+        }
         final List<SpellAbility> abilities = new ArrayList<>();
-        for (final SpellAbility ability : card.getAllPossibleAbilities(player, true)) {
+        for (final SpellAbility liveAbility : liveAbilities.values()) {
+            final SpellAbility ability = liveAbility.copy(card, player, true);
             if (ability.canPlay()) {
                 abilities.add(ability);
             }
+            for (final SpellAbility mayPlay : auditMayPlayOptions(ability, card, player)) {
+                if (mayPlay.canPlay()) {
+                    abilities.add(mayPlay);
+                }
+            }
             for (final OptionalCostValue optionalCost : GameActionUtil.getOptionalCostValues(ability)) {
-                final SpellAbility alternative = GameActionUtil.addOptionalCosts(ability, List.of(optionalCost));
-                alternative.setActivatingPlayer(player);
+                final SpellAbility alternative = addAuditOptionalCost(ability, optionalCost);
                 if (alternative.canPlay()) {
                     abilities.add(alternative);
                 }
             }
         }
         return abilities;
+    }
+
+    private static SpellAbility addAuditOptionalCost(final SpellAbility ability,
+            final OptionalCostValue optionalCost) {
+        final SpellAbility result = ability.copy(ability.getHostCard(), ability.getActivatingPlayer(), true);
+        if (ability.hasParam("ReduceCost")) {
+            result.putParam("ReduceCost", ability.getParam("ReduceCost"));
+        }
+        if (ability.hasParam("RaiseCost")) {
+            result.putParam("RaiseCost", ability.getParam("RaiseCost"));
+        }
+        if (optionalCost.getType() != OptionalCost.Offering) {
+            result.getPayCosts().add(optionalCost.getCost());
+        }
+        result.addOptionalCost(optionalCost.getType());
+        switch (optionalCost.getType()) {
+        case Retrace:
+        case Jumpstart:
+            result.getRestrictions().setZone(ZoneType.Graveyard);
+            break;
+        case Flash:
+        case Offering:
+            result.getRestrictions().setInstantSpeed(true);
+            break;
+        default:
+            break;
+        }
+        return result;
+    }
+
+    private static List<SpellAbility> auditMayPlayOptions(final SpellAbility ability, final Card source,
+            final Player player) {
+        final List<SpellAbility> result = new ArrayList<>();
+        for (final CardPlayOption option : source.mayPlay(player)) {
+            if (option.getAbility().hasParam("MayPlayNotSorcerySpeed") && player.canCastSorcery()) {
+                continue;
+            }
+            if ((!ability.isBasicSpell() || ability.costHasManaX() && ability.getPayCosts().getCostMana() != null
+                    && ability.getPayCosts().getCostMana().getXMin() > 0)
+                    && option.getPayManaCost() == CardPlayOption.PayManaCost.NO) {
+                continue;
+            }
+            if (ability.isKeyword(Keyword.WARP) && !ability.getHostCard().equals(option.getHost())) {
+                continue;
+            }
+            final SpellAbility mayPlay = ability.copy(source, player, true);
+            if (option.getPayManaCost() == CardPlayOption.PayManaCost.NO) {
+                mayPlay.setPayCosts(mayPlay.getPayCosts().copyWithNoMana());
+                mayPlay.putParam("WithoutManaCost", "True");
+                mayPlay.setBasicSpell(false);
+            } else if (option.getAltManaCost() != null) {
+                final Cost replacement = mayPlay.getPayCosts().copyWithNoMana();
+                replacement.add(option.getAltManaCost());
+                mayPlay.setPayCosts(replacement);
+                mayPlay.setBasicSpell(false);
+            }
+            if (option.getAbility().hasParam("ValidAfterStack")) {
+                mayPlay.putParam("ValidAfterStack", option.getAbility().getParam("ValidAfterStack"));
+            }
+            if (option.getAbility().hasParam("RaiseCost")) {
+                String raise = option.getAbility().getParam("RaiseCost");
+                if (option.getAbility().hasSVar(raise)) {
+                    raise = Integer.toString(AbilityUtils.calculateAmount(option.getHost(), raise,
+                            option.getAbility()));
+                }
+                mayPlay.putParam("RaiseCost", raise);
+            }
+            if (option.isWithFlash()) {
+                mayPlay.getRestrictions().setInstantSpeed(true);
+            }
+            mayPlay.getRestrictions().setZone(null);
+            mayPlay.setMayPlay(option);
+            result.add(mayPlay);
+        }
+        return result;
     }
 
     /**

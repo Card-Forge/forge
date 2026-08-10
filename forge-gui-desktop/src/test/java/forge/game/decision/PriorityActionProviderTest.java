@@ -3,17 +3,21 @@ package forge.game.decision;
 import forge.ai.AITest;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 public class PriorityActionProviderTest extends AITest {
@@ -40,12 +44,48 @@ public class PriorityActionProviderTest extends AITest {
         final Player player = game.getPlayers().get(1);
         final Card bolt = addCardToZone("Lightning Bolt", player, ZoneType.Hand);
         addCard("Mountain", player);
+        bolt.getFirstSpellAbility().setActivatingPlayer(null);
 
-        final DecisionRequest request = provider.createPriorityRequest(player);
+        final DecisionRequest request = NeutralityAssertions.assertGameAndRngNeutral(
+                "PRIORITY_ACTION feasibility generation", game, () -> provider.createPriorityRequest(player));
 
         assertTrue(hasCandidate(request, PriorityActionKind.PASS, null));
         assertTrue(hasCandidate(request, PriorityActionKind.CAST_SPELL, bolt.getName()));
         assertFalse(request.isForced());
+        assertNull(bolt.getFirstSpellAbility().getActivatingPlayer(),
+                "neutral priority generation must restore live SpellAbility callback state");
+    }
+
+    @Test
+    public void priorityPreviewDoesNotAllocateLiveSpellAbilityIds() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final Card bolt = addCardToZone("Lightning Bolt", player, ZoneType.Hand);
+        addCard("Mountain", player);
+        final AbilitySub before = new AbilitySub(ApiType.Draw, bolt, null, Map.of());
+
+        provider.createPriorityRequest(player);
+
+        final AbilitySub after = new AbilitySub(ApiType.Draw, bolt, null, Map.of());
+        assertEquals(after.getId(), before.getId() + 1,
+                "neutral priority generation must not advance the global SpellAbility ID sequence");
+    }
+
+    @Test
+    public void unsupportedPriorityPreviewIsIsolatedFromTheNativeGameLoop() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        addCardToZone("Divination", player, ZoneType.Hand);
+        addCard("Goblin Electromancer", player);
+        addCard("Goblin Electromancer", player);
+        addCard("Island", player);
+        addCard("Mountain", player);
+
+        final PriorityActionDiagnostics.Capture capture = NeutralityAssertions.assertGameAndRngNeutral(
+                "unsupported PRIORITY_ACTION diagnostic capture", game,
+                () -> PriorityActionDiagnostics.captureIsolated(player, new PriorityActionProvider()));
+
+        assertNull(capture, "an unsupported diagnostic state must not escape into the native callback path");
     }
 
     @Test

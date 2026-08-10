@@ -74,12 +74,36 @@ public final class PriorityActionDiagnostics {
         if (!ENABLED) {
             return null;
         }
+        return captureIsolated(player, PROVIDER);
+    }
+
+    static Capture captureIsolated(final Player player, final PriorityActionProvider provider) {
         final long startedAtNanos = System.nanoTime();
-        final PriorityActionProvider.Generation generation = PROVIDER.generatePriorityRequest(player);
-        final DecisionRequest request = generation.getRequest();
-        return new Capture(player, player.getGame().getPhaseHandler().getTurn(),
-                String.valueOf(player.getGame().getPhaseHandler().getPhase()), player.getName(), request,
-                generation.getFeasibilityMeasurements(), System.nanoTime() - startedAtNanos);
+        try {
+            final PriorityActionProvider.Generation generation = provider.generatePriorityRequest(player);
+            final DecisionRequest request = generation.getRequest();
+            return new Capture(player, player.getGame().getPhaseHandler().getTurn(),
+                    String.valueOf(player.getGame().getPhaseHandler().getPhase()), player.getName(), request,
+                    generation.getFeasibilityMeasurements(), System.nanoTime() - startedAtNanos);
+        } catch (final RuntimeException ex) {
+            recordPriorityDiagnosticFailure(player, startedAtNanos, ex.getClass().getSimpleName());
+            return null;
+        }
+    }
+
+    private static void recordPriorityDiagnosticFailure(final Player player, final long startedAtNanos,
+            final String reason) {
+        try {
+            traceDecision(player, DecisionType.PRIORITY_ACTION, "PRIORITY_CAPTURE", -1, false, null);
+            synchronized (EVENTS) {
+                EVENTS.add(formatRow("PRIORITY_STATE", PROCESS_ID, "", "", "", "",
+                        DecisionType.PRIORITY_ACTION, false, player.getGame().getPhaseHandler().getTurn(),
+                        player.getGame().getPhaseHandler().getPhase(), player.getName(), "", 0, "", "",
+                        System.nanoTime() - startedAtNanos, "", "", "", reason));
+            }
+        } catch (final RuntimeException ignored) {
+            // Diagnostics must never alter the Forge callback or game-loop path.
+        }
     }
 
     /** Starts timing the unmodified Forge player-controller callback. */
