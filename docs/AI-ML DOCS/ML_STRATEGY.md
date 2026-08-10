@@ -2,7 +2,7 @@
 
 **Status:** Provisional / Accepted for implementation planning
 **Date:** 2026-08-08
-**Revision:** 4 — decision decomposition, termination semantics, FRL-00.5 measurement contract, benchmark matchup policy, engineering timebox, compute-provider portability, FRL-00.5 findings
+**Revision:** 9 — as revision 8, plus the post-CONFIRMATION sequence: ORDER attribution before decomposition, the modern DAMAGE_ASSIGNMENT information barrier, and the zero-unsupported gate ahead of RandomLegalPolicy
 **Scope:** Initial ForgeRL 1v1 research environment
 
 ## Purpose
@@ -143,12 +143,13 @@ Initial policy:
 | `TARGET` — single target             | Enumerate                                                     |
 | `MODE` — small legal set             | Enumerate                                                     |
 | `X_VALUE` — bounded small range      | Enumerate where practical                                     |
-| `MULLIGAN`                           | Enumerate                                                     |
+| `MULLIGAN` — keep/redraw             | Enumerate (binary)                                            |
+| `MULLIGAN` — London bottoming        | Sequential `CARD_SELECTION` (max 35 subsets; enumerable, but sequential for identity reuse) |
 | `CONFIRMATION`                       | Enumerate                                                     |
 | `CARD_SELECTION` — small bounded set | Enumerate or sequential selection                             |
 | `ATTACK`                             | Decompose into sequential set construction                    |
 | `BLOCK`                              | Decompose into blocker/attacker assignments                   |
-| `ORDER`                              | Decompose into sequential permutation construction            |
+| `ORDER` — see 18.2                   | Attribution pending; almost certainly not one family          |
 | `PAYMENT`                            | Decompose where complete payment enumeration is combinatorial |
 | multi-target choices                 | Autoregressive/sequential selection                           |
 | large subset choices                 | Sequential set construction                                   |
@@ -401,6 +402,80 @@ This distinction must remain explicit in profiling, trajectories, replay and eva
 
 Every synthetic decision must still compose into exactly one legal Forge result without changing Magic rules.
 
+## 3.8 Implemented Boundary Status
+
+The initial policy in 3.1 has now been tested against the engine. Status as of FRL-02J:
+
+| DecisionType | Milestone | Realised representation | Status |
+|---|---|---|---|
+| `PRIORITY_ACTION` | FRL-01A | Enumerated top-level actions | SUPPORTED, known `COST_ADJUSTMENT_CHOICE_REQUIRED` gap |
+| — action continuation | FRL-02A | `decision_sequence_id` + `subdecision_index` correlation, not a request family | SUPPORTED |
+| `TARGET` | FRL-02B | Sequential multi-target selection with legal DONE | SUPPORTED for cards, players, stack spells |
+| `PAYMENT` | FRL-02C | Sequential source/floating-mana selection | **PARTIAL** — variable output and several mana semantics fail closed |
+| `X_VALUE` | FRL-02D | Enumerated finite `X|N` domain | SUPPORTED within a provable capacity model |
+| `MODE` | FRL-02E | Enumerated from Forge's own `possible` list, original ordinals | SUPPORTED for ordinary single-mode Charm slice |
+| `CARD_SELECTION` | FRL-02F | Sequential, stable `(cardId, gameTimestamp)` identities | SUPPORTED for resolution-time own-hand discard |
+| `ATTACK` | FRL-02G | `ADD_ATTACKER \| ... \| DONE` | SUPPORTED for constraint-free 1v1 slice |
+| `BLOCK` | FRL-02H | Two-stage `CHOOSE_BLOCKER` → `CHOOSE_ATTACKER_FOR_BLOCKER` | SUPPORTED for independent-pair Player-only slice |
+| `MULLIGAN` | FRL-02J | KEEP/REDRAW plus `MULLIGAN_BOTTOM` card selection | SUPPORTED for ordinary 1v1 Constructed London mulligan |
+| `ORDER` | 18.2 | attribution pending — see below | OPEN, aggregate |
+| `DAMAGE_ASSIGNMENT` | — | see 3.9 | OPEN |
+
+The decomposition policy in 3.1 held for `ATTACK`, `BLOCK` and `PAYMENT`. It was **incomplete** for `MULLIGAN`: the London bottoming choice is a second, separate decision that the original one-line classification did not describe.
+
+Every implemented boundary follows the same discipline: Forge remains the legality authority, unsupported states are structured and explicit rather than approximated, and the neutral layer does not mutate live game state during candidate construction.
+
+`PAYMENT` is the load-bearing exception. It is `PARTIAL`, it is the second-highest-volume family, and its unsupported share is measured rather than hypothetical: the reactive matchup produced 848 raw callbacks, 225 atomic requests and 192 explicit `VARIABLE_MANA_OUTPUT` states — roughly 22.6% of raw payment callbacks carrying a known unsupported feature.
+
+`ORDER` is listed as one row only because the engine exposes it as one callback. It is an aggregate of several unrelated decision families and must be attributed before it is classified. See 18.2.
+
+## 3.9 DAMAGE_ASSIGNMENT and the Information Barrier
+
+The rules changed underneath this boundary. Since Foundations (November 2024) there is no damage assignment order: when an attacking creature is blocked by several creatures, its controller divides the combat damage freely among them at the start of the combat damage step, lethal damage no longer constrains the division, and trample remains the sole exception in requiring lethal damage to every blocker before trampling over. Players make no combat-damage decision during the declare blockers step, and there is no priority window between assignment and damage.
+
+### This is not hidden information
+
+The distinction matters for where the problem lands in the architecture.
+
+```text
+hidden information
+    a state exists and one player cannot observe it
+    -> belief-state inference
+
+damage assignment
+    the state does not exist yet
+    -> a private, not-yet-made future choice
+```
+
+The defending player casts combat tricks without knowing how the damage will be divided. That is uncertainty about an **opponent's future choice**, not uncertainty about a concealed card. It is an opponent-modelling problem, not an inference problem over hidden zones, and it should not be modelled as a belief state.
+
+### Two interface rules
+
+```text
+no assignment value may enter the opponent's observation
+before the choice is made
+
+no artificial opponent observation or response step may be
+introduced between assignment and damage
+```
+
+The second is the easier mistake to make. A decomposed assignment boundary naturally produces intermediate steps, and exposing them to the opponent would invent a response window the rules do not grant — and would silently make the defender stronger than Magic allows.
+
+### Open question before implementation
+
+FRL-02H documented the live Forge combat trace, and it places these calls in the declare-blockers path:
+
+```text
+-> orderBlockersForDamageAssignment()
+-> orderAttackersForDamageAssignment()
+```
+
+Under post-Foundations rules no such decision belongs there. Either the methods are vestigial, or they no longer fire, or this Forge version has not adopted the change.
+
+> Before `DAMAGE_ASSIGNMENT` is implemented, the ORDER attribution audit must establish which of the three is true. The boundary has to be designed against the model the engine actually runs, not against the model the rules describe.
+
+FRL-02H already admits the one-attacker/many-blockers case in the v0 slice, so this boundary is live rather than theoretical.
+
 ---
 
 # 4. Forced Decisions and Automatic Resolution
@@ -553,6 +628,26 @@ INVALID / TRUNCATED
 
 and must not silently become losses.
 
+### This requirement binds the match harness
+
+FRL-02K0 found the inverse failure in practice. A diagnostic exception escaped into the game loop; the simulator caught it and, in a `finally` block, ended the game as a draw; `Player.onGameOver` then marked both unresolved players as winners.
+
+The engine failure did not become a loss. It became a **result** — which is equally prohibited and considerably harder to notice, because nothing turns red.
+
+Therefore:
+
+> Any code path that can end a game must classify the termination. A `finally` block that assigns an outcome without classifying why violates this section regardless of which outcome it assigns.
+
+This applies to the match harness and the simulator entry point, not only to the ForgeRL environment wrapper.
+
+**Status: closed.** The simulator no longer constructs a singular winner from a malformed outcome. The case is reported explicitly:
+
+```text
+INVALID_OUTCOME MULTIPLE_WINNERS [0,1]
+```
+
+The underlying Forge defect — a singular getter resolving a plural, unordered winner source — is no longer a ForgeAI blocker. It remains recorded as an upstream contribution candidate in Section 20.4.
+
 ## 7.3 Game-limit termination
 
 Examples:
@@ -683,6 +778,63 @@ N policy decisions
 ```
 
 while remaining traceable back to the original engine interaction.
+
+## 8.2 Decision Trace V2 and the Labeled-Sample Contract
+
+The decision trace and the trajectory format converge on the same artifact: an observation, a legal candidate set, and a chosen action label. `DECISION_TRACE_V2` makes that contract explicit rather than implying it from a single flat record.
+
+Records are split by lifecycle stage, because a "selected candidate" field cannot be populated at request-generation time:
+
+```text
+DECISION_TRACE_V2|REQUEST
+    DecisionType, context/adapter/stage, step, forced
+    legalCandidates with unique semantic keys
+    no selection label
+
+DECISION_TRACE_V2|RESULT
+    references the preceding request
+    terminal state
+```
+
+Terminal states are distinct rather than collapsed into one failure sentinel:
+
+```text
+CHOSEN             a candidate was selected
+FORCED             exactly one legal candidate; no policy information
+UNOBSERVED         no unambiguous teacher mapping seam exists
+ENGINE_ROLLBACK    the action was legitimately cancelled by Forge
+MAPPING_FAILED     mapping was attempted and no legal candidate matched
+TRACE_INCOMPLETE   the trace ended mid-decision
+```
+
+The distinction matters for data-quality monitoring as much as for training: a rising unlabeled rate that cannot separate legitimate cancellation from a truncated trace would repeat the failure mode of Section 14.11.
+
+### Behavior-cloning validity
+
+A record is a valid labeled policy sample only if:
+
+```text
+RESULT == CHOSEN
+and forced == false
+and selectedCandidate is a member of legalCandidates
+```
+
+`FORCED` is excluded by construction, consistent with Section 4. This is not a formality: forced decisions carry no policy information, and including them inflates any reported top-1 accuracy with trivially correct predictions. Published collectible-card-game work found several percentage points of real improvement from filtering such records out of imitation data.
+
+Everything else — `UNOBSERVED`, `ENGINE_ROLLBACK`, `MAPPING_FAILED`, `TRACE_INCOMPLETE` — is a diagnostic observation and never training data.
+
+`DecisionTraceTrainingValidator` enforces the rule mechanically rather than leaving it to the consumer.
+
+### Status and the remaining gap
+
+```text
+DECISION_TRACE_V2 format          CLOSED
+teacher-label coverage            PARTIAL by decision family
+```
+
+The format is training-capable. Coverage is not yet complete: `TARGET` and `PAYMENT` in particular can still terminate as `UNOBSERVED` where no unambiguous mapping seam exists between the Forge teacher's action and a neutral candidate.
+
+> Before the first behavior-cloning data collection, per-`DecisionType` label coverage must be measured and reported. A family with low `CHOSEN` share contributes observations but no supervision, and its absence from the training signal must be a known quantity rather than a discovery made after training.
 
 ---
 
@@ -1094,6 +1246,217 @@ recurrent sequence context
 
 No replay-capacity conclusion may be drawn from those byte counts.
 
+## 14.10 AI-Controller Benchmark Coverage Bias
+
+Any benchmark driven by Forge's own heuristic controller measures **that controller's decision path**, not the environment's decision surface.
+
+Two independent observations establish this:
+
+```text
+FRL-00.5
+93-98% of callbacks exposed no candidate count,
+dominated by PRIORITY_ACTION
+(79% of baseline, 65% of reactive callbacks)
+
+FRL-02D
+raw X callbacks     0 / 0
+neutral X requests  0 / 0
+across 2 x 10 benchmark games,
+because the Forge AI preselects the value,
+while focused fixtures show the same boundary
+generating candidates at p50 ~29 ms
+```
+
+The rule is therefore:
+
+> **Counts obtained through the Forge-AI controller path are a lower bound on decision-surface coverage. They are controller-path-specific and must never be read as environment properties.**
+
+Explicitly prohibited inference:
+
+```text
+0 callbacks observed
+→ "this DecisionType does not occur in the environment"
+```
+
+The only supported reading is:
+
+```text
+0 callbacks observed
+→ "this DecisionType was not exercised by the Forge
+   controller path in this slice"
+```
+
+Every reported coverage or frequency figure must be labeled with the policy that drove the run.
+
+Only a `RandomLegalPolicy`-driven or otherwise policy-driven ForgeRL run produces coverage and frequency numbers usable for throughput estimation.
+
+### Accumulated zero-coverage observations
+
+The effect was first recorded in FRL-02A, which found that the Forge AI frequently preselects targets and X values inside its priority heuristic, so an AI trace does not expose all decisions a future external controller must make. Subsequent milestones produced repeated instances:
+
+```text
+FRL-02D  X_VALUE          0 / 0   in both 10-game matchups
+FRL-02E  MODE             0 / 0   in the proactive matchup
+FRL-02F  CARD_SELECTION   0       discard callbacks in the proactive matchup
+```
+
+None of these is evidence that the decision type is rare in Magic. Each is evidence that the Forge heuristic controller did not reach it in that slice.
+
+The proactive matchup in particular has now produced zero coverage for three separate decision types. A benchmark slice can be adequate for throughput and inadequate for coverage at the same time; the two properties must be reported separately.
+
+## 14.11 Determinism: the FRL-02K0 Finding
+
+An apparent single-milestone score deviation triggered a full determinism audit. The audit found something different and worse than the deviation it was chasing.
+
+### There was no outlier
+
+Replaying every milestone twice from its own merge commit:
+
+| Milestone | Retained report | Replay A | Replay B |
+|---|---:|---:|---:|
+| FRL-02C | 5-5 | 5-5 | 3-7 |
+| FRL-02D | 5-5 | 3-7 | 3-7 |
+| FRL-02E | 3-7 | 5-5 | 5-5 |
+| FRL-02F | 5-5 | 5-5 | 5-5 |
+| FRL-02G | 3-7 | 3-7 | 5-5 |
+
+The reported score was unstable at **every** milestone, and same-commit repeats disagree with each other. The earlier reading of FRL-02E as "the deviation" was an artifact of five samples of a process-dependent value.
+
+Meanwhile the underlying traces were identical everywhere. Gameplay hash, RNG hash, and a 4,018-record common priority-teacher projection matched at every milestone, and every adjacent comparison C-D, D-E, E-F, F-G returned first divergence `-1`.
+
+### Root cause
+
+```text
+PriorityActionDiagnostics.capture
+  -> PriorityActionProvider.generatePriorityRequest
+  -> COST_ADJUSTMENT_CHOICE_REQUIRED
+  -> UnsupportedPriorityActionException escapes the diagnostic boundary
+  -> game loop aborts
+  -> simulator finally-block: setGameOver(Draw)
+  -> Player.onGameOver marks both unresolved players as winners
+  -> GameOutcome stores both in an identity-keyed HashMap
+  -> the winner readout returns the first entry, which is process-dependent
+```
+
+Two of ten games in the reactive matchup aborted mid-game at every milestone since FRL-01A. The score instability was never a determinism problem in the game; it was an invalid-state readout that **masked a 20% abort rate** for five consecutive milestones.
+
+The original hypothesis — probe-side RNG consumption — was wrong.
+
+### Neutrality has three categories, not two
+
+State neutrality and RNG neutrality were both necessary and together still insufficient. Neutral priority previews advanced the global static `SpellAbility` identifier counter: neither game state nor randomness, but process-wide.
+
+> A neutral boundary must not perturb **any** global process state: game state, random number generation, or global counters and identifier sequences.
+
+The fix gives audit-created abilities request-local negative identifiers, restores live ability activators in a `finally` block, and preserves full `getAllPossibleAbilities` semantics including Forge alternative costs. A regression asserts that the global ability-ID sequence advances by exactly one between two sentinel allocations.
+
+All nine decision families are now verified state-neutral and RNG-neutral with zero draws consumed:
+
+```text
+PRIORITY_ACTION  TARGET  PAYMENT  X_VALUE  MODE
+CARD_SELECTION   ATTACK  BLOCK    MULLIGAN
+```
+
+### The detection was luck, and that is the argument for the gate
+
+Five score samples happened to contain one differing value. Had they agreed, nothing would have been investigated and two of ten games would still be aborting silently.
+
+Final score is not a determinism detector: two runs can diverge on turn three and still finish with the same record. The permanent gates replace the lucky observation with a guaranteed one:
+
+```text
+same seed, twice          -> identical gameplay / RNG / decision hash
+diagnostics OFF vs ON     -> identical gameplay / RNG hash and draw count
+per-family probe check    -> unchanged FORGE_STATE_V1, zero RNG draws
+ambiguous outcomes        -> rejected, never resolved from unordered iteration
+```
+
+Traces are SHA-256 over UTF-8 canonical records at three levels — decision, gameplay state fingerprint, and RNG draw — with a first-divergence reduction so any mismatch resolves to a last-equal/first-different index.
+
+### Collector self-neutrality
+
+The gate initially proved that priority and mulligan diagnostics are neutral — using a trace collector that was itself active in every run. That is a measurement-apparatus problem: an instrument cannot validate itself.
+
+The gap was narrower than it looks. Diagnostics OFF-versus-ON remained valid (the collector was present on both sides), and the root cause stands independently because the aborts appear in pre-collector reports. What was *not* proven was that the shipping build behaves like the instrumented one — which is exactly the claim a benchmark needs.
+
+It is now proven at full-game scale. Four child-JVM runs:
+
+```text
+collector OFF-A    collector OFF-B
+collector ON-A     collector ON-B
+```
+
+compared over channels that do not depend on the collector:
+
+```text
+ReferenceGameplay projection
+priority projection
+RNG trace and draw count
+final Forge state
+outcome
+```
+
+All four runs were identical on every channel. This is no longer a local attach/snapshot/hash assertion.
+
+The observer effect is not eliminated — the reference hasher is itself an observer. It is reduced to something small enough that its neutrality is verifiable by reading it rather than by measuring it. That is the achievable goal.
+
+### Reproducibility status
+
+Production checkpoint: PR #11, head `676c941`, merge `c8835a22`.
+
+| Matchup | Seed | Runs | Result | Hashes |
+|---|---|---:|---:|---|
+| Dead and Alive vs Air Forces | 20260809 | 4 (OFF A/B, ON A/B), 40 games | 7-3 | all identical |
+| Izzet Guild Kit vs Dimir Guild Kit | 20260810 | 4 (OFF A/B, ON A/B), 40 games | 3-7 | all identical |
+| V2 cohort repeats | — | 40 games | — | 0 canonical trace differences |
+
+The proactive cohort reproduces its pre-fix callback and request counts exactly, confirming that it never contained an aborted game. Only the reactive cohort was contaminated.
+
+## 14.12 Worker Output Isolation
+
+Single-process determinism does not imply multi-process integrity. Diagnostic sinks write to configured paths; six workers pointed at the same paths would interleave or overwrite, and the result would look like nondeterminism.
+
+The resolution is a shared output namespace owned by the launcher, not per-class process-ID logic:
+
+```text
+<outputRoot>/<runId>/worker-000/
+    priority.csv
+    mulligan.csv
+    determinism/
+
+<outputRoot>/<runId>/worker-001/
+    ...
+```
+
+Path resolution order, with fail-fast on partial configuration:
+
+```text
+explicit per-sink path
+  >  derived outputRoot / runId / workerId
+  >  disabled
+```
+
+A full worker namespace enables all three sinks together.
+
+### Two-JVM smoke result
+
+```text
+exit codes              0 / 0
+path collisions         0
+parse errors            0
+process interleaving    0
+
+GAMEPLAY_TRACE_V1       byte-identical
+RNG_TRACE_V1            byte-identical
+DECISION_TRACE_V2       byte-identical
+PRIORITY_REFERENCE_V1   identical
+```
+
+Byte-identical traces across two simultaneous JVMs at the same seed prove isolation and per-process determinism together — a stronger property than absence of collision, and the one the multi-process benchmark actually depends on.
+
+The child-JVM gates were initially Windows-specific through a hardcoded `java.exe`; they are now portable across Windows, Linux and macOS, so they can run permanently rather than in an environment-specific profile.
+
+**Status: gate satisfied ahead of the multi-process REAL ForgeRL benchmark.**
+
 ---
 
 # 15. Decision After FRL-00.5
@@ -1184,6 +1547,8 @@ learner contention
 
 before deciding whether PPO's on-policy sample use is economically unacceptable.
 
+This list is expanded into a per-layer, per-DecisionType cost model in Section 15.4.
+
 ## 15.2 Current Scaling Classification
 
 For the decision matrix, FRL-00.5 currently places local execution closer to:
@@ -1268,6 +1633,173 @@ stochastic policy where appropriate
 A replay-capable actor-critic becomes especially interesting.
 
 PPO remains the reference baseline.
+
+## 15.4 Atomic Decision Cost Model
+
+The cost of one atomic agent decision is not a single number. It must be decomposed and each layer measured separately:
+
+```text
+Forge transition / callback latency
+candidate generation latency
+candidate encoding latency
+observation encoding latency
+IPC
+policy inference
+candidate application
+```
+
+`candidate generation` is a distinct cost class from `candidate encoding`, and the measured spread across decision types justifies separating them:
+
+```text
+FRL-02C PAYMENT request generation
+p50 274.8 us / p95 616 us / p99 829.8 us
+
+FRL-02D X_VALUE request generation
+p50 29.066 ms
+```
+
+Two orders of magnitude. X is expensive because it runs full payment-feasibility probes per candidate; PAYMENT is not. A single aggregate "generation latency" would hide exactly the variation that matters.
+
+Therefore measure, per DecisionType:
+
+```text
+generation latency p50 / p95 / p99
+generations per game
+candidates per request
+feasibility / rule probes per request
+feasibility / rule probes per candidate where meaningful
+```
+
+### Latency alone is not a throughput statement
+
+A decision type's contribution to throughput is:
+
+```text
+generation cost x frequency
+```
+
+Section 14.10 establishes that frequency measured through the Forge-AI controller path is a lower bound. X_VALUE is the extreme case: p50 ~29 ms generation at an AI-path frequency of zero.
+
+Reports must therefore give **both**:
+
+```text
+per-request latency
+aggregate ms per game
+```
+
+and the aggregate is only valid under a policy-driven run.
+
+### Generation-cost gate
+
+A DecisionType whose generation p50 exceeds a defined multiple of the Forge transition p50 must be flagged before it enters the atomic decision path, together with the dominant probe class responsible.
+
+The purpose is to name the cost at the boundary where it is introduced, rather than discovering an unexplained aggregate at the REAL ForgeRL benchmark and having to attribute it afterwards.
+
+### Measured generation latency by decision type
+
+Revalidated on the fixed head, reactive cohort (Izzet/Dimir, seed 20260810, ten games, diagnostics ON):
+
+| DecisionType | Generation p50 | p95 | p99 | Native callback p50 | Generation / native at p50 |
+|---|---:|---:|---:|---:|---:|
+| `MULLIGAN` keep/redraw | below timer resolution | — | — | 27.1 us | — |
+| `CARD_SELECTION` | 42.8 us | 136.0 us | 896.8 us | 63.2 us | 68% |
+| `MULLIGAN_BOTTOM` | 45.7 us | 64.8 us | 64.8 us | 165.3 us | 28% |
+| `ATTACK` | 70.0 us | 208.4 us | 343.5 us | 7.677 ms | 0.9% |
+| `TARGET` | 187.6 us | 447.9 us | 447.9 us | not available | — |
+| `BLOCK` | 260.7 us | 829.1 us | 1.395 ms | 4.647 ms | 5.6% |
+| `PAYMENT` | 370.9 us | 933.6 us | 1.395 ms | not available | — |
+| `MODE` | 1.037 ms | 59.778 ms | 59.778 ms | not available | — |
+| `PRIORITY_ACTION` | 1.266 ms | 9.937 ms | **127.270 ms** | 3.320 ms | 38% |
+| `X_VALUE` (focused fixture) | 31.56 ms | 40.26 ms | 48.98 ms | n/a | — |
+
+A `0` reading for `MULLIGAN` keep/redraw means below timer resolution, not free.
+
+`MODE` p95/p99 rest on two requests and are not a usable estimate.
+
+### The generation-cost gate has fired: PRIORITY_ACTION
+
+For combat the neutral layer is cheap relative to the controller it replaces — `ATTACK` generation is under 1% of the native callback, `BLOCK` under 6%. That result does not generalise.
+
+`PRIORITY_ACTION` is the dominant family, at 5,120 of roughly 6,600 observations in the cohort, and it inverts the relationship at the tail:
+
+```text
+p50   generation 1.266 ms   vs native 3.320 ms     38%
+p95   generation 9.937 ms   vs native 24.942 ms    40%
+p99   generation 127.270 ms vs native 43.267 ms   294%
+```
+
+At the 99th percentile, generating the neutral candidate set costs roughly three times the Forge AI callback it is meant to replace. On the family that accounts for around three quarters of the decision surface, this is the case Section 15.4's gate exists for.
+
+Required before the REAL ForgeRL benchmark:
+
+```text
+identify the dominant probe class in the PRIORITY_ACTION tail
+report probes per request and per candidate for that family
+decide whether the tail is a card-specific pathology or structural
+```
+
+`X_VALUE` remains a separate outlier for a known reason: a full payment-feasibility probe per candidate. Its architecture was not changed by the determinism gate.
+
+## 15.5 Measured Callback-to-Request Ratios
+
+Section 3.7 states that Forge callback count is not agent decision count. Both cohorts are now revalidated on the fixed head, and the direction is family-specific rather than uniform.
+
+| Family | Proactive callbacks → requests | Ratio | Reactive callbacks → requests | Ratio |
+|---|---:|---:|---:|---:|
+| `PRIORITY_ACTION` | not separately reported | — | 5,120 → 5,001 | 0.977 |
+| `TARGET` | not separately reported | — | 3 → 3 | 1.000 |
+| `PAYMENT` | 789 → 430 | 0.545 | 1,292 → 303 | 0.235 |
+| `MODE` | not separately reported | — | 7 → 2 | 0.286 |
+| `CARD_SELECTION` | not separately reported | — | 34 → 37 | 1.088 |
+| `ATTACK` | 122 → 239 | 1.959 | 126 → 221 | 1.754 |
+| `BLOCK` | 37 → 65 | 1.757 | 21 → 61 | 2.905 |
+| `MULLIGAN` keep/redraw | not separately reported | — | 24 → 24 | 1.000 |
+| `MULLIGAN_BOTTOM` | not separately reported | — | 4 → 4 | 1.000 |
+
+Combined `PAYMENT` across both cohorts:
+
+```text
+2,081 callbacks -> 733 requests     ratio 0.352
+```
+
+This supersedes the earlier combined figure of `1,637 -> 655` (ratio 0.40), which mixed a clean proactive run with a reactive run containing two aborted games.
+
+`PAYMENT` **collapses**: Forge issues many fine-grained payment callbacks that the neutral layer groups into fewer atomic decisions, and the reactive collapse is steeper than the proactive one. Combat **expands**, by roughly a factor of two. `PRIORITY_ACTION`, the dominant family, is close to one-to-one.
+
+Because `PRIORITY_ACTION` and `PAYMENT` together dominate volume, the aggregate atomic-decision rate is likely to land **at or below** the raw callback rate rather than above it. No projection assuming a single direction is valid.
+
+### Measured forced share
+
+Section 4 auto-resolves atomic decisions with exactly one legal candidate.
+
+| Family | Proactive forced share | Reactive forced share |
+|---|---:|---:|
+| `PRIORITY_ACTION` | — | 27.2% |
+| `PAYMENT` | 14.9% | 24.8% |
+| `ATTACK` | 29.3% | 24.4% |
+| `BLOCK` | 27.7% | 42.6% |
+| `TARGET`, `MODE`, `CARD_SELECTION`, `MULLIGAN` | — | 0% |
+
+Combined `PAYMENT` forced share is 18.96%.
+
+FRL-00.5 estimated 73-85% forced, but over the 2-7% of callbacks whose candidate count was observable — a sample biased toward inherently forced types. The measured range over real atomic requests is roughly 0% to 43% depending on family, clustering near a quarter for the volume families.
+
+The auto-resolution saving is real and considerably smaller than the original estimate. Cohorts must not be mixed when quoting these figures.
+
+### Downstream callbacks per action
+
+FRL-02A measured, per non-PASS priority action:
+
+```text
+proactive   mean 1.810   p50 1   p95 5   max 8
+reactive    mean 2.046   p50 1   p95 5   max 7
+```
+
+All callback-free actions in the sample were land plays.
+
+### Coverage caveat
+
+119 unsupported `PRIORITY_ACTION` observations occurred in the ten-game reactive cohort, roughly 2.3% of priority decisions. They now fail as explicit diagnostic states rather than escaping into the game loop, but they remain a real coverage hole that a `RandomLegalPolicy` run will encounter.
 
 ---
 
@@ -1394,9 +1926,38 @@ Priority Legal-Action Boundary
 
         ↓
 
-FRL-01B+
+FRL-01B+ / FRL-02x
 remaining algorithm-neutral
 decision boundaries
+        ✅ through CONFIRMATION
+
+        ↓
+
+ORDER Attribution Audit
+separate live ORDER families
+from legacy combat ordering
+
+        ↓
+
+modern DAMAGE_ASSIGNMENT
+information barrier,
+no premature leak
+
+        ↓
+
+Runtime Gap Audit
+collect known PAYMENT gaps
+and any new ones
+
+        ↓
+
+Gap Closure
+primarily VARIABLE_MANA_OUTPUT
+/ PAYMENT
+
+        ↓
+
+ZERO-UNSUPPORTED v0 gate
 
         ↓
 
@@ -1408,12 +1969,17 @@ completes representative full games
 REAL ForgeRL benchmark
 
 atomic agent decisions/sec
+candidate generation latency by decision type
 observation bytes/decision
 candidate bytes/decision
 trajectory bytes/decision
 IPC latency
 inference latency
 learner contention
+
+        ↓
+
+Training-Safety / Issue Gate
 
         ↓
 
@@ -1523,6 +2089,74 @@ The purpose is simultaneously to:
 2. solve the largest unresolved action-interface boundary,
 3. measure the callback→agent-step transformation,
 4. establish the first real ML-facing throughput number.
+
+## 18.2 ORDER Attribution Audit
+
+`ORDER` is a single engine callback covering several unrelated decision families. FRL-00.5 counted 591 and 419 calls across the two matchups with a median of one item and a maximum of three to four, but that aggregate cannot be attributed to a family and therefore cannot inform a representation decision.
+
+Attribute separately at minimum:
+
+```text
+orderSimultaneousSa            simultaneous triggered abilities
+scry / surveil ordering        partition followed by ordering
+zone ordering
+legacy combat ordering         orderBlockersForDamageAssignment
+                               orderAttackersForDamageAssignment
+```
+
+Record per subtype, not in aggregate:
+
+```text
+call count per game
+candidate count: mean / p50 / p95 / max
+forced share
+generation latency p50 / p95 / p99
+```
+
+Per-subtype counts are required because the subtypes grow differently. Four simultaneous triggers are twenty-four permutations. A scry three is a partition into keep and bottom followed by an ordering of the kept cards — structurally a different decision, not a longer one. An aggregate distribution cannot decide enumerate-versus-decompose for either.
+
+The audit must also answer one specific question, because Section 3.9 depends on it:
+
+> Does `orderBlockersForDamageAssignment` fire in the v0 slice, how often, and with how many items?
+
+If it fires, "legacy combat ordering" is not legacy — it is the model this Forge version actually runs, and `DAMAGE_ASSIGNMENT` must be designed against that.
+
+Only after attribution should the type be split, for example into `TRIGGER_ORDER`, `ZONE_ORDER`, and `PARTITION_PLUS_ORDER`. Deferring the aggregate as "legacy" would defer live strategic decisions along with the dead one: when several triggered abilities controlled by the same player go on the stack simultaneously, that player chooses their order, and the order can change the result.
+
+## 18.3 Runtime Gap Audit and the Zero-Unsupported Gate
+
+Purpose: establish that a random legal policy can complete games **entirely through the neutral interface**, with no silent recourse to the Forge heuristic.
+
+Exit criterion for the defined v0 random-policy runs:
+
+```text
+0 agent-relevant UNSUPPORTED
+0 Forge-AI fallbacks
+0 MAPPING_FAILED
+0 TRACE_INCOMPLETE
+```
+
+Deliberately **not** counted:
+
+```text
+UNOBSERVED       a teacher-label coverage problem for behavior
+                 cloning, not a blocker for an external controller
+
+engine-owned and forced operations
+                 not policy decisions at all
+```
+
+Section 8.2 keeps these in separate terminal states precisely so that they can be counted separately here.
+
+### The criterion must be enforced, not observed
+
+A Forge-AI fallback in a random-policy run must **throw**. `MAPPING_FAILED` and `TRACE_INCOMPLETE` must be hard failures in that configuration, not rows someone counts afterwards.
+
+A gate that depends on a person noticing entries in a CSV is the same construction that carried the abort in Section 14.11 through five consecutive milestones. The lesson there was not "look more carefully" — it was that a criterion which can be passed by inattention is not a criterion.
+
+### Known largest gap
+
+`PAYMENT`, not `DAMAGE_ASSIGNMENT`, is the current blocker. `DAMAGE_ASSIGNMENT` is a well-bounded new boundary; `PAYMENT` is a measured hole in an existing one, with roughly 22.6% of raw payment callbacks in the reactive matchup carrying a known unsupported feature. Gap Closure therefore precedes the gate, and `VARIABLE_MANA_OUTPUT` is its primary target.
 
 ---
 
@@ -1948,6 +2582,107 @@ Kaggle is therefore:
 
 ---
 
+# 20. Modified Upstream Forge Surface
+
+The FRL work is not an isolated module. New decision code is contained in one package:
+
+```text
+forge-game/src/main/java/forge/game/decision/
+```
+
+but several **existing, upstream-maintained** Forge files have been modified. Known so far:
+
+```text
+forge-game/src/main/java/forge/game/phase/PhaseHandler.java     FRL-02H
+forge-ai/src/main/java/forge/ai/PlayerControllerAi.java         FRL-02D
+forge-game/.../CostAdjustment.java                              FRL-02D
+forge-ai/pom.xml                                                FRL-02H
+```
+
+This list is incomplete and must be reconstructed and then maintained.
+
+## 20.1 Why this is tracked
+
+The fork has not yet been synchronised with `Card-Forge/forge`. Until it is, the merge cost of these modifications is invisible but accruing. `CostAdjustment` is the most exposed: cost-reduction logic is routinely touched upstream by new card implementations.
+
+Absence of a git merge conflict to date is **not** evidence of low merge cost. The FRL-02D merge was conflict-free only because master had moved in documentation alone.
+
+## 20.2 Requirement
+
+Every FRL report must list the existing Forge files it modified, separately from files it added.
+
+The cumulative list is the input to a later, deliberate decision about extracting a dedicated module. That decision is explicitly **not** made here, and must not be taken mid-milestone.
+
+A useful trend indicator:
+
+```text
+git diff --name-only <merge-base with upstream>..HEAD -- "*.java"
+```
+
+## 20.3 Test-suite state
+
+Green at the production checkpoint (PR #11, merge `c8835a22`):
+
+```text
+baseline diagnostics                 11 / 11
+baseline decision regression        220 / 220
+
+focused X / V2 / projection          32 / 32
+Java executable resolver              3 / 3
+focused mulligan lifecycle            6 / 6
+outcome integrity                     3 / 3
+
+collector OFF/OFF/ON/ON      1 test, 4 full games   PASS
+worker isolation             1 test, 2 live JVMs    PASS
+
+final expanded gate regression      286 / 286
+failures 0, errors 0, skipped 0
+
+package: BUILD SUCCESS
+Checkstyle: 0 violations
+git diff --check: clean
+```
+
+The earlier figure of 283 predates the three portability resolver tests and was corrected to 286 in the final report.
+
+The previously known-red state — seven `PriorityActionDiagnostics` failures from a 55-versus-54 diagnostic column count — was repaired by tightening the stale assertions to the production contract rather than relaxing them.
+
+That episode is worth recording rather than closing quietly. While the suite was red, it could not have distinguished a genuine regression from the known breakage. The determinism defect in Section 14.11 was live throughout that period and was found by a coincidence in reported scores, not by the test suite.
+
+> A known-red suite is acceptable only while it is recorded, attributed, and short-lived. It removes the signal that would catch the next defect, including the one already present.
+
+## 20.4 Upstream Contribution Candidates
+
+Some defects found here are Forge defects, not ForgeAI needs. Contributing them upstream removes fork debt instead of adding it.
+
+Current candidate:
+
+```text
+GameOutcome resolves a singular winner from a plural,
+unordered, identity-keyed source.
+
+The result is process-dependent even when the game state
+is fully determined.
+```
+
+This is not the same claim as "more than one winner is invalid" — Forge supports multiplayer and team formats where several players legitimately win together. The defect is that the answer is unstable, not that it is plural.
+
+Two separable changes follow, and the first carries no semantic risk:
+
+```text
+A  make the winner collection insertion-ordered
+   -> the existing getter becomes deterministic
+   -> no API change, no caller affected
+   -> requires confirming that insertion order is itself deterministic
+
+B  expose a 0 / 1 / n winner API
+   -> callers decide explicitly
+```
+
+ForgeAI is already unblocked by its own simulator-side classification, so this is contribution work rather than remediation.
+
+---
+
 # Architectural Commitment
 
 We commit now to:
@@ -1967,7 +2702,15 @@ We commit now to:
 13. compute-provider neutrality, with the algorithm chosen before the provider,
 14. a single common compute basis for the primary algorithm bake-off,
 15. sharded, versioned, compressed and resumable trajectory storage,
-16. checkpoint compatibility metadata with fail-loud validation on schema mismatch.
+16. checkpoint compatibility metadata with fail-loud validation on schema mismatch,
+17. labelling every coverage and frequency figure with the policy that drove the run, and never reading a Forge-AI-path count as an environment property,
+18. a per-layer, per-DecisionType atomic decision cost model that separates candidate generation from candidate encoding,
+19. RNG neutrality of neutral boundaries, in addition to state neutrality,
+20. per-report listing of modified existing Forge files, separately from added files,
+21. neutrality of boundaries against all global process state — game state, randomness, and global counters or identifier sequences,
+22. classification of every game termination at whichever layer ends the game, including the match harness,
+23. a launcher-owned worker output namespace, with no per-class process-ID logic in diagnostic sinks,
+24. a mechanically enforced labeled-sample contract, with forced and unlabeled decisions excluded from policy training data.
 
 We explicitly **do not commit yet** to:
 
