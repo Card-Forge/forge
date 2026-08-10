@@ -39,7 +39,9 @@ public class UntapAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if ("PoolExtraMana".equals(aiLogic)) {
-            return doPoolExtraManaLogic(ai, sa);
+            // mana is the reason this logic exists, but it must not veto the untaps that are worth
+            // making on their own, e.g. a Time Vault that cannot untap itself
+            return doPoolExtraManaLogic(ai, sa) || hasPriorityUntapTarget(ai, sa);
         }
         if ("PreventCombatDamage".equals(aiLogic)) {
             return doPreventCombatDamageLogic(ai, sa);
@@ -464,6 +466,21 @@ public class UntapAi extends SpellAbilityAi {
         return ph.getNextTurn() == ai
                 && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))
                 && holdsSomethingToCast(ai, inHand);
+    }
+
+    /**
+     * True when something we could target is worth untapping for its own sake, whatever the mana
+     * situation. The targeting pass applies the full filters, so this only has to be permissive
+     * enough not to lose those cards before it runs.
+     */
+    private static boolean hasPriorityUntapTarget(final Player ai, final SpellAbility sa) {
+        // tapped-ness is a field read and targetability is not, so narrow on it first
+        CardCollection tapped = CardLists.filter(ai.getYourTeam().getCardsIn(ZoneType.Battlefield),
+                CardPredicates.TAPPED);
+        if (tapped.isEmpty()) {
+            return false;
+        }
+        return detectPriorityUntapTargets(CardLists.getTargetableCards(tapped, sa)) != null;
     }
 
     /** The mana sources in the given state that this untap could legally take as its target. */
