@@ -80,6 +80,38 @@ public final class LegalCandidate {
         this.blockAttacker = null;
     }
 
+    private LegalCandidate(final int candidateId, final String semanticKey) {
+        this.candidateId = candidateId;
+        this.kind = null;
+        this.sourceCardId = -1;
+        this.sourceName = "";
+        this.sourceZone = null;
+        this.sourceState = null;
+        this.abilityDescription = "";
+        this.semanticKey = Objects.requireNonNull(semanticKey);
+        this.spellAbility = null;
+        this.targetKind = null;
+        this.targetEntityId = -1;
+        this.targetName = "";
+        this.targetZone = null;
+        this.target = null;
+        this.paymentKind = null;
+        this.mana = null;
+        this.xValue = null;
+        this.modeOrdinal = null;
+        this.modeDescription = "";
+        this.modeUsesTargeting = false;
+        this.mode = null;
+        this.cardSelectionKind = null;
+        this.cardSelectionCard = null;
+        this.attackKind = null;
+        this.attackCard = null;
+        this.attackDefender = null;
+        this.blockKind = null;
+        this.blockCard = null;
+        this.blockAttacker = null;
+    }
+
     private LegalCandidate(final int candidateId, final TargetCandidateKind targetKind, final GameObject target,
             final int targetEntityId, final String targetName, final ZoneType targetZone, final String semanticKey) {
         this.candidateId = candidateId;
@@ -395,6 +427,10 @@ public final class LegalCandidate {
         return new LegalCandidate(candidateId, BlockDeclarationCandidateKind.DONE, null, null);
     }
 
+    static LegalCandidate mulligan(final int candidateId, final MulliganCandidateKind kind) {
+        return new LegalCandidate(candidateId, Objects.requireNonNull(kind).semanticKey());
+    }
+
     public int getCandidateId() {
         return candidateId;
     }
@@ -459,6 +495,11 @@ public final class LegalCandidate {
     /** BLOCK candidate kind, otherwise {@code null}. */
     public BlockDeclarationCandidateKind getBlockKind() {
         return blockKind;
+    }
+
+    /** MULLIGAN candidate kind, or {@code null} for another decision family. */
+    public MulliganCandidateKind getMulliganKind() {
+        return MulliganCandidateKind.fromSemanticKey(semanticKey);
     }
 
     /** Stable blocker identity for BLOCK candidates, otherwise {@code null}. */

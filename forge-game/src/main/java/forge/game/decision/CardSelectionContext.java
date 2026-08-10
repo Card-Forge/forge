@@ -11,8 +11,9 @@ public final class CardSelectionContext {
     private final Integer actionSubdecisionIndex;
     private final int chooserId;
     private final int affectedPlayerId;
-    private final int sourceCardId;
-    private final long sourceCardTimestamp;
+    private final CardSelectionAdapter selectionAdapter;
+    private final Integer sourceCardId;
+    private final Long sourceCardTimestamp;
     private final int min;
     private final int max;
     private final List<CardSelectionCard> selectedCards;
@@ -31,8 +32,10 @@ public final class CardSelectionContext {
         this.actionSubdecisionIndex = actionSubdecisionIndex;
         this.chooserId = session.getChooser().getId();
         this.affectedPlayerId = session.getAffectedPlayer().getId();
-        this.sourceCardId = session.getSource().getHostCard().getId();
-        this.sourceCardTimestamp = session.getSource().getHostCard().getGameTimestamp();
+        this.selectionAdapter = session.getSelectionAdapter();
+        this.sourceCardId = session.getSource() == null ? null : session.getSource().getHostCard().getId();
+        this.sourceCardTimestamp = session.getSource() == null ? null
+                : session.getSource().getHostCard().getGameTimestamp();
         this.min = session.getMin();
         this.max = session.getMax();
         this.selectedCards = List.copyOf(session.getSelectedIdentities());
@@ -67,11 +70,15 @@ public final class CardSelectionContext {
         return affectedPlayerId;
     }
 
-    public int getSourceCardId() {
+    public CardSelectionAdapter getSelectionAdapter() {
+        return selectionAdapter;
+    }
+
+    public Integer getSourceCardId() {
         return sourceCardId;
     }
 
-    public long getSourceCardTimestamp() {
+    public Long getSourceCardTimestamp() {
         return sourceCardTimestamp;
     }
 

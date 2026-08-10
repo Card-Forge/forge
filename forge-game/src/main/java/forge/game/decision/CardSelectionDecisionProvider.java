@@ -28,6 +28,8 @@ public final class CardSelectionDecisionProvider {
         NEGATIVE_BOUNDS,
         MIN_EXCEEDS_MAX,
         IMPOSSIBLE_MINIMUM,
+        SOURCE_REQUIRED,
+        SOURCE_NOT_ALLOWED,
         HIDDEN_SELECTABLE_CARD,
         LIVE_STATE_CHANGED,
         REQUEST_OWNERSHIP,
@@ -41,11 +43,33 @@ public final class CardSelectionDecisionProvider {
     public SessionStart beginSession(final Player chooser, final Player affectedPlayer, final SpellAbility source,
             final CardCollection validCards, final int min, final int max,
             final CardCollectionView visibleToChooser) {
+        return beginSession(chooser, affectedPlayer, CardSelectionAdapter.DISCARD, source, validCards, min, max,
+                visibleToChooser);
+    }
+
+    /** Starts a source-absent selection session for an explicitly supported adapter. */
+    public SessionStart beginSession(final Player chooser, final Player affectedPlayer,
+            final CardSelectionAdapter selectionAdapter, final CardCollection validCards, final int min,
+            final int max, final CardCollectionView visibleToChooser) {
+        return beginSession(chooser, affectedPlayer, selectionAdapter, null, validCards, min, max,
+                visibleToChooser);
+    }
+
+    private SessionStart beginSession(final Player chooser, final Player affectedPlayer,
+            final CardSelectionAdapter selectionAdapter, final SpellAbility source,
+            final CardCollection validCards, final int min, final int max,
+            final CardCollectionView visibleToChooser) {
         Objects.requireNonNull(chooser);
         Objects.requireNonNull(affectedPlayer);
-        Objects.requireNonNull(source);
+        Objects.requireNonNull(selectionAdapter);
         Objects.requireNonNull(validCards);
         Objects.requireNonNull(visibleToChooser);
+        if (selectionAdapter == CardSelectionAdapter.DISCARD && source == null) {
+            return SessionStart.failure(Status.INVALID_DOMAIN, Reason.SOURCE_REQUIRED);
+        }
+        if (selectionAdapter == CardSelectionAdapter.MULLIGAN_BOTTOM && source != null) {
+            return SessionStart.failure(Status.INVALID_DOMAIN, Reason.SOURCE_NOT_ALLOWED);
+        }
         if (min < 0 || max < 0) {
             return SessionStart.failure(Status.INVALID_DOMAIN, Reason.NEGATIVE_BOUNDS);
         }
@@ -68,7 +92,7 @@ public final class CardSelectionDecisionProvider {
             }
         }
         final CardSelectionSession session = new CardSelectionSession(nextSessionId++, chooser, affectedPlayer,
-                source, min, max, validCards, new ArrayList<>(visible.values()));
+                selectionAdapter, source, min, max, validCards, new ArrayList<>(visible.values()));
         return SessionStart.ready(session);
     }
 

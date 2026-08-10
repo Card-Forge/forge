@@ -20,6 +20,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
 import forge.game.decision.DownstreamCallbackFamily;
+import forge.game.decision.MulliganDiagnostics;
 import forge.game.decision.PriorityActionDiagnostics;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -57,6 +58,7 @@ import java.util.stream.Collectors;
  * Handles phase skips for now.
  */
 public class PlayerControllerAi extends PlayerController {
+    private static final MulliganDiagnostics MULLIGAN_DIAGNOSTICS = MulliganDiagnostics.global();
     private final AiController brains;
 
     private boolean pilotsNonAggroDeck = false;
@@ -783,11 +785,18 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
-        return !ComputerUtil.wantMulligan(player, cardsToReturn);
+        final MulliganDiagnostics.KeepCapture capture = MULLIGAN_DIAGNOSTICS.captureKeepOrRedraw(player,
+                firstPlayer, cardsToReturn);
+        final long nativeCallbackStartedAtNanos = MULLIGAN_DIAGNOSTICS.startNativeCallback();
+        final boolean keep = !ComputerUtil.wantMulligan(player, cardsToReturn);
+        return MULLIGAN_DIAGNOSTICS.recordKeepOrRedraw(capture, keep, nativeCallbackStartedAtNanos);
     }
 
     @Override
     public CardCollectionView tuckCardsViaMulligan(CardCollectionView hand, int cardsToReturn) {
+        final MulliganDiagnostics.BottomCapture capture = MULLIGAN_DIAGNOSTICS.captureBottom(player, hand,
+                cardsToReturn);
+        final long nativeCallbackStartedAtNanos = MULLIGAN_DIAGNOSTICS.startNativeCallback();
         // TODO This is better than it was before, but still suboptimal (but fast).
         // Maybe score a bunch of hands based on projected hand size and return the "duds"
         int numLandsDesired = (player.getStartingHandSize() - cardsToReturn) / 2;
@@ -827,7 +836,8 @@ public class PlayerControllerAi extends PlayerController {
             toReturn.add(ComputerUtilCard.getWorstAI(hand));
         }
 
-        return CardCollection.getView(toReturn);
+        final CardCollectionView result = CardCollection.getView(toReturn);
+        return MULLIGAN_DIAGNOSTICS.recordBottom(capture, result, nativeCallbackStartedAtNanos);
     }
 
     @Override

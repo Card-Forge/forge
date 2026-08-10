@@ -40,6 +40,8 @@ public class CardSelectionDecisionProviderTest extends AITest {
         assertEquals(start.getStatus(), CardSelectionDecisionProvider.Status.READY);
         assertEquals(stepZero.getStatus(), CardSelectionDecisionProvider.Status.DECISION);
         assertEquals(stepZero.getRequest().getDecisionType(), DecisionType.CARD_SELECTION);
+        assertEquals(stepZero.getRequest().getCardSelectionContext().getSelectionAdapter(),
+                CardSelectionAdapter.DISCARD);
         assertEquals(stepZero.getRequest().getCandidates().size(), 3);
         assertEquals(stepZero.getRequest().getCardSelectionContext().getSelectionStepIndex(), 0);
         assertNull(stepZero.getRequest().getCardSelectionContext().getDecisionSequenceId());
@@ -348,6 +350,28 @@ public class CardSelectionDecisionProviderTest extends AITest {
                 + " shrinkage=[0, 1] generation_p50_ns=" + percentile(timings, 0.50)
                 + " generation_p95_ns=" + percentile(timings, 0.95)
                 + " generation_p99_ns=" + percentile(timings, 0.99));
+    }
+
+    @Test
+    public void mulliganBottomUsesAnExplicitSourceAbsentAdapter() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final Card first = addCardToZone("Island", chooser, ZoneType.Hand);
+        final Card second = addCardToZone("Mountain", chooser, ZoneType.Hand);
+        final CardCollection valid = new CardCollection(List.of(first, second));
+
+        final CardSelectionDecisionProvider.SessionStart start = provider.beginSession(chooser, chooser,
+                CardSelectionAdapter.MULLIGAN_BOTTOM, valid, 2, 2, valid);
+        final DecisionRequest request = provider.generateNext(start.getSession(), null).getRequest();
+        final CardSelectionContext context = request.getCardSelectionContext();
+
+        assertEquals(start.getStatus(), CardSelectionDecisionProvider.Status.READY);
+        assertEquals(context.getSelectionAdapter(), CardSelectionAdapter.MULLIGAN_BOTTOM);
+        assertNull(context.getSourceCardId());
+        assertNull(context.getSourceCardTimestamp());
+        assertNull(context.getDecisionSequenceId());
+        assertNull(context.getActionSubdecisionIndex());
+        assertEquals(request.getCandidates().size(), 2);
     }
 
     private DecisionRequest request(final Player chooser, final Player affected, final SpellAbility source,
