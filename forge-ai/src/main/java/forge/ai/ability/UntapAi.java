@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
@@ -228,7 +229,7 @@ public class UntapAi extends SpellAbilityAi {
                 if (choice == null) {
                     if ("PoolExtraMana".equals(sa.getParam("AILogic"))) {
                         // untapping was decided on to reach a spell, so untap what makes the mana
-                        choice = ComputerUtilCard.getBestLandAI(CardLists.filter(untapList, CardPredicates.LANDS_PRODUCING_MANA));
+                        choice = ComputerUtilCard.getBestAI(CardLists.filter(untapList, CardPredicates.PRODUCES_MANA));
                     } else if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
                         choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
                     } else if (!sa.getPayCosts().hasManaCost() || sa.isTrigger()
@@ -437,27 +438,20 @@ public class UntapAi extends SpellAbilityAi {
 
         // TODO: currently limited to Main 2, somehow improve to let the AI use this SA at other time?
         if (ph.is(PhaseType.MAIN2, ai) && untapReachesASpell(ai, playable, untappingCards.size())) {
-            CardCollection manaLandsTapped = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.LANDS_PRODUCING_MANA, CardPredicates.TAPPED);
-            manaLandsTapped = CardLists.getValidCards(manaLandsTapped, sa.getParam("ValidTgts"), ai, source, null);
-
-            if (!manaLandsTapped.isEmpty()) {
-                // already have a tapped land, so agree to proceed with untapping it
+            if (!targetableManaSources(ai, sa, source, CardPredicates.TAPPED).isEmpty()) {
+                // already have a tapped source, so agree to proceed with untapping it
                 return true;
             }
 
-            // pool one additional mana by tapping a land to try to ramp to something
-            CardCollection manaLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.LANDS_PRODUCING_MANA, CardPredicates.CAN_TAP);
-            manaLands = CardLists.getValidCards(manaLands, sa.getParam("ValidTgts"), ai, source, null);
+            // pool one additional mana by tapping a source to try to ramp to something
+            CardCollection manaSources = targetableManaSources(ai, sa, source, CardPredicates.CAN_TAP);
 
-            if (manaLands.isEmpty()) {
+            if (manaSources.isEmpty()) {
                 // nothing to untap
                 return false;
             }
 
-            Card landToPool = manaLands.getFirst();
-            SpellAbility manaAb = landToPool.getManaAbilities().getFirst();
+            SpellAbility manaAb = manaSources.getFirst().getManaAbilities().getFirst();
 
             ComputerUtil.playNoStack(ai, manaAb, game, false);
 
@@ -466,10 +460,18 @@ public class UntapAi extends SpellAbilityAi {
 
         // past declare blockers during the opponent's turn and right before our turn, untapping is
         // worth it for something we can hold up, e.g. a removal spell or burn spell we can't pay for
-        // yet - the lands untap on their own next turn, so it buys nothing beyond that
+        // yet - the sources untap on their own next turn, so it buys nothing beyond that
         return ph.getNextTurn() == ai
                 && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))
                 && holdsSomethingToCast(ai, inHand);
+    }
+
+    /** The mana sources in the given state that this untap could legally take as its target. */
+    private static CardCollection targetableManaSources(final Player ai, final SpellAbility sa,
+            final Card source, final Predicate<Card> state) {
+        CardCollection sources = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                CardPredicates.PRODUCES_MANA, state);
+        return CardLists.getValidCards(sources, sa.getParam("ValidTgts"), ai, source, null);
     }
 
     /**
