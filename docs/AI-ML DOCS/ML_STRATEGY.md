@@ -1,8 +1,8 @@
 # ForgeAI ML Strategy
 
 **Status:** Provisional / Accepted for implementation planning
-**Date:** 2026-08-08
-**Revision:** 9 — as revision 8, plus the post-CONFIRMATION sequence: ORDER attribution before decomposition, the modern DAMAGE_ASSIGNMENT information barrier, and the zero-unsupported gate ahead of RandomLegalPolicy
+**Date:** 2026-08-10
+**Revision:** 10 — corrects CONFIRMATION authority after the FRL-02K attribution audit; preserves the ORDER attribution sequence, the modern DAMAGE_ASSIGNMENT information barrier, and the zero-unsupported gate ahead of RandomLegalPolicy
 **Scope:** Initial ForgeRL 1v1 research environment
 
 ## Purpose
@@ -145,7 +145,7 @@ Initial policy:
 | `X_VALUE` — bounded small range      | Enumerate where practical                                     |
 | `MULLIGAN` — keep/redraw             | Enumerate (binary)                                            |
 | `MULLIGAN` — London bottoming        | Sequential `CARD_SELECTION` (max 35 subsets; enumerable, but sequential for identity reuse) |
-| `CONFIRMATION`                       | Enumerate                                                     |
+| `CONFIRMATION`                       | Attribution required; enumerate only for a proven semantic adapter |
 | `CARD_SELECTION` — small bounded set | Enumerate or sequential selection                             |
 | `ATTACK`                             | Decompose into sequential set construction                    |
 | `BLOCK`                              | Decompose into blocker/attacker assignments                   |
@@ -157,6 +157,8 @@ Initial policy:
 This table is an initial architectural policy, not a complete inventory of Forge callbacks.
 
 Every actual `PlayerController` decision type must eventually be classified explicitly.
+
+`CONFIRMATION` is not one homogeneous callback family. The FRL-02K0 safety gate and the FRL-02K attribution audit are complete, but production adapter implementation remains **OPEN**. Normal mandatory triggers are engine-owned and generate no `DecisionRequest`. Optional no-cost normal triggers are the candidate future confirmation adapter. Nonzero-cost optional triggers are cost/payment-owned and must not receive a duplicate generic accept/decline request. `confirmAction` is heterogeneous by caller-owned semantics; `confirmTrigger` is a mixed callback surface rather than an authoritative boundary; bid, replacement, static-application and binary choices remain separate semantic families.
 
 ### Rationale: generalization, not current infeasibility
 
@@ -404,7 +406,7 @@ Every synthetic decision must still compose into exactly one legal Forge result 
 
 ## 3.8 Implemented Boundary Status
 
-The initial policy in 3.1 has now been tested against the engine. Status as of FRL-02J:
+The initial policy in 3.1 has now been tested against the engine. Status as of the FRL-02K attribution audit:
 
 | DecisionType | Milestone | Realised representation | Status |
 |---|---|---|---|
@@ -418,6 +420,7 @@ The initial policy in 3.1 has now been tested against the engine. Status as of F
 | `ATTACK` | FRL-02G | `ADD_ATTACKER \| ... \| DONE` | SUPPORTED for constraint-free 1v1 slice |
 | `BLOCK` | FRL-02H | Two-stage `CHOOSE_BLOCKER` → `CHOOSE_ATTACKER_FOR_BLOCKER` | SUPPORTED for independent-pair Player-only slice |
 | `MULLIGAN` | FRL-02J | KEEP/REDRAW plus `MULLIGAN_BOTTOM` card selection | SUPPORTED for ordinary 1v1 Constructed London mulligan |
+| `CONFIRMATION` | FRL-02K | attribution complete; no generic adapter approved; implementation OPEN | **OPEN** |
 | `ORDER` | 18.2 | attribution pending — see below | OPEN, aggregate |
 | `DAMAGE_ASSIGNMENT` | — | see 3.9 | OPEN |
 
@@ -1929,7 +1932,23 @@ Priority Legal-Action Boundary
 FRL-01B+ / FRL-02x
 remaining algorithm-neutral
 decision boundaries
-        ✅ through CONFIRMATION
+        FRL-02K0
+        PASS
+
+        ↓
+
+        FRL-02K attribution audit
+        PASS
+
+        ↓
+
+        FRL-02K semantic adapter closure
+        OPEN
+
+        ↓
+
+        CONFIRMATION implementation
+        OPEN
 
         ↓
 
@@ -1951,9 +1970,8 @@ and any new ones
 
         ↓
 
-Gap Closure
+Gap Closure / PAYMENT
 primarily VARIABLE_MANA_OUTPUT
-/ PAYMENT
 
         ↓
 
