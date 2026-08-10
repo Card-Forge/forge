@@ -32,6 +32,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     private final FCollectionView<T> validChoices;
     protected final FCollection<T> selected = new FCollection<>();
     protected Iterable<PlayerZoneUpdate> zonesShown; // want to hide these zones when input done
+    private PlayerZoneUpdates zonesToShow;
     protected MassSelectMode massSelectMode = null;
 
     public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0) {
@@ -55,17 +56,13 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
             }
         }
         getController().getGui().setSelectables(vCards, this.min, this.max);
-        final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
+        zonesToShow = new PlayerZoneUpdates();
         for (final GameEntity ge : validChoices) {
             final Zone cz = ge instanceof Card c ? c.getLastKnownZone() : null;
             if (cz != null) {
-                zonesToUpdate.add(new PlayerZoneUpdate(cz.getPlayer().getView(), cz.getZoneType()));
+                zonesToShow.add(new PlayerZoneUpdate(cz.getPlayer().getView(), cz.getZoneType()));
             }
         }
-        FThreads.invokeInEdtNowOrLater(() -> {
-            getController().getGui().updateZones(zonesToUpdate);
-            zonesShown = getController().getGui().tempShowZones(controller.getPlayer().getView(), zonesToUpdate);
-        });
     }
     
     @Override
@@ -167,7 +164,8 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
     @Override
     protected void onStop() {
-        getController().getGui().hideZones(getController().getPlayer().getView(),zonesShown);  
+        // fall back to zonesToShow if the input stopped before the tempShowZones reply landed
+        getController().getGui().hideZones(getController().getPlayer().getView(), zonesShown != null ? zonesShown : zonesToShow);
         getController().getGui().clearSelectables();
         super.onStop();
     }
@@ -183,6 +181,12 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     @Override
     public void showMessage() {
         super.showMessage();
+        // show zones after the prompt/buttons: for a remote player tempShowZones blocks on a
+        // round trip. EDT-only so a netty-thread refresh() can't start a second one.
+        if (zonesShown == null && zonesToShow != null && FThreads.isGuiThread()) {
+            getController().getGui().updateZones(zonesToShow);
+            zonesShown = getController().getGui().tempShowZones(getController().getPlayer().getView(), zonesToShow);
+        }
         // Use mass select mode for proliferate. If you wanted to add it to a different effect
         // the effect must allow you to select any number of targets between "none" and "all valid targets"
         if (sa != null && ApiType.Proliferate == sa.getApi() && min == 0) {
