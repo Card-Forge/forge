@@ -133,12 +133,20 @@ public final class DeterminismTrace {
         if (game.getOutcome().isDraw()) {
             return "DRAW";
         }
+        final List<Integer> winningSeats = new ArrayList<>();
         for (final Player player : game.getRegisteredPlayers()) {
-            if (player.getRegisteredPlayer().equals(game.getOutcome().getWinningPlayer())) {
-                return "WINNER_SEAT_" + player.getId();
+            if (player.getOutcome() != null && player.getOutcome().hasWon()) {
+                winningSeats.add(player.getId());
             }
         }
-        return "MAPPING_FAILED";
+        Collections.sort(winningSeats);
+        if (winningSeats.size() == 1) {
+            return "WINNER_SEAT_" + winningSeats.get(0);
+        }
+        if (winningSeats.isEmpty()) {
+            return "MAPPING_FAILED";
+        }
+        return "INVALID_WINNER_SEATS_" + winningSeats.toString().replace(" ", "");
     }
 
     private void write(final String fileName, final List<String> records) throws IOException {
