@@ -32,7 +32,8 @@ public class MulliganDecisionProviderTest extends AITest {
 
         final MulliganDecisionProvider.SessionStart start = provider.beginCallback(acting, starting,
                 new CardCollection(List.of(first, second)), 0);
-        final MulliganDecisionProvider.Generation generation = provider.generateNext(start.getSession());
+        final MulliganDecisionProvider.Generation generation = NeutralityAssertions.assertGameAndRngNeutral(
+                "MULLIGAN generation", game, () -> provider.generateNext(start.getSession()));
 
         assertEquals(start.getStatus(), MulliganDecisionProvider.Status.READY);
         assertEquals(generation.getStatus(), MulliganDecisionProvider.Status.DECISION);

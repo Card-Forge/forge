@@ -164,7 +164,8 @@ public class XDecisionProviderTest extends AITest {
         final List<String> withoutOldX = keys(decision(invoke, player, null));
         invoke.setXManaCostPaid(9);
 
-        final XDecisionProvider.Generation generation = provider.generateXRequest(invoke, player, null);
+        final XDecisionProvider.Generation generation = NeutralityAssertions.assertGameAndRngNeutral(
+                "X_VALUE generation", game, () -> provider.generateXRequest(invoke, player, null));
 
         assertEquals(generation.getStatus(), XDecisionProvider.Status.DECISION);
         assertEquals(keys(generation.getRequest()), withoutOldX);

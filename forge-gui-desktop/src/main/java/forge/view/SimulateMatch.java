@@ -1,6 +1,8 @@
 package forge.view;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -19,6 +21,7 @@ import forge.game.GameLogEntryType;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
+import forge.game.decision.DeterminismTrace;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.tournament.system.AbstractTournament;
 import forge.gamemodes.tournament.system.TournamentBracket;
@@ -30,6 +33,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Lang;
+import forge.util.DeterminismAuditRandom;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.WordUtil;
@@ -86,7 +90,10 @@ public class SimulateMatch {
         Long seed = null;
         if (params.containsKey("s")) {
             seed = Long.parseLong(params.get("s").get(0));
-            MyRandom.setRandom(new Random(seed));
+            MyRandom.setRandom(seededRandom(seed));
+        } else if (!System.getProperty(DeterminismTrace.OUTPUT_DIRECTORY_PROPERTY, "").isBlank()) {
+            System.err.println("Determinism trace mode requires an explicit simulation seed");
+            return;
         }
 
         GameType type = GameType.Constructed;
@@ -206,7 +213,10 @@ public class SimulateMatch {
         final StopWatch sw = new StopWatch();
         sw.start();
 
+        final long rngStartIndex = MyRandom.getRandom() instanceof DeterminismAuditRandom random
+                ? random.getDrawCount() : 0L;
         final Game g1 = mc.createGame();
+        final DeterminismTrace determinismTrace = attachDeterminismTrace(g1, iGame, rngStartIndex);
         // will run match in the same thread
         try {
             TimeLimitedCodeBlock.runWithTimeout(() -> {
@@ -222,6 +232,7 @@ public class SimulateMatch {
                 sw.stop();
             }
             g1.setGameOver(GameEndReason.Draw);
+            finishDeterminismTrace(determinismTrace);
         }
 
         List<GameLogEntry> log;
@@ -372,6 +383,40 @@ public class SimulateMatch {
 
     public static Match simulateOffthreadGame(List<Deck> decks, GameType format, int games) {
         return null;
+    }
+
+    static Random seededRandom(final long seed) {
+        if (System.getProperty(DeterminismTrace.OUTPUT_DIRECTORY_PROPERTY, "").isBlank()) {
+            return new Random(seed);
+        }
+        return new DeterminismAuditRandom(seed);
+    }
+
+    private static DeterminismTrace attachDeterminismTrace(final Game game, final int gameIndex,
+            final long rngStartIndex) {
+        final String outputDirectory = System.getProperty(DeterminismTrace.OUTPUT_DIRECTORY_PROPERTY, "");
+        if (outputDirectory.isBlank()) {
+            return null;
+        }
+        if (!(MyRandom.getRandom() instanceof DeterminismAuditRandom random)) {
+            throw new IllegalStateException("Determinism trace mode requires the seeded audit RNG");
+        }
+        try {
+            return DeterminismTrace.attach(game, gameIndex, random, Path.of(outputDirectory), rngStartIndex);
+        } catch (final IOException ex) {
+            throw new IllegalStateException("Unable to initialize determinism trace output", ex);
+        }
+    }
+
+    private static void finishDeterminismTrace(final DeterminismTrace trace) {
+        if (trace == null) {
+            return;
+        }
+        try {
+            trace.finish();
+        } catch (final IOException ex) {
+            throw new IllegalStateException("Unable to write determinism trace output", ex);
+        }
     }
 
     private static Deck deckFromCommandLineParameter(String deckname, GameType type) {

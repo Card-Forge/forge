@@ -40,8 +40,9 @@ public class PaymentDecisionProviderTest extends AITest {
         final ManaCostBeingPaid remaining = new ManaCostBeingPaid(
                 spell.getPayCosts().getCostMana().getManaCostFor(spell));
 
-        final PaymentDecisionProvider.Generation generation = provider.generatePaymentRequest(
-                remaining, spell, payer, identityMatrix(), null);
+        final PaymentDecisionProvider.Generation generation = NeutralityAssertions.assertGameAndRngNeutral(
+                "PAYMENT generation", game,
+                () -> provider.generatePaymentRequest(remaining, spell, payer, identityMatrix(), null));
         final DecisionRequest request = generation.getRequest();
 
         assertEquals(request.getDecisionType(), DecisionType.PAYMENT);

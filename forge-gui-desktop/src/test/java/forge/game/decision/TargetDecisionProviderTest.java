@@ -188,7 +188,8 @@ public class TargetDecisionProviderTest extends AITest {
         final SpellAbility ability = targetAbility("Dark Banishing", chooser);
         final Card bear = addCard("Runeclaw Bear", opponent);
 
-        final DecisionRequest request = decision(ability, chooser);
+        final DecisionRequest request = NeutralityAssertions.assertGameAndRngNeutral(
+                "TARGET generation", game, () -> decision(ability, chooser));
 
         assertTrue(request.isForced());
         assertEquals(targetCardIds(request), List.of(bear.getId()));

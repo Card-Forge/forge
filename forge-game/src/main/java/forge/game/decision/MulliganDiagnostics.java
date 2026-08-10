@@ -126,11 +126,15 @@ public final class MulliganDiagnostics {
                     .filter(candidate -> candidate.getMulliganKind() == selectedKind)
                     .findFirst().orElse(null);
             if (selected == null) {
+                traceDecision(capture.actingPlayer, DecisionType.MULLIGAN, "KEEP_OR_REDRAW",
+                        context.getMulliganStepIndex(), request.isForced(), null);
                 emit("MULLIGAN_STATE", context, request.getCandidates().size(), false, "",
                         "MAPPING_FAILED", "MULLIGAN_CANDIDATE_NOT_FOUND", 0L, nativeCallbackNanos, "", -1L,
                         -1, 0, 0, 0);
                 return nativeKeep;
             }
+            traceDecision(capture.actingPlayer, request, "KEEP_OR_REDRAW",
+                    context.getMulliganStepIndex(), selected);
             final MulliganDecisionProvider.Generation applied = mulliganProvider.apply(request, selected);
             emit("MULLIGAN", context, request.getCandidates().size(), false, selected.getSemanticKey(),
                     applied.getStatus().name(), "", applied.getGenerationNanos(), nativeCallbackNanos, "", -1L,
@@ -184,6 +188,8 @@ public final class MulliganDiagnostics {
             for (final MulliganBottomAdapter.ReplayStep step : replay.getSteps()) {
                 final DecisionRequest request = step.getRequest();
                 final CardSelectionContext context = request.getCardSelectionContext();
+                traceDecision(capture.actingPlayer, request, context.getSelectionAdapter().name(),
+                        context.getSelectionStepIndex(), step.getCandidate());
                 emit("CARD_SELECTION", parentGameId(capture), parentSessionId(capture), parentRound(capture),
                         parentStep(capture), capture.actingPlayer.getId(), parentStartingPlayerId(capture),
                         capture.cardsToReturn, context.getVisibleCards().size(), request.getCandidates().size(),
@@ -205,6 +211,8 @@ public final class MulliganDiagnostics {
         if (!enabled) {
             return;
         }
+        traceDecision(actingPlayer, DecisionType.MULLIGAN, "KEEP_OR_REDRAW", -1, true,
+                MulliganCandidateKind.KEEP.semanticKey());
         emit("MULLIGAN_CALLBACK", actingPlayer.getGame().getId(), -1L, -1, -1, actingPlayer.getId(),
                 startingPlayer.getId(), cardsToReturn, actingPlayer.getCardsIn(ZoneType.Hand).size(), 0, true,
                 MulliganCandidateKind.KEEP.semanticKey(), "FORCED_KEEP", "CAN_MULLIGAN_FALSE", 0L, 0L, "", -1L,
@@ -215,6 +223,19 @@ public final class MulliganDiagnostics {
         synchronized (events) {
             return List.copyOf(events);
         }
+    }
+
+    private static void traceDecision(final Player actingPlayer, final DecisionRequest request,
+            final String adapterOrStage, final int decisionStepIndex, final LegalCandidate selectedCandidate) {
+        traceDecision(actingPlayer, request.getDecisionType(), adapterOrStage, decisionStepIndex,
+                request.isForced(), selectedCandidate == null ? "MAPPING_FAILED" : selectedCandidate.getSemanticKey());
+    }
+
+    private static void traceDecision(final Player actingPlayer, final DecisionType decisionType,
+            final String adapterOrStage, final int decisionStepIndex, final boolean forced,
+            final String selectedSemanticKey) {
+        DeterminismTrace.recordDecision(actingPlayer.getGame(), actingPlayer.getId(), decisionType,
+                adapterOrStage, decisionStepIndex, forced, selectedSemanticKey);
     }
 
     private void emitBottomState(final BottomCapture capture, final String status, final String reason,

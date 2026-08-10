@@ -25,7 +25,8 @@ public class PriorityActionProviderTest extends AITest {
         final Game game = initAndCreateGame();
         final Player player = game.getPlayers().get(1);
 
-        final DecisionRequest request = provider.createPriorityRequest(player);
+        final DecisionRequest request = NeutralityAssertions.assertGameAndRngNeutral(
+                "PRIORITY_ACTION generation", game, () -> provider.createPriorityRequest(player));
 
         assertEquals(request.getDecisionType(), DecisionType.PRIORITY_ACTION);
         assertEquals(request.getCandidates().size(), 1);
