@@ -622,8 +622,12 @@ public class CardView extends GameEntityView {
     }
     public boolean mayPlayerLook(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);
-        // TODO don't use contains as it only queries the backing HashSet which is problematic for netplay because of unsynchronized player ids
-        return col != null && col.indexOf(pv) != -1;
+        if (col == null) { return false; }
+        // compare by id, not reference: MP client/server PlayerViews are distinct objects
+        for (PlayerView p : col) {
+            if (p.getId() == pv.getId()) { return true; }
+        }
+        return false;
     }
     void setPlayerMayLook(Iterable<Player> list) {
         if (Iterables.isEmpty(list)) {
