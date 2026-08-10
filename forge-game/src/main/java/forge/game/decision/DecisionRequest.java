@@ -2,6 +2,8 @@ package forge.game.decision;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 /** An immutable set of legal alternatives for one atomic player decision. */
 public final class DecisionRequest {
@@ -80,6 +82,13 @@ public final class DecisionRequest {
         this.mulliganContext = mulliganContext;
         if (this.candidates.isEmpty()) {
             throw new IllegalArgumentException("A DecisionRequest must contain at least one legal candidate");
+        }
+        final Set<String> semanticKeys = new HashSet<>();
+        for (final LegalCandidate candidate : this.candidates) {
+            if (!semanticKeys.add(candidate.getSemanticKey())) {
+                throw new IllegalArgumentException("DecisionRequest candidate semantic keys must be unique: "
+                        + candidate.getSemanticKey());
+            }
         }
         if (decisionType == DecisionType.TARGET && targetContext == null) {
             throw new IllegalArgumentException("A TARGET DecisionRequest requires target context");

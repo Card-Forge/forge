@@ -14,8 +14,11 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.DeterminismAuditRandom;
 import org.testng.annotations.Test;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
@@ -84,6 +87,46 @@ public class XDecisionProviderTest extends AITest {
 
         assertEquals(values(request), List.of(0));
         assertTrue(request.isForced());
+    }
+
+    @Test
+    public void nativeXResultClosesOnlyAfterMappingAndForcedMismatchIsVisible() throws Exception {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        addCard("Island", player);
+        addCard("Island", player);
+        addCard("Mountain", player);
+        final Path output = Files.createTempDirectory("frl02k0-x-result-");
+        final DeterminismTrace trace = DeterminismTrace.attach(game, 0,
+                new DeterminismAuditRandom(20260810L), output);
+        try {
+            final DecisionRequest forcedRequest = decision(invoke(player, 0), player, null);
+            final DeterminismTrace.RequestHandle forcedHandle = DeterminismTrace.recordRequest(game,
+                    player.getId(), forcedRequest, "X_VALUE", 0);
+            assertFalse(forcedHandle.getResultRecord().isPresent());
+            PriorityActionDiagnostics.recordXResult(
+                    new PriorityActionDiagnostics.XTraceCapture(forcedRequest, forcedHandle), 1);
+            assertEquals(forcedHandle.getResultRecord().orElseThrow().getKind(),
+                    DecisionTraceResultKind.MAPPING_FAILED);
+
+            addCard("Forest", player);
+            final DecisionRequest strategicRequest = decision(invoke(player, 0), player, null);
+            final DeterminismTrace.RequestHandle strategicHandle = DeterminismTrace.recordRequest(game,
+                    player.getId(), strategicRequest, "X_VALUE", 0);
+            PriorityActionDiagnostics.recordXResult(
+                    new PriorityActionDiagnostics.XTraceCapture(strategicRequest, strategicHandle), 1);
+            assertEquals(strategicHandle.getResultRecord().orElseThrow().getKind(),
+                    DecisionTraceResultKind.CHOSEN);
+            assertEquals(strategicHandle.getResultRecord().orElseThrow().getSelectedCandidateSemanticKey(), "X|1");
+        } finally {
+            trace.finish();
+            try (var files = Files.list(output)) {
+                for (final Path file : files.toList()) {
+                    Files.deleteIfExists(file);
+                }
+            }
+            Files.deleteIfExists(output);
+        }
     }
 
     @Test

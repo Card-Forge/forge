@@ -2,7 +2,10 @@ package forge.view;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -22,6 +25,9 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.decision.DeterminismTrace;
+import forge.game.decision.DiagnosticOutputPaths;
+import forge.game.decision.ReferenceGameplayObserver;
+import forge.game.decision.DeterminismTraceHasher;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.tournament.system.AbstractTournament;
 import forge.gamemodes.tournament.system.TournamentBracket;
@@ -91,7 +97,8 @@ public class SimulateMatch {
         if (params.containsKey("s")) {
             seed = Long.parseLong(params.get("s").get(0));
             MyRandom.setRandom(seededRandom(seed));
-        } else if (!System.getProperty(DeterminismTrace.OUTPUT_DIRECTORY_PROPERTY, "").isBlank()) {
+        } else if (DiagnosticOutputPaths.resolve().determinismTraceDirectory().isPresent()
+                || Boolean.getBoolean(DeterminismTrace.AUDIT_RANDOM_PROPERTY)) {
             System.err.println("Determinism trace mode requires an explicit simulation seed");
             return;
         }
@@ -216,6 +223,7 @@ public class SimulateMatch {
         final long rngStartIndex = MyRandom.getRandom() instanceof DeterminismAuditRandom random
                 ? random.getDrawCount() : 0L;
         final Game g1 = mc.createGame();
+        final ReferenceGameplayObserver referenceObserver = attachReferenceObserver(g1, iGame);
         final DeterminismTrace determinismTrace = attachDeterminismTrace(g1, iGame, rngStartIndex);
         // will run match in the same thread
         try {
@@ -233,25 +241,33 @@ public class SimulateMatch {
             }
             g1.setGameOver(GameEndReason.Draw);
             finishDeterminismTrace(determinismTrace);
+            finishReferenceObserver(referenceObserver);
+            writeReferenceRng(iGame, rngStartIndex);
         }
 
-        List<GameLogEntry> log;
-        if (outputGamelog) {
-            log = g1.getGameLog().getLogEntries(null);
-        } else {
-            log = g1.getGameLog().getLogEntries(GameLogEntryType.MATCH_RESULTS);
-        }
-        Collections.reverse(log);
-        for (GameLogEntry l : log) {
+        for (GameLogEntry l : reportableLogEntries(g1, outputGamelog)) {
             System.out.println(l);
         }
 
-        // If both players life totals to 0 in a single turn, the game should end in a draw
-        if (g1.getOutcome().isDraw()) {
+        final SimulationOutcomeClassification outcome = SimulationOutcomeClassification.classify(g1);
+        writeReferenceOutcome(iGame, outcome);
+        if (outcome.getKind() == SimulationOutcomeClassification.Kind.DRAW) {
             System.out.printf("\nGame Result: Game %d ended in a Draw! Took %d ms.%n", 1 + iGame, sw.getTime());
+        } else if (outcome.getKind() == SimulationOutcomeClassification.Kind.SINGLE_WINNER) {
+            System.out.printf("\nGame Result: Game %d ended in %d ms. %s has won!\n%n", 1 + iGame,
+                    sw.getTime(), outcome.getWinnerName().orElseThrow());
         } else {
-            System.out.printf("\nGame Result: Game %d ended in %d ms. %s has won!\n%n", 1 + iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName());
+            System.out.printf("\nGame Result: Game %d has %s. Took %d ms.%n", 1 + iGame,
+                    outcome.canonical(), sw.getTime());
         }
+    }
+
+    static List<GameLogEntry> reportableLogEntries(final Game game, final boolean outputGamelog) {
+        final List<GameLogEntry> entries = new ArrayList<>(game.getGameLog().getLogEntries(
+                outputGamelog ? null : GameLogEntryType.MATCH_RESULTS));
+        entries.removeIf(entry -> entry.type() == GameLogEntryType.MATCH_RESULTS);
+        Collections.reverse(entries);
+        return entries;
     }
 
     private static void simulateTournament(Map<String, List<String>> params, GameRules rules, boolean outputGamelog) {
@@ -386,7 +402,8 @@ public class SimulateMatch {
     }
 
     static Random seededRandom(final long seed) {
-        if (System.getProperty(DeterminismTrace.OUTPUT_DIRECTORY_PROPERTY, "").isBlank()) {
+        if (DiagnosticOutputPaths.resolve().determinismTraceDirectory().isEmpty()
+                && !Boolean.getBoolean(DeterminismTrace.AUDIT_RANDOM_PROPERTY)) {
             return new Random(seed);
         }
         return new DeterminismAuditRandom(seed);
@@ -394,15 +411,15 @@ public class SimulateMatch {
 
     private static DeterminismTrace attachDeterminismTrace(final Game game, final int gameIndex,
             final long rngStartIndex) {
-        final String outputDirectory = System.getProperty(DeterminismTrace.OUTPUT_DIRECTORY_PROPERTY, "");
-        if (outputDirectory.isBlank()) {
+        final Optional<Path> outputDirectory = DiagnosticOutputPaths.resolve().determinismTraceDirectory();
+        if (outputDirectory.isEmpty()) {
             return null;
         }
         if (!(MyRandom.getRandom() instanceof DeterminismAuditRandom random)) {
             throw new IllegalStateException("Determinism trace mode requires the seeded audit RNG");
         }
         try {
-            return DeterminismTrace.attach(game, gameIndex, random, Path.of(outputDirectory), rngStartIndex);
+            return DeterminismTrace.attach(game, gameIndex, random, outputDirectory.orElseThrow(), rngStartIndex);
         } catch (final IOException ex) {
             throw new IllegalStateException("Unable to initialize determinism trace output", ex);
         }
@@ -417,6 +434,77 @@ public class SimulateMatch {
         } catch (final IOException ex) {
             throw new IllegalStateException("Unable to write determinism trace output", ex);
         }
+    }
+
+    private static ReferenceGameplayObserver attachReferenceObserver(final Game game, final int gameIndex) {
+        final String outputDirectory = System.getProperty(ReferenceGameplayObserver.OUTPUT_DIRECTORY_PROPERTY, "");
+        if (outputDirectory.isBlank()) {
+            return null;
+        }
+        try {
+            return ReferenceGameplayObserver.attach(game, gameIndex, Path.of(outputDirectory));
+        } catch (final IOException ex) {
+            throw new IllegalStateException("Unable to initialize reference gameplay output", ex);
+        }
+    }
+
+    private static void finishReferenceObserver(final ReferenceGameplayObserver observer) {
+        if (observer == null) {
+            return;
+        }
+        try {
+            observer.finish();
+        } catch (final IOException ex) {
+            throw new IllegalStateException("Unable to write reference gameplay output", ex);
+        }
+    }
+
+    private static void writeReferenceRng(final int gameIndex, final long rngStartIndex) {
+        final Optional<Path> outputDirectory = referenceOutputDirectory();
+        if (outputDirectory.isEmpty()) {
+            return;
+        }
+        if (!(MyRandom.getRandom() instanceof DeterminismAuditRandom random)) {
+            throw new IllegalStateException("Reference RNG output requires the seeded audit RNG");
+        }
+        final long rngEndIndex = random.getDrawCount();
+        final List<String> records = random.getCanonicalRecords(rngStartIndex, rngEndIndex);
+        final String prefix = String.format(Locale.ROOT, "game-%03d", gameIndex + 1);
+        try {
+            Files.write(outputDirectory.orElseThrow().resolve(prefix + ".reference-rng.trace"), records,
+                    StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING,
+                    StandardOpenOption.WRITE);
+            Files.write(outputDirectory.orElseThrow().resolve(prefix + ".reference-rng-summary.properties"),
+                    List.of("rngTraceVersion=" + DeterminismTrace.RNG_TRACE_VERSION,
+                            "rngHash=" + DeterminismTraceHasher.sha256(records),
+                            "rngDrawStart=" + rngStartIndex,
+                            "rngDrawEnd=" + rngEndIndex,
+                            "rngDrawCount=" + (rngEndIndex - rngStartIndex)), StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+        } catch (final IOException ex) {
+            throw new IllegalStateException("Unable to write reference RNG output", ex);
+        }
+    }
+
+    private static void writeReferenceOutcome(final int gameIndex,
+            final SimulationOutcomeClassification outcome) {
+        final Optional<Path> outputDirectory = referenceOutputDirectory();
+        if (outputDirectory.isEmpty()) {
+            return;
+        }
+        final String prefix = String.format(Locale.ROOT, "game-%03d", gameIndex + 1);
+        try {
+            Files.writeString(outputDirectory.orElseThrow().resolve(prefix + ".reference-outcome.txt"),
+                    outcome.canonical() + System.lineSeparator(), StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+        } catch (final IOException ex) {
+            throw new IllegalStateException("Unable to write reference outcome", ex);
+        }
+    }
+
+    private static Optional<Path> referenceOutputDirectory() {
+        final String outputDirectory = System.getProperty(ReferenceGameplayObserver.OUTPUT_DIRECTORY_PROPERTY, "");
+        return outputDirectory.isBlank() ? Optional.empty() : Optional.of(Path.of(outputDirectory));
     }
 
     private static Deck deckFromCommandLineParameter(String deckname, GameType type) {

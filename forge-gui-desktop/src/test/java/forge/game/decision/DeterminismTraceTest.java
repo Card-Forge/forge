@@ -26,8 +26,14 @@ public class DeterminismTraceTest extends AITest {
         final Path directory = Files.createTempDirectory("frl02k0-trace-");
         try {
             final DeterminismTrace trace = DeterminismTrace.attach(game, 0, random, directory);
-            DeterminismTrace.recordDecision(game, player.getId(), DecisionType.PRIORITY_ACTION,
-                    "PRIORITY", 0, false, "PRIORITY_ACTION|PASS");
+            final MulliganContext context = new MulliganContext(game.getId(), 1L, 0, 0,
+                    player.getId(), game.getPlayers().get(1).getId(), 0, 7,
+                    MulliganStage.KEEP_OR_REDRAW, List.of());
+            final DecisionRequest request = new DecisionRequest(1L, DecisionType.MULLIGAN,
+                    List.of(LegalCandidate.mulligan(0, MulliganCandidateKind.KEEP),
+                            LegalCandidate.mulligan(1, MulliganCandidateKind.REDRAW)), context);
+            DeterminismTrace.recordRequest(game, player.getId(), request, "KEEP_OR_REDRAW", 0)
+                    .recordMappedResult(request.getCandidates().get(0));
             random.nextBoolean();
             trace.recordGameplayCheckpoint("MANUAL");
             trace.finish();
@@ -43,12 +49,14 @@ public class DeterminismTraceTest extends AITest {
             assertTrue(Files.exists(rngDiagnostic));
             assertTrue(Files.exists(summary));
             assertTrue(Files.readString(gameplay, StandardCharsets.UTF_8).startsWith("GAMEPLAY_TRACE_V1|0|"));
-            assertTrue(Files.readString(decision, StandardCharsets.UTF_8).startsWith("DECISION_TRACE_V1|0|"));
+            assertTrue(Files.readString(decision, StandardCharsets.UTF_8)
+                    .startsWith("DECISION_TRACE_V2|REQUEST|0|"));
             assertTrue(Files.readString(rng, StandardCharsets.UTF_8).startsWith("RNG_TRACE_V1|0|"));
             final List<String> summaryLines = Files.readAllLines(summary, StandardCharsets.UTF_8);
             assertTrue(summaryLines.stream().anyMatch(line -> line.startsWith("gameplayHash=")));
             assertTrue(summaryLines.stream().anyMatch(line -> line.startsWith("decisionHash=")));
             assertTrue(summaryLines.stream().anyMatch(line -> line.startsWith("rngHash=")));
+            assertTrue(summaryLines.contains("decisionTraceVersion=DECISION_TRACE_V2"));
         } finally {
             deleteTraceDirectory(directory);
         }

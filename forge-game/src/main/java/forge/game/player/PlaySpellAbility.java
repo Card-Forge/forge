@@ -749,13 +749,17 @@ public class PlaySpellAbility {
             for (final String aVar : announce.split(",")) {
                 final String varName = aVar.trim();
                 Range<Integer> range = AbilityUtils.getAnnouncementBounds(ability, varName);
+                PriorityActionDiagnostics.XTraceCapture xTrace = null;
 
                 if ("X".equalsIgnoreCase(varName)) {
-                    PriorityActionDiagnostics.recordXAnnouncement(ability, controller.getPlayer(),
+                    xTrace = PriorityActionDiagnostics.recordXAnnouncement(ability, controller.getPlayer(),
                             range.getMinimum(), range.getMaximum());
                 }
 
                 final Integer value = controller.announceRequirements(ability, range.getMinimum(), range.getMaximum(), varName);
+                if ("X".equalsIgnoreCase(varName)) {
+                    PriorityActionDiagnostics.recordXResult(xTrace, value);
+                }
                 if (value == null) {
                     return false;
                 }
@@ -777,9 +781,11 @@ public class PlaySpellAbility {
                 boolean replacedXshard = ability.isSpell() && ability.getHostCard().getManaCost().countX() > 0 && !cost.hasXInAnyCostPart();
                 if (("Count$xPaid".equals(sVar) && !replacedXshard) || sVar.isEmpty()) {
                     Range<Integer> range = AbilityUtils.getAnnouncementBounds(ability, "X");
-                    PriorityActionDiagnostics.recordXAnnouncement(ability, controller.getPlayer(),
+                    final PriorityActionDiagnostics.XTraceCapture xTrace =
+                            PriorityActionDiagnostics.recordXAnnouncement(ability, controller.getPlayer(),
                             range.getMinimum(), range.getMaximum());
                     final Integer value = controller.announceRequirements(ability, range.getMinimum(), range.getMaximum(), "X");
+                    PriorityActionDiagnostics.recordXResult(xTrace, value);
                     if (value == null) {
                         return false;
                     }

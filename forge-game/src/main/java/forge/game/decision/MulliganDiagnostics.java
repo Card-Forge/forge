@@ -19,7 +19,8 @@ import java.util.List;
 public final class MulliganDiagnostics {
     public static final String OUTPUT_PATH_PROPERTY = "forge.mulligan.metricsFile";
 
-    private static final String OUTPUT_PATH = System.getProperty(OUTPUT_PATH_PROPERTY, "");
+    private static final String OUTPUT_PATH = DiagnosticOutputPaths.resolve().mulliganMetricsFile()
+            .map(Path::toString).orElse("");
     private static final long PROCESS_ID = ProcessHandle.current().pid();
     private static final String HEADER = "event_type,process_id,game_id,mulligan_session_id,mulligan_round_index,"
             + "mulligan_step_index,acting_player,starting_player,cards_to_return,hand_size,candidate_count,forced,"
@@ -81,10 +82,20 @@ public final class MulliganDiagnostics {
         try {
             final MulliganDecisionProvider.SessionStart start = mulliganProvider.beginCallback(actingPlayer,
                     startingPlayer, new CardCollection(actingPlayer.getCardsIn(ZoneType.Hand)), cardsToReturn);
-            return new KeepCapture(start, actingPlayer, startingPlayer, cardsToReturn, gameId, handSize, null);
+            final MulliganDecisionProvider.Generation generation = start.getStatus()
+                    == MulliganDecisionProvider.Status.READY
+                    ? mulliganProvider.generateNext(start.getSession()) : null;
+            final DecisionRequest request = generation == null ? null : generation.getRequest();
+            final DeterminismTrace.RequestHandle traceHandle = generation != null
+                    && generation.getStatus() == MulliganDecisionProvider.Status.DECISION && request != null
+                    ? DeterminismTrace.recordRequest(actingPlayer.getGame(), actingPlayer.getId(), request,
+                            "KEEP_OR_REDRAW", request.getMulliganContext().getMulliganStepIndex())
+                    : null;
+            return new KeepCapture(start, generation, traceHandle, actingPlayer, startingPlayer, cardsToReturn,
+                    gameId, handSize, null);
         } catch (final RuntimeException ex) {
-            return new KeepCapture(null, actingPlayer, startingPlayer, cardsToReturn, gameId, handSize,
-                    ex.getClass().getSimpleName());
+            return new KeepCapture(null, null, null, actingPlayer, startingPlayer, cardsToReturn, gameId,
+                    handSize, ex.getClass().getSimpleName());
         }
     }
 
@@ -107,8 +118,7 @@ public final class MulliganDiagnostics {
                 return nativeKeep;
             }
 
-            final MulliganDecisionProvider.Generation generation = mulliganProvider.generateNext(
-                    capture.start.getSession());
+            final MulliganDecisionProvider.Generation generation = capture.generation;
             final DecisionRequest request = generation.getRequest();
             final MulliganContext context = request == null ? null : request.getMulliganContext();
             emit("MULLIGAN_CALLBACK", context, generation.getRequest() == null ? 0
@@ -126,15 +136,13 @@ public final class MulliganDiagnostics {
                     .filter(candidate -> candidate.getMulliganKind() == selectedKind)
                     .findFirst().orElse(null);
             if (selected == null) {
-                traceDecision(capture.actingPlayer, DecisionType.MULLIGAN, "KEEP_OR_REDRAW",
-                        context.getMulliganStepIndex(), request.isForced(), null);
+                capture.traceHandle.recordMappingFailed();
                 emit("MULLIGAN_STATE", context, request.getCandidates().size(), false, "",
                         "MAPPING_FAILED", "MULLIGAN_CANDIDATE_NOT_FOUND", 0L, nativeCallbackNanos, "", -1L,
                         -1, 0, 0, 0);
                 return nativeKeep;
             }
-            traceDecision(capture.actingPlayer, request, "KEEP_OR_REDRAW",
-                    context.getMulliganStepIndex(), selected);
+            capture.traceHandle.recordMappedResult(selected);
             final MulliganDecisionProvider.Generation applied = mulliganProvider.apply(request, selected);
             emit("MULLIGAN", context, request.getCandidates().size(), false, selected.getSemanticKey(),
                     applied.getStatus().name(), "", applied.getGenerationNanos(), nativeCallbackNanos, "", -1L,
@@ -188,7 +196,7 @@ public final class MulliganDiagnostics {
             for (final MulliganBottomAdapter.ReplayStep step : replay.getSteps()) {
                 final DecisionRequest request = step.getRequest();
                 final CardSelectionContext context = request.getCardSelectionContext();
-                traceDecision(capture.actingPlayer, request, context.getSelectionAdapter().name(),
+                traceMappedDecision(capture.actingPlayer, request, context.getSelectionAdapter().name(),
                         context.getSelectionStepIndex(), step.getCandidate());
                 emit("CARD_SELECTION", parentGameId(capture), parentSessionId(capture), parentRound(capture),
                         parentStep(capture), capture.actingPlayer.getId(), parentStartingPlayerId(capture),
@@ -211,8 +219,13 @@ public final class MulliganDiagnostics {
         if (!enabled) {
             return;
         }
-        traceDecision(actingPlayer, DecisionType.MULLIGAN, "KEEP_OR_REDRAW", -1, true,
-                MulliganCandidateKind.KEEP.semanticKey());
+        final MulliganContext context = new MulliganContext(actingPlayer.getGame().getId(), -1L, -1, -1,
+                actingPlayer.getId(), startingPlayer.getId(), cardsToReturn,
+                actingPlayer.getCardsIn(ZoneType.Hand).size(), MulliganStage.KEEP_OR_REDRAW, List.of());
+        final DecisionRequest request = new DecisionRequest(-1L, DecisionType.MULLIGAN,
+                List.of(LegalCandidate.mulligan(0, MulliganCandidateKind.KEEP)), context);
+        DeterminismTrace.recordRequest(actingPlayer.getGame(), actingPlayer.getId(), request,
+                "KEEP_OR_REDRAW", -1).recordEngineForced();
         emit("MULLIGAN_CALLBACK", actingPlayer.getGame().getId(), -1L, -1, -1, actingPlayer.getId(),
                 startingPlayer.getId(), cardsToReturn, actingPlayer.getCardsIn(ZoneType.Hand).size(), 0, true,
                 MulliganCandidateKind.KEEP.semanticKey(), "FORCED_KEEP", "CAN_MULLIGAN_FALSE", 0L, 0L, "", -1L,
@@ -225,17 +238,15 @@ public final class MulliganDiagnostics {
         }
     }
 
-    private static void traceDecision(final Player actingPlayer, final DecisionRequest request,
+    private static void traceMappedDecision(final Player actingPlayer, final DecisionRequest request,
             final String adapterOrStage, final int decisionStepIndex, final LegalCandidate selectedCandidate) {
-        traceDecision(actingPlayer, request.getDecisionType(), adapterOrStage, decisionStepIndex,
-                request.isForced(), selectedCandidate == null ? "MAPPING_FAILED" : selectedCandidate.getSemanticKey());
-    }
-
-    private static void traceDecision(final Player actingPlayer, final DecisionType decisionType,
-            final String adapterOrStage, final int decisionStepIndex, final boolean forced,
-            final String selectedSemanticKey) {
-        DeterminismTrace.recordDecision(actingPlayer.getGame(), actingPlayer.getId(), decisionType,
-                adapterOrStage, decisionStepIndex, forced, selectedSemanticKey);
+        final DeterminismTrace.RequestHandle handle = DeterminismTrace.recordRequest(actingPlayer.getGame(),
+                actingPlayer.getId(), request, adapterOrStage, decisionStepIndex);
+        if (selectedCandidate == null) {
+            handle.recordMappingFailed();
+        } else {
+            handle.recordMappedResult(selectedCandidate);
+        }
     }
 
     private void emitBottomState(final BottomCapture capture, final String status, final String reason,
@@ -334,6 +345,8 @@ public final class MulliganDiagnostics {
 
     public static final class KeepCapture {
         private final MulliganDecisionProvider.SessionStart start;
+        private final MulliganDecisionProvider.Generation generation;
+        private final DeterminismTrace.RequestHandle traceHandle;
         private final Player actingPlayer;
         private final Player startingPlayer;
         private final int cardsToReturn;
@@ -341,10 +354,14 @@ public final class MulliganDiagnostics {
         private final int handSize;
         private final String captureReason;
 
-        private KeepCapture(final MulliganDecisionProvider.SessionStart start, final Player actingPlayer,
-                final Player startingPlayer, final int cardsToReturn, final int gameId, final int handSize,
-                final String captureReason) {
+        private KeepCapture(final MulliganDecisionProvider.SessionStart start,
+                final MulliganDecisionProvider.Generation generation,
+                final DeterminismTrace.RequestHandle traceHandle, final Player actingPlayer,
+                final Player startingPlayer, final int cardsToReturn, final int gameId,
+                final int handSize, final String captureReason) {
             this.start = start;
+            this.generation = generation;
+            this.traceHandle = traceHandle;
             this.actingPlayer = actingPlayer;
             this.startingPlayer = startingPlayer;
             this.cardsToReturn = cardsToReturn;

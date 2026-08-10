@@ -2175,8 +2175,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 // don't set targeting player when forceful target,
                 // "targeting player controls" should not be reset when the spell is copied
                 currentAbility.setTargetingPlayer(targetingPlayer);
-                PriorityActionDiagnostics.recordTargetRequest(currentAbility, targetingPlayer);
-                if (!targetingPlayer.getController().chooseTargetsFor(currentAbility)) {
+                final PriorityActionDiagnostics.TargetTraceCapture targetTrace =
+                        PriorityActionDiagnostics.recordTargetRequest(currentAbility, targetingPlayer);
+                final boolean targetsChosen = targetingPlayer.getController().chooseTargetsFor(currentAbility);
+                PriorityActionDiagnostics.recordTargetResult(targetTrace, targetsChosen);
+                if (!targetsChosen) {
                     return false;
                 }
             }
