@@ -116,4 +116,88 @@ public class UntapAiTest extends AITest {
         AssertJUnit.assertTrue("Voyaging Satyr should not have untapped a land it cannot use",
                 satyr.isUntapped());
     }
+
+    /**
+     * Holding a spell up is only half the reason: with no tapped mana source to reuse, the mana
+     * this was decided on never arrives, so the untapper should keep its tap rather than spend it
+     * on the biggest tapped permanent it happens to see.
+     */
+    @Test
+    public void holdsOnOpponentsTurnWithNoManaSourceToReuse() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card follower = addCard("Kiora's Follower", ai);
+        follower.setSickness(false);
+        addCard("Forest", ai); // untapped, so there is no mana source to reuse
+        Card fatty = addCard("Colossal Dreadmaw", ai);
+        fatty.setTapped(true);
+        fatty.setSickness(false);
+        addCardToZone("Counterspell", ai, ZoneType.Hand); // held up, but unpayable without Islands
+        fillLibrary(ai, 10);
+        fillLibrary(opp, 10);
+
+        game.getPhaseHandler().devModeSet(PhaseType.END_OF_TURN, opp);
+        game.getAction().checkStateEffects(true);
+        gameLoopUntilNextPhase(game);
+
+        AssertJUnit.assertTrue("Kiora's Follower should not have spent its tap for no mana",
+                follower.isUntapped());
+        AssertJUnit.assertTrue("the Dreadmaw was untapped for a reason that was about mana",
+                fatty.isTapped());
+    }
+
+    /**
+     * Reusing a tapped mana creature is the same ramp as reusing a tapped land. With no land on the
+     * battlefield at all there is nothing to pool from, so an untapper that can take any permanent
+     * has to reach for the dork or it does not fire.
+     */
+    @Test
+    public void rampsOffAManaCreatureWhenThereAreNoLands() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Kiora's Follower", ai).setSickness(false);
+        Card tappedDork = addCard("Llanowar Elves", ai);
+        tappedDork.setTapped(true);
+        tappedDork.setSickness(false);
+        addCard("Llanowar Elves", ai).setSickness(false); // the one mana available right now
+        Card fatty = addCard("Colossal Dreadmaw", ai); // a bigger, but useless, untap
+        fatty.setTapped(true);
+        fatty.setSickness(false);
+        addCardToZone("Grizzly Bears", ai, ZoneType.Hand); // {1}{G}
+        fillLibrary(ai, 10);
+
+        moveToMain2(game, ai);
+        gameLoopUntilNextPhase(game);
+
+        AssertJUnit.assertEquals("AI should have untapped the mana creature and cast the two-drop", 1,
+                countCardsWithName(game, "Grizzly Bears"));
+        AssertJUnit.assertTrue("the Dreadmaw was untapped instead of the mana creature",
+                fatty.isTapped());
+    }
+
+    /**
+     * Wanting mana must not cost the untaps that are worth making anyway. A Time Vault cannot untap
+     * itself, so freeing it is worth a tap whether or not there is a spell to ramp into.
+     */
+    @Test
+    public void untapsATimeVaultWithNoManaReason() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        Card follower = addCard("Kiora's Follower", ai);
+        follower.setSickness(false);
+        addCard("Time Vault", ai).setTapped(true);
+        addCard("Forest", ai);
+        fillLibrary(ai, 10);
+
+        moveToMain2(game, ai);
+        gameLoopUntilNextPhase(game);
+
+        // the Vault is tapped again for the extra turn, so the Follower's own tap is the evidence
+        AssertJUnit.assertTrue("Kiora's Follower should have freed the Time Vault",
+                follower.isTapped());
+    }
 }
