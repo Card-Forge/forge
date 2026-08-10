@@ -95,31 +95,31 @@ public class FRL02KConfirmationAuditTest extends AITest {
     @Test
     public void publicTriggerContextIsStableFailClosedAndNeutral() {
         final Game game = initAndCreateGame();
-        final Player decider = game.getPlayers().get(1);
+        final Player deciderViewer = game.getPlayers().get(1);
         final Player opponent = game.getPlayers().get(0);
-        final Card source = addCard("Luminous Angel", decider);
-        final Card sameDefinition = addCard("Luminous Angel", decider);
+        final Card source = addCard("Luminous Angel", deciderViewer);
+        final Card sameDefinition = addCard("Luminous Angel", deciderViewer);
         final Card hiddenLibraryCard = addCardToZone("Runeclaw Bear", opponent, ZoneType.Library);
         final Card faceDownSource = addCard("Runeclaw Bear", opponent);
         faceDownSource.turnFaceDown(true);
 
-        final List<String> sourceDefinitions = stableDefinitionKeys(source);
-        AssertJUnit.assertEquals("same card definition must keep trigger ordering and identity inputs", sourceDefinitions,
-                stableDefinitionKeys(sameDefinition));
-        AssertJUnit.assertFalse("opponent library identity is not public to the decider",
-                hiddenLibraryCard.getView().canBeShownTo(decider.getView()));
-        AssertJUnit.assertFalse("opponent face-down identity is not public to the decider",
-                faceDownSource.getView().canFaceDownBeShownTo(decider.getView()));
+        final List<String> sourceDefinitions = stableSemanticDefinitionKeys(source);
+        AssertJUnit.assertEquals("same semantic card definition must keep trigger ordering and identity inputs",
+                sourceDefinitions, stableSemanticDefinitionKeys(sameDefinition));
+        AssertJUnit.assertFalse("opponent library identity is not public to the fixed decider viewer",
+                hiddenLibraryCard.getView().canBeShownTo(deciderViewer.getView()));
+        AssertJUnit.assertFalse("opponent face-down identity is not public to the fixed decider viewer",
+                faceDownSource.getView().canFaceDownBeShownTo(deciderViewer.getView()));
 
         final String stateBefore = ForgeStateFingerprint.canonical(game);
         final Random previousRandom = MyRandom.getRandom();
         final DeterminismAuditRandom auditRandom = new DeterminismAuditRandom(20260810L);
         MyRandom.setRandom(auditRandom);
         try {
-            final String sourceContext = publicCardContext(source, decider);
-            final String hiddenSourceContext = publicCardContext(hiddenLibraryCard, decider);
-            final String hiddenObjectContext = publicCardContext(hiddenLibraryCard, decider);
-            final String faceDownContext = publicCardContext(faceDownSource, decider);
+            final String sourceContext = publicCardContext(source, deciderViewer);
+            final String hiddenSourceContext = publicCardContext(hiddenLibraryCard, deciderViewer);
+            final String hiddenObjectContext = publicCardContext(hiddenLibraryCard, deciderViewer);
+            final String faceDownContext = publicCardContext(faceDownSource, deciderViewer);
             AssertJUnit.assertTrue("public source must have a neutral encoding", sourceContext.startsWith("CARD|"));
             AssertJUnit.assertEquals("hidden source must fail closed without identity export", "UNSUPPORTED_HIDDEN",
                     hiddenSourceContext);
@@ -127,8 +127,10 @@ public class FRL02KConfirmationAuditTest extends AITest {
                     "UNSUPPORTED_HIDDEN", hiddenObjectContext);
             AssertJUnit.assertEquals("face-down source must fail closed for v0", "UNSUPPORTED_HIDDEN",
                     faceDownContext);
-            AssertJUnit.assertFalse("public triggering players must not alias", publicContext(source,
-                    sourceDefinitions.get(0), decider).equals(publicContext(source, sourceDefinitions.get(0), opponent)));
+            final String eventFromDecider = publicContext(source, sourceDefinitions.get(0), deciderViewer, deciderViewer);
+            final String eventFromOpponent = publicContext(source, sourceDefinitions.get(0), deciderViewer, opponent);
+            AssertJUnit.assertFalse("fixed-viewer public triggering players must not alias",
+                    eventFromDecider.equals(eventFromOpponent));
             AssertJUnit.assertEquals("context projection must not consume gameplay RNG", 0L,
                     auditRandom.getDrawCount());
         } finally {
@@ -150,7 +152,7 @@ public class FRL02KConfirmationAuditTest extends AITest {
         }
     }
 
-    private static List<String> stableDefinitionKeys(final Card card) {
+    private static List<String> stableSemanticDefinitionKeys(final Card card) {
         final List<String> definitions = new ArrayList<>();
         int ordinal = 0;
         for (final Trigger trigger : card.getTriggers()) {
@@ -161,7 +163,10 @@ public class FRL02KConfirmationAuditTest extends AITest {
                 }
             }
             Collections.sort(parameters);
-            definitions.add(card.getSetCode() + "|" + card.getName() + "|"
+            // Audit-only approximation: the repository has no proven canonical rules-definition ID.
+            // Printing/set identity, runtime IDs, timestamps, and object identity are deliberately
+            // excluded from this semantic key and may be retained only as diagnostics/provenance.
+            definitions.add(card.getName() + "|"
                     + card.getCurrentStateName() + "|ordinal=" + ordinal++
                     + "|mode=" + trigger.getMode() + "|intrinsic=" + trigger.isIntrinsic()
                     + "|static=" + trigger.isStatic() + "|params=" + parameters);
@@ -176,12 +181,13 @@ public class FRL02KConfirmationAuditTest extends AITest {
         if (card.isFaceDown() || !card.getView().canBeShownTo(viewer.getView())) {
             return "UNSUPPORTED_HIDDEN";
         }
-        return "CARD|" + card.getSetCode() + "|" + card.getName() + "|id=" + card.getId()
-                + "|timestamp=" + card.getGameTimestamp();
+        return "CARD|name=" + card.getName() + "|diagnosticId=" + card.getId()
+                + "|diagnosticTimestamp=" + card.getGameTimestamp();
     }
 
-    private static String publicContext(final Card card, final String definition, final Player triggeringPlayer) {
-        return publicCardContext(card, triggeringPlayer) + "|definition=" + definition
+    private static String publicContext(final Card card, final String definition,
+            final Player deciderViewer, final Player triggeringPlayer) {
+        return publicCardContext(card, deciderViewer) + "|definition=" + definition
                 + "|triggeringPlayer=" + triggeringPlayer.getId();
     }
 

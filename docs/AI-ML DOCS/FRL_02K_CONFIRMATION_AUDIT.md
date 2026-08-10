@@ -754,24 +754,24 @@ HELPER_OCCURRENCES=0
 captureError=null for every occurrence
 ```
 
-All 26 had immediate caller `WrappedAbility.resolve`, `wrapper.isMandatory() == false`, `static == false`, and `spawningAbility == false`. `continuation=ABSENT` in the metrics-enabled run for every occurrence. The strict v0 classifier treats `intrinsic == false` as untrusted generated/copied/granted provenance even when the visible object shape is otherwise simple.
+All 26 had immediate caller `WrappedAbility.resolve`, `wrapper.isMandatory() == false`, `static == false`, and `spawningAbility == false`. `continuation=ABSENT` in the metrics-enabled run for every occurrence. The strict v0 classifier treats `intrinsic == false` as untrusted nonintrinsic provenance even when the visible object shape is otherwise simple; it does not infer the exact generated, copied, or granted construction path from that flag alone.
 
 The exact bucket sum is:
 
 | Bucket | Count | Agent-required? | RandomLegalPolicy blocker? | Reason |
 |---|---:|---|---|---|
 | `NORMAL_OPTIONAL_NO_COST_PUBLIC` | 0 | — | — | no occurrence satisfies both public-context and trusted intrinsic-provenance admission |
-| `NORMAL_OPTIONAL_NO_COST_CONTEXT_UNSUPPORTED` | 22 | Yes, if the trigger remains in the external policy slice | Yes | `CardLKI` and/or opaque `SpellAbility`/collection context cannot be projected safely |
+| `NORMAL_OPTIONAL_NO_COST_CONTEXT_UNSUPPORTED` | 22 | Yes, if the trigger remains in the external policy slice | Yes | the current generic A2 projection cannot safely admit `CardLKI` and/or opaque `SpellAbility`/collection context; field decision-relevance is not yet proven |
 | `COST_BEARING_OPTIONAL` | 1 | Not as generic confirmation | Yes, as payment coverage | `PayLife<3>` belongs to the later payment decision, not a duplicate accept/decline request |
 | `STATIC_OPTIONAL` | 0 | — | — | none reached `confirmTrigger` in this workload; static uses another lifecycle |
 | `DELAYED_OPTIONAL` | 0 | — | — | no delayed marker reached the seam |
-| `GENERATED_OR_COPIED_OPTIONAL` | 3 | Yes if admitted at all; v0 rejects | Yes | visible `DamageDone` objects, but `intrinsic == false` makes provenance fail closed |
+| `GENERATED_OR_COPIED_OPTIONAL` | 3 | Yes if admitted at all; v0 rejects | Yes | visible `DamageDone` objects, but `intrinsic == false` is untrusted provenance and therefore fails closed |
 | `HIDDEN_SOURCE` | 0 | — | — | no hidden source was observed in these 26 entries |
 | `HIDDEN_TRIGGERING_OBJECT` | 0 | — | — | no object was classified as hidden; LKI/opaque objects are in the context-unsupported bucket |
 | `OTHER` | 0 | — | — | no remainder |
 | **Total** | **26** |  |  | **invariant holds** |
 
-Therefore the narrow correct optional-no-cost adapter coverage is **`0 / 26`** for this controlled run. The 22 context-unsupported and 3 nonintrinsic occurrences remain unresolved external-policy cases; the one cost-bearing occurrence is a separate PAYMENT blocker. No mandatory trigger was among these 26, so no engine-owned mandatory case is counted as a RandomLegalPolicy blocker.
+Therefore the narrow correct optional-no-cost adapter coverage is **`0 / 26`** for this controlled run. This is a result of the **current strict A2 admission predicate**, not a proof that the 22 runtime shapes are permanently unrepresentable. The current generic projection refuses to expose raw or insufficiently justified runtime context; a future semantic-relevance audit may prove that individual fields are `ENGINE_ONLY`, `REDUNDANT`, or `DERIVABLE_FROM_PUBLIC_CONTEXT`, or may replace them with a smaller public projection. The 22 context-unsupported and 3 nonintrinsic occurrences therefore remain unresolved external-policy cases, not impossibility findings; the one cost-bearing occurrence is a separate PAYMENT blocker. No mandatory trigger was among these 26, so no engine-owned mandatory case is counted as a RandomLegalPolicy blocker.
 
 The per-occurrence record below exports only public source categories, public seat identities, safe type categories, and rejection reasons. Hidden card/object values are intentionally not copied into the report.
 
@@ -810,10 +810,10 @@ The table's `optional / wrapper / decider` columns are, in order, `isOptionalTri
 
 `Trigger.getId()` remains rejected as canonical training identity. Its allocation is object-lifecycle dependent, reset/copy behavior is not a semantic definition contract, and generated/delayed/copy paths can preserve or recreate IDs in ways that are not cross-run provenance. `hashCode()`, `toString()`, localized `TriggerDescription`, and Java object identity are also rejected.
 
-The narrow identity needed for a future v0 candidate is a definition key with these components:
+The narrow identity needed for a future v0 candidate is a **semantic definition key** with these components:
 
 ```text
-host-card semantic definition (set code + canonical card name)
+host-card canonical/rules definition identity
 + card-state name
 + ordinal in the ordered intrinsic trigger-definition collection
 + trigger mode
@@ -822,7 +822,7 @@ host-card semantic definition (set code + canonical card name)
    excluding localized/descriptive TriggerDescription
 ```
 
-This is a semantic definition identity, not an instance identity. The audit probe captured the ordinal and normalized parameter-key set from the source trigger and the focused fixture confirmed identical ordered definition keys for two independent `Luminous Angel` instances. Two fresh one-game JVM probes with the same seed produced identical safe occurrence output (`SHA-256 31549D3D0C15FFA6C08D79615D60CD15B390EB492F4EBF06A9ED4226F2610D` in both runs), including definition ordinals and modes. That is sufficient evidence for the admitted ordinary intrinsic slice, not a universal proof for generated or granted provenance. The future adapter must fail closed when the host/state/ordinal/normalized definition cannot be established.
+This is a semantic definition identity, not an instance identity. The repository does not yet provide a proven universal canonical rules-definition identifier, so the A2 test uses an explicitly audit-only approximation based on canonical card name, card state, ordered definition ordinal, mode/flags, and normalized nonlocalized parameters. The test deliberately excludes set code, printing, runtime card ID, game timestamp, `Trigger.getId()`, hash code, object identity, and localized descriptions from the semantic key. Set code, printing, runtime IDs, timestamps, and `Trigger.getId()` may remain diagnostic/provenance metadata, but they must not silently become policy/training semantics. Two independent `Luminous Angel` instances still produce the same audit-only semantic definition keys. Two fresh one-game JVM probes with the same seed produced identical safe occurrence output (`SHA-256 31549D3D0C15FFA6C08D79615D60CD15B390EB492F4EBF06A9ED4226F2610D` in both runs), including definition ordinals and modes. That is evidence for the admitted ordinary intrinsic slice, not a universal proof for generated or granted provenance. The future adapter must fail closed when the host/state/ordinal/normalized definition cannot be established.
 
 ### 23.5 Trace-local occurrence identity
 
@@ -850,19 +850,21 @@ The context audit classifies these as follows:
 |---|---|---|---|
 | `Player` / `Activator` / `Target` / `DefendingPlayer` → `Player` | can select controller, target, or opponent | public seat/player identity | allowed when Forge visibility says public |
 | `Card` / `Source` → visible `Card` | can distinguish the source or public spell/card | public card definition plus a trace-local public instance identity; the probe's `(card id, game timestamp)` is diagnostic only, not canonical training identity | allowed only after visibility and provenance checks |
-| `CardLKI` | carries last-known-information/runtime provenance, and may not be safely reconstructible as a public semantic object | none; do not export its identity | fail closed |
-| `SpellAbility` | may contain targets, choices, and hidden source information | none; do not expose the runtime object | fail closed |
-| `SpellAbilityTargets` / `CurrentCastSpells` → collection/runtime objects | potentially decision-relevant but not a stable neutral value in the observed callback | none; no universal collection serialization | fail closed |
+| `CardLKI` | carries last-known-information/runtime provenance; A2 did not prove whether every field is policy-relevant | none in the current generic projection; a future audit may prove an explicit public replacement or engine-only status | current A2 projection rejects the raw value; this is not a permanent unrepresentability finding |
+| `SpellAbility` | may contain targets, choices, and hidden source information; A2 did not prove which fields, if any, the policy needs | none for the raw object; only an explicitly proven typed public subset could be considered later | current A2 projection rejects the raw value; this is not a permanent unrepresentability finding |
+| `SpellAbilityTargets` / `CurrentCastSpells` → collection/runtime objects | potentially decision-relevant, redundant, or engine-only; A2 did not prove which | none for the opaque collection; only a future explicitly typed public subset could be considered | current A2 projection rejects the opaque value pending semantic-relevance proof |
 | `DamageAmount`, `LifeAmount`, `CurrentStormCount` → numeric values | relevant only if the admitted trigger definition actually branches on them | typed bounded scalar, only when proven decision-relevant and public | not sufficient to admit the surrounding occurrence |
 | `Cause == null` | no value to encode | absent | allowed as absence |
 
-The future public DTO must contain typed neutral records only; it must not contain `Card`, `Player`, `SpellAbility`, `Trigger`, `GameEntity`, or LKI objects. The A2 focused test demonstrates anti-aliasing: the same public source and definition combined with two different public triggering players produce distinct conceptual contexts. It also compares a state fingerprint before/after projection and records zero audit-RNG draws. The test's card id/timestamp string is only a local diagnostic encoding; a production/training identity would need an independently approved public instance identity or a trace-local public ordinal.
+For `SpellAbilityTargets` and `CurrentCastSpells`, the current table's `fail closed` result means only that the opaque collection is not admitted by the generic A2 projection. It does not establish that every member or derived fact is needed by the policy, nor that a smaller public event projection is impossible. A future relevance audit must make that distinction explicitly.
 
-There were no strict `NORMAL_OPTIONAL_NO_COST_PUBLIC` occurrences in the 26-run after provenance filtering. The three apparently public `DamageDone` occurrences are deliberately not admitted because `intrinsic == false`; the test does not silently turn public object shape into trusted provenance.
+The future public DTO must contain typed neutral records only; it must not contain `Card`, `Player`, `SpellAbility`, `Trigger`, `GameEntity`, or LKI objects. The A2 focused test demonstrates anti-aliasing from one fixed decider/viewer perspective: the same public source and definition combined with two different public triggering players produce distinct conceptual contexts. It also compares a state fingerprint before/after projection and records zero audit-RNG draws. The test's card id/timestamp string is only a local diagnostic encoding; a production/training identity would need an independently approved public instance identity or a trace-local public ordinal.
+
+There were no strict `NORMAL_OPTIONAL_NO_COST_PUBLIC` occurrences in the 26-run after provenance filtering. The three apparently public `DamageDone` occurrences are deliberately not admitted because `intrinsic == false`; the test does not silently turn public object shape into trusted provenance. Likewise, the 22 context-unsupported occurrences are currently unsupported by the generic A2 projection; the presence of `CardLKI`, `SpellAbility`, or an opaque collection alone does not establish that every contained fact is required by the external policy or impossible to replace with a smaller public event projection.
 
 ### 23.7 Hidden-information boundary
 
-Visibility uses Forge's existing view semantics (`CardView.canBeShownTo` and `canFaceDownBeShownTo`) rather than a new audit-local rule. A v0 source/object is safe only when the decider can legitimately see it and its semantic identity is public. Ordinary visible battlefield, graveyard, or stack cards can be candidates after the definition/provenance checks; the decider and public triggering players can be represented by public seat identity.
+Visibility uses Forge's existing view semantics (`CardView.canBeShownTo` and `canFaceDownBeShownTo`) rather than a new audit-local rule. A v0 source/object is safe only when the decider can legitimately see it and its semantic identity is public. Ordinary visible battlefield, graveyard, or stack cards can be candidates after the definition/provenance checks; the decider and public triggering players can be represented by public seat identity. The A2 rejection of an opaque runtime value is not a substitute for this visibility decision: a future relevance audit must still distinguish engine-only or derivable facts from genuinely unsafe hidden information.
 
 The focused test proves fail-closed behavior for an opponent library card, an opponent face-down source, and a hidden triggering-card position. Their identity is not written into the neutral output. Opponent hand/library cards, face-down cards, hidden spell-ability sources, hidden LKI, and any object whose visibility cannot be proven are unsupported. Emblems, immutable effects, command-zone objects, and delayed/generated sources are also outside this v0 unless a future seam proves a public stable source and definition; source-card visibility alone is not enough.
 
@@ -894,7 +896,8 @@ AND existing Forge classification says the trigger is optional
 AND no nonzero Cost parameter is present
 AND Cost=="0" is handled only according to the existing TriggerHandler branch order
 AND every decision-relevant triggering object has an approved public typed encoding
-AND no CardLKI, opaque SpellAbility/collection, hidden object, or unstable provenance exists
+AND the current strict projection contains no raw CardLKI, opaque SpellAbility/collection,
+    hidden object, or untrusted provenance
 AND ActionContinuation is absent
 ```
 
@@ -922,7 +925,7 @@ No new parser is introduced by A2.
 | `Cost == "0"` | follow existing branch order | do not infer rule optionality from the string alone |
 | static trigger | exclude | static paths use `playTrigger`, not ordinary stack `WrappedAbility.resolve` confirmation |
 | delayed/player-defined delayed | exclude by default | provenance and source identity are not yet stable/publicly complete |
-| generated/granted/copied/nonintrinsic | exclude by default | A2 observed three `intrinsic == false` public-shaped cases; provenance is not trusted |
+| generated/granted/copied/nonintrinsic | exclude by default | A2 observed three `intrinsic == false` public-shaped cases; provenance is not trusted, but `intrinsic == false` is not treated as a universal generated/copied/granted proof |
 | hidden source/object | exclude | Forge visibility cannot prove a safe neutral identity |
 | `PlayerControllerAi.chooseContraptionsToCrank` | exclude structurally | it directly calls `confirmTrigger(new WrappedAbility(...))` and does not pass through the `WrappedAbility.resolve` admission seam |
 
@@ -985,16 +988,54 @@ The candidate order is stable (`ACCEPT`, then `DECLINE`). Mandatory triggers pro
 
 ### 23.15 A2 verdict
 
-The architecture closure conditions are not all satisfied for a production v0 adapter. The exact remaining blockers are:
+The architecture closure conditions are not all satisfied for a production v0 adapter. The exact remaining blockers under the **current strict A2 predicate** are:
 
 ```text
-22 / 26: CardLKI and/or opaque runtime context cannot be publicly encoded safely
-3 / 26: visible object shape but intrinsic provenance is false/untrusted
+22 / 26: current generic projection rejects CardLKI and/or opaque runtime context pending decision-relevance proof
+3 / 26: visible object shape but intrinsic provenance is false/untrusted pending dedicated provenance attribution
 1 / 26: nonzero Cost belongs to PAYMENT, not generic confirmation
 ```
 
-The mandatory-trigger, helper-contamination, ActionContinuation, exactly-once seam, visibility fail-closed, state-neutrality, RNG-neutrality, and DECISION_TRACE_V2 questions are answered, but the strict candidate coverage is still zero in the controlled workload.
+The mandatory-trigger, helper-contamination, ActionContinuation, exactly-once seam, visibility fail-closed, state-neutrality, RNG-neutrality, and DECISION_TRACE_V2 questions are answered, but the strict candidate coverage is still zero in the controlled workload. The `22 / 26` line is a current unsupported classification, not a theorem that those runtime shapes can never be represented safely; decision relevance and any smaller public projection remain open.
 
 **A2 architecture verdict: `NO_SAFE_V0_YET`.**
 
 This remains an audit-only decision. Do not implement `DecisionType.CONFIRMATION`, `ConfirmationDecisionProvider`, or any production adapter until architecture review explicitly approves a narrower admitted trigger shape and its context contract.
+
+## 24. FRL-02K-A2R architecture-review corrections
+
+This section records the review corrections without reopening the A2 findings or changing the `NO_SAFE_V0_YET` verdict.
+
+### 24.1 Meaning of `0 / 26`
+
+`NORMAL_OPTIONAL_NO_COST_PUBLIC = 0 / 26` means that no measured occurrence satisfies the **current strict A2 admission predicate**. The current generic projection fails closed when it encounters raw `CardLKI`, raw `SpellAbility`, opaque collections, hidden values, or untrusted provenance. This is a statement of current support, not a proof that those runtime shapes are permanently unrepresentable. A future semantic-relevance audit must determine whether each field is `ENGINE_ONLY`, `REDUNDANT`, `DERIVABLE_FROM_PUBLIC_CONTEXT`, publicly projectable through an explicit typed value, or genuinely unsafe. Runtime context presence alone is not enough to conclude impossibility.
+
+### 24.2 Semantic identity versus provenance identity
+
+The future policy/training semantic key is conceptually:
+
+```text
+canonical card/rules identity
++ card-state identity
++ ordered trigger-definition discriminator
++ trigger mode
++ normalized nonlocalized semantic parameters
+```
+
+The test-only helper uses canonical card name plus card state, ordered definition ordinal, mode/flags, and normalized parameters as an explicitly limited approximation because no universal canonical rules identifier has been proven here. Set code, printing, runtime card ID, game timestamp, `Trigger.getId()`, hash code, object identity, and localized descriptions are not semantic policy identity. They may be retained separately as diagnostic/provenance metadata.
+
+### 24.3 Fixed-perspective anti-aliasing
+
+The test-only context helper now takes independent `deciderViewer` and `triggeringPlayer` values. The anti-aliasing assertion keeps one fixed decider/viewer, one source, and one definition, then varies only the public triggering player. Source visibility is checked against the fixed decider/viewer, and the two conceptual contexts must differ. This corrects the earlier test weakness that changed viewer perspective between the compared events.
+
+### 24.4 Hidden-information and provenance preservation
+
+The test continues to use Forge's `CardView.canBeShownTo` and `canFaceDownBeShownTo` authority. Opponent library/hidden-zone identity and face-down identity fail closed without being copied into the neutral output. `intrinsic == false` remains currently untrusted provenance for strict v0; it is not treated as a universal semantic synonym for generated, copied, or granted. Exact provenance remains a dedicated future audit question.
+
+### 24.5 Evidence labels
+
+The historical labels remain `K0/base = 286`, `pre-A2 audit branch = 287`, and `post-A2 expanded selection = 288`. Any result from these review-correction tests is reported as `post-A2R`, never relabeled as a K0 or A2 baseline.
+
+### 24.6 A2R verification result
+
+The unchanged expanded A2 selection was rerun after the corrections and remains `post-A2R = 288` tests with zero failures, errors, and skips. The focused correction/lifecycle selection ran 4 tests (`FRL02KConfirmationAuditTest` = 3, `TriggerLifeGateTest` = 1) with zero failures, errors, and skips. `FullGameCollectorNeutralityTest` and `WorkerIsolationSmokeTest` each passed as one-test gates; their combined orchestration exceeded the initial 120-second wrapper limit, so they were rerun separately and completed successfully. Package, configured `validate`/Checkstyle, and `git diff --check` also passed. No production implementation file changed.
