@@ -41,7 +41,7 @@
   </object>
   <object id="55" template="../../../../common/maps/obj/enemy.tx" x="198.923" y="147.44">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Joven&quot;, &quot;Chandler&quot;, &quot;Joven's Tools&quot;, &quot;Joven's Ferrets&quot;], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Ebony Rhino&quot; ] }
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Koskun Keep&quot;, &quot;Joven's Tools&quot;, &quot;Joven's Ferrets&quot;]
 }
 </property>
     <property name="enemy" value="Joven and Chandler"/>
