@@ -6,9 +6,11 @@
 FRL-02K0 PASS
 ```
 
-The current decision regression suite is green, same-seed reproduction is exact, all enabled neutral diagnostics
-are behavior-neutral after the fix, every representative neutral probe is state- and RNG-neutral, and the two
-historical score transitions are explained. CONFIRMATION remains out of scope and paused for review.
+The current decision regression suite is green, same-seed reproduction is exact across fresh and simultaneous JVMs,
+the full-game collector OFF-vs-ON differential is independently equal, and malformed simulator outcomes can no
+longer become visible winners. `DECISION_TRACE_V2` now represents REQUEST/RESULT lifecycle and explicitly separates
+training labels from forced, unobserved, failed, rolled-back, and incomplete history. All accepted historical and
+per-probe evidence remains intact. CONFIRMATION remains out of scope and paused for review.
 
 ## 1. Preserved stopped work and gate checkout
 
@@ -55,8 +57,9 @@ The baseline checkpoint changed those stale assertions to exact equality with 55
 - non-stage rows have `fields[54] == ""`.
 
 No assertion was removed or weakened. Baseline evidence was 11/11 focused diagnostics tests and 220/220 complete
-decision regressions. The final expanded regression command executes 255 tests with 0 failures, 0 errors, and
-0 skipped. The package lifecycle and configured Checkstyle lifecycle both pass with zero violations.
+decision regressions. The final expanded regression command executes 283 tests across `forge-game`, `forge-ai`, and
+`forge-gui-desktop` with 0 failures, 0 errors, and 0 skipped. The package lifecycle and configured Checkstyle
+lifecycle both pass with zero violations.
 
 ## 3. Canonical trace architecture
 
@@ -65,24 +68,40 @@ retained under the opt-in `forge.determinism.traceDir` directory. Normal runs do
 
 ### Decision trace
 
-Version and field order:
+`DECISION_TRACE_V2` has two canonical record kinds. REQUEST contains the trace-local monotonically allocated
+`decisionTraceIndex`, turn, phase, seat, `DecisionType`, adapter/stage, decision step, `forced`, the actual ordered
+list of legal candidate semantic keys, and a versioned candidate-set integrity hash. It contains no selected field.
+The exact `DecisionRequest` order is the V2 canonical candidate order; it is not resorted by the trace. A
+`DecisionRequest` rejects duplicate semantic keys, so candidates are uniquely addressable without using
+request-local `candidateId` as a training identity.
+
+RESULT references the trace-local index and has exactly one typed terminal kind:
 
 ```text
-DECISION_TRACE_V1
-sequenceIndex
-turn
-phase
-actingPlayerSeat
-DecisionType
-adapterOrStage
-decisionStepIndex
-forced
-selectedCandidateSemanticKey
+CHOSEN
+FORCED
+UNOBSERVED
+ENGINE_ROLLBACK
+MAPPING_FAILED
+TRACE_INCOMPLETE
 ```
 
-Semantic candidate keys come from the existing neutral decision model. Latency, prompt text, request IDs, process
-IDs, and paths are excluded. Unmapped callbacks emit `MAPPING_FAILED`. OFF runs correctly retain no decision file
-and report `decisionHash=ABSENT`; that absence is never compared to an ON decision hash.
+`CHOSEN` requires a completed native callback, a real mapping attempt, and membership in REQUEST legal candidates.
+`FORCED` requires one legal candidate; where Forge still invokes the native callback it is emitted only after that
+result maps to the sole candidate. Immediate `FORCED` is limited to an engine-proven callback bypass. `UNOBSERVED`
+is emitted only after a normally completed callback without a trustworthy mapping seam. `MAPPING_FAILED` requires
+an observed result and a real failed mapping attempt. `ENGINE_ROLLBACK` requires authoritative Forge evidence; no
+current family guesses one. Finalization closes every still-open request as `TRACE_INCOMPLETE`; duplicate terminals,
+unknown references, illegal selected keys, and dangling requests are rejected.
+
+The Mulligan keep/redraw seam opens its REQUEST during capture, before `ComputerUtil.wantMulligan` runs. A focused
+production-order regression omits the native return after capture and proves that finalization emits
+`TRACE_INCOMPLETE`, rather than silently omitting an entered callback.
+
+The BC-valid rule is exactly REQUEST + RESULT(CHOSEN) + `forced=false` + selected semantic key in legal candidates.
+Forced history is valid trajectory history but excluded from policy loss. All other terminal kinds are excluded.
+OFF runs correctly retain no decision file and report `decisionHash=ABSENT`; that absence is never compared to an
+ON decision hash.
 
 ### Gameplay trace
 
@@ -118,9 +137,10 @@ capture performs no extra draw. No reflection, rewind, seed restoration, or game
 `DeterminismTraceHasher.firstDivergence` returns the first unequal or missing record index, so every mismatch can be
 reduced to a last-equal/first-different tuple.
 
-## 4. Environment manifest and reconstructed benchmark
+## 4. Accepted V1 environment manifest and reconstructed benchmark
 
-Current controlled environment:
+Accepted pre-completion controlled environment (the final V2 runs reuse the same runtime/decks/seeds and are
+reported separately in section 5):
 
 ```text
 experiment commit: 75d795c379a9e98a750b46bccb74131b9e636d2c
@@ -187,7 +207,7 @@ The aggregate hashes below are SHA-256 reductions of the ten ordered per-game ha
 | ON A | priority + mulligan | same | same | same | 3-7 |
 | ON B | priority + mulligan | same | same | same | 3-7 |
 
-ON decision aggregate A and B is identically
+The retained `DECISION_TRACE_V1` aggregate for ON A and B is identically
 `87fc16e6e48577559099bd94f8341b993f24b423773ba59ad912f3e6d3b897f6`. OFF has no decision artifacts.
 
 Authoritative per-game values, identical in all four runs:
@@ -220,7 +240,7 @@ reactive workload above and revalidates the pre-fix proactive measurement cohort
 | ON A | priority + mulligan | same | same | same | 7-3 |
 | ON B | priority + mulligan | same | same | same | 7-3 |
 
-ON decision aggregate A and B is identically
+The retained `DECISION_TRACE_V1` aggregate for ON A and B is identically
 `a0a46f4868fe4b09dc039ad3c0493684b35b46ef88b621dbefc7119eac8e0b04`. Both ON metrics files contain the same
 28,187 priority rows and 52 mulligan rows, with zero `PRIORITY_STATE` or `MAPPING_FAILED` records.
 
@@ -239,7 +259,52 @@ Authoritative proactive per-game values, identical in all four runs:
 | 9 | `2134ce75ab4220d2805b892fa89cdd1144136ee027eb8b4032cf8a2828ebdc3a` | `c41db0fc62f3c6d1fe0adbadc2d6fff7fa88cc2b13b97523e193e352d55cae18` | 549 | WINNER_SEAT_0 |
 | 10 | `3127f0a300b2e4ffa8e6732ef7951aec273ece4dff5790ccd0be0a758acc096e` | `aa95cbc9c877b355507359bcc2edc7fc905e705f70bf60fffba782400b41b6de` | 451 | WINNER_SEAT_0 |
 
-## 6. Trace collector and direct probe neutrality
+### Current final-tree V2 repeatability
+
+The final V2 instrumentation was rerun in fresh worker namespaces, ten games per run. A/B files are byte-identical
+for every `game-*.gameplay.trace`, `game-*.rng.trace`, and `game-*.decision.trace`; each pair has zero differing
+trace files. Aggregate input is explicitly versioned: ordered lines
+`<AGGREGATE_VERSION>|gameIndex|<TRACE_VERSION>|hash[|drawCount]`, each followed by LF, reduced with SHA-256.
+
+| Cohort | Run | `GAMEPLAY_TRACE_AGGREGATE_V1` | `RNG_TRACE_AGGREGATE_V1` | `DECISION_TRACE_AGGREGATE_V2` | Result |
+|---|---|---|---|---|---:|
+| Izzet/Dimir, seed 20260810 | A | `fcc493ab02fc8f804d096b146d4f46b9f320b4628c16ebe9edd4ff193abbda39` | `4580f64ba5548f7fa755e41b1e9e516b05a6ed5d83dc1dac6924fc9441b73359` | `997e80ef3adad0dd180cf32aad1c99465df6ce9e8aee3104ebc0122b6f6f86d0` | 3-7 |
+| Izzet/Dimir, seed 20260810 | B | same | same | same | 3-7 |
+| Dead and Alive/Air Forces, seed 20260809 | A | `2c908ce3238833c4e4f763f149bf5ad5284ac3c004bea2e337047c5f97712227` | `9dc911149a356e2eb7b98007fc415d32b36fd338a86c9bba7634d7279ec909dd` | `9092d4a08847e876a8eb0c47088c09429447d6d61d56d1e03d2f8034e0f04755` | 7-3 |
+| Dead and Alive/Air Forces, seed 20260809 | B | same | same | same | 7-3 |
+
+After the final Mulligan lifecycle review fix, all four ten-game JVM runs were regenerated. Each A/B pair has 50/50
+identical determinism artifacts, and both post-review A cohorts are byte-identical to the preceding valid V2 A
+cohorts. The aggregate hashes and outcomes in this table therefore remain the exact final-head values.
+
+The corresponding versioned outcome aggregates are
+`088a75698030d34075d8883c7874fdd2e830504a13afd60a9d05d7b7e7451ce5`
+(`OUTCOME_AGGREGATE_V1`, reactive A/B) and
+`3161d2dfa688733144c39fcdebf4e75551bc227c9bd7abbac4b6d52753dbcf7b`
+(`OUTCOME_AGGREGATE_V1`, proactive A/B). V1 and V2 decision hashes are schema artifacts and are not compared as
+behavioral hashes.
+
+## 6. FULL-GAME TRACE COLLECTOR SELF-NEUTRALITY
+
+The non-circular collector gate runs the same real Izzet/Dimir game four times with seed 20260810. Both sides use
+`DeterminismAuditRandom`, the small `ReferenceGameplayObserver`, and Priority diagnostics. Only ON attaches
+`DeterminismTrace`. The reference observer only subscribes, reads event class and `FORGE_STATE_V1`, and appends a
+canonical string; it calls no AI, candidate provider, game mutation, or RNG helper. Its narrow test verifies zero
+state change and zero RNG draws.
+
+| Run | Collector | PID | `REFERENCE_GAMEPLAY_V1` | `PRIORITY_REFERENCE_V1` | `RNG_TRACE_V1` / draws | final-state hash | outcome |
+|---|---:|---:|---|---|---|---|---|
+| OFF-A | OFF | 13188 | `c362811badf3eef8abf7f9362f36fb26151587786c814d3d87eb7fe0e1d252b6` | `65ecb8d07e32649bb49b26afe0f93e0d42e835df6e4067c999664a76a69f16d2` | `bcb802e32a0bf276259d9d2de16025f9ee3a98dc5b0c0f5628d48bc273baf840` / 810 | `43cd109c7cea13af1938678020ee6224d9d783fe1f9e1fe9dfeb6bebb196b329` | WINNER Ai(2)-Dimir Guild Kit |
+| OFF-B | OFF | 20960 | same | same | same / 810 | same | same |
+| ON-A | ON | 27500 | same | same | same / 810 | same | same |
+| ON-B | ON | 10692 | same | same | same / 810 | same | same |
+
+Reference records, reference hash, Priority projection records/hash, independent RNG records/hash/count, final
+state, and semantic outcome all satisfy OFF-A = OFF-B = ON-A = ON-B exactly. This proves collector incremental
+self-neutrality independently of collector output. The earlier diagnostics OFF-vs-ON tables in section 5 remain a
+separate proof: they isolate neutral Priority/Mulligan diagnostics while the collector exists on both sides.
+
+### Direct probe neutrality
 
 The collector regression captures the canonical state and RNG count before attach/snapshot/hash/write and verifies
 both remain identical afterward. It also verifies absent decision output when no neutral decision is recorded.
@@ -445,19 +510,175 @@ summed as a future controller cost because the external policy replaces the teac
 known generation outlier: the final focused measurement is approximately 31.56 / 40.26 / 48.98 ms p50/p95/p99.
 No X architecture changed in this gate.
 
-## 13. Verification and remaining risks
+## 13. RAW SIMULATOR OUTCOME INTEGRITY
+
+`SimulationOutcomeClassification` collects semantic winners directly from registered `PlayerOutcome.hasWon()`
+values and sorts identities by stable seat/player ID. It calls neither `GameOutcome.getWinningPlayer()` nor
+`getWinningLobbyPlayer()`. Exactly one winner produces `WINNER <name>`; a legitimate `GameOutcome.isDraw()` remains
+`DRAW`. In ordinary two-player non-team Constructed, zero or multiple semantic winners produce explicit invalid
+results. Multiplayer/team multiplicity remains `MULTIPLE_WINNERS`, not globally invalid.
+
+The exact historical regression calls `game.setGameOver(GameEndReason.Draw)` on two unresolved players. Both become
+semantic winners; `DeterminismTrace` records `INVALID_WINNER_SEATS_[0,1]`, while simulator classification is exactly:
+
+```text
+INVALID_OUTCOME MULTIPLE_WINNERS [0,1]
+```
+
+No optional singular winner exists. The simulator also removes Forge's internally produced `MATCH_RESULTS`
+aggregate row from its reportable log because that row still uses the unsafe singular legacy getter; semantic
+per-player outcome rows and the multiplicity-safe `Game Result` remain visible. Therefore the malformed game is not
+printed or counted as a normal simulator win. Timeout, general exception, and `StackOverflowError` cleanup still use
+the existing Draw-related termination, but every such terminal state now passes through the same classifier and
+cannot emit the unsafe aggregate row. The final 40-game V2 matrix contains zero `Match Result:` rows. Exception
+semantics were not otherwise redesigned.
+
+## 14. UPSTREAM CANDIDATE A / UPSTREAM CANDIDATE B
+
+Current Forge structure:
+
+```text
+Game.setGameOver(reason)
+  -> new GameOutcome(reason, getRegisteredPlayers())
+
+playerRating = HashMap<RegisteredPlayer, PlayerStatistics>
+playerNames  = field typed HashMap, instantiated LinkedHashMap
+singular winner getters iterate playerRating.entrySet()
+```
+
+`Game.setGameOver` is the only live `new GameOutcome(reason, players)` caller. Its iterable is `allPlayers`, a
+`PlayerCollection`/`FCollection`; `FCollection` is explicitly list-backed and preserves insertion order. `Game`
+populates it by iterating the `Match` player list, which is an unmodifiable copy of the original ordered
+`List<RegisteredPlayer>`. Player/seat IDs are allocated in that order. Team-number discovery and assignment do not
+reorder this list. A test witnesses the same order through `GameOutcome.playerNames` after setting both players to
+the same team, and passed in two separately launched Maven/Surefire JVMs (`exit 0`, `exit 0`). Thus identical game
+construction has deterministic registration insertion order across fresh JVMs, including team assignment.
+
+Upstream A: **GO as a separate narrow follow-up candidate**. Replacing only `playerRating`'s `HashMap` with an
+insertion-ordered map would preserve the existing first-winning-entry behavior and make it deterministic relative
+to the proven registration sequence. It does not resolve semantic ambiguity and is not part of PR #11. Its upstream
+test should populate multiple winning entries and assert the same legacy singular result in repeated fresh JVMs.
+
+Upstream B: **recommended separate follow-up**. Add an explicit plural/multiplicity API such as
+`getWinningPlayers()` so callers can distinguish 0/1/n winners without abusing a singular getter. B should be
+reviewed across team/multiplayer callers and must not be combined casually with A. No upstream repository was
+modified and no upstream PR was opened.
+
+## 15. DECISION TRACE V2 training-label integrity
+
+Actual final-tree A-run counts follow. `Strategic` means `forced=false`; label coverage is BC-valid strategic
+CHOSEN divided by strategic requests. Every row has zero `ENGINE_ROLLBACK`, `MAPPING_FAILED`, and
+`TRACE_INCOMPLETE` unless shown otherwise.
+
+### Reactive: Izzet Guild Kit vs Dimir Guild Kit, seed 20260810, 10 games
+
+| DecisionType | Requests | Strategic | Forced requests | CHOSEN | FORCED results | UNOBSERVED | BC-valid | Coverage |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| PRIORITY_ACTION | 5001 | 3643 | 1358 | 3643 | 1358 | 0 | 3643 | 100% |
+| TARGET | 3 | 3 | 0 | 3 | 0 | 0 | 3 | 100% |
+| PAYMENT | 303 | 228 | 75 | 0 | 0 | 303 | 0 | 0% |
+| X_VALUE | 0 | 0 | 0 | 0 | 0 | 0 | 0 | n/a |
+| MODE | 2 | 2 | 0 | 2 | 0 | 0 | 2 | 100% |
+| CARD_SELECTION | 41 | 41 | 0 | 41 | 0 | 0 | 41 | 100% |
+| ATTACK | 221 | 167 | 54 | 167 | 54 | 0 | 167 | 100% |
+| BLOCK | 61 | 35 | 26 | 35 | 26 | 0 | 35 | 100% |
+| MULLIGAN | 24 | 24 | 0 | 24 | 0 | 0 | 24 | 100% |
+| **Total** | **5656** | **4143** | **1513** | **3915** | **1438** | **303** | **3915** | **94.50%** |
+
+### Proactive: Dead and Alive vs Air Forces, seed 20260809, 10 games
+
+| DecisionType | Requests | Strategic | Forced requests | CHOSEN | FORCED results | UNOBSERVED | BC-valid | Coverage |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| PRIORITY_ACTION | 4385 | 3855 | 530 | 3855 | 530 | 0 | 3855 | 100% |
+| TARGET | 0 | 0 | 0 | 0 | 0 | 0 | 0 | n/a |
+| PAYMENT | 430 | 366 | 64 | 0 | 0 | 430 | 0 | 0% |
+| X_VALUE | 0 | 0 | 0 | 0 | 0 | 0 | 0 | n/a |
+| MODE | 0 | 0 | 0 | 0 | 0 | 0 | 0 | n/a |
+| CARD_SELECTION | 3 | 3 | 0 | 3 | 0 | 0 | 3 | 100% |
+| ATTACK | 239 | 169 | 70 | 169 | 70 | 0 | 169 | 100% |
+| BLOCK | 65 | 47 | 18 | 47 | 18 | 0 | 47 | 100% |
+| MULLIGAN | 23 | 23 | 0 | 23 | 0 | 0 | 23 | 100% |
+| **Total** | **5145** | **4463** | **682** | **4097** | **618** | **430** | **4097** | **91.80%** |
+
+Reactive/proactive mapping-failure rates are 0/5656 and 0/5145; trace-incomplete rates are likewise zero.
+UNOBSERVED rates are 303/5656 (5.36%) and 430/5145 (8.36%). All PAYMENT requests are deliberately
+`REQUEST_ONLY_UNLABELED`: payment completed normally, but the existing seam cannot map a full native payment result
+to one atomic neutral candidate without reconstructing or replaying teacher behavior. This is a coverage gap, not a
+fabricated failure or label. Its forced REQUESTs also remain UNOBSERVED because a native payment callback did run.
+
+Readiness from observed requests: PRIORITY_ACTION, TARGET, MODE, CARD_SELECTION, ATTACK, BLOCK, and MULLIGAN are
+`BC_LABEL_READY`; PRIORITY_ACTION/ATTACK/BLOCK also contribute `HISTORY_ONLY_FORCED`. PAYMENT is
+`REQUEST_ONLY_UNLABELED`. X_VALUE had no cohort request, but a direct native-result hook test proves strategic
+CHOSEN and proves that a forced request remains open until callback validation; an out-of-domain native result is a
+real `MAPPING_FAILED`. No family claims `ENGINE_ROLLBACK_OBSERVED`, and no generic CANCEL candidate exists.
+
+## 16. Worker output architecture and two-process determinism
+
+The atomic worker contract is:
+
+```text
+forge.diagnostics.outputRoot
+forge.diagnostics.runId
+forge.diagnostics.workerId
+```
+
+All three nonblank properties automatically enable Priority, Mulligan, and Determinism under
+`<root>/<runId>/worker-%03d/`. Per sink, precedence is explicit legacy path > derived worker path > disabled. A
+complete namespace plus one explicit override leaves the other two derived. Any partial or blank worker namespace
+fails fast, even when one explicit sink is present. `runId` rejects separators/traversal and `workerId` must be
+non-negative. No properties retains legacy disabled behavior.
+
+The simultaneous same-seed worker smoke used Izzet/Dimir, seed 20260810, one game, `runId=same-seed-smoke`:
+
+| Worker | PID / exit | Directory | Produced worker-local files |
+|---:|---|---|---|
+| 0 | 3600 / 0 | `.../same-seed-smoke/worker-000` | priority.csv, mulligan.csv, 5 determinism artifacts |
+| 1 | 28940 / 0 | `.../same-seed-smoke/worker-001` | priority.csv, mulligan.csv, 5 determinism artifacts |
+
+Both CSVs in each worker contain only that worker process ID. File-path intersection and collision count are zero;
+parse errors are zero. Canonical equality:
+
+| Channel | Version | Worker 0 hash | Worker 1 | Bytes/projection |
+|---|---|---|---|---|
+| gameplay | `GAMEPLAY_TRACE_V1` | `d7eed7b9d75d3503a1296e9fb72cdf98ed1f375735c2282b92089542618caf1d` | same | IDENTICAL |
+| RNG | `RNG_TRACE_V1` | `bcb802e32a0bf276259d9d2de16025f9ee3a98dc5b0c0f5628d48bc273baf840` | same | IDENTICAL |
+| decision | `DECISION_TRACE_V2` | `ec936999e7a5ca84275a7c05ec5a9f9cc9595d96b2bff831a7bea18c8f138311` | same | IDENTICAL |
+| Priority | `PRIORITY_REFERENCE_V1` | `65ecb8d07e32649bb49b26afe0f93e0d42e835df6e4067c999664a76a69f16d2` | same | IDENTICAL projection |
+
+## 17. Trace version ledger
+
+Every per-game Determinism summary persists `gameplayTraceVersion=GAMEPLAY_TRACE_V1`,
+`decisionTraceVersion=DECISION_TRACE_V2`, and `rngTraceVersion=RNG_TRACE_V1` beside its hash. The independent
+reference summary persists `referenceGameplayVersion=REFERENCE_GAMEPLAY_V1`; Priority projection evidence always
+names `PRIORITY_REFERENCE_V1`. Current representative/versioned aggregate pairs are:
+
+| Schema | Current evidence hash |
+|---|---|
+| `DECISION_TRACE_V2` | worker one-game `ec936999...f138311`; reactive aggregate `997e80ef...6f86d0`; proactive aggregate `9092d4a0...f04755` |
+| `GAMEPLAY_TRACE_V1` | worker one-game `d7eed7b9...8caf1d`; reactive aggregate `fcc493ab...bda39`; proactive aggregate `2c908ce3...12227` |
+| `RNG_TRACE_V1` | worker/collector one-game `bcb802e3...af840`; reactive aggregate `4580f64b...73359`; proactive aggregate `9dc91114...909dd` |
+| `REFERENCE_GAMEPLAY_V1` | collector full-game `c362811b...252b6` |
+| `PRIORITY_REFERENCE_V1` | collector/worker `65ecb8d0...f16d2` |
+
+Ellipses in this compact ledger are presentation only; full hashes appear in the authoritative tables above.
+Aggregate schema/version and reduction are documented in section 5, so no V1/V2 decision hash is treated as a
+behavioral comparison.
+
+## 18. Verification and remaining risks
 
 Final verification evidence:
 
 ```text
-focused diagnostics baseline: 11 tests, 0 failures/errors/skips
-baseline decision regression:  220 tests, 0 failures/errors/skips
-final expanded gate regression: 255 tests, 0 failures/errors/skips
-determinism trace focused:      3 tests, 0 failures/errors/skips
-proactive fixed-head matrix:    40 games, 0 per-game trace/outcome differences
-package:                        BUILD SUCCESS
-configured Checkstyle:          0 violations
-git diff --check:               clean
+focused X/V2/projection:         32 tests, 0 failures/errors/skips
+focused Mulligan lifecycle:       6 tests, 0 failures/errors/skips
+outcome integrity focused:       3 tests, 0 failures/errors/skips
+collector OFF/OFF/ON/ON:         1 test / 4 full games, PASS
+two simultaneous workers:        1 test / 2 JVMs, PASS
+final expanded gate regression:  283 tests, 0 failures/errors/skips
+current V2 cohort repeats:        40 games, 0 canonical trace differences
+package:                          BUILD SUCCESS
+configured Checkstyle:            0 violations
+git diff --check:                 clean
 ```
 
 Remaining non-blocking limitations:
@@ -470,7 +691,16 @@ Remaining non-blocking limitations:
   RNG, teacher projection, and final outcomes all agree in the measured gates.
 - Full trace mode is development/audit infrastructure and is intentionally heavier. Disabled mode does not snapshot
   game state.
-- Proactive fixed-head evidence is retained under `target/frl02k0-proactive-fixed-20260809`; these audit artifacts
-  are intentionally not committed.
+- PAYMENT remains intentionally request-only/unlabeled until Forge exposes a trustworthy atomic native result seam.
+  It is excluded from BC policy labels and separately visible as UNOBSERVED.
+- X_VALUE did not occur in either controlled ten-game cohort; its lifecycle is covered by a direct native-result
+  hook regression, not claimed from cohort frequency.
+- Upstream A only determinizes the legacy singular answer and does not resolve ambiguity. Upstream B remains the
+  preferred explicit plural API follow-up; neither upstream change was made here.
+- Final V2 audit evidence is retained under `target/frl02k0-final-v2-post-review-20260810`; audit artifacts are intentionally not
+  committed.
 
+All final FRL-02K0 conditions pass: decision regressions, same-seed repeatability, diagnostics neutrality,
+full-game collector self-neutrality, all nine state/RNG probe gates, historical 02D->02E and 02E->02F explanation,
+V2 label integrity, multiplicity-safe simulator reporting, and worker-isolated same-seed process determinism.
 No determinism blocker remains for this gate. CONFIRMATION was not started.
