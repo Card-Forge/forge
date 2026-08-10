@@ -13,6 +13,7 @@ import forge.ai.PlayerControllerAi;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCopyService;
 import forge.game.decision.ForgeStateFingerprint;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -33,6 +34,7 @@ public class FRL02KConfirmationAuditTest extends AITest {
         private final boolean triggerDecision;
         private int confirmTriggerCalls;
         private int activeContinuationCalls;
+        private final List<WrappedAbility> observedWrappers = new ArrayList<>();
 
         private CountingController(final Game game, final Player player, final boolean triggerDecision) {
             super(game, player, new LobbyPlayerAi(player.getName() + "-frl02k-audit", null));
@@ -42,6 +44,7 @@ public class FRL02KConfirmationAuditTest extends AITest {
         @Override
         public boolean confirmTrigger(final WrappedAbility wrapper) {
             confirmTriggerCalls++;
+            observedWrappers.add(wrapper);
             if (hasActiveContinuation()) {
                 activeContinuationCalls++;
             }
@@ -140,6 +143,83 @@ public class FRL02KConfirmationAuditTest extends AITest {
                 ForgeStateFingerprint.canonical(game));
     }
 
+    @Test
+    public void gelectrodeProjectionDropsEngineOnlyObjectsWithoutAliasing() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final CountingController controller = installController(game, player, true);
+        final Card source = addCard("Gelectrode", player);
+        final Card firstSpell = addCardToZone("Opt", player, ZoneType.Hand);
+        final Card secondSpell = addCardToZone("Opt", player, ZoneType.Hand);
+
+        Trigger gelectrodeTrigger = null;
+        for (final Trigger trigger : source.getTriggers()) {
+            if (TriggerType.SpellCast.equals(trigger.getMode())) {
+                gelectrodeTrigger = trigger;
+                break;
+            }
+        }
+        AssertJUnit.assertNotNull("Gelectrode must expose its intrinsic SpellCast trigger", gelectrodeTrigger);
+        AssertJUnit.assertEquals("Instant,Sorcery", gelectrodeTrigger.getParam("ValidCard"));
+        AssertJUnit.assertEquals("TrigUntap", gelectrodeTrigger.getParam("Execute"));
+
+        game.getAction().checkStateEffects(true);
+        runSpellCastTrigger(game, player, firstSpell);
+        runSpellCastTrigger(game, player, secondSpell);
+
+        AssertJUnit.assertEquals("two equivalent public spell-cast events must reach the native seam twice", 2,
+                controller.confirmTriggerCalls);
+        AssertJUnit.assertEquals(2, controller.observedWrappers.size());
+
+        final Map<AbilityKey, Object> firstObjects = controller.observedWrappers.get(0).getTriggeringObjects();
+        final Map<AbilityKey, Object> secondObjects = controller.observedWrappers.get(1).getTriggeringObjects();
+        AssertJUnit.assertNotSame("the internal cast cards are separate runtime objects",
+                firstObjects.get(AbilityKey.Card), secondObjects.get(AbilityKey.Card));
+        AssertJUnit.assertNotSame("the internal SpellAbility objects are separate runtime objects",
+                firstObjects.get(AbilityKey.SpellAbility), secondObjects.get(AbilityKey.SpellAbility));
+        AssertJUnit.assertNotSame("the internal cast collections are separate runtime objects",
+                firstObjects.get(AbilityKey.CurrentCastSpells), secondObjects.get(AbilityKey.CurrentCastSpells));
+        AssertJUnit.assertNotNull("the fixture must carry CardLKI only as an engine object",
+                firstObjects.get(AbilityKey.CardLKI));
+
+        final List<String> definitions = stableSemanticDefinitionKeys(source);
+        final Player opponent = game.getPlayers().get(0);
+        final Card hiddenCard = addCardToZone("Runeclaw Bear", opponent, ZoneType.Library);
+        final Map<AbilityKey, Object> hiddenObjects = AbilityKey.newMap();
+        hiddenObjects.put(AbilityKey.Activator, player);
+        hiddenObjects.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(hiddenCard));
+        final List<Card> hiddenCollection = new ArrayList<>();
+        hiddenCollection.add(hiddenCard);
+        hiddenObjects.put(AbilityKey.CurrentCastSpells, hiddenCollection);
+        final String stateBeforeProjection = ForgeStateFingerprint.canonical(game);
+        final Random previousRandom = MyRandom.getRandom();
+        final DeterminismAuditRandom auditRandom = new DeterminismAuditRandom(20260810L);
+        MyRandom.setRandom(auditRandom);
+        try {
+            final String firstContext = gelectrodeContext(firstObjects, source, definitions.get(0), player, 1);
+            final String secondContext = gelectrodeContext(secondObjects, source, definitions.get(0), player, 2);
+            AssertJUnit.assertFalse("trace-local occurrence identity must distinguish the two events",
+                    firstContext.equals(secondContext));
+            AssertJUnit.assertEquals("engine-only objects must not change an equivalent public projection",
+                    withoutOccurrence(firstContext), withoutOccurrence(secondContext));
+            AssertJUnit.assertFalse("the public projection must not export raw SpellAbility values",
+                    firstContext.contains("SpellAbility"));
+            AssertJUnit.assertFalse("the public projection must not export CardLKI values",
+                    firstContext.contains("CardLKI"));
+            final String hiddenContext = gelectrodeContext(hiddenObjects, source, definitions.get(0), player, 3);
+            AssertJUnit.assertEquals("hidden engine-only values must not alter the public projection",
+                    withoutOccurrence(firstContext), withoutOccurrence(hiddenContext));
+            AssertJUnit.assertFalse("hidden CardLKI identity must not enter the public projection",
+                    hiddenContext.contains(hiddenCard.getName()));
+            AssertJUnit.assertEquals("Gelectrode projection must not consume gameplay RNG", 0L,
+                    auditRandom.getDrawCount());
+        } finally {
+            MyRandom.setRandom(previousRandom);
+        }
+        AssertJUnit.assertEquals("Gelectrode projection must not mutate Forge state", stateBeforeProjection,
+                ForgeStateFingerprint.canonical(game));
+    }
+
     private static boolean hasActiveContinuation() {
         try {
             final Field field = Class.forName("forge.game.decision.PriorityActionDiagnostics")
@@ -191,6 +271,27 @@ public class FRL02KConfirmationAuditTest extends AITest {
                 + "|triggeringPlayer=" + triggeringPlayer.getId();
     }
 
+    private static String gelectrodeContext(final Card source, final String definition,
+            final Player deciderViewer, final Player triggeringPlayer, final int occurrence) {
+        return publicContext(source, definition, deciderViewer, triggeringPlayer)
+                + "|event=SPELL_CAST|occurrence=" + occurrence;
+    }
+
+    private static String gelectrodeContext(final Map<AbilityKey, Object> triggerObjects, final Card source,
+            final String definition, final Player deciderViewer, final int occurrence) {
+        final Object activator = triggerObjects.get(AbilityKey.Activator);
+        if (!(activator instanceof Player)) {
+            return "UNSUPPORTED_NO_PUBLIC_ACTIVATOR";
+        }
+        return gelectrodeContext(source, definition, deciderViewer, (Player) activator, occurrence);
+    }
+
+    private static String withoutOccurrence(final String context) {
+        final String suffix = "|occurrence=";
+        final int suffixIndex = context.lastIndexOf(suffix);
+        return suffixIndex < 0 ? context : context.substring(0, suffixIndex);
+    }
+
     private TriggerRunResult runOptionalAngel(final boolean decision) {
         final Game game = initAndCreateGame();
         final Player player = game.getPlayers().get(1);
@@ -213,6 +314,22 @@ public class FRL02KConfirmationAuditTest extends AITest {
         game.getTriggerHandler().resetActiveTriggers();
         game.getTriggerHandler().runTrigger(TriggerType.Phase, AbilityKey.mapFromPlayer(player), false);
         AssertJUnit.assertTrue("fixture must create a simultaneous trigger entry",
+                game.getStack().hasSimultaneousStackEntries());
+        game.getStack().addAllTriggeredAbilitiesToStack();
+    }
+
+    private void runSpellCastTrigger(final Game game, final Player player, final Card spellCard) {
+        final SpellAbility spellAbility = spellCard.getFirstSpellAbility();
+        spellAbility.setActivatingPlayer(player);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Activator, player);
+        runParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(spellCard));
+        runParams.put(AbilityKey.CurrentCastSpells, new ArrayList<Card>());
+        runParams.put(AbilityKey.CurrentStormCount, 1);
+        runParams.put(AbilityKey.SpellAbility, spellAbility);
+        game.getTriggerHandler().resetActiveTriggers();
+        game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams, false);
+        AssertJUnit.assertTrue("fixture must create a simultaneous SpellCast trigger entry",
                 game.getStack().hasSimultaneousStackEntries());
         game.getStack().addAllTriggeredAbilitiesToStack();
     }

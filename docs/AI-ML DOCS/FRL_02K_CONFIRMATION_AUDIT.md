@@ -1039,3 +1039,455 @@ The historical labels remain `K0/base = 286`, `pre-A2 audit branch = 287`, and `
 ### 24.6 A2R verification result
 
 The unchanged expanded A2 selection was rerun after the corrections and remains `post-A2R = 288` tests with zero failures, errors, and skips. The focused correction/lifecycle selection ran 4 tests (`FRL02KConfirmationAuditTest` = 3, `TriggerLifeGateTest` = 1) with zero failures, errors, and skips. `FullGameCollectorNeutralityTest` and `WorkerIsolationSmokeTest` each passed as one-test gates; their combined orchestration exceeded the initial 120-second wrapper limit, so they were rerun separately and completed successfully. Package, configured `validate`/Checkstyle, and `git diff --check` also passed. No production implementation file changed.
+
+## 25. FRL-02K-A3 decision relevance and public event projection
+
+This section records the A3 audit after PR #12 was merged into `master` at
+`62ea04e8dd2c0f374208a4ecaeba66d5d423422f`. A3 is test-only architecture evidence on branch
+`frl/02k-a3-trigger-event-projection`. It does not add `DecisionType.CONFIRMATION`, a confirmation provider,
+a production trigger context, a serializer, or external policy integration.
+
+The A3 question is narrower than “can every Forge run parameter be serialized?” It asks which values are
+actually needed by the external policy for one measured trigger shape, and whether those facts can be projected
+from public, typed semantics while omitting the raw Forge objects.
+
+### 25.1 Reproduction of the A2 occurrence set
+
+The canonical reactive workload was rerun in a fresh JVM:
+
+```text
+Izzet Guild Kit vs Dimir Guild Kit
+seed 20260810
+10 games
+```
+
+The audit-only JDI probe observed:
+
+```text
+WrappedAbility.resolve occurrences = 26
+confirmTrigger callbacks           = 26
+helper-origin callbacks            = 0
+native results                     = 26
+capture errors                     = 0
+ordinary continuations present     = 0
+```
+
+A second fresh JVM run produced the same 26 occurrence records in the same order. After removing only the
+additional diagnostic `originalHostName` field used for the provenance audit, the two complete occurrence
+record lists compared equal (`26` versus `26`, difference count `0`). The proactive workload remains at zero
+`confirmTrigger` callbacks. The A2 count is therefore reproduced exactly; no workload divergence occurred.
+
+### 25.2 Semantic shape clustering
+
+| Semantic shape | Count | Cost class | Provenance | A2 bucket |
+|---|---:|---|---|---|
+| `Gelectrode`: `SpellCast -> Untap` | 17 | absent / zero | intrinsic | `NORMAL_OPTIONAL_NO_COST_CONTEXT_UNSUPPORTED` |
+| `Lazav, Dimir Mastermind`: `ChangesZone -> Clone` | 3 | absent / zero | intrinsic | `NORMAL_OPTIONAL_NO_COST_CONTEXT_UNSUPPORTED` |
+| `Blood Operative`: `ChangesZone -> ChangeZone` | 2 | absent / zero | intrinsic | `NORMAL_OPTIONAL_NO_COST_CONTEXT_UNSUPPORTED` |
+| `Blood Operative`: `Surveil -> ChangeZone` | 1 | `PayLife<3>` | intrinsic | `COST_BEARING_OPTIONAL` |
+| Cipher-derived `DamageDone -> Play`: `Nightveil Specter` (1), `Tibor and Lumia` (2) | 3 | absent / zero | `intrinsic=false`, derived from `Stolen Identity` | `GENERATED_OR_COPIED_OPTIONAL` |
+| **Total** | **26** |  |  |  |
+
+### 25.3 Dominant candidate
+
+The dominant normal candidate is intrinsic `Gelectrode`, `SpellCast -> Untap`, at `17 / 26` callbacks. It is
+non-static, non-delayed in the measured run, has `OptionalDecider$ You`, has no nonzero cost, and has a visible
+battlefield source. It is therefore the narrow A3 candidate. A3 does not generalize its projection to the other
+four semantic shapes.
+
+### 25.4 Exact Forge engine trace
+
+The card script is `forge-gui/res/cardsfolder/g/gelectrode.txt`:
+
+```text
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You
+  | TriggerZones$ Battlefield | Execute$ TrigUntap | OptionalDecider$ You
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+```
+
+The source path is:
+
+```text
+TriggerSpellAbilityCastOrCopy.performTest(runParams)
+  -> requires SpellAbility and Activator
+  -> checks ValidActivatingPlayer and ValidCard
+TriggerHandler.runSingleTriggerInternal(...)
+  -> constructs the execution SpellAbility
+  -> copies trigger objects into it
+  -> OptionalDecider sets optional=true and the decider
+  -> creates WrappedAbility
+  -> queues the non-static wrapper on the simultaneous stack
+MagicStack.addAllTriggeredAbilitiesToStack()
+  -> invokes the controller's simultaneous-resolution path
+WrappedAbility.resolve()
+  -> calls confirmTrigger exactly once when decider != null
+  -> true reaches playSpellAbilityNoStack(sa, false)
+  -> false returns before the effect
+```
+
+Forge needs the complete `SpellAbility` and run-parameter map to establish that a qualifying spell was cast and
+to execute `TrigUntap`. That does not make the complete map policy context. The actual Gelectrode effect is
+“untap this visible source”; it has no target, card-selection, count, life-payment, or spell-identity branch.
+
+### 25.5 AbilityKey decision-relevance matrix for Gelectrode
+
+| AbilityKey | Runtime type in the workload | Why Forge has it | Needed for this ACCEPT/DECLINE decision? | Public replacement | Classification |
+|---|---|---|---|---|---|
+| `Activator` | `Player` | Valid activating-player matching and decider resolution | Yes: identifies the public event participant | typed player/seat identity | `REQUIRED_FOR_POLICY_CONTEXT` |
+| `Card` | `Card` | `ValidCard$ Instant,Sorcery` matching and trigger diagnostics | No; the trigger already qualifies and the effect does not inspect the cast card | none in the trigger-local context; public card facts remain ordinary observation/history if needed | `REQUIRED_FOR_ENGINE_ONLY` |
+| `CardLKI` | `Card` / LKI copy | Generic cast-trigger object propagation for effects and last-known information | No for Gelectrode | omit; never expose the raw LKI object | `REQUIRED_FOR_ENGINE_ONLY` |
+| `CurrentCastSpells` | opaque `ArrayList` | Generic run-parameter propagation for triggers that count or inspect casts | No; Gelectrode has no cast-count predicate | omit | `REDUNDANT` |
+| `CurrentStormCount` | `Integer` | Generic storm/count trigger support | No | omit | `REDUNDANT` |
+| `LifeAmount` | `Integer` | Generic life-payment propagation from a cast ability | No | omit | `REDUNDANT` |
+| `SpellAbility` | `SpellApiBased` | Trigger qualification and the execution carrier | No as a raw policy value | event type plus typed public participants | `REQUIRED_FOR_ENGINE_ONLY` |
+| `SpellAbilityTargets` | opaque `FCollection` when present | Generic target-sensitive trigger support | No; Gelectrode has no target predicate or target effect | omit | `REDUNDANT` |
+
+The distinction is per semantic shape. The same key can be policy-relevant for a different trigger; A3 does not
+declare a global AbilityKey rule.
+
+### 25.6 CardLKI verdict
+
+**`ENGINE_ONLY` for the selected Gelectrode shape.** `TriggerSpellAbilityCastOrCopy.setTriggeringObjects` copies
+`CardLKI` into the wrapped ability because the common cast-trigger machinery preserves a broad engine object
+surface. Gelectrode's own `ValidCard`, `ValidActivatingPlayer`, and `TrigUntap` semantics do not inspect the
+LKI identity. The A3 runtime fixture deliberately supplies a `CardLKI` object, then proves that the public
+projection ignores it. A hidden LKI value is never converted into a public card identity. If another trigger
+uses an LKI fact to decide, that trigger is outside this slice and must fail closed until separately proven.
+
+### 25.7 SpellAbility and collection verdict
+
+The raw `SpellAbility` is **`ENGINE_ONLY`** for Gelectrode. `SpellAbilityTargets` and `CurrentCastSpells` are
+**`REDUNDANT`** for this shape; no raw replacement is permitted. The exact replacement surface is:
+
+```text
+event = SPELL_CAST
+triggeringPlayer = public player/seat
+```
+
+combined with the visible source, semantic trigger definition, and the ordinary player-perspective observation.
+The A3 test creates two separate runtime SpellAbility objects and two separate collection objects. The
+projection remains equal after occurrence identity is removed. A hidden `CardLKI` and a hidden collection member
+also leave the projection unchanged and their identities do not appear in the output.
+
+### 25.8 Minimum sufficient public event context
+
+For this exact shape, the smallest conceptual decision-local context is:
+
+```text
+source              = public source instance reference
+definition          = semantic trigger-definition key
+occurrenceIndex     = trace-local monotonic occurrence identity
+event               = SPELL_CAST
+triggeringPlayer    = public player/seat identity
+deciderViewer       = separate decision-maker perspective
+```
+
+The future source reference must be an explicitly approved public instance identity or trace-local public ordinal;
+the test-only diagnostic card ID and game timestamp are not the production contract. The definition key is the
+semantic key described below. `activePlayer` remains a separate game-state/observation fact and is not collapsed
+into `triggeringPlayer` or `deciderViewer`.
+
+For Gelectrode, the cast-card identity, LKI, raw SpellAbility, targets, storm count, life amount, and collections
+are intentionally omitted. If a future event shape requires one of those facts, it needs a separate relevance
+proof rather than reuse of this projection.
+
+### 25.9 Observation/history split
+
+The normal visible game observation owns the current battlefield/source state, player/seat entities, and any
+public card or event facts that the existing observation contract already exposes. A future public history event
+may own the already-observable fact that a player cast an instant or sorcery. The trigger-specific request only
+needs to identify the decision-local event and the source/definition/occurrence that is currently asking for
+`ACCEPT` or `DECLINE`; it must not copy the whole game state or duplicate an existing public history event.
+
+No new `HistoryEvent` or production DTO was added in A3. The current `DecisionRequest` model has only
+decision-specific context slots and no approved generic confirmation-context slot. This is an implementation
+placement task for the future slice, not a reason to invent `DECISION_TRACE_V3`: the trace-level REQUEST/RESULT
+contract remains compatible, while the exact typed context slot must be approved during implementation.
+
+### 25.10 Fixed-perspective anti-aliasing
+
+The test-only helper takes independent `deciderViewer` and `triggeringPlayer` arguments. The fixed-viewer test
+uses the same visible source and semantic definition, keeps `deciderViewer` unchanged, and compares
+`triggeringPlayer = player A` with `triggeringPlayer = player B`. The resulting contexts are distinct. Source
+visibility is checked against `deciderViewer`, never against the event participant. This is the required
+perspective-fixed invariant, not a viewer-switching comparison.
+
+### 25.11 Opaque-object invariance and sufficiency result
+
+The runtime-backed A3 fixture resolves two Gelectrode SpellCast triggers with:
+
+```text
+different Card instances
+different SpellAbility instances
+different CurrentCastSpells collection instances
+CardLKI present in the engine map
+same visible source, event shape, and public triggering player
+```
+
+The raw maps differ by object identity, but the public conceptual contexts are identical after removing the
+trace-local occurrence index. A second adversarial map adds an LKI copy of an opponent library card and a
+collection containing a hidden member; the projection is unchanged and the hidden card name is absent. This
+proves intentional abstraction for the selected shape: the omitted objects do not provide a policy distinction
+for Gelectrode. It does not authorize dropping opaque objects for other trigger definitions.
+
+### 25.12 Provenance audit of the three `intrinsic=false` callbacks
+
+All three A2 occurrences are Cipher-derived triggers, not proven universal “generated/copied/granted” cases:
+
+| Occurrence(s) | Visible source | `originalHostName` | Construction path | A3 category | v0 status |
+|---|---|---|---|---|---|
+| 4 | `Nightveil Specter` | `Stolen Identity` | Cipher static effect adds `CipherTrigger` to the encoded card; `Card.getTriggerForStaticAbility(..., false, stAb)` parses the trigger | `DERIVED_BUT_STABLY_ATTRIBUTABLE` | exclude pending trusted provenance contract |
+| 10, 11 | `Tibor and Lumia` | `Stolen Identity` | same Cipher `AddTrigger$ CipherTrigger` path; the trigger executes `PlayEncoded` with `CopyCard$ True` | `DERIVED_BUT_STABLY_ATTRIBUTABLE` | exclude pending trusted provenance contract |
+
+Forge's Cipher construction is visible in `CardFactoryUtil` (`AddTrigger$ CipherTrigger`, `PlayEncoded`) and the
+static-trigger path in `StaticAbilityContinuous`/`Card`. `intrinsic=false` therefore means “not an intrinsic
+card-script trigger on the current host,” not “universally generated, copied, or granted.” A3 keeps all three
+out of the admitted slice rather than increasing coverage by assumption.
+
+### 25.13 Semantic identity refinement
+
+The future semantic definition key remains conceptually:
+
+```text
+canonical rules/card identity
++ card-state identity
++ ordered intrinsic trigger-definition discriminator or normalized definition hash
++ trigger mode
++ normalized nonlocalized semantic parameters
+```
+
+For this audit only, `stableSemanticDefinitionKeys` uses canonical card name plus current card state, trigger
+ordinal, mode/flags, and sorted nonlocalized parameters. The test proves equal keys for independent instances of
+the same semantic card-state definition and deliberately excludes set code, printing, runtime card ID, game
+timestamp, `Trigger.getId()`, hash code, Java object identity, `toString()`, and localized descriptions.
+
+Set/printing, runtime ID, timestamp, and `Trigger.getId()` may be retained as separate diagnostic/provenance
+metadata. They are not policy/training identity. The audit does not claim to have solved universal canonical
+card identity; it has only prevented printing identity from becoming the semantic contract.
+
+### 25.14 Occurrence identity and determinism
+
+A future implementation should allocate a trace-local monotonic `occurrenceIndex` at the engine-owned seam:
+
+```text
+1, 2, 3, ... within the decision trace
+```
+
+It is an occurrence discriminator, not a semantic candidate identity. It must not use PID, time, randomness,
+object identity, `hashCode()`, or `Trigger.getId()`. The current A3 harness does not add a production counter; it
+uses its local resolve order only as evidence. Two fresh JVM runs of the same seed/workload produced identical
+26-record occurrence order, supporting this deterministic trace-local design. Same source/definition events with
+different triggering objects remain distinguishable by occurrence index even when the semantic projection is the
+same.
+
+### 25.15 Hidden-information boundary and information monotonicity
+
+Supported for the Gelectrode slice:
+
+```text
+visible battlefield Gelectrode source
+public triggering player/seat
+public decider/viewer perspective
+```
+
+Omitted by construction:
+
+```text
+CardLKI
+raw SpellAbility
+raw Card and Player objects
+SpellAbilityTargets
+CurrentCastSpells and other opaque collections
+hidden cast-card identity
+```
+
+Rejected or deferred:
+
+```text
+opponent library/hand source identity
+face-down source identity
+hidden triggering card identity
+hidden collection members when a future trigger actually needs them
+delayed/generated/copied/granted or untrusted-provenance sources
+```
+
+The existing A2 visibility fixture uses Forge's `CardView.canBeShownTo` and
+`CardView.canFaceDownBeShownTo` authority for opponent-library and face-down cards and fails closed. The A3
+adversarial map demonstrates that an opponent hidden LKI/member is not exported because the Gelectrode projector
+does not inspect it. The information-monotonicity rule is explicit: a trigger request may contain no information
+the deciding player could not legally know at that exact point, and projection may not be more informative than
+Forge's own player-perspective state/history plus the public event semantics.
+
+### 25.16 ActionContinuation
+
+The measured A2/A3 workload has:
+
+```text
+non-null ordinary trigger continuations = 0 / 26
+```
+
+The focused optional-trigger fixtures also observe zero active continuations. The lifecycle remains:
+
+```text
+causing action -> trigger queued -> original action continuation closes
+  -> later trigger resolution -> no continuation on the trigger decision
+```
+
+The future admission rule treats a non-null continuation at ordinary trigger resolution as an integrity warning
+and fails closed unless a separately proven valid lifecycle exists. No continuation is copied into the proposed
+context.
+
+### 25.17 A3 admission predicate and exclusions
+
+The Gelectrode slice admission predicate is:
+
+```text
+engine-owned WrappedAbility.resolve seam
+AND decider != null
+AND wrapper is optional
+AND normal non-static resolution
+AND intrinsic trusted provenance
+AND no nonzero cost under Forge's existing classification
+AND visible source under the decider's perspective
+AND stable semantic definition identity
+AND trace-local occurrence identity
+AND all decision-relevant objects have approved public typed encodings
+AND no active ActionContinuation
+```
+
+The predicate rejects mandatory triggers because they are engine-owned and produce no request; nonzero-cost
+triggers because decline belongs to cost/payment semantics; static triggers because they use `playTrigger`; delayed
+and player-defined delayed triggers because timing/provenance are not closed; generated/copied/granted and
+`intrinsic=false` triggers because provenance is not trusted for this slice; helper calls because they do not pass
+through the `WrappedAbility.resolve` seam; and hidden sources/objects because visibility fails closed.
+
+`Cost == "0"` continues to follow `TriggerHandler`'s existing branch order. `OptionalDecider` wins before the
+zero-cost mandatory branch; string text is not reparsed by the audit.
+
+### 25.18 State and RNG neutrality
+
+The corrected fixed-viewer, hidden-source, hidden-object, and Gelectrode projection tests all compare
+`ForgeStateFingerprint` before and after projection and use `DeterminismAuditRandom` as the active RNG. Results:
+
+```text
+ForgeStateFingerprint before == after: PASS
+DeterminismAuditRandom draws:         0
+supported Gelectrode projection:      PASS
+rejected hidden projection:           PASS
+opaque/LKI omission projection:      PASS
+```
+
+The projector is getter-only and exception-isolated. Any unsupported or unexpected value is an `UNSUPPORTED`
+result, not a mutation, RNG fallback, or Forge-AI fallback.
+
+### 25.19 A2 versus A3 26-way reconciliation
+
+| Bucket | A2 count | A3 count | Why changed |
+|---|---:|---:|---|
+| `NORMAL_OPTIONAL_NO_COST_PUBLIC` | 0 | 0 | The old generic public-object bucket remains strict and is not reused. |
+| `NORMAL_OPTIONAL_NO_COST_EVENT_PROJECTABLE` | 0 | 17 | Gelectrode's raw CardLKI/SpellAbility/collection fields were proven engine-only or redundant for this semantic shape. |
+| `NORMAL_OPTIONAL_NO_COST_CONTEXT_UNSUPPORTED` | 22 | 5 | 17 Gelectrode occurrences moved to the explicit event-projectable bucket; Lazav and Blood Operative remain unresolved. |
+| `COST_BEARING_OPTIONAL` | 1 | 1 | Payment-owned semantics unchanged. |
+| `STATIC_OPTIONAL` | 0 | 0 | Not measured in the controlled workload; still excluded. |
+| `DELAYED_OPTIONAL` | 0 | 0 | Not measured; still excluded. |
+| `PROVENANCE_UNTRUSTED_DERIVED` | 0 | 3 | A2's `GENERATED_OR_COPIED_OPTIONAL` label was refined to Cipher-derived but untrusted provenance. |
+| hidden source/object | 0 | 0 | No measured hidden source/object callback; future hidden cases still fail closed. |
+| other | 0 | 0 | No remainder. |
+| **Total** | **26** | **26** | **No occurrence left unclassified.** |
+
+The strict A2 admitted count remains `0 / 26`; A3 semantically projectable count is `17 / 26`; remaining
+non-admitted callbacks are `9 / 26` (`5` unsupported normal no-cost, `1` cost-bearing, `3` untrusted derived
+provenance).
+
+### 25.20 Controlled RandomLegalPolicy blocker ledger
+
+| Current family | Count | A3 status |
+|---|---:|---|
+| Gelectrode optional no-cost trigger slice | 17 reactive | `SUPPORTED_BY_PROPOSED_ADAPTER` at architecture level; no production adapter exists yet |
+| Other normal optional no-cost triggers | 5 reactive | `DEFERRED_BUT_BLOCKING` |
+| Cost-bearing trigger | 1 reactive | `OTHER_DECISION_TYPE` / `DEFERRED_BUT_BLOCKING`; cost/payment-owned |
+| `confirmAction` | 8 reactive | `DEFERRED_BUT_BLOCKING`; heterogeneous caller-owned semantics |
+| `confirmPayment` | 0 / 0 | `DEFERRED_BUT_BLOCKING` if reached; separate PAYMENT lifecycle |
+| `chooseBinary` | 2 reactive | `OTHER_DECISION_TYPE`; effect-specific binary domains |
+| `payCostToPreventEffect` | 5 reactive / 24 proactive | `OTHER_DECISION_TYPE` / `DEFERRED_BUT_BLOCKING`; PAYMENT/prevention |
+| bid | 0 / 0 | `NOT_REACHED`; separate BID family |
+| replacement | 0 / 0 | `NOT_REACHED`; separate REPLACEMENT family |
+| static application | 0 / 0 | `NOT_REACHED`; separate static/combat family |
+
+The A3 slice does not make CONFIRMATION globally complete. The known `confirmAction`, `chooseBinary`, payment,
+bid, replacement, and static families remain separate RandomLegalPolicy work.
+
+### 25.21 Commander/generalization review
+
+The context uses player/seat entities and retains three distinct roles:
+
+```text
+decider/viewer
+triggering player
+active player
+```
+
+It does not encode `SELF`/`OPPONENT`. The same shape can therefore be extended to more than two players, multiple
+opponents, an affected player distinct from the decider, and several simultaneous public events. Simultaneous
+events remain separated by trace-local occurrence identity. Multiplayer Commander rules are not implemented or
+claimed by A3.
+
+### 25.22 DECISION_TRACE_V2 compatibility
+
+The candidate remains:
+
+```text
+REQUEST
+  DecisionType.CONFIRMATION
+  legalCandidates = [ACCEPT, DECLINE]
+
+RESULT
+  CHOSEN
+```
+
+The stable candidate order remains `ACCEPT`, then `DECLINE`. Mandatory triggers generate no request. The event
+projection is compatible with `DECISION_TRACE_V2` at the trace level; A3 adds no V3 schema. The future
+implementation must add or select an approved typed request-context slot without exposing raw Forge objects.
+
+### 25.23 A3 architecture verdict
+
+The dominant Gelectrode shape is now closed as a **slice-level architecture candidate**: its direct boolean
+semantics, engine seam, public decision relevance, opaque-object invariance, fixed-perspective anti-aliasing,
+hidden-information behavior, stable audit identity approximation, deterministic occurrence order, absent
+continuation, exactly-once callback, state neutrality, RNG neutrality, and V2 trace semantics are all supported
+by source and test-only evidence.
+
+**A3 architecture verdict: `IMPLEMENT_GELECTRODE_OPTIONAL_TRIGGER_SLICE`.**
+
+This verdict authorizes only a future implementation review for that named slice. It does not authorize production
+CONFIRMATION code in A3, does not admit the other nine callbacks, and does not close global CONFIRMATION.
+
+### 25.24 A3 verification evidence
+
+Historical labels are preserved:
+
+```text
+K0/base regression              = 286
+pre-A2 audit branch             = 287
+post-A2 expanded selection      = 288
+```
+
+Current A3 results are reported separately:
+
+| Gate | Executed | Passed | Failed | Errors | Skipped |
+|---|---:|---:|---:|---:|---:|
+| Focused A1/A2/A3 plus `TriggerLifeGateTest` | 5 | 5 | 0 | 0 | 0 |
+| Full reactor decision/determinism regression, successful run before final hidden-member assertion | 620 | 614 | 0 | 0 | 6 |
+| Full reactor rerun after final hidden-member assertion | 620 | 613 | 1 | 0 | 6 |
+| Isolated `NetworkPlayIntegrationTest.testServerStartAndStop` rerun | 1 | 0 | 1 | 0 | 0 |
+| `FullGameCollectorNeutralityTest` | 1 | 1 | 0 | 0 | 0 |
+| `WorkerIsolationSmokeTest` | 1 | 1 | 0 | 0 | 0 |
+
+The successful full-suite run was `620/614/0/0/6` on the A3 branch before the final one-line test-fixture
+hardening that added a hidden member to the adversarial collection. The final focused A3 selection reran that
+hardening and remains fully green at `5/5/0/0/0`. The subsequent broad rerun and isolated network-test rerun
+were blocked only by `java.net.BindException: Address already in use` on hard-coded Forge test port `55556`.
+At the time of diagnosis, no listener held the port; Discord held it as an unrelated outbound ephemeral local
+port, so no process was terminated and no environment-wide setting was changed. Package (`BUILD SUCCESS`),
+configured `validate`/Checkstyle (`0` violations), and `git diff --check` all pass after the final changes. No
+production implementation is part of A3.
