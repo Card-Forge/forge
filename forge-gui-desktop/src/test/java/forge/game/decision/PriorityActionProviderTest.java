@@ -145,6 +145,21 @@ public class PriorityActionProviderTest extends AITest {
     }
 
     @Test
+    public void forgeAlternativeCostIsPreservedByNeutralPriorityGeneration() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final Card geistflame = addCardToZone("Geistflame", player, ZoneType.Graveyard);
+        addCards("Mountain", 4, player);
+
+        final DecisionRequest request = NeutralityAssertions.assertGameAndRngNeutral(
+                "PRIORITY_ACTION alternative-cost generation", game,
+                () -> provider.createPriorityRequest(player));
+
+        assertTrue(hasCandidate(request, PriorityActionKind.CAST_SPELL, geistflame.getName()),
+                "the neutral probe must retain Forge-generated flashback actions");
+    }
+
+    @Test
     public void publicExileCardWithForgeMayPlayPermissionIsExposed() {
         final Game game = initAndCreateGame();
         final Player player = game.getPlayers().get(1);
