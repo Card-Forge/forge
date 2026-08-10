@@ -57,7 +57,7 @@ public class WorkerIsolationSmokeTest {
 
     private static Child start(final Path root, final String runId, final int workerId) throws IOException {
         final List<String> command = new ArrayList<>();
-        command.add(Path.of(System.getProperty("java.home"), "bin", "java.exe").toString());
+        command.add(ChildJvmSupport.javaExecutable().toString());
         command.add("-D" + DiagnosticOutputPaths.OUTPUT_ROOT_PROPERTY + "=" + root);
         command.add("-D" + DiagnosticOutputPaths.RUN_ID_PROPERTY + "=" + runId);
         command.add("-D" + DiagnosticOutputPaths.WORKER_ID_PROPERTY + "=" + workerId);

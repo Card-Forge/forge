@@ -51,7 +51,7 @@ public class FullGameCollectorNeutralityTest {
         final Path console = run.resolve("console.log");
         Files.createDirectories(run);
         final List<String> command = new ArrayList<>();
-        command.add(Path.of(System.getProperty("java.home"), "bin", "java.exe").toString());
+        command.add(ChildJvmSupport.javaExecutable().toString());
         command.add("-D" + DeterminismTrace.AUDIT_RANDOM_PROPERTY + "=true");
         command.add("-D" + ReferenceGameplayObserver.OUTPUT_DIRECTORY_PROPERTY + "=" + reference);
         command.add("-Dforge.priority.metricsFile=" + priority);
