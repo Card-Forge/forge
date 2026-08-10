@@ -57,7 +57,7 @@ The baseline checkpoint changed those stale assertions to exact equality with 55
 - non-stage rows have `fields[54] == ""`.
 
 No assertion was removed or weakened. Baseline evidence was 11/11 focused diagnostics tests and 220/220 complete
-decision regressions. The final expanded regression command executes 283 tests across `forge-game`, `forge-ai`, and
+decision regressions. The final expanded regression command executes 286 tests across `forge-game`, `forge-ai`, and
 `forge-gui-desktop` with 0 failures, 0 errors, and 0 skipped. The package lifecycle and configured Checkstyle
 lifecycle both pass with zero violations.
 
@@ -628,6 +628,12 @@ complete namespace plus one explicit override leaves the other two derived. Any 
 fails fast, even when one explicit sink is present. `runId` rejects separators/traversal and `workerId` must be
 non-negative. No properties retains legacy disabled behavior.
 
+Child-JVM launch paths are centralized in the test-only `ChildJvmSupport` helper. It resolves
+`<java.home>/bin/java.exe` on Windows and `<java.home>/bin/java` on Linux, macOS, and other Unix-like systems,
+checks that the resolved file exists, and passes it directly to `ProcessBuilder`; it never shells through a command
+interpreter or searches an arbitrary PATH. `ChildJvmSupportTest` covers Windows, Linux, and macOS derivation, while
+both permanent child-JVM integration gates use the same helper.
+
 The simultaneous same-seed worker smoke used Izzet/Dimir, seed 20260810, one game, `runId=same-seed-smoke`:
 
 | Worker | PID / exit | Directory | Produced worker-local files |
@@ -670,11 +676,12 @@ Final verification evidence:
 
 ```text
 focused X/V2/projection:         32 tests, 0 failures/errors/skips
+focused Java executable resolver: 3 tests, 0 failures/errors/skips
 focused Mulligan lifecycle:       6 tests, 0 failures/errors/skips
 outcome integrity focused:       3 tests, 0 failures/errors/skips
 collector OFF/OFF/ON/ON:         1 test / 4 full games, PASS
 two simultaneous workers:        1 test / 2 JVMs, PASS
-final expanded gate regression:  283 tests, 0 failures/errors/skips
+final expanded gate regression:  286 tests, 0 failures/errors/skips
 current V2 cohort repeats:        40 games, 0 canonical trace differences
 package:                          BUILD SUCCESS
 configured Checkstyle:            0 violations
