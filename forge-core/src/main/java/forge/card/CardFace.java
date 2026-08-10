@@ -223,20 +223,25 @@ final class CardFace implements ICardFace, Cloneable {
         if("".equals(variant.initialLoyalty)) variant.initialLoyalty = this.initialLoyalty;
         if("".equals(variant.defense)) variant.defense = this.defense;
 
-        if(variant.keywords == null) variant.keywords = this.keywords;
-        else variant.keywords.addAll(0, this.keywords);
+        // COPY the base lists into the variant (don't alias): assigning the base list reference and
+        // then addAll'ing into it on a SECOND variant call does this.list.addAll(0, this.list),
+        // doubling every keyword/ability/trigger/replacement on Universes Within / flavor-name cards
+        // (Blanka, The Howling Abomination fired twice) and permanently corrupting the shared base
+        // CardRules for every printing. The `!= this.x` guard also prevents a self-append.
+        if(variant.keywords == null) variant.keywords = new ArrayList<>(this.keywords);
+        else if(variant.keywords != this.keywords) variant.keywords.addAll(0, this.keywords);
 
-        if(variant.abilities == null) variant.abilities = this.abilities;
-        else variant.abilities.addAll(0, this.abilities);
+        if(variant.abilities == null) variant.abilities = new ArrayList<>(this.abilities);
+        else if(variant.abilities != this.abilities) variant.abilities.addAll(0, this.abilities);
 
-        if(variant.staticAbilities == null) variant.staticAbilities = this.staticAbilities;
-        else variant.staticAbilities.addAll(0, this.staticAbilities);
+        if(variant.staticAbilities == null) variant.staticAbilities = new ArrayList<>(this.staticAbilities);
+        else if(variant.staticAbilities != this.staticAbilities) variant.staticAbilities.addAll(0, this.staticAbilities);
 
-        if(variant.triggers == null) variant.triggers = this.triggers;
-        else variant.triggers.addAll(0, this.triggers);
+        if(variant.triggers == null) variant.triggers = new ArrayList<>(this.triggers);
+        else if(variant.triggers != this.triggers) variant.triggers.addAll(0, this.triggers);
 
-        if(variant.replacements == null) variant.replacements = this.replacements;
-        else variant.replacements.addAll(0, this.replacements);
+        if(variant.replacements == null) variant.replacements = new ArrayList<>(this.replacements);
+        else if(variant.replacements != this.replacements) variant.replacements.addAll(0, this.replacements);
 
         if(variant.variables == null) variant.variables = this.variables;
         else this.variables.forEach((k, v) -> variant.variables.putIfAbsent(k, v));
