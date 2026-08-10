@@ -468,6 +468,18 @@
 			"Story"]
 	},
 	{
+		"name": "An-Havva Inn",
+		"displayName": "An-Havva Inn",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building41",
+		"map": "../Realm of Legends/maps/map/grove/An-Havva_Inn.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Gitrog Bog",
 		"displayName": "Gitrog Bog",
 		"type": "castle",

@@ -1641,6 +1641,30 @@
     }
   },
   {
+    "name": "Joven's Shoes",
+    "description": "3/3 legendary rogue. RRR, T: Destroy a non-creature artifact.",
+    "equipmentSlot": "Boots",
+    "iconName": "Joven'sShoes",
+    "effect": {
+      "lifeModifier": -5,
+      "startBattleWithCard": [
+        "Joven|hml"
+      ]
+    }
+  },
+  {
+    "name": "Chandler's Shoes",
+    "description": "3/3 legendary rogue. RRR, T: Destroy an artifact creature.",
+    "equipmentSlot": "Boots",
+    "iconName": "Chandler'sShoes",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+        "Chandler|hml"
+      ]
+    }
+  },
+  {
     "name": "Murderer's Axe",
     "description": "Equip - discard. Gives +2/+2.",
     "equipmentSlot": "Right",

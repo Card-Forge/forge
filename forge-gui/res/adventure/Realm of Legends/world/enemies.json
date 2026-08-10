@@ -63016,6 +63016,379 @@
     "spawnRate": 0
   },
   {
+    "name": "Joven and Chandler",
+    "sprite": "sprites/enemy/humanoid/human/bandit/banditslingshot.atlas",
+    "deck": [
+      "decks/legends/joven_and_chandler.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Joven's Shoes"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Chandler's Shoes"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Joven and Chandler"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Joven"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Chandler"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 2,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "spawnRate": 0
+  },
+  {
+    "name": "Feroz",
+    "sprite": "sprites/enemy/humanoid/human/wizard/archmage.atlas",
+    "deck": [
+      "decks/legends/feroz.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Feroz, Ulgrotha's Warden"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 0,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "WUG",
+    "spawnRate": 1
+  },
+  {
+    "name": "Greensleeves",
+    "sprite": "sprites/enemy/humanoid/elf/elf_golgari.atlas",
+    "deck": [
+      "decks/legends/greensleeves.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Greensleeves"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Greensleeves, Maro-Sorcerer"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 0,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 0,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "G",
+    "spawnRate": 1
+  },
+  {
+    "name": "Autumn Willow",
+    "sprite": "sprites/enemy/humanoid/elf/druid_2.atlas",
+    "deck": [
+      "decks/legends/autumn_willow.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Autumn Willow, Harmony"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Autumn Willow"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 0,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 0,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "G",
+    "spawnRate": 1
+  },
+  {
+    "name": "Daughter of Autumn",
+    "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
+    "deck": [
+      "decks/legends/daughter_of_autumn.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Daughter of Autumn"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 0,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "GW",
+    "spawnRate": 1
+  },
+  {
     "name": "Withengar",
     "sprite": "sprites/enemy/fiend/abyssalbaron.atlas",
     "deck": [
