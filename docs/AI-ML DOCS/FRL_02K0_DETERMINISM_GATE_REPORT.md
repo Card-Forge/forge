@@ -156,6 +156,26 @@ Current `ALL_NEUTRAL_DIAGNOSTICS_ON` additionally uses
 `-Dforge.mulligan.metricsFile=<csv>`. OFF omits both properties. The trace directory property is present in every
 hashed run and is audit infrastructure rather than a neutral decision diagnostic.
 
+The supplemental proactive remeasurement used the same environment and flags on branch head
+`e05db6035781a80a84d53d0cc3da4316cdc98b8b`; the only commit after the measured production-code head is this
+report. Its exact workload was:
+
+```text
+decks:                    Dead and Alive (seat 0) vs Air Forces (seat 1)
+Dead and Alive SHA-256:   3ac49a5a180a78193861c1fd191c6212f8ba29570fb1ff122e161afaf24480a3
+Air Forces SHA-256:       a8be5bfcb8a2871a83203c87cfd94c88bb0227ed4f0c1c8b1268cf71b1c50a12
+AI profiles:              no -a override; Forge default profile for both seats
+mulligan:                 configured Forge London rule
+seed:                     20260809
+games:                    10
+```
+
+The packaged command differed only in deck names and seed:
+
+```text
+java [diagnostic properties] -cp ..\forge-gui-desktop\target\forge-gui-desktop-2.0.14-SNAPSHOT-jar-with-dependencies.jar forge.view.Main sim -d "Dead and Alive" "Air Forces" -n 10 -s 20260809 -q
+```
+
 ## 5. Current-head reproducibility and diagnostics neutrality
 
 The aggregate hashes below are SHA-256 reductions of the ten ordered per-game hashes/outcomes.
@@ -187,6 +207,37 @@ Authoritative per-game values, identical in all four runs:
 
 Therefore same-commit reproducibility and diagnostics OFF-vs-ON neutrality both pass at per-record granularity,
 not merely at final score granularity.
+
+### Supplemental proactive fixed-head remeasurement
+
+The proactive workload was independently repeated in four fresh JVMs. It uses the same comparison rules as the
+reactive workload above and revalidates the pre-fix proactive measurement cohort on the fixed head.
+
+| Run | Diagnostics | Gameplay aggregate | RNG aggregate | Outcome aggregate | Result |
+|---|---|---|---|---|---:|
+| OFF A | none | `071a396a353e4dbd1a9db62bdeece836ddcaaa4d900f368efa223a137d0e8162` | `36001966aa6ab3c8e2950d444b1974577a6e6d9ea9c37b25690994376ff3a917` | `f093203eb188901ab338111c45565afe6dac27899e28161690febc0c9ea0c077` | 7-3 |
+| OFF B | none | same | same | same | 7-3 |
+| ON A | priority + mulligan | same | same | same | 7-3 |
+| ON B | priority + mulligan | same | same | same | 7-3 |
+
+ON decision aggregate A and B is identically
+`a0a46f4868fe4b09dc039ad3c0493684b35b46ef88b621dbefc7119eac8e0b04`. Both ON metrics files contain the same
+28,187 priority rows and 52 mulligan rows, with zero `PRIORITY_STATE` or `MAPPING_FAILED` records.
+
+Authoritative proactive per-game values, identical in all four runs:
+
+| Game | Gameplay hash | RNG hash | Draws | Outcome |
+|---:|---|---|---:|---|
+| 1 | `2162268d1cb4dcd81012617d0c818aebc4a8e035d1219be9766ff56ce27ec814` | `5ac028ce610abe5e9081a9f47e023d33d23a45e72b851f93efa20bb25ac0b0cb` | 1282 | WINNER_SEAT_0 |
+| 2 | `d18ce0110daff364f966eec2526a0a81a415468aa3f73d0623aa5076ef280db0` | `ef42a71508e5ce2747fdc555afa9fafe7fe614514c00ec8b1137f52aa08c869c` | 501 | WINNER_SEAT_0 |
+| 3 | `1ad36dcc2846291b77936a0f17614f23b7b1893ef4c655485ac1088bb9a6b2ca` | `3a860d9edac87e662b2e12f19992ee78327d17580347747a976b774831b56d79` | 388 | WINNER_SEAT_1 |
+| 4 | `356e9c0f83b489e0d388fdef26d7d7083ec665366c6099d4db6ab1681687b367` | `6a27933dffd56e3e7fdc0c471923fb0c622ab36a8664e116af60790838248a33` | 5201 | WINNER_SEAT_0 |
+| 5 | `1e9022298400953634d52c8005edf9d47bfb57fa474c7861418b09785d4d429a` | `458f3f111a7eb6a18d173f012f451d62171552400cdc8ce245f8f035246e468f` | 527 | WINNER_SEAT_1 |
+| 6 | `2f859dacd127ea93cb6d21c55572c74b5dcfcc07ea3b21fa9b9596047a12d3a0` | `33080eea9d83c94f9c9ad5be544ad976ae7be193ce7781617a8a5c73e8c9d6e8` | 616 | WINNER_SEAT_1 |
+| 7 | `58bc3b64535880a43300b9202503ed2ab0cae67344dc49bb15ff4f6c81cb7b53` | `e5fc9ea24544dc36ad3d92eff62a1cc5bc0a1a6a56a289c45dfa21c9fb9f6efc` | 314 | WINNER_SEAT_0 |
+| 8 | `6ff200961ad8a8564d0d2de4ccc9cb22add9abd1cc1782aeb0553331da5a664f` | `c9d9efaf705fcf3c64ebd5d089ac1d54b818317301a00782dca33b2ea6619fc2` | 482 | WINNER_SEAT_0 |
+| 9 | `2134ce75ab4220d2805b892fa89cdd1144136ee027eb8b4032cf8a2828ebdc3a` | `c41db0fc62f3c6d1fe0adbadc2d6fff7fa88cc2b13b97523e193e352d55cae18` | 549 | WINNER_SEAT_0 |
+| 10 | `3127f0a300b2e4ffa8e6732ef7951aec273ece4dff5790ccd0be0a758acc096e` | `aa95cbc9c877b355507359bcc2edc7fc905e705f70bf60fffba782400b41b6de` | 451 | WINNER_SEAT_0 |
 
 ## 6. Trace collector and direct probe neutrality
 
@@ -353,8 +404,23 @@ the final four ten-game runs then matched in full.
 
 ## 12. Measurement reconciliation and latency interpretation
 
-Current final ON-A evidence (one ten-game Izzet/Dimir run) demonstrates that callback-to-request direction remains
-family-specific:
+The supplemental fixed-head proactive ON-A run supplies the previously missing current cohort. ON-B reproduced the
+same callback, request, forced, and strategic counts; latency is reported from ON-A to remain comparable with the
+single-run reactive table.
+
+| Family | Raw callbacks/observations | Atomic requests | Ratio | Forced | Strategic | Forced share | Generation p50/p95/p99 ns | Native p50/p95/p99 ns |
+|---|---:|---:|---:|---:|---:|---:|---|---|
+| PRIORITY | 4,385 | 4,385 | 1.000 | 530 | 3,855 | 12.1% | 1,120,900 / 4,107,400 / 6,586,200 | 2,095,200 / 19,159,800 / 46,483,800 |
+| TARGET | 0 | 0 | n/a | 0 | 0 | n/a | unavailable | unavailable |
+| PAYMENT | 789 | 430 | 0.545 | 64 | 366 | 14.9% | 389,100 / 1,131,700 / 2,144,100 | unavailable |
+| MODE | 0 | 0 | n/a | 0 | 0 | n/a | unavailable | unavailable |
+| CARD_SELECTION | 0 | 0 | n/a | 0 | 0 | n/a | unavailable | unavailable |
+| ATTACK | 122 | 239 | 1.959 | 70 | 169 | 29.3% | 64,300 / 239,300 / 902,700 | 8,631,100 / 50,797,600 / 85,475,700 |
+| BLOCK | 37 | 65 | 1.757 | 18 | 47 | 27.7% | 218,700 / 745,400 / 2,149,100 | 4,678,800 / 13,684,600 / 23,424,300 |
+| MULLIGAN KEEP/REDRAW | 23 | 23 | 1.000 | 0 | 23 | 0.0% | 0 / 0 / 0 | 30,600 / 136,200 / 6,811,600 |
+| MULLIGAN_BOTTOM | 3 | 3 | 1.000 | 0 | 3 | 0.0% | 100,600 / 6,736,700 / 6,736,700 | 3,273,000 / 3,334,800 / 3,334,800 |
+
+The current final reactive ON-A evidence (one ten-game Izzet/Dimir run) demonstrates the opposite cohort:
 
 | Family | Raw callbacks/observations | Atomic requests | Ratio | Forced | Strategic | Forced share | Generation p50/p95/p99 ns | Native p50/p95/p99 ns |
 |---|---:|---:|---:|---:|---:|---:|---|---|
@@ -368,11 +434,11 @@ family-specific:
 | MULLIGAN KEEP/REDRAW | 24 | 24 | 1.000 | 0 | 24 | 0.0% | 0 / 0 / 0 | 33,500 / 645,700 / 28,373,200 |
 | MULLIGAN_BOTTOM | 4 | 4 | 1.000 | 0 | 4 | 0.0% | 52,800 / 82,000 / 82,000 | 231,100 / 3,932,000 / 3,932,000 |
 
-The retained reports independently preserve the Revision 6 examples: PAYMENT `1,637 -> 655` (0.40), ATTACK
-`122 -> 239` (1.96), and BLOCK `37 -> 65` (1.76). PAYMENT's retained forced share is independently supported as
-126/655 = 19.24%. No retained report contains the source numerator/denominator for the proposed 38.6% upper bound,
-so this gate does not claim that range as independently revalidated. The current controlled cohort instead shows
-that family shares can range from 0% to 42.6%; cohorts must not be mixed.
+The fixed-head proactive run exactly revalidates the retained proactive callback/request counts for PAYMENT
+`789 -> 430`, ATTACK `122 -> 239`, and BLOCK `37 -> 65`. Combined with the fixed-head reactive cohort, the current
+two-matchup PAYMENT total is `2,081 -> 733` (0.352), with 139 forced and 594 strategic requests (18.96% forced).
+This replaces the pre-fix combined `1,637 -> 655` value for Revision 7; it must not be assembled from one current
+cohort and one historical cohort. The fixed-head forced shares range from 0% to 42.6% across families and matchups.
 
 Neutral generation, native teacher callback, and future external-policy inference are distinct costs. They are not
 summed as a future controller cost because the external policy replaces the teacher callback. X_VALUE remains the
@@ -388,6 +454,7 @@ focused diagnostics baseline: 11 tests, 0 failures/errors/skips
 baseline decision regression:  220 tests, 0 failures/errors/skips
 final expanded gate regression: 255 tests, 0 failures/errors/skips
 determinism trace focused:      3 tests, 0 failures/errors/skips
+proactive fixed-head matrix:    40 games, 0 per-game trace/outcome differences
 package:                        BUILD SUCCESS
 configured Checkstyle:          0 violations
 git diff --check:               clean
@@ -403,5 +470,7 @@ Remaining non-blocking limitations:
   RNG, teacher projection, and final outcomes all agree in the measured gates.
 - Full trace mode is development/audit infrastructure and is intentionally heavier. Disabled mode does not snapshot
   game state.
+- Proactive fixed-head evidence is retained under `target/frl02k0-proactive-fixed-20260809`; these audit artifacts
+  are intentionally not committed.
 
 No determinism blocker remains for this gate. CONFIRMATION was not started.
