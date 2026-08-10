@@ -76,7 +76,33 @@ import forge.game.zone.ZoneType;
  */
 public abstract class SpellAbility extends CardTraitBase implements ISpellAbility, IIdentifiable, Comparable<SpellAbility> {
     private static int maxId = 0;
-    private static int nextId() { return ++maxId; }
+    private static final ThreadLocal<Integer> auditNextId = new ThreadLocal<>();
+
+    private static int nextId() {
+        final Integer auditId = auditNextId.get();
+        if (auditId != null) {
+            auditNextId.set(auditId - 1);
+            return auditId;
+        }
+        return ++maxId;
+    }
+
+    /**
+     * Runs diagnostics-only ability expansion without consuming IDs from the live-game sequence.
+     * Audit abilities receive unique negative IDs and must never be installed into game state.
+     */
+    public static <T> T withAuditIdSequence(final Supplier<T> auditWork) {
+        Objects.requireNonNull(auditWork, "auditWork");
+        if (auditNextId.get() != null) {
+            return auditWork.get();
+        }
+        auditNextId.set(-1);
+        try {
+            return auditWork.get();
+        } finally {
+            auditNextId.remove();
+        }
+    }
 
     public static class EmptySa extends SpellAbility {
         public EmptySa(Card sourceCard) { super(sourceCard, Cost.Zero); setActivatingPlayer(sourceCard.getController());}
@@ -2149,8 +2175,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 // don't set targeting player when forceful target,
                 // "targeting player controls" should not be reset when the spell is copied
                 currentAbility.setTargetingPlayer(targetingPlayer);
-                PriorityActionDiagnostics.recordTargetRequest(currentAbility, targetingPlayer);
-                if (!targetingPlayer.getController().chooseTargetsFor(currentAbility)) {
+                final PriorityActionDiagnostics.TargetTraceCapture targetTrace =
+                        PriorityActionDiagnostics.recordTargetRequest(currentAbility, targetingPlayer);
+                final boolean targetsChosen = targetingPlayer.getController().chooseTargetsFor(currentAbility);
+                PriorityActionDiagnostics.recordTargetResult(targetTrace, targetsChosen);
+                if (!targetsChosen) {
                     return false;
                 }
             }

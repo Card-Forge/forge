@@ -41,8 +41,9 @@ public class ModeDecisionProviderTest extends AITest {
         addIzzetMana(chooser);
         final List<AbilitySub> original = izzet.getAdditionalAbilityList("Choices");
 
-        final ModeDecisionProvider.Generation generation = provider.generateModeRequest(izzet,
-                List.of(original.get(0), original.get(2)), 1, 1, false, chooser, null);
+        final ModeDecisionProvider.Generation generation = NeutralityAssertions.assertGameAndRngNeutral(
+                "MODE generation", game, () -> provider.generateModeRequest(izzet,
+                        List.of(original.get(0), original.get(2)), 1, 1, false, chooser, null));
 
         assertEquals(generation.getStatus(), ModeDecisionProvider.Status.DECISION);
         final DecisionRequest request = generation.getRequest();

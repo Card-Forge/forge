@@ -199,7 +199,7 @@ public final class PaymentDecisionProvider {
             for (final SpellAbility liveManaAbility : card.getManaAbilities()) {
                 final SpellAbility manaAbility;
                 if (sideEffectFree) {
-                    manaAbility = liveManaAbility.copy(payer);
+                    manaAbility = liveManaAbility.copy(liveManaAbility.getHostCard(), payer, true);
                     if (manaAbility == null) {
                         return PrototypeResult.unsupported(UnsupportedReason.NONTRIVIAL_MANA_SUBABILITY);
                     }

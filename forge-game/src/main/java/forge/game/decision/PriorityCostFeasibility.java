@@ -281,10 +281,7 @@ public final class PriorityCostFeasibility {
     }
 
     private static SpellAbility preparedProbe(final SpellAbility root, final Player payer) {
-        if (root.getActivatingPlayer() != null) {
-            return root;
-        }
-        final SpellAbility copy = root.copy(payer);
+        final SpellAbility copy = root.copy(root.getHostCard(), payer, true);
         if (copy == null) {
             throw new IllegalArgumentException("Unable to create a side-effect-free prepared ability probe");
         }
@@ -355,7 +352,7 @@ public final class PriorityCostFeasibility {
         UnsupportedReason unsupportedReason = null;
         int index = 0;
         for (final SpellAbility manaAbility : card.getManaAbilities()) {
-            final SpellAbility probeAbility = manaAbility.copy(payer);
+            final SpellAbility probeAbility = manaAbility.copy(manaAbility.getHostCard(), payer, true);
             if (probeAbility == null) {
                 unsupportedReason = chooseReason(unsupportedReason, UnsupportedReason.DYNAMIC_MANA_PRODUCTION);
                 index++;
@@ -421,7 +418,7 @@ public final class PriorityCostFeasibility {
     private static boolean hasPlayableAlternativeManaActivation(final Player payer) {
         for (final Card card : payer.getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final SpellAbility liveAbility : card.getManaAbilities()) {
-                final SpellAbility baseProbe = liveAbility.copy(payer);
+                final SpellAbility baseProbe = liveAbility.copy(liveAbility.getHostCard(), payer, true);
                 if (baseProbe == null) {
                     continue;
                 }

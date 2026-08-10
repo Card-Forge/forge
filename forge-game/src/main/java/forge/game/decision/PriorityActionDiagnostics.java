@@ -1,6 +1,7 @@
 package forge.game.decision;
 
 import forge.game.player.Player;
+import forge.game.GameObject;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.Card;
@@ -42,7 +43,8 @@ public final class PriorityActionDiagnostics {
             + "selection_session_id,selection_step_index,selection_status,selection_reason,selection_selected_count,"
             + "selection_remaining_count,selection_initial_count,selection_candidate_shrinkage,selection_stage";
     private static final int COLUMN_COUNT = 55;
-    private static final String OUTPUT_PATH = System.getProperty(OUTPUT_PATH_PROPERTY, "");
+    private static final String OUTPUT_PATH = DiagnosticOutputPaths.resolve().priorityMetricsFile()
+            .map(Path::toString).orElse("");
     private static final boolean ENABLED = !OUTPUT_PATH.isBlank();
     private static final long PROCESS_ID = ProcessHandle.current().pid();
     private static final PriorityActionProvider PROVIDER = ENABLED ? new PriorityActionProvider() : null;
@@ -74,12 +76,37 @@ public final class PriorityActionDiagnostics {
         if (!ENABLED) {
             return null;
         }
+        return captureIsolated(player, PROVIDER);
+    }
+
+    static Capture captureIsolated(final Player player, final PriorityActionProvider provider) {
         final long startedAtNanos = System.nanoTime();
-        final PriorityActionProvider.Generation generation = PROVIDER.generatePriorityRequest(player);
-        final DecisionRequest request = generation.getRequest();
-        return new Capture(player.getGame().getPhaseHandler().getTurn(),
-                String.valueOf(player.getGame().getPhaseHandler().getPhase()), player.getName(), request,
-                generation.getFeasibilityMeasurements(), System.nanoTime() - startedAtNanos);
+        try {
+            final PriorityActionProvider.Generation generation = provider.generatePriorityRequest(player);
+            final DecisionRequest request = generation.getRequest();
+            final DeterminismTrace.RequestHandle traceHandle = DeterminismTrace.recordRequest(player.getGame(),
+                    player.getId(), request, "PRIORITY", 0);
+            return new Capture(player, player.getGame().getPhaseHandler().getTurn(),
+                    String.valueOf(player.getGame().getPhaseHandler().getPhase()), player.getName(), request,
+                    traceHandle, generation.getFeasibilityMeasurements(), System.nanoTime() - startedAtNanos);
+        } catch (final RuntimeException ex) {
+            recordPriorityDiagnosticFailure(player, startedAtNanos, ex.getClass().getSimpleName());
+            return null;
+        }
+    }
+
+    private static void recordPriorityDiagnosticFailure(final Player player, final long startedAtNanos,
+            final String reason) {
+        try {
+            synchronized (EVENTS) {
+                EVENTS.add(formatRow("PRIORITY_STATE", PROCESS_ID, "", "", "", "",
+                        DecisionType.PRIORITY_ACTION, false, player.getGame().getPhaseHandler().getTurn(),
+                        player.getGame().getPhaseHandler().getPhase(), player.getName(), "", 0, "", "",
+                        System.nanoTime() - startedAtNanos, "", "", "", reason));
+            }
+        } catch (final RuntimeException ignored) {
+            // Diagnostics must never alter the Forge callback or game-loop path.
+        }
     }
 
     /** Starts timing the unmodified Forge player-controller callback. */
@@ -95,6 +122,11 @@ public final class PriorityActionDiagnostics {
         }
         final LegalCandidate selectedCandidate = selectedCandidate(capture.request, selected);
         final String mapping = selectionMapping(capture.request, selected, selectedCandidate);
+        if (selectedCandidate == null) {
+            capture.traceHandle.recordMappingFailed();
+        } else {
+            capture.traceHandle.recordMappedResult(selectedCandidate);
+        }
         synchronized (EVENTS) {
             for (final PriorityActionProvider.FeasibilityMeasurement measurement : capture.feasibilityMeasurements) {
                 EVENTS.add(formatFeasibilityRecord(capture, measurement));
@@ -166,10 +198,10 @@ public final class PriorityActionDiagnostics {
     }
 
     /** Records the raw Forge callback separately from any completion-safe neutral X request. */
-    public static void recordXAnnouncement(final SpellAbility ability, final Player choosingPlayer,
+    public static XTraceCapture recordXAnnouncement(final SpellAbility ability, final Player choosingPlayer,
             final int rawMin, final int rawMax) {
         if (!ENABLED) {
-            return;
+            return null;
         }
         final ActiveContinuation active = ACTIVE_CONTINUATION.get();
         final ActionContinuation continuation = active == null ? null : active.continuation;
@@ -196,10 +228,13 @@ public final class PriorityActionDiagnostics {
                         choosingPlayer.getName(), 0, 0L, rawMin, rawMax, null, null,
                         XDecisionProvider.Status.UNSUPPORTED, "DIAGNOSTIC_EXCEPTION"));
             }
-            return;
+            return null;
         }
         final DecisionRequest request = generation.getRequest();
         final XDecisionContext context = request == null ? null : request.getXContext();
+        final DeterminismTrace.RequestHandle traceHandle = request == null ? null
+                : DeterminismTrace.recordRequest(choosingPlayer.getGame(), choosingPlayer.getId(), request,
+                        "X_ANNOUNCEMENT", context == null ? -1 : stepIndex(context.getSubdecisionIndex()));
         final Integer candidateMin = request == null ? null : request.getCandidates().get(0).getXValue();
         final Integer candidateMax = request == null ? null
                 : request.getCandidates().get(request.getCandidates().size() - 1).getXValue();
@@ -215,13 +250,32 @@ public final class PriorityActionDiagnostics {
                     rawMin, rawMax, candidateMin, candidateMax, generation.getStatus(),
                     generation.getUnsupportedReason()));
         }
+        return request == null ? null : new XTraceCapture(request, traceHandle);
+    }
+
+    /** Completes an X request only after the unchanged native callback returns. */
+    public static void recordXResult(final XTraceCapture capture, final Integer nativeResult) {
+        if (capture == null) {
+            return;
+        }
+        if (nativeResult == null) {
+            capture.traceHandle.recordUnobserved();
+            return;
+        }
+        final LegalCandidate selected = capture.request.getCandidates().stream()
+                .filter(candidate -> nativeResult.equals(candidate.getXValue())).findFirst().orElse(null);
+        if (selected == null) {
+            capture.traceHandle.recordMappingFailed();
+        } else {
+            capture.traceHandle.recordMappedResult(selected);
+        }
     }
 
     /** Records the raw Forge MODE callback and, separately, any supported neutral MODE request. */
-    public static void recordModeCallback(final SpellAbility ability, final List<AbilitySub> possible,
+    public static ModeTraceCapture recordModeCallback(final SpellAbility ability, final List<AbilitySub> possible,
             final int min, final int num, final boolean allowRepeat, final Player choosingPlayer) {
         if (!ENABLED) {
-            return;
+            return null;
         }
         final ActiveContinuation active = ACTIVE_CONTINUATION.get();
         final ActionContinuation continuation = active == null ? null : active.continuation;
@@ -250,10 +304,13 @@ public final class PriorityActionDiagnostics {
                         turn, phase, player, choosingPlayer.getName(), 0, 0L,
                         ModeDecisionProvider.Status.UNSUPPORTED, "DIAGNOSTIC_EXCEPTION", 0, 0, ""));
             }
-            return;
+            return null;
         }
         final DecisionRequest request = generation.getRequest();
         final ModeDecisionContext context = request == null ? null : request.getModeContext();
+        final DeterminismTrace.RequestHandle traceHandle = request == null ? null
+                : DeterminismTrace.recordRequest(choosingPlayer.getGame(), choosingPlayer.getId(), request,
+                        "MODE_SELECTION", context == null ? -1 : stepIndex(context.getSubdecisionIndex()));
         final String ordinals = request == null ? "" : request.getCandidates().stream()
                 .map(candidate -> Integer.toString(candidate.getModeOrdinal()))
                 .reduce((left, right) -> left + "+" + right).orElse("");
@@ -269,13 +326,33 @@ public final class PriorityActionDiagnostics {
                     generation.getStatus(), generation.getUnsupportedReason(), generation.getRuleLegalityProbes(),
                     generation.getDownstreamCompletionProbes(), ordinals));
         }
+        return request == null ? null : new ModeTraceCapture(request, traceHandle);
+    }
+
+    /** Completes a MODE request only when a single native mode maps unambiguously. */
+    public static void recordModeResult(final ModeTraceCapture capture, final List<AbilitySub> nativeResult) {
+        if (capture == null) {
+            return;
+        }
+        if (nativeResult == null || nativeResult.size() != 1) {
+            capture.traceHandle.recordUnobserved();
+            return;
+        }
+        final AbilitySub selectedMode = nativeResult.get(0);
+        final LegalCandidate selected = capture.request.getCandidates().stream()
+                .filter(candidate -> candidate.getMode() == selectedMode).findFirst().orElse(null);
+        if (selected == null) {
+            capture.traceHandle.recordMappingFailed();
+        } else {
+            capture.traceHandle.recordMappedResult(selected);
+        }
     }
 
     /** Records one neutral atomic request from the live Forge payment state. */
-    public static void recordPaymentRequest(final ManaCostBeingPaid cost, final SpellAbility ability,
+    public static PaymentTraceCapture recordPaymentRequest(final ManaCostBeingPaid cost, final SpellAbility ability,
             final Player payer, final ManaConversionMatrix matrix) {
         if (!ENABLED) {
-            return;
+            return null;
         }
         final ActiveContinuation active = ACTIVE_CONTINUATION.get();
         final ActionContinuation continuation = active == null ? null : active.continuation;
@@ -283,6 +360,10 @@ public final class PriorityActionDiagnostics {
                 ability, payer, matrix, continuation);
         final DecisionRequest request = generation.getRequest();
         final PaymentDecisionContext context = request == null ? null : request.getPaymentContext();
+        final DeterminismTrace.RequestHandle traceHandle = request == null ? null
+                : DeterminismTrace.recordRequest(payer.getGame(), payer.getId(), request,
+                        context == null ? "" : String.valueOf(context.getPaymentStage()),
+                        context == null ? -1 : stepIndex(context.getSubdecisionIndex()));
         final String eventType = request == null ? "PAYMENT_STATE" : "PAYMENT";
         final String candidateKinds = request == null ? "" : request.getCandidates().stream()
                 .map(candidate -> candidate.getPaymentKind().name()).distinct().sorted()
@@ -303,6 +384,14 @@ public final class PriorityActionDiagnostics {
                     context == null ? cost.toString(false, payer.getManaPool()) : context.getRemainingCostSummary(),
                     generation.getStatus(), generation.getUnsupportedReason(), candidateKinds));
         }
+        return request == null ? null : new PaymentTraceCapture(traceHandle);
+    }
+
+    /** Marks a PAYMENT request unlabeled only after the surrounding native payment operation returns normally. */
+    public static void recordPaymentResult(final PaymentTraceCapture capture) {
+        if (capture != null) {
+            capture.traceHandle.recordUnobserved();
+        }
     }
 
     /**
@@ -310,9 +399,9 @@ public final class PriorityActionDiagnostics {
      * This is deliberately best-effort diagnostics: unsupported target semantics are recorded, never allowed
      * to alter the existing human or AI controller path.
      */
-    public static void recordTargetRequest(final SpellAbility ability, final Player choosingPlayer) {
+    public static TargetTraceCapture recordTargetRequest(final SpellAbility ability, final Player choosingPlayer) {
         if (!ENABLED) {
-            return;
+            return null;
         }
         final ActiveContinuation active = ACTIVE_CONTINUATION.get();
         final ActionContinuation continuation = active == null ? null : active.continuation;
@@ -322,6 +411,9 @@ public final class PriorityActionDiagnostics {
                     choosingPlayer, continuation);
             final DecisionRequest request = generation.getRequest();
             final TargetDecisionContext context = request == null ? null : request.getTargetContext();
+            final DeterminismTrace.RequestHandle traceHandle = request == null ? null
+                    : DeterminismTrace.recordRequest(choosingPlayer.getGame(), choosingPlayer.getId(), request,
+                            "TARGET_SELECTION", context == null ? -1 : stepIndex(context.getSubdecisionIndex()));
             final int turn = active == null ? ability.getHostCard().getGame().getPhaseHandler().getTurn()
                     : active.capture.turn;
             final String phase = active == null
@@ -342,6 +434,8 @@ public final class PriorityActionDiagnostics {
                         context == null ? -1 : context.getTargetGroupIndex(), generation.getStatus(), donePresent,
                         generation.getRequestGenerationNanos(), null));
             }
+            return request == null ? null : new TargetTraceCapture(request, traceHandle, ability,
+                    List.copyOf(ability.getTargets()));
         } catch (final UnsupportedTargetDecisionException e) {
             final int turn = active == null ? ability.getHostCard().getGame().getPhaseHandler().getTurn()
                     : active.capture.turn;
@@ -358,6 +452,43 @@ public final class PriorityActionDiagnostics {
                         choosingPlayer.getName(), 0, -1, null, false, System.nanoTime() - startedAtNanos,
                         "UNSUPPORTED_TARGET_SEMANTICS"));
             }
+            return null;
+        }
+    }
+
+    /** Completes a TARGET request after the native target callback without replaying controller logic. */
+    public static void recordTargetResult(final TargetTraceCapture capture, final boolean nativeResult) {
+        if (capture == null) {
+            return;
+        }
+        if (!nativeResult) {
+            capture.traceHandle.recordUnobserved();
+            return;
+        }
+        final List<GameObject> addedTargets = new ArrayList<>(capture.ability.getTargets());
+        addedTargets.removeAll(capture.targetsBefore);
+        if (addedTargets.isEmpty()) {
+            final LegalCandidate done = capture.request.getCandidates().stream()
+                    .filter(candidate -> candidate.getTargetKind() == TargetCandidateKind.DONE)
+                    .findFirst().orElse(null);
+            if (done == null) {
+                capture.traceHandle.recordMappingFailed();
+            } else {
+                capture.traceHandle.recordMappedResult(done);
+            }
+            return;
+        }
+        if (addedTargets.size() != 1) {
+            capture.traceHandle.recordUnobserved();
+            return;
+        }
+        final GameObject nativeTarget = addedTargets.get(0);
+        final LegalCandidate selected = capture.request.getCandidates().stream()
+                .filter(candidate -> candidate.getTarget() == nativeTarget).findFirst().orElse(null);
+        if (selected == null) {
+            capture.traceHandle.recordMappingFailed();
+        } else {
+            capture.traceHandle.recordMappedResult(selected);
         }
     }
 
@@ -371,7 +502,7 @@ public final class PriorityActionDiagnostics {
         try {
             final DiscardCardSelectionAdapter.Capture adapterCapture = DISCARD_SELECTION_ADAPTER.begin(chooser,
                     affectedPlayer, ability, validCards, min, max, visibleToChooser);
-            return new DiscardSelectionCapture(adapterCapture, chooser.getGame().getId(),
+            return new DiscardSelectionCapture(adapterCapture, chooser, chooser.getGame().getId(),
                     chooser.getGame().getPhaseHandler().getTurn(),
                     String.valueOf(chooser.getGame().getPhaseHandler().getPhase()), chooser.getName(),
                     affectedPlayer.getName(), validCards.size());
@@ -407,6 +538,9 @@ public final class PriorityActionDiagnostics {
                 for (final DiscardCardSelectionAdapter.ReplayStep step : replay.getSteps()) {
                     final DecisionRequest request = step.getRequest();
                     final CardSelectionContext context = request.getCardSelectionContext();
+                    traceMappedDecision(capture.actingPlayer, request,
+                            context.getSelectionAdapter().name(), context.getSelectionStepIndex(),
+                            step.getCandidate());
                     final int remaining = (int) request.getCandidates().stream()
                             .filter(candidate -> candidate.getCardSelectionKind()
                                     == CardSelectionCandidateKind.SELECT_CARD).count();
@@ -452,7 +586,7 @@ public final class PriorityActionDiagnostics {
                     attackingPlayer, combat);
             final int initialCandidateCount = adapterCapture.getStatus() == AttackDeclarationAdapter.Status.SUPPORTED
                     ? adapterCapture.getSession().getEligibleIdentities().size() : 0;
-            return new AttackDeclarationCapture(adapterCapture, attackingPlayer.getGame().getId(),
+            return new AttackDeclarationCapture(adapterCapture, whoDeclares, attackingPlayer.getGame().getId(),
                     attackingPlayer.getGame().getPhaseHandler().getTurn(),
                     String.valueOf(attackingPlayer.getGame().getPhaseHandler().getPhase()), whoDeclares.getName(),
                     attackingPlayer.getName(), initialCandidateCount);
@@ -497,6 +631,8 @@ public final class PriorityActionDiagnostics {
                 for (final AttackDeclarationAdapter.ReplayStep step : replay.getSteps()) {
                     final DecisionRequest request = step.getRequest();
                     final AttackDeclarationContext context = request.getAttackContext();
+                    traceMappedDecision(capture.actingPlayer, request, "ATTACK_DECLARATION",
+                            context.getAttackStepIndex(), step.getCandidate());
                     final int remaining = (int) request.getCandidates().stream()
                             .filter(candidate -> candidate.getAttackKind()
                                     == AttackDeclarationCandidateKind.ADD_ATTACKER).count();
@@ -542,12 +678,12 @@ public final class PriorityActionDiagnostics {
                     defendingPlayer, combat);
             final int initialCandidateCount = adapterCapture.getStatus() == BlockDeclarationAdapter.Status.SUPPORTED
                     ? adapterCapture.getSession().getInitialEligibleBlockerCount() + 1 : 0;
-            return new BlockDeclarationCapture(adapterCapture, defendingPlayer.getGame().getId(),
+            return new BlockDeclarationCapture(adapterCapture, whoDeclares, defendingPlayer.getGame().getId(),
                     defendingPlayer.getGame().getPhaseHandler().getTurn(),
                     String.valueOf(defendingPlayer.getGame().getPhaseHandler().getPhase()), whoDeclares.getName(),
                     defendingPlayer.getName(), initialCandidateCount, null);
         } catch (final RuntimeException ex) {
-            return new BlockDeclarationCapture(null, defendingPlayer.getGame().getId(),
+            return new BlockDeclarationCapture(null, whoDeclares, defendingPlayer.getGame().getId(),
                     defendingPlayer.getGame().getPhaseHandler().getTurn(),
                     String.valueOf(defendingPlayer.getGame().getPhaseHandler().getPhase()), whoDeclares.getName(),
                     defendingPlayer.getName(), 0, "DIAGNOSTIC_EXCEPTION");
@@ -593,6 +729,8 @@ public final class PriorityActionDiagnostics {
                 for (final BlockDeclarationAdapter.ReplayStep step : replay.getSteps()) {
                     final DecisionRequest request = step.getRequest();
                     final BlockDeclarationContext context = request.getBlockContext();
+                    traceMappedDecision(capture.actingPlayer, request, context.getBlockStage().name(),
+                            context.getBlockStepIndex(), step.getCandidate());
                     final int remaining = (int) request.getCandidates().stream()
                             .filter(candidate -> candidate.getBlockKind()
                                     == BlockDeclarationCandidateKind.CHOOSE_BLOCKER).count();
@@ -671,6 +809,21 @@ public final class PriorityActionDiagnostics {
             }
         }
         return "UNMAPPED";
+    }
+
+    private static void traceMappedDecision(final Player actingPlayer, final DecisionRequest request,
+            final String adapterOrStage, final int decisionStepIndex, final LegalCandidate selectedCandidate) {
+        final DeterminismTrace.RequestHandle handle = DeterminismTrace.recordRequest(actingPlayer.getGame(),
+                actingPlayer.getId(), request, adapterOrStage, decisionStepIndex);
+        if (selectedCandidate == null) {
+            handle.recordMappingFailed();
+        } else {
+            handle.recordMappedResult(selectedCandidate);
+        }
+    }
+
+    private static int stepIndex(final Integer value) {
+        return value == null ? -1 : value;
     }
 
     private static String formatPriorityRecord(final Capture capture, final LegalCandidate candidate,
@@ -906,22 +1059,75 @@ public final class PriorityActionDiagnostics {
 
     /** Opaque timing state for one request/controller callback pair. */
     public static final class Capture {
+        private final Player actingPlayer;
         private final int turn;
         private final String phase;
         private final String player;
         private final DecisionRequest request;
+        private final DeterminismTrace.RequestHandle traceHandle;
         private final List<PriorityActionProvider.FeasibilityMeasurement> feasibilityMeasurements;
         private final long generationNanos;
 
-        private Capture(final int turn, final String phase, final String player, final DecisionRequest request,
+        private Capture(final Player actingPlayer, final int turn, final String phase, final String player,
+                final DecisionRequest request,
+                final DeterminismTrace.RequestHandle traceHandle,
                 final List<PriorityActionProvider.FeasibilityMeasurement> feasibilityMeasurements,
                 final long generationNanos) {
+            this.actingPlayer = actingPlayer;
             this.turn = turn;
             this.phase = phase;
             this.player = player;
             this.request = request;
+            this.traceHandle = traceHandle;
             this.feasibilityMeasurements = feasibilityMeasurements;
             this.generationNanos = generationNanos;
+        }
+    }
+
+    /** Opaque V2 lifecycle state for one X callback. */
+    public static final class XTraceCapture {
+        private final DecisionRequest request;
+        private final DeterminismTrace.RequestHandle traceHandle;
+
+        XTraceCapture(final DecisionRequest request, final DeterminismTrace.RequestHandle traceHandle) {
+            this.request = request;
+            this.traceHandle = traceHandle;
+        }
+    }
+
+    /** Opaque V2 lifecycle state for one MODE callback. */
+    public static final class ModeTraceCapture {
+        private final DecisionRequest request;
+        private final DeterminismTrace.RequestHandle traceHandle;
+
+        private ModeTraceCapture(final DecisionRequest request, final DeterminismTrace.RequestHandle traceHandle) {
+            this.request = request;
+            this.traceHandle = traceHandle;
+        }
+    }
+
+    /** Opaque V2 lifecycle state for one PAYMENT operation. */
+    public static final class PaymentTraceCapture {
+        private final DeterminismTrace.RequestHandle traceHandle;
+
+        private PaymentTraceCapture(final DeterminismTrace.RequestHandle traceHandle) {
+            this.traceHandle = traceHandle;
+        }
+    }
+
+    /** Opaque V2 lifecycle state for one TARGET callback. */
+    public static final class TargetTraceCapture {
+        private final DecisionRequest request;
+        private final DeterminismTrace.RequestHandle traceHandle;
+        private final SpellAbility ability;
+        private final List<GameObject> targetsBefore;
+
+        private TargetTraceCapture(final DecisionRequest request, final DeterminismTrace.RequestHandle traceHandle,
+                final SpellAbility ability, final List<GameObject> targetsBefore) {
+            this.request = request;
+            this.traceHandle = traceHandle;
+            this.ability = ability;
+            this.targetsBefore = targetsBefore;
         }
     }
 
@@ -938,6 +1144,7 @@ public final class PriorityActionDiagnostics {
     /** Opaque pre-controller state for one turn-based ATTACK callback. */
     public static final class AttackDeclarationCapture {
         private final AttackDeclarationAdapter.Capture adapterCapture;
+        private final Player actingPlayer;
         private final int gameId;
         private final int turn;
         private final String phase;
@@ -945,10 +1152,11 @@ public final class PriorityActionDiagnostics {
         private final String attackingPlayer;
         private final int initialCandidateCount;
 
-        private AttackDeclarationCapture(final AttackDeclarationAdapter.Capture adapterCapture, final int gameId,
-                final int turn, final String phase, final String declaringPlayer, final String attackingPlayer,
-                final int initialCandidateCount) {
+        private AttackDeclarationCapture(final AttackDeclarationAdapter.Capture adapterCapture,
+                final Player actingPlayer, final int gameId, final int turn, final String phase,
+                final String declaringPlayer, final String attackingPlayer, final int initialCandidateCount) {
             this.adapterCapture = adapterCapture;
+            this.actingPlayer = actingPlayer;
             this.gameId = gameId;
             this.turn = turn;
             this.phase = phase;
@@ -961,6 +1169,7 @@ public final class PriorityActionDiagnostics {
     /** Opaque pre-controller state for one turn-based BLOCK callback. */
     public static final class BlockDeclarationCapture {
         private final BlockDeclarationAdapter.Capture adapterCapture;
+        private final Player actingPlayer;
         private final int gameId;
         private final int turn;
         private final String phase;
@@ -969,10 +1178,12 @@ public final class PriorityActionDiagnostics {
         private final int initialCandidateCount;
         private final String captureReason;
 
-        private BlockDeclarationCapture(final BlockDeclarationAdapter.Capture adapterCapture, final int gameId,
-                final int turn, final String phase, final String declaringPlayer, final String defendingPlayer,
-                final int initialCandidateCount, final String captureReason) {
+        private BlockDeclarationCapture(final BlockDeclarationAdapter.Capture adapterCapture,
+                final Player actingPlayer, final int gameId, final int turn, final String phase,
+                final String declaringPlayer, final String defendingPlayer, final int initialCandidateCount,
+                final String captureReason) {
             this.adapterCapture = adapterCapture;
+            this.actingPlayer = actingPlayer;
             this.gameId = gameId;
             this.turn = turn;
             this.phase = phase;
@@ -986,6 +1197,7 @@ public final class PriorityActionDiagnostics {
     /** Opaque pre-controller state for one resolution-time discard callback. */
     public static final class DiscardSelectionCapture {
         private final DiscardCardSelectionAdapter.Capture adapterCapture;
+        private final Player actingPlayer;
         private final int gameId;
         private final int turn;
         private final String phase;
@@ -993,10 +1205,11 @@ public final class PriorityActionDiagnostics {
         private final String affectedPlayer;
         private final int initialCandidateCount;
 
-        private DiscardSelectionCapture(final DiscardCardSelectionAdapter.Capture adapterCapture, final int gameId,
-                final int turn, final String phase, final String chooser, final String affectedPlayer,
-                final int initialCandidateCount) {
+        private DiscardSelectionCapture(final DiscardCardSelectionAdapter.Capture adapterCapture,
+                final Player actingPlayer, final int gameId, final int turn, final String phase,
+                final String chooser, final String affectedPlayer, final int initialCandidateCount) {
             this.adapterCapture = adapterCapture;
+            this.actingPlayer = actingPlayer;
             this.gameId = gameId;
             this.turn = turn;
             this.phase = phase;

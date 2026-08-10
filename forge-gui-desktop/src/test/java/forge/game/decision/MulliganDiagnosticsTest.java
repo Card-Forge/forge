@@ -7,9 +7,13 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
+import forge.util.DeterminismAuditRandom;
 import forge.game.zone.ZoneType;
 import org.testng.annotations.Test;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import static org.testng.Assert.assertFalse;
@@ -39,6 +43,35 @@ public class MulliganDiagnosticsTest extends AITest {
 
         assertFalse(diagnostics.recordKeepOrRedraw(redrawCapture, false, 19L));
         assertTrue(diagnostics.events().stream().anyMatch(line -> line.contains("MULLIGAN|REDRAW")));
+    }
+
+    @Test
+    public void captureOpensRequestBeforeNativeCallbackSoAbortFinalizesTraceIncomplete() throws Exception {
+        final MulliganDiagnostics diagnostics = new MulliganDiagnostics(true);
+        final Game game = mulliganGame();
+        final Player acting = game.getPlayers().get(1);
+        final Player starting = game.getPlayers().get(0);
+        addCardToZone("Island", acting, ZoneType.Hand);
+        final Path directory = Files.createTempDirectory("frl02k0-mulligan-abort-");
+        final DeterminismTrace trace = DeterminismTrace.attach(game, 0,
+                new DeterminismAuditRandom(20260810L), directory);
+        try {
+            diagnostics.captureKeepOrRedraw(acting, starting, 0);
+            trace.finish();
+
+            final List<String> records = Files.readAllLines(directory.resolve("game-001.decision.trace"),
+                    StandardCharsets.UTF_8);
+            assertTrue(records.get(0).startsWith("DECISION_TRACE_V2|REQUEST|0|"));
+            assertTrue(records.get(1).startsWith("DECISION_TRACE_V2|RESULT|0|TRACE_INCOMPLETE|"));
+        } finally {
+            trace.finish();
+            try (var files = Files.list(directory)) {
+                for (final Path file : files.toList()) {
+                    Files.deleteIfExists(file);
+                }
+            }
+            Files.deleteIfExists(directory);
+        }
     }
 
     @Test

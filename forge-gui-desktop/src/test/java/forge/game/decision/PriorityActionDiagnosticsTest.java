@@ -8,13 +8,25 @@ import static org.testng.Assert.assertEquals;
 public class PriorityActionDiagnosticsTest {
 
     @Test
+    public void headerAndDeclaredColumnCountUseTheSameExactContract() throws ReflectiveOperationException {
+        final java.lang.reflect.Field headerField = PriorityActionDiagnostics.class.getDeclaredField("HEADER");
+        final java.lang.reflect.Field columnCountField =
+                PriorityActionDiagnostics.class.getDeclaredField("COLUMN_COUNT");
+        headerField.setAccessible(true);
+        columnCountField.setAccessible(true);
+
+        assertEquals(((String) headerField.get(null)).split(",", -1).length, 55);
+        assertEquals(columnCountField.getInt(null), 55);
+    }
+
+    @Test
     public void continuationRecordsKeepSequenceMetadataInDedicatedColumns() {
         final String row = PriorityActionDiagnostics.formatContinuationRecord("DOWNSTREAM", 42L, 481L, 2,
                 PriorityActionKind.CAST_SPELL, "42:Drain Life", DownstreamCallbackFamily.TARGET, false,
                 3, "MAIN1", "Ada", "Bea", 5);
 
         final String[] fields = row.split(",", -1);
-        assertEquals(fields.length, 54);
+        assertEquals(fields.length, 55);
         assertEquals(fields[0], "DOWNSTREAM");
         assertEquals(fields[1], "42");
         assertEquals(fields[2], "481");
@@ -28,6 +40,7 @@ public class PriorityActionDiagnosticsTest {
         assertEquals(fields[10], "Ada");
         assertEquals(fields[11], "Bea");
         assertEquals(fields[12], "5");
+        assertEquals(fields[54], "");
     }
 
     @Test
@@ -45,7 +58,7 @@ public class PriorityActionDiagnosticsTest {
                 CostAdjustmentPreview.Status.CHOICE_REQUIRED, CostAdjustmentPreview.Reason.REDUCTION_ORDER, 45L);
 
         final String[] fields = row.split(",", -1);
-        assertEquals(fields.length, 54);
+        assertEquals(fields.length, 55);
         assertEquals(fields[0], "FEASIBILITY");
         assertEquals(fields[18], "UNSUPPORTED");
         assertEquals(fields[19], "COST_ADJUSTMENT_CHOICE_REQUIRED");
@@ -62,7 +75,7 @@ public class PriorityActionDiagnosticsTest {
                 0, TargetDecisionProvider.Status.DECISION, true, 123L, null);
 
         final String[] fields = row.split(",", -1);
-        assertEquals(fields.length, 54);
+        assertEquals(fields.length, 55);
         assertEquals(fields[0], "TARGET");
         assertEquals(fields[1], "42");
         assertEquals(fields[2], "481");
@@ -84,7 +97,7 @@ public class PriorityActionDiagnosticsTest {
                 1, 123L, 0, Integer.MAX_VALUE, 0, 0, XDecisionProvider.Status.DECISION, null);
 
         final String[] fields = row.split(",", -1);
-        assertEquals(fields.length, 54);
+        assertEquals(fields.length, 55);
         assertEquals(fields[0], "X_VALUE");
         assertEquals(fields[6], "X_VALUE");
         assertEquals(fields[33], "0");
@@ -106,7 +119,8 @@ public class PriorityActionDiagnosticsTest {
 
         final String[] callbackFields = callback.split(",", -1);
         final String[] requestFields = request.split(",", -1);
-        assertEquals(callbackFields.length, 54);
+        assertEquals(callbackFields.length, 55);
+        assertEquals(requestFields.length, 55);
         assertEquals(callbackFields[0], "MODE_CALLBACK");
         assertEquals(callbackFields[3], "");
         assertEquals(callbackFields[6], "MODE");
@@ -131,7 +145,8 @@ public class PriorityActionDiagnosticsTest {
 
         final String[] callbackFields = callback.split(",", -1);
         final String[] requestFields = request.split(",", -1);
-        assertEquals(callbackFields.length, 54);
+        assertEquals(callbackFields.length, 55);
+        assertEquals(requestFields.length, 55);
         assertEquals(callbackFields[0], "CARD_SELECTION_DISCARD_CALLBACK");
         assertEquals(callbackFields[2], "");
         assertEquals(callbackFields[3], "");
@@ -160,6 +175,7 @@ public class PriorityActionDiagnosticsTest {
                 3, "MAIN1", "Ada", "Ada", 5);
 
         final String[] fields = row.split(",", -1);
+        assertEquals(fields.length, 55);
         assertEquals(fields[0], "DOWNSTREAM");
         assertEquals(fields[6], "CARD_SELECTION");
         assertEquals(fields[44], "");
@@ -174,7 +190,7 @@ public class PriorityActionDiagnosticsTest {
                 123L, 456L, AttackDeclarationDecisionProvider.Status.DECISION, null, 1, 1, 2, 1);
 
         final String[] fields = row.split(",", -1);
-        assertEquals(fields.length, 54);
+        assertEquals(fields.length, 55);
         assertEquals(fields[0], "ATTACK");
         assertEquals(fields[2], "");
         assertEquals(fields[3], "");
@@ -189,5 +205,17 @@ public class PriorityActionDiagnosticsTest {
         assertEquals(fields[51], "1");
         assertEquals(fields[52], "2");
         assertEquals(fields[53], "1");
+    }
+
+    @Test
+    public void blockRecordsWriteDeclarationStageInTheFinalColumn() {
+        final String row = PriorityActionDiagnostics.formatBlockDeclarationRecord(
+                "BLOCK", 42L, 19, 7L, 1, false, 3, "COMBAT_DECLARE_BLOCKERS", "Ada", "Bea", 2,
+                123L, 456L, BlockDeclarationDecisionProvider.Status.DECISION, null, 1, 1, 2, 1,
+                BlockDeclarationStage.CHOOSE_ATTACKER_FOR_BLOCKER);
+
+        final String[] fields = row.split(",", -1);
+        assertEquals(fields.length, 55);
+        assertEquals(fields[54], "CHOOSE_ATTACKER_FOR_BLOCKER");
     }
 }

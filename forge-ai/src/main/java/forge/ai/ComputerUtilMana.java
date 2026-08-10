@@ -654,9 +654,8 @@ public class ComputerUtilMana {
                         break;
                     }
                 }
-                if (!test && hasCompatibleFloating) {
-                    PriorityActionDiagnostics.recordPaymentRequest(cost, sa, ai, manapool);
-                }
+                final PriorityActionDiagnostics.PaymentTraceCapture paymentTrace = !test && hasCompatibleFloating
+                        ? PriorityActionDiagnostics.recordPaymentRequest(cost, sa, ai, manapool) : null;
                 boolean found = false;
                 for (byte color : ManaAtom.MANATYPES) {
                     if (manapool.tryPayCostWithColor(color, sa, cost, manaSpentToPay)) {
@@ -664,6 +663,7 @@ public class ComputerUtilMana {
                         break;
                     }
                 }
+                PriorityActionDiagnostics.recordPaymentResult(paymentTrace);
                 if (!found) {
                     break;
                 }
@@ -779,9 +779,12 @@ public class ComputerUtilMana {
                 // remove to prevent re-usage since resources don't get consumed
                 sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
             } else {
-                PriorityActionDiagnostics.recordPaymentRequest(cost, sa, ai, manapool);
+                final PriorityActionDiagnostics.PaymentTraceCapture paymentTrace =
+                        PriorityActionDiagnostics.recordPaymentRequest(cost, sa, ai, manapool);
                 final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
-                if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment, effect, true))) {
+                final boolean paymentCompleted = pay.payComputerCosts(new AiCostDecision(ai, saPayment, effect, true));
+                PriorityActionDiagnostics.recordPaymentResult(paymentTrace);
+                if (!paymentCompleted) {
                     saList.remove(saPayment);
                     continue;
                 }

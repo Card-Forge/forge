@@ -35,9 +35,14 @@ public class CardSelectionDiscardIntegrationTest extends AITest {
         final CardCollection aiResult = new CardCollection(List.of(second, first));
         final int originalHandSize = chooser.getCardsIn(ZoneType.Hand).size();
 
+        final DiscardCardSelectionAdapter.Replay replay = NeutralityAssertions.assertGameAndRngNeutral(
+                "CARD_SELECTION generation/replay", game, () -> {
+                    final DiscardCardSelectionAdapter.Capture capture = adapter.begin(chooser, chooser, discard,
+                            valid, 2, 2, valid);
+                    return adapter.replay(capture, aiResult);
+                });
         final DiscardCardSelectionAdapter.Capture capture = adapter.begin(chooser, chooser, discard,
                 valid, 2, 2, valid);
-        final DiscardCardSelectionAdapter.Replay replay = adapter.replay(capture, aiResult);
 
         assertEquals(capture.getStatus(), DiscardCardSelectionAdapter.Status.SUPPORTED);
         assertEquals(replay.getStatus(), DiscardCardSelectionAdapter.ReplayStatus.COMPLETE);

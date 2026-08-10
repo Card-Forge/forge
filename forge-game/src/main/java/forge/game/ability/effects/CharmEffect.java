@@ -268,8 +268,10 @@ public class CharmEffect extends SpellAbilityEffect {
             sa.setChoosingPlayer(chooser);
         }
 
-        PriorityActionDiagnostics.recordModeCallback(sa, choices, min, num, canRepeat, chooser);
+        final PriorityActionDiagnostics.ModeTraceCapture modeTrace =
+                PriorityActionDiagnostics.recordModeCallback(sa, choices, min, num, canRepeat, chooser);
         List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, choices, min, num, canRepeat);
+        PriorityActionDiagnostics.recordModeResult(modeTrace, chosen);
         chainAbilities(sa, chosen);
 
         if (chosen != null && !chosen.isEmpty()) {

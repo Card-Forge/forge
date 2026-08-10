@@ -93,7 +93,6 @@ public final class DiscardCardSelectionAdapter {
         int selectedIndex = 0;
         while (generation.getStatus() == CardSelectionDecisionProvider.Status.DECISION) {
             final DecisionRequest request = generation.getRequest();
-            steps.add(new ReplayStep(request, generation.getGenerationNanos()));
             final LegalCandidate mapped;
             if (selectedIndex < selected.size()) {
                 final CardSelectionCard wanted = selected.get(selectedIndex++);
@@ -105,6 +104,7 @@ public final class DiscardCardSelectionAdapter {
                         .filter(candidate -> candidate.getCardSelectionKind() == CardSelectionCandidateKind.DONE)
                         .findFirst().orElse(null);
             }
+            steps.add(new ReplayStep(request, mapped, generation.getGenerationNanos()));
             if (mapped == null) {
                 return Replay.failure(ReplayStatus.MAPPING_FAILED, "RESULT_CARD_NOT_IN_ATOMIC_REQUEST", steps);
             }
@@ -192,15 +192,21 @@ public final class DiscardCardSelectionAdapter {
 
     public static final class ReplayStep {
         private final DecisionRequest request;
+        private final LegalCandidate candidate;
         private final long generationNanos;
 
-        ReplayStep(final DecisionRequest request, final long generationNanos) {
+        ReplayStep(final DecisionRequest request, final LegalCandidate candidate, final long generationNanos) {
             this.request = request;
+            this.candidate = candidate;
             this.generationNanos = generationNanos;
         }
 
         public DecisionRequest getRequest() {
             return request;
+        }
+
+        public LegalCandidate getCandidate() {
+            return candidate;
         }
 
         public long getGenerationNanos() {

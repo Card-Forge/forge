@@ -25,9 +25,12 @@ public class AttackDeclarationAdapterTest extends AITest {
         final Card creature = addCardToZone("Grizzly Bears", attacker, ZoneType.Battlefield);
         creature.setSickness(false);
         final Combat combat = new Combat(attacker);
+        final AttackDeclarationAdapter.Replay replay = NeutralityAssertions.assertGameAndRngNeutral(
+                "ATTACK generation/replay", game, () -> {
+                    final AttackDeclarationAdapter.Capture capture = adapter.begin(attacker, attacker, combat);
+                    return adapter.replay(capture, Map.of());
+                });
         final AttackDeclarationAdapter.Capture capture = adapter.begin(attacker, attacker, combat);
-
-        final AttackDeclarationAdapter.Replay replay = adapter.replay(capture, Map.of());
 
         assertEquals(capture.getStatus(), AttackDeclarationAdapter.Status.SUPPORTED);
         assertEquals(replay.getStatus(), AttackDeclarationAdapter.ReplayStatus.COMPLETE);

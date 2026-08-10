@@ -32,8 +32,12 @@ public class MulliganBottomAdapterTest extends AITest {
         final CardCollection callbackHand = new CardCollection(List.of(first, second));
         final int handSizeBefore = actingPlayer.getCardsIn(ZoneType.Hand).size();
 
+        final MulliganBottomAdapter.Replay replay = NeutralityAssertions.assertGameAndRngNeutral(
+                "MULLIGAN generation/replay", game, () -> {
+                    final MulliganBottomAdapter.Capture capture = adapter.begin(actingPlayer, callbackHand, 1);
+                    return adapter.replay(capture, new CardCollection(second));
+                });
         final MulliganBottomAdapter.Capture capture = adapter.begin(actingPlayer, callbackHand, 1);
-        final MulliganBottomAdapter.Replay replay = adapter.replay(capture, new CardCollection(second));
 
         assertEquals(capture.getStatus(), MulliganBottomAdapter.Status.SUPPORTED);
         assertEquals(replay.getStatus(), MulliganBottomAdapter.ReplayStatus.COMPLETE);

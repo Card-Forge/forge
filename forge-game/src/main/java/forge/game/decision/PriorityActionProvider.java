@@ -10,6 +10,7 @@ import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,10 @@ public final class PriorityActionProvider {
      * preferred payment or a selected action.
      */
     Generation generatePriorityRequest(final Player player) {
+        return SpellAbility.withAuditIdSequence(() -> generatePriorityRequestInAuditScope(player));
+    }
+
+    private Generation generatePriorityRequestInAuditScope(final Player player) {
         final Map<String, CandidatePrototype> actionsByKey = new LinkedHashMap<>();
         final List<FeasibilityMeasurement> feasibilityMeasurements = new ArrayList<>();
         for (final Card card : actionSources(player)) {
@@ -79,20 +84,32 @@ public final class PriorityActionProvider {
      * the later discard, sacrifice, target, or payment resource.
      */
     private static List<SpellAbility> topLevelAbilities(final Card card, final Player player) {
-        final List<SpellAbility> abilities = new ArrayList<>();
-        for (final SpellAbility ability : card.getAllPossibleAbilities(player, true)) {
-            if (ability.canPlay()) {
-                abilities.add(ability);
-            }
-            for (final OptionalCostValue optionalCost : GameActionUtil.getOptionalCostValues(ability)) {
-                final SpellAbility alternative = GameActionUtil.addOptionalCosts(ability, List.of(optionalCost));
-                alternative.setActivatingPlayer(player);
-                if (alternative.canPlay()) {
-                    abilities.add(alternative);
-                }
-            }
+        final Map<SpellAbility, Player> originalActivators = new IdentityHashMap<>();
+        for (final SpellAbility ability : card.getAllSpellAbilities()) {
+            originalActivators.put(ability, ability.getActivatingPlayer());
         }
-        return abilities;
+        try {
+            return SpellAbility.withAuditIdSequence(() -> {
+                final List<SpellAbility> abilities = new ArrayList<>();
+                for (final SpellAbility discovered : card.getAllPossibleAbilities(player, true)) {
+                    final SpellAbility ability = discovered.copy(discovered.getHostCard(), player, true);
+                    if (ability.canPlay()) {
+                        abilities.add(ability);
+                    }
+                    for (final OptionalCostValue optionalCost : GameActionUtil.getOptionalCostValues(ability)) {
+                        final SpellAbility alternative = GameActionUtil.addOptionalCosts(ability,
+                                List.of(optionalCost));
+                        alternative.setActivatingPlayer(player);
+                        if (alternative.canPlay()) {
+                            abilities.add(alternative);
+                        }
+                    }
+                }
+                return abilities;
+            });
+        } finally {
+            originalActivators.forEach(SpellAbility::setActivatingPlayer);
+        }
     }
 
     /**
