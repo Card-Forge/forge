@@ -1491,3 +1491,170 @@ At the time of diagnosis, no listener held the port; Discord held it as an unrel
 port, so no process was terminated and no environment-wide setting was changed. Package (`BUILD SUCCESS`),
 configured `validate`/Checkstyle (`0` violations), and `git diff --check` all pass after the final changes. No
 production implementation is part of A3.
+
+## 26. FRL-02K-B1 production Gelectrode slice
+
+### 26.1 Gate and scope
+
+PR #13 was verified at reviewed head `f65b852fc5a755a93724633ab00f1fd511e84651` before merge. The exact-head
+broad rerun recorded `620` tests, `613` passed, `1` failure, `0` errors and `6` skipped; the sole failure was
+`NetworkPlayIntegrationTest.testServerStartAndStop`, a `java.net.BindException` on Forge test port `55556`.
+The A3 focused selection remained green at `5/5/0/0/0`. Under the A3 rule this was accepted as
+`INFRASTRUCTURE_FLAKE_ACCEPTED`. PR #13 was then merged as `86894c502bf1f7b6f0c736507506b7347b83db2e`.
+
+B1 was implemented from that exact `origin/master` in isolated worktree
+`C:\forgeAI-confirmation-b1`, branch `frl/02k-b1-gelectrode-confirmation`. No other confirmation profile,
+ORDER, or DAMAGE_ASSIGNMENT path was added.
+
+### 26.2 Exact production admission profile
+
+The only admitted profile is `GELECTRODE_SPELL_CAST_UNTAP_SELF`. Admission requires the conjunction below:
+
+```text
+canonical source/rules identity = Gelectrode in CardStateName.Original
+trigger = intrinsic, normal, non-static, optional
+Mode = SpellCast
+ValidCard = Instant,Sorcery
+ValidActivatingPlayer = You
+OptionalDecider = You
+TriggerZones = Battlefield
+Execute = TrigUntap
+TrigUntap = DB$ Untap | Defined$ Self
+no nonzero cost
+source visible to decider
+no active ActionContinuation
+```
+
+Card name alone, localized text, `Trigger.getId()`, Java identity, opaque triggering objects, and raw collections
+are insufficient. Four public token copies in the canonical 17 are admitted only because their live trigger is
+still intrinsic and matches the complete Gelectrode signature; token status is not treated as trigger provenance.
+Copied/generated/granted trigger provenance remains rejected by the intrinsic/spawning-ability checks.
+
+### 26.3 Typed context and identity separation
+
+`ConfirmationDecisionContext` is immutable and contains exactly:
+
+```text
+ConfirmationTriggerProfile profile
+ConfirmationEventType event = SPELL_CAST
+CardSelectionCard sourcePublicIdentity
+int triggeringPlayerId
+int deciderPlayerId
+```
+
+The existing typed public-card identity is reused. Its `(cardId, gameTimestamp)` pair is runtime/entity
+correlation only and is not trigger semantics or candidate semantics. The semantic trigger identity is the fixed
+profile `GELECTRODE_SPELL_CAST_UNTAP_SELF`; candidate semantics are `ACCEPT` and `DECLINE`.
+
+The context contains no raw `Card`, `CardLKI`, `SpellAbility`, `Trigger`, `WrappedAbility`, `Player`,
+`GameEntity`, collection, localized description, runtime trigger ID, request ID, timestamp outside the typed
+public-card identity, or agent-facing `occurrenceIndex`. Request IDs remain provider-local monotonic
+infrastructure. Any trace-local request index is separate correlation metadata and is not a model feature.
+
+The repository exposes Forge's view-based `GameEventSpellAbilityCast`, stack, and log surfaces, but does not yet
+prove a ForgeRL player-perspective cast-history contract that correlates the concrete public cast to this seam.
+The B1 observation result is therefore `OBSERVATION_HISTORY_GAP`; raw cast-card or LKI data was not added to
+the context.
+
+### 26.4 Engine seam, ownership, and candidates
+
+The production seam is `forge-game/src/main/java/forge/game/trigger/WrappedAbility.java`,
+`WrappedAbility.resolve()`, immediately around the existing decider callback. The controller-owned narrow
+`ConfirmationDecisionProvider` performs admission, request generation, candidate validation, and application.
+The Contraption helper's direct `confirmTrigger(new WrappedAbility(...))` call does not invoke `resolve()` and
+therefore cannot enter B1. `PlayerControllerAi.confirmTrigger` was not globally instrumented.
+
+An admitted request has the immutable candidate list, in this exact order:
+
+```text
+ACCEPT
+DECLINE
+```
+
+Both candidates are legal and `forced=false`. A native teacher callback is called once and maps
+`true -> ACCEPT`, `false -> DECLINE`. An explicitly installed external/test resolver supplies one candidate
+directly. The two ownership paths are mutually exclusive. `ACCEPT -> true -> TrigUntap`; `DECLINE -> false`
+returns before `TrigUntap`. Unknown, stale, wrong-type, cross-request, and cross-profile candidates fail closed.
+
+Mandatory triggers generate no request. Cost-bearing optional triggers generate no generic CONFIRMATION request.
+Unsupported external-owned profiles fail closed without a fabricated candidate set; native compatibility remains
+unchanged when no external resolver is installed.
+
+### 26.5 Hidden information, continuation, neutrality, and exactly-once
+
+The projector rejects a face-down/hidden source or a source not visible to the decider and exports no raw LKI,
+`SpellAbility`, collection, or hidden identity. Hidden/opaque adversarial fixtures fail closed as
+`UNSUPPORTED_HIDDEN` or `UNSUPPORTED_PROFILE` without a request. Ordinary admitted Gelectrode resolution has
+no non-null `ActionContinuation`; an active continuation makes the profile unsupported.
+
+Supported, unsupported, cost-bearing, and hidden projection tests all assert unchanged Forge state fingerprints
+and zero `DeterminismAuditRandom` draws. `FullGameCollectorNeutralityTest` and `WorkerIsolationSmokeTest`
+passed. The two worker traces had identical gameplay, RNG, DECISION_TRACE_V2, and priority hashes, with zero
+collisions and zero parse errors.
+
+Each admitted ACCEPT and DECLINE path has one request, one provider choice, one applied boolean, and one native
+effect decision. ACCEPT performs one untap; DECLINE performs none. No second `confirmTrigger`, duplicate
+`doTrigger`, target replay, or extra RNG path is introduced.
+
+### 26.6 DECISION_TRACE_V2
+
+Representative native-teacher trace records are:
+
+```text
+DECISION_TRACE_V2|REQUEST|0|13|MAIN1|0|CONFIRMATION|GELECTRODE_CONFIRMATION|0|false|[ACCEPT,DECLINE]|...
+DECISION_TRACE_V2|RESULT|0|CHOSEN|DECLINE|true|true|false|false|false
+```
+
+The omitted tail is the existing trace correlation token; it is not a raw Forge object. The request contains
+`CONFIRMATION`, `[ACCEPT,DECLINE]`, and `forced=false`; the result is one legal `CHOSEN` candidate. No V3
+schema or localized/raw value was added.
+
+### 26.7 Controlled workloads and the hard 17/26 invariant
+
+The fresh-JVM runtime workloads produced:
+
+| Workload | Raw callbacks | Admitted | Rejected/deferred | Results | ACCEPT | DECLINE | Confirmation trace requests/results |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Izzet Guild Kit vs Dimir Guild Kit, seed `20260810`, 10 games | 26 | 17 | 9 | 17 | 6 | 11 | 17 / 17 |
+| Dead and Alive vs Air Forces, seed `20260809`, 10 games | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 |
+
+Reactive classification was exactly:
+
+```text
+Gelectrode admitted                         17
+other normal optional no-cost, deferred     5  (UNSUPPORTED_PROFILE / CARD_IDENTITY)
+cost-bearing optional, deferred              1  (UNSUPPORTED_COST / NONZERO_COST)
+provenance-untrusted derived, deferred       3  (UNSUPPORTED_PROVENANCE / UNTRUSTED_PROVENANCE)
+total                                       26
+```
+
+Helper admissions were `0`, mandatory requests were `0`, and continuation violations were `0`. No changes were
+made to `confirmAction`, `confirmPayment`, `chooseBinary`, `payCostToPreventEffect`, `confirmBidAction`,
+replacement, or static-application callbacks.
+
+### 26.8 B1 blocker ledger
+
+| Family | Current result |
+|---|---|
+| Gelectrode optional trigger | `SUPPORTED` — 17 reactive occurrences |
+| Other normal optional no-cost triggers | `DEFERRED_BUT_BLOCKING` — 5 |
+| Cost-bearing trigger | `PAYMENT / DEFERRED_BUT_BLOCKING` — 1 |
+| `confirmAction` | `DEFERRED_BUT_BLOCKING` — 8 reactive observations; no B1 interception |
+| `chooseBinary` | `OTHER_DECISION_TYPE / BLOCKING` — 2 reactive observations |
+| `payCostToPreventEffect` | `PAYMENT / BLOCKING` — 5 reactive / 24 proactive observations |
+| bid | `NOT_REACHED / separate family` — 0 / 0 |
+| replacement | `NOT_REACHED / separate family` — 0 / 0 |
+| static application | `NOT_REACHED / separate family` — 0 / 0 |
+
+### 26.9 B1 verification totals
+
+The final focused selection ran `44` tests: `15` in `forge-game` and `29` in `forge-gui-desktop`, with
+`44` passed, `0` failed, `0` errors, and `0` skipped. The new Gelectrode provider tests were `16/16`; the
+fresh-JVM canonical workload test was `1/1`; collector neutrality and worker isolation were `2/2`.
+
+The full decision/determinism reactor ran `637` tests: `631` passed, `0` failed, `0` errors, and `6` skipped.
+The final package command and configured Checkstyle/Validate both returned `BUILD SUCCESS` with `0` Checkstyle
+violations. `git diff --check` is clean.
+
+**B1 production verdict: `FRL_02K_B1_PASS`.** The Gelectrode slice is supported; global CONFIRMATION remains
+open.

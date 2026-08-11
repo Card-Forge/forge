@@ -1,8 +1,8 @@
 # ForgeAI ML Strategy
 
 **Status:** Provisional / Accepted for implementation planning
-**Date:** 2026-08-10
-**Revision:** 10 — corrects CONFIRMATION authority after the FRL-02K attribution audit; preserves the ORDER attribution sequence, the modern DAMAGE_ASSIGNMENT information barrier, and the zero-unsupported gate ahead of RandomLegalPolicy
+**Date:** 2026-08-11
+**Revision:** 11 — records the FRL-02K-B1 Gelectrode production slice while keeping global CONFIRMATION open, the ORDER attribution sequence, the modern DAMAGE_ASSIGNMENT information barrier, and the zero-unsupported gate ahead of RandomLegalPolicy
 **Scope:** Initial ForgeRL 1v1 research environment
 
 ## Purpose
@@ -158,7 +158,7 @@ This table is an initial architectural policy, not a complete inventory of Forge
 
 Every actual `PlayerController` decision type must eventually be classified explicitly.
 
-`CONFIRMATION` is not one homogeneous callback family. The FRL-02K0 safety gate and the FRL-02K attribution audit are complete, but production adapter implementation remains **OPEN**. Normal mandatory triggers are engine-owned and generate no `DecisionRequest`. Optional no-cost normal triggers are the candidate future confirmation adapter. Nonzero-cost optional triggers are cost/payment-owned and must not receive a duplicate generic accept/decline request. `confirmAction` is heterogeneous by caller-owned semantics; `confirmTrigger` is a mixed callback surface rather than an authoritative boundary; bid, replacement, static-application and binary choices remain separate semantic families.
+`CONFIRMATION` is not one homogeneous callback family. The FRL-02K0 safety gate, FRL-02K attribution audit, and the exact FRL-02K-B1 Gelectrode production slice are complete. The supported slice is only the explicit `Gelectrode` `SpellCast -> Untap Self` profile, with strict semantic admission at `WrappedAbility.resolve`, typed player-perspective-safe context, `[ACCEPT, DECLINE]`, and the hard `17/26` workload invariant. Global CONFIRMATION remains **OPEN**. Normal mandatory triggers are engine-owned and generate no `DecisionRequest`. Other optional no-cost triggers remain deferred. Nonzero-cost optional triggers are cost/payment-owned and must not receive a duplicate generic accept/decline request. `confirmAction` is heterogeneous by caller-owned semantics; `confirmTrigger` is a mixed callback surface rather than an authoritative boundary outside the admitted seam; bid, replacement, static-application and binary choices remain separate semantic families.
 
 ### Rationale: generalization, not current infeasibility
 
@@ -420,7 +420,7 @@ The initial policy in 3.1 has now been tested against the engine. Status as of t
 | `ATTACK` | FRL-02G | `ADD_ATTACKER \| ... \| DONE` | SUPPORTED for constraint-free 1v1 slice |
 | `BLOCK` | FRL-02H | Two-stage `CHOOSE_BLOCKER` → `CHOOSE_ATTACKER_FOR_BLOCKER` | SUPPORTED for independent-pair Player-only slice |
 | `MULLIGAN` | FRL-02J | KEEP/REDRAW plus `MULLIGAN_BOTTOM` card selection | SUPPORTED for ordinary 1v1 Constructed London mulligan |
-| `CONFIRMATION` | FRL-02K | attribution complete; no generic adapter approved; implementation OPEN | **OPEN** |
+| `CONFIRMATION` | FRL-02K-B1 | `Gelectrode` optional `SpellCast -> Untap Self`; strict profile admission; `[ACCEPT, DECLINE]`; exact `17/26` runtime gate | **SUPPORTED for this slice; global OPEN** |
 | `ORDER` | 18.2 | attribution pending — see below | OPEN, aggregate |
 | `DAMAGE_ASSIGNMENT` | — | see 3.9 | OPEN |
 
@@ -1942,12 +1942,14 @@ decision boundaries
 
         ↓
 
-        FRL-02K semantic adapter closure
-        OPEN
+        FRL-02K-B1 Gelectrode optional
+        SpellCast -> Untap Self slice
+        SUPPORTED
+        global CONFIRMATION OPEN
 
         ↓
 
-        CONFIRMATION implementation
+        remaining CONFIRMATION profiles
         OPEN
 
         ↓
