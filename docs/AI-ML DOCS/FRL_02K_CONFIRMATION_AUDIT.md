@@ -1673,12 +1673,12 @@ replacement, or static-application callbacks.
 
 ### 26.9 B1 verification totals
 
-The final focused selection ran `39` tests: `7` in `forge-game` and `32` in `forge-gui-desktop`, with
-`39` passed, `0` failed, `0` errors, and `0` skipped. The new Gelectrode provider tests are `18/18` after
+The final focused selection ran `40` tests: `7` in `forge-game` and `33` in `forge-gui-desktop`, with
+`40` passed, `0` failed, `0` errors, and `0` skipped. The new Gelectrode provider tests are `19/19` after
 the single-use request, external-ownership, and live-effect regression tests; the
 fresh-JVM canonical workload test was `1/1`; collector neutrality and worker isolation were `2/2`.
 
-The full decision/determinism reactor ran `640` tests: `634` passed, `0` failed, `0` errors, and `6` skipped.
+The full decision/determinism reactor ran `641` tests: `635` passed, `0` failed, `0` errors, and `6` skipped.
 The final package command and configured Checkstyle/Validate both returned `BUILD SUCCESS` with `0` Checkstyle
 violations. `git diff --check` is clean.
 
@@ -1699,3 +1699,25 @@ non-Gelectrode profiles remain outside the production adapter.
 
 **B1R production verdict: `FRL_02K_B1_PASS`.** The Gelectrode slice is supported; global CONFIRMATION remains
 open.
+
+### 26.11 FRL-02K-B1R2 hidden-information correction
+
+The B1R2 fix closes the unsupported-external error channel without changing admission or execution semantics:
+
+```text
+UnsupportedConfirmationDecisionException message
+    Unsupported FRL-02K-B1 CONFIRMATION decision: <status> / <reason>
+```
+
+The propagated exception no longer receives or formats `WrappedAbility`, source-card names, source IDs,
+descriptions, or other wrapper data. The hidden-source external-ownership test now asserts
+`UNSUPPORTED_HIDDEN`, reason `UNSUPPORTED_HIDDEN`, zero resolver/native callbacks, and absence of the hidden
+card name from the exception message. Any additional diagnostics must remain in an engine-internal channel;
+the environment-visible failure contains only the typed status and public reason code.
+
+The B1R2 focused selection is `40/40/0/0/0`; the full reactor is `641/635/0/0/6`. The exact `17/26`
+classifier invariant, hidden-information boundary, native/external trace ownership flags, and all
+exactly-once assertions remain unchanged.
+
+**B1R2 production verdict: `FRL_02K_B1_PASS`.** The Gelectrode slice is supported; global CONFIRMATION remains
+open. The `CardSelectionCard` identity naming remains a documented future cleanup and is not part of B1R2.

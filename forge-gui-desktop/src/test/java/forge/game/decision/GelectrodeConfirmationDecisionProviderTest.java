@@ -233,6 +233,30 @@ public class GelectrodeConfirmationDecisionProviderTest extends AITest {
     }
 
     @Test
+    public void hiddenExternalOwnershipDoesNotLeakSourceIdentityInExceptionMessage() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final ResolverController controller = installResolverController(game, player);
+        controller.getConfirmationDecisionProvider().setResolver(request -> {
+            controller.resolverCalls++;
+            return request.getCandidates().get(0);
+        });
+        final Card hiddenSource = addCard("Gelectrode", player);
+        final String hiddenCardName = hiddenSource.getName();
+        final WrappedAbility wrapper = wrapperFor(hiddenSource, player, TriggerType.SpellCast);
+        hiddenSource.turnFaceDown(true);
+
+        final UnsupportedConfirmationDecisionException exception = expectThrows(
+                UnsupportedConfirmationDecisionException.class, wrapper::resolve);
+
+        assertEquals(exception.getStatus(), ConfirmationDecisionProvider.Status.UNSUPPORTED_HIDDEN);
+        assertEquals(exception.getReason(), "UNSUPPORTED_HIDDEN");
+        assertFalse(exception.getMessage().contains(hiddenCardName));
+        assertEquals(controller.resolverCalls, 0);
+        assertEquals(controller.confirmTriggerCalls, 0);
+    }
+
+    @Test
     public void liveWrappedEffectMismatchIsUnsupported() {
         final Game game = initAndCreateGame();
         final Player player = game.getPlayers().get(1);

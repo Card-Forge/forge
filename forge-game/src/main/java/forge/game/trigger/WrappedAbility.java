@@ -463,7 +463,7 @@ public class WrappedAbility extends Ability {
                 }
             } else {
                 if (provider.hasResolver()) {
-                    throw new UnsupportedConfirmationDecisionException(this, generation);
+                    throw new UnsupportedConfirmationDecisionException(generation.getStatus(), generation.getReason());
                 }
                 if (!resolvedDecider.getController().confirmTrigger(this)) {
                     return;
