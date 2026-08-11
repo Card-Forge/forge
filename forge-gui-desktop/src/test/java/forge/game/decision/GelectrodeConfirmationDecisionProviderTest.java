@@ -7,6 +7,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.ability.ApiType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -28,6 +29,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertThrows;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.expectThrows;
 
 /** Focused production tests for the narrow FRL-02K-B1 provider boundary. */
 public class GelectrodeConfirmationDecisionProviderTest extends AITest {
@@ -220,10 +222,28 @@ public class GelectrodeConfirmationDecisionProviderTest extends AITest {
             return request.getCandidates().get(0);
         });
 
-        wrapperFor(game, player, "Lazav, Dimir Mastermind", TriggerType.ChangesZone).resolve();
+        final UnsupportedConfirmationDecisionException exception = expectThrows(
+                UnsupportedConfirmationDecisionException.class,
+                () -> wrapperFor(game, player, "Lazav, Dimir Mastermind", TriggerType.ChangesZone).resolve());
 
+        assertEquals(exception.getStatus(), ConfirmationDecisionProvider.Status.UNSUPPORTED_PROFILE);
+        assertEquals(exception.getReason(), "CARD_IDENTITY");
         assertEquals(controller.resolverCalls, 0);
         assertEquals(controller.confirmTriggerCalls, 0);
+    }
+
+    @Test
+    public void liveWrappedEffectMismatchIsUnsupported() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final Card source = addCard("Gelectrode", player);
+        final WrappedAbility wrapper = wrapperWithLiveApi(source, player, TriggerType.SpellCast, ApiType.GainLife);
+
+        final ConfirmationDecisionProvider.Generation generation = provider.generate(wrapper, player);
+
+        assertEquals(generation.getStatus(), ConfirmationDecisionProvider.Status.UNSUPPORTED_PROFILE);
+        assertEquals(generation.getReason(), "LIVE_EFFECT_MISMATCH");
+        assertNull(generation.getRequest());
     }
 
     @Test
@@ -248,7 +268,7 @@ public class GelectrodeConfirmationDecisionProviderTest extends AITest {
                     StandardCharsets.UTF_8);
             assertEquals(records.size(), 2);
             assertTrue(records.get(0).contains("|CONFIRMATION|GELECTRODE_CONFIRMATION|0|false|[ACCEPT,DECLINE]|"));
-            assertTrue(records.get(1).contains("|CHOSEN|ACCEPT|false|true|"));
+            assertTrue(records.get(1).contains("|CHOSEN|ACCEPT|false|false|"));
             assertFalse(records.stream().anyMatch(value -> value.contains("SpellAbility")
                     || value.contains("WrappedAbility") || value.contains("CardLKI")));
         } finally {
@@ -393,6 +413,27 @@ public class GelectrodeConfirmationDecisionProviderTest extends AITest {
         effect.setActivatingPlayer(player);
         effect.setOptionalTrigger(optional);
         effect.setIntrinsic(intrinsic);
+        final Card castSpell = addCardToZone("Opt", player, ZoneType.Hand);
+        final SpellAbility castAbility = castSpell.getFirstSpellAbility();
+        castAbility.setActivatingPlayer(player);
+        final Map<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
+        triggeringObjects.put(AbilityKey.Activator, player);
+        triggeringObjects.put(AbilityKey.SpellAbility, castAbility);
+        trigger.setTriggeringObjects(effect, triggeringObjects);
+        return new WrappedAbility(trigger, effect, player);
+    }
+
+    private WrappedAbility wrapperWithLiveApi(final Card source, final Player player, final TriggerType mode,
+            final ApiType liveApi) {
+        final Trigger trigger = source.getTriggers().stream()
+                .filter(value -> mode.equals(value.getMode()))
+                .findFirst()
+                .orElseThrow();
+        final SpellAbility effect = AbilityFactory.getAbility(source, trigger.getParam("Execute"));
+        effect.setApi(liveApi);
+        effect.setActivatingPlayer(player);
+        effect.setOptionalTrigger(true);
+        effect.setIntrinsic(true);
         final Card castSpell = addCardToZone("Opt", player, ZoneType.Hand);
         final SpellAbility castAbility = castSpell.getFirstSpellAbility();
         castAbility.setActivatingPlayer(player);

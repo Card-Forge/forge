@@ -257,12 +257,31 @@ public final class DeterminismTrace {
 
         /** Closes after a native result is observed and maps to this request. */
         public void recordMappedResult(final LegalCandidate selectedCandidate) {
-            recordMappedResult(selectedCandidate, true);
+            recordNativeMappedResult(selectedCandidate);
         }
 
-        /** Closes after a selected result is mapped, preserving decision ownership in the trace. */
+        /** Closes after a native result is observed and maps to this request. */
+        public void recordNativeMappedResult(final LegalCandidate selectedCandidate) {
+            recordChosenResult(selectedCandidate, true, true);
+        }
+
+        /** Closes after an external policy selects a legal candidate without a native callback. */
+        public void recordExternalChosenResult(final LegalCandidate selectedCandidate) {
+            recordChosenResult(selectedCandidate, false, false);
+        }
+
+        /** Closes after a selected result, preserving the explicit decision owner in the trace. */
         public void recordMappedResult(final LegalCandidate selectedCandidate,
                 final boolean nativeCallbackCompleted) {
+            if (nativeCallbackCompleted) {
+                recordNativeMappedResult(selectedCandidate);
+            } else {
+                recordExternalChosenResult(selectedCandidate);
+            }
+        }
+
+        private void recordChosenResult(final LegalCandidate selectedCandidate,
+                final boolean nativeCallbackCompleted, final boolean mappingAttempted) {
             if (!isActive()) {
                 return;
             }
@@ -271,7 +290,7 @@ public final class DeterminismTrace {
                 throw new IllegalArgumentException("Selected candidate is not legal for request: " + selected);
             }
             trace.complete(this, requestRecord.isForced() ? DecisionTraceResultKind.FORCED
-                    : DecisionTraceResultKind.CHOSEN, selected, nativeCallbackCompleted, true,
+                    : DecisionTraceResultKind.CHOSEN, selected, nativeCallbackCompleted, mappingAttempted,
                     false, false, false);
         }
 

@@ -68,6 +68,30 @@ public class DeterminismTraceV2Test extends AITest {
     }
 
     @Test
+    public void externalConfirmationChoiceIsValidHistoryButNotBcSample() throws Exception {
+        final Fixture fixture = attachTrace();
+        try {
+            final CardSelectionCard source = new CardSelectionCard(addCard("Gelectrode", fixture.player));
+            final DecisionRequest request = new DecisionRequest(13L, DecisionType.CONFIRMATION,
+                    List.of(LegalCandidate.confirmation(0, ConfirmationCandidateKind.ACCEPT),
+                            LegalCandidate.confirmation(1, ConfirmationCandidateKind.DECLINE)),
+                    new ConfirmationDecisionContext(ConfirmationTriggerProfile.GELECTRODE_SPELL_CAST_UNTAP_SELF,
+                            ConfirmationEventType.SPELL_CAST, source, fixture.player.getId(), fixture.player.getId()));
+            final DeterminismTrace.RequestHandle handle = record(fixture, request);
+
+            handle.recordExternalChosenResult(request.getCandidates().get(0));
+
+            final DecisionTraceResultRecord result = handle.getResultRecord().orElseThrow();
+            assertTrue(DecisionTraceTrainingValidator.isHistoryValid(handle.getRequestRecord(), result));
+            assertFalse(result.isNativeCallbackCompleted());
+            assertFalse(result.isMappingAttempted());
+            assertFalse(DecisionTraceTrainingValidator.isBCPolicySample(handle.getRequestRecord(), result));
+        } finally {
+            fixture.finishAndDelete();
+        }
+    }
+
+    @Test
     public void resultTaxonomyKeepsUnobservedMappingFailureAndRollbackDistinct() throws Exception {
         final Fixture fixture = attachTrace();
         try {

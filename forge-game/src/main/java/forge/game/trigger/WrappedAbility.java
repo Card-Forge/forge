@@ -23,6 +23,7 @@ import forge.game.decision.ConfirmationDecisionProvider;
 import forge.game.decision.DecisionRequest;
 import forge.game.decision.DeterminismTrace;
 import forge.game.decision.LegalCandidate;
+import forge.game.decision.UnsupportedConfirmationDecisionException;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
@@ -450,14 +451,19 @@ public class WrappedAbility extends Ability {
                 final LegalCandidate selected = provider.choose(request,
                         () -> resolvedDecider.getController().confirmTrigger(this));
                 final boolean accepted = provider.apply(request, selected, this);
-                confirmationCapture.recordResult(selected, !provider.hasResolver());
-                traceHandle.recordMappedResult(selected, !provider.hasResolver());
+                final boolean nativeTeacher = !provider.hasResolver();
+                confirmationCapture.recordResult(selected, nativeTeacher);
+                if (nativeTeacher) {
+                    traceHandle.recordNativeMappedResult(selected);
+                } else {
+                    traceHandle.recordExternalChosenResult(selected);
+                }
                 if (!accepted) {
                     return;
                 }
             } else {
                 if (provider.hasResolver()) {
-                    return;
+                    throw new UnsupportedConfirmationDecisionException(this, generation);
                 }
                 if (!resolvedDecider.getController().confirmTrigger(this)) {
                     return;

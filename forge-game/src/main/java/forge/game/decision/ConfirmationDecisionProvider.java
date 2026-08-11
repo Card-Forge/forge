@@ -2,10 +2,12 @@ package forge.game.decision;
 
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.card.CardStateName;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -217,12 +219,24 @@ public final class ConfirmationDecisionProvider {
             return Admission.of(Status.UNSUPPORTED_PROFILE, "TRIGGER_DEFINITION");
         }
         try {
-            return GELECTRODE_EFFECT_PARAMS.equals(AbilityFactory.getMapParams(source.getSVar("TrigUntap")))
+            if (!GELECTRODE_EFFECT_PARAMS.equals(AbilityFactory.getMapParams(source.getSVar("TrigUntap")))) {
+                return Admission.of(Status.UNSUPPORTED_PROFILE, "EFFECT_DEFINITION");
+            }
+            return matchesLiveEffect(wrapper.getWrappedAbility())
                     ? Admission.of(Status.ADMITTED, "ADMITTED")
-                    : Admission.of(Status.UNSUPPORTED_PROFILE, "EFFECT_DEFINITION");
+                    : Admission.of(Status.UNSUPPORTED_PROFILE, "LIVE_EFFECT_MISMATCH");
         } catch (final RuntimeException ex) {
             return Admission.of(Status.UNSUPPORTED_PROFILE, "EFFECT_DEFINITION");
         }
+    }
+
+    private static boolean matchesLiveEffect(final SpellAbility liveEffect) {
+        return liveEffect != null
+                && liveEffect.getApi() == ApiType.Untap
+                && GELECTRODE_EFFECT_PARAMS.equals(liveEffect.getMapParams())
+                && liveEffect.getSubAbility() == null
+                && liveEffect.getAdditionalAbilities().isEmpty()
+                && liveEffect.getAdditionalAbilityLists().isEmpty();
     }
 
     private static Map<String, String> normalizedTriggerParams(final Trigger trigger) {

@@ -1582,8 +1582,14 @@ directly. The two ownership paths are mutually exclusive. `ACCEPT -> true -> Tri
 returns before `TrigUntap`. Unknown, stale, wrong-type, cross-request, and cross-profile candidates fail closed.
 
 Mandatory triggers generate no request. Cost-bearing optional triggers generate no generic CONFIRMATION request.
-Unsupported external-owned profiles fail closed without a fabricated candidate set; native compatibility remains
+When an external resolver owns the decision, an unsupported profile raises
+`UnsupportedConfirmationDecisionException` with the structured status/reason and no native fallback; this makes
+the episode invalid instead of turning unsupported into an implicit `DECLINE`. Native teacher compatibility remains
 unchanged when no external resolver is installed.
+
+The admission also validates the live `WrappedAbility` effect, not only the static `TrigUntap` SVar: the live
+ability must have `ApiType.Untap`, exactly `DB$ Untap | Defined$ Self` parameters, and no sub- or additional
+ability branch. A matching card script with a mismatched live effect is rejected as `LIVE_EFFECT_MISMATCH`.
 
 ### 26.5 Hidden information, continuation, neutrality, and exactly-once
 
@@ -1618,7 +1624,15 @@ DECISION_TRACE_V2|RESULT|0|CHOSEN|DECLINE|true|true|false|false|false
 
 The omitted tail is the existing trace correlation token; it is not a raw Forge object. The request contains
 `CONFIRMATION`, `[ACCEPT,DECLINE]`, and `forced=false`; the result is one legal `CHOSEN` candidate. No V3
-schema or localized/raw value was added.
+schema or localized/raw value was added. An external-policy result uses the same V2 schema with ownership flags
+`nativeCallbackCompleted=false` and `mappingAttempted=false`:
+
+```text
+DECISION_TRACE_V2|RESULT|0|CHOSEN|ACCEPT|false|false|false|false|false
+```
+
+Such a result is valid trajectory/history but is explicitly excluded from `isBCPolicySample`; only a native
+teacher callback with both flags true can produce a BC label.
 
 ### 26.7 Controlled workloads and the hard 17/26 invariant
 
@@ -1659,14 +1673,29 @@ replacement, or static-application callbacks.
 
 ### 26.9 B1 verification totals
 
-The final focused selection ran `37` tests: `7` in `forge-game` and `30` in `forge-gui-desktop`, with
-`37` passed, `0` failed, `0` errors, and `0` skipped. The new Gelectrode provider tests are `17/17` after
-the single-use request regression test; the
+The final focused selection ran `39` tests: `7` in `forge-game` and `32` in `forge-gui-desktop`, with
+`39` passed, `0` failed, `0` errors, and `0` skipped. The new Gelectrode provider tests are `18/18` after
+the single-use request, external-ownership, and live-effect regression tests; the
 fresh-JVM canonical workload test was `1/1`; collector neutrality and worker isolation were `2/2`.
 
-The full decision/determinism reactor ran `638` tests: `632` passed, `0` failed, `0` errors, and `6` skipped.
+The full decision/determinism reactor ran `640` tests: `634` passed, `0` failed, `0` errors, and `6` skipped.
 The final package command and configured Checkstyle/Validate both returned `BUILD SUCCESS` with `0` Checkstyle
 violations. `git diff --check` is clean.
 
-**B1 production verdict: `FRL_02K_B1_PASS`.** The Gelectrode slice is supported; global CONFIRMATION remains
+### 26.10 FRL-02K-B1R architecture-review corrections
+
+The B1R correction pass made exactly four scoped changes and did not add another confirmation profile:
+
+```text
+external unsupported profile -> UnsupportedConfirmationDecisionException / invalid episode
+external CHOSEN result       -> valid history, not a BC teacher sample
+native vs external trace     -> native=true/true; external=false/false
+admission                    -> static script and live WrappedAbility effect must both match
+```
+
+The fresh focused suite and canonical workloads remain green after these corrections. The hard classifier result
+is still exactly `17 admitted / 26 callbacks`; Lazav, Blood Operative, Cipher-derived callbacks, and all other
+non-Gelectrode profiles remain outside the production adapter.
+
+**B1R production verdict: `FRL_02K_B1_PASS`.** The Gelectrode slice is supported; global CONFIRMATION remains
 open.
