@@ -21,9 +21,10 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Exercises {@link ScryfallManifestSync} against a tiny embedded HTTP server standing
- * in for {@code api.scryfall.com/cards/manifest}, so these run offline and don't
- * depend on Scryfall's real rate limit or live catalog.
+ * Tests run against an embedded mock scryfall api.
+ *
+ * The ScryfallManifestSync pulls in the latest uploaded scans from Scryfall.
+ * This is not the same as bulk downloading that happens while browsing decks/adventure.
  */
 @Test(groups = {"UnitTest"})
 public class ScryfallManifestSyncTest {
@@ -44,9 +45,8 @@ public class ScryfallManifestSyncTest {
         server.createContext("/", this::handle);
         server.start();
         ScryfallManifestSync.manifestBaseUrlOverride = "http://127.0.0.1:" + server.getAddress().getPort();
-        // A lookup CdnUuidCache can't answer locally now falls back to ScryfallSetSync;
-        // point it at an unreachable address so these tests stay offline and a "should be
-        // null" assertion isn't quietly satisfied by a live Scryfall hit instead.
+        // A CdnUuidCache miss falls back to ScryfallSetSync;
+        // point it at an unreachable address so these tests stay offline
         ScryfallSetSync.searchBaseUrlOverride = "http://127.0.0.1:1/unreachable";
     }
 

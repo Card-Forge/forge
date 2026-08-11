@@ -25,15 +25,16 @@ import java.util.zip.GZIPOutputStream;
 /**
  * Lazy-loading, thread-safe cache for Scryfall CDN UUIDs.
  *
- * <p>All UUID data is generated on the user's machine, straight from Scryfall — there
- * is no hosted/bundled data source. On the first lookup for a set, the cache checks
- * for a local copy under {@code {cacheDir}/cdn_uuid/{setCode}.json.gz}. If absent, it
- * asks {@link ScryfallSetSync} to build that set's mapping from the Scryfall card
- * search API and writes the result locally (gzip-compressed) so subsequent lookups
- * are instant. {@link ScryfallManifestSync} additionally lets a set's entries be kept
- * fresh in bulk (newest image updates first) instead of one set at a time. Returns
- * {@code null} on any failure so callers fall back to the rate-limited Scryfall API
- * or the cardforge server.
+ * All UUID data is generated on the user's machine, straight from Scryfall.
+ *
+ * The cache resolves data locally first from
+ * {@code {cacheDir}/cdn_uuid/{setCode}.json.gz} files.
+ *
+ * When there is a cache miss (file or entry), it's repopulated from
+ * the scryfall search api.
+ *
+ * The cache returns null, so the user may resolve via a rate-limited, non-cdn scryfall
+ * image hosting. The client rate limits these requests.
  *
  * <p>Set JSON format:
  * <pre>
@@ -48,7 +49,7 @@ public final class CdnUuidCache {
 
     private static final String FALLBACK_LANG    = "en";
 
-    /** Sentinel: set was looked up and no data exists (locally or on Scryfall). */
+    /** Used when set was looked up and no data exists. */
     private static final Map<String, Map<String, LangUuids>> MISSING_SET = Collections.emptyMap();
 
     private static final class LangUuids {
@@ -62,14 +63,13 @@ public final class CdnUuidCache {
             new ConcurrentHashMap<>();
 
     /**
-     * Override the local cache directory. Package-private for unit tests.
-     * Must end with the platform file separator when set.
+     * Override for the local cache directory for tests.
      */
     static volatile String localCacheDirOverride = null;
 
     private CdnUuidCache() {}
 
-    /** Clears the in-memory cache. Package-private for unit tests only. */
+    /** Test helper */
     static void clearCacheForTesting() { setCache.clear(); }
 
     /** The directory local set caches live in, honoring the test override. Package-private for {@link ScryfallManifestSync}. */
@@ -79,10 +79,6 @@ public final class CdnUuidCache {
 
     /**
      * Deletes every locally cached CDN UUID set file and clears the in-memory cache.
-     * Exposed as a user-facing "clear CDN image cache" action: a set whose local
-     * copy predates a Scryfall image update (or was cached before it had any image
-     * at all) stays stale until re-fetched, and this is the simplest way to force
-     * that without per-file expiry bookkeeping.
      */
     public static void clearCache() {
         setCache.clear();
@@ -97,10 +93,12 @@ public final class CdnUuidCache {
 
     /**
      * Merges externally-sourced (setCode → collectorNumber → lang → uuid) entries into
-     * the on-disk cache. Used by {@link ScryfallManifestSync}, whose data source (the
-     * manifest endpoint) never distinguishes a double-faced card's back-face UUID from
-     * its front — every entry is treated as front-only. Delegates to
-     * {@link #mergeSetEntriesWithFaces} so the never-overwrite guarantee lives in one place.
+     * the on-disk cache.
+     *
+     * Used by {@link ScryfallManifestSync}, whose data source (the manifest endpoint)
+     * never distinguishes a double-faced card's back-face UUID from its front.
+     *
+     * Delegates to {@link #mergeSetEntriesWithFaces} so the never-overwrite guarantee lives in one place.
      */
     static void mergeSetEntries(String setCode, Map<String, Map<String, String>> newEntries) {
         Map<String, Map<String, String[]>> withFaces = new HashMap<>(newEntries.size() * 2);
@@ -117,6 +115,7 @@ public final class CdnUuidCache {
     /**
      * Merges externally-sourced (setCode → collectorNumber → lang → [frontUuid, backUuidOrNull])
      * entries into the on-disk cache, creating or updating {@code {cacheDir}/{setCode}.json.gz}.
+     *
      * Used by {@link ScryfallSetSync} when a set has no local data at all yet and is built
      * fresh from Scryfall's card search API, which — unlike the manifest endpoint — exposes
      * each face's own image URL, so a double-faced card's genuinely distinct back-face UUID
