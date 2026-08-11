@@ -1,4 +1,4 @@
-Name:Cybernetics Specialist
+Name:Cybernetic Specialist
 ManaCost:2
 Types:Artifact Creature Human Scientist
 PT:2/1
