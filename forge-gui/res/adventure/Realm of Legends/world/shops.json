@@ -1072,7 +1072,7 @@
     "name":"ACRShop",
     "description":"Brotherhood Arsenal",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"UBShop",
+    "sprite":"RogueShop",
     "rewards": [
       {
         "count":4,
@@ -1106,7 +1106,7 @@
     "name":"SPMShop",
     "description":"Friendly Neighborhood Cards",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"UBShop",
+    "sprite":"InsectSpiderShop",
     "rewards": [
       {
         "count":4,
@@ -1208,7 +1208,7 @@
     "name":"CLBShop",
     "description":"Baldur's Gate Deals",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"UBShop",
+    "sprite":"DnDShop",
     "rewards": [
       {
         "count":4,
