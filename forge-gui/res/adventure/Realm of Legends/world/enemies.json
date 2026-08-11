@@ -63396,7 +63396,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 1.5,
     "life": 50,
     "rewards": [
       {
@@ -63410,36 +63410,6 @@
         "count": 1,
         "cardName": "Nephilim Epochal",
         "editions": [ "MBC" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Dune-Brood Nephilim",
-        "editions": [ "GPT" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Ink-Treader Nephilim",
-        "editions": [ "GPT" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Glint-Eye Nephilim",
-        "editions": [ "GPT" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Witch-Maw Nephilim",
-        "editions": [ "GPT" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Yore-Tiller Nephilim",
-        "editions": [ "GPT" ]
       },
       {
         "type": "shards",

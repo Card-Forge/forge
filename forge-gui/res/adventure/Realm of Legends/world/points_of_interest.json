@@ -480,6 +480,18 @@
 			"Story"]
 	},
 	{
+		"name": "Ancient Opal Cavern",
+		"displayName": "Ancient Opal Cavern",
+		"type": "castle",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "ForgottenCave",
+		"map": "../Realm of Legends/maps/map/grove/Ancient_Opal_Cavern.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Gitrog Bog",
 		"displayName": "Gitrog Bog",
 		"type": "castle",
