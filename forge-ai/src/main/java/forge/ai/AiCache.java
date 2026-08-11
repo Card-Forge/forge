@@ -54,6 +54,7 @@ public class AiCache {
         return result;
     }
 
+    // TODO add different scopes + staleness indicator
     public static void clear() {
         dataMap.clear();
     }

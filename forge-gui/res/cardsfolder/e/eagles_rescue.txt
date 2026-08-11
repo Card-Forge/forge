@@ -1,0 +1,9 @@
+Name:Eagle's Rescue
+ManaCost:2 WU WU
+Types:Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | Description$ Enchanted creature gets +2/+2 and has flying.
+A:AB$ Pump | Cost$ 2 WU WU | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl+powerLE1 | ValidTgtsDesc$ creature you control with power 1 or less | SorcerySpeed$ True | SubAbility$ DBChange | SpellDescription$ Return this card from your graveyard to the battlefield attached to target creature you control with power 1 or less. Activate only as a sorcery.
+SVar:DBChange:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ParentTarget
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying.\n{2}{W/U}{W/U}: Return this card from your graveyard to the battlefield attached to target creature you control with power 1 or less. Activate only as a sorcery.

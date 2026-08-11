@@ -1,0 +1,8 @@
+Name:Mugato
+ManaCost:3 G G
+Types:Creature Ape Beast
+PT:6/6
+K:Reach
+K:Vigilance
+K:Deathtouch
+Oracle:Reach, vigilance, deathtouch

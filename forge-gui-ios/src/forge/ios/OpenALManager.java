@@ -11,7 +11,7 @@ import org.robovm.rt.bro.annotation.Library;
  * Minimal RoboVM binding to ObjectAL's OpenALManager (compiled into libObjectAL.a).
  *
  * Used to permanently suspend the OpenAL effects engine. Sound effects now play
- * through libGDX Music (AVAudioPlayer) on iOS (see forge.sound.AudioClip), so OpenAL
+ * through libGDX Music (AVAudioPlayer) on iOS (see forge.sound.MusicAudioClip), so OpenAL
  * is unused - but libGDX auto-initializes it, and an ACTIVE OpenAL 3D-mixer render
  * cycle beats against the AVAudioPlayer music/effects (mediaserverd) clock, producing
  * a slow periodic music crackle. OALSuspendManager.manuallySuspended alcSuspendContext's
