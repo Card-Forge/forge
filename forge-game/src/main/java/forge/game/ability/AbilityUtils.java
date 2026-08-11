@@ -1181,6 +1181,8 @@ public class AbilityUtils {
                 next = game.getNextPlayerAfter(next, dir);
             }
             players.add(next);
+        } else if (defined.equals("ManaSpender")) {
+            players.addAll(((SpellAbility) sa).getPayingMana().stream().map(m -> m.getPlayer()).collect(Collectors.toList()));
         } else {
             // will be filtered below
             players.addAll(game.getPlayersInTurnOrder());

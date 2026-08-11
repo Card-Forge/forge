@@ -22,6 +22,7 @@ Advisor:Advisors
 Aetherborn:Aetherborn
 Alien:Aliens
 Ally:Allies
+Andorian:Andorians
 Angel:Angels
 Antelope:Antelopes
 Ape:Apes
@@ -164,6 +165,7 @@ Jellyfish:Jellyfishes
 Juggernaut:Juggernauts
 Kangaroo:Kangaroos
 Kavu:Kavu
+Kelpien:Kelpiens
 Kirin:Kirins
 Kithkin:Kithkin
 Klingon:Klingons
@@ -220,6 +222,7 @@ Ooze:Oozes
 Orb:Orbs
 Orc:Orcs
 Orgg:Orggs
+Orion:Orions
 Otter:Otters
 Ouphe:Ouphes
 Ox:Oxen
@@ -314,6 +317,7 @@ Tellarite:Tellarites
 Tentacle:Tentacles
 Tetravite:Tetravites
 Thalakos:Thalakoses
+Tholian:Tholians
 Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
@@ -333,6 +337,7 @@ Varmint:Varmints
 Vedalken:Vedalkens
 Villain:Villains
 Volver:Volvers
+Vorta:Vorta
 Vulcan:Vulcans
 Wall:Walls
 Warlock:Warlocks
@@ -348,6 +353,7 @@ Wombat:Wombats
 Worm:Worms
 Wraith:Wraiths
 Wurm:Wurms
+Xindi:Xindi
 Yeti:Yetis
 Zombie:Zombies
 Zubera:Zuberas
