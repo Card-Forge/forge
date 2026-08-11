@@ -451,11 +451,33 @@ sim() {
     trap 'mv -f "$OSLOG_LIB.committed" "$OSLOG_LIB" 2>/dev/null || true' EXIT
     build_oslog sim
     echo "=== robovm ipad-sim build ($SIM_ARCH) ==="
-    # On Apple Silicon (arch=arm64-simulator) this fails at the mojo's device
-    # selection AFTER producing the binary + config.xml — expected; we assemble
-    # the .app ourselves below. On Intel (x86_64) it produces the .app directly.
-    (cd "$ROOT/forge-gui-ios" && mvn robovm:ipad-sim --settings "$SETTINGS" \
-        -Dmaven.repo.local="$CLONE" -Drobovm.arch="$SIM_ARCH" -DskipTests 2>&1 | tail -8) || true
+    if [ "$SIM_ARCH" = "arm64-simulator" ]; then
+        # The mojo blocks in its own app launch after the AOT link (and picks its own
+        # simulator). All we need from it is config.xml, written once the link is done:
+        # stop it there and let assemble_arm64_sim_app rebundle with the AppCompiler
+        # (the AOT cache is content-hashed, so nothing recompiles).
+        local TMPD="$ROOT/forge-gui-ios/target/robovm.tmp" mvnpid
+        # not under robovm.tmp: the mojo wipes that directory after mvn has opened the log
+        local MVNLOG="$ROOT/forge-gui-ios/target/ipad-sim.log"
+        mkdir -p "$TMPD"
+        rm -f "$TMPD/config.xml"
+        set -m
+        (cd "$ROOT/forge-gui-ios" && mvn robovm:ipad-sim --settings "$SETTINGS" \
+            -Dmaven.repo.local="$CLONE" -Drobovm.arch="$SIM_ARCH" -DskipTests \
+            > "$MVNLOG" 2>&1) &
+        mvnpid=$!
+        set +m
+        # -s not -f: the mojo opens config.xml before serializing into it
+        while kill -0 "$mvnpid" 2>/dev/null && [ ! -s "$TMPD/config.xml" ]; do sleep 2; done
+        sleep 2
+        kill -TERM -"$mvnpid" 2>/dev/null || true
+        wait "$mvnpid" 2>/dev/null || true
+        [ -s "$TMPD/config.xml" ] || { echo "robovm build failed, last lines:"; tail -12 "$MVNLOG"; }
+    else
+        # Intel: the mojo bundles the .app itself in its launch phase — let it run.
+        (cd "$ROOT/forge-gui-ios" && mvn robovm:ipad-sim --settings "$SETTINGS" \
+            -Dmaven.repo.local="$CLONE" -Drobovm.arch="$SIM_ARCH" -DskipTests 2>&1 | tail -8) || true
+    fi
     mv -f "$OSLOG_LIB.committed" "$OSLOG_LIB"; trap - EXIT
 
     APP="$ROOT/forge-gui-ios/target/robovm.tmp/$APP_EXEC.app"
