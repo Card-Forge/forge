@@ -18,6 +18,7 @@ public final class DecisionRequest {
     private final AttackDeclarationContext attackContext;
     private final BlockDeclarationContext blockContext;
     private final MulliganContext mulliganContext;
+    private final ConfirmationDecisionContext confirmationContext;
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates) {
         this(requestId, decisionType, candidates, null, null, null, null, null, null, null, null);
@@ -63,12 +64,28 @@ public final class DecisionRequest {
         this(requestId, decisionType, candidates, null, null, null, null, null, null, null, mulliganContext);
     }
 
+    DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
+            final ConfirmationDecisionContext confirmationContext) {
+        this(requestId, decisionType, candidates, null, null, null, null, null, null, null, null,
+                confirmationContext);
+    }
+
     private DecisionRequest(final long requestId, final DecisionType decisionType,
             final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
             final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
             final ModeDecisionContext modeContext, final CardSelectionContext cardSelectionContext,
             final AttackDeclarationContext attackContext, final BlockDeclarationContext blockContext,
             final MulliganContext mulliganContext) {
+        this(requestId, decisionType, candidates, targetContext, paymentContext, xContext, modeContext,
+                cardSelectionContext, attackContext, blockContext, mulliganContext, null);
+    }
+
+    private DecisionRequest(final long requestId, final DecisionType decisionType,
+            final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
+            final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
+            final ModeDecisionContext modeContext, final CardSelectionContext cardSelectionContext,
+            final AttackDeclarationContext attackContext, final BlockDeclarationContext blockContext,
+            final MulliganContext mulliganContext, final ConfirmationDecisionContext confirmationContext) {
         this.requestId = requestId;
         this.decisionType = Objects.requireNonNull(decisionType);
         this.candidates = List.copyOf(candidates);
@@ -80,6 +97,7 @@ public final class DecisionRequest {
         this.attackContext = attackContext;
         this.blockContext = blockContext;
         this.mulliganContext = mulliganContext;
+        this.confirmationContext = confirmationContext;
         if (this.candidates.isEmpty()) {
             throw new IllegalArgumentException("A DecisionRequest must contain at least one legal candidate");
         }
@@ -138,6 +156,12 @@ public final class DecisionRequest {
         if (decisionType != DecisionType.MULLIGAN && mulliganContext != null) {
             throw new IllegalArgumentException("Only MULLIGAN DecisionRequests may contain mulligan context");
         }
+        if (decisionType == DecisionType.CONFIRMATION && confirmationContext == null) {
+            throw new IllegalArgumentException("A CONFIRMATION DecisionRequest requires confirmation context");
+        }
+        if (decisionType != DecisionType.CONFIRMATION && confirmationContext != null) {
+            throw new IllegalArgumentException("Only CONFIRMATION DecisionRequests may contain confirmation context");
+        }
     }
 
     public long getRequestId() {
@@ -193,6 +217,11 @@ public final class DecisionRequest {
     /** MULLIGAN-only metadata for one KEEP/REDRAW callback. */
     public MulliganContext getMulliganContext() {
         return mulliganContext;
+    }
+
+    /** CONFIRMATION-only semantic trigger context. */
+    public ConfirmationDecisionContext getConfirmationContext() {
+        return confirmationContext;
     }
 
     public boolean isForced() {

@@ -18,8 +18,10 @@ public class DiagnosticOutputPathsTest {
     private static final String WORKER_ID = "forge.diagnostics.workerId";
     private static final String PRIORITY = "forge.priority.metricsFile";
     private static final String MULLIGAN = "forge.mulligan.metricsFile";
+    private static final String CONFIRMATION = "forge.confirmation.metricsFile";
     private static final String DETERMINISM = "forge.determinism.traceDir";
-    private static final String[] PROPERTIES = { ROOT, RUN_ID, WORKER_ID, PRIORITY, MULLIGAN, DETERMINISM };
+    private static final String[] PROPERTIES = { ROOT, RUN_ID, WORKER_ID, PRIORITY, MULLIGAN, CONFIRMATION,
+        DETERMINISM };
 
     private final Map<String, String> previous = new LinkedHashMap<>();
 
@@ -45,7 +47,7 @@ public class DiagnosticOutputPathsTest {
     }
 
     @Test
-    public void completeWorkerNamespaceEnablesAllThreeDerivedOutputs() {
+    public void completeWorkerNamespaceEnablesAllFourDerivedOutputs() {
         System.setProperty(ROOT, "audit-root");
         System.setProperty(RUN_ID, "run-alpha");
         System.setProperty(WORKER_ID, "7");
@@ -56,6 +58,7 @@ public class DiagnosticOutputPathsTest {
         assertEquals(paths.workerDirectory().orElseThrow(), worker);
         assertEquals(paths.priorityMetricsFile().orElseThrow(), worker.resolve("priority.csv"));
         assertEquals(paths.mulliganMetricsFile().orElseThrow(), worker.resolve("mulligan.csv"));
+        assertEquals(paths.confirmationMetricsFile().orElseThrow(), worker.resolve("confirmation.csv"));
         assertEquals(paths.determinismTraceDirectory().orElseThrow(), worker.resolve("determinism"));
     }
 
@@ -71,6 +74,7 @@ public class DiagnosticOutputPathsTest {
         final Path worker = Path.of("audit-root", "run-alpha", "worker-000");
         assertEquals(paths.priorityMetricsFile().orElseThrow(), Path.of("special-priority.csv"));
         assertEquals(paths.mulliganMetricsFile().orElseThrow(), worker.resolve("mulligan.csv"));
+        assertEquals(paths.confirmationMetricsFile().orElseThrow(), worker.resolve("confirmation.csv"));
         assertEquals(paths.determinismTraceDirectory().orElseThrow(), worker.resolve("determinism"));
     }
 
@@ -121,6 +125,7 @@ public class DiagnosticOutputPathsTest {
         assertFalse(paths.workerDirectory().isPresent());
         assertFalse(paths.priorityMetricsFile().isPresent());
         assertFalse(paths.mulliganMetricsFile().isPresent());
+        assertFalse(paths.confirmationMetricsFile().isPresent());
         assertFalse(paths.determinismTraceDirectory().isPresent());
     }
 }

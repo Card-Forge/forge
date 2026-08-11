@@ -20,7 +20,10 @@ public final class DecisionTraceTrainingValidator {
         final String selected = result.getSelectedCandidateSemanticKey();
         switch (result.getKind()) {
         case CHOSEN:
-            return !request.isForced() && result.isNativeCallbackCompleted() && result.isMappingAttempted()
+            final boolean nativeMapped = result.isNativeCallbackCompleted() && result.isMappingAttempted();
+            final boolean externalChosen = request.getDecisionType() == DecisionType.CONFIRMATION
+                    && !result.isNativeCallbackCompleted() && !result.isMappingAttempted();
+            return !request.isForced() && (nativeMapped || externalChosen)
                     && request.getLegalCandidates().contains(selected);
         case FORCED:
             return request.isForced() && request.getLegalCandidates().size() == 1
@@ -44,6 +47,8 @@ public final class DecisionTraceTrainingValidator {
             final DecisionTraceResultRecord result) {
         return isHistoryValid(request, result) && result.getKind() == DecisionTraceResultKind.CHOSEN
                 && !request.isForced()
+                && result.isNativeCallbackCompleted()
+                && result.isMappingAttempted()
                 && request.getLegalCandidates().contains(result.getSelectedCandidateSemanticKey());
     }
 

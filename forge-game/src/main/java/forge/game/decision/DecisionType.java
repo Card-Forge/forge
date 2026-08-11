@@ -10,5 +10,6 @@ public enum DecisionType {
     PAYMENT,
     CARD_SELECTION,
     ATTACK,
-    BLOCK
+    BLOCK,
+    CONFIRMATION
 }

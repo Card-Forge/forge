@@ -46,6 +46,7 @@ public final class LegalCandidate {
     private final BlockDeclarationCandidateKind blockKind;
     private final BlockDeclarationCard blockCard;
     private final BlockDeclarationCard blockAttacker;
+    private final ConfirmationCandidateKind confirmationKind;
 
     private LegalCandidate(final int candidateId, final PriorityActionKind kind, final Card source,
             final SpellAbility spellAbility, final String semanticKey) {
@@ -78,6 +79,7 @@ public final class LegalCandidate {
         this.blockKind = null;
         this.blockCard = null;
         this.blockAttacker = null;
+        this.confirmationKind = null;
     }
 
     private LegalCandidate(final int candidateId, final String semanticKey) {
@@ -110,6 +112,7 @@ public final class LegalCandidate {
         this.blockKind = null;
         this.blockCard = null;
         this.blockAttacker = null;
+        this.confirmationKind = null;
     }
 
     private LegalCandidate(final int candidateId, final TargetCandidateKind targetKind, final GameObject target,
@@ -143,6 +146,7 @@ public final class LegalCandidate {
         this.blockKind = null;
         this.blockCard = null;
         this.blockAttacker = null;
+        this.confirmationKind = null;
     }
 
     private LegalCandidate(final int candidateId, final PaymentCandidateKind paymentKind, final Card source,
@@ -176,6 +180,7 @@ public final class LegalCandidate {
         this.blockKind = null;
         this.blockCard = null;
         this.blockAttacker = null;
+        this.confirmationKind = null;
     }
 
     private LegalCandidate(final int candidateId, final int xValue) {
@@ -208,6 +213,7 @@ public final class LegalCandidate {
         this.blockKind = null;
         this.blockCard = null;
         this.blockAttacker = null;
+        this.confirmationKind = null;
     }
 
     private LegalCandidate(final int candidateId, final int modeOrdinal, final AbilitySub mode) {
@@ -240,6 +246,7 @@ public final class LegalCandidate {
         this.blockKind = null;
         this.blockCard = null;
         this.blockAttacker = null;
+        this.confirmationKind = null;
     }
 
     private LegalCandidate(final int candidateId, final CardSelectionCandidateKind cardSelectionKind,
@@ -274,6 +281,7 @@ public final class LegalCandidate {
         this.blockKind = null;
         this.blockCard = null;
         this.blockAttacker = null;
+        this.confirmationKind = null;
     }
 
     private LegalCandidate(final int candidateId, final AttackDeclarationCandidateKind attackKind,
@@ -309,6 +317,7 @@ public final class LegalCandidate {
         this.blockKind = null;
         this.blockCard = null;
         this.blockAttacker = null;
+        this.confirmationKind = null;
     }
 
     private LegalCandidate(final int candidateId, final BlockDeclarationCandidateKind blockKind,
@@ -344,6 +353,7 @@ public final class LegalCandidate {
         this.blockKind = Objects.requireNonNull(blockKind);
         this.blockCard = blockCard;
         this.blockAttacker = blockAttacker;
+        this.confirmationKind = null;
     }
 
     private static boolean branchUsesTargeting(final SpellAbility first) {
@@ -431,6 +441,43 @@ public final class LegalCandidate {
         return new LegalCandidate(candidateId, Objects.requireNonNull(kind).semanticKey());
     }
 
+    static LegalCandidate confirmation(final int candidateId, final ConfirmationCandidateKind kind) {
+        return new LegalCandidate(candidateId, Objects.requireNonNull(kind));
+    }
+
+    private LegalCandidate(final int candidateId, final ConfirmationCandidateKind kind) {
+        this.candidateId = candidateId;
+        this.kind = null;
+        this.sourceCardId = -1;
+        this.sourceName = "";
+        this.sourceZone = null;
+        this.sourceState = null;
+        this.abilityDescription = "";
+        this.semanticKey = kind.semanticKey();
+        this.spellAbility = null;
+        this.targetKind = null;
+        this.targetEntityId = -1;
+        this.targetName = "";
+        this.targetZone = null;
+        this.target = null;
+        this.paymentKind = null;
+        this.mana = null;
+        this.xValue = null;
+        this.modeOrdinal = null;
+        this.modeDescription = "";
+        this.modeUsesTargeting = false;
+        this.mode = null;
+        this.cardSelectionKind = null;
+        this.cardSelectionCard = null;
+        this.attackKind = null;
+        this.attackCard = null;
+        this.attackDefender = null;
+        this.blockKind = null;
+        this.blockCard = null;
+        this.blockAttacker = null;
+        this.confirmationKind = kind;
+    }
+
     public int getCandidateId() {
         return candidateId;
     }
@@ -500,6 +547,11 @@ public final class LegalCandidate {
     /** MULLIGAN candidate kind, or {@code null} for another decision family. */
     public MulliganCandidateKind getMulliganKind() {
         return MulliganCandidateKind.fromSemanticKey(semanticKey);
+    }
+
+    /** CONFIRMATION candidate kind, or {@code null} for another decision family. */
+    public ConfirmationCandidateKind getConfirmationKind() {
+        return confirmationKind;
     }
 
     /** Stable blocker identity for BLOCK candidates, otherwise {@code null}. */
