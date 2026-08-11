@@ -188,6 +188,10 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
      * objects this client has actually been told about.
      */
     public void setCodecTracker(Tracker tracker, int consumerId) {
+        // Skip no-op rebinds: setGameView fires on every view push, the tracker changes per game.
+        if (tracker == codecTracker && consumerId == codecConsumerId) {
+            return;
+        }
         this.codecTracker = tracker;
         this.codecConsumerId = consumerId;
         applyCodecTracker(channel);

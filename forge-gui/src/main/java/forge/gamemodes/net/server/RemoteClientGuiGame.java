@@ -41,8 +41,8 @@ import java.util.stream.Collectors;
 
 /**
  * Server-side proxy for one remote client's GUI. One instance per connected remote player,
- * constructed at lobby time and reused across every game of the match (and across
- * reconnects). Per-game delta state is rebuilt by {@link #resetDeltaSync}.
+ * constructed at lobby time and reused across the match (and across reconnects, via
+ * {@link #resetForReconnect}).
  *
  * <p>IGuiGame overrides forward through one of four helpers named for their behavior:
  * {@link #send} (fire), {@link #syncAndSend} (walk the trackable graph, then fire),
@@ -65,8 +65,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     private boolean initialSyncSent = false;
     private boolean objectsRegistered = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
-    // Identifies the game the delta state and codec belong to; each game has its own Tracker.
-    private Tracker lastSyncedTracker;
     private volatile boolean paused;
     private volatile boolean resyncPending;
 
@@ -100,11 +98,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     /**
-     * Drop the delta baseline so the next update sends full state.
-     * Required whenever the client's baseline is gone or no longer applies:
-     * after a reconnect, and at each new game of a match.
+     * Reset delta sync state for reconnection.
+     * After a client reconnects, it has no prior delta baseline,
+     * so we must send a full state before resuming delta sync.
      */
-    public void resetDeltaSync() {
+    public void resetForReconnect() {
         initialSyncSent = false;
         objectsRegistered = false;
         fallbackLogged = false;
@@ -296,14 +294,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     @Override
     public void setGameView(final GameView gameView) {
         super.setGameView(gameView);
-        // Each game owns a Tracker and restarts card ids at 1, so a new one means the
-        // delta baseline no longer applies and client IdRefs must resolve against it.
-        // A null view is a transient clear between games; leave both pointing at the
-        // outgoing game so its in-flight messages still resolve.
-        if (gameView != null && gameView.getTracker() != lastSyncedTracker) {
-            lastSyncedTracker = gameView.getTracker();
-            resetDeltaSync();
-            client.setCodecTracker(lastSyncedTracker, syncManager.getConsumerId());
+        // Each game owns a Tracker and restarts card ids at 1, so client IdRefs must resolve
+        // against the current game's. A null view is a transient clear between games — leave
+        // the codec on the outgoing game so its in-flight messages still resolve.
+        if (gameView != null) {
+            client.setCodecTracker(gameView.getTracker(), syncManager.getConsumerId());
         }
         updateGameView();
     }

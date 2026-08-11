@@ -144,9 +144,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * Called at game lifecycle boundaries (start, restart, recovery) and when a remote
      * client receives a {@code setGameView} protocol message.
      *
-     * <p>Two paths: the field is reassigned directly when either side is null or the
-     * incoming view belongs to a different game. Successive views of the same game are
-     * merged via {@link GameView#copyChangedProps} rather than swapping the reference.
+     * <p>Two paths: if either {@code gameView} or {@code gameView0} is null, the field is
+     * reassigned directly. If both are non-null, the incoming view's properties are merged
+     * into the existing view via {@link GameView#copyChangedProps} rather than swapping
+     * the reference.
      *
      * <p>The merge path preserves object identity of the GameView and every nested
      * {@link forge.trackable.TrackableObject}. GUI components hold direct references to
@@ -154,14 +155,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * delta-sync consumers also register per-consumer dirty bits on them). Swapping the
      * GameView reference would leave those references pointing at an orphaned graph;
      * merging keeps them valid as the data underneath changes.
-     *
-     * <p>Across games that reasoning inverts: ids restart at 1, so merging would write the
-     * new game's cards onto same-id objects from the finished one. Both GUIs rebuild their
-     * card panels at openView, so replacing the graph there orphans nothing.
      */
     @Override
     public void setGameView(final GameView gameView0) {
-        if (gameView == null || gameView0 == null || gameView.getId() != gameView0.getId()) {
+        if (gameView == null || gameView0 == null) {
             if (gameView0 != null) {
                 gameView0.updateObjLookup();
             }

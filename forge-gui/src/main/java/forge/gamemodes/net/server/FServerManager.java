@@ -923,7 +923,7 @@ public final class FServerManager implements IHasForgeLog {
         netGui.resume();
 
         // Reset delta sync state — reconnecting client has no prior baseline
-        netGui.resetDeltaSync();
+        netGui.resetForReconnect();
         netLog.info("[Reconnect] Delta sync state reset for slot {}", slotIndex);
 
         // Send game state via setGameView protocol (client needs gameView set before openView)
