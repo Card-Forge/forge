@@ -156,6 +156,11 @@ public final class PriorityActionDiagnostics {
         }
     }
 
+    /** Returns whether the current thread is inside a priority-action continuation scope. */
+    public static boolean hasActiveActionContinuation() {
+        return ACTIVE_CONTINUATION != null && ACTIVE_CONTINUATION.get() != null;
+    }
+
     static boolean isSingleActionSelection(final int selectedAbilityCount) {
         return selectedAbilityCount == 1;
     }

@@ -18,6 +18,11 @@ import forge.game.card.CardDamageTable;
 import forge.game.card.CardState;
 import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
+import forge.game.decision.ConfirmationDiagnostics;
+import forge.game.decision.ConfirmationDecisionProvider;
+import forge.game.decision.DecisionRequest;
+import forge.game.decision.DeterminismTrace;
+import forge.game.decision.LegalCandidate;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
@@ -432,8 +437,31 @@ public class WrappedAbility extends Ability {
             if (!decider.isInGame()) {
                 decider = SpellAbilityEffect.getNewChooser(sa, decider);
             }
-            if (!decider.getController().confirmTrigger(this)) {
-                return;
+            final Player resolvedDecider = decider;
+            final ConfirmationDecisionProvider provider =
+                    resolvedDecider.getController().getConfirmationDecisionProvider();
+            final ConfirmationDecisionProvider.Generation generation = provider.generate(this, resolvedDecider);
+            final ConfirmationDiagnostics.Capture confirmationCapture =
+                    ConfirmationDiagnostics.capture(game, resolvedDecider, generation, this);
+            if (generation.getStatus() == ConfirmationDecisionProvider.Status.ADMITTED) {
+                final DecisionRequest request = generation.getRequest();
+                final DeterminismTrace.RequestHandle traceHandle = DeterminismTrace.recordRequest(
+                        game, resolvedDecider.getId(), request, "GELECTRODE_CONFIRMATION", 0);
+                final LegalCandidate selected = provider.choose(request,
+                        () -> resolvedDecider.getController().confirmTrigger(this));
+                final boolean accepted = provider.apply(request, selected, this);
+                confirmationCapture.recordResult(selected, !provider.hasResolver());
+                traceHandle.recordMappedResult(selected, !provider.hasResolver());
+                if (!accepted) {
+                    return;
+                }
+            } else {
+                if (provider.hasResolver()) {
+                    return;
+                }
+                if (!resolvedDecider.getController().confirmTrigger(this)) {
+                    return;
+                }
             }
         }
 

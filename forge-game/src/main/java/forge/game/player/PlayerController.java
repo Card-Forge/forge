@@ -17,6 +17,7 @@ import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
+import forge.game.decision.ConfirmationDecisionProvider;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
@@ -76,6 +77,7 @@ public abstract class PlayerController {
 
     protected final Player player;
     protected final LobbyPlayer lobbyPlayer;
+    private final ConfirmationDecisionProvider confirmationDecisionProvider = new ConfirmationDecisionProvider();
 
     public PlayerController(Game game0, Player p, LobbyPlayer lp) {
         gameView = game0.getView();
@@ -91,6 +93,9 @@ public abstract class PlayerController {
     public Match getMatch() { return gameView.getMatch(); }
     public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
+    public final ConfirmationDecisionProvider getConfirmationDecisionProvider() {
+        return confirmationDecisionProvider;
+    }
 
     public void tempShowCards(final Iterable<Card> cards) { } // show cards in UI until ended
     public void endTempShowCards() { }

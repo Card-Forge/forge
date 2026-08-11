@@ -257,6 +257,12 @@ public final class DeterminismTrace {
 
         /** Closes after a native result is observed and maps to this request. */
         public void recordMappedResult(final LegalCandidate selectedCandidate) {
+            recordMappedResult(selectedCandidate, true);
+        }
+
+        /** Closes after a selected result is mapped, preserving decision ownership in the trace. */
+        public void recordMappedResult(final LegalCandidate selectedCandidate,
+                final boolean nativeCallbackCompleted) {
             if (!isActive()) {
                 return;
             }
@@ -265,7 +271,8 @@ public final class DeterminismTrace {
                 throw new IllegalArgumentException("Selected candidate is not legal for request: " + selected);
             }
             trace.complete(this, requestRecord.isForced() ? DecisionTraceResultKind.FORCED
-                    : DecisionTraceResultKind.CHOSEN, selected, true, true, false, false, false);
+                    : DecisionTraceResultKind.CHOSEN, selected, nativeCallbackCompleted, true,
+                    false, false, false);
         }
 
         /** Closes when Forge proves a sole-candidate decision without invoking a native callback. */

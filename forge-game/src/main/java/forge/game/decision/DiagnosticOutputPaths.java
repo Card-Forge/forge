@@ -12,6 +12,7 @@ public final class DiagnosticOutputPaths {
     public static final String WORKER_ID_PROPERTY = "forge.diagnostics.workerId";
     public static final String PRIORITY_FILE_PROPERTY = "forge.priority.metricsFile";
     public static final String MULLIGAN_FILE_PROPERTY = "forge.mulligan.metricsFile";
+    public static final String CONFIRMATION_FILE_PROPERTY = "forge.confirmation.metricsFile";
     public static final String DETERMINISM_DIRECTORY_PROPERTY = "forge.determinism.traceDir";
 
     private DiagnosticOutputPaths() {
@@ -39,6 +40,7 @@ public final class DiagnosticOutputPaths {
         return new Resolved(
                 optionalPath(System.getProperty(PRIORITY_FILE_PROPERTY), workerDirectory, "priority.csv"),
                 optionalPath(System.getProperty(MULLIGAN_FILE_PROPERTY), workerDirectory, "mulligan.csv"),
+                optionalPath(System.getProperty(CONFIRMATION_FILE_PROPERTY), workerDirectory, "confirmation.csv"),
                 optionalPath(System.getProperty(DETERMINISM_DIRECTORY_PROPERTY), workerDirectory, "determinism"),
                 Optional.ofNullable(workerDirectory));
     }
@@ -83,13 +85,16 @@ public final class DiagnosticOutputPaths {
     public static final class Resolved {
         private final Optional<Path> priorityMetricsFile;
         private final Optional<Path> mulliganMetricsFile;
+        private final Optional<Path> confirmationMetricsFile;
         private final Optional<Path> determinismTraceDirectory;
         private final Optional<Path> workerDirectory;
 
         private Resolved(final Optional<Path> priorityMetricsFile, final Optional<Path> mulliganMetricsFile,
+                final Optional<Path> confirmationMetricsFile,
                 final Optional<Path> determinismTraceDirectory, final Optional<Path> workerDirectory) {
             this.priorityMetricsFile = priorityMetricsFile;
             this.mulliganMetricsFile = mulliganMetricsFile;
+            this.confirmationMetricsFile = confirmationMetricsFile;
             this.determinismTraceDirectory = determinismTraceDirectory;
             this.workerDirectory = workerDirectory;
         }
@@ -100,6 +105,10 @@ public final class DiagnosticOutputPaths {
 
         public Optional<Path> mulliganMetricsFile() {
             return mulliganMetricsFile;
+        }
+
+        public Optional<Path> confirmationMetricsFile() {
+            return confirmationMetricsFile;
         }
 
         public Optional<Path> determinismTraceDirectory() {
@@ -114,6 +123,7 @@ public final class DiagnosticOutputPaths {
             final Set<Path> paths = new LinkedHashSet<>();
             priorityMetricsFile.ifPresent(paths::add);
             mulliganMetricsFile.ifPresent(paths::add);
+            confirmationMetricsFile.ifPresent(paths::add);
             determinismTraceDirectory.ifPresent(paths::add);
             return paths;
         }
