@@ -1,5 +1,6 @@
 package forge.adventure.util;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerMapping;
@@ -34,6 +35,15 @@ public enum KeyBinding {
         this.bindings = bindings;
     }
 
+    public boolean isPressed() {
+        for (int key : bindings) {
+            if (Gdx.input.isKeyPressed(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isPressed(int key) {
         return isPressed(key, null);
     }
@@ -47,10 +57,6 @@ public enum KeyBinding {
             }
         }
         return false;
-    }
-
-    public int[] getBindings() {
-        return bindings;
     }
 
     // The controller binding always has index 1.

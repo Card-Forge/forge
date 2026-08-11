@@ -1,6 +1,5 @@
 package forge.adventure.stage;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.files.FileHandle;
@@ -387,29 +386,20 @@ public abstract class GameStage extends Stage {
             player.stop();
         } else {
             keyboardInput.setZero();
-            for (int key : KeyBinding.Left.getBindings()) {
-                if (Gdx.input.isKeyPressed(key)) {
-                    keyboardInput.x = -1;
-                    break;
-                }
+            if (KeyBinding.Left.isPressed()) {
+                keyboardInput.x -= 1;
             }
-            for (int key : KeyBinding.Right.getBindings()) {
-                if (Gdx.input.isKeyPressed(key)) {
-                    keyboardInput.x = 1;
-                    break;
-                }
+
+            if (KeyBinding.Right.isPressed()) {
+                keyboardInput.x += 1;
             }
-            for (int key : KeyBinding.Up.getBindings()) {
-                if (Gdx.input.isKeyPressed(key)) {
-                    keyboardInput.y = 1;
-                    break;
-                }
+
+            if (KeyBinding.Up.isPressed()) {
+                keyboardInput.y += 1;
             }
-            for (int key : KeyBinding.Down.getBindings()) {
-                if (Gdx.input.isKeyPressed(key)) {
-                    keyboardInput.y = -1;
-                    break;
-                }
+
+            if (KeyBinding.Down.isPressed()) {
+                keyboardInput.y -= 1;
             }
 
             // Input priority: touch > controller > keyboard
