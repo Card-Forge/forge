@@ -52,6 +52,8 @@ public final class ConfirmationDecisionProvider {
     private DecisionRequest activeRequest;
     private Resolver resolver;
     private long unsupportedCount;
+    private boolean choiceMade;
+    private LegalCandidate chosenCandidate;
 
     public void setResolver(final Resolver resolver0) {
         resolver = resolver0;
@@ -97,15 +99,23 @@ public final class ConfirmationDecisionProvider {
         final DecisionRequest request = new DecisionRequest(nextRequestId++, DecisionType.CONFIRMATION,
                 candidates, context);
         activeRequest = request;
+        choiceMade = false;
+        chosenCandidate = null;
         return Generation.admitted(request);
     }
 
     /** Chooses one candidate, either with the explicitly installed resolver or the native teacher callback. */
     public LegalCandidate choose(final DecisionRequest request, final BooleanSupplier nativeTeacher) {
         validateActiveRequest(request);
+        if (choiceMade) {
+            throw new IllegalArgumentException("Confirmation request already has a chosen candidate");
+        }
+        Objects.requireNonNull(nativeTeacher);
         final LegalCandidate selected = resolver == null
                 ? nativeCandidate(request, nativeTeacher.getAsBoolean()) : resolver.choose(request);
         validateCandidate(request, selected);
+        choiceMade = true;
+        chosenCandidate = selected;
         return selected;
     }
 
@@ -123,8 +133,15 @@ public final class ConfirmationDecisionProvider {
                 || context.getDeciderPlayerId() != wrapper.getDecider().getId()) {
             throw new IllegalArgumentException("Confirmation request does not match the live wrapper");
         }
+        if (choiceMade && chosenCandidate != candidate) {
+            throw new IllegalArgumentException("Applied candidate does not match the chosen confirmation candidate");
+        }
         validateCandidate(request, candidate);
-        return candidate.getConfirmationKind() == ConfirmationCandidateKind.ACCEPT;
+        final boolean accepted = candidate.getConfirmationKind() == ConfirmationCandidateKind.ACCEPT;
+        activeRequest = null;
+        choiceMade = false;
+        chosenCandidate = null;
+        return accepted;
     }
 
     private static LegalCandidate nativeCandidate(final DecisionRequest request, final boolean accepted) {

@@ -1,8 +1,8 @@
 # FRL-02K — Confirmation Attribution and Semantic Boundary Audit
 
-Status: AUDIT ONLY. No FRL-02K production adapter is approved or implemented.
+Status: A3 audit retained; FRL-02K-B1 Gelectrode production addendum PASS. Global CONFIRMATION remains OPEN.
 
-Audit date: 2026-08-10
+Audit date: 2026-08-11 (historical A1/A2/A3 evidence begins 2026-08-10)
 
 Repository: `chrismaghuhn/forgeAI`
 
@@ -14,9 +14,10 @@ Architecture authority: `docs/AI-ML DOCS/ML_STRATEGY.md`
 
 Determinism and safety authority: `docs/AI-ML DOCS/FRL_02K0_DETERMINISM_GATE_REPORT.md`
 
-Primary recommendation after A2: `NO_SAFE_V0_YET`
+Historical primary recommendation after A2: `NO_SAFE_V0_YET`
 
-The cleanest future candidate is `OPTIONAL_TRIGGER_NO_COST`, but it is not ready for implementation. Its callback semantics are clean only after the engine-owned seam, trigger provenance, public triggering-object context, static/delayed exclusions, and fail-closed visibility rules are specified and tested.
+The cleanest future candidate identified by A2 was `OPTIONAL_TRIGGER_NO_COST`. Section 26 records the separately
+reviewed and implemented `Gelectrode` slice; the other optional-trigger shapes remain unimplemented.
 
 ## 0. Checkpoint and scope
 
@@ -36,7 +37,10 @@ The original A1 checkpoint and the A2 rebase are both retained here. The A1 audi
 
 `origin/master` no longer equals the historical checkpoint: it is `266f44a7cae8f9cc7379a8429a137c5fc7c483bb`, one separate docs-only commit (`docs: update ML strategy`) ahead of `c8835a22...`. That commit changes only `docs/AI-ML DOCS/ML_STRATEGY.md`. A1 intentionally did not absorb that remote drift; A2 rebased the isolated audit branch onto the exact docs-only commit. The original `C:\forgeAI` checkout and `C:\forgeAI-determinism-gate` worktree were not touched.
 
-This audit does not add `DecisionType.CONFIRMATION`, `DecisionRequest.CONFIRMATION`, `LegalCandidate`, `ConfirmationContext`, `ConfirmationDecisionProvider`, `ConfirmationAdapter`, or any other production boundary. A2 adds only focused test-only evidence; production implementation remains absent.
+The A1/A2/A3 audit portions below did not add `DecisionType.CONFIRMATION`, `DecisionRequest.CONFIRMATION`,
+`LegalCandidate`, `ConfirmationContext`, `ConfirmationDecisionProvider`, `ConfirmationAdapter`, or any other
+production boundary. Section 26 is the later B1 production addendum and is intentionally separated from those
+historical audit claims.
 
 Evidence labels used below:
 
@@ -62,7 +66,8 @@ The callback named `confirmTrigger` contains at least four different cases:
 3. Cost-bearing optional triggers normally use `confirmTrigger` procedurally to enter cost handling; the actual decline can be expressed by failing or declining the later cost payment path. A generic second `ACCEPT/DECLINE` request would overlap that rule.
 4. `PlayerControllerAi.chooseContraptionsToCrank` directly invokes the same callback on a newly constructed `WrappedAbility` as an AI helper. A generic controller-method instrumentation point is therefore not semantically authoritative.
 
-The controlled workloads produced 26 `confirmTrigger` entries in the reactive matchup and zero in the proactive matchup, but the 26 entries are not all equivalent policy decisions. The correct next architectural step is to define and test a narrow engine-owned optional no-cost trigger seam. Until that is complete, the audit verdict is `NO_SAFE_V0_YET`.
+The controlled workloads produced 26 `confirmTrigger` entries in the reactive matchup and zero in the proactive matchup, but the 26 entries are not all equivalent policy decisions. The historical A2/A3 verdict was
+`NO_SAFE_V0_YET`; B1 now closes only the named Gelectrode shape and leaves the other shapes open.
 
 ## 2. Current runtime callback attribution
 
@@ -1593,8 +1598,14 @@ passed. The two worker traces had identical gameplay, RNG, DECISION_TRACE_V2, an
 collisions and zero parse errors.
 
 Each admitted ACCEPT and DECLINE path has one request, one provider choice, one applied boolean, and one native
-effect decision. ACCEPT performs one untap; DECLINE performs none. No second `confirmTrigger`, duplicate
-`doTrigger`, target replay, or extra RNG path is introduced.
+effect decision. The provider now rejects a second choose or apply for the same request. ACCEPT performs one
+untap; DECLINE performs none. No second `confirmTrigger`, duplicate `doTrigger`, target replay, or extra RNG
+path is introduced.
+
+The focused suite uses a real intrinsic-false derived-trigger fixture and the canonical fresh-JVM workload for
+the three provenance-untrusted callbacks. A standalone Cipher encode/exile fixture is not currently available
+without constructing the full encoded-card lifecycle; that remains a small test-fixture gap, while the
+production provenance gate and the measured `3` rejected callbacks remain unchanged.
 
 ### 26.6 DECISION_TRACE_V2
 
@@ -1648,11 +1659,12 @@ replacement, or static-application callbacks.
 
 ### 26.9 B1 verification totals
 
-The final focused selection ran `44` tests: `15` in `forge-game` and `29` in `forge-gui-desktop`, with
-`44` passed, `0` failed, `0` errors, and `0` skipped. The new Gelectrode provider tests were `16/16`; the
+The final focused selection ran `37` tests: `7` in `forge-game` and `30` in `forge-gui-desktop`, with
+`37` passed, `0` failed, `0` errors, and `0` skipped. The new Gelectrode provider tests are `17/17` after
+the single-use request regression test; the
 fresh-JVM canonical workload test was `1/1`; collector neutrality and worker isolation were `2/2`.
 
-The full decision/determinism reactor ran `637` tests: `631` passed, `0` failed, `0` errors, and `6` skipped.
+The full decision/determinism reactor ran `638` tests: `632` passed, `0` failed, `0` errors, and `6` skipped.
 The final package command and configured Checkstyle/Validate both returned `BUILD SUCCESS` with `0` Checkstyle
 violations. `git diff --check` is clean.
 

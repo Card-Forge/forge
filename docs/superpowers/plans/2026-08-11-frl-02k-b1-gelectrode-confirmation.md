@@ -152,4 +152,3 @@ Create small coherent commits, push branch
 
 Do not mark ready, merge, start another confirmation profile, ORDER, or
 DAMAGE_ASSIGNMENT. Stop for architecture review.
-

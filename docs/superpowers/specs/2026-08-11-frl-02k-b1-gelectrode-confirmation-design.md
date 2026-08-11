@@ -131,4 +131,3 @@ candidate validation/order/forced state, ActionContinuation absence, state/RNG
 neutrality, trace completion, native teacher mapping, and exactly-once behavior.
 The controlled Izzet Guild Kit vs Dimir Guild Kit run with seed `20260810` and
 10 games must prove exactly 17 admitted and 9 rejected/deferred out of 26.
-

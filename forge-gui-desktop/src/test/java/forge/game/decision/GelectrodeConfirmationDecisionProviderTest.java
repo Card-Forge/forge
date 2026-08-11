@@ -131,6 +131,20 @@ public class GelectrodeConfirmationDecisionProviderTest extends AITest {
     }
 
     @Test
+    public void requestCannotBeChosenOrAppliedTwice() {
+        final Game game = initAndCreateGame();
+        final Player player = game.getPlayers().get(1);
+        final WrappedAbility wrapper = wrapperFor(game, player, "Gelectrode", TriggerType.SpellCast);
+        final DecisionRequest request = provider.generate(wrapper, player).getRequest();
+
+        final LegalCandidate selected = provider.choose(request, () -> true);
+        assertThrows(IllegalArgumentException.class, () -> provider.choose(request, () -> false));
+        assertTrue(provider.apply(request, selected, wrapper));
+        assertThrows(IllegalArgumentException.class, () -> provider.apply(request, selected, wrapper));
+        assertThrows(IllegalArgumentException.class, () -> provider.choose(request, () -> true));
+    }
+
+    @Test
     public void wrappedResolveAcceptUsesOneExternalCandidateAndUntapsOnce() {
         final Game game = initAndCreateGame();
         final Player player = game.getPlayers().get(1);
