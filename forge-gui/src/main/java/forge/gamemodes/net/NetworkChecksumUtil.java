@@ -382,6 +382,7 @@ public final class NetworkChecksumUtil {
             addCards(cards, getEffectiveValue(player, TrackableProperty.Graveyard));
             addCards(cards, getEffectiveValue(player, TrackableProperty.Exile));
             addCards(cards, getEffectiveValue(player, TrackableProperty.Command));
+            addCards(cards, getEffectiveValue(player, TrackableProperty.Library));
             cards.sort(Comparator.comparingInt(CardView::getId));
 
             for (CardView card : cards) {
