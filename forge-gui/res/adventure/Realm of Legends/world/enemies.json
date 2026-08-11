@@ -63389,6 +63389,72 @@
     "spawnRate": 1
   },
   {
+    "name": "Nephilim Epochal",
+    "sprite": "sprites/enemy/aberration/eldrazi/eldrazi_2.atlas",
+    "deck": [
+      "decks/legends/nephilim_epochal.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Opal",
+        "editions": [ "SLD" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Nephilim Epochal",
+        "editions": [ "MBC" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Dune-Brood Nephilim",
+        "editions": [ "GPT" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ink-Treader Nephilim",
+        "editions": [ "GPT" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Glint-Eye Nephilim",
+        "editions": [ "GPT" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Witch-Maw Nephilim",
+        "editions": [ "GPT" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Yore-Tiller Nephilim",
+        "editions": [ "GPT" ]
+      },
+      {
+        "type": "shards",
+        "count": 100
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "WUBRG",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
     "name": "Withengar",
     "sprite": "sprites/enemy/fiend/abyssalbaron.atlas",
     "deck": [
