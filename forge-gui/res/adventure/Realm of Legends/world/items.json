@@ -889,6 +889,16 @@
     "cost": 500
   },
   {
+    "name": "Otherworldly Return Card",
+    "usableOnWorldMap": true,
+    "equipmentSlot": "Ability2",
+    "description": "Teleports you to the otherworldly market",
+    "commandOnUse": "teleport to poi \"Otherworldly Market\"",
+    "iconName": "Pull",
+    "questItem": true,
+    "shardsNeeded": 1
+  },
+  {
     "name": "Staff of Speed",
     "usableOnWorldMap": true,
     "equipmentSlot": "Ability1",

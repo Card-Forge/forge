@@ -492,6 +492,18 @@
 			"Story"]
 	},
 	{
+		"name": "Otherworldly Market",
+		"displayName": "Otherworldly Market",
+		"type": "capital",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Universe Portal",
+		"map": "../Realm of Legends/maps/map/cave/Otherworldly_Market.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Gitrog Bog",
 		"displayName": "Gitrog Bog",
 		"type": "castle",
