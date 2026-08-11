@@ -129,7 +129,7 @@ public enum CounterEnumType implements CounterType {
 
     DOOM("DOOM", 255, 104, 118, CounterAiCategory.Negative),
 
-    DREAD ("DREAD", 205, 170, 240, CounterAiCategory.Neutral),
+    DREAD ("DREAD", 205, 170, 240, CounterAiCategory.Positive),
 
     DREAM("DREAM", 190, 189, 255, CounterAiCategory.Positive),
 

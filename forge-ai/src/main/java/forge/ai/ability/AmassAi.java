@@ -7,7 +7,6 @@ import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -36,8 +35,7 @@ public class AmassAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactGame);
         }
         final String type = sa.getParam("Type");
-        final String color = sa.getParamOrDefault("Color", "black");
-        final String tokenScript = ColorSet.fromNames(color.split(",")).toString().toLowerCase() + "_0_0_" + sa.getOriginalParam("Type").toLowerCase() + "_army";
+        final String tokenScript = "b_0_0_" + sa.getOriginalParam("Type").toLowerCase() + "_army";
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
         Card token = TokenInfo.getProtoType(tokenScript, sa, ai, false);
