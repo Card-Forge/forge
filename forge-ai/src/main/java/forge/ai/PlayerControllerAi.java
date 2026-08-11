@@ -20,6 +20,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
 import forge.game.decision.BooleanCallbackAuditDiagnostics;
+import forge.game.decision.ChangesZoneAuditDiagnostics;
 import forge.game.decision.DownstreamCallbackFamily;
 import forge.game.decision.MulliganDiagnostics;
 import forge.game.decision.PriorityActionDiagnostics;
@@ -450,6 +451,7 @@ public class PlayerControllerAi extends PlayerController {
 
         if (storeChoices) {
             tc = sa.getTargets();
+            ChangesZoneAuditDiagnostics.recordStoredTargetBeforeConfirm(wrapper, sa, tc);
             sa.resetTargets();
         }
         if (storeSubChoices) {
@@ -461,6 +463,7 @@ public class PlayerControllerAi extends PlayerController {
         if (!brains.doTrigger(sa, false)) {
             ret = false;
         }
+        ChangesZoneAuditDiagnostics.recordAiTargetEvaluation(wrapper, sa, tc);
         if (storeChoices) {
             sa.resetTargets();
             sa.setTargets(tc);
