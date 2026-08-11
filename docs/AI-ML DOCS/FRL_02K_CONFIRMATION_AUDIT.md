@@ -1,6 +1,6 @@
 # FRL-02K — Confirmation Attribution and Semantic Boundary Audit
 
-Status: A3 audit retained; FRL-02K-B1 Gelectrode production addendum PASS. Global CONFIRMATION remains OPEN.
+Status: A3 audit retained; FRL-02K-B1 Gelectrode production addendum PASS; FRL-02K-C1 ChangesZone projection audit PASS. Global CONFIRMATION remains OPEN.
 
 Audit date: 2026-08-11 (historical A1/A2/A3 evidence begins 2026-08-10)
 
@@ -2057,3 +2057,147 @@ contract. Future PAYMENT-CLOSURE capture belongs before `CostPayment.payComputer
 `P0=0`, `P1=0`, `P2=1`; no production or test changes are required by this correction.
 
 **FRL-02K-C audit verdict: `FRL_02K_C_PASS`.**
+
+## 28. FRL-02K-C1 — ChangesZone Trigger Decision-Relevance, Public Event Projection, and History Audit
+
+### 28.1 Gate and exact checkout
+
+[BESTAETIGT] The C1 gate was evaluated after `git fetch origin` in the protected primary checkout. PR #15,
+`FRL-02K-C: audit remaining confirmation and boolean boundaries`, was merged. Its reviewed head was
+`2c17cf8d357bd3dc3da1a62111c050bac751841a`, its merge commit was
+`72a574e7235002064f648b21d7b4387f8ac50be4`, and the current `origin/master` was the same merge commit.
+
+The primary `C:\forgeAI` checkout remained on
+`chore/decision-diagnostics-column-contract` with its pre-existing user modifications untouched. C1 used the
+clean isolated worktree `C:\forgeAI-confirmation-c1` on
+`frl/02k-c1-changeszone-trigger-projection`, with `HEAD == origin/master == 72a574e7235002064f648b21d7b4387f8ac50be4`
+and a clean initial tree.
+
+### 28.2 Audit-only scope
+
+[BESTAETIGT] C1 added no `DecisionType.CONFIRMATION`, no new confirmation provider/profile, no generic
+`confirmAction` adapter, no production `HistoryEvent`, and no public DTO. The only runtime output is enabled by
+the opt-in `forge.changesZone.auditFile` property. The diagnostic recorder catches its own failures and does
+not call an AI helper or choose a target.
+
+The exact runtime profiles are deliberately narrow:
+
+| Profile | Trigger | Executed effect | Reactive occurrences |
+|---|---|---|---:|
+| `BLOOD_OPERATIVE` | `ChangesZone -> ChangeZone` | `TrigChangeZone` | 2 |
+| `LAZAV` | `ChangesZone -> Clone` | `LazavCopy` | 3 |
+
+No other `ChangesZone` trigger is admitted by the recorder.
+
+### 28.3 Decision-relevance and engine ownership
+
+[STARKES INDIZ] `GameAction` supplies both the moved current `Card` and a `CardLKI` value when it raises the
+`ChangesZone` trigger. `TriggerChangesZone` stores both keys, but for these `Origin$ Any` profiles its validity
+test uses the current `runParams.Card`. The audit records the two values only as typed `Card` and `CardLKI`
+presence/visibility metadata; it never exports either object or a value derived from raw object identity.
+
+[BESTAETIGT] Lazav's `Defined$ TriggeredCardLKICopy` path is resolved by `AbilityUtils.getDefinedCards` through
+the triggering `Card` key. The `CardLKI` key is present in the trigger map but is not consumed as the clone source
+by this script. This is a profile-specific decision-relevance result, not a universal `ChangesZone` rule.
+
+### 28.4 Public projection and information monotonicity
+
+[BESTAETIGT] The C1 CSV projection contains only typed, safe fields: profile, trigger mode/parameters, effect
+API, rule-defined context token, player seats, visibility markers, zone types, public card names when
+`CardView.canBeShownTo` permits them, target ordering, result booleans, clone-state count deltas, and neutral
+audit markers. `public_context_key` is built only from public name/zone/seat/type facts and excludes LKI values,
+runtime IDs, timestamps, `Trigger.getId()`, Java identity, process IDs, wall-clock values, and RNG values.
+
+`Card` and `CardLKI` remain distinct typed fields. Hidden-at-decision and previously-hidden states are explicit;
+hidden card names and target names are represented by a marker. The canonical five-row set observed public
+source/current-card context for this workload and did not manufacture a hidden-hand or hidden-library case.
+That absence is a coverage limitation, not permission to generalize the projection to hidden-information policy.
+
+### 28.5 Blood Operative target ordering
+
+[BESTAETIGT] `PlayerControllerAi.confirmTrigger` temporarily clears the stored target choices, lets the existing
+`ChangeZoneAi` evaluator consider Blood's graveyard target, and restores the original target choices before the
+native callback returns. C1 records this as `AI_TARGET_EVALUATION` before `CONFIRM_TRIGGER_RESULT`; an accepted
+trigger then enters and exits `ChangeZoneEffect` with its effect-time target ordering separately recorded.
+
+Both Blood occurrences were accepted in the canonical run and both entered/exited `ChangeZoneEffect`. No second
+generic confirmation was inserted into this path. The diagnostic output therefore distinguishes AI
+preselection-before-confirmation from downstream effect target use without changing either list.
+
+### 28.6 Lazav duplicate semantic choice
+
+[BESTAETIGT] Lazav's accepted trigger enters `CloneEffect`, which then invokes its caller-owned optional
+`confirmAction` for the optional copy. C1 records the enter/result pair and the subsequent clone-state change.
+All three Lazav triggers were accepted; all three entered `CloneEffect` and invoked the second optional choice.
+Two copy choices were accepted and changed clone state; one copy choice was declined and changed no clone state.
+
+This is evidence of two distinct semantic gates for one Magic "may": trigger acceptance followed by optional
+copy application. The Human controller path exposes the same two prompts (wrapper `confirmTrigger`, then the
+`CloneEffect` optional `confirmAction`). C1 therefore rejects a generic boolean collapse and keeps the two caller
+owned semantics separate.
+
+### 28.7 Deterministic lifecycle and history audit
+
+[BESTAETIGT] The five trigger occurrences received deterministic trace-local tokens `1` through `5`; tokens are
+allocated in observed game order and do not use Java identity, process IDs, wall-clock time, RNG, or
+`Trigger.getId()`. The fresh-JVM audit produced 35 lifecycle rows with the following exact event shapes:
+
+```text
+Blood 1: TRIGGER_ENTER > AI_TARGET_EVALUATION > CONFIRM_TRIGGER_RESULT
+          > CHANGE_ZONE_EFFECT_ENTER > CHANGE_ZONE_EFFECT_EXIT > TRIGGER_EXIT
+Lazav 2: TRIGGER_ENTER > CONFIRM_TRIGGER_RESULT > CLONE_EFFECT_ENTER
+          > CLONE_CONFIRM_ACTION_ENTER > CLONE_CONFIRM_ACTION_RESULT
+          > CLONE_STATE_CHANGED > CLONE_EFFECT_EXIT > TRIGGER_EXIT
+Blood 3: same shape as Blood 1
+Lazav 4: TRIGGER_ENTER > CONFIRM_TRIGGER_RESULT > CLONE_EFFECT_ENTER
+          > CLONE_CONFIRM_ACTION_ENTER > CLONE_CONFIRM_ACTION_RESULT
+          > CLONE_EFFECT_EXIT > TRIGGER_EXIT
+Lazav 5: same shape as Lazav 2
+```
+
+The recorder is a diagnostic history projection only. No engine history event or continuation object was added;
+the remaining architecture question is whether a future public event contract should carry this lifecycle and
+which events are policy-relevant. C1 closes the observation gap for these five profiles but does not approve a
+production history schema.
+
+### 28.8 Timing, continuation, state, and RNG neutrality
+
+[BESTAETIGT] Every emitted C1 row reported `ActionContinuation=false`, `state_neutral=true`, and
+`rng_delta=0`. The audit-on and audit-off canonical reactive runs produced identical determinism trace trees.
+Projection reads are performed around the existing engine calls; they do not enter the AI decision path, consume
+RNG, mutate targets, or alter clone/zone effects.
+
+### 28.9 C1 verification evidence
+
+The focused fresh-JVM test ran the exact `Izzet Guild Kit` versus `Dimir Guild Kit` workload for 10 games with
+seed `20260810`, and passed with `1` test, `0` failures, `0` errors, and `0` skips. It verified the two/three
+profile counts, source/rule shapes, Card/CardLKI typed projection, no raw-object or localized-prompt leakage,
+the five per-token lifecycle orderings, neutrality markers, and audit-on versus audit-off determinism.
+
+The inherited `FRL02KRemainingConfirmationAuditTest` remains the regression lock for B1 and the prior C callback
+inventory: reactive `confirmTrigger=26`, B1 admitted `17`, unsupported-profile `5`, unsupported-cost `1`,
+unsupported-provenance `3`, with `confirmAction=8`, `chooseBinary=2`, and `payCostToPreventEffect=5`.
+
+The broad `mvn -pl forge-gui-desktop -am test` reactor passed `643` tests with `637` passed, `0` failures,
+`0` errors, and `6` existing stress/network skips. The full run completed with `BUILD SUCCESS`; its warnings were
+existing card-data, network-filter, and media-environment diagnostics, not C1 failures. The normal
+`mvn -pl forge-gui-desktop -am package` run repeated the same `643/637/0/0/6` result, created the Forge jar,
+executable, and bundled jar-with-dependencies, and completed with `BUILD SUCCESS`. The final
+`mvn -pl forge-gui-desktop -am validate` run completed with `BUILD SUCCESS`; all six modules again reported zero
+Checkstyle violations. After the final non-semantic projection cleanup, a final `-DskipTests package` and
+`validate` also completed with `BUILD SUCCESS` on the exact handoff tree.
+
+### 28.10 C1 disposition and blockers
+
+[WIDERLEGT] Raw `CardLKI` presence is not sufficient evidence that a generic confirmation context must expose
+LKI identity. For these two profiles, the decision-relevant current `Card` and the rule-defined
+`TriggeredCardLKICopy` path are observable without raw LKI export.
+
+[UNKLAERT] The result is not a universal proof for hidden-origin `ChangesZone` events, copied/granted triggers,
+or other `ChangesZone` modes and effects. Hidden-information coverage, broader public replacement semantics, and
+stable production history ownership remain separate audits.
+
+[BLOCKER] Global `CONFIRMATION` remains OPEN. C1 is an audit PASS for the five named runtime occurrences, not a
+production implementation approval and not a zero-unsupported result.
+
+**FRL-02K-C1 audit verdict: `FRL_02K_C1_PASS`.**

@@ -7,6 +7,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
+import forge.game.decision.ChangesZoneAuditDiagnostics;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -50,29 +51,31 @@ public class CloneEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
-            return;
-        }
-
-        final Card host = sa.getHostCard();
-        final Player activator = sa.getActivatingPlayer();
-        List<Card> cloneTargets = new ArrayList<>();
-        final Game game = activator.getGame();
-        final List<String> pumpKeywords = Lists.newArrayList();
-
-        if (sa.hasParam("PumpKeywords")) {
-            pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
-        }
-
-        // find cloning source i.e. thing to be copied
-        Card cardToCopy = null;
-
-        if (sa.hasParam("Choices")) {
-            ZoneType choiceZone = ZoneType.Battlefield;
-            if (sa.hasParam("ChoiceZone")) {
-                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+        ChangesZoneAuditDiagnostics.recordCloneEffect(sa, true);
+        try {
+            if (!checkValidDuration(sa.getParam("Duration"), sa)) {
+                return;
             }
-            CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
+
+            final Card host = sa.getHostCard();
+            final Player activator = sa.getActivatingPlayer();
+            List<Card> cloneTargets = new ArrayList<>();
+            final Game game = activator.getGame();
+            final List<String> pumpKeywords = Lists.newArrayList();
+
+            if (sa.hasParam("PumpKeywords")) {
+                pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
+            }
+
+            // find cloning source i.e. thing to be copied
+            Card cardToCopy = null;
+
+            if (sa.hasParam("Choices")) {
+                ZoneType choiceZone = ZoneType.Battlefield;
+                if (sa.hasParam("ChoiceZone")) {
+                    choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+                }
+                CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
 
             // choices need to be filtered by LastState Battlefield or Graveyard
             // if a Clone enters the field as other cards it could clone,
@@ -91,26 +94,32 @@ public class CloneEffect extends SpellAbilityEffect {
 
             String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
                     Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-            cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, choiceOpt, null);
-        } else if (sa.hasParam("Defined")) {
-            List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
-            if (!cloneSources.isEmpty()) {
-                cardToCopy = cloneSources.get(0);
+                cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, choiceOpt, null);
+            } else if (sa.hasParam("Defined")) {
+                List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
+                if (!cloneSources.isEmpty()) {
+                    cardToCopy = cloneSources.get(0);
+                }
+            } else if (sa.usesTargeting()) {
+                cardToCopy = sa.getTargetCard();
+            } else if (sa.hasParam("CopyFromChosenName")) {
+                String name = host.getNamedCard();
+                cardToCopy = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), activator);
             }
-        } else if (sa.usesTargeting()) {
-            cardToCopy = sa.getTargetCard();
-        } else if (sa.hasParam("CopyFromChosenName")) {
-            String name = host.getNamedCard();
-            cardToCopy = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), activator);
-        }
-        if (cardToCopy == null) {
-            return;
-        }
+            if (cardToCopy == null) {
+                return;
+            }
 
-        final boolean optional = sa.hasParam("Optional");
-        if (optional && !host.getController().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantCopy", cardToCopy.getTranslatedName()), null)) {
-            return;
-        }
+            final boolean optional = sa.hasParam("Optional");
+            if (optional) {
+                ChangesZoneAuditDiagnostics.recordCloneConfirmAction(sa, cardToCopy, true, false);
+                final boolean accepted = host.getController().getController().confirmAction(sa, null,
+                        Localizer.getInstance().getMessage("lblDoYouWantCopy", cardToCopy.getTranslatedName()), null);
+                ChangesZoneAuditDiagnostics.recordCloneConfirmAction(sa, cardToCopy, false, accepted);
+                if (!accepted) {
+                    return;
+                }
+            }
 
         // find target of cloning i.e. card becoming a clone
         if (sa.hasParam("CloneTarget")) {
@@ -142,7 +151,10 @@ public class CloneEffect extends SpellAbilityEffect {
 
             game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
 
+            final int cloneStatesBefore = tgtCard.getCloneStates().size();
             tgtCard.addCloneState(CardFactory.getCloneStates(cardToCopy, tgtCard, sa), ts);
+            ChangesZoneAuditDiagnostics.recordCloneStateChanged(sa, tgtCard, cloneStatesBefore,
+                    tgtCard.getCloneStates().size());
             tgtCard.updateRooms();
 
             // set ETB tapped of clone
@@ -201,7 +213,10 @@ public class CloneEffect extends SpellAbilityEffect {
             // spire
             tgtCard.setMarkedColors(cardToCopy.getMarkedColors());
 
-            game.fireEvent(new GameEventCardStatsChanged(tgtCard));
+                game.fireEvent(new GameEventCardStatsChanged(tgtCard));
+            }
+        } finally {
+            ChangesZoneAuditDiagnostics.recordCloneEffect(sa, false);
         }
     }
 }

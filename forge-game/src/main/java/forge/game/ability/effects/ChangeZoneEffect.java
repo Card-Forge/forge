@@ -11,6 +11,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
+import forge.game.decision.ChangesZoneAuditDiagnostics;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.keyword.Keyword;
@@ -442,16 +443,21 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
-            return;
-        }
+        ChangesZoneAuditDiagnostics.recordChangeZoneEffect(sa, true);
+        try {
+            if (!checkValidDuration(sa.getParam("Duration"), sa)) {
+                return;
+            }
 
-        if (sa.isHidden() && !sa.isNinjutsu()) {
-            changeHiddenOriginResolve(sa);
-        } else {
-            //else if (isKnown(origin) || sa.containsKey("Ninjutsu")) {
-            // Why is this an elseif and not just an else?
-            changeKnownOriginResolve(sa);
+            if (sa.isHidden() && !sa.isNinjutsu()) {
+                changeHiddenOriginResolve(sa);
+            } else {
+                //else if (isKnown(origin) || sa.containsKey("Ninjutsu")) {
+                // Why is this an elseif and not just an else?
+                changeKnownOriginResolve(sa);
+            }
+        } finally {
+            ChangesZoneAuditDiagnostics.recordChangeZoneEffect(sa, false);
         }
     }
 

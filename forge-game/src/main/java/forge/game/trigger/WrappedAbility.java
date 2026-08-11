@@ -20,6 +20,7 @@ import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.decision.ConfirmationDiagnostics;
 import forge.game.decision.ConfirmationDecisionProvider;
+import forge.game.decision.ChangesZoneAuditDiagnostics;
 import forge.game.decision.DecisionRequest;
 import forge.game.decision.DeterminismTrace;
 import forge.game.decision.LegalCandidate;
@@ -434,44 +435,51 @@ public class WrappedAbility extends Ability {
             }
         }
 
-        if (decider != null) {
-            if (!decider.isInGame()) {
-                decider = SpellAbilityEffect.getNewChooser(sa, decider);
-            }
-            final Player resolvedDecider = decider;
-            final ConfirmationDecisionProvider provider =
-                    resolvedDecider.getController().getConfirmationDecisionProvider();
-            final ConfirmationDecisionProvider.Generation generation = provider.generate(this, resolvedDecider);
-            final ConfirmationDiagnostics.Capture confirmationCapture =
-                    ConfirmationDiagnostics.capture(game, resolvedDecider, generation, this);
-            if (generation.getStatus() == ConfirmationDecisionProvider.Status.ADMITTED) {
-                final DecisionRequest request = generation.getRequest();
-                final DeterminismTrace.RequestHandle traceHandle = DeterminismTrace.recordRequest(
-                        game, resolvedDecider.getId(), request, "GELECTRODE_CONFIRMATION", 0);
-                final LegalCandidate selected = provider.choose(request,
-                        () -> resolvedDecider.getController().confirmTrigger(this));
-                final boolean accepted = provider.apply(request, selected, this);
-                final boolean nativeTeacher = !provider.hasResolver();
-                confirmationCapture.recordResult(selected, nativeTeacher);
-                if (nativeTeacher) {
-                    traceHandle.recordNativeMappedResult(selected);
+        final ChangesZoneAuditDiagnostics.Scope auditScope = ChangesZoneAuditDiagnostics.begin(this);
+        try {
+            if (decider != null) {
+                if (!decider.isInGame()) {
+                    decider = SpellAbilityEffect.getNewChooser(sa, decider);
+                }
+                final Player resolvedDecider = decider;
+                final ConfirmationDecisionProvider provider =
+                        resolvedDecider.getController().getConfirmationDecisionProvider();
+                final ConfirmationDecisionProvider.Generation generation = provider.generate(this, resolvedDecider);
+                final ConfirmationDiagnostics.Capture confirmationCapture =
+                        ConfirmationDiagnostics.capture(game, resolvedDecider, generation, this);
+                if (generation.getStatus() == ConfirmationDecisionProvider.Status.ADMITTED) {
+                    final DecisionRequest request = generation.getRequest();
+                    final DeterminismTrace.RequestHandle traceHandle = DeterminismTrace.recordRequest(
+                            game, resolvedDecider.getId(), request, "GELECTRODE_CONFIRMATION", 0);
+                    final LegalCandidate selected = provider.choose(request,
+                            () -> resolvedDecider.getController().confirmTrigger(this));
+                    final boolean accepted = provider.apply(request, selected, this);
+                    final boolean nativeTeacher = !provider.hasResolver();
+                    confirmationCapture.recordResult(selected, nativeTeacher);
+                    if (nativeTeacher) {
+                        traceHandle.recordNativeMappedResult(selected);
+                    } else {
+                        traceHandle.recordExternalChosenResult(selected);
+                    }
+                    ChangesZoneAuditDiagnostics.recordTriggerResult(auditScope, accepted);
+                    if (!accepted) {
+                        return;
+                    }
                 } else {
-                    traceHandle.recordExternalChosenResult(selected);
-                }
-                if (!accepted) {
-                    return;
-                }
-            } else {
-                if (provider.hasResolver()) {
-                    throw new UnsupportedConfirmationDecisionException(generation.getStatus(), generation.getReason());
-                }
-                if (!resolvedDecider.getController().confirmTrigger(this)) {
-                    return;
+                    if (provider.hasResolver()) {
+                        throw new UnsupportedConfirmationDecisionException(generation.getStatus(), generation.getReason());
+                    }
+                    final boolean accepted = resolvedDecider.getController().confirmTrigger(this);
+                    ChangesZoneAuditDiagnostics.recordTriggerResult(auditScope, accepted);
+                    if (!accepted) {
+                        return;
+                    }
                 }
             }
+            getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
+        } finally {
+            ChangesZoneAuditDiagnostics.end(auditScope);
         }
-
-        getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
     }
 
     @Override
