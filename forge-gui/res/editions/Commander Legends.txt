@@ -7,6 +7,8 @@ Booster=13 Common:fromSheet("CMR cards"), 3 fromSheet("CMR Non-Legendary Uncommo
 Foil=NotSupported
 DoublePick=Always
 DraftType=Commander
+DraftFreeCommander=The Prismatic Piper
+MaxMatchPlayers=4
 ScryfallCode=CMR
 
 [cards]

@@ -63,8 +63,8 @@ public class BoosterDraft implements IBoosterDraft {
 
     /** Whether this draft uses Commander-format deck-building rules. */
     protected boolean isCommanderDraft = false;
-    /** Name of the free commander card provided by the edition, or {@code null}. */
     protected String freeCommanderName = null;
+    protected String impliedPartner = null;
 
     private IDraftLog draftLog = null;
 
@@ -200,7 +200,7 @@ public class BoosterDraft implements IBoosterDraft {
                         }
                         doublePickDuringDraft = edition.getDraftOptions().isDoublePick(this.getPodSize());
                         if (edition.getDraftType() == CardEdition.DraftType.Commander) {
-                            activateCommanderDraft(edition.getDraftOptions().getFreeCommander());
+                            activateCommanderDraft(edition.getDraftOptions().getFreeCommander(), edition.getDraftOptions().getImpliedPartner());
                         }
                     }
 
@@ -331,7 +331,7 @@ public class BoosterDraft implements IBoosterDraft {
             }
             draft.doublePickDuringDraft = edition.getDraftOptions().isDoublePick(draft.getPodSize());
             if (edition.getDraftType() == CardEdition.DraftType.Commander) {
-                draft.activateCommanderDraft(edition.getDraftOptions().getFreeCommander());
+                draft.activateCommanderDraft(edition.getDraftOptions().getFreeCommander(), edition.getDraftOptions().getImpliedPartner());
             }
         }
 
@@ -377,7 +377,7 @@ public class BoosterDraft implements IBoosterDraft {
      */
     protected LimitedPlayer createAIPlayer(final int seatingOrder) {
         if (isCommanderDraft) {
-            return new CommanderLimitedPlayerAI(seatingOrder, this, freeCommanderName);
+            return new CommanderLimitedPlayerAI(seatingOrder, this, freeCommanderName, impliedPartner);
         }
         return new LimitedPlayerAI(seatingOrder, this);
     }
@@ -387,11 +387,13 @@ public class BoosterDraft implements IBoosterDraft {
      * with {@link CommanderLimitedPlayerAI} instances.  Must be called before
      * {@link #initializeBoosters()}.
      *
-     * @param freeCmdName name of the edition's free commander, or {@code null}
+     * @param freeCmdName    name of the edition's free commander, or {@code null}
+     * @param impliedPartner
      */
-    protected void activateCommanderDraft(final String freeCmdName) {
+    protected void activateCommanderDraft(final String freeCmdName, String impliedPartner) {
         this.isCommanderDraft = true;
         this.freeCommanderName = (freeCmdName != null && !freeCmdName.isEmpty()) ? freeCmdName : null;
+        this.impliedPartner = impliedPartner;
         for (int i = 1; i < this.players.size(); i++) {
             this.players.set(i, createAIPlayer(i));
         }

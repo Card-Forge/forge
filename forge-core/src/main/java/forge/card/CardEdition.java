@@ -867,16 +867,17 @@ public final class CardEdition implements Comparable<CardEdition> {
             int maxPodSize = metadata.getInt("MaxPodSize", 8);
             int recommendedPodSize = metadata.getInt("RecommendedPodSize", 8);
             int maxMatchPlayers = metadata.getInt("MaxMatchPlayers", 2);
-            String deckType = metadata.get("DeckType", "Normal");
-            String freeCommander = metadata.get("FreeCommander", "");
+            String freeCommander = metadata.get("DraftFreeCommander", "");
+            String impliedPartner = metadata.get("DraftImpliedPartnership", "");
 
             res.draftOptions = new DraftOptions(
                     doublePick,
                     maxPodSize,
                     recommendedPodSize,
                     maxMatchPlayers,
-                    deckType,
-                    freeCommander
+                    res.draftType,
+                    freeCommander,
+                    impliedPartner
             );
 
             return res;
