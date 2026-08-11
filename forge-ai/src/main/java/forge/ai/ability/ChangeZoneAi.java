@@ -16,6 +16,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
+import forge.game.decision.TriggeredTargetAuditDiagnostics;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -1205,6 +1206,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
             list.remove(choice);
             if (sa.canTarget(choice)) {
                 sa.getTargets().add(choice);
+                TriggeredTargetAuditDiagnostics.recordTargetStored(sa,
+                        "ChangeZoneAi.isPreferredTarget->TargetChoices.add");
             }
         }
 

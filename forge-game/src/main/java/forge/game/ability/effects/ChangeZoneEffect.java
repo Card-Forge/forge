@@ -12,6 +12,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.decision.ChangesZoneAuditDiagnostics;
+import forge.game.decision.TriggeredTargetAuditDiagnostics;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.keyword.Keyword;
@@ -444,6 +445,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         ChangesZoneAuditDiagnostics.recordChangeZoneEffect(sa, true);
+        TriggeredTargetAuditDiagnostics.recordEffect(sa, true);
         try {
             if (!checkValidDuration(sa.getParam("Duration"), sa)) {
                 return;
@@ -458,6 +460,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         } finally {
             ChangesZoneAuditDiagnostics.recordChangeZoneEffect(sa, false);
+            TriggeredTargetAuditDiagnostics.recordEffect(sa, false);
         }
     }
 

@@ -2225,3 +2225,404 @@ stable production history ownership remain separate audits.
 production implementation approval and not a zero-unsupported result.
 
 **FRL-02K-C1 audit verdict: `FRL_02K_C1_PASS` (evidence retained; C1R interpretation corrected).**
+
+## 29. FRL-02K-C2 - Triggered TARGET Ownership and Stack-Time Decision Seam Audit
+
+### 29.1 Gate, checkpoint, and scope
+
+[BESTAETIGT] The C2 gate was evaluated after `git fetch origin` in the protected primary checkout. PR #16,
+`FRL-02K-C1: audit ChangesZone trigger public context`, is merged. The reviewed final head is
+`d64a009958cda0b4a12f20d23097c8f066550bde`, the merge commit is
+`f7120316e6d88953ff5f3f257f847429533b6abd`, and `origin/master` is
+`4813d58039f3e10858d16dd74e7c5ef7d427e624`. `git merge-base --is-ancestor
+f7120316e6d88953ff5f3f257f847429533b6abd origin/master` passed.
+
+The protected `C:\forgeAI` checkout was not modified. C2 used the isolated worktree
+`C:\forgeAI-triggered-target-c2` on `frl/02k-c2-triggered-target-ownership`, initially at
+`HEAD == origin/master == 4813d58039f3e10858d16dd74e7c5ef7d427e624` with a clean tree. The scope is audit-only:
+the new recorder is enabled only by `forge.triggeredTarget.auditFile`, and the added call sites observe existing
+objects and return without selecting, applying, or reordering a target.
+
+No `DecisionType` was added. No Blood script, Lazav script, `TargetDecisionProvider` production behavior,
+`CONFIRMATION` profile, `PAYMENT`, `ORDER`, or `DAMAGE_ASSIGNMENT` behavior was changed. `ML_STRATEGY.md` was
+not changed because C2 identifies a future seam but does not approve a durable production architecture.
+
+### 29.2 Blood target shape and normalized Forge state
+
+[BESTAETIGT] `forge-gui/res/cardsfolder/b/blood_operative.txt` defines the relevant trigger as:
+
+```text
+Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self
+| Execute$ TrigChangeZone | OptionalDecider$ You
+```
+
+Its `TrigChangeZone` SVar is a `ChangeZone` effect with `Origin$ Graveyard`, `Destination$ Exile`,
+`ValidTgts$ Card`, and a card target prompt. `AbilityFactory.adjustChangeZoneTarget` at
+`forge-game/src/main/java/forge/game/ability/AbilityFactory.java:370-380` normalizes a non-player ChangeZone
+target's zone from `Origin`; the C2 provider fixture therefore verifies the normalized `TgtZone$ Graveyard`
+shape. The second Blood surveil ability uses `Defined$ Self` and is not part of this target audit.
+
+### 29.3 Exact runtime call graph
+
+[BESTAETIGT] The current AI path for the canonical Blood trigger is:
+
+```text
+TriggerHandler.runSingleTriggerInternal:457
+  -> new WrappedAbility(regtrig, sa, decider):518
+  -> MagicStack.addSimultaneousStackEntry:818
+  -> MagicStack.chooseOrderOfSimultaneousStackEntry:844+
+  -> PlayerControllerAi.orderAndPlaySimultaneousSa:1362+
+  -> PlayerControllerAi.prepareSingleSa:1393+
+  -> AiController.brains.doTrigger
+  -> SpellAbilityAi.doTriggerNoCostWithSubs:189
+  -> ChangeZoneAi.doTriggerNoCost:212
+  -> ChangeZoneAi.knownOriginTriggerAI:1420
+  -> ChangeZoneAi.isPreferredTarget:839
+  -> sa.getTargets().add(choice):1209
+  -> ComputerUtil.playStack
+  -> MagicStack.add:251
+  -> MagicStack.push:524
+  -> MagicStack.resolveStack:564
+  -> WrappedAbility.resolve:409
+  -> PlayerControllerAi.confirmTrigger:438
+  -> PlayerControllerAi.playSpellAbilityNoStack
+  -> ChangeZoneEffect.resolve:446
+```
+
+[BESTAETIGT] The Human path is materially different at target policy but shares the normal stack-time
+preparation boundary:
+
+```text
+MagicStack.chooseOrderOfSimultaneousStackEntry
+  -> PlayerControllerHuman.orderAndPlaySimultaneousSa:2389
+  -> PlaySpellAbility.playSpellAbility
+  -> PlaySpellAbility.playAbility:677
+  -> SpellAbility.setupTargets:2159
+  -> PlayerControllerHuman.chooseTargetsFor:2426
+  -> TargetSelection.chooseTargets:73
+  -> TargetChoices.add
+  -> PlaySpellAbility.playAbility:729
+  -> MagicStack.addAndUnfreeze
+```
+
+The source map proves the Human and AI selection surfaces are not the same method. A headless Human GUI
+interaction was not manufactured for this audit; the Human source path is confirmed, while its interactive
+runtime replay remains a coverage limitation.
+
+### 29.4 T0-T8 timing
+
+| Checkpoint | Confirmed current lifecycle |
+|---|---|
+| T0 | `ChangesZone` trigger condition is raised with the current `Card` and trigger parameters. |
+| T1 | `TriggerHandler.runSingleTriggerInternal` builds the underlying `SpellAbility`, assigns trigger data, wraps it in `WrappedAbility`, and queues the wrapper. |
+| T2 | The `TrigChangeZone` ability already has its target restriction and one-card minimum/max before target preparation; ChangeZone origin normalization supplies Graveyard legality. |
+| T3 | Target preparation starts in AI `prepareSingleSa -> brains.doTrigger`; Human starts in `SpellAbility.setupTargets -> chooseTargetsFor`. `ActionContinuation` is not active. |
+| T4 | AI target A is first stored by `ChangeZoneAi.isPreferredTarget` after `sa.canTarget(choice)` and `TargetChoices.add`. Human stores the selected card in `TargetSelection` during `setupTargets`. |
+| T5 | `ComputerUtil.playStack` calls `MagicStack.add`; Forge checks `hasLegalTargeting` and then `push`es the already-targeted ability. The C2 recorder emits before/after push. |
+| T6 | `MagicStack.resolveStack` begins resolution and rechecks target legality through `hasFizzled`; this can remove an illegal target but does not make a new strategic choice. |
+| T7 | `WrappedAbility.resolve` invokes the later optional `confirmTrigger`; Blood's native AI callback temporarily evaluates another target and restores A. |
+| T8 | Accepted Blood resolution enters `ChangeZoneEffect.resolve`; `getDefinedCardsOrTargeted` consumes the stored target. C2 records C at effect entry. |
+
+[WIDERLEGT] Target selection does not occur in `TriggerHandler` construction, in `MagicStack.add`, or at
+resolution. Those stages construct, validate, lock, and consume the existing target choices respectively.
+
+### 29.4.1 Native 0-target engine disposition
+
+[BESTAETIGT] A focused native fixture closes the engine-side 0-target question; this is separate from the
+provider's `INVALID_TARGETING` status. With a real `Blood Operative` on the battlefield and an empty Graveyard,
+the underlying native triggered `SpellAbility` has a mandatory one-card target but zero legal candidates. The
+native path is:
+
+```text
+SpellAbilityAi.doTrigger(sa, mandatory=true)
+  -> TargetRestrictions.getNumCandidates(sa) == 0
+  -> return sa.isTargetNumberValid() == false   (minimum target count = 1)
+  -> PlayerControllerAi.prepareSingleSa(...) == false
+  -> PlayerControllerAi.playTrigger(...) does not call ComputerUtil.playNoStack(...)
+```
+
+For a queued non-static trigger, `PlayerControllerAi.orderAndPlaySimultaneousSa` has the same guard:
+`ComputerUtil.playStack(...)` is called only when `prepareSingleSa(...)` returns `true`. The native fixture
+asserts `playTrigger(...) == false`, unchanged stack size, and no stored target. Therefore:
+
+```text
+0 legal required targets
+  -> TARGET preparation fails
+  -> trigger is not pushed onto the stack
+  -> engine legality outcome, not unsupported-policy failure
+```
+
+This is the disposition that a future C2A external path must mirror when the provider returns
+`INVALID_TARGETING`.
+
+### 29.5 Exact origin and owner of target A
+
+[BESTAETIGT] For the canonical AI workload, target A is first created at
+`forge-ai/src/main/java/forge/ai/ability/ChangeZoneAi.java:1209`:
+
+```text
+list.remove(choice);
+if (sa.canTarget(choice)) {
+    sa.getTargets().add(choice);
+}
+```
+
+The C2 recorder is placed immediately after that existing `TargetChoices.add` and does not participate in the
+choice. The caller chain is `PlayerControllerAi.prepareSingleSa -> brains.doTrigger -> ChangeZoneAi` and the
+target policy is `ComputerUtilCard.getBestAI(list)` at the selection branch. The legal domain was prepared by
+`CardLists.getTargetableCards`, then filtered by `sa.canTarget` and ChangeZone-specific AI filters.
+
+Therefore the current owner is an AI-specific target-preparation path, not a generic `TARGET` provider seam.
+The exact game target A is authoritative for later resolution, but its strategic ownership is currently
+`BLOOD_TARGET_OWNER_IDENTIFIED_BUT_AI_ENTANGLED`.
+
+### 29.6 Legality versus strategic policy
+
+[BESTAETIGT] Forge remains the legality authority. The relevant boundaries are:
+
+```text
+TargetRestrictions.getAllCandidates / target zone
+CardUtil.getValidCardsToTarget
+StaticAbilityMustTarget.filterMustTargetCards
+SpellAbility.canTarget
+min/max target count and TargetChoices
+```
+
+The current strategic selectors are separate: Human uses `TargetSelection`/controller input; AI uses
+`ChangeZoneAi.isPreferredTarget` and `ComputerUtilCard.getBestAI`. The audit recorder never calls either selector.
+The future contract must keep Forge candidate enumeration and legality in Forge while moving only strategic choice
+to an external policy.
+
+### 29.7 Existing TargetDecisionProvider compatibility
+
+[BESTAETIGT] The existing provider can represent Blood's normalized underlying `SpellAbility` without a new
+`DecisionType` or a trigger-specific candidate kind. `TargetDecisionProvider.generateTargetRequest` accepts a
+targeting ability, uses Forge's candidate and MustTarget APIs, applies candidates through the normal
+`TargetChoices.add`, and supports `continuation == null` explicitly. `TargetCandidateKind.TARGET_CARD` and the
+existing request-local candidate-correlation key convention are sufficient for Graveyard cards.
+
+The C2 provider test verified 0/1/many candidates, exact `CardUtil` candidate completeness, forced-one behavior,
+null continuation context, state/RNG neutrality, and a face-down candidate with an empty visible name.
+
+There is one small integration caveat: passing `WrappedAbility` directly to the provider would inherit the
+wrapper's zero cost/root semantics because `WrappedAbility` delegates targeting but does not override every
+cost/root accessor. The safe future call is on `wrapper.getWrappedAbility()` while applying to that same live
+`TargetChoices`, with an explicit chooser (the Blood decider/activating player for this slice). This is an
+orchestration/context extension, not a legality rewrite.
+
+**Target provider verdict: `TARGET_PROVIDER_COMPATIBLE_WITH_SMALL_EXTENSION`.** The extension is the
+trigger-stack-time orchestration and explicit underlying-ability/chooser context; the provider's legal target
+model is reusable as-is for Blood.
+
+### 29.8 ActionContinuation and occurrence correlation
+
+[BESTAETIGT] C2 records `action_continuation=false` at target preparation, A storage, stack, confirmation, and
+effect rows. A triggered ability's target is not a subdecision of the priority action that caused the trigger, so
+`null` continuation is correct and no continuation was invented.
+
+The C2 token is a diagnostic-only, deterministic, trace-local occurrence token allocated at wrapper construction
+and bound to the wrapper, underlying ability, and sub-abilities by identity inside the engine recorder. It is not
+exported as model semantics and is not `Trigger.getId`, Java identity, `hashCode`, PID, wall clock, or RNG.
+Existing `DECISION_TRACE_V2` request ordering is sufficient for a future target request; C2 does not require a
+trace-schema V3. A future public history contract may carry an engine-owned occurrence relation, but no such DTO
+was added here.
+
+### 29.9 Teacher mapping feasibility
+
+[STARKES INDIZ] A future teacher map is architecturally possible: run the provider's complete legal candidate
+enumeration before mutation, compute the same deterministic request-local candidate-correlation key, and map the
+native Forge AI card A to exactly one `TARGET_CARD` candidate. That key is audit/runtime entity correlation only;
+it is not a cross-run policy or training identity. The mapping can be done without a second AI call, target replay,
+RNG, or target mutation. The current native AI target is a policy trace, not evidence that an external policy
+already owns A; C2 adds no BC data or training implementation.
+
+### 29.10 External ownership seam
+
+[BESTAETIGT] The conceptual future path is:
+
+```text
+constructed triggered ability
+  -> provider.generateTargetRequest(underlying SA, explicit chooser, null)
+  -> external policy selects one legal candidate
+  -> provider.apply
+  -> TargetChoices contains A
+  -> existing stack insertion
+```
+
+The current AI path must bypass or split `prepareSingleSa -> brains.doTrigger` for the strategic target portion;
+otherwise the AI can preselect A or recompute B before the external policy. The legality calls remain in Forge.
+The seam classification is `AI_TARGET_SELECTION_ENTANGLED` and `TARGET_PREPARATION_REQUIRES_REFACTOR`.
+
+### 29.11 TARGET versus later CONFIRMATION
+
+[BESTAETIGT] Blood has two distinct decisions: `TARGET` chooses which public Graveyard card, and the later
+trigger-level `may` asks whether to perform the exile. A exists on the triggered ability even if the later may is
+declined; accepted resolution uses A, and declined resolution has no `ChangeZoneEffect` entry. The C2 design
+therefore does not collapse target selection into confirmation or duplicate a target choice in the confirmation
+provider.
+
+The current public `TargetDecisionContext` does not itself expose a stack-history relation. The selected card is
+visible in Forge's stack-time state and is recorded by the opt-in C2 audit, but no ObservationEncoder-/History-
+contract audit was performed and no production Observation/History event was added. C2 therefore establishes
+`TARGET_VISIBILITY_AT_CONFIRMATION_UNPROVEN`, not `TARGET_HISTORY_EVENT_REQUIRED`. C2A must first verify whether
+the resolving trigger and its public stored target are already available in the confirmation-time observation or
+stack projection. Only if that existing contract cannot express the relation is the disposition
+`OBSERVATION_OR_HISTORY_BRIDGE_REQUIRED`. A future confirmation context must not duplicate target identity when
+the selected target is already public through the existing contract.
+
+### 29.12 Human/AI parity and stack locking
+
+[BESTAETIGT] Both Human and AI complete target preparation before `MagicStack.add` pushes the triggered ability,
+but their policy owners differ. Human's common engine seam is `SpellAbility.setupTargets`; AI currently bypasses
+that controller path and mutates `TargetChoices` in `ChangeZoneAi`.
+
+`MagicStack.add` calls `hasLegalTargeting` before `push`; it does not choose. At resolution `hasFizzled` rechecks
+the stored card against current legality and removes invalid choices according to Forge's fizzle rules. This is
+legality revalidation, not a second strategic TARGET request. A future external path must select exactly once
+before stack insertion and preserve the existing fizzle behavior.
+
+### 29.13 0/1/many, completeness, and hidden information
+
+[BESTAETIGT] The focused provider fixture measured:
+
+| Legal Graveyard cards | Provider behavior |
+|---:|---|
+| 0 | `INVALID_TARGETING`; no impossible policy request is exposed. |
+| 1 | `DECISION`, one `TARGET_CARD`, `isForced=true`; application completes through normal `TargetChoices`. |
+| 2+ | `DECISION`, `isForced=false`; every Forge-legal card is offered in deterministic request-local candidate-correlation order. |
+
+For the multi-card fixture, provider candidate IDs equal the sorted IDs from `CardUtil.getValidCardsToTarget`.
+`TargetRestrictions`, `canTarget`, and MustTarget are retained as the legality sources. Public Graveyard cards
+are emitted as public typed projections. A face-down candidate may remain legal but its candidate name is empty;
+the C2 recorder emits `<HIDDEN>` and never raw `Card`, `CardLKI`, Java identity, localized prompt, or hidden name.
+This confirms the public-information boundary for this fixture, not a universal hidden-zone claim.
+
+The native engine disposition is independently confirmed by the focused fixture: zero mandatory legal targets
+fail target preparation and do not reach stack insertion. This must remain distinct from the provider's
+unsupported/environment status; `INVALID_TARGETING` is the provider-side representation of Forge's no-stack
+legality outcome for this mandatory targeted trigger.
+
+For C2A the three branches are therefore explicit:
+
+```text
+provider INVALID_TARGETING
+  -> mirror Forge's no-stack legality outcome
+provider forced single candidate
+  -> apply automatically; no policy call and no BC sample
+provider multiple candidates
+  -> issue the real DecisionType.TARGET request
+```
+
+### 29.14 C2 lifecycle and A/B/C evidence
+
+[BESTAETIGT] The opt-in CSV records the following per Blood occurrence:
+
+```text
+TRIGGER_CONSTRUCTED > TRIGGER_QUEUED > TARGET_STORED > TARGET_PREPARATION
+> STACK_BEFORE_PUSH > STACK_AFTER_PUSH > RESOLVE_ENTER
+> CONFIRM_TRIGGER_ENTER > TARGET_A_BEFORE_CONFIRM > TARGET_STORED
+> TARGET_B_EVALUATION > CONFIRM_TRIGGER_RESULT
+> EFFECT_ENTER > EFFECT_EXIT > RESOLVE_EXIT
+```
+
+The second `TARGET_STORED` is the existing AI helper's temporary B mutation after `confirmTrigger` cleared A;
+it is not a second game target. In the canonical ten-game workload, two Blood occurrences were correlated,
+both accepted, A equaled C twice, and A/B diverged once. `EFFECT_ENTER` is the C comparison point because
+`EFFECT_EXIT` observes the same card after its zone has changed to Exile. This preserves the C1R result and
+classifies B as evaluation-only.
+
+The diagnostic `target_order` value is a request-local/runtime entity correlation key of the form
+`TARGET_CARD|zone|cardId|gameTimestamp`. It is suitable for ordering and correlating rows within this audit;
+`(cardId, gameTimestamp)` is not a cross-run policy/training identity and is not a production semantic contract.
+
+### 29.15 Exactly-once and observation/history contract
+
+[BESTAETIGT] The current native lifecycle has one authoritative game target A, one later may decision, and one
+effect consumption C per accepted trigger. It also performs one temporary AI B evaluation during native
+confirmation. External ownership must keep the first three operations as exactly one target selection, one stored
+target, and zero target reselection during confirmation; B must not be treated as a second game decision.
+
+The minimum future public bridge is:
+
+```text
+CURRENT_OBSERVATION: source, decider, public legal candidates, selected public stack target
+STACK_PUBLIC_STATE: the triggered stack item and its stored TargetChoices projection
+PUBLIC_HISTORY_EVENT: conditional occurrence relation only if observation/stack projection cannot expose A
+DECISION_LOCAL_CONTEXT: target group/min/max and null continuation
+ENGINE_ONLY: raw Card/CardLKI references and the diagnostic scope map
+```
+
+No ObservationEncoder or production HistoryEvent was changed in C2. The history bridge remains conditional on
+the unperformed confirmation-time visibility audit; C2 does not require a new `HistoryEvent`.
+
+### 29.16 Required target ownership matrix
+
+| Stage | Engine object/state | Current setter/owner | Strategic decision? | Future owner | Agent-facing? |
+|---|---|---|---|---|---|
+| trigger construction | `SpellAbility` inside `WrappedAbility` | `TriggerHandler.runSingleTriggerInternal` | No | Forge | No |
+| legal enumeration | `TargetRestrictions`/candidate list | Forge APIs plus AI filters | Legality only | Forge legality oracle | Yes, via provider |
+| target A creation | underlying `TargetChoices` | `ChangeZoneAi.isPreferredTarget` / Human `TargetSelection` | Yes | external TARGET policy after seam split | Yes |
+| temporary B | reset/repopulated `TargetChoices` | `PlayerControllerAi.confirmTrigger -> brains.doTrigger` | AI evaluation only | none; must be skipped for external ownership | No |
+| stack insertion | `MagicStack`/`SpellAbilityStackInstance` | `MagicStack.add -> push` | No | Forge | Stack state yes |
+| confirmTrigger | wrapper confirmation callback | decider controller | Yes, may/decline | CONFIRMATION policy | Yes, separately |
+| effect target C | same underlying `TargetChoices` consumed by effect | `ChangeZoneEffect` | No | Forge effect resolution | Result/history only |
+
+### 29.17 TargetDecisionProvider compatibility matrix
+
+| Requirement | Current provider | Blood triggered target | Result |
+|---|---|---|---|
+| targeting ability supported | `usesTargeting`, `TargetRestrictions` | normalized one-card `ChangeZone` | PASS |
+| chooser known | explicit `Player` argument; context carries chooser ID | decider/activating player known, AI `targetingPlayer` field currently unset | SMALL CONTEXT EXTENSION |
+| complete legal candidates | `getAllCandidates` + `CardUtil` + `canTarget` | Graveyard cards complete in fixture | PASS |
+| visibility safe | `canBeShownTo`, blank face-down name | public Graveyard / hidden-name test | PASS |
+| min/max targets | provider and Forge target count | 1/1 | PASS |
+| MustTarget | existing static filter | retained | PASS |
+| nullable continuation | explicit null support | C2 T3/T4 false/null | PASS |
+| candidate application | normal `TargetChoices.add` | underlying SA only | PASS |
+| deterministic order | semantic key sort | stable card order | PASS |
+| teacher mapping | native A can match one candidate key | feasible, not implemented | FEASIBLE |
+| external ownership | no orchestration hook yet | AI preselection remains in path | BLOCKED BY SEAM |
+
+Final compatibility: `TARGET_PROVIDER_COMPATIBLE_WITH_SMALL_EXTENSION`.
+
+### 29.18 Regression, neutrality, and zero-unsupported impact
+
+[BESTAETIGT] The baseline reactor run before C2 changes was `643 run = 637 passed + 6` existing skips, with
+`0` failures and `0` errors. The focused C2/C1/B1 regression selection after C2R was `37 run = 37 passed`, with
+`0` failures, `0` errors, and `0` skips. The post-C2R full-reactor run was `647 run = 641 passed + 6` existing skips, with `0` failures and `0` errors.
+The focused C2 lifecycle test passed its fresh-JVM audit-on/audit-off ten-game workload; the provider audit passed
+its three tests, including the native 0-target fixture. C2's audit-on and audit-off determinism trace trees matched,
+every C2 row reported
+`state_neutral=true`, `rng_delta=0`, and `action_continuation=false`.
+
+The inherited B1/C/C1 locks remain authoritative: `confirmTrigger=26`, Gelectrode admitted `17`, other no-cost
+`5`, cost-bearing `1`, provenance-untrusted `3`; `confirmAction=8`, `chooseBinary=2`,
+`payCostToPreventEffect=5`; Blood `2`, Lazav `3`; C1R A==C twice and one reproducible A/B divergence. The
+provider audit adds no admission profile and does not change the zero-unsupported status of global
+`CONFIRMATION`; it is a target ownership audit, not a production provider rollout. Post-change
+`mvn -pl forge-gui-desktop -am -DskipTests package` and `validate` both passed; validate reported zero
+Checkstyle violations in all six reactor modules.
+
+### 29.19 Recommended next milestone and blockers
+
+[BLOCKER] The next safe milestone is `FRL-02K-C2A IMPLEMENT_TRIGGERED_TARGET_PROVIDER_SEAM`, with priority:
+
+1. Split triggered target preparation from `brains.doTrigger` for the external-owner path.
+2. Call the existing provider on the underlying triggered `SpellAbility` with explicit chooser and null
+   continuation, retaining Forge legality and TargetChoices application.
+3. Preserve Human `setupTargets`, native AI behavior, stack legality, fizzle rechecks, and B-free external
+   confirmation evaluation as separate regression paths.
+4. Only after that seam is reviewed, audit/implement a Blood confirmation slice.
+
+`REMOVE_AI_TARGET_OWNERSHIP_FROM_TRIGGER_PREPARATION` is the implementation substance of C2A, not an approved C2
+change. Blood production support remains blocked until that seam has architecture approval. No production
+correctness fix was required to complete C2.
+
+### 29.20 C2 verification verdict
+
+[BESTAETIGT] Target A origin, timing, current owner, B non-authority, C correlation, Human/AI parity,
+provider compatibility, native 0-target no-stack disposition, 0/1/many behavior, null continuation,
+hidden-information boundary, state/RNG neutrality, and the next milestone are all established for the requested
+Blood slice. Confirmation-time target visibility remains unproven; C2 does not establish a mandatory history event.
+
+**FRL-02K-C2 audit verdict: `FRL_02K_C2_PASS` (audit-only; Blood TARGET ownership remains blocked for production).**

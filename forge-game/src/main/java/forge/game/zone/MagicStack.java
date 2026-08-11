@@ -27,6 +27,7 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.PlayEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
+import forge.game.decision.TriggeredTargetAuditDiagnostics;
 import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
@@ -355,7 +356,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         // The ability is added to stack HERE
+        TriggeredTargetAuditDiagnostics.recordStackBeforePush(sp);
         push(sp, si, id);
+        TriggeredTargetAuditDiagnostics.recordStackAfterPush(sp);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -814,6 +817,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public final void addSimultaneousStackEntry(final SpellAbility sa) {
         simultaneousStackEntryList.add(sa);
+        TriggeredTargetAuditDiagnostics.recordQueued(sa);
     }
 
     public boolean addAllTriggeredAbilitiesToStack() {

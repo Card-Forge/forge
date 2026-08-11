@@ -24,6 +24,7 @@ import forge.game.decision.ChangesZoneAuditDiagnostics;
 import forge.game.decision.DownstreamCallbackFamily;
 import forge.game.decision.MulliganDiagnostics;
 import forge.game.decision.PriorityActionDiagnostics;
+import forge.game.decision.TriggeredTargetAuditDiagnostics;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -452,6 +453,7 @@ public class PlayerControllerAi extends PlayerController {
         if (storeChoices) {
             tc = sa.getTargets();
             ChangesZoneAuditDiagnostics.recordStoredTargetBeforeConfirm(wrapper, sa, tc);
+            TriggeredTargetAuditDiagnostics.recordStoredBeforeConfirm(wrapper, sa, tc);
             sa.resetTargets();
         }
         if (storeSubChoices) {
@@ -460,7 +462,9 @@ public class PlayerControllerAi extends PlayerController {
         }
         // There is no way this doTrigger here will have the same target as stored above
         // So it's possible it's making a different decision here than will actually happen
-        if (!brains.doTrigger(sa, false)) {
+        final boolean temporaryTargetResult = brains.doTrigger(sa, false);
+        TriggeredTargetAuditDiagnostics.recordTemporaryTargetEvaluation(wrapper, sa, temporaryTargetResult);
+        if (!temporaryTargetResult) {
             ret = false;
         }
         ChangesZoneAuditDiagnostics.recordAiTargetEvaluation(wrapper, sa, tc);
@@ -1399,9 +1403,15 @@ public class PlayerControllerAi extends PlayerController {
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
-            return targetingPlayer.getController().chooseTargetsFor(sa);
+            final boolean result = targetingPlayer.getController().chooseTargetsFor(sa);
+            TriggeredTargetAuditDiagnostics.recordTargetPreparation(sa,
+                    "PlayerControllerAi.prepareSingleSa->PlayerController.chooseTargetsFor", result);
+            return result;
         }
-        return brains.doTrigger(sa, isMandatory);
+        final boolean result = brains.doTrigger(sa, isMandatory);
+        TriggeredTargetAuditDiagnostics.recordTargetPreparation(sa,
+                "PlayerControllerAi.prepareSingleSa->AiController.brains.doTrigger", result);
+        return result;
     }
 
     @Override

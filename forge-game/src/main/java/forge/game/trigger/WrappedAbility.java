@@ -24,6 +24,7 @@ import forge.game.decision.ChangesZoneAuditDiagnostics;
 import forge.game.decision.DecisionRequest;
 import forge.game.decision.DeterminismTrace;
 import forge.game.decision.LegalCandidate;
+import forge.game.decision.TriggeredTargetAuditDiagnostics;
 import forge.game.decision.UnsupportedConfirmationDecisionException;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
@@ -406,79 +407,87 @@ public class WrappedAbility extends Ability {
     // //////////////////////////////////////
     @Override
     public void resolve() {
-        final Game game = getActivatingPlayer().getGame();
-        final Trigger regtrig = getTrigger();
-
-        if (!(TriggerType.Always.equals(regtrig.getMode())) && !regtrig.hasParam("NoResolvingCheck")) {
-            // Most State triggers don't have "Intervening If"
-            if (!regtrig.requirementsCheck(game)) {
-                return;
-            }
-            // Since basic requirements check only cares about whether it's "Activated"
-            // Also check on triggered object specific requirements on resolution (e.g. evolve)
-            if (!regtrig.meetsRequirementsOnTriggeredObjects(game, getTriggeringObjects())) {
-                return;
-            }
-        }
-
-        if (!regtrig.checkResolvedLimit(getActivatingPlayer())) {
-            return;
-        }
-
-        if (regtrig.hasParam("ResolvingCheck")) {
-            // rare cases: Hidden Predators (state trigger, but have "Intervening If" to check IsPresent2) etc.
-            Map<String, String> recheck = Maps.newHashMap();
-            String key = regtrig.getParam("ResolvingCheck");
-            recheck.put(key, regtrig.getParam(key));
-            if (!meetsCommonRequirements(recheck)) {
-                return;
-            }
-        }
-
-        final ChangesZoneAuditDiagnostics.Scope auditScope = ChangesZoneAuditDiagnostics.begin(this);
+        TriggeredTargetAuditDiagnostics.recordResolveEnter(this);
         try {
-            if (decider != null) {
-                if (!decider.isInGame()) {
-                    decider = SpellAbilityEffect.getNewChooser(sa, decider);
+            final Game game = getActivatingPlayer().getGame();
+            final Trigger regtrig = getTrigger();
+
+            if (!(TriggerType.Always.equals(regtrig.getMode())) && !regtrig.hasParam("NoResolvingCheck")) {
+                // Most State triggers don't have "Intervening If"
+                if (!regtrig.requirementsCheck(game)) {
+                    return;
                 }
-                final Player resolvedDecider = decider;
-                final ConfirmationDecisionProvider provider =
-                        resolvedDecider.getController().getConfirmationDecisionProvider();
-                final ConfirmationDecisionProvider.Generation generation = provider.generate(this, resolvedDecider);
-                final ConfirmationDiagnostics.Capture confirmationCapture =
-                        ConfirmationDiagnostics.capture(game, resolvedDecider, generation, this);
-                if (generation.getStatus() == ConfirmationDecisionProvider.Status.ADMITTED) {
-                    final DecisionRequest request = generation.getRequest();
-                    final DeterminismTrace.RequestHandle traceHandle = DeterminismTrace.recordRequest(
-                            game, resolvedDecider.getId(), request, "GELECTRODE_CONFIRMATION", 0);
-                    final LegalCandidate selected = provider.choose(request,
-                            () -> resolvedDecider.getController().confirmTrigger(this));
-                    final boolean accepted = provider.apply(request, selected, this);
-                    final boolean nativeTeacher = !provider.hasResolver();
-                    confirmationCapture.recordResult(selected, nativeTeacher);
-                    if (nativeTeacher) {
-                        traceHandle.recordNativeMappedResult(selected);
-                    } else {
-                        traceHandle.recordExternalChosenResult(selected);
-                    }
-                    ChangesZoneAuditDiagnostics.recordTriggerResult(auditScope, accepted);
-                    if (!accepted) {
-                        return;
-                    }
-                } else {
-                    if (provider.hasResolver()) {
-                        throw new UnsupportedConfirmationDecisionException(generation.getStatus(), generation.getReason());
-                    }
-                    final boolean accepted = resolvedDecider.getController().confirmTrigger(this);
-                    ChangesZoneAuditDiagnostics.recordTriggerResult(auditScope, accepted);
-                    if (!accepted) {
-                        return;
-                    }
+                // Since basic requirements check only cares about whether it's "Activated"
+                // Also check on triggered object specific requirements on resolution (e.g. evolve)
+                if (!regtrig.meetsRequirementsOnTriggeredObjects(game, getTriggeringObjects())) {
+                    return;
                 }
             }
-            getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
+
+            if (!regtrig.checkResolvedLimit(getActivatingPlayer())) {
+                return;
+            }
+
+            if (regtrig.hasParam("ResolvingCheck")) {
+                // rare cases: Hidden Predators (state trigger, but have "Intervening If" to check IsPresent2) etc.
+                Map<String, String> recheck = Maps.newHashMap();
+                String key = regtrig.getParam("ResolvingCheck");
+                recheck.put(key, regtrig.getParam(key));
+                if (!meetsCommonRequirements(recheck)) {
+                    return;
+                }
+            }
+
+            final ChangesZoneAuditDiagnostics.Scope auditScope = ChangesZoneAuditDiagnostics.begin(this);
+            try {
+                if (decider != null) {
+                    TriggeredTargetAuditDiagnostics.recordConfirmationEnter(this);
+                    if (!decider.isInGame()) {
+                        decider = SpellAbilityEffect.getNewChooser(sa, decider);
+                    }
+                    final Player resolvedDecider = decider;
+                    final ConfirmationDecisionProvider provider =
+                            resolvedDecider.getController().getConfirmationDecisionProvider();
+                    final ConfirmationDecisionProvider.Generation generation = provider.generate(this, resolvedDecider);
+                    final ConfirmationDiagnostics.Capture confirmationCapture =
+                            ConfirmationDiagnostics.capture(game, resolvedDecider, generation, this);
+                    if (generation.getStatus() == ConfirmationDecisionProvider.Status.ADMITTED) {
+                        final DecisionRequest request = generation.getRequest();
+                        final DeterminismTrace.RequestHandle traceHandle = DeterminismTrace.recordRequest(
+                                game, resolvedDecider.getId(), request, "GELECTRODE_CONFIRMATION", 0);
+                        final LegalCandidate selected = provider.choose(request,
+                                () -> resolvedDecider.getController().confirmTrigger(this));
+                        final boolean accepted = provider.apply(request, selected, this);
+                        final boolean nativeTeacher = !provider.hasResolver();
+                        confirmationCapture.recordResult(selected, nativeTeacher);
+                        if (nativeTeacher) {
+                            traceHandle.recordNativeMappedResult(selected);
+                        } else {
+                            traceHandle.recordExternalChosenResult(selected);
+                        }
+                        ChangesZoneAuditDiagnostics.recordTriggerResult(auditScope, accepted);
+                        TriggeredTargetAuditDiagnostics.recordConfirmationResult(this, accepted);
+                        if (!accepted) {
+                            return;
+                        }
+                    } else {
+                        if (provider.hasResolver()) {
+                            throw new UnsupportedConfirmationDecisionException(generation.getStatus(), generation.getReason());
+                        }
+                        final boolean accepted = resolvedDecider.getController().confirmTrigger(this);
+                        ChangesZoneAuditDiagnostics.recordTriggerResult(auditScope, accepted);
+                        TriggeredTargetAuditDiagnostics.recordConfirmationResult(this, accepted);
+                        if (!accepted) {
+                            return;
+                        }
+                    }
+                }
+                getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
+            } finally {
+                ChangesZoneAuditDiagnostics.end(auditScope);
+            }
         } finally {
-            ChangesZoneAuditDiagnostics.end(auditScope);
+            TriggeredTargetAuditDiagnostics.recordResolveExit(this);
         }
     }
 

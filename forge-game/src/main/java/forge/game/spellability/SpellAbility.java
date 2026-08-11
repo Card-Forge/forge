@@ -50,6 +50,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostTap;
 import forge.game.decision.PriorityActionDiagnostics;
+import forge.game.decision.TriggeredTargetAuditDiagnostics;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -2179,6 +2180,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         PriorityActionDiagnostics.recordTargetRequest(currentAbility, targetingPlayer);
                 final boolean targetsChosen = targetingPlayer.getController().chooseTargetsFor(currentAbility);
                 PriorityActionDiagnostics.recordTargetResult(targetTrace, targetsChosen);
+                TriggeredTargetAuditDiagnostics.recordTargetPreparation(currentAbility,
+                        "SpellAbility.setupTargets->PlayerController.chooseTargetsFor", targetsChosen);
                 if (!targetsChosen) {
                     return false;
                 }

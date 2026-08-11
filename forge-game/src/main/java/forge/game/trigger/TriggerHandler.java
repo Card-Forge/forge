@@ -29,6 +29,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.decision.TriggeredTargetAuditDiagnostics;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -516,6 +517,7 @@ public class TriggerHandler {
         }
 
         final WrappedAbility wrapperAbility = new WrappedAbility(regtrig, sa, decider);
+        TriggeredTargetAuditDiagnostics.register(wrapperAbility);
         //wrapperAbility.setDescription(wrapperAbility.getStackDescription());
         //wrapperAbility.setDescription(wrapperAbility.toUnsuppressedString());
 
