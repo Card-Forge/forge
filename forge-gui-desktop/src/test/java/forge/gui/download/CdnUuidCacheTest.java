@@ -6,10 +6,20 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.zip.GZIPOutputStream;
 
+/**
+ * All UUID data here is seeded straight into the local cache dir (gzip-compressed,
+ * exactly as {@link CdnUuidCache} writes it) rather than served from anywhere remote —
+ * there's no hosted data source anymore. {@link ScryfallSetSync#searchBaseUrlOverride}
+ * points at an unreachable address so any lookup that isn't pre-seeded fails fast
+ * instead of hitting the real Scryfall API; on-demand generation from Scryfall itself
+ * is covered by {@link ScryfallSetSyncTest}.
+ */
 @Test(groups = {"UnitTest"})
 public class CdnUuidCacheTest {
 
@@ -22,44 +32,40 @@ public class CdnUuidCacheTest {
     private static final String UUID_FRONT = "aaaaaaaa-bbbb-cccc-dddd-000000000003";
     private static final String UUID_BACK  = "aaaaaaaa-bbbb-cccc-dddd-000000000004";
 
-    /** Local cache dir — starts empty; populated by the cache on first remote fetch. */
     private File localCacheDir;
-    /** Remote "server" dir — pre-populated with set JSON files, served via file:// URL. */
-    private File remoteDir;
 
     @BeforeClass
     public void setUp() throws IOException {
         localCacheDir = Files.createTempDirectory("cdn_local").toFile();
-        remoteDir     = Files.createTempDirectory("cdn_remote").toFile();
 
-        // tst.json — single-faced cards, multiple languages
-        write(new File(remoteDir, SET + ".json"),
+        // tst.json.gz — single-faced cards, multiple languages
+        writeGzip(new File(localCacheDir, SET + ".json.gz"),
                 "{"
                 + "\"1\":{\"en\":\"" + UUID_EN + "\",\"ja\":\"" + UUID_JA + "\"},"
                 + "\"2\":{\"en\":\"" + UUID_EN + "\"}"
                 + "}");
 
-        // dfc.json — double-faced cards
-        write(new File(remoteDir, SET_DFC + ".json"),
+        // dfc.json.gz — double-faced cards
+        writeGzip(new File(localCacheDir, SET_DFC + ".json.gz"),
                 "{"
                 + "\"1\":{\"en\":[\"" + UUID_FRONT + "\",\"" + UUID_BACK  + "\"]},"
                 + "\"2\":{\"en\":[\"" + UUID_FRONT + "\",\"" + UUID_FRONT + "\"]}"
                 + "}");
 
-        // SET_ABSENT has no file in remoteDir — lookups must return null
+        // SET_ABSENT has no local file and the Scryfall override is unreachable —
+        // lookups must return null rather than hang or hit the real API.
 
         CdnUuidCache.localCacheDirOverride = localCacheDir.getAbsolutePath() + File.separator;
-        CdnUuidCache.remoteBaseUrlOverride = remoteDir.toURI().toURL().toString();
+        ScryfallSetSync.searchBaseUrlOverride = "http://127.0.0.1:1/unreachable";
         CdnUuidCache.clearCacheForTesting();
     }
 
     @AfterClass
     public void tearDown() {
         CdnUuidCache.localCacheDirOverride = null;
-        CdnUuidCache.remoteBaseUrlOverride = null;
+        ScryfallSetSync.searchBaseUrlOverride = null;
         CdnUuidCache.clearCacheForTesting();
         deleteDir(localCacheDir);
-        deleteDir(remoteDir);
     }
 
     // --- CDN URL formula ---
@@ -146,32 +152,6 @@ public class CdnUuidCacheTest {
         Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_EN, "front", "normal"));
     }
 
-    // --- remote fetch writes to local cache ---
-
-    @Test
-    public void remoteFetch_writesLocalCacheFile() {
-        // After the first successful lookup, the set JSON should be present in localCacheDir,
-        // gzip-compressed.
-        CdnUuidCache.getCdnUrl(SET, "1", "en", "front", "normal");
-        Assert.assertTrue(new File(localCacheDir, SET + ".json.gz").exists(),
-                "local cache file should be written after remote fetch");
-    }
-
-    @Test(dependsOnMethods = "remoteFetch_writesLocalCacheFile")
-    public void localCache_usedOnSubsequentLookup() throws IOException {
-        // Corrupt the in-memory cache but keep the local file; clear remote.
-        CdnUuidCache.clearCacheForTesting();
-        CdnUuidCache.remoteBaseUrlOverride = "file:///nonexistent-dir/";
-        try {
-            String url = CdnUuidCache.getCdnUrl(SET, "1", "en", "front", "normal");
-            Assert.assertEquals(url, CdnUuidCache.cdnUrl(UUID_EN, "front", "normal"),
-                    "should resolve from local cache even when remote is unavailable");
-        } finally {
-            CdnUuidCache.remoteBaseUrlOverride = remoteDir.toURI().toURL().toString();
-            CdnUuidCache.clearCacheForTesting();
-        }
-    }
-
     // --- null / missing inputs ---
 
     @Test
@@ -186,13 +166,13 @@ public class CdnUuidCacheTest {
 
     @Test
     public void absentSet_returnsNull() {
-        // No local file and no remote file for SET_ABSENT.
+        // No local file for SET_ABSENT, and the Scryfall search override is unreachable.
         Assert.assertNull(CdnUuidCache.getCdnUrl(SET_ABSENT, "1", "en", "front", "normal"));
     }
 
     @Test(dependsOnMethods = "absentSet_returnsNull")
     public void absentSetCachedAsMissing_secondCallAlsoNull() {
-        // MISSING_SET sentinel must be in cache; second lookup must not retry remote.
+        // MISSING_SET sentinel must be in cache; second lookup must not retry Scryfall.
         Assert.assertNull(CdnUuidCache.getCdnUrl(SET_ABSENT, "99", "en", "front", "normal"));
     }
 
@@ -203,8 +183,10 @@ public class CdnUuidCacheTest {
 
     // --- helpers ---
 
-    private static void write(File f, String content) throws IOException {
-        Files.write(f.toPath(), content.getBytes(StandardCharsets.UTF_8));
+    private static void writeGzip(File f, String content) throws IOException {
+        try (GZIPOutputStream gz = new GZIPOutputStream(new FileOutputStream(f))) {
+            gz.write(content.getBytes(StandardCharsets.UTF_8));
+        }
     }
 
     private static void deleteDir(File dir) {

@@ -44,6 +44,10 @@ public class ScryfallManifestSyncTest {
         server.createContext("/", this::handle);
         server.start();
         ScryfallManifestSync.manifestBaseUrlOverride = "http://127.0.0.1:" + server.getAddress().getPort();
+        // A lookup CdnUuidCache can't answer locally now falls back to ScryfallSetSync;
+        // point it at an unreachable address so these tests stay offline and a "should be
+        // null" assertion isn't quietly satisfied by a live Scryfall hit instead.
+        ScryfallSetSync.searchBaseUrlOverride = "http://127.0.0.1:1/unreachable";
     }
 
     @AfterClass
@@ -51,6 +55,7 @@ public class ScryfallManifestSyncTest {
         server.stop(0);
         CdnUuidCache.localCacheDirOverride = null;
         ScryfallManifestSync.manifestBaseUrlOverride = null;
+        ScryfallSetSync.searchBaseUrlOverride = null;
     }
 
     @AfterMethod

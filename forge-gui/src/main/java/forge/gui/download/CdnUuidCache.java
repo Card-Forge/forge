@@ -7,14 +7,10 @@ import com.google.gson.JsonParser;
 import forge.localinstance.properties.ForgeConstants;
 import org.tinylog.Logger;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,20 +25,15 @@ import java.util.zip.GZIPOutputStream;
 /**
  * Lazy-loading, thread-safe cache for Scryfall CDN UUIDs.
  *
- * <p>UUID data lives in per-set JSON files hosted in the forge-extras repository.
- * On the first lookup for a set, the cache checks for a local copy under
- * {@code {cacheDir}/cdn_uuid/{setCode}.json.gz}. If absent it fetches the file from
- * forge-extras and writes it locally (gzip-compressed) so subsequent lookups are instant.
- * Returns {@code null} on any failure so callers fall back to the rate-limited
- * Scryfall API or the cardforge server.
- *
- * <p>The remote fetch requests {@code Accept-Encoding: gzip}; GitHub's raw content
- * server honors it (roughly halving transfer size for this UUID-heavy JSON), and
- * the response is decompressed transparently. The local disk copy is stored
- * gzip-compressed too, independent of whatever encoding the remote used. Note this
- * is purely a runtime concern — the JSON files as committed to forge-extras are
- * kept as plain, sorted text so they stay diffable; gzipping those would make
- * every regeneration a full-file binary rewrite instead of a minimal diff.
+ * <p>All UUID data is generated on the user's machine, straight from Scryfall — there
+ * is no hosted/bundled data source. On the first lookup for a set, the cache checks
+ * for a local copy under {@code {cacheDir}/cdn_uuid/{setCode}.json.gz}. If absent, it
+ * asks {@link ScryfallSetSync} to build that set's mapping from the Scryfall card
+ * search API and writes the result locally (gzip-compressed) so subsequent lookups
+ * are instant. {@link ScryfallManifestSync} additionally lets a set's entries be kept
+ * fresh in bulk (newest image updates first) instead of one set at a time. Returns
+ * {@code null} on any failure so callers fall back to the rate-limited Scryfall API
+ * or the cardforge server.
  *
  * <p>Set JSON format:
  * <pre>
@@ -56,9 +47,8 @@ import java.util.zip.GZIPOutputStream;
 public final class CdnUuidCache {
 
     private static final String FALLBACK_LANG    = "en";
-    private static final int    FETCH_TIMEOUT_MS = 10_000;
 
-    /** Sentinel: set was looked up and no data exists (locally or remotely). */
+    /** Sentinel: set was looked up and no data exists (locally or on Scryfall). */
     private static final Map<String, Map<String, LangUuids>> MISSING_SET = Collections.emptyMap();
 
     private static final class LangUuids {
@@ -76,12 +66,6 @@ public final class CdnUuidCache {
      * Must end with the platform file separator when set.
      */
     static volatile String localCacheDirOverride = null;
-
-    /**
-     * Override the remote base URL. Package-private for unit tests.
-     * Must end with '/'. Supports {@code file://} URLs for offline testing.
-     */
-    static volatile String remoteBaseUrlOverride = null;
 
     private CdnUuidCache() {}
 
@@ -113,17 +97,35 @@ public final class CdnUuidCache {
 
     /**
      * Merges externally-sourced (setCode → collectorNumber → lang → uuid) entries into
-     * the on-disk cache, creating or updating {@code {cacheDir}/{setCode}.json.gz}.
-     * Used by {@link ScryfallManifestSync} when a user builds/refreshes their own
-     * lookup data straight from the Scryfall API instead of (or in addition to)
-     * forge-extras.
-     *
-     * <p>Existing entries are never overwritten: forge-extras/CLI-sourced data can
-     * record a double-faced card's distinct front/back UUIDs (a real but rare case),
-     * while a manifest-derived entry only ever has a single UUID (see
-     * {@link ScryfallManifestSync}) — merging must fill gaps, not degrade precision.
+     * the on-disk cache. Used by {@link ScryfallManifestSync}, whose data source (the
+     * manifest endpoint) never distinguishes a double-faced card's back-face UUID from
+     * its front — every entry is treated as front-only. Delegates to
+     * {@link #mergeSetEntriesWithFaces} so the never-overwrite guarantee lives in one place.
      */
-    static synchronized void mergeSetEntries(String setCode, Map<String, Map<String, String>> newEntries) {
+    static void mergeSetEntries(String setCode, Map<String, Map<String, String>> newEntries) {
+        Map<String, Map<String, String[]>> withFaces = new HashMap<>(newEntries.size() * 2);
+        for (Map.Entry<String, Map<String, String>> cnEntry : newEntries.entrySet()) {
+            Map<String, String[]> langMap = new HashMap<>(cnEntry.getValue().size() * 2);
+            for (Map.Entry<String, String> langEntry : cnEntry.getValue().entrySet()) {
+                langMap.put(langEntry.getKey(), new String[]{langEntry.getValue(), null});
+            }
+            withFaces.put(cnEntry.getKey(), langMap);
+        }
+        mergeSetEntriesWithFaces(setCode, withFaces);
+    }
+
+    /**
+     * Merges externally-sourced (setCode → collectorNumber → lang → [frontUuid, backUuidOrNull])
+     * entries into the on-disk cache, creating or updating {@code {cacheDir}/{setCode}.json.gz}.
+     * Used by {@link ScryfallSetSync} when a set has no local data at all yet and is built
+     * fresh from Scryfall's card search API, which — unlike the manifest endpoint — exposes
+     * each face's own image URL, so a double-faced card's genuinely distinct back-face UUID
+     * (a real but rare case) can be recorded precisely instead of assumed.
+     *
+     * <p>Existing entries are never overwritten, so a precise front/back pair already on
+     * disk can't be degraded by a later, less precise source filling the same slot.
+     */
+    static synchronized void mergeSetEntriesWithFaces(String setCode, Map<String, Map<String, String[]>> newEntries) {
         File file = localCacheFile(setCode);
         JsonObject merged = new JsonObject();
         if (file.exists()) {
@@ -135,13 +137,22 @@ public final class CdnUuidCache {
             }
         }
 
-        for (Map.Entry<String, Map<String, String>> cnEntry : newEntries.entrySet()) {
+        for (Map.Entry<String, Map<String, String[]>> cnEntry : newEntries.entrySet()) {
             String cn = cnEntry.getKey();
             JsonObject langObj = merged.has(cn) && merged.get(cn).isJsonObject()
                     ? merged.getAsJsonObject(cn) : new JsonObject();
-            for (Map.Entry<String, String> langEntry : cnEntry.getValue().entrySet()) {
-                if (!langObj.has(langEntry.getKey())) {
-                    langObj.addProperty(langEntry.getKey(), langEntry.getValue());
+            for (Map.Entry<String, String[]> langEntry : cnEntry.getValue().entrySet()) {
+                String lang  = langEntry.getKey();
+                if (langObj.has(lang)) continue;
+                String front = langEntry.getValue()[0];
+                String back  = langEntry.getValue()[1];
+                if (back != null && !back.equals(front)) {
+                    JsonArray arr = new JsonArray();
+                    arr.add(front);
+                    arr.add(back);
+                    langObj.add(lang, arr);
+                } else {
+                    langObj.addProperty(lang, front);
                 }
             }
             if (langObj.size() > 0) merged.add(cn, langObj);
@@ -222,16 +233,16 @@ public final class CdnUuidCache {
             }
         }
 
-        // 2. Fetch from remote, cache locally
-        String remoteUrl = remoteUrl(setCode);
-        try {
-            String json = fetchString(remoteUrl);
-            if (json != null) {
-                writeLocalCache(localFile, json);
-                return parseSetJson(json);
+        // 2. Nothing local yet — build this set's mapping straight from Scryfall.
+        // ScryfallSetSync merges its own results into the local cache file (via
+        // mergeSetEntriesWithFaces) and evicts setCache, so re-reading that file
+        // afterward picks up whatever it found.
+        if (ScryfallSetSync.sync(setCode) && localFile.exists()) {
+            try {
+                return parseSetFile(localFile);
+            } catch (Exception e) {
+                Logger.warn("CdnUuidCache: corrupt local cache {} after Scryfall sync: {}", localFile, e.getMessage());
             }
-        } catch (Exception e) {
-            Logger.debug("CdnUuidCache: no UUID data for set '{}': {}", setCode, e.getMessage());
         }
 
         return MISSING_SET;
@@ -239,39 +250,6 @@ public final class CdnUuidCache {
 
     private static File localCacheFile(String setCode) {
         return new File(cacheDir(), setCode + ".json.gz");
-    }
-
-    private static String remoteUrl(String setCode) {
-        String base = remoteBaseUrlOverride != null
-                ? remoteBaseUrlOverride
-                : ForgeConstants.FORGE_EXTRAS_CDN_UUID_URL;
-        return base + setCode + ".json";
-    }
-
-    /** Fetches {@code urlStr} and returns the body as a string, or {@code null} for HTTP 404. */
-    private static String fetchString(String urlStr) throws Exception {
-        URLConnection conn = new URL(urlStr).openConnection();
-        conn.setConnectTimeout(FETCH_TIMEOUT_MS);
-        conn.setReadTimeout(FETCH_TIMEOUT_MS);
-        conn.setRequestProperty("Accept", "application/json");
-        conn.setRequestProperty("Accept-Encoding", "gzip");
-        conn.connect();
-        if (conn instanceof HttpURLConnection) {
-            int status = ((HttpURLConnection) conn).getResponseCode();
-            if (status == 404) return null;
-            if (status != 200) throw new Exception("HTTP " + status + " for " + urlStr);
-        }
-        // Setting Accept-Encoding ourselves means the JDK won't auto-decompress;
-        // only unwrap if the server actually honored it (e.g. file:// URLs never do).
-        boolean gzipped = "gzip".equalsIgnoreCase(conn.getContentEncoding());
-        try (InputStream raw = conn.getInputStream();
-             InputStream is = gzipped ? new GZIPInputStream(raw) : raw;
-             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) sb.append(line).append('\n');
-            return sb.toString();
-        }
     }
 
     private static void writeLocalCache(File file, String json) {
@@ -299,10 +277,6 @@ public final class CdnUuidCache {
              InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
             return parseSetObject(JsonParser.parseReader(reader).getAsJsonObject());
         }
-    }
-
-    private static Map<String, Map<String, LangUuids>> parseSetJson(String json) {
-        return parseSetObject(JsonParser.parseString(json).getAsJsonObject());
     }
 
     /**
