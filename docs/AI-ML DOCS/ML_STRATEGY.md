@@ -2,7 +2,7 @@
 
 **Status:** Provisional / Accepted for implementation planning
 **Date:** 2026-08-11
-**Revision:** 12 — records the FRL-02K-B1 Gelectrode production slice and the FRL-02K-C1 ChangesZone projection audit while keeping global CONFIRMATION open, the ORDER attribution sequence, the modern DAMAGE_ASSIGNMENT information barrier, and the zero-unsupported gate ahead of RandomLegalPolicy
+**Revision:** 13 — records the FRL-02K-B1 Gelectrode production slice and the FRL-02K-C1 ChangesZone projection audit plus C1R ownership corrections while keeping global CONFIRMATION open, the ORDER attribution sequence, the modern DAMAGE_ASSIGNMENT information barrier, and the zero-unsupported gate ahead of RandomLegalPolicy
 **Scope:** Initial ForgeRL 1v1 research environment
 
 ## Purpose
@@ -1951,7 +1951,7 @@ decision boundaries
 
         FRL-02K-C1 ChangesZone
         trigger projection + history audit
-        AUDIT PASS
+        AUDIT PASS; C1R semantics corrected
         global CONFIRMATION OPEN
 
         ↓

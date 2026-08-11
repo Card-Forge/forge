@@ -55,6 +55,12 @@ public class FRL02KChangesZoneProjectionAuditTest {
         for (final AuditRow row : rows) {
             assertEquals(row.get("raw_card_exported"), "false", "Card values must remain typed projections");
             assertEquals(row.get("raw_lki_exported"), "false", "CardLKI values must remain metadata-only");
+            assertTrue(Set.of("SINGLE_RULE_MAY_TRIGGER_ONLY",
+                    "SAME_RULE_DECISION_DUPLICATED_BY_ENGINE_SURFACES").contains(row.get("rule_decision_model")),
+                    "rule decision model must distinguish Magic semantics from Forge surfaces");
+            assertTrue(Set.of("BLOOD_OPERATIVE_TARGET_OWNERSHIP_UNPROVEN", "NOT_APPLICABLE")
+                    .contains(row.get("target_ownership_verdict")),
+                    "target ownership verdict must remain explicit");
             assertTrue(Set.of("Card", "CardLKI", "NONE").contains(row.get("decision_context_type")),
                     "decision context type must be explicit");
             assertTrue(Set.of("PUBLIC", "HIDDEN", "NONE").contains(row.get("decision_context_visibility")),
@@ -103,6 +109,8 @@ public class FRL02KChangesZoneProjectionAuditTest {
         assertEquals(blood.get("live_api"), "ChangeZone");
         assertEquals(blood.get("optional_trigger"), "true");
         assertEquals(blood.get("optional_effect"), "false");
+        assertEquals(blood.get("rule_decision_model"), "SINGLE_RULE_MAY_TRIGGER_ONLY");
+        assertEquals(blood.get("target_ownership_verdict"), "BLOOD_OPERATIVE_TARGET_OWNERSHIP_UNPROVEN");
 
         final AuditRow lazav = firstByProfile.get("LAZAV");
         assertEquals(lazav.get("source_name"), "Lazav, Dimir Mastermind");
@@ -115,16 +123,27 @@ public class FRL02KChangesZoneProjectionAuditTest {
         assertEquals(lazav.get("optional_trigger"), "true");
         assertEquals(lazav.get("optional_effect"), "true");
         assertEquals(lazav.get("defined_context"), "TriggeredCardLKICopy");
+        assertEquals(lazav.get("rule_decision_model"),
+                "SAME_RULE_DECISION_DUPLICATED_BY_ENGINE_SURFACES");
+        assertEquals(lazav.get("target_ownership_verdict"), "NOT_APPLICABLE");
 
         final Path root = repositoryRoot();
         final String bloodScript = Files.readString(root.resolve("forge-gui/res/cardsfolder/b/blood_operative.txt"));
         assertTrue(bloodScript.contains("Execute$ TrigChangeZone"), "Blood must use the audited ChangeZone effect");
         assertTrue(bloodScript.contains("ValidTgts$ Card"), "Blood downstream target must remain card-typed");
         final String lazavScript = Files.readString(root.resolve("forge-gui/res/cardsfolder/l/lazav_dimir_mastermind.txt"));
+        assertTrue(lazavScript.contains("OptionalDecider$ You"),
+                "Lazav trigger must retain its Forge trigger-level optional surface");
         assertTrue(lazavScript.contains("Execute$ LazavCopy"), "Lazav must use the audited Clone effect");
         assertTrue(lazavScript.contains("Defined$ TriggeredCardLKICopy"),
                 "Lazav must consume the current triggered Card projection");
         assertTrue(lazavScript.contains("Optional$ True"), "Lazav clone action must remain optional");
+        final String lazavOracle = lazavScript.lines()
+                .filter(line -> line.startsWith("Oracle:"))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("Lazav script must contain an Oracle line"));
+        assertEquals(countOccurrences(lazavOracle, "may"), 1,
+                "Lazav Oracle text must contain one Magic may decision");
     }
 
     private static void assertLifecycleOrdering(final List<AuditRow> rows) {
@@ -134,6 +153,8 @@ public class FRL02KChangesZoneProjectionAuditTest {
         }
         assertEquals(byToken.size(), 5, "one deterministic token must identify each C1 occurrence");
         final Map<String, Integer> profileCounts = new HashMap<>();
+        int bloodStoredMatchesAi = 0;
+        int bloodStoredDiffersFromAi = 0;
         for (final List<AuditRow> lifecycle : byToken.values()) {
             final String profile = lifecycle.get(0).get("profile");
             profileCounts.merge(profile, 1, Integer::sum);
@@ -144,9 +165,18 @@ public class FRL02KChangesZoneProjectionAuditTest {
             assertOrdered(events, "TRIGGER_ENTER", "CONFIRM_TRIGGER_RESULT", "TRIGGER_EXIT");
 
             if ("BLOOD_OPERATIVE".equals(profile)) {
+                assertEquals(count(events, "STORED_TARGET_BEFORE_CONFIRM"), 1,
+                        "Blood must expose the target stored before confirmation");
                 assertEquals(count(events, "AI_TARGET_EVALUATION"), 1,
                         "Blood target evaluation must be observable before native confirmation returns");
-                assertOrdered(events, "TRIGGER_ENTER", "AI_TARGET_EVALUATION", "CONFIRM_TRIGGER_RESULT");
+                assertOrdered(events, "TRIGGER_ENTER", "STORED_TARGET_BEFORE_CONFIRM", "AI_TARGET_EVALUATION",
+                        "CONFIRM_TRIGGER_RESULT");
+                final AuditRow storedTarget = first(lifecycle, "STORED_TARGET_BEFORE_CONFIRM");
+                final AuditRow aiTarget = first(lifecycle, "AI_TARGET_EVALUATION");
+                assertEquals(storedTarget.get("target_count"), "1",
+                        "Blood must have one stored trigger target before confirmation");
+                assertEquals(aiTarget.get("target_count"), "1",
+                        "Blood AI evaluation must expose one temporary target");
                 final boolean accepted = Boolean.parseBoolean(valueFor(lifecycle, "CONFIRM_TRIGGER_RESULT",
                         "trigger_result"));
                 if (accepted) {
@@ -154,6 +184,20 @@ public class FRL02KChangesZoneProjectionAuditTest {
                     assertEquals(count(events, "CHANGE_ZONE_EFFECT_EXIT"), 1);
                     assertOrdered(events, "CONFIRM_TRIGGER_RESULT", "CHANGE_ZONE_EFFECT_ENTER",
                             "CHANGE_ZONE_EFFECT_EXIT", "TRIGGER_EXIT");
+                    final AuditRow effectTarget = first(lifecycle, "CHANGE_ZONE_EFFECT_ENTER");
+                    assertEquals(effectTarget.get("target_count"), "1",
+                            "Blood ChangeZoneEffect must resolve one target");
+                    assertEquals(targetProjection(storedTarget), targetProjection(effectTarget),
+                            "Blood effect resolution must use the stored trigger target");
+                    if (targetProjection(storedTarget).equals(targetProjection(aiTarget))) {
+                        bloodStoredMatchesAi++;
+                    } else {
+                        bloodStoredDiffersFromAi++;
+                    }
+                    System.out.println("FRL02K_C1_BLOOD_TARGET token=" + lifecycle.get(0).get("token")
+                            + " stored=" + targetProjection(storedTarget)
+                            + " ai=" + targetProjection(aiTarget)
+                            + " effect=" + targetProjection(effectTarget));
                 } else {
                     assertEquals(count(events, "CHANGE_ZONE_EFFECT_ENTER"), 0,
                             "declined Blood triggers must not enter ChangeZoneEffect");
@@ -194,6 +238,10 @@ public class FRL02KChangesZoneProjectionAuditTest {
         }
         assertEquals(profileCounts.getOrDefault("BLOOD_OPERATIVE", 0), 2);
         assertEquals(profileCounts.getOrDefault("LAZAV", 0), 3);
+        assertEquals(bloodStoredMatchesAi, 1,
+                "the canonical run must retain one Blood occurrence where stored and temporary AI targets match");
+        assertEquals(bloodStoredDiffersFromAi, 1,
+                "the canonical run must retain one Blood occurrence where temporary AI and stored targets diverge");
     }
 
     private static String valueFor(final List<AuditRow> rows, final String event, final String column) {
@@ -207,6 +255,20 @@ public class FRL02KChangesZoneProjectionAuditTest {
 
     private static int count(final List<String> events, final String event) {
         return (int) events.stream().filter(event::equals).count();
+    }
+
+    private static String targetProjection(final AuditRow row) {
+        return row.get("target_count") + "|" + row.get("target_values") + "|" + row.get("target_order");
+    }
+
+    private static int countOccurrences(final String text, final String needle) {
+        int count = 0;
+        int offset = 0;
+        while ((offset = text.indexOf(needle, offset)) >= 0) {
+            count++;
+            offset += needle.length();
+        }
+        return count;
     }
 
     private static void assertOrdered(final List<String> events, final String... ordered) {
@@ -270,6 +332,10 @@ public class FRL02KChangesZoneProjectionAuditTest {
         for (int index = 0; index < header.size(); index++) {
             indexes.put(header.get(index), index);
         }
+        assertTrue(indexes.containsKey("rule_decision_model"),
+                "audit must classify the Magic rule decision separately from Forge surfaces");
+        assertTrue(indexes.containsKey("target_ownership_verdict"),
+                "audit must retain the Blood target ownership verdict");
         final List<AuditRow> rows = new ArrayList<>();
         for (final String line : lines.subList(1, lines.size())) {
             final List<String> columns = csv(line);

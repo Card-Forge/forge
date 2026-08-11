@@ -39,7 +39,8 @@ public final class ChangesZoneAuditDiagnostics {
 
     private static final String HEADER = "token,sequence,profile,event,source_name,source_visibility,decider_seat,"
             + "viewer_seat,trigger_mode,origin,destination,valid_card,trigger_zones,execute,live_api,"
-            + "optional_trigger,optional_effect,defined_context,triggering_object_keys,source_controller,"
+            + "optional_trigger,optional_effect,rule_decision_model,target_ownership_verdict,defined_context,"
+            + "triggering_object_keys,source_controller,"
             + "decision_context_type,decision_context_visibility,decision_context_name,decision_context_zone,"
             + "public_context_key,card_owner_seat,card_controller_seat,card_is_creature,lki_present,lki_origin_zone,"
             + "lki_visibility,hidden_at_decision,previously_hidden,raw_card_exported,raw_lki_exported,target_count,"
@@ -81,6 +82,24 @@ public final class ChangesZoneAuditDiagnostics {
             return scope;
         } catch (final RuntimeException ignored) {
             return null;
+        }
+    }
+
+    public static void recordStoredTargetBeforeConfirm(final WrappedAbility wrapper, final SpellAbility ability,
+            final TargetChoices storedTargets) {
+        if (!ENABLED || wrapper == null || ability == null || !ability.usesTargeting()) {
+            return;
+        }
+        final Scope scope = current();
+        if (scope == null || scope.profile != Profile.BLOOD_OPERATIVE) {
+            return;
+        }
+        try {
+            emit(scope, "STORED_TARGET_BEFORE_CONFIRM", null,
+                    targetDetails(storedTargets, "STORED_TARGET_BEFORE_CONFIRM", scope.facts.decider), "NONE", "NONE",
+                    "NONE", "NONE", "NONE");
+        } catch (final RuntimeException ignored) {
+            // Audit failures must never alter the AI callback or game-loop path.
         }
     }
 
@@ -216,7 +235,8 @@ public final class ChangesZoneAuditDiagnostics {
                 playerId(scope.facts.decider), scope.facts.triggerMode, scope.facts.origin, scope.facts.destination,
                 scope.facts.validCard, scope.facts.triggerZones, scope.facts.execute, scope.facts.liveApi,
                 Boolean.toString(scope.facts.optionalTrigger), Boolean.toString(scope.facts.optionalEffect),
-                scope.facts.definedContext, scope.facts.triggeringObjectKeys, scope.facts.sourceController,
+                ruleDecisionModel(scope.profile), targetOwnershipVerdict(scope.profile), scope.facts.definedContext,
+                scope.facts.triggeringObjectKeys, scope.facts.sourceController,
                 context.type, context.visibility, context.name, context.zone, context.publicKey, context.owner,
                 context.controller, context.creature, Boolean.toString(scope.facts.lkiPresent()), scope.facts.lkiOrigin(),
                 scope.facts.lkiVisibility, context.hiddenAtDecision, Boolean.toString(scope.facts.previouslyHidden()), "false", "false",
@@ -357,6 +377,17 @@ public final class ChangesZoneAuditDiagnostics {
         }
         final String value = trigger.getParam(key);
         return value == null || value.isBlank() ? "NONE" : value;
+    }
+
+    private static String ruleDecisionModel(final Profile profile) {
+        return profile == Profile.LAZAV
+                ? "SAME_RULE_DECISION_DUPLICATED_BY_ENGINE_SURFACES"
+                : "SINGLE_RULE_MAY_TRIGGER_ONLY";
+    }
+
+    private static String targetOwnershipVerdict(final Profile profile) {
+        return profile == Profile.BLOOD_OPERATIVE
+                ? "BLOOD_OPERATIVE_TARGET_OWNERSHIP_UNPROVEN" : "NOT_APPLICABLE";
     }
 
     private static String objectKeys(final WrappedAbility wrapper) {

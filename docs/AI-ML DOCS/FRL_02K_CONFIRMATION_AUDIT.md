@@ -1,6 +1,6 @@
 # FRL-02K — Confirmation Attribution and Semantic Boundary Audit
 
-Status: A3 audit retained; FRL-02K-B1 Gelectrode production addendum PASS; FRL-02K-C1 ChangesZone projection audit PASS. Global CONFIRMATION remains OPEN.
+Status: A3 audit retained; FRL-02K-B1 Gelectrode production addendum PASS; FRL-02K-C1 ChangesZone projection evidence PASS with C1R semantic corrections recorded. Global CONFIRMATION remains OPEN.
 
 Audit date: 2026-08-11 (historical A1/A2/A3 evidence begins 2026-08-10)
 
@@ -1818,20 +1818,18 @@ was present.
 | Runtime cluster | Count | Trigger/rules identity | Live effect | Keys/provenance | Classification |
 |---|---:|---|---|---|---|
 | Gelectrode | 17 | `SpellCast`, `Mode=SpellCast`, `OptionalDecider=You`, `TriggerZones=Battlefield`, `ValidActivatingPlayer=You`, `ValidCard=Instant,Sorcery`, `Execute=TrigUntap`, `Original` | `LIVE_API=Untap` | public source; `Activator`, `Card`, `CardLKI`, cast/ability keys; intrinsic | `SUPPORTED B1` |
-| Blood Operative | 2 | `ChangesZone`, Battlefield destination, `OptionalDecider=You`, `ValidCard=Card.Self`, `Execute=TrigChangeZone`, `Original` | `LIVE_API=ChangeZone` | `Card;CardLKI`; intrinsic; no cost | `OPTIONAL_TRIGGER_NO_COST` candidate; context blocker |
-| Lazav, Dimir Mastermind | 3 | `ChangesZone`, Graveyard destination, `OptionalDecider=You`, `ValidCard=Creature.!token+OppOwn`, `Execute=LazavCopy`, `Original` | `LIVE_API=Clone` | `Card;CardLKI`; intrinsic; no cost | `OPTIONAL_TRIGGER_NO_COST` candidate; context blocker |
+| Blood Operative | 2 | `ChangesZone`, Battlefield destination, `OptionalDecider=You`, `ValidCard=Card.Self`, `Execute=TrigChangeZone`, `Original` | `LIVE_API=ChangeZone` | `Card;CardLKI`; intrinsic; no cost; A/B/C target projections | `BLOOD_OPERATIVE_TARGET_OWNERSHIP_UNPROVEN` |
+| Lazav, Dimir Mastermind | 3 | `ChangesZone`, Graveyard destination, `OptionalDecider=You`, `ValidCard=Creature.!token+OppOwn`, `Execute=LazavCopy`, `Original`; one Oracle `may` | `LIVE_API=Clone` plus `Optional$ True` | `Card;CardLKI`; intrinsic; no cost; trigger/effect surfaces duplicate one rule decision | `SAME_RULE_DECISION_DUPLICATED_BY_ENGINE_SURFACES` |
 | Blood Operative | 1 | `Surveil`, Graveyard trigger zone, `PresentPlayer=You`, `IsPresent=Card.StrictlySelf`, `Execute=TrigReturn`, `Original` | `LIVE_API=ChangeZone` | `Player` key; intrinsic; `PayLife<3>` cost; no `OptionalDecider` parameter | payment-owned cost-bearing trigger |
 | Nightveil Specter | 1 | `DamageDone`, `CombatDamage=True`, `OptionalDecider=You`, `ValidSource=Card.Self`, `ValidTarget=Player`, `Execute=PlayEncoded`, `Original` | `LIVE_API=Play` | public damage/source keys; `intrinsic=false`; derived/cipher | provenance blocker |
 | Tibor and Lumia | 2 | same `DamageDone`/combat-damage family, `Execute=PlayEncoded`, `Original` | `LIVE_API=Play` | public damage/source keys; `intrinsic=false`; derived/cipher | provenance blocker |
 
-The 5 normal no-cost rows are not a generic "optional and no-cost" admission. They justify a future narrow
-`ChangesZone`-trigger audit/implementation family, split by the live `ChangeZone` versus `Clone` effect. Both
-carry `CardLKI` in the live triggering-object map. The current audit records the key, not the value, and does
-not claim that a player-perspective public identity or history encoding is complete. Raw `CardLKI` presence does
-not prove that hidden information is policy-relevant: the correct C conclusion is
-`SAFE_NARROW_PROFILE_CANDIDATE` plus `PUBLIC_CONTEXT_PROJECTION_UNPROVEN` and
-`OBSERVATION_HISTORY_GAP`. C1 must determine whether the field is engine-only, derivable from the public event,
-replaceable with a typed public value, or genuinely hidden-information-relevant.
+The 5 normal no-cost rows are not a generic "optional and no-cost" admission. C1R keeps the narrow
+`ChangesZone`-trigger audit split by the live `ChangeZone` versus `Clone` effect. Both carry `CardLKI` in the live
+triggering-object map, but Lazav's `TriggeredCardLKICopy` consumes the triggering `Card`, not the separate LKI
+value. Blood's current target identity is correlated through A/B/C value projections; target policy ownership is
+still not established. Raw `CardLKI` presence does not prove that hidden information is policy-relevant: the
+canonical current-card result remains a typed public projection, while hidden-origin coverage is still open.
 
 The cost-bearing row is not a second generic accept/decline profile. `WrappedAbility.resolve()` reaches the
 native `confirmTrigger` callback, and `PlayerControllerAi.confirmTrigger()` delegates to
@@ -1955,7 +1953,7 @@ source cards were visible in this workload.
 | Surface | Runtime count | Semantic cluster | Correct owner | Binary? | Safe public context now? | Future action |
 |---|---:|---|---|---|---|---|
 | `confirmTrigger` | 17 | Gelectrode `SpellCast -> Untap` | named `CONFIRMATION` B1 profile | yes, ACCEPT/DECLINE | yes for the approved B1 DTO | supported B1; keep exact predicate |
-| `confirmTrigger` | 5 | Blood Operative/Lazav `ChangesZone`, no cost | `CONFIRMATION` trigger family | yes, proceed/suppress | not yet proven; raw `CardLKI` rejected pending relevance/public replacement; history gap | future C1a/C1b, no C change |
+| `confirmTrigger` | 5 | Blood/Lazav `ChangesZone`, no cost | Blood trigger surface; Lazav one rule `may` duplicated across trigger/Clone surfaces | yes at current Forge surfaces | public current `Card` observed; Blood target ownership remains unproven; Lazav `CardLKI` is not the Clone source | C1R corrected; no production C change |
 | `confirmTrigger` | 1 | Blood Operative `Surveil -> ChangeZone`, `PayLife<3>` | PAYMENT/cost-gated trigger entry | not as a second generic request | public source only; cost context incomplete | PAYMENT closure; no duplicate CONFIRMATION |
 | `confirmTrigger` | 3 | cipher-derived `DamageDone -> Play` | generated/provenance trigger family | yes procedurally | no stable provenance/context contract | future cipher/provenance audit |
 | `confirmAction` | 8 | Encode (5) and Clone (3) caller branches | caller-owned effect semantics | yes per caller | not generic; prompts/context differ | C2a Encode, C2b Clone |
@@ -1975,8 +1973,8 @@ No slice below is implemented by FRL-02K-C:
 
 | Future slice | Exact seam and scope | Required context/blockers | Expected coverage | Zero-Unsupported relevance |
 |---|---|---|---:|---|
-| C1a | `WrappedAbility.resolve` narrow `Blood Operative ChangesZone -> ChangeZone` no-cost profile | public changed-card identity; raw `CardLKI` rejected; decision relevance/public replacement not yet proven; definition/occurrence history gap | 2 reactive | blocks current reactive zero-unsupported |
-| C1b | `WrappedAbility.resolve` narrow `Lazav ChangesZone -> Clone` no-cost profile | public opponent-card identity and clone target/source semantics; raw `CardLKI` rejected; decision relevance/public replacement not yet proven; history gap | 3 reactive | blocks current reactive zero-unsupported |
+| C1a | `WrappedAbility.resolve` narrow `Blood Operative ChangesZone -> ChangeZone` no-cost profile | A/B/C target correlation measured; A==C, but stored-target policy ownership remains unproven and hidden-origin coverage is absent | 2 reactive | audit evidence retained; production implementation remains blocked |
+| C1b | `WrappedAbility.resolve` narrow `Lazav ChangesZone -> Clone` no-cost profile | one Oracle `may` duplicated across trigger/Clone surfaces; future owner is one caller-specific CloneEffect slice; raw `CardLKI` is not the Clone source; hidden-origin coverage is absent | 3 reactive | audit evidence retained; production implementation remains blocked |
 | C1p | generated/cipher `DamageDone -> Play` provenance profile | stable generated source/definition/occurrence provenance and public damage context | 3 reactive | blocks current reactive zero-unsupported |
 | C2a | `EncodeEffect.resolve` caller-owned optional encode branch | public host/available-encoder context; no localized prompt | 5 reactive | blocks current reactive zero-unsupported |
 | C2b | `CloneEffect.resolve` caller-owned optional clone branch | chosen-card/target public identity and clone legality | 3 reactive | blocks current reactive zero-unsupported |
@@ -2045,16 +2043,16 @@ and `6` existing stress/network skips. No `BindException` or port-55556 failure 
 both completed with `BUILD SUCCESS`; all six reactor modules reported `0` Checkstyle violations, and
 `git diff --check` is clean. No diagnostic callback invokes an AI helper or changes the game loop.
 
-### 27.16 C-R1 architecture review correction
+### 27.16 C-R1 architecture review correction (historical baseline)
 
-The five no-cost `ChangesZone` rows are `SAFE_NARROW_PROFILE_CANDIDATE` with
-`PUBLIC_CONTEXT_PROJECTION_UNPROVEN` and `OBSERVATION_HISTORY_GAP`. Raw `CardLKI` presence does not establish
-policy-relevant hidden information. C1a/C1b must first determine whether the value is engine-only, derivable
-from the public event, replaceable with a typed public value, or genuinely hidden-information-relevant.
+The five no-cost `ChangesZone` rows were previously classified as `SAFE_NARROW_PROFILE_CANDIDATE` with
+`PUBLIC_CONTEXT_PROJECTION_UNPROVEN` and `OBSERVATION_HISTORY_GAP`. This subsection is retained as the
+pre-C1 baseline. Section 28 supersedes its C1a/C1b interpretation with the measured public Card relevance,
+Lazav single-rule duplication, and Blood A/B/C target-ownership correction.
 
 The `payCostToPreventEffect` rows are post-native-result attribution records, not a pre-decision PAYMENT context
-contract. Future PAYMENT-CLOSURE capture belongs before `CostPayment.payComputerCosts(...)`. Review disposition:
-`P0=0`, `P1=0`, `P2=1`; no production or test changes are required by this correction.
+contract. Future PAYMENT-CLOSURE capture belongs before `CostPayment.payComputerCosts(...)`. The historical review
+disposition was `P0=0`, `P1=0`, `P2=1`; the current C1R disposition is recorded in section 28.
 
 **FRL-02K-C audit verdict: `FRL_02K_C_PASS`.**
 
@@ -2117,12 +2115,22 @@ That absence is a coverage limitation, not permission to generalize the projecti
 
 [BESTAETIGT] `PlayerControllerAi.confirmTrigger` temporarily clears the stored target choices, lets the existing
 `ChangeZoneAi` evaluator consider Blood's graveyard target, and restores the original target choices before the
-native callback returns. C1 records this as `AI_TARGET_EVALUATION` before `CONFIRM_TRIGGER_RESULT`; an accepted
-trigger then enters and exits `ChangeZoneEffect` with its effect-time target ordering separately recorded.
+native callback returns. C1R records three separate value-only target projections:
 
-Both Blood occurrences were accepted in the canonical run and both entered/exited `ChangeZoneEffect`. No second
-generic confirmation was inserted into this path. The diagnostic output therefore distinguishes AI
-preselection-before-confirmation from downstream effect target use without changing either list.
+| Projection | Audit event | Meaning |
+|---|---|---|
+| A | `STORED_TARGET_BEFORE_CONFIRM` | Target already stored on the triggered ability before the AI callback |
+| B | `AI_TARGET_EVALUATION` | Temporary target produced while `brains.doTrigger()` evaluates the trigger |
+| C | `CHANGE_ZONE_EFFECT_ENTER` | Target actually supplied to `ChangeZoneEffect` |
+
+Both Blood occurrences were accepted in the canonical run and both entered/exited `ChangeZoneEffect`. A equals C
+for both occurrences, proving that effect resolution uses the stored trigger target. A equals B only for the first
+occurrence; the second has a different temporary AI target (`Electrolyze`) while the stored/effect target is
+`Wee Dragonauts`. This proves the AI preselection surface is not the authoritative effect target and prevents
+claiming that an external confirmation already owns Blood's target.
+
+The C1R verdict is `BLOOD_OPERATIVE_TARGET_OWNERSHIP_UNPROVEN` / `BLOOD_OPERATIVE_AI_PRESELECTION_BLOCKER`.
+No second generic confirmation was inserted and no target was changed by the recorder.
 
 ### 28.6 Lazav duplicate semantic choice
 
@@ -2131,19 +2139,26 @@ preselection-before-confirmation from downstream effect target use without chang
 All three Lazav triggers were accepted; all three entered `CloneEffect` and invoked the second optional choice.
 Two copy choices were accepted and changed clone state; one copy choice was declined and changed no clone state.
 
-This is evidence of two distinct semantic gates for one Magic "may": trigger acceptance followed by optional
-copy application. The Human controller path exposes the same two prompts (wrapper `confirmTrigger`, then the
-`CloneEffect` optional `confirmAction`). C1 therefore rejects a generic boolean collapse and keeps the two caller
-owned semantics separate.
+The Oracle text contains one Magic `may`. The Forge script exposes that one rule decision through two engine
+surfaces: `OptionalDecider$ You` on the trigger and `Optional$ True` on `LazavCopy`. The observed
+`confirmTrigger=ACCEPT` followed by `confirmAction=ACCEPT/DECLINE` therefore proves
+`SAME_RULE_DECISION_DUPLICATED_BY_ENGINE_SURFACES`, not two independent Magic decisions. The Human path's two
+prompts are additional evidence of the duplicate engine exposure, not a second rules-level choice.
+
+The future ForgeRL owner is one decision slice and one training sample at the caller-specific `CloneEffect`
+optional-copy seam, because that seam owns the specific creature card and the copy/no-copy outcome. Whether the
+trigger-level check becomes procedural/auto-proceed or the card-script optionality is corrected is deferred; C1R
+adds neither implementation.
 
 ### 28.7 Deterministic lifecycle and history audit
 
 [BESTAETIGT] The five trigger occurrences received deterministic trace-local tokens `1` through `5`; tokens are
 allocated in observed game order and do not use Java identity, process IDs, wall-clock time, RNG, or
-`Trigger.getId()`. The fresh-JVM audit produced 35 lifecycle rows with the following exact event shapes:
+`Trigger.getId()`. The fresh-JVM audit produced 37 lifecycle rows with the following exact event shapes:
 
 ```text
-Blood 1: TRIGGER_ENTER > AI_TARGET_EVALUATION > CONFIRM_TRIGGER_RESULT
+Blood 1: TRIGGER_ENTER > STORED_TARGET_BEFORE_CONFIRM > AI_TARGET_EVALUATION
+          > CONFIRM_TRIGGER_RESULT
           > CHANGE_ZONE_EFFECT_ENTER > CHANGE_ZONE_EFFECT_EXIT > TRIGGER_EXIT
 Lazav 2: TRIGGER_ENTER > CONFIRM_TRIGGER_RESULT > CLONE_EFFECT_ENTER
           > CLONE_CONFIRM_ACTION_ENTER > CLONE_CONFIRM_ACTION_RESULT
@@ -2171,8 +2186,10 @@ RNG, mutate targets, or alter clone/zone effects.
 
 The focused fresh-JVM test ran the exact `Izzet Guild Kit` versus `Dimir Guild Kit` workload for 10 games with
 seed `20260810`, and passed with `1` test, `0` failures, `0` errors, and `0` skips. It verified the two/three
-profile counts, source/rule shapes, Card/CardLKI typed projection, no raw-object or localized-prompt leakage,
-the five per-token lifecycle orderings, neutrality markers, and audit-on versus audit-off determinism.
+profile counts, source/rule shapes, the single Lazav Oracle `may` against its two Forge surfaces, Card/CardLKI
+typed projection, no raw-object or localized-prompt leakage, the five per-token lifecycle orderings, all Blood
+A/B/C target projections (`A == C` twice; `A == B` once; `A != B` once), neutrality markers, and audit-on versus
+audit-off determinism.
 
 The inherited `FRL02KRemainingConfirmationAuditTest` remains the regression lock for B1 and the prior C callback
 inventory: reactive `confirmTrigger=26`, B1 admitted `17`, unsupported-profile `5`, unsupported-cost `1`,
@@ -2189,9 +2206,16 @@ Checkstyle violations. After the final non-semantic projection cleanup, a final 
 
 ### 28.10 C1 disposition and blockers
 
-[WIDERLEGT] Raw `CardLKI` presence is not sufficient evidence that a generic confirmation context must expose
+[BESTAETIGT] Raw `CardLKI` presence is not sufficient evidence that a generic confirmation context must expose
 LKI identity. For these two profiles, the decision-relevant current `Card` and the rule-defined
 `TriggeredCardLKICopy` path are observable without raw LKI export.
+
+[BESTAETIGT] Lazav is one Oracle `may` duplicated across trigger and CloneEffect engine surfaces, not two
+independent Magic decisions. The future policy boundary must produce one request and one training sample.
+
+[BLOCKER] Blood's stored target is the target used by `ChangeZoneEffect`, but its policy ownership is not proven:
+the temporary AI evaluation can diverge from the stored target. Preserve
+`BLOOD_OPERATIVE_TARGET_OWNERSHIP_UNPROVEN` until target selection ownership is explicitly moved or attributed.
 
 [UNKLAERT] The result is not a universal proof for hidden-origin `ChangesZone` events, copied/granted triggers,
 or other `ChangesZone` modes and effects. Hidden-information coverage, broader public replacement semantics, and
@@ -2200,4 +2224,4 @@ stable production history ownership remain separate audits.
 [BLOCKER] Global `CONFIRMATION` remains OPEN. C1 is an audit PASS for the five named runtime occurrences, not a
 production implementation approval and not a zero-unsupported result.
 
-**FRL-02K-C1 audit verdict: `FRL_02K_C1_PASS`.**
+**FRL-02K-C1 audit verdict: `FRL_02K_C1_PASS` (evidence retained; C1R interpretation corrected).**

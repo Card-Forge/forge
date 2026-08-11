@@ -451,6 +451,7 @@ public class PlayerControllerAi extends PlayerController {
 
         if (storeChoices) {
             tc = sa.getTargets();
+            ChangesZoneAuditDiagnostics.recordStoredTargetBeforeConfirm(wrapper, sa, tc);
             sa.resetTargets();
         }
         if (storeSubChoices) {
