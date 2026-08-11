@@ -1221,6 +1221,18 @@
         "editions": ["CLB", "HBG"]
       }]
   },
+  {
+    "name":"UBSLDShop",
+    "description":"Straight from the Secret Lair",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"UBShop",
+    "rewards": [
+      {
+        "count":8,
+        "sourceDeck": "decks/rewards/SLD_Exclusives.dck"
+      }]
+
+  },
 {                                      
 "name":"Swamp",    
 "description":"Swamps For Sale",
