@@ -1721,3 +1721,339 @@ exactly-once assertions remain unchanged.
 
 **B1R2 production verdict: `FRL_02K_B1_PASS`.** The Gelectrode slice is supported; global CONFIRMATION remains
 open. The `CardSelectionCard` identity naming remains a documented future cleanup and is not part of B1R2.
+
+## 27. FRL-02K-C remaining confirmation and boolean boundary audit
+
+FRL-02K-C is an audit and attribution milestone. It adds only opt-in, neutral callback diagnostics and focused
+tests. It does not add a new CONFIRMATION profile, a generic `confirmAction` adapter, a BINARY implementation,
+PAYMENT expansion, ORDER, DAMAGE_ASSIGNMENT, ObservationEncoder, or an RL player.
+
+### 27.1 Corrected post-B1 checkpoint
+
+The intentionally dirty primary checkout was preserved without reset, clean, checkout, stash, commit, rebase,
+merge, or modification:
+
+```text
+primary checkout: C:\\forgeAI
+branch: chore/decision-diagnostics-column-contract
+HEAD: 7a0dea0ebb5b1ec8aac5c97d94c0a06c809471c5
+expected user modifications: ML_STRATEGY.md and PriorityActionDiagnosticsTest.java
+origin/master: ee4d46e5b41de0f9d07756e9f80de57e3479421e
+```
+
+The isolated audit worktree was created from exactly `origin/master`:
+
+```text
+worktree: C:\\forgeAI-confirmation-c
+branch: frl/02k-c-remaining-confirmation-audit
+HEAD: ee4d46e5b41de0f9d07756e9f80de57e3479421e
+merge-base: ee4d46e5b41de0f9d07756e9f80de57e3479421e
+working tree at creation: clean
+```
+
+The prior run stopped before worktree creation and produced no audit evidence. Its result is treated as
+`PREVIOUS_RUN_ABORTED_BEFORE_AUDIT`, not as an architecture verdict.
+
+### 27.2 Neutral runtime instrumentation
+
+`BooleanCallbackAuditDiagnostics` is enabled only when `forge.booleanCallback.metricsFile` is set. It records
+the exact callback family, immediate production caller, owner hint, public source marker, API/mode, typed
+boolean shape, player seats, continuation state, provenance, native result, and trigger-only metadata. Trigger
+metadata includes card state, `TriggerType`, sorted non-descriptive normalized parameters, `Execute`, live API,
+intrinsic state, spawning-ability presence, triggering-object key names, and public source-controller seat.
+
+The recorder never calls AI helpers, consumes RNG, resolves an effect, changes targets, or exports raw
+`SpellAbility`, `Trigger`, `WrappedAbility`, `Card`, `CardLKI`, `GameEntity`, localized prompt, Java identity, or
+trigger ID values. Hidden source cards become a typed `HIDDEN` marker. `CardLKI` and other engine-only values may
+appear only as key names in the internal audit row; their values are never serialized and such context remains
+unsupported for an agent-facing decision.
+
+### 27.3 Canonical fresh-JVM runtime counts
+
+The exact controlled workloads were rerun from this C branch in fresh child JVMs:
+
+```text
+reactive:  Izzet Guild Kit vs Dimir Guild Kit, 10 games, seed 20260810
+proactive: Dead and Alive vs Air Forces, 10 games, seed 20260809
+```
+
+| Callback family | Reactive | Proactive | Observed boolean rows | Immediate runtime status |
+|---|---:|---:|---:|---|
+| `confirmTrigger` | 26 | 0 | 26 | 17 B1-admitted; 9 deferred by profile/cost/provenance |
+| `confirmAction` | 8 | 0 | 8 | caller-owned, heterogeneous |
+| `chooseBinary` | 2 | 0 | 2 | effect-specific `HeadsOrTails` |
+| `payCostToPreventEffect` | 5 | 24 | 29 | payment/prevention |
+| `confirmPayment` | 0 | 0 | 0 | not reached |
+| `confirmBidAction` | 0 | 0 | 0 | not reached |
+| `confirmReplacementEffect` | 0 | 0 | 0 | not reached |
+| `confirmStaticApplication` | 0 | 0 | 0 | not reached |
+
+The boolean audit therefore reconciles `41` reactive rows (`26 + 8 + 2 + 5`) and `24` proactive rows. No
+observed callback row remains outside a family or cluster.
+
+### 27.4 B1 regression lock
+
+The same reactive run still produced the hard B1 classifier invariant:
+
+```text
+raw confirmTrigger-related callbacks: 26
+Gelectrode admitted:                 17
+other normal optional no-cost:        5
+cost-bearing optional:                1
+provenance-untrusted derived:         3
+confirmation results:                17
+```
+
+The five normal no-cost rows, one cost-bearing row, and three derived rows were not newly admitted. B1 remains
+the named `GELECTRODE_SPELL_CAST_UNTAP_SELF` slice with candidates `ACCEPT` and `DECLINE`; global
+`CONFIRMATION` remains `OPEN`.
+
+### 27.5 Remaining `confirmTrigger` attribution
+
+The fresh rows were individually reconciled as follows. All rows were public-source rows, had no active
+`ActionContinuation`, and had explicit native booleans. `source_controller`, `decider`, and active-player seats
+are recorded as typed public seats; a blank triggering player means that no public player-valued triggering key
+was present.
+
+| Runtime cluster | Count | Trigger/rules identity | Live effect | Keys/provenance | Classification |
+|---|---:|---|---|---|---|
+| Gelectrode | 17 | `SpellCast`, `Mode=SpellCast`, `OptionalDecider=You`, `TriggerZones=Battlefield`, `ValidActivatingPlayer=You`, `ValidCard=Instant,Sorcery`, `Execute=TrigUntap`, `Original` | `LIVE_API=Untap` | public source; `Activator`, `Card`, `CardLKI`, cast/ability keys; intrinsic | `SUPPORTED B1` |
+| Blood Operative | 2 | `ChangesZone`, Battlefield destination, `OptionalDecider=You`, `ValidCard=Card.Self`, `Execute=TrigChangeZone`, `Original` | `LIVE_API=ChangeZone` | `Card;CardLKI`; intrinsic; no cost | `OPTIONAL_TRIGGER_NO_COST` candidate; context blocker |
+| Lazav, Dimir Mastermind | 3 | `ChangesZone`, Graveyard destination, `OptionalDecider=You`, `ValidCard=Creature.!token+OppOwn`, `Execute=LazavCopy`, `Original` | `LIVE_API=Clone` | `Card;CardLKI`; intrinsic; no cost | `OPTIONAL_TRIGGER_NO_COST` candidate; context blocker |
+| Blood Operative | 1 | `Surveil`, Graveyard trigger zone, `PresentPlayer=You`, `IsPresent=Card.StrictlySelf`, `Execute=TrigReturn`, `Original` | `LIVE_API=ChangeZone` | `Player` key; intrinsic; `PayLife<3>` cost; no `OptionalDecider` parameter | payment-owned cost-bearing trigger |
+| Nightveil Specter | 1 | `DamageDone`, `CombatDamage=True`, `OptionalDecider=You`, `ValidSource=Card.Self`, `ValidTarget=Player`, `Execute=PlayEncoded`, `Original` | `LIVE_API=Play` | public damage/source keys; `intrinsic=false`; derived/cipher | provenance blocker |
+| Tibor and Lumia | 2 | same `DamageDone`/combat-damage family, `Execute=PlayEncoded`, `Original` | `LIVE_API=Play` | public damage/source keys; `intrinsic=false`; derived/cipher | provenance blocker |
+
+The 5 normal no-cost rows are not a generic "optional and no-cost" admission. They justify a future narrow
+`ChangesZone`-trigger audit/implementation family, split by the live `ChangeZone` versus `Clone` effect. Both
+carry `CardLKI` in the live triggering-object map. The current audit records the key, not the value, and does
+not claim that a player-perspective public identity or history encoding is complete. Raw `CardLKI` presence does
+not prove that hidden information is policy-relevant: the correct C conclusion is
+`SAFE_NARROW_PROFILE_CANDIDATE` plus `PUBLIC_CONTEXT_PROJECTION_UNPROVEN` and
+`OBSERVATION_HISTORY_GAP`. C1 must determine whether the field is engine-only, derivable from the public event,
+replaceable with a typed public value, or genuinely hidden-information-relevant.
+
+The cost-bearing row is not a second generic accept/decline profile. `WrappedAbility.resolve()` reaches the
+native `confirmTrigger` callback, and `PlayerControllerAi.confirmTrigger()` delegates to
+`AiController.doTrigger(sa, false)`. The AI trigger path checks cost feasibility and the ability-specific
+`willPayCosts` logic before the wrapped effect is allowed to resolve. In this run the native result was false,
+so resolution returned before `playSpellAbilityNoStack` and no second payment callback was generated for that
+occurrence. A future policy must preserve this ownership boundary and trace the cost-specific payment path
+before exposing any payment intent.
+
+The 3 derived/cipher rows are semantically optional trigger proceed/suppress callbacks, but they are not B1
+profiles: their live trigger is `intrinsic=false`, generated/copy provenance, and their public-looking damage
+keys do not establish a stable public source/definition/occurrence identity. They remain
+`PROVENANCE_BLOCKER` candidates for a later cipher/generated-trigger audit.
+
+### 27.6 `confirmAction` caller attribution
+
+The exact current total is `8`, with all clusters summing to `8`:
+
+| Cluster | Count | True means | False means | Owner |
+|---|---:|---|---|---|
+| `EncodeEffect#resolve`, `Stolen Identity`, API `Encode` | 4 | continue to exile/encode | abort the encode operation | caller-owned optional effect |
+| `EncodeEffect#resolve`, `Call of the Nightwing`, API `Encode` | 1 | continue to exile/encode | abort the encode operation | caller-owned optional effect |
+| `CloneEffect#resolve`, `Lazav, Dimir Mastermind`, API `Clone` | 3 | continue the clone branch | cancel the clone branch | caller-owned optional effect |
+
+This surface is not a single confirmation semantic. The method's production callers include zone movement,
+discard, selection, discover, sacrifice, roll/state branches, optional effects, and combat alternatives. The
+observed 8 are specifically Encode and Clone branches; their prompts are localized at the caller and were not
+exported. A generic `confirmAction -> CONFIRMATION` adapter is rejected. Future work must split at
+`EncodeEffect#resolve` and `CloneEffect#resolve` (or another exact caller seam) and provide each caller's public
+candidate context.
+
+The private `HumanCostDecision.confirmAction(CostPart, String)` calls are not this `PlayerController.confirmAction`
+surface. They delegate to `confirmPayment` and belong to PAYMENT.
+
+### 27.7 `chooseBinary` attribution
+
+The exact total is `2`, both from `FlipCoinEffect#flipCoin` for public `Stitch in Time` abilities with
+`BinaryChoiceType.HeadsOrTails`. The boolean is not ACCEPT/DECLINE:
+
+```text
+true  -> call heads
+false -> call tails
+```
+
+The later `chooseFlipResult` callback is a different result decision and was not reached in this workload. The
+observed choice has a stable two-label domain and public source, but the production callback is also used by
+tap/untap, odds/evens, direction, counter, time-travel, and roll effects. A general `BINARY_CHOICE` adapter is
+not justified by the Java return type or these two rows. The future slice should be a typed flip-call decision,
+or another explicitly named effect family, with semantic alternatives rather than localized prompt text.
+
+### 27.8 `payCostToPreventEffect` attribution
+
+The exact current total is `5` reactive and `24` proactive. Every row has the stable shape:
+
+```text
+true  -> pay the supplied cost and prevent/replace the effect
+false -> do not pay, or the cost is not payable; allow the non-payment branch
+```
+
+Reactive:
+
+```text
+AbilityUtils.handleUnlessCost -> Syncopate / Counter: 5
+```
+
+Proactive:
+
+```text
+SacrificeEffect.resolve             -> Morinfen / Sacrifice: 3
+AbilityUtils.handleUnlessCost      -> Disrupt / Counter: 1
+AbilityUtils.handleUnlessCost      -> Hidden Horror / Sacrifice: 4
+AbilityUtils.handleUnlessCost      -> Barrow Ghoul / Sacrifice: 1
+AbilityUtils.handleUnlessCost      -> Waterspout Djinn / Sacrifice: 15
+```
+
+`AbilityUtils.handleUnlessCost` invokes the callback once per payer and then uses `alreadyPaid` and the
+`UnlessSwitched`/sub-ability rules to decide which engine branch resolves. `SacrificeEffect` uses the same
+callback for Echo and cumulative upkeep payment gates. This is a PAYMENT/prevention boundary, not generic
+CONFIRMATION. The boolean may express a payment intent in a caller, but actual construction is the subsequent
+`CostPayment` path. These rows are post-native-result attribution records, not a future pre-decision PAYMENT
+context contract: they are written after the native payment path has evaluated feasibility and called
+`CostPayment.payComputerCosts(...)`. A future PAYMENT-CLOSURE capture must be placed before that payment call.
+It must decide whether an explicit `PAYMENT_INTENT` is needed; it must not expose a generic confirmation and
+then ask the agent to pay the same cost a second time.
+
+### 27.9 Unreached callback families
+
+| Surface | Production owner/caller | Reactive | Proactive | Classification |
+|---|---|---:|---:|---|
+| `confirmPayment` | `PlaySpellAbility` cost-part branches and `HumanCostDecision` payment helper | 0 | 0 | `NOT_REACHED`; PAYMENT, not CONFIRMATION |
+| `confirmBidAction` | `BidLifeEffect` loop; followed by `chooseNumber` bid amount | 0 | 0 | `NOT_REACHED`; separate multi-step BID family |
+| `confirmReplacementEffect` | `ReplacementHandler.executeReplacement` optional replacement branch | 0 | 0 | `NOT_REACHED`; REPLACEMENT family |
+| `confirmStaticApplication` | combat alternative damage assignment, `StaticAbilityManaConvert`, `StaticAbilitySurveilNum` | 0 | 0 | `NOT_REACHED`; STATIC_APPLICATION or DAMAGE_ASSIGNMENT |
+
+No artificial workload was created to force these paths. Mandatory normal triggers remain engine-owned: the
+`WrappedAbility.resolve()` decider gate is not entered when the engine constructs a mandatory wrapper with
+`decider == null`. The controller callback instrumentation has a mandatory guard for diagnostic attribution,
+but it does not manufacture a policy request.
+
+### 27.10 ActionContinuation and context boundary
+
+All `41` reactive and `24` proactive boolean audit rows had `ActionContinuation=false`. The canonical B1
+admitted rows also had no active continuation. The recorder reads the existing
+`PriorityActionDiagnostics.hasActiveActionContinuation()` marker and creates no top-level request, so the
+current evidence leaves no continuation ambiguity.
+
+If any future callback is reached inside an active continuation, the boolean must be represented inside that
+existing action sequence and owned by its semantic family. A separate top-level confirmation would risk a
+duplicate decision and must fail closed until the continuation contract is explicit.
+
+The current public projection is deliberately incomplete for future policy use. Source names and player seats
+are emitted only under Forge view visibility. Localized descriptions, raw callback parameters, hidden hand or
+library identity, face-down identity, LKI values, raw ability/trigger/entity objects, opaque collections,
+`Trigger.getId()`, Java identity, and prompt strings are not emitted. The 5 `CardLKI` trigger rows remain
+unresolved pending context-relevance/public-replacement and history audits; raw `CardLKI` presence is not proof
+of policy-relevant hidden information. The 3 generated/cipher rows remain provenance-blocked even though their
+source cards were visible in this workload.
+
+### 27.11 Semantic ownership matrix
+
+| Surface | Runtime count | Semantic cluster | Correct owner | Binary? | Safe public context now? | Future action |
+|---|---:|---|---|---|---|---|
+| `confirmTrigger` | 17 | Gelectrode `SpellCast -> Untap` | named `CONFIRMATION` B1 profile | yes, ACCEPT/DECLINE | yes for the approved B1 DTO | supported B1; keep exact predicate |
+| `confirmTrigger` | 5 | Blood Operative/Lazav `ChangesZone`, no cost | `CONFIRMATION` trigger family | yes, proceed/suppress | not yet proven; raw `CardLKI` rejected pending relevance/public replacement; history gap | future C1a/C1b, no C change |
+| `confirmTrigger` | 1 | Blood Operative `Surveil -> ChangeZone`, `PayLife<3>` | PAYMENT/cost-gated trigger entry | not as a second generic request | public source only; cost context incomplete | PAYMENT closure; no duplicate CONFIRMATION |
+| `confirmTrigger` | 3 | cipher-derived `DamageDone -> Play` | generated/provenance trigger family | yes procedurally | no stable provenance/context contract | future cipher/provenance audit |
+| `confirmAction` | 8 | Encode (5) and Clone (3) caller branches | caller-owned effect semantics | yes per caller | not generic; prompts/context differ | C2a Encode, C2b Clone |
+| `chooseBinary` | 2 | `FlipCoinEffect`, Heads/Tails | effect-specific binary choice | yes, heads/tails | yes for current public source | C3 typed flip-call slice |
+| `payCostToPreventEffect` | 5 / 24 | unless/prevention, Echo, cumulative upkeep | PAYMENT/prevention | yes, pay/do-not-pay | requires typed cost/effect context | PAYMENT-CLOSURE |
+| `confirmPayment` | 0 / 0 | cost-part payment confirmation | PAYMENT | unknown in this workload | not observed | defer until reached |
+| `confirmBidAction` | 0 / 0 | continue bid plus numeric amount | BID | yes but multi-step | not observed | defer separate BID |
+| `confirmReplacementEffect` | 0 / 0 | apply/decline replacement | REPLACEMENT | yes | not observed | defer replacement |
+| `confirmStaticApplication` | 0 / 0 | static application or combat alternative | STATIC_APPLICATION/DAMAGE_ASSIGNMENT | yes | not observed | defer separate family |
+
+Every observed callback row is represented exactly once by the rows above. The zero rows are explicitly
+unreached, not inferred coverage.
+
+### 27.12 Future implementation decomposition
+
+No slice below is implemented by FRL-02K-C:
+
+| Future slice | Exact seam and scope | Required context/blockers | Expected coverage | Zero-Unsupported relevance |
+|---|---|---|---:|---|
+| C1a | `WrappedAbility.resolve` narrow `Blood Operative ChangesZone -> ChangeZone` no-cost profile | public changed-card identity; raw `CardLKI` rejected; decision relevance/public replacement not yet proven; definition/occurrence history gap | 2 reactive | blocks current reactive zero-unsupported |
+| C1b | `WrappedAbility.resolve` narrow `Lazav ChangesZone -> Clone` no-cost profile | public opponent-card identity and clone target/source semantics; raw `CardLKI` rejected; decision relevance/public replacement not yet proven; history gap | 3 reactive | blocks current reactive zero-unsupported |
+| C1p | generated/cipher `DamageDone -> Play` provenance profile | stable generated source/definition/occurrence provenance and public damage context | 3 reactive | blocks current reactive zero-unsupported |
+| C2a | `EncodeEffect.resolve` caller-owned optional encode branch | public host/available-encoder context; no localized prompt | 5 reactive | blocks current reactive zero-unsupported |
+| C2b | `CloneEffect.resolve` caller-owned optional clone branch | chosen-card/target public identity and clone legality | 3 reactive | blocks current reactive zero-unsupported |
+| C3 | `FlipCoinEffect.flipCoin` `HeadsOrTails` typed choice | semantic labels `HEADS`/`TAILS`; separate later result path | 2 reactive | blocks current reactive zero-unsupported |
+| PAYMENT-CLOSURE | `AbilityUtils.handleUnlessCost`/`SacrificeEffect` through `CostPayment` | typed payer/cost/effect context; explicit intent-versus-construction contract | 5 reactive, 24 proactive, plus cost trigger closure | blocks both controlled workload slices |
+| BID / REPLACEMENT / STATIC | their exact engine callers only when reached | family-specific typed context and continuation rules | 0 / 0 currently | does not block current slice |
+
+The most important architectural result is negative: there is no evidence for a generic boolean-to-
+`CONFIRMATION` adapter. The next implementation review should choose one small family and preserve the B1 named
+profile unchanged.
+
+### 27.13 DecisionType recommendations
+
+```text
+CONFIRMATION:
+    keep global status OPEN; retain only GELECTRODE_SPELL_CAST_UNTAP_SELF as supported B1.
+
+confirmAction:
+    no generic DecisionType adapter. Use caller-specific Encode/Clone decision contracts if approved later.
+
+chooseBinary:
+    do not add general BINARY_CHOICE from the Java boolean alone. The observed stable candidate is a future
+    typed FLIP_CALL / HEADS_TAILS family; other enum kinds must remain separate until observed.
+
+payCostToPreventEffect and cost-bearing trigger:
+    PAYMENT owns the boundary. Do not add generic CONFIRMATION + PAYMENT for the same event. Add an explicit
+    PAYMENT_INTENT only if a future engine trace proves a distinct pre-payment strategic choice.
+
+confirmPayment:
+    existing PAYMENT family; defer until a controlled workload reaches it.
+
+confirmBidAction:
+    BID / continue-bid plus numeric amount, not generic confirmation.
+
+confirmReplacementEffect:
+    REPLACEMENT.
+
+confirmStaticApplication:
+    STATIC_APPLICATION for static effects and DAMAGE_ASSIGNMENT for combat alternatives.
+```
+
+### 27.14 Zero-Unsupported relevance
+
+For the exact controlled workloads, the current blockers are the 5 remaining normal no-cost triggers, 1
+cost-bearing trigger boundary, 3 derived/cipher triggers, 8 caller-owned `confirmAction` callbacks, 2
+effect-specific binary callbacks, and 5 reactive/24 proactive payment-prevention callbacks. Solving these
+families is required before RandomLegalPolicy can finish these workloads without Forge-AI fallback.
+
+The zero-count `confirmPayment`, bid, replacement, and static-application surfaces do not block the current
+workloads. They remain real future families rather than being declared complete. Mandatory normal triggers are
+engine-owned and do not create a missing agent decision merely because the controller class contains a boolean
+method.
+
+### 27.15 FRL-02K-C test and neutrality evidence
+
+The new fresh-JVM focused test exercised the exact reactive and proactive workloads, parsed the 28-column safe
+audit projection, asserted all family totals and semantic clusters, checked the 17/26 B1 invariant, asserted
+the 5 no-cost versus 1 cost-bearing trigger split, and verified no raw object identity or localized prompt
+value was emitted. It compared audit-on and audit-off deterministic trace trees for the same reactive seed.
+
+The existing B1 trigger-context tests separately assert unchanged `ForgeStateFingerprint` and zero
+`DeterminismAuditRandom` draws for neutral projection work. The final focused selection passed `28` tests with
+`0` failures, `0` errors, and `0` skips, including the collector and worker neutrality tests. The broad
+`mvn -pl forge-gui-desktop -am test` reactor passed `642` tests with `636` passed, `0` failures, `0` errors,
+and `6` existing stress/network skips. No `BindException` or port-55556 failure occurred. Package and validate
+both completed with `BUILD SUCCESS`; all six reactor modules reported `0` Checkstyle violations, and
+`git diff --check` is clean. No diagnostic callback invokes an AI helper or changes the game loop.
+
+### 27.16 C-R1 architecture review correction
+
+The five no-cost `ChangesZone` rows are `SAFE_NARROW_PROFILE_CANDIDATE` with
+`PUBLIC_CONTEXT_PROJECTION_UNPROVEN` and `OBSERVATION_HISTORY_GAP`. Raw `CardLKI` presence does not establish
+policy-relevant hidden information. C1a/C1b must first determine whether the value is engine-only, derivable
+from the public event, replaceable with a typed public value, or genuinely hidden-information-relevant.
+
+The `payCostToPreventEffect` rows are post-native-result attribution records, not a pre-decision PAYMENT context
+contract. Future PAYMENT-CLOSURE capture belongs before `CostPayment.payComputerCosts(...)`. Review disposition:
+`P0=0`, `P1=0`, `P2=1`; no production or test changes are required by this correction.
+
+**FRL-02K-C audit verdict: `FRL_02K_C_PASS`.**

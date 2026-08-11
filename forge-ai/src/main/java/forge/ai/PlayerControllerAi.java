@@ -19,6 +19,7 @@ import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
+import forge.game.decision.BooleanCallbackAuditDiagnostics;
 import forge.game.decision.DownstreamCallbackFamily;
 import forge.game.decision.MulliganDiagnostics;
 import forge.game.decision.PriorityActionDiagnostics;
@@ -398,18 +399,32 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, List<String> options, Card cardToShow, Map<String, Object> params) {
         PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.CONFIRMATION, 2, false, player);
-        return getAi().confirmAction(sa, mode, message, params);
+        final boolean result = getAi().confirmAction(sa, mode, message, params);
+        BooleanCallbackAuditDiagnostics.recordSpellAbility("confirmAction", "confirmAction", "CALLER_OWNED",
+                player, sa, mode == null ? "" : mode.name(), "BOOLEAN_CALLER_DEFINED", "UNKNOWN", "UNKNOWN",
+                "TRUE_FALSE_CALLER_DEFINED", result, sa == null ? null : sa.getActivatingPlayer());
+        return result;
     }
 
     @Override
     public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode mode, String string,
             int bid, Player winner) {
-        return getAi().confirmBidAction(sa, mode, string, bid, winner);
+        final boolean result = getAi().confirmBidAction(sa, mode, string, bid, winner);
+        BooleanCallbackAuditDiagnostics.recordSpellAbility("confirmBidAction", "confirmBidAction", "BID",
+                player, sa, mode == null ? "" : mode.name(), "CONTINUE_BIDDING", "UNKNOWN", "NO",
+                "TRUE=CONTINUE;FALSE=STOP", result, winner);
+        return result;
     }
 
     @Override
     public boolean confirmStaticApplication(Card hostCard, PlayerActionConfirmMode mode, String message, String logic) {
-        return getAi().confirmStaticApplication(hostCard, logic);
+        final boolean result = getAi().confirmStaticApplication(hostCard, logic);
+        BooleanCallbackAuditDiagnostics.recordCard("confirmStaticApplication", "confirmStaticApplication",
+                "STATIC_APPLICATION_OR_DAMAGE_ASSIGNMENT", player, hostCard, null,
+                mode == null ? "" : mode.name(), "APPLY_OR_LEAVE", "UNKNOWN", "UNKNOWN",
+                "TRUE=APPLY;FALSE=ALTERNATE_OR_SKIP", result,
+                hostCard == null ? null : hostCard.getController());
+        return result;
     }
 
     // TODO: accept based on game state (infinite loop / unwinnable position); always declines for now
@@ -422,6 +437,7 @@ public class PlayerControllerAi extends PlayerController {
         final SpellAbility sa = wrapper.getWrappedAbility();
         //final Trigger regtrig = wrapper.getTrigger();
         if (wrapper.isMandatory()) {
+            BooleanCallbackAuditDiagnostics.recordTrigger(player, wrapper, true);
             return true;
         }
         // Store/replace target choices more properly to get this SA cleared.
@@ -454,13 +470,18 @@ public class PlayerControllerAi extends PlayerController {
             sub.setTargets(subtc);
         }
 
+        BooleanCallbackAuditDiagnostics.recordTrigger(player, wrapper, ret);
         return ret;
     }
 
     @Override
     public boolean confirmPayment(CostPart costPart, String prompt, SpellAbility sa) {
         PriorityActionDiagnostics.recordDownstreamCallback(DownstreamCallbackFamily.CONFIRMATION, 2, false, player);
-        return brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method)
+        final boolean result = brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method)
+        BooleanCallbackAuditDiagnostics.recordSpellAbility("confirmPayment", "confirmPayment", "PAYMENT",
+                player, sa, "", "PAY_OR_DECLINE_COST_PART", "UNKNOWN", "YES",
+                "TRUE=PROCEED;FALSE=DECLINE_COST_PART", result, sa == null ? null : sa.getActivatingPlayer());
+        return result;
     }
 
     @Override
@@ -472,7 +493,11 @@ public class PlayerControllerAi extends PlayerController {
         if (effectSA != null) {
             effectSA.setActivatingPlayer(host.getController());
         }
-        return brains.aiShouldRun(replacementEffect, effectSA, host, affected);
+        final boolean result = brains.aiShouldRun(replacementEffect, effectSA, host, affected);
+        BooleanCallbackAuditDiagnostics.recordCard("confirmReplacementEffect", "confirmReplacementEffect",
+                "REPLACEMENT", player, host, effectSA, "", "APPLY_OR_LEAVE_UNREPLACED", "UNKNOWN", "NO",
+                "TRUE=APPLY;FALSE=LEAVE_EVENT", result, affected);
+        return result;
     }
 
     @Override
@@ -977,6 +1002,16 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultVal) {
+        final boolean result = chooseBinaryNative(sa, kindOfChoice, defaultVal);
+        BooleanCallbackAuditDiagnostics.recordSpellAbility("chooseBinary", "chooseBinary",
+                "EFFECT_SPECIFIC_BINARY", player, sa, "", kindOfChoice == null ? "" : kindOfChoice.name(),
+                "UNKNOWN", "NO", "TRUE/FALSE_MEANING_DEFINED_BY_KIND", result,
+                sa == null ? null : sa.getActivatingPlayer());
+        return result;
+    }
+
+    private boolean chooseBinaryNative(final SpellAbility sa, final BinaryChoiceType kindOfChoice,
+            final Boolean defaultVal) {
         switch (kindOfChoice) {
             case TapOrUntap: return true;
             case UntapOrLeaveTapped:
@@ -1037,7 +1072,12 @@ public class PlayerControllerAi extends PlayerController {
      */
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Map<String, Object> params) {
-        return SpellApiToAi.Converter.get(sa).chooseBinary(kindOfChoice, sa, params);
+        final boolean result = SpellApiToAi.Converter.get(sa).chooseBinary(kindOfChoice, sa, params);
+        BooleanCallbackAuditDiagnostics.recordSpellAbility("chooseBinary", "chooseBinary",
+                "EFFECT_SPECIFIC_BINARY", player, sa, "", kindOfChoice == null ? "" : kindOfChoice.name(),
+                "UNKNOWN", "NO", "TRUE/FALSE_MEANING_DEFINED_BY_KIND", result,
+                sa == null ? null : sa.getActivatingPlayer());
+        return result;
     }
 
     @Override
@@ -1287,15 +1327,17 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers) {
+        boolean result = false;
         if (SpellApiToAi.Converter.get(sa).willPayUnlessCost(player, sa, cost, alreadyPaid, allPayers)) {
-            if (!ComputerUtilCost.canPayCost(cost, sa, player, true)) {
-                return false;
+            if (ComputerUtilCost.canPayCost(cost, sa, player, true)) {
+                final CostPayment pay = new CostPayment(cost, sa);
+                result = pay.payComputerCosts(new AiCostDecision(player, sa, true));
             }
-
-            final CostPayment pay = new CostPayment(cost, sa);
-            return pay.payComputerCosts(new AiCostDecision(player, sa, true));
         }
-        return false;
+        BooleanCallbackAuditDiagnostics.recordSpellAbility("payCostToPreventEffect", "payCostToPreventEffect",
+                "PAYMENT_PREVENTION", player, sa, "", "PAY_OR_DO_NOT_PAY", "UNKNOWN", "YES",
+                "TRUE=PAID;FALSE=DECLINED_OR_UNPAYABLE", result, sa == null ? null : sa.getActivatingPlayer());
+        return result;
     }
 
     public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa) {
