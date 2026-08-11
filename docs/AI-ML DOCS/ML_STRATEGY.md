@@ -2,7 +2,7 @@
 
 **Status:** Provisional / Accepted for implementation planning
 **Date:** 2026-08-11
-**Revision:** 13 — records the FRL-02K-B1 Gelectrode production slice and the FRL-02K-C1 ChangesZone projection audit plus C1R ownership corrections while keeping global CONFIRMATION open, the ORDER attribution sequence, the modern DAMAGE_ASSIGNMENT information barrier, and the zero-unsupported gate ahead of RandomLegalPolicy
+**Revision:** 14 — combines the measured FRL-01A–FRL-02J boundary status, callback-to-request ratios, generation-cost model and upstream-surface accounting with the FRL-02K-B1 Gelectrode slice and FRL-02K-C1 ChangesZone projection audit, including C1R ownership corrections while keeping global CONFIRMATION open, the ORDER attribution sequence, the modern DAMAGE_ASSIGNMENT information barrier, and the zero-unsupported gate ahead of RandomLegalPolicy
 **Scope:** Initial ForgeRL 1v1 research environment
 
 ## Purpose
