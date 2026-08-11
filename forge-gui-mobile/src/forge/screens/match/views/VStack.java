@@ -278,11 +278,7 @@ public class VStack extends FDropDown {
         }
 
         private void showCardOrMenu(CardView sourceCard, FPopupMenu menu, float x, float y) {
-            if (sourceCard == null) {
-                menu.show(this, x, y);
-                return;
-            }
-            if (cardBounds.contains(x, y))
+            if (sourceCard != null && cardBounds.contains(x, y))
                 CardZoom.show(sourceCard);
             else
                 menu.show(this, x, y);
