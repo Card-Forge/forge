@@ -75,6 +75,9 @@ public abstract class GameStage extends Stage {
     private float animationTimeout = 0;
     public static float maximumScrollDistance = 1.5f;
     public static float minimumScrollDistance = 0.3f;
+    private final Vector2 keyboardInput = new Vector2();
+    private final Vector2 controllerInput = new Vector2();
+    private final Vector2 touchInput = new Vector2();
 
     private String extraAnnouncement = "";
 
@@ -248,16 +251,11 @@ public abstract class GameStage extends Stage {
         showDialog();
     }
 
-
     public boolean axisMoved(Controller controller, int axisIndex, float value) {
         if (MapStage.getInstance().isDialogOnlyInput() || isPaused()) {
             return true;
         }
-        player.getMovementDirection().x = controller.getAxis(0);
-        player.getMovementDirection().y = -controller.getAxis(1);
-        if (player.getMovementDirection().len() < 0.2) {
-            player.stop();
-        }
+        controllerInput.set(controller.getAxis(0), -controller.getAxis(1));
         return true;
     }
 
@@ -267,7 +265,6 @@ public abstract class GameStage extends Stage {
         Fly
 
     }
-
 
     HashMap<PlayerModification, Float> currentModifications = new HashMap<>();
 
@@ -360,6 +357,7 @@ public abstract class GameStage extends Stage {
             animationTimeout -= delta;
             return;
         }
+
         Array<PlayerModification> modsToRemove = new Array<>();
         for (Map.Entry<PlayerModification, Float> mod : currentModifications.entrySet()) {
             mod.setValue(mod.getValue() - delta);
@@ -371,28 +369,66 @@ public abstract class GameStage extends Stage {
             onRemoveEffect(mod);
         }
 
-        if (isPaused()) {
-            return;
-        }
-
-
         if (onEndAction != null) {
-
             onEndAction.run();
             onEndAction = null;
         }
 
-        if (touchX >= 0) {
-            Vector2 target = this.screenToStageCoordinates(new Vector2(touchX, touchY));
-            target.x -= player.getWidth() / 2f;
-            Vector2 diff = target.sub(player.pos());
-
-            if (diff.len() < 2) {
-                diff.setZero();
-                player.stop();
+        if (isPaused() || isDialogOnlyInput() || Forge.advFreezePlayerControls) {
+            keyboardInput.setZero();
+            controllerInput.setZero();
+            touchInput.setZero();
+            player.getMovementDirection().setZero();
+            player.stop();
+        } else {
+            keyboardInput.setZero();
+            if (KeyBinding.Left.isPressed()) {
+                keyboardInput.x -= 1;
             }
-            player.setMovementDirection(diff);
+
+            if (KeyBinding.Right.isPressed()) {
+                keyboardInput.x += 1;
+            }
+
+            if (KeyBinding.Up.isPressed()) {
+                keyboardInput.y += 1;
+            }
+
+            if (KeyBinding.Down.isPressed()) {
+                keyboardInput.y -= 1;
+            }
+
+            // Input priority: touch > controller > keyboard
+            Vector2 dir = new Vector2();
+            if (touchX >= 0 && touchInput.len() > 0.2f) {
+                dir.set(touchInput);
+
+            } else if (controllerInput.len() > 0.2f) {
+                dir.set(controllerInput);
+
+            } else {
+                dir.set(keyboardInput);
+            }
+            if (dir.len() < 0.01f) {
+                player.stop();
+            } else {
+                player.getMovementDirection().set(dir);
+            }
+
+            if (touchX >= 0) {
+                Vector2 target = this.screenToStageCoordinates(new Vector2(touchX, touchY));
+                target.x -= player.getWidth() / 2f;
+                Vector2 diff = target.sub(player.pos());
+
+                if (diff.len() < 2) {
+                    touchInput.setZero();
+                    player.stop();
+                } else {
+                    touchInput.set(diff);
+                }
+            }
         }
+
         camera.position.x = Math.min(Math.max(Scene.getIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.getIntendedWidth() / 2f);
         camera.position.y = Math.min(Math.max(Scene.getIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.getIntendedHeight() / 2f);
 
@@ -415,23 +451,22 @@ public abstract class GameStage extends Stage {
 
     abstract protected void onActing(float delta);
 
-
     @Override
     public boolean keyDown(int keycode) {
         super.keyDown(keycode);
         if (isPaused())
             return true;
         if (KeyBinding.Left.isPressed(keycode)) {
-            player.getMovementDirection().x = -1;
+            keyboardInput.x = -1;
         }
         if (KeyBinding.Right.isPressed(keycode)) {
-            player.getMovementDirection().x = +1;
+            keyboardInput.x = +1;
         }
         if (KeyBinding.Up.isPressed(keycode)) {
-            player.getMovementDirection().y = +1;
+            keyboardInput.y = +1;
         }
         if (KeyBinding.Down.isPressed(keycode)) {
-            player.getMovementDirection().y = -1;
+            keyboardInput.y = -1;
         }
         if (keycode == Input.Keys.F5)//todo config
         {
@@ -542,6 +577,9 @@ public abstract class GameStage extends Stage {
     public void stop() {
         WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+        touchInput.setZero();
+        keyboardInput.setZero();
+        controllerInput.setZero();
         touchX = -1;
         touchY = -1;
         player.stop();
