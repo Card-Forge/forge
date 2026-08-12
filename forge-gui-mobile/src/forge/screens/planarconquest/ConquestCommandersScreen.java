@@ -218,7 +218,7 @@ public class ConquestCommandersScreen extends FScreen {
                     float setWidth = CardRenderer.getSetWidth(font, set);
                     availableWidth = w - cardArtWidth - setWidth;
 
-                    g.drawText(commander.getOrigin() + " (" + record.getWins() + "W / " + record.getLosses() + "L)", font, foreColor, x, y, availableWidth, lineHeight, false, Align.left, true);
+                    g.drawText(commander.getOrigin() + " (" + Forge.getLocalizer().getMessage("lblWinLossRecordShort", record.getWins(), record.getLosses()) + ")", font, foreColor, x, y, availableWidth, lineHeight, false, Align.left, true);
 
                     x += availableWidth + CardRenderer.SET_BOX_MARGIN;
                     y -= CardRenderer.SET_BOX_MARGIN;

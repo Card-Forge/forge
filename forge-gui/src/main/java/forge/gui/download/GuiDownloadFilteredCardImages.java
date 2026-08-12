@@ -8,6 +8,7 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.ImageUtil;
+import forge.util.ForgeUpdateConfig;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -84,6 +85,11 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
      * falls back to the cardforge hosted server otherwise.
      */
     private static String buildUrl(PaperCard c, String face) {
+        final String hostedPath = ImageUtil.getDownloadUrl(c, face);
+        if (ForgeUpdateConfig.isCardImageMirrorEnabled()) {
+            return hostedPath == null ? null : ForgeConstants.getCardImageDownloadUrl(hostedPath);
+        }
+
         final String collectorNum = c.getCollectorNumber();
         final boolean hasCollectorNum = !IPaperCard.NO_COLLECTOR_NUMBER.equals(collectorNum)
                 && !"0".equals(collectorNum)
@@ -104,7 +110,6 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         }
 
         // Fallback: cardforge hosted server
-        String cardforgeUrl = ImageUtil.getDownloadUrl(c, face);
-        return cardforgeUrl != null ? ForgeConstants.URL_PIC_DOWNLOAD + cardforgeUrl : null;
+        return hostedPath != null ? ForgeConstants.getCardImageDownloadUrl(hostedPath) : null;
     }
 }

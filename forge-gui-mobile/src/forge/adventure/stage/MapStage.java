@@ -873,7 +873,7 @@ public class MapStage extends GameStage {
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
         dialog.clearListeners();
-        TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
+        TextraButton ok = Controls.newTextButton(Forge.getLocalizer().getMessage("lblOK"), this::hideDialog);
         ok.setVisible(false);
         TypingLabel L = Controls.newTypingLabel("{GRADIENT=RED;WHITE;1;1}" + Forge.getLocalizer().getMessage("lblDefeatedDescription"));
         L.setWrap(true);

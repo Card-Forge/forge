@@ -8,7 +8,7 @@
         <android.manifestMerger.versionDigits>2,2,4,2</android.manifestMerger.versionDigits>
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
-        <build.max.memory>-Xmx1536m</build.max.memory>
+        <build.max.memory>-Xmx4096m</build.max.memory>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -93,6 +93,29 @@
                  so tinylog's ServiceLoader can discover its providers at runtime. -->
             <resource>
                 <directory>src/main/resources</directory>
+            </resource>
+            <!-- Bundle localization overrides so custom Android builds do not
+                 depend on the public assets.zip being updated at the same time. -->
+            <resource>
+                <directory>${project.basedir}/../forge-gui/res/languages</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>en-US.properties</include>
+                    <include>zh-CN.properties</include>
+                    <include>cardnames-zh-CN.txt</include>
+                </includes>
+                <targetPath>assets/localization</targetPath>
+            </resource>
+            <!-- The Android runtime cannot reliably read arbitrary classpath
+                 resources from dependency JARs, so expose the shared mirror
+                 configuration through AssetManager during app startup. -->
+            <resource>
+                <directory>${project.basedir}/../forge-gui/src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>forge-update.properties</include>
+                </includes>
+                <targetPath>assets/update-mirror</targetPath>
             </resource>
         </resources>
         <!-- append generated snapshot-version property -->
@@ -466,7 +489,7 @@
                                     <goal>manifest-merger</goal>
                                 </goals>
                                 <configuration>
-                                    <manifestVersionName>${snapshot-version}</manifestVersionName>
+                                    <manifestVersionName>${displayVersion}</manifestVersionName>
                                 </configuration>
                             </execution>
                         </executions>
@@ -681,7 +704,7 @@
                                     <goal>manifest-merger</goal>
                                 </goals>
                                 <configuration>
-                                    <manifestVersionName>${snapshot-version}</manifestVersionName>
+                                    <manifestVersionName>${displayVersion}</manifestVersionName>
                                 </configuration>
                             </execution>
                         </executions>
@@ -814,7 +837,7 @@
                                     <goal>manifest-merger</goal>
                                 </goals>
                                 <configuration>
-                                    <manifestVersionName>${snapshot-version}-dev</manifestVersionName>
+                                    <manifestVersionName>${displayVersion}-dev</manifestVersionName>
                                 </configuration>
                             </execution>
                             <execution>

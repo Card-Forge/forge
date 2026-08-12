@@ -412,7 +412,7 @@ public class SpellSmithScene extends UIScene {
         if (cost_low > -1) totalCost *= 2.5f; //And CMC cost multiplier.
 
         cardPool = StreamUtil.stream(P).collect(Collectors.toList());
-        poolSize.setText(((cardPool.size() > 0 ? "[/][FOREST]" : "[/][RED]")) + cardPool.size() + " possible card" + (cardPool.size() > 1 ? "s" : ""));
+        poolSize.setText(((cardPool.size() > 0 ? "[/][FOREST]" : "[/][RED]")) + Forge.getLocalizer().getMessage("lblPossibleCards", cardPool.size()));
         currentPrice = (int) totalCost;
         currentShardPrice = (int) (totalCost * 0.2f); //Intentionally rounding up via the cast to int
         pullUsingGold.setText("[+Pull][+goldcoin] "+ currentPrice);

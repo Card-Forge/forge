@@ -25,6 +25,7 @@ import forge.screens.home.VHomeUI.PnlDisplay;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -36,12 +37,14 @@ public enum VSubmenuWinston implements IVSubmenu<CSubmenuWinston> {
     /** */
     SINGLETON_INSTANCE;
 
+    private final Localizer localizer = Localizer.getInstance();
+
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Winston Draft");
+    private final DragTab tab = new DragTab(localizer.getMessage("lblWinstonDraft"));
 
     /** */
-    private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Winston Draft");
+    private final LblHeader lblTitle = new LblHeader(localizer.getMessage("lblSanctionedWinstonDraft"));
 
     private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart  = new StartButton();
@@ -51,21 +54,22 @@ public enum VSubmenuWinston implements IVSubmenu<CSubmenuWinston> {
 
     private final JLabel lblInfo = new FLabel.Builder()
             .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
-            .text("Build or select a deck").build();
+            .text(localizer.getMessage("lblBuildorselectadeck")).build();
 
     private final FLabel lblDir1 = new FLabel.Builder()
-            .text("In Winston Draft mode, two players draft 6 packs of cards by piles.")
+            .text(localizer.getMessage("lblWinstonDraftDescription"))
             .fontSize(12).build();
 
     private final FLabel lblDir2 = new FLabel.Builder()
-            .text("Build a deck from the cards you choose. The AI will do the same.")
+            .text(localizer.getMessage("lblWinstonDraftBuildDescription"))
             .fontSize(12).build();
 
     private final FLabel lblDir3 = new FLabel.Builder()
-            .text("Then, play against the AI opponent you drafted against.")
+            .text(localizer.getMessage("lblWinstonDraftPlayDescription"))
             .fontSize(12).build();
 
-    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("New Winston Draft Game").fontSize(16).build();
+    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder()
+            .text(localizer.getMessage("lblNewWinstonDraftGame")).fontSize(16).build();
 
     /**
      * Constructor.
@@ -75,7 +79,7 @@ public enum VSubmenuWinston implements IVSubmenu<CSubmenuWinston> {
         btnStart.setEnabled(false);
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        lstDecks.setCaption("Winston Draft Decks");
+        lstDecks.setCaption(localizer.getMessage("lblWinstonDraftDecks"));
 
         pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         pnlStart.setOpaque(false);
@@ -95,7 +99,7 @@ public enum VSubmenuWinston implements IVSubmenu<CSubmenuWinston> {
      */
     @Override
     public String getMenuTitle() {
-        return "Winston Draft";
+        return localizer.getMessage("lblWinstonDraft");
     }
 
     /* (non-Javadoc)

@@ -84,9 +84,11 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         pnlAvatarUsers.setOpaque(false);
         pnlAvatarPics.setOpaque(false);
 
-        pnlAvatarUsers.add(new FLabel.Builder().fontSize(12).text("Human").build(),
+        pnlAvatarUsers.add(new FLabel.Builder().fontSize(12)
+                .text(Localizer.getInstance().getMessage("lblHuman")).build(),
                 "w 100px!, h 20px!, gap 0 20px 0 0");
-        pnlAvatarUsers.add(new FLabel.Builder().fontSize(12).text("AI").build(),
+        pnlAvatarUsers.add(new FLabel.Builder().fontSize(12)
+                .text(Localizer.getInstance().getMessage("lblAI")).build(),
                 "w 100px!, h 20px!, wrap");
 
         pnlAvatarUsers.add(lblAvatarHuman, "w 100px!, h 100px!, gap 0 20px 0 0");

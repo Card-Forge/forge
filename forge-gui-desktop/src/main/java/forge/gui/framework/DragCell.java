@@ -21,6 +21,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 import forge.toolbox.FSkin.SkinImage;
 import forge.view.FView;
 import net.miginfocom.swing.MigLayout;
@@ -68,7 +69,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         lblOverflow.setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
         lblOverflow.setOpaque(true);
         lblOverflow.setBackground(Color.black);
-        lblOverflow.setToolTipText("Other tabs");
+        lblOverflow.setToolTipText(Localizer.getInstance().getMessage("lblOtherTabs"));
 
         pnlBorderRight.setOpaque(false);
         pnlBorderRight.addMouseListener(SResizingUtil.getResizeXListener());

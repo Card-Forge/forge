@@ -34,6 +34,7 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.toolbox.FButton;
+import forge.util.Localizer;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.view.FDialog;
@@ -113,10 +114,10 @@ public class BoxedProductCardListViewer extends FDialog {
         
         this.addWindowFocusListener(new CardListFocuser());
 
-        FButton btnOK = new FButton("Next Pack");
+        FButton btnOK = new FButton(Localizer.getInstance().getMessage("lblNextPack"));
         btnOK.addActionListener(e -> BoxedProductCardListViewer.this.processWindowEvent(new WindowEvent(BoxedProductCardListViewer.this, WindowEvent.WINDOW_CLOSING)));
 
-        FButton btnCancel = new FButton("Open All Remaining");
+        FButton btnCancel = new FButton(Localizer.getInstance().getMessage("lblOpenAllRemaining"));
         btnCancel.addActionListener(e -> {
             BoxedProductCardListViewer.this.skipTheRest = true;
             BoxedProductCardListViewer.this.processWindowEvent(new WindowEvent(BoxedProductCardListViewer.this, WindowEvent.WINDOW_CLOSING));

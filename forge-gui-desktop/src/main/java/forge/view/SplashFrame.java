@@ -38,6 +38,7 @@ import javax.swing.UIManager;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
+import forge.util.Localizer;
 import forge.toolbox.FProgressBar;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
@@ -96,7 +97,7 @@ public class SplashFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("Loading Forge...");
+        this.setTitle(Localizer.getInstance().getMessage("lblLoadingForge"));
 
         // Insert JPanel to hold content above background
         final JPanel pnlContent = new JPanel();

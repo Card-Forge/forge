@@ -45,6 +45,7 @@ import forge.screens.home.sanctioned.CSubmenuWinston;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 
 /**
@@ -56,6 +57,7 @@ import forge.util.MyRandom;
  * @version $Id: CEditorDraftingProcess.java 24872 2014-02-17 07:35:47Z drdev $
  */
 public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
+    private final Localizer localizer = Localizer.getInstance();
     private IBoosterDraft boosterDraft;
 
     private String ccAddLabel = "Add card";
@@ -85,7 +87,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
         //hide filters and options panel so more of pack is visible by default
         catalogManager.setHideViewOptions(1, true);
 
-        deckManager.setCaption("Draft Picks");
+        deckManager.setCaption(localizer.getMessage("lblDraftPicks"));
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -123,7 +125,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Draft", null);
+        cmb.addMoveItems(localizer.getMessage("lblDraft"), null);
     }
 
     @Override
@@ -201,7 +203,8 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * </p>
      */
     private void saveDraft() {
-        String s = FOptionPane.showInputDialog("Save this draft as:", "Save Draft", FOptionPane.QUESTION_ICON);
+        String s = FOptionPane.showInputDialog(localizer.getMessage("lblSaveDraftAs") + ":",
+                localizer.getMessage("lblSaveDraft"), FOptionPane.QUESTION_ICON);
 
         // Cancel button will be null; OK will return string.
         // Must check for null value first, then string length.
@@ -215,8 +218,8 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
         for (DeckGroup d : FModel.getDecks().getWinston()) {
             if (s.equalsIgnoreCase(d.getName())) {
                 if (!FOptionPane.showConfirmDialog(
-                        "There is already a deck named '" + s + "'. Overwrite?",
-                        "Overwrite Deck?", false)) {
+                        localizer.getMessage("lblAlreadyDeckName") + s + localizer.getMessage("lblOverwriteConfirm"),
+                        localizer.getMessage("lblOverwriteDeck"), false)) {
                     // If no overwrite, recurse.
                     saveDraft();
                     return;
@@ -319,10 +322,9 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
     @Override
     public boolean canSwitchAway(boolean isClosing) {
         if (isClosing && !saved) {
-            String userPrompt =
-                    "This will end the current draft and you will not be able to resume.\n\n" +
-                            "Leave anyway?";
-            return FOptionPane.showConfirmDialog(userPrompt, "Leave Draft?", "Leave", "Cancel", false);
+            String userPrompt = localizer.getMessage("lblEndDraftConfirm");
+            return FOptionPane.showConfirmDialog(userPrompt, localizer.getMessage("lblLeaveDraft"),
+                    localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false);
         }
         return true;
     }

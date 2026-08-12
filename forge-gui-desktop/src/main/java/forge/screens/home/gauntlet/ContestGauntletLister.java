@@ -16,6 +16,7 @@ import forge.gui.UiCommand;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -24,6 +25,7 @@ import net.miginfocom.swing.MigLayout;
  */
 @SuppressWarnings("serial")
 public class ContestGauntletLister extends JPanel {
+    private final Localizer localizer = Localizer.getInstance();
     private RowPanel previousSelect;
     private RowPanel[] rows;
     private UiCommand cmdRowSelect;
@@ -55,13 +57,13 @@ public class ContestGauntletLister extends JPanel {
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
         rowTitle.add(new FLabel.Builder().build(),
                 "w 30px!, h 20px!, gap 1% 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Name").fontAlign(SwingConstants.LEFT).build(),
+        rowTitle.add(new FLabel.Builder().text(localizer.getMessage("lblName")).fontAlign(SwingConstants.LEFT).build(),
                 "w 98% - 350px!, h 20px!, gap 20px 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Last Activity").fontAlign(SwingConstants.CENTER).build(),
+        rowTitle.add(new FLabel.Builder().text(localizer.getMessage("lblLastActivity")).fontAlign(SwingConstants.CENTER).build(),
                 "w 100px!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Opponents").fontAlign(SwingConstants.CENTER).build(),
+        rowTitle.add(new FLabel.Builder().text(localizer.getMessage("lblOpponents")).fontAlign(SwingConstants.CENTER).build(),
                 "w 100px!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Progress").fontAlign(SwingConstants.CENTER).build(),
+        rowTitle.add(new FLabel.Builder().text(localizer.getMessage("lblProgress")).fontAlign(SwingConstants.CENTER).build(),
                 "w 100px!, h 20px!, gap 0 0 5px 0");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 

@@ -206,7 +206,8 @@ public enum FControl implements KeyEventDispatcher {
         if (hasCurrentMatches) {
             userPrompt = getLocalizer().getMessage("lblOneOrMoreGamesActive") + ". " + userPrompt;
         }
-        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, getLocalizer().getMessage("lblCancel"), !hasCurrentMatches)) { //default Yes if no game active
+        if (!FOptionPane.showConfirmDialog(userPrompt, getLocalizer().getMessage("lblForgeAction", action),
+                action, getLocalizer().getMessage("lblCancel"), !hasCurrentMatches)) { //default Yes if no game active
             return false;
         }
         return CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true);
@@ -362,7 +363,8 @@ public enum FControl implements KeyEventDispatcher {
         try {
             SLayoutIO.loadLayout(null);
         } catch (final InvalidLayoutFileException ex) {
-            SOptionPane.showMessageDialog(String.format(getLocalizer().getMessage("lblerrLoadingLayoutFile"), screen.getTabCaption()), "Warning!");
+            SOptionPane.showMessageDialog(String.format(getLocalizer().getMessage("lblerrLoadingLayoutFile"),
+                    screen.getTabCaption()), getLocalizer().getMessage("lblWarning"));
             if (screen.deleteLayoutFile()) {
                 SLayoutIO.loadLayout(null); //try again
             }

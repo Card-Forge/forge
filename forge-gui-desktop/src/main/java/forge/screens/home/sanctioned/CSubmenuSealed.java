@@ -28,6 +28,7 @@ import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorLimited;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 
 /**
  * Controls the sealed submenu in the home UI.
@@ -91,18 +92,20 @@ public enum CSubmenuSealed implements ICDoc {
     }
 
     private void startGame(final GameType gameType) {
+        final Localizer localizer = Localizer.getInstance();
         final boolean gauntlet = !VSubmenuSealed.SINGLETON_INSTANCE.isSingleSelected();
         final DeckProxy humanDeck = VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
 
         if (humanDeck == null) {
-            FOptionPane.showErrorDialog("Please build and/or select a deck for yourself.", "No Deck");
+            FOptionPane.showErrorDialog(localizer.getMessage("lblNoDeckSelected"), localizer.getMessage("lblNoDeck"));
             return;
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             final String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
             if (null != errorMessage) {
-                FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
+                FOptionPane.showErrorDialog(localizer.getMessage("lblInvalidDeckDesc").replace("%n", errorMessage),
+                        localizer.getMessage("lblInvalidDeck"));
                 return;
             }
         }

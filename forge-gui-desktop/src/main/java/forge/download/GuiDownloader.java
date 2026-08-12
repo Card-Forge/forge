@@ -37,18 +37,22 @@ import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
 import forge.toolbox.JXButtonPanel;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import java.util.function.Consumer;
 
 @SuppressWarnings("serial")
 public class GuiDownloader extends DefaultBoundedRangeModel {
+    private final Localizer localizer = Localizer.getInstance();
     // Swing components
     private final FPanel pnlDialog = new FPanel(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
     private final FProgressBar progressBar = new FProgressBar();
-    private final FButton btnStart = new FButton("Start");
-    private final FTextField txtAddress = new FTextField.Builder().ghostText("Proxy Address").build();
-    private final FTextField txtPort = new FTextField.Builder().ghostText("Proxy Port").build();
+    private final FButton btnStart = new FButton(localizer.getMessage("lblStart"));
+    private final FTextField txtAddress = new FTextField.Builder()
+            .ghostText(localizer.getMessage("lblProxyAddress")).build();
+    private final FTextField txtPort = new FTextField.Builder()
+            .ghostText(localizer.getMessage("lblProxyPort")).build();
 
     private final UiCommand cmdClose = new UiCommand() {
         @Override public void run() {
@@ -58,7 +62,7 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
             SOverlayUtils.hideOverlay();
 
             if (callback != null) {
-                callback.accept(btnStart.getText() == "OK"); //determine result based on whether download finished
+                callback.accept(localizer.getMessage("lblOK").equals(btnStart.getText()));
             }
         }
     };
@@ -66,9 +70,9 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
     private final FLabel btnClose = new FLabel.Builder().text("X")
             .hoverable(true).fontAlign(SwingConstants.CENTER).cmdClick(cmdClose).build();
 
-    private final FRadioButton radProxyNone = new FRadioButton("No Proxy");
-    private final FRadioButton radProxySocks = new FRadioButton("SOCKS Proxy");
-    private final FRadioButton radProxyHTTP = new FRadioButton("HTTP Proxy");
+    private final FRadioButton radProxyNone = new FRadioButton(localizer.getMessage("lblNoProxy"));
+    private final FRadioButton radProxySocks = new FRadioButton(localizer.getMessage("lblSocksProxy"));
+    private final FRadioButton radProxyHTTP = new FRadioButton(localizer.getMessage("lblHttpProxy"));
 
     private final GuiDownloadService service;
     private final Consumer<Boolean> callback;
@@ -96,7 +100,7 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
         btnStart.setEnabled(false);
 
         progressBar.reset();
-        progressBar.setString("Scanning for existing items...");
+        progressBar.setString(localizer.getMessage("lblScanningForExistingItems"));
         pnlDialog.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
 
         // Layout

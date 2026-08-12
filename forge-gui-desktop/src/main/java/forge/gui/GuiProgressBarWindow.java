@@ -24,6 +24,7 @@ import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
 
 import forge.view.FDialog;
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -48,7 +49,7 @@ public class GuiProgressBarWindow extends FDialog {
      */
     public GuiProgressBarWindow() {
         this.setResizable(false);
-        this.setTitle("Some Progress");
+        this.setTitle(Localizer.getInstance().getMessage("lblProgress"));
         final Dimension screen = this.getToolkit().getScreenSize();
         this.setBounds(screen.width / 3, 100, // position
                 450, 84); // size

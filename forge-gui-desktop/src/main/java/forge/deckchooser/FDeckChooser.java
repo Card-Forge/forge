@@ -179,7 +179,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
         setDeckPoolWithConfig(ArchetypeDeckGenerator.getMatrixDecks(format, isAi), ItemManagerConfig.STRING_ONLY);
 
-        btnRandom.setText("Random");
+        btnRandom.setText(localizer.getMessage("lblRandom"));
         btnRandom.setCommand((UiCommand) () -> DeckgenUtil.randomSelect(lstDecks));
 
         // default selection = basic two color deck
@@ -195,7 +195,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setAllowMultipleSelections(false);
         setDeckPoolWithConfig(CommanderDeckGenerator.getCommanderDecks(deckFormat, isAi, false), ItemManagerConfig.STRING_ONLY);
 
-        btnRandom.setText("Random");
+        btnRandom.setText(localizer.getMessage("lblRandom"));
         btnRandom.setCommand((UiCommand) () -> DeckgenUtil.randomSelect(lstDecks));
 
         // default selection = basic two color deck
@@ -211,7 +211,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setAllowMultipleSelections(false);
         setDeckPoolWithConfig(CommanderDeckGenerator.getCommanderDecks(deckFormat, isAi, true), ItemManagerConfig.STRING_ONLY);
 
-        btnRandom.setText("Random");
+        btnRandom.setText(localizer.getMessage("lblRandom"));
         btnRandom.setCommand((UiCommand) () -> DeckgenUtil.randomSelect(lstDecks));
 
         // default selection = basic two color deck

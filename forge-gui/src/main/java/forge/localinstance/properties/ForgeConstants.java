@@ -19,6 +19,7 @@ package forge.localinstance.properties;
 
 import forge.gui.GuiBase;
 import forge.util.FileUtil;
+import forge.util.ForgeUpdateConfig;
 import forge.util.Localizer;
 
 import java.io.File;
@@ -341,11 +342,30 @@ public final class ForgeConstants {
     public static final String URL_CARDFORGE = "https://downloads.cardforge.org";
     public static final String GITHUB_ASSETS_BASE = "https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/";
 
-    public static final String URL_PIC_DOWNLOAD = URL_CARDFORGE + "/images/cards/";
+    public static final String URL_PIC_DOWNLOAD = ForgeUpdateConfig.getCardImageBaseUrlOrDefault(URL_CARDFORGE + "/images/cards/");
     public static final String URL_TOKEN_DOWNLOAD = URL_CARDFORGE + "/images/tokens/";
     public static final String URL_PRICE_DOWNLOAD = GITHUB_ASSETS_BASE + "all-prices.txt";
     private static final String URL_SCRYFALL = "https://api.scryfall.com";
     public static final String URL_PIC_SCRYFALL_DOWNLOAD = URL_SCRYFALL + "/cards/";
+
+    /**
+     * Builds a hosted card-image URL. The China mirror stores normalized
+     * full-border JPEGs, while the upstream Card Forge server uses .full.jpg.
+     */
+    public static String getCardImageDownloadUrl(final String relativePath) {
+        if (relativePath == null) {
+            return null;
+        }
+        String path = relativePath;
+        if (ForgeUpdateConfig.isCardImageMirrorEnabled() && !path.endsWith(".fullborder.jpg")) {
+            if (path.endsWith(".full.jpg")) {
+                path = path.substring(0, path.length() - ".full.jpg".length()) + ".fullborder.jpg";
+            } else if (path.endsWith(".jpg")) {
+                path = path.substring(0, path.length() - ".jpg".length()) + ".fullborder.jpg";
+            }
+        }
+        return URL_PIC_DOWNLOAD + path;
+    }
 
     // Constants for Display Card Identity game setting
     public static final String DISP_CURRENT_COLORS_ALWAYS = "Always";

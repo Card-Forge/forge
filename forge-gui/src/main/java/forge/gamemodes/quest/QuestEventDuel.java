@@ -17,6 +17,7 @@
  */
 package forge.gamemodes.quest;
 
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -36,7 +37,7 @@ public class QuestEventDuel extends QuestEvent {
 
     public QuestEventDuel getRandomOpponent(QuestEventDifficulty difficulty) {
         QuestEventDuel duel = new QuestEventDuel();
-        duel.setTitle("Random Opponent");
+        duel.setTitle(Localizer.getInstance().getMessage("lblRandomOpponent"));
         duel.setIconImageKey(getIconImageKey());
         duel.setOpponentName(getTitle());
         duel.setDifficulty(difficulty);

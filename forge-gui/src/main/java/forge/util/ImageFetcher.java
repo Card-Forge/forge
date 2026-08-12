@@ -286,24 +286,24 @@ public abstract class ImageFetcher {
             // Skip ftp if using art crop
             if (!useArtCrop) {
                 // Move priority of ftp image here
-                StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
                 if (!hasSetLookup) {
+                    String url;
                     if (!updateLink) {
-                        setDownload.append(ImageUtil.getDownloadUrl(paperCard, face));
+                        url = ImageUtil.getDownloadUrl(paperCard, face);
                     } else {
-                        String url = ImageUtil.getDownloadUrl(paperCard, face);
-                        setDownload.append(TextUtil.fastReplace(url, "1.full", imageKey.substring(imageKey.lastIndexOf('|') + 1, imageKey.indexOf('$')) + ".full"));
+                        url = ImageUtil.getDownloadUrl(paperCard, face);
+                        url = TextUtil.fastReplace(url, "1.full", imageKey.substring(imageKey.lastIndexOf('|') + 1, imageKey.indexOf('$')) + ".full");
                     }
-                    downloadUrls.add(setDownload.toString());
+                    downloadUrls.add(ForgeConstants.getCardImageDownloadUrl(url));
                 } else {
                     List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(paperCard);
                     for (PaperCard pc : clones) {
                         if (clones.size() > 1) {//clones only
                             if (!paperCard.getEdition().equalsIgnoreCase(pc.getEdition())) {
-                                downloadUrls.add(ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(pc, face));
+                                downloadUrls.add(ForgeConstants.getCardImageDownloadUrl(ImageUtil.getDownloadUrl(pc, face)));
                             }
                         } else {// original from set
-                            downloadUrls.add(ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(pc, face));
+                            downloadUrls.add(ForgeConstants.getCardImageDownloadUrl(ImageUtil.getDownloadUrl(pc, face)));
                         }
                     }
                 }

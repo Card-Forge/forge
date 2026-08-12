@@ -425,7 +425,7 @@ public final class LayoutMenu {
         }
 
         final FScrollPane scroller = new FScrollPane(checkPanel, false);
-        final FButton btnOk = new FButton("OK");
+        final FButton btnOk = new FButton(localizer.getMessage("lblOK"));
         btnOk.addActionListener(e -> dlg.dispose());
 
         dlg.add(scroller, "w 400!, h 300!, wrap");

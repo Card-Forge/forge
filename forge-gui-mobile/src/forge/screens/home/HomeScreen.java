@@ -113,7 +113,7 @@ public class HomeScreen extends FScreen {
         addButton(Forge.getLocalizer().getMessage("lblHelp"), e -> FThreads.invokeInEdtLater(() -> {
             try {
                 if (Forge.getDeviceAdapter().isConnectedToInternet()) {
-                    FOptionPane.showOptionDialog("Join Discord option will open the invite link to join Forge Discord server. Forge Support option will open the Forge Support Channel.", "Choose option", FOptionPane.INFORMATION_ICON, List.of("Join Discord", "Forge Support"), -1, result -> {
+                    FOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblDiscordHelpDescription"), Forge.getLocalizer().getMessage("lblChooseOption"), FOptionPane.INFORMATION_ICON, List.of(Forge.getLocalizer().getMessage("lblJoinDiscord"), Forge.getLocalizer().getMessage("lblForgeSupport")), -1, result -> {
                         switch (result) {
                             case 0:
                                 Gdx.net.openURI("https://discord.gg/3v9JCVr");
@@ -126,7 +126,7 @@ public class HomeScreen extends FScreen {
                         }
                     });
                 } else {
-                    FOptionPane.showErrorDialog("Internet Connection required to open Forge Discord server", "No Internet");
+                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblInternetConnectionRequired"), Forge.getLocalizer().getMessage("lblNoInternet"));
                 }
             } catch (Exception e1) {
                 e1.printStackTrace();

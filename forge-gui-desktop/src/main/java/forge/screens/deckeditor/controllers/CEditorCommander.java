@@ -39,6 +39,7 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +99,7 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         CardManager deckManager = new CardManager(getCDetailPicture(), false, false, false);
         deckManager.setAlwaysNonUnique(true);
 
-        catalogManager.setCaption("Catalog");
+        catalogManager.setCaption(Localizer.getInstance().getMessage("lblCatalog"));
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);

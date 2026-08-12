@@ -1,0 +1,15 @@
+schema=1
+version=2.0.15-cn.1
+publishedAt=2026-08-12T16:00:00+08:00
+android.version=2.0.15-cn.1
+android.url=android/2.0.15-cn.1/forge-android-2.0.15-cn.1.apk
+android.size=0
+android.sha256=0000000000000000000000000000000000000000000000000000000000000000
+desktop.version=2.0.15-cn.1
+desktop.url=desktop/2.0.15-cn.1/forge-desktop-2.0.15-cn.1.jar
+desktop.size=0
+desktop.sha256=0000000000000000000000000000000000000000000000000000000000000000
+assets.version=2.0.15-cn.1
+assets.url=assets/2.0.15-cn.1/assets.zip
+assets.size=0
+assets.sha256=0000000000000000000000000000000000000000000000000000000000000000

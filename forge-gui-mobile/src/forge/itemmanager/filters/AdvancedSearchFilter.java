@@ -259,12 +259,12 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             private AdvancedSearch.Filter<T> filter;
 
             private Filter() {
-                btnNotBeforeParen = add(new FLabel.Builder().align(Align.center).text("NOT").selectable().build());
+                btnNotBeforeParen = add(new FLabel.Builder().align(Align.center).text(Forge.getLocalizer().getMessage("lblNotOperator")).selectable().build());
                 btnOpenParen = add(new FLabel.Builder().align(Align.center).text("(").selectable().build());
-                btnNotAfterParen = add(new FLabel.Builder().align(Align.center).text("NOT").selectable().build());
+                btnNotAfterParen = add(new FLabel.Builder().align(Align.center).text(Forge.getLocalizer().getMessage("lblNotOperator")).selectable().build());
                 btnFilter = add(new FLabel.ButtonBuilder().parseSymbols(true).build());
                 btnCloseParen = add(new FLabel.Builder().align(Align.center).selectable().text(")").build());
-                btnAnd = add(new FLabel.Builder().align(Align.center).text("AND").selectable().command(new FEventHandler() {
+                btnAnd = add(new FLabel.Builder().align(Align.center).text(Forge.getLocalizer().getMessage("lblAndOperator")).selectable().command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         if (btnAnd.isSelected()) {
@@ -276,7 +276,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                         }
                     }
                 }).build());
-                btnOr = add(new FLabel.Builder().align(Align.center).text("OR").selectable().command(new FEventHandler() {
+                btnOr = add(new FLabel.Builder().align(Align.center).text(Forge.getLocalizer().getMessage("lblOrOperator")).selectable().command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         if (btnOr.isSelected()) {

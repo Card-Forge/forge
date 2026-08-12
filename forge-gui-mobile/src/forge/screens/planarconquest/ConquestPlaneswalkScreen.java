@@ -77,14 +77,14 @@ public class ConquestPlaneswalkScreen extends FScreen {
             ConquestPlane selectedPlane = planeSelector.getSelectedPlane();
             if (model.isPlaneUnlocked(selectedPlane)) {
                 unlockCost = 0;
-                setText("Planeswalk");
+                setText(Forge.getLocalizer().getMessage("lblPlaneswalk"));
             }
             else {
                 ConquestPreferences prefs = FModel.getConquestPreferences();
                 unlockCost = prefs.getPrefInt(CQPref.PLANESWALK_FIRST_UNLOCK) + prefs.getPrefInt(CQPref.PLANESWALK_UNLOCK_INCREASE) * (model.getUnlockedPlaneCount() - 1);
 
                 int emblems = model.getPlaneswalkEmblems();
-                String message = "Unlock {PW}";
+                String message = Forge.getLocalizer().getMessage("lblUnlockAction") + " {PW}";
                 if (emblems < unlockCost) {
                     message += TextRenderer.startColor(Color.RED) + emblems + TextRenderer.endColor();
                 }

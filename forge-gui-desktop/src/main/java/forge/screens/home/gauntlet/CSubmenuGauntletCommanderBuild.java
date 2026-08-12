@@ -7,6 +7,7 @@ import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.swing.*;
@@ -24,6 +25,7 @@ import java.util.List;
 public enum CSubmenuGauntletCommanderBuild implements ICDoc {
     SINGLETON_INSTANCE;
 
+    private final Localizer localizer = Localizer.getInstance();
     private final VSubmenuGauntletCommanderBuild view = VSubmenuGauntletCommanderBuild.SINGLETON_INSTANCE;
     private final List<Deck> workingDecks = new ArrayList<>();
     private final File openStartDir = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc);
@@ -41,7 +43,7 @@ public enum CSubmenuGauntletCommanderBuild implements ICDoc {
 
         @Override
         public String getDescription() {
-            return "Forge data file .dat";
+            return localizer.getMessage("lblForgeDataFile");
         }
     };
 
@@ -149,8 +151,8 @@ public enum CSubmenuGauntletCommanderBuild implements ICDoc {
         // Warn if no name
         if (name.isEmpty()) {
             FOptionPane.showMessageDialog(
-                    "Please name your gauntlet using the 'Gauntlet Name' box.",
-                    "Save Error!",
+                    localizer.getMessage("lblPleaseNameGauntlet"),
+                    localizer.getMessage("lblSaveErrorWarning"),
                     FOptionPane.ERROR_ICON);
             return false;
         }
@@ -159,9 +161,8 @@ public enum CSubmenuGauntletCommanderBuild implements ICDoc {
         // Confirm if overwrite
         if (f.exists()) {
             if (!FOptionPane.showConfirmDialog(
-                    "There is already a gauntlet named '" + name + "'.\n"
-                            + "All progress and data will be overwritten. Continue?",
-                    "Overwrite Gauntlet?")) { return false; }
+                    localizer.getMessage("lblGauntletAlreadyExists", name),
+                    localizer.getMessage("lblOverwriteGauntlet"))) { return false; }
 
             gd = GauntletIO.loadGauntlet(f);
             if (gd == null) { return false; }
@@ -169,8 +170,8 @@ public enum CSubmenuGauntletCommanderBuild implements ICDoc {
         // Confirm if a new gauntlet will be created
         else {
             if (!FOptionPane.showConfirmDialog(
-                    "This will create a new gauntlet named '" + name + "'. Continue?",
-                    "Create Gauntlet?")) { return false; }
+                    localizer.getMessage("lblCreateGauntletPrompt", name),
+                    localizer.getMessage("lblCreateGauntlet"))) { return false; }
 
             gd = new GauntletData(true);
         }
@@ -193,7 +194,7 @@ public enum CSubmenuGauntletCommanderBuild implements ICDoc {
     private boolean openGauntlet() {
         final File file;
         final JFileChooser open = new JFileChooser(openStartDir);
-        open.setDialogTitle("Import Deck");
+        open.setDialogTitle(localizer.getMessage("lblImportGauntlet"));
         open.addChoosableFileFilter(this.filterDAT);
         final int returnVal = open.showOpenDialog(null);
 

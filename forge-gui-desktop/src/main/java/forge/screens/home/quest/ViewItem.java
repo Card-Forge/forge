@@ -17,11 +17,13 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 /** An update-able panel instance representing a single item. */
 @SuppressWarnings("serial")
 public class ViewItem extends FPanel {
+    private final Localizer localizer = Localizer.getInstance();
     private final FLabel lblIcon, lblName, lblPrice, btnPurchase;
     private final FHtmlViewer tarDesc;
     private IQuestBazaarItem item;
@@ -33,7 +35,8 @@ public class ViewItem extends FPanel {
         this.lblName = new FLabel.Builder().fontStyle(Font.BOLD).build();
         this.lblPrice = new FLabel.Builder().fontStyle(Font.BOLD).fontSize(12).build();
         this.tarDesc = new FHtmlViewer();
-        this.btnPurchase = new FLabel.Builder().text("Buy").opaque(true).fontSize(20).hoverable(true).build();
+        this.btnPurchase = new FLabel.Builder().text(localizer.getMessage("lblBuy"))
+                .opaque(true).fontSize(20).hoverable(true).build();
 
         this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
@@ -84,7 +87,7 @@ public class ViewItem extends FPanel {
             ViewItem.this.lblIcon.setIcon(i);
 
             ViewItem.this.lblName.setText(bazaarItem.getPurchaseName());
-            ViewItem.this.lblPrice.setText("Cost: " + bazaarItem.getBuyingPrice(qA) + " credits");
+            ViewItem.this.lblPrice.setText(localizer.getMessage("lblCostCredits", bazaarItem.getBuyingPrice(qA)));
             String desc = bazaarItem.getPurchaseDescription(qA);
             ViewItem.this.tarDesc.setText(FSkin.encodeSymbols(desc, false)); //encode in case there are mana symbols in description
 

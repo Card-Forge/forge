@@ -87,7 +87,7 @@ public class SettingsScene extends UIScene {
             createNewPlane.getContentTable().row();
             createNewPlane.getContentTable().add(selectSourcePlane);
             createNewPlane.getContentTable().row();
-            createNewPlane.text("Set new plane name");
+            createNewPlane.text(Forge.getLocalizer().getMessage("lblSetNewPlaneName"));
             createNewPlane.getContentTable().row();
             createNewPlane.getContentTable().add(newPlaneName);
             newPlaneName.setText(selectSourcePlane.getSelected() + "_copy");

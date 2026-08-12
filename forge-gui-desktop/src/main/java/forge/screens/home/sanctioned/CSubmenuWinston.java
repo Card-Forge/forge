@@ -28,6 +28,7 @@ import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorWinstonProcess;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 
 /**
  * Controls the draft submenu in the home UI.
@@ -85,18 +86,20 @@ public enum CSubmenuWinston implements ICDoc {
     }
 
     private void startGame(final GameType gameType) {
+        final Localizer localizer = Localizer.getInstance();
         final DeckProxy humanDeck = VSubmenuWinston.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
         final int aiIndex = 0;
 
         if (humanDeck == null) {
-            FOptionPane.showErrorDialog("No deck selected for human.\n(You may need to build a new deck)", "No Deck");
+            FOptionPane.showErrorDialog(localizer.getMessage("lblNoDeckSelected"), localizer.getMessage("lblNoDeck"));
             return;
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             final String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
             if (null != errorMessage) {
-                FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
+                FOptionPane.showErrorDialog(localizer.getMessage("lblInvalidDeckDesc").replace("%n", errorMessage),
+                        localizer.getMessage("lblInvalidDeck"));
                 return;
             }
         }

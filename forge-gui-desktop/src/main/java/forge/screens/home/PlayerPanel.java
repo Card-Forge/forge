@@ -730,7 +730,7 @@ public class PlayerPanel extends FPanel {
             setRandomSleeve(false);
         }
 
-        sleeveLabel.setToolTipText("L-click: Select sleeve. R-click: Randomize sleeve.");
+        sleeveLabel.setToolTipText(localizer.getMessage("lblSleeveSelectionTooltip"));
         sleeveLabel.addFocusListener(sleeveFocusListener);
         sleeveLabel.setCommand((UiCommand) () -> {
             lobby.changePlayerFocus(index);

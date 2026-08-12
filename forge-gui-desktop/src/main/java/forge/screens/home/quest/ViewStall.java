@@ -41,6 +41,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextPane;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -68,7 +69,7 @@ public class ViewStall extends JPanel {
     public ViewStall(final VBazaarUI v0) {
         // Final/component inits
         this.lblStallName = new FLabel.Builder().text("").fontAlign(SwingConstants.CENTER).build();
-        this.lblEmpty = new FLabel.Builder().text("The merchant does not have anything useful for sale.")
+        this.lblEmpty = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblMerchantNothingUseful"))
                 .fontAlign(SwingConstants.CENTER).build();
         this.lblStats = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontSize(12).build();
 

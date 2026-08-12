@@ -78,6 +78,6 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
             return;
         }
 
-        downloads.put(destPath, ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(c, face));
+        downloads.put(destPath, ForgeConstants.getCardImageDownloadUrl(ImageUtil.getDownloadUrl(c, face)));
     }
 }

@@ -8,6 +8,7 @@ import forge.gui.GuiBase;
 import forge.gui.interfaces.IProgressBar;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
+import forge.util.UpdateManifest;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -22,6 +23,8 @@ import java.util.zip.ZipFile;
 
 public class GuiDownloadZipService extends GuiDownloadService {
     private final String name, desc, sourceUrl, destFolder, deleteFolder;
+    private final long expectedSize;
+    private final String expectedSha256;
     private int filesExtracted;
     private boolean allowDeletion;
 
@@ -29,6 +32,12 @@ public class GuiDownloadZipService extends GuiDownloadService {
         this(name0, desc0, sourceUrl0, destFolder0, deleteFolder0, progressBar0,true);
     }
     public GuiDownloadZipService(final String name0, final String desc0, final String sourceUrl0, final String destFolder0, final String deleteFolder0, final IProgressBar progressBar0, final boolean allowDeletion0) {
+        this(name0, desc0, sourceUrl0, destFolder0, deleteFolder0, progressBar0, allowDeletion0, 0, "");
+    }
+
+    public GuiDownloadZipService(final String name0, final String desc0, final String sourceUrl0, final String destFolder0,
+                                 final String deleteFolder0, final IProgressBar progressBar0, final boolean allowDeletion0,
+                                 final long expectedSize0, final String expectedSha2560) {
         name = name0;
         desc = desc0;
         sourceUrl = sourceUrl0;
@@ -36,6 +45,8 @@ public class GuiDownloadZipService extends GuiDownloadService {
         deleteFolder = deleteFolder0;
         progressBar = progressBar0;
         allowDeletion = allowDeletion0;
+        expectedSize = expectedSize0;
+        expectedSha256 = expectedSha2560;
     }
 
     @Override
@@ -138,6 +149,12 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 return null;
             }
 
+            final File downloadedFile = new File(destFile);
+            if (!UpdateManifest.verify(downloadedFile, expectedSize, expectedSha256)) {
+                Logger.error("Downloaded file failed size or SHA-256 verification: " + sourceUrl);
+                downloadedFile.delete();
+                return null;
+            }
             return destFile;
         }
         catch (final Exception ex) {

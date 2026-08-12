@@ -32,8 +32,10 @@ import forge.itemmanager.SItemManagerUtil;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 
 public class QuestSpellShop {
+    private static final Localizer localizer = Localizer.getInstance();
     private static Map<String, Integer> mapPrices;
     private static double multiplier;
     private static ItemPool<InventoryItem> decksUsingMyCards;
@@ -166,16 +168,18 @@ public class QuestSpellShop {
         List<InventoryItem> itemFlatList = itemsToBuy.toFlatList();
         String suffix = SItemManagerUtil.getItemDisplayString(itemFlatList, 1, true);
         String displayList = SItemManagerUtil.buildDisplayList(itemsToBuy);
-        String title = "Buy " + suffix;
+        String title = localizer.getMessage("lblBuyItemsTitle", suffix);
 
         long creditsShort = totalCost - FModel.getQuest().getAssets().getCredits();
         if (creditsShort > 0) {
-            SOptionPane.showMessageDialog("You need " + creditsShort + " more credits to purchase the following " + suffix.toLowerCase() + ".\n" + displayList, title);
+            SOptionPane.showMessageDialog(localizer.getMessage("lblNeedMoreCredits",
+                    creditsShort, suffix.toLowerCase(), displayList), title);
             return;
         }
 
-        if (confirmPurchase && !SOptionPane.showConfirmDialog("Pay " + totalCost + " credits to purchase the following " +
-                suffix.toLowerCase() + "?\n" + displayList, title, "Buy", "Cancel")) {
+        if (confirmPurchase && !SOptionPane.showConfirmDialog(localizer.getMessage("lblPayCreditsToPurchase",
+                totalCost, suffix.toLowerCase(), displayList), title,
+                localizer.getMessage("lblBuy"), localizer.getMessage("lblCancel"))) {
             return;
         }
 
@@ -226,7 +230,10 @@ public class QuestSpellShop {
                         final List<PaperCard> remainingCards = new ArrayList<>();
 
                         while (((BoxedProduct) booster).boosterPacksRemaining() > 0 && !skipTheRest) {
-                            skipTheRest = GuiBase.getInterface().showBoxedProduct(booster.getName(), "You have found the following cards inside (Booster Pack " + (totalPacks - ((BoxedProduct) booster).boosterPacksRemaining() + 1) + " of " + totalPacks + "):", ((BoxedProduct) booster).getNextBoosterPack());
+                            skipTheRest = GuiBase.getInterface().showBoxedProduct(booster.getName(),
+                                    localizer.getMessage("lblFoundCardsInBooster",
+                                            totalPacks - ((BoxedProduct) booster).boosterPacksRemaining() + 1, totalPacks),
+                                    ((BoxedProduct) booster).getNextBoosterPack());
                         }
 
                         if (skipTheRest) {
@@ -238,11 +245,13 @@ public class QuestSpellShop {
                         remainingCards.addAll(((BoxedProduct) booster).getExtraCards());
 
                         if (!remainingCards.isEmpty()) {
-                            GuiBase.getInterface().showCardList(booster.getName(), "You have found the following cards inside:", remainingCards);
+                            GuiBase.getInterface().showCardList(booster.getName(),
+                                    localizer.getMessage("lblFoundCardsInside"), remainingCards);
                         }
 
                     } else {
-                        GuiBase.getInterface().showCardList(booster.getName(), "You have found the following cards inside:", newCards);
+                        GuiBase.getInterface().showCardList(booster.getName(),
+                                localizer.getMessage("lblFoundCardsInside"), newCards);
                     }
                 }
             }
@@ -254,12 +263,8 @@ public class QuestSpellShop {
                     itemsToAdd.addAllOfType(deck.getDeck().getMain());
                 }
 
-                boolean one = (qty == 1);
-                SOptionPane.showMessageDialog(String.format(
-                        "%s '%s' %s added to your decklist.%n%n%s cards were also added to your pool.",
-                        one ? "Deck" : String.format("%d copies of deck", qty),
-                        deck.getName(), one ? "was" : "were", one ? "Its" : "Their"),
-                        "Thanks for purchasing!", SOptionPane.INFORMATION_ICON);
+                SOptionPane.showMessageDialog(localizer.getMessage("lblPurchasedDeckAdded", qty,
+                        deck.getName()), localizer.getMessage("lblThanksForPurchasing"), SOptionPane.INFORMATION_ICON);
             }
         }
 
@@ -302,10 +307,11 @@ public class QuestSpellShop {
             List<InventoryItem> itemFlatList = itemsToSell.toFlatList();
             String suffix = SItemManagerUtil.getItemDisplayString(itemFlatList, 1, true);
             String displayList = SItemManagerUtil.buildDisplayList(itemsToSell);
-            String title = "Sell " + suffix;
+            String title = localizer.getMessage("lblSellItemsTitle", suffix);
 
-            if (!SOptionPane.showConfirmDialog("Sell the following " + suffix.toLowerCase() + " for " + totalReceived +
-                    " credit" + (totalReceived != 1 ? "s" : "") + "?\n" + displayList, title, "Sell", "Cancel")) {
+            if (!SOptionPane.showConfirmDialog(localizer.getMessage("lblSellItemsForCredits",
+                    suffix.toLowerCase(), totalReceived, displayList), title,
+                    localizer.getMessage("lblSell"), localizer.getMessage("lblCancel"))) {
                 return;
             }
         }

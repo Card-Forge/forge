@@ -597,7 +597,7 @@ public class RewardScene extends UIScene {
         void update() {
             setDisabled(WorldSave.getCurrentSave().getPlayer().getGold() < price);
             if (isSold)
-                setText("SOLD");
+                setText(Forge.getLocalizer().getMessage("lblSoldStatus"));
             else
                 updateOwned();
         }
@@ -663,7 +663,7 @@ public class RewardScene extends UIScene {
         void update() {
             setDisabled(remainingSelections <= 0);
             if (isSold)
-                setText("SELECTED");
+                setText(Forge.getLocalizer().getMessage("lblSelectedStatus"));
             else
                 updateOwned();
         }
@@ -687,7 +687,7 @@ public class RewardScene extends UIScene {
             setX(actor.getX());
             setY(actor.getY() - getHeight());
 
-            setText("Pick Reward");
+            setText(Forge.getLocalizer().getMessage("lblPickReward"));
             updateOwned();
             addListener(new ClickListener() {
                 @Override
@@ -698,7 +698,7 @@ public class RewardScene extends UIScene {
                         Current.player().addReward(rewardActor.getReward());
 
                         headerLabel.setVisible(remainingSelections > 0);
-                        headerLabel.setText("Select " + remainingSelections + " rewards");
+                        headerLabel.setText(Forge.getLocalizer().getMessage("lblSelectRewards", remainingSelections));
                         doneButton.setDisabled(remainingSelections > 0);
 
                         HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD, 5);

@@ -10,6 +10,8 @@ import com.badlogic.gdx.files.FileHandle;
 import forge.gui.GuiBase;
 import forge.util.BuildInfo;
 import forge.util.DateUtil;
+import forge.util.ForgeUpdateConfig;
+import forge.util.UpdateManifest;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -19,6 +21,8 @@ import forge.Forge;
 import forge.gui.FThreads;
 import forge.gui.download.GuiDownloadZipService;
 import forge.gui.util.SOptionPane;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.util.FileUtil;
 
 import static forge.localinstance.properties.ForgeConstants.ADV_TEXTURE_BG_FILE;
@@ -28,18 +32,30 @@ import static forge.localinstance.properties.ForgeConstants.DEFAULT_SKINS_DIR;
 import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_ATOM;
 import static forge.localinstance.properties.ForgeConstants.GITHUB_FORGE_URL;
 import static forge.localinstance.properties.ForgeConstants.GITHUB_RELEASES_ATOM;
+import static forge.localinstance.properties.ForgeConstants.FONTS_DIR;
+import static forge.localinstance.properties.ForgeConstants.LANG_DIR;
 import static forge.localinstance.properties.ForgeConstants.RELEASE_URL;
 import static forge.localinstance.properties.ForgeConstants.RES_DIR;
 
 public class AssetsDownloader {
-    private final static ImmutableList<String> downloadIgnoreExit = ImmutableList.of("Download", "Ignore", "Exit");
-    private final static ImmutableList<String> downloadExit = ImmutableList.of("Download", "Exit");
+    private static ImmutableList<String> getDownloadIgnoreExitOptions() {
+        return ImmutableList.of(Forge.getLocalizer().getMessage("lblDownload"), Forge.getLocalizer().getMessage("lblIgnore"), Forge.getLocalizer().getMessage("lblExit"));
+    }
+
+    private static ImmutableList<String> getDownloadExitOptions() {
+        return ImmutableList.of(Forge.getLocalizer().getMessage("lblDownload"), Forge.getLocalizer().getMessage("lblExit"));
+    }
 
     public static void checkForUpdates(boolean exited, Runnable runnable) {
         if (exited)
             return;
+        installBundledCjkFont();
+        installBundledLocalizationOverrides();
+        if (GuiBase.isAndroid()) {
+            Forge.getLocalizer().initialize(Forge.locale, LANG_DIR);
+        }
         final String versionString = Forge.getDeviceAdapter().getVersionString();
-        Forge.getSplashScreen().getProgressBar().setDescription("Checking for updates...");
+        Forge.getSplashScreen().getProgressBar().setDescription(Forge.getLocalizer().getMessage("lblCheckingForUpdates"));
         if (versionString.contains("GIT")) {
             if (!GuiBase.isAndroid()) {
                 run(runnable);
@@ -51,6 +67,22 @@ public class AssetsDownloader {
         final String apkSize = "12MB";
 
         final boolean isSnapshots = versionString.contains("SNAPSHOT");
+        boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
+        UpdateManifest mirrorManifest = null;
+        if (connectedToInternet) {
+            if (!ForgeUpdateConfig.isMirrorEnabled()) {
+                // Localized builds use the China mirror exclusively. Never fall back
+                // to the upstream release or snapshot servers.
+                connectedToInternet = false;
+            } else {
+                try {
+                    mirrorManifest = UpdateManifest.load(ForgeUpdateConfig.getManifestUrl());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    connectedToInternet = false;
+                }
+            }
+        }
         final String snapsURL = GITHUB_SNAPSHOT_URL;
         // desktop and mobile-dev share the same package
         final String guiChannel = GuiBase.isAndroid() ? "forge/forge-gui-android/" : "forge/forge-gui-desktop/";
@@ -66,27 +98,58 @@ public class AssetsDownloader {
         Date snapsTimestamp = null, buildTimeStamp = null;
 
         String message;
-        boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
         if (connectedToInternet) {
             //currently for desktop/mobile-dev release on github
-            final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_ATOM);
+            final String releaseTag = mirrorManifest == null
+                    ? Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_ATOM)
+                    : "forge-" + mirrorManifest.version();
+            final UpdateManifest.Artifact mirrorInstaller = mirrorManifest == null ? null
+                    : (GuiBase.isAndroid() ? mirrorManifest.android() : mirrorManifest.desktop());
+            // A mirror manifest may intentionally publish only assets. In that case Android must
+            // continue to the resource update below without trying to construct an empty APK URL.
+            // Desktop has no separate resource package, so it can finish startup immediately.
+            if (mirrorManifest != null && (mirrorInstaller == null || !mirrorInstaller.isPresent())) {
+                if (!GuiBase.isAndroid()) {
+                    run(runnable);
+                    return;
+                }
+            } else {
             try {
-                URL versionUrl = new URL(versionText);
-                String version = isSnapshots ? FileUtil.readFileToString(versionUrl) : releaseTag.replace("forge-", "");
+                String version = mirrorManifest == null
+                        ? (isSnapshots ? FileUtil.readFileToString(new URL(versionText)) : releaseTag.replace("forge-", ""))
+                        : mirrorManifest.version();
                 String filename = "";
                 String installerURL = "";
+                long installerSize = 0;
+                String installerSha256 = "";
                 if (GuiBase.isAndroid()) {
-                    filename = "forge-android-" + version + "-signed-aligned.apk";
-                    installerURL = isSnapshots ? snapsURL + filename : releaseURL + version + "/" + filename;
+                    if (mirrorManifest != null) {
+                        final UpdateManifest.Artifact artifact = mirrorManifest.android();
+                        installerURL = mirrorManifest.resolveUrl(artifact);
+                        filename = new FileHandle(new URL(installerURL).getPath()).name();
+                        installerSize = artifact.size();
+                        installerSha256 = artifact.sha256();
+                    } else {
+                        filename = "forge-android-" + version + "-signed-aligned.apk";
+                        installerURL = isSnapshots ? snapsURL + filename : releaseURL + version + "/" + filename;
+                    }
                 } else {
-                    //current release on github is tar.bz2, update this to jar installer in the future...
-                    filename = isSnapshots ? "forge-installer-" + version + ".jar" : releaseTag.replace("forge-", "forge-gui-desktop-") + ".tar.bz2";
-                    String releaseBZ2URL = GITHUB_FORGE_URL + "releases/download/" + releaseTag + "/" + filename;
-                    String snapsBZ2URL = GITHUB_SNAPSHOT_URL + filename;
-                    installerURL = isSnapshots ? snapsBZ2URL : releaseBZ2URL;
+                    if (mirrorManifest != null) {
+                        final UpdateManifest.Artifact artifact = mirrorManifest.desktop();
+                        installerURL = mirrorManifest.resolveUrl(artifact);
+                        filename = new FileHandle(new URL(installerURL).getPath()).name();
+                        installerSize = artifact.size();
+                        installerSha256 = artifact.sha256();
+                    } else {
+                        //current release on github is tar.bz2, update this to jar installer in the future...
+                        filename = isSnapshots ? "forge-installer-" + version + ".jar" : releaseTag.replace("forge-", "forge-gui-desktop-") + ".tar.bz2";
+                        String releaseBZ2URL = GITHUB_FORGE_URL + "releases/download/" + releaseTag + "/" + filename;
+                        String snapsBZ2URL = GITHUB_SNAPSHOT_URL + filename;
+                        installerURL = isSnapshots ? snapsBZ2URL : releaseBZ2URL;
+                    }
                 }
                 String snapsBuildDate = "", buildDate = "";
-                if (isSnapshots) {
+                if (mirrorManifest == null && isSnapshots) {
                     URL url = new URL(snapsURL + "build.txt");
                     snapsTimestamp = format.parse(FileUtil.readFileToString(url));
                     snapsBuildDate = snapsTimestamp.toString();
@@ -111,29 +174,28 @@ public class AssetsDownloader {
                 if (verifyUpdatable) {
                     Forge.getSplashScreen().prepareForDialogs();
 
-                    message = "A new version of Forge is available.\n(v." + version + " | " + snapsBuildDate + ")\n" +
-                            "You are currently on an older version.\n(v." + versionString + " | " + buildDate + ")\n" +
-                            "Would you like to update to the new version now?";
+                    message = Forge.getLocalizer().getMessage("lblNewVersionForgeAvailableDetailed", version, snapsBuildDate, versionString, buildDate);
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
-                        message += " If so, you may want to connect to wifi first. The download is around " + (GuiBase.isAndroid() ? apkSize : packageSize) + ".";
+                        message += " " + Forge.getLocalizer().getMessage("lblConnectWifiForDownload", GuiBase.isAndroid() ? apkSize : packageSize);
                     }
-                    if (isSnapshots) // this is for snaps initial info
+                    if (mirrorManifest == null && isSnapshots) // this is for snaps initial info
                         message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, buildTimeStamp, snapsTimestamp);
                     //failed to grab latest github tag
                     if (!isSnapshots && releaseTag.isEmpty()) {
                         if (!GuiBase.isAndroid())
                             run(runnable);
-                    } else if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later", true, true)) {
+                    } else if (SOptionPane.showConfirmDialog(message, Forge.getLocalizer().getMessage("lblNewVersionAvailable"), Forge.getLocalizer().getMessage("lblUpdateNow"), Forge.getLocalizer().getMessage("lblUpdateLater"), true, true)) {
                         String installer = new GuiDownloadZipService("", "update", installerURL,
-                                Forge.getDeviceAdapter().getDownloadsDir(), null, Forge.getSplashScreen().getProgressBar()).download(filename);
+                                Forge.getDeviceAdapter().getDownloadsDir(), null, Forge.getSplashScreen().getProgressBar(),
+                                true, installerSize, installerSha256).download(filename);
                         if (installer != null) {
                             Forge.getDeviceAdapter().openFile(installer);
                             Forge.isMobileAdventureMode = Forge.advStartup;
                             Forge.exitAnimation(false);
                             return;
                         }
-                        switch (SOptionPane.showOptionDialog("Could not download update. " +
-                                "Press OK to proceed without update.", "Update Failed", null, ImmutableList.of("Ok"))) {
+                        switch (SOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblCouldNotDownloadUpdate"),
+                                Forge.getLocalizer().getMessage("lblUpdateFailed"), null, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")))) {
                             default:
                                 if (!GuiBase.isAndroid()) {
                                     run(runnable);
@@ -154,6 +216,7 @@ public class AssetsDownloader {
                     run(runnable);
                     return;
                 }
+            }
             }
         } else {
             if (!GuiBase.isAndroid()) {
@@ -190,7 +253,11 @@ public class AssetsDownloader {
                 Forge.exitAnimation(false); //can't continue if this fails
                 return;
             }
-        } else if (versionString.equals(FileUtil.readFileToString(versionFile.file())) && FSkin.getSkinDir() != null) {
+        }
+        final UpdateManifest.Artifact mirrorAssets = mirrorManifest == null ? null : mirrorManifest.assets();
+        final String resourceVersion = mirrorAssets != null && mirrorAssets.isPresent()
+                ? mirrorAssets.version() : versionString;
+        if (versionFile.exists() && resourceVersion.equals(FileUtil.readFileToString(versionFile.file())) && FSkin.getSkinDir() != null) {
             run(runnable);
             return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
         }
@@ -203,12 +270,12 @@ public class AssetsDownloader {
                 Date buildDate = format.parse(buildString);
                 Date targetDate = format.parse(target);
                 // if res folder has same build date then continue loading assets
-                if (buildDate.equals(targetDate) && versionString.equals(FileUtil.readFileToString(versionFile.file()))) {
+                if (buildDate.equals(targetDate) && resourceVersion.equals(FileUtil.readFileToString(versionFile.file()))) {
                     run(runnable);
                     return;
                 }
                 mandatory = true;
-                build += "\nInstalled resources date: " + target + "\n";
+                build += "\n" + Forge.getLocalizer().getMessage("lblInstalledResourcesDate", target) + "\n";
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -221,13 +288,13 @@ public class AssetsDownloader {
             canIgnoreDownload = false;
 
         if (!connectedToInternet) {
-            message = "Updated resource files cannot be downloaded due to lack of internet connection.\n\n";
+            message = Forge.getLocalizer().getMessage("lblUpdatedResourcesUnavailable") + "\n\n";
             if (canIgnoreDownload) {
-                message += "You can continue without this download, but you may miss out on card fixes or experience other problems.";
+                message += Forge.getLocalizer().getMessage("lblContinueWithoutResourceUpdate");
             } else {
-                message += "You cannot start the app since you haven't previously downloaded these files.";
+                message += Forge.getLocalizer().getMessage("lblCannotStartWithoutResources");
             }
-            switch (SOptionPane.showOptionDialog(message, "No Internet Connection", null, ImmutableList.of("Ok"))) {
+            switch (SOptionPane.showOptionDialog(message, Forge.getLocalizer().getMessage("lblNoInternetConnection"), null, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")))) {
                 default: {
                     if (!canIgnoreDownload) {
                         Forge.isMobileAdventureMode = Forge.advStartup;
@@ -239,21 +306,20 @@ public class AssetsDownloader {
         }
 
         //prompt user whether they wish to download the updated resource files
-        message = "There are updated resource files to download. " +
-                "This download is around " + packageSize + ", ";
+        message = Forge.getLocalizer().getMessage("lblUpdatedResourcesDownload", packageSize) + " ";
         if (Forge.getDeviceAdapter().isConnectedToWifi()) {
-            message += "which shouldn't take long if your wifi connection is good.";
+            message += Forge.getLocalizer().getMessage("lblWifiDownloadShouldBeQuick");
         } else {
-            message += "so it's highly recommended that you connect to wifi first.";
+            message += Forge.getLocalizer().getMessage("lblWifiDownloadRecommended");
         }
         final List<String> options;
         message += "\n\n";
         if (canIgnoreDownload) {
-            message += "If you choose to ignore this download, you may miss out on card fixes or experience other problems.";
-            options = downloadIgnoreExit;
+            message += Forge.getLocalizer().getMessage("lblIgnoreResourceUpdateWarning");
+            options = getDownloadIgnoreExitOptions();
         } else {
-            message += "This download is mandatory to start the app since you haven't previously downloaded these files.";
-            options = downloadExit;
+            message += Forge.getLocalizer().getMessage("lblResourceUpdateMandatory");
+            options = getDownloadExitOptions();
         }
 
         switch (SOptionPane.showOptionDialog(message + build, "", null, options)) {
@@ -274,9 +340,28 @@ public class AssetsDownloader {
 
         //allow deletion on Android 10 or if using app-specific directory
         boolean allowDeletion = Forge.androidVersion < 30 || GuiBase.isUsingAppDirectory();
-        String assetURL = isSnapshots ? snapsURL + "assets.zip" : releaseURL + versionString + "/" + "assets.zip";
-        new GuiDownloadZipService("", "resource files", assetURL,
-                ASSETS_DIR, RES_DIR, Forge.getSplashScreen().getProgressBar(), allowDeletion).downloadAndUnzip();
+        final String assetURL;
+        final long assetSize;
+        final String assetSha256;
+        if (mirrorAssets != null && mirrorAssets.isPresent()) {
+            try {
+                assetURL = mirrorManifest.resolveUrl(mirrorAssets);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Forge.isMobileAdventureMode = Forge.advStartup;
+                Forge.exitAnimation(false);
+                return;
+            }
+            assetSize = mirrorAssets.size();
+            assetSha256 = mirrorAssets.sha256();
+        } else {
+            assetURL = isSnapshots ? snapsURL + "assets.zip" : releaseURL + versionString + "/" + "assets.zip";
+            assetSize = 0;
+            assetSha256 = "";
+        }
+        new GuiDownloadZipService("", Forge.getLocalizer().getMessage("lblResourceFiles"), assetURL,
+                ASSETS_DIR, RES_DIR, Forge.getSplashScreen().getProgressBar(), allowDeletion,
+                assetSize, assetSha256).downloadAndUnzip();
 
         if (allowDeletion)
             FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed
@@ -291,7 +376,7 @@ public class AssetsDownloader {
         //so they don't need to be re-downloaded until you upgrade again
         if (connectedToInternet) {
             if (versionFile.exists())
-                FileUtil.writeFile(versionFile.file(), versionString);
+                FileUtil.writeFile(versionFile.file(), resourceVersion);
         }
         //final check if temp.zip exists then extraction is not complete...
         FileHandle check = assetsDir.child("temp.zip");
@@ -307,8 +392,10 @@ public class AssetsDownloader {
 
     private static void run(Runnable toRun) {
         if (toRun != null) {
+            installBundledCjkFont();
+            installBundledLocalizationOverrides();
             if (!GuiBase.isAndroid()) {
-                Forge.getSplashScreen().getProgressBar().setDescription("Loading game resources...");
+                Forge.getSplashScreen().getProgressBar().setDescription(Forge.getLocalizer().getMessage("lblLoadingGameResources"));
             }
             FThreads.invokeInBackgroundThread(toRun);
             return;
@@ -316,6 +403,46 @@ public class AssetsDownloader {
         if (!GuiBase.isAndroid()) {
             Forge.isMobileAdventureMode = Forge.advStartup;
             Forge.exitAnimation(false);
+        }
+    }
+
+    private static void installBundledLocalizationOverrides() {
+        if (!GuiBase.isAndroid()) {
+            return;
+        }
+        FileHandle destination = Gdx.files.absolute(LANG_DIR);
+        destination.mkdirs();
+        for (String fileName : ImmutableList.of("en-US.properties", "zh-CN.properties", "cardnames-zh-CN.txt")) {
+            FileHandle bundledFile = Gdx.files.internal("localization/" + fileName);
+            if (bundledFile.exists()) {
+                bundledFile.copyTo(destination.child(fileName));
+            }
+        }
+    }
+
+    private static void installBundledCjkFont() {
+        if (!GuiBase.isAndroid()) {
+            return;
+        }
+        final String fontName = "SourceHanSansCN";
+        FileHandle bundledFont = Gdx.files.internal("bundled-font/" + fontName + ".ttf");
+        if (!bundledFont.exists()) {
+            return;
+        }
+        FileHandle fontDirectory = Gdx.files.absolute(FONTS_DIR);
+        fontDirectory.mkdirs();
+        FileHandle installedFont = fontDirectory.child(fontName + ".ttf");
+        if (!installedFont.exists() || installedFont.length() != bundledFont.length()) {
+            bundledFont.copyTo(installedFont);
+        }
+        FileHandle bundledLicense = Gdx.files.internal("bundled-font/OFL.txt");
+        if (bundledLicense.exists()) {
+            bundledLicense.copyTo(fontDirectory.child("SourceHanSansCN-OFL.txt"));
+        }
+        if (FModel.getPreferences().getPref(FPref.UI_CJK_FONT).isEmpty()) {
+            FModel.getPreferences().setPref(FPref.UI_CJK_FONT, fontName);
+            FModel.getPreferences().save();
+            Forge.CJK_Font = fontName;
         }
     }
 }

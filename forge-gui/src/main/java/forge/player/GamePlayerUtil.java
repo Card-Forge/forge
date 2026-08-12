@@ -123,24 +123,20 @@ public final class GamePlayerUtil {
     }
 
     private static void showThankYouPrompt(final String playerName) {
-        SOptionPane.showMessageDialog("Thank you, " + playerName + ". "
-                + "You will not be prompted again but you can change\n"
-                + "your name at any time using the \"Player Name\" setting in Preferences\n"
-                + "or via the constructed match setup screen\n");
+        SOptionPane.showMessageDialog(localizer.getMessage("lblThankYouPlayerName", playerName));
     }
 
     private static String getPlayerNameUsingFirstTimePrompt() {
         return SOptionPane.showInputDialog(
-                "By default, Forge will refer to you as the \"Human\" during gameplay.\n" +
-                        "If you would prefer a different name please enter it now.",
-                        "Personalize Forge Gameplay",
+                localizer.getMessage("lblFirstTimePlayerNamePrompt"),
+                        localizer.getMessage("lblPersonalizeForgeGameplay"),
                         SOptionPane.QUESTION_ICON);
     }
 
     private static String getPlayerNameUsingStandardPrompt(final String playerName) {
         return SOptionPane.showInputDialog(
-                "Please enter a new name. (alpha-numeric only)",
-                "Personalize Forge Gameplay",
+                localizer.getMessage("lblEnterNewPlayerName"),
+                localizer.getMessage("lblPersonalizeForgeGameplay"),
                 null,
                 playerName);
     }

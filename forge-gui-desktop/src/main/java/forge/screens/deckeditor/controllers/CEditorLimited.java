@@ -53,6 +53,7 @@ import forge.screens.home.sanctioned.CSubmenuSealed;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.storage.IStorage;
+import forge.util.Localizer;
 
 /**
  * Child controller for limited deck editor UI.
@@ -93,7 +94,7 @@ public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
         final CardManager catalogManager = new CardManager(cDetailPicture0, false, false, FScreen.DECK_EDITOR_DRAFT.equals(screen0));
         final CardManager deckManager = new CardManager(cDetailPicture0, false, false, FScreen.DECK_EDITOR_DRAFT.equals(screen0));
 
-        catalogManager.setCaption("Sideboard");
+        catalogManager.setCaption(Localizer.getInstance().getMessage("lblSideboard"));
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -158,12 +159,14 @@ public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Move", "to deck");
+        cmb.addMoveItems(Localizer.getInstance().getMessage("lblMove"),
+                Localizer.getInstance().getMessage("lbltodeck"));
     }
 
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Move", "to sideboard");
+        cmb.addMoveItems(Localizer.getInstance().getMessage("lblMove"),
+                Localizer.getInstance().getMessage("lbltosideboard"));
     }
 
     /*

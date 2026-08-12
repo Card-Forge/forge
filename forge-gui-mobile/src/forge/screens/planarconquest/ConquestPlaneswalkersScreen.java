@@ -31,7 +31,7 @@ public class ConquestPlaneswalkersScreen extends FScreen {
     private final CardListPreview tokenDisplay = add(new CardListPreview(lstPlaneswalkers));
 
     public ConquestPlaneswalkersScreen() {
-        super("Select Planeswalker", ConquestMenu.getMenu());
+        super(Forge.getLocalizer().getMessage("lblSelectPlaneswalker"), ConquestMenu.getMenu());
     }
 
     @Override

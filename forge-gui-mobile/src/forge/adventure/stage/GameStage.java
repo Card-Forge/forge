@@ -133,7 +133,7 @@ public abstract class GameStage extends Stage {
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
         dialog.clearListeners();
-        TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
+        TextraButton ok = Controls.newTextButton(Forge.getLocalizer().getMessage("lblOK"), this::hideDialog);
         ok.setVisible(false);
         TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}" +
                 Forge.getLocalizer().getMessage("lblEffectDialogDescription") + "{ENDGRADIENT}\n" +
@@ -175,7 +175,7 @@ public abstract class GameStage extends Stage {
         L.setWrap(true);
         L.skipToTheEnd();
         dialog.getContentTable().add(L).width(250f);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
+        dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblOK"), () -> {
             hideDialog();
             Timer.schedule(new Timer.Task() {
                 @Override
@@ -238,7 +238,7 @@ public abstract class GameStage extends Stage {
         L.skipToTheEnd();
 
         dialog.getContentTable().add(L).width(250);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
+        dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblOK"), () -> {
             hideDialog();
             if (runnable != null)
                 runnable.run();

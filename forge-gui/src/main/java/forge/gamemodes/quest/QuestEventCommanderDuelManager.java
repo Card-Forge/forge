@@ -12,6 +12,7 @@ import forge.deck.DeckProxy;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 
 /**
@@ -116,7 +117,7 @@ public class QuestEventCommanderDuelManager implements QuestEventDuelManagerInte
         randomDuel.setName(duel.getName());
         randomDuel.setOpponentName(duel.getName());
         randomDuel.setDeckProxy(duel.getDeckProxy());
-        randomDuel.setTitle("Random Opponent");
+        randomDuel.setTitle(Localizer.getInstance().getMessage("lblRandomOpponent"));
         randomDuel.setShowDifficulty(false);
         randomDuel.setDescription("Fight a random generated commander opponent.");
         randomDuel.setIsRandomMatch(true);

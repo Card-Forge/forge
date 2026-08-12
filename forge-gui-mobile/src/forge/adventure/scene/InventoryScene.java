@@ -345,9 +345,9 @@ public class InventoryScene extends UIScene {
             boolean isInPoi = MapStage.getInstance().isInMap();
             useButton.setDisabled(!(isInPoi && data.usableInPoi || !isInPoi && data.usableOnWorldMap));
             if (data.shardsNeeded == 0)
-                useButton.setText("Use");
+                useButton.setText(Forge.getLocalizer().getMessage("lblUse"));
             else
-                useButton.setText("Use " + data.shardsNeeded + "[+Shards]");
+                useButton.setText(Forge.getLocalizer().getMessage("lblUseShards", data.shardsNeeded));
             useButton.layout();
             if (Current.player().getShards() < data.shardsNeeded)
                 useButton.setDisabled(true);
@@ -360,9 +360,9 @@ public class InventoryScene extends UIScene {
                     TextraButton button = (TextraButton) equipButton;
                     Long id = Current.player().itemInSlot(data.equipmentSlot);
                     if (id != null && id.equals(data.longID) && data.isEquipped) {
-                        button.setText("Unequip");
+                        button.setText(Forge.getLocalizer().getMessage("lblUnequip"));
                     } else {
-                        button.setText("Equip");
+                        button.setText(Forge.getLocalizer().getMessage("lblEquip"));
                     }
                     button.layout();
                 }
@@ -377,12 +377,12 @@ public class InventoryScene extends UIScene {
 
             deleteButton.setDisabled(true);
             useButton.setDisabled(false);
-            useButton.setText("Open");
+            useButton.setText(Forge.getLocalizer().getMessage("lblOpen"));
             useButton.layout();
             equipButton.setDisabled(true);
             repairButton.setVisible(false);
 
-            itemDescription.setText(data.getName() + "\n[%98]" + (data.getComment() == null?"":data.getComment()+" - ") + data.getAllCardsInASinglePool(true, true).countAll() + " cards");
+            itemDescription.setText(data.getName() + "\n[%98]" + (data.getComment() == null?"":data.getComment()+" - ") + Forge.getLocalizer().getMessage("lblCardCount", data.getAllCardsInASinglePool(true, true).countAll()));
         }
 
 

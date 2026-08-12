@@ -93,8 +93,9 @@
                                 <preCp>anything</preCp>
                             </classPath>
                             <jre>
+                                <path>runtime</path>
                                 <minVersion>17</minVersion>
-                                <requiresJdk>true</requiresJdk>
+                                <requiresJdk>false</requiresJdk>
                                 <maxHeapSize>4096</maxHeapSize>
                                 <opts>
                                     <opt>${mandatory.java.args}</opt>
@@ -165,7 +166,7 @@
                     <archive>
                         <manifestEntries>
                             <Implementation-Title>${project.name}</Implementation-Title>
-                            <Implementation-Version>${snapshot-version}</Implementation-Version>
+                            <Implementation-Version>${displayVersion}</Implementation-Version>
                             <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
                             <Add-Opens>
 <![CDATA[

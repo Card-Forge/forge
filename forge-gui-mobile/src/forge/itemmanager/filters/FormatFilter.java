@@ -121,28 +121,28 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         private final FGroupList<CardEdition> lstSets = add(new FGroupList<>());
 
         private MultiSetSelect() {
-            super("Choose Sets");
+            super(Forge.getLocalizer().getMessage("lblChooseSets"));
 
-            lstSets.addGroup("Core Sets");
-            lstSets.addGroup("Expansions");
-            lstSets.addGroup("Starter Sets");
-            lstSets.addGroup("Reprint Sets");
-            lstSets.addGroup("Boxed Sets");
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblCoreSets"));
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblExpansions"));
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblStarterSets"));
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblReprintSets"));
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblBoxedSets"));
 
-            lstSets.addGroup("Collector's Edition");
-            lstSets.addGroup("Duel Decks");
-            lstSets.addGroup("Promo Sets");
-            lstSets.addGroup("Digital Sets");
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblCollectorsEdition"));
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblDuelDecks"));
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblPromoSets"));
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblDigitalSets"));
 
-            lstSets.addGroup("Draft Innovation Sets");
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblDraftInnovationSets"));
 
 
-            lstSets.addGroup("Commander Sets");
-            lstSets.addGroup("Multiplayer Sets");
-            lstSets.addGroup("Other Supplemental Sets");
-            lstSets.addGroup("Funny Sets");
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblCommanderSets"));
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblMultiplayerSets"));
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblOtherSupplementalSets"));
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblFunnySets"));
 
-            lstSets.addGroup("Custom Sets");
+            lstSets.addGroup(Forge.getLocalizer().getMessage("lblCustomSets"));
 
             List<CardEdition> sets = FModel.getMagicDb().getSortedEditions();
             for (CardEdition set : sets) {

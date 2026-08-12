@@ -79,7 +79,10 @@ public class GLSurfaceView20 extends GLSurfaceView {
         // add this line, the IME can show the selectable words when use chinese input method editor.
         if (outAttrs != null) {
             outAttrs.imeOptions = outAttrs.imeOptions | EditorInfo.IME_FLAG_NO_EXTRACT_UI;
-            outAttrs.inputType = DefaultAndroidInput.getAndroidInputType(onscreenKeyboardType, true);
+            // A visible-password/no-suggestions input type disables composing text
+            // in several Chinese IMEs. Use a normal text editor connection so the
+            // IME can submit pinyin composition and selected Chinese candidates.
+            outAttrs.inputType = DefaultAndroidInput.getAndroidInputType(onscreenKeyboardType, false);
         }
 
         BaseInputConnection connection = new BaseInputConnection(this, false) {

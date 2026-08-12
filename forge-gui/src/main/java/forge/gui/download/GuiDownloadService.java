@@ -29,6 +29,8 @@ import forge.gui.interfaces.ITextField;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
+import forge.util.ForgeUpdateConfig;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -43,6 +45,7 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings("serial")
 public abstract class GuiDownloadService implements Runnable {
+    private final Localizer localizer = Localizer.getInstance();
     public static final Proxy.Type[] TYPES = Proxy.Type.values();
 
     //Components passed from GUI component displaying download
@@ -110,7 +113,7 @@ public abstract class GuiDownloadService implements Runnable {
             if (onReadyToStart != null) {
                 onReadyToStart.run();
             }
-            progressBar.setDescription("Click \"Start\" to download and extract " + startOverrideDesc);
+            progressBar.setDescription(localizer.getMessage("lblClickStartDownload", startOverrideDesc));
             btnStart.setCommand(cmdStartDownload);
             btnStart.setEnabled(true);
 
@@ -124,16 +127,17 @@ public abstract class GuiDownloadService implements Runnable {
 
     private void readyToStart() {
         if (files == null) {
-            progressBar.setDescription("Connection error?");
-            btnStart.setText("OK");
+            progressBar.setDescription(localizer.getMessage("lblConnectionErrorPrompt"));
+            btnStart.setText(localizer.getMessage("lblOK"));
             btnStart.setCommand(cmdClose);
         } else if (files.isEmpty()) {
-            progressBar.setDescription("All items have been downloaded.");
-            btnStart.setText("OK");
+            progressBar.setDescription(localizer.getMessage("lblAllItemsDownloaded"));
+            btnStart.setText(localizer.getMessage("lblOK"));
             btnStart.setCommand(cmdClose);
         } else {
             progressBar.setMaximum(files.size());
-            progressBar.setDescription(files.size() == 1 ? "1 item found." : files.size() + " items found.");
+            progressBar.setDescription(files.size() == 1 ? localizer.getMessage("lblOneItemFound")
+                    : localizer.getMessage("lblItemsFound", files.size()));
             //for(Entry<String, String> kv : cards.entrySet()) System.out.printf("Will get %s from %s%n", kv.getKey(), kv.getValue());
             btnStart.setCommand(cmdStartDownload);
         }
@@ -186,22 +190,23 @@ public abstract class GuiDownloadService implements Runnable {
                 sb.append(count).append("/").append(files.size()).append(" - ");
 
                 long t2Go = (files.size() - count) * a;
+                final StringBuilder remaining = new StringBuilder();
 
                 if (t2Go > 3600000) {
-                    sb.append(String.format("%02d:", t2Go / 3600000));
+                    remaining.append(String.format("%02d:", t2Go / 3600000));
                     t2Go = t2Go % 3600000;
                 }
                 if (t2Go > 60000) {
-                    sb.append(String.format("%02d:", t2Go / 60000));
+                    remaining.append(String.format("%02d:", t2Go / 60000));
                     t2Go = t2Go % 60000;
                 } else {
-                    sb.append("00:");
+                    remaining.append("00:");
                 }
 
-                sb.append(String.format("%02d remaining.", t2Go / 1000));
+                remaining.append(String.format("%02d", t2Go / 1000));
+                sb.append(localizer.getMessage("lblTimeRemaining", remaining));
             } else {
-                sb.append(String.format("%d of %d items finished! Skipped " + skipped + " items. Please close!",
-                        count, files.size()));
+                sb.append(localizer.getMessage("lblItemsFinished", count, files.size(), skipped));
                 finish();
             }
 
@@ -211,7 +216,7 @@ public abstract class GuiDownloadService implements Runnable {
     }
 
     protected void finish() {
-        btnStart.setText("OK");
+        btnStart.setText(localizer.getMessage("lblOK"));
         btnStart.setCommand(cmdClose);
         btnStart.setEnabled(true);
         btnStart.requestFocusInWindow();
@@ -392,12 +397,25 @@ public abstract class GuiDownloadService implements Runnable {
     }
 
     protected static HashSet<String> retrieveManifestDirectory() {
-        String manifestUrl = ForgeConstants.URL_PIC_DOWNLOAD;
         HashSet<String> existingSets = new HashSet<>();
 
-        String response = HttpUtil.getURL(manifestUrl);
+        if (ForgeUpdateConfig.isCardImageMirrorEnabled()) {
+            String response = HttpUtil.getURL(ForgeConstants.URL_PIC_DOWNLOAD + "sets.txt");
+            if (response == null) {
+                return existingSets;
+            }
+            for (String line : response.split("\\R")) {
+                String setCode = line.trim();
+                if (!setCode.isEmpty()) {
+                    existingSets.add(setCode);
+                }
+            }
+            return existingSets;
+        }
 
-        if (response == null) return null;
+        String response = HttpUtil.getURL(ForgeConstants.URL_PIC_DOWNLOAD);
+
+        if (response == null) return existingSets;
 
         String[] strings = response.split("<a href=\"");
         

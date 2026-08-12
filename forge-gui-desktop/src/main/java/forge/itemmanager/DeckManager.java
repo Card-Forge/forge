@@ -497,10 +497,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 this.setToolTipText(null);
                 break;
             case 0:
-                this.setToolTipText("Delete this deck");
+                this.setToolTipText(Localizer.getInstance().getMessage("lblDeleteThisDeck"));
                 break;
             case 1:
-                this.setToolTipText("Edit this deck");
+                this.setToolTipText(Localizer.getInstance().getMessage("lblEditThisDeck"));
                 break;
             }
             listView.getTable().repaint();

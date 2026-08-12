@@ -176,9 +176,9 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_VIBRATE_ON_ADVENTURE_REWARD("true"),
         UI_VIBRATE_ON_SHOP_ACTION("true"),
 
-        UI_LANGUAGE("en-US"),
+        UI_LANGUAGE("zh-CN"),
 
-        AUTO_UPDATE("none"),
+        AUTO_UPDATE("中国版官方渠道"),
         USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
         CHECK_SNAPSHOT_AT_STARTUP("true"),
         MAX_LOG_FILES("10"), // applied per category: up to N forge.*.log backups AND N network log entries

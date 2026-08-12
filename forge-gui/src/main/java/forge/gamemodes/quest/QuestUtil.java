@@ -195,7 +195,8 @@ public class QuestUtil {
         }
 
         if (worlds.size() < 1) {
-            SOptionPane.showErrorDialog("There are currently no worlds you can travel to\nin this version of Forge.", "No Worlds");
+            SOptionPane.showErrorDialog(localizer.getMessage("lblNoWorldsAvailable"),
+                    localizer.getMessage("lblNoWorlds"));
             return;
         }
 
@@ -658,7 +659,8 @@ public class QuestUtil {
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             final String errorMessage = getDeckConformanceProblemsBeforeGame(deck);
             if (null != errorMessage) {
-                SOptionPane.showErrorDialog(localizer.getMessage("lblInvalidDeckDesc").replace("%n",errorMessage), "Invalid Deck");
+                SOptionPane.showErrorDialog(localizer.getMessage("lblInvalidDeckDesc").replace("%n", errorMessage),
+                        localizer.getMessage("lblInvalidDeck"));
                 return false;
             }
         }

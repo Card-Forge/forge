@@ -31,6 +31,7 @@ import forge.toolbox.FProgressBar;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FRadioButton.RadioButtonGroup;
 import forge.toolbox.FTextField;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 public class GuiDownloader extends FDialog {
@@ -40,9 +41,9 @@ public class GuiDownloader extends FDialog {
     private final FProgressBar progressBar = add(new FProgressBar());
     private final FTextField txtAddress = add(new FTextField());
     private final FTextField txtPort = add(new FTextField());
-    private final FRadioButton radProxyNone = add(new FRadioButton("No Proxy"));
-    private final FRadioButton radProxySocks = add(new FRadioButton("SOCKS Proxy"));
-    private final FRadioButton radProxyHTTP = add(new FRadioButton("HTTP Proxy"));
+    private final FRadioButton radProxyNone = add(new FRadioButton(Localizer.getInstance().getMessage("lblNoProxy")));
+    private final FRadioButton radProxySocks = add(new FRadioButton(Localizer.getInstance().getMessage("lblSocksProxy")));
+    private final FRadioButton radProxyHTTP = add(new FRadioButton(Localizer.getInstance().getMessage("lblHttpProxy")));
 
     @SuppressWarnings("serial")
     private final UiCommand cmdClose = new UiCommand() {
@@ -52,7 +53,7 @@ public class GuiDownloader extends FDialog {
             service.setCancel(true);
             hide();
             if (callback != null) {
-                callback.accept(getButton(0).getText() == "OK"); //determine result based on whether download finished
+                callback.accept(Localizer.getInstance().getMessage("lblOK").equals(getButton(0).getText())); //determine result based on whether download finished
             }
         }
     };
@@ -68,8 +69,8 @@ public class GuiDownloader extends FDialog {
         service = service0;
         callback = callback0;
 
-        txtAddress.setGhostText("Proxy Address");
-        txtPort.setGhostText("Proxy Port");
+        txtAddress.setGhostText(Localizer.getInstance().getMessage("lblProxyAddress"));
+        txtPort.setGhostText(Localizer.getInstance().getMessage("lblProxyPort"));
         txtAddress.setEnabled(false);
         txtPort.setEnabled(false);
 
@@ -83,12 +84,12 @@ public class GuiDownloader extends FDialog {
         radProxySocks.setCommand(new ProxyHandler(2));
         radProxyNone.setSelected(true);
 
-        getButton(0).setText("Start");
-        initButton(1, "Cancel", e -> cmdClose.run());
+        getButton(0).setText(Localizer.getInstance().getMessage("lblStart"));
+        initButton(1, Localizer.getInstance().getMessage("lblCancel"), e -> cmdClose.run());
 
         progressBar.reset();
         progressBar.setShowProgressTrail(true);
-        progressBar.setDescription("Scanning for existing items...");
+        progressBar.setDescription(Localizer.getInstance().getMessage("lblScanningForExistingItems"));
     }
 
     @Override

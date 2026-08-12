@@ -55,9 +55,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final FScrollPane scrContent = new FScrollPane(pnlContent, false);
 
     private final FLabel btnCheckForUpdates           = _makeButton(localizer.getMessage("btnCheckForUpdates"));
-    private final FLabel btnDownloadSetPics           = _makeButton(localizer.getMessage("btnDownloadSetPics"));
-    private final FLabel btnDownloadPics              = _makeButton(localizer.getMessage("btnDownloadPics"));
-    private final FLabel btnDownloadPicsHQ            = _makeButton(localizer.getMessage("btnDownloadPicsHQ"));
     private final FLabel btnDownloadQuestImages       = _makeButton(localizer.getMessage("btnDownloadQuestImages"));
     private final FLabel btnDownloadAchievementImages = _makeButton(localizer.getMessage("btnDownloadAchievementImages"));
     private final FLabel btnReportBug                 = _makeButton(localizer.getMessage("btnReportBug"));
@@ -79,21 +76,10 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         pnlContent.setOpaque(false);
 
-        pnlContent.add(_makeLabel("Bulk downloaders have been disabled. Please use auto-downloader for now."), constraintsLBL);
-
         // Github actions now uploading the latest version predictably. So we should be able to use this again.
         pnlContent.add(btnCheckForUpdates, constraintsBTN);
         pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
 
-//        pnlContent.add(btnDownloadPics, constraintsBTN);
-//        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
-//
-//        pnlContent.add(btnDownloadPicsHQ, constraintsBTN);
-//        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPicsHQ")), constraintsLBL);
-//
-//        pnlContent.add(btnDownloadSetPics, constraintsBTN);
-//        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSetPics")), constraintsLBL);
-//
         pnlContent.add(btnDownloadQuestImages, constraintsBTN);
         pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadQuestImages")), constraintsLBL);
 //
@@ -145,9 +131,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     }
 
     public void setCheckForUpdatesCommand(UiCommand command)           { btnCheckForUpdates.setCommand(command);     }
-    public void setDownloadPicsCommand(UiCommand command)              { btnDownloadPics.setCommand(command);        }
-    public void setDownloadPicsHQCommand(UiCommand command)            { btnDownloadPicsHQ.setCommand(command);      }
-    public void setDownloadSetPicsCommand(UiCommand command)           { btnDownloadSetPics.setCommand(command);     }
     public void setDownloadQuestImagesCommand(UiCommand command)       { btnDownloadQuestImages.setCommand(command); }
     public void setDownloadAchievementImagesCommand(UiCommand command) { btnDownloadAchievementImages.setCommand(command); }
     public void setReportBugCommand(UiCommand command)                 { btnReportBug.setCommand(command);           }
@@ -159,7 +142,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     public void setDownloadSkinsCommand(UiCommand command)             { btnDownloadSkins.setCommand(command);       }
 
     public void focusTopButton() {
-        btnDownloadPics.requestFocusInWindow();
+        btnCheckForUpdates.requestFocusInWindow();
     }
 
     private void _showDialog(Component c, final Runnable onShow) {

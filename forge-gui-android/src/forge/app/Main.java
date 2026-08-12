@@ -78,6 +78,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Properties;
 import java.util.Set;
 
 public class Main extends AndroidApplication {
@@ -180,6 +181,7 @@ public class Main extends AndroidApplication {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        configureUpdateMirror();
         // Capture uncaught exceptions before the JVM dies — without this, the stack trace would only reach Android logcat, not the network log users share
         final Thread.UncaughtExceptionHandler prior = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
@@ -481,6 +483,24 @@ public class Main extends AndroidApplication {
             }).start();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void configureUpdateMirror() {
+        try (InputStream stream = getAssets().open("update-mirror/forge-update.properties");
+             Reader reader = new InputStreamReader(stream, StandardCharsets.UTF_8)) {
+            final Properties properties = new Properties();
+            properties.load(reader);
+            setSystemPropertyIfConfigured("forge.update.url", properties.getProperty("update.baseUrl"));
+            setSystemPropertyIfConfigured("forge.images.url", properties.getProperty("images.baseUrl"));
+        } catch (IOException e) {
+            android.util.Log.w("ForgeUpdate", "No packaged update mirror configuration", e);
+        }
+    }
+
+    private static void setSystemPropertyIfConfigured(final String name, final String value) {
+        if (System.getProperty(name, "").isEmpty() && value != null && !value.trim().isEmpty()) {
+            System.setProperty(name, value.trim());
         }
     }
 

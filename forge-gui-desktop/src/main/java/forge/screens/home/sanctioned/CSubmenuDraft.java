@@ -115,7 +115,8 @@ public enum CSubmenuDraft implements ICDoc {
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             final String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
             if (null != errorMessage) {
-                FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
+                FOptionPane.showErrorDialog(localizer.getMessage("lblInvalidDeckDesc").replace("%n", errorMessage),
+                        localizer.getMessage("lblInvalidDeck"));
                 return;
             }
         }
@@ -124,7 +125,8 @@ public enum CSubmenuDraft implements ICDoc {
         String duelType = (String)VSubmenuDraft.SINGLETON_INSTANCE.getCbOpponent().getSelectedItem();
 
         if (duelType == null) {
-            FOptionPane.showErrorDialog("Please select duel types for the draft match.", "Missing opponent items");
+            FOptionPane.showErrorDialog(localizer.getMessage("lblSelectDraftDuelType"),
+                    localizer.getMessage("lblMissingOpponentItems"));
             return;
         }
 

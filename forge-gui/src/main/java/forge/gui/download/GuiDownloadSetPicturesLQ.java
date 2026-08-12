@@ -94,7 +94,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
             return; //don't add on download if you have an existing fullborder image in this set...
 
         if (!destFile.exists()) {
-            downloads.put(destFile.getAbsolutePath(), ForgeConstants.URL_PIC_DOWNLOAD + urlPath);
+            downloads.put(destFile.getAbsolutePath(), ForgeConstants.getCardImageDownloadUrl(urlPath));
         }
     }
 }

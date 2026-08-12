@@ -34,6 +34,7 @@ import forge.util.Localizer;
 public enum CCurrentDeck implements ICDoc {
     SINGLETON_INSTANCE;
 
+    private final Localizer localizer = Localizer.getInstance();
     private static File previousDirectory;
 
     private final JFileChooser fileChooser = new JFileChooser(ForgeConstants.DECK_BASE_DIR);
@@ -52,7 +53,7 @@ public enum CCurrentDeck implements ICDoc {
             }
 
             @Override public String getDescription() {
-                return "Simple Deck File .dck";
+                return localizer.getMessage("lblSimpleDeckFile");
             }
         };
 
@@ -143,7 +144,7 @@ public enum CCurrentDeck implements ICDoc {
 
     /** */
     private File getImportFilename() {
-        fileChooser.setDialogTitle("Import Deck");
+        fileChooser.setDialogTitle(localizer.getMessage("lblImportDeck"));
         fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
         if (previousDirectory != null) {
             fileChooser.setCurrentDirectory(previousDirectory);
@@ -197,7 +198,7 @@ public enum CCurrentDeck implements ICDoc {
         }
         GuiBase.getInterface().copyToClipboard(deck.generateTextExport());
         FOptionPane.showMessageDialog(
-                Localizer.getInstance().getMessage("lblDeckListCopiedClipboard", deck.getName()));
+                localizer.getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 
     /** */
@@ -219,7 +220,7 @@ public enum CCurrentDeck implements ICDoc {
     }
 
     private File getExportFilename() {
-        fileChooser.setDialogTitle("Export Deck");
+        fileChooser.setDialogTitle(localizer.getMessage("lblExportDeck"));
         fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
         if (previousDirectory != null) {
             fileChooser.setCurrentDirectory(previousDirectory);
@@ -231,12 +232,12 @@ public enum CCurrentDeck implements ICDoc {
             previousDirectory = file.getParentFile();
             
             if (!previousDirectory.exists()) {
-                FOptionPane.showErrorDialog("Cannot save deck to " + check);
+                FOptionPane.showErrorDialog(localizer.getMessage("lblCannotSaveDeckTo", check));
                 return null;
             }
             
             if(isFileNameInvalid(file)) {
-                FOptionPane.showErrorDialog("Cannot save deck to " + check + "\nDeck name may not include any of the characters / \\ : * ? \" < > |");
+                FOptionPane.showErrorDialog(localizer.getMessage("lblDeckNameInvalid", check));
                 return null;
             }
 
@@ -247,7 +248,7 @@ public enum CCurrentDeck implements ICDoc {
 
     private File getPrintProxiesFilename() {
         final JFileChooser save = new JFileChooser(previousDirectory);
-        save.setDialogTitle("Print Proxies");
+        save.setDialogTitle(localizer.getMessage("lblPrintProxies"));
         save.setDialogType(JFileChooser.SAVE_DIALOG);
         save.setFileFilter(HTML_FILTER);
 
@@ -257,12 +258,12 @@ public enum CCurrentDeck implements ICDoc {
             previousDirectory = file.getParentFile();
             
             if (!previousDirectory.exists()) {
-                FOptionPane.showErrorDialog("Cannot save proxies to " + check);
+                FOptionPane.showErrorDialog(localizer.getMessage("lblCannotSaveProxiesTo", check));
                 return null;
             }
             
             if(isFileNameInvalid(file)) {
-                FOptionPane.showErrorDialog("Cannot save proxies to " + check + "\nFile name may not include any of the characters / \\ : * ? \" < > |");
+                FOptionPane.showErrorDialog(localizer.getMessage("lblProxyNameInvalid", check));
                 return null;
             }
 
@@ -286,7 +287,7 @@ public enum CCurrentDeck implements ICDoc {
 
         @Override
         public String getDescription() {
-            return "Proxy File .html";
+            return Localizer.getInstance().getMessage("lblProxyFile");
         }
     };
     

@@ -618,7 +618,7 @@ public class VLobby implements ILobbyView {
         final FPanel deckPanel = new FPanel();
         deckPanel.setBorderToggle(false);
         deckPanel.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        deckPanel.add(new FLabel.Builder().text("Select " + formatName)
+        deckPanel.add(new FLabel.Builder().text(localizer.getMessage("lblSelectFormatName", formatName))
                 .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
                 .build(), "gaptop 10px, gapbottom 5px, growx, pushx");
         final FList<Object> deckList = new FList<>();

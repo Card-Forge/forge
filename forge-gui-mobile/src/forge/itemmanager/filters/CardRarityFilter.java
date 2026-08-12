@@ -1,5 +1,6 @@
 package forge.itemmanager.filters;
 
+import forge.Forge;
 import forge.card.CardRarity;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
@@ -8,7 +9,7 @@ import java.util.function.Predicate;
 
 public class CardRarityFilter extends ComboBoxFilter<PaperCard, CardRarity> {
     public CardRarityFilter(ItemManager<? super PaperCard> itemManager0) {
-        super("Any Rarity", CardRarity.FILTER_OPTIONS, itemManager0);
+        super(Forge.getLocalizer().getMessage("lblAnyRarity"), CardRarity.FILTER_OPTIONS, itemManager0);
     }
 
     @Override

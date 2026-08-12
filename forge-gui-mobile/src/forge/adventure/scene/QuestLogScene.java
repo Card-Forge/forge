@@ -30,9 +30,9 @@ public class QuestLogScene extends UIScene {
         scrollWindow = ui.findActor("scrollWindow");
         root = ui.findActor("questList");
         detailRoot = ui.findActor("questDetails");
-        abandonQuestButton = Controls.newTextButton("Abandon Quest");
-        trackButton = Controls.newTextButton("Track Quest");
-        backToListButton = Controls.newTextButton("Quest List");
+        abandonQuestButton = Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbandonQuest"));
+        trackButton = Controls.newTextButton(Forge.getLocalizer().getMessage("lblTrackQuest"));
+        backToListButton = Controls.newTextButton(Forge.getLocalizer().getMessage("lblQuestList"));
         ui.onButtonPress("return", QuestLogScene.this::back);
         ui.onButtonPress("status", QuestLogScene.this::status);
         backToListButton.addListener(new ClickListener() {

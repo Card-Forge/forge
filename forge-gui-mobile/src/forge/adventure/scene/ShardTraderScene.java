@@ -91,7 +91,7 @@ public class ShardTraderScene extends UIScene {
 
         sellShardsQuantity.setDisabled(currentShards < shardsToSell);
         buyShardsCost.setDisabled(currentGold < shardCost);
-        buyShardsCost.setText( "Buy [+Shards] " + shardsToBuy + " for [+GoldCoin] " + shardCost);
-        sellShardsQuantity.setText("Sell [+Shards] " + shardsToSell + " for [+GoldCoin] " +shardPrice);
+        buyShardsCost.setText(Forge.getLocalizer().getMessage("lblBuyShardsForGold", shardsToBuy, shardCost));
+        sellShardsQuantity.setText(Forge.getLocalizer().getMessage("lblSellShardsForGold", shardsToSell, shardPrice));
     }
 }

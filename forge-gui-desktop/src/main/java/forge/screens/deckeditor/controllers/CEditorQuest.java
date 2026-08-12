@@ -60,6 +60,7 @@ import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 import forge.util.StreamUtil;
 
 /**
@@ -124,7 +125,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         final CardManager catalogManager = new CardManager(cDetailPicture0, false, true, false);
         final CardManager deckManager = new CardManager(cDetailPicture0, false, true, false);
 
-        catalogManager.setCaption("Quest Inventory");
+        catalogManager.setCaption(Localizer.getInstance().getMessage("lblQuestInventory"));
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);

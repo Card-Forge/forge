@@ -28,7 +28,9 @@ public class AutoUpdater {
     private static final boolean VERSION_FROM_METADATA = true;
     private static final Localizer localizer = Localizer.getInstance();
 
-    public static String[] updateChannels = new String[]{ "none", "snapshot", "release"};
+    /** Localized builds update exclusively from the packaged China mirror. */
+    public static final String CHINA_UPDATE_CHANNEL = "中国版官方渠道";
+    public static final String[] updateChannels = new String[]{CHINA_UPDATE_CHANNEL};
 
     private final boolean isLoading;
     private String updateChannel;
@@ -37,6 +39,9 @@ public class AutoUpdater {
     private String versionUrlString;
     private String packageUrl;
     private String packagePath;
+    private String packageFilename;
+    private long packageSize;
+    private String packageSha256 = "";
     private String buildDate = "";
     private String snapsBuildDate = "";
 
@@ -72,45 +77,14 @@ public class AutoUpdater {
     }
 
     private boolean verifyUpdateable() {
-        if (buildVersion.contains("GIT")) {
-            //return false;
-        }
-
-        if (isLoading) {
-            // TODO This doesn't work yet, because FSkin isn't loaded at the time.
-            return false;
-        } else if (updateChannel.equals("none")) {
-            String message = localizer.getMessage("lblYouHaventSetUpdateChannel");
-            List<String> options = List.of(localizer.getMessageorUseDefault("lblCancel", "Cancel"), localizer.getMessageorUseDefault("lblRelease", "Release"), localizer.getMessageorUseDefault("lblSnapshot", "Snapshot"));
-            int option = SOptionPane.showOptionDialog(message, localizer.getMessage("lblManualCheck"), null, options, 0);
-            if (option < 1) {
-                return false;
-            }
-            updateChannel = options.get(option);
-        }
-
-        if (buildVersion.contains("SNAPSHOT")) {
-            if (!updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblSnapshot", "Snapshot"))) {
-                System.out.println("Snapshot build versions must use snapshot update channel to work");
-                return false;
-            }
-
-            versionUrlString = GITHUB_SNAPSHOT_URL + "version.txt";
-        } else {
-            if (!updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
-                System.out.println("Release build versions must use release update channel to work");
-                return false;
-            }
-            versionUrlString = RELEASE_URL + "forge/forge-gui-desktop/version.txt";
-        }
-
-        // Check the internet connection
-        if (!testNetConnection()) {
+        // This distribution must never fall back to the upstream snapshot or release
+        // servers. The packaged mirror manifest is the single source of updates.
+        if (!ForgeUpdateConfig.isMirrorEnabled()) {
+            System.err.println("China update mirror is not configured; update check cancelled.");
             return false;
         }
-
-        // Download appropriate version file
-        return compareBuildWithLatestChannelVersion();
+        updateChannel = CHINA_UPDATE_CHANNEL;
+        return verifyMirrorUpdate();
     }
 
     private boolean testNetConnection() {
@@ -158,6 +132,29 @@ public class AutoUpdater {
         return true;
     }
 
+    private boolean verifyMirrorUpdate() {
+        versionUrlString = ForgeUpdateConfig.getManifestUrl();
+        if (!testNetConnection()) {
+            return false;
+        }
+        try {
+            final UpdateManifest manifest = UpdateManifest.load(versionUrlString);
+            final UpdateManifest.Artifact artifact = manifest.desktop();
+            if (!artifact.isPresent()) {
+                return false;
+            }
+            version = artifact.version().isEmpty() ? manifest.version() : artifact.version();
+            packageUrl = manifest.resolveUrl(artifact);
+            packageFilename = new File(new URL(packageUrl).getPath()).getName();
+            packageSize = artifact.size();
+            packageSha256 = artifact.sha256();
+            return !buildVersion.equals(version);
+        } catch (IOException e) {
+            SOptionPane.showOptionDialog(e.getMessage(), localizer.getMessage("lblError"), null, List.of("Ok"));
+            return false;
+        }
+    }
+
     private void retrieveVersion() throws MalformedURLException {
         if (VERSION_FROM_METADATA && updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
             extractVersionFromMavenRelease();
@@ -170,6 +167,7 @@ public class AutoUpdater {
         } else {
             packageUrl = GITHUB_SNAPSHOT_URL + "forge-installer-" + version + ".jar";
         }
+        packageFilename = new File(URI.create(packageUrl).getPath()).getName();
     }
 
     private void extractVersionFromMavenRelease() throws MalformedURLException {
@@ -220,10 +218,10 @@ public class AutoUpdater {
         WaitCallback<Boolean> callback = new WaitCallback<Boolean>() {
             @Override
             public void run() {
-                GuiBase.getInterface().download(new GuiDownloadZipService("Auto Updater", localizer.getMessage("lblNewVersionDownloading"), packageUrl, System.getProperty("user.home") + "/Downloads/", null, null) {
+                GuiBase.getInterface().download(new GuiDownloadZipService("Auto Updater", localizer.getMessage("lblNewVersionDownloading"), packageUrl, System.getProperty("user.home") + "/Downloads/", null, null, true, packageSize, packageSha256) {
                     @Override
                     public void downloadAndUnzip() {
-                        packagePath = download(version + "-upgrade.jar");
+                        packagePath = download(packageFilename);
                         if (packagePath != null) {
                             restartAndUpdate(packagePath);
                         }

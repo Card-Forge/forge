@@ -157,7 +157,7 @@ public interface IGuiGame {
     void message(String message, String title);
 
     default void showErrorDialog(final String message) {
-        showErrorDialog(message, "Error");
+        showErrorDialog(message, Localizer.getInstance().getMessage("lblError"));
     }
     void showErrorDialog(String message, String title);
 

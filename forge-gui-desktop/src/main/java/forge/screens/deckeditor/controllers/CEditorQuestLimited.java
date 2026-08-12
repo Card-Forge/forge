@@ -49,6 +49,7 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.StreamUtil;
+import forge.util.Localizer;
 
 /**
  * Child controller for quest deck editor UI.
@@ -104,7 +105,7 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
         final CardManager catalogManager = new CardManager(cDetailPicture0, false, true, false);
         final CardManager deckManager = new CardManager(cDetailPicture0, false, true, false);
 
-        catalogManager.setCaption("Sideboard");
+        catalogManager.setCaption(Localizer.getInstance().getMessage("lblSideboard"));
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -171,7 +172,8 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
      */
     @Override
     protected void buildAddContextMenu(final EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Move", "to deck");
+        cmb.addMoveItems(Localizer.getInstance().getMessage("lblMove"),
+                Localizer.getInstance().getMessage("lbltodeck"));
     }
 
     /* (non-Javadoc)
@@ -179,7 +181,8 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
      */
     @Override
     protected void buildRemoveContextMenu(final EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Move", "to sideboard");
+        cmb.addMoveItems(Localizer.getInstance().getMessage("lblMove"),
+                Localizer.getInstance().getMessage("lbltosideboard"));
     }
 
     /*

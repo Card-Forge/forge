@@ -7,6 +7,7 @@ import forge.gui.util.SOptionPane;
 import forge.localinstance.skin.FSkinProp;
 import forge.trackable.TrackableObject;
 import forge.util.IHasForgeLog;
+import forge.util.Localizer;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -103,7 +104,8 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                     } catch (final NullPointerException | InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += e.toString();
-                        SOptionPane.showMessageDialog(catchedError[0], "Error", FSkinProp.ICO_WARNING);
+                        SOptionPane.showMessageDialog(catchedError[0],
+                                Localizer.getInstance().getMessage("lblError"), FSkinProp.ICO_WARNING);
                         netLog.error("Exception in protocol method {} args={}: {}", methodName, describeArgs(args), e.toString());
                     }
                     getRemote(ctx).send(new ReplyEvent(event.getId(), reply));

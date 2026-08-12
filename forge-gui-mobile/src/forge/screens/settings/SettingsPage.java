@@ -73,9 +73,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 if (prefs.getPref(FPref.UI_CJK_FONT).isEmpty()) {
                     Lang lang = Lang.initInstance(newValue);
                     if (lang.getFontFile() != null) {
-                        String message = "Please download CJK font (from \"Files\"), and set it before change language.";
-                        message += "\nPlease use \"" + lang.getFontFile() + "\".";
-                        FOptionPane.showMessageDialog(message, "Please set CJK Font");
+                        String message = Forge.getLocalizer().getMessage("lblCJKFontRequired", lang.getFontFile());
+                        FOptionPane.showMessageDialog(message, Forge.getLocalizer().getMessage("lblCJKFontRequiredTitle"));
                         return;
                     }
                 }
@@ -862,7 +861,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             private final String currentValue;
 
             private CustomSelectScreen() {
-                super("Select " + label.substring(0, label.length() - 1));
+                super(Forge.getLocalizer().getMessage("lblSelectSetting", label.substring(0, label.length() - 1)));
                 if(pref instanceof FPref) {
                     currentValue = FModel.getPreferences().getPref((FPref) pref);
                 } else if(pref instanceof ForgeNetPreferences.FNetPref) {
@@ -1021,12 +1020,12 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     input -> {
                         if (input == null) return; // cancelled
                         if (!input.matches("\\d+")) {
-                            FOptionPane.showMessageDialog("Please enter a valid number.", "Invalid Input");
+                            FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblPleaseEnterValidNumber"), Forge.getLocalizer().getMessage("lblInvalidInput"));
                             return;
                         }
                         int value = Integer.parseInt(input);
                         if (value < minValue || value > maxValue) {
-                            FOptionPane.showMessageDialog("Value must be between " + minValue + " and " + maxValue + ".", "Invalid Input");
+                            FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblValueMustBeBetween", minValue, maxValue), Forge.getLocalizer().getMessage("lblInvalidInput"));
                             return;
                         }
                         valueChanged(input);
@@ -1071,7 +1070,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         if (input == null) return;
                         String normalized = normalizeHexColor(input);
                         if (normalized == null) {
-                            FOptionPane.showMessageDialog("Please enter a 6-digit RGB hex (e.g. 66CCFF).", "Invalid Color");
+                            FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblPleaseEnterRGBHex"), Forge.getLocalizer().getMessage("lblInvalidColor"));
                             return;
                         }
                         FModel.getPreferences().setPref((FPref) pref, normalized);

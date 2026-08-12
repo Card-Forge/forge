@@ -410,13 +410,16 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeAutoUpdaterComboBox() {
-        // TODO: Ideally we would filter out update paths based on the type of Forge people have
         final String[] updatePaths = AutoUpdater.updateChannels;
         final FPref updatePreference = FPref.AUTO_UPDATE;
         final FComboBoxPanel<String> panel = this.view.getCbpAutoUpdater();
         final FComboBox<String> comboBox = createComboBox(updatePaths, updatePreference);
-        final String selectedItem = this.prefs.getPref(updatePreference);
-        panel.setComboBox(comboBox, selectedItem);
+        // Migrate preferences written by upstream builds (none/snapshot/release).
+        if (!AutoUpdater.CHINA_UPDATE_CHANNEL.equals(this.prefs.getPref(updatePreference))) {
+            this.prefs.setPref(updatePreference, AutoUpdater.CHINA_UPDATE_CHANNEL);
+            this.prefs.save();
+        }
+        panel.setComboBox(comboBox, AutoUpdater.CHINA_UPDATE_CHANNEL);
     }
 
     private void initializeServerUPnPComboBox() {

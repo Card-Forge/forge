@@ -31,6 +31,7 @@ import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -101,7 +102,9 @@ public class QuestDraftWinLose extends ControlWinLose {
         }
         view.getBtnQuit().addActionListener(e -> {
             if (warningString == null ||
-                    FOptionPane.showOptionDialog(warningString, warningCaption, FSkin.getImage(FSkinProp.ICO_WARNING).scale(2), ImmutableList.of("Yes", "No"), 1) == 0) {
+                    FOptionPane.showOptionDialog(warningString, warningCaption, FSkin.getImage(FSkinProp.ICO_WARNING).scale(2),
+                            ImmutableList.of(Localizer.getInstance().getMessage("lblYes"),
+                                    Localizer.getInstance().getMessage("lblNo")), 1) == 0) {
                 if (warningString != null) {
                     PlayerView humanPlayer = null;
                     for (PlayerView playerView : matchUI.getLocalPlayers()) {

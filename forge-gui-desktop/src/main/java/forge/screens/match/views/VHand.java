@@ -63,7 +63,7 @@ public class VHand implements IVDoc<CHand> {
         id0.setDoc(this);
 
         if (p == null) {
-            tab.setText("lblNoPlayerHand");
+            tab.setText(Localizer.getInstance().getMessage("lblNoPlayerHand"));
         } else {
             tab.setText(Localizer.getInstance().getMessage("lblPlayerHand", p.getName()));
         }

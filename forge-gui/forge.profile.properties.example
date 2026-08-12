@@ -1,87 +1,84 @@
 #
-# forge.profile.properties.example
+# Forge 用户目录配置示例
 #
-# To get started using this file, just copy or rename it to
-# forge.profile.properties and edit one or more of the paths below.
+# 如需启用本文件，请将它复制或重命名为：
+#   forge.profile.properties
+# 然后按需要修改下方一个或多个路径。
 #
-# Normally, users will not need to do anything here.  Keeping the default paths
-# is an easy way to make sure your Forge settings and data are kept safe when
-# you upgrade Forge, even if you install to a different path or delete the
-# entire Forge program directory before you upgrade.
+# 通常情况下，用户无需修改这里的任何内容。保留默认路径可以确保
+# Forge 升级、移动安装目录或删除旧程序目录时，个人设置和游戏数据
+# 仍然安全地保存在系统用户目录中。
 #
-# If you need to, though, you can use this file to set the locations that Forge
-# will use to store your data.  However, remember that whenever you install a
-# new version of Forge into a different directory, it will not see your data
-# unless you copy this file into the new program directory.
+# 如果确实需要自定义数据位置，可以通过本文件设置 Forge 保存数据的
+# 各个目录。以后如果把新版 Forge 安装到其他目录，请同时把配置好的
+# forge.profile.properties 复制到新版程序目录，否则新版程序不会读取
+# 这些自定义路径。
 #
-# If you specify a relative path in this file, it will be relative to the Forge
-# program directory.  Note that paths defined in this file will each have the
-# whitespace trimmed from their start and end.  If you need the path to start or
-# end with a space or tab character, put a slash before or after it, as
-# appropriate.  For example, for the directory "<forge dir>/ local  ", use:
+# 本文件中的相对路径以 Forge 程序目录为基准。每个路径值开头和结尾的
+# 空白字符都会被自动去除。如果目录名确实需要以空格或制表符开头或结尾，
+# 请在相应位置加一个斜杠。例如目录“<Forge目录>/ local  ”应写为：
 #   xxxDir=./ local  /
 #
-# Also note that all backslashes in this file need to be escaped themselves with
-# a backslash.  For example: d:\\mtg-pics.  Forwards slashes work on all
-# platforms, including Windows, and do not need to be escaped: d:/mtg-pics.
+# Windows 路径中的反斜杠必须写两次，例如：
+#   d:\\mtg-pics
+# 也可以直接使用正斜杠；正斜杠适用于包括 Windows 在内的所有平台，
+# 无需转义，例如：
+#   d:/mtg-pics
 #
-# EXAMPLES
-# --------
+# 示例
+# ----
 #
-# To have Forge use the default directories:
+# 使用全部默认目录：
 #   userDir=
 #   cacheDir=
 #   cardPicsDir=
 #
-# To use a specific user data directory but the default cache dir on Windows:
+# Windows 上自定义用户数据目录，同时保持默认缓存目录：
 #   userDir=D:/ForgeData
 #   cacheDir=
 #   cardPicsDir=
 #
-# To put everything under a specific path on a Unix-based system:
+# 在 Linux、macOS 等类 Unix 系统上，把全部数据放在指定位置：
 #   userDir=/local/path/forge
 #   cacheDir=/local/path/forge/cache
 #   cardPicsDir=
 
-# This is where Forge will save your personal data, such as your saved decks,
-# preferences, and quest progress.  If you want to back up your data or copy it
-# to another computer, this is the directory to copy.  The default value is
-# platform-specific, and may differ a bit from what is listed here if you have
-# an older version of Windows:
-#   Windows: <your application data directory>/Forge/
-#            (usually, C:/Users/<your username>/Application Data/Roaming/Forge/)
-#   OSX:   <your home directory>/Library/Application Support/Forge/
-#   Linux: <your home directory>/.forge/
+# Forge 保存个人数据的位置，包括牌组、偏好设置和任务模式进度。
+# 备份数据或迁移到其他电脑时，应备份这个目录。
+# 默认位置由操作系统决定；旧版 Windows 的实际位置可能略有不同：
+#   Windows：<应用数据目录>/Forge/
+#            通常为 C:/Users/<用户名>/AppData/Roaming/Forge/
+#   macOS：  <用户主目录>/Library/Application Support/Forge/
+#   Linux：  <用户主目录>/.forge/
 userDir=
 
-# This is where forge will keep downloaded content, such as card pictures and
-# updated price lists.  The default values are:
-#   Windows: <your local application data directory>/Forge/Cache/
-#         (usually C:/Users/<your username>/Application Data/Local/Forge/Cache/)
-#   OSX:   <your home directory>/Library/Caches/Forge/
-#   Linux: <your home directory>/.cache/forge/
+# Forge 保存下载内容的位置，例如卡图和更新后的价格表。
+# 默认位置为：
+#   Windows：<本地应用数据目录>/Forge/Cache/
+#            通常为 C:/Users/<用户名>/AppData/Local/Forge/Cache/
+#   macOS：  <用户主目录>/Library/Caches/Forge/
+#   Linux：  <用户主目录>/.cache/forge/
 cacheDir=
 
-# This is where forge will download and/or look for card picture data.  The
-# directory structure and filenames are the same as those used by Magic
-# Workstation, and if you have both programs installed, you can share the same
-# picture database between them.  The default value (for all plaforms) is:
-#   <the cacheDir defined above>/pics/cards/
+# Forge 下载和查找卡图的位置。目录结构和文件名与 Magic Workstation
+# 兼容；如果同时安装了两个程序，可以让它们共用同一个卡图库。
+# 所有平台的默认位置都是：
+#   <上方设置的 cacheDir>/pics/cards/
 cardPicsDir=
 
-# You may also specify custom folder names for each set, just in case you are
-# using any uncommon picture storage folder structure. Specify 3-letter codes
-# from res/blockdata/setsdata.txt, an arrow (->) and the sub-folder name that
-# holds card images from that edition. Separate records by a vertical bar (|).
-#   Ex: cardPicsSubDirs=LEA->Alpha|ROE->Rise of Eldrazi
+# 可为特定系列指定自定义卡图子目录，用于兼容非标准的卡图目录结构。
+# 系列代码使用 res/blockdata/setsdata.txt 中的三位代码，后接“->”和
+# 该系列卡图所在的子目录名；多条记录用竖线“|”分隔。
+# 示例：
+#   cardPicsSubDirs=LEA->Alpha|ROE->Rise of Eldrazi
 cardPicsSubDirs=
 
-# This is the top level directory that forge will use for storing and
-# locating decklists. The default value (for all platforms) is:
-#   <the userDir defined above>/decks/
+# Forge 保存和查找牌组文件的顶层目录。
+# 所有平台的默认位置都是：
+#   <上方设置的 userDir>/decks/
 decksDir=
 
-# This is where forge will look for your constructed format decklists.
-# The default value (for all plaforms) is:
-#   <the decksDir defined above>/constructed/
+# Forge 查找构筑赛制牌组的目录。
+# 所有平台的默认位置都是：
+#   <上方设置的 decksDir>/constructed/
 decksConstructedDir=

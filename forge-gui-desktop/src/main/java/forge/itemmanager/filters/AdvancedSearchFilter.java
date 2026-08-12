@@ -221,12 +221,15 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                 super(null);
                 setOpaque(false);
 
-                btnNotBeforeParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("NOT").hoverable().selectable().build();
+                btnNotBeforeParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                        .text(Localizer.getInstance().getMessage("lblNotOperator")).hoverable().selectable().build();
                 btnOpenParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("(").hoverable().selectable().build();
-                btnNotAfterParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("NOT").hoverable().selectable().build();
+                btnNotAfterParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                        .text(Localizer.getInstance().getMessage("lblNotOperator")).hoverable().selectable().build();
                 btnFilter = new FLabel.ButtonBuilder().build();
                 btnCloseParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).hoverable().selectable().text(")").build();
-                btnAnd = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("AND").hoverable().selectable().cmdClick(new UiCommand() {
+                btnAnd = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                        .text(Localizer.getInstance().getMessage("lblAndOperator")).hoverable().selectable().cmdClick(new UiCommand() {
                     @Override
                     public void run() {
                         if (btnAnd.isSelected()) {
@@ -238,7 +241,8 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                         }
                     }
                 }).build();
-                btnOr = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("OR").hoverable().selectable().cmdClick(new UiCommand() {
+                btnOr = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                        .text(Localizer.getInstance().getMessage("lblOrOperator")).hoverable().selectable().cmdClick(new UiCommand() {
                     @Override
                     public void run() {
                         if (btnOr.isSelected()) {

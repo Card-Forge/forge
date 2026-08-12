@@ -98,6 +98,10 @@ forge-gui/tools/PerSetTrackingResults
 __pycache__
 *.pyc
 
+# Local release toolchains and account-configuration launchers
+/.tools/
+/配置阿里云OSS.cmd
+
 # Ignore Claude configuration
 .claude
 # EDHREC commander matrix tool intermediates

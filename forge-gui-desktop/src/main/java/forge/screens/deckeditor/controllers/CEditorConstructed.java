@@ -362,7 +362,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             break;
         case Sideboard:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromsideboard"));
-            cmb.addMoveAlternateItems("Move", "to deck");
+            cmb.addMoveAlternateItems(localizer.getMessage("lblMove"), localizer.getMessage("lbltodeck"));
             break;
         case Commander:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblascommander"));

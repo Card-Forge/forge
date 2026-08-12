@@ -120,20 +120,6 @@ public class FilesPage extends TabPage<SettingsScreen> {
             }
         }, 1);
         //content downloaders
-//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPics"),
-//                Forge.getLocalizer().getMessage("lblDownloadPics")) {
-//            @Override
-//            protected GuiDownloadService createService() {
-//                return new GuiDownloadPicturesLQ();
-//            }
-//        }, 2);
-//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSetPics"),
-//                Forge.getLocalizer().getMessage("lblDownloadSetPics")) {
-//            @Override
-//            protected GuiDownloadService createService() {
-//                return new GuiDownloadSetPicturesLQ();
-//            }
-//        }, 2);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
                 Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
             @Override
@@ -164,13 +150,6 @@ public class FilesPage extends TabPage<SettingsScreen> {
             @Override
             protected void finishCallback() {
                 SettingsScreen.getSettingsScreen().getSettingsPage().refreshSkinsList();
-            }
-        }, 2);
-        lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("btnDownloadCardImages"),
-                Forge.getLocalizer().getMessage("lblDownloadCardImages")) {
-            @Override
-            public void select() {
-                Forge.openScreen(new CardImageBrowserScreen());
             }
         }, 2);
         lstItems.addItem(new OptionContentDownloader(Forge.getLocalizer().getMessage("btnDownloadCJKFonts"),

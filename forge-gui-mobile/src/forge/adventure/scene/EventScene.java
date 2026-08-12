@@ -323,7 +323,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 previousPage.setDisabled(true);
                 editDeck.setDisabled(true);
                 editDeck.setVisible(false);
-                advance.setText("Join Event");
+                advance.setText(Forge.getLocalizer().getMessage("lblJoinEvent"));
                 advance.setVisible(true);
                 break;
             case Entered:
@@ -332,16 +332,16 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 editDeck.setDisabled(true);
                 editDeck.setVisible(false);
                 if (currentEvent.getDraft() != null) {
-                    advance.setText("Enter Draft");
+                    advance.setText(Forge.getLocalizer().getMessage("lblEnterDraft"));
                 } else if (currentEvent.format == AdventureEventController.EventFormat.Sealed) {
-                    advance.setText("Create Deck");
+                    advance.setText(Forge.getLocalizer().getMessage("lblCreateDeck"));
                 } else {
-                    advance.setText("Select Deck");
+                    advance.setText(Forge.getLocalizer().getMessage("lblSelectDeck"));
                 }
                 advance.setVisible(true);
                 break;
             case Ready:
-                advance.setText("Start Event");
+                advance.setText(Forge.getLocalizer().getMessage("lblStartEvent"));
                 advance.setVisible(true);
                 editDeck.setDisabled(false);
                 editDeck.setVisible(true);
@@ -349,7 +349,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 previousPage.setDisabled(false);
                 break;
             case Started:
-                advance.setText("Play round " + currentEvent.currentRound);
+                advance.setText(Forge.getLocalizer().getMessage("lblPlayRound", currentEvent.currentRound));
                 advance.setVisible(true);
                 editDeck.setDisabled(false);
                 editDeck.setVisible(true);
@@ -357,7 +357,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 previousPage.setDisabled(false);
                 break;
             case Completed:
-                advance.setText("Collect Rewards");
+                advance.setText(Forge.getLocalizer().getMessage("lblCollectRewards"));
                 advance.setVisible(true);
                 editDeck.setDisabled(true);
                 editDeck.setVisible(false);
@@ -592,14 +592,14 @@ public class EventScene extends MenuScene implements IAfterMatch {
             metaDraftTable.add(packName);
             //TODO: Replace with translations
 
-            TextraButton previewButton = Controls.newTextButton("Preview");
+            TextraButton previewButton = Controls.newTextButton(Forge.getLocalizer().getMessage("lblPreview"));
             previewButton.addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     Forge.switchScene(DeckPreviewScene.getInstance(deckOption));
                 }
             });
 
-            TextraButton selectButton = Controls.newTextButton("Select");
+            TextraButton selectButton = Controls.newTextButton(Forge.getLocalizer().getMessage("lblSelectAction"));
             if (deckOption.getTags().contains("Selected")) {
                 packName.setColor(Color.FOREST);
                 selectButton.setColor(Color.FOREST);

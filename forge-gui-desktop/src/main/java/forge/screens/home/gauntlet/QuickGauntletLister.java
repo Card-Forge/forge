@@ -23,6 +23,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedButton;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -30,6 +31,7 @@ import net.miginfocom.swing.MigLayout;
  */
 @SuppressWarnings("serial")
 public class QuickGauntletLister extends JPanel {
+    private final Localizer localizer = Localizer.getInstance();
     private final SkinIcon icoDelete, icoDeleteOver, icoEdit, icoEditOver;
     private RowPanel previousSelect;
     private RowPanel[] rows;
@@ -72,15 +74,15 @@ public class QuickGauntletLister extends JPanel {
         final SkinnedPanel rowTitle = new SkinnedPanel();
         rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        rowTitle.add(new FLabel.Builder().text("Name").fontAlign(SwingConstants.LEFT).build(),
+        rowTitle.add(new FLabel.Builder().text(localizer.getMessage("lblName")).fontAlign(SwingConstants.LEFT).build(),
                 "w 49% - 185px!, h 20px!, gap 64px 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Your Deck").fontAlign(SwingConstants.LEFT).build(),
+        rowTitle.add(new FLabel.Builder().text(localizer.getMessage("lblYourDeck")).fontAlign(SwingConstants.LEFT).build(),
                 "w 49% - 185px!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Last Activity").fontAlign(SwingConstants.LEFT).build(),
+        rowTitle.add(new FLabel.Builder().text(localizer.getMessage("lblLastActivity")).fontAlign(SwingConstants.LEFT).build(),
                 "w 140px!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Opponents").fontAlign(SwingConstants.RIGHT).build(),
+        rowTitle.add(new FLabel.Builder().text(localizer.getMessage("lblOpponents")).fontAlign(SwingConstants.RIGHT).build(),
                 "w 90px!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Progress").fontAlign(SwingConstants.RIGHT).build(),
+        rowTitle.add(new FLabel.Builder().text(localizer.getMessage("lblProgress")).fontAlign(SwingConstants.RIGHT).build(),
                 "w 90px!, h 20px!, gap 0 0 5px 0");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
@@ -96,7 +98,7 @@ public class QuickGauntletLister extends JPanel {
             row.add(new EditButton(row), "w 22px!, h 20px!, gap 5px 0 5px 0");
             row.add(new FLabel.Builder().fontAlign(SwingConstants.LEFT).text(name).build(),
                     "w 49% - 185px!, h 20px!, gap 10px 0 5px 0");
-            row.add(new FLabel.Builder().text(gd.getUserDeck() == null ? "(none)" : gd.getUserDeck().getName()).fontAlign(SwingConstants.LEFT).build(),
+            row.add(new FLabel.Builder().text(gd.getUserDeck() == null ? localizer.getMessage("lblNoDeck") : gd.getUserDeck().getName()).fontAlign(SwingConstants.LEFT).build(),
                     "w 49% - 185px!, h 20px!, gap 0 0 5px 0");
             row.add(new FLabel.Builder().text(gd.getTimestamp()).fontAlign(SwingConstants.LEFT).build(),
                     "w 140px!, h 20px!, gap 0 0 5px 0");
@@ -133,7 +135,7 @@ public class QuickGauntletLister extends JPanel {
             setContentAreaFilled(false);
             setBorder((Border)null);
             setBorderPainted(false);
-            setToolTipText("Delete this gauntlet");
+            setToolTipText(localizer.getMessage("lblDeleteThisGauntlet"));
 
             this.addMouseListener(new FMouseAdapter() {
                 @Override
@@ -169,7 +171,7 @@ public class QuickGauntletLister extends JPanel {
             setContentAreaFilled(false);
             setBorder((Border)null);
             setBorderPainted(false);
-            setToolTipText("Rename this gauntlet");
+            setToolTipText(localizer.getMessage("lblRenameThisGauntlet"));
 
             this.addMouseListener(new FMouseAdapter() {
                 @Override
@@ -301,14 +303,15 @@ public class QuickGauntletLister extends JPanel {
         String gauntletName;
         final String oldGauntletName = gauntlet.getName();
         while (true) {
-            gauntletName = FOptionPane.showInputDialog("Rename gauntlet to:", "Gauntlet Rename", null, oldGauntletName);
+            gauntletName = FOptionPane.showInputDialog(localizer.getMessage("lblEnterNewGauntletGameName"),
+                    localizer.getMessage("lblRenameGauntlet"), null, oldGauntletName);
             if (gauntletName == null) { return; }
 
             gauntletName = QuestUtil.cleanString(gauntletName);
             if (gauntletName.equals(oldGauntletName)) { return; } //quit if chose same name
 
             if (gauntletName.isEmpty()) {
-                FOptionPane.showMessageDialog("Please specify a gauntlet name.");
+                FOptionPane.showMessageDialog(localizer.getMessage("lblPleaseSpecifyGauntletName"));
                 continue;
             }
 
@@ -320,7 +323,7 @@ public class QuickGauntletLister extends JPanel {
                 }
             }
             if (exists) {
-                FOptionPane.showMessageDialog("A gauntlet already exists with that name. Please pick another gauntlet name.");
+                FOptionPane.showMessageDialog(localizer.getMessage("lblGauntletNameExistsPleasePickAnotherName"));
                 continue;
             }
             break;
@@ -334,8 +337,8 @@ public class QuickGauntletLister extends JPanel {
         final GauntletData gd = r0.getGauntletData();
 
         if (!FOptionPane.showConfirmDialog(
-                "Are you sure you want to delete \"" + gd.getName()
-                + "\"?", "Delete Gauntlet")) { return; }
+                localizer.getMessage("lblAreYouSuerDeleteGauntlet", gd.getName()),
+                localizer.getMessage("lblDeleteGauntlet"))) { return; }
 
         GauntletIO.getGauntletFile(gd).delete();
         if (cmdRowDelete != null) { cmdRowDelete.run(); }

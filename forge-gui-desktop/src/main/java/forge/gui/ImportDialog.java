@@ -68,6 +68,7 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
 import forge.toolbox.SmartScroller;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import net.miginfocom.swing.MigLayout;
 
@@ -77,6 +78,7 @@ import net.miginfocom.swing.MigLayout;
  * processing done in this class, so most operations are asynchronous.
  */
 public class ImportDialog {
+    private final Localizer localizer = Localizer.getInstance();
     private final FButton _btnStart;
     private final FButton _btnCancel;
     private final FLabel  _btnChooseDir;
@@ -90,7 +92,8 @@ public class ImportDialog {
     // volatile since it is checked from multiple threads
     private volatile boolean _cancel;
 
-    private static final ImmutableList<String> fixOrContinue = ImmutableList.of("Whoops, let me fix that!", "Continue with the import, I know what I'm doing.");
+    private final ImmutableList<String> fixOrContinue = ImmutableList.of(
+            localizer.getMessage("lblFixMigrationSelection"), localizer.getMessage("lblContinueImportAnyway"));
 
     @SuppressWarnings("serial")
     public ImportDialog(final String forcedSrcDir, final Runnable onDialogClose) {
@@ -103,7 +106,8 @@ public class ImportDialog {
         isMigration = !StringUtils.isEmpty(forcedSrcDir);
 
         // header
-        _topPanel.add(new FLabel.Builder().text((isMigration ? "Migrate" : "Import") + " profile data").fontSize(15).build(), "center");
+        _topPanel.add(new FLabel.Builder().text(localizer.getMessage(
+                isMigration ? "lblMigrateProfileData" : "lblImportProfileData")).fontSize(15).build(), "center");
 
         // add some help text if this is for the initial data migration
         if (isMigration) {
@@ -144,10 +148,11 @@ public class ImportDialog {
         // import source widgets
         final JPanel importSourcePanel = new JPanel(new MigLayout("insets 0, gap 10"));
         importSourcePanel.setOpaque(false);
-        importSourcePanel.add(new FLabel.Builder().text("Import from:").build());
+        importSourcePanel.add(new FLabel.Builder().text(localizer.getMessage("lblImportFrom")).build());
         _txfSrc = new FTextField.Builder().readonly().build();
         importSourcePanel.add(_txfSrc, "pushx, growx");
-        _btnChooseDir = new FLabel.ButtonBuilder().text("Choose directory...").enabled(!isMigration).build();
+        _btnChooseDir = new FLabel.ButtonBuilder().text(localizer.getMessage("lblChooseDirectory"))
+                .enabled(!isMigration).build();
         final JFileChooser _fileChooser = new JFileChooser();
         _fileChooser.setMultiSelectionEnabled(false);
         _fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -157,7 +162,7 @@ public class ImportDialog {
             if (JFileChooser.APPROVE_OPTION == _fileChooser.showOpenDialog(JOptionPane.getRootFrame())) {
                 final File f = _fileChooser.getSelectedFile();
                 if (!f.canRead()) {
-                    FOptionPane.showErrorDialog("Cannot access selected directory (Permission denied).");
+                    FOptionPane.showErrorDialog(localizer.getMessage("lblCannotAccessDirectory"));
                 }
                 else {
                     _txfSrc.setText(f.getAbsolutePath());
@@ -247,9 +252,9 @@ public class ImportDialog {
 
         // action button widgets
         final Runnable cleanup = SOverlayUtils::hideOverlay;
-        _btnStart = new FButton("Start import");
+        _btnStart = new FButton(localizer.getMessage("lblStartImport"));
         _btnStart.setEnabled(false);
-        _btnCancel = new FButton("Cancel");
+        _btnCancel = new FButton(localizer.getMessage("lblCancel"));
         _btnCancel.addActionListener(e -> {
             _cancel = true;
             cleanup.run();
@@ -334,23 +339,23 @@ public class ImportDialog {
             // add deck selections
             final JPanel knownDeckPanel = new JPanel(new MigLayout("insets 0, gap 5, wrap 2"));
             knownDeckPanel.setOpaque(false);
-            knownDeckPanel.add(new FLabel.Builder().text("Decks").build(), "wrap");
-            _addSelectionWidget(knownDeckPanel, OpType.CONSTRUCTED_DECK, "Constructed decks");
-            _addSelectionWidget(knownDeckPanel, OpType.DRAFT_DECK,       "Draft decks");
-            _addSelectionWidget(knownDeckPanel, OpType.PLANAR_DECK,      "Planar decks");
-            _addSelectionWidget(knownDeckPanel, OpType.SCHEME_DECK,      "Scheme decks");
-            _addSelectionWidget(knownDeckPanel, OpType.SEALED_DECK,      "Sealed decks");
-            _addSelectionWidget(knownDeckPanel, OpType.UNKNOWN_DECK,     "Unknown decks");
+            knownDeckPanel.add(new FLabel.Builder().text(localizer.getMessage("lblDecks")).build(), "wrap");
+            _addSelectionWidget(knownDeckPanel, OpType.CONSTRUCTED_DECK, localizer.getMessage("lblConstructedDecks"));
+            _addSelectionWidget(knownDeckPanel, OpType.DRAFT_DECK, localizer.getMessage("lblDraftDecks"));
+            _addSelectionWidget(knownDeckPanel, OpType.PLANAR_DECK, localizer.getMessage("lblPlanarDecks"));
+            _addSelectionWidget(knownDeckPanel, OpType.SCHEME_DECK, localizer.getMessage("lblSchemeDecks"));
+            _addSelectionWidget(knownDeckPanel, OpType.SEALED_DECK, localizer.getMessage("lblSealedDecks"));
+            _addSelectionWidget(knownDeckPanel, OpType.UNKNOWN_DECK, localizer.getMessage("lblUnknownDecks"));
             final JPanel unknownDeckPanel = new JPanel(new MigLayout("insets 0, gap 5"));
             unknownDeckPanel.setOpaque(false);
             _unknownDeckCombo = new FComboBoxWrapper<>();
-            _unknownDeckCombo.addItem(new _UnknownDeckChoice("Constructed", ForgeConstants.DECK_CONSTRUCTED_DIR));
-            _unknownDeckCombo.addItem(new _UnknownDeckChoice("Draft",       ForgeConstants.DECK_DRAFT_DIR));
-            _unknownDeckCombo.addItem(new _UnknownDeckChoice("Planar",      ForgeConstants.DECK_PLANE_DIR));
-            _unknownDeckCombo.addItem(new _UnknownDeckChoice("Scheme",      ForgeConstants.DECK_SCHEME_DIR));
-            _unknownDeckCombo.addItem(new _UnknownDeckChoice("Sealed",      ForgeConstants.DECK_SEALED_DIR));
+            _unknownDeckCombo.addItem(new _UnknownDeckChoice(localizer.getMessage("lblConstructed"), ForgeConstants.DECK_CONSTRUCTED_DIR));
+            _unknownDeckCombo.addItem(new _UnknownDeckChoice(localizer.getMessage("lblDraft"), ForgeConstants.DECK_DRAFT_DIR));
+            _unknownDeckCombo.addItem(new _UnknownDeckChoice(localizer.getMessage("lblPlanar"), ForgeConstants.DECK_PLANE_DIR));
+            _unknownDeckCombo.addItem(new _UnknownDeckChoice(localizer.getMessage("lblScheme"), ForgeConstants.DECK_SCHEME_DIR));
+            _unknownDeckCombo.addItem(new _UnknownDeckChoice(localizer.getMessage("lblSealed"), ForgeConstants.DECK_SEALED_DIR));
             _unknownDeckCombo.addActionListener(arg0 -> _updateUI());
-            _unknownDeckLabel = new FLabel.Builder().text("Treat unknown decks as:").build();
+            _unknownDeckLabel = new FLabel.Builder().text(localizer.getMessage("lblTreatUnknownDecksAs")).build();
             unknownDeckPanel.add(_unknownDeckLabel);
             _unknownDeckCombo.addTo(unknownDeckPanel);
             knownDeckPanel.add(unknownDeckPanel, "span");
@@ -359,41 +364,38 @@ public class ImportDialog {
             // add other userDir data elements
             final JPanel dataPanel = new JPanel(new MigLayout("insets 0, gap 5, wrap"));
             dataPanel.setOpaque(false);
-            dataPanel.add(new FLabel.Builder().text("Other data").build());
-            _addSelectionWidget(dataPanel, OpType.GAUNTLET_DATA,   "Gauntlet data");
-            _addSelectionWidget(dataPanel, OpType.QUEST_DATA,      "Quest saves");
-            _addSelectionWidget(dataPanel, OpType.PREFERENCE_FILE, "Preference files");
+            dataPanel.add(new FLabel.Builder().text(localizer.getMessage("lblOtherData")).build());
+            _addSelectionWidget(dataPanel, OpType.GAUNTLET_DATA, localizer.getMessage("lblGauntletData"));
+            _addSelectionWidget(dataPanel, OpType.QUEST_DATA, localizer.getMessage("lblQuestSaves"));
+            _addSelectionWidget(dataPanel, OpType.PREFERENCE_FILE, localizer.getMessage("lblPreferenceFiles"));
             cbPanel.add(dataPanel, "aligny top");
 
             // add cacheDir data elements
             final JPanel cachePanel = new JPanel(new MigLayout("insets 0, gap 5, wrap 2"));
             cachePanel.setOpaque(false);
-            cachePanel.add(new FLabel.Builder().text("Cached data").build(), "wrap");
-            _addSelectionWidget(cachePanel, OpType.DEFAULT_CARD_PIC, "Default card pics");
-            _addSelectionWidget(cachePanel, OpType.SET_CARD_PIC,     "Set-specific card pics");
-            _addSelectionWidget(cachePanel, OpType.TOKEN_PIC,        "Card token pics");
-            _addSelectionWidget(cachePanel, OpType.QUEST_PIC,        "Quest-related pics");
-            _addSelectionWidget(cachePanel, OpType.DB_FILE,          "Database files", true, null, "wrap");
+            cachePanel.add(new FLabel.Builder().text(localizer.getMessage("lblCachedData")).build(), "wrap");
+            _addSelectionWidget(cachePanel, OpType.DEFAULT_CARD_PIC, localizer.getMessage("lblDefaultCardPics"));
+            _addSelectionWidget(cachePanel, OpType.SET_CARD_PIC, localizer.getMessage("lblSetSpecificCardPics"));
+            _addSelectionWidget(cachePanel, OpType.TOKEN_PIC, localizer.getMessage("lblCardTokenPics"));
+            _addSelectionWidget(cachePanel, OpType.QUEST_PIC, localizer.getMessage("lblQuestRelatedPics"));
+            _addSelectionWidget(cachePanel, OpType.DB_FILE, localizer.getMessage("lblDatabaseFiles"), true, null, "wrap");
 
             _addSelectionWidget(cachePanel, OpType.POSSIBLE_SET_CARD_PIC,
-                    "Import possible set pics from as-yet unsupported cards", false,
-                    "<html>Picture files that are not recognized as belonging to any known card.<br>" +
-                            "It could be that these pictures belong to cards that are not yet supported<br>" +
-                            "by Forge.  If you know this to be the case and want the pictures imported for<br>" +
-                            "future use, select this option.<html>", "span");
+                    localizer.getMessage("lblImportUnsupportedCardPics"), false,
+                    localizer.getMessage("lblImportUnsupportedCardPicsHelp"), "span");
             cbPanel.add(cachePanel, "aligny top");
             _selectionPanel.add(cbPanel, "center");
 
             // add move/copy and overwrite checkboxes
             final JPanel ioOptionPanel = new JPanel(new MigLayout("insets 0, gap 10"));
             ioOptionPanel.setOpaque(false);
-            _moveCheckbox = new FCheckBox("Remove source files after copy");
-            _moveCheckbox.setToolTipText("Move files into the data directories instead of just copying them");
+            _moveCheckbox = new FCheckBox(localizer.getMessage("lblRemoveSourceFilesAfterCopy"));
+            _moveCheckbox.setToolTipText(localizer.getMessage("lblMoveFilesInsteadOfCopy"));
             _moveCheckbox.setSelected(isMigration);
             _moveCheckbox.addChangeListener(_stateChangedListener);
             ioOptionPanel.add(_moveCheckbox);
-            _overwriteCheckbox = new FCheckBox("Overwrite files in destination");
-            _overwriteCheckbox.setToolTipText("Overwrite existing data with the imported data");
+            _overwriteCheckbox = new FCheckBox(localizer.getMessage("lblOverwriteDestinationFiles"));
+            _overwriteCheckbox.setToolTipText(localizer.getMessage("lblOverwriteExistingData"));
             _overwriteCheckbox.addChangeListener(_stateChangedListener);
             ioOptionPanel.add(_overwriteCheckbox);
             _selectionPanel.add(ioOptionPanel);
@@ -413,7 +415,7 @@ public class ImportDialog {
 
             // add progress bar
             _progressBar = new JProgressBar();
-            _progressBar.setString("Preparing to analyze source directory...");
+            _progressBar.setString(localizer.getMessage("lblPreparingSourceAnalysis"));
             _progressBar.setStringPainted(true);
             _selectionPanel.add(_progressBar, "w 100%!");
 
@@ -515,7 +517,7 @@ public class ImportDialog {
                 // update the progress bar widget from the GUI event loop
                 SwingUtilities.invokeLater(() -> {
                     if (_cancel) { return; }
-                    _progressBar.setString("Analyzing...");
+                    _progressBar.setString(localizer.getMessage("lblAnalyzing"));
                     _progressBar.setMaximum(numFilesToAnalyze);
                     _progressBar.setValue(0);
                     _progressBar.setIndeterminate(false);
@@ -530,7 +532,7 @@ public class ImportDialog {
                 _cancel = true;
 
                 SwingUtilities.invokeLater(() -> {
-                    _progressBar.setString("Error");
+                    _progressBar.setString(localizer.getMessage("lblError"));
                     BugReporter.reportException(e);
                 });
             } finally {
@@ -549,7 +551,7 @@ public class ImportDialog {
             if (!_cancel) {
                 _progressBar.setValue(_progressBar.getMaximum());
                 _updateUI();
-                _progressBar.setString("Analysis complete");
+                _progressBar.setString(localizer.getMessage("lblAnalysisComplete"));
 
                 // clear any previously-set action listeners on the start button
                 // in case we've previously completed an analysis but changed the directory
@@ -614,7 +616,8 @@ public class ImportDialog {
                             sb.append("will come up again the next time you start Forge in order to migrate the remaining files<br>");
                             sb.append("unless you move or delete them manually.</html>");
 
-                            final int chosen = FOptionPane.showOptionDialog(sb.toString(), "Migration warning", FOptionPane.WARNING_ICON, fixOrContinue);
+                            final int chosen = FOptionPane.showOptionDialog(sb.toString(),
+                                    localizer.getMessage("lblMigrationWarning"), FOptionPane.WARNING_ICON, fixOrContinue);
 
                             if (chosen != 1) {
                                 // i.e. option 0 was chosen or the dialog was otherwise closed
@@ -826,7 +829,7 @@ public class ImportDialog {
             }
 
             // set progress bar bounds
-            _progressBar.setString(_move ? "Moving files..." : "Copying files...");
+            _progressBar.setString(localizer.getMessage(_move ? "lblMovingFiles" : "lblCopyingFiles"));
             _progressBar.setMinimum(0);
             _progressBar.setMaximum(_operations.size());
         }
@@ -938,7 +941,7 @@ public class ImportDialog {
                 // report any exceptions in a standard dialog
                 // note that regular I/O errors don't throw, they'll just be mentioned in the log
                 SwingUtilities.invokeLater(() -> {
-                    _progressBar.setString("Error");
+                    _progressBar.setString(localizer.getMessage("lblError"));
                     BugReporter.reportException(e);
                 });
             }
@@ -952,8 +955,8 @@ public class ImportDialog {
             if (_cancel) { return; }
 
             _progressBar.setValue(_progressBar.getMaximum());
-            _progressBar.setString("Import complete");
-            _btnCancel.setText("Done");
+            _progressBar.setString(localizer.getMessage("lblImportComplete"));
+            _btnCancel.setText(localizer.getMessage("lblDone"));
         }
     }
 

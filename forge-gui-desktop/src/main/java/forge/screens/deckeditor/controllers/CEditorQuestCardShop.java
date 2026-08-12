@@ -48,6 +48,7 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 
 /**
  * Child controller for quest card shop UI.
@@ -58,6 +59,7 @@ import forge.util.ItemPool;
  * @version $Id: CEditorQuestCardShop.java 15088 2012-04-07 11:34:05Z Max mtg $
  */
 public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, DeckBase> {
+    private final Localizer localizer = Localizer.getInstance();
     private final FLabel creditsLabel = new FLabel.Builder()
             .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_COINSTACK))
             .fontSize(15).build();
@@ -67,7 +69,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             .fontSize(11)
             .build();
     @SuppressWarnings("serial")
-    private final FLabel fullCatalogToggle = new FLabel.Builder().text("See full catalog")
+    private final FLabel fullCatalogToggle = new FLabel.Builder().text(localizer.getMessage("lblSeeFullCatalog"))
             .fontSize(14).hoverable(true).cmdClick((UiCommand) this::toggleFullCatalog)
             .build();
 
@@ -104,8 +106,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         final SpellShopManager catalogManager = new SpellShopManager(cDetailPicture0, false);
         final SpellShopManager deckManager = new SpellShopManager(cDetailPicture0, false);
 
-        catalogManager.setCaption("Spell Shop");
-        deckManager.setCaption("Quest Inventory");
+        catalogManager.setCaption(localizer.getMessage("lblSpellShop"));
+        deckManager.setCaption(localizer.getMessage("lblQuestInventory"));
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -122,14 +124,14 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             this.getBtnAdd().setEnabled(false);
             this.getBtnRemove().setEnabled(false);
             this.getBtnRemove4().setEnabled(false);
-            fullCatalogToggle.setText("Return to spell shop");
+            fullCatalogToggle.setText(localizer.getMessage("lblReturnToSpellShop"));
         }
         else {
             this.getCatalogManager().setPool(cardsForSale);
             this.getBtnAdd().setEnabled(true);
             this.getBtnRemove().setEnabled(true);
             this.getBtnRemove4().setEnabled(true);
-            fullCatalogToggle.setText("See full catalog");
+            fullCatalogToggle.setText(localizer.getMessage("lblSeeFullCatalog"));
         }
     }
 
@@ -168,19 +170,20 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         if (!showingFullCatalog) {
-            cmb.addMoveItems("Buy", null);
+            cmb.addMoveItems(localizer.getMessage("lblBuy"), null);
         }
     }
 
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
         if (!showingFullCatalog) {
-            cmb.addMoveItems("Sell", null);
+            cmb.addMoveItems(localizer.getMessage("lblSell"), null);
         }
     }
 
     private void updateCreditsLabel() {
-        this.creditsLabel.setText("Credits: " + QuestUtil.formatCredits(this.questData.getAssets().getCredits()));
+        this.creditsLabel.setText(localizer.getMessage("lblCreditsAmount",
+                QuestUtil.formatCredits(this.questData.getAssets().getCredits())));
     }
 
     /*
@@ -225,16 +228,16 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         resetUI();
 
         CCTabLabel = VCardCatalog.SINGLETON_INSTANCE.getTabLabel().getText();
-        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Cards for sale");
+        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(localizer.getMessage("lblCardsForSale"));
 
         CCAddLabel = this.getBtnAdd().getText();
-        this.getBtnAdd().setText("Buy Card");
+        this.getBtnAdd().setText(localizer.getMessage("lblBuyCard"));
 
         CDTabLabel = VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().getText();
-        VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Your Cards");
+        VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(localizer.getMessage("lblYourCards"));
 
         CDRemLabel = this.getBtnRemove().getText();
-        this.getBtnRemove().setText("Sell Card");
+        this.getBtnRemove().setText(localizer.getMessage("lblSellCard"));
 
         this.getBtnAddBasicLands().setVisible(false);
 
@@ -256,8 +259,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getCatalogManager().setPool(cardsForSale);
         this.getDeckManager().setPool(ownedItems);
 
-        this.getBtnRemove4().setText("Sell all extras");
-        this.getBtnRemove4().setToolTipText("Sell unneeded extra copies of all cards");
+        this.getBtnRemove4().setText(localizer.getMessage("lblSellAllExtras"));
+        this.getBtnRemove4().setToolTipText(localizer.getMessage("lblSellUnneededExtras"));
         this.getBtnRemove4().setCommand((UiCommand) () -> {
             QuestSpellShop.sellExtras(getCatalogManager(), getDeckManager());
             updateCreditsLabel();
