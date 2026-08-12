@@ -50,6 +50,8 @@ import forge.game.zone.*;
 import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
 import org.apache.commons.lang3.tuple.Pair;
 import org.tinylog.Logger;
 import org.tinylog.TaggedLogger;
@@ -604,10 +606,16 @@ public class Game {
     }
 
     public synchronized CardCollectionView getCardsIn(final ZoneType zone) {
-        if (zone == ZoneType.Stack) {
-            return getStackZone().getCards();
+        final CardCollectionView cards = zone == ZoneType.Stack
+                ? getStackZone().getCards()
+                : getPlayers().getCardsIn(zone);
+        if (PerfProbe.isEnabled()) {
+            // Aggregate zone queries are a suspected allocation source; count both the calls and the
+            // cards they expose so a later "iterate instead of materialise" change can be measured.
+            PerfProbe.count(PerfCounter.ZONE_AGGREGATE_QUERIES);
+            PerfProbe.count(PerfCounter.ZONE_CARDS_MATERIALIZED, cards.size());
         }
-        return getPlayers().getCardsIn(zone);
+        return cards;
     }
 
     public CardCollectionView getCardsIncludePhasingIn(final ZoneType zone) {

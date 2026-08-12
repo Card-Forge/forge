@@ -28,6 +28,9 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
+import forge.util.perf.PerfTimer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +72,16 @@ public class GameCopier {
         return makeCopy(null, null);
     }
     public Game makeCopy(PhaseType advanceToPhase, Player aiPlayer) {
+        final long token = PerfProbe.start(PerfTimer.GAME_COPY);
+        try {
+            PerfProbe.count(PerfCounter.GAME_COPIES);
+            return makeCopyImpl(advanceToPhase, aiPlayer);
+        } finally {
+            PerfProbe.stop(PerfTimer.GAME_COPY, token);
+        }
+    }
+
+    private Game makeCopyImpl(PhaseType advanceToPhase, Player aiPlayer) {
         if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
             // How do we advance to phase when using restores?
             return snapshot.makeCopy();
@@ -296,6 +309,9 @@ public class GameCopier {
     private static final boolean PRUNE_HIDDEN_INFO = false;
     private static final boolean USE_FROM_PAPER_CARD = true;
     private Card createCardCopy(Game newGame, Player newOwner, Card c, Player aiPlayer) {
+        // The source calls reparsing a non-token card "very expensive" and the majority of copier
+        // time; counting copied cards is what turns that claim into a per-decision measurement.
+        PerfProbe.count(PerfCounter.GAME_COPY_CARDS);
         if (c.isToken() && !c.isImmutable()) {
             Card result = new TokenInfo(c).makeOneToken(newOwner, c.getId());
             new CardCopyService(c).copyCopiableCharacteristics(result, null, null);

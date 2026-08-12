@@ -37,6 +37,9 @@ import forge.game.staticability.StaticAbilityPanharmonicon;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
+import forge.util.perf.PerfTimer;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
@@ -186,6 +189,16 @@ public class TriggerHandler {
         resetActiveTriggers(true, null);
     }
     public final void resetActiveTriggers(boolean collect, CardCollectionView lastStateBattlefield) {
+        final long token = PerfProbe.start(PerfTimer.TRIGGER_RESET);
+        try {
+            PerfProbe.count(PerfCounter.TRIGGER_RESETS);
+            resetActiveTriggersImpl(collect, lastStateBattlefield);
+        } finally {
+            PerfProbe.stop(PerfTimer.TRIGGER_RESET, token);
+        }
+    }
+
+    private void resetActiveTriggersImpl(boolean collect, CardCollectionView lastStateBattlefield) {
         if (collect) {
             collectTriggerForWaiting();
         }
@@ -273,6 +286,7 @@ public class TriggerHandler {
         if (waitingTriggers.isEmpty()) {
             return false;
         }
+        PerfProbe.count(PerfCounter.WAITING_TRIGGER_RUNS);
         final List<TriggerWaiting> waiting = new ArrayList<>(waitingTriggers);
         waitingTriggers.clear();
 

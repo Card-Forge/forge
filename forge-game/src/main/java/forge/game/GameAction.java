@@ -57,6 +57,9 @@ import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
+import forge.util.perf.PerfTimer;
 
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
@@ -1074,6 +1077,16 @@ public class GameAction {
         checkStaticAbilities(runEvents, Sets.newHashSet(), CardCollection.EMPTY);
     }
     public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList) {
+        final long token = PerfProbe.start(PerfTimer.STATIC_ABILITIES);
+        try {
+            PerfProbe.count(PerfCounter.STATIC_ABILITY_CHECKS);
+            checkStaticAbilitiesImpl(runEvents, affectedCards, preList);
+        } finally {
+            PerfProbe.stop(PerfTimer.STATIC_ABILITIES, token);
+        }
+    }
+
+    private void checkStaticAbilitiesImpl(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList) {
         if (isCheckingStaticAbilitiesOnHold()) {
             return;
         }
@@ -1398,6 +1411,16 @@ public class GameAction {
         return checkStateEffects(runEvents, Sets.newHashSet());
     }
     public boolean checkStateEffects(final boolean runEvents, final Set<Card> affectedCards) {
+        final long token = PerfProbe.start(PerfTimer.STATE_EFFECTS);
+        try {
+            PerfProbe.count(PerfCounter.STATE_EFFECT_CHECKS);
+            return checkStateEffectsImpl(runEvents, affectedCards);
+        } finally {
+            PerfProbe.stop(PerfTimer.STATE_EFFECTS, token);
+        }
+    }
+
+    private boolean checkStateEffectsImpl(final boolean runEvents, final Set<Card> affectedCards) {
         // check game over early for win conditions such as Platinum Angel + Hurricane lethal for both players
         checkGameOverCondition();
         if (game.isGameOver()) {

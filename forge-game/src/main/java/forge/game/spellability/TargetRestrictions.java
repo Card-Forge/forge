@@ -33,6 +33,9 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
+import forge.util.perf.PerfTimer;
 
 /**
  * <p>
@@ -569,6 +572,22 @@ public class TargetRestrictions {
         return getAllCandidates(sa, false);
     }
     public final List<GameEntity> getAllCandidates(final SpellAbility sa, final boolean onlyNonCard) {
+        final long token = PerfProbe.start(PerfTimer.TARGET_CANDIDATES);
+        try {
+            final List<GameEntity> candidates = collectAllCandidates(sa, onlyNonCard);
+            if (PerfProbe.isEnabled()) {
+                // Most AI callers only need "at least N"; recording how many entities are actually
+                // materialised is what makes a bounded-traversal replacement measurable.
+                PerfProbe.count(PerfCounter.TARGET_CANDIDATE_QUERIES);
+                PerfProbe.count(PerfCounter.TARGET_CANDIDATES_MATERIALIZED, candidates.size());
+            }
+            return candidates;
+        } finally {
+            PerfProbe.stop(PerfTimer.TARGET_CANDIDATES, token);
+        }
+    }
+
+    private List<GameEntity> collectAllCandidates(final SpellAbility sa, final boolean onlyNonCard) {
         final Game game = sa.getActivatingPlayer().getGame();
         final List<GameEntity> candidates = Lists.newArrayList();
         for (Player player : game.getPlayers()) {

@@ -13,6 +13,9 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
+import forge.util.perf.PerfTimer;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -49,6 +52,7 @@ public class GameStateEvaluator {
             return null;
         }
 
+        PerfProbe.count(PerfCounter.COMBAT_LOOKAHEAD_COPIES);
         GameCopier copier = new GameCopier(evalGame);
         Game gameCopy = copier.makeCopy(null, aiPlayer);
 
@@ -100,6 +104,16 @@ public class GameStateEvaluator {
     }
 
     public Score getScoreForGameState(Game game, Player aiPlayer) {
+        final long token = PerfProbe.start(PerfTimer.SCORE_EVALUATION);
+        try {
+            PerfProbe.count(PerfCounter.SCORE_EVALUATIONS);
+            return getScoreForGameStateWithLookahead(game, aiPlayer);
+        } finally {
+            PerfProbe.stop(PerfTimer.SCORE_EVALUATION, token);
+        }
+    }
+
+    private Score getScoreForGameStateWithLookahead(Game game, Player aiPlayer) {
         if (!aiPlayer.isInGame()) {
             return getTerminalScore(game, aiPlayer);
         }

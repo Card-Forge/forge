@@ -12,6 +12,7 @@ import com.google.common.collect.Multimap;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.GameTraceDescriptors;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -33,6 +34,10 @@ import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
+import forge.util.perf.PerfTimer;
+import forge.util.perf.TraceCategory;
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
@@ -65,6 +70,17 @@ public class ComputerUtilAbility {
     }
 
     public static CardCollection getAvailableCards(final Game game, final Player player) {
+        final long token = PerfProbe.start(PerfTimer.CANDIDATE_GENERATION);
+        try {
+            final CardCollection available = collectAvailableCards(game, player);
+            PerfProbe.count(PerfCounter.CANDIDATE_CARDS, available.size());
+            return available;
+        } finally {
+            PerfProbe.stop(PerfTimer.CANDIDATE_GENERATION, token);
+        }
+    }
+
+    private static CardCollection collectAvailableCards(final Game game, final Player player) {
         CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
 
         all.addAll(player.getCardsIn(ZoneType.Graveyard));
@@ -80,6 +96,17 @@ public class ComputerUtilAbility {
     }
 
     public static List<SpellAbility> getSpellAbilities(final CardCollectionView all, final Player activator) {
+        final long token = PerfProbe.start(PerfTimer.CANDIDATE_GENERATION);
+        try {
+            final List<SpellAbility> abilities = collectSpellAbilities(all, activator);
+            PerfProbe.count(PerfCounter.CANDIDATE_ABILITIES, abilities.size());
+            return abilities;
+        } finally {
+            PerfProbe.stop(PerfTimer.CANDIDATE_GENERATION, token);
+        }
+    }
+
+    private static List<SpellAbility> collectSpellAbilities(final CardCollectionView all, final Player activator) {
         final List<SpellAbility> spellAbilities = Lists.newArrayList();
         for (final Card c : all) {
             Multimap<SpellAbility, SpellAbility> unhiddenAltCost = ArrayListMultimap.create();
@@ -96,6 +123,24 @@ public class ComputerUtilAbility {
     }
 
     public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player activator) {
+        final long token = PerfProbe.start(PerfTimer.CANDIDATE_GENERATION);
+        try {
+            final List<SpellAbility> expanded = collectOriginalAndAltCostAbilities(originList, activator);
+            if (PerfProbe.isEnabled()) {
+                PerfProbe.count(PerfCounter.CANDIDATE_ABILITIES_WITH_ALT_COSTS, expanded.size());
+                if (PerfProbe.isTracing()) {
+                    for (final SpellAbility variant : expanded) {
+                        PerfProbe.trace(TraceCategory.ALT_COST, GameTraceDescriptors.describe(variant));
+                    }
+                }
+            }
+            return expanded;
+        } finally {
+            PerfProbe.stop(PerfTimer.CANDIDATE_GENERATION, token);
+        }
+    }
+
+    private static List<SpellAbility> collectOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player activator) {
         List<SpellAbility> originListWithAddCosts = Lists.newArrayList();
         for (SpellAbility sa : originList) {
             // If this spell has alternative additional costs, add them instead of the unmodified SA itself

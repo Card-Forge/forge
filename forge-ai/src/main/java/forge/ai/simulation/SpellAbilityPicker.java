@@ -5,6 +5,7 @@ import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
+import forge.game.GameTraceDescriptors;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.phase.PhaseType;
@@ -15,6 +16,10 @@ import forge.game.spellability.SpellAbilityCondition;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
+import forge.util.perf.PerfTimer;
+import forge.util.perf.TraceCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -351,17 +356,30 @@ public class SpellAbilityPicker {
         Score bestScore = new Score(Integer.MIN_VALUE);
         final SpellAbilityChoicesIterator choicesIterator = new SpellAbilityChoicesIterator(controller);
         Score lastScore;
+        PerfProbe.count(PerfCounter.SIMULATED_CANDIDATES);
         do {
             // TODO: MyRandom should be an instance on the game object, so that we could do
             // simulations in parallel without messing up global state.
             MyRandom.setRandom(new Random(randomSeedToUse));
-            GameSimulator simulator = new GameSimulator(controller, game, player, phase);
-            simulator.setInterceptor(choicesIterator);
-            // I feel like something here is making a wrong assumption about what the target is
-            lastScore = simulator.simulateSpellAbility(sa);
+            // One branch is one whole copy-resolve-score cycle: the unit the plan's parallel
+            // top-level executor would eventually schedule, so it is measured as a unit.
+            final long branchToken = PerfProbe.start(PerfTimer.SIMULATION_BRANCH);
+            try {
+                PerfProbe.count(PerfCounter.SIMULATION_BRANCHES);
+                GameSimulator simulator = new GameSimulator(controller, game, player, phase);
+                simulator.setInterceptor(choicesIterator);
+                // I feel like something here is making a wrong assumption about what the target is
+                lastScore = simulator.simulateSpellAbility(sa);
+            } finally {
+                PerfProbe.stop(PerfTimer.SIMULATION_BRANCH, branchToken);
+            }
             numSimulations++;
             if (lastScore.value > bestScore.value) {
                 bestScore = lastScore;
+            }
+            if (PerfProbe.isTracing()) {
+                PerfProbe.trace(TraceCategory.SIMULATION,
+                        lastScore.value + "\t" + lastScore.availableValue + "\t" + GameTraceDescriptors.describe(sa));
             }
         } while (choicesIterator.advance(lastScore));
         controller.doneEvaluating(bestScore);

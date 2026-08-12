@@ -29,6 +29,8 @@ import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
 
 public class ComputerUtilCost {
 
@@ -530,6 +532,7 @@ public class ComputerUtilCost {
         return canPayCost(sa.getPayCosts(), sa, payer, effect);
     }
     public static boolean canPayCost(final Cost cost, final SpellAbility sa, final Player payer, final boolean effect) {
+        PerfProbe.count(PerfCounter.CAN_PAY_COST_CHECKS);
         if (sa.getActivatingPlayer() == null) {
             sa.setActivatingPlayer(payer); // complaints on NPE had came before this line was added.
         }
