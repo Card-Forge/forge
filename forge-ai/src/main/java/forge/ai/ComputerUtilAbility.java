@@ -1,8 +1,10 @@
 package forge.ai;
 
 import java.util.Comparator;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -274,7 +276,7 @@ public class ComputerUtilAbility {
     public static boolean isFullyTargetable(SpellAbility sa) {
         SpellAbility sub = sa;
         while (sub != null) {
-            if (sub.usesTargeting() && sub.getTargetRestrictions().getNumCandidates(sub) < sub.getMinTargets()) {
+            if (sub.usesTargeting() && !sub.getTargetRestrictions().hasAtLeastCandidates(sub, sub.getMinTargets())) {
                 return false;
             }
             sub = sub.getSubAbility();
@@ -284,8 +286,67 @@ public class ComputerUtilAbility {
 
     public final static saComparator saEvaluator = new saComparator();
 
+    /**
+     * Comparator facts that are stable for the length of one candidate ordering.
+     *
+     * <p>{@link saComparator} derives the same handful of values from an ability on every one of the
+     * {@code O(n log n)} comparisons it takes part in, and some of them — the priority value above
+     * all, which walks the host card's triggers and static abilities — are not cheap. Nothing in a
+     * sort mutates the game, so those values cannot change while the sort runs; this keeps them for
+     * exactly as long as that holds and is then discarded.</p>
+     *
+     * <p>It is a cache, not a policy: every value is produced by the code the comparator would have
+     * run inline, so an ordering made with facts must be identical to one made without them. Create
+     * one per decision, never share one across decisions, and never hold one past the sort.</p>
+     */
+    public static final class SortFacts {
+        private final Map<SpellAbility, SaFacts> perAbility = new IdentityHashMap<>();
+        private final Map<Game, Boolean> planarDieDeprioritized = new IdentityHashMap<>();
+
+        private SaFacts get(final SpellAbility sa) {
+            SaFacts f = perAbility.get(sa);
+            if (f == null) {
+                PerfProbe.count(PerfCounter.SORT_FACTS_COMPUTED);
+                f = new SaFacts();
+                perAbility.put(sa, f);
+            } else {
+                PerfProbe.count(PerfCounter.SORT_FACT_HITS);
+            }
+            return f;
+        }
+
+        boolean isPlanarDieDeprioritized(final Game game) {
+            Boolean known = planarDieDeprioritized.get(game);
+            if (known == null) {
+                known = saComparator.computePlanarDieDeprioritized(game);
+                planarDieDeprioritized.put(game, known);
+            }
+            return known;
+        }
+    }
+
+    /** The lazily derived facts about one ability. All of them are read-only queries. */
+    private static final class SaFacts {
+        private int cmc = -1;
+        private int energy = -1;
+        private Boolean activateLast;
+        private Boolean freeSpellHost;
+        private Integer priority;
+        private Integer creatureScore;
+    }
+
     // not sure "playing biggest spell" matters?
     public final static class saComparator implements Comparator<SpellAbility> {
+        /** Optional per-sort fact cache; {@code null} means every value is derived on demand. */
+        private final SortFacts facts;
+
+        public saComparator() {
+            this(null);
+        }
+        public saComparator(final SortFacts facts) {
+            this.facts = facts;
+        }
+
         @Override
         public int compare(final SpellAbility a, final SpellAbility b) {
             return compareEvaluator(a, b, false);
@@ -293,13 +354,13 @@ public class ComputerUtilAbility {
         public int compareEvaluator(final SpellAbility a, final SpellAbility b, boolean safeToEvaluateCreatures) {
             // sort from highest cost to lowest
             // we want the highest costs first
-            int a1 = a.getPayCosts().getTotalMana().getCMC();
-            int b1 = b.getPayCosts().getTotalMana().getCMC();
+            int a1 = cmc(a);
+            int b1 = cmc(b);
 
             // deprioritize SAs explicitly marked as preferred to be activated last compared to all other SAs
-            if (a.hasParam("AIActivateLast") && !b.hasParam("AIActivateLast")) {
+            if (activateLast(a) && !activateLast(b)) {
                 return 1;
-            } else if (b.hasParam("AIActivateLast") && !a.hasParam("AIActivateLast")) {
+            } else if (activateLast(b) && !activateLast(a)) {
                 return -1;
             }
 
@@ -313,33 +374,18 @@ public class ComputerUtilAbility {
                         return 0; // fallback if neither SA have a host card somehow
                     }
                 }
-                Game game = hostCardForGame.getGame();
-                if (game.getActivePlanes() != null) {
-                    for (Card c : game.getActivePlanes()) {
-                        if (c.hasSVar("AIRollPlanarDieParams") && c.getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
-                            if (ApiType.RollPlanarDice == a.getApi()) {
-                                return 1;
-                            } else {
-                                return -1;
-                            }
-                        }
+                if (planarDieDeprioritized(hostCardForGame.getGame())) {
+                    if (ApiType.RollPlanarDice == a.getApi()) {
+                        return 1;
+                    } else {
+                        return -1;
                     }
                 }
             }
 
             // deprioritize pump spells with pure energy cost (can be activated last,
             // since energy is generally scarce, plus can benefit e.g. Electrostatic Pummeler)
-            int a2 = 0, b2 = 0;
-            if (a.getApi() == ApiType.Pump && a.getPayCosts().getCostEnergy() != null) {
-                if (a.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
-                    a2 = a.getPayCosts().getCostEnergy().convertAmount();
-                }
-            }
-            if (b.getApi() == ApiType.Pump && b.getPayCosts().getCostEnergy() != null) {
-                if (b.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
-                    b2 = b.getPayCosts().getCostEnergy().convertAmount();
-                }
-            }
+            int a2 = energy(a), b2 = energy(b);
             if (a2 == 0 && b2 > 0) {
                 return -1;
             } else if (b2 == 0 && a2 > 0) {
@@ -353,9 +399,9 @@ public class ComputerUtilAbility {
                 return 1;
             }
 
-            if (a.getHostCard() != null && a.getHostCard().hasSVar("FreeSpellAI")) {
+            if (freeSpellHost(a)) {
                 return -1;
-            } else if (b.getHostCard() != null && b.getHostCard().hasSVar("FreeSpellAI")) {
+            } else if (freeSpellHost(b)) {
                 return 1;
             }
 
@@ -370,17 +416,106 @@ public class ComputerUtilAbility {
                 }
             }
 
-            a1 += getSpellAbilityPriority(a);
-            b1 += getSpellAbilityPriority(b);
+            a1 += priority(a);
+            b1 += priority(b);
 
             // if both are creature spells sort them after
             if (safeToEvaluateCreatures) {
                 // try to align the scales: if priority swings in either direction extra evaluation matters less
-                a1 += Math.round(ComputerUtilCard.evaluateCreature(a) / (10.5f + Math.abs(a1)));
-                b1 += Math.round(ComputerUtilCard.evaluateCreature(b) / (10.5f + Math.abs(b1)));
+                a1 += Math.round(creatureScore(a) / (10.5f + Math.abs(a1)));
+                b1 += Math.round(creatureScore(b) / (10.5f + Math.abs(b1)));
             }
 
             return b1 - a1;
+        }
+
+        private int cmc(final SpellAbility sa) {
+            if (facts == null) {
+                return sa.getPayCosts().getTotalMana().getCMC();
+            }
+            final SaFacts f = facts.get(sa);
+            if (f.cmc < 0) {
+                f.cmc = sa.getPayCosts().getTotalMana().getCMC();
+            }
+            return f.cmc;
+        }
+
+        private boolean activateLast(final SpellAbility sa) {
+            if (facts == null) {
+                return sa.hasParam("AIActivateLast");
+            }
+            final SaFacts f = facts.get(sa);
+            if (f.activateLast == null) {
+                f.activateLast = sa.hasParam("AIActivateLast");
+            }
+            return f.activateLast;
+        }
+
+        private int energy(final SpellAbility sa) {
+            if (facts == null) {
+                return computeEnergy(sa);
+            }
+            final SaFacts f = facts.get(sa);
+            if (f.energy < 0) {
+                f.energy = computeEnergy(sa);
+            }
+            return f.energy;
+        }
+
+        private static int computeEnergy(final SpellAbility sa) {
+            if (sa.getApi() == ApiType.Pump && sa.getPayCosts().getCostEnergy() != null
+                    && sa.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
+                return sa.getPayCosts().getCostEnergy().convertAmount();
+            }
+            return 0;
+        }
+
+        private boolean freeSpellHost(final SpellAbility sa) {
+            if (facts == null) {
+                return sa.getHostCard() != null && sa.getHostCard().hasSVar("FreeSpellAI");
+            }
+            final SaFacts f = facts.get(sa);
+            if (f.freeSpellHost == null) {
+                f.freeSpellHost = sa.getHostCard() != null && sa.getHostCard().hasSVar("FreeSpellAI");
+            }
+            return f.freeSpellHost;
+        }
+
+        private int priority(final SpellAbility sa) {
+            if (facts == null) {
+                return getSpellAbilityPriority(sa);
+            }
+            final SaFacts f = facts.get(sa);
+            if (f.priority == null) {
+                f.priority = getSpellAbilityPriority(sa);
+            }
+            return f.priority;
+        }
+
+        private int creatureScore(final SpellAbility sa) {
+            if (facts == null) {
+                return ComputerUtilCard.evaluateCreature(sa);
+            }
+            final SaFacts f = facts.get(sa);
+            if (f.creatureScore == null) {
+                f.creatureScore = ComputerUtilCard.evaluateCreature(sa);
+            }
+            return f.creatureScore;
+        }
+
+        private boolean planarDieDeprioritized(final Game game) {
+            return facts == null ? computePlanarDieDeprioritized(game) : facts.isPlanarDieDeprioritized(game);
+        }
+
+        private static boolean computePlanarDieDeprioritized(final Game game) {
+            if (game.getActivePlanes() != null) {
+                for (Card c : game.getActivePlanes()) {
+                    if (c.hasSVar("AIRollPlanarDieParams") && c.getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private static int getSpellAbilityPriority(SpellAbility sa) {
@@ -490,13 +625,21 @@ public class ComputerUtilAbility {
     }
 
     public static List<SpellAbility> sortCreatureSpells(final List<SpellAbility> all) {
+        return sortCreatureSpells(all, null);
+    }
+    /**
+     * @param facts optional per-decision comparator facts, shared with the preceding
+     *     {@link #saEvaluator} pass so that a creature's evaluation is paid for once
+     */
+    public static List<SpellAbility> sortCreatureSpells(final List<SpellAbility> all, final SortFacts facts) {
         // try to smoothen power creep by making CMC less of a factor
         final List<SpellAbility> creatures = AiController.filterListByApi(Lists.newArrayList(all), ApiType.PermanentCreature);
         if (creatures.size() <= 1) {
             return all;
         }
         // TODO this doesn't account for nearly identical creatures where one is a newer but more cost efficient variant
-        creatures.sort(ComputerUtilCard.EvaluateCreatureSpellComparator);
+        creatures.sort(facts == null ? ComputerUtilCard.EvaluateCreatureSpellComparator
+                : ComputerUtilCard.evaluateCreatureSpellComparator(facts));
         int idx = 0;
         for (int i = 0; i < all.size(); i++) {
             if (all.get(i).getApi() == ApiType.PermanentCreature) {

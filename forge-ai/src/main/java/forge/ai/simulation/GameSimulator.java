@@ -13,6 +13,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.util.collect.FCollectionView;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
 
 import java.util.*;
 
@@ -42,6 +44,23 @@ public class GameSimulator {
     }
 
     public GameSimulator(SimulationController controller, Game origGame, Player origAiPlayer, PhaseType advanceToPhase) {
+        this(controller, origGame, origAiPlayer, advanceToPhase, null);
+    }
+
+    /**
+     * @param knownOrigScore the caller's already-evaluated score for {@code origGame} from
+     *     {@code origAiPlayer}'s perspective, or {@code null} to evaluate it here.
+     *
+     *     <p>Every branch of one candidate re-derives the same unchanged baseline, and that
+     *     evaluation is not cheap: before combat damage it copies the whole game again to look
+     *     ahead. {@link GameStateEvaluator.Score} is two final ints, so passing the value the picker
+     *     already holds is the same number reached by less work. It is only sound while the original
+     *     game has not changed in a way the evaluator can see, so with assertions on — which is how
+     *     the test suite runs — the supplied value is checked against a fresh evaluation for every
+     *     branch, and a stale baseline fails loudly rather than quietly changing a decision.</p>
+     */
+    public GameSimulator(SimulationController controller, Game origGame, Player origAiPlayer, PhaseType advanceToPhase,
+            Score knownOrigScore) {
         this.controller = controller;
         copier = new GameCopier(origGame);
         simGame = copier.makeCopy(advanceToPhase, origAiPlayer);
@@ -53,7 +72,14 @@ public class GameSimulator {
         debugLines = origLines;
 
         debugPrint = false;
-        origScore = eval.getScoreForGameState(origGame, origAiPlayer);
+        if (knownOrigScore != null) {
+            PerfProbe.count(PerfCounter.BASELINE_SCORE_REUSES);
+            origScore = knownOrigScore;
+            assert baselineStillHolds(origGame, origAiPlayer, knownOrigScore)
+                    : "reused simulation baseline no longer matches a fresh evaluation";
+        } else {
+            origScore = eval.getScoreForGameState(origGame, origAiPlayer);
+        }
 
         if (advanceToPhase == null && CHECK_GAME_COPY_SCORE) {
             ensureGameCopyScoreMatches(origGame, origAiPlayer);
@@ -73,6 +99,11 @@ public class GameSimulator {
 
         debugPrint = false;
         debugLines = null;
+    }
+
+    /** The shadow check behind the reused baseline. Only ever called from an {@code assert}. */
+    private boolean baselineStillHolds(Game origGame, Player origAiPlayer, Score supplied) {
+        return supplied.equals(eval.getScoreForGameState(origGame, origAiPlayer));
     }
 
     private void ensureGameCopyScoreMatches(Game origGame, Player origAiPlayer) {

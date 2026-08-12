@@ -51,10 +51,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -79,9 +76,6 @@ public class AiAttackController {
 
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
-    private final int timeOut;
-    private final boolean canUseTimeout;
-    private List<CompletableFuture<Integer>> futures = new ArrayList<>();
 
     /**
      * <p>
@@ -99,8 +93,6 @@ public class AiAttackController {
         myList = ai.getCreaturesInPlay();
         this.nextTurn = nextTurn;
         refreshCombatants(defendingOpponent);
-        this.timeOut = ai.getGame().getAITimeout();
-        this.canUseTimeout = ai.getGame().canUseTimeout();
     } // overloaded constructor to evaluate attackers that should attack next turn
 
     public AiAttackController(final Player ai, Card attacker) {
@@ -114,8 +106,6 @@ public class AiAttackController {
             attackers.add(attacker);
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
-        this.timeOut = ai.getGame().getAITimeout();
-        this.canUseTimeout = ai.getGame().canUseTimeout();
     } // overloaded constructor to evaluate single specified attacker
 
     private void refreshCombatants(GameEntity defender) {
@@ -878,27 +868,33 @@ public class AiAttackController {
         final Queue<Card> attackersLeft = new ConcurrentLinkedQueue<>(this.attackers);
 
         // Attackers that don't really have a choice
-        final AtomicInteger numForcedAttackers = new AtomicInteger(0);
+        int numForcedAttackers = 0;
         // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
         // because creatures not chosen can't attack.
+        //
+        // This loop runs serially, in attacker order. It used to fan out onto the common pool, but
+        // the tasks read shared combat and requirement objects and declared attackers into the live
+        // Combat, so the resulting attack depended on how the pool happened to interleave them, and
+        // a task still running when the aggregate timed out could declare an attacker after the
+        // method had moved on. The work here is a handful of requirement lookups per attacker;
+        // ordering it costs little and makes the declaration reproducible.
         if (!nextTurn) {
             for (final Card attacker : this.attackers) {
-                final GameEntity finalDefender = defender;
-                futures.add(CompletableFuture.supplyAsync(()-> {
-                    GameEntity mustAttackDef = null;
+                GameEntity mustAttackDef = null;
+                try {
                     if (attacker.getSVar("MustAttack").equals("True")) {
-                        mustAttackDef = finalDefender;
+                        mustAttackDef = defender;
                     } else if (attacker.hasSVar("EndOfTurnLeavePlay")
-                            && isEffectiveAttacker(ai, attacker, combat, finalDefender)) {
-                        mustAttackDef = finalDefender;
+                            && isEffectiveAttacker(ai, attacker, combat, defender)) {
+                        mustAttackDef = defender;
                     } else if (seasonOfTheWitch) {
                         //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
-                        mustAttackDef = finalDefender;
+                        mustAttackDef = defender;
                     } else {
-                        if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return 0;
+                        if (combat.getAttackConstraints().getRequirements().get(attacker) == null) continue;
                         // check defenders in order of maximum requirements
                         List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
-                        final GameEntity def = finalDefender;
+                        final GameEntity def = defender;
                         reqs.sort((r1, r2) -> {
                             if (r1.getValue() == r2.getValue()) {
                                 // try to attack the designated defender
@@ -931,28 +927,19 @@ public class AiAttackController {
                             }
                         }
                     }
-                    if (mustAttackDef != null) {
-                        // combat is shared across these parallel futures and its attacker
-                        // multimap is not thread-safe; unsynchronized addAttacker calls
-                        // collide (ConcurrentModificationException, dropped attackers)
-                        synchronized (combat) {
-                            combat.addAttacker(attacker, mustAttackDef);
-                        }
-                        attackersLeft.remove(attacker);
-                        numForcedAttackers.incrementAndGet();
-                    }
-                    return 0;
-                }).exceptionally(ex -> {
+                } catch (RuntimeException ex) {
+                    // the fan-out this replaced completed a failing task exceptionally and carried
+                    // on with the remaining attackers; keep that rather than failing the whole
+                    // declaration on one bad creature
                     ex.printStackTrace();
-                    return 0;
-                }));
+                    continue;
+                }
+                if (mustAttackDef != null) {
+                    combat.addAttacker(attacker, mustAttackDef);
+                    attackersLeft.remove(attacker);
+                    numForcedAttackers++;
+                }
             }
-            CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
-            if (canUseTimeout)
-                CompletableFuture.allOf(futuresArray).completeOnTimeout(null, timeOut, TimeUnit.SECONDS).join();
-            else
-                CompletableFuture.allOf(futuresArray).join();
-            futures.clear();
             if (attackersLeft.isEmpty()) {
                 return aiAggression;
             }
@@ -960,10 +947,10 @@ public class AiAttackController {
 
         // Lightmine Field: make sure the AI doesn't wipe out its own creatures
         if (lightmineField) {
-            doLightmineFieldAttackLogic(attackersLeft, numForcedAttackers.get(), playAggro);
+            doLightmineFieldAttackLogic(attackersLeft, numForcedAttackers, playAggro);
         }
         // Revenge of Ravens: make sure the AI doesn't kill itself and doesn't damage itself unnecessarily
-        if (!doRevengeOfRavensAttackLogic(defender, attackersLeft, numForcedAttackers.get(), attackMax)) {
+        if (!doRevengeOfRavensAttackLogic(defender, attackersLeft, numForcedAttackers, attackMax)) {
             return aiAggression;
         }
 

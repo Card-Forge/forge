@@ -75,7 +75,7 @@ import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
 import java.util.*;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.Callable;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -735,19 +735,7 @@ public class AiController {
 
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
 
-        final long sortToken = PerfProbe.start(PerfTimer.CANDIDATE_SORT);
-        try {
-            try {
-                all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
-                ComputerUtilAbility.sortCreatureSpells(all);
-            } catch (IllegalArgumentException ex) {
-                System.err.println(ex.getMessage());
-                String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
-                Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
-            }
-        } finally {
-            PerfProbe.stop(PerfTimer.CANDIDATE_SORT, sortToken);
-        }
+        sortCandidates(all);
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             ApiType saApi = sa.getApi();
@@ -966,7 +954,7 @@ public class AiController {
             return AiPlayDecision.AnotherTime;
         }
         if (sa.usesTargeting()) {
-            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa) == 0) {
+            if (!sa.isTargetNumberValid() && !sa.getTargetRestrictions().hasAtLeastCandidates(sa, 1)) {
                 return AiPlayDecision.TargetingFailed;
             }
             if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
@@ -1672,23 +1660,38 @@ public class AiController {
         return chosenSa;
     }
 
-    private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
-        if (all == null || all.isEmpty())
-            return null;
-
+    /**
+     * Orders candidate abilities best-first, exactly as the two comparator passes always have.
+     *
+     * <p>The only difference from calling the comparators directly is that both passes share one
+     * {@link ComputerUtilAbility.SortFacts}, so a given ability's cost, priority value and creature
+     * evaluation are derived once for the sort instead of once per comparison. Nothing between the
+     * two passes mutates the game, which is what makes that sharing sound; the facts are dropped as
+     * soon as the ordering is finished.</p>
+     */
+    static void sortCandidates(final List<SpellAbility> all) { // package visible so a parity test can order the same list both ways
         final long sortToken = PerfProbe.start(PerfTimer.CANDIDATE_SORT);
         try {
+            final ComputerUtilAbility.SortFacts facts = new ComputerUtilAbility.SortFacts();
+            final ComputerUtilAbility.saComparator evaluator = new ComputerUtilAbility.saComparator(facts);
             try {
-                all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
-                ComputerUtilAbility.sortCreatureSpells(all);
+                all.sort(evaluator); // put best spells first
+                ComputerUtilAbility.sortCreatureSpells(all, facts);
             } catch (IllegalArgumentException ex) {
                 System.err.println(ex.getMessage());
-                String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
+                String assertex = ComparatorUtil.verifyTransitivity(evaluator, all);
                 Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
             }
         } finally {
             PerfProbe.stop(PerfTimer.CANDIDATE_SORT, sortToken);
         }
+    }
+
+    private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
+        if (all == null || all.isEmpty())
+            return null;
+
+        sortCandidates(all);
         if (PerfProbe.isTracing()) {
             // The sorted list is the parity artefact for any comparator-facts change: the ordered
             // descriptors must match byte for byte, not merely produce the same final choice.
@@ -1700,7 +1703,7 @@ public class AiController {
         // in case of infinite loop reset below would not be reached
         timeoutReached = false;
 
-        FutureTask<SpellAbility> future = new FutureTask<>(() -> {
+        final Callable<SpellAbility> evaluation = () -> {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1788,46 +1791,39 @@ public class AiController {
             }
 
             return null;
-        });
+        };
 
-        // Timed from thread creation so that the per-decision OS thread the plan proposes replacing
-        // is inside the measurement, not hidden outside it.
+        // Timed from submission so that the cost of getting onto the worker is inside the
+        // measurement, not hidden outside it.
         final long evalToken = PerfProbe.start(PerfTimer.CANDIDATE_EVALUATION);
         try {
-            Thread t = new Thread(future, "Game AI Eval");
-            t.start();
+            AiEvaluationExecutor.Evaluation<SpellAbility> run = AiEvaluationExecutor.submit(evaluation);
             try {
-                return future.get(game.getAITimeout(), TimeUnit.SECONDS);
+                return run.get(game.getAITimeout(), TimeUnit.SECONDS);
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
                 e.printStackTrace();
                 if (e instanceof TimeoutException) {
                     PerfProbe.count(PerfCounter.EVAL_TIMEOUTS);
                     // log where the eval thread currently is - each timeout doubles as a
                     // profiler sample for diagnosing remaining AI slowdowns from user logs
-                    StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
-                    StackTraceElement[] evalStack = t.getStackTrace();
-                    for (int i = 0; i < Math.min(30, evalStack.length); i++) {
-                        sb.append("\n\tat ").append(evalStack[i]);
+                    Thread evalThread = run.getRunningThread();
+                    if (evalThread != null) {
+                        StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
+                        StackTraceElement[] evalStack = evalThread.getStackTrace();
+                        for (int i = 0; i < Math.min(30, evalStack.length); i++) {
+                            sb.append("\n\tat ").append(evalStack[i]);
+                        }
+                        System.out.println(sb);
                     }
-                    System.out.println(sb);
                 }
                 // ask the eval thread to exit at the next SpellAbility check first: a brutal
                 // Thread.stop() mid-evaluation can leave partially mutated shared state behind
                 timeoutReached = true;
-                future.cancel(true);
-                try {
-                    t.join(500);
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
-                }
-                if (t.isAlive()) {
-                    // last resort, see #8302: the eval thread may be stuck inside a single
-                    // evaluation or an infinite loop and never reach the cooperative exit
-                    try {
-                        t.stop();
-                    } catch (UnsupportedOperationException | NoSuchMethodError ex) {
-                        // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
-                    }
+                run.cancel();
+                if (!run.awaitCompletion(500, TimeUnit.MILLISECONDS)) {
+                    // it did not honour cancellation, so it may still be mutating game state:
+                    // stop it if the JVM allows and never hand it another decision either way
+                    run.abandon();
                 }
                 // TODO mark some as skipped to increase chance to find something playable next priority
                 return null;

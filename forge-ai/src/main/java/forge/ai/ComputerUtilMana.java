@@ -63,8 +63,19 @@ public class ComputerUtilMana {
         return canPayManaCost(sa.getPayCosts(), sa, ai, extraMana, effect);
     }
     public static boolean canPayManaCost(final Cost cost, final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
+        return canPayManaCost(cost, sa, ai, extraMana, effect, null);
+    }
+    /**
+     * @param adjustedCostOut if non-null, receives in element 0 the structurally adjusted cost this
+     *     check derived, so that a caller which is about to make a second cost check over the same
+     *     ability does not have to derive it again. It is only the same cost if the second check
+     *     would have adjusted in the same context — see
+     *     {@code ComputerUtilCost#canReuseAdjustedCost}, which is the only caller that decides that.
+     */
+    public static boolean canPayManaCost(final Cost cost, final SpellAbility sa, final Player ai, final int extraMana,
+            final boolean effect, final Cost[] adjustedCostOut) {
         PerfProbe.count(PerfCounter.MANA_FEASIBILITY_CHECKS);
-        return payManaCost(cost, sa, ai, true, extraMana, true, effect);
+        return payManaCost(cost, sa, ai, true, extraMana, true, effect, adjustedCostOut);
     }
 
     public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
@@ -74,7 +85,10 @@ public class ComputerUtilMana {
         return payManaCost(cost, sa, ai, false, 0, true, effect);
     }
     private static boolean payManaCost(final Cost cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, final boolean effect) {
-        ManaCostBeingPaid manaCost = calculateManaCost(cost, sa, ai, test, extraMana, effect);
+        return payManaCost(cost, sa, ai, test, extraMana, checkPlayable, effect, null);
+    }
+    private static boolean payManaCost(final Cost cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, final boolean effect, final Cost[] adjustedCostOut) {
+        ManaCostBeingPaid manaCost = calculateManaCost(cost, sa, ai, test, extraMana, effect, adjustedCostOut);
         return payManaCost(manaCost, sa, ai, test, checkPlayable, effect) != null;
     }
 
@@ -1208,6 +1222,13 @@ public class ComputerUtilMana {
      * @return ManaCost
      */
     public static ManaCostBeingPaid calculateManaCost(final Cost cost, final SpellAbility sa, final Player payer, final boolean test, final int extraMana, final boolean effect) {
+        return calculateManaCost(cost, sa, payer, test, extraMana, effect, null);
+    }
+    /**
+     * @param adjustedCostOut if non-null, receives in element 0 the structurally adjusted cost used
+     *     here, for a caller that wants to reuse it rather than adjust the same cost again
+     */
+    public static ManaCostBeingPaid calculateManaCost(final Cost cost, final SpellAbility sa, final Player payer, final boolean test, final int extraMana, final boolean effect, final Cost[] adjustedCostOut) {
         Card host = sa.getHostCard();
         Zone castFromBackup = null;
         if (test && sa.isSpell() && !host.isInZone(ZoneType.Stack)) {
@@ -1225,6 +1246,9 @@ public class ComputerUtilMana {
         } else {
             // when not testing CostPayment already handled raise
             payCosts = cost;
+        }
+        if (adjustedCostOut != null) {
+            adjustedCostOut[0] = payCosts;
         }
         CostPartMana manapart = payCosts != null ? payCosts.getCostMana() : null;
         final ManaCost mana = payCosts != null ? ( manapart == null ? ManaCost.ZERO : manapart.getManaCostFor(sa) ) : ManaCost.NO_COST;

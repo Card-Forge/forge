@@ -568,6 +568,66 @@ public class TargetRestrictions {
         return num + getAllCandidates(sa).size();
     }
 
+    /**
+     * Whether {@link #getNumCandidates(SpellAbility)} would return at least {@code required}.
+     *
+     * <p>Most callers only ask whether a minimum number of targets exists, and pay for a full
+     * candidate list to find out. This walks the same sources in the same order, applies the same
+     * predicates, and stops as soon as the answer is known. It deliberately reproduces
+     * {@code getNumCandidates}'s behaviour rather than correcting it, including the double count
+     * noted there, so that the boolean a caller observes is unchanged.</p>
+     *
+     * <p>The one thing that is never skipped is the target text change applied between the player
+     * and card passes: it mutates {@code validTgts} and later readers depend on it having run.</p>
+     *
+     * @param sa the ability whose targeting is being tested
+     * @param required how many candidates the caller needs; zero or less is trivially satisfied
+     * @return {@code getNumCandidates(sa) >= required}
+     */
+    public final boolean hasAtLeastCandidates(final SpellAbility sa, final int required) {
+        final long token = PerfProbe.start(PerfTimer.TARGET_CANDIDATES);
+        int visited = 0;
+        try {
+            PerfProbe.count(PerfCounter.TARGET_THRESHOLD_QUERIES);
+            int num = 0;
+            if (this.tgtZone.contains(ZoneType.Stack)) {
+                for (final SpellAbilityStackInstance si : sa.getHostCard().getGame().getStack()) {
+                    visited++;
+                    if (sa.canTargetSpellAbility(si.getSpellAbility())) {
+                        num++;
+                    }
+                }
+            }
+
+            final Game game = sa.getActivatingPlayer().getGame();
+            for (final Player player : game.getPlayers()) {
+                visited++;
+                if (sa.canTarget(player)) {
+                    num++;
+                }
+            }
+
+            this.applyTargetTextChanges(sa);
+
+            if (num >= required) {
+                return true;
+            }
+
+            for (final Card c : game.getCardsIn(this.tgtZone)) {
+                visited++;
+                if (sa.canTarget(c) && ++num >= required) {
+                    return true;
+                }
+            }
+            return num >= required;
+        } finally {
+            if (PerfProbe.isEnabled()) {
+                PerfProbe.count(PerfCounter.TARGET_CANDIDATES_VISITED, visited);
+            }
+            PerfProbe.stop(PerfTimer.TARGET_CANDIDATES, token);
+        }
+    }
+
     public final List<GameEntity> getAllCandidates(final SpellAbility sa) {
         return getAllCandidates(sa, false);
     }

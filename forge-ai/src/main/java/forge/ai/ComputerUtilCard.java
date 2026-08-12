@@ -743,6 +743,11 @@ public class ComputerUtilCard {
         // TODO ideally we could reuse the value from the previous pass with false
         return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
     };
+    /** The same ordering, reusing the facts the previous pass already derived. */
+    public static Comparator<SpellAbility> evaluateCreatureSpellComparator(final ComputerUtilAbility.SortFacts facts) {
+        final ComputerUtilAbility.saComparator evaluator = new ComputerUtilAbility.saComparator(facts);
+        return (a, b) -> evaluator.compareEvaluator(a, b, true);
+    }
 
     private static final CreatureEvaluator creatureEvaluator = new CreatureEvaluator();
     private static final LandEvaluator landEvaluator = new LandEvaluator();
