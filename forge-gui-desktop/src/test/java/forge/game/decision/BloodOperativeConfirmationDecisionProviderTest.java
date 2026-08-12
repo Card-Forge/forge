@@ -13,13 +13,18 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Locale;
+import java.lang.reflect.Modifier;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 public class BloodOperativeConfirmationDecisionProviderTest extends AITest {
     private final ConfirmationDecisionProvider provider = new ConfirmationDecisionProvider();
@@ -97,5 +102,138 @@ public class BloodOperativeConfirmationDecisionProviderTest extends AITest {
         assertFalse(request.isForced());
         assertEquals(request.getCandidates().stream().map(LegalCandidate::getSemanticKey).toList(),
                 List.of("ACCEPT", "DECLINE"));
+
+        final Object context = request.getConfirmationContext();
+        assertNotNull(context);
+        assertEquals(enumName(readRequiredGetter(context, "getProfile"), "profile"),
+                "BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD");
+        assertEquals(enumName(readRequiredGetter(context, "getEvent"), "event"), "CHANGES_ZONE");
+
+        final Object targetPublicIdentity = readRequiredGetter(context, "getTargetPublicIdentity");
+        assertNotNull(targetPublicIdentity);
+        if (targetPublicIdentity == null) {
+            return;
+        }
+        assertFalse(targetPublicIdentity instanceof Card, "targetPublicIdentity must be a value projection");
+        assertPublicCardProjection(targetPublicIdentity, legalCard);
+
+        final Field triggeringPlayerId = requiredField(context, "triggeringPlayerId");
+        assertNotNull(triggeringPlayerId);
+        if (triggeringPlayerId == null) {
+            return;
+        }
+        assertEquals(triggeringPlayerId.getType(), Integer.class);
+        assertNull(readRequiredField(context, triggeringPlayerId));
+        assertNull(readRequiredGetter(context, "getTriggeringPlayerId"));
+        assertNumericEquals(readRequiredGetter(context, "getDeciderPlayerId"), decider.getId(),
+                "deciderPlayerId");
+        assertValueOnlyFields(context);
+    }
+
+    private static void assertPublicCardProjection(final Object projection, final Card expectedCard) {
+        assertNotNull(expectedCard.getZone());
+        assertNotNull(expectedCard.getOwner());
+        assertNotNull(expectedCard.getController());
+        if (expectedCard.getZone() == null || expectedCard.getOwner() == null
+                || expectedCard.getController() == null) {
+            return;
+        }
+        assertValueOnlyFields(projection);
+        assertNumericEquals(readRequiredGetter(projection, "getCardId"), expectedCard.getId(), "cardId");
+        assertNumericEquals(readRequiredGetter(projection, "getGameTimestamp"), expectedCard.getGameTimestamp(),
+                "gameTimestamp");
+        assertEquals(readRequiredGetter(projection, "getVisibleName"), expectedCard.getName());
+        assertEquals(readRequiredGetter(projection, "getZone"), expectedCard.getZone().getZoneType());
+        assertNumericEquals(readRequiredGetter(projection, "getOwnerId"), expectedCard.getOwner().getId(),
+                "ownerId");
+        assertNumericEquals(readRequiredGetter(projection, "getControllerId"), expectedCard.getController().getId(),
+                "controllerId");
+    }
+
+    private static void assertNumericEquals(final Object actual, final long expected, final String fieldName) {
+        assertNotNull(actual, fieldName + " is missing");
+        assertTrue(actual instanceof Number, fieldName + " must be numeric");
+        if (actual instanceof Number number) {
+            assertEquals(number.longValue(), expected, fieldName + " mismatch");
+        }
+    }
+
+    private static String enumName(final Object value, final String fieldName) {
+        assertNotNull(value, fieldName + " is missing");
+        assertTrue(value instanceof Enum<?>, fieldName + " must be an enum");
+        if (value instanceof Enum<?> enumValue) {
+            return enumValue.name();
+        }
+        return null;
+    }
+
+    private static Object readRequiredGetter(final Object target, final String getterName) {
+        assertNotNull(target, "cannot read " + getterName + " from null");
+        if (target == null) {
+            return null;
+        }
+        try {
+            final Method getter = target.getClass().getMethod(getterName);
+            return getter.invoke(target);
+        } catch (ReflectiveOperationException | RuntimeException ex) {
+            fail("missing or unreadable required getter " + getterName + " ("
+                    + ex.getClass().getSimpleName() + ")");
+            return null;
+        }
+    }
+
+    private static Field requiredField(final Object target, final String fieldName) {
+        assertNotNull(target, "cannot read " + fieldName + " from null");
+        if (target == null) {
+            return null;
+        }
+        try {
+            return target.getClass().getDeclaredField(fieldName);
+        } catch (ReflectiveOperationException | RuntimeException ex) {
+            fail("missing required field " + fieldName + " (" + ex.getClass().getSimpleName() + ")");
+            return null;
+        }
+    }
+
+    private static Object readRequiredField(final Object target, final Field field) {
+        assertNotNull(target, "cannot read a field from null");
+        assertNotNull(field, "required field is missing");
+        if (target == null || field == null) {
+            return null;
+        }
+        try {
+            field.setAccessible(true);
+            return field.get(target);
+        } catch (ReflectiveOperationException | RuntimeException ex) {
+            fail("unreadable required field " + field.getName() + " ("
+                    + ex.getClass().getSimpleName() + ")");
+            return null;
+        }
+    }
+
+    private static void assertValueOnlyFields(final Object value) {
+        assertNotNull(value, "value-only object is missing");
+        if (value == null) {
+            return;
+        }
+        for (final Field field : value.getClass().getDeclaredFields()) {
+            if (field.isSynthetic() || Modifier.isStatic(field.getModifiers())) {
+                continue;
+            }
+            final String fieldName = field.getName().toLowerCase(Locale.ROOT);
+            assertFalse(fieldName.contains("occurrence"), "raw occurrence field: " + field.getName());
+            assertFalse(fieldName.contains("continuation"), "raw continuation field: " + field.getName());
+            assertTrue(isValueOnlyType(field.getType()), "raw Forge object field: " + field.getName());
+        }
+    }
+
+    private static boolean isValueOnlyType(final Class<?> type) {
+        return type.isPrimitive()
+                || type.isEnum()
+                || type == String.class
+                || Number.class.isAssignableFrom(type)
+                || type == Boolean.class
+                || type == Character.class
+                || "forge.game.decision.CardSelectionCard".equals(type.getName());
     }
 }
