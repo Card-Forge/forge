@@ -45,14 +45,28 @@ public enum PerfCounter {
     CAN_PAY_COST_CHECKS("canPayCostChecks"),
     /** {@code ComputerUtilMana.canPayManaCost} invocations. */
     MANA_FEASIBILITY_CHECKS("manaFeasibilityChecks"),
+    /** Structural {@code CostAdjustment.adjust} results reused across one feasibility call. */
+    COST_ADJUSTMENT_REUSES("costAdjustmentReuses"),
     /** AI evaluation watchdog timeouts. */
     EVAL_TIMEOUTS("evalTimeouts"),
+    /** Evaluation runs abandoned because they ignored cancellation. */
+    EVAL_WORKERS_ABANDONED("evalWorkersAbandoned"),
+
+    // ---- candidate ordering ----
+    /** Per-decision comparator facts computed for a spell ability. */
+    SORT_FACTS_COMPUTED("sortFactsComputed"),
+    /** Comparator fact lookups answered from the per-decision cache. */
+    SORT_FACT_HITS("sortFactHits"),
 
     // ---- targeting ----
     /** {@code TargetRestrictions.getAllCandidates} invocations. */
     TARGET_CANDIDATE_QUERIES("targetCandidateQueries"),
     /** Target candidates actually placed into a returned list. */
     TARGET_CANDIDATES_MATERIALIZED("targetCandidatesMaterialized"),
+    /** {@code TargetRestrictions.hasAtLeastCandidates} invocations. */
+    TARGET_THRESHOLD_QUERIES("targetThresholdQueries"),
+    /** Entities examined by those bounded traversals before they stopped. */
+    TARGET_CANDIDATES_VISITED("targetCandidatesVisited"),
 
     // ---- zone aggregation ----
     /** Aggregate {@code Game.getCardsIn(ZoneType)} queries. */
@@ -83,6 +97,8 @@ public enum PerfCounter {
     COMBAT_LOOKAHEAD_COPIES("combatLookaheadCopies"),
     /** {@code GameStateEvaluator.getScoreForGameState} invocations. */
     SCORE_EVALUATIONS("scoreEvaluations"),
+    /** Root scores taken from the caller instead of being re-evaluated per simulation branch. */
+    BASELINE_SCORE_REUSES("baselineScoreReuses"),
     /** Candidate abilities evaluated by the full-simulation picker. */
     SIMULATED_CANDIDATES("simulatedCandidates"),
     /** Individual target/mode branches simulated inside those candidates. */

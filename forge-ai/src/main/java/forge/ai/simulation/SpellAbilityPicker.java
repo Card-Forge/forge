@@ -356,6 +356,14 @@ public class SpellAbilityPicker {
         Score bestScore = new Score(Integer.MIN_VALUE);
         final SpellAbilityChoicesIterator choicesIterator = new SpellAbilityChoicesIterator(controller);
         Score lastScore;
+        // Every branch of this candidate scores the same unchanged original game as its baseline,
+        // and that evaluation copies the whole game again for combat lookahead when there is combat
+        // to look ahead to. The first branch still evaluates it exactly where it always did; the
+        // rest take that value. Only branches of one candidate share it: the baseline is not stable
+        // across candidates, because working out whether a candidate can be played and paid for
+        // touches state the evaluator reads. GameSimulator re-checks the value it is handed
+        // whenever assertions are on, so a branch that does move the baseline fails loudly.
+        Score branchBaseline = null;
         PerfProbe.count(PerfCounter.SIMULATED_CANDIDATES);
         do {
             // TODO: MyRandom should be an instance on the game object, so that we could do
@@ -366,7 +374,12 @@ public class SpellAbilityPicker {
             final long branchToken = PerfProbe.start(PerfTimer.SIMULATION_BRANCH);
             try {
                 PerfProbe.count(PerfCounter.SIMULATION_BRANCHES);
-                GameSimulator simulator = new GameSimulator(controller, game, player, phase);
+                GameSimulator simulator = new GameSimulator(controller, game, player, phase, branchBaseline);
+                if (!GameSimulator.COPY_STACK) {
+                    // with a copied stack the simulator's baseline is the post-resolution score, not
+                    // the score of the game as it stands, so it is not the value to hand on
+                    branchBaseline = simulator.getScoreForOrigGame();
+                }
                 simulator.setInterceptor(choicesIterator);
                 // I feel like something here is making a wrong assumption about what the target is
                 lastScore = simulator.simulateSpellAbility(sa);

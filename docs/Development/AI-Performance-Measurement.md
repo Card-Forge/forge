@@ -157,7 +157,7 @@ the outermost decision, because that is the unit a player waits for. Re-entrant 
 same timer are folded into the outermost span, so a recursive rules path cannot multiply its own
 elapsed time.
 
-**Threads.** A conventional priority decision does most of its work on the `"Game AI Eval"` watchdog
+**Threads.** A conventional priority decision does most of its work on a `"Game AI Eval-N"` watchdog
 thread while the game thread waits on the decision's future. Both write to the same record, so
 counters and timers use atomic arrays. This is bookkeeping for the measurement, not a claim that the
 AI is thread-safe.

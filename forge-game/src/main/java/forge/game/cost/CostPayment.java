@@ -105,6 +105,25 @@ public class CostPayment extends ManaConversionMatrix {
     }
 
     /**
+     * As {@link #canPayAdditionalCosts(Cost, SpellAbility, boolean, Player)}, for a caller that has
+     * already run {@link CostAdjustment#adjust(Cost, SpellAbility, boolean)} over the same cost and
+     * ability in a context it has established is equivalent.
+     *
+     * <p>The adjusted cost must not be adjusted a second time — raises would be applied twice — so
+     * this takes the result and only re-applies the side effect the adjustment carries.</p>
+     *
+     * @param adjustedCost the already-adjusted cost, never adjusted again here
+     */
+    public static boolean canPayAdjustedAdditionalCosts(final Cost adjustedCost, final SpellAbility ability, final boolean effect, final Player payer) {
+        if (adjustedCost == null) {
+            return true;
+        }
+
+        ability.setMaxWaterbend(adjustedCost);
+        return adjustedCost.canPay(ability, payer, effect);
+    }
+
+    /**
      * <p>
      * isAllPaid.
      * </p>

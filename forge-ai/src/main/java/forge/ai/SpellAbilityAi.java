@@ -179,7 +179,7 @@ public abstract class SpellAbilityAi {
         }
 
         // a mandatory SA without target candidates doesn't need to go any deeper
-        if (sa.usesTargeting() && mandatory && sa.getTargetRestrictions().getNumCandidates(sa) == 0) {
+        if (sa.usesTargeting() && mandatory && !sa.getTargetRestrictions().hasAtLeastCandidates(sa, 1)) {
             return sa.isTargetNumberValid();
         }
 

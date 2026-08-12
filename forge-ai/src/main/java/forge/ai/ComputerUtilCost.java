@@ -3,6 +3,7 @@ package forge.ai;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import forge.game.GameObject;
@@ -633,9 +634,61 @@ public class ComputerUtilCost {
             }
         }
 
-        // TODO both of these call CostAdjustment.adjust, try to reuse instead
-        return ComputerUtilMana.canPayManaCost(cost, sa, payer, extraManaNeeded, effect)
-                && CostPayment.canPayAdditionalCosts(cost, sa, effect, payer);
+        // Both checks below structurally adjust the same cost for the same ability. The mana check
+        // reports what it derived so the additional-cost check can take that result instead of
+        // scanning every battlefield, stack and command permanent's static abilities a second time.
+        final Cost[] adjustedForMana = new Cost[1];
+        if (!ComputerUtilMana.canPayManaCost(cost, sa, payer, extraManaNeeded, effect, adjustedForMana)) {
+            return false;
+        }
+        if (canReuseAdjustedCost(sa, effect, cost, adjustedForMana[0])) {
+            PerfProbe.count(PerfCounter.COST_ADJUSTMENT_REUSES);
+            assert reusedAdjustmentMatches(cost, sa, effect, adjustedForMana[0])
+                    : "reused cost adjustment differs from adjusting again for " + sa;
+            return CostPayment.canPayAdjustedAdditionalCosts(adjustedForMana[0], sa, effect, payer);
+        }
+        return CostPayment.canPayAdditionalCosts(cost, sa, effect, payer);
+    }
+
+    /**
+     * Whether the adjustment the mana check derived is the one the additional-cost check would
+     * derive for itself.
+     *
+     * <p>The two are not automatically the same. While it works out the mana cost,
+     * {@code ComputerUtilMana.calculateManaCost} temporarily points the host card's "cast from" at
+     * the zone it is currently in, and the adjustment reads that: commander tax is charged from it,
+     * and a static ability's {@code AffectedZone} requirement is tested against it for a card that
+     * has been cast. The additional-cost check runs after that temporary value has been restored,
+     * so where the adjustment can see it, the two contexts genuinely differ and the second
+     * adjustment has to be performed for itself.</p>
+     */
+    private static boolean canReuseAdjustedCost(final SpellAbility sa, final boolean effect, final Cost cost, final Cost adjusted) {
+        if (adjusted == null) {
+            return false;
+        }
+        if (sa.isTrigger() || cost == null || effect) {
+            // adjustment is the identity here, so both calls see the same object either way
+            return true;
+        }
+        if ("NumTimes".equals(sa.getParam("Announce"))) {
+            // the mana check may have rewritten the host's NumTimes SVar in between
+            return false;
+        }
+        final Card host = sa.getHostCard();
+        if (host == null) {
+            return false;
+        }
+        if (sa.isSpell() && !host.isInZone(ZoneType.Stack) && !Objects.equals(host.getCastFrom(), host.getZone())) {
+            // the mana check adjusted under a different "cast from" than this one would
+            return !host.isCommander() && !host.wasCast();
+        }
+        return true;
+    }
+
+    /** The shadow check behind {@link #canReuseAdjustedCost}. Only ever called from an {@code assert}. */
+    private static boolean reusedAdjustmentMatches(final Cost cost, final SpellAbility sa, final boolean effect, final Cost reused) {
+        final Cost adjustedAgain = CostAdjustment.adjust(cost, sa, effect);
+        return Objects.equals(String.valueOf(adjustedAgain), String.valueOf(reused));
     }
 
     public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {
