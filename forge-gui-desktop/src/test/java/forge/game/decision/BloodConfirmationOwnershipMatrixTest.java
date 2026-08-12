@@ -32,6 +32,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNotSame;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
@@ -60,7 +61,7 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
                 targetRequest.set(request);
                 final LegalCandidate selected = request.getCandidates().stream()
                         .filter(candidate -> candidate.getTargetKind() == TargetCandidateKind.TARGET_CARD)
-                        .filter(candidate -> candidate.getTarget() == fixture.legalCard())
+                        .filter(candidate -> candidate.getTarget() == fixture.targetA())
                         .findFirst()
                         .orElseThrow(() -> new AssertionError("Blood target A is not in the legal request"));
                 selectedTarget.set(selected);
@@ -85,9 +86,14 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
             trace = DeterminismTrace.attach(fixture.game(), 0, auditRandom, traceDirectory);
 
             UnsupportedConfirmationDecisionException unsupportedBaseline = null;
-            Boolean routeResult = null;
+            final int stackSizeBefore = fixture.game().getStack().size();
+            GameObject liveTargetAtStackInsertion = null;
             try {
-                routeResult = controller.playTrigger(fixture.source(), fixture.wrapper(), true);
+                controller.orderAndPlaySimultaneousSa(List.of(fixture.wrapper()));
+                if (fixture.ability().getTargets().size() == 1) {
+                    liveTargetAtStackInsertion = fixture.ability().getTargets().get(0);
+                }
+                fixture.game().getStack().resolveStack();
             } catch (final UnsupportedConfirmationDecisionException ex) {
                 // Current B1 is intentionally narrower than Blood. Keep the RED at assertions.
                 unsupportedBaseline = ex;
@@ -100,44 +106,77 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
             final List<String> requestRecords = records.stream()
                     .filter(record -> record.startsWith("DECISION_TRACE_V2|REQUEST|"))
                     .toList();
+            final List<String> resultRecords = records.stream()
+                    .filter(record -> record.startsWith("DECISION_TRACE_V2|RESULT|"))
+                    .toList();
+            final List<String> targetRequestRecords = requestRecords.stream()
+                    .filter(record -> "TARGET".equals(traceField(record, 6)))
+                    .toList();
+            final List<String> confirmationRequestRecords = requestRecords.stream()
+                    .filter(record -> "CONFIRMATION".equals(traceField(record, 6)))
+                    .toList();
 
             final SoftAssert assertions = new SoftAssert();
             assertions.assertNull(unsupportedBaseline,
                     "external Blood confirmation must complete without an unsupported-profile exception");
-            assertions.assertTrue(Boolean.TRUE.equals(routeResult),
-                    "the real PlayerControllerAi playTrigger route must complete");
+            assertions.assertEquals(controller.orderSimultaneousSaCalls(), 1,
+                    "the production order route must invoke deterministic ordering once");
             assertions.assertEquals(targetResolverCalls.get(), 1,
                     "the external TARGET resolver must be called exactly once");
             assertions.assertEquals(confirmationResolverCalls.get(), 1,
                     "the external CONFIRMATION resolver must be called exactly once");
-            assertions.assertSame(selectedTarget.get(), fixture.legalCard(),
+            assertions.assertSame(selectedTarget.get().getTarget(), fixture.targetA(),
                     "the TARGET resolver must select card A");
+            assertions.assertEquals(fixture.game().getStack().size(), stackSizeBefore,
+                    "the queued trigger must resolve without leaving a stack entry");
+            assertions.assertEquals(fixture.ability().getTargets().size(), 1,
+                    "the live underlying ability must retain exactly one target");
+            assertions.assertTrue(fixture.ability().getTargets().contains(fixture.targetA()),
+                    "the live underlying ability must retain target A");
+            assertions.assertFalse(fixture.ability().getTargets().contains(fixture.targetB()),
+                    "the live underlying ability must never contain temporary target B");
+            assertions.assertSame(liveTargetAtStackInsertion, fixture.targetA(),
+                    "the live ChangeZone target C must remain exactly target A");
             assertions.assertEquals(controller.nativeTargetCallbackCalls(), 0,
                     "external TARGET ownership must not invoke the native target callback");
             assertions.assertEquals(controller.nativeConfirmationCallbackCalls(), 0,
                     "external CONFIRMATION ownership must not invoke the native confirmation callback");
             assertions.assertNull(controller.targetAtNativeConfirmation(),
                     "native confirmation must not create a temporary target B");
-            assertions.assertTrue(fixture.game().getCardsIn(ZoneType.Exile).contains(fixture.legalCard()),
+            assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Exile).stream()
+                    .filter(card -> card == fixture.targetA()).count(), 1L,
                     "the existing ChangeZone effect must consume card A");
-            assertions.assertFalse(fixture.game().getCardsIn(ZoneType.Graveyard).contains(fixture.legalCard()),
+            assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Graveyard).stream()
+                    .filter(card -> card == fixture.targetA()).count(), 0L,
                     "card A must leave the graveyard exactly once");
-            assertions.assertEquals(requestRecords.size(), 2,
-                    "the route must trace exactly one TARGET and one CONFIRMATION request");
-            assertions.assertEquals(requestRecords.stream()
-                    .filter(record -> record.contains("|TARGET|"))
-                    .count(), 1L, "the route must trace exactly one TARGET request");
-            assertions.assertEquals(requestRecords.stream()
-                    .filter(record -> record.contains("|CONFIRMATION|"))
-                    .count(), 1L, "the route must trace exactly one CONFIRMATION request");
+            assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Exile).stream()
+                    .filter(card -> card == fixture.targetB()).count(), 0L,
+                    "card B must not be consumed by the ChangeZone effect");
+            assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Graveyard).stream()
+                    .filter(card -> card == fixture.targetB()).count(), 1L,
+                    "card B must remain the untouched alternative");
+            assertions.assertEquals(targetRequestRecords.size(), 1,
+                    "the route must trace exactly one TARGET request");
+            assertions.assertEquals(confirmationRequestRecords.size(), 1,
+                    "the route must trace exactly one CONFIRMATION request");
+            assertions.assertEquals(resultRecords.size(), 2,
+                    "the route must trace one terminal RESULT for each request");
 
             final DecisionRequest observedTargetRequest = targetRequest.get();
             assertions.assertNotNull(observedTargetRequest, "the external TARGET request must be observable");
             if (observedTargetRequest != null) {
                 assertions.assertEquals(observedTargetRequest.getDecisionType(), DecisionType.TARGET);
-                assertions.assertEquals(observedTargetRequest.getCandidates().size(), 1);
-                assertions.assertSame(observedTargetRequest.getCandidates().get(0).getTarget(),
-                        fixture.legalCard());
+                assertions.assertFalse(observedTargetRequest.isForced(),
+                        "two legal Blood cards must keep TARGET external and non-forced");
+                final List<LegalCandidate> targetCandidates = observedTargetRequest.getCandidates().stream()
+                        .filter(candidate -> candidate.getTargetKind() == TargetCandidateKind.TARGET_CARD)
+                        .toList();
+                assertions.assertEquals(targetCandidates.size(), 2,
+                        "the TARGET request must expose both A and B");
+                assertions.assertTrue(targetCandidates.stream()
+                        .anyMatch(candidate -> candidate.getTarget() == fixture.targetA()));
+                assertions.assertTrue(targetCandidates.stream()
+                        .anyMatch(candidate -> candidate.getTarget() == fixture.targetB()));
             }
 
             final DecisionRequest observedConfirmationRequest = confirmationRequest.get();
@@ -147,11 +186,21 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
                     "the external CONFIRMATION resolver must select ACCEPT");
             if (observedConfirmationRequest != null) {
                 assertions.assertEquals(observedConfirmationRequest.getDecisionType(), DecisionType.CONFIRMATION);
+                assertions.assertFalse(observedConfirmationRequest.isForced(),
+                        "Blood confirmation must remain an explicit non-forced request");
+                assertions.assertEquals(observedConfirmationRequest.getCandidates().stream()
+                        .map(LegalCandidate::getConfirmationKind).toList(),
+                        List.of(ConfirmationCandidateKind.ACCEPT, ConfirmationCandidateKind.DECLINE),
+                        "Blood confirmation candidates must be exactly ACCEPT then DECLINE");
             }
             if (selectedConfirmation.get() != null) {
                 assertions.assertEquals(selectedConfirmation.get().getConfirmationKind(),
                         ConfirmationCandidateKind.ACCEPT);
             }
+            assertTerminalExternalResult(assertions, targetRequestRecords, resultRecords,
+                    selectedTarget.get(), "TARGET");
+            assertTerminalExternalResult(assertions, confirmationRequestRecords, resultRecords,
+                    selectedConfirmation.get(), "CONFIRMATION");
             assertions.assertAll();
         } finally {
             if (trace != null) {
@@ -169,7 +218,8 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
         final Player chooser = game.getPlayers().get(1);
         final Player opponent = game.getPlayers().get(0);
         final Card source = addCardToZone("Blood Operative", chooser, ZoneType.Battlefield);
-        final Card legalCard = addCardToZone("Runeclaw Bear", opponent, ZoneType.Graveyard);
+        final Card targetA = addCardToZone("Runeclaw Bear", opponent, ZoneType.Graveyard);
+        final Card targetB = addCardToZone("Llanowar Elves", opponent, ZoneType.Graveyard);
         final Trigger trigger = source.getTriggers().stream()
                 .filter(candidate -> candidate.getMode() == TriggerType.ChangesZone)
                 .filter(candidate -> "Any".equals(candidate.getParam("Origin")))
@@ -185,7 +235,7 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
         final SpellAbility ability = trigger.ensureAbility();
         ability.setActivatingPlayer(chooser);
         ability.setOptionalTrigger(true);
-        return new BloodFixture(game, chooser, source, legalCard, trigger, ability,
+        return new BloodFixture(game, chooser, source, targetA, targetB, trigger, ability,
                 new WrappedAbility(trigger, ability, chooser));
     }
 
@@ -193,8 +243,10 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
         assertEquals(fixture.source().getName(), "Blood Operative");
         assertEquals(fixture.source().getZone().getZoneType(), ZoneType.Battlefield);
         assertEquals(fixture.source().getController(), fixture.chooser());
-        assertEquals(fixture.game().getCardsIn(ZoneType.Graveyard).size(), 1);
-        assertTrue(fixture.game().getCardsIn(ZoneType.Graveyard).contains(fixture.legalCard()));
+        assertEquals(fixture.game().getCardsIn(ZoneType.Graveyard).size(), 2);
+        assertNotSame(fixture.targetA(), fixture.targetB());
+        assertTrue(fixture.game().getCardsIn(ZoneType.Graveyard).contains(fixture.targetA()));
+        assertTrue(fixture.game().getCardsIn(ZoneType.Graveyard).contains(fixture.targetB()));
         assertEquals(fixture.trigger().getMode(), TriggerType.ChangesZone);
         assertTrue(fixture.trigger().isIntrinsic());
         assertFalse(fixture.trigger().isStatic());
@@ -208,7 +260,8 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
         assertTrue(restrictions.getZone().contains(ZoneType.Graveyard));
         assertEquals(fixture.ability().getMinTargets(), 1);
         assertEquals(fixture.ability().getMaxTargets(), 1);
-        assertTrue(fixture.ability().canTarget(fixture.legalCard()));
+        assertTrue(fixture.ability().canTarget(fixture.targetA()));
+        assertTrue(fixture.ability().canTarget(fixture.targetB()));
         assertTrue(fixture.ability().getTargets().isEmpty());
         assertEquals(fixture.wrapper().getDecider(), fixture.chooser());
         assertTrue(fixture.wrapper().isOptionalTrigger());
@@ -231,9 +284,50 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
         }
     }
 
+    private static void assertTerminalExternalResult(final SoftAssert assertions,
+            final List<String> requestRecords, final List<String> resultRecords,
+            final LegalCandidate selectedCandidate, final String decisionType) {
+        if (requestRecords.size() != 1) {
+            return;
+        }
+        final String requestId = traceField(requestRecords.get(0), 2);
+        final List<String> matchingResults = resultRecords.stream()
+                .filter(record -> requestId.equals(traceField(record, 2)))
+                .toList();
+        assertions.assertEquals(matchingResults.size(), 1,
+                "exactly one terminal RESULT must close the " + decisionType + " request");
+        if (matchingResults.size() != 1) {
+            return;
+        }
+        final String result = matchingResults.get(0);
+        assertions.assertEquals(traceField(result, 3), "CHOSEN",
+                decisionType + " must finish with CHOSEN, not TRACE_INCOMPLETE");
+        assertions.assertEquals(traceField(result, 5), "false",
+                decisionType + " must record external native-callback=false");
+        assertions.assertEquals(traceField(result, 6), "false",
+                decisionType + " must record external mapping-attempted=false");
+        assertions.assertEquals(traceField(result, 8), "false",
+                decisionType + " must not be engine-forced");
+        if (selectedCandidate != null) {
+            assertions.assertEquals(traceField(result, 4), traceText(selectedCandidate.getSemanticKey()),
+                    decisionType + " RESULT must name the selected candidate");
+        }
+    }
+
+    private static String traceField(final String record, final int index) {
+        final String[] fields = record.split("\\|", -1);
+        return index < fields.length ? fields[index] : "";
+    }
+
+    private static String traceText(final String value) {
+        return value.replace("%", "%25").replace("|", "%7C")
+                .replace("\r", "%0D").replace("\n", "%0A");
+    }
+
     private static final class CountingController extends PlayerControllerAi {
         private int nativeTargetCallbackCalls;
         private int nativeConfirmationCallbackCalls;
+        private int orderSimultaneousSaCalls;
         private GameObject targetAtNativeConfirmation;
 
         private CountingController(final Game game, final Player player) {
@@ -244,6 +338,12 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
         protected boolean invokeNativeTriggeredTarget(final SpellAbility underlying, final boolean mandatory) {
             nativeTargetCallbackCalls++;
             return super.invokeNativeTriggeredTarget(underlying, mandatory);
+        }
+
+        @Override
+        public List<SpellAbility> orderSimultaneousSa(final List<SpellAbility> activePlayerSAs) {
+            orderSimultaneousSaCalls++;
+            return activePlayerSAs;
         }
 
         @Override
@@ -263,12 +363,16 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
             return nativeConfirmationCallbackCalls;
         }
 
+        private int orderSimultaneousSaCalls() {
+            return orderSimultaneousSaCalls;
+        }
+
         private GameObject targetAtNativeConfirmation() {
             return targetAtNativeConfirmation;
         }
     }
 
-    private record BloodFixture(Game game, Player chooser, Card source, Card legalCard,
+    private record BloodFixture(Game game, Player chooser, Card source, Card targetA, Card targetB,
             Trigger trigger, SpellAbility ability, WrappedAbility wrapper) {
     }
 }
