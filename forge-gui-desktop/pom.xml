@@ -12,6 +12,7 @@
     <name>Forge</name>
 
     <properties>
+        <launch4j.skip>false</launch4j.skip>
         <parsedVersion.majorVersion>0</parsedVersion.majorVersion>
         <parsedVersion.minorVersion>0</parsedVersion.minorVersion>
         <parsedVersion.incrementalVersion>0</parsedVersion.incrementalVersion>
@@ -80,6 +81,7 @@
                             <goal>launch4j</goal>
                         </goals>
                         <configuration>
+                            <skip>${launch4j.skip}</skip>
                             <headerType>gui</headerType>
                             <outfile>${project.build.directory}/forge.exe</outfile>
                             <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>

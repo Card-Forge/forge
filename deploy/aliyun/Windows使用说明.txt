@@ -1,0 +1,12 @@
+Forge 简体中文民间汉化版 Windows 免 Java 完整版
+
+1. 请先完整解压本压缩包，不能直接在压缩包内运行。
+2. 双击 forge.exe 启动。
+3. 程序已内置 Java 21，无需安装 JRE 或 JDK。
+4. 请勿删除或移动 runtime、res 目录以及主程序 JAR。
+5. 本版本仅使用民间汉化版更新渠道；缺失卡图会按需下载，不提供批量下载全部卡图功能。
+
+重要说明：本版本由社区爱好者制作，是非官方简体中文版本，与 Card Forge 官方及 Wizards of the Coast 无隶属或授权关系。
+
+更新服务器：https://update.mtg-forge-kaorou.vip/forge/
+中文卡图服务器：https://images.mtg-forge-kaorou.vip/cards/
