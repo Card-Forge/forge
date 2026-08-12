@@ -497,8 +497,6 @@ public enum CounterEnumType implements CounterType {
 
     EXPERIENCE("EXP", CounterAiCategory.Positive),
 
-    POINT("POINT", CounterAiCategory.Positive),
-
     POISON("POISN", CounterAiCategory.Negative),
 
     RAD("RAD", CounterAiCategory.Neutral),
