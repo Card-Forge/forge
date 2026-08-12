@@ -1,4 +1,4 @@
-Name:Omenpath
+Name:Omenpath Token
 ManaCost:no cost
 Types:Enchantment Omenpath
 A:AB$ Planeswalk | Cost$ Sac<1/CARDNAME/this enchantment> | SorcerySpeed$ True | SpellDescription$ Planeswalk. Activate only as a sorcery.

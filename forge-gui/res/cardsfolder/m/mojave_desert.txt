@@ -8,7 +8,7 @@ SVar:DBSnakeCheck:DB$ Token | TokenScript$ b_1_1_snake_deathtouch | TokenOwner$ 
 SVar:DBShuffleOne:DB$ Shuffle | Defined$ Player.IsRemembered | SubAbility$ DBCleanupOne
 SVar:DBCleanupOne:DB$ Cleanup | ClearImprinted$ True
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigChaosRemember | TriggerDescription$ Whenever chaos ensues, create X 1/1 black Snake creature tokens with deathtouch, where X is 1 plus the number of nonbasic land types among lands you control.
-SVar:TrigChaosRemember:DB$ Pump | RememberObjects$ Valid Land.YouCtrl+nonBasic | SubAbility$ DBChaosToken
+SVar:TrigChaosRemember:DB$ Pump | RememberObjects$ Valid Land.YouCtrl | SubAbility$ DBChaosToken
 SVar:DBChaosToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_snake_deathtouch | TokenOwner$ You | SubAbility$ DBCleanupChaos
 SVar:X:Remembered$LandType/Plus.1
 SVar:DBCleanupChaos:DB$ Cleanup | ClearRemembered$ True

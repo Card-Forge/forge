@@ -1,4 +1,4 @@
-Name:Entropy
+Name:Entropy Token
 ManaCost:no cost
 Types:Enchantment Entropy
 A:AB$ ChaosEnsues | Cost$ Sac<1/CARDNAME/this enchantment> | SorcerySpeed$ True | SpellDescription$ Chaos ensues. Activate only as a sorcery.

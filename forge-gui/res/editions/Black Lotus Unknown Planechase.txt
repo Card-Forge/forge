@@ -59,11 +59,11 @@ PLA044 C The Command Zone @
 PLA045 C The Pro Tour @
 PLA046 C Year-End Review @
 
-[CreatureTypes]
-Fan:Fans
 [EnchantmentTypes]
 Entropy
 Omenpath
+[ArtifactTypes]
+Hat
 [PlanarTypes]
 Amsterdam
 Blind Eternities
