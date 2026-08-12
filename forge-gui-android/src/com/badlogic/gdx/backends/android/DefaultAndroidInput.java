@@ -517,15 +517,21 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
 
             if (e.getKeyCode() == android.view.KeyEvent.KEYCODE_UNKNOWN && e.getAction() == android.view.KeyEvent.ACTION_MULTIPLE) {
                 String chars = e.getCharacters();
-                for (int i = 0; i < chars.length(); i++) {
-                    event = usedKeyEvents.obtain();
-                    event.timeStamp = System.nanoTime();
-                    event.keyCode = 0;
-                    event.keyChar = chars.charAt(i);
-                    event.type = KeyEvent.KEY_TYPED;
-                    keyEvents.add(event);
+                if (chars != null) {
+                    for (int i = 0; i < chars.length(); i++) {
+                        event = usedKeyEvents.obtain();
+                        event.timeStamp = System.nanoTime();
+                        event.keyCode = 0;
+                        event.keyChar = chars.charAt(i);
+                        event.type = KeyEvent.KEY_TYPED;
+                        keyEvents.add(event);
+                    }
                 }
-                return false;
+                // IMEs commit composed text (including Chinese candidates) as an
+                // ACTION_MULTIPLE event. Forge normally renders on demand, so the
+                // queued keyTyped events must explicitly wake the render thread.
+                app.getGraphics().requestRendering();
+                return true;
             }
 
             char character = (char)e.getUnicodeChar();

@@ -74,6 +74,11 @@ public class GLSurfaceView20 extends GLSurfaceView {
     }
 
     @Override
+    public boolean onCheckIsTextEditor () {
+        return true;
+    }
+
+    @Override
     public InputConnection onCreateInputConnection (EditorInfo outAttrs) {
 
         // add this line, the IME can show the selectable words when use chinese input method editor.
