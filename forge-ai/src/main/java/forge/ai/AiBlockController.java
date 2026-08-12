@@ -45,6 +45,9 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
+import forge.util.perf.PerfTimer;
 
 
 /**
@@ -366,6 +369,16 @@ public class AiBlockController {
      * @param combat a {@link forge.game.combat.Combat} object.
      */
     private void makeGangBlocks(final Combat combat) {
+        final long token = PerfProbe.start(PerfTimer.GANG_BLOCKS);
+        try {
+            PerfProbe.count(PerfCounter.GANG_BLOCK_PASSES);
+            makeGangBlocksImpl(combat);
+        } finally {
+            PerfProbe.stop(PerfTimer.GANG_BLOCKS, token);
+        }
+    }
+
+    private void makeGangBlocksImpl(final Combat combat) {
         List<Card> currentAttackers = CardLists.filter(attackersLeft, rampagesOrNeedsManyToBlock(combat).negate());
         List<Card> blockers;
 
@@ -1009,6 +1022,12 @@ public class AiBlockController {
         List<Card> possibleBlockers = ai.getCreaturesInPlay();
         if (exludedBlockers != null && !exludedBlockers.isEmpty()) {
             possibleBlockers.removeAll(exludedBlockers);
+        }
+        if (PerfProbe.isEnabled()) {
+            // The gang-block search is O(A x B^2) in these; recording B is what makes the slope,
+            // rather than just the total, measurable across board sizes.
+            PerfProbe.count(PerfCounter.BLOCK_DECLARATIONS);
+            PerfProbe.count(PerfCounter.POSSIBLE_BLOCKERS, possibleBlockers.size());
         }
         attackers = sortPotentialAttackers(combat);
         assignBlockers(combat, possibleBlockers);

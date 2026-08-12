@@ -49,6 +49,9 @@ import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Visitor;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
+import forge.util.perf.PerfTimer;
 
 public class ReplacementHandler {
     private final Game game;
@@ -67,6 +70,22 @@ public class ReplacementHandler {
     }
 
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
+        final long token = PerfProbe.start(PerfTimer.REPLACEMENT_LOOKUP);
+        try {
+            final List<ReplacementEffect> found = collectReplacementList(event, runParams, layer);
+            if (PerfProbe.isEnabled()) {
+                // Discovery scans every card in the game; the ratio of lookups to effects found is
+                // what decides whether a declared-type/layer index would pay for itself.
+                PerfProbe.count(PerfCounter.REPLACEMENT_LOOKUPS);
+                PerfProbe.count(PerfCounter.REPLACEMENT_EFFECTS_FOUND, found.size());
+            }
+            return found;
+        } finally {
+            PerfProbe.stop(PerfTimer.REPLACEMENT_LOOKUP, token);
+        }
+    }
+
+    private List<ReplacementEffect> collectReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
         final CardCollection preList = new CardCollection();
         Card affectedLKI = null;
         Card affectedCard = null;

@@ -64,6 +64,12 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.*;
+import forge.util.perf.DecisionKind;
+import forge.util.perf.DecisionRecord;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
+import forge.util.perf.PerfTimer;
+import forge.util.perf.TraceCategory;
 
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
@@ -729,13 +735,18 @@ public class AiController {
 
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
 
+        final long sortToken = PerfProbe.start(PerfTimer.CANDIDATE_SORT);
         try {
-            all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
-            ComputerUtilAbility.sortCreatureSpells(all);
-        } catch (IllegalArgumentException ex) {
-            System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
-            Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+            try {
+                all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
+                ComputerUtilAbility.sortCreatureSpells(all);
+            } catch (IllegalArgumentException ex) {
+                System.err.println(ex.getMessage());
+                String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
+                Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+            }
+        } finally {
+            PerfProbe.stop(PerfTimer.CANDIDATE_SORT, sortToken);
         }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -812,6 +823,7 @@ public class AiController {
     }
 
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
+        PerfProbe.count(PerfCounter.CAN_PLAY_CHECKS);
         final Card host = sa.getHostCard();
         Card altHost = host;
 
@@ -1301,12 +1313,55 @@ public class AiController {
 
     // declares blockers for given defender in a given combat
     public void declareBlockersFor(Player defender, Combat combat) {
-        AiBlockController block = new AiBlockController(defender, defender != player);
-        // When player != defender, AI should declare blockers for its benefit.
-        block.assignBlockersForCombat(combat);
+        // Guarded so that a disabled build does not build the phase string on every decision.
+        final DecisionRecord record = PerfProbe.isEnabled()
+                ? PerfProbe.beginDecision(DecisionKind.BLOCK, defender.getName(),
+                        game.getPhaseHandler().getTurn(), String.valueOf(game.getPhaseHandler().getPhase()))
+                : null;
+        final long token = PerfProbe.start(PerfTimer.DECLARE_BLOCKERS);
+        try {
+            AiBlockController block = new AiBlockController(defender, defender != player);
+            // When player != defender, AI should declare blockers for its benefit.
+            block.assignBlockersForCombat(combat);
+            if (PerfProbe.isTracing()) {
+                for (final Card attackerCard : combat.getAttackers()) {
+                    for (final Card blocker : combat.getBlockers(attackerCard)) {
+                        PerfProbe.trace(TraceCategory.BLOCKER, GameTraceDescriptors.describe(blocker) + " blocks "
+                                + GameTraceDescriptors.describe(attackerCard));
+                    }
+                }
+            }
+        } finally {
+            PerfProbe.stop(PerfTimer.DECLARE_BLOCKERS, token);
+            PerfProbe.endDecision(record);
+        }
     }
 
     public void declareAttackers(Player attacker, Combat combat) {
+        final DecisionRecord record = PerfProbe.isEnabled()
+                ? PerfProbe.beginDecision(DecisionKind.ATTACK, attacker.getName(),
+                        game.getPhaseHandler().getTurn(), String.valueOf(game.getPhaseHandler().getPhase()))
+                : null;
+        final long token = PerfProbe.start(PerfTimer.DECLARE_ATTACKERS);
+        try {
+            declareAttackersImpl(attacker, combat);
+            if (PerfProbe.isEnabled()) {
+                PerfProbe.count(PerfCounter.ATTACK_DECLARATIONS);
+                PerfProbe.count(PerfCounter.ATTACKERS_DECLARED, combat.getAttackers().size());
+            }
+            if (PerfProbe.isTracing()) {
+                for (final Card declared : combat.getAttackers()) {
+                    PerfProbe.trace(TraceCategory.ATTACKER, GameTraceDescriptors.describe(declared) + " -> "
+                            + GameTraceDescriptors.describe(combat.getDefenderByAttacker(declared)));
+                }
+            }
+        } finally {
+            PerfProbe.stop(PerfTimer.DECLARE_ATTACKERS, token);
+            PerfProbe.endDecision(record);
+        }
+    }
+
+    private void declareAttackersImpl(Player attacker, Combat combat) {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
         AiAttackController aiAtk = new AiAttackController(attacker);
         lastAttackAggression = aiAtk.declareAttackers(combat);
@@ -1355,6 +1410,34 @@ public class AiController {
     }
 
     public List<SpellAbility> chooseSpellAbilityToPlay() {
+        // The measured unit is the whole priority decision: this is what a player waits for, and
+        // what every AI performance claim in the plan has to be expressed in.
+        final DecisionRecord record = PerfProbe.isEnabled()
+                ? PerfProbe.beginDecision(DecisionKind.PRIORITY, player.getName(),
+                        game.getPhaseHandler().getTurn(), String.valueOf(game.getPhaseHandler().getPhase()))
+                : null;
+        final long token = PerfProbe.start(PerfTimer.DECISION);
+        try {
+            PerfProbe.count(PerfCounter.DECISIONS);
+            final List<SpellAbility> chosen = chooseSpellAbilityToPlayImpl();
+            if (PerfProbe.isTracing()) {
+                if (chosen == null || chosen.isEmpty()) {
+                    PerfProbe.trace(TraceCategory.CHOSEN, "-");
+                } else {
+                    // A land drop can return several abilities; all of them are part of the decision.
+                    for (final SpellAbility picked : chosen) {
+                        PerfProbe.trace(TraceCategory.CHOSEN, GameTraceDescriptors.describe(picked));
+                    }
+                }
+            }
+            return chosen;
+        } finally {
+            PerfProbe.stop(PerfTimer.DECISION, token);
+            PerfProbe.endDecision(record);
+        }
+    }
+
+    private List<SpellAbility> chooseSpellAbilityToPlayImpl() {
         AiCache.clear();
         // Reset cached predicted combat, as it may be stale. It will be
         // re-created if needed and used for any AI logic that needs it.
@@ -1593,13 +1676,25 @@ public class AiController {
         if (all == null || all.isEmpty())
             return null;
 
+        final long sortToken = PerfProbe.start(PerfTimer.CANDIDATE_SORT);
         try {
-            all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
-            ComputerUtilAbility.sortCreatureSpells(all);
-        } catch (IllegalArgumentException ex) {
-            System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
-            Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+            try {
+                all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
+                ComputerUtilAbility.sortCreatureSpells(all);
+            } catch (IllegalArgumentException ex) {
+                System.err.println(ex.getMessage());
+                String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
+                Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+            }
+        } finally {
+            PerfProbe.stop(PerfTimer.CANDIDATE_SORT, sortToken);
+        }
+        if (PerfProbe.isTracing()) {
+            // The sorted list is the parity artefact for any comparator-facts change: the ordered
+            // descriptors must match byte for byte, not merely produce the same final choice.
+            for (final SpellAbility candidate : all) {
+                PerfProbe.trace(TraceCategory.CANDIDATE, GameTraceDescriptors.describe(candidate));
+            }
         }
 
         // in case of infinite loop reset below would not be reached
@@ -1679,6 +1774,11 @@ public class AiController {
                 // PhaseHandler ph = game.getPhaseHandler();
                 // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getInstance().getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 
+                if (PerfProbe.isTracing()) {
+                    PerfProbe.trace(TraceCategory.EVALUATION,
+                            opinion + "\t" + GameTraceDescriptors.describe(sa));
+                }
+
                 if (opinion != AiPlayDecision.WillPlay) {
                     continue;
                 }
@@ -1690,42 +1790,50 @@ public class AiController {
             return null;
         });
 
-        Thread t = new Thread(future, "Game AI Eval");
-        t.start();
+        // Timed from thread creation so that the per-decision OS thread the plan proposes replacing
+        // is inside the measurement, not hidden outside it.
+        final long evalToken = PerfProbe.start(PerfTimer.CANDIDATE_EVALUATION);
         try {
-            return future.get(game.getAITimeout(), TimeUnit.SECONDS);
-        } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            e.printStackTrace();
-            if (e instanceof TimeoutException) {
-                // log where the eval thread currently is - each timeout doubles as a
-                // profiler sample for diagnosing remaining AI slowdowns from user logs
-                StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
-                StackTraceElement[] evalStack = t.getStackTrace();
-                for (int i = 0; i < Math.min(30, evalStack.length); i++) {
-                    sb.append("\n\tat ").append(evalStack[i]);
-                }
-                System.out.println(sb);
-            }
-            // ask the eval thread to exit at the next SpellAbility check first: a brutal
-            // Thread.stop() mid-evaluation can leave partially mutated shared state behind
-            timeoutReached = true;
-            future.cancel(true);
+            Thread t = new Thread(future, "Game AI Eval");
+            t.start();
             try {
-                t.join(500);
-            } catch (InterruptedException ie) {
-                Thread.currentThread().interrupt();
-            }
-            if (t.isAlive()) {
-                // last resort, see #8302: the eval thread may be stuck inside a single
-                // evaluation or an infinite loop and never reach the cooperative exit
-                try {
-                    t.stop();
-                } catch (UnsupportedOperationException | NoSuchMethodError ex) {
-                    // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
+                return future.get(game.getAITimeout(), TimeUnit.SECONDS);
+            } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                e.printStackTrace();
+                if (e instanceof TimeoutException) {
+                    PerfProbe.count(PerfCounter.EVAL_TIMEOUTS);
+                    // log where the eval thread currently is - each timeout doubles as a
+                    // profiler sample for diagnosing remaining AI slowdowns from user logs
+                    StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
+                    StackTraceElement[] evalStack = t.getStackTrace();
+                    for (int i = 0; i < Math.min(30, evalStack.length); i++) {
+                        sb.append("\n\tat ").append(evalStack[i]);
+                    }
+                    System.out.println(sb);
                 }
+                // ask the eval thread to exit at the next SpellAbility check first: a brutal
+                // Thread.stop() mid-evaluation can leave partially mutated shared state behind
+                timeoutReached = true;
+                future.cancel(true);
+                try {
+                    t.join(500);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
+                if (t.isAlive()) {
+                    // last resort, see #8302: the eval thread may be stuck inside a single
+                    // evaluation or an infinite loop and never reach the cooperative exit
+                    try {
+                        t.stop();
+                    } catch (UnsupportedOperationException | NoSuchMethodError ex) {
+                        // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
+                    }
+                }
+                // TODO mark some as skipped to increase chance to find something playable next priority
+                return null;
             }
-            // TODO mark some as skipped to increase chance to find something playable next priority
-            return null;
+        } finally {
+            PerfProbe.stop(PerfTimer.CANDIDATE_EVALUATION, evalToken);
         }
     }
 

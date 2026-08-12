@@ -25,6 +25,9 @@ import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMustAttack;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
+import forge.util.perf.PerfTimer;
 
 public class AttackConstraints {
 
@@ -37,20 +40,31 @@ public class AttackConstraints {
     private final Multimap<GameEntity, StaticAbility> playerRequirements;
 
     public AttackConstraints(final Combat combat) {
-        possibleAttackers = combat.getAttackingPlayer().getCreaturesInPlay();
-        possibleDefenders = combat.getDefenders();
-        globalRestrictions = GlobalAttackRestrictions.getGlobalRestrictions(combat.getAttackingPlayer(), possibleDefenders);
-        playerRequirements = StaticAbilityMustAttack.mustAttackSpecific(combat.getAttackingPlayer(), possibleDefenders);
+        final long token = PerfProbe.start(PerfTimer.ATTACK_CONSTRAINTS);
+        try {
+            possibleAttackers = combat.getAttackingPlayer().getCreaturesInPlay();
+            possibleDefenders = combat.getDefenders();
+            globalRestrictions = GlobalAttackRestrictions.getGlobalRestrictions(combat.getAttackingPlayer(), possibleDefenders);
+            playerRequirements = StaticAbilityMustAttack.mustAttackSpecific(combat.getAttackingPlayer(), possibleDefenders);
 
-        // TODO extend for "SharedTurnModes"
-        for (final Card possibleAttacker : possibleAttackers) {
-            restrictions.put(possibleAttacker, new AttackRestriction(possibleAttacker, possibleDefenders));
+            // TODO extend for "SharedTurnModes"
+            for (final Card possibleAttacker : possibleAttackers) {
+                restrictions.put(possibleAttacker, new AttackRestriction(possibleAttacker, possibleDefenders));
 
-            final Multimap<Card, StaticAbility> causesToAttack = StaticAbilityMustAttack.getAttackRequirements(possibleAttacker,
-                    possibleAttackers.stream().filter(p -> !p.equals(possibleAttacker)).collect(Collectors.toList()));
+                final Multimap<Card, StaticAbility> causesToAttack = StaticAbilityMustAttack.getAttackRequirements(possibleAttacker,
+                        possibleAttackers.stream().filter(p -> !p.equals(possibleAttacker)).collect(Collectors.toList()));
 
-            final AttackRequirement r = new AttackRequirement(possibleAttacker, causesToAttack, possibleDefenders);
-            requirements.put(possibleAttacker, r);
+                final AttackRequirement r = new AttackRequirement(possibleAttacker, causesToAttack, possibleDefenders);
+                requirements.put(possibleAttacker, r);
+            }
+            if (PerfProbe.isEnabled()) {
+                // Setup is O(A^2) in "other attacker" list elements before any legal-set recursion;
+                // recording the attacker count is what lets that slope be measured, not just the total.
+                PerfProbe.count(PerfCounter.ATTACK_CONSTRAINTS_BUILT);
+                PerfProbe.count(PerfCounter.POSSIBLE_ATTACKERS, possibleAttackers.size());
+            }
+        } finally {
+            PerfProbe.stop(PerfTimer.ATTACK_CONSTRAINTS, token);
         }
     }
 

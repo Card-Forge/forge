@@ -43,6 +43,8 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import forge.util.perf.PerfCounter;
+import forge.util.perf.PerfProbe;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -52,6 +54,7 @@ public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
 
     public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
+        PerfProbe.count(PerfCounter.MANA_FEASIBILITY_CHECKS);
         //check copy of cost so it doesn't modify the exist cost being paid
         cost = new ManaCostBeingPaid(cost);
         return payManaCost(cost, sa, ai, true, true, effect) != null;
@@ -60,6 +63,7 @@ public class ComputerUtilMana {
         return canPayManaCost(sa.getPayCosts(), sa, ai, extraMana, effect);
     }
     public static boolean canPayManaCost(final Cost cost, final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
+        PerfProbe.count(PerfCounter.MANA_FEASIBILITY_CHECKS);
         return payManaCost(cost, sa, ai, true, extraMana, true, effect);
     }
 
