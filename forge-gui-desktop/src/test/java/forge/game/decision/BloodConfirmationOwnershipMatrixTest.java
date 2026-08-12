@@ -125,8 +125,13 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
                     "the external TARGET resolver must be called exactly once");
             assertions.assertEquals(confirmationResolverCalls.get(), 1,
                     "the external CONFIRMATION resolver must be called exactly once");
-            assertions.assertSame(selectedTarget.get().getTarget(), fixture.targetA(),
-                    "the TARGET resolver must select card A");
+            final LegalCandidate selectedTargetCandidate = selectedTarget.get();
+            assertions.assertNotNull(selectedTargetCandidate,
+                    "the external TARGET resolver must select a candidate");
+            if (selectedTargetCandidate != null) {
+                assertions.assertSame(selectedTargetCandidate.getTarget(), fixture.targetA(),
+                        "the TARGET resolver must select card A");
+            }
             assertions.assertEquals(fixture.game().getStack().size(), stackSizeBefore,
                     "the queued trigger must resolve without leaving a stack entry");
             assertions.assertEquals(fixture.ability().getTargets().size(), 1,
@@ -198,7 +203,7 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
                         ConfirmationCandidateKind.ACCEPT);
             }
             assertTerminalExternalResult(assertions, targetRequestRecords, resultRecords,
-                    selectedTarget.get(), "TARGET");
+                    selectedTargetCandidate, "TARGET");
             assertTerminalExternalResult(assertions, confirmationRequestRecords, resultRecords,
                     selectedConfirmation.get(), "CONFIRMATION");
             assertions.assertAll();
