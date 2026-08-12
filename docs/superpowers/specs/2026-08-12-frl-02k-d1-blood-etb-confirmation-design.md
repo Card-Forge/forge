@@ -90,7 +90,13 @@ D1:  TargetChoices contains exactly one live Card, the stored Target A.
 `WrappedAbility.resolve` remains a generic lifecycle adapter:
 
 ```text
-generate -> capture/choose -> integrity-validate -> trace -> apply -> continue/return
+generate
+  -> capture/request-trace
+  -> choose
+  -> apply + live-context integrity validation
+  -> diagnostics result
+  -> terminal DECISION_TRACE_V2 result
+  -> continue/return
 ```
 
 It may select the trace stage from the typed request context, but it may not
@@ -101,7 +107,7 @@ necessary by the real production-route test.
 ## 3. Public Target-A context and integrity
 
 Extend `ConfirmationDecisionContext` with a nullable immutable
-`CardSelectionCard targetPublicIdentity`.
+`CardSelectionCard targetPublicIdentity` and a nullable event-player value.
 
 ```text
 Gelectrode: targetPublicIdentity == null
@@ -109,12 +115,22 @@ Blood:      targetPublicIdentity == public projection of live Target A
 ```
 
 The Blood request also exposes the existing profile, `CHANGES_ZONE` event,
-public source identity, triggering-player ID, and decider-player ID. The
+public source identity, optional event-player ID, and decider-player ID. The
 projection is created only when exactly one live target exists, it is a Card,
 it is public to the decider, and its value can be safely projected. Its public
 identity is the established `(cardId, gameTimestamp)` value inside
 `CardSelectionCard`; no raw `Card`, `CardLKI`, `TargetChoices`, `SpellAbility`,
 `Game`, `Zone`, or JVM identity is exported.
+
+The existing B1 `triggeringPlayerId` meaning is retained for Gelectrode: it is
+the public `AbilityKey.Activator` player from the SpellCast event and remains
+non-null. Blood does not inherit that B1 assumption. The current
+`TriggerChangesZone.setTriggeringObjects` runtime projection copies
+`AbilityKey.Card`/`CardLKI`, not `AbilityKey.Activator`, and no runtime-proven
+Blood event player is required by D1. Therefore the context carries
+`triggeringPlayerId == null` for Blood; it must not use a sentinel or duplicate
+the decider ID. The nullable value is event-specific and is not part of Blood
+admission.
 
 The request-local A/B/C invariant is:
 
@@ -137,14 +153,35 @@ The resolver determines ownership only after exact admission:
 | Exact Blood profile, valid A | One D1 request; native `confirmTrigger` once; validate restored A | One D1 request; resolver once; native callback and B zero |
 | Unsupported/hidden/non-exact/copy/stale-before-request | No D1 request; preserve existing native Forge path | Sanitized hard failure before resolver/native fallback |
 | Active `ActionContinuation` | Never create a D1 request; preserve existing native boundary behavior | Reject before resolver or native callback |
-| Native A restoration/integrity failure | No second callback; controlled native mapping failure | Not applicable |
+| Native A restoration/integrity failure | No second callback; `MAPPING_FAILED` with native/mapping `true/true`; no `CHOSEN` | Not applicable |
 | External null/foreign/stale/wrong-kind/throwing resolver | Not applicable | Fail closed; no native fallback and no `MAPPING_FAILED` classification |
 
 For external ownership, the live A identity is rechecked after resolver
 selection and before applying the result. For native ownership, the Boolean is
 mapped exactly once, but `recordNativeMappedResult(ACCEPT/DECLINE)` is delayed
 until the callback has returned and A has been restored and verified. An
-integrity failure never triggers a second native callback.
+integrity failure never triggers a second native callback. A native Boolean
+that cannot be safely associated with the original A is a native request/result
+mapping failure: it records `MAPPING_FAILED` with `nativeCallbackCompleted=true`
+and `mappingAttempted=true`, never a `CHOSEN` or an external `false/false`
+result. External resolver/application failures remain non-native and may
+finalize as `TRACE_INCOMPLETE` under the existing V2 contract.
+
+### 4.1 Independent TARGET/CONFIRMATION ownership matrix
+
+C2A Target A ownership and D1 confirmation ownership are independent
+controller-local seams. The production route must preserve all four
+combinations:
+
+| TARGET resolver | CONFIRMATION resolver | Required ownership and observations |
+|---|---|---|
+| `null` | `null` | Forge AI owns A; native confirmation owns yes/no; target and native confirmation callbacks each occur once on the supported path. |
+| `external` | `null` | External policy owns A once; native confirmation owns yes/no; temporary B may exist during native confirmation but A must be restored and consumed. |
+| `null` | `external` | Forge AI owns A once; external policy owns ACCEPT/DECLINE once; native confirmation and temporary B are absent. |
+| `external` | `external` | External policy owns A once and ACCEPT/DECLINE once; native target callback is zero; native confirmation callback is zero; B is absent; ACCEPT consumes C==A. |
+
+No combination may create two Target-A decisions, a second TARGET request, or a
+confirmation-time retarget.
 
 ## 5. Candidates, resolution, and traces
 
@@ -174,8 +211,14 @@ The existing BC rule remains unchanged: only valid non-forced native
 `true/true` history is eligible. Invalid external runs may remain
 `TRACE_INCOMPLETE`; they must not be reclassified as native mapping failures.
 
+`UnsupportedConfirmationDecisionException` keeps its sanitized status/reason
+API, but its message is changed from the stale B1-only wording to a
+profile-neutral confirmation unsupported/integrity message. No card name,
+target name, resolver exception text, or raw object string is included.
+
 `ConfirmationDiagnostics` is generalized in wording from B1-only to supported
-confirmation profiles. Any added fields remain opt-in, value-only, sanitized,
+confirmation profiles and gains a sanitized `profile` field containing the
+typed enum name. Any other fields remain opt-in, value-only, sanitized,
 worker-local, state-neutral, and RNG-neutral; diagnostics do not participate
 in correctness.
 
@@ -221,8 +264,8 @@ forge-game/src/main/java/forge/game/decision/ConfirmationTriggerProfile.java
 forge-game/src/main/java/forge/game/decision/ConfirmationEventType.java
 forge-game/src/main/java/forge/game/trigger/WrappedAbility.java
 forge-game/src/main/java/forge/game/decision/ConfirmationDiagnostics.java
-possibly forge-game/.../BloodOperativeEtbProfile.java
-possibly forge-game/.../UnsupportedConfirmationDecisionException.java
+forge-game/src/main/java/forge/game/decision/UnsupportedConfirmationDecisionException.java
+possibly forge-game/src/main/java/forge/game/decision/BloodOperativeEtbProfile.java
 ```
 
 Expected focused tests/docs:
@@ -241,9 +284,22 @@ No `PlayerControllerAi` policy logic, card script, ObservationEncoder,
 HistoryEvent, unrelated decision provider, or global callback adapter is in
 scope.
 
+`DecisionTraceTrainingValidator` is a retained regression authority, not an
+expected production change: its current V2 rules already accept external
+`CONFIRMATION` `CHOSEN` history with `false/false` while keeping BC eligibility
+strictly native `true/true`.
+
 ## 8. Self-review
 
 ```text
+Review resolutions:
+P1-1 trace terminalization follows apply/integrity validation: FIXED
+P1-2 Blood has no invented triggering player: FIXED
+P1-3 explicit 2x2 ownership matrix: FIXED
+P2-1 native integrity failure is V2 MAPPING_FAILED true/true: FIXED
+P2-2 profile-neutral sanitized exception message is mandatory: FIXED
+P2-3 typed ConfirmationDiagnostics.profile field is mandatory: FIXED
+
 P0: 0
 P1: 0
 P2: 0 design defects
