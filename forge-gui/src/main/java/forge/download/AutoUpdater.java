@@ -28,9 +28,9 @@ public class AutoUpdater {
     private static final boolean VERSION_FROM_METADATA = true;
     private static final Localizer localizer = Localizer.getInstance();
 
-    /** Localized builds update exclusively from the packaged China mirror. */
-    public static final String CHINA_UPDATE_CHANNEL = "中国版官方渠道";
-    public static final String[] updateChannels = new String[]{CHINA_UPDATE_CHANNEL};
+    /** This community localization updates exclusively from its packaged mirror. */
+    public static final String COMMUNITY_UPDATE_CHANNEL = CommunityEditionInfo.UPDATE_CHANNEL_NAME;
+    public static final String[] updateChannels = new String[]{COMMUNITY_UPDATE_CHANNEL};
 
     private final boolean isLoading;
     private String updateChannel;
@@ -80,10 +80,10 @@ public class AutoUpdater {
         // This distribution must never fall back to the upstream snapshot or release
         // servers. The packaged mirror manifest is the single source of updates.
         if (!ForgeUpdateConfig.isMirrorEnabled()) {
-            System.err.println("China update mirror is not configured; update check cancelled.");
+            System.err.println("Community update mirror is not configured; update check cancelled.");
             return false;
         }
-        updateChannel = CHINA_UPDATE_CHANNEL;
+        updateChannel = COMMUNITY_UPDATE_CHANNEL;
         return verifyMirrorUpdate();
     }
 

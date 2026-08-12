@@ -114,6 +114,7 @@
                 <filtering>false</filtering>
                 <includes>
                     <include>forge-update.properties</include>
+                    <include>forge-community-release-notes-zh-CN.txt</include>
                 </includes>
                 <targetPath>assets/update-mirror</targetPath>
             </resource>

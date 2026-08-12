@@ -415,11 +415,11 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBoxPanel<String> panel = this.view.getCbpAutoUpdater();
         final FComboBox<String> comboBox = createComboBox(updatePaths, updatePreference);
         // Migrate preferences written by upstream builds (none/snapshot/release).
-        if (!AutoUpdater.CHINA_UPDATE_CHANNEL.equals(this.prefs.getPref(updatePreference))) {
-            this.prefs.setPref(updatePreference, AutoUpdater.CHINA_UPDATE_CHANNEL);
+        if (!AutoUpdater.COMMUNITY_UPDATE_CHANNEL.equals(this.prefs.getPref(updatePreference))) {
+            this.prefs.setPref(updatePreference, AutoUpdater.COMMUNITY_UPDATE_CHANNEL);
             this.prefs.save();
         }
-        panel.setComboBox(comboBox, AutoUpdater.CHINA_UPDATE_CHANNEL);
+        panel.setComboBox(comboBox, AutoUpdater.COMMUNITY_UPDATE_CHANNEL);
     }
 
     private void initializeServerUPnPComboBox() {

@@ -10,7 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 
-/** A small, dependency-free manifest for the China update mirror. */
+/** A small, dependency-free manifest for the community update mirror. */
 public final class UpdateManifest {
     public static final int SCHEMA_VERSION = 1;
 

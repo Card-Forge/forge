@@ -349,7 +349,7 @@ public final class ForgeConstants {
     public static final String URL_PIC_SCRYFALL_DOWNLOAD = URL_SCRYFALL + "/cards/";
 
     /**
-     * Builds a hosted card-image URL. The China mirror stores normalized
+     * Builds a hosted card-image URL. The community mirror stores normalized
      * full-border JPEGs, while the upstream Card Forge server uses .full.jpg.
      */
     public static String getCardImageDownloadUrl(final String relativePath) {

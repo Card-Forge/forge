@@ -49,6 +49,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
         lstItems.addGroup(Forge.getLocalizer().getMessage("lblCardAudit"));
         lstItems.addGroup(Forge.getLocalizer().getMessage("ContentDownloaders"));
         lstItems.addGroup(Forge.getLocalizer().getMessage("lblStorageLocations"));
+        lstItems.addGroup(Forge.getLocalizer().getMessage("ReleaseNotes"));
 
         //Backup and Restore
         lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("lblBackupRestore"), Forge.getLocalizer().getMessage("lblBackupRestoreDescription")) {
@@ -212,6 +213,13 @@ public class FilesPage extends TabPage<SettingsScreen> {
             lstItems.addItem(cardPicsOption, 2);
             lstItems.addItem(decksOption, 2);
         }
+        lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("ReleaseNotes"),
+                Forge.getLocalizer().getMessage("nlCommunityReleaseNotes")) {
+            @Override
+            public void select() {
+                Forge.openScreen(new CommunityReleaseNotesScreen());
+            }
+        }, 4);
     }
 
     @Override

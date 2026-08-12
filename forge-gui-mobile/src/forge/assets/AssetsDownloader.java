@@ -71,7 +71,7 @@ public class AssetsDownloader {
         UpdateManifest mirrorManifest = null;
         if (connectedToInternet) {
             if (!ForgeUpdateConfig.isMirrorEnabled()) {
-                // Localized builds use the China mirror exclusively. Never fall back
+                // This community localization uses its own mirror exclusively. Never fall back
                 // to the upstream release or snapshot servers.
                 connectedToInternet = false;
             } else {

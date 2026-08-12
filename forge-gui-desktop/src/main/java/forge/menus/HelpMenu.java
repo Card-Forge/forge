@@ -14,6 +14,7 @@ import forge.error.ExceptionHandler;
 import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FOptionPane;
 import forge.util.BuildInfo;
+import forge.util.CommunityEditionInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.LogExporter;
@@ -53,7 +54,9 @@ public final class HelpMenu {
         return e -> {
             final Localizer localizer = Localizer.getInstance();
             FOptionPane.showMessageDialog(
-                    "Version : " + BuildInfo.getVersionString(),
+                    CommunityEditionInfo.EDITION_NAME + "\n"
+                            + "Version : " + BuildInfo.getVersionString() + "\n\n"
+                            + CommunityEditionInfo.DISCLAIMER,
                     localizer.getMessage("lblAboutForge"));
         };
     }

@@ -496,6 +496,19 @@ public class Main extends AndroidApplication {
         } catch (IOException e) {
             android.util.Log.w("ForgeUpdate", "No packaged update mirror configuration", e);
         }
+
+        try (InputStream stream = getAssets().open("update-mirror/forge-community-release-notes-zh-CN.txt");
+             Reader reader = new InputStreamReader(stream, StandardCharsets.UTF_8)) {
+            final StringBuilder notes = new StringBuilder();
+            final char[] buffer = new char[4096];
+            int count;
+            while ((count = reader.read(buffer)) >= 0) {
+                notes.append(buffer, 0, count);
+            }
+            setSystemPropertyIfConfigured("forge.community.releaseNotes", notes.toString());
+        } catch (IOException e) {
+            android.util.Log.w("ForgeUpdate", "No packaged community release notes", e);
+        }
     }
 
     private static void setSystemPropertyIfConfigured(final String name, final String value) {
