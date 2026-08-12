@@ -1,7 +1,7 @@
 Name:Elvish Impersonation Contest
 ManaCost:no cost
 Types:Plane Las Vegas
-T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever you planeswalk here and at the beginning of your upkeep, create an Elvish Impersonators token.
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever you planeswalk here and at the beginning of your upkeep, create an Elvish Impersonators token.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Secondary$ True | Execute$ TrigToken | TriggerDescription$ Whenever you planeswalk here and at the beginning of your upkeep, create an Elvish Impersonators token.
 SVar:TrigToken:DB$ CopyPermanent | DefinedName$ Elvish Impersonators
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever Chaos ensues, target Elvish Impersonators becomes a 6/6. Its controller creates a Treasure token.

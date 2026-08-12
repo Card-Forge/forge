@@ -1,7 +1,7 @@
 Name:Asmoranomardicadaistinaculdacar's Kitchen
 ManaCost:no cost
 Types:Plane Hell
-T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever you planeswalk here and whenever a creature enters under your control, create a Food token.
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever you planeswalk here and whenever a creature enters under your control, create a Food token.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Secondary$ True | Execute$ TrigToken | TriggerDescription$ Whenever you planeswalk here and whenever a creature enters under your control, create a Food token.
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, target opponent loses that much life.
