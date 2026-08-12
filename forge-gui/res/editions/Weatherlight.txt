@@ -178,6 +178,3 @@ ScryfallCode=WTH
 165 R Lotus Vale @John Avon
 166 R Scorched Ruins @John Avon
 167 R Winding Canyons @John Avon
-
-[tokens]
-g_1_1_squirrel

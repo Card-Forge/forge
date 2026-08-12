@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Easy
+Description=Gatecrash/Grand_Prix_Trial_Charlotte/Justin_Cavenaugh_-_Experiment_Jund_(Standard,_#46398).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Deathrite Shaman
+4 Dreg Mangler
+4 Experiment One
+3 Falkenrath Aristocrat
+3 Flinthoof Boar
+4 Ghor-Clan Rampager
+3 Hellrider
+4 Strangleroot Geist
+2 Abrupt Decay
+4 Searing Spear
+2 Tragic Slip
+4 Blood Crypt
+4 Dragonskull Summit
+3 Forest
+4 Overgrown Tomb
+4 Rootbound Crag
+4 Stomping Ground
+2 Woodland Cemetery
+[Sideboard]
+2 Golgari Charm
+2 Gruul Charm
+1 Rakdos Charm
+2 Rolling Temblor
+3 Skullcrack
+2 Tribute to Hunger

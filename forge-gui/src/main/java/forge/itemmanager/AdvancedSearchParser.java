@@ -287,23 +287,6 @@ public abstract class AdvancedSearchParser {
                 }
                 break;
 
-            case "name":
-                switch(opUsed) {
-                    case "!":
-                        predicate = CardRulesPredicates.name(StringOp.EQUALS_IC, valueStr);
-                        break;
-
-                    case "!=":
-                        predicate = CardRulesPredicates.name(StringOp.EQUALS_IC, valueStr).negate();
-                        break;
-
-                    case "=":
-                    case ":":
-                        predicate = CardRulesPredicates.name(StringOp.CONTAINS_IC, valueStr);
-                        break;
-                }
-                break;
-
             case "is":
                 if (opUsed.equals(":")) {
                     switch(valueStr) {
@@ -325,6 +308,14 @@ public abstract class AdvancedSearchParser {
 
                         case "transform":
                             predicate = CardRulesPredicates.isSplitType(CardSplitType.Transform);
+                            break;
+
+                        case "vanilla":
+                            predicate = CardRulesPredicates.isVanilla();
+                            break;
+
+                        case "custom":
+                            predicate = card -> card.isCustom();
                             break;
                     }
                 }
@@ -432,6 +423,25 @@ public abstract class AdvancedSearchParser {
 
                     case "<=":
                         predicate = RarityParser.handleLessOrEqual(valueStr);
+                        break;
+                }
+                break;
+
+
+
+            case "name":
+                switch(opUsed) {
+                    case "!":
+                        predicate = PaperCardPredicates.searchableName(StringOp.EQUALS_IC, valueStr);
+                        break;
+
+                    case "!=":
+                        predicate = PaperCardPredicates.searchableName(StringOp.EQUALS_IC, valueStr).negate();
+                        break;
+
+                    case "=":
+                    case ":":
+                        predicate = PaperCardPredicates.searchableName(StringOp.CONTAINS_IC, valueStr);
                         break;
                 }
                 break;

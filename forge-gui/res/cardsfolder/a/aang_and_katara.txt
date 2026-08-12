@@ -1,0 +1,10 @@
+Name:Aang and Katara
+ManaCost:3 G W U
+Types:Legendary Creature Human Avatar Ally
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enter or attack, create X 1/1 white Ally creature tokens, where X is the number of tapped artifacts and/or creatures you control.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME enter or attack, create X 1/1 white Ally creature tokens, where X is the number of tapped artifacts and/or creatures you control.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_ally | TokenOwner$ You
+SVar:X:Count$Valid Artifact.YouCtrl+tapped,Creature.YouCtrl+tapped
+DeckHas:Ability$Token
+Oracle:Whenever Aang and Katara enter or attack, create X 1/1 white Ally creature tokens, where X is the number of tapped artifacts and/or creatures you control.

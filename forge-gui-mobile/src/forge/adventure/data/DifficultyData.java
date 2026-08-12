@@ -25,5 +25,6 @@ public class DifficultyData {
     public ObjectMap<String,String> starterDecks = null;
     public ObjectMap<String,String> constructedStarterDecks= null;
     public ObjectMap<String,String> pileDecks= null;
+    public ObjectMap<String,String> commanderDecks = null;
 
 }

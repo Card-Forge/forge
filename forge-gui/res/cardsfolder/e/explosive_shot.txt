@@ -1,0 +1,5 @@
+Name:Explosive Shot
+ManaCost:1 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+Oracle:Explosive Shot deals 4 damage to target creature.

@@ -3,5 +3,5 @@ ManaCost:2 B
 Types:Instant
 A:SP$ ChooseCard | ValidTgts$ Opponent | Choices$ Creature.TargetedPlayerCtrl+cmcEQX,Planeswalker.TargetedPlayerCtrl+cmcEQX | ChoiceTitle$ Choose a creature or planeswalker with the highest mana value among creatures and planeswalkers you control | Mandatory$ True | SubAbility$ DBExile | StackDescription$ REP Target opponent_{p:Targeted} | SpellDescription$ Target opponent exiles a creature or planeswalker they control with the greatest mana value among creatures and planeswalkers they control.
 SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | StackDescription$ None
-SVar:X:Count$Valid Creature.TargetedPlayerCtrl,Planeswalker.TargetedPlayerCtrl$GreatestCMC
+SVar:X:Count$Valid Creature.TargetedPlayerCtrl,Planeswalker.TargetedPlayerCtrl$GreatestCardManaCost
 Oracle:Target opponent exiles a creature or planeswalker they control with the greatest mana value among creatures and planeswalkers they control.

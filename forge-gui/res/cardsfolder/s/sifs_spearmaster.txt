@@ -1,0 +1,7 @@
+Name:Sif's Spearmaster
+ManaCost:2 R
+Types:Creature God Warrior Hero
+PT:1/4
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Opponent | NumDmg$ X | SpellDescription$ This creature deals damage equal to its power to target opponent.
+SVar:X:Count$CardPower
+Oracle:{T}: This creature deals damage equal to its power to target opponent.

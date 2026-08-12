@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Repressed Magic
+Title=Repressed Magic
+Icon=Repressed Magic.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Adrian_Aue_-_Izzet_Drakes_(Standard,_#783316).dck
+Deck Type=constructed
+
+[Main]
+4 Crackling Drake
+4 Enigma Drake
+4 Pteramander
+3 Dive Down
+4 Opt
+4 Shock
+3 Spell Pierce
+1 Beacon Bolt
+4 Chart a Course
+4 Discovery // Dispersal
+4 Lava Coil
+8 Island
+5 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+1 Beacon Bolt
+2 Disdainful Stroke
+1 Entrancing Melody
+2 Fiery Cannonade
+2 Negate
+3 Niv-Mizzet, Parun
+4 Raptor Hatchling

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Snow White
+Title=Snow White
+Icon=Snow White.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Andrea_Biaggi_-_Asmoremrakiselbrand_(Modern,_#1210205).dck
+Deck Type=constructed
+
+[Main]
+1 Griselbrand
+3 Seasoned Pyromancer
+3 Bonecrusher Giant
+4 Asmoranomardicadaistinaculdacar
+4 Emrakul, the Aeons Torn
+4 Insolent Neonate
+4 Street Wraith
+2 Wishclaw Talisman
+4 The Underworld Cookbook
+1 Lightning Bolt
+4 Goryo's Vengeance
+1 Shatterskull Smashing
+4 Thoughtseize
+4 Urza's Saga
+1 Verdant Catacombs
+1 Swamp
+1 Marsh Flats
+1 Den of the Bugbear
+1 Arid Mesa
+2 Blood Crypt
+2 Mountain
+4 Bloodstained Mire
+4 Blackcleave Cliffs
+[Sideboard]
+1 Feed the Swarm
+1 Nihil Spellbomb
+1 Shattering Spree
+2 Abrade
+2 Inquisition of Kozilek
+2 Alpine Moon
+3 Leyline of the Void
+3 Void Mirror

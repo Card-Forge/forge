@@ -1,0 +1,9 @@
+Name:Aang, A Lot to Learn
+ManaCost:2 GW
+Types:Legendary Creature Human Avatar Ally
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | IsPresent$ Lesson.YouOwn | PresentZone$ Graveyard | Description$ NICKNAME has vigilance as long as there's a Lesson card in your graveyard.
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control dies, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Lesson
+Oracle:Aang has vigilance as long as there's a Lesson card in your graveyard.\nWhenever another creature you control dies, put a +1/+1 counter on Aang.

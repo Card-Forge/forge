@@ -1,0 +1,9 @@
+Name:Compassionate Healer
+ManaCost:1 W
+Types:Creature Human Cleric Ally
+PT:2/2
+T:Mode$ Taps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever this creature becomes tapped, you gain 1 life and scry 1. (Look at the top card of your library. You may put it on the bottom.)
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+DeckHas:Ability$LifeGain
+Oracle:Whenever this creature becomes tapped, you gain 1 life and scry 1. (Look at the top card of your library. You may put it on the bottom.)

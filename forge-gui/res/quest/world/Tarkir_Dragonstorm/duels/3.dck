@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Hellboy
+Title=Hellboy
+Icon=Hellboy.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Hando_Shinnosuke_-_Mono_Red_(Standard,_#2448940).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+4 Screaming Nemesis
+4 Tersa Lightshatter
+4 Lightning Strike
+4 Burst Lightning
+4 Monstrous Rage
+1 Torch the Tower
+17 Mountain
+4 Rockface Village
+2 Soulstone Sanctuary
+[Sideboard]
+1 Obliterating Bolt
+3 Lithomantic Barrage
+3 Torch the Tower
+2 Witchstalker Frenzy
+2 Case of the Crimson Pulse
+4 Sunspine Lynx

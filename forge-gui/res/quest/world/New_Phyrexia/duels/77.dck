@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Orunmila
+Title=Orunmila
+Icon=Orunmila.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Modern_Festival_Prelim_#8418480/Futile_Effort_-_Faeries_(Modern,_#278355).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Spellstutter Sprite
+2 Vendilion Clique
+2 Vedalken Shackles
+4 Cryptic Command
+2 Disfigure
+2 Dismember
+1 Dispel
+2 Mana Leak
+1 Smother
+2 Spell Snare
+3 Inquisition of Kozilek
+2 Thoughtseize
+4 Bitterblossom
+2 Creeping Tar Pit
+2 Flooded Strand
+6 Island
+3 Mutavault
+4 Polluted Delta
+4 Secluded Glen
+2 Swamp
+2 Watery Grave
+[Sideboard]
+2 Damnation
+1 Engineered Explosives
+3 Faerie Macabre
+1 Pithing Needle
+2 Spellskite
+4 Spreading Seas

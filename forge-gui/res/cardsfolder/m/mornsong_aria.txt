@@ -1,0 +1,9 @@
+Name:Mornsong Aria
+ManaCost:1 B B
+Types:Legendary Enchantment
+S:Mode$ CantDraw | Description$ Players can't draw cards or gain life.
+S:Mode$ CantGainLife | Secondary$ True | Description$ Players can't draw cards or gain life.
+T:Mode$ Phase | Phase$ Draw | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles.
+SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 3 | SubAbility$ DBTutor
+SVar:DBTutor:DB$ ChangeZone | DefinedPlayer$ TriggeredPlayer | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True
+Oracle:Players can't draw cards or gain life.\nAt the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles.

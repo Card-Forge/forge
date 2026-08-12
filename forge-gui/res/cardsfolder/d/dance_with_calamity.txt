@@ -7,6 +7,6 @@ SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBDig | RepeatOptional$ True | SubA
 SVar:DBDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True
 SVar:Play:DB$ Play | Defined$ Remembered | ValidSA$ Spell | Amount$ All | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LE13 | SubAbility$ DBCleanup | SpellDescription$ If the total mana value of the cards exiled this way is 13 or less, you may cast any number of spells from among those cards without paying their mana costs.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$SumCMC
+SVar:X:Remembered$CardManaCost
 AI:RemoveDeck:Random
 Oracle:Shuffle your library. As many times as you choose, you may exile the top card of your library. If the total mana value of the cards exiled this way is 13 or less, you may cast any number of spells from among those cards without paying their mana costs.

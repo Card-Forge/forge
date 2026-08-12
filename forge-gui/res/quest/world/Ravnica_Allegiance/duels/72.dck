@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Hugo_Shah-jones_-_5c_Humans_(Modern,_#781548).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+3 Kitesail Freebooter
+4 Mantis Rider
+4 Meddling Mage
+1 Militia Bugler
+4 Noble Hierarch
+4 Phantasmal Image
+4 Reflector Mage
+1 Tajic, Legion's Edge
+4 Thalia's Lieutenant
+4 Thalia, Guardian of Thraben
+4 Aether Vial
+4 Ancient Ziggurat
+4 Cavern of Souls
+4 Horizon Canopy
+1 Island
+1 Plains
+1 Seachrome Coast
+4 Unclaimed Territory
+[Sideboard]
+3 Auriok Champion
+2 Damping Sphere
+2 Deputy of Detention
+1 Grafdigger's Cage
+2 Izzet Staticaster
+2 Knight of Autumn
+2 Sin Collector
+1 Whirler Rogue

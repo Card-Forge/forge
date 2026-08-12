@@ -9,6 +9,8 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
@@ -92,6 +94,10 @@ public class PlayerProperty {
             if (!player.hasBlessing()) {
                 return false;
             }
+        } else if (property.equals("hasEnduringStory")) {
+            if (!player.hasEnduringStory()) {
+                return false;
+            }
         } else if (property.equals("CanBeEnchantedBy")) {
             if (!player.canBeAttached(source, null)) {
                 return false;
@@ -132,32 +138,34 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.startsWith("wasDealt")) {
-            boolean found = false;
-            String validCard = null;
             Boolean combat = null;
             if (property.contains("CombatDamage")) {
                 combat = true;
             }
-            if (property.contains("ThisTurnBySource")) {
-                found = source.getDamageHistory().getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility) > 0;
-            } else {
-                String comp = "GE";
-                int right = 1;
-                int numValid = 0;
+            String validCard = null;
+            String comp = "GE";
+            int right = 1;
 
-                if (property.contains("ThisTurnBy")) {
-                    String[] props = property.split(" ");
+            if (property.contains("ThisTurnBy")) {
+                int idx = 2;
+                String[] props = property.split(" ");
+                if (property.contains("BySource")) {
+                    idx--;
+                } else {
                     validCard = props[1];
-                    if (props.length > 2) {
-                        comp = props[2].substring(0, 2);
-                        right = AbilityUtils.calculateAmount(source, props[2].substring(2), spellAbility);
-                    }
                 }
-
-                numValid = game.getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility).size();
-                found = Expressions.compare(numValid, comp, right);
+                if (props.length > idx) {
+                    comp = props[idx].substring(0, 2);
+                    right = AbilityUtils.calculateAmount(source, props[idx].substring(2), spellAbility);
+                }
             }
-            if (!found) {
+            int result;
+            if (property.contains("BySource")) {
+                result = source.getDamageHistory().getDamageDoneThisTurn(combat, false, property.contains("SourceTimes"), null, "You", source, player, spellAbility);
+            } else {
+                result = game.getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility).size();
+            }
+            if (!Expressions.compare(result, comp, right)) {
                 return false;
             }
         } else if (property.equals("attackedBySourceThisCombat")) {
@@ -222,10 +230,6 @@ public class PlayerProperty {
             if (!found) {
                 return false;
             }
-        } else if (property.equals("IsNotRemembered")) {
-            if (source.isRemembered(player)) {
-                return false;
-            }
         } else if (property.equals("IsTriggerRemembered")) {
             boolean found = false;
             for (Object o : spellAbility.getTriggerRemembered()) {
@@ -278,6 +282,14 @@ public class PlayerProperty {
             }
         } else if (property.equals("MaxSpeed")) {
             if (!player.maxSpeed()) {
+                return false;
+            }
+        } else if (property.equals("targetedBy")) {
+            if (!(spellAbility instanceof SpellAbility)) {
+                return false;
+            }
+            SpellAbility sp = (SpellAbility)spellAbility;
+            if (!sp.getRootAbility().isTargeting(player)) {
                 return false;
             }
         } else if (property.startsWith("controls")) {
@@ -423,10 +435,6 @@ public class PlayerProperty {
                     return false;
                 }
             }
-        } else if (property.startsWith("LessThanHalfStartingLifeTotal")) {
-            if (player.getLife() >= (int) Math.ceil(player.getStartingLife() / 2.0)) {
-                return false;
-            }
         } else if (property.startsWith("Triggered") || property.equals("OriginalHostRemembered")) {
             if (!AbilityUtils.getDefinedPlayers(source, property, spellAbility).contains(player)) {
                 return false;
@@ -490,6 +498,15 @@ public class PlayerProperty {
                 }
             }
             return false;
+        } else if (property.startsWith("counters")) {
+            final String[] splitProperty = property.split("_");
+            final String strNum = splitProperty[1].substring(2);
+            final String comparator = splitProperty[1].substring(0, 2);
+            final int number = AbilityUtils.calculateAmount(source, strNum, spellAbility);
+            final int actualNumber = player.getCounters(CounterType.getType(splitProperty[2]));
+            if (!Expressions.compare(actualNumber, comparator, number)) {
+                return false;
+            }
         } else {
             // could print error msg for unknown property here, though it'd need to check that it's not "Any" case
             return false;

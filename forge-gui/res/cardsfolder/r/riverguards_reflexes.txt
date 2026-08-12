@@ -1,0 +1,6 @@
+Name:Riverguard's Reflexes
+ManaCost:1 W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | KW$ First Strike | SubAbility$ DBUntap | SpellDescription$ Target creature gets +2/+2 and gains first strike until end of turn. Untap it.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+Oracle:Target creature gets +2/+2 and gains first strike until end of turn. Untap it.

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Dracula
+Title=Dracula
+Icon=Dracula.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Payden_Bullis_-_Mono-Blue_Merfolk_(Modern,_#1346693).dck
+Deck Type=constructed
+
+[Main]
+2 Phantasmal Image
+2 Merrow Reejerey
+3 Cursecatcher
+4 Silvergill Adept
+4 Svyelun of Sea and Sky
+4 Master of the Pearl Trident
+4 Tide Shaper
+4 Lord of Atlantis
+4 Aether Vial
+2 Force of Negation
+3 Dismember
+4 Spreading Seas
+1 Otawara, Soaring City
+1 Minamo, School at Water's Edge
+2 Cavern of Souls
+4 Mutavault
+12 Island
+[Sideboard]
+1 Ceremonious Rejection
+2 Spell Pierce
+2 Hurkyl's Recall
+2 Pithing Needle
+2 Tidebinder Mage
+3 Relic of Progenitus
+3 Subtlety

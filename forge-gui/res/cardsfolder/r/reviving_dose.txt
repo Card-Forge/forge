@@ -2,5 +2,5 @@ Name:Reviving Dose
 ManaCost:2 W
 Types:Instant
 A:SP$ GainLife | LifeAmount$ 3 | SpellDescription$ You gain 3 life. | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 Oracle:You gain 3 life.\nDraw a card.

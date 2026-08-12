@@ -1,0 +1,9 @@
+Name:Radioactive Spider
+Variant:UniversesWithin:FlavorName:Fateweaver
+ManaCost:G
+Types:Creature Spider
+PT:1/1
+K:Reach
+K:Deathtouch
+A:AB$ ChangeZone | Cost$ 2 Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Spider.Hero | ChangeTypeDesc$ Spider Hero | SorcerySpeed$ True | SpellDescription$ Search your libary for a Spider Hero card, reveal it, put it into your hand, then shuffle. Activate only as a sorcery.
+Oracle:Reach, deathtouch\nFateful Bite — {2}, Sacrifice this creature: Search your libary for a Spider Hero card, reveal it, put it into your hand, then shuffle. Activate only as a sorcery.

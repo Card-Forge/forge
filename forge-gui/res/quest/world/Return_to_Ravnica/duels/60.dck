@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Magneto
+Title=Magneto
+Icon=Magneto.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/PTQ_Dragon┬┤s_Maze_-_Tokyo,_Japan/Aryabhim_A._Rahman_-_Infect_(Modern,_#48428).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+4 Plague Stinger
+2 Abrupt Decay
+4 Apostle's Blessing
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+2 Rancor
+2 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+1 Hurkyl's Recall
+1 Inquisition of Kozilek
+1 Nature's Claim
+1 Nihil Spellbomb
+1 Relic of Progenitus
+3 Spell Pierce
+4 Spellskite
+3 Thoughtseize

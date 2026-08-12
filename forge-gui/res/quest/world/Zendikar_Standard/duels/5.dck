@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Gruul-precon
+Title=Gruul-precon
+Icon=Gruul-precon.jpg
+Difficulty=Easy
+Description=Zendikar/Front_Range_Magic_$1.5K_Team_Challenge_2/Luke_Hagerling_-_Mono_Red_Burn_(Standard,_#3610).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ball Lightning
+4 Goblin Guide
+4 Hell's Thunder
+4 Hellspark Elemental
+4 Howling Mine
+4 Burst Lightning
+4 Lightning Bolt
+3 Volcanic Fallout
+3 Earthquake
+3 Chandra Nalaar
+19 Mountain
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Act of Treason
+2 Banefire
+2 Dragon's Claw
+4 Goblin Ruinblaster
+2 Manabarbs
+1 Mark of Mutiny
+2 Pithing Needle

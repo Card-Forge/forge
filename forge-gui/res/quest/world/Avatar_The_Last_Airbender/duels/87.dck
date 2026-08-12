@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Anakin Skywalker
+Title=Anakin Skywalker
+Icon=Anakin Skywalker.jpg
+Difficulty=Hard
+Description=./Modern/Avatar_The_Last_Airbender/Naterooy_-_Dimir_Control_(Modern,_#2819642).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+4 Subtlety
+4 Wan Shi Tong, Librarian
+4 Consult the Star Charts
+4 Counterspell
+4 Fatal Push
+3 Sheoldred's Edict
+3 Spell Snare
+2 Cling to Dust
+1 Force of Negation
+1 Logic Knot
+1 Spell Pierce
+1 Kaito, Bane of Nightmares
+4 Field of Ruin
+4 Flooded Strand
+4 Island
+4 Polluted Delta
+3 Undercity Sewers
+3 Watery Grave
+1 Steam Vents
+1 Swamp
+[Sideboard]
+4 Consign to Memory
+3 Meltdown
+3 Mystical Dispute
+2 Graveyard Trespasser
+1 Damnation
+1 Engineered Explosives
+1 Snapcaster Mage

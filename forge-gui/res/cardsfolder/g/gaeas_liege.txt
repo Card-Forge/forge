@@ -2,12 +2,12 @@ Name:Gaea's Liege
 ManaCost:3 G G G
 Types:Creature Avatar
 PT:*/*
-S:Mode$ Continuous | CharacteristicDefining$ True | IsPresent$ Card.Self+notattacking | SetPower$ X | SetToughness$ X | Description$ As long as CARDNAME isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as CARDNAME is attacking, its power and toughness are each equal to the number of Forests defending player controls.
+S:Mode$ Continuous | CharacteristicDefining$ True | IsPresent$ Card.Self+!attacking | SetPower$ X | SetToughness$ X | Description$ As long as CARDNAME isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as CARDNAME is attacking, its power and toughness are each equal to the number of Forests defending player controls.
 SVar:X:Count$Valid Forest.YouCtrl
 S:Mode$ Continuous | CharacteristicDefining$ True | IsPresent$ Card.Self+attacking | SetPower$ Y | SetToughness$ Y
 SVar:Y:Count$Valid Forest.DefenderCtrl
-A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Forest | RemoveLandTypes$ True | Duration$ UntilHostLeavesPlay | SpellDescription$ Target land becomes a Forest until CARDNAME leaves the battlefield.
+A:AB$ Animate | Cost$ T | ValidTgts$ Land | Types$ Forest | RemoveLandTypes$ True | Duration$ UntilHostLeavesPlay | SpellDescription$ Target land becomes a Forest until CARDNAME leaves the battlefield.
 SVar:BuffedBy:Forest
 AI:RemoveDeck:All
-DeckHints:Type$Forest & Keyword$Forestwalk & Name$Yavimaya, Cradle of Growth
+DeckHints:Type$Forest & Keyword$Landwalk:Forest & Name$Yavimaya, Cradle of Growth
 Oracle:As long as Gaea's Liege isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as Gaea's Liege is attacking, its power and toughness are each equal to the number of Forests defending player controls.\n{T}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.

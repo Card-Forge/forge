@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Ratbert
+Title=Ratbert
+Icon=Ratbert.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Brandon_Chen_-_Gruul_Aggro_(Standard,_#2452751).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+2 Hearth Elemental
+3 Manifold Mouse
+4 Monastery Swiftspear
+4 Questing Druid
+4 Cori-Steel Cutter
+4 Burst Lightning
+4 Might of the Meek
+4 Monstrous Rage
+2 Shock
+4 Copperline Gorge
+4 Karplusan Forest
+7 Mountain
+2 Rockface Village
+4 Thornspire Verge
+[Sideboard]
+3 Ghost Vacuum
+3 Lithomantic Barrage
+3 Pawpatch Formation
+2 Pawpatch Recruit
+2 Pick Your Poison
+2 Pyroclasm

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Darkseid
+Title=Darkseid
+Icon=Darkseid.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/PTQ_Amsterdam_2010_-_Albuquerque_-_USA/Tucker_Foster_-_Cruel_Control_(Standard,_#1628).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Gatekeeper of Malakir
+3 Malakir Bloodwitch
+4 Sedraxis Specter
+4 Lightning Bolt
+3 Staggershock
+3 Terminate
+4 Blightning
+2 Cruel Ultimatum
+4 Spreading Seas
+3 Jace, the Mind Sculptor
+4 Creeping Tar Pit
+4 Crumbling Necropolis
+3 Dragonskull Summit
+3 Drowned Catacomb
+2 Island
+2 Lavaclaw Reaches
+2 Mountain
+3 Scalding Tarn
+4 Swamp
+[Sideboard]
+2 Basilisk Collar
+1 Burst Lightning
+4 Countersquall
+3 Cunning Sparkmage
+1 Doom Blade
+1 Negate
+3 Thought Hemorrhage

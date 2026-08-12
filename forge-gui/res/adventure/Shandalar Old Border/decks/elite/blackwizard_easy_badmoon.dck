@@ -1,0 +1,17 @@
+[metadata]
+Name=Da Vinci 1
+[Main]
+23 Swamp|USG|3
+3 Hymn to Tourach|FEM
+3 Nantuko Shade|TOR
+3 Phyrexian Arena|APC
+4 Bad Moon|LEA
+4 Black Knight|LEB
+4 Corrupt|USG
+4 Dauthi Slayer|TMP
+4 Phyrexian Ghoul|USG
+4 Phyrexian Negator|UDS
+4 Plaguebearer|EXO
+
+[StartInBattle_Reference]
+1 Wall of Bone|LEA

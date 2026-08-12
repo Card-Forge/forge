@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Mac Nac Feegle
+Title=The Mac Nac Feegle
+Icon=The Mac Nac Feegle.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Adrian_Casabo_-_Mardu_Knights_(Standard,_#975335).dck
+Deck Type=constructed
+
+[Main]
+2 Stormfist Crusader
+2 Blacklance Paragon
+2 Foulmire Knight
+2 Corpse Knight
+4 Fervent Champion
+4 Worthy Knight
+4 Venerable Knight
+4 Skyknight Vanguard
+4 Inspiring Veteran
+4 Knight of the Ebon Legion
+2 Unbreakable Formation
+4 Fight as One
+1 Savai Triome
+2 Swamp
+3 Plains
+4 Blood Crypt
+4 Tournament Grounds
+4 Godless Shrine
+4 Sacred Foundry
+[Sideboard]
+1 Unbreakable Formation
+1 Lurrus of the Dream-Den
+2 Embereth Shieldbreaker
+2 Despark
+3 Apostle of Purifying Light
+3 Dire Tactics
+3 Drill Bit

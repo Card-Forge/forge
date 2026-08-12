@@ -1,0 +1,9 @@
+Name:Tombstone, Career Criminal
+Variant:UniversesWithin:FlavorName:Nill, Vessel of Valgavoth
+ManaCost:2 B
+Types:Legendary Creature Human Villain
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When NICKNAME enters, return target Villain card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Villain.YouOwn | TgtPrompt$ Select target Villain card in your graveyard
+S:Mode$ ReduceCost | ValidCard$ Villain | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Villain spells you cast cost {1} less to cast.
+Oracle:When Tombstone enters, return target Villain card from your graveyard to your hand.\nVillain spells you cast cost {1} less to cast.

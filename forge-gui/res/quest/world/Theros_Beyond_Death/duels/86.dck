@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/ARNECK_-_Mardu_Pyromancer_(Modern,_#933723).dck
+Deck Type=constructed
+
+[Main]
+1 Kroxa, Titan of Death's Hunger
+2 Magus of the Moon
+3 Young Pyromancer
+4 Seasoned Pyromancer
+4 Merchant of the Vale
+4 Lightning Skelemental
+2 Kolaghan's Command
+2 Fatal Push
+4 Lightning Bolt
+1 Dreadbore
+1 Angrath's Rampage
+2 Smiting Helix
+3 Inquisition of Kozilek
+3 Thoughtseize
+3 Unearth
+1 Plains
+1 Arid Mesa
+2 Blood Crypt
+2 Castle Embereth
+2 Mountain
+2 Sacred Foundry
+2 Swamp
+2 Blackcleave Cliffs
+3 Marsh Flats
+4 Bloodstained Mire
+[Sideboard]
+1 Ashiok, Dream Render
+1 Kaya's Guile
+2 Soul-Guide Lantern
+2 Kambal, Consul of Allocation
+2 Collective Brutality
+2 Bonecrusher Giant
+2 Wear // Tear
+3 Fulminator Mage

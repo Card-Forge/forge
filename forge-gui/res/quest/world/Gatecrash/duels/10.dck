@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Odysseus
+Title=Odysseus
+Icon=Odysseus.jpg
+Difficulty=Medium
+Description=Gatecrash/Standard_Bronze_TCQ_-_Huntsville,_TX_-_2-23-13/MichaelGustafson_-_Golgari_Midrange_(Standard,_#46489).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Crypt Ghast
+4 Deathrite Shaman
+4 Desecration Demon
+2 Dreg Mangler
+1 Gyre Sage
+4 Lotleth Troll
+1 Necropolis Regent
+2 Nightveil Specter
+2 Volatile Rig
+2 Wasteland Viper
+4 Golgari Keyrune
+2 Illusionist's Bracers
+2 Abrupt Decay
+1 Golgari Charm
+2 Ultimate Price
+2 Contaminated Ground
+2 Vraska the Unseen
+5 Forest
+4 Overgrown Tomb
+26 Swamp
+[Sideboard]
+2 Devour Flesh
+2 Forced Adaptation
+2 Killing Wave
+3 Pithing Needle

@@ -1,0 +1,7 @@
+Name:High-Flying Ace
+ManaCost:2 W
+Types:Creature Bird Mutant
+PT:2/3
+K:Flying
+A:AB$ Pump | Cost$ 3 W | ValidTgts$ Creature.withoutFlying | ValidTgtsDesc$ creature without flying | KW$ Flying | SorcerySpeed$ True | SpellDescription$ Target creature without flying gains flying until end of turn. Activate only as a sorcery.
+Oracle:Flying\n{3}{W}: Target creature without flying gains flying until end of turn. Activate only as a sorcery.

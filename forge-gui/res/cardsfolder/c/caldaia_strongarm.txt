@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Creature Human Warrior
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put two +1/+1 counters on target creature.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2
 K:Blitz:3 G
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters|Sacrifice

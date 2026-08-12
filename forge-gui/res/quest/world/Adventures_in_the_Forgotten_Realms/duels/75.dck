@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Aqueduct
+Title=Aqueduct
+Icon=Aqueduct.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/sweallar_-_Hardened_Scales_(Modern,_#1197596)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Arcbound Javelineer
+4 Arcbound Ravager
+4 Hangarback Walker
+4 Ingenious Smith
+4 Walking Ballista
+4 Zabaz, the Glimmerwasp
+1 Springleaf Drum
+1 Witch's Oven
+1 Basilisk Collar
+3 The Ozolith
+3 Welding Jar
+4 Hardened Scales
+4 Urza's Saga
+1 Forest
+1 Sacred Foundry
+2 Idyllic Grange
+2 Plains
+3 Temple Garden
+3 Arid Mesa
+4 Windswept Heath
+4 Inkmoth Nexus
+[Sideboard]
+1 Pithing Needle
+1 Path to Exile
+1 Lurrus of the Dream-Den
+2 Damping Sphere
+2 Relic of Progenitus
+2 Torpor Orb
+3 Prismatic Ending
+3 Void Mirror

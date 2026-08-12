@@ -1,0 +1,10 @@
+Name:Improvised Arsenal
+ManaCost:1 R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | Description$ Equipped creature gets +1/+0 for each artifact you control.
+A:AB$ CopyPermanent | Cost$ 4 R | Defined$ Self | SpellDescription$ Create a token that's a copy of this Equipment.
+K:Equip:R
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Artifact
+Oracle:Equipped creature gets +1/+0 for each artifact you control.\n{4}{R}: Create a token that's a copy of this Equipment.\nEquip {R}

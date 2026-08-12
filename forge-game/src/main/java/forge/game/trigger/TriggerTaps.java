@@ -21,7 +21,9 @@ import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.cost.CostTeamwork;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.CostPaymentStack;
 import forge.util.Localizer;
 
 /**
@@ -50,7 +52,8 @@ public class TriggerTaps extends Trigger {
     }
 
     /** {@inheritDoc}
-     * @param runParams*/
+     * @param runParams
+     */
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
@@ -65,6 +68,19 @@ public class TriggerTaps extends Trigger {
         }
         if (hasParam("Attacker")) {
             if (getParam("Attacker").equalsIgnoreCase("True") != (Boolean) runParams.get(AbilityKey.Attacker)) {
+                return false;
+            }
+        }
+
+        if (hasParam("FirstTime")) {
+            if (!(boolean) runParams.get(AbilityKey.FirstTime)) {
+                return false;
+            }
+        }
+
+        if (hasParam("Teamwork")) {
+            CostPaymentStack.Entry currentPayment = (CostPaymentStack.Entry) runParams.get(AbilityKey.IndividualCostPaymentInstance);
+            if (currentPayment == null || !(currentPayment.cost() instanceof CostTeamwork)) {
                 return false;
             }
         }

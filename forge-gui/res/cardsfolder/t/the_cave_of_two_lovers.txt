@@ -1,0 +1,9 @@
+Name:The Cave of Two Lovers
+ManaCost:3 R
+Types:Enchantment Saga
+K:Chapter:3:DBToken,DBSearch,DBEarthbend
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_ally | TokenOwner$ You | SpellDescription$ Create two 1/1 white Ally creature tokens.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Mountain,Cave | ChangeNum$ 1 | SpellDescription$ Search your library for a Mountain or Cave card, reveal it, put it into your hand, then shuffle.
+SVar:DBEarthbend:DB$ Earthbend | Num$ 3 | SpellDescription$ Earthbend 3. (Target land you control becomes a 0/0 creature with haste that's still a land. Put three +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+DeckHas:Ability$Token
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create two 1/1 white Ally creature tokens.\nII — Search your library for a Mountain or Cave card, reveal it, put it into your hand, then shuffle.\nIII — Earthbend 3. (Target land you control becomes a 0/0 creature with haste that's still a land. Put three +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)

@@ -6,8 +6,7 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantAttach {
 
-    public static boolean cantAttach(final GameEntity target, final Card card, boolean checkSBA) {
-        // CantTarget static abilities
+    public static StaticAbility cantAttach(final GameEntity target, final Card card, boolean checkSBA) {
         for (final Card ca : target.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantAttach)) {
@@ -15,11 +14,11 @@ public class StaticAbilityCantAttach {
                 }
 
                 if (applyCantAttachAbility(stAb, card, target, checkSBA)) {
-                    return true;
+                    return stAb;
                 }
             }
         }
-        return false;
+        return null;
     }
 
     public static boolean applyCantAttachAbility(final StaticAbility stAb, final Card card, final GameEntity target, boolean checkSBA) {

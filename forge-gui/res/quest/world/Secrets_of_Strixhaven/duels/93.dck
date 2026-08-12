@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Flandre Scarlet
+Title=Flandre Scarlet
+Icon=Flandre Scarlet.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/aspiringspike_-_Izzet_Control_(Modern,_#2944411).dck
+Deck Type=constructed
+
+[Main]
+4 Tamiyo, Inquisitive Student
+4 Snapcaster Mage
+3 Subtlety
+4 Flame of Anor
+4 Galvanic Discharge
+1 Sink into Stupor
+1 Consult the Star Charts
+2 Prismari Charm
+4 Traumatic Critique
+3 Spell Snare
+1 Logic Knot
+1 Lightning Bolt
+4 Counterspell
+3 Force of Negation
+3 Thundering Falls
+4 Island
+4 Steam Vents
+4 Flooded Strand
+4 Polluted Delta
+1 Misty Rainforest
+1 Otawara, Soaring City
+[Sideboard]
+2 Brotherhood's End
+1 Meltdown
+4 Consign to Memory
+1 Fire Magic
+3 Mystical Dispute
+2 Test of Talents
+2 Obsidian Charmaw

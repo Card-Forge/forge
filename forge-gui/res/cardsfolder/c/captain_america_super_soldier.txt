@@ -1,0 +1,8 @@
+Name:Captain America, Super-Soldier
+ManaCost:1 W W
+Types:Legendary Creature Human Soldier Hero
+PT:3/2
+K:First Strike
+K:etbCounter:SHIELD:1
+S:Mode$ Continuous | Affected$ You,Hero.Other+YouCtrl | AddKeyword$ Hexproof | IsPresent$ Card.Self+counters_GE1_SHIELD | Description$ As long as NICKNAME has a shield counter on him, you and other Heroes you control have hexproof.
+Oracle:First strike\nCaptain America enters with a shield counter on him. (If he would be dealt damage or destroyed, remove a shield counter from him instead.)\nAs long as Captain America has a shield counter on him, you and other Heroes you control have hexproof.

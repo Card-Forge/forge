@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Robot Santa
+Title=Robot Santa
+Icon=Robot Santa.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/SCG_States_Laramie/Andrew_Ohlschwager_-_Bant_(Standard,_#618312).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+4 Bounding Krasis
+1 Den Protector
+4 Duskwatch Recruiter
+1 Hidden Dragonslayer
+3 Jace, Vryn's Prodigy
+1 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Sylvan Advocate
+3 Tireless Tracker
+4 Collected Company
+3 Dromoka's Command
+1 Ojutai's Command
+3 Canopy Vista
+4 Evolving Wilds
+3 Forest
+1 Fortified Village
+2 Island
+4 Lumbering Falls
+3 Plains
+1 Port Town
+3 Prairie Stream
+1 Yavimaya Coast
+[Sideboard]
+1 Dispel
+2 Lantern Scout
+4 Negate
+2 Silkwrap
+1 Stratus Dancer
+2 Tragic Arrogance

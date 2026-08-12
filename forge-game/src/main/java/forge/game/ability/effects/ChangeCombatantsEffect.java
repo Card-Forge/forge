@@ -9,7 +9,6 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -35,7 +34,7 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
 
         // TODO: may expand this effect for defined blocker (False Orders, General Jarkeld, Sorrow's Path, Ydwen Efreet)
         for (final Card c : getTargetCards(sa)) {
-            String cardString = CardTranslation.getTranslatedName(c.getName()) + " (" + c.getId() + ")";
+            String cardString = c.getTranslatedName() + " (" + c.getId() + ")";
             if (isOptional && !activator.getController().confirmAction(sa, null,
                     Localizer.getInstance().getMessage("lblChangeCombatantOption", cardString), null)) {
                 continue;

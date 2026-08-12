@@ -3,7 +3,8 @@ ManaCost:1 R
 Types:Creature Human Warrior
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraft | TriggerDescription$ At the beginning of your upkeep, draft a card from CARDNAME's spellbook, then exile it. Until end of turn, you may play that card.
-SVar:TrigDraft:DB$ Draft | Spellbook$ Boots of Speed,Cliffhaven Kitesail,Colossus Hammer,Dueling Rapier,Spare Dagger,Tormentor's Helm,Goldvein Pick,Jousting Lance,Mask of Immolation,Mirror Shield,Relic Axe,Rogue's Gloves,Scavenged Blade,Shield of the Realm,Ceremonial Knife | Zone$ Exile | RememberDrafted$ True | SubAbility$ DBEffect
+SVar:TrigDraft:DB$ Draft | Spellbook$ Boots of Speed,Cliffhaven Kitesail,Colossus Hammer,Dueling Rapier,Spare Dagger,Tormentor's Helm,Goldvein Pick,Jousting Lance,Mask of Immolation,Mirror Shield,Relic Axe,Rogue's Gloves,Scavenged Blade,Shield of the Realm,Ceremonial Knife | RememberDrafted$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Defined$ Remembered | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ExileOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of turn, you may play that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

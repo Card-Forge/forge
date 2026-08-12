@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Dr No
+Title=Dr No
+Icon=Dr No.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/Ivan_Draw_Go_-_Mono_White_Midrange_(Standard,_#1551589).dck
+Deck Type=constructed
+
+[Main]
+3 Serra Paragon
+3 Steel Seraph
+3 Loran of the Third Path
+3 Sanctuary Warden
+3 Spirited Companion
+3 Ambitious Farmhand
+4 Reckoner Bankbuster
+4 Lay Down Arms
+2 Touch the Spirit Realm
+4 Wedding Announcement
+4 The Wandering Emperor
+1 Eiganjo, Seat of the Empire
+2 Mishra's Foundry
+4 Roadside Reliquary
+17 Plains
+[Sideboard]
+2 Destroy Evil
+2 Elspeth Resplendent
+2 Farewell
+2 Fateful Absence
+3 Temporary Lockdown
+4 Sunset Revelry

@@ -1,0 +1,10 @@
+Name:Toph, the Blind Bandit
+ManaCost:2 G
+Types:Legendary Creature Human Warrior Ally
+PT:*/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEarthbend | TriggerDescription$ When NICKNAME enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:TrigEarthbend:DB$ Earthbend | Num$ 2
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ NICKNAME's power is equal to the number of +1/+1 counters on lands you control.
+SVar:X:Count$Valid Land.YouCtrl$CardCounters.P1P1
+DeckHas:Ability$Counters
+Oracle:When Toph enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)\nToph's power is equal to the number of +1/+1 counters on lands you control.

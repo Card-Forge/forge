@@ -1,0 +1,8 @@
+Name:Skateboard
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When this Equipment enters, tap target permanent.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste | AddPower$ 1 | Description$ Equipped creature gets +1/+0 and has haste.
+Oracle:When this Equipment enters, tap target permanent.\nEquipped creature gets +1/+0 and has haste.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

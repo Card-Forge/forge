@@ -1,0 +1,8 @@
+Name:Prismari, the Inspiration
+ManaCost:5 U R
+Types:Legendary Creature Elder Dragon
+PT:7/7
+K:Flying
+K:Ward:PayLife<5>
+S:Mode$ Continuous | Affected$ Instant.wasCastByYou,Sorcery.wasCastByYou | AffectedZone$ Stack | AddKeyword$ Storm | Description$ Instant and sorcery spells you cast have storm. (Whenever you cast an instant or sorcery spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Oracle:Flying\nWard—Pay 5 life.\nInstant and sorcery spells you cast have storm. (Whenever you cast an instant or sorcery spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Boba Fett
+Title=Boba Fett
+Icon=Boba Fett.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/Magic-League_Modern_Trial_01-03-2012/Mrrr_-_Boros_(Modern,_#27260).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Figure of Destiny
+1 Goblin Bushwhacker
+4 Goblin Guide
+4 Grim Lavamancer
+3 Plated Geopede
+1 Ranger of Eos
+4 Steppe Lynx
+4 Lightning Bolt
+3 Lightning Helix
+4 Path to Exile
+3 Searing Blaze
+1 Oblivion Ring
+2 Elspeth, Knight-Errant
+4 Arid Mesa
+4 Marsh Flats
+5 Mountain
+3 Plains
+3 Sacred Foundry
+4 Scalding Tarn
+[Sideboard]
+4 Blood Moon
+2 Burrenton Forge-Tender
+2 Duergar Hedge-Mage
+2 Grafdigger's Cage
+1 Kataki, War's Wage
+2 Sulfur Elemental
+2 Thalia, Guardian of Thraben

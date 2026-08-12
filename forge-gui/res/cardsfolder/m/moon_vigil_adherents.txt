@@ -1,0 +1,8 @@
+Name:Moon-Vigil Adherents
+ManaCost:2 G G
+Types:Creature Elf Druid
+PT:0/0
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ This creature gets +1/+1 for each creature you control and each creature card in your graveyard.
+SVar:X:Count$ValidBattlefield,Graveyard Creature.YouCtrl
+Oracle:Trample\nThis creature gets +1/+1 for each creature you control and each creature card in your graveyard.

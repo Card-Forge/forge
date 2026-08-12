@@ -4,7 +4,7 @@ URL:http://imgur.com/a/EeY71
 Goal:Play the Specified Permanent
 Targets:Card.YouCtrl+namedBroodstar
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:You can't win the game. Instead, play Broodstar before the end of your turn.\nYou know that the top four cards in your library are Ancient Tomb, Voltaic Key, Channel, and Welding Jar (in this order).
 [state]
 humanlife=7

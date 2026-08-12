@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Dr Doom
+Title=Dr Doom
+Icon=Dr Doom.jpg
+Difficulty=Medium
+Description=Dark_Ascension/Standard_Bronze_TCQ_-_Camillus,_NY_-_2-18-12/KevinPoncelet_-_Get_'er_Dungrove_(Standard,_#26485).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Acidic Slime
+1 Bellowing Tanglewurm
+4 Birds of Paradise
+4 Dungrove Elder
+4 Llanowar Elves
+3 Phyrexian Metamorph
+4 Strangleroot Geist
+1 Vorapede
+4 Sword of War and Peace
+1 Dismember
+4 Green Sun's Zenith
+2 Overrun
+2 Garruk, Primal Hunter
+24 Forest
+[Sideboard]
+1 Daybreak Ranger
+1 Glissa, the Traitor
+2 Naturalize
+2 Nihil Spellbomb
+3 Ratchet Bomb
+2 Surgical Extraction
+2 Sword of Feast and Famine
+1 Tumble Magnet

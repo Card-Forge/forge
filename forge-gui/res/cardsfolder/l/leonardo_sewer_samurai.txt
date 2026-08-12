@@ -1,0 +1,13 @@
+Name:Leonardo, Sewer Samurai
+ManaCost:3 W
+Types:Legendary Creature Mutant Ninja Turtle Samurai
+PT:3/3
+K:Sneak:2 W W
+K:Double Strike
+S:Mode$ Continuous | Affected$ Creature.nonLand+YouOwn+powerLE1,Creature.nonLand+YouOwn+toughnessLE1 | Condition$ PlayerTurn | MayPlay$ True | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ During your turn, you may cast creature spells with power or toughness 1 or less from your graveyard. If you cast a spell this way, that creature enters with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)
+T:Mode$ SpellCast | ValidCard$ Card.CastSa Spell.MayPlaySource | Execute$ TrigEffect | Static$ True | TriggerZones$ Battlefield
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ReMoved | RememberObjects$ TriggeredCard
+SVar:ReMoved:Event$ Moved | Origin$ Stack | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBCounter
+SVar:ETBCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ FINALITY | CounterNum$ 1 | SubAbility$ RemoveSelf
+SVar:RemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:Sneak {2}{W}{W}\nDouble strike\nDuring your turn, you may cast creature spells with power or toughness 1 or less from your graveyard. If you cast a spell this way, that creature enters with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)

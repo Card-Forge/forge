@@ -27,9 +27,9 @@ import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
-import forge.util.Callback;
 import forge.util.MyRandom;
 
 import java.util.Arrays;
@@ -52,6 +52,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     static PointOfInterestChanges changes;
 
     private Array<DialogData> entryDialog;
+    private AdventureEventData.AdventureEventMatch humanMatch = null;
 
     private int packsSelected = 0; //Used for meta drafts, booster drafts will use existing logic.
 
@@ -124,26 +125,17 @@ public class EventScene extends MenuScene implements IAfterMatch {
         //todo: add translation
         decline.name = "Do not enter event";
 
-        enterWithCoin.callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
-                refresh();
-            }
+        enterWithCoin.callback = (result) -> {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
+            refresh();
         };
-        enterWithShards.callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
-                refresh();
-            }
+        enterWithShards.callback = (result) -> {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
+            refresh();
         };
-        enterWithGold.callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
-                refresh();
-            }
+        enterWithGold.callback = (result) -> {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
+            refresh();
         };
 
         introDialog.options = new DialogData[4];
@@ -187,19 +179,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
         });
 
         editDeck = ui.findActor("editDeck");
-        editDeck.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if (currentEvent.format == AdventureEventController.EventFormat.Draft
-                        && (currentEvent.eventStatus == Ready || currentEvent.eventStatus == Started)) {
-                    DraftScene.instance().loadEvent(currentEvent);
-                    Forge.switchScene(DraftScene.instance());
-                } else if (currentEvent.format == AdventureEventController.EventFormat.Jumpstart && currentEvent.eventStatus == Ready) {
-                    DeckEditScene.getInstance().loadEvent(currentEvent);
-                    Forge.switchScene(DeckEditScene.getInstance());
-                }
-            }
-        });
 
         Window window = ui.findActor("scrollWindow");
         root = ui.findActor("enemies");
@@ -354,6 +333,8 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 editDeck.setVisible(false);
                 if (currentEvent.getDraft() != null) {
                     advance.setText("Enter Draft");
+                } else if (currentEvent.format == AdventureEventController.EventFormat.Sealed) {
+                    advance.setText("Create Deck");
                 } else {
                     advance.setText("Select Deck");
                 }
@@ -427,7 +408,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     @Override
     public void enter() {
         super.enter();
-        GameHUD.getInstance().switchAudio();
+        GameHUD.getInstance().updateBGM();
         scrollContainer.clear();
 
         if (money != null) {
@@ -446,33 +427,39 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void editDeck() {
-        if (currentEvent.eventStatus == Ready) {
-            DraftScene.instance().loadEvent(currentEvent);
-            Forge.switchScene(DraftScene.instance());
-        }
+        DeckEditScene.getInstance().loadEvent(currentEvent);
+        Forge.switchScene(DeckEditScene.getInstance());
     }
 
     public void advance() {
         switch (currentEvent.eventStatus) {
             case Available:
                 activate(entryDialog); //Entry fee pop-up
-
                 break;
             case Entered: //Start draft or select deck
                 //Show progress / wait indicator? Draft can take a while to generate
                 switch (currentEvent.format) {
                     case Draft:
-                        DraftScene.instance().loadEvent(currentEvent);
-                        Forge.switchScene(DraftScene.instance());
+                        editDeck();
+                        break;
+                    case Sealed:
+                        if (currentEvent.registeredDeck.get(DeckSection.Sideboard) == null) {
+                            currentEvent.generateSealedPool();
+                        }
+                        currentEvent.eventStatus = Ready;
+                        editDeck();
                         break;
                     case Jumpstart:
                         loadMetaDraft();
                 }
                 break;
             case Ready: //Commit to selected deck
-                //Add confirmation pop-up?
+                if(!validateDeck())
+                    break;
                 currentEvent.startEvent();
             case Started: //Play next round
+                if(!validateDeck())
+                    break;
                 advance.setDisabled(true);
                 startRound();
                 break;
@@ -483,7 +470,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 break;
 
             case Abandoned: //Show results but don't allow any interaction
-
                 break;
         }
         refresh();
@@ -500,7 +486,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void startRound() {
-        for (AdventureEventData.AdventureEventMatch match : currentEvent.matches.get(currentEvent.currentRound)) {
+        for (AdventureEventData.AdventureEventMatch match : currentEvent.getMatches(currentEvent.currentRound)) {
             match.round = currentEvent.currentRound;
             if (match.winner != null) continue;
 
@@ -549,9 +535,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
         }
     }
 
-    AdventureEventData.AdventureEventMatch humanMatch = null;
-
-    public void setWinner(boolean winner) {
+    public void setWinner(boolean winner, boolean isArena) {
         if (winner) {
             humanMatch.winner = humanMatch.p1;
             humanMatch.p1.wins++;
@@ -564,13 +548,13 @@ public class EventScene extends MenuScene implements IAfterMatch {
             currentEvent.matchesLost++;
         }
 
-        if (winner) {
-            //AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
-            //AdventureQuestController.instance().showQuestDialogs(MapStage.this);
-        } else {
-//            AdventureQuestController.instance().updateQuestsLose(currentMob);
+//        if (winner) {
+//            AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
 //            AdventureQuestController.instance().showQuestDialogs(MapStage.this);
-        }
+//        } else {
+//           AdventureQuestController.instance().updateQuestsLose(currentMob);
+//           AdventureQuestController.instance().showQuestDialogs(MapStage.this);
+//        }
 
         finishRound();
     }
@@ -590,6 +574,11 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void loadMetaDraft() {
+        if(currentEvent.jumpstartBoosters.isEmpty()) {
+            metaDraftTable.setVisible(false);
+            return;
+        }
+
         metaDraftTable.setVisible(true);
 
         metaDraftTable.clear();
@@ -633,6 +622,24 @@ public class EventScene extends MenuScene implements IAfterMatch {
             metaDraftTable.add(selectButton).padLeft(10);
         }
         eventPages[0] = metaDraftTable;
+    }
+
+    private boolean validateDeck() {
+        String deckError = currentEvent.format.getDeckFormat().getDeckConformanceProblem(currentEvent.registeredDeck);
+
+        if(deckError != null) {
+            DialogData warning = new DialogData();
+            warning.locname = "lblInvalidDeck";
+            warning.text = "Deck " + deckError; //Needs localization but so does getDeckConformanceProblem.
+
+            DialogData dismiss = new DialogData();
+            dismiss.locname = "lblOK";
+            warning.options = new DialogData[]{dismiss};
+
+            loadDialog(warning);
+            return false;
+        }
+        return true;
     }
 
     private boolean selectedJumpstartPackIsLast(Deck selectedPack) {

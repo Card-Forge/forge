@@ -3,6 +3,7 @@ package forge.game.cost;
 public interface ICostVisitor<T> {
 
     T visit(CostBehold cost);
+    T visit(CostBeholdExile cost);
     T visit(CostGainControl cost);
     T visit(CostChooseColor cost);
     T visit(CostChooseCreatureType cost);
@@ -34,11 +35,13 @@ public interface ICostVisitor<T> {
     T visit(CostRemoveAnyCounter cost);
     T visit(CostRemoveCounter cost);
     T visit(CostPutCounter cost);
+    T visit(CostPutCounterYou cost);
     T visit(CostUntapType cost);
     T visit(CostUntap cost);
     T visit(CostUnattach cost);
     T visit(CostTapType cost);
     T visit(CostPayShards cost);
+    T visit(CostBlight cost);
 
     class Base<T> implements ICostVisitor<T> {
 
@@ -46,22 +49,18 @@ public interface ICostVisitor<T> {
         public T visit(CostGainControl cost) {
             return null;
         }
-
         @Override
         public T visit(CostChooseColor cost) {
             return null;
         }
-
         @Override
         public T visit(CostChooseCreatureType cost) {
             return null;
         }
-
         @Override
         public T visit(CostCollectEvidence cost) {
             return null;
         }
-
         @Override
         public T visit(CostDiscard cost) {
             return null;
@@ -70,160 +69,139 @@ public interface ICostVisitor<T> {
         public T visit(CostBehold cost) {
             return null;
         }
-
+        @Override
+        public T visit(CostBeholdExile cost) {
+            return null;
+        }
         @Override
         public T visit(CostDamage cost) {
             return null;
         }
-
         @Override
         public T visit(CostDraw cost) {
             return null;
         }
-
         @Override
         public T visit(CostExile cost) {
             return null;
         }
-
         @Override
         public T visit(CostExileFromStack cost) {
             return null;
         }
-
         @Override
         public T visit(CostExiledMoveToGrave cost) {
             return null;
         }
-
         @Override
         public T visit(CostExert cost) {
             return null;
         }
-
         @Override
         public T visit(CostEnlist cost) {
             return null;
         }
-
         @Override
         public T visit(CostFlipCoin cost) {
             return null;
         }
-
         @Override
         public T visit(CostForage cost) {
             return null;
         }
-
         @Override
         public T visit(CostRollDice cost) {
             return null;
         }
-
         @Override
         public T visit(CostMill cost) {
             return null;
         }
-
         @Override
         public T visit(CostAddMana cost) {
             return null;
         }
-
         @Override
         public T visit(CostPayLife cost) {
             return null;
         }
-
         @Override
         public T visit(CostPayEnergy cost) {
             return null;
         }
-
         @Override
         public T visit(CostGainLife cost) {
             return null;
         }
-
         @Override
         public T visit(CostPartMana cost) {
             return null;
         }
-
         @Override
         public T visit(CostPromiseGift cost) {
             return null;
         }
-
         @Override
         public T visit(CostPutCardToLib cost) {
             return null;
         }
-
         @Override
         public T visit(CostTap cost) {
             return null;
         }
-
         @Override
         public T visit(CostSacrifice cost) {
             return null;
         }
-
         @Override
         public T visit(CostReturn cost) {
             return null;
         }
-
         @Override
         public T visit(CostReveal cost) {
             return null;
         }
-
         @Override
         public T visit(CostRevealChosen cost) {
             return null;
         }
-
         @Override
         public T visit(CostRemoveAnyCounter cost) {
             return null;
         }
-
         @Override
         public T visit(CostRemoveCounter cost) {
             return null;
         }
-
         @Override
         public T visit(CostPutCounter cost) {
             return null;
         }
-
+        @Override
+        public T visit(CostPutCounterYou cost) {
+            return null;
+        }
         @Override
         public T visit(CostUntapType cost) {
             return null;
         }
-
         @Override
         public T visit(CostUntap cost) {
             return null;
         }
-
         @Override
         public T visit(CostUnattach cost) {
             return null;
         }
-
         @Override
         public T visit(CostTapType cost) {
             return null;
         }
-
         @Override
         public T visit(CostPayShards cost) {
             return null;
         }
+        @Override
+        public T visit(CostBlight cost) { return null; }
     }
 }

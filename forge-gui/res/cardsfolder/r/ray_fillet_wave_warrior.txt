@@ -1,0 +1,9 @@
+Name:Ray Fillet, Wave Warrior
+ManaCost:2 U
+Types:Legendary Creature Fish Mutant
+PT:0/2
+K:Flying
+K:Evolve
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+HasCounters | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control with a counter on it deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Flying\nEvolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nWhenever a creature you control with a counter on it deals combat damage to a player, draw a card.

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/US_National_Qualifier_-_Stratford/Frank_Appleby_Jr_-_Eldrazi_Green_(Standard,_#13997).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Emrakul, the Aeons Torn
+4 Joraga Treespeaker
+4 Overgrown Battlement
+4 Primeval Titan
+3 Ulamog, the Infinite Gyre
+2 Wall of Tanglecord
+2 Wurmcoil Engine
+4 Summoning Trap
+4 Explore
+2 Green Sun's Zenith
+4 Growth Spasm
+4 Eldrazi Temple
+1 Eye of Ugin
+12 Forest
+3 Khalni Garden
+2 Mystifying Maze
+4 Tectonic Edge
+[Sideboard]
+3 Acidic Slime
+2 All Is Dust
+3 Nature's Claim
+3 Obstinate Baloth
+3 Tumble Magnet

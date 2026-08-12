@@ -1,0 +1,6 @@
+Name:Purple Dragon Punks
+ManaCost:1 R
+Types:Creature Human Rogue
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ R | RestrictValid$ Spell.Artifact,Activated | SpellDescription$ Add {U}. Spend this mana only to cast an artifact spell or activate an ability.
+Oracle:{T}: Add {R}. Spend this mana only to cast an artifact spell or to activate an ability.

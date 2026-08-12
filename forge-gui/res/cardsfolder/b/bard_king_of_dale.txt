@@ -1,0 +1,12 @@
+Name:Bard, King of Dale
+ManaCost:4 W U
+Types:Legendary Creature Human Noble Archer
+PT:3/5
+K:Reach
+K:Vigilance
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | NotFirstCardInDrawStep$ True | ReplaceWith$ DrawTwo | Description$ If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.
+SVar:DrawTwo:DB$ Draw | Defined$ You | NumCards$ 2
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DoubleToken | Description$ If one or more tokens would be created under your control, twice that many of those tokens are created instead.
+SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount
+DeckHints:Ability$Token
+Oracle:Reach, vigilance\nIf you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.\nIf one or more tokens would be created under your control, twice that many of those tokens are created instead.

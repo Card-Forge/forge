@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Gbadu
+Title=Gbadu
+Icon=Gbadu.jpg
+Difficulty=Medium
+Description=Zendikar/Magic-League_Standard_Trial_10-12-09/Pegachris_-_UW_Control_(Standard,_#3326).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+4 Sphinx of Jwar Isle
+4 Courier's Capsule
+4 Flashfreeze
+4 Negate
+4 Path to Exile
+4 Day of Judgment
+2 Martial Coup
+2 Mind Spring
+4 Oblivion Ring
+2 Gargoyle Castle
+4 Glacial Fortress
+7 Island
+7 Plains
+4 Sejiri Refuge
+[Sideboard]
+4 Cancel
+4 Celestial Purge
+4 Luminarch Ascension
+3 Relic of Progenitus

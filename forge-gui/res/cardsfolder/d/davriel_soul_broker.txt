@@ -12,7 +12,7 @@ SVar:Conjure:DB$ MakeCard | Conjure$ True | Name$ Manor Guardian | Zone$ Hand | 
 SVar:Return2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | AtRandom$ True | SubAbility$ DBEffect | SpellDescription$ Return two random creature cards from your graveyard to your hand. They perpetually gain +1/+1.
 SVar:DBEffect:DB$ Pump | PumpZone$ Hand | Defined$ Remembered | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:ReturnBig:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.cmcEQV | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | AtRandom$ True | SpellDescription$ Return a random creature card with the highest mana value from among cards in your graveyard to the battlefield.
-SVar:V:Count$ValidGraveyard Creature.YouOwn$GreatestCMC
+SVar:V:Count$ValidGraveyard Creature.YouOwn$GreatestCardManaCost
 SVar:EmblemBuff:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 5) | StaticAbilities$ YoursP2Pow | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +2/+0."
 SVar:YoursP2Pow:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ 2 | AffectedZone$ Battlefield | Description$ Creatures you control get +2/+0.
 SVar:EmblemReduceCost:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 6) | StaticAbilities$ CostBLess | Duration$ Permanent | SpellDescription$ You get an emblem with "Spells you cast cost {B} less to cast."

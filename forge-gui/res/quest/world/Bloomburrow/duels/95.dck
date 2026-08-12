@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Bumba
+Title=Bumba
+Icon=Bumba.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/summon_legend_-_Jeskai_Ocelot_(Modern,_#2182612).dck
+Deck Type=constructed
+
+[Main]
+4 Ajani, Nacatl Pariah
+4 Amped Raptor
+4 Guide of Souls
+4 Mockingbird
+4 Ocelot Pride
+3 Phantasmal Image
+3 Phlage, Titan of Fire's Fury
+4 Ranger-Captain of Eos
+4 Galvanic Discharge
+4 Static Prison
+2 Aether Hub
+1 Meticulous Archive
+4 Arid Mesa
+1 Elegant Parlor
+4 Flooded Strand
+3 Sacred Foundry
+1 Arena of Glory
+2 Plains
+2 Windswept Heath
+2 Hallowed Fountain
+[Sideboard]
+2 Deafening Silence
+2 Suncleanser
+4 White Orchid Phantom
+3 Soul-Guide Lantern
+4 Sanctifier en-Vec

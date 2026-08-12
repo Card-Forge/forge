@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Bugs Bunny
+Title=Bugs Bunny
+Icon=Bugs Bunny.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Clancey_Cook_-_Azorius_Soul_Sisters_(Standard,_#1173269).dck
+Deck Type=constructed
+
+[Main]
+3 Daxos, Blessed by the Sun
+3 Heliod, Sun-Crowned
+3 Alseid of Life's Bounty
+4 Protean Thaumaturge
+4 Archon of Sun's Grace
+4 Righteous Valkyrie
+4 Speaker of the Heavens
+2 Shadowspear
+2 Shatter the Sky
+3 Of One Mind
+1 Banishing Light
+2 Omen of the Sea
+2 Ominous Seas
+2 Heliod's Punishment
+2 Sentinel's Eyes
+3 Staggering Insight
+3 Dramatic Finale
+3 Frogify
+2 Tranquil Cove
+2 Temple of Enlightenment
+3 Castle Ardenvale
+4 Hengegate Pathway
+7 Island
+13 Plains
+[Sideboard]

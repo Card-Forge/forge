@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Isperia
+Title=Isperia
+Icon=Isperia.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Bayesta_93_-_Golgari_Cauldron_(Modern,_#2281991).dck
+Deck Type=constructed
+
+[Main]
+1 Aftermath Analyst
+4 Delighted Halfling
+1 Fulminator Mage
+4 Orcish Bowmasters
+1 Haywire Mite
+1 Overlord of the Balemurk
+1 Sheoldred, the Apocalypse
+1 Nihil Spellbomb
+1 Shadowspear
+4 The One Ring
+4 Agatha's Soul Cauldron
+2 Abrupt Decay
+4 Fatal Push
+4 Malevolent Rumble
+4 Urza's Saga
+4 Grist, the Hunger Tide
+2 Boseiju, Who Endures
+2 Swamp
+2 Shifting Woodland
+2 Overgrown Tomb
+1 Polluted Delta
+2 Forest
+4 Verdant Catacombs
+2 Underground Mortuary
+1 Urborg, Tomb of Yawgmoth
+1 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+3 Culling Ritual
+2 Damping Sphere
+3 Fulminator Mage
+1 Ghost Vacuum
+2 Haywire Mite
+1 Pithing Needle
+1 Shoot the Sheriff
+1 Undercity Informer
+1 Veil of Summer

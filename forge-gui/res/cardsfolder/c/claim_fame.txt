@@ -11,5 +11,5 @@ Name:Fame
 ManaCost:1 R
 Types:Sorcery
 K:Aftermath
-A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ Haste | SpellDescription$ Target creature gets +2/+0 and gains haste until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | KW$ Haste | SpellDescription$ Target creature gets +2/+0 and gains haste until end of turn.
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nTarget creature gets +2/+0 and gains haste until end of turn.

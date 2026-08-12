@@ -5,7 +5,7 @@ PT:2/1
 K:Multikicker:2
 K:etbCounter:P1P1:XKicked:no Condition:CARDNAME enters with a +1/+1 counter on it for each time it was kicked.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals damage equal to its power to target creature.
-SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ Y
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ Y
 SVar:X:Count$CardCounters.P1P1
 SVar:XKicked:Count$TimesKicked
 SVar:Y:Count$CardPower

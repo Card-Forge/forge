@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=SerendibGenie
+Title=SerendibGenie
+Icon=SerendibGenie.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/DiaboDeCapote#95913_-_Abzan_Lifegain_(Standard,_#1324168).dck
+Deck Type=constructed
+
+[Main]
+1 Shaile, Dean of Radiance
+1 Valentin, Dean of the Vein
+2 Righteous Valkyrie
+4 Prosperous Innkeeper
+4 Kor Celebrant
+4 Celestial Unicorn
+4 Marauding Blight-Priest
+4 Voice of the Blessed
+4 Lunarch Veteran
+2 Disenchant
+4 Revitalize
+4 Hunt for Specimens
+2 Cleric Class
+3 Rune of Sustenance
+2 Blossoming Sands
+2 Jungle Hollow
+3 Forest
+3 Swamp
+4 Scoured Barrens
+10 Plains
+[Sideboard]
+3 Containment Breach
+4 Pest Summoning

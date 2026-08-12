@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sauron
+Title=Sauron
+Icon=Sauron.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/TacoFarmer_-_Boros_Pia_(Standard,_#1964995).dck
+Deck Type=constructed
+
+[Main]
+4 Pia Nalaar, Consul of Revival
+2 Heartflame Duelist
+3 Virtue of Courage
+4 Lightning Helix
+4 Play with Fire
+1 Torch the Tower
+3 Reckless Impulse
+4 Wrenn's Resolve
+2 Nahiri's Warcrafting
+1 Invasion of Kaldheim
+4 Quintorius Kand
+4 Chandra, Dressed to Kill
+2 Cavern of Souls
+4 Restless Bivouac
+4 Battlefield Forge
+4 Sundown Pass
+1 Eiganjo, Seat of the Empire
+7 Mountain
+1 Plains
+1 Sokenzan, Crucible of Defiance
+[Sideboard]
+2 Destroy Evil
+4 End the Festivities
+4 Urabrask's Forge
+3 Lithomantic Barrage
+1 Invasion of Kaldheim
+1 Nahiri's Warcrafting

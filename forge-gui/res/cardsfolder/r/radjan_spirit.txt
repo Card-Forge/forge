@@ -2,5 +2,5 @@ Name:Radjan Spirit
 ManaCost:3 G
 Types:Creature Spirit
 PT:3/2
-A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn.
+A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn.
 Oracle:{T}: Target creature loses flying until end of turn.

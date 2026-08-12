@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ulasht
+Title=Ulasht
+Icon=Ulasht.jpg
+Difficulty=Easy
+Description=Shadows_over_Innistrad/PPTQ_Tabacchi_Volpone_-_Catanzaro_Lido,_Italy/Rocco_Barbera_-_Ramp_(Standard,_#630063).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Dragonlord Atarka
+1 Dragonmaster Outcast
+2 Drowner of Hope
+2 Jaddi Offshoot
+3 Ulamog, the Ceaseless Hunger
+4 World Breaker
+2 Hedron Archive
+4 Kozilek's Return
+4 Explosive Vegetation
+4 Nissa's Pilgrimage
+4 Oath of Nissa
+4 Chandra, Flamecaller
+4 Cinder Glade
+8 Forest
+2 Island
+2 Mountain
+4 Sanctum of Ugin
+4 Shrine of the Forsaken Gods
+1 Wastes
+[Sideboard]
+1 Epiphany at the Drownyard
+3 Negate
+1 Radiant Flames
+1 Reality Smasher
+3 Rending Volley
+2 Thought-Knot Seer
+2 Tireless Tracker

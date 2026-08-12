@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=En Sabah Nur
+Title=En Sabah Nur
+Icon=En Sabah Nur.jpg
+Difficulty=Easy
+Description=Gatecrash/SCG_Standard_Open_Orlando/Ross_Lennon_-_Experiment_Jund_(Standard,_#48643).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Shaman
+3 Dreg Mangler
+4 Experiment One
+3 Falkenrath Aristocrat
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+3 Gore-House Chainwalker
+4 Rakdos Cackler
+2 Abrupt Decay
+2 Searing Spear
+3 Dreadbore
+2 Madcap Skills
+4 Blood Crypt
+1 Dragonskull Summit
+2 Forest
+4 Mountain
+4 Overgrown Tomb
+2 Rootbound Crag
+4 Stomping Ground
+1 Woodland Cemetery
+[Sideboard]
+3 Deathrite Shaman
+2 Domri Rade
+3 Duress
+2 Golgari Charm
+2 Thundermaw Hellkite
+2 Tragic Slip

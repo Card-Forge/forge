@@ -1,10 +1,9 @@
 package forge.adventure.data;
 
-import forge.util.Callback;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Dialog Data JSON loader class.
@@ -22,7 +21,7 @@ public class DialogData implements Serializable {
     public DialogData[] options = new DialogData[0];      //List of sub-dialogs. Show up as options in the current one.
     public boolean isDisabled = false;
 
-    public transient Callback callback;
+    public transient Consumer callback;
 
     public DialogData(){}
     public DialogData(DialogData other){
@@ -77,6 +76,7 @@ public class DialogData implements Serializable {
         public QuestFlag setMapFlag;      //Set map flag.
 
         public RewardData[] grantRewards = new RewardData[0];   //launch a RewardScene with the provided data.
+        public RewardData[] grantRewardsChoice = new RewardData[0];   //launch a RewardScene choice with the provided data.
         public String issueQuest; //Add quest with this ID to the player's questlog.
 
         public int addMapReputation = 0;  //Gives the player X reputation points in this POI. Negative to take.
@@ -109,6 +109,7 @@ public class DialogData implements Serializable {
                 setMapFlag.val = other.setMapFlag.val;
             }
             grantRewards = other.grantRewards.clone();
+            grantRewardsChoice = other.grantRewardsChoice.clone();
             issueQuest = other.issueQuest;
             addMapReputation = other.addMapReputation;
             POIReference = other.POIReference;

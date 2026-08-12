@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Nogita_takahiro_-_Wall_Ramp_(Modern,_#1217311).dck
+Deck Type=constructed
+
+[Main]
+1 Emrakul, the Aeons Torn
+1 Perimeter Captain
+1 Spike Feeder
+1 Heliod, Sun-Crowned
+2 Secret Door
+3 Axebane Guardian
+4 Drift of Phantasms
+4 Overgrown Battlement
+4 Wall of Blossoms
+4 Wall of Shards
+4 Wall of Roots
+4 Saruli Caretaker
+1 Staff of Domination
+3 Chord of Calling
+4 Collected Company
+1 Plains
+1 Forest
+1 Island
+1 Cavern of Souls
+1 Hallowed Fountain
+2 Temple Garden
+2 Breeding Pool
+2 Waterlogged Grove
+4 Misty Rainforest
+4 Windswept Heath
+[Sideboard]
+1 Knight of Autumn
+1 Sanctifier en-Vec
+1 Magus of the Moon
+1 Unmoored Ego
+1 Ensnaring Bridge
+1 Choke
+1 Beast Within
+1 High Alert
+2 Negate
+2 Prismatic Ending
+3 Veil of Summer

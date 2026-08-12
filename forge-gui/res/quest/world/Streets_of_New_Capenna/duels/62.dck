@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Mister Fantastic
+Title=Mister Fantastic
+Icon=Mister Fantastic.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Ben_DeBoer_-_Five-color_Zoo_(Modern,_#1377911).dck
+Deck Type=constructed
+
+[Main]
+2 Haktos the Unscarred
+4 General's Enforcer
+4 Fleetfoot Dancer
+4 Mantis Rider
+4 Territorial Kavu
+4 General Ferrous Rokiric
+1 Void Rend
+3 Terminate
+4 Obscura Charm
+4 Lightning Helix
+4 Boros Charm
+1 Plains
+1 Temple Garden
+1 Deserted Beach
+1 Sundown Pass
+1 Hallowed Fountain
+1 Godless Shrine
+1 Sacred Foundry
+1 Jetmir's Garden
+1 Indatha Triome
+1 Xander's Lounge
+1 Raffine's Tower
+3 Marsh Flats
+4 Arid Mesa
+4 Pillar of the Paruns
+[Sideboard]
+2 March of Otherworldly Light
+2 Void Rend
+3 Unmoored Ego
+4 Meddling Mage
+4 Rip Apart

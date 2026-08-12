@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Hagrid
+Title=Hagrid
+Icon=Hagrid.jpg
+Difficulty=Easy
+Description=./Standard/Final_Fantasy/Daniel_K_Wenrick_-_Izzet_Aggro_(Standard,_#2534368).dck
+Deck Type=constructed
+
+[Main]
+3 Monastery Swiftspear
+3 Slickshot Show-Off
+3 Vivi Ornitier
+1 Thundertrap Trainer
+4 Cori-Steel Cutter
+4 Into the Flood Maw
+4 Monstrous Rage
+4 Opt
+2 Torch the Tower
+4 Sleight of Hand
+4 Stock Up
+4 Stormchaser's Talent
+5 Island
+4 Riverpyre Verge
+4 Shivan Reef
+4 Spirebluff Canal
+3 Mountain
+[Sideboard]
+3 Abrade
+3 Soul-Guide Lantern
+2 Drake Hatcher
+2 Ral, Crackling Wit
+2 Sunspine Lynx
+2 Witchstalker Frenzy
+1 Torch the Tower

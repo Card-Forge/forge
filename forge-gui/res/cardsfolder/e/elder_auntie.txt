@@ -1,0 +1,7 @@
+Name:Elder Auntie
+ManaCost:2 R
+Types:Creature Goblin Warlock
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 black and red Goblin creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ br_1_1_goblin | TokenOwner$ You
+Oracle:When this creature enters, create a 1/1 black and red Goblin creature token.

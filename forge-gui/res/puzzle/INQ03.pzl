@@ -4,7 +4,7 @@ URL:http://imgur.com/a/EeY71
 Goal:Play the Specified Permanent
 Targets:Card.YouCtrl+namedMarit Lage
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:You can't win the game. Instead, you need to remove 10 ice counters from Dark Depths and create a Marit Lage token.\nDesperate Ritual is the only card in your library that will be drawn in your Draw step.
 [state]
 humanlife=1

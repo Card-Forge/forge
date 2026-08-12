@@ -1,0 +1,12 @@
+Name:Turtles in Time
+ManaCost:5 U U
+Types:Sorcery
+A:SP$ ChangeZoneAll | ChangeType$ Creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBGenericChoice | SpellDescription$ Return all creatures to their owners' hands. Each player may shuffle their hand and graveyard into their library, then each player who does draws seven cards. Exile CARDNAME.
+SVar:DBGenericChoice:DB$ GenericChoice | Defined$ Player | TempRemember$ Chooser | Choices$ Stargate,Homebody | ShowChoice$ ExceptSelf | SubAbility$ DBTimetwister | AILogic$ Timetwister
+SVar:Stargate:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Stargate | SpellDescription$ Yes, I want to shuffle my hand and graveyard into my library.
+SVar:Homebody:DB$ Pump | Defined$ Remembered | SpellDescription$ NO, I DO NOT want to shuffle my hand and graveyard into my library.
+SVar:DBTimetwister:DB$ ChangeZoneAll | ChangeType$ Card.OwnedBy Player.NotedForStargate | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | SubAbility$ DBRepeatDraw | StackDescription$ None
+SVar:DBRepeatDraw:DB$ Draw | Defined$ Player.NotedForStargate | NumCards$ 7 | SubAbility$ DBClearNoted | StackDescription$ None
+SVar:DBClearNoted:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Stargate | SubAbility$ DBChange | StackDescription$ None
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
+Oracle:Return all creatures to their owners' hands. Each player may shuffle their hand and graveyard into their library, then each player who does draws seven cards.\nExile Turtles in Time.

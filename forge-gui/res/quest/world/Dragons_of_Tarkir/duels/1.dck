@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=The Court Jester
+Title=The Court Jester
+Icon=The Court Jester.jpg
+Difficulty=Medium
+Description=Dragons_of_Tarkir/SCG_Elite_IQ_Amarillo/Paul_Whitcomb_-_Bant_(Standard,_#287040).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Deathmist Raptor
+3 Den Protector
+4 Elvish Mystic
+4 Fleecemane Lion
+2 Stratus Dancer
+4 Sylvan Caryatid
+4 Whisperwood Elemental
+2 Disdainful Stroke
+3 Mastery of the Unseen
+2 Elspeth, Sun's Champion
+1 Flooded Strand
+3 Forest
+1 Island
+2 Mana Confluence
+2 Nykthos, Shrine to Nyx
+2 Plains
+1 Temple of Mystery
+4 Temple of Plenty
+4 Windswept Heath
+4 Yavimaya Coast
+[Sideboard]
+2 Dromoka's Command
+2 Glare of Heresy
+2 Hornet Nest
+1 Negate
+2 Plummet
+1 Ugin, the Spirit Dragon
+2 Valorous Stance

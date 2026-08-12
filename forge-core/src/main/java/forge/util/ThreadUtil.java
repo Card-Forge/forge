@@ -4,7 +4,7 @@ import java.util.concurrent.*;
 
 public class ThreadUtil {
     static {
-        System.out.printf("(ThreadUtil first call): Running on a machine with %d cpu core(s)%n", Runtime.getRuntime().availableProcessors() );
+        System.out.printf("(ThreadUtil first call): Running with priority %d%n", Thread.currentThread().getPriority());
     }
 
     private static class WorkerThreadFactory implements ThreadFactory {

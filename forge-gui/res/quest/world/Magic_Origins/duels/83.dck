@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Treebeard
+Title=Treebeard
+Icon=Treebeard.jpg
+Difficulty=Hard
+Description=../Modern/Magic_Origins/Modern_Daily_#8986429/Nyad55_-_Merfolk_(Modern,_#337600).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Coralhelm Commander
+4 Harbinger of the Tides
+1 Kira, Great Glass-Spinner
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Master of Waves
+1 Phantasmal Image
+4 Silvergill Adept
+2 Vendilion Clique
+4 AEther Vial
+1 Dismember
+2 Mana Leak
+1 Negate
+2 Spell Pierce
+4 Spreading Seas
+2 Cavern of Souls
+10 Island
+1 Minamo, School at Water's Edge
+4 Mutavault
+3 Wanderwine Hub
+[Sideboard]
+1 Annul
+2 Hibernation
+2 Hurkyl's Recall
+2 Relic of Progenitus
+2 Remand
+2 Spellskite
+3 Tidebinder Mage

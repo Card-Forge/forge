@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Insanity
+Description=Insanity embraces madness. Discard for value and deploy threats that love the graveyard.
+Deck Type=constructed
+Set=TOR
+Image=insanity.jpg
+[main]
+4 Swamp|ODY|1
+4 Swamp|ODY|2
+4 Swamp|ODY|3
+4 Forest|ODY|1
+3 Forest|ODY|2
+3 Forest|ODY|3
+2 Tainted Wood|TOR
+1 Anurid Scavenger|TOR
+2 Arrogant Wurm|TOR
+3 Basking Rootwalla|TOR
+2 Boneshard Slasher|TOR
+2 Carrion Rats|TOR
+2 Centaur Veteran|TOR
+1 Grotesque Hybrid|TOR
+2 Krosan Archer|ODY
+2 Krosan Constrictor|TOR
+1 Nantuko Blightcutter|TOR
+1 Nantuko Cultivator|TOR
+3 Putrid Imp|TOR
+3 Wild Mongrel|ODY
+2 Muscle Burst|ODY
+2 Sylvan Might|ODY
+2 Waste Away|TOR
+2 Acorn Harvest|TOR
+1 Narcissism|TOR
+2 Strength of Lunacy|TOR
+[sideboard]

@@ -1,0 +1,8 @@
+Name:Beifong's Bounty Hunters
+ManaCost:2 B G
+Types:Creature Human Mercenary
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonLand+YouCtrl | Execute$ TrigEarthbend | TriggerDescription$ Whenever a nonland creature you control dies, earthbend X, where X is that creature's power. (Target land you control becomes a 0/0 creature with haste that's still a land. Put X +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:TrigEarthbend:DB$ Earthbend | Num$ X
+SVar:X:TriggeredCard$CardPower
+Oracle:Whenever a nonland creature you control dies, earthbend X, where X is that creature's power. (Target land you control becomes a 0/0 creature with haste that's still a land. Put X +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)

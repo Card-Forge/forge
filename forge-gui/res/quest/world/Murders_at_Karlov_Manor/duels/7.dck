@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Bridge Troll
+Title=Bridge Troll
+Icon=Bridge Troll.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Arkany1_-_Bant_Toxic_(Standard,_#2006477).dck
+Deck Type=constructed
+
+[Main]
+4 Crawling Chorus
+4 Skrelv, Defector Mite
+4 Venerated Rotpriest
+2 Bloated Contaminator
+3 Slaughter Singer
+3 Annex Sentry
+4 Fading Hope
+2 Bring the Ending
+4 March of Swirling Mist
+4 Serum Snare
+4 Skrelv's Hive
+3 Adarkar Wastes
+1 Plains
+1 Island
+2 Mirrex
+1 Eiganjo, Seat of the Empire
+4 Razorverge Thicket
+4 Seachrome Coast
+4 The Seedcore
+2 Yavimaya Coast
+[Sideboard]
+1 Annex Sentry
+4 Destroy Evil
+4 Knockout Blow
+3 Negate
+1 Melira, the Living Cure
+2 Doorkeeper Thrull

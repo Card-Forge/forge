@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent.!token+YouOwn | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken permanent is put into your graveyard from the battlefield, CARDNAME deals 1 damage to you.
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
-A:AB$ GainControl | Cost$ Sac<1/Creature> | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent gains control of CARDNAME. (This effect lasts indefinitely.)
+A:AB$ GainControl | Cost$ Sac<1/Creature> | Defined$ Self | ValidTgts$ Opponent | SpellDescription$ Target opponent gains control of CARDNAME. (This effect lasts indefinitely.)
 SVar:SacMe:4
 AI:RemoveDeck:All
 Oracle:Whenever a nontoken permanent is put into your graveyard from the battlefield, Jinxed Ring deals 1 damage to you.\nSacrifice a creature: Target opponent gains control of Jinxed Ring. (This effect lasts indefinitely.)

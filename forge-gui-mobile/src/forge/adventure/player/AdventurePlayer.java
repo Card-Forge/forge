@@ -31,6 +31,7 @@ import forge.util.ItemPool;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Class that represents the player (not the player sprite)
@@ -38,19 +39,22 @@ import java.util.*;
 public class AdventurePlayer implements Serializable, SaveFileContent {
     public static final int MIN_DECK_COUNT = 10;
     // this is a purely arbitrary limit, could be higher or lower; just meant as some sort of reasonable limit for the user
-    public static final int MAX_DECK_COUNT = 20;
+    private int maxDeckCount = 20;
     // Player profile data.
     private String name;
     private int heroRace;
     private int avatarIndex;
     private boolean isFemale;
-    private ColorSet colorIdentity = ColorSet.ALL_COLORS;
+    private ColorSet colorIdentity = ColorSet.WUBRG;
 
     // Deck data
     private Deck deck;
-    private final ArrayList<Deck> decks = new ArrayList<Deck>(MIN_DECK_COUNT);
+    private final ArrayList<Deck> decks = new ArrayList<>(MIN_DECK_COUNT);
     private int selectedDeckIndex = 0;
     private final DifficultyData difficultyData = new DifficultyData();
+
+    // Commander mode
+    private AdventureModes adventureMode;
 
     // Game data.
     private float worldPosX;
@@ -68,8 +72,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final ArrayList<ItemData> inventoryItems = new ArrayList<>();
     private final Array<Deck> boostersOwned = new Array<>();
     private final HashMap<String, Long> equippedItems = new HashMap<>();
+    private final ArrayList<HashMap<String, Long>> deckLoadouts = new ArrayList<>();
     private final List<AdventureQuestData> quests = new ArrayList<>();
     private final List<AdventureEventData> events = new ArrayList<>();
+    private final Set<PaperCard> unsupportedCards = new HashSet<>();
+    private final Predicate<PaperCard> isUnsupported = pc -> pc != null && pc.getRules() != null && pc.getRules().isUnsupported();
+    private final Predicate<PaperCard> isValid = pc -> pc != null && pc.getRules() != null && !pc.getRules().isUnsupported();
 
     // Fantasy/Chaos mode settings.
     private boolean fantasyMode = false;
@@ -96,6 +104,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public int getDeckCount() { return decks.size(); }
 
+    public int getMaxDeckCount() { return maxDeckCount; }
+
     private void clearDecks() {
         decks.clear();
         for (int i = 0; i < MIN_DECK_COUNT; i++)
@@ -110,15 +120,18 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         fantasyMode = false;
         announceFantasy = false;
         usingCustomDeck = false;
+        adventureMode = null;
         blessing = null;
         gold = 0;
         maxLife = 20;
         life = 20;
         shards = 0;
+        maxDeckCount = 20;
         clearDecks();
         inventoryItems.clear();
         boostersOwned.clear();
         equippedItems.clear();
+        deckLoadouts.clear();
         characterFlags.clear();
         questFlags.clear();
         quests.clear();
@@ -130,6 +143,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         favoriteCards.clear();
         AdventureEventController.clear();
         AdventureQuestController.clear();
+        unsupportedCards.clear();
     }
 
     static public AdventurePlayer current() {
@@ -142,11 +156,18 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public final ItemPool<PaperCard> autoSellCards = new ItemPool<>(PaperCard.class);
     public final Set<PaperCard> favoriteCards = new HashSet<>();
 
-    public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, boolean isUsingCustomDeck, DifficultyData difficultyData) {
+    public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy,
+                       boolean isUsingCustomDeck, DifficultyData difficultyData, AdventureModes adventureMode) {
         clear();
+        this.adventureMode = adventureMode;
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
         announceCustom = usingCustomDeck = isUsingCustomDeck;
 
+        this.maxDeckCount = Config.instance().getConfigData().maxNumberOfDecks; // Get the MAX_DECK_COUNT from the config file
+        // Sanity Check make sure the number is not insane and make sure it is at least 20
+        this.maxDeckCount = Math.max(Math.min(this.maxDeckCount, 99), 20);
+
+        clearDecks(); // Reset the empty decks to now already have the commander in the command zone.
         deck = startingDeck;
         decks.set(0, deck);
 
@@ -187,7 +208,40 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void setSelectedDeckSlot(int slot) {
+        setSelectedDeckSlot(slot, true);
+    }
+
+    public void setSelectedDeckSlot(int slot, boolean switchLoadout) {
         if (slot >= 0 && slot < getDeckCount()) {
+            boolean bindLoadouts = Config.instance().getSettingData().bindEquipmentLoadoutsToDecks;
+            if (switchLoadout && bindLoadouts && slot != selectedDeckIndex) {
+                // Save current loadout to old deck
+                ensureDeckLoadoutsSize();
+                deckLoadouts.set(selectedDeckIndex, new HashMap<>(equippedItems));
+
+                // Clear current equipment
+                for (ItemData item : inventoryItems) {
+                    if (item != null) {
+                        item.isEquipped = false;
+                    }
+                }
+                equippedItems.clear();
+
+                // Restore loadout for new deck (if any)
+                HashMap<String, Long> newLoadout = deckLoadouts.get(slot);
+                if (newLoadout != null) {
+                    for (Map.Entry<String, Long> entry : newLoadout.entrySet()) {
+                        ItemData item = getItemFromInventory(entry.getValue());
+                        if (item != null) {
+                            item.isEquipped = true;
+                            equippedItems.put(entry.getKey(), entry.getValue());
+                        }
+                    }
+                }
+
+                onEquipmentChange.emit();
+            }
+
             selectedDeckIndex = slot;
             deck = decks.get(selectedDeckIndex);
             setColorIdentity(DeckProxy.getColorIdentity(deck));
@@ -266,7 +320,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public Boolean isFemale() {
         return isFemale;
     }
-
+    
     public float getWorldPosX() {
         return worldPosX;
     }
@@ -281,6 +335,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public int getLife() {
         return life;
+    }
+
+    public AdventureModes getAdventureMode(){
+        return adventureMode;
+    }
+
+    public boolean isCommanderMode() {
+        return adventureMode != null && adventureMode.isCommanderLike();
     }
 
     public int getMaxLife() {
@@ -307,6 +369,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return colorIdentity.toString();
     }
 
+    public Collection<PaperCard> getUnsupportedCards() {
+        return unsupportedCards;
+    }
+
 
     //Setters
     public void setWorldPosX(float worldPosX) {
@@ -324,7 +390,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void setColorIdentity(ColorSet set) {
         this.colorIdentity = set;
     }
-
 
     @Override
     public void load(SaveFileData data) {
@@ -382,14 +447,21 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         heroRace = data.readInt("heroRace");
         avatarIndex = data.readInt("avatarIndex");
         isFemale = data.readBool("isFemale");
+
+        String _mode = data.readString("adventure_mode");
+        if (_mode == null)
+            adventureMode = AdventureModes.Standard;
+        else
+            adventureMode = AdventureModes.valueOf(_mode);
+
         if (data.containsKey("colorIdentity")) {
             String temp = data.readString("colorIdentity");
             if (temp != null)
                 setColorIdentity(temp);
             else
-                colorIdentity = ColorSet.ALL_COLORS;
+                colorIdentity = ColorSet.WUBRG;
         } else
-            colorIdentity = ColorSet.ALL_COLORS;
+            colorIdentity = ColorSet.WUBRG;
 
         gold = data.readInt("gold");
         maxLife = data.readInt("maxLife");
@@ -478,14 +550,29 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
 
         deck = new Deck(data.readString("deckName"));
-        deck.getMain().addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deckCards"))));
-        if (data.containsKey("sideBoardCards"))
-            deck.getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards"))));
-        if(data.containsKey("attractionDeckCards"))
-            deck.getOrCreate(DeckSection.Attractions).addAll(CardPool.fromCardList(List.of((String[]) data.readObject("attractionDeckCards"))));
-        if(data.containsKey("contraptionDeckCards")) //TODO: Generalize this. Can't we just serialize the whole deck?
-            deck.getOrCreate(DeckSection.Contraptions).addAll(CardPool.fromCardList(List.of((String[]) data.readObject("contraptionDeckCards"))));
-
+        CardPool deckCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deckCards")));
+        deck.getMain().addAll(deckCards.getFilteredPool(isValid));
+        unsupportedCards.addAll(deckCards.getFilteredPool(isUnsupported).toFlatList());
+        if (data.containsKey("sideBoardCards")) {
+            CardPool sideBoardCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards")));
+            deck.getOrCreate(DeckSection.Sideboard).addAll(sideBoardCards.getFilteredPool(isValid));
+            unsupportedCards.addAll(sideBoardCards.getFilteredPool(isUnsupported).toFlatList());
+        }
+        if (data.containsKey("attractionDeckCards")) {
+            CardPool attractionDeckCards = CardPool.fromCardList(List.of((String[]) data.readObject("attractionDeckCards")));
+            deck.getOrCreate(DeckSection.Attractions).addAll(attractionDeckCards.getFilteredPool(isValid));
+            unsupportedCards.addAll(attractionDeckCards.getFilteredPool(isUnsupported).toFlatList());
+        }
+        if (data.containsKey("contraptionDeckCards")) {//TODO: Generalize this. Can't we just serialize the whole deck?
+            CardPool contraptionDeckCards = CardPool.fromCardList(List.of((String[]) data.readObject("contraptionDeckCards")));
+            deck.getOrCreate(DeckSection.Contraptions).addAll(contraptionDeckCards.getFilteredPool(isValid));
+            unsupportedCards.addAll(contraptionDeckCards.getFilteredPool(isUnsupported).toFlatList());
+        }
+        if (data.containsKey("commanderCards")) {
+            CardPool commanderCards = CardPool.fromCardList(List.of((String[]) data.readObject("commanderCards")));
+            deck.getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
+            unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
+        }
         if (data.containsKey("characterFlagsKey") && data.containsKey("characterFlagsValue")) {
             String[] keys = (String[]) data.readObject("characterFlagsKey");
             Byte[] values = (Byte[]) data.readObject("characterFlagsValue");
@@ -521,13 +608,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
 
+        // Set max deck count to either the value in the config or the current player deck count and then ensure it is bound by 20 and 99
+        this.maxDeckCount = Math.min(Math.max(Math.max(data.containsKey("deckCount") ? data.readInt("deckCount") : 20, Config.instance().getConfigData().maxNumberOfDecks), 20), 99);
+
+
         // Load decks
         // Check if this save has dynamic deck count, use set-count load if not
         boolean hasDynamicDeckCount = data.containsKey("deckCount");
         if (hasDynamicDeckCount) {
             int dynamicDeckCount = data.readInt("deckCount");
             // In case the save had previously saved more decks than the current version allows (in case of the max being lowered)
-            dynamicDeckCount = Math.min(MAX_DECK_COUNT, dynamicDeckCount);
+            dynamicDeckCount = Math.min(maxDeckCount, dynamicDeckCount);
             for (int i = 0; i < dynamicDeckCount; i++){
                 // The first x elements are pre-created
                 if (i < MIN_DECK_COUNT) {
@@ -536,13 +627,29 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 else {
                     decks.add(new Deck(data.readString("deck_name_" + i)));
                 }
-                decks.get(i).getMain().addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i))));
-                if (data.containsKey("sideBoardCards_" + i))
-                    decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i))));
-                if (data.containsKey("attractionDeckCards_" + i))
-                    decks.get(i).getOrCreate(DeckSection.Attractions).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("attractionDeckCards_" + i))));
-                if (data.containsKey("contraptionDeckCards_" + i))
-                    decks.get(i).getOrCreate(DeckSection.Contraptions).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("contraptionDeckCards_" + i))));
+                CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
+                decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
+                unsupportedCards.addAll(mainCards.getFilteredPool(isUnsupported).toFlatList());
+                if (data.containsKey("sideBoardCards_" + i)) {
+                    CardPool sideBoardCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i)));
+                    decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(sideBoardCards.getFilteredPool(isValid));
+                    unsupportedCards.addAll(sideBoardCards.getFilteredPool(isUnsupported).toFlatList());
+                }
+                if (data.containsKey("attractionDeckCards_" + i)) {
+                    CardPool attractionCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("attractionDeckCards_" + i)));
+                    decks.get(i).getOrCreate(DeckSection.Attractions).addAll(attractionCards.getFilteredPool(isValid));
+                    unsupportedCards.addAll(attractionCards.getFilteredPool(isUnsupported).toFlatList());
+                }
+                if (data.containsKey("contraptionDeckCards_" + i)) {
+                    CardPool contraptionCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("contraptionDeckCards_" + i)));
+                    decks.get(i).getOrCreate(DeckSection.Contraptions).addAll(contraptionCards.getFilteredPool(isValid));
+                    unsupportedCards.addAll(contraptionCards.getFilteredPool(isUnsupported).toFlatList());
+                }
+                if (data.containsKey("commanderCards_" + i)) {
+                    CardPool commanderCards = CardPool.fromCardList(List.of((String[]) data.readObject("commanderCards_" + i)));
+                    decks.get(i).getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
+                    unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
+                }
             }
             // In case we allow removing decks from the deck selection GUI, populate up to the minimum
             for (int i = dynamicDeckCount++; i < MIN_DECK_COUNT; i++) {
@@ -557,26 +664,67 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     continue;
                 }
                 decks.set(i, new Deck(data.readString("deck_name_" + i)));
-                decks.get(i).getMain().addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i))));
-                if (data.containsKey("sideBoardCards_" + i))
-                    decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i))));
+                CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
+                decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
+                unsupportedCards.addAll(mainCards.getFilteredPool(isUnsupported).toFlatList());
+                if (data.containsKey("sideBoardCards_" + i)) {
+                    CardPool sideBoardCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i)));
+                    decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(sideBoardCards.getFilteredPool(isValid));
+                    unsupportedCards.addAll(sideBoardCards.getFilteredPool(isUnsupported).toFlatList());
+                }
+                if (data.containsKey("commanderCards_" + i)) {
+                    CardPool commanderCards = CardPool.fromCardList(List.of((String[]) data.readObject("commanderCards_" + i)));
+                    decks.get(i).getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
+                    unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
+                }
             }
         }
 
-        setSelectedDeckSlot(data.readInt("selectedDeckIndex"));
-        cards.addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("cards"))));
+        // Load deck loadouts (equipment tied to each deck)
+        for (int i = 0; i < getDeckCount(); i++) {
+            HashMap<String, Long> loadout = null;
+            if (data.containsKey("deckLoadout_slots_" + i) && data.containsKey("deckLoadout_items_" + i)) {
+                try {
+                    String[] loadoutSlots = (String[]) data.readObject("deckLoadout_slots_" + i);
+                    Long[] loadoutItems = (Long[]) data.readObject("deckLoadout_items_" + i);
+                    if (loadoutSlots.length == loadoutItems.length) {
+                        loadout = new HashMap<>();
+                        for (int j = 0; j < loadoutSlots.length; j++) {
+                            loadout.put(loadoutSlots[j], loadoutItems[j]);
+                        }
+                    }
+                } catch (Exception ignored) {}
+            }
+            deckLoadouts.add(loadout);
+        }
+
+        // Use false to skip loadout switching during load (equippedItems already loaded correctly above)
+        setSelectedDeckSlot(data.readInt("selectedDeckIndex"), false);
+        CardPool cardPool = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("cards")));
+        cards.addAll(cardPool.getFilteredPool(isValid));
+        unsupportedCards.addAll(cardPool.getFilteredPool(isUnsupported).toFlatList());
 
         if (data.containsKey("newCards")) {
             InventoryItem[] items = (InventoryItem[]) data.readObject("newCards");
             for (InventoryItem item : items) {
-                newCards.add((PaperCard) item);
+                if (item instanceof PaperCard pc) {
+                    if (isUnsupported.test(pc))
+                        unsupportedCards.add(pc);
+                    else
+                        newCards.add(pc);
+                }
             }
         }
         if (data.containsKey("noSellCards")) {
             // Legacy list of unsellable cards. Now done via CardRequest flags. Convert the corresponding cards.
             PaperCard[] items = (PaperCard[]) data.readObject("noSellCards");
             CardPool noSellPool = new CardPool();
-            noSellPool.addAllFlat(List.of(items));
+            for (PaperCard pc : items) {
+                if (isUnsupported.test(pc))
+                    unsupportedCards.add(pc);
+                else
+                    noSellPool.add(pc);
+            }
             for (Map.Entry<PaperCard, Integer> noSellEntry : noSellPool) {
                 PaperCard item = noSellEntry.getKey();
                 if (item == null)
@@ -614,11 +762,21 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
         if (data.containsKey("autoSellCards")) {
             PaperCard[] items = (PaperCard[]) data.readObject("autoSellCards");
-            autoSellCards.addAllFlat(Arrays.asList(items));
+            for (PaperCard pc : items) {
+                if (isUnsupported.test(pc))
+                    unsupportedCards.add(pc);
+                else
+                    autoSellCards.add(pc);
+            }
         }
         if (data.containsKey("favoriteCards")) {
             PaperCard[] items = (PaperCard[]) data.readObject("favoriteCards");
-            favoriteCards.addAll(Arrays.asList(items));
+            for (PaperCard pc : items) {
+                if (isUnsupported.test(pc))
+                    unsupportedCards.add(pc);
+                else
+                    favoriteCards.add(pc);
+            }
         }
 
         fantasyMode = data.containsKey("fantasyMode") && data.readBool("fantasyMode");
@@ -629,6 +787,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             getCurrentGameStage().setExtraAnnouncement(Forge.getLocalizer().getMessage("lblDataMigrationMsg"));
         }
 
+        RewardData.invalidateCardPool();
         onLifeTotalChangeList.emit();
         onShardsChangeList.emit();
         onGoldChangeList.emit();
@@ -657,6 +816,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("avatarIndex", avatarIndex);
         data.store("isFemale", isFemale);
         data.store("colorIdentity", colorIdentity.getColor());
+
+        data.store("adventure_mode", adventureMode.toString());
 
         data.store("fantasyMode", fantasyMode);
         data.store("announceFantasy", announceFantasy);
@@ -715,6 +876,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             data.storeObject("attractionDeckCards", deck.get(DeckSection.Attractions).toCardList("\n").split("\n"));
         if (deck.get(DeckSection.Contraptions) != null)
             data.storeObject("contraptionDeckCards", deck.get(DeckSection.Contraptions).toCardList("\n").split("\n"));
+        if (deck.get(DeckSection.Commander) != null)
+            data.storeObject("commanderCards", deck.get(DeckSection.Commander).toCardList("\n").split("\n"));
 
         // save decks dynamically
         data.store("deckCount", getDeckCount());
@@ -727,7 +890,28 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 data.storeObject("attractionDeckCards_" + i, decks.get(i).get(DeckSection.Attractions).toCardList("\n").split("\n"));
             if (decks.get(i).get(DeckSection.Contraptions) != null)
                 data.storeObject("contraptionDeckCards_" + i, decks.get(i).get(DeckSection.Contraptions).toCardList("\n").split("\n"));
+            if (decks.get(i).get(DeckSection.Commander) != null)
+                data.storeObject("commanderCards_" + i, decks.get(i).get(DeckSection.Commander).toCardList("\n").split("\n"));
         }
+
+        // Save deck loadouts (equipment tied to each deck)
+        // First, save current equipment to current deck's loadout
+        ensureDeckLoadoutsSize();
+        deckLoadouts.set(selectedDeckIndex, new HashMap<>(equippedItems));
+        for (int i = 0; i < getDeckCount(); i++) {
+            HashMap<String, Long> loadout = i < deckLoadouts.size() ? deckLoadouts.get(i) : null;
+            if (loadout != null) {
+                ArrayList<String> loadoutSlots = new ArrayList<>();
+                ArrayList<Long> loadoutItems = new ArrayList<>();
+                for (Map.Entry<String, Long> entry : loadout.entrySet()) {
+                    loadoutSlots.add(entry.getKey());
+                    loadoutItems.add(entry.getValue());
+                }
+                data.storeObject("deckLoadout_slots_" + i, loadoutSlots.toArray(new String[0]));
+                data.storeObject("deckLoadout_items_" + i, loadoutItems.toArray(new Long[0]));
+            }
+        }
+
         data.store("selectedDeckIndex", selectedDeckIndex);
         data.storeObject("cards", cards.toCardList("\n").split("\n"));
 
@@ -1020,6 +1204,25 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return items.random();
     }
 
+    public boolean hasEquippedItem() {
+        for (Long id : equippedItems.values()) {
+            ItemData item = getEquippedItem(id);
+            if (item == null)
+                continue;
+            if (isHardorInsaneDifficulty()) {
+                return true;
+            } else {
+                switch (item.equipmentSlot) {
+                    // limit to these for easy and normal
+                    case "Boots", "Body", "Neck" -> {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public ItemData getEquippedAbility1() {
         for (Long id : equippedItems.values()) {
             ItemData data = getEquippedItem(id);
@@ -1073,6 +1276,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         int basePrice = (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor);
 
+        if (card.isFoil()) {
+            basePrice += basePrice * 20 / 100;
+        }
+
         float townPriceModifier = currentLocationChanges == null ? 1f : currentLocationChanges.getTownPriceModifier();
         return (int) (basePrice * (2.0f - townPriceModifier));
     }
@@ -1118,9 +1325,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void removeItem(String name) {
-        ItemData item = ItemListData.getItem(name);
-        if (item != null)
-            removeItem(item);
+        inventoryItems.stream().filter(itemData -> name.equalsIgnoreCase(itemData.name)).findFirst().ifPresent(this::removeItem);
     }
 
     public void removeItem(ItemData item) {
@@ -1134,7 +1339,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void equip(ItemData item) {
-        if (equippedItems.get(item.equipmentSlot) != null && equippedItems.get(item.equipmentSlot) == item.longID) {
+        Long itemID = equippedItems.get(item.equipmentSlot);
+        if (itemID != null && itemID.equals(item.longID)) {
             item.isEquipped = false;
             equippedItems.remove(item.equipmentSlot);
         } else {
@@ -1186,16 +1392,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public int countItem(String name) {
-        int count = 0;
-        if (!hasItem(name))
-            return count;
-        for (ItemData i : inventoryItems) {
-            if (i == null)
-                continue;
-            if (i.name.equals(name))
-                count++;
-        }
-        return count;
+        return (int) inventoryItems.stream().filter(Objects::nonNull).filter(i -> i.name.equals(name)).count();
     }
 
     public boolean addItem(String name) {
@@ -1212,11 +1409,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void removeAllQuestItems(){
-        for (ItemData data : inventoryItems) {
-            if(data != null && data.questItem){
-                removeItem(data);
-            }
-        }
+        inventoryItems.removeIf(data -> data != null && data.questItem);
     }
 
     public boolean addBooster(Deck booster) {
@@ -1352,6 +1545,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      */
     public void clearDeck() {
         deck = decks.set(selectedDeckIndex, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+        ensureDeckLoadoutsSize();
+        deckLoadouts.set(selectedDeckIndex, null);
     }
 
     /**
@@ -1361,10 +1556,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         int oldIndex = selectedDeckIndex;
         this.setSelectedDeckSlot(0);
         decks.remove(oldIndex);
+        if (oldIndex < deckLoadouts.size()) {
+            deckLoadouts.remove(oldIndex);
+        }
     }
 
     public void addDeck(){
         decks.add(new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+        deckLoadouts.add(null);
     }
 
     /**
@@ -1373,14 +1572,25 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * @return int - index of new copy slot, or -1 if no slot was available
      */
     public int copyDeck() {
-        for (int i = 0; i < MAX_DECK_COUNT; i++) {
+        for (int i = 0; i < maxDeckCount; i++) {
+            if (i >= getDeckCount()) addDeck();
             if (isEmptyDeck(i)) {
                 decks.set(i, (Deck) deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")"));
+                // Copy loadout from source deck to new slot
+                ensureDeckLoadoutsSize();
+                HashMap<String, Long> sourceLoadout = selectedDeckIndex < deckLoadouts.size() ? deckLoadouts.get(selectedDeckIndex) : null;
+                deckLoadouts.set(i, sourceLoadout != null ? new HashMap<>(sourceLoadout) : null);
                 return i;
             }
         }
 
         return -1;
+    }
+
+    private void ensureDeckLoadoutsSize() {
+        while (deckLoadouts.size() < getDeckCount()) {
+            deckLoadouts.add(null);
+        }
     }
 
     public boolean isEmptyDeck(int deckIndex) {
@@ -1439,6 +1649,43 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return copiesUsed;
     }
 
+    public void removeLostCardFromPools(PaperCard card) {
+        if (card.isVeryBasicLand() && !card.isFoil()) {
+            return;
+        }
+
+        int leftInPool = Current.player().getCards().count(card) - 1;
+
+        for (final Deck deck : decks) {
+            int cntInDeck = deck.count(card);
+            int nToRemoveFromThisDeck = cntInDeck - leftInPool;
+            if (nToRemoveFromThisDeck <= 0) {
+                continue;
+            }
+
+            for(DeckSection section : DeckSection.values()) {
+                if (section == DeckSection.Main || deck.get(section) == null) {
+                    continue;
+                }
+                int cntInSection = deck.get(section).count(card);
+                int nToRemoveFromSection = Math.min(cntInSection, nToRemoveFromThisDeck);
+                if (nToRemoveFromSection > 0) {
+                    deck.get(section).remove(card, nToRemoveFromSection);
+                    nToRemoveFromThisDeck -= nToRemoveFromSection;
+                    if (nToRemoveFromThisDeck <= 0) {
+                        break;
+                    }
+                }
+            }
+
+            if (nToRemoveFromThisDeck <= 0) {
+                continue;
+            }
+
+            deck.getMain().remove(card, nToRemoveFromThisDeck);
+        }
+        Current.player().getCards().remove(card, 1);
+    }
 
     public CardPool getCollectionCards(boolean allCards) {
         CardPool collectionCards = new CardPool();

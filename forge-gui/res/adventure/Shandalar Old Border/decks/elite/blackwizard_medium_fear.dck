@@ -1,0 +1,21 @@
+[metadata]
+Name=blackwizard_medium_fear
+[Main]
+1 Smother|ONS
+15 Swamp|ONS|2
+2 Skeletal Scrying|ODY
+2 Snuff Out|MMQ
+3 Mishra's Factory|4ED
+3 Withered Wretch|LGN
+4 Bloodstained Mire|ONS
+4 Cabal Therapy|JUD
+4 Contagion|ALL
+4 Dark Ritual|2ED
+4 Duress|7ED
+4 Nantuko Shade|TOR
+4 Polluted Delta|ONS
+4 Ravenous Rats|INV
+4 The Rack|3ED
+
+[StartInBattle_Reference]
+1 Wall of Bone|LEA

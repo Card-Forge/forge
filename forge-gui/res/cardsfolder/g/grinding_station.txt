@@ -1,7 +1,7 @@
 Name:Grinding Station
 ManaCost:2
 Types:Artifact
-A:AB$ Mill | Cost$ T Sac<1/Artifact> | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player mills three cards.
+A:AB$ Mill | Cost$ T Sac<1/Artifact> | NumCards$ 3 | ValidTgts$ Player | SpellDescription$ Target player mills three cards.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact | IsPresent$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever an artifact enters, you may untap CARDNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:Random

@@ -1,0 +1,7 @@
+Name:Inner Demons Gangsters
+Variant:UniversesWithin:FlavorName:Caldaia Brawlers
+ManaCost:3 B
+Types:Creature Human Rogue Villain
+PT:3/4
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ +1 | KW$ Menace | SorcerySpeed$ True | SpellDescription$ This creature gets +1/+0 and gains menace until end of turn. Activate only as a sorcery. (It can't be blocked except by two or more creatures.)
+Oracle:Discard a card: This creature gets +1/+0 and gains menace until end of turn. Activate only as a sorcery. (It can't be blocked except by two or more creatures.)

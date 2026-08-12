@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Bushwhacked
+Title=Bushwhacked
+Icon=Bushwhacked.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/Magic-League_Standard_Trial_30-07-2010/Mad03_-_GU_Aggro_(Standard,_#892).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Elvish Visionary
+4 Joraga Treespeaker
+4 Kozilek's Predator
+4 Nest Invader
+4 Noble Hierarch
+4 Sea Gate Oracle
+2 Eldrazi Monument
+4 Unified Will
+4 Overrun
+4 Shared Discovery
+5 Forest
+2 Halimar Depths
+3 Island
+4 Khalni Garden
+4 Misty Rainforest
+4 Verdant Catacombs
+[Sideboard]
+3 Into the Roil
+2 Jace Beleren
+4 Negate
+2 Pithing Needle
+4 Spreading Seas

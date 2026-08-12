@@ -1,0 +1,11 @@
+Name:Mole Module
+ManaCost:5
+Types:Artifact Vehicle
+PT:6/6
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever this Vehicle deals combat damage to a player, mill four cards. You may put a permanent card from among them onto the battlefield.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Battlefield | Hidden$ True | ChangeType$ Permanent.IsRemembered | ChangeNum$ 1 | SelectPrompt$ You may choose a permanent card milled this way | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Crew:2
+Oracle:Menace\nWhenever this Vehicle deals combat damage to a player, mill four cards. You may put a permanent card from among them onto the battlefield.\nCrew 2

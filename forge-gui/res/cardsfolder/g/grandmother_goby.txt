@@ -1,0 +1,10 @@
+Name:Grandmother Goby
+ManaCost:2 U U
+Types:Legendary Creature Merfolk Wizard
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast a noncreature spell, counter that spell. Create a number of 1/1 blue Merfolk creature tokens equal to the amount of mana spent to cast that spell.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ u_1_1_merfolk | TokenOwner$ You | TokenAmount$ X
+SVar:X:TriggeredCard$CastTotalManaSpent
+DeckHas:Ability$Token
+Oracle:Whenever you cast a noncreature spell, counter that spell. Create a number of 1/1 blue Merfolk creature tokens equal to the amount of mana spent to cast that spell.

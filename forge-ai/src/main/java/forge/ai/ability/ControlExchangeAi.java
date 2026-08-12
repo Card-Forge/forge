@@ -31,7 +31,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
         object1 = ComputerUtilCard.getBestAI(list);
         if (sa.hasParam("Defined")) {
             object2 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).get(0);
-        } else if (tgt.getMinTargets(sa.getHostCard(), sa) > 1) {
+        } else if (sa.getMinTargets() > 1) {
             CardCollectionView list2 = ai.getCardsIn(ZoneType.Battlefield);
             list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getHostCard(), sa);
             object2 = ComputerUtilCard.getWorstAI(list2);
@@ -53,23 +53,21 @@ public class ControlExchangeAi extends SpellAbilityAi {
             if (mandatory) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
-        } else {
-            if (mandatory) {
-                AiAbilityDecision decision = chkDrawback(sa, aiPlayer);
-                if (sa.isTargetNumberValid()) {
-                    return  new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
-
-                return decision;
-            } else {
-                return canPlay(aiPlayer, sa);
+        } else if (mandatory) {
+            AiAbilityDecision decision = chkDrawback(aiPlayer, sa);
+            if (sa.isTargetNumberValid()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
+
+            return decision;
+        } else {
+            return canPlay(aiPlayer, sa);
         }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         if (!sa.usesTargeting()) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

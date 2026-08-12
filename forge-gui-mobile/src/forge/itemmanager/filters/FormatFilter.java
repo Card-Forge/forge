@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.utils.Align;
 
@@ -24,7 +25,6 @@ import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
-import forge.util.Callback;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
@@ -199,7 +199,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         }
 
         @Override
-        public void onClose(Callback<Boolean> canCloseCallback) {
+        public void onClose(Consumer<Boolean> canCloseCallback) {
             if (selectedSets.size() > 0) {
                 List<String> setCodes = new ArrayList<>();
                 List<CardEdition> sortedSets = new ArrayList<>(selectedSets);

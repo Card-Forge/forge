@@ -84,7 +84,7 @@ ScryfallCode=KLR
 74 U Wind-Kin Raiders @Shreya Shetty
 75 C Aether Poisoner @Yongjae Choi
 76 U Aetherborn Marauder @Kieran Yanner
-77 C Alley Strangler @Efflam Mercier
+77 C Alley Strangler @Enora Mercier
 78 C Daring Demolition @Svetlin Velinov
 79 C Defiant Salvager @Volkan Baǵa
 80 M Demon of Dark Schemes @Daarken

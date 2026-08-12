@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ulasht
+Title=Ulasht
+Icon=Ulasht.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/7720_-_Izzet_Drakes_(Standard,_#771239).dck
+Deck Type=constructed
+
+[Main]
+4 Arclight Phoenix
+4 Crackling Drake
+3 Goblin Electromancer
+1 Murmuring Mystic
+1 Blink of an Eye
+4 Opt
+4 Radical Idea
+4 Shock
+1 Beacon Bolt
+4 Chart a Course
+2 Discovery // Dispersal
+3 Lava Coil
+3 Tormenting Voice
+1 The Mirari Conjecture
+7 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+1 Banefire
+1 Beacon Bolt
+3 Entrancing Melody
+1 Lava Coil
+1 Murmuring Mystic
+2 Negate
+2 Niv-Mizzet, Parun
+1 Ral, Izzet Viceroy
+2 Shivan Fire
+1 Star of Extinction

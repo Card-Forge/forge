@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Tweedledum
+Title=Tweedledum
+Icon=Tweedledum.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/MaxPoint_Silver_-_Galaxy_Games_-_2-9-14/MikeMagby_-_Orzhov_Control_(Standard,_#65647).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Baron of Vizkopa
+4 Gray Merchant of Asphodel
+4 Nightveil Specter
+4 Pack Rat
+4 Bile Blight
+4 Hero's Downfall
+2 Ultimate Price
+4 Thoughtseize
+4 Underworld Connections
+4 Godless Shrine
+4 Mutavault
+14 Swamp
+4 Temple of Silence
+[Sideboard]
+2 Devour Flesh
+2 Drown in Sorrow
+2 Erebos, God of the Dead
+3 Lifebane Zombie
+3 Revoke Existence
+3 Sin Collector

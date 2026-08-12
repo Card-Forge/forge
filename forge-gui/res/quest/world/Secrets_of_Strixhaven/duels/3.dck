@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Token
+Title=Token
+Icon=Token.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Abe_Kenichi_-_Izzet_Elementals_(Standard,_#2904871).dck
+Deck Type=constructed
+
+[Main]
+4 Eddymurk Crab
+4 Colorstorm Stallion
+4 Opt
+2 Spell Pierce
+4 Burst Lightning
+2 Get Out
+2 Prismari Charm
+4 Sleight of Hand
+2 Winternight Stories
+4 Boomerang Basics
+3 Flow State
+4 Stormchaser's Talent
+7 Island
+4 Spirebluff Canal
+4 Steam Vents
+2 Stormcarved Coast
+4 Riverpyre Verge
+[Sideboard]
+2 Negate
+1 Spell Pierce
+3 Soul-Guide Lantern
+2 Ral, Crackling Wit
+1 Get Out
+1 Roaring Furnace
+2 Broadside Barrage
+1 Sear
+1 Flow State
+1 Impractical Joke

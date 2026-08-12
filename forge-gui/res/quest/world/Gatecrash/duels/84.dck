@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Riptide
+Title=Riptide
+Icon=Riptide.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/Tachikawa_result/Nagase_Yoshinobu_in_Grand_Prix_Kobe_2014_Trial_-_ÒâøÒâ│Òé┐ÒéñÒé╣Òâ¬Òâ╝_(Modern,_#80898).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Grim Lavamancer
+2 Keldon Marauders
+4 Vexing Devil
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+4 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+1 Battlefield Forge
+2 Blood Crypt
+4 Marsh Flats
+3 Scalding Tarn
+[Sideboard]
+4 Contaminated Ground
+2 Deathmark
+4 Rakdos Charm
+3 Smash to Smithereens

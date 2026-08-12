@@ -1,0 +1,11 @@
+Name:Flash Thompson, Spider-Fan
+Variant:UniversesWithin:FlavorName:Basil, Cabaretti Loudmouth
+ManaCost:1 W
+Types:Legendary Creature Human Citizen
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBHeckle,DBHeroWorship
+SVar:DBHeckle:DB$ Tap | ValidTgts$ Creature | SpellDescription$ Heckle — Tap target creature.
+SVar:DBHeroWorship:DB$ Untap | ValidTgts$ Creature | SpellDescription$ Hero Worship — Untap target creature.
+Oracle:Flash\nWhen Flash Thompson enters, choose one or both —\n• Heckle — Tap target creature.\n• Hero Worship — Untap target creature.

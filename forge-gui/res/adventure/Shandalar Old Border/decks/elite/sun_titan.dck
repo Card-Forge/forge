@@ -1,0 +1,19 @@
+[metadata]
+Name=sun_titan
+[Main]
+24 Plains|INV
+4 Jareth, Leonine Titan|ONS
+2 Noble Templar|SCG
+4 Serra Avatar|USG
+4 Avatar of Hope|PCY
+4 Eternal Dragon|SCG
+4 Purify|ULG
+4 Kirtar's Wrath|ODY
+3 Noble Purpose|MMQ
+3 Jabari's Influence|MIR
+3 Death or Glory|INV
+
+[StartInBattle_Reference]
+1 Plains|INV|1
+1 Plains|INV|2
+1 Ivory Guardians|LEG

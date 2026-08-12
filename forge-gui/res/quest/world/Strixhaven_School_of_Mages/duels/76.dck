@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Wyatt Earp
+Title=Wyatt Earp
+Icon=Wyatt Earp.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Magicofplayer1_-_Dredge_(Modern,_#1166278).dck
+Deck Type=constructed
+
+[Main]
+1 Bloodghast
+3 Ox of Agonas
+4 Golgari Thug
+4 Narcomoeba
+4 Prized Amalgam
+4 Stinkweed Imp
+4 Shriekhorn
+2 Conflagrate
+3 Life from the Loam
+4 Cathartic Reunion
+4 Creeping Chill
+4 Thrilling Discovery
+1 Gemstone Mine
+1 Mountain
+1 Blood Crypt
+2 Stomping Ground
+2 Forgotten Cave
+2 City of Brass
+2 Sacred Foundry
+4 Scalding Tarn
+4 Bloodstained Mire
+[Sideboard]
+1 Blast Zone
+2 Bloodghast
+2 Ancient Grudge
+2 Darkblast
+2 Nature's Claim
+3 Lightning Axe
+3 Leyline of Sanctity

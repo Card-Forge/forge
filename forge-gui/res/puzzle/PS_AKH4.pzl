@@ -3,7 +3,7 @@ Name:Possibility Storm - Amonkhet #04 - How much damage can you deal?
 URL:https://i.redd.it/vfe0zsipygzy.png
 Goal:Win
 Turns:1
-Difficulty:Easy
+Difficulty:Common
 Description:Try to do as much damage to your opponent as possible during your turn.
 [state]
 ActivePlayer=Human

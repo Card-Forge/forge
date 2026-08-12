@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Black
+Title=Dungeon Crawling Black
+Icon=Dungeon Crawling Black.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/SCG_Invitational_Qualifier_-_Memphis,_TN/Kevin_Thomason_-_Mono-Green_Aggro_(Modern,_#640836).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avatar of the Resolute
+4 Dryad Militant
+4 Experiment One
+3 Kalonian Tusker
+2 Kessig Prowler
+4 Leatherback Baloth
+4 Strangleroot Geist
+4 Aspect of Hydra
+2 Dismember
+4 Vines of Vastwood
+4 Rancor
+19 Forest
+2 Treetop Village
+[Sideboard]
+1 Dismember
+1 Dungrove Elder
+4 Feed the Clan
+2 Fog
+4 Natural State
+3 Relic of Progenitus

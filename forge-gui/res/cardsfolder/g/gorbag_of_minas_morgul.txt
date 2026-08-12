@@ -6,7 +6,7 @@ T:Mode$ DamageDone | ValidSource$ Goblin.YouCtrl,Orc.YouCtrl | ValidTarget$ Play
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Card.TriggeredSource/that creature> | Execute$ TrigCharm | TriggerDescription$ When you do, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBTreasure
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
-SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
 DeckHints:Type$Goblin|Orc
 DeckHas:Ability$Token|Sacrifice & Type$Treasure
-Oracle:Whenever a Goblin or Orc you control deals combat damage to a player, you may sacrifice it. When you do, choose one—\n• Draw a card.\n• Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+Oracle:Whenever a Goblin or Orc you control deals combat damage to a player, you may sacrifice it. When you do, choose one—\n• Draw a card.\n• Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

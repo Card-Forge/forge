@@ -22,8 +22,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
 
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -33,23 +34,25 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
-import forge.game.event.GameEventCardAttachment;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordWithType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttach;
 import forge.game.zone.ZoneType;
+import forge.trackable.TrackableProperty;
+import forge.util.Lang;
 
-public abstract class GameEntity extends GameObject implements IIdentifiable {
+public abstract class GameEntity implements GameObject, IIdentifiable {
     protected int id;
     private String name = "";
     protected CardCollection attachedCards = new CardCollection();
-    protected Map<CounterType, Integer> counters = Maps.newHashMap();
+    protected Multiset<CounterType> counters = HashMultiset.create();
     protected List<Pair<Integer, Boolean>> damageReceivedThisTurn = Lists.newArrayList();
 
     protected GameEntity(int id0) {
@@ -76,6 +79,13 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
     public int staticDamagePrevention(int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
+        return staticDamagePrevention(damage, possiblePrevention, source, isCombat, null);
+    }
+
+    // combatDamagePreventedThisTurn: optional precomputed result of
+    // ReplacementHandler.isPreventCombatDamageThisTurn, so the AI can cache it
+    // instead of re-running the check for every attacker of a predicted combat
+    public int staticDamagePrevention(int damage, final int possiblePrevention, final Card source, final boolean isCombat, final Boolean combatDamagePreventedThisTurn) {
         if (damage <= 0) {
             return 0;
         }
@@ -83,8 +93,13 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             return damage;
         }
 
-        if (isCombat && getGame().getReplacementHandler().isPreventCombatDamageThisTurn()) {
-            return 0;
+        if (isCombat) {
+            final boolean prevented = combatDamagePreventedThisTurn != null
+                    ? combatDamagePreventedThisTurn.booleanValue()
+                    : getGame().getReplacementHandler().isPreventCombatDamageThisTurn();
+            if (prevented) {
+                return 0;
+            }
         }
 
         for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
@@ -143,30 +158,25 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
     public final CardCollectionView getEnchantedBy() {
         // enchanted means attached by Aura
-        return CardLists.filter(getAttachedCards(), CardPredicates.AURA);
+        return CardLists.filter(getAttachedCards(), Card::isAura);
     }
 
     // doesn't include phased out cards
     public final CardCollectionView getAttachedCards() {
-        return CardLists.filter(attachedCards, CardPredicates.phasedIn());
+        return CardLists.filter(getAllAttachedCards(), CardPredicates.phasedIn());
     }
 
     // for view does include phased out cards
     public final CardCollectionView getAllAttachedCards() {
-        return attachedCards;
+        return CardCollection.getView(attachedCards);
     }
 
     public final void setAttachedCards(final Iterable<Card> cards) {
-        attachedCards = new CardCollection(cards);
-        updateAttachedCards();
+        attachedCards = getView().setCards(attachedCards, cards, TrackableProperty.AttachedCards);
     }
 
     public final void clearAttachedCards() {
-        if (attachedCards.isEmpty()) {
-            return;
-        }
-        attachedCards.clear();
-        updateAttachedCards();
+        attachedCards = getView().clearCards(attachedCards, TrackableProperty.AttachedCards);
     }
 
     public final boolean hasCardAttachments() {
@@ -175,7 +185,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
     public final boolean isEnchanted() {
         // enchanted means attached by Aura
-        return getAttachedCards().anyMatch(CardPredicates.AURA);
+        return getAttachedCards().anyMatch(Card::isAura);
     }
 
     public final boolean hasCardAttachment(Card c) {
@@ -195,21 +205,15 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public final void addAttachedCard(final Card c) {
-        if (attachedCards.add(c)) {
-            updateAttachedCards();
-            getGame().fireEvent(new GameEventCardAttachment(c, null, this));
-        }
+        attachedCards = getView().addCard(attachedCards, c, TrackableProperty.AttachedCards);
     }
 
     public final void removeAttachedCard(final Card c) {
-        if (attachedCards.remove(c)) {
-            updateAttachedCards();
-            getGame().fireEvent(new GameEventCardAttachment(c, this, null));
-        }
+        attachedCards = getView().removeCard(attachedCards, c, TrackableProperty.AttachedCards);
     }
 
     public final void updateAttachedCards() {
-        getView().updateAttachedCards(this);
+        getView().setCards(null, attachedCards, TrackableProperty.AttachedCards);
     }
 
     public final void unAttachAllCards(Card old) {
@@ -222,63 +226,83 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return canBeAttached(attach, sa, false);
     }
     public boolean canBeAttached(final Card attach, SpellAbility sa, boolean checkSBA) {
-        // master mode
-        if (!attach.isAttachment() || (attach.isCreature() && !attach.hasKeyword(Keyword.RECONFIGURE))
-                || equals(attach)) {
-            return false;
+        return cantBeAttachedMsg(attach, sa, checkSBA) == null;
+    }
+
+    public String cantBeAttachedMsg(final Card attach, SpellAbility sa) {
+        return cantBeAttachedMsg(attach, sa, false);
+    }
+    public String cantBeAttachedMsg(final Card attach, SpellAbility sa, boolean checkSBA) {
+        if (!attach.isAttachment()) {
+            return attach.getDisplayName() + " is not an attachment";
+        }
+        if (equals(attach)) {
+            return attach.getDisplayName() + " can't attach to itself";
+        }
+
+        if (attach.isCreature() && !attach.hasKeyword(Keyword.RECONFIGURE)) {
+            return attach.getDisplayName() + " is a creature without reconfigure";
         }
 
         if (attach.isPhasedOut()) {
-            return false;
+            return attach.getDisplayName() + " is phased out";
         }
 
-        // check for rules
-        if (attach.isAura() && !canBeEnchantedBy(attach)) {
-            return false;
+        if (attach.isAura()) {
+            String msg = cantBeEnchantedByMsg(attach);
+            if (msg != null) {
+                return msg;
+            }
         }
-        if (attach.isEquipment() && !canBeEquippedBy(attach, sa)) {
-            return false;
+        if (attach.isEquipment()) {
+            String msg = cantBeEquippedByMsg(attach, sa);
+            if (msg != null) {
+                return msg;
+            }
         }
-        if (attach.isFortification() && !canBeFortifiedBy(attach)) {
-            return false;
+        if (attach.isFortification()) {
+            String msg = cantBeFortifiedByMsg(attach);
+            if (msg != null) {
+                return msg;
+            }
         }
 
-        // check for can't attach static
-        if (StaticAbilityCantAttach.cantAttach(this, attach, checkSBA)) {
-            return false;
+        StaticAbility stAb = StaticAbilityCantAttach.cantAttach(this, attach, checkSBA);
+        if (stAb != null) {
+            return stAb.toString();
         }
 
-        // true for all
-        return true;
+        return null;
     }
 
-    protected boolean canBeEquippedBy(final Card aura, SpellAbility sa) {
-        /**
-         * Equip only to Creatures which are cards
-         */
-        return false;
-    }
-
-    protected boolean canBeFortifiedBy(final Card aura) {
+    protected String cantBeEquippedByMsg(final Card aura, SpellAbility sa) {
         /**
          * Equip only to Lands which are cards
          */
-        return false;
+        return getName() + " is not a Creature";
     }
 
-    protected boolean canBeEnchantedBy(final Card aura) {
+    protected String cantBeFortifiedByMsg(final Card fort) {
+        /**
+         * Equip only to Lands which are cards
+         */
+        return getName() + " is not a Land";
+    }
+
+    protected String cantBeEnchantedByMsg(final Card aura) {
         if (!aura.hasKeyword(Keyword.ENCHANT)) {
-            return false;
+            return "No Enchant Keyword";
         }
         for (KeywordInterface ki : aura.getKeywords(Keyword.ENCHANT)) {
-            String k = ki.getOriginal();
-            String m[] = k.split(":");
-            String v = m[1];
-            if (!isValid(v.split(","), aura.getController(), aura, null)) {
-                return false;
+            if (ki instanceof KeywordWithType kwt) {
+                String v = kwt.getValidType();
+                String desc = kwt.getTypeDescription();
+                if (!isValid(v.split(","), aura.getController(), aura, null)) {
+                    return getName() + " is not " + Lang.nounWithAmount(1, desc);
+                }
             }
         }
-        return true;
+        return null;
     }
 
     public boolean hasCounters() {
@@ -286,51 +310,30 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     // get all counters from a card
-    public final Map<CounterType, Integer> getCounters() {
+    public final Multiset<CounterType> getCounters() {
         return counters;
     }
 
     // get total number of all counters on an entity
     public final int getNumAllCounters() {
-        int count = 0;
-        for (Integer i : getCounters().values()) {
-            if (i != null && i > 0) {
-                count += i;
-            }
-        }
-        return count;
+        return this.counters.size();
     }
 
     public final int getCounters(final CounterType counterName) {
-        Integer value = counters.get(counterName);
-        return value == null ? 0 : value;
-    }
-    public final int getCounters(final CounterEnumType counterType) {
-        return getCounters(CounterType.get(counterType));
+        return counters.count(counterName);
     }
 
     public void setCounters(final CounterType counterType, final Integer num) {
-        if (num <= 0) {
-            counters.remove(counterType);
-        } else {
-            counters.put(counterType, num);
-        }
-    }
-    public void setCounters(final CounterEnumType counterType, final Integer num) {
-        setCounters(CounterType.get(counterType), num);
+        counters.setCount(counterType, num);
     }
 
-    abstract public void setCounters(final Map<CounterType, Integer> allCounters);
+    abstract public void setCounters(final Multiset<CounterType> allCounters);
 
     abstract public boolean canRemoveCounters(final CounterType type);
 
     abstract public boolean canReceiveCounters(final CounterType type);
     abstract public int subtractCounter(final CounterType counterName, final int n, final Player remover);
     abstract public void clearCounters();
-
-    public boolean canReceiveCounters(final CounterEnumType type) {
-        return canReceiveCounters(CounterType.get(type));
-    }
 
     public final void addCounter(final CounterType counterType, int n, final Player source, GameEntityCounterTable table) {
         if (n <= 0 || !canReceiveCounters(counterType)) {
@@ -351,18 +354,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         table.put(source, this, counterType, n);
     }
 
-    public final void addCounter(final CounterEnumType counterType, final int n, final Player source, GameEntityCounterTable table) {
-        addCounter(CounterType.get(counterType), n, source, table);
-    }
-
-    public int subtractCounter(final CounterEnumType counterName, final int n, final Player remover) {
-        return subtractCounter(CounterType.get(counterName), n, remover);
-    }
-
     abstract public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params);
-    public void addCounterInternal(final CounterEnumType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
-        addCounterInternal(CounterType.get(counterType), n, source, fireEvents, table, params);
-    }
     public Integer getCounterMax(final CounterType counterType) {
         return null;
     }

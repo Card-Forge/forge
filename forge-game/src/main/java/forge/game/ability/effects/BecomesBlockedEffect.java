@@ -9,6 +9,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -39,7 +40,7 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
                 blocked.add(c);
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Attacker, c);
-                runParams.put(AbilityKey.Blockers, Lists.<Card>newArrayList());
+                runParams.put(AbilityKey.Blockers, CardCollection.EMPTY);
                 runParams.put(AbilityKey.Defender, game.getCombat().getDefenderByAttacker(c));
                 runParams.put(AbilityKey.DefendingPlayer, game.getCombat().getDefenderPlayerByAttacker(c));
                 game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);

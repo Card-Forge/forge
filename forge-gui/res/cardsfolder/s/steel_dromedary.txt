@@ -7,6 +7,6 @@ SVar:CamelTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter
 SVar:DBAddCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.Self+counters_GE1_P1P1 | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ CARDNAME doesn't untap during your untap step if it has a +1/+1 counter on it.
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMoveCounter | TriggerDescription$ At the beginning of combat on your turn, you may move a +1/+1 counter from CARDNAME onto target creature.
-SVar:TrigMoveCounter:DB$ MoveCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | Source$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigMoveCounter:DB$ MoveCounter | ValidTgts$ Creature | Source$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Steel Dromedary enters tapped with two +1/+1 counters on it.\nSteel Dromedary doesn't untap during your untap step if it has a +1/+1 counter on it.\nAt the beginning of combat on your turn, you may move a +1/+1 counter from Steel Dromedary onto target creature.

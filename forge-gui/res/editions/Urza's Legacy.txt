@@ -154,6 +154,3 @@ ScryfallCode=ULG
 141 U Ghitu Encampment @Don Hazeltine
 142 U Spawning Pool @Rob Alexander
 143 U Treetop Village @Anthony S. Waters
-
-[tokens]
-g_1_1_squirrel

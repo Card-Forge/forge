@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Easy
+Description=Gatecrash/SCG_Standard_Open_Edison/Phillip_Napoli_-_Gruul_Aggro_(Standard,_#45178).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Flinthoof Boar
+4 Hellrider
+4 Rakdos Cackler
+4 Stromkirk Noble
+4 Searing Spear
+4 Pillar of Flame
+4 Rancor
+12 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+[Sideboard]
+4 Flames of the Firebrand
+4 Reckless Waif
+3 Traitorous Blood
+4 Volcanic Strength

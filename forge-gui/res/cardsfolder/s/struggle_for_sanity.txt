@@ -8,7 +8,7 @@ SVar:DBExileOpp:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Hand | Destinatio
 SVar:DBYouChoose:DB$ ChooseCard | Defined$ You | Choices$ Card.IsRemembered | ChoiceZone$ Hand | Amount$ 1 | Mandatory$ True | SubAbility$ DBExileYou
 SVar:DBExileYou:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Hand | Destination$ Exile
 SVar:DBReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsImprinted | Origin$ Exile | Destination$ Hand | SubAbility$ DBGoYard | StackDescription$ None
-SVar:DBGoYard:DB$ ChangeZoneAll | ChangeType$ Card.IsNotImprinted+IsRemembered | Origin$ Exile | Destination$ Graveyard | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBGoYard:DB$ ChangeZoneAll | ChangeType$ Card.!IsImprinted+IsRemembered | Origin$ Exile | Destination$ Graveyard | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Count$ValidHand Card.IsRemembered
 SVar:NeedsToPlayVar:Y GE1

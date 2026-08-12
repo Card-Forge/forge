@@ -4,7 +4,7 @@ Types:Legendary Creature Dragon Ranger
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+X until end of turn, where X is the greatest power among other Dragons you control and Dragon cards in your graveyard.
 SVar:TrigPump:DB$ Pump | NumAtt$ +X | NumDef$ +X
-SVar:X:Count$ValidGraveyard,Battlefield Dragon.YouCtrl+Other$GreatestPower
+SVar:X:Count$ValidGraveyard,Battlefield Dragon.YouCtrl+Other$GreatestCardPower
 K:Choose a Background
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Graveyard|Counters

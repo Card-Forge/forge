@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Prince Valiant
+Title=Prince Valiant
+Icon=Prince Valiant.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/HummingBard_-_Death_and_Taxes_(Modern,_#2032279).dck
+Deck Type=constructed
+
+[Main]
+4 Thalia, Guardian of Thraben
+4 Aven Interrupter
+4 Leonin Arbiter
+4 Archon of Emeria
+4 Skyclave Apparition
+2 Esper Sentinel
+4 Sanctifier en-Vec
+4 Solitude
+4 Giver of Runes
+1 Lion Sash
+4 Stoneforge Mystic
+1 Sword of Light and Shadow
+1 Sword of Fire and Ice
+1 Batterskull
+4 Aether Vial
+1 Kaldra Compleat
+4 Volatile Fault
+1 Eiganjo Castle
+4 Ghost Quarter
+1 Flagstones of Trokair
+11 Plains
+4 Silent Clearing
+4 Field of Ruin
+4 Eiganjo, Seat of the Empire
+[Sideboard]
+2 Loran of the Third Path
+3 The Battle of Bywater
+3 Celestial Purge
+3 Containment Priest
+4 March of Otherworldly Light

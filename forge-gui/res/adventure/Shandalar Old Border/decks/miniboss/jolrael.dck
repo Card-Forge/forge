@@ -1,0 +1,24 @@
+[metadata]
+Name=Jolrael, Empress of Beasts
+[Main]
+20 Forest|ICE
+4 Nature's Lore|ICE
+4 Three Visits|PTK
+4 Skyshroud Claim|NMS
+2 Fog|MIR
+2 Constant Mists|STH
+2 Seeds of Innocence|MIR
+2 Calming Verse|PCY
+2 Early Harvest|MIR
+2 Seedborn Muse|LGN
+4 Decree of Savagery|SCG
+4 Collective Unconscious|MMQ
+4 Overrun|TMP
+2 Spidersilk Armor|MMQ
+2 Vernal Bloom|USG
+
+[StartInBattle_Reference]
+1 Jolrael, Empress of Beasts|PCY
+1 Undiscovered Paradise|VIS
+1 Jolrael's Centaur|MIR
+1 Nature's Revolt|TMP

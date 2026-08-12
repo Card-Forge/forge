@@ -4,5 +4,5 @@ Types:Creature Human Assassin
 PT:1/3
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, you become the monarch.
-SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+SVar:TrigMonarch:DB$ BecomeMonarch
 Oracle:Deathtouch\nWhen Thorn of the Black Rose enters, you become the monarch.

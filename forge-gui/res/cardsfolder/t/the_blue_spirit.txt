@@ -1,0 +1,9 @@
+Name:The Blue Spirit
+ManaCost:3 U
+Types:Legendary Creature Human Rogue Ally
+PT:2/4
+S:Mode$ CastWithFlash | ValidCard$ Creature | ValidSA$ Spell | Caster$ You | CheckSVar$ X | SVarCompare$ EQ0 | Description$ You may cast the first creature spell you cast each turn as though it had flash.
+T:Mode$ ChangesZone | Phase$ BeginCombat->EndCombat | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.!token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a nontoken creature you control enters during combat, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:Count$ThisTurnCast_Creature.YouCtrl
+Oracle:You may cast the first creature spell you cast each turn as though it had flash.\nWhenever a nontoken creature you control enters during combat, draw a card.

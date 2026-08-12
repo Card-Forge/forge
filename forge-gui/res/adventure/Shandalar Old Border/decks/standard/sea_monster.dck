@@ -3,14 +3,14 @@ Name=sea_monster
 [Main]
 1 Forest|TMP|3
 14 Island|TMP|3
-4 Merfolk Looter|EXO|1
-4 Merfolk Traders|WTH|1
-4 Rootwater Alligator|EXO|1
-4 Rootwater Depths|TMP|1
-4 Rootwater Diver|TMP|1
-4 Rootwater Hunter|TMP|1
-4 Rootwater Matriarch|TMP|1
-4 Rootwater Mystic|EXO|1
-4 Rootwater Shaman|TMP|1
-4 Sea Monster|7ED|1
-4 Yavimaya Coast|APC|1
+4 Merfolk Looter|EXO
+4 Merfolk Traders|WTH
+4 Rootwater Alligator|EXO
+4 Rootwater Depths|TMP
+4 Rootwater Diver|TMP
+4 Rootwater Hunter|TMP
+4 Rootwater Matriarch|TMP
+4 Rootwater Mystic|EXO
+4 Rootwater Shaman|TMP
+4 Sea Monster|7ED
+4 Yavimaya Coast|APC

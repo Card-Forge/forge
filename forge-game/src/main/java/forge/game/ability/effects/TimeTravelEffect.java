@@ -9,17 +9,17 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
 import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.Localizer;
-import forge.util.collect.FCollection;
 
 public class TimeTravelEffect extends SpellAbilityEffect {
 
@@ -37,13 +37,11 @@ public class TimeTravelEffect extends SpellAbilityEffect {
 
         PlayerController pc = activator.getController();
 
-        final CounterEnumType counterType = CounterEnumType.TIME;
+        final CounterType counterType = CounterEnumType.TIME;
 
         for (int i = 0; i < num; i++) {
-            FCollection<Card> list = new FCollection<>();
-
             // card you own that is suspended
-            list.addAll(CardLists.filter(activator.getCardsIn(ZoneType.Exile), CardPredicates.hasSuspend()));
+            CardCollection list = CardLists.filter(activator.getCardsIn(ZoneType.Exile), Card::hasSuspend);
             // permanent you control with time counter
             list.addAll(CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounter(counterType)));
 
@@ -54,7 +52,7 @@ public class TimeTravelEffect extends SpellAbilityEffect {
                 Map<String, Object> params = Maps.newHashMap();
                 params.put("Target", c);
                 params.put("CounterType", counterType);
-                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter", counterType.getName(), CardTranslation.getTranslatedName(c.getName())) + " ";
+                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter", counterType.getName(), c.getTranslatedName()) + " ";
                 boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
 
                 if (putCounter) {
@@ -63,7 +61,7 @@ public class TimeTravelEffect extends SpellAbilityEffect {
                     c.subtractCounter(counterType, 1, activator);
                 }
             }
-            table.replaceCounterEffect(game, sa, true);
+            table.replaceCounterEffect(game, sa);
         }
     }
 

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Storm2
+Title=Storm2
+Icon=Storm2.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/2012_TCGplayer.com_MaxPoint_Diamond_-_Edison/GerrardFabiano_-_Zombie_Pod_(Standard,_#31762).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Artist
+4 Diregraf Ghoul
+1 Falkenrath Aristocrat
+2 Fume Spitter
+4 Geralf's Messenger
+4 Gloom Surgeon
+4 Gravecrawler
+1 Manic Vandal
+3 Phyrexian Metamorph
+1 Zealous Conscripts
+4 Birthing Pod
+2 Go for the Throat
+3 Tragic Slip
+4 Blackcleave Cliffs
+3 Cavern of Souls
+4 Dragonskull Summit
+10 Swamp
+3 Woodland Cemetery
+[Sideboard]
+1 Bonfire of the Damned
+2 Despise
+2 Liliana of the Veil
+3 Phyrexian Obliterator
+1 Ratchet Bomb
+2 Sorin's Thirst

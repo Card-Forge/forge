@@ -59,6 +59,9 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowActivated(final WindowEvent e) {
+                if (minimized) {
+                    setMinimized(false); //ensure window is restored when activated (fixes focus issues in some environments like WSL)
+                }
                 resume(); //resume music when main frame regains focus
             }
 

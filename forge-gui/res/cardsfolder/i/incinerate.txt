@@ -1,7 +1,8 @@
 Name:Incinerate
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBEffect | RememberDamagedCreature$ True | SpellDescription$ CARDNAME deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | ConditionDefined$ Remembered | ConditionPresent$ Creature | StackDescription$ None | AILogic$ CantRegenerate
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBEffect | RememberDamaged$ True | SpellDescription$ CARDNAME deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered.Creature | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | StackDescription$ None | AILogic$ CantRegenerate | SubAbility$ DBCleanup
 SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Incinerate deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.

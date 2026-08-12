@@ -31,6 +31,7 @@
 	"Borderland Ranger",
 	"Escaped Skaab",
 	"Falkenrath Neonate",
+	"Hobbling Zombie",
 	"Howlpack Exile",
 	"Loam Dryad",
 	"Missionary of Saint Traft",
@@ -46,7 +47,9 @@
 	"inn_ulvenwald_village",
 	"inn_Cave_river",
 	"inn_lodge_1",
-	"inn_forgotten_lodge_1"
+	"inn_forgotten_lodge_1",
+	"inn_dark_forest",
+	"inn_abbey"
 ],
 "structures": [
 	{

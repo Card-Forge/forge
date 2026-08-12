@@ -3,8 +3,10 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
 
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
@@ -19,7 +21,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 
@@ -128,7 +129,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                             srcCards.size(), true, params);
                 }
             } else {
-                // target cant receive this counter type
+                // target can't receive this counter type
                 if (!dest.canReceiveCounters(cType)) {
                     return;
                 }
@@ -143,20 +144,20 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 }
             }
 
-            Map<CounterType, Integer> countersToAdd = Maps.newHashMap();
+            Multiset<CounterType> countersToAdd = HashMultiset.create();
 
             for (Card src : srcCards) {
                 if ("All".equals(counterName)) {
-                    final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(src.getCounters());
-                    for (Map.Entry<CounterType, Integer> e : tgtCounters.entrySet()) {
-                        removeCounter(sa, src, dest, e.getKey(), counterNum, countersToAdd);
+                    final Multiset<CounterType> tgtCounters = HashMultiset.create(src.getCounters());
+                    for (Multiset.Entry<CounterType> e : tgtCounters.entrySet()) {
+                        removeCounter(sa, src, dest, e.getElement(), counterNum, countersToAdd);
                     }
                 } else {
                     removeCounter(sa, src, dest, cType, counterNum, countersToAdd);
                 }
             }
-            for (Map.Entry<CounterType, Integer> e : countersToAdd.entrySet()) {
-                dest.addCounter(e.getKey(), e.getValue(), activator, table);
+            for (Multiset.Entry<CounterType> e : countersToAdd.entrySet()) {
+                dest.addCounter(e.getElement(), e.getCount(), activator, table);
             }
 
             game.updateLastStateForCard(dest);
@@ -182,7 +183,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             if (counterNum.equals("Any")) {
                 tgtCards = activator.getController().chooseCardsForEffect(
                         tgtCards, sa, Localizer.getInstance().getMessage("lblChooseCardToGetCountersFrom",
-                                cType.getName(), CardTranslation.getTranslatedName(source.getName())),
+                                cType.getName(), source.getTranslatedName()),
                         0, tgtCards.size(), true, params);
             }
 
@@ -212,7 +213,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 params.put("Target", cur);
                 int cnum = activator.getController().chooseNumber(sa,
                         Localizer.getInstance().getMessage("lblPutHowManyTargetCounterOnCard", cType.getName(),
-                                CardTranslation.getTranslatedName(cur.getName())),
+                                cur.getTranslatedName()),
                         0, source.getCounters(cType), params);
 
                 if (cnum > 0) {
@@ -262,27 +263,27 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                         continue;
                     }
 
-                    Map<CounterType, Integer> countersToAdd = Maps.newHashMap();
+                    Multiset<CounterType> countersToAdd = HashMultiset.create();
                     if ("All".equals(counterName)) {
-                        final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(source.getCounters());
-                        for (Map.Entry<CounterType, Integer> e : tgtCounters.entrySet()) {
-                            removeCounter(sa, source, cur, e.getKey(), counterNum, countersToAdd);
+                        final Multiset<CounterType> tgtCounters = HashMultiset.create(source.getCounters());
+                        for (CounterType e : tgtCounters.elementSet()) {
+                            removeCounter(sa, source, cur, e, counterNum, countersToAdd);
                         }
                     } else if ("EachNotOn".equals(counterName)) {
-                        final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(source.getCounters());
-                        for (Map.Entry<CounterType, Integer> e : tgtCounters.entrySet()) {
-                            if (cur.getCounters(e.getKey()) > 0) {
+                        final Multiset<CounterType> tgtCounters = HashMultiset.create(source.getCounters());
+                        for (CounterType e : tgtCounters.elementSet()) {
+                            if (cur.getCounters(e) > 0) {
                                 continue;
                             }
-                            removeCounter(sa, source, cur, e.getKey(), counterNum, countersToAdd);
+                            removeCounter(sa, source, cur, e, counterNum, countersToAdd);
                         }
                     } else if ("Any".equals(counterName)) {
                         // any counterType currently only Leech Bonder
-                        final Map<CounterType, Integer> tgtCounters = source.getCounters();
+                        final Multiset<CounterType> tgtCounters = source.getCounters();
 
                         final List<CounterType> typeChoices = Lists.newArrayList();
                         // get types of counters
-                        for (CounterType ct : tgtCounters.keySet()) {
+                        for (CounterType ct : tgtCounters.elementSet()) {
                             if (dest.canReceiveCounters(ct) && source.canRemoveCounters(ct)) {
                                 typeChoices.add(ct);
                             }
@@ -308,18 +309,18 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                         removeCounter(sa, source, cur, cType, counterNum, countersToAdd);
                     }
 
-                    for (Map.Entry<CounterType, Integer> e : countersToAdd.entrySet()) {
-                        cur.addCounter(e.getKey(), e.getValue(), activator, table);
+                    for (Multiset.Entry<CounterType> e : countersToAdd.entrySet()) {
+                        cur.addCounter(e.getElement(), e.getCount(), activator, table);
                     }
                 }
             }
             // update source
             game.updateLastStateForCard(source);
         }
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
     } // moveCounterResolve
 
-    protected void removeCounter(SpellAbility sa, final Card src, final Card dest, CounterType cType, String counterNum, Map<CounterType, Integer> countersToAdd) {
+    protected void removeCounter(SpellAbility sa, final Card src, final Card dest, CounterType cType, String counterNum, Multiset<CounterType> countersToAdd) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
@@ -353,7 +354,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             int min = sa.hasParam("NonZero") && countersToAdd.isEmpty() ? 1 : 0;
             cnum = pc.chooseNumber(
                     sa, Localizer.getInstance().getMessage("lblTakeHowManyTargetCounterFromCard",
-                            cType.getName(), CardTranslation.getTranslatedName(src.getName())),
+                            cType.getName(), src.getTranslatedName()),
                     min, cmax, params);
         } else {
             cnum = Math.min(cmax, AbilityUtils.calculateAmount(host, counterNum, sa));
@@ -361,7 +362,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         if (cnum > 0) {
             src.subtractCounter(cType, cnum, activator);
             game.updateLastStateForCard(src);
-            countersToAdd.put(cType, (countersToAdd.getOrDefault(cType, 0)) + cnum);
+            countersToAdd.add(cType, cnum);
         }
     }
 }

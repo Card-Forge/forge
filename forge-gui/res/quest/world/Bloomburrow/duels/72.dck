@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Regigigas
+Title=Regigigas
+Icon=Regigigas.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/Masterbeardsman_-_Dredge_(Modern,_#2267129).dck
+Deck Type=constructed
+
+[Main]
+4 Narcomoeba
+4 Golgari Thug
+4 Prized Amalgam
+3 Silversmote Ghoul
+4 Stinkweed Imp
+2 Ox of Agonas
+1 Wonder
+4 Otherworldly Gaze
+3 Darkblast
+4 Cathartic Reunion
+4 Creeping Chill
+1 Conflagrate
+4 Tome Scour
+3 Steam Vents
+4 Cephalid Coliseum
+4 Bloodstained Mire
+1 Thundering Falls
+1 Watery Grave
+1 Blood Crypt
+4 Polluted Delta
+[Sideboard]
+4 Leyline of the Void
+4 Silent Gravestone
+4 Leyline of Sanctity
+1 Into the Flood Maw
+2 Conflagrate

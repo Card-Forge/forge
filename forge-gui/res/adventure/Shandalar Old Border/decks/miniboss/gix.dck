@@ -1,0 +1,28 @@
+[metadata]
+Name=Gix
+[Main]
+12 Swamp|USG
+4 Spawning Pool|ULG
+4 Mishra's Factory|ATQ
+4 Standing Stones|DRK
+4 Duress|USG
+2 Oppression|USG
+2 Tainted Aether|USG
+2 Megrim|STH
+2 Spreading Plague|INV
+2 Decree of Pain|SCG
+2 Chimeric Staff|USG
+2 Xanthic Statue|WTH
+2 Chimeric Idol|PCY
+2 Chimeric Sphere|WTH
+2 Jade Statue|LEA
+4 Soul Feast|UDS
+4 Rhystic Syphon|PCY
+2 Lethal Vapors|SCG
+2 Caustic Tar|ODY
+
+[StartInBattle_Reference]
+2 Priest of Gix|USG
+1 Tainted Aether|USG
+1 Oppression|USG
+1 Bereavement|USG

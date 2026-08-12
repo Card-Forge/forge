@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sentinel
+Title=Sentinel
+Icon=Sentinel.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/dschidi_-_Deck_(Modern,_#662769).dck
+Deck Type=constructed
+
+[Main]
+1 AEtherling
+2 Dominus of Fealty
+4 Harbinger of the Tides
+2 Kira, Great Glass-Spinner
+4 Master of Waves
+2 Sower of Temptation
+1 Teferi, Mage of Zhalfir
+2 Thassa, God of the Sea
+2 Vendilion Clique
+4 Wistful Selkie
+4 Fieldmist Borderpost
+4 Mistvein Borderpost
+2 Sea's Claim
+4 Spreading Seas
+1 Jace, Architect of Thought
+3 Karn Liberated
+1 Tamiyo, the Moon Sage
+13 Island
+4 Nykthos, Shrine to Nyx
+[Sideboard]
+1 Batterskull
+1 Cyclonic Rift
+1 Dispel
+2 Glen Elendra Archmage
+2 Imprisoned in the Moon
+1 Jace, Architect of Thought
+3 Negate
+3 Spellskite
+1 Wurmcoil Engine

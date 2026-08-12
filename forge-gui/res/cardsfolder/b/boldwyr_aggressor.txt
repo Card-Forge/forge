@@ -1,0 +1,9 @@
+Name:Boldwyr Aggressor
+ManaCost:3 R R
+Types:Creature Giant Warrior
+PT:2/5
+K:Double Strike
+S:Mode$ Continuous | Affected$ Giant.Other+YouCtrl | AddKeyword$ Double Strike | Description$ Other Giants you control have double strike.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Giant
+Oracle:Double strike\nOther Giants you control have double strike.

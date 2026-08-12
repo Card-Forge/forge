@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Pointy Haired Boss
+Title=Pointy Haired Boss
+Icon=Pointy Haired Boss.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/SCG_Invitational_Columbus/Joe_Bass_-_Abzan_Control_(Standard,_#254416).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+3 Den Protector
+4 Fleecemane Lion
+4 Siege Rhino
+4 Abzan Charm
+2 Bile Blight
+1 Dromoka's Command
+3 Hero's Downfall
+1 End Hostilities
+4 Thoughtseize
+3 Elspeth, Sun's Champion
+1 Ugin, the Spirit Dragon
+2 Caves of Koilos
+2 Forest
+3 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+1 Ajani, Mentor of Heroes
+3 Arashin Cleric
+3 Drown in Sorrow
+2 Duress
+1 Nissa, Worldwaker
+1 Read the Bones
+2 Sorin, Solemn Visitor

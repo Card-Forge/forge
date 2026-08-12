@@ -3,7 +3,6 @@ ManaCost:G
 Types:Creature Elf Druid
 PT:1/1
 K:Level up:1 G
-SVar:maxLevel:5
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 2 | AddAbility$ ABMana | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE4_LEVEL | Description$ LEVEL 1-4 1/2 {T}: Add {G}{G}.
 SVar:ABMana:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 4 | IsPresent$ Card.Self+counters_GE5_LEVEL

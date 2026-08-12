@@ -1,0 +1,7 @@
+Name:Scuzzback Scrounger
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:3/2
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your first main phase, you may blight 1. If you do, create a Treasure token. (To blight 1, put a -1/-1 counter on a creature you control. A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+SVar:TrigToken:AB$ Token | Cost$ Blight<1> | TokenScript$ c_a_treasure_sac
+Oracle:At the beginning of your first main phase, you may blight 1. If you do, create a Treasure token. (To blight 1, put a -1/-1 counter on a creature you control. A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

@@ -2,7 +2,7 @@ Name:Embalmed Brawler
 ManaCost:2 B
 Types:Creature Zombie
 PT:2/2
-K:Amplify:1:Zombie
+K:Amplify:1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks or blocks, you lose 1 life for each +1/+1 counter on it.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, you lose 1 life for each +1/+1 counter on it.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X

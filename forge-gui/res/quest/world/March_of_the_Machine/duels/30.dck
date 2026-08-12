@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Ajok
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Matias_Leveratto_-_Rakdos_Reanimator_(Standard,_#1636274).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+1 Atraxa, Grand Unifier
+3 Phyrexian Fleshgorger
+2 Atsushi, the Blazing Sky
+2 Etali, Primal Conqueror
+4 Fable of the Mirror-Breaker
+3 Reckoner Bankbuster
+2 Cut Down
+1 Abrade
+4 Go for the Throat
+3 Invoke Despair
+1 Bitter Reunion
+1 The Elder Dragon War
+3 The Cruelty of Gix
+1 Takenuma, Abandoned Mire
+4 Haunted Ridge
+1 Sokenzan, Crucible of Defiance
+4 Blackcleave Cliffs
+1 Ziatora's Proving Ground
+9 Swamp
+1 Mountain
+1 Xander's Lounge
+4 Sulfurous Springs
+[Sideboard]
+1 Cut Down
+1 Reckoner Bankbuster
+1 Abrade
+1 Rotten Reunion
+4 Duress
+1 Breach the Multiverse
+1 Glistening Deluge
+2 Gix's Command
+1 Chandra, Hope's Beacon
+2 Lithomantic Barrage

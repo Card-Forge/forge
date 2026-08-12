@@ -5,7 +5,7 @@ Difficulty=hard
 Description=UG Intruder Alarm deck with Imperious Perfect and mana elves
 Icon=Mister Fantastic.jpg
 Deck Type=constructed
-[main]
+[Main]
 4 Misty Rainforest
 4 Tropical Island
 7 Island|M12
@@ -23,4 +23,4 @@ Deck Type=constructed
 4 Dormant Gomazoa
 2 Apes of Rath
 1 Walking Dream
-[sideboard]
+[Sideboard]

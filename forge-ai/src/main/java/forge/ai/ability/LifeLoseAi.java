@@ -14,10 +14,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
-import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-
-import java.util.List;
 
 public class LifeLoseAi extends SpellAbilityAi {
 
@@ -28,7 +25,7 @@ public class LifeLoseAi extends SpellAbilityAi {
      * SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
 
         final Card source = sa.getHostCard();
@@ -41,9 +38,8 @@ public class LifeLoseAi extends SpellAbilityAi {
                 amount = root.getXManaCostPaid();
             } else if (root.getPayCosts() != null && root.getPayCosts().hasXInAnyCostPart()) {
                 // Set PayX here to maximum value.
-                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-                root.setXManaCostPaid(xPay);
-                amount = xPay;
+                amount = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
+                root.setXManaCostPaid(amount);
             }
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
@@ -67,24 +63,23 @@ public class LifeLoseAi extends SpellAbilityAi {
      * forge.game.card.Card)
      */
     @Override
-    protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
+    protected boolean willPayCosts(Player payer, SpellAbility sa, Cost cost, Card source) {
         final String amountStr = sa.getParam("LifeAmount");
         int amount = 0;
 
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            amount = ComputerUtilCost.setMaxXValue(sa, payer, sa.isTrigger());
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
         // special logic for checkLifeCost
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, amount, sa)) {
+        if (!ComputerUtilCost.checkLifeCost(payer, cost, source, amount, sa)) {
             return false;
         }
 
         // other cost as the same
-        return super.willPayCosts(ai, sa, cost, source);
+        return super.willPayCosts(payer, sa, cost, source);
     }
 
     /*
@@ -107,9 +102,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            sa.setXManaCostPaid(amount);
+            amount = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
@@ -163,45 +156,33 @@ public class LifeLoseAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility, boolean)
      */
     @Override
-    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa,
-                                                final boolean mandatory) {
-        if (sa.usesTargeting()) {
-            if (!doTgt(ai, sa, mandatory)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        if (sa.usesTargeting() && !doTgt(ai, sa, mandatory)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        final Card source = sa.getHostCard();
-        final String amountStr = sa.getParam("LifeAmount");
-        int amount = 0;
-        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, true);
-            sa.setXManaCostPaid(xPay);
-            amount = xPay;
-        } else {
-            amount = AbilityUtils.calculateAmount(source, amountStr, sa);
-        }
-
-        final List<Player> tgtPlayers = sa.usesTargeting() && !sa.hasParam("Defined")
-                ? new FCollection<>(sa.getTargets().getTargetPlayers())
-                : AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
-
-        // For cards like Foul Imp, ETB you lose life
         if (mandatory) {
             return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
         }
 
-        if (!tgtPlayers.contains(ai) || amount <= 0 || amount + 3 <= ai.getLife()) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        final Card source = sa.getHostCard();
+        final String amountStr = sa.getParam("LifeAmount");
+        int amount;
+        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
+            amount = ComputerUtilCost.setMaxXValue(sa, ai, true);
         } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
+
+        // For cards like Foul Imp: ETB you lose life
+        if (!getPlayers(ai, sa).contains(ai) || amount <= 0 || amount + 3 <= ai.getLife()) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid,
-            FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         if (!payer.canLoseLife() || payer.cantLoseForZeroOrLessLife()) {
             return false;
         }
@@ -224,7 +205,7 @@ public class LifeLoseAi extends SpellAbilityAi {
             return true;
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 
     protected boolean doTgt(Player ai, SpellAbility sa, boolean mandatory) {

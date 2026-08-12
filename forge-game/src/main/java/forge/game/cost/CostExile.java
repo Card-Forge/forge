@@ -223,22 +223,7 @@ public class CostExile extends CostPartWithList {
             list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
         }
 
-        int amount = this.getAbilityAmount(ability);
-
-        if (nTypes > -1) {
-            if (AbilityUtils.countCardTypesFromList(list, false) < nTypes) return false;
-        }
-        
-        if (sharedType) { // will need more logic if cost ever wants more than 2 that share a type
-            if (list.size() < amount) return false;
-            for (int i = 0; i < list.size(); i++) {
-                final Card card1 = list.get(i);
-                for (final Card compare : list) {
-                    if (!compare.equals(card1) && compare.sharesCardTypeWith(card1)) {
-                        return true;
-                    }
-                }
-            }
+        if (nTypes > -1 && AbilityUtils.countCardTypesFromList(list, false) < nTypes) {
             return false;
         }
 
@@ -248,6 +233,27 @@ public class CostExile extends CostPartWithList {
             }
             int i = AbilityUtils.calculateAmount(source, totalM, ability);
             return totalCMCgreater ? CardLists.getTotalCMC(list) >= i : CardLists.cmcCanSumTo(i, list);
+        }
+
+        int amount = this.getAbilityAmount(ability);
+        
+        if (sharedType) {
+            if (list.size() < amount) {
+                return false;
+            }
+
+            for (CardType.CoreType coreType : CardType.CoreType.values()) {
+                int count = 0;
+                for (final Card card : list) {
+                    if (card.getType().hasType(coreType)) {
+                        count++;
+                        if (count >= amount) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
         // for Craft: do not count the source card twice (it will be sacrificed)

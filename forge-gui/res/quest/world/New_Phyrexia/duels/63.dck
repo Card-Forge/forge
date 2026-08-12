@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=MamiWata
+Title=MamiWata
+Icon=MamiWata.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Magic-League_Modern_Trial/Mistah_Alex_-_Zoo_(Modern,_#18781).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+3 Grim Lavamancer
+4 Kird Ape
+4 Knight of the Reliquary
+4 Tarmogoyf
+4 Wild Nacatl
+3 Incinerate
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+4 Arid Mesa
+1 Forest
+1 Misty Rainforest
+2 Mountain
+2 Plains
+4 Sacred Foundry
+4 Stomping Ground
+4 Temple Garden
+[Sideboard]
+3 Ancient Grudge
+2 Beast Within
+3 Burrenton Forge-Tender
+3 Ethersworn Canonist
+2 Proclamation of Rebirth
+2 Relic of Progenitus

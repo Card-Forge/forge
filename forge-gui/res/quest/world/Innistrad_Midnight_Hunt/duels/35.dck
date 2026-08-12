@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Superman
+Title=Superman
+Icon=Superman.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/JayVillain_-_Demonic_Sacrifice_Mono_Black_(Standard,_#1211275).dck
+Deck Type=constructed
+
+[Main]
+2 Varragoth, Bloodsky Sire
+2 Burning-Rune Demon
+2 Heirloom Mirror
+2 Dreadhound
+2 Lord of the Forsaken
+3 Dream Devourer
+4 Shambling Ghast
+4 Ecstatic Awakener
+2 Raise the Draugr
+2 Demonic Gifts
+3 Deadly Dispute
+4 Infernal Grasp
+2 Agadeem's Awakening
+3 Crawl from the Cellar
+2 The Meathook Massacre
+21 Swamp
+[Sideboard]

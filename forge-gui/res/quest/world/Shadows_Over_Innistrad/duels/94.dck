@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Blue Devil
+Title=Blue Devil
+Icon=Blue Devil.jpg
+Difficulty=Very Hard
+Description=../Modern/Shadows_over_Innistrad/SCG_States_Littleton/Michael_Lewis_-_GW_Auras_(Modern,_#618287).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+3 Path to Exile
+1 Open the Armory
+4 Daybreak Coronet
+4 Ethereal Armor
+1 Gryff's Boon
+4 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+1 Spirit Link
+2 Spirit Mantle
+1 Forest
+4 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+4 Temple Garden
+4 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+2 Gaddock Teeg
+4 Leyline of Sanctity
+3 Nature's Claim
+2 Rest in Peace
+3 Stony Silence
+1 Suspension Field

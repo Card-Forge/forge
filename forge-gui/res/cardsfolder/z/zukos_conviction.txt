@@ -1,0 +1,8 @@
+Name:Zuko's Conviction
+ManaCost:B
+Types:Instant
+K:Kicker:4
+A:SP$ ChangeZone | ValidTgts$ Creature.YouOwn | TgtPrompt$ Choose target creature card in your graveyard | Origin$ Graveyard | Destination$ Hand | DestinationAlternative$ Battlefield | DestAltSVar$ MANDATORY X | Tapped$ True | SpellDescription$ Return target creature card from your graveyard to your hand. If this spell was kicked, instead put that card onto the battlefield tapped.
+SVar:X:Count$Kicked.1.0
+DeckHas:Ability$Graveyard
+Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nReturn target creature card from your graveyard to your hand. If this spell was kicked, instead put that card onto the battlefield tapped.

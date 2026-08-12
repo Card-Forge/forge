@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Frogmanfue_-_Rakdos_Midrange_(Standard,_#1414413).dck
+Deck Type=constructed
+
+[Main]
+4 Fable of the Mirror-Breaker
+4 Tenacious Underdog
+4 Graveyard Trespasser
+4 Bloodtithe Harvester
+2 Infernal Grasp
+2 Hagra Mauling
+2 Deadly Dispute
+1 Duress
+4 Invoke Despair
+4 Dread Fugue
+2 The Meathook Massacre
+2 Lolth, Spider Queen
+2 Sorin the Mirthless
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Den of the Bugbear
+2 Hive of the Eye Tyrant
+4 Blightstep Pathway
+4 Haunted Ridge
+9 Swamp
+[Sideboard]
+1 Valki, God of Lies
+1 Soul Shatter
+1 Go Blank
+2 Reckoner Bankbuster
+2 Parasitic Grasp
+2 Infernal Grasp
+3 Duress
+3 Ray of Enfeeblement

@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Artifact.YouCtrl:artifact you control
 SVar:AttachAILogic:Pump
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopyPermanent | TriggerDescription$ At the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game.
-SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ Enchanted | NumCopies$ 1 | SubAbility$ DBWin
+SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ Enchanted | SubAbility$ DBWin
 SVar:DBWin:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE8
 SVar:X:Count$MostCardName Artifact.YouCtrl
 Oracle:Enchant artifact you control\nAt the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game.

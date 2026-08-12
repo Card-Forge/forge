@@ -1,0 +1,11 @@
+Name:Ravenous Robots
+ManaCost:1 R
+Types:Artifact Creature Robot
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an artifact spell, create a 1/1 colorless Robot artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_robot | TokenOwner$ You
+A:AB$ PumpAll | Cost$ R T | ValidCards$ Creature.token+YouCtrl | KW$ Haste | SpellDescription$ Creature tokens you control gain haste until end of turn.
+SVar:BuffedBy:Artifact
+DeckHas:Ability$Token
+DeckHints:Type$Artifact
+Oracle:Whenever you cast an artifact spell, create a 1/1 colorless Robot artifact creature token.\n{R}, {T}: Creature tokens you control gain haste until end of turn.

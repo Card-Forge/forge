@@ -5,7 +5,7 @@ Difficulty=medium
 Description=Mono G Muraganda Petroglyphs deck with vanilla creatures and a few tokens
 Icon=Radagast.jpg
 Deck Type=constructed
-[main]
+[Main]
 23 Forest|M11
 4 Muraganda Petroglyphs
 2 Hornet Sting
@@ -24,4 +24,4 @@ Deck Type=constructed
 1 Moss Monster
 1 Silverback Ape
 1 Craw Wurm
-[sideboard]
+[Sideboard]

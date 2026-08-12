@@ -1,0 +1,10 @@
+Name:Longshot, Rebel Bowman
+ManaCost:3 R
+Types:Legendary Creature Human Rebel Ally
+PT:3/3
+K:Reach
+S:Mode$ ReduceCost | ValidCard$ Card.nonCreature | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Noncreature spells you cast cost {1} less to cast.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a noncreature spell, NICKNAME deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+SVar:BuffedBy:Card.nonCreature+nonLand
+Oracle:Reach (This creature can block creatures with flying.)\nNoncreature spells you cast cost {1} less to cast.\nWhenever you cast a noncreature spell, Longshot deals 2 damage to each opponent.

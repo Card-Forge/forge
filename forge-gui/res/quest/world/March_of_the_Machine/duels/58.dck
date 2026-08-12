@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Imperial Guard
+Title=Imperial Guard
+Icon=Imperial Guard.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/crazybaloth_-_White_Weenie_(Modern,_#1636831).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+3 Thalia, Guardian of Thraben
+4 Thalia's Lieutenant
+4 Ranger-Captain of Eos
+1 Giant Killer
+3 Luminarch Aspirant
+4 Esper Sentinel
+4 Solitude
+2 Adeline, Resplendent Cathar
+2 Adeline, Resplendent Cathar
+2 Anointed Peacekeeper
+1 Recruitment Officer
+3 Knight-Errant of Eos
+4 Aether Vial
+3 Horizon Canopy
+4 Mutavault
+4 Cavern of Souls
+6 Plains
+2 Eiganjo, Seat of the Empire
+[Sideboard]
+3 Burrenton Forge-Tender
+2 Kataki, War's Wage
+1 Containment Priest
+2 Drannith Magistrate
+2 Containment Priest
+3 Sanctifier en-Vec
+2 Loran of the Third Path

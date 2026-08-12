@@ -1,0 +1,11 @@
+Name:Agent Venom
+Variant:UniversesWithin:FlavorName:Rhilex the Accursed
+ManaCost:2 B
+Types:Legendary Creature Symbiote Soldier Hero
+PT:2/3
+K:Flash
+K:Menace
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+!token+YouCtrl | Execute$ TrigDraw | TriggerDescription$ Whenever another nontoken creature you control dies, you draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+Oracle:Flash\nMenace\nWhenever another nontoken creature you control dies, you draw a card and lose 1 life.

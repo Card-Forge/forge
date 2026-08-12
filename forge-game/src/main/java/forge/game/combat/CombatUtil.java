@@ -17,7 +17,6 @@
  */
 package forge.game.combat;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -40,7 +39,6 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.MapToAmount;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
@@ -206,8 +204,8 @@ public class CombatUtil {
         }
 
         // Basic checks (unless is for next turn)
-        if (!forNextTurn && (
-                   !attacker.isCreature()
+        if (!forNextTurn &&
+                (!attacker.isCreature()
                 || attacker.isTapped() || attacker.isPhasedOut()
                 || isAttackerSick(attacker, defender)
                 || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
@@ -225,20 +223,9 @@ public class CombatUtil {
                     if (!ge.equals(defender) && ge instanceof Player) {
                         // found a player which does not goad that creature
                         // and creature can attack this player or planeswalker
-                        if (!attacker.isGoadedBy((Player) ge) && !ge.hasKeyword("Creatures your opponents control attack a player other than you if able.") && canAttack(attacker, ge)) {
+                        if (!attacker.isGoadedBy((Player) ge) && canAttack(attacker, ge)) {
                             return false;
                         }
-                    }
-                }
-            }
-        }
-
-        // Quasi-goad logic for "Kardur, Doomscourge" etc. that isn't goad but behaves the same
-        if (defender != null && defender.hasKeyword("Creatures your opponents control attack a player other than you if able.")) {
-            for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
-                if (!ge.equals(defender) && ge instanceof Player) {
-                    if (!ge.hasKeyword("Creatures your opponents control attack a player other than you if able.") && canAttack(attacker, ge)) {
-                        return false;
                     }
                 }
             }
@@ -283,7 +270,7 @@ public class CombatUtil {
     }
 
     public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
-        return getAttackCost(game, attacker, defender, ImmutableList.of());
+        return getAttackCost(game, attacker, defender, List.of());
     }
     /**
      * Get the cost that has to be paid for a creature to attack a certain
@@ -402,16 +389,13 @@ public class CombatUtil {
     }
 
     /**
-     * Create a {@link Map} mapping each possible attacker for the attacking
-     * {@link Player} this {@link Combat} (see
-     * {@link #getPossibleAttackers(Player)}) to a {@link MapToAmount}. This map
-     * then maps each {@link GameEntity}, for which an attack requirement
+     * Create a {@link AttackConstraints} mapping each {@link GameEntity}, for which an attack requirement
      * exists, to the number of requirements on attacking that entity. Absent
      * entries, including an empty map, indicate no requirements exist.
      *
      * @param combat
      *            a {@link Combat}.
-     * @return a {@link Map}.
+     * @return a {@link AttackConstraints}.
      */
     public static AttackConstraints getAllRequirements(final Combat combat) {
         return new AttackConstraints(combat);

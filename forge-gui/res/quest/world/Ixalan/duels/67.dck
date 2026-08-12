@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Robot67
+Title=Robot67
+Icon=Crocodile Dundee.jpg
+Difficulty=Easy
+Description=Abzan 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+4 Renegade Map
+2 Treasure Map
+4 Fatal Push
+4 Fumigate
+3 Start // Finish
+4 Anointed Procession
+1 Cast Out
+4 Hidden Stockpile
+2 Ixalan's Binding
+4 Legion's Landing
+2 Vraska, Relic Seeker
+4 Concealed Courtyard
+4 Evolving Wilds
+1 Forest
+2 Ifnir Deadlands
+5 Plains
+2 Shefet Dunes
+4 Swamp
+[Sideboard]
+4 Adanto Vanguard
+4 Duress
+1 Ixalan's Binding
+4 Lost Legacy
+2 Sunscourge Champion

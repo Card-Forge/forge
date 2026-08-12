@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Terminator
+Title=Terminator
+Icon=Terminator.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Aida_Yasuki_-_Monoblue_Tempo_(Standard,_#767222).dck
+Deck Type=constructed
+
+[Main]
+1 Exclusion Mage
+4 Merfolk Trickster
+4 Mist-Cloaked Herald
+2 Nightveil Sprite
+4 Siren Stormtamer
+4 Tempest Djinn
+2 Warkite Marauder
+2 Dive Down
+3 Essence Scatter
+2 Spell Pierce
+4 Wizard's Retort
+2 Chart a Course
+1 Quasiduplicate
+4 Curious Obsession
+21 Island
+[Sideboard]
+3 Diamond Mare
+1 Disdainful Stroke
+1 Exclusion Mage
+3 Negate
+3 Selective Snare
+2 Sleep
+2 Syncopate

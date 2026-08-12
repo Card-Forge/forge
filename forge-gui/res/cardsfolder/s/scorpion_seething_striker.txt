@@ -1,0 +1,11 @@
+Name:Scorpion, Seething Striker
+Variant:UniversesWithin:FlavorName:Scorvus Ames, Crimelord
+ManaCost:3 B
+Types:Legendary Creature Scorpion Human Villain
+PT:3/3
+K:Deathtouch
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Morbid | Execute$ TrigConnive | TriggerDescription$ At the beginning of your end step, if a creature died this turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:TrigConnive:DB$ Connive | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+SVar:Morbid:Count$Morbid.1.0
+DeckHas:Ability$Counters
+Oracle:Deathtouch\nAt the beginning of your end step, if a creature died this turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

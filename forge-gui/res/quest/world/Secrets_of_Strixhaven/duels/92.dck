@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Travis_Brown_-_Hammer_Time_(Modern,_#2897102).dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+3 Memnite
+4 Ornithopter
+4 Puresteel Paladin
+4 Stoneforge Mystic
+4 Colossus Hammer
+1 Cryptic Coat
+1 Lavaspur Boots
+4 Leyline Axe
+4 Mox Opal
+1 Pithing Needle
+4 Battlefield Improvisation
+4 Metallic Rebuke
+4 Urza's Saga
+4 Arid Mesa
+1 Flooded Strand
+2 Hallowed Fountain
+2 Inkmoth Nexus
+4 Marsh Flats
+1 Meticulous Archive
+2 Plains
+[Sideboard]
+3 Consign to Memory
+2 Damping Sphere
+2 Erode
+1 Grafdigger's Cage
+2 Portable Hole
+1 Surge of Salvation
+1 Tormod's Crypt
+3 Vexing Bauble

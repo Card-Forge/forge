@@ -18,7 +18,7 @@ ManaCost:no cost
 Colors:black,green
 Types:Legendary Planeswalker Grist
 Loyalty:3
-A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ bg_1_1_insect | TokenOwner$ You | ImprintTokens$ True | SubAbility$ DBMill | SpellDescription$ Create a 1/1 black and green Insect creature token, then mill two cards. Put a deathtouch counter on the token if a black card was milled this way.
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ bg_1_1_insect | TokenOwner$ You | ImprintTokens$ True | SubAbility$ DBMill | SpellDescription$ Create a 1/1 black and green Insect creature token, then mill two cards. Put a deathtouch counter on the token if a black card was milled this way.
 SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 2 | RememberMilled$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Imprinted | CounterType$ Deathtouch | CounterNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Black | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 A:AB$ Destroy | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.

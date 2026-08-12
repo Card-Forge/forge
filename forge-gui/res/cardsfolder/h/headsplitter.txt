@@ -2,7 +2,7 @@ Name:Headsplitter
 ManaCost:1 R
 Types:Artifact Equipment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 black Assassin creature token with menace, then attach CARDNAME to it.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_assassin_menace | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_assassin_menace | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token

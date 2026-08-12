@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/Durotan97_-_Orzhov_Blink_(Modern,_#2532857).dck
+Deck Type=constructed
+
+[Main]
+1 Boggart Trawler
+4 Phelia, Exuberant Shepherd
+4 Overlord of the Balemurk
+2 Recruiter of the Guard
+4 Solitude
+4 Witch Enchanter
+4 Emperor of Bones
+4 Flickerwisp
+3 Cecil, Dark Knight
+1 Aven Interrupter
+3 Ephemerate
+4 Fatal Push
+4 Thoughtseize
+1 Windswept Heath
+2 Plains
+4 Arid Mesa
+1 Shadowy Backstreet
+2 Godless Shrine
+1 Swamp
+1 Hallowed Fountain
+1 Undercity Sewers
+1 Meticulous Archive
+4 Marsh Flats
+[Sideboard]
+2 Ashiok, Dream Render
+2 High Noon
+2 White Orchid Phantom
+2 Clarion Conqueror
+3 Wrath of the Skies
+4 Consign to Memory

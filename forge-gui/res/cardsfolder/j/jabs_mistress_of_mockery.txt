@@ -1,0 +1,6 @@
+Name:Jabs, Mistress of Mockery
+ManaCost:2 R
+Types:Legendary Creature Human Rogue
+PT:2/3
+S:Mode$ Panharmonicon | ValidCard$ Permanent.YouCtrl+YouDontOwn | Description$ If a triggered ability of a permanent you control but don't own triggers, that ability triggers an additional time.
+Oracle:If a triggered ability of a permanent you control but don't own triggers, that ability triggers an additional time.

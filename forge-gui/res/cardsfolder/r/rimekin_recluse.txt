@@ -1,0 +1,7 @@
+Name:Rimekin Recluse
+ManaCost:2 U
+Types:Creature Elemental Wizard
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, return up to one other target creature to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one other target creature
+Oracle:When this creature enters, return up to one other target creature to its owner's hand.

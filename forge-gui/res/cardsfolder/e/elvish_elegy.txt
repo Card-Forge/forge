@@ -1,0 +1,9 @@
+Name:Elvish Elegy
+ManaCost:BG
+Types:Kindred Sorcery Elf
+A:SP$ Mill | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBPumpAll | SpellDescription$ Mill three cards, then each creature card in your graveyard perpetually gets +1/+1. You may put an Elf or land card from among the milled cards into your hand.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouOwn | PumpZone$ Graveyard | Duration$ Perpetual | NumAtt$ +1 | NumDef$ +1 | SubABility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Elf.IsRemembered,Land.IsRemembered | SelectPrompt$ You may put an Elf or land card from among the milled cards into your hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill
+Oracle:Mill three cards, then each creature card in your graveyard perpetually gets +1/+1. You may put an Elf or land card from among the milled cards into your hand.

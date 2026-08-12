@@ -1,0 +1,9 @@
+Name:Toucan-Puffin
+ManaCost:2 W
+Types:Creature Bird
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, target creature you control gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhen this creature enters, target creature you control gets +2/+0 until end of turn.

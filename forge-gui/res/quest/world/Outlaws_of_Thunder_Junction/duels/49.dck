@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/Akira_Kobayashi_-_Azorius_Control_(Standard,_#2061689).dck
+Deck Type=constructed
+
+[Main]
+1 Tishana's Tidebinder
+3 March of Otherworldly Light
+4 Three Steps Ahead
+1 Get Lost
+4 No More Lies
+3 Deduce
+4 Memory Deluge
+2 Depopulate
+2 Sunfall
+1 Farewell
+2 Temporary Lockdown
+4 The Wandering Emperor
+1 Jace, the Perfected Mind
+3 Adarkar Wastes
+4 Deserted Beach
+1 Eiganjo, Seat of the Empire
+4 Field of Ruin
+3 Island
+2 Mirrex
+1 Otawara, Soaring City
+3 Plains
+4 Restless Anchorage
+2 Seachrome Coast
+1 Sunken Citadel
+[Sideboard]
+2 Elspeth's Smite
+2 Rest in Peace
+2 Negate
+1 Unlicensed Hearse
+1 Kutzil's Flanker
+2 Temporary Lockdown
+1 Chrome Host Seedshark
+2 Tishana's Tidebinder
+1 Boon-Bringer Valkyrie
+1 Hullbreaker Horror

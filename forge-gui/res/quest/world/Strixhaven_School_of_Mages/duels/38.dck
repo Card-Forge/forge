@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Boros-precon
+Title=Boros-precon
+Icon=Boros-precon.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Dan_Hall_-_Jeskai_Mutate_(Standard,_#1169241).dck
+Deck Type=constructed
+
+[Main]
+4 Lore Drakkis
+4 Goldspan Dragon
+4 Vadrok, Apex of Thunder
+1 Essence Scatter
+1 Sejiri Shelter
+1 Scorching Dragonfire
+1 Mystical Dispute
+2 Negate
+2 Fire Prophecy
+3 Prismari Command
+4 Unsubstantiate
+4 Spikefield Hazard
+3 Seize the Spoils
+4 Expressive Iteration
+2 Mountain
+4 Hengegate Pathway
+4 Needleverge Pathway
+4 Raugrin Triome
+4 Riverglide Pathway
+4 Island
+[Sideboard]
+1 Light of Hope
+1 Glass Casket
+1 Essence Scatter
+2 Phoenix of Ash
+2 Mystical Dispute
+2 Cinderclasm
+3 Mazemind Tome
+3 Redcap Melee

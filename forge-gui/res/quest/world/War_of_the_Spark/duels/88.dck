@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Ogun
+Title=Ogun
+Icon=Ogun.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/John_Johnson_-_Infect_(Modern,_#801853).dck
+Deck Type=constructed
+
+[Main]
+1 Ichorclaw Myr
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+1 Apostle's Blessing
+3 Become Immense
+3 Blossoming Defense
+2 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+2 Spell Pierce
+4 Vines of Vastwood
+2 Distortion Strike
+2 Rancor
+2 Forest
+2 Breeding Pool
+4 Inkmoth Nexus
+1 Misty Rainforest
+1 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+2 Pendelhaven
+[Sideboard]
+1 Spellskite
+1 Viridian Corrupter
+1 Wild Defiance
+2 Dismember
+2 Dispel
+1 Dissenter's Deliverance
+2 Nature's Claim
+2 Ravenous Trap
+1 Nissa, Voice of Zendikar
+2 Teferi, Time Raveler

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Jack Sparrow
+Title=Jack Sparrow
+Icon=Jack Sparrow.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/States-Champs_New_York/Qin_Zhu_-_Valakut_Ramp_(Standard,_#7638).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avenger of Zendikar
+4 Overgrown Battlement
+4 Primeval Titan
+2 Wurmcoil Engine
+2 Harrow
+4 Lightning Bolt
+3 Summoning Trap
+4 Cultivate
+3 Explore
+3 Khalni Heart Expedition
+3 Evolving Wilds
+5 Forest
+11 Mountain
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 All Is Dust
+2 Combust
+3 Naturalize
+4 Obstinate Baloth
+4 Pyroclasm

@@ -124,6 +124,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Forge.setLastInputWasController(false);
         if (hud.touchDown(screenX, screenY, pointer, button))
             return true;
         if (isInHudOnlyMode())
@@ -144,6 +145,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        Forge.setLastInputWasController(false);
         if (hud.touchDragged(screenX, screenY, pointer))
             return true;
         if (isInHudOnlyMode())
@@ -181,8 +183,8 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     }
 
     @Override
-    public void setWinner(boolean winner) {
-        stage.setWinner(winner);
+    public void setWinner(boolean winner, boolean isArena) {
+        stage.setWinner(winner, isArena);
     }
 
     public boolean isInHudOnlyMode() {

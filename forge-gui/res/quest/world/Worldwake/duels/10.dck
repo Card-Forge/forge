@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=BlackPanther
+Title=BlackPanther
+Icon=BlackPanther.jpg
+Difficulty=Easy
+Description=Worldwake/National_Qualifier_2010_-_Salzburg_-_Austria/Michael_Rohrbock_-_Boss_Naya_(Standard,_#2197).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Baneslayer Angel
+2 Birds of Paradise
+4 Bloodbraid Elf
+3 Cunning Sparkmage
+4 Knight of the Reliquary
+4 Noble Hierarch
+4 Ranger of Eos
+1 Scute Mob
+3 Stoneforge Mystic
+1 Vithian Stinger
+3 Wild Nacatl
+2 Basilisk Collar
+1 Behemoth Sledge
+2 Oblivion Ring
+4 Arid Mesa
+5 Forest
+3 Misty Rainforest
+2 Mountain
+2 Plains
+1 Raging Ravine
+1 Rootbound Crag
+1 Sejiri Steppe
+2 Stirring Wildwood
+1 Tectonic Edge
+2 Terramorphic Expanse
+[Sideboard]
+4 Great Sable Stag
+3 Luminarch Ascension
+1 Manabarbs
+3 Path to Exile

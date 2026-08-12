@@ -7,7 +7,7 @@ SVar:LifeYou:Count$YourLifeTotal
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_human | ConditionCheckSVar$ CreaturesThem | ConditionSVarCompare$ GTCreaturesYou | SubAbility$ DBDraw | SpellDescription$ If an opponent controls more creatures than you, create two 1/1 white Human creature tokens.
 SVar:CreaturesThem:PlayerCountOpponents$HighestValid Creature.YouCtrl
 SVar:CreaturesYou:Count$Valid Creature.YouCtrl
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ CardsThem | ConditionSVarCompare$ GTCardsYou | StackDescription$ SpellDescription | SpellDescription$ If an opponent has more cards in hand than you, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ CardsThem | ConditionSVarCompare$ GTCardsYou | StackDescription$ SpellDescription | SpellDescription$ If an opponent has more cards in hand than you, draw a card.
 SVar:CardsThem:PlayerCountOpponents$HighestCardsInHand
 SVar:CardsYou:Count$CardsInYourHand
 DeckHas:Ability$LifeGain|Token

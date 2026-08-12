@@ -1,0 +1,7 @@
+Name:A Good Day to Die
+ManaCost:B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | SubAbility$ DBDelayedTrigger | SpellDescription$ Target creature gets +2/+0 until end of turn.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigDraw | SpellDescription$ When that creature dies this turn, you draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Target creature gets +2/+0 until end of turn. When that creature dies this turn, you draw a card.

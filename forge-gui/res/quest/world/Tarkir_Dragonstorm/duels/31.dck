@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Colossus
+Title=Colossus
+Icon=Colossus.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/Morisaki_Nobuki_-_WR_Aggro_(Standard,_#2441821).dck
+Deck Type=constructed
+
+[Main]
+4 Resolute Reinforcements
+4 Imodane's Recruiter
+2 Sanguine Evangelist
+1 Anim Pakal, Thousandth Moon
+1 Arabella, Abandoned Doll
+4 Skyknight Squire
+4 Voice of Victory
+4 Stadium Headliner
+4 Frontline Rush
+4 Case of the Gateway Express
+4 Warleader's Call
+2 Shardmage's Rescue
+3 Plains
+5 Mountain
+4 Inspiring Vantage
+4 Battlefield Forge
+4 Sunbillow Verge
+2 Dalkovan Encampment
+[Sideboard]
+2 Rest in Peace
+4 Urabrask's Forge
+2 Surge of Salvation
+2 Requisition Raid
+4 Sheltered by Ghosts
+1 Chandra, Spark Hunter

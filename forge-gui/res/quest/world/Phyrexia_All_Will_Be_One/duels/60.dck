@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Flandre Scarlet
+Title=Flandre Scarlet
+Icon=Flandre Scarlet.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Chiba_Tatsuya_-_Affinity_(Modern,_#1634970)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Ornithopter
+4 Frogmite
+3 Memnite
+4 Thought Monitor
+4 Patchwork Automaton
+4 Springleaf Drum
+4 Cranial Plating
+1 Pithing Needle
+1 Aether Spellbomb
+1 Welding Jar
+1 Shadowspear
+3 Metallic Rebuke
+4 Galvanic Blast
+4 Thoughtcast
+4 Urza's Saga
+3 Spire of Industry
+1 Island
+4 Darksteel Citadel
+2 Fiery Islet
+4 Silverbluff Bridge
+[Sideboard]
+2 Ghirapur Aether Grid
+4 Boom // Bust
+2 Etched Champion
+1 Soul-Guide Lantern
+2 Haywire Mite
+2 The Stone Brain
+2 Soulless Jailer

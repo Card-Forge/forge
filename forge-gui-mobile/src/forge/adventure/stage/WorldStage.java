@@ -1,7 +1,5 @@
 package forge.adventure.stage;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -21,6 +19,8 @@ import forge.adventure.util.*;
 import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
 import forge.gui.FThreads;
+import forge.haptic.HapticEngine;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
@@ -118,10 +118,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     player.playEffect(Paths.EFFECT_SPARKS, 0.5f);
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     SoundSystem.instance.play(SoundEffectType.Block, false);
-                    Gdx.input.vibrate(50);
-                    int duration = mob.getData().boss ? 400 : 200;
-                    if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
-                        Controllers.getCurrent().startVibration(duration, 1);
+                    HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER, mob.getData().boss ? 400 : 200);
                     Forge.advFreezePlayerControls = true;
                     player.clearCollisionHeight();
                     startPause(0.8f, () -> {
@@ -162,7 +159,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     }
 
     @Override
-    public void setWinner(boolean playerIsWinner) {
+    public void setWinner(boolean playerIsWinner, boolean isArena) {
         if (playerIsWinner) {
             currentMob.clearCollisionHeight();
             Current.player().win();
@@ -192,10 +189,13 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 boolean defeated = Current.player().defeated();
                 AdventureQuestController.instance().updateQuestsLose(currentMob);
                 AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
+                boolean defeatedFromBoss = currentMob.getData().boss && !isArena;
                 WorldStage.this.removeEnemy(currentMob);
                 currentMob = null;
                 if (defeated) {
                     WorldStage.getInstance().resetPlayerLocation();
+                } else if (defeatedFromBoss) {
+                    WorldStage.getInstance().defeatedFromBoss();
                 }
             });
         }
@@ -230,8 +230,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
     public void loadPOI(PointOfInterest poi) {
         try {
-            TileMapScene.instance().load(poi);
             stop();
+            TileMapScene.instance().load(poi);
             TileMapScene.instance().setFromWorldMap(true);
             Forge.switchScene(TileMapScene.instance());
         } catch (Exception e) {
@@ -266,7 +266,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
 
         World world = WorldSave.getCurrentSave().getWorld();
-        int currentBiome = World.highestBiome(world.getBiome((int) player.getX() / world.getTileSize(), (int) player.getY() / world.getTileSize()));
+        int currentBiome = World.highestBiome(world.getBiome((int) ((player.getX() + player.getWidth() / 2f) / world.getTileSize()), (int) (player.getY() / world.getTileSize())));
         List<BiomeData> biomeData = WorldSave.getCurrentSave().getWorld().getData().GetBiomes();
         float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2 : 1;
         if (biomeData.size() <= currentBiome) {// "if isOnRoad

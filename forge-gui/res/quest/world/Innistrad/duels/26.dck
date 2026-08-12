@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Amadioha
+Title=Amadioha
+Icon=Amadioha.jpg
+Difficulty=Medium
+Description=Innistrad/Worlds_2011_-_4-2_or_Better_Record/Janus_Kofoed_ÔÇô_12_points_-_Red_Deck_Wins_(Standard,_#22350).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+3 Grim Lavamancer
+2 Hero of Oxid Ridge
+2 Spikeshot Elder
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+4 Brimstone Volley
+3 Galvanic Blast
+3 Gut Shot
+3 Incinerate
+1 Shock
+2 Arc Trail
+22 Mountain
+[Sideboard]
+2 Koth of the Hammer
+3 Manic Vandal
+3 Traitorous Blood
+4 Vulshok Refugee

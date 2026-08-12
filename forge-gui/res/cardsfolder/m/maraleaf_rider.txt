@@ -2,7 +2,7 @@ Name:Maraleaf Rider
 ManaCost:1 G
 Types:Creature Elf Knight
 PT:3/1
-A:AB$ MustBlock | Cost$ Sac<1/Food> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature blocks CARDNAME this turn if able.
+A:AB$ MustBlock | Cost$ Sac<1/Food> | ValidTgts$ Creature | SpellDescription$ Target creature blocks CARDNAME this turn if able.
 SVar:AIPreference:SacCost$Card.Food
 AI:RemoveDeck:All
 DeckHints:Ability$Food

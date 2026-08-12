@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Mortivore
+Title=Mortivore
+Icon=Mortivore.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/Davi_Montenegro_-_Naya_Aggro_(Standard,_#1146266).dck
+Deck Type=constructed
+
+[Main]
+1 Shepherd of the Flock
+2 Reidane, God of the Worthy
+4 Clarion Spirit
+4 Bonecrusher Giant
+4 Lovestruck Beast
+4 Lotus Cobra
+4 Giant Killer
+4 Edgewall Innkeeper
+3 Esika's Chariot
+1 Kabira Takedown
+1 Adventurous Impulse
+4 Showdown of the Skalds
+1 Mountain
+1 Evolving Wilds
+2 Plains
+4 Cragcrown Pathway
+4 Fabled Passage
+4 Forest
+4 Needleverge Pathway
+4 Branchloft Pathway
+[Sideboard]
+1 The Akroan War
+1 Roiling Vortex
+1 Redcap Melee
+1 Felidar Retreat
+1 Jegantha, the Wellspring
+1 Reidane, God of the Worthy
+2 Glass Casket
+2 Ox of Agonas
+2 Rip Apart
+3 Drannith Magistrate

@@ -1,0 +1,8 @@
+Name:Changeling Wayfinder
+ManaCost:3
+Types:Creature Shapeshifter
+PT:1/2
+K:Changeling
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ShuffleNonMandatory$ True
+Oracle:Changeling (This card is every creature type.)\nWhen this creature enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.

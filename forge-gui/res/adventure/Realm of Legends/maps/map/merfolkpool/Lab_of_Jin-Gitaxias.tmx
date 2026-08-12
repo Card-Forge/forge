@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="83">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;The Surgical Bay&quot;, &quot;Viral Drake&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/phyrexia/GitaxianTilesheet.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMpvIyMEzDg6fzEmEIGcCYj4HhEh5sykc7e/GB4WbvRaQwNYPaYY4kdplG9iKnK5jfQX6kdTpDT1cggC+dzaSSOwjFLzpAj29y459Uewm5YyjYu4sHgUEAmS/Lg98eWvkX3V5ztHRGTj5z4yTdXmqVI8Taa06B/yixl9rlJcjeem7c8tT2J7K9sLIHGcDEyPEnAMvuO9Q=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1lVEOhCAMRP3duGfhGB7MdP/Y++zxDIkTx24rCJVkAgTD67SA6zxNa0XLq021fXqU06FvOs85tkjm733wZO95XNbBjubK7k3SfwzR+WYfrGywisr3EWyLi1pb8YxywfPO1ZU+6cy/E4fHFapvVvW+0ggXd4fPU40vAdwWX09wuX7ar1R8j3J1brWwPnKuuOHO8jul4+CxFXerSkMPrnems+Gzlwku3gerdnoObq9XK+/evyjCZwvXy+/dPTf2kSWe
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wI2TgSFPkoEhH4hzkXABEBdKQuRpBXikGBh4pVDt5QPy+aVoZycuALN/OANYXNIyTpHtmq3HwDAXiLfoQcS2QWlcfGrZuxpo3hKo3aSA3RS4A2TvLqD+biBeSUX/EGPvTKB9a4B4FpH2FgHTeTEQH6DQv6QCAWC+FqQwb4PsXagHSVsw/4L83wTEzUj+gZVf0/UQmFLQqQfBMLAQygbFOawMpUX5tRgtPS+G+nepHqIMpQXo1kNgEJgIpOcA8WQofyeN0vlqaHpei2Q+PfMUtQAAal80sw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMAbtNjYGjHgzv0CJshg4YJqQfhPqC5+MCEUXupYu80oLnToXgd1A0bkMRm0Mhe5HQ1D2rvAhLTGS3CGR3cxOIOetg7QQ+TTw97sbljKNl7CCntToe6AZm/DEu40sO/6PZcRHPnDDrZi60coaW9G/RwlyO0tBdfeUkLe88RUV6SY+8dpLIHGcDEbpNRPgMAC9v4YQ==
+  </data>
+ </layer>
+ <layer id="8" name="Archway" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowAVtOsNtAtGwSgYBaNgFNAKAAAyOgC2
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="277" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="208.902" y="62.4088">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Shrine of Piercing Vision|NPH&quot;, &quot;Surgical Skullbomb|ONE&quot;, &quot;Atmosphere Surgeon|ONE&quot;, &quot;Inexorable Tide|SOM&quot; ] }"/>
+    <property name="enemy" value="Jin-Gitaxias"/>
+    <property name="threatRange" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="313" y="136.112">
+   <properties>
+    <property name="enemy" value="Brudiclad"/>
+    <property name="threatRange" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="207.841" y="177.756">
+   <properties>
+    <property name="enemy" value="Rona"/>
+   </properties>
+  </object>
+  <object id="71" name="switch" type="dialog" gid="4426" x="368" y="126.848" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A large, conspicuous switch juts from the wall in the back of the lab.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear the sound of metal sliding across metal from behind you.&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:82}, {&quot;deleteMapObject&quot;:73}],
+		&quot;name&quot;:&quot;Flip the switch&quot; 
+	},
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/booster.tx" x="193.083" y="31.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;blue&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/dialog.tx" x="155.447" y="230.116" width="119.307" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Muttering in a strange tongue fills the space ahead, barely audible over the sloshing of chemicals and the clank of glass on glass. You get a strong sense that the science done in this place is certainly not for the betterment of society.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/enemy.tx" x="313" y="164.333">
+   <properties>
+    <property name="enemy" value="Tekuthal"/>
+    <property name="threatRange" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="280.333" y="194.333">
+   <properties>
+    <property name="enemy" value="Unctus"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/booster.tx" x="222.667" y="32">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;blue&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/dialog.tx" x="199.468" y="74.2197" width="32.307" height="8.83333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The strange metallic master of this lab stands before you, obviously quite furious to have his experiments interrupted.
+
+'Curious about the truth revealed here? Forswear your flesh and you will truly see.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="Waypoints">
+  <object id="73" template="../../../../common/maps/obj/gate.tx" x="208.25" y="96.5">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate is locked. There must be a way to open it somewhere else in here.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Continue&quot; } 
+    ]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

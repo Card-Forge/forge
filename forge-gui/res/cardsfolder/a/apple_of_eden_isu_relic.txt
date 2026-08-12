@@ -8,6 +8,6 @@ SVar:DBReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exil
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn, and mana of any type can be spent to cast them.
 SVar:DrawTrig:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerDescription$ Until end of turn, whenever you play a land or cast a spell this way, its owner draws a card.
 SVar:DrawTrigLand:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | Execute$ TrigDraw | TriggerDescription$ Until end of turn, whenever you play a land or cast a spell this way, its owner draws a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardOwner
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardOwner
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:{T}, Pay 4 life, Sacrifice Apple of Eden: Look at target opponent's hand and exile those cards face down. You may play those cards this turn, and mana of any type can be spent to cast them. Until end of turn, whenever you play a land or cast a spell this way, its owner draws a card. At the beginning of the next end step, return the exiled cards to their owner's hand. Activate only as a sorcery.

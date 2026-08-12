@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="68">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4CBwY2TNHFqmE/IbHL0EFJPrH5y9ZGrnlrmjHR70fk7eRgYdmHBtIhfeqRnUswmR3wUjAwAAAl2DPk=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17" tintcolor="#8a3440">
+  <data encoding="base64" compression="zlib">
+   eJybx8nAMG8Uj+JRPIpH8SgexYMWowNKzAIAu+NKJg==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91FEOgzAIBmDeW09Qt4O5s8x5LN3m3bY+kDACzU81IyHWaPmCkq6ZaP1DjiqRPbeB6Jn9nIbzXH5ezdf3ylHEmmMD7Ei/2tTuPRE9EmajrjRr/av4rrLPBbQR1zJ131EbcS+g6dmls192N8Msjbnmd4+6cm6sufLiqFvEWtack51nfufF6FmHnoNed8+/89mytVnv353uCNqeadWNnJPats4NxIyek9pu/d+WGXWl7c3wDJg9rrXHymiND/q+9Gw=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgaQJqH/naqMtLfzlEwCmgNPrEPtAsGDhyVGGgXDE8wEOXzSLSXWgAAPmsCmQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="169.494" y="134.657">
+   <properties>
+    <property name="displayNameOverride" value="The Deceiver" />
+    <property name="effect">{ "startBattleWithCard": [ "Wheel of Torture|ULG" ] }</property>
+    <property name="enemy" value="Torturer" />
+    <property name="threatRange" type="int" value="100" />
+   <property name="speedModifier" type="float" value="20" /></properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/treasure.tx" x="330.5" y="123"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
+  <object id="60" template="../../../../common/maps/obj/gold.tx" x="332" y="137.25" />
+  <object id="61" template="../../../../common/maps/obj/gold.tx" x="332" y="149.75" />
+  <object id="62" template="../../../../common/maps/obj/entry_up.tx" x="207.5" y="145.192" />
+  <object id="63" template="../../../../common/maps/obj/door_left.tx" x="176.5" y="49">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2F.tmx" />
+    <property name="teleportObjectId" value="58" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/treasure.tx" x="331.609" y="170.45">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 1,
+    "itemName": "Shoes of Sorrow"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/manashards.tx" x="207.8" y="37.9959" />
+ </objectgroup>
+</map>

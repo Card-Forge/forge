@@ -1,0 +1,8 @@
+Name:Spiral into Solitude
+ManaCost:1 W
+Types:Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ CantAttack,CantBlock | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't attack or block.
+A:AB$ ChangeZone | Cost$ 1 W Blight<1> Sac<1/CARDNAME/this Aura> | Defined$ Enchanted | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile enchanted creature.
+Oracle:Enchant creature\nEnchanted creature can't attack or block.\n{1}{W}, Blight 1, Sacrifice this Aura: Exile enchanted creature. (To blight 1, put a -1/-1 counter on a creature you control.)

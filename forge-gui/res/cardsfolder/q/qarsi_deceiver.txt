@@ -2,7 +2,7 @@ Name:Qarsi Deceiver
 ManaCost:1 U
 Types:Creature Snake Wizard
 PT:0/4
-A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ MorphOrManifest | SpellDescription$ Add {C}. Spend this mana only to cast a face-down creature spell, pay a mana cost to turn a manifested creature face up, or pay a morph cost. (A megamorph cost is a morph cost.)
+A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ Spell.isCastFaceDown+Creature,Static.ManifestUp+Creature,Static.MorphUp | SpellDescription$ Add {C}. Spend this mana only to cast a face-down creature spell, pay a mana cost to turn a manifested creature face up, or pay a morph cost. (A megamorph cost is a morph cost.)
 AI:RemoveDeck:Random
 DeckHints:Keyword$Morph|Megamorph
 Oracle:{T}: Add {C}. Spend this mana only to cast a face-down creature spell, pay a mana cost to turn a manifested creature face up, or pay a morph cost. (A megamorph cost is a morph cost.)

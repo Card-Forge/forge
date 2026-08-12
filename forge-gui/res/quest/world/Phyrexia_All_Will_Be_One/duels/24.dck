@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Treebeard
+Title=Treebeard
+Icon=Treebeard.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/27TrueRunes_-_Bant_Apparatus_(Standard,_#1624332).dck
+Deck Type=constructed
+
+[Main]
+3 Mindsplice Apparatus
+3 March of Otherworldly Light
+4 Union of the Third Path
+4 Silver Scrutiny
+3 Sunset Revelry
+4 White Sun's Twilight
+3 Farewell
+4 Herd Migration
+4 Temporary Lockdown
+3 Jace, the Perfected Mind
+1 Forest
+7 Plains
+4 Island
+1 Swamp
+1 Mountain
+1 Boseiju, Who Endures
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Jetmir's Garden
+3 Raffine's Tower
+4 Spara's Headquarters
+[Sideboard]

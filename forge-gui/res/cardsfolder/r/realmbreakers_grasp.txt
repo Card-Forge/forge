@@ -3,5 +3,5 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant:Artifact,Creature:artifact or creature
 SVar:AttachAILogic:Curse
-S:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Card.EnchantedBy | ValidSA$ Activated.nonManaAbility | Description$ Enchanted permanent can't attack or block, and its activated abilities can't be activated unless they're mana abilities.
+S:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Card.EnchantedBy | ValidSA$ Activated.!ManaAbility | Description$ Enchanted permanent can't attack or block, and its activated abilities can't be activated unless they're mana abilities.
 Oracle:Enchant artifact or creature\nEnchanted permanent can't attack or block, and its activated abilities can't be activated unless they're mana abilities.

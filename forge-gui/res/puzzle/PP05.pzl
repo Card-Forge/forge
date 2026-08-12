@@ -3,7 +3,7 @@ Name:Pauper Puzzles #05 - Blitzkrieg
 URL:https://pauperpuzzles.wordpress.com/2017/01/21/5-blitzkrieg/
 Goal:Win
 Turns:2
-Difficulty:Hard
+Difficulty:Rare
 Description:Survive the incoming attack and win on your next turn.
 [state]
 ActivePlayer=AI

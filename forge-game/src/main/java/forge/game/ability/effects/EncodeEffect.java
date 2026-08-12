@@ -4,6 +4,7 @@ import java.util.Map;
 
 import forge.game.Game;
 import forge.game.GameLogEntryType;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -11,7 +12,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.CardTranslation;
 import forge.util.Localizer;
 
 public class EncodeEffect extends SpellAbilityEffect {
@@ -47,7 +47,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         }
 
         // Handle choice of whether or not to encoded
-        if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantExileCardAndEncodeOntoYouCreature", CardTranslation.getTranslatedName(host.getName())), null)) {
+        if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantExileCardAndEncodeOntoYouCreature", host.getTranslatedName()), null)) {
             return;
         }
 
@@ -65,8 +65,8 @@ public class EncodeEffect extends SpellAbilityEffect {
         }
 
         StringBuilder codeLog = new StringBuilder();
-        codeLog.append("Encoding ").append(host.toString()).append(" to ").append(choice.toString());
-        game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, codeLog.toString());
+        codeLog.append("Encoding ").append(host).append(" to ").append(choice);
+        game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, codeLog.toString()));
 
         // store hostcard in encoded array
         choice.addEncodedCard(moved);

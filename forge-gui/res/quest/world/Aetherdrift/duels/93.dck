@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Gbadu
+Title=Gbadu
+Icon=Gbadu.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Yoshioka_Takuya_-_Esper_Oculus_(Modern,_#2373755).dck
+Deck Type=constructed
+
+[Main]
+2 Murktide Regent
+2 Picklock Prankster
+4 Psychic Frog
+4 Abhorrent Oculus
+2 Ketramose, the New Dawn
+1 Nihil Spellbomb
+4 Fatal Push
+4 Counterspell
+3 Spell Snare
+4 Force of Negation
+4 Consider
+1 Sink into Stupor
+4 Unearth
+2 Pest Control
+1 Island
+1 Swamp
+1 Hallowed Fountain
+2 Watery Grave
+2 Bloodstained Mire
+3 Flooded Strand
+4 Polluted Delta
+2 Darkslick Shores
+1 Meticulous Archive
+2 Undercity Sewers
+[Sideboard]
+3 Thoughtseize
+2 Nihil Spellbomb
+3 Stern Scolding
+2 Pest Control
+4 Consign to Memory
+1 Ketramose, the New Dawn

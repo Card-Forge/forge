@@ -1,0 +1,6 @@
+Name:Mind Transfer Protocol
+ManaCost:2 U
+Types:Instant
+A:SP$ Animate | ValidTgts$ Artifact,Creature | ValidTgtsDesc$ artifact or creature | Power$ 4 | Toughness$ 5 | Types$ Artifact,Creature | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/5. Draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/5.\nDraw a card.

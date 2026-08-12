@@ -116,9 +116,7 @@ public class ManaCostBeingPaid {
         }
     }
 
-    // holds Mana_Part objects
-    // ManaPartColor is stored before ManaPartGeneric
-    private final Map<ManaCostShard, ShardCount> unpaidShards = Maps.newHashMap();
+    private final Map<ManaCostShard, ShardCount> unpaidShards = new EnumMap<>(ManaCostShard.class);
     private Map<String, Integer> xManaCostPaidByColor;
     private byte sunburstMap = 0;
     private int cntX = 0;
@@ -408,7 +406,7 @@ public class ManaCostBeingPaid {
             }
 
             unpaidShards.keySet().removeAll(toRemove);
-            //System.out.println("Tried to substract a " + shard.toString() + " shard that is not present in this ManaCostBeingPaid");
+            //System.out.println("Tried to subtract a " + shard.toString() + " shard that is not present in this ManaCostBeingPaid");
             return;
         }
 
@@ -525,11 +523,7 @@ public class ManaCostBeingPaid {
             if (xManaCostPaidByColor == null) {
                 xManaCostPaidByColor = Maps.newHashMap();
             }
-            Integer xColor = xManaCostPaidByColor.get(color);
-            if (xColor == null) {
-                xColor = 0;
-            }
-            xManaCostPaidByColor.put(color, xColor + 1);
+            xManaCostPaidByColor.merge(color, 1, Integer::sum);
         }
 
         decreaseShard(chosenShard, 1);
@@ -608,7 +602,7 @@ public class ManaCostBeingPaid {
                 decreaseShard(shard, 1);
             }
             else {
-                decreaseGenericMana(1);
+                decreaseGenericMana(shard.getCmc());
             }
         }
         decreaseGenericMana(subThisManaCost.getGenericCost());

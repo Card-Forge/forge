@@ -4,7 +4,7 @@ Types:Creature Human Assassin
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, you may sacrifice a creature. When you do, target player draws two cards and loses 2 life.
 SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature> | Execute$ TrigDraw | TriggerDescription$ When you do, target player draws two cards and loses 2 life.
-SVar:TrigDraw:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBLoseLife
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted
 K:Plot:2 B
 DeckHas:Ability$Sacrifice

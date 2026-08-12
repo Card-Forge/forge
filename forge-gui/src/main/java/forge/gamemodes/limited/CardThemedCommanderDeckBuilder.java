@@ -34,9 +34,8 @@ public class CardThemedCommanderDeckBuilder extends CardThemedDeckBuilder {
         this.availableList.removeAll(aiPlayables);
         targetSize=format.getMainRange().getMinimum();
         colors = keyCard.getRules().getColorIdentity();
-        colors = ColorSet.fromMask(colors.getColor() | keyCard.getRules().getColorIdentity().getColor());
         if (secondKeyCard != null && !format.equals(DeckFormat.Oathbreaker)) {
-            colors = ColorSet.fromMask(colors.getColor() | secondKeyCard.getRules().getColorIdentity().getColor());
+            colors = ColorSet.combine(colors, secondKeyCard.getRules().getColorIdentity());
             targetSize--;
         }
         numSpellsNeeded = ((Double)Math.floor(targetSize*(getCreaturePercentage()+getSpellPercentage()))).intValue();

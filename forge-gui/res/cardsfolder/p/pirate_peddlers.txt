@@ -1,0 +1,8 @@
+Name:Pirate Peddlers
+ManaCost:2 B
+Types:Creature Human Pirate
+PT:2/2
+K:Deathtouch
+T:Mode$ Sacrificed | ValidCard$ Permanent.Other | Execute$ TrigPutCounter | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice another permanent, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Deathtouch\nWhenever you sacrifice another permanent, put a +1/+1 counter on this creature.

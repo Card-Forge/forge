@@ -2,7 +2,6 @@
 Code=GNT
 Date=2018-11-16
 Name=Game Night
-Code2=GNT
 Type=Multiplayer
 ScryfallCode=GNT
 
@@ -75,9 +74,3 @@ ScryfallCode=GNT
 66 L Mountain @Nils Hamm
 67 L Forest @Noah Bradley
 68 L Forest @Dimitar Marinski
-
-[tokens]
-w_2_2_knight_vigilance
-b_2_2_zombie
-r_1_1_goblin
-c_1_1_a_thopter_flying

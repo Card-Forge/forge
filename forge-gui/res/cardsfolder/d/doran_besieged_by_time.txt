@@ -1,0 +1,16 @@
+Name:Doran, Besieged by Time
+ManaCost:1 W B G
+Types:Legendary Creature Treefolk Druid
+PT:0/5
+S:Mode$ ReduceCost | ValidCard$ Creature.powerLTtoughness | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Each creature spell you cast with toughness greater than its power costs {1} less to cast.
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump1 | TriggerDescription$ Whenever a creature you control attacks or blocks, it gets +X/+X until end of turn, where X is the difference between its power and toughness.
+SVar:TrigPump1:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +X1 | NumDef$ +X1
+T:Mode$ Blocks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump2 | Secondary$ True | TriggerDescription$ Whenever a creature you control attacks or blocks, it gets +X/+X until end of turn, where X is the difference between its power and toughness.
+SVar:TrigPump2:DB$ Pump | Defined$ TriggeredBlockerLKICopy | NumAtt$ +X2 | NumDef$ +X2
+SVar:X1:SVar$Y1/Abs
+SVar:Y1:TriggeredAttacker$CardPower/Minus.Z1
+SVar:Z1:TriggeredAttacker$CardToughness
+SVar:X2:SVar$Y2/Abs
+SVar:Y2:TriggeredBlocker$CardPower/Minus.Z2
+SVar:Z2:TriggeredBlocker$CardToughness
+Oracle:Each creature spell you cast with toughness greater than its power costs {1} less to cast.\nWhenever a creature you control attacks or blocks, it gets +X/+X until end of turn, where X is the difference between its power and toughness.

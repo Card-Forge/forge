@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/DeadlyPants_-_Sultai_Reanimator_(Standard,_#2274835).dck
+Deck Type=constructed
+
+[Main]
+1 Valgavoth, Terror Eater
+3 Atraxa, Grand Unifier
+1 Harvester of Misery
+2 Kiora, the Rising Tide
+4 Picklock Prankster
+3 Fallaji Archaeologist
+3 Bitter Triumph
+2 Virtue of Persistence
+4 Squirming Emergence
+4 Wail of the Forgotten
+2 Omniscience
+1 The Cruelty of Gix
+4 Founding the Third Path
+2 Jace, the Perfected Mind
+1 Darkslick Shores
+1 Forest
+2 Swamp
+2 Island
+1 Plains
+2 Gloomlake Verge
+1 Undercity Sewers
+2 Blooming Marsh
+2 Llanowar Wastes
+1 Underground Mortuary
+2 Botanical Sanctum
+1 Hedge Maze
+2 Yavimaya Coast
+4 Fabled Passage
+[Sideboard]
+2 Into the Flood Maw
+2 Nowhere to Run
+2 Duress
+1 Drag to the Roots
+1 Tear Asunder
+1 Nissa, Ascended Animist
+1 Tranquil Frillback
+2 Ghost Vacuum
+3 An Offer You Can't Refuse

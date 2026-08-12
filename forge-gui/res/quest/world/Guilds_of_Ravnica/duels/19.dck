@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Tombstone
+Title=Tombstone
+Icon=Tombstone.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Akos_Kenyeres_-_UBR_Junk_(Standard,_#774514).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Chainwhirler
+4 Nicol Bolas, the Ravager
+3 Niv-Mizzet, Parun
+3 Thief of Sanity
+1 Verix Bladewing
+2 Dragon's Hoard
+2 Dive Down
+3 Shock
+2 Spell Pierce
+1 Spit Flame
+3 Lava Coil
+2 Phyrexian Scriptures
+2 The Eldest Reborn
+3 Sarkhan, Fireblood
+4 Dragonskull Summit
+2 Drowned Catacomb
+1 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+4 Watery Grave
+[Sideboard]
+2 Disdainful Stroke
+2 Fiery Cannonade
+2 Fight with Fire
+1 Hostage Taker
+1 Moment of Craving
+2 Negate
+1 Niv-Mizzet, Parun
+1 Sorcerous Spyglass
+3 Thought Erasure

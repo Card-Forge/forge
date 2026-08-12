@@ -1,0 +1,8 @@
+Name:Suki, Courageous Rescuer
+ManaCost:1 W W
+Types:Legendary Creature Human Warrior Ally
+PT:2/4
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | Description$ Other creatures you control get +1/+0.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Permanent.YouCtrl+Other | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever another permanent you control leaves the battlefield during your turn, create a 1/1 while Ally creature token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_ally
+Oracle:Other creatures you control get +1/+0.\nWhenever another permanent you control leaves the battlefield during your turn, create a 1/1 white Ally creature token. This ability triggers only once each turn.

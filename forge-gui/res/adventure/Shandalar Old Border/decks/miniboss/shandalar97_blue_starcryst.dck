@@ -1,0 +1,24 @@
+[metadata]
+Name=The Astral Visionary
+[Main]
+1 Leviathan|DRK
+4 Old Man of the Sea|ARN
+4 Yotian Soldier|ATQ
+4 Zephyr Falcon|LEG
+1 Ancestral Recall|LEA
+4 Psionic Blast|LEA
+1 Braingeyser|LEA
+1 Time Walk|LEA
+1 Timetwister|LEA
+1 Black Lotus|LEA
+4 Howling Mine|LEA
+1 Mox Sapphire|LEA
+1 Copy Artifact|LEA
+4 Stasis|LEA
+4 Unstable Mutation|ARN
+22 Island|LEA
+
+[StartInBattle_Reference]
+1 Mox Sapphire|LEA
+1 Zephyr Falcon|LEG
+1 Yotian Soldier|ATQ

@@ -16,7 +16,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
-import forge.util.CardTranslation;
 import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.Localizer;
@@ -80,12 +79,12 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             }
             if (sa.hasParam("Optional") && !pl.getController().confirmAction(sa, null,
                     Localizer.getInstance().getMessage("lblWouldYouLikePutRemoveCounters", ctype.getName(),
-                            CardTranslation.getTranslatedName(gameCard.getName())), null)) {
+                            gameCard.getTranslatedName()), null)) {
                 continue;
             }
             if (gameCard.hasCounters()) {
                 if (eachExisting) {
-                    for (CounterType listType : Lists.newArrayList(gameCard.getCounters().keySet())) {
+                    for (CounterType listType : Lists.newArrayList(gameCard.getCounters().elementSet())) {
                         addOrRemoveCounter(sa, gameCard, listType, counterAmount, table, pl);
                     }
                 } else {
@@ -95,7 +94,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
                 gameCard.addCounter(ctype, counterAmount, pl, table);
             }
         }
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
     }
 
     private void addOrRemoveCounter(final SpellAbility sa, final Card tgtCard, CounterType ctype,
@@ -105,7 +104,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         Map<String, Object> params = Maps.newHashMap();
         params.put("Target", tgtCard);
 
-        List<CounterType> list = Lists.newArrayList(tgtCard.getCounters().keySet());
+        List<CounterType> list = Lists.newArrayList(tgtCard.getCounters().elementSet());
         if (ctype != null) {
             list = Lists.newArrayList(ctype);
         }
@@ -135,7 +134,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
                 putCounter = false;
             } else {
                 params.put("CounterType", chosenType);
-                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  chosenType.getName(), CardTranslation.getTranslatedName(tgtCard.getName())) + " ";
+                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter", chosenType.getName(), tgtCard.getTranslatedName()) + " ";
                 putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
             }
         }

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Chief_Wiggum
+Title=Chief_Wiggum
+Icon=Chief_Wiggum.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/MTGJoe2_-_Mono-Red_Aggro_(Standard,_#1739407).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Voldaren Epicure
+4 Scalding Viper
+4 Charming Scoundrel
+2 Feldon, Ronom Excavator
+2 Squee, Dubious Monarch
+2 Goddric, Cloaked Reveler
+4 Kumano Faces Kakkazan
+4 Play with Fire
+4 Lightning Strike
+4 Virtue of Courage
+13 Mountain
+4 Shivan Reef
+2 Stormcarved Coast
+2 Mirrex
+1 Sokenzan, Crucible of Defiance
+[Sideboard]

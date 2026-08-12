@@ -1,17 +1,14 @@
 package forge.game.event;
 
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 
-public class GameEventCardPlotted extends GameEvent {
+public record GameEventCardPlotted(CardView card, PlayerView activatingPlayer) implements GameEvent {
 
-    public final Card card;
-
-    public final Player activatingPlayer;
-
-    public GameEventCardPlotted(Card card, Player player) {
-        this.card = card;
-        activatingPlayer = player;
+    public GameEventCardPlotted(Card card, Player activatingPlayer) {
+        this(CardView.get(card), PlayerView.get(activatingPlayer));
     }
 
     @Override
@@ -24,6 +21,6 @@ public class GameEventCardPlotted extends GameEvent {
      */
     @Override
     public String toString() {
-        return activatingPlayer.getName() + " has plotted " + (card != null ? card.toString() : "(unknown)");
+        return activatingPlayer.toString() + " has plotted " + (card != null ? card.toString() : "(unknown)");
     }
 }

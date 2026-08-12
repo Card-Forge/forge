@@ -312,7 +312,7 @@ ScryfallCode=J25
 304 C Deep Analysis @Jesper Ejsing
 305 C Draugr Thought-Thief @Dan Murayama Scott
 306 U Exclusion Mage @Chris Seaman
-307 C Expedition Diviner @Heonhwa Choe
+307 C Expedition Diviner @Heonhwa
 308 C Expendable Lackey @Randy Gallegos
 309 U Experimental Aviator @Jesper Ejsing
 310 U Fading Hope @Rovina Cai

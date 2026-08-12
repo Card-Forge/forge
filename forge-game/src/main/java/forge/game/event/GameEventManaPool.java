@@ -1,22 +1,16 @@
 package forge.game.event;
 
-import forge.game.mana.Mana;
+import java.util.Set;
+
+import forge.card.MagicColor;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.Lang;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventManaPool extends GameEvent {
-    public final Player player;
-    public final EventValueChangeType mode;
-    public final Mana mana;
+public record GameEventManaPool(PlayerView player, EventValueChangeType mode, Set<MagicColor.Color> colors) implements GameEvent {
 
-    public GameEventManaPool(Player owner, EventValueChangeType changeMode, Mana mana) {
-        this.mana = mana;
-        player = owner;
-        mode = changeMode;
+    public GameEventManaPool(Player player, EventValueChangeType mode, Set<MagicColor.Color> colors) {
+        this(PlayerView.get(player), mode, colors);
     }
 
     @Override
@@ -34,7 +28,7 @@ public class GameEventManaPool extends GameEvent {
         switch (mode) {
         case Added:
         case Removed:
-            sb.append(" - ").append(mana);
+            sb.append(" - ").append(colors);
             break;
         default:
             break;

@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Ral
 Loyalty:4
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature+YouCtrl | Execute$ TrigLoyalty | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put a loyalty counter on CARDNAME.
 SVar:TrigLoyalty:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ 1
-A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ ur_1_1_otter_prowess | TokenOwner$ You | SpellDescription$ Create a 1/1 blue and red Otter creature token with prowess.
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ ur_1_1_otter_prowess | TokenOwner$ You | SpellDescription$ Create a 1/1 blue and red Otter creature token with prowess.
 A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | NumCards$ 3 | SubAbility$ DiscardTwo | SpellDescription$ Draw three cards, then discard two cards.
 SVar:DiscardTwo:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 A:AB$ Draw | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 3 | SubAbility$ WitEmblem | SpellDescription$ Draw three cards. You get an emblem with "Instant and sorcery spells you cast have storm."

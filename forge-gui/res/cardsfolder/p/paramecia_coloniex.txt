@@ -1,0 +1,11 @@
+Name:Paramecia Coloniex
+ManaCost:1 B
+Types:Creature Zombie Worm
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill three cards. (Put the top three cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigImmediateTrig | TriggerDescription$ When this creature dies, you may exile it. When you do, put target creature card from your graveyard on top of your library.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ ExileAnyGrave<1/Card.TriggeredNewCard> | Execute$ TrigChangeZone | TriggerDescription$ When you do, put target creature card from your graveyard on top of your library.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Creature.YouOwn | ValidTgtsDesc$ creature card in your graveyard
+DeckHas:Ability$Mill|Graveyard
+Oracle:When this creature enters, mill three cards. (Put the top three cards of your library into your graveyard.)\nWhen this creature dies, you may exile it. When you do, put target creature card from your graveyard on top of your library.

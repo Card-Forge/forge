@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=The Thing
+Title=The Thing
+Icon=The Thing.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/Veeohla_-_Grixis_Control_(Modern,_#2531901).dck
+Deck Type=constructed
+
+[Main]
+4 Psychic Frog
+4 Tamiyo, Inquisitive Student
+3 Snapcaster Mage
+2 Orcish Bowmasters
+2 Subtlety
+4 Counterspell
+4 Lightning Bolt
+3 Fatal Push
+3 Flame of Anor
+3 Spell Snare
+1 Cling to Dust
+1 Force of Negation
+1 Stern Scolding
+1 Terminate
+2 Kaito, Bane of Nightmares
+1 Jace, the Mind Sculptor
+4 Polluted Delta
+3 Scalding Tarn
+2 Flooded Strand
+2 Island
+2 Steam Vents
+2 Watery Grave
+1 Bloodstained Mire
+1 Otawara, Soaring City
+1 Raucous Theater
+1 Swamp
+1 Thundering Falls
+1 Undercity Sewers
+[Sideboard]
+2 Consign to Memory
+2 Sheoldred's Edict
+2 Thoughtseize
+1 Cleansing Wildfire
+1 Dress Down
+1 Fire Magic
+1 Force of Negation
+1 Harbinger of the Seas
+1 Illness in the Ranks
+1 Kolaghan's Command
+1 Nihil Spellbomb
+1 Slaughter Games

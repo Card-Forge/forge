@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Easy
+Description=Oath_of_the_Gatewatch/SCG_Classic_Philadelphia/Jason_Imperiale_-_Red_Deck_Wins_(Standard,_#606209).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+4 Monastery Swiftspear
+2 Pia and Kiran Nalaar
+2 Reckless Bushwhacker
+2 Zurgo Bellstriker
+4 Atarka's Command
+4 Fiery Impulse
+3 Outnumber
+4 Dragon Fodder
+4 Hordeling Outburst
+4 Nissa, Voice of Zendikar
+4 Bloodstained Mire
+3 Cinder Glade
+2 Forest
+6 Mountain
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+3 Arc Lightning
+2 Goblin Dark-Dwellers
+4 Roast
+1 Sarkhan, the Dragonspeaker
+3 Thunderbreak Regent

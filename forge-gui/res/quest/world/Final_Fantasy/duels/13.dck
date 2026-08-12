@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/David_Akers_-_Izzet_Aggro_(Standard,_#2528240).dck
+Deck Type=constructed
+
+[Main]
+4 Vivi Ornitier
+3 Drake Hatcher
+4 Cori-Steel Cutter
+4 Opt
+4 Torch the Tower
+3 Monstrous Rage
+2 Into the Flood Maw
+1 Spell Pierce
+4 Sleight of Hand
+4 Stock Up
+1 Wild Ride
+4 Stormchaser's Talent
+1 Unable to Scream
+7 Island
+4 Riverpyre Verge
+4 Shivan Reef
+4 Spirebluff Canal
+2 Mountain
+[Sideboard]
+2 Abrade
+2 Lithomantic Barrage
+2 Ral, Crackling Wit
+2 Soul-Guide Lantern
+2 Spell Pierce
+2 Unable to Scream
+1 Disdainful Stroke
+1 Get Out
+1 Tishana's Tidebinder

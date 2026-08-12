@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 030216 - Downside Up
 URL:https://www.coolstuffinc.com/a/seanuy-030216-downside-up
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win this turn. It is the upkeep phase. If you marked upkeep as "skip" then unmark it and restart.
 [state]
 turn=2

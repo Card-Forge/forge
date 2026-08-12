@@ -1,6 +1,6 @@
 Name:Mazemind Tome
 ManaCost:2
-Types:Artifact
+Types:Artifact Book
 A:AB$ Scry | Cost$ T AddCounter<1/PAGE> | ScryNum$ 1 | SpellDescription$ Scry 1.
 A:AB$ Draw | Cost$ 2 T AddCounter<1/PAGE> | NumCards$ 1 | SpellDescription$ Draw a card.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE4_PAGE | Execute$ TrigChange | TriggerDescription$ When there are four or more page counters on CARDNAME, exile it. If you do, you gain 4 life.

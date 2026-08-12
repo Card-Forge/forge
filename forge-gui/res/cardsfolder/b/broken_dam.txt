@@ -1,5 +1,5 @@
 Name:Broken Dam
 ManaCost:U
 Types:Sorcery
-A:SP$ Tap | TargetMin$ 1 | TargetMax$ 2 | TgtPrompt$ Choose target creature without horsemanship | ValidTgts$ Creature.withoutHorsemanship | SpellDescription$ Tap one or two target creatures without horsemanship.
+A:SP$ Tap | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature.withoutHorsemanship | TgtPrompt$ Choose one or two target creatures without horsemanship | SpellDescription$ Tap one or two target creatures without horsemanship.
 Oracle:Tap one or two target creatures without horsemanship.

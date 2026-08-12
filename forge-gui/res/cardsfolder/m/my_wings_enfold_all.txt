@@ -2,7 +2,7 @@ Name:My Wings Enfold All
 ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, ABILITY
-SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBEffect | CharmNum$ 1
+SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBEffect
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:DBEffect:DB$ Effect | Triggers$ CastTrig | SpellDescription$ Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.
 SVar:CastTrig:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Command | TriggerDescription$ Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.

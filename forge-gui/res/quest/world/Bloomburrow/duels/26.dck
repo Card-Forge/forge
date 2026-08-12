@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Boris Karloff
+Title=Boris Karloff
+Icon=Boris Karloff.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/George_Qi_-_Izzet_Aggro_(Standard,_#2177511).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Mockingbird
+1 Kitsa, Otterball Elite
+4 Slickshot Show-Off
+4 Monastery Swiftspear
+4 Shock
+4 Might of the Meek
+4 Dazzling Denial
+2 Slick Sequence
+1 Artist's Talent
+4 Stormchaser's Talent
+4 Proft's Eidetic Memory
+1 Case of the Crimson Pulse
+1 Thundering Falls
+4 Spirebluff Canal
+4 Shivan Reef
+5 Island
+5 Mountain
+[Sideboard]
+2 Shore Up
+2 Brotherhood's End
+2 Urabrask's Forge
+4 Scorching Shot
+2 Three Steps Ahead
+3 Sunspine Lynx

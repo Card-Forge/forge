@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Comic Book Guy
+Title=Comic Book Guy
+Icon=Comic Book Guy.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/Abe_Kenichi_-_WU_Control_(Standard,_#1509731).dck
+Deck Type=constructed
+
+[Main]
+1 Hullbreaker Horror
+1 The Celestus
+2 Union of the Third Path
+3 Make Disappear
+3 Soul Partition
+3 Thirst for Discovery
+3 Fateful Absence
+3 Negate
+2 Silver Scrutiny
+3 Lay Down Arms
+3 Farewell
+2 Teferi, Temporal Pilgrim
+4 The Wandering Emperor
+1 Otawara, Soaring City
+2 Demolition Field
+3 Spara's Headquarters
+3 Raffine's Tower
+3 Deserted Beach
+6 Island
+9 Plains
+[Sideboard]
+1 Depopulate
+2 Reckoner Bankbuster
+2 Unlicensed Hearse
+3 Sunset Revelry
+3 Dissipate
+4 Temporary Lockdown

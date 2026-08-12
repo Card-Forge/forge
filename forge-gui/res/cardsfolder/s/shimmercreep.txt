@@ -1,0 +1,11 @@
+Name:Shimmercreep
+ManaCost:4 B
+Types:Creature Elemental
+PT:3/5
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ Vivid — When this creature enters, each opponent loses X life and you gain X life, where X is the number of colors among permanents you control.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Permanent.YouCtrl$Colors
+DeckHas:Ability$LifeGain
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nVivid — When this creature enters, each opponent loses X life and you gain X life, where X is the number of colors among permanents you control.

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Abiku
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Daisuke_Ishikawa_-_Five-color_Zoo_(Modern,_#1681556).dck
+Deck Type=constructed
+
+[Main]
+4 Territorial Kavu
+3 General Ferrous Rokiric
+4 Shardless Agent
+4 Bloodbraid Elf
+4 Scion of Draco
+4 Lightning Bolt
+4 Lightning Helix
+4 Tribal Flames
+4 Leyline Binding
+2 Teferi, Time Raveler
+4 Arid Mesa
+1 Breeding Pool
+4 Flooded Strand
+1 Forest
+1 Overgrown Tomb
+1 Plains
+1 Sacred Foundry
+1 Steam Vents
+1 Temple Garden
+4 Windswept Heath
+2 Wooded Foothills
+1 Xander's Lounge
+1 Zagoth Triome
+[Sideboard]
+2 Alpine Moon
+1 Lavinia, Azorius Renegade
+2 Rest in Peace
+2 Rip Apart
+2 Metropolis Reformer
+2 Wear // Tear
+1 Hidetsugu Consumes All
+2 Orvar, the All-Form
+1 Jegantha, the Wellspring

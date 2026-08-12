@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=SantaMuerte
+Title=SantaMuerte
+Icon=SantaMuerte.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/Khepi_-_Bant_Beanstalk_Control_(Modern,_#1754969).dck
+Deck Type=constructed
+
+[Main]
+2 Murktide Regent
+4 Solitude
+4 Counterspell
+3 Growth Spiral
+3 Temporal Mastery
+4 Preordain
+4 Time Warp
+3 Lorien Revealed
+4 Leyline Binding
+4 Up the Beanstalk
+3 Teferi, Time Raveler
+1 Mistveil Plains
+2 Hallowed Fountain
+1 Temple Garden
+1 Breeding Pool
+1 Ketria Triome
+4 Flooded Strand
+4 Windswept Heath
+1 Celestial Colonnade
+1 Spara's Headquarters
+1 Raffine's Tower
+1 Plains
+3 Island
+1 Forest
+[Sideboard]
+1 Stony Silence
+2 Hallowed Moonlight
+2 Chalice of the Void
+2 Dovin's Veto
+2 Veil of Summer
+2 Blossoming Calm
+2 Dress Down
+2 Supreme Verdict

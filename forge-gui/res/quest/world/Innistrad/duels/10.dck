@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Orzhov-precon
+Title=Orzhov-precon
+Icon=Orzhov-precon.jpg
+Difficulty=Medium
+Description=Innistrad/2011_Provincials_Quebec/Patrick_Chagnon_-_Red_Deck_Wins_(Standard,_#20938).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+2 Goblin Arsonist
+3 Grim Lavamancer
+2 Hero of Oxid Ridge
+2 Spikeshot Elder
+4 Stormblood Berserker
+4 Stromkirk Noble
+3 Shrine of Burning Rage
+4 Brimstone Volley
+3 Incinerate
+4 Arc Trail
+3 Koth of the Hammer
+23 Mountain
+[Sideboard]
+4 Dismember
+2 Manic Vandal
+2 Perilous Myr
+1 Sword of War and Peace
+4 Vulshok Refugee

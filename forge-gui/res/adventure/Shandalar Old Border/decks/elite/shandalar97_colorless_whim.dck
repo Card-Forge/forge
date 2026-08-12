@@ -1,0 +1,25 @@
+[metadata]
+Name=Whim of Shandalar
+[Main]
+4 Clone|LEA
+4 Royal Assassin|LEA
+4 Serra Angel|LEA
+4 Yotian Soldier|ATQ
+4 Power Sink|LEA
+4 Twiddle|LEA
+1 Whimsy|PAST
+4 Icy Manipulator|LEA
+2 Meekstone|LEA
+2 Haunting Wind|ATQ
+2 Kismet|LEG
+4 Psychic Venom|LEA
+2 Plains|LEA
+2 Island|LEA
+2 Swamp|LEA
+4 City of Brass|ARN
+4 Scrubland|LEA
+4 Tundra|LEA
+4 Underground Sea|LEA
+
+[StartInBattle_Reference]
+1 City of Brass|ARN

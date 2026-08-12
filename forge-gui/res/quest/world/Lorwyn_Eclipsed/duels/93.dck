@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Amphibian
+Title=Amphibian
+Icon=Amphibian.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Moorehardcore_-_Golgari_Yawgmoth_(Modern,_#2832456).dck
+Deck Type=constructed
+
+[Main]
+1 Strangleroot Geist
+4 Yawgmoth, Thran Physician
+3 Walking Ballista
+4 Young Wolf
+1 Endurance
+2 Formidable Speaker
+4 Delighted Halfling
+4 Badgermole Cub
+1 Ignoble Hierarch
+4 Agatha's Soul Cauldron
+4 Malevolent Rumble
+3 Green Sun's Zenith
+3 Dredger's Insight
+1 Grist, the Hunger Tide
+1 Swamp
+2 Boseiju, Who Endures
+1 Dryad Arbor
+1 Underground Mortuary
+3 Overgrown Tomb
+4 Verdant Catacombs
+2 Forest
+3 Spymaster's Vault
+4 Windswept Heath
+[Sideboard]
+1 Murderous Cut
+1 Vexing Bauble
+1 Scavenging Ooze
+1 Outland Liberator
+1 Soulless Jailer
+1 Force of Vigor
+3 Fatal Push
+2 Thoughtseize
+1 Mai, Scornful Striker
+2 Ashiok, Dream Render
+1 Fulminator Mage

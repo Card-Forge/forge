@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Karl_Maahs_-_WUBG_Mill_(Standard,_#1967694).dck
+Deck Type=constructed
+
+[Main]
+4 Aftermath Analyst
+3 Slogurk, the Overslime
+4 Nissa, Resurgent Animist
+1 Ertai Resurrected
+2 Atraxa, Grand Unifier
+2 Cut Down
+2 Bitter Triumph
+4 Memory Deluge
+1 Path of Peril
+3 Splendid Reclamation
+2 Terror Tide
+2 Wrenn and Realmbreaker
+2 Jace, the Perfected Mind
+1 Plains
+3 Island
+3 Swamp
+5 Forest
+4 Takenuma, Abandoned Mire
+3 Otawara, Soaring City
+2 Boseiju, Who Endures
+1 Hedge Maze
+2 Underground Mortuary
+4 Brokers Hideout
+4 Riveteers Overlook
+4 Obscura Storefront
+[Sideboard]
+4 Duress
+2 Cut Down
+2 Melira, the Living Cure
+2 Path of Peril
+1 Titania, Voice of Gaea
+2 Ertai Resurrected
+1 Jace, the Perfected Mind
+1 Tidal Terror

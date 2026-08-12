@@ -62,7 +62,7 @@ public class DrainManaAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final Card source = sa.getHostCard();
 

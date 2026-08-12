@@ -1,0 +1,9 @@
+Name:Wild Pack Squad
+Variant:UniversesWithin:FlavorName:Freestrider Aces
+ManaCost:2 W
+Types:Creature Human Mercenary
+PT:2/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, up to one target creature gains first strike and vigilance until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | KW$ First Strike & Vigilance
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on your turn, up to one target creature gains first strike and vigilance until end of turn.

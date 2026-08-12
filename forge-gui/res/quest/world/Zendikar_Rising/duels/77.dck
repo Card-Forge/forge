@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Token
+Title=Token
+Icon=Token.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/A22en_-_Mill_(Modern,_#1073849).dck
+Deck Type=constructed
+
+[Main]
+4 Ruin Crab
+4 Hedron Crab
+4 Mesmeric Orb
+2 Visions of Beyond
+2 Cling to Dust
+4 Archive Trap
+4 Drown in the Loch
+4 Fatal Push
+4 Into the Story
+4 Surgical Extraction
+2 Bloodchief's Thirst
+1 Mystic Sanctuary
+2 Watery Grave
+2 Swamp
+3 Flooded Strand
+3 Darkslick Shores
+3 Field of Ruin
+4 Polluted Delta
+4 Island
+[Sideboard]
+1 Lurrus of the Dream-Den
+2 Crypt Incursion
+2 Damnation
+2 Set Adrift
+4 Aether Gust
+4 Thoughtseize

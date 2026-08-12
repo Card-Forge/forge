@@ -422,7 +422,7 @@
                 ],
                 &quot;text&quot;:    &quot;With a gust of red flames, the door burns away, leaving only ashes in your path. You are now free to pass.&quot;,
                 &quot;options&quot;:
-                    [ { &quot;name&quot;: &quot;(continue)&quot; } ]
+                    [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
             },
             {
                 &quot;name&quot;: &quot;You knock on the door&quot;,

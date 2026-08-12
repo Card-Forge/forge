@@ -18,5 +18,5 @@ Name:Ritual Chamber
 ManaCost:3 B B
 Types:Enchantment Room
 T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ TrigToken | TriggerDescription$ When you unlock this door, create a 6/6 black Demon creature token with flying.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_6_6_demon_flying | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ b_6_6_demon_flying | TokenOwner$ You
 Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhen you unlock this door, create a 6/6 black Demon creature token with flying.

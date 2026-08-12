@@ -1,0 +1,10 @@
+Name:Scarlet Spider, Kaine
+Variant:UniversesWithin:FlavorName:Kivni, Orb Weaver
+ManaCost:B R
+Types:Legendary Creature Spider Human Hero
+PT:2/1
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When NICKNAME enters, you may discard a card. If you do, put a +1/+1 counter on him.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ Discard<1/Card> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+K:Mayhem:BR
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Scarlet Spider enters, you may discard a card. If you do, put a +1/+1 counter on him.\nMayhem {B/R} (You may cast this card from your graveyard for {B/R} if you discarded it this turn. Timing rules still apply.)

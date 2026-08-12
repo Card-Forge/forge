@@ -5,6 +5,6 @@ PT:6/6
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a creature you control to its owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Creature.YouCtrl
 SVar:NeedsToPlayVar:Z GE2
-SVar:Z:Count$Valid Creature.YouCtrl+inZoneBattlefield
+SVar:Z:Count$Valid Creature.YouCtrl
 AI:RemoveDeck:Random
 Oracle:At the beginning of your upkeep, return a creature you control to its owner's hand.

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Tanit
+Title=Tanit
+Icon=Tanit.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/Magic-League_Standard_Master_23-05-10/chayajom_-_Vampires_(Standard,_#1874).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Black Knight
+4 Gatekeeper of Malakir
+2 Malakir Bloodwitch
+4 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+4 Tendrils of Corruption
+3 Consuming Vapors
+2 Grim Discovery
+2 Mind Sludge
+4 Sign in Blood
+4 Marsh Flats
+15 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Doom Blade
+4 Duress
+4 Underworld Dreams

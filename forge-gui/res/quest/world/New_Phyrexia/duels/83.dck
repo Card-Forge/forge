@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=MamanBrigitte
+Title=MamanBrigitte
+Icon=MamanBrigitte.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Osaka,_Japan/Kei_,U_in_PTQ_Barcelona_-_Faeries_(Modern,_#28003).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+3 Vedalken Shackles
+4 Cryptic Command
+2 Mana Leak
+4 Remand
+1 Spell Pierce
+4 Spell Snare
+3 Faerie Conclave
+18 Island
+4 Mutavault
+[Sideboard]
+1 Academy Ruins
+1 Commandeer
+2 Jace Beleren
+1 Mindbreak Trap
+2 Ratchet Bomb
+2 Relic of Progenitus
+2 Trickbind
+2 Wipe Away
+2 Wurmcoil Engine

@@ -745,10 +745,10 @@ ScryfallCode=2XM
 4 w_2_2_cat @Jesper Ejsing
 5 w_1_1_human_soldier @Deruchenko Alexander
 6 w_1_1_soldier @Jakub Kasper
-7 u_2_1_a_phyrexian_myr @Daarken
+7 u_2_1_a_myr @Daarken
 8 u_1_1_a_thopter_flying @Andrew Murray
 9 b_5_5_demon_flying @Sidharth Chaturvedi
-10 b_0_0_phyrexian_germ @Igor Kieryluk
+10 b_0_0_germ @Igor Kieryluk
 11 marit_lage @Stephan Martiniere
 12 g_3_3_ape @Lars Grant-West
 13 g_3_3_beast @Jason Felix
@@ -761,7 +761,7 @@ ScryfallCode=2XM
 20 gw_x_x_elemental_total_creatures @Mark Winters
 21 gw_1_1_elf_warrior @Carl Frank
 22 c_a_clue_draw @Noah Bradley
-23 c_3_3_a_phyrexian_golem @Daarken
+23 c_3_3_a_golem @Daarken
 24 c_1_1_a_myr @Ryan Pancoast
 25 c_1_1_a_servo @Igor Kieryluk
 26 c_1_1_a_thopter_flying @Richard Wright

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Sauron
+Title=Sauron
+Icon=Sauron.jpg
+Difficulty=Very Hard
+Description=./Modern/Marvels_Spider_Man/Joel_Doolittle_-_Esper_(Modern,_#2660507).dck
+Deck Type=constructed
+
+[Main]
+4 Overlord of the Balemurk
+4 Phelia, Exuberant Shepherd
+4 Quantum Riddler
+4 Solitude
+4 Witch Enchanter
+2 Aven Interrupter
+2 Emperor of Bones
+2 Flickerwisp
+1 Boggart Trawler
+1 Superior Spider-Man
+4 Ephemerate
+3 Fatal Push
+4 Thoughtseize
+2 Teferi, Time Raveler
+4 Marsh Flats
+3 Flooded Strand
+3 Polluted Delta
+2 Godless Shrine
+2 Plains
+2 Watery Grave
+1 Meticulous Archive
+1 Shadowy Backstreet
+1 Swamp
+[Sideboard]
+3 Wrath of the Skies
+2 Clarion Conqueror
+2 Consign to Memory
+2 March of Otherworldly Light
+2 Mystical Dispute
+1 Deafening Silence
+1 Disruptor Flute
+1 Plague Engineer
+1 Reprieve

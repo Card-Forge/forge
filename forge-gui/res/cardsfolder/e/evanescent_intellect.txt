@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Mill | Description$ Enchanted creature has "{1}{U}, {T}: Target player mills three cards."
-SVar:Mill:AB$ Mill | Cost$ 1 U T | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills three cards.
+SVar:Mill:AB$ Mill | Cost$ 1 U T | NumCards$ 3 | ValidTgts$ Player | SpellDescription$ Target player mills three cards.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature\nEnchanted creature has "{1}{U}, {T}: Target player mills three cards."

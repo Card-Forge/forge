@@ -1,7 +1,7 @@
 Name:Mercy Killing
 ManaCost:2 GW
 Types:Instant
-A:SP$ SacrificeAll | Defined$ Targeted | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBToken | SpellDescription$ Target creature's controller sacrifices it, then creates X 1/1 green and white Elf Warrior creature tokens, where X is that creature's power.
+A:SP$ SacrificeAll | Defined$ Targeted | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Target creature's controller sacrifices it, then creates X 1/1 green and white Elf Warrior creature tokens, where X is that creature's power.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ gw_1_1_elf_warrior | TokenOwner$ TargetedController
 SVar:X:Targeted$CardPower
 Oracle:Target creature's controller sacrifices it, then creates X 1/1 green and white Elf Warrior creature tokens, where X is that creature's power.

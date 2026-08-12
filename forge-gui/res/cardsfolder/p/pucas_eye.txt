@@ -1,0 +1,10 @@
+Name:Puca's Eye
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this artifact enters, draw a card, then choose a color. This artifact becomes the chosen color.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBChooseColor
+SVar:DBChooseColor:DB$ ChooseColor | Defined$ You | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True | Duration$ Permanent
+A:AB$ Draw | Cost$ 3 T | NumCards$ 1 | CheckSVar$ X | SVarCompare$ EQ5 | SpellDescription$ Draw a card. Activate only if there are five colors among permanents you control.
+SVar:X:Count$Valid Permanent.YouCtrl$Colors
+Oracle:When this artifact enters, draw a card, then choose a color. This artifact becomes the chosen color.\n{3}, {T}: Draw a card. Activate only if there are five colors among permanents you control.

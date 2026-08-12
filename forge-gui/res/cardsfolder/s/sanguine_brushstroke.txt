@@ -4,7 +4,8 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a Blood token and conjure a card named Blood Artist onto the battlefield.
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw | SubAbility$ DBMakeCard
 SVar:DBMakeCard:DB$ MakeCard | Conjure$ True | Name$ A-Blood Artist | Zone$ Battlefield
-T:Mode$ Sacrificed | ValidCard$ Blood.token+YouCtrl | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Blood token, each opponent loses 1 life.
-SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+T:Mode$ Sacrificed | ValidCard$ Blood.token+YouCtrl | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Blood token, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Blood
-Oracle:When Sanguine Brushstroke enters, create a Blood token and conjure a card named Blood Artist onto the battlefield.\nWhenever you sacrifice a Blood token, each opponent loses 1 life.
+Oracle:When Sanguine Brushstroke enters the battlefield, create a Blood token and conjure a card named Blood Artist onto the battlefield.\nWhenever you sacrifice a Blood token, each opponent loses 1 life and you gain 1 life.

@@ -1,0 +1,8 @@
+Name:Squawkroaster
+ManaCost:3 R
+Types:Creature Elemental
+PT:*/4
+K:Double Strike
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ Vivid — CARDNAME's power is equal to the number of colors among permanents you control.
+SVar:X:Count$Valid Permanent.YouCtrl$Colors
+Oracle:Double strike\nVivid — Squawkroaster's power is equal to the number of colors among permanents you control.

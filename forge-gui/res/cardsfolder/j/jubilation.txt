@@ -1,0 +1,10 @@
+Name:Jubilation
+ManaCost:5 G
+Types:Creature Elemental Incarnation
+PT:5/5
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ When this creature enters, creatures you control get +2/+2 and gain trample until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Trample
+K:Encore:7 G G
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:When this creature enters, creatures you control get +2/+2 and gain trample until end of turn.\nEncore {7}{G}{G} ({7}{G}{G}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

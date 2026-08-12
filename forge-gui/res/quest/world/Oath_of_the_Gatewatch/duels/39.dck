@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Aqueduct
+Title=Aqueduct
+Icon=Aqueduct.jpg
+Difficulty=Medium
+Description=Oath_of_the_Gatewatch/Standard_Constructed_League/PlaneswalkerMaster69_-_Eldrazi_(Standard,_#609225).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Hangarback Walker
+4 Hedron Crawler
+3 Pia and Kiran Nalaar
+4 Reality Smasher
+4 Thopter Engineer
+3 Thought-Knot Seer
+4 Vile Aggregate
+2 Spatial Contortion
+3 Roast
+4 Chandra, Flamecaller
+2 Battlefield Forge
+4 Foundry of the Consuls
+10 Mountain
+2 Ruins of Oran-Rief
+4 Shivan Reef
+3 Tomb of the Spirit Dragon
+[Sideboard]
+2 Arc Lightning
+2 Ashcloud Phoenix
+1 Barrage of Boulders
+3 Eldrazi Obligator
+1 Oblivion Sower
+2 Outpost Siege
+1 Rending Volley

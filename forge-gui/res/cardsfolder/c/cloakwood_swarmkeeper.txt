@@ -2,8 +2,8 @@ Name:Cloakwood Swarmkeeper
 ManaCost:G
 Types:Creature Elf Ranger
 PT:1/1
-T:Mode$ ChangesZoneAll | ValidCards$ Card.token+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPutcounter | TriggerDescription$ Gathered Swarm — Whenever one or more tokens you control enter, put a +1/+1 counter on CARDNAME.
-SVar:TrigPutcounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Self | CounterNum$ 1
+T:Mode$ ChangesZoneAll | ValidCards$ Card.token+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Gathered Swarm — Whenever one or more tokens you control enter, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Self | CounterNum$ 1
 DeckHints:Ability$Token
 DeckHas:Ability$Counters
 Oracle:Gathered Swarm — Whenever one or more tokens you control enter, put a +1/+1 counter on Cloakwood Swarmkeeper.

@@ -1,7 +1,7 @@
 [metadata]
-Name=Modern Masters
 Code=MMA
 Date=2013-06-07
+Name=Modern Masters
 Type=Reprint
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 RareMythic

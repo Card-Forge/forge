@@ -19,67 +19,85 @@ package forge.card;
 
 import java.util.Set;
 
-/**
- * <p>
- * CardType class.
- * </p>
- * 
- * @author Forge
- * @version $Id: CardType.java 24393 2014-01-21 06:27:36Z Max mtg $
- */
-public class CardChangedType {
+import com.google.common.collect.Lists;
 
-    // takes care of individual card types
-    private final CardType addType;
-    private final CardType removeType;
-    private final boolean addAllCreatureTypes;
-    private final Set<RemoveType> remove;
+import forge.card.CardType.CoreType;
+import forge.util.IterableUtil;
 
-    public CardChangedType(final CardType addType0, final CardType removeType0, final boolean addAllCreatureTypes0,
-            final Set<RemoveType> remove0) {
-        addType = addType0;
-        removeType = removeType0;
-        addAllCreatureTypes = addAllCreatureTypes0;
-        remove = remove0;
-    }
+public record CardChangedType(CardTypeView addType, CardTypeView removeType, boolean addAllCreatureTypes, Set<RemoveType> remove) implements ICardChangedType {
 
-    public final CardType getAddType() {
-        return addType;
-    }
-
-    public final CardType getRemoveType() {
-        return removeType;
-    }
-
-    public final boolean isAddAllCreatureTypes() {
-        return addAllCreatureTypes;
-    }
-
-    public final boolean isRemoveSuperTypes() {
+    public boolean isRemoveSuperTypes() {
         return remove.contains(RemoveType.SuperTypes);
     }
 
-    public final boolean isRemoveCardTypes() {
+    public boolean isRemoveCardTypes() {
         return remove.contains(RemoveType.CardTypes);
     }
 
-    public final boolean isRemoveSubTypes() {
+    public boolean isRemoveSubTypes() {
         return remove.contains(RemoveType.SubTypes);
     }
 
-    public final boolean isRemoveLandTypes() {
+    @Override
+    public boolean isRemoveLandTypes() {
         return remove.contains(RemoveType.LandTypes);
     }
 
-    public final boolean isRemoveCreatureTypes() {
+    public boolean isRemoveCreatureTypes() {
         return remove.contains(RemoveType.CreatureTypes);
     }
 
-    public final boolean isRemoveArtifactTypes() {
+    public boolean isRemoveArtifactTypes() {
         return remove.contains(RemoveType.ArtifactTypes);
     }
 
-    public final boolean isRemoveEnchantmentTypes() {
+    public boolean isRemoveEnchantmentTypes() {
         return remove.contains(RemoveType.EnchantmentTypes);
+    }
+
+    @Override
+    public CardType applyChanges(CardType newType) {
+        if (isRemoveCardTypes()) {
+            // 205.1a However, an object with either the instant or sorcery card type retains that type.
+            newType.coreTypes.retainAll(CoreType.spellTypes);
+        }
+        if (isRemoveSuperTypes()) {
+            newType.supertypes.clear();
+        }
+        if (isRemoveSubTypes()) {
+            newType.subtypes.clear();
+        } else if (!newType.subtypes.isEmpty()) {
+            if (isRemoveLandTypes()) {
+                newType.subtypes.removeIf(CardType::isALandType);
+            }
+            if (isRemoveCreatureTypes()) {
+                newType.subtypes.removeIf(CardType::isACreatureType);
+                // need to remove AllCreatureTypes too when removing creature Types
+                newType.allCreatureTypes = false;
+            }
+            if (isRemoveArtifactTypes()) {
+                newType.subtypes.removeIf(CardType::isAnArtifactType);
+            }
+            if (isRemoveEnchantmentTypes()) {
+                newType.subtypes.removeIf(CardType::isAnEnchantmentType);
+            }
+        }
+        if (removeType() != null) {
+            newType.removeAll(removeType());
+        }
+        if (addType() != null) {
+            newType.addAll(addType());
+            if (addType().hasAllCreatureTypes()) {
+                newType.allCreatureTypes = true;
+            }
+        }
+        if (addAllCreatureTypes()) {
+            newType.allCreatureTypes = true;
+        }
+        // remove specific creature types from all creature types
+        if (removeType() != null && newType.allCreatureTypes) {
+            newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(IterableUtil.filter(removeType().getSubtypes(), CardType::isACreatureType)));
+        }
+        return newType;
     }
 }

@@ -1,0 +1,16 @@
+Name:Superior Foes of Spider-Man
+Variant:UniversesWithin:FlavorName:Restless Razorkin
+ManaCost:2 R
+Types:Creature Human Rogue Villain
+PT:3/3
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE4 | ValidActivatingPlayer$ You | OptionalDecider$ You | Execute$ ExileSelf | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 4 or greater, you may exile the top card of your library. If you do, you may play that card until you exile another card with this creature.
+SVar:ExileSelf:DB$ ChangeZone | Defined$ Imprinted | Origin$ Command | Destination$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | AILogic$ ExileAndPlayUntilEOT
+# AILogic tag not quite right?
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Play | Duration$ Permanent | ForgetOnMoved$ Exile | ImprintOnHost$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup2 | Static$ True
+SVar:DBCleanup2:DB$ Cleanup | ClearImprinted$ True
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card until you exile another card with CARDNAME.
+Oracle:Whenever you cast a spell with mana value 4 or greater, you may exile the top card of your library. If you do, you may play that card until you exile another card with this creature.

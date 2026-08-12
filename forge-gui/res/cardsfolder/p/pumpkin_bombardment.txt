@@ -1,0 +1,9 @@
+Name:Pumpkin Bombardment
+Variant:UniversesWithin:FlavorName:Knife Trick
+ManaCost:BR
+Types:Sorcery
+K:AlternateAdditionalCost:Discard<1/Card>:2
+A:SP$ DealDamage | NumDmg$ 3 | ValidTgts$ Creature | SpellDescription$ CARDNAME deals 3 damage to target creature.
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:As an additional cost to cast this spell, discard a card or pay {2}.\nPumpkin Bombardment deals 3 damage to target creature.

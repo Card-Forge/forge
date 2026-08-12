@@ -41,7 +41,7 @@ public class DrainManaEffect extends SpellAbilityEffect {
             List<Mana> cleared = p.getManaPool().clearPool(false);
             drained.addAll(cleared);
             if (StaticAbilityUnspentMana.hasManaBurn(p)) {
-                final int lost = p.loseLife(cleared.size(), false, true);
+                final int lost = p.loseLife(cleared.size(), false, true, sa);
                 if (lost > 0) {
                     lossMap.put(p, lost);
                 }
@@ -54,7 +54,7 @@ public class DrainManaEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("DrainMana")) {
-            sa.getActivatingPlayer().getManaPool().add(drained);
+            sa.getActivatingPlayer().getManaPool().addMana(drained);
         }
         if (sa.hasParam("RememberDrainedMana")) {
             sa.getHostCard().addRemembered(drained.size());

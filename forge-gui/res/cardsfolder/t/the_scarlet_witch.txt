@@ -1,0 +1,7 @@
+Name:The Scarlet Witch
+ManaCost:2 R
+Types:Legendary Creature Mutant Warlock Hero
+PT:2/3
+S:Mode$ ReduceCost | ValidCard$ Instant.cmcGE4,Sorcery.cmcGE4 | Type$ Spell | Activator$ You | Amount$ X | Description$ Instant and sorcery spells you cast with mana value 4 or greater cost {X} less to cast, where X is CARDNAME's power.
+SVar:X:Count$CardPower
+Oracle:Instant and sorcery spells you cast with mana value 4 or greater cost {X} less to cast, where X is The Scarlet Witch's power.

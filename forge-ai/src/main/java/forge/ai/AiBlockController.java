@@ -604,6 +604,7 @@ public class AiBlockController {
     private void makeTradeBlocks(final Combat combat) {
         List<Card> currentAttackers = new ArrayList<>(attackersLeft);
         List<Card> killingBlockers;
+        boolean needsRefresh = false;
 
         for (final Card attacker : attackersLeft) {
             if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > 1) {
@@ -618,19 +619,17 @@ public class AiBlockController {
 
             if (!killingBlockers.isEmpty()) {
                 final Card blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
-                boolean doTrade = false;
 
-                if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                    // Always trade when life in danger
-                    doTrade = true;
-                } else {
-                    // Randomly trade creatures with lower power and [hopefully] worse abilities, if enabled in profile
-                    doTrade = wouldLikeToRandomlyTrade(attacker, blocker, combat);
+                if (lifeInDanger && needsRefresh) {
+                    // is it very likely to end up in danger again if we weren't already?
+                    lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
                 }
 
-                if (doTrade) {
+                // Randomly trade creatures with lower power and [hopefully] worse abilities, if enabled in profile
+                if (lifeInDanger || wouldLikeToRandomlyTrade(attacker, blocker, combat)) {
                     combat.addBlocker(attacker, blocker);
                     currentAttackers.remove(attacker);
+                    needsRefresh = true;
                 }
             }
         }
@@ -649,7 +648,14 @@ public class AiBlockController {
     }
 
     private void makeChumpBlocks(final Combat combat, List<Card> attackers) {
-        if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
+        makeChumpBlocks(combat, attackers, true);
+    }
+
+    // recheckDanger: lifeInDanger runs a full combat damage prediction, so only
+    // re-evaluate it when a blocker was assigned since the last check - skipping
+    // an attacker leaves the combat unchanged and the previous result still holds
+    private void makeChumpBlocks(final Combat combat, List<Card> attackers, boolean recheckDanger) {
+        if (recheckDanger && !ComputerUtilCombat.lifeInDanger(ai, combat)) {
             lifeInDanger = false;
             return;
         }
@@ -663,10 +669,11 @@ public class AiBlockController {
             || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)
             || ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
             attackers.remove(0);
-            makeChumpBlocks(combat, attackers);
+            makeChumpBlocks(combat, attackers, false);
             return;
         }
 
+        boolean blocked = false;
         List<Card> chumpBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
         if (!chumpBlockers.isEmpty()) {
             final Card blocker = ComputerUtilCard.getWorstCreatureAI(chumpBlockers);
@@ -688,7 +695,7 @@ public class AiBlockController {
                             attackersLeft.remove(other);
                             blockedButUnkilled.add(other);
                             attackers.remove(other);
-                            makeChumpBlocks(combat, attackers);
+                            makeChumpBlocks(combat, attackers, true);
                             return;
                         }
                     }
@@ -698,9 +705,10 @@ public class AiBlockController {
             combat.addBlocker(attacker, blocker);
             attackersLeft.remove(attacker);
             blockedButUnkilled.add(attacker);
+            blocked = true;
         }
         attackers.remove(0);
-        makeChumpBlocks(combat, attackers);
+        makeChumpBlocks(combat, attackers, blocked);
     }
 
     // Block creatures with "can't be blocked except by two or more creatures"
@@ -861,10 +869,9 @@ public class AiBlockController {
             return;
         }
 
-        AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-        final int evalThresholdToken = aic.getIntProperty(AiProps.THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER);
-        final int evalThresholdNonToken = aic.getIntProperty(AiProps.THRESHOLD_NONTOKEN_CHUMP_TO_SAVE_PLANESWALKER);
-        final boolean onlyIfLethal = aic.getBooleanProperty(AiProps.CHUMP_TO_SAVE_PLANESWALKER_ONLY_ON_LETHAL);
+        final int evalThresholdToken = AiProfileUtil.getIntProperty(ai, AiProps.THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER);
+        final int evalThresholdNonToken = AiProfileUtil.getIntProperty(ai, AiProps.THRESHOLD_NONTOKEN_CHUMP_TO_SAVE_PLANESWALKER);
+        final boolean onlyIfLethal = AiProfileUtil.getBoolProperty(ai, AiProps.CHUMP_TO_SAVE_PLANESWALKER_ONLY_ON_LETHAL);
 
         if (evalThresholdToken > 0 || evalThresholdNonToken > 0) {
             // detect how much damage is threatened to each of the planeswalkers, see which ones would be
@@ -1047,7 +1054,7 @@ public class AiBlockController {
         clearBlockers(combat, possibleBlockers);
 
         diff = (ai.getLife() * 2) - 5; // This is the minimal gain for an unnecessary trade
-        if (ai.getController().isAI() && diff > 0 && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.PLAY_AGGRO)) {
+        if (diff > 0 && AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO)) {
             diff = 0;
         }
 
@@ -1079,11 +1086,10 @@ public class AiBlockController {
         // When the AI holds some Fog effect, don't bother about lifeInDanger
         if (!ComputerUtil.hasAFogEffect(ai, ai, checkingOther)) {
             lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
-            makeTradeBlocks(combat); // choose necessary trade blocks
+            makeTradeBlocks(combat);
 
-            // if life is still in danger
             if (lifeInDanger) {
-                makeChumpBlocks(combat); // choose necessary chump blocks
+                makeChumpBlocks(combat);
             }
 
             // Reinforce blockers blocking attackers with trample if life is still in danger
@@ -1106,7 +1112,7 @@ public class AiBlockController {
             // == 2. If the AI life would still be in danger make a safer approach ==
             if (lifeInDanger) {
                 clearBlockers(combat, possibleBlockers); // reset every block assignment
-                makeTradeBlocks(combat); // choose necessary trade blocks
+                makeTradeBlocks(combat);
                 makeGoodBlocks(combat);
                 // choose necessary chump blocks if life is still in danger
                 makeChumpBlocks(combat);
@@ -1283,10 +1289,10 @@ public class AiBlockController {
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             // simulation must get same results or it may crash
-            if (!aic.usesSimulation()) {
-                enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
-                randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS);
-                randomTradeIfCreatInHand = aic.getBooleanProperty(AiProps.ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT);
+            if (!aic.usesFullSimulation()) {
+                enableRandomTrades = aic.getBoolProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
+                randomTradeIfBehindOnBoard = aic.getBoolProperty(AiProps.RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS);
+                randomTradeIfCreatInHand = aic.getBoolProperty(AiProps.ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT);
                 minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
                 maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
                 chanceModForEmbalm = aic.getIntProperty(AiProps.CHANCE_DECREASE_TO_TRADE_VS_EMBALM);
@@ -1307,8 +1313,7 @@ public class AiBlockController {
             oppCreatureCount = ComputerUtil.countUsefulCreatures(attackersLeft.get(0).getController());
         }
 
-        if (attacker != null && attacker.getOwner() != null)
-            if (attacker.getOwner().equals(ai) && "6".equals(attacker.getSVar("SacMe"))) {
+        if (attacker.getOwner().equals(ai) && "6".equals(attacker.getSVar("SacMe"))) {
             // Temporarily controlled object - don't trade with it
             // TODO: find a more reliable way to figure out that control will be reestablished next turn
             return false;

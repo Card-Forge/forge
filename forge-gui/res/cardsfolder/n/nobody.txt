@@ -1,0 +1,8 @@
+Name:Nobody
+ManaCost:1 UR UR
+Types:Artifact Creature Human Hero
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature enters, return up to one other target artifact you control to its owner's hand. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Artifact.Other+YouCtrl | ValidTgtsDesc$ another artifact you control | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+Oracle:When this creature enters, return up to one other target artifact you control to its owner's hand. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)

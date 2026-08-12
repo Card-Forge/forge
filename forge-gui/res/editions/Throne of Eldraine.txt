@@ -2,7 +2,6 @@
 Code=ELD
 Date=2019-10-04
 Name=Throne of Eldraine
-Code2=ELD
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromSheet("ELD cards"), 3 Uncommon:fromSheet("ELD cards"), 1 RareMythic:fromSheet("ELD cards"), 1 BasicLand
@@ -49,7 +48,7 @@ ScryfallCode=ELD
 34 C True Love's Kiss @Donato Giancola
 35 U Venerable Knight @Colin Boyer
 36 R Worthy Knight @Yongjae Choi
-37 C Youthful Knight @Heonhwa Choe
+37 C Youthful Knight @Heonhwa
 38 U Animating Faerie @Joseph Meehan
 39 M Brazen Borrower @Eric Deschamps
 40 C Charmed Sleep @Titus Lunter
@@ -155,7 +154,7 @@ ScryfallCode=ELD
 140 C Searing Barrage @Allen Williams
 141 C Seven Dwarves @Jason Rainville
 142 U Skullknocker Ogre @Svetlin Velinov
-143 U Slaying Fire @Heonhwa Choe
+143 U Slaying Fire @Heonhwa
 144 R Sundering Stroke @Stanton Feng
 145 U Syr Carah, the Bold @Wisnu Tan
 146 C Thrill of Possibility @Steve Argyle
@@ -418,14 +417,13 @@ ScryfallCode=ELD
 [promo]
 392 R Piper of the Swarm @Jesper Ejsing
 393 U Glass Casket @Anastasia Ovchinnikova
-394 U Slaying Fire @Heonhwa Choe
+394 U Slaying Fire @Heonhwa
 395 U Kenrith's Transformation @Kimonas Theodossiou
 396 U Improbable Alliance @Zoltan Boros
 397 U Inspiring Veteran @Scott Murphy
 
 [rebalanced]
 A-81 U A-Cauldron Familiar @Milivoj Ćeran
-A-125 R A-Fires of Invention @Stanton Feng
 
 [tokens]
 1 w_0_1_goat @Forrest Imel
@@ -443,9 +441,9 @@ A-125 R A-Fires of Invention @Stanton Feng
 13 rw_3_1_human_warrior_trample_haste @Suzanne Helmigh
 14 bg_2_2_wolf_garruk @David Gaillet
 15 c_a_food_sac @Steven Belledin
-16 c_a_food_sac @Steven Belledin
-17 c_a_food_sac @Steven Belledin
-18 c_a_food_sac @Steven Belledin
+16 c_a_food_sac @Randy Gallegos
+17 c_a_food_sac @Donato Giancola
+18 c_a_food_sac @Lucas Graciano
 
 [other]
 19 emblem_garruk_cursed_huntsman @Eric Deschamps

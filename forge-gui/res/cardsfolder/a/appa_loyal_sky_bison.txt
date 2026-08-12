@@ -1,0 +1,12 @@
+Name:Appa, Loyal Sky Bison
+ManaCost:4 W W
+Types:Legendary Creature Bison Ally
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever NICKNAME enters or attacks, ABILITY
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPump,DBAirbend
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Flying | SpellDescription$ Target creature you control gains flying until end of turn.
+SVar:DBAirbend:DB$ Airbend | ValidTgts$ Permanent.Other+nonLand+YouCtrl | TgtPrompt$ Select another target nonland permanent you control | SpellDescription$ Airbend another target nonland permanent you control.
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Appa enters or attacks, choose one —\n• Target creature you control gains flying until end of turn.\n• Airbend another target nonland permanent you control. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)

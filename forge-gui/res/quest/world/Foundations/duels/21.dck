@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Luis_Alvarez_Zucchino_-_Ub_Aggro_(Standard,_#2280422).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+2 Enduring Curiosity
+1 Ertai Resurrected
+4 Faerie Mastermind
+4 Floodpits Drowner
+4 Mockingbird
+4 Spyglass Siren
+2 Anoint with Affliction
+2 Cut Down
+2 Faebloom Trick
+2 Go for the Throat
+2 Spell Stutter
+3 Kaito, Bane of Nightmares
+4 Darkslick Shores
+2 Fountainport
+4 Gloomlake Verge
+3 Island
+3 Restless Reef
+4 Swamp
+4 Underground River
+[Sideboard]
+1 Aclazotz, Deepest Betrayal
+1 Disdainful Stroke
+2 Duress
+1 Enduring Curiosity
+2 Ghost Vacuum
+1 Gix's Command
+1 Go for the Throat
+1 Harvester of Misery
+2 Negate
+1 Sheoldred, the Apocalypse
+2 Tishana's Tidebinder

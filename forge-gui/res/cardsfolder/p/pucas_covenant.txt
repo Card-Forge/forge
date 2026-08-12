@@ -1,0 +1,7 @@
+Name:Puca's Covenant
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+HasCounters | TriggerZones$ Battlefield | Execute$ TrigChangeZone | OptionalDecider$ You | ResolvedLimit$ 1 | TriggerDescription$ Whenever a creature you control with a counter on it dies, you may return another target permanent card with mana value less than or equal to the number of counters on that creature from your graveyard to your hand. Do this only once each turn.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn+cmcLEX+NotDefinedTriggeredCard | TgtPrompt$ Choose another target permanent card with mana value less than or equal to the number of counters
+SVar:X:TriggeredCard$CardCounters.ALL
+Oracle:Whenever a creature you control with a counter on it dies, you may return another target permanent card with mana value less than or equal to the number of counters on that creature from your graveyard to your hand. Do this only once each turn.

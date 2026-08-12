@@ -1,0 +1,9 @@
+Name:The Boulder, Ready to Rumble
+ManaCost:3 G
+Types:Legendary Creature Human Warrior Performer
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEarthbend | TriggerDescription$ Whenever NICKNAME attacks, earthbend X, where X is the number of creatures you control with power 4 or greater. (Target land you control becomes a 0/0 creature with haste that's still a land. Put X +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:TrigEarthbend:DB$ Earthbend | Num$ X
+SVar:X:Count$Valid Creature.YouCtrl+powerGE4
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever The Boulder attacks, earthbend X, where X is the number of creatures you control with power 4 or greater. (Target land you control becomes a 0/0 creature with haste that's still a land. Put X +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)

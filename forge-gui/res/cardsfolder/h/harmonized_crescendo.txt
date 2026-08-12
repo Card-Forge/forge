@@ -1,0 +1,10 @@
+Name:Harmonized Crescendo
+ManaCost:4 U U
+Types:Instant
+K:Convoke
+A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBDraw | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type. Draw a card for each permanent you control of that type.
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
+AI:RemoveDeck:Random
+SVar:NeedsToPlay:Creature
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose a creature type. Draw a card for each permanent you control of that type.

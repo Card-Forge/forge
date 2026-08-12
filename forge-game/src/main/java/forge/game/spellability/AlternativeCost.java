@@ -21,6 +21,7 @@ public enum AlternativeCost {
     Overload,
     Prowl,
     Plotted,
+    Sneak,
     Spectacle,
     Surge,
     Warp,

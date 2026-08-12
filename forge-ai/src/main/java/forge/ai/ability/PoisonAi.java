@@ -6,7 +6,6 @@ import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.GameLossReason;
@@ -65,7 +64,7 @@ public class PoisonAi extends SpellAbilityAi {
         boolean result;
         if (sa.usesTargeting()) {
             result = tgtPlayer(ai, sa, mandatory);
-        } else if (mandatory || !ai.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
+        } else if (mandatory || !ai.canReceiveCounters(CounterEnumType.POISON)) {
             // mandatory or ai is uneffected
             result = true;
         } else {
@@ -90,7 +89,7 @@ public class PoisonAi extends SpellAbilityAi {
             PlayerCollection betterTgts = tgts.filter(input -> {
                 if (input.cantLoseCheck(GameLossReason.Poisoned)) {
                     return false;
-                } else if (!input.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
+                } else if (!input.canReceiveCounters(CounterEnumType.POISON)) {
                     return false;
                 }
                 return true;
@@ -109,7 +108,7 @@ public class PoisonAi extends SpellAbilityAi {
         if (tgts.isEmpty()) {
             if (mandatory) {
                 // AI is uneffected
-                if (ai.canBeTargetedBy(sa) && !ai.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
+                if (ai.canBeTargetedBy(sa) && !ai.canReceiveCounters(CounterEnumType.POISON)) {
                     sa.getTargets().add(ai);
                     return true;
                 }
@@ -121,7 +120,7 @@ public class PoisonAi extends SpellAbilityAi {
                         if (input.cantLoseCheck(GameLossReason.Poisoned)) {
                             return true;
                         }
-                        return !input.canReceiveCounters(CounterType.get(CounterEnumType.POISON));
+                        return !input.canReceiveCounters(CounterEnumType.POISON);
                     });
                     if (!betterAllies.isEmpty()) {
                         allies = betterAllies;

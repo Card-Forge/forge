@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Instant
 A:SP$ Effect | ValidTgts$ Player | StaticAbilities$ STCantBeCast,STCantBeActivated | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.
 SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Instant,Sorcery | Caster$ Player.IsRemembered | Description$ Target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.
-SVar:STCantBeActivated:Mode$ CantBeActivated | ValidCard$ Card | ValidSA$ Activated.nonManaAbility | Activator$ Player.IsRemembered
+SVar:STCantBeActivated:Mode$ CantBeActivated | ValidCard$ Card | ValidSA$ Activated.!ManaAbility | Activator$ Player.IsRemembered
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 Oracle:Until end of turn, target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.\nDraw a card.

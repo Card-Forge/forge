@@ -2,7 +2,6 @@
 Code=ZNR
 Date=2020-09-25
 Name=Zendikar Rising
-Code2=ZNR
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!dfc:fromSheet("ZNR cards"), 3 Uncommon:!dfc:fromSheet("ZNR cards"), 1 RareMythic:!dfc:fromSheet("ZNR cards"), 1 BasicLand
@@ -26,7 +25,7 @@ ScryfallCode=ZNR
 10 C Disenchant @Colin Boyer
 11 U Emeria Captain @Matt Stewart
 12 M Emeria's Call @Matt Stewart
-13 C Expedition Healer @Heonhwa Choe
+13 C Expedition Healer @Heonhwa
 14 C Farsight Adept @Cristi Balanescu
 15 U Fearless Fledgling @Jesper Ejsing
 16 R Felidar Retreat @Ralph Horsley
@@ -70,7 +69,7 @@ ScryfallCode=ZNR
 54 R Coralhelm Chronicler @Lie Setiawan
 55 C Cunning Geysermage @Chris Rallis
 56 C Deliberate @Slawomir Maniak
-57 C Expedition Diviner @Heonhwa Choe
+57 C Expedition Diviner @Heonhwa
 58 C Field Research @PINDURSKI
 59 C Glacial Grasp @Tomasz Jedruszek
 60 R Glasspool Mimic @Johan Grenier
@@ -128,7 +127,7 @@ ScryfallCode=ZNR
 112 C Marauding Blight-Priest @Caio Monteiro
 113 U Mind Carver @Scott Murphy
 114 C Mind Drain @Grzegorz Rutkowski
-115 R Nighthawk Scavenger @Heonhwa Choe
+115 R Nighthawk Scavenger @Heonhwa
 116 C Nimana Skitter-Sneak @Campbell White
 117 C Nimana Skydancer @Bryan Sola
 118 R Nullpriest of Oblivion @Yongjae Choi
@@ -246,7 +245,7 @@ ScryfallCode=ZNR
 230 M Nahiri, Heir of the Ancients @Anna Steinbauer
 231 M Nissa of Shadowed Boughs @Yongjae Choi
 232 M Omnath, Locus of Creation @Chris Rahn
-233 R Orah, Skyclave Hierophant @Heonhwa Choe
+233 R Orah, Skyclave Hierophant @Heonhwa
 234 R Phylath, World Sculptor @Victor Adame Minguez
 235 U Ravager's Mace @Antonio José Manzanedo
 236 U Soaring Thought-Thief @Lie Setiawan
@@ -360,7 +359,7 @@ ScryfallCode=ZNR
 338 M Drana, the Last Bloodchief @Tyler Jacobson
 339 R Hagra Mauling @Victor Adame Minguez
 340 R Inscription of Ruin @Zoltan Boros
-341 R Nighthawk Scavenger @Heonhwa Choe
+341 R Nighthawk Scavenger @Heonhwa
 342 R Nullpriest of Oblivion @Yongjae Choi
 343 M Scourge of the Skyclaves @Chase Stone
 344 R Shadows' Verdict @Lius Lasahido
@@ -388,7 +387,7 @@ ScryfallCode=ZNR
 366 R Grakmaw, Skyclave Ravager @Filip Burburan
 367 R Kaza, Roil Chaser @Ekaterina Burmak
 368 R Linvala, Shield of Sea Gate @Wayne Reynolds
-369 R Orah, Skyclave Hierophant @Heonhwa Choe
+369 R Orah, Skyclave Hierophant @Heonhwa
 370 R Verazol, the Split Current @Daarken
 371 R Yasharn, Implacable Earth @G-host Lee
 372 R Zagras, Thief of Heartbeats @Anna Steinbauer
@@ -431,7 +430,6 @@ A-198 R A-Oran-Rief Ooze @Daarken
 A-224 U A-Kargan Warleader @Colin Boyer
 A-228 U A-Moss-Pit Skeleton @Bryan Sola
 A-230 M A-Nahiri, Heir of the Ancients @Anna Steinbauer
-A-232 M A-Omnath, Locus of Creation @Chris Rahn
 A-234 R A-Phylath, World Sculptor @Victor Adame Minguez
 A-238 U A-Umara Mystic @Bryan Sola
 A-257 U A-Base Camp @Jokubas Uogintas
@@ -486,3 +484,6 @@ A-257 U A-Base Camp @Jokubas Uogintas
 9 bg_x_x_hydra @Filip Burburan
 10 c_1_1_a_construct @Jokubas Uogintas
 11 c_0_1_a_goblin_construct_noblock_ping @Johan Grenier
+
+[other]
+12 copy @Jason Rainville

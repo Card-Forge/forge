@@ -69,16 +69,15 @@ public class CCombat implements ICDoc {
     }
 
     private static String getCombatDescription(final CombatView localCombat, final GameEntityView defender) {
-        final StringBuilder display = new StringBuilder();
-
         final Iterable<FCollection<CardView>> bands = localCombat.getAttackingBandsOf(defender);
         if (bands == null || Iterables.isEmpty(bands)) {
             return StringUtils.EMPTY;
         }
 
+        final StringBuilder display = new StringBuilder();
         display.append("\n");
-        if (defender instanceof CardView) {
-            PlayerView controller = ((CardView) defender).getController();
+        if (defender instanceof CardView def) {
+            PlayerView controller = def.getController();
             if (controller == null) {
                 //shouldn't be null but display card's + controller ie Black Knight's controller
                 display.append(Lang.getInstance().getPossesive(defender.getName())).append(" controller");

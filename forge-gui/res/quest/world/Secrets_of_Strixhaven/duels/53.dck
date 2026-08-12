@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Asanbosam
+Title=Asanbosam
+Icon=Asanbosam.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Jacob_Roach_-_Simic_Ritual_(Modern,_#2941302).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+4 Ice-Fang Coatl
+4 Shardless Agent
+3 Coiling Oracle
+3 Pond Prophet
+2 Endurance
+2 Fblthp, the Lost
+2 Harbinger of the Seas
+2 Subtlety
+4 Flare of Denial
+4 Sink into Stupor
+2 Quandrix Charm
+4 Birthing Ritual
+4 Breeding Pool
+3 Snow-Covered Forest
+3 Snow-Covered Island
+2 Flooded Strand
+2 Hedge Maze
+2 Petrified Hamlet
+2 Windswept Heath
+1 Polluted Delta
+1 Verdant Catacombs
+[Sideboard]
+3 Mystical Dispute
+3 Stern Scolding
+2 Consign to Memory
+2 Dismember
+2 Force of Vigor
+2 Surgical Extraction
+1 Collector Ouphe

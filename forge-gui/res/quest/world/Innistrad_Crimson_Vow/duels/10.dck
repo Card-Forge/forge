@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Saruman
+Title=Saruman
+Icon=Saruman.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/IzzetABCannon_-_Abzan_Aggro_(Standard,_#1258318).dck
+Deck Type=constructed
+
+[Main]
+2 Ollenbock Escort
+2 Legion Angel
+3 Trelasarra, Moon Dancer
+4 Prosperous Innkeeper
+4 Lunarch Veteran
+4 Cleric of Life's Bond
+4 Righteous Valkyrie
+4 Luminarch Aspirant
+4 Voice of the Blessed
+1 Charge Through
+2 Kabira Takedown
+2 Snakeskin Veil
+1 Agadeem's Awakening
+1 Emeria's Call
+1 Swamp
+1 Field of Ruin
+2 Skyclave Cleric
+2 Cave of the Frost Dragon
+2 Hive of the Eye Tyrant
+3 Plains
+3 Forest
+4 Branchloft Pathway
+4 Brightclimb Pathway
+[Sideboard]
+1 Snakeskin Veil
+2 Disenchant
+2 Curse of Silence
+2 Legion Angel
+4 Skyclave Apparition
+4 Vanishing Verse

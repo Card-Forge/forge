@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robin Hood
+Title=Robin Hood
+Icon=Robin Hood.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/B1gDan_-_UR_Delver_(Modern,_#1038374).dck
+Deck Type=constructed
+
+[Main]
+2 Brazen Borrower
+4 Delver of Secrets
+4 Snapcaster Mage
+4 Sprite Dragon
+2 Magmatic Sinkhole
+3 Mana Leak
+3 Archmage's Charm
+4 Opt
+4 Force of Negation
+4 Lightning Bolt
+4 Remand
+2 Blood Moon
+1 Mountain
+2 Mystic Sanctuary
+4 Steam Vents
+4 Scalding Tarn
+4 Flooded Strand
+5 Island
+[Sideboard]
+1 Blood Moon
+2 Relic of Progenitus
+2 Mystical Dispute
+2 Anger of the Gods
+2 Surgical Extraction
+3 Aether Gust
+3 Abrade

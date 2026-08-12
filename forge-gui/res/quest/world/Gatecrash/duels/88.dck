@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=IsaBere
+Title=IsaBere
+Icon=IsaBere.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/Modern_Turniers_vom_04.06.2013/Obeth_Thomas_-_Red_Deck_Wins_(Modern,_#53412).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Deathrite Shaman
+4 Goblin Guide
+4 Vexing Devil
+4 Lightning Bolt
+4 Searing Blaze
+4 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+4 Blackcleave Cliffs
+3 Blood Crypt
+4 Mountain
+4 Scalding Tarn
+3 Stomping Ground
+[Sideboard]
+2 Back to Nature
+2 Combust
+3 Molten Rain
+1 Rain of Gore
+4 Rakdos Charm
+3 Torpor Orb

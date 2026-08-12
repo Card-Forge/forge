@@ -1,0 +1,234 @@
+//Rank|Name|Rarity|Set
+#1|Morlun, Devourer of Spiders|R|SPM
+#2|Silk, Web Weaver|R|SPM
+#3|The Spot, Living Portal|R|SPM
+#4|Friendly Neighborhood|R|SPM
+#5|Lizard, Connors's Curse|R|SPM
+#6|Sandman, Shifting Scoundrel|R|SPM
+#7|Cosmic Spider-Man|M|SPM
+#8|Doctor Octopus, Master Planner|M|SPM
+#9|Mister Negative|M|SPM
+#10|Origin of Spider-Man|R|SPM
+#11|Black Cat, Cunning Thief|R|SPM
+#12|Web of Life and Destiny|M|SPM
+#13|Peter Parker|M|SPM
+#14|Villainous Wrath|R|SPM
+#15|Spider-Woman, Stunning Savior|R|SPM
+#16|Spectacular Spider-Man|R|SPM
+#17|Norman Osborn|M|SPM
+#18|Terrific Team-Up|U|SPM
+#19|Spectacular Tactics|C|SPM
+#20|Kraven's Last Hunt|R|SPM
+#21|Miles Morales|M|SPM
+#22|Radioactive Spider|R|SPM
+#23|Spider-Girl, Legacy Hero|U|SPM
+#24|Mystic Confluence|M|MAR
+#25|Morbius the Living Vampire|U|SPM
+#26|Spider-UK|U|SPM
+#27|Mysterio, Master of Illusion|R|SPM
+#28|Damage Control Crew|U|SPM
+#29|Biorganic Carapace|R|SPM
+#30|Spider-Man India|U|SPM
+#31|Symbiote Spider-Man|R|SPM
+#32|Goblin Bombardment|M|MAR
+#33|Sudden Strike|U|SPM
+#34|Web Up|C|SPM
+#35|Mysterio's Phantasm|C|SPM
+#36|Spider-Ham, Peter Porker|R|SPM
+#37|Wall Crawl|U|SPM
+#38|Cheering Crowd|R|SPM
+#39|Mary Jane Watson|R|SPM
+#40|Spider Manifestation|C|SPM
+#41|Sun-Spider, Nimble Webber|U|SPM
+#42|Spiders-Man, Heroic Horde|U|SPM
+#43|Gallant Citizen|C|SPM
+#44|City Pigeon|C|SPM
+#45|Daily Bugle Reporters|C|SPM
+#46|Flash Thompson, Spider-Fan|U|SPM
+#47|Silver Sable, Mercenary Leader|U|SPM
+#48|Robotics Mastery|U|SPM
+#49|Spider-Byte, Web Warden|U|SPM
+#50|Behold the Sinister Six!|M|SPM
+#51|The Spot's Portal|U|SPM
+#52|Venom's Hunger|C|SPM
+#53|Professional Wrestler|C|SPM
+#54|Arana, Heart of the Spider|R|SPM
+#55|Carnage, Crimson Chaos|R|SPM
+#56|Kraven the Hunter|R|SPM
+#57|Aunt May|U|SPM
+#58|Amazing Acrobatics|C|SPM
+#59|Flying Octobot|U|SPM
+#60|The Death of Gwen Stacy|R|SPM
+#61|Gwenom, Remorseless|M|SPM
+#62|Scorpion's Sting|C|SPM
+#63|Ezekiel Sims, Spider-Totem|U|SPM
+#64|Spider-Man, Brooklyn Visionary|C|SPM
+#65|Prowler, Clawed Thief|U|SPM
+#66|Piloted by Peni|U|SPM
+#67|Hide on the Ceiling|R|SPM
+#68|Unstable Experiment|C|SPM
+#69|Gwen Stacy|M|SPM
+#70|Shadow of the Goblin|R|SPM
+#71|Pictures of Spider-Man|U|SPM
+#72|Scarlet Spider, Ben Reilly|R|SPM
+#73|Iron Spider, Stark Upgrade|R|SPM
+#74|Rite of Replication|M|MAR
+#75|Skithiryx, the Blight Dragon|M|MAR
+#76|The Clone Saga|R|SPM
+#77|Grow Extra Arms|C|SPM
+#78|Spider-Rex, Daring Dino|C|SPM
+#79|Skyward Spider|C|SPM
+#80|Web-Warriors|U|SPM
+#81|Arasta of the Endless Web|M|MAR
+#82|Arachne, Psionic Weaver|R|SPM
+#83|Costume Closet|U|SPM
+#84|Thwip!|C|SPM
+#85|School Daze|U|SPM
+#86|Whoosh!|C|SPM
+#87|Merciless Enforcers|C|SPM
+#88|Spider-Man Noir|U|SPM
+#89|Kapow!|C|SPM
+#90|Spider-Slayer, Hatred Honed|U|SPM
+#91|Path to Exile|M|MAR
+#92|Reprieve|M|MAR
+#93|Spider-Man, Web-Slinger|C|SPM
+#94|Beetle, Legacy Criminal|C|SPM
+#95|Tombstone, Career Criminal|U|SPM
+#96|Venomized Cat|C|SPM
+#97|Raging Goblinoids|U|SPM
+#98|Scout the City|C|SPM
+#99|Supportive Parents|U|SPM
+#100|Sinister Hideout|C|SPM
+#101|Suburban Sanctuary|C|SPM
+#102|Leyline Binding|M|MAR
+#103|Counterspell|M|MAR
+#104|Infernal Grasp|M|MAR
+#105|Terminate|M|MAR
+#106|Selfless Police Captain|C|SPM
+#107|Doc Ock, Sinister Scientist|C|SPM
+#108|Swarm, Being of Bees|C|SPM
+#109|Venom, Evil Unleashed|C|SPM
+#110|Strength of Will|R|SPM
+#111|Mob Lookout|C|SPM
+#112|Superior Spider-Man|R|SPM
+#113|Ultimate Green Goblin|R|SPM
+#114|Eerie Gravestone|C|SPM
+#115|Interdimensional Web Watch|R|SPM
+#116|Vibrant Cityscape|C|SPM
+#117|University Campus|C|SPM
+#118|Najeela, the Blade-Blossom|M|MAR
+#119|Doc Ock's Henchmen|C|SPM
+#120|Agent Venom|R|SPM
+#121|Common Crook|C|SPM
+#122|Kraven's Cats|C|SPM
+#123|Rhino, Barreling Brute|U|SPM
+#124|Bagel and Schmear|C|SPM
+#125|News Helicopter|C|SPM
+#126|Rocket-Powered Goblin Glider|R|SPM
+#127|Ponder|M|MAR
+#128|Arachnogenesis|M|MAR
+#129|Silkguard|M|MAR
+#130|Anti-Venom, Horrifying Healer|M|SPM
+#131|Spider-Man No More|C|SPM
+#132|Eddie Brock|M|SPM
+#133|The Soul Stone|M|SPM
+#134|Electro, Assaulting Battery|R|SPM
+#135|Wisecrack|U|SPM
+#136|Rhino's Rampage|U|SPM
+#137|Mechanical Mobster|C|SPM
+#138|Spider-Bot|C|SPM
+#139|Reanimate|M|MAR
+#140|Molten Man, Inferno Incarnate|U|SPM
+#141|Spider-Punk|R|SPM
+#142|Superior Foes of Spider-Man|U|SPM
+#143|Lurking Lizards|C|SPM
+#144|Pumpkin Bombardment|C|SPM
+#145|Doc Ock's Tentacles|R|SPM
+#146|Spider-Mobile|U|SPM
+#147|Daily Bugle Building|U|SPM
+#148|Urban Retreat|R|SPM
+#149|Savage Beating|M|MAR
+#150|Rent Is Due|R|SPM
+#151|Wild Pack Squad|C|SPM
+#152|Shocker, Unshakable|U|SPM
+#153|Kraven, Proud Predator|U|SPM
+#154|Shriek, Treblemaker|U|SPM
+#155|Vulture, Scheming Scavenger|U|SPM
+#156|Wraith, Vicious Vigilante|U|SPM
+#157|Subway Train|C|SPM
+#158|Multiversal Passage|R|SPM
+#159|Clever Impersonator|M|MAR
+#160|Lorthos, the Tidemaker|M|MAR
+#161|Thrill of Possibility|M|MAR
+#162|Unexpected Windfall|M|MAR
+#163|Alibou, Ancient Witness|M|MAR
+#164|Starling, Aerial Ally|C|SPM
+#165|Chameleon, Master of Disguise|U|SPM
+#166|Hydro-Man, Fluid Felon|R|SPM
+#167|Secret Identity|U|SPM
+#168|Prison Break|U|SPM
+#169|Scorpion, Seething Striker|U|SPM
+#170|Electro's Bolt|C|SPM
+#171|Comeuppance|M|MAR
+#172|Feed the Swarm|M|MAR
+#173|Opposition Agent|M|MAR
+#174|Saw in Half|M|MAR
+#175|Relentless Assault|M|MAR
+#176|Risky Research|C|SPM
+#177|Shock|M|MAR
+#178|Spider-Islanders|C|SPM
+#179|Guy in the Chair|C|SPM
+#180|Oscorp Industries|R|SPM
+#181|Savage Mansion|C|SPM
+#182|Shock MAR|M|SPM
+#183|Inner Demons Gangsters|C|SPM
+#184|Ominous Asylum|C|SPM
+#185|Heroic Intervention|M|MAR
+#186|Web-Shooters|U|SPM
+#187|Angry Rabble|C|SPM
+#188|Hobgoblin, Mantled Marauder|U|SPM
+#189|Romantic Rendezvous|C|SPM
+#190|Stegron the Dinosaur Man|C|SPM
+#191|Green Goblin, Revenant|U|SPM
+#192|Scarlet Spider, Kaine|U|SPM
+#193|Hex|M|MAR
+#194|Lady Octopus, Inspired Inventor|R|SPM
+#195|J. Jonah Jameson|R|SPM
+#196|Spider-Verse|M|SPM
+#197|Peter Parker's Camera|R|SPM
+#198|Steel Wrecking Ball|C|SPM
+#199|Traumatize|M|MAR
+#200|Tangle|M|MAR
+#201|Nine Lives|M|MAR
+#202|Mindbreak Trap|M|MAR
+#203|Beast Within|M|MAR
+#204|Hunter's Insight|M|MAR
+#205|Parker Luck|R|SPM
+#206|Maximum Carnage|R|SPM
+#207|Parallel Lives|M|MAR
+#208|With Great Power|R|SPM
+#209|Impostor Syndrome|M|SPM
+#210|Madame Web, Clairvoyant|U|SPM
+#211|Oscorp Research Team|C|SPM
+#212|Spider-Sense|R|SPM
+#213|Alien Symbiosis|U|SPM
+#214|Sandman's Quicksand|U|SPM
+#215|Heroes' Hangout|U|SPM
+#216|Masked Meower|C|SPM
+#217|Spider-Gwen, Free Spirit|C|SPM
+#218|Spinneret and Spiderling|R|SPM
+#219|Taxi Driver|C|SPM
+#220|Jackal, Genius Geneticist|R|SPM
+#221|Spider-Man 2099|R|SPM
+#222|Hot Dog Cart|C|SPM
+#223|Living Brain, Mechanical Marvel|U|SPM
+#224|Passenger Ferry|C|SPM
+#225|Spider-Suit|U|SPM
+#226|Rest in Peace|M|MAR
+#227|Winds of Change|M|MAR
+#228|Wedding Ring|M|MAR
+#229|Plains|C|SPM
+#230|Island|C|SPM
+#231|Swamp|C|SPM
+#232|Mountain|C|SPM
+#233|Forest|C|SPM

@@ -1,22 +1,23 @@
 package forge.game;
 
 public enum GameLogEntryType {
-    GAME_OUTCOME("Game outcome"),
-    MATCH_RESULTS("Match result"),
+    GAME_OUTCOME("Game Outcome"),
+    MATCH_RESULTS("Match Result"),
     TURN("Turn"),
     MULLIGAN("Mulligan"),
     ANTE("Ante"),
     DRAFT("Draft"),
     ZONE_CHANGE("Zone Change"),
-    PLAYER_CONTROL("Player control"),
-    COMBAT("Combat"),
-    DISCARD("Discard"),
-    INFORMATION("Information"),
-    EFFECT_REPLACED("Replacement Effect"),
-    LAND("Land"),
-    STACK_RESOLVE("Resolve stack"),
-    STACK_ADD("Add to stack"),
+    PLAYER_CONTROL("Player Control"),
     DAMAGE("Damage"),
+    LIFE("Life"),
+    LAND("Land"),
+    DISCARD("Discard"),
+    COMBAT("Combat"),
+    INFORMATION("Information"),
+    STACK_RESOLVE("Resolve Stack"),
+    STACK_ADD("Add To Stack"),
+    EFFECT_REPLACED("Replacement Effect"),
     MANA("Mana"),
     PHASE("Phase");
     

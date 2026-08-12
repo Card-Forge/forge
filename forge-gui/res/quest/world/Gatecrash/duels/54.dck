@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sentinel
+Title=Sentinel
+Icon=Sentinel.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/Prato_-_PML_#4/Lorenzo_Lentini_-_Zoo_(Modern,_#65054).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+2 Burning-Tree Shaman
+4 Experiment One
+4 Flinthoof Boar
+3 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+3 Tarmogoyf
+1 Dismember
+4 Lightning Bolt
+2 Tarfire
+2 Vines of Vastwood
+4 Rancor
+4 Arid Mesa
+4 Copperline Gorge
+2 Forest
+2 Mountain
+3 Stomping Ground
+4 Verdant Catacombs
+[Sideboard]
+2 Ancient Grudge
+1 Combust
+1 Kitchen Finks
+4 Molten Rain
+2 Pillar of Flame
+2 Relic of Progenitus
+2 Torpor Orb

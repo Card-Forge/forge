@@ -1,0 +1,37 @@
+[metadata]
+Name=Orzhov Control
+Deck Type=constructed
+Title=Orzhov Control
+Description=Orzhov Control
+Difficulty=Easy
+Icon=Baal
+[Main]
+3 Approach of the Second Sun
+4 Arch of Orazca
+4 Authority of the Consuls
+4 Cast Out
+4 Concealed Courtyard
+4 Fatal Push
+2 Field of Ruin
+4 Forsaken Sanctuary
+3 Fumigate
+2 Mastermind's Acquisition
+2 Plains
+1 Plains
+2 Plains
+1 Scavenger Grounds
+4 Settle the Wreckage
+2 Swamp
+1 Swamp
+2 Swamp
+4 Thaumatic Compass
+4 Treasure Map
+3 Vraska's Contempt
+[Sideboard]
+1 Azor's Gateway
+1 Dispossess
+4 Duress
+3 Lost Legacy
+4 Moment of Craving
+1 Profane Procession
+1 Torment of Hailfire

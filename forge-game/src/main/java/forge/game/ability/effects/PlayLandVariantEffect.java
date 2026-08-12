@@ -60,6 +60,6 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         source.addCloneState(CardFactory.getCloneStates(random, source, sa), game.getNextTimestamp());
         source.updateStateForView();
 
-        activator.playLandNoCheck(source, sa);
+        activator.playLand(source, sa);
     }
 }

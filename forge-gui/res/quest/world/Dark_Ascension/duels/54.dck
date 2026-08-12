@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Joe Kidd
+Title=Joe Kidd
+Icon=Joe Kidd.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/Modern@MagicLair/Valenza_Ezio_-_Zoo_(Modern,_#37077).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Geist of Saint Traft
+4 Grim Lavamancer
+4 Kird Ape
+4 Loam Lion
+4 Steppe Lynx
+3 Tarmogoyf
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+4 Tribal Flames
+4 Arid Mesa
+1 Blood Crypt
+1 Forest
+1 Hallowed Fountain
+4 Marsh Flats
+2 Misty Rainforest
+1 Plains
+1 Sacred Foundry
+3 Scalding Tarn
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+1 Verdant Catacombs
+[Sideboard]
+1 Grafdigger's Cage
+2 Lingering Souls
+3 Oblivion Ring
+2 Ranger of Eos
+4 Relic of Progenitus
+3 Thalia, Guardian of Thraben

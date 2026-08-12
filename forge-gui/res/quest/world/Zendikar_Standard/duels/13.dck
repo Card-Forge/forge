@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Easy
+Description=Zendikar/US_States_2009_-_Tennessee/Shane_Giachetti_-_Emeria_Aggro_(Standard,_#3270).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+2 Devout Lightcaster
+4 Kazandu Blademaster
+4 Knight of the White Orchid
+4 Kor Cartographer
+4 Sigiled Paladin
+4 White Knight
+2 Celestial Purge
+4 Path to Exile
+4 Honor of the Pure
+2 Ajani Goldmane
+4 Emeria, the Sky Ruin
+18 Plains
+[Sideboard]
+4 Dispeller's Capsule
+2 Iona, Shield of Emeria
+3 Martial Coup
+2 Tempest of Light

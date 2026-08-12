@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Landwalk:Island | Description$ Enchanted creature has islandwalk. (It can't be blocked as long as defending player controls an Island.)
-DeckHas:Keyword$Islandwalk
+DeckHas:Keyword$Landwalk:Island
 Oracle:Enchant creature (Target a creature as you cast this. This card enters attached to that creature.)\nEnchanted creature has islandwalk. (It can't be blocked as long as defending player controls an Island.)

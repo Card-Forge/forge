@@ -1,0 +1,9 @@
+Name:Blue Marvel, Adam Brashear
+ManaCost:3 U U
+Types:Legendary Creature Human Scientist Hero
+PT:3/5
+K:Flying
+K:Ward:2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw your second card each turn, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhenever you draw your second card each turn, put a +1/+1 counter on Blue Marvel.

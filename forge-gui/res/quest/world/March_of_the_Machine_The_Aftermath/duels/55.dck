@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=James T Kirk
+Title=James T Kirk
+Icon=James T Kirk.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Kinoshita_Kiyoto_-_Belcher_(Modern,_#1661018).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Charbelcher
+4 Desperate Ritual
+4 Pact of Negation
+2 Pyretic Ritual
+1 Surgical Extraction
+1 Noxious Revival
+4 Manamorphose
+4 Spikefield Hazard
+4 Valakut Awakening
+1 An Offer You Can't Refuse
+1 Reforge the Soul
+4 Recross the Paths
+1 Empty the Warrens
+3 Irencrag Feat
+4 Sea Gate Restoration
+4 Shatterskull Smashing
+4 Bala Ged Recovery
+4 Turntimber Symbiosis
+4 Strike It Rich
+1 Reckless Handling
+1 Pyromancer Ascension
+[Sideboard]
+3 Magus of the Moon
+4 Leyline of Sanctity
+4 Force of Vigor
+4 Veil of Summer

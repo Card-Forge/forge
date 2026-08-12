@@ -1,0 +1,8 @@
+Name:Forum Necroscribe
+ManaCost:5 B
+Types:Creature Troll Warlock
+PT:5/4
+K:Ward:Discard<1/Card>
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigChangeZone | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield | TriggerDescription$ Repartee — Whenever you cast an instant or sorcery spell that targets a creature, return target creature card from your graveyard to the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield
+Oracle:Ward—Discard a card.\nRepartee — Whenever you cast an instant or sorcery spell that targets a creature, return target creature card from your graveyard to the battlefield.

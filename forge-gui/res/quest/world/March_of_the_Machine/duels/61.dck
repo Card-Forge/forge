@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Bugs Bunny
+Title=Bugs Bunny
+Icon=Bugs Bunny.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/CharonsObol_-_Death_and_Taxes_(Modern,_#1634284).dck
+Deck Type=constructed
+
+[Main]
+4 Stoneforge Mystic
+3 Thalia, Guardian of Thraben
+4 Giver of Runes
+4 Archon of Emeria
+4 Solitude
+3 Extraction Specialist
+2 Anointed Peacekeeper
+4 Deeproot Wayfinder
+1 Lightning Greaves
+1 Sword of Fire and Ice
+1 Batterskull
+4 Aether Vial
+1 Kaldra Compleat
+3 Ephemerate
+3 Plains
+1 Forest
+3 Horizon Canopy
+3 Tectonic Edge
+4 Razorverge Thicket
+4 Field of Ruin
+4 Branchloft Pathway
+[Sideboard]
+2 Kataki, War's Wage
+2 Gaddock Teeg
+3 Drannith Magistrate
+4 Sanctifier en-Vec
+3 Outland Liberator
+1 Anointed Peacekeeper

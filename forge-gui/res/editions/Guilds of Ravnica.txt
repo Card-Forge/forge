@@ -2,7 +2,6 @@
 Code=GRN
 Date=2018-10-05
 Name=Guilds of Ravnica
-Code2=GRN
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common:!fromSheet("GRN lands"):fromSheet("GRN cards"), 3 Uncommon:fromSheet("GRN cards"), 1 RareMythic:fromSheet("GRN cards"), 1 fromSheet("GRN lands")
@@ -122,7 +121,7 @@ ScryfallCode=GRN
 107 U Inescapable Blaze @Steve Argyle
 108 U Lava Coil @Wesley Burt
 109 R Legion Warboss @Alex Konstad
-110 C Maniacal Rage @Heonhwa Choe
+110 C Maniacal Rage @Heonhwa
 111 C Maximize Velocity @Svetlin Velinov
 112 C Ornery Goblin @Johann Bodin
 113 R Risk Factor @Chris Seaman
@@ -310,3 +309,7 @@ Boros Guildgate|GRN|2
 4 r_1_1_goblin @Mark Zug
 5 bg_1_1_insect @Ben Wootten
 6 gw_2_2_elf_knight_vigilance @Tomasz Jedruszek
+
+[other]
+7 emblem_ral_izzet_viceroy @Kieran Yanner
+8 emblem_vraska_golgari_queen @Magali Villeneuve

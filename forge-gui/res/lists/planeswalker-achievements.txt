@@ -7,6 +7,7 @@ Ajani, Caller of the Pride|Ajani's Menagerie|You're a crazy cat lady now!
 Ajani, Inspiring Leader|Ajani's Leap of Faith|Cats from above!
 Ajani, Mentor of Heroes|Ajani's Vitality|Do sta let!
 Ajani, Nacatl Avenger|Ajani's Vengeance|There can only be one. For you, that is.
+Ajani, Outland Chaperone|Ajani's Search and Rescue|Here you are! I've been worried about you!
 Ajani, Sleeper Agent|Ajani's Progress|Every step brings us closer to perfection.
 Ajani, Strength of the Pride|Ajani's Obliteration|A defiant roar... then silence.
 Ajani, Valiant Protector|Ajani's Valiant Smash|Sometimes, life can be brutal.
@@ -15,6 +16,7 @@ Aminatou, the Fateshifter|Aminatou's Twist of Fate|Let's shuffle this a bit.
 Angrath, Minotaur Pirate|Angrath's Massacre|All we have to do is kill everyone who tries to steal Orazca from our grasp.
 Angrath, the Flame-Chained|Angrath's Torture|If you will not tell me where the Immortal Sun is, knight, then you will die.
 Archangel Elspeth|Elspeth's Mass Reanimation|Rise and Shine!
+Arzakon|Arzakon's Timetwister|Game over. Reload?
 Arlinn, Embraced by the Moon|Arlinn's Hunt|Fair fight? What fair fight?
 Ashiok, Nightmare Muse|Ashiok's Subconscious|It's wonderful what you find when you look to places that don't exist!
 Ashiok, Nightmare Weaver|Ashiok's Identity|I subscribe to the theory of blank slate!
@@ -52,6 +54,7 @@ Dovin Baan|Dovin's Static|Have you tried to turn it off and on again?
 Dovin, Architect of Law|Dovin's Freeze|With one gear out of place, the whole machine grinds to halt.
 Dovin, Grand Arbiter|Dovin's Modern Recall|The best solutions for the worst problems.
 Dungeon Master|Dungeons and Dragons|A fighter, a wizard, a rogue, and a cleric walk into a dungeon...
+Dyfed, the Guiding Hand|Dyfed's Secret Stash|I have something just for this occasion!
 Ellywick Tumblestrum|Ellywick's Song|Hear the tale of dungeons... and dragons!
 Elspeth Resplendent|Elspeth's Heavenly Cavalry|Forward! For Giada!
 Elspeth Tirel|Elspeth's Solitude|Tokens are my only friends...
@@ -60,6 +63,7 @@ Elspeth, Sun's Champion|Elspeth's Crusade|With Heliod on my side, I'm invincible
 Elspeth, Sun's Nemesis|Elspeth's Healing|That guy Heliod will be the death of me.
 Elspeth, Undaunted Hero|Elspeth's Miracle|Just believe in me.
 Estrid, the Masked|Estrid's Replenishing Blast|Let the masquerade begin.
+Feroz, Ulgrotha's Warden|Feroz's Emphatic Ban|You won't exploit them any more!
 Freyalise, Llanowar's Fury|Freyalise's Big Party|Let's celebrate each and every one of you!
 Garruk, the Veil-Cursed|Garruk's Graveyard|The dead shall help the living!
 Garruk Wildspeaker|Garruk's Overrun|I speak seven languages, including Wild!
@@ -78,6 +82,7 @@ Gideon, Battle-Forged|Gideon's First Steps|I still have a long road ahead of me.
 Gideon, Champion of Justice|Gideon's Aftermath|Gideon stands alone!
 Gideon, Martial Paragon|Gideon's Alpha Strike|Geronimo!
 Gideon, the Oathsworn|Gideon's Ultimate Sacrifice|Follow me to oblivion.
+Greensleeves|Greensleeves's Assault|They grow up so fast, don't they?
 Grist, the Hunger Tide|Grist's Vengeance of the Dead|Bzzzzz!
 Grist, the Plague Swarm|Grist's Graveyard Assault|Cockroaches would be preferable.
 Huatli, Dinosaur Knight|Huatli's Dino Thunder|Victory is ours forever more!
@@ -157,7 +162,9 @@ Ob Nixilis Reignited|Ob Nixilis's Torment|I'll give you dreams from beyond the u
 Ob Nixilis, the Adversary|Ob Nixilis's Pact|The price is, let's see... everything.
 Oko, the Ringleader|Oko's Fearsome Posse|Meet new mooks, same as the old mooks.
 Oko, the Trickster|Oko's Massive Friends|And watch where you're stomping!
+Oko, Shadowmoor Scion|Oko's Shadowmoor Support|Protect people, huh? Am I doing it right?
 Oko, Thief of Crowns|Oko's Unfair Switcheroo|How about some magic beans for that?
+Professor Dellian Fel|Dellian's Sanguine Bond|I am not interested in your excuses.
 Professor Onyx|Professor's Discipline|You'll get it back at the end of the semester unless you pay a... fine.
 Quintorius Kand|Quintorius's Archeological Dig|The past is still alive.
 Ral Zarek|Ral's Long Day|So much work, so much time!
@@ -165,6 +172,7 @@ Ral, Caller of Storms|Ral's Invocation|The storm called and left a message.
 Ral, Crackling Wit|Ral's Perfect Storm|I am not the eye of the storm. I am its heart.
 Ral, Izzet Viceroy|Ral's Bonus|I was just researching lightning and then it hit me.
 Ral, Leyline Prodigy|Ral's Bolt of Inspiration|There's always more ideas.
+Ral Zarek, Guest Lecturer|Ral's Stasis|Detention.
 Rowan, Fearless Sparkmage|Rowan's Magnetic Personality|Personal magnetism can create the spark of revolt.
 Rowan, Scholar of Sparks|Rowan's Twin Magic|Of course I haven't copied my answers, professor!
 Saheeli Rai|Saheeli's Creativity|I love when all the pieces come together!
@@ -178,6 +186,7 @@ Sarkhan, Fireblood|Sarkhan's Call for Friends|My minions, meet the meat.
 Sarkhan, the Dragonspeaker|Sarkhan's Voices|Huh? What are you saying?
 Sarkhan Unbroken|Sarkhan's Dragonstorm|Skies full of dragons! Oh, what a glorious day!
 Serra the Benevolent|Serra's Worship Service|As long as you have belief in me, you shall not die.
+Sifa Grent|Sifa's Heist|Now let's see what they had.
 Sivitri, Dragon Master|Sivitri's Dragon Cleansing|Nothing can withstand a dragon's breath, except another dragon.
 Sorin Markov|Sorin's Hypnosis|You're getting sleepy... very sleepy...
 Sorin the Mirthless|Sorin's Unlucky Strike|Not very funny when it happens to you, is it?
@@ -209,6 +218,7 @@ Tezzeret, Master of Metal|Tezzeret's Confiscation|Your stuff will serve a grande
 Tezzeret, Master of the Bridge|Tezzeret's Mass Transit|Just for today, everyone rides free.
 The Aetherspark|Extraplanar Energy|I'm not sure where it's coming from, but there's a lot of it.
 The Royal Scions|Kenrith Twins' Ultimate Combo|You hit them, I'll tell you where.
+Thomil, the Destroyer|Thomil's Unwise Summoning|I'm sure this won't come back to bite me later...
 Tibalt, Cosmic Impostor|Tibalt's Heist|Who says crime doesn't pay?
 Tibalt, the Fiend-Blooded|Tibalt's Treason|My side is the winning side!
 Tyvar Kell|Tyvar's Charge|To arms! To arms! And remember -- look fabulous!
@@ -229,6 +239,7 @@ Vraska, Relic Seeker|Vraska's Mark|Never play hide and seek with a Gorgon.
 Vraska, Scheming Gorgon|Vraska's Stone Gaze|I think we could use a new figurehead!
 Vronos, Masked Inquisitor|Vronos's Best Friend|Let's see Garruk resist NOW!
 Will, Scholar of Frost|Will's Elementics|I think it's better this way.
+Worzel, the Protector|Worzel's Sprite Commercial|What do you mean you wanted a Fanta?
 Wrenn and Realmbreaker|Wrenn's Ultimate Resource|There are no more places I cannot reach.
 Wrenn and Seven|Wrenn's Wild Regrowth|The past is no burden for me.
 Wrenn and Six|Wrenn's Bountiful Land|Let's retrace our steps.

@@ -5,9 +5,9 @@ PT:4/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return two creatures you control to their owner's hand.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Card.Self,Creature.YouOwn+Other | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another creature is returned to your hand from the battlefield, create a 1/1 white Soldier creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier | TokenOwner$ You
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 2 | Mandatory$ True
 SVar:NeedsToPlayVar:Z GE2
-SVar:Z:Count$Valid Creature.YouCtrl+cmcLE4+inZoneBattlefield
+SVar:Z:Count$Valid Creature.YouCtrl+cmcLE4
 AI:RemoveDeck:Random
 Oracle:Flying\nWhen Stormfront Riders enters, return two creatures you control to their owner's hand.\nWhenever Stormfront Riders or another creature is returned to your hand from the battlefield, create a 1/1 white Soldier creature token.

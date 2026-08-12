@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Edna Krabappel
+Title=Edna Krabappel
+Icon=Edna Krabappel.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Cabezadebolo_-_Azorius_Tempo_(Standard,_#2273166).dck
+Deck Type=constructed
+
+[Main]
+4 Haughty Djinn
+4 Picklock Prankster
+3 Kiora, the Rising Tide
+4 Abhorrent Oculus
+1 Into the Flood Maw
+4 Moment of Truth
+4 Unsummon
+4 Helping Hand
+4 Chart a Course
+3 Recommission
+4 Founding the Third Path
+4 Island
+4 Seachrome Coast
+4 Adarkar Wastes
+4 Meticulous Archive
+4 Floodfarm Verge
+1 Plains
+[Sideboard]
+3 Temporary Lockdown
+4 Exorcise
+2 Negate
+2 Silent Hallcreeper
+4 Sheltered by Ghosts

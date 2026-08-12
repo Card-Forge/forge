@@ -1,0 +1,7 @@
+Name:Chitinous Graspling
+ManaCost:3 GU
+Types:Creature Shapeshifter
+PT:3/4
+K:Changeling
+K:Reach
+Oracle:Changeling (This card is every creature type.)\nReach

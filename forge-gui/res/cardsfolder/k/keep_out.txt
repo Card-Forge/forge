@@ -1,0 +1,7 @@
+Name:Keep Out
+ManaCost:1 W
+Types:Instant
+A:SP$ Charm | Choices$ DBDamage,DBDestroy | Defined$ You
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.tapped | NumDmg$ 4 | TgtPrompt$ Select target tapped creature | SpellDescription$ CARDNAME deals 4 damage to target tapped creature.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
+Oracle:Choose one —\n• Keep Out deals 4 damage to target tapped creature.\n• Destroy target enchantment.

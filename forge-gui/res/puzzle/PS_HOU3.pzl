@@ -3,7 +3,7 @@ Name:Possibility Storm - Hour of Devastation #03
 URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/HOU3.jpg
 Goal:Win
 Turns:1
-Difficulty:Very Hard
+Difficulty:Mythic
 Description:Win this turn.
 [state]
 humanlife=20

@@ -1,0 +1,10 @@
+Name:Sparring Dummy
+ManaCost:1 G
+Types:Artifact Creature Scarecrow
+PT:1/3
+K:Defender
+A:AB$ Mill | Cost$ T | NumCards$ 1 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill a card. You may put a land card milled this way into your hand. You gain 2 life if a Lesson card is milled this way. (To mill a card, put the top card of your library into your graveyard.)
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Land.IsRemembered | SelectPrompt$ You may select an instant or sorcery card | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | ConditionDefined$ Remembered | ConditionPresent$ Lesson | LifeAmount$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Defender\n{T}: Mill a card. You may put a land card milled this way into your hand. You gain 2 life if a Lesson card is milled this way. (To mill a card, put the top card of your library into your graveyard.)

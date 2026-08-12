@@ -1,7 +1,5 @@
 package forge.gui.framework;
 
-
-
 /**
  * This interface provides a unifying type to any component
  * (usually JPanels or JScrollPanes) which could be used as

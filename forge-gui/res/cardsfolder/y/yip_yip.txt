@@ -1,0 +1,6 @@
+Name:Yip Yip!
+ManaCost:W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target creature you control gets +2/+2 until end of turn. If that creature is an Ally, it also gains flying until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Ally | KW$ Flying
+Oracle:Target creature you control gets +2/+2 until end of turn. If that creature is an Ally, it also gains flying until end of turn.

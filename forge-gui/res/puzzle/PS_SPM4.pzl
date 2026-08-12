@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - Marvel's Spider-Man #04
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/11/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Start in your Upkeep with Smile at Death's trigger on the stack. Your Evendos each start with no charge counters, and your creatures with no +1/+1 counters. Ensure your solution satisfies all possible blocks. Good luck!
+[state]
+turn=1
+activeplayer=p1
+activephase=CLEANUP
+activephaseadvance=UPKEEP
+p0life=20
+p0hand=Goldvein Hydra;Flash Thompson, Spider-Fan;Virulent Silencer;Peter Parker's Camera;Relic's Roar
+p0library=
+p0graveyard=Cheering Crowd;Jackal, Genius Geneticist;Delney, Streetwise Lookout|Set:PWCS|Art:1
+p0battlefield=Zimone, Paradox Sculptor;The Millennium Calendar|Counters:TIME=5;Loading Zone;Smile at Death;Urban Retreat;Urban Retreat;Urban Retreat;Urban Retreat;Evendo, Waking Haven;Evendo, Waking Haven
+p1life=1000
+p1battlefield=Summon: Knights of Round|Counters:LORE=4
+p1precast=Summon^ Knights of Round:TrigToken;Summon^ Knights of Round:TrigToken;Summon^ Knights of Round:TrigToken;Summon^ Knights of Round:TrigToken
+removesummoningsickness=true

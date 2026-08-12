@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Isael_-_Rakdos_Aggro_(Standard,_#2251309).dck
+Deck Type=constructed
+
+[Main]
+4 Cacophony Scamp
+4 Callous Sell-Sword
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Monastery Swiftspear
+2 Slickshot Show-Off
+4 Might of the Meek
+4 Monstrous Rage
+4 Turn Inside Out
+4 Felonious Rage
+4 Leyline of Resonance
+4 Blackcleave Cliffs
+10 Mountain
+4 Sulfurous Springs
+[Sideboard]
+2 Anoint with Affliction
+2 Pyroclasm
+4 Urabrask's Forge
+4 Torch the Tower
+3 Soul-Guide Lantern

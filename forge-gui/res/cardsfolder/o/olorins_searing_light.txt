@@ -7,6 +7,6 @@ SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Battlef
 SVar:RepeatBis:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | DamageMap$ True | RepeatSubAbility$ DBDamage | ConditionZone$ Graveyard | ConditionPresent$ Instant.YouOwn,Sorcery.YouOwn | ConditionCompare$ GE2 | SubAbility$ DBCleanup
 SVar:DBDamage:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:RememberedLKI$FilterControlledByRemembered_CardPower
+SVar:X:RememberedLKI$Valid Card.RememberedPlayerCtrl$CardPower
 DeckHints:Ability$Graveyard|Mill
 Oracle:Each opponent exiles a creature with the greatest power among creatures that player controls.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, Olórin's Searing Light deals damage to each opponent equal to the power of the creature they exiled.

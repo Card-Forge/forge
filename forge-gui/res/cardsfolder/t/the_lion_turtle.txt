@@ -1,0 +1,12 @@
+Name:The Lion-Turtle
+ManaCost:1 G U
+Types:Legendary Creature Elder Cat Turtle
+PT:3/6
+K:Vigilance
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+S:Mode$ CantAttack,CantBlock | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ LT3 | Description$ CARDNAME can't attack or block unless there are three or more Lesson cards in your graveyard.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+SVar:X:Count$ValidGraveyard Lesson.YouOwn
+Oracle:Vigilance, reach\nWhen The Lion-Turtle enters, you gain 3 life.\nThe Lion-Turtle can't attack or block unless there are three or more Lesson cards in your graveyard.\n{T}: Add one mana of any color.

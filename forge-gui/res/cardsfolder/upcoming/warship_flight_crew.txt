@@ -1,0 +1,5 @@
+Name:Warship Flight Crew
+ManaCost:1 R
+Types:Creature Klingon Pilot
+PT:2/2
+Oracle:

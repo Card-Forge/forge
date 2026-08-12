@@ -6,7 +6,7 @@ K:Chapter:4:DBToken,DBEffect,DBEffect,DBPutCounterAll
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_2_moogle_lifelink | TokenOwner$ You | SpellDescription$ Create two 1/2 white Moogle creature tokens with lifelink.
 SVar:DBEffect:DB$ Effect | Triggers$ MogCopy | SpellDescription$ Whenever you cast a noncreature spell this turn, create a token that's a copy of a non-Saga token you control.
 SVar:MogCopy:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Command | TriggerDescription$ Whenever you cast a noncreature spell this turn, create a token that's a copy of a non-Saga token you control.
-SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Card.token+nonSaga+YouCtrl | TgtPrompt$ Select target non-Saga token you control
+SVar:TrigCopy:DB$ CopyPermanent | Choices$ Card.token+nonSaga+YouCtrl | ChoiceTitle$ Choose a non-Saga token you control
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Moogle.Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on each other Moogle you control.
 K:Flying
 K:Lifelink

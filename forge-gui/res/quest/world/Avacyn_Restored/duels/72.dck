@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Wilma Flintstone
+Title=Wilma Flintstone
+Icon=Wilma Flintstone.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/GP_Yokohama_-_Grinders_Winners/Akihiro_Wada_-_Boros_(Modern,_#32890).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Burrenton Forge-Tender
+3 Figure of Destiny
+1 Goblin Bushwhacker
+4 Goblin Guide
+2 Grim Lavamancer
+4 Mirran Crusader
+3 Ranger of Eos
+4 Steppe Lynx
+3 Thalia, Guardian of Thraben
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+4 Arid Mesa
+2 Clifftop Retreat
+4 Marsh Flats
+2 Mountain
+3 Plains
+3 Sacred Foundry
+4 Scalding Tarn
+1 Slayers' Stronghold
+[Sideboard]
+2 Combust
+2 Disenchant
+2 Kataki, War's Wage
+2 Pillar of Flame
+1 Proclamation of Rebirth
+1 Shatterstorm
+1 Stony Silence
+2 Torpor Orb

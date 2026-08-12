@@ -81,7 +81,6 @@ public class TargetSelection {
         final int maxTargets = numTargets != null ? numTargets : ability.getMaxTargets();
         //final int maxTotalCMC = tgt.getMaxTotalCMC(ability.getHostCard(), ability);
         final int numTargeted = ability.getTargets().size();
-        final boolean isSingleZone = tgt.isSingleZone();
 
         final boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
         final boolean hasAllTargets = numTargeted == maxTargets && maxTargets > 0;
@@ -105,7 +104,7 @@ public class TargetSelection {
             return chooseCardFromStack(mandatory, numTargets);
         }
 
-        List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
+        List<GameEntity> candidates = tgt.getAllCandidates(this.ability);
         boolean hasEnoughCandidates = candidates.size() >= minTargets;
         if (tgt.isDifferentControllers() || tgt.isForEachPlayer()) {
             PlayerCollection controllers = new PlayerCollection();
@@ -149,19 +148,6 @@ public class TargetSelection {
             validTargets = new CardCollection(IterableUtil.filter(validTargets, filter));
         }
 
-        // single zone
-        if (isSingleZone) {
-            final List<Card> removeCandidates = new ArrayList<>();
-            final Card firstTgt = ability.getTargetCard();
-            if (firstTgt != null) {
-                for (Card t : validTargets) {
-                    if (!t.getController().equals(firstTgt.getController())) {
-                        removeCandidates.add(t);
-                    }
-                }
-                validTargets.removeAll(removeCandidates);
-            }
-        }
         if (validTargets.isEmpty()) {
             // If all targets are filtered after applying MustTarget static ability, the spell can't be cast or the ability can't be activated
             if (mustTargetFiltered) {
@@ -171,7 +157,7 @@ public class TargetSelection {
             //this handles "target opponent" cards, along with any other cards that can only target a single non-card game entity
             //note that we don't handle auto-targeting cards this way since it's possible that the result will be undesirable
             if (minTargets != 0) {
-                List<GameEntity> nonCardTargets = tgt.getAllCandidates(this.ability, true, true);
+                List<GameEntity> nonCardTargets = tgt.getAllCandidates(this.ability, true);
                 if (nonCardTargets.size() == 1) {
                     return ability.getTargets().add(nonCardTargets.get(0));
                 }

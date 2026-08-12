@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Olokun
+Title=Olokun
+Icon=Olokun.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Alemani_Mauro_-_Humans_(Modern,_#1035691).dck
+Deck Type=constructed
+
+[Main]
+2 General Kudro of Drannith
+3 Thalia, Guardian of Thraben
+4 Noble Hierarch
+4 Thalia's Lieutenant
+4 Kitesail Freebooter
+4 Meddling Mage
+4 Phantasmal Image
+4 Mantis Rider
+4 Reflector Mage
+4 Champion of the Parish
+4 Aether Vial
+1 Island
+1 Plains
+1 Waterlogged Grove
+4 Ancient Ziggurat
+4 Horizon Canopy
+4 Cavern of Souls
+4 Unclaimed Territory
+[Sideboard]
+1 Magus of the Moon
+1 Knight of Autumn
+2 Dismember
+2 Plague Engineer
+2 Gaddock Teeg
+2 Grafdigger's Cage
+2 Deputy of Detention
+3 Auriok Champion

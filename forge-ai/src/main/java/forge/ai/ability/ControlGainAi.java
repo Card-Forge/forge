@@ -41,20 +41,6 @@ import forge.util.collect.FCollectionView;
 import java.util.List;
 import java.util.Map;
 
-
-//AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
-
-//GainControl specific sa:
-//  LoseControl - the lose control conditions (as a comma separated list)
-//  -Untap - source card becomes untapped
-//  -LoseControl - you lose control of source card
-//  -LeavesPlay - source card leaves the battlefield
-//  -PowerGT - (not implemented yet for Old Man of the Sea)
-//  AddKWs - Keywords to add to the controlled card
-//            (as a "&"-separated list; like Haste, Sacrifice CARDNAME at EOT, any standard keyword)
-//  OppChoice - set to True if opponent chooses creature (for Preacher) - not implemented yet
-//  Untap - set to True if target card should untap when control is taken
-
 /**
  * <p>
  * AbilityFactory_GainControl class.
@@ -85,7 +71,6 @@ public class ControlGainAi extends SpellAbilityAi {
                 if (tgtCards.isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
                 }
-
             }
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else {
@@ -93,11 +78,12 @@ public class ControlGainAi extends SpellAbilityAi {
             if (sa.hasParam("TargetingPlayer")) {
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
                 sa.setTargetingPlayer(targetingPlayer);
-                if (targetingPlayer.getController().chooseTargetsFor(sa)) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
+                // TODO these blocks should continue checking with the worst
+                // and if targetingPlayer is AI set the target directly (instead of using the Runnable)
+                if (CardLists.getTargetableCards(ai.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             if (tgt.canOnlyTgtOpponent()) {
@@ -200,7 +186,7 @@ public class ControlGainAi extends SpellAbilityAi {
             Card t = null;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().size() == 0)) {
+                if (sa.getTargets().size() < sa.getMinTargets() || sa.getTargets().size() == 0) {
                     sa.resetTargets();
                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 } else {
@@ -299,12 +285,12 @@ public class ControlGainAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, final Player ai) {
+    public AiAbilityDecision chkDrawback(final Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
 
         // Special card logic that is processed elsewhere
         if (sa.hasParam("AILogic")) {
-            if (("DonateTargetPerm").equals(sa.getParam("AILogic"))) {
+            if ("DonateTargetPerm".equals(sa.getParam("AILogic"))) {
                 // Donate step 2 - target a donatable permanent.
                 return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
             }
@@ -346,7 +332,7 @@ public class ControlGainAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // Pay to gain Control
         if (sa.hasParam("UnlessSwitched")) {
             final Card host = sa.getHostCard();
@@ -360,6 +346,6 @@ public class ControlGainAi extends SpellAbilityAi {
             }
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

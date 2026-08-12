@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Repressed Magic
+Title=Repressed Magic
+Icon=Repressed Magic.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/PPTQ_Finibus_Terrae-The_Magic_Spot_-_Bari,_Italy/Paolo_Marchese_-_Red_Deck_Wins_(Standard,_#627502).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+1 Chandra, Fire of Kaladesh
+4 Falkenrath Gorger
+3 Lightning Berserker
+4 Reckless Bushwhacker
+4 Zurgo Bellstriker
+4 Atarka's Command
+4 Fiery Impulse
+3 Titan's Strength
+4 Dragon Fodder
+4 Exquisite Firecraft
+4 Cinder Glade
+4 Game Trail
+13 Mountain
+[Sideboard]
+1 Act of Treason
+1 Clip Wings
+2 Magmatic Chasm
+3 Rending Volley
+4 Roast
+3 Thunderbreak Regent

@@ -83,11 +83,11 @@ public class DeckSelectScene extends UIScene {
 
     private void layoutDeckButtons() {
         for (int i = 0; i < AdventurePlayer.current().getDeckCount(); i++)
-            addDeckButton(Forge.getLocalizer().getMessage("lblDeck") + ": " + (i + 1), i);
+            addDeckButton(i);
     }
 
     private void addDeck(){
-        if (Current.player().getDeckCount() >= AdventurePlayer.MAX_DECK_COUNT){
+        if (Current.player().getDeckCount() >= Current.player().getMaxDeckCount()){
             showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblAddDeck"), Forge.getLocalizer().getMessage("lblMaxDeckCountReached"),
                     Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null));
             return;
@@ -144,6 +144,7 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void updateDeckButton(int index) {
+        if (!buttons.containsKey(index)) addDeckButton(index);
         buttons.get(index).setText(Current.player().getDeck(index).getName());
         buttons.get(index).getTextraLabel().layout();
         buttons.get(index).layout();
@@ -177,8 +178,9 @@ public class DeckSelectScene extends UIScene {
         }
     }
 
-    private TextraButton addDeckButton(String name, int i) {
+    private TextraButton addDeckButton(int i) {
         TextraButton button = Controls.newTextButton("-");
+        String name = Forge.getLocalizer().getMessage("lblDeck") + ": " + (i + 1);
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -222,7 +224,7 @@ public class DeckSelectScene extends UIScene {
     @Override
     public void enter() {
         refreshDeckButtons();
-        GameHUD.getInstance().switchAudio();
+        GameHUD.getInstance().updateBGM();
         select(Current.player().getSelectedDeckIndex());
         performTouch(scrollPane); //can use mouse wheel if available to scroll after selection
         super.enter();
@@ -236,6 +238,8 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void edit() {
-        Forge.switchScene(DeckEditScene.getInstance());
+        DeckEditScene editScene = DeckEditScene.getInstance();
+        editScene.loadEvent(null);
+        Forge.switchScene(editScene);
     }
 }

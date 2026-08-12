@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Atomic Robo
+Title=Atomic Robo
+Icon=Atomic Robo.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/Capipf95_-_Mill_(Modern,_#1969322).dck
+Deck Type=constructed
+
+[Main]
+4 Ruin Crab
+4 Hedron Crab
+4 Drown in the Loch
+4 Fatal Push
+4 Archive Trap
+1 Spell Pierce
+3 Visions of Beyond
+2 Surgical Extraction
+2 Tasha's Hideous Laughter
+3 Fractured Sanity
+4 Preordain
+2 Glimpse the Unthinkable
+1 Jace, the Perfected Mind
+1 Swamp
+1 Undercity Sewers
+1 Otawara, Soaring City
+4 Scalding Tarn
+3 Field of Ruin
+1 Snow-Covered Island
+3 Island
+1 Oboro, Palace in the Clouds
+1 Shelldock Isle
+4 Polluted Delta
+2 Watery Grave
+[Sideboard]
+2 Ensnaring Bridge
+2 Crypt Incursion
+2 Flusterstorm
+3 Mystical Dispute
+3 Soul-Guide Lantern
+3 Extirpate

@@ -1,0 +1,9 @@
+Name:Splinter, Aging Champion
+ManaCost:2 W
+Types:Legendary Creature Mutant Ninja Rat
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When NICKNAME enters, destroy up to one target tapped creature.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.tapped | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target tapped creature
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME leaves the battlefield, you and another target player each draw a card.
+SVar:TrigDraw:DB$ Draw | ValidTgts$ Player.Other | Defined$ TargetedAndYou | NumCards$ 1
+Oracle:When Splinter enters, destroy up to one target tapped creature.\nWhen Splinter leaves the battlefield, you and another target player each draw a card.

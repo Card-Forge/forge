@@ -1,7 +1,7 @@
 Name:Dazzling Flameweaver
-ManaCost:2 B R
+ManaCost:1 B R
 Types:Creature Lizard Warlock
-PT:4/4
+PT:3/3
 K:Menace
 K:Ward:PayLife<3>
 T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, conjure a random card from CARDNAME's spellbook into exile. You may play that card until the end of your next turn.

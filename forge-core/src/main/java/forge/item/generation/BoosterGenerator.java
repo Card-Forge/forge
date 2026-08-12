@@ -34,7 +34,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * <p>
@@ -429,12 +432,11 @@ public class BoosterGenerator {
             }
 
             BoosterSlot boosterSlot = boosterSlots.get(slotType);
-            Map<String, Integer> slotReplacementCount = bulkSlotReplacement(boosterSlot, numCards);
 
             List<PaperCard> paperCards = Lists.newArrayList();
-            for(Map.Entry<String, Integer> entry : slotReplacementCount.entrySet()) {
+            for(Map.Entry<String, Long> entry : bulkSlotReplacement(boosterSlot, numCards).entrySet()) {
                 String determineSheet = entry.getKey();
-                int numCardsToGenerate = entry.getValue();
+                int numCardsToGenerate = (int)(long)entry.getValue();
 
                 if (determineSheet == null || determineSheet.isEmpty() || numCardsToGenerate == 0) {
                     continue;
@@ -450,7 +452,7 @@ public class BoosterGenerator {
                 String setCode = template.getEdition();
                 PrintSheet ps;
                 try {
-                    // Apply the edition to the sheet name by default. We'll try again if thats not a real sheet
+                    // Apply the edition to the sheet name by default. We'll try again if that's not a real sheet
                     ps = getPrintSheet(determineSheet + " " + setCode);
                 } catch (Exception e) {
                     ps = getPrintSheet(determineSheet);
@@ -469,19 +471,8 @@ public class BoosterGenerator {
         return result;
     }
 
-    private static Map<String, Integer> bulkSlotReplacement(BoosterSlot boosterSlot, int numCards) {
-        Map<String, Integer> slotReplacementCount = new HashMap<>();
-
-        for(int i = 0; i < numCards; i++) {
-            String determineSheet = boosterSlot.replaceSlot();
-            if (slotReplacementCount.containsKey(determineSheet)) {
-                slotReplacementCount.put(determineSheet, slotReplacementCount.get(determineSheet) + 1);
-            } else {
-                slotReplacementCount.put(determineSheet, 1);
-            }
-        }
-
-        return slotReplacementCount;
+    private static Map<String, Long> bulkSlotReplacement(BoosterSlot boosterSlot, int numCards) {
+        return Stream.generate(boosterSlot::replaceSlot).limit(numCards).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     private static void ensureGuaranteedCardInBooster(List<PaperCard> result, SealedTemplate template, String boosterMustContain) {
@@ -633,7 +624,10 @@ public class BoosterGenerator {
                 System.out.println("Parsing from main code: " + mainCode);
                 String sheetName = StringUtils.strip(mainCode.substring(10), "()\" ");
                 System.out.println("Attempting to lookup: " + sheetName);
-                src = tryGetStaticSheet(sheetName).toFlatList();
+                PrintSheet fromSheet = tryGetStaticSheet(sheetName);
+                if (fromSheet == null)
+                    throw new RuntimeException("PrintSheet Error: " + ps.getName() + " didn't find " + sheetName + " from " + mainCode);
+                src = fromSheet.toFlatList();
                 setPred = x -> true;
 
             } else if (mainCode.startsWith("promo") || mainCode.startsWith("name")) { // get exactly the named cards, that's a tiny inlined print sheet

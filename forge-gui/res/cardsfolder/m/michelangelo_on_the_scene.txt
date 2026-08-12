@@ -1,0 +1,11 @@
+Name:Michelangelo, On the Scene
+ManaCost:4 G G
+Types:Legendary Creature Mutant Ninja Turtle
+PT:2/2
+K:Trample
+K:etbCounter:P1P1:X:no Condition:NICKNAME enters with a +1/+1 counter on him for each land you control.
+SVar:X:Count$Valid Land.YouCtrl
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When NICKNAME dies, return this card to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Counters
+Oracle:Trample (This creature can deal excess combat damage to the player it's attacking.)\nMichelangelo enters with a +1/+1 counter on him for each land you control.\nWhen Michelangelo dies, return this card to your hand.

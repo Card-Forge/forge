@@ -1,12 +1,8 @@
 package forge.sound;
 
-import forge.gui.GuiBase;
-import forge.localinstance.properties.ForgeConstants;
 import forge.util.MyRandom;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
-import java.io.FilenameFilter;
 
 public enum MusicPlaylist {
     BLACK       ("black/"),
@@ -35,16 +31,19 @@ public enum MusicPlaylist {
         isInvalidated = true;
     }
 
+    public String getSubDir() {
+        return this.subDir;
+    }
+
     public String getRandomFilename() {
-        String path = SoundSystem.instance.getMusicDirectory() + subDir;
         if (filenames == null || isInvalidated) {
             try {
-                FilenameFilter filter = (file, name) -> name.endsWith(".mp3") || name.endsWith(".wav") || name.endsWith(".m4a");
-                filenames = new File(path).listFiles(filter);
-                if (GuiBase.isAdventureMode() && (filenames == null || ArrayUtils.isEmpty(filenames))) {
-                    path = ForgeConstants.ADVENTURE_COMMON_MUSIC_DIR + subDir;
-                    filenames = new File(path).listFiles(filter);
-                }
+                File musicDir = SoundSystem.findMusicDirectory(this);
+                if(musicDir != null)
+                    filenames = musicDir.listFiles(SoundSystem.PLAYABLE_AUDIO);
+                else
+                    filenames = new File[0];
+
                 if (filenames == null)
                     filenames = new File[0];
             }
@@ -56,43 +55,16 @@ public enum MusicPlaylist {
         }
 
         if (filenames.length == 0) { return null; }
-
-        if (filenames.length == 1) {
+        else if (filenames.length == 1) {
             mostRecentTrackIdx = 0;
         }
-        else { //determine filename randomly from playlist
-            int newIndex;
-            do {
-                newIndex = MyRandom.getRandom().nextInt(filenames.length);
-            } while (newIndex == mostRecentTrackIdx); //ensure a different track is chosen than the last one
-
-            mostRecentTrackIdx = newIndex;
+        else {
+            int index = MyRandom.getRandom().nextInt(filenames.length - 1);
+            if(index >= mostRecentTrackIdx)
+                index += 1;
+            mostRecentTrackIdx = index;
         }
 
         return filenames[mostRecentTrackIdx].getPath();
-    }
-
-    public String getNewRandomFilename() {
-        File[] music;
-        String path = SoundSystem.instance.getMusicDirectory() + subDir;
-        try {
-            FilenameFilter filter = (file, name) -> name.endsWith(".mp3") || name.endsWith(".wav") || name.endsWith(".m4a");
-            music = new File(path).listFiles(filter);
-            if (GuiBase.isAdventureMode() && (music == null || ArrayUtils.isEmpty(music))) {
-                path = ForgeConstants.ADVENTURE_COMMON_MUSIC_DIR + subDir;
-                music = new File(path).listFiles(filter);
-            }
-            if (music == null)
-               return null;
-        }
-        catch (Exception e) {
-            return null;
-        }
-        if (music.length == 0)
-            return null;
-
-        int index = MyRandom.getRandom().nextInt(music.length);
-        System.out.println("Looking up " +path + ForgeConstants.PATH_SEPARATOR + music[index]);
-        return music[index].getPath();
     }
 }

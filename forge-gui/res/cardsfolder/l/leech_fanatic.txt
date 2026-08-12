@@ -2,5 +2,5 @@ Name:Leech Fanatic
 ManaCost:1 B
 Types:Creature Human Warlock
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | Condition$ PlayerTurn | Description$ During your turn, CARDNAME has first strike.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | Condition$ PlayerTurn | Description$ During your turn, CARDNAME has lifelink.
 Oracle:During your turn, Leech Fanatic has lifelink.

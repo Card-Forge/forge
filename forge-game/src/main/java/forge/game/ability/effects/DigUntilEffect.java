@@ -114,6 +114,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
         if (sa.hasParam("MaxRevealed")) {
             maxRevealed = AbilityUtils.calculateAmount(host, sa.getParam("MaxRevealed"), sa);
         }
+        Integer totalCMC = null;
+        if (sa.hasParam("MinTotalCMC")) {
+            totalCMC = AbilityUtils.calculateAmount(host, sa.getParam("MinTotalCMC"), sa);
+        }
 
         String[] type = new String[]{"Card"};
         if (sa.hasParam("Valid")) {
@@ -152,14 +156,24 @@ public class DigUntilEffect extends SpellAbilityEffect {
             }
             CardCollection found = new CardCollection();
             CardCollection revealed = new CardCollection();
+            CardCollection moved = new CardCollection();
+            Integer restCMC = totalCMC;
 
             final PlayerZone library = p.getZone(digSite);
-            final int maxToDig = maxRevealed != null ? maxRevealed : library.size();
+            int maxToDig = library.size();
+            if (maxRevealed != null) {
+                maxToDig = Math.min(maxRevealed, maxToDig);
+            }
 
             for (int i = 0; i < maxToDig; i++) {
                 final Card c = library.get(i);
                 revealed.add(c);
-                if (c.isValid(type, sa.getActivatingPlayer(), host, sa)) {
+                if (restCMC != null) {
+                    restCMC -= c.getCMC();
+                    if (restCMC <= 0) {
+                        break;
+                    }
+                } else if (c.isValid(type, sa.getActivatingPlayer(), host, sa)) {
                     found.add(c);
                     if (sa.hasParam("ForgetOtherRemembered")) {
                         host.clearRemembered();
@@ -196,7 +210,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
 
                 while (itr.hasNext()) {
-                    final Card c = itr.next();
+                    Card c = itr.next();
 
                     if (optionalFound &&
                             !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()), null)) {
@@ -214,7 +228,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     AbilityKey.addCardZoneTableParams(moveParams, tableSeq);
 
                     if (foundDest.equals(ZoneType.Battlefield)) {
-                        moveParams.put(AbilityKey.SimultaneousETB, new CardCollection(c));
+                        moveParams.put(AbilityKey.SimultaneousETB, found);
                         if (sa.hasParam("GainControl")) {
                             c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
                         }
@@ -245,7 +259,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     } else if (sa.hasParam("NoMoveFound")) {
                         //Don't do anything
                     } else {
-                        game.getAction().moveTo(foundDest, c, foundLibPos, sa, moveParams);
+                        c = game.getAction().moveTo(foundDest, c, foundLibPos, sa, moveParams);
+                        moved.add(c);
+                        if (foundDest == ZoneType.Exile) {
+                            handleExiledWith(c, sa);
+                        }
                     }
 
                     if (sequential) {
@@ -285,7 +303,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 AbilityKey.addCardZoneTableParams(moveParams, table);
 
                 for (Card c : revealed) {
-                    game.getAction().moveTo(finalDest, c, finalPos, sa, moveParams);
+                    c = game.getAction().moveTo(finalDest, c, finalPos, sa, moveParams);
+                    if (finalDest == ZoneType.Exile) {
+                        handleExiledWith(c, sa);
+                    }
                 }
             }
 
@@ -295,12 +316,12 @@ public class DigUntilEffect extends SpellAbilityEffect {
 
             if (sa.isKeyword(Keyword.CASCADE)) {
                 Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(p);
-                runParams.put(AbilityKey.Cards, revealed);
+                runParams.put(AbilityKey.Cards, moved);
                 game.getReplacementHandler().run(ReplacementType.Cascade, runParams);
 
                 if (sa.hasParam("RememberRevealed")) {
                     final ZoneType removeZone = foundDest;
-                    host.removeRemembered(revealed.filter(c -> !c.isInZone(removeZone)));
+                    host.removeRemembered(moved.filter(c -> !c.isInZone(removeZone)));
                 }
             }
         } // end foreach player

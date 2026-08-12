@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sorin
+Title=Sorin
+Icon=Sorin.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Sasaki_Junichi_-_WG_Aggro_(Standard,_#2378229).dck
+Deck Type=constructed
+
+[Main]
+3 Ghalta, Primal Hunger
+4 Llanowar Elves
+2 Surrak, the Hunt Caller
+3 Melira, the Living Cure
+3 Polukranos Reborn
+3 Trostani, Three Whispers
+4 Outcaster Trailblazer
+4 Seraphic Steed
+2 Keen-Eyed Curator
+4 Spinner of Souls
+2 Lumbering Worldwagon
+3 Day of Judgment
+3 Plains
+7 Forest
+4 Brushland
+3 Razorverge Thicket
+2 Restless Prairie
+4 Hushwood Verge
+[Sideboard]
+1 Day of Judgment
+2 Obstinate Baloth
+2 Rest in Peace
+2 Destroy Evil
+3 Temporary Lockdown
+3 Tribute to the World Tree
+2 Get Lost

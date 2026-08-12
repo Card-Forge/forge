@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Solaire
+Title=Solaire
+Icon=Solaire.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/PTQ_Journey_Into_Nyx_-_Napoli,_Italy/Simone_Barberini_-_Esper_Control_(Standard,_#67656).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Azorius Charm
+2 Devour Flesh
+4 Dissolve
+3 Hero's Downfall
+4 Sphinx's Revelation
+4 Supreme Verdict
+4 Detention Sphere
+3 Ashiok, Nightmare Weaver
+2 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+4 Godless Shrine
+4 Hallowed Fountain
+2 Island
+2 Mutavault
+2 Plains
+3 Temple of Deceit
+3 Temple of Enlightenment
+3 Temple of Silence
+4 Watery Grave
+[Sideboard]
+1 AEtherling
+3 Blood Baron of Vizkopa
+4 Doom Blade
+1 Obzedat, Ghost Council
+2 Pithing Needle
+2 Revoke Existence

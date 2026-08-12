@@ -6,8 +6,8 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battl
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, it gets +X/+X until end of turn, where X is the greatest power and/or toughness among other creatures you control.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
 SVar:X:SVar$Y/LimitMin.Z
-SVar:Y:Count$Valid Creature.Other+YouCtrl$GreatestPower
-SVar:Z:Count$Valid Creature.Other+YouCtrl$GreatestToughness
+SVar:Y:Count$Valid Creature.Other+YouCtrl$GreatestCardPower
+SVar:Z:Count$Valid Creature.Other+YouCtrl$GreatestCardToughness
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
 Oracle:Whenever Freelance Muscle attacks or blocks, it gets +X/+X until end of turn, where X is the greatest power and/or toughness among other creatures you control.

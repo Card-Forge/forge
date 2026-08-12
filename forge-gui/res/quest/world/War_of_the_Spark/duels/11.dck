@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Diablo
+Title=Diablo
+Icon=Diablo.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Austin_Snide_-_Orzhov_Aggro_(Standard,_#795261).dck
+Deck Type=constructed
+
+[Main]
+4 Cruel Celebrant
+4 Gutterbones
+4 Hunted Witness
+4 Midnight Reaper
+2 Orzhov Enforcer
+4 Plaguecrafter
+4 Priest of Forgotten Gods
+4 Tithe Taker
+4 Revival // Revenge
+4 Sorin, Vengeful Bloodlord
+7 Plains
+7 Swamp
+4 Godless Shrine
+4 Isolated Chapel
+[Sideboard]
+2 Basilica Bell-Haunt
+1 Militia Bugler
+2 Despark
+1 Mortify
+2 God-Eternal Oketra
+2 Kaya, Orzhov Usurper
+4 Duress
+1 Kaya's Wrath

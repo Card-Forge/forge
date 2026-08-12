@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Medium
+Description=New_Phyrexia/2011_TCGplayer_TCQ_-_Orlando,_FL_(6-11)/NicholasRufrano_-_Boros_(Standard,_#15986).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+1 Hero of Oxid Ridge
+4 Mirran Crusader
+4 Squadron Hawk
+4 Steppe Lynx
+4 Stoneforge Mystic
+1 Batterskull
+2 Sword of War and Peace
+3 Dismember
+4 Lightning Bolt
+3 Koth of the Hammer
+4 Arid Mesa
+1 Evolving Wilds
+4 Marsh Flats
+6 Mountain
+6 Plains
+4 Scalding Tarn
+1 Terramorphic Expanse
+[Sideboard]
+2 Arc Trail
+3 Divine Offering
+1 Gideon Jura
+4 Kor Firewalker
+3 Spellskite
+1 Sword of Body and Mind
+1 Sword of Feast and Famine

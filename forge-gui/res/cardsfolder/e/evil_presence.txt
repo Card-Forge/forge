@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant:Land
 SVar:AttachAILogic:ChangeType
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Swamp | RemoveLandTypes$ True | Description$ Enchanted land is a Swamp.
-DeckHints:Keyword$Swampwalk
+DeckHints:Keyword$Landwalk:Swamp
 Oracle:Enchant land\nEnchanted land is a Swamp.

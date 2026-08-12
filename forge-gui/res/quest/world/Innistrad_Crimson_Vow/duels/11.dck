@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Imperial Guard
+Title=Imperial Guard
+Icon=Imperial Guard.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/HardPoreCorn_-_Mono_Red_Goblins_(Standard,_#1246654).dck
+Deck Type=constructed
+
+[Main]
+1 Voldaren Epicure
+1 Rem Karolus, Stalwart Slayer
+1 Bloodthirsty Adversary
+1 Hulking Bugbear
+1 Hobgoblin Captain
+3 Hobgoblin Bandit Lord
+3 Reckless Stormseeker
+4 Goblin Javelineer
+4 Battle Cry Goblin
+4 Fireblade Charger
+3 You See a Pair of Goblins
+3 Frost Bite
+2 Angelfire Ignition
+3 Thundering Rebuke
+3 Roil Eruption
+1 Showdown of the Skalds
+1 Den of the Bugbear
+6 Snow-Covered Plains
+15 Snow-Covered Mountain
+[Sideboard]

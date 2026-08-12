@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/mordetolight_-_Enigmatic_Incarnation_(Modern,_#1632293).dck
+Deck Type=constructed
+
+[Main]
+1 Atraxa, Grand Unifier
+1 Eternal Witness
+4 Fable of the Mirror-Breaker
+1 Fury
+1 Heliod, the Radiant Dawn
+1 Phantasmal Image
+2 Renegade Rallier
+4 Solitude
+3 Spirited Companion
+3 Ephemerate
+4 Abundant Growth
+4 Enigmatic Incarnation
+4 Leyline Binding
+4 Spreading Seas
+4 Flooded Strand
+1 Forest
+1 Glasspool Mimic
+1 Hallowed Fountain
+1 Indatha Triome
+1 Island
+3 Misty Rainforest
+1 Plains
+1 Raugrin Triome
+1 Sacred Foundry
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+1 Zagoth Triome
+[Sideboard]
+1 Collector Ouphe
+2 Dawnbringer Cleric
+2 Drannith Magistrate
+2 Endurance
+2 Force of Vigor
+1 Magus of the Moon
+1 Meddling Mage
+2 Sanctifier en-Vec
+1 Serra's Emissary
+1 Titan of Industry

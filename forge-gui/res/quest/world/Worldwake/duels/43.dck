@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Nibbler
+Title=Nibbler
+Icon=Nibbler.jpg
+Difficulty=Medium
+Description=Worldwake/Magic-League_Standard_Master_14-02-10/Duodax_-_Jund_(Standard,_#2605).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Broodmate Dragon
+4 Siege-Gang Commander
+4 Sprouting Thrinax
+3 Bituminous Blast
+4 Lightning Bolt
+4 Blightning
+4 Maelstrom Pulse
+4 Rampant Growth
+4 Dragonskull Summit
+2 Forest
+2 Mountain
+4 Raging Ravine
+2 Rootbound Crag
+4 Savage Lands
+3 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Dragon's Claw
+4 Goblin Ruinblaster
+3 Malakir Bloodwitch
+4 Mind Rot

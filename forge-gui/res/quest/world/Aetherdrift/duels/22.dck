@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sharee
+Title=Sharee
+Icon=Sharee.jpg
+Difficulty=Easy
+Description=./Standard/Aetherdrift/Laura_Dunbavan_-_Simic_Terror_(Standard,_#2365873).dck
+Deck Type=constructed
+
+[Main]
+2 Abhorrent Oculus
+4 Eddymurk Crab
+4 Tolarian Terror
+2 Bounce Off
+4 Cache Grab
+3 Get Out
+4 Seed of Hope
+2 Spell Pierce
+4 This Town Ain't Big Enough
+2 Analyze the Pollen
+4 Bushwhack
+4 Stormchaser's Talent
+4 Up the Beanstalk
+4 Botanical Sanctum
+1 Forest
+4 Island
+1 Restless Vinestalk
+3 Willowrush Verge
+4 Yavimaya Coast
+[Sideboard]
+2 Bounce Off
+2 Disdainful Stroke
+1 Ghost Vacuum
+2 Negate
+2 Obstinate Baloth
+2 Pawpatch Formation
+2 Soul-Guide Lantern
+2 Spell Pierce

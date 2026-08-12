@@ -1,0 +1,8 @@
+Name:Sourbread Auntie
+ManaCost:2 R R
+Types:Creature Goblin Warrior
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, you may blight 2. If you do, create two 1/1 black and red Goblin creature tokens. (To blight 2, put two -1/-1 counters on a creature you control.)
+SVar:TrigToken:AB$ Token | Cost$ Blight<2> | TokenAmount$ 2 | TokenScript$ br_1_1_goblin
+DeckHas:Ability$Token
+Oracle:When this creature enters, you may blight 2. If you do, create two 1/1 black and red Goblin creature tokens. (To blight 2, put two -1/-1 counters on a creature you control.)

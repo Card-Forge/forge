@@ -8,6 +8,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
 import forge.screens.FScreen;
+import forge.screens.match.views.VChat;
 import forge.screens.match.views.VDevMenu;
 import forge.screens.match.views.VGameMenu;
 import forge.screens.match.views.VLog;
@@ -336,6 +337,8 @@ public abstract class FDropDown extends FScrollPane {
         if (this instanceof VReveal)
             return true;
         if (this instanceof VLog)
+            return true;
+        if (this instanceof VChat)
             return true;
         if (this instanceof VDevMenu)
             return true;

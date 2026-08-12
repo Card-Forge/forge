@@ -1,0 +1,8 @@
+Name:Mona Lisa, Science Geek
+ManaCost:2 G
+Types:Legendary Creature Lizard Mutant
+PT:1/3
+K:Reach
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is NICKNAME's power.
+SVar:X:Count$CardPower
+Oracle:Reach\n{T}: Add X mana of any one color, where X is Mona Lisa's power.

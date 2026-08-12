@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Easy
+Description=./Standard/Avatar_The_Last_Airbender/Kakuda_Wataru_-_Azorius_Control_(Standard,_#2718032).dck
+Deck Type=constructed
+
+[Main]
+2 Malcolm, Alluring Scoundrel
+4 Spyglass Siren
+3 Tishana's Tidebinder
+4 Enduring Curiosity
+4 Floodpits Drowner
+4 Aang, Swift Savior
+4 Get Lost
+4 Phantom Interference
+3 Consult the Star Charts
+3 Aang's Iceberg
+4 Plains
+8 Island
+4 Restless Anchorage
+1 Meticulous Archive
+3 Floodfarm Verge
+2 Starting Town
+2 Multiversal Passage
+1 Abandoned Air Temple
+[Sideboard]
+2 Negate
+2 Day of Judgment
+3 Elspeth's Smite
+3 Enduring Innocence
+2 Ghost Vacuum
+2 Pinnacle Starcage
+1 Spider-Sense

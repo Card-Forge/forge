@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Eldrazi
+Title=Eldrazi
+Icon=Eldrazi.jpg
+Difficulty=Medium
+Description=Dark_Ascension/SCG_Invitational_Qualifier_-_Catania,_Italy/Angelo_Asta_-_Birthing_Pod_(Standard,_#29797).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+1 Archon of Justice
+3 Avacyn's Pilgrim
+4 Birds of Paradise
+3 Blade Splicer
+2 Daybreak Ranger
+2 Fiend Hunter
+1 Geist-Honored Monk
+3 Hero of Bladehold
+2 Phyrexian Metamorph
+4 Strangleroot Geist
+1 Sun Titan
+1 Wurmcoil Engine
+3 Birthing Pod
+2 Sword of Feast and Famine
+2 Green Sun's Zenith
+2 Oblivion Ring
+4 Copperline Gorge
+6 Forest
+2 Plains
+4 Razorverge Thicket
+3 Rootbound Crag
+4 Sunpetal Grove
+[Sideboard]
+2 Act of Aggression
+2 Ancient Grudge
+2 Arc Trail
+2 Celestial Purge
+2 Garruk Relentless
+2 Ratchet Bomb
+2 Sword of War and Peace

@@ -3,5 +3,5 @@ ManaCost:2 U
 Types:Creature Gnome Warlock
 PT:2/2
 T:Mode$ RolledDieOnce | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigToken | TriggerDescription$ Whenever you roll one or more dice, create a 1/1 blue Faerie Dragon creature token with flying.
-SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_faerie_dragon_flying | TokenAmount$ 1 | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_faerie_dragon_flying | TokenOwner$ You
 Oracle:Whenever you roll one or more dice, create a 1/1 blue Faerie Dragon creature token with flying.

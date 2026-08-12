@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mimic Vat&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvFo3gE4lUcDAyrgXgNB33tfAqkQcCVjn59BsQrOSD2Puakr789oP4FgeVAO1/Qyc8ge1frQOz1goY9PfyMbC8orEHx7UXncKZnWCOnLXrGLwi7c9I/LyGHNT3ilRb2AgCKwqUt
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILhB1brjCx7R8EoIBYAANwcAa8=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="282" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="185" y="161">
+   <properties>
+    <property name="enemy" value="Mimic"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/dialog.tx" x="175" y="239.25" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A small cave reveals itself, two seemingly undefended treasure chests the only thing to be seen. You're obviously suspicious but... you feel like there is real treasure here...&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/treasure.tx" x="210" y="161">
+   <properties>
+    <property name="reward"> [
+     {
+        &quot;type&quot;: &quot;randomCard&quot;,
+        &quot;count&quot;: 2,
+        &quot;addMaxCount&quot;: 4,
+        &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+}
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

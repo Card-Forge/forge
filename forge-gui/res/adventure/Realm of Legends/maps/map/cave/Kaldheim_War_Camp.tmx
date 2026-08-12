@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="102">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Raiders' Karve&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlTEKwCAQBG1Th7wt5M1+KqRLhAOjJ3vKFIPFgTfuFuYjpTyQa/ue1vzvrNXlTcse6w7PrLze5+03oofReyL7eXSs9pktv+h+0fvFr95jJr/yP1T71XasdrFyjepXZqj2WNnv3PWO6px6ePJTZwgAAAAAAOtwA0dXU/g=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJylWEFy00AQ1NHylRL/8AMogj/ByZDizgOAwNcSCPfkTiqlfxgSdsrqot3p2V2HqZqyJGs0vbOz07P7MA7DsB6Gd+V3Mx00rt/Hc5E9vcN6vRqGP8v7+t8tKZ7V5LJ865EwsTp/KjfTsW7E7+2UK2xq2IDrR7n+bbDV7EM+vjxoLU54J/RmOv4NbWELPV/i83N1uMfY2P5Vef612Lw2sdQ4YlyMzWkmu/E4bpi/3RI7tQ9s3wq2u/J7b/C1fHM8eyRy2+XVfvRxA7YM33Mlvu3moyY1bGdFv6yfrrva3DtM8W5ofPti3W+r+D4Vu+34NHaKb17+v+jwM9P3WHtsGR8wzBI7/McY5xP8xJjfjAfddmBEDXwc/+HjWoHvMTaudfC5bfhx9VjtOAaB60rqjOJzNZfvuT7+kljoOuLvZRjZJtYq6h3XZdRPvmZ+YMyaq58TXzwuV/Oj7vAcQXZLDbxelGsf13h+plyhovmgMcf8KD6+xv1+PK6BmymvsYxR868lPAf4RobP3fN3aryjsWzxs7NrcVsNX4+t+usRzr0emwwf5pprPOpE71w64fXWiw8YHW+7eut6UZYax/X0VBlG11tk9db1ozqmjE9r2NzYavgcxqhnqA3KMdmYesXxd/io4VOfge/tCz/PytXQ3p4k42/F932V+wQfuL0Ga4uHnbT4m/dUmlvKB1md5n7C9WSQbH3V7DC3vMZa/KA4uV5nnL+Z8vXFsXBczD6Br3f/5uq142Hl9F7+cT7d+P5XdG54PJonV0tfGmsi+9Zz8Tn+YXyOuzVPsL/MzgbcmHqx1fZ7rf4IGr2pO1dx+E7pVbiWnSV57saEOONae79LM8+uv8/GoDzCe9FW7GfixYi922N/SHqA2hxn8Q2Mup/KxsVjynIC5zHZWVSmtb5Je3r9r7YHZP7gsyLXHzvlXtPFNtv7QbjPz7gHMeR9XOu8ye2dXMzZP876WLI4hCjfM0YV1DGck3DvgzlzvnDPZ4CZaL1xvAOMKtovYUxZP6a4Tj1XY4m8U+7g++zsqtev9sS6n6jZYk2cS8weiO84VzNsmS8eG/LC2Wh89Dyc8YToM82FHnwad+RF+FYb5Vac60KVf/U8WqUHn+YsYo81mGHDnAameM/1Bn8BsEIoYQ==
+  </data>
+ </layer>
+ <layer id="7" name="Mountain Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmE1OwzAQhe0jOCqU8zTpnSgbLkNgAaumquA2pJU4BxklI4w749hq6xkknvRUqbbkT8+/maYypsnwgXBKv5wxzuEJ1RPjx/qdw7xO4OGU2x94V9X4m8NXWsgpyXY/+CHSXgvz7awx74M3DKc0HzLeDN7aU8aUOS6x9r4qnjGWYcl98epGxjurkw8ZIcNHpXy3A9syyDC2Bo+F+fy98uZ+/qcylDiTkWUVjK+Fr3XjXRiOrYWvnu7qcF1p4esJtifH88XuxksL5vbFnb51gA/aqP0bnpXXVE3M2cdi5Atz7QX4kOF5ynFOwEfdh9cUnsXAOMcpMccg/73fMpz+etwX5vOFrEcvU3BnZbLjxL0RNPMtrOzc+qL4NGf3z5cu7XxwxlC1hNJ3R0zaM/yrfI3QN0ioGJ/0GmyZ97OWOQY2jXz4tvqMsEmcM8gVY6LM1egozdUdKR7fuWyprMAFbR1TK6N4UmqQuV5O42/Mb3dTfQcNfcJsLpEP+BtN9N+v
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdWDtOA0EM3SBRIBBSVkABOUAiJCSuQEJDz624BfmIGiQINVXuQBEipQgXoGSdjRXHsWc8n1DwpNH+vOM3/o13i+J/4vtoN7Kx+AsdMXhn1z/76/N+0/2utKaPtvu5BVQvzuHigjJ4pGsADKp3R808PnDNETv/tCyKm2oMVzwR45O4+QDcBtZngJZwDznelWuO40hu5+xa822oPecVty/GMXQe5HIRpto5F13fdMXxtqyvU3wMeCHnC2Gd3LbUFg8d+RnkS4/ZMDe4T0LyqlvW/MCGMXVein9XTtBYQDkpZvEZ93EKJJ+mvC/ZyxqDWp7yPYTruT7YvIfHM5vaJZ4DZH0x4at/kizM+Zag0yWj8eHyvv1YguQbDleex64L70l7SShoHrnq8qRt9+3E06fQe778mLE81zjMK52PDduYt7ffj+0veF+h4XOvPt6TfeH4cluuf7iWzQVLrQzRCbLohwWr+76aSvdBBPrY5QMfP2rLHPbrrjhZ92nQ2Wls3uM9AJUF8JpNYY1H7ltex9Afof7NAbAdz99UnWBjKotxdxpGbQlqO7S3Ng/qtPTlIJviU4RmO6kGToSapgFl6Vpi6p+UG1r+S/UZ4arPV0xHyD6N/sV36BpzfK/i90FM7wCYGb4DJJ6WvsM6lw9afeG9R6o9aUzTGPLZ1lJfLP5x9fI5+izkQNcZ87/D14NJenyw7HGu+TSulv9LFkh1GsG/G6guztkSo68BsggtBi3/1TRIfoy141OzHi5Y1pvqRx9GAk+N14DI5q7rFgwVmwIvHPAfxWf3XQH/MfHRK7fHrvALZivP5w==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="256.285" y="337.285">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Invasion of the Giants|KHM&quot;, &quot;Giant's Amulet|KHM&quot;]}"/>
+    <property name="enemy" value="Aegar"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="528.116" y="194.229">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Just before you strike the killing blow your opponent throws down his weapon and puts his hands up.
+
+'You are far mightier than I expected! You'll have no problems in the land ahead! May Birgi sing of your deeds!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="enemy" value="Arni"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="262.885" y="444.395">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Varragoth"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/entry_up.tx" x="605.699" y="312.652">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/gold.tx" x="189.5" y="320.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="198.087" y="89.9317">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Fynn"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="83,84,85,84"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="105.536" y="331.533">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Ranar"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="81,82"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="262.657" y="495.649">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Orvar"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="73,74"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="501.568" y="446.145">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Lathril"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="76,75,76,77"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/waypoint.tx" x="196.473" y="493.497"/>
+  <object id="74" template="../../../../common/maps/obj/waypoint.tx" x="410.093" y="487.04"/>
+  <object id="75" template="../../../../common/maps/obj/waypoint.tx" x="443.455" y="363.28"/>
+  <object id="76" template="../../../../common/maps/obj/waypoint.tx" x="507.487" y="407.941"/>
+  <object id="77" template="../../../../common/maps/obj/waypoint.tx" x="472.511" y="481.659"/>
+  <object id="81" template="../../../../common/maps/obj/waypoint.tx" x="106.612" y="410.093"/>
+  <object id="82" template="../../../../common/maps/obj/waypoint.tx" x="114.146" y="122.755"/>
+  <object id="83" template="../../../../common/maps/obj/waypoint.tx" x="202.392" y="85.089"/>
+  <object id="84" template="../../../../common/maps/obj/waypoint.tx" x="276.11" y="114.146"/>
+  <object id="85" template="../../../../common/maps/obj/waypoint.tx" x="389.108" y="115.76"/>
+  <object id="86" template="../../../../common/maps/obj/gold.tx" x="317.004" y="317.542">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/booster.tx" x="229.85" y="321.666">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/manashards.tx" x="36.2637" y="298.405"/>
+  <object id="89" template="../../../../common/maps/obj/manashards.tx" x="92.6222" y="64.6417"/>
+  <object id="90" template="../../../../common/maps/obj/manashards.tx" x="307.857" y="623.175"/>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="416.667" y="60">
+   <properties>
+    <property name="enemy" value="Maja"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/booster.tx" x="280.333" y="320">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/manashards.tx" x="532" y="526.667"/>
+  <object id="94" template="../../../../common/maps/obj/dialog.tx" x="509.333" y="242.916" width="36.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A boisterous man stands in the snow ahead, a wide smile crossing his face as he ceases his work cleaning an elk carcass.
+
+'Ho, traveler! There's quite a harsh land ahead of you! Let me test your strength to see if you're fit to explore it!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/dialog.tx" x="509.056" y="291.56" width="34" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A snowy landscape sprawls out before you. From your current vantage point, it seems a valley with a fortress in its center, and you see movement against the white of the snow in the distance. The weather and the runic designs carved into the side of some of the stones nearby indicate this place likely came from the plane of Kaldheim.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/dialog.tx" x="437.114" y="64.1447" width="56.7151" height="11.5" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A warrior stands resolutely blocking the way out of the canyon you find yourself in.
+
+'My people are in the vale beyond. I can't risk you hurting them. For Bretagard!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/dialog.tx" x="183.636" y="404.553" width="170" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A giant stands before you, a swirl of frost in one hand and flame in the other.
+
+'Another smallfolk come to claim the treasures of the giants? I will crush you like the worm you are.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="98" template="../../obj/treasure.tx" x="442" y="230">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="99" template="../../obj/treasure.tx" x="162.667" y="616">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="100" template="../../obj/treasure.tx" x="19.3333" y="434">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;KHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="346.5" y="159.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Do you hear the Immerstrum calling? It calls for blood! For war!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The snow runs red today.&quot;,
+					&quot;text&quot;: &quot;'Follow the song of your bloodlust, and may it lead you to many more victories!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Kardur, Doomscourge&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Kardur's Vicious Return&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;editions&quot;: [&quot;KHM&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 8 }              
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 6
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Hell yeah!&quot;,
+					&quot;text&quot;: &quot;'Yes! The warstorm surges within your soul! It must be fed! Slay every last resident of this pathetic camp, pretenders to the legacy of Kaldheim all, and I shall teach you the true power of Kaldheim!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;Can't say I hear it.&quot;,
+					&quot;text&quot;: &quot;'Begone, coward. My work is not fit for soft hands such as yours.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Kardur"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,9 @@
+Name:Wildvine Pummeler
+ManaCost:6 G
+Types:Creature Giant Berserker
+PT:6/5
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Vivid — This spell costs {1} less to cast for each color among permanents you control.
+K:Reach
+K:Trample
+SVar:X:Count$Valid Permanent.YouCtrl$Colors
+Oracle:Vivid — This spell costs {1} less to cast for each color among permanents you control.\nReach, trample

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Sly Cooper
+Title=Sly Cooper
+Icon=Sly Cooper.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Ale_Mtg_-_Orzhov_Tokens_(Standard,_#2440712).dck
+Deck Type=constructed
+
+[Main]
+3 Beza, the Bounding Spring
+4 Enduring Innocence
+2 Overlord of the Mistmoors
+4 Carrot Cake
+2 Anoint with Affliction
+4 Cut Down
+2 Go for the Throat
+1 Elspeth's Smite
+2 Get Lost
+2 Day of Judgment
+2 Sunfall
+4 Caretaker's Talent
+2 Elspeth, Storm Slayer
+1 Kaya, Intangible Slayer
+4 Bleachbone Verge
+4 Fountainport
+2 Demolition Field
+4 Shadowy Backstreet
+4 Concealed Courtyard
+5 Plains
+2 Swamp
+[Sideboard]
+2 Destroy Evil
+2 Outrageous Robbery
+1 Elspeth's Smite
+1 Ghost Vacuum
+3 Duress
+1 Pest Control
+2 The Stone Brain
+3 Wilt-Leaf Liege

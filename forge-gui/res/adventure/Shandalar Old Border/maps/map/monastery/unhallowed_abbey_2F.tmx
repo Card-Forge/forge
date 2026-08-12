@@ -1,0 +1,553 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="19" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="117">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx" />
+ <layer id="6" name="Collision" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wI2TMKaFnU8JmPuYynYTYye17SbFTmrZjctOdDOx2UGJ3SB903gxMUh8Nw9x6si1FxsAmYmPj6yfHLuxhScuc7DJDXV76aUfpG8lB3l6l3NQnpdgdhMbzpTaiW43MfZSy050u/EBatuJbDe+dEurOgnZHnz84WgvtcIWAIOHLCo=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJx7ws7A8GQI4UJ54jE1zCAVD4Sd+Oynt33UjD9y7B6u4QyzE91uevkRXYxe4YzN/8MtXvHZTUt34Ms/tPY/NrMHMv8OZN1ArDtM+BhQQBM3+XaBzCIFIwNS9Q4GDAAw7Fue
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJzV1F0KwkAMBOB9788F2tIzCD2NnsIDqNeqtb2bK7IQFpvMBFcwMBS2bL/koZnrEOYfpM+C3Dk1ISz1fo7N99z0/mU+4lOrO2Az8yImaqMuYyI24npMy0bcQZjn0U5enXPeQZkV6aGEm2ytp1KuVaXcQ4e5U8u5W8yt8s16ifdW57y9007mp+8ye5KxNZPdk6htmawr7Wv1jvxP05lletz8jtwRbP8ybGn78R/qCRGT22E=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJzl1G0OQDAMBuD+ZnoFcRXBwdzFvTDugcwSZsOqPhJv0tik2xM/CuCbkQFAGR5XH/CbidjviwWffdbktF1mFaky11y26zszXO9T3PZom+p2450S18/JLWYrR+Xa+q64tjTjne3s1qj2Puep7t3n/+hSZ0HPICXUOfT913DYHKavzWmatq5llu85TTM294m86ZpFzQDLEj8K
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="19">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDDZQKE89sx5rMjA80SRdjlLwH2SuFulyo4A0MBq/o2AU4AcAe0YOPQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../../../common/maps/obj/treasure.tx" x="256.447" y="95.763">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Scrubland|LEA"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Caves of Koilos|APC"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Desolation Angel|APC"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Grim Monolith|ULG"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Vindicate|APC"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="291.571" y="166.141">
+   <properties>
+    <property name="enemy" value="Demon" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="100,101,99" />
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/waypoint.tx" x="193.014" y="286.598" />
+  <object id="86" template="../../../../common/maps/obj/entry_up.tx" x="208.316" y="175.684">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/monastery/unhallowed_abbey_1F.tmx" />
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/booster.tx" x="272.228" y="95.7719">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/treasure.tx" x="240.333" y="47.6667">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/booster.tx" x="257.333" y="47.3333">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/treasure.tx" x="175.667" y="48.3333">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/treasure.tx" x="144.333" y="95">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/booster.tx" x="127.667" y="94">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/booster.tx" x="159" y="47">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="208.666" y="270.394">
+   <properties>
+    <property name="enemy" value="Demon" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="98,97,83" />
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="122.212" y="172.727">
+   <properties>
+    <property name="enemy" value="Demon" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="104,102,103" />
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/waypoint.tx" x="192.727" y="255.455" />
+  <object id="98" template="../../../../common/maps/obj/waypoint.tx" x="223.091" y="255.455" />
+  <object id="99" template="../../../../common/maps/obj/waypoint.tx" x="288.545" y="127.273" />
+  <object id="100" template="../../../../common/maps/obj/waypoint.tx" x="287.636" y="192" />
+  <object id="101" template="../../../../common/maps/obj/waypoint.tx" x="319.091" y="159.273" />
+  <object id="102" template="../../../../common/maps/obj/waypoint.tx" x="97.4545" y="159.636" />
+  <object id="103" template="../../../../common/maps/obj/waypoint.tx" x="126.545" y="127.455" />
+  <object id="104" template="../../../../common/maps/obj/waypoint.tx" x="125.636" y="200.909" />
+  <object id="108" name="Ward" type="dialog" gid="11912" x="192.063" y="128.292" width="48" height="16">
+   <properties>
+    <property name="dialog">[{
+    "text":"A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.",
+    "options":[
+    { "name":"Leave." } 
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="109" name="Sacrifice1" type="dialog" gid="11905" x="159.667" y="123.333" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    "text":"A captive lies tied to the altar. Glowing red runes encircle them.", 
+    "options":[ 
+	{ 
+		"text":"As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.",
+		"action":[{"deleteMapObject":-1},{"advanceMapFlag":"gate"}],
+		"name":"Free them." 
+			"options":[{
+			"condition":[{"getMapFlag":{"key":"gate","op":"&gt;=","val":3}}],
+			"action":[{"deleteMapObject":108}],
+			"name":"ok" }]
+	},
+	{ "name":"Leave." } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="110" name="Sacrifice2" type="dialog" gid="11906" x="256.667" y="123.667" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    "text":"A captive lies tied to the altar. Glowing red runes encircle them.", 
+    "options":[ 
+	{ 
+		"text":"As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.",
+		"action":[{"deleteMapObject":-1},{"advanceMapFlag":"gate"}],
+		"name":"Free them." 
+			"options":[{
+			"condition":[{"getMapFlag":{"key":"gate","op":"&gt;=","val":3}}],
+			"action":[{"deleteMapObject":108}],
+			"name":"ok" }]
+	},
+	{ "name":"Leave." } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="111" name="Sacrifice3" type="dialog" gid="11907" x="224" y="285.333" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    "text":"A captive lies tied to the altar. Glowing red runes encircle them.", 
+    "options":[ 
+	{ 
+		"text":"As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.",
+		"action":[{"deleteMapObject":-1},{"advanceMapFlag":"gate"}],
+		"name":"Free them." 
+			"options":[{
+			"condition":[{"getMapFlag":{"key":"gate","op":"&gt;=","val":3}}],
+			"action":[{"deleteMapObject":108}],
+			"name":"ok" }]
+	},
+	{ "name":"Leave." } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/dialog.tx" x="209.364" y="114.091" width="13.8182" height="13.3636">
+   <properties>
+    <property name="dialog">[{
+    "text":"*The large, imposing demon before you smirks*\n Ah, so you must be the one who's been freeing my sacrifices...and the volunteer to be my new one. Tell me, mortal, as your last words that aren't a howl of pain - why challenge me?",
+    "options":[{ 
+	"name":"Because you're a monster, and you should be stopped!",  
+	"text":"*The demon sneers.*\n Ah, a noble *hero*. I should have guessed. Your kind die like anyone else when your power runs dry - allow me to demonstrate!",
+	"options":[{
+		"name":"End",
+		"action":[{"deleteMapObject":113}]
+		}]
+   	},
+	{ 
+	"name":"I want power. I'll take it from what's left of you.",  
+	"text":"*The demon chuckles.*\n I'll commend your ambition, if not your sense. Fight hard enough, and I might let you replace that failure you dealt with upstairs.",
+	"options":[{
+		"name":"End",
+		"action":[{"deleteMapObject":113}]
+		}]
+    	},
+	{ 
+	"name":"Honestly, you just looked like you'd be a good fight.",  
+	"text":"*The demon blinks in surprise, then laughs.*\n Well, if that's what you seek, you'll find more than you bargained for here. I hope you enjoy the last battle of your life, *mortal*.",
+	"options":[{
+		"name":"End",
+		"action":[{"deleteMapObject":113}]
+		}]
+    	},
+	{ 
+	"name":"...",  
+	"text":"*The fiend's eyes narrow.*\n Too scared for words? So be it, mortal. You'll die all the same.",
+	"options":[{
+		"name":"End",
+		"action":[{"deleteMapObject":113}]
+		}]
+    }]
+}]</property>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/enemy.tx" x="203.566" y="96.2358" width="24" height="24">
+   <properties>
+    <property name="defeatDialog">[{
+    "text":"*With a snarl of pain, the demon collapses to the floor.* \n Congratulations, mortal, you've bested me. In exchange for my life, I offer a lesson - the same killing power I wield.",
+    "options":[{ 
+	"name":"I have no need for power from something as vile as you. Die!",  
+	"text":"*The demon's eyes widen in fear.* \n No! I will not be destroyed by- \n *A final blast of power reduces him to mana in the air of this place, and something clatters to the ground. A holy symbol of this place - or rather, what it once was. As the unholy energy around it fades, you can still feel magic coursing through it.*"
+	"options":[{
+		"name":"End",
+		"action":[{"addItem":"Hallowed Sigil"},{"deleteMapObject":116}]
+		}]
+   	},
+	{ 
+	"name":"If you knew anything worth teaching me directly, I wouldn't have been able to defeat you.",  
+	"text":"*The demon's eyes widen in fear.* \n No! I will not be destroyed by- \n *A final blast of power reduces him to mana in the air of this place, and something clatters to the ground. A holy symbol of this place - or rather, what it once was. As the unholy energy around it fades, you can still feel magic coursing through it.*"
+	"options":[{
+		"name":"End",
+		"action":[{"addItem":"Hallowed Sigil"},{"deleteMapObject":116}]
+		}]
+    	},
+	{ 
+	"name":"...Very well, even a monster like you deserves mercy. *Once.*",  
+	"text":"*The demon smiles, moving his hand in an arcane gesture.* \n *As you unconsciously mimic it, you feel a dark, repulsive power crystallize in your hand. \n *The demon smiles as he begins to fade into a cloud of smoke.* \n Very well, mortal. My power is yours to wield...until next time."
+	"options":[{
+		"name":"End",
+		"action":[{"addItem":"Unhallowed Sigil"},{"deleteMapObject":116}]
+		}]
+    	},
+	{ 
+	"name":"As you should. I'll take your offer.",  
+	"text":"*The demon smiles, moving his hand in an arcane gesture.* \n *As you unconsciously mimic it, you feel a dark, repulsive power crystallize in your hand. \n *The demon smiles as he begins to fade into a cloud of smoke.* \n Very well, mortal. My power is yours to wield...until next time."
+	"options":[{
+		"name":"End",
+		"action":[{"addItem":"Unhallowed Sigil"},{"deleteMapObject":116}]
+		}]
+    }]
+}]
+</property>
+    <property name="effect">{ "startBattleWithCard": [ "Marble Diamond|7ED", "Charcoal Diamond|7ED", "Edgewalker|SCG", "Righteous War|VIS", "Purgatory|MIR" ] }</property>
+    <property name="enemy" value="Valyx the Tormentor" />
+   </properties>
+  </object>
+ </objectgroup>
+</map>

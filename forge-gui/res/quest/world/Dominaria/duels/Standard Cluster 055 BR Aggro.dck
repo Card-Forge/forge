@@ -1,0 +1,34 @@
+[metadata]
+Name=BR Aggro
+Deck Type=constructed
+Title=BR Aggro
+Description=BR Aggro
+Difficulty=Easy
+Icon=Asanbosam
+[Main]
+3 Aethersphere Harvester
+4 Bomat Courier
+2 Canyon Slough
+4 Dragonskull Summit
+4 Dread Wanderer
+4 Earthshaker Khenra
+4 Fatal Push
+4 Hazoret the Fervent
+2 Ifnir Deadlands
+3 Mountain
+1 Mountain
+1 Mountain
+4 Night Market Lookout
+2 Pia Nalaar
+4 Scrapheap Scrounger
+4 Swamp
+1 Swamp
+4 Swamp
+1 Swamp
+4 Unlicensed Disintegration
+[Sideboard]
+3 Abrade
+2 Bontu's Last Reckoning
+4 Duress
+1 Ravenous Chupacabra
+1 Vraska's Contempt

@@ -2,7 +2,7 @@ Name:Into the Flood Maw
 ManaCost:U
 Types:Instant
 K:Gift
-SVar:GiftAbility:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_fish | TokenTapped$ True | TokenOwner$ Promised | LockTokenScript$ True | GiftDescription$ a tapped Fish
+SVar:GiftAbility:DB$ Token | TokenScript$ u_1_1_fish | TokenTapped$ True | TokenOwner$ Promised | LockTokenScript$ True | GiftDescription$ a tapped Fish
 A:SP$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand | TargetMin$ X | TargetMax$ X | SubAbility$ DBChangeZone | SpellDescription$ Return target creature an opponent controls to its owner's hand. If the gift was promised, instead return target nonland permanent an opponent controls to its owner's hand.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Origin$ Battlefield | Destination$ Hand | TargetMin$ Y | TargetMax$ Y | AITgts$ !Creature
 SVar:X:Count$PromisedGift.0.1

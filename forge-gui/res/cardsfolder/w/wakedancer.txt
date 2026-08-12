@@ -2,7 +2,7 @@ Name:Wakedancer
 ManaCost:2 B
 Types:Creature Human Shaman
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ Morbid — When CARDNAME enters, if a creature died this turn, create a 2/2 black Zombie creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | Execute$ TrigToken | TriggerDescription$ Morbid — When CARDNAME enters, if a creature died this turn, create a 2/2 black Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You
 SVar:Morbid:Count$Morbid.1.0
 Oracle:Morbid — When Wakedancer enters, if a creature died this turn, create a 2/2 black Zombie creature token.

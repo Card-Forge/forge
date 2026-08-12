@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Storm
+Title=Storm
+Icon=Storm.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/Watanabe_Tomio_-_Affinity_(Modern,_#1523497)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+4 Thought Monitor
+4 Sojourner's Companion
+4 Ornithopter
+4 Memnite
+4 Frogmite
+1 Aether Spellbomb
+1 Shadowspear
+2 Welding Jar
+4 Cranial Plating
+4 Springleaf Drum
+4 Forging the Anchor
+4 Thoughtcast
+4 Urza's Saga
+3 Treasure Vault
+4 Silverbluff Bridge
+4 Mistvault Bridge
+4 Darksteel Citadel
+[Sideboard]
+2 Grafdigger's Cage
+2 Hurkyl's Recall
+3 Tormod's Crypt
+4 Damping Sphere
+4 Metallic Rebuke
