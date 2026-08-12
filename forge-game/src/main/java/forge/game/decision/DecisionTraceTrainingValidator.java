@@ -21,7 +21,8 @@ public final class DecisionTraceTrainingValidator {
         switch (result.getKind()) {
         case CHOSEN:
             final boolean nativeMapped = result.isNativeCallbackCompleted() && result.isMappingAttempted();
-            final boolean externalChosen = request.getDecisionType() == DecisionType.CONFIRMATION
+            final boolean externalChosen = (request.getDecisionType() == DecisionType.CONFIRMATION
+                    || request.getDecisionType() == DecisionType.TARGET)
                     && !result.isNativeCallbackCompleted() && !result.isMappingAttempted();
             return !request.isForced() && (nativeMapped || externalChosen)
                     && request.getLegalCandidates().contains(selected);

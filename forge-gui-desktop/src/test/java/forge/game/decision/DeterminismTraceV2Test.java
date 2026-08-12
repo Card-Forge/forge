@@ -2,7 +2,10 @@ package forge.game.decision;
 
 import forge.ai.AITest;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 import forge.util.DeterminismAuditRandom;
 import org.testng.annotations.Test;
 
@@ -86,6 +89,27 @@ public class DeterminismTraceV2Test extends AITest {
             assertFalse(result.isNativeCallbackCompleted());
             assertFalse(result.isMappingAttempted());
             assertFalse(DecisionTraceTrainingValidator.isBCPolicySample(handle.getRequestRecord(), result));
+        } finally {
+            fixture.finishAndDelete();
+        }
+    }
+
+    @Test
+    public void externalTargetChoiceRequiresFalseNativeAndMappingFlagsAndIsNotBcSample() throws Exception {
+        final Fixture fixture = attachTrace();
+        try {
+            final DecisionRequest request = targetRequest(fixture);
+            final DeterminismTrace.RequestHandle handle = recordTarget(fixture, request);
+            final LegalCandidate selected = request.getCandidates().get(0);
+            final DecisionTraceRequestRecord requestRecord = handle.getRequestRecord();
+            final DecisionTraceResultRecord external = chosenResult(requestRecord, selected, false, false);
+
+            assertTrue(DecisionTraceTrainingValidator.isHistoryValid(requestRecord, external));
+            assertFalse(DecisionTraceTrainingValidator.isBCPolicySample(requestRecord, external));
+            assertFalse(DecisionTraceTrainingValidator.isHistoryValid(requestRecord,
+                    chosenResult(requestRecord, selected, true, false)));
+            assertFalse(DecisionTraceTrainingValidator.isHistoryValid(requestRecord,
+                    chosenResult(requestRecord, selected, false, true)));
         } finally {
             fixture.finishAndDelete();
         }
@@ -197,6 +221,41 @@ public class DeterminismTraceV2Test extends AITest {
 
     private DeterminismTrace.RequestHandle record(final Fixture fixture, final DecisionRequest request) {
         return DeterminismTrace.recordRequest(fixture.game, fixture.player.getId(), request, "KEEP_OR_REDRAW", 0);
+    }
+
+    private DeterminismTrace.RequestHandle recordTarget(final Fixture fixture, final DecisionRequest request) {
+        return DeterminismTrace.recordRequest(fixture.game, fixture.player.getId(), request,
+                "TRIGGERED_TARGET", 0);
+    }
+
+    private DecisionRequest targetRequest(final Fixture fixture) {
+        final Player chooser = fixture.player;
+        final Player opponent = fixture.game.getPlayers().stream()
+                .filter(player -> player != chooser)
+                .findFirst()
+                .orElseThrow();
+        final Card source = addCardToZone("Dark Banishing", chooser, ZoneType.Hand);
+        final SpellAbility ability = source.getSpellAbilities().stream()
+                .filter(SpellAbility::usesTargeting)
+                .findFirst()
+                .orElseThrow();
+        ability.setActivatingPlayer(chooser);
+        addCard("Runeclaw Bear", opponent);
+        addCard("Llanowar Elves", opponent);
+
+        final TargetDecisionProvider.Generation generation = new TargetDecisionProvider()
+                .generateTargetRequest(ability, chooser, null);
+        assertEquals(generation.getStatus(), TargetDecisionProvider.Status.DECISION);
+        assertFalse(generation.getRequest().isForced());
+        return generation.getRequest();
+    }
+
+    private static DecisionTraceResultRecord chosenResult(final DecisionTraceRequestRecord request,
+            final LegalCandidate selected, final boolean nativeCallbackCompleted,
+            final boolean mappingAttempted) {
+        return new DecisionTraceResultRecord(request.getTraceRequestIndex(), DecisionTraceResultKind.CHOSEN,
+                selected.getSemanticKey(), nativeCallbackCompleted, mappingAttempted,
+                false, false, false);
     }
 
     private Fixture attachTrace() throws Exception {

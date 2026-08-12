@@ -1,6 +1,6 @@
 # FRL-02K — Confirmation Attribution and Semantic Boundary Audit
 
-Status: A3 audit retained; FRL-02K-B1 Gelectrode production addendum PASS; FRL-02K-C1 ChangesZone projection evidence PASS with C1R semantic corrections recorded. Global CONFIRMATION remains OPEN.
+Status: A3 audit retained; FRL-02K-B1 Gelectrode production addendum PASS; FRL-02K-C1 ChangesZone projection evidence PASS with C1R semantic corrections recorded; FRL-02K-C2A exact Blood Operative ETB TARGET profile SUPPORTED / PASS. Global triggered TARGET, Blood CONFIRMATION, and global CONFIRMATION remain OPEN.
 
 Audit date: 2026-08-11 (historical A1/A2/A3 evidence begins 2026-08-10)
 
@@ -11,6 +11,24 @@ Audit worktree: `C:\forgeAI-confirmation`
 Branch: `frl/02k-confirmation-boundary`
 
 Architecture authority: `docs/AI-ML DOCS/ML_STRATEGY.md`
+
+## Current authority (R3)
+
+The following is the current C2A authority. Sections 29.19 and 29.20 retain the pre-C2A C2 disposition for historical traceability only and do not override this status.
+
+| Boundary | Current authority |
+|---|---|
+| `FRL-02K-C2A` | `SUPPORTED / PASS` for the exact Blood Operative ETB `TARGET` profile only. |
+| `resolver == null` | Native Forge ownership is preserved. |
+| `resolver != null` | Only the exact Blood profile is externally owned. All other player-owned targeted triggers fail closed; there is no Forge-AI fallback. |
+| `global triggered TARGET` | `OPEN` |
+| `Blood CONFIRMATION` | `OPEN` |
+| `global CONFIRMATION` | `OPEN` |
+| Agent completeness | Blood is not agent-complete; only the exact ETB `TARGET` profile is supported, and the later Blood confirmation remains open. |
+
+Reference set: [C2A design/spec](../superpowers/specs/2026-08-11-frl-02k-c2a-triggered-target-provider-seam-design.md), [C2A implementation plan](../superpowers/plans/2026-08-11-frl-02k-c2a-triggered-target-provider-seam.md), and [C2A audit](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md).
+
+The recorded current validation evidence is the audit's [evidence matrix](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#6-evidence-matrix) and [exact Task 12 commands](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#61-final-task-12-exact-commands). This central-ledger update adds no new test result.
 
 Determinism and safety authority: `docs/AI-ML DOCS/FRL_02K0_DETERMINISM_GATE_REPORT.md`
 
@@ -2226,7 +2244,7 @@ production implementation approval and not a zero-unsupported result.
 
 **FRL-02K-C1 audit verdict: `FRL_02K_C1_PASS` (evidence retained; C1R interpretation corrected).**
 
-## 29. FRL-02K-C2 - Triggered TARGET Ownership and Stack-Time Decision Seam Audit
+## 29. FRL-02K-C2 - Triggered TARGET Ownership and Stack-Time Decision Seam Audit (historical C2/C2R record; superseded by C2A)
 
 ### 29.1 Gate, checkpoint, and scope
 
@@ -2603,9 +2621,9 @@ provider audit adds no admission profile and does not change the zero-unsupporte
 `mvn -pl forge-gui-desktop -am -DskipTests package` and `validate` both passed; validate reported zero
 Checkstyle violations in all six reactor modules.
 
-### 29.19 Recommended next milestone and blockers
+### 29.19 Historical C2 disposition: recommended next milestone and blockers (superseded by C2A)
 
-[BLOCKER] The next safe milestone is `FRL-02K-C2A IMPLEMENT_TRIGGERED_TARGET_PROVIDER_SEAM`, with priority:
+[HISTORICAL C2 DISPOSITION] At the C2 checkpoint, the next safe milestone was `FRL-02K-C2A IMPLEMENT_TRIGGERED_TARGET_PROVIDER_SEAM`, with priority:
 
 1. Split triggered target preparation from `brains.doTrigger` for the external-owner path.
 2. Call the existing provider on the underlying triggered `SpellAbility` with explicit chooser and null
@@ -2614,15 +2632,16 @@ Checkstyle violations in all six reactor modules.
    confirmation evaluation as separate regression paths.
 4. Only after that seam is reviewed, audit/implement a Blood confirmation slice.
 
-`REMOVE_AI_TARGET_OWNERSHIP_FROM_TRIGGER_PREPARATION` is the implementation substance of C2A, not an approved C2
-change. Blood production support remains blocked until that seam has architecture approval. No production
-correctness fix was required to complete C2.
+At that historical C2 checkpoint, `REMOVE_AI_TARGET_OWNERSHIP_FROM_TRIGGER_PREPARATION` was the implementation
+substance of C2A, not an approved C2 change. Blood production support remained blocked until that seam had
+architecture approval. The seam is now the narrow, validated C2A profile recorded in the current authority above;
+no production correctness fix was required to complete C2.
 
-### 29.20 C2 verification verdict
+### 29.20 Historical C2 verification verdict (superseded by C2A)
 
-[BESTAETIGT] Target A origin, timing, current owner, B non-authority, C correlation, Human/AI parity,
+[HISTORICAL C2 VERDICT] Target A origin, timing, current owner, B non-authority, C correlation, Human/AI parity,
 provider compatibility, native 0-target no-stack disposition, 0/1/many behavior, null continuation,
 hidden-information boundary, state/RNG neutrality, and the next milestone are all established for the requested
 Blood slice. Confirmation-time target visibility remains unproven; C2 does not establish a mandatory history event.
 
-**FRL-02K-C2 audit verdict: `FRL_02K_C2_PASS` (audit-only; Blood TARGET ownership remains blocked for production).**
+**Historical FRL-02K-C2 audit verdict: `FRL_02K_C2_PASS` (audit-only; its pre-C2A Blood TARGET production blocker is superseded by the current FRL-02K-C2A exact-profile status above).**

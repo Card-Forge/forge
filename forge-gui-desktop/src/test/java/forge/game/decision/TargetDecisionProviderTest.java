@@ -24,6 +24,26 @@ public class TargetDecisionProviderTest extends AITest {
     private final TargetDecisionProvider provider = new TargetDecisionProvider();
 
     @Test
+    public void requestIdsAreMonotonicPerProviderAndRestartForIndependentProviders() {
+        final Game game = initAndCreateGame();
+        final Player chooser = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final SpellAbility ability = targetAbility("Dark Banishing", chooser);
+        addCard("Runeclaw Bear", opponent);
+        addCard("Llanowar Elves", opponent);
+
+        final TargetDecisionProvider firstProvider = new TargetDecisionProvider();
+        final TargetDecisionProvider secondProvider = new TargetDecisionProvider();
+        final DecisionRequest first = firstProvider.generateTargetRequest(ability, chooser, null).getRequest();
+        final DecisionRequest second = firstProvider.generateTargetRequest(ability, chooser, null).getRequest();
+        final DecisionRequest independent = secondProvider.generateTargetRequest(ability, chooser, null).getRequest();
+
+        assertEquals(first.getRequestId(), 0L);
+        assertEquals(second.getRequestId(), 1L);
+        assertEquals(independent.getRequestId(), 0L);
+    }
+
+    @Test
     public void requiredCreatureTargetContainsEveryForgeLegalNonBlackCreature() {
         final Game game = initAndCreateGame();
         final Player chooser = game.getPlayers().get(1);

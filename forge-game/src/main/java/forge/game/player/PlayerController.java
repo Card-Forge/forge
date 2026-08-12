@@ -18,6 +18,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
 import forge.game.decision.ConfirmationDecisionProvider;
+import forge.game.decision.TargetDecisionProvider;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
@@ -78,6 +79,8 @@ public abstract class PlayerController {
     protected final Player player;
     protected final LobbyPlayer lobbyPlayer;
     private final ConfirmationDecisionProvider confirmationDecisionProvider = new ConfirmationDecisionProvider();
+    private final TargetDecisionProvider targetDecisionProvider = new TargetDecisionProvider();
+    private TargetDecisionProvider.Resolver targetDecisionResolver;
 
     public PlayerController(Game game0, Player p, LobbyPlayer lp) {
         gameView = game0.getView();
@@ -95,6 +98,15 @@ public abstract class PlayerController {
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
     public final ConfirmationDecisionProvider getConfirmationDecisionProvider() {
         return confirmationDecisionProvider;
+    }
+    public final TargetDecisionProvider getTargetDecisionProvider() {
+        return targetDecisionProvider;
+    }
+    public final TargetDecisionProvider.Resolver getTargetDecisionResolver() {
+        return targetDecisionResolver;
+    }
+    public final void setTargetDecisionResolver(final TargetDecisionProvider.Resolver resolver) {
+        targetDecisionResolver = resolver;
     }
 
     public void tempShowCards(final Iterable<Card> cards) { } // show cards in UI until ended

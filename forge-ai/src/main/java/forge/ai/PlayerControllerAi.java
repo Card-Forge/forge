@@ -24,7 +24,9 @@ import forge.game.decision.ChangesZoneAuditDiagnostics;
 import forge.game.decision.DownstreamCallbackFamily;
 import forge.game.decision.MulliganDiagnostics;
 import forge.game.decision.PriorityActionDiagnostics;
+import forge.game.decision.TargetDecisionProvider;
 import forge.game.decision.TriggeredTargetAuditDiagnostics;
+import forge.game.decision.TriggeredTargetDecisionCoordinator;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -63,6 +65,8 @@ import java.util.stream.Collectors;
 public class PlayerControllerAi extends PlayerController {
     private static final MulliganDiagnostics MULLIGAN_DIAGNOSTICS = MulliganDiagnostics.global();
     private final AiController brains;
+    private final TriggeredTargetDecisionCoordinator triggeredTargetDecisionCoordinator =
+            new TriggeredTargetDecisionCoordinator();
 
     private boolean pilotsNonAggroDeck = false;
 
@@ -1359,8 +1363,18 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
+        final TargetDecisionProvider.Resolver resolver = getTargetDecisionResolver();
+        for (final SpellAbility sa : activePlayerSAs) {
+            enforceTriggeredTargetBoundary(sa, resolver);
+        }
         for (final SpellAbility sa : orderSimultaneousSa(activePlayerSAs)) {
-            if (sa.isTrigger() && !sa.isCopied()) {
+            triggeredTargetDecisionCoordinator.enforceExternalTargetBoundary(sa,
+                    resolver);
+            if (resolver == null && triggeredTargetDecisionCoordinator.isUnclassifiableForRouting(sa)) {
+                // Preserve resolver-null native ownership, but never stack-insert an unclassifiable malformed cycle.
+                continue;
+            }
+            if (isTriggeredForC2aRouting(sa, resolver) && !sa.isCopied()) {
                 if (prepareSingleSa(sa.getHostCard(), sa, true)) {
                     ComputerUtil.playStack(sa, player, getGame());
                 }
@@ -1390,15 +1404,117 @@ public class PlayerControllerAi extends PlayerController {
         }
     }
 
+    protected boolean invokeNativeTriggeredTarget(final SpellAbility underlying, final boolean mandatory) {
+        return brains.doTrigger(underlying, mandatory);
+    }
+
+    private void enforceTriggeredTargetBoundary(final SpellAbility root,
+            final TargetDecisionProvider.Resolver resolver) {
+        final Set<SpellAbility> visited = Collections.newSetFromMap(new IdentityHashMap<>());
+        final boolean triggeredRoot;
+        if (root == null) {
+            triggeredRoot = false;
+        } else {
+            // Coordinator admission performs the cycle-safe parent validation before this recursive trigger lookup.
+            triggeredTargetDecisionCoordinator.enforceExternalTargetBoundary(root, resolver);
+            triggeredRoot = isTriggeredForC2aRouting(root, resolver);
+        }
+        enforceTriggeredTargetBoundary(root, resolver, visited, triggeredRoot);
+    }
+
+    private boolean isTriggeredForC2aRouting(final SpellAbility ability,
+            final TargetDecisionProvider.Resolver resolver) {
+        // External ownership is fail-closed before this query; native routing keeps acyclic trigger semantics.
+        return resolver != null ? ability.isTrigger()
+                : triggeredTargetDecisionCoordinator.isTriggerForRouting(ability);
+    }
+
+    private void enforceTriggeredTargetBoundary(final SpellAbility current,
+            final TargetDecisionProvider.Resolver resolver, final Set<SpellAbility> visited,
+            final boolean triggeredAncestor) {
+        if (current == null || !visited.add(current)) {
+            return;
+        }
+
+        triggeredTargetDecisionCoordinator.enforceExternalTargetBoundary(current, resolver, triggeredAncestor);
+        enforceTriggeredTargetChildren(current, resolver, visited, triggeredAncestor);
+        if (current instanceof WrappedAbility wrapper) {
+            // WrappedAbility delegates most child edges to its live ability but not the additional single-ability map.
+            // Traverse the delegate's edges without preflighting the admitted live ability as a separate node.
+            enforceTriggeredTargetChildren(wrapper.getWrappedAbility(), resolver, visited, triggeredAncestor);
+        }
+    }
+
+    private void enforceTriggeredTargetChildren(final SpellAbility owner,
+            final TargetDecisionProvider.Resolver resolver, final Set<SpellAbility> visited,
+            final boolean triggeredAncestor) {
+        if (owner == null) {
+            return;
+        }
+        enforceTriggeredTargetBoundary(owner.getSubAbility(), resolver, visited, triggeredAncestor);
+        for (final SpellAbility child : owner.getAdditionalAbilities().values()) {
+            enforceTriggeredTargetBoundary(child, resolver, visited, triggeredAncestor);
+        }
+        for (final List<AbilitySub> children : owner.getAdditionalAbilityLists().values()) {
+            for (final AbilitySub child : children) {
+                enforceTriggeredTargetBoundary(child, resolver, visited, triggeredAncestor);
+            }
+        }
+    }
+
     private boolean prepareSingleSa(final Card host, SpellAbility sa, boolean isMandatory) {
+        final TargetDecisionProvider.Resolver resolver = getTargetDecisionResolver();
+        enforceTriggeredTargetBoundary(sa, resolver);
         if (sa.getApi() == ApiType.Charm) {
             if (!CharmEffect.makeChoices(sa)) {
                 return false;
             }
+            enforceTriggeredTargetBoundary(sa, resolver);
             if (!sa.hasParam("Random")) {
                 return true;
             }
             sa = sa.getSubAbility();
+        }
+        triggeredTargetDecisionCoordinator.enforceExternalTargetBoundary(sa, resolver);
+        if (sa instanceof WrappedAbility wrapper) {
+            final TriggeredTargetDecisionCoordinator.Preparation preparation =
+                    triggeredTargetDecisionCoordinator.prepare(wrapper, wrapper.getDecider(),
+                            getTargetDecisionProvider(), resolver);
+            switch (preparation.getStatus()) {
+            case NO_STACK:
+                TriggeredTargetAuditDiagnostics.recordTargetPreparation(sa,
+                        "PlayerControllerAi.prepareSingleSa->TriggeredTargetDecisionCoordinator", false);
+                return false;
+            case PREPARED:
+                TriggeredTargetAuditDiagnostics.recordTargetPreparation(sa,
+                        "PlayerControllerAi.prepareSingleSa->TriggeredTargetDecisionCoordinator", true);
+                return true;
+            case NATIVE: {
+                final boolean result = invokeNativeTriggeredTarget(wrapper.getWrappedAbility(), isMandatory);
+                TriggeredTargetAuditDiagnostics.recordTargetPreparation(sa,
+                        "PlayerControllerAi.prepareSingleSa->PlayerControllerAi.invokeNativeTriggeredTarget", result);
+                return result;
+            }
+            case NATIVE_WITH_TEACHER_CAPTURE: {
+                final boolean nativeResult = invokeNativeTriggeredTarget(wrapper.getWrappedAbility(), isMandatory);
+                TriggeredTargetAuditDiagnostics.recordTargetPreparation(sa,
+                        "PlayerControllerAi.prepareSingleSa->PlayerControllerAi.invokeNativeTriggeredTarget",
+                        nativeResult);
+                return triggeredTargetDecisionCoordinator.completeNative(preparation, nativeResult);
+            }
+            case NOT_APPLICABLE:
+                break;
+            case NATIVE_UNSUPPORTED_TARGETED_TRIGGER:
+                if (resolver == null && triggeredTargetDecisionCoordinator.isUnclassifiableForRouting(sa)) {
+                    TriggeredTargetAuditDiagnostics.recordTargetPreparation(sa,
+                            "PlayerControllerAi.prepareSingleSa->TriggeredTargetDecisionCoordinator", false);
+                    return false;
+                }
+                break;
+            default:
+                throw new IllegalStateException("Unhandled triggered target preparation status: "
+                        + preparation.getStatus());
+            }
         }
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);

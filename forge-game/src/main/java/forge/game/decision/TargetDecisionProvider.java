@@ -28,6 +28,11 @@ import java.util.Set;
  * {@code TargetChoices}. It does not score, simulate, or invoke Forge AI.</p>
  */
 public final class TargetDecisionProvider {
+    @FunctionalInterface
+    public interface Resolver {
+        LegalCandidate resolve(DecisionRequest request);
+    }
+
     public enum Status {
         DECISION,
         COMPLETE,
