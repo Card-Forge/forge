@@ -30,6 +30,12 @@ Reference set: [C2A design/spec](../superpowers/specs/2026-08-11-frl-02k-c2a-tri
 
 The recorded current validation evidence is the audit's [evidence matrix](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#6-evidence-matrix) and [exact Task 12 commands](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#61-final-task-12-exact-commands). This central-ledger update adds no new test result.
 
+### FRL-02K-D current remainder closure (2026-08-12)
+
+The focused [FRL-02K-D remainder audit](FRL_02K_D_CONFIRMATION_REMAINDER_AUDIT.md) re-measured the canonical controlled workloads and closes the current v0 boolean-callback attribution ledger. The reactive `Izzet Guild Kit vs Dimir Guild Kit` run produced 41 callbacks: `confirmTrigger=26`, `confirmAction=8`, `chooseBinary=2`, and `payCostToPreventEffect=5`. The proactive comparison produced 24 callbacks, all `payCostToPreventEffect`. The exact rows reconcile to those totals.
+
+The resulting milestone verdict is `FRL_02K_D_PASS`. Gelectrode B1 and the exact C2A Blood ETB `TARGET` profile remain supported. Blood's later ETB yes/no choice is the one exact next candidate, `FRL-02K-D1`, subject to a narrow public Target-A projection; Blood Surveil is `PAYMENT`, Lazav's trigger-level surface is a duplicate engine surface owned by its clone decision, Cipher-derived play is caller-owned, and Stitch in Time is `FLIP_CALL`. Global CONFIRMATION remains open. Historical sections below remain historical and do not override the D ledger.
+
 Determinism and safety authority: `docs/AI-ML DOCS/FRL_02K0_DETERMINISM_GATE_REPORT.md`
 
 Historical primary recommendation after A2: `NO_SAFE_V0_YET`
