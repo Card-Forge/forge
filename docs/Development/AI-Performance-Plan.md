@@ -23,6 +23,38 @@ Two existing measurements are particularly relevant:
 
 Historical PR [#11160](https://github.com/Card-Forge/forge/pull/11160) includes profiler stacks in which `Card.canTap`/`canUntap` reached `ReplacementHandler.getReplacementList` and full-game traversal thousands of times through mana grouping and creature evaluation. Several targeted fixes from that work are already merged. The remaining broad discovery path is still observable, but its current share requires a new profile.
 
+## Implementation status
+
+This document is the plan this repository is executing, so it now also records what each phase
+actually did. Sections below keep their original analysis of the pinned revision; where the code has
+since moved, an **Implemented** note says how. Phases 2 to 5 are untouched.
+
+| Phase | State | Where |
+|---|---|---|
+| 0 — measurement foundation | Done | [AI-Performance-Measurement.md](AI-Performance-Measurement.md) |
+| 1 — low-risk work elimination | Done, with two design changes and two deferrals | [AI-Performance-Phase1.md](AI-Performance-Phase1.md) |
+| 2 to 5 | Not started | — |
+
+Three findings from phase 1 change what a later phase should assume:
+
+1. **The baseline-invariance premise in §3.1 and §10.1 is false at decision scope.** The shadow
+   assertion the plan required was written first and it failed: on a full board with recursive
+   simulation, the score evaluated at the top of `chooseSpellAbilityToPlay` no longer matches a fresh
+   evaluation by the time the branches run, because deciding whether each candidate can be played and
+   paid for touches state the evaluator reads. The plan's fallback — narrow the scope or abandon —
+   was taken: reuse is scoped to the branches of one candidate. Any later work that wants to treat an
+   evaluator result as stable across a decision has to prove that separately.
+2. **A per-controller evaluation worker is not viable** (§3.6). Every simulated game copy builds its
+   own players and controllers, and the AI in a copy takes priority while an outer decision is still
+   on the stack. One worker per controller deadlocks the nested decision; one per copy parks a thread
+   per copy. This also means "one AI decision at a time" is not a safe assumption for §7 concurrency
+   work.
+3. **Recursive simulation has a pre-existing game-copy inaccuracy.** A fixture with creatures in play
+   before combat fails `GameSimulator`'s own copy-score check on the unmodified source: the copy comes
+   back with a creature missing on each side and the opponent two life adrift. This is not something
+   phase 1 introduced or fixed, but it bounds what a `GameCopier` redesign (§10.9) can be validated
+   against, and it deserves its own investigation.
+
 ## 1. AI architecture overview
 
 ### 1.1 Live priority-to-action flow
@@ -49,6 +81,11 @@ PhaseHandler.mainLoopStep
 [`PlayerControllerAi`](https://github.com/Card-Forge/forge/blob/e3c5554c79e6e6f225697b821d36db1863eb467d/forge-ai/src/main/java/forge/ai/PlayerControllerAi.java#L821-L833) is the game-controller adapter. [`AiController.chooseSpellAbilityToPlay`](https://github.com/Card-Forge/forge/blob/e3c5554c79e6e6f225697b821d36db1863eb467d/forge-ai/src/main/java/forge/ai/AiController.java#L1357-L1383) clears `AiCache`, resets decision memories, and selects the full-simulation or conventional path. The conventional path builds and orders the candidates in [`getSpellAbilityToPlay` and `chooseSpellAbilityToPlayFromList`](https://github.com/Card-Forge/forge/blob/e3c5554c79e6e6f225697b821d36db1863eb467d/forge-ai/src/main/java/forge/ai/AiController.java#L1520-L1726).
 
 The latter is not parallel candidate evaluation. It creates a `FutureTask`, starts a fresh `Thread("Game AI Eval")`, and performs the entire candidate loop in that single worker. The caller waits, times out cooperatively, joins, and retains a deprecated `Thread.stop()` fallback. This is a watchdog boundary, not multicore scaling.
+
+> **Implemented (phase 1, §3.6).** The boundary and its semantics are unchanged, but the thread per
+> decision is gone: `AiEvaluationExecutor` runs the candidate loop on a pooled daemon worker. The
+> `Thread.stop()` fallback stays, because the loop still only honours cancellation between abilities;
+> a run that ignores it keeps its thread and never returns to the pool, as before.
 
 ### 1.2 Candidate generation, legality, scoring, targeting, mana, and costs
 
@@ -95,6 +132,11 @@ Attack declaration follows `PhaseHandler.declareAttackersTurnBasedAction -> Play
 Blocking is multi-pass. [`makeGangBlocks`](https://github.com/Card-Forge/forge/blob/e3c5554c79e6e6f225697b821d36db1863eb467d/forge-ai/src/main/java/forge/ai/AiBlockController.java#L368-L525) explores single blockers, pairs, and triples for each attacker, interleaving creature/combat/static queries. Its triple search is `O(A × B²)` in available blockers, excluding the cost of those queries. This aligns with user reports of severe token-combat stalls ([#6985](https://github.com/Card-Forge/forge/issues/6985), [#9000](https://github.com/Card-Forge/forge/issues/9000)), but those reports do not prove which method dominates.
 
 There is already concurrency in [`AiAttackController.declareAttackers`](https://github.com/Card-Forge/forge/blob/e3c5554c79e6e6f225697b821d36db1863eb467d/forge-ai/src/main/java/forge/ai/AiAttackController.java#L876-L959): one `CompletableFuture.supplyAsync` per attacker on the common pool. Tasks read shared combat/requirement objects and can call `combat.addAttacker`; only that individual method is synchronized. A timeout completes the aggregate future but does not cancel unfinished tasks. This code is not proof that attack evaluation is safely parallel; it is a correctness and determinism risk that should be tested or removed before broader concurrency work.
+
+> **Implemented (phase 1, §3.7).** Removed. The loop runs serially in attacker order, so the
+> declaration is reproducible and no task can outlive the method. A failing attacker is still skipped
+> rather than failing the whole declaration, which is what the discarded `exceptionally` handler did.
+> There is now **no** concurrency in AI attack evaluation, and §7 should not treat any as precedent.
 
 ### 1.5 Rules-derived state: triggers, replacements, statics, zones
 
@@ -232,6 +274,13 @@ These are the best first implementation candidates because they eliminate demons
 
 1. **Pass a verified reusable baseline `Score` into `GameSimulator`.** `SpellAbilityPicker` calculates `origGameScore`, but each `GameSimulator` constructor recalculates it. `Score` is observed to contain only two final integers. Candidate/choice setup does mutate `SpellAbility` metadata, however, so first add a shadow assertion that a freshly evaluated baseline remains equal before every branch. If the corpus proves that invariant, pass the immutable value in a simulation context and retain sampled debug validation. If it fails, scope reuse only between branches with the same evaluator-relevant setup or abandon it. The successful case removes evaluation and possible combat-lookahead copies per branch without changing its value.
 
+   > **Implemented, narrowed.** The shadow assertion was written first and it *failed*: the baseline
+   > taken at the top of `chooseSpellAbilityToPlay` does not survive candidate generation, so the
+   > `SimulationRoot`/whole-decision form of this is unsound. Reuse is instead scoped to the branches
+   > of one candidate — the first branch evaluates exactly where it always did, the rest take that
+   > value — via a fifth `GameSimulator` constructor parameter. The assertion ships and runs in every
+   > assertion-enabled build.
+
 2. **Add thresholded target counting.** Most AI callers only need `candidateCount >= minTargets` or “any candidate”. Add a new method rather than changing `getNumCandidates` semantics:
 
    ```java
@@ -241,15 +290,50 @@ These are the best first implementation candidates because they eliminate demons
 
    Traverse candidates in the same player/card order, apply the same validity predicate and duplicate behavior, and stop exactly at `required`. Replace only threshold consumers such as `ComputerUtilAbility.isFullyTargetable` and mandatory-target checks. Keep `getAllCandidates` for consumers that need order or members. This is equivalent because the caller observes only the boolean.
 
+   > **Implemented** as `TargetRestrictions.hasAtLeastCandidates(sa, required)`, migrating
+   > `ComputerUtilAbility.isFullyTargetable`, `AiController.canPlaySa`, `SpellAbilityAi.doTrigger`
+   > and `CharmEffect`. One correction to the sketch: the traversal must **not** return early before
+   > `applyTargetTextChanges`, which runs between the player and card passes and mutates `validTgts`
+   > that later readers depend on. The player pass therefore always completes.
+
 3. **Cache stable sort facts for one conventional decision.** Before sorting, calculate decision-wide facts (for example `aiHasNoCreatures`) once and lazily store per-`SpellAbility` facts in an `IdentityHashMap`: converted CMC, existing priority value, energy value, creature score, and flags. Keep the existing stable list order and comparator branches exactly. Do not “fix” suspicious comparator asymmetries in the same patch; a behavior parity trace must show the exact same ordered list.
+
+   > **Implemented** as `ComputerUtilAbility.SortFacts`, shared between both ordering passes so a
+   > creature's evaluation is paid for once per decision rather than once per comparison. The
+   > `saEvaluator` singleton still derives everything on demand, so other callers are untouched. The
+   > comparator asymmetries were left exactly as they are.
 
 4. **Use no-allocation traversal where the result is not retained.** Replace aggregate `Game.getCardsIn(zone)` materialization only in consumers that merely iterate and do not require a snapshot, indexing, sorting, or mutation. `Game.forEachCardInGame` is an existing precedent. Introduce an ordered zone visitor/iterator if a subset of zones is required. Preserve player and zone iteration order.
 
+   > **Deferred.** The roadmap in §12 gives this no phase 1 row, and §4.1 makes it conditional on an
+   > allocation profile selecting the call sites. Converting an aggregate zone query is per-call-site
+   > work — each consumer has to be audited for snapshot, indexing and mutation assumptions — so it
+   > belongs with the phase 2 allocation pass, after a profile says which call sites are worth it.
+
 5. **Reuse one structurally adjusted `Cost` within a single feasibility call.** `ComputerUtilCost.canPayCost` reaches both mana and additional-cost checks, which each invoke structural `CostAdjustment.adjust`. Add internal overloads accepting a previously adjusted `Cost`; still run the separate `ManaCostBeingPaid` adjustment. This must be guarded by tests because adjustment temporarily manipulates face-down state and other parameters. Scope reuse to one call stack; do not cache adjusted costs across mutations.
+
+   > **Implemented, guarded.** The mana check reports the adjustment it derived and
+   > `CostPayment.canPayAdjustedAdditionalCosts` takes it. The two adjustments are **not**
+   > unconditionally equal, which the plan anticipated: while it works out the mana cost,
+   > `calculateManaCost` temporarily points the host's `castFrom` at its current zone, and the
+   > adjustment reads that for commander tax and for a static's `AffectedZone` requirement. Reuse is
+   > declined where the adjustment can see that difference (a commander, a card that has been cast)
+   > and where the ability announces `NumTimes`. Every reuse is shadow-checked under assertions.
 
 6. **Replace decision-thread construction with a reusable single-thread executor.** This removes one OS-thread creation per priority decision while retaining the watchdog boundary. Use a named daemon `ThreadPoolExecutor(1,1)` owned by the AI/game lifecycle, a bounded queue, and cancellation. Remove `Thread.stop()` only after all evaluation loops honor interruption/cancellation; otherwise timeouts can leave mutation in progress. This is primarily a robustness/allocation improvement and is likely lower impact than the work-elimination items.
 
+   > **Implemented, as a shared pool rather than a per-controller worker.** A worker owned by one
+   > controller deadlocks a nested decision, and one owned by each controller parks a thread per game
+   > copy — every copy builds its own controllers, and the AI in a copy takes priority while an outer
+   > decision is still on the stack. `AiEvaluationExecutor` therefore pools workers process-wide,
+   > sized by actual concurrency. `Thread.stop()` was **not** removed, for the reason given here: the
+   > evaluation loop honours cancellation only between abilities.
+
 7. **Fix the existing forced-attacker futures before adding concurrency.** The low-risk correctness choice is to run that small loop serially. A behavior-preserving parallel rewrite is possible only after extracting a pure computation over an immutable snapshot and applying results serially in original attacker order. Current timed-out tasks can outlive the method and mutate shared combat; that should not remain as an assumed-safe foundation.
+
+   > **Implemented.** The loop is serial and in attacker order; the `CompletableFuture` fan-out, its
+   > aggregate timeout and the `synchronized (combat)` block are gone. A pure-computation parallel
+   > rewrite, if ever wanted, now starts from a clean serial baseline.
 
 ## 4. Allocation and GC optimizations
 
@@ -568,6 +652,34 @@ GameSimulator(SimulationController controller, SimulationRoot root) {
 
 Keep a compatibility constructor for tests/callers that do not already own a baseline. Compute the reusable value at the same serial point from which branch constructors currently observe the original game, and do not reuse it after evaluator-relevant mutation. The `Score` value itself is thread-safe because its two fields are final integers; that says nothing about the evaluator. Correctness test: constructor-supplied score must equal freshly evaluated score before every branch in a debug corpus, including pre-combat states that trigger lookahead and abilities whose setup changes targets, modes, X, or activating player.
 
+> **Implemented (phase 1), and the condition did not hold.** The shadow test above was built first
+> and it failed on a full board with recursive simulation: the score evaluated at the top of
+> `chooseSpellAbilityToPlay` no longer equalled a fresh evaluation by the time the branches ran,
+> because deciding whether each candidate can be played and paid for touches state the evaluator
+> reads. `SimulationRoot` was therefore not introduced. What shipped is narrower:
+>
+> ```java
+> // GameSimulator, fifth parameter; the four-argument constructor still evaluates for itself
+> GameSimulator(SimulationController controller, Game origGame, Player origAiPlayer,
+>         PhaseType advanceToPhase, Score knownOrigScore)
+>
+> // SpellAbilityPicker.evaluateSa: the first branch of a candidate evaluates the baseline,
+> // the rest take it
+> Score branchBaseline = null;
+> do {
+>     GameSimulator simulator = new GameSimulator(controller, game, player, phase, branchBaseline);
+>     if (!GameSimulator.COPY_STACK) {
+>         branchBaseline = simulator.getScoreForOrigGame();
+>     }
+>     ...
+> } while (choicesIterator.advance(lastScore));
+> ```
+>
+> The `COPY_STACK` guard matters: with a copied stack the simulator's baseline is the
+> post-resolution score, not the score of the game as it stands, so it must not be handed on. The
+> shadow check is kept as an `assert` inside the constructor, so it runs over the whole test suite
+> and costs nothing in a shipped build.
+
 ### 10.2 Add bounded target predicates
 
 **Existing:** `TargetRestrictions.getNumCandidates`, consumers in `ComputerUtilAbility.isFullyTargetable`, `SpellAbilityAi`, and charm/trigger checks.
@@ -838,6 +950,24 @@ The default pass criterion is **exact trace identity**. If actions differ, first
 | Phase 5 | P3 | In-process parallel independent games after global-state removal | Very high | Very high | High throughput, but process model may remain preferable | Multiple games in one heap | Yes |
 
 The gates matter: do not start Phase 3 because a machine has many cores, and do not start replacement/static registries before Phase 2 profiles show they remain dominant. Reprofile after each major work-elimination change because the hotspot distribution will move.
+
+### Phase 0 and 1 outcomes
+
+| Row | Outcome |
+|---|---|
+| P0 Pin fixtures/seeds/JVM; decision metrics, JFR events, traces, dashboards | **Done** (phase 0): `PerfProbe`, `PerfReport`, `DecisionTraceWriter`, `GameStateDigest`, `JfrPerfSink`, `forge bench` |
+| P0 Reproduce PR #11366 and #11160 evidence on current source | **Not done.** A timing run needs a machine that is not sharing CPU, which §11.2 is explicit about; the container this work was done in is not one. The runbook is in the phase 1 doc. #11366 additionally cannot be reproduced until its `CardState` cache exists, which is phase 2 P0 |
+| P0 Remove or make pure the forced-attacker futures; timeout regression test | **Done.** Serial in attacker order; covered by a repeat-declaration determinism test |
+| P1 Pass root `Score` into `GameSimulator` | **Done, narrowed to one candidate's branches.** The whole-decision form failed its shadow test — see §10.1 |
+| P1 Add `hasAtLeastCandidates` and migrate threshold-only callers | **Done.** Four callers migrated |
+| P1 Per-sort decision facts with exact ordered-output test | **Done.** `SortFacts`, shared across both ordering passes |
+| P2 Reuse one structural adjusted cost within `canPayCost` | **Done, guarded.** Declined where the two adjustments can see a different `castFrom`, or on `NumTimes` |
+| P2 Replace per-decision OS thread with lifecycle executor | **Done, as a shared pool.** Per-controller ownership is not viable — see §3.6 |
+| (§3.4) No-allocation traversal where the result is not retained | **Deferred to phase 2.** No phase 1 row here, and §4.1 gates it on an allocation profile |
+
+Parity for every shipped item was checked as exact trace identity against the merge base, on a
+conventional full-board turn and a full-simulation multi-branch turn: ordered decision traces and
+the final canonical state digests were byte-identical.
 
 ## 13. Expected overall improvement
 
