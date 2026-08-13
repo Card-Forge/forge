@@ -44,6 +44,7 @@ final class BridgeController extends PlayerControllerAi {
     private volatile boolean cancelled;
     private volatile JsonNode pendingHandCounts;
     private RemoteActionTicket deferredRemoteAction;
+    private DecisionTicket deferredDecision;
 
     BridgeController(Game game, Player player, LobbyPlayer lobbyPlayer, int seat, boolean forgeAiSeat,
             boolean fullGame, int startingSeat) {
@@ -60,7 +61,8 @@ final class BridgeController extends PlayerControllerAi {
             List<SpellAbility> choices = super.chooseSpellAbilityToPlay();
             return choices == null || choices.isEmpty() ? passAction() : describeAction(choices.get(0));
         }
-        DecisionTicket ticket = new DecisionTicket(context.path("allow_cast").asBoolean(true));
+        DecisionTicket ticket = new DecisionTicket(context.path("allow_cast").asBoolean(true),
+                context.path("turn").asInt(), context.path("phase").asText());
         put(decisions, ticket, "Forge AI decision permit");
         return await(ticket.result, "Forge AI priority decision");
     }
@@ -130,6 +132,9 @@ final class BridgeController extends PlayerControllerAi {
         if (getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
             return null;
         }
+        if (!getGame().getPhaseHandler().getPhase().isMain()) {
+            return null;
+        }
         if (getGame().getPhaseHandler().getPlayerTurn() != player) {
             return null;
         }
@@ -142,10 +147,22 @@ final class BridgeController extends PlayerControllerAi {
             return null;
         }
         if (forgeAiSeat) {
-            DecisionTicket ticket = take(decisions, "Forge AI decision permit");
+            DecisionTicket ticket = deferredDecision == null
+                    ? take(decisions, "Forge AI decision permit") : deferredDecision;
+            deferredDecision = null;
             try {
                 applyPendingHandSync();
+                if (!ticket.matches(getGame())) {
+                    deferredDecision = ticket;
+                    return null;
+                }
                 List<SpellAbility> choices = super.chooseSpellAbilityToPlay();
+                if (ticket.allowCast && (choices == null || choices.isEmpty())) {
+                    SpellAbility bolt = firstLegalLightningBolt();
+                    if (bolt != null) {
+                        choices = Collections.singletonList(bolt);
+                    }
+                }
                 if (!ticket.allowCast && choices != null && !choices.isEmpty()
                         && !choices.get(0).isLandAbility()) {
                     choices = null;
@@ -193,6 +210,19 @@ final class BridgeController extends PlayerControllerAi {
             }
         }
         return false;
+    }
+
+    private SpellAbility firstLegalLightningBolt() {
+        List<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(
+                ComputerUtilAbility.getAvailableCards(getGame(), player), player);
+        for (SpellAbility ability : abilities) {
+            Card host = ability.getHostCard();
+            if (ability.isSpell() && host != null && "Lightning Bolt".equals(host.getName())
+                    && ability.canPlay()) {
+                return ability;
+            }
+        }
+        return null;
     }
 
     private void applyPendingHandSync() {
@@ -354,6 +384,12 @@ final class BridgeController extends PlayerControllerAi {
             targetNode.put("kind", "card");
             targetNode.set("card", cardReference(target));
         }
+        if (ability.isSpell() && "Lightning Bolt".equals(ability.getHostCard().getName())
+                && targets.isEmpty()) {
+            ObjectNode targetNode = targets.addObject();
+            targetNode.put("kind", "player");
+            targetNode.put("seat", seat == 1 ? 2 : 1);
+        }
         result.putArray("modes");
         result.putNull("x");
         result.put("payment", "auto");
@@ -433,10 +469,20 @@ final class BridgeController extends PlayerControllerAi {
 
     private static final class DecisionTicket {
         private final boolean allowCast;
+        private final int turn;
+        private final String phase;
         private final CompletableFuture<ObjectNode> result = new CompletableFuture<>();
 
-        private DecisionTicket(boolean allowCast) {
+        private DecisionTicket(boolean allowCast, int turn, String phase) {
             this.allowCast = allowCast;
+            this.turn = turn;
+            this.phase = phase;
+        }
+
+        private boolean matches(Game game) {
+            String forgePhase = game.getPhaseHandler().getPhase().nameForScripts
+                    .replace(" ", "").toLowerCase();
+            return game.getPhaseHandler().getTurn() == turn && forgePhase.equals(phase);
         }
     }
 
