@@ -10,6 +10,9 @@ SVar:DBCleanupOne:DB$ Cleanup | ClearImprinted$ True
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigChaosRemember | TriggerDescription$ Whenever chaos ensues, create X 1/1 black Snake creature tokens with deathtouch, where X is 1 plus the number of nonbasic land types among lands you control.
 SVar:TrigChaosRemember:DB$ Pump | RememberObjects$ Valid Land.YouCtrl | SubAbility$ DBChaosToken
 SVar:DBChaosToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_snake_deathtouch | TokenOwner$ You | SubAbility$ DBCleanupChaos
-SVar:X:Remembered$LandType/Plus.1
+SVar:X:SVar$XNonbasic/Plus.1
+SVar:XNonbasic:SVar$XAllTypes/Minus.XBasicTypes
+SVar:XAllTypes:Remembered$LandType
+SVar:XBasicTypes:Count$Domain
 SVar:DBCleanupChaos:DB$ Cleanup | ClearRemembered$ True
 Oracle:Whenever you planeswalk to Mojave Desert, each player searches their library for up to two basic land or Desert cards and puts them onto the battlefield tapped, then shuffles their library. If a Desert entered the battlefield under a player's control this way, they create a 1/1 black Snake creature token with deathtouch.\nWhenever chaos ensues, create X 1/1 black Snake creature tokens with deathtouch, where X is 1 plus the number of nonbasic land types among lands you control.
