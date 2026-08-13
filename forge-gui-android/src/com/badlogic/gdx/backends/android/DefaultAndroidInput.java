@@ -248,9 +248,7 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
                 alert.setTitle(title);
                 final EditText input = new EditText(context);
-                if (keyboardType != OnscreenKeyboardType.Default) {
-                    input.setInputType(getAndroidInputType(keyboardType, false));
-                }
+                input.setInputType(getAndroidInputType(keyboardType, false));
                 input.setHint(hint);
                 input.setText(text);
                 input.setSingleLine();
@@ -289,7 +287,17 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
                         });
                     }
                 });
-                alert.show();
+                final AlertDialog dialog = alert.create();
+                dialog.setOnShowListener(ignored -> {
+                    input.requestFocus();
+                    input.selectAll();
+                    if (dialog.getWindow() != null) {
+                        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                    }
+                    final InputMethodManager manager = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    input.post(() -> manager.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT));
+                });
+                dialog.show();
             }
         });
     }

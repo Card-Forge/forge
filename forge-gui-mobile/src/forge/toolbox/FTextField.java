@@ -1,5 +1,7 @@
 package forge.toolbox;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
 
@@ -246,6 +248,9 @@ public class FTextField extends FDisplayObject implements ITextField {
 
     public boolean startEdit() {
         if (readOnly) { return false; }
+        if (GuiBase.isAndroid()) {
+            return startNativeAndroidEdit();
+        }
         Forge.setOnScreenKeyboard(true, isNumeric);
         if (isEditing) { return true; } //do nothing if already editing
 
@@ -397,6 +402,37 @@ public class FTextField extends FDisplayObject implements ITextField {
             }
         });
         isEditing = true;
+        return true;
+    }
+
+    /** Android IMEs do not consistently forward composed candidates through libGDX's GL surface. Use a native EditText
+     * dialog for every Forge text field and commit the completed string back on the render thread instead. */
+    private boolean startNativeAndroidEdit() {
+        if (isEditing) { return true; }
+
+        selStart = 0;
+        selLength = text.length();
+        textBeforeKeyInput = text;
+        isEditing = true;
+
+        final String title = Forge.getLocalizer().getMessageorUseDefault("lblNativeTextInput", "Enter text");
+        final String hint = ghostText == null ? "" : ghostText;
+        Gdx.input.getTextInput(new Input.TextInputListener() {
+            @Override
+            public void input(final String result) {
+                setText(result);
+                endEdit();
+            }
+
+            @Override
+            public void canceled() {
+                text = textBeforeKeyInput;
+                isEditing = false;
+                selStart = 0;
+                selLength = 0;
+                textBeforeKeyInput = null;
+            }
+        }, title, text, hint, isNumeric ? Input.OnscreenKeyboardType.NumberPad : Input.OnscreenKeyboardType.Default);
         return true;
     }
 
