@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -438,10 +437,10 @@ public final class TriggeredTargetDecisionCoordinator {
         final BloodOperativeEtbProfile.Validation validation =
                 BloodOperativeEtbProfile.validateCommonSemanticProfile(wrapper);
         if (!validation.isAdmitted()) {
-            if (isLiveEffectFailure(validation.getFailure(), liveAbility) && hasInitialTargetFailure(liveAbility)) {
+            if (isLiveEffectFailure(validation.getFailure()) && hasInitialTargetFailure(liveAbility)) {
                 return Admission.unsupported(TriggeredTargetIntegrityException.Reason.NON_EMPTY_INITIAL_TARGETS);
             }
-            return Admission.unsupported(mapCommonFailure(validation.getFailure(), liveAbility));
+            return Admission.unsupported(mapCommonFailure(validation.getFailure()));
         }
 
         if (hasInitialTargetFailure(liveAbility)) {
@@ -451,34 +450,16 @@ public final class TriggeredTargetDecisionCoordinator {
     }
 
     private static TriggeredTargetIntegrityException.Reason mapCommonFailure(
-            final BloodOperativeEtbProfile.Failure failure, final SpellAbility liveAbility) {
-        if (isLiveEffectFailure(failure, liveAbility)) {
+            final BloodOperativeEtbProfile.Failure failure) {
+        if (failure == BloodOperativeEtbProfile.Failure.TARGETING_SHAPE) {
             return TriggeredTargetIntegrityException.Reason.LIVE_EFFECT_MISMATCH;
         }
         return TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE;
     }
 
-    private static boolean isLiveEffectFailure(final BloodOperativeEtbProfile.Failure failure,
-            final SpellAbility liveAbility) {
-        if (failure == BloodOperativeEtbProfile.Failure.TARGETING_SHAPE) {
-            return true;
-        }
-        if (failure != BloodOperativeEtbProfile.Failure.LIVE_EFFECT_DEFINITION || liveAbility == null) {
-            return false;
-        }
-        try {
-            final Map<String, String> params = liveAbility.getMapParams();
-            if (params == null || !Set.of("DB", "Origin", "Destination", "ValidTgts", "TgtPrompt",
-                    "ValidTgtsDesc", "TgtZone", "TargetMin", "TargetMax").containsAll(params.keySet())) {
-                return false;
-            }
-            return !"ChangeZone".equals(params.get("DB"))
-                    || !"Graveyard".equals(params.get("Origin"))
-                    || !"Exile".equals(params.get("Destination"))
-                    || !"Card".equals(params.get("ValidTgts"));
-        } catch (final RuntimeException ex) {
-            return false;
-        }
+    private static boolean isLiveEffectFailure(final BloodOperativeEtbProfile.Failure failure) {
+        return failure == BloodOperativeEtbProfile.Failure.LIVE_EFFECT_DEFINITION
+                || failure == BloodOperativeEtbProfile.Failure.TARGETING_SHAPE;
     }
 
     private static boolean hasInitialTargetFailure(final SpellAbility liveAbility) {
