@@ -257,6 +257,13 @@ final class BridgeController extends PlayerControllerAi {
                     choices = Collections.singletonList(choices.get(0));
                 }
                 if (ticket.allowCast && choices != null && !choices.isEmpty()
+                        && !choices.get(0).isLandAbility() && opponentControlsCreature()) {
+                    SpellAbility bolt = firstLegalLightningBolt();
+                    if (bolt != null) {
+                        choices = Collections.singletonList(bolt);
+                    }
+                }
+                if (ticket.allowCast && choices != null && !choices.isEmpty()
                         && getGame().getPhaseHandler().getPhase() == PhaseType.MAIN1
                         && choices.get(0).getHostCard().isCreature()
                         && controlsCreature()) {
@@ -469,6 +476,20 @@ final class BridgeController extends PlayerControllerAi {
         return false;
     }
 
+    private boolean opponentControlsCreature() {
+        for (Player candidate : getGame().getPlayers()) {
+            if (candidate == player) {
+                continue;
+            }
+            for (Card card : candidate.getCardsIn(ZoneType.Battlefield)) {
+                if (card.isCreature()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private SpellAbility firstLegalLightningBolt() {
         List<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(
                 ComputerUtilAbility.getAvailableCards(getGame(), player), player);
@@ -477,6 +498,25 @@ final class BridgeController extends PlayerControllerAi {
             if (ability.isSpell() && host != null && "Lightning Bolt".equals(host.getName())
                     && ability.canPlay()) {
                 ability.resetTargets();
+                boolean targetedCreature = false;
+                for (Player candidate : getGame().getPlayers()) {
+                    if (candidate == player) {
+                        continue;
+                    }
+                    for (Card card : candidate.getCardsIn(ZoneType.Battlefield)) {
+                        if (card.isCreature() && ability.canTarget(card)) {
+                            ability.getTargets().add(card);
+                            targetedCreature = true;
+                            break;
+                        }
+                    }
+                    if (targetedCreature) {
+                        break;
+                    }
+                }
+                if (targetedCreature) {
+                    return ability;
+                }
                 for (Player candidate : getGame().getPlayers()) {
                     if (candidate != player) {
                         ability.getTargets().add(candidate);
@@ -622,8 +662,35 @@ final class BridgeController extends PlayerControllerAi {
             if ("player".equals(target.path("kind").asText())) {
                 int targetSeat = target.path("seat").asInt();
                 ability.getTargets().add(getGame().getPlayers().get(targetSeat - 1));
+            } else if ("card".equals(target.path("kind").asText())) {
+                Card card = exactOpponentCard(target.path("card"), "spell target");
+                if (!ability.canTarget(card)) {
+                    throw new IllegalStateException("Remote spell target is not legal: " + target);
+                }
+                ability.getTargets().add(card);
             }
         }
+    }
+
+    private Card exactOpponentCard(JsonNode reference, String label) {
+        String name = reference.path("name").asText();
+        int wantedIndex = reference.path("idx").asInt(0);
+        List<Card> matches = new ArrayList<>();
+        for (Player candidate : getGame().getPlayers()) {
+            if (candidate == player) {
+                continue;
+            }
+            for (Card card : candidate.getCardsIn(ZoneType.Battlefield)) {
+                if (card.getName().equals(name) && sameNameIndex(card) == wantedIndex) {
+                    matches.add(card);
+                }
+            }
+        }
+        if (matches.size() != 1) {
+            throw new IllegalStateException("Remote " + label + " matched " + matches.size()
+                    + " opposing Forge cards: " + reference);
+        }
+        return matches.get(0);
     }
 
     private ObjectNode describeAction(SpellAbility ability) {

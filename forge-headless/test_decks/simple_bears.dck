@@ -1,0 +1,10 @@
+[metadata]
+Name=Simple Bears and Bolts Test Deck
+Description=Mono-red creature combat mirror deck for Task D
+
+[Main]
+24 Mountain
+18 Goblin Piker
+18 Lightning Bolt
+
+[Sideboard]
