@@ -103,6 +103,118 @@ public class BloodOperativeConfirmationDecisionProviderTest extends AITest {
     }
 
     @Test
+    public void unsupportedConfirmationExceptionUsesProfileNeutralMessage() {
+        final ConfirmationDecisionProvider localProvider = new ConfirmationDecisionProvider();
+        localProvider.setResolver(request -> null);
+
+        try {
+            final ExactBloodFixture fixture = exactBloodFixture();
+            final ConfirmationDecisionProvider.Generation generation =
+                    localProvider.generate(fixture.wrapper, fixture.decider);
+
+            assertEquals(generation.getStatus(), ConfirmationDecisionProvider.Status.ADMITTED);
+            final DecisionRequest request = generation.getRequest();
+            assertNotNull(request);
+            if (request == null) {
+                return;
+            }
+
+            UnsupportedConfirmationDecisionException observed = null;
+            try {
+                localProvider.choose(request, () -> {
+                    fail("external confirmation must not fall back to native Forge");
+                    return false;
+                });
+                fail("expected invalid external confirmation candidate");
+            } catch (final UnsupportedConfirmationDecisionException ex) {
+                observed = ex;
+            } catch (final RuntimeException ex) {
+                fail("unexpected confirmation exception: " + ex.getClass().getSimpleName());
+            }
+
+            assertNotNull(observed);
+            if (observed == null) {
+                return;
+            }
+            assertEquals(observed.getStatus(), ConfirmationDecisionProvider.Status.INVALID_EXTERNAL_CANDIDATE);
+            final String message = observed.getMessage();
+            assertNotNull(message);
+            if (message == null) {
+                return;
+            }
+            assertFalse(message.contains("FRL-02K-B1"));
+            assertTrue(message.toLowerCase(Locale.ROOT).contains("confirmation decision"));
+        } finally {
+            localProvider.setResolver(null);
+        }
+    }
+
+    @Test
+    public void bloodApplyValidationFailureInvalidatesRequest() {
+        final ConfirmationDecisionProvider localProvider = new ConfirmationDecisionProvider();
+        localProvider.setResolver(request -> request.getCandidates().stream()
+                .filter(candidate -> candidate.getConfirmationKind() == ConfirmationCandidateKind.ACCEPT)
+                .findFirst()
+                .orElse(null));
+
+        try {
+            final ExactBloodFixture fixture = exactBloodFixture();
+            final ConfirmationDecisionProvider.Generation generation =
+                    localProvider.generate(fixture.wrapper, fixture.decider);
+
+            assertEquals(generation.getStatus(), ConfirmationDecisionProvider.Status.ADMITTED);
+            final DecisionRequest request = generation.getRequest();
+            assertNotNull(request);
+            if (request == null) {
+                return;
+            }
+            final LegalCandidate selected = localProvider.choose(request, () -> {
+                fail("external confirmation must not invoke the native callback");
+                return false;
+            });
+            assertNotNull(selected);
+            if (selected == null) {
+                return;
+            }
+
+            final List<Player> players = fixture.decider.getGame().getPlayers();
+            assertNotNull(players);
+            assertTrue(players != null && players.size() > 1);
+            if (players == null || players.size() < 2) {
+                return;
+            }
+            final Player wrongDecider = players.get(0);
+            assertNotNull(wrongDecider);
+            if (wrongDecider == null) {
+                return;
+            }
+            final WrappedAbility wrongWrapper = new WrappedAbility(
+                    fixture.wrapper.getTrigger(), fixture.wrapper.getWrappedAbility(), wrongDecider);
+            assertNotNull(wrongWrapper);
+            if (wrongWrapper == null) {
+                return;
+            }
+            boolean firstApplyFailed = false;
+            try {
+                localProvider.apply(request, selected, wrongWrapper);
+                fail("expected mismatched Blood wrapper to be rejected");
+            } catch (final RuntimeException ex) {
+                firstApplyFailed = true;
+            }
+            assertTrue(firstApplyFailed);
+
+            try {
+                localProvider.apply(request, selected, fixture.wrapper);
+                fail("a failed Blood apply must invalidate the request and forbid retry");
+            } catch (final RuntimeException ex) {
+                // Expected: the failed integrity validation must clear the active request.
+            }
+        } finally {
+            localProvider.setResolver(null);
+        }
+    }
+
+    @Test
     public void exactBloodEtbConfirmationIsNotYetAdmittedOnTheBaseline() {
         final Game game = initAndCreateGame();
         final Player decider = game.getPlayers().get(1);
