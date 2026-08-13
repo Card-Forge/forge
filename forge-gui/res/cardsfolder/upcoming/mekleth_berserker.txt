@@ -1,0 +1,6 @@
+Name:Mek'leth Berserker
+ManaCost:3 R
+Types:Creature Klingon Berserker
+PT:4/3
+K:Menace
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)
