@@ -299,6 +299,9 @@ final class BridgeSession {
         switch (kind) {
         case "priority":
             return controller.decidePriority(params.path("context"));
+        case "declare_attackers":
+        case "declare_blockers":
+            return controller.decideCombat(kind, params.path("context"));
         case "mulligan":
             int cardsToReturn = params.path("context").path("cards_to_return").asInt(0);
             return controller.decideMulligan(cardsToReturn);

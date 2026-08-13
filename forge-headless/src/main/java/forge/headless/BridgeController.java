@@ -21,10 +21,13 @@ import forge.LobbyPlayer;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
+import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
@@ -41,6 +44,8 @@ final class BridgeController extends PlayerControllerAi {
     private final int startingSeat;
     private final BlockingQueue<DecisionTicket> decisions = new ArrayBlockingQueue<>(16);
     private final BlockingQueue<RemoteActionTicket> remoteActions = new ArrayBlockingQueue<>(128);
+    private final BlockingQueue<CombatActionTicket> combatActions = new ArrayBlockingQueue<>(16);
+    private final BlockingQueue<CombatDecisionTicket> combatDecisions = new ArrayBlockingQueue<>(16);
     private volatile boolean cancelled;
     private volatile boolean finishing;
     private volatile int drainThroughTurn;
@@ -66,6 +71,10 @@ final class BridgeController extends PlayerControllerAi {
         }
         boolean allowCast = context.path("allow_cast").asBoolean(true);
         int authoritativeTurn = context.path("turn").asInt();
+        if (context.path("resolve_stack").asBoolean(false)) {
+            put(decisions, new DecisionTicket(false, authoritativeTurn), "Forge AI stack-resolution pass");
+            return passAction();
+        }
         // Drain permits commonly arrive while the shadow is still completing
         // the preceding remote turn. Keep those future permits queued; their
         // turn tag makes them safe to consume later. Only an already-past
@@ -106,6 +115,14 @@ final class BridgeController extends PlayerControllerAi {
         return result;
     }
 
+    ObjectNode decideCombat(String kind, JsonNode context) {
+        requireForgeAiSeat();
+        CombatDecisionTicket ticket = new CombatDecisionTicket(
+                kind, context.path("allow_combat").asBoolean(true));
+        put(combatDecisions, ticket, "Forge AI " + kind + " decision");
+        return await(ticket.result, "Forge AI " + kind + " decision");
+    }
+
     void acceptOpponentAction(JsonNode action, JsonNode context, PrintStream diagnostics) {
         if (forgeAiSeat) {
             throw new IllegalStateException("opponent_action cannot target the Forge AI seat");
@@ -115,6 +132,13 @@ final class BridgeController extends PlayerControllerAi {
             return;
         }
         int authoritativeTurn = context.path("turn").asInt();
+        String actionType = action.path("type").asText();
+        if ("declare_attackers".equals(actionType) || "declare_blockers".equals(actionType)) {
+            put(combatActions, new CombatActionTicket(action.deepCopy(), authoritativeTurn),
+                    "remote combat action");
+            diagnostics.println("Bridge queued exact remote combat action for seat " + seat + ": " + action);
+            return;
+        }
         if ("pass".equals(action.path("type").asText())
                 && "authoritative_turn_end".equals(action.path("reason").asText())) {
             remoteDrainThroughTurn = Math.max(remoteDrainThroughTurn, authoritativeTurn);
@@ -148,6 +172,10 @@ final class BridgeController extends PlayerControllerAi {
         RemoteActionTicket remote;
         while ((remote = remoteActions.poll()) != null) {
             remote.consumed.completeExceptionally(new IllegalStateException("Bridge game stopped"));
+        }
+        CombatDecisionTicket combatDecision;
+        while ((combatDecision = combatDecisions.poll()) != null) {
+            combatDecision.result.completeExceptionally(new IllegalStateException("Bridge game stopped"));
         }
     }
 
@@ -228,6 +256,12 @@ final class BridgeController extends PlayerControllerAi {
                     // action exactly matched by DeepScry.
                     choices = Collections.singletonList(choices.get(0));
                 }
+                if (ticket.allowCast && choices != null && !choices.isEmpty()
+                        && getGame().getPhaseHandler().getPhase() == PhaseType.MAIN1
+                        && choices.get(0).getHostCard().isCreature()
+                        && controlsCreature()) {
+                    choices = null;
+                }
                 if (!ticket.allowCast) {
                     choices = null;
                 }
@@ -288,6 +322,129 @@ final class BridgeController extends PlayerControllerAi {
         }
     }
 
+    @Override
+    public void declareAttackers(Player attacker, Combat combat) {
+        if (!fullGame) {
+            super.declareAttackers(attacker, combat);
+            return;
+        }
+        if (forgeAiSeat) {
+            CombatDecisionTicket ticket = take(combatDecisions, "Forge attacker decision permit");
+            try {
+                if (ticket.allowCombat) {
+                    super.declareAttackers(attacker, combat);
+                }
+                ticket.result.complete(describeAttackers(combat));
+            } catch (RuntimeException e) {
+                ticket.result.completeExceptionally(e);
+                throw e;
+            }
+            return;
+        }
+        CombatActionTicket ticket = take(combatActions, "remote attacker declaration");
+        applyRemoteAttackers(attacker, combat, ticket.action);
+    }
+
+    @Override
+    public void declareBlockers(Player defender, Combat combat) {
+        if (!fullGame) {
+            super.declareBlockers(defender, combat);
+            return;
+        }
+        if (forgeAiSeat) {
+            CombatDecisionTicket ticket = take(combatDecisions, "Forge blocker decision permit");
+            try {
+                if (ticket.allowCombat) {
+                    super.declareBlockers(defender, combat);
+                }
+                ticket.result.complete(describeBlockers(combat));
+            } catch (RuntimeException e) {
+                ticket.result.completeExceptionally(e);
+                throw e;
+            }
+            return;
+        }
+        CombatActionTicket ticket = take(combatActions, "remote blocker declaration");
+        applyRemoteBlockers(combat, ticket.action);
+    }
+
+    private ObjectNode describeAttackers(Combat combat) {
+        ObjectNode action = BridgeTransport.JSON.createObjectNode();
+        action.put("type", "declare_attackers");
+        ArrayNode assignments = action.putArray("assignments");
+        for (Card attacker : combat.getAttackers()) {
+            ObjectNode assignment = assignments.addObject();
+            assignment.set("attacker", cardReference(attacker));
+            GameEntity defender = combat.getDefenderByAttacker(attacker);
+            if (!(defender instanceof Player defendingPlayer)) {
+                throw new IllegalStateException("Task D only supports player combat defenders");
+            }
+            ObjectNode target = assignment.putObject("defender");
+            target.put("kind", "player");
+            target.put("seat", defendingPlayer.getId() + 1);
+        }
+        return action;
+    }
+
+    private ObjectNode describeBlockers(Combat combat) {
+        ObjectNode action = BridgeTransport.JSON.createObjectNode();
+        action.put("type", "declare_blockers");
+        ArrayNode assignments = action.putArray("assignments");
+        for (Card attacker : combat.getAttackers()) {
+            for (Card blocker : combat.getBlockers(attacker)) {
+                ObjectNode assignment = assignments.addObject();
+                assignment.set("blocker", cardReference(blocker));
+                assignment.set("attacker", cardReference(attacker));
+            }
+        }
+        return action;
+    }
+
+    private void applyRemoteAttackers(Player attacker, Combat combat, JsonNode action) {
+        if (!"declare_attackers".equals(action.path("type").asText())) {
+            throw new IllegalStateException("Expected declare_attackers, got " + action);
+        }
+        CardCollection available = CombatUtil.getPossibleAttackers(attacker);
+        for (JsonNode assignment : action.path("assignments")) {
+            Card card = exactCombatCard(available, assignment.path("attacker"), "attacker");
+            int defenderSeat = assignment.path("defender").path("seat").asInt();
+            Player defendingPlayer = getGame().getPlayers().get(defenderSeat - 1);
+            if (!CombatUtil.canAttack(card, defendingPlayer)) {
+                throw new IllegalStateException("Remote attacker cannot legally attack: " + assignment);
+            }
+            combat.addAttacker(card, defendingPlayer);
+            available.remove(card);
+        }
+    }
+
+    private void applyRemoteBlockers(Combat combat, JsonNode action) {
+        if (!"declare_blockers".equals(action.path("type").asText())) {
+            throw new IllegalStateException("Expected declare_blockers, got " + action);
+        }
+        for (JsonNode assignment : action.path("assignments")) {
+            Card blocker = exactCombatCard(player.getCardsIn(ZoneType.Battlefield),
+                    assignment.path("blocker"), "blocker");
+            Card attacker = exactCombatCard(combat.getAttackers(), assignment.path("attacker"), "blocked attacker");
+            combat.addBlocker(attacker, blocker);
+        }
+    }
+
+    private Card exactCombatCard(Iterable<Card> cards, JsonNode reference, String label) {
+        String name = reference.path("name").asText();
+        int wantedIndex = reference.path("idx").asInt(0);
+        List<Card> matches = new ArrayList<>();
+        for (Card card : cards) {
+            if (card.getName().equals(name) && sameNameIndex(card) == wantedIndex) {
+                matches.add(card);
+            }
+        }
+        if (matches.size() != 1) {
+            throw new IllegalStateException("Remote " + label + " matched " + matches.size()
+                    + " Forge cards: " + reference);
+        }
+        return matches.get(0);
+    }
+
     private boolean hasAnyLegalPriorityAction() {
         CardCollection lands = ComputerUtilAbility.getAvailableLandsToPlay(getGame(), player);
         if (lands != null && !lands.isEmpty()) {
@@ -297,6 +454,15 @@ final class BridgeController extends PlayerControllerAi {
                 ComputerUtilAbility.getAvailableCards(getGame(), player), player);
         for (SpellAbility ability : abilities) {
             if (ability.canPlay()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean controlsCreature() {
+        for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
+            if (card.isCreature()) {
                 return true;
             }
         }
@@ -593,6 +759,28 @@ final class BridgeController extends PlayerControllerAi {
         private RemoteActionTicket(JsonNode action, int turn) {
             this.action = action;
             this.turn = turn;
+        }
+    }
+
+    private static final class CombatActionTicket {
+        private final JsonNode action;
+        @SuppressWarnings("unused")
+        private final int turn;
+
+        private CombatActionTicket(JsonNode action, int turn) {
+            this.action = action;
+            this.turn = turn;
+        }
+    }
+
+    private static final class CombatDecisionTicket {
+        private final String kind;
+        private final boolean allowCombat;
+        private final CompletableFuture<ObjectNode> result = new CompletableFuture<>();
+
+        private CombatDecisionTicket(String kind, boolean allowCombat) {
+            this.kind = kind;
+            this.allowCombat = allowCombat;
         }
     }
 }
