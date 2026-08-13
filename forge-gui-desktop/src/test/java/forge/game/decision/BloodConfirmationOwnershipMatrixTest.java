@@ -148,17 +148,19 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
                     "external CONFIRMATION ownership must not invoke the native confirmation callback");
             assertions.assertNull(controller.targetAtNativeConfirmation(),
                     "native confirmation must not create a temporary target B");
+            final Card currentTargetA = fixture.game().getCardState(fixture.targetA(), null);
+            final Card currentTargetB = fixture.game().getCardState(fixture.targetB(), null);
             assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Exile).stream()
-                    .filter(card -> card == fixture.targetA()).count(), 1L,
+                    .filter(card -> samePublicCardIdentity(card, currentTargetA)).count(), 1L,
                     "the existing ChangeZone effect must consume card A");
             assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Graveyard).stream()
-                    .filter(card -> card == fixture.targetA()).count(), 0L,
+                    .filter(card -> samePublicCardIdentity(card, currentTargetA)).count(), 0L,
                     "card A must leave the graveyard exactly once");
             assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Exile).stream()
-                    .filter(card -> card == fixture.targetB()).count(), 0L,
+                    .filter(card -> samePublicCardIdentity(card, currentTargetB)).count(), 0L,
                     "card B must not be consumed by the ChangeZone effect");
             assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Graveyard).stream()
-                    .filter(card -> card == fixture.targetB()).count(), 1L,
+                    .filter(card -> samePublicCardIdentity(card, currentTargetB)).count(), 1L,
                     "card B must remain the untouched alternative");
             assertions.assertEquals(targetRequestRecords.size(), 1,
                     "the route must trace exactly one TARGET request");
@@ -216,6 +218,12 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
             }
             MyRandom.setRandom(previousRandom);
         }
+    }
+
+    private static boolean samePublicCardIdentity(final Card actual, final Card expected) {
+        return actual != null && expected != null
+                && actual.getId() == expected.getId()
+                && actual.getGameTimestamp() == expected.getGameTimestamp();
     }
 
     private BloodFixture bloodFixture() {
