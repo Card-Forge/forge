@@ -39,11 +39,14 @@ final class BridgeController extends PlayerControllerAi {
     private final boolean forgeAiSeat;
     private final boolean fullGame;
     private final int startingSeat;
-    private final BlockingQueue<DecisionTicket> decisions = new ArrayBlockingQueue<>(1);
-    private final BlockingQueue<RemoteActionTicket> remoteActions = new ArrayBlockingQueue<>(16);
+    private final BlockingQueue<DecisionTicket> decisions = new ArrayBlockingQueue<>(16);
+    private final BlockingQueue<RemoteActionTicket> remoteActions = new ArrayBlockingQueue<>(128);
     private volatile boolean cancelled;
     private volatile boolean finishing;
+    private volatile int drainThroughTurn;
+    private volatile int remoteDrainThroughTurn;
     private volatile JsonNode pendingHandCounts;
+    private volatile int pendingHandTurn;
     private RemoteActionTicket deferredRemoteAction;
 
     BridgeController(Game game, Player player, LobbyPlayer lobbyPlayer, int seat, boolean forgeAiSeat,
@@ -61,7 +64,24 @@ final class BridgeController extends PlayerControllerAi {
             List<SpellAbility> choices = super.chooseSpellAbilityToPlay();
             return choices == null || choices.isEmpty() ? passAction() : describeAction(choices.get(0));
         }
-        DecisionTicket ticket = new DecisionTicket(context.path("allow_cast").asBoolean(true));
+        boolean allowCast = context.path("allow_cast").asBoolean(true);
+        int authoritativeTurn = context.path("turn").asInt();
+        // Drain permits commonly arrive while the shadow is still completing
+        // the preceding remote turn. Keep those future permits queued; their
+        // turn tag makes them safe to consume later. Only an already-past
+        // permit is genuinely stale.
+        if (!allowCast && getGame().getPhaseHandler().getTurn() > authoritativeTurn) {
+            return passAction();
+        }
+        if (!allowCast) {
+            drainThroughTurn = Math.max(drainThroughTurn, authoritativeTurn);
+            // Also enqueue a sentinel to wake a game thread already blocked in
+            // take(decisions). If no thread is blocked, the controller removes
+            // this ticket locally before auto-passing the completed turn.
+            put(decisions, new DecisionTicket(false, authoritativeTurn), "Forge AI drain sentinel");
+            return passAction();
+        }
+        DecisionTicket ticket = new DecisionTicket(allowCast, authoritativeTurn);
         put(decisions, ticket, "Forge AI decision permit");
         return await(ticket.result, "Forge AI priority decision");
     }
@@ -86,7 +106,7 @@ final class BridgeController extends PlayerControllerAi {
         return result;
     }
 
-    void acceptOpponentAction(JsonNode action, PrintStream diagnostics) {
+    void acceptOpponentAction(JsonNode action, JsonNode context, PrintStream diagnostics) {
         if (forgeAiSeat) {
             throw new IllegalStateException("opponent_action cannot target the Forge AI seat");
         }
@@ -94,48 +114,59 @@ final class BridgeController extends PlayerControllerAi {
             diagnostics.println("Bridge accepted scripted opponent action for seat " + seat + ": " + action);
             return;
         }
+        int authoritativeTurn = context.path("turn").asInt();
+        if ("pass".equals(action.path("type").asText())
+                && "authoritative_turn_end".equals(action.path("reason").asText())) {
+            remoteDrainThroughTurn = Math.max(remoteDrainThroughTurn, authoritativeTurn);
+            put(remoteActions, new RemoteActionTicket(action.deepCopy(), authoritativeTurn),
+                    "remote turn-end sentinel");
+            diagnostics.println("Bridge reached authoritative remote turn end for seat " + seat
+                    + " turn " + authoritativeTurn);
+            return;
+        }
         if ("pass".equals(action.path("type").asText())
                 && !"authoritative_main_phase_end".equals(action.path("reason").asText())) {
             diagnostics.println("Bridge mirrored opponent priority pass for seat " + seat + ": " + action);
             return;
         }
-        RemoteActionTicket ticket = new RemoteActionTicket(action.deepCopy());
+        RemoteActionTicket ticket = new RemoteActionTicket(action.deepCopy(), authoritativeTurn);
         diagnostics.println("Bridge replay pending at life " + lifeSummary() + ": " + action);
         put(remoteActions, ticket, "remote opponent action");
         if ("authoritative_main_phase_end".equals(action.path("reason").asText())) {
             diagnostics.println("Bridge queued authoritative pass marker for seat " + seat);
             return;
         }
-        if (isLethalBolt(action)) {
-            diagnostics.println("Bridge queued terminal lethal Bolt for seat " + seat);
-            return;
-        }
-        await(ticket.consumed, "Forge replay of opponent action");
-        diagnostics.println("Bridge replayed opponent action for seat " + seat + " at life "
-                + lifeSummary() + ": " + action);
+        diagnostics.println("Bridge queued exact replay action for seat " + seat);
     }
 
     void cancel() {
         cancelled = true;
-        DecisionTicket decision = decisions.poll();
-        if (decision != null) {
+        DecisionTicket decision;
+        while ((decision = decisions.poll()) != null) {
             decision.result.completeExceptionally(new IllegalStateException("Bridge game stopped"));
         }
-        RemoteActionTicket remote = remoteActions.poll();
-        if (remote != null) {
+        RemoteActionTicket remote;
+        while ((remote = remoteActions.poll()) != null) {
             remote.consumed.completeExceptionally(new IllegalStateException("Bridge game stopped"));
         }
     }
 
-    void stageHandSync(JsonNode desiredCounts) {
+    void stageHandSync(JsonNode desiredCounts, int turn) {
         if (!desiredCounts.isObject()) {
             throw new IllegalStateException("Full-game reveal requires context.hand_counts");
         }
         pendingHandCounts = desiredCounts.deepCopy();
+        pendingHandTurn = turn;
     }
 
     void finishGame() {
         finishing = true;
+        if (forgeAiSeat) {
+            DecisionTicket ticket;
+            while ((ticket = decisions.poll()) != null) {
+                ticket.result.complete(passAction());
+            }
+        }
     }
 
     @Override
@@ -161,7 +192,23 @@ final class BridgeController extends PlayerControllerAi {
             return null;
         }
         if (forgeAiSeat) {
-            if (finishing && decisions.isEmpty()) {
+            int currentTurn = getGame().getPhaseHandler().getTurn();
+            DecisionTicket head = decisions.peek();
+            while (head != null && head.turn < currentTurn) {
+                decisions.poll().result.complete(passAction());
+                head = decisions.peek();
+            }
+            if (drainThroughTurn >= currentTurn && head != null
+                    && !head.allowCast && head.turn <= currentTurn) {
+                decisions.poll().result.complete(passAction());
+                return null;
+            }
+            // A drain sentinel follows every real action for its authoritative
+            // turn. Once it has been consumed, pass any extra Forge callbacks
+            // locally until the shadow advances; never consume a future turn's
+            // real decision early.
+            if ((finishing || drainThroughTurn >= currentTurn)
+                    && (head == null || head.turn > currentTurn)) {
                 return null;
             }
             DecisionTicket ticket = take(decisions, "Forge AI decision permit");
@@ -174,8 +221,14 @@ final class BridgeController extends PlayerControllerAi {
                         choices = Collections.singletonList(bolt);
                     }
                 }
-                if (!ticket.allowCast && choices != null && !choices.isEmpty()
-                        && !choices.get(0).isLandAbility()) {
+                if (ticket.allowCast && choices != null && !choices.isEmpty()) {
+                    // One protocol decision describes one game action. Forge's
+                    // stock AI may batch several abilities in this callback;
+                    // executing that batch would mutate more than the single
+                    // action exactly matched by DeepScry.
+                    choices = Collections.singletonList(choices.get(0));
+                }
+                if (!ticket.allowCast) {
                     choices = null;
                 }
                 ticket.result.complete(choices == null || choices.isEmpty()
@@ -187,6 +240,31 @@ final class BridgeController extends PlayerControllerAi {
             }
         }
 
+        int currentTurn = getGame().getPhaseHandler().getTurn();
+        RemoteActionTicket head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
+        while (head != null && head.turn < currentTurn
+                && "pass".equals(head.action.path("type").asText())) {
+            if (deferredRemoteAction == null) {
+                remoteActions.poll();
+            } else {
+                deferredRemoteAction = null;
+            }
+            head.consumed.complete(null);
+            head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
+        }
+        if (remoteDrainThroughTurn >= currentTurn && head != null && head.turn <= currentTurn
+                && "authoritative_turn_end".equals(head.action.path("reason").asText())) {
+            if (deferredRemoteAction == null) {
+                remoteActions.poll();
+            } else {
+                deferredRemoteAction = null;
+            }
+            head.consumed.complete(null);
+            return null;
+        }
+        if (remoteDrainThroughTurn >= currentTurn && (head == null || head.turn > currentTurn)) {
+            return null;
+        }
         RemoteActionTicket ticket = deferredRemoteAction == null
                 ? (finishing ? remoteActions.poll() : take(remoteActions, "remote opponent action"))
                 : deferredRemoteAction;
@@ -247,7 +325,7 @@ final class BridgeController extends PlayerControllerAi {
 
     private void applyPendingHandSync() {
         JsonNode desiredCountsNode = pendingHandCounts;
-        if (desiredCountsNode == null) {
+        if (desiredCountsNode == null || getGame().getPhaseHandler().getTurn() < pendingHandTurn) {
             return;
         }
         pendingHandCounts = null;
@@ -457,19 +535,6 @@ final class BridgeController extends PlayerControllerAi {
         return String.join("/", totals);
     }
 
-    private boolean isLethalBolt(JsonNode action) {
-        if (!"cast".equals(action.path("type").asText())
-                || !"Lightning Bolt".equals(action.path("card").path("name").asText())) {
-            return false;
-        }
-        for (JsonNode target : action.path("targets")) {
-            if ("player".equals(target.path("kind").asText())) {
-                int targetSeat = target.path("seat").asInt();
-                return getGame().getPlayers().get(targetSeat - 1).getLife() <= 3;
-            }
-        }
-        return false;
-    }
 
     private void requireForgeAiSeat() {
         if (!forgeAiSeat) {
@@ -511,19 +576,23 @@ final class BridgeController extends PlayerControllerAi {
 
     private static final class DecisionTicket {
         private final boolean allowCast;
+        private final int turn;
         private final CompletableFuture<ObjectNode> result = new CompletableFuture<>();
 
-        private DecisionTicket(boolean allowCast) {
+        private DecisionTicket(boolean allowCast, int turn) {
             this.allowCast = allowCast;
+            this.turn = turn;
         }
     }
 
     private static final class RemoteActionTicket {
         private final JsonNode action;
+        private final int turn;
         private final CompletableFuture<Void> consumed = new CompletableFuture<>();
 
-        private RemoteActionTicket(JsonNode action) {
+        private RemoteActionTicket(JsonNode action, int turn) {
             this.action = action;
+            this.turn = turn;
         }
     }
 }

@@ -318,7 +318,9 @@ final class BridgeSession {
         }
         String cardName = requireText(params.path("card"), "name");
         if (!options.isSkeleton()) {
-            lobbyPlayers.get(seat).getController().stageHandSync(params.path("context").path("hand_counts"));
+            JsonNode context = params.path("context");
+            lobbyPlayers.get(seat).getController().stageHandSync(context.path("hand_counts"),
+                    requireInt(context, "turn"));
             diagnostics.println("Staged revealed hand for seat " + seat + ": " + cardName);
             return;
         }
@@ -355,7 +357,8 @@ final class BridgeSession {
         if (seat == options.getSeat()) {
             throw new BridgeFailure("opponent_seat", "opponent_action named the Forge AI seat");
         }
-        lobbyPlayers.get(seat).getController().acceptOpponentAction(params.path("action"), diagnostics);
+        lobbyPlayers.get(seat).getController().acceptOpponentAction(
+                params.path("action"), params.path("context"), diagnostics);
     }
 
     private void handleStateDigest(JsonNode params) {
@@ -371,12 +374,15 @@ final class BridgeSession {
         List<Integer> actualLife = null;
         List<Integer> actualHands = null;
         List<Integer> actualPermanents = null;
+        int expectedTurn = params.path("turn").asInt();
+        int actualTurn = 0;
         boolean matched = false;
-        for (int attempt = 0; attempt < 100 && !matched; attempt++) {
+        for (int attempt = 0; attempt < 500 && !matched; attempt++) {
             actualLife = new ArrayList<>();
             actualHands = new ArrayList<>();
             actualPermanents = new ArrayList<>();
-            matched = true;
+            actualTurn = game.getPhaseHandler().getTurn();
+            matched = actualTurn == expectedTurn;
             for (int index = 0; index < game.getPlayers().size(); index++) {
                 Player player = game.getPlayers().get(index);
                 actualLife.add(player.getLife());
@@ -396,9 +402,10 @@ final class BridgeSession {
             }
         }
         if (!matched) {
-            throw new BridgeFailure("state_desync", "Digest mismatch at turn " + params.path("turn").asInt()
+            throw new BridgeFailure("state_desync", "Digest mismatch at turn " + expectedTurn
                     + ": expected life/hand/permanents=" + life + "/" + hands + "/" + permanents
-                    + ", Forge=" + actualLife + "/" + actualHands + "/" + actualPermanents);
+                    + ", Forge=" + actualLife + "/" + actualHands + "/" + actualPermanents
+                    + " at turn=" + actualTurn + " phase=" + game.getPhaseHandler().getPhase());
         }
         String actualDigest = "t" + params.path("turn").asInt()
                 + "|l" + actualLife.get(0) + "," + actualLife.get(1)
@@ -432,7 +439,11 @@ final class BridgeSession {
                 match.startGame(game);
             } catch (Throwable failure) {
                 gameThreadFailure = failure;
+                diagnostics.println("Forge game thread failure: " + failure);
+                failure.printStackTrace(diagnostics);
             } finally {
+                diagnostics.println("Forge game thread stopped at turn " + game.getPhaseHandler().getTurn()
+                        + " phase " + game.getPhaseHandler().getPhase() + " gameOver=" + game.isGameOver());
                 for (LobbyPlayerBridge lobbyPlayer : lobbyPlayers.values()) {
                     lobbyPlayer.getController().cancel();
                 }
