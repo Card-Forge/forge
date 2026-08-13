@@ -1,5 +1,7 @@
 package forge.item;
 
+import forge.util.MyRandom;
+
 import java.util.List;
 import java.util.TreeMap;
 
@@ -45,7 +47,7 @@ public class BoosterSlot {
     }
 
     public String replaceSlot() {
-        float rand = (float) Math.random();
+        float rand = MyRandom.getRandom().nextFloat();
         for (Float key : slotPercentages.keySet()) {
             if (rand < key) {
                 System.out.println("Replaced a base slot! " + slotName + " -> " + slotPercentages.get(key));

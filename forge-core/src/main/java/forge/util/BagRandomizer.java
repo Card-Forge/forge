@@ -1,9 +1,7 @@
 package forge.util;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
 /**
  * Data structure that allows random draws from a set number of items,
@@ -12,8 +10,6 @@ import java.util.Random;
  * @param <T> an object
  */
 public class BagRandomizer<T > implements Iterable<T>{
-    private static Random random = new SecureRandom();
-
     private T[] bag;
     private int currentPosition = 0;
 
@@ -49,7 +45,7 @@ public class BagRandomizer<T > implements Iterable<T>{
     private void shuffleBag() {
         int n = bag.length;
         for (int i = 0; i < n; i++) {
-            int r = (int) (random.nextDouble() * (i + 1));
+            int r = (int) (MyRandom.getRandom().nextDouble() * (i + 1));
             T swap = bag[r];
             bag[r] = bag[i];
             bag[i] = swap;
