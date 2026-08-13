@@ -212,6 +212,15 @@ public class TriggeredTargetDecisionCoordinatorTest extends AITest {
     }
 
     @Test
+    public void nonEmptyInitialTargetsPrecedeUnknownLiveSemanticParameter() {
+        final BloodFixture fixture = bloodFixture();
+        fixture.ability().getTargets().add(fixture.firstTarget());
+        fixture.ability().putParam("UnknownSemantic", "True");
+
+        assertUnsupportedTargeted(fixture, "NON_EMPTY_INITIAL_TARGETS");
+    }
+
+    @Test
     public void chooserMustMatchDeciderActivatorAndSourceController() {
         final BloodFixture deciderMismatch = bloodFixture();
         assertUnsupportedTargeted(withWrapper(deciderMismatch,
