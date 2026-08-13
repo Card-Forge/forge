@@ -418,7 +418,7 @@ public class FSkinFont {
         if (useCjkFont && !Forge.forcedEnglishonCJKMissing) {
             // Bump this suffix whenever the bundled character sources change so
             // an upgrade cannot reuse an older bitmap-font cache with missing glyphs.
-            fontName += Forge.locale + "-community2";
+            fontName += Forge.locale + "-community3";
         }
         FileHandle fontFile = Assets.getFileHandle(ForgeConstants.FONTS_DIR + fontName + ".fnt");
         final boolean[] found = {false};

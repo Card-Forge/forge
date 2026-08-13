@@ -1,6 +1,14 @@
 # ⚔️  Forge: The Magic: The Gathering Rules Engine
 
-Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
+> 本分支是由社区爱好者维护的非官方简体中文版本，与 Card Forge 官方及 Wizards of the Coast 无隶属或授权关系。
+>
+> **本项目提供的软件、安装包、更新服务和卡图下载服务完全免费。请勿向任何人付费购买本群发布的安装包。**
+>
+> 交流与问题反馈：QQ群 `813597628`
+>
+> 汉化版开源分支：[https://github.com/kaorou-bot/forge/tree/zh-cn-community-release](https://github.com/kaorou-bot/forge/tree/zh-cn-community-release)
+>
+> Forge 上游开源项目：[https://github.com/Card-Forge/forge](https://github.com/Card-Forge/forge)
 
 [![Test build](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml/badge.svg)](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml)
 
@@ -74,9 +82,9 @@ For comprehensive gameplay instructions, visit our [User Guide](https://github.c
 
 ## 💬 Support & Community
 
-Need help? Join our vibrant Discord community! 
-- 📜 Read the **#rules** and explore the **FAQ**.
-- ❓ Ask your questions in the **#help** channel for assistance.
+简体中文民间汉化版交流与问题反馈：QQ群 `813597628`。
+
+本软件、安装包、更新服务和卡图下载服务完全免费；请勿付费购买。
 
 ---
 

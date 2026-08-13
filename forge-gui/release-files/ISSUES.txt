@@ -1,1 +1,2 @@
 问题反馈与民间汉化版支持：QQ群 813597628
+本软件完全免费。开源分支：https://github.com/kaorou-bot/forge/tree/zh-cn-community-release

@@ -1,0 +1,31 @@
+【Forge 简体中文民间汉化版发布公告】
+
+Forge 2.0.15-汉化-08.13 已发布，Windows 免 Java 完整版和 Android APK 均可下载。
+
+重要说明：
+1. 本软件以及本项目提供的安装包、更新服务和卡图下载服务完全免费，请勿向任何人付费购买本群发布的安装包。
+2. 本版本由社区爱好者维护，是非官方民间汉化版，与 Card Forge 官方及 Wizards of the Coast 无隶属或授权关系。
+3. 交流与问题反馈请在本群进行：QQ群 813597628。
+
+本次更新：
+- 原版 Discord、论坛和问题反馈入口统一改为本 QQ 群。
+- 停用向原版 Sentry 服务自动发送错误报告的功能。
+- 修复安卓发布说明中部分汉字显示为方框的问题。
+- Windows 版内置 Java 21，无需另装 JRE 或 JDK。
+- 安卓版支持中文输入法，内置 CJK 字体，可覆盖安装此前同签名汉化版。
+- 桌面端和安卓端继续使用民间汉化更新服务器及按需卡图服务器。
+
+下载地址：
+Windows 免 Java 完整版：
+https://update.mtg-forge-kaorou.vip/forge/desktop/2.0.15-cn-08.13/forge-windows-2.0.15-cn-08.13.zip
+
+Android APK：
+https://update.mtg-forge-kaorou.vip/forge/android/2.0.15-cn-08.13/forge-android-2.0.15-cn-08.13.apk
+
+汉化版开源分支：
+https://github.com/kaorou-bot/forge/tree/zh-cn-community-release
+
+Forge 上游项目：
+https://github.com/Card-Forge/forge
+
+安装提示：Windows 版请完整解压后运行 forge.exe；安卓首次安装后可能继续下载约 181 MiB 资源包，建议使用稳定 Wi-Fi。升级前请备份重要牌组和存档。
