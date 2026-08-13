@@ -201,40 +201,6 @@ public class Main extends IOSApplication.Delegate {
             // timeouts) and the jetsam memory ceiling. Set here, before any game/CardState class loads.
             System.setProperty("forge.staticMemo", "on");
 
-            // Clear card cache when a new build is deployed. The cache stores
-            // pre-parsed card rules for fast startup, but stale caches cause bugs
-            // (e.g., duplicate triggers). Compare the app's CFBundleVersion to a
-            // stored marker — if they differ, this is a new deploy.
-            String appBuild = NSBundle.getMainBundle().getInfoDictionaryObject("CFBundleVersion").toString();
-            File cacheDir = new File(documentsPath + "cache/db/");
-            cacheDir.mkdirs();
-            File buildMarker = new File(cacheDir, ".build_version");
-            String cachedBuild = "";
-            if (buildMarker.exists()) {
-                try {
-                    byte[] bytes = new byte[(int) buildMarker.length()];
-                    FileInputStream fis = new FileInputStream(buildMarker);
-                    fis.read(bytes);
-                    fis.close();
-                    cachedBuild = new String(bytes).trim();
-                } catch (IOException e) { /* treat as mismatch */ }
-            }
-            if (!appBuild.equals(cachedBuild)) {
-                File cardCache = new File(cacheDir, "cardcache.bin");
-                File cardsDb = new File(cacheDir, "cardsdb.bin");
-                if (cardCache.exists()) { cardCache.delete(); log("Cleared stale cardcache.bin (build " + cachedBuild + " -> " + appBuild + ")"); }
-                if (cardsDb.exists()) { cardsDb.delete(); log("Cleared stale cardsdb.bin"); }
-                try {
-                    FileOutputStream fos = new FileOutputStream(buildMarker);
-                    fos.write(appBuild.getBytes());
-                    fos.close();
-                } catch (IOException e) {
-                    log("Could not write build marker: " + e.getMessage());
-                }
-            } else {
-                log("Card cache up-to-date for build " + appBuild);
-            }
-
             final IOSApplicationConfiguration config = new IOSApplicationConfiguration();
             config.useAccelerometer = false;
             config.useCompass = false;

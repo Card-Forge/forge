@@ -6,6 +6,7 @@ Type=Commander
 ScryfallCode=TRC
 
 [cards]
+78 R Christine Chapel, Combat Medic @Pauline Voss
 85 M Captain Kirk, Boldly Going @Josh Newton
 132 C Evasive Maneuvers @Evan Shipard
 133 C Head of Security @Alexey Kot
@@ -42,6 +43,7 @@ ScryfallCode=TRC
 199 R Klingon Strike Force @Fahmi Fauzi
 200 M Benjamin Sisko, Besieged @Josu Hernaiz
 201 R Tenacious Tosk @Filipe Pagliuso
+300 R Christine Chapel, Combat Medic @Pauline Voss
 579 C Refute @Mark Spears
 580 C Last Gasp @Arthur Haas
 582 C Run Amok @Carlos C Diaz
