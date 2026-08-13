@@ -30,6 +30,18 @@ public class BloodOperativeConfirmationDecisionProviderTest extends AITest {
     private final ConfirmationDecisionProvider provider = new ConfirmationDecisionProvider();
 
     @Test
+    public void bloodProfileUsesDedicatedEtbConfirmationTraceLabel() {
+        assertEquals(ConfirmationTriggerProfile.BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD.getTraceLabel(),
+                "BLOOD_ETB_CONFIRMATION");
+    }
+
+    @Test
+    public void gelectrodeProfileKeepsExistingConfirmationTraceLabel() {
+        assertEquals(ConfirmationTriggerProfile.GELECTRODE_SPELL_CAST_UNTAP_SELF.getTraceLabel(),
+                "GELECTRODE_CONFIRMATION");
+    }
+
+    @Test
     public void exactBloodEtbConfirmationIsNotYetAdmittedOnTheBaseline() {
         final Game game = initAndCreateGame();
         final Player decider = game.getPlayers().get(1);
