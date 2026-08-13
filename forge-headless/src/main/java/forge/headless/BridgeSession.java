@@ -148,6 +148,10 @@ final class BridgeSession {
             requireNotification(id, method);
             handleOpponentAction(params);
             break;
+        case "state_digest":
+            requireNotification(id, method);
+            handleStateDigest(params);
+            break;
         case "game_end":
             requireNotification(id, method);
             handleGameEnd(params);
@@ -354,6 +358,58 @@ final class BridgeSession {
         lobbyPlayers.get(seat).getController().acceptOpponentAction(params.path("action"), diagnostics);
     }
 
+    private void handleStateDigest(JsonNode params) {
+        requireGame();
+        checkSequence(params);
+        ArrayNode life = requireArray(params, "life");
+        ArrayNode hands = requireArray(params, "hand_counts");
+        ArrayNode permanents = requireArray(params, "permanents_count");
+        if (life.size() != game.getPlayers().size() || hands.size() != game.getPlayers().size()
+                || permanents.size() != game.getPlayers().size()) {
+            throw new BridgeFailure("state_digest_shape", "Digest player arrays do not match Forge seats");
+        }
+        List<Integer> actualLife = null;
+        List<Integer> actualHands = null;
+        List<Integer> actualPermanents = null;
+        boolean matched = false;
+        for (int attempt = 0; attempt < 100 && !matched; attempt++) {
+            actualLife = new ArrayList<>();
+            actualHands = new ArrayList<>();
+            actualPermanents = new ArrayList<>();
+            matched = true;
+            for (int index = 0; index < game.getPlayers().size(); index++) {
+                Player player = game.getPlayers().get(index);
+                actualLife.add(player.getLife());
+                actualHands.add(player.getZone(ZoneType.Hand).size());
+                actualPermanents.add(player.getCardsIn(ZoneType.Battlefield).size());
+                matched &= life.get(index).asInt() == actualLife.get(index)
+                        && hands.get(index).asInt() == actualHands.get(index)
+                        && permanents.get(index).asInt() == actualPermanents.get(index);
+            }
+            if (!matched) {
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    throw new BridgeFailure("state_digest_interrupted", "Interrupted awaiting digest state");
+                }
+            }
+        }
+        if (!matched) {
+            throw new BridgeFailure("state_desync", "Digest mismatch at turn " + params.path("turn").asInt()
+                    + ": expected life/hand/permanents=" + life + "/" + hands + "/" + permanents
+                    + ", Forge=" + actualLife + "/" + actualHands + "/" + actualPermanents);
+        }
+        String actualDigest = "t" + params.path("turn").asInt()
+                + "|l" + actualLife.get(0) + "," + actualLife.get(1)
+                + "|h" + actualHands.get(0) + "," + actualHands.get(1)
+                + "|p" + actualPermanents.get(0) + "," + actualPermanents.get(1);
+        if (!actualDigest.equals(requireText(params, "digest"))) {
+            throw new BridgeFailure("state_digest_value", "Digest string mismatch: " + actualDigest);
+        }
+        diagnostics.println("State digest matched: " + actualDigest);
+    }
+
     private void handleGameEnd(JsonNode params) {
         requireGame();
         if (params.has("seq")) {
@@ -363,6 +419,9 @@ final class BridgeSession {
                 + ", winner=" + params.path("winner").asText("none")
                 + ", reason=" + params.path("reason").asText());
         if (!options.isSkeleton()) {
+            for (LobbyPlayerBridge lobbyPlayer : lobbyPlayers.values()) {
+                lobbyPlayer.getController().finishGame();
+            }
             awaitGameThread();
         }
     }

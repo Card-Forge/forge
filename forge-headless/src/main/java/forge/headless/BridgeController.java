@@ -40,11 +40,11 @@ final class BridgeController extends PlayerControllerAi {
     private final boolean fullGame;
     private final int startingSeat;
     private final BlockingQueue<DecisionTicket> decisions = new ArrayBlockingQueue<>(1);
-    private final BlockingQueue<RemoteActionTicket> remoteActions = new ArrayBlockingQueue<>(1);
+    private final BlockingQueue<RemoteActionTicket> remoteActions = new ArrayBlockingQueue<>(16);
     private volatile boolean cancelled;
+    private volatile boolean finishing;
     private volatile JsonNode pendingHandCounts;
     private RemoteActionTicket deferredRemoteAction;
-    private DecisionTicket deferredDecision;
 
     BridgeController(Game game, Player player, LobbyPlayer lobbyPlayer, int seat, boolean forgeAiSeat,
             boolean fullGame, int startingSeat) {
@@ -61,8 +61,7 @@ final class BridgeController extends PlayerControllerAi {
             List<SpellAbility> choices = super.chooseSpellAbilityToPlay();
             return choices == null || choices.isEmpty() ? passAction() : describeAction(choices.get(0));
         }
-        DecisionTicket ticket = new DecisionTicket(context.path("allow_cast").asBoolean(true),
-                context.path("turn").asInt(), context.path("phase").asText());
+        DecisionTicket ticket = new DecisionTicket(context.path("allow_cast").asBoolean(true));
         put(decisions, ticket, "Forge AI decision permit");
         return await(ticket.result, "Forge AI priority decision");
     }
@@ -95,14 +94,25 @@ final class BridgeController extends PlayerControllerAi {
             diagnostics.println("Bridge accepted scripted opponent action for seat " + seat + ": " + action);
             return;
         }
-        if ("pass".equals(action.path("type").asText())) {
+        if ("pass".equals(action.path("type").asText())
+                && !"authoritative_main_phase_end".equals(action.path("reason").asText())) {
             diagnostics.println("Bridge mirrored opponent priority pass for seat " + seat + ": " + action);
             return;
         }
         RemoteActionTicket ticket = new RemoteActionTicket(action.deepCopy());
+        diagnostics.println("Bridge replay pending at life " + lifeSummary() + ": " + action);
         put(remoteActions, ticket, "remote opponent action");
+        if ("authoritative_main_phase_end".equals(action.path("reason").asText())) {
+            diagnostics.println("Bridge queued authoritative pass marker for seat " + seat);
+            return;
+        }
+        if (isLethalBolt(action)) {
+            diagnostics.println("Bridge queued terminal lethal Bolt for seat " + seat);
+            return;
+        }
         await(ticket.consumed, "Forge replay of opponent action");
-        diagnostics.println("Bridge replayed opponent action for seat " + seat + ": " + action);
+        diagnostics.println("Bridge replayed opponent action for seat " + seat + " at life "
+                + lifeSummary() + ": " + action);
     }
 
     void cancel() {
@@ -122,6 +132,10 @@ final class BridgeController extends PlayerControllerAi {
             throw new IllegalStateException("Full-game reveal requires context.hand_counts");
         }
         pendingHandCounts = desiredCounts.deepCopy();
+    }
+
+    void finishGame() {
+        finishing = true;
     }
 
     @Override
@@ -147,15 +161,12 @@ final class BridgeController extends PlayerControllerAi {
             return null;
         }
         if (forgeAiSeat) {
-            DecisionTicket ticket = deferredDecision == null
-                    ? take(decisions, "Forge AI decision permit") : deferredDecision;
-            deferredDecision = null;
+            if (finishing && decisions.isEmpty()) {
+                return null;
+            }
+            DecisionTicket ticket = take(decisions, "Forge AI decision permit");
             try {
                 applyPendingHandSync();
-                if (!ticket.matches(getGame())) {
-                    deferredDecision = ticket;
-                    return null;
-                }
                 List<SpellAbility> choices = super.chooseSpellAbilityToPlay();
                 if (ticket.allowCast && (choices == null || choices.isEmpty())) {
                     SpellAbility bolt = firstLegalLightningBolt();
@@ -176,7 +187,9 @@ final class BridgeController extends PlayerControllerAi {
             }
         }
 
-        RemoteActionTicket ticket = deferredRemoteAction == null ? remoteActions.poll() : deferredRemoteAction;
+        RemoteActionTicket ticket = deferredRemoteAction == null
+                ? (finishing ? remoteActions.poll() : take(remoteActions, "remote opponent action"))
+                : deferredRemoteAction;
         if (ticket == null) {
             return null;
         }
@@ -219,6 +232,13 @@ final class BridgeController extends PlayerControllerAi {
             Card host = ability.getHostCard();
             if (ability.isSpell() && host != null && "Lightning Bolt".equals(host.getName())
                     && ability.canPlay()) {
+                ability.resetTargets();
+                for (Player candidate : getGame().getPlayers()) {
+                    if (candidate != player) {
+                        ability.getTargets().add(candidate);
+                        break;
+                    }
+                }
                 return ability;
             }
         }
@@ -429,6 +449,28 @@ final class BridgeController extends PlayerControllerAi {
         return result;
     }
 
+    private String lifeSummary() {
+        List<String> totals = new ArrayList<>();
+        for (Player gamePlayer : getGame().getPlayers()) {
+            totals.add(Integer.toString(gamePlayer.getLife()));
+        }
+        return String.join("/", totals);
+    }
+
+    private boolean isLethalBolt(JsonNode action) {
+        if (!"cast".equals(action.path("type").asText())
+                || !"Lightning Bolt".equals(action.path("card").path("name").asText())) {
+            return false;
+        }
+        for (JsonNode target : action.path("targets")) {
+            if ("player".equals(target.path("kind").asText())) {
+                int targetSeat = target.path("seat").asInt();
+                return getGame().getPlayers().get(targetSeat - 1).getLife() <= 3;
+            }
+        }
+        return false;
+    }
+
     private void requireForgeAiSeat() {
         if (!forgeAiSeat) {
             throw new IllegalStateException("Decision requested from mirrored opponent seat " + seat);
@@ -469,20 +511,10 @@ final class BridgeController extends PlayerControllerAi {
 
     private static final class DecisionTicket {
         private final boolean allowCast;
-        private final int turn;
-        private final String phase;
         private final CompletableFuture<ObjectNode> result = new CompletableFuture<>();
 
-        private DecisionTicket(boolean allowCast, int turn, String phase) {
+        private DecisionTicket(boolean allowCast) {
             this.allowCast = allowCast;
-            this.turn = turn;
-            this.phase = phase;
-        }
-
-        private boolean matches(Game game) {
-            String forgePhase = game.getPhaseHandler().getPhase().nameForScripts
-                    .replace(" ", "").toLowerCase();
-            return game.getPhaseHandler().getTurn() == turn && forgePhase.equals(phase);
         }
     }
 
