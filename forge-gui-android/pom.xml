@@ -4,7 +4,8 @@
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
-        <android.manifest.versionCodeUpdateFromVersion>true</android.manifest.versionCodeUpdateFromVersion>
+        <android.manifest.versionCodeUpdateFromVersion>false</android.manifest.versionCodeUpdateFromVersion>
+        <android.manifestMerger.versionCode>${androidVersionCode}</android.manifestMerger.versionCode>
         <android.manifestMerger.versionDigits>2,2,4,2</android.manifestMerger.versionDigits>
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
@@ -16,8 +17,8 @@
         <cardforge.user>user</cardforge.user>
         <cardforge.pass>pass</cardforge.pass>
         <cardforge.server>ftp.cardforge.org</cardforge.server>
-        <androidBuildTools>35.0.0</androidBuildTools>
-        <androidPlatform>35</androidPlatform>
+        <androidBuildTools>36.0.0</androidBuildTools>
+        <androidPlatform>36</androidPlatform>
     </properties>
 
     <parent>

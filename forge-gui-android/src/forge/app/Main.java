@@ -304,6 +304,7 @@ public class Main extends AndroidApplication {
         TableRow row = new TableRow(this);
         TableRow row2 = new TableRow(this);
         TextView text = new TextView(this);
+        text.setTextColor(Color.WHITE);
         text.setGravity(Gravity.LEFT);
         text.setTypeface(Typeface.SERIF);
         String SP = "Storage Permission";
@@ -416,6 +417,7 @@ public class Main extends AndroidApplication {
                             TableRow checkboxRow = new TableRow(getContext());
                             TableRow buttonRow = new TableRow(getContext());
                             TextView text = new TextView(getContext());
+                            text.setTextColor(Color.WHITE);
                             text.setGravity(Gravity.LEFT);
                             text.setTypeface(Typeface.SERIF);
 
@@ -427,6 +429,7 @@ public class Main extends AndroidApplication {
                             messageRow.setGravity(Gravity.CENTER);
 
                             CheckBox checkBox = new CheckBox(getContext());
+                            checkBox.setTextColor(Color.WHITE);
                             checkBox.setTypeface(Typeface.SERIF);
                             checkBox.setGravity(Gravity.TOP);
                             checkBox.setChecked(false);

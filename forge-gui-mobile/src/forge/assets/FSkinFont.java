@@ -321,6 +321,7 @@ public class FSkinFont {
     }
 
     public void draw(Batch batch, String text, Color color, float x, float y, float w, boolean wrap, int horzAlignment) {
+        if (font == null) { return; } //skip text until fonts are ready
         updateScale();
         font.setColor(color);
         font.draw(batch, text, x, y, w, horzAlignment, wrap);
@@ -328,6 +329,7 @@ public class FSkinFont {
 
     //update scale of font if needed
     private void updateScale() {
+        if (font == null) { return; } //splash fonts may not be ready on first launch
         try {
             if (font.getScaleX() != scale) {
                 font.getData().setScale(scale);
@@ -438,6 +440,13 @@ public class FSkinFont {
             FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
             if (ttfFile != null && ttfFile.exists()) {
                 generateFont(ttfFile, fontName, fontSize);
+            } else {
+                // CJK font not unpacked yet (first launch): fall back to the skin font
+                // so the splash screen never renders with a null BitmapFont.
+                // Keep emergency fallback files separate from the normal CJK
+                // cache name. Once the bundled font is installed, the fallback
+                // can never be mistaken for a valid CJK cache on a later start.
+                generateFont(FSkin.getSkinFile(TTF_FILE), fontName + "-fallback", fontSize);
             }
         } else {
             generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);

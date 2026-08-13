@@ -36,6 +36,7 @@ import static forge.localinstance.properties.ForgeConstants.FONTS_DIR;
 import static forge.localinstance.properties.ForgeConstants.LANG_DIR;
 import static forge.localinstance.properties.ForgeConstants.RELEASE_URL;
 import static forge.localinstance.properties.ForgeConstants.RES_DIR;
+import static forge.localinstance.properties.ForgeConstants.USER_PREFS_DIR;
 
 public class AssetsDownloader {
     private static ImmutableList<String> getDownloadIgnoreExitOptions() {
@@ -49,8 +50,8 @@ public class AssetsDownloader {
     public static void checkForUpdates(boolean exited, Runnable runnable) {
         if (exited)
             return;
-        installBundledCjkFont();
         installBundledLocalizationOverrides();
+        refreshFontsIfBundledCjkChanged(installBundledCjkFont());
         if (GuiBase.isAndroid()) {
             Forge.getLocalizer().initialize(Forge.locale, LANG_DIR);
         }
@@ -392,8 +393,8 @@ public class AssetsDownloader {
 
     private static void run(Runnable toRun) {
         if (toRun != null) {
-            installBundledCjkFont();
             installBundledLocalizationOverrides();
+            refreshFontsIfBundledCjkChanged(installBundledCjkFont());
             if (!GuiBase.isAndroid()) {
                 Forge.getSplashScreen().getProgressBar().setDescription(Forge.getLocalizer().getMessage("lblLoadingGameResources"));
             }
@@ -420,29 +421,57 @@ public class AssetsDownloader {
         }
     }
 
-    private static void installBundledCjkFont() {
+    private static boolean installBundledCjkFont() {
         if (!GuiBase.isAndroid()) {
-            return;
+            return false;
         }
         final String fontName = "SourceHanSansCN";
         FileHandle bundledFont = Gdx.files.internal("bundled-font/" + fontName + ".ttf");
         if (!bundledFont.exists()) {
-            return;
+            return false;
         }
+        boolean fontConfigurationChanged = false;
         FileHandle fontDirectory = Gdx.files.absolute(FONTS_DIR);
         fontDirectory.mkdirs();
         FileHandle installedFont = fontDirectory.child(fontName + ".ttf");
+        FileHandle installMarker = fontDirectory.child(".bundled-cjk-" + bundledFont.length() + ".ready");
+        if (!installMarker.exists()) {
+            fontConfigurationChanged = true;
+        }
         if (!installedFont.exists() || installedFont.length() != bundledFont.length()) {
             bundledFont.copyTo(installedFont);
+            fontConfigurationChanged = true;
         }
         FileHandle bundledLicense = Gdx.files.internal("bundled-font/OFL.txt");
         if (bundledLicense.exists()) {
             bundledLicense.copyTo(fontDirectory.child("SourceHanSansCN-OFL.txt"));
         }
         if (FModel.getPreferences().getPref(FPref.UI_CJK_FONT).isEmpty()) {
+            FileUtil.ensureDirectoryExists(USER_PREFS_DIR);
             FModel.getPreferences().setPref(FPref.UI_CJK_FONT, fontName);
             FModel.getPreferences().save();
             Forge.CJK_Font = fontName;
+            fontConfigurationChanged = true;
         }
+        if (fontConfigurationChanged) {
+            for (FileHandle marker : fontDirectory.list(".ready")) {
+                if (marker.name().startsWith(".bundled-cjk-") && !marker.equals(installMarker)) {
+                    marker.delete();
+                }
+            }
+            installMarker.writeString("SourceHanSansCN " + bundledFont.length(), false, "UTF-8");
+        }
+        return fontConfigurationChanged;
+    }
+
+    private static void refreshFontsIfBundledCjkChanged(boolean fontConfigurationChanged) {
+        if (!fontConfigurationChanged) {
+            return;
+        }
+        // A splash font may have been generated before the bundled CJK font was
+        // unpacked. Remove that fallback cache and immediately rebuild the live
+        // font objects so the first session also renders Chinese correctly.
+        FSkinFont.deleteCachedFiles();
+        FSkinFont.updateAll();
     }
 }
