@@ -2,10 +2,10 @@
 
 **Status:** Provisional / Accepted for implementation planning
 **Date:** 2026-08-12
-**Revision:** 15 — records the validated FRL-02K-C2A exact Blood Operative ETB TARGET seam: resolver-null native Forge ownership, resolver-non-null external ownership only for that exact profile, and fail-closed handling for other player-owned targeted triggers; global triggered TARGET, Blood CONFIRMATION, and global CONFIRMATION remain OPEN
+**Revision:** 16 — records the validated FRL-02K-C2A exact Blood Operative ETB TARGET seam and FRL-02K-D1 exact Blood Operative ETB CONFIRMATION seam: resolver-null native Forge ownership, resolver-non-null external ownership only for the exact profile, nullable Blood triggering-player provenance, and fail-closed handling for other profiles; global triggered TARGET and global CONFIRMATION remain OPEN
 **Scope:** Initial ForgeRL 1v1 research environment
 
-The current C2A authority is defined by the [design/spec](../superpowers/specs/2026-08-11-frl-02k-c2a-triggered-target-provider-seam-design.md), [implementation plan](../superpowers/plans/2026-08-11-frl-02k-c2a-triggered-target-provider-seam.md), and [triggered TARGET audit](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md). The audit's [evidence matrix](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#6-evidence-matrix) and [exact Task 12 commands](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#61-final-task-12-exact-commands) are the recorded validation evidence for this narrow seam.
+The current C2A authority is defined by the [design/spec](../superpowers/specs/2026-08-11-frl-02k-c2a-triggered-target-provider-seam-design.md), [implementation plan](../superpowers/plans/2026-08-11-frl-02k-c2a-triggered-target-provider-seam.md), and [triggered TARGET audit](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md). The exact D1 confirmation authority is defined by the [D1 design/spec](../superpowers/specs/2026-08-12-frl-02k-d1-blood-etb-confirmation-design.md), [D1 implementation plan](../superpowers/plans/2026-08-12-frl-02k-d1-blood-etb-confirmation.md), and [D1 audit](FRL_02K_D1_BLOOD_CONFIRMATION_AUDIT.md). The C2A audit's [evidence matrix](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#6-evidence-matrix) and [exact Task 12 commands](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#61-final-task-12-exact-commands), together with the D1 audit evidence matrix, are the recorded validation evidence for these narrow seams.
 
 ## Purpose
 
@@ -160,7 +160,7 @@ This table is an initial architectural policy, not a complete inventory of Forge
 
 Every actual `PlayerController` decision type must eventually be classified explicitly.
 
-`CONFIRMATION` is not one homogeneous callback family. The FRL-02K0 safety gate, FRL-02K attribution audit, and the exact FRL-02K-B1 Gelectrode production slice are complete. The supported slice is only the explicit `Gelectrode` `SpellCast -> Untap Self` profile, with strict semantic admission at `WrappedAbility.resolve`, typed player-perspective-safe context, `[ACCEPT, DECLINE]`, and the hard `17/26` workload invariant. Global CONFIRMATION remains **OPEN**. Normal mandatory triggers are engine-owned and generate no `DecisionRequest`. Other optional no-cost triggers remain deferred. Nonzero-cost optional triggers are cost/payment-owned and must not receive a duplicate generic accept/decline request. `confirmAction` is heterogeneous by caller-owned semantics; `confirmTrigger` is a mixed callback surface rather than an authoritative boundary outside the admitted seam; bid, replacement, static-application and binary choices remain separate semantic families.
+`CONFIRMATION` is not one homogeneous callback family. The FRL-02K0 safety gate, FRL-02K attribution audit, exact FRL-02K-B1 Gelectrode production slice, and exact FRL-02K-D1 Blood Operative ETB confirmation slice are complete. The supported slices are the explicit `Gelectrode` `SpellCast -> Untap Self` profile and the explicit Blood `ChangesZone -> Battlefield` / `TrigChangeZone` / `ChangeZone Graveyard -> Exile` profile, each with strict semantic admission at `WrappedAbility.resolve`, typed player-perspective-safe context, and `[ACCEPT, DECLINE]`. Blood uses a nullable event-player field and a public Target-A projection with a private request-local identity guard; native confirmation must restore A before terminal trace completion, while external confirmation skips temporary B. Global CONFIRMATION remains **OPEN**. Normal mandatory triggers are engine-owned and generate no `DecisionRequest`. Other optional no-cost triggers remain deferred. Nonzero-cost optional triggers are cost/payment-owned and must not receive a duplicate generic accept/decline request. `confirmAction` is heterogeneous by caller-owned semantics; `confirmTrigger` is a mixed callback surface rather than an authoritative boundary outside the admitted seams; bid, replacement, static-application and binary choices remain separate semantic families.
 
 ### Rationale: generalization, not current infeasibility
 
@@ -422,13 +422,13 @@ The initial policy in 3.1 has now been tested against the engine. Status as of t
 | `ATTACK` | FRL-02G | `ADD_ATTACKER \| ... \| DONE` | SUPPORTED for constraint-free 1v1 slice |
 | `BLOCK` | FRL-02H | Two-stage `CHOOSE_BLOCKER` → `CHOOSE_ATTACKER_FOR_BLOCKER` | SUPPORTED for independent-pair Player-only slice |
 | `MULLIGAN` | FRL-02J | KEEP/REDRAW plus `MULLIGAN_BOTTOM` card selection | SUPPORTED for ordinary 1v1 Constructed London mulligan |
-| `CONFIRMATION` | FRL-02K-B1 | `Gelectrode` optional `SpellCast -> Untap Self`; strict profile admission; `[ACCEPT, DECLINE]`; exact `17/26` runtime gate | **SUPPORTED for this slice; Blood and global OPEN** |
+| `CONFIRMATION` | FRL-02K-B1 + FRL-02K-D1 | `Gelectrode` optional `SpellCast -> Untap Self` plus exact Blood Operative ETB `ChangesZone -> Battlefield -> ChangeZone Graveyard -> Exile`; strict profile admission; typed context; `[ACCEPT, DECLINE]`; exact workload gates | **SUPPORTED for the two named slices; global OPEN** |
 | `ORDER` | 18.2 | attribution pending — see below | OPEN, aggregate |
 | `DAMAGE_ASSIGNMENT` | — | see 3.9 | OPEN |
 
 The decomposition policy in 3.1 held for `ATTACK`, `BLOCK` and `PAYMENT`. It was **incomplete** for `MULLIGAN`: the London bottoming choice is a second, separate decision that the original one-line classification did not describe.
 
-FRL-02K-C2A is a narrow production seam, not a general triggered-target or confirmation adapter. For the exact Blood Operative ETB profile, `resolver == null` preserves native Forge ownership; with `resolver != null`, only that exact profile is externally owned, while all other player-owned targeted triggers fail closed without Forge-AI fallback. Blood is not agent-complete. Global triggered `TARGET`, Blood `CONFIRMATION`, and global `CONFIRMATION` remain `OPEN`.
+FRL-02K-C2A and FRL-02K-D1 are narrow production seams, not general triggered-target or confirmation adapters. For the exact Blood Operative ETB profile, `resolver == null` preserves native Forge ownership; with `resolver != null`, only that exact profile is externally owned, while all other player-owned targeted/confirmation profiles fail closed without Forge-AI fallback. Blood is not agent-complete. Global triggered `TARGET` and global `CONFIRMATION` remain `OPEN`.
 
 Every implemented boundary follows the same discipline: Forge remains the legality authority, unsupported states are structured and explicit rather than approximated, and the neutral layer does not mutate live game state during candidate construction.
 

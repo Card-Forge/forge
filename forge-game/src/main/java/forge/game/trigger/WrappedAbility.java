@@ -453,20 +453,30 @@ public class WrappedAbility extends Ability {
                             ConfirmationDiagnostics.capture(game, resolvedDecider, generation, this);
                     if (generation.getStatus() == ConfirmationDecisionProvider.Status.ADMITTED) {
                         final DecisionRequest request = generation.getRequest();
+                        final boolean externalOwner = provider.isExternalOwner(request);
                         final DeterminismTrace.RequestHandle traceHandle = DeterminismTrace.recordRequest(
-                                game, resolvedDecider.getId(), request, "GELECTRODE_CONFIRMATION", 0);
+                                game, resolvedDecider.getId(), request,
+                                request.getConfirmationContext().getProfile().getTraceLabel(), 0);
                         final LegalCandidate selected = provider.choose(request,
                                 () -> resolvedDecider.getController().confirmTrigger(this));
-                        final boolean accepted = provider.apply(request, selected, this);
-                        final boolean nativeTeacher = !provider.hasResolver();
-                        confirmationCapture.recordResult(selected, nativeTeacher);
-                        if (nativeTeacher) {
-                            traceHandle.recordNativeMappedResult(selected);
-                        } else {
-                            traceHandle.recordExternalChosenResult(selected);
+                        final boolean accepted;
+                        try {
+                            accepted = provider.apply(request, selected, this);
+                        } catch (final UnsupportedConfirmationDecisionException ex) {
+                            if (!externalOwner
+                                    && ex.getStatus() == ConfirmationDecisionProvider.Status.NATIVE_MAPPING_FAILED) {
+                                traceHandle.recordMappingFailed();
+                            }
+                            throw ex;
                         }
+                        confirmationCapture.recordResult(selected, !externalOwner);
                         ChangesZoneAuditDiagnostics.recordTriggerResult(auditScope, accepted);
                         TriggeredTargetAuditDiagnostics.recordConfirmationResult(this, accepted);
+                        if (externalOwner) {
+                            traceHandle.recordExternalChosenResult(selected);
+                        } else {
+                            traceHandle.recordNativeMappedResult(selected);
+                        }
                         if (!accepted) {
                             return;
                         }

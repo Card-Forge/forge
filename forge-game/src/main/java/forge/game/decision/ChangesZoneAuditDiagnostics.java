@@ -126,8 +126,12 @@ public final class ChangesZoneAuditDiagnostics {
         if (!ENABLED || scope == null) {
             return;
         }
-        emit(scope, "CONFIRM_TRIGGER_RESULT", null, TargetDetails.NONE, Boolean.toString(result), "NONE",
-                "NONE", "NONE", "NONE");
+        try {
+            emit(scope, "CONFIRM_TRIGGER_RESULT", null, TargetDetails.NONE, Boolean.toString(result), "NONE",
+                    "NONE", "NONE", "NONE");
+        } catch (final RuntimeException ignored) {
+            // Audit failures must never alter the callback or game-loop path.
+        }
     }
 
     public static void recordAiTargetEvaluation(final WrappedAbility wrapper, final SpellAbility ability,

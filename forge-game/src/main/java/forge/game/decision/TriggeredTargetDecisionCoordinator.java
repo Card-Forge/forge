@@ -1,24 +1,16 @@
 package forge.game.decision;
 
-import forge.card.CardStateName;
 import forge.game.GameObject;
-import forge.game.ability.AbilityFactory;
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
-import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,27 +21,6 @@ import java.util.Set;
  * external application, and native-result mapping without duplicating Forge's legality oracle.</p>
  */
 public final class TriggeredTargetDecisionCoordinator {
-    private static final String BLOOD_OPERATIVE = "Blood Operative";
-    private static final String BLOOD_TRIGGER = "TrigChangeZone";
-
-    private static final Map<String, String> BLOOD_TRIGGER_PARAMS = Map.of(
-            "Mode", "ChangesZone",
-            "Origin", "Any",
-            "Destination", "Battlefield",
-            "ValidCard", "Card.Self",
-            "OptionalDecider", "You",
-            "Execute", BLOOD_TRIGGER);
-    private static final Map<String, String> BLOOD_EFFECT_PARAMS = Map.of(
-            "DB", "ChangeZone",
-            "Origin", "Graveyard",
-            "Destination", "Exile",
-            "ValidTgts", "Card");
-    private static final Set<String> BLOOD_STATIC_EFFECT_PARAMS = Set.of(
-            "DB", "Origin", "Destination", "ValidTgts", "TgtPrompt", "ValidTgtsDesc");
-    private static final Set<String> BLOOD_LIVE_EFFECT_PARAMS = Set.of(
-            "DB", "Origin", "Destination", "ValidTgts", "TgtPrompt", "ValidTgtsDesc",
-            "TgtZone", "TargetMin", "TargetMax");
-
     public enum Classification {
         NOT_APPLICABLE,
         ADMITTED,
@@ -408,7 +379,7 @@ public final class TriggeredTargetDecisionCoordinator {
         }
 
         try {
-            return admitBlood(wrapper, chooser, trigger);
+            return admitBlood(wrapper, chooser);
         } catch (final RuntimeException ex) {
             return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
         }
@@ -435,17 +406,18 @@ public final class TriggeredTargetDecisionCoordinator {
         return false;
     }
 
-    private static Admission admitBlood(final WrappedAbility wrapper, final Player chooser,
-            final Trigger trigger) {
-        final SpellAbility liveAbility = wrapper.getWrappedAbility();
-        final Player decider = wrapper.getDecider();
-        final Card source = wrapper.getHostCard();
-        if (liveAbility == null || trigger == null || source == null || chooser == null || decider == null) {
+    private static Admission admitBlood(final WrappedAbility wrapper, final Player chooser) {
+        final SpellAbility liveAbility;
+        final Player decider;
+        final Card source;
+        try {
+            liveAbility = wrapper.getWrappedAbility();
+            decider = wrapper.getDecider();
+            source = wrapper.getHostCard();
+        } catch (final RuntimeException ex) {
             return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
         }
-        if (!BLOOD_OPERATIVE.equals(source.getName())
-                || source.getCurrentStateName() != CardStateName.Original
-                || source.isCloned()) {
+        if (liveAbility == null || source == null || chooser == null || decider == null) {
             return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
         }
         if (source.isFaceDown()
@@ -456,87 +428,41 @@ public final class TriggeredTargetDecisionCoordinator {
                 || !source.getView().canBeShownTo(decider.getView())) {
             return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
         }
-        if (!trigger.isIntrinsic() || trigger.isStatic() || trigger.getMode() != TriggerType.ChangesZone
-                || trigger.getSpawningAbility() != null || wrapper.isCopied()
-                || liveAbility.isCopied() || !wrapper.isIntrinsic() || !liveAbility.isIntrinsic()) {
-            return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
-        }
         if (!samePlayer(chooser, decider)
                 || !samePlayer(decider, liveAbility.getActivatingPlayer())
                 || !samePlayer(decider, source.getController())) {
             return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
         }
-        if (!BLOOD_TRIGGER_PARAMS.equals(normalize(trigger.getOriginalMapParams(), "TriggerDescription"))
-                || !BLOOD_TRIGGER_PARAMS.equals(normalize(trigger.getMapParams(), "TriggerDescription"))) {
-            return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
-        }
-        if (!matchesStaticEffect(source)) {
-            return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
-        }
 
-        return matchesLiveEffect(liveAbility);
-    }
-
-    private static boolean matchesStaticEffect(final Card source) {
-        if (!source.hasSVar(BLOOD_TRIGGER)) {
-            return false;
-        }
-        try {
-            final Map<String, String> params = AbilityFactory.getMapParams(source.getSVar(BLOOD_TRIGGER));
-            if (!BLOOD_STATIC_EFFECT_PARAMS.containsAll(params.keySet())) {
-                return false;
+        final BloodOperativeEtbProfile.Validation validation =
+                BloodOperativeEtbProfile.validateCommonSemanticProfile(wrapper);
+        if (!validation.isAdmitted()) {
+            if (isLiveEffectFailure(validation.getFailure()) && hasInitialTargetFailure(liveAbility)) {
+                return Admission.unsupported(TriggeredTargetIntegrityException.Reason.NON_EMPTY_INITIAL_TARGETS);
             }
-            return BLOOD_EFFECT_PARAMS.equals(normalize(params, "TgtPrompt", "ValidTgtsDesc"));
-        } catch (final RuntimeException ex) {
-            return false;
+            return Admission.unsupported(mapCommonFailure(validation.getFailure()));
         }
-    }
 
-    private static Admission matchesLiveEffect(final SpellAbility liveAbility) {
-        final Map<String, String> params = liveAbility.getMapParams();
-        if (params == null || !BLOOD_LIVE_EFFECT_PARAMS.containsAll(params.keySet())) {
-            return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
-        }
-        if (liveAbility.hasParam("Optional") || liveAbility.hasParam("TargetingPlayer")
-                || liveAbility.getTargetingPlayer() != null) {
-            return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
-        }
-        if (liveAbility.getTargets() == null || !liveAbility.getTargets().isEmpty()) {
+        if (hasInitialTargetFailure(liveAbility)) {
             return Admission.unsupported(TriggeredTargetIntegrityException.Reason.NON_EMPTY_INITIAL_TARGETS);
-        }
-        if (!BLOOD_EFFECT_PARAMS.equals(normalize(params, "TgtPrompt", "ValidTgtsDesc", "TgtZone",
-                "TargetMin", "TargetMax")) || liveAbility.getApi() != ApiType.ChangeZone) {
-            return Admission.unsupported(TriggeredTargetIntegrityException.Reason.LIVE_EFFECT_MISMATCH);
-        }
-
-        final TargetRestrictions restrictions = liveAbility.getTargetRestrictions();
-        try {
-            if (!liveAbility.usesTargeting() || restrictions == null || restrictions.isRandomTarget()
-                    || restrictions.isRandomNumTargets() || !List.of(ZoneType.Graveyard).equals(restrictions.getZone())
-                    || liveAbility.getMinTargets() != 1 || liveAbility.getMaxTargets() != 1
-                    || liveAbility.getSubAbility() != null || !liveAbility.getAdditionalAbilities().isEmpty()
-                    || !liveAbility.getAdditionalAbilityLists().isEmpty()
-                    || liveAbility.getPayCosts() == null || !liveAbility.getPayCosts().isFree()
-                    || (params.containsKey("TgtZone") && !"Graveyard".equals(params.get("TgtZone")))
-                    || (params.containsKey("TargetMin") && !"1".equals(params.get("TargetMin")))
-                    || (params.containsKey("TargetMax") && !"1".equals(params.get("TargetMax")))) {
-                return Admission.unsupported(TriggeredTargetIntegrityException.Reason.LIVE_EFFECT_MISMATCH);
-            }
-        } catch (final RuntimeException ex) {
-            return Admission.unsupported(TriggeredTargetIntegrityException.Reason.LIVE_EFFECT_MISMATCH);
         }
         return Admission.admitted();
     }
 
-    private static Map<String, String> normalize(final Map<String, String> params, final String... ignoredKeys) {
-        if (params == null) {
-            return Map.of();
+    private static TriggeredTargetIntegrityException.Reason mapCommonFailure(
+            final BloodOperativeEtbProfile.Failure failure) {
+        if (failure == BloodOperativeEtbProfile.Failure.TARGETING_SHAPE) {
+            return TriggeredTargetIntegrityException.Reason.LIVE_EFFECT_MISMATCH;
         }
-        final Map<String, String> normalized = new HashMap<>(params);
-        for (final String ignoredKey : ignoredKeys) {
-            normalized.remove(ignoredKey);
-        }
-        return normalized;
+        return TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE;
+    }
+
+    private static boolean isLiveEffectFailure(final BloodOperativeEtbProfile.Failure failure) {
+        return failure == BloodOperativeEtbProfile.Failure.TARGETING_SHAPE;
+    }
+
+    private static boolean hasInitialTargetFailure(final SpellAbility liveAbility) {
+        return liveAbility.getTargets() == null || !liveAbility.getTargets().isEmpty();
     }
 
     private static Player implicitChooser(final SpellAbility queuedAbility) {

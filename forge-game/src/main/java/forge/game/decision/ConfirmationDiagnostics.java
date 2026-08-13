@@ -14,12 +14,12 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Optional, B1-only lifecycle diagnostics for the Gelectrode confirmation seam. */
+/** Optional lifecycle diagnostics for the explicitly supported confirmation profiles. */
 public final class ConfirmationDiagnostics {
     public static final String OUTPUT_PATH_PROPERTY = DiagnosticOutputPaths.CONFIRMATION_FILE_PROPERTY;
 
     private static final String HEADER = "event_type,process_id,game_id,turn,phase,decider,status,reason,request_id,"
-            + "legal_candidates,forced,selected,native_callback,source_name,mode,execute";
+            + "legal_candidates,forced,selected,native_callback,source_name,mode,execute,profile";
     private static final String OUTPUT_PATH = outputPath();
     private static final boolean ENABLED = !OUTPUT_PATH.isBlank();
     private static final long PROCESS_ID = ProcessHandle.current().pid();
@@ -41,17 +41,22 @@ public final class ConfirmationDiagnostics {
         if (!ENABLED || game == null || decider == null || generation == null) {
             return Capture.disabled();
         }
-        final DecisionRequest request = generation.getRequest();
-        final String candidates = request == null ? "" : String.join(";",
-                request.getCandidates().stream().map(LegalCandidate::getSemanticKey).toList());
-        final String requestId = request == null ? "" : Long.toString(request.getRequestId());
-        final String forced = request == null ? "" : Boolean.toString(request.isForced());
-        final PublicSource source = publicSource(wrapper, decider);
-        synchronized (EVENTS) {
-            EVENTS.add(row("CALLBACK", game, decider, generation.getStatus().name(), generation.getReason(), requestId,
-                    candidates, forced, "", "", source.name, source.mode, source.execute));
+        try {
+            final DecisionRequest request = generation.getRequest();
+            final String candidates = request == null ? "" : String.join(";",
+                    request.getCandidates().stream().map(LegalCandidate::getSemanticKey).toList());
+            final String requestId = request == null ? "" : Long.toString(request.getRequestId());
+            final String forced = request == null ? "" : Boolean.toString(request.isForced());
+            final String profile = profileName(generation);
+            final PublicSource source = safePublicSource(wrapper, decider);
+            synchronized (EVENTS) {
+                EVENTS.add(row("CALLBACK", game, decider, generation.getStatus().name(), generation.getReason(), requestId,
+                        candidates, forced, "", "", source.name, source.mode, source.execute, profile));
+            }
+            return new Capture(game, decider, generation.getStatus(), requestId, source, profile, true);
+        } catch (final RuntimeException ex) {
+            return Capture.disabled();
         }
-        return new Capture(game, decider, generation.getStatus(), requestId, source, true);
     }
 
     private static String outputPath() {
@@ -65,11 +70,32 @@ public final class ConfirmationDiagnostics {
     private static String row(final String eventType, final Game game, final Player decider, final String status,
             final String reason, final String requestId, final String candidates, final String forced,
             final String selected,
-            final String nativeCallback, final String sourceName, final String mode, final String execute) {
+            final String nativeCallback, final String sourceName, final String mode, final String execute,
+            final String profile) {
         return String.join(",", eventType, Long.toString(PROCESS_ID), Long.toString(game.getId()),
                 Integer.toString(game.getPhaseHandler().getTurn()), csv(String.valueOf(game.getPhaseHandler().getPhase())),
                 Integer.toString(decider.getId()), status, reason, requestId, csv(candidates), forced, csv(selected),
-                nativeCallback, csv(sourceName), csv(mode), csv(execute));
+                nativeCallback, csv(sourceName), csv(mode), csv(execute), csv(profile));
+    }
+
+    private static String profileName(final ConfirmationDecisionProvider.Generation generation) {
+        try {
+            if (generation == null) {
+                return "";
+            }
+            final ConfirmationTriggerProfile profile = generation.getProfile();
+            return profile == null ? "" : profile.name();
+        } catch (final RuntimeException ex) {
+            return "";
+        }
+    }
+
+    private static PublicSource safePublicSource(final WrappedAbility wrapper, final Player decider) {
+        try {
+            return publicSource(wrapper, decider);
+        } catch (final RuntimeException ex) {
+            return PublicSource.EMPTY;
+        }
     }
 
     private static PublicSource publicSource(final WrappedAbility wrapper, final Player decider) {
@@ -119,22 +145,24 @@ public final class ConfirmationDiagnostics {
         private final ConfirmationDecisionProvider.Status status;
         private final String requestId;
         private final PublicSource source;
+        private final String profile;
         private final boolean enabled;
         private boolean resultRecorded;
 
         private Capture(final Game game, final Player decider,
                 final ConfirmationDecisionProvider.Status status, final String requestId, final PublicSource source,
-                final boolean enabled) {
+                final String profile, final boolean enabled) {
             this.game = game;
             this.decider = decider;
             this.status = status;
             this.requestId = requestId;
             this.source = source;
+            this.profile = profile;
             this.enabled = enabled;
         }
 
         private static Capture disabled() {
-            return new Capture(null, null, null, "", PublicSource.EMPTY, false);
+            return new Capture(null, null, null, "", PublicSource.EMPTY, "", false);
         }
 
         /** Records the one mapped result for an admitted request. */
@@ -143,10 +171,14 @@ public final class ConfirmationDiagnostics {
                 return;
             }
             resultRecorded = true;
-            synchronized (EVENTS) {
-                EVENTS.add(row("RESULT", game, decider, status.name(), status.name(), requestId, "", "",
-                        selectedCandidate == null ? "" : selectedCandidate.getSemanticKey(),
-                        Boolean.toString(nativeCallback), source.name, source.mode, source.execute));
+            try {
+                synchronized (EVENTS) {
+                    EVENTS.add(row("RESULT", game, decider, status.name(), status.name(), requestId, "", "",
+                            selectedCandidate == null ? "" : selectedCandidate.getSemanticKey(),
+                            Boolean.toString(nativeCallback), source.name, source.mode, source.execute, profile));
+                }
+            } catch (final RuntimeException ex) {
+                // Diagnostics must never alter the Forge callback or game-loop path.
             }
         }
     }
