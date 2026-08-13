@@ -1,13 +1,13 @@
 package forge.game.decision;
 
-/** Raised when external confirmation ownership encounters a profile outside the admitted B1 slice. */
+/** Raised when confirmation ownership encounters an unsupported profile or integrity failure. */
 public final class UnsupportedConfirmationDecisionException extends IllegalStateException {
     private final ConfirmationDecisionProvider.Status status;
     private final String reason;
 
     public UnsupportedConfirmationDecisionException(final ConfirmationDecisionProvider.Status status0,
             final String reason0) {
-        super("Unsupported FRL-02K-B1 CONFIRMATION decision: " + status0 + " / " + reason0);
+        super("Confirmation decision unsupported or integrity-failed: " + status0 + " / " + reason0);
         status = status0;
         reason = reason0;
     }
