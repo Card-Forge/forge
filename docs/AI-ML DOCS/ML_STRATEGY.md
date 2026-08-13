@@ -2,13 +2,25 @@
 
 **Status:** Provisional / Accepted for implementation planning
 **Date:** 2026-08-12
-**FRL-02L Update:** 2026-08-13 — live ORDER attribution is now authoritative: simultaneous-trigger ordering and the retained-top component of Surveil are v0 ORDER profiles; legacy combat ordering is rules-gated off; modern damage distribution remains separate
-**Revision:** 17 — records the validated FRL-02K-C2A exact Blood Operative ETB TARGET seam and FRL-02K-D1 exact Blood Operative ETB CONFIRMATION seam, plus the authoritative FRL-02L live ORDER attribution: simultaneous-trigger order and the retained-top component of Surveil are v0 ORDER profiles; legacy combat ordering is rules-gated off; modern damage distribution remains separate; global triggered TARGET and global CONFIRMATION remain OPEN
+**FRL-02L Update:** 2026-08-13 — corrected live ORDER attribution now distinguishes simultaneous-trigger ordering, the discovered copied-spell resolve-first seam, and the retained-top component of Surveil; legacy combat ordering is rules-gated off; modern damage distribution remains separate
+**Revision:** 18 — records the validated FRL-02K-C2A exact Blood Operative ETB TARGET seam and FRL-02K-D1 exact Blood Operative ETB CONFIRMATION seam, plus the corrected FRL-02L live ORDER attribution: `SIMULTANEOUS_TRIGGER_ORDER`, discovered `COPY_SPELL_RESOLVE_FIRST_ORDER`, and the retained-top component of Surveil are separate semantic areas; only the first is the current L1 implementation profile; legacy combat ordering is rules-gated off; modern damage distribution remains separate; global triggered TARGET and global CONFIRMATION remain OPEN
 **Scope:** Initial ForgeRL 1v1 research environment
 
 The current C2A authority is defined by the [design/spec](../superpowers/specs/2026-08-11-frl-02k-c2a-triggered-target-provider-seam-design.md), [implementation plan](../superpowers/plans/2026-08-11-frl-02k-c2a-triggered-target-provider-seam.md), and [triggered TARGET audit](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md). The exact D1 confirmation authority is defined by the [D1 design/spec](../superpowers/specs/2026-08-12-frl-02k-d1-blood-etb-confirmation-design.md), [D1 implementation plan](../superpowers/plans/2026-08-12-frl-02k-d1-blood-etb-confirmation.md), and [D1 audit](FRL_02K_D1_BLOOD_CONFIRMATION_AUDIT.md). The C2A audit's [evidence matrix](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#6-evidence-matrix) and [exact Task 12 commands](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#61-final-task-12-exact-commands), together with the D1 audit evidence matrix, are the recorded validation evidence for these narrow seams.
 
-FRL-02L is now the authoritative ORDER attribution result. The controlled v0 slice contains two exact ORDER-bearing profiles: same-player simultaneous-trigger ordering, and the retained-top ordering component of the Surveil partition-plus-order callback. Legacy combat ordering callbacks are rules-gated off in the controlled workload, and modern combat damage distribution remains a separate `DAMAGE_ASSIGNMENT` boundary. Therefore `ORDER` is required for v0, but no generic ORDER adapter or provider is authorized by this audit; the next implementation slice is `FRL-02L1 IMPLEMENT_SIMULTANEOUS_TRIGGER_ORDER`.
+FRL-02L is now the authoritative ORDER attribution result, corrected by
+FRL-02L1R2. The controlled-v0 inventory contains three distinct player-owned
+semantic areas: same-player simultaneous-trigger ordering,
+`COPY_SPELL_RESOLVE_FIRST_ORDER` from the exact proven Replicate/
+`CopySpellAbilityEffect` path, and the retained-top ordering component of the
+Surveil partition-plus-order callback. The copied-spell profile is discovered,
+not implemented, and does not imply generic copied-spell support. Legacy
+combat ordering callbacks are rules-gated off in the controlled workload, and
+modern combat damage distribution remains a separate `DAMAGE_ASSIGNMENT`
+boundary. Therefore `ORDER` is required for v0, but no generic ORDER adapter or
+provider is authorized by this audit; the implementation roadmap remains
+`FRL-02L1 SIMULTANEOUS_TRIGGER_ORDER` -> exact copy-spell ORDER design ->
+`FRL-02L2 SURVEIL_PARTITION_PLUS_ORDER`.
 
 ## Purpose
 
@@ -295,7 +307,7 @@ DONE
 
 Where ordering or multiple-block rules require additional choices, expose those as subsequent typed requests.
 
-FRL-02L confirms that this sequential shape applies only to exact attributed profiles, not to a generic callback-wide `ORDER` family. The v0 profiles are same-player simultaneous-trigger ordering and the retained-top ordering subdecision within Surveil partition-plus-order. Legacy combat ordering is excluded, and explicit library/Scry/zone-order profiles remain future-pool work.
+FRL-02L confirms that this sequential shape applies only to exact attributed profiles, not to a generic callback-wide `ORDER` family. The corrected controlled-v0 semantic areas are same-player simultaneous-trigger ordering, the discovered `COPY_SPELL_RESOLVE_FIRST_ORDER` copied-spell seam, and the retained-top ordering subdecision within Surveil partition-plus-order. The copied-spell seam remains open and unimplemented; legacy combat ordering is excluded, and explicit library/Scry/zone-order profiles remain future-pool work.
 
 ## 3.4 Ordering
 
@@ -428,7 +440,7 @@ The initial policy in 3.1 has now been tested against the engine. Status as of t
 | `BLOCK` | FRL-02H | Two-stage `CHOOSE_BLOCKER` → `CHOOSE_ATTACKER_FOR_BLOCKER` | SUPPORTED for independent-pair Player-only slice |
 | `MULLIGAN` | FRL-02J | KEEP/REDRAW plus `MULLIGAN_BOTTOM` card selection | SUPPORTED for ordinary 1v1 Constructed London mulligan |
 | `CONFIRMATION` | FRL-02K-B1 + FRL-02K-D1 | `Gelectrode` optional `SpellCast -> Untap Self` plus exact Blood Operative ETB `ChangesZone -> Battlefield -> ChangeZone Graveyard -> Exile`; strict profile admission; typed context; `[ACCEPT, DECLINE]`; exact workload gates | **SUPPORTED for the two named slices; global OPEN** |
-| `ORDER` | FRL-02L | simultaneous-trigger order plus Surveil retained-top order; no generic adapter | V0_ORDER_REQUIRED; implementation not started |
+| `ORDER` | FRL-02L | simultaneous-trigger order; discovered copied-spell resolve-first order; Surveil retained-top order; no generic adapter | `FRL_02L1_PASS`; copy-spell and Surveil open |
 | `DAMAGE_ASSIGNMENT` | — | see 3.9 | OPEN |
 
 The decomposition policy in 3.1 held for `ATTACK`, `BLOCK` and `PAYMENT`. It was **incomplete** for `MULLIGAN`: the London bottoming choice is a second, separate decision that the original one-line classification did not describe.
@@ -439,7 +451,7 @@ Every implemented boundary follows the same discipline: Forge remains the legali
 
 `PAYMENT` is the load-bearing exception. It is `PARTIAL`, it is the second-highest-volume family, and its unsupported share is measured rather than hypothetical: the reactive matchup produced 848 raw callbacks, 225 atomic requests and 192 explicit `VARIABLE_MANA_OUTPUT` states — roughly 22.6% of raw payment callbacks carrying a known unsupported feature.
 
-The engine exposes several unrelated ordering families through callbacks whose names contain `order`. FRL-02L has attributed the current v0 profiles; the remaining Scry, explicit zone, ordered-graveyard, and legacy combat surfaces must not be generalized into one adapter. See 18.2.
+The engine exposes several unrelated ordering families through callbacks whose names contain `order`. FRL-02L has attributed the current v0 semantic areas; the remaining Scry, explicit zone, ordered-graveyard, and legacy combat surfaces must not be generalized into one adapter. See 18.2.
 
 ## 3.9 DAMAGE_ASSIGNMENT and the Information Barrier
 
@@ -2173,12 +2185,26 @@ Only after attribution should the type be split, for example into `TRIGGER_ORDER
 
 The completed [FRL-02L audit](FRL_02L_ORDER_ATTRIBUTION_AUDIT.md) reconciles source inventory with the controlled runtime rather than treating every method containing `order` as an agent decision:
 
-* `SIMULTANEOUS_TRIGGER_ORDER` is `LIVE_AGENT_ORDER`: `MagicStack` groups pending entries by the active player under APNAP, passes only that player's entries to `orderSimultaneousSa`, and the returned permutation changes stack insertion/resolution order. The v0 workload observed 116 callback calls, including 20 calls with two or more entries and seven non-identity permutations.
+* `SIMULTANEOUS_TRIGGER_ORDER` is `LIVE_AGENT_ORDER`: `MagicStack` groups pending entries by the active player under APNAP, passes only that player's entries to `orderSimultaneousSa`, and the returned permutation changes stack insertion/resolution order. The corrected v0 workload observed 116 raw callback calls, 20 raw multi-item callbacks, 19 exact simultaneous-trigger sessions, and 26 exact L1 requests.
+* `COPY_SPELL_RESOLVE_FIRST_ORDER` is a separately discovered `LIVE_AGENT_ORDER` seam: the exact Replicate/`CopySpellAbilityEffect` path produced one non-trigger copied-spell callback, and the Human controller explicitly exposes `Resolve first` before per-copy target setup. The profile is player-owned, not engine-owned, but remains `DISCOVERED / OPEN / NOT IMPLEMENTED`; it does not imply generic copied-spell support.
 * `SURVEIL_PARTITION_PLUS_ORDER` is a decomposed v0 profile: the partition is a `CARD_SELECTION`-like choice and the relative order of cards remaining on top is an ORDER subdecision. The workload observed 16 Surveil callbacks, including 10 two-card inputs and five calls with two retained top cards; two of those five returned a non-identity order.
 * `orderMoveToZoneList` is source-reachable plumbing for zone-order profiles but no current v0 card/effect path required a strategic library or ordered-graveyard decision. The observed calls were graveyard transfers with identity output under the default controlled rules.
 * `arrangeForScry`, legacy combat ordering, payment-cost ordering, canonical sorting, hand reordering, and arbitrary existing-stack reordering are not current v0 ORDER profiles.
 
-The exact current disposition is `V0_ORDER_REQUIRED`, with no generic `DecisionType.ORDER` implementation before the exact profile design. The recommended next production slice is `FRL-02L1 IMPLEMENT_SIMULTANEOUS_TRIGGER_ORDER`; Surveil remains separately decomposed and must not be silently folded into a generic permutation adapter.
+The exact current disposition is `V0_ORDER_REQUIRED`, with no generic
+`DecisionType.ORDER` implementation. The roadmap is:
+
+```text
+FRL-02L1 SIMULTANEOUS_TRIGGER_ORDER
+    -> FRL-02L1C DESIGN_COPY_SPELL_RESOLVE_FIRST_ORDER
+    -> FRL-02L2 SURVEIL_PARTITION_PLUS_ORDER
+    -> ORDER v0 closed
+    -> MODERN DAMAGE_ASSIGNMENT
+    -> FULL RUNTIME GAP AUDIT
+```
+
+The copied-spell profile and Surveil remain separately decomposed and must not
+be silently folded into a generic permutation adapter.
 
 ## 18.3 Runtime Gap Audit and the Zero-Unsupported Gate
 

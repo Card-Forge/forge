@@ -24,6 +24,7 @@ import forge.game.decision.ChangesZoneAuditDiagnostics;
 import forge.game.decision.DownstreamCallbackFamily;
 import forge.game.decision.MulliganDiagnostics;
 import forge.game.decision.PriorityActionDiagnostics;
+import forge.game.decision.SimultaneousTriggerOrderDecisionCoordinator;
 import forge.game.decision.TargetDecisionProvider;
 import forge.game.decision.TriggeredTargetAuditDiagnostics;
 import forge.game.decision.TriggeredTargetDecisionCoordinator;
@@ -67,6 +68,8 @@ public class PlayerControllerAi extends PlayerController {
     private final AiController brains;
     private final TriggeredTargetDecisionCoordinator triggeredTargetDecisionCoordinator =
             new TriggeredTargetDecisionCoordinator();
+    private final SimultaneousTriggerOrderDecisionCoordinator simultaneousTriggerOrderDecisionCoordinator =
+            new SimultaneousTriggerOrderDecisionCoordinator();
 
     private boolean pilotsNonAggroDeck = false;
 
@@ -1358,7 +1361,8 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs) {
-        return getAi().orderPlaySa(activePlayerSAs);
+        return simultaneousTriggerOrderDecisionCoordinator.order(activePlayerSAs, getPlayer(),
+                getSimultaneousTriggerOrderDecisionProvider(), getAi()::orderPlaySa);
     }
 
     @Override

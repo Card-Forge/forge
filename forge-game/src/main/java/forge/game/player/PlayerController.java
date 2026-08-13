@@ -18,6 +18,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
 import forge.game.decision.ConfirmationDecisionProvider;
+import forge.game.decision.SimultaneousTriggerOrderDecisionProvider;
 import forge.game.decision.TargetDecisionProvider;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -80,6 +81,8 @@ public abstract class PlayerController {
     protected final LobbyPlayer lobbyPlayer;
     private final ConfirmationDecisionProvider confirmationDecisionProvider = new ConfirmationDecisionProvider();
     private final TargetDecisionProvider targetDecisionProvider = new TargetDecisionProvider();
+    private final SimultaneousTriggerOrderDecisionProvider simultaneousTriggerOrderDecisionProvider =
+            new SimultaneousTriggerOrderDecisionProvider();
     private TargetDecisionProvider.Resolver targetDecisionResolver;
 
     public PlayerController(Game game0, Player p, LobbyPlayer lp) {
@@ -107,6 +110,16 @@ public abstract class PlayerController {
     }
     public final void setTargetDecisionResolver(final TargetDecisionProvider.Resolver resolver) {
         targetDecisionResolver = resolver;
+    }
+    public final SimultaneousTriggerOrderDecisionProvider getSimultaneousTriggerOrderDecisionProvider() {
+        return simultaneousTriggerOrderDecisionProvider;
+    }
+    public final SimultaneousTriggerOrderDecisionProvider.Resolver getSimultaneousTriggerOrderResolver() {
+        return simultaneousTriggerOrderDecisionProvider.getResolver();
+    }
+    public final void setSimultaneousTriggerOrderResolver(
+            final SimultaneousTriggerOrderDecisionProvider.Resolver resolver) {
+        simultaneousTriggerOrderDecisionProvider.setResolver(resolver);
     }
 
     public void tempShowCards(final Iterable<Card> cards) { } // show cards in UI until ended

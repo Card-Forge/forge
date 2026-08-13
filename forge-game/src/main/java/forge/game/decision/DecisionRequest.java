@@ -19,6 +19,7 @@ public final class DecisionRequest {
     private final BlockDeclarationContext blockContext;
     private final MulliganContext mulliganContext;
     private final ConfirmationDecisionContext confirmationContext;
+    private final SimultaneousTriggerOrderContext orderContext;
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates) {
         this(requestId, decisionType, candidates, null, null, null, null, null, null, null, null);
@@ -70,6 +71,12 @@ public final class DecisionRequest {
                 confirmationContext);
     }
 
+    DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
+            final SimultaneousTriggerOrderContext orderContext) {
+        this(requestId, decisionType, candidates, null, null, null, null, null, null, null, null,
+                null, orderContext);
+    }
+
     private DecisionRequest(final long requestId, final DecisionType decisionType,
             final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
             final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
@@ -86,6 +93,17 @@ public final class DecisionRequest {
             final ModeDecisionContext modeContext, final CardSelectionContext cardSelectionContext,
             final AttackDeclarationContext attackContext, final BlockDeclarationContext blockContext,
             final MulliganContext mulliganContext, final ConfirmationDecisionContext confirmationContext) {
+        this(requestId, decisionType, candidates, targetContext, paymentContext, xContext, modeContext,
+                cardSelectionContext, attackContext, blockContext, mulliganContext, confirmationContext, null);
+    }
+
+    private DecisionRequest(final long requestId, final DecisionType decisionType,
+            final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
+            final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
+            final ModeDecisionContext modeContext, final CardSelectionContext cardSelectionContext,
+            final AttackDeclarationContext attackContext, final BlockDeclarationContext blockContext,
+            final MulliganContext mulliganContext, final ConfirmationDecisionContext confirmationContext,
+            final SimultaneousTriggerOrderContext orderContext) {
         this.requestId = requestId;
         this.decisionType = Objects.requireNonNull(decisionType);
         this.candidates = List.copyOf(candidates);
@@ -98,6 +116,7 @@ public final class DecisionRequest {
         this.blockContext = blockContext;
         this.mulliganContext = mulliganContext;
         this.confirmationContext = confirmationContext;
+        this.orderContext = orderContext;
         if (this.candidates.isEmpty()) {
             throw new IllegalArgumentException("A DecisionRequest must contain at least one legal candidate");
         }
@@ -162,6 +181,34 @@ public final class DecisionRequest {
         if (decisionType != DecisionType.CONFIRMATION && confirmationContext != null) {
             throw new IllegalArgumentException("Only CONFIRMATION DecisionRequests may contain confirmation context");
         }
+        if (decisionType == DecisionType.ORDER && orderContext == null) {
+            throw new IllegalArgumentException("An ORDER DecisionRequest requires order context");
+        }
+        if (decisionType != DecisionType.ORDER && orderContext != null) {
+            throw new IllegalArgumentException("Only ORDER DecisionRequests may contain order context");
+        }
+        if (decisionType == DecisionType.ORDER) {
+            if (candidates.size() < 2) {
+                throw new IllegalArgumentException("An ORDER DecisionRequest requires at least two candidates");
+            }
+            if (orderContext.getProfile() != SimultaneousTriggerOrderProfile.SIMULTANEOUS_TRIGGER_ORDER
+                    || orderContext.getDirection() != OrderDirection.RESOLVE_FIRST
+                    || orderContext.getOriginalItemCount() < candidates.size()
+                    || orderContext.getOriginalItemCount() < 2) {
+                throw new IllegalArgumentException("ORDER request does not match the exact profile");
+            }
+            for (final LegalCandidate candidate : candidates) {
+                if (candidate.getOrderKind() != OrderCandidateKind.SELECT_RESOLVE_FIRST
+                        || candidate.getOrderItem() == null
+                        || !candidate.getSemanticKey().equals("RESOLVE_FIRST|"
+                                + candidate.getOrderItem().getItemId())) {
+                    throw new IllegalArgumentException("ORDER candidates must be SELECT_RESOLVE_FIRST items");
+                }
+            }
+        } else if (candidates.stream().anyMatch(candidate -> candidate.getOrderKind() != null
+                || candidate.getOrderItem() != null)) {
+            throw new IllegalArgumentException("ORDER candidates require DecisionType.ORDER");
+        }
     }
 
     public long getRequestId() {
@@ -222,6 +269,11 @@ public final class DecisionRequest {
     /** CONFIRMATION-only semantic trigger context. */
     public ConfirmationDecisionContext getConfirmationContext() {
         return confirmationContext;
+    }
+
+    /** ORDER-only semantic session context. */
+    public SimultaneousTriggerOrderContext getOrderContext() {
+        return orderContext;
     }
 
     public boolean isForced() {

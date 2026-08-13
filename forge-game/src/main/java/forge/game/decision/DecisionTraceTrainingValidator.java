@@ -22,7 +22,8 @@ public final class DecisionTraceTrainingValidator {
         case CHOSEN:
             final boolean nativeMapped = result.isNativeCallbackCompleted() && result.isMappingAttempted();
             final boolean externalChosen = (request.getDecisionType() == DecisionType.CONFIRMATION
-                    || request.getDecisionType() == DecisionType.TARGET)
+                    || request.getDecisionType() == DecisionType.TARGET
+                    || request.getDecisionType() == DecisionType.ORDER)
                     && !result.isNativeCallbackCompleted() && !result.isMappingAttempted();
             return !request.isForced() && (nativeMapped || externalChosen)
                     && request.getLegalCandidates().contains(selected);
@@ -37,6 +38,10 @@ public final class DecisionTraceTrainingValidator {
             return selected.isEmpty() && result.isEngineRollbackObserved();
         case MAPPING_FAILED:
             return selected.isEmpty() && result.isNativeCallbackCompleted() && result.isMappingAttempted();
+        case INVALID_EXTERNAL_CANDIDATE:
+        case NATIVE_CALLBACK_FAILURE:
+            return request.getDecisionType() == DecisionType.ORDER && selected.isEmpty()
+                    && !result.isNativeCallbackCompleted() && !result.isMappingAttempted();
         case TRACE_INCOMPLETE:
             return selected.isEmpty() && result.isTraceFinalization();
         default:

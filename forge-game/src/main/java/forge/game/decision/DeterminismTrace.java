@@ -322,6 +322,22 @@ public final class DeterminismTrace {
             }
         }
 
+        /** Closes an ORDER request after an external resolver returns invalid data or throws. */
+        public void recordInvalidExternalCandidate() {
+            if (isActive()) {
+                trace.complete(this, DecisionTraceResultKind.INVALID_EXTERNAL_CANDIDATE, "", false, false,
+                        false, false, false);
+            }
+        }
+
+        /** Closes the active ORDER request after the native callback throws before returning. */
+        public void recordNativeCallbackFailure() {
+            if (isActive()) {
+                trace.complete(this, DecisionTraceResultKind.NATIVE_CALLBACK_FAILURE, "", false, false,
+                        false, false, false);
+            }
+        }
+
         /** Closes only at a Forge seam that authoritatively reports engine rollback. */
         public void recordEngineRollback() {
             if (isActive()) {
@@ -331,6 +347,9 @@ public final class DeterminismTrace {
         }
 
         private void recordTraceIncomplete() {
+            if ("SIMULTANEOUS_TRIGGER_ORDER".equals(requestRecord.getAdapterOrStage())) {
+                SimultaneousTriggerOrderAuditDiagnostics.recordTraceIncomplete();
+            }
             trace.complete(this, DecisionTraceResultKind.TRACE_INCOMPLETE, "", false, false,
                     false, false, true);
         }

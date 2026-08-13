@@ -8,12 +8,30 @@
 
 ## Executive verdict
 
-Forge does contain live, modern, agent-relevant ordering decisions in the controlled v0 slice. The audit found two distinct profiles:
+Forge does contain live, modern, agent-relevant ordering decisions in the controlled v0 slice. The corrected authority distinguishes three semantic areas:
 
 1. `SIMULTANEOUS_TRIGGER_ORDER`: a pure permutation of two or more abilities controlled by the same player before stack insertion.
-2. `SURVEIL_PARTITION_PLUS_ORDER`: a Surveil partition decision followed, when two or more cards remain on top, by a relative top-library order.
+2. `COPY_SPELL_RESOLVE_FIRST_ORDER`: the proven Replicate/`CopySpellAbilityEffect` copied-spell resolve-first ordering seam; discovered in the controlled workload but not implemented.
+3. `SURVEIL_PARTITION_PLUS_ORDER`: a Surveil partition decision followed, when two or more cards remain on top, by a relative top-library order.
 
-The first profile is the cleanest next production slice. The second is not a pure permutation callback and must remain decomposed from the card-partition decision. No generic `ORDER` adapter or provider is implemented here.
+The first profile is the current L1 implementation slice. The copied-spell
+profile requires its own design checkpoint and is not admitted by
+`SIMULTANEOUS_TRIGGER_ORDER`. The Surveil profile is not a pure permutation
+callback and must remain decomposed from the card-partition decision. No
+generic `ORDER` adapter or provider is implemented here.
+
+The raw shared callback surface is not the semantic denominator:
+
+```text
+raw multi-item orderSimultaneousSa callbacks = 20
+SIMULTANEOUS_TRIGGER_ORDER sessions = 19
+COPY_SPELL_RESOLVE_FIRST_ORDER-like sessions = 1
+```
+
+`FRL-02L1R2_COPY_SPELL_ORDER_OWNERSHIP_AUDIT.md` corrected the original
+callback-wide inference after runtime type and Human-controller ownership
+inspection. The original raw measurement remains historical evidence; only its
+semantic attribution is corrected.
 
 `FRL-02I legacy combat order != FRL-02L live ORDER attribution.` The old blocker/attacker damage-assignment callbacks remain excluded from v0. Modern direct combat damage distribution remains `DAMAGE_ASSIGNMENT`, not `ORDER`.
 
@@ -168,7 +186,7 @@ Therefore:
 
 This is a real Magic-rules ordering decision when two or more abilities controlled by one player are pending together. The returned permutation changes the order in which the abilities are inserted into the LIFO stack, and therefore can change resolution order and state.
 
-The AI's native category ordering is evidence that Forge treats the family as policy-bearing rather than as a canonical sort. The runtime observed seven non-identity permutations in the 20 multi-item calls.
+The AI's native category ordering is evidence that Forge treats the family as policy-bearing rather than as a canonical sort. The runtime observed seven non-identity permutations in the raw 20 multi-item calls. R2 establishes that the raw family contains 19 simultaneous-trigger sessions and one separate player-owned copied-spell session.
 
 ## 12. Canonical runtime counts
 
@@ -198,13 +216,55 @@ The two `orderAndPlaySimultaneousSa` rows are not additional decisions; they are
 
 ## 13. Item-count distribution
 
-For `orderSimultaneousSa`, the 20 strategic-size calls were distributed as follows:
+For `orderSimultaneousSa`, the 20 raw multi-item calls were distributed as follows:
 
 ```text
 n=2: 14 calls
 n=3: 5 calls
 n=4: 1 call
 ```
+
+The corrected semantic attribution is:
+
+```text
+raw multi-item callbacks = 20
+
+SIMULTANEOUS_TRIGGER_ORDER:
+  n=2: 13 sessions
+  n=3: 5 sessions
+  n=4: 1 session
+  sessions: 19
+
+COPY_SPELL_RESOLVE_FIRST_ORDER-like:
+  n=2: 1 session
+  sessions: 1
+  status: DISCOVERED / NOT_IMPLEMENTED
+```
+
+For the exact L1 profile, the sequential request distribution is candidate
+size 2 = 19, candidate size 3 = 6, candidate size 4 = 1, for 26 requests.
+
+## 13.1 FRL-02L1R2 authority correction
+
+The original FRL-02L audit treated the 20 raw multi-item
+`orderSimultaneousSa` callbacks as 20 strategic sessions for one profile.
+FRL-02L1R initially separated the non-trigger shape from the trigger profile
+but incorrectly classified its ownership as engine-owned. FRL-02L1R2 resolved
+the Human-controller ownership dispute: the exact Replicate/Pyromatics callback
+is player-owned, but it belongs to the separate
+`COPY_SPELL_RESOLVE_FIRST_ORDER`-like semantic family.
+
+The corrected relationship is:
+
+```text
+orderSimultaneousSa = heterogeneous controller surface
+  -> SIMULTANEOUS_TRIGGER_ORDER (19 canonical sessions, current L1)
+  -> COPY_SPELL_RESOLVE_FIRST_ORDER-like (1 canonical session, open)
+```
+
+The one copied-spell callback is not a missing L1 admission and must not be
+called engine-owned. It remains on native fallback until its separately
+authorized profile is designed and implemented.
 
 Among those calls, player 0 received 15 and player 1 received 5. Seven returned permutations differed from the captured input order:
 
@@ -427,7 +487,9 @@ Observed callback volume is not used as a proxy for strategic ownership.
 
 | Surface / callers | Ordered object | v0 reachable? | Observed | n distribution | Strategic? | Forced? | Rules/engine owner | Classification | Visibility | Native mapping | Teacher | Continuation | Future type | Before v0 gate? | Blocker |
 |---|---|---:|---:|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| `PlayerController.orderSimultaneousSa`; AI `orderPlaySa`; Human implementation | `SpellAbility` stack entries | yes | 116 | 0/96/14/6 | yes for n>=2 | n<=1 | same-player CR 603.3b order; stack engine | `LIVE_AGENT_ORDER` | public stack profile; projection missing | valid permutation; AI input mutation | safe with request-local ID | absent | `ORDER` / sequential | yes | no provider yet |
+| `PlayerController.orderSimultaneousSa`; AI `orderPlaySa`; Human implementation | heterogeneous copied/trigger stack entries | yes | 116 raw | 0/96/14/6 | profile-dependent | profile-dependent | shared controller surface; stack engine | `MULTI_PROFILE_CONTROLLER_SURFACE` | profile-specific | valid permutation; AI input mutation | profile-specific | absent | profile-specific | attribution required | not one denominator |
+| exact wrapped non-static trigger route | `WrappedAbility` stack entries | yes | 19 | n=2:13, n=3:5, n=4:1 | yes | n<=1 | same-player CR 603.3b order; stack engine | `SIMULTANEOUS_TRIGGER_ORDER` | public stack profile | valid permutation; AI input mutation | safe with request-local ID | absent | `ORDER` / sequential | current L1 | 19/19 gate |
+| `CopySpellAbilityEffect` -> `orderAndPlaySimultaneousSa` | copied `SpellApiBased` spell entries | yes | 1 | n=2:1 | yes | n<=1 under explicit encoding | copy effect/controller seam; stack engine | `COPY_SPELL_RESOLVE_FIRST_ORDER` | public copied-spell seam | private native mapping required | safe with request-local ID | absent | `ORDER` / sequential | future design | not implemented |
 | `orderAndPlaySimultaneousSa` AI/Human | ordered abilities plus execution | yes | 116 wrapper calls | 0/96/14/6 | no separate seam | n<=1 | controller execution | `DUPLICATE_ENGINE_SURFACE` | same as child | no returned result | not separate | absent | none | no | compound wrapper |
 | `TriggerHandler.runSingleTriggerInternal` and `addSimultaneousStackEntry` | pending wrapped abilities | yes | route source | n/a | no; queueing | empty queue | trigger/stack engine | `ENGINE_OWNED_ORDER` | engine internal | no policy result | not a decision | absent | none | no | none |
 | `TriggerWaiting.setTriggers` | trigger collection order | yes | route source | n/a | no | n/a | linked insertion order | `DETERMINISTIC_INTERNAL_ORDER` | engine internal | no policy result | not a decision | absent | none | no | none |
@@ -472,16 +534,36 @@ native teacher mapping: safe only after partition/order decomposition and reques
 recommended representation: partition/card-selection first, then sequential order of retained top cards
 ```
 
-## 34. v0-required ORDER profiles
+```text
+COPY_SPELL_RESOLVE_FIRST_ORDER
+status: DISCOVERED / NOT_IMPLEMENTED
+v0 reachable: yes, exact Replicate/Pyromatics path
+minimum strategic n: 2 copied spells
+observed sessions: 1
+visibility: public copied-spell ordering seam; exact projection requires a separate design
+native teacher mapping: safe only with request-local identity
+recommended representation: separate sequential RESOLVE_FIRST profile before per-copy TARGET setup
+```
 
-The v0-required profiles are exactly:
+## 34. Controlled-v0 ORDER semantic inventory
+
+The corrected controlled-v0 inventory contains three distinct player-owned
+semantic areas, with different implementation status:
 
 ```text
 SIMULTANEOUS_TRIGGER_ORDER
+  status: current L1 implementation profile
+
+COPY_SPELL_RESOLVE_FIRST_ORDER
+  status: DISCOVERED / OPEN / NOT IMPLEMENTED
+
 SURVEIL_PARTITION_PLUS_ORDER (its retained-top ORDER subdecision)
+  status: OPEN / NOT IMPLEMENTED
 ```
 
-No legacy combat order, generic stack reorder, cost order, hand UI order, or aggregate zone callback is v0-required by this audit.
+Only `SIMULTANEOUS_TRIGGER_ORDER` is covered by the current L1 acceptance
+gate. No legacy combat order, generic stack reorder, cost order, hand UI order,
+or aggregate zone callback is admitted by this audit.
 
 ## 35. Future-pool-only ORDER profiles
 
@@ -572,6 +654,10 @@ P0: none.
 
 P1 resolved by this audit:
 - live same-player simultaneous-trigger ordering was identified and measured;
+- the raw 20-callback surface was separated from the exact 19-session L1
+  trigger profile;
+- FRL-02L1R2 corrected the one copied-spell callback from `ENGINE_OWNED` to a
+  separate player-owned, not-yet-implemented semantic profile;
 - live Surveil retained-top ordering was separated from card partition;
 - legacy combat order was proven rules-gated and separated from modern damage distribution;
 - native input mutation was captured as a future teacher-mapping constraint.
@@ -594,7 +680,14 @@ ORDER_DECISION:
 V0_ORDER_REQUIRED
 ```
 
-The exact current-v0 profiles are `SIMULTANEOUS_TRIGGER_ORDER` and the retained-top order component of `SURVEIL_PARTITION_PLUS_ORDER`.
+The corrected controlled-v0 semantic inventory is:
+
+```text
+SIMULTANEOUS_TRIGGER_ORDER                 PASS (`FRL_02L1_PASS`)
+COPY_SPELL_RESOLVE_FIRST_ORDER             DISCOVERED / OPEN / NOT IMPLEMENTED
+SURVEIL_PARTITION_PLUS_ORDER               OPEN / NOT IMPLEMENTED
+ORDER_V0_COMPLETE                          false
+```
 
 ## 43. Next milestone and Draft PR
 
@@ -604,7 +697,7 @@ FRL-02L1
 IMPLEMENT_SIMULTANEOUS_TRIGGER_ORDER
 ```
 
-`FRL-02L1` is the recommended first exact production slice because it is a pure same-player stack permutation with direct canonical reachability. It must not become a generic permutation adapter. Surveil remains a separate decomposed v0 profile and is not silently folded into the first slice.
+`FRL-02L1` is the recommended first exact production slice because it is a pure same-player stack permutation with direct canonical reachability. It must not become a generic permutation adapter. After the L1 gate, the next design checkpoint is `FRL-02L1C DESIGN_COPY_SPELL_RESOLVE_FIRST_ORDER`; `FRL-02L2 SURVEIL_PARTITION_PLUS_ORDER` remains separate and is not silently folded into the first slice.
 
 The branch is intended for a Draft PR titled:
 

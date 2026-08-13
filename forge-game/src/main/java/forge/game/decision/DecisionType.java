@@ -11,5 +11,6 @@ public enum DecisionType {
     CARD_SELECTION,
     ATTACK,
     BLOCK,
-    CONFIRMATION
+    CONFIRMATION,
+    ORDER
 }
