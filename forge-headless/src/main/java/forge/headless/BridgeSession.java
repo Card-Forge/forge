@@ -367,13 +367,22 @@ final class BridgeSession {
         ArrayNode life = requireArray(params, "life");
         ArrayNode hands = requireArray(params, "hand_counts");
         ArrayNode permanents = requireArray(params, "permanents_count");
+        ArrayNode creatureCounts = requireArray(params, "creature_counts");
+        ArrayNode creaturePower = requireArray(params, "creature_power");
+        ArrayNode creatures = requireArray(params, "creatures");
         if (life.size() != game.getPlayers().size() || hands.size() != game.getPlayers().size()
-                || permanents.size() != game.getPlayers().size()) {
+                || permanents.size() != game.getPlayers().size()
+                || creatureCounts.size() != game.getPlayers().size()
+                || creaturePower.size() != game.getPlayers().size()
+                || creatures.size() != game.getPlayers().size()) {
             throw new BridgeFailure("state_digest_shape", "Digest player arrays do not match Forge seats");
         }
         List<Integer> actualLife = null;
         List<Integer> actualHands = null;
         List<Integer> actualPermanents = null;
+        List<Integer> actualCreatureCounts = null;
+        List<Integer> actualCreaturePower = null;
+        List<List<String>> actualCreatures = null;
         int expectedTurn = params.path("turn").asInt();
         int actualTurn = 0;
         boolean matched = false;
@@ -381,6 +390,9 @@ final class BridgeSession {
             actualLife = new ArrayList<>();
             actualHands = new ArrayList<>();
             actualPermanents = new ArrayList<>();
+            actualCreatureCounts = new ArrayList<>();
+            actualCreaturePower = new ArrayList<>();
+            actualCreatures = new ArrayList<>();
             actualTurn = game.getPhaseHandler().getTurn();
             matched = actualTurn == expectedTurn;
             for (int index = 0; index < game.getPlayers().size(); index++) {
@@ -388,9 +400,24 @@ final class BridgeSession {
                 actualLife.add(player.getLife());
                 actualHands.add(player.getZone(ZoneType.Hand).size());
                 actualPermanents.add(player.getCardsIn(ZoneType.Battlefield).size());
+                int playerCreaturePower = 0;
+                List<String> playerCreatures = new ArrayList<>();
+                for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
+                    if (card.isCreature()) {
+                        playerCreaturePower += card.getNetPower();
+                        playerCreatures.add(card.getName());
+                    }
+                }
+                Collections.sort(playerCreatures);
+                actualCreatureCounts.add(playerCreatures.size());
+                actualCreaturePower.add(playerCreaturePower);
+                actualCreatures.add(playerCreatures);
                 matched &= life.get(index).asInt() == actualLife.get(index)
                         && hands.get(index).asInt() == actualHands.get(index)
-                        && permanents.get(index).asInt() == actualPermanents.get(index);
+                        && permanents.get(index).asInt() == actualPermanents.get(index)
+                        && creatureCounts.get(index).asInt() == actualCreatureCounts.get(index)
+                        && creaturePower.get(index).asInt() == actualCreaturePower.get(index)
+                        && jsonStrings(creatures.get(index)).equals(playerCreatures);
             }
             if (!matched) {
                 try {
@@ -403,18 +430,32 @@ final class BridgeSession {
         }
         if (!matched) {
             throw new BridgeFailure("state_desync", "Digest mismatch at turn " + expectedTurn
-                    + ": expected life/hand/permanents=" + life + "/" + hands + "/" + permanents
-                    + ", Forge=" + actualLife + "/" + actualHands + "/" + actualPermanents
+                    + ": expected life/hand/permanents/creatures/power/identity="
+                    + life + "/" + hands + "/" + permanents + "/" + creatureCounts + "/" + creaturePower
+                    + "/" + creatures + ", Forge=" + actualLife + "/" + actualHands + "/" + actualPermanents
+                    + "/" + actualCreatureCounts + "/" + actualCreaturePower + "/" + actualCreatures
                     + " at turn=" + actualTurn + " phase=" + game.getPhaseHandler().getPhase());
         }
         String actualDigest = "t" + params.path("turn").asInt()
                 + "|l" + actualLife.get(0) + "," + actualLife.get(1)
                 + "|h" + actualHands.get(0) + "," + actualHands.get(1)
-                + "|p" + actualPermanents.get(0) + "," + actualPermanents.get(1);
+                + "|p" + actualPermanents.get(0) + "," + actualPermanents.get(1)
+                + "|c" + actualCreatureCounts.get(0) + "," + actualCreatureCounts.get(1)
+                + "|pow" + actualCreaturePower.get(0) + "," + actualCreaturePower.get(1)
+                + "|ci" + String.join("+", actualCreatures.get(0)) + ","
+                + String.join("+", actualCreatures.get(1));
         if (!actualDigest.equals(requireText(params, "digest"))) {
             throw new BridgeFailure("state_digest_value", "Digest string mismatch: " + actualDigest);
         }
         diagnostics.println("State digest matched: " + actualDigest);
+    }
+
+    private static List<String> jsonStrings(JsonNode node) {
+        List<String> values = new ArrayList<>();
+        for (JsonNode value : node) {
+            values.add(value.asText());
+        }
+        return values;
     }
 
     private void handleGameEnd(JsonNode params) {

@@ -1,0 +1,9 @@
+[metadata]
+Name=Simple Pikers Test Deck
+Description=Minimal mono-red creature mirror deck for Task D1
+
+[Main]
+26 Mountain
+34 Goblin Piker
+
+[Sideboard]
