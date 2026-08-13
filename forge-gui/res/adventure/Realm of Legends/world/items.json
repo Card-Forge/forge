@@ -3143,6 +3143,41 @@
      ]
     }
   },
+  {
+    "name": "Morcant's Crown",
+    "description": "Surveil 1 in upkeep, 4GG, sac for X 2/2 elves = elves in GY as sorcery.",
+    "equipmentSlot": "Neck",
+    "iconName": "Morcant'sCrown",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Morcant's Eyes"
+      ]
+    }
+  },
+  {
+    "name": "Faerie Crown",
+    "description": "Opponent loses 1 life when you cast a spell during their turn.",
+    "equipmentSlot": "Neck",
+    "iconName": "FaerieCrown",
+    "effect": {
+      "startBattleWithCard": [
+        "Faerie Tauntings"
+      ]
+    }
+  },
+  {
+    "name": "Evershrike Anklet",
+    "description": "2/2 flyer, +2/+2 for each aura on it, can revive with an aura from hand.",
+    "equipmentSlot": "Boots",
+    "iconName": "EvershrikeAnklet",
+    "effect": {
+      "lifeModifier": -5,
+      "startBattleWithCard": [
+        "Evershrike"
+      ]
+    }
+  },
     {
     "name": "Amulet of Mischief",
     "description": "Pay 3U for random spell steal",

@@ -129,6 +129,15 @@ Joven'sShoes
 Chandler'sShoes
   xy: 128, 144
   size: 16, 16
+Morcant'sCrown
+  xy: 96, 400
+  size: 16, 16
+FaerieCrown
+  xy: 144, 368
+  size: 16, 16
+EvershrikeAnklet
+  xy: 64, 992
+  size: 16, 16
 SkyclaveMaul
   xy: 224, 432
   size: 16, 16
