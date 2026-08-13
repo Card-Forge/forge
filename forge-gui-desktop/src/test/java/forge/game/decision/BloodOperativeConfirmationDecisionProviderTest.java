@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Locale;
 import java.lang.reflect.Modifier;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -39,6 +40,66 @@ public class BloodOperativeConfirmationDecisionProviderTest extends AITest {
     public void gelectrodeProfileKeepsExistingConfirmationTraceLabel() {
         assertEquals(ConfirmationTriggerProfile.GELECTRODE_SPELL_CAST_UNTAP_SELF.getTraceLabel(),
                 "GELECTRODE_CONFIRMATION");
+    }
+
+    @Test
+    public void bloodExternalResolverOwnsConfirmationWithoutNativeFallback() {
+        final ConfirmationDecisionProvider localProvider = new ConfirmationDecisionProvider();
+        final AtomicInteger resolverCalls = new AtomicInteger();
+        final AtomicInteger nativeCalls = new AtomicInteger();
+        localProvider.setResolver(request -> {
+            resolverCalls.incrementAndGet();
+            return request.getCandidates().stream()
+                    .filter(candidate -> candidate.getConfirmationKind() == ConfirmationCandidateKind.ACCEPT)
+                    .findFirst()
+                    .orElseThrow(() -> new AssertionError("expected ACCEPT candidate"));
+        });
+
+        try {
+            final ExactBloodFixture fixture = exactBloodFixture();
+            final ConfirmationDecisionProvider.Generation generation =
+                    localProvider.generate(fixture.wrapper, fixture.decider);
+
+            assertEquals(generation.getStatus(), ConfirmationDecisionProvider.Status.ADMITTED);
+            final DecisionRequest request = generation.getRequest();
+            final LegalCandidate selected = localProvider.choose(request, () -> {
+                nativeCalls.incrementAndGet();
+                return false;
+            });
+
+            assertEquals(selected.getConfirmationKind(), ConfirmationCandidateKind.ACCEPT);
+            assertEquals(resolverCalls.get(), 1);
+            assertEquals(nativeCalls.get(), 0);
+            assertTrue(localProvider.apply(request, selected, fixture.wrapper));
+        } finally {
+            localProvider.setResolver(null);
+        }
+    }
+
+    @Test
+    public void bloodNativeTeacherMapsBooleanExactlyOnce() {
+        final ConfirmationDecisionProvider localProvider = new ConfirmationDecisionProvider();
+        localProvider.setResolver(null);
+        final AtomicInteger nativeCalls = new AtomicInteger();
+
+        try {
+            final ExactBloodFixture fixture = exactBloodFixture();
+            final ConfirmationDecisionProvider.Generation generation =
+                    localProvider.generate(fixture.wrapper, fixture.decider);
+
+            assertEquals(generation.getStatus(), ConfirmationDecisionProvider.Status.ADMITTED);
+            final DecisionRequest request = generation.getRequest();
+            final LegalCandidate selected = localProvider.choose(request, () -> {
+                nativeCalls.incrementAndGet();
+                return true;
+            });
+
+            assertEquals(selected.getConfirmationKind(), ConfirmationCandidateKind.ACCEPT);
+            assertEquals(nativeCalls.get(), 1);
+            assertTrue(localProvider.apply(request, selected, fixture.wrapper));
+        } finally {
+            localProvider.setResolver(null);
+        }
     }
 
     @Test
@@ -140,6 +201,51 @@ public class BloodOperativeConfirmationDecisionProviderTest extends AITest {
         assertNumericEquals(readRequiredGetter(context, "getDeciderPlayerId"), decider.getId(),
                 "deciderPlayerId");
         assertValueOnlyFields(context);
+    }
+
+    private ExactBloodFixture exactBloodFixture() {
+        final Game game = initAndCreateGame();
+        final Player decider = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final Card source = addCardToZone("Blood Operative", decider, ZoneType.Battlefield);
+        final Card legalCard = addCardToZone("Runeclaw Bear", opponent, ZoneType.Graveyard);
+
+        final Trigger trigger = source.getTriggers().stream()
+                .filter(candidate -> candidate.getMode() == TriggerType.ChangesZone)
+                .filter(candidate -> "Any".equals(candidate.getParam("Origin")))
+                .filter(candidate -> "Battlefield".equals(candidate.getParam("Destination")))
+                .filter(candidate -> "Card.Self".equals(candidate.getParam("ValidCard")))
+                .filter(candidate -> "You".equals(candidate.getParam("OptionalDecider")))
+                .filter(candidate -> "TrigChangeZone".equals(candidate.getParam("Execute")))
+                .filter(Trigger::isIntrinsic)
+                .filter(candidate -> !candidate.isStatic())
+                .filter(candidate -> candidate.getSpawningAbility() == null)
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("expected Blood Operative ETB trigger is unavailable"));
+
+        final SpellAbility ability = trigger.ensureAbility();
+        assertNotNull(ability);
+        ability.setActivatingPlayer(decider);
+        ability.setOptionalTrigger(true);
+        assertEquals(ability.getApi(), ApiType.ChangeZone);
+        assertEquals(ability.getParam("Origin"), "Graveyard");
+        assertEquals(ability.getParam("Destination"), "Exile");
+        assertEquals(ability.getParam("ValidTgts"), "Card");
+        assertEquals(ability.getTargets().size(), 0);
+        assertTrue(ability.canTarget(legalCard));
+        ability.getTargets().add(legalCard);
+
+        return new ExactBloodFixture(decider, new WrappedAbility(trigger, ability, decider));
+    }
+
+    private static final class ExactBloodFixture {
+        private final Player decider;
+        private final WrappedAbility wrapper;
+
+        private ExactBloodFixture(final Player decider0, final WrappedAbility wrapper0) {
+            decider = decider0;
+            wrapper = wrapper0;
+        }
     }
 
     private static void assertPublicCardProjection(final Object projection, final Card expectedCard) {
