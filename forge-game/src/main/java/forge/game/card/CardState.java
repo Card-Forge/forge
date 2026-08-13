@@ -56,6 +56,7 @@ import io.sentry.Sentry;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -132,6 +133,31 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         cachedReplacementsPlain = null;
         cachedStaticAbilities = null;
         cachedTraitTriggers = null;
+    }
+
+    /**
+     * Whether a cached view still equals what building it now would produce, element for element and
+     * in order.
+     *
+     * <p>Only ever called from an {@code assert}. The plan makes this the merge gate for this cache:
+     * a complete audit of every mutator that can change a derived trait view is not something anyone
+     * can do by reading, so a debug build rebuilds each view on every read and fails loudly if an
+     * invalidation was missed. Assertions are enabled under Surefire, which turns the whole rules and
+     * AI corpus into that audit; a shipped build pays nothing.</p>
+     */
+    private static boolean stillCurrent(final FCollectionView<?> cached, final FCollectionView<?> rebuilt) {
+        if (cached.size() != rebuilt.size()) {
+            return false;
+        }
+        final Iterator<?> a = cached.iterator();
+        final Iterator<?> b = rebuilt.iterator();
+        while (a.hasNext() && b.hasNext()) {
+            // identity, not equality: a rebuilt view must hand back the same trait objects
+            if (a.next() != b.next()) {
+                return false;
+            }
+        }
+        return !a.hasNext() && !b.hasNext();
     }
 
     public CardState(Card card, CardStateName name) {
@@ -700,9 +726,16 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     public final FCollectionView<Trigger> getTriggers() {
         if (cachedTraitTriggers != null) {
             PerfProbe.count(PerfCounter.TRAIT_CACHE_HITS);
+            assert stillCurrent(cachedTraitTriggers, buildTriggers())
+                    : "stale cached triggers on " + this;
             return cachedTraitTriggers;
         }
         PerfProbe.count(PerfCounter.TRAIT_CACHE_REBUILDS);
+        cachedTraitTriggers = buildTriggers();
+        return cachedTraitTriggers;
+    }
+
+    private FCollection<Trigger> buildTriggers() {
         FCollection<Trigger> result = new FCollection<>(triggers);
         if (getStateName().equals(CardStateName.Original)) {
             if (getCard().hasState(CardStateName.LeftSplit))
@@ -711,7 +744,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 result.addAll(getCard().getState(CardStateName.RightSplit).triggers);
         }
         card.updateTriggers(result, this);
-        cachedTraitTriggers = result;
         return result;
     }
 
@@ -739,9 +771,16 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     public final FCollectionView<StaticAbility> getStaticAbilities() {
         if (cachedStaticAbilities != null) {
             PerfProbe.count(PerfCounter.TRAIT_CACHE_HITS);
+            assert stillCurrent(cachedStaticAbilities, buildStaticAbilities())
+                    : "stale cached static abilities on " + this;
             return cachedStaticAbilities;
         }
         PerfProbe.count(PerfCounter.TRAIT_CACHE_REBUILDS);
+        cachedStaticAbilities = buildStaticAbilities();
+        return cachedStaticAbilities;
+    }
+
+    private FCollection<StaticAbility> buildStaticAbilities() {
         FCollection<StaticAbility> result = new FCollection<>(staticAbilities);
         if (getStateName().equals(CardStateName.Original)) {
             if (getCard().hasState(CardStateName.LeftSplit))
@@ -750,7 +789,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 result.addAll(getCard().getState(CardStateName.RightSplit).staticAbilities);
         }
         card.updateStaticAbilities(result, this);
-        cachedStaticAbilities = result;
         return result;
     }
     public final boolean addStaticAbility(StaticAbility stab) {
@@ -777,9 +815,21 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 rulesHost ? cachedReplacementsAsRulesHost : cachedReplacementsPlain;
         if (cached != null) {
             PerfProbe.count(PerfCounter.TRAIT_CACHE_HITS);
+            assert stillCurrent(cached, buildReplacementEffects(rulesHost))
+                    : "stale cached replacement effects (rulesHost=" + rulesHost + ") on " + this;
             return cached;
         }
         PerfProbe.count(PerfCounter.TRAIT_CACHE_REBUILDS);
+        final FCollection<ReplacementEffect> built = buildReplacementEffects(rulesHost);
+        if (rulesHost) {
+            cachedReplacementsAsRulesHost = built;
+        } else {
+            cachedReplacementsPlain = built;
+        }
+        return built;
+    }
+
+    private FCollection<ReplacementEffect> buildReplacementEffects(boolean rulesHost) {
         FCollection<ReplacementEffect> result = new FCollection<>(replacementEffects);
         // add Split to Original
         if (getStateName().equals(CardStateName.Original)) {
@@ -811,7 +861,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         card.updateReplacementEffects(result, this, rulesHost);
 
         if (!rulesHost) {
-            cachedReplacementsPlain = result;
             return result;
         }
 
@@ -829,7 +878,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             result.add(omenRep);
         }
 
-        cachedReplacementsAsRulesHost = result;
         return result;
     }
     public boolean addReplacementEffect(final ReplacementEffect replacementEffect) {
