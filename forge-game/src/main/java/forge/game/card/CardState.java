@@ -731,7 +731,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             return cachedTraitTriggers;
         }
         PerfProbe.count(PerfCounter.TRAIT_CACHE_REBUILDS);
-        cachedTraitTriggers = buildTriggers();
+        // read-only: this instance is kept and handed to every later reader, so a caller that
+        // mutated it - FCollectionView inherits remove/clear/removeIf from Collection - would
+        // silently change what everyone else sees
+        cachedTraitTriggers = new FCollection.ReadOnlyFCollection<>(buildTriggers());
         return cachedTraitTriggers;
     }
 
@@ -776,7 +779,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             return cachedStaticAbilities;
         }
         PerfProbe.count(PerfCounter.TRAIT_CACHE_REBUILDS);
-        cachedStaticAbilities = buildStaticAbilities();
+        cachedStaticAbilities = new FCollection.ReadOnlyFCollection<>(buildStaticAbilities());
         return cachedStaticAbilities;
     }
 
@@ -820,7 +823,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             return cached;
         }
         PerfProbe.count(PerfCounter.TRAIT_CACHE_REBUILDS);
-        final FCollection<ReplacementEffect> built = buildReplacementEffects(rulesHost);
+        final FCollectionView<ReplacementEffect> built =
+                new FCollection.ReadOnlyFCollection<>(buildReplacementEffects(rulesHost));
         if (rulesHost) {
             cachedReplacementsAsRulesHost = built;
         } else {

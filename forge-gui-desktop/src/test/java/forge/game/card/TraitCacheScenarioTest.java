@@ -466,35 +466,94 @@ public class TraitCacheScenarioTest extends AITest {
      * The cached views are handed out through {@code FCollectionView}, which extends
      * {@code Collection} and therefore inherits {@code remove}, {@code clear} and {@code removeIf}.
      * Before the cache, mutating a returned view corrupted a throwaway collection; now it would
-     * corrupt the cache for every later reader. This records that no caller does so today — the
-     * hazard is latent, not live — and fails if one appears.
+     * corrupt the cache for every later reader, so the views are handed out read-only and every one
+     * of those routes has to fail where it is called.
      */
     @Test(timeOut = 300000)
-    public void nothingMutatesACachedViewThroughTheReturnedCollection() {
+    public void cachedViewsRefuseEveryRouteToMutation() {
         final Game game = gameWithBattlefield();
         final Player p = game.getPlayers().get(1);
         final Card c = addCard("Soul Warden", p);
         warmAllViews(c);
 
         final CardState state = c.getCurrentState();
-        final List<String> triggersBefore = describe(state.getTriggers());
-        final List<String> staticsBefore = describe(state.getStaticAbilities());
-        final List<String> replacementsBefore = describe(state.getReplacementEffects(true));
+        final FCollectionView<Trigger> triggers = state.getTriggers();
+        Assert.assertFalse(triggers.isEmpty(), "the fixture card must have a trigger to try to remove");
+        final Trigger victim = triggers.get(0);
+        final List<String> before = describe(triggers);
 
-        // play a whole turn: if any engine path mutates a handed-out view, the cached contents move
+        assertRefused(() -> triggers.remove(victim), "remove(Object)");
+        assertRefused(() -> triggers.clear(), "clear()");
+        assertRefused(() -> triggers.removeIf(t -> true), "removeIf");
+        assertRefused(() -> triggers.removeAll(List.of(victim)), "removeAll");
+        assertRefused(() -> triggers.retainAll(List.of()), "retainAll");
+        assertRefused(() -> triggers.add(victim), "add");
+        assertRefused(() -> triggers.addAll(List.of(victim)), "addAll");
+        assertRefused(() -> {
+            final java.util.Iterator<Trigger> it = triggers.iterator();
+            it.next();
+            it.remove();
+        }, "iterator().remove()");
+
+        Assert.assertEquals(describe(state.getTriggers()), before,
+                "a refused mutation must leave the cached view exactly as it was");
+
+        // the same for the other two kinds
+        assertRefused(() -> state.getStaticAbilities().clear(), "static abilities clear()");
+        assertRefused(() -> state.getReplacementEffects(true).clear(), "replacement effects clear()");
+        assertRefused(() -> state.getReplacementEffects(false).clear(), "plain replacement effects clear()");
+
+        // and reading still works normally
+        Assert.assertTrue(state.getTriggers().contains(victim));
+        Assert.assertSame(state.getTriggers().get(0), victim);
+        Assert.assertEquals(state.getTriggers().size(), before.size());
+    }
+
+    private static void assertRefused(final Runnable mutation, final String what) {
+        try {
+            mutation.run();
+            Assert.fail("a cached trait view allowed " + what + "; it must refuse, because the "
+                    + "collection is shared with every later reader");
+        } catch (final UnsupportedOperationException expected) {
+            // what a read-only view is supposed to do
+        }
+    }
+
+    /**
+     * Nothing in the engine actually attempts one of those mutations while a turn is played — if
+     * something did, it would now throw rather than corrupt the cache, but it would still be a
+     * behaviour change, so this pins that no path takes it.
+     */
+    @Test(timeOut = 600000)
+    public void playingATurnNeverAttemptsToMutateACachedView() {
+        final Game game = gameWithBattlefield();
+        final Player p = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final Card watched = addCard("Soul Warden", p);
+        watched.setSickness(false);
+        addCard("Glorious Anthem", p);
         addCard("Mountain", p);
-        fillLibrary(p, 8);
-        fillLibrary(game.getPlayers().get(0), 8);
+        addCardToZone("Lightning Bolt", p, ZoneType.Hand);
+        for (final Card c : addCards("Grizzly Bears", 2, p)) {
+            c.setSickness(false);
+        }
+        addCards("Runeclaw Bear", 2, opponent);
+        fillLibrary(p, 10);
+        fillLibrary(opponent, 10);
         game.getPhaseHandler().devModeSet(forge.game.phase.PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
+
+        for (final Card c : game.getCardsInGame()) {
+            warmAllViews(c);
+        }
+        final List<String> before = describe(watched.getCurrentState().getTriggers());
+
         playUntilNextTurn(game);
 
-        warmAllViews(c);
-        Assert.assertEquals(describe(state.getTriggers()), triggersBefore,
-                "something mutated the cached trigger view through the collection it was handed");
-        Assert.assertEquals(describe(state.getStaticAbilities()), staticsBefore,
-                "something mutated the cached static ability view through the collection it was handed");
-        Assert.assertEquals(describe(state.getReplacementEffects(true)), replacementsBefore,
-                "something mutated the cached replacement view through the collection it was handed");
+        for (final Card c : game.getCardsInGame()) {
+            warmAllViews(c);
+        }
+        Assert.assertEquals(describe(watched.getCurrentState().getTriggers()), before,
+                "the cached view moved during a played turn");
     }
 }

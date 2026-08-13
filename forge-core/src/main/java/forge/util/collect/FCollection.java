@@ -9,6 +9,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 
@@ -625,6 +626,67 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     @Override
     public boolean allMatch(Predicate<? super T> test) {
         return list.stream().allMatch(test);
+    }
+
+    /**
+     * An {@link FCollection} that refuses to be changed after it has been built.
+     *
+     * <p>{@link FCollectionView} is documented as a read-only interface, but it extends
+     * {@link Collection}, so {@code remove}, {@code clear} and {@code removeIf} are inherited and do
+     * change the collection they are called on. That is harmless for a collection built per call and
+     * thrown away, and not harmless at all for one that is kept and handed to every later reader: a
+     * single stray mutation would silently persist. Anything that caches a derived view should hand
+     * out one of these instead, so such a call fails where it is made rather than corrupting what
+     * everyone else reads.</p>
+     *
+     * <p>Reading is unchanged, including iteration order, indexed access and the set-backed
+     * {@code contains}. Only the mutators throw, and the iterators refuse {@code remove}.</p>
+     */
+    public static class ReadOnlyFCollection<T> extends FCollection<T> {
+        private static final long serialVersionUID = 6252031393861155203L;
+
+        /** False while the superclass constructor fills this in, true forever after. */
+        private final boolean sealed;
+
+        public ReadOnlyFCollection(final Iterable<? extends T> from) {
+            super(from);
+            sealed = true;
+        }
+
+        private void refuse() {
+            if (sealed) {
+                throw new UnsupportedOperationException(
+                        "this FCollection is a shared read-only view and must not be modified");
+            }
+        }
+
+        @Override public boolean add(final T e) { refuse(); return super.add(e); }
+        @Override public void add(final int index, final T element) { refuse(); super.add(index, element); }
+        @Override public boolean addAll(final Collection<? extends T> c) { refuse(); return super.addAll(c); }
+        @Override public boolean addAll(final Iterable<? extends T> i) { refuse(); return super.addAll(i); }
+        @Override public boolean addAll(final T[] c) { refuse(); return super.addAll(c); }
+        @Override public boolean addAll(final int index, final Collection<? extends T> c) { refuse(); return super.addAll(index, c); }
+        @Override public boolean remove(final Object o) { refuse(); return super.remove(o); }
+        @Override public T remove(final int index) { refuse(); return super.remove(index); }
+        @Override public boolean removeAll(final Collection<?> c) { refuse(); return super.removeAll(c); }
+        @Override public boolean removeAll(final Iterable<?> c) { refuse(); return super.removeAll(c); }
+        @Override public boolean removeIf(final Predicate<? super T> filter) { refuse(); return super.removeIf(filter); }
+        @Override public boolean retainAll(final Collection<?> c) { refuse(); return super.retainAll(c); }
+        @Override public void clear() { refuse(); super.clear(); }
+        @Override public T set(final int index, final T element) { refuse(); return super.set(index, element); }
+        @Override public void sort() { refuse(); super.sort(); }
+        @Override public void sort(final Comparator<? super T> comparator) { refuse(); super.sort(comparator); }
+
+        // the backing list's iterators support remove(), which would be a way around all of the above
+        @Override public Iterator<T> iterator() {
+            return sealed ? Iterators.unmodifiableIterator(super.iterator()) : super.iterator();
+        }
+        @Override public ListIterator<T> listIterator() {
+            return sealed ? ImmutableList.copyOf(this).listIterator() : super.listIterator();
+        }
+        @Override public ListIterator<T> listIterator(final int index) {
+            return sealed ? ImmutableList.copyOf(this).listIterator(index) : super.listIterator(index);
+        }
     }
 
     /**
