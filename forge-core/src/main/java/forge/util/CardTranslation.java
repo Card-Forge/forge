@@ -26,7 +26,9 @@ public class CardTranslation {
 
         try (LineReader translationFile = new LineReader(Files.newInputStream(Paths.get(languagesDirectory + filename)), StandardCharsets.UTF_8)) {
             for (String line : translationFile.readLines()) {
-                String[] matches = line.split("\\|");
+                // Only the first three pipes delimit the four translation fields.
+                // Oracle text can legitimately contain pipes (for example, dice-roll tables).
+                String[] matches = line.split("\\|", 4);
                 if (matches.length >= 2) {
                     if (matches[0].indexOf('$') > 0) {
                         //Functional variant, e.g. "Garbage Elemental $C"
