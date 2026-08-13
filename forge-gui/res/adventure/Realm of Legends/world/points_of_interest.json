@@ -504,6 +504,18 @@
 			"Story"]
 	},
 	{
+		"name": "Eclipsed Elven Court",
+		"displayName": "Eclipsed Elven Court",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Great Aurora",
+		"map": "../Realm of Legends/maps/map/evilgrove/Eclipsed_Elven_Court.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Gitrog Bog",
 		"displayName": "Gitrog Bog",
 		"type": "castle",
