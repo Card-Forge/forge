@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -407,16 +408,17 @@ public final class TriggeredTargetDecisionCoordinator {
     }
 
     private static Admission admitBlood(final WrappedAbility wrapper, final Player chooser) {
-        final BloodOperativeEtbProfile.Validation validation =
-                BloodOperativeEtbProfile.validateCommonSemanticProfile(wrapper);
-        if (!validation.isAdmitted()) {
-            return Admission.unsupported(mapCommonFailure(validation.getFailure()));
+        final SpellAbility liveAbility;
+        final Player decider;
+        final Card source;
+        try {
+            liveAbility = wrapper.getWrappedAbility();
+            decider = wrapper.getDecider();
+            source = wrapper.getHostCard();
+        } catch (final RuntimeException ex) {
+            return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
         }
-
-        final SpellAbility liveAbility = wrapper.getWrappedAbility();
-        final Player decider = wrapper.getDecider();
-        final Card source = wrapper.getHostCard();
-        if (chooser == null || decider == null) {
+        if (liveAbility == null || source == null || chooser == null || decider == null) {
             return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
         }
         if (source.isFaceDown()
@@ -432,18 +434,55 @@ public final class TriggeredTargetDecisionCoordinator {
                 || !samePlayer(decider, source.getController())) {
             return Admission.unsupported(TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE);
         }
-        if (liveAbility.getTargets() == null || !liveAbility.getTargets().isEmpty()) {
+
+        final BloodOperativeEtbProfile.Validation validation =
+                BloodOperativeEtbProfile.validateCommonSemanticProfile(wrapper);
+        if (!validation.isAdmitted()) {
+            if (isLiveEffectFailure(validation.getFailure(), liveAbility) && hasInitialTargetFailure(liveAbility)) {
+                return Admission.unsupported(TriggeredTargetIntegrityException.Reason.NON_EMPTY_INITIAL_TARGETS);
+            }
+            return Admission.unsupported(mapCommonFailure(validation.getFailure(), liveAbility));
+        }
+
+        if (hasInitialTargetFailure(liveAbility)) {
             return Admission.unsupported(TriggeredTargetIntegrityException.Reason.NON_EMPTY_INITIAL_TARGETS);
         }
         return Admission.admitted();
     }
 
     private static TriggeredTargetIntegrityException.Reason mapCommonFailure(
-            final BloodOperativeEtbProfile.Failure failure) {
-        if (failure == BloodOperativeEtbProfile.Failure.TARGETING_SHAPE) {
+            final BloodOperativeEtbProfile.Failure failure, final SpellAbility liveAbility) {
+        if (isLiveEffectFailure(failure, liveAbility)) {
             return TriggeredTargetIntegrityException.Reason.LIVE_EFFECT_MISMATCH;
         }
         return TriggeredTargetIntegrityException.Reason.UNSUPPORTED_PROFILE;
+    }
+
+    private static boolean isLiveEffectFailure(final BloodOperativeEtbProfile.Failure failure,
+            final SpellAbility liveAbility) {
+        if (failure == BloodOperativeEtbProfile.Failure.TARGETING_SHAPE) {
+            return true;
+        }
+        if (failure != BloodOperativeEtbProfile.Failure.LIVE_EFFECT_DEFINITION || liveAbility == null) {
+            return false;
+        }
+        try {
+            final Map<String, String> params = liveAbility.getMapParams();
+            if (params == null || !Set.of("DB", "Origin", "Destination", "ValidTgts", "TgtPrompt",
+                    "ValidTgtsDesc", "TgtZone", "TargetMin", "TargetMax").containsAll(params.keySet())) {
+                return false;
+            }
+            return !"ChangeZone".equals(params.get("DB"))
+                    || !"Graveyard".equals(params.get("Origin"))
+                    || !"Exile".equals(params.get("Destination"))
+                    || !"Card".equals(params.get("ValidTgts"));
+        } catch (final RuntimeException ex) {
+            return false;
+        }
+    }
+
+    private static boolean hasInitialTargetFailure(final SpellAbility liveAbility) {
+        return liveAbility.getTargets() == null || !liveAbility.getTargets().isEmpty();
     }
 
     private static Player implicitChooser(final SpellAbility queuedAbility) {
