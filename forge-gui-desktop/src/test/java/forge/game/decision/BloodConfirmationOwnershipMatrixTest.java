@@ -220,10 +220,208 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
         }
     }
 
+    @Test
+    public void wrapperExternalBloodUsesProfileTraceAndCapturedExternalOwnership() throws Exception {
+        final Random previousRandom = MyRandom.getRandom();
+        final DeterminismAuditRandom auditRandom = new DeterminismAuditRandom(DETERMINISTIC_SEED);
+        Path traceDirectory = null;
+        DeterminismTrace trace = null;
+        final SoftAssert assertions = new SoftAssert();
+        MyRandom.setRandom(auditRandom);
+
+        try {
+            final BloodFixture fixture = bloodFixture();
+            assertBloodFixture(fixture);
+            fixture.ability().getTargets().add(fixture.targetA());
+            final CountingController controller = installController(fixture);
+            final Card targetAIdentity = fixture.targetA();
+            final AtomicInteger confirmationResolverCalls = new AtomicInteger();
+            controller.getConfirmationDecisionProvider().setResolver(request -> {
+                confirmationResolverCalls.incrementAndGet();
+                controller.getConfirmationDecisionProvider().setResolver(null);
+                return request.getCandidates().stream()
+                        .filter(candidate -> candidate.getConfirmationKind() == ConfirmationCandidateKind.ACCEPT)
+                        .findFirst()
+                        .orElse(null);
+            });
+
+            traceDirectory = Files.createTempDirectory("frl02k-d1-blood-wrapper-external-");
+            trace = DeterminismTrace.attach(fixture.game(), 0, auditRandom, traceDirectory);
+            RuntimeException unexpectedBaseline = null;
+            try {
+                fixture.wrapper().resolve();
+            } catch (final RuntimeException ex) {
+                unexpectedBaseline = ex;
+            }
+
+            final Exception traceFinishFailure = finishTrace(trace);
+            final List<String> records = readTraceRecords(traceDirectory, assertions);
+            final List<String> requestRecords = records.stream()
+                    .filter(record -> record.startsWith("DECISION_TRACE_V2|REQUEST|"))
+                    .toList();
+            final List<String> resultRecords = records.stream()
+                    .filter(record -> record.startsWith("DECISION_TRACE_V2|RESULT|"))
+                    .toList();
+            final List<String> confirmationRequestRecords = requestRecords.stream()
+                    .filter(record -> "CONFIRMATION".equals(traceField(record, 6)))
+                    .toList();
+
+            assertions.assertNull(unexpectedBaseline,
+                    "external Blood wrapper resolution must not throw on the admitted profile");
+            assertions.assertNull(traceFinishFailure, "the attached decision trace must finish cleanly");
+            assertions.assertEquals(confirmationResolverCalls.get(), 1,
+                    "external Blood confirmation must invoke the resolver exactly once");
+            assertions.assertEquals(controller.nativeConfirmationCallbackCalls(), 0,
+                    "captured external ownership must not invoke native confirmation");
+            assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Exile).stream()
+                    .filter(card -> samePublicCardIdentity(card, targetAIdentity)).count(), 1L,
+                    "ACCEPT must consume target A by public card identity");
+            assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Graveyard).stream()
+                    .filter(card -> samePublicCardIdentity(card, targetAIdentity)).count(), 0L,
+                    "target A must leave the graveyard exactly once");
+            assertions.assertEquals(confirmationRequestRecords.size(), 1,
+                    "the wrapper must trace exactly one Blood CONFIRMATION request");
+            assertions.assertEquals(resultRecords.size(), 1,
+                    "the wrapper must trace exactly one terminal Blood result");
+            if (confirmationRequestRecords.size() == 1) {
+                final String request = confirmationRequestRecords.get(0);
+                assertions.assertEquals(traceField(request, 7), "BLOOD_ETB_CONFIRMATION",
+                        "the request stage must identify the Blood ETB profile");
+                assertions.assertEquals(traceField(request, 9), "false",
+                        "Blood confirmation must not be forced");
+                assertions.assertEquals(traceField(request, 10), "[ACCEPT,DECLINE]",
+                        "Blood confirmation candidates must remain ACCEPT then DECLINE");
+            }
+            if (resultRecords.size() == 1 && confirmationRequestRecords.size() == 1) {
+                assertions.assertEquals(traceField(resultRecords.get(0), 2),
+                        traceField(confirmationRequestRecords.get(0), 2));
+                assertions.assertEquals(traceField(resultRecords.get(0), 3), "CHOSEN",
+                        "external Blood confirmation must close as CHOSEN");
+                assertions.assertEquals(traceField(resultRecords.get(0), 4), "ACCEPT");
+                assertions.assertEquals(traceField(resultRecords.get(0), 5), "false",
+                        "external Blood confirmation must record nativeCallbackCompleted=false");
+                assertions.assertEquals(traceField(resultRecords.get(0), 6), "false",
+                        "external Blood confirmation must record mappingAttempted=false");
+            }
+            assertions.assertAll();
+        } finally {
+            finishTrace(trace);
+            if (traceDirectory != null) {
+                deleteTree(traceDirectory);
+            }
+            MyRandom.setRandom(previousRandom);
+        }
+    }
+
+    @Test
+    public void wrapperNativeBloodAIntegrityFailureRecordsMappingFailed() throws Exception {
+        final Random previousRandom = MyRandom.getRandom();
+        final DeterminismAuditRandom auditRandom = new DeterminismAuditRandom(DETERMINISTIC_SEED);
+        Path traceDirectory = null;
+        DeterminismTrace trace = null;
+        final SoftAssert assertions = new SoftAssert();
+        MyRandom.setRandom(auditRandom);
+
+        try {
+            final BloodFixture fixture = bloodFixture();
+            assertBloodFixture(fixture);
+            fixture.ability().getTargets().add(fixture.targetA());
+            final Card targetAIdentity = fixture.targetA();
+            final CountingController controller = installController(fixture);
+            controller.configureNativeAIntegrityFailure();
+            controller.getConfirmationDecisionProvider().setResolver(null);
+
+            traceDirectory = Files.createTempDirectory("frl02k-d1-blood-wrapper-native-");
+            trace = DeterminismTrace.attach(fixture.game(), 0, auditRandom, traceDirectory);
+            UnsupportedConfirmationDecisionException observed = null;
+            RuntimeException unexpectedBaseline = null;
+            try {
+                fixture.wrapper().resolve();
+            } catch (final UnsupportedConfirmationDecisionException ex) {
+                observed = ex;
+            } catch (final RuntimeException ex) {
+                unexpectedBaseline = ex;
+            }
+
+            final Exception traceFinishFailure = finishTrace(trace);
+            final List<String> records = readTraceRecords(traceDirectory, assertions);
+            final List<String> requestRecords = records.stream()
+                    .filter(record -> record.startsWith("DECISION_TRACE_V2|REQUEST|"))
+                    .toList();
+            final List<String> resultRecords = records.stream()
+                    .filter(record -> record.startsWith("DECISION_TRACE_V2|RESULT|"))
+                    .toList();
+
+            assertions.assertNull(unexpectedBaseline,
+                    "native Blood A-integrity failure must use the controlled mapping exception");
+            assertions.assertNotNull(observed,
+                    "native Blood A-integrity failure must throw UnsupportedConfirmationDecisionException");
+            if (observed != null) {
+                assertions.assertEquals(observed.getStatus(), ConfirmationDecisionProvider.Status.NATIVE_MAPPING_FAILED);
+            }
+            assertions.assertEquals(controller.nativeConfirmationCallbackCalls(), 1,
+                    "native Blood confirmation must invoke the callback exactly once");
+            assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Exile).stream()
+                    .filter(card -> samePublicCardIdentity(card, targetAIdentity)).count(), 0L,
+                    "A-integrity failure must not consume target A");
+            assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Graveyard).stream()
+                    .filter(card -> samePublicCardIdentity(card, targetAIdentity)).count(), 1L,
+                    "target A must remain in the graveyard after mapping failure");
+            assertions.assertEquals(requestRecords.size(), 1,
+                    "native Blood confirmation must trace exactly one request");
+            assertions.assertEquals(resultRecords.size(), 1,
+                    "native Blood A-integrity failure must close exactly one result");
+            if (resultRecords.size() == 1) {
+                final String result = resultRecords.get(0);
+                assertions.assertEquals(traceField(result, 3), "MAPPING_FAILED");
+                assertions.assertEquals(traceField(result, 4), "");
+                assertions.assertEquals(traceField(result, 5), "true",
+                        "mapping failure must record nativeCallbackCompleted=true");
+                assertions.assertEquals(traceField(result, 6), "true",
+                        "mapping failure must record mappingAttempted=true");
+            }
+            assertions.assertNull(traceFinishFailure, "the attached decision trace must finish cleanly");
+            assertions.assertAll();
+        } finally {
+            finishTrace(trace);
+            if (traceDirectory != null) {
+                deleteTree(traceDirectory);
+            }
+            MyRandom.setRandom(previousRandom);
+        }
+    }
+
     private static boolean samePublicCardIdentity(final Card actual, final Card expected) {
         return actual != null && expected != null
                 && actual.getId() == expected.getId()
                 && actual.getGameTimestamp() == expected.getGameTimestamp();
+    }
+
+    private static Exception finishTrace(final DeterminismTrace trace) {
+        if (trace == null) {
+            return null;
+        }
+        try {
+            trace.finish();
+            return null;
+        } catch (final Exception ex) {
+            return ex;
+        }
+    }
+
+    private static List<String> readTraceRecords(final Path traceDirectory, final SoftAssert assertions) {
+        if (traceDirectory == null) {
+            assertions.assertTrue(false, "decision trace directory was not created");
+            return List.of();
+        }
+        final Path decisionTrace = traceDirectory.resolve("game-001.decision.trace");
+        try {
+            return Files.exists(decisionTrace)
+                    ? Files.readAllLines(decisionTrace, StandardCharsets.UTF_8) : List.of();
+        } catch (final IOException ex) {
+            assertions.assertTrue(false, "decision trace could not be read: " + ex.getMessage());
+            return List.of();
+        }
     }
 
     private BloodFixture bloodFixture() {
@@ -342,6 +540,7 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
         private int nativeConfirmationCallbackCalls;
         private int orderSimultaneousSaCalls;
         private GameObject targetAtNativeConfirmation;
+        private boolean nativeAIntegrityFailure;
 
         private CountingController(final Game game, final Player player) {
             super(game, player, new LobbyPlayerAi(player.getName() + "-frl02k-d1", null));
@@ -365,7 +564,15 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
             if (wrapper.getWrappedAbility().getTargets().size() == 1) {
                 targetAtNativeConfirmation = wrapper.getWrappedAbility().getTargets().get(0);
             }
+            if (nativeAIntegrityFailure) {
+                wrapper.getWrappedAbility().resetTargets();
+                return true;
+            }
             return super.confirmTrigger(wrapper);
+        }
+
+        private void configureNativeAIntegrityFailure() {
+            nativeAIntegrityFailure = true;
         }
 
         private int nativeTargetCallbackCalls() {
