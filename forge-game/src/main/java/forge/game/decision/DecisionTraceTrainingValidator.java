@@ -51,11 +51,27 @@ public final class DecisionTraceTrainingValidator {
 
     public static boolean isBCPolicySample(final DecisionTraceRequestRecord request,
             final DecisionTraceResultRecord result) {
+        final boolean profiledOrder = request != null
+                && (request.isSimultaneousTriggerOrderRequest()
+                        || request.isCopySpellResolveFirstOrderRequest());
+        final boolean profileMetadataEligible = !profiledOrder
+                || request.isCopySpellResolveFirstOrderRequest()
+                        && request.hasExactCopySpellResolveFirstOrderMetadata()
+                        && request.getTeacherLabelEligibility()
+                                == DecisionTraceTeacherLabelEligibility.BC_ELIGIBLE
+                        && request.getProfile()
+                                == DecisionTraceRequestRecord.Profile.COPY_SPELL_RESOLVE_FIRST_ORDER
+                || request.isSimultaneousTriggerOrderRequest()
+                        && request.getTeacherLabelEligibility()
+                                == DecisionTraceTeacherLabelEligibility.BC_ELIGIBLE
+                        && request.getProfile()
+                                == DecisionTraceRequestRecord.Profile.SIMULTANEOUS_TRIGGER_ORDER;
         return isHistoryValid(request, result) && result.getKind() == DecisionTraceResultKind.CHOSEN
                 && !request.isForced()
                 && result.isNativeCallbackCompleted()
                 && result.isMappingAttempted()
-                && request.getLegalCandidates().contains(result.getSelectedCandidateSemanticKey());
+                && request.getLegalCandidates().contains(result.getSelectedCandidateSemanticKey())
+                && profileMetadataEligible;
     }
 
     public static void validateRecords(final List<DecisionTraceRequestRecord> requests,

@@ -18,6 +18,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
 import forge.game.decision.ConfirmationDecisionProvider;
+import forge.game.decision.CopySpellResolveFirstOrderDecisionProvider;
 import forge.game.decision.SimultaneousTriggerOrderDecisionProvider;
 import forge.game.decision.TargetDecisionProvider;
 import forge.game.keyword.KeywordInterface;
@@ -83,6 +84,8 @@ public abstract class PlayerController {
     private final TargetDecisionProvider targetDecisionProvider = new TargetDecisionProvider();
     private final SimultaneousTriggerOrderDecisionProvider simultaneousTriggerOrderDecisionProvider =
             new SimultaneousTriggerOrderDecisionProvider();
+    private final CopySpellResolveFirstOrderDecisionProvider copySpellResolveFirstOrderDecisionProvider =
+            new CopySpellResolveFirstOrderDecisionProvider();
     private TargetDecisionProvider.Resolver targetDecisionResolver;
 
     public PlayerController(Game game0, Player p, LobbyPlayer lp) {
@@ -120,6 +123,16 @@ public abstract class PlayerController {
     public final void setSimultaneousTriggerOrderResolver(
             final SimultaneousTriggerOrderDecisionProvider.Resolver resolver) {
         simultaneousTriggerOrderDecisionProvider.setResolver(resolver);
+    }
+    public final CopySpellResolveFirstOrderDecisionProvider getCopySpellResolveFirstOrderDecisionProvider() {
+        return copySpellResolveFirstOrderDecisionProvider;
+    }
+    public final CopySpellResolveFirstOrderDecisionProvider.Resolver getCopySpellResolveFirstOrderResolver() {
+        return copySpellResolveFirstOrderDecisionProvider.getResolver();
+    }
+    public final void setCopySpellResolveFirstOrderResolver(
+            final CopySpellResolveFirstOrderDecisionProvider.Resolver resolver) {
+        copySpellResolveFirstOrderDecisionProvider.setResolver(resolver);
     }
 
     public void tempShowCards(final Iterable<Card> cards) { } // show cards in UI until ended

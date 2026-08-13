@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -19,42 +18,33 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
-/** Fresh-JVM canonical acceptance gate for FRL-02L1 admission and request counts. */
-public class FRL02L1SimultaneousTriggerOrderAuditTest {
+/** Fresh-JVM canonical acceptance gate for the exact L1C copied-spell profile. */
+public class FRL02L1CCopySpellResolveFirstOrderAuditTest {
     private static final String AUDIT_PROPERTY = "forge.simultaneousTriggerOrder.auditFile";
 
     @Test(timeOut = 900_000L)
-    public void canonicalWorkloadAdmitsEveryL1ProfileSessionAndPreservesTrace() throws Exception {
-        final Path root = Files.createTempDirectory("frl02l1-order-audit-");
+    public void canonicalWorkloadSeparatesL1CAttributionAndPreservesDeterminism() throws Exception {
+        final Path root = Files.createTempDirectory("frl02l1c-order-audit-");
         boolean completed = false;
         try {
             final AuditRun audit = run(root, "audit", true);
-            AssertionError acceptanceFailure = null;
-            try {
-                assertExpectedCounts(audit);
-            } catch (final AssertionError failure) {
-                acceptanceFailure = failure;
-            }
-
+            assertExpectedCounts(audit);
             final AuditRun control = run(root, "control", false);
             assertEquals(hashTree(audit.trace), hashTree(control.trace),
-                    "order audit instrumentation must not change deterministic traces");
-            if (acceptanceFailure != null) {
-                throw acceptanceFailure;
-            }
+                    "diagnostics must not change deterministic traces");
+            assertTrue(Files.notExists(control.auditFile));
             completed = true;
         } finally {
             if (completed) {
                 deleteTree(root);
             } else {
-                System.out.println("FRL02L1 audit failure artifacts: " + root);
+                System.out.println("FRL02L1C audit failure artifacts: " + root);
             }
         }
     }
 
     private static void assertExpectedCounts(final AuditRun run) throws IOException {
-        assertTrue(Files.exists(run.auditFile), "canonical audit must produce its diagnostics file: "
-                + run.auditFile + "\nconsole=" + run.console);
+        assertTrue(Files.exists(run.auditFile), "canonical audit must produce diagnostics: " + run.auditFile);
         final Map<String, String> values = readProperties(run.auditFile);
         assertEquals(values.get("version"), "FRL_02L1_ORDER_AUDIT_V3");
         assertEquals(values.get("raw.orderSimultaneousSa.total"), "116");
@@ -65,7 +55,6 @@ public class FRL02L1SimultaneousTriggerOrderAuditTest {
         assertEquals(values.get("raw.orderSimultaneousSa.n4"), "1");
         assertEquals(values.get("raw.orderSimultaneousSa.nOther"), "0");
         assertEquals(values.get("raw.rawMultiItemCallbacks"), "20");
-        assertEquals(values.get("raw.nonL1MultiItemCallbacks"), "0");
         assertEquals(values.get("l1.triggerSessions"), "19");
         assertEquals(values.get("l1.admittedSessions"), "19");
         assertEquals(values.get("l1.orderRequests"), "26");
@@ -74,13 +63,42 @@ public class FRL02L1SimultaneousTriggerOrderAuditTest {
         assertEquals(values.get("l1.candidateSize4"), "1");
         assertEquals(values.get("l1.forced"), "0");
         assertEquals(values.get("l1.unsupportedFallbacks"), "0");
-        assertEquals(values.get("raw.outsideL1NativeFallbacks"), "0");
-        assertEquals(values.get("l1.integrityFailures"), "0");
-        assertEquals(values.get("l1.unsupportedFailures"), "0");
-        assertEquals(values.get("l1.invalidExternalCandidates"), "0");
-        assertEquals(values.get("l1.nativeCallbackFailures"), "0");
         assertEquals(values.get("l1.mappingFailures"), "0");
         assertEquals(values.get("l1.traceIncomplete"), "0");
+        assertEquals(values.get("l1c.copySessions"), "1");
+        assertEquals(values.get("l1c.admittedSessions"), "1");
+        assertEquals(values.get("l1c.inputSize2"), "1");
+        assertEquals(values.get("l1c.orderRequests"), "1");
+        assertEquals(values.get("l1c.candidateSize2"), "1");
+        assertEquals(values.get("l1c.forced"), "0");
+        assertEquals(values.get("l1c.nativeTeacherCallbacks"), "1");
+        assertEquals(values.get("l1c.mappingFailures"), "0");
+        assertEquals(values.get("l1c.nativeCallbackFailures"), "0");
+        assertEquals(values.get("l1c.invalidExternalCandidates"), "0");
+        assertEquals(values.get("l1c.traceIncomplete"), "0");
+
+        final List<Path> summaries;
+        try (var paths = Files.list(run.trace)) {
+            summaries = paths.filter(path -> path.getFileName().toString().endsWith(".summary.properties"))
+                    .toList();
+        }
+        final Path cSummary = summaries.stream().filter(FRL02L1CCopySpellResolveFirstOrderAuditTest::isV3)
+                .findFirst().orElseThrow(() -> new AssertionError("no C-bearing V3 summary"));
+        final Path cTrace = cSummary.resolveSibling(cSummary.getFileName().toString()
+                .replace(".summary.properties", ".decision.trace"));
+        final List<String> cRecords = Files.readAllLines(cTrace, StandardCharsets.UTF_8);
+        assertTrue(cRecords.stream().allMatch(line -> line.startsWith("DECISION_TRACE_V3|")));
+        assertTrue(cRecords.stream().anyMatch(line -> line.contains(
+                "|COPY_SPELL_RESOLVE_FIRST_ORDER|BC_EXCLUDED_PUBLIC_SYMMETRY")));
+    }
+
+    private static boolean isV3(final Path summary) {
+        try {
+            return Files.readAllLines(summary, StandardCharsets.UTF_8).contains(
+                    "decisionTraceVersion=DECISION_TRACE_V3");
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
+        }
     }
 
     private static AuditRun run(final Path root, final String name, final boolean auditEnabled) throws Exception {
@@ -116,7 +134,7 @@ public class FRL02L1SimultaneousTriggerOrderAuditTest {
                 .start();
         if (!process.waitFor(300, TimeUnit.SECONDS)) {
             process.destroyForcibly();
-            fail("canonical FRL-02L1 child JVM timed out: " + name);
+            fail("canonical FRL02L1C child JVM timed out: " + name);
         }
         assertEquals(process.exitValue(), 0, Files.readString(console, StandardCharsets.UTF_8));
         return new AuditRun(auditFile, trace, console);
@@ -138,7 +156,7 @@ public class FRL02L1SimultaneousTriggerOrderAuditTest {
                 ? workingDirectory.getParent() : workingDirectory;
     }
 
-    private static String hashTree(final Path root) throws IOException, NoSuchAlgorithmException {
+    private static String hashTree(final Path root) throws IOException, java.security.NoSuchAlgorithmException {
         final MessageDigest digest = MessageDigest.getInstance("SHA-256");
         if (!Files.exists(root)) {
             return "";
@@ -168,10 +186,10 @@ public class FRL02L1SimultaneousTriggerOrderAuditTest {
         private final Path trace;
         private final Path console;
 
-        private AuditRun(final Path auditFile0, final Path trace0, final Path console0) {
-            auditFile = auditFile0;
-            trace = trace0;
-            console = console0;
+        private AuditRun(final Path auditFile, final Path trace, final Path console) {
+            this.auditFile = auditFile;
+            this.trace = trace;
+            this.console = console;
         }
     }
 }

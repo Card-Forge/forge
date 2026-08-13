@@ -31,6 +31,10 @@ public class SimultaneousTriggerOrderCoordinatorTest extends AITest {
     public void semanticAndNativeOrderArePureReverses() {
         final List<String> nativeInsertion = List.of("A", "B", "C", "D");
 
+        assertEquals(OrderResolutionTranslation.toSemanticResolveFirst(nativeInsertion),
+                List.of("D", "C", "B", "A"));
+        assertEquals(OrderResolutionTranslation.toNativeInsertion(
+                OrderResolutionTranslation.toSemanticResolveFirst(nativeInsertion)), nativeInsertion);
         assertEquals(SimultaneousTriggerOrderDecisionCoordinator.toSemanticResolveFirst(nativeInsertion),
                 List.of("D", "C", "B", "A"));
         assertEquals(SimultaneousTriggerOrderDecisionCoordinator.toNativeInsertion(

@@ -49,6 +49,8 @@ public final class LegalCandidate {
     private final ConfirmationCandidateKind confirmationKind;
     private final OrderCandidateKind orderKind;
     private final SimultaneousTriggerOrderItem orderItem;
+    private final CopySpellResolveFirstOrderItemKind copySpellResolveFirstOrderKind;
+    private final CopySpellResolveFirstOrderItem copySpellResolveFirstOrderItem;
 
     private LegalCandidate(final int candidateId, final PriorityActionKind kind, final Card source,
             final SpellAbility spellAbility, final String semanticKey) {
@@ -84,6 +86,8 @@ public final class LegalCandidate {
         this.confirmationKind = null;
         this.orderKind = null;
         this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
     }
 
     private LegalCandidate(final int candidateId, final String semanticKey) {
@@ -119,6 +123,8 @@ public final class LegalCandidate {
         this.confirmationKind = null;
         this.orderKind = null;
         this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
     }
 
     private LegalCandidate(final int candidateId, final TargetCandidateKind targetKind, final GameObject target,
@@ -155,6 +161,8 @@ public final class LegalCandidate {
         this.confirmationKind = null;
         this.orderKind = null;
         this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
     }
 
     private LegalCandidate(final int candidateId, final PaymentCandidateKind paymentKind, final Card source,
@@ -191,6 +199,8 @@ public final class LegalCandidate {
         this.confirmationKind = null;
         this.orderKind = null;
         this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
     }
 
     private LegalCandidate(final int candidateId, final int xValue) {
@@ -226,6 +236,8 @@ public final class LegalCandidate {
         this.confirmationKind = null;
         this.orderKind = null;
         this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
     }
 
     private LegalCandidate(final int candidateId, final int modeOrdinal, final AbilitySub mode) {
@@ -261,6 +273,8 @@ public final class LegalCandidate {
         this.confirmationKind = null;
         this.orderKind = null;
         this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
     }
 
     private LegalCandidate(final int candidateId, final CardSelectionCandidateKind cardSelectionKind,
@@ -298,6 +312,8 @@ public final class LegalCandidate {
         this.confirmationKind = null;
         this.orderKind = null;
         this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
     }
 
     private LegalCandidate(final int candidateId, final AttackDeclarationCandidateKind attackKind,
@@ -336,6 +352,8 @@ public final class LegalCandidate {
         this.confirmationKind = null;
         this.orderKind = null;
         this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
     }
 
     private LegalCandidate(final int candidateId, final BlockDeclarationCandidateKind blockKind,
@@ -374,6 +392,8 @@ public final class LegalCandidate {
         this.confirmationKind = null;
         this.orderKind = null;
         this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
     }
 
     private static boolean branchUsesTargeting(final SpellAbility first) {
@@ -470,6 +490,12 @@ public final class LegalCandidate {
         return new LegalCandidate(candidateId, Objects.requireNonNull(kind), Objects.requireNonNull(item));
     }
 
+    static LegalCandidate copySpellResolveFirstOrder(final int candidateId,
+            final CopySpellResolveFirstOrderItemKind kind,
+            final CopySpellResolveFirstOrderItem item) {
+        return new LegalCandidate(candidateId, Objects.requireNonNull(kind), Objects.requireNonNull(item));
+    }
+
     private LegalCandidate(final int candidateId, final ConfirmationCandidateKind kind) {
         this.candidateId = candidateId;
         this.kind = null;
@@ -503,6 +529,8 @@ public final class LegalCandidate {
         this.confirmationKind = kind;
         this.orderKind = null;
         this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
     }
 
     private LegalCandidate(final int candidateId, final OrderCandidateKind kind,
@@ -539,6 +567,49 @@ public final class LegalCandidate {
         this.confirmationKind = null;
         this.orderKind = kind;
         this.orderItem = item;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
+    }
+
+    private LegalCandidate(final int candidateId, final CopySpellResolveFirstOrderItemKind kind,
+            final CopySpellResolveFirstOrderItem item) {
+        this.candidateId = candidateId;
+        this.kind = null;
+        this.sourceCardId = -1;
+        this.sourceName = "";
+        this.sourceZone = null;
+        this.sourceState = null;
+        this.abilityDescription = "";
+        this.semanticKey = "RESOLVE_FIRST|" + item.getItemId();
+        this.spellAbility = null;
+        this.targetKind = null;
+        this.targetEntityId = -1;
+        this.targetName = "";
+        this.targetZone = null;
+        this.target = null;
+        this.paymentKind = null;
+        this.mana = null;
+        this.xValue = null;
+        this.modeOrdinal = null;
+        this.modeDescription = "";
+        this.modeUsesTargeting = false;
+        this.mode = null;
+        this.cardSelectionKind = null;
+        this.cardSelectionCard = null;
+        this.attackKind = null;
+        this.attackCard = null;
+        this.attackDefender = null;
+        this.blockKind = null;
+        this.blockCard = null;
+        this.blockAttacker = null;
+        this.confirmationKind = null;
+        this.orderKind = null;
+        this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = Objects.requireNonNull(kind);
+        this.copySpellResolveFirstOrderItem = Objects.requireNonNull(item);
+        if (kind != item.getKind()) {
+            throw new IllegalArgumentException("L1C candidate kind does not match item kind");
+        }
     }
 
     public int getCandidateId() {
@@ -623,6 +694,14 @@ public final class LegalCandidate {
 
     public SimultaneousTriggerOrderItem getOrderItem() {
         return orderItem;
+    }
+
+    public CopySpellResolveFirstOrderItemKind getCopySpellResolveFirstOrderKind() {
+        return copySpellResolveFirstOrderKind;
+    }
+
+    public CopySpellResolveFirstOrderItem getCopySpellResolveFirstOrderItem() {
+        return copySpellResolveFirstOrderItem;
     }
 
     /** Stable blocker identity for BLOCK candidates, otherwise {@code null}. */

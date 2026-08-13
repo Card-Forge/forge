@@ -8,7 +8,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,18 +33,17 @@ public final class SimultaneousTriggerOrderDecisionCoordinator {
      * resolves first under MagicStack's add-first LIFO insertion.
      */
     static <T> List<T> toSemanticResolveFirst(final List<T> nativeInsertionOrder) {
-        return reversed(nativeInsertionOrder);
+        return OrderResolutionTranslation.toSemanticResolveFirst(nativeInsertionOrder);
     }
 
     /** Reverses semantic resolve-first order into MagicStack insertion order. */
     static <T> List<T> toNativeInsertion(final List<T> semanticResolveFirstOrder) {
-        return reversed(semanticResolveFirstOrder);
+        return OrderResolutionTranslation.toNativeInsertion(semanticResolveFirstOrder);
     }
 
     public List<SpellAbility> order(final List<SpellAbility> active,
             final Player chooser, final SimultaneousTriggerOrderDecisionProvider provider,
             final NativeOrderer nativeOrderer) {
-        SimultaneousTriggerOrderAuditDiagnostics.recordRawInvocation(active == null ? -1 : active.size());
         Objects.requireNonNull(provider);
         Objects.requireNonNull(nativeOrderer);
 
@@ -151,7 +149,7 @@ public final class SimultaneousTriggerOrderDecisionCoordinator {
         return new Snapshot(entries, byIdentity, chooser, orderSessionId);
     }
 
-    private static boolean isSimultaneousTriggerProfileCandidate(final List<SpellAbility> active) {
+    static boolean isSimultaneousTriggerProfileCandidate(final List<SpellAbility> active) {
         try {
             Player effectiveOrderingPlayer = null;
             for (final SpellAbility entry : active) {
@@ -324,7 +322,9 @@ public final class SimultaneousTriggerOrderDecisionCoordinator {
             final DecisionRequest request) {
         SimultaneousTriggerOrderAuditDiagnostics.recordRequest(request.getCandidates().size(), request.isForced());
         return DeterminismTrace.recordRequest(chooser.getGame(), chooser.getId(), request,
-                TRACE_STAGE, request.getOrderContext().getStepIndex());
+                TRACE_STAGE, request.getOrderContext().getStepIndex(),
+                DecisionTraceRequestRecord.Profile.SIMULTANEOUS_TRIGGER_ORDER,
+                DecisionTraceTeacherLabelEligibility.BC_ELIGIBLE);
     }
 
     private static boolean isFullPermutation(final List<SpellAbility> result, final Snapshot snapshot) {
@@ -338,12 +338,6 @@ public final class SimultaneousTriggerOrderDecisionCoordinator {
             }
         }
         return seen.size() == snapshot.entries.size();
-    }
-
-    private static <T> List<T> reversed(final List<T> source) {
-        final List<T> copy = new ArrayList<>(Objects.requireNonNull(source));
-        Collections.reverse(copy);
-        return List.copyOf(copy);
     }
 
     private static SimultaneousTriggerOrderIntegrityException failure(

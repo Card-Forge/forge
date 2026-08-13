@@ -26,6 +26,7 @@ public final class DeterminismTrace {
     public static final String OUTPUT_DIRECTORY_PROPERTY = "forge.determinism.traceDir";
     public static final String AUDIT_RANDOM_PROPERTY = "forge.determinism.auditRandom";
     public static final String DECISION_TRACE_VERSION = "DECISION_TRACE_V2";
+    public static final String DECISION_TRACE_V3 = "DECISION_TRACE_V3";
     public static final String GAMEPLAY_TRACE_VERSION = "GAMEPLAY_TRACE_V1";
     public static final String RNG_TRACE_VERSION = "RNG_TRACE_V1";
 
@@ -39,6 +40,7 @@ public final class DeterminismTrace {
     private final long rngStartIndex;
     private final List<String> gameplayRecords = new ArrayList<>();
     private final List<String> decisionRecords = new ArrayList<>();
+    private final List<DecisionTraceEvent> decisionEvents = new ArrayList<>();
     private final List<DecisionTraceRequestRecord> decisionRequests = new ArrayList<>();
     private final List<DecisionTraceResultRecord> decisionResults = new ArrayList<>();
     private final Map<Long, RequestHandle> openRequests = new LinkedHashMap<>();
@@ -77,6 +79,17 @@ public final class DeterminismTrace {
                 : trace.addRequest(actingPlayerSeat, request, adapterOrStage, decisionStepIndex);
     }
 
+    /** Records a request with an explicit trace profile and teacher-label eligibility. */
+    public static RequestHandle recordRequest(final Game game, final int actingPlayerSeat,
+            final DecisionRequest request, final String adapterOrStage, final int decisionStepIndex,
+            final DecisionTraceRequestRecord.Profile profile,
+            final DecisionTraceTeacherLabelEligibility teacherLabelEligibility) {
+        final DeterminismTrace trace = ACTIVE.get(game);
+        return trace == null ? RequestHandle.inactive()
+                : trace.addRequest(actingPlayerSeat, request, adapterOrStage, decisionStepIndex,
+                        profile, teacherLabelEligibility);
+    }
+
     @Subscribe
     public void receive(final GameEvent event) {
         recordGameplayCheckpoint("EVENT:" + event.getClass().getSimpleName());
@@ -99,6 +112,7 @@ public final class DeterminismTrace {
             request.recordTraceIncomplete();
         }
         DecisionTraceTrainingValidator.validateRecords(decisionRequests, decisionResults);
+        materializeDecisionRecords();
         final long rngEndIndex = random.getDrawCount();
         final List<String> rngRecords = random.getCanonicalRecords(rngStartIndex, rngEndIndex);
         final List<String> rngDiagnosticRecords = random.getDiagnosticRecords(rngStartIndex, rngEndIndex);
@@ -112,7 +126,7 @@ public final class DeterminismTrace {
         write(prefix + ".summary.properties", List.of(
                 "gameplayTraceVersion=" + GAMEPLAY_TRACE_VERSION,
                 "gameplayHash=" + DeterminismTraceHasher.sha256(gameplayRecords),
-                "decisionTraceVersion=" + DECISION_TRACE_VERSION,
+                "decisionTraceVersion=" + decisionTraceVersion(),
                 "decisionHash=" + (decisionRecords.isEmpty() ? "ABSENT"
                         : DeterminismTraceHasher.sha256(decisionRecords)),
                 "rngTraceVersion=" + RNG_TRACE_VERSION,
@@ -127,6 +141,13 @@ public final class DeterminismTrace {
 
     private synchronized RequestHandle addRequest(final int actingPlayerSeat, final DecisionRequest request,
             final String adapterOrStage, final int decisionStepIndex) {
+        return addRequest(actingPlayerSeat, request, adapterOrStage, decisionStepIndex, null, null);
+    }
+
+    private synchronized RequestHandle addRequest(final int actingPlayerSeat, final DecisionRequest request,
+            final String adapterOrStage, final int decisionStepIndex,
+            final DecisionTraceRequestRecord.Profile profile,
+            final DecisionTraceTeacherLabelEligibility teacherLabelEligibility) {
         if (finished) {
             return RequestHandle.inactive();
         }
@@ -136,16 +157,16 @@ public final class DeterminismTrace {
         final String candidateList = canonicalCandidateList(legalCandidates);
         final String candidateSetHash = DeterminismTraceHasher.sha256(
                 List.of("DECISION_CANDIDATE_SET_V1|" + candidateList));
-        final DecisionTraceRequestRecord record = new DecisionTraceRequestRecord(nextRequestIndex++,
-                phase.getTurn(), String.valueOf(phase.getPhase()), actingPlayerSeat, request.getDecisionType(),
-                adapterOrStage, decisionStepIndex, request.isForced(), legalCandidates, candidateSetHash);
+        final DecisionTraceRequestRecord record = profile == null && teacherLabelEligibility == null
+                ? new DecisionTraceRequestRecord(nextRequestIndex++, phase.getTurn(),
+                        String.valueOf(phase.getPhase()), actingPlayerSeat, request.getDecisionType(),
+                        adapterOrStage, decisionStepIndex, request.isForced(), legalCandidates, candidateSetHash)
+                : new DecisionTraceRequestRecord(nextRequestIndex++, phase.getTurn(),
+                        String.valueOf(phase.getPhase()), actingPlayerSeat, request.getDecisionType(),
+                        adapterOrStage, decisionStepIndex, request.isForced(), legalCandidates, candidateSetHash,
+                        profile, teacherLabelEligibility);
         decisionRequests.add(record);
-        decisionRecords.add(String.join("|", DECISION_TRACE_VERSION, "REQUEST",
-                Long.toString(record.getTraceRequestIndex()), Integer.toString(record.getTurn()),
-                canonicalText(record.getPhase()), Integer.toString(record.getActingPlayerSeat()),
-                record.getDecisionType().name(), canonicalText(record.getAdapterOrStage()),
-                Integer.toString(record.getDecisionStepIndex()), Boolean.toString(record.isForced()),
-                candidateList, record.getCandidateSetHash()));
+        decisionEvents.add(DecisionTraceEvent.request(record));
         final RequestHandle handle = new RequestHandle(this, record);
         openRequests.put(record.getTraceRequestIndex(), handle);
         return handle;
@@ -169,14 +190,45 @@ public final class DeterminismTrace {
         openRequests.remove(handle.requestRecord.getTraceRequestIndex());
         handle.resultRecord = result;
         decisionResults.add(result);
-        decisionRecords.add(String.join("|", DECISION_TRACE_VERSION, "RESULT",
-                Long.toString(result.getTraceRequestIndex()), result.getKind().name(),
-                canonicalText(result.getSelectedCandidateSemanticKey()),
-                Boolean.toString(result.isNativeCallbackCompleted()),
-                Boolean.toString(result.isMappingAttempted()),
-                Boolean.toString(result.isEngineRollbackObserved()),
-                Boolean.toString(result.isEngineForcedBypass()),
-                Boolean.toString(result.isTraceFinalization())));
+        decisionEvents.add(DecisionTraceEvent.result(result));
+    }
+
+    private String decisionTraceVersion() {
+        return decisionRequests.stream().anyMatch(DecisionTraceRequestRecord::isCopySpellResolveFirstOrderRequest)
+                ? DECISION_TRACE_V3 : DECISION_TRACE_VERSION;
+    }
+
+    private void materializeDecisionRecords() {
+        decisionRecords.clear();
+        final String version = decisionTraceVersion();
+        for (final DecisionTraceEvent event : decisionEvents) {
+            if (event.request != null) {
+                final DecisionTraceRequestRecord record = event.request;
+                final String candidateList = canonicalCandidateList(record.getLegalCandidates());
+                final List<String> fields = new ArrayList<>(List.of(version, "REQUEST",
+                        Long.toString(record.getTraceRequestIndex()), Integer.toString(record.getTurn()),
+                        canonicalText(record.getPhase()), Integer.toString(record.getActingPlayerSeat()),
+                        record.getDecisionType().name(), canonicalText(record.getAdapterOrStage()),
+                        Integer.toString(record.getDecisionStepIndex()), Boolean.toString(record.isForced()),
+                        candidateList, record.getCandidateSetHash()));
+                if (DECISION_TRACE_V3.equals(version)) {
+                    fields.add(record.getProfile() == null ? "" : record.getProfile().name());
+                    fields.add(record.getTeacherLabelEligibility() == null
+                            ? "" : record.getTeacherLabelEligibility().name());
+                }
+                decisionRecords.add(String.join("|", fields));
+            } else {
+                final DecisionTraceResultRecord result = event.result;
+                decisionRecords.add(String.join("|", version, "RESULT",
+                        Long.toString(result.getTraceRequestIndex()), result.getKind().name(),
+                        canonicalText(result.getSelectedCandidateSemanticKey()),
+                        Boolean.toString(result.isNativeCallbackCompleted()),
+                        Boolean.toString(result.isMappingAttempted()),
+                        Boolean.toString(result.isEngineRollbackObserved()),
+                        Boolean.toString(result.isEngineForcedBypass()),
+                        Boolean.toString(result.isTraceFinalization())));
+            }
+        }
     }
 
     private String outcome() {
@@ -223,6 +275,25 @@ public final class DeterminismTrace {
 
     private static String canonicalListText(final String value) {
         return canonicalText(value).replace(",", "%2C").replace("[", "%5B").replace("]", "%5D");
+    }
+
+    private static final class DecisionTraceEvent {
+        private final DecisionTraceRequestRecord request;
+        private final DecisionTraceResultRecord result;
+
+        private DecisionTraceEvent(final DecisionTraceRequestRecord request,
+                final DecisionTraceResultRecord result) {
+            this.request = request;
+            this.result = result;
+        }
+
+        private static DecisionTraceEvent request(final DecisionTraceRequestRecord request) {
+            return new DecisionTraceEvent(request, null);
+        }
+
+        private static DecisionTraceEvent result(final DecisionTraceResultRecord result) {
+            return new DecisionTraceEvent(null, result);
+        }
     }
 
     /** Trace-local lifecycle handle; an inactive handle is a no-op when no collector is attached. */
@@ -347,7 +418,9 @@ public final class DeterminismTrace {
         }
 
         private void recordTraceIncomplete() {
-            if ("SIMULTANEOUS_TRIGGER_ORDER".equals(requestRecord.getAdapterOrStage())) {
+            if (requestRecord.isCopySpellResolveFirstOrderRequest()) {
+                SimultaneousTriggerOrderAuditDiagnostics.recordCopySpellTraceIncomplete();
+            } else if (requestRecord.isSimultaneousTriggerOrderRequest()) {
                 SimultaneousTriggerOrderAuditDiagnostics.recordTraceIncomplete();
             }
             trace.complete(this, DecisionTraceResultKind.TRACE_INCOMPLETE, "", false, false,

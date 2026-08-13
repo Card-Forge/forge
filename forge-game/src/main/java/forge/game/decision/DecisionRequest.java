@@ -20,6 +20,7 @@ public final class DecisionRequest {
     private final MulliganContext mulliganContext;
     private final ConfirmationDecisionContext confirmationContext;
     private final SimultaneousTriggerOrderContext orderContext;
+    private final CopySpellResolveFirstOrderContext copySpellResolveFirstOrderContext;
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates) {
         this(requestId, decisionType, candidates, null, null, null, null, null, null, null, null);
@@ -77,6 +78,12 @@ public final class DecisionRequest {
                 null, orderContext);
     }
 
+    DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
+            final CopySpellResolveFirstOrderContext copySpellResolveFirstOrderContext) {
+        this(requestId, decisionType, candidates, null, null, null, null, null, null, null, null,
+                null, null, copySpellResolveFirstOrderContext);
+    }
+
     private DecisionRequest(final long requestId, final DecisionType decisionType,
             final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
             final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
@@ -104,6 +111,19 @@ public final class DecisionRequest {
             final AttackDeclarationContext attackContext, final BlockDeclarationContext blockContext,
             final MulliganContext mulliganContext, final ConfirmationDecisionContext confirmationContext,
             final SimultaneousTriggerOrderContext orderContext) {
+        this(requestId, decisionType, candidates, targetContext, paymentContext, xContext, modeContext,
+                cardSelectionContext, attackContext, blockContext, mulliganContext, confirmationContext,
+                orderContext, null);
+    }
+
+    private DecisionRequest(final long requestId, final DecisionType decisionType,
+            final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
+            final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
+            final ModeDecisionContext modeContext, final CardSelectionContext cardSelectionContext,
+            final AttackDeclarationContext attackContext, final BlockDeclarationContext blockContext,
+            final MulliganContext mulliganContext, final ConfirmationDecisionContext confirmationContext,
+            final SimultaneousTriggerOrderContext orderContext,
+            final CopySpellResolveFirstOrderContext copySpellResolveFirstOrderContext) {
         this.requestId = requestId;
         this.decisionType = Objects.requireNonNull(decisionType);
         this.candidates = List.copyOf(candidates);
@@ -117,6 +137,7 @@ public final class DecisionRequest {
         this.mulliganContext = mulliganContext;
         this.confirmationContext = confirmationContext;
         this.orderContext = orderContext;
+        this.copySpellResolveFirstOrderContext = copySpellResolveFirstOrderContext;
         if (this.candidates.isEmpty()) {
             throw new IllegalArgumentException("A DecisionRequest must contain at least one legal candidate");
         }
@@ -181,32 +202,60 @@ public final class DecisionRequest {
         if (decisionType != DecisionType.CONFIRMATION && confirmationContext != null) {
             throw new IllegalArgumentException("Only CONFIRMATION DecisionRequests may contain confirmation context");
         }
-        if (decisionType == DecisionType.ORDER && orderContext == null) {
+        if (decisionType == DecisionType.ORDER && orderContext == null
+                && copySpellResolveFirstOrderContext == null) {
             throw new IllegalArgumentException("An ORDER DecisionRequest requires order context");
         }
-        if (decisionType != DecisionType.ORDER && orderContext != null) {
+        if (decisionType != DecisionType.ORDER
+                && (orderContext != null || copySpellResolveFirstOrderContext != null)) {
             throw new IllegalArgumentException("Only ORDER DecisionRequests may contain order context");
         }
         if (decisionType == DecisionType.ORDER) {
             if (candidates.size() < 2) {
                 throw new IllegalArgumentException("An ORDER DecisionRequest requires at least two candidates");
             }
-            if (orderContext.getProfile() != SimultaneousTriggerOrderProfile.SIMULTANEOUS_TRIGGER_ORDER
-                    || orderContext.getDirection() != OrderDirection.RESOLVE_FIRST
-                    || orderContext.getOriginalItemCount() < candidates.size()
-                    || orderContext.getOriginalItemCount() < 2) {
-                throw new IllegalArgumentException("ORDER request does not match the exact profile");
-            }
-            for (final LegalCandidate candidate : candidates) {
-                if (candidate.getOrderKind() != OrderCandidateKind.SELECT_RESOLVE_FIRST
-                        || candidate.getOrderItem() == null
-                        || !candidate.getSemanticKey().equals("RESOLVE_FIRST|"
-                                + candidate.getOrderItem().getItemId())) {
-                    throw new IllegalArgumentException("ORDER candidates must be SELECT_RESOLVE_FIRST items");
+            if (orderContext != null) {
+                if (copySpellResolveFirstOrderContext != null
+                        || orderContext.getProfile() != SimultaneousTriggerOrderProfile.SIMULTANEOUS_TRIGGER_ORDER
+                        || orderContext.getDirection() != OrderDirection.RESOLVE_FIRST
+                        || orderContext.getOriginalItemCount() < candidates.size()
+                        || orderContext.getOriginalItemCount() < 2) {
+                    throw new IllegalArgumentException("ORDER request does not match the exact L1 profile");
+                }
+                for (final LegalCandidate candidate : candidates) {
+                    if (candidate.getOrderKind() != OrderCandidateKind.SELECT_RESOLVE_FIRST
+                            || candidate.getOrderItem() == null
+                            || candidate.getCopySpellResolveFirstOrderKind() != null
+                            || candidate.getCopySpellResolveFirstOrderItem() != null
+                            || !candidate.getSemanticKey().equals("RESOLVE_FIRST|"
+                                    + candidate.getOrderItem().getItemId())) {
+                        throw new IllegalArgumentException("ORDER candidates must be SELECT_RESOLVE_FIRST items");
+                    }
+                }
+            } else {
+                if (copySpellResolveFirstOrderContext.getProfile()
+                        != CopySpellResolveFirstOrderProfile.COPY_SPELL_RESOLVE_FIRST_ORDER
+                        || copySpellResolveFirstOrderContext.getDirection() != OrderDirection.RESOLVE_FIRST
+                        || copySpellResolveFirstOrderContext.getOriginalItemCount() < candidates.size()
+                        || copySpellResolveFirstOrderContext.getOriginalItemCount() < 2) {
+                    throw new IllegalArgumentException("ORDER request does not match the exact L1C profile");
+                }
+                for (final LegalCandidate candidate : candidates) {
+                    if (candidate.getCopySpellResolveFirstOrderKind()
+                            != CopySpellResolveFirstOrderItemKind.COPIED_SPELL
+                            || candidate.getCopySpellResolveFirstOrderItem() == null
+                            || candidate.getOrderKind() != null
+                            || candidate.getOrderItem() != null
+                            || !candidate.getSemanticKey().equals("RESOLVE_FIRST|"
+                                    + candidate.getCopySpellResolveFirstOrderItem().getItemId())) {
+                        throw new IllegalArgumentException("ORDER candidates must be COPIED_SPELL items");
+                    }
                 }
             }
         } else if (candidates.stream().anyMatch(candidate -> candidate.getOrderKind() != null
-                || candidate.getOrderItem() != null)) {
+                || candidate.getOrderItem() != null
+                || candidate.getCopySpellResolveFirstOrderKind() != null
+                || candidate.getCopySpellResolveFirstOrderItem() != null)) {
             throw new IllegalArgumentException("ORDER candidates require DecisionType.ORDER");
         }
     }
@@ -274,6 +323,11 @@ public final class DecisionRequest {
     /** ORDER-only semantic session context. */
     public SimultaneousTriggerOrderContext getOrderContext() {
         return orderContext;
+    }
+
+    /** L1C-only semantic session context. */
+    public CopySpellResolveFirstOrderContext getCopySpellResolveFirstOrderContext() {
+        return copySpellResolveFirstOrderContext;
     }
 
     public boolean isForced() {

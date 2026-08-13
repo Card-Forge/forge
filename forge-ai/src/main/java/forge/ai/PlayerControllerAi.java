@@ -23,7 +23,9 @@ import forge.game.decision.BooleanCallbackAuditDiagnostics;
 import forge.game.decision.ChangesZoneAuditDiagnostics;
 import forge.game.decision.DownstreamCallbackFamily;
 import forge.game.decision.MulliganDiagnostics;
+import forge.game.decision.OrderProfileRouter;
 import forge.game.decision.PriorityActionDiagnostics;
+import forge.game.decision.CopySpellResolveFirstOrderDecisionCoordinator;
 import forge.game.decision.SimultaneousTriggerOrderDecisionCoordinator;
 import forge.game.decision.TargetDecisionProvider;
 import forge.game.decision.TriggeredTargetAuditDiagnostics;
@@ -70,6 +72,8 @@ public class PlayerControllerAi extends PlayerController {
             new TriggeredTargetDecisionCoordinator();
     private final SimultaneousTriggerOrderDecisionCoordinator simultaneousTriggerOrderDecisionCoordinator =
             new SimultaneousTriggerOrderDecisionCoordinator();
+    private final CopySpellResolveFirstOrderDecisionCoordinator copySpellResolveFirstOrderDecisionCoordinator =
+            new CopySpellResolveFirstOrderDecisionCoordinator();
 
     private boolean pilotsNonAggroDeck = false;
 
@@ -1361,8 +1365,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs) {
-        return simultaneousTriggerOrderDecisionCoordinator.order(activePlayerSAs, getPlayer(),
-                getSimultaneousTriggerOrderDecisionProvider(), getAi()::orderPlaySa);
+        return OrderProfileRouter.order(activePlayerSAs, getPlayer(), simultaneousTriggerOrderDecisionCoordinator,
+                getSimultaneousTriggerOrderDecisionProvider(), copySpellResolveFirstOrderDecisionCoordinator,
+                getCopySpellResolveFirstOrderDecisionProvider(), getAi()::orderPlaySa);
     }
 
     @Override
