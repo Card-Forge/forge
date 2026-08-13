@@ -26,6 +26,9 @@ final class BridgeOptions {
             description = "Full-duplex JSONL message log")
     private Path logPath;
 
+    @Option(names = "--skeleton", description = "Use the Task B non-running mirrored shell")
+    private boolean skeleton;
+
     List<File> getDecks() {
         return decks;
     }
@@ -40,6 +43,10 @@ final class BridgeOptions {
 
     Path getLogPath() {
         return logPath;
+    }
+
+    boolean isSkeleton() {
+        return skeleton;
     }
 
     void validate() {

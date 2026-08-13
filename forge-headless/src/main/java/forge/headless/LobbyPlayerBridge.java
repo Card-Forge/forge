@@ -10,12 +10,16 @@ import forge.game.player.PlayerController;
 final class LobbyPlayerBridge extends LobbyPlayer implements IGameEntitiesFactory {
     private final int seat;
     private final boolean forgeAiSeat;
+    private final boolean fullGame;
+    private final int startingSeat;
     private BridgeController controller;
 
-    LobbyPlayerBridge(String name, int seat, boolean forgeAiSeat) {
+    LobbyPlayerBridge(String name, int seat, boolean forgeAiSeat, boolean fullGame, int startingSeat) {
         super(name);
         this.seat = seat;
         this.forgeAiSeat = forgeAiSeat;
+        this.fullGame = fullGame;
+        this.startingSeat = startingSeat;
     }
 
     BridgeController getController() {
@@ -27,13 +31,13 @@ final class LobbyPlayerBridge extends LobbyPlayer implements IGameEntitiesFactor
 
     @Override
     public PlayerController createMindSlaveController(Player master, Player slave) {
-        return new BridgeController(slave.getGame(), slave, this, seat, forgeAiSeat);
+        return new BridgeController(slave.getGame(), slave, this, seat, forgeAiSeat, fullGame, startingSeat);
     }
 
     @Override
     public Player createIngamePlayer(Game game, int id) {
         Player player = new Player(getName(), game, id);
-        controller = new BridgeController(game, player, this, seat, forgeAiSeat);
+        controller = new BridgeController(game, player, this, seat, forgeAiSeat, fullGame, startingSeat);
         player.setFirstController(controller);
         return player;
     }

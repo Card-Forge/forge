@@ -45,6 +45,9 @@ final class BridgeSession {
     private final Map<Integer, LobbyPlayerBridge> lobbyPlayers = new HashMap<>();
 
     private Game game;
+    private Match match;
+    private Thread gameThread;
+    private volatile Throwable gameThreadFailure;
     private String gameId;
     private long lastSequence;
     private boolean shutdownRequested;
@@ -89,7 +92,8 @@ final class BridgeSession {
         capabilities.add("decision.priority");
         capabilities.add("decision.mulligan");
         capabilities.add("event.reveal.library_bag");
-        capabilities.add("event.opponent_action.accept_only");
+        capabilities.add("event.opponent_action.replay");
+        capabilities.add("mode.full_game_loop");
 
         ObjectNode request = rpcMessage();
         request.put("id", HELLO_REQUEST_ID);
@@ -119,6 +123,7 @@ final class BridgeSession {
     }
 
     private void handleCall(JsonNode message) throws IOException {
+        throwIfGameThreadFailed();
         if (!"2.0".equals(message.path("jsonrpc").asText())) {
             throw new BridgeFailure("invalid_request", "jsonrpc must be 2.0");
         }
@@ -153,6 +158,7 @@ final class BridgeSession {
             break;
         case "shutdown":
             requireRequest(id, method);
+            stopGameThread();
             ObjectNode shutdown = BridgeTransport.JSON.createObjectNode();
             shutdown.put("accepted", true);
             sendResult(id, shutdown);
@@ -183,6 +189,7 @@ final class BridgeSession {
             throw new BridgeFailure("seed_mismatch", "game_start RNG seed does not match --seed");
         }
 
+        int startingSeat = requireInt(params, "starting_player");
         ArrayNode protocolPlayers = requireArray(params, "players");
         if (protocolPlayers.size() != options.getDecks().size()) {
             throw new BridgeFailure("player_count_mismatch", "game_start player count does not match -d decks");
@@ -205,7 +212,7 @@ final class BridgeSession {
             decks.add(deck);
 
             LobbyPlayerBridge lobbyPlayer = new LobbyPlayerBridge(requireText(protocolPlayer, "name"), seat,
-                    seat == yourSeat);
+                    seat == yourSeat, !options.isSkeleton(), startingSeat);
             lobbyPlayers.put(seat, lobbyPlayer);
             RegisteredPlayer registeredPlayer = new RegisteredPlayer(deck);
             registeredPlayer.setPlayer(lobbyPlayer);
@@ -215,12 +222,13 @@ final class BridgeSession {
 
         GameRules rules = new GameRules(GameType.Constructed);
         rules.setAppliedVariants(EnumSet.of(GameType.Constructed));
-        Match match = new Match(rules, registeredPlayers, "Bridge-" + gameId);
+        match = new Match(rules, registeredPlayers, "Bridge-" + gameId);
         game = match.createGame();
-        initializeDeckZones(decks);
-        int startingSeat = requireInt(params, "starting_player");
-        Player startingPlayer = playerForSeat(startingSeat);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, startingPlayer);
+        if (options.isSkeleton()) {
+            initializeDeckZones(decks);
+            Player startingPlayer = playerForSeat(startingSeat);
+            game.getPhaseHandler().devModeSet(PhaseType.MAIN1, startingPlayer);
+        }
 
         ObjectNode result = BridgeTransport.JSON.createObjectNode();
         result.put("accepted", true);
@@ -228,12 +236,22 @@ final class BridgeSession {
         result.put("state", "ready");
         ArrayNode libraries = result.putArray("library_counts");
         ArrayNode hands = result.putArray("hand_counts");
-        for (Player player : game.getPlayers()) {
-            libraries.add(player.getZone(ZoneType.Library).size());
-            hands.add(player.getZone(ZoneType.Hand).size());
+        for (int index = 0; index < game.getPlayers().size(); index++) {
+            if (options.isSkeleton()) {
+                Player player = game.getPlayers().get(index);
+                libraries.add(player.getZone(ZoneType.Library).size());
+                hands.add(player.getZone(ZoneType.Hand).size());
+            } else {
+                libraries.add(decks.get(index).getMain().countAll());
+                hands.add(0);
+            }
         }
         diagnostics.println("Constructed local Forge bridge game " + gameId + " with "
                 + registeredPlayers.size() + " seats");
+        if (!options.isSkeleton()) {
+            startGameThread();
+            result.put("state", "running");
+        }
         return result;
     }
 
@@ -276,7 +294,7 @@ final class BridgeSession {
         String kind = requireText(params, "kind");
         switch (kind) {
         case "priority":
-            return controller.decidePriority();
+            return controller.decidePriority(params.path("context"));
         case "mulligan":
             int cardsToReturn = params.path("context").path("cards_to_return").asInt(0);
             return controller.decideMulligan(cardsToReturn);
@@ -295,6 +313,11 @@ final class BridgeSession {
             throw new BridgeFailure("unsupported_reveal_zone", "Task B reveal only supports zone_from=library");
         }
         String cardName = requireText(params.path("card"), "name");
+        if (!options.isSkeleton()) {
+            lobbyPlayers.get(seat).getController().stageHandSync(params.path("context").path("hand_counts"));
+            diagnostics.println("Staged revealed hand for seat " + seat + ": " + cardName);
+            return;
+        }
         PlayerZone library = player.getZone(ZoneType.Library);
         List<Card> reordered = new ArrayList<>();
         for (Card card : library.getCards()) {
@@ -339,6 +362,53 @@ final class BridgeSession {
         diagnostics.println("Bridge game ended: result=" + params.path("result").asText()
                 + ", winner=" + params.path("winner").asText("none")
                 + ", reason=" + params.path("reason").asText());
+        if (!options.isSkeleton()) {
+            awaitGameThread();
+        }
+    }
+
+    private void startGameThread() {
+        gameThread = new Thread(() -> {
+            try {
+                match.startGame(game);
+            } catch (Throwable failure) {
+                gameThreadFailure = failure;
+            } finally {
+                for (LobbyPlayerBridge lobbyPlayer : lobbyPlayers.values()) {
+                    lobbyPlayer.getController().cancel();
+                }
+            }
+        }, "forge-bridge-game-loop");
+        gameThread.start();
+    }
+
+    private void awaitGameThread() {
+        try {
+            gameThread.join(5000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new BridgeFailure("game_thread_interrupted", "Interrupted waiting for Forge game completion");
+        }
+        if (gameThread.isAlive()) {
+            throw new BridgeFailure("game_thread_timeout", "Forge game did not finish with the authoritative game");
+        }
+        throwIfGameThreadFailed();
+    }
+
+    private void stopGameThread() {
+        if (gameThread == null || !gameThread.isAlive()) {
+            return;
+        }
+        for (LobbyPlayerBridge lobbyPlayer : lobbyPlayers.values()) {
+            lobbyPlayer.getController().cancel();
+        }
+        gameThread.interrupt();
+    }
+
+    private void throwIfGameThreadFailed() {
+        if (gameThreadFailure != null) {
+            throw new BridgeFailure("forge_game_failure", gameThreadFailure.toString());
+        }
     }
 
     private void checkSequence(JsonNode params) {
