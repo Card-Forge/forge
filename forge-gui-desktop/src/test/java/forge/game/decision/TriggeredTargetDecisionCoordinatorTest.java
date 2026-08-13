@@ -217,7 +217,24 @@ public class TriggeredTargetDecisionCoordinatorTest extends AITest {
         fixture.ability().getTargets().add(fixture.firstTarget());
         fixture.ability().putParam("UnknownSemantic", "True");
 
-        assertUnsupportedTargeted(fixture, "NON_EMPTY_INITIAL_TARGETS");
+        assertUnsupportedTargeted(fixture, "UNSUPPORTED_PROFILE");
+    }
+
+    @Test
+    public void bloodLiveValidationDistinguishesKnownValueMismatchFromUnknownKey() {
+        final BloodFixture knownValueMismatch = bloodFixture();
+        knownValueMismatch.ability().putParam("Destination", "Library");
+
+        final BloodOperativeEtbProfile.Validation knownValidation =
+                BloodOperativeEtbProfile.validateCommonSemanticProfile(knownValueMismatch.wrapper());
+        assertEquals(knownValidation.getFailure(), BloodOperativeEtbProfile.Failure.TARGETING_SHAPE);
+
+        final BloodFixture unknownKey = bloodFixture();
+        unknownKey.ability().putParam("UnknownSemantic", "True");
+
+        final BloodOperativeEtbProfile.Validation unknownValidation =
+                BloodOperativeEtbProfile.validateCommonSemanticProfile(unknownKey.wrapper());
+        assertEquals(unknownValidation.getFailure(), BloodOperativeEtbProfile.Failure.LIVE_EFFECT_DEFINITION);
     }
 
     @Test
