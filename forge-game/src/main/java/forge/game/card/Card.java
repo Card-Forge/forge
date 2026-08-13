@@ -1933,21 +1933,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    public void setCounters(final CounterType counterType, final Integer num) {
+    protected void onCountersChanged() {
         // Shield and Stun counters contribute replacement effects (see updateReplacementEffects).
         invalidateTraitCaches();
-        super.setCounters(counterType, num);
     }
 
     @Override
     public final void setCounters(final Multiset<CounterType> allCounters) {
-        invalidateTraitCaches();
-        boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().allMatch(CounterType::isKeywordCounter);
-        counters = allCounters;
+        boolean changed = getCounters().contains(CounterEnumType.MANABOND) || getCounters().elementSet().stream().allMatch(CounterType::isKeywordCounter);
+        replaceCounters(allCounters);
         view.updateCounters(this);
 
         if (!isLKI()) {
-            for (CounterType ct : counters.elementSet()) {
+            for (CounterType ct : getCounters().elementSet()) {
                 if (createCounterStatic(ct)) {
                     changed = true;
                 }
@@ -1960,10 +1958,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     @Override
     public final void clearCounters() {
-        if (counters.isEmpty()) { return; }
-        boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().allMatch(CounterType::isKeywordCounter);
+        if (getCounters().isEmpty()) { return; }
+        boolean changed = getCounters().contains(CounterEnumType.MANABOND) || getCounters().elementSet().stream().allMatch(CounterType::isKeywordCounter);
 
-        counters.clear();
+        removeAllCounters();
         view.updateCounters(this);
 
         if (changed) {

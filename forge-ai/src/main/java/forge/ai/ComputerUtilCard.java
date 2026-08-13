@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -1893,7 +1894,7 @@ public class ComputerUtilCard {
         if (!hiddenKws.isEmpty()) {
             pumped.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
         }
-        pumped.setCounters(c.getCounters());
+        pumped.setCounters(HashMultiset.create(c.getCounters()));
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {
             pumped.setTapped(true);

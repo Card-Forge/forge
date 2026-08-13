@@ -1196,7 +1196,7 @@ public class GameState {
 
                     c.setTapped(tapped);
                     c.setSickness(sickness);
-                    c.setCounters(counters);
+                    c.setCounters(HashMultiset.create(counters));
                 }
             } else {
                 zone.setCards(kv.getValue());
