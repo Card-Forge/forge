@@ -1,5 +1,8 @@
 # Forge 汉化版阿里云镜像
 
+> 完整开发、构建、版本管理、故障复盘和发布验收流程见
+> `docs/Development/Community-ZH-CN-Maintenance.md`。本文只保留阿里云基础设施说明。
+
 本目录用于把 Forge 汉化版的安卓包、桌面包、资源包和中文卡图发布到阿里云 OSS，
 再由阿里云 CDN 对中国内地用户分发。生产环境不需要 ECS。
 
@@ -84,6 +87,22 @@ $env:FORGE_IMAGE_URL = 'https://img.example.com/cards/'
 
 脚本会计算文件大小和 SHA-256，先上传不可变文件，最后上传更新清单。只有最后一步成功后，
 客户端才会看到新版本。
+
+后续仅发布客户端时优先使用 `publish-clients.ps1`。Android 清单版本必须是 APK
+的精确 ASCII `versionName`，桌面显示版本通过独立参数传入：
+
+```powershell
+.\deploy\aliyun\publish-clients.ps1 `
+  -ManifestVersion '2.0.15-cn0813r2' `
+  -DesktopVersion '2.0.15-汉化-08.13.2' `
+  -ObjectVersion '2.0.15-cn-08.13.2' `
+  -Bucket 'forge-cn-update-账号唯一后缀' `
+  -AndroidApk '.\Forge-Android.apk' `
+  -DesktopPackage '.\Forge-Windows.zip' `
+  -Ossutil '.\ossutil.exe'
+```
+
+若把中文显示版本写入 `android.version`，APK 会在每次启动时把同一个版本误判为更新。
 
 ## 六、发布卡图
 

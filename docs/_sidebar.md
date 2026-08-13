@@ -44,6 +44,7 @@
   - [Tutorial: creating a custom card](Card-scripting-API/Creating-a-Custom-Card.md)
 
 - Development
+  - [简体中文民间版维护手册](Development/Community-ZH-CN-Maintenance.md)
   - [IntelliJ Setup](Development/IntelliJ-setup/IntelliJ-setup.md)
   - [Snapshots & Releases](Development/Snapshots-and-Releases.md)
   - [Android Builds](Development/Android-Builds.md)
