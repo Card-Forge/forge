@@ -20,10 +20,8 @@ package forge.gui.error;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SOptionPane;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
+import forge.util.CommunityEditionInfo;
 import forge.util.Localizer;
-import io.sentry.Sentry;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -61,7 +59,6 @@ public class BugReporter {
 
         final StringBuilder sb = new StringBuilder();
         if (null != message && !message.isEmpty()) {
-            Sentry.addBreadcrumb(message);
             sb.append(FThreads.debugGetCurrThreadId()).append(" > ").append(message).append("\n");
         }
 
@@ -87,7 +84,8 @@ public class BugReporter {
     }
 
     public static boolean isSentryEnabled() {
-        return FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.USE_SENTRY);
+        // The community build does not send reports to the upstream Sentry service.
+        return false;
     }
     /**
      * Alias for reportException(ex, null).
@@ -117,7 +115,7 @@ public class BugReporter {
         if (isSentryEnabled()) {
             sendSentry();
         } else {
-            GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessageorUseDefault("btnReportBug", "Report a Bug"), message, false);
+            GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessageorUseDefault("btnReportBug", "QQ Group Support"), message, false);
         }
     }
 
@@ -152,13 +150,7 @@ public class BugReporter {
     }
 
     public static void sendSentry() {
-        try {
-            if (exception != null) {
-                Sentry.captureException(exception);
-            } else if (message !=null) {
-                Sentry.captureMessage(message);
-            }
-        } catch (Exception ignored) {}
+        GuiBase.getInterface().copyToClipboard(CommunityEditionInfo.QQ_GROUP);
     }
 
     /**

@@ -25,6 +25,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.Lang;
 import forge.util.LineReader;
+import forge.util.CommunityEditionInfo;
 import forge.util.TextBounds;
 import forge.util.Utils;
 
@@ -394,6 +395,10 @@ public class FSkinFont {
                     System.err.println("Error reading translation file: " + translationFilePath);
             }
         }
+        if ("zh-CN".equalsIgnoreCase(langCode)) {
+            appendUniqueCharacters(CommunityEditionInfo.getReleaseNotes(), characterSet, characters);
+            appendUniqueCharacters(CommunityEditionInfo.SUPPORT_CONTACT, characterSet, characters);
+        }
         langUniqueCharacterSet.put(langCode, characters.toString());
 
         return characters.toString();
@@ -411,7 +416,9 @@ public class FSkinFont {
         }
         boolean useCjkFont = Lang.initInstance(Forge.locale).getFontFile() != null;
         if (useCjkFont && !Forge.forcedEnglishonCJKMissing) {
-            fontName += Forge.locale;
+            // Bump this suffix whenever the bundled character sources change so
+            // an upgrade cannot reuse an older bitmap-font cache with missing glyphs.
+            fontName += Forge.locale + "-community2";
         }
         FileHandle fontFile = Assets.getFileHandle(ForgeConstants.FONTS_DIR + fontName + ".fnt");
         final boolean[] found = {false};
@@ -450,6 +457,21 @@ public class FSkinFont {
             }
         } else {
             generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
+        }
+    }
+
+    private static void appendUniqueCharacters(final String text, final IntSet characterSet,
+            final StringBuilder characters) {
+        if (text == null) {
+            return;
+        }
+        for (int offset = 0; offset < text.length(); ) {
+            final int codePoint = text.codePointAt(offset);
+            if (!characterSet.contains(codePoint)) {
+                characterSet.add(codePoint);
+                characters.append(Character.toChars(codePoint));
+            }
+            offset += Character.charCount(codePoint);
         }
     }
 

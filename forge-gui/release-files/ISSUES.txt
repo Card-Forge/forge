@@ -1,3 +1,1 @@
-Known issues are here: https://github.com/Card-Forge/forge/issues
-
-Feel free to report your own there if you have any.
+问题反馈与民间汉化版支持：QQ群 813597628

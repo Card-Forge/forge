@@ -3,7 +3,6 @@ package forge.screens.home;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
@@ -27,6 +26,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.util.CommunityEditionInfo;
 import forge.util.Utils;
 
 public class HomeScreen extends FScreen {
@@ -111,26 +111,10 @@ public class HomeScreen extends FScreen {
             SettingsScreen.show(true);
         });
         addButton(Forge.getLocalizer().getMessage("lblHelp"), e -> FThreads.invokeInEdtLater(() -> {
-            try {
-                if (Forge.getDeviceAdapter().isConnectedToInternet()) {
-                    FOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblDiscordHelpDescription"), Forge.getLocalizer().getMessage("lblChooseOption"), FOptionPane.INFORMATION_ICON, List.of(Forge.getLocalizer().getMessage("lblJoinDiscord"), Forge.getLocalizer().getMessage("lblForgeSupport")), -1, result -> {
-                        switch (result) {
-                            case 0:
-                                Gdx.net.openURI("https://discord.gg/3v9JCVr");
-                                break;
-                            case 1:
-                                Gdx.net.openURI("https://discord.com/channels/267367946135928833/692000787856883752");
-                                break;
-                            default:
-                                break;
-                        }
-                    });
-                } else {
-                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblInternetConnectionRequired"), Forge.getLocalizer().getMessage("lblNoInternet"));
-                }
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
+            Forge.getClipboard().setContents(CommunityEditionInfo.QQ_GROUP);
+            FOptionPane.showMessageDialog(
+                    Forge.getLocalizer().getMessage("lblCommunitySupportDescription", CommunityEditionInfo.QQ_GROUP),
+                    Forge.getLocalizer().getMessage("lblCommunitySupport"));
         }));
         baseButtonCount = buttons.size();
     }

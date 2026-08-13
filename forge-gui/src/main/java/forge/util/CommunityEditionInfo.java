@@ -8,6 +8,8 @@ import java.nio.charset.StandardCharsets;
 public final class CommunityEditionInfo {
     public static final String EDITION_NAME = "Forge 简体中文民间汉化版";
     public static final String UPDATE_CHANNEL_NAME = "民间汉化版更新渠道";
+    public static final String QQ_GROUP = "813597628";
+    public static final String SUPPORT_CONTACT = "QQ群：" + QQ_GROUP;
     public static final String DISCLAIMER =
             "本版本由社区爱好者制作，是非官方简体中文版本，与 Card Forge 官方及 Wizards of the Coast 无隶属或授权关系。";
 

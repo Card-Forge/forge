@@ -8,10 +8,12 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import forge.gui.GuiBase;
 import forge.menus.MenuUtil;
 import forge.screens.match.controllers.CDev;
 import forge.screens.match.views.IDevListener;
 import forge.util.Localizer;
+import forge.util.CommunityEditionInfo;
 
 /**
  * Gets a menu that replicates all the DevMode options.
@@ -147,7 +149,7 @@ public class DevModeMenu implements ActionListener, IDevListener {
     }
 
     private static void openDevForumInBrowser() {
-        MenuUtil.openUrlInBrowser("http://www.slightlymagic.net/forum/viewforum.php?f=52");
+        GuiBase.getInterface().copyToClipboard(CommunityEditionInfo.QQ_GROUP);
     }
 
 }

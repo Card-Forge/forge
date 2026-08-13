@@ -171,10 +171,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     Forge.selector = FModel.getPreferences().getPref(FPref.UI_SELECTOR_MODE);
                 }
             }, 0);
-        lstSettings.addItem(new BooleanSetting(FPref.USE_SENTRY,
-            Forge.getLocalizer().getMessage("lblAutomaticBugReports"),
-            Forge.getLocalizer().getMessage("nlAutomaticBugReports")), 0);
-
         // GAMEPLAY OPTIONS TAB
         lstSettings.addItem(new CustomSelectSetting(FPref.MULLIGAN_RULE,
             Forge.getLocalizer().getMessage("cbpMulliganRule"),
