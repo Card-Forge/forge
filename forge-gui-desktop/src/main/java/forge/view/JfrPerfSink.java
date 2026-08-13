@@ -79,6 +79,10 @@ public final class JfrPerfSink implements PerfSink {
         long staticChecks;
         @Label("Replacement lookups")
         long replacementLookups;
+        @Label("Card trait cache hits")
+        long traitCacheHits;
+        @Label("Card trait cache rebuilds")
+        long traitCacheRebuilds;
         @Label("Game copies")
         long gameCopies;
         @Label("Cards copied")
@@ -136,6 +140,8 @@ public final class JfrPerfSink implements PerfSink {
         event.zoneQueries = record.get(PerfCounter.ZONE_AGGREGATE_QUERIES);
         event.staticChecks = record.get(PerfCounter.STATIC_ABILITY_CHECKS);
         event.replacementLookups = record.get(PerfCounter.REPLACEMENT_LOOKUPS);
+        event.traitCacheHits = record.get(PerfCounter.TRAIT_CACHE_HITS);
+        event.traitCacheRebuilds = record.get(PerfCounter.TRAIT_CACHE_REBUILDS);
         event.gameCopies = record.get(PerfCounter.GAME_COPIES);
         event.copiedCards = record.get(PerfCounter.GAME_COPY_CARDS);
         event.simulationBranches = record.get(PerfCounter.SIMULATION_BRANCHES);
