@@ -4,6 +4,9 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.simulation.SimulationTest;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -14,9 +17,11 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 /**
- * Upstream #7621: the human autopay button decides "can pay?" via
- * {@link ComputerUtilMana#getManaSourcesToPayCost}, which must work with
- * mana-producing creatures even when no untapped lands exist.
+ * Regression guard for upstream #7621: the human autopay button decides "can
+ * pay?" via {@link ComputerUtilMana#getManaSourcesToPayCost}, which must work
+ * with mana-producing creatures even when no untapped lands exist. A creature
+ * with summoning sickness (CR 302.6) must NOT be tapped, so the sick case is
+ * asserted to fail while the un-sick dork case must pay.
  */
 public class AutopayManaDorkTest extends SimulationTest {
 
@@ -60,18 +65,22 @@ public class AutopayManaDorkTest extends SimulationTest {
         Player ai = game.getPlayers().get(1);
         SpellAbility sa = spellInHand(game, "Tamiyo's Safekeeping");
 
-        AssertJUnit.assertNotNull("autopay should tap the untapped mana-dork with no lands available",
-                ComputerUtilMana.getManaSourcesToPayCost(new ManaCostBeingPaid(sa.getHostCard().getManaCost()), sa, ai, false));
+        CardCollection sources = ComputerUtilMana.getManaSourcesToPayCost(
+                new ManaCostBeingPaid(sa.getHostCard().getManaCost()), sa, ai, false);
+        Card dork = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                CardPredicates.nameEquals("Noble Hierarch")).get(0);
+        AssertJUnit.assertTrue("autopay should tap the untapped mana-dork with no lands available",
+                sources.contains(dork));
     }
 
-    /** CR 605.3b: summoning sickness does not stop mana abilities, so a sick dork is also a valid source. */
+    /** CR 302.6: a creature with summoning sickness cannot use its tap abilities, so a sick dork is not payable. */
     @Test
-    public void autopayUsesSickManaDork() {
+    public void autopayCannotUseSickManaDork() {
         Game game = gameWith(new String[] { "Noble Hierarch" }, false);
         Player ai = game.getPlayers().get(1);
         SpellAbility sa = spellInHand(game, "Tamiyo's Safekeeping");
 
-        AssertJUnit.assertNotNull("mana abilities ignore summoning sickness, so a sick dork can still pay",
+        AssertJUnit.assertNull("summoning sickness stops the dork from being tapped for mana (CR 302.6)",
                 ComputerUtilMana.getManaSourcesToPayCost(new ManaCostBeingPaid(sa.getHostCard().getManaCost()), sa, ai, false));
     }
 }
