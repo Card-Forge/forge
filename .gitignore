@@ -102,6 +102,9 @@ __pycache__
 /.tools/
 /配置阿里云OSS.cmd
 
+# Generated local release packages
+/dist/
+
 # Ignore Claude configuration
 .claude
 # EDHREC commander matrix tool intermediates

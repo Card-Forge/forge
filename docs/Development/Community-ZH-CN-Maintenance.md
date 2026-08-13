@@ -173,7 +173,34 @@ Windows 完整包应包含 `forge.exe`、匹配的主 JAR、`runtime`、`res`、
 
 老 `android-maven-plugin` 在 Windows 上把全部 classpath 展开成一个 D8 命令，容易超过系统命令行长度。常规 Maven 流程通常能完成 Java 编译、资源打包和 ProGuard，然后在 D8 阶段失败。
 
-解决方案：将仓库临时映射到短盘符，把 D8 参数逐行写入 `@args` 文件，再调用 Build Tools 的 `d8.bat @args`；随后把 dex、四 ABI 原生库、字体、fallback 资源和服务描述符加入 `.ap_`，最后用 `zipalign` 与 `apksigner` 完成对齐、签名和验证。
+上述流程已固化为一键脚本：
+
+```powershell
+.\deploy\build-android-community.ps1
+```
+
+脚本自动完成以下工作：
+
+1. 读取根 `pom.xml` 的 Maven revision、显示版本和 Android `versionCode`；
+2. 在同一个 Maven reactor 中增量编译 Android 及其依赖模块；
+3. 让旧插件完成 Manifest 合并、资源处理和 ProGuard；
+4. 将仓库临时映射到纯 ASCII 短盘符，把 D8 参数写入 `@args` 文件，接管会失败的 D8 阶段；
+5. 重新组装 dex、四 ABI 原生库、CJK 字体、fallback 启动资源、中文本地化和 tinylog 服务描述符；
+6. 执行 zipalign、APK 签名、签名验证、版本校验和关键文件清单校验；
+7. 将最终文件、SHA-256 和构建元数据输出到 `dist/android/`。
+
+第一次完整构建仍需编译 Forge 的依赖模块，会花较长时间。后续不要主动删除各模块 `target`，Maven 会复用已编译结果，构建会明显加快。只有构建缓存异常或确实需要回收磁盘时，才运行第 11 节的清理脚本。
+
+默认使用当前用户的 `.android/debug.keystore`，以保持现有测试版可覆盖安装。正式换用长期发布密钥时可传入 `-Keystore`、`-KeyAlias`，并通过环境变量 `FORGE_ANDROID_STORE_PASSWORD`、`FORGE_ANDROID_KEY_PASSWORD` 提供密码；密钥文件和密码不得提交 Git。更换签名密钥后，旧版用户无法直接覆盖安装，因此发布密钥一旦确定必须长期备份。
+
+如工具不在默认位置，可以显式传入：
+
+```powershell
+.\deploy\build-android-community.ps1 `
+  -JavaHome 'C:\Program Files\Java\jdk-21.0.10' `
+  -AndroidSdk "$env:LOCALAPPDATA\Android\Sdk" `
+  -Maven '.\.tools\apache-maven-3.9.12\bin\mvn.cmd'
+```
 
 参数文件中包含版本化模块 JAR 路径。版本更新后若复用旧 args 文件，必须替换所有旧 `cn...` 版本，否则会把旧代码打进新 APK。
 
@@ -231,7 +258,7 @@ OSS Bucket 私有时，RAM 发布账号可能有上传权限却没有读取对�
 
 ## 11. 磁盘清理
 
-构建产物不应长期散落在各模块 `target`。确认正式包已上传并另行归档后使用：
+构建产物不应无限期散落在各模块 `target`，但这些目录也是自动打包的增量缓存。日常开发应保留它们以提高构建速度；确认正式包已上传并另行归档、磁盘空间不足或缓存异常时再使用：
 
 ```powershell
 .\deploy\cleanup-development-artifacts.ps1
@@ -250,4 +277,3 @@ OSS Bucket 私有时，RAM 发布账号可能有上传权限却没有读取对�
 6. 修一个缺字不是字库方案；应审计全部本地化数据并使用增量字体。
 7. PowerShell 默认 BOM 会破坏 Java Properties 的第一个键；清单必须为 UTF-8 无 BOM。
 8. 所有清理应限定在已解析的仓库路径内，并默认 dry-run。
-
