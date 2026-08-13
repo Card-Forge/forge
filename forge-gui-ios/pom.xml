@@ -106,7 +106,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-robovm</artifactId>
-            <version>1.13.5</version>
+            <version>1.14.2</version>
         </dependency>
         <dependency>
             <!-- iOS backend for gdx-controllers-core (forge-gui-mobile dep):
@@ -121,7 +121,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-platform</artifactId>
-            <version>1.13.5</version>
+            <version>1.14.2</version>
             <classifier>natives-ios</classifier>
         </dependency>
         <dependency>
@@ -131,18 +131,18 @@
                  RoboVM merges automatically -->
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-box2d-platform</artifactId>
-            <version>1.13.5</version>
+            <version>1.14.2</version>
             <classifier>natives-ios</classifier>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype</artifactId>
-            <version>1.13.5</version>
+            <version>1.14.2</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype-platform</artifactId>
-            <version>1.13.5</version>
+            <version>1.14.2</version>
             <classifier>natives-ios</classifier>
         </dependency>
         <!-- Stub java.util.function classes for RoboVM compatibility -->
