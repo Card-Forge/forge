@@ -118,7 +118,7 @@ public class AssetsDownloader {
             try {
                 String version = mirrorManifest == null
                         ? (isSnapshots ? FileUtil.readFileToString(new URL(versionText)) : releaseTag.replace("forge-", ""))
-                        : mirrorManifest.version();
+                        : (mirrorInstaller.version().isEmpty() ? mirrorManifest.version() : mirrorInstaller.version());
                 String filename = "";
                 String installerURL = "";
                 long installerSize = 0;

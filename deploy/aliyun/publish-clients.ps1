@@ -3,6 +3,9 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$ManifestVersion,
 
+    [Parameter(Mandatory = $false)]
+    [string]$DesktopVersion = '',
+
     [Parameter(Mandatory = $true)]
     [ValidatePattern('^[0-9A-Za-z._-]+$')]
     [string]$ObjectVersion,
@@ -22,6 +25,14 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+
+# Android's startup updater compares the installed APK versionName with the
+# manifest identity. ManifestVersion must therefore be the APK's exact ASCII
+# versionName (for example, 2.0.15-cn0813r2). The desktop build can retain its
+# localized Implementation-Version via DesktopVersion.
+if ([string]::IsNullOrWhiteSpace($DesktopVersion)) {
+    $DesktopVersion = $ManifestVersion
+}
 
 function Resolve-Artifact([string]$Path, [string]$Label) {
     $file = Get-Item -LiteralPath (Resolve-Path -LiteralPath $Path -ErrorAction Stop).Path
@@ -89,7 +100,7 @@ try {
         "android.url=android/$ObjectVersion/$androidName"
         "android.size=$($android.Size)"
         "android.sha256=$($android.Sha256)"
-        "desktop.version=$ManifestVersion"
+        "desktop.version=$DesktopVersion"
         "desktop.url=desktop/$ObjectVersion/$desktopName"
         "desktop.size=$($desktop.Size)"
         "desktop.sha256=$($desktop.Sha256)"
