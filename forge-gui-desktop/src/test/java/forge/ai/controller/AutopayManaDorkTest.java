@@ -16,16 +16,18 @@ import org.testng.annotations.Test;
 /**
  * Upstream #7621: the human autopay button decides "can pay?" via
  * {@link ComputerUtilMana#getManaSourcesToPayCost}, which must work with
- * untapped mana-producing creatures even when no untapped lands exist
- * (mana abilities ignore summoning sickness, so a dork is a valid source).
+ * mana-producing creatures even when no untapped lands exist.
  */
 public class AutopayManaDorkTest extends SimulationTest {
 
-    private Game gameWith(String[] battlefield) {
+    private Game gameWith(String[] battlefield, boolean dorkWithoutSickness) {
         Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
         for (String name : battlefield) {
-            addCard(name, ai);
+            Card c = addCard(name, ai);
+            if (dorkWithoutSickness && c.isCreature()) {
+                c.setSickness(false);
+            }
         }
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
         game.getAction().checkStateEffects(true);
@@ -43,7 +45,7 @@ public class AutopayManaDorkTest extends SimulationTest {
     /** Sanity check: the autopay path can find a payment for a single green mana at all. */
     @Test
     public void autopayWithLandAndDork() {
-        Game game = gameWith(new String[] { "Forest", "Noble Hierarch" });
+        Game game = gameWith(new String[] { "Forest", "Noble Hierarch" }, false);
         Player ai = game.getPlayers().get(1);
         SpellAbility sa = spellInHand(game, "Tamiyo's Safekeeping");
 
@@ -51,13 +53,25 @@ public class AutopayManaDorkTest extends SimulationTest {
                 ComputerUtilMana.getManaSourcesToPayCost(new ManaCostBeingPaid(sa.getHostCard().getManaCost()), sa, ai, false));
     }
 
+    /** Exact upstream #7621 scenario: no lands, one untapped dork with no summoning sickness. */
     @Test
     public void autopayUsesManaDorkWhenNoUntappedLandsExist() {
-        Game game = gameWith(new String[] { "Noble Hierarch" });
+        Game game = gameWith(new String[] { "Noble Hierarch" }, true);
         Player ai = game.getPlayers().get(1);
         SpellAbility sa = spellInHand(game, "Tamiyo's Safekeeping");
 
         AssertJUnit.assertNotNull("autopay should tap the untapped mana-dork with no lands available",
+                ComputerUtilMana.getManaSourcesToPayCost(new ManaCostBeingPaid(sa.getHostCard().getManaCost()), sa, ai, false));
+    }
+
+    /** CR 605.3b: summoning sickness does not stop mana abilities, so a sick dork is also a valid source. */
+    @Test
+    public void autopayUsesSickManaDork() {
+        Game game = gameWith(new String[] { "Noble Hierarch" }, false);
+        Player ai = game.getPlayers().get(1);
+        SpellAbility sa = spellInHand(game, "Tamiyo's Safekeeping");
+
+        AssertJUnit.assertNotNull("mana abilities ignore summoning sickness, so a sick dork can still pay",
                 ComputerUtilMana.getManaSourcesToPayCost(new ManaCostBeingPaid(sa.getHostCard().getManaCost()), sa, ai, false));
     }
 }
