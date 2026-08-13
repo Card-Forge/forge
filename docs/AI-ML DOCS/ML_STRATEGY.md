@@ -2,10 +2,13 @@
 
 **Status:** Provisional / Accepted for implementation planning
 **Date:** 2026-08-12
-**Revision:** 16 — records the validated FRL-02K-C2A exact Blood Operative ETB TARGET seam and FRL-02K-D1 exact Blood Operative ETB CONFIRMATION seam: resolver-null native Forge ownership, resolver-non-null external ownership only for the exact profile, nullable Blood triggering-player provenance, and fail-closed handling for other profiles; global triggered TARGET and global CONFIRMATION remain OPEN
+**FRL-02L Update:** 2026-08-13 — live ORDER attribution is now authoritative: simultaneous-trigger ordering and the retained-top component of Surveil are v0 ORDER profiles; legacy combat ordering is rules-gated off; modern damage distribution remains separate
+**Revision:** 17 — records the validated FRL-02K-C2A exact Blood Operative ETB TARGET seam and FRL-02K-D1 exact Blood Operative ETB CONFIRMATION seam, plus the authoritative FRL-02L live ORDER attribution: simultaneous-trigger order and the retained-top component of Surveil are v0 ORDER profiles; legacy combat ordering is rules-gated off; modern damage distribution remains separate; global triggered TARGET and global CONFIRMATION remain OPEN
 **Scope:** Initial ForgeRL 1v1 research environment
 
 The current C2A authority is defined by the [design/spec](../superpowers/specs/2026-08-11-frl-02k-c2a-triggered-target-provider-seam-design.md), [implementation plan](../superpowers/plans/2026-08-11-frl-02k-c2a-triggered-target-provider-seam.md), and [triggered TARGET audit](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md). The exact D1 confirmation authority is defined by the [D1 design/spec](../superpowers/specs/2026-08-12-frl-02k-d1-blood-etb-confirmation-design.md), [D1 implementation plan](../superpowers/plans/2026-08-12-frl-02k-d1-blood-etb-confirmation.md), and [D1 audit](FRL_02K_D1_BLOOD_CONFIRMATION_AUDIT.md). The C2A audit's [evidence matrix](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#6-evidence-matrix) and [exact Task 12 commands](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#61-final-task-12-exact-commands), together with the D1 audit evidence matrix, are the recorded validation evidence for these narrow seams.
+
+FRL-02L is now the authoritative ORDER attribution result. The controlled v0 slice contains two exact ORDER-bearing profiles: same-player simultaneous-trigger ordering, and the retained-top ordering component of the Surveil partition-plus-order callback. Legacy combat ordering callbacks are rules-gated off in the controlled workload, and modern combat damage distribution remains a separate `DAMAGE_ASSIGNMENT` boundary. Therefore `ORDER` is required for v0, but no generic ORDER adapter or provider is authorized by this audit; the next implementation slice is `FRL-02L1 IMPLEMENT_SIMULTANEOUS_TRIGGER_ORDER`.
 
 ## Purpose
 
@@ -151,7 +154,7 @@ Initial policy:
 | `CARD_SELECTION` — small bounded set | Enumerate or sequential selection                             |
 | `ATTACK`                             | Decompose into sequential set construction                    |
 | `BLOCK`                              | Decompose into blocker/attacker assignments                   |
-| `ORDER` — see 18.2                   | Attribution pending; almost certainly not one family          |
+| `ORDER`                             | Exact profiles established by FRL-02L; no generic family      |
 | `PAYMENT`                            | Decompose where complete payment enumeration is combinatorial |
 | multi-target choices                 | Autoregressive/sequential selection                           |
 | large subset choices                 | Sequential set construction                                   |
@@ -292,6 +295,8 @@ DONE
 
 Where ordering or multiple-block rules require additional choices, expose those as subsequent typed requests.
 
+FRL-02L confirms that this sequential shape applies only to exact attributed profiles, not to a generic callback-wide `ORDER` family. The v0 profiles are same-player simultaneous-trigger ordering and the retained-top ordering subdecision within Surveil partition-plus-order. Legacy combat ordering is excluded, and explicit library/Scry/zone-order profiles remain future-pool work.
+
 ## 3.4 Ordering
 
 Do not enumerate permutations.
@@ -423,7 +428,7 @@ The initial policy in 3.1 has now been tested against the engine. Status as of t
 | `BLOCK` | FRL-02H | Two-stage `CHOOSE_BLOCKER` → `CHOOSE_ATTACKER_FOR_BLOCKER` | SUPPORTED for independent-pair Player-only slice |
 | `MULLIGAN` | FRL-02J | KEEP/REDRAW plus `MULLIGAN_BOTTOM` card selection | SUPPORTED for ordinary 1v1 Constructed London mulligan |
 | `CONFIRMATION` | FRL-02K-B1 + FRL-02K-D1 | `Gelectrode` optional `SpellCast -> Untap Self` plus exact Blood Operative ETB `ChangesZone -> Battlefield -> ChangeZone Graveyard -> Exile`; strict profile admission; typed context; `[ACCEPT, DECLINE]`; exact workload gates | **SUPPORTED for the two named slices; global OPEN** |
-| `ORDER` | 18.2 | attribution pending — see below | OPEN, aggregate |
+| `ORDER` | FRL-02L | simultaneous-trigger order plus Surveil retained-top order; no generic adapter | V0_ORDER_REQUIRED; implementation not started |
 | `DAMAGE_ASSIGNMENT` | — | see 3.9 | OPEN |
 
 The decomposition policy in 3.1 held for `ATTACK`, `BLOCK` and `PAYMENT`. It was **incomplete** for `MULLIGAN`: the London bottoming choice is a second, separate decision that the original one-line classification did not describe.
@@ -434,7 +439,7 @@ Every implemented boundary follows the same discipline: Forge remains the legali
 
 `PAYMENT` is the load-bearing exception. It is `PARTIAL`, it is the second-highest-volume family, and its unsupported share is measured rather than hypothetical: the reactive matchup produced 848 raw callbacks, 225 atomic requests and 192 explicit `VARIABLE_MANA_OUTPUT` states — roughly 22.6% of raw payment callbacks carrying a known unsupported feature.
 
-`ORDER` is listed as one row only because the engine exposes it as one callback. It is an aggregate of several unrelated decision families and must be attributed before it is classified. See 18.2.
+The engine exposes several unrelated ordering families through callbacks whose names contain `order`. FRL-02L has attributed the current v0 profiles; the remaining Scry, explicit zone, ordered-graveyard, and legacy combat surfaces must not be generalized into one adapter. See 18.2.
 
 ## 3.9 DAMAGE_ASSIGNMENT and the Information Barrier
 
@@ -468,7 +473,7 @@ introduced between assignment and damage
 
 The second is the easier mistake to make. A decomposed assignment boundary naturally produces intermediate steps, and exposing them to the opponent would invent a response window the rules do not grant — and would silently make the defender stronger than Magic allows.
 
-### Open question before implementation
+### FRL-02L attribution result
 
 FRL-02H documented the live Forge combat trace, and it places these calls in the declare-blockers path:
 
@@ -477,9 +482,9 @@ FRL-02H documented the live Forge combat trace, and it places these calls in the
 -> orderAttackersForDamageAssignment()
 ```
 
-Under post-Foundations rules no such decision belongs there. Either the methods are vestigial, or they no longer fire, or this Forge version has not adopted the change.
+Under post-Foundations rules no such decision belongs there. FRL-02L resolved the Forge-side question for the controlled v0 environment: `GameRules.orderCombatants` remains false in `SimulateMatch`, `Combat` therefore does not invoke `orderBlockers`, `orderBlocker`, or `orderAttackers`, and the canonical 10-game audit observed zero calls to all three. These methods are retained as legacy compatibility surfaces and are classified `LEGACY_COMBAT_ORDER`, not as a v0 agent boundary.
 
-> Before `DAMAGE_ASSIGNMENT` is implemented, the ORDER attribution audit must establish which of the three is true. The boundary has to be designed against the model the engine actually runs, not against the model the rules describe.
+Modern direct combat damage distribution is not ORDER. It remains the next separate `DAMAGE_ASSIGNMENT` attribution/implementation milestone, with the combat callback's legal candidate domain to be audited there. FRL-02I legacy combat order and FRL-02L live ORDER attribution are separate milestones and must not be merged.
 
 FRL-02H already admits the one-attacker/many-blockers case in the v0 slice, so this boundary is live rather than theoretical.
 
@@ -2163,6 +2168,17 @@ The audit must also answer one specific question, because Section 3.9 depends on
 If it fires, "legacy combat ordering" is not legacy — it is the model this Forge version actually runs, and `DAMAGE_ASSIGNMENT` must be designed against that.
 
 Only after attribution should the type be split, for example into `TRIGGER_ORDER`, `ZONE_ORDER`, and `PARTITION_PLUS_ORDER`. Deferring the aggregate as "legacy" would defer live strategic decisions along with the dead one: when several triggered abilities controlled by the same player go on the stack simultaneously, that player chooses their order, and the order can change the result.
+
+### FRL-02L disposition
+
+The completed [FRL-02L audit](FRL_02L_ORDER_ATTRIBUTION_AUDIT.md) reconciles source inventory with the controlled runtime rather than treating every method containing `order` as an agent decision:
+
+* `SIMULTANEOUS_TRIGGER_ORDER` is `LIVE_AGENT_ORDER`: `MagicStack` groups pending entries by the active player under APNAP, passes only that player's entries to `orderSimultaneousSa`, and the returned permutation changes stack insertion/resolution order. The v0 workload observed 116 callback calls, including 20 calls with two or more entries and seven non-identity permutations.
+* `SURVEIL_PARTITION_PLUS_ORDER` is a decomposed v0 profile: the partition is a `CARD_SELECTION`-like choice and the relative order of cards remaining on top is an ORDER subdecision. The workload observed 16 Surveil callbacks, including 10 two-card inputs and five calls with two retained top cards; two of those five returned a non-identity order.
+* `orderMoveToZoneList` is source-reachable plumbing for zone-order profiles but no current v0 card/effect path required a strategic library or ordered-graveyard decision. The observed calls were graveyard transfers with identity output under the default controlled rules.
+* `arrangeForScry`, legacy combat ordering, payment-cost ordering, canonical sorting, hand reordering, and arbitrary existing-stack reordering are not current v0 ORDER profiles.
+
+The exact current disposition is `V0_ORDER_REQUIRED`, with no generic `DecisionType.ORDER` implementation before the exact profile design. The recommended next production slice is `FRL-02L1 IMPLEMENT_SIMULTANEOUS_TRIGGER_ORDER`; Surveil remains separately decomposed and must not be silently folded into a generic permutation adapter.
 
 ## 18.3 Runtime Gap Audit and the Zero-Unsupported Gate
 
