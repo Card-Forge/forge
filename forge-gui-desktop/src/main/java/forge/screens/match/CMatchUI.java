@@ -1362,7 +1362,7 @@ public final class CMatchUI
     public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables, boolean backupLastZones) {
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final PlayerView view : playersWithTargetables.keySet()) {
-            for(final ZoneType zone : zones) {
+            for (final ZoneType zone : zones) {
                 if (zone.equals(ZoneType.Battlefield) || zone.equals(ZoneType.Hand)) {
                     continue;
                 }
