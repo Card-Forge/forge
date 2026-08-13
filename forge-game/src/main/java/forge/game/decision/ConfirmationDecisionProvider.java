@@ -104,12 +104,21 @@ public final class ConfirmationDecisionProvider {
         } catch (final RuntimeException ex) {
             return unsupported(Status.UNSUPPORTED_HIDDEN);
         }
-        if (source == null || source.isFaceDown() || source.getView() == null || decider.getView() == null
-                || !source.getView().canBeShownTo(decider.getView())) {
+        try {
+            if (source == null || source.isFaceDown() || source.getView() == null || decider.getView() == null
+                    || !source.getView().canBeShownTo(decider.getView())) {
+                return unsupported(Status.UNSUPPORTED_HIDDEN);
+            }
+        } catch (final RuntimeException ex) {
             return unsupported(Status.UNSUPPORTED_HIDDEN);
         }
 
-        final Admission admission = classifyProfile(wrapper, trigger, source, decider);
+        final Admission admission;
+        try {
+            admission = classifyProfile(wrapper, trigger, source, decider);
+        } catch (final RuntimeException ex) {
+            return unsupported(Status.UNSUPPORTED_PROFILE);
+        }
         if (admission.status != Status.ADMITTED) {
             return unsupported(admission.status, admission.reason);
         }
@@ -183,7 +192,12 @@ public final class ConfirmationDecisionProvider {
 
         try {
             Objects.requireNonNull(nativeTeacher);
-            final LegalCandidate selected = nativeCandidate(request, nativeTeacher.getAsBoolean());
+            final boolean accepted = nativeTeacher.getAsBoolean();
+            if (request != activeRequest) {
+                clearActiveState();
+                throw new IllegalArgumentException("Confirmation request was invalidated during native resolution");
+            }
+            final LegalCandidate selected = nativeCandidate(request, accepted);
             validateCandidate(request, selected);
             choiceMade = true;
             chosenCandidate = selected;
@@ -209,7 +223,12 @@ public final class ConfirmationDecisionProvider {
         validateCandidate(request, candidate);
 
         if (context.getProfile() == ConfirmationTriggerProfile.BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD) {
-            validateBloodRequest(context, wrapper);
+            try {
+                validateBloodRequest(context, wrapper);
+            } catch (final RuntimeException ex) {
+                clearActiveState();
+                throw ex;
+            }
             if (!matchesLiveBloodTarget(context, wrapper)) {
                 final boolean external = activeResolver != null;
                 clearActiveState();
