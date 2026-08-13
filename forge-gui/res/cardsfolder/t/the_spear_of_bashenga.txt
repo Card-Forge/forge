@@ -1,0 +1,11 @@
+Name:The Spear of Bashenga
+ManaCost:4 W
+Types:Legendary Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ NoMonarch | SVarCompare$ EQ0 | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, if there is no monarch, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch
+SVar:NoMonarch:PlayerCountPlayers$HasPropertyisMonarch
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Equipped creature gets +2/+2 and has vigilance.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Attacked$ Player.isMonarch | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever equipped creature attacks the monarch, destroy target tapped nonland permanent that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand+tapped+ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target tapped nonland permanent damaged player controls
+K:Equip:2
+Oracle:When The Spear of Bashenga enters, if there is no monarch, you become the monarch.\nEquipped creature gets +2/+2 and has vigilance.\nWhenever equipped creature attacks the monarch, destroy target tapped nonland permanent that player controls.\nEquip {2}

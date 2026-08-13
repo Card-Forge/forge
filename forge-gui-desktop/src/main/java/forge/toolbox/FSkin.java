@@ -1098,7 +1098,7 @@ public class FSkin {
             str = str.replaceAll(pattern, replacement);
         }
         // Just return the string unencoded if we're optimizing for screen readers.
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SR_OPTIMIZE)) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SCREENREADER_OPTIMIZE)) {
             return str;
         }
         // format mana symbols to display as icons
@@ -1506,7 +1506,7 @@ public class FSkin {
         return mySkins;
     }
 
-    public static Iterable<String> getAllSkins() {
+    public static List<String> getAllSkins() {
         return allSkins;
     }
 
@@ -1516,6 +1516,11 @@ public class FSkin {
 
     public static Map<Integer, SkinImage> getSleeves() {
         return sleeves;
+    }
+
+    public static BufferedImage getSleeveImage(int index) {
+        SkinImage s = sleeves.get(index);
+        return (s != null && s.image instanceof BufferedImage bi) ? bi : null;
     }
 
     public static boolean isLoaded() { return loaded; }
@@ -1559,32 +1564,24 @@ public class FSkin {
 
         // Test if various points of requested sub-image are transparent.
         // If any return true, image exists.
-        int x, y;
         Color c;
 
         if (bimPreferredSprite != null) {
-            // Center
-            x = (x0 + w0 / 2);
-            y = (y0 + h0 / 2);
-            c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
-            if (c.getAlpha() != 0) { return bimPreferredSprite; }
-
-            x += 2;
-            y += 2;
-            c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
-            if (c.getAlpha() != 0) { return bimPreferredSprite; }
-
-            x -= 4;
-            c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
-            if (c.getAlpha() != 0) { return bimPreferredSprite; }
-
-            y -= 4;
-            c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
-            if (c.getAlpha() != 0) { return bimPreferredSprite; }
-
-            x += 4;
-            c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
-            if (c.getAlpha() != 0) { return bimPreferredSprite; }
+            // Probe wider than the centre to catch icons with a transparent middle.
+            final int cx = x0 + w0 / 2;
+            final int cy = y0 + h0 / 2;
+            final int r  = Math.min(8, Math.min(w0, h0) / 2);
+            final int[][] probes = {
+                { cx,     cy     },
+                { cx + r, cy + r },
+                { cx - r, cy + r },
+                { cx - r, cy - r },
+                { cx + r, cy - r },
+            };
+            for (int[] p : probes) {
+                c = getColorFromPixel(bimPreferredSprite.getRGB(p[0], p[1]));
+                if (c.getAlpha() != 0) { return bimPreferredSprite; }
+            }
         }
 
         return bimDefaultSprite;

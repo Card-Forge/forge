@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -50,6 +51,8 @@ import forge.game.card.CardView;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.MyRandom;
@@ -241,6 +244,17 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         reward.setAutoSell(!reward.isAutoSell());
         autoSell.setText(reward.isAutoSell() ? "[%85][+Sell]" + priceTag : "[%85][GRAY] " + priceTag);
         autoSell.getColor().a = reward.isAutoSell() ? 1f : 0.7f;
+
+        calcAutoSellWidth();
+    }
+
+    private void calcAutoSellWidth() {
+        float btnHeight = autoSell.getTextraLabel().layout.getHeight() * 1.8f;
+        float width = btnHeight - 2f;
+        if (FModel.getPreferences().getPrefBoolean(FPref.ADV_DISPLAY_PRICE_IN_REWARD_SCREEN)) {
+            width = Math.max(autoSell.getTextraLabel().layout.getWidth() + 6f, width);
+        };
+        autoSell.setSize(width, btnHeight);
     }
 
     public RewardActor(Reward reward, boolean flippable, RewardScene.Type type, boolean showOverlay) {
@@ -257,7 +271,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             case Card: {
                 if (!reward.isNoSell) {
                     int sellPrice = AdventurePlayer.current().cardSellPrice(reward.getCard());
-                    priceTag = sellPrice > 0 ? " " + sellPrice : "";
+                    priceTag = FModel.getPreferences().getPrefBoolean(FPref.ADV_DISPLAY_PRICE_IN_REWARD_SCREEN) && sellPrice > 0 ? String.valueOf(sellPrice) : "";
                     autoSell = Controls.newTextButton("[%85][GRAY] " + priceTag);
                     autoSell.getColor().a = 0.7f; // semi-transparent by default
                     autoSell.addListener(new InputListener() {
@@ -270,8 +284,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             if (!reward.isAutoSell()) autoSell.getColor().a = 0.7f;
                         }
                     });
-                    float btnHeight = autoSell.getTextraLabel().layout.getHeight() * 1.8f;
-                    autoSell.setSize(autoSell.getWidth(), btnHeight);
+                    calcAutoSellWidth();
                     autoSell.addListener(new ClickListener() {
                         public void clicked(InputEvent event, float x, float y) {
                             updateAutoSell();
@@ -719,8 +732,20 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (img == null)
             return;
         image = img;
-        if (Forge.isTextureFilteringEnabled())
-            image.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+        if (Forge.isTextureFilteringEnabled()) {
+            // ImageCache loads card art without mipmaps. Applying a mipmap
+            // min filter to those textures makes OpenGL sample missing mip levels → solid black.
+            boolean useMipMaps = false;
+            try {
+                useMipMaps = img.getTextureData() != null && img.getTextureData().useMipMaps();
+            } catch (Exception ignored) {}
+
+            TextureFilter filter = useMipMaps 
+                ? Texture.TextureFilter.MipMapLinearLinear
+                : Texture.TextureFilter.Linear;
+                
+            image.setFilter(filter, Texture.TextureFilter.Linear);
+        }
         if (toolTipImage == null)
             toolTipImage = new RewardImage(processDrawable(image));
         if (GuiBase.isAndroid() || Forge.hasGamepad()) {
@@ -1008,8 +1033,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         ? DeckFormat.Commander
                         : DeckFormat.Adventure;
                     int maxCopies = deckFormat.getMaxCardCopies(pc);
+                    boolean autoSellVariantCommanderMode = FModel.getPreferences().getPrefBoolean(FPref.ADV_COMMANDER_AUTOSELL_VARIANT);
+                    boolean isPresentAutoSell = AdventurePlayer.current().getAutoSellCards().contains(pc);
 
-                    if (AdventurePlayer.current().isCommanderMode()) {
+                    if (isPresentAutoSell) {
+                        setAutoSell(true);
+                    } else if (deckFormat.equals(DeckFormat.Commander) && autoSellVariantCommanderMode) {
                         setAutoSell(maxCopies == 1 && inCollectionLike(pc));
                     } else {
                         int ownedCount = AdventurePlayer.current().getCollectionCards(true).count(pc);
@@ -1217,7 +1246,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         float[] val = worldTransform.getValues();
         //val[Matrix4.M32]=0.0002f;
         worldTransform.set(val);
-        float originX = this.getOriginX(), originY = this.getOriginY();
         worldTransform.translate(getX() + getWidth() / 2, getY() + getHeight() / 2, 0);
         if (clicked) {
             worldTransform.rotate(0, 1, 0, 180 * flipProcess);

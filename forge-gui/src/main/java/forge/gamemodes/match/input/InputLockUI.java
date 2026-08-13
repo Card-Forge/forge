@@ -4,8 +4,6 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
-import forge.gamemodes.match.YieldController;
-import forge.gamemodes.match.YieldUpdate;
 import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
@@ -93,22 +91,7 @@ public class InputLockUI implements Input {
     }
     @Override
     public void selectButtonCancel() {
-        // autoPassCancel first: its mayAutoPass gate needs at least one mode still active to do UI updates.
-        controller.autoPassCancel();
-        YieldController yc = controller.getYieldController();
-        PlayerView pv = controller.getLocalPlayerView();
-        if (yc.getAutoPassUntilMarker() != null) {
-            yc.clearMarker();
-            if (controller.getGui() != null) {
-                controller.getGui().applyYieldUpdate(new YieldUpdate.ClearMarker(pv));
-            }
-        }
-        if (yc.autoPassUntilStackEmpty()) {
-            yc.setAutoPassUntilStackEmpty(false);
-            if (controller.getGui() != null) {
-                controller.getGui().applyYieldUpdate(new YieldUpdate.StackYield(pv, false));
-            }
-        }
+        controller.getYieldController().clearActiveYieldAndDispatch();
     }
 
     @Override

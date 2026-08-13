@@ -318,7 +318,7 @@ public class CardFactory {
             if (rules.getOtherPart() != null) {
                 readCardFace(card, rules.getOtherPart());
             } else if (!rules.getMeldWith().isEmpty()) {
-                readCardFace(card, StaticData.instance().getCommonCards().getRules(rules.getMeldWith()).getOtherPart());
+                readCardFace(card, StaticData.instance().getCommonCards().getRulesOrElseUnsupported(rules.getMeldWith()).getOtherPart());
             }
         }
 
@@ -364,23 +364,6 @@ public class CardFactory {
 
         c.getCurrentState().setFlavorName(face.getFlavorName());
 
-        // Negative card Id's are for view purposes only
-        if (c.getId() >= 0) {
-            // Build English oracle and translated oracle mapping
-            CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
-
-            for (Entry<String, String> v : face.getVariables())
-                c.setSVar(v.getKey(), v.getValue());
-            for (String r : face.getReplacements())
-                c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
-            for (String s : face.getStaticAbilities())
-                c.addStaticAbility(s);
-            for (String t : face.getTriggers())
-                c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
-
-            // keywords not before variables
-            c.addIntrinsicKeywords(face.getKeywords(), false);
-        }
         if (face.getDraftActions() != null) {
             face.getDraftActions().forEach(c::addDraftAction);
         }
@@ -409,8 +392,28 @@ public class CardFactory {
 
         c.setAttractionLights(face.getAttractionLights());
 
-        if (c.getId() > 0) // Set FactoryAbilities if not for view
+        // Negative card Id's are for view purposes only
+        if (c.getId() >= 0) {
+            // Build English oracle and translated oracle mapping
+            CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
+
+            for (Entry<String, String> v : face.getVariables())
+                c.setSVar(v.getKey(), v.getValue());
+            for (String r : face.getReplacements())
+                c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
+            for (String s : face.getStaticAbilities())
+                c.addStaticAbility(s);
+            for (String t : face.getTriggers())
+                c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
+
+            // keywords not before variables
+            if (c.getCurrentState().addIntrinsicKeywords(face.getKeywords(), false)) {
+                c.updateKeywordsCache();
+            }
+
+            // add spells only after
             CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
+        }
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki, final boolean keepTextChanges) {
@@ -593,9 +596,8 @@ public class CardFactory {
             }
 
             // CR 208.3 A noncreature object not on the battlefield has power or toughness only if it has a power and toughness printed on it.
-            // currently only LKI can be trusted?
             if ((cause.hasParam("SetPower") || cause.hasParam("SetToughness")) &&
-                (state.getType().isCreature() || (originalState != null && in.getOriginalState(originalState.getStateName()).getBasePowerString() != null))) {
+                    (state.getType().isCreature() || (originalState != null && in.getOriginalState(originalState.getStateName()).hasPrintedPT()))) {
                 if (cause.hasParam("SetPower")) {
                     state.setBasePower(AbilityUtils.calculateAmount(host, cause.getParam("SetPower"), cause));
                 }
@@ -777,4 +779,4 @@ public class CardFactory {
         return result;
     }
 
-} // end class AbstractCardFactory
+}

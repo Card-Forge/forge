@@ -1,7 +1,6 @@
 package forge.ai;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.IdentityHashMap;
@@ -233,7 +232,7 @@ public class ComputerUtilCard {
             // TODO - Improve ranking various non-basic lands depending on context
 
             // Urza's Mine/Tower/Power Plant
-            final CardCollectionView aiAvailable = nbLand.get(0).getController().getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Hand));
+            final CardCollectionView aiAvailable = nbLand.get(0).getController().getCardsIn(ZoneType.Battlefield, ZoneType.Hand);
             if (IterableUtil.any(list, CardPredicates.nameEquals("Urza's Mine"))) {
                 if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Mine")).isEmpty()) {
                     return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Mine")).getFirst();
@@ -292,7 +291,6 @@ public class ComputerUtilCard {
     public static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal) {
         return evaluateLandRemovalPriority(ai, land, removal, true);
     }
-
     private static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal,
             final boolean includeLandDestruction) {
         if (land == null || !land.isLand()) {
@@ -325,7 +323,7 @@ public class ComputerUtilCard {
                 // Usually low priority: Homeward Path matters if the AI has
                 // stolen creatures that it could lose, but otherwise it is
                 // mostly just a colorless land with a narrow political button.
-                if (aiControlsStolenCreature(ai)) {
+                if (ai.getCreaturesInPlay().anyMatch(c -> c.getOwner() != ai)) {
                     score += 100;
                 } else {
                     score = Math.max(0, score - 50);
@@ -425,15 +423,6 @@ public class ComputerUtilCard {
     private static boolean isHomewardPathAbility(final SpellAbility ability) {
         return ability.getApi() == ApiType.GainControlVariant
                 && "GainControlOwns".equals(ability.getParam("AILogic"));
-    }
-
-    private static boolean aiControlsStolenCreature(final Player ai) {
-        for (Card creature : ai.getCreaturesInPlay()) {
-            if (!creature.getOwner().equals(ai)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private static boolean isLandAnimationAbility(final SpellAbility ability) {
@@ -567,6 +556,37 @@ public class ComputerUtilCard {
         return getMostExpensivePermanentAI(list);
     }
 
+    public static Card getBestRemovalTargetAI(final Player ai, final Iterable<Card> list) {
+        if (Iterables.isEmpty(list)) {
+            return null;
+        }
+        return Aggregates.itemWithMax(list, c -> evaluateRemovalTargetPriority(ai, c));
+    }
+
+    private static int evaluateRemovalTargetPriority(final Player ai, final Card c) {
+        int value;
+        if (c.isCreature()) {
+            value = evaluateCreature(c);
+        } else if (c.isLand()) {
+            value = evaluateLandRemovalPriority(ai, c, null, false);
+        } else {
+            value = 50 + 30 * c.getCMC();
+            if (c.isPlaneswalker()) {
+                value += c.getCounters(CounterEnumType.LOYALTY) * 10;
+            }
+        }
+
+        // tokens are slightly better since they'll be gone forever
+        if (c.isToken()) {
+            value += 30;
+        }
+
+        if (c.getController().isOpponentOf(ai)) {
+            value += ComputerUtil.evaluateBoardPosition(ai, c.getController()) / 4;
+        }
+        return value;
+    }
+
     /**
      * getBestCreatureAI.
      *
@@ -606,36 +626,6 @@ public class ComputerUtilCard {
             return Iterables.get(list, 0);
         }
         return Aggregates.itemWithMin(IterableUtil.filter(list, CardPredicates.CREATURES), ComputerUtilCard.creatureEvaluator);
-    }
-
-    // This selection rates tokens higher
-
-    /**
-     * <p>
-     * getBestCreatureToBounceAI.
-     * </p>
-     *
-     * @param list
-     * @return a {@link forge.game.card.Card} object.
-     */
-    public static Card getBestCreatureToBounceAI(final Iterable<Card> list) {
-        if (Iterables.size(list) == 1) {
-            return Iterables.get(list, 0);
-        }
-        final int tokenBonus = 60;
-        Card biggest = null;
-        int biggestvalue = -1;
-
-        for (Card card : CardLists.filter(list, CardPredicates.CREATURES)) {
-            int newvalue = evaluateCreature(card);
-            newvalue += card.isToken() ? tokenBonus : 0; // raise the value of tokens
-
-            if (biggestvalue < newvalue) {
-                biggest = card;
-                biggestvalue = newvalue;
-            }
-        }
-        return biggest;
     }
 
     // For ability of Oracle en-Vec, return the first card that are going to attack next turn
@@ -1413,7 +1403,7 @@ public class ComputerUtilCard {
             }
             //TODO:add threat from triggers and other abilities (ie. Bident of Thassa)
         }
-        if (!c.getManaAbilities().isEmpty()) {
+        if (!c.getManaAbilities().isEmpty() && !landGrantingRemoval(sa)) {
             threat += 0.5f * costTarget / opp.getLandsInPlay().size();   //set back opponent's mana
         }
 
@@ -1423,6 +1413,21 @@ public class ComputerUtilCard {
         }
         final float chance = MyRandom.getRandom().nextFloat();
         return chance < valueNow;
+    }
+
+    private static boolean landGrantingRemoval(final SpellAbility sa) {
+        SpellAbility sub = sa.getSubAbility();
+        while (sub != null) {
+            if (ApiType.ChangeZone.equals(sub.getApi())
+                    && "Library".equals(sub.getParamOrDefault("Origin", ""))
+                    && "Battlefield".equals(sub.getParamOrDefault("Destination", ""))
+                    && sub.getParamOrDefault("ChangeType", "").contains("Land.Basic")
+                    && "TargetedController".equals(sub.getParamOrDefault("DefinedPlayer", ""))) {
+                return true;
+            }
+            sub = sub.getSubAbility();
+        }
+        return false;
     }
 
     /**
@@ -1457,7 +1462,7 @@ public class ComputerUtilCard {
 
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            simAI = aic.usesSimulation();
+            simAI = aic.usesFullSimulation();
             if (!simAI) {
                 holdCombatTricks = aic.getBoolProperty(AiProps.TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
                 chanceToHoldCombatTricks = aic.getIntProperty(AiProps.CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
@@ -1739,13 +1744,13 @@ public class ComputerUtilCard {
                     }
                 }
 
-                float value = 1.0f * (pumpedDmg - dmg);
+                float value = pumpedDmg - dmg;
                 if (c == sa.getHostCard() && power > 0) {
                     int divisor = sa.getPayCosts().getTotalMana().getCMC();
                     if (divisor <= 0) {
                         divisor = 1;
                     }
-                    value *= power / divisor;
+                    value *= (float) power / divisor;
                 } else {
                     value /= opp.getLife();
                 }

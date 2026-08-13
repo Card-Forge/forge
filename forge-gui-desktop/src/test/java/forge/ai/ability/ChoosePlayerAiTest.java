@@ -24,7 +24,7 @@ public class ChoosePlayerAiTest extends AITest {
         preferredOpponent.setTeam(2);
 
         firstOpponent.setLife(20, null);
-        preferredOpponent.setLife(5, null);
+        preferredOpponent.setLife(25, null);
 
         Card source = addCard("Mountain", ai);
         SpellAbility choosePlayerSa = new SpellAbility.EmptySa(ApiType.ChoosePlayer, source, ai);

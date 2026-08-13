@@ -2,6 +2,7 @@ package forge.gamemodes.match;
 
 import com.google.common.collect.*;
 
+import forge.deck.Deck;
 import forge.game.GameEntityView;
 import forge.game.GameEndReason;
 import forge.game.GameLog;
@@ -11,6 +12,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gui.FThreads;
@@ -20,6 +22,8 @@ import forge.gui.control.PlaybackSpeed;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IMayViewCards;
 import forge.interfaces.IGameController;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
@@ -43,7 +47,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private boolean ignoreConcedeChain = false;
     private boolean networkGame = false;
 
-    private java.util.Timer waitingTimer;
+    private Timer waitingTimer;
     private long waitingStartTime;
 
     @Override
@@ -79,7 +83,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public String getDayTime() {
         return daytime;
     }
-
     @Override
     public void updateDayTime(String daytime) {
         this.daytime = daytime;
@@ -89,16 +92,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final void setCurrentPlayer(PlayerView player) {
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
-        if (hasLocalPlayers() && !isLocalPlayer(player)) { //add check if gameControllers is not empty
-            if(GuiBase.getInterface().isLibgdxPort()){//spectator is registered as localplayer bug on ai vs ai (after .
-                if (spectator != null){               //human vs ai game), then it loses "control" when you watch ai vs ai,
-                    currentPlayer = null;             //again, and vice versa, This is to prevent throwing error, lose control,
-                    updateCurrentPlayer(null);        //workaround fix on mayviewcards below is needed or it will bug the UI..
-                    gameControllers.clear();
-                    return;
-                }
-            }
-
+        if (hasLocalPlayers() && !isLocalPlayer(player)) {
             throw new IllegalArgumentException();
         }
 
@@ -114,6 +108,53 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gameView;
     }
 
+    // Network clients have no server-side match, so decks are only reachable through the lobby.
+    // Null on the host and in local games, where getGameView().getDeck() works directly.
+    private GameLobby clientLobby;
+
+    public final void setClientLobby(final GameLobby lobby) {
+        clientLobby = lobby;
+    }
+
+    public final Deck getDeckForPlayer(final PlayerView player) {
+        if (player == null) {
+            return null;
+        }
+        if (clientLobby != null) {
+            for (int i = 0; i < clientLobby.getNumberOfSlots(); i++) {
+                final LobbySlot slot = clientLobby.getSlot(i);
+                if (slot != null && player.getLobbyPlayerName().equals(slot.getName())) {
+                    return slot.getDeck();
+                }
+            }
+            return null;
+        }
+        return gameView == null ? null : gameView.getDeck(player);
+    }
+
+    public final int getMaximumCommanderBracket() {
+        return clientLobby != null
+                ? clientLobby.getData().getMaximumCommanderBracket()
+                : FModel.getPreferences().getPrefInt(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET);
+    }
+
+    /**
+     * Receives a {@link GameView} snapshot and installs it as the GUI's view of game state.
+     * Called at game lifecycle boundaries (start, restart, recovery) and when a remote
+     * client receives a {@code setGameView} protocol message.
+     *
+     * <p>Two paths: if either {@code gameView} or {@code gameView0} is null, the field is
+     * reassigned directly. If both are non-null, the incoming view's properties are merged
+     * into the existing view via {@link GameView#copyChangedProps} rather than swapping
+     * the reference.
+     *
+     * <p>The merge path preserves object identity of the GameView and every nested
+     * {@link forge.trackable.TrackableObject}. GUI components hold direct references to
+     * those instances (UI panels store {@code PlayerView}/{@code CardView} fields;
+     * delta-sync consumers also register per-consumer dirty bits on them). Swapping the
+     * GameView reference would leave those references pointing at an orphaned graph;
+     * merging keeps them valid as the data underneath changes.
+     */
     @Override
     public void setGameView(final GameView gameView0) {
         if (gameView == null || gameView0 == null) {
@@ -123,9 +164,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             gameView = gameView0;
             return;
         }
-
-        //if game view set to another instance without being first cleared,
-        //update existing game view object instead of overwriting it
         gameView.copyChangedProps(gameView0);
     }
 
@@ -151,8 +189,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
+        // HashMap.put keeps the existing key on an id-equal put and PlayerView equality is by id, so without
+        // removing first, re-registration across matches would retain the prior game's stale PlayerView
         final boolean doSetCurrentPlayer = originalGameControllers.isEmpty();
+        originalGameControllers.remove(player);
         originalGameControllers.put(player, gameController);
+        gameControllers.remove(player);
         gameControllers.put(player, gameController);
         if (doSetCurrentPlayer) {
             setCurrentPlayer(player);
@@ -188,6 +230,20 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         this.spectator = spectator;
     }
 
+    /**
+     * Discard the previous match's controller bookkeeping. The mobile port hands out a single
+     * reused {@code MatchController} instance per match (see {@code GuiMobile.getNewGuiGame()}),
+     * whereas desktop constructs a fresh {@code CMatchUI}; without this reset the prior match's
+     * controllers and spectator leak into the next match and break {@link #setCurrentPlayer} and
+     * {@link #mayView}.
+     */
+    public void resetForNewMatch() {
+        gameControllers.clear();
+        originalGameControllers.clear();
+        spectator = null;
+        currentPlayer = null;
+    }
+
     @Override
     public final void updateSingleCard(final CardView card) {
         updateCards(Collections.singleton(card));
@@ -218,27 +274,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (!hasLocalPlayers()) {
             return true; //if not in game, card can be shown
         }
-        if (GuiBase.getInterface().isLibgdxPort()){
-            if (gameView != null && gameView.isGameOver()) {
-                return true;
-            }
-            if (spectator != null) { //workaround fix!! this is needed on above code or it will
-                for (Map.Entry<PlayerView, IGameController> e : gameControllers.entrySet()) {
-                    if (e.getValue().equals(spectator)) {
-                        gameControllers.remove(e.getKey());
-                        break;
-                    }
-                }
-                return true;
-            }
-            try {
-                if (getGameController().mayLookAtAllCards()) { // when it bugged here, the game thinks the spectator (null)
-                    return true;                               // is the humancontroller here (maybe because there is an existing game thread???)
-                }
-            } catch (NullPointerException e) {
-                return true; // return true so it will work as normal
-            }
-        } else if (getGameController().mayLookAtAllCards()) {
+        if (GuiBase.getInterface().isLibgdxPort() && gameView != null && gameView.isGameOver()) {
+            return true; //mobile: browse every zone from the minimized win/lose overlay after the match ends
+        }
+        if (getGameController().mayLookAtAllCards()) {
             return true;
         }
         return c.canBeShownToAny(getLocalPlayers());
@@ -279,9 +318,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Set<GameEntityView> highlighted = Sets.newHashSet();
 
     @Override
-    public void setHighlighted(final GameEntityView gv, final boolean b) {
-        final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
-        if (hasChanged) {
+    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
+        for (final GameEntityView gv : entities) {
+            final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
+            if (!hasChanged) continue;
             if (gv instanceof PlayerView pv) {
                 updateLives(Collections.singleton(pv));
             }
@@ -297,23 +337,68 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     private final Set<CardView> selectableCards = Sets.newHashSet();
+    private int selectionMin = 0;
+    private int selectionMax = 0;
 
-    public void setSelectables(final Iterable<CardView> cards) {
+    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
         for (CardView cv : cards) {
             selectableCards.add(cv);
         }
+        selectionMin = min;
+        selectionMax = max;
     }
 
     public void clearSelectables() {
         selectableCards.clear();
+        selectionMin = 0;
+        selectionMax = 0;
     }
 
     public boolean isSelectable(final CardView card) {
         return selectableCards.contains(card);
     }
 
+    /** Number of selectable cards currently highlighted — i.e. picked so far in the active selection prompt. */
+    public int countPickedSelectables() {
+        int n = 0;
+        for (CardView cv : selectableCards) {
+            if (highlighted.contains(cv)) n++;
+        }
+        return n;
+    }
+
     public boolean isSelecting() {
         return !selectableCards.isEmpty();
+    }
+
+    public int getSelectionMin() {
+        return selectionMin;
+    }
+    public int getSelectionMax() {
+        return selectionMax;
+    }
+
+    /** Weighted membership: duplicates in the pushed iterable accumulate counts, so a card's
+     *  count expresses how "strong" its selectability is (1 = actionable, 2 = Auto would tap it). */
+    private final Multiset<CardView> weaklySelectableCards = HashMultiset.create();
+
+    public void setWeaklySelectable(final Iterable<CardView> cards) {
+        weaklySelectableCards.clear();
+        for (CardView cv : cards) {
+            weaklySelectableCards.add(cv);
+        }
+    }
+
+    public void clearWeaklySelectable() {
+        weaklySelectableCards.clear();
+    }
+
+    public boolean isWeaklySelectable(final CardView card) {
+        return weaklySelectableCards.contains(card);
+    }
+
+    public int getWeakSelectableStrength(final CardView card) {
+        return weaklySelectableCards.count(card);
     }
 
     public boolean isGamePaused() {
@@ -425,11 +510,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return false;
         }
 
-        gameView.getGame().getAction().invoke(() -> {
-            if (!gameView.getGame().isGameOver()) {
-                gameView.getGame().setGameOver(GameEndReason.AllHumansLost);
-            }
-        });
+        gameView.getGame().getAction().invoke(() -> gameView.getGame().setGameOver(GameEndReason.AllHumansLost));
         return true;
     }
 
@@ -456,9 +537,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     checkAwaitNextInputTimer();
                     synchronized (awaitNextInputTimer) {
                         if (awaitNextInputTask != null) {
-                            updatePromptForAwait(getCurrentPlayer());
+                            String waitingForName = updatePromptForAwait(getCurrentPlayer());
                             if (GuiBase.isNetPlay(AbstractGuiGame.this)) {
-                                showWaitingTimer(getCurrentPlayer(), findWaitingForPlayerName(getCurrentPlayer()));
+                                showWaitingTimer(getCurrentPlayer(), waitingForName);
                             }
                             awaitNextInputTask = null;
                         }
@@ -478,10 +559,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    protected final void updatePromptForAwait(final PlayerView playerView) {
+    protected final String updatePromptForAwait(final PlayerView playerView) {
         // Append "Waiting for opponent..." below the yield prompt so the user keeps the
         // cancel-yield UI during opponent turns instead of losing it to the await prompt.
-        String waiting = Localizer.getInstance().getMessage("lblWaitingForOpponent");
+        String waitingForName = findWaitingForPlayerName(playerView);
+        String waiting = waitingForName != null
+                ? Localizer.getInstance().getMessage("lblWaitingForPlayer", waitingForName)
+                : Localizer.getInstance().getMessage("lblWaitingForOpponent");
         String yieldMsg = currentYieldMessage();
         if (yieldMsg != null) {
             cancelAwaitNextInput();
@@ -491,13 +575,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             showPromptMessage(playerView, waiting);
             updateButtons(playerView, false, false, false);
         }
+        return waitingForName;
     }
 
     private String currentYieldMessage() {
         YieldController yielding = null;
         for (IGameController c : gameControllers.values()) {
             YieldController yc = c.getYieldController();
-            if (yc != null && yc.shouldAutoYield()) {
+            if (yc.shouldAutoYield()) {
                 yielding = yc;
                 break;
             }
@@ -525,9 +610,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
         this.waitingStartTime = System.currentTimeMillis();
         // Capture timer so stale EDT tick runnables detect cancel/restart and skip
-        final java.util.Timer myTimer = new java.util.Timer("waitingTimer");
+        final Timer myTimer = new Timer("waitingTimer");
         waitingTimer = myTimer;
-        myTimer.schedule(new java.util.TimerTask() {
+        myTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 FThreads.invokeInEdtLater(() -> {
@@ -626,10 +711,34 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         PlayerView pv;
         if (update instanceof YieldUpdate.ClearMarker u) pv = u.player();
         else if (update instanceof YieldUpdate.StackYield u) pv = u.player();
+        else if (update instanceof YieldUpdate.SetAutoPassUntilEndOfTurn u) pv = u.player();
         else return;
         IGameController c = getGameController(pv);
         if (c != null) c.applyYieldUpdate(update);
         refreshYieldUi(pv);
+    }
+
+    /** Toggle the auto-pass marker for {@code phase} on {@code phaseOwner}'s turn. The
+     *  caller's {@code markLabelStopsAtPhase} runs when setting a marker, to un-skip
+     *  the cell on the platform-specific phase indicator so the marker can fire. */
+    protected final void handleYieldMarkerToggle(PlayerView phaseOwner, PhaseType phase, Runnable markLabelStopsAtPhase) {
+        PlayerView local = getCurrentPlayer();
+        if (local == null) return;
+        IGameController controller = getGameController(local);
+        if (controller == null) return;
+        YieldMarker existing = controller.getYieldController().getAutoPassUntilMarker();
+        boolean clickedSameLabel = existing != null
+                && phaseOwner.equals(existing.getPhaseOwner())
+                && phase == existing.getPhase();
+        if (clickedSameLabel) {
+            controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
+        } else {
+            markLabelStopsAtPhase.run();
+            boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
+            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
+            controller.selectButtonOk();   // Pass current priority so the marker takes effect immediately.
+        }
+        refreshYieldUi(local);
     }
 
     // End auto-yield/input code
@@ -759,11 +868,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         final int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         final int m1 = max >= 0 ? sourceChoices.size() - max : -1;
         return order(title, topCaption, m1, m2, sourceChoices, destChoices, c, false);
-    }
-
-    @Override
-    public <T> List<T> order(final String title, final String top, final List<T> sourceChoices, final CardView c) {
-        return order(title, top, 0, 0, sourceChoices, null, c, false);
     }
 
     /**

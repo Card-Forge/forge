@@ -2,12 +2,13 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import com.google.common.collect.Multiset;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.Aggregates;
 import forge.util.Localizer;
 
 public class TriggerCounterPlayerAddedAll extends Trigger {
@@ -33,10 +34,11 @@ public class TriggerCounterPlayerAddedAll extends Trigger {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
         sa.setTriggeringObjectsFrom(runParams, AbilityKey.Source, AbilityKey.Object, AbilityKey.CounterMap);
-        sa.setTriggeringObject(AbilityKey.Amount, Aggregates.sum(((Map<CounterType, Integer>) runParams.get(AbilityKey.CounterMap)).values()));
+        sa.setTriggeringObject(AbilityKey.Amount, ((Multiset<CounterType>) runParams.get(AbilityKey.CounterMap)).size());
     }
 
     @Override

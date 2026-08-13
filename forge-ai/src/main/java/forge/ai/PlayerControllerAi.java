@@ -44,6 +44,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -70,10 +71,6 @@ public class PlayerControllerAi extends PlayerController {
 
     public void setupAutoProfile(Deck deck) {
         pilotsNonAggroDeck = deck.getName().contains("Control") || deck.getAverageCMC() > 3;
-    }
-
-    public void setUseSimulation(boolean value) {
-        brains.setUseSimulation(value);
     }
 
     @Override
@@ -340,7 +337,7 @@ public class PlayerControllerAi extends PlayerController {
         if (delayedReveal != null) {
             reveal(delayedReveal);
         }
-        return SpellApiToAi.Converter.get(sa).chooseSingleEntity(player, sa, (FCollection<T>)optionList, isOptional, targetedPlayer, params);
+        return SpellApiToAi.Converter.get(sa).chooseSingleEntity(player, sa, optionList, isOptional, targetedPlayer, params);
     }
 
     @Override
@@ -401,6 +398,11 @@ public class PlayerControllerAi extends PlayerController {
         return getAi().confirmStaticApplication(hostCard, logic);
     }
 
+    // TODO: accept based on game state (infinite loop / unwinnable position); always declines for now
+    public boolean acceptsDrawOffer() {
+        return false;
+    }
+
     @Override
     public boolean confirmTrigger(WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
@@ -451,6 +453,9 @@ public class PlayerControllerAi extends PlayerController {
         Card host = replacementEffect.getHostCard();
         if (host.hasAlternateState()) {
             host = host.getGame().getCardState(host);
+        }
+        if (effectSA != null) {
+            effectSA.setActivatingPlayer(host.getController());
         }
         return brains.aiShouldRun(replacementEffect, effectSA, host, affected);
     }
@@ -643,8 +648,7 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
 
-            if(source == null || !source.hasParam("LibraryPosition")
-                    || AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) >= 0) {
+            if (orderedMoveToTopOfLibrary(destinationZone, source)) {
                 //Cards going to the top of a deck are returned in reverse order.
                 Collections.reverse(reordered);
             }
@@ -659,7 +663,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max) {
+    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser) {
         if (p == player) {
             return brains.getCardsToDiscard(min, max, validCards, sa);
         }
@@ -835,7 +839,7 @@ public class PlayerControllerAi extends PlayerController {
                 sa.resolve();
             }
         } else {
-            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerRunnable(sa));
+            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerAction(sa));
         }
         return true;
     }
@@ -845,11 +849,10 @@ public class PlayerControllerAi extends PlayerController {
      * defers the human choice from canPlayAI (worker thread with possibly low timeout)
      * to handlePlayingSpellAbility (game thread, no timeout).
      */
-    private Runnable getDeferredTargetingPlayerRunnable(SpellAbility sa) {
-        SpellAbility root = sa;
+    private Consumer<SpellAbility> getDeferredTargetingPlayerAction(SpellAbility sa) {
         while (sa != null) {
             if (sa.hasParam("TargetingPlayer") && sa.getTargetingPlayer() != null) {
-                return () -> {
+                return root -> {
                     SpellAbility cur = root;
                     while (cur != null) {
                         if (cur.hasParam("TargetingPlayer") && cur.getTargetingPlayer() != null) {
@@ -872,7 +875,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
+    public CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
         return brains.getCardsToDiscard(numDiscard, null, null);
     }
 
@@ -1603,6 +1606,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
+        if (sa.hasOptionalKeywordAmount(keyword)) {
+            return Math.min(sa.getOptionalKeywordAmount(keyword), max);
+        }
         // TODO: improve the logic depending on the keyword and the playability of the cost-modified SA (enough targets present etc.)
         if (keyword.getKeyword() == Keyword.CASUALTY
                 && "true".equalsIgnoreCase(sa.getHostCard().getSVar("AINoCasualtyPayment"))) {

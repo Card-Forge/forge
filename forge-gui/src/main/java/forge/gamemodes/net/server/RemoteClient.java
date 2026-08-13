@@ -10,6 +10,7 @@ import forge.util.IHasForgeLog;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 
+import java.net.SocketAddress;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public final class RemoteClient implements IToClient, IHasForgeLog {
@@ -20,9 +21,12 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     private volatile Channel channel;
     private String username;
     private int index = UNASSIGNED_SLOT;
+    private boolean libgdx;
     private volatile ReplyPool replies = new ReplyPool();
     private volatile Tracker codecTracker;
+    private volatile int codecConsumerId = -1;
     private final AtomicInteger sendErrors = new AtomicInteger(0);
+    private RemoteClientGuiGame gui;
 
     // Package-private: SaturationLoggingHandler reads/resets these on writability transitions
     volatile long saturationStartMs = 0L;
@@ -55,6 +59,12 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
      */
     public boolean hasValidSlot() {
         return index >= 0;
+    }
+
+    /** Remote peer address, for admission limits and logging. */
+    public SocketAddress getRemoteAddress() {
+        final Channel ch = channel;
+        return ch == null ? null : ch.remoteAddress();
     }
 
     /** Encodes synchronously on the caller's thread. Returns null on failure (logged). */
@@ -155,14 +165,35 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
         this.index = index;
     }
 
+    public boolean isLibgdx() {
+        return libgdx;
+    }
+    public void setLibgdx(final boolean libgdx) {
+        this.libgdx = libgdx;
+    }
+
+    public RemoteClientGuiGame getGui() {
+        return gui;
+    }
+    void setGui(final RemoteClientGuiGame gui) {
+        this.gui = gui;
+    }
+
     /**
-     * Set the tracker on the channel's encoder and decoder for IdRef
-     * replacement/resolution. Called when the game starts (before any
-     * client protocol messages arrive). Cached so that {@link #swapChannel}
-     * can re-apply it after a reconnect.
+     * Set the tracker and per-client consumerId on the channel's encoder and
+     * decoder. Called when the game starts (before any client protocol
+     * messages arrive). Cached so that {@link #swapChannel} can re-apply
+     * after a reconnect. The consumerId is the {@code DeltaSyncManager} id
+     * for this client; the encoder uses it to gate IdRef substitution to
+     * objects this client has actually been told about.
      */
-    public void setCodecTracker(Tracker tracker) {
+    public void setCodecTracker(Tracker tracker, int consumerId) {
+        // Skip no-op rebinds: setGameView fires on every view push, the tracker changes per game.
+        if (tracker == codecTracker && consumerId == codecConsumerId) {
+            return;
+        }
         this.codecTracker = tracker;
+        this.codecConsumerId = consumerId;
         applyCodecTracker(channel);
     }
 
@@ -170,9 +201,16 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
         if (codecTracker == null || ch == null) {
             return;
         }
+        // Swap on the event loop so it lands between decoded frames: a message the
+        // client sent against the previous game must not resolve against the new one.
+        if (!ch.eventLoop().inEventLoop()) {
+            ch.eventLoop().execute(() -> applyCodecTracker(ch));
+            return;
+        }
         CompatibleObjectEncoder encoder = ch.pipeline().get(CompatibleObjectEncoder.class);
         if (encoder != null) {
             encoder.setTracker(codecTracker);
+            encoder.setConsumerId(codecConsumerId);
         }
         CompatibleObjectDecoder decoder = ch.pipeline().get(CompatibleObjectDecoder.class);
         if (decoder != null) {

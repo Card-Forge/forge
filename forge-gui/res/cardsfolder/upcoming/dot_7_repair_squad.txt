@@ -1,0 +1,7 @@
+Name:DOT-7 Repair Squad
+ManaCost:3 W
+Types:Artifact Creature Robot
+PT:3/3
+K:Flying
+A:AB$ Untap | Cost$ 1 W | ValidTgts$ Creature | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ Untap target creature. Activate only as a sorcery and only once each turn.
+Oracle:Flying\n{1}{W}: Untap target creature. Activate only as a sorcery and only once each turn.

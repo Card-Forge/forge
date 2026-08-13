@@ -16,6 +16,7 @@ import forge.toolbox.FOptionPane;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
+import forge.util.LogExporter;
 import forge.view.KeyboardShortcutsDialog;
 
 import static forge.localinstance.properties.ForgeConstants.GITHUB_FORGE_URL;
@@ -28,8 +29,11 @@ public final class HelpMenu {
         JMenu menu = new JMenu(localizer.getMessage("lblHelp"));
         menu.setMnemonic(KeyEvent.VK_H);
         menu.add(getMenu_GettingStarted());
-        menu.add(getMenu_Troubleshooting());
         menu.add(getMenuItem_KeyboardShortcuts());
+        menu.addSeparator();
+        menu.add(getMenuItem_OpenLogFile());
+        menu.add(getMenuItem_OpenLogFileDirectory());
+        menu.add(getMenuItem_ExportLogs());
         menu.addSeparator();
         menu.add(getMenuItem_ReleaseNotes());
         menu.add(getMenuItem_License());
@@ -52,13 +56,6 @@ public final class HelpMenu {
                     "Version : " + BuildInfo.getVersionString(),
                     localizer.getMessage("lblAboutForge"));
         };
-    }
-
-    private static JMenu getMenu_Troubleshooting() {
-        final Localizer localizer = Localizer.getInstance();
-        JMenu mnu = new JMenu(localizer.getMessage("lblTroubleshooting"));
-        mnu.add(getMenuItem_OpenLogFile());
-        return mnu;
     }
 
     private static JMenu getMenu_GettingStarted() {
@@ -89,6 +86,38 @@ public final class HelpMenu {
         JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblOpenLogFile"));
         menuItem.addActionListener(getOpenFileAction(ExceptionHandler.getActiveLogFile()));
         return menuItem;
+    }
+
+    private static JMenuItem getMenuItem_OpenLogFileDirectory() {
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblOpenLogFileDirectory"));
+        menuItem.addActionListener(getOpenFileAction(new File(ForgeConstants.LOG_FILE).getParentFile()));
+        return menuItem;
+    }
+
+    private static JMenuItem getMenuItem_ExportLogs() {
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblExportLogs"));
+        menuItem.addActionListener(e -> exportLogs());
+        return menuItem;
+    }
+
+    private static void exportLogs() {
+        final Localizer localizer = Localizer.getInstance();
+        File downloads = new File(System.getProperty("user.home"), "Downloads");
+        if (!downloads.isDirectory()) {
+            downloads = new File(System.getProperty("user.home"));
+        }
+        try {
+            File zipFile = LogExporter.exportLogs(downloads);
+            if (zipFile == null) {
+                FOptionPane.showMessageDialog(localizer.getMessage("lblNoLogFilesFound"), localizer.getMessage("lblExportLogs"));
+                return;
+            }
+            FOptionPane.showMessageDialog(localizer.getMessage("lblSuccess") + "\n" + zipFile.getAbsolutePath(), localizer.getMessage("lblExportLogs"));
+        } catch (IOException ex) {
+            FOptionPane.showMessageDialog(ex.toString(), localizer.getMessage("lblError"));
+        }
     }
 
     private static JMenuItem getMenuItem_License() {

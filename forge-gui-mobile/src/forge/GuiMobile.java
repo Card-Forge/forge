@@ -211,10 +211,15 @@ public class GuiMobile implements IGuiBase {
     @Override
     public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices) {
-        return new WaitCallback<List<T>>() {
+        return order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, false).ordered();
+    }
+
+    public <T> IGuiGame.OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final boolean showRememberCheckbox) {
+        return new WaitCallback<IGuiGame.OrderResult<T>>() {
             @Override
             public void run() {
-                GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, null, this);
+                GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, null, showRememberCheckbox, this);
             }
         }.invokeAndWait();
     }
@@ -289,11 +294,6 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void refreshSkin() {
-        //todo refresh skin selector
-    }
-
-    @Override
     public void copyToClipboard(final String text) {
         Forge.getClipboard().setContents(text);
     }
@@ -341,6 +341,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public IGuiGame getNewGuiGame() {
+        MatchController.instance.resetForNewMatch();
         return MatchController.instance;
     }
 

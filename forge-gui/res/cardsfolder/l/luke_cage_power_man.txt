@@ -1,0 +1,7 @@
+Name:Luke Cage, Power Man
+ManaCost:3 W
+Types:Legendary Creature Human Hero
+PT:2/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Unbreakable Skin — Whenever NICKNAME attacks alone, he gets +2/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy him.)
+SVar:TrigPump:DB$ Pump | NumAtt$ +2 | KW$ Indestructible
+Oracle:Unbreakable Skin — Whenever Luke Cage attacks alone, he gets +2/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy him.)

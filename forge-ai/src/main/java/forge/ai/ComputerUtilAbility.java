@@ -229,7 +229,7 @@ public class ComputerUtilAbility {
     public static boolean isFullyTargetable(SpellAbility sa) {
         SpellAbility sub = sa;
         while (sub != null) {
-            if (sub.usesTargeting() && sub.getTargetRestrictions().getNumCandidates(sub, true) < sub.getMinTargets()) {
+            if (sub.usesTargeting() && sub.getTargetRestrictions().getNumCandidates(sub) < sub.getMinTargets()) {
                 return false;
             }
             sub = sub.getSubAbility();
@@ -433,6 +433,11 @@ public class ComputerUtilAbility {
             // try to cast mana ritual spells before casting spells to maximize potential mana
             if ("ManaRitual".equals(sa.getParam("AILogic"))) {
                 p += 9;
+            }
+
+            if ((sa.isPlotting() || sa.isForetelling() || sa.isKeyword(Keyword.SUSPEND)) && ai.getTurn() > 10) {
+                // less time in late game, prefer something that affects board right away
+                p -= 1;
             }
 
             return p;

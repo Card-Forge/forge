@@ -41,27 +41,31 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static char NameSetSeparator = '|';
     public final static String FlagPrefix = "#";
     public static final String FlagSeparator = "\t";
+    public static final Comparator<CardRules> CARD_RULES_NAME_COMPARATOR = Comparator.comparing(CardRules::getPreInitName, String.CASE_INSENSITIVE_ORDER);
 
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
-    private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
-    private final Map<String, CardRules> rulesByName;
+    private final Map<String, CardRules> rulesByPrimaryName;
+    private final Map<String, CardRules> rulesByAltName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
+    private final ListMultimap<CardRules, PaperCard> allCardsByRules = Multimaps.newListMultimap(new TreeMap<>(CARD_RULES_NAME_COMPARATOR), Lists::newArrayList);
+    private final Map<CardRules, PaperCard> uniqueCardsByRules = Maps.newTreeMap(CARD_RULES_NAME_COMPARATOR);
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, String> normalizedNames = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
-    private static Map<String, String> artPrefs = Maps.newHashMap();
+    private static final Map<String, String> artPrefs = Maps.newHashMap();
     /**
      * Map of flavor names to the identifier of the functional variant on which they appear in their respective card rules.
      */
     private final Map<String, String> flavorNameMappings = Maps.newHashMap();
+    private final Map<String, PaperCard> uniqueCardsByFlavorName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
 
     private final Map<String, Integer> artIds = Maps.newHashMap();
 
     private final CardEdition.Collection editions;
     private final Set<String> filtered;
 
-    private Map<String, Boolean> nonLegendaryCreatureNames = Maps.newHashMap();
+    private final Map<String, Boolean> nonLegendaryCreatureNames = Maps.newHashMap();
 
-    public enum CardArtPreference {
+    public enum CardArtPreference implements Comparator<CardEdition> {
         LATEST_ART_ALL_EDITIONS(false, true),
         LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY(true, true),
         ORIGINAL_ART_ALL_EDITIONS(false, false),
@@ -81,6 +85,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (ed == null) return false;
             return !filterSets || ALLOWED_SET_TYPES.contains(ed.getType());
         }
+
+        @Override
+        public int compare(CardEdition o1, CardEdition o2) {
+            if (o1 == o2)
+                return 0;
+            if(filterSets && (ALLOWED_SET_TYPES.contains(o1.getType()) != ALLOWED_SET_TYPES.contains(o2.getType())))
+                return ALLOWED_SET_TYPES.contains(o1.getType()) ? -1 : 1;
+            return (latestFirst ? -1 : 1) * o1.getDate().compareTo(o2.getDate());
+        }
     }
 
     // Placeholder to setup default art Preference - to be moved from Static Data!
@@ -93,10 +106,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         public boolean isFoil;
         public String collectorNumber;
         public Map<String, String> flags;
-
-        private CardRequest(String name, String edition, int artIndex, boolean isFoil, String collectorNumber) {
-            this(name, edition, artIndex, isFoil, collectorNumber, null);
-        }
 
         private CardRequest(String name, String edition, int artIndex, boolean isFoil, String collectorNumber, Map<String, String> flags) {
             cardName = name;
@@ -295,12 +304,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, Set<String> filteredCards) {
         this.filtered = filteredCards;
-        this.rulesByName = rules;
+        this.rulesByPrimaryName = rules;
         this.editions = editions0;
 
-        //Collects additional mappings used for flavor names
-        //Need an extra map for these to avoid ConcurrentModificationException
-        Map<String, CardRules> extraRuleMappings = new HashMap<>();
         List<CardRules> needsPlaceholderFaces = new ArrayList<>();
 
         // create faces list from rules
@@ -313,10 +319,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (filteredCards.contains(rule.getPreInitName()))
                 continue;
             for (ICardFace face : rule.getAllFaces()) {
-                addFaceToDbNames(face);
+                addFaceToDbNames(face, rule);
             }
             if (rule.hasFunctionalVariants()) {
-                cacheFlavorNames(rule, extraRuleMappings);
+                cacheRuleFlavorNames(rule);
             }
         }
 
@@ -324,16 +330,17 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for(CardRules rule : needsPlaceholderFaces) {
             rule.supplyPlaceholderFaces(this.facesByName);
         }
-
-        rulesByName.putAll(extraRuleMappings);
     }
 
-    private void addFaceToDbNames(ICardFace face) {
+    private void addFaceToDbNames(ICardFace face, CardRules rules) {
         if (face == null) {
             return;
         }
         final String name = face.getName();
         facesByName.put(name, face);
+        //Stash names of alternate faces for loose name-to-rules lookups. Technically ambiguous; first come, first served.
+        if (!rulesByPrimaryName.containsKey(name))
+            rulesByAltName.putIfAbsent(name, rules);
         final String normalName = StringUtils.stripAccents(name);
         if (!normalName.equals(name)) {
             normalizedNames.put(normalName, name);
@@ -341,13 +348,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         if (face.hasFunctionalVariants()) {
             for (ICardFace varFace : face.getFunctionalVariants().values())
-                cacheFlavorName(varFace);
+                cacheFaceFlavorName(varFace);
         }
         if (face.getFlavorName() != null) //Probably shouldn't be putting a flavor name on the main print?
-            cacheFlavorName(face);
+            cacheFaceFlavorName(face);
     }
 
-    private void cacheFlavorName(ICardFace face) {
+    private void cacheFaceFlavorName(ICardFace face) {
         String altName = face.getFlavorName();
         if(altName == null)
             return;
@@ -358,7 +365,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    private void cacheFlavorNames(CardRules rules, Map<String, CardRules> map) {
+    private void cacheRuleFlavorNames(CardRules rules) {
         if (rules.getSupportedFunctionalVariants() == null)
             return;
         boolean hasFlavorName = false;
@@ -368,7 +375,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (baseName.equals(name))
                 continue;
             hasFlavorName = true;
-            map.put(name, rules);
+            rulesByAltName.put(name, rules);
             flavorNameMappings.put(name, variantName);
         }
         if (hasFlavorName)
@@ -401,10 +408,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if(!flavorNameMappings.containsKey(normalizedFlavorName)) {
                 flavorNameMappings.put(normalizedFlavorName, variantName);
                 flavorNameMappings.put(cr.getName(), IPaperCard.NO_FUNCTIONAL_VARIANT);
-                rulesByName.put(normalizedFlavorName, cr);
-                cacheFlavorName(cr.getMainPart().getFunctionalVariant(variantName));
+                rulesByAltName.put(normalizedFlavorName, cr);
+                cacheFaceFlavorName(cr.getMainPart().getFunctionalVariant(variantName));
                 if(cr.getOtherPart() != null)
-                    cacheFlavorName(cr.getOtherPart().getFunctionalVariant(variantName));
+                    cacheFaceFlavorName(cr.getOtherPart().getFunctionalVariant(variantName));
             }
         }
 
@@ -438,7 +445,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 return;
             }
         }
-        rulesByName.putIfAbsent(cardName, cr);
         boolean reIndexNecessary = false;
         CardEdition ed = editions.get(setCode);
         if (ed == null || ed.equals(CardEdition.UNKNOWN)) {
@@ -450,8 +456,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             reIndexNecessary |= addFromSetByName(cardName, ed, cr);
         }
 
-        if (reIndexNecessary)
+        if (reIndexNecessary) {
+            rulesByPrimaryName.putIfAbsent(cardName, cr); //TODO: Cache alt names here too.
             reIndex();
+        }
     }
 
     public void initialize(boolean logMissingPerEdition, boolean logMissingSummary, boolean enableUnknownCards) {
@@ -471,7 +479,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             }
 
             for (CardEdition.EditionEntry cis : e.getAllCardsInSet()) {
-                CardRules cr = rulesByName.get(cis.name());
+                CardRules cr = rulesByPrimaryName.get(cis.name());
+                if (cr == null)
+                    cr = rulesByAltName.get(cis.name()); //Entry written using a flavor name
                 if (cr == null) {
                     missingCards.add(cis.name());
                     continue;
@@ -510,7 +520,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             System.err.println("Upcoming set " + upcomingSet + " dated in the future. All `upcoming` cards will be added to this set with unknown rarity.");
         }
 
-        for (CardRules cr : rulesByName.values()) {
+        for (CardRules cr : rulesByPrimaryName.values()) {
             if (!contains(cr.getName())) {
                 if (!cr.isCustom()) {
                     if (upcomingSet != null && cr.getPath() != null && cr.getPath().contains("upcoming/")) {
@@ -538,6 +548,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         allCardsByName.put(mainName, paperCard);
 
         CardRules rules = paperCard.getRules();
+        allCardsByRules.put(rules, paperCard);
         if (rules.getSplitType() == CardSplitType.None && !rules.hasFunctionalVariants()) {
             return;
         }
@@ -554,24 +565,27 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     private void reIndex() {
-        uniqueCardsByName.clear();
-        for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
-            PaperCard pc = getFirstNonSpeicalWithImage(kv.getValue());
-            uniqueCardsByName.put(kv.getKey(), pc);
+        uniqueCardsByRules.clear();
+        uniqueCardsByFlavorName.clear();
+        for (Entry<CardRules, Collection<PaperCard>> kv : allCardsByRules.asMap().entrySet()) {
+            PaperCard pc = getBestUniquePrint(kv.getValue());
+            uniqueCardsByRules.put(kv.getKey(), pc);
+        }
+        for (Entry<String, String> kv : flavorNameMappings.entrySet()) {
+            if (kv.getValue().equals(IPaperCard.NO_FUNCTIONAL_VARIANT))
+                continue;
+            String flavorName = kv.getKey();
+            PaperCard pc = getBestUniquePrint(allCardsByName.get(flavorName));
+            uniqueCardsByFlavorName.put(flavorName, pc);
         }
     }
 
-    private static PaperCard getFirstNonSpeicalWithImage(final Collection<PaperCard> cards) {
-        //NOTE: this is written this way to avoid checking final card in list
-        final Iterator<PaperCard> iterator = cards.iterator();
-        PaperCard pc = iterator.next();
-        while (iterator.hasNext()) {
-            if (pc.hasImage() && !pc.getRarity().equals(CardRarity.Special)) {
-                return pc;
-            }
-            pc = iterator.next();
-        }
-        return pc;
+    private PaperCard getBestUniquePrint(final Collection<PaperCard> cards) {
+        return cards.stream()
+                .filter(pc -> !pc.getRarity().equals(CardRarity.Special))
+                .min(Comparator.comparing((PaperCard pc) -> editions.get(pc.getEdition()), defaultCardArtPreference)
+                        .thenComparing(PaperCard::getCollectorNumber))
+                .orElseGet(() -> cards.iterator().next());
     }
 
     public boolean setPreferredArt(String cardName, String setCode, int artIndex) {
@@ -579,7 +593,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         PaperCard pc = this.getCard(cardRequestForPreferredArt);
         if (pc != null) {
             artPrefs.put(cardName, cardRequestForPreferredArt);
-            uniqueCardsByName.put(cardName, pc);
+            uniqueCardsByRules.put(pc.getRules(), pc);
             return true;
         }
         return false;
@@ -589,11 +603,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return artPrefs.getOrDefault(cardName, null) != null;
     }
 
-    public CardRules getRules(String cardName) {
-        CardRules result = rulesByName.get(cardName);
-        return Objects.requireNonNullElseGet(result, () -> CardRules.getUnsupportedCardNamed(cardName));
-    }
-
+    @Override
     public CardArtPreference getCardArtPreference(){ return this.defaultCardArtPreference; }
     public void setCardArtPreference(boolean latestArt, boolean coreExpansionOnly){
         if (coreExpansionOnly){
@@ -603,7 +613,33 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    public void setCardArtPreference(String artPreference){
+    /**
+     * Retrieves a CardRules matching the provided name. 
+     * @param allowAltNames If false, the name must be the exact name of the card in its default state. If true, flavor 
+     *                      names and alternate face names can be used, though an exact match will be preferred.
+     * @see #getAllCards(String) 
+     * @see #getAllCardsNoAlt(String) 
+     */
+    public CardRules getRules(String cardName, boolean allowAltNames) {
+        cardName = getNormalizedName(cardName);
+        CardRules result = rulesByPrimaryName.get(cardName);
+        if (result != null)
+            return result;
+        if (allowAltNames) {
+            result = rulesByAltName.get(cardName);
+            return result;
+        }
+        return null;
+    }
+
+    public CardRules getRulesOrElseUnsupported(String cardName) {
+        CardRules rules = getRules(cardName, false);
+        if (rules == null)
+            return CardRules.getUnsupportedCardNamed(cardName);
+        return rules;
+    }
+
+    public void setCardArtPreference(String artPreference) {
         artPreference = artPreference.toLowerCase().trim();
         boolean isLatest = artPreference.contains("latest");
         // additional check in case of unrecognised values wrt. to legacy opts
@@ -612,7 +648,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         boolean hasFilter = artPreference.contains("core");
         this.setCardArtPreference(isLatest, hasFilter);
     }
-
 
     /*
      * ======================
@@ -701,21 +736,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      * Therefore, the single Edition request can be overruled if no image is found
      * for the corresponding requested edition.
      */
-    @Override
-    public PaperCard getCardFromSet(String cardName, CardEdition edition, boolean isFoil) {
-        return getCardFromSet(cardName, edition, IPaperCard.NO_ART_INDEX,
-                IPaperCard.NO_COLLECTOR_NUMBER, isFoil);
-    }
-
-    @Override
-    public PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, boolean isFoil) {
-        return getCardFromSet(cardName, edition, artIndex, IPaperCard.NO_COLLECTOR_NUMBER, isFoil);
-    }
-
-    @Override
-    public PaperCard getCardFromSet(String cardName, CardEdition edition, String collectorNumber, boolean isFoil) {
-        return getCardFromSet(cardName, edition, IPaperCard.NO_ART_INDEX, collectorNumber, isFoil);
-    }
 
     @Override
     public PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, String collectorNumber, boolean isFoil) {
@@ -739,11 +759,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             filter = filter.and((c) -> collectorNumber.equals(c.getCollectorNumber()));
 
         List<PaperCard> candidates = getAllCards(cardName, filter);
-        // Weird quirk here. If a set contains both "Ancestral Recall" and "Emeritus of Ideation // Ancestral Recall", a
-        // card request for Ancestral Recall with no collector number could find either. Could use getAllCardsNoAlt, but
-        // then a request for "Fire" wouldn't find "Fire // Ice".
         if (candidates.isEmpty())
             return null;
+
+        if (candidates.stream().map(PaperCard::getRules).distinct().count() > 1)
+        {
+            //We've run into either an ambiguous alt-face or an Emeritus situation. Can't do anything for the former,
+            //but we can bias towards the main face if it's the latter.
+            String finalCardName = cardName;
+            if (candidates.stream().map(PaperCard::getName).anyMatch(n -> n.equalsIgnoreCase(finalCardName))) {
+                candidates.removeIf(c -> !c.getName().equalsIgnoreCase(finalCardName));
+            }
+        }
 
         Iterator<PaperCard> candidatesIterator = candidates.iterator();
         PaperCard candidate = candidatesIterator.next();
@@ -764,35 +791,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      * ====================================================
      */
 
-    /* Get Card from Edition using the default `CardArtPreference`
-    NOTE: this method has NOT been included in the Interface API refactoring as it
-    relies on a specific (new) attribute included in the `CardDB` that sets the
-    default `ArtPreference`. This attribute does not necessarily belongs to any
-    class implementing ICardInterface, and so the not inclusion in the API
-     */
-    public PaperCard getCardFromEditions(final String cardName) {
-        return this.getCardFromEditions(cardName, this.defaultCardArtPreference);
-    }
-
-    public PaperCard getCardFromEditions(final String cardName, Predicate<PaperCard> filter) {
-        return this.getCardFromEditions(cardName, this.defaultCardArtPreference, filter);
-    }
-
-    @Override
-    public PaperCard getCardFromEditions(final String cardName, CardArtPreference artPreference) {
-        return getCardFromEditions(cardName, artPreference, IPaperCard.NO_ART_INDEX);
-    }
-
-    @Override
-    public PaperCard getCardFromEditions(final String cardName, CardArtPreference artPreference, Predicate<PaperCard> filter) {
-        return getCardFromEditions(cardName, artPreference, IPaperCard.NO_ART_INDEX, filter);
-    }
-
-    @Override
-    public PaperCard getCardFromEditions(final String cardInfo, final CardArtPreference artPreference, int artIndex) {
-        return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex, null);
-    }
-
     @Override
     public PaperCard getCardFromEditions(final String cardInfo, final CardArtPreference artPreference, int artIndex, Predicate<PaperCard> filter) {
         return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex, filter);
@@ -805,59 +803,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      * ===============================================
      */
 
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, Date releaseDate){
-        return this.getCardFromEditionsReleasedBefore(cardName, this.defaultCardArtPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
-    }
-
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, int artIndex, Date releaseDate){
-        return this.getCardFromEditionsReleasedBefore(cardName, this.defaultCardArtPreference, artIndex, releaseDate);
-    }
-
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, Date releaseDate, Predicate<PaperCard> filter){
-        return this.getCardFromEditionsReleasedBefore(cardName, this.defaultCardArtPreference, releaseDate, filter);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate){
-        return this.getCardFromEditionsReleasedBefore(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter){
-        return this.getCardFromEditionsReleasedBefore(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate, filter);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate){
-        return this.tryToGetCardFromEditions(cardName, artPreference, artIndex, releaseDate, true, null);
-    }
-
     @Override
     public PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate, Predicate<PaperCard> filter){
         return this.tryToGetCardFromEditions(cardName, artPreference, artIndex, releaseDate, true, filter);
-    }
-
-    public PaperCard getCardFromEditionsReleasedAfter(String cardName, Date releaseDate){
-        return this.getCardFromEditionsReleasedAfter(cardName, this.defaultCardArtPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
-    }
-
-    public PaperCard getCardFromEditionsReleasedAfter(String cardName, int artIndex, Date releaseDate){
-        return this.getCardFromEditionsReleasedAfter(cardName, this.defaultCardArtPreference, artIndex, releaseDate);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate){
-        return this.getCardFromEditionsReleasedAfter(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter){
-        return this.getCardFromEditionsReleasedAfter(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate, filter);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate){
-        return this.tryToGetCardFromEditions(cardName, artPreference, artIndex, releaseDate, false, null);
     }
 
     @Override
@@ -995,36 +943,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return cardsInSet.size();
     }
 
-    // returns a list of all cards from their respective latest (or preferred) editions
-    @Override
-    public Collection<PaperCard> getUniqueCards() {
-        return uniqueCardsByName.values();
-    }
-
-    public Collection<PaperCard> getUniqueCardsNoAlt() {
-        return Maps.filterEntries(this.uniqueCardsByName, e -> {
-            if (e == null)
-                return false;
-            return e.getKey().equals(e.getValue().getName());
-        }).values();
-    }
-
-    public List<PaperCard> getUniqueCardsNoAlt(String cardName) {
-        return Lists.newArrayList(Maps.filterEntries(uniqueCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getNormalizedName(cardName)));
-    }
-
-    public PaperCard getUniqueByName(final String name) {
-        return uniqueCardsByName.get(getNormalizedName(name));
-    }
-
-    public Collection<ICardFace> getAllFaces() {
-        return facesByName.values();
-    }
-
-    public ICardFace getFaceByName(final String name) {
-        return facesByName.get(getNormalizedName(name));
-    }
-
     public boolean isNonLegendaryCreatureName(final String name) {
         Boolean bool = nonLegendaryCreatureNames.get(name);
         if (bool != null) {
@@ -1047,28 +965,28 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public Collection<PaperCard> getAllCards() {
-        return Collections.unmodifiableCollection(allCardsByName.values());
+        return Collections.unmodifiableCollection(allCardsByRules.values());
     }
 
-    public Collection<PaperCard> getAllCardsNoAlt() {
-        return Multimaps.filterEntries(allCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).values();
+    // returns a list of all cards from their respective latest (or preferred) editions
+    @Override
+    public Collection<PaperCard> getUniqueCards() {
+        return uniqueCardsByRules.values();
+    }
+    @Override
+    public Collection<ICardFace> getAllFaces() {
+        return facesByName.values();
     }
 
     @Override
     public Stream<PaperCard> streamAllCards() {
-        return allCardsByName.values().stream();
+        return allCardsByRules.values().stream();
     }
     @Override
     public Stream<PaperCard> streamUniqueCards() {
-        return uniqueCardsByName.values().stream();
+        return uniqueCardsByRules.values().stream();
     }
-    public Stream<PaperCard> streamAllCardsNoAlt() {
-        return allCardsByName.entries().stream().filter(e -> e.getKey().equals(e.getValue().getName())).map(Entry::getValue);
-    }
-    public Stream<PaperCard> streamUniqueCardsNoAlt() {
-        return uniqueCardsByName.entrySet().stream().filter(e -> e.getKey().equals(e.getValue().getName())).map(Entry::getValue);
-    }
-
+    @Override
     public Stream<ICardFace> streamAllFaces() {
         return facesByName.values().stream();
     }
@@ -1090,7 +1008,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     };
 
     public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
-        return streamAllCardsNoAlt().filter(EDITION_NON_REPRINT).collect(Collectors.toList());
+        return streamAllCards().filter(EDITION_NON_REPRINT).collect(Collectors.toList());
     }
 
     public String getNormalizedName(final String cardName) {
@@ -1123,13 +1041,24 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      *     <li>"Ironfang" (Transformed card back face) will return nothing.</li>
      *     <li>"Ancestral Recall" will only return printings of "Ancestral Recall", not "Emeritus of Ideation".</li>
      *     <li>"Fire" will return nothing. You must specify "Fire // Ice" or "Start // Fire".</li>
-     *     <li>"Spongebob Squarepants" will return nothing.</li>
-     *     <li>"Jodah, the Unifier" will return all Jodah printings, including "Spongebob Squarepants".</li>
+     *     <li>"SpongeBob SquarePants" will return nothing.</li>
+     *     <li>"Jodah, the Unifier" will return all Jodah printings, including "SpongeBob SquarePants".</li>
      * </ul>
      * @see #getAllCards(String)
      */
-    public List<PaperCard> getAllCardsNoAlt(String cardName) {
-        return Lists.newArrayList(Multimaps.filterEntries(allCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getNormalizedName(cardName)));
+    public List<PaperCard> getAllCardsNoAlt(String rulesName) {
+        CardRules rules = getRules(rulesName, false);
+        if(rules == null)
+            return List.of();
+        return allCardsByRules.get(rules);
+    }
+
+    public List<PaperCard> getAllCards(CardRules rules) {
+        return allCardsByRules.get(rules);
+    }
+
+    public List<PaperCard> getAllCards(PaperCard card) {
+        return getAllCards(card.getRules());
     }
 
     /**
@@ -1145,15 +1074,17 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return getAllCards(cardName).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /**
-     * Returns a modifiable list of cards matching the given predicate
-     */
-    public List<PaperCard> getAllCardsNoAlt(Predicate<PaperCard> predicate) {
-        return streamAllCardsNoAlt().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
+    public List<PaperCard> getAllCards(PaperCard card, Predicate<PaperCard> predicate){
+        return getAllCards(card).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public List<PaperCard> getAllCardsNoAlt(final String cardName, Predicate<PaperCard> predicate){
-        return getAllCardsNoAlt(cardName).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
+    public List<PaperCard> getAllCards(CardRules card, Predicate<PaperCard> predicate){
+        return getAllCards(card).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    @Override
+    public List<PaperCard> getAllCardsNoAlt(final String rulesName, Predicate<PaperCard> predicate){
+        return getAllCardsNoAlt(rulesName).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
     // Do I want a foiled version of these cards?
@@ -1174,6 +1105,29 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     @Override
+    public PaperCard getUniqueByName(String cardName) {
+        if (uniqueCardsByFlavorName.containsKey(cardName))
+            return uniqueCardsByFlavorName.get(cardName);
+        CardRules rules = getRules(cardName, true);
+        if(rules == null)
+            return null;
+        return uniqueCardsByRules.get(rules);
+    }
+
+    @Override
+    public PaperCard getUniqueByNameNoAlt(String rulesName) {
+        CardRules rules = getRules(rulesName, false);
+        if(rules == null)
+            return null;
+        return uniqueCardsByRules.get(rules);
+    }
+
+    @Override
+    public ICardFace getFaceByName(String faceName) {
+        return facesByName.get(getNormalizedName(faceName));
+    }
+
+    @Override
     public boolean contains(String name) {
         return allCardsByName.containsKey(getNormalizedName(name));
     }
@@ -1186,7 +1140,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public Predicate<? super PaperCard> wasPrintedInSets(Collection<String> setCodes) {
         Set<String> sets = new HashSet<>(setCodes);
-        return paperCard -> getAllCardsNoAlt(paperCard.getName()).stream()
+        return paperCard -> getAllCards(paperCard).stream()
                 .map(PaperCard::getEdition).anyMatch(editionCode ->
                     sets.contains(editionCode) &&
                         StaticData.instance().getCardEdition(editionCode).isCardObtainable(paperCard.getName())
@@ -1203,7 +1157,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     // This Predicate validates if a card was printed at [rarity], on any of its printings
     @Override
     public Predicate<? super PaperCard> wasPrintedAtRarity(CardRarity rarity) {
-        return paperCard -> getAllCardsNoAlt(paperCard.getName()).stream()
+        return paperCard -> getAllCards(paperCard).stream()
                 .map(PaperCard::getRarity)
                 .anyMatch(rarity::equals);
     }
@@ -1268,13 +1222,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             // works similarly to Map<K,V>, returning prev. value
             String cardName = rules.getName();
 
-            CardRules result = rulesByName.get(cardName);
+            CardRules result = rulesByPrimaryName.get(cardName);
             if (result != null && result.getName().equals(cardName)) { // change properties only
                 result.reinitializeFromRules(rules);
                 return result;
             }
 
-            result = rulesByName.put(cardName, rules);
+            result = rulesByPrimaryName.put(cardName, rules);
 
             // 1. generate all paper cards from edition data we have (either explicit, or found in res/editions, or add to unknown edition)
             List<PaperCard> paperCards = new ArrayList<>();

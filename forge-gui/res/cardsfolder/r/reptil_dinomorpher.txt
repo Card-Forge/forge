@@ -1,0 +1,7 @@
+Name:Reptil, Dinomorpher
+ManaCost:G
+Types:Legendary Creature Human Hero
+PT:1/2
+A:AB$ Animate | PrecostDesc$ Brontosaurus — | Cost$ 3 | Types$ Dinosaur,Hero | RemoveCreatureTypes$ True | Power$ 3 | Toughness$ 5 | Keywords$ Vigilance & Reach | SpellDescription$ Until end of turn, NICKNAME becomes a Dinosaur Hero with base power and toughness 3/5 and gains vigilance and reach.
+A:AB$ Animate | PrecostDesc$ Tyrannosaurus Rex — | Cost$ 6 | Types$ Dinosaur,Hero | RemoveCreatureTypes$ True | Power$ 6 | Toughness$ 6 | Keywords$ Trample | SpellDescription$ Until end of turn, NICKNAME becomes a Dinosaur Hero with base power and toughness 6/6 and gains trample.
+Oracle:Brontosaurus — {3}: Until end of turn, Reptil becomes a Dinosaur Hero with base power and toughness 3/5 and gains vigilance and reach.\nTyrannosaurus Rex — {6}: Until end of turn, Reptil becomes a Dinosaur Hero with base power and toughness 6/6 and gains trample.

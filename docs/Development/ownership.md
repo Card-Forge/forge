@@ -7,6 +7,7 @@ Please also try to check back a bit after your PR gets merged in case it causes 
 | - | - | - | - |
 | PC Releases | friarsol | Agetian | - update Maven dependencies<br>- maintain CI files |
 | Android Releases | | kevlahnota | |
+| iOS Releases | | | |
 | Sentry | JaminCollins | | - watch trends for rare/unusual crashes |
 
 ## Ingame Engine
@@ -27,7 +28,7 @@ Please also try to check back a bit after your PR gets merged in case it causes 
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
 | Desktop | | | - performance profiling |
-| Android | | DrDev, kevlahnota | - test new libGDX versions |
+| Mobile | | DrDev, kevlahnota | - test new libGDX versions |
 | Localization | | Alumi | - update card translation files<br>- update engine text (native speaker not required) |
 | Sound effects | | | |
 

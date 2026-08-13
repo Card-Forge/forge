@@ -1,0 +1,11 @@
+Name:Titanbones, Towering Heart
+ManaCost:3 G
+Types:Legendary Creature Skeleton Druid
+PT:4/3
+K:Reach
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put two +1/+1 counters on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+T:Mode$ Discarded | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerController$ TriggeredCardController | TriggerDescription$ When you discard this card, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHints:Ability$LifeGain
+Oracle:Reach\nWhenever you gain life, put two +1/+1 counters on Titanbones.\nWhen you discard this card, you gain 3 life.

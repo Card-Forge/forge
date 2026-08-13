@@ -25,6 +25,7 @@ import forge.util.MultiplexOutputStream;
 
 import java.io.*;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
@@ -72,10 +73,47 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
     }
 
     /**
+     * Copy the current contents of this JVM's active log file to dest. The active log is held under an
+     * exclusive lock for the process lifetime; on Windows that lock is mandatory, so the file can't be
+     * read through a separate handle. Reading it through the owning channel is the only way to snapshot
+     * it while Forge is running.
+     * @return true if a snapshot was written, false if no log is active
+     */
+    public static boolean snapshotActiveLog(File dest) throws IOException {
+        if (logChannel == null) {
+            return false;
+        }
+        long size = logChannel.size();
+        try (FileOutputStream out = new FileOutputStream(dest)) {
+            ByteBuffer buffer = ByteBuffer.allocate(8192);
+            long position = 0;
+            while (position < size) {
+                buffer.clear();
+                int read = logChannel.read(buffer, position);
+                if (read <= 0) {
+                    break;
+                }
+                out.write(buffer.array(), 0, read);
+                position += read;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Call this at the beginning to make sure that the class is loaded and the
      * static initializer has run.
      */
     public static void registerErrorHandling() {
+        if (logChannel != null) {
+            // Already holding our slot lock in this JVM (e.g. Forge.create() re-entered
+            // after Android recreates the GL surface/context). Re-running the logic below
+            // would tryLock() our own activeLogFile via a second channel, which throws
+            // OverlappingFileLockException (not an IOException, so it wouldn't be caught
+            // by the archive-probe loop) and would also claim a second log slot.
+            return;
+        }
+
         File parent = new File(ForgeConstants.LOG_FILE).getParentFile();
         parent.mkdirs();
 
@@ -107,7 +145,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
             File slot = slotFile(parent, n);
             try {
                 FileChannel ch = FileChannel.open(slot.toPath(),
-                        StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
+                        StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE, StandardOpenOption.READ);
                 FileLock lock = ch.tryLock();
                 if (lock != null) {
                     logChannel = ch;

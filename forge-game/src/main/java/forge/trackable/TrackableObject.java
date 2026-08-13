@@ -8,8 +8,25 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import forge.game.IIdentifiable;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardView;
 
-//base class for objects that can be tracked and synced between game server and GUI
+/**
+ * Base for objects that mirror engine state into a serialized view consumed by GUI(s).
+ * Each subclass exposes its mutable state as {@link TrackableProperty} entries; the engine
+ * writes via {@link #set} and consumers (GUIs) read via {@link #get}.
+ *
+ * <p><b>Consumer dirty bits.</b> Each GUI client that uses delta-sync registers as a
+ * consumer; the object keeps a per-consumer set of properties dirty since the consumer's
+ * last drain. {@link forge.gamemodes.net.server.DeltaSyncManager#collectDeltas} reads and
+ * clears them. Offline games never register consumers, so {@code set} does no tracking work.
+ *
+ * <p><b>Freeze interaction.</b> When the owning {@link Tracker} is frozen, {@code set}
+ * queues the change rather than applying it; the queued change replays at unfreeze. Do not
+ * read a property during a frozen window expecting a freshly-set value — {@code get}
+ * returns the pre-freeze value, not the queued one.
+ */
 public abstract class TrackableObject implements IIdentifiable, Serializable {
     private static final long serialVersionUID = 7386836745378571056L;
 
@@ -18,7 +35,6 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     private final Map<TrackableProperty, Object> props;
     private int version;
     // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer.
-    // In offline games (no consumers), set() does no tracking work at all.
     private transient Map<Integer, EnumSet<TrackableProperty>> consumers;
     private boolean copyingProps;
 
@@ -121,7 +137,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         if (copyingProps) { return; } //prevent infinite loop from circular reference
         copyingProps = true;
         for (final TrackableProperty prop : from.props.keySet()) {
-            prop.copyChangedProps(from, this);
+            prop.getType().copyChangedProps(from, this, prop);
         }
         // Remove properties that reverted to default on the source.
         // set() removes props that equal their default value, so they won't
@@ -142,6 +158,20 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      */
     public int getVersion() {
         return version;
+    }
+
+    /**
+     * Check whether a consumer is currently registered on this object.
+     * <p>
+     * Used by network serialization to gate IdRef substitution: the server
+     * registers a consumer on every TrackableObject it has included in a
+     * delta packet for a given client. An object without that consumer is
+     * one the client hasn't been told about (typically an ephemeral such as
+     * a {@code Card.fromPaperCard} choice copy that never enters a tracked
+     * zone), and protocol-method args holding it must serialize inline.
+     */
+    public boolean hasConsumer(int consumerId) {
+        return consumers != null && consumers.containsKey(consumerId);
     }
 
     /**
@@ -184,4 +214,127 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         return copy;
     }
 
+    //special methods for updating card and player properties as needed and returning the new collection
+    public Card setCard(Card oldCard, Card newCard, TrackableProperty key) {
+        if (newCard != oldCard) {
+            set(key, CardView.get(newCard));
+        }
+        return newCard;
+    }
+    public CardCollection setCards(CardCollection oldCards, CardCollection newCards, TrackableProperty key) {
+        if (newCards == null || newCards.isEmpty()) { //avoid storing empty collections
+            set(key, null);
+            return null;
+        }
+        set(key, CardView.getCollection(newCards)); //TODO prevent overwriting list if not necessary
+        return newCards;
+    }
+    public CardCollection setCards(CardCollection oldCards, Iterable<Card> newCards, TrackableProperty key) {
+        if (newCards == null) {
+            set(key, null);
+            return null;
+        }
+        return setCards(oldCards, new CardCollection(newCards), key);
+    }
+    public CardCollection addCard(CardCollection oldCards, Card cardToAdd, TrackableProperty key) {
+        if (cardToAdd == null) { return oldCards; }
+
+        if (oldCards == null) {
+            oldCards = new CardCollection();
+        }
+        if (oldCards.add(cardToAdd)) {
+            TrackableCollection<CardView> views = get(key);
+            if (views == null) {
+                views = new TrackableCollection<>();
+                views.add(cardToAdd.getView());
+                set(key, views);
+            }
+            else if (views.add(cardToAdd.getView())) {
+                flagAsChanged(key);
+            }
+        }
+        return oldCards;
+    }
+    public CardCollection addCards(CardCollection oldCards, Iterable<Card> cardsToAdd, TrackableProperty key) {
+        if (cardsToAdd == null) { return oldCards; }
+
+        TrackableCollection<CardView> views = get(key);
+        if (oldCards == null) {
+            oldCards = new CardCollection();
+        }
+        boolean needFlagAsChanged = false;
+        for (Card c : cardsToAdd) {
+            if (c != null && oldCards.add(c)) {
+                if (views == null) {
+                    views = new TrackableCollection<>();
+                    views.add(c.getView());
+                    set(key, views);
+                }
+                else if (views.add(c.getView())) {
+                    needFlagAsChanged = true;
+                }
+            }
+        }
+        if (needFlagAsChanged) {
+            flagAsChanged(key);
+        }
+        return oldCards;
+    }
+    public CardCollection removeCard(CardCollection oldCards, Card cardToRemove, TrackableProperty key) {
+        if (cardToRemove == null || oldCards == null) { return oldCards; }
+
+        if (oldCards.remove(cardToRemove)) {
+            TrackableCollection<CardView> views = get(key);
+            if (views == null) {
+                set(key, null);
+            } else if (views.remove(cardToRemove.getView())) {
+                if (views.isEmpty()) {
+                    set(key, null); //avoid keeping around an empty collection
+                }
+                else {
+                    flagAsChanged(key);
+                }
+            }
+            if (oldCards.isEmpty()) {
+                oldCards = null; //avoid keeping around an empty collection
+            }
+        }
+        return oldCards;
+    }
+    public CardCollection removeCards(CardCollection oldCards, Iterable<Card> cardsToRemove, TrackableProperty key) {
+        if (cardsToRemove == null || oldCards == null) { return oldCards; }
+
+        TrackableCollection<CardView> views = get(key);
+        boolean needFlagAsChanged = false;
+        for (Card c : cardsToRemove) {
+            if (oldCards.remove(c)) {
+                if (views == null) {
+                    set(key, null);
+                } else if (views.remove(c.getView())) {
+                    if (views.isEmpty()) {
+                        views = null;
+                        set(key, null); //avoid keeping around an empty collection
+                        needFlagAsChanged = false; //doesn't need to be flagged a second time
+                    }
+                    else {
+                        needFlagAsChanged = true;
+                    }
+                }
+                if (oldCards.isEmpty()) {
+                    oldCards = null; //avoid keeping around an empty collection
+                    break;
+                }
+            }
+        }
+        if (needFlagAsChanged) {
+            flagAsChanged(key);
+        }
+        return oldCards;
+    }
+    public CardCollection clearCards(CardCollection oldCards, TrackableProperty key) {
+        if (oldCards != null) {
+            set(key, null);
+        }
+        return null;
+    }
 }

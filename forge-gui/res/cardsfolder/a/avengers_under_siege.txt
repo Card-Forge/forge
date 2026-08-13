@@ -1,0 +1,10 @@
+Name:Avengers: Under Siege
+ManaCost:2 B R
+Types:Enchantment Saga
+K:Chapter:3:DBToken,DBDamageAll,DBTreasure
+SVar:DBToken:DB$ Token | TokenScript$ b_2_1_villain_menace | TokenAmount$ 2 | TokenOwner$ You | SpellDescription$ Create two 2/1 black Villain creature tokens with menace.
+SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature.nonVillain | ValidPlayers$ Opponent | ValidDescription$ each non-Villain creature and each opponent | NumDmg$ 2 | SpellDescription$ This Saga deals 2 damage to each non-Villain creature and each opponent.
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ X | TokenOwner$ You | SpellDescription$ Create a Treasure token for each Villain you control.
+SVar:X:Count$Valid Villain.YouCtrl
+DeckHints:Type$Villain
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create two 2/1 black Villain creature tokens with menace.\nII — This Saga deals 2 damage to each non-Villain creature and each opponent.\nIII — Create a Treasure token for each Villain you control.

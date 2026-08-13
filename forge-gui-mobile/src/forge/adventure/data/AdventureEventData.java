@@ -265,7 +265,7 @@ public class AdventureEventData implements Serializable {
                 return false;
             if (!c.hasBoosterTemplate())
                 return false;
-            if(c.getBoosterTemplate().getNumberOfCardsExpected() <= 11)
+            if(c.getBoosterTemplate().getNumberOfCardsExpected() <= 7)
                 return false;
             for (PrintSheet ps : c.getPrintSheetsBySection()) {
                 //exclude block with sets containing P9 cards.

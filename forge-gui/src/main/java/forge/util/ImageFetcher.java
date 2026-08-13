@@ -13,14 +13,79 @@ import forge.model.FModel;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 public abstract class ImageFetcher {
     // see https://scryfall.com/docs/api/languages and
     // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     private static final HashMap<String, String> langCodeMap = new HashMap<>();
     protected static final boolean disableHostedDownload = true;
-    protected static Date scryfallCooldownTime = null;
+    protected static volatile Date scryfallCooldownTime = null;
     private static final HashSet<String> fetching = new HashSet<>();
+
+    /** Minimum gap between Scryfall requests, matching what GuiDownloadService already keeps. */
+    private static final long SCRYFALL_MIN_INTERVAL_MS = 100;
+    private static final long SCRYFALL_COOLDOWN_MINUTES = 5;
+    private static final Object scryfallPacing = new Object();
+    private static long lastScryfallRequest = 0;
+
+    protected static boolean isScryfall(final String url) {
+        return url != null && url.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD);
+    }
+
+    /** Whether we are still backing off after Scryfall rate limited us. Clears an expired cooldown. */
+    protected static boolean scryfallCoolingDown() {
+        final Date cooldown = scryfallCooldownTime;
+        if (cooldown == null) {
+            return false;
+        }
+        if (cooldown.after(new Date())) {
+            return true;
+        }
+        scryfallCooldownTime = null;
+        return false;
+    }
+
+    /**
+     * Whether this particular download should be skipped because we are backing off Scryfall, so
+     * callers can simply skip the fetch while this returns true.
+     */
+    protected static boolean inScryfallCooldown(final String url) {
+        if (!isScryfall(url) || !scryfallCoolingDown()) {
+            return false;
+        }
+        System.err.println("Currently in cooldown period for scryfall downloads. Skipping download attempt for: " + url);
+        return true;
+    }
+
+    /** Record that Scryfall returned 429, so we stop asking for a while. */
+    protected static void noteScryfallRateLimited() {
+        scryfallCooldownTime = new Date(System.currentTimeMillis()
+                + TimeUnit.MINUTES.toMillis(SCRYFALL_COOLDOWN_MINUTES));
+    }
+
+    /**
+     * Space Scryfall requests out. Downloads run on a work stealing pool, so without this a screen
+     * full of missing images asks for all of them at once. Called from the download task, never the
+     * EDT.
+     */
+    protected static void paceScryfall(final String url) {
+        if (!isScryfall(url)) {
+            return;
+        }
+        synchronized (scryfallPacing) {
+            final long wait = lastScryfallRequest + SCRYFALL_MIN_INTERVAL_MS - System.currentTimeMillis();
+            if (wait > 0) {
+                try {
+                    Thread.sleep(wait);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            lastScryfallRequest = System.currentTimeMillis();
+        }
+    }
 
     static {
         langCodeMap.put("en-US", "en");
@@ -50,7 +115,7 @@ public abstract class ImageFetcher {
             // the wrong frame.
             addScryfallUrl(c, face, useArtCrop, downloadUrls);
 
-            List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCardsNoAlt(c.getName());
+            List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(c);
             for (PaperCard pc : clones) {
                 if (c.getEdition().equalsIgnoreCase(pc.getEdition())) {
                     continue;
@@ -107,17 +172,27 @@ public abstract class ImageFetcher {
             final ArrayList<String> downloadUrls = new ArrayList<>();
             final String filename = imageKey.substring(ImageKeys.BOOSTER_PREFIX.length());
             // Look up the download URL from booster-images.txt
-            for (String line : FileUtil.readFile(ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE)) {
-                if (line.endsWith("/" + filename)) {
-                    downloadUrls.add(line);
+            final List<String> boosterFileContent = FileUtil.readFile(ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE);
+
+            for (String line : boosterFileContent) {
+                boolean exactMatch = line.endsWith(filename);
+                boolean filenameHasNoExtension = filename.lastIndexOf('.') == -1;
+                boolean matchesWithExtension = line.matches(".*" + Pattern.quote(filename) + "\\.[^.]+$");
+
+                if (exactMatch || (filenameHasNoExtension && matchesWithExtension)) {
+                    if (line.startsWith("http")) {
+                        downloadUrls.add(line);
+                    } else {
+                        downloadUrls.add(ForgeConstants.GITHUB_ASSETS_BASE + "images/boosters/" + line);
+                    }
                     break;
                 }
             }
+
             if (downloadUrls.isEmpty()) {
                 System.err.println("No booster image URL found for: " + filename);
                 return;
             }
-
 
             FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_BOOSTER_PICS_DIR);
             File destFile = new File(ForgeConstants.CACHE_BOOSTER_PICS_DIR, filename);
@@ -221,7 +296,7 @@ public abstract class ImageFetcher {
                     }
                     downloadUrls.add(setDownload.toString());
                 } else {
-                    List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCardsNoAlt(paperCard.getName());
+                    List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(paperCard);
                     for (PaperCard pc : clones) {
                         if (clones.size() > 1) {//clones only
                             if (!paperCard.getEdition().equalsIgnoreCase(pc.getEdition())) {
@@ -363,7 +438,49 @@ public abstract class ImageFetcher {
         setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
     }
 
+    /**
+     * Fetch the Scryfall art-crop image for a card image key and cache it as the player's deck
+     * sleeve. Forces art_crop regardless of the user's UI_CARD_ART_FORMAT preference and caches
+     * under CACHE_SLEEVE_PICS_DIR keyed by a hash of the image key.
+     */
+    public void fetchSleeveArt(final String sleeveArtKey, final Callback callback) {
+        FThreads.assertExecutedByEdt(true);
+
+        if (sleeveArtKey == null || sleeveArtKey.length() < 2 || !sleeveArtKey.startsWith(ImageKeys.CARD_PREFIX)) {
+            return;
+        }
+        // Not gated on UI_ENABLE_ONLINE_IMAGE_FETCHER: that suppresses passive auto-download of card
+        // art, but choosing a card-art sleeve is an explicit request, so fetch even when it's off
+        final PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(sleeveArtKey);
+        if (paperCard == null || paperCard.getRules().isCustom() || paperCard.getArtist().isEmpty()) {
+            return;
+        }
+        if (paperCard.getCollectorNumber().equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+            return;
+        }
+        final File destFile = new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(sleeveArtKey));
+        if (destFile.exists()) {
+            return;
+        }
+        final ArrayList<String> downloadUrls = new ArrayList<>();
+        final String imagePath = ImageUtil.getImageRelativePath(paperCard, "", true, false);
+        final boolean hasSetLookup = ImageKeys.hasSetLookup(imagePath);
+        getScryfallDownloadURL(paperCard, "", true, hasSetLookup, null, downloadUrls);
+        if (downloadUrls.isEmpty()) {
+            return;
+        }
+        FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_SLEEVE_PICS_DIR);
+        setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
+    }
+
     private void setupObserver(final String destPath, final Callback callback, final ArrayList<String> downloadUrls) {
+        // Skip before registering rather than inside the download task: nothing removes a path from
+        // the in-flight set below, so a fetch registered during the cooldown would never be retried
+        // once the cooldown lifts. Only when every candidate is Scryfall - otherwise another source
+        // may still serve it.
+        if (scryfallCoolingDown() && downloadUrls.stream().allMatch(ImageFetcher::isScryfall)) {
+            return;
+        }
         // Note: No synchronization is needed here because this is executed on
         // EDT thread (see assert on top) and so is the notification of observers.
         HashSet<Callback> observers = currentFetches.get(destPath);

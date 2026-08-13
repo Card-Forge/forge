@@ -1,0 +1,7 @@
+Name:Brave Brawler
+ManaCost:1 W
+Types:Creature Human Warrior Hero
+PT:2/1
+K:Lifelink
+A:AB$ PutCounter | Cost$ 4 W | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | PowerUp$ True | SpellDescription$ Put two +1/+1 counters on this creature. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)
+Oracle:Lifelink\nPower-up — {4}{W}: Put two +1/+1 counters on this creature. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)

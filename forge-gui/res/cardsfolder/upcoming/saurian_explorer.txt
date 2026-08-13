@@ -1,0 +1,9 @@
+Name:Saurian Explorer
+ManaCost:3 G
+Types:Creature Dinosaur Scout
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land you control enters, this creature gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
+A:AB$ Token | Cost$ 6 | TokenScript$ new_planet | TokenOwner$ You | TokenTapped$ True | SorcerySpeed$ True | SpellDescription$ Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color." Activate only as a sorcery.
+SVar:BuffedBy:Land
+Oracle:Landfall — Whenever a land you control enters, this creature gets +2/+2 until end of turn.\n{6}: Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color." Activate only as a sorcery.

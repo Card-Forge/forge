@@ -124,7 +124,7 @@ public class FileSection {
     public String get(final String fieldName) {
         return this.lines.get(fieldName);
     }
-    
+
     public String get(final String fieldName, final String defaultValue) {
         return lines.containsKey(fieldName) ? this.lines.get(fieldName) : defaultValue;
     }
@@ -148,8 +148,6 @@ public class FileSection {
     public int getInt(final String fieldName) {
         return this.getInt(fieldName, 0);
     }
-
-
     public int getInt(final String fieldName, final int defaultValue) {
         try {
             return Integer.parseInt(this.get(fieldName));
@@ -161,7 +159,6 @@ public class FileSection {
     public boolean getBoolean(final String fieldName) {
         return this.getBoolean(fieldName, false);
     }
-
     public boolean getBoolean(final String fieldName, final boolean defaultValue) {
         final String field = this.get(fieldName);
         if (field == null) return defaultValue;

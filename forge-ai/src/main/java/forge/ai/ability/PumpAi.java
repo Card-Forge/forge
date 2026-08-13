@@ -533,7 +533,7 @@ public class PumpAi extends PumpAiBase {
 
             t = ComputerUtilCard.getBestAI(list);
             //option to hold removal instead only applies for single targeted removal
-            if (!immediately && tgt.getMaxTargets(source, sa) == 1 && sa.isCurse() && defense < 0) {
+            if (!immediately && sa.getMaxTargets() == 1 && sa.isCurse() && defense < 0) {
                 if (!ComputerUtilCard.useRemovalNow(sa, t, -defense, ZoneType.Graveyard)
                         && !ComputerUtil.activateForCost(sa, ai)) {
                     return false;
@@ -547,10 +547,9 @@ public class PumpAi extends PumpAiBase {
     }
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
-        if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        if (list.size() < sa.getMinTargets()) {
             sa.resetTargets();
             return false;
         }

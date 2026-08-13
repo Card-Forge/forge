@@ -3,7 +3,6 @@ package forge.gamemodes.puzzle;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.collect.Lists;
 
@@ -40,13 +39,10 @@ public class PuzzleIO {
                 boolean completed = FileUtil.doesFileExist(ForgeConstants.USER_PUZZLE_DIR + element.replace(SUFFIX_DATA, SUFFIX_COMPLETE));
 
                 // Pass file name into Puzzle so it can save the completed name to match
-                puzzles.add(new Puzzle(parsePuzzleSections(pfData), filename, completed));
+                puzzles.add(new Puzzle(FileSection.parseSections(pfData), filename, completed));
             }
         }
         return puzzles;
     }
 
-    public static Map<String, List<String>> parsePuzzleSections(List<String> pfData) {
-        return FileSection.parseSections(pfData);
-    }
 }

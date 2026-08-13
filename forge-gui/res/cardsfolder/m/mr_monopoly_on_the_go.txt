@@ -1,0 +1,13 @@
+Name:Mr. Monopoly, On the Go
+ManaCost:3 R
+Types:Legendary Planeswalker Monopoly
+Loyalty:5
+A:AB$ RollDice | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | ResultSVar$ Result | SubAbility$ DBPutCounter | SpellDescription$ Roll a six-sided die. Put a number of loyalty counters on NICKNAME equal to the result.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ Result
+A:AB$ Dig | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Heist! — Exile the top two cards of target opponent's library. Until end of turn, you may play those cards, and mana of any type can be spent to cast them.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ EffPlay | EffectOwner$ You | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:EffPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until end of turn, you may play those cards, and mana of any type can be spent to cast them.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Destroy | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact | SpellDescription$ Shut Down! — Destroy target artifact.
+A:AB$ Token | Cost$ SubCounter<40/LOYALTY> | Planeswalker$ True | TokenAmount$ 200 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | Ultimate$ True | SpellDescription$ Pass Go — Create 200 Treasure tokens.
+Oracle:[0]: Roll a six-sided die. Put a number of loyalty counters on Mr. Monopoly equal to the result.\n[-2]: Heist! — Exile the top two cards of target opponent's library. Until end of turn, you may play those cards, and mana of any type can be spent to cast them.\n[-4]: Shut Down! — Destroy target artifact.\n[-40]: Pass Go — Create 200 Treasure tokens.

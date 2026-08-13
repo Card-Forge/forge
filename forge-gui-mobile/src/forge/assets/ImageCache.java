@@ -23,14 +23,16 @@ import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.EvictingQueue;
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
 import forge.deck.DeckProxy;
-import forge.gui.GuiBase;
 import forge.item.PaperToken;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -44,6 +46,7 @@ import forge.Forge;
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
+import forge.gui.GuiBase;
 import forge.deck.Deck;
 import forge.game.card.CardView;
 import forge.game.player.IHasIcon;
@@ -71,6 +74,7 @@ import forge.util.ImageUtil;
 public class ImageCache {
     private static ImageCache imageCache;
     private Supplier<HashSet<String>> missingIconKeys = Suppliers.memoize(HashSet::new);
+
     public int counter = 0;
     private int maxCardCapacity = 300; //default card capacity
     private EvictingQueue<String> q;
@@ -86,12 +90,19 @@ public class ImageCache {
     private void initCache(int capacity) {
         //override maxCardCapacity
         maxCardCapacity = capacity;
+        // iOS: every card texture is now a manager-owned image whose whole lifecycle the AssetManager owns
+        // (see CardTextureData). Keep the old downloaded ceiling (48 on <=~4GB devices, else 120) as the unified
+        // resident cap so the card set doesn't balloon toward cacheSize (300) — decoded cards are hundreds of MB
+        // of native memory and the main per-turn ratchet over a long game.
+        if (GuiBase.isIOS()) {
+            boolean lowRam = Forge.totalDeviceRAM > 0 && Forge.totalDeviceRAM <= 4500;
+            maxCardCapacity = lowRam ? 48 : 120;
+        }
         //init q
-        q = EvictingQueue.create(capacity);
+        q = EvictingQueue.create(maxCardCapacity);
         //init syncQ for threadsafe use
         syncQ = Queues.synchronizedQueue(q);
-        //cap
-        int cl = GuiBase.isAndroid() ? maxCardCapacity + (capacity / 3) : 400;
+        int cl = maxCardCapacity + (capacity / 3);
         cardsLoaded = new HashSet<>(cl);
     }
 
@@ -114,6 +125,7 @@ public class ImageCache {
             syncQ = Queues.synchronizedQueue(getQ());
         return syncQ;
     }
+
 
     public Texture getDefaultImage() {
         return Forge.getAssets().getDefaultImage();
@@ -143,6 +155,8 @@ public class ImageCache {
             }
         } catch (Exception ignored) {}
         getCardsLoaded().clear();
+        imageRecord.get().clear();
+        counter = 0;
         ((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
     }
 
@@ -323,6 +337,10 @@ public class ImageCache {
         try {
             image = loadAsset(imageKey, imageFile, others);
         } catch (final Exception ex) {
+            // surface silent texture-load failures (iOS diagnosis)
+            System.err.println("LOAD-DEBUG loadAsset failed for " + imageKey
+                    + " (file=" + (imageFile != null ? imageFile.getPath() : "null") + "): " + ex);
+            ex.printStackTrace();
             image = null;
         }
 
@@ -347,57 +365,89 @@ public class ImageCache {
         return Forge.getAssets().manager().get(file.getPath(), Texture.class, false);
     }
 
+    public int getCardsLoadedCount() {
+        return getCardsLoaded().size();
+    }
+
     private Texture loadAsset(String imageKey, File file, boolean others) {
         if (file == null)
             return null;
         Texture check = getAsset(file);
         if (check != null)
             return check;
+
+        String fileName = file.getPath();
+
         if (!others) {
             //update first before clearing
-            getSyncQ().add(file.getPath());
-            getCardsLoaded().add(file.getPath());
+            getSyncQ().add(fileName);
+            getCardsLoaded().add(fileName);
             unloadCardTextures(false);
         }
-        String fileName = file.getPath();
-        //load to assetmanager
+
         try {
             if (Forge.getAssets().manager().get(fileName, Texture.class, false) == null) {
-                Forge.getAssets().manager().load(fileName, Texture.class, Forge.getAssets().getTextureFilter());
+                Forge.getAssets().manager().load(fileName, Texture.class, cardTextureParameter(fileName));
                 Forge.getAssets().manager().finishLoadingAsset(fileName);
                 counter += 1;
+                // a texture just became available for a card that may already be drawn in text mode:
+                // invalidate cached card art so renderers pick it up
+                CardRenderer.clearcardArtCache();
+                ((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
             }
         } catch (Exception e) {
             System.err.println("Failed to load image: " + fileName);
+            System.err.println("Error details: " + e.getMessage());
+            e.printStackTrace(System.err);
         }
 
-        //return loaded assets
-        if (others) {
-            return Forge.getAssets().manager().get(fileName, Texture.class, false);
-        } else {
-            Texture cardTexture = Forge.getAssets().manager().get(fileName, Texture.class, false);
-            //if full bordermasking is enabled, update the border color
-            if (cardTexture != null) {
-                String setCode = imageKey.split("/")[0].trim().toUpperCase();
-                int radius;
-                if (setCode.equals("A") || setCode.equals("LEA") || setCode.equals("B") || setCode.equals("LEB"))
-                    radius = 28;
-                else if (setCode.equals("MED") || setCode.equals("ME2") || setCode.equals("ME3") || setCode.equals("ME4") || setCode.equals("TD0") || setCode.equals("TD1"))
-                    radius = 25;
-                else
-                    radius = 22;
-                updateImageRecord(cardTexture.toString(), isCloserToWhite(getpixelColor(cardTexture)), radius, cardTexture.toString().contains(".fullborder.") || cardTexture.toString().contains("tokens"));
-            }
+        Texture cardTexture = Forge.getAssets().manager().get(fileName, Texture.class, false);
+        if (others || cardTexture == null)
             return cardTexture;
+        //if full bordermasking is enabled, update the border color
+        String setCode = imageKey.split("/")[0].trim().toUpperCase();
+        int radius;
+        if (setCode.equals("A") || setCode.equals("LEA") || setCode.equals("B") || setCode.equals("LEB"))
+            radius = 28;
+        else if (setCode.equals("MED") || setCode.equals("ME2") || setCode.equals("ME3") || setCode.equals("ME4") || setCode.equals("TD0") || setCode.equals("TD1"))
+            radius = 25;
+        else
+            radius = 22;
+        // Downloaded images from Scryfall (in Documents/cache) are always fullborder; also check path.
+        boolean isFullBorder = isDownloadedCardImage(fileName) || fileName.contains(".fullborder.") || fileName.contains("tokens");
+        // Store under the SAME derivation the lookups use (getTextureKey), so store==lookup by
+        // construction — on iOS both equal fileName, but on the Windows desktop wrapper file.getPath()
+        // uses backslashes while FileTextureData.getFileHandle().path() uses forward slashes.
+        updateImageRecord(getTextureKey(cardTexture), isCloserToWhite(getpixelColor(cardTexture)), radius, isFullBorder);
+        return cardTexture;
+    }
+
+    // iOS downloaded images (Documents/cache) decode via CardTextureData so the AssetManager owns their
+    // whole lifecycle; every other card image uses the stock file decode. This selects a decode PARAMETER
+    // only — it caches/gets/unloads nothing.
+    private static TextureParameter cardTextureParameter(String fileName) {
+        if (isDownloadedCardImage(fileName)) {
+            TextureParameter p = new TextureParameter();
+            p.textureData = new CardTextureData(fileName);
+            p.minFilter = Texture.TextureFilter.Linear;
+            p.magFilter = Texture.TextureFilter.Linear;
+            return p;
         }
+        return Forge.getAssets().getTextureFilter();
+    }
+
+    private static boolean isDownloadedCardImage(String absolutePath) {
+        return GuiBase.isIOS() && absolutePath.contains("/Documents/cache");
     }
 
     public void unloadCardTextures(boolean removeAll) {
         if (removeAll) {
             try {
-                for (String asset : Forge.getAssets().manager().getAssetNames()) {
-                    if (asset.contains(".full")) {
-                        Forge.getAssets().manager().unload(asset);
+                // Iterate cardsLoaded (not getAssetNames filtered by ".full") so downloaded card paths that
+                // don't contain ".full" are released too, and non-card assets are never touched.
+                for (String fileName : getCardsLoaded()) {
+                    if (Forge.getAssets().manager().get(fileName, Texture.class, false) != null) {
+                        Forge.getAssets().manager().unload(fileName);
                     }
                 }
                 getSyncQ().clear();
@@ -427,20 +477,32 @@ public class ImageCache {
         } catch (Exception ignored) {}
     }
 
-    public void preloadCache(Iterable<String> keys) {
+    public void preloadCache(final Iterable<String> keys) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
             return;
+        // GL textures must be created on the render thread: preload is called
+        // from the background match-start thread, and textures uploaded there
+        // are blank on iOS (desktop drivers happen to tolerate it)
+        if (Gdx.app != null && !forge.gui.FThreads.isGuiThread()) {
+            Gdx.app.postRunnable(() -> preloadCache(keys));
+            return;
+        }
         for (String imageKey : keys) {
             if (getImage(imageKey, false) == null)
                 System.err.println("could not load card image:" + imageKey);
         }
     }
 
-    public void preloadCache(Deck deck) {
+    public void preloadCache(final Deck deck) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
             return;
         if (deck == null)
             return;
+        // see preloadCache(Iterable): GL work must happen on the render thread
+        if (Gdx.app != null && !forge.gui.FThreads.isGuiThread()) {
+            Gdx.app.postRunnable(() -> preloadCache(deck));
+            return;
+        }
         if (deck.getAllCardsInASinglePool().toFlatList().size() <= 100) {
             for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
                 if (getImage(p.getImageKey(false), false) == null)
@@ -449,8 +511,21 @@ public class ImageCache {
         }
     }
 
+    // The path key for a texture, derived from the manager-owned TextureData: CardTextureData for iOS
+    // downloaded cards, FileTextureData for everything loaded from a file. Both resolve to the same
+    // absolute path loadAsset keyed updateImageRecord by, so border lookups match. Non-file textures
+    // fall back to toString().
+    private String getTextureKey(Texture t) {
+        if (t == null) return null;
+        TextureData d = t.getTextureData();
+        if (d instanceof CardTextureData) return ((CardTextureData) d).getPath();
+        if (d instanceof FileTextureData) return ((FileTextureData) d).getFileHandle().path();
+        return t.toString();
+    }
+
     public TextureRegion croppedBorderImage(Texture image) {
-        if (!image.toString().contains(".fullborder.") && !image.toString().contains("tokens"))
+        String key = getTextureKey(image);
+        if (key == null || (!key.contains(".fullborder.") && !key.contains("tokens")))
             return new TextureRegion(image);
         float rscale = 0.96f;
         int rw = Math.round(image.getWidth() * rscale);
@@ -464,7 +539,7 @@ public class ImageCache {
         if (t == null)
             return Color.valueOf("#171717");
         try {
-            return Color.valueOf(imageRecord.get().get(t.toString()).colorValue);
+            return Color.valueOf(imageRecord.get().get(getTextureKey(t)).colorValue);
         } catch (Exception e) {
             return Color.valueOf("#171717");
         }
@@ -488,7 +563,7 @@ public class ImageCache {
     public int getRadius(Texture t) {
         if (t == null)
             return 20;
-        ImageRecord record = imageRecord.get().get(t.toString());
+        ImageRecord record = imageRecord.get().get(getTextureKey(t));
         if (record == null)
             return 20;
         Integer i = record.cardRadius;
@@ -500,7 +575,7 @@ public class ImageCache {
     public boolean isFullBorder(Texture image) {
         if (image == null)
             return false;
-        ImageRecord record = imageRecord.get().get(image.toString());
+        ImageRecord record = imageRecord.get().get(getTextureKey(image));
         if (record == null)
             return false;
         return record.isFullBorder;

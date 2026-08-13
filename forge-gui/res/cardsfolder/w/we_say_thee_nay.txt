@@ -1,0 +1,7 @@
+Name:We Say Thee Nay!
+ManaCost:1 U
+Types:Instant Arcane
+K:Teamwork:2
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays {2}. Counter that spell unless its controller pays {4} instead if this spell was cast using teamwork.
+SVar:X:Count$Teamwork.4.2
+Oracle:Teamwork 2 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 2 or more.)\nCounter target spell unless its controller pays {2}. Counter that spell unless its controller pays {4} instead if this spell was cast using teamwork.

@@ -1,0 +1,12 @@
+Name:Glorious Purpose
+ManaCost:1 U
+Types:Enchantment Plan
+T:Mode$ Connives | Execute$ TrigPutCounterAll | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control connives, put a +1/+1 counter on that creature and a plan counter on this enchantment.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Card.TriggeredCard | CounterType$ P1P1 | CounterNum$ 1 | ValidCards2$ Card.Self | CounterType2$ PLAN
+T:Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ PLAN | CounterAmount$ EQ6 | Execute$ TrigSac | TriggerDescription$ When the sixth plan counter is put on this enchantment, sacrifice it. If you do, exile the top four cards of your library. You may cast any number of spells from among them without paying their mana costs. Put the rest into your hand.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | RememberSacrificed$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True | SubAbility$ DBPlay | ConditionDefined$ Remembered | ConditionPresent$ Card
+SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+IsImprinted | ValidZone$ Exile | ValidSA$ Spell | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ All | SubAbility$ DBRestHand
+SVar:DBRestHand:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+Oracle:Whenever a creature you control connives, put a +1/+1 counter on that creature and a plan counter on this enchantment.\nWhen the sixth plan counter is put on this enchantment, sacrifice it. If you do, exile the top four cards of your library. You may cast any number of spells from among them without paying their mana costs. Put the rest into your hand.

@@ -175,8 +175,8 @@ public class BasicMacroSystem implements IMacroSystem {
     }
 
     @Override
-    public boolean isRecording() {
-        return false;
+    public boolean hasRememberedActions() {
+        return !rememberedActions.isEmpty();
     }
 
     @Override

@@ -39,6 +39,7 @@ import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldController;
 import forge.gui.GuiBase;
 import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
@@ -49,6 +50,7 @@ import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.model.FModel;
+import forge.player.AutoYieldStore.TriggerDecision;
 import forge.player.PlayerZoneUpdate;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
@@ -249,7 +251,6 @@ public class MatchScreen extends FScreen {
 
         @Override
         protected void buildMenu() {
-
             if (isTopHumanPlayerActive() == getRotate180()) {
                 addItem(new MenuItem(Forge.getLocalizer().getMessage("lblGame"), gameMenu));
                 addItem(new MenuItem(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players));
@@ -369,31 +370,29 @@ public class MatchScreen extends FScreen {
         }
 
         if (gameMenu != null) {
-            if (gameMenu.getChildCount() > 1) {
-                if (viewWinLose == null) {
-                    gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
-                    gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
-                    if (!Forge.isMobileAdventureMode) {
-                        gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
-                        gameMenu.getChildAt(3).setEnabled(false);
-                    }
-                } else {
-                    gameMenu.getChildAt(0).setEnabled(false);
-                    gameMenu.getChildAt(1).setEnabled(false);
-                    if (!Forge.isMobileAdventureMode) {
-                        gameMenu.getChildAt(2).setEnabled(false);
-                        gameMenu.getChildAt(3).setEnabled(true);
-                    }
+            // Index trailing items from end — entries inserted before Settings don't shift them
+            int n = gameMenu.getChildCount();
+            if (n > 1) {
+                int idxConcede = 0;
+                int idxAutoYields = 1;
+                int idxSettings = n - 2; // Settings is second-from-last
+                int idxShowWinLose = n - 1; // Show Win/Lose is last
+                boolean gameOver = viewWinLose != null;
+                boolean canSwitch = !gameOver && !game.isMulligan();
+                gameMenu.getChildAt(idxConcede).setEnabled(canSwitch);
+                gameMenu.getChildAt(idxAutoYields).setEnabled(canSwitch);
+                if (!Forge.isMobileAdventureMode) {
+                    gameMenu.getChildAt(idxSettings).setEnabled(canSwitch);
+                    gameMenu.getChildAt(idxShowWinLose).setEnabled(gameOver);
                 }
             }
         }
-        if (devMenu != null) {
-            if (devMenu.isVisible()) {
-                try {
-                    //rollbackphase enable -- todo limit by gametype?
-                    devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetPlay(MatchController.instance) && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
-                } catch (Exception e) {/*NPE when the game hasn't started yet and you click dev mode*/}
-            }
+
+        if (devMenu != null && devMenu.isVisible()) {
+            try {
+                //rollbackphase enable -- todo limit by gametype?
+                devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetPlay(MatchController.instance) && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
+            } catch (Exception e) {/*NPE when the game hasn't started yet and you click dev mode*/}
         }
 
         if (activeEffect != null) {
@@ -402,7 +401,7 @@ public class MatchScreen extends FScreen {
 
         drawArcs(g);
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && Forge.magnify && Forge.magnifyToggle) {
-            if (Forge.isLandscapeMode() && (!GuiBase.isAndroid() || Forge.hasGamepad()) && !CardZoom.isOpen() && potentialListener != null) {
+            if (Forge.isLandscapeMode() && (!GuiBase.isMobile() || Forge.hasGamepad()) && !CardZoom.isOpen() && potentialListener != null) {
                 for (FDisplayObject object : potentialListener) {
                     if (object != null) {
                         if (object instanceof FCardPanel cardPanel) {
@@ -414,7 +413,10 @@ public class MatchScreen extends FScreen {
                                         vPlayerPanel = getPlayerPanel(cardView.getOwner());
                                     if (vPlayerPanel != null) {
                                         boolean rotate = CardRendererUtils.needsRotation(cardView) && !Forge.magnifyShowDetails;
-                                        boolean inBattlefield = ZoneType.Battlefield.equals(cardView.getZone());
+                                        // A ghost's card is in exile, but it sits on the battlefield attached to its
+                                        // host, so position its preview like a battlefield card (on the host's side)
+                                        boolean inBattlefield = ZoneType.Battlefield.equals(cardView.getZone())
+                                                || (cardPanel instanceof CardAreaPanel cap && cap.isGhost());
                                         float mul = 0.45f;
                                         float div = inBattlefield ? cardPanel.isTapped() ? 2.7f : 2.4f : 1.6f;
                                         float adjX = rotate ? cardPanel.getWidth() / div : 0f;
@@ -493,7 +495,7 @@ public class MatchScreen extends FScreen {
                 if (playerPanel != null && playerPanelsList.contains(playerPanel)) {
                     playerViewSet.add(p);
                     FCollectionView<CardView> battlefield = p.getBattlefield();
-                    if (battlefield != null) {
+                    if (!battlefield.isEmpty()) {
                         Iterable<CardView> bfIter = MatchController.instance.isNetGame()
                                 ? battlefield.threadSafeIterable() : battlefield;
                         for (CardView c : bfIter) {
@@ -660,7 +662,13 @@ public class MatchScreen extends FScreen {
                 break;
             case Keys.E: //end turn on Ctrl+E on Android, E when running on desktop
                 if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
-                    getGameController().passPriorityUntilEndOfTurn();
+                    YieldController.endTurn(getGameController(), MatchController.instance.getCurrentPlayer());
+                    return true;
+                }
+                break;
+            case Keys.P: //auto-pass toggle on Ctrl+P on Android, P when running on desktop
+                if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
+                    YieldController.toggleAutoPassOrStopAll(getGameController());
                     return true;
                 }
                 break;
@@ -688,17 +696,13 @@ public class MatchScreen extends FScreen {
                     if (!stackInstance.isAbility()) {
                         return false;
                     }
-                    final int triggerID = stackInstance.getSourceTrigger();
-
-                    if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
-                    } else {
-                        controller.setShouldAlwaysAcceptTrigger(triggerID);
+                    final boolean abilityScope = controller.getYieldController().isAbilityScope();
+                    final String key = stackInstance.getKey();
+                    if (!key.isEmpty()) {
+                        TriggerDecision next = controller.getTriggerDecision(key) == TriggerDecision.ACCEPT ? TriggerDecision.ASK : TriggerDecision.ACCEPT;
+                        controller.setTriggerDecision(key, next, abilityScope);
                     }
 
-                    final String key = stackInstance.getKey();
-                    boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
                     controller.setShouldAutoYield(key, true, abilityScope);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
@@ -718,18 +722,14 @@ public class MatchScreen extends FScreen {
                     if (!stackInstance.isAbility()) {
                         return false;
                     }
-                    final int triggerID = stackInstance.getSourceTrigger();
-
-                    if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
-                    } else {
-                        controller.setShouldAlwaysDeclineTrigger(triggerID);
+                    final boolean abilityScope = controller.getYieldController().isAbilityScope();
+                    final String key = stackInstance.getKey();
+                    if (!key.isEmpty()) {
+                        TriggerDecision next = controller.getTriggerDecision(key) == TriggerDecision.DECLINE ? TriggerDecision.ASK : TriggerDecision.DECLINE;
+                        controller.setTriggerDecision(key, next, abilityScope);
                     }
 
-                    final String key = stackInstance.getKey();
-                    boolean abilityScope2 = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
-                    controller.setShouldAutoYield(key, true, abilityScope2);
+                    controller.setShouldAutoYield(key, true, abilityScope);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
                         controller.passPriority();

@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardStateName;
 import forge.card.ICardFace;
+import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.game.card.Card;
 import forge.game.card.CardFaceView;
 import forge.game.card.CardView;
@@ -232,45 +233,47 @@ public class GuiChoose {
     }
     public static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final CMatchUI matchUI) {
-        // An input box for handling the order of choices.
+        return order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, false, matchUI).ordered();
+    }
 
-        final Callable<List<T>> callable = () -> {
+    public static <T> OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox, final CMatchUI matchUI) {
+        final Callable<OrderResult<T>> callable = () -> {
             final DualListBox<T> dual = new DualListBox<>(remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, matchUI);
             dual.setSecondColumnLabelText(top);
-
+            dual.setRememberDecisionVisible(showRememberCheckbox);
             dual.setSideboardMode(sideboardingMode);
-
             dual.setTitle(title);
             dual.pack();
             dual.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             if (matchUI != null && referenceCard != null) {
                 matchUI.setCard(referenceCard);
-                // MARKED FOR UPDATE
             }
             dual.setVisible(true);
 
             final List<T> objects = dual.getOrderedList();
+            final boolean remember = showRememberCheckbox && dual.isRememberDecisionSelected();
 
             dual.dispose();
             if (matchUI != null) {
                 matchUI.clearPanelSelections();
             }
-            return objects;
+            return new OrderResult<>(objects, remember);
         };
 
-        final FutureTask<List<T>> ft = new FutureTask<>(callable);
+        final FutureTask<OrderResult<T>> ft = new FutureTask<>(callable);
         FThreads.invokeInEdtAndWait(ft);
         try {
             return ft.get();
-        } catch (final Exception e) { // we have waited enough
+        } catch (final Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new OrderResult<>(null, false);
     }
 
     public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, 
 						    final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
-	gui.setSelectables(manipulable);
+	gui.setSelectables(manipulable, 0, 0);
 	@SuppressWarnings("Convert2Lambda") // Avoid lambdas to maintain compatibility with Android 5 API
     final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
         @Override
