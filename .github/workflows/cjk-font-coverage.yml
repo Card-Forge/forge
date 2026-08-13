@@ -1,0 +1,29 @@
+name: Verify CJK font coverage
+
+on:
+  push:
+    paths:
+      - 'forge-gui/res/languages/**'
+      - 'forge-gui/res/skins/default/SourceHanSansCN.ttf'
+      - 'forge-gui-mobile/src/forge/assets/FSkinFont.java'
+      - 'deploy/VerifyCjkFontCoverage.java'
+      - '.github/workflows/cjk-font-coverage.yml'
+  pull_request:
+    paths:
+      - 'forge-gui/res/languages/**'
+      - 'forge-gui/res/skins/default/SourceHanSansCN.ttf'
+      - 'forge-gui-mobile/src/forge/assets/FSkinFont.java'
+      - 'deploy/VerifyCjkFontCoverage.java'
+      - '.github/workflows/cjk-font-coverage.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify every localized code point
+        run: java deploy/VerifyCjkFontCoverage.java

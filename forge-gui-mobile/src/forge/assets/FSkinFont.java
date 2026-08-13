@@ -38,9 +38,15 @@ public class FSkinFont {
 
     private static final String TTF_FILE = "font1.ttf";
     private static HashMap<String, String> langUniqueCharacterSet = new HashMap<>();
+    private static final HashMap<String, FreeTypeFontGenerator> incrementalFontGenerators = new HashMap<>();
+    private static final IntSet auditedIncrementalFonts = new IntSet();
+    private static final IntSet RUNTIME_NORMALIZED_CODE_POINTS = new IntSet();
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
+        for (int codePoint : new int[] {0x0160, 0x02E3, 0x2075, 0x2610, 0xA789, 0x2B689, 0x2B812}) {
+            RUNTIME_NORMALIZED_CODE_POINTS.add(codePoint);
+        }
     }
     public static FSkinFont get(final int unscaledSize) {
         return _get((int)Utils.scale(unscaledSize));
@@ -124,6 +130,8 @@ public class FSkinFont {
         Glyph lastGlyph = null;
         availableWidth /= data.scaleX;
 
+        str = normalizeForBitmapFont(str);
+        end = Math.min(end, str.length());
         for (; index < end; index++) {
             char ch = str.charAt(index);
             if (ch == '[' && data.markupEnabled) {
@@ -174,6 +182,8 @@ public class FSkinFont {
         if (font == null) {
             return new TextBounds(0f, 0f);
         }
+        str = normalizeForBitmapFont(str);
+        end = Math.min(end, str.length());
         BitmapFontData data = font.getData();
         //int start = 0;
         //int end = str.length();
@@ -225,6 +235,7 @@ public class FSkinFont {
         if (font == null) {
             return new TextBounds(0f, 0f);
         }
+        str = normalizeForBitmapFont(str);
         BitmapFontData data = font.getData();
         int start = 0;
         float maxWidth = 0;
@@ -247,6 +258,7 @@ public class FSkinFont {
         if (font == null) {
             return new TextBounds(0f, 0f);
         }
+        str = normalizeForBitmapFont(str);
         BitmapFontData data = font.getData();
         if (wrapWidth <= 0) wrapWidth = Integer.MAX_VALUE;
         int start = 0;
@@ -325,7 +337,32 @@ public class FSkinFont {
         if (font == null) { return; } //skip text until fonts are ready
         updateScale();
         font.setColor(color);
-        font.draw(batch, text, x, y, w, horzAlignment, wrap);
+        font.draw(batch, normalizeForBitmapFont(text), x, y, w, horzAlignment, wrap);
+    }
+
+    /**
+     * libGDX BitmapFont is UTF-16-char based and cannot address supplementary-plane glyphs.
+     * Keep the source translations intact, but replace unsupported supplementary-plane
+     * ideographs and uncommon symbols with readable BMP equivalents before layout and drawing.
+     */
+    private static String normalizeForBitmapFont(final CharSequence text) {
+        if (text == null) {
+            return "";
+        }
+        final String value = text.toString();
+        if (value.indexOf('\uD86D') < 0 && value.indexOf('\uD86E') < 0
+                && value.indexOf('\u0160') < 0 && value.indexOf('\u02E3') < 0
+                && value.indexOf('\u2075') < 0 && value.indexOf('\u2610') < 0
+                && value.indexOf('\uA789') < 0) {
+            return value;
+        }
+        return value.replace("\uD86E\uDC12", "章") // 𫠒: simplified form of 鱆, octopus
+                .replace("\uD86D\uDE89", "魟")     // 𫚉: simplified form of 魟, ray
+                .replace('\u0160', 'S')              // Latin S with caron in an English biography
+                .replace('\u02E3', 'x')              // modifier x used as an exponent
+                .replace('\u2075', '5')              // superscript five
+                .replace('\u2610', '\u25A1')         // ballot box -> supported white square
+                .replace('\uA789', ':');             // modifier colon in a proper name
     }
 
     //update scale of font if needed
@@ -416,6 +453,18 @@ public class FSkinFont {
         }
         boolean useCjkFont = Lang.initInstance(Forge.locale).getFontFile() != null;
         if (useCjkFont && !Forge.forcedEnglishonCJKMissing) {
+            String ttfName = Forge.CJK_Font;
+            FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
+            if (ttfFile != null && ttfFile.exists()) {
+                // Never load a persisted bitmap cache for CJK. Card translations and user-entered
+                // deck names change independently of the application version, so a pre-baked .fnt
+                // inevitably becomes stale. FreeType's incremental data adds any glyph supported by
+                // Source Han Sans the first time it is measured or drawn.
+                generateIncrementalFont(ttfFile, fontSize);
+                return;
+            }
+        }
+        if (useCjkFont && !Forge.forcedEnglishonCJKMissing) {
             // Bump this suffix whenever the bundled character sources change so
             // an upgrade cannot reuse an older bitmap-font cache with missing glyphs.
             fontName += Forge.locale + "-community3";
@@ -473,6 +522,78 @@ public class FSkinFont {
             }
             offset += Character.charCount(codePoint);
         }
+    }
+
+    private static synchronized FreeTypeFontGenerator getIncrementalFontGenerator(final FileHandle ttfFile) {
+        final String path = ttfFile.file().getAbsolutePath();
+        FreeTypeFontGenerator generator = incrementalFontGenerators.get(path);
+        if (generator == null) {
+            generator = new FreeTypeFontGenerator(ttfFile);
+            incrementalFontGenerators.put(path, generator);
+        }
+        return generator;
+    }
+
+    private void auditCjkFontCoverage(final FreeTypeFontGenerator generator, final FileHandle ttfFile) {
+        final int auditKey = ttfFile.file().getAbsolutePath().hashCode();
+        synchronized (auditedIncrementalFonts) {
+            if (auditedIncrementalFonts.contains(auditKey)) {
+                return;
+            }
+            auditedIncrementalFonts.add(auditKey);
+        }
+
+        int missingCount = 0;
+        final StringBuilder missingPreview = new StringBuilder();
+        final String characters = getCharacterSet(Forge.locale);
+        for (int offset = 0; offset < characters.length(); ) {
+            final int codePoint = characters.codePointAt(offset);
+            offset += Character.charCount(codePoint);
+            if (Character.isISOControl(codePoint) || Character.isWhitespace(codePoint)) {
+                continue;
+            }
+            // BitmapFont is char based, so supplementary-plane glyphs cannot be represented even
+            // when the TrueType file contains them. Report those together with absent font glyphs.
+            if (!RUNTIME_NORMALIZED_CODE_POINTS.contains(codePoint)
+                    && (codePoint > Character.MAX_VALUE || !generator.hasGlyph(codePoint))) {
+                missingCount++;
+                if (missingPreview.length() < 512) {
+                    missingPreview.append(String.format(" U+%04X", codePoint));
+                }
+            }
+        }
+        if (missingCount == 0) {
+            System.out.println("CJK font coverage audit passed for " + Forge.locale + ": " + ttfFile.name());
+        } else {
+            System.err.println("CJK font coverage audit found " + missingCount + " unsupported code points in "
+                    + ttfFile.name() + ":" + missingPreview);
+        }
+    }
+
+    private void generateIncrementalFont(final FileHandle ttfFile, final int requestedFontSize) {
+        final FreeTypeFontGenerator generator = getIncrementalFontGenerator(ttfFile);
+        auditCjkFontCoverage(generator, ttfFile);
+
+        final FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.characters = FreeTypeFontGenerator.DEFAULT_CHARS + "\u2022\u2014";
+        parameter.size = Math.max(MIN_FONT_SIZE, Math.min(requestedFontSize, MAX_FONT_SIZE));
+        parameter.incremental = true;
+        final int pageSize = parameter.size >= 20 ? 512 : 256;
+        parameter.packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
+        parameter.minFilter = GuiBase.isIOS() ? Texture.TextureFilter.Linear : Texture.TextureFilter.Nearest;
+        parameter.magFilter = parameter.minFilter;
+
+        FThreads.invokeInEdtNowOrLater(() -> {
+            try {
+                font = generator.generateFont(parameter);
+                // The custom packer makes BitmapFont default to non-owning textures. Mark them as
+                // owned so the normal font lifecycle can release every incrementally added page.
+                font.setOwnsTexture(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Forge.setForcedEnglishonCJKMissing();
+            }
+        });
     }
 
     private void generateFont(final FileHandle ttfFile, final String fontName, final int fontSize) {

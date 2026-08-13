@@ -434,7 +434,9 @@ public class AssetsDownloader {
         FileHandle fontDirectory = Gdx.files.absolute(FONTS_DIR);
         fontDirectory.mkdirs();
         FileHandle installedFont = fontDirectory.child(fontName + ".ttf");
-        FileHandle installMarker = fontDirectory.child(".bundled-cjk-" + bundledFont.length() + ".ready");
+        // v2 switches CJK rendering from persisted bitmap caches to incremental FreeType glyphs.
+        // Its one-time marker forces old installations to discard every stale .fnt/.png atlas.
+        FileHandle installMarker = fontDirectory.child(".bundled-cjk-v2-" + bundledFont.length() + ".ready");
         if (!installMarker.exists()) {
             fontConfigurationChanged = true;
         }
