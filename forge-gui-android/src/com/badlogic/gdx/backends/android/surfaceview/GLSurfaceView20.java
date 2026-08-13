@@ -27,6 +27,7 @@ import android.view.KeyEvent;
 import android.view.inputmethod.BaseInputConnection;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.OnscreenKeyboardType;
 import com.badlogic.gdx.backends.android.DefaultAndroidInput;
 
@@ -90,7 +91,18 @@ public class GLSurfaceView20 extends GLSurfaceView {
             outAttrs.inputType = DefaultAndroidInput.getAndroidInputType(onscreenKeyboardType, false);
         }
 
-        BaseInputConnection connection = new BaseInputConnection(this, false) {
+        BaseInputConnection connection = new BaseInputConnection(this, true) {
+            @Override
+            public boolean commitText (CharSequence text, int newCursorPosition) {
+                // Keep composing text inside the InputConnection, but bypass the legacy Android key-event conversion when
+                // the IME commits a candidate. Several Chinese keyboards never emit ACTION_MULTIPLE for commitText().
+                super.commitText(text, newCursorPosition);
+                if (Gdx.input instanceof DefaultAndroidInput) {
+                    return ((DefaultAndroidInput)Gdx.input).commitImeText(text);
+                }
+                return true;
+            }
+
             @Override
             public boolean deleteSurroundingText (int beforeLength, int afterLength) {
                 /*

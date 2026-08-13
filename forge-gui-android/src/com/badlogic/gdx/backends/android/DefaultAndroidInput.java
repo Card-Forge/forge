@@ -516,22 +516,7 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
             KeyEvent event = null;
 
             if (e.getKeyCode() == android.view.KeyEvent.KEYCODE_UNKNOWN && e.getAction() == android.view.KeyEvent.ACTION_MULTIPLE) {
-                String chars = e.getCharacters();
-                if (chars != null) {
-                    for (int i = 0; i < chars.length(); i++) {
-                        event = usedKeyEvents.obtain();
-                        event.timeStamp = System.nanoTime();
-                        event.keyCode = 0;
-                        event.keyChar = chars.charAt(i);
-                        event.type = KeyEvent.KEY_TYPED;
-                        keyEvents.add(event);
-                    }
-                }
-                // IMEs commit composed text (including Chinese candidates) as an
-                // ACTION_MULTIPLE event. Forge normally renders on demand, so the
-                // queued keyTyped events must explicitly wake the render thread.
-                app.getGraphics().requestRendering();
-                return true;
+                return commitImeText(e.getCharacters());
             }
 
             char character = (char)e.getUnicodeChar();
@@ -600,6 +585,25 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
         return isCatchKey(keyCode);
     }
 
+    /** Delivers text committed by an Android IME directly to libGDX. Modern IMEs are not required to translate
+     * {@link InputConnection#commitText(CharSequence, int)} into ACTION_MULTIPLE key events, so relying on the legacy event
+     * path loses composed text such as a selected Chinese candidate on many keyboards. */
+    public boolean commitImeText (CharSequence text) {
+        if (text == null) return true;
+        synchronized (this) {
+            for (int i = 0; i < text.length(); i++) {
+                KeyEvent event = usedKeyEvents.obtain();
+                event.timeStamp = System.nanoTime();
+                event.keyCode = 0;
+                event.keyChar = text.charAt(i);
+                event.type = KeyEvent.KEY_TYPED;
+                keyEvents.add(event);
+            }
+        }
+        app.getGraphics().requestRendering();
+        return true;
+    }
+
     @Override
     public void setOnscreenKeyboardVisible (final boolean visible) {
         setOnscreenKeyboardVisible(visible, OnscreenKeyboardType.Default);
@@ -617,14 +621,15 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
                 if (visible) {
                     View view = ((AndroidGraphics)app.getGraphics()).getView();
                     OnscreenKeyboardType tmp = type == null ? OnscreenKeyboardType.Default : type;
-                    if (((GLSurfaceView20)view).onscreenKeyboardType != tmp) {
-                        ((GLSurfaceView20)view).onscreenKeyboardType = tmp;
-                        manager.restartInput(view);
-                    }
+                    ((GLSurfaceView20)view).onscreenKeyboardType = tmp;
 
                     view.setFocusable(true);
                     view.setFocusableInTouchMode(true);
-                    manager.showSoftInput(((AndroidGraphics)app.getGraphics()).getView(), 0);
+                    view.requestFocus();
+                    // Always recreate the connection when a Forge text field starts editing. Reusing a connection after
+                    // another field closes can leave some IMEs attached to the window fallback connection.
+                    manager.restartInput(view);
+                    manager.showSoftInput(view, 0);
                 } else {
                     manager.hideSoftInputFromWindow(((AndroidGraphics)app.getGraphics()).getView().getWindowToken(), 0);
                 }
