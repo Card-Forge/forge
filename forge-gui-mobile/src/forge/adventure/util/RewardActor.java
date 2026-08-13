@@ -781,7 +781,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             renderedCount++;
             //The first time we find a card that has no art, render one out of view to fully initialize CardImageRenderer.
             g.begin(preview_w, preview_h);
-            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt);
+            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt, true);
             g.end();
         }
         Matrix4 m = new Matrix4();
@@ -792,7 +792,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         g.begin(preview_w, preview_h);
         g.setProjectionMatrix(m);
         g.startClip();
-        CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt);
+        CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt, true);
         g.end();
         g.endClip();
         //Rendering ends here. Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.

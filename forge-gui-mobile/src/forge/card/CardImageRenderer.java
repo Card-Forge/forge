@@ -115,6 +115,10 @@ public class CardImageRenderer {
     }
 
     public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList, boolean showArtist, boolean showArtBox) {
+        drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, noText, isChoiceList, showArtist, showArtBox, false);
+    }
+
+    public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList, boolean showArtist, boolean showArtBox, boolean useEditionLabel) {
         updateStaticFields(w, h);
 
         float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
@@ -226,7 +230,7 @@ public class CardImageRenderer {
             y += textBoxHeight;
 
             //draw type line
-            drawTypeLine(g, state, canShow, headerColors, x, y, w, typeBoxHeight, noText, false, false);
+            drawTypeLine(g, state, canShow, headerColors, x, y, w, typeBoxHeight, noText, false, false, useEditionLabel || !showArtBox);
             y += typeBoxHeight;
         } else if (isClass) {
             //draw text box
@@ -235,7 +239,7 @@ public class CardImageRenderer {
             y += textBoxHeight;
 
             //draw type line
-            drawTypeLine(g, state, canShow, headerColors, x, y, w, typeBoxHeight, noText, false, false);
+            drawTypeLine(g, state, canShow, headerColors, x, y, w, typeBoxHeight, noText, false, false, useEditionLabel || !showArtBox);
             y += typeBoxHeight;
         } else if (isDungeon) {
             if (!drawDungeon) {
@@ -244,11 +248,11 @@ public class CardImageRenderer {
                 drawTextBox(g, card, state, textBoxColors, x + artInset, y - artHeight, (w - 2 * artInset), textBoxHeight + artHeight, onTop, useCardBGTexture, noText, altState, isFaceDown, canShow, isChoiceList);
                 y += textBoxHeight;
             }
-            drawTypeLine(g, state, canShow, headerColors, x, y, w, typeBoxHeight, noText, false, false);
+            drawTypeLine(g, state, canShow, headerColors, x, y, w, typeBoxHeight, noText, false, false, useEditionLabel || !showArtBox);
             y += typeBoxHeight;
         } else {
             //draw type line
-            drawTypeLine(g, state, canShow, headerColors, x, y, w, typeBoxHeight, noText, false, false);
+            drawTypeLine(g, state, canShow, headerColors, x, y, w, typeBoxHeight, noText, false, false, useEditionLabel || !showArtBox);
             y += typeBoxHeight;
 
             //draw text box
@@ -483,7 +487,7 @@ public class CardImageRenderer {
             g.drawImage(cardArt, x, y, w, h);
     }
 
-    private static void drawTypeLine(Graphics g, CardStateView state, boolean canShow, Color[] colors, float x, float y, float w, float h, boolean noText, boolean noRarity, boolean isAdventure) {
+    private static void drawTypeLine(Graphics g, CardStateView state, boolean canShow, Color[] colors, float x, float y, float w, float h, boolean noText, boolean noRarity, boolean isAdventure, boolean useEditionLabel) {
         float oldAlpha = g.getfloatAlphaComposite();
         if (isAdventure)
             g.setAlphaComposite(0.6f);
@@ -496,24 +500,39 @@ public class CardImageRenderer {
 
         float padding = h / 8;
 
-        //draw square icon for rarity
+        //draw rarity: edition text box (deck-editor style) or classic anvil set icons
         if (!noRarity && state != null) {
-            float iconSize = h * 0.9f;
-            float iconPadding = (h - iconSize) / 2;
-            w -= iconSize + iconPadding * 2;
-            //g.fillRect(CardRenderer.getRarityColor(state.getRarity()), x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-            if (state.getRarity() == null) {
-                g.drawImage(FSkinImage.SET_SPECIAL, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-            } else if (state.getRarity() == CardRarity.Special) {
-                g.drawImage(FSkinImage.SET_SPECIAL, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-            } else if (state.getRarity() == CardRarity.MythicRare) {
-                g.drawImage(FSkinImage.SET_MYTHIC, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-            } else if (state.getRarity() == CardRarity.Rare) {
-                g.drawImage(FSkinImage.SET_RARE, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-            } else if (state.getRarity() == CardRarity.Uncommon) {
-                g.drawImage(FSkinImage.SET_UNCOMMON, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+            if (useEditionLabel) {
+                String set = canShow ? state.getSetCode() : CardEdition.UNKNOWN_CODE;
+                CardRarity rarity = canShow ? state.getRarity() : CardRarity.Unknown;
+                if (rarity == null)
+                    rarity = CardRarity.Unknown;
+                if (!StringUtils.isEmpty(set)) {
+                    float setWidth = CardRenderer.getSetWidth(TYPE_FONT, set);
+                    float setHeight = h - 2 * CardRenderer.SET_BOX_MARGIN;
+                    float setX = x + w - setWidth - CardRenderer.SET_BOX_MARGIN;
+                    float setY = y + CardRenderer.SET_BOX_MARGIN;
+                    CardRenderer.drawSetLabel(g, TYPE_FONT, set, rarity, setX, setY, setWidth, setHeight);
+                    w -= setWidth + CardRenderer.SET_BOX_MARGIN;
+                }
             } else {
-                g.drawImage(FSkinImage.SET_COMMON, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+                float iconSize = h * 0.9f;
+                float iconPadding = (h - iconSize) / 2;
+                w -= iconSize + iconPadding * 2;
+                //g.fillRect(CardRenderer.getRarityColor(state.getRarity()), x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+                if (state.getRarity() == null) {
+                    g.drawImage(FSkinImage.SET_SPECIAL, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+                } else if (state.getRarity() == CardRarity.Special) {
+                    g.drawImage(FSkinImage.SET_SPECIAL, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+                } else if (state.getRarity() == CardRarity.MythicRare) {
+                    g.drawImage(FSkinImage.SET_MYTHIC, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+                } else if (state.getRarity() == CardRarity.Rare) {
+                    g.drawImage(FSkinImage.SET_RARE, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+                } else if (state.getRarity() == CardRarity.Uncommon) {
+                    g.drawImage(FSkinImage.SET_UNCOMMON, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+                } else {
+                    g.drawImage(FSkinImage.SET_COMMON, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+                }
             }
         }
 
@@ -538,7 +557,7 @@ public class CardImageRenderer {
                 //float headerHeight = Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * TYPE_FONT.getCapHeight()) + 2;
                 float typeBoxHeight = 2 * getCapHeight(TYPE_FONT);
                 drawHeader(g, card, card.getState(true), altcolors, x, y, w - (w / 2), typeBoxHeight, noText, true);
-                drawTypeLine(g, card.getState(true), canShow, altcolors, x, y + typeBoxHeight, w - (w / 2), typeBoxHeight, noText, true, true);
+                drawTypeLine(g, card.getState(true), canShow, altcolors, x, y + typeBoxHeight, w - (w / 2), typeBoxHeight, noText, true, true, false);
                 float mod = (typeBoxHeight + typeBoxHeight);
                 setTextBox(g, card, card.getState(true), altcolors, x, y + mod, w - (w / 2), h - mod, onTop, useCardBGTexture, noText, typeBoxHeight, typeBoxHeight, true, altstate, isFacedown);
                 //right
