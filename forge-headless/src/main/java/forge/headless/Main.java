@@ -41,6 +41,9 @@ public final class Main {
                 TextUIGame.run(args);
                 return 0;
 
+            case "bridge":
+                return BridgeMain.run(args, System.in, System.out, System.err);
+
             default:
                 System.err.println("Unknown command: " + args[0]);
                 System.err.println("Run './headless.sh --help' to see the available commands.");
@@ -63,6 +66,7 @@ public final class Main {
         System.out.println("Commands:");
         System.out.println("  sim    Run automated games between Forge AI players.");
         System.out.println("  tui    Play or observe a game in an interactive terminal.");
+        System.out.println("  bridge Connect Forge AI to an external game coordinator over JSON-RPC.");
         System.out.println();
         System.out.println("Examples:");
         System.out.println("  ./headless.sh sim -d deck1.dck deck2.dck -n 10");
