@@ -19,7 +19,6 @@ import forge.util.StreamUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.IOException;
 import java.text.DateFormatSymbols;
 import java.util.*;
 import java.util.function.Function;
@@ -194,10 +193,6 @@ public class DeckImportController {
     }
 
     public boolean importBannedAndRestrictedCards(){ return this.includeBnRInDeck; }
-
-    public String getDeckTextFromUrl(final String deckUrl) throws IOException {
-        return DeckUrlLoader.loadImportText(deckUrl);
-    }
 
     public List<Token> parseInput(String input) {
         tokens.clear();

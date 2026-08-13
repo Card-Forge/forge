@@ -594,7 +594,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             String deckText = null;
             String error = null;
             try {
-                deckText = controller.getDeckTextFromUrl(url);
+                deckText = DeckUrlLoader.loadImportText(url);
             } catch (IOException ex) {
                 error = ex.getMessage();
             }
