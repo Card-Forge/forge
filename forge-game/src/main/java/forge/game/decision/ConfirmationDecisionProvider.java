@@ -67,6 +67,8 @@ public final class ConfirmationDecisionProvider {
     private long unsupportedCount;
     private boolean choiceMade;
     private LegalCandidate chosenCandidate;
+    /** Request-local identity guard; the public context exposes only its CardSelectionCard projection. */
+    private Card activeBloodTarget;
 
     public void setResolver(final Resolver resolver0) {
         resolver = resolver0;
@@ -88,9 +90,9 @@ public final class ConfirmationDecisionProvider {
     }
 
     public Generation generate(final WrappedAbility wrapper, final Player decider) {
+        clearActiveState();
         Objects.requireNonNull(wrapper);
         Objects.requireNonNull(decider);
-        clearActiveState();
 
         if (PriorityActionDiagnostics.hasActiveActionContinuation()) {
             return unsupported(Status.UNSUPPORTED_ACTION_CONTINUATION);
@@ -120,18 +122,19 @@ public final class ConfirmationDecisionProvider {
             return unsupported(Status.UNSUPPORTED_PROFILE);
         }
         if (admission.status != Status.ADMITTED) {
-            return unsupported(admission.status, admission.reason);
+            return unsupported(admission.status, admission.reason, admission.profile);
         }
 
         final ConfirmationDecisionContext context;
         if (admission.profile == ConfirmationTriggerProfile.BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD) {
             if (!bloodOwnershipMatches(wrapper, source, decider)) {
-                return unsupported(Status.UNSUPPORTED_PROFILE, "PLAYER_SCOPE");
+                return unsupported(Status.UNSUPPORTED_PROFILE, "PLAYER_SCOPE", admission.profile);
             }
             final TargetCapture target = captureBloodTarget(wrapper, decider);
             if (!target.admitted) {
-                return unsupported(Status.UNSUPPORTED_PROFILE, BLOOD_TARGET_UNSUPPORTED);
+                return unsupported(Status.UNSUPPORTED_PROFILE, BLOOD_TARGET_UNSUPPORTED, admission.profile);
             }
+            activeBloodTarget = target.liveTarget;
             context = new ConfirmationDecisionContext(
                     ConfirmationTriggerProfile.BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD,
                     ConfirmationEventType.CHANGES_ZONE,
@@ -212,43 +215,55 @@ public final class ConfirmationDecisionProvider {
     public boolean apply(final DecisionRequest request, final LegalCandidate candidate,
             final WrappedAbility wrapper) {
         validateActiveRequest(request);
-        Objects.requireNonNull(wrapper);
-        final ConfirmationDecisionContext context = request.getConfirmationContext();
-        if (context == null) {
-            throw new IllegalArgumentException("Confirmation request does not match the live wrapper");
-        }
-        if (choiceMade && chosenCandidate != candidate) {
-            throw new IllegalArgumentException("Applied candidate does not match the chosen confirmation candidate");
-        }
-        validateCandidate(request, candidate);
-
-        if (context.getProfile() == ConfirmationTriggerProfile.BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD) {
-            try {
-                validateBloodRequest(context, wrapper);
-            } catch (final RuntimeException ex) {
-                clearActiveState();
-                throw ex;
+        try {
+            Objects.requireNonNull(wrapper);
+            final ConfirmationDecisionContext context = request.getConfirmationContext();
+            if (context == null) {
+                throw new IllegalArgumentException("Confirmation request does not match the live wrapper");
             }
-            if (!matchesLiveBloodTarget(context, wrapper)) {
-                final boolean external = activeResolver != null;
-                clearActiveState();
-                throw new UnsupportedConfirmationDecisionException(
-                        external ? Status.TARGET_A_INTEGRITY_FAILURE : Status.NATIVE_MAPPING_FAILED,
-                        external ? TARGET_A_INTEGRITY : NATIVE_MAPPING);
+            final boolean bloodEtbProfile = context.getProfile()
+                    == ConfirmationTriggerProfile.BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD;
+            if (bloodEtbProfile && (!choiceMade || chosenCandidate == null)) {
+                throw new IllegalStateException("Confirmation result was not chosen");
             }
-        } else if (context.getProfile() != ConfirmationTriggerProfile.GELECTRODE_SPELL_CAST_UNTAP_SELF
-                || context.getEvent() != ConfirmationEventType.SPELL_CAST
-                || wrapper.getHostCard() == null
-                || context.getSourcePublicIdentity().getCardId() != wrapper.getHostCard().getId()
-                || context.getSourcePublicIdentity().getGameTimestamp() != wrapper.getHostCard().getGameTimestamp()
-                || wrapper.getDecider() == null
-                || context.getDeciderPlayerId() != wrapper.getDecider().getId()) {
-            throw new IllegalArgumentException("Confirmation request does not match the live wrapper");
-        }
+            if (choiceMade && chosenCandidate != candidate) {
+                throw new IllegalArgumentException(
+                        "Applied candidate does not match the chosen confirmation candidate");
+            }
+            validateCandidate(request, candidate);
 
-        final boolean accepted = candidate.getConfirmationKind() == ConfirmationCandidateKind.ACCEPT;
-        clearActiveState();
-        return accepted;
+            if (bloodEtbProfile) {
+                try {
+                    validateBloodRequest(context, wrapper);
+                } catch (final RuntimeException ex) {
+                    clearActiveState();
+                    throw ex;
+                }
+                if (!matchesLiveBloodTarget(context, wrapper)) {
+                    final boolean external = activeResolver != null;
+                    clearActiveState();
+                    throw new UnsupportedConfirmationDecisionException(
+                            external ? Status.TARGET_A_INTEGRITY_FAILURE : Status.NATIVE_MAPPING_FAILED,
+                            external ? TARGET_A_INTEGRITY : NATIVE_MAPPING);
+                }
+            } else if (context.getProfile() != ConfirmationTriggerProfile.GELECTRODE_SPELL_CAST_UNTAP_SELF
+                    || context.getEvent() != ConfirmationEventType.SPELL_CAST
+                    || wrapper.getHostCard() == null
+                    || context.getSourcePublicIdentity().getCardId() != wrapper.getHostCard().getId()
+                    || context.getSourcePublicIdentity().getGameTimestamp() != wrapper.getHostCard().getGameTimestamp()
+                    || wrapper.getDecider() == null
+                    || context.getDeciderPlayerId() != wrapper.getDecider().getId()) {
+                throw new IllegalArgumentException("Confirmation request does not match the live wrapper");
+            }
+
+            final boolean accepted = candidate.getConfirmationKind() == ConfirmationCandidateKind.ACCEPT;
+            clearActiveState();
+            return accepted;
+        } catch (final RuntimeException ex) {
+            // Once an active request is being applied, every validation failure is terminal.
+            clearActiveState();
+            throw ex;
+        }
     }
 
     private static LegalCandidate nativeCandidate(final DecisionRequest request, final boolean accepted) {
@@ -284,9 +299,14 @@ public final class ConfirmationDecisionProvider {
     }
 
     private Generation unsupported(final Status status, final String reason) {
+        return unsupported(status, reason, null);
+    }
+
+    private Generation unsupported(final Status status, final String reason,
+            final ConfirmationTriggerProfile profile) {
         clearActiveState();
         unsupportedCount++;
-        return new Generation(status, reason, null);
+        return new Generation(status, reason, null, profile);
     }
 
     private static Admission classifyProfile(final WrappedAbility wrapper, final Trigger trigger,
@@ -315,7 +335,9 @@ public final class ConfirmationDecisionProvider {
         final BloodOperativeEtbProfile.Validation validation =
                 BloodOperativeEtbProfile.validateCommonSemanticProfile(wrapper);
         if (!validation.isAdmitted()) {
-            return mapBloodFailure(validation.getFailure());
+            final Admission failure = mapBloodFailure(validation.getFailure());
+            return new Admission(failure.status, failure.reason,
+                    ConfirmationTriggerProfile.BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD);
         }
         return Admission.admitted(ConfirmationTriggerProfile.BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD);
     }
@@ -426,13 +448,13 @@ public final class ConfirmationDecisionProvider {
                 return TargetCapture.rejected();
             }
             final CardSelectionCard projection = new CardSelectionCard(target);
-            return isProjectable(projection) ? TargetCapture.admitted(projection) : TargetCapture.rejected();
+            return isProjectable(projection) ? TargetCapture.admitted(projection, target) : TargetCapture.rejected();
         } catch (final RuntimeException ex) {
             return TargetCapture.rejected();
         }
     }
 
-    private static boolean matchesLiveBloodTarget(final ConfirmationDecisionContext context,
+    private boolean matchesLiveBloodTarget(final ConfirmationDecisionContext context,
             final WrappedAbility wrapper) {
         try {
             final Player decider = wrapper.getDecider();
@@ -442,7 +464,7 @@ public final class ConfirmationDecisionProvider {
                 return false;
             }
             final GameObject targetObject = targets.get(0);
-            if (!(targetObject instanceof Card target) || target.getZone() == null
+            if (!(targetObject instanceof Card target) || target != activeBloodTarget || target.getZone() == null
                     || target.getZone().getZoneType() != ZoneType.Graveyard || target.isFaceDown()
                     || target.getView() == null || !target.getView().canBeShownTo(decider.getView())) {
                 return false;
@@ -501,21 +523,27 @@ public final class ConfirmationDecisionProvider {
         activeResolver = null;
         choiceMade = false;
         chosenCandidate = null;
+        activeBloodTarget = null;
     }
 
     public static final class Generation {
         private final Status status;
         private final String reason;
         private final DecisionRequest request;
+        private final ConfirmationTriggerProfile profile;
 
-        private Generation(final Status status, final String reason, final DecisionRequest request) {
+        private Generation(final Status status, final String reason, final DecisionRequest request,
+                final ConfirmationTriggerProfile profile0) {
             this.status = status;
             this.reason = reason;
             this.request = request;
+            profile = profile0;
         }
 
         private static Generation admitted(final DecisionRequest request) {
-            return new Generation(Status.ADMITTED, "ADMITTED", request);
+            return new Generation(Status.ADMITTED, "ADMITTED", request,
+                    request == null || request.getConfirmationContext() == null
+                            ? null : request.getConfirmationContext().getProfile());
         }
 
         public Status getStatus() {
@@ -528,6 +556,10 @@ public final class ConfirmationDecisionProvider {
 
         public DecisionRequest getRequest() {
             return request;
+        }
+
+        public ConfirmationTriggerProfile getProfile() {
+            return profile;
         }
     }
 
@@ -555,18 +587,20 @@ public final class ConfirmationDecisionProvider {
     private static final class TargetCapture {
         private final boolean admitted;
         private final CardSelectionCard projection;
+        private final Card liveTarget;
 
-        private TargetCapture(final boolean admitted0, final CardSelectionCard projection0) {
+        private TargetCapture(final boolean admitted0, final CardSelectionCard projection0, final Card liveTarget0) {
             admitted = admitted0;
             projection = projection0;
+            liveTarget = liveTarget0;
         }
 
-        private static TargetCapture admitted(final CardSelectionCard projection) {
-            return new TargetCapture(true, projection);
+        private static TargetCapture admitted(final CardSelectionCard projection, final Card liveTarget) {
+            return new TargetCapture(true, projection, liveTarget);
         }
 
         private static TargetCapture rejected() {
-            return new TargetCapture(false, null);
+            return new TargetCapture(false, null, null);
         }
     }
 }

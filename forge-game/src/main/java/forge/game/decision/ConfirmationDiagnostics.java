@@ -41,18 +41,22 @@ public final class ConfirmationDiagnostics {
         if (!ENABLED || game == null || decider == null || generation == null) {
             return Capture.disabled();
         }
-        final DecisionRequest request = generation.getRequest();
-        final String candidates = request == null ? "" : String.join(";",
-                request.getCandidates().stream().map(LegalCandidate::getSemanticKey).toList());
-        final String requestId = request == null ? "" : Long.toString(request.getRequestId());
-        final String forced = request == null ? "" : Boolean.toString(request.isForced());
-        final String profile = profileName(generation);
-        final PublicSource source = safePublicSource(wrapper, decider);
-        synchronized (EVENTS) {
-            EVENTS.add(row("CALLBACK", game, decider, generation.getStatus().name(), generation.getReason(), requestId,
-                    candidates, forced, "", "", source.name, source.mode, source.execute, profile));
+        try {
+            final DecisionRequest request = generation.getRequest();
+            final String candidates = request == null ? "" : String.join(";",
+                    request.getCandidates().stream().map(LegalCandidate::getSemanticKey).toList());
+            final String requestId = request == null ? "" : Long.toString(request.getRequestId());
+            final String forced = request == null ? "" : Boolean.toString(request.isForced());
+            final String profile = profileName(generation);
+            final PublicSource source = safePublicSource(wrapper, decider);
+            synchronized (EVENTS) {
+                EVENTS.add(row("CALLBACK", game, decider, generation.getStatus().name(), generation.getReason(), requestId,
+                        candidates, forced, "", "", source.name, source.mode, source.execute, profile));
+            }
+            return new Capture(game, decider, generation.getStatus(), requestId, source, profile, true);
+        } catch (final RuntimeException ex) {
+            return Capture.disabled();
         }
-        return new Capture(game, decider, generation.getStatus(), requestId, source, profile, true);
     }
 
     private static String outputPath() {
@@ -76,12 +80,11 @@ public final class ConfirmationDiagnostics {
 
     private static String profileName(final ConfirmationDecisionProvider.Generation generation) {
         try {
-            if (generation == null || generation.getRequest() == null
-                    || generation.getRequest().getConfirmationContext() == null
-                    || generation.getRequest().getConfirmationContext().getProfile() == null) {
+            if (generation == null) {
                 return "";
             }
-            return generation.getRequest().getConfirmationContext().getProfile().name();
+            final ConfirmationTriggerProfile profile = generation.getProfile();
+            return profile == null ? "" : profile.name();
         } catch (final RuntimeException ex) {
             return "";
         }
@@ -168,10 +171,14 @@ public final class ConfirmationDiagnostics {
                 return;
             }
             resultRecorded = true;
-            synchronized (EVENTS) {
-                EVENTS.add(row("RESULT", game, decider, status.name(), status.name(), requestId, "", "",
-                        selectedCandidate == null ? "" : selectedCandidate.getSemanticKey(),
-                        Boolean.toString(nativeCallback), source.name, source.mode, source.execute, profile));
+            try {
+                synchronized (EVENTS) {
+                    EVENTS.add(row("RESULT", game, decider, status.name(), status.name(), requestId, "", "",
+                            selectedCandidate == null ? "" : selectedCandidate.getSemanticKey(),
+                            Boolean.toString(nativeCallback), source.name, source.mode, source.execute, profile));
+                }
+            } catch (final RuntimeException ex) {
+                // Diagnostics must never alter the Forge callback or game-loop path.
             }
         }
     }

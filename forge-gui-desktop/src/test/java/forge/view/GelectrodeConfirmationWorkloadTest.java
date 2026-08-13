@@ -25,19 +25,25 @@ public class GelectrodeConfirmationWorkloadTest {
         try {
             final Metrics reactive = run(root, "reactive", "Izzet Guild Kit", "Dimir Guild Kit", 10, 20260810L);
             assertEquals(reactive.callbacks, 26, "reactive raw trigger callbacks");
-            assertEquals(reactive.statusCounts.getOrDefault("ADMITTED", 0), 17,
+            assertEquals(reactive.statusCounts.getOrDefault("ADMITTED", 0), 19,
+                    "admitted Gelectrode plus Blood callbacks");
+            assertEquals(reactive.profileStatusCounts.getOrDefault(
+                    "GELECTRODE_SPELL_CAST_UNTAP_SELF|ADMITTED", 0), 17,
                     "admitted Gelectrode callbacks");
-            assertEquals(reactive.statusCounts.getOrDefault("UNSUPPORTED_PROFILE", 0), 5,
+            assertEquals(reactive.profileStatusCounts.getOrDefault(
+                    "BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD|ADMITTED", 0), 2,
+                    "admitted Blood ETB callbacks");
+            assertEquals(reactive.statusCounts.getOrDefault("UNSUPPORTED_PROFILE", 0), 3,
                     "other normal optional profiles");
             assertEquals(reactive.statusCounts.getOrDefault("UNSUPPORTED_COST", 0), 1,
                     "cost-bearing callback");
             assertEquals(reactive.statusCounts.getOrDefault("UNSUPPORTED_PROVENANCE", 0), 3,
                     "provenance-untrusted callbacks");
-            assertEquals(reactive.results, 17, "one result per admitted callback");
+            assertEquals(reactive.results, 19, "one result per admitted callback");
             assertEquals(reactive.candidateCounts.getOrDefault("ACCEPT", 0)
-                    + reactive.candidateCounts.getOrDefault("DECLINE", 0), 17);
-            assertEquals(reactive.confirmationRequests, 17, "DECISION_TRACE_V2 confirmation requests");
-            assertEquals(reactive.confirmationResults, 17, "DECISION_TRACE_V2 confirmation results");
+                    + reactive.candidateCounts.getOrDefault("DECLINE", 0), 19);
+            assertEquals(reactive.confirmationRequests, 19, "DECISION_TRACE_V2 confirmation requests");
+            assertEquals(reactive.confirmationResults, 19, "DECISION_TRACE_V2 confirmation results");
 
             final Metrics proactive = run(root, "proactive", "Dead and Alive", "Air Forces", 10, 20260809L);
             assertEquals(proactive.callbacks, 0, "proactive raw trigger callbacks");
@@ -104,16 +110,19 @@ public class GelectrodeConfirmationWorkloadTest {
         private final int callbacks;
         private final int results;
         private final Map<String, Integer> statusCounts;
+        private final Map<String, Integer> profileStatusCounts;
         private final Map<String, Integer> candidateCounts;
         private final int confirmationRequests;
         private final int confirmationResults;
 
         private Metrics(final int callbacks, final int results, final Map<String, Integer> statusCounts,
+                final Map<String, Integer> profileStatusCounts0,
                 final Map<String, Integer> candidateCounts, final int confirmationRequests,
                 final int confirmationResults) {
             this.callbacks = callbacks;
             this.results = results;
             this.statusCounts = statusCounts;
+            this.profileStatusCounts = profileStatusCounts0;
             this.candidateCounts = candidateCounts;
             this.confirmationRequests = confirmationRequests;
             this.confirmationResults = confirmationResults;
@@ -123,6 +132,7 @@ public class GelectrodeConfirmationWorkloadTest {
             int callbacks = 0;
             int results = 0;
             final Map<String, Integer> statuses = new HashMap<>();
+            final Map<String, Integer> profileStatuses = new HashMap<>();
             final Map<String, Integer> candidates = new HashMap<>();
             if (Files.exists(metrics)) {
                 final List<String> lines = Files.readAllLines(metrics, StandardCharsets.UTF_8);
@@ -131,6 +141,8 @@ public class GelectrodeConfirmationWorkloadTest {
                     if ("CALLBACK".equals(columns.get(0))) {
                         callbacks++;
                         statuses.merge(columns.get(6), 1, Integer::sum);
+                        final String profile = columns.size() > 16 ? columns.get(16) : "";
+                        profileStatuses.merge(profile + "|" + columns.get(6), 1, Integer::sum);
                     } else if ("RESULT".equals(columns.get(0))) {
                         results++;
                         candidates.merge(columns.get(11), 1, Integer::sum);
@@ -155,7 +167,8 @@ public class GelectrodeConfirmationWorkloadTest {
                     }
                 }
             }
-            return new Metrics(callbacks, results, statuses, candidates, confirmationRequests, confirmationResults);
+            return new Metrics(callbacks, results, statuses, profileStatuses, candidates,
+                    confirmationRequests, confirmationResults);
         }
 
         private static List<String> csv(final String line) {

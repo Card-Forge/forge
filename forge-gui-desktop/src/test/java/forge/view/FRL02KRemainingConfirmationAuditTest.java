@@ -57,15 +57,21 @@ public class FRL02KRemainingConfirmationAuditTest {
 
     private static void assertReactiveB1(final AuditRun run) {
         assertEquals(run.confirmationCallbacks, 26, "reactive raw trigger callbacks");
-        assertEquals(run.confirmationStatusCounts.getOrDefault("ADMITTED", 0), 17,
+        assertEquals(run.confirmationStatusCounts.getOrDefault("ADMITTED", 0), 19,
+                "admitted B1 plus D1 callbacks");
+        assertEquals(run.confirmationProfileStatusCounts.getOrDefault(
+                "GELECTRODE_SPELL_CAST_UNTAP_SELF|ADMITTED", 0), 17,
                 "admitted Gelectrode callbacks");
-        assertEquals(run.confirmationStatusCounts.getOrDefault("UNSUPPORTED_PROFILE", 0), 5,
+        assertEquals(run.confirmationProfileStatusCounts.getOrDefault(
+                "BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD|ADMITTED", 0), 2,
+                "admitted Blood ETB callbacks");
+        assertEquals(run.confirmationStatusCounts.getOrDefault("UNSUPPORTED_PROFILE", 0), 3,
                 "other normal optional profiles");
         assertEquals(run.confirmationStatusCounts.getOrDefault("UNSUPPORTED_COST", 0), 1,
                 "cost-bearing callback");
         assertEquals(run.confirmationStatusCounts.getOrDefault("UNSUPPORTED_PROVENANCE", 0), 3,
                 "provenance-untrusted callbacks");
-        assertEquals(run.confirmationResults, 17, "one result per admitted callback");
+        assertEquals(run.confirmationResults, 19, "one result per admitted callback");
     }
 
     private static void assertReactiveBooleanCounts(final AuditRun run) {
@@ -307,11 +313,13 @@ public class FRL02KRemainingConfirmationAuditTest {
         private final int confirmationCallbacks;
         private final int confirmationResults;
         private final Map<String, Integer> confirmationStatusCounts;
+        private final Map<String, Integer> confirmationProfileStatusCounts;
 
         private AuditRun(final String name, final Path booleanMetrics, final Path determinism,
                 final List<List<String>> booleanRows, final Map<String, Integer> familyCounts,
                 final Map<String, Integer> clusterCounts, final int confirmationCallbacks,
-                final int confirmationResults, final Map<String, Integer> confirmationStatusCounts) {
+                final int confirmationResults, final Map<String, Integer> confirmationStatusCounts,
+                final Map<String, Integer> confirmationProfileStatusCounts0) {
             this.name = name;
             this.booleanMetrics = booleanMetrics;
             this.determinism = determinism;
@@ -321,6 +329,7 @@ public class FRL02KRemainingConfirmationAuditTest {
             this.confirmationCallbacks = confirmationCallbacks;
             this.confirmationResults = confirmationResults;
             this.confirmationStatusCounts = confirmationStatusCounts;
+            this.confirmationProfileStatusCounts = confirmationProfileStatusCounts0;
         }
 
         private static AuditRun read(final String name, final Path booleanMetrics,
@@ -345,6 +354,7 @@ public class FRL02KRemainingConfirmationAuditTest {
             int confirmationCallbacks = 0;
             int confirmationResults = 0;
             final Map<String, Integer> confirmationStatusCounts = new HashMap<>();
+            final Map<String, Integer> confirmationProfileStatusCounts = new HashMap<>();
             if (Files.exists(confirmationMetrics)) {
                 final List<String> lines = Files.readAllLines(confirmationMetrics, StandardCharsets.UTF_8);
                 for (final String line : lines.subList(1, lines.size())) {
@@ -352,13 +362,17 @@ public class FRL02KRemainingConfirmationAuditTest {
                     if ("CALLBACK".equals(columns.get(0))) {
                         confirmationCallbacks++;
                         confirmationStatusCounts.merge(columns.get(6), 1, Integer::sum);
+                        final String profile = columns.size() > 16 ? columns.get(16) : "";
+                        confirmationProfileStatusCounts.merge(profile + "|" + columns.get(6), 1,
+                                Integer::sum);
                     } else if ("RESULT".equals(columns.get(0))) {
                         confirmationResults++;
                     }
                 }
             }
             return new AuditRun(name, booleanMetrics, determinism, booleanRows, familyCounts, clusterCounts,
-                    confirmationCallbacks, confirmationResults, confirmationStatusCounts);
+                    confirmationCallbacks, confirmationResults, confirmationStatusCounts,
+                    confirmationProfileStatusCounts);
         }
     }
 }

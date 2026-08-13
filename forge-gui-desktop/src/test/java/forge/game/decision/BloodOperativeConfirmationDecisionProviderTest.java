@@ -61,6 +61,8 @@ public class BloodOperativeConfirmationDecisionProviderTest extends AITest {
                     localProvider.generate(fixture.wrapper, fixture.decider);
 
             assertEquals(generation.getStatus(), ConfirmationDecisionProvider.Status.ADMITTED);
+            assertEquals(generation.getProfile(),
+                    ConfirmationTriggerProfile.BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD);
             final DecisionRequest request = generation.getRequest();
             final LegalCandidate selected = localProvider.choose(request, () -> {
                 nativeCalls.incrementAndGet();
@@ -97,6 +99,46 @@ public class BloodOperativeConfirmationDecisionProviderTest extends AITest {
             assertEquals(selected.getConfirmationKind(), ConfirmationCandidateKind.ACCEPT);
             assertEquals(nativeCalls.get(), 1);
             assertTrue(localProvider.apply(request, selected, fixture.wrapper));
+        } finally {
+            localProvider.setResolver(null);
+        }
+    }
+
+    @Test
+    public void bloodApplyRequiresTheCapturedDecisionResult() {
+        final ConfirmationDecisionProvider localProvider = new ConfirmationDecisionProvider();
+        localProvider.setResolver(request -> request.getCandidates().get(0));
+
+        try {
+            final ExactBloodFixture fixture = exactBloodFixture();
+            final ConfirmationDecisionProvider.Generation generation =
+                    localProvider.generate(fixture.wrapper, fixture.decider);
+
+            assertEquals(generation.getStatus(), ConfirmationDecisionProvider.Status.ADMITTED);
+            final DecisionRequest request = generation.getRequest();
+            assertNotNull(request);
+            if (request == null) {
+                return;
+            }
+
+            boolean rejected = false;
+            try {
+                localProvider.apply(request, request.getCandidates().get(0), fixture.wrapper);
+                fail("apply must not bypass the resolver or native confirmation callback");
+            } catch (final IllegalStateException ex) {
+                rejected = true;
+            }
+            assertTrue(rejected);
+
+            try {
+                localProvider.choose(request, () -> {
+                    fail("an apply failure must invalidate the active request");
+                    return false;
+                });
+                fail("a failed apply must not leave a retryable confirmation request");
+            } catch (final RuntimeException ex) {
+                // Expected: the apply failure clears the request-local ownership state.
+            }
         } finally {
             localProvider.setResolver(null);
         }
@@ -146,6 +188,58 @@ public class BloodOperativeConfirmationDecisionProviderTest extends AITest {
             assertTrue(message.toLowerCase(Locale.ROOT).contains("confirmation decision"));
         } finally {
             localProvider.setResolver(null);
+        }
+    }
+
+    @Test
+    public void bloodExternalResolverThrowingOrReturningForeignCandidateFailsClosed() {
+        final AtomicInteger nativeCalls = new AtomicInteger();
+        final ExactBloodFixture fixture = exactBloodFixture();
+        final ConfirmationDecisionProvider localProvider = new ConfirmationDecisionProvider();
+        localProvider.setResolver(request -> {
+            throw new IllegalStateException("resolver failure must be sanitized");
+        });
+
+        try {
+            final DecisionRequest request = localProvider.generate(fixture.wrapper, fixture.decider).getRequest();
+            assertNotNull(request);
+            if (request == null) {
+                return;
+            }
+            try {
+                localProvider.choose(request, () -> {
+                    nativeCalls.incrementAndGet();
+                    return true;
+                });
+                fail("a throwing external resolver must not fall back to native Forge");
+            } catch (final UnsupportedConfirmationDecisionException ex) {
+                assertEquals(ex.getStatus(), ConfirmationDecisionProvider.Status.INVALID_EXTERNAL_CANDIDATE);
+            }
+            assertEquals(nativeCalls.get(), 0);
+        } finally {
+            localProvider.setResolver(null);
+        }
+
+        final ConfirmationDecisionProvider foreignProvider = new ConfirmationDecisionProvider();
+        foreignProvider.setResolver(request -> LegalCandidate.pass(99));
+        try {
+            final DecisionRequest request = foreignProvider.generate(fixture.wrapper, fixture.decider).getRequest();
+            assertNotNull(request);
+            if (request == null) {
+                return;
+            }
+            try {
+                foreignProvider.choose(request, () -> {
+                    nativeCalls.incrementAndGet();
+                    return true;
+                });
+                fail("a foreign external candidate must not fall back to native Forge");
+            } catch (final UnsupportedConfirmationDecisionException ex) {
+                assertEquals(ex.getStatus(), ConfirmationDecisionProvider.Status.INVALID_EXTERNAL_CANDIDATE);
+            }
+            assertEquals(nativeCalls.get(), 0);
+        } finally {
+            foreignProvider.setResolver(null);
         }
     }
 
@@ -313,6 +407,20 @@ public class BloodOperativeConfirmationDecisionProviderTest extends AITest {
         assertNumericEquals(readRequiredGetter(context, "getDeciderPlayerId"), decider.getId(),
                 "deciderPlayerId");
         assertValueOnlyFields(context);
+    }
+
+    @Test
+    public void unsupportedBloodGenerationRetainsItsTypedProfile() {
+        final ExactBloodFixture fixture = exactBloodFixture();
+        fixture.wrapper.getWrappedAbility().getTargets().clear();
+
+        final ConfirmationDecisionProvider.Generation generation =
+                provider.generate(fixture.wrapper, fixture.decider);
+
+        assertEquals(generation.getStatus(), ConfirmationDecisionProvider.Status.UNSUPPORTED_PROFILE);
+        assertEquals(generation.getProfile(),
+                ConfirmationTriggerProfile.BLOOD_OPERATIVE_ETB_EXILE_GRAVEYARD_CARD);
+        assertNull(generation.getRequest());
     }
 
     private ExactBloodFixture exactBloodFixture() {

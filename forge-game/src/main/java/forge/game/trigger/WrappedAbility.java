@@ -470,13 +470,13 @@ public class WrappedAbility extends Ability {
                             throw ex;
                         }
                         confirmationCapture.recordResult(selected, !externalOwner);
+                        ChangesZoneAuditDiagnostics.recordTriggerResult(auditScope, accepted);
+                        TriggeredTargetAuditDiagnostics.recordConfirmationResult(this, accepted);
                         if (externalOwner) {
                             traceHandle.recordExternalChosenResult(selected);
                         } else {
                             traceHandle.recordNativeMappedResult(selected);
                         }
-                        ChangesZoneAuditDiagnostics.recordTriggerResult(auditScope, accepted);
-                        TriggeredTargetAuditDiagnostics.recordConfirmationResult(this, accepted);
                         if (!accepted) {
                             return;
                         }

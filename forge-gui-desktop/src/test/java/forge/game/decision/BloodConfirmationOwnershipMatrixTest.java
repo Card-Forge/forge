@@ -221,6 +221,14 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
     }
 
     @Test
+    public void targetAndConfirmationResolversRemainIndependentAcrossAllFourCells() throws Exception {
+        runOwnershipCell(false, false);
+        runOwnershipCell(true, false);
+        runOwnershipCell(false, true);
+        runOwnershipCell(true, true);
+    }
+
+    @Test
     public void wrapperExternalBloodUsesProfileTraceAndCapturedExternalOwnership() throws Exception {
         final Random previousRandom = MyRandom.getRandom();
         final DeterminismAuditRandom auditRandom = new DeterminismAuditRandom(DETERMINISTIC_SEED);
@@ -391,6 +399,113 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
                 && actual.getGameTimestamp() == expected.getGameTimestamp();
     }
 
+    private void runOwnershipCell(final boolean externalTarget, final boolean externalConfirmation)
+            throws Exception {
+        final Random previousRandom = MyRandom.getRandom();
+        final DeterminismAuditRandom auditRandom = new DeterminismAuditRandom(DETERMINISTIC_SEED);
+        Path traceDirectory = null;
+        DeterminismTrace trace = null;
+        MyRandom.setRandom(auditRandom);
+        try {
+            final BloodFixture fixture = bloodFixture();
+            assertBloodFixture(fixture);
+            final CountingController controller = installController(fixture);
+            controller.configureNativeTarget(fixture.targetA());
+
+            final AtomicInteger targetResolverCalls = new AtomicInteger();
+            if (externalTarget) {
+                controller.setTargetDecisionResolver(request -> {
+                    targetResolverCalls.incrementAndGet();
+                    return request.getCandidates().stream()
+                            .filter(candidate -> candidate.getTargetKind() == TargetCandidateKind.TARGET_CARD)
+                            .filter(candidate -> candidate.getTarget() == fixture.targetA())
+                            .findFirst()
+                            .orElseThrow(() -> new AssertionError("Blood target A is not in the legal request"));
+                });
+            }
+
+            final AtomicInteger confirmationResolverCalls = new AtomicInteger();
+            if (externalConfirmation) {
+                controller.getConfirmationDecisionProvider().setResolver(request -> {
+                    confirmationResolverCalls.incrementAndGet();
+                    return request.getCandidates().stream()
+                            .filter(candidate -> candidate.getConfirmationKind() == ConfirmationCandidateKind.ACCEPT)
+                            .findFirst()
+                            .orElseThrow(() -> new AssertionError("ACCEPT is not in the confirmation request"));
+                });
+            } else {
+                controller.getConfirmationDecisionProvider().setResolver(null);
+            }
+
+            traceDirectory = Files.createTempDirectory("frl02k-d1-blood-matrix-");
+            trace = DeterminismTrace.attach(fixture.game(), 0, auditRandom, traceDirectory);
+            controller.orderAndPlaySimultaneousSa(List.of(fixture.wrapper()));
+            fixture.game().getStack().resolveStack();
+            trace.finish();
+
+            final List<String> records = readTraceRecords(traceDirectory, new SoftAssert());
+            final List<String> requestRecords = records.stream()
+                    .filter(record -> record.startsWith("DECISION_TRACE_V2|REQUEST|"))
+                    .toList();
+            final List<String> resultRecords = records.stream()
+                    .filter(record -> record.startsWith("DECISION_TRACE_V2|RESULT|"))
+                    .toList();
+            final List<String> targetRequests = requestRecords.stream()
+                    .filter(record -> "TARGET".equals(traceField(record, 6)))
+                    .toList();
+            final List<String> confirmationRequests = requestRecords.stream()
+                    .filter(record -> "CONFIRMATION".equals(traceField(record, 6)))
+                    .toList();
+
+            assertEquals(targetResolverCalls.get(), externalTarget ? 1 : 0,
+                    "TARGET resolver ownership mismatch for matrix cell");
+            assertEquals(confirmationResolverCalls.get(), externalConfirmation ? 1 : 0,
+                    "CONFIRMATION resolver ownership mismatch for matrix cell");
+            assertEquals(controller.nativeTargetCallbackCalls(), externalTarget ? 0 : 1,
+                    "native TARGET callback ownership mismatch for matrix cell");
+            assertEquals(controller.nativeConfirmationCallbackCalls(), externalConfirmation ? 0 : 1,
+                    "native CONFIRMATION callback ownership mismatch for matrix cell");
+            assertEquals(targetRequests.size(), 1, "every matrix cell must create one TARGET request");
+            assertEquals(confirmationRequests.size(), 1,
+                    "every matrix cell must create one CONFIRMATION request");
+            assertEquals(resultRecords.size(), 2, "every matrix cell must close both requests");
+            assertEquals(fixture.ability().getTargets().size(), 1,
+                    "every matrix cell must retain exactly one target after confirmation");
+            assertTrue(fixture.ability().getTargets().contains(fixture.targetA()),
+                    "every matrix cell must restore target A");
+            assertFalse(fixture.ability().getTargets().contains(fixture.targetB()),
+                    "every matrix cell must not leave target B selected");
+            if (externalConfirmation) {
+                assertNull(controller.targetAtNativeConfirmation(),
+                        "external confirmation must not create temporary target B");
+            }
+            final List<String> targetResults = resultsFor(targetRequests, resultRecords);
+            final List<String> confirmationResults = resultsFor(confirmationRequests, resultRecords);
+            assertEquals(traceField(targetResults.get(0), 3), "CHOSEN");
+            assertEquals(traceField(confirmationResults.get(0), 3), "CHOSEN");
+            assertEquals(traceField(targetResults.get(0), 5), Boolean.toString(!externalTarget));
+            assertEquals(traceField(targetResults.get(0), 6), Boolean.toString(!externalTarget));
+            assertEquals(traceField(confirmationResults.get(0), 5), Boolean.toString(!externalConfirmation));
+            assertEquals(traceField(confirmationResults.get(0), 6), Boolean.toString(!externalConfirmation));
+        } finally {
+            finishTrace(trace);
+            if (traceDirectory != null) {
+                deleteTree(traceDirectory);
+            }
+            MyRandom.setRandom(previousRandom);
+        }
+    }
+
+    private static List<String> resultsFor(final List<String> requestRecords, final List<String> resultRecords) {
+        assertEquals(requestRecords.size(), 1);
+        final String requestId = traceField(requestRecords.get(0), 2);
+        final List<String> matching = resultRecords.stream()
+                .filter(record -> requestId.equals(traceField(record, 2)))
+                .toList();
+        assertEquals(matching.size(), 1);
+        return matching;
+    }
+
     private static Exception finishTrace(final DeterminismTrace trace) {
         if (trace == null) {
             return null;
@@ -535,6 +650,7 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
         private int orderSimultaneousSaCalls;
         private GameObject targetAtNativeConfirmation;
         private boolean nativeAIntegrityFailure;
+        private Card nativeTarget;
 
         private CountingController(final Game game, final Player player) {
             super(game, player, new LobbyPlayerAi(player.getName() + "-frl02k-d1", null));
@@ -543,6 +659,10 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
         @Override
         protected boolean invokeNativeTriggeredTarget(final SpellAbility underlying, final boolean mandatory) {
             nativeTargetCallbackCalls++;
+            if (nativeTarget != null) {
+                underlying.getTargets().add(nativeTarget);
+                return true;
+            }
             return super.invokeNativeTriggeredTarget(underlying, mandatory);
         }
 
@@ -567,6 +687,10 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
 
         private void configureNativeAIntegrityFailure() {
             nativeAIntegrityFailure = true;
+        }
+
+        private void configureNativeTarget(final Card target) {
+            nativeTarget = target;
         }
 
         private int nativeTargetCallbackCalls() {

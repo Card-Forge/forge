@@ -1,6 +1,6 @@
 # FRL-02K — Confirmation Attribution and Semantic Boundary Audit
 
-Status: A3 audit retained; FRL-02K-B1 Gelectrode production addendum PASS; FRL-02K-C1 ChangesZone projection evidence PASS with C1R semantic corrections recorded; FRL-02K-C2A exact Blood Operative ETB TARGET profile SUPPORTED / PASS. Global triggered TARGET, Blood CONFIRMATION, and global CONFIRMATION remain OPEN.
+Status: A3 audit retained; FRL-02K-B1 Gelectrode production addendum PASS; FRL-02K-C1 ChangesZone projection evidence PASS with C1R semantic corrections recorded; FRL-02K-C2A exact Blood Operative ETB TARGET profile SUPPORTED / PASS; FRL-02K-D1 exact Blood Operative ETB CONFIRMATION profile SUPPORTED / PASS. Global triggered TARGET and global CONFIRMATION remain OPEN.
 
 Audit date: 2026-08-11 (historical A1/A2/A3 evidence begins 2026-08-10)
 
@@ -22,13 +22,17 @@ The following is the current C2A authority. Sections 29.19 and 29.20 retain the 
 | `resolver == null` | Native Forge ownership is preserved. |
 | `resolver != null` | Only the exact Blood profile is externally owned. All other player-owned targeted triggers fail closed; there is no Forge-AI fallback. |
 | `global triggered TARGET` | `OPEN` |
-| `Blood CONFIRMATION` | `OPEN` |
+| `Blood CONFIRMATION` | `SUPPORTED / PASS` for the exact Blood Operative ETB confirmation profile; all other Blood confirmation shapes remain open. |
 | `global CONFIRMATION` | `OPEN` |
 | Agent completeness | Blood is not agent-complete; only the exact ETB `TARGET` profile is supported, and the later Blood confirmation remains open. |
 
-Reference set: [C2A design/spec](../superpowers/specs/2026-08-11-frl-02k-c2a-triggered-target-provider-seam-design.md), [C2A implementation plan](../superpowers/plans/2026-08-11-frl-02k-c2a-triggered-target-provider-seam.md), and [C2A audit](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md).
+Reference set: [C2A design/spec](../superpowers/specs/2026-08-11-frl-02k-c2a-triggered-target-provider-seam-design.md), [C2A implementation plan](../superpowers/plans/2026-08-11-frl-02k-c2a-triggered-target-provider-seam.md), [C2A audit](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md), and [D1 audit](FRL_02K_D1_BLOOD_CONFIRMATION_AUDIT.md).
 
 The recorded current validation evidence is the audit's [evidence matrix](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#6-evidence-matrix) and [exact Task 12 commands](FRL_02K_C2A_TRIGGERED_TARGET_AUDIT.md#61-final-task-12-exact-commands). This central-ledger update adds no new test result.
+
+### FRL-02K-D1 exact Blood ETB CONFIRMATION closure (2026-08-13)
+
+The isolated [D1 audit](FRL_02K_D1_BLOOD_CONFIRMATION_AUDIT.md) closes the exact Blood Operative ETB `CONFIRMATION` profile. It preserves `resolver == null` native Forge ownership and hard-fails unsupported states when an external resolver is present. The profile uses a nullable Blood `triggeringPlayerId`, a public/projectable Target-A projection, a private request-local identity guard, exactly `[ACCEPT, DECLINE]`, and the lifecycle order `apply + live integrity -> diagnostics -> terminal trace`. Native confirmation may create temporary B but must restore A before `CHOSEN`; external confirmation skips B and records false/false native/mapping trace flags. The four independent target/confirmation resolver cells and the canonical workload invariants are green. Global `CONFIRMATION` remains OPEN and Blood remains not agent-complete beyond this exact ETB slice.
 
 ### FRL-02K-D current remainder closure (2026-08-12)
 
