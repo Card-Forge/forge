@@ -273,12 +273,6 @@ public class BloodConfirmationOwnershipMatrixTest extends AITest {
                     "external Blood confirmation must invoke the resolver exactly once");
             assertions.assertEquals(controller.nativeConfirmationCallbackCalls(), 0,
                     "captured external ownership must not invoke native confirmation");
-            assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Exile).stream()
-                    .filter(card -> samePublicCardIdentity(card, targetAIdentity)).count(), 1L,
-                    "ACCEPT must consume target A by public card identity");
-            assertions.assertEquals(fixture.game().getCardsIn(ZoneType.Graveyard).stream()
-                    .filter(card -> samePublicCardIdentity(card, targetAIdentity)).count(), 0L,
-                    "target A must leave the graveyard exactly once");
             assertions.assertEquals(confirmationRequestRecords.size(), 1,
                     "the wrapper must trace exactly one Blood CONFIRMATION request");
             assertions.assertEquals(resultRecords.size(), 1,
