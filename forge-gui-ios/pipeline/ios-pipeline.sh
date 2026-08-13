@@ -136,9 +136,9 @@ ASM="$M2/org/ow2/asm/asm/$ASM_VER/asm-$ASM_VER.jar"
 ASMC="$M2/org/ow2/asm/asm-commons/$ASM_VER/asm-commons-$ASM_VER.jar"
 TOOLS_CP="$ASM:$ASMC:$JV/tools"
 
-RT="$M2/com/mobidevelop/robovm/robovm-rt/2.3.23/robovm-rt-2.3.23.jar"
-ROBOVM_OBJC="$M2/com/mobidevelop/robovm/robovm-objc/2.3.23/robovm-objc-2.3.23.jar"
-ROBOVM_CT="$M2/com/mobidevelop/robovm/robovm-cocoatouch/2.3.23/robovm-cocoatouch-2.3.23.jar"
+RT="$M2/com/mobidevelop/robovm/robovm-rt/2.3.23/robovm-rt-2.3.24.jar"
+ROBOVM_OBJC="$M2/com/mobidevelop/robovm/robovm-objc/2.3.23/robovm-objc-2.3.24.jar"
+ROBOVM_CT="$M2/com/mobidevelop/robovm/robovm-cocoatouch/2.3.23/robovm-cocoatouch-2.3.24.jar"
 GDXB="$M2/com/badlogicgames/gdx/gdx-backend-robovm/1.14.2/gdx-backend-robovm-1.14.2.jar"
 
 # ---------------------------------------------------------------- bootstrap
