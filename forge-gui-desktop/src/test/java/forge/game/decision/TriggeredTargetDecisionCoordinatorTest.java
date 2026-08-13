@@ -142,6 +142,16 @@ public class TriggeredTargetDecisionCoordinatorTest extends AITest {
     }
 
     @Test
+    public void chooserDeciderMismatchPrecedesLiveEffectMismatch() {
+        final BloodFixture fixture = bloodFixture();
+        fixture.ability().setApi(ApiType.GainLife);
+
+        assertUnsupportedTargeted(withWrapper(fixture,
+                new WrappedAbility(fixture.trigger(), fixture.ability(), fixture.opponent())),
+                "UNSUPPORTED_PROFILE");
+    }
+
+    @Test
     public void liveTargetBoundsMismatchRejectsAdmission() {
         final BloodFixture minMismatch = bloodFixture();
         replaceLiveTargetBounds(minMismatch.ability(), "0", "1");
@@ -190,6 +200,15 @@ public class TriggeredTargetDecisionCoordinatorTest extends AITest {
 
         assertEquals(exception.getReason(), "NON_EMPTY_INITIAL_TARGETS");
         assertEquals(fixture.ability().getTargets().size(), 1);
+    }
+
+    @Test
+    public void nonEmptyInitialTargetsPrecedeLiveEffectMismatch() {
+        final BloodFixture fixture = bloodFixture();
+        fixture.ability().getTargets().add(fixture.firstTarget());
+        fixture.ability().setApi(ApiType.GainLife);
+
+        assertUnsupportedTargeted(fixture, "NON_EMPTY_INITIAL_TARGETS");
     }
 
     @Test
