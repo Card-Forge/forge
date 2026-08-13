@@ -131,9 +131,7 @@ final class BloodOperativeEtbProfile {
         final Map<String, String> params;
         try {
             params = liveAbility.getMapParams();
-            if (params == null || !BLOOD_LIVE_EFFECT_PARAMS.containsAll(params.keySet())
-                    || !BLOOD_EFFECT_PARAMS.equals(normalize(params, "TgtPrompt", "ValidTgtsDesc",
-                    "TgtZone", "TargetMin", "TargetMax"))) {
+            if (params == null || !BLOOD_LIVE_EFFECT_PARAMS.containsAll(params.keySet())) {
                 return Validation.failed(Failure.LIVE_EFFECT_DEFINITION);
             }
         } catch (final RuntimeException ex) {
@@ -145,6 +143,17 @@ final class BloodOperativeEtbProfile {
                     || liveAbility.getTargetingPlayer() != null) {
                 return Validation.failed(Failure.LIVE_EFFECT_DEFINITION);
             }
+        } catch (final RuntimeException ex) {
+            return Validation.failed(Failure.LIVE_EFFECT_DEFINITION);
+        }
+
+        for (final Map.Entry<String, String> expected : BLOOD_EFFECT_PARAMS.entrySet()) {
+            if (!expected.getValue().equals(params.get(expected.getKey()))) {
+                return Validation.failed(Failure.TARGETING_SHAPE);
+            }
+        }
+
+        try {
             if (liveAbility.getApi() != ApiType.ChangeZone) {
                 return Validation.failed(Failure.TARGETING_SHAPE);
             }

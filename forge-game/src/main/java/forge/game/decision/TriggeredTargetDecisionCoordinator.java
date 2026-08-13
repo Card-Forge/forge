@@ -458,8 +458,7 @@ public final class TriggeredTargetDecisionCoordinator {
     }
 
     private static boolean isLiveEffectFailure(final BloodOperativeEtbProfile.Failure failure) {
-        return failure == BloodOperativeEtbProfile.Failure.LIVE_EFFECT_DEFINITION
-                || failure == BloodOperativeEtbProfile.Failure.TARGETING_SHAPE;
+        return failure == BloodOperativeEtbProfile.Failure.TARGETING_SHAPE;
     }
 
     private static boolean hasInitialTargetFailure(final SpellAbility liveAbility) {
