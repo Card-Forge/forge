@@ -63,7 +63,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                 this.difficulty = split[1].trim();
             } else if ("Description".equalsIgnoreCase(split[0])) {
                 this.description = split[1].trim();
-            } else if ("AiName".equalsIgnoreCase(split[0])) {
+            } else if ("AIName".equalsIgnoreCase(split[0])) {
                 this.aiName = split[1].trim();
             } else if ("Targets".equalsIgnoreCase(split[0])) {
                 this.targets = split[1].trim();
@@ -255,7 +255,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
 
     public boolean getCompleted() { return completed; }
 
-    public String getAiName() { return aiName; }
+    public String getAIName() { return aiName; }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
