@@ -7,7 +7,7 @@ SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.!token+YouCtrl+withoutFlying |
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigExile | TriggerDescription$ Whenever chaos ensues, exile target creature with flying. For as long as it remains exiled, its owner may cast it by paying {2} rather than paying its mana cost.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayAltManaCost$ 2 | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast the card by paying {2} rather than paying its mana cost.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayPlayer$ CardOwner | MayPlayAltManaCost$ 2 | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast the card by paying {2} rather than paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ PlaneswalkedFrom | ValidCard$ Plane.Self | Execute$ TrigRemove | TriggerDescription$ When you planeswalk away from CARDNAME, remove all flying counters from all creatures.
 SVar:TrigRemove:DB$ RemoveCounterAll | ValidCards$ Creature | CounterType$ Flying | AllCounters$ True
