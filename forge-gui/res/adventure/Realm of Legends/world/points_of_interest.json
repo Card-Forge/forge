@@ -528,6 +528,18 @@
 			"Story"]
 	},
 	{
+		"name": "Idyllic Beachfront",
+		"displayName": "Idyllic Beachfront",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Idyllic Beachfront",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Idyllic_Beachfront.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Gitrog Bog",
 		"displayName": "Gitrog Bog",
 		"type": "castle",

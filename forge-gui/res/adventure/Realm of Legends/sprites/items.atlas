@@ -144,6 +144,12 @@ FlamecasterPants
 TarfireHelm
   xy: 80, 384
   size: 16, 16
+StarfishOnYourFoot
+  xy: 464, 16
+  size: 16, 16
+TidalAmulet
+  xy: 48, 784
+  size: 16, 16
 SkyclaveMaul
   xy: 224, 432
   size: 16, 16

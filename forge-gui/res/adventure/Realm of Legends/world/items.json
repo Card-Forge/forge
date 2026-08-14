@@ -3201,6 +3201,29 @@
       ]
     }
   },
+  {
+    "name": "Starfish On Your Foot",
+    "description": "0/1 starfish. U: regenerate. Get a 0/1 token at end step if you regened",
+    "equipmentSlot": "Boots",
+    "iconName": "StarfishOnYourFoot",
+    "effect": {
+      "startBattleWithCard": [
+        "Spiny Starfish"
+      ]
+    }
+  },
+  {
+    "name": "Tidal Amulet",
+    "description": "Gets a counter on upkeep. At one, all blue get -2/-0. At three, +2/+0. Resets at four.",
+    "equipmentSlot": "Neck",
+    "iconName": "TidalAmulet",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCard": [
+        "Tidal Influence"
+      ]
+    }
+  },
     {
     "name": "Amulet of Mischief",
     "description": "Pay 3U for random spell steal",
