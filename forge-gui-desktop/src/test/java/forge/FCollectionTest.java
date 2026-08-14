@@ -51,7 +51,10 @@ public class FCollectionTest {
         for (Card c : cc.threadSafeIterable()) {
             futures.add(CompletableFuture.supplyAsync(() -> {
                 if (c.getId() % 2 > 0)
-                    cc.remove(c);
+                    // FCollection.remove is not synchronized, so serialize the concurrent removals
+                    synchronized (cc) {
+                        cc.remove(c);
+                    }
                 return 0;
             }));
         }
