@@ -87,6 +87,10 @@ public enum PerfCounter {
     REPLACEMENT_LOOKUPS("replacementLookups"),
     /** Replacement effects returned as applicable by those lookups. */
     REPLACEMENT_EFFECTS_FOUND("replacementEffectsFound"),
+    /** Derived CardState trait views served from their per-state cache. */
+    TRAIT_CACHE_HITS("traitCacheHits"),
+    /** Derived CardState trait views rebuilt after first use or invalidation. */
+    TRAIT_CACHE_REBUILDS("traitCacheRebuilds"),
 
     // ---- simulation ----
     /** {@code GameCopier.makeCopy} invocations. */

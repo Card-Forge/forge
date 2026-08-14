@@ -630,10 +630,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void setStates(Map<CardStateName, CardState> map) {
         states.clear();
         states.putAll(map);
+        invalidateTraitCaches();
     }
 
     public final void addAlternateState(final CardStateName state, final boolean updateView) {
         states.put(state, new CardState(this, state));
+        // Original merges the raw traits of split states, so state topology is a cache input.
+        invalidateTraitCaches();
         if (updateView) {
             updateStateForView();
         }
@@ -646,6 +649,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (state == currentStateName) {
             currentStateName = CardStateName.Original;
         }
+        invalidateTraitCaches();
         if (updateView) {
             updateStateForView();
         }
@@ -1932,7 +1936,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
+    public void setCounters(final CounterType counterType, final Integer num) {
+        if (getCounters(counterType) == num) {
+            return;
+        }
+        super.setCounters(counterType, num);
+        // Shield, stun and finality counters contribute generated replacement effects.
+        invalidateTraitCaches();
+    }
+
+    @Override
     public final void setCounters(final Multiset<CounterType> allCounters) {
+        invalidateTraitCaches();
         boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().allMatch(CounterType::isKeywordCounter);
         counters = allCounters;
         view.updateCounters(this);
@@ -1952,6 +1967,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     public final void clearCounters() {
         if (counters.isEmpty()) { return; }
+        invalidateTraitCaches();
         boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().allMatch(CounterType::isKeywordCounter);
 
         counters.clear();
@@ -4192,6 +4208,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void updateTypeCache() {
+        // updateTypes() refreshes only the current state. Clone/rollback paths can change the type
+        // inputs of other states too, so none of this card's trait views may survive this update.
+        invalidateTraitCaches();
         this.getCurrentState().updateTypes();
     }
 
@@ -4925,12 +4944,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         for (Table.Cell<Long, Long, CardTraitChanges> e : changes.cellSet()) {
             changedCardTraitsByText.put(e.getRowKey(), e.getColumnKey(), e.getValue().copy(this, true));
         }
+        invalidateTraitCaches();
     }
     public final void addChangedCardTraitsByText(Collection<SpellAbility> spells,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics, long timestamp, long staticId) {
         changedCardTraitsByText.put(timestamp, staticId, new CardTraitChanges(
             spells, trigger, replacements, statics, e -> true
         ));
+        invalidateTraitCaches();
 
         // setting card traits via text, does overwrite any other word change effects?
         this.changedTextColors.addEmpty(timestamp, staticId);
@@ -4953,6 +4974,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final ICardTraitChanges addChangedCardTraits(ICardTraitChanges changes, long timestamp, long staticId, boolean updateView) {
         changedCardTraits.put(timestamp, staticId, changes);
+        invalidateTraitCaches();
         if (updateView) {
             updateAbilityTextForView();
         }
@@ -4960,10 +4982,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean removeChangedCardTraits(long timestamp, long staticId) {
-        return changedCardTraits.remove(timestamp, staticId) != null;
+        final boolean changed = changedCardTraits.remove(timestamp, staticId) != null;
+        if (changed) {
+            invalidateTraitCaches();
+        }
+        return changed;
     }
     public final boolean removeChangedCardTraitsByText(long timestamp, long staticId) {
-        return changedCardTraitsByText.remove(timestamp, staticId) != null;
+        final boolean changed = changedCardTraitsByText.remove(timestamp, staticId) != null;
+        if (changed) {
+            invalidateTraitCaches();
+        }
+        return changed;
     }
 
     public Iterable<? extends ICardTraitChanges> getChangedCardTraitsList(CardState state) {
@@ -4986,6 +5016,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         for (Table.Cell<Long, Long, ICardTraitChanges> e : changes.cellSet()) {
             changedCardTraits.put(e.getRowKey(), e.getColumnKey(), e.getValue().copy(this, true));
         }
+        invalidateTraitCaches();
     }
 
     public boolean clearChangedCardTraits() {
@@ -4998,6 +5029,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             changed = true;
         }
         changedCardTraits.clear();
+        if (changed) {
+            invalidateTraitCaches();
+        }
         return changed;
     }
 
@@ -5221,7 +5255,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void updateKeywordsCache() {
         updateKeywordsCache(getCurrentState());
     }
+
+    /** Drop the derived replacement/static/trigger views on every state of this card. */
+    public final void invalidateTraitCaches() {
+        for (final CardState state : states.values()) {
+            state.invalidateTraitCache();
+        }
+        for (final CardCloneStates cloneStates : clonedStates.values()) {
+            for (final CardState state : cloneStates.values()) {
+                state.invalidateTraitCache();
+            }
+        }
+    }
+
     public final void updateKeywordsCache(final CardState state) {
+        // Keywords can contribute all three cached trait kinds.
+        state.invalidateTraitCache();
         KeywordCollection keywords = new KeywordCollection();
 
         // Layer 1

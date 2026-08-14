@@ -14,7 +14,11 @@ The labels in this report are deliberate:
 - **Proposed** means a design, not an existing Forge API or thread-safety guarantee.
 - **Uncertain** identifies a point that must be resolved by profiling or parity tests.
 
-I could inspect the complete source and Git history, but could not build or profile this revision in the supplied environment: Java 17 is present, while Maven is absent, the repository has no Maven wrapper, and no compiled dependency tree is available. Consequently, this report does **not** call any newly identified path a measured bottleneck. Historical measurements are useful evidence but are not substitutes for a fresh baseline.
+The initial analysis environment had Java 17 but no Maven or Maven wrapper, so the plan did not call
+any newly identified path a measured bottleneck. Implementation work later bootstrapped Maven 3.9.11:
+the phase 2 game suite and the desktop compile now pass, but this shared machine is still unsuitable
+for a trustworthy timing baseline. Historical measurements are useful evidence but are not
+substitutes for a fresh controlled run.
 
 Two existing measurements are particularly relevant:
 
@@ -27,13 +31,14 @@ Historical PR [#11160](https://github.com/Card-Forge/forge/pull/11160) includes 
 
 This document is the plan this repository is executing, so it now also records what each phase
 actually did. Sections below keep their original analysis of the pinned revision; where the code has
-since moved, an **Implemented** note says how. Phases 2 to 5 are untouched.
+since moved, an **Implemented** note says how.
 
 | Phase | State | Where |
 |---|---|---|
 | 0 — measurement foundation | Done | [AI-Performance-Measurement.md](AI-Performance-Measurement.md) |
 | 1 — low-risk work elimination | Done, with two design changes and two deferrals | [AI-Performance-Phase1.md](AI-Performance-Phase1.md) |
-| 2 to 5 | Not started | — |
+| 2 — redundant computation, allocations, and caching | In progress; trait-view cache done | [AI-Performance-Phase2.md](AI-Performance-Phase2.md) |
+| 3 to 5 | Not started | — |
 
 Three findings from phase 1 change what a later phase should assume:
 
@@ -724,6 +729,13 @@ public final void invalidateTraitCaches() {
 
 Each getter returns its cached view when non-null and otherwise executes today's builder unchanged before storing it. Replacement getters use separate entries for `rulesHost`. Invalidation must include the concrete inputs enumerated above, not only add/remove base traits. Copying must leave caches cold or build independent views; it must not share cached collection objects between card states. This code is not made concurrently safe by caching: live card states remain serial and isolated branches own separate copies. A debug generation/rebuild comparison can strengthen the open PR's seeded-game evidence before merge.
 
+> **Implemented, with an expanded invalidation audit.** The four views are cached per `CardState`,
+> with separate replacement entries for `rulesHost`. In addition to the open PR's invalidators, the
+> implementation covers `clearCounters`, alternate-state add/remove, and the direct perpetual-trait
+> removal path in `LosePerpetualEffect`; each could otherwise leave a derived view stale. Cache hits
+> and rebuilds are exposed through `PerfCounter`. See
+> [AI-Performance-Phase2.md](AI-Performance-Phase2.md).
+
 ### 10.4 Introduce a decision context
 
 **NEW:** `AiDecisionContext`, constructed in `AiController.chooseSpellAbilityToPlay` and passed through newly overloaded helper methods.
@@ -956,7 +968,7 @@ The gates matter: do not start Phase 3 because a machine has many cores, and do 
 | Row | Outcome |
 |---|---|
 | P0 Pin fixtures/seeds/JVM; decision metrics, JFR events, traces, dashboards | **Done** (phase 0): `PerfProbe`, `PerfReport`, `DecisionTraceWriter`, `GameStateDigest`, `JfrPerfSink`, `forge bench` |
-| P0 Reproduce PR #11366 and #11160 evidence on current source | **Not done.** A timing run needs a machine that is not sharing CPU, which §11.2 is explicit about; the container this work was done in is not one. The runbook is in the phase 1 doc. #11366 additionally cannot be reproduced until its `CardState` cache exists, which is phase 2 P0 |
+| P0 Reproduce PR #11366 and #11160 evidence on current source | **Not done.** A timing run needs a machine that is not sharing CPU, which §11.2 is explicit about; the container this work was done in is not one. The cache needed to reproduce #11366 now exists; the runbook is in the phase 1 and phase 2 docs |
 | P0 Remove or make pure the forced-attacker futures; timeout regression test | **Done.** Serial in attacker order; covered by a repeat-declaration determinism test |
 | P1 Pass root `Score` into `GameSimulator` | **Done, narrowed to one candidate's branches.** The whole-decision form failed its shadow test — see §10.1 |
 | P1 Add `hasAtLeastCandidates` and migrate threshold-only callers | **Done.** Four callers migrated |
@@ -968,6 +980,13 @@ The gates matter: do not start Phase 3 because a machine has many cores, and do 
 Parity for every shipped item was checked as exact trace identity against the merge base, on a
 conventional full-board turn and a full-simulation multi-branch turn: ordered decision traces and
 the final canonical state digests were byte-identical.
+
+### Phase 2 outcomes so far
+
+| Row | Outcome |
+|---|---|
+| P0 Cache `CardState` trigger/static/replacement views | **Done.** Four per-state caches, complete audited invalidation, hit/rebuild counters, and focused mutation regressions; see [AI-Performance-Phase2.md](AI-Performance-Phase2.md) |
+| P0 Reproduce PR #11366 timing on this revision | **Pending.** Run the fixed-seed corpus on a quiet machine and require exact decision-trace identity before accepting timing results |
 
 ## 13. Expected overall improvement
 

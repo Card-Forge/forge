@@ -142,8 +142,9 @@ Added to `PerfCounter`, so the JSON report and the JFR events show whether each 
 - **Reproducing the PR #11366 and #11160 measurements on this revision** (plan roadmap, phase 1 P0).
   This is a measurement task, and it was not run here: the container this work was done in shares CPU
   with other tenants, which is the one thing §11.2 says a timing run must not do. The runbook below is
-  what to run on a machine that can produce a trustworthy number. Note that #11366's result cannot be
-  reproduced without first implementing the `CardState` trait cache, which is phase 2 P0.
+  what to run on a machine that can produce a trustworthy number. At the end of phase 1, #11366's
+  result could not yet be reproduced because the `CardState` trait cache was still phase 2 P0; that
+  cache is now implemented.
 
 ## Reproduction runbook
 

@@ -25,7 +25,9 @@ public class LosePerpetualEffect extends SpellAbilityEffect {
                 }
             }
             if (toRemove != (long) 0) {
-                host.getChangedCardTraits().remove(toRemove, (long) 0);
+                // Go through Card's mutator so derived trigger/static/replacement views are
+                // invalidated along with the perpetual trait layer.
+                host.removeChangedCardTraits(toRemove, (long) 0);
                 host.removePerpetual(toRemove);
             }       
         }
