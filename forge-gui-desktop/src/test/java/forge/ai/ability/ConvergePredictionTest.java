@@ -80,6 +80,32 @@ public class ConvergePredictionTest extends AITest {
     }
 
     /**
+     * The token count is a separate SVar from the one X announces, so the per-API override never
+     * matched here and PermanentAi's loop is not on this path. Only the prediction sizes it.
+     */
+    @Test
+    public void convergeSizesATokenSpellOnTheXPath() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        for (String l : new String[]{"Plains", "Island", "Swamp", "Mountain", "Forest"}) {
+            addCard(l, ai);
+        }
+        addCard("Island", ai);
+        addCard("Island", ai);
+        fillLibrary(ai, 15);
+        // X U U, and TokenAmount reads Count$Converge off a different SVar than X does
+        addCardToZone("Sweep the Skies", ai, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+        game.getAction().checkStateEffects(true);
+        gameLoopUntilNextPhase(game);
+
+        assertEquals("one thopter per colour spent", 5,
+                countCardsWithName(game, "Thopter Token", ZoneType.Battlefield));
+    }
+
+    /**
      * DrawAi used to override calculateAmount for Count$Converge because it read zero before
      * anything had been paid. It reads the prediction now, so the override is gone and the spell
      * still has to size itself correctly.
