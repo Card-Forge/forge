@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Timer;
+import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -548,7 +549,17 @@ public class AdventureQuestController implements Serializable {
 
     String randomItemName()
     {  //todo: expand and include in fetch/delivery quests
-        String[] options = {"collection of frequently asked questions","case of card sleeves", "well loved playmat", "copy of Richard Garfield's autobiography", "collection of random foreign language cards", "lucky coin", "giant card binder", "unsorted box of commons", "bucket full of pieces of shattered artifacts","depleted mana shard"};
+        String[] options = {
+                Forge.getLocalizer().getMessage("advRewardItem1"),
+                Forge.getLocalizer().getMessage("advRewardItem2"),
+                Forge.getLocalizer().getMessage("advRewardItem3"),
+                Forge.getLocalizer().getMessage("advRewardItem4"),
+                Forge.getLocalizer().getMessage("advRewardItem5"),
+                Forge.getLocalizer().getMessage("advRewardItem6"),
+                Forge.getLocalizer().getMessage("advRewardItem7"),
+                Forge.getLocalizer().getMessage("advRewardItem8"),
+                Forge.getLocalizer().getMessage("advRewardItem9"),
+                Forge.getLocalizer().getMessage("advRewardItem10")};
 
         return Aggregates.random(options);
     }
@@ -566,9 +577,9 @@ public class AdventureQuestController implements Serializable {
             if (q.sourceID.equals(pointID)) {
                 //remind player about current active side quest
                 DialogData response = new DialogData();
-                response.text = "\"You haven't finished the last thing we asked you to do!\" (" + q.name +") ";
+                response.text = Forge.getLocalizer().getMessage("advQuestNotFinished", q.name);
                 DialogData dismiss = new DialogData();
-                dismiss.name = "\"Oh, right, let me go take care of that.\"";
+                dismiss.name = Forge.getLocalizer().getMessage("advQuestGoTakeCareOfThat");
                 response.options = new DialogData[]{dismiss};
                 ret = new AdventureQuestData();
                 ret.offerDialog = response;
@@ -578,9 +589,9 @@ public class AdventureQuestController implements Serializable {
         if (nextQuestDate.containsKey(pointID) && nextQuestDate.get(pointID) >= LocalDate.now().toEpochDay()){
             //No more side quests available here today due to previous activity
             DialogData response = new DialogData();
-            response.text = "\"We don't have anything new for you to do right now. Come back tomorrow.\"";
+            response.text = Forge.getLocalizer().getMessage("advQuestComeBackTomorrow");
             DialogData dismiss = new DialogData();
-            dismiss.name = "\"Okay.\" (Leave)";
+            dismiss.name = Forge.getLocalizer().getMessage("advOkayLeave");
             response.options = new DialogData[]{dismiss};
             ret = new AdventureQuestData();
             ret.offerDialog = response;
@@ -590,9 +601,9 @@ public class AdventureQuestController implements Serializable {
         if (tooManyQuests(Current.player().getQuests())) {
             //No more side quests available here today, too many active
             DialogData response = new DialogData();
-            response.text = "\"Adventurer, we need your assistance!\"";
+            response.text = Forge.getLocalizer().getMessage("advQuestNeedAssistance");
             DialogData dismiss = new DialogData();
-            dismiss.name = "\"I can't, I have far too many things to do right now\" (Your quest log is too full already) (Leave)";
+            dismiss.name = Forge.getLocalizer().getMessage("advQuestLogFull");
             response.options = new DialogData[]{dismiss};
             ret = new AdventureQuestData();
             ret.offerDialog = response;
