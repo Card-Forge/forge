@@ -150,6 +150,9 @@ StarfishOnYourFoot
 TidalAmulet
   xy: 48, 784
   size: 16, 16
+PegasusHelm
+  xy: 0, 320
+  size: 16, 16
 SkyclaveMaul
   xy: 224, 432
   size: 16, 16

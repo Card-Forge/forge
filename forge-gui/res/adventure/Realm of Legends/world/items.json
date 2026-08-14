@@ -3224,6 +3224,18 @@
       ]
     }
   },
+  {
+    "name": "Pegasus Helm",
+    "description": "2, Discard a card: Make a 1/1 flying pegasus token.",
+    "equipmentSlot": "Neck",
+    "iconName": "PegasusHelm",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Pegasus Refuge"
+      ]
+    }
+  },
     {
     "name": "Amulet of Mischief",
     "description": "Pay 3U for random spell steal",

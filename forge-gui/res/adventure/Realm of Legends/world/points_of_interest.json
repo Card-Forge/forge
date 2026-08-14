@@ -540,6 +540,18 @@
 			"Story"]
 	},
 	{
+		"name": "Peaceful Clearing",
+		"displayName": "Peaceful Clearing",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Tranquil Clearing",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Peaceful_Clearing.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Gitrog Bog",
 		"displayName": "Gitrog Bog",
 		"type": "castle",
