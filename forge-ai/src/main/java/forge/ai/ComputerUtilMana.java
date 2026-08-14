@@ -90,6 +90,13 @@ public class ComputerUtilMana {
      * that still reaches the most of them. Returns the colors the announced X buys.
      */
     public static byte setXForBestConverge(final SpellAbility sa, final Player ai, final int maxX) {
+        final AiController aic = aiControllerOf(ai);
+        if (aic != null && aic.reapplyConvergeX(sa)) {
+            // the same spell is searched again on the way down to its API logic, and each step of
+            // the walk is a full payment solve - the answer from the first walk still holds
+            return aic.getExpectedPayingColors(sa);
+        }
+
         int bestX = 0;
         int bestCount = 0;
         byte bestColors = 0;
@@ -101,21 +108,21 @@ public class ComputerUtilMana {
                 bestCount = count;
                 bestColors = colors;
                 bestX = i;
+                if (bestCount == MagicColor.WUBRG.length) {
+                    break; // nothing above this can buy a sixth color
+                }
             }
         }
         sa.setXManaCostPaid(bestX);
-        rememberExpectedPayingColors(ai, sa, bestColors);
+        if (aic != null) {
+            aic.rememberConvergeX(sa, bestX, bestColors);
+        }
         return bestColors;
     }
 
-    /**
-     * Park what this spell would be paid with on the AI, where the rules side can ask for it
-     * through PlayerController rather than the AI having to write it onto the spell.
-     */
-    private static void rememberExpectedPayingColors(final Player ai, final SpellAbility sa, final byte colors) {
-        if (ai != null && ai.getController() instanceof PlayerControllerAi controller) {
-            controller.getAi().setExpectedPayingColors(sa, colors);
-        }
+    private static AiController aiControllerOf(final Player ai) {
+        return ai != null && ai.getController() instanceof PlayerControllerAi controller
+                ? controller.getAi() : null;
     }
 
     // Does not check if mana sources can be used right now, just checks for potential chance.
