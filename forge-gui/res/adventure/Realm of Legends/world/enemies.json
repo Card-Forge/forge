@@ -63916,6 +63916,364 @@
     "spawnRate": 0
   },
   {
+    "name": "Ashling",
+    "sprite": "sprites/enemy/elemental/magmaelemental.atlas",
+    "deck": [
+      "decks/legends/ashling.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Flamecaster Pants"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ashling, the Limitless"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ashling, the Extinguisher"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ashling the Pilgrim"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ashling, Flame Dancer"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ashling, Rekindled"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 2,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "WUBRG",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Grub",
+    "sprite": "sprites/enemy/humanoid/goblin/goblin_3.atlas",
+    "deck": [
+      "decks/legends/grub.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Tarfire Helm"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Grub, Storied Matriarch"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "RB",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Auntie Ool",
+    "sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
+    "deck": [
+      "decks/legends/auntie_ool.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Auntie Ool, Cursewretch"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "BGR",
+    "spawnRate": 0
+  },
+  {
+    "name": "Bre",
+    "sprite": "sprites/enemy/humanoid/human/cleric/cleric_orzhov.atlas",
+    "deck": [
+      "decks/legends/bre.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 5,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Bre of Clan Stoutarm"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "WR",
+    "spawnRate": 0
+  },
+  {
+    "name": "Salacinder and Soot",
+    "sprite": "sprites/enemy/monstrosity/basilisk_3.atlas",
+    "deck": [
+      "decks/legends/salacinder_and_soot.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 5,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Salacinder and Soot, Rascals"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "UR",
+    "spawnRate": 0
+  },
+  {
     "name": "Withengar",
     "sprite": "sprites/enemy/fiend/abyssalbaron.atlas",
     "deck": [

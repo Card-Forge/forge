@@ -3178,6 +3178,29 @@
       ]
     }
   },
+  {
+    "name": "Flamecaster Pants",
+    "description": "3/2 elemental with reach, burn opp 2 when you cast a MV 4+ spell.",
+    "equipmentSlot": "Boots",
+    "iconName": "FlamecasterPants",
+    "effect": {
+      "lifeModifier": -3,
+      "startBattleWithCard": [
+        "Enraged Flamecaster"
+      ]
+    }
+  },
+  {
+    "name": "Tarfire Helm",
+    "description": "At each end step, if you put a counter on a creature, burn opp 2.",
+    "equipmentSlot": "Neck",
+    "iconName": "TarfireHelm",
+    "effect": {
+      "startBattleWithCard": [
+        "Lasting Tarfire"
+      ]
+    }
+  },
     {
     "name": "Amulet of Mischief",
     "description": "Pay 3U for random spell steal",

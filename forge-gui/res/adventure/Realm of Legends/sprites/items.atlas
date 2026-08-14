@@ -138,6 +138,12 @@ FaerieCrown
 EvershrikeAnklet
   xy: 64, 992
   size: 16, 16
+FlamecasterPants
+  xy: 16, 448
+  size: 16, 16
+TarfireHelm
+  xy: 80, 384
+  size: 16, 16
 SkyclaveMaul
   xy: 224, 432
   size: 16, 16

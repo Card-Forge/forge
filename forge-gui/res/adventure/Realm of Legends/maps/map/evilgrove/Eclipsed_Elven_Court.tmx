@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="165">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="168">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -86,7 +86,7 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="134" template="../../../../common/maps/obj/enemy.tx" x="217.333" y="268">
+  <object id="134" template="../../../../common/maps/obj/enemy.tx" x="222.083" y="279.5">
    <properties>
     <property name="enemy" value="Maralen"/>
     <property name="pursueRange" type="int" value="30"/>
@@ -261,6 +261,21 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   <object id="164" template="../../../../common/maps/obj/scroll.tx" x="413.75" y="388.5">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Firdoch Core&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="165" template="../../../../common/maps/obj/scroll.tx" x="145.5" y="303">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Trystan's Command&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="166" template="../../../../common/maps/obj/scroll.tx" x="196" y="254">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Morcant's Eyes&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="167" template="../../../../common/maps/obj/scroll.tx" x="93.75" y="254">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Morcant's Loyalist&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
  </objectgroup>

@@ -516,6 +516,18 @@
 			"Story"]
 	},
 	{
+		"name": "Ashling's Domain",
+		"displayName": "Ashling's Domain",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Ashling Domain",
+		"map": "../Realm of Legends/maps/map/barbariancamp/Ashlings_Domain.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Gitrog Bog",
 		"displayName": "Gitrog Bog",
 		"type": "castle",
