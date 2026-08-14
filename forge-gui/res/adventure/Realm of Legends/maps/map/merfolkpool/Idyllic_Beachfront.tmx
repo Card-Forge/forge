@@ -171,7 +171,7 @@ ALL SUMMERS MUST BE VEILED&quot;,
   </object>
   <object id="108" template="../../../../common/maps/obj/enemy.tx" x="218.667" y="329.333">
    <properties>
-    <property name="enemy" value="Maeve"/>
+    <property name="enemy" value="Neerdiv"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
