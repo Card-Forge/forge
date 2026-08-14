@@ -2,19 +2,19 @@
 Name:Magic the Puzzling - Duelist #5 - Eeny Meeny Miney Moe
 Goal:Win
 Turns:1
-Difficulty:Easy
+Difficulty:Common
 Description:Your opponent is Nick. He's under the false assumption that he's going to win this duel. Of source, with Circles of Protection for two of your three colors, four blockers, and a Conversion in play, he has plenty of reason to be cocky. But then, you draw an Instill Energy and the solution comes to you. You're going to take Nick down this turn and you plan to enjoy the look on his face when you do it.\n\nIt is the beginning of your upkeep phase. Defeat Nick this turn without dying.
 [state]
 ActivePlayer=human
 ActivePhase=upkeep
 HumanLife=5
 AILife=12
-humanhand=Black Ward; Disenchant; Earthbind; Swords to Plowshares; Instill Energy; Flashfires; Red Elemental Blast; Stone Rain; Giant Growth; Black Knight;
+humanhand=Black Ward|Set:3ED; Disenchant|Set:3ED; Earthbind|Set:3ED; Swords to Plowshares|Set:3ED; Instill Energy|Set:3ED; Flashfires|Set:3ED; Red Elemental Blast|Set:3ED; Stone Rain|Set:3ED; Giant Growth|Set:3ED; Black Knight|Set:3ED;
 humanprecast=
 humangraveyard=
 humanlibrary=
-humanBattlefield=Plains; Plains; Plains; Plains; Forest; Forest; Mountain; Mountain; Mountain; Mountain; Basalt Monolith; Sol Ring; Rod of Ruin; Stone Giant|Id:1; Dwarven Weaponsmith; Grizzly Bears; Hill Giant; Library of Leng;
-aibattlefield=Plains; Plains; Swamp|Tapped; Swamp|Tapped; Swamp|Tapped; Island|Tapped; Island|Tapped; Sol Ring|Tapped; Circle of Protection: Red; Circle of Protection: Green; Phantasmal Forces; Hypnotic Specter|Counters:M1M1=3|Id:11; Unstable Mutation|AttachedTo:11; Pearled Unicorn|Id:10; Flight|AttachedTo:10; Wall of Water; Conversion; Dingus Egg;Weakness|AttachedTo:1;
+humanBattlefield=Plains|Set:3ED; Plains|Set:3ED; Plains|Set:3ED; Plains|Set:3ED; Forest|Set:3ED; Forest|Set:3ED; Mountain|Set:3ED; Mountain|Set:3ED; Mountain|Set:3ED; Mountain|Set:3ED; Basalt Monolith|Set:3ED; Sol Ring|Set:3ED; Rod of Ruin|Set:3ED; Stone Giant|Id:1|Set:3ED; Dwarven Weaponsmith|Set:3ED; Grizzly Bears|Set:3ED; Hill Giant|Set:3ED; Library of Leng|Set:3ED;
+aibattlefield=Plains|Set:3ED; Plains|Set:3ED; Swamp|Tapped|Set:3ED; Swamp|Tapped|Set:3ED; Swamp|Tapped|Set:3ED; Island|Tapped|Set:3ED; Island|Tapped|Set:3ED; Sol Ring|Tapped|Set:3ED; Circle of Protection: Red|Set:3ED; Circle of Protection: Green|Set:3ED; Phantasmal Forces|Set:3ED; Hypnotic Specter|Counters:M1M1=3|Id:11|Set:3ED; Unstable Mutation|AttachedTo:11|Set:3ED; Pearled Unicorn|Id:10|Set:3ED; Flight|AttachedTo:10|Set:3ED; Wall of Water|Set:3ED; Conversion|Set:3ED; Dingus Egg|Set:3ED;Weakness|AttachedTo:1|Set:3ED;
 aiprecast=
 aigraveyard=
 ailibrary=
