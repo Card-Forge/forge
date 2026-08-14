@@ -300,7 +300,22 @@ final class BridgeSession {
         String kind = requireText(params, "kind");
         switch (kind) {
         case "priority":
-            return controller.decidePriority(params.path("context"));
+            JsonNode context = params.path("context");
+            int turn = context.path("turn").asInt();
+            if (context.path("active_seat").asInt() == options.getSeat()
+                    && "main1".equals(context.path("phase").asText())) {
+                for (Map.Entry<Integer, LobbyPlayerBridge> entry : lobbyPlayers.entrySet()) {
+                    if (entry.getKey() == options.getSeat()) {
+                        continue;
+                    }
+                    BridgeController remote = entry.getValue().getController();
+                    if (remote.hasPendingNonMainAction(turn)) {
+                        controller.queuePriorityHandoffPass(turn, "main1");
+                        remote.awaitPendingNonMainAction(turn);
+                    }
+                }
+            }
+            return controller.decidePriority(context);
         case "declare_attackers":
         case "declare_blockers":
             return controller.decideCombat(kind, params.path("context"));

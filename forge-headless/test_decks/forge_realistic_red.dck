@@ -1,0 +1,14 @@
+[metadata]
+Name=Forge Bridge Realistic Red
+Description=Varied mono-red creatures and burn for full-game bridge acceptance
+
+[Main]
+24 Mountain
+6 Goblin Piker
+6 Gray Ogre
+6 Hill Giant
+6 Shock
+6 Lightning Bolt
+6 Lightning Strike
+
+[Sideboard]

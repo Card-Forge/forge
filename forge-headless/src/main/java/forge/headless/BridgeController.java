@@ -4,8 +4,10 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -53,6 +55,7 @@ final class BridgeController extends PlayerControllerAi {
     private int forgeLandPlayedTurn = -1;
     private volatile boolean multiBlockerScenario;
     private volatile boolean multiBlockerDamageObserved;
+    private volatile boolean instantPriority;
     private volatile JsonNode pendingHandCounts;
     private volatile int pendingHandTurn;
     private RemoteActionTicket deferredRemoteAction;
@@ -69,14 +72,17 @@ final class BridgeController extends PlayerControllerAi {
     ObjectNode decidePriority(JsonNode context) {
         requireForgeAiSeat();
         multiBlockerScenario |= context.path("multi_blocker").asBoolean(false);
+        instantPriority |= context.path("instant_priority").asBoolean(false);
         if (!fullGame) {
             List<SpellAbility> choices = super.chooseSpellAbilityToPlay();
             return choices == null || choices.isEmpty() ? passAction() : describeAction(choices.get(0));
         }
         boolean allowCast = context.path("allow_cast").asBoolean(true);
         int authoritativeTurn = context.path("turn").asInt();
+        String authoritativePhase = context.path("phase").asText("");
         if (context.path("resolve_stack").asBoolean(false)) {
-            put(decisions, new DecisionTicket(false, authoritativeTurn), "Forge AI stack-resolution pass");
+            put(decisions, new DecisionTicket(false, authoritativeTurn, authoritativePhase),
+                    "Forge AI stack-resolution pass");
             return passAction();
         }
         // Drain permits commonly arrive while the shadow is still completing
@@ -91,10 +97,11 @@ final class BridgeController extends PlayerControllerAi {
             // Also enqueue a sentinel to wake a game thread already blocked in
             // take(decisions). If no thread is blocked, the controller removes
             // this ticket locally before auto-passing the completed turn.
-            put(decisions, new DecisionTicket(false, authoritativeTurn), "Forge AI drain sentinel");
+            put(decisions, new DecisionTicket(false, authoritativeTurn, authoritativePhase),
+                    "Forge AI drain sentinel");
             return passAction();
         }
-        DecisionTicket ticket = new DecisionTicket(allowCast, authoritativeTurn);
+        DecisionTicket ticket = new DecisionTicket(allowCast, authoritativeTurn, authoritativePhase);
         put(decisions, ticket, "Forge AI decision permit");
         return await(ticket.result, "Forge AI priority decision");
     }
@@ -119,9 +126,43 @@ final class BridgeController extends PlayerControllerAi {
         return result;
     }
 
+    void queuePriorityHandoffPass(int turn, String phase) {
+        requireForgeAiSeat();
+        put(decisions, new DecisionTicket(false, turn, phase), "Forge AI priority handoff pass");
+    }
+
+    boolean hasPendingNonMainAction(int turn) {
+        if (forgeAiSeat) {
+            return false;
+        }
+        RemoteActionTicket head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
+        while (head != null && head.turn < turn
+                && "pass".equals(head.action.path("type").asText())) {
+            if (deferredRemoteAction == null) {
+                remoteActions.poll();
+            } else {
+                deferredRemoteAction = null;
+            }
+            head.consumed.complete(null);
+            head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
+        }
+        return head != null && head.turn == turn
+                && !"pass".equals(head.action.path("type").asText())
+                && !"main1".equals(head.phase) && !"main2".equals(head.phase);
+    }
+
+    void awaitPendingNonMainAction(int turn) {
+        if (!hasPendingNonMainAction(turn)) {
+            return;
+        }
+        RemoteActionTicket head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
+        await(head.consumed, "non-main remote action handoff");
+    }
+
     ObjectNode decideCombat(String kind, JsonNode context) {
         requireForgeAiSeat();
         multiBlockerScenario |= context.path("multi_blocker").asBoolean(false);
+        instantPriority |= context.path("instant_priority").asBoolean(false);
         CombatDecisionTicket ticket = new CombatDecisionTicket(
                 kind, context.path("allow_combat").asBoolean(true),
                 context.path("multi_blocker").asBoolean(false));
@@ -138,7 +179,9 @@ final class BridgeController extends PlayerControllerAi {
             return;
         }
         multiBlockerScenario |= context.path("multi_blocker").asBoolean(false);
+        instantPriority |= context.path("instant_priority").asBoolean(false);
         int authoritativeTurn = context.path("turn").asInt();
+        String authoritativePhase = context.path("phase").asText("");
         String actionType = action.path("type").asText();
         if ("declare_attackers".equals(actionType) || "declare_blockers".equals(actionType)) {
             put(combatActions, new CombatActionTicket(action.deepCopy(), authoritativeTurn),
@@ -149,7 +192,7 @@ final class BridgeController extends PlayerControllerAi {
         if ("pass".equals(action.path("type").asText())
                 && "authoritative_turn_end".equals(action.path("reason").asText())) {
             remoteDrainThroughTurn = Math.max(remoteDrainThroughTurn, authoritativeTurn);
-            put(remoteActions, new RemoteActionTicket(action.deepCopy(), authoritativeTurn),
+            put(remoteActions, new RemoteActionTicket(action.deepCopy(), authoritativeTurn, authoritativePhase),
                     "remote turn-end sentinel");
             diagnostics.println("Bridge reached authoritative remote turn end for seat " + seat
                     + " turn " + authoritativeTurn);
@@ -157,12 +200,13 @@ final class BridgeController extends PlayerControllerAi {
         }
         String passReason = action.path("reason").asText();
         boolean isBridgeBarrier = "authoritative_main_phase_end".equals(passReason)
-                || "authoritative_stack_resolution".equals(passReason);
+                || "authoritative_stack_resolution".equals(passReason)
+                || "authoritative_priority_pass".equals(passReason);
         if ("pass".equals(action.path("type").asText()) && !isBridgeBarrier) {
             diagnostics.println("Bridge mirrored opponent priority pass for seat " + seat + ": " + action);
             return;
         }
-        RemoteActionTicket ticket = new RemoteActionTicket(action.deepCopy(), authoritativeTurn);
+        RemoteActionTicket ticket = new RemoteActionTicket(action.deepCopy(), authoritativeTurn, authoritativePhase);
         diagnostics.println("Bridge replay pending at life " + lifeSummary() + ": " + action);
         put(remoteActions, ticket, "remote opponent action");
         if ("authoritative_main_phase_end".equals(action.path("reason").asText())) {
@@ -171,6 +215,10 @@ final class BridgeController extends PlayerControllerAi {
         }
         if ("authoritative_stack_resolution".equals(action.path("reason").asText())) {
             diagnostics.println("Bridge queued authoritative stack-resolution pass for seat " + seat);
+            return;
+        }
+        if ("authoritative_priority_pass".equals(action.path("reason").asText())) {
+            diagnostics.println("Bridge queued authoritative priority pass for seat " + seat);
             return;
         }
         diagnostics.println("Bridge queued exact replay action for seat " + seat);
@@ -215,16 +263,23 @@ final class BridgeController extends PlayerControllerAi {
         if (!fullGame) {
             return super.chooseSpellAbilityToPlay();
         }
-        if (getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
-            return null;
-        }
-        if (!getGame().getPhaseHandler().getPhase().isMain()) {
-            return null;
-        }
-        if (getGame().getPhaseHandler().getPlayerTurn() != player) {
+        boolean sharedActiveMain = getGame().getPhaseHandler().getPhase().isMain()
+                && getGame().getPhaseHandler().getPlayerTurn() == player;
+        if (!instantPriority) {
+            if (getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)
+                    || !sharedActiveMain) {
+                return null;
+            }
+        } else if (!getGame().getStack().isEmpty()) {
+            // The first instant increment exposes empty-stack windows (end step
+            // and combat tricks). Both engines drain an already-cast spell
+            // locally before accepting another bridge action.
             return null;
         }
         applyPendingHandSync();
+        if (forgeAiSeat && instantPriority && !sharedActiveMain && decisions.peek() == null) {
+            return null;
+        }
         // DeepScry does not ask the Forge-controlled seat at empty menus, so its
         // AI can pass locally. The remote replay seat still consumes a tagged
         // pass/barrier here; that prevents Forge from crossing a resolution or
@@ -238,6 +293,17 @@ final class BridgeController extends PlayerControllerAi {
             while (head != null && head.turn < currentTurn) {
                 decisions.poll().result.complete(passAction());
                 head = decisions.peek();
+            }
+            if (instantPriority && !sharedActiveMain && head == null) {
+                return null;
+            }
+            if (head != null && head.turn > currentTurn) {
+                return null;
+            }
+            String currentPhase = currentBridgePhase();
+            if (head != null && head.turn == currentTurn && !head.phase.isEmpty()
+                    && !head.phase.equals(currentPhase)) {
+                return null;
             }
             if (drainThroughTurn >= currentTurn && head != null
                     && !head.allowCast && head.turn <= currentTurn) {
@@ -256,7 +322,11 @@ final class BridgeController extends PlayerControllerAi {
             try {
                 applyPendingHandSync();
                 List<SpellAbility> choices = super.chooseSpellAbilityToPlay();
-                if (ticket.allowCast && (choices == null || choices.isEmpty())) {
+                if (instantPriority && ticket.allowCast) {
+                    SpellAbility deterministic = firstLegalDeterministicAction();
+                    choices = deterministic == null ? null : Collections.singletonList(deterministic);
+                }
+                if (!instantPriority && ticket.allowCast && (choices == null || choices.isEmpty())) {
                     SpellAbility bolt = firstLegalLightningBolt();
                     if (bolt != null) {
                         choices = Collections.singletonList(bolt);
@@ -274,7 +344,7 @@ final class BridgeController extends PlayerControllerAi {
                     SpellAbility creature = firstLegalCoverageCreature();
                     choices = creature == null ? null : Collections.singletonList(creature);
                 }
-                if (ticket.allowCast && choices != null && !choices.isEmpty()
+                if (!instantPriority && ticket.allowCast && choices != null && !choices.isEmpty()
                         && !choices.get(0).isLandAbility() && opponentControlsCreature()) {
                     SpellAbility bolt = firstLegalLightningBolt();
                     if (bolt != null) {
@@ -302,6 +372,9 @@ final class BridgeController extends PlayerControllerAi {
             }
         }
 
+        if (instantPriority && !sharedActiveMain && !hasAnyLegalPriorityAction()) {
+            return null;
+        }
         int currentTurn = getGame().getPhaseHandler().getTurn();
         RemoteActionTicket head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
         while (head != null && head.turn < currentTurn
@@ -326,6 +399,27 @@ final class BridgeController extends PlayerControllerAi {
         }
         if (remoteDrainThroughTurn >= currentTurn && (head == null || head.turn > currentTurn)) {
             return null;
+        }
+        if (instantPriority && head != null && head.turn > currentTurn) {
+            return null;
+        }
+        if (instantPriority && head != null && head.turn < currentTurn
+                && !"pass".equals(head.action.path("type").asText())) {
+            throw new IllegalStateException("Missed remote action from turn " + head.turn
+                    + " before Forge advanced to turn " + currentTurn + ": " + head.action);
+        }
+        if (instantPriority && !sharedActiveMain) {
+            if (head == null || head.turn > currentTurn) {
+                return null;
+            }
+            String currentPhase = currentBridgePhase();
+            boolean mainPhaseTicket = "main1".equals(head.phase) || "main2".equals(head.phase);
+            if (head.turn == currentTurn && !mainPhaseTicket && !"main1".equals(currentPhase)) {
+                return null;
+            }
+            if (head.turn == currentTurn && mainPhaseTicket && !head.phase.equals(currentPhase)) {
+                return null;
+            }
         }
         RemoteActionTicket ticket = deferredRemoteAction == null
                 ? (finishing ? remoteActions.poll() : take(remoteActions, "remote opponent action"))
@@ -623,6 +717,72 @@ final class BridgeController extends PlayerControllerAi {
         return null;
     }
 
+    private SpellAbility firstLegalDeterministicAction() {
+        if (forgeLandPlayedTurn != getGame().getPhaseHandler().getTurn()) {
+            CardCollection lands = ComputerUtilAbility.getAvailableLandsToPlay(getGame(), player);
+            if (lands != null) {
+                for (Card land : lands) {
+                    for (SpellAbility ability : land.getAllPossibleAbilities(player, true)) {
+                        if (ability.isLandAbility() && ability.canPlay()) {
+                            return ability;
+                        }
+                    }
+                }
+            }
+        }
+        for (String name : new String[] { "Shock", "Lightning Bolt", "Lightning Strike", "Incinerate" }) {
+            SpellAbility burn = firstLegalNamedSpell(name);
+            if (burn != null) {
+                prepareDeterministicBurnTargets(burn, burnDamage(name));
+                return burn;
+            }
+        }
+        for (String name : new String[] { "Goblin Piker", "Gray Ogre", "Hill Giant" }) {
+            SpellAbility creature = firstLegalNamedSpell(name);
+            if (creature != null) {
+                return creature;
+            }
+        }
+        return null;
+    }
+
+    private SpellAbility firstLegalNamedSpell(String name) {
+        List<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(
+                ComputerUtilAbility.getAvailableCards(getGame(), player), player);
+        for (SpellAbility ability : abilities) {
+            Card host = ability.getHostCard();
+            if (ability.isSpell() && host != null && name.equals(host.getName()) && ability.canPlay()) {
+                return ability;
+            }
+        }
+        return null;
+    }
+
+    private void prepareDeterministicBurnTargets(SpellAbility ability, int damage) {
+        ability.resetTargets();
+        for (Player candidate : getGame().getPlayers()) {
+            if (candidate == player) {
+                continue;
+            }
+            for (Card card : candidate.getCardsIn(ZoneType.Battlefield)) {
+                if (card.isCreature() && card.getNetToughness() <= damage && ability.canTarget(card)) {
+                    ability.getTargets().add(card);
+                    return;
+                }
+            }
+        }
+        for (Player candidate : getGame().getPlayers()) {
+            if (candidate != player && ability.canTarget(candidate)) {
+                ability.getTargets().add(candidate);
+                return;
+            }
+        }
+    }
+
+    private static int burnDamage(String name) {
+        return "Shock".equals(name) ? 2 : 3;
+    }
+
     private SpellAbility firstLegalCoverageCreature() {
         String wanted = countBattlefield(player, "Gray Ogre") < 2
                 ? "Gray Ogre"
@@ -653,10 +813,21 @@ final class BridgeController extends PlayerControllerAi {
         if (desiredCountsNode == null || getGame().getPhaseHandler().getTurn() < pendingHandTurn) {
             return;
         }
+        int desiredSize = 0;
+        Iterator<JsonNode> desiredCounts = desiredCountsNode.elements();
+        while (desiredCounts.hasNext()) {
+            desiredSize += desiredCounts.next().asInt();
+        }
+        PlayerZone handZone = player.getZone(ZoneType.Hand);
+        // A turn's reveal arrives before Forge has necessarily performed its
+        // draw-step action. Defer reconciliation until the authoritative hand
+        // size is reachable; instant-priority callbacks can occur in upkeep.
+        if (handZone.size() != desiredSize) {
+            return;
+        }
         pendingHandCounts = null;
         Map<String, Integer> desired = new LinkedHashMap<>();
         desiredCountsNode.fields().forEachRemaining(entry -> desired.put(entry.getKey(), entry.getValue().asInt()));
-        PlayerZone handZone = player.getZone(ZoneType.Hand);
         PlayerZone libraryZone = player.getZone(ZoneType.Library);
         List<Card> hand = new ArrayList<>();
         List<Card> library = new ArrayList<>();
@@ -712,6 +883,14 @@ final class BridgeController extends PlayerControllerAi {
         return null;
     }
 
+    private String currentBridgePhase() {
+        PhaseType phase = getGame().getPhaseHandler().getPhase();
+        if (phase == PhaseType.END_OF_TURN) {
+            return "end";
+        }
+        return phase.nameForScripts.replace(" ", "").toLowerCase(Locale.ROOT);
+    }
+
     @Override
     public boolean mulliganKeepHand(Player mulliganingPlayer, int cardsToReturn) {
         return fullGame || super.mulliganKeepHand(mulliganingPlayer, cardsToReturn);
@@ -764,8 +943,19 @@ final class BridgeController extends PlayerControllerAi {
         }
 
         if (matches.size() != 1) {
+            List<String> handState = new ArrayList<>();
+            for (Card card : player.getCardsIn(ZoneType.Hand)) {
+                handState.add(card.getName());
+            }
+            List<String> landState = new ArrayList<>();
+            for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
+                if (card.isLand()) {
+                    landState.add(card.getName() + "(tapped=" + card.isTapped() + ")");
+                }
+            }
             throw new IllegalStateException("Remote action matched " + matches.size()
-                    + " Forge legal actions: " + action);
+                    + " Forge legal actions: " + action + "; hand=" + handState + "; lands=" + landState
+                    + "; phase=" + currentBridgePhase());
         }
         SpellAbility matched = matches.get(0);
         applyTargets(matched, action.path("targets"));
@@ -852,6 +1042,7 @@ final class BridgeController extends PlayerControllerAi {
         reference.put("zone", card.getZone() == null ? "none" : card.getZone().getZoneType().name().toLowerCase());
         reference.put("idx", sameNameIndex(card));
         if (card.isInZone(ZoneType.Battlefield)) {
+            reference.put("controller", card.getController().getId() + 1);
             reference.put("object_id", "forge-" + card.getId());
         }
         return reference;
@@ -929,22 +1120,26 @@ final class BridgeController extends PlayerControllerAi {
     private static final class DecisionTicket {
         private final boolean allowCast;
         private final int turn;
+        private final String phase;
         private final CompletableFuture<ObjectNode> result = new CompletableFuture<>();
 
-        private DecisionTicket(boolean allowCast, int turn) {
+        private DecisionTicket(boolean allowCast, int turn, String phase) {
             this.allowCast = allowCast;
             this.turn = turn;
+            this.phase = phase;
         }
     }
 
     private static final class RemoteActionTicket {
         private final JsonNode action;
         private final int turn;
+        private final String phase;
         private final CompletableFuture<Void> consumed = new CompletableFuture<>();
 
-        private RemoteActionTicket(JsonNode action, int turn) {
+        private RemoteActionTicket(JsonNode action, int turn, String phase) {
             this.action = action;
             this.turn = turn;
+            this.phase = phase;
         }
     }
 
