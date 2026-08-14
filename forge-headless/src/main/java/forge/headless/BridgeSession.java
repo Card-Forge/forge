@@ -486,6 +486,20 @@ final class BridgeSession {
                 lobbyPlayer.getController().finishGame();
             }
             awaitGameThread();
+            boolean required = false;
+            boolean observed = false;
+            for (LobbyPlayerBridge lobbyPlayer : lobbyPlayers.values()) {
+                BridgeController controller = lobbyPlayer.getController();
+                required |= controller.requiresMultiBlockerCoverage();
+                observed |= controller.observedMultiBlockerDamage();
+            }
+            if (required && !observed) {
+                throw new BridgeFailure("multi_blocker_coverage",
+                        "Forge never reached a multi-blocker damage assignment callback");
+            }
+            if (observed) {
+                diagnostics.println("Forge multi-blocker damage assignment callback observed");
+            }
         }
     }
 

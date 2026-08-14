@@ -1,0 +1,10 @@
+[metadata]
+Name=Simple Multi-Blocker Coverage Deck
+Description=Vanilla Hill Giant into two Gray Ogres for Forge bridge damage assignment coverage
+
+[Main]
+24 Mountain
+24 Gray Ogre
+12 Hill Giant
+
+[Sideboard]

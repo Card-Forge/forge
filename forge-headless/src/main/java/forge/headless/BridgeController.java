@@ -51,6 +51,8 @@ final class BridgeController extends PlayerControllerAi {
     private volatile int drainThroughTurn;
     private volatile int remoteDrainThroughTurn;
     private int forgeLandPlayedTurn = -1;
+    private volatile boolean multiBlockerScenario;
+    private volatile boolean multiBlockerDamageObserved;
     private volatile JsonNode pendingHandCounts;
     private volatile int pendingHandTurn;
     private RemoteActionTicket deferredRemoteAction;
@@ -66,6 +68,7 @@ final class BridgeController extends PlayerControllerAi {
 
     ObjectNode decidePriority(JsonNode context) {
         requireForgeAiSeat();
+        multiBlockerScenario |= context.path("multi_blocker").asBoolean(false);
         if (!fullGame) {
             List<SpellAbility> choices = super.chooseSpellAbilityToPlay();
             return choices == null || choices.isEmpty() ? passAction() : describeAction(choices.get(0));
@@ -118,8 +121,10 @@ final class BridgeController extends PlayerControllerAi {
 
     ObjectNode decideCombat(String kind, JsonNode context) {
         requireForgeAiSeat();
+        multiBlockerScenario |= context.path("multi_blocker").asBoolean(false);
         CombatDecisionTicket ticket = new CombatDecisionTicket(
-                kind, context.path("allow_combat").asBoolean(true));
+                kind, context.path("allow_combat").asBoolean(true),
+                context.path("multi_blocker").asBoolean(false));
         put(combatDecisions, ticket, "Forge AI " + kind + " decision");
         return await(ticket.result, "Forge AI " + kind + " decision");
     }
@@ -132,6 +137,7 @@ final class BridgeController extends PlayerControllerAi {
             diagnostics.println("Bridge accepted scripted opponent action for seat " + seat + ": " + action);
             return;
         }
+        multiBlockerScenario |= context.path("multi_blocker").asBoolean(false);
         int authoritativeTurn = context.path("turn").asInt();
         String actionType = action.path("type").asText();
         if ("declare_attackers".equals(actionType) || "declare_blockers".equals(actionType)) {
@@ -263,6 +269,11 @@ final class BridgeController extends PlayerControllerAi {
                     // action exactly matched by DeepScry.
                     choices = Collections.singletonList(choices.get(0));
                 }
+                if (ticket.allowCast && multiBlockerScenario && choices != null && !choices.isEmpty()
+                        && !choices.get(0).isLandAbility()) {
+                    SpellAbility creature = firstLegalCoverageCreature();
+                    choices = creature == null ? null : Collections.singletonList(creature);
+                }
                 if (ticket.allowCast && choices != null && !choices.isEmpty()
                         && !choices.get(0).isLandAbility() && opponentControlsCreature()) {
                     SpellAbility bolt = firstLegalLightningBolt();
@@ -348,7 +359,9 @@ final class BridgeController extends PlayerControllerAi {
         if (forgeAiSeat) {
             CombatDecisionTicket ticket = take(combatDecisions, "Forge attacker decision permit");
             try {
-                if (ticket.allowCombat) {
+                if (ticket.allowCombat && ticket.multiBlocker && !multiBlockerDamageObserved) {
+                    declareCoverageAttacker(attacker, combat);
+                } else if (ticket.allowCombat) {
                     super.declareAttackers(attacker, combat);
                 }
                 ticket.result.complete(describeAttackers(combat));
@@ -371,7 +384,9 @@ final class BridgeController extends PlayerControllerAi {
         if (forgeAiSeat) {
             CombatDecisionTicket ticket = take(combatDecisions, "Forge blocker decision permit");
             try {
-                if (ticket.allowCombat) {
+                if (ticket.allowCombat && ticket.multiBlocker && !multiBlockerDamageObserved) {
+                    declareCoverageBlockers(combat);
+                } else if (ticket.allowCombat) {
                     super.declareBlockers(defender, combat);
                 }
                 ticket.result.complete(describeBlockers(combat));
@@ -383,6 +398,68 @@ final class BridgeController extends PlayerControllerAi {
         }
         CombatActionTicket ticket = take(combatActions, "remote blocker declaration");
         applyRemoteBlockers(combat, ticket.action);
+    }
+
+    private void declareCoverageAttacker(Player attacker, Combat combat) {
+        for (Card card : CombatUtil.getPossibleAttackers(attacker)) {
+            if (!"Hill Giant".equals(card.getName())) {
+                continue;
+            }
+            for (Player candidate : getGame().getPlayers()) {
+                if (candidate != attacker && countBattlefield(candidate, "Gray Ogre") >= 2
+                        && CombatUtil.canAttack(card, candidate)) {
+                    combat.addAttacker(card, candidate);
+                    return;
+                }
+            }
+        }
+    }
+
+    private void declareCoverageBlockers(Combat combat) {
+        Card hillGiant = null;
+        for (Card attacker : combat.getAttackers()) {
+            if ("Hill Giant".equals(attacker.getName())) {
+                hillGiant = attacker;
+                break;
+            }
+        }
+        if (hillGiant == null) {
+            return;
+        }
+        int assigned = 0;
+        for (Card blocker : player.getCardsIn(ZoneType.Battlefield)) {
+            if ("Gray Ogre".equals(blocker.getName()) && CombatUtil.canBlock(hillGiant, blocker, combat)) {
+                combat.addBlocker(hillGiant, blocker);
+                if (++assigned == 2) {
+                    return;
+                }
+            }
+        }
+    }
+
+    @Override
+    public CardCollection orderBlockers(Card attacker, CardCollection blockers) {
+        if (blockers.size() > 1) {
+            multiBlockerDamageObserved = true;
+        }
+        return super.orderBlockers(attacker, blockers);
+    }
+
+    @Override
+    public Map<Card, Integer> assignCombatDamage(Card attacker, CardCollectionView blockers,
+            CardCollectionView remaining, int damageDealt, GameEntity defender, boolean overrideOrder) {
+        if (blockers.size() > 1) {
+            multiBlockerDamageObserved = true;
+        }
+        return super.assignCombatDamage(attacker, blockers, remaining, damageDealt, defender, overrideOrder);
+    }
+
+    boolean requiresMultiBlockerCoverage() {
+        return multiBlockerScenario;
+    }
+
+    boolean observedMultiBlockerDamage() {
+        return multiBlockerDamageObserved;
     }
 
     private ObjectNode describeAttackers(Combat combat) {
@@ -544,6 +621,31 @@ final class BridgeController extends PlayerControllerAi {
             }
         }
         return null;
+    }
+
+    private SpellAbility firstLegalCoverageCreature() {
+        String wanted = countBattlefield(player, "Gray Ogre") < 2
+                ? "Gray Ogre"
+                : countBattlefield(player, "Hill Giant") == 0 ? "Hill Giant" : "Gray Ogre";
+        List<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(
+                ComputerUtilAbility.getAvailableCards(getGame(), player), player);
+        for (SpellAbility ability : abilities) {
+            Card host = ability.getHostCard();
+            if (ability.isSpell() && host != null && wanted.equals(host.getName()) && ability.canPlay()) {
+                return ability;
+            }
+        }
+        return null;
+    }
+
+    private static int countBattlefield(Player owner, String name) {
+        int count = 0;
+        for (Card card : owner.getCardsIn(ZoneType.Battlefield)) {
+            if (name.equals(card.getName())) {
+                count++;
+            }
+        }
+        return count;
     }
 
     private void applyPendingHandSync() {
@@ -860,11 +962,13 @@ final class BridgeController extends PlayerControllerAi {
     private static final class CombatDecisionTicket {
         private final String kind;
         private final boolean allowCombat;
+        private final boolean multiBlocker;
         private final CompletableFuture<ObjectNode> result = new CompletableFuture<>();
 
-        private CombatDecisionTicket(String kind, boolean allowCombat) {
+        private CombatDecisionTicket(String kind, boolean allowCombat, boolean multiBlocker) {
             this.kind = kind;
             this.allowCombat = allowCombat;
+            this.multiBlocker = multiBlocker;
         }
     }
 }
