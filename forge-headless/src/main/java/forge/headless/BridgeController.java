@@ -50,6 +50,7 @@ final class BridgeController extends PlayerControllerAi {
     private volatile boolean finishing;
     private volatile int drainThroughTurn;
     private volatile int remoteDrainThroughTurn;
+    private int forgeLandPlayedTurn = -1;
     private volatile JsonNode pendingHandCounts;
     private volatile int pendingHandTurn;
     private RemoteActionTicket deferredRemoteAction;
@@ -148,8 +149,10 @@ final class BridgeController extends PlayerControllerAi {
                     + " turn " + authoritativeTurn);
             return;
         }
-        if ("pass".equals(action.path("type").asText())
-                && !"authoritative_main_phase_end".equals(action.path("reason").asText())) {
+        String passReason = action.path("reason").asText();
+        boolean isBridgeBarrier = "authoritative_main_phase_end".equals(passReason)
+                || "authoritative_stack_resolution".equals(passReason);
+        if ("pass".equals(action.path("type").asText()) && !isBridgeBarrier) {
             diagnostics.println("Bridge mirrored opponent priority pass for seat " + seat + ": " + action);
             return;
         }
@@ -158,6 +161,10 @@ final class BridgeController extends PlayerControllerAi {
         put(remoteActions, ticket, "remote opponent action");
         if ("authoritative_main_phase_end".equals(action.path("reason").asText())) {
             diagnostics.println("Bridge queued authoritative pass marker for seat " + seat);
+            return;
+        }
+        if ("authoritative_stack_resolution".equals(action.path("reason").asText())) {
+            diagnostics.println("Bridge queued authoritative stack-resolution pass for seat " + seat);
             return;
         }
         diagnostics.println("Bridge queued exact replay action for seat " + seat);
@@ -212,11 +219,11 @@ final class BridgeController extends PlayerControllerAi {
             return null;
         }
         applyPendingHandSync();
-        // DeepScry does not call its controller at empty priority menus. Forge
-        // does, so mirror that semantic by passing locally without consuming a
-        // protocol action. Otherwise the next real action is replayed one step
-        // too early (notably, a turn-one land during Forge's upkeep).
-        if (!hasAnyLegalPriorityAction()) {
+        // DeepScry does not ask the Forge-controlled seat at empty menus, so its
+        // AI can pass locally. The remote replay seat still consumes a tagged
+        // pass/barrier here; that prevents Forge from crossing a resolution or
+        // turn boundary before the corresponding digest has been sampled.
+        if (forgeAiSeat && !hasAnyLegalPriorityAction()) {
             return null;
         }
         if (forgeAiSeat) {
@@ -271,6 +278,9 @@ final class BridgeController extends PlayerControllerAi {
                 }
                 if (!ticket.allowCast) {
                     choices = null;
+                }
+                if (choices != null && !choices.isEmpty() && choices.get(0).isLandAbility()) {
+                    forgeLandPlayedTurn = currentTurn;
                 }
                 ticket.result.complete(choices == null || choices.isEmpty()
                         ? passAction() : describeAction(choices.get(0)));
@@ -454,13 +464,20 @@ final class BridgeController extends PlayerControllerAi {
 
     private boolean hasAnyLegalPriorityAction() {
         CardCollection lands = ComputerUtilAbility.getAvailableLandsToPlay(getGame(), player);
-        if (lands != null && !lands.isEmpty()) {
-            return true;
+        if (forgeLandPlayedTurn != getGame().getPhaseHandler().getTurn() && lands != null) {
+            for (Card land : lands) {
+                for (SpellAbility ability : land.getAllPossibleAbilities(player, true)) {
+                    if (ability.isLandAbility() && ability.canPlay()) {
+                        return true;
+                    }
+                }
+            }
         }
         List<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(
                 ComputerUtilAbility.getAvailableCards(getGame(), player), player);
         for (SpellAbility ability : abilities) {
-            if (ability.canPlay()) {
+            Card host = ability.getHostCard();
+            if (ability.isSpell() && host != null && host.isInZone(ZoneType.Hand) && ability.canPlay()) {
                 return true;
             }
         }

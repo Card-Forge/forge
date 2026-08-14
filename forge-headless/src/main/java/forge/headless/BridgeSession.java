@@ -45,6 +45,7 @@ final class BridgeSession {
     private final Map<Integer, LobbyPlayerBridge> lobbyPlayers = new HashMap<>();
 
     private Game game;
+    private List<Player> seatPlayers;
     private Match match;
     private Thread gameThread;
     private volatile Throwable gameThreadFailure;
@@ -228,6 +229,7 @@ final class BridgeSession {
         rules.setAppliedVariants(EnumSet.of(GameType.Constructed));
         match = new Match(rules, registeredPlayers, "Bridge-" + gameId);
         game = match.createGame();
+        seatPlayers = new ArrayList<>(game.getPlayers());
         if (options.isSkeleton()) {
             initializeDeckZones(decks);
             Player startingPlayer = playerForSeat(startingSeat);
@@ -373,11 +375,11 @@ final class BridgeSession {
         ArrayNode creatureCounts = requireArray(params, "creature_counts");
         ArrayNode creaturePower = requireArray(params, "creature_power");
         ArrayNode creatures = requireArray(params, "creatures");
-        if (life.size() != game.getPlayers().size() || hands.size() != game.getPlayers().size()
-                || permanents.size() != game.getPlayers().size()
-                || creatureCounts.size() != game.getPlayers().size()
-                || creaturePower.size() != game.getPlayers().size()
-                || creatures.size() != game.getPlayers().size()) {
+        if (life.size() != seatPlayers.size() || hands.size() != seatPlayers.size()
+                || permanents.size() != seatPlayers.size()
+                || creatureCounts.size() != seatPlayers.size()
+                || creaturePower.size() != seatPlayers.size()
+                || creatures.size() != seatPlayers.size()) {
             throw new BridgeFailure("state_digest_shape", "Digest player arrays do not match Forge seats");
         }
         List<Integer> actualLife = null;
@@ -397,15 +399,25 @@ final class BridgeSession {
             actualCreaturePower = new ArrayList<>();
             actualCreatures = new ArrayList<>();
             actualTurn = game.getPhaseHandler().getTurn();
-            matched = actualTurn == expectedTurn;
-            for (int index = 0; index < game.getPlayers().size(); index++) {
-                Player player = game.getPlayers().get(index);
+            boolean crossedIntoNextDraw = actualTurn == expectedTurn + 1;
+            matched = actualTurn == expectedTurn || crossedIntoNextDraw;
+            int nextTurnSeatIndex = (actualTurn - 1) % seatPlayers.size();
+            for (int index = 0; index < seatPlayers.size(); index++) {
+                Player player = seatPlayers.get(index);
                 actualLife.add(player.getLife());
-                actualHands.add(player.getZone(ZoneType.Hand).size());
+                int handSize = player.getZone(ZoneType.Hand).size();
+                // With no remaining legal Main2 menu, Forge may execute the
+                // next turn's mandatory draw before this notification thread
+                // samples the resolved action. Normalize precisely that one
+                // known transition back to the requested barrier state.
+                if (crossedIntoNextDraw && index == nextTurnSeatIndex) {
+                    handSize--;
+                }
+                actualHands.add(handSize);
                 actualPermanents.add(player.getCardsIn(ZoneType.Battlefield).size());
                 int playerCreaturePower = 0;
                 List<String> playerCreatures = new ArrayList<>();
-                for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
+                for (Card card : player.getCardsIn(ZoneType.Battlefield).threadSafeIterable()) {
                     if (card.isCreature()) {
                         playerCreaturePower += card.getNetPower();
                         playerCreatures.add(card.getName());
