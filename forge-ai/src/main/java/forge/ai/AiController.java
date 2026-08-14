@@ -102,6 +102,7 @@ public class AiController {
     private volatile boolean timeoutReached;
     private SpellAbility expectedPayingColorsSa;
     private byte expectedPayingColors;
+    private int expectedConvergeX = -1;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -819,6 +820,7 @@ public class AiController {
         // an evaluation can reach another one, so hand back whatever the outer spell was expecting
         final SpellAbility outerColorsSa = expectedPayingColorsSa;
         final byte outerColors = expectedPayingColors;
+        final int outerConvergeX = expectedConvergeX;
 
         if (sa instanceof Spell sp) {
             altHost = sp.canPlayFromHost();
@@ -844,7 +846,7 @@ public class AiController {
 
         if (sa.isSpell()) {
             altHost.setCastSA(null);
-            setExpectedPayingColors(outerColorsSa, outerColors);
+            rememberConvergeX(outerColorsSa, outerConvergeX, outerColors);
         }
 
         return decision;
@@ -875,11 +877,32 @@ public class AiController {
     public void setExpectedPayingColors(final SpellAbility sa, final byte colors) {
         expectedPayingColorsSa = sa;
         expectedPayingColors = colors;
+        expectedConvergeX = -1;
     }
 
     public byte getExpectedPayingColors(final SpellAbility sa) {
         // deliberately identity - the answer is only good for the exact spell it was worked out for
         return sa == expectedPayingColorsSa ? expectedPayingColors : 0;
+    }
+
+    /**
+     * Same, for a spell whose X is what buys the colors, so the announcement is remembered with
+     * them - searching for it walks every X up to the affordable one and solves the payment at each.
+     */
+    public void rememberConvergeX(final SpellAbility sa, final int x, final byte colors) {
+        setExpectedPayingColors(sa, colors);
+        expectedConvergeX = x;
+    }
+
+    /**
+     * Put back the X a previous search on this same spell settled on, if there was one.
+     */
+    public boolean reapplyConvergeX(final SpellAbility sa) {
+        if (sa != expectedPayingColorsSa || expectedConvergeX < 0) {
+            return false;
+        }
+        sa.setXManaCostPaid(expectedConvergeX);
+        return true;
     }
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
