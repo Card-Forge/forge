@@ -775,16 +775,12 @@ public class CardImageRenderer {
         Texture image = new CachedCardImageRenderer(key).getImage();
 
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
-        if (image == null) { //draw details if can't draw zoom
+        if (card.isImmutable() && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_IMAGES_EFFECT_CARDS)){
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
         }
-        if(card.isImmutable() && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_IMAGES_EFFECT_CARDS)){
-            drawDetails(g, card, gameView, altState, x, y, w, h);
-            return;
-        }
-
-        if (image == ImageCache.getInstance().getDefaultImage() || Forge.enableUIMask.equals("Art")) { //support drawing card image manually if card image not found
+        // when image is not available draw the card renders
+        if (image == null || image == ImageCache.getInstance().getDefaultImage() || Forge.enableUIMask.equals("Art")) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top, true, true);
         } else {
             float radius = (h - w) / 8;
