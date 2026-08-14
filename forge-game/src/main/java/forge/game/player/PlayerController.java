@@ -20,6 +20,8 @@ import forge.game.cost.*;
 import forge.game.decision.ConfirmationDecisionProvider;
 import forge.game.decision.CopySpellResolveFirstOrderDecisionProvider;
 import forge.game.decision.SimultaneousTriggerOrderDecisionProvider;
+import forge.game.decision.SurveilPartitionDecisionCoordinator;
+import forge.game.decision.SurveilPartitionDecisionProvider;
 import forge.game.decision.TargetDecisionProvider;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -86,6 +88,10 @@ public abstract class PlayerController {
             new SimultaneousTriggerOrderDecisionProvider();
     private final CopySpellResolveFirstOrderDecisionProvider copySpellResolveFirstOrderDecisionProvider =
             new CopySpellResolveFirstOrderDecisionProvider();
+    private final SurveilPartitionDecisionProvider surveilPartitionDecisionProvider =
+            new SurveilPartitionDecisionProvider();
+    private final SurveilPartitionDecisionCoordinator surveilPartitionDecisionCoordinator =
+            new SurveilPartitionDecisionCoordinator(surveilPartitionDecisionProvider);
     private TargetDecisionProvider.Resolver targetDecisionResolver;
 
     public PlayerController(Game game0, Player p, LobbyPlayer lp) {
@@ -126,6 +132,12 @@ public abstract class PlayerController {
     }
     public final CopySpellResolveFirstOrderDecisionProvider getCopySpellResolveFirstOrderDecisionProvider() {
         return copySpellResolveFirstOrderDecisionProvider;
+    }
+    public final SurveilPartitionDecisionCoordinator getSurveilPartitionDecisionCoordinator() {
+        return surveilPartitionDecisionCoordinator;
+    }
+    public final SurveilPartitionDecisionProvider getSurveilPartitionDecisionProvider() {
+        return surveilPartitionDecisionProvider;
     }
     public final CopySpellResolveFirstOrderDecisionProvider.Resolver getCopySpellResolveFirstOrderResolver() {
         return copySpellResolveFirstOrderDecisionProvider.getResolver();

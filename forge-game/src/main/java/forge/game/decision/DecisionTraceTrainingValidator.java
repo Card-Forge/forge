@@ -51,6 +51,13 @@ public final class DecisionTraceTrainingValidator {
 
     public static boolean isBCPolicySample(final DecisionTraceRequestRecord request,
             final DecisionTraceResultRecord result) {
+        if (request != null && isSurveilPartitionBearing(request)) {
+            return isHistoryValid(request, result)
+                    && request.isSurveilPartitionRequest()
+                    && result.getKind() == DecisionTraceResultKind.CHOSEN
+                    && request.getTeacherLabelEligibility()
+                            == DecisionTraceTeacherLabelEligibility.BC_ELIGIBLE;
+        }
         final boolean profiledOrder = request != null
                 && (request.isSimultaneousTriggerOrderRequest()
                         || request.isCopySpellResolveFirstOrderRequest());
@@ -72,6 +79,12 @@ public final class DecisionTraceTrainingValidator {
                 && result.isMappingAttempted()
                 && request.getLegalCandidates().contains(result.getSelectedCandidateSemanticKey())
                 && profileMetadataEligible;
+    }
+
+    private static boolean isSurveilPartitionBearing(final DecisionTraceRequestRecord request) {
+        return request.isSurveilPartitionRequest()
+                || request.getProfile() == DecisionTraceRequestRecord.Profile.SURVEIL_PARTITION
+                || "SURVEIL_PARTITION".equals(request.getAdapterOrStage());
     }
 
     public static void validateRecords(final List<DecisionTraceRequestRecord> requests,

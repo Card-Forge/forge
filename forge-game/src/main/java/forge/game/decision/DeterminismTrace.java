@@ -45,6 +45,7 @@ public final class DeterminismTrace {
     private final List<DecisionTraceResultRecord> decisionResults = new ArrayList<>();
     private final Map<Long, RequestHandle> openRequests = new LinkedHashMap<>();
     private long nextRequestIndex;
+    private int maxOpenRequestCount;
     private boolean finished;
 
     private DeterminismTrace(final Game game, final int gameIndex, final DeterminismAuditRandom random,
@@ -87,7 +88,20 @@ public final class DeterminismTrace {
         final DeterminismTrace trace = ACTIVE.get(game);
         return trace == null ? RequestHandle.inactive()
                 : trace.addRequest(actingPlayerSeat, request, adapterOrStage, decisionStepIndex,
-                        profile, teacherLabelEligibility);
+                profile, teacherLabelEligibility);
+    }
+
+    /** Package-private lifecycle observations for deterministic decision-boundary tests. */
+    int requestCountForTesting() {
+        return decisionRequests.size();
+    }
+
+    int openRequestCountForTesting() {
+        return openRequests.size();
+    }
+
+    int maxOpenRequestCountForTesting() {
+        return maxOpenRequestCount;
     }
 
     @Subscribe
@@ -169,6 +183,7 @@ public final class DeterminismTrace {
         decisionEvents.add(DecisionTraceEvent.request(record));
         final RequestHandle handle = new RequestHandle(this, record);
         openRequests.put(record.getTraceRequestIndex(), handle);
+        maxOpenRequestCount = Math.max(maxOpenRequestCount, openRequests.size());
         return handle;
     }
 
@@ -194,7 +209,8 @@ public final class DeterminismTrace {
     }
 
     private String decisionTraceVersion() {
-        return decisionRequests.stream().anyMatch(DecisionTraceRequestRecord::isCopySpellResolveFirstOrderRequest)
+        return decisionRequests.stream().anyMatch(record -> record.isCopySpellResolveFirstOrderRequest()
+                || record.isSurveilPartitionRequest())
                 ? DECISION_TRACE_V3 : DECISION_TRACE_VERSION;
     }
 

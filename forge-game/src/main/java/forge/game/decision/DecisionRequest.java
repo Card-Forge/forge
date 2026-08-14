@@ -21,6 +21,7 @@ public final class DecisionRequest {
     private final ConfirmationDecisionContext confirmationContext;
     private final SimultaneousTriggerOrderContext orderContext;
     private final CopySpellResolveFirstOrderContext copySpellResolveFirstOrderContext;
+    private final SurveilPartitionContext surveilPartitionContext;
 
     DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates) {
         this(requestId, decisionType, candidates, null, null, null, null, null, null, null, null);
@@ -84,6 +85,12 @@ public final class DecisionRequest {
                 null, null, copySpellResolveFirstOrderContext);
     }
 
+    DecisionRequest(final long requestId, final DecisionType decisionType, final List<LegalCandidate> candidates,
+            final SurveilPartitionContext surveilPartitionContext) {
+        this(requestId, decisionType, candidates, null, null, null, null, null, null, null, null,
+                null, null, null, surveilPartitionContext);
+    }
+
     private DecisionRequest(final long requestId, final DecisionType decisionType,
             final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
             final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
@@ -124,6 +131,20 @@ public final class DecisionRequest {
             final MulliganContext mulliganContext, final ConfirmationDecisionContext confirmationContext,
             final SimultaneousTriggerOrderContext orderContext,
             final CopySpellResolveFirstOrderContext copySpellResolveFirstOrderContext) {
+        this(requestId, decisionType, candidates, targetContext, paymentContext, xContext, modeContext,
+                cardSelectionContext, attackContext, blockContext, mulliganContext, confirmationContext,
+                orderContext, copySpellResolveFirstOrderContext, null);
+    }
+
+    private DecisionRequest(final long requestId, final DecisionType decisionType,
+            final List<LegalCandidate> candidates, final TargetDecisionContext targetContext,
+            final PaymentDecisionContext paymentContext, final XDecisionContext xContext,
+            final ModeDecisionContext modeContext, final CardSelectionContext cardSelectionContext,
+            final AttackDeclarationContext attackContext, final BlockDeclarationContext blockContext,
+            final MulliganContext mulliganContext, final ConfirmationDecisionContext confirmationContext,
+            final SimultaneousTriggerOrderContext orderContext,
+            final CopySpellResolveFirstOrderContext copySpellResolveFirstOrderContext,
+            final SurveilPartitionContext surveilPartitionContext) {
         this.requestId = requestId;
         this.decisionType = Objects.requireNonNull(decisionType);
         this.candidates = List.copyOf(candidates);
@@ -138,6 +159,7 @@ public final class DecisionRequest {
         this.confirmationContext = confirmationContext;
         this.orderContext = orderContext;
         this.copySpellResolveFirstOrderContext = copySpellResolveFirstOrderContext;
+        this.surveilPartitionContext = surveilPartitionContext;
         if (this.candidates.isEmpty()) {
             throw new IllegalArgumentException("A DecisionRequest must contain at least one legal candidate");
         }
@@ -172,11 +194,23 @@ public final class DecisionRequest {
         if (decisionType != DecisionType.MODE && modeContext != null) {
             throw new IllegalArgumentException("Only MODE DecisionRequests may contain mode context");
         }
-        if (decisionType == DecisionType.CARD_SELECTION && cardSelectionContext == null) {
-            throw new IllegalArgumentException("A CARD_SELECTION DecisionRequest requires card-selection context");
+        if (decisionType == DecisionType.CARD_SELECTION
+                && (cardSelectionContext == null) == (surveilPartitionContext == null)) {
+            throw new IllegalArgumentException(
+                    "A CARD_SELECTION DecisionRequest requires exactly one selection context");
         }
-        if (decisionType != DecisionType.CARD_SELECTION && cardSelectionContext != null) {
-            throw new IllegalArgumentException("Only CARD_SELECTION DecisionRequests may contain card-selection context");
+        if (decisionType != DecisionType.CARD_SELECTION
+                && (cardSelectionContext != null || surveilPartitionContext != null)) {
+            throw new IllegalArgumentException(
+                    "Only CARD_SELECTION DecisionRequests may contain selection context");
+        }
+        if (surveilPartitionContext != null) {
+            validateSurveilPartitionRequest(this.candidates, surveilPartitionContext);
+        } else if (this.candidates.stream().anyMatch(candidate ->
+                candidate.getSurveilPartitionCandidateKind() != null
+                        || candidate.getSurveilPartitionCard() != null)) {
+            throw new IllegalArgumentException(
+                    "Surveil partition candidates require a Surveil partition context");
         }
         if (decisionType == DecisionType.ATTACK && attackContext == null) {
             throw new IllegalArgumentException("An ATTACK DecisionRequest requires attack context");
@@ -260,6 +294,89 @@ public final class DecisionRequest {
         }
     }
 
+    private static void validateSurveilPartitionRequest(final List<LegalCandidate> candidates,
+            final SurveilPartitionContext context) {
+        if (context.getProfile() != SurveilPartitionProfile.SURVEIL_PARTITION
+                || context.getDecisionStepIndex() < 0
+                || context.getDecisionStepIndex() >= context.getOriginalItemCount()) {
+            throw new IllegalArgumentException("Surveil partition context does not match the exact profile");
+        }
+        if (candidates.size() != 2) {
+            throw new IllegalArgumentException("A Surveil partition request requires exactly two candidates");
+        }
+
+        boolean hasGraveyardCandidate = false;
+        boolean hasRetainCandidate = false;
+        for (final LegalCandidate candidate : candidates) {
+            final SurveilPartitionCandidateKind kind = candidate.getSurveilPartitionCandidateKind();
+            final SurveilPartitionCard item = candidate.getSurveilPartitionCard();
+            if (kind == null || item == null || item.getItemId() != context.getCurrentItemId()
+                    || hasUnrelatedPayload(candidate)
+                    || !candidate.getSemanticKey().equals(surveilSemanticKey(kind, item))) {
+                throw new IllegalArgumentException(
+                        "Surveil partition candidates must match the current typed item and operation");
+            }
+            if (kind == SurveilPartitionCandidateKind.CLASSIFY_GRAVEYARD) {
+                if (hasGraveyardCandidate) {
+                    throw new IllegalArgumentException("Surveil partition candidates must contain one of each operation");
+                }
+                hasGraveyardCandidate = true;
+            } else if (kind == SurveilPartitionCandidateKind.CLASSIFY_RETAIN) {
+                if (hasRetainCandidate) {
+                    throw new IllegalArgumentException("Surveil partition candidates must contain one of each operation");
+                }
+                hasRetainCandidate = true;
+            } else {
+                throw new IllegalArgumentException("Unknown Surveil partition candidate kind");
+            }
+        }
+        if (!hasGraveyardCandidate || !hasRetainCandidate) {
+            throw new IllegalArgumentException("Surveil partition candidates must contain one of each operation");
+        }
+    }
+
+    private static String surveilSemanticKey(final SurveilPartitionCandidateKind kind,
+            final SurveilPartitionCard item) {
+        final String operation = kind == SurveilPartitionCandidateKind.CLASSIFY_GRAVEYARD
+                ? "CLASSIFY_GRAVEYARD" : "CLASSIFY_RETAIN";
+        return "SURVEIL_PARTITION|" + operation + "|" + item.getItemId();
+    }
+
+    private static boolean hasUnrelatedPayload(final LegalCandidate candidate) {
+        return candidate.getKind() != null
+                || candidate.getTargetKind() != null
+                || candidate.getPaymentKind() != null
+                || candidate.getXValue() != null
+                || candidate.getModeOrdinal() != null
+                || !candidate.getModeDescription().isEmpty()
+                || candidate.isModeUsesTargeting()
+                || candidate.getCardSelectionKind() != null
+                || candidate.getCardSelectionCard() != null
+                || candidate.getAttackKind() != null
+                || candidate.getAttackCard() != null
+                || candidate.getAttackDefender() != null
+                || candidate.getBlockKind() != null
+                || candidate.getBlockerCard() != null
+                || candidate.getBlockAttackerCard() != null
+                || candidate.getMulliganKind() != null
+                || candidate.getConfirmationKind() != null
+                || candidate.getOrderKind() != null
+                || candidate.getOrderItem() != null
+                || candidate.getCopySpellResolveFirstOrderKind() != null
+                || candidate.getCopySpellResolveFirstOrderItem() != null
+                || candidate.getTargetEntityId() != -1
+                || !candidate.getTargetName().isEmpty()
+                || candidate.getTargetZone() != null
+                || candidate.getSourceCardId() != -1
+                || !candidate.getSourceName().isEmpty()
+                || candidate.getSourceZone() != null
+                || candidate.getSourceState() != null
+                || !candidate.getAbilityDescription().isEmpty()
+                || candidate.getSpellAbility() != null
+                || candidate.getTarget() != null
+                || candidate.getMana() != null;
+    }
+
     public long getRequestId() {
         return requestId;
     }
@@ -298,6 +415,11 @@ public final class DecisionRequest {
     /** CARD_SELECTION-only callback/session metadata. */
     public CardSelectionContext getCardSelectionContext() {
         return cardSelectionContext;
+    }
+
+    /** SURVEIL_PARTITION-only typed context. */
+    public SurveilPartitionContext getSurveilPartitionContext() {
+        return surveilPartitionContext;
     }
 
     /** ATTACK-only metadata for one atomic turn-based declaration step. */

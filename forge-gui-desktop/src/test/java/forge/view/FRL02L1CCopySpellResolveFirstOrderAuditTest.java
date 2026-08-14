@@ -82,10 +82,14 @@ public class FRL02L1CCopySpellResolveFirstOrderAuditTest {
             summaries = paths.filter(path -> path.getFileName().toString().endsWith(".summary.properties"))
                     .toList();
         }
-        final Path cSummary = summaries.stream().filter(FRL02L1CCopySpellResolveFirstOrderAuditTest::isV3)
-                .findFirst().orElseThrow(() -> new AssertionError("no C-bearing V3 summary"));
-        final Path cTrace = cSummary.resolveSibling(cSummary.getFileName().toString()
-                .replace(".summary.properties", ".decision.trace"));
+        final List<Path> cTraces = summaries.stream()
+                .filter(FRL02L1CCopySpellResolveFirstOrderAuditTest::isV3)
+                .map(FRL02L1CCopySpellResolveFirstOrderAuditTest::decisionTraceFor)
+                .filter(FRL02L1CCopySpellResolveFirstOrderAuditTest::containsL1CRequest)
+                .toList();
+        assertEquals(cTraces.size(), 1,
+                "canonical workload must contain exactly one L1C-bearing V3 trace");
+        final Path cTrace = cTraces.get(0);
         final List<String> cRecords = Files.readAllLines(cTrace, StandardCharsets.UTF_8);
         assertTrue(cRecords.stream().allMatch(line -> line.startsWith("DECISION_TRACE_V3|")));
         assertTrue(cRecords.stream().anyMatch(line -> line.contains(
@@ -96,6 +100,20 @@ public class FRL02L1CCopySpellResolveFirstOrderAuditTest {
         try {
             return Files.readAllLines(summary, StandardCharsets.UTF_8).contains(
                     "decisionTraceVersion=DECISION_TRACE_V3");
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    private static Path decisionTraceFor(final Path summary) {
+        return summary.resolveSibling(summary.getFileName().toString()
+                .replace(".summary.properties", ".decision.trace"));
+    }
+
+    private static boolean containsL1CRequest(final Path trace) {
+        try {
+            return Files.readAllLines(trace, StandardCharsets.UTF_8).stream()
+                    .anyMatch(line -> line.contains("|ORDER|COPY_SPELL_RESOLVE_FIRST_ORDER|"));
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }

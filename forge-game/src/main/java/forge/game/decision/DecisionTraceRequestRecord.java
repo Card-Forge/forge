@@ -8,7 +8,8 @@ public final class DecisionTraceRequestRecord {
     public enum Profile {
         OTHER,
         SIMULTANEOUS_TRIGGER_ORDER,
-        COPY_SPELL_RESOLVE_FIRST_ORDER
+        COPY_SPELL_RESOLVE_FIRST_ORDER,
+        SURVEIL_PARTITION
     }
 
     private final long traceRequestIndex;
@@ -114,6 +115,12 @@ public final class DecisionTraceRequestRecord {
     boolean isSimultaneousTriggerOrderRequest() {
         return profile == Profile.SIMULTANEOUS_TRIGGER_ORDER
                 || "SIMULTANEOUS_TRIGGER_ORDER".equals(adapterOrStage);
+    }
+
+    boolean isSurveilPartitionRequest() {
+        return decisionType == DecisionType.CARD_SELECTION
+                && profile == Profile.SURVEIL_PARTITION
+                && "SURVEIL_PARTITION".equals(adapterOrStage);
     }
 
     /** Parses a persisted REQUEST line, preserving malformed V3 metadata as null for fail-closed checks. */

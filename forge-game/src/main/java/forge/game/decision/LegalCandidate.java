@@ -51,6 +51,8 @@ public final class LegalCandidate {
     private final SimultaneousTriggerOrderItem orderItem;
     private final CopySpellResolveFirstOrderItemKind copySpellResolveFirstOrderKind;
     private final CopySpellResolveFirstOrderItem copySpellResolveFirstOrderItem;
+    private final SurveilPartitionCandidateKind surveilPartitionCandidateKind;
+    private final SurveilPartitionCard surveilPartitionCard;
 
     private LegalCandidate(final int candidateId, final PriorityActionKind kind, final Card source,
             final SpellAbility spellAbility, final String semanticKey) {
@@ -88,6 +90,8 @@ public final class LegalCandidate {
         this.orderItem = null;
         this.copySpellResolveFirstOrderKind = null;
         this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
     }
 
     private LegalCandidate(final int candidateId, final String semanticKey) {
@@ -125,6 +129,8 @@ public final class LegalCandidate {
         this.orderItem = null;
         this.copySpellResolveFirstOrderKind = null;
         this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
     }
 
     private LegalCandidate(final int candidateId, final TargetCandidateKind targetKind, final GameObject target,
@@ -163,6 +169,8 @@ public final class LegalCandidate {
         this.orderItem = null;
         this.copySpellResolveFirstOrderKind = null;
         this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
     }
 
     private LegalCandidate(final int candidateId, final PaymentCandidateKind paymentKind, final Card source,
@@ -201,6 +209,8 @@ public final class LegalCandidate {
         this.orderItem = null;
         this.copySpellResolveFirstOrderKind = null;
         this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
     }
 
     private LegalCandidate(final int candidateId, final int xValue) {
@@ -238,6 +248,8 @@ public final class LegalCandidate {
         this.orderItem = null;
         this.copySpellResolveFirstOrderKind = null;
         this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
     }
 
     private LegalCandidate(final int candidateId, final int modeOrdinal, final AbilitySub mode) {
@@ -275,6 +287,8 @@ public final class LegalCandidate {
         this.orderItem = null;
         this.copySpellResolveFirstOrderKind = null;
         this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
     }
 
     private LegalCandidate(final int candidateId, final CardSelectionCandidateKind cardSelectionKind,
@@ -314,6 +328,49 @@ public final class LegalCandidate {
         this.orderItem = null;
         this.copySpellResolveFirstOrderKind = null;
         this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
+    }
+
+    private LegalCandidate(final int candidateId, final String semanticKey,
+            final SurveilPartitionCandidateKind surveilPartitionCandidateKind,
+            final SurveilPartitionCard surveilPartitionCard) {
+        this.candidateId = candidateId;
+        this.kind = null;
+        this.sourceCardId = -1;
+        this.sourceName = "";
+        this.sourceZone = null;
+        this.sourceState = null;
+        this.abilityDescription = "";
+        this.semanticKey = Objects.requireNonNull(semanticKey);
+        this.spellAbility = null;
+        this.targetKind = null;
+        this.targetEntityId = -1;
+        this.targetName = "";
+        this.targetZone = null;
+        this.target = null;
+        this.paymentKind = null;
+        this.mana = null;
+        this.xValue = null;
+        this.modeOrdinal = null;
+        this.modeDescription = "";
+        this.modeUsesTargeting = false;
+        this.mode = null;
+        this.cardSelectionKind = null;
+        this.cardSelectionCard = null;
+        this.attackKind = null;
+        this.attackCard = null;
+        this.attackDefender = null;
+        this.blockKind = null;
+        this.blockCard = null;
+        this.blockAttacker = null;
+        this.confirmationKind = null;
+        this.orderKind = null;
+        this.orderItem = null;
+        this.copySpellResolveFirstOrderKind = null;
+        this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = Objects.requireNonNull(surveilPartitionCandidateKind);
+        this.surveilPartitionCard = Objects.requireNonNull(surveilPartitionCard);
     }
 
     private LegalCandidate(final int candidateId, final AttackDeclarationCandidateKind attackKind,
@@ -354,6 +411,8 @@ public final class LegalCandidate {
         this.orderItem = null;
         this.copySpellResolveFirstOrderKind = null;
         this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
     }
 
     private LegalCandidate(final int candidateId, final BlockDeclarationCandidateKind blockKind,
@@ -394,6 +453,8 @@ public final class LegalCandidate {
         this.orderItem = null;
         this.copySpellResolveFirstOrderKind = null;
         this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
     }
 
     private static boolean branchUsesTargeting(final SpellAbility first) {
@@ -448,6 +509,17 @@ public final class LegalCandidate {
 
     static LegalCandidate selectCard(final int candidateId, final CardSelectionCard card) {
         return new LegalCandidate(candidateId, CardSelectionCandidateKind.SELECT_CARD, Objects.requireNonNull(card));
+    }
+
+    public static LegalCandidate surveilPartition(final int candidateId,
+            final SurveilPartitionCandidateKind kind, final SurveilPartitionCard item) {
+        final SurveilPartitionCandidateKind requiredKind = Objects.requireNonNull(kind);
+        final SurveilPartitionCard requiredItem = Objects.requireNonNull(item);
+        final String operation = requiredKind == SurveilPartitionCandidateKind.CLASSIFY_GRAVEYARD
+                ? "CLASSIFY_GRAVEYARD" : "CLASSIFY_RETAIN";
+        return new LegalCandidate(candidateId,
+                "SURVEIL_PARTITION|" + operation + "|" + requiredItem.getItemId(),
+                requiredKind, requiredItem);
     }
 
     static LegalCandidate cardSelectionDone(final int candidateId) {
@@ -531,6 +603,8 @@ public final class LegalCandidate {
         this.orderItem = null;
         this.copySpellResolveFirstOrderKind = null;
         this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
     }
 
     private LegalCandidate(final int candidateId, final OrderCandidateKind kind,
@@ -569,6 +643,8 @@ public final class LegalCandidate {
         this.orderItem = item;
         this.copySpellResolveFirstOrderKind = null;
         this.copySpellResolveFirstOrderItem = null;
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
     }
 
     private LegalCandidate(final int candidateId, final CopySpellResolveFirstOrderItemKind kind,
@@ -607,6 +683,8 @@ public final class LegalCandidate {
         this.orderItem = null;
         this.copySpellResolveFirstOrderKind = Objects.requireNonNull(kind);
         this.copySpellResolveFirstOrderItem = Objects.requireNonNull(item);
+        this.surveilPartitionCandidateKind = null;
+        this.surveilPartitionCard = null;
         if (kind != item.getKind()) {
             throw new IllegalArgumentException("L1C candidate kind does not match item kind");
         }
@@ -656,6 +734,16 @@ public final class LegalCandidate {
     /** Visible stable card identity for SELECT_CARD, otherwise {@code null}. */
     public CardSelectionCard getCardSelectionCard() {
         return cardSelectionCard;
+    }
+
+    /** Surveil partition operation, otherwise {@code null}. */
+    public SurveilPartitionCandidateKind getSurveilPartitionCandidateKind() {
+        return surveilPartitionCandidateKind;
+    }
+
+    /** Chooser-visible Surveil item projection, otherwise {@code null}. */
+    public SurveilPartitionCard getSurveilPartitionCard() {
+        return surveilPartitionCard;
     }
 
     /** ATTACK candidate kind, otherwise {@code null}. */

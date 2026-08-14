@@ -1055,7 +1055,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         final CardCollection topN = getTopXCardsFromLibrary(num);
 
         if (!topN.isEmpty()) {
-            final Pair<CardCollection, CardCollection> lists = getController().arrangeForSurveil(topN);
+            final CardCollection originalTopN = topN;
+            final Pair<CardCollection, CardCollection> lists = getController()
+                    .getSurveilPartitionDecisionCoordinator()
+                    .captureNativeSurveil(this, originalTopN, getController()::arrangeForSurveil);
             final CardCollection toTop = lists.getLeft();
             final CardCollection toGrave = lists.getRight();
 
