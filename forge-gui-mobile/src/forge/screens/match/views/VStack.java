@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
@@ -249,6 +250,7 @@ public class VStack extends FDropDown {
         private final Color foreColor, backColor;
         private String text;
         private float preferredHeight;
+        private final Rectangle cardBounds = new Rectangle(0, 0, 0, 0);
 
         private StackInstanceDisplay(StackItemView stackInstance0, float width) {
             stackInstance = stackInstance0;
@@ -273,6 +275,13 @@ public class VStack extends FDropDown {
             float height = Math.max(CARD_HEIGHT, textRenderer.getWrappedBounds(text, FONT, width).height);
             height += 2 * (PADDING + BORDER_THICKNESS);
             preferredHeight = Math.round(height);
+        }
+
+        private void showCardOrMenu(CardView sourceCard, FPopupMenu menu, float x, float y) {
+            if (sourceCard != null && cardBounds.contains(x, y))
+                CardZoom.show(sourceCard);
+            else
+                menu.show(this, x, y);
         }
 
         @Override
@@ -333,8 +342,8 @@ public class VStack extends FDropDown {
                         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblZoomOrDetails"), e -> CardZoom.show(stackInstance.getSourceCard())));
                     }
                 };
-
-                menu.show(this, x, y);
+                // tapping on small cardView should zoom the card otherwise show menu
+                showCardOrMenu(stackInstance.getSourceCard(), menu, x, y);
                 return true;
             }
             CardZoom.show(stackInstance.getSourceCard());
@@ -372,6 +381,7 @@ public class VStack extends FDropDown {
 
             x += PADDING;
             y += PADDING;
+            cardBounds.set(x, y, CARD_WIDTH, CARD_HEIGHT);
             CardRenderer.drawCardWithOverlays(g, sourceCard, x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);
 
             x += CARD_WIDTH + PADDING;

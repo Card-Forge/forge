@@ -4,6 +4,71 @@ Date=2026-08-14
 Name=The Hobbit
 Type=Expansion
 ScryfallCode=HOB
+#https://mtgscribe.com/2026/07/21/the-hobbit-play-booster-fact-sheet/
+BoosterSlots=Common,Common-Scene,Uncommon,Uncommon-Special,RareMythic,Land,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-Scene, 2 Uncommon, 1 Uncommon-Special, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("HOB cards")
+
+[Common-Scene]
+Base=Common:fromSheet("HOB cards")
+Replace=0.078F Common:fromSheet("HOB scene")
+
+[Uncommon]
+Base=Uncommon:fromSheet("HOB cards")
+
+[Uncommon-Special]
+Base=Uncommon:fromSheet("HOB cards")
+Replace=0.055F Uncommon:fromSheet("HOB scene")
+Replace=0.109F Uncommon:fromSheet("HOB dragonhoard")
+
+[Wildcard]
+Base=Common:fromSheet("HOB cards")
+Replace=0.039F Uncommon:fromSheet("HOB cards")
+Replace=0.173F Rare:fromSheet("HOB cards")
+Replace=0.023F Mythic:fromSheet("HOB cards")
+Replace=0.004064F Common:fromSheet("HOB scene")
+Replace=0.004335F Uncommon:fromSheet("HOB scene")
+Replace=0.002438F Rare:fromSheet("HOB scene")
+Replace=0.006502F Uncommon:fromSheet("HOB dragonhoard")
+Replace=0.00298F Rare:fromSheet("HOB dragonhoard")
+Replace=0.001084F Mythic:fromSheet("HOB dragonhoard")
+Replace=0.001084F Rare:fromSheet("HOB bookcover")
+Replace=0.000813F Mythic:fromSheet("HOB bookcover")
+
+[RareMythic]
+Base=Rare:fromSheet("HOB cards")
+Replace=0.111F Mythic:fromSheet("HOB cards")
+Replace=0.018F Rare:fromSheet("HOB scene")
+Replace=0.023F Rare:fromSheet("HOB dragonhoard")
+Replace=0.007F Mythic:fromSheet("HOB dragonhoard")
+Replace=0.007F Rare:fromSheet("HOB bookcover")
+Replace=0.005F Mythic:fromSheet("HOB bookcover")
+
+[WildcardFoil]
+Base=Common:fromSheet("HOB cards")
+Replace=0.293F Uncommon:fromSheet("HOB cards")
+Replace=0.071F Rare:fromSheet("HOB cards")
+Replace=0.01F Mythic:fromSheet("HOB cards")
+Replace=0.00486F Common:fromSheet("HOB scene")
+Replace=0.00519F Uncommon:fromSheet("HOB scene")
+Replace=0.00296F Rare:fromSheet("HOB scene")
+Replace=0.00778F Uncommon:fromSheet("HOB dragonhoard")
+Replace=0.00361F Rare:fromSheet("HOB dragonhoard")
+Replace=0.00131F Mythic:fromSheet("HOB dragonhoard")
+Replace=0.00131F Rare:fromSheet("HOB bookcover")
+Replace=0.00098F Mythic:fromSheet("HOB bookcover")
+
+[Land]
+Base=BasicLand:fromSheet("HOB dual basic")
+Replace=.1F BasicLand:fromSheet("HOB dual basic")+
+Replace=.267F BasicLand:fromSheet("HOB basic frame")
+Replace=.067F BasicLand:fromSheet("HOB basic frame")+
+Replace=.133F fromSheet("HOB journey")
+Replace=.033F fromSheet("HOB journey")+
 
 [cards]
 1 C Long-Bodied Grey Dog @Anna Podedworna
@@ -187,13 +252,13 @@ ScryfallCode=HOB
 179 U Thrór's Map @Gaboleps
 180 C Well-Worn Spatula @Gaboleps
 181 R Elven Passage @Shahab Alizadeh
-182 C Elvenking's Halls @Leon Tukker
-183 C Goblin-town @Sean Vo
+182 L Elvenking's Halls @Leon Tukker
+183 L Goblin-town @Sean Vo
 184 C Hobbit Hole @Shahab Alizadeh
-185 C Iron Hills @Marina Ortega Lorente
-186 C Lake-town @Marina Ortega Lorente
+185 L Iron Hills @Marina Ortega Lorente
+186 L Lake-town @Marina Ortega Lorente
 187 R The Lonely Mountain @Leon Tukker
-188 C Mirkwood @Leon Tukker
+188 L Mirkwood @Leon Tukker
 189 L Plains @Chris Cold
 190 L Island @Kamila Szutenberg
 191 L Swamp @Erikas Perl
@@ -204,6 +269,8 @@ ScryfallCode=HOB
 196 L Swamp @WFlemming Illustration
 197 L Mountain @WFlemming Illustration
 198 L Forest @WFlemming Illustration
+
+[borderless]
 199 U Troop of Ponies @Ted Nasmith
 200 C Rage into the Valley @Ted Nasmith
 201 R The Great Goblin @Ted Nasmith
@@ -290,6 +357,8 @@ ScryfallCode=HOB
 282 R Thranduil, the Elvenking @James Bousema
 283 M The Arkenstone @Tyler Jacobson
 284 R The Lonely Mountain @Tyler Jacobson
+
+[extended art]
 285 R Bilbo's Gambit @Randy Gallegos
 286 R Fíli the Pathfinder @Valera Lutfullina
 287 R Kíli the Resourceful @Yuhong Ding
@@ -342,3 +411,82 @@ ScryfallCode=HOB
 11 stone_boulder @Kamila Szutenberg
 12 c_a_treasure_sac @Leonardo Santanna
 13 c_a_treasure_sac @Kamila Szutenberg
+
+[journey]
+1 Plains|HOB|[194]
+1 Island|HOB|[195]
+1 Swamp|HOB|[196]
+1 Mountain|HOB|[197]
+1 Forest|HOB|[198]
+
+[basic frame]
+1 Plains|HOB|[189]
+1 Island|HOB|[190]
+1 Swamp|HOB|[191]
+1 Mountain|HOB|[192]
+1 Forest|HOB|[193]
+
+[dual basic]
+1 Elvenking's Halls|HOB|[182]
+1 Goblin-town|HOB|[183]
+1 Iron Hills|HOB|[185]
+1 Lake-town|HOB|[186]
+1 Mirkwood|HOB|[188]
+
+[scene]
+1 Troop of Ponies|HOB|[199]
+1 Rage into the Valley|HOB|[200]
+1 The Great Goblin|HOB|[201]
+1 Thorin Oakenshield|HOB|[202]
+1 Gandalf, Spark Starter|HOB|[203]
+1 Glamdring, Foe-hammer|HOB|[204]
+1 The Eagles Are Coming!|HOB|[205]
+1 Dreaded Bat-Cloud|HOB|[206]
+1 The Lonely Mountain|HOB|[207]
+1 Chief Warg's Company|HOB|[208]
+1 Thorin's Last Stand|HOB|[209]
+1 Bard's Company|HOB|[210]
+1 Bolg's Company|HOB|[211]
+1 Dáin's Company|HOB|[212]
+1 Thranduil's Company|HOB|[213]
+
+[dragonhoard]
+1 Belladonna Took|HOB|[214]
+1 Bofur, Reliable Guardian|HOB|[215]
+1 Iron Hills Blacksmith|HOB|[216]
+1 The Queen of Dale|HOB|[217]
+1 Bilbo, Luckwearer|HOB|[218]
+1 Bilbo, Thief in the Night|HOB|[219]
+1 Fateful Discovery|HOB|[220]
+1 Most Decrepit Old Bird|HOB|[221]
+1 Azog, Moria's Ruin|HOB|[222]
+1 Great Ugly-Looking Goblin|HOB|[223]
+1 Head of the Hunt|HOB|[224]
+1 Desert Were-Worm|HOB|[225]
+1 Desolation of Smaug|HOB|[226]
+1 Glóin the Mighty|HOB|[227]
+1 Last Light of Durin's Day|HOB|[228]
+1 Smaug the Magnificent|HOB|[229]
+1 Beorn the Fierce|HOB|[230]
+1 Dancing from Dark to Dawn|HOB|[231]
+1 The Notary Hobbits|HOB|[232]
+1 Thranduil, Sindarin Liege|HOB|[233]
+1 The Arkenstone|HOB|[234]
+1 My Precious|HOB|[235]
+1 Orcrist, Goblin-cleaver|HOB|[236]
+1 Sting, Bilbo's Sword|HOB|[237]
+1 Elven Passage|HOB|[238]
+
+[bookcover]
+1 Gleaming Splendor|HOB|[239]
+1 The Lord of the Eagles|HOB|[240]
+1 Gollum, Riddle Master|HOB|[241]
+1 Gandalf, Goblins' Bane|HOB|[242]
+1 Thorin, Mountain-king|HOB|[243]
+1 Bard, King of Dale|HOB|[244]
+1 Smaug, Wicked Worm|HOB|[245]
+1 Thranduil, the Elvenking|HOB|[246]
+1 The Arkenstone|HOB|[247]
+1 The Lonely Mountain|HOB|[248]
+
+

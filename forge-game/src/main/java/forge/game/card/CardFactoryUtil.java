@@ -131,7 +131,7 @@ public class CardFactoryUtil {
         if (!cost.isOnlyManaCost()) {
             sbCost.append(" — ");
         }
-        sbCost.append(cost.toString());
+        sbCost.append(cost);
 
         // Cost need to be set later
         StringBuilder sb = new StringBuilder();

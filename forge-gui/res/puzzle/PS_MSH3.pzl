@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Marvel Super Heroes #03
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/06/latest-4-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. You have an additional copy of each card in your hand and on your battlefield. (You don't know whether you will draw any of them, though!) Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0hand=The Soul Stone;Secret of Bloodbending;Case of the Stashed Skeleton;Stomped by the Foot;Lost Jitte;Likeness Looter
+p0library=Likeness Looter;Lost Jitte;Stomped by the Foot;Case of the Stashed Skeleton;Secret of Bloodbending;The Soul Stone;Swamp;Swamp;Swamp;Swamp;Island;Island;Island;Island;Island;Kang the Conqueror;Ultimecia, Time Sorceress
+p0battlefield=Ultimecia, Time Sorceress;Kang the Conqueror;Island;Island;Island;Island;Island;Swamp;Swamp;Swamp;Swamp;T:c_a_treasure_sac;T:c_a_treasure_sac;T:c_a_treasure_sac
+p1life=32
+p1battlefield=Chandra, Flameshaper|Counters:LOYALTY=7;Bitterbloom Bearer;Scrawling Crawler;T:ub_1_1_faerie_flying;T:ub_1_1_faerie_flying;T:ub_1_1_faerie_flying
+# Randomize the order of cards in the library
+p0precast=Ancestral Knowledge:TrigShuffle

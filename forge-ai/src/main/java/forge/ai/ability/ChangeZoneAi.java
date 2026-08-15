@@ -1952,7 +1952,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             if (!preferredOppList.isEmpty()) {
                 return Aggregates.random(preferredOppList);
-            } else if (!preferredList.isEmpty()) {
+            }
+            if (!preferredList.isEmpty()) {
                 return Aggregates.random(preferredList);
             }
 
