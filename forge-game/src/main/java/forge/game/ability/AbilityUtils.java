@@ -1181,6 +1181,8 @@ public class AbilityUtils {
                 next = game.getNextPlayerAfter(next, dir);
             }
             players.add(next);
+        } else if (defined.equals("ManaSpender")) {
+            players.addAll(((SpellAbility) sa).getPayingMana().stream().map(m -> m.getPlayer()).collect(Collectors.toList()));
         } else {
             // will be filtered below
             players.addAll(game.getPlayersInTurnOrder());
@@ -2725,7 +2727,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].startsWith("PlanarDiceSpecialActionThisTurn")) {
-            return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
+            return doXMath(game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn(), expr, c, ctb);
         }
 
         if (sq[0].equals("TotalTurns")) {
@@ -2789,7 +2791,7 @@ public class AbilityUtils {
                     activated++;
                 }
             }
-            return activated;
+            return doXMath(activated, expr, c, ctb);
         }
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>

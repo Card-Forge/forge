@@ -91,7 +91,6 @@ public class Assets implements Disposable {
     private ObjectMap<String, Texture> tmxMap;
     private Texture defaultImage, dummy;
     private TextureParameter textureParameter;
-    private TextureParameter cardTextureParameter;
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
     private Texture holofoil;
@@ -100,12 +99,12 @@ public class Assets implements Disposable {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
         try {
             //init titleLQ
-            if (GuiBase.isAndroid())
+            if (GuiBase.isMobile())
                 getTexture(Gdx.files.internal("fallback_skin").child(titleFilename));
             else
                 getTexture(Gdx.files.classpath("fallback_skin").child(titleFilename));
             //init transition
-            if (GuiBase.isAndroid())
+            if (GuiBase.isMobile())
                 getTexture(Gdx.files.internal("fallback_skin").child("transition.png"));
             else
                 getTexture(Gdx.files.classpath("fallback_skin").child("transition.png"));
@@ -310,27 +309,6 @@ public class Assets implements Disposable {
         return textureParameter;
     }
 
-    // Card images are opaque. iOS is native-memory constrained, so there it loads the card path as RGB565
-    // (half the RGBA8888 footprint) with no mipmaps (cards are drawn ~1:1) — mirroring the RGB565 downscale on
-    // the downloaded path. Every other platform keeps the full-quality RGBA8888 + mipmap path (getTextureFilter),
-    // so card textures are not downgraded off iOS. Kept separate so UI textures are unaffected either way.
-    public TextureParameter getCardTextureFilter() {
-        if (!GuiBase.isIOS())
-            return getTextureFilter();
-        if (cardTextureParameter == null) {
-            cardTextureParameter = new TextureParameter();
-            cardTextureParameter.format = Pixmap.Format.RGB565;
-            cardTextureParameter.genMipMaps = false;
-        }
-        if (Forge.isTextureFilteringEnabled()) {
-            cardTextureParameter.minFilter = Texture.TextureFilter.Linear;
-            cardTextureParameter.magFilter = Texture.TextureFilter.Linear;
-        } else {
-            cardTextureParameter.minFilter = Texture.TextureFilter.Nearest;
-            cardTextureParameter.magFilter = Texture.TextureFilter.Nearest;
-        }
-        return cardTextureParameter;
-    }
 
     public Texture getTexture(FileHandle file) {
         return getTexture(file, true);

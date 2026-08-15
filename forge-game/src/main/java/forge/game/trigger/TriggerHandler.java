@@ -591,13 +591,8 @@ public class TriggerHandler {
     }
 
     public void onPlayerLost(Player p) {
-        List<Trigger> lost = new ArrayList<>(delayedTriggers);
-        for (Trigger t : lost) {
-            // CR 800.4d trigger controller lost game
-            if (p.equals(t.getSpawningAbility().getActivatingPlayer())) {
-                delayedTriggers.remove(t);
-            }
-        }
+        // CR 800.4d trigger controller lost game
+        delayedTriggers.removeIf(t -> p.equals(t.getSpawningAbility().getActivatingPlayer()));
         // run all ChangesZone
         runWaitingTriggers();
     }

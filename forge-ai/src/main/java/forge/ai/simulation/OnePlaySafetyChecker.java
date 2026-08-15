@@ -14,28 +14,20 @@ public final class OnePlaySafetyChecker {
         // during that resolution incrementally; priority responses need two full stack-resolution
         // branches and are not supported yet.
         if (sa == null || CHECKING.get()
-                || (!player.getGame().getStack().isEmpty()
-                && !player.getGame().getStack().isResolving())) {
+                || (!player.getGame().getStack().isEmpty() && !player.getGame().getStack().isResolving())) {
             return true;
         }
 
         CHECKING.set(true);
         try {
-            Score originalScore = new GameStateEvaluator().getScoreForGameState(player.getGame(), player);
-            SimulationController controller = new SimulationController(originalScore, 0);
+            SimulationController controller = new SimulationController(new Score(0), 0);
             GameSimulator simulator = new GameSimulator(controller, player.getGame(), player, null);
-            // TODO this doesn't respect heuristics shaping for the SA yet (targets etc.)
+            Score originalScore = simulator.getScoreForOrigGame();
             Score resultScore = simulator.simulateSpellAbility(sa);
-            Player simulatedPlayer = (Player) simulator.getGameCopier().find(player);
 
-            if (simulatedPlayer == null) {
-                return true;
-            }
-            if (simulatedPlayer.hasLost()) {
-                return false;
-            }
+            // desperate plays are ok if next combat was already likely to kill AI
             return resultScore.value == Integer.MIN_VALUE
-                    || (long) resultScore.value >= (long) originalScore.value - expectedCardScoreLoss(player, sa, simulator);
+                    || resultScore.value >= (long) originalScore.value - expectedCardScoreLoss(player, sa, simulator);
         } finally {
             CHECKING.remove();
         }
