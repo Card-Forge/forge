@@ -43,6 +43,9 @@ public final class BridgeMain {
             options.validate();
             MyRandom.setRandom(new Random(options.getSeed()));
             FModel.initialize(null, null);
+            // Card and model initialization may consume gameplay RNG, including from worker threads.
+            // Give every bridge game the requested initial RNG state after initialization has completed.
+            MyRandom.setRandom(new Random(options.getSeed()));
             try (BridgeTransport transport = new BridgeTransport(protocolInput, protocolOutput,
                     options.getLogPath())) {
                 new BridgeSession(options, transport, diagnosticOutput).run();
