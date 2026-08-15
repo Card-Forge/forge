@@ -91,7 +91,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             } else if (secretlyChoose) {
                 chooseMap.put(p, chosen);
             } else {
-                source.setChosenNumber(chosen, false);
+                source.setChosenNumber(chosen);
             }
             if (sa.hasParam("Notify")) {
                 p.getGame().getAction().notifyOfValue(sa, source, Localizer.getInstance().

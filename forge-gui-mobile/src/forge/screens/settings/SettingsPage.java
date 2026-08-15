@@ -49,6 +49,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.setListItemRenderer(new SettingRenderer());
         txtSearch.setFont(FSkinFont.get(12));
         txtSearch.setGhostText(Forge.getLocalizer().getMessage("lblSearch"));
+        txtSearch.setLiveChangeEvents(true); //filter as characters are typed
         txtSearch.setChangedHandler(e -> applySearch());
 
         lstSettings.addGroup(Forge.getLocalizer().getMessage("lblGeneralSettings"));
