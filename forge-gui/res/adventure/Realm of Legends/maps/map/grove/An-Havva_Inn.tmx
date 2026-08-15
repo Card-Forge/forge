@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="73">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="80">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -241,5 +241,12 @@
 </property>
    </properties>
   </object>
+  <object id="73" template="../../../../common/maps/obj/collision.tx" x="226.658" y="160.409" width="74.184" height="46.6816"/>
+  <object id="74" template="../../../../common/maps/obj/collision.tx" x="113.408" y="160.659" width="74.184" height="46.6816"/>
+  <object id="75" template="../../../../common/maps/obj/collision.tx" x="131.908" y="208.659" width="39.684" height="14.6816"/>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="244.158" y="209.159" width="39.684" height="14.6816"/>
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="161.783" y="98.7425" width="92.3507" height="34.3483"/>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="160.158" y="71.3259" width="14.3507" height="30.3483"/>
+  <object id="79" template="../../../../common/maps/obj/collision.tx" x="239.825" y="83.1592" width="14.3507" height="30.3483"/>
  </objectgroup>
 </map>

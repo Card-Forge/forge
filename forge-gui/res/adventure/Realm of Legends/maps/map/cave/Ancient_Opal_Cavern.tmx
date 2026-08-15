@@ -6,7 +6,6 @@
  <properties>
   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mox Opal&quot;, &quot;Pillar of the Paruns&quot; ]}"/>
  </properties>
- </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">

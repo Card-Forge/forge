@@ -63148,6 +63148,7 @@
     ],
     "ai": "",
     "speed": 45,
+    "scale": 0.5,
     "life": 20,
     "rewards": [
       {
@@ -63418,7 +63419,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1.5,
+    "scale": 1,
     "life": 50,
     "rewards": [
       {
@@ -64171,7 +64172,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 5,
+    "scale": 2,
     "life": 30,
     "rewards": [
       {
@@ -64237,7 +64238,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 5,
+    "scale": 3,
     "life": 30,
     "rewards": [
       {
@@ -64879,6 +64880,7 @@
     ],
     "ai": "",
     "speed": 45,
+    "scale": 0.5,
     "life": 20,
     "rewards": [
       {
@@ -65595,6 +65597,21 @@
     ],
     "colors": "UB",
     "spawnRate": 0
+  },
+  {
+    "name": "Zo-Zu the Punisher",
+    "sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 0.3,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
   },
   {
     "name": "Withengar",
