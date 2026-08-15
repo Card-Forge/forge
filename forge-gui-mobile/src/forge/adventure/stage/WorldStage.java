@@ -504,9 +504,9 @@ public class WorldStage extends GameStage implements SaveFileContent {
         for (AdventureQuestData adq: Current.player().getQuests())
         {
             if (adq.isTracked) {
-                PointOfInterest nearestValidPOI = adq.getClosestValidPOI(player.pos());
+                PointOfInterest nearestValidPOI = adq.getClosestValidPOI(player.getCenter());
                 if (nearestValidPOI != null) {
-                    navDirection = new Vector2(nearestValidPOI.getPosition()).sub(player.pos());
+                    navDirection = new Vector2(nearestValidPOI.getCenter()).sub(player.getCenter());
                     break;
                 }
 
@@ -527,7 +527,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     {
                         EnemySprite sprite = active.getValue();
                         if (sprite.equals(target)){
-                            navDirection = new Vector2(adq.getTargetEnemySprite().pos()).sub(player.pos());
+                            navDirection = new Vector2(adq.getTargetEnemySprite().getCenter()).sub(player.getCenter());
                         }
                     }
                 }
