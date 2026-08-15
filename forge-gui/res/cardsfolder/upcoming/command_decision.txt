@@ -1,0 +1,7 @@
+Name:Command Decision
+ManaCost:1 W
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDestroy,DBDraw
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.powerGE4 | ValidTgtsDesc$ creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:Choose one —\n• Destroy target creature with power 4 or greater.\n• Draw a card.

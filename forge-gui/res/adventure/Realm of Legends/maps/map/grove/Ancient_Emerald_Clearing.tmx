@@ -35,7 +35,7 @@
   <object id="64" template="../../../../common/maps/obj/enemy.tx" x="230.621" y="123.08">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Unnatural Growth|INR&quot;, &quot;Lurking Predators|m10&quot; ] }"/>
-    <property name="enemy" value="Autumn Willow"/>
+    <property name="enemy" value="Kaysa"/>
     <property name="fleeRange" value="30"/>
     <property name="pursueRange" type="int" value="30"/>
     <property name="spawn.Easy" type="bool" value="false"/>
