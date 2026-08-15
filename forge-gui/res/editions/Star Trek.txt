@@ -30,6 +30,7 @@ ScryfallCode=TRK
 64 U Hoshi Sato, Exolinguist @Jason Seiler
 65 C Humpback Whales @Evan Shipard
 72 C Marooned @Joel Chaim Holtzman
+76 C Open Communications @David Robert Hovey
 87 U V'Ger, the Intruder @Jessica Rossier
 92 C Assault Drone @Filipe Pagliuso
 93 C Automated Warfare System @Pierre Raveneau
@@ -38,6 +39,7 @@ ScryfallCode=TRK
 97 C Cha'DIch Investigator @Javier Charro
 99 U Collective Drone @José Parodi
 105 C Eject the Warp Core @Pierre Raveneau
+109 R General Chang, Cold Warrior @Cliff Nielsen
 111 C A Good Day to Die @Monztre
 114 C He's Dead, Jim @Crystal Fae
 115 U Hive Mind Coprocessor @Andrey Kuzinskiy
@@ -114,8 +116,11 @@ ScryfallCode=TRK
 399 R Overgrown Tomb @Sam Burley
 400 R Sacred Foundry @Eliz Roxs
 401 R Breeding Pool @Josu Solano
+415 R General Chang, Cold Warrior @Oliver Barrett
 417 R Salt Vampire @Simon Dominic
 418 M Captain James T. Kirk @Josh Newton
+427 R General Chang, Cold Warrior @Julia Vasilyeva
+437 R General Chang, Cold Warrior @Julia Vasilyeva
 478 M Crystalline Entity @David Álvarez
 481 R U.S.S. Enterprise-D, Galaxy-Class @Pablo Mendoza
 487 R Hallowed Fountain @Mark Poole
@@ -130,6 +135,7 @@ ScryfallCode=TRK
 496 R Breeding Pool @Josu Solano
 500 M Dr. Beverly Crusher @Anna Czeszejko
 520 M Captain Kathryn Janeway @Jurijus Chitrovas
+539 R General Chang, Cold Warrior @Oliver Barrett
 541 R Salt Vampire @Simon Dominic
 542 M Captain James T. Kirk @Josh Newton
 557 R U.S.S. Enterprise-D, Galaxy-Class @Scott Okumura
