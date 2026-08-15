@@ -46,6 +46,7 @@ final class BridgeController extends PlayerControllerAi {
     private final int startingSeat;
     private final BlockingQueue<DecisionTicket> decisions = new ArrayBlockingQueue<>(16);
     private final BlockingQueue<RemoteActionTicket> remoteActions = new ArrayBlockingQueue<>(128);
+    private final BlockingQueue<RemoteChoiceTicket> remoteChoices = new ArrayBlockingQueue<>(16);
     private final BlockingQueue<CombatActionTicket> combatActions = new ArrayBlockingQueue<>(16);
     private final BlockingQueue<CombatDecisionTicket> combatDecisions = new ArrayBlockingQueue<>(16);
     private volatile boolean cancelled;
@@ -61,6 +62,7 @@ final class BridgeController extends PlayerControllerAi {
     private volatile JsonNode pendingHandCounts;
     private volatile int pendingHandTurn;
     private RemoteActionTicket deferredRemoteAction;
+    private SpellAbility pendingRemoteCast;
 
     BridgeController(Game game, Player player, LobbyPlayer lobbyPlayer, int seat, boolean forgeAiSeat,
             boolean fullGame, int startingSeat) {
@@ -186,6 +188,16 @@ final class BridgeController extends PlayerControllerAi {
         int authoritativeTurn = context.path("turn").asInt();
         String authoritativePhase = context.path("phase").asText("");
         String actionType = action.path("type").asText();
+        if ("choose".equals(actionType)) {
+            if (!"spell_targets".equals(action.path("choice_kind").asText())) {
+                throw new IllegalStateException("Unsupported remote choice: " + action);
+            }
+            RemoteChoiceTicket ticket = new RemoteChoiceTicket(action.deepCopy(), context.deepCopy());
+            put(remoteChoices, ticket,
+                    "remote spell-target continuation");
+            diagnostics.println("Bridge queued remote spell-target continuation for seat " + seat + ": " + action);
+            return;
+        }
         if ("declare_attackers".equals(actionType) || "declare_blockers".equals(actionType)) {
             put(combatActions, new CombatActionTicket(action.deepCopy(), authoritativeTurn),
                     "remote combat action");
@@ -237,6 +249,8 @@ final class BridgeController extends PlayerControllerAi {
         while ((remote = remoteActions.poll()) != null) {
             remote.consumed.completeExceptionally(new IllegalStateException("Bridge game stopped"));
         }
+        remoteChoices.clear();
+        remoteChoices.offer(RemoteChoiceTicket.cancelled());
         CombatDecisionTicket combatDecision;
         while ((combatDecision = combatDecisions.poll()) != null) {
             combatDecision.result.completeExceptionally(new IllegalStateException("Bridge game stopped"));
@@ -474,6 +488,27 @@ final class BridgeController extends PlayerControllerAi {
             ticket.consumed.completeExceptionally(e);
             throw e;
         }
+    }
+
+    @Override
+    public boolean playChosenSpellAbility(SpellAbility ability) {
+        if (!fullGame || forgeAiSeat || pendingRemoteCast == null) {
+            return super.playChosenSpellAbility(ability);
+        }
+        RemoteChoiceTicket ticket = take(remoteChoices, "remote spell-target continuation");
+        JsonNode expectedCard = ticket.context.path("card");
+        if (!ability.getHostCard().getName().equals(expectedCard.path("name").asText())
+                || sameNameIndex(ability.getHostCard()) != expectedCard.path("idx").asInt(0)) {
+            throw new IllegalStateException("Remote target continuation does not match pending cast: "
+                    + ticket.action + "; pending=" + ability.getHostCard().getName());
+        }
+        applyTargets(ability, ticket.action.path("selections"));
+        if (!ability.isTargetNumberValid()) {
+            throw new IllegalStateException("Remote target continuation selected an invalid number of targets: "
+                    + ticket.action);
+        }
+        pendingRemoteCast = null;
+        return super.playChosenSpellAbility(ability);
     }
 
     static int compareMainPhase(String ticketPhase, String currentPhase) {
@@ -973,11 +1008,12 @@ final class BridgeController extends PlayerControllerAi {
                     }
                 }
             }
-        } else if ("cast".equals(type) || "activate".equals(type)) {
+        } else if ("cast".equals(type) || "announce_cast".equals(type) || "activate".equals(type)) {
             List<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(
                     ComputerUtilAbility.getAvailableCards(getGame(), player), player);
             for (SpellAbility ability : abilities) {
-                boolean correctKind = "cast".equals(type) ? ability.isSpell() : !ability.isSpell();
+                boolean correctKind = ("cast".equals(type) || "announce_cast".equals(type))
+                        ? ability.isSpell() : !ability.isSpell();
                 Card host = ability.getHostCard();
                 if (correctKind && host != null && host.getName().equals(name)
                         && sameNameIndex(host) == wantedIndex && ability.canPlay()) {
@@ -1004,7 +1040,14 @@ final class BridgeController extends PlayerControllerAi {
                     + "; phase=" + currentBridgePhase());
         }
         SpellAbility matched = matches.get(0);
-        applyTargets(matched, action.path("targets"));
+        if ("announce_cast".equals(type)) {
+            if (pendingRemoteCast != null) {
+                throw new IllegalStateException("A second remote cast was announced before target completion");
+            }
+            pendingRemoteCast = matched;
+        } else {
+            applyTargets(matched, action.path("targets"));
+        }
         return matched;
     }
 
@@ -1016,7 +1059,11 @@ final class BridgeController extends PlayerControllerAi {
         for (JsonNode target : targets) {
             if ("player".equals(target.path("kind").asText())) {
                 int targetSeat = target.path("seat").asInt();
-                ability.getTargets().add(getGame().getPlayers().get(targetSeat - 1));
+                Player targetPlayer = getGame().getPlayers().get(targetSeat - 1);
+                if (!ability.canTarget(targetPlayer)) {
+                    throw new IllegalStateException("Remote player spell target is not legal: " + target);
+                }
+                ability.getTargets().add(targetPlayer);
             } else if ("card".equals(target.path("kind").asText())) {
                 Card card = exactOpponentCard(target.path("card"), "spell target");
                 if (!ability.canTarget(card)) {
@@ -1186,6 +1233,21 @@ final class BridgeController extends PlayerControllerAi {
             this.action = action;
             this.turn = turn;
             this.phase = phase;
+        }
+    }
+
+    private static final class RemoteChoiceTicket {
+        private final JsonNode action;
+        private final JsonNode context;
+
+        private RemoteChoiceTicket(JsonNode action, JsonNode context) {
+            this.action = action;
+            this.context = context;
+        }
+
+        private static RemoteChoiceTicket cancelled() {
+            return new RemoteChoiceTicket(BridgeTransport.JSON.createObjectNode(),
+                    BridgeTransport.JSON.createObjectNode());
         }
     }
 

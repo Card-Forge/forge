@@ -20,3 +20,10 @@ also verifies its two corresponding SMART damage-assignment sub-choices. The
 scenario keeps one Hill Giant per battlefield because occurrence-index card
 references are not stable object identities after multiple same-name objects
 change zones.
+
+Targeted remote casts are split across the same callback boundary used by the
+engines. An `announce_cast` action selects and reserves the legal Forge spell;
+a later `choose` action with `choice_kind: "spell_targets"` supplies player or
+battlefield targets. `BridgeController` validates the referenced card and
+target count, applies the targets, and only then delegates cost payment and
+casting to Forge. Untargeted casts remain one complete `cast` action.

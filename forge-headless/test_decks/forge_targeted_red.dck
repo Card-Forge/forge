@@ -1,0 +1,10 @@
+[metadata]
+Name=Forge Bridge Targeted Red
+Description=Varied mono-red creatures and sorcery burn for target-callback acceptance
+
+[Main]
+30 Mountain
+15 Goblin Piker
+15 Volcanic Hammer
+
+[Sideboard]
