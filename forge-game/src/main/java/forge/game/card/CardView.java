@@ -174,6 +174,10 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Secondary);
     }
 
+    public boolean hasPreparedSpell() {
+        return hasAlternateState() && getAlternateState().getState() == CardStateName.PreparedSpell;
+    }
+
     public boolean isModalCard() {
         return get(TrackableProperty.Modal);
     }

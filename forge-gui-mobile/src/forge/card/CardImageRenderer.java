@@ -529,20 +529,26 @@ public class CardImageRenderer {
     private static final TextRenderer cardTextRenderer = new TextRenderer(true);
 
     private static void drawTextBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean onTop, boolean useCardBGTexture, boolean noText, boolean altstate, boolean isFacedown, boolean canShow, boolean isChoiceList) {
-        if (card.hasSecondaryState()) {
+        if (card.hasSecondaryState() || card.hasPreparedSpell()) {
             Color[] altcolors = FSkinColor.tintColors(Color.WHITE, fillColorBackground(g, CardDetailUtil.getBorderColors(card.getState(true), canShow) , x, y, w, h), CardRenderer.NAME_BOX_TINT);
-            if ((isFacedown && !altstate) || card.getZone() == ZoneType.Stack || isChoiceList || altstate) {
+            if ((isFacedown && !altstate) || card.getZone() == ZoneType.Stack && !card.hasPreparedSpell() || isChoiceList || altstate) {
                 setTextBox(g, card, state, colors, x, y, w, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown);
             } else {
+                float leftX = x, rightX = x + w / 2, width = w - (w / 2);
+                CardStateView rightState = state, leftState = card.getState(true);
+                if (card.hasPreparedSpell()) {
+                    leftX = x + w / 2;
+                    rightX = x;
+                }
                 //left
                 //float headerHeight = Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * TYPE_FONT.getCapHeight()) + 2;
                 float typeBoxHeight = 2 * getCapHeight(TYPE_FONT);
-                drawHeader(g, card, card.getState(true), altcolors, x, y, w - (w / 2), typeBoxHeight, noText, true);
-                drawTypeLine(g, card.getState(true), canShow, altcolors, x, y + typeBoxHeight, w - (w / 2), typeBoxHeight, noText, true, true);
+                drawHeader(g, card, leftState, altcolors, leftX, y, width, typeBoxHeight, noText, true);
+                drawTypeLine(g, leftState, canShow, altcolors, leftX, y + typeBoxHeight, width, typeBoxHeight, noText, true, true);
                 float mod = (typeBoxHeight + typeBoxHeight);
-                setTextBox(g, card, card.getState(true), altcolors, x, y + mod, w - (w / 2), h - mod, onTop, useCardBGTexture, noText, typeBoxHeight, typeBoxHeight, true, altstate, isFacedown);
+                setTextBox(g, card, leftState, altcolors, leftX, y + mod, width, h - mod, onTop, useCardBGTexture, noText, typeBoxHeight, typeBoxHeight, true, altstate, isFacedown);
                 //right
-                setTextBox(g, card, state, colors, x + w / 2, y, w - (w / 2), h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown);
+                setTextBox(g, card, rightState, colors, rightX, y, width, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown);
             }
         } else {
             setTextBox(g, card, state, colors, x, y, w, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown);
@@ -769,16 +775,12 @@ public class CardImageRenderer {
         Texture image = new CachedCardImageRenderer(key).getImage();
 
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
-        if (image == null) { //draw details if can't draw zoom
+        if (card.isImmutable() && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_IMAGES_EFFECT_CARDS)){
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
         }
-        if(card.isImmutable() && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_IMAGES_EFFECT_CARDS)){
-            drawDetails(g, card, gameView, altState, x, y, w, h);
-            return;
-        }
-
-        if (image == ImageCache.getInstance().getDefaultImage() || Forge.enableUIMask.equals("Art")) { //support drawing card image manually if card image not found
+        // when image is not available draw the card renders
+        if (image == null || image == ImageCache.getInstance().getDefaultImage() || Forge.enableUIMask.equals("Art")) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top, true, true);
         } else {
             float radius = (h - w) / 8;

@@ -733,7 +733,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             return;
         image = img;
         if (Forge.isTextureFilteringEnabled()) {
-            // ImageCache loads card art without mipmaps (getCardTextureFilter). Applying a mipmap
+            // ImageCache loads card art without mipmaps. Applying a mipmap
             // min filter to those textures makes OpenGL sample missing mip levels → solid black.
             boolean useMipMaps = false;
             try {

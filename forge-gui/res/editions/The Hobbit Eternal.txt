@@ -156,7 +156,7 @@ ScryfallCode=HOC
 202 C Smite the Deathless @Alexander Mokhov
 203 U Celeborn the Wise @Wangjie Li
 204 R Elvish Archdruid @Anastasia Balakchina
-205 C Elvish Mystic @Iga "IgsonArt" Oliwiak
+205 C Elvish Mystic @Iga Oliwiak
 206 C Elvish Visionary @Zuzanna Wużyk
 207 C Galadhrim Guide @Inka Schulz
 208 U Gift of Strands @Ignis Bruno
