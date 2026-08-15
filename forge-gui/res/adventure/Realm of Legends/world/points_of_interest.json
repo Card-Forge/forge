@@ -552,6 +552,18 @@
 			"Story"]
 	},
 	{
+		"name": "Planeswalker Dueling Club",
+		"displayName": "Planeswalker Dueling Club",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building56",
+		"map": "../Realm of Legends/maps/map/cave/Planeswalker_Dueling_Club.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Gitrog Bog",
 		"displayName": "Gitrog Bog",
 		"type": "castle",
@@ -592,8 +604,8 @@
 		"displayName": "Condemned Sewers",
 		"type": "cave",
 		"count": 1,
-		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
-		"sprite": "Building180",
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Dimir Guildgate",
 		"map": "../Realm of Legends/maps/map/evilgrove/Hidden_Dimir_Base.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [

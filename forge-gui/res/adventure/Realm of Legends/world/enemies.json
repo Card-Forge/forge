@@ -65188,6 +65188,415 @@
     "spawnRate": 1
   },
   {
+    "name": "Worzel",
+    "sprite": "sprites/enemy/humanoid/human/cleric/priest.atlas",
+    "deck": [
+      "decks/legends/worzel.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Worzel, the Protector"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "W",
+    "spawnRate": 0
+  },
+  {
+    "name": "Thomil",
+    "sprite": "sprites/enemy/undead/lich.atlas",
+    "deck": [
+      "decks/legends/thomil.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Thomil, the Destroyer"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "B",
+    "spawnRate": 0
+  },
+  {
+    "name": "Venser",
+    "sprite": "sprites/enemy/humanoid/human/cleric/monk_3.atlas",
+    "deck": [
+      "decks/legends/venser.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Venser, Visionary Traveler"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Venser, the Sojourner"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Venser, Shaper Savant"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Venser, Corpse Puppet"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "UW",
+    "spawnRate": 0
+  },
+  {
+    "name": "Sifa Grent",
+    "sprite": "sprites/enemy/humanoid/human/wizard/jaya.atlas",
+    "deck": [
+      "decks/legends/sifa_grent.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Sifa Grent"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "BR",
+    "spawnRate": 0
+  },
+  {
+    "name": "Freyalise",
+    "sprite": "sprites/enemy/humanoid/elf/elf_golgari.atlas",
+    "deck": [
+      "decks/legends/freyalise.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Freyalise, Llanowar's Fury"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Freyalise, Skyshroud Partisan"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "G",
+    "spawnRate": 0
+  },
+  {
+    "name": "Sivitri",
+    "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
+    "deck": [
+      "decks/legends/sivitri.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Sivitri, Dragon Master"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Sivitri Scarzam"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "UB",
+    "spawnRate": 0
+  },
+  {
     "name": "Withengar",
     "sprite": "sprites/enemy/fiend/abyssalbaron.atlas",
     "deck": [

@@ -3236,6 +3236,30 @@
       ]
     }
   },
+  {
+    "name": "Interplanar Armor",
+    "description": "Gain 1 life on PW cast. Taps for C or 1, T: Add two of dif. colors for PWs.",
+    "equipmentSlot": "Body",
+    "iconName": "InterplanarArmor",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Interplanar Beacon"
+      ]
+    }
+  },
+  {
+    "name": "Cloud Keeper Armor",
+    "description": "T, pay 2 life: Adds CC to spend only on legendary spells.",
+    "equipmentSlot": "Body",
+    "iconName": "CloudKeeperArmor",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Untaidake, the Cloud Keeper"
+      ]
+    }
+  },
     {
     "name": "Amulet of Mischief",
     "description": "Pay 3U for random spell steal",
