@@ -118,7 +118,8 @@ final class BridgeController extends PlayerControllerAi {
         result.put("type", "keep");
         ArrayNode bottom = result.putArray("bottom");
         if (!fullGame && cardsToReturn > 0) {
-            CardCollectionView cards = super.londonMulliganReturnCards(player, cardsToReturn);
+            CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
+            CardCollectionView cards = super.tuckCardsViaMulligan(hand, cardsToReturn);
             for (Card card : cards) {
                 bottom.add(cardReference(card));
             }
