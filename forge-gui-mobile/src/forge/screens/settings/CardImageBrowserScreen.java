@@ -55,6 +55,7 @@ public class CardImageBrowserScreen extends FScreen {
         txtSearch.setGhostText(Forge.getLocalizer().getMessage("lblSearch") + " " +
                 Forge.getLocalizer().getMessage("lblCards") + "...");
         // Auto-refresh on every keystroke
+        txtSearch.setLiveChangeEvents(true);
         txtSearch.setChangedHandler(e -> scheduleStatsUpdate());
 
         // ── Format / Sets combo — same options as the deck-browser filter ────
