@@ -97,6 +97,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     private boolean makeTokenRow = true;
     private boolean stackCreatures = false;
+    private boolean groupTokens;
     private boolean groupTokensAndCreatures;
     private boolean groupAll;
     private boolean grouping;
@@ -113,9 +114,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private void updateGroupScope() {
         String groupScope = FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS);
         this.stackCreatures = "stack".equals(groupScope);
+        this.groupTokens = "group_tokens".equals(groupScope) || "group_creatures".equals(groupScope) || "group_all".equals(groupScope);
         this.groupTokensAndCreatures = "group_creatures".equals(groupScope) || "group_all".equals(groupScope);
         this.groupAll = "group_all".equals(groupScope);
-        this.grouping = groupTokensAndCreatures || groupAll;
+        this.grouping = groupTokens || groupTokensAndCreatures || groupAll;
         int prefDepth = FModel.getPreferences().getPrefInt(FPref.UI_MAX_STACK_DEPTH);
         this.maxStackDepth = Math.max(MIN_STACK_DEPTH, Math.min(MAX_STACK_DEPTH, prefDepth));
     }
@@ -134,11 +136,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 && card.isSick() == first.isSick()
                 && card.hasSamePT(first)
                 && card.getText().equals(first.getText())
-                && (!groupTokensAndCreatures || card.isTapped() == first.isTapped())
-                && (!groupTokensAndCreatures || card.getDamage() == first.getDamage());
+                && (!groupTokens || card.isTapped() == first.isTapped())
+                && (!groupTokens || card.getDamage() == first.getDamage());
         return collectStacked(remainingPanels, RowType.Token,
                 base.and(this::compatibleUnderCombatSeparation),
-                maxStackDepth, groupTokensAndCreatures);
+                maxStackDepth, groupTokens);
     }
 
     private CardStackRow collectAllCreatures(List<CardPanel> remainingPanels) {
