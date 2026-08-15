@@ -7,8 +7,10 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class SwingImageFetcher extends ImageFetcher {
 
@@ -34,13 +36,41 @@ public class SwingImageFetcher extends ImageFetcher {
                 return false;
             }
 
+            if (inScryfallCooldown(urlToDownload)) {
+                return false;
+            }
+
             String newdespath = urlToDownload.contains(".fullborder.jpg") || urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) ?
                     TextUtil.fastReplace(destPath, ".full.jpg", ".fullborder.jpg") : destPath;
             if (!newdespath.contains(".full") && !newdespath.contains(".artcrop") && urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) && !destPath.startsWith(ForgeConstants.CACHE_TOKEN_PICS_DIR))
                 newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); //fix planes/phenomenon for round border options
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
-            BufferedImage image = ImageIO.read(url);
+            paceScryfall(urlToDownload);
+
+            // Read through a connection rather than ImageIO.read(URL), which discards the response
+            // code - without it a 429 is indistinguishable from any other failure and we keep asking.
+            final URLConnection connection = url.openConnection();
+            connection.setRequestProperty("Accept", "*/*");
+            connection.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+            if (connection instanceof HttpURLConnection httpConnection) {
+                final int responseCode = httpConnection.getResponseCode();
+                if (responseCode != HttpURLConnection.HTTP_OK) {
+                    System.err.println("Failed to fetch image. HTTP code: " + responseCode
+                            + " (" + httpConnection.getResponseMessage() + ") for URL: " + urlToDownload);
+                    if (responseCode == 429 && isScryfall(urlToDownload)) {
+                        System.err.println("Rate limited by scryfall. Pausing image downloads.");
+                        noteScryfallRateLimited();
+                    }
+                    httpConnection.disconnect();
+                    return false;
+                }
+            }
+
+            BufferedImage image;
+            try (InputStream is = connection.getInputStream()) {
+                image = ImageIO.read(is);
+            }
             // First, save to a temporary file so that nothing tries to read
             // a partial download.
             File destFile = new File(newdespath + ".tmp");

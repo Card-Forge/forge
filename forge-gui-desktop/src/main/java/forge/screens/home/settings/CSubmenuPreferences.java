@@ -165,8 +165,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbShowDraftRanking(), FPref.UI_OVERLAY_DRAFT_RANKING));
         lstControls.add(Pair.of(view.getCbAiPicker(), FPref.UI_ENABLE_AI_PICKER));
 
-
-        for(final Pair<JCheckBox, FPref> kv : lstControls) {
+        for (final Pair<JCheckBox, FPref> kv : lstControls) {
           kv.getKey().addItemListener(arg0 -> {
               if (updating) { return; }
 

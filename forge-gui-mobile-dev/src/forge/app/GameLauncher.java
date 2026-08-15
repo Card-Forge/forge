@@ -113,11 +113,11 @@ public class GameLauncher {
         if (Config.instance().getSettingData().fullScreen) {
             config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
             config.setAutoIconify(true);
-            config.setHdpiMode(HdpiMode.Logical);
         } else {
             config.setWindowedMode(windowWidth, windowHeight);
             config.setResizable(false);
         }
+        config.setHdpiMode(HdpiMode.Logical);
         config.setTitle("Forge - " + versionString);
         config.setWindowListener(new Lwjgl3WindowAdapter() {
             @Override
@@ -140,8 +140,6 @@ public class GameLauncher {
                 Forge.setWindowFocus(false);
             }
         });
-
-        config.setHdpiMode(HdpiMode.Logical);
 
         new Lwjgl3Application(start, config);
     }

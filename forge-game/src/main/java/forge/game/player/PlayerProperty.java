@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -497,6 +498,15 @@ public class PlayerProperty {
                 }
             }
             return false;
+        } else if (property.startsWith("counters")) {
+            final String[] splitProperty = property.split("_");
+            final String strNum = splitProperty[1].substring(2);
+            final String comparator = splitProperty[1].substring(0, 2);
+            final int number = AbilityUtils.calculateAmount(source, strNum, spellAbility);
+            final int actualNumber = player.getCounters(CounterType.getType(splitProperty[2]));
+            if (!Expressions.compare(actualNumber, comparator, number)) {
+                return false;
+            }
         } else {
             // could print error msg for unknown property here, though it'd need to check that it's not "Any" case
             return false;

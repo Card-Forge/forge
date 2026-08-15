@@ -83,7 +83,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public String getDayTime() {
         return daytime;
     }
-
     @Override
     public void updateDayTime(String daytime) {
         this.daytime = daytime;
