@@ -1,0 +1,9 @@
+Name:Ekthi, Contaminator Priest
+ManaCost:3 W
+Types:Legendary Creature Phyrexian Cleric
+PT:3/3
+S:Mode$ Continuous | Affected$ Phyrexian.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Phyrexians you control get +1/+1.
+S:Mode$ Continuous | Affected$ Equipment.YouCtrl | AddKeyword$ Living Weapon | Description$ Each Equipment you control has living weapon. (Whenever an Equipment you control enters, create a 0/0 black Phyrexian Germ creature token, then attack that Equipment to it.)
+SVar:PlayMain1:TRUE
+DeckHints:Type$Phyrexian|Equipment
+Oracle:Other Phyrexians you control get +1/+1.\nEach Equipment you control has living weapon. (Whenever an Equipment you control enters, create a 0/0 black Phyrexian Germ creature token, then attack that Equipment to it.)

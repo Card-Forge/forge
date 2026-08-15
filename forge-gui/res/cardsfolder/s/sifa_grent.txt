@@ -1,0 +1,15 @@
+Name:Sifa Grent
+ManaCost:3 B R
+Types:Legendary Planeswalker Sifa
+Loyalty:4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature dies, target opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+A:AB$ Goad | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Goad up to two target creatures.
+A:AB$ Dig | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ Opponent | DestinationZone$ Exile | DigNum$ 2 | ChangeNum$ All | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Each opponent exiles the top two cards of their library. Until end of turn, you may play those cards without paying their mana costs.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlayWithoutManaCost$ True | Description$ Until end of turn, you may play those cards without paying their mana costs.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Text:CARDNAME can be your commander.
+DeckHas:Ability$LifeGain
+Oracle:Whenever a creature dies, target opponent loses 1 life and you gain 1 life.\n[+1]: Goad up to two target creatures.\n[-6]: Each opponent exiles the top two cards of their library. Until end of turn, you may play those cards without paying their mana costs.\nSifa Grent can be your commander.
