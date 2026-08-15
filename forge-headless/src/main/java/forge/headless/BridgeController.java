@@ -52,6 +52,8 @@ final class BridgeController extends PlayerControllerAi {
     private volatile boolean finishing;
     private volatile int drainThroughTurn;
     private volatile int remoteDrainThroughTurn;
+    private volatile int remoteMainDrainTurn = -1;
+    private volatile String remoteMainDrainPhase = "";
     private int forgeLandPlayedTurn = -1;
     private volatile boolean multiBlockerScenario;
     private volatile boolean multiBlockerDamageObserved;
@@ -256,6 +258,14 @@ final class BridgeController extends PlayerControllerAi {
             while ((ticket = decisions.poll()) != null) {
                 ticket.result.complete(passAction());
             }
+        } else {
+            // The remote seat may already be blocked in take(remoteActions)
+            // when an authoritative lethal combat action is followed
+            // immediately by game_end. Setting finishing alone cannot wake an
+            // in-progress blocking read, so supply one final pass sentinel.
+            int turn = getGame().getPhaseHandler().getTurn();
+            put(remoteActions, new RemoteActionTicket(passAction(), turn, currentBridgePhase()),
+                    "remote game-finish sentinel");
         }
     }
 
@@ -378,6 +388,10 @@ final class BridgeController extends PlayerControllerAi {
         }
         int currentTurn = getGame().getPhaseHandler().getTurn();
         RemoteActionTicket head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
+        String currentPhase = currentBridgePhase();
+        if (remoteMainDrainTurn == currentTurn && remoteMainDrainPhase.equals(currentPhase)) {
+            return null;
+        }
         while (head != null && head.turn < currentTurn
                 && "pass".equals(head.action.path("type").asText())) {
             if (deferredRemoteAction == null) {
@@ -409,11 +423,24 @@ final class BridgeController extends PlayerControllerAi {
             throw new IllegalStateException("Missed remote action from turn " + head.turn
                     + " before Forge advanced to turn " + currentTurn + ": " + head.action);
         }
+        while (head != null && head.turn == currentTurn
+                && compareMainPhase(head.phase, currentPhase) < 0) {
+            if (deferredRemoteAction == null) {
+                remoteActions.poll();
+            } else {
+                deferredRemoteAction = null;
+            }
+            head.consumed.complete(null);
+            head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
+        }
+        if (head != null && head.turn == currentTurn
+                && compareMainPhase(head.phase, currentPhase) > 0) {
+            return null;
+        }
         if (instantPriority && !sharedActiveMain) {
             if (head == null || head.turn > currentTurn) {
                 return null;
             }
-            String currentPhase = currentBridgePhase();
             boolean mainPhaseTicket = "main1".equals(head.phase) || "main2".equals(head.phase);
             if (head.turn == currentTurn && !mainPhaseTicket && !"main1".equals(currentPhase)) {
                 return null;
@@ -436,6 +463,10 @@ final class BridgeController extends PlayerControllerAi {
                 deferredRemoteAction = ticket;
                 return null;
             }
+            if ("authoritative_main_phase_end".equals(ticket.action.path("reason").asText())) {
+                remoteMainDrainTurn = ticket.turn;
+                remoteMainDrainPhase = ticket.phase;
+            }
             SpellAbility ability = matchRemoteAction(ticket.action);
             ticket.consumed.complete(null);
             return ability == null ? null : Collections.singletonList(ability);
@@ -443,6 +474,20 @@ final class BridgeController extends PlayerControllerAi {
             ticket.consumed.completeExceptionally(e);
             throw e;
         }
+    }
+
+    static int compareMainPhase(String ticketPhase, String currentPhase) {
+        return Integer.compare(mainPhaseRank(ticketPhase), mainPhaseRank(currentPhase));
+    }
+
+    private static int mainPhaseRank(String phase) {
+        if ("main1".equals(phase)) {
+            return 1;
+        }
+        if ("main2".equals(phase)) {
+            return 2;
+        }
+        return 0;
     }
 
     @Override

@@ -17,6 +17,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class BridgeTransportTest {
     @Test
+    public void ordersRemoteMainPhaseTickets() {
+        assertEquals(0, BridgeController.compareMainPhase("main1", "main1"));
+        assertEquals(0, BridgeController.compareMainPhase("main2", "main2"));
+        assertEquals(-1, BridgeController.compareMainPhase("main1", "main2"));
+        assertEquals(1, BridgeController.compareMainPhase("main2", "main1"));
+    }
+
+    @Test
     public void preservesOneJsonMessagePerLineAndLogsBothDirections() throws Exception {
         Path log = Files.createTempFile("forge-bridge-transport", ".jsonl");
         ByteArrayInputStream input = new ByteArrayInputStream(
