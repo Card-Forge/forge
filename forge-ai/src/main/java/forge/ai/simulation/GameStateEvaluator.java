@@ -254,22 +254,23 @@ public class GameStateEvaluator {
         // TODO: These should be based on other considerations - e.g. in relation to opponents state.
         if (c.isCreature()) {
             return eval.evaluateCreature(c);
-        } else if (c.isLand()) {
+        }
+        if (c.isLand()) {
             return evaluateLand(c);
-        } else if (c.isEnchantingCard()) {
+        }
+        if (c.isEnchantingCard()) {
             // TODO: Should provide value in whatever it's enchanting?
             // Else the computer would think that casting a Lifelink enchantment
             // on something that already has lifelink is a net win.
             return 0;
-        } else {
-            // TODO treat cards like Captive Audience negative
-            // e.g. a 5 CMC permanent results in 200, whereas a 5/5 creature is ~225
-            int value = 50 + 30 * c.getCMC();
-            if (c.isPlaneswalker()) {
-                value += 2 * c.getCounters(CounterEnumType.LOYALTY);
-            }
-            return value;
         }
+        // TODO treat cards like Captive Audience negative
+        // e.g. a 5 CMC permanent results in 200, whereas a 5/5 creature is ~225
+        int value = 50 + 30 * c.getCMC();
+        if (c.isPlaneswalker()) {
+            value += 2 * c.getCounters(CounterEnumType.LOYALTY);
+        }
+        return value;
     }
 
     public static int evaluateLand(Card c) {

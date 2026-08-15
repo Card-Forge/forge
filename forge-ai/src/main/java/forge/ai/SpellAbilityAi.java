@@ -112,7 +112,7 @@ public abstract class SpellAbilityAi {
         if (!checkConditions(ai, sa)) {
             SpellAbility sub = sa.getSubAbility();
             if (sub == null || !checkConditions(ai, sub)) {
-                return new AiAbilityDecision(0, AiPlayDecision.NeedsToPlayCriteriaNotMet);
+                return new AiAbilityDecision(0, AiPlayDecision.ConditionsNotMet);
             }
         }
         return decision;

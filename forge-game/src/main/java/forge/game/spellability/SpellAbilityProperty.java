@@ -13,6 +13,7 @@ import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.zone.ZoneType;
@@ -157,6 +158,10 @@ public class SpellAbilityProperty {
             return sa.isLastChapter();
         } else if (property.equals("paidPhyrexianMana")) {
             return sa.getSpendPhyrexianMana() > 0;
+        } else if (property.startsWith("ManaSpentBy")) {
+            String[] k = property.split(" ", 2);
+            PlayerCollection spenders = AbilityUtils.getDefinedPlayers(source, k[1], spellAbility);
+            return sa.getPayingMana().stream().anyMatch(m -> spenders.contains(m.getPlayer()));
         } else if (property.startsWith("ManaSpent")) {
             String[] k = property.split(" ", 2);
             String comparator = k[1].substring(0, 2);
