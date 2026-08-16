@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import forge.localinstance.properties.ForgeConstants;
+import forge.util.ThreadUtil;
 import org.tinylog.Logger;
 
 import java.io.File;
@@ -20,29 +21,26 @@ import java.time.Instant;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 /**
- * Lazy-loading, thread-safe cache for Scryfall CDN UUIDs.
+ * Lazy-loading, thread-safe cache for Scryfall CDN UUIDs, generated on demand from Scryfall's
+ * search API (see {@link ScryfallSetSync}) and cached locally at
+ * {@code {cacheDir}/cdn_uuid/{setCode}.json.gz}. A {@code null} result lets the caller fall
+ * back to rate-limited, non-CDN Scryfall image hosting.
  *
- * All UUID data is generated on the user's machine, straight from Scryfall.
+ * <p>Callers include interactive gameplay code that runs on the EDT/render thread, so a lookup
+ * this can't answer from disk never blocks on network I/O itself: it queues the set code and
+ * returns as if the data weren't there yet. {@link #syncPendingSets} does the actual work and
+ * is submitted to the existing shared {@link ThreadUtil#getServicePool}, warming the cache for
+ * the next lookup instead of the current one.
  *
- * The cache resolves data locally first from
- * {@code {cacheDir}/cdn_uuid/{setCode}.json.gz} files.
- *
- * When there is a cache miss (file or entry), it's repopulated from
- * the scryfall search api.
- *
- * The cache returns null, so the user may resolve via a rate-limited, non-cdn scryfall
- * image hosting. The client rate limits these requests.
- *
- * <p>A (collector number, language) that a set's data genuinely doesn't have -- e.g. a
- * card released after the set was last synced -- is recorded as a negative-cache "miss"
- * with a timestamp, right alongside the real entries. A miss younger than
- * {@link #MISS_RETRY_AFTER} short-circuits with no network call; once it's older, the
- * next lookup re-syncs the set from Scryfall to see if it's showed up since.
+ * <p>A (collector number, language) that a set's cached data genuinely doesn't have -- e.g. a
+ * card released after the set was last synced -- is recorded as a negative-cache "miss" with
+ * a timestamp; see {@link #trackMiss} for the retry policy.
  *
  * <p>Set JSON format:
  * <pre>
@@ -82,6 +80,12 @@ public final class CdnUuidCache {
     private static final ConcurrentHashMap<String, Map<String, Map<String, LangUuids>>> setCache =
             new ConcurrentHashMap<>();
 
+    /** Set codes a lookup couldn't answer locally, waiting for {@link #syncPendingSets}. */
+    private static final Set<String> pendingSyncs = ConcurrentHashMap.newKeySet();
+
+    /** Submits {@link #syncPendingSets} to the shared pool for tests to disable. */
+    static volatile boolean autoSyncEnabled = true;
+
     /**
      * Override for the local cache directory for tests.
      */
@@ -112,16 +116,13 @@ public final class CdnUuidCache {
     }
 
     /**
-     * Merges externally-sourced (setCode → collectorNumber → lang → [frontUuid, backUuidOrNull])
-     * entries into the on-disk cache, creating or updating {@code {cacheDir}/{setCode}.json.gz}.
+     * Merges externally-sourced (collectorNumber → lang → [frontUuid, backUuidOrNull]) entries
+     * for {@code setCode} into its on-disk cache file. Called by {@link ScryfallSetSync} after
+     * (re)building a set from Scryfall's card search API.
      *
-     * Used by {@link ScryfallSetSync} when a set has no local data at all yet (or a
-     * previously-recorded miss is stale) and is (re)built from Scryfall's card search API.
-     *
-     * <p>A real entry already on disk is never overwritten, so a precise front/back pair
-     * can't be degraded by a later, less precise source filling the same slot. A miss
-     * record occupying the slot doesn't count as "already there" -- real data always
-     * upgrades a miss.
+     * <p>A real entry already on disk is never overwritten -- a precise front/back pair can't be
+     * degraded by a later, less precise source -- but a miss record occupying the slot doesn't
+     * count as "already there", so real data always upgrades a miss.
      */
     static synchronized void mergeSetEntriesWithFaces(String setCode, Map<String, Map<String, String[]>> newEntries) {
         File file = localCacheFile(setCode);
@@ -180,12 +181,18 @@ public final class CdnUuidCache {
 
     private static JsonObject readLocalJson(File file) {
         if (!file.exists()) return new JsonObject();
-        try (InputStream is = new GZIPInputStream(new FileInputStream(file));
-             InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
-            return JsonParser.parseReader(reader).getAsJsonObject();
+        try {
+            return readGzipJson(file);
         } catch (Exception e) {
             Logger.warn("CdnUuidCache: corrupt local cache {}, rebuilding: {}", file, e.getMessage());
             return new JsonObject();
+        }
+    }
+
+    private static JsonObject readGzipJson(File file) throws Exception {
+        try (InputStream is = new GZIPInputStream(new FileInputStream(file));
+             InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
+            return JsonParser.parseReader(reader).getAsJsonObject();
         }
     }
 
@@ -209,8 +216,10 @@ public final class CdnUuidCache {
         if (cardMap == MISSING_SET) return null;
 
         LangUuids uuids = resolveWithFallback(cardMap, collectorNum, lang);
-        if (uuids == null) uuids = trackMiss(setCode, cardMap, collectorNum, lang);
-        if (uuids == null) return null;
+        if (uuids == null) {
+            trackMiss(setCode, cardMap, collectorNum, lang);
+            return null;
+        }
 
         String uuid = (wantBack && uuids.back != null) ? uuids.back : uuids.front;
         String side = wantBack ? "back" : "front";
@@ -233,32 +242,55 @@ public final class CdnUuidCache {
     }
 
     /**
-     * Neither {@code lang} nor its English fallback resolved to real data. Tracks that as a
-     * miss against the exact requested {@code lang}: a miss seen for the first time, or one
-     * younger than {@link #MISS_RETRY_AFTER}, is recorded/left alone and this returns
-     * {@code null} with no network call. A miss older than that is worth re-checking --
-     * the set is re-synced from Scryfall, in case the card has shown up since.
+     * Neither {@code lang} nor its English fallback resolved to real data. A miss seen for the
+     * first time is recorded immediately (no network call). One already recorded and younger
+     * than {@link #MISS_RETRY_AFTER} is left alone -- also no network call. One older than that
+     * queues the set for {@link #syncPendingSets} to re-check.
      */
-    private static LangUuids trackMiss(String setCode, Map<String, Map<String, LangUuids>> cardMap,
-                                        String cn, String lang) {
+    private static void trackMiss(String setCode, Map<String, Map<String, LangUuids>> cardMap,
+                                   String cn, String lang) {
         Map<String, LangUuids> langMap = cardMap.get(cn);
         LangUuids existing = langMap != null ? langMap.get(lang) : null;
 
-        if (existing != null && existing.isMiss() && isStale(existing.missedAt)) {
-            ScryfallSetSync.sync(setCode);
-            Map<String, Map<String, LangUuids>> refreshed = loadSet(setCode);
-            LangUuids retried = resolveWithFallback(refreshed, cn, lang);
-            if (retried != null) return retried;
-        } else if (existing != null && existing.isMiss()) {
-            return null; // recorded recently; don't hit the network again yet
+        if (existing != null && existing.isMiss()) {
+            if (isStale(existing.missedAt)) queueSync(setCode);
+            return;
         }
 
         recordMiss(setCode, cn, lang);
-        return null;
     }
 
     private static boolean isStale(Instant missedAt) {
         return Duration.between(missedAt, Instant.now()).compareTo(MISS_RETRY_AFTER) >= 0;
+    }
+
+    /** Queues {@code setCode} and, unless a test disabled it, submits {@link #syncPendingSets} to the shared pool. */
+    private static void queueSync(String setCode) {
+        if (pendingSyncs.add(setCode) && autoSyncEnabled) {
+            ThreadUtil.getServicePool().submit(CdnUuidCache::syncPendingSets);
+        }
+    }
+
+    /**
+     * Synchronously syncs every set a lookup has queued (a never-seen set, or a stale miss due
+     * a retry) from Scryfall. Meant to run off the EDT/render thread -- see the class javadoc.
+     */
+    public static void syncPendingSets() {
+        for (String setCode : pendingSyncs) {
+            if (!pendingSyncs.remove(setCode)) continue; // another thread already claimed it
+            ScryfallSetSync.sync(setCode);
+            refreshStaleMisses(setCode);
+        }
+    }
+
+    /** A miss still unresolved after a resync attempt just got reconfirmed -- refresh its timestamp. */
+    private static void refreshStaleMisses(String setCode) {
+        for (Map.Entry<String, Map<String, LangUuids>> cnEntry : readSetFromDisk(setCode).entrySet()) {
+            for (Map.Entry<String, LangUuids> langEntry : cnEntry.getValue().entrySet()) {
+                LangUuids v = langEntry.getValue();
+                if (v.isMiss() && isStale(v.missedAt)) recordMiss(setCode, cnEntry.getKey(), langEntry.getKey());
+            }
+        }
     }
 
     /**
@@ -288,32 +320,28 @@ public final class CdnUuidCache {
     }
 
     private static Map<String, Map<String, LangUuids>> loadSet(String setCode) {
-        File localFile = localCacheFile(setCode);
+        Map<String, Map<String, LangUuids>> onDisk = readSetFromDisk(setCode);
+        if (onDisk != MISSING_SET) return onDisk;
 
-        // 1. Try local disk cache
-        if (localFile.exists()) {
-            try {
-                return parseSetFile(localFile);
-            } catch (Exception e) {
-                Logger.warn("CdnUuidCache: corrupt local cache {}: {}", localFile, e.getMessage());
-                //noinspection ResultOfMethodCallIgnored
-                localFile.delete();
-            }
-        }
-
-        // 2. Nothing local yet — build this set's mapping straight from Scryfall.
-        // ScryfallSetSync merges its own results into the local cache file (via
-        // mergeSetEntriesWithFaces) and evicts setCache, so re-reading that file
-        // afterward picks up whatever it found.
-        if (ScryfallSetSync.sync(setCode) && localFile.exists()) {
-            try {
-                return parseSetFile(localFile);
-            } catch (Exception e) {
-                Logger.warn("CdnUuidCache: corrupt local cache {} after Scryfall sync: {}", localFile, e.getMessage());
-            }
-        }
-
+        // Nothing local yet -- queue this set for syncPendingSets instead of blocking on network
+        // I/O here. ScryfallSetSync merges its results into the local cache file and evicts
+        // setCache when it's done, so the next lookup picks up whatever it found.
+        queueSync(setCode);
         return MISSING_SET;
+    }
+
+    /** Pure disk read: {@link #MISSING_SET} if there's no local file yet, without queuing a sync. */
+    private static Map<String, Map<String, LangUuids>> readSetFromDisk(String setCode) {
+        File localFile = localCacheFile(setCode);
+        if (!localFile.exists()) return MISSING_SET;
+        try {
+            return parseSetFile(localFile);
+        } catch (Exception e) {
+            Logger.warn("CdnUuidCache: corrupt local cache {}: {}", localFile, e.getMessage());
+            //noinspection ResultOfMethodCallIgnored
+            localFile.delete();
+            return MISSING_SET;
+        }
     }
 
     private static File localCacheFile(String setCode) {
@@ -341,10 +369,7 @@ public final class CdnUuidCache {
     }
 
     private static Map<String, Map<String, LangUuids>> parseSetFile(File file) throws Exception {
-        try (InputStream is = new GZIPInputStream(new FileInputStream(file));
-             InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
-            return parseSetObject(JsonParser.parseReader(reader).getAsJsonObject());
-        }
+        return parseSetObject(readGzipJson(file));
     }
 
     /**

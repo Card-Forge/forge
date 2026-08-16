@@ -25,6 +25,11 @@ import java.util.zip.GZIPOutputStream;
  * {@link CdnUuidCache} falls back to when a set has no local data yet — against
  * a tiny embedded HTTP server standing in for {@code api.scryfall.com/cards/search},
  * so these run offline and don't depend on Scryfall's real catalog.
+ *
+ * <p>CdnUuidCache never blocks the caller on network I/O: a lookup that needs Scryfall
+ * data queues the set code and returns immediately as if the data weren't there.
+ * {@code autoSyncEnabled} is disabled here so tests drive the queue synchronously via
+ * {@link CdnUuidCache#syncPendingSets} instead of racing a real background submission.
  */
 @Test(groups = {"UnitTest"})
 public class ScryfallSetSyncTest {
@@ -42,6 +47,7 @@ public class ScryfallSetSyncTest {
     public void setUp() throws IOException {
         localCacheDir = Files.createTempDirectory("setsync_local").toFile();
         CdnUuidCache.localCacheDirOverride = localCacheDir.getAbsolutePath() + File.separator;
+        CdnUuidCache.autoSyncEnabled = false;
 
         server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
         server.createContext("/", this::handle);
@@ -54,6 +60,7 @@ public class ScryfallSetSyncTest {
     public void tearDown() {
         server.stop(0);
         CdnUuidCache.localCacheDirOverride = null;
+        CdnUuidCache.autoSyncEnabled = true;
         ScryfallSetSync.searchBaseUrlOverride = null;
     }
 
@@ -127,6 +134,17 @@ public class ScryfallSetSyncTest {
                 + ",\"data\":[" + String.join(",", entries) + "]}";
     }
 
+    /**
+     * A cold lookup only queues the set and returns {@code null} immediately. This triggers
+     * it, runs the queue synchronously, and re-queries for the (now-resolved, or still-absent)
+     * result.
+     */
+    private static String resolveAfterSync(String set, String cn, String lang, String face, String size) {
+        CdnUuidCache.getCdnUrl(set, cn, lang, face, size);
+        CdnUuidCache.syncPendingSets();
+        return CdnUuidCache.getCdnUrl(set, cn, lang, face, size);
+    }
+
     // -------------------------------------------------------------------------
 
     @Test
@@ -134,7 +152,7 @@ public class ScryfallSetSyncTest {
         pages.put(1, page(false, 1,
                 singleFaced("11111111-1111-1111-1111-111111111111", "1", "en")));
 
-        String url = CdnUuidCache.getCdnUrl("neo", "1", "en", "front", "normal");
+        String url = resolveAfterSync("neo", "1", "en", "front", "normal");
 
         Assert.assertEquals(url,
                 CdnUuidCache.cdnUrl("11111111-1111-1111-1111-111111111111", "front", "normal"));
@@ -148,8 +166,8 @@ public class ScryfallSetSyncTest {
                         "aaaaaaaa-0000-0000-0000-000000000001",
                         "bbbbbbbb-0000-0000-0000-000000000002")));
 
-        String front = CdnUuidCache.getCdnUrl("sld", "5", "en", "front", "normal");
-        String back  = CdnUuidCache.getCdnUrl("sld", "5", "en", "back", "normal");
+        String front = resolveAfterSync("sld", "5", "en", "front", "normal");
+        String back  = CdnUuidCache.getCdnUrl("sld", "5", "en", "back", "normal"); // set already synced by now
 
         Assert.assertEquals(front, CdnUuidCache.cdnUrl("aaaaaaaa-0000-0000-0000-000000000001", "front", "normal"),
                 "front face UUID should come from card_faces[0].image_uris, not the card id");
@@ -164,7 +182,7 @@ public class ScryfallSetSyncTest {
                         "cccccccc-0000-0000-0000-000000000003",
                         "cccccccc-0000-0000-0000-000000000003")));
 
-        String back = CdnUuidCache.getCdnUrl("neo", "6", "en", "back", "normal");
+        String back = resolveAfterSync("neo", "6", "en", "back", "normal");
 
         Assert.assertEquals(back, CdnUuidCache.cdnUrl("cccccccc-0000-0000-0000-000000000003", "back", "normal"));
     }
@@ -174,8 +192,8 @@ public class ScryfallSetSyncTest {
         pages.put(1, page(true, 1, singleFaced("dddddddd-0000-0000-0000-000000000001", "1", "en")));
         pages.put(2, page(false, 2, singleFaced("eeeeeeee-0000-0000-0000-000000000002", "2", "en")));
 
-        String url1 = CdnUuidCache.getCdnUrl("neo", "1", "en", "front", "normal");
-        String url2 = CdnUuidCache.getCdnUrl("neo", "2", "en", "front", "normal");
+        String url1 = resolveAfterSync("neo", "1", "en", "front", "normal");
+        String url2 = CdnUuidCache.getCdnUrl("neo", "2", "en", "front", "normal"); // set already synced by now
 
         Assert.assertNotNull(url1);
         Assert.assertNotNull(url2);
@@ -185,7 +203,7 @@ public class ScryfallSetSyncTest {
     @Test
     public void unknownSet_returns404_lookupIsNullWithoutThrowing() {
         // No page registered for "xyz" -> handle() serves a 404, same as Scryfall for no matches.
-        String url = CdnUuidCache.getCdnUrl("xyz", "1", "en", "front", "normal");
+        String url = resolveAfterSync("xyz", "1", "en", "front", "normal");
 
         Assert.assertNull(url);
         Assert.assertFalse(new File(localCacheDir, "xyz.json.gz").exists());
@@ -202,7 +220,7 @@ public class ScryfallSetSyncTest {
 
         // Scryfall search sees a *different* id for the same card/lang -- must not clobber it.
         pages.put(1, page(false, 1, singleFaced("99999999-0000-0000-0000-000000000009", "1", "en")));
-        ScryfallSetSync.sync("neo");
+        ScryfallSetSync.sync("neo"); // direct call, bypassing CdnUuidCache's backgrounding entirely
 
         String url = CdnUuidCache.getCdnUrl("neo", "1", "en", "front", "normal");
         Assert.assertEquals(url, CdnUuidCache.cdnUrl("ffffffff-0000-0000-0000-000000000001", "front", "normal"),
@@ -213,7 +231,7 @@ public class ScryfallSetSyncTest {
     public void searchQuery_scopesToSetAndAllLanguages() {
         pages.put(1, page(false, 1, singleFaced("11111111-2222-3333-4444-555555555555", "1", "en")));
 
-        CdnUuidCache.getCdnUrl("ltr", "1", "en", "front", "normal");
+        resolveAfterSync("ltr", "1", "en", "front", "normal");
 
         Assert.assertNotNull(lastQuery);
         String decoded = URLDecoder.decode(lastQuery, StandardCharsets.UTF_8);
@@ -250,8 +268,13 @@ public class ScryfallSetSyncTest {
                 "{\"9\":{\"en\":{\"miss\":\"2020-01-01T00:00:00Z\"}}}");
         pages.put(1, page(false, 1, singleFaced("99999999-0000-0000-0000-000000000009", "9", "en")));
 
-        String url = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
+        // The triggering call still sees the stale miss and returns null; the retry is only
+        // queued, not run synchronously -- syncPendingSets() is what actually performs it.
+        String immediate = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
+        Assert.assertNull(immediate, "the retry is only queued, not run synchronously");
+        CdnUuidCache.syncPendingSets();
 
+        String url = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
         Assert.assertEquals(url, CdnUuidCache.cdnUrl("99999999-0000-0000-0000-000000000009", "front", "normal"));
         Assert.assertEquals(requestCount.get(), 1, "a stale miss should trigger exactly one retry");
     }
@@ -262,8 +285,8 @@ public class ScryfallSetSyncTest {
                 "{\"9\":{\"en\":{\"miss\":\"2020-01-01T00:00:00Z\"}}}");
         // No page registered -> 404, same as Scryfall finding nothing for this set.
 
-        String first = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
-        Assert.assertNull(first);
+        CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal"); // queues the retry
+        CdnUuidCache.syncPendingSets();
         Assert.assertEquals(requestCount.get(), 1, "the stale miss should have triggered one retry");
 
         String second = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");

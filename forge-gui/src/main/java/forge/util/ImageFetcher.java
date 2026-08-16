@@ -141,7 +141,7 @@ public abstract class ImageFetcher {
         String setCode = edition.getScryfallCode();
         String langCode = edition.getCardsLangCode();
 
-        // Prefer CDN (no rate limit) when a UUID JSON file exists in the assets.
+        // Prefer CDN (no rate limit) when CdnUuidCache already has (or can sync) a UUID for this card.
         if (!StringUtils.isBlank(setCode)) {
             String size = useArtCrop ? "art_crop" : "normal";
             String cdnUrl = forge.gui.download.CdnUuidCache.getCdnUrl(

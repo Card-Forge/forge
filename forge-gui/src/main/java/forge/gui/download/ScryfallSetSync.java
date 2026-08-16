@@ -92,22 +92,26 @@ final class ScryfallSetSync {
         String front;
         String back = null;
         if (card.has("image_uris") && card.get("image_uris").isJsonObject()) {
-            front = uuidFromUrl(normalUrl(card.getAsJsonObject("image_uris")), id);
+            front = uuidFromUrl(normalUrl(card.getAsJsonObject("image_uris")));
         } else if (card.has("card_faces") && card.get("card_faces").isJsonArray()) {
             JsonArray faces = card.getAsJsonArray("card_faces");
             if (faces.size() == 0) return;
             JsonObject face0 = faces.get(0).getAsJsonObject();
             if (!face0.has("image_uris") || !face0.get("image_uris").isJsonObject()) return;
-            front = uuidFromUrl(normalUrl(face0.getAsJsonObject("image_uris")), id);
+            front = uuidFromUrl(normalUrl(face0.getAsJsonObject("image_uris")));
             if (faces.size() > 1) {
                 JsonObject face1 = faces.get(1).getAsJsonObject();
                 if (face1.has("image_uris") && face1.get("image_uris").isJsonObject()) {
-                    back = uuidFromUrl(normalUrl(face1.getAsJsonObject("image_uris")), id);
+                    back = uuidFromUrl(normalUrl(face1.getAsJsonObject("image_uris")));
                 }
             }
         } else {
             return; // no image data for this card
         }
+        // No real image yet (e.g. a placeholder like errors.scryfall.com/soon.jpg for an
+        // unreleased/preview card): leave this (cn, lang) unmerged so CdnUuidCache records
+        // it as a retryable miss, rather than guessing a UUID that may never become valid
+        // and would then be stuck forever (merged "real" data is never overwritten).
         if (front == null) return;
 
         byCn.computeIfAbsent(cn, k -> new HashMap<>()).put(lang, new String[]{front, back});
@@ -119,18 +123,13 @@ final class ScryfallSetSync {
     }
 
     /**
-     * Extracts the UUID segment from a Scryfall CDN image URL.
-     *
-     * <p>URL format: {@code https://cards.scryfall.io/normal/front/4/e/{uuid}.jpg?timestamp}
-     *
-     * <p>Parsing the UUID from the URL (rather than using the card's {@code id} field directly)
-     * correctly handles the rare double-faced cards where both faces share an artwork UUID
-     * that differs from the card's own {@code id}. Falls back to {@code cardId} for non-CDN
-     * URLs such as {@code errors.scryfall.com/soon.jpg} (placeholder for missing images).
+     * Extracts the UUID segment from a Scryfall CDN image URL
+     * ({@code https://cards.scryfall.io/normal/front/4/e/{uuid}.jpg?timestamp}), or
+     * {@code null} for a non-CDN URL (e.g. the {@code errors.scryfall.com/soon.jpg}
+     * placeholder Scryfall serves for a card with no image yet).
      */
-    private static String uuidFromUrl(String url, String cardId) {
-        if (url == null) return null;
-        if (!url.contains("cards.scryfall.io")) return cardId;
+    private static String uuidFromUrl(String url) {
+        if (url == null || !url.contains("cards.scryfall.io")) return null;
         int qmark = url.indexOf('?');
         String path = qmark >= 0 ? url.substring(0, qmark) : url;
         int slash = path.lastIndexOf('/');

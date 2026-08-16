@@ -20,8 +20,8 @@ import java.util.function.Predicate;
  * Downloads card images for all cards that match the supplied predicate.
  *
  * URL priority per card face:
- *  1. cards.scryfall.io CDN (not rate-limited) — when a UUID JSON file exists at
- *     {@code res/cdn_uuid/{scryfallCode}/{collectorNumber}.json} for this card
+ *  1. cards.scryfall.io CDN (not rate-limited) — via {@link CdnUuidCache}, which resolves
+ *     from its local cache or syncs the set from Scryfall on demand
  *  2. api.scryfall.com per-card API (rate-limited, 100 ms/request) — fallback when
  *     no UUID is available but the card has a collector number
  *  3. cardforge hosted server — final fallback
@@ -84,7 +84,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
      * Returns the best available download URL for one card face.
      *
      * Priority:
-     *  1. cards.scryfall.io CDN URL from cdn_uuid JSON file (no rate limit; optional assets)
+     *  1. cards.scryfall.io CDN URL via {@link CdnUuidCache} (no rate limit)
      *  2. api.scryfall.com per-card API URL (rate-limited; GuiDownloadService
      *     enforces 100 ms between requests to api.scryfall.com URLs automatically)
      *  3. cardforge hosted server
@@ -100,7 +100,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         String scryfallCode = (edition != null) ? edition.getScryfallCode() : null;
         boolean hasScryfallCode = !StringUtils.isBlank(scryfallCode);
 
-        // 1. CDN — fast, no rate limit; requires cdn_uuid JSON files in assets
+        // 1. CDN — fast, no rate limit; resolved (or synced on demand) via CdnUuidCache
         if (edition != null && hasCollectorNum && hasScryfallCode) {
             String cdnUrl = CdnUuidCache.getCdnUrl(
                     scryfallCode, collectorNum, edition.getCardsLangCode(), face, "normal");

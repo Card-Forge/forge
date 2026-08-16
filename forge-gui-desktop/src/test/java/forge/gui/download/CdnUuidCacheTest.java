@@ -60,6 +60,7 @@ public class CdnUuidCacheTest {
         // lookups must return null rather than hang or hit the real API.
 
         CdnUuidCache.localCacheDirOverride = localCacheDir.getAbsolutePath() + File.separator;
+        CdnUuidCache.autoSyncEnabled = false; // these tests drive misses synchronously, not via the background pool
         ScryfallSetSync.searchBaseUrlOverride = "http://127.0.0.1:1/unreachable";
         CdnUuidCache.clearCacheForTesting();
     }
@@ -67,6 +68,7 @@ public class CdnUuidCacheTest {
     @AfterClass
     public void tearDown() {
         CdnUuidCache.localCacheDirOverride = null;
+        CdnUuidCache.autoSyncEnabled = true;
         ScryfallSetSync.searchBaseUrlOverride = null;
         CdnUuidCache.clearCacheForTesting();
         deleteDir(localCacheDir);
