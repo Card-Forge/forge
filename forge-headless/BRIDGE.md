@@ -1,11 +1,24 @@
 # Forge headless bridge
 
-The `bridge` mode exposes a Forge AI seat over newline-delimited JSON-RPC 2.0. Standard output is reserved for protocol messages; diagnostics go to standard error. The `--log` file records both protocol directions as JSONL.
+The `bridge` command runs one Forge AI player under an external game
+coordinator. It is intended to be launched by software such as DeepScry rather
+than used as an interactive game.
+
+The coordinator sends newline-delimited JSON-RPC 2.0 requests and public game
+events on standard input. Standard output is reserved for Forge's JSON-RPC
+responses and decisions, while diagnostics go to standard error. The `--log`
+file records both protocol directions as JSON Lines.
 
 ```sh
 ./headless.sh bridge -d decks/simple_bolt.dck decks/simple_bolt.dck \
   --seat 1 --seed 42 --log /tmp/forge-bridge.jsonl
 ```
+
+Run `./headless.sh bridge --help` for the complete command-line contract. Deck
+files are ordered by seat, and `--seat` selects the one-based seat controlled
+by Forge AI. The seed initializes Forge's current shared random-number stream;
+the bridge protocol will separate controller and mirrored-engine randomness in
+a subsequent protocol version.
 
 The Java process initiates `hello`. Its controller then accepts `game_start`,
 `decision`, and `shutdown` requests plus protocol event notifications. Full-game

@@ -22,6 +22,7 @@ public class MainHelpTest {
         assertTrue(output.getOutput().contains("Run Forge games without starting"));
         assertTrue(output.getOutput().contains("sim    Run automated games"));
         assertTrue(output.getOutput().contains("tui    Play or observe a game"));
+        assertTrue(output.getOutput().contains("bridge  Connect Forge AI"));
         assertTrue(output.getOutput().contains("Examples:"));
         assertFalse(output.getOutput().contains("Unknown command"));
     }
