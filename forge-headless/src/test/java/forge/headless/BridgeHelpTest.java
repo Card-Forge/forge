@@ -20,8 +20,10 @@ public class BridgeHelpTest {
 
         assertTrue(help.contains("Run one Forge AI player under an external game coordinator"));
         assertTrue(help.contains("standard input"));
-        assertTrue(help.contains("ordered by one-based seat"));
-        assertTrue(help.contains("number"));
+        assertTrue(help.contains("deck file for every player"));
+        assertTrue(help.contains("one-based seat number"));
+        assertTrue(help.contains("--listen"));
+        assertTrue(help.contains("game_start"));
         assertTrue(help.contains("normally launched by a coordinator"));
         assertFalse(help.contains("Task B"));
         assertFalse(help.contains("--skeleton"));

@@ -71,7 +71,7 @@ public final class Main {
         System.out.println("Examples:");
         System.out.println("  ./headless.sh sim -d deck1.dck deck2.dck -n 10");
         System.out.println("  ./headless.sh tui deck1.dck deck2.dck --p1 tui --p2 ai");
-        System.out.println("  ./headless.sh bridge -d deck1.dck deck2.dck --seat 2 --seed 42");
+        System.out.println("  ./headless.sh bridge");
         System.out.println();
         System.out.println("Run './headless.sh <command> --help' for command-specific options.");
     }

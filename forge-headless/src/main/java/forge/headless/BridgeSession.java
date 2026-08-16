@@ -32,6 +32,7 @@ import forge.game.phase.PhaseType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.util.MyRandom;
 
 /** Owns one bridge process lifecycle and its local mirrored Forge game. */
@@ -50,6 +51,7 @@ final class BridgeSession {
     private Thread gameThread;
     private volatile Throwable gameThreadFailure;
     private String gameId;
+    private int controlledSeat;
     private long lastSequence;
     private boolean shutdownRequested;
 
@@ -186,17 +188,26 @@ final class BridgeSession {
         }
         gameId = requireText(params, "game_id");
         int yourSeat = requireInt(params, "your_seat");
-        if (yourSeat != options.getSeat()) {
+        if (options.getSeat() != null && yourSeat != options.getSeat()) {
             throw new BridgeFailure("seat_mismatch", "game_start your_seat does not match --seat");
         }
+        controlledSeat = yourSeat;
         JsonNode seedNode = params.path("rng").get("seed");
-        if (seedNode != null && !seedNode.isNull() && seedNode.asLong() != options.getSeed()) {
+        if (seedNode == null || seedNode.isNull()) {
+            throw new BridgeFailure("seed_required", "game_start must supply rng.seed");
+        }
+        long gameSeed = seedNode.asLong();
+        if (options.getSeed() != null && gameSeed != options.getSeed()) {
             throw new BridgeFailure("seed_mismatch", "game_start RNG seed does not match --seed");
         }
+        MyRandom.setRandom(new java.util.Random(gameSeed));
 
         int startingSeat = requireInt(params, "starting_player");
         ArrayNode protocolPlayers = requireArray(params, "players");
-        if (protocolPlayers.size() != options.getDecks().size()) {
+        if (yourSeat < 1 || yourSeat > protocolPlayers.size()) {
+            throw new BridgeFailure("seat_range", "game_start your_seat must identify a supplied player");
+        }
+        if (!options.getDecks().isEmpty() && protocolPlayers.size() != options.getDecks().size()) {
             throw new BridgeFailure("player_count_mismatch", "game_start player count does not match -d decks");
         }
 
@@ -208,12 +219,18 @@ final class BridgeSession {
             if (requireInt(protocolPlayer, "seat") != seat) {
                 throw new BridgeFailure("seat_order", "Players must be supplied in contiguous seat order");
             }
-            File deckFile = options.getDecks().get(index);
-            Deck deck = DeckSerializer.fromFile(deckFile);
-            if (deck == null) {
-                throw new BridgeFailure("deck_load", "Could not load deck " + deckFile);
+            ArrayNode protocolDecklist = requireArray(protocolPlayer, "decklist");
+            Deck deck;
+            if (options.getDecks().isEmpty()) {
+                deck = deckFromProtocol(protocolPlayer, protocolDecklist, seat);
+            } else {
+                File deckFile = options.getDecks().get(index);
+                deck = DeckSerializer.fromFile(deckFile);
+                if (deck == null) {
+                    throw new BridgeFailure("deck_load", "Could not load deck " + deckFile);
+                }
+                validateDecklist(deck, protocolDecklist, seat);
             }
-            validateDecklist(deck, requireArray(protocolPlayer, "decklist"), seat);
             decks.add(deck);
 
             LobbyPlayerBridge lobbyPlayer = new LobbyPlayerBridge(requireText(protocolPlayer, "name"), seat,
@@ -261,6 +278,29 @@ final class BridgeSession {
         return result;
     }
 
+    private Deck deckFromProtocol(JsonNode protocolPlayer, ArrayNode protocolDecklist, int seat) {
+        Deck deck = new Deck(requireText(protocolPlayer, "name"));
+        CardPool main = deck.getOrCreate(DeckSection.Main);
+        for (JsonNode card : protocolDecklist) {
+            String name = requireText(card, "name");
+            int count = requireInt(card, "count");
+            if (count <= 0) {
+                throw new BridgeFailure("deck_count", "Card count must be positive for " + name
+                        + " in seat " + seat);
+            }
+            PaperCard paperCard = FModel.getMagicDb().getCommonCards().getCard(name);
+            if (paperCard == null) {
+                throw new BridgeFailure("deck_card_unknown", "Forge does not recognize " + name
+                        + " in seat " + seat);
+            }
+            main.add(paperCard, count);
+        }
+        if (main.isEmpty()) {
+            throw new BridgeFailure("deck_empty", "Protocol decklist is empty for seat " + seat);
+        }
+        return deck;
+    }
+
     private void validateDecklist(Deck deck, ArrayNode protocolDecklist, int seat) {
         Map<String, Integer> expected = new LinkedHashMap<>();
         for (Entry<PaperCard, Integer> entry : deck.getMain()) {
@@ -296,16 +336,16 @@ final class BridgeSession {
     private ObjectNode handleDecision(JsonNode params) {
         requireGame();
         checkSequence(params);
-        BridgeController controller = lobbyPlayers.get(options.getSeat()).getController();
+        BridgeController controller = lobbyPlayers.get(controlledSeat).getController();
         String kind = requireText(params, "kind");
         switch (kind) {
         case "priority":
             JsonNode context = params.path("context");
             int turn = context.path("turn").asInt();
-            if (context.path("active_seat").asInt() == options.getSeat()
+            if (context.path("active_seat").asInt() == controlledSeat
                     && "main1".equals(context.path("phase").asText())) {
                 for (Map.Entry<Integer, LobbyPlayerBridge> entry : lobbyPlayers.entrySet()) {
-                    if (entry.getKey() == options.getSeat()) {
+                    if (entry.getKey() == controlledSeat) {
                         continue;
                     }
                     BridgeController remote = entry.getValue().getController();
@@ -374,7 +414,7 @@ final class BridgeSession {
         requireGame();
         checkSequence(params);
         int seat = requireInt(params, "seat");
-        if (seat == options.getSeat()) {
+        if (seat == controlledSeat) {
             throw new BridgeFailure("opponent_seat", "opponent_action named the Forge AI seat");
         }
         lobbyPlayers.get(seat).getController().acceptOpponentAction(

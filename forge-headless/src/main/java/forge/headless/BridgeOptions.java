@@ -19,22 +19,29 @@ import picocli.CommandLine.Option;
         footer = {
             "",
             "This command is normally launched by a coordinator rather than used as an interactive game.",
-            "Example:",
-            "  ./headless.sh bridge -d player1.dck player2.dck --seat 2 --seed 42 --log forge.jsonl"
+            "Examples:",
+            "  ./headless.sh bridge",
+            "  ./headless.sh bridge --listen 127.0.0.1:17772 --log forge.jsonl",
+            "",
+            "Decks, the controlled seat, and random seed normally arrive in the game_start request."
         })
 final class BridgeOptions {
-    @Option(names = {"-d", "--decks"}, arity = "2..*", required = true,
+    @Option(names = {"-d", "--decks"}, arity = "2..*",
             paramLabel = "<deck>",
-            description = "Deck file for every player, ordered by one-based seat number")
+            description = "Legacy: deck file for every player, ordered by one-based seat number")
     private List<File> decks = new ArrayList<>();
 
-    @Option(names = "--seat", required = true, paramLabel = "<number>",
-            description = "One-based player seat controlled by this Forge AI")
-    private int seat;
+    @Option(names = "--seat", paramLabel = "<number>",
+            description = "Legacy: require game_start to select this one-based seat")
+    private Integer seat;
 
-    @Option(names = "--seed", required = true, paramLabel = "<number>",
-            description = "Seed Forge's internal random-number generator for a repeatable run")
-    private long seed;
+    @Option(names = "--seed", paramLabel = "<number>",
+            description = "Legacy: require game_start to use this Forge random seed")
+    private Long seed;
+
+    @Option(names = "--listen", paramLabel = "<host:port>",
+            description = "Accept one JSON-RPC connection over TCP instead of using standard input and output")
+    private String listenAddress;
 
     @Option(names = "--log", defaultValue = "forge-bridge.jsonl",
             paramLabel = "<path>",
@@ -50,12 +57,16 @@ final class BridgeOptions {
         return decks;
     }
 
-    int getSeat() {
+    Integer getSeat() {
         return seat;
     }
 
-    long getSeed() {
+    Long getSeed() {
         return seed;
+    }
+
+    String getListenAddress() {
+        return listenAddress;
     }
 
     Path getLogPath() {
@@ -67,7 +78,11 @@ final class BridgeOptions {
     }
 
     void validate() {
-        if (seat < 1 || seat > decks.size()) {
+        boolean legacyConfigured = !decks.isEmpty() || seat != null || seed != null;
+        if (legacyConfigured && (decks.isEmpty() || seat == null || seed == null)) {
+            throw new IllegalArgumentException("-d/--decks, --seat, and --seed must be supplied together");
+        }
+        if (legacyConfigured && (seat < 1 || seat > decks.size())) {
             throw new IllegalArgumentException("--seat must refer to one of the supplied decks");
         }
         for (File deck : decks) {
