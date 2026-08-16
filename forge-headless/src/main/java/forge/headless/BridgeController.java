@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import forge.LobbyPlayer;
+import forge.model.FModel;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
@@ -35,6 +36,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.item.PaperCard;
 
 /** Protocol-synchronized controller around Forge's real AI and remote replay seats. */
 final class BridgeController extends PlayerControllerAi {
@@ -49,6 +51,7 @@ final class BridgeController extends PlayerControllerAi {
     private final BlockingQueue<RemoteChoiceTicket> remoteChoices = new ArrayBlockingQueue<>(16);
     private final BlockingQueue<CombatActionTicket> combatActions = new ArrayBlockingQueue<>(16);
     private final BlockingQueue<CombatDecisionTicket> combatDecisions = new ArrayBlockingQueue<>(16);
+    private final BlockingQueue<String> publicHandReveals = new ArrayBlockingQueue<>(16);
     private volatile boolean cancelled;
     private volatile boolean finishing;
     private volatile int drainThroughTurn;
@@ -265,6 +268,10 @@ final class BridgeController extends PlayerControllerAi {
         pendingHandTurn = turn;
     }
 
+    void stagePublicHandReveal(String cardName) {
+        put(publicHandReveals, cardName, "public hand reveal");
+    }
+
     void finishGame() {
         finishing = true;
         if (forgeAiSeat) {
@@ -470,6 +477,18 @@ final class BridgeController extends PlayerControllerAi {
             return null;
         }
         deferredRemoteAction = null;
+        // Once the stack is empty, a resolution marker is a synchronization
+        // barrier, not an instruction to end the main phase. Consume it and
+        // wait for the next authoritative action: that may be another spell or
+        // land in the same main phase, or the explicit main-phase-end marker.
+        while ("authoritative_stack_resolution".equals(ticket.action.path("reason").asText())) {
+            ticket.consumed.complete(null);
+            ticket = finishing ? remoteActions.poll() : take(remoteActions,
+                    "remote action after stack resolution");
+            if (ticket == null) {
+                return null;
+            }
+        }
         try {
             applyPendingHandSync();
             if ("play_land".equals(ticket.action.path("type").asText())
@@ -890,6 +909,7 @@ final class BridgeController extends PlayerControllerAi {
     }
 
     private void applyPendingHandSync() {
+        applyPublicHandReveals();
         JsonNode desiredCountsNode = pendingHandCounts;
         if (desiredCountsNode == null || getGame().getPhaseHandler().getTurn() < pendingHandTurn) {
             return;
@@ -918,6 +938,15 @@ final class BridgeController extends PlayerControllerAi {
             while (countNamed(hand, target.getKey()) < target.getValue()) {
                 Card incoming = firstNamed(library, target.getKey());
                 Card outgoing = firstExcess(hand, desired);
+                if (incoming == null && outgoing != null) {
+                    PaperCard paperCard = FModel.getMagicDb().getCommonCards().getCard(target.getKey());
+                    if (paperCard == null) {
+                        throw new IllegalStateException("Forge does not recognize revealed card "
+                                + target.getKey());
+                    }
+                    incoming = Card.fromPaperCard(paperCard, player);
+                    incoming.setCollectible(true);
+                }
                 if (incoming == null || outgoing == null) {
                     throw new IllegalStateException("Cannot reconcile " + target.getKey()
                             + " into " + player.getName() + " hand");
@@ -930,6 +959,30 @@ final class BridgeController extends PlayerControllerAi {
         }
         handZone.setCards(hand);
         libraryZone.setCards(library);
+    }
+
+    private void applyPublicHandReveals() {
+        String cardName;
+        while ((cardName = publicHandReveals.poll()) != null) {
+            PlayerZone handZone = player.getZone(ZoneType.Hand);
+            List<Card> hand = new ArrayList<>();
+            handZone.getCards().forEach(hand::add);
+            if (countNamed(hand, cardName) > 0) {
+                continue;
+            }
+            if (hand.isEmpty()) {
+                throw new IllegalStateException("Cannot reveal " + cardName
+                        + " in empty hand for " + player.getName());
+            }
+            PaperCard paperCard = FModel.getMagicDb().getCommonCards().getCard(cardName);
+            if (paperCard == null) {
+                throw new IllegalStateException("Forge does not recognize revealed card " + cardName);
+            }
+            Card incoming = Card.fromPaperCard(paperCard, player);
+            incoming.setCollectible(true);
+            hand.set(0, incoming);
+            handZone.setCards(hand);
+        }
     }
 
     private static int countNamed(List<Card> cards, String name) {

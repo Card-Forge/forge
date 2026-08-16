@@ -379,6 +379,11 @@ final class BridgeSession {
         String cardName = requireText(params.path("card"), "name");
         if (!options.isSkeleton()) {
             JsonNode context = params.path("context");
+            if ("public_action".equals(context.path("reason").asText())) {
+                lobbyPlayers.get(seat).getController().stagePublicHandReveal(cardName);
+                diagnostics.println("Staged public action card for seat " + seat + ": " + cardName);
+                return;
+            }
             lobbyPlayers.get(seat).getController().stageHandSync(context.path("hand_counts"),
                     requireInt(context, "turn"));
             diagnostics.println("Staged revealed hand for seat " + seat + ": " + cardName);
