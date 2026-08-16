@@ -104,10 +104,10 @@ public class QuestLogScene extends UIScene {
         scrollContainer.clear();
 
         for (AdventureQuestData quest : Current.player().getQuests()) {
-            TypingLabel nameLabel = Controls.newTypingLabel(quest.getName());
+            String headerCode = quest.isTracked ? "{GRADIENT=CYAN;BLUE;1;1}•{ENDGRADIENT}[BLACK]" : "[BLACK]";
+            TypingLabel nameLabel = Controls.newTypingLabel(headerCode + quest.getName());
             nameLabel.skipToTheEnd();
             nameLabel.setWrap(true);
-            nameLabel.setColor(Color.BLACK);
             scrollContainer.add(nameLabel).align(Align.left).expandX();
             Button details = Controls.newTextButton(Forge.getLocalizer().getMessage("lblDetails"));
             details.addListener(new ClickListener() {
@@ -139,7 +139,7 @@ public class QuestLogScene extends UIScene {
         detailRoot.setVisible(true);
         detailScrollContainer.clear();
         detailScrollContainer.row();
-        trackButton.setText(quest.isTracked?Forge.getLocalizer().getMessage("lblUntrackQuest"):Forge.getLocalizer().getMessage("lblTrackQuest"));
+        trackButton.clearListeners();
         trackButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 toggleTracked(quest);
@@ -147,6 +147,7 @@ public class QuestLogScene extends UIScene {
         });
 
         abandonQuestButton.setColor(Color.RED);
+        abandonQuestButton.clearListeners();
         abandonQuestButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 Dialog confirm = createGenericDialog("", Forge.getLocalizer().getMessage("lblAbandonQuestConfirm"),Forge.getLocalizer().getMessage("lblYes"),Forge.getLocalizer().getMessage("lblNo"), () -> abandonQuest(quest), null);
@@ -199,15 +200,22 @@ public class QuestLogScene extends UIScene {
             detailScrollContainer.add(activeDescriptionLabel).padLeft(35).width(detailRoot.getWidth() - 50);
             detailScrollContainer.row();
         }
+        updateTrackButton(quest.isTracked);
     }
 
     private void toggleTracked(AdventureQuestData quest) {
-        if (quest.isTracked){
-            quest.isTracked = false;
-            trackButton.setText(Forge.getLocalizer().getMessage("lblTrackQuest"));
-        } else {
+        quest.isTracked = !quest.isTracked;
+        if (quest.isTracked) {
             AdventureQuestController.trackQuest(quest);
+        }
+        updateTrackButton(quest.isTracked);
+    }
+
+    private void updateTrackButton(boolean isTracked) {
+        if (isTracked) {
             trackButton.setText(Forge.getLocalizer().getMessage("lblUntrackQuest"));
+        } else {
+            trackButton.setText(Forge.getLocalizer().getMessage("lblTrackQuest"));
         }
     }
 
