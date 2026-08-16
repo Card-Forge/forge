@@ -25,14 +25,16 @@ import java.util.zip.GZIPInputStream;
  * to exactly the set a lookup just missed on, so nothing needs to be
  * pre-generated or hosted anywhere.
  *
- * <p>Unlike {@link ScryfallManifestSync} (which only ever sees a card's own
- * {@code id} and assumes a double-faced card's back face shares it), the
- * search API returns each card's own {@code image_uris} (single-faced) or
- * {@code card_faces[].image_uris} (double-faced) — so the UUID is read out of
- * the actual CDN image URL for each face, exactly like the old bulk-data
- * generator did. That matters for a small number of double-faced cards (e.g.
- * a couple of Secret Lair prints) whose back face uses a genuinely different
- * artwork UUID than the card's {@code id}.
+ * <p>The search API returns each card's own {@code image_uris} (single-faced) or
+ * {@code card_faces[].image_uris} (double-faced), so the UUID is read out of the
+ * actual CDN image URL for each face rather than assumed from the card's {@code id}.
+ * That matters for a small number of double-faced cards (e.g. a couple of Secret
+ * Lair prints) whose back face uses a genuinely different artwork UUID than the
+ * card's {@code id}.
+ *
+ * <p>A card this doesn't find (e.g. released after the set was last synced) is left
+ * for {@link CdnUuidCache} to record as a timestamped miss and retry later, rather
+ * than retried here.
  */
 final class ScryfallSetSync {
 

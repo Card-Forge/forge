@@ -15,6 +15,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,26 +38,44 @@ import java.util.zip.GZIPOutputStream;
  * The cache returns null, so the user may resolve via a rate-limited, non-cdn scryfall
  * image hosting. The client rate limits these requests.
  *
+ * <p>A (collector number, language) that a set's data genuinely doesn't have -- e.g. a
+ * card released after the set was last synced -- is recorded as a negative-cache "miss"
+ * with a timestamp, right alongside the real entries. A miss younger than
+ * {@link #MISS_RETRY_AFTER} short-circuits with no network call; once it's older, the
+ * next lookup re-syncs the set from Scryfall to see if it's showed up since.
+ *
  * <p>Set JSON format:
  * <pre>
  *   {
  *     "1":   {"en": "uuid"},
  *     "2":   {"en": "uuid", "ja": "ja-uuid"},
- *     "A-40":{"en": ["frontUuid", "backUuid"]}
+ *     "A-40":{"en": ["frontUuid", "backUuid"]},
+ *     "9":   {"en": {"miss": "2026-08-11T18:23:45.123Z"}}
  *   }
  * </pre>
  */
 public final class CdnUuidCache {
 
     private static final String FALLBACK_LANG    = "en";
+    private static final Duration MISS_RETRY_AFTER = Duration.ofDays(1);
 
     /** Used when set was looked up and no data exists. */
     private static final Map<String, Map<String, LangUuids>> MISSING_SET = Collections.emptyMap();
 
     private static final class LangUuids {
-        final String front;
-        final String back; // null → same UUID for both faces
-        LangUuids(String front, String back) { this.front = front; this.back = back; }
+        final String front;      // null when this is a miss record
+        final String back;       // null → same UUID for both faces (only meaningful for a real entry)
+        final Instant missedAt;  // non-null → negative-cache record; front/back are unused
+
+        private LangUuids(String front, String back, Instant missedAt) {
+            this.front = front;
+            this.back = back;
+            this.missedAt = missedAt;
+        }
+
+        static LangUuids found(String front, String back) { return new LangUuids(front, back, null); }
+        static LangUuids miss(Instant at) { return new LangUuids(null, null, at); }
+        boolean isMiss() { return missedAt != null; }
     }
 
     /** Cache: setCode → (collectorNumber → (lang → LangUuids)) */
@@ -72,7 +92,7 @@ public final class CdnUuidCache {
     /** Test helper */
     static void clearCacheForTesting() { setCache.clear(); }
 
-    /** The directory local set caches live in, honoring the test override. Package-private for {@link ScryfallManifestSync}. */
+    /** The directory local set caches live in, honoring the test override. Package-private for {@link ScryfallSetSync}. */
     static String cacheDir() {
         return localCacheDirOverride != null ? localCacheDirOverride : ForgeConstants.CACHE_CDN_UUID_DIR;
     }
@@ -92,49 +112,20 @@ public final class CdnUuidCache {
     }
 
     /**
-     * Merges externally-sourced (setCode → collectorNumber → lang → uuid) entries into
-     * the on-disk cache.
-     *
-     * Used by {@link ScryfallManifestSync}, whose data source (the manifest endpoint)
-     * never distinguishes a double-faced card's back-face UUID from its front.
-     *
-     * Delegates to {@link #mergeSetEntriesWithFaces} so the never-overwrite guarantee lives in one place.
-     */
-    static void mergeSetEntries(String setCode, Map<String, Map<String, String>> newEntries) {
-        Map<String, Map<String, String[]>> withFaces = new HashMap<>(newEntries.size() * 2);
-        for (Map.Entry<String, Map<String, String>> cnEntry : newEntries.entrySet()) {
-            Map<String, String[]> langMap = new HashMap<>(cnEntry.getValue().size() * 2);
-            for (Map.Entry<String, String> langEntry : cnEntry.getValue().entrySet()) {
-                langMap.put(langEntry.getKey(), new String[]{langEntry.getValue(), null});
-            }
-            withFaces.put(cnEntry.getKey(), langMap);
-        }
-        mergeSetEntriesWithFaces(setCode, withFaces);
-    }
-
-    /**
      * Merges externally-sourced (setCode → collectorNumber → lang → [frontUuid, backUuidOrNull])
      * entries into the on-disk cache, creating or updating {@code {cacheDir}/{setCode}.json.gz}.
      *
-     * Used by {@link ScryfallSetSync} when a set has no local data at all yet and is built
-     * fresh from Scryfall's card search API, which — unlike the manifest endpoint — exposes
-     * each face's own image URL, so a double-faced card's genuinely distinct back-face UUID
-     * (a real but rare case) can be recorded precisely instead of assumed.
+     * Used by {@link ScryfallSetSync} when a set has no local data at all yet (or a
+     * previously-recorded miss is stale) and is (re)built from Scryfall's card search API.
      *
-     * <p>Existing entries are never overwritten, so a precise front/back pair already on
-     * disk can't be degraded by a later, less precise source filling the same slot.
+     * <p>A real entry already on disk is never overwritten, so a precise front/back pair
+     * can't be degraded by a later, less precise source filling the same slot. A miss
+     * record occupying the slot doesn't count as "already there" -- real data always
+     * upgrades a miss.
      */
     static synchronized void mergeSetEntriesWithFaces(String setCode, Map<String, Map<String, String[]>> newEntries) {
         File file = localCacheFile(setCode);
-        JsonObject merged = new JsonObject();
-        if (file.exists()) {
-            try (InputStream is = new GZIPInputStream(new FileInputStream(file));
-                 InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
-                merged = JsonParser.parseReader(reader).getAsJsonObject();
-            } catch (Exception e) {
-                Logger.warn("CdnUuidCache: corrupt local cache {}, rebuilding: {}", file, e.getMessage());
-            }
-        }
+        JsonObject merged = readLocalJson(file);
 
         for (Map.Entry<String, Map<String, String[]>> cnEntry : newEntries.entrySet()) {
             String cn = cnEntry.getKey();
@@ -142,7 +133,7 @@ public final class CdnUuidCache {
                     ? merged.getAsJsonObject(cn) : new JsonObject();
             for (Map.Entry<String, String[]> langEntry : cnEntry.getValue().entrySet()) {
                 String lang  = langEntry.getKey();
-                if (langObj.has(lang)) continue;
+                if (isRealEntry(langObj.get(lang))) continue; // never overwrite real data
                 String front = langEntry.getValue()[0];
                 String back  = langEntry.getValue()[1];
                 if (back != null && !back.equals(front)) {
@@ -159,6 +150,43 @@ public final class CdnUuidCache {
 
         writeLocalCache(file, merged.toString());
         setCache.remove(setCode); // force a re-read of the freshly-written file on next lookup
+    }
+
+    /**
+     * Records that {@code (cn, lang)} has no real data in {@code setCode} as of now, so
+     * repeat lookups can short-circuit without hitting Scryfall again until
+     * {@link #MISS_RETRY_AFTER} has passed. Never overwrites a real entry already there.
+     */
+    private static synchronized void recordMiss(String setCode, String cn, String lang) {
+        File file = localCacheFile(setCode);
+        JsonObject setObj = readLocalJson(file);
+        JsonObject langObj = setObj.has(cn) && setObj.get(cn).isJsonObject()
+                ? setObj.getAsJsonObject(cn) : new JsonObject();
+        if (isRealEntry(langObj.get(lang))) return; // real data already recorded; never clobber
+
+        JsonObject missObj = new JsonObject();
+        missObj.addProperty("miss", Instant.now().toString());
+        langObj.add(lang, missObj);
+        setObj.add(cn, langObj);
+
+        writeLocalCache(file, setObj.toString());
+        setCache.remove(setCode);
+    }
+
+    /** A JSON string or array value is real data; an object (miss record) or absent value is not. */
+    private static boolean isRealEntry(JsonElement value) {
+        return value != null && !value.isJsonObject();
+    }
+
+    private static JsonObject readLocalJson(File file) {
+        if (!file.exists()) return new JsonObject();
+        try (InputStream is = new GZIPInputStream(new FileInputStream(file));
+             InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
+            return JsonParser.parseReader(reader).getAsJsonObject();
+        } catch (Exception e) {
+            Logger.warn("CdnUuidCache: corrupt local cache {}, rebuilding: {}", file, e.getMessage());
+            return new JsonObject();
+        }
     }
 
     /**
@@ -180,16 +208,57 @@ public final class CdnUuidCache {
         Map<String, Map<String, LangUuids>> cardMap = ensureSetLoaded(setCode);
         if (cardMap == MISSING_SET) return null;
 
-        Map<String, LangUuids> langMap = cardMap.get(collectorNum);
-        if (langMap == null) return null;
-
-        LangUuids uuids = langMap.get(lang);
-        if (uuids == null && !FALLBACK_LANG.equals(lang)) uuids = langMap.get(FALLBACK_LANG);
+        LangUuids uuids = resolveWithFallback(cardMap, collectorNum, lang);
+        if (uuids == null) uuids = trackMiss(setCode, cardMap, collectorNum, lang);
         if (uuids == null) return null;
 
         String uuid = (wantBack && uuids.back != null) ? uuids.back : uuids.front;
         String side = wantBack ? "back" : "front";
         return cdnUrl(uuid, side, size);
+    }
+
+    /** The real (non-miss) entry for {@code lang}, or its English fallback, if either has real data. */
+    private static LangUuids resolveWithFallback(Map<String, Map<String, LangUuids>> cardMap, String cn, String lang) {
+        Map<String, LangUuids> langMap = cardMap.get(cn);
+        if (langMap == null) return null;
+
+        LangUuids direct = langMap.get(lang);
+        if (direct != null && !direct.isMiss()) return direct;
+
+        if (!FALLBACK_LANG.equals(lang)) {
+            LangUuids fallback = langMap.get(FALLBACK_LANG);
+            if (fallback != null && !fallback.isMiss()) return fallback;
+        }
+        return null;
+    }
+
+    /**
+     * Neither {@code lang} nor its English fallback resolved to real data. Tracks that as a
+     * miss against the exact requested {@code lang}: a miss seen for the first time, or one
+     * younger than {@link #MISS_RETRY_AFTER}, is recorded/left alone and this returns
+     * {@code null} with no network call. A miss older than that is worth re-checking --
+     * the set is re-synced from Scryfall, in case the card has shown up since.
+     */
+    private static LangUuids trackMiss(String setCode, Map<String, Map<String, LangUuids>> cardMap,
+                                        String cn, String lang) {
+        Map<String, LangUuids> langMap = cardMap.get(cn);
+        LangUuids existing = langMap != null ? langMap.get(lang) : null;
+
+        if (existing != null && existing.isMiss() && isStale(existing.missedAt)) {
+            ScryfallSetSync.sync(setCode);
+            Map<String, Map<String, LangUuids>> refreshed = loadSet(setCode);
+            LangUuids retried = resolveWithFallback(refreshed, cn, lang);
+            if (retried != null) return retried;
+        } else if (existing != null && existing.isMiss()) {
+            return null; // recorded recently; don't hit the network again yet
+        }
+
+        recordMiss(setCode, cn, lang);
+        return null;
+    }
+
+    private static boolean isStale(Instant missedAt) {
+        return Duration.between(missedAt, Instant.now()).compareTo(MISS_RETRY_AFTER) >= 0;
     }
 
     /**
@@ -280,7 +349,7 @@ public final class CdnUuidCache {
 
     /**
      * Parses a set JSON object.
-     * Format: {@code {"cn": {"lang": "uuid"|["frontUuid","backUuid"]}, ...}}
+     * Format: {@code {"cn": {"lang": "uuid"|["frontUuid","backUuid"]|{"miss": timestamp}}, ...}}
      */
     private static Map<String, Map<String, LangUuids>> parseSetObject(JsonObject setObj) {
         Map<String, Map<String, LangUuids>> cardMap = new HashMap<>(setObj.size() * 2);
@@ -291,17 +360,24 @@ public final class CdnUuidCache {
             for (Map.Entry<String, JsonElement> langEntry : langObj.entrySet()) {
                 JsonElement val = langEntry.getValue();
                 if (val.isJsonPrimitive()) {
-                    langMap.put(langEntry.getKey(), new LangUuids(val.getAsString(), null));
+                    langMap.put(langEntry.getKey(), LangUuids.found(val.getAsString(), null));
                 } else if (val.isJsonArray()) {
                     JsonArray arr = val.getAsJsonArray();
                     if (arr.size() >= 2) {
                         String front = arr.get(0).getAsString();
                         String back  = arr.get(1).getAsString();
                         langMap.put(langEntry.getKey(),
-                                new LangUuids(front, back.equals(front) ? null : back));
+                                LangUuids.found(front, back.equals(front) ? null : back));
                     } else if (arr.size() == 1) {
                         langMap.put(langEntry.getKey(),
-                                new LangUuids(arr.get(0).getAsString(), null));
+                                LangUuids.found(arr.get(0).getAsString(), null));
+                    }
+                } else if (val.isJsonObject() && val.getAsJsonObject().has("miss")) {
+                    try {
+                        Instant missedAt = Instant.parse(val.getAsJsonObject().get("miss").getAsString());
+                        langMap.put(langEntry.getKey(), LangUuids.miss(missedAt));
+                    } catch (Exception ignored) {
+                        // corrupt timestamp -- treat as though this (cn, lang) was never checked
                     }
                 }
             }

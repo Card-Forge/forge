@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URLDecoder;
@@ -17,6 +18,7 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * Exercises {@link ScryfallSetSync} — the on-demand, per-set generator that
@@ -217,5 +219,55 @@ public class ScryfallSetSyncTest {
         String decoded = URLDecoder.decode(lastQuery, StandardCharsets.UTF_8);
         Assert.assertTrue(decoded.contains("set:ltr"), "query should scope to the requested set: " + decoded);
         Assert.assertTrue(decoded.contains("lang:any"), "query should request all languages: " + decoded);
+    }
+
+    // -------------------------------------------------------------------------
+    // Miss-record retry: CdnUuidCache persists a timestamped "miss" for a (cn, lang) it
+    // can't find in an already-synced set, and only re-hits Scryfall once that's stale.
+
+    private static void writeGzip(File f, String content) throws IOException {
+        try (GZIPOutputStream gz = new GZIPOutputStream(new FileOutputStream(f))) {
+            gz.write(content.getBytes(StandardCharsets.UTF_8));
+        }
+    }
+
+    @Test
+    public void freshMiss_doesNotRetryScryfall() throws IOException {
+        // "neo" already has local data, but cn 9 was checked moments ago and came back empty.
+        writeGzip(new File(localCacheDir, "neo.json.gz"),
+                "{\"1\":{\"en\":\"11111111-0000-0000-0000-000000000001\"},"
+                        + "\"9\":{\"en\":{\"miss\":\"" + java.time.Instant.now() + "\"}}}");
+
+        String url = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
+
+        Assert.assertNull(url);
+        Assert.assertEquals(requestCount.get(), 0, "a fresh miss must not hit Scryfall again");
+    }
+
+    @Test
+    public void staleMiss_retriesAndResolvesIfNowFound() throws IOException {
+        writeGzip(new File(localCacheDir, "neo.json.gz"),
+                "{\"9\":{\"en\":{\"miss\":\"2020-01-01T00:00:00Z\"}}}");
+        pages.put(1, page(false, 1, singleFaced("99999999-0000-0000-0000-000000000009", "9", "en")));
+
+        String url = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
+
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl("99999999-0000-0000-0000-000000000009", "front", "normal"));
+        Assert.assertEquals(requestCount.get(), 1, "a stale miss should trigger exactly one retry");
+    }
+
+    @Test
+    public void staleMiss_stillMissing_refreshesTimestampAndStopsRetrying() throws IOException {
+        writeGzip(new File(localCacheDir, "neo.json.gz"),
+                "{\"9\":{\"en\":{\"miss\":\"2020-01-01T00:00:00Z\"}}}");
+        // No page registered -> 404, same as Scryfall finding nothing for this set.
+
+        String first = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
+        Assert.assertNull(first);
+        Assert.assertEquals(requestCount.get(), 1, "the stale miss should have triggered one retry");
+
+        String second = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
+        Assert.assertNull(second);
+        Assert.assertEquals(requestCount.get(), 1, "the refreshed miss timestamp should prevent an immediate second retry");
     }
 }

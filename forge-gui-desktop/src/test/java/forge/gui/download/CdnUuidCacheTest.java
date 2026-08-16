@@ -6,10 +6,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 /**
@@ -181,11 +185,57 @@ public class CdnUuidCacheTest {
         Assert.assertNull(CdnUuidCache.getCdnUrl(SET, "9999", "en", "front", "normal"));
     }
 
+    // --- miss tracking ---
+
+    @Test(dependsOnMethods = "unknownCollectorNumber_returnsNull")
+    public void missingEntry_isPersistedAsTimestampedMiss() throws IOException {
+        // The prior lookup for cn 9999 (unresolvable, and the Scryfall override is
+        // unreachable so no retry could have succeeded) should have recorded a miss
+        // marker on disk rather than just silently returning null every time.
+        String raw = readGunzipped(new File(localCacheDir, SET + ".json.gz"));
+        Assert.assertTrue(raw.contains("\"9999\""), "miss should be recorded under its collector number: " + raw);
+        Assert.assertTrue(raw.contains("\"miss\""), "miss should be recorded with the miss marker: " + raw);
+
+        // Real entries already in the file must be untouched.
+        Assert.assertEquals(CdnUuidCache.getCdnUrl(SET, "1", "en", "front", "normal"),
+                CdnUuidCache.cdnUrl(UUID_EN, "front", "normal"));
+    }
+
+    @Test(dependsOnMethods = "missingEntry_isPersistedAsTimestampedMiss")
+    public void freshMiss_stillReturnsNullOnRepeatLookup() {
+        // The miss recorded above is only seconds old -- well under the 1-day retry
+        // window -- so this must short-circuit to null again without touching the
+        // (unreachable) Scryfall override.
+        Assert.assertNull(CdnUuidCache.getCdnUrl(SET, "9999", "en", "front", "normal"));
+    }
+
+    @Test
+    public void recordedMiss_upgradesToRealEntryOnceMerged() {
+        // Simulate ScryfallSetSync later finding this card (e.g. after a resync
+        // triggered by a stale miss): a real entry must overwrite the miss marker.
+        Map<String, String[]> cn7 = new HashMap<>();
+        cn7.put("en", new String[]{UUID_EN, null});
+        Map<String, Map<String, String[]>> found = new HashMap<>();
+        found.put("7", cn7);
+
+        Assert.assertNull(CdnUuidCache.getCdnUrl(SET, "7", "en", "front", "normal"));
+        CdnUuidCache.mergeSetEntriesWithFaces(SET, found);
+
+        Assert.assertEquals(CdnUuidCache.getCdnUrl(SET, "7", "en", "front", "normal"),
+                CdnUuidCache.cdnUrl(UUID_EN, "front", "normal"));
+    }
+
     // --- helpers ---
 
     private static void writeGzip(File f, String content) throws IOException {
         try (GZIPOutputStream gz = new GZIPOutputStream(new FileOutputStream(f))) {
             gz.write(content.getBytes(StandardCharsets.UTF_8));
+        }
+    }
+
+    private static String readGunzipped(File f) throws IOException {
+        try (GZIPInputStream gz = new GZIPInputStream(new FileInputStream(f))) {
+            return new String(gz.readAllBytes(), StandardCharsets.UTF_8);
         }
     }
 

@@ -11,14 +11,12 @@ import forge.game.GameFormat;
 import forge.gui.FThreads;
 import forge.gui.download.CdnUuidCache;
 import forge.gui.download.GuiDownloadFilteredCardImages;
-import forge.gui.download.ScryfallManifestSync;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.filters.ArchivedFormatSelect;
 import forge.model.FModel;
 import forge.screens.FScreen;
-import forge.screens.LoadingOverlay;
 import forge.toolbox.*;
 import forge.util.TextUtil;
 import forge.util.Utils;
@@ -41,7 +39,6 @@ public class CardImageBrowserScreen extends FScreen {
     private final FLabel            lblDownloaded;
     private final FLabel            lblMissing;
     private final FButton           btnDownload;
-    private final FButton           btnBuildCdnCache;
     private final FButton           btnClearCdnCache;
 
     private GameFormat   selectedFormat    = null;
@@ -121,10 +118,7 @@ public class CardImageBrowserScreen extends FScreen {
         btnDownload = add(new FButton(Forge.getLocalizer().getMessage("btnDownloadCardImages")));
         btnDownload.setCommand(e -> startDownload());
 
-        // ── CDN image lookup cache: build (from Scryfall) and clear ──────────
-        btnBuildCdnCache = add(new FButton(Forge.getLocalizer().getMessage("btnBuildCdnImageCache")));
-        btnBuildCdnCache.setCommand(e -> buildCdnCache());
-
+        // ── CDN image lookup cache: clear (rebuilt automatically on demand) ──
         btnClearCdnCache = add(new FButton(Forge.getLocalizer().getMessage("btnClearCdnImageCache")));
         btnClearCdnCache.setCommand(e -> clearCdnCache());
 
@@ -180,24 +174,8 @@ public class CardImageBrowserScreen extends FScreen {
     }
 
     // =========================================================================
-    //  CDN image lookup cache: build directly from Scryfall, or clear
+    //  CDN image lookup cache: clear
     // =========================================================================
-
-    private void buildCdnCache() {
-        LoadingOverlay.runBackgroundTask(Forge.getLocalizer().getMessage("lblBuildingCdnImageCache"), () -> {
-            try {
-                int merged = ScryfallManifestSync.sync("en", null);
-                FThreads.invokeInEdtLater(() -> {
-                    SOptionPane.showMessageDialog(
-                            Forge.getLocalizer().getMessage("lblCdnImageCacheBuildComplete", merged));
-                    scheduleStatsUpdate();
-                });
-            } catch (Exception e) {
-                FThreads.invokeInEdtLater(() -> SOptionPane.showErrorDialog(
-                        Forge.getLocalizer().getMessage("lblCdnImageCacheBuildFailed", e.getMessage())));
-            }
-        });
-    }
 
     private void clearCdnCache() {
         if (!SOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblClearCdnImageCacheConfirm"))) {
@@ -248,9 +226,6 @@ public class CardImageBrowserScreen extends FScreen {
 
         float btnW = Math.min(w * 0.6f, Utils.AVG_FINGER_HEIGHT * 4);
         btnDownload.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
-        y += BTN_HEIGHT + PADDING;
-
-        btnBuildCdnCache.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
         y += BTN_HEIGHT + PADDING;
 
         btnClearCdnCache.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
