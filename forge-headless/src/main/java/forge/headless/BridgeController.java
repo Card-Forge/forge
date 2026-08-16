@@ -233,6 +233,14 @@ final class BridgeController extends PlayerControllerAi {
         }
         if ("authoritative_stack_resolution".equals(action.path("reason").asText())) {
             diagnostics.println("Bridge queued authoritative stack-resolution pass for seat " + seat);
+            // The following state_digest describes the post-resolution board.
+            // Do not let the protocol reader reach it until Forge's game thread
+            // has consumed this marker at its first empty-stack priority
+            // callback. Waiting on the typed ticket is an explicit protocol
+            // barrier; polling the mutable game state in handleStateDigest is
+            // too late when Forge has not yet left the callback that applies
+            // the preceding remote cast.
+            await(ticket.consumed, "remote stack-resolution barrier");
             return;
         }
         if ("authoritative_priority_pass".equals(action.path("reason").asText())) {
@@ -471,23 +479,23 @@ final class BridgeController extends PlayerControllerAi {
             }
         }
         RemoteActionTicket ticket = deferredRemoteAction == null
-                ? (finishing ? remoteActions.poll() : take(remoteActions, "remote opponent action"))
+                ? (finishing ? remoteActions.poll() : take(remoteActions,
+                        "remote opponent action at turn " + currentTurn + " phase " + currentPhase
+                                + " (drain through turn " + remoteDrainThroughTurn + ")"))
                 : deferredRemoteAction;
         if (ticket == null) {
             return null;
         }
         deferredRemoteAction = null;
-        // Once the stack is empty, a resolution marker is a synchronization
-        // barrier, not an instruction to end the main phase. Consume it and
-        // wait for the next authoritative action: that may be another spell or
-        // land in the same main phase, or the explicit main-phase-end marker.
-        while ("authoritative_stack_resolution".equals(ticket.action.path("reason").asText())) {
+        // A resolution marker is the authoritative controller's priority pass
+        // after its cast. Return that pass to Forge immediately so the other
+        // seat can pass and the stack can resolve. Waiting for another remote
+        // action inside this same callback leaves the just-cast spell stranded
+        // on the stack while the protocol reader advances to its post-resolution
+        // digest.
+        if ("authoritative_stack_resolution".equals(ticket.action.path("reason").asText())) {
             ticket.consumed.complete(null);
-            ticket = finishing ? remoteActions.poll() : take(remoteActions,
-                    "remote action after stack resolution");
-            if (ticket == null) {
-                return null;
-            }
+            return null;
         }
         try {
             applyPendingHandSync();
