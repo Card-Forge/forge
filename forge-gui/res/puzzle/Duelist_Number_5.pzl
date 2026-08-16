@@ -3,7 +3,7 @@ Name:Magic the Puzzling - Duelist #5 - Eeny Meeny Miney Moe
 Goal:Win
 Turns:1
 Difficulty:Common
-Description:Your opponent is Nick. He's under the false assumption that he's going to win this duel. Of source, with Circles of Protection for two of your three colors, four blockers, and a Conversion in play, he has plenty of reason to be cocky. But then, you draw an Instill Energy and the solution comes to you. You're going to take Nick down this turn and you plan to enjoy the look on his face when you do it.\n\nIt is the beginning of your upkeep phase. Defeat Nick this turn without dying.
+Description:Your opponent is Nick. He's under the false assumption that he's going to win this duel. Of course, with Circles of Protection for two of your three colors, four blockers, and a Conversion in play, he has plenty of reason to be cocky. But then, you draw an Instill Energy and the solution comes to you. You're going to take Nick down this turn and you plan to enjoy the look on his face when you do it.\n\nIt is the beginning of your upkeep phase. Defeat Nick this turn without dying.
 [state]
 ActivePlayer=human
 ActivePhase=upkeep
