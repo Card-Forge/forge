@@ -456,49 +456,47 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {
-        FCollection<SpellAbility> newCol = new FCollection<>();
-        updateSpellAbilities(newCol);
-        newCol.addAll(abilities);
-        card.updateSpellAbilities(newCol, this);
-        return newCol;
+        FCollection<SpellAbility> result = new FCollection<>(abilities);
+        if (getStateName().equals(CardStateName.Original)) {
+            if (getCard().hasState(CardStateName.LeftSplit))
+                result.addAll(getCard().getState(CardStateName.LeftSplit).abilities);
+            if (getCard().hasState(CardStateName.RightSplit))
+                result.addAll(getCard().getState(CardStateName.RightSplit).abilities);
+        }
+        card.updateSpellAbilities(result, this);
+        return result;
     }
     public final FCollectionView<SpellAbility> getManaAbilities() {
-        FCollection<SpellAbility> newCol = new FCollection<>();
-        updateSpellAbilities(newCol);
-        newCol.addAll(abilities);
-        card.updateSpellAbilities(newCol, this);
-        newCol.removeIf(Predicate.not(SpellAbility::isManaAbility));
-        return newCol;
+        FCollection<SpellAbility> result = new FCollection<>(abilities);
+        if (getStateName().equals(CardStateName.Original)) {
+            if (getCard().hasState(CardStateName.LeftSplit))
+                result.addAll(getCard().getState(CardStateName.LeftSplit).abilities);
+            if (getCard().hasState(CardStateName.RightSplit))
+                result.addAll(getCard().getState(CardStateName.RightSplit).abilities);
+        }
+        card.updateSpellAbilities(result, this);
+        result.removeIf(Predicate.not(SpellAbility::isManaAbility));
+        return result;
     }
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
-        FCollection<SpellAbility> newCol = new FCollection<>();
-        updateSpellAbilities(newCol);
-        newCol.addAll(abilities);
-        card.updateSpellAbilities(newCol, this);
-        newCol.removeIf(SpellAbility::isManaAbility);
-        return newCol;
+        FCollection<SpellAbility> result = new FCollection<>(abilities);
+        if (getStateName().equals(CardStateName.Original)) {
+            if (getCard().hasState(CardStateName.LeftSplit))
+                result.addAll(getCard().getState(CardStateName.LeftSplit).abilities);
+            if (getCard().hasState(CardStateName.RightSplit))
+                result.addAll(getCard().getState(CardStateName.RightSplit).abilities);
+        }
+        card.updateSpellAbilities(result, this);
+        result.removeIf(SpellAbility::isManaAbility);
+        return result;
     }
 
-    protected final void updateSpellAbilities(FCollection<SpellAbility> newCol) {
-        // add Split to Original
-        if (getStateName().equals(CardStateName.Original)) {
-            if (getCard().hasState(CardStateName.LeftSplit)) {
-                CardState leftState = getCard().getState(CardStateName.LeftSplit);
-                newCol.addAll(leftState.abilities);
-                leftState.updateSpellAbilities(newCol);
-            }
-            if (getCard().hasState(CardStateName.RightSplit)) {
-                CardState rightState = getCard().getState(CardStateName.RightSplit);
-                newCol.addAll(rightState.abilities);
-                rightState.updateSpellAbilities(newCol);
-            }
-        }
-
+    protected final SpellAbility getIntrinsicSpell() {
         // SpellPermanent only for Original State
         switch(getStateName()) {
         case Backside:
             if (!getCard().isModal()) {
-                return;
+                return null;
             }
             break;
         case Original:
@@ -511,32 +509,65 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         case SpecializeW:
             break;
         default:
-            return;
-        }
-        // if card has left or right split, disable intrinsic Spell for original
-        if (getStateName().equals(CardStateName.Original) && (getCard().hasState(CardStateName.LeftSplit) || getCard().hasState(CardStateName.RightSplit))) {
-            return;
+            return null;
         }
 
         CardTypeView type = getTypeWithChanges();
+        if (!type.isPermanent()) {
+            return null;
+        }
+
         if (type.isLand()) {
             if (landAbility == null) {
                 landAbility = new LandAbility(card, this);
             }
-            newCol.add(landAbility);
+            return landAbility;
         } else if (type.isAura()) {
-            newCol.add(getAuraSpell());
-        } else if (type.isPermanent()) {
+            return getAuraSpell();
+        } else {
             if (abilities.anyMatch(s -> (
                     s.isBasicSpell() && s.getSubAbility() == null && (ApiType.PermanentCreature.equals(s.getApi()) || ApiType.PermanentNoncreature.equals(s.getApi())))
                 )) {
-                return;
+                return null;
             }
 
             if (permanentAbility == null) {
                 permanentAbility = new SpellPermanent(card, this);
             }
-            newCol.add(permanentAbility);
+            return permanentAbility;
+        }
+    }
+
+    protected final void updateSpellAbilities(List<SpellAbility> newCol) {
+        // add Split to Original
+        if (getStateName().equals(CardStateName.Original) &&
+                (getCard().hasState(CardStateName.LeftSplit) || getCard().hasState(CardStateName.RightSplit))) {
+            boolean skip = false;
+            // insert right first, so left can be added before
+            if (getCard().hasState(CardStateName.RightSplit)) {
+                skip = true;
+                SpellAbility spRight = getCard().getState(CardStateName.RightSplit).getIntrinsicSpell();
+                if (spRight != null) {
+                    newCol.add(0, spRight);
+                }
+            }
+            if (getCard().hasState(CardStateName.LeftSplit)) {
+                skip = true;
+                SpellAbility spLeft = getCard().getState(CardStateName.LeftSplit).getIntrinsicSpell();
+                if (spLeft != null) {
+                    newCol.add(0, spLeft);
+                }
+            }
+
+            // if card has left or right split, disable intrinsic Spell for original
+            if (skip) {
+                return;
+            }
+        }
+
+        SpellAbility sp = getIntrinsicSpell();
+        if (sp != null) {
+            newCol.add(0, sp);
         }
     }
 
@@ -559,9 +590,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 list.clear();
             }
             CardTypeView type = state.getTypeWithChanges();
-            if (!type.isLand()) {
-                return list;
-            }
+            state.updateSpellAbilities(list);
             for (MagicColor.Color c : MagicColor.Color.values()) {
                if (c.getBasicLandType() == null) {
                    continue;
@@ -620,7 +649,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         if (this.card.getCastSA() != null) {
             return this.card.getCastSA();
         }
-        return Iterables.getFirst(getNonManaAbilities(), null);
+        return getNonManaAbilities().stream().filter(SpellAbility::isSpell).findFirst().orElse(null);
     }
 
     public final SpellAbility getFirstSpellAbilityWithFallback() {
