@@ -31,8 +31,6 @@ import java.util.Random;
 public class TextUIGame {
 
     public static void run(String[] args) {
-        System.out.println("=== Forge Text UI Mode ===");
-
         // Strip the "tui" command from args - Main.java passes it but picocli doesn't need it
         String[] tuiArgs = new String[args.length - 1];
         System.arraycopy(args, 1, tuiArgs, 0, args.length - 1);
@@ -53,6 +51,8 @@ public class TextUIGame {
      * Called by TUICommand after picocli parses the arguments.
      */
     public static void runGame(TUICommand cmd) {
+        System.out.println("=== Forge Text UI Mode ===");
+
         // Extract parsed options from command
         String humanDeckName = cmd.deck1;
         String aiDeckName = cmd.deck2;

@@ -8,7 +8,7 @@ import picocli.CommandLine.Parameters;
  * Command-line interface definition for the Text UI mode using picocli.
  */
 @Command(name = "tui",
-         description = "Text UI Mode - Interactive Forge Gameplay",
+         description = "Play or observe a Forge game in an interactive terminal.",
          mixinStandardHelpOptions = true,
          version = "Forge TUI 2.0")
 public class TUICommand implements Runnable {
@@ -46,7 +46,7 @@ public class TUICommand implements Runnable {
     boolean numericChoices = false;
 
     @Option(names = "--seed",
-            description = "Set random seed for deterministic testing")
+            description = "Seed Forge's random-number generator for a repeatable game")
     Long seed;
 
     @Option(names = "--start-state",

@@ -3,16 +3,17 @@ set -euo pipefail
 
 # Get the directory where this script is located
 script_dir=$(cd "$(dirname "$0")" && pwd)
+caller_dir=$(pwd -P)
 
 # Convert any relative deck paths to absolute paths
-# Relative paths are resolved relative to the script's location, not the caller's pwd
+# before changing to the directory that contains the assembled JAR.
 args=()
 for arg in "$@"; do
     # Check if this looks like a deck file path (ends in .dck and doesn't start with -)
     if [[ "$arg" == *.dck ]] && [[ "$arg" != -* ]]; then
-        # If it's a relative path (doesn't start with /), resolve relative to script directory
+        # If it is a relative path, preserve the caller's interpretation of it.
         if [[ "$arg" != /* ]]; then
-            arg="$script_dir/$arg"
+            arg="$caller_dir/$arg"
         fi
     fi
     args+=("$arg")
@@ -28,4 +29,4 @@ if [[ -z "$jar_file" ]]; then
     exit 1
 fi
 
-cd "$target_dir" && time java -jar "$(basename "$jar_file")" "${args[@]}"
+cd "$target_dir" && exec java -jar "$(basename "$jar_file")" "${args[@]}"
