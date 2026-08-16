@@ -167,7 +167,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbility playMerchantSa = c.getSpellAbilities().get(0);
+        SpellAbility playMerchantSa = c.getFirstSpellAbility();
         playMerchantSa.setActivatingPlayer(p);
 
         GameSimulator sim = createSimulator(p);
@@ -222,7 +222,7 @@ public class GameSimulationTest extends SimulationTest {
         GameSimulator sim = createSimulator(p1);
         Game simGame = sim.getSimulatedGameState();
 
-        SpellAbility fractureSa = fractureP1.getSpellAbilities().get(0);
+        SpellAbility fractureSa = fractureP1.getFirstSpellAbility();
         AssertJUnit.assertNotNull(fractureSa);
         fractureSa.getTargets().add(p0);
         sim.simulateSpellAbility(fractureSa);
@@ -318,7 +318,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
+        SpellAbility manifestSA = soulSummons.getFirstSpellAbility();
 
         GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(manifestSA);
@@ -363,7 +363,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
+        SpellAbility manifestSA = soulSummons.getFirstSpellAbility();
 
         GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(manifestSA);
@@ -390,7 +390,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
+        SpellAbility manifestSA = soulSummons.getFirstSpellAbility();
 
         GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(manifestSA);
@@ -626,7 +626,7 @@ public class GameSimulationTest extends SimulationTest {
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
 
-        SpellAbility callTheScionsSA = callTheScionsCard.getSpellAbilities().get(0);
+        SpellAbility callTheScionsSA = callTheScionsCard.getFirstSpellAbility();
 
         GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(callTheScionsSA).value;
@@ -1009,7 +1009,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(2, lilianaInPlay.getNetPower());
         AssertJUnit.assertEquals(3, lilianaInPlay.getNetToughness());
 
-        SpellAbility playLiliana = lilianaInHand.getSpellAbilities().get(0);
+        SpellAbility playLiliana = lilianaInHand.getFirstSpellAbility();
         GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(playLiliana);
         Game simGame = sim.getSimulatedGameState();
@@ -1039,7 +1039,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertEquals(0, p.getCounters(CounterEnumType.ENERGY));
 
-        SpellAbility playTurtle = turtleCard.getSpellAbilities().get(0);
+        SpellAbility playTurtle = turtleCard.getFirstSpellAbility();
         GameSimulator sim = createSimulator(p);
         sim.simulateSpellAbility(playTurtle);
         Game simGame = sim.getSimulatedGameState();
@@ -1066,7 +1066,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertTrue(p1.getManaPool().isEmpty());
 
-        SpellAbility playRitual = darkRitualCard.getSpellAbilities().get(0);
+        SpellAbility playRitual = darkRitualCard.getFirstSpellAbility();
         GameSimulator sim = createSimulator(p1);
         sim.simulateSpellAbility(playRitual);
         Game simGame = sim.getSimulatedGameState();
@@ -1076,7 +1076,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(3, simP1.getManaPool().getAmountOfColor(MagicColor.BLACK));
 
         Card darkConfidantCard2 = (Card) sim.getGameCopier().find(darkConfidantCard);
-        SpellAbility playDarkConfidant2 = darkConfidantCard2.getSpellAbilities().get(0);
+        SpellAbility playDarkConfidant2 = darkConfidantCard2.getFirstSpellAbility();
         Card deathriteCard2 = (Card) sim.getGameCopier().find(deathriteCard);
 
         GameSimulator sim2 = createSimulator(simP1);
@@ -1087,7 +1087,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(1, sim2P.getManaPool().getAmountOfColor(MagicColor.BLACK));
 
         Card deathriteCard3 = (Card) sim2.getGameCopier().find(deathriteCard2);
-        SpellAbility playDeathriteCard3 = deathriteCard3.getSpellAbilities().get(0);
+        SpellAbility playDeathriteCard3 = deathriteCard3.getFirstSpellAbility();
 
         GameSimulator sim3 = createSimulator(sim2P);
         sim3.simulateSpellAbility(playDeathriteCard3);
@@ -2118,14 +2118,14 @@ public class GameSimulationTest extends SimulationTest {
         GameSimulator sim = createSimulator(p0);
         Game simGame = sim.getSimulatedGameState();
 
-        SpellAbility actSA = actOfTreason.getSpellAbilities().get(0);
+        SpellAbility actSA = actOfTreason.getFirstSpellAbility();
         AssertJUnit.assertNotNull(actSA);
         actSA.setActivatingPlayer(p0);
         actSA.setTargetCard(serraAngel);
         sim.simulateSpellAbility(actSA);
         simGame.getAction().checkStateEffects(true);
 
-        SpellAbility pathSA = pathToExile.getSpellAbilities().get(0);
+        SpellAbility pathSA = pathToExile.getFirstSpellAbility();
         AssertJUnit.assertNotNull(pathSA);
         pathSA.setActivatingPlayer(p0);
         pathSA.setTargetCard(serraAngel);
@@ -2150,7 +2150,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbility playSa = c.getSpellAbilities().get(0);
+        SpellAbility playSa = c.getFirstSpellAbility();
         playSa.setActivatingPlayer(p);
 
         GameSimulator sim = createSimulator(p);
@@ -2183,7 +2183,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbility playSa = cardEverAfter.getSpellAbilities().get(0);
+        SpellAbility playSa = cardEverAfter.getFirstSpellAbility();
         playSa.setActivatingPlayer(p);
         playSa.getTargets().add(cardWaywardServant);
         playSa.getTargets().add(cardRagingGoblin);
@@ -2675,7 +2675,7 @@ public class GameSimulationTest extends SimulationTest {
         Game simGame = sim.getSimulatedGameState();
 
         for (Card card : cards) {
-            SpellAbility a1 = card.getSpellAbilities().get(0);
+            SpellAbility a1 = card.getFirstSpellAbility();
             a1.setActivatingPlayer(p);
             sim.simulateSpellAbility(a1);
         }
