@@ -4,7 +4,7 @@ Types:Plane Chicago
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When you planeswalk here, each player chooses a creature they control and creates a token that's a copy of it, except it's a Reflection in addition to its other types.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBCopyEach
 SVar:DBCopyEach:DB$ CopyPermanent | Choices$ Creature.ControlledBy Remembered | Chooser$ Remembered | Controller$ Remembered | AddTypes$ Reflection
-S:Mode$ Continuous | Affected$ Creature.Reflection | AddKeyword$ Shadow | Description$ All Reflections have shadow. (They can block or be blocked only by creatures with shadow.)
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.Reflection | AddKeyword$ Shadow | Description$ All Reflections have shadow. (They can block or be blocked only by creatures with shadow.)
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigChaos | TriggerDescription$ Whenever Chaos ensues, create a token that's a copy of a creature you control, except it's a Reflection in addition to its other types.
 SVar:TrigChaos:DB$ CopyPermanent | Choices$ Creature.YouCtrl | AddTypes$ Reflection
 Oracle:When you planeswalk here, each player chooses a creature they control and creates a token that's a copy of it, except it's a Reflection in addition to its other types.\nAll Reflections have shadow. (They can block or be blocked only by creatures with shadow.)\nWhenever chaos ensues, create a token that's a copy of a creature you control, except it's a Reflection in addition to its other types.

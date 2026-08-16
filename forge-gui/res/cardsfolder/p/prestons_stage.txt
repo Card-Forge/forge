@@ -7,6 +7,6 @@ T:Mode$ TurnFaceUp | ValidCard$ Creature | TriggerZones$ Command | Execute$ Trig
 SVar:TrigTokenFaceUp:DB$ Token | TokenScript$ c_a_hat_sac | TokenOwner$ TriggeredCardController
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever Chaos ensues, until your next turn, creature cards in your hand have flash.
 SVar:RolledChaos:DB$ Effect | StaticAbilities$ GrantFlash | Duration$ UntilYourNextTurn
-SVar:GrantFlash:Mode$ Continuous | Affected$ Creature.YouOwn | AffectedZone$ Hand | AddKeyword$ Flash | Description$ Creature cards in your hand have flash.
+SVar:GrantFlash:Mode$ Continuous | Affected$ Creature.YouOwn | AffectedZone$ Hand,Stack | AddKeyword$ Flash | Description$ Creature cards in your hand have flash.
 SVar:AIRollPlanarDieParams:Mode$ Random | Chance$ 25
 Oracle:Whenever a player performs a magic trick, they create a Hat token. (You perform a magic trick when you cast an instant or spell with flash, or turn a face-down creature face-up. Hat tokens are artifact tokens with "{1}, {T}, Sacrifice this artifact: Create a 1/1 white Rabbit creature token.")\nWhenever Chaos ensues, until your next turn, creature cards in your hand have flash.

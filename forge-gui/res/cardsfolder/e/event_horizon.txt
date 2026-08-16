@@ -1,12 +1,13 @@
 Name:Event Horizon
 ManaCost:no cost
 Types:Plane Blind Eternities
-S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Wastes | RemoveLandTypes$ True | Description$ Nonbasic lands are Wastes.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Land.nonBasic | RemoveLandTypes$ True | SetName$ Wastes | AddAbility$ WastesMana | Description$ Nonbasic lands are Wastes.
+SVar:WastesMana:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 T:Mode$ TapsForMana | ValidCard$ Permanent | Activator$ You | Produced$ C | Execute$ TrigMana | TriggerZones$ Command | Static$ True | TriggerDescription$ Whenever you tap a permanent for {C}, add an additional {C}.
-SVar:TrigMana:DB$ Mana | Produced$ C | Amount$ 1
+SVar:TrigMana:DB$ Mana | Produced$ C | Amount$ 1 | Defined$ You
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigCharm | TriggerDescription$ Whenever chaos ensues, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DrawFour,DestroyPerm,Reanimate
 SVar:DrawFour:DB$ Draw | NumCards$ 4 | SpellDescription$ Draw four cards.
 SVar:DestroyPerm:DB$ Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Destroy target permanent.
-SVar:Reanimate:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature card in your graveyard | SpellDescription$ You may return target creature card from your graveyard to the battlefield.
+SVar:Reanimate:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | Optional$ True | TgtPrompt$ Choose target creature card in your graveyard | SpellDescription$ You may return target creature card from your graveyard to the battlefield.
 Oracle:Nonbasic lands are Wastes.\nWhenever you tap a permanent for {C}, add an additional {C}.\nWhenever chaos ensues, choose one —\n• Draw four cards.\n• Destroy target permanent.\n• You may return target creature card from your graveyard to the battlefield.
