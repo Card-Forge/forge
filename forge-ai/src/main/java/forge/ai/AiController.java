@@ -103,6 +103,7 @@ public class AiController {
     private SpellAbility expectedPayingColorsSa;
     private byte expectedPayingColors;
     private int expectedConvergeX = -1;
+    private boolean solvingPayingColors;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -817,10 +818,6 @@ public class AiController {
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         final Card host = sa.getHostCard();
         Card altHost = host;
-        // an evaluation can reach another one, so hand back whatever the outer spell was expecting
-        final SpellAbility outerColorsSa = expectedPayingColorsSa;
-        final byte outerColors = expectedPayingColors;
-        final int outerConvergeX = expectedConvergeX;
 
         if (sa instanceof Spell sp) {
             altHost = sp.canPlayFromHost();
@@ -828,7 +825,6 @@ public class AiController {
                 return AiPlayDecision.CantPlaySa;
             }
             altHost.setCastSA(sa);
-            predictConvergePayment(sa, altHost);
         } else if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
@@ -846,28 +842,9 @@ public class AiController {
 
         if (sa.isSpell()) {
             altHost.setCastSA(null);
-            rememberConvergeX(outerColorsSa, outerConvergeX, outerColors);
         }
 
         return decision;
-    }
-
-    /**
-     * Converge counts the colors actually spent, which nothing has yet - so Count$Converge would
-     * report zero and the AI would size every converge effect as if it were empty. Work out what
-     * this spell would be paid with, so the card can be asked about its own payment while we are
-     * still deciding whether to cast it.
-     */
-    private void predictConvergePayment(final SpellAbility sa, final Card host) {
-        if (!host.hasConverge() || !sa.getPayingMana().isEmpty()) {
-            return;
-        }
-        if (sa.costHasManaX()) {
-            // on these cards X is what buys the colors, so announcing it settles them too
-            ComputerUtilCost.setMaxXValue(sa, player, sa.isTrigger());
-        } else {
-            setExpectedPayingColors(sa, ComputerUtilMana.getConvergeColors(sa, player));
-        }
     }
 
     /**
@@ -880,9 +857,32 @@ public class AiController {
         expectedConvergeX = -1;
     }
 
+    /**
+     * Converge counts the colors actually spent, which nothing has yet - so Count$Converge would
+     * report zero and the AI would size every converge effect as if it were empty. Worked out on
+     * the first read rather than up front, so a spell rejected by a cheap check never pays for a
+     * payment solve, and remembered by spell identity because it is only good for that one spell.
+     */
     public byte getExpectedPayingColors(final SpellAbility sa) {
-        // deliberately identity - the answer is only good for the exact spell it was worked out for
-        return sa == expectedPayingColorsSa ? expectedPayingColors : 0;
+        if (sa == expectedPayingColorsSa) {
+            return expectedPayingColors;
+        }
+        final Card host = sa.getHostCard();
+        if (solvingPayingColors || host == null || !host.hasConverge()
+                || !sa.getPayingMana().isEmpty()) {
+            return 0;
+        }
+        if (sa.costHasManaX()) {
+            // on these cards X is what buys the colors, so they are settled by the announcement
+            return 0;
+        }
+        solvingPayingColors = true;
+        try {
+            setExpectedPayingColors(sa, ComputerUtilMana.getConvergeColors(sa, player));
+        } finally {
+            solvingPayingColors = false;
+        }
+        return expectedPayingColors;
     }
 
     /**
