@@ -359,6 +359,8 @@ final class BridgeSession {
         case "declare_attackers":
         case "declare_blockers":
             return controller.decideCombat(kind, params.path("context"));
+        case "choose":
+            return controller.decideChoice(params.path("context"));
         case "mulligan":
             int cardsToReturn = params.path("context").path("cards_to_return").asInt(0);
             return controller.decideMulligan(cardsToReturn);

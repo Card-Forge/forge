@@ -51,6 +51,7 @@ final class BridgeController extends PlayerControllerAi {
     private final BlockingQueue<RemoteChoiceTicket> remoteChoices = new ArrayBlockingQueue<>(16);
     private final BlockingQueue<CombatActionTicket> combatActions = new ArrayBlockingQueue<>(16);
     private final BlockingQueue<CombatDecisionTicket> combatDecisions = new ArrayBlockingQueue<>(16);
+    private final BlockingQueue<ChoiceDecisionTicket> choiceDecisions = new ArrayBlockingQueue<>(16);
     private final BlockingQueue<String> publicHandReveals = new ArrayBlockingQueue<>(16);
     private volatile boolean cancelled;
     private volatile boolean finishing;
@@ -144,15 +145,13 @@ final class BridgeController extends PlayerControllerAi {
             return false;
         }
         RemoteActionTicket head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
-        while (head != null && head.turn < turn
-                && "pass".equals(head.action.path("type").asText())) {
-            if (deferredRemoteAction == null) {
-                remoteActions.poll();
-            } else {
-                deferredRemoteAction = null;
-            }
-            head.consumed.complete(null);
-            head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
+        if (head != null && head.turn < turn && "pass".equals(head.action.path("type").asText())) {
+            // The remote game thread may already be blocked in take() waiting
+            // for this exact turn-end/pass sentinel. A coordinator-thread poll
+            // can steal the wakeup and strand that callback forever. Leave
+            // stale passes for their single consumer; they are not non-main
+            // gameplay actions and therefore do not require a handoff here.
+            return false;
         }
         return head != null && head.turn == turn
                 && !"pass".equals(head.action.path("type").asText())
@@ -176,6 +175,13 @@ final class BridgeController extends PlayerControllerAi {
                 context.path("multi_blocker").asBoolean(false));
         put(combatDecisions, ticket, "Forge AI " + kind + " decision");
         return await(ticket.result, "Forge AI " + kind + " decision");
+    }
+
+    ObjectNode decideChoice(JsonNode context) {
+        requireForgeAiSeat();
+        ChoiceDecisionTicket ticket = new ChoiceDecisionTicket(context.deepCopy());
+        put(choiceDecisions, ticket, "Forge AI controller choice");
+        return await(ticket.result, "Forge AI controller choice");
     }
 
     void acceptOpponentAction(JsonNode action, JsonNode context, PrintStream diagnostics) {
@@ -265,6 +271,10 @@ final class BridgeController extends PlayerControllerAi {
         CombatDecisionTicket combatDecision;
         while ((combatDecision = combatDecisions.poll()) != null) {
             combatDecision.result.completeExceptionally(new IllegalStateException("Bridge game stopped"));
+        }
+        ChoiceDecisionTicket choiceDecision;
+        while ((choiceDecision = choiceDecisions.poll()) != null) {
+            choiceDecision.result.completeExceptionally(new IllegalStateException("Bridge game stopped"));
         }
     }
 
@@ -644,7 +654,18 @@ final class BridgeController extends PlayerControllerAi {
         if (blockers.size() > 1) {
             multiBlockerDamageObserved = true;
         }
-        return super.orderBlockers(attacker, blockers);
+        if (!fullGame || !forgeAiSeat || blockers.size() < 2) {
+            return super.orderBlockers(attacker, blockers);
+        }
+        ChoiceDecisionTicket ticket = take(choiceDecisions, "Forge AI damage-assignment order permit");
+        try {
+            CardCollection ordered = super.orderBlockers(attacker, blockers);
+            completeDamageOrder(ticket, ordered);
+            return ordered;
+        } catch (RuntimeException e) {
+            ticket.result.completeExceptionally(e);
+            throw e;
+        }
     }
 
     @Override
@@ -653,7 +674,72 @@ final class BridgeController extends PlayerControllerAi {
         if (blockers.size() > 1) {
             multiBlockerDamageObserved = true;
         }
-        return super.assignCombatDamage(attacker, blockers, remaining, damageDealt, defender, overrideOrder);
+        if (!fullGame || !forgeAiSeat || blockers.size() < 2) {
+            return super.assignCombatDamage(attacker, blockers, remaining, damageDealt, defender, overrideOrder);
+        }
+        ChoiceDecisionTicket ticket = take(choiceDecisions, "Forge AI combat-damage assignment permit");
+        try {
+            Map<Card, Integer> assignment = super.assignCombatDamage(
+                    attacker, blockers, remaining, damageDealt, defender, overrideOrder);
+            CardCollection ordered = new CardCollection();
+            for (Card blocker : assignment.keySet()) {
+                if (blockers.contains(blocker)) {
+                    ordered.add(blocker);
+                }
+            }
+            for (Card blocker : blockers) {
+                if (!ordered.contains(blocker)) {
+                    ordered.add(blocker);
+                }
+            }
+            completeDamageOrder(ticket, ordered);
+            return assignment;
+        } catch (RuntimeException e) {
+            ticket.result.completeExceptionally(e);
+            throw e;
+        }
+    }
+
+    private void completeDamageOrder(ChoiceDecisionTicket ticket, Iterable<Card> ordered) {
+        if (!"combat_damage_assignment_order".equals(ticket.context.path("choice_kind").asText())) {
+            throw new IllegalStateException("Expected combat damage assignment choice, got " + ticket.context);
+        }
+        ObjectNode action = BridgeTransport.JSON.createObjectNode();
+        action.put("type", "choose");
+        action.put("choice_kind", "combat_damage_assignment_order");
+        ArrayNode selections = action.putArray("selections");
+        for (Card blocker : ordered) {
+            selections.add(cardReference(blocker));
+        }
+        ticket.result.complete(action);
+    }
+
+    @Override
+    public CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
+        if (!fullGame || !forgeAiSeat || numDiscard == 0) {
+            return super.chooseCardsToDiscardToMaximumHandSize(numDiscard);
+        }
+        ChoiceDecisionTicket ticket = take(choiceDecisions, "Forge AI discard choice permit");
+        try {
+            if (!"discard".equals(ticket.context.path("choice_kind").asText())
+                    || ticket.context.path("count").asInt() != numDiscard) {
+                throw new IllegalStateException("Expected discard choice for " + numDiscard + " cards, got "
+                        + ticket.context);
+            }
+            CardCollectionView chosen = super.chooseCardsToDiscardToMaximumHandSize(numDiscard);
+            ObjectNode action = BridgeTransport.JSON.createObjectNode();
+            action.put("type", "choose");
+            action.put("choice_kind", "discard");
+            ArrayNode selections = action.putArray("selections");
+            for (Card card : chosen) {
+                selections.add(cardReference(card));
+            }
+            ticket.result.complete(action);
+            return chosen;
+        } catch (RuntimeException e) {
+            ticket.result.completeExceptionally(e);
+            throw e;
+        }
     }
 
     boolean requiresMultiBlockerCoverage() {
@@ -1294,6 +1380,15 @@ final class BridgeController extends PlayerControllerAi {
             this.action = action;
             this.turn = turn;
             this.phase = phase;
+        }
+    }
+
+    private static final class ChoiceDecisionTicket {
+        private final JsonNode context;
+        private final CompletableFuture<ObjectNode> result = new CompletableFuture<>();
+
+        private ChoiceDecisionTicket(JsonNode context) {
+            this.context = context;
         }
     }
 
