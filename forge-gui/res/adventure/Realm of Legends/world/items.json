@@ -889,6 +889,16 @@
     "cost": 500
   },
   {
+    "name": "Otherworldly Return Card",
+    "usableOnWorldMap": true,
+    "equipmentSlot": "Ability2",
+    "description": "Teleports you to the otherworldly market",
+    "commandOnUse": "teleport to poi \"Otherworldly Market\"",
+    "iconName": "Pull",
+    "questItem": true,
+    "shardsNeeded": 1
+  },
+  {
     "name": "Staff of Speed",
     "usableOnWorldMap": true,
     "equipmentSlot": "Ability1",
@@ -1638,6 +1648,41 @@
         "startBattleWithCard": [
         "Gingerbrute|ELD"
      ]
+    }
+  },
+  {
+    "name": "Joven's Shoes",
+    "description": "3/3 legendary rogue. RRR, T: Destroy a non-creature artifact.",
+    "equipmentSlot": "Boots",
+    "iconName": "Joven'sShoes",
+    "effect": {
+      "lifeModifier": -5,
+      "startBattleWithCard": [
+        "Joven|hml"
+      ]
+    }
+  },
+  {
+    "name": "Chandler's Shoes",
+    "description": "3/3 legendary rogue. RRR, T: Destroy an artifact creature.",
+    "equipmentSlot": "Boots",
+    "iconName": "Chandler'sShoes",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+        "Chandler|hml"
+      ]
+    }
+  },
+  {
+    "name": "Murderer's Axe",
+    "description": "Equip - discard. Gives +2/+2.",
+    "equipmentSlot": "Right",
+    "iconName": "Murderer'sAxe",
+    "effect": {
+      "startBattleWithCard": [
+        "Murderer's Axe|SOI"
+      ]
     }
   },
     {
@@ -3096,6 +3141,123 @@
         "startBattleWithCard": [
         "Tide of War"
      ]
+    }
+  },
+  {
+    "name": "Morcant's Crown",
+    "description": "Surveil 1 in upkeep, 4GG, sac for X 2/2 elves = elves in GY as sorcery.",
+    "equipmentSlot": "Neck",
+    "iconName": "Morcant'sCrown",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Morcant's Eyes"
+      ]
+    }
+  },
+  {
+    "name": "Faerie Crown",
+    "description": "Opponent loses 1 life when you cast a spell during their turn.",
+    "equipmentSlot": "Neck",
+    "iconName": "FaerieCrown",
+    "effect": {
+      "startBattleWithCard": [
+        "Faerie Tauntings"
+      ]
+    }
+  },
+  {
+    "name": "Evershrike Anklet",
+    "description": "2/2 flyer, +2/+2 for each aura on it, can revive with an aura from hand.",
+    "equipmentSlot": "Boots",
+    "iconName": "EvershrikeAnklet",
+    "effect": {
+      "lifeModifier": -5,
+      "startBattleWithCard": [
+        "Evershrike"
+      ]
+    }
+  },
+  {
+    "name": "Flamecaster Pants",
+    "description": "3/2 elemental with reach, burn opp 2 when you cast a MV 4+ spell.",
+    "equipmentSlot": "Boots",
+    "iconName": "FlamecasterPants",
+    "effect": {
+      "lifeModifier": -3,
+      "startBattleWithCard": [
+        "Enraged Flamecaster"
+      ]
+    }
+  },
+  {
+    "name": "Tarfire Helm",
+    "description": "At each end step, if you put a counter on a creature, burn opp 2.",
+    "equipmentSlot": "Neck",
+    "iconName": "TarfireHelm",
+    "effect": {
+      "startBattleWithCard": [
+        "Lasting Tarfire"
+      ]
+    }
+  },
+  {
+    "name": "Starfish On Your Foot",
+    "description": "0/1 starfish. U: regenerate. Get a 0/1 token at end step if you regened",
+    "equipmentSlot": "Boots",
+    "iconName": "StarfishOnYourFoot",
+    "effect": {
+      "startBattleWithCard": [
+        "Spiny Starfish"
+      ]
+    }
+  },
+  {
+    "name": "Tidal Amulet",
+    "description": "Gets a counter on upkeep. At one, all blue get -2/-0. At three, +2/+0. Resets at four.",
+    "equipmentSlot": "Neck",
+    "iconName": "TidalAmulet",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCard": [
+        "Tidal Influence"
+      ]
+    }
+  },
+  {
+    "name": "Pegasus Helm",
+    "description": "2, Discard a card: Make a 1/1 flying pegasus token.",
+    "equipmentSlot": "Neck",
+    "iconName": "PegasusHelm",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Pegasus Refuge"
+      ]
+    }
+  },
+  {
+    "name": "Interplanar Armor",
+    "description": "Gain 1 life on PW cast. Taps for C or 1, T: Add two of dif. colors for PWs.",
+    "equipmentSlot": "Body",
+    "iconName": "InterplanarArmor",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Interplanar Beacon"
+      ]
+    }
+  },
+  {
+    "name": "Cloud Keeper Armor",
+    "description": "T, pay 2 life: Adds CC to spend only on legendary spells.",
+    "equipmentSlot": "Body",
+    "iconName": "CloudKeeperArmor",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Untaidake, the Cloud Keeper"
+      ]
     }
   },
     {
