@@ -92,6 +92,34 @@ public class BeamMeUpTest extends AITest {
                 canBeamUp(open, p));
     }
 
+    /**
+     * The three graveyard-cast keywords share one exile replacement, so each has to end up pointing
+     * at its own spell property. Flashback and Harmonize are here because that shared code is what
+     * Beam me up joined - a swapped name or property would otherwise go unnoticed.
+     */
+    @Test
+    public void eachKeywordTargetsItsOwnSpellProperty() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        assertEquals("Spell.BeamMeUp+castKeyword",
+                exileStackSa(addCardToZone("Open Communications", p, ZoneType.Graveyard)));
+        assertEquals("Spell.Flashback+castKeyword",
+                exileStackSa(addCardToZone("Deep Analysis", p, ZoneType.Graveyard)));
+        assertEquals("Spell.Harmonize+castKeyword",
+                exileStackSa(addCardToZone("Channeled Dragonfire", p, ZoneType.Graveyard)));
+    }
+
+    /** @return the ValidStackSa of the card's "exile as it leaves the stack" replacement */
+    private String exileStackSa(Card c) {
+        for (ReplacementEffect re : c.getReplacementEffects()) {
+            if (re.getParam("ValidStackSa") != null) {
+                return re.getParam("ValidStackSa");
+            }
+        }
+        return null;
+    }
+
     /** Marooned only stops the creature it is on, not every creature. */
     @Test
     public void anotherCreatureStillPaysTheCost() {
