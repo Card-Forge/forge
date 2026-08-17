@@ -144,7 +144,7 @@ public class MapActor extends Actor {
         }
     }
 
-    private Vector2 getCenter() {
+    public Vector2 getCenter() {
         float scale = 1f;
         if (this instanceof EnemySprite) {
             scale = ((EnemySprite) this).getData().scale;
