@@ -17,11 +17,23 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class BridgeTransportTest {
     @Test
-    public void ordersRemoteMainPhaseTickets() {
-        assertEquals(0, BridgeController.compareMainPhase("main1", "main1"));
-        assertEquals(0, BridgeController.compareMainPhase("main2", "main2"));
-        assertEquals(-1, BridgeController.compareMainPhase("main1", "main2"));
-        assertEquals(1, BridgeController.compareMainPhase("main2", "main1"));
+    public void ordersRemotePhaseTickets() {
+        assertEquals(-1, BridgeController.compareBridgePhase("upkeep", "draw"));
+        assertEquals(-1, BridgeController.compareBridgePhase("draw", "main1"));
+        assertEquals(0, BridgeController.compareBridgePhase("main1", "main1"));
+        assertEquals(-1, BridgeController.compareBridgePhase("main1", "begincombat"));
+        assertEquals(-1, BridgeController.compareBridgePhase("declareblockers", "combatdamage"));
+        assertEquals(-1, BridgeController.compareBridgePhase("endcombat", "main2"));
+        assertEquals(0, BridgeController.compareBridgePhase("main2", "main2"));
+        assertEquals(-1, BridgeController.compareBridgePhase("main1", "main2"));
+        assertEquals(1, BridgeController.compareBridgePhase("main2", "main1"));
+        assertEquals(-1, BridgeController.compareBridgePhase("main2", "end"));
+        assertEquals(-1, BridgeController.compareBridgePhase("end", "cleanup"));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void rejectsUnknownRemotePhase() {
+        BridgeController.compareBridgePhase("combat-ish", "main2");
     }
 
     @Test

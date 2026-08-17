@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -67,6 +66,70 @@ final class BridgeController extends PlayerControllerAi {
     private volatile int pendingHandTurn;
     private RemoteActionTicket deferredRemoteAction;
     private SpellAbility pendingRemoteCast;
+
+    private enum BridgePhase {
+        UNTAP("untap"),
+        UPKEEP("upkeep"),
+        DRAW("draw"),
+        MAIN1("main1"),
+        BEGIN_COMBAT("begincombat"),
+        DECLARE_ATTACKERS("declareattackers"),
+        DECLARE_BLOCKERS("declareblockers"),
+        FIRST_STRIKE_DAMAGE("firststrikedamage"),
+        COMBAT_DAMAGE("combatdamage"),
+        END_COMBAT("endcombat"),
+        MAIN2("main2"),
+        END("end"),
+        CLEANUP("cleanup");
+
+        private final String protocolName;
+
+        BridgePhase(String protocolName) {
+            this.protocolName = protocolName;
+        }
+
+        private static BridgePhase fromProtocolName(String protocolName) {
+            for (BridgePhase phase : values()) {
+                if (phase.protocolName.equals(protocolName)) {
+                    return phase;
+                }
+            }
+            throw new IllegalStateException("Unknown bridge phase: " + protocolName);
+        }
+
+        private static BridgePhase fromForgePhase(PhaseType phase) {
+            switch (phase) {
+            case UNTAP:
+                return UNTAP;
+            case UPKEEP:
+                return UPKEEP;
+            case DRAW:
+                return DRAW;
+            case MAIN1:
+                return MAIN1;
+            case COMBAT_BEGIN:
+                return BEGIN_COMBAT;
+            case COMBAT_DECLARE_ATTACKERS:
+                return DECLARE_ATTACKERS;
+            case COMBAT_DECLARE_BLOCKERS:
+                return DECLARE_BLOCKERS;
+            case COMBAT_FIRST_STRIKE_DAMAGE:
+                return FIRST_STRIKE_DAMAGE;
+            case COMBAT_DAMAGE:
+                return COMBAT_DAMAGE;
+            case COMBAT_END:
+                return END_COMBAT;
+            case MAIN2:
+                return MAIN2;
+            case END_OF_TURN:
+                return END;
+            case CLEANUP:
+                return CLEANUP;
+            default:
+                throw new IllegalStateException("Unsupported Forge phase: " + phase);
+            }
+        }
+    }
 
     BridgeController(Game game, Player player, LobbyPlayer lobbyPlayer, int seat, boolean forgeAiSeat,
             boolean fullGame, int startingSeat) {
@@ -482,7 +545,12 @@ final class BridgeController extends PlayerControllerAi {
                     + " before Forge advanced to turn " + currentTurn + ": " + head.action);
         }
         while (head != null && head.turn == currentTurn
-                && compareMainPhase(head.phase, currentPhase) < 0) {
+                && compareBridgePhase(head.phase, currentPhase) < 0) {
+            if (!"pass".equals(head.action.path("type").asText())) {
+                throw new IllegalStateException("Missed remote action from turn " + head.turn
+                        + " phase " + head.phase + " before Forge advanced to phase "
+                        + currentPhase + ": " + head.action);
+            }
             if (deferredRemoteAction == null) {
                 remoteActions.poll();
             } else {
@@ -492,7 +560,7 @@ final class BridgeController extends PlayerControllerAi {
             head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
         }
         if (head != null && head.turn == currentTurn
-                && compareMainPhase(head.phase, currentPhase) > 0) {
+                && compareBridgePhase(head.phase, currentPhase) > 0) {
             return null;
         }
         if (instantPriority && !sharedActiveMain) {
@@ -567,18 +635,10 @@ final class BridgeController extends PlayerControllerAi {
         return super.playChosenSpellAbility(ability);
     }
 
-    static int compareMainPhase(String ticketPhase, String currentPhase) {
-        return Integer.compare(mainPhaseRank(ticketPhase), mainPhaseRank(currentPhase));
-    }
-
-    private static int mainPhaseRank(String phase) {
-        if ("main1".equals(phase)) {
-            return 1;
-        }
-        if ("main2".equals(phase)) {
-            return 2;
-        }
-        return 0;
+    static int compareBridgePhase(String ticketPhase, String currentPhase) {
+        return Integer.compare(
+                BridgePhase.fromProtocolName(ticketPhase).ordinal(),
+                BridgePhase.fromProtocolName(currentPhase).ordinal());
     }
 
     @Override
@@ -1131,11 +1191,7 @@ final class BridgeController extends PlayerControllerAi {
     }
 
     private String currentBridgePhase() {
-        PhaseType phase = getGame().getPhaseHandler().getPhase();
-        if (phase == PhaseType.END_OF_TURN) {
-            return "end";
-        }
-        return phase.nameForScripts.replace(" ", "").toLowerCase(Locale.ROOT);
+        return BridgePhase.fromForgePhase(getGame().getPhaseHandler().getPhase()).protocolName;
     }
 
     @Override
