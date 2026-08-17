@@ -504,86 +504,15 @@ final class BridgeController extends PlayerControllerAi {
             }
         }
 
-        if (instantPriority && !sharedActiveMain && !hasAnyLegalPriorityAction()) {
-            return null;
-        }
         int currentTurn = getGame().getPhaseHandler().getTurn();
-        RemoteActionTicket head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
         String currentPhase = currentBridgePhase();
         if (remoteMainDrainTurn == currentTurn && remoteMainDrainPhase.equals(currentPhase)) {
             return null;
         }
-        while (head != null && head.turn < currentTurn
-                && "pass".equals(head.action.path("type").asText())) {
-            if (deferredRemoteAction == null) {
-                remoteActions.poll();
-            } else {
-                deferredRemoteAction = null;
-            }
-            head.consumed.complete(null);
-            head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
-        }
-        if (remoteDrainThroughTurn >= currentTurn && head != null && head.turn <= currentTurn
-                && "authoritative_turn_end".equals(head.action.path("reason").asText())) {
-            if (deferredRemoteAction == null) {
-                remoteActions.poll();
-            } else {
-                deferredRemoteAction = null;
-            }
-            head.consumed.complete(null);
-            return null;
-        }
-        if (remoteDrainThroughTurn >= currentTurn && (head == null || head.turn > currentTurn)) {
-            return null;
-        }
-        if (instantPriority && head != null && head.turn > currentTurn) {
-            return null;
-        }
-        if (instantPriority && head != null && head.turn < currentTurn
-                && !"pass".equals(head.action.path("type").asText())) {
-            throw new IllegalStateException("Missed remote action from turn " + head.turn
-                    + " before Forge advanced to turn " + currentTurn + ": " + head.action);
-        }
-        while (head != null && head.turn == currentTurn
-                && compareBridgePhase(head.phase, currentPhase) < 0) {
-            if (!"pass".equals(head.action.path("type").asText())) {
-                throw new IllegalStateException("Missed remote action from turn " + head.turn
-                        + " phase " + head.phase + " before Forge advanced to phase "
-                        + currentPhase + ": " + head.action);
-            }
-            if (deferredRemoteAction == null) {
-                remoteActions.poll();
-            } else {
-                deferredRemoteAction = null;
-            }
-            head.consumed.complete(null);
-            head = deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
-        }
-        if (head != null && head.turn == currentTurn
-                && compareBridgePhase(head.phase, currentPhase) > 0) {
-            return null;
-        }
-        if (instantPriority && !sharedActiveMain) {
-            if (head == null || head.turn > currentTurn) {
-                return null;
-            }
-            boolean mainPhaseTicket = "main1".equals(head.phase) || "main2".equals(head.phase);
-            if (head.turn == currentTurn && !mainPhaseTicket && !"main1".equals(currentPhase)) {
-                return null;
-            }
-            if (head.turn == currentTurn && mainPhaseTicket && !head.phase.equals(currentPhase)) {
-                return null;
-            }
-        }
-        RemoteActionTicket ticket = deferredRemoteAction == null
-                ? (finishing ? remoteActions.poll() : take(remoteActions,
-                        "remote opponent action at turn " + currentTurn + " phase " + currentPhase
-                                + " (drain through turn " + remoteDrainThroughTurn + ")"))
-                : deferredRemoteAction;
+        RemoteActionTicket ticket = takeRemoteActionForCurrentPhase(currentTurn, currentPhase);
         if (ticket == null) {
             return null;
         }
-        deferredRemoteAction = null;
         // A resolution marker is the authoritative controller's priority pass
         // after its cast. Return that pass to Forge immediately so the other
         // seat can pass and the stack can resolve. Waiting for another remote
@@ -639,6 +568,72 @@ final class BridgeController extends PlayerControllerAi {
         return Integer.compare(
                 BridgePhase.fromProtocolName(ticketPhase).ordinal(),
                 BridgePhase.fromProtocolName(currentPhase).ordinal());
+    }
+
+    private RemoteActionTicket takeRemoteActionForCurrentPhase(int currentTurn, String currentPhase) {
+        while (true) {
+            RemoteActionTicket head = peekRemoteAction();
+            if (head == null) {
+                if (finishing || remoteDrainThroughTurn >= currentTurn) {
+                    return null;
+                }
+                deferredRemoteAction = take(remoteActions,
+                        "remote opponent action at turn " + currentTurn + " phase " + currentPhase
+                                + " (drain through turn " + remoteDrainThroughTurn + ")");
+                continue;
+            }
+            if (head.turn < currentTurn) {
+                if (!isPass(head)) {
+                    throw missedRemoteAction(head, currentTurn, currentPhase);
+                }
+                pollRemoteAction().consumed.complete(null);
+                continue;
+            }
+            if (head.turn > currentTurn) {
+                return null;
+            }
+            if (remoteDrainThroughTurn >= currentTurn
+                    && "authoritative_turn_end".equals(head.action.path("reason").asText())) {
+                pollRemoteAction().consumed.complete(null);
+                return null;
+            }
+            int phaseOrder = compareBridgePhase(head.phase, currentPhase);
+            if (phaseOrder < 0) {
+                if (!isPass(head)) {
+                    throw missedRemoteAction(head, currentTurn, currentPhase);
+                }
+                pollRemoteAction().consumed.complete(null);
+                continue;
+            }
+            if (phaseOrder > 0) {
+                return null;
+            }
+            return pollRemoteAction();
+        }
+    }
+
+    private RemoteActionTicket peekRemoteAction() {
+        return deferredRemoteAction == null ? remoteActions.peek() : deferredRemoteAction;
+    }
+
+    private RemoteActionTicket pollRemoteAction() {
+        if (deferredRemoteAction == null) {
+            return remoteActions.poll();
+        }
+        RemoteActionTicket result = deferredRemoteAction;
+        deferredRemoteAction = null;
+        return result;
+    }
+
+    private static boolean isPass(RemoteActionTicket ticket) {
+        return "pass".equals(ticket.action.path("type").asText());
+    }
+
+    private static IllegalStateException missedRemoteAction(
+            RemoteActionTicket ticket, int currentTurn, String currentPhase) {
+        return new IllegalStateException("Missed remote action from turn " + ticket.turn
+                + " phase " + ticket.phase + " before Forge advanced to turn "
+                + currentTurn + " phase " + currentPhase + ": " + ticket.action);
     }
 
     @Override
