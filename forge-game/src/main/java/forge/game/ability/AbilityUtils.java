@@ -2791,7 +2791,7 @@ public class AbilityUtils {
                     activated++;
                 }
             }
-            return doXMath(activated, s, c, ctb);
+            return doXMath(activated, expr, c, ctb);
         }
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
