@@ -2240,6 +2240,40 @@ public class CardFactoryUtil {
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
             inst.addReplacement(re);
+        } else if (keyword.startsWith("Beam me up")) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
+            sb.append("| ValidStackSa$ Spell.BeamMeUp+castKeyword | Description$ Beam me up");
+
+            if (keyword.contains(":")) { // K:Beam me up:Cost:ExtraParams:ExtraDescription
+                final String[] k = keyword.split(":");
+                final Cost cost = new Cost(k[1], false);
+                sb.append(cost.isOnlyManaCost() ? " " : "—").append(cost.toSimpleString());
+                sb.append(cost.isOnlyManaCost() ? "" : ".");
+
+                String extraDesc =  k.length > 3 ? k[3] : "";
+                if (!extraDesc.isEmpty()) { // extra params added in GameActionUtil, desc added here
+                    sb.append(cost.isOnlyManaCost() ? ". " : " ").append(extraDesc);
+                }
+            }
+
+            sb.append(" (").append(inst.getReminderText()).append(")");
+
+            String repeffstr = sb.toString();
+
+            String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
+
+            SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
+
+            if (!intrinsic) {
+                saExile.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
+
+            re.setOverridingAbility(saExile);
+
+            inst.addReplacement(re);
         } else if (keyword.startsWith("Flashback")) {
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");

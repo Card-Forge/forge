@@ -1875,6 +1875,10 @@ public class CardProperty {
             if (!card.canBeTurnedFaceUp()) {
                 return false;
             }
+        } else if (property.equals("canBeBeamedUp")) {
+            if (card.hasKeyword("CARDNAME can't be beamed up.")) {
+                return false;
+            }
         } else if (property.equals("NoAbilities")) {
             if (!card.hasNoAbilities()) {
                 return false;
