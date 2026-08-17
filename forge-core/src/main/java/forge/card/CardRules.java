@@ -382,9 +382,7 @@ public final class CardRules implements ICardCharacteristics {
             subtypes.add(type);
         }
 
-        return subtypes.size() == 2 &&
-                subtypes.contains("Time Lord") &&
-                subtypes.contains("Doctor");
+        return subtypes.size() == 2 && subtypes.contains("Time Lord") && subtypes.contains("Doctor");
     }
 
     public boolean canBeOathbreaker() {
@@ -488,13 +486,12 @@ public final class CardRules implements ICardCharacteristics {
         ICardFace mainFace = Objects.requireNonNullElse(mainPart.getFunctionalVariant(variantName), mainPart);
         String mainPartName = mainFace.getDisplayName();
 
-        if(splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
+        if (splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
             ICardFace otherFace = Objects.requireNonNullElse(otherPart.getFunctionalVariant(variantName), otherPart);
             String otherPartName = otherFace.getDisplayName();
             return mainPartName + " // " + otherPartName;
         }
-        else
-            return mainPartName;
+        return mainPartName;
     }
 
     String findOrCreateVariantForFlavorName(String flavorName, String suggestedVariantName) {
@@ -517,7 +514,7 @@ public final class CardRules implements ICardCharacteristics {
         variantMain.setFlavorName(nameParts[0]);
         ((CardFace) mainPart).assignMissingFieldsToVariant(variantMain);
 
-        if(otherPart != null) {
+        if (otherPart != null) {
             CardFace variantOther = ((CardFace) otherPart).getOrCreateFunctionalVariant(variantName);
             variantOther.setFlavorName(nameParts[1]);
             ((CardFace) otherPart).assignMissingFieldsToVariant(variantOther);
@@ -854,7 +851,7 @@ public final class CardRules implements ICardCharacteristics {
                     break;
 
                 case 'V':
-                    if("Variant".equals(key)) {
+                    if ("Variant".equals(key)) {
                         if (value == null) value = "";
                         colonPos = value.indexOf(':');
                         if(colonPos <= 0) throw new IllegalArgumentException("Missing variant name");

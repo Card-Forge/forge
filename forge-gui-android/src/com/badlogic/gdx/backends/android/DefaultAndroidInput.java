@@ -31,23 +31,33 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Handler;
-import android.text.*;
 import android.text.InputFilter;
 import android.text.InputFilter.LengthFilter;
+import android.text.InputType;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.util.DisplayMetrics;
-import android.view.*;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.Surface;
+import android.view.View;
 import android.view.View.OnGenericMotionListener;
 import android.view.View.OnKeyListener;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputConnectionWrapper;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
-import android.widget.TextView.OnEditorActionListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.window.OnBackInvokedCallback;
 import android.window.OnBackInvokedDispatcher;
-
 import com.badlogic.gdx.AbstractInput;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
@@ -59,8 +69,9 @@ import com.badlogic.gdx.backends.android.keyboardheight.KeyboardHeightProvider;
 import com.badlogic.gdx.backends.android.keyboardheight.StandardKeyboardHeightProvider;
 import com.badlogic.gdx.backends.android.surfaceview.GLSurfaceView20;
 import com.badlogic.gdx.input.NativeInputConfiguration;
-import com.badlogic.gdx.input.TextInputWrapper;
+import com.badlogic.gdx.input.NativeInputConfiguration.NativeInputCloseCallback;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Pool;
 
 import java.util.ArrayList;
@@ -150,6 +161,7 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
     private boolean justTouched = false;
     private InputProcessor processor;
     private final AndroidApplicationConfiguration config;
+    private final View view;
     protected final Orientation nativeOrientation;
     private long currentEventTimeStamp = 0;
     private PredictiveBackHandler predictiveBackHandler;
@@ -162,18 +174,17 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
     private final ArrayList<OnGenericMotionListener> genericMotionListeners = new ArrayList<>();
     private final AndroidMouseHandler mouseHandler;
 
-    public DefaultAndroidInput (Application activity, Context context, Object view, AndroidApplicationConfiguration config) {
-        // we hook into View, for LWPs we call onTouch below directly from
-        // within the AndroidWallpaperEngine#onTouchEvent() method.
-        if (view instanceof View) {
-            View v = (View)view;
-            v.setOnKeyListener(this);
-            v.setOnTouchListener(this);
-            v.setFocusable(true);
-            v.setFocusableInTouchMode(true);
-            v.requestFocus();
-            v.setOnGenericMotionListener(this);
-        }
+    public DefaultAndroidInput (Application activity, Context context, View v, AndroidApplicationConfiguration config) {
+
+        this.view = v;
+
+        view.setOnKeyListener(this);
+        view.setOnTouchListener(this);
+        view.setFocusable(true);
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnGenericMotionListener(this);
+
         this.config = config;
         this.mouseHandler = new AndroidMouseHandler();
 
@@ -474,10 +485,10 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
             }
 
             if (touchEvents.isEmpty()) {
-                for (int i = 0; i < deltaX.length; i++) {
-                    deltaX[0] = 0;
-                    deltaY[0] = 0;
-                }
+                // Fix DefaultAndroidInput delta reset
+                // https://github.com/libgdx/libgdx/pull/7838
+                Arrays.fill(deltaX, 0);
+				Arrays.fill(deltaY, 0);
             }
 
             keyEvents.clear();
@@ -627,15 +638,14 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
     }
 
     private RelativeLayout relativeLayoutField = null;
-    private TextInputWrapper textInputWrapper;
 
     private int getSoftButtonsBarHeight () {
-        AndroidApplication androidApplication = (AndroidApplication)app;
+        WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
 
         DisplayMetrics metrics = new DisplayMetrics();
-        androidApplication.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        windowManager.getDefaultDisplay().getMetrics(metrics);
         int usableHeight = metrics.heightPixels;
-        androidApplication.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
+        windowManager.getDefaultDisplay().getRealMetrics(metrics);
         int realHeight = metrics.heightPixels;
 
         if (realHeight > usableHeight) {
@@ -645,8 +655,35 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
         return 0;
     }
 
+    private int cachedHeight;
+    private boolean cachedVisible;
+
+    private void dispatchHeightAndVisibilityChangesToObserver (boolean visible, int height) {
+        if (observer != null) {
+            boolean visibilityChanged = visible != cachedVisible;
+            boolean heightChanged = height != cachedHeight;
+            if (visibilityChanged || heightChanged) {
+                if (visibilityChanged) {
+                    if (visible) {
+                        observer.onKeyboardShow(height);
+                    } else {
+                        observer.onKeyboardHide();
+                    }
+                } else if (visible) {
+                    // Height changed but visibility didn't, and keyboard is visible
+                    observer.onKeyboardShow(height);
+                }
+
+                if (heightChanged) observer.onKeyboardHeightChanged(height);
+
+                cachedVisible = visible;
+                cachedHeight = height;
+            }
+        }
+    }
+
     @Override
-    public void onKeyboardHeightChanged (int height, int leftInset, int rightInset, int orientation) {
+    public void onKeyboardHeightChanged (boolean visible, int height, int leftInset, int rightInset, int orientation) {
         KeyboardHeightProvider keyboardHeightProvider = ((AndroidApplication)app).getKeyboardHeightProvider();
         boolean isStandardHeightProvider = keyboardHeightProvider instanceof StandardKeyboardHeightProvider;
         if (config.useImmersiveMode && isStandardHeightProvider) {
@@ -654,37 +691,40 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
         }
 
         if (!isNativeInputOpen()) {
-            if (observer != null) observer.onKeyboardHeightChanged(height);
+            dispatchHeightAndVisibilityChangesToObserver(visible, height);
+            // Even if it is not visible, we want smooth animation when we actually start animating for visibility
+            if (relativeLayoutField != null) relativeLayoutField.setY(-height);
             return;
         }
 
-        if (height == 0) {
-            // Don't close keyboard on floating keyboards
-            if (!isStandardHeightProvider && (keyboardHeightProvider.getKeyboardLandscapeHeight() != 0
-                    || keyboardHeightProvider.getKeyboardPortraitHeight() != 0)) {
-                closeTextInputField(false);
-            }
+        if (height == 0 && isStandardHeightProvider && getEditTextForNativeInput().isPopupShowing()) {
             // What should I say at this point, everything is busted on android
-            if (isStandardHeightProvider && getEditTextForNativeInput().isPopupShowing()) {
-                return;
-            }
-            if (observer != null) observer.onKeyboardHeightChanged(0);
-            relativeLayoutField.setY(0);
             return;
         }
-        if (observer != null) observer.onKeyboardHeightChanged(height + getEditTextForNativeInput().getHeight());
-        // This is weird, if I don't do that there is a weird scaling/position error after rotating the 2. time
-        relativeLayoutField.setX(0);
-        relativeLayoutField.setScaleX(1);
-        relativeLayoutField.setY(0);
+
+        if (!visible) {
+            closeTextInputField(false);
+            dispatchHeightAndVisibilityChangesToObserver(false, height);
+            relativeLayoutField.setY(height);
+            return;
+        }
+
+        dispatchHeightAndVisibilityChangesToObserver(true, height + getEditTextForNativeInput().getHeight());
+
         // @off
         if ((((Activity)context).getWindow().getAttributes().softInputMode & WindowManager.LayoutParams.SOFT_INPUT_MASK_ADJUST) != WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING) {
             height = 0;
         }
+
+        // This is legit insanity. If we want to animate over `scaleX`, FOR REASONS NO-ONE WILL EVER UNDERSTAND, the keyboard doesn't push the views up if `scaleX` < 1 at start.
+        // Unless you are very familiar with android views and animations, do _not_ touch this code, unless absolutely necessary.
+        FrameLayout.LayoutParams containerParams = (FrameLayout.LayoutParams) relativeLayoutField.getLayoutParams();
+        containerParams.leftMargin = leftInset;
+        containerParams.rightMargin = rightInset;
+        relativeLayoutField.setLayoutParams(containerParams);
+
         relativeLayoutField.animate()
                 .y(-height)
-                .scaleX(((float) Gdx.graphics.getWidth() - rightInset - leftInset) / Gdx.graphics.getWidth())
-                .x((float) (leftInset - rightInset) / 2)
                 .setDuration(100)
                 .setListener(new Animator.AnimatorListener() {
                     @Override
@@ -709,9 +749,7 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
     }
 
     private void createDefaultEditText () {
-        // TODO: 07.10.2024 This should probably just get the content/root view instead
-        View view = ((AndroidGraphics)app.getGraphics()).getView();
-        ViewGroup frameLayout = (ViewGroup)view.getParent();
+        FrameLayout frameLayout = view.getRootView().findViewById(android.R.id.content);
         final RelativeLayout relativeLayout = new RelativeLayout(context);
         relativeLayout.setGravity(Gravity.BOTTOM);
         // Why? Why isn't it working without?
@@ -754,7 +792,7 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
                     // This is needed for multiline delete
                     @Override
                     public boolean sendKeyEvent (android.view.KeyEvent event) {
-                        if (multiline && event.getAction() == android.view.KeyEvent.ACTION_DOWN) {
+                        if (nativeInputConfiguration.isMultiLine() && event.getAction() == android.view.KeyEvent.ACTION_DOWN) {
                             if (event.getKeyCode() == android.view.KeyEvent.KEYCODE_DEL) {
                                 super.deleteSurroundingText(1, 0);
                                 return true;
@@ -791,239 +829,199 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
         return (AutoCompleteTextView)relativeLayoutField.getChildAt(0);
     }
 
-    private boolean multiline;
+    private NativeInputConfiguration nativeInputConfiguration;
 
     @Override
     public void openTextInputField (final NativeInputConfiguration configuration) {
         configuration.validate();
-        if (isNativeInputOpen()) {
-            if (closeTriggered) {
-                while (closeTriggered) {
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        return;
-                    }
-                }
-            } else {
-                throw new GdxRuntimeException("Can't open keyboard if already open with openTextInputField");
-            }
-        }
+        if (isNativeInputOpen()) throw new GdxRuntimeException("Can't open keyboard if already open with openTextInputField");
+
         if (onscreenVisible) throw new GdxRuntimeException("Can't open keyboard if already open with setOnscreenKeyboardVisible");
 
-        textInputWrapper = configuration.getTextInputWrapper();
-        multiline = configuration.isMultiLine();
-        handle.post(new Runnable() {
-            public void run () {
-                if (relativeLayoutField == null) createDefaultEditText();
-                final AutoCompleteTextView editText = getEditTextForNativeInput();
-                if (isNativeInputOpen()) return;
+        this.nativeInputConfiguration = configuration;
+        handle.post(() -> {
+            if (relativeLayoutField == null) createDefaultEditText();
+            final AutoCompleteTextView editText = getEditTextForNativeInput();
+            if (isNativeInputOpen()) return;
 
-                InputMethodManager manager = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager manager = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
-                // Potential cleanup
-                if (relativeLayoutField.getChildCount() > 1)
-                    relativeLayoutField.removeViews(1, relativeLayoutField.getChildCount() - 1);
+            // Potential cleanup
+            if (relativeLayoutField.getChildCount() > 1)
+                relativeLayoutField.removeViews(1, relativeLayoutField.getChildCount() - 1);
 
-                editText.setOnEditorActionListener(new OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction (TextView textView, int actionId, android.view.KeyEvent keyEvent) {
-                        if (actionId == EditorInfo.IME_ACTION_DONE) {
-                            Gdx.input.closeTextInputField(true);
-                            return true;
-                        }
-                        return true;
-                    }
-                });
-
-                // Needs to be done first, for some reason...
-                if (configuration.getType() != OnscreenKeyboardType.Password) {
-                    editText.setTransformationMethod(null);
+            editText.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    Gdx.input.closeTextInputField(true);
+                    return true;
                 }
+                return true;
+            });
 
-                editText.setInputType(getAndroidInputType(configuration.getType(), false));
-
-                if (configuration.isPreventCorrection()) {
-                    editText.setInputType(editText.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-                    editText.setInputType(editText.getInputType() & ~InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                } else {
-                    editText.setInputType(
-                            editText.getInputType() | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_AUTO_CORRECT);
-                }
-
-                editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                if (configuration.isMultiLine()) {
-                    editText.setInputType(editText.getInputType() | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-                    editText.setImeOptions(editText.getImeOptions() | EditorInfo.IME_FLAG_NO_FULLSCREEN);
-                    // For cursor control support
-                    editText.setWidth(Gdx.graphics.getWidth());
-                    editText.setLines(3);
-                } else {
-                    editText.setImeOptions(editText.getImeOptions() | EditorInfo.IME_FLAG_NO_FULLSCREEN);
-                    editText.setSingleLine();
-                }
-                // Reset filters to not run into a issue, where the max length filter messes with setText
-                // But, we can't set the correct filters here, because that leads to problems for some apparent reason nobody will
-                // ever understand
-                editText.setFilters(new InputFilter[] {});
-                editText.setText(textInputWrapper.getText());
-                editText.setHint(configuration.getPlaceholder());
-
-                InputFilter filter = new InputFilter() {
-                    @Override
-                    public CharSequence filter (CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                        boolean keepOriginal = true;
-                        StringBuilder sb = new StringBuilder(end - start);
-                        for (int i = start; i < end; i++) {
-                            char c = source.charAt(i);
-                            // TODO: 02.08.2022 There is a backend incosistenty between iOS and android. On Autocomplete
-                            // iOS would delete whole words, while android only deletes characters. We should make it
-                            // consistent. However that seems not that trivial and it first needs to be decided, which
-                            // behavior the correct one is.
-                            if (configuration.getValidator() == null || configuration.getValidator().validate(c + ""))
-                                sb.append(c);
-                            else
-                                keepOriginal = false;
-                        }
-                        if (keepOriginal)
-                            return null;
-                        else {
-                            if (source instanceof Spanned) {
-                                SpannableString sp = new SpannableString(sb);
-                                TextUtils.copySpansFrom((Spanned)source, start, sb.length(), null, sp, 0);
-                                return sp;
-                            } else {
-                                return sb;
-                            }
-                        }
-                    }
-                };
-                InputFilter[] filters = new InputFilter[] {filter};
-                if (configuration.getMaxLength() != null) {
-                    filters = new InputFilter[] {filter, new LengthFilter(configuration.getMaxLength())};
-                }
-
-                editText.setFilters(filters);
-
-                if (configuration.getAutoComplete() != null) {
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line,
-                            configuration.getAutoComplete());
-                    editText.setAdapter(adapter);
-                } else {
-                    editText.setAdapter(null);
-                }
-
-                editText.setBackgroundColor(Color.WHITE);
-
-                if (configuration.getType() == OnscreenKeyboardType.Password) {
-                    // For some reason this needs to be done last, otherwise it won't work
-                    editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    if (configuration.isShowPasswordButton()) {
-                        final ImageView imageView = new ImageView(context);
-
-                        imageView.setImageResource(context.getResources().getIdentifier("design_ic_visibility", "drawable", context.getPackageName()));
-                        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                                RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                        params.rightMargin = 10;
-                        params.height = editText.getHeight();
-                        params.width = editText.getHeight();
-
-                        imageView.setLayoutParams(params);
-                        imageView.setOnClickListener(new View.OnClickListener() {
-                            private boolean isHidding = true;
-
-                            @Override
-                            public void onClick (View v) {
-                                int start = editText.getSelectionStart();
-                                int end = editText.getSelectionStart();
-                                isHidding = !isHidding;
-                                if (isHidding) {
-                                    editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                                    imageView.setImageResource(context.getResources().getIdentifier("design_ic_visibility", "drawable", context.getPackageName()));
-                                } else {
-                                    editText.setTransformationMethod(null);
-                                    imageView.setImageResource(context.getResources().getIdentifier("design_ic_visibility_off", "drawable", context.getPackageName()));
-                                }
-                                // Seems to get reset by "setTransformationMethod"
-                                editText.setSelection(start, end);
-                            }
-                        });
-                        imageView.setAlpha(0.5f);
-                        imageView.setPadding(5, 5, 5, 5);
-                        relativeLayoutField.addView(imageView);
-                    }
-                }
-
-                // One wonders why here? I don't know!
-                editText.setSelection(textInputWrapper.getSelectionStart(), textInputWrapper.getSelectionEnd());
-
-                relativeLayoutField.setVisibility(View.VISIBLE);
-
-                editText.requestFocus();
-                manager.showSoftInput(editText, 0);
+            // Needs to be done first, for some reason...
+            if (!configuration.isMaskInput()) {
+                editText.setTransformationMethod(null);
             }
+
+            editText.setInputType(getAndroidInputType(configuration.getType(), false));
+
+            if (configuration.isPreventCorrection()) {
+                editText.setInputType(editText.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+                editText.setInputType(editText.getInputType() & ~InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+            } else {
+                editText.setInputType(
+                        editText.getInputType() | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_AUTO_CORRECT);
+            }
+
+            editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+            if (configuration.isMultiLine()) {
+                editText.setInputType(editText.getInputType() | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                editText.setImeOptions(editText.getImeOptions() | EditorInfo.IME_FLAG_NO_FULLSCREEN);
+                // For cursor control support
+                editText.setWidth(Gdx.graphics.getWidth());
+                editText.setLines(3);
+            } else {
+                editText.setImeOptions(editText.getImeOptions() | EditorInfo.IME_FLAG_NO_FULLSCREEN);
+                editText.setSingleLine();
+            }
+            // Reset filters to not run into a issue, where the max length filter messes with setText
+            // But, we can't set the correct filters here, because that leads to problems for some apparent reason nobody will
+            // ever understand
+            editText.setFilters(new InputFilter[] {});
+            editText.setText(configuration.getTextInputWrapper().getText());
+            editText.setHint(configuration.getPlaceholder());
+
+            InputFilter filter = (source, start, end, dest, dstart, dend) -> {
+                boolean keepOriginal = true;
+                StringBuilder sb = new StringBuilder(end - start);
+                for (int i = start; i < end; i++) {
+                    char c = source.charAt(i);
+                    // TODO: 02.08.2022 There is a backend incosistenty between iOS and android. On Autocomplete
+                    // iOS would delete whole words, while android only deletes characters. We should make it
+                    // consistent. However that seems not that trivial and it first needs to be decided, which
+                    // behavior the correct one is.
+                    if (configuration.getValidator() == null || configuration.getValidator().validate(c + ""))
+                        sb.append(c);
+                    else
+                        keepOriginal = false;
+                }
+                if (keepOriginal)
+                    return null;
+                else {
+                    if (source instanceof Spanned) {
+                        SpannableString sp = new SpannableString(sb);
+                        TextUtils.copySpansFrom((Spanned)source, start, sb.length(), null, sp, 0);
+                        return sp;
+                    } else {
+                        return sb;
+                    }
+                }
+            };
+            InputFilter[] filters = new InputFilter[] {filter};
+            if (configuration.getMaxLength() != -1) {
+                filters = new InputFilter[] {filter, new LengthFilter(configuration.getMaxLength())};
+            }
+
+            editText.setFilters(filters);
+
+            if (configuration.getAutoComplete() != null) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line,
+                        configuration.getAutoComplete());
+                editText.setAdapter(adapter);
+            } else {
+                editText.setAdapter(null);
+            }
+
+            editText.setBackgroundColor(Color.WHITE);
+
+            if (configuration.isMaskInput()) {
+                // For some reason this needs to be done last, otherwise it won't work
+                editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                if (configuration.isShowUnmaskButton()) {
+                    final ImageView imageView = new ImageView(context);
+
+                    imageView.setImageResource(context.getResources().getIdentifier("design_ic_visibility", "drawable", context.getPackageName()));
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    params.rightMargin = 10;
+                    params.height = editText.getHeight();
+                    params.width = editText.getHeight();
+
+                    imageView.setLayoutParams(params);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        private boolean isHidding = true;
+
+                        @Override
+                        public void onClick (View v) {
+                            int start = editText.getSelectionStart();
+                            int end = editText.getSelectionStart();
+                            isHidding = !isHidding;
+                            if (isHidding) {
+                                editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                                imageView.setImageResource(context.getResources().getIdentifier("design_ic_visibility", "drawable", context.getPackageName()));
+                            } else {
+                                editText.setTransformationMethod(null);
+                                imageView.setImageResource(context.getResources().getIdentifier("design_ic_visibility_off", "drawable", context.getPackageName()));
+                            }
+                            // Seems to get reset by "setTransformationMethod"
+                            editText.setSelection(start, end);
+                        }
+                    });
+                    imageView.setAlpha(0.5f);
+                    imageView.setPadding(5, 5, 5, 5);
+                    relativeLayoutField.addView(imageView);
+                }
+            }
+
+            // One wonders why here? I don't know!
+            editText.setSelection(configuration.getTextInputWrapper().getSelectionStart(),
+                    configuration.getTextInputWrapper().getSelectionEnd());
+
+            relativeLayoutField.setVisibility(View.VISIBLE);
+
+            editText.requestFocus();
+            manager.showSoftInput(editText, 0);
         });
     }
 
-    // Due to the lots of threads in android, we need to use this as a lock to wait with openTextInputField until close has
-    // finished
-    boolean closeTriggered = false;
+    @Override
+    public void closeTextInputField (boolean isConfirmative, @Null NativeInputCloseCallback callback) {
+        if (!isNativeInputOpen()) return;
+        handle.post( () -> {
+            if (!isNativeInputOpen()) return;
+            view.requestFocus();
+
+            EditText editText = getEditTextForNativeInput();
+            String text = editText.getText().toString();
+            int selectionStart = editText.getSelectionStart();
+            int selectionEnd = editText.getSelectionEnd();
+            NativeInputConfiguration config = nativeInputConfiguration;
+
+            Gdx.app.postRunnable( () -> {
+                config.getTextInputWrapper().writeResults(text, selectionStart, selectionEnd);
+
+                boolean keepOpen = config.getCloseCallback().onClose(isConfirmative);
+                if (callback != null) keepOpen |= callback.onClose(isConfirmative);
+
+                if (!keepOpen) {
+                    handle.post( () -> {
+                        InputMethodManager manager = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    });
+                }
+            });
+
+            nativeInputConfiguration = null;
+
+            if (relativeLayoutField.getChildCount() > 1) relativeLayoutField.removeViews(1, relativeLayoutField.getChildCount() - 1);
+            relativeLayoutField.setVisibility(View.INVISIBLE);
+        });
+    }
 
     @Override
-    public void closeTextInputField (final boolean sendReturn) {
-        if (closeTriggered) return;
-        if (!isNativeInputOpen()) return;
-        closeTriggered = true;
-        handle.post(new Runnable() {
-            @Override
-            public void run () {
-                if (!isNativeInputOpen()) {
-                    closeTriggered = false;
-                    return;
-                }
-                final View view = ((AndroidGraphics)app.getGraphics()).getView();
-                view.requestFocus();
-                EditText editText = getEditTextForNativeInput();
-                final String text = editText.getText().toString();
-                final int selection = editText.getSelectionStart();
-                Gdx.app.postRunnable(new Runnable() {
-                    final TextInputWrapper wrapper = textInputWrapper;
-
-                    @Override
-                    public void run () {
-                        wrapper.setText(text);
-                        wrapper.setPosition(selection);
-                        if (sendReturn) {
-                            getInputProcessor().keyDown(Keys.ENTER);
-                            getInputProcessor().keyTyped((char)13);
-                        }
-
-                        // This is getting ridiculous...
-                        Gdx.app.postRunnable(new Runnable() {
-                            @Override
-                            public void run () {
-                                if (wrapper.shouldClose()) {
-                                    handle.post(new Runnable() {
-                                        @Override
-                                        public void run () {
-                                            InputMethodManager manager = (InputMethodManager)context
-                                                    .getSystemService(Context.INPUT_METHOD_SERVICE);
-                                            manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                                        }
-                                    });
-                                }
-                            }
-
-                        });
-                    }
-                });
-                if (relativeLayoutField.getChildCount() > 1)
-                    relativeLayoutField.removeViews(1, relativeLayoutField.getChildCount() - 1);
-                relativeLayoutField.setVisibility(View.INVISIBLE);
-                closeTriggered = false;
-            }
-        });
+    public boolean isTextInputFieldOpened () {
+        return isNativeInputOpen();
     }
 
     private KeyboardHeightObserver observer;
@@ -1405,12 +1403,14 @@ public class DefaultAndroidInput extends AbstractInput implements AndroidInput, 
     private class PredictiveBackHandler {
 
         private final OnBackInvokedDispatcher dispatcher = ((Activity)context).getOnBackInvokedDispatcher();
-        private final OnBackInvokedCallback callback = new OnBackInvokedCallback() {
-            @Override
-            public void onBackInvoked () {
-                if (processor != null) {
-                    processor.keyDown(Keys.BACK);
-                }
+        private final OnBackInvokedCallback callback = () -> {
+            synchronized (DefaultAndroidInput.this) {
+                KeyEvent event = new KeyEvent();
+                event.timeStamp = System.nanoTime();
+                event.type = KeyEvent.KEY_DOWN;
+                event.keyCode = Keys.BACK;
+                event.keyChar = 0;
+                keyEvents.add(event);
             }
         };
 

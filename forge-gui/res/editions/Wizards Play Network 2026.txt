@@ -22,3 +22,10 @@ ScryfallCode=PW26
 14 R An Unexpected Party @Tomas Duchek
 15 R Bilbo, Luckwearer @Yigit Koroglu
 16 R Wood Elves @Ramza Psyru
+17 R Highly Illogical @Patricia Pria
+18 R Munitions Enthusiast @Rémi Jacquot
+19 R Solemn Simulacrum @Randy Gallegos
+20 R Burst Lightning @Néstor Ossandón Leal
+21 R Crystal Ball @Ron Spencer
+22 R Tragic Trajectory @Ovidio Cartagena
+23 R Leyline of Anticipation @Alexandr Leskinen

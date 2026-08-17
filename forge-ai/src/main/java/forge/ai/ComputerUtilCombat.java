@@ -2465,8 +2465,7 @@ public class ComputerUtilCombat {
                 if (exec.getApi() == ApiType.Clone && "Self".equals(exec.getParam("CloneTarget"))
                         && exec.hasParam("ValidTgts") && exec.getParam("ValidTgts").contains("Creature")
                         && exec.getParam("ValidTgts").contains("attacking")) {
-                    // Tilonalli's Skinshifter and potentially other similar cards that can clone other stuff
-                    // while attacking
+                    // Tilonalli's Skinshifter and potentially other similar cards that can clone other stuff while attacking
                     if (exec.getParam("ValidTgts").contains("nonLegendary") && attacker.getType().isLegendary()) {
                         continue;
                     }

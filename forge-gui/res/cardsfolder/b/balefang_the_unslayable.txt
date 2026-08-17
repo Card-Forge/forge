@@ -1,0 +1,14 @@
+Name:Balefang the Unslayable
+ManaCost:3 R R
+Types:Legendary Creature Demon Dragon
+PT:5/5
+K:Flying
+K:Trample
+K:Protection:Angel
+K:Protection:Archon
+S:Mode$ CantGainLife | ValidPlayer$ Player | Description$ Players can't gain life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, target opponent creates a tapped Baneslayer Angel token. The token is goaded for the rest of the game. (It's a {3}{W}{W} 5/5 Angel creature with flying, first strike, lifelink, and protection from Demons and from Dragons.)
+SVar:TrigToken:DB$ CopyPermanent | DefinedName$ Baneslayer Angel | ValidTgts$ Opponent | Controller$ TargetedPlayer | TokenTapped$ True | RememberTokens$ True | SubAbility$ DBGoad
+SVar:DBGoad:DB$ Goad | Defined$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying, trample, protection from Angels and from Archons\nPlayers can't gain life.\nWhen Balefang enters, target opponent creates a tapped Baneslayer Angel token. The token is goaded for the rest of the game. (It's a {3}{W}{W} 5/5 Angel creature with flying, first strike, lifelink, and protection from Demons and from Dragons.)

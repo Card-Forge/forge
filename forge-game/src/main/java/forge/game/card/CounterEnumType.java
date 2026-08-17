@@ -211,7 +211,7 @@ public enum CounterEnumType implements CounterType {
 
     HIT("HIT", 255, 245, 195, CounterAiCategory.Positive),
 
-    HONE("HONE", 51, 227, 255, CounterAiCategory.Positive),
+    HONE("HONE", 35, 235, 240, CounterAiCategory.Positive),
 
     HOPE("HOPE", 232, 245, 245, CounterAiCategory.Positive),
 
@@ -313,6 +313,8 @@ public enum CounterEnumType implements CounterType {
 
     NEST("NEST", 80, 80, 50, CounterAiCategory.Positive),
 
+    ODOR("ODOR", 130, 140, 85, CounterAiCategory.Positive),
+
     OIL("OIL", 99, 102, 106, CounterAiCategory.Positive),
 
     OMEN("OMEN", 255, 178, 120, CounterAiCategory.Positive),
@@ -353,6 +355,8 @@ public enum CounterEnumType implements CounterType {
 
     PREY("PREY", 240, 0, 0, CounterAiCategory.Positive),
 
+    PROMOTION("PROM", 40, 210, 230, CounterAiCategory.Positive),
+
     PUPA("PUPA", 0, 223, 203, CounterAiCategory.Negative),
 
     P0P1("+0/+1", "+0/+1", 96, 226, 23, CounterAiCategory.Positive),
@@ -371,11 +375,13 @@ public enum CounterEnumType implements CounterType {
 
     RALLY("RALLY", 25, 230, 225, CounterAiCategory.Positive),
 
+    REFINE("RFIN", 51, 227, 255, CounterAiCategory.Positive),
+
+    REJECTION("REJECT", 212, 235, 242, CounterAiCategory.Positive),
+
     RELEASE("RELEASE", 200, 210, 50, CounterAiCategory.Positive),
 
     REPRIEVE("REPR", 240, 120, 50, CounterAiCategory.Positive),
-
-    REJECTION("REJECT", 212, 235, 242, CounterAiCategory.Positive),
 
     REV("REV", 255, 108, 111, CounterAiCategory.Positive),
 
@@ -480,6 +486,8 @@ public enum CounterEnumType implements CounterType {
     WRECK("WRECK", 208, 55, 255, CounterAiCategory.Positive),
 
     // Player Counters
+
+    CONTRACT("CTRCT", CounterAiCategory.Neutral),
 
     ENERGY("ENRGY", CounterAiCategory.Positive),
 

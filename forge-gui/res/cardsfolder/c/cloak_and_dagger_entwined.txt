@@ -5,8 +5,7 @@ PT:2/2
 K:Deathtouch
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRevealHand | TriggerDescription$ When NICKNAME enter, choose target opponent and up to one target creature they control. They reveal their hand. You may exile a nonland card from their hand or the chosen creature until NICKNAME leave the battlefield.
-SVar:TrigRevealHand:DB$ RevealHand | ValidTgts$ Opponent | RememberRevealed$ True | SubAbility$ DBPump | SpellDescription$ Target opponent reveals their hand.
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature.ControlledBy ParentTarget | ValidTgtsDesc$ creature controlled by the targeted opponent | TargetMin$ 0 | TargetMax$ 1 | RememberPumped$ True | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand,Battlefield | Destination$ Exile | Defined$ Remembered | ChangeNum$ 1 | Optional$ True | Duration$ UntilHostLeavesPlay | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigRevealHand:DB$ RevealHand | ValidTgts$ Opponent | SubAbility$ DBPump | SpellDescription$ Target opponent reveals their hand.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.ControlledBy ParentTarget | ValidTgtsDesc$ creature controlled by the targeted opponent | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand,Battlefield | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeNum$ 1 | ChangeType$ Card.targetedBy,Card.nonLand+inZoneHand | Hidden$ True | Duration$ UntilHostLeavesPlay
 Oracle:Deathtouch, lifelink\nWhen Cloak and Dagger enter, choose target opponent and up to one target creature they control. They reveal their hand. You may exile a nonland card from their hand or the chosen creature until Cloak and Dagger leave the battlefield.

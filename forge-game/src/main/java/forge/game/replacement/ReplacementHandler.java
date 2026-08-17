@@ -103,12 +103,14 @@ public class ReplacementHandler {
             Card c = preList.get(crd);
             Zone cardZone = game.getZoneOf(c);
 
-            // all tap/untap replacements are active from the battlefield or the command zone
-            // (e.g. Ood Sphere); skip other zones - this is a major hot path, as canTap/canUntap
-            // run a cantHappenCheck per mana source per AI cost check
+            // all tap/untap/produce mana replacements are active from the battlefield or the
+            // command zone (e.g. Ood Sphere); skip other zones - this is a major hot path, as
+            // canTap/canUntap run a cantHappenCheck per mana source per AI cost check, and
+            // groupSourcesByManaColor runs a ProduceMana check per mana ability on top of that
             // (performance mode only, in case a custom card wants one active from elsewhere)
             if (Spell.isPerformanceMode()
-                    && (event == ReplacementType.Tap || event == ReplacementType.Untap)
+                    && (event == ReplacementType.Tap || event == ReplacementType.Untap
+                            || event == ReplacementType.ProduceMana)
                     && cardZone != null
                     && cardZone.getZoneType() != ZoneType.Battlefield
                     && cardZone.getZoneType() != ZoneType.Command) {
@@ -282,8 +284,6 @@ public class ReplacementHandler {
      */
     private ReplacementResult executeReplacement(final Map<AbilityKey, Object> runParams,
         final ReplacementEffect replacementEffect, final Player decider) {
-        SpellAbility effectSA = null;
-
         Card host = replacementEffect.getHostCard();
         // AlternateState for OriginsPlaneswalker
         // FaceDown for cards like Necropotence
@@ -292,7 +292,7 @@ public class ReplacementHandler {
         }
 
         // TODO: the source of replacement effect should be the source of the original effect
-        effectSA = replacementEffect.ensureAbility();
+        SpellAbility effectSA = replacementEffect.ensureAbility();
         if (effectSA != null) {
             SpellAbility tailend = effectSA;
             do {
@@ -301,7 +301,7 @@ public class ReplacementHandler {
                 tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
                 tailend.setReplacingObjectsFrom(runParams, AbilityKey.InternalTriggerTable, AbilityKey.SimultaneousETB);
                 tailend = tailend.getSubAbility();
-            } while(tailend != null);
+            } while (tailend != null);
 
             effectSA.setLastStateBattlefield((CardCollectionView) Objects.requireNonNullElse(runParams.get(AbilityKey.LastStateBattlefield), game.getLastStateBattlefield()));
             effectSA.setLastStateGraveyard((CardCollectionView) Objects.requireNonNullElse(runParams.get(AbilityKey.LastStateGraveyard), game.getLastStateGraveyard()));
@@ -315,10 +315,8 @@ public class ReplacementHandler {
         // Decider gets to choose whether or not to apply the replacement.
         if (replacementEffect.hasParam("Optional")) {
             Player optDecider = decider;
-            if (replacementEffect.hasParam("OptionalDecider") && effectSA != null) {
-                effectSA.setActivatingPlayer(host.getController());
-                optDecider = AbilityUtils.getDefinedPlayers(host,
-                        replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
+            if (replacementEffect.hasParam("OptionalDecider")) {
+                optDecider = AbilityUtils.getDefinedPlayers(host, replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
             String name = Objects.requireNonNullElse(host.getRenderForUI() ? host.getCardForUi() : null, host).getTranslatedName();
@@ -351,7 +349,7 @@ public class ReplacementHandler {
         }
 
         if ("True".equals(replacementEffect.getParam("Skip"))) {
-            return ReplacementResult.Skipped; // Event is skipped.
+            return ReplacementResult.Skipped;
         }
         Player player = host.getController();
 
@@ -359,6 +357,7 @@ public class ReplacementHandler {
             ApiType apiType = effectSA.getApi();
             if (replacementEffect.getMode() != ReplacementType.DamageDone ||
                 (apiType == ApiType.ReplaceDamage || apiType == ApiType.ReplaceSplitDamage || apiType == ApiType.ReplaceEffect)) {
+                effectSA.setActivatingPlayer(host.getController());
                 player.getController().playSpellAbilityNoStack(effectSA, true);
             } else {
                 // The SA if buffered, but replacement result should be set to Replaced
