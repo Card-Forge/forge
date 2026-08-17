@@ -331,6 +331,7 @@ public class CardImageRenderer {
 
     public static final FBufferedImage forgeArt;
     private static final FBufferedImage stretchedArt;
+    private static final FBufferedImage dungeonArt;
 
     static {
         final float logoWidth = FSkinImage.CARDART.getWidth();
@@ -355,19 +356,31 @@ public class CardImageRenderer {
                 g.drawImage(FSkinImage.CARDART, (w - newW) /2, (h - newH) / 2, newW, newH);
             }
         };
+        dungeonArt = new FBufferedImage(w, h) {
+            @Override
+            protected void draw(Graphics g, float w, float h) {
+                g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, w, h);
+                g.fillRect(FScreen.getTextureOverlayColor(), 0, 0, w, h);
+                int newW = Math.round((h * (logoWidth / logoHeight)) * 1.2f);
+                int newH = Math.round(logoHeight * 0.8f);
+                g.drawImage(FSkinImage.CARDART, (w - newW) /2, (h - newH) / 2, newW, newH);
+            }
+        };
     }
 
     private static void drawArt(CardView cv, Graphics g, float x, float y, float w, float h, boolean altState, boolean isFaceDown) {
+        boolean isDungeon = cv.getCurrentState().getType().isDungeon();
         boolean useStretchedArt = cv.getCurrentState().getType().hasSubtype("Saga")
                 || cv.getCurrentState().getType().hasSubtype("Class")
                 || cv.getCurrentState().getType().hasSubtype("Case")
-                || cv.getCurrentState().getType().isDungeon();
+                || isDungeon;
         ColorSet colorSet = cv.getCurrentState().getColors();
         if (altState && cv.hasAlternateState()) {
+            isDungeon = cv.getAlternateState().getType().isDungeon();
             useStretchedArt = cv.getAlternateState().getType().hasSubtype("Saga")
                     || cv.getAlternateState().getType().hasSubtype("Class")
                     || cv.getAlternateState().getType().hasSubtype("Case")
-                    || cv.getAlternateState().getType().isDungeon();
+                    || isDungeon;
             colorSet = cv.getAlternateState().getColors();
         }
         if (cv == null) {
@@ -380,7 +393,7 @@ public class CardImageRenderer {
             }
             //fallback
             if (useStretchedArt) {
-                g.drawImage(stretchedArt, x, y, w, h);
+                g.drawImage(isDungeon ? dungeonArt : stretchedArt, x, y, w, h);
             } else {
                 g.drawImage(forgeArt, x, y, w, h);
             }
@@ -395,7 +408,7 @@ public class CardImageRenderer {
             if (cardArt != null) {
                 if (isHidden && !altState) {
                     if (useStretchedArt) {
-                        g.drawImage(stretchedArt, x, y, w, h);
+                        g.drawImage(isDungeon ? dungeonArt : stretchedArt, x, y, w, h);
                     } else {
                         g.drawImage(forgeArt, x, y, w, h);
                     }
@@ -427,14 +440,14 @@ public class CardImageRenderer {
                 }
             } else {
                 if (useStretchedArt) {
-                    g.drawImage(stretchedArt, x, y, w, h);
+                    g.drawImage(isDungeon ? dungeonArt : stretchedArt, x, y, w, h);
                 } else {
                     g.drawImage(forgeArt, x, y, w, h);
                 }
             }
         } else {
             if (useStretchedArt) {
-                g.drawImage(stretchedArt, x, y, w, h);
+                g.drawImage(isDungeon ? dungeonArt : stretchedArt, x, y, w, h);
             } else {
                 g.drawImage(forgeArt, x, y, w, h);
             }
