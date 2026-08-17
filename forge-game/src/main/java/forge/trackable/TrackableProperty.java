@@ -110,6 +110,7 @@ public enum TrackableProperty {
     PairedWith(TrackableTypes.CardViewType),
     CurrentState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
     AlternateState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
+    AlternateStateName(TrackableTypes.StringType),
     LeftSplitState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
     RightSplitState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
     Room(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
@@ -217,7 +218,6 @@ public enum TrackableProperty {
     SA_IsSpell(TrackableTypes.BooleanType),
 
     //HasBackSide
-    BackSideName(TrackableTypes.StringType),
     HasBackSide(TrackableTypes.BooleanType),
 
     //StackItem

@@ -660,7 +660,7 @@ public class CardDetailUtil {
         if (card.hasPreparedSpell()) {
             area.append("\n\n");
             area.append("Prepared — "
-                + card.getBackSideName() + " "
+                + card.getAlternateStateName() + " "
                 + card.getAlternateState().getManaCost().toString() + ":"
                 + card.getAlternateState().getAbilityText()
             );
