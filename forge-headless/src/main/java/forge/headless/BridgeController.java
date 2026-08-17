@@ -303,8 +303,27 @@ final class BridgeController extends PlayerControllerAi {
             // immediately by game_end. Setting finishing alone cannot wake an
             // in-progress blocking read, so supply one final pass sentinel.
             int turn = getGame().getPhaseHandler().getTurn();
-            put(remoteActions, new RemoteActionTicket(passAction(), turn, currentBridgePhase()),
-                    "remote game-finish sentinel");
+            signalRemoteGameFinish(new RemoteActionTicket(passAction(), turn, currentBridgePhase()));
+        }
+    }
+
+    private void signalRemoteGameFinish(RemoteActionTicket sentinel) {
+        try {
+            // A naturally completed game cancels both controllers from the
+            // game-thread finally block before game_end reaches this protocol
+            // thread. There is then no blocked queue consumer to wake, and
+            // cancellation has already satisfied the lifecycle boundary.
+            if (cancelled) {
+                return;
+            }
+            if (!remoteActions.offer(sentinel, WAIT_SECONDS, TimeUnit.SECONDS) && !cancelled) {
+                throw new IllegalStateException("Timed out queuing remote game-finish sentinel");
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            if (!cancelled) {
+                throw new IllegalStateException("Interrupted while queuing remote game-finish sentinel", e);
+            }
         }
     }
 
