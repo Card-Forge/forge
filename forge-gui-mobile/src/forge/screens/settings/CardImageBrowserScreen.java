@@ -118,7 +118,7 @@ public class CardImageBrowserScreen extends FScreen {
         btnDownload = add(new FButton(Forge.getLocalizer().getMessage("btnDownloadCardImages")));
         btnDownload.setCommand(e -> startDownload());
 
-        // ── CDN image lookup cache: clear (rebuilt automatically on demand) ──
+        // ── Clear CDN cache button ─────────────────────────────────────────────
         btnClearCdnCache = add(new FButton(Forge.getLocalizer().getMessage("btnClearCdnImageCache")));
         btnClearCdnCache.setCommand(e -> clearCdnCache());
 

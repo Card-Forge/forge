@@ -27,30 +27,13 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 /**
- * Lazy-loading, thread-safe cache for Scryfall CDN UUIDs, generated on demand from Scryfall's
- * search API (see {@link ScryfallSetSync}) and cached locally at
- * {@code {cacheDir}/cdn_uuid/{setCode}.json.gz}. A {@code null} result lets the caller fall
- * back to rate-limited, non-CDN Scryfall image hosting.
+ * Thread-safe cache of Scryfall CDN image URLs, built on demand via {@link ScryfallSetSync}
+ * and stored at {@code {cacheDir}/cdn_uuid/{setCode}.json.gz}. Never blocks on network I/O:
+ * a miss queues the set for {@link #syncPendingSets} and returns {@code null}. An unresolved
+ * (cn, lang) is recorded as a timestamped miss so repeat lookups skip until it's stale
+ * (see {@link #trackMiss}).
  *
- * <p>Callers include interactive gameplay code that runs on the EDT/render thread, so a lookup
- * this can't answer from disk never blocks on network I/O itself: it queues the set code and
- * returns as if the data weren't there yet. {@link #syncPendingSets} does the actual work and
- * is submitted to the existing shared {@link ThreadUtil#getServicePool}, warming the cache for
- * the next lookup instead of the current one.
- *
- * <p>A (collector number, language) that a set's cached data genuinely doesn't have -- e.g. a
- * card released after the set was last synced -- is recorded as a negative-cache "miss" with
- * a timestamp; see {@link #trackMiss} for the retry policy.
- *
- * <p>Set JSON format:
- * <pre>
- *   {
- *     "1":   {"en": "uuid"},
- *     "2":   {"en": "uuid", "ja": "ja-uuid"},
- *     "A-40":{"en": ["frontUuid", "backUuid"]},
- *     "9":   {"en": {"miss": "2026-08-11T18:23:45.123Z"}}
- *   }
- * </pre>
+ * <p>Set JSON: {@code {"cn": {"lang": "uuid" | ["front","back"] | {"miss": timestamp}}}}
  */
 public final class CdnUuidCache {
 
@@ -83,12 +66,10 @@ public final class CdnUuidCache {
     /** Set codes a lookup couldn't answer locally, waiting for {@link #syncPendingSets}. */
     private static final Set<String> pendingSyncs = ConcurrentHashMap.newKeySet();
 
-    /** Submits {@link #syncPendingSets} to the shared pool for tests to disable. */
+    /** Submits {@link #syncPendingSets} to the shared pool; tests disable this. */
     static volatile boolean autoSyncEnabled = true;
 
-    /**
-     * Override for the local cache directory for tests.
-     */
+    /** Test override for the local cache directory. */
     static volatile String localCacheDirOverride = null;
 
     private CdnUuidCache() {}
@@ -96,14 +77,12 @@ public final class CdnUuidCache {
     /** Test helper */
     static void clearCacheForTesting() { setCache.clear(); }
 
-    /** The directory local set caches live in, honoring the test override. Package-private for {@link ScryfallSetSync}. */
+    /** Local set-cache directory, honoring the test override. */
     static String cacheDir() {
         return localCacheDirOverride != null ? localCacheDirOverride : ForgeConstants.CACHE_CDN_UUID_DIR;
     }
 
-    /**
-     * Deletes every locally cached CDN UUID set file and clears the in-memory cache.
-     */
+    /** Deletes every local cache file and clears the in-memory cache. */
     public static void clearCache() {
         setCache.clear();
         File dir = new File(cacheDir());
@@ -116,13 +95,9 @@ public final class CdnUuidCache {
     }
 
     /**
-     * Merges externally-sourced (collectorNumber → lang → [frontUuid, backUuidOrNull]) entries
-     * for {@code setCode} into its on-disk cache file. Called by {@link ScryfallSetSync} after
-     * (re)building a set from Scryfall's card search API.
-     *
-     * <p>A real entry already on disk is never overwritten -- a precise front/back pair can't be
-     * degraded by a later, less precise source -- but a miss record occupying the slot doesn't
-     * count as "already there", so real data always upgrades a miss.
+     * Merges (cn → lang → [front, back]) entries for {@code setCode} into its cache file.
+     * Never overwrites a real entry, but a miss record doesn't count as "already there" --
+     * real data always upgrades a miss.
      */
     static synchronized void mergeSetEntriesWithFaces(String setCode, Map<String, Map<String, String[]>> newEntries) {
         File file = localCacheFile(setCode);
@@ -153,11 +128,7 @@ public final class CdnUuidCache {
         setCache.remove(setCode); // force a re-read of the freshly-written file on next lookup
     }
 
-    /**
-     * Records that {@code (cn, lang)} has no real data in {@code setCode} as of now, so
-     * repeat lookups can short-circuit without hitting Scryfall again until
-     * {@link #MISS_RETRY_AFTER} has passed. Never overwrites a real entry already there.
-     */
+    /** Records {@code (cn, lang)} as missing as of now, so lookups skip retrying until {@link #MISS_RETRY_AFTER} passes. */
     private static synchronized void recordMiss(String setCode, String cn, String lang) {
         File file = localCacheFile(setCode);
         JsonObject setObj = readLocalJson(file);
@@ -197,14 +168,13 @@ public final class CdnUuidCache {
     }
 
     /**
-     * Returns the Scryfall CDN image URL for a given card face, or {@code null}
-     * if no UUID data is available.
+     * Returns the Scryfall CDN URL for a card face, or {@code null} if unavailable.
      *
-     * @param scryfallCode  lowercase Scryfall set code (e.g. {@code "ltr"})
-     * @param collectorNum  collector number as in Scryfall data (e.g. {@code "51"}, {@code "T1"})
-     * @param lang          preferred language code (e.g. {@code "en"}, {@code "ja"})
-     * @param face          {@code ""} or {@code "front"} for the front face; {@code "back"} for the back
-     * @param size          {@code "normal"} or {@code "art_crop"}
+     * @param scryfallCode lowercase Scryfall set code
+     * @param collectorNum collector number
+     * @param lang preferred language code
+     * @param face {@code ""}/{@code "front"} or {@code "back"}
+     * @param size {@code "normal"} or {@code "art_crop"}
      */
     public static String getCdnUrl(String scryfallCode, String collectorNum,
                                    String lang, String face, String size) {
@@ -242,10 +212,8 @@ public final class CdnUuidCache {
     }
 
     /**
-     * Neither {@code lang} nor its English fallback resolved to real data. A miss seen for the
-     * first time is recorded immediately (no network call). One already recorded and younger
-     * than {@link #MISS_RETRY_AFTER} is left alone -- also no network call. One older than that
-     * queues the set for {@link #syncPendingSets} to re-check.
+     * Records a first-time miss immediately. A miss younger than {@link #MISS_RETRY_AFTER}
+     * is left alone; an older one queues the set for {@link #syncPendingSets}.
      */
     private static void trackMiss(String setCode, Map<String, Map<String, LangUuids>> cardMap,
                                    String cn, String lang) {
@@ -271,10 +239,7 @@ public final class CdnUuidCache {
         }
     }
 
-    /**
-     * Synchronously syncs every set a lookup has queued (a never-seen set, or a stale miss due
-     * a retry) from Scryfall. Meant to run off the EDT/render thread -- see the class javadoc.
-     */
+    /** Syncs every queued set from Scryfall. Meant to run off the EDT/render thread. */
     public static void syncPendingSets() {
         for (String setCode : pendingSyncs) {
             if (!pendingSyncs.remove(setCode)) continue; // another thread already claimed it
@@ -283,7 +248,7 @@ public final class CdnUuidCache {
         }
     }
 
-    /** A miss still unresolved after a resync attempt just got reconfirmed -- refresh its timestamp. */
+    /** Refreshes the timestamp of any miss still unresolved after a resync. */
     private static void refreshStaleMisses(String setCode) {
         for (Map.Entry<String, Map<String, LangUuids>> cnEntry : readSetFromDisk(setCode).entrySet()) {
             for (Map.Entry<String, LangUuids> langEntry : cnEntry.getValue().entrySet()) {
@@ -294,13 +259,11 @@ public final class CdnUuidCache {
     }
 
     /**
-     * Builds a Scryfall CDN image URL from a card UUID. The CDN ({@code cards.scryfall.io})
-     * is not rate-limited; given a UUID and image size, the URL is fully deterministic:
-     * {@code https://cards.scryfall.io/{size}/{front|back}/{uuid[0]}/{uuid[1]}/{uuid}.jpg}.
+     * Builds the deterministic Scryfall CDN URL for a card UUID.
      *
-     * @param uuid  the Scryfall card UUID (e.g. {@code "4e7a547f-..."})
-     * @param side  {@code "front"} or {@code "back"}
-     * @param size  {@code "normal"} or {@code "art_crop"}
+     * @param uuid Scryfall card UUID
+     * @param side {@code "front"} or {@code "back"}
+     * @param size {@code "normal"} or {@code "art_crop"}
      */
     public static String cdnUrl(String uuid, String side, String size) {
         return "https://cards.scryfall.io/" + size + "/" + side
@@ -323,9 +286,8 @@ public final class CdnUuidCache {
         Map<String, Map<String, LangUuids>> onDisk = readSetFromDisk(setCode);
         if (onDisk != MISSING_SET) return onDisk;
 
-        // Nothing local yet -- queue this set for syncPendingSets instead of blocking on network
-        // I/O here. ScryfallSetSync merges its results into the local cache file and evicts
-        // setCache when it's done, so the next lookup picks up whatever it found.
+        // Nothing local yet -- queue instead of blocking; the next lookup picks up whatever
+        // syncPendingSets finds.
         queueSync(setCode);
         return MISSING_SET;
     }
@@ -372,10 +334,7 @@ public final class CdnUuidCache {
         return parseSetObject(readGzipJson(file));
     }
 
-    /**
-     * Parses a set JSON object.
-     * Format: {@code {"cn": {"lang": "uuid"|["frontUuid","backUuid"]|{"miss": timestamp}}, ...}}
-     */
+    /** Format: {@code {"cn": {"lang": "uuid"|["front","back"]|{"miss": timestamp}}}} */
     private static Map<String, Map<String, LangUuids>> parseSetObject(JsonObject setObj) {
         Map<String, Map<String, LangUuids>> cardMap = new HashMap<>(setObj.size() * 2);
         for (Map.Entry<String, JsonElement> cnEntry : setObj.entrySet()) {

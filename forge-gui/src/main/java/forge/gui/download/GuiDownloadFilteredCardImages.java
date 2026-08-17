@@ -17,14 +17,8 @@ import java.util.TreeMap;
 import java.util.function.Predicate;
 
 /**
- * Downloads card images for all cards that match the supplied predicate.
- *
- * URL priority per card face:
- *  1. cards.scryfall.io CDN (not rate-limited) — via {@link CdnUuidCache}, which resolves
- *     from its local cache or syncs the set from Scryfall on demand
- *  2. api.scryfall.com per-card API (rate-limited, 100 ms/request) — fallback when
- *     no UUID is available but the card has a collector number
- *  3. cardforge hosted server — final fallback
+ * Downloads card images for all cards matching the predicate.
+ * Per face: CDN via {@link CdnUuidCache}, then the rate-limited Scryfall API, then cardforge.
  */
 public class GuiDownloadFilteredCardImages extends GuiDownloadService {
 
@@ -80,15 +74,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         downloads.put(destFull.getAbsolutePath(), url);
     }
 
-    /**
-     * Returns the best available download URL for one card face.
-     *
-     * Priority:
-     *  1. cards.scryfall.io CDN URL via {@link CdnUuidCache} (no rate limit)
-     *  2. api.scryfall.com per-card API URL (rate-limited; GuiDownloadService
-     *     enforces 100 ms between requests to api.scryfall.com URLs automatically)
-     *  3. cardforge hosted server
-     */
+    /** Best available download URL for one face: CDN, then Scryfall API, then cardforge. */
     private static String buildUrl(PaperCard c, String face) {
         final String collectorNum = c.getCollectorNumber();
         final boolean hasCollectorNum = !IPaperCard.NO_COLLECTOR_NUMBER.equals(collectorNum)
@@ -100,21 +86,21 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         String scryfallCode = (edition != null) ? edition.getScryfallCode() : null;
         boolean hasScryfallCode = !StringUtils.isBlank(scryfallCode);
 
-        // 1. CDN — fast, no rate limit; resolved (or synced on demand) via CdnUuidCache
+        // 1. CDN
         if (edition != null && hasCollectorNum && hasScryfallCode) {
             String cdnUrl = CdnUuidCache.getCdnUrl(
                     scryfallCode, collectorNum, edition.getCardsLangCode(), face, "normal");
             if (cdnUrl != null) return cdnUrl;
         }
 
-        // 2. Scryfall per-card API — rate-limited (100 ms/request via GuiDownloadService)
+        // 2. Scryfall API
         if (hasCollectorNum && edition != null && hasScryfallCode) {
             String apiPath = ImageUtil.getScryfallDownloadUrl(
                     c, face, scryfallCode, edition.getCardsLangCode(), false);
             if (apiPath != null) return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + apiPath;
         }
 
-        // 3. Cardforge hosted server
+        // 3. Cardforge
         String cardforgeUrl = ImageUtil.getDownloadUrl(c, face);
         return cardforgeUrl != null ? ForgeConstants.URL_PIC_DOWNLOAD + cardforgeUrl : null;
     }

@@ -17,12 +17,9 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 /**
- * All UUID data here is seeded straight into the local cache dir (gzip-compressed,
- * exactly as {@link CdnUuidCache} writes it) rather than served from anywhere remote —
- * there's no hosted data source anymore. {@link ScryfallSetSync#searchBaseUrlOverride}
- * points at an unreachable address so any lookup that isn't pre-seeded fails fast
- * instead of hitting the real Scryfall API; on-demand generation from Scryfall itself
- * is covered by {@link ScryfallSetSyncTest}.
+ * UUID data is pre-seeded into the local cache dir (gzip, as {@link CdnUuidCache} writes it).
+ * {@link ScryfallSetSync#searchBaseUrlOverride} points at an unreachable address so an
+ * unseeded lookup fails fast; on-demand generation is covered by {@link ScryfallSetSyncTest}.
  */
 @Test(groups = {"UnitTest"})
 public class CdnUuidCacheTest {
@@ -56,11 +53,10 @@ public class CdnUuidCacheTest {
                 + "\"2\":{\"en\":[\"" + UUID_FRONT + "\",\"" + UUID_FRONT + "\"]}"
                 + "}");
 
-        // SET_ABSENT has no local file and the Scryfall override is unreachable —
-        // lookups must return null rather than hang or hit the real API.
+        // SET_ABSENT has no local file; the Scryfall override is unreachable.
 
         CdnUuidCache.localCacheDirOverride = localCacheDir.getAbsolutePath() + File.separator;
-        CdnUuidCache.autoSyncEnabled = false; // these tests drive misses synchronously, not via the background pool
+        CdnUuidCache.autoSyncEnabled = false; // drive misses synchronously, not via the pool
         ScryfallSetSync.searchBaseUrlOverride = "http://127.0.0.1:1/unreachable";
         CdnUuidCache.clearCacheForTesting();
     }
@@ -191,9 +187,7 @@ public class CdnUuidCacheTest {
 
     @Test(dependsOnMethods = "unknownCollectorNumber_returnsNull")
     public void missingEntry_isPersistedAsTimestampedMiss() throws IOException {
-        // The prior lookup for cn 9999 (unresolvable, and the Scryfall override is
-        // unreachable so no retry could have succeeded) should have recorded a miss
-        // marker on disk rather than just silently returning null every time.
+        // The prior lookup for cn 9999 should have recorded a miss marker on disk.
         String raw = readGunzipped(new File(localCacheDir, SET + ".json.gz"));
         Assert.assertTrue(raw.contains("\"9999\""), "miss should be recorded under its collector number: " + raw);
         Assert.assertTrue(raw.contains("\"miss\""), "miss should be recorded with the miss marker: " + raw);
@@ -205,16 +199,13 @@ public class CdnUuidCacheTest {
 
     @Test(dependsOnMethods = "missingEntry_isPersistedAsTimestampedMiss")
     public void freshMiss_stillReturnsNullOnRepeatLookup() {
-        // The miss recorded above is only seconds old -- well under the 1-day retry
-        // window -- so this must short-circuit to null again without touching the
-        // (unreachable) Scryfall override.
+        // The miss recorded above is fresh, well under the retry window.
         Assert.assertNull(CdnUuidCache.getCdnUrl(SET, "9999", "en", "front", "normal"));
     }
 
     @Test
     public void recordedMiss_upgradesToRealEntryOnceMerged() {
-        // Simulate ScryfallSetSync later finding this card (e.g. after a resync
-        // triggered by a stale miss): a real entry must overwrite the miss marker.
+        // A real entry found later (e.g. via a resync) must overwrite the miss marker.
         Map<String, String[]> cn7 = new HashMap<>();
         cn7.put("en", new String[]{UUID_EN, null});
         Map<String, Map<String, String[]>> found = new HashMap<>();

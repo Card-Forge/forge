@@ -19,22 +19,10 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 /**
- * Builds the local CDN UUID cache for a single set, on demand, straight from
- * Scryfall's card search API — the client-side equivalent of what the old
- * forge-extras/CLI generator did against a full bulk-data export, but scoped
- * to exactly the set a lookup just missed on, so nothing needs to be
- * pre-generated or hosted anywhere.
- *
- * <p>The search API returns each card's own {@code image_uris} (single-faced) or
- * {@code card_faces[].image_uris} (double-faced), so the UUID is read out of the
- * actual CDN image URL for each face rather than assumed from the card's {@code id}.
- * That matters for a small number of double-faced cards (e.g. a couple of Secret
- * Lair prints) whose back face uses a genuinely different artwork UUID than the
- * card's {@code id}.
- *
- * <p>A card this doesn't find (e.g. released after the set was last synced) is left
- * for {@link CdnUuidCache} to record as a timestamped miss and retry later, rather
- * than retried here.
+ * Builds one set's CDN UUID mapping from Scryfall's card search API, on demand.
+ * Reads each face's own image URL rather than assuming from the card's {@code id},
+ * so double-faced cards with distinct front/back art resolve correctly.
+ * A card not found here is left for {@link CdnUuidCache} to record as a retryable miss.
  */
 final class ScryfallSetSync {
 
@@ -50,10 +38,8 @@ final class ScryfallSetSync {
     private ScryfallSetSync() {}
 
     /**
-     * Fetches every print of {@code setCode} (all languages) from Scryfall and merges
-     * the result into {@link CdnUuidCache}'s local cache for that set.
-     *
-     * @return {@code true} if any card data was found and cached for this set
+     * Fetches every print of {@code setCode} from Scryfall and merges it into the cache.
+     * @return true if anything was found and cached
      */
     static boolean sync(String setCode) {
         Map<String, Map<String, String[]>> byCn = new HashMap<>();
@@ -108,10 +94,8 @@ final class ScryfallSetSync {
         } else {
             return; // no image data for this card
         }
-        // No real image yet (e.g. a placeholder like errors.scryfall.com/soon.jpg for an
-        // unreleased/preview card): leave this (cn, lang) unmerged so CdnUuidCache records
-        // it as a retryable miss, rather than guessing a UUID that may never become valid
-        // and would then be stuck forever (merged "real" data is never overwritten).
+        // No image yet (placeholder URL) -- leave unmerged so CdnUuidCache retries later
+        // instead of permanently recording a guessed UUID.
         if (front == null) return;
 
         byCn.computeIfAbsent(cn, k -> new HashMap<>()).put(lang, new String[]{front, back});
@@ -122,12 +106,7 @@ final class ScryfallSetSync {
         return imageUris.has("normal") ? imageUris.get("normal").getAsString() : null;
     }
 
-    /**
-     * Extracts the UUID segment from a Scryfall CDN image URL
-     * ({@code https://cards.scryfall.io/normal/front/4/e/{uuid}.jpg?timestamp}), or
-     * {@code null} for a non-CDN URL (e.g. the {@code errors.scryfall.com/soon.jpg}
-     * placeholder Scryfall serves for a card with no image yet).
-     */
+    /** UUID segment of a Scryfall CDN URL, or {@code null} for a non-CDN placeholder URL. */
     private static String uuidFromUrl(String url) {
         if (url == null || !url.contains("cards.scryfall.io")) return null;
         int qmark = url.indexOf('?');

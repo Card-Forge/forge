@@ -21,15 +21,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.GZIPOutputStream;
 
 /**
- * Exercises {@link ScryfallSetSync} — the on-demand, per-set generator that
- * {@link CdnUuidCache} falls back to when a set has no local data yet — against
- * a tiny embedded HTTP server standing in for {@code api.scryfall.com/cards/search},
- * so these run offline and don't depend on Scryfall's real catalog.
- *
- * <p>CdnUuidCache never blocks the caller on network I/O: a lookup that needs Scryfall
- * data queues the set code and returns immediately as if the data weren't there.
- * {@code autoSyncEnabled} is disabled here so tests drive the queue synchronously via
- * {@link CdnUuidCache#syncPendingSets} instead of racing a real background submission.
+ * Exercises {@link ScryfallSetSync} against an embedded HTTP server standing in for
+ * {@code api.scryfall.com/cards/search}, offline. {@code autoSyncEnabled} is disabled so
+ * tests drive {@link CdnUuidCache#syncPendingSets} synchronously instead of racing a real
+ * background submission.
  */
 @Test(groups = {"UnitTest"})
 public class ScryfallSetSyncTest {
@@ -134,11 +129,7 @@ public class ScryfallSetSyncTest {
                 + ",\"data\":[" + String.join(",", entries) + "]}";
     }
 
-    /**
-     * A cold lookup only queues the set and returns {@code null} immediately. This triggers
-     * it, runs the queue synchronously, and re-queries for the (now-resolved, or still-absent)
-     * result.
-     */
+    /** Triggers a cold lookup, (cdn) syncs (operation) synchronously, then re-queries for the result. */
     private static String resolveAfterSync(String set, String cn, String lang, String face, String size) {
         CdnUuidCache.getCdnUrl(set, cn, lang, face, size);
         CdnUuidCache.syncPendingSets();
@@ -240,8 +231,7 @@ public class ScryfallSetSyncTest {
     }
 
     // -------------------------------------------------------------------------
-    // Miss-record retry: CdnUuidCache persists a timestamped "miss" for a (cn, lang) it
-    // can't find in an already-synced set, and only re-hits Scryfall once that's stale.
+    // Miss-record retry
 
     private static void writeGzip(File f, String content) throws IOException {
         try (GZIPOutputStream gz = new GZIPOutputStream(new FileOutputStream(f))) {
@@ -268,8 +258,6 @@ public class ScryfallSetSyncTest {
                 "{\"9\":{\"en\":{\"miss\":\"2020-01-01T00:00:00Z\"}}}");
         pages.put(1, page(false, 1, singleFaced("99999999-0000-0000-0000-000000000009", "9", "en")));
 
-        // The triggering call still sees the stale miss and returns null; the retry is only
-        // queued, not run synchronously -- syncPendingSets() is what actually performs it.
         String immediate = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
         Assert.assertNull(immediate, "the retry is only queued, not run synchronously");
         CdnUuidCache.syncPendingSets();
