@@ -20,6 +20,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbilityCantBeBeamedUp;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -1876,7 +1877,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("canBeBeamedUp")) {
-            if (card.hasKeyword("CARDNAME can't be beamed up.")) {
+            if (StaticAbilityCantBeBeamedUp.cantBeBeamedUp(card)) {
                 return false;
             }
         } else if (property.equals("NoAbilities")) {
