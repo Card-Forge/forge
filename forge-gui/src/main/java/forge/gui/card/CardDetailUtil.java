@@ -656,6 +656,14 @@ public class CardDetailUtil {
             area.append("\n\n");
             area.append("Owner: ").append(card.getOwner().toString());
         }
+
+        if (card.hasPreparedSpell()) {
+            area.append("\n\n");
+            area.append("Prepared — "
+                + card.getBackSideName() + " "
+                + card.getAlternateState().getManaCost().toString() + ":"
+                + card.getAlternateState().getAbilityText());
+        }
         return area.toString().trim();
     }
 }
