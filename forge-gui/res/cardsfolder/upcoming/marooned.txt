@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Artifact,Creature:artifact or creature
 SVar:AttachAILogic:Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When this Aura enters, you may pay {3}. If you do, tap enchanted permanent.
-SVar:TrigTap:DB$ Tap | Defined$ Enchanted | UnlessCost$ 3 | UnlessPayer$ You | UnlessSwitched$ True
+SVar:TrigTap:AB$ Tap | Defined$ Enchanted | Cost$ 3
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Permanent.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted permanent doesn't untap during its controller's untap step and can't be beamed up.
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddKeyword$ CARDNAME can't be beamed up.
 Oracle:Enchant artifact or creature\nWhen this Aura enters, you may pay {3}. If you do, tap enchanted permanent.\nEnchanted permanent doesn't untap during its controller's untap step and can't be beamed up.
