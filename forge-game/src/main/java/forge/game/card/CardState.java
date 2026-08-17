@@ -467,26 +467,12 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return result;
     }
     public final FCollectionView<SpellAbility> getManaAbilities() {
-        FCollection<SpellAbility> result = new FCollection<>(abilities);
-        if (getStateName().equals(CardStateName.Original)) {
-            if (getCard().hasState(CardStateName.LeftSplit))
-                result.addAll(getCard().getState(CardStateName.LeftSplit).abilities);
-            if (getCard().hasState(CardStateName.RightSplit))
-                result.addAll(getCard().getState(CardStateName.RightSplit).abilities);
-        }
-        card.updateSpellAbilities(result, this);
+        FCollectionView<SpellAbility> result = getSpellAbilities();
         result.removeIf(Predicate.not(SpellAbility::isManaAbility));
         return result;
     }
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
-        FCollection<SpellAbility> result = new FCollection<>(abilities);
-        if (getStateName().equals(CardStateName.Original)) {
-            if (getCard().hasState(CardStateName.LeftSplit))
-                result.addAll(getCard().getState(CardStateName.LeftSplit).abilities);
-            if (getCard().hasState(CardStateName.RightSplit))
-                result.addAll(getCard().getState(CardStateName.RightSplit).abilities);
-        }
-        card.updateSpellAbilities(result, this);
+        FCollectionView<SpellAbility> result = getSpellAbilities();
         result.removeIf(SpellAbility::isManaAbility);
         return result;
     }
