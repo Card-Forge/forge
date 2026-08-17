@@ -659,9 +659,9 @@ public class CardDetailUtil {
 
         if (card.hasPreparedSpell()) {
             area.append("\n\n");
-            area.append("Prepared — "
+            area.append(Localizer.getInstance().getMessage("lblPrepared") + " — "
                 + card.getAlternateStateName() + " "
-                + card.getAlternateState().getManaCost().toString() + ":"
+                + card.getAlternateState().getManaCost().toString() + ": "
                 + card.getAlternateState().getAbilityText()
             );
         }
