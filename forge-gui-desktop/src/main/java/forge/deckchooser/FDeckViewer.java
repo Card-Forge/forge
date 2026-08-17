@@ -2,6 +2,7 @@ package forge.deckchooser;
 
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.game.card.CardView;
 import forge.gui.CardDetailPanel;
@@ -56,21 +57,31 @@ public class FDeckViewer extends FDialog {
         show(deck, false);
     }
 
+    public static void show(final DeckProxy deckProxy) {
+        if (deckProxy == null) { return; }
+        final Deck deck = deckProxy.getDeck();
+        show(deck, deckProxy, deckProxy.isCommanderDeck(deck));
+    }
+
     public static void show(final Deck deck, final boolean showCommanderBracket) {
+        show(deck, null, showCommanderBracket);
+    }
+
+    private static void show(final Deck deck, final DeckProxy deckProxy, final boolean showCommanderBracket) {
         if (deck == null) { return; }
 
-        final FDeckViewer deckViewer = new FDeckViewer(deck, showCommanderBracket);
+        final FDeckViewer deckViewer = new FDeckViewer(deck, deckProxy, showCommanderBracket);
         deckViewer.setVisible(true);
         deckViewer.dispose();
     }
 
-    private FDeckViewer(final Deck deck0, final boolean showCommanderBracket) {
+    private FDeckViewer(final Deck deck0, final DeckProxy deckProxy, final boolean showCommanderBracket) {
         this.deck = deck0;
         this.setTitle(deck.getName());
         this.cardManager = new CardManager(null, false, false, false) {
             {
                 if (showCommanderBracket) {
-                    addView(new CommanderBracketDeckView(this, getModel(), FDeckViewer.this.deck));
+                    addView(new CommanderBracketDeckView(this, getModel(), FDeckViewer.this.deck, deckProxy));
                 }
             }
 
