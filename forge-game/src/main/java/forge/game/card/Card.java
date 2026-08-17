@@ -3117,7 +3117,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             sb.append("\r\n");
         }
 
-        if (hasState(CardStateName.PreparedSpell) && state.getStateName().equals(CardStateName.Original)) {
+        /*if (hasState(CardStateName.PreparedSpell) && state.getStateName().equals(CardStateName.Original)) {
             CardState prepState = getState(CardStateName.PreparedSpell);
             SpellAbility prepSA = prepState.getFirstSpellAbility();
             if (prepSA != null) {
@@ -3127,7 +3127,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 sb.append(": ");
                 sb.append(prepSA);
             }
-        }
+        }*/
 
         // replace triple line feeds with double line feeds
         final String s = "\r\n\r\n\r\n";
