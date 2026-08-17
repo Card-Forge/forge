@@ -35,7 +35,14 @@ jobs:
 
       - name: Check backlog
         id: behind
-        run: echo "behind=$(git rev-list --count master..forge/master)" >> "$GITHUB_OUTPUT"
+        # Honest count: raw SHA count over-counts because fork cherry-picks
+        # upstream commits (same patch-id, different SHA). git cherry reports
+        # only commits whose content is actually absent from master.
+        run: |
+          RAW=$(git rev-list --count master..forge/master)
+          HONEST=$(git cherry master forge/master | grep -c '^+')
+          echo "raw=$RAW happy=$HONEST (content-absent commits)"
+          echo "behind=$HONEST" >> "$GITHUB_OUTPUT"
 
       - name: Merge upstream into sync branch
         if: steps.behind.outputs.behind > 0
@@ -49,10 +56,25 @@ jobs:
           fi
           git merge --no-edit master
           git merge --no-edit forge/master
-          if [ -n "$(git ls-files -u)" ]; then
-            echo "::error::Merge conflicts with upstream. Resolve manually:"
+          # Fork-owned files: the fork intentionally keeps its own version
+          # (branding; custom SwingImageFetcher). Upstream changes there are
+          # folded in manually via cherry-pick when wanted, so auto-resolve
+          # with --ours and let the rest of the merge land.
+          FORK_OWNED="README.md docs/Home.md forge-gui-desktop/src/main/java/forge/util/SwingImageFetcher.java"
+          CONFLICTS=$(git ls-files -u | awk '{print $4}' | sort -u)
+          UNEXPECTED=$(comm -23 <(echo "$CONFLICTS") <(echo "$FORK_OWNED" | tr ' ' '\n' | sort))
+          if [ -n "$UNEXPECTED" ]; then
+            echo "::error::Unexpected merge conflicts with upstream:"
+            echo "$UNEXPECTED"
+            echo "::error::Resolve manually:"
             echo "::error::  git fetch forge && git checkout -b sync/upstream origin/sync/upstream && git merge forge/master"
             exit 1
+          fi
+          if [ -n "$CONFLICTS" ]; then
+            git checkout --ours -- $CONFLICTS
+            git add $CONFLICTS
+            git commit --no-edit
+            echo "::warning::Auto-resolved fork-owned files (kept fork version): $CONFLICTS"
           fi
 
       - name: Push sync branch
