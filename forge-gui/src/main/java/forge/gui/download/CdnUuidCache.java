@@ -40,6 +40,31 @@ public final class CdnUuidCache {
     private static final String FALLBACK_LANG    = "en";
     private static final Duration MISS_RETRY_AFTER = Duration.ofDays(1);
 
+    /**
+     * Every Scryfall language code observed
+     */
+    public static final String[] LANGUAGE_CODES = {
+            "ar",  // Arabic
+            "de",  // German
+            "dw",  // Dwarvish (joke/funny-set language)
+            "en",  // English
+            "es",  // Spanish
+            "fr",  // French
+            "grc", // Ancient Greek
+            "he",  // Hebrew
+            "it",  // Italian
+            "ja",  // Japanese
+            "ko",  // Korean
+            "la",  // Latin
+            "ph",  // Phyrexian
+            "pt",  // Portuguese
+            "qya", // Quenya
+            "ru",  // Russian
+            "sa",  // Sanskrit
+            "zhs", // Chinese Simplified
+            "zht"  // Chinese Traditional
+    };
+
     /** Used when set was looked up and no data exists. */
     private static final Map<String, Map<String, LangUuids>> MISSING_SET = Collections.emptyMap();
 
