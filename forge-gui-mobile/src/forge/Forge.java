@@ -28,7 +28,9 @@ import forge.error.ExceptionHandler;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.download.CdnUuidCache;
 import forge.gui.error.BugReporter;
+import forge.gui.util.SOptionPane;
 import forge.interfaces.IDeviceAdapter;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
@@ -43,6 +45,7 @@ import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
+import forge.screens.settings.CardImageBrowserScreen;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.*;
@@ -360,6 +363,29 @@ public class Forge implements ApplicationListener {
             System.out.println(fScreen.toString());*/
     }
 
+    /**
+     * First run (or cache cleared): offer the one-time bulk CDN sync so later card image
+     * downloads resolve instantly instead of one Scryfall set at a time. Call only once a real
+     * home/adventure screen is open -- not while the mode-selector splash is still showing.
+     */
+    public static void maybePromptForBulkCdnSync() {
+        boolean hasCache = CdnUuidCache.hasAnyCachedSets();
+        System.out.println("maybePromptForBulkCdnSync: cacheDir=" + CdnUuidCache.cacheDir() + " hasAnyCachedSets=" + hasCache);
+        if (hasCache) {
+            return;
+        }
+        System.out.println("maybePromptForBulkCdnSync: showing prompt");
+        FThreads.invokeInBackgroundThread(() -> {
+            boolean confirmed = SOptionPane.showConfirmDialog(
+                    getLocalizer().getMessage("lblFirstRunBulkCdnPrompt"),
+                    "Forge", "Download Now", "Not Now", true);
+            System.out.println("maybePromptForBulkCdnSync: user answered confirmed=" + confirmed);
+            if (confirmed) {
+                CardImageBrowserScreen.openAndAutoStartBulkSync();
+            }
+        });
+    }
+
     public static void openHomeDefault() {
         //default to English only if CJK is missing
         getLocalizer().setEnglish(forcedEnglishonCJKMissing);
@@ -451,25 +477,35 @@ public class Forge implements ApplicationListener {
                     }
                     //selection transition
                     setTransitionScreen(new TransitionScreen(() -> {
+                        boolean openedRealScreen;
                         if (createNewAdventureMap) {
                             openAdventure();
                             clearSplashScreen();
+                            openedRealScreen = true;
                         } else {
                             if (selector.equals("Classic")) {
                                 openHomeDefault();
                                 clearSplashScreen();
+                                openedRealScreen = true;
                             } else if (selector.equals("Adventure")) {
                                 openAdventure();
                                 clearSplashScreen();
+                                openedRealScreen = true;
                             } else if (splashScreen != null) {
                                 splashScreen.setShowModeSelector(true);
+                                openedRealScreen = false;
                             } else {//default mode in case splashscreen is null at some point as seen on resume..
                                 openHomeDefault();
                                 clearSplashScreen();
+                                openedRealScreen = true;
                             }
                         }
                         safeToClose = true;
                         clearTransitionScreen();
+                        System.out.println("afterDbLoaded: TransitionScreen callback done, openedRealScreen=" + openedRealScreen + ", selector=" + selector);
+                        if (openedRealScreen) {
+                            maybePromptForBulkCdnSync();
+                        }
                         if (GuiBase.isIOS()) {
                             // POST-LOAD memory reclaim (iOS): booting parses ~32k card rules +
                             // builds ~100k PaperCards + loads skin assets — a large transient

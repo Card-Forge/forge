@@ -188,11 +188,21 @@ public class DialogDownloadCardImages {
         SOptionPane.showMessageDialog(localizer.getMessage("lblCdnImageCacheCleared"));
     }
 
+    /** Called after {@link #show()} to open straight into a confirmed bulk sync (e.g. the first-run prompt). */
+    public void showAndAutoStartBulkSync() {
+        show();
+        runBulkSync();
+    }
+
     /** Resolves CDN links for every set at once from Scryfall's bulk data export, instead of one set at a time. */
     private void startBulkSync() {
         if (!SOptionPane.showConfirmDialog(localizer.getMessage("lblSyncBulkCardDataConfirm"))) {
             return;
         }
+        runBulkSync();
+    }
+
+    private void runBulkSync() {
         btnDownload.setEnabled(false);
         btnSyncBulkData.setEnabled(false);
         btnClearCdnCache.setEnabled(false);

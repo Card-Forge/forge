@@ -185,6 +185,15 @@ public class CardImageBrowserScreen extends FScreen {
     //  Bulk data sync: resolve CDN links for every set at once
     // =========================================================================
 
+    /** Opens the screen and immediately starts a bulk sync that's already been confirmed elsewhere (e.g. the first-run prompt). Safe to call from any thread. */
+    public static void openAndAutoStartBulkSync() {
+        FThreads.invokeInEdtLater(() -> {
+            CardImageBrowserScreen screen = new CardImageBrowserScreen();
+            Forge.openScreen(screen);
+            screen.runBulkSync();
+        });
+    }
+
     private void startBulkSync() {
         // SOptionPane.showConfirmDialog() blocks its caller while the dialog renders on the EDT,
         // so it must never be called directly from a tap handler (which runs on the EDT itself)
@@ -193,7 +202,13 @@ public class CardImageBrowserScreen extends FScreen {
             if (!SOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSyncBulkCardDataConfirm"))) {
                 return;
             }
+            runBulkSync();
+        });
+    }
 
+    /** Runs the sync itself; always hops onto its own background thread, so it's safe to call from the EDT or not. */
+    private void runBulkSync() {
+        FThreads.invokeInBackgroundThread(() -> {
             FThreads.invokeInEdtLater(() -> {
                 btnDownload.setEnabled(false);
                 btnSyncBulkData.setEnabled(false);

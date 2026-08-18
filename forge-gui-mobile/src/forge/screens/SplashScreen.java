@@ -226,6 +226,8 @@ public class SplashScreen extends FContainer {
                 else
                     Forge.openHomeDefault();
                 Forge.clearSplashScreen();
+                System.out.println("SplashScreen.BgAnimation.onEnd: openAdventure=" + openAdventure);
+                Forge.maybePromptForBulkCdnSync();
             }
         }
     }

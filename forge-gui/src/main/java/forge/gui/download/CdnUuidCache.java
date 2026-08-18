@@ -78,7 +78,7 @@ public final class CdnUuidCache {
     static void clearCacheForTesting() { setCache.clear(); }
 
     /** Local set-cache directory, honoring the test override. */
-    static String cacheDir() {
+    public static String cacheDir() {
         return localCacheDirOverride != null ? localCacheDirOverride : ForgeConstants.CACHE_CDN_UUID_DIR;
     }
 
@@ -89,6 +89,12 @@ public final class CdnUuidCache {
      */
     public static boolean isSetCached(String scryfallCode) {
         return scryfallCode != null && localCacheFile(scryfallCode.toLowerCase()).exists();
+    }
+
+    /** Whether any set has ever been synced locally. Used to offer a one-time bulk warm-up on first run. */
+    public static boolean hasAnyCachedSets() {
+        File[] files = new File(cacheDir()).listFiles((dir, name) -> name.endsWith(".json.gz"));
+        return files != null && files.length > 0;
     }
 
     /** Deletes every local cache file and clears the in-memory cache. */
