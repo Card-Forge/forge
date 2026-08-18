@@ -1419,7 +1419,7 @@ public class Game {
 
     public boolean isVoid() {
         return getLeftBattlefieldThisTurn().stream().anyMatch(c -> !c.isLand()) ||
-                getStack().getSpellsCastThisTurn().stream().anyMatch(SpellAbility::isWarp);
+                getStack().getSpellsCastThisTurn().values().stream().anyMatch(SpellAbility::isWarp);
     }
 
     public int getAITimeout() {
