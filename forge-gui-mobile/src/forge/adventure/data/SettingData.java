@@ -22,6 +22,7 @@ public class SettingData {
     public boolean disableWinLose;
     public boolean disableNotForSale;
     public boolean showShopOverlay;
+    public boolean showDungeonDifficultyRatings = true;
     public boolean useAllCardVariants;
     public boolean disableCrackedItems;
     public boolean excludeAlchemyVariants;

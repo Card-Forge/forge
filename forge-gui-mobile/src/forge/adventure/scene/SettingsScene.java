@@ -8,6 +8,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.Graphics;
+import forge.adventure.data.PointOfInterestData;
 import forge.adventure.data.RewardData;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
@@ -233,6 +234,18 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
+        boolean challengeRatingsAvailable = PointOfInterestData.hasChallengeRatings();
+        CheckBox showDungeonDifficultyRatings = addSettingField(
+                Forge.getLocalizer().getMessageorUseDefault("lblShowDungeonDifficultyRatings", "Display dungeon difficulty ratings"),
+                challengeRatingsAvailable && Config.instance().getSettingData().showDungeonDifficultyRatings,
+                new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        Config.instance().getSettingData().showDungeonDifficultyRatings = ((CheckBox) actor).isChecked();
+                        Config.instance().saveSettings();
+                    }
+                });
+        showDungeonDifficultyRatings.setDisabled(!challengeRatingsAvailable);
         addSettingField(Forge.getLocalizer().getMessage("lblUseAllCardVariants"), Config.instance().getSettingData().useAllCardVariants, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -435,12 +448,13 @@ public class SettingsScene extends UIScene {
         settingGroup.add(slide).align(Align.right);
     }
 
-    private void addSettingField(String name, boolean value, ChangeListener change) {
+    private CheckBox addSettingField(String name, boolean value, ChangeListener change) {
         CheckBox box = Controls.newCheckBox("");
         box.setChecked(value);
         box.addListener(change);
         addLabel(name);
         settingGroup.add(box).align(Align.right);
+        return box;
     }
 
     private void addSettingField(String name, int value, ChangeListener change) {

@@ -39,6 +39,7 @@ import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.data.AdventureQuestData;
+import forge.adventure.data.ChallengeRating;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.DeckSelectScene;
@@ -395,9 +396,9 @@ public class GameHUD extends Stage {
             case "town":
                 if (MapStage.getInstance().isInMap()) {
                     int rep = TileMapScene.instance().getPointOfInterestChanges().getMapReputation();
-                    String reputationText = TileMapScene.instance().rootPoint.getDisplayName() + "\nReputation: " + (rep > 0 ? "[GREEN]" : rep < 0 ? "[RED]" : "[WHITE]") + rep + "[/]";
+                    String reputationText = getLocationNotificationName() + "\nReputation: " + (rep > 0 ? "[GREEN]" : rep < 0 ? "[RED]" : "[WHITE]") + rep + "[/]";
                     if (fromWorldMap) {
-                        addNotification(reputationText);
+                        addLocationNotification(reputationText, isLocationChallengeRatingVisible());
                         fromWorldMap = false;
                     }
                 }
@@ -406,7 +407,7 @@ public class GameHUD extends Stage {
             case "cave":
             case "castle":
                 if (fromWorldMap) {
-                    addNotification(TileMapScene.instance().rootPoint.getDisplayName());
+                    addLocationNotification(getLocationNotificationName(), isLocationChallengeRatingVisible());
                     fromWorldMap = false;
                 }
                 break;
@@ -438,6 +439,20 @@ public class GameHUD extends Stage {
             updateBookmarkActor(MapStage.getInstance().getChanges().isBookmarked());
         updateEnemyCounter();
         avatarGroup.setZIndex(ui.getChildren().size);
+    }
+
+    private String getLocationNotificationName() {
+        String displayName = TileMapScene.instance().rootPoint.getDisplayName();
+        ChallengeRating rating = TileMapScene.instance().rootPoint.getData().getChallengeRating();
+        if (!isLocationChallengeRatingVisible()) {
+            return displayName;
+        }
+        return displayName + rating.getNotificationBullet();
+    }
+
+    private boolean isLocationChallengeRatingVisible() {
+        return TileMapScene.instance().rootPoint.getData().getChallengeRating() != null
+                && Config.instance().getSettingData().showDungeonDifficultyRatings;
     }
 
     void updateKeys() {
@@ -1094,12 +1109,21 @@ public class GameHUD extends Stage {
     }
 
     public void addNotification(String text) {
+        addNotification(text, false);
+    }
+
+    private void addLocationNotification(String text, boolean preserveMarkupColors) {
+        notificationPane.clearActions();
+        addNotification(text, preserveMarkupColors);
+    }
+
+    private void addNotification(String text, boolean preserveMarkupColors) {
         Action preconfigureNotification = new Action() {
             @Override
             public boolean act(float delta) {
                 notificationText.setWrap(false);
-                notificationText.setText(text);
-                notificationText.setColor(Color.BLACK);
+                notificationText.setText(preserveMarkupColors ? "[BLACK]" + text : text);
+                notificationText.setColor(preserveMarkupColors ? Color.WHITE : Color.BLACK);
                 notificationText.setWidth(Math.min(notificationText.getPrefWidth(), Forge.isLandscapeMode() ? getWidth() * 0.25f : getWidth() - 25));
                 notificationText.setWrap(true);
                 notificationText.layout();
@@ -1135,6 +1159,7 @@ public class GameHUD extends Stage {
     }
 
     public void clearNotifications() {
+        notificationPane.clearActions();
         notificationText.setText("");
         notificationPane.setBounds(5, Forge.isLandscapeMode() ? -notificationText.getPrefHeight() : getHeight(), getWidth() * 0.4f, 25);
         notificationPane.setStyle(Controls.getSkin().get("paper", ScrollPane.ScrollPaneStyle.class));

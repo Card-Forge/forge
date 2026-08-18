@@ -1,6 +1,8 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -17,12 +19,16 @@ import com.google.common.collect.Sets;
 import forge.Forge;
 import forge.adventure.data.AdventureEventData;
 import forge.adventure.data.AdventureQuestData;
+import forge.adventure.data.ChallengeRating;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.WorldStage;
+import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
+import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
 
 import java.util.List;
@@ -46,6 +52,7 @@ public class MapViewScene extends UIScene {
     private final float maxZoom = 1.2f;
     private final float minZoom = 0.25f;
     private Set<PointOfInterest> bookmark;
+    private final Group poiMarkers;
     private int lastOverlayMode = 0; // 0=none, 1=details, 2=events, 3=reputation
 
     public static MapViewScene instance() {
@@ -86,6 +93,8 @@ public class MapViewScene extends UIScene {
         miniMapPlayer = new Image();
         img.setPosition(0, 0);
         table.addActor(img);
+        poiMarkers = new Group();
+        table.addActor(poiMarkers);
         table.addActor(miniMapPlayer);
         miniMapPlayer.setZIndex(2);
         details = Lists.newArrayList();
@@ -134,6 +143,8 @@ public class MapViewScene extends UIScene {
         miniMapPlayer.setScale(1);
         img.setScale(1);
         img.setPosition(0,0);
+        poiMarkers.setScale(1);
+        poiMarkers.setPosition(0, 0);
         index = -1;
         Forge.switchToLast();
         return true;
@@ -265,6 +276,8 @@ public class MapViewScene extends UIScene {
             img.setScale(img.getScaleX() * 0.9f);
             miniMapPlayer.setPosition((scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 0.9f * miniMapPlayer.getX(), (scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 0.9f * miniMapPlayer.getY());
             miniMapPlayer.setScale(miniMapPlayer.getScaleX() * 0.9f);
+            poiMarkers.setPosition((scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 0.9f * poiMarkers.getX(), (scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 0.9f * poiMarkers.getY());
+            poiMarkers.setScale(poiMarkers.getScaleX() * 0.9f);
             for (Actor actor : table.getChildren()) {
                 if (actor instanceof TypingLabel) {
                     actor.setPosition((scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 0.9f * actor.getX(), (scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 0.9f * actor.getY());
@@ -278,6 +291,8 @@ public class MapViewScene extends UIScene {
             img.setScale(img.getScaleX() * 1.1f);
             miniMapPlayer.setPosition(-(scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 1.1f * miniMapPlayer.getX(), -(scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 1.1f * miniMapPlayer.getY());
             miniMapPlayer.setScale(miniMapPlayer.getScaleX() * 1.1f);
+            poiMarkers.setPosition(-(scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 1.1f * poiMarkers.getX(), -(scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 1.1f * poiMarkers.getY());
+            poiMarkers.setScale(poiMarkers.getScaleX() * 1.1f);
             for (Actor actor : table.getChildren()) {
                 if (actor instanceof TypingLabel) {
                     actor.setPosition(-(scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 1.1f * actor.getX(), -(scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 1.1f * actor.getY());
@@ -300,6 +315,7 @@ public class MapViewScene extends UIScene {
         avatarY = getMapY(WorldStage.getInstance().getPlayerSprite().getY()) - miniMapPlayer.getHeight() / 2;
         miniMapPlayer.setPosition(avatarX, avatarY);
         miniMapPlayer.layout();
+        buildLocationMarkers();
         scroll.scrollTo(avatarX, avatarY, miniMapPlayer.getWidth(), miniMapPlayer.getHeight(), true, true);
         for (AdventureQuestData adq : Current.player().getQuests()) {
             PointOfInterest poi = adq.getTargetPOI();
@@ -344,6 +360,53 @@ public class MapViewScene extends UIScene {
 
         super.enter();
     }
+    private void buildLocationMarkers() {
+        poiMarkers.clearChildren();
+        // culling tests use unscaled bounds, so cover the map at maximum zoom to never cull the group
+        poiMarkers.setSize(img.getWidth() * maxZoom, img.getHeight() * maxZoom);
+        TextureAtlas markerAtlas = Config.instance().getAtlas(Paths.MAP_MARKER);
+        TextureAtlas itemsAtlas = Config.instance().getAtlas(Paths.ITEMS_ATLAS);
+        TextureRegion dotRegion = itemsAtlas.findRegion("ChallengeDot");
+        TextureRegion xRegion = itemsAtlas.findRegion("ClearedX");
+        boolean showRatings = Config.instance().getSettingData().showDungeonDifficultyRatings;
+        WorldSave save = WorldSave.getCurrentSave();
+        TextureRegion crownRegion = new TextureRegion(Current.world().getGlobalTexture(), 16, 0, 16, 16);
+        for (PointOfInterest poi : Current.world().getAllPointOfInterest()) {
+            TextureAtlas.AtlasRegion marker = markerAtlas.findRegion(poi.getData().type);
+            if (marker == null)
+                continue;
+            PointOfInterestChanges changes = save.getExistingPointOfInterestChanges(poi.getID());
+            if (changes == null || !(changes.isVisited() || changes.hasDeletedObjects()))
+                continue;
+            Image image;
+            boolean crowned = false;
+            if (save.isPointOfInterestCleared(poi)) {
+                if (xRegion == null)
+                    continue;
+                image = new Image(xRegion);
+            } else {
+                ChallengeRating rating = poi.getData().getChallengeRating();
+                if (rating == null || !showRatings || dotRegion == null)
+                    continue;
+                image = new Image(dotRegion);
+                image.setColor(rating.getColor());
+                crowned = save.hasLivingBoss(poi);
+            }
+            // constant badge size for every location, sized to read alongside the star markers
+            float size = 9f;
+            image.setSize(size, size);
+            image.setPosition(getMapX(poi.getPosition().x) + marker.getRegionWidth() / 2f - size / 2f,
+                    getMapY(poi.getPosition().y) + marker.getRegionHeight() / 2f - size / 2f);
+            poiMarkers.addActor(image);
+            if (crowned) {
+                Image crown = new Image(crownRegion);
+                crown.setSize(8, 8);
+                crown.setPosition(image.getX() + 0.5f, image.getY() + 4);
+                poiMarkers.addActor(crown);
+            }
+        }
+    }
+
     float getMapX(float posX) {
         return (posX / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * img.getWidth();
     }

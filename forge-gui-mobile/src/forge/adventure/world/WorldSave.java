@@ -19,7 +19,9 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 
 import java.io.*;
+import java.util.ArrayDeque;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
@@ -56,6 +58,95 @@ public class WorldSave {
         if (!pointOfInterestChanges.containsKey(id))
             pointOfInterestChanges.put(id, new PointOfInterestChanges());
         return pointOfInterestChanges.get(id);
+    }
+
+    public PointOfInterestChanges getExistingPointOfInterestChanges(String id) {
+        return pointOfInterestChanges.get(id);
+    }
+
+    /**
+     * True when the point of interest has been fully cleared: its root map and every
+     * discovered sub-map are cleared. Unrated towns and capitals additionally require
+     * that they actually contained enemies; rated ones qualify like dungeons.
+     */
+    public boolean isPointOfInterestCleared(PointOfInterest poi) {
+        if (poi == null || poi.getData() == null || poi.getData().map == null || poi.getData().map.isEmpty())
+            return false;
+        String rootId = poi.getID();
+        HashSet<String> seen = new HashSet<>();
+        ArrayDeque<String> pending = new ArrayDeque<>();
+        seen.add(rootId);
+        pending.add(rootId);
+        boolean enemiesSeen = false;
+        while (!pending.isEmpty()) {
+            PointOfInterestChanges changes = pointOfInterestChanges.get(pending.poll());
+            if (changes == null || !changes.isCleared())
+                return false;
+            enemiesSeen |= changes.hasSeenEnemies();
+            for (String target : changes.getSubMaps()) {
+                // same record keying as TileMapScene.getPointOfInterestChanges(targetMap)
+                String key = rootId.endsWith(target) ? rootId : rootId + target;
+                if (seen.add(key))
+                    pending.add(key);
+            }
+        }
+        // unrated towns never earn the X; rated ones (Bazaar of Wonders, the spawn camp) qualify like dungeons
+        if (("town".equalsIgnoreCase(poi.getData().type) || "capital".equalsIgnoreCase(poi.getData().type))
+                && poi.getData().getChallengeRating() == null)
+            return enemiesSeen;
+        return true;
+    }
+
+    /**
+     * True when any discovered map of the point of interest is known to still contain
+     * a living crowned (effect-carrying) enemy.
+     */
+    public boolean hasLivingBoss(PointOfInterest poi) {
+        if (poi == null || poi.getData() == null || poi.getData().map == null || poi.getData().map.isEmpty())
+            return false;
+        String rootId = poi.getID();
+        HashSet<String> seen = new HashSet<>();
+        ArrayDeque<String> pending = new ArrayDeque<>();
+        seen.add(rootId);
+        pending.add(rootId);
+        while (!pending.isEmpty()) {
+            PointOfInterestChanges changes = pointOfInterestChanges.get(pending.poll());
+            if (changes == null)
+                continue;
+            if (changes.isBossAlive())
+                return true;
+            for (String target : changes.getSubMaps()) {
+                String key = rootId.endsWith(target) ? rootId : rootId + target;
+                if (seen.add(key))
+                    pending.add(key);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Resets the cleared flag on the point of interest's root map and every discovered
+     * sub-map, so a quest re-target forces a fresh clear of the whole chain.
+     */
+    public void resetPointOfInterestClearedState(PointOfInterest poi) {
+        if (poi == null)
+            return;
+        String rootId = poi.getID();
+        HashSet<String> seen = new HashSet<>();
+        ArrayDeque<String> pending = new ArrayDeque<>();
+        seen.add(rootId);
+        pending.add(rootId);
+        while (!pending.isEmpty()) {
+            PointOfInterestChanges changes = pointOfInterestChanges.get(pending.poll());
+            if (changes == null)
+                continue;
+            changes.clearDeletedObjects();
+            for (String target : changes.getSubMaps()) {
+                String key = rootId.endsWith(target) ? rootId : rootId + target;
+                if (seen.add(key))
+                    pending.add(key);
+            }
+        }
     }
 
     static public boolean load(int currentSlot) {
