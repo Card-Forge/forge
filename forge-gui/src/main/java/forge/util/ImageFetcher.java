@@ -76,10 +76,7 @@ public abstract class ImageFetcher {
         String setCode = edition.getScryfallCode();
         String langCode = edition.getCardsLangCode();
 
-        // Prefer CDN (no rate limit) if this set was already synced by the bulk downloader.
-        // Read-only lookup: gameplay must never have the side effect of queuing a full-set
-        // Scryfall search just because a card's image happens to be missing -- see
-        // CdnUuidCache.getCdnUrlIfCached() for why.
+        // Prefer CDN (no rate limit) if this set was already synced; read-only, see getCdnUrlIfCached().
         if (!StringUtils.isBlank(setCode)) {
             String size = useArtCrop ? "art_crop" : "normal";
             String cdnUrl = forge.gui.download.CdnUuidCache.getCdnUrlIfCached(

@@ -73,18 +73,25 @@ final class ScryfallSetSync {
     private static void addCard(Map<String, Map<String, String[]>> byCn, JsonObject card) {
         String cn   = str(card, "collector_number");
         String lang = str(card, "lang");
-        String id   = str(card, "id");
-        if (cn == null || lang == null || id == null) return;
+        if (cn == null || lang == null) return;
 
+        String[] frontBack = frontBackUuids(card);
+        if (frontBack == null) return; // no image data yet, or a placeholder URL
+
+        byCn.computeIfAbsent(cn, k -> new HashMap<>()).put(lang, frontBack);
+    }
+
+    /** Per-face CDN UUIDs for one card, or {@code null} if it has no usable image data yet. Shared with {@link ScryfallBulkDataSync}. */
+    static String[] frontBackUuids(JsonObject card) {
         String front;
         String back = null;
         if (card.has("image_uris") && card.get("image_uris").isJsonObject()) {
             front = uuidFromUrl(normalUrl(card.getAsJsonObject("image_uris")));
         } else if (card.has("card_faces") && card.get("card_faces").isJsonArray()) {
             JsonArray faces = card.getAsJsonArray("card_faces");
-            if (faces.size() == 0) return;
+            if (faces.size() == 0) return null;
             JsonObject face0 = faces.get(0).getAsJsonObject();
-            if (!face0.has("image_uris") || !face0.get("image_uris").isJsonObject()) return;
+            if (!face0.has("image_uris") || !face0.get("image_uris").isJsonObject()) return null;
             front = uuidFromUrl(normalUrl(face0.getAsJsonObject("image_uris")));
             if (faces.size() > 1) {
                 JsonObject face1 = faces.get(1).getAsJsonObject();
@@ -93,13 +100,9 @@ final class ScryfallSetSync {
                 }
             }
         } else {
-            return; // no image data for this card
+            return null; // no image data for this card
         }
-        // No image yet (placeholder URL) -- leave unmerged so CdnUuidCache retries later
-        // instead of permanently recording a guessed UUID.
-        if (front == null) return;
-
-        byCn.computeIfAbsent(cn, k -> new HashMap<>()).put(lang, new String[]{front, back});
+        return front == null ? null : new String[]{front, back};
     }
 
     /** Reads an {@code image_uris} object and returns the value of the {@code normal} key. */
@@ -127,7 +130,8 @@ final class ScryfallSetSync {
         return base + "?unique=prints&q=" + URLEncoder.encode(query, StandardCharsets.UTF_8);
     }
 
-    private static String str(JsonObject obj, String key) {
+    /** Shared with {@link ScryfallBulkDataSync}. */
+    static String str(JsonObject obj, String key) {
         return obj.has(key) && !obj.get(key).isJsonNull() ? obj.get(key).getAsString() : null;
     }
 
@@ -146,10 +150,7 @@ final class ScryfallSetSync {
             int status = ((HttpURLConnection) conn).getResponseCode();
             if (status == 404) return null;
             if (status == 429) {
-                if (ScryfallRateLimiter.isApiUrl(urlStr)) {
-                    long retryAfter = ScryfallRateLimiter.parseRetryAfterSeconds(conn.getHeaderField("Retry-After"));
-                    ScryfallRateLimiter.noteRateLimited(urlStr, retryAfter);
-                }
+                ScryfallRateLimiter.noteIfRateLimited(429, urlStr, conn.getHeaderField("Retry-After"));
                 throw new IOException("HTTP 429 (rate limited) for " + urlStr);
             }
             if (status != 200) throw new IOException("HTTP " + status + " for " + urlStr);

@@ -60,10 +60,7 @@ public class SwingImageFetcher extends ImageFetcher {
                 if (responseCode != HttpURLConnection.HTTP_OK) {
                     System.err.println("Failed to fetch image. HTTP code: " + responseCode
                             + " (" + httpConnection.getResponseMessage() + ") for URL: " + urlToDownload);
-                    if (responseCode == 429 && ScryfallRateLimiter.isApiUrl(urlToDownload)) {
-                        long retryAfter = ScryfallRateLimiter.parseRetryAfterSeconds(httpConnection.getHeaderField("Retry-After"));
-                        ScryfallRateLimiter.noteRateLimited(urlToDownload, retryAfter);
-                    }
+                    ScryfallRateLimiter.noteIfRateLimited(responseCode, urlToDownload, httpConnection.getHeaderField("Retry-After"));
                     httpConnection.disconnect();
                     return false;
                 }

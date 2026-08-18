@@ -263,9 +263,7 @@ public abstract class GuiDownloadService implements Runnable {
                     // instead of racing through the rest of a large queue in skip-only mode.
                     ScryfallRateLimiter.awaitCooldownCleared(() -> cancel, this::reportStatus);
                 }
-                if (cancel) {
-                    // cancelled while waiting out a cooldown
-                } else if (FileUtil.ensureDirectoryExists(base)) { //ensure destination directory exists
+                if (!cancel && FileUtil.ensureDirectoryExists(base)) { //ensure destination directory exists
                     URL imageUrl = new URL(url);
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection(p);
                     // Scryfall asks for a descriptive User-Agent and rate-limits harder without one.
@@ -327,10 +325,7 @@ public abstract class GuiDownloadService implements Runnable {
                             System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
                         break;
                     case 429:
-                        if (ScryfallRateLimiter.isApiUrl(url)) {
-                            long retryAfter = ScryfallRateLimiter.parseRetryAfterSeconds(conn.getHeaderField("Retry-After"));
-                            ScryfallRateLimiter.noteRateLimited(url, retryAfter);
-                        }
+                        ScryfallRateLimiter.noteIfRateLimited(429, url, conn.getHeaderField("Retry-After"));
                         conn.disconnect();
                         break;
                     default:
@@ -338,7 +333,7 @@ public abstract class GuiDownloadService implements Runnable {
                         System.out.println("  Connection failed for url: " + url);
                         break;
                     }
-                } else {
+                } else if (!cancel) {
                     System.out.println("  Can't create folder: " + base.getAbsolutePath());
                 }
             }

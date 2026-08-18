@@ -4,18 +4,11 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Single global pacing/cooldown gate for Scryfall's api.scryfall.com endpoints (card lookup,
- * search, download-by-name). Never applies to cards.scryfall.io CDN URLs -- those are pre-resolved
- * and intentionally unthrottled; see CdnUuidCache.
+ * Global pacing/cooldown gate for api.scryfall.com endpoints. Never applies to cards.scryfall.io
+ * CDN URLs -- those are unthrottled; see {@link forge.gui.download.CdnUuidCache}.
  *
- * <p>Scryfall's documented hard per-endpoint-category limits (see
- * https://scryfall.com/docs/api): {@code /cards/search}, {@code /cards/named},
- * {@code /cards/random}, and {@code /cards/collection} are capped at 2/sec (500ms); every other
- * method is capped at 10/sec (100ms). Forge only ever calls {@code search} (CDN UUID resolution)
- * and {@code named} (a legacy fuzzy-name lookup) from the slow bucket -- everything else (the
- * per-card {@code /cards/{set}/{cn}/{lang}} lookup) is in the fast bucket. Pacing every request
- * at the fast bucket's 100ms, including search, was 5x faster than Scryfall actually allows for
- * that endpoint and was the real cause of repeated 429s during bulk CDN-cache warm-up.
+ * <p>Scryfall caps {@code /cards/search} and {@code /cards/named} at 2/sec (500ms); everything
+ * else at 10/sec (100ms).
  */
 public final class ScryfallRateLimiter {
     private static final String API_HOST_PREFIX = "https://api.scryfall.com/";
@@ -81,6 +74,13 @@ public final class ScryfallRateLimiter {
         }
     }
 
+    /** Records a cooldown if {@code responseCode} is 429 for a Scryfall API url; no-op otherwise. */
+    public static void noteIfRateLimited(int responseCode, String url, String retryAfterHeader) {
+        if (responseCode == 429 && isApiUrl(url)) {
+            noteRateLimited(url, parseRetryAfterSeconds(retryAfterHeader));
+        }
+    }
+
     /** True (and logs) if url is a Scryfall API URL and we're currently backing off. */
     public static boolean shouldSkip(String url) {
         if (!isApiUrl(url) || !isCoolingDown()) {
@@ -91,27 +91,15 @@ public final class ScryfallRateLimiter {
     }
 
     /**
-     * Blocks the calling thread until any active cooldown clears, polling {@code cancelled} so a
-     * long-running background job (the bulk downloader) can still be cancelled while waiting.
-     * No-op if not currently cooling down.
-     *
-     * <p>Only call this from a background thread that may legitimately block for minutes at a
-     * time -- never from a gameplay fire-and-forget path (e.g. {@code CdnUuidCache}'s implicit
-     * cache-miss sync), where failing fast and moving on is the correct behavior. Without this,
-     * a large multi-set/multi-thousand-file bulk run that trips one 429 early on races through
-     * its entire remaining backlog in skip-and-print mode -- far faster than the cooldown can
-     * ever clear -- and ends up downloading nothing for the rest of the run.
+     * Blocks the calling thread until any active cooldown clears, polling {@code cancelled}.
+     * No-op if not cooling down. Only call from a cancelable background job (e.g. the bulk
+     * downloader) -- never from a gameplay fire-and-forget path, where failing fast is correct.
      */
     public static void awaitCooldownCleared(java.util.function.BooleanSupplier cancelled) {
         awaitCooldownCleared(cancelled, null);
     }
 
-    /**
-     * Same as {@link #awaitCooldownCleared(java.util.function.BooleanSupplier)}, but also invokes
-     * {@code onWaiting} (throttled to roughly once every 5 seconds) with a human-readable status
-     * string, so a caller with a visible progress UI can show that it's genuinely waiting rather
-     * than appearing to hang.
-     */
+    /** Same as {@link #awaitCooldownCleared(java.util.function.BooleanSupplier)}, but reports a status string (throttled to ~5s) via {@code onWaiting} for a visible progress UI. */
     public static void awaitCooldownCleared(java.util.function.BooleanSupplier cancelled,
                                              java.util.function.Consumer<String> onWaiting) {
         if (!isCoolingDown()) {
@@ -141,12 +129,7 @@ public final class ScryfallRateLimiter {
         }
     }
 
-    /**
-     * Blocks the calling thread (never the EDT) until it's this caller's turn. No-op for
-     * non-API URLs, so CDN/cardforge downloads never pay this cost. Search/named requests pace
-     * independently from everything else, so a burst of one kind never forces the other to wait
-     * longer than its own documented limit requires.
-     */
+    /** Blocks the calling thread (never the EDT) until it's this caller's turn. No-op for non-API URLs. */
     public static void acquire(String url) {
         if (!isApiUrl(url)) {
             return;

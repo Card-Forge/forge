@@ -369,17 +369,13 @@ public class Forge implements ApplicationListener {
      * home/adventure screen is open -- not while the mode-selector splash is still showing.
      */
     public static void maybePromptForBulkCdnSync() {
-        boolean hasCache = CdnUuidCache.hasAnyCachedSets();
-        System.out.println("maybePromptForBulkCdnSync: cacheDir=" + CdnUuidCache.cacheDir() + " hasAnyCachedSets=" + hasCache);
-        if (hasCache) {
+        if (CdnUuidCache.hasAnyCachedSets()) {
             return;
         }
-        System.out.println("maybePromptForBulkCdnSync: showing prompt");
         FThreads.invokeInBackgroundThread(() -> {
             boolean confirmed = SOptionPane.showConfirmDialog(
                     getLocalizer().getMessage("lblFirstRunBulkCdnPrompt"),
                     "Forge", "Download Now", "Not Now", true);
-            System.out.println("maybePromptForBulkCdnSync: user answered confirmed=" + confirmed);
             if (confirmed) {
                 CardImageBrowserScreen.openAndAutoStartBulkSync();
             }
@@ -502,7 +498,6 @@ public class Forge implements ApplicationListener {
                         }
                         safeToClose = true;
                         clearTransitionScreen();
-                        System.out.println("afterDbLoaded: TransitionScreen callback done, openedRealScreen=" + openedRealScreen + ", selector=" + selector);
                         if (openedRealScreen) {
                             maybePromptForBulkCdnSync();
                         }

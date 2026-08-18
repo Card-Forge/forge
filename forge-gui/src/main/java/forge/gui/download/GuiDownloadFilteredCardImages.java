@@ -60,11 +60,8 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         }
 
         // Warm the CDN UUID cache for every needed set before resolving URLs below, so this run
-        // uses the unthrottled CDN path instead of falling back to the rate-limited Scryfall API
-        // just because the cache hadn't finished populating yet. Skip a set that's already
-        // cached (e.g. from a bulk-data sync via ScryfallBulkDataSync) instead of unconditionally
-        // re-fetching it through the rate-limited /cards/search endpoint -- otherwise the bulk
-        // sync's whole point (avoiding that endpoint) is defeated on every subsequent download.
+        // prefers the unthrottled CDN path over the rate-limited Scryfall API. Skip sets already
+        // cached (e.g. by a prior bulk-data sync).
         final List<String> needSync = new ArrayList<>();
         for (String setCode : scryfallSetCodes) {
             if (!CdnUuidCache.isSetCached(setCode)) {
@@ -132,10 +129,8 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         String scryfallCode = (edition != null) ? edition.getScryfallCode() : null;
         boolean hasScryfallCode = !StringUtils.isBlank(scryfallCode);
 
-        // 1. CDN -- read-only: the warm-up loop above is the one deliberate, sequential place
-        // that syncs sets. If a set's warm-up sync failed to produce data, fall through to the
-        // API below for this run rather than triggering another uncoordinated background sync
-        // (see CdnUuidCache.getCdnUrlIfCached()).
+        // 1. CDN -- read-only (see CdnUuidCache.getCdnUrlIfCached()); falls through to the API
+        // below if the warm-up loop above didn't resolve this set.
         if (edition != null && hasCollectorNum && hasScryfallCode) {
             String cdnUrl = CdnUuidCache.getCdnUrlIfCached(
                     scryfallCode, collectorNum, edition.getCardsLangCode(), face, "normal");

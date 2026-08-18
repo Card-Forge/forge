@@ -107,11 +107,7 @@ public final class CdnUuidCache {
         return localCacheDirOverride != null ? localCacheDirOverride : ForgeConstants.CACHE_CDN_UUID_DIR;
     }
 
-    /**
-     * Whether {@code scryfallCode} already has a local cache file, from either the per-set sync
-     * or a bulk-data sync. Lets a caller about to warm the cache skip a set that's already warm
-     * instead of unconditionally re-fetching it.
-     */
+    /** Whether {@code scryfallCode} already has a local cache file (per-set or bulk-data sync). */
     public static boolean isSetCached(String scryfallCode) {
         return scryfallCode != null && localCacheFile(scryfallCode.toLowerCase()).exists();
     }
@@ -186,12 +182,8 @@ public final class CdnUuidCache {
     }
 
     /**
-     * Read-only counterpart to {@link #getCdnUrl}: returns a CDN URL only if {@code scryfallCode}
-     * has already been synced (by the bulk downloader), and never has the side effect of queuing
-     * a sync or recording a miss. Safe to call from the interactive gameplay image-fetch path,
-     * which must never silently kick off a full multi-page Scryfall search just because a card
-     * happens to be missing -- that's real, unbounded background API traffic triggered by
-     * ordinary play, not a deliberate, cancelable, user-initiated bulk operation.
+     * Read-only counterpart to {@link #getCdnUrl}: never queues a sync or records a miss. Use
+     * from the gameplay image-fetch path, which must not trigger background Scryfall traffic.
      */
     public static String getCdnUrlIfCached(String scryfallCode, String collectorNum,
                                            String lang, String face, String size) {
@@ -210,11 +202,7 @@ public final class CdnUuidCache {
         return cdnUrl(uuid, side, size);
     }
 
-    /**
-     * Like {@link #ensureSetLoaded}, but never queues a sync on a miss -- so a set that hasn't
-     * been synced yet stays retryable (e.g. once the bulk downloader finishes it) instead of
-     * either triggering background work or getting permanently cached as absent.
-     */
+    /** Like {@link #ensureSetLoaded}, but never queues a sync -- an unsynced set stays retryable rather than triggering work or being cached as permanently absent. */
     private static Map<String, Map<String, LangUuids>> ensureSetLoadedReadOnly(String setCode) {
         Map<String, Map<String, LangUuids>> cached = setCache.get(setCode);
         if (cached != null) return cached;
@@ -347,7 +335,7 @@ public final class CdnUuidCache {
      * @param size {@code "normal"} or {@code "art_crop"}
      */
     public static String cdnUrl(String uuid, String side, String size) {
-        return "https://cards.scryfall.io/" + size + "/" + side
+        return ForgeConstants.URL_SCRYFALL_CDN + size + "/" + side
                 + "/" + uuid.charAt(0) + "/" + uuid.charAt(1) + "/" + uuid + ".jpg";
     }
 

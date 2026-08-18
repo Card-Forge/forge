@@ -84,8 +84,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
 
                 if (responseCode == 429 && ScryfallRateLimiter.isApiUrl(urlToDownload)) {
                     Sentry.captureMessage("Device has been rate limited. Adding reduction of download attempts for this device. " + urlToDownload);
-                    long retryAfter = ScryfallRateLimiter.parseRetryAfterSeconds(c.getHeaderField("Retry-After"));
-                    ScryfallRateLimiter.noteRateLimited(urlToDownload, retryAfter);
+                    ScryfallRateLimiter.noteIfRateLimited(responseCode, urlToDownload, c.getHeaderField("Retry-After"));
                 }
 
                 c.disconnect();

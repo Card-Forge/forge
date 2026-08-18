@@ -21,14 +21,8 @@ import java.util.function.BooleanSupplier;
 import java.util.zip.GZIPInputStream;
 
 /**
- * Warms {@link CdnUuidCache} for every set in one pass using Scryfall's Bulk Data API
- * (https://scryfall.com/docs/api/bulk-data), instead of one paginated {@code /cards/search}
- * request per set via {@link ScryfallSetSync}. A format like Standard touches dozens of sets
- * full of reprints; resolving each of those sets individually means dozens of paced (500ms)
- * search requests just to build CDN UUIDs Scryfall already publishes in one file. The
- * "default_cards" bulk file -- one row per print, in English or the card's sole language -- is a
- * single download from a direct *.scryfall.io file origin, which Scryfall documents as having no
- * rate limit at all, and covers the whole catalog at once.
+ * Warms {@link CdnUuidCache} for every set in one pass via Scryfall's Bulk Data API
+ * (https://scryfall.com/docs/api/bulk-data) 
  */
 public final class ScryfallBulkDataSync {
     private static final String BULK_DATA_LISTING_URL = "https://api.scryfall.com/bulk-data";
@@ -107,10 +101,7 @@ public final class ScryfallBulkDataSync {
 
             int status = conn.getResponseCode();
             if (status == 429) {
-                if (ScryfallRateLimiter.isApiUrl(url)) {
-                    long retryAfter = ScryfallRateLimiter.parseRetryAfterSeconds(conn.getHeaderField("Retry-After"));
-                    ScryfallRateLimiter.noteRateLimited(url, retryAfter);
-                }
+                ScryfallRateLimiter.noteIfRateLimited(429, url, conn.getHeaderField("Retry-After"));
                 return null;
             }
             if (status != 200) {
@@ -150,9 +141,7 @@ public final class ScryfallBulkDataSync {
         conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
         conn.setReadTimeout(READ_TIMEOUT_MS);
         conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
-        // downloadUrl is a *.scryfall.io direct file origin -- Scryfall documents these as having
-        // no rate limit, and ScryfallRateLimiter.isApiUrl() correctly excludes this host, so no
-        // acquire() call here (matches how CDN image URLs are already treated).
+        // downloadUrl is a *.scryfall.io file origin, not api.scryfall.com -- unthrottled, no acquire() needed.
         conn.connect();
 
         int status = conn.getResponseCode();
@@ -217,14 +206,14 @@ public final class ScryfallBulkDataSync {
     }
 
     private static void addCard(Map<String, Map<String, Map<String, String[]>>> bySet, JsonObject card) {
-        String setCode = str(card, "set");
-        String cn = str(card, "collector_number");
-        String lang = str(card, "lang");
+        String setCode = ScryfallSetSync.str(card, "set");
+        String cn = ScryfallSetSync.str(card, "collector_number");
+        String lang = ScryfallSetSync.str(card, "lang");
         if (setCode == null || cn == null || lang == null) {
             return;
         }
 
-        String[] frontBack = frontBackUuids(card);
+        String[] frontBack = ScryfallSetSync.frontBackUuids(card);
         if (frontBack == null) {
             return;
         }
@@ -232,53 +221,5 @@ public final class ScryfallBulkDataSync {
         bySet.computeIfAbsent(setCode, k -> new HashMap<>())
                 .computeIfAbsent(cn, k -> new HashMap<>())
                 .put(lang, frontBack);
-    }
-
-    /** Per-face CDN UUIDs for one card, or {@code null} if it has no usable image data yet. */
-    private static String[] frontBackUuids(JsonObject card) {
-        String front;
-        String back = null;
-        if (card.has("image_uris") && card.get("image_uris").isJsonObject()) {
-            front = uuidFromUrl(normalUrl(card.getAsJsonObject("image_uris")));
-        } else if (card.has("card_faces") && card.get("card_faces").isJsonArray()) {
-            JsonArray faces = card.getAsJsonArray("card_faces");
-            if (faces.isEmpty()) {
-                return null;
-            }
-            JsonObject face0 = faces.get(0).getAsJsonObject();
-            if (!face0.has("image_uris") || !face0.get("image_uris").isJsonObject()) {
-                return null;
-            }
-            front = uuidFromUrl(normalUrl(face0.getAsJsonObject("image_uris")));
-            if (faces.size() > 1) {
-                JsonObject face1 = faces.get(1).getAsJsonObject();
-                if (face1.has("image_uris") && face1.get("image_uris").isJsonObject()) {
-                    back = uuidFromUrl(normalUrl(face1.getAsJsonObject("image_uris")));
-                }
-            }
-        } else {
-            return null;
-        }
-        return front == null ? null : new String[]{front, back};
-    }
-
-    private static String normalUrl(JsonObject imageUris) {
-        return imageUris.has("normal") ? imageUris.get("normal").getAsString() : null;
-    }
-
-    private static String uuidFromUrl(String url) {
-        if (url == null || !url.contains("cards.scryfall.io")) {
-            return null;
-        }
-        int qmark = url.indexOf('?');
-        String path = qmark >= 0 ? url.substring(0, qmark) : url;
-        int slash = path.lastIndexOf('/');
-        String filename = slash >= 0 ? path.substring(slash + 1) : path;
-        int dot = filename.lastIndexOf('.');
-        return dot >= 0 ? filename.substring(0, dot) : filename;
-    }
-
-    private static String str(JsonObject obj, String key) {
-        return obj.has(key) && !obj.get(key).isJsonNull() ? obj.get(key).getAsString() : null;
     }
 }
