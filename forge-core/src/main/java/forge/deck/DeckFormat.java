@@ -623,5 +623,8 @@ public enum DeckFormat {
             predicate = predicate.or(CardRulesPredicates.canBePartnerCommanderWith(commanders.get(0).getRules()));
         }
         return PaperCardPredicates.fromRules(predicate);
+
+        // Also consider if commanders provide a deckbuilding allowance
+
     }
 }

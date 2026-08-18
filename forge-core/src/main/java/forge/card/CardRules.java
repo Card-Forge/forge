@@ -21,6 +21,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.mana.ManaCost;
+import forge.deck.DeckBuildingAdjustments;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -51,6 +52,7 @@ public final class CardRules implements ICardCharacteristics {
     private String meldWith;
     private String partnerWith;
     private String partnerType;
+    private DeckBuildingAdjustments deckBuildingAdjustments;
     private int setColorID;
     private boolean custom;
     private boolean unsupported;
@@ -578,6 +580,7 @@ public final class CardRules implements ICardCharacteristics {
         private String meldWith = "";
         private String partnerWith = "";
         private String partnerType = "";
+        private DeckBuildingAdjustments adjustments;
         private int setColorID = 0;
         private String handLife = null;
         private String normalizedName = "";
@@ -744,6 +747,15 @@ public final class CardRules implements ICardCharacteristics {
                         face.setDefense(value);
                     } else if ("Draft".equals(key)) {
                         face.addDraftAction(value);
+                    } else if ("Deckbuilding".equals(key)) {
+                        // DecckBuilding:Allowance/Restriction:MatchType:Valid:Description
+                        String[] parts = value.split(":", 5);
+                        if (parts.length < 4) {
+                            throw new IllegalArgumentException("Deckbuilding line has too few parts: " + value);
+                        }
+                        if (this.adjustments == null) {
+                            this.adjustments = new DeckBuildingAdjustments(parts[0], parts[1], parts[2], parts[3], parts.length > 4 ? parts[4] : "");
+                        }
                     }
                     break;
 
