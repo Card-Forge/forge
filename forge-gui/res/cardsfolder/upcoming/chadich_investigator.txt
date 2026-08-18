@@ -1,0 +1,7 @@
+Name:Cha'DIch Investigator
+ManaCost:4 B
+Types:Creature Klingon Warrior
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 2/1 red Klingon Warrior creature token with haste.
+SVar:TrigToken:DB$ Token | TokenScript$ r_2_1_klingon_warrior_haste | TokenOwner$ You
+Oracle:When this creature enters, create a 2/1 red Klingon Warrior creature token with haste.

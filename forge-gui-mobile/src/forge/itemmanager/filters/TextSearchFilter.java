@@ -85,6 +85,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
             setFont(FONT);
             setGhostText(Forge.getLocalizer().getMessage("lblSearch"));
             setHeight(getDefaultHeight(DEFAULT_FONT)); //set height based on default filter font
+            setLiveChangeEvents(true); //filter the list as characters are typed (local-only, no network)
         }
 
         @Override

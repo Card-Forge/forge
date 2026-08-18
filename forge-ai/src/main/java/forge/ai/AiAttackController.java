@@ -859,7 +859,7 @@ public class AiAttackController {
         boolean simAI = false;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            simAI = aic.usesSimulation();
+            simAI = aic.usesFullSimulation();
             if (!simAI) {
                 playAggro = aic.getBoolProperty(AiProps.PLAY_AGGRO);
                 chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
@@ -1588,6 +1588,7 @@ public class AiAttackController {
                         sa = t.ensureAbility();
                         if (c.getController().isAI()) {
                             PlayerControllerAi aic = ((PlayerControllerAi) c.getController().getController());
+                            sa.setActivatingPlayer(c.getController());
                             if (!aic.getAi().doTrigger(sa, false)) {
                                 missTarget = true;
                                 break;

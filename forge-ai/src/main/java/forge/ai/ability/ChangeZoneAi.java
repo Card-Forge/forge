@@ -1116,6 +1116,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // the Unless cost (for example, Erratic Portal)
         list.removeAll(getSafeTargetsIfUnlessCostPaid(ai, sa, list));
 
+        // X was sized against every legal target, but the list has since been narrowed to the ones
+        // the AI actually wants - usually just the opponents' permanents. Bring X down to match
+        // before the check below, otherwise controlling a single targetable permanent of its own is
+        // enough to make the AI refuse a spell it would happily cast for less.
+        if (!mandatory && "X".equals(sa.getTargetRestrictions().getMinTargets())
+                && "Count$xPaid".equals(sa.getSVar("X"))
+                && sa.getXManaCostPaid() != null && sa.getXManaCostPaid() > list.size()) {
+            sa.setXManaCostPaid(list.size());
+        }
+
         if (!mandatory && list.size() < sa.getMinTargets()) {
             return false;
         }
@@ -1952,7 +1962,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             if (!preferredOppList.isEmpty()) {
                 return Aggregates.random(preferredOppList);
-            } else if (!preferredList.isEmpty()) {
+            }
+            if (!preferredList.isEmpty()) {
                 return Aggregates.random(preferredList);
             }
 
