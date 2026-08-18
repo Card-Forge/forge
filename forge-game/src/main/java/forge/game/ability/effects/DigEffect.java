@@ -334,6 +334,10 @@ public class DigEffect extends SpellAbilityEffect {
 
                     movedCards = new CardCollection();
                     if (valid.isEmpty()) {
+                        if (delayedReveal != null) {
+                            // the digger still gets to look at the dug cards even with nothing to choose
+                            game.getAction().revealTo(top, p);
+                        }
                         chooser.getController().notifyOfValue(sa, null, Localizer.getInstance().getMessage("lblNoValidCards"));
                     } else {
                         if (p == chooser) { // the digger can still see all the dug cards when choosing
