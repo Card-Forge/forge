@@ -36,7 +36,7 @@ public class SwingImageFetcher extends ImageFetcher {
                 return false;
             }
 
-            if (inScryfallCooldown(urlToDownload)) {
+            if (ScryfallRateLimiter.shouldSkip(urlToDownload)) {
                 return false;
             }
 
@@ -48,7 +48,7 @@ public class SwingImageFetcher extends ImageFetcher {
                 newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); //fix planes/phenomenon for round border options
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
-            paceScryfall(urlToDownload);
+            ScryfallRateLimiter.acquire(urlToDownload);
 
             // Read through a connection rather than ImageIO.read(URL), which discards the response
             // code - without it a 429 is indistinguishable from any other failure and we keep asking.
@@ -60,9 +60,9 @@ public class SwingImageFetcher extends ImageFetcher {
                 if (responseCode != HttpURLConnection.HTTP_OK) {
                     System.err.println("Failed to fetch image. HTTP code: " + responseCode
                             + " (" + httpConnection.getResponseMessage() + ") for URL: " + urlToDownload);
-                    if (responseCode == 429 && isScryfall(urlToDownload)) {
-                        System.err.println("Rate limited by scryfall. Pausing image downloads.");
-                        noteScryfallRateLimited();
+                    if (responseCode == 429 && ScryfallRateLimiter.isApiUrl(urlToDownload)) {
+                        long retryAfter = ScryfallRateLimiter.parseRetryAfterSeconds(httpConnection.getHeaderField("Retry-After"));
+                        ScryfallRateLimiter.noteRateLimited(urlToDownload, retryAfter);
                     }
                     httpConnection.disconnect();
                     return false;

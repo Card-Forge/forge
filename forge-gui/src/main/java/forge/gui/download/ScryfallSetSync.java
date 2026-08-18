@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import forge.util.BuildInfo;
+import forge.util.ScryfallRateLimiter;
 import org.tinylog.Logger;
 
 import java.io.IOException;
@@ -28,9 +30,7 @@ final class ScryfallSetSync {
 
     private static final String DEFAULT_SEARCH_URL = "https://api.scryfall.com/cards/search";
 
-    /** Scryfall's general API guidance: 50-100ms between requests. */
-    private static final long REQUEST_INTERVAL_MS = 100;
-    private static final int  CONNECT_TIMEOUT_MS  = 15_000;
+    private static final int CONNECT_TIMEOUT_MS = 15_000;
 
     /** Override for tests; must be a full base URL with no trailing query string. */
     static volatile String searchBaseUrlOverride = null;
@@ -46,6 +46,8 @@ final class ScryfallSetSync {
         String url = searchUrl(setCode);
         try {
             while (url != null) {
+                if (ScryfallRateLimiter.isCoolingDown()) break; // back off; a later sync retries
+
                 JsonObject page = fetchJson(url);
                 if (page == null) break; // 404: no such set / no matching cards
 
@@ -56,7 +58,6 @@ final class ScryfallSetSync {
 
                 boolean hasMore = page.has("has_more") && page.get("has_more").getAsBoolean();
                 url = hasMore && page.has("next_page") ? page.get("next_page").getAsString() : null;
-                if (url != null) Thread.sleep(REQUEST_INTERVAL_MS);
             }
         } catch (Exception e) {
             Logger.debug("ScryfallSetSync: could not build set '{}' from Scryfall: {}", setCode, e.getMessage());
@@ -119,7 +120,10 @@ final class ScryfallSetSync {
 
     private static String searchUrl(String setCode) {
         String base = searchBaseUrlOverride != null ? searchBaseUrlOverride : DEFAULT_SEARCH_URL;
-        String query = "set:" + setCode + " lang:any";
+        // English only: CdnUuidCache.getCdnUrl() always falls back to "en", and virtually every
+        // edition's cards are English, so "lang:any" fetched ~10x more pages (every printed
+        // language) than needed and was tripping Scryfall's rate limit before finishing a set.
+        String query = "set:" + setCode + " lang:en";
         return base + "?unique=prints&q=" + URLEncoder.encode(query, StandardCharsets.UTF_8);
     }
 
@@ -129,15 +133,25 @@ final class ScryfallSetSync {
 
     /** Fetches {@code urlStr} and parses it as JSON, or returns {@code null} for HTTP 404. */
     private static JsonObject fetchJson(String urlStr) throws IOException {
+        ScryfallRateLimiter.acquire(urlStr);
         URLConnection conn = new URL(urlStr).openConnection();
         conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
         conn.setReadTimeout(CONNECT_TIMEOUT_MS);
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestProperty("Accept-Encoding", "gzip");
+        // Scryfall asks for a descriptive User-Agent and rate-limits harder without one.
+        conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
         conn.connect();
         if (conn instanceof HttpURLConnection) {
             int status = ((HttpURLConnection) conn).getResponseCode();
             if (status == 404) return null;
+            if (status == 429) {
+                if (ScryfallRateLimiter.isApiUrl(urlStr)) {
+                    long retryAfter = ScryfallRateLimiter.parseRetryAfterSeconds(conn.getHeaderField("Retry-After"));
+                    ScryfallRateLimiter.noteRateLimited(urlStr, retryAfter);
+                }
+                throw new IOException("HTTP 429 (rate limited) for " + urlStr);
+            }
             if (status != 200) throw new IOException("HTTP " + status + " for " + urlStr);
         }
         boolean gzipped = "gzip".equalsIgnoreCase(conn.getContentEncoding());

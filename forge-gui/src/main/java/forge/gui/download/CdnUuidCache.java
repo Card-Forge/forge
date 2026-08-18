@@ -82,6 +82,15 @@ public final class CdnUuidCache {
         return localCacheDirOverride != null ? localCacheDirOverride : ForgeConstants.CACHE_CDN_UUID_DIR;
     }
 
+    /**
+     * Whether {@code scryfallCode} already has a local cache file, from either the per-set sync
+     * or a bulk-data sync. Lets a caller about to warm the cache skip a set that's already warm
+     * instead of unconditionally re-fetching it.
+     */
+    public static boolean isSetCached(String scryfallCode) {
+        return scryfallCode != null && localCacheFile(scryfallCode.toLowerCase()).exists();
+    }
+
     /** Deletes every local cache file and clears the in-memory cache. */
     public static void clearCache() {
         setCache.clear();
@@ -143,6 +152,47 @@ public final class CdnUuidCache {
 
         writeLocalCache(file, setObj.toString());
         setCache.remove(setCode);
+    }
+
+    /**
+     * Read-only counterpart to {@link #getCdnUrl}: returns a CDN URL only if {@code scryfallCode}
+     * has already been synced (by the bulk downloader), and never has the side effect of queuing
+     * a sync or recording a miss. Safe to call from the interactive gameplay image-fetch path,
+     * which must never silently kick off a full multi-page Scryfall search just because a card
+     * happens to be missing -- that's real, unbounded background API traffic triggered by
+     * ordinary play, not a deliberate, cancelable, user-initiated bulk operation.
+     */
+    public static String getCdnUrlIfCached(String scryfallCode, String collectorNum,
+                                           String lang, String face, String size) {
+        if (scryfallCode == null || collectorNum == null) return null;
+        String setCode = scryfallCode.toLowerCase();
+
+        Map<String, Map<String, LangUuids>> cardMap = ensureSetLoadedReadOnly(setCode);
+        if (cardMap == MISSING_SET) return null;
+
+        LangUuids uuids = resolveWithFallback(cardMap, collectorNum, lang);
+        if (uuids == null) return null;
+
+        boolean wantBack = "back".equals(face);
+        String uuid = (wantBack && uuids.back != null) ? uuids.back : uuids.front;
+        String side = wantBack ? "back" : "front";
+        return cdnUrl(uuid, side, size);
+    }
+
+    /**
+     * Like {@link #ensureSetLoaded}, but never queues a sync on a miss -- so a set that hasn't
+     * been synced yet stays retryable (e.g. once the bulk downloader finishes it) instead of
+     * either triggering background work or getting permanently cached as absent.
+     */
+    private static Map<String, Map<String, LangUuids>> ensureSetLoadedReadOnly(String setCode) {
+        Map<String, Map<String, LangUuids>> cached = setCache.get(setCode);
+        if (cached != null) return cached;
+
+        Map<String, Map<String, LangUuids>> onDisk = readSetFromDisk(setCode);
+        if (onDisk == MISSING_SET) return MISSING_SET;
+
+        Map<String, Map<String, LangUuids>> existing = setCache.putIfAbsent(setCode, onDisk);
+        return existing != null ? existing : onDisk;
     }
 
     /** A JSON string or array value is real data; an object (miss record) or absent value is not. */

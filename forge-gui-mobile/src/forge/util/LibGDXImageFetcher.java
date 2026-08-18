@@ -55,7 +55,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 return false;
             }
 
-            if (inScryfallCooldown(urlToDownload)) {
+            if (ScryfallRateLimiter.shouldSkip(urlToDownload)) {
                 return false;
             }
 
@@ -68,6 +68,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); //fix planes/phenomenon for round border options
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
+            ScryfallRateLimiter.acquire(urlToDownload);
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             c.setRequestProperty("Accept", "*/*");
             c.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
@@ -80,14 +81,14 @@ public class LibGDXImageFetcher extends ImageFetcher {
             System.out.println("HTTP Response: " + responseCode + " " + responseMessage + " for URL: " + urlToDownload);
             if (responseCode != HttpURLConnection.HTTP_OK) {
                 System.err.println("Failed to fetch image. HTTP code: " + responseCode + " (" + responseMessage + ") for URL: " + urlToDownload);
-                c.disconnect();
 
-                if (responseCode == 429) {
-                    System.err.println("Device has been rate limited. Adding reduction of download attempts for this device.");
+                if (responseCode == 429 && ScryfallRateLimiter.isApiUrl(urlToDownload)) {
                     Sentry.captureMessage("Device has been rate limited. Adding reduction of download attempts for this device. " + urlToDownload);
-                    noteScryfallRateLimited();
+                    long retryAfter = ScryfallRateLimiter.parseRetryAfterSeconds(c.getHeaderField("Retry-After"));
+                    ScryfallRateLimiter.noteRateLimited(urlToDownload, retryAfter);
                 }
 
+                c.disconnect();
                 return false;
             }
 
@@ -175,12 +176,6 @@ public class LibGDXImageFetcher extends ImageFetcher {
                                 System.out.println("Failed to download setless token [" + destPath + "]: " + t.getMessage());
                             }
                         }
-                    }
-                } finally {
-                    try {
-                        TimeUnit.MILLISECONDS.sleep(100);
-                    } catch (InterruptedException ex) {
-                        throw new RuntimeException(ex);
                     }
                 }
             }

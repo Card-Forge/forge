@@ -219,7 +219,7 @@ public class ScryfallSetSyncTest {
     }
 
     @Test
-    public void searchQuery_scopesToSetAndAllLanguages() {
+    public void searchQuery_scopesToSetAndEnglish() {
         pages.put(1, page(false, 1, singleFaced("11111111-2222-3333-4444-555555555555", "1", "en")));
 
         resolveAfterSync("ltr", "1", "en", "front", "normal");
@@ -227,7 +227,10 @@ public class ScryfallSetSyncTest {
         Assert.assertNotNull(lastQuery);
         String decoded = URLDecoder.decode(lastQuery, StandardCharsets.UTF_8);
         Assert.assertTrue(decoded.contains("set:ltr"), "query should scope to the requested set: " + decoded);
-        Assert.assertTrue(decoded.contains("lang:any"), "query should request all languages: " + decoded);
+        // Scoped to English only -- CdnUuidCache.getCdnUrl() always falls back to "en" and
+        // virtually every edition is English, so fetching every printed language (lang:any)
+        // multiplied API calls ~10x and tripped Scryfall's rate limit before a set finished syncing.
+        Assert.assertTrue(decoded.contains("lang:en"), "query should scope to English: " + decoded);
     }
 
     // -------------------------------------------------------------------------
