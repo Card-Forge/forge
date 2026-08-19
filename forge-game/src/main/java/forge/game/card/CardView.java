@@ -1022,6 +1022,9 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.NeedsTransformAnimation, value);
     }
     public boolean useCardArt() {
+        // prevent NPE
+        if (getCurrentState() == null)
+            return false;
         // Use card art for prepared spell
         return CardStateName.PreparedSpell.equals(getCurrentState().state);
     }
