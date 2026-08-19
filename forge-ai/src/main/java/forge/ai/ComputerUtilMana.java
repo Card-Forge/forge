@@ -82,6 +82,7 @@ public class ComputerUtilMana {
         if (payManaCost(cost, sa, ai, true, true, false) != null) {
             return cost.getSunburst();
         }
+        // TODO return -1 so API can bail out since it's unpayable
         return 0;
     }
 
