@@ -42,6 +42,10 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
+        Card hostCard = sa.getHostCard();
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        boolean aboutToBeMyTurn = ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
+
         if (!targetAI(ai, sa, false)) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
@@ -68,11 +72,40 @@ public class DrawAi extends SpellAbilityAi {
 
         if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
             // Canopy lands and other cards that sacrifice themselves to draw cards
-            if (ai.getCardsIn(ZoneType.Hand).isEmpty()
-                    || (sa.getHostCard().isLand() && ai.getLandsInPlay().size() >= 5)) {
-                // TODO: make this configurable in the AI profile
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+
+            if (hostCard.isLand()) {
+                if (aboutToBeMyTurn && ai.getLandsInPlay().size() >= 5) {
+                    return new AiAbilityDecision(80, AiPlayDecision.WillPlay);
+                }
+                return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
             }
+
+            // Blood or Clue tokens
+            if (hostCard.isToken() && (hostCard.getType().hasSubtype("Clue") || hostCard.getType().hasSubtype("Blood"))) {
+                if (ph.isPlayerTurn(ai)) {
+                    if (ph.getPhase().isAfter(PhaseType.DRAW) && ai.getCardsIn(ZoneType.Hand).isEmpty()) {
+                        return new AiAbilityDecision(90, AiPlayDecision.WillPlay);
+                    }
+                } else {
+                    if (aboutToBeMyTurn) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    }
+                    // TODO: Other reasons to draw a card is searching for answers
+                }
+
+                return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
+            }
+
+            if (ph.isPlayerTurn(ai)) {
+                if (ph.getPhase().isAfter(PhaseType.DRAW) && ai.getCardsIn(ZoneType.Hand).isEmpty()) {
+                    return new AiAbilityDecision(60, AiPlayDecision.WillPlay);
+                }
+            } else {
+                if (aboutToBeMyTurn) {
+                    return new AiAbilityDecision(80, AiPlayDecision.WillPlay);
+                }
+            }
+
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
 
