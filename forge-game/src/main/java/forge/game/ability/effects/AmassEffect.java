@@ -49,7 +49,10 @@ public class AmassEffect extends TokenEffectBase {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        final Player amasser = getTargetPlayers(sa).get(0);
+        final Player amasser = getTargetPlayers(sa).getFirst();
+        if (amasser == null) {
+            return;
+        }
         final int amount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("Num", "1"), sa);
         final String type = sa.getParam("Type");
 
