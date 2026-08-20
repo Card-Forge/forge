@@ -322,13 +322,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
         final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
 
-        // Yellow glow for cards that Auto would tap to pay (weak-selectable strength >= 2)
-        if (isPreferenceEnabled(FPref.UI_SHOW_AUTOTAP_PREVIEW) && matchUI.getWeakSelectableStrength(getCard()) >= 2) {
-            for (int layer = 2; layer >= 1; layer--) {
-                g2d.setColor(new Color(1f, 1f, 0f, 0.14f * layer));
-                final int n = Math.max(1, Math.round(layer * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
-                g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n, cornerSize + n);
-            }
+        // Yellow glow for cards that Auto would tap to pay (weak-selectable strength >= 2).
+        // Drawn after the actionable highlight (see below) so it shows over it, except when a
+        // chosen/hover/flash/zone frame outranks it - then it goes underneath, here.
+        final boolean autoTapGlow = isPreferenceEnabled(FPref.UI_SHOW_AUTOTAP_PREVIEW)
+                && matchUI.getWeakSelectableStrength(getCard()) >= 2;
+        final boolean priorityFrame = matchUI.isHighlighted(getCard()) || isSelected
+                || (hasFlash && getCard() != null && matchUI.mayView(getCard()))
+                || zoneBannerColor != null;
+        if (autoTapGlow && priorityFrame) {
+            drawAutoTapGlow(g2d, cornerSize, offset);
         }
 
         // Magenta outline for when card is chosen
@@ -408,6 +411,23 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 g2d.fillRoundRect(cardXOffset + ins, cardYOffset + ins, cardWidth - ins * 2, cardHeight - ins * 2, cornerSize - ins, cornerSize - ins);
             }
         }
+
+        // Auto-tap glow takes over the actionable highlight when no higher-priority frame is up.
+        if (autoTapGlow && !priorityFrame) {
+            drawAutoTapGlow(g2d, cornerSize, offset);
+        }
+    }
+
+    /** Yellow glow marking a card the Auto button would tap to pay. */
+    private void drawAutoTapGlow(final Graphics2D g2d, final int cornerSize, final int offset) {
+        // Soft fade around the border.
+        final int outer = Math.max(1, Math.round(2 * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+        g2d.setColor(new Color(1f, 1f, 0f, 0.28f));
+        g2d.fillRoundRect(cardXOffset - outer, (cardYOffset - outer) + offset, cardWidth + (outer * 2), cardHeight + (outer * 2), cornerSize + outer, cornerSize + outer);
+        // Solid border on top: the fade alone lets the actionable highlight tint through.
+        final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+        g2d.setColor(Color.YELLOW);
+        g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n, cornerSize + n);
     }
 
     /** Pref is normalized to 6 hex chars on the write side; this just parses,
