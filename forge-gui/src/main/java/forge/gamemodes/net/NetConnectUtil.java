@@ -11,6 +11,7 @@ import forge.gamemodes.net.event.NetEvent;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.localinstance.properties.ForgeNetPreferences;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.ILobbyView;
@@ -91,6 +92,11 @@ public class NetConnectUtil {
             @Override
             public ClientGameLobby getLobby() {
                 return null;
+            }
+            @Override
+            public void lobbyAlert(final String title, final String message) {
+                FThreads.invokeInBackgroundThread(() ->
+                        SOptionPane.showMessageDialog(message, title, SOptionPane.WARNING_ICON));
             }
         });
         server.setDraftHandler(view.getDraftHandler());
@@ -202,6 +208,11 @@ public class NetConnectUtil {
             @Override
             public ClientGameLobby getLobby() {
                 return lobby;
+            }
+            @Override
+            public void lobbyAlert(final String title, final String message) {
+                FThreads.invokeInBackgroundThread(() ->
+                        SOptionPane.showMessageDialog(message, title, SOptionPane.WARNING_ICON));
             }
         });
         client.setDraftHandler(view.getDraftHandler());
