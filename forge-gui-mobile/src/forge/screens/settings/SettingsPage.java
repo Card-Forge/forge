@@ -72,11 +72,18 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgePreferences prefs = FModel.getPreferences();
                 if (prefs.getPref(FPref.UI_CJK_FONT).isEmpty()) {
                     Lang lang = Lang.initInstance(newValue);
-                    if (lang.getFontFile() != null) {
-                        String message = "Please download CJK font (from \"Files\"), and set it before change language.";
-                        message += "\nPlease use \"" + lang.getFontFile() + "\".";
-                        FOptionPane.showMessageDialog(message, "Please set CJK Font");
-                        return;
+                    String requiredFont = lang.getFontFile();
+                    if (requiredFont != null) {
+                        //bundled fonts (e.g. Russian) need no download, apply directly
+                        if (FSkinFont.resolveCjkFontFile(requiredFont).exists()) {
+                            prefs.setPref(FPref.UI_CJK_FONT, requiredFont);
+                            prefs.save();
+                        } else {
+                            String message = "Please download CJK font (from \"Files\"), and set it before change language.";
+                            message += "\nPlease use \"" + requiredFont + "\".";
+                            FOptionPane.showMessageDialog(message, "Please set CJK Font");
+                            return;
+                        }
                     }
                 }
 
