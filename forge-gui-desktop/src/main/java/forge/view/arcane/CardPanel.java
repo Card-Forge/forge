@@ -40,6 +40,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
@@ -129,6 +130,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private String zoneBannerText;
     private Color zoneBannerColor;
     private CachedCardImage cachedImage;
+    private int lastImageWidth = -1, lastImageHeight = -1;
+    private String lastImageKey;
     private int groupCount;
     private int hotkeyDigit; // 1..9 paints a numbered badge for Ctrl+digit selection; 0 hides
     private Font badgeFont;
@@ -190,13 +193,23 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         imagePanel = new ScaledImagePanel();
         add(imagePanel);
         addComponentListener(new ComponentAdapter() {
+            //only the image depends on the panel size; the text overlays are
+            //maintained by setCard and don't need to be rebuilt on every resize.
+            //An animation panel resizes every frame - keep its existing image and
+            //let ScaledImagePanel scale it rather than re-requesting per frame.
             @Override
             public void componentShown(final ComponentEvent e) {
-                CardPanel.this.setCard(CardPanel.this.getCard());
+                onSizeDependentImageUpdate();
             }
             @Override
             public void componentResized(final ComponentEvent e) {
-                CardPanel.this.setCard(CardPanel.this.getCard());
+                onSizeDependentImageUpdate();
+            }
+            private void onSizeDependentImageUpdate() {
+                if (isAnimationPanel && imagePanel != null && imagePanel.hasImage()) {
+                    return;
+                }
+                CardPanel.this.updateImage();
             }
         });
     }
@@ -239,6 +252,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         if (card == null)  {
             cachedImage = null;
+            lastImageKey = null;
             setImage(null);
             return;
         }
@@ -247,15 +261,30 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final float screenScale = GuiBase.getInterface().getScreenScale();
         int imageWidth = Math.round(imagePanel.getWidth() * screenScale);
         int imageHeight = Math.round(imagePanel.getHeight() * screenScale);
+
+        // Skip redundant requests: repeated layout passes resize every panel several
+        // times, and zone refreshes re-set the same card. Only re-request when the
+        // image key (card face/visibility) or the panel size actually changed - an
+        // in-flight async load repaints via onImageFetched when it completes.
+        final String imageKey = card.getCurrentState().getImageKey(matchUI.getLocalPlayers());
+        if (cachedImage != null && imageWidth == lastImageWidth && imageHeight == lastImageHeight
+                && Objects.equals(imageKey, lastImageKey)) {
+            return;
+        }
+        lastImageWidth = imageWidth;
+        lastImageHeight = imageHeight;
+        lastImageKey = imageKey;
         cachedImage = new CachedCardImage(card, matchUI.getLocalPlayers(), imageWidth, imageHeight) {
             @Override
             public void onImageFetched() {
                 if (cachedImage != null) {
-                    setImage(cachedImage.getImage());
+                    setImage(cachedImage.getCachedImage());
                 }
             }
         };
-        setImage(cachedImage.getImage());
+        // Cache-only: if the image isn't cached yet the panel shows its text overlay and
+        // the constructor's asynchronous load repaints it via onImageFetched when ready.
+        setImage(cachedImage.getCachedImage());
     }
 
     private void setImage(final BufferedImage srcImage) {

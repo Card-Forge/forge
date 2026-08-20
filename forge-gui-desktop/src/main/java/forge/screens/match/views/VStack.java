@@ -285,8 +285,12 @@ public class VStack implements IVDoc<CStack> {
 
             final Graphics2D g2d = (Graphics2D) g;
 
-            //draw image for source card
-            final BufferedImage img = cachedImage.getImage();
+            //prefer the cached image (the async load repaints when ready), but fall back to a
+            //synchronous load so an evicted entry can't leave the item permanently blank
+            BufferedImage img = cachedImage.getCachedImage();
+            if (img == null) {
+                img = cachedImage.getImage();
+            }
             if (img != null) {
                 g2d.drawImage(img, null, PADDING, PADDING);
             }
