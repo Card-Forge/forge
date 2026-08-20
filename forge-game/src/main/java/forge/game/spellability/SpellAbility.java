@@ -74,6 +74,18 @@ import forge.game.zone.ZoneType;
  * @version $Id$
  */
 public abstract class SpellAbility extends CardTraitBase implements ISpellAbility, IIdentifiable, Comparable<SpellAbility> {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AlternateCost", "Amount", "Announce", "Boast", "CantCopy", "CloakUp", "CostDesc",
+        "CumulativeUpkeep", "DisguiseUp", "DividedAsYouChoose", "Exhaust", "Hidden",
+        "IsCurse", "ManaRestriction", "ManifestUp", "MaxTotalTargetCMC",
+        "MaxTotalTargetPower", "MorphUp", "Origin", "Planeswalker", "PowerUp",
+        "PrecostDesc", "SpellDescription", "TargetType", "TargetingPlayer",
+        "TargetingPlayerControls", "TargetsWithControllerProperty",
+        "TargetsWithDefinedController", "TargetsWithRelatedProperty",
+        "TargetsWithSharedCardType", "TargetsWithSharedTypes", "Unlock", "ValidAfterStack",
+        "WithoutManaCost", "XColor",
+    };
+
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
 
