@@ -46,12 +46,15 @@ public enum StaticAbilityMode {
     PlayerMustAttack,
     // StaticAbilityMustBlock
     MustBlock,
+    MustBeBlockedByAll,
 
     // StaticAbilityAssignCombatDamageAsUnblocked
     AssignCombatDamageAsUnblocked,
 
     // StaticAbilityCombatDamageToughness
     CombatDamageToughness,
+    // StaticAbilityLethalDamageByPower
+    LethalDamageByPower,
 
     // StaticAbilityColorlessDamageSource
     ColorlessDamageSource,
@@ -97,6 +100,10 @@ public enum StaticAbilityMode {
 
     // StaticAbilityCantBecomeMonarch
     CantBecomeMonarch,
+    
+    // Hidden Keywords Refactoring (Issue #3307)
+    CantGainControl,
+    BounceAtUntap,
 
     // StaticAbilityCantAttach
     CantAttach,
