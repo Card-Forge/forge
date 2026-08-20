@@ -42,6 +42,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         // Mobile only
         UI_LANDSCAPE_MODE ("false"),
         UI_FULLSCREEN_MODE ("false"),
+        UI_BORDERLESS_FULLSCREEN_MODE ("false"),
         UI_VIDEO_MODE ("720p"),
         UI_SELECTOR_MODE ("Default"),
         UI_ANDROID_MINIMIZE_ON_SCRLOCK("false"),
