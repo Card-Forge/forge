@@ -79,6 +79,7 @@ public abstract class GameStage extends Stage {
     private final Vector2 keyboardInput = new Vector2();
     private final Vector2 controllerInput = new Vector2();
     private final Vector2 touchInput = new Vector2();
+    protected final Vector2 touchKnobInput = new Vector2();
 
     private String extraAnnouncement = "";
 
@@ -263,6 +264,10 @@ public abstract class GameStage extends Stage {
         return true;
     }
 
+    public void setTouchKnobInput(float x, float y) {
+        touchKnobInput.set(x, y);
+    }
+
     enum PlayerModification {
         Sprint,
         Hide,
@@ -382,6 +387,7 @@ public abstract class GameStage extends Stage {
             keyboardInput.setZero();
             controllerInput.setZero();
             touchInput.setZero();
+            touchKnobInput.setZero();
             player.getMovementDirection().setZero();
             player.stop();
         } else {
@@ -406,10 +412,10 @@ public abstract class GameStage extends Stage {
             Vector2 dir = new Vector2();
             if (touchX >= 0 && touchInput.len() > 0.2f) {
                 dir.set(touchInput);
-
             } else if (controllerInput.len() > 0.2f) {
                 dir.set(controllerInput);
-
+            } else if (touchKnobInput.len() > 0.2f) {
+                dir.set(touchKnobInput);
             } else {
                 dir.set(keyboardInput);
             }
@@ -582,6 +588,7 @@ public abstract class GameStage extends Stage {
         WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         touchInput.setZero();
+        touchKnobInput.setZero();
         keyboardInput.setZero();
         controllerInput.setZero();
         touchX = -1;
