@@ -246,15 +246,16 @@ public class ComputerUtilAbility {
             return compareEvaluator(a, b, false);
         }
         public int compareEvaluator(final SpellAbility a, final SpellAbility b, boolean safeToEvaluateCreatures) {
-            // sort from highest cost to lowest
             // we want the highest costs first
+            // TODO support alternative strategies like going wide with attackers
             int a1 = a.getPayCosts().getTotalMana().getCMC();
             int b1 = b.getPayCosts().getTotalMana().getCMC();
 
             // deprioritize SAs explicitly marked as preferred to be activated last compared to all other SAs
             if (a.hasParam("AIActivateLast") && !b.hasParam("AIActivateLast")) {
                 return 1;
-            } else if (b.hasParam("AIActivateLast") && !a.hasParam("AIActivateLast")) {
+            }
+            if (b.hasParam("AIActivateLast") && !a.hasParam("AIActivateLast")) {
                 return -1;
             }
 
@@ -274,9 +275,8 @@ public class ComputerUtilAbility {
                         if (c.hasSVar("AIRollPlanarDieParams") && c.getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
                             if (ApiType.RollPlanarDice == a.getApi()) {
                                 return 1;
-                            } else {
-                                return -1;
                             }
+                            return -1;
                         }
                     }
                 }
@@ -297,20 +297,23 @@ public class ComputerUtilAbility {
             }
             if (a2 == 0 && b2 > 0) {
                 return -1;
-            } else if (b2 == 0 && a2 > 0) {
+            }
+            if (b2 == 0 && a2 > 0) {
                 return 1;
             }
 
-            // cast 0 mana cost spells first (might be a Mox)
+            // use 0 cmc abilities first (might be a Mox)
             if (a1 == 0 && b1 > 0 && ApiType.Mana != a.getApi()) {
                 return -1;
-            } else if (a1 > 0 && b1 == 0 && ApiType.Mana != b.getApi()) {
+            }
+            if (a1 > 0 && b1 == 0 && ApiType.Mana != b.getApi()) {
                 return 1;
             }
 
             if (a.getHostCard() != null && a.getHostCard().hasSVar("FreeSpellAI")) {
                 return -1;
-            } else if (b.getHostCard() != null && b.getHostCard().hasSVar("FreeSpellAI")) {
+            }
+            if (b.getHostCard() != null && b.getHostCard().hasSVar("FreeSpellAI")) {
                 return 1;
             }
 
@@ -320,7 +323,8 @@ public class ComputerUtilAbility {
                 // (looks like it's not a full-fledged alternative cost as such, and is not processed with other alt costs)
                 if (a.isSpectacle() && !b.isSpectacle() && a1 < b1) {
                     return 1;
-                } else if (b.isSpectacle() && !a.isSpectacle() && b1 < a1) {
+                }
+                if (b.isSpectacle() && !a.isSpectacle() && b1 < a1) {
                     return 1;
                 }
             }

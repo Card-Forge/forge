@@ -491,7 +491,7 @@ public class Forge implements ApplicationListener {
     }
 
     public static void setCursor(TextureRegion textureRegion, String name) {
-        if (GuiBase.isAndroid())
+        if (GuiBase.isMobile())
             return;
         if (isMobileAdventureMode) {
             if (cursorA0 != null && Objects.equals(name, "0")) {
@@ -686,21 +686,6 @@ public class Forge implements ApplicationListener {
         Dscreens.addFirst(front);
     }
 
-    // iOS apps must not programmatically terminate (App Store guideline / HIG),
-    // so the iOS device adapter's exit()/restart() are no-ops. That left the
-    // normal exit flow stuck on the ClosingScreen, forcing the user to swipe the
-    // app away and relaunch. On iOS, return to the main menu instead so the app
-    // stays usable: adventure -> classic home (switchToClassic), classic -> home.
-    private static boolean iOSReturnToMainMenu() {
-        if (!GuiBase.isIOS())
-            return false;
-        if (isMobileAdventureMode)
-            switchToClassic();
-        else
-            openHomeDefault();
-        return true;
-    }
-
     public static void restart(boolean silent) {
         if (exited) {
             return;
@@ -708,8 +693,6 @@ public class Forge implements ApplicationListener {
 
         Consumer<Boolean> callback = result -> {
             if (result) {
-                if (iOSReturnToMainMenu())
-                    return;
                 exited = true;
                 exitAnimation(true);
             }
@@ -736,8 +719,6 @@ public class Forge implements ApplicationListener {
 
         Consumer<Integer> callback = result -> {
             if (result == 0) {
-                if (iOSReturnToMainMenu())
-                    return;
                 exited = true;
                 exitAnimation(false);
             }

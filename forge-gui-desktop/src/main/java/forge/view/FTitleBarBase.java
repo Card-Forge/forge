@@ -25,6 +25,7 @@ import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedMenuBar;
+import forge.util.BuildInfo;
 import forge.util.Localizer;
 import forge.util.RSSReader;
 
@@ -423,6 +424,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
             g2d.drawLine(x2, y1, x1, y2);
         }
     }
+
     public class UpdaterButton extends TitleBarButton {
         final int MARQUEE_SPEED_DIV = 50;
         final int REPAINT_WITHIN_MS = 50;
@@ -438,7 +440,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
         protected void onClick() {
             if (!displayText.isEmpty()) {
                 try {
-                    new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_ATOM, FControl.instance.getBuildTimeStamp(), FControl.instance.getSnapsTimestamp())));
+                    new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_ATOM, BuildInfo.getTimestamp(), FControl.instance.getSnapsTimestamp())));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

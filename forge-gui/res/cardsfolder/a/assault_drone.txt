@@ -1,0 +1,6 @@
+Name:Assault Drone
+ManaCost:3 B
+Types:Artifact Creature Borg
+PT:2/4
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddPower$ 1 | Description$ Artifact creatures you control get +1/+0.
+Oracle:Artifact creatures you control get +1/+0.
