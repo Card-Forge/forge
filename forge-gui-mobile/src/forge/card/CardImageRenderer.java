@@ -400,7 +400,7 @@ public class CardImageRenderer {
             g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
             return;
         }
-        if (Forge.enableUIMask.equals("Art")) {
+        if (Forge.enableUIMask.equals("Art") || cv.useCardArt()) {
             FImageComplex cardArt = CardRenderer.getCardArt(cv);
             FImageComplex altArt = cardArt;
             boolean isHidden = (cv.getCurrentState().getImageKey().equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))
@@ -793,7 +793,7 @@ public class CardImageRenderer {
             return;
         }
         // when image is not available draw the card renders
-        if (image == null || image == ImageCache.getInstance().getDefaultImage() || Forge.enableUIMask.equals("Art")) { //support drawing card image manually if card image not found
+        if (image == null || image == ImageCache.getInstance().getDefaultImage() || (Forge.enableUIMask.equals("Art") || card.useCardArt())) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top, true, true);
         } else {
             float radius = (h - w) / 8;
