@@ -330,6 +330,14 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         locked = true;
         game.getAction().invoke(() -> {
+            // REFORGE COMMANDER EXTENSION
+            // Cancel can tear this input down (stop()) while this lambda sits
+            // queued on the game thread pool; playing the ability afterwards
+            // would mutate state against a rolled-back payment.
+            if (isFinished()) {
+                locked = false;
+                return;
+            }
             if (PlaySpellAbility.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
                 final List<AbilityManaPart> manaAbilities = chosen.getAllManaParts();
                 boolean restrictionsMet = true;
@@ -419,6 +427,12 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     protected void onStateChanged() {
+        // REFORGE COMMANDER EXTENSION
+        // A cancelled input must not pay life (done()) or re-stop; the cost can
+        // reach "paid" from an in-flight mana ability after stop() ran.
+        if (isFinished()) {
+            return;
+        }
         if (isAlreadyPaid()) {
             done();
             stop();
