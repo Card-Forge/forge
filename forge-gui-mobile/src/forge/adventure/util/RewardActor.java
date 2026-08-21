@@ -1533,6 +1533,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     getStage().addActor(switchButton);
             }
             shown = true;
+            RewardScene.instance().showTooltipInfo(
+                "[%95]Swipe Up/Down to toggle Card Detail View.",
+                Reward.Type.Card.equals(reward.type));
         }
 
         public void hide() {
@@ -1545,6 +1548,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (switchButton != null)
                 switchButton.remove();
             shown = false;
+            RewardScene.instance().showTooltipInfo("", false);
         }
     }
 
