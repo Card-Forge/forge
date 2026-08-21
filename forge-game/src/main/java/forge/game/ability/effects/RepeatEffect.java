@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameEndReason;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -38,15 +39,15 @@ public class RepeatEffect extends SpellAbilityEffect {
             AbilityUtils.resolve(repeat);
             count++;
             if (maxRepeat != null && maxRepeat <= count) {
-                // TODO Replace Infinite Loop Break with a game draw. Here are the scenarios that can cause this:
-                // Helm of Obedience vs Graveyard to Library replacement effect
-
+                // Helm of Obedience vs Graveyard-to-Library replacement effect:
+                // the repeat can never terminate on its own, so declare a draw
+                // instead of continuing in a half-resolved state.
                 if (source.getName().equals("Helm of Obedience")) {
-                StringBuilder infLoop = new StringBuilder(source.toString());
-                    infLoop.append(" - To avoid an infinite loop, this repeat has been broken ");
-                    infLoop.append(" and the game will now continue in the current state, ending the loop early. ");
-                    infLoop.append("Once Draws are available this probably should change to a Draw.");
-                    System.out.println(infLoop.toString());
+                    final Game game = sa.getActivatingPlayer().getGame();
+                    for (final Player p : game.getPlayers()) {
+                        p.loopDraw();
+                    }
+                    game.setGameOver(GameEndReason.Draw);
                 }
                 break;
             }
