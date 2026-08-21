@@ -37,8 +37,8 @@ import java.util.Comparator;
  */
 public class RewardScene extends UIScene {
     private TextraButton doneButton, detailButton, restockButton;
-    private TextraLabel playerGold, playerShards;
-    private TypingLabel headerLabel, tooltipInfo;
+    private TextraLabel playerGold, playerShards, tooltipInfo;
+    private TypingLabel headerLabel;
     private Vector2 headerLabelOrigPos;
     private boolean autoSell;
 
@@ -82,13 +82,8 @@ public class RewardScene extends UIScene {
         detailButton.setVisible(false);
         doneButton = ui.findActor("done");
         restockButton = ui.findActor("restock");
-        tooltipInfo = Controls.newTypingLabel("[%?SHINY]{GRADIENT}Swipe Up/Down to toggle Card Detail View.{ENDGRADIENT}");
-        tooltipInfo.skipToTheEnd();
-        float w = tooltipInfo.getPrefWidth();
-        float h = tooltipInfo.getPrefHeight() / 2.5f;
-        tooltipInfo.setBounds((Scene.getIntendedWidth() / 2f) - (w / 2f), h, Scene.getIntendedWidth(), h);
+        tooltipInfo = Controls.newTextraLabel("");
         tooltipInfo.setVisible(false);
-        ui.addActor(tooltipInfo);
     }
 
     @Override
@@ -222,8 +217,16 @@ public class RewardScene extends UIScene {
         super.enter();
     }
 
-    public void showTooltipInfo(boolean val) {
-        tooltipInfo.setVisible(val);
+    public void showTooltipInfo(String message, boolean visible) {
+        tooltipInfo.setText(message);
+        float w = tooltipInfo.getPrefWidth();
+        float h = tooltipInfo.getPrefHeight();
+        tooltipInfo.setBounds((Scene.getIntendedWidth() / 2f) - (w / 2f), 0, Scene.getIntendedWidth(), h);
+        tooltipInfo.setVisible(visible);
+        if (visible)
+            ui.addActor(tooltipInfo);
+        else
+            ui.removeActor(tooltipInfo);
     }
 
     private void showLootOrDone() {
