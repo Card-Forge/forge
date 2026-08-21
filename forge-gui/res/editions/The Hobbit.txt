@@ -412,6 +412,10 @@ Replace=.033F fromSheet("HOB journey")+
 12 c_a_treasure_sac @Leonardo Santanna
 13 c_a_treasure_sac @Kamila Szutenberg
 
+[other]
+14 enduring_story @Kim Dingwall
+15 adventure @Nia Kovalevski
+
 [journey]
 1 Plains|HOB|[194]
 1 Island|HOB|[195]
