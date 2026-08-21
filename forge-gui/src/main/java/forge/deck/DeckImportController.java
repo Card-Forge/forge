@@ -50,6 +50,7 @@ public class DeckImportController {
     private GameFormat currentGameFormat;
     private GameType currentGameType;
     private final List<DeckSection> allowedSections = new ArrayList<>();
+    private boolean commanderAutoDetected = false;
     private ItemPool<PaperCard> playerInventory;
     /**
      * If a free card is missing from a player's inventory (e.g. a basic land), it gets run through this function, which
@@ -113,6 +114,10 @@ public class DeckImportController {
 
     public boolean hasNoDefaultGameFormat(){
         return this.currentGameFormat == null;
+    }
+
+    public boolean wasCommanderAutoDetected() {
+        return commanderAutoDetected;
     }
 
     public String getCurrentGameFormatName(){
@@ -197,6 +202,15 @@ public class DeckImportController {
     public List<Token> parseInput(String input) {
         tokens.clear();
         cardsInTokens.clear();
+        commanderAutoDetected = false;
+
+        // Allow the Commander section when an explicit header is present so its cards aren't dropped
+        if (!this.allowedSections.contains(DeckSection.Commander)
+                && inputContainsCommanderSection(input)) {
+            this.allowedSections.add(DeckSection.Commander);
+            commanderAutoDetected = true;
+        }
+
         DeckRecognizer recognizer = new DeckRecognizer();
         // Set Art Preference first thing
         recognizer.setArtPreference(this.artPreference);
@@ -248,6 +262,20 @@ public class DeckImportController {
             PaperCard tokenCard = token.getCard();
             cardsInTokens.put(tokenCard, token);
         }
+    }
+
+    private static boolean inputContainsCommanderSection(String input) {
+        for (String line : input.split("\n")) {
+            String trimmed = line.trim().replaceAll("^[/#*]+\\s*", "")
+                    .replaceAll("[:\\s]+$", "").toLowerCase();
+            if (trimmed.equals("commander")) {
+                return true;
+            }
+            if (line.trim().startsWith("CM:")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void checkAndFixCommanderIn(DeckSection targetDeckSection){
