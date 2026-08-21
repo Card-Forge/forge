@@ -31,6 +31,10 @@ public class RepeatEffect extends SpellAbilityEffect {
         if (sa.hasParam("MaxRepeat")) {
             maxRepeat = AbilityUtils.calculateAmount(source, sa.getParam("MaxRepeat"), sa);
             if (maxRepeat == 0) return; // do nothing if maxRepeat is 0. the next loop will execute at least once
+        } else {
+            // Uncounted "repeat until condition" loops get a hang-safety net.
+            // ponytail: arbitrary cap like the stack limit; raise if a real card needs more.
+            maxRepeat = 1000;
         }
 
         //execute repeat ability at least once
@@ -38,10 +42,12 @@ public class RepeatEffect extends SpellAbilityEffect {
         do {
             AbilityUtils.resolve(repeat);
             count++;
-            if (maxRepeat != null && maxRepeat <= count) {
+            if (maxRepeat <= count) {
                 // Helm of Obedience vs Graveyard-to-Library replacement effect:
                 // the repeat can never terminate on its own, so declare a draw
-                // instead of continuing in a half-resolved state.
+                // instead of continuing in a half-resolved state. Other cards
+                // hitting their (explicit or default) cap just stop — MaxRepeat
+                // is also used as a legitimate counted-loop bound.
                 if (source.getName().equals("Helm of Obedience")) {
                     final Game game = sa.getActivatingPlayer().getGame();
                     for (final Player p : game.getPlayers()) {
