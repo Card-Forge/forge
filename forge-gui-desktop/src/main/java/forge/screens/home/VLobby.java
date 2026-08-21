@@ -641,11 +641,13 @@ public class VLobby implements ILobbyView {
         refreshGeneratedDecks = false;
         final DeckType type = mainChooser.getSelectedDeckType();
         final Deck deck = mainChooser.getDeck();
-        // something went wrong, clear selection to prevent error loop
         if (deck == null) {
-            mainChooser.getLstDecks().setSelectedIndex(0);
+            return;
         }
-        final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
+        final Collection<DeckProxy> selectedDecks = mainChooser.getSelectedDeckProxies();
+        if (selectedDecks.isEmpty()) {
+            return;
+        }
         if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
             final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy::getName);
             if (isCommanderDeck) {

@@ -228,6 +228,10 @@ public abstract class ItemView<T extends InventoryItem> {
         return items;
     }
 
+    public final void clearSelectedItems() {
+        onSetSelectedIndices(List.of());
+    }
+
     public final boolean setSelectedItem(final T item) {
         return setSelectedItem(item, true);
     }
