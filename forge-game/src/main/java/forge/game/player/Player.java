@@ -1994,6 +1994,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         setOutcome(PlayerOutcome.draw());
     }
 
+    public final void loopDraw() {
+        setOutcome(PlayerOutcome.loopDraw());
+    }
+
     public final boolean conceded() {
         return getOutcome() != null && getOutcome().lossState == GameLossReason.Conceded;
     }

@@ -1,3 +1,4 @@
+// REFORGE COMMANDER EXTENSION: loop-draw outcome fragment (lblGameEndedInDrawInfiniteLoop).
 package forge.game.player;
 
 
@@ -27,6 +28,15 @@ public class PlayerOutcome {
 
     public static PlayerOutcome draw() {
         return new PlayerOutcome(null, GameLossReason.IntentionalDraw, null);
+    }
+
+    /**
+     * Draw caused by an infinite loop (e.g. stack-size safety net or
+     * RepeatEffect max-repeat break). The reason string doubles as the
+     * loop marker consumed by {@link #toString()}.
+     */
+    public static PlayerOutcome loopDraw() {
+        return new PlayerOutcome(null, GameLossReason.IntentionalDraw, "loop");
     }
 
     public static PlayerOutcome altWin(String sourceName) {
@@ -75,7 +85,11 @@ public class PlayerOutcome {
             case OpponentWon: return localizer.getMessage("lblLostBecauseAnOpponentHasWonBySpell").replace("%s", loseConditionSpell);
             case SpellEffect: return localizer.getMessage("lblLostDueToEffectOfSpell").replace("%s", loseConditionSpell);
             case CommanderDamage: return localizer.getMessage("lblLostDueToAccumulationOf21DamageFromGenerals");
-            case IntentionalDraw: return localizer.getMessage("lblAcceptedThatTheGameIsADraw");
+            case IntentionalDraw:
+                if ("loop".equals(loseConditionSpell)) {
+                    return localizer.getMessage("lblGameEndedInDrawInfiniteLoop");
+                }
+                return localizer.getMessage("lblAcceptedThatTheGameIsADraw");
         }
         return localizer.getMessage("lblLostForUnknownReasonBug");
     }

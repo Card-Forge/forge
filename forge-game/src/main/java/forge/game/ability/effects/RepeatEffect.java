@@ -1,6 +1,8 @@
+// REFORGE COMMANDER EXTENSION: Helm infinite-loop draw + default maxRepeat cap (loop safety net).
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameEndReason;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -30,6 +32,10 @@ public class RepeatEffect extends SpellAbilityEffect {
         if (sa.hasParam("MaxRepeat")) {
             maxRepeat = AbilityUtils.calculateAmount(source, sa.getParam("MaxRepeat"), sa);
             if (maxRepeat == 0) return; // do nothing if maxRepeat is 0. the next loop will execute at least once
+        } else {
+            // Uncounted "repeat until condition" loops get a hang-safety net.
+            // ponytail: arbitrary cap like the stack limit; raise if a real card needs more.
+            maxRepeat = 1000;
         }
 
         //execute repeat ability at least once
@@ -37,16 +43,19 @@ public class RepeatEffect extends SpellAbilityEffect {
         do {
             AbilityUtils.resolve(repeat);
             count++;
-            if (maxRepeat != null && maxRepeat <= count) {
-                // TODO Replace Infinite Loop Break with a game draw. Here are the scenarios that can cause this:
-                // Helm of Obedience vs Graveyard to Library replacement effect
-
-                if (source.getName().equals("Helm of Obedience")) {
-                StringBuilder infLoop = new StringBuilder(source.toString());
-                    infLoop.append(" - To avoid an infinite loop, this repeat has been broken ");
-                    infLoop.append(" and the game will now continue in the current state, ending the loop early. ");
-                    infLoop.append("Once Draws are available this probably should change to a Draw.");
-                    System.out.println(infLoop.toString());
+            if (maxRepeat <= count) {
+                // Helm of Obedience vs Graveyard-to-Library replacement effect:
+                // the repeat can never terminate on its own, so declare a draw
+                // instead of continuing in a half-resolved state. Other cards
+                // hitting their (explicit or default) cap just stop — MaxRepeat
+                // is also used as a legitimate counted-loop bound.
+                if (source.getName().equals("Helm of Obedience")
+                        && checkRepeatConditions(sa)) {
+                    final Game game = sa.getActivatingPlayer().getGame();
+                    for (final Player p : game.getPlayers()) {
+                        p.loopDraw();
+                    }
+                    game.setGameOver(GameEndReason.Draw);
                 }
                 break;
             }
