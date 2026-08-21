@@ -76,6 +76,8 @@ public class AiAttackController {
 
     private final Player ai;
     private Player defendingOpponent;
+    private final List<Player> defenderPreferences;
+    private int defenderPreferenceIndex;
 
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
@@ -95,7 +97,8 @@ public class AiAttackController {
 
     public AiAttackController(final Player ai, boolean nextTurn) {
         this.ai = ai;
-        defendingOpponent = choosePreferredDefenderPlayer(ai, true);
+        defenderPreferences = getPreferredDefenderPlayers(ai, true);
+        defendingOpponent = defenderPreferences.get(0);
         myList = ai.getCreaturesInPlay();
         this.nextTurn = nextTurn;
         refreshCombatants(defendingOpponent);
@@ -105,7 +108,8 @@ public class AiAttackController {
 
     public AiAttackController(final Player ai, Card attacker) {
         this.ai = ai;
-        defendingOpponent = choosePreferredDefenderPlayer(ai, true);
+        defenderPreferences = getPreferredDefenderPlayers(ai, true);
+        defendingOpponent = defenderPreferences.get(0);
         this.oppList = getOpponentCreatures(defendingOpponent);
         myList = ai.getCreaturesInPlay();
         this.nextTurn = false;
@@ -202,21 +206,27 @@ public class AiAttackController {
         return choosePreferredDefenderPlayer(ai, false);
     }
     public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
+        return getPreferredDefenderPlayers(ai, forCombatDmg).get(0);
+    }
+
+    private static List<Player> getPreferredDefenderPlayers(Player ai, boolean forCombatDmg) {
         PlayerCollection opponents = ai.getOpponents();
-        if (opponents.size() < 2) {
-            return Iterables.getFirst(opponents, null);
+        if (opponents.size() == 1) {
+            return List.of(opponents.get(0));
         }
 
-        Map<Player, Integer> threatScores = Maps.newHashMap();
+        final Map<Player, Integer> threatScores = new HashMap<>(opponents.size());
         for (Player opp : opponents) {
-            final int life = opp.getLife();
-            int score = ComputerUtil.evaluateBoardPosition(ai, opp);
-            int lowLifeThreshold = Math.min(20, opp.getStartingLife());
-            if (life > 0 && life < lowLifeThreshold) {
-                // TODO commander damage
-                int lifeDeficit = lowLifeThreshold - life;
-                score += lifeDeficit * lifeDeficit;
-            }
+            final int threatScore = ComputerUtil.evaluateBoardPosition(ai, opp);
+            threatScores.put(opp, threatScore);
+        }
+        int highestThreat = Collections.max(threatScores.values());
+
+        final int temperature = AiProfileUtil.getIntProperty(ai, AiProps.MULTIPLAYER_DEFENDER_SOFTMAX_TEMPERATURE);
+        final Map<Player, Integer> scores = new HashMap<>(opponents.size());
+        for (Player opp : opponents) {
+            final int threatScore = threatScores.get(opp);
+            int score = threatScore + getFinishingBonus(ai, opp, threatScore, highestThreat, temperature);
             if (forCombatDmg) {
                 if (opp.isMonarch() && ai.canBecomeMonarch()) {
                     score += 80;
@@ -231,13 +241,35 @@ public class AiAttackController {
                     score -= 50;
                 }
             }
-            threatScores.put(opp, score);
+            scores.put(opp, score);
         }
-        // round away slightly so a single land drop doesn't mean players with earlier turn order are predictably attacked
-        // grows with game age since by then threat ranges become less narrow
-        int threatLimit = Collections.max(threatScores.values()) - 10 - ai.getGame().getPhaseHandler().getTurn();
-        threatScores.values().removeIf(e -> e < threatLimit);
-        return Aggregates.random(threatScores.keySet());
+
+        final List<Player> preferences = new ArrayList<>(opponents);
+        preferences.sort(Comparator.comparingInt(scores::get).reversed());
+
+        // Sample the primary target with softmax so near-equal threats do not always draw every attack.
+        final Player selected = Aggregates.itemWithSoftmax(preferences, scores::get, temperature);
+        preferences.remove(selected);
+        preferences.add(0, selected);
+        return preferences;
+    }
+
+    private static int getFinishingBonus(final Player ai, final Player opponent, final int threatScore, final int highestThreat,
+            final int temperature) {
+        final int ttkScore = ComputerUtil.getCombatTtkScore(ai, ComputerUtil.estimateCombatTurnsToKill(ai, opponent));
+        // Preserve weaker opponents as potential checks on a clear leader.
+        return (int) Math.round(ttkScore * Math.exp((threatScore - highestThreat) / (double) temperature));
+    }
+
+    private boolean chooseNextDefender() {
+        while (++defenderPreferenceIndex < defenderPreferences.size()) {
+            defendingOpponent = defenderPreferences.get(defenderPreferenceIndex);
+            refreshCombatants(defendingOpponent);
+            if (!attackers.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static List<Card> sortAttackers(final List<Card> in) {
@@ -807,12 +839,9 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
-        // something prevents attacking, try another
-        if (this.attackers.isEmpty() && ai.getOpponents().size() > 1) {
-            final PlayerCollection opps = ai.getOpponents();
-            opps.remove(defendingOpponent);
-            defendingOpponent = Aggregates.random(opps);
-            refreshCombatants(defendingOpponent);
+        // Something prevents attacking the preferred defender, so try the next threat candidate.
+        if (this.attackers.isEmpty()) {
+            chooseNextDefender();
         }
 
         // TODO ideally requirements and attackMax are calculated first. so AI knows which attackers can't contribute
@@ -1339,6 +1368,11 @@ public class AiAttackController {
             }
         }
 
+        // Threat ranking alone can select a defended opponent over one that is open. If the
+        // preferred target produces no voluntary attackers, evaluate the next best target.
+        if (combat.getAttackers().isEmpty() && chooseNextDefender()) {
+            return declareAttackers(combat);
+        }
         return aiAggression;
     }
 
