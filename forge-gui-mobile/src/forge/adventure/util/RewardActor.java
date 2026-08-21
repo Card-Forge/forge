@@ -196,7 +196,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                                 e.printStackTrace();
                             }
                         }
-                        holdTooltip.hide();
+                        holdTooltip.hide(true);
                         holdTooltip.tooltip_actor = new ComplexTooltip(toolTipImage);
                         if (wasShown) {
                             holdTooltip.show();
@@ -1496,6 +1496,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (!frontSideUp())
                 return;
             ensureOverlayControls();
+            RewardScene.instance().showTooltipInfo("");
 
             // Drop any leftover overlay actors from another card (stale input blockers).
             Stage stage = getStage();
@@ -1533,12 +1534,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     getStage().addActor(switchButton);
             }
             shown = true;
-            RewardScene.instance().showTooltipInfo(
-                "[%95]Swipe Up/Down to toggle Card Detail View.",
-                Reward.Type.Card.equals(reward.type));
+            if (Reward.Type.Card.equals(reward.type)) {
+                RewardScene.instance().showTooltipInfo("[%95]Swipe Up/Down to toggle Card Detail View.");
+            }
         }
 
         public void hide() {
+            hide(false);
+        }
+        public void hide(boolean retainOverlay) {
             if (dismissBackdrop != null)
                 dismissBackdrop.remove();
             if (cardHitArea != null)
@@ -1548,7 +1552,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (switchButton != null)
                 switchButton.remove();
             shown = false;
-            RewardScene.instance().showTooltipInfo("", false);
+            if (!retainOverlay)
+                RewardScene.instance().showTooltipInfo("");
         }
     }
 
