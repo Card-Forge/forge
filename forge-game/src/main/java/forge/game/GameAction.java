@@ -1230,8 +1230,37 @@ public class GameAction {
         // preList means that this is run by a pre Check with LKI objects
         // in that case Always trigger should not Run
         if (preList.isEmpty()) {
-            for (Player p : game.getPlayers()) {
-                for (Card c : p.getCardsIn(ZoneType.Battlefield).threadSafeIterable()) {
+            // REFORGE COMMANDER EXTENSION
+            // Iterate the battlefield without expanding stacked tokens (one
+            // prototype per stack) so a full static check does not permanently
+            // materialize every token into distinct cards, defeating O(S)
+            // stacking. Fall back to the expanded sweep only when a stack's
+            // controller differs from its zone owner — the one case that must
+            // move real cards to another player's battlefield.
+            boolean stacksNeedCorrection = false; // doc:1c DONE
+            for (final Player p : game.getPlayers()) {
+                final PlayerZone bf = p.getZone(ZoneType.Battlefield);
+                if (bf instanceof PlayerZoneBattlefield) {
+                    for (final StackedTokenCard stack : ((PlayerZoneBattlefield) bf).getStackedTokens()) {
+                        if (!stack.getController().equals(p)) {
+                            stacksNeedCorrection = true;
+                            break;
+                        }
+                    }
+                }
+                if (stacksNeedCorrection) {
+                    break;
+                }
+            }
+            for (final Player p : game.getPlayers()) {
+                final PlayerZone bf = p.getZone(ZoneType.Battlefield);
+                final Iterable<Card> battlefield;
+                if (!stacksNeedCorrection && bf instanceof PlayerZoneBattlefield) {
+                    battlefield = ((PlayerZoneBattlefield) bf).getCardsUnexpanded().threadSafeIterable();
+                } else {
+                    battlefield = p.getCardsIn(ZoneType.Battlefield).threadSafeIterable();
+                }
+                for (Card c : battlefield) {
                     if (!c.getController().equals(p)) {
                         controllerChangeZoneCorrection(c);
                         affectedCards.add(c);
