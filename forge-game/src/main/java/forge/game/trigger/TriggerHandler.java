@@ -459,8 +459,6 @@ public class TriggerHandler {
     private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams, Player controller) {
         // All tests passed, execute ability.
 
-        checkInfiniteLoop(regtrig, controller); // doc:11c PARTIAL
-
         adjustUndoStack(regtrig, runParams);
 
         Card host = regtrig.getHostCard();
@@ -499,6 +497,10 @@ public class TriggerHandler {
         if (regtrig.hasParam("TriggerController")) {
             Player p = AbilityUtils.getDefinedPlayers(host, regtrig.getParam("TriggerController"), sa).get(0);
             sa.setActivatingPlayer(p);
+        }
+
+        if (checkInfiniteLoop(regtrig, sa.getActivatingPlayer())) { // doc:11c PARTIAL
+            return;
         }
 
         if (!sa.getActivatingPlayer().isInGame()) {
@@ -562,16 +564,16 @@ public class TriggerHandler {
      * draw; AI controllers auto-declare past a higher threshold. Mana and
      * state-trigger modes are exempt — they legitimately fire many times.
      */
-    private void checkInfiniteLoop(final Trigger regtrig, final Player controller) {
+    private boolean checkInfiniteLoop(final Trigger regtrig, final Player controller) {
         if (game.isGameOver()) {
-            return;
+            return true;
         }
         switch (regtrig.getMode()) {
             case TapsForMana:
             case ManaAdded:
             case Always:
             case Immediate:
-                return;
+                return false;
             default:
                 break;
         }
@@ -584,20 +586,21 @@ public class TriggerHandler {
         final String key = controller.getName() + "|" + regtrig.getHostCard().getName() + "|" + regtrig.getMode();
         final int count = loopFireCounts.merge(key, 1, Integer::sum);
         if (loopPrompted.contains(key)) {
-            return;
+            return false;
         }
         if (controller.isAI()) {
             if (count >= LOOP_AI_DRAW_THRESHOLD) {
                 declareLoopDraw();
+                return true;
             }
-            return;
+            return false;
         }
         if (count < LOOP_PROMPT_THRESHOLD) {
-            return;
+            return false;
         }
         loopPrompted.add(key);
         final Localizer localizer = Localizer.getInstance();
-        final String message = String.format(localizer.getMessage("lblInfiniteLoopDetected"),
+        final String message = localizer.getMessage("lblInfiniteLoopDetected",
                 regtrig.getHostCard().getName(), count);
         final List<String> options = Lists.newArrayList(
                 localizer.getMessage("lblDeclareDraw"), localizer.getMessage("lblContinue"));
@@ -605,7 +608,9 @@ public class TriggerHandler {
                 PlayerActionConfirmMode.DeclareLoop, message, options, regtrig.getHostCard(), null);
         if (draw) {
             declareLoopDraw();
+            return true;
         }
+        return false;
     }
 
     private void declareLoopDraw() {

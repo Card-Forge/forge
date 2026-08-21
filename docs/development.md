@@ -361,8 +361,8 @@ Missing: no game-state fingerprinting, no repeat detection, no shortcut mechanis
 
 | # | Gap | Fix | Issue | Milestone |
 |---|-----|-----|-------|-----------|
-| 11a | Stack limit is 999, no explicit loop-draw declaration | Lower to 500; add `loopDraw()` declaration + game-over "infinite loop" message | #45 | v1 |
-| 11b | `RepeatEffect` Helm of Obedience case does `break` instead of declaring a draw (TODO at line 41) | Replace with `intentionalDraw()` + `GameEndReason.Draw`; add default `maxRepeat` | #46 | v1 |
+| 11a | Stack limit is 999, no explicit loop-draw declaration | Lower to 500; add `loopDraw()` declaration + game-over "infinite loop" message — **DONE** — stack guard 500 with `loopDraw()` draw (`MagicStack.java:263`), outcome `has drawn — an infinite loop was detected` (`PlayerOutcome.java`, `en-US.properties`) | #45 | v1 |
+| 11b | `RepeatEffect` Helm of Obedience case does `break` instead of declaring a draw (TODO at line 41) | Replace with `intentionalDraw()` + `GameEndReason.Draw`; add default `maxRepeat` — **DONE** — Helm declares draw (`RepeatEffect.java:51`), uncapped loops default `MaxRepeat` 1000 | #46 | v1 |
 | 11c | Trigger chain loops (A→B→A) not caught by per-trigger dedup | Track trigger fire counts per turn in `TriggerHandler`; prompt draw declaration past a threshold — **PARTIAL**: `checkInfiniteLoop()` counts fires per host/mode/controller signature per turn, prompts the human at 20 (Declare Draw / Continue) and auto-draws AI loops at 50; mana and state-trigger modes exempt (`TriggerHandler.java`) | #47 | v1 |
 | 11d | No detection that game state is *repeating* — the reliable loop signal | `GameStateFingerprint` hashed after each resolution; 3 consecutive identical fingerprints = loop | #48 | v1 |
 | 11e | No player-facing flow when a loop is found | Loop-detected dialog: Declare Draw / Break Loop / Continue (max 5); mandatory loops skip dialog → immediate draw; AI breaks or draws autonomously | #49 | v1 |
