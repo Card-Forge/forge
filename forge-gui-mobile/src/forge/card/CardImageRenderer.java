@@ -222,7 +222,7 @@ public class CardImageRenderer {
         if (isSaga) {
             //draw text box
             Color[] textBoxColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.TEXT_BOX_TINT);
-            drawTextBox(g, card, state, textBoxColors, x + artInset, y - artHeight, (w - 2 * artInset) / 2, textBoxHeight + artHeight, onTop, useCardBGTexture, noText, altState, isFaceDown, canShow, isChoiceList);
+            drawTextBox(g, card, state, textBoxColors, x + artInset, y - artHeight, (w - 2 * artInset) / 2, textBoxHeight + artHeight, onTop, useCardBGTexture, noText, altState, isFaceDown, canShow, isChoiceList, artHeight > 0);
             y += textBoxHeight;
 
             //draw type line
@@ -231,7 +231,7 @@ public class CardImageRenderer {
         } else if (isClass) {
             //draw text box
             Color[] textBoxColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.TEXT_BOX_TINT);
-            drawTextBox(g, card, state, textBoxColors, x + artInset + (artWidth / 2), y - artHeight, (w - 2 * artInset) / 2, textBoxHeight + artHeight, onTop, useCardBGTexture, noText, altState, isFaceDown, canShow, isChoiceList);
+            drawTextBox(g, card, state, textBoxColors, x + artInset + (artWidth / 2), y - artHeight, (w - 2 * artInset) / 2, textBoxHeight + artHeight, onTop, useCardBGTexture, noText, altState, isFaceDown, canShow, isChoiceList, artHeight > 0);
             y += textBoxHeight;
 
             //draw type line
@@ -241,7 +241,7 @@ public class CardImageRenderer {
             if (!drawDungeon) {
                 //draw textbox
                 Color[] textBoxColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.TEXT_BOX_TINT);
-                drawTextBox(g, card, state, textBoxColors, x + artInset, y - artHeight, (w - 2 * artInset), textBoxHeight + artHeight, onTop, useCardBGTexture, noText, altState, isFaceDown, canShow, isChoiceList);
+                drawTextBox(g, card, state, textBoxColors, x + artInset, y - artHeight, (w - 2 * artInset), textBoxHeight + artHeight, onTop, useCardBGTexture, noText, altState, isFaceDown, canShow, isChoiceList, artHeight > 0);
                 y += textBoxHeight;
             }
             drawTypeLine(g, state, canShow, headerColors, x, y, w, typeBoxHeight, noText, false, false);
@@ -253,7 +253,7 @@ public class CardImageRenderer {
 
             //draw text box
             Color[] textBoxColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.TEXT_BOX_TINT);
-            drawTextBox(g, card, state, textBoxColors, x + artInset, y, w - 2 * artInset, textBoxHeight, onTop, useCardBGTexture, noText, altState, isFaceDown, canShow, isChoiceList);
+            drawTextBox(g, card, state, textBoxColors, x + artInset, y, w - 2 * artInset, textBoxHeight, onTop, useCardBGTexture, noText, altState, isFaceDown, canShow, isChoiceList, artHeight > 0);
             y += textBoxHeight;
         }
 
@@ -541,11 +541,11 @@ public class CardImageRenderer {
     //use text renderer to handle mana symbols and reminder text
     private static final TextRenderer cardTextRenderer = new TextRenderer(true);
 
-    private static void drawTextBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean onTop, boolean useCardBGTexture, boolean noText, boolean altstate, boolean isFacedown, boolean canShow, boolean isChoiceList) {
+    private static void drawTextBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean onTop, boolean useCardBGTexture, boolean noText, boolean altstate, boolean isFacedown, boolean canShow, boolean isChoiceList, boolean isArtVisible) {
         if (card.hasSecondaryState() || card.hasPreparedSpell()) {
             Color[] altcolors = FSkinColor.tintColors(Color.WHITE, fillColorBackground(g, CardDetailUtil.getBorderColors(card.getState(true), canShow) , x, y, w, h), CardRenderer.NAME_BOX_TINT);
             if ((isFacedown && !altstate) || card.getZone() == ZoneType.Stack && !card.hasPreparedSpell() || isChoiceList || altstate) {
-                setTextBox(g, card, state, colors, x, y, w, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown);
+                setTextBox(g, card, state, colors, x, y, w, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown, isArtVisible);
             } else {
                 float leftX = x, rightX = x + w / 2, width = w - (w / 2);
                 CardStateView rightState = state, leftState = card.getState(true);
@@ -559,16 +559,16 @@ public class CardImageRenderer {
                 drawHeader(g, card, leftState, altcolors, leftX, y, width, typeBoxHeight, noText, true);
                 drawTypeLine(g, leftState, canShow, altcolors, leftX, y + typeBoxHeight, width, typeBoxHeight, noText, true, true);
                 float mod = (typeBoxHeight + typeBoxHeight);
-                setTextBox(g, card, leftState, altcolors, leftX, y + mod, width, h - mod, onTop, useCardBGTexture, noText, typeBoxHeight, typeBoxHeight, true, altstate, isFacedown);
+                setTextBox(g, card, leftState, altcolors, leftX, y + mod, width, h - mod, onTop, useCardBGTexture, noText, typeBoxHeight, typeBoxHeight, true, altstate, isFacedown, isArtVisible);
                 //right
-                setTextBox(g, card, rightState, colors, rightX, y, width, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown);
+                setTextBox(g, card, rightState, colors, rightX, y, width, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown, isArtVisible);
             }
         } else {
-            setTextBox(g, card, state, colors, x, y, w, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown);
+            setTextBox(g, card, state, colors, x, y, w, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown, isArtVisible);
         }
     }
 
-    private static void setTextBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean onTop, boolean useCardBGTexture, boolean noText, float adventureHeaderHeight, float adventureTypeHeight, boolean drawAdventure, boolean altstate, boolean isFaceDown) {
+    private static void setTextBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean onTop, boolean useCardBGTexture, boolean noText, float adventureHeaderHeight, float adventureTypeHeight, boolean drawAdventure, boolean altstate, boolean isFaceDown, boolean isArtVisible) {
         boolean fakeDuals = false;
         //update land bg colors
         FSkinProp imageProp = null;
@@ -607,7 +607,7 @@ public class CardImageRenderer {
                 else {
                     g.setAlphaComposite(0.95f);
                     fillColorBackground(g, colorPairs, x, y, w, h);
-                    if (fakeDuals && landTypeCount == 2) {
+                    if (fakeDuals && landTypeCount == 2 && isArtVisible) {
                         g.setAlphaComposite(0.1f);
                         drawAlphaLines(g, x, y, w, h);
                     }
