@@ -17,6 +17,8 @@
  */
 package forge.game.zone;
 
+// REFORGE COMMANDER EXTENSION: stack-cap loop draw (500 vs upstream 999).
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
