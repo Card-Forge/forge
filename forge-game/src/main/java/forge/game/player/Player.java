@@ -3062,7 +3062,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        for (final Card c : getCardsIn(ZoneType.Library)) {
+        for (final Card c : List.copyOf(getCardsIn(ZoneType.Library))) { //Copy the list so ChangeZone effects don't trigger concurrent modification.
             for (KeywordInterface inst : c.getKeywords()) {
                 String kw = inst.getOriginal();
                 if (kw.startsWith("MayEffectFromOpeningDeck")) {
@@ -3709,6 +3709,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (story) {
             enduringStoryEffect = new Card(game.nextCardId(), null, game);
             enduringStoryEffect.setOwner(this);
+            enduringStoryEffect.setImageKey(StaticData.instance().getOtherImageKey(ImageKeys.ENDURING_STORY_IMAGE, setCode));
             enduringStoryEffect.setName("An Enduring Story");
             enduringStoryEffect.setGamePieceType(GamePieceType.EFFECT);
             if (setCode != null) {

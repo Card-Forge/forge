@@ -732,7 +732,7 @@ public class ComputerUtilCost {
             }
         }
 
-        int x = ObjectUtils.defaultIfNull(val, 0);
+        int x = ObjectUtils.getIfNull(val, 0);
         sa.setXManaCostPaid(x);
         return x;
     }

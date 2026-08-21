@@ -64,6 +64,8 @@ public class SpellAbilityProperty {
             return sa.isEmbalm();
         } else if (property.equals("Eternalize")) {
             return sa.isEternalize();
+        } else if (property.equals("BeamMeUp")) {
+            return sa.isBeamMeUp();
         } else if (property.equals("Flashback")) {
             return sa.isFlashback();
         } else if (property.equals("Harmonize")) {

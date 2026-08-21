@@ -1,3 +1,4 @@
+// REFORGE COMMANDER EXTENSION: loop-draw outcome fragment (lblGameEndedInDrawInfiniteLoop).
 package forge.game.player;
 
 
