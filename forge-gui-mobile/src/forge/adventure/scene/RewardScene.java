@@ -38,7 +38,7 @@ import java.util.Comparator;
 public class RewardScene extends UIScene {
     private TextraButton doneButton, detailButton, restockButton;
     private TextraLabel playerGold, playerShards;
-    private TypingLabel headerLabel;
+    private TypingLabel headerLabel, tooltipInfo;
     private Vector2 headerLabelOrigPos;
     private boolean autoSell;
 
@@ -52,8 +52,6 @@ public class RewardScene extends UIScene {
             object = new RewardScene();
         return object;
     }
-
-    private boolean showTooltips = false;
 
     public enum Type {
         Shop,
@@ -84,6 +82,13 @@ public class RewardScene extends UIScene {
         detailButton.setVisible(false);
         doneButton = ui.findActor("done");
         restockButton = ui.findActor("restock");
+        tooltipInfo = Controls.newTypingLabel("[%?SHINY]{GRADIENT}Swipe Up/Down to toggle Card Detail View.{ENDGRADIENT}");
+        tooltipInfo.skipToTheEnd();
+        float w = tooltipInfo.getPrefWidth();
+        float h = tooltipInfo.getPrefHeight() / 2.5f;
+        tooltipInfo.setBounds((Scene.getIntendedWidth() / 2f) - (w / 2f), h, Scene.getIntendedWidth(), h);
+        tooltipInfo.setVisible(false);
+        ui.addActor(tooltipInfo);
     }
 
     @Override
@@ -215,6 +220,10 @@ public class RewardScene extends UIScene {
         autoSell = false;
         updateDetailButton();
         super.enter();
+    }
+
+    public void showTooltipInfo(boolean val) {
+        tooltipInfo.setVisible(val);
     }
 
     private void showLootOrDone() {
