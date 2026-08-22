@@ -102789,7 +102789,7 @@
   {
     "name": "FEM Vodalian Mage C",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
-    "scale": 0.5,
+    "scale": 0.25,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_mage.dck"
     ],
@@ -103092,7 +103092,7 @@
   {
     "name": "FEM Vodalian Mage A",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
-    "scale": 0.5,
+    "scale": 0.25,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_mage_a.dck"
     ],
@@ -103141,7 +103141,7 @@
   {
     "name": "FEM Vodalian Mage B",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
-    "scale": 0.5,
+    "scale": 0.25,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_mage_b.dck"
     ],
@@ -103332,7 +103332,7 @@
   {
     "name": "FEM Ally Vodalian Mage A",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
-    "scale": 0.5,
+    "scale": 0.25,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_mage_a.dck"
     ],
@@ -103351,7 +103351,7 @@
   {
     "name": "FEM Ally Vodalian Mage B",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
-    "scale": 0.5,
+    "scale": 0.25,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_mage_b.dck"
     ],
@@ -103370,7 +103370,7 @@
   {
     "name": "FEM Ally Vodalian Mage C",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
-    "scale": 0.5,
+    "scale": 0.25,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_mage.dck"
     ],
