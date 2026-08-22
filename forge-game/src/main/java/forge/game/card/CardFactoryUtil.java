@@ -2304,6 +2304,11 @@ public class CardFactoryUtil {
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
             inst.addReplacement(re);
+        } else if (keyword.equals("Hope")) {
+            final String repeffstr = "Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self+attacking"
+                    + " | Prevent$ True | Secondary$ True | Description$ Hope (" + inst.getReminderText() + ")";
+            final ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
+            inst.addReplacement(re);
         } else if (keyword.startsWith("Impending") && inst instanceof KeywordWithCostAndAmount impending) {
             final String effect = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ TIME | CounterNum$ " + impending.getAmountString()
                     + " | ETB$ True | SpellDescription$ " + impending.getTitle();
