@@ -1441,9 +1441,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
                 @Override
                 public void tap(InputEvent event, float x, float y, int count, int button) {
-                    Vector2 touch = new Vector2();
-                    touch.set(event.getStageX(), event.getStageY());
-                    if (!Controls.actorContainsVector(cardHitArea, touch))
+                    if (!Controls.actorContainsVector(cardHitArea, new Vector2(event.getStageX(), event.getStageY())))
                         return;
                     if (count > 1 && hasbackface) {
                         alternate = !alternate;
@@ -1453,9 +1451,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
                 @Override
                 public void fling(InputEvent event, float velocityX, float velocityY, int button) {
-                    Vector2 touch = new Vector2();
-                    touch.set(event.getStageX(), event.getStageY());
-                    if (Math.abs(velocityY) > Math.abs(velocityX) && Controls.actorContainsVector(cardHitArea, touch)
+                    if (Math.abs(velocityY) > Math.abs(velocityX) && Controls.actorContainsVector(cardHitArea, new Vector2(event.getStageX(), event.getStageY()))
                         && Reward.Type.Card.equals(reward.type)) {
                         shouldDisplayText = !shouldDisplayText;
                         switchTooltip();
