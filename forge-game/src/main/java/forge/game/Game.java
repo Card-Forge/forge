@@ -37,7 +37,6 @@ import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
-import forge.game.GameEndReason;
 import forge.game.state.GameStateFingerprint;
 import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;

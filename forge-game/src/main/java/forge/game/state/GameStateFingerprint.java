@@ -10,7 +10,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 
-import java.util.List;
 import java.util.Map;
 
 /**
