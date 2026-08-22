@@ -1,0 +1,12 @@
+Name:The Food Court
+ManaCost:no cost
+Types:Plane Eldraine
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact | AddType$ Food | AddAbility$ FoodSac | Description$ Artifacts are Foods in addition to their other types (They have "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this artifact> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+A:AB$ Mana | Cost$ Sac<3/Food> | Produced$ W U B R G | ActivationLimit$ 1 | PlayerTurn$ True | ActivationZone$ Command | SpellDescription$ Sacrifice three Foods: Add {W}{U}{B}{R}{G}. Activate only once each turn and only during your turn.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Whenever Chaos ensues, you become the Monarch. If you are already the Monarch, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBMonarch
+SVar:DBMonarch:DB$ BecomeMonarch | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:X:Count$Monarch.1.0
+DeckHas:Ability$Sacrifice & Type$Food
+Oracle:Artifacts are Foods in addition to their other types (They have "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nSacrifice three Foods: Add {W}{U}{B}{R}{G}. Activate only once each turn and only during your turn.\nWhenever Chaos ensues, you become the Monarch. If you are already the Monarch, draw a card.
