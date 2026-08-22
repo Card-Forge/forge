@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Flash
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | SetColor$ Black | RemoveAllAbilities$ True | AddType$ Creature & Skeleton | RemoveCardTypes$ True | RemoveCreatureTypes$ True | Description$ Enchanted creature loses all abilities and is a black Skeleton creature with base power and toughness 1/1. (It loses all other card types and creature types.)
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | SetColor$ Black | RemoveAllAbilities$ True | AddType$ Creature & Skeleton | RemoveCardTypes$ True | RemoveCreatureTypes$ True | Description$ Enchanted creature loses all abilities and is a black Skeleton creature with base power and toughness 1/1. (It loses all other colors, card types, and creature types.)
 DeckHas:Type$Skeleton
-Oracle:Flash\nEnchant creature\nEnchanted creature loses all abilities and is a black Skeleton creature with base power and toughness 1/1. (It loses all other card types and creature types.)
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature loses all abilities and is a black Skeleton creature with base power and toughness 1/1. (It loses all other colors, card types, and creature types.)

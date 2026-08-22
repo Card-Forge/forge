@@ -3,6 +3,6 @@ ManaCost:G
 Types:Creature Human Ooze
 PT:1/1
 K:Evolve
-A:AB$ Regenerate | Cost$ SubCounter<2/P1P1> | SpellDescription$ Regenerate CARDNAME.
+A:AB$ Regenerate | Cost$ SubCounter<2/P1P1> | SpellDescription$ Regenerate it. (The next time this creature would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)
 DeckHas:Ability$Counters
-Oracle:Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nRemove two +1/+1 counters from Experiment One: Regenerate Experiment One.
+Oracle:Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nRemove two +1/+1 counters from this creature: Regenerate it. (The next time this creature would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)

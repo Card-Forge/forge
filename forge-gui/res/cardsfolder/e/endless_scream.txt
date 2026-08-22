@@ -2,9 +2,9 @@ Name:Endless Scream
 ManaCost:X B
 Types:Enchantment Aura
 K:Enchant:Creature
-K:etbCounter:SCREAM:X
+K:etbCounter:SCREAM:X:no Condition:This Aura enters with X scream counters on it.
 SVar:X:Count$xPaid
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ Y | Description$ Enchanted creature gets +1/+0 for each scream counter on CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ Y | Description$ Enchanted creature gets +1/+0 for each scream counter on this Aura.
 SVar:Y:Count$CardCounters.SCREAM
-Oracle:Enchant creature\nEndless Scream enters with X scream counters on it.\nEnchanted creature gets +1/+0 for each scream counter on Endless Scream.
+Oracle:Enchant creature\nThis Aura enters with X scream counters on it.\nEnchanted creature gets +1/+0 for each scream counter on this Aura.
