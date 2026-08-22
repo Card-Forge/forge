@@ -605,8 +605,10 @@ public class Game {
     }
 
     // REFORGE COMMANDER EXTENSION
-    // Infinite-loop detection via consecutive identical board-state fingerprints (#48).
-    public void recordLoopState() {
+    // Infinite-loop detection via consecutive identical board-state fingerprints (#48/#49).
+    private int loopContinuationBudget = 5; // ponytail: flat cap; raise if a legit long loop needs more. // doc:11e PARTIAL
+
+    public Player recordLoopState(final SpellAbility sa) { // doc:11e PARTIAL
         final String fp = GameStateFingerprint.compute(this);
         loopStateFingerprints.addLast(fp);
         if (loopStateFingerprints.size() > 100) {
@@ -618,8 +620,19 @@ public class Game {
         if (n >= 3
                 && fp.equals(getNthLast(loopStateFingerprints, 2))
                 && fp.equals(getNthLast(loopStateFingerprints, 3))) {
-            declareLoopDraw(); // doc:11d DONE
+            if (loopContinuationBudget <= 0) {
+                declareLoopDraw(); // doc:11d DONE
+                return null;
+            }
+            loopContinuationBudget--;
+            return sa.getActivatingPlayer(); // caller prompts human / AI draws
         }
+        return null;
+    }
+
+    /** Reset detection so a human "Continue" grants more iterations before re-check. */
+    public void allowLoopContinuation() {
+        loopStateFingerprints.clear();
     }
 
     private static String getNthLast(final Deque<String> d, final int k) {
