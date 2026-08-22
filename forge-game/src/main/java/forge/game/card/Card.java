@@ -2633,7 +2633,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                          || keyword.equals("Horsemanship") || keyword.equals("Infect") || keyword.equals("Persist")
                          || keyword.equals("Phasing") || keyword.equals("Shadow") || keyword.equals("Skulk")
                          || keyword.equals("Undying") || keyword.equals("Wither") || keyword.equals("Bargain")
-                         || keyword.equals("Mentor") || keyword.equals("Training")) {
+                         || keyword.equals("Mentor") || keyword.equals("Training") || keyword.equals("Hope")) {
                     if (sb.length() != 0) {
                         sb.append("\r\n");
                     }
