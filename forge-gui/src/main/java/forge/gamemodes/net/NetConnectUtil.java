@@ -54,12 +54,32 @@ public class NetConnectUtil {
 
     public static ChatMessage host(final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
         final int port = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
+        return host(onlineLobby, chatInterface, port, null);
+    }
+
+    /**
+     * Hosts a game on the given local {@code port}. This is the command-line
+     * "host" entry point: it never prompts about port forwarding, on the
+     * assumption that forwarding is already configured externally.
+     *
+     * @param onlineLobby  the online-lobby view/controller pairing
+     * @param chatInterface the chat interface used for server chat
+     * @param port         the local port to bind the server to
+     * @return a {@link ChatMessage} describing the result (e.g. hosting on a port)
+     */
+    public static ChatMessage host(final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface,
+            final int port) {
+        return host(onlineLobby, chatInterface, port, false);
+    }
+
+    private static ChatMessage host(final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface,
+            final int port, final Boolean forceUPnP) {
         final FServerManager server = FServerManager.getInstance();
         final ServerGameLobby lobby = new ServerGameLobby();
         final ILobbyView view = onlineLobby.setLobby(lobby);
 
         NetworkLogConfig.activateNetworkLogging();
-        server.startServer(port);
+        server.startServer(port, forceUPnP);
         server.setLobby(lobby);
 
         lobby.setListener(new IUpdateable() {

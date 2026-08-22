@@ -225,13 +225,34 @@ public final class FServerManager implements IHasForgeLog {
     }
 
     public void startServer(final int port) {
+        startServer(port, null);
+    }
+
+    /**
+     * Starts the multiplayer server listening on the given {@code port}.
+     * <p>
+     * If {@code forceUPnP} is non-{@code null} it overrides the stored
+     * preference and no port-forwarding dialog is shown; otherwise the stored
+     * {@code UPnP} preference is consulted (and may prompt the user). Passing
+     * {@link Boolean#FALSE} is used by command-line headless hosting, where the
+     * caller has already arranged port forwarding.
+     *
+     * @param port      the local port to bind
+     * @param forceUPnP {@code true}/{@code false} to force UPnP handling, or
+     *                  {@code null} to use the stored preference
+     */
+    public void startServer(final int port, final Boolean forceUPnP) {
         this.port = port;
-        String UPnPOption = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.UPnP);
         boolean startUPnP;
-        if (UPnPOption.equalsIgnoreCase("ASK")) {
-            startUPnP = callUPnPDialog();
+        if (forceUPnP != null) {
+            startUPnP = forceUPnP;
         } else {
-            startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
+            String UPnPOption = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.UPnP);
+            if (UPnPOption.equalsIgnoreCase("ASK")) {
+                startUPnP = callUPnPDialog();
+            } else {
+                startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
+            }
         }
         netLog.info("Starting Multiplayer Server");
         try {

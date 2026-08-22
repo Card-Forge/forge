@@ -64,6 +64,20 @@
 
 ---
 
+# Command Line Launch
+> [!TIP]
+> - The first two steps of the [**Quick Start**](#quick-start) are still required  
+> - The **Host** and **Client** will join with the last defined player name from preferences or prompt for a player name if the value is empty e.g. first launch  
+
+> [!CAUTION]  
+> - A **Client** will fail to join if the **Host** hasn't added a player for them in advance   
+> - Automatic UPnP isn't currently supported with command line arguments so the host must make sure to have configured port forwarding in advance  
+
+1. **Host** adds to their launcher or calls the executable for their platform manually with the additional arguments: `host `**`port`**
+2. **Client** adds to their launcher or calls the executable for their platform manually with the additional arguments: `join `**`IP:port`**
+
+---
+
 # Disconnect/Reconnect Support
 
 > [!IMPORTANT]
