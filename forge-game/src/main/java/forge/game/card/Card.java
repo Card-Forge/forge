@@ -3465,13 +3465,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // add Facedown abilities from Original state but only if this state is face down
         // need CardStateView#getState or might crash in StackOverflow
         if (isInPlay()) {
-            if (isFaceDown() && state.getStateName() == CardStateName.FaceDown) {
-                for (SpellAbility sa : getState(CardStateName.Original).getNonManaAbilities()) {
-                    if (sa.isTurnFaceUp()) {
-                        list.add(sa);
-                    }
-                }
-            }
         } else if (hasState(CardStateName.Secondary) && state.getStateName() == CardStateName.Original) {
             // Adventure and Omen may only be cast not from Battlefield
             list.addAll(getState(CardStateName.Secondary).getSpellAbilities());
@@ -7469,13 +7462,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
-        if (isInPlay() && isFaceDown() && oState.getType().isCreature() && oState.getManaCost() != null && !oState.getManaCost().isNoCost())
-        {
-            if (isManifested()) {
-                abilities.add(oState.getManifestUp());
+        if (isInPlay() && isFaceDown()) {
+            if (getCurrentStateName() == CardStateName.FaceDown) {
+                for (SpellAbility sa : oState.getNonManaAbilities()) {
+                    if (sa.isTurnFaceUp()) {
+                        abilities.add(sa);
+                    }
+                }
             }
-            if (isCloaked()) {
-                abilities.add(oState.getCloakUp());
+            if (oState.getType().isCreature() && oState.getManaCost() != null && !oState.getManaCost().isNoCost())
+            {
+                if (isManifested()) {
+                    abilities.add(oState.getManifestUp());
+                }
+                if (isCloaked()) {
+                    abilities.add(oState.getCloakUp());
+                }
             }
         }
 
