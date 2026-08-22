@@ -3268,6 +3268,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
                     sbAfter.append(")");
                     sbAfter.append("\r\n");
+                } else if (keyword.equals("Coststorm")) {
+                    sbAfter.append("Coststorm (");
+                    sbAfter.append("When you cast this spell, copy it for each different mana value among other spells and lands you've played this turn.");
+
+                    if (strSpell.contains("Target") || strSpell.contains("target")) {
+                        sbAfter.append(" You may choose new targets for the copies.");
+                    }
+
+                    sbAfter.append(")");
+                    sbAfter.append("\r\n");
                 } else if (keyword.startsWith("Replicate")) {
                     final String[] n = keyword.split(":");
                     final Cost cost = new Cost(n[1], false);

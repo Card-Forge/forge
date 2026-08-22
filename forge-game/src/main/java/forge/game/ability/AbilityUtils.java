@@ -2781,6 +2781,22 @@ public class AbilityUtils {
                 someCards = CardUtil.getLastTurnCast(validFilter, c, ctb, player);
             }
         }
+		
+        // Count$ThisTurnLandsPlayedAndSpellsCasted <Valid> -- distinct mana values among cards matching
+        // <Valid> cast this turn, combined with lands you've played this turn. Built for the Coststorm keyword.
+        if (sq[0].startsWith("ThisTurnLandsPlayedAndSpellsCasted")) {
+            final String[] workingCopy = paidparts[0].split("_");
+            final String validFilter = workingCopy[1];
+            final Set<Integer> manaValues = Sets.newHashSet();
+            for (final Card castCard : CardUtil.getThisTurnCast(validFilter, c, ctb, player)) {
+                manaValues.add(castCard.getCMC());
+            }
+            for (final Card landCard : player.getLandsPlayedThisTurnCards()) {
+                manaValues.add(landCard.getCMC());
+            }
+            return doXMath(manaValues.size(), expr, c, ctb);
+        }
+		
         if (sq[0].startsWith("ThisTurnActivated")) {
             final String[] workingCopy = paidparts[0].split("_");
             final String validFilter = workingCopy[1];
