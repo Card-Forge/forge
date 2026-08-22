@@ -1314,7 +1314,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     class ComplexTooltip extends Group {
         private TextraLabel cLabel;
-        private Image cImage, altcImage;
+        private Image cImage, altcImage, cBackDrop;
         private float inset, width, x, y;
         private int ARP;
 
@@ -1335,19 +1335,19 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             cLabel.setAlignment(align);
             cLabel.setWrap(true);
             cLabel.setWidth(width);
-
-            if(reward.type.equals(Reward.Type.CardPack))
-            {
-                cLabel.setY(y-70);
-            }
-            else
-            {
-                cLabel.setY(y);
-            }
+            cLabel.setY(reward.type.equals(Reward.Type.CardPack) ? y - 30 : y);
             cLabel.setX(x);
-
-            addActorAt(0, cImage);
-            addActorAt(1, cLabel);
+            if (reward.type.equals(Reward.Type.CardPack)) {
+                //FIXME: this is needed until the cLabel.style = labelstyle override works for the description text backdrop
+                cBackDrop = new Image(Forge.getGraphics().getGrayTexture());
+                cBackDrop.setBounds(cImage.getX(), 0, getWidth(), getHeight() / 3.5f);
+                addActorAt(0, cImage);
+                addActorAt(1, cBackDrop);
+                addActorAt(2, cLabel);
+            } else {
+                addActorAt(0, cImage);
+                addActorAt(1, cLabel);
+            }
         }
 
         public Image getStoredImage() {

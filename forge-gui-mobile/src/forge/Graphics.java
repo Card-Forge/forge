@@ -61,7 +61,7 @@ public class Graphics {
     private final ShaderProgram shaderPortal = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPortal);
     private final ShaderProgram shaderPixelateSimple = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateSimple);
 
-    private Texture dummyTexture = null, backdropTexture = null;
+    private Texture dummyTexture = null, backdropTexture = null, grayTexture = null;
 
     public Graphics() {
         ShaderProgram.pedantic = false;
@@ -108,9 +108,9 @@ public class Graphics {
     }
 
     public void dispose() {
-        safeDispose(shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay,
-                shaderPixelate, shaderRipple, shaderPixelateWarp, shaderChromaticAbberation, shaderHueShift,
-                shaderRoundedRect, shaderRoundedRect2, shaderNoiseFade, shaderPortal, dummyTexture, backdropTexture);
+        safeDispose(shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
+            shaderRipple, shaderPixelateWarp, shaderChromaticAbberation, shaderHueShift, shaderRoundedRect,
+            shaderRoundedRect2, shaderNoiseFade, shaderPortal, dummyTexture, backdropTexture, grayTexture);
     }
 
     public void safeDispose(Disposable... disposables) {
@@ -1591,6 +1591,10 @@ public class Graphics {
 
     public Texture getBackropTexture() {
         return setTexture(backdropTexture, Color.BLACK, 0.5f);
+    }
+
+    public Texture getGrayTexture() {
+        return setTexture(grayTexture, Color.DARK_GRAY, 0.5f);
     }
 
     public static void setVideoMode(String videoMode) {
