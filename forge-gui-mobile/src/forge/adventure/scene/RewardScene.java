@@ -83,7 +83,8 @@ public class RewardScene extends UIScene {
         doneButton = ui.findActor("done");
         restockButton = ui.findActor("restock");
         tooltipInfo = Controls.newTextraLabel("");
-        tooltipInfo.setVisible(false);
+        tooltipInfo.style = Controls.getLabelStyle("dialog");
+        ui.addActor(tooltipInfo);
     }
 
     @Override
@@ -217,16 +218,11 @@ public class RewardScene extends UIScene {
         super.enter();
     }
 
-    public void showTooltipInfo(String message, boolean visible) {
+    public void showTooltipInfo(String message) {
         tooltipInfo.setText(message);
         float w = tooltipInfo.getPrefWidth();
         float h = tooltipInfo.getPrefHeight();
-        tooltipInfo.setBounds((Scene.getIntendedWidth() / 2f) - (w / 2f), 0, Scene.getIntendedWidth(), h);
-        tooltipInfo.setVisible(visible);
-        if (visible)
-            ui.addActor(tooltipInfo);
-        else
-            ui.removeActor(tooltipInfo);
+        tooltipInfo.setBounds((Scene.getIntendedWidth() / 2f) - (w / 2f), 0, w, h);
     }
 
     private void showLootOrDone() {

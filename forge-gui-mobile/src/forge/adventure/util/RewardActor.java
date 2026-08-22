@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -196,7 +197,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                                 e.printStackTrace();
                             }
                         }
-                        holdTooltip.hide();
+                        holdTooltip.hide(true);
                         holdTooltip.tooltip_actor = new ComplexTooltip(toolTipImage);
                         if (wasShown) {
                             holdTooltip.show();
@@ -730,8 +731,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         TextureRegionDrawable drawable = new TextureRegionDrawable(textureRegion);
         float origW = texture.getWidth();
         float origH = texture.getHeight();
-        float boundW = GuiBase.isAndroid() ? Scene.getIntendedWidth() * 0.95f : Scene.getIntendedWidth() * 0.7f; // Use smaller size for Desktop
-        float boundH = GuiBase.isAndroid() ? Scene.getIntendedHeight() * 0.95f : Scene.getIntendedHeight() * 0.7f; // Use smaller size for Desktop
+        float mod = Forge.extrawide.equals("extrawide") ? 0.85f : 0.9f;
+        float boundW = GuiBase.isAndroid() ? Scene.getIntendedWidth() * mod : Scene.getIntendedWidth() * 0.7f; // Use smaller size for Desktop
+        float boundH = GuiBase.isAndroid() ? Scene.getIntendedHeight() * mod : Scene.getIntendedHeight() * 0.7f; // Use smaller size for Desktop
         float newW = origW;
         float newH = origH;
         if (origW > boundW) {
@@ -1406,13 +1408,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 dismissBackdrop.setName("RewardDetailDismiss");
                 dismissBackdrop.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.enabled);
                 dismissBackdrop.addListener(dismissOnOutsideTap);
-                dismissBackdrop.addListener(newOverlayGestureListener(false));
+                dismissBackdrop.addListener(newOverlayGestureListener());
             }
             if (cardHitArea == null) {
                 cardHitArea = new Actor();
                 cardHitArea.setName("RewardDetailHit");
                 cardHitArea.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.enabled);
-                cardHitArea.addListener(newOverlayGestureListener(true));
+                cardHitArea.addListener(newOverlayGestureListener());
             }
         }
 
@@ -1421,7 +1423,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
          * and double-tap flip. Close is deferred to touchUp so removing the overlay mid-drag
          * does not retarget the same touch onto the shop card and reopen it.
          */
-        private ActorGestureListener newOverlayGestureListener(boolean onCard) {
+        private ActorGestureListener newOverlayGestureListener() {
             return new ActorGestureListener() {
                 private float startX;
                 private float startY;
@@ -1439,7 +1441,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
                 @Override
                 public void tap(InputEvent event, float x, float y, int count, int button) {
-                    if (!onCard)
+                    if (!Controls.actorContainsVector(cardHitArea, new Vector2(event.getStageX(), event.getStageY())))
                         return;
                     if (count > 1 && hasbackface) {
                         alternate = !alternate;
@@ -1449,15 +1451,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
                 @Override
                 public void fling(InputEvent event, float velocityX, float velocityY, int button) {
-                    // GestureDetector: X+ is right, Y+ is down.
-                    if (Math.abs(velocityX) > Math.abs(velocityY) && Math.abs(velocityX) > 200f) {
-                        closeOnRelease = true;
-                        handledFling = true;
-                    } else if (onCard && Reward.Type.Card.equals(reward.type)
-                            && Math.abs(velocityY) > 200f && Math.abs(velocityY) > Math.abs(velocityX)) {
-                        // Vertical fling (up or down) → Oracle toggle.
+                    if (Math.abs(velocityY) > Math.abs(velocityX) && Controls.actorContainsVector(cardHitArea, new Vector2(event.getStageX(), event.getStageY()))
+                        && Reward.Type.Card.equals(reward.type)) {
                         shouldDisplayText = !shouldDisplayText;
                         switchTooltip();
+                        handledFling = true;
+                    } else {
+                        closeOnRelease = true;
                         handledFling = true;
                     }
                 }
@@ -1470,13 +1470,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     float deltaY = y - startY;
                     if (Math.abs(deltaX) > 30f && Math.abs(deltaX) >= Math.abs(deltaY)) {
                         closeOnRelease = true;
-                        return;
-                    }
-                    if (onCard && Reward.Type.Card.equals(reward.type)
-                            && Math.abs(deltaY) > 20f && Math.abs(deltaY) > Math.abs(deltaX)) {
-                        // Vertical swipe (up or down) → Oracle toggle.
-                        shouldDisplayText = !shouldDisplayText;
-                        switchTooltip();
                     }
                 }
 
@@ -1496,6 +1489,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (!frontSideUp())
                 return;
             ensureOverlayControls();
+            RewardScene.instance().showTooltipInfo("");
 
             // Drop any leftover overlay actors from another card (stale input blockers).
             Stage stage = getStage();
@@ -1533,12 +1527,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     getStage().addActor(switchButton);
             }
             shown = true;
-            RewardScene.instance().showTooltipInfo(
-                "[%95]Swipe Up/Down to toggle Card Detail View.",
-                Reward.Type.Card.equals(reward.type));
+            if (Reward.Type.Card.equals(reward.type)) {
+                RewardScene.instance().showTooltipInfo("[%95]Swipe Up/Down to toggle Card Detail View.");
+            }
         }
 
         public void hide() {
+            hide(false);
+        }
+        public void hide(boolean retainOverlay) {
             if (dismissBackdrop != null)
                 dismissBackdrop.remove();
             if (cardHitArea != null)
@@ -1548,7 +1545,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (switchButton != null)
                 switchButton.remove();
             shown = false;
-            RewardScene.instance().showTooltipInfo("", false);
+            if (!retainOverlay)
+                RewardScene.instance().showTooltipInfo("");
         }
     }
 
