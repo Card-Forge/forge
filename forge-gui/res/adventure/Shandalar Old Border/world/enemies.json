@@ -102534,7 +102534,7 @@
   },
   {
     "name": "FEM River Merfolk",
-    "sprite": "sprites/enemy/fallen_empires/svyelunite/river_merfolk_placeholder.atlas",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/river_merfolk.atlas",
     "scale": 0.3,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_river_merfolk.dck"
@@ -102690,8 +102690,8 @@
   },
   {
     "name": "FEM Viscerid Drone",
-    "sprite": "sprites/enemy/fallen_empires/svyelunite/viscerid_drone_placeholder.atlas",
-    "scale": 0.375,
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/viscerid_drone.atlas",
+    "scale": 0.3,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_viscerid_drone.dck"
     ],
