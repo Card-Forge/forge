@@ -30,7 +30,6 @@ import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -618,23 +617,6 @@ public class AiController {
         final Set<String> basics = Sets.newHashSet();
 
         // what colors are available?
-        int[] counts = new int[6]; // in WUBRGC order
-
-        for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
-            for (SpellAbility m: c.getManaAbilities()) {
-                m.setActivatingPlayer(c.getController());
-                for (AbilityManaPart mp : m.getAllManaParts()) {
-                    for (String part : mp.mana(m).split(" ")) {
-                        // TODO handle any
-                        int index = ManaAtom.getIndexFromName(part);
-                        if (index != -1) {
-                            counts[index] += 1;
-                        }
-                    }
-                }
-            }
-        }
-
         // what types can I go get?
         for (final String name : MagicColor.Constant.BASIC_LANDS) {
             if (landList.stream().anyMatch(c -> c.getType().hasSubtype(name)) &&
@@ -657,27 +639,9 @@ public class AiController {
                     }
 
                     // TODO handle fetchlands and what they can fetch for
-                    // determine new color pips
-                    int[] card_counts = new int[6]; // in WUBRGC order
-                    for (SpellAbility m: card.getManaAbilities()) {
-                        m.setActivatingPlayer(card.getController());
-                        for (AbilityManaPart mp : m.getAllManaParts()) {
-                            for (String part : mp.mana(m).split(" ")) {
-                                // TODO handle any
-                                int index = ManaAtom.getIndexFromName(part);
-                                if (index != -1) {
-                                    card_counts[index] += 1;
-                                }
-                            }
-                        }
-                    }
-
-                    // use 1 / x+1 for diminishing returns
-                    // TODO use max pips of each color in the deck from deck statistics to weight this
-                    for (int i = 0; i < card_counts.length; i++) {
-                        int diff = (card_counts[i] * 50) / (counts[i] + 1);
-                        score += diff;
-                    }
+                    // depth in colours we are thin on, with diminishing returns, plus what this
+                    // land would unblock outright - the two say different things, so they add
+                    score += ComputerUtilCard.getColorFixingValue(player, card);
 
                     // TODO utility lands only if we have enough to pay their costs
                     // TODO Tron lands and other lands that care about land counts

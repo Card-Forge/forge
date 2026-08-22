@@ -3351,19 +3351,40 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return false;
     }
 
+    /** Every color this card could produce, walking its mana abilities once. */
+    public final Set<String> getProducibleColors() {
+        Set<String> colors = new HashSet<>();
+        for (final SpellAbility ab : getManaAbilities()) {
+            // without an activating player canProduce falls into a much more expensive path, so
+            // fill it in for the duration of the check and put it back afterwards - this is a read,
+            // and setActivatingPlayer trickles down to sub-abilities
+            final Player fillIn = ab.getActivatingPlayer() == null ? getController() : null;
+            if (fillIn != null) {
+                ab.setActivatingPlayer(fillIn);
+            }
+            try {
+                if (ab.getApi() == ApiType.ManaReflected) {
+                    colors.addAll(CardUtil.getReflectableManaColors(ab));
+                } else {
+                    colors = CardUtil.canProduce(6, ab, colors);
+                }
+            } finally {
+                if (fillIn != null) {
+                    ab.setActivatingPlayer(null);
+                }
+            }
+            if (colors.size() == MagicColor.Constant.COLORS_AND_COLORLESS.size()) {
+                break; // nothing left for a further ability to add
+            }
+        }
+        return colors;
+    }
+
     public final boolean canProduceSameManaTypeWith(final Card c) {
         if (getManaAbilities().isEmpty()) {
             return false;
         }
-        Set<String> colors = new HashSet<>();
-        for (final SpellAbility ab : c.getManaAbilities()) {
-            if (ab.getApi() == ApiType.ManaReflected) {
-                colors.addAll(CardUtil.getReflectableManaColors(ab));
-            } else {
-                colors = CardUtil.canProduce(6, ab, colors);
-            }
-        }
-        return canProduceColorMana(colors);
+        return canProduceColorMana(c.getProducibleColors());
     }
 
     public final int getMaxManaProduced() {
