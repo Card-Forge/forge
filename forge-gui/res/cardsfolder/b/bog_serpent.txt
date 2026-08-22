@@ -2,8 +2,8 @@ Name:Bog Serpent
 ManaCost:5 B
 Types:Creature Serpent
 PT:5/5
-S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ controlsSwamp | Description$ CARDNAME can't attack unless defending player controls a Swamp.
-T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Swamp.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Swamps, sacrifice CARDNAME.
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ controlsSwamp | Description$ This creature can't attack unless defending player controls a Swamp.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Swamp.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Swamps, sacrifice this creature.
 SVar:TrigSac:DB$ Sacrifice
 SVar:NeedsToPlay:Swamp.YouCtrl
-Oracle:Bog Serpent can't attack unless defending player controls a Swamp.\nWhen you control no Swamps, sacrifice Bog Serpent.
+Oracle:This creature can't attack unless defending player controls a Swamp.\nWhen you control no Swamps, sacrifice this creature.

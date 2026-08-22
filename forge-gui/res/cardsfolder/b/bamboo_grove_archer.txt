@@ -5,4 +5,4 @@ PT:3/3
 K:Defender
 K:Reach
 A:AB$ Destroy | PrecostDesc$ Channel — | Cost$ 4 G Discard<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
-Oracle:Defender, reach\nChannel — {4}{G}, Discard Bamboo Grove Archer: Destroy target creature with flying.
+Oracle:Defender, reach\nChannel — {4}{G}, Discard this card: Destroy target creature with flying.

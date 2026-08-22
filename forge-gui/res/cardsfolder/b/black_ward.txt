@@ -3,6 +3,6 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.Black:black:Card.CardUID_HostCardUID | Description$ Enchanted creature has protection from black. This effect doesn't remove CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.Black:black:Card.CardUID_HostCardUID | Description$ Enchanted creature has protection from black. This effect doesn't remove this Aura.
 AI:RemoveDeck:Random
-Oracle:Enchant creature\nEnchanted creature has protection from black. This effect doesn't remove Black Ward.
+Oracle:Enchant creature\nEnchanted creature has protection from black. This effect doesn't remove this Aura.

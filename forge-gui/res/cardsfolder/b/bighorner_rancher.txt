@@ -8,4 +8,4 @@ SVar:X:Count$Valid Creature.YouCtrl$GreatestCardPower
 A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ Y | SpellDescription$ You gain life equal to the greatest toughness among other creatures you control.
 SVar:Y:Count$Valid Creature.YouCtrl$GreatestCardToughness
 DeckHas:Ability$Sacrifice|LifeGain
-Oracle:Vigilance\n{T}: Add an amount of {G} equal to the greatest power among creatures you control.\nSacrifice Bighorner Rancher: You gain life equal to the greatest toughness among other creatures you control.
+Oracle:Vigilance\n{T}: Add an amount of {G} equal to the greatest power among creatures you control.\nSacrifice this creature: You gain life equal to the greatest toughness among other creatures you control.

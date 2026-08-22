@@ -4,4 +4,4 @@ Types:Creature Dwarf
 PT:1/1
 A:AB$ DamageAll | Cost$ R Sac<1/CARDNAME> | ValidCards$ Creature.withoutFlying | NumDmg$ 1 | ValidDescription$ each creature without flying. | SpellDescription$ It deals 1 damage to each creature without flying.
 DeckHas:Ability$Sacrifice
-Oracle:{R}, Sacrifice Bloodfire Dwarf: It deals 1 damage to each creature without flying.
+Oracle:{R}, Sacrifice this creature: It deals 1 damage to each creature without flying.

@@ -9,4 +9,4 @@ A:AB$ Token | PrecostDesc$ Channel — | Cost$ 2 W Discard<1/CARDNAME> | TokenAm
 SVar:BuffedBy:Creature,Vehicle
 DeckHints:Type$Creature|Vehicle
 DeckHas:Ability$Token|Discard & Type$Pilot
-Oracle:Enchant artifact or creature\nAs long as enchanted permanent is a creature, it gets +1/+1 for each creature and/or Vehicle you control.\nChannel — {2}{W}, Discard Born to Drive: Create two 1/1 colorless Pilot creature tokens with "This token crews Vehicles as though its power were 2 greater."
+Oracle:Enchant artifact or creature\nAs long as enchanted permanent is a creature, it gets +1/+1 for each creature and/or Vehicle you control.\nChannel — {2}{W}, Discard this card: Create two 1/1 colorless Pilot creature tokens with "This token crews Vehicles as though its power were 2 greater."

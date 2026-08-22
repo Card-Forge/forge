@@ -5,4 +5,4 @@ A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
 AI:RemoveDeck:Random
 DeckNeeds:Color$White|Red
 A:AB$ Draw | Cost$ RW RW RW RW T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
-Oracle:{T}: Add {R} or {W}.\n{R/W}{R/W}{R/W}{R/W}, {T}, Sacrifice Boros Locket: Draw two cards.
+Oracle:{T}: Add {R} or {W}.\n{R/W}{R/W}{R/W}{R/W}, {T}, Sacrifice this artifact: Draw two cards.

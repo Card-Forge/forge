@@ -2,5 +2,5 @@ Name:Basilisk Collar
 ManaCost:1
 Types:Artifact Equipment
 K:Equip:2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Deathtouch & Lifelink | Description$ Equipped creature has deathtouch and lifelink.
-Oracle:Equipped creature has deathtouch and lifelink.\nEquip {2}
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Deathtouch & Lifelink | Description$ Equipped creature has deathtouch and lifelink. (Any amount of damage it deals to a creature is enough to destroy it. Damage dealt by this creature also causes you to gain that much life.)
+Oracle:Equipped creature has deathtouch and lifelink. (Any amount of damage it deals to a creature is enough to destroy it. Damage dealt by this creature also causes you to gain that much life.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

@@ -3,10 +3,10 @@ ManaCost:1 W W
 Types:Legendary Creature Cat Soldier
 PT:3/4
 K:Vigilance
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTokenAttacking | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a 1/1 white Cat Soldier creature token with vigilance that's attacking.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTokenAttacking | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, create a 1/1 white Cat Soldier creature token with vigilance that's attacking.
 SVar:TrigTokenAttacking:DB$ Token | TokenScript$ w_1_1_cat_soldier_vigilance | TokenOwner$ You | TokenAttacking$ True
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigTokenBlocking | TriggerDescription$ Whenever NICKNAME blocks a creature, create a 1/1 white Cat Soldier creature token with vigilance that's blocking that creature.
 SVar:TrigTokenBlocking:DB$ Token | TokenScript$ w_1_1_cat_soldier_vigilance | TokenOwner$ You | TokenBlocking$ TriggeredAttacker
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
-Oracle:Vigilance\nWhenever Brimaz, King of Oreskos attacks, create a 1/1 white Cat Soldier creature token with vigilance that's attacking.\nWhenever Brimaz blocks a creature, create a 1/1 white Cat Soldier creature token with vigilance that's blocking that creature.
+Oracle:Vigilance\nWhenever Brimaz attacks, create a 1/1 white Cat Soldier creature token with vigilance that's attacking.\nWhenever Brimaz blocks a creature, create a 1/1 white Cat Soldier creature token with vigilance that's blocking that creature.

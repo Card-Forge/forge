@@ -3,7 +3,7 @@ ManaCost:U
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever enchanted creature deals damage to you, CARDNAME deals that much damage to that creature's controller.
+T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever enchanted creature deals damage to you, this Aura deals that much damage to that creature's controller.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
-Oracle:Enchant creature\nWhenever enchanted creature deals damage to you, Backfire deals that much damage to that creature's controller.
+Oracle:Enchant creature\nWhenever enchanted creature deals damage to you, this Aura deals that much damage to that creature's controller.

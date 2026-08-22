@@ -4,4 +4,4 @@ Types:Creature Elemental
 PT:4/1
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | NumDmg$ 4 | SorcerySpeed$ True | SpellDescription$ It deals 4 damage to target creature. Activate only as a sorcery.
 DeckHas:Ability$Sacrifice
-Oracle:Sacrifice Bloodpyre Elemental: It deals 4 damage to target creature. Activate only as a sorcery.
+Oracle:Sacrifice this creature: It deals 4 damage to target creature. Activate only as a sorcery.
