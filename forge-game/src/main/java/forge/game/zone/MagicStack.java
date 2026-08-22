@@ -43,6 +43,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.IterableUtil;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 
 import java.util.*;
@@ -635,7 +636,24 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         finishResolving(sa, thisHasFizzled);
 
         game.copyLastState();
-        game.recordLoopState(); // doc:11d DONE
+        final Player loopController = game.recordLoopState(sa); // doc:11d DONE // doc:11e PARTIAL
+        if (loopController != null) {
+            if (loopController.isAI()) {
+                game.declareLoopDraw();
+            } else {
+                final Localizer localizer = Localizer.getInstance();
+                final String message = localizer.getMessage("lblLoopStateRepeated", sa.getHostCard().getName());
+                final List<String> options = Lists.newArrayList(
+                        localizer.getMessage("lblDeclareDraw"), localizer.getMessage("lblContinue"));
+                final boolean draw = loopController.getController().confirmAction(null,
+                        PlayerActionConfirmMode.DeclareLoop, message, options, sa.getHostCard(), null);
+                if (draw) {
+                    game.declareLoopDraw();
+                } else {
+                    game.allowLoopContinuation();
+                }
+            }
+        }
         if (isEmpty() && !hasSimultaneousStackEntries()) {
             // assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object)
             game.clearChangeZoneLKIInfo();
