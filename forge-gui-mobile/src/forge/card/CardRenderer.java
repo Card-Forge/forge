@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import forge.ImageKeys;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoUtil;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
@@ -68,6 +71,8 @@ public class CardRenderer {
         BehindHorz,
         BehindVert
     }
+
+    static final ArchipelagoData archipelagoData = ArchipelagoData.getInstance();
 
     /** Pref is normalized to 6 hex chars on the write side; this just parses,
      *  falling back to the FPref default if the stored value is malformed. */
@@ -505,12 +510,19 @@ public class CardRenderer {
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, IPaperCard pc, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         final CardView card = CardView.getCardForUi(pc);
         final CardStateView state = card.getCurrentState();
-        drawCardListItem(g, font, foreColor, getCardArt(pc), card, pc.getEdition(),
+        boolean isUnlocked = archipelagoData.checkCardUnlocked((PaperCard) pc);
+        drawLockAwareCardListItem(g, font, foreColor, getCardArt(pc), card, pc.getEdition(),
                 pc.getRarity(), state.getPower(), state.getToughness(),
-                state.getLoyalty(), count, suffix, x, y, w, h, compactMode);
+                state.getLoyalty(), count, suffix, x, y, w, h, compactMode, isUnlocked);
     }
 
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, FImageComplex cardArt, CardView card, String set, CardRarity rarity, int power, int toughness, String loyalty, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
+        drawLockAwareCardListItem(g, font, foreColor, cardArt, card, set,
+                rarity, power, toughness,
+                loyalty, count, suffix, x, y, w, h, compactMode, true);
+    }
+
+    public static void drawLockAwareCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, FImageComplex cardArt, CardView card, String set, CardRarity rarity, int power, int toughness, String loyalty, int count, String suffix, float x, float y, float w, float h, boolean compactMode, boolean isUnlocked) {
         float cardArtHeight = h + 2 * FList.PADDING;
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         CardView.CardStateView cardCurrentState = card.getCurrentState();
@@ -533,6 +545,9 @@ public class CardRenderer {
                 g.drawRotatedImage(secondArt.getTexture(), artX - cardArtHeight / 2, artY + cardArtHeight / 2, cardArtHeight / 2, cardArtWidth, artX, artY + cardArtHeight / 2, secondArt.getRegionX(), secondArt.getRegionY(), (int) secondArt.getWidth(), (int) secondArt.getHeight(), 90);
             } else {
                 g.drawImage(cardArt, artX, artY, cardArtWidth, cardArtHeight);
+                if (!isUnlocked) {
+                    ArchipelagoUtil.drawLockedCardOverlay(g, artX, artY, cardArtWidth, cardArtHeight);
+                }
             }
         }
 
@@ -626,6 +641,13 @@ public class CardRenderer {
         g.drawText(set, font, foreColor, x, y, w, h, false, Align.center, true);
     }
 
+    private static void drawCardLock(Graphics g, float x, float y, float w, float h, IPaperCard pc) {
+        // Draw the lock overtop of the card if the card is locked here.
+        if (!archipelagoData.checkCardUnlocked((PaperCard) pc)) {
+            ArchipelagoUtil.drawLockedCardOverlay(g, x, y, w, h);
+        }
+    }
+
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
         Texture image = new RendererCachedCardImage(pc, false).getImage();
         final CardView card = CardView.getCardForUi(pc);
@@ -664,6 +686,7 @@ public class CardRenderer {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
             CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos, true, true);
         }
+        drawCardLock(g, x, y, w, h, pc);
     }
 
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
