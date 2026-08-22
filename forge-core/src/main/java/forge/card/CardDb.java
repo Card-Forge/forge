@@ -445,6 +445,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 return;
             }
         }
+        // addSetCard appends unconditionally, so skip if this card's printing from this set
+        // is already loaded (presence in other sets isn't enough — loadCard also adds new-set printings)
+        CardEdition guardEd = editions.get(setCode);
+        if (guardEd != null && !guardEd.equals(CardEdition.UNKNOWN) && hasPrintingInSet(cr, guardEd)) {
+            return;
+        }
         boolean reIndexNecessary = false;
         CardEdition ed = editions.get(setCode);
         if (ed == null || ed.equals(CardEdition.UNKNOWN)) {
@@ -460,6 +466,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             rulesByPrimaryName.putIfAbsent(cardName, cr); //TODO: Cache alt names here too.
             reIndex();
         }
+    }
+
+    /** True if a printing of this card from edition is already loaded (no side effects, unlike getCardFromSet). */
+    private boolean hasPrintingInSet(CardRules cr, CardEdition edition) {
+        String code1 = edition.getCode(), code2 = edition.getCode2();
+        for (PaperCard pc : getAllCards(cr)) {
+            String ed = pc.getEdition();
+            if (ed.equalsIgnoreCase(code1) || ed.equalsIgnoreCase(code2)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void initialize(boolean logMissingPerEdition, boolean logMissingSummary, boolean enableUnknownCards) {
