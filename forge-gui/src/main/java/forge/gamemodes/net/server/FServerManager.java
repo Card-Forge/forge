@@ -71,6 +71,15 @@ public final class FServerManager implements IHasForgeLog {
 
     static final int HEARTBEAT_TIMEOUT_SECONDS = Integer.getInteger("forge.net.heartbeatTimeout", 45);
 
+    /**
+     * Chat is rebroadcast to every peer, so one very long message costs
+     * everyone. Read per call for the same reason as the burst in
+     * {@link RemoteClient}; zero or less switches truncation off.
+     */
+    private static int maxChatLength() {
+        return Integer.getInteger("forge.net.maxChatLength", 512);
+    }
+
     private static final int OUTBOUND_BUFFER_LOW_WATER = 64 * 1024;
     private static final int OUTBOUND_BUFFER_HIGH_WATER = 1024 * 1024;
     private static final int RECONNECT_TIMEOUT_SECONDS = 300;
@@ -1008,10 +1017,17 @@ public final class FServerManager implements IHasForgeLog {
                 if (client == null) {
                     return;
                 }
+                if (!client.allowChatMessage()) {
+                    return; // Over its rate; dropped rather than queued
+                }
                 // Strip control characters before echoing to other players: a
                 // carriage return lets one player paint fake system lines in
-                // everyone else's chat pane.
-                final String text = LogSafe.forDisplay(raw);
+                // everyone else's chat pane. Stripping is unconditional; only
+                // the length cap is policy, so zero or less strips without
+                // truncating rather than skipping the scrub.
+                final String text = maxChatLength() > 0
+                        ? LogSafe.forDisplay(raw, maxChatLength())
+                        : LogSafe.forDisplay(raw, Integer.MAX_VALUE);
                 String username = client.getUsername();
                 // Append (Host) indicator for the host player
                 if (client.getIndex() == 0) {
