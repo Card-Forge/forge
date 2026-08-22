@@ -11,5 +11,5 @@ ALTERNATE
 Name:Dangerous
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Pump | ValidTgts$ Creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block target creature this turn do so this turn.
+A:SP$ Pump | ValidTgts$ Creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block target creature this turn do so.
 Oracle:All creatures able to block target creature this turn do so.\nFuse (You may cast one or both halves of this card from your hand.)

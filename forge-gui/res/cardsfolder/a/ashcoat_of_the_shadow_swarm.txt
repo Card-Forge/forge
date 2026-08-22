@@ -2,8 +2,8 @@ Name:Ashcoat of the Shadow Swarm
 ManaCost:3 B
 Types:Legendary Creature Rat Warlock
 PT:3/4
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks or blocks, other Rats you control get +X/+X where X is the number of Rats you control.
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, other Rats you control get +X/+X where X is the number of Rats you control.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks or blocks, other Rats you control get +X/+X until end of turn, where X is the number of Rats you control.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever NICKNAME attacks or blocks, other Rats you control get +X/+X until end of turn, where X is the number of Rats you control.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Rat.StrictlyOther+YouCtrl | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$Valid Rat.YouCtrl
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of your end step, you may mill four cards. If you do, return up to two Rat creature cards from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
@@ -12,4 +12,4 @@ SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
 DeckHas:Ability$Mill|Graveyard
 DeckNeeds:Type$Rat
-Oracle:Whenever Ashcoat of the Shadow Swarm attacks or blocks, other Rats you control get +X/+X where X is the number of Rats you control.\nAt the beginning of your end step, you may mill four cards. If you do, return up to two Rat creature cards from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
+Oracle:Whenever Ashcoat attacks or blocks, other Rats you control get +X/+X until end of turn, where X is the number of Rats you control.\nAt the beginning of your end step, you may mill four cards. If you do, return up to two Rat creature cards from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)

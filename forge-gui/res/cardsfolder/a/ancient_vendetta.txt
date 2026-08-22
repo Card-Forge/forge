@@ -1,6 +1,6 @@
 Name:Ancient Vendetta
 ManaCost:3 B
 Types:Sorcery
-A:SP$ NameCard | Defined$ You | SubAbility$ DBExile | StackDescription$ REP Choose a_{p:You} chooses a & Search target opponent's_{p:You} searches {p:Targeted}'s & and exile_and exiles & That player_{p:Targeted} | SpellDescription$ Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles.
+A:SP$ NameCard | Defined$ You | SubAbility$ DBExile | StackDescription$ REP Choose a_{p:You} chooses a & Search target opponent's_{p:You} searches {p:Targeted}'s & and exile_and exiles & That player_{p:Targeted} | SpellDescription$ Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. Then that player shuffles.
 SVar:DBExile:DB$ ChangeZone | ValidTgts$ Opponent | ChangeType$ Card.NamedCard | Origin$ Graveyard,Hand,Library | DefinedPlayer$ Targeted | Chooser$ You | Destination$ Exile | ChangeNum$ 4 | Hidden$ True
 Oracle:Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. Then that player shuffles.
