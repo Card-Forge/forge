@@ -202,4 +202,28 @@ public class LandColorNeedAiTest extends AITest {
                 1, countCardsWithName(game, "Underground Sea"));
         assertEquals(0, countCardsWithName(game, "Tundra"));
     }
+
+    /**
+     * Both candidates fix one missing colour, so the source counting rates them the same. Only one
+     * of them actually casts something this turn, and that is what should decide it.
+     */
+    @Test
+    public void castingSomethingNowOutranksMereColorFixing() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Forest", 1, ai);
+        addCardToZone("Doom Blade", ai, ZoneType.Hand);      // {1}{B} - Forest + Swamp casts it
+        addCardToZone("Angel of Mercy", ai, ZoneType.Hand);  // {4}{W} - a Plains fixes white, but
+                                                             // two lands is nowhere near five mana
+        game.getAction().checkStateEffects(true);
+
+        Card swamp = addCardToZone("Swamp", ai, ZoneType.Library);
+        Card plains = addCardToZone("Plains", ai, ZoneType.Library);
+
+        int black = ComputerUtilCard.getColorFixingValue(ai, swamp);
+        int white = ComputerUtilCard.getColorFixingValue(ai, plains);
+        System.out.println("swamp=" + black + " plains=" + white);
+        assertTrue("the land that actually casts something wins", black > white);
+    }
 }

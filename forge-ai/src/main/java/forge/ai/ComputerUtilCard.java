@@ -215,6 +215,13 @@ public class ComputerUtilCard {
 
     /** Score per source fixed, on the scale AiController's land scoring already uses. */
     public static final int COLOR_FIXING_WEIGHT = 50;
+    /**
+     * A land that casts something this turn is rated at twice a source fixed - it necessarily fixed
+     * one to get there, and being able to spend the mana now is worth more than being closer to it.
+     * Not a dominant term: a land fixing several colors can still outrank one that casts a single
+     * spell, which is deliberate, since a mana base is built over more than this turn.
+     */
+    public static final int CASTABLE_NOW_WEIGHT = 2 * COLOR_FIXING_WEIGHT;
 
     /** How many missing sources these extra ones supply across the player's hand and board. */
     private static int countSourcesFixed(final Player benefits, final int[] have, final int[] with) {
@@ -248,7 +255,20 @@ public class ComputerUtilCard {
         final int[] have = ComputerUtilCost.getManaSourceCounts(benefits);
         final int[] with = have.clone();
         ComputerUtilCost.addManaSources(candidate, with);
-        return COLOR_FIXING_WEIGHT * countSourcesFixed(benefits, have, with) + evaluateSpareSources(have, with);
+
+        // Two things decide a land. countSourcesFixed grades how much closer it brings the colored
+        // requirements; this asks what the counting cannot - whether it lets something be cast this
+        // turn, mana and all. A land doing both scores for both. It only taps once, so where it
+        // makes several colors, take the best rather than the sum.
+        int castableNow = 0;
+        for (MagicColor.Color color : MagicColor.Color.values()) {
+            if (with[color.ordinal()] > have[color.ordinal()]) {
+                castableNow = Math.max(castableNow, ComputerUtilCost.countUnlockedNow(benefits, color));
+            }
+        }
+        return CASTABLE_NOW_WEIGHT * castableNow
+                + COLOR_FIXING_WEIGHT * countSourcesFixed(benefits, have, with)
+                + evaluateSpareSources(have, with);
     }
 
     /** Value of a spare source of a color nothing needs yet, falling off as sources accumulate. */
