@@ -25,6 +25,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
+import com.google.common.collect.Multisets;
 
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -52,7 +53,10 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
     protected int id;
     private String name = "";
     protected CardCollection attachedCards = new CardCollection();
-    protected Multiset<CounterType> counters = HashMultiset.create();
+    private Multiset<CounterType> counters = HashMultiset.create();
+    // What getCounters() hands out. Refreshed whenever the multiset itself is replaced, so no
+    // caller can reach the counters without going past onCountersChanged().
+    private Multiset<CounterType> countersView = Multisets.unmodifiableMultiset(counters);
     protected List<Pair<Integer, Boolean>> damageReceivedThisTurn = Lists.newArrayList();
 
     protected GameEntity(int id0) {
@@ -311,7 +315,7 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
 
     // get all counters from a card
     public final Multiset<CounterType> getCounters() {
-        return counters;
+        return countersView;
     }
 
     // get total number of all counters on an entity
@@ -325,6 +329,27 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
 
     public void setCounters(final CounterType counterType, final Integer num) {
         counters.setCount(counterType, num);
+        onCountersChanged();
+    }
+
+    /** Replace the whole set of counters. */
+    protected final void replaceCounters(final Multiset<CounterType> allCounters) {
+        counters = allCounters;
+        countersView = Multisets.unmodifiableMultiset(counters);
+        onCountersChanged();
+    }
+
+    /** Empty the counters in place, keeping the same multiset. */
+    protected final void removeAllCounters() {
+        counters.clear();
+        onCountersChanged();
+    }
+
+    /**
+     * Called after every change to the counters. Subclasses holding state derived from them
+     * override this, rather than each mutation site having to remember for itself.
+     */
+    protected void onCountersChanged() {
     }
 
     abstract public void setCounters(final Multiset<CounterType> allCounters);
