@@ -66,6 +66,7 @@
         <module>forge-game</module>
         <module>forge-ai</module>
         <module>forge-gui</module>
+        <module>forge-headless</module>
         <module>forge-gui-mobile</module>
         <module>forge-gui-mobile-dev</module>
         <module>forge-gui-desktop</module>

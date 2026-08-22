@@ -1,0 +1,9 @@
+[metadata]
+Name=Simple Bolt Test Deck
+Description=Minimal test deck with Forests and Grizzly Bears.
+
+[Main]
+20 Forest
+40 Grizzly Bears
+
+[Sideboard]
