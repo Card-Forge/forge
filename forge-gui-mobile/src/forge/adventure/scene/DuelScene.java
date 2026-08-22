@@ -99,6 +99,10 @@ public class DuelScene extends ForgeScene {
         return callbackExit;
     }
 
+    public EnemySprite getEnemy() {
+        return enemy;
+    }
+
     public void GameEnd() {
         //TODO: Progress towards applicable Adventure quests also needs to be reported here.
         if (eventData != null)

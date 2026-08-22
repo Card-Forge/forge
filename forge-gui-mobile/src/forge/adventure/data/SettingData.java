@@ -1,5 +1,6 @@
 package forge.adventure.data;
 
+import java.util.HashMap;
 
 /**
  * Data class that will be used to read Json configuration files
@@ -29,4 +30,7 @@ public class SettingData {
     public boolean bindEquipmentLoadoutsToDecks;
     public boolean drawChevronsToHiddenEnemiesInClearQuest;
     public boolean preferEraMatchedTokenArt;
+    public boolean enableExtraBattleBackgrounds = true;
+    public HashMap<String, String> battleBackgroundSources = new HashMap<>();
+    public HashMap<String, Boolean> useCustomBattleBackgroundSources = new HashMap<>();
 }
