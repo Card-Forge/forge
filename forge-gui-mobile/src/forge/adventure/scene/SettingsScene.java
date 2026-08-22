@@ -9,8 +9,10 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.data.RewardData;
+import forge.adventure.util.AdventureBackgroundDownloader;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.assets.FSkinTexture;
 import forge.assets.ImageCache;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -211,6 +213,56 @@ public class SettingsScene extends UIScene {
                 }
             }
         });
+        String planeDefault = Forge.getLocalizer().getMessage("lblPlaneDefault");
+        String customSource = Forge.getLocalizer().getMessage("lblCustomSource");
+        boolean useCustomSource = Config.instance().isUsingCustomBattleBackgroundSource();
+        String configuredSource = Config.instance().getCustomBattleBackgroundSource();
+        SelectBox<String> backgroundSource = Controls.newComboBox();
+        backgroundSource.setItems(planeDefault, customSource);
+        backgroundSource.setSelected(useCustomSource ? customSource : planeDefault);
+        TextField backgroundSourceUrl = Controls.newTextField(configuredSource == null ? "" : configuredSource);
+        CheckBox extraBattleBackgrounds = addSettingField(
+                Forge.getLocalizer().getMessage("lblEnableExtraBattleBackgrounds"),
+                Config.instance().getSettingData().enableExtraBattleBackgrounds,
+                new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        boolean enabled = ((CheckBox) actor).isChecked();
+                        Config.instance().getSettingData().enableExtraBattleBackgrounds = enabled;
+                        Config.instance().saveSettings();
+                        backgroundSource.setDisabled(!enabled);
+                        backgroundSourceUrl.setDisabled(!enabled
+                                || !customSource.equals(backgroundSource.getSelected()));
+                        AdventureBackgroundDownloader.cancel();
+                        FSkinTexture.invalidateAdventureTextures();
+                    }
+                });
+        backgroundSource.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean custom = customSource.equals(((SelectBox<?>) actor).getSelected());
+                backgroundSourceUrl.setDisabled(!extraBattleBackgrounds.isChecked() || !custom);
+                Config.instance().setUseCustomBattleBackgroundSource(custom);
+                Config.instance().saveSettings();
+                AdventureBackgroundDownloader.cancel();
+            }
+        });
+        backgroundSourceUrl.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (customSource.equals(backgroundSource.getSelected())) {
+                    Config.instance().setBattleBackgroundSource(((TextField) actor).getText());
+                    Config.instance().saveSettings();
+                    AdventureBackgroundDownloader.cancel();
+                }
+            }
+        });
+        backgroundSource.setDisabled(!extraBattleBackgrounds.isChecked());
+        backgroundSourceUrl.setDisabled(!extraBattleBackgrounds.isChecked() || !useCustomSource);
+        addLabel(Forge.getLocalizer().getMessage("lblBattleBackgroundSource"));
+        settingGroup.add(backgroundSource).align(Align.right).pad(2);
+        addLabel(Forge.getLocalizer().getMessage("lblBattleBackgroundIndexUrl"));
+        settingGroup.add(backgroundSourceUrl).align(Align.right).pad(2);
         addSettingField(Forge.getLocalizer().getMessage("lblDisableWinLose"), Config.instance().getSettingData().disableWinLose, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -378,6 +430,9 @@ public class SettingsScene extends UIScene {
 
 
     public boolean back() {
+        GuiBase.setAdventureCacheDirectory(Config.instance().getCachePrefix());
+        FSkinTexture.invalidateAdventureTextures();
+        AdventureBackgroundDownloader.start();
         Forge.switchToLast();
         return true;
     }
@@ -435,12 +490,13 @@ public class SettingsScene extends UIScene {
         settingGroup.add(slide).align(Align.right);
     }
 
-    private void addSettingField(String name, boolean value, ChangeListener change) {
+    private CheckBox addSettingField(String name, boolean value, ChangeListener change) {
         CheckBox box = Controls.newCheckBox("");
         box.setChecked(value);
         box.addListener(change);
         addLabel(name);
         settingGroup.add(box).align(Align.right);
+        return box;
     }
 
     private void addSettingField(String name, int value, ChangeListener change) {

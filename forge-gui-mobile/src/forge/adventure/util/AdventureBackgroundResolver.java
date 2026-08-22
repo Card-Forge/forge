@@ -24,6 +24,10 @@ public final class AdventureBackgroundResolver {
         GameScene gameScene = GameScene.instance();
         PointOfInterest pointOfInterest = gameScene.getMapPOI();
         String location = gameScene.getAdventurePlayerLocation(false, true);
+        FSkinTexture background = getLocationBackground(location);
+        if (!Config.instance().getSettingData().enableExtraBattleBackgrounds) {
+            return background;
+        }
         String biome = pointOfInterest == null ? null
                 : gameScene.getBiomeByPosition(pointOfInterest.getPosition());
 
@@ -49,7 +53,7 @@ public final class AdventureBackgroundResolver {
             addNamedFolder(preferredFolders, "poi", pointName);
         }
 
-        return getLocationBackground(location).getRandomAdventureBackground(
+        return background.getRandomAdventureBackground(
                 "waste".equals(biome) ? "colorless" : biome,
                 preferredFolders);
     }
