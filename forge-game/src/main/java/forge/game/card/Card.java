@@ -2936,8 +2936,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
-        // Give spellText line breaks for easier reading
-        sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
+        // Give spellText line breaks for easier reading (Text: is on CardState so copies receive it)
+        sb.append(AbilityUtils.applyDescriptionTextChangeEffects(state.getNonAbilityText(), this)
+                .replaceAll("\\\\r\\\\n", "\r\n"));
         sb.append(linebreak);
 
         // Triggered abilities
@@ -3152,8 +3153,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private StringBuilder abilityTextInstantSorcery(CardState state) {
         final StringBuilder sb = new StringBuilder();
 
-        // Give spellText line breaks for easier reading
-        String spellText = text.replaceAll("\\\\r\\\\n", "\r\n");
+        // Give spellText line breaks for easier reading (Text: is on CardState so copies receive it)
+        String spellText = AbilityUtils.applyDescriptionTextChangeEffects(state.getNonAbilityText(), this)
+                .replaceAll("\\\\r\\\\n", "\r\n");
         sb.append(spellText);
 
         // NOTE:
@@ -5521,6 +5523,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         changedCardKeywordsByWord = new KeywordsChange(addKeywords, removeKeywords, false);
 
+        // Text: is stored on CardState so clones/copies receive it as a copiable characteristic
+        originalText = currentState.getNonAbilityText();
         text = AbilityUtils.applyDescriptionTextChangeEffects(originalText, this);
 
         getView().updateChangedColorWords(this);
