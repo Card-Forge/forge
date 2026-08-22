@@ -3,5 +3,5 @@ ManaCost:6 W
 Types:Creature Human Soldier
 PT:4/4
 A:AB$ Tap | Cost$ 3 W | ValidTgts$ Creature | SpellDescription$ Tap target creature.
-A:AB$ Pump | Cost$ 3 W | Defined$ Self | NumDef$ +5 | SpellDescription$ CARDNAME gets +0/+5 until end of turn.
-Oracle:{3}{W}: Tap target creature.\n{3}{W}: Crowd Favorites gets +0/+5 until end of turn.
+A:AB$ Pump | Cost$ 3 W | Defined$ Self | NumDef$ +5 | SpellDescription$ This creature gets +0/+5 until end of turn.
+Oracle:{3}{W}: Tap target creature.\n{3}{W}: This creature gets +0/+5 until end of turn.

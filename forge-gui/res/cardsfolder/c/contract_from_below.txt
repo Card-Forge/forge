@@ -7,4 +7,4 @@ SVar:DBAnte:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destinati
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 7
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:Remove Contract from Below from your deck before playing if you're not playing for ante.\nDiscard your hand, ante the top card of your library, then draw seven cards.
+Oracle:Remove this card from your deck before playing if you're not playing for ante.\nDiscard your hand, ante the top card of your library, then draw seven cards.

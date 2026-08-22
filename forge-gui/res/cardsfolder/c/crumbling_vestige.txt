@@ -1,10 +1,10 @@
 Name:Crumbling Vestige
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters, add one mana of any color.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When this land enters, add one mana of any color.
 SVar:TrigMana:DB$ Mana | Produced$ Any
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 DeckHas:Ability$Mana.Colorless
-Oracle:Crumbling Vestige enters tapped.\nWhen Crumbling Vestige enters, add one mana of any color.\n{T}: Add {C}. ({C} represents colorless mana.)
+Oracle:This land enters tapped.\nWhen this land enters, add one mana of any color.\n{T}: Add {C}. ({C} represents colorless mana.)

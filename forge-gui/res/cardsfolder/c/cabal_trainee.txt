@@ -3,4 +3,4 @@ ManaCost:B
 Types:Creature Human Minion
 PT:1/1
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | NumAtt$ -2 | IsCurse$ True | ValidTgts$ Creature | SpellDescription$ Target creature gets -2/-0 until end of turn.
-Oracle:Sacrifice Cabal Trainee: Target creature gets -2/-0 until end of turn.
+Oracle:Sacrifice this creature: Target creature gets -2/-0 until end of turn.

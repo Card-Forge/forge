@@ -5,4 +5,4 @@ A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 5 | SubAbility$ DBDig | SpellDescrip
 SVar:DBDig:DB$ Dig | DigNum$ 5 | RestRandomOrder$ True | NoReveal$ True
 A:AB$ Token | Cost$ UR UR Discard<1/CARDNAME> | ActivationZone$ Hand | TokenScript$ c_a_treasure_sac | AILogic$ AlwaysOnDiscard | SpellDescription$ Create a Treasure token.
 DeckHas:Ability$Token
-Oracle:Creative Outburst deals 5 damage to any target. Look at the top five cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.\n{U/R}{U/R}, Discard Creative Outburst: Create a Treasure token.
+Oracle:Creative Outburst deals 5 damage to any target. Look at the top five cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.\n{U/R}{U/R}, Discard this card: Create a Treasure token.

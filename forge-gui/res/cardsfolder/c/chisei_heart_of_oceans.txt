@@ -3,9 +3,9 @@ ManaCost:2 U U
 Types:Legendary Creature Spirit
 PT:4/4
 K:Flying
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you remove a counter from a permanent you control.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice NICKNAME unless you remove a counter from a permanent you control.
 SVar:TrigSac:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ RemoveAnyCounter<1/Any/Permanent>
 SVar:NeedsToPlay:Creature.YouCtrl+HasCounters
 SVar:AIRemoveCounterCostPriority:ANY
 DeckNeeds:Ability$Counters
-Oracle:Flying\nAt the beginning of your upkeep, sacrifice Chisei, Heart of Oceans unless you remove a counter from a permanent you control.
+Oracle:Flying\nAt the beginning of your upkeep, sacrifice Chisei unless you remove a counter from a permanent you control.

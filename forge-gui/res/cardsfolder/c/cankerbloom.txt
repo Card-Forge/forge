@@ -9,4 +9,4 @@ SVar:Proliferate:DB$ Proliferate | SpellDescription$ Proliferate. (Choose any nu
 AI:RemoveDeck:Random
 DeckHas:Ability$Sacrifice|Proliferate
 DeckHints:Ability$Counters
-Oracle:{1}, Sacrifice Cankerbloom: Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+Oracle:{1}, Sacrifice this creature: Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

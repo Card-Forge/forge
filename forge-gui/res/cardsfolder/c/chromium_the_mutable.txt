@@ -5,8 +5,8 @@ PT:7/7
 K:Flash
 K:Flying
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-A:AB$ Animate | Cost$ Discard<1/Card> | Types$ Human | Power$ 1 | Toughness$ 1 | Keywords$ Hexproof | RemoveAllAbilities$ True | RemoveCreatureTypes$ True | SubAbility$ DBUnblockable | SpellDescription$ Until end of turn, CARDNAME becomes a Human with base power and toughness 1/1, loses all abilities, and gains hexproof. It can't be blocked this turn.
+A:AB$ Animate | Cost$ Discard<1/Card> | Types$ Human | Power$ 1 | Toughness$ 1 | Keywords$ Hexproof | RemoveAllAbilities$ True | RemoveCreatureTypes$ True | SubAbility$ DBUnblockable | SpellDescription$ Until end of turn, NICKNAME becomes a Human with base power and toughness 1/1, loses all abilities, and gains hexproof. It can't be blocked this turn.
 SVar:DBUnblockable:DB$ Effect | ExileOnMoved$ Battlefield | RememberObjects$ Self | StaticAbilities$ Unblockable
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 DeckHas:Ability$Discard
-Oracle:Flash\nThis spell can't be countered.\nFlying\nDiscard a card: Until end of turn, Chromium, the Mutable becomes a Human with base power and toughness 1/1, loses all abilities, and gains hexproof. It can't be blocked this turn.
+Oracle:Flash\nThis spell can't be countered.\nFlying\nDiscard a card: Until end of turn, Chromium becomes a Human with base power and toughness 1/1, loses all abilities, and gains hexproof. It can't be blocked this turn.

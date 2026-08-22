@@ -1,7 +1,7 @@
 Name:Cleansing Meditation
 ManaCost:1 W W
 Types:Sorcery
-A:SP$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE7 | TrueSubAbility$ ThreshDestruction | FalseSubAbility$ Destruction | SpellDescription$ Destroy all enchantments. Threshold — If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.
+A:SP$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE7 | TrueSubAbility$ ThreshDestruction | FalseSubAbility$ Destruction | SpellDescription$ Destroy all enchantments. Threshold — If there are seven or more cards in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.
 SVar:Destruction:DB$ DestroyAll | ValidCards$ Enchantment
 SVar:ThreshDestruction:DB$ DestroyAll | ValidCards$ Enchantment | SubAbility$ ThreshReturn | RememberDestroyed$ True | StackDescription$ Threshold — If seven or more cards are in your graveyard, instead destroy all enchantments,
 SVar:ThreshReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | StackDescription$ then return all cards in your graveyard destroyed this way to the battlefield. | SubAbility$ DBCleanup

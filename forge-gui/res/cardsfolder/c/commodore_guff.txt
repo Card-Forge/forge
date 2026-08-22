@@ -11,4 +11,4 @@ SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ X
 SVar:X:Count$Valid Planeswalker.YouCtrl
 DeckHas:Ability$Token & Type$Wizard
 DeckNeeds:Type$Planeswalker
-Oracle:At the beginning of your end step, put a loyalty counter on another target planeswalker you control.\n[+1]: Create a 1/1 red Wizard creature token with "{T}: Add {R}. Spend this mana only to cast a planeswalker spell."\n[-3]:You draw X cards and Commodore Guff deals X damage to each opponent, where X is the number of planeswalkers you control.\nCommodore Guff can be your commander.
+Oracle:At the beginning of your end step, put a loyalty counter on another target planeswalker you control.\n[+1]: Create a 1/1 red Wizard creature token with "{T}: Add {R}. Spend this mana only to cast a planeswalker spell."\n[-3]: You draw X cards and Commodore Guff deals X damage to each opponent, where X is the number of planeswalkers you control.\nCommodore Guff can be your commander.

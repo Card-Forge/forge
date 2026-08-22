@@ -3,8 +3,8 @@ ManaCost:1 U
 Types:Enchantment Aura Cartouche
 K:Enchant:Creature.YouCtrl:creature you control
 SVar:AttachAILogic:Pump
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this Aura enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | Description$ Enchanted creature gets +1/+1 and has flying.
 DeckHints:Name$Trial of Knowledge
-Oracle:Enchant creature you control\nWhen Cartouche of Knowledge enters, draw a card.\nEnchanted creature gets +1/+1 and has flying.
+Oracle:Enchant creature you control\nWhen this Aura enters, draw a card.\nEnchanted creature gets +1/+1 and has flying.

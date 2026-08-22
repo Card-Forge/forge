@@ -3,11 +3,11 @@ ManaCost:8
 Types:Artifact Creature Construct
 PT:8/8
 K:Trample
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When you cast this spell and whenever CARDNAME attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroy | Secondary$ True | TriggerDescription$ When you cast this spell and whenever CARDNAME attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When you cast this spell and whenever this creature attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroy | Secondary$ True | TriggerDescription$ When you cast this spell and whenever this creature attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.
 SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select up to one target nonland permanent | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenOwner$ TargetedController
 K:Unearth:8
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Graveyard|Token
-Oracle:Trample\nWhen you cast this spell and whenever Cityscape Leveler attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.\nUnearth {8}
+Oracle:Trample\nWhen you cast this spell and whenever this creature attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.\nUnearth {8}
