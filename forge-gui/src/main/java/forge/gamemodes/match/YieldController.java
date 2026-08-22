@@ -477,7 +477,9 @@ public class YieldController {
             return;
         }
         StackItemView siv = StackItemView.get(si);
-        if (siv != null && getBoolPref(FPref.YIELD_INTERRUPT_ON_TARGETING)
+        // Only an opponent targeting you is worth breaking a yield for since you
+        // already know about anything you cast at your own permanents.
+        if (isOpponent && siv != null && getBoolPref(FPref.YIELD_INTERRUPT_ON_TARGETING)
                 && targetsPlayerOrPermanents(siv, local)) {
             applyInterrupt();
             return;
