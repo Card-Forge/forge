@@ -34,6 +34,7 @@ import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaRefundService;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
