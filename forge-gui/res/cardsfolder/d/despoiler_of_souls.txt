@@ -2,6 +2,6 @@ Name:Despoiler of Souls
 ManaCost:B B
 Types:Creature Horror
 PT:3/1
-S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
-A:AB$ ChangeZone | Cost$ B B ExileFromGrave<2/Creature.Other> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield.
-Oracle:Despoiler of Souls can't block.\n{B}{B}, Exile two other creature cards from your graveyard: Return Despoiler of Souls from your graveyard to the battlefield.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ This creature can't block.
+A:AB$ ChangeZone | Cost$ B B ExileFromGrave<2/Creature.Other> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SpellDescription$ Return this card from your graveyard to the battlefield.
+Oracle:This creature can't block.\n{B}{B}, Exile two other creature cards from your graveyard: Return this card from your graveyard to the battlefield.

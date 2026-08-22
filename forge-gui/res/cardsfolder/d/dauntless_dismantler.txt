@@ -8,4 +8,4 @@ A:AB$ DestroyAll | Cost$ X X W Sac<1/CARDNAME> | ValidCards$ Artifact.cmcEQX | S
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 DeckHas:Ability$Sacrifice
-Oracle:Artifacts your opponents control enter tapped.\n{X}{X}{W}, Sacrifice Dauntless Dismantler: Destroy each artifact with mana value X.
+Oracle:Artifacts your opponents control enter tapped.\n{X}{X}{W}, Sacrifice this creature: Destroy each artifact with mana value X.

@@ -8,4 +8,4 @@ SVar:DBReplace:DB$ ReplaceDamage | Amount$ ShieldAmount | SubAbility$ ExileEffec
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:ShieldAmount:ReplaceCount$DamageAmount/HalfDown
 DeckHas:Ability$Sacrifice
-Oracle:{T}, Sacrifice Dark Sphere: The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
+Oracle:{T}, Sacrifice this artifact: The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.

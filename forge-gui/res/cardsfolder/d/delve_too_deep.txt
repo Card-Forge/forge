@@ -6,4 +6,4 @@ A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | Sub
 SVar:DBToken:DB$ Token | TokenScript$ br_7_7_demon | TokenOwner$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7
 SVar:X:Count$xPaid
 DeckHas:Ability$Token & Type$Demon
-Oracle:Delve\nTarget creature gets -X/-X until end of turn. If X was 7 or greater, create a 7/7 black and red Demon creature token.
+Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nTarget creature gets -X/-X until end of turn. If X was 7 or greater, create a 7/7 black and red Demon creature token.

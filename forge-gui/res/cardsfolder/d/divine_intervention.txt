@@ -1,11 +1,11 @@
 Name:Divine Intervention
 ManaCost:6 W W
 Types:Enchantment
-K:etbCounter:INTERVENTION:2
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCtr | TriggerDescription$ At the beginning of your upkeep, remove an intervention counter from CARDNAME. When you remove the last intervention counter from CARDNAME, the game is a draw.
+K:etbCounter:INTERVENTION:2:no Condition:This enchantment enters with two intervention counters on it.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCtr | TriggerDescription$ At the beginning of your upkeep, remove an intervention counter from this enchantment. When you remove the last intervention counter from this enchantment, the game is a draw.
 SVar:TrigRemoveCtr:DB$ RemoveCounter | Defined$ Self | CounterType$ INTERVENTION | CounterNum$ 1 | SubAbility$ GameIsADraw
 SVar:GameIsADraw:DB$ GameDrawn | ConditionPresent$ Card.Self+counters_EQ0_INTERVENTION
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 DeckHas:Ability$Counters
-Oracle:Divine Intervention enters with two intervention counters on it.\nAt the beginning of your upkeep, remove an intervention counter from Divine Intervention.\nWhen you remove the last intervention counter from Divine Intervention, the game is a draw.
+Oracle:This enchantment enters with two intervention counters on it.\nAt the beginning of your upkeep, remove an intervention counter from this enchantment.\nWhen you remove the last intervention counter from this enchantment, the game is a draw.
