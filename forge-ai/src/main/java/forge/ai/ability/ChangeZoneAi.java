@@ -1561,6 +1561,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // Exiling or bouncing stuff
             if (player.isOpponentOf(decider)) {
                 c = ComputerUtilCard.getBestAI(fetchList);
+            } else if (origin.contains(ZoneType.Library)) {
+                // searching your own library is a tutor - exile is where the card waits to be
+                // played, not somewhere to dump the worst thing you own
+                c = ComputerUtilCard.getBestAI(fetchList);
             } else {
                 if (!sa.hasParam("Mandatory") && origin.contains(ZoneType.Battlefield) && sa.hasParam("ChangeNum")) {
                     // exclude tokens, they won't come back, and enchanted stuff, since auras will go away

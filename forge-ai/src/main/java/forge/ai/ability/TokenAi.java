@@ -67,6 +67,15 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
+        // a converge token count reads the payment through its own SVar, so nothing below would
+        // announce X - and the count is read before that block, so it has to happen here
+        if (sa.costHasManaX() && source.hasConverge() && sa.getSVar("X").equals("Count$xPaid")
+                && !"X".equals(sa.getParamOrDefault("TokenAmount", "1"))) {
+            // it announces the converge-best X itself; keeping the return value would put the
+            // largest affordable X back over it
+            ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
+        }
+
         Card actualToken = spawnToken(ai, sa);
 
         String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
@@ -84,9 +93,6 @@ public class TokenAi extends SpellAbilityAi {
         // X-cost spells
         if (tokenHasX) {
             int x = AbilityUtils.calculateAmount(sa.getHostCard(), tokenAmount, sa);
-            if (source.getSVar("X").equals("Count$Converge")) {
-                x = ComputerUtilMana.getConvergeCount(sa, ai);
-            }
             if (sa.getSVar("X").equals("Count$xPaid")) {
                 x = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
                 sa.getRootAbility().setXManaCostPaid(x);
