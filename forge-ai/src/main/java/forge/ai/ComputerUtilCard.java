@@ -29,6 +29,7 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.MagicColor.Constant;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -60,6 +61,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
@@ -1110,6 +1112,24 @@ public class ComputerUtilCard {
         Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();
         Player opp = ai.getStrongestOpponent();
+        if (sa.isManaAbility()) {
+            // Planned mana payments set express choices before replaying the ability. Honor those
+            // choices here instead of letting generic color heuristics pick a different output.
+            for (AbilityManaPart manaPart : sa.getAllManaParts()) {
+                for (String color : TextUtil.split(manaPart.getExpressChoice(), ' ')) {
+                    String longColor = MagicColor.toLongString(ManaAtom.fromName(color));
+                    if (colorChoices.contains(longColor) && !chosen.contains(longColor)) {
+                        chosen.add(longColor);
+                        if (chosen.size() == max) {
+                            return chosen;
+                        }
+                    }
+                }
+                if (!chosen.isEmpty()) {
+                    return chosen;
+                }
+            }
+        }
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
 
