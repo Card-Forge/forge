@@ -613,8 +613,11 @@ public class Game {
             loopStateFingerprints.removeFirst();
         }
         final int n = loopStateFingerprints.size();
-        // three identical fingerprints in a row (period-1/2 loop) = repeating state -> draw
-        if (n >= 3 && loopStateFingerprints.getLast().equals(getNthLast(loopStateFingerprints, 3))) {
+        // three consecutive identical fingerprints (period-1 or -2 loop) = repeating state -> draw.
+        // Compare against both preceding entries so an alternating A->B->A pattern does not draw.
+        if (n >= 3
+                && fp.equals(getNthLast(loopStateFingerprints, 2))
+                && fp.equals(getNthLast(loopStateFingerprints, 3))) {
             declareLoopDraw(); // doc:11d DONE
         }
     }

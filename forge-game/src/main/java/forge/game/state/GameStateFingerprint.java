@@ -10,6 +10,9 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,35 +39,39 @@ public final class GameStateFingerprint {
             sb.append("L:").append(p.getLife());
             sb.append("Po:").append(p.getPoisonCounters());
 
-            final StringBuilder cd = new StringBuilder();
+            // canonicalize so entry order does not change the fingerprint
+            final List<String> cd = new ArrayList<>();
             for (final Map.Entry<Card, Integer> e : p.getCommanderDamage()) {
-                cd.append(e.getKey().getName()).append('=').append(e.getValue()).append(',');
+                cd.add(e.getKey().getName() + "=" + e.getValue());
             }
+            Collections.sort(cd);
             sb.append("CD:").append(cd);
 
-            final StringBuilder mp = new StringBuilder();
+            final List<String> mp = new ArrayList<>();
             for (final Mana m : p.getManaPool()) {
-                mp.append(MagicColor.toShortString(m.getColor())).append(',');
+                mp.add(MagicColor.toShortString(m.getColor()));
             }
+            Collections.sort(mp);
             sb.append("MP:").append(mp);
         }
 
         for (final ZoneType zt : ZoneType.values()) {
-            final StringBuilder names = new StringBuilder();
+            final List<String> names = new ArrayList<>();
             if (zt == ZoneType.Battlefield) {
                 for (final Player p : game.getPlayers()) {
                     final PlayerZone z = p.getZone(ZoneType.Battlefield);
                     final CardCollectionView cards = (z instanceof PlayerZoneBattlefield)
                             ? ((PlayerZoneBattlefield) z).getCardsUnexpanded() : z.getCards(false);
                     for (final Card c : cards) {
-                        names.append(c.getName()).append(',');
+                        names.add(c.getName());
                     }
                 }
             } else {
                 for (final Card c : game.getCardsIn(zt)) {
-                    names.append(c.getName()).append(',');
+                    names.add(c.getName());
                 }
             }
+            Collections.sort(names);
             sb.append("|Z:").append(zt.getName()).append(':').append(names);
         }
         return sb.toString();
