@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Elf Citizen
 PT:2/3
 K:Reach
-T:Mode$ AttackerBlocked | ValidCard$ Creature.withFlying | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks a creature with flying, CARDNAME gets +2/+0 until end of turn.
+T:Mode$ AttackerBlocked | ValidCard$ Creature.withFlying | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature blocks a creature with flying, this creature gets +2/+0 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2
-Oracle:Reach\nWhenever High-Rise Sawjack blocks a creature with flying, High-Rise Sawjack gets +2/+0 until end of turn.
+Oracle:Reach (This creature can block creatures with flying.)\nWhenever this creature blocks a creature with flying, this creature gets +2/+0 until end of turn.

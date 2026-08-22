@@ -3,9 +3,9 @@ ManaCost:X G
 Types:Legendary Creature Elf Soldier
 PT:0/0
 K:Vigilance
-K:etbCounter:P1P1:X
+K:etbCounter:P1P1:X:no Condition:NICKNAME enters with X +1/+1 counters on it.
 SVar:X:Count$xPaid
 A:AB$ PumpAll | Cost$ 5 G | ValidCards$ Creature.Elf+StrictlyOther+YouCtrl | NumAtt$ +Y | NumDef$ +Y | KW$ Vigilance | SpellDescription$ Until end of turn, other Elves you control gain vigilance and get +1/+1 for each +1/+1 counter on NICKNAME.
 SVar:Y:Count$CardCounters.P1P1
 DeckHas:Ability$Counters
-Oracle:Haldir, Lórien Lieutenant enters with X +1/+1 counters on it.\nVigilance\n{5}{G}: Until end of turn, other Elves you control gain vigilance and get +1/+1 for each +1/+1 counter on Haldir.
+Oracle:Haldir enters with X +1/+1 counters on it.\nVigilance\n{5}{G}: Until end of turn, other Elves you control gain vigilance and get +1/+1 for each +1/+1 counter on Haldir.

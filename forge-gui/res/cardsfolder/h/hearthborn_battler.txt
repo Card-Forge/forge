@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Creature Lizard Warlock
 PT:2/3
 K:Haste
-T:Mode$ SpellCast | ValidActivatingPlayer$ Player | ActivatorThisTurnCast$ EQ2 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a player casts their second spell each turn, CARDNAME deals 2 damage to target opponent.
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player | ActivatorThisTurnCast$ EQ2 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a player casts their second spell each turn, this creature deals 2 damage to target opponent.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player.Opponent | NumDmg$ 2
-Oracle:Haste\nWhenever a player casts their second spell each turn, Hearthborn Battler deals 2 damage to target opponent.
+Oracle:Haste\nWhenever a player casts their second spell each turn, this creature deals 2 damage to target opponent.

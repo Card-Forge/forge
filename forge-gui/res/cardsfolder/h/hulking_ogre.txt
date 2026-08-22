@@ -2,5 +2,5 @@ Name:Hulking Ogre
 ManaCost:2 R
 Types:Creature Ogre
 PT:3/3
-S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
-Oracle:Hulking Ogre can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ This creature can't block.
+Oracle:This creature can't block.

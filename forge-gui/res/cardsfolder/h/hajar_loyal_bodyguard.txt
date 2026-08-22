@@ -6,4 +6,4 @@ A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.Legendary+YouCtrl |
 AI:RemoveDeck:Random
 DeckHints:Type$Legendary
 DeckHas:Ability$Sacrifice & Keyword$Indestructible
-Oracle:Sacrifice Hajar, Loyal Bodyguard: Legendary creatures you control get +1/+0 and gain indestructible until end of turn.
+Oracle:Sacrifice Hajar: Legendary creatures you control get +1/+0 and gain indestructible until end of turn.
