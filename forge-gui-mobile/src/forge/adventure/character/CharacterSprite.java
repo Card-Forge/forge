@@ -16,6 +16,8 @@ import java.util.HashMap;
  */
 
 public class CharacterSprite extends MapActor {
+    private static final float DEFAULT_ANIMATION_FRAME_DURATION = 0.2f;
+    private static final float MAX_DEATH_ANIMATION_DURATION = 3f;
     private static final float MAX_ACTION_ANIMATION_DURATION = 5f;
     private final HashMap<AnimationTypes, HashMap<AnimationDirections, Animation<TextureRegion>>> animations = new HashMap<>();
     float timer;
@@ -63,7 +65,11 @@ public class CharacterSprite extends MapActor {
                     anim = Config.instance().getAnimatedSprites(path, stand.toString() + dir.toString());
 
                 if (anim.size != 0) {
-                    dirs.put(dir, new Animation<>(0.2f, anim));
+                    float frameDuration = DEFAULT_ANIMATION_FRAME_DURATION;
+                    if (stand == AnimationTypes.Death) {
+                        frameDuration = Math.min(frameDuration, MAX_DEATH_ANIMATION_DURATION / anim.size);
+                    }
+                    dirs.put(dir, new Animation<>(frameDuration, anim));
                     if (getWidth() == 0.0)//init size onload
                     {
                         setWidth(anim.first().getWidth());
