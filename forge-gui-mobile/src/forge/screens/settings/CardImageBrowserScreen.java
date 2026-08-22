@@ -9,7 +9,10 @@ import forge.assets.FSkinFont;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.gui.FThreads;
+import forge.gui.download.CdnUuidCache;
 import forge.gui.download.GuiDownloadFilteredCardImages;
+import forge.gui.download.ScryfallBulkDataSync;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.filters.ArchivedFormatSelect;
@@ -37,6 +40,9 @@ public class CardImageBrowserScreen extends FScreen {
     private final FLabel            lblDownloaded;
     private final FLabel            lblMissing;
     private final FButton           btnDownload;
+    private final FButton           btnSyncBulkData;
+    private final FProgressBar      bulkSyncProgress;
+    private final FButton           btnClearCdnCache;
 
     private GameFormat   selectedFormat    = null;
     private String       selectedFormatText;
@@ -115,6 +121,15 @@ public class CardImageBrowserScreen extends FScreen {
         btnDownload = add(new FButton(Forge.getLocalizer().getMessage("btnDownloadCardImages")));
         btnDownload.setCommand(e -> startDownload());
 
+        // ── Bulk data sync button ────────────────────────────────────────────
+        btnSyncBulkData = add(new FButton(Forge.getLocalizer().getMessage("btnSyncBulkCardData")));
+        btnSyncBulkData.setCommand(e -> startBulkSync());
+        bulkSyncProgress = add(new FProgressBar());
+
+        // ── Clear CDN cache button ─────────────────────────────────────────────
+        btnClearCdnCache = add(new FButton(Forge.getLocalizer().getMessage("btnClearCdnImageCache")));
+        btnClearCdnCache.setCommand(e -> clearCdnCache());
+
         // Run initial stats for "All cards, all sets" as soon as the screen opens
         scheduleStatsUpdate();
     }
@@ -167,6 +182,89 @@ public class CardImageBrowserScreen extends FScreen {
     }
 
     // =========================================================================
+    //  Bulk data sync: resolve CDN links for every set at once
+    // =========================================================================
+
+    /** Opens the screen and immediately starts a bulk sync that's already been confirmed elsewhere (e.g. the first-run prompt). Safe to call from any thread. */
+    public static void openAndAutoStartBulkSync() {
+        FThreads.invokeInEdtLater(() -> {
+            CardImageBrowserScreen screen = new CardImageBrowserScreen();
+            Forge.openScreen(screen);
+            screen.runBulkSync();
+        });
+    }
+
+    private void startBulkSync() {
+        // SOptionPane.showConfirmDialog() blocks its caller while the dialog renders on the EDT,
+        // so it must never be called directly from a tap handler (which runs on the EDT itself)
+        // -- that throws immediately and the whole method aborts before any UI update happens.
+        FThreads.invokeInBackgroundThread(() -> {
+            if (!SOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSyncBulkCardDataConfirm"))) {
+                return;
+            }
+            runBulkSync();
+        });
+    }
+
+    /** Runs the sync itself; always hops onto its own background thread, so it's safe to call from the EDT or not. */
+    private void runBulkSync() {
+        FThreads.invokeInBackgroundThread(() -> {
+            FThreads.invokeInEdtLater(() -> {
+                btnDownload.setEnabled(false);
+                btnSyncBulkData.setEnabled(false);
+                btnClearCdnCache.setEnabled(false);
+                bulkSyncProgress.reset();
+                bulkSyncProgress.setMaximum(100);
+                bulkSyncProgress.setShowETA(false);
+                bulkSyncProgress.setShowCount(false);
+                bulkSyncProgress.setDescription("Starting...");
+                bulkSyncProgress.setShowProgressTrail(true);
+            });
+
+            int setCount = ScryfallBulkDataSync.sync(
+                    (message, fraction) -> FThreads.invokeInEdtLater(() -> {
+                        bulkSyncProgress.setDescription(message);
+                        if (fraction >= 0) {
+                            bulkSyncProgress.setShowProgressTrail(false);
+                            bulkSyncProgress.setValue((int) Math.round(fraction * 100));
+                        } else {
+                            bulkSyncProgress.setShowProgressTrail(true);
+                        }
+                    }),
+                    () -> false);
+            FThreads.invokeInEdtLater(() -> {
+                btnDownload.setEnabled(true);
+                btnSyncBulkData.setEnabled(true);
+                btnClearCdnCache.setEnabled(true);
+                bulkSyncProgress.setShowProgressTrail(false);
+                if (setCount >= 0) {
+                    bulkSyncProgress.setValue(100);
+                    bulkSyncProgress.setDescription(Forge.getLocalizer().getMessage("lblBulkCardDataSynced") + " (" + setCount + " sets)");
+                    scheduleStatsUpdate();
+                } else {
+                    bulkSyncProgress.setDescription("Bulk sync failed -- see log for details.");
+                }
+            });
+        });
+    }
+
+    // =========================================================================
+    //  CDN image lookup cache: clear
+    // =========================================================================
+
+    private void clearCdnCache() {
+        // Same EDT restriction as startBulkSync() -- must not call SOptionPane directly from a
+        // tap handler.
+        FThreads.invokeInBackgroundThread(() -> {
+            if (!SOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblClearCdnImageCacheConfirm"))) {
+                return;
+            }
+            CdnUuidCache.clearCache();
+            SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblCdnImageCacheCleared"));
+        });
+    }
+
+    // =========================================================================
     //  Helpers
     // =========================================================================
 
@@ -207,6 +305,15 @@ public class CardImageBrowserScreen extends FScreen {
 
         float btnW = Math.min(w * 0.6f, Utils.AVG_FINGER_HEIGHT * 4);
         btnDownload.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
+        y += BTN_HEIGHT + PADDING;
+
+        btnSyncBulkData.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
+        y += BTN_HEIGHT + PADDING;
+
+        bulkSyncProgress.setBounds(x, y, w, STAT_HEIGHT * 0.8f);
+        y += STAT_HEIGHT * 0.8f + PADDING;
+
+        btnClearCdnCache.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
     }
 
     // =========================================================================
