@@ -37,6 +37,7 @@ import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
+import forge.game.state.GameStateFingerprint;
 import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
 import forge.game.player.*;
@@ -275,6 +276,10 @@ public class Game {
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
     private final Table<Integer, Long, Card> changeZoneLKIInfo = HashBasedTable.create();
+
+    // REFORGE COMMANDER EXTENSION
+    // Rolling history of board-state fingerprints for infinite-loop detection (#48).
+    private final ArrayDeque<String> loopStateFingerprints = new ArrayDeque<>();
     public final void addChangeZoneLKIInfo(Card lki) {
         if (lki == null) {
             return;
@@ -597,6 +602,39 @@ public class Game {
         if (maingame == null) {
             fireEvent(new GameEventGameOutcome(result, match.getOutcomes()));
         }
+    }
+
+    // REFORGE COMMANDER EXTENSION
+    // Infinite-loop detection via consecutive identical board-state fingerprints (#48).
+    public void recordLoopState() {
+        final String fp = GameStateFingerprint.compute(this);
+        loopStateFingerprints.addLast(fp);
+        if (loopStateFingerprints.size() > 100) {
+            loopStateFingerprints.removeFirst();
+        }
+        final int n = loopStateFingerprints.size();
+        // three consecutive identical fingerprints (period-1 or -2 loop) = repeating state -> draw.
+        // Compare against both preceding entries so an alternating A->B->A pattern does not draw.
+        if (n >= 3
+                && fp.equals(getNthLast(loopStateFingerprints, 2))
+                && fp.equals(getNthLast(loopStateFingerprints, 3))) {
+            declareLoopDraw(); // doc:11d DONE
+        }
+    }
+
+    private static String getNthLast(final Deque<String> d, final int k) {
+        final List<String> list = new ArrayList<>(d);
+        return list.get(list.size() - k);
+    }
+
+    public void declareLoopDraw() {
+        if (isGameOver()) {
+            return;
+        }
+        for (final Player p : getPlayers()) {
+            p.loopDraw();
+        }
+        setGameOver(GameEndReason.Draw);
     }
 
     public Zone getZoneOf(final Card card) {
