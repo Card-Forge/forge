@@ -14,6 +14,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeNetPreferences;
+import forge.localinstance.properties.ForgeProfileProperties;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.properties.IPreferences;
@@ -37,10 +38,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 /**
  * Controls the preferences submenu in the home UI.
@@ -190,6 +199,8 @@ public enum CSubmenuPreferences implements ICDoc {
 
         view.getBtnUserProfileUI().setCommand((UiCommand) CSubmenuPreferences.this::openUserProfileDirectory);
 
+        view.getBtnDeckDirectoryUI().setCommand((UiCommand) CSubmenuPreferences.this::changeDeckDirectory);
+
         view.getBtnClearImageCache().setCommand((UiCommand) CSubmenuPreferences.this::clearImageCache);
 
         view.getBtnTokenPreviewer().setCommand((UiCommand) CSubmenuPreferences.this::openTokenPreviewer);
@@ -336,6 +347,183 @@ public enum CSubmenuPreferences implements ICDoc {
         } catch(final Exception e) {
             System.out.println("Unable to open Directory: " + e.toString());
         }
+    }
+
+    private void changeDeckDirectory() {
+        final JFileChooser chooser = new JFileChooser(ForgeConstants.DECK_BASE_DIR);
+        chooser.setDialogTitle(localizer.getMessage("lblChooseDeckDirectory"));
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+
+        if (chooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
+        final File selectedDir = chooser.getSelectedFile();
+        if (selectedDir == null) {
+            return;
+        }
+
+        final File oldDeckDir = new File(ForgeConstants.DECK_BASE_DIR);
+        final File newDeckDir = selectedDir.getAbsoluteFile();
+
+        final boolean isSameDeckDirectory = isSameDirectory(oldDeckDir, newDeckDir);
+        try {
+            if (!isSameDeckDirectory && isNestedDeckDirectory(oldDeckDir, newDeckDir)) {
+                FOptionPane.showErrorDialog(
+                    localizer.getMessage("lblDeckDirectoryNestedError"),
+                    localizer.getMessage("lblChooseDeckDirectory")
+                );
+                return;
+            }
+        } catch (final IOException e) {
+            FOptionPane.showErrorDialog(
+                localizer.getMessage("lblDeckMigrationFailed", e.getMessage()),
+                localizer.getMessage("lblError")
+            );
+            return;
+        }
+
+        try {
+            ensureWritableDirectory(newDeckDir);
+        } catch (final IOException e) {
+            FOptionPane.showErrorDialog(
+                localizer.getMessage("lblDeckDirectoryNotWritable"),
+                localizer.getMessage("lblError")
+            );
+            return;
+        }
+
+        if (!isSameDeckDirectory) {
+            final boolean hasDeckFilesToCopy;
+            try {
+                hasDeckFilesToCopy = containsFiles(oldDeckDir, true);
+            } catch (final IOException e) {
+                FOptionPane.showErrorDialog(
+					localizer.getMessage("lblDeckMigrationFailed", e.getMessage()),
+                    localizer.getMessage("lblError")
+				);
+                return;
+            }
+
+            if (
+				hasDeckFilesToCopy &&
+                FOptionPane.showConfirmDialog(
+                    localizer.getMessage("lblMigrateDecksPrompt", oldDeckDir.getAbsolutePath(), newDeckDir.getAbsolutePath()),
+					localizer.getMessage("lblMigrateDecksTitle"),
+					localizer.getMessage("lblYes"),
+					localizer.getMessage("lblNo"),
+					false
+	            )
+			) {
+                final AtomicInteger copiedFiles = new AtomicInteger();
+                final AtomicInteger skippedFiles = new AtomicInteger();
+                try {
+                    copyDeckDirectory(oldDeckDir, newDeckDir, copiedFiles, skippedFiles);
+                } catch (final IOException | RuntimeException e) {
+                    FOptionPane.showErrorDialog(localizer.getMessage("lblDeckMigrationFailed", e.getMessage()),
+                            localizer.getMessage("lblError"));
+                    return;
+                }
+
+                final String deckDir = getDirectoryPath(newDeckDir);
+                ForgeProfileProperties.setDecksDir(deckDir);
+                FOptionPane.showMessageDialog(
+                    localizer.getMessage(
+						"lblDeckDirectoryChangeRestartMigrated",
+						deckDir,
+                        String.valueOf(copiedFiles.get()),
+						String.valueOf(skippedFiles.get())
+					),
+                    localizer.getMessage("lblRestartRequired"));
+                return;
+            }
+        }
+
+        final String deckDir = getDirectoryPath(newDeckDir);
+        ForgeProfileProperties.setDecksDir(deckDir);
+        FOptionPane.showMessageDialog(
+			localizer.getMessage("lblDeckDirectoryChangeRestart", deckDir),
+            localizer.getMessage("lblRestartRequired")
+		);
+    }
+
+    private static String getDirectoryPath(final File dir) {
+        String deckDir = dir.getAbsolutePath();
+        if (!deckDir.endsWith(File.separator)) {
+            deckDir += File.separator;
+        }
+        return deckDir;
+    }
+
+    private static void ensureWritableDirectory(final File dir) throws IOException {
+        final Path path = dir.toPath();
+        Files.createDirectories(path);
+
+        if (!Files.isDirectory(path)) {
+            throw new IOException(dir.getAbsolutePath());
+        }
+
+        final Path testFile = Files.createTempFile(path, "forge-deck-dir-test-", ".tmp");
+        Files.deleteIfExists(testFile);
+    }
+
+    private static boolean containsFiles(final File dir, final boolean recursive) throws IOException {
+        if (!dir.isDirectory()) {
+            return false;
+        }
+        if (!recursive) {
+            final File[] files = dir.listFiles(File::isFile);
+            return files != null && files.length > 0;
+        }
+        try (Stream<Path> paths = Files.walk(dir.toPath())) {
+            return paths.anyMatch(Files::isRegularFile);
+        }
+    }
+
+    private static boolean isSameDirectory(final File oldDeckDir, final File newDeckDir) {
+        try {
+            return oldDeckDir.getCanonicalFile().equals(newDeckDir.getCanonicalFile());
+        } catch (final IOException e) {
+            return oldDeckDir.getAbsoluteFile().equals(newDeckDir.getAbsoluteFile());
+        }
+    }
+
+    private static boolean isNestedDeckDirectory(final File oldDeckDir, final File newDeckDir) throws IOException {
+        final Path oldPath = oldDeckDir.getCanonicalFile().toPath();
+        final Path newPath = newDeckDir.getCanonicalFile().toPath();
+        return !oldPath.equals(newPath) && (oldPath.startsWith(newPath) || newPath.startsWith(oldPath));
+    }
+
+    private static void copyDeckDirectory(
+        final File oldDeckDir,
+        final File newDeckDir,
+        final AtomicInteger copiedFiles,
+        final AtomicInteger skippedFiles
+    ) throws IOException {
+        final Path sourcePath = oldDeckDir.toPath();
+        final Path targetPath = newDeckDir.toPath();
+
+        Files.walkFileTree(sourcePath, new SimpleFileVisitor<>() {
+            @Override
+            public FileVisitResult preVisitDirectory(final Path dir, final BasicFileAttributes attrs) throws IOException {
+                Files.createDirectories(targetPath.resolve(sourcePath.relativize(dir)));
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFile(final Path file, final BasicFileAttributes attrs) throws IOException {
+                final Path targetFile = targetPath.resolve(sourcePath.relativize(file));
+                if (Files.exists(targetFile)) {
+                    skippedFiles.incrementAndGet();
+                    return FileVisitResult.CONTINUE;
+                }
+                Files.createDirectories(targetFile.getParent());
+                Files.copy(file, targetFile);
+                copiedFiles.incrementAndGet();
+                return FileVisitResult.CONTINUE;
+            }
+        });
     }
 
     private void clearImageCache() {
