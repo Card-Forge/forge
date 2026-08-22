@@ -731,7 +731,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         TextureRegionDrawable drawable = new TextureRegionDrawable(textureRegion);
         float origW = texture.getWidth();
         float origH = texture.getHeight();
-        float mod = Forge.extrawide.equals("extrawide") ? 0.8f : 0.85f;
+        float mod = Forge.extrawide.equals("extrawide") ? 0.85f : 0.9f;
         float boundW = GuiBase.isAndroid() ? Scene.getIntendedWidth() * mod : Scene.getIntendedWidth() * 0.7f; // Use smaller size for Desktop
         float boundH = GuiBase.isAndroid() ? Scene.getIntendedHeight() * mod : Scene.getIntendedHeight() * 0.7f; // Use smaller size for Desktop
         float newW = origW;
@@ -1442,7 +1442,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 @Override
                 public void tap(InputEvent event, float x, float y, int count, int button) {
                     Vector2 touch = new Vector2();
-                    touch.set(x, y);
+                    touch.set(event.getStageX(), event.getStageY());
                     if (!Controls.actorContainsVector(cardHitArea, touch))
                         return;
                     if (count > 1 && hasbackface) {
@@ -1470,19 +1470,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 public void panStop(InputEvent event, float x, float y, int pointer, int button) {
                     if (handledFling)
                         return;
-                    Vector2 touch = new Vector2();
-                    touch.set(x, y);
                     float deltaX = x - startX;
                     float deltaY = y - startY;
                     if (Math.abs(deltaX) > 30f && Math.abs(deltaX) >= Math.abs(deltaY)) {
                         closeOnRelease = true;
-                        return;
-                    }
-                    if (Controls.actorContainsVector(cardHitArea, touch) && Reward.Type.Card.equals(reward.type)
-                        && Math.abs(deltaY) > 20f && Math.abs(deltaY) > Math.abs(deltaX)) {
-                        // Vertical swipe (up or down) → Oracle toggle.
-                        shouldDisplayText = !shouldDisplayText;
-                        switchTooltip();
                     }
                 }
 
