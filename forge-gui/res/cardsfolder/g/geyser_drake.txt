@@ -3,5 +3,5 @@ ManaCost:2 U
 Types:Creature Drake
 PT:2/3
 K:Flying
-S:Mode$ ReduceCost | Type$ Spell | Activator$ You | Amount$ 1 | Condition$ NotPlayerTurn | Description$ As long as it's not your turn, spells you cast cost {1} less to cast.
-Oracle:Flying\nAs long as it's not your turn, spells you cast cost {1} less to cast.
+S:Mode$ ReduceCost | Type$ Spell | Activator$ You | Amount$ 1 | Condition$ NotPlayerTurn | Description$ During turns other than yours, spells you cast cost {1} less to cast.
+Oracle:Flying\nDuring turns other than yours, spells you cast cost {1} less to cast.

@@ -3,5 +3,5 @@ ManaCost:2 U U
 Types:Creature Spirit
 PT:2/4
 K:Flying
-A:AB$ Regenerate | Cost$ U U U | SpellDescription$ Regenerate CARDNAME.
-Oracle:Flying\n{U}{U}{U}: Regenerate Ghost Ship.
+A:AB$ Regenerate | Cost$ U U U | SpellDescription$ Regenerate this creature.
+Oracle:Flying\n{U}{U}{U}: Regenerate this creature.

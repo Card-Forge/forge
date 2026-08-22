@@ -4,4 +4,4 @@ Types:Artifact
 K:Flash
 A:AB$ Destroy | Cost$ 7 T Sac<1/CARDNAME> | ValidTgts$ Permanent | SpellDescription$ Destroy target permanent.
 DeckHas:Ability$Sacrifice
-Oracle:Flash\n{7}, {T}, Sacrifice Goblin Firebomb: Destroy target permanent.
+Oracle:Flash\n{7}, {T}, Sacrifice this artifact: Destroy target permanent.

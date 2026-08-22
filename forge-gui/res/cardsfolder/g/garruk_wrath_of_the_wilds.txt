@@ -12,4 +12,4 @@ SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ R
 SVar:DBCleanup2:DB$ Cleanup | ClearRemembered$ True
 A:AB$ PumpAll | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Until end of turn, creatures you control get +3/+3 and gain trample.
 DeckHas:Type$Troll|Elk|Wolf|Beast|Insect|Squirrel|Boar|Basilisk|Antelope & Ability$Sacrifice|Counters|LifeGain
-Oracle:[+1]: Choose a creature card in your hand. It perpetually gets +1/+1 and perpetually gains "This spell costs {1} less to cast."\n[-1]: Draft a card from Garruk, Wrath of the Wild's spellbook and put it onto the battlefield.\n[-6]: Until end of turn, creatures you control get +3/+3 and gain trample.
+Oracle:[+1]: Choose a creature card in your hand. It perpetually gets +1/+1 and perpetually gains "This spell costs {1} less to cast."\n[-1]: Draft a card from Garruk, Wrath of the Wilds's spellbook and put it onto the battlefield.\n[-6]: Until end of turn, creatures you control get +3/+3 and gain trample.
