@@ -3,8 +3,8 @@ ManaCost:2 G
 Types:Creature Snake Ninja
 PT:3/3
 K:Ninjutsu:1 G
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, choose land or nonland. Seek a permanent card of the chosen type.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, choose land or nonland. Seek a permanent card of the chosen kind.
 SVar:TrigChoose:DB$ ChooseType | Type$ Card | ValidTypes$ Land,Nonland | SubAbility$ DBSeek
 SVar:DBSeek:DB$ Seek | Type$ Card.Permanent+ChosenType | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenType$ True
-Oracle:Ninjutsu {1}{G}\nWhenever Jukai Liberator deals combat damage to a player, choose land or nonland. Seek a permanent card of the chosen type.
+Oracle:Ninjutsu {1}{G} ({1}{G}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Jukai Liberator deals combat damage to a player, choose land or nonland. Seek a permanent card of the chosen kind.
