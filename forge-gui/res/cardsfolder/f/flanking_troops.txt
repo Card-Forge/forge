@@ -2,6 +2,6 @@ Name:Flanking Troops
 ManaCost:2 W W
 Types:Creature Human Soldier
 PT:2/2
-T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, you may tap target creature.
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ Whenever this creature attacks, you may tap target creature.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
-Oracle:Whenever Flanking Troops attacks, you may tap target creature.
+Oracle:Whenever this creature attacks, you may tap target creature.

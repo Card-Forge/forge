@@ -5,4 +5,4 @@ PT:1/1
 K:Haste
 A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ It deals 1 damage to any target.
 DeckHas:Ability$Sacrifice
-Oracle:Haste\n{T}, Sacrifice Fanatical Firebrand: It deals 1 damage to any target.
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\n{T}, Sacrifice this creature: It deals 1 damage to any target.

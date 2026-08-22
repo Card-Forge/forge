@@ -6,4 +6,4 @@ SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ ABDamage | Description$ Enchanted creature has "{T}: This creature deals 1 damage to any target."
 SVar:ABDamage:AB$ DealDamage | Cost$ T | NumDmg$ 1 | ValidTgts$ Any | SpellDescription$ This creature deals 1 damage to any target.
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-Oracle:Enchant creature you control\nEnchanted creature has "{T}: This creature deals 1 damage to any target."\nSacrifice Fire Whip: Fire Whip deals 1 damage to any target.
+Oracle:Enchant creature you control\nEnchanted creature has "{T}: This creature deals 1 damage to any target."\nSacrifice this Aura: It deals 1 damage to any target.

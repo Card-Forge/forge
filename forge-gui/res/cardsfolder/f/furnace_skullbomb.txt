@@ -6,4 +6,4 @@ A:AB$ PutCounter | Cost$ 1 R Sac<1/CARDNAME> | ValidTgts$ Artifact.YouCtrl,Creat
 SVar:DBDraw:DB$ Draw
 AI:RemoveDeck:Random
 DeckHas:Color$Red & Ability$Sacrifice|Counters
-Oracle:{1}, Sacrifice Furnace Skullbomb: Draw a card.\n{1}{R}, Sacrifice Furnace Skullbomb: Put two oil counters on target artifact or creature you control. Draw a card. Activate only as a sorcery.
+Oracle:{1}, Sacrifice this artifact: Draw a card.\n{1}{R}, Sacrifice this artifact: Put two oil counters on target artifact or creature you control. Draw a card. Activate only as a sorcery.
