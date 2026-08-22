@@ -24,12 +24,14 @@ import com.google.common.collect.*;
 import forge.game.CardTraitBase;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
+import forge.game.GameEndReason;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityDisableTriggers;
@@ -37,6 +39,7 @@ import forge.game.staticability.StaticAbilityPanharmonicon;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+import forge.util.Localizer;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
@@ -496,6 +499,10 @@ public class TriggerHandler {
             sa.setActivatingPlayer(p);
         }
 
+        if (checkInfiniteLoop(regtrig, sa.getActivatingPlayer())) { // doc:11c PARTIAL
+            return;
+        }
+
         if (!sa.getActivatingPlayer().isInGame()) {
             return;
         }
@@ -541,6 +548,76 @@ public class TriggerHandler {
         if (regtrig.hasParam("OneOff") && host.isImmutable() || removeBoon) {
             host.getController().getZone(ZoneType.Command).remove(host);
         }
+    }
+
+    // REFORGE COMMANDER EXTENSION — roadmap #47 (epic #44, CR 732 loop handling)
+    private static final int LOOP_PROMPT_THRESHOLD = 20;
+    private static final int LOOP_AI_DRAW_THRESHOLD = 50;
+    private final Map<String, Integer> loopFireCounts = new HashMap<>();
+    private final Set<String> loopPrompted = new HashSet<>();
+    private int loopCountTurn = -1;
+
+    /**
+     * Counts trigger fires per host/mode/controller signature within a turn and
+     * intervenes when a signature repeats far beyond plausible play: the human
+     * controller is asked whether this is an infinite loop and may declare a
+     * draw; AI controllers auto-declare past a higher threshold. Mana and
+     * state-trigger modes are exempt — they legitimately fire many times.
+     */
+    private boolean checkInfiniteLoop(final Trigger regtrig, final Player controller) {
+        if (game.isGameOver()) {
+            return true;
+        }
+        switch (regtrig.getMode()) {
+            case TapsForMana:
+            case ManaAdded:
+            case Always:
+            case Immediate:
+                return false;
+            default:
+                break;
+        }
+        final int turn = game.getPhaseHandler().getTurn();
+        if (turn != loopCountTurn) {
+            loopFireCounts.clear();
+            loopPrompted.clear();
+            loopCountTurn = turn;
+        }
+        final String key = controller.getName() + "|" + regtrig.getHostCard().getName() + "|" + regtrig.getMode();
+        final int count = loopFireCounts.merge(key, 1, Integer::sum);
+        if (loopPrompted.contains(key)) {
+            return false;
+        }
+        if (controller.isAI()) {
+            if (count >= LOOP_AI_DRAW_THRESHOLD) {
+                declareLoopDraw();
+                return true;
+            }
+            return false;
+        }
+        if (count < LOOP_PROMPT_THRESHOLD) {
+            return false;
+        }
+        loopPrompted.add(key);
+        final Localizer localizer = Localizer.getInstance();
+        final String message = localizer.getMessage("lblInfiniteLoopDetected",
+                regtrig.getHostCard().getName(), count);
+        final List<String> options = Lists.newArrayList(
+                localizer.getMessage("lblDeclareDraw"), localizer.getMessage("lblContinue"));
+        final boolean draw = controller.getController().confirmAction(null,
+                PlayerActionConfirmMode.DeclareLoop, message, options, regtrig.getHostCard(), null);
+        if (draw) {
+            declareLoopDraw();
+            return true;
+        }
+        return false;
+    }
+
+    private void declareLoopDraw() {
+        for (final Player p : game.getPlayers()) {
+            p.loopDraw();
+        }
+        game.setGameOver(GameEndReason.Draw);
     }
 
     private void adjustUndoStack(Trigger regtrig, Map<AbilityKey, Object> runParams) {

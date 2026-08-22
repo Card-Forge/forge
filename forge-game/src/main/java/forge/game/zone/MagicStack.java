@@ -262,7 +262,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         // Stop infinite loop. E.g. Scalelord Reckoner mirrormatch with only triggering targets is a draw.
         // 500 still leaves room for legitimate storm-style chains; catches harmful loops 2x faster than the old 999.
-        if (game.getStack().size() > 500) {
+        if (game.getStack().size() > 500) { // doc:11a DONE
             for (Player p : game.getPlayers()) {
                 p.loopDraw();
             }

@@ -50,7 +50,7 @@ public class RepeatEffect extends SpellAbilityEffect {
                 // hitting their (explicit or default) cap just stop — MaxRepeat
                 // is also used as a legitimate counted-loop bound.
                 if (source.getName().equals("Helm of Obedience")
-                        && checkRepeatConditions(sa)) {
+                        && checkRepeatConditions(sa)) { // doc:11b DONE
                     final Game game = sa.getActivatingPlayer().getGame();
                     for (final Player p : game.getPlayers()) {
                         p.loopDraw();
