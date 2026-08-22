@@ -1,6 +1,6 @@
 Name:Inflation Station
 ManaCost:no cost
 Types:Artifact Contraption
-T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, target creature gets +3/+3 until end of turn.
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank this Contraption, target creature gets +3/+3 until end of turn.
 SVar:TrigCrank:DB$ Pump | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +3
-Oracle:Whenever you crank Inflation Station, target creature gets +3/+3 until end of turn.
+Oracle:Whenever you crank this Contraption, target creature gets +3/+3 until end of turn.

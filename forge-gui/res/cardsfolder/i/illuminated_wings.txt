@@ -6,4 +6,4 @@ SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
-Oracle:Enchant creature\nEnchanted creature has flying.\n{2}, Sacrifice Illuminated Wings: Draw a card.
+Oracle:Enchant creature\nEnchanted creature has flying.\n{2}, Sacrifice this Aura: Draw a card.

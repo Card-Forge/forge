@@ -2,9 +2,9 @@ Name:Infested Fleshcutter
 ManaCost:1 W
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddSVar$ AE | Description$ Equipped creature gets +2/+0.
-T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigToken | TriggerDescription$ Whenever equipped creature attacks, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block." (Players dealt combat damage by it also get a poison counter.)
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigToken | TriggerDescription$ Whenever equipped creature attacks, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This token can't block." (Players dealt combat damage by it also get a poison counter.)
 SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock
 K:Equip:2 W
 SVar:AE:SVar:HasAttackEffect:TRUE
 DeckHas:Type$Phyrexian|Mite & Ability$Token
-Oracle:Equipped creature gets +2/+0.\nWhenever equipped creature attacks, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block." (Players dealt combat damage by it also get a poison counter.)\nEquip {2}{W}
+Oracle:Equipped creature gets +2/+0.\nWhenever equipped creature attacks, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This token can't block." (Players dealt combat damage by it also get a poison counter.)\nEquip {2}{W}

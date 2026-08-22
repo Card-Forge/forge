@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Creature Illusion
 PT:3/4
 K:Flying
-T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.
 SVar:TrigSac:DB$ Sacrifice
 SVar:Targeting:Dies
-Oracle:Flying\nWhen Illusionary Servant becomes the target of a spell or ability, sacrifice it.
+Oracle:Flying\nWhen this creature becomes the target of a spell or ability, sacrifice it.
