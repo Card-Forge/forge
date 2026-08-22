@@ -464,98 +464,98 @@ public class NewGameScene extends MenuScene {
         boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
 
         modeSummary = new DialogData();
-        modeSummary.name = "Summary";
+        modeSummary.name = Forge.getLocalizer().getMessage("lblSummary");
 
         StringBuilder summaryText = new StringBuilder();
         switch (selectedMode) {
             case Standard:
-                summaryText.append("Mode: Standard\n\nYour starting deck is built from 2-3 Jumpstart packs of twenty cards each.\n\n");
+                summaryText.append(Forge.getLocalizer().getMessage("advModeStandardSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append("On your currently selected difficulty, Easy, you will receive three jumpstart packs of your chosen color.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffEasyStandard"));
                         break;
                     case "Normal":
-                        summaryText.append("On your currently selected difficulty, Normal, you will receive two jumpstart packs of your chosen color and one of an allied color.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffNormalStandard"));
                         break;
                     case "Hard":
-                        summaryText.append("On your currently selected difficulty, Hard, you will receive one jumpstart pack of your chosen color and one of an allied color.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffHardStandard"));
                         break;
                     case "Insane":
-                        summaryText.append("On your currently selected difficulty, Insane, you will receive one jumpstart pack of your chosen color and one of an allied color.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffInsaneStandard"));
                         break;
                     default:
-                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        difficultySummary.text = Forge.getLocalizer().getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Constructed:
-                summaryText.append("Mode: Constructed\n\nYou will receive a specific preconstructed deck based on your chosen color and difficulty.\n\n");
+                summaryText.append(Forge.getLocalizer().getMessage("advModeConstructedSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append("On your currently selected difficulty, Easy, your deck will only contain your chosen color.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffEasyConstructed"));
                         break;
                     case "Normal":
-                        summaryText.append("On your currently selected difficulty, Normal, your deck will contain your chosen color and one allied color.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffNormalConstructed"));
                         break;
                     case "Hard":
-                        summaryText.append("On your currently selected difficulty, Hard, your deck will contain your chosen color and one opposing color.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffHardConstructed"));
                         break;
                     case "Insane":
-                        summaryText.append("On your currently selected difficulty, Insane, your deck will contain your chosen color and one opposing color.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffInsaneConstructed"));
                         break;
                     default:
-                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        difficultySummary.text = Forge.getLocalizer().getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Pile:
-                summaryText.append("Mode: Pile\n\nYou will receive a random pile of cards based on your chosen color and difficulty.\n\n");
+                summaryText.append(Forge.getLocalizer().getMessage("advModePileSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append("On your currently selected difficulty, Easy, your deck will only contain your chosen color and one allied color.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffEasyPile"));
                         break;
                     case "Normal":
-                        summaryText.append("On your currently selected difficulty, Normal, your deck will contain your chosen color and two allied colors.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffNormalPile"));
                         break;
                     case "Hard":
-                        summaryText.append("On your currently selected difficulty, Hard, your deck will contain your chosen color and two allied colors.\n\n");
-                        summaryText.append("You will receive less uncommon and rare cards than on Normal difficulty.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffHardPile"));
+                        summaryText.append(Forge.getLocalizer().getMessage("advPileLessRareReward"));
                         break;
                     case "Insane":
-                        summaryText.append("On your currently selected difficulty, Insane, your deck will contain your chosen color and two allied colors.\n\n");
-                        summaryText.append("You will receive less uncommon and rare cards than on Normal difficulty.");
+                        summaryText.append(Forge.getLocalizer().getMessage("advDiffInsanePile"));
+                        summaryText.append(Forge.getLocalizer().getMessage("advPileLessRareReward"));
                         break;
                     default:
-                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        difficultySummary.text = Forge.getLocalizer().getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Chaos:
-                summaryText.append("Mode: Chaos\n\nYou (and all enemies) will receive a random preconstructed deck.\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                summaryText.append(Forge.getLocalizer().getMessage("advModeChaosSummary"));
                 break;
             case Custom:
                 if (enableGeneticAI) {
-                    summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                    summaryText.append(Forge.getLocalizer().getMessage("advModeCustomGeneticSummary"));
                 } else {
-                    summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck.");
+                    summaryText.append(Forge.getLocalizer().getMessage("advModeCustomSummary"));
                 }
                 break;
             case Precon:
-                summaryText.append("Mode: Precon\n\nYou will receive a specific preconstructed deck. You can choose a random or a specific preconstructed deck from an edition of your choice.\n\n");
+                summaryText.append(Forge.getLocalizer().getMessage("advModePreconSummary"));
                 break;
             case Commander:
-                summaryText.append("Mode: Commander\n\nYou will be given a preconstructed commander deck based on the chosen color theme to start the playthrough.\n\nGood luck on your quest of creating a coherent deck that can win consistently and defeat the bosses.");
+                summaryText.append(Forge.getLocalizer().getMessage("advModeCommanderSummary"));
                 break;
             case CommanderPrecon:
-                summaryText.append("Mode: Commander Precon\n\nChoose a named commander preconstructed deck to start the playthrough.\n\nThis uses Commander deckbuilding and game rules, but lets you pick from the curated commander precon folder.");
+                summaryText.append(Forge.getLocalizer().getMessage("advModeCommanderPreconSummary"));
                 break;
             default:
-                summaryText.append("No summary available for this game mode.");
+                summaryText.append(Forge.getLocalizer().getMessage("advNoModeSummaryAvailable"));
                 break;
         }
 
         DialogData dismiss = new DialogData();
-        dismiss.name = "OK";
+        dismiss.name = Forge.getLocalizer().getMessage("lblOK");
         modeSummary.text = summaryText.toString();
         modeSummary.options = new DialogData[1];
         modeSummary.options[0] = dismiss;

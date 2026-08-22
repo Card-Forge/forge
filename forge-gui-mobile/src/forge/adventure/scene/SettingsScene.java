@@ -152,7 +152,7 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
                 return null;
             });
-            addLabel("Reward/Shop Card Display Ratio");
+            addLabel(Forge.getLocalizer().getMessage("advRewardShopCardDisplayRatio"));
             settingGroup.add(rewardCardAdjLandscape).align(Align.right).pad(2);
             SelectBox<Float> tooltipAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 0.95f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().cardTooltipAdjLandscape, o -> {
                 Float val = (Float) o;
@@ -162,7 +162,7 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
                 return null;
             });
-            addLabel("Reward/Shop Card Tooltip Ratio");
+            addLabel(Forge.getLocalizer().getMessage("advRewardShopCardTooltipRatio"));
             settingGroup.add(tooltipAdjLandscape).align(Align.right).pad(2);
         } else {
             //portrait adjustment
@@ -174,7 +174,7 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
                 return null;
             });
-            addLabel("Reward/Shop Card Display Ratio");
+            addLabel(Forge.getLocalizer().getMessage("advRewardShopCardDisplayRatio"));
             settingGroup.add(rewardCardAdj).align(Align.right).pad(2);
             SelectBox<Float> tooltipAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().cardTooltipAdj, o -> {
                 Float val = (Float) o;
@@ -184,7 +184,7 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
                 return null;
             });
-            addLabel("Reward/Shop Card Tooltip Ratio");
+            addLabel(Forge.getLocalizer().getMessage("advRewardShopCardTooltipRatio"));
             settingGroup.add(tooltipAdj).align(Align.right).pad(2);
         }
         if (!GuiBase.isAndroid()) {

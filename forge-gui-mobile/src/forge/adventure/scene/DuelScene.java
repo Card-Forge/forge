@@ -437,7 +437,8 @@ public class DuelScene extends ForgeScene {
             if (deck == null) {
                 isDeckMissing = true;
                 boolean canUseGeneticAI = Config.instance().getConfigData().enableGeneticAI;
-                isDeckMissingMsg = "Deck for " + currentEnemy.getName() + " is missing! " + (this.eventData == null ? (canUseGeneticAI ? "Genetic AI deck will be used." : "Player deck will be used.") : "Player deck will be used.");
+                isDeckMissingMsg = Forge.getLocalizer().getMessage("advDeckMissingForEnemy", currentEnemy.getName())
+                        + (this.eventData == null ? (canUseGeneticAI ? Forge.getLocalizer().getMessage("advGeneticAiDeckWillBeUsed") : Forge.getLocalizer().getMessage("advPlayerDeckWillBeUsed")) : Forge.getLocalizer().getMessage("advPlayerDeckWillBeUsed"));
                 System.err.println(isDeckMissingMsg);
                 deck = this.eventData == null && canUseGeneticAI ? Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck() : this.playerDeck;
             }
