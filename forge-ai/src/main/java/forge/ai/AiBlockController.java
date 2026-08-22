@@ -19,12 +19,14 @@ package forge.ai;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 
 import forge.card.CardStateName;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardTraitViewCache;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -69,6 +71,11 @@ public class AiBlockController {
     private int diff = 0;
 
     private boolean lifeInDanger = false;
+    private boolean checkPoisonDanger = true;
+    private AiCombatEvaluationMatrix combatEvaluation;
+    private ToIntFunction<Card> creatureValues;
+    private ToIntFunction<Card> creatureValuesWithoutMana;
+    private final Map<Player, Integer> usefulCreatureCounts = new IdentityHashMap<>();
 
     // set to true when AI is predicting a blocking for another player so it doesn't use hidden information
     private boolean checkingOther = false;
@@ -79,12 +86,12 @@ public class AiBlockController {
     }
 
     // finds the creatures able to block the attacker
-    private static List<Card> getPossibleBlockers(final Combat combat, final Card attacker, final List<Card> blockersLeft, final boolean solo) {
+    private List<Card> getPossibleBlockers(final Combat combat, final Card attacker, final List<Card> blockersLeft, final boolean solo) {
         final List<Card> blockers = new ArrayList<>();
 
         for (final Card blocker : blockersLeft) {
             // if the blocker can block a creature with lure it can't block a creature without
-            if (CombatUtil.canBlock(attacker, blocker, combat)) {
+            if (canBlock(attacker, blocker, combat)) {
                 boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
                 if (solo && cantBlockAlone) {
                     continue;
@@ -96,6 +103,63 @@ public class AiBlockController {
         return blockers;
     }
 
+    private boolean canBlock(final Card attacker, final Card blocker, final Combat combat) {
+        return combatEvaluation.canBlock(attacker, blocker, combat);
+    }
+
+    private boolean canDestroyAttacker(final Combat combat, final Card attacker,
+            final Card blocker, final boolean withoutAbilities,
+            final boolean withoutAttackerStaticAbilities) {
+        return combatEvaluation.canDestroyAttacker(ai, attacker, blocker, combat,
+                withoutAbilities, withoutAttackerStaticAbilities);
+    }
+
+    private boolean canDestroyBlocker(final Combat combat, final Card blocker,
+            final Card attacker, final boolean withoutAbilities,
+            final boolean withoutAttackerStaticAbilities) {
+        return combatEvaluation.canDestroyBlocker(ai, attacker, blocker, combat,
+                withoutAbilities, withoutAttackerStaticAbilities);
+    }
+
+    private int damageAsBlocker(final Card attacker, final Card blocker) {
+        return combatEvaluation.damageAsBlocker(attacker, blocker);
+    }
+
+    private int enoughDamageToKill(final Card target, final int maxDamage,
+            final Card source) {
+        return combatEvaluation.enoughDamageToKill(target, maxDamage, source);
+    }
+
+    private boolean isLifeInDanger(final Combat combat) {
+        if (combatEvaluation == null) {
+            return ComputerUtilCombat.lifeInDanger(ai, combat);
+        }
+        return ComputerUtilCombat.lifeInDanger(ai, combat, 0, checkPoisonDanger,
+                attacker -> combatEvaluation.damageIfUnblocked(attacker, ai, combat));
+    }
+
+    private void addBlocker(final Combat combat, final Card attacker, final Card blocker) {
+        combat.addBlocker(attacker, blocker);
+        combatChanged();
+    }
+
+    private void removeBlockAssignment(final Combat combat, final Card attacker,
+            final Card blocker) {
+        combat.removeBlockAssignment(attacker, blocker);
+        combatChanged();
+    }
+
+    private void removeFromCombat(final Combat combat, final Card blocker) {
+        combat.removeFromCombat(blocker);
+        combatChanged();
+    }
+
+    private void combatChanged() {
+        combatEvaluation.combatChanged();
+        creatureValues = ComputerUtilCard.getCachedCreatureEvaluator();
+        creatureValuesWithoutMana = ComputerUtilCard.getCachedCreatureEvaluator(false);
+    }
+
     // finds blockers that won't be destroyed
     private List<Card> getSafeBlockers(final Combat combat, final Card attacker, final List<Card> blockersLeft) {
         final List<Card> blockers = new ArrayList<>();
@@ -103,7 +167,8 @@ public class AiBlockController {
         // Usually don't check attacker static abilities at this point since the attackers have already attacked and, thus,
         // their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness unless we're simulating an outcome outside of real combat
         for (final Card b : blockersLeft) {
-            if (!ComputerUtilCombat.canDestroyBlocker(ai, b, attacker, combat, false, attacker.getGame().getPhaseHandler().inCombat())) {
+            if (!canDestroyBlocker(combat, b, attacker, false,
+                    attacker.getGame().getPhaseHandler().inCombat())) {
                 blockers.add(b);
             }
         }
@@ -117,7 +182,8 @@ public class AiBlockController {
         // Usually don't check attacker static abilities at this point since the attackers have already attacked and, thus,
         // their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness unless we're simulating an outcome outside of real combat
         for (final Card b : blockersLeft) {
-            if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, b, combat, false, attacker.getGame().getPhaseHandler().inCombat())) {
+            if (canDestroyAttacker(combat, attacker, b, false,
+                    attacker.getGame().getPhaseHandler().inCombat())) {
                 blockers.add(b);
             }
         }
@@ -173,7 +239,7 @@ public class AiBlockController {
             }
         }
 
-        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+        if (isLifeInDanger(combat)) {
             // add creatures attacking the Player to the front of the list
             sortedAttackers.addAll(0, firstAttacker);
         } else {
@@ -205,19 +271,22 @@ public class AiBlockController {
                     if (ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
                         continue;
                     }
-                    blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
+                    blocker = ComputerUtilCard.getWorstCreatureAI(
+                            killingBlockers, creatureValues);
                 // 2.Blockers that won't get destroyed
                 } else if (!StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)
                     && !ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
-                    blocker = ComputerUtilCard.getWorstCreatureAI(safeBlockers);
+                    blocker = ComputerUtilCard.getWorstCreatureAI(
+                            safeBlockers, creatureValues);
                     // check whether it's better to block a creature without trample to absorb more damage
                     if (attacker.hasKeyword(Keyword.TRAMPLE)) {
                         boolean doNotBlock = false;
                         for (Card other : attackersLeft) {
-                            if (other.equals(attacker) || !CombatUtil.canBlock(other, blocker)
+                            if (other.equals(attacker)
+                                    || !combatEvaluation.canBlockWithoutCombat(other, blocker)
                                     || other.hasKeyword(Keyword.TRAMPLE)
                                     || ComputerUtilCombat.attackerHasThreateningAfflict(other, ai)
-                                    || ComputerUtilCombat.canDestroyBlocker(ai, blocker, other, combat, false)
+                                    || canDestroyBlocker(combat, blocker, other, false, false)
                                     || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(other)) {
                                 continue;
                             }
@@ -252,7 +321,7 @@ public class AiBlockController {
                     if ((b.hasSVar("SacMe") && Integer.parseInt(b.getSVar("SacMe")) > 3) ||
                             (b.hasSVar("SacMeAfterBlock") && !attacker.hasKeyword(Keyword.TRAMPLE) && !attacker.hasKeyword(Keyword.BANDING))) {
                         blocker = b;
-                        if (!ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)) {
+                        if (!canDestroyAttacker(combat, attacker, blocker, false, false)) {
                             blockedButUnkilled.add(attacker);
                         }
                         break;
@@ -260,8 +329,9 @@ public class AiBlockController {
                 }
                 // 5.Blockers that can destroy the attacker and are worth less
                 if (!killingBlockers.isEmpty()) {
-                    final Card worst = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
-                    int value = ComputerUtilCard.evaluateCreature(attacker);
+                    final Card worst = ComputerUtilCard.getWorstCreatureAI(
+                            killingBlockers, creatureValues);
+                    int value = creatureValues.applyAsInt(attacker);
 
                     // check for triggers when unblocked
                     for (Trigger trigger : attacker.getTriggers()) {
@@ -284,14 +354,14 @@ public class AiBlockController {
                         }
                     }
 
-                    if (ComputerUtilCard.evaluateCreature(worst) + diff < value) {
+                    if (creatureValues.applyAsInt(worst) + diff < value) {
                         blocker = worst;
                     }
                 }
             }
             if (blocker != null) {
                 currentAttackers.remove(attacker);
-                combat.addBlocker(attacker, blocker);
+                addBlocker(combat, attacker, blocker);
             }
         }
         attackersLeft = new ArrayList<>(currentAttackers);
@@ -310,7 +380,7 @@ public class AiBlockController {
                         || (b.hasKeyword(Keyword.FADING) && b.getCounters(CounterEnumType.FADE) == 0)
                         || b.hasSVar("EndOfTurnLeavePlay")) {
                     blocker = b;
-                    if (!ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)) {
+                    if (!canDestroyAttacker(combat, attacker, blocker, false, false)) {
                         blockedButUnkilled.add(attacker);
                     }
                     break;
@@ -318,7 +388,7 @@ public class AiBlockController {
             }
             if (blocker != null) {
                 currentAttackers.remove(attacker);
-                combat.addBlocker(attacker, blocker);
+                addBlocker(combat, attacker, blocker);
             }
         }
         attackersLeft = new ArrayList<>(currentAttackers);
@@ -401,8 +471,8 @@ public class AiBlockController {
                             if (ComputerUtilCombat.totalFirstStrikeDamageOfBlockers(attacker, blockGang) >= damageNeeded) {
                                 currentAttackers.remove(attacker);
                                 for (final Card b : blockGang) {
-                                    if (CombatUtil.canBlock(attacker, blocker, combat)) {
-                                        combat.addBlocker(attacker, b);
+                                    if (canBlock(attacker, blocker, combat)) {
+                                        addBlocker(combat, attacker, b);
                                     }
                                 }
                             }
@@ -428,7 +498,7 @@ public class AiBlockController {
                 continue;
             }
 
-            int evalAttackerValue = ComputerUtilCard.evaluateCreature(attacker);
+            int evalAttackerValue = creatureValues.applyAsInt(attacker);
 
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
             List<Card> usableBlockers;
@@ -444,26 +514,31 @@ public class AiBlockController {
                         && !ComputerUtilCombat.dealsFirstStrikeDamage(c, false, combat)) {
                     return false;
                 }
-                return lifeInDanger || wouldLikeToRandomlyTrade(attacker, c, combat) || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker);
+                return lifeInDanger || wouldLikeToRandomlyTrade(attacker, c, combat)
+                        || creatureValues.applyAsInt(c) + diff
+                        < creatureValues.applyAsInt(attacker);
             });
             if (usableBlockers.size() < 2) {
                 return;
             }
 
-            final Card leader = ComputerUtilCard.getBestCreatureAI(usableBlockers);
+            final Card leader = ComputerUtilCard.getBestCreatureAI(
+                    usableBlockers, creatureValues);
             blockGang.add(leader);
             usableBlockers.remove(leader);
-            absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
-            currentValue = ComputerUtilCard.evaluateCreature(leader);
+            absorbedDamage = enoughDamageToKill(
+                    leader, attacker.getNetCombatDamage(), attacker);
+            currentValue = creatureValues.applyAsInt(leader);
 
             // consider a double block
             for (final Card blocker : usableBlockers) {
                 // Add an additional blocker if the current blockers are not
                 // enough and the new one would deal the remaining damage
                 final int currentDamage = ComputerUtilCombat.totalDamageOfBlockers(attacker, blockGang);
-                final int additionalDamage = ComputerUtilCombat.dealsDamageAsBlocker(attacker, blocker);
-                final int absorbedDamage2 = ComputerUtilCombat.getEnoughDamageToKill(blocker, attacker.getNetCombatDamage(), attacker, true);
-                final int addedValue = ComputerUtilCard.evaluateCreature(blocker);
+                final int additionalDamage = damageAsBlocker(attacker, blocker);
+                final int absorbedDamage2 = enoughDamageToKill(
+                        blocker, attacker.getNetCombatDamage(), attacker);
+                final int addedValue = creatureValues.applyAsInt(blocker);
                 final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker, false)
                         + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
                 if ((damageNeeded > currentDamage || CombatUtil.getMinNumBlockersForAttacker(attacker, ai) > blockGang.size())
@@ -473,14 +548,14 @@ public class AiBlockController {
                         // only one blocker can be killed
                         || currentValue + addedValue - 50 <= evalAttackerValue
                         // or attacker is worth more
-                        || (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)))
+                        || (lifeInDanger && isLifeInDanger(combat)))
                         // or life is in danger
-                        && CombatUtil.canBlock(attacker, blocker, combat)) {
+                        && canBlock(attacker, blocker, combat)) {
                     // this is needed for attackers that can't be blocked by more than 1
                     currentAttackers.remove(attacker);
-                    combat.addBlocker(attacker, blocker);
-                    if (CombatUtil.canBlock(attacker, leader, combat)) {
-                        combat.addBlocker(attacker, leader);
+                    addBlocker(combat, attacker, blocker);
+                    if (canBlock(attacker, leader, combat)) {
+                        addBlocker(combat, attacker, leader);
                     }
                     foundDoubleBlock = true;
                     break;
@@ -501,9 +576,10 @@ public class AiBlockController {
             for (final Card secondBlocker : usableBlockers) {
                 // consider the properties of the second blocker
                 final int currentDamage = ComputerUtilCombat.totalDamageOfBlockers(attacker, blockGang);
-                final int additionalDamage2 = ComputerUtilCombat.dealsDamageAsBlocker(attacker, secondBlocker);
-                final int absorbedDamage2 = ComputerUtilCombat.getEnoughDamageToKill(secondBlocker, attacker.getNetCombatDamage(), attacker, true);
-                final int addedValue2 = ComputerUtilCard.evaluateCreature(secondBlocker);
+                final int additionalDamage2 = damageAsBlocker(attacker, secondBlocker);
+                final int absorbedDamage2 = enoughDamageToKill(
+                        secondBlocker, attacker.getNetCombatDamage(), attacker);
+                final int addedValue2 = creatureValues.applyAsInt(secondBlocker);
                 final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker, false)
                         + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, secondBlocker, combat, false);
 
@@ -512,9 +588,10 @@ public class AiBlockController {
 
                 // loop over the remaining blockers in search of a good third blocker candidate
                 for (Card thirdBlocker : usableBlockersAsThird) {
-                    final int additionalDamage3 = ComputerUtilCombat.dealsDamageAsBlocker(attacker, thirdBlocker);
-                    final int absorbedDamage3 = ComputerUtilCombat.getEnoughDamageToKill(thirdBlocker, attacker.getNetCombatDamage(), attacker, true);
-                    final int addedValue3 = ComputerUtilCard.evaluateCreature(secondBlocker);
+                    final int additionalDamage3 = damageAsBlocker(attacker, thirdBlocker);
+                    final int absorbedDamage3 = enoughDamageToKill(
+                            thirdBlocker, attacker.getNetCombatDamage(), attacker);
+                    final int addedValue3 = creatureValues.applyAsInt(secondBlocker);
                     final int netCombatDamage = attacker.getNetCombatDamage();
 
                     if ((damageNeeded > currentDamage || CombatUtil.getMinNumBlockersForAttacker(attacker, ai) > blockGang.size())
@@ -527,18 +604,18 @@ public class AiBlockController {
                             // or attacker is worth more
                             || (thirdBlocker.isToken() && absorbedDamage2 + absorbedDamage > netCombatDamage)
                             // or third blocker is a token and no more than two blockers will die, one of which is the third blocker (token)
-                            || (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)))
+                            || (lifeInDanger && isLifeInDanger(combat)))
                             // or life is in danger
-                            && CombatUtil.canBlock(attacker, secondBlocker, combat)
-                            && CombatUtil.canBlock(attacker, thirdBlocker, combat)) {
+                            && canBlock(attacker, secondBlocker, combat)
+                            && canBlock(attacker, thirdBlocker, combat)) {
                         // this is needed for attackers that can't be blocked by more than 1
                         currentAttackers.remove(attacker);
-                        combat.addBlocker(attacker, thirdBlocker);
-                        if (CombatUtil.canBlock(attacker, secondBlocker, combat)) {
-                            combat.addBlocker(attacker, secondBlocker);
+                        addBlocker(combat, attacker, thirdBlocker);
+                        if (canBlock(attacker, secondBlocker, combat)) {
+                            addBlocker(combat, attacker, secondBlocker);
                         }
-                        if (CombatUtil.canBlock(attacker, leader, combat)) {
-                            combat.addBlocker(attacker, leader);
+                        if (canBlock(attacker, leader, combat)) {
+                            addBlocker(combat, attacker, leader);
                         }
                         break blockerLoop;
                     }
@@ -569,20 +646,23 @@ public class AiBlockController {
                 return;
             }
 
-            final Card leader = ComputerUtilCard.getWorstCreatureAI(usableBlockers);
+            final Card leader = ComputerUtilCard.getWorstCreatureAI(
+                    usableBlockers, creatureValues);
             blockGang.add(leader);
             usableBlockers.remove(leader);
-            absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
+            absorbedDamage = enoughDamageToKill(
+                    leader, attacker.getNetCombatDamage(), attacker);
 
             // consider a double block
             for (final Card blocker : usableBlockers) {
-                final int absorbedDamage2 = ComputerUtilCombat.getEnoughDamageToKill(blocker, attacker.getNetCombatDamage(), attacker, true);
+                final int absorbedDamage2 = enoughDamageToKill(
+                        blocker, attacker.getNetCombatDamage(), attacker);
                 // only do it if neither blocking creature will die
                 if (absorbedDamage > attacker.getNetCombatDamage() && absorbedDamage2 > attacker.getNetCombatDamage()) {
                     currentAttackers.remove(attacker);
-                    combat.addBlocker(attacker, blocker);
-                    if (CombatUtil.canBlock(attacker, leader, combat)) {
-                        combat.addBlocker(attacker, leader);
+                    addBlocker(combat, attacker, blocker);
+                    if (canBlock(attacker, leader, combat)) {
+                        addBlocker(combat, attacker, leader);
                     }
                     break;
                 }
@@ -618,16 +698,17 @@ public class AiBlockController {
             killingBlockers = getKillingBlockers(combat, attacker, possibleBlockers);
 
             if (!killingBlockers.isEmpty()) {
-                final Card blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
+                final Card blocker = ComputerUtilCard.getWorstCreatureAI(
+                        killingBlockers, creatureValues);
 
                 if (lifeInDanger && needsRefresh) {
                     // is it very likely to end up in danger again if we weren't already?
-                    lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
+                    lifeInDanger = isLifeInDanger(combat);
                 }
 
                 // Randomly trade creatures with lower power and [hopefully] worse abilities, if enabled in profile
                 if (lifeInDanger || wouldLikeToRandomlyTrade(attacker, blocker, combat)) {
-                    combat.addBlocker(attacker, blocker);
+                    addBlocker(combat, attacker, blocker);
                     currentAttackers.remove(attacker);
                     needsRefresh = true;
                 }
@@ -655,7 +736,7 @@ public class AiBlockController {
     // re-evaluate it when a blocker was assigned since the last check - skipping
     // an attacker leaves the combat unchanged and the previous result still holds
     private void makeChumpBlocks(final Combat combat, List<Card> attackers, boolean recheckDanger) {
-        if (recheckDanger && !ComputerUtilCombat.lifeInDanger(ai, combat)) {
+        if (recheckDanger && !isLifeInDanger(combat)) {
             lifeInDanger = false;
             return;
         }
@@ -676,7 +757,8 @@ public class AiBlockController {
         boolean blocked = false;
         List<Card> chumpBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
         if (!chumpBlockers.isEmpty()) {
-            final Card blocker = ComputerUtilCard.getWorstCreatureAI(chumpBlockers);
+            final Card blocker = ComputerUtilCard.getWorstCreatureAI(
+                    chumpBlockers, creatureValues);
 
             // check if it's better to block a creature with lower power and without trample
             if (attacker.hasKeyword(Keyword.TRAMPLE)) {
@@ -690,8 +772,8 @@ public class AiBlockController {
                                 && !other.hasKeyword(Keyword.TRAMPLE)
                                 && !StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(other)
                                 && !ComputerUtilCombat.attackerHasThreateningAfflict(other, ai)
-                                && CombatUtil.canBlock(other, blocker, combat)) {
-                            combat.addBlocker(other, blocker);
+                                && canBlock(other, blocker, combat)) {
+                            addBlocker(combat, other, blocker);
                             attackersLeft.remove(other);
                             blockedButUnkilled.add(other);
                             attackers.remove(other);
@@ -702,7 +784,7 @@ public class AiBlockController {
                 }
             }
 
-            combat.addBlocker(attacker, blocker);
+            addBlocker(combat, attacker, blocker);
             attackersLeft.remove(attacker);
             blockedButUnkilled.add(attacker);
             blocked = true;
@@ -725,8 +807,8 @@ public class AiBlockController {
             }
             List<Card> usedBlockers = new ArrayList<>();
             for (Card blocker : possibleBlockers) {
-                if (CombatUtil.canBlock(attacker, blocker, combat)) {
-                    combat.addBlocker(attacker, blocker);
+                if (canBlock(attacker, blocker, combat)) {
+                    addBlocker(combat, attacker, blocker);
                     usedBlockers.add(blocker);
                     if (CombatUtil.canAttackerBeBlockedWithAmount(attacker, usedBlockers.size(), combat)) {
                         attackersLeft.remove(attacker);
@@ -736,7 +818,7 @@ public class AiBlockController {
                 }
             }
             for (Card blocker : usedBlockers) {
-                combat.removeBlockAssignment(attacker, blocker);
+                removeBlockAssignment(combat, attacker, blocker);
             }
         }
     }
@@ -771,8 +853,8 @@ public class AiBlockController {
                 if (blocker.hasKeyword(Keyword.BANDING) || blocker.hasKeyword(Keyword.BANDSWITH)) {
                     if (ComputerUtilCombat.getAttack(attacker) > ComputerUtilCombat.totalShieldDamage(attacker, combat.getBlockers(attacker))
                             && ComputerUtilCombat.shieldDamage(attacker, blocker) > 0
-                            && CombatUtil.canBlock(attacker, blocker, combat) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                        combat.addBlocker(attacker, blocker);
+                            && canBlock(attacker, blocker, combat) && isLifeInDanger(combat)) {
+                        addBlocker(combat, attacker, blocker);
                         needsMoreChumpBlockers = false;
                         break;
                     }
@@ -789,8 +871,8 @@ public class AiBlockController {
                     // enough and the new one would suck some of the damage
                     if (ComputerUtilCombat.getAttack(attacker) > ComputerUtilCombat.totalShieldDamage(attacker, combat.getBlockers(attacker))
                             && ComputerUtilCombat.shieldDamage(attacker, blocker) > 0
-                            && CombatUtil.canBlock(attacker, blocker, combat) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                        combat.addBlocker(attacker, blocker);
+                            && canBlock(attacker, blocker, combat) && isLifeInDanger(combat)) {
+                        addBlocker(combat, attacker, blocker);
                     }
                 }
             }
@@ -823,9 +905,9 @@ public class AiBlockController {
                     // Add an additional blocker if the current blockers are not
                     // enough and the new one would deal additional damage
                     if (damageNeeded > ComputerUtilCombat.totalDamageOfBlockers(attacker, combat.getBlockers(attacker))
-                            && ComputerUtilCombat.dealsDamageAsBlocker(attacker, blocker) > 0
-                            && CombatUtil.canBlock(attacker, blocker, combat)) {
-                        combat.addBlocker(attacker, blocker);
+                            && damageAsBlocker(attacker, blocker) > 0
+                            && canBlock(attacker, blocker, combat)) {
+                        addBlocker(combat, attacker, blocker);
                     }
                     blockers.remove(blocker); // Don't check them again next
                 }
@@ -850,13 +932,14 @@ public class AiBlockController {
                 // Add an additional blocker if the current blockers are not
                 // enough and the new one would deal the remaining damage
                 final int currentDamage = ComputerUtilCombat.totalDamageOfBlockers(attacker, combat.getBlockers(attacker));
-                final int additionalDamage = ComputerUtilCombat.dealsDamageAsBlocker(attacker, blocker);
+                final int additionalDamage = damageAsBlocker(attacker, blocker);
                 if (damageNeeded > currentDamage
                         && damageNeeded <= currentDamage + additionalDamage
-                        && ComputerUtilCard.evaluateCreature(blocker) + diff < ComputerUtilCard.evaluateCreature(attacker)
-                        && CombatUtil.canBlock(attacker, blocker, combat)
+                        && creatureValues.applyAsInt(blocker) + diff
+                        < creatureValues.applyAsInt(attacker)
+                        && canBlock(attacker, blocker, combat)
                         && !ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(blocker, attacker, false)) {
-                    combat.addBlocker(attacker, blocker);
+                    addBlocker(combat, attacker, blocker);
                     blockersLeft.remove(blocker);
                 }
             }
@@ -899,7 +982,8 @@ public class AiBlockController {
             CardCollection pwsWithChumpBlocks = new CardCollection();
             CardCollection chosenChumpBlockers = new CardCollection();
             CardCollection chumpPWDefenders = CardLists.filter(this.blockersLeft,
-                    card -> ComputerUtilCard.evaluateCreature(card) <= (card.isToken() ? evalThresholdToken : evalThresholdNonToken)
+                    card -> creatureValues.applyAsInt(card)
+                            <= (card.isToken() ? evalThresholdToken : evalThresholdNonToken)
             );
             CardLists.sortByPowerAsc(chumpPWDefenders);
             if (!chumpPWDefenders.isEmpty()) {
@@ -916,8 +1000,8 @@ public class AiBlockController {
                     if (def instanceof Card card && threatenedPWs.contains(def)) {
                         Card blockerDecided = null;
                         for (final Card blocker : chumpPWDefenders) {
-                            if (CombatUtil.canBlock(attacker, blocker, combat)) {
-                                combat.addBlocker(attacker, blocker);
+                            if (canBlock(attacker, blocker, combat)) {
+                                addBlocker(combat, attacker, blocker);
                                 pwsWithChumpBlocks.add(card);
                                 chosenChumpBlockers.add(blocker);
                                 blockerDecided = blocker;
@@ -946,7 +1030,7 @@ public class AiBlockController {
                         if (!isFullyBlocked && damageToPW >= pw.getCounters(CounterEnumType.LOYALTY)) {
                             for (Card chump : pwDefenders) {
                                 if (chosenChumpBlockers.contains(chump)) {
-                                    combat.removeFromCombat(chump);
+                                    removeFromCombat(combat, chump);
                                 }
                             }
                         }
@@ -970,10 +1054,10 @@ public class AiBlockController {
             for (final Card attacker : attackers) {
                 List<Card> blockers = getPossibleBlockers(combat, attacker, chumpBlockers, false);
                 for (final Card blocker : blockers) {
-                    if (CombatUtil.canBlock(attacker, blocker, combat) && blockersLeft.contains(blocker)
+                    if (canBlock(attacker, blocker, combat) && blockersLeft.contains(blocker)
                             && (CombatUtil.mustBlockAnAttacker(blocker, combat, null)
                                     || StaticAbilityMustBlock.blocksEachCombatIfAble(blocker))) {
-                        combat.addBlocker(attacker, blocker);
+                        addBlocker(combat, attacker, blocker);
                         if (!blocker.getMustBlockCards().isEmpty()) {
                             int mustBlockAmt = blocker.getMustBlockCards().size();
                             final CardCollectionView blockedSoFar = combat.getAttackersBlockedBy(blocker);
@@ -993,7 +1077,7 @@ public class AiBlockController {
     private void clearBlockers(final Combat combat, final List<Card> possibleBlockers) {
         for (final Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), ai)) {
             // don't touch other player's blockers
-            combat.removeFromCombat(blocker);
+            removeFromCombat(combat, blocker);
         }
 
         attackersLeft = new ArrayList<>(attackers); // keeps track of all currently unblocked attackers
@@ -1051,6 +1135,21 @@ public class AiBlockController {
             return;
         }
 
+        try (CardTraitViewCache ignored = CardTraitViewCache.open()) {
+            usefulCreatureCounts.clear();
+            combatEvaluation = new AiCombatEvaluationMatrix();
+            creatureValues = ComputerUtilCard.getCachedCreatureEvaluator();
+            creatureValuesWithoutMana = ComputerUtilCard.getCachedCreatureEvaluator(false);
+            checkPoisonDanger = ComputerUtilCombat.sumPoisonIfUnblocked(
+                    combat.getAttackersOf(ai), ai) > 0;
+            assignBlockersWithMatrix(combat, possibleBlockers);
+        } finally {
+            combatEvaluation = null;
+        }
+    }
+
+    private void assignBlockersWithMatrix(final Combat combat, List<Card> possibleBlockers) {
+
         clearBlockers(combat, possibleBlockers);
 
         diff = (ai.getLife() * 2) - 5; // This is the minimal gain for an unnecessary trade
@@ -1085,7 +1184,7 @@ public class AiBlockController {
 
         // When the AI holds some Fog effect, don't bother about lifeInDanger
         if (!ComputerUtil.hasAFogEffect(ai, ai, checkingOther)) {
-            lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
+            lifeInDanger = isLifeInDanger(combat);
             makeTradeBlocks(combat);
 
             if (lifeInDanger) {
@@ -1093,7 +1192,7 @@ public class AiBlockController {
             }
 
             // Reinforce blockers blocking attackers with trample if life is still in danger
-            if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
+            if (lifeInDanger && isLifeInDanger(combat)) {
                 reinforceBlockersAgainstTrample(combat);
             } else {
                 lifeInDanger = false;
@@ -1106,7 +1205,7 @@ public class AiBlockController {
 
             // TODO could be made more accurate if this would be inside each blocker choosing loop instead
             if (removeUnpayableBlocks(combat) || lifeInDanger) {
-                lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
+                lifeInDanger = isLifeInDanger(combat);
             }
 
             // == 2. If the AI life would still be in danger make a safer approach ==
@@ -1118,7 +1217,7 @@ public class AiBlockController {
                 makeChumpBlocks(combat);
 
                 // Reinforce blockers blocking attackers with trample if life is still in danger
-                if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
+                if (lifeInDanger && isLifeInDanger(combat)) {
                     reinforceBlockersAgainstTrample(combat);
                 } else {
                     lifeInDanger = false;
@@ -1133,13 +1232,13 @@ public class AiBlockController {
                 clearBlockers(combat, possibleBlockers);
                 makeChumpBlocks(combat);
 
-                if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
+                if (lifeInDanger && isLifeInDanger(combat)) {
                     makeTradeBlocks(combat);
                 } else {
                     lifeInDanger = false;
                 }
 
-                if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
+                if (lifeInDanger && isLifeInDanger(combat)) {
                     reinforceBlockersAgainstTrample(combat);
                 } else {
                     lifeInDanger = false;
@@ -1173,7 +1272,7 @@ public class AiBlockController {
             if (!CombatUtil.canAttackerBeBlockedWithAmount(attacker, combat.getBlockers(attacker).size(), combat)) {
                 for (final Card blocker : CardLists.filterControlledBy(combat.getBlockers(attacker), ai)) {
                     // don't touch other player's blockers
-                    combat.removeFromCombat(blocker);
+                    removeFromCombat(combat, blocker);
                 }
             }
         }
@@ -1307,10 +1406,12 @@ public class AiBlockController {
             return false;
         }
 
-        aiCreatureCount = ComputerUtil.countUsefulCreatures(ai);
+        aiCreatureCount = usefulCreatureCounts.computeIfAbsent(
+                ai, ComputerUtil::countUsefulCreatures);
 
         if (!attackersLeft.isEmpty()) {
-            oppCreatureCount = ComputerUtil.countUsefulCreatures(attackersLeft.get(0).getController());
+            oppCreatureCount = usefulCreatureCounts.computeIfAbsent(
+                    attackersLeft.get(0).getController(), ComputerUtil::countUsefulCreatures);
         }
 
         if (attacker.getOwner().equals(ai) && "6".equals(attacker.getSVar("SacMe"))) {
@@ -1326,7 +1427,7 @@ public class AiBlockController {
             chance = maxRandomTradeChance;
         }
 
-        int evalAtk = ComputerUtilCard.evaluateCreature(attacker, true, false);
+        int evalAtk = creatureValuesWithoutMana.applyAsInt(attacker);
         boolean atkEmbalm = (attacker.hasKeyword(Keyword.EMBALM) || attacker.hasKeyword(Keyword.ETERNALIZE)) && !attacker.isToken();
         boolean blkEmbalm = (blocker.hasKeyword(Keyword.EMBALM) || blocker.hasKeyword(Keyword.ETERNALIZE)) && !blocker.isToken();
 
@@ -1341,7 +1442,7 @@ public class AiBlockController {
             // in relation to the original state, not to the Morph state
             evalBlk = ComputerUtilCard.evaluateCreature(Card.fromPaperCard(blocker.getPaperCard(), ai), false, true);
         } else {
-            evalBlk = ComputerUtilCard.evaluateCreature(blocker, true, false);
+            evalBlk = creatureValuesWithoutMana.applyAsInt(blocker);
         }
         int chanceToSavePW = chanceToTradeDownToSaveWalker > 0 && evalAtk + 1 < evalBlk ? chanceToTradeDownToSaveWalker : chanceToTradeToSaveWalker;
         boolean powerParityOrHigher = blocker.getNetPower() <= attacker.getNetPower();
@@ -1373,7 +1474,7 @@ public class AiBlockController {
             Cost tax = CombatUtil.getBlockCost(blocker.getGame(), blocker, combat.getAttackersBlockedBy(blocker).get(0));
             int taxCMC = tax != null ? tax.getCostMana().getMana().getCMC() : 0;
             if (myFreeMana < currentBlockTax + taxCMC) {
-                combat.removeFromCombat(blocker);
+                removeFromCombat(combat, blocker);
                 modified = true;
                 continue;
             }

@@ -50,6 +50,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
+import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -3208,10 +3209,16 @@ public class ComputerUtil {
             if (!containsAttacker) {
                 continue;
             }
-            // TODO if it's next turn ignore mustBlockCards
-            AiBlockController block = new AiBlockController(ai, false);
-            // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
-            block.assignBlockersForCombat(combat, excludedBlockers);
+            if (!checkDiff && isUnblockedCombatAlwaysSafe(
+                    ai, combat, serious, payment, excludedBlockers)) {
+                continue;
+            }
+            if (hasPossibleBlocker(ai, combat, excludedBlockers)) {
+                // TODO if it's next turn ignore mustBlockCards
+                AiBlockController block = new AiBlockController(ai, false);
+                // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
+                block.assignBlockersForCombat(combat, excludedBlockers);
+            }
 
             // TODO predict other, noncombat sources of damage and add them to the "payment" variable.
             // examples : Black Vise, The Rack, known direct damage spells in enemy hand, etc
@@ -3230,6 +3237,60 @@ public class ComputerUtil {
             }
         }
         return remainingLife;
+    }
+
+    static boolean isUnblockedCombatAlwaysSafe(Player defender, Combat combat,
+            boolean serious, int payment, CardCollection excludedBlockers) {
+        for (Card blocker : defender.getCreaturesInPlay()) {
+            if (excludedBlockers != null && excludedBlockers.contains(blocker)) {
+                continue;
+            }
+            if (CombatUtil.mustBlockAnAttacker(blocker, combat, null)
+                    || StaticAbilityMustBlock.blocksEachCombatIfAble(blocker)) {
+                return false;
+            }
+        }
+
+        if (serious) {
+            return !ComputerUtilCombat.lifeInSeriousDanger(defender, combat, payment);
+        }
+
+        for (Card attacker : combat.getAttackersOf(defender)) {
+            if (!attacker.getSVar("MustBeBlocked").isEmpty()
+                    || attacker.isCommander()
+                    && defender.getCommanderDamage(attacker)
+                    + ComputerUtilCombat.damageIfUnblocked(
+                            attacker, defender, combat, false) >= 21) {
+                return false;
+            }
+        }
+
+        int poison = ComputerUtilCombat.resultingPoison(defender, combat);
+        if (poison > Math.max(7, defender.getPoisonCounters())) {
+            return false;
+        }
+
+        int threshold = Math.max(
+                AiProfileUtil.getIntProperty(defender, AiProps.AI_IN_DANGER_THRESHOLD),
+                AiProfileUtil.getIntProperty(defender, AiProps.AI_IN_DANGER_MAX_THRESHOLD));
+        return defender.cantLoseForZeroOrLessLife()
+                || ComputerUtilCombat.lifeThatWouldRemain(defender, combat) - payment
+                        >= Math.min(threshold, defender.getLife());
+    }
+
+    static boolean hasPossibleBlocker(Player defender, Combat combat, CardCollection excludedBlockers) {
+        for (Card blocker : defender.getCreaturesInPlay()) {
+            if ((excludedBlockers != null && excludedBlockers.contains(blocker))
+                    || !CombatUtil.canBlock(blocker, combat)) {
+                continue;
+            }
+            for (Card attacker : combat.getAttackers()) {
+                if (CombatUtil.canBlock(attacker, blocker, combat)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static boolean isETBprevented(Card c) {

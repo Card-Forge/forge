@@ -3400,6 +3400,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {
+        return CardTraitViewCache.getSpellAbilities(this);
+    }
+
+    final FCollectionView<SpellAbility> getSpellAbilitiesUncached() {
         return currentState.getSpellAbilities();
     }
     public final FCollectionView<SpellAbility> getManaAbilities() {
@@ -3422,7 +3426,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         // only Layer 4 are affected, and it's never intrinsic
-        return changedCardTypes.values().stream().anyMatch(ICardChangedType::isRemoveLandTypes);
+        return !changedCardTypes.isEmpty()
+                && changedCardTypes.values().stream().anyMatch(ICardChangedType::isRemoveLandTypes);
     }
 
     public boolean hasNoAbilities() {
@@ -3482,6 +3487,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final FCollectionView<SpellAbility> getAllSpellAbilities() {
+        return CardTraitViewCache.getAllSpellAbilities(this);
+    }
+
+    final FCollectionView<SpellAbility> getAllSpellAbilitiesUncached() {
         final FCollection<SpellAbility> res = new FCollection<>();
         for (final CardStateName key : states.keySet()) {
             res.addAll(getState(key).getNonManaAbilities());
@@ -6990,8 +6999,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final FCollectionView<StaticAbility> getStaticAbilities() {
+        return CardTraitViewCache.getStaticAbilities(this);
+    }
+
+    final FCollectionView<StaticAbility> getStaticAbilitiesUncached() {
         return currentState.getStaticAbilities();
     }
+
     public final StaticAbility addStaticAbility(final String s) {
         if (!s.trim().isEmpty()) {
             final StaticAbility stAb = StaticAbility.create(s, this, currentState, true);
@@ -7028,6 +7042,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final FCollectionView<Trigger> getTriggers() {
+        return CardTraitViewCache.getTriggers(this);
+    }
+
+    final FCollectionView<Trigger> getTriggersUncached() {
         return currentState.getTriggers();
     }
     public final Trigger addTrigger(final Trigger t) {
@@ -7052,6 +7070,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
+        return CardTraitViewCache.getReplacementEffects(this);
+    }
+
+    final FCollectionView<ReplacementEffect> getReplacementEffectsUncached() {
         return currentState.getReplacementEffects();
     }
 
@@ -7419,9 +7441,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable, final Multimap<SpellAbility, SpellAbility> unhiddenAltCost) {
         CardState oState = getOriginalState(CardStateName.Original);
         final List<SpellAbility> abilities = Lists.newArrayList();
+        final boolean skipSpells = removeUnplayable && isInPlay();
         for (SpellAbility sa : getSpellAbilities()) {
             if (sa.isAdventure() && isOnAdventure()) {
                 continue; // skip since it's already on adventure
+            }
+            // A spell cannot be cast from its battlefield object, regardless of
+            // alternative or optional costs. Avoid manufacturing those variants
+            // when a caller only wants actions that are playable right now.
+            if (skipSpells && sa.isSpell()) {
+                continue;
             }
             abilities.add(sa);
             //add alternative costs as additional spell abilities
@@ -7450,6 +7479,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             for (SpellAbility sa : getState(CardStateName.Backside).getSpellAbilities()) {
                 // only add Spells there
                 if (sa.isSpell() || sa.isLandAbility()) {
+                    if (skipSpells && sa.isSpell()) {
+                        continue;
+                    }
                     abilities.add(sa);
                     List<SpellAbility> altCost = GameActionUtil.getAlternativeCosts(sa, player, false);
                     abilities.addAll(altCost);
