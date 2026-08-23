@@ -5,4 +5,4 @@ PT:4/3
 K:Haste
 K:Madness:2 R
 DeckHints:Ability$Discard
-Oracle:Haste\nMadness {2}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nMadness {2}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

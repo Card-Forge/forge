@@ -4,5 +4,5 @@ Types:Creature Faerie Wizard
 PT:4/3
 S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell | IsPresent$ Faerie.YouCtrl | EffectZone$ All | Caster$ You | Description$ You may cast this spell as though it had flash if you control a Faerie.
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Hexproof | Description$ This creature has hexproof as long as it's untapped.
-Oracle:You may cast this spell as though it had flash if you control a Faerie.\nFlying\nThis creature has hexproof as long as it's untapped.
+S:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Hexproof | Description$ This creature has hexproof as long as it's untapped. (It can't be the target of spells or abilities your opponents control.)
+Oracle:You may cast this spell as though it had flash if you control a Faerie.\nFlying\nThis creature has hexproof as long as it's untapped. (It can't be the target of spells or abilities your opponents control.)

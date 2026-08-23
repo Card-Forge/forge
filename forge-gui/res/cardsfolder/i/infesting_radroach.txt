@@ -3,10 +3,10 @@ ManaCost:2 B
 Types:Creature Insect Mutant
 PT:2/2
 K:Flying
-S:Mode$ CantBlock | ValidCard$ Creature.Self | Description$ CARDNAME can't block.
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigRadiation | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, they get that many rad counters.
+S:Mode$ CantBlock | ValidCard$ Creature.Self | Description$ This creature can't block.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigRadiation | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, they get that many rad counters.
 SVar:TrigRadiation:DB$ Radiation | Defined$ TriggeredTarget | Num$ X
 SVar:X:TriggerCount$DamageAmount
-T:Mode$ Milled | ValidPlayer$ Opponent | OptionalDecider$ You | ValidCard$ Card.nonLand | TriggerZones$ Graveyard | Execute$ TrigReturn | PresentZone$ Graveyard | IsPresent$ Card.StrictlySelf | TriggerDescription$ Whenever an opponent mills a nonland card, if CARDNAME is in your graveyard, you may return it to your hand.
+T:Mode$ Milled | ValidPlayer$ Opponent | OptionalDecider$ You | ValidCard$ Card.nonLand | TriggerZones$ Graveyard | Execute$ TrigReturn | PresentZone$ Graveyard | IsPresent$ Card.StrictlySelf | TriggerDescription$ Whenever an opponent mills a nonland card, if this creature is in your graveyard, you may return it to your hand.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand
-Oracle:Flying\nInfesting Radroach can't block.\nWhenever Infesting Radroach deals combat damage to a player, they get that many rad counters.\nWhenever an opponent mills a nonland card, if Infesting Radroach is in your graveyard, you may return it to your hand.
+Oracle:Flying\nThis creature can't block.\nWhenever this creature deals combat damage to a player, they get that many rad counters.\nWhenever an opponent mills a nonland card, if this creature is in your graveyard, you may return it to your hand.

@@ -7,7 +7,7 @@ SVar:TrigDrain:DB$ DealDamage | ValidTgts$ Creature.Other,Player,Planeswalker.Ot
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 DeckHas:Ability$Counters|LifeGain
 AlternateMode:DoubleFaced
-Oracle:When Invasion of Ulgrotha enters, it deals 3 damage to any other target and you gain 3 life.
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen this Siege enters, it deals 3 damage to any other target and you gain 3 life.
 
 ALTERNATE
 

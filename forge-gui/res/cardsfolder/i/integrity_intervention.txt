@@ -10,6 +10,6 @@ ALTERNATE
 Name:Intervention
 ManaCost:2 R W
 Types:Instant
-A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target player deals 3 damage to any target and you gain 3 life.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to any target and you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 Oracle:Intervention deals 3 damage to any target and you gain 3 life.

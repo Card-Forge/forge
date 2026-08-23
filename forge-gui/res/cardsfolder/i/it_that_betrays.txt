@@ -5,4 +5,4 @@ PT:11/11
 K:Annihilator:2
 T:Mode$ Sacrificed | ValidCard$ Permanent.!token+OppCtrl | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard
-Oracle:Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)\nWhenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
+Oracle:Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)\nWhenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
