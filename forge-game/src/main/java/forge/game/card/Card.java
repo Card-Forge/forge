@@ -2583,7 +2583,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
                         || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Ripple")
-                        || keyword.startsWith("Ward")) {
+                        || keyword.startsWith("Ward") || keyword.startsWith("Poison Tolerance")) {
                     sbLong.append(inst.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner with:")) {
                     final String[] k = keyword.split(":");

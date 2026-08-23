@@ -399,7 +399,7 @@ public class DrawAi extends SpellAbilityAi {
                 // try to make opponent lose to poison
                 // currently only Caress of Phyrexia
                 if (getPoison != null && oppA.canReceiveCounters(CounterEnumType.POISON)) {
-                    if (oppA.getPoisonCounters() + numCards > 9) {
+                    if (oppA.getPoisonCounters() + numCards >= oppA.getPoisonCounterThreshold()) {
                         sa.getTargets().add(oppA);
                         return true;
                     }
@@ -443,7 +443,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
 
                 if (getPoison != null && ai.canReceiveCounters(CounterEnumType.POISON)) {
-                    if (numCards + ai.getPoisonCounters() >= 8) {
+                    if (numCards + ai.getPoisonCounters() >= ai.getPoisonCounterThreshold() - 2) {
                         aiTarget = false;
                     }
                 }
@@ -500,7 +500,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
 
                 // ally would lose because of poison
-                if (getPoison != null && ally.canReceiveCounters(CounterEnumType.POISON) && ally.getPoisonCounters() + numCards > 9) {
+                if (getPoison != null && ally.canReceiveCounters(CounterEnumType.POISON) && ally.getPoisonCounters() + numCards >= ally.getPoisonCounterThreshold()) {
                         continue;
                 }
 
