@@ -2668,7 +2668,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     }
                     sbLong.append(type).append(" offering");
                     sbLong.append(" (").append(inst.getReminderText()).append(")");
-                } else if (keyword.startsWith("Equipment swap") ||keyword.startsWith("Equip") || keyword.startsWith("Fortify")
+                } else if (keyword.startsWith("Equipment swap") || keyword.startsWith("Equip") || keyword.startsWith("Fortify")
                         || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge")
                         || keyword.startsWith("Spectacle") || keyword.startsWith("Evoke")
                         || keyword.startsWith("Bestow") || keyword.startsWith("Surge")
