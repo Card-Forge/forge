@@ -6872,7 +6872,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean canBeDestroyed() {
-        return isInPlay() && !isPhasedOut() && (!hasKeyword(Keyword.INDESTRUCTIBLE) || (isCreature() && getNetToughness() <= 0));
+        return canBeDestroyed(null, true);
+    }
+
+    public final boolean canBeDestroyed(SpellAbility sa, boolean regenerate) {
+        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
+        repRunParams.put(AbilityKey.Cause, sa);
+        repRunParams.put(AbilityKey.Regeneration, regenerate);
+
+        return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Destroy, repRunParams);
     }
 
     @Override
