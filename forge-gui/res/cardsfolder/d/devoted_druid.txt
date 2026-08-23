@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Elf Druid
 PT:0/2
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Untap | Cost$ AddCounter<1/M1M1> | SpellDescription$ Untap CARDNAME.
+A:AB$ Untap | Cost$ AddCounter<1/M1M1> | SpellDescription$ Untap this creature.
 AI:RemoveDeck:All
-Oracle:{T}: Add {G}.\nPut a -1/-1 counter on Devoted Druid: Untap Devoted Druid.
+Oracle:{T}: Add {G}.\nPut a -1/-1 counter on this creature: Untap this creature.

@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAITgts:Card.powerGE1
 SVar:AttachAILogic:Pump
-T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Execute$ TrigSacrifice | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, that player sacrifices a land.
+T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Execute$ TrigSacrifice | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, that player sacrifices a land of their choice.
 SVar:TrigSacrifice:DB$ Sacrifice | Defined$ TriggeredTarget | SacValid$ Land | ChangeNum$ 1 | SpellDescription$ Sacrifice a land.
-Oracle:Enchant creature\nWhenever enchanted creature deals combat damage to a player, that player sacrifices a land.
+Oracle:Enchant creature\nWhenever enchanted creature deals combat damage to a player, that player sacrifices a land of their choice.

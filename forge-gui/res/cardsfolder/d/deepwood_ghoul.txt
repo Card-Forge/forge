@@ -2,5 +2,5 @@ Name:Deepwood Ghoul
 ManaCost:2 B
 Types:Creature Zombie
 PT:2/1
-A:AB$ Regenerate | Cost$ PayLife<2> | SpellDescription$ Regenerate CARDNAME.
-Oracle:Pay 2 life: Regenerate Deepwood Ghoul.
+A:AB$ Regenerate | Cost$ PayLife<2> | SpellDescription$ Regenerate this creature.
+Oracle:Pay 2 life: Regenerate this creature.

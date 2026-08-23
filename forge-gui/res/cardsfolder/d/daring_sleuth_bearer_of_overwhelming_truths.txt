@@ -2,12 +2,12 @@ Name:Daring Sleuth
 ManaCost:1 U
 Types:Creature Human Rogue
 PT:2/1
-T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ When you sacrifice a Clue, transform CARDNAME.
+T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ When you sacrifice a Clue, transform this creature.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 DeckHas:Ability$Investigate|Token
 DeckNeeds:Ability$Investigate
 AlternateMode:DoubleFaced
-Oracle:When you sacrifice a Clue, transform Daring Sleuth.
+Oracle:When you sacrifice a Clue, transform this creature.
 
 ALTERNATE
 
@@ -17,6 +17,6 @@ Colors:blue
 Types:Creature Human Wizard
 PT:3/2
 K:Prowess
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigInvestigate | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigInvestigate | TriggerDescription$ Whenever this creature deals combat damage to a player, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate
-Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhenever Bearer of Overwhelming Truths deals combat damage to a player, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhenever this creature deals combat damage to a player, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")

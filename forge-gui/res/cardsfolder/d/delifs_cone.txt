@@ -8,4 +8,4 @@ SVar:DBNoCombatDamage:DB$ Effect | RememberObjects$ Remembered | StaticAbilities
 SVar:SNoCombatDamage:Mode$ AssignNoCombatDamage | ValidCard$ Card.IsRemembered | Description$ Remembered creature assigns no combat damage this turn.
 SVar:DelifX:Remembered$CardPower
 AI:RemoveDeck:All
-Oracle:{T}, Sacrifice Delif's Cone: This turn, when target creature you control attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
+Oracle:{T}, Sacrifice this artifact: This turn, when target creature you control attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.

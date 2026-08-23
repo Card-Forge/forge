@@ -5,7 +5,7 @@ A:SP$ ChooseSource | Choices$ Card.YouCtrl,Emblem.YouCtrl | RememberChosen$ True
 SVar:CoinFlip:DB$ FlipCoin | WinSubAbility$ CreateWinEffect | LoseSubAbility$ CreateLossEffect | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 # Winning Effect
 SVar:CreateWinEffect:DB$ Effect | Name$ Desperate Gambit's Effect — Won The Flip | ReplacementEffects$ EventWinDamageDone | RememberObjects$ Remembered
-SVar:EventWinDamageDone:Event$ DamageDone | ValidSource$ Card.IsRemembered,Emblem.IsRemembered | ReplaceWith$ DmgTwice | Description$ The next time source would deal damage this turn, it deals double that damage instead.
+SVar:EventWinDamageDone:Event$ DamageDone | ValidSource$ Card.IsRemembered,Emblem.IsRemembered | ReplaceWith$ DmgTwice | Description$ The next time that source would deal damage this turn, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ WinX | SubAbility$ ExileEffect
 SVar:WinX:ReplaceCount$DamageAmount/Twice
 # Losing Effect

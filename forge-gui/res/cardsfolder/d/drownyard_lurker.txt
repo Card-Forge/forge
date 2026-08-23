@@ -3,8 +3,8 @@ ManaCost:7
 Types:Creature Eldrazi Trilobite
 PT:7/7
 K:Vigilance
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast or cycle CARDNAME, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
-T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When you cast or cycle CARDNAME, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast or cycle CARDNAME, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this token: Add {C}."
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When you cast or cycle CARDNAME, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this token: Add {C}."
 SVar:TrigToken:DB$ Token | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
 K:Cycling:2 U
-Oracle:Vigilance\nWhen you cast or cycle Drownyard Lurker, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."\nCycling {2}{U} ({2}{U}, Discard this card: Draw a card.)
+Oracle:Vigilance\nWhen you cast or cycle Drownyard Lurker, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this token: Add {C}."\nCycling {2}{U} ({2}{U}, Discard this card: Draw a card.)

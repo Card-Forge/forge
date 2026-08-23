@@ -5,4 +5,4 @@ A:AB$ Mana | Cost$ 2 T Sac<1/CARDNAME> | Produced$ U B | SubAbility$ DBDraw | Sp
 SVar:DBDraw:DB$ Draw
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:{2}, {T}, Sacrifice Darkwater Egg: Add {U}{B}. Draw a card.
+Oracle:{2}, {T}, Sacrifice this artifact: Add {U}{B}. Draw a card.

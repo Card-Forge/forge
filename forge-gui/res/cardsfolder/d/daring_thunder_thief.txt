@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Creature Turtle Rogue
 PT:4/4
 K:Flash
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-Oracle:Flash\nDaring Thunder-Thief enters tapped.
+Oracle:Flash\nThis creature enters tapped.

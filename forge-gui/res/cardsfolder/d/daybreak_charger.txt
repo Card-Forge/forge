@@ -2,6 +2,6 @@ Name:Daybreak Charger
 ManaCost:1 W
 Types:Creature Unicorn
 PT:3/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature gets +2/+0 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, target creature gets +2/+0 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +2
-Oracle:When Daybreak Charger enters, target creature gets +2/+0 until end of turn.
+Oracle:When this creature enters, target creature gets +2/+0 until end of turn.

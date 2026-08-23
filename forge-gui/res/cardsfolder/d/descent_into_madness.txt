@@ -1,10 +1,10 @@
 Name:Descent into Madness
 ManaCost:3 B B
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a despair counter on CARDNAME, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a despair counter on this enchantment, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on this enchantment.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DESPAIR | CounterNum$ 1 | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | DefinedPlayer$ Player | ChangeNum$ X | Hidden$ True | Origin$ Battlefield,Hand | Destination$ Exile | Mandatory$ True
 SVar:X:Count$CardCounters.DESPAIR
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:At the beginning of your upkeep, put a despair counter on Descent into Madness, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on Descent into Madness.
+Oracle:At the beginning of your upkeep, put a despair counter on this enchantment, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on this enchantment.
