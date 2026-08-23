@@ -27,6 +27,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundSystem;
+import forge.util.Localizer;
 import forge.util.NameGenerator;
 
 import java.util.Random;
@@ -459,103 +460,104 @@ public class NewGameScene extends MenuScene {
 
     private void showModeHelp() {
 
+        Localizer localizer = Forge.getLocalizer();
         AdventureModes selectedMode = modes.get(mode.getCurrentIndex());
         DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
         boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
 
         modeSummary = new DialogData();
-        modeSummary.name = Forge.getLocalizer().getMessage("lblSummary");
+        modeSummary.name = localizer.getMessage("lblSummary");
 
         StringBuilder summaryText = new StringBuilder();
         switch (selectedMode) {
             case Standard:
-                summaryText.append(Forge.getLocalizer().getMessage("advModeStandardSummary"));
+                summaryText.append(localizer.getMessage("advModeStandardSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffEasyStandard"));
+                        summaryText.append(localizer.getMessage("advDiffEasyStandard"));
                         break;
                     case "Normal":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffNormalStandard"));
+                        summaryText.append(localizer.getMessage("advDiffNormalStandard"));
                         break;
                     case "Hard":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffHardStandard"));
+                        summaryText.append(localizer.getMessage("advDiffHardStandard"));
                         break;
                     case "Insane":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffInsaneStandard"));
+                        summaryText.append(localizer.getMessage("advDiffInsaneStandard"));
                         break;
                     default:
-                        difficultySummary.text = Forge.getLocalizer().getMessage("advCannotDetermineStarterDeck");
+                        difficultySummary.text = localizer.getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Constructed:
-                summaryText.append(Forge.getLocalizer().getMessage("advModeConstructedSummary"));
+                summaryText.append(localizer.getMessage("advModeConstructedSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffEasyConstructed"));
+                        summaryText.append(localizer.getMessage("advDiffEasyConstructed"));
                         break;
                     case "Normal":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffNormalConstructed"));
+                        summaryText.append(localizer.getMessage("advDiffNormalConstructed"));
                         break;
                     case "Hard":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffHardConstructed"));
+                        summaryText.append(localizer.getMessage("advDiffHardConstructed"));
                         break;
                     case "Insane":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffInsaneConstructed"));
+                        summaryText.append(localizer.getMessage("advDiffInsaneConstructed"));
                         break;
                     default:
-                        difficultySummary.text = Forge.getLocalizer().getMessage("advCannotDetermineStarterDeck");
+                        difficultySummary.text = localizer.getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Pile:
-                summaryText.append(Forge.getLocalizer().getMessage("advModePileSummary"));
+                summaryText.append(localizer.getMessage("advModePileSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffEasyPile"));
+                        summaryText.append(localizer.getMessage("advDiffEasyPile"));
                         break;
                     case "Normal":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffNormalPile"));
+                        summaryText.append(localizer.getMessage("advDiffNormalPile"));
                         break;
                     case "Hard":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffHardPile"));
-                        summaryText.append(Forge.getLocalizer().getMessage("advPileLessRareReward"));
+                        summaryText.append(localizer.getMessage("advDiffHardPile"));
+                        summaryText.append(localizer.getMessage("advPileLessRareReward"));
                         break;
                     case "Insane":
-                        summaryText.append(Forge.getLocalizer().getMessage("advDiffInsanePile"));
-                        summaryText.append(Forge.getLocalizer().getMessage("advPileLessRareReward"));
+                        summaryText.append(localizer.getMessage("advDiffInsanePile"));
+                        summaryText.append(localizer.getMessage("advPileLessRareReward"));
                         break;
                     default:
-                        difficultySummary.text = Forge.getLocalizer().getMessage("advCannotDetermineStarterDeck");
+                        difficultySummary.text = localizer.getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Chaos:
-                summaryText.append(Forge.getLocalizer().getMessage("advModeChaosSummary"));
+                summaryText.append(localizer.getMessage("advModeChaosSummary"));
                 break;
             case Custom:
                 if (enableGeneticAI) {
-                    summaryText.append(Forge.getLocalizer().getMessage("advModeCustomGeneticSummary"));
+                    summaryText.append(localizer.getMessage("advModeCustomGeneticSummary"));
                 } else {
-                    summaryText.append(Forge.getLocalizer().getMessage("advModeCustomSummary"));
+                    summaryText.append(localizer.getMessage("advModeCustomSummary"));
                 }
                 break;
             case Precon:
-                summaryText.append(Forge.getLocalizer().getMessage("advModePreconSummary"));
+                summaryText.append(localizer.getMessage("advModePreconSummary"));
                 break;
             case Commander:
-                summaryText.append(Forge.getLocalizer().getMessage("advModeCommanderSummary"));
+                summaryText.append(localizer.getMessage("advModeCommanderSummary"));
                 break;
             case CommanderPrecon:
-                summaryText.append(Forge.getLocalizer().getMessage("advModeCommanderPreconSummary"));
+                summaryText.append(localizer.getMessage("advModeCommanderPreconSummary"));
                 break;
             default:
-                summaryText.append(Forge.getLocalizer().getMessage("advNoModeSummaryAvailable"));
+                summaryText.append(localizer.getMessage("advNoModeSummaryAvailable"));
                 break;
         }
 
         DialogData dismiss = new DialogData();
-        dismiss.name = Forge.getLocalizer().getMessage("lblOK");
+        dismiss.name = localizer.getMessage("lblOK");
         modeSummary.text = summaryText.toString();
         modeSummary.options = new DialogData[1];
         modeSummary.options[0] = dismiss;

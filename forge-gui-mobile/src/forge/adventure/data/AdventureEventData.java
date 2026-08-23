@@ -28,6 +28,7 @@ import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.StreamUtil;
 
@@ -852,9 +853,10 @@ public class AdventureEventData implements Serializable {
     }
 
     public String getDescription(PointOfInterestChanges changes) {
+        Localizer localizer = Forge.getLocalizer();
         float townPriceModifier = changes == null ? 1f : changes.getTownPriceModifier();
         if (format == AdventureEventController.EventFormat.Draft) {
-            description = Forge.getLocalizer().getMessage("advEventTypeBoosterDraft");
+            description = localizer.getMessage("advEventTypeBoosterDraft");
             description += "Block: " + getCardBlock() + "\n";
             description += "Boosters: " + String.join(", ", packConfiguration) + "\n";
             description += "Competition Style: " + participants.length + " players, matches played as best of " + eventRules.gamesPerMatch + ", " + (eventRules.getPairingDescription()) + "\n\n";
@@ -886,8 +888,8 @@ public class AdventureEventData implements Serializable {
             } else {
                 description += "\n";
             }
-            description += Forge.getLocalizer().getMessage("advDraftPrizesDesc");
-            description += Forge.getLocalizer().getMessage("advJumpstartParticipationPrize");
+            description += localizer.getMessage("advDraftPrizesDesc");
+            description += localizer.getMessage("advJumpstartParticipationPrize");
         } else if (format == AdventureEventController.EventFormat.Sealed) {
             description = "Event Type: Sealed Deck\n";
             description += "Block: " + getCardBlock() + "\n";
@@ -909,7 +911,7 @@ public class AdventureEventData implements Serializable {
             }
 
             description += "Prizes\n";
-            description += Forge.getLocalizer().getMessage("advSealedChampionPrize", packConfiguration.length);
+            description += localizer.getMessage("advSealedChampionPrize", packConfiguration.length);
             description += "2+ wins: Silver Challenge Coin\n";
             description += String.format("1+ wins: %s Booster, %s Booster\n", rewardPacks[1].getComment(), rewardPacks[2].getComment());
             description += String.format("0 wins: %s Booster", rewardPacks[0].getComment());

@@ -17,6 +17,7 @@ import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
 import forge.adventure.world.WorldSave;
 import forge.util.Aggregates;
+import forge.util.Localizer;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -549,17 +550,18 @@ public class AdventureQuestController implements Serializable {
 
     String randomItemName()
     {  //todo: expand and include in fetch/delivery quests
+        Localizer localizer = Forge.getLocalizer();
         String[] options = {
-                Forge.getLocalizer().getMessage("advRewardItem1"),
-                Forge.getLocalizer().getMessage("advRewardItem2"),
-                Forge.getLocalizer().getMessage("advRewardItem3"),
-                Forge.getLocalizer().getMessage("advRewardItem4"),
-                Forge.getLocalizer().getMessage("advRewardItem5"),
-                Forge.getLocalizer().getMessage("advRewardItem6"),
-                Forge.getLocalizer().getMessage("advRewardItem7"),
-                Forge.getLocalizer().getMessage("advRewardItem8"),
-                Forge.getLocalizer().getMessage("advRewardItem9"),
-                Forge.getLocalizer().getMessage("advRewardItem10")};
+                localizer.getMessage("advRewardItem1"),
+                localizer.getMessage("advRewardItem2"),
+                localizer.getMessage("advRewardItem3"),
+                localizer.getMessage("advRewardItem4"),
+                localizer.getMessage("advRewardItem5"),
+                localizer.getMessage("advRewardItem6"),
+                localizer.getMessage("advRewardItem7"),
+                localizer.getMessage("advRewardItem8"),
+                localizer.getMessage("advRewardItem9"),
+                localizer.getMessage("advRewardItem10")};
 
         return Aggregates.random(options);
     }
@@ -569,6 +571,7 @@ public class AdventureQuestController implements Serializable {
     }
 
     public AdventureQuestData getQuestNPCResponse(String pointID, PointOfInterestChanges changes, String questOrigin) {
+        Localizer localizer = Forge.getLocalizer();
         AdventureQuestData ret;
 
         for (AdventureQuestData q : Current.player().getQuests()) {
@@ -577,9 +580,9 @@ public class AdventureQuestController implements Serializable {
             if (q.sourceID.equals(pointID)) {
                 //remind player about current active side quest
                 DialogData response = new DialogData();
-                response.text = Forge.getLocalizer().getMessage("advQuestNotFinished", q.name);
+                response.text = localizer.getMessage("advQuestNotFinished", q.name);
                 DialogData dismiss = new DialogData();
-                dismiss.name = Forge.getLocalizer().getMessage("advQuestGoTakeCareOfThat");
+                dismiss.name = localizer.getMessage("advQuestGoTakeCareOfThat");
                 response.options = new DialogData[]{dismiss};
                 ret = new AdventureQuestData();
                 ret.offerDialog = response;
@@ -589,9 +592,9 @@ public class AdventureQuestController implements Serializable {
         if (nextQuestDate.containsKey(pointID) && nextQuestDate.get(pointID) >= LocalDate.now().toEpochDay()){
             //No more side quests available here today due to previous activity
             DialogData response = new DialogData();
-            response.text = Forge.getLocalizer().getMessage("advQuestComeBackTomorrow");
+            response.text = localizer.getMessage("advQuestComeBackTomorrow");
             DialogData dismiss = new DialogData();
-            dismiss.name = Forge.getLocalizer().getMessage("advOkayLeave");
+            dismiss.name = localizer.getMessage("advOkayLeave");
             response.options = new DialogData[]{dismiss};
             ret = new AdventureQuestData();
             ret.offerDialog = response;
@@ -601,9 +604,9 @@ public class AdventureQuestController implements Serializable {
         if (tooManyQuests(Current.player().getQuests())) {
             //No more side quests available here today, too many active
             DialogData response = new DialogData();
-            response.text = Forge.getLocalizer().getMessage("advQuestNeedAssistance");
+            response.text = localizer.getMessage("advQuestNeedAssistance");
             DialogData dismiss = new DialogData();
-            dismiss.name = Forge.getLocalizer().getMessage("advQuestLogFull");
+            dismiss.name = localizer.getMessage("advQuestLogFull");
             response.options = new DialogData[]{dismiss};
             ret = new AdventureQuestData();
             ret.offerDialog = response;
