@@ -3,9 +3,9 @@ ManaCost:2 G G
 Types:Creature Ooze
 PT:0/0
 S:Mode$ Continuous | Affected$ Ooze.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Oozes you control get +1/+1.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | IsPresent$ Card.IsCommander+YouCtrl | TriggerDescription$ At the beginning of your upkeep, if you control a commander, create a token that's a copy of CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | IsPresent$ Card.IsCommander+YouCtrl | TriggerDescription$ At the beginning of your upkeep, if you control a commander, create a token that's a copy of this creature.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self
 AI:RemoveDeck:NonCommander
 DeckHas:Ability$Token
 DeckNeeds:Type$Ooze
-Oracle:Oozes you control get +1/+1.\nAt the beginning of your upkeep, if you control a commander, create a token that's a copy of Biowaste Blob.
+Oracle:Oozes you control get +1/+1.\nAt the beginning of your upkeep, if you control a commander, create a token that's a copy of this creature.

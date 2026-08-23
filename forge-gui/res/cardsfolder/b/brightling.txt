@@ -2,10 +2,10 @@ Name:Brightling
 ManaCost:1 W W
 Types:Creature Shapeshifter
 PT:3/3
-A:AB$ Pump | Cost$ W | KW$ Vigilance | Defined$ Self | SpellDescription$ CARDNAME gains vigilance until end of turn.
-A:AB$ Pump | Cost$ W | KW$ Lifelink | Defined$ Self | SpellDescription$ CARDNAME gains lifelink until end of turn.
-A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-A:AB$ GenericChoice | Cost$ 1 | Choices$ PumpAtt,PumpDef | SpellDescription$ CARDNAME gets +1/-1 or -1/+1 until end of turn.
-SVar:PumpAtt:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
-SVar:PumpDef:DB$ Pump | Defined$ Self | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ CARDNAME gets -1/+1 until end of turn.
-Oracle:{W}: Brightling gains vigilance until end of turn.\n{W}: Brightling gains lifelink until end of turn.\n{W}: Return Brightling to its owner's hand.\n{1}: Brightling gets +1/-1 or -1/+1 until end of turn.
+A:AB$ Pump | Cost$ W | KW$ Vigilance | Defined$ Self | SpellDescription$ This creature gains vigilance until end of turn.
+A:AB$ Pump | Cost$ W | KW$ Lifelink | Defined$ Self | SpellDescription$ This creature gains lifelink until end of turn.
+A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return this creature to its owner's hand.
+A:AB$ GenericChoice | Cost$ 1 | Choices$ PumpAtt,PumpDef | SpellDescription$ This creature gets +1/-1 or -1/+1 until end of turn.
+SVar:PumpAtt:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ This creature gets +1/-1 until end of turn.
+SVar:PumpDef:DB$ Pump | Defined$ Self | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ This creature gets -1/+1 until end of turn.
+Oracle:{W}: This creature gains vigilance until end of turn.\n{W}: This creature gains lifelink until end of turn.\n{W}: Return this creature to its owner's hand.\n{1}: This creature gets +1/-1 or -1/+1 until end of turn.

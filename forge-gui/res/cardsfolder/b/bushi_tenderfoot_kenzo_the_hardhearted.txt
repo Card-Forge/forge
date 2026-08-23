@@ -2,10 +2,10 @@ Name:Bushi Tenderfoot
 ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When a creature dealt damage by CARDNAME this turn dies, flip CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When a creature dealt damage by this creature this turn dies, flip this creature.
 SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
 AlternateMode:Flip
-Oracle:When a creature dealt damage by Bushi Tenderfoot this turn dies, flip Bushi Tenderfoot.
+Oracle:When a creature dealt damage by this creature this turn dies, flip this creature.
 
 ALTERNATE
 

@@ -8,14 +8,14 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STLook
 SVar:STLookPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any type to cast spells this way.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AlternateMode:Modal
-Oracle:This spell costs 1 less to cast for each 1 life your opponents have lost this turn.\nTarget opponent exiles the top three cards of their library. Until the end of your next turn, you may play those cards. If you cast a spell this way, mana of any type can be spent to cast it.
+Oracle:This spell costs {1} less to cast for each 1 life your opponents have lost this turn.\nTarget opponent exiles the top three cards of their library. Until the end of your next turn, you may play those cards. If you cast a spell this way, mana of any type can be spent to cast it.
 
 ALTERNATE
 
 Name:Sanguine Morass
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
-Oracle:Sanguine Morass enters tapped.\n{T}: Add {B} or {R}.
+Oracle:This land enters tapped.\n{T}: Add {B} or {R}.

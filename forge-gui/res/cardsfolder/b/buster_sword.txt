@@ -8,4 +8,4 @@ SVar:TrigDraw:DB$ Draw | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+YouOwn | ValidSA$ Spell.cmcLEX | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
 SVar:X:TriggerCount$DamageAmount
 SVar:BusterSwordCE:SVar:MustBeBlocked:AttackingPlayerConservative
-Oracle:Equipped creature gets +3/+2.\nWhenever equipped creature deals combat damage to a player, draw a card, then you may cast a spell from your hand with mana value less than or equal to that damage without paying its mana cost.
+Oracle:Equipped creature gets +3/+2.\nWhenever equipped creature deals combat damage to a player, draw a card, then you may cast a spell from your hand with mana value less than or equal to that damage without paying its mana cost.\nEquip {2}

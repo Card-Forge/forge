@@ -1,7 +1,7 @@
 Name:Burning Sands
 ManaCost:3 R R
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a creature dies, that creature's controller sacrifices a land.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a creature dies, that creature's controller sacrifices a land of their choice.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Land | Defined$ TriggeredCardController
 AI:RemoveDeck:Random
-Oracle:Whenever a creature dies, that creature's controller sacrifices a land.
+Oracle:Whenever a creature dies, that creature's controller sacrifices a land of their choice.

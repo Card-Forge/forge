@@ -4,4 +4,4 @@ Types:Enchantment
 PT:6/6
 A:AB$ DamageAll | Cost$ 1 R Sac<1/CARDNAME> | ValidCards$ Creature.tapped | ValidPlayers$ Player | NumDmg$ 3 | ValidDescription$ each tapped creature and each player. | SpellDescription$ It deals 3 damage to each tapped creature and each player.
 DeckHas:Ability$Sacrifice
-Oracle:{1}{R}, Sacrifice Blockbuster: It deals 3 damage to each tapped creature and each player.
+Oracle:{1}{R}, Sacrifice this enchantment: It deals 3 damage to each tapped creature and each player.

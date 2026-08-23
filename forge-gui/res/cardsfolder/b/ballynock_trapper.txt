@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Creature Kithkin Soldier
 PT:2/2
 A:AB$ Tap | Cost$ T | ValidTgts$ Creature | SpellDescription$ Tap target creature.
-T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a white spell, you may untap CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a white spell, you may untap this creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
-Oracle:{T}: Tap target creature.\nWhenever you cast a white spell, you may untap Ballynock Trapper.
+Oracle:{T}: Tap target creature.\nWhenever you cast a white spell, you may untap this creature.

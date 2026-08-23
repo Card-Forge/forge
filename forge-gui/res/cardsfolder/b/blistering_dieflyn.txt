@@ -3,5 +3,5 @@ ManaCost:3 R
 Types:Creature Imp
 PT:0/1
 K:Flying
-A:AB$ Pump | Cost$ BR | NumAtt$ +1 | Defined$ Self | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-Oracle:Flying\n{B/R}: Blistering Dieflyn gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ BR | NumAtt$ +1 | Defined$ Self | SpellDescription$ This creature gets +1/+0 until end of turn.
+Oracle:Flying\n{B/R}: This creature gets +1/+0 until end of turn.

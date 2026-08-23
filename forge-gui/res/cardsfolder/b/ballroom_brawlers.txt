@@ -2,8 +2,8 @@ Name:Ballroom Brawlers
 ManaCost:3 W W
 Types:Creature Human Warrior
 PT:3/5
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSelectTargetCreature | TriggerDescription$ Whenever CARDNAME attacks, CARDNAME and up to one other target creature you control both gain your choice of first strike or lifelink until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSelectTargetCreature | TriggerDescription$ Whenever this creature attacks, this creature and up to one other target creature you control both gain your choice of first strike or lifelink until end of turn.
 SVar:TrigSelectTargetCreature:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | ThisDefinedAndTgts$ Self | KWChoice$ First Strike,Lifelink | TgtPrompt$ Select up to one other target creature
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$LifeGain
-Oracle:Whenever Ballroom Brawlers attacks, Ballroom Brawlers and up to one other target creature you control both gain your choice of first strike or lifelink until end of turn.
+Oracle:Whenever this creature attacks, this creature and up to one other target creature you control both gain your choice of first strike or lifelink until end of turn.
