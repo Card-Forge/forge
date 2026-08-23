@@ -40,7 +40,16 @@ import java.util.*;
  * @version $Id: AbilityFactoryAlterLife.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
 
-public abstract class SpellAbilityEffect {
+public abstract class SpellAbilityEffect implements IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AfterDescription", "Amount", "Announce", "AtEOTCondition", "AtEOTDesc",
+        "ConditionDescription", "Defined", "DefinedExiler", "Duration",
+        "ExiledWithEffectSource", "ForEach", "Forecast", "GiftDescription",
+        "IncludeAllComponentCards", "Named", "ReplaceDyingCondition", "ReplaceDyingDefined",
+        "ReplaceDyingExiledWith", "ReplaceDyingValid", "ReplaceDyingZone", "ReturnAbility",
+        "ReturnValid", "SpellDescription", "StackDescription", "StartingWith",
+        "ThisDefinedAndTgts",
+    };
 
     public abstract void resolve(SpellAbility sa);
 

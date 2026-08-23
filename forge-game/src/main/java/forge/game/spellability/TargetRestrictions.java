@@ -28,6 +28,7 @@ import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.IHasForgeParams;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -42,7 +43,17 @@ import forge.util.TextUtil;
  * @author Forge
  * @version $Id$
  */
-public class TargetRestrictions {
+public class TargetRestrictions implements IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "MaxTotalTargetCMC", "MaxTotalTargetPower", "RandomNumTargets", "TargetMax",
+        "TargetMin", "TargetUnique", "TargetValidTargeting", "TargetingPlayer",
+        "TargetsAtRandom", "TargetsForEachPlayer", "TargetsWithDifferentCMC",
+        "TargetsWithDifferentControllers", "TargetsWithDifferentNames",
+        "TargetsWithEqualToughness", "TargetsWithSameCardType", "TargetsWithSameController",
+        "TargetsWithSameCreatureType", "TargetsWithoutSameCreatureType", "TgtPrompt",
+        "TgtZone", "ValidTgts", "ValidTgtsDesc",
+    };
+
     // Target has two things happening:
     // Targeting restrictions (Creature, Min/Maxm etc) which are true for this
     // What this Object is restricted to targeting
