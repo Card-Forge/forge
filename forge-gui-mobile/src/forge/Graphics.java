@@ -61,7 +61,7 @@ public class Graphics {
     private final ShaderProgram shaderPortal = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPortal);
     private final ShaderProgram shaderPixelateSimple = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateSimple);
 
-    private Texture dummyTexture = null;
+    private Texture dummyTexture = null, backdropTexture = null, grayTexture = null;
 
     public Graphics() {
         ShaderProgram.pedantic = false;
@@ -108,9 +108,9 @@ public class Graphics {
     }
 
     public void dispose() {
-        safeDispose(shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay,
-                shaderPixelate, shaderRipple, shaderPixelateWarp, shaderChromaticAbberation, shaderHueShift,
-                shaderRoundedRect, shaderRoundedRect2, shaderNoiseFade, shaderPortal, dummyTexture);
+        safeDispose(shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
+            shaderRipple, shaderPixelateWarp, shaderChromaticAbberation, shaderHueShift, shaderRoundedRect,
+            shaderRoundedRect2, shaderNoiseFade, shaderPortal, dummyTexture, backdropTexture, grayTexture);
     }
 
     public void safeDispose(Disposable... disposables) {
@@ -1574,15 +1574,27 @@ public class Graphics {
         return brightness > 155 ? Color.valueOf("#171717") : Color.valueOf("#fffffd");
     }
 
+    private Texture setTexture(Texture texture, Color color, float alphaComposite) {
+        if (texture != null)
+            return texture;
+        Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        P.setColor(color.r, color.g, color.b, alphaComposite);
+        P.drawPixel(0, 0);
+        texture = new Texture(P);
+        P.dispose();
+        return texture;
+    }
+
     public Texture getDummyTexture() {
-        if (dummyTexture == null) {
-            Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-            P.setColor(1f, 1f, 1f, 1f);
-            P.drawPixel(0, 0);
-            dummyTexture = new Texture(P);
-            P.dispose();
-        }
-        return dummyTexture;
+        return setTexture(dummyTexture, Color.WHITE, 1f);
+    }
+
+    public Texture getBackropTexture() {
+        return setTexture(backdropTexture, Color.BLACK, 0.5f);
+    }
+
+    public Texture getGrayTexture() {
+        return setTexture(grayTexture, Color.DARK_GRAY, 0.5f);
     }
 
     public static void setVideoMode(String videoMode) {
