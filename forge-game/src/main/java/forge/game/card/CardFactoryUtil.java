@@ -1205,7 +1205,7 @@ public class CardFactoryUtil {
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            sa.setSVar("CoststormCount", "Count$ThisTurnLandsPlayedAndSpellsCasted_Card.YouCtrl+!CastSaSource");
+            sa.setSVar("CoststormCount", "Count$DifferentManaValuesAmongSpellsAndLandsThisTurn_Card.YouCtrl+!CastSaSource");
 
             parsedTrigger.setOverridingAbility(sa);
 

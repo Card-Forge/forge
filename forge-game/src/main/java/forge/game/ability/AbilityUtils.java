@@ -2782,9 +2782,9 @@ public class AbilityUtils {
             }
         }
 		
-        // Count$ThisTurnLandsPlayedAndSpellsCasted <Valid> -- distinct mana values among cards matching
+        // Count$DifferentManaValuesAmongSpellsAndLandsThisTurn <Valid> -- distinct mana values among cards matching
         // <Valid> cast this turn, combined with lands you've played this turn. Built for the Coststorm keyword.
-        if (sq[0].startsWith("ThisTurnLandsPlayedAndSpellsCasted")) {
+        if (sq[0].startsWith("DifferentManaValuesAmongSpellsAndLandsThisTurn")) {
             final String[] workingCopy = paidparts[0].split("_");
             final String validFilter = workingCopy[1];
             final Set<Integer> manaValues = Sets.newHashSet();
