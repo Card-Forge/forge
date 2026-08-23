@@ -4,15 +4,15 @@ Types:Creature Whale
 PT:6/6
 K:Flash
 K:Ward:2
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless it's your turn.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This creature enters tapped unless it's your turn.
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPlayerTurn$ False
 AlternateMode:Adventure
-Oracle:Flash\nWard {2}\nHorned Loch-Whale enters tapped unless it's your turn.
+Oracle:Flash\nWard {2}\nThis creature enters tapped unless it's your turn.
 
 ALTERNATE
 
 Name:Lagoon Breach
 ManaCost:1 U
 Types:Instant Adventure
-A:SP$ ChangeZone | ValidTgts$ Creature.attacking+YouDontCtrl | TgtPrompt$ Select target attacking creature you don't control | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | StackDescription$ {p:TargetedOwner} puts {c:Targeted} on the top or bottom of their library. | SpellDescription$ The owner of target attacking creature you don't control puts it on the top or bottom of their library.
-Oracle:The owner of target attacking creature you don't control puts it on the top or bottom of their library.
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking+YouDontCtrl | TgtPrompt$ Select target attacking creature you don't control | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | StackDescription$ {p:TargetedOwner} puts {c:Targeted} on the top or bottom of their library. | SpellDescription$ The owner of target attacking creature you don't control puts it on their choice of the top or bottom of their library.
+Oracle:The owner of target attacking creature you don't control puts it on their choice of the top or bottom of their library.

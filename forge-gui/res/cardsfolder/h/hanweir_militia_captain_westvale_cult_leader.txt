@@ -2,10 +2,10 @@ Name:Hanweir Militia Captain
 ManaCost:1 W
 Types:Creature Human Soldier
 PT:2/2
-T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | IsPresent$ Creature.YouCtrl | PresentCompare$ GE4 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your upkeep, if you control four or more creatures, transform CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | IsPresent$ Creature.YouCtrl | PresentCompare$ GE4 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your upkeep, if you control four or more creatures, transform this creature.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
-Oracle:At the beginning of your upkeep, if you control four or more creatures, transform Hanweir Militia Captain.
+Oracle:At the beginning of your upkeep, if you control four or more creatures, transform this creature.
 
 ALTERNATE
 

@@ -2,6 +2,6 @@ Name:Hyrax Tower Scout
 ManaCost:2 G
 Types:Creature Human Scout
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters, untap target creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When this creature enters, untap target creature.
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature
-Oracle:When Hyrax Tower Scout enters, untap target creature.
+Oracle:When this creature enters, untap target creature.

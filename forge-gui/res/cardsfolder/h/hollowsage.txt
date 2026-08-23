@@ -2,6 +2,6 @@ Name:Hollowsage
 ManaCost:3 B
 Types:Creature Merfolk Wizard
 PT:2/2
-T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME becomes untapped, you may have target player discard a card.
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ Whenever this creature becomes untapped, you may have target player discard a card.
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose
-Oracle:Whenever Hollowsage becomes untapped, you may have target player discard a card.
+Oracle:Whenever this creature becomes untapped, you may have target player discard a card.

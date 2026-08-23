@@ -4,4 +4,4 @@ Types:Artifact Creature Scarecrow
 PT:1/1
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 AI:RemoveDeck:All
-Oracle:Sacrifice Heap Doll: Exile target card from a graveyard.
+Oracle:Sacrifice this creature: Exile target card from a graveyard.

@@ -5,4 +5,4 @@ PT:5/5
 K:Deathtouch
 T:Mode$ ChangesZone | ValidCard$ Creature.!token+Other | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever another nontoken creature dies, you may draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-Oracle:Deathtouch\nWhenever another nontoken creature dies, you may draw a card.
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhenever another nontoken creature dies, you may draw a card.

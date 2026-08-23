@@ -6,4 +6,4 @@ K:Prowess
 A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | SpellDescription$ It deals damage equal to its power to target creature or planeswalker.
 SVar:X:Sacrificed$CardPower
 DeckHas:Ability$Sacrifice
-Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\n{R}, Sacrifice Heartfire Immolator: It deals damage equal to its power to target creature or planeswalker.
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\n{R}, Sacrifice this creature: It deals damage equal to its power to target creature or planeswalker.

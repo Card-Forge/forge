@@ -2,7 +2,7 @@ Name:Halvar, God of Battle
 ManaCost:2 W W
 Types:Legendary Creature God
 PT:4/4
-S:Mode$ Continuous | Affected$ Creature.YouCtrl+enchanted,Creature.YouCtrl+equipped | AddKeyword$ Double Strike | Description$ Creatures you control that are enchanted or equipped gain double strike.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+enchanted,Creature.YouCtrl+equipped | AddKeyword$ Double Strike | Description$ Creatures you control that are enchanted or equipped have double strike.
 T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigTargetAuraEquip | OptionalDecider$ You | TriggerDescription$ At the beginning of each combat, you may attach target Aura or Equipment attached to a creature you control to target creature you control.
 SVar:TrigTargetAuraEquip:DB$ Pump | ValidTgts$ Equipment.AttachedTo Creature.YouCtrl,Aura.AttachedTo Creature.YouCtrl | TgtPrompt$ Select target Aura or Equipment attached to a creature you control | SubAbility$ DBAttach | StackDescription$ None
 SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
