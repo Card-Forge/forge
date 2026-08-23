@@ -80,10 +80,22 @@ public class ImageCache {
     // short prefixes to save memory
 
     private static final Set<String> _missingIconKeys = new HashSet<>();
+    // A single large zone view needs two entries per card - the decoded original and the
+    // scaled copy the panel paints - so 400 cannot hold even one. Treat that long-standing
+    // default as unset; any other value is one somebody chose.
+    private static final int LEGACY_DEFAULT_CACHE_SIZE = 400;
+    private static final int DEFAULT_CACHE_SIZE = 1500;
     private static final LoadingCache<String, BufferedImage> _CACHE = CacheBuilder.newBuilder()
-            .maximumSize(FModel.getPreferences().getPrefInt(FPref.UI_IMAGE_CACHE_MAXIMUM))
+            .maximumSize(cacheSize())
+            // soft values so memory pressure, not entry count, is what ultimately evicts
+            .softValues()
             .expireAfterAccess(15, TimeUnit.MINUTES)
             .build(new ImageLoader());
+
+    private static int cacheSize() {
+        final int configured = FModel.getPreferences().getPrefInt(FPref.UI_IMAGE_CACHE_MAXIMUM);
+        return configured == LEGACY_DEFAULT_CACHE_SIZE ? DEFAULT_CACHE_SIZE : configured;
+    }
     private static final BufferedImage _defaultImage;
     private static final BufferedImage _stars;
     private static final BufferedImage _inv_stars;
