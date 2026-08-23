@@ -42,7 +42,7 @@ import java.util.*;
 
 public abstract class SpellAbilityEffect {
 
-    public abstract void resolve(SpellAbility sa);
+    public void resolve(SpellAbility sa) {}
 
     protected String getStackDescription(final SpellAbility sa) {
         // Unless overridden, let the spell description also be the stack description
@@ -535,7 +535,6 @@ public abstract class SpellAbilityEffect {
 
     protected static void addForgetOnCastTrigger(final Card card, String valid) {
         String trig = "Mode$ SpellCast | TriggerZones$ Command | Static$ True | ValidCard$ " + valid;
-
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
         card.addTrigger(parsedTrigger);
@@ -557,7 +556,6 @@ public abstract class SpellAbilityEffect {
 
     protected static void addForgetOnPhasedInTrigger(final Card card) {
         String trig = "Mode$ PhaseIn | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
-
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
         card.addTrigger(parsedTrigger);
