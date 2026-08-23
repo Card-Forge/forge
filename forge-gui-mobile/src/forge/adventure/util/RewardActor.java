@@ -1522,6 +1522,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             tooltip_actor.setBounds(tooltip_actor.cImage.getX(), tooltip_actor.cImage.getY(), tooltip_actor.cImage.getPrefWidth(), tooltip_actor.cImage.getPrefHeight());
             tooltip_actor.cLabel.setX(Scene.getIntendedWidth() / 2f - tooltip_actor.width / 2);
             tooltip_actor.cLabel.setY(Scene.getIntendedHeight() / 2f - tooltip_actor.inset);
+            if (tooltip_actor.cBackDrop != null) {
+                tooltip_actor.cLabel.setY(Scene.getIntendedHeight() / 2f - tooltip_actor.inset * 2.5f);
+                tooltip_actor.cBackDrop.setX(tooltip_actor.cLabel.getX() - tooltip_actor.inset);
+                tooltip_actor.cBackDrop.setY(tooltip_actor.cLabel.getY() - tooltip_actor.inset * 2.85f);
+            }
             tooltip_actor.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
 
             float tipW = tooltip_actor.cImage.getPrefWidth();
