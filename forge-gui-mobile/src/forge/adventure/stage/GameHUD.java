@@ -137,13 +137,11 @@ public class GameHUD extends Stage {
                 if (MapStage.getInstance().isInMap()) {
                     if (MapStage.getInstance().isPaused())
                         return;
-                    MapStage.getInstance().getPlayerSprite().getMovementDirection().x += ((Touchpad) actor).getKnobPercentX();
-                    MapStage.getInstance().getPlayerSprite().getMovementDirection().y += ((Touchpad) actor).getKnobPercentY();
+                    MapStage.getInstance().setTouchKnobInput(((Touchpad) actor).getKnobPercentX(), ((Touchpad) actor).getKnobPercentY());
                 } else {
                     if (WorldStage.getInstance().isPaused())
                         return;
-                    WorldStage.getInstance().getPlayerSprite().getMovementDirection().x += ((Touchpad) actor).getKnobPercentX();
-                    WorldStage.getInstance().getPlayerSprite().getMovementDirection().y += ((Touchpad) actor).getKnobPercentY();
+                    WorldStage.getInstance().setTouchKnobInput(((Touchpad) actor).getKnobPercentX(), ((Touchpad) actor).getKnobPercentY());
                 }
             }
         });
@@ -280,6 +278,8 @@ public class GameHUD extends Stage {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         touchpad.setVisible(false);
+        MapStage.getInstance().setTouchKnobInput(0, 0);
+        WorldStage.getInstance().setTouchKnobInput(0, 0);
         MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         return super.touchUp(screenX, screenY, pointer, button);

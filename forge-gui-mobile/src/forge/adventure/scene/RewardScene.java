@@ -53,8 +53,6 @@ public class RewardScene extends UIScene {
         return object;
     }
 
-    private boolean showTooltips = false;
-
     public enum Type {
         Shop,
         Loot,

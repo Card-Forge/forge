@@ -2240,46 +2240,29 @@ public class CardFactoryUtil {
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
             inst.addReplacement(re);
-        } else if (keyword.startsWith("Flashback")) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
-            sb.append("| ValidStackSa$ Spell.Flashback+castKeyword | Description$ Flashback");
-
-            if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
-                final String[] k = keyword.split(":");
-                final Cost cost = new Cost(k[1], false);
-                sb.append(cost.isOnlyManaCost() ? " " : "—").append(cost.toSimpleString());
-                sb.append(cost.isOnlyManaCost() ? "" : ".");
-
-                String extraDesc =  k.length > 3 ? k[3] : "";
-                if (!extraDesc.isEmpty()) { // extra params added in GameActionUtil, desc added here
-                    sb.append(cost.isOnlyManaCost() ? ". " : " ").append(extraDesc);
-                }
+        } else if (keyword.startsWith("Beam me up") || keyword.startsWith("Flashback")
+                || keyword.startsWith("Harmonize")) {
+            // all three read "cast this from your graveyard for <cost>, then exile this spell",
+            // so they differ only in the name shown and the property the stack check matches on
+            final String kwName;
+            final String saProperty;
+            if (keyword.startsWith("Beam me up")) {
+                kwName = "Beam me up";
+                saProperty = "BeamMeUp";
+            } else if (keyword.startsWith("Flashback")) {
+                kwName = "Flashback";
+                saProperty = "Flashback";
+            } else {
+                kwName = "Harmonize";
+                saProperty = "Harmonize";
             }
 
-            sb.append(" (").append(inst.getReminderText()).append(")");
-
-            String repeffstr = sb.toString();
-
-            String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
-
-            SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
-
-            if (!intrinsic) {
-                saExile.setIntrinsic(false);
-            }
-
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
-
-            re.setOverridingAbility(saExile);
-
-            inst.addReplacement(re);
-        } else if (keyword.startsWith("Harmonize")) {
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
-            sb.append("| ValidStackSa$ Spell.Harmonize+castKeyword | Description$ Harmonize");
+            sb.append("| ValidStackSa$ Spell.").append(saProperty).append("+castKeyword");
+            sb.append(" | Description$ ").append(kwName);
 
-            if (keyword.contains(":")) {
+            if (keyword.contains(":")) { // K:<keyword>:Cost:ExtraParams:ExtraDescription
                 final String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 sb.append(cost.isOnlyManaCost() ? " " : "—").append(cost.toSimpleString());
