@@ -4,6 +4,6 @@ Types:Creature Bird Spirit
 PT:3/2
 K:Flash
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Planeswalker.Yanling+YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Yanling planeswalker.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Planeswalker.Yanling+YouCtrl | Description$ This creature gets +1/+1 as long as you control a Yanling planeswalker.
 SVar:BuffedBy:Yanling
-Oracle:Flash (You may cast this card any time you could cast an instant.)\nFlying\nCelestial Messenger gets +1/+1 as long as you control a Yanling planeswalker.
+Oracle:Flash (You may cast this card any time you could cast an instant.)\nFlying\nThis creature gets +1/+1 as long as you control a Yanling planeswalker.

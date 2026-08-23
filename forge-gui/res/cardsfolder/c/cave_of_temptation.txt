@@ -6,4 +6,4 @@ A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any c
 A:AB$ PutCounter | Cost$ 4 T Sac<1/CARDNAME> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on target creature. Activate only as a sorcery.
 AI:RemoveDeck:All
 DeckHas:Ability$Counters
-Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{4}, {T}, Sacrifice Cave of Temptation: Put two +1/+1 counters on target creature. Activate only as a sorcery.
+Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{4}, {T}, Sacrifice this land: Put two +1/+1 counters on target creature. Activate only as a sorcery.

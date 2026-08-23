@@ -3,5 +3,5 @@ ManaCost:2 B
 Types:Creature Elemental Skeleton
 PT:1/1
 K:Wither
-A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
-Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\n{1}{B}: Regenerate Cinderbones.
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate this creature.
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\n{1}{B}: Regenerate this creature.

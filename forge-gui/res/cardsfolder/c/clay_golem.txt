@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Creature Golem
 PT:4/4
 A:AB$ PutCounter | Cost$ 6 RollDice<1/8/X> | Monstrosity$ X | AILogic$ FromDiceRoll | StackDescription$ SpellDescription | SpellDescription$ Monstrosity X, where X is the result. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)
-T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Berserk — When CARDNAME becomes monstrous, destroy target permanent.
+T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Berserk — When this creature becomes monstrous, destroy target permanent.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent
 DeckHas:Ability$Counters
-Oracle:{6}, Roll a d8: Monstrosity X, where X is the result. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nBerserk — When Clay Golem becomes monstrous, destroy target permanent.
+Oracle:{6}, Roll a d8: Monstrosity X, where X is the result. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nBerserk — When this creature becomes monstrous, destroy target permanent.

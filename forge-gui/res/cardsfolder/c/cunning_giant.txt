@@ -4,4 +4,4 @@ Types:Creature Giant
 PT:4/4
 K:If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.
 AI:RemoveDeck:All
-Oracle:If Cunning Giant is unblocked, you may have it assign its combat damage to a creature defending player controls.
+Oracle:If this creature is unblocked, you may have it assign its combat damage to a creature defending player controls.

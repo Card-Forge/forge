@@ -3,5 +3,5 @@ ManaCost:4 U U
 Types:Creature Sphinx
 PT:5/5
 K:Flying
-A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SpellDescription$ CARDNAME's owner shuffles it into their library.
-Oracle:Flying\n{U}: Cerulean Sphinx's owner shuffles it into their library.
+A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SpellDescription$ This creature's owner shuffles it into their library.
+Oracle:Flying\n{U}: This creature's owner shuffles it into their library.

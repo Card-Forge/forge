@@ -4,4 +4,4 @@ Types:Artifact Creature Construct
 PT:3/3
 Draft:Draft CARDNAME face up.
 Draft:As you draft a card, you may draft an additional card from that booster pack. If you do, put CARDNAME into that booster pack.
-Oracle:Draft Cogwork Librarian face up.\nAs you draft a card, you may draft an additional card from that booster pack. If you do, put Cogwork Librarian into that booster pack.
+Oracle:Draft this card face up.\nAs you draft a card, you may draft an additional card from that booster pack. If you do, put this card into that booster pack.

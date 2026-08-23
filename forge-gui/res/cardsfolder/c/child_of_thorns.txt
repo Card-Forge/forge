@@ -3,4 +3,4 @@ ManaCost:G
 Types:Creature Spirit
 PT:1/1
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
-Oracle:Sacrifice Child of Thorns: Target creature gets +1/+1 until end of turn.
+Oracle:Sacrifice this creature: Target creature gets +1/+1 until end of turn.

@@ -3,7 +3,7 @@ ManaCost:2 R G W
 Types:Legendary Creature Human Soldier Mercenary
 PT:4/4
 K:Haste
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ Whenever NICKNAME enters, attach up to one target Equipment you control to it.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ When NICKNAME enters, attach up to one target Equipment you control to it.
 SVar:TrigAttach:DB$ Attach | Defined$ Self | Object$ Targeted | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select up to one target Equipment you control | TargetMin$ 0 | TargetMax$ 1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, draw a card for each equipped attacking creature you control. Then if NICKNAME has power 7 or greater, create two Treasure tokens.
 SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBTreasure

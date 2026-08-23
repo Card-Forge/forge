@@ -2,10 +2,10 @@ Name:Cloistered Youth
 ManaCost:1 W
 Types:Creature Human
 PT:1/1
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may transform CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may transform this creature.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
-Oracle:At the beginning of your upkeep, you may transform Cloistered Youth.
+Oracle:At the beginning of your upkeep, you may transform this creature.
 
 ALTERNATE
 

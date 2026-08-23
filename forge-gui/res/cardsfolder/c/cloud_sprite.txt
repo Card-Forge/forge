@@ -3,5 +3,5 @@ ManaCost:U
 Types:Creature Faerie
 PT:1/1
 K:Flying
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
-Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nCloud Sprite can block only creatures with flying.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ This creature can block only creatures with flying.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nThis creature can block only creatures with flying.

@@ -1,6 +1,6 @@
 Name:Crack the Earth
 ManaCost:R
 Types:Sorcery Arcane
-A:SP$ Sacrifice | SacValid$ Permanent | Defined$ Player | SpellDescription$ Each player sacrifices a permanent.
+A:SP$ Sacrifice | SacValid$ Permanent | Defined$ Player | SpellDescription$ Each player sacrifices a permanent of their choice.
 AI:RemoveDeck:Random
-Oracle:Each player sacrifices a permanent.
+Oracle:Each player sacrifices a permanent of their choice.

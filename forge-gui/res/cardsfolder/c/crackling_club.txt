@@ -6,4 +6,4 @@ SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | Description$ Enchanted creature gets +1/+0.
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | NumDmg$ 1 | SpellDescription$ It deals 1 damage to target creature.
 DeckHas:Ability$Sacrifice
-Oracle:Enchant creature\nEnchanted creature gets +1/+0.\nSacrifice Crackling Club: It deals 1 damage to target creature.
+Oracle:Enchant creature\nEnchanted creature gets +1/+0.\nSacrifice this Aura: It deals 1 damage to target creature.

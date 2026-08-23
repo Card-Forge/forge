@@ -2,7 +2,7 @@ Name:Coward
 ManaCost:1 R
 Types:Sorcery
 A:SP$ Animate | ValidTgts$ Creature | HiddenKeywords$ CARDNAME can't block. | Types$ Coward | IsCurse$ True | SubAbility$ DBTimeTravel | StackDescription$ REP Target creature_{c:Targeted} | SpellDescription$ Target creature can't block this turn and becomes a Coward in addition to its other types until end of turn.
-SVar:DBTimeTravel:DB$ TimeTravel | SpellDescription$ Time Travel.
+SVar:DBTimeTravel:DB$ TimeTravel | SpellDescription$ Time travel.
 AlternateMode:Split
 Oracle:Target creature can't block this turn and becomes a Coward in addition to its other types until end of turn.\nTime travel.
 

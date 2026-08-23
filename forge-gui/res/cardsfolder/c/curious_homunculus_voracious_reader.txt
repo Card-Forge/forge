@@ -3,11 +3,11 @@ ManaCost:1 U
 Types:Creature Homunculus
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add {C}. Spend this mana only to cast an instant or sorcery spell.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Instant.YouOwn,Sorcery.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Instant.YouOwn,Sorcery.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform this creature.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 DeckHints:Type$Instant|Sorcery & Ability$Graveyard
 AlternateMode:DoubleFaced
-Oracle:{T}: Add {C}. Spend this mana only to cast an instant or sorcery spell.\nAt the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform Curious Homunculus.
+Oracle:{T}: Add {C}. Spend this mana only to cast an instant or sorcery spell.\nAt the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform this creature.
 
 ALTERNATE
 

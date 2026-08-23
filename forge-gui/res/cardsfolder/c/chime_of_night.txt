@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, destroy target nonblack creature.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDestroy | TriggerDescription$ When this Aura is put into a graveyard from the battlefield, destroy target nonblack creature.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature
-Oracle:Enchant creature\nWhen Chime of Night is put into a graveyard from the battlefield, destroy target nonblack creature.
+Oracle:Enchant creature\nWhen this Aura is put into a graveyard from the battlefield, destroy target nonblack creature.

@@ -2,6 +2,6 @@ Name:City of Brass
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
-T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes tapped, it deals 1 damage to you.
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever this land becomes tapped, it deals 1 damage to you.
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
-Oracle:Whenever City of Brass becomes tapped, it deals 1 damage to you.\n{T}: Add one mana of any color.
+Oracle:Whenever this land becomes tapped, it deals 1 damage to you.\n{T}: Add one mana of any color.
