@@ -22,6 +22,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -131,6 +132,7 @@ public class ManaAi extends SpellAbilityAi {
     public static boolean doManaRitualLogic(Player ai, SpellAbility sa, boolean fromTrigger) {
         final Card host = sa.getHostCard();
         final String logic = sa.getParamOrDefault("AILogic", "");
+        final boolean manaBattery = logic.startsWith("ManaRitualBattery");
 
         if (sa.usesTargeting()) { // Rousing Refrain
             PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -144,13 +146,18 @@ public class ManaAi extends SpellAbilityAi {
                 return true;
             }
         }
-        
+
         CardCollection manaSources = ComputerUtilMana.getAvailableManaSources(ai, true);
-        int numManaSrcs = manaSources.size();
+        int baseMana = manaSources.size();
+        if (manaBattery) {
+            manaSources.remove(host);
+            baseMana = manaSources.size() + ai.getManaPool().totalMana();
+        }
         int manaReceived = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
         manaReceived *= sa.getParam("Produced").split(" ").length;
 
         int selfCost = sa.getRootAbility().getPayCosts().getCostMana() != null ? sa.getRootAbility().getPayCosts().getCostMana().getMana().getCMC() : 0;
+        baseMana -= selfCost;
 
         String produced = sa.getParam("Produced");
         byte producedColor = produced.equals("Any") ? MagicColor.ALL_COLORS : MagicColor.fromName(produced);
@@ -162,12 +169,13 @@ public class ManaAi extends SpellAbilityAi {
             numCounters = host.getCounters(ctrType);
             manaReceived = numCounters;
             if (logic.startsWith("ManaRitualBattery.")) {
-                manaSurplus = Integer.parseInt(logic.substring(18)); // adds an extra mana even if no counters removed
+                manaSurplus = Integer.parseInt(logic.substring("ManaRitualBattery.".length()));
+                // adds an extra mana even if no counters removed
                 manaReceived += manaSurplus;
             }
         }
 
-        int searchCMC = numManaSrcs - selfCost + manaReceived;
+        int searchCMC = baseMana + manaReceived;
 
         if ("X".equals(sa.getParam("Produced"))) {
             String x = host.getSVar("X");
@@ -191,7 +199,7 @@ public class ManaAi extends SpellAbilityAi {
             ManaCost cost = testSa.getPayCosts().getTotalMana();
             boolean canPayWithAvailableColors = cost.canBePaidWithAvailable(ColorSet.fromNames(
                     ComputerUtilCost.getAvailableManaColors(ai, (List<Card>)null)).getColor());
-            
+
             if (cost.getCMC() == 0 && cost.countX() == 0) {
                 // no mana cost, no need to activate this SA then (additional mana not needed)
                 continue;
@@ -235,15 +243,111 @@ public class ManaAi extends SpellAbilityAi {
                         CardPredicates.lessCMC(searchCMC),
                         CardPredicates.isColorless().or(CardPredicates.isColor(producedColor))));
 
-        if (logic.startsWith("ManaRitualBattery")) {
+        if (castableSpells.isEmpty()) {
+            return false;
+        }
+
+        if (manaBattery) {
             // Don't remove more counters than would be needed to cast the more expensive thing we want to cast,
             // otherwise the AI grabs too many counters at once.
-            int maxCtrs = Aggregates.max(castableSpells, Card::getCMC) - manaSurplus;
-            sa.setXManaCostPaid(Math.min(numCounters, maxCtrs));
+            int countersNeeded = Aggregates.max(castableSpells, Card::getCMC) - baseMana - manaSurplus;
+            if (countersNeeded <= 0) {
+                return false;
+            }
+            sa.setXManaCostPaid(Math.min(numCounters, countersNeeded));
         }
 
         // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
-        return castableSpells.size() > 0;
+        return true;
+    }
+
+    // Optional untap choices happen before the main phase, so forecast a useful spell without
+    // changing the battery's X payment. The activation path chooses X from the actual game state.
+    public static boolean shouldUntapManaBattery(Player ai, SpellAbility manaAbility) {
+        final Card host = manaAbility.getHostCard();
+        final String logic = manaAbility.getParamOrDefault("AILogic", "");
+        if (!logic.startsWith("ManaRitualBattery")
+                || !"Count$xPaid".equals(host.getSVar("X"))
+                || !manaAbility.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
+            return false;
+        }
+
+        final CounterType counterType = manaAbility.getPayCosts()
+                .getCostPartByType(CostRemoveCounter.class).counter;
+        final int storedMana = host.getCounters(counterType);
+        if (storedMana <= 0) {
+            return false;
+        }
+
+        final int baseMana = ComputerUtilMana.getAvailableManaEstimate(ai, false,
+                ability -> isPotentialMainPhaseManaSource(ai, ability.getHostCard())
+                        && !isManaRitualBatteryAbility(ability));
+        final CardCollection futureManaSources = ComputerUtilMana.getAvailableManaSources(ai, false);
+        futureManaSources.removeIf(card -> !isPotentialMainPhaseManaSource(ai, card)
+                || !hasNonBatteryManaAbility(card));
+
+        final String produced = manaAbility.getParam("Produced");
+        final byte producedColor = produced.equals("Any")
+                ? MagicColor.ALL_COLORS : MagicColor.fromName(produced);
+        byte availableManaColors = ColorSet.fromNames(
+                ComputerUtilCost.getAvailableManaColors(ai, futureManaSources)).getColor();
+        availableManaColors |= producedColor;
+
+        final List<SpellAbility> handAbilities = new ArrayList<>();
+        for (Card card : ai.getCardsIn(ZoneType.Hand)) {
+            handAbilities.addAll(card.getSpellAbilities());
+        }
+
+        final String restrictValid = manaAbility.getParamOrDefault("RestrictValid", "Card");
+        final int manaWithStorage = baseMana + storedMana;
+        for (SpellAbility spell : ComputerUtilAbility.getOriginalAndAltCostAbilities(handAbilities, ai)) {
+            final ManaCost cost = spell.getPayCosts().getTotalMana();
+            if (!spell.isSpell() || spell.getHostCard().isInstant()
+                    || (cost.getCMC() == 0 && cost.countX() == 0)
+                    || (cost.getColorProfile() != 0 && !cost.canBePaidWithAvailable(availableManaColors))
+                    || ComputerUtilAbility.getAbilitySourceName(spell)
+                            .equals(ComputerUtilAbility.getAbilitySourceName(manaAbility))
+                    || spell.hasParam("AINoRecursiveCheck")
+                    || !CardPredicates.restriction(restrictValid.split(","), ai, host, manaAbility)
+                            .test(spell.getHostCard())) {
+                continue;
+            }
+
+            final int spellCost = cost.getCMC();
+            if (spellCost > baseMana && spellCost <= manaWithStorage
+                    && isUsefulNextMainPhaseSpell(ai, spell)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isPotentialMainPhaseManaSource(Player ai, Card card) {
+        return card.isInPlay() && !card.isPhasedOut()
+                && (!card.isCreature() || !card.isSick())
+                && (!card.isTapped() || card.canUntap(ai, true));
+    }
+
+    private static boolean hasNonBatteryManaAbility(Card card) {
+        for (SpellAbility manaAbility : card.getManaAbilities()) {
+            if (!isManaRitualBatteryAbility(manaAbility)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isManaRitualBatteryAbility(SpellAbility manaAbility) {
+        return manaAbility.getParamOrDefault("AILogic", "").startsWith("ManaRitualBattery");
+    }
+
+    private static boolean isUsefulNextMainPhaseSpell(Player ai, SpellAbility spell) {
+        final SpellAbility noCost = spell.copyWithNoManaCost();
+        if (noCost == null) {
+            return false;
+        }
+        noCost.setActivatingPlayer(ai);
+        return SpellApiToAi.Converter.get(noCost).doTriggerNoCostWithSubs(ai, noCost, false).willingToPlay();
     }
 
     private boolean improvesPosition(Player ai, SpellAbility sa) {

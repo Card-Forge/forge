@@ -46,6 +46,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ComputerUtilMana {
@@ -1293,9 +1294,14 @@ public class ComputerUtilMana {
         return getAvailableManaEstimate(p, true);
     }
     public static int getAvailableManaEstimate(final Player p, final boolean checkPlayable) {
+        return getAvailableManaEstimate(p, checkPlayable, ma -> true);
+    }
+    public static int getAvailableManaEstimate(final Player p, final boolean checkPlayable,
+            final Predicate<SpellAbility> manaAbilityFilter) {
         int availableMana = 0;
 
-        final List<Card> srcs = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), c -> !c.getManaAbilities().isEmpty());
+        final List<Card> srcs = CardLists.filter(p.getCardsIn(ZoneType.Battlefield),
+                c -> !c.getManaAbilities().isEmpty());
 
         int maxProduced = 0;
         int producedWithCost = 0;
@@ -1305,6 +1311,9 @@ public class ComputerUtilMana {
             maxProduced = 0;
 
             for (SpellAbility ma : src.getManaAbilities()) {
+                if (!manaAbilityFilter.test(ma)) {
+                    continue;
+                }
                 ma.setActivatingPlayer(p);
                 if (!checkPlayable || ma.canPlay()) {
                     int costsToActivate = ma.getPayCosts().getCostMana() != null ? ma.getPayCosts().getCostMana().convertAmount() : 0;
