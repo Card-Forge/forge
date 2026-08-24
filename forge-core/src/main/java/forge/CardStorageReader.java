@@ -19,10 +19,12 @@ package forge;
 
 import com.google.common.io.Files;
 import forge.card.CardRules;
+import forge.card.ICardFace;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.io.*;
@@ -68,7 +70,8 @@ public class CardStorageReader {
     private transient File cardsfolder;
 
     private transient ZipFile zip;
-    private transient Map<String, ZipEntry> zipEntriesMap;
+    private transient NavigableMap<String, ZipEntry> zipEntriesByBaseName;
+    private transient NavigableMap<String, File> cardFilesByBaseName;
     private final transient Charset charset;
 
     private final boolean loadCardsLazily;
@@ -102,6 +105,10 @@ public class CardStorageReader {
 
         this.charset = Charset.forName(CardStorageReader.DEFAULT_CHARSET_NAME);
     } // CardReader()
+
+    boolean isLoadingCardsLazily() {
+        return loadCardsLazily;
+    }
 
     private List<CardRules> loadCardsInRange(final List<File> files, final int from, final int to) {
         final CardRules.Reader rulesReader = new CardRules.Reader();
@@ -148,78 +155,131 @@ public class CardStorageReader {
             }
             chars[charIndex++] = c;
         }
+        if (charIndex == 0) {
+            return "";
+        }
         if (chars[charIndex - 1] == '_') {
             charIndex--;
         }
         return new String(chars, 0, charIndex);
     }
-    
-    private ZipEntry findZipEntryForCard(String transformedName) {
-        if (zip == null) {
-            return null;
-        }
 
-        if (zipEntriesMap == null) {
-            zipEntriesMap = new HashMap<>();
+    private synchronized NavigableMap<String, ZipEntry> getZipEntriesByBaseName() {
+        if (zipEntriesByBaseName == null) {
+            final TreeMap<String, ZipEntry> index = new TreeMap<>();
             for (ZipEntry entry : getZipEntries()) {
-                zipEntriesMap.put(entry.getName(), entry);
+                index.put(baseName(entry.getName()), entry);
             }
+            zipEntriesByBaseName = index;
         }
-
-        transformedName = transformedName.charAt(0) + "/" + transformedName;
-        ZipEntry entry = zipEntriesMap.get(transformedName + CardStorageReader.CARD_FILE_DOT_EXTENSION);
-        if (entry == null) {
-            // Double faced cards file naming convention currently has both names - so try to prefix match.
-            // TODO: Consider changing the naming convention for DFCs.
-            for (String fileName : zipEntriesMap.keySet()) {
-                if (fileName.startsWith(transformedName)) {
-                    entry = zipEntriesMap.get(fileName);
-                    break;
-                }
-            }
-        }
-        return entry;
+        return zipEntriesByBaseName;
     }
-    
-    private File findFileForCard(String transformedName) {
-        String folder = cardsfolder.getAbsolutePath() + "/" + transformedName.charAt(0);
-        File file = new File(folder + "/" + transformedName + CardStorageReader.CARD_FILE_DOT_EXTENSION);
-        if (!file.exists()) {
-            file = null;
-            // Double faced cards file naming convention currently has both names - so try to prefix match.
-            // TODO: Consider changing the naming convention for DFCs.
-            String[] fileNames = new File(folder).list();
-            if (fileNames != null) {
-                for (String fileName : new File(folder).list()) {
-                    if (fileName.startsWith(transformedName)) {
-                        file = new File(folder, fileName);
-                        break;
-                    }
-                }
+
+    private synchronized NavigableMap<String, File> getCardFilesByBaseName() {
+        if (cardFilesByBaseName == null) {
+            final TreeMap<String, File> index = new TreeMap<>();
+            for (File file : collectCardFiles(new ArrayList<>(), cardsfolder)) {
+                index.put(baseName(file.getName()), file);
+            }
+            cardFilesByBaseName = index;
+        }
+        return cardFilesByBaseName;
+    }
+
+    private static String baseName(String path) {
+        final int slash = path.lastIndexOf('/');
+        final String name = slash < 0 ? path : path.substring(slash + 1);
+        return name.endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION)
+                ? name.substring(0, name.length() - CardStorageReader.CARD_FILE_DOT_EXTENSION.length())
+                : name;
+    }
+
+    private static <T> List<T> findCandidates(NavigableMap<String, T> index, String transformedName) {
+        final List<T> candidates = new ArrayList<>();
+        final T exact = index.get(transformedName);
+        if (exact != null) {
+            candidates.add(exact);
+        }
+        final String prefix = transformedName + "_";
+        for (Map.Entry<String, T> e : index.tailMap(prefix, true).entrySet()) {
+            if (!e.getKey().startsWith(prefix)) {
+                break;
+            }
+            candidates.add(e.getValue());
+        }
+        return candidates;
+    }
+
+    private boolean rulesMatchName(CardRules rules, String transformedName) {
+        if (transformedName.equals(transformName(StringUtils.stripAccents(rules.getName())))) {
+            return true;
+        }
+        for (ICardFace face : rules.getAllFaces()) {
+            if (transformedName.equals(transformName(StringUtils.stripAccents(face.getName())))) {
+                return true;
             }
         }
-        return file;
+        return false;
     }
 
     public final CardRules attemptToLoadCard(String cardName) {
-        String transformedName = transformName(cardName);
-        CardRules rules = null;
-
-        // TODO: Should CardRules.Reader object be cached?
-        ZipEntry entry = findZipEntryForCard(transformedName);
-        if (entry != null) {
-            rules = loadCard(new CardRules.Reader(), entry);
-        } else {
-            File file = findFileForCard(transformedName);
-            if (file != null) {
-                rules = loadCard(new CardRules.Reader(), file);
-            }
+        final String transformedName = transformName(StringUtils.stripAccents(cardName));
+        if (transformedName.isEmpty()) {
+            return null;
         }
 
-        return rules;
+        final CardRules.Reader rulesReader = new CardRules.Reader();
+        if (zip != null) {
+            for (ZipEntry entry : findCandidates(getZipEntriesByBaseName(), transformedName)) {
+                final CardRules rules = loadCard(rulesReader, entry);
+                if (rulesMatchName(rules, transformedName)) {
+                    return rules;
+                }
+            }
+        }
+        for (File file : findCandidates(getCardFilesByBaseName(), transformedName)) {
+            final CardRules rules = loadCard(rulesReader, file);
+            if (rulesMatchName(rules, transformedName)) {
+                return rules;
+            }
+        }
+        if (zip != null) {
+            for (ZipEntry entry : findFaceCandidates(getZipEntriesByBaseName(), transformedName)) {
+                final CardRules rules = loadCard(rulesReader, entry);
+                if (rulesMatchName(rules, transformedName)) {
+                    return rules;
+                }
+            }
+        }
+        for (File file : findFaceCandidates(getCardFilesByBaseName(), transformedName)) {
+            final CardRules rules = loadCard(rulesReader, file);
+            if (rulesMatchName(rules, transformedName)) {
+                return rules;
+            }
+        }
+        return null;
+    }
+
+    private static <T> List<T> findFaceCandidates(NavigableMap<String, T> index, String transformedName) {
+        final String marker = "_" + transformedName;
+        final List<T> candidates = new ArrayList<>();
+        for (Map.Entry<String, T> e : index.entrySet()) {
+            final String key = e.getKey();
+            if (!key.startsWith(transformedName) && key.contains(marker)) {
+                candidates.add(e.getValue());
+            }
+        }
+        return candidates;
     }
 
     public final Iterable<CardRules> loadCards() {
+        if (loadCardsLazily) {
+            return Collections.emptyList();
+        }
+        return readAllCards();
+    }
+
+    public final Iterable<CardRules> readAllCards() {
         final Localizer localizer = Localizer.getInstance();
 
         progressObserver.setOperationName(localizer.getMessage("splash.loading.examining-cards"), true);
@@ -230,10 +290,6 @@ public class CardStorageReader {
         final Set<CardRules> result;
         result = new TreeSet<>(Comparator.comparing(CardRules::getNormalizedName, String.CASE_INSENSITIVE_ORDER));
 
-        if (loadCardsLazily) {
-            return result;
-        }
- 
         final List<File> allFiles = collectCardFiles(new ArrayList<>(), this.cardsfolder);
         if (!allFiles.isEmpty()) {
             int fileParts = zip == null ? NUMBER_OF_PARTS : 1 + NUMBER_OF_PARTS / 3;

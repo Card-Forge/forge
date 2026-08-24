@@ -533,6 +533,10 @@ public final class CardRules implements ICardCharacteristics {
         return this.placeholderFaces != null;
     }
 
+    public Collection<String> getPlaceholderFaceNames() {
+        return placeholderFaces == null ? Collections.emptyList() : placeholderFaces.values();
+    }
+
     void supplyPlaceholderFaces(Map<String, ICardFace> facesByName) {
         if(this.placeholderFaces == null)
             return;

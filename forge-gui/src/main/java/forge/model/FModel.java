@@ -193,9 +193,11 @@ public final class FModel {
         loadDynamicGamedata();
 
         // Load card database
-        // Lazy loading currently disabled
+        // Custom cards and tokens always load eagerly: StaticData.attemptToLoadCard only
+        // consults the main card reader, so a lazy custom reader would never be read.
+        final boolean loadCardsLazily = getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY);
         reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
-                false);
+                loadCardsLazily);
         tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
                 false);
 
