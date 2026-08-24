@@ -3439,10 +3439,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         for (SpellAbility sa : getSpellAbilities()) {
-            // morph up and disguise up are not part of the card
-            if (sa.isMorphUp() || sa.isDisguiseUp()) {
-                continue;
-            }
             // while Adventure and Omen are part of Secondary
             if ((sa.isAdventure() || sa.isOmen()) && !getCurrentStateName().equals(sa.getCardStateName())) {
                 continue;
