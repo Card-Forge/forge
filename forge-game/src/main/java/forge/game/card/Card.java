@@ -3462,10 +3462,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             ck.applySpellAbility(list);
         }
 
-        // add Facedown abilities from Original state but only if this state is face down
-        // need CardStateView#getState or might crash in StackOverflow
-        if (isInPlay()) {
-        } else if (hasState(CardStateName.Secondary) && state.getStateName() == CardStateName.Original) {
+        if (!isInPlay() && hasState(CardStateName.Secondary) && state.getStateName() == CardStateName.Original) {
             // Adventure and Omen may only be cast not from Battlefield
             list.addAll(getState(CardStateName.Secondary).getSpellAbilities());
         }
@@ -3831,15 +3828,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         getView().setPlayerMayLook(result);
     }
 
-    public final void updateMayPlay() {
-        PlayerCollection result = new PlayerCollection();
-        for (CardPlayOption o : mayPlay.values()) {
-            if (o.grantsZonePermissions())
-                result.add(o.getPlayer());
-        }
-        getView().setMayPlayPlayers(result);
-    }
-
     public final CardPlayOption mayPlay(final StaticAbility sta) {
         if (sta == null) {
             return null;
@@ -3858,11 +3846,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void setMayPlay(final Player player, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
         this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
-        this.updateMayPlay();
     }
     public final void removeMayPlay(final StaticAbility sta) {
         this.mayPlay.remove(sta);
-        this.updateMayPlay();
     }
     public final Map<StaticAbility, CardPlayOption> getMayPlay() {
         return Maps.newHashMap(mayPlay);
@@ -7470,8 +7456,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     }
                 }
             }
-            if (oState.getType().isCreature() && oState.getManaCost() != null && !oState.getManaCost().isNoCost())
-            {
+            if (oState.getType().isCreature() && oState.getManaCost() != null && !oState.getManaCost().isNoCost()) {
                 if (isManifested()) {
                     abilities.add(oState.getManifestUp());
                 }
