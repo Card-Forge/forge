@@ -5,10 +5,14 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitPredicates;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.cost.Cost;
+import forge.game.cost.CostPayment;
 import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostTap;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
@@ -289,14 +293,13 @@ public class ManaAi extends SpellAbilityAi {
                 continue;
             }
 
-            if (manaSurplus == 0 && canPayWithManaBattery(
-                    ai, manaAbility, spell, 0, 0, forecast)) {
+            if (manaSurplus == 0 && canPayWithManaBattery(ai, manaAbility, spell, 0, forecast)) {
                 continue;
             }
 
             final int firstCounter = manaSurplus > 0 ? 0 : 1;
             for (int counters = firstCounter; counters <= storedCounters; counters++) {
-                if (canPayWithManaBattery(ai, manaAbility, spell, counters, manaSurplus, forecast)) {
+                if (canPayWithManaBattery(ai, manaAbility, spell, counters, forecast)) {
                     return counters;
                 }
             }
@@ -305,15 +308,10 @@ public class ManaAi extends SpellAbilityAi {
     }
 
     private static boolean canPayWithManaBattery(Player ai, SpellAbility manaAbility, SpellAbility spell,
-            int counters, int manaSurplus, boolean forecast) {
+            int counters, boolean forecast) {
         final ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(
                 spell.getPayCosts(), spell, ai, true, 0, false);
-        final String produced = manaAbility.getParam("Produced");
-        for (int i = 0; i < counters + manaSurplus && !cost.isPaid(); i++) {
-            for (String mana : produced.split(" ")) {
-                cost.ai_payMana(mana, ai.getManaPool());
-            }
-        }
+        payManaBatteryIntoCost(ai, manaAbility, spell, cost, counters);
         if (cost.isPaid()) {
             return true;
         }
@@ -322,13 +320,53 @@ public class ManaAi extends SpellAbilityAi {
         return ComputerUtilMana.canPayManaCost(cost, spell, ai, false, !forecast,
                 ability -> ability.getHostCard() != host
                         && !ability.getParamOrDefault("AILogic", "").startsWith("ManaRitualBattery")
-                        && (!forecast || isPotentialMainPhaseManaSource(ai, ability.getHostCard())));
+                        && (!forecast || isPotentialMainPhaseManaAbility(ai, ability)));
     }
 
-    private static boolean isPotentialMainPhaseManaSource(Player ai, Card card) {
-        return card.isInPlay() && !card.isPhasedOut()
-                && (!card.isCreature() || !card.isSick())
-                && (!card.isTapped() || card.canUntap(ai, true));
+    private static void payManaBatteryIntoCost(Player ai, SpellAbility manaAbility, SpellAbility spell,
+            ManaCostBeingPaid cost, int counters) {
+        final SpellAbility predictedAbility = manaAbility.copy(ai);
+        if (predictedAbility == null) {
+            return;
+        }
+        predictedAbility.setXManaCostPaid(counters);
+        final ManaCostShard shard = cost.getShardToPayByPriority(
+                cost.getDistinctShards(), ColorSet.WUBRG.getColor());
+        if (shard == null) {
+            return;
+        }
+
+        for (String produced : ComputerUtilMana.predictMana(predictedAbility, ai, shard).split(" ")) {
+            if (produced.isEmpty()) {
+                continue;
+            }
+            final byte color = MagicColor.fromName(produced);
+            if (!spell.allowsPayingWithShard(manaAbility.getHostCard(), color)) {
+                continue;
+            }
+            final Mana mana = new Mana(color, manaAbility.getHostCard(),
+                    predictedAbility.getManaPart(), ai);
+            if (cost.isNeeded(mana, ai.getManaPool())) {
+                cost.payMana(mana, ai.getManaPool());
+            }
+        }
+    }
+
+    private static boolean isPotentialMainPhaseManaAbility(Player ai, SpellAbility ability) {
+        final Card card = ability.getHostCard();
+        if (!card.isInPlay() || card.isPhasedOut()
+                || (card.isCreature() && card.isSick())
+                || (card.isTapped() && !card.canUntap(ai, true))) {
+            return false;
+        }
+
+        final SpellAbility predictedAbility = ability.copy(ai);
+        if (predictedAbility == null) {
+            return false;
+        }
+        final Cost futureCost = predictedAbility.getPayCosts();
+        futureCost.getCostParts().removeIf(CostTap.class::isInstance);
+        return CostPayment.canPayAdditionalCosts(futureCost, predictedAbility, false);
     }
 
     private static boolean isUsefulNextMainPhaseSpell(Player ai, SpellAbility spell) {

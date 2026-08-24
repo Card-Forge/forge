@@ -141,6 +141,32 @@ public class StorageLandAiTest extends AITest {
     }
 
     @Test
+    public void storageLandStaysTappedWhenAnotherManaSourceCannotPayItsCounterCost() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Card silos = addStorageLand("Sand Silos", 1, ai);
+        addTappedCard("Island", ai);
+        addTappedCard("Island", ai);
+        final Card prism = addCard("Pentad Prism", ai);
+        addCardToZone("Phantom Monster", ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.UNTAP, ai);
+
+        AssertJUnit.assertEquals(0, prism.getCounters(CHARGE));
+        AssertJUnit.assertFalse(chooseToUntap(ai, silos.getManaAbilities().getFirst()));
+    }
+
+    @Test
+    public void storageLandManaRespectsPayoffSourceRestrictions() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Card silos = addStorageLand("Sand Silos", 2, ai);
+        addCardToZone("Myr Superion", ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.UNTAP, ai);
+
+        AssertJUnit.assertFalse(chooseToUntap(ai, silos.getManaAbilities().getFirst()));
+    }
+
+    @Test
     public void storageLandDoesNotUntapForAnInstantUntilRitualLogicSupportsInstantTiming() {
         final Game game = initAndCreateGame();
         final Player ai = game.getPlayers().get(1);
@@ -225,6 +251,22 @@ public class StorageLandAiTest extends AITest {
         AssertJUnit.assertNotNull(choices);
         AssertJUnit.assertEquals("Sand Silos", choices.get(0).getHostCard().getName());
         AssertJUnit.assertEquals(Integer.valueOf(2), choices.get(0).getXManaCostPaid());
+    }
+
+    @Test
+    public void manaDoublingReducesTheCountersSpent() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Card silos = addStorageLand("Sand Silos", 4, ai);
+        silos.setTapped(false);
+        addCard("Mana Reflection", ai);
+        addCardToZone("Phantom Monster", ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+
+        final SpellAbility manaAbility = getManaBatteryAbility(silos);
+        manaAbility.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue(ManaAi.doManaRitualLogic(ai, manaAbility, false));
+        AssertJUnit.assertEquals(Integer.valueOf(2), manaAbility.getXManaCostPaid());
     }
 
     @Test
