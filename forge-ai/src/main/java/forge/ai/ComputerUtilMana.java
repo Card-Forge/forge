@@ -57,6 +57,11 @@ public class ComputerUtilMana {
         cost = new ManaCostBeingPaid(cost);
         return payManaCost(cost, sa, ai, true, true, effect) != null;
     }
+    public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
+            final boolean effect, final boolean checkPlayable, final Predicate<SpellAbility> manaAbilityFilter) {
+        cost = new ManaCostBeingPaid(cost);
+        return payManaCost(cost, sa, ai, true, checkPlayable, effect, manaAbilityFilter) != null;
+    }
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
         return canPayManaCost(sa.getPayCosts(), sa, ai, extraMana, effect);
     }
@@ -597,6 +602,12 @@ public class ComputerUtilMana {
 
     // returns null if unpayable
     private static List<SpellAbility> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
+        return payManaCost(cost, sa, ai, test, checkPlayable, effect, manaAbility -> true);
+    }
+
+    private static List<SpellAbility> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
+            final boolean test, final boolean checkPlayable, final boolean effect,
+            final Predicate<SpellAbility> manaAbilityFilter) {
         if ((sa.isOffering() && sa.getSacrificedAsOffering() == null) || (sa.isEmerge() && sa.getSacrificedAsEmerge() == null)) {
             // nothing was chosen
             return null;
@@ -637,7 +648,8 @@ public class ComputerUtilMana {
         int phyLifeToPay = 2;
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         boolean hasConverge = sa.getHostCard().hasConverge();
-        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test, checkPlayable, hasConverge);
+        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(
+                cost, sa, ai, test, checkPlayable, hasConverge, manaAbilityFilter);
 
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
         ManaCostShard toPay = null;
@@ -831,9 +843,10 @@ public class ComputerUtilMana {
      */
     private static ListMultimap<ManaCostShard, SpellAbility> getSourcesForShards(final ManaCostBeingPaid cost,
             final SpellAbility sa, final Player ai, final boolean test, final boolean checkPlayable,
-            final boolean hasConverge) {
+            final boolean hasConverge, final Predicate<SpellAbility> manaAbilityFilter) {
         // arrange all mana abilities by color produced.
-        final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(ai, checkPlayable);
+        final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(
+                ai, checkPlayable, manaAbilityFilter);
         if (manaAbilityMap.isEmpty()) {
             // no mana abilities, bailing out
             return null;
@@ -1294,14 +1307,9 @@ public class ComputerUtilMana {
         return getAvailableManaEstimate(p, true);
     }
     public static int getAvailableManaEstimate(final Player p, final boolean checkPlayable) {
-        return getAvailableManaEstimate(p, checkPlayable, ma -> true);
-    }
-    public static int getAvailableManaEstimate(final Player p, final boolean checkPlayable,
-            final Predicate<SpellAbility> manaAbilityFilter) {
         int availableMana = 0;
 
-        final List<Card> srcs = CardLists.filter(p.getCardsIn(ZoneType.Battlefield),
-                c -> !c.getManaAbilities().isEmpty());
+        final List<Card> srcs = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), c -> !c.getManaAbilities().isEmpty());
 
         int maxProduced = 0;
         int producedWithCost = 0;
@@ -1311,9 +1319,6 @@ public class ComputerUtilMana {
             maxProduced = 0;
 
             for (SpellAbility ma : src.getManaAbilities()) {
-                if (!manaAbilityFilter.test(ma)) {
-                    continue;
-                }
                 ma.setActivatingPlayer(p);
                 if (!checkPlayable || ma.canPlay()) {
                     int costsToActivate = ma.getPayCosts().getCostMana() != null ? ma.getPayCosts().getCostMana().convertAmount() : 0;
@@ -1502,7 +1507,8 @@ public class ComputerUtilMana {
         return sortedManaSources;
     }
 
-    private static ListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
+    private static ListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai,
+            final boolean checkPlayable, final Predicate<SpellAbility> manaAbilityFilter) {
         final ListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
         final Game game = ai.getGame();
 
@@ -1511,6 +1517,9 @@ public class ComputerUtilMana {
                 System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor sourceCard = " + sourceCard);
             }
             for (final SpellAbility m : getAIPlayableMana(sourceCard)) {
+                if (!manaAbilityFilter.test(m)) {
+                    continue;
+                }
                 if (DEBUG_MANA_PAYMENT) {
                     System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor m = " + m);
                 }

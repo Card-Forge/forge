@@ -144,6 +144,30 @@ public class StorageLandAiTest extends AITest {
     }
 
     @Test
+    public void storageLandStaysTappedWhenItCannotSupplyEnoughColoredMana() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Card silos = addStorageLand("Sand Silos", 1, ai);
+        addCard("Mountain", ai);
+        addCard("Mountain", ai);
+        addCardToZone("Phantom Warrior", ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.UNTAP, ai);
+
+        AssertJUnit.assertFalse(chooseToUntap(ai, silos.getManaAbilities().getFirst()));
+    }
+
+    @Test
+    public void storageLandStaysTappedForAnAlternativeCostTheAiWillNotUse() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Card silos = addStorageLand("Sand Silos", 3, ai);
+        addCardToZone("Mulldrifter", ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.UNTAP, ai);
+
+        AssertJUnit.assertFalse(chooseToUntap(ai, silos.getManaAbilities().getFirst()));
+    }
+
+    @Test
     public void storageLandDoesNotUntapForAnInstantUntilRitualLogicSupportsInstantTiming() {
         final Game game = initAndCreateGame();
         final Player ai = game.getPlayers().get(1);
@@ -241,6 +265,31 @@ public class StorageLandAiTest extends AITest {
         AssertJUnit.assertNotNull(choices);
         AssertJUnit.assertEquals("Sand Silos", choices.get(0).getHostCard().getName());
         AssertJUnit.assertEquals(Integer.valueOf(2), choices.get(0).getXManaCostPaid());
+    }
+
+    @Test
+    public void storageLandSpendsForThePayoffTheControllerPrefers() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Card store = addStorageLand("Icatian Store", 5, ai);
+        addCardToZone("Ajani's Welcome", ai, ZoneType.Hand);
+        addCardToZone("Serra Angel", ai, ZoneType.Hand);
+
+        executeUntapStep(game, ai);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+
+        final PlayerControllerAi controller = (PlayerControllerAi) ai.getController();
+        final List<SpellAbility> manaChoices = controller.chooseSpellAbilityToPlay();
+        AssertJUnit.assertNotNull(manaChoices);
+        AssertJUnit.assertEquals("Icatian Store", manaChoices.get(0).getHostCard().getName());
+        AssertJUnit.assertEquals(Integer.valueOf(1), manaChoices.get(0).getXManaCostPaid());
+
+        controller.playChosenSpellAbility(manaChoices.get(0));
+        AssertJUnit.assertEquals(4, store.getCounters(STORAGE));
+
+        final List<SpellAbility> spellChoices = controller.chooseSpellAbilityToPlay();
+        AssertJUnit.assertNotNull(spellChoices);
+        AssertJUnit.assertEquals("Ajani's Welcome", spellChoices.get(0).getHostCard().getName());
     }
 
     private Card addStorageLand(String cardName, int counters, Player ai) {
