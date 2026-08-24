@@ -1,6 +1,8 @@
 package forge.ai.simulation;
 
 
+import com.google.common.collect.Iterables;
+
 import forge.ai.AIOption;
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
@@ -153,11 +155,43 @@ public class GameSimulator {
             result = saMatcher(hostCard.getAllPossibleAbilities(aiPlayer, true), desc);
         }
 
+        if (result == null) {
+            result = findTriggerSaInSimGame(sa, hostCard);
+        }
+
         if (result != null) {
             result = SpellAbilityChoiceCopier.copyCastChoices(sa, result, aiPlayer);
         }
 
         return result;
+    }
+
+    /**
+     * A trigger's ability is not among the host card's spell abilities and usually carries no
+     * description, so the description match above cannot see it. Trigger ids are reassigned by the
+     * copy, but trigger order is rebuilt from the same script, so match on position.
+     */
+    private SpellAbility findTriggerSaInSimGame(final SpellAbility sa, final Card hostCard) {
+        final SpellAbility root = sa.getRootAbility();
+        if (root == null || !root.isTrigger() || root.getTrigger() == null || hostCard == null) {
+            return null;
+        }
+        final Card origHost = sa.getHostCard();
+        int index = Iterables.indexOf(origHost.getTriggers(), t -> t == root.getTrigger());
+        if (index < 0 || index >= hostCard.getTriggers().size()) {
+            return null;
+        }
+        int depth = 0;
+        for (SpellAbility p = sa; p != root && p instanceof forge.game.spellability.AbilitySub; ) {
+            p = ((forge.game.spellability.AbilitySub) p).getParent();
+            depth++;
+        }
+        SpellAbility exec = Iterables.get(hostCard.getTriggers(), index).ensureAbility();
+        for (int i = 0; i < depth && exec != null; i++) {
+            exec = exec.getSubAbility();
+        }
+        // positional match, so make sure we landed on the same kind of ability
+        return exec != null && exec.getApi() == sa.getApi() ? exec : null;
     }
 
     private SpellAbility saMatcher(Iterable<SpellAbility> candidates, String desc) {

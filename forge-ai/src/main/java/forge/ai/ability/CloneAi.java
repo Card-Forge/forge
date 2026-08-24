@@ -1,9 +1,14 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Lists;
+
 import forge.ai.AiAbilityDecision;
+import forge.ai.AiController;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
+import forge.ai.simulation.OnePlaySafetyChecker;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -12,12 +17,16 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.List;
 import java.util.Map;
 
 public class CloneAi extends SpellAbilityAi {
+
+    /** How many candidates are worth a simulation before falling back. */
+    private static final int CLONE_SIM_BUDGET = 3;
 
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
@@ -132,8 +141,7 @@ public class CloneAi extends SpellAbilityAi {
         }
 
         if (mandatory || "CloneBestCreature".equals(sa.getParam("AILogic"))) {
-            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(targets));
-            return true;
+            return cloneBestTarget(sa, targets, mandatory);
         }
 
         // Default:
@@ -141,6 +149,63 @@ public class CloneAi extends SpellAbilityAi {
         // two are the only things that clone a target. Those can just use
         // AI:RemoveDeck:All until this can do a reasonably good job of picking
         // a good target
+        return false;
+    }
+
+    /**
+     * A creature is evaluated under whoever controls it now, but the copy arrives under ours: an
+     * opponent's Nightmare is an 8/8 for them and a 0/0 for us. Rank by the evaluation, then keep
+     * the first candidate a one-play simulation agrees is an improvement.
+     */
+    private boolean cloneBestTarget(final SpellAbility sa, final List<Card> targets, final boolean mandatory) {
+        if (targets.isEmpty()) {
+            return false;
+        }
+        final List<Card> ranked = Lists.newArrayList(targets);
+        ranked.sort((a, b) -> ComputerUtilCard.evaluateCreature(b) - ComputerUtilCard.evaluateCreature(a));
+
+        final Player self = sa.getActivatingPlayer();
+        final AiController aic = ((PlayerControllerAi) self.getController()).getAi();
+        final boolean maySimulate = aic.usesHybridSimulation() || aic.usesFullSimulation();
+        int simsLeft = CLONE_SIM_BUDGET;
+        for (final Card candidate : ranked) {
+            sa.resetTargets();
+            sa.getTargets().add(candidate);
+            if (!needsSimulating(candidate, self)) {
+                // the evaluation reads the same under either controller, so trust it
+                return true;
+            }
+            if (!maySimulate || simsLeft-- <= 0) {
+                // no way to price it, so leave it rather than guess at the opponent's numbers
+                continue;
+            }
+            if (OnePlaySafetyChecker.isAcceptable(self, sa)) {
+                return true;
+            }
+        }
+
+        sa.resetTargets();
+        if (mandatory) {
+            // no choice about it, so take the one the evaluation liked best
+            sa.getTargets().add(ranked.get(0));
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Only a candidate defined by its controller's board is worth the price of a simulation.
+     * Being over-broad here costs a simulation, never a wrong answer.
+     */
+    private static boolean needsSimulating(final Card candidate, final Player self) {
+        if (candidate.getController() == self) {
+            return false;
+        }
+        for (final StaticAbility st : candidate.getStaticAbilities()) {
+            if (st.hasParam("CharacteristicDefining")) {
+                return true;
+            }
+        }
         return false;
     }
 
