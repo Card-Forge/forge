@@ -149,7 +149,7 @@ public class GameSimulator {
 
         SpellAbility result = saMatcher(candidates, desc);
         if (result == null) {
-            // could try and reimplement this so
+            // could try and reimplement this so a quick match doesn't require building the rest first
             result = saMatcher(hostCard.getAllPossibleAbilities(aiPlayer, true), desc);
         }
 
