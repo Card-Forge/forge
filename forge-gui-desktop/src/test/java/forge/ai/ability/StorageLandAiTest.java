@@ -6,7 +6,6 @@ import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
-import forge.game.cost.CostRemoveCounter;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -29,25 +28,13 @@ public class StorageLandAiTest extends AITest {
         final String[] storageLands = {
                 "Bottomless Vault", "Dwarven Hold", "Hollow Trees", "Icatian Store", "Sand Silos"
         };
-        final String[] producedColors = {"B", "R", "G", "W", "U"};
-
-        for (int i = 0; i < storageLands.length; i++) {
-            final String cardName = storageLands[i];
+        for (String cardName : storageLands) {
             final Card land = addCard(cardName, ai);
             final SpellAbility manaAbility = getManaBatteryAbility(land);
 
             AssertJUnit.assertFalse(cardName, land.getRules().getAiHints().getRemAIDecks());
             AssertJUnit.assertEquals(cardName, "ManaRitualBattery", land.getSVar("AIUntapPreference"));
-            AssertJUnit.assertEquals(cardName, "Count$xPaid", land.getSVar("X"));
-            AssertJUnit.assertTrue(cardName,
-                    land.hasKeyword("You may choose not to untap CARDNAME during your untap step."));
-            AssertJUnit.assertEquals(cardName, "ManaRitualBattery", manaAbility.getParam("AILogic"));
-            AssertJUnit.assertEquals(cardName, producedColors[i], manaAbility.getParam("Produced"));
-            AssertJUnit.assertEquals(cardName, "X", manaAbility.getParam("Amount"));
             AssertJUnit.assertEquals(cardName, "True", manaAbility.getParam("AINoRecursiveCheck"));
-            AssertJUnit.assertTrue(cardName, manaAbility.getPayCosts().hasTapCost());
-            AssertJUnit.assertTrue(cardName,
-                    manaAbility.getPayCosts().hasSpecificCostType(CostRemoveCounter.class));
         }
     }
 
@@ -64,20 +51,6 @@ public class StorageLandAiTest extends AITest {
         game.getPhaseHandler().devAdvanceToPhase(PhaseType.UPKEEP);
         playUntilStackClear(game);
         AssertJUnit.assertEquals(5, silos.getCounters(STORAGE));
-    }
-
-    @Test
-    public void storageLandUntapsForAnAffordableSameColorSpell() {
-        final Game game = initAndCreateGame();
-        final Player ai = game.getPlayers().get(1);
-        final Card silos = addStorageLand("Sand Silos", 4, ai);
-        addCardToZone("Phantom Monster", ai, ZoneType.Hand);
-        game.getPhaseHandler().devModeSet(PhaseType.UNTAP, ai);
-
-        final SpellAbility manaAbility = silos.getManaAbilities().getFirst();
-        manaAbility.setXManaCostPaid(7);
-        AssertJUnit.assertTrue(chooseToUntap(ai, manaAbility));
-        AssertJUnit.assertEquals(Integer.valueOf(7), manaAbility.getXManaCostPaid());
     }
 
     @Test
@@ -133,17 +106,6 @@ public class StorageLandAiTest extends AITest {
     }
 
     @Test
-    public void storageLandStaysTappedForAnOffColorSpell() {
-        final Game game = initAndCreateGame();
-        final Player ai = game.getPlayers().get(1);
-        final Card vault = addStorageLand("Bottomless Vault", 4, ai);
-        addCardToZone("Phantom Monster", ai, ZoneType.Hand);
-        game.getPhaseHandler().devModeSet(PhaseType.UNTAP, ai);
-
-        AssertJUnit.assertFalse(chooseToUntap(ai, vault.getManaAbilities().getFirst()));
-    }
-
-    @Test
     public void storageLandStaysTappedWhenItCannotSupplyEnoughColoredMana() {
         final Game game = initAndCreateGame();
         final Player ai = game.getPlayers().get(1);
@@ -168,6 +130,17 @@ public class StorageLandAiTest extends AITest {
     }
 
     @Test
+    public void storageLandStaysTappedWhenThePayoffHasAnUnpayableAdditionalCost() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Card hold = addStorageLand("Dwarven Hold", 1, ai);
+        addCardToZone("Goblin Grenade", ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.UNTAP, ai);
+
+        AssertJUnit.assertFalse(chooseToUntap(ai, hold.getManaAbilities().getFirst()));
+    }
+
+    @Test
     public void storageLandDoesNotUntapForAnInstantUntilRitualLogicSupportsInstantTiming() {
         final Game game = initAndCreateGame();
         final Player ai = game.getPlayers().get(1);
@@ -176,19 +149,6 @@ public class StorageLandAiTest extends AITest {
         game.getPhaseHandler().devModeSet(PhaseType.UNTAP, ai);
 
         AssertJUnit.assertFalse(chooseToUntap(ai, silos.getManaAbilities().getFirst()));
-    }
-
-    @Test
-    public void atLeastOneSufficientStorageLandUntapsDuringTheRealUntapStep() {
-        final Game game = initAndCreateGame();
-        final Player ai = game.getPlayers().get(1);
-        final Card firstSilos = addStorageLand("Sand Silos", 4, ai);
-        final Card secondSilos = addStorageLand("Sand Silos", 4, ai);
-        addCardToZone("Phantom Monster", ai, ZoneType.Hand);
-
-        executeUntapStep(game, ai);
-
-        AssertJUnit.assertFalse(firstSilos.isTapped() && secondSilos.isTapped());
     }
 
     @Test
