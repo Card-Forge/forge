@@ -2,7 +2,6 @@ package forge.ai;
 
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
-import forge.ai.ability.ManaAi;
 import forge.ai.ability.ProtectAi;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
@@ -965,14 +964,8 @@ public class PlayerControllerAi extends PlayerController {
                             return true;
                         case "Never":
                             return false;
-                        case "ManaRitualBattery":
-                            for (SpellAbility manaAbility : source.getManaAbilities()) {
-                                if (manaAbility.getParamOrDefault("AILogic", "").startsWith("ManaRitualBattery")) {
-                                    manaAbility.setActivatingPlayer(source.getController());
-                                    return ManaAi.shouldUntapManaBattery(source.getController(), manaAbility);
-                                }
-                            }
-                            break;
+                        case "StorageLand":
+                            return shouldUntapStorageLand(source);
                         case "NothingRemembered":
                             if (!source.hasRemembered()) {
                                 return true;
@@ -1011,6 +1004,14 @@ public class PlayerControllerAi extends PlayerController {
             default:
                 return MyRandom.getRandom().nextBoolean();
         }
+    }
+
+    private static boolean shouldUntapStorageLand(Card source) {
+        final int otherManaSources = CardLists.count(source.getController().getLandsInPlay(),
+                land -> land != source && CardPredicates.LANDS_PRODUCING_MANA.test(land));
+        final int availableMana = otherManaSources + source.getCounters(CounterType.getType("STORAGE"));
+        return source.getController().getCardsIn(ZoneType.Hand).anyMatch(
+                card -> card.getCMC() > otherManaSources && card.getCMC() <= availableMana);
     }
 
     /*

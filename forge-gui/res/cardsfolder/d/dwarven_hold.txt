@@ -8,5 +8,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | PresentDefined$ Self | IsPres
 SVar:TrigStore:DB$ PutCounter | Defined$ Self | CounterType$ STORAGE | CounterNum$ 1
 A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ R | Amount$ X | AILogic$ ManaRitualBattery | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each storage counter removed this way.
 SVar:X:Count$xPaid
-SVar:AIUntapPreference:ManaRitualBattery
+SVar:AIUntapPreference:StorageLand
 Oracle:Dwarven Hold enters tapped.\nYou may choose not to untap Dwarven Hold during your untap step.\nAt the beginning of your upkeep, if Dwarven Hold is tapped, put a storage counter on it.\n{T}, Remove any number of storage counters from Dwarven Hold: Add {R} for each storage counter removed this way.

@@ -8,5 +8,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | PresentDefined$ Self | IsPres
 SVar:TrigStore:DB$ PutCounter | Defined$ Self | CounterType$ STORAGE | CounterNum$ 1
 A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ U | Amount$ X | AILogic$ ManaRitualBattery | AINoRecursiveCheck$ True | SpellDescription$ Add {U} for each storage counter removed this way.
 SVar:X:Count$xPaid
-SVar:AIUntapPreference:ManaRitualBattery
+SVar:AIUntapPreference:StorageLand
 Oracle:Sand Silos enters tapped.\nYou may choose not to untap Sand Silos during your untap step.\nAt the beginning of your upkeep, if Sand Silos is tapped, put a storage counter on it.\n{T}, Remove any number of storage counters from Sand Silos: Add {U} for each storage counter removed this way.

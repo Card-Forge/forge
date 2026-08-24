@@ -46,7 +46,6 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ComputerUtilMana {
@@ -56,11 +55,6 @@ public class ComputerUtilMana {
         //check copy of cost so it doesn't modify the exist cost being paid
         cost = new ManaCostBeingPaid(cost);
         return payManaCost(cost, sa, ai, true, true, effect) != null;
-    }
-    public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
-            final boolean effect, final boolean checkPlayable, final Predicate<SpellAbility> manaAbilityFilter) {
-        cost = new ManaCostBeingPaid(cost);
-        return payManaCost(cost, sa, ai, true, checkPlayable, effect, manaAbilityFilter) != null;
     }
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
         return canPayManaCost(sa.getPayCosts(), sa, ai, extraMana, effect);
@@ -602,12 +596,6 @@ public class ComputerUtilMana {
 
     // returns null if unpayable
     private static List<SpellAbility> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
-        return payManaCost(cost, sa, ai, test, checkPlayable, effect, manaAbility -> true);
-    }
-
-    private static List<SpellAbility> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
-            final boolean test, final boolean checkPlayable, final boolean effect,
-            final Predicate<SpellAbility> manaAbilityFilter) {
         if ((sa.isOffering() && sa.getSacrificedAsOffering() == null) || (sa.isEmerge() && sa.getSacrificedAsEmerge() == null)) {
             // nothing was chosen
             return null;
@@ -648,8 +636,7 @@ public class ComputerUtilMana {
         int phyLifeToPay = 2;
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         boolean hasConverge = sa.getHostCard().hasConverge();
-        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(
-                cost, sa, ai, test, checkPlayable, hasConverge, manaAbilityFilter);
+        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test, checkPlayable, hasConverge);
 
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
         ManaCostShard toPay = null;
@@ -843,10 +830,9 @@ public class ComputerUtilMana {
      */
     private static ListMultimap<ManaCostShard, SpellAbility> getSourcesForShards(final ManaCostBeingPaid cost,
             final SpellAbility sa, final Player ai, final boolean test, final boolean checkPlayable,
-            final boolean hasConverge, final Predicate<SpellAbility> manaAbilityFilter) {
+            final boolean hasConverge) {
         // arrange all mana abilities by color produced.
-        final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(
-                ai, checkPlayable, manaAbilityFilter);
+        final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
             // no mana abilities, bailing out
             return null;
@@ -1507,8 +1493,7 @@ public class ComputerUtilMana {
         return sortedManaSources;
     }
 
-    private static ListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai,
-            final boolean checkPlayable, final Predicate<SpellAbility> manaAbilityFilter) {
+    private static ListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
         final ListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
         final Game game = ai.getGame();
 
@@ -1517,9 +1502,6 @@ public class ComputerUtilMana {
                 System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor sourceCard = " + sourceCard);
             }
             for (final SpellAbility m : getAIPlayableMana(sourceCard)) {
-                if (!manaAbilityFilter.test(m)) {
-                    continue;
-                }
                 if (DEBUG_MANA_PAYMENT) {
                     System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor m = " + m);
                 }
