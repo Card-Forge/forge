@@ -1331,7 +1331,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             x = cImage.getX() + inset;
             y = cImage.getPrefHeight() / 2.3f;
             ARP = Forge.isLandscapeMode() ? 100 : 150;
-            cLabel = Controls.newTextraLabel("[%" + ARP + "]" + description);
+            String text = reward.type.equals(Reward.Type.CardPack)
+                ? "[%" + ARP + "][%?SHADOW]" + description
+                : "[%" + ARP + "]" + description;
+            cLabel = Controls.newTextraLabel(text);
             cLabel.setAlignment(align);
             cLabel.setWrap(true);
             cLabel.setWidth(width);
@@ -1527,9 +1530,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             float tipW = tooltip_actor.cImage.getPrefWidth();
             float tipH = tooltip_actor.cImage.getPrefHeight();
             cardHitArea.setBounds(
-                    Scene.getIntendedWidth() / 2f - tipW / 2f,
-                    Scene.getIntendedHeight() / 2f - tipH / 2f,
-                    tipW, tipH);
+                Scene.getIntendedWidth() / 2f - tipW / 2f,
+                Scene.getIntendedHeight() / 2f - tipH / 2f,
+                tipW, tipH);
+
+            // get cardHitArea position as reference for cBackDrop position
+            if (tooltip_actor.cBackDrop != null) {
+                tooltip_actor.cBackDrop.setPosition(cardHitArea.getX(), cardHitArea.getY());
+                tooltip_actor.cLabel.setY(Scene.getIntendedHeight() / 2f - tooltip_actor.inset * 2.5f);
+            }
 
             dismissBackdrop.setBounds(0, 0, Scene.getIntendedWidth(), Scene.getIntendedHeight());
             getStage().addActor(dismissBackdrop);
