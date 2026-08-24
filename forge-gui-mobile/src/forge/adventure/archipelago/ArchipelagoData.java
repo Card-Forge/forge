@@ -350,7 +350,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     public void addCardByRarity(String rarity) {
         cardsEarnedByRarity.merge(rarity, 1L, Long::sum);
-        updatePlayerChecks(ArchipelagoCheckTypes.TOTAL_CARDS_EARNED, String.format("%sRandomizer:{RESET}\nCards of Rarity: " + rarity + " - " + cardsEarnedByRarity.get(rarity), ArchipelagoColors.Plum));
+        updatePlayerChecks(ArchipelagoCheckTypes.TOTAL_CARDS_EARNED, String.format("%sRandomizer:{RESET}\nTotal cards earned: ", ArchipelagoColors.Plum));
     }
 
     public void addGold(int amount) {

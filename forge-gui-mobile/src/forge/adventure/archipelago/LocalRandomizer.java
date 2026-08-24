@@ -72,7 +72,7 @@ public class LocalRandomizer {
                     totalCardsEarned += value;
                 }
                 if (totalCardsEarned > 0 && totalCardsEarned % totalCardsEarnedBreakPoint == 0) {
-                    generateRandomizedReward(notificationMessage);
+                    generateRandomizedReward(notificationMessage + totalCardsEarned);
                 }
             }
             case COLORLESS_BATTLE_WON -> {
