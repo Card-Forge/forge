@@ -145,15 +145,35 @@ public abstract class ImageFetcher {
         String preferredLangCode = CardLanguageIndex.getPreferredCardLangCode();
         if (preferredLangCode != null && !preferredLangCode.equalsIgnoreCase(defaultLangCode)
                 && CardLanguageIndex.instance().isAvailableInLanguage(setCode, card.getCollectorNumber(), preferredLangCode)) {
+            addCdnUrlIfKnown(setCode, card.getCollectorNumber(), preferredLangCode, face, useArtCrop, downloadUrls);
             String preferredUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(card, face, setCode, preferredLangCode, useArtCrop);
             if (!downloadUrls.contains(preferredUrl)) {
                 downloadUrls.add(preferredUrl);
             }
         }
 
+        addCdnUrlIfKnown(setCode, card.getCollectorNumber(), defaultLangCode, face, useArtCrop, downloadUrls);
         String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(card, face, setCode, defaultLangCode, useArtCrop);
         if (!downloadUrls.contains(primaryUrl)) {
             downloadUrls.add(primaryUrl);
+        }
+    }
+
+    /**
+     * TEMPORARY BRIDGE (see CardCdnUuidBridge): if a UUID is known locally for this
+     * printing/language, try the Scryfall CDN before the rate-limited API. No-op
+     * (does nothing, changes no behavior) when the UUID isn't known yet - remove
+     * this call once PR #10928's CdnUuidCache is available instead.
+     */
+    private void addCdnUrlIfKnown(String setCode, String collectorNumber, String langCode, String face, boolean useArtCrop, ArrayList<String> downloadUrls) {
+        String uuid = CardCdnUuidBridge.instance().getUuid(setCode, collectorNumber, langCode);
+        if (uuid == null) {
+            return;
+        }
+        String size = useArtCrop ? "art_crop" : "normal";
+        String cdnUrl = CardCdnUuidBridge.buildCdnUrl(uuid, size, face);
+        if (cdnUrl != null && !downloadUrls.contains(cdnUrl)) {
+            downloadUrls.add(cdnUrl);
         }
     }
 

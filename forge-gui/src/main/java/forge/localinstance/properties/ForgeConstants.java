@@ -103,6 +103,7 @@ public final class ForgeConstants {
     public static final String ADVENTURE_COMMON_MUSIC_DIR   = ADVENTURE_COMMON_DIR + "music" + PATH_SEPARATOR;
     public static final String LANG_DIR                     = RES_DIR + "languages" + PATH_SEPARATOR;
     public static final String CARD_LANGUAGES_FILE          = LANG_DIR + "card-art-languages.txt";
+    public static final String CARD_ART_CDN_UUID_FILE       = LANG_DIR + "card-art-cdn-uuid.txt";
     public static final String EFFECTS_DIR                  = RES_DIR + "effects" + PATH_SEPARATOR;
     public static final String PUZZLE_DIR                   = RES_DIR + "puzzle" + PATH_SEPARATOR;
     public static final String TUTORIAL_DIR                 = RES_DIR + "tutorial" + PATH_SEPARATOR;
@@ -299,6 +300,9 @@ public final class ForgeConstants {
     public static final String DB_DIR                        = CACHE_DIR + "db" + PATH_SEPARATOR;
     public static final String FONTS_DIR                     = CACHE_DIR + "fonts" + PATH_SEPARATOR;
     public static final String CACHE_SKINS_DIR               = CACHE_DIR + "skins" + PATH_SEPARATOR;
+    // TEMPORARY BRIDGE: see CARD_ART_CDN_UUID_FILE above. Runtime-built, per-language
+    // UUID files land here, one per language the player has actually used.
+    public static final String CACHE_CDN_UUID_BRIDGE_DIR      = CACHE_DIR + "cdn_uuid_bridge" + PATH_SEPARATOR;
     public static final String CACHE_TOKEN_PICS_DIR          = PICS_DIR + "tokens" + PATH_SEPARATOR;
     public static final String CACHE_SLEEVE_PICS_DIR         = PICS_DIR + "sleeves" + PATH_SEPARATOR;
     public static final String CACHE_ICON_PICS_DIR           = PICS_DIR + "icons" + PATH_SEPARATOR;
@@ -347,6 +351,9 @@ public final class ForgeConstants {
     public static final String URL_PRICE_DOWNLOAD = GITHUB_ASSETS_BASE + "all-prices.txt";
     private static final String URL_SCRYFALL = "https://api.scryfall.com";
     public static final String URL_PIC_SCRYFALL_DOWNLOAD = URL_SCRYFALL + "/cards/";
+    // TEMPORARY BRIDGE: see CARD_ART_CDN_UUID_FILE above.
+    public static final String URL_SCRYFALL_CDN_BRIDGE = "https://cards.scryfall.io/";
+    public static final String URL_SCRYFALL_SEARCH_BRIDGE = URL_SCRYFALL + "/cards/search";
 
     // Constants for Display Card Identity game setting
     public static final String DISP_CURRENT_COLORS_ALWAYS = "Always";
