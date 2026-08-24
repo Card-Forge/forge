@@ -289,6 +289,20 @@ public class StaticData {
         }
     }
 
+    // Only safe while no game is reading the card dbs; callers guarantee quiescence.
+    public void resetLazyLoadedCards() {
+        if (!cardReader.isLoadingCardsLazily()) {
+            return;
+        }
+        synchronized (lazyLoadLock) {
+            commonCards.clearLoadedCards();
+            variantCards.clearLoadedCards();
+            missingLazyCards.clear();
+            filtered.clear();
+            allCardsLoaded = false;
+        }
+    }
+
     public boolean lazyLoadCard(String cardName, String setCode) {
         if (cardName == null || cardName.isEmpty() || !cardReader.isLoadingCardsLazily()) {
             return false;

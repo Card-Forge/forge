@@ -451,6 +451,21 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return false;
     }
 
+    // Only safe while no game is reading this db; callers guarantee quiescence.
+    public void clearLoadedCards() {
+        allCardsByName.clear();
+        allCardsByRules.clear();
+        uniqueCardsByRules.clear();
+        uniqueCardsByFlavorName.clear();
+        facesByName.clear();
+        rulesByAltName.clear();
+        rulesByPrimaryName.clear();
+        normalizedNames.clear();
+        flavorNameMappings.clear();
+        artIds.clear();
+        nonLegendaryCreatureNames.clear();
+    }
+
     public void loadCard(String cardName, String setCode, CardRules cr) {
         // @leriomaggio: This method is called when lazy-loading is set
         // OR if a card is trying to load from an edition its not from
