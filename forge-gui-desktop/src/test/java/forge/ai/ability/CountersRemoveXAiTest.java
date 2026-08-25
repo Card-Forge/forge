@@ -62,6 +62,27 @@ public class CountersRemoveXAiTest extends AITest {
         assertEquals(1, parasite.getNetPower());
     }
 
+    @Test
+    public void willNotPayLifeForTheActivation() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card parasite = addCard("Hex Parasite", ai);
+        addCards("Mountain", 3, ai); // no black source, so {B/P} would cost 2 life
+        Card courser = addCard("Centaur Courser", opp);
+        courser.setCounters(CounterEnumType.P1P1, 1);
+        ai.setLife(6, null);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+        game.getAction().checkStateEffects(true);
+        gameLoopUntilNextPhase(game);
+
+        assertEquals(6, ai.getLife());
+        assertEquals(1, courser.getCounters(CounterEnumType.P1P1));
+        assertEquals(1, parasite.getNetPower());
+    }
+
     private Card withParasite(Game game, Player ai) {
         Card parasite = addCard("Hex Parasite", ai);
         addCards("Swamp", 6, ai);
