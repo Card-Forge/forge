@@ -820,27 +820,30 @@ public class AiController {
             if (altHost == null) {
                 return AiPlayDecision.CantPlaySa;
             }
-            altHost.setCastSA(sa);
         } else if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
 
-        // state needs to be switched here so API checks evaluate the right face
-        if (host != altHost) {
-            sa.setHostCard(altHost);
+        if (sa.getApi() != null) {
+            altHost = SpellApiToAi.Converter.get(sa).getAiEvaluationHost(player, sa, altHost);
         }
-
-        AiPlayDecision decision = canPlayAndPayForFace(sa);
-
-        if (host != altHost) {
-            sa.setHostCard(host);
+        try {
+            if (sa.isSpell()) {
+                altHost.setCastSA(sa);
+            }
+            // state needs to be switched here so API checks evaluate the right face
+            if (host != altHost) {
+                sa.setHostCard(altHost);
+            }
+            return canPlayAndPayForFace(sa);
+        } finally {
+            if (host != altHost) {
+                sa.setHostCard(host);
+            }
+            if (sa.isSpell()) {
+                altHost.setCastSA(null);
+            }
         }
-
-        if (sa.isSpell()) {
-            altHost.setCastSA(null);
-        }
-
-        return decision;
     }
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)

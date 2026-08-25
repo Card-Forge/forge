@@ -65,6 +65,10 @@ public abstract class SpellAbilityAi extends SpellAbilityEffect {
         return chkDrawbackWithSubs(aiPlayer, subAb);
     }
 
+    protected Card getAiEvaluationHost(final Player ai, final SpellAbility sa, final Card host) {
+        return host;
+    }
+
     /**
      * Handles the AI decision to play a "main" SpellAbility
      */

@@ -6,15 +6,23 @@ import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCopyService;
+import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 public class RevealAi extends RevealAiBase {
 
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
+        if (isRememberedSelfRevealAnyNumber(sa) && getRevealableCards(ai, sa).isEmpty()) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
         if (!revealHandTargetAI(ai, sa, false)) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
@@ -24,6 +32,36 @@ public class RevealAi extends RevealAiBase {
         }
 
         return super.checkApiLogic(ai, sa);
+    }
+
+    @Override
+    protected Card getAiEvaluationHost(final Player ai, final SpellAbility sa, final Card host) {
+        if (!isRememberedSelfRevealAnyNumber(sa)) {
+            return host;
+        }
+
+        final CardCollection cards = getRevealableCards(ai, sa);
+        if (cards.isEmpty()) {
+            return host;
+        }
+
+        final Card projectedHost = CardCopyService.getLKICopy(host);
+        projectedHost.addRemembered(cards);
+        return projectedHost;
+    }
+
+    private static boolean isRememberedSelfRevealAnyNumber(final SpellAbility sa) {
+        return sa.hasParam("AnyNumber") && sa.hasParam("RememberRevealed") && !sa.usesTargeting()
+                && (!sa.hasParam("Defined") || "You".equals(sa.getParam("Defined")));
+    }
+
+    private static CardCollection getRevealableCards(final Player ai, final SpellAbility sa) {
+        final CardCollection cards = sa.hasParam("RevealValid")
+                ? CardLists.getValidCards(ai.getCardsIn(ZoneType.Hand), sa.getParam("RevealValid"),
+                        ai, sa.getHostCard(), sa)
+                : new CardCollection(ai.getCardsIn(ZoneType.Hand));
+        cards.remove(sa.getHostCard());
+        return cards;
     }
 
     @Override
