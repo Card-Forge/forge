@@ -102920,7 +102920,7 @@
   {
     "name": "FEM Vodalian War Machine",
     "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_war_machine_placeholder.atlas",
-    "scale": 0.1875,
+    "scale": 0.5,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_vodalian_war_machine.dck"
     ],
