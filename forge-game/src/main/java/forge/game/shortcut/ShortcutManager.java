@@ -30,10 +30,13 @@ public class ShortcutManager { // doc:11h PARTIAL
         return current;
     }
 
-    /** @return false if a declaration is already in flight. */
+    /** @return false if a nonterminal declaration is already in flight. */
     public boolean declareShortcut(final Player controller, final List<SpellAbility> loopAbilities, final int count) {
         if (current != null) {
-            return false;
+            final ShortcutDeclaration.Status s = current.getStatus();
+            if (s != ShortcutDeclaration.Status.COMPLETE && s != ShortcutDeclaration.Status.OBJECTED && s != ShortcutDeclaration.Status.DRAW) {
+                return false;
+            }
         }
         current = new ShortcutDeclaration(controller, loopAbilities, count);
         return true;
@@ -43,7 +46,9 @@ public class ShortcutManager { // doc:11h PARTIAL
         if (current == null) {
             return;
         }
-        current.recordResponse(p, ShortcutDeclaration.Response.ACCEPT);
+        if (!current.recordResponse(p, ShortcutDeclaration.Response.ACCEPT)) {
+            return;
+        }
         if (current.allAccepted()) {
             current.setStatus(ShortcutDeclaration.Status.ACCEPTED);
             beginExecution();
@@ -54,8 +59,16 @@ public class ShortcutManager { // doc:11h PARTIAL
         if (current == null) {
             return;
         }
-        current.recordResponse(p, ShortcutDeclaration.Response.LOWER);
+        if (!current.recordResponse(p, ShortcutDeclaration.Response.LOWER)) {
+            return;
+        }
+        final int oldCount = current.getProposedCount();
         current.setProposedCount(newCount);
+        if (oldCount != newCount) {
+            for (final Player responder : current.getResponses().keySet()) {
+                current.getResponses().put(responder, ShortcutDeclaration.Response.PENDING);
+            }
+        }
         current.setStatus(ShortcutDeclaration.Status.DECLARED);
     }
 
@@ -63,16 +76,21 @@ public class ShortcutManager { // doc:11h PARTIAL
         if (current == null) {
             return;
         }
-        current.recordResponse(p, ShortcutDeclaration.Response.INTERRUPT);
+        if (!current.recordResponse(p, ShortcutDeclaration.Response.INTERRUPT)) {
+            return;
+        }
         current.setInterruptAt(at);
         current.setStatus(ShortcutDeclaration.Status.INTERRUPTED);
+        beginExecution();
     }
 
     public void object(final Player p) {
         if (current == null) {
             return;
         }
-        current.recordResponse(p, ShortcutDeclaration.Response.OBJECT);
+        if (!current.recordResponse(p, ShortcutDeclaration.Response.OBJECT)) {
+            return;
+        }
         if (current.isMandatoryLoop()) {
             game.declareLoopDraw();
             current.setStatus(ShortcutDeclaration.Status.DRAW);
@@ -87,17 +105,34 @@ public class ShortcutManager { // doc:11h PARTIAL
         }
         current.setStatus(ShortcutDeclaration.Status.EXECUTING);
         final int count = Math.min(current.getProposedCount(), Math.max(1, current.getInterruptAt()));
-        final RepeatNExecutor executor = new RepeatNExecutor();
-        final BooleanSupplier interrupt = () -> false;
+        final boolean[] interruptedFlag = new boolean[1];
+        final BooleanSupplier interrupt = () -> interruptedFlag[0];
         final Consumer<Integer> progress = done -> { /* UI hook deferred */ };
+        boolean fullyCompleted = true;
         for (final SpellAbility sa : current.getLoopAbilities()) {
             final SpellAbility ability = sa;
             final Supplier<SpellAbility> factory = () -> ability;
-            executor.execute(game, count, factory, progress, interrupt);
+            final RepeatNExecutor.RepeatResult result = RepeatNExecutor.execute(game, count, factory, progress, interrupt);
+            if (result.aborted) {
+                fullyCompleted = false;
+                if (current.getStatus() == ShortcutDeclaration.Status.INTERRUPTED) {
+                    interruptedFlag[0] = true;
+                }
+                break;
+            }
             if (game.isGameOver()) {
                 break;
             }
         }
-        current.setStatus(game.isGameOver() ? ShortcutDeclaration.Status.COMPLETE : ShortcutDeclaration.Status.COMPLETE);
+        if (game.isGameOver()) {
+            current.setStatus(ShortcutDeclaration.Status.COMPLETE);
+        } else if (!fullyCompleted) {
+            // Status already set by interrupt() or will be EXECUTING if aborted for other reasons
+            if (current.getStatus() == ShortcutDeclaration.Status.EXECUTING) {
+                current.setStatus(ShortcutDeclaration.Status.OBJECTED);
+            }
+        } else {
+            current.setStatus(ShortcutDeclaration.Status.COMPLETE);
+        }
     }
 }

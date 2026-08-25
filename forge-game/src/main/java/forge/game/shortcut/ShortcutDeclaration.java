@@ -54,8 +54,12 @@ public class ShortcutDeclaration {
     public void setStatus(final Status s) { status = s; }
     public Map<Player, Response> getResponses() { return responses; }
 
-    public void recordResponse(final Player p, final Response r) {
+    public boolean recordResponse(final Player p, final Response r) {
+        if (!responses.containsKey(p)) {
+            return false;
+        }
         responses.put(p, r);
+        return true;
     }
 
     /** A mandatory loop is one with no optional/non-deterministic step. */
