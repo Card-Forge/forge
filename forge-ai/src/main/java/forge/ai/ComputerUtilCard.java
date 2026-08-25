@@ -319,7 +319,8 @@ public class ComputerUtilCard {
                 }
                 continue;
             }
-            if (isHomewardPathAbility(ability)) {
+            if (ability.getApi() == ApiType.GainControlVariant
+                    && "GainControlOwns".equals(ability.getParam("AILogic"))) {
                 // Usually low priority: Homeward Path matters if the AI has
                 // stolen creatures that it could lose, but otherwise it is
                 // mostly just a colorless land with a narrow political button.
@@ -418,11 +419,6 @@ public class ComputerUtilCard {
             valid = ability.getParamOrDefault("ValidCards", "");
         }
         return valid.contains("Land");
-    }
-
-    private static boolean isHomewardPathAbility(final SpellAbility ability) {
-        return ability.getApi() == ApiType.GainControlVariant
-                && "GainControlOwns".equals(ability.getParam("AILogic"));
     }
 
     private static boolean isLandAnimationAbility(final SpellAbility ability) {
@@ -1822,7 +1818,6 @@ public class ComputerUtilCard {
                     reserved = ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, false);
                     // Only proceed with this if we could actually reserve mana
                     if (reserved) {
-                        AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
                         AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
                         return false;
                     }

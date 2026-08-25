@@ -147,8 +147,8 @@ public class TransitionScreen extends FContainer {
                 xmod *= 1f;//static logo only
                 float ymod;
                 if (FSkin.getLogo() != null) {
-                    ymod = Forge.getScreenHeight() / 2f + (FSkin.getLogo().getHeight() * xmod) / 2;
-                    g.drawImage(FSkin.getLogo(), Forge.getScreenWidth() / 2f - (FSkin.getLogo().getWidth() * xmod) / 2, Forge.getScreenHeight() / 2f - (FSkin.getLogo().getHeight() * xmod) / 2, FSkin.getLogo().getWidth() * xmod, FSkin.getLogo().getHeight() * xmod);
+                    ymod = Forge.isMobileAdventureMode && Forge.isLandscapeMode() ? 0.85f : 1f;
+                    g.drawImage(FSkin.getLogo(), Forge.getScreenWidth() / 2f - (FSkin.getLogo().getWidth() * xmod) / 2, (Forge.getScreenHeight() / 2f - (FSkin.getLogo().getHeight() * xmod) / 2) * ymod, FSkin.getLogo().getWidth() * xmod, FSkin.getLogo().getHeight() * xmod);
                 } else {
                     ymod = Forge.getScreenHeight() / 2f + (FSkinImage.LOGO.getHeight() * xmod) / 1.5f;
                     g.drawImage(FSkinImage.LOGO, Forge.getScreenWidth() / 2f - (FSkinImage.LOGO.getWidth() * xmod) / 2, Forge.getScreenHeight() / 2f - (FSkinImage.LOGO.getHeight() * xmod) / 1.5f, FSkinImage.LOGO.getWidth() * xmod, FSkinImage.LOGO.getHeight() * xmod);
