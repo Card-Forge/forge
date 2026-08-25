@@ -74,7 +74,7 @@ public final class CardCdnUuidBridge {
     private static volatile CardCdnUuidBridge instance;
 
     private final Map<String, Map<String, String>> englishIndex;
-    private final Map<String, Map<String, String>> foreignCache = new HashMap<>();
+    private final Map<String, Map<String, Map<String, String>>> foreignCache = new HashMap<>();
     private final Set<String> foreignSyncInFlightOrDone = new HashSet<>();
 
     public static CardCdnUuidBridge instance() {
@@ -213,7 +213,7 @@ public final class CardCdnUuidBridge {
         }
     }
 
-    /** Undoes JSON string escaping (\/, \uXXXX, etc.) - next_page needs this, or "\u0026" (an escaped '&') breaks pagination past page 2. */
+    /** Undoes JSON string escaping (forward slashes, unicode escapes, etc.) - next_page needs this, or an escaped '&' breaks pagination past page 2. */
     private static String unescapeJsonString(String s) {
         StringBuilder out = new StringBuilder(s.length());
         for (int i = 0; i < s.length(); i++) {
