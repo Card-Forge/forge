@@ -169,20 +169,22 @@ number of instant and sorcery cards you own in exile and in your graveyard
 * `AIPreference:SacCost$Creature.token,Creature.cmcLE2`
 
 * `AntiBuffedBy:{ValidCards}`
-
 If a permanent with this SVar is on the battlefield under human control the AI will play the specified cards in Main1. Applicable for cards like *Timid Drake*.
 
 * `BuffedBy:{ValidCards}`
-
 If a permanent with this SVar is on the battlefield under its control the AI will play the specified cards in Main1. Applicable for creatures with a P/T setting static ability (e.g. *Kithkin Rabble*) or additional buffs (*Abzan Runemark*).
 
 * `EnchantMe:{Multiple/Once}`
-
 Creatures with "Multiple" in this SVar will always be preferred when the AI enchants (e.g *Rabid Wombat*), creatures with "Once" only if they are not enchanted already.
 
 * `EquipMe:{Multiple/Once>}`
-
 Creatures with "Multiple" in this SVar will always be preferred when the AI equips, creatures with "Once" only if they are not equipped already.
+
+* `DoNotDiscardIfAble`
+* `DiscardMe`
+
+* `SacMe:{1-6}`
+The AI will sacrifice these cards to pay costs. The higher the number the higher the priority. Example: *Hatching Plans* has `SVar:SacMe:5`.
 
 * `EndOfTurnLeavePlay:True`
 
@@ -199,7 +201,6 @@ Creatures with "Multiple" in this SVar will always be preferred when the AI equi
 * `ManaNeededToAvoidNegativeEffect:`
 
 * `NeedsToPlayVar:{SVar or #} {cmp}`
-
 Put this on cards that are very situational.
 
 Uses operand-operator syntax, where `{cmp}` is a comparator:  
@@ -223,16 +224,10 @@ SVar:Y:Count$Valid Creature.YouCtrl
 * `NoZeroToughnessAI:True`
 
 * `PlayMain1:{TRUE/OPPONENTCREATURES/ALWAYS}`
-
 The AI will play permanents with this SVar in its first main phase. For some more common mechanics the AI performs its own checks, e.g. to get Backup abilities on an attacker. But for complex cases without own AILogic, it will usually hold them until Main2 to save mana for combat tricks.  
 For other spells only "ALWAYS" is supported.
-
-* `SacMe:{1-6}`
-
-The AI will sacrifice these cards to pay costs. The higher the number the higher the priority. Example: *Hatching Plans* has `SVar:SacMe:5`.
 
 * `Targeting:Dies`
 
 * `UntapMe:True`
-
 The AI will prioritize untapping of this card.
