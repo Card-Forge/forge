@@ -20,6 +20,6 @@ ManaCost:no cost
 Colors:blue
 Types:Creature Kraken Horror
 PT:7/8
-T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Whenever this creature transforms into CARDNAME, return all non-Horror creatures to their owner's hands.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this creature transforms into CARDNAME, return all non-Horror creatures to their owners' hands.
 SVar:TrigChange:DB$ ChangeZoneAll | ChangeType$ Creature.nonHorror | Origin$ Battlefield | Destination$ Hand
 Oracle:When this creature transforms into Awoken Horror, return all non-Horror creatures to their owners' hands.

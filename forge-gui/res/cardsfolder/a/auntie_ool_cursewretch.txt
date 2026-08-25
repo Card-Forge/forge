@@ -7,4 +7,4 @@ T:Mode$ CounterAddedOnce | ValidCard$ Creature.inRealZoneBattlefield | TriggerZo
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ TriggeredCardLKICopy | ConditionPresent$ Card.YouCtrl | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ TriggeredCardController | ConditionDefined$ TriggeredCardLKICopy | ConditionPresent$ Card.YouDontCtrl
 DeckHints:Ability$Counters
-Oracle:Ward—Blight 2 (To blight 2, a player puts two -1/-1 counters on a creature they control.)\nWhenever one or more -1/-1 counters are put on a creature, draw a card if you control that creature. If you don't control it, its controller loses 1 life.
+Oracle:Ward—Blight 2. (To blight 2, a player puts two -1/-1 counters on a creature they control.)\nWhenever one or more -1/-1 counters are put on a creature, draw a card if you control that creature. If you don't control it, its controller loses 1 life.

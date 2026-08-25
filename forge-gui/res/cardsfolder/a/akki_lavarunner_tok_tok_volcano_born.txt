@@ -3,10 +3,10 @@ ManaCost:3 R
 Types:Creature Goblin Warrior
 PT:1/1
 K:Haste
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigFlip | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, flip it.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigFlip | TriggerDescription$ Whenever this creature deals damage to an opponent, flip it.
 SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
 AlternateMode:Flip
-Oracle:Haste\nWhenever Akki Lavarunner deals damage to an opponent, flip it.
+Oracle:Haste\nWhenever this creature deals damage to an opponent, flip it.
 
 ALTERNATE
 

@@ -2,10 +2,10 @@ Name:Artillery Enthusiast
 ManaCost:R
 Types:Creature Goblin Artificer
 PT:1/2
-S:Mode$ Continuous | Affected$ Creature.modified+YouCtrl | AddKeyword$ Menace | Description$ Modified creatures you control have menace.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters, you may discard a card. If you do, seek a card with mana value equal to that card's mana value.
+S:Mode$ Continuous | Affected$ Creature.modified+YouCtrl | AddKeyword$ Menace | Description$ Modified creatures you control have menace. (Equipment, Auras you control, and counters are modifications.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters, you may discard a card. If you do, seek a card with mana value equal to that card's mana value. (To seek a card, put one at random from your library into your hand.)
 SVar:TrigSeek:AB$ Seek | Cost$ Discard<1/Card> | Type$ Card.cmcEQX
 SVar:X:Discarded$CardManaCost
 DeckHas:Ability$Discard & Keyword$Menace
 DeckHints:Type$Equipment|Aura & Ability$Counters
-Oracle:Modified creatures you control have menace.\nWhen Artillery Enthusiast enters, you may discard a card. If you do, seek a card with mana value equal to that card's mana value.
+Oracle:Modified creatures you control have menace. (Equipment, Auras you control, and counters are modifications.)\nWhen Artillery Enthusiast enters, you may discard a card. If you do, seek a card with mana value equal to that card's mana value. (To seek a card, put one at random from your library into your hand.)

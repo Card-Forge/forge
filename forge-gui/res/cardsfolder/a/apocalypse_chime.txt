@@ -3,4 +3,4 @@ ManaCost:2
 Types:Artifact
 A:AB$ DestroyAll | Cost$ 2 T Sac<1/CARDNAME> | ValidCards$ Permanent.!token+setHML | NoRegen$ True | SpellDescription$ Destroy all nontoken permanents with a name originally printed in the Homelands expansion. They can't be regenerated.
 AI:RemoveDeck:Random
-Oracle:{2}, {T}, Sacrifice Apocalypse Chime: Destroy all nontoken permanents with a name originally printed in the Homelands expansion. They can't be regenerated.
+Oracle:{2}, {T}, Sacrifice this artifact: Destroy all nontoken permanents with a name originally printed in the Homelands expansion. They can't be regenerated.
