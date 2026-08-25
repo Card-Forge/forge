@@ -3,59 +3,104 @@ package forge.ai.ability;
 import org.testng.annotations.Test;
 
 import forge.ai.AITest;
-import forge.ai.SpellApiToAi;
 import forge.game.Game;
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
-/**
- * Making everything unblockable is only worth the cost when the swing it enables is lethal.
- * Exercised with Venser's -1, which never fired at all before EffectAi could ask that.
- */
 public class VenserAiTest extends AITest {
 
     @Test
-    public void goesUnblockableOnlyForLethal() {
-        assertTrue("18 power against 18 life should swing for the win", wouldGoUnblockable(18, null));
-        assertFalse("18 power against 19 life is not worth a loyalty point", wouldGoUnblockable(19, null));
-        assertFalse("a swing the opponent can Fog away is not lethal",
-                wouldGoUnblockable(18, "Kami of False Hope"));
+    public void goesUnblockableForALethalSwing() {
+        Game game = boardWithVenser(18, null);
+        Player opp = game.getPlayers().get(0);
+        Player ai = game.getPlayers().get(1);
+
+        gameLoopUntilNextPhase(game);
+
+        assertEquals(4, loyalty(game));
+        assertTrue(unblockableEffectIsUp(game));
+
+        // and the loyalty actually buys the game: the swing goes through unblocked
+        playUntilPhase(game, PhaseType.MAIN2);
+        assertEquals(0, opp.getLife());
+        assertTrue("the opponent is dead", opp.hasLost());
+        assertEquals("and nothing of ours traded, because nothing could block",
+                3, ourDreadmaws(ai));
     }
 
-    private boolean wouldGoUnblockable(int oppLife, String oppExtra) {
+    @Test
+    public void holdsTheAbilityWhenTheSwingIsShort() {
+        Game game = boardWithVenser(19, null);
+
+        gameLoopUntilNextPhase(game);
+
+        assertEquals(5, loyalty(game));
+    }
+
+    @Test
+    public void holdsTheAbilityAgainstAFog() {
+        Game game = boardWithVenser(18, "Kami of False Hope");
+
+        gameLoopUntilNextPhase(game);
+
+        assertEquals(5, loyalty(game));
+    }
+
+    /**
+     * 18 power against an opponent holding two 6/6 blockers, so the swing is lethal only because
+     * nothing can block it - a check that consulted blockers would answer no on this board.
+     */
+    private Game boardWithVenser(int oppLife, String oppExtra) {
         Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
         Player opp = game.getPlayers().get(0);
 
-        Card venser = addCard("Venser, the Sojourner", ai);
-        venser.setCounters(CounterEnumType.LOYALTY, 5);
-        addCards("Colossal Dreadmaw", 3, ai); // 18 power
-        addCards("Colossal Dreadmaw", 2, opp); // blockers, which stop mattering
+        addCard("Venser, the Sojourner", ai).setCounters(CounterEnumType.LOYALTY, 5);
+        addCards("Colossal Dreadmaw", 3, ai);
+        addCards("Colossal Dreadmaw", 2, opp);
         if (oppExtra != null) {
             addCard(oppExtra, opp);
         }
         opp.setLife(oppLife, null);
+        for (Player p : game.getPlayers()) {
+            fillLibrary(p, 20);
+        }
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
         game.getAction().checkStateEffects(true);
         for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             c.setSickness(false);
         }
+        return game;
+    }
 
-        for (SpellAbility sa : venser.getSpellAbilities()) {
-            if (sa.getApi() == ApiType.Effect && !sa.hasParam("Ultimate")) {
-                sa.setActivatingPlayer(ai);
-                return SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay();
+    private int ourDreadmaws(Player ai) {
+        int n = 0;
+        for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.getName().equals("Colossal Dreadmaw")) {
+                n++;
             }
         }
-        throw new AssertionError("Venser has no -1 ability");
+        return n;
+    }
+
+    /** 5 to start: 4 means the -1 was activated, 7 the +2, and 5 that Venser was left alone. */
+    private int loyalty(Game game) {
+        return findCardWithName(game, "Venser, the Sojourner").getCounters(CounterEnumType.LOYALTY);
+    }
+
+    private boolean unblockableEffectIsUp(Game game) {
+        for (Card c : game.getCardsIn(ZoneType.Command)) {
+            if (c.getName().endsWith("'s Effect") && c.getName().startsWith("Venser, the Sojourner")) {
+                return true;
+            }
+        }
+        return false;
     }
 }
