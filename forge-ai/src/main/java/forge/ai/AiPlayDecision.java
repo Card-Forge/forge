@@ -5,9 +5,9 @@ public enum AiPlayDecision {
     WillPlay,
     MandatoryPlay,
     PlayToEmptyHand,
+    AddBoardPresence,
     ImpactCombat,
     ResponseToStackResolve,
-    AddBoardPresence,
     Removal,
     Tempo,
     CardAdvantage,
@@ -19,28 +19,29 @@ public enum AiPlayDecision {
     StackNotEmpty,
     AnotherTime,
 
-    // Don't play decision reasons
+    // Don't play reasons
     CantPlaySa,
     CantPlayAi,
     CantAfford,
     CantAffordX,
+    TargetingFailed,
+    StopRunawayActivations,
+    CostNotAcceptable,
     DoesntImpactCombat,
     DoesntImpactGame,
-    MissingLogic,
-    MissingNeededCards,
     TimingRestrictions,
     MissingPhaseRestrictions,
-    ConditionsNotMet,
+    MissingLogic,
+    MissingNeededCards,
     NeedsToPlayCriteriaNotMet,
-    StopRunawayActivations,
-    TargetingFailed,
-    CostNotAcceptable,
-    LifeInDanger,
+    ConditionsNotMet,
+    IncreasesLifeInDanger,
+    BadEtbEffects,
+    CurseEffects,
     WouldBecomeZeroToughnessCreature,
     WouldDestroyLegend,
     WouldDestroyWorldEnchantment,
-    BadEtbEffects,
-    CurseEffects;
+    HybridSimRejected;
 
     public boolean willingToPlay() {
         return switch (this) {
