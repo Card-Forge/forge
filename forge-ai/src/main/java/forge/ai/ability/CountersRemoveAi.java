@@ -153,11 +153,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                     Card depth = depthsList.getFirst();
                     int ice = depth.getCounters(iceType);
                     if (amount >= ice) {
-                        sa.getTargets().add(depth);
-                        if (xPay) {
-                            sa.setXManaCostPaid(ice);
-                        }
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        return takeTarget(sa, depth, xPay, amount, ice);
                     }
                 }
             }
@@ -172,11 +168,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
             if (!planeswalkerList.isEmpty()) {
                 Card best = ComputerUtilCard.getBestPlaneswalkerAI(planeswalkerList);
-                sa.getTargets().add(best);
-                if (xPay) {
-                    sa.setXManaCostPaid(best.getCurrentLoyalty());
-                }
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                return takeTarget(sa, best, xPay, amount, best.getCurrentLoyalty());
             }
 
             // do as M1M1 part
