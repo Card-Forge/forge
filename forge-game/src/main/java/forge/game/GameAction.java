@@ -699,11 +699,11 @@ public class GameAction {
             stAb.setActiveZone(EnumSet.of(ZoneType.Command));
             // needed for ETB lookahead like Bronzehide Lion
             stAb.putParam("AffectedZone", "All");
-            SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Battlefield");
             eff.getOwner().getZone(ZoneType.Command).add(eff);
         }
 
         eff.addRemembered(copied);
+        copied.addLeavesPlayCommand(() -> cleanStaticEffect(eff, copied));
         // refresh needed for canEnchant checks
         checkStaticAbilities(false, Sets.newHashSet(copied), new CardCollection(copied));
         return eff;
