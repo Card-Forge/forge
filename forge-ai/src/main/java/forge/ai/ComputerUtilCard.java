@@ -1,6 +1,7 @@
 package forge.ai;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.IdentityHashMap;
@@ -30,6 +31,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.MagicColor.Constant;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -211,6 +213,111 @@ public class ComputerUtilCard {
         return cardStream.max(Comparator.comparing(Card::getCMC)).orElse(null);
     }
 
+    /** Score per source fixed, on the scale AiController's land scoring already uses. */
+    public static final int COLOR_FIXING_WEIGHT = 50;
+    /**
+     * A land that casts something this turn is rated at twice a source fixed - it necessarily fixed
+     * one to get there, and being able to spend the mana now is worth more than being closer to it.
+     * Not a dominant term: a land fixing several colors can still outrank one that casts a single
+     * spell, which is deliberate, since a mana base is built over more than this turn.
+     */
+    public static final int CASTABLE_NOW_WEIGHT = 2 * COLOR_FIXING_WEIGHT;
+
+    /** How many missing sources these extra ones supply across the player's hand and board. */
+    private static int countSourcesFixed(final Player benefits, final int[] have, final int[] with) {
+        if (Arrays.equals(have, with)) {
+            return 0;
+        }
+
+        int fixed = 0;
+        for (Card c : benefits.getCardsIn(ZoneType.Hand)) {
+            fixed += countSourcesFixed(c.getManaCost(), have, with);
+        }
+        for (Card c : benefits.getCardsIn(ZoneType.Battlefield)) {
+            // only what can be activated from here, not the permanent's own casting cost
+            for (SpellAbility ab : c.getNonManaAbilities()) {
+                if (!ab.isActivatedAbility() || ab.getPayCosts() == null
+                        || ab.getPayCosts().getCostMana() == null) {
+                    continue;
+                }
+                fixed += countSourcesFixed(ab.getPayCosts().getCostMana().getMana(), have, with);
+            }
+        }
+        return fixed;
+    }
+
+    /** What this land is worth to the player's mana: what it makes payable, plus spare depth. */
+    public static int getColorFixingValue(final Player benefits, final Card candidate) {
+        if (benefits == null || candidate == null) {
+            return 0;
+        }
+        // one pass over the battlefield; the candidate only ever adds to what is already there
+        final int[] have = ComputerUtilCost.getManaSourceCounts(benefits);
+        final int[] with = have.clone();
+        ComputerUtilCost.addManaSources(candidate, with);
+
+        // Two things decide a land. countSourcesFixed grades how much closer it brings the colored
+        // requirements; this asks what the counting cannot - whether it lets something be cast this
+        // turn, mana and all. A land doing both scores for both. It only taps once, so where it
+        // makes several colors, take the best rather than the sum.
+        int castableNow = 0;
+        for (MagicColor.Color color : MagicColor.Color.values()) {
+            if (with[color.ordinal()] > have[color.ordinal()]) {
+                castableNow = Math.max(castableNow, ComputerUtilCost.countUnlockedNow(benefits, color));
+            }
+        }
+        return CASTABLE_NOW_WEIGHT * castableNow
+                + COLOR_FIXING_WEIGHT * countSourcesFixed(benefits, have, with)
+                + evaluateSpareSources(have, with);
+    }
+
+    /** Value of a spare source of a color nothing needs yet, falling off as sources accumulate. */
+    private static int evaluateSpareSources(final int[] have, final int[] with) {
+        int value = 0;
+        for (int i = 0; i < have.length; i++) {
+            if (with[i] > have[i]) {
+                // 1/(x+1) for diminishing returns, matching the land scoring this replaces
+                value += ((with[i] - have[i]) * COLOR_FIXING_WEIGHT) / (have[i] + 1);
+            }
+        }
+        return value;
+    }
+
+    /** How many more colored sources this cost still wants; zero once it is castable. */
+    private static int countMissingSources(final ManaCost cost, final int[] counts) {
+        if (cost == null || cost.isNoCost()) {
+            return 0;
+        }
+        byte mask = 0;
+        for (MagicColor.Color color : MagicColor.Color.values()) {
+            if (counts[color.ordinal()] > 0) {
+                mask |= color.getColorMask();
+            }
+        }
+        int[] need = new int[counts.length];
+        int missing = 0;
+        for (ManaCostShard shard : cost) {
+            if (shard.isPhyrexian()) {
+                continue;
+            }
+            if (shard.isMonoColor() && !shard.isOr2Generic()) {
+                // a plain colored pip wants a source of its own
+                need[MagicColor.Color.fromByte(shard.getColorMask()).ordinal()]++;
+            } else if (!shard.canBePaidWithManaOfColor(mask)) {
+                missing++;                   // hybrid and generic keep the looser check
+            }
+        }
+        for (int i = 0; i < need.length; i++) {
+            missing += Math.max(0, need[i] - counts[i]);
+        }
+        return missing;
+    }
+
+    /** How many of one cost's missing sources these extra ones supply, never negative. */
+    private static int countSourcesFixed(final ManaCost cost, final int[] have, final int[] with) {
+        return Math.max(0, countMissingSources(cost, have) - countMissingSources(cost, with));
+    }
+
     /**
      * <p>
      * getBestLandAI.
@@ -220,6 +327,10 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestLandAI(final Iterable<Card> list) {
+        return getBestLandAI(null, list);
+    }
+
+    public static Card getBestLandAI(final Player benefits, final Iterable<Card> list) {
         final List<Card> land = CardLists.filter(list, CardPredicates.LANDS);
         if (land.isEmpty()) {
             return null;
@@ -249,7 +360,9 @@ public class ComputerUtilCard {
                 }
             }
 
-            return Aggregates.random(nbLand);
+            // a colour we are short of outranks raw land value; ties fall through to it
+            return Aggregates.itemWithMax(nbLand,
+                    c -> getColorFixingValue(benefits, c) + landEvaluator.apply(c));
         }
 
         // if no non-basic lands, target the least represented basic land type

@@ -211,7 +211,7 @@ public class ControlGainAi extends SpellAbilityAi {
                 } else if (artifacts > 0) {
                     t = ComputerUtilCard.getBestArtifactAI(list);
                 } else if (lands > 0) {
-                    t = ComputerUtilCard.getBestLandAI(list);
+                    t = ComputerUtilCard.getBestLandAI(ai, list);
                 } else if (enchantments > 0) {
                     t = ComputerUtilCard.getBestEnchantmentAI(list, sa, false);
                 } else {
