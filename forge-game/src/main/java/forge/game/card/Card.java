@@ -3439,16 +3439,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         for (SpellAbility sa : getSpellAbilities()) {
-            // while Adventure and Omen are part of Secondary
-            if ((sa.isAdventure() || sa.isOmen()) && !getCurrentStateName().equals(sa.getCardStateName())) {
+            if (sa.isLandAbility() || sa.isBasicSpell()) {
                 continue;
             }
-            if (sa.isLandAbility()) {
-                continue;
-            }
-            if (!(sa instanceof SpellPermanent && sa.isBasicSpell())) {
-                return false;
-            }
+            return false;
         }
         return true;
     }
