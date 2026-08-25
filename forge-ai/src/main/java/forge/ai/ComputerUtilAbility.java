@@ -247,7 +247,6 @@ public class ComputerUtilAbility {
         public int compareEvaluator(final SpellAbility a, final SpellAbility b, boolean safeToEvaluateCreatures) {
             // we want the highest costs first
             // TODO support alternative strategies like going wide with attackers
-
             int a1 = a.getPayCosts().getTotalMana().getCMC();
             int b1 = b.getPayCosts().getTotalMana().getCMC();
 
