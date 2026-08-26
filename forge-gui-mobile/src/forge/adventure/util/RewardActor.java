@@ -475,7 +475,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     //Comment did not contain the edition code, this is not a basic booster pack
                 }
 
-                Sprite item = null;
+                Sprite item;
                 boolean found = !imageKey.isEmpty();
                 if(found) {
                     Texture t = ImageCache.getInstance().getImage(imageKey, false, true);
@@ -495,12 +495,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     item = Config.instance().getItemSprite("Deck");
                     setItemTooltips(item, backSprite, isBooster);
                 }
-                if (isBooster)
-                    processSprite(backSprite, item, Controls.newTextraLabel("[%200]" + editionCode + " Booster"), 0,
-                            -10, isBooster);
-                else
-                    processSprite(backSprite, item, Controls.newTextraLabel("[%200]Event Reward Pack"), 0, -10,
-                            isBooster);
+                processSprite(backSprite, item, isBooster
+                    ? Controls.newTextraLabel("[%200]" + editionCode + " Booster")
+                    : Controls.newTextraLabel("[%200]Event Reward Pack"), 0, -10, isBooster);
                 needsToBeDisposed = true;
                 break;
             }
@@ -550,7 +547,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             ActorGestureListener gestureListener = new ActorGestureListener() {
                 @Override
                 public boolean longPress(Actor actor, float x, float y) {
-                    processListenerEvent(ListenerEventType.CLICKED, x, y);
+                    processListenerEvent(ListenerEventType.LONG_PRESS, x, y);
                     return true;
                 }
             };
@@ -596,12 +593,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         TOUCH_DOWN,
         TOUCH_UP,
         ENTER,
-        EXIT
+        EXIT,
+        LONG_PRESS
 
     }
     private void processListenerEvent(ListenerEventType event, float x, float y) {
         switch (event) {
-            case CLICKED -> {
+            case CLICKED, LONG_PRESS -> {
                 if (isDragging) {
                     isDragging = false;
                     return;
@@ -1033,8 +1031,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 holdTooltip.hide();
                 holdTooltip.tooltip_actor.clear();
                 holdTooltip.tooltip_actor.remove();
-            } catch (Exception e) {
-            }
+            } catch (Exception ignored) {}
         }
         if (autoSell != null)
             autoSell.remove();
@@ -1502,11 +1499,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         && Reward.Type.Card.equals(reward.type)) {
                         shouldDisplayText = !shouldDisplayText;
                         switchTooltip();
-                        handledFling = true;
                     } else {
                         closeOnRelease = true;
-                        handledFling = true;
                     }
+                    handledFling = true;
                 }
 
                 @Override
