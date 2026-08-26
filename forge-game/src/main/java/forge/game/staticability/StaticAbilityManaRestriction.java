@@ -1,9 +1,7 @@
 package forge.game.staticability;
 
-import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 
 public class StaticAbilityManaRestriction {
     public static boolean manaRestriction(final SpellAbility sa, final Card source)  {
