@@ -516,6 +516,35 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 break;
             }
         }
+        ClickListener clickListener = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                processListenerEvent(ListenerEventType.CLICKED, event.getStageX(), event.getStageY());
+            }
+
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                processListenerEvent(ListenerEventType.ENTER, event.getStageX(), event.getStageY());
+            }
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                processListenerEvent(ListenerEventType.EXIT, event.getStageX(), event.getStageY());
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                processListenerEvent(ListenerEventType.TOUCH_DOWN, event.getStageX(), event.getStageY());
+                return super.touchDown(event, x, y, pointer, button);
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                processListenerEvent(ListenerEventType.TOUCH_UP, event.getStageX(), event.getStageY());
+                super.touchUp(event, x, y, pointer, button);
+            }
+        };
+        addListener(clickListener);
         if (isAndroidorHasGamepad()) {
             // Mobile: restore longPress and process as click event
             ActorGestureListener gestureListener = new ActorGestureListener() {
@@ -528,30 +557,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             gestureListener.getGestureDetector().setLongPressSeconds(0.1f);
             addListener(gestureListener);
         } else {
-            addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    if (isDragging) {
-                        isDragging = false;
-                        return;
-                    }
-                    if (flipOnClick)
-                        flip();
-                    if (frontSideUp())
-                        alternate = !alternate;
-                    switchTooltip();
-                }
-
-                @Override
-                public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    hover = true;
-                }
-
-                @Override
-                public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    hover = false;
-                }
-            });
             // Desktop: vertical drag while hovering toggles Oracle text in the tooltip.
             if (Reward.Type.Card.equals(reward.type)) {
                 addListener(new DragListener() {
@@ -586,6 +591,63 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
     }
 
+    enum ListenerEventType {
+        CLICKED,
+        TOUCH_DOWN,
+        TOUCH_UP,
+        ENTER,
+        EXIT
+
+    }
+    private void processListenerEvent(ListenerEventType event, float x, float y) {
+        switch (event) {
+            case CLICKED -> {
+                if (isDragging) {
+                    isDragging = false;
+                    return;
+                }
+                if (isAndroidorHasGamepad()) {
+                    if (!frontSideUp() && flipOnClick) {
+                        flip();
+                        return;
+                    }
+                    if (holdTooltip != null) {
+                        // Recover if shown was left true after the overlay actors were removed.
+                        if (shown && !holdTooltip.isVisibleOnStage())
+                            shown = false;
+
+                        if (!shown)
+                            holdTooltip.show();
+                    }
+                } else {
+                    if (flipOnClick)
+                        flip();
+                    if (frontSideUp())
+                        alternate = !alternate;
+                    switchTooltip();
+                }
+            }
+            case ENTER -> hover = true;
+            case EXIT -> {
+                //don't exit hover if the pointer is still hovering
+                if (Controls.actorContainsVector(this, x, y))
+                    return;
+                hover = false;
+            }
+            case TOUCH_DOWN -> {
+                if (isAndroidorHasGamepad()) {
+                    isDragging = false;
+                    hover = true;
+                }
+            }
+            case TOUCH_UP -> {
+                if (isAndroidorHasGamepad()) {
+                    hover = false;
+                }
+            }
+        }
+
+    }
     private Texture getRenderedBackface(Reward r) {
         if (Talt == null)
             Talt = renderPlaceholder(new Graphics(), r.getCard(), true);
@@ -1207,6 +1269,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     batch.setShader(null);
                     batch.begin();
                 }
+            }
+            // this is needed here for cards hovered
+            if (hover | hasKeyboardFocus()) {
+                batch.draw(Forge.getGraphics().getGrayTexture(), x, -getHeight() / 2, width, getHeight());
             }
             if (hasbackface) {
                 TextureRegion icon = FSkinImage.ADV_FLIPICON.getTextureRegion();
