@@ -429,9 +429,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         if (!hasParam("ManaRestriction")) { return true; }
         String res = getParam("ManaRestriction");
-        if (res.equals("None")) {
-            return false;
-        }
         if (res.equals("ChosenColor")) {
             return this.getHostCard().hasChosenColor() && shard == ManaAtom.fromName(this.getHostCard().getChosenColor());
         }
