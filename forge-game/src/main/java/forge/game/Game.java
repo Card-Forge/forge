@@ -37,6 +37,7 @@ import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
+import forge.game.shortcut.ShortcutManager;
 import forge.game.state.GameStateFingerprint;
 import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
@@ -280,6 +281,11 @@ public class Game {
     // REFORGE COMMANDER EXTENSION
     // Rolling history of board-state fingerprints for infinite-loop detection (#48).
     private final ArrayDeque<String> loopStateFingerprints = new ArrayDeque<>();
+
+    // REFORGE COMMANDER EXTENSION
+    // CR 720 shortcut-proposal manager (#52). One in-flight declaration at a time;
+    // engine core only — the loop-builder dialog and opponent-response UI are deferred.
+    private final ShortcutManager shortcutManager = new ShortcutManager(this); // doc:11h PARTIAL
     public final void addChangeZoneLKIInfo(Card lki) {
         if (lki == null) {
             return;
@@ -648,6 +654,10 @@ public class Game {
             p.loopDraw();
         }
         setGameOver(GameEndReason.Draw);
+    }
+
+    public ShortcutManager getShortcutManager() {
+        return shortcutManager;
     }
 
     public Zone getZoneOf(final Card card) {
