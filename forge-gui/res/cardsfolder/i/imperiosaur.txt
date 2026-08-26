@@ -2,5 +2,5 @@ Name:Imperiosaur
 ManaCost:2 G G
 Types:Creature Dinosaur
 PT:5/5
-S:Mode$ ManaRestriction | ValidSA$ Spell.Self | ValidSource$ Land.Basic+inZoneBattlefield | EffectZone$ All | Description$ Spend only mana produced by basic lands to cast this spell.
+S:Mode$ ManaRestriction | ValidSource$ Land.Basic+inZoneBattlefield | EffectZone$ All | Description$ Spend only mana produced by basic lands to cast this spell.
 Oracle:Spend only mana produced by basic lands to cast this spell.

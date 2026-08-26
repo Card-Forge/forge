@@ -5,23 +5,20 @@ import forge.game.spellability.SpellAbility;
 
 public class StaticAbilityManaRestriction {
     public static boolean manaRestriction(final SpellAbility sa, final Card source)  {
+        if (!sa.isSpell()) {
+            return false;
+        }
+        // only applies to Static Abilities of the HostCard
         for (final StaticAbility stAb : sa.getHostCard().getStaticAbilities()) {
             if (!stAb.checkConditions(StaticAbilityMode.ManaRestriction)) {
                 continue;
             }
 
-            if (applyValid(stAb, sa) && !applySource(stAb, source)) {
+            if (!applySource(stAb, source)) {
                 return true;
             }
         }
         return false;
-    }
-
-    private static boolean applyValid(final StaticAbility stAb, final SpellAbility sa) {
-        if (!stAb.matchesValidParam("ValidSA", sa)) {
-            return false;
-        }
-        return true;
     }
 
     private static boolean applySource(final StaticAbility stAb, final Card source) {
