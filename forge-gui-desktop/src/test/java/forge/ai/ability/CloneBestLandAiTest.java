@@ -14,6 +14,13 @@ import forge.game.player.Player;
  */
 public class CloneBestLandAiTest extends AITest {
 
+    /** The Stage is taken at the end of the turn before ours, so run the game from there. */
+    private void runAtOppEndStep(Game game, Player opp) {
+        game.getPhaseHandler().devModeSet(PhaseType.END_OF_TURN, opp);
+        game.getAction().checkStateEffects(true);
+        gameLoopUntilNextPhase(game);
+    }
+
     @Test
     public void copiesTheBetterLandItControls() {
         Game game = initAndCreateGame();
@@ -28,12 +35,41 @@ public class CloneBestLandAiTest extends AITest {
         addCard("Gaea's Cradle", ai);
         addCards("Grizzly Bears", 3, ai);
 
-        // end of the opponent's turn, so ours is next
-        game.getPhaseHandler().devModeSet(PhaseType.END_OF_TURN, opp);
-        game.getAction().checkStateEffects(true);
-        gameLoopUntilNextPhase(game);
+        runAtOppEndStep(game, opp);
 
         AssertJUnit.assertEquals("Ancient Tomb", stage.getName());
+    }
+
+    @Test
+    public void copiesAnOpponentsLandToo() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card stage = addCard("Thespian's Stage", ai);
+        addCards("Swamp", 4, ai);
+        addCard("Ancient Tomb", opp);
+
+        runAtOppEndStep(game, opp);
+
+        AssertJUnit.assertEquals("Ancient Tomb", stage.getName());
+    }
+
+    @Test
+    public void ignoresALandThatOnlyScoresOnTheirBoard() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card stage = addCard("Thespian's Stage", ai);
+        addCards("Swamp", 4, ai);
+        // huge for them, worthless for us: the creatures it counts are on their side
+        addCard("Gaea's Cradle", opp);
+        addCards("Grizzly Bears", 3, opp);
+
+        runAtOppEndStep(game, opp);
+
+        AssertJUnit.assertEquals("Thespian's Stage", stage.getName());
     }
 
     @Test
@@ -46,25 +82,6 @@ public class CloneBestLandAiTest extends AITest {
         addCards("Swamp", 4, ai);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
-        game.getAction().checkStateEffects(true);
-        gameLoopUntilNextPhase(game);
-
-        AssertJUnit.assertEquals("Thespian's Stage", stage.getName());
-    }
-
-    @Test
-    public void leavesItAloneWithNothingBetterAround() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(1);
-        Player opp = game.getPlayers().get(0);
-
-        Card stage = addCard("Thespian's Stage", ai);
-        addCards("Swamp", 4, ai);
-        // the only upgrade on the board is theirs, and it would be scored under them rather than
-        // under us, so it is not one to read
-        addCard("Ancient Tomb", opp);
-
-        game.getPhaseHandler().devModeSet(PhaseType.END_OF_TURN, opp);
         game.getAction().checkStateEffects(true);
         gameLoopUntilNextPhase(game);
 
