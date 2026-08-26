@@ -1,0 +1,92 @@
+floodwater_homarid.png
+size: 512,240
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 256, 0
+  size: 16, 16
+Idle
+  xy: 0, 0
+  size: 64, 48
+Idle
+  xy: 64, 0
+  size: 64, 48
+Idle
+  xy: 128, 0
+  size: 64, 48
+Idle
+  xy: 192, 0
+  size: 64, 48
+Walk
+  xy: 0, 48
+  size: 64, 48
+Walk
+  xy: 64, 48
+  size: 64, 48
+Walk
+  xy: 128, 48
+  size: 64, 48
+Walk
+  xy: 192, 48
+  size: 64, 48
+Walk
+  xy: 256, 48
+  size: 64, 48
+Walk
+  xy: 320, 48
+  size: 64, 48
+Walk
+  xy: 384, 48
+  size: 64, 48
+Walk
+  xy: 448, 48
+  size: 64, 48
+Attack
+  xy: 0, 96
+  size: 128, 48
+Attack
+  xy: 128, 96
+  size: 128, 48
+Attack
+  xy: 256, 96
+  size: 128, 48
+Attack
+  xy: 384, 96
+  size: 128, 48
+Attack
+  xy: 0, 144
+  size: 128, 48
+Attack
+  xy: 128, 144
+  size: 128, 48
+Attack
+  xy: 256, 144
+  size: 128, 48
+Attack
+  xy: 384, 144
+  size: 128, 48
+Death
+  xy: 0, 192
+  size: 64, 48
+Death
+  xy: 64, 192
+  size: 64, 48
+Death
+  xy: 128, 192
+  size: 64, 48
+Death
+  xy: 192, 192
+  size: 64, 48
+Death
+  xy: 256, 192
+  size: 64, 48
+Death
+  xy: 320, 192
+  size: 64, 48
+Death
+  xy: 384, 192
+  size: 64, 48
+Death
+  xy: 448, 192
+  size: 64, 48

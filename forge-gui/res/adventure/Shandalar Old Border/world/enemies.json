@@ -102124,8 +102124,8 @@
   },
   {
     "name": "FEM Floodwater Homarid",
-    "sprite": "sprites/enemy/fallen_empires/svyelunite/floodwater_homarid_placeholder.atlas",
-    "scale": 0.3,
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/floodwater_homarid.atlas",
+    "scale": 0.375,
     "deck": [
       "decks/standard/fallen_empires_svyelunite_floodwater_homarid.dck"
     ],
