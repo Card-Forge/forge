@@ -517,53 +517,16 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             }
         }
         if (isAndroidorHasGamepad()) {
-            addListener(new ClickListener() {
+            // Mobile: restore longPress and process as click event
+            ActorGestureListener gestureListener = new ActorGestureListener() {
                 @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    if (isDragging) {
-                        isDragging = false;
-                        return;
-                    }
-
-                    if (!frontSideUp() && flipOnClick) {
-                        flip();
-                        return;
-                    }
-
-                    // Tap opens a sticky detail overlay (no hold required).
-                    if (holdTooltip != null) {
-                        // Recover if shown was left true after the overlay actors were removed.
-                        if (shown && !holdTooltip.isVisibleOnStage())
-                            shown = false;
-                            
-                        if (!shown)
-                            holdTooltip.show();
-                    }
+                public boolean longPress(Actor actor, float x, float y) {
+                    processListenerEvent(ListenerEventType.CLICKED, x, y);
+                    return true;
                 }
-
-                @Override
-                public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    hover = true;
-                }
-
-                @Override
-                public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    hover = false;
-                }
-
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    isDragging = false;
-                    hover = true;
-                    return super.touchDown(event, x, y, pointer, button);
-                }
-
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    hover = false;
-                    super.touchUp(event, x, y, pointer, button);
-                }
-            });
+            };
+            gestureListener.getGestureDetector().setLongPressSeconds(0.1f);
+            addListener(gestureListener);
         } else {
             addListener(new ClickListener() {
                 @Override
