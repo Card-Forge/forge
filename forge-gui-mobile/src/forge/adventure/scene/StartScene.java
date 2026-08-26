@@ -9,6 +9,7 @@ import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
+import forge.adventure.util.AdventureBackgroundDownloader;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
@@ -258,6 +259,8 @@ public class StartScene extends UIScene {
 
         FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(Config.instance().getPrefix());
+        GuiBase.setAdventureCacheDirectory(Config.instance().getCachePrefix());
+        AdventureBackgroundDownloader.start();
 
         if (Forge.createNewAdventureMap) {
             this.NewGame();
