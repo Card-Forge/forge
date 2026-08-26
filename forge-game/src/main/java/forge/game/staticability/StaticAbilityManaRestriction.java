@@ -7,16 +7,13 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityManaRestriction {
     public static boolean manaRestriction(final SpellAbility sa, final Card source)  {
-        final Game game = source.getGame();
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(StaticAbilityMode.ManaRestriction)) {
-                    continue;
-                }
+        for (final StaticAbility stAb : sa.getHostCard().getStaticAbilities()) {
+            if (!stAb.checkConditions(StaticAbilityMode.ManaRestriction)) {
+                continue;
+            }
 
-                if (applyValid(stAb, sa) && !applySource(stAb, source)) {
-                    return true;
-                }
+            if (applyValid(stAb, sa) && !applySource(stAb, source)) {
+                return true;
             }
         }
         return false;
