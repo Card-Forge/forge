@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -15,7 +14,6 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import java.util.Collection;
 import java.util.List;
@@ -182,25 +180,9 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     if (sa.hasParam("TargetingPlayer")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
-                        MutableBoolean reset = new MutableBoolean(false);
-                        list = CardLists.filter(list, c -> {
-                            if (!c.isCreature() || c.getController().equals(aiPlayer)) {
-                                return true;
-                            }
-                            if (!sa.hasParam("SetToughness") && c.getStaticAbilities().stream().anyMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
-                                // if the copy has a toughness-setting CDA better check it doesn't die under our control
-                                final Card copy = CardCopyService.getLKICopy(c);
-                                copy.setController(aiPlayer, game.getNextTimestamp());
-                                game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), new CardCollection(copy));
-                                reset.setTrue();
-                                if (copy.getNetToughness() < 1) {
-                                    return false;
-                                }
-                            }
-                            return true;
-                        });
-                        if (reset.isTrue()) {
-                            game.getAction().checkStaticAbilities(false);
+                        if (!sa.hasParam("SetToughness")) {
+                            // the copy would land under our control, where a toughness-setting CDA reads a different board
+                            list = ComputerUtilCard.filterOutFatalCopies(list, aiPlayer);
                         }
                         choice = ComputerUtilCard.getBestCreatureAI(list);
                     }
