@@ -38,6 +38,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_SCREENREADER_OPTIMIZE("false"),
         UI_TOUCHSCREEN_OPTIMIZE("false"),
         UI_DOCK_LAYOUT (""),
+        UI_IMAGE_CACHE_MAXIMUM("400"),
 
         // Mobile only
         UI_LANDSCAPE_MODE ("false"),
@@ -82,7 +83,6 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_AUTO_AIDECK_SELECTION("true"),
         UI_DISABLE_CARD_IMAGES ("false"),
         UI_REVERSE_PROMPT_BUTTON ("false"),
-        UI_IMAGE_CACHE_MAXIMUM("400"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
         UI_CARD_IMAGE_RENDER_USE_SANS_SERIF_FONT ("true"),

@@ -1,0 +1,29 @@
+[metadata]
+Code=SLZ
+Date=2026-12-31
+Name=The Zeta Set
+Type=Collector_Edition
+ScryfallCode=SLZ
+
+[cards]
+10 C Serra Angel @MSCHF
+33 U Windfall @MSCHF
+51 C Unearth @MSCHF
+58 U Glimpse the Impossible @MSCHF
+88 C Baleful Strix @MSCHF
+102 R Darksteel Monolith @MSCHF
+119 R Oboro, Palace in the Clouds @MSCHF
+131 C Serra Angel @MSCHF
+154 U Windfall @MSCHF
+172 C Unearth @MSCHF
+179 U Glimpse the Impossible @MSCHF
+209 C Baleful Strix @MSCHF
+223 R Darksteel Monolith @MSCHF
+240 R Oboro, Palace in the Clouds @MSCHF
+252 C Serra Angel @MSCHF
+275 U Windfall @MSCHF
+293 C Unearth @MSCHF
+300 U Glimpse the Impossible @MSCHF
+330 C Baleful Strix @MSCHF
+344 R Darksteel Monolith @MSCHF
+361 R Oboro, Palace in the Clouds @MSCHF

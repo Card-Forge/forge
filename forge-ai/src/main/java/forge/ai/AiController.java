@@ -967,7 +967,7 @@ public class AiController {
 
     private AiPlayDecision saSideEffects(final Card card, final SpellAbility sa) {
         if (usesHybridSimulation()) {
-            return OnePlaySafetyChecker.isAcceptable(player, sa) ? AiPlayDecision.WillPlay : AiPlayDecision.CurseEffects;
+            return OnePlaySafetyChecker.isAcceptable(player, sa) ? AiPlayDecision.WillPlay : AiPlayDecision.HybridSimRejected;
         }
 
         if ((!sa.isSpell() && !sa.isLandAbility()) || usesFullSimulation()) {
