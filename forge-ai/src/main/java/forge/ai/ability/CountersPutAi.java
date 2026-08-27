@@ -717,7 +717,7 @@ public class CountersPutAi extends CountersAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((!sa.isTargetNumberValid()) || (sa.getTargets().isEmpty())) {
+                    if (!sa.isTargetNumberValid() || sa.getTargets().isEmpty()) {
                         sa.resetTargets();
                         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     } else {

@@ -38,6 +38,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_SCREENREADER_OPTIMIZE("false"),
         UI_TOUCHSCREEN_OPTIMIZE("false"),
         UI_DOCK_LAYOUT (""),
+        UI_IMAGE_CACHE_MAXIMUM("400"),
 
         // Mobile only
         UI_LANDSCAPE_MODE ("false"),
@@ -84,7 +85,6 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_AUTO_AIDECK_SELECTION("true"),
         UI_DISABLE_CARD_IMAGES ("false"),
         UI_REVERSE_PROMPT_BUTTON ("false"),
-        UI_IMAGE_CACHE_MAXIMUM("400"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
         UI_CARD_IMAGE_RENDER_USE_SANS_SERIF_FONT ("true"),
@@ -167,6 +167,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_ENABLE_MUSIC ("true"),
         UI_VOL_SOUNDS ("100"),
         UI_VOL_MUSIC ("100"),
+        UI_PAUSE_MUSIC_ON_FOCUS_LOSS ("true"),
         UI_ALT_SOUND_SYSTEM ("false"),
         UI_CURRENT_SOUND_SET("Default"),
         UI_CURRENT_MUSIC_SET("Default"),

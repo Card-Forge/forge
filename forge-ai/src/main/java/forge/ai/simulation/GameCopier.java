@@ -494,21 +494,21 @@ public class GameCopier {
         }
     }
 
-    public GameObject find(GameObject o) {
+    public <T extends GameObject> T find(T o) {
         if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
-            return snapshot.find(o);
+            return (T) snapshot.find(o);
         }
 
-        GameObject result = null;
+        T result = null;
         if (o instanceof Card) {
-            result = cardMap.get(o);
+            result = (T) cardMap.get(o);
             if (result != null) {
                 return result;
             } else {
                 System.out.println("Couldn't map " + o + "/" + System.identityHashCode(o));
             }
         } else if (o instanceof Player) {
-            result = playerMap.get(o);
+            result = (T) playerMap.get(o);
             if (result != null)
                 return result;
         }

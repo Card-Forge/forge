@@ -64,6 +64,8 @@ public class SpellAbilityProperty {
             return sa.isEmbalm();
         } else if (property.equals("Eternalize")) {
             return sa.isEternalize();
+        } else if (property.equals("BeamMeUp")) {
+            return sa.isBeamMeUp();
         } else if (property.equals("Flashback")) {
             return sa.isFlashback();
         } else if (property.equals("Harmonize")) {
@@ -151,7 +153,8 @@ public class SpellAbilityProperty {
             if (source.getEffectSourceAbility() == null) {
                 return false;
             }
-            if (!sa.equals(source.getEffectSourceAbility().getRootAbility().getOriginalAbility())) {
+            SpellAbility root = source.getEffectSourceAbility().getRootAbility();
+            if (!sa.equals(Objects.requireNonNullElse(root.getOriginalAbility(), root))) {
                 return false;
             }
         } else if (property.equals("LastChapter")) {
