@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntity;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
 import forge.game.card.CardState;
@@ -36,7 +37,7 @@ import forge.util.collect.FCollectionView;
  * <p>
  * The three main methods are canPlayAI(), chkAIDrawback and doTriggerAINoCost.
  */
-public abstract class SpellAbilityAi {
+public abstract class SpellAbilityAi extends SpellAbilityEffect {
 
     public Predicate<Card> CREATURE_OR_TAP_ABILITY = c -> {
         if (c.isCreature()) {
@@ -119,14 +120,15 @@ public abstract class SpellAbilityAi {
     }
 
     protected boolean checkConditions(final Player ai, final SpellAbility sa) {
-        // copy it to disable some checks that the AI need to check extra
-        SpellAbilityCondition con = (SpellAbilityCondition) sa.getConditions().copy();
+        SpellAbilityCondition con = sa.getConditions();
 
         // if manaspent, check if AI can pay the colored mana as cost
         if (!con.getManaSpent().isEmpty()) {
             // need to use ManaCostBeingPaid check, can't use Cost#canPay
             ManaCostBeingPaid paid = new ManaCostBeingPaid(new ManaCost(con.getManaSpent()));
             if (ComputerUtilMana.canPayManaCost(paid, sa, ai, sa.isTrigger())) {
+                // copy it to disable some checks that the AI need to check extra
+                con = (SpellAbilityCondition) con.copy();
                 con.setManaSpent("");
             }
         }

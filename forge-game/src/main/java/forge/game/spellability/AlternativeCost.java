@@ -2,6 +2,7 @@ package forge.game.spellability;
 
 public enum AlternativeCost {
     Awaken,
+    BeamMeUp,
     Bestow,
     Blitz,
     Dash,

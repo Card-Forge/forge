@@ -717,6 +717,11 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     SoundSystem.instance.changeBackgroundTrack();
                 }
             }, 7);
+        if (!GuiBase.isAndroid() && !GuiBase.isIOS()) {
+            lstSettings.addItem(new BooleanSetting(FPref.UI_PAUSE_MUSIC_ON_FOCUS_LOSS,
+                Forge.getLocalizer().getMessage("cbPauseMusicOnFocusLoss"),
+                Forge.getLocalizer().getMessage("nlPauseMusicOnFocusLoss")), 7);
+        }
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
             "Use Alternate Sound System",
             "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."), 7);*/

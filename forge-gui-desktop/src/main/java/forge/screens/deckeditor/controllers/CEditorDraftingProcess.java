@@ -65,8 +65,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     private boolean saved = false;
     private final Localizer localizer = Localizer.getInstance();
 
-    //========== Constructor
-
     /**
      * Updates the deck editor UI as necessary draft selection mode.
      */
