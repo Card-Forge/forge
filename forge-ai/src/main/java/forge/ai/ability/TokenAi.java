@@ -44,6 +44,10 @@ public class TokenAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
+        if (ComputerUtil.activateForCost(sa, ai)) {
+            return true;
+        }
+
         final Card source = sa.getHostCard();
         // Planeswalker-related flags
         boolean pwMinus = false;
@@ -133,6 +137,10 @@ public class TokenAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
+        if (ComputerUtil.activateForCost(sa, ai)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
         final Game game = ai.getGame();
         final Player opp = ai.getWeakestOpponent();
 
