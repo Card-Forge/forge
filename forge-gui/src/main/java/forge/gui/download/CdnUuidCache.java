@@ -181,6 +181,30 @@ public final class CdnUuidCache {
         setCache.remove(setCode);
     }
 
+    public static boolean isAvailableInLanguage(String scryfallCode, String collectorNum, String lang) {
+        if (scryfallCode == null || collectorNum == null || lang == null) return false;
+        String setCode = scryfallCode.toLowerCase();
+
+        Map<String, Map<String, LangUuids>> cardMap = ensureSetLoadedReadOnly(setCode);
+        if (cardMap == MISSING_SET) return false;
+
+        Map<String, LangUuids> langMap = cardMap.get(collectorNum);
+        if (langMap == null) return false;
+
+        LangUuids uuids = langMap.get(lang.toLowerCase());
+        return uuids != null && !uuids.isMiss();
+    }
+
+    public static String resolvePreferredLangCode(String preferredLang, String scryfallCode,
+                                                   String collectorNum, String defaultLangCode) {
+        if (preferredLang == null || preferredLang.isEmpty()
+                || FALLBACK_LANG.equalsIgnoreCase(preferredLang)
+                || preferredLang.equalsIgnoreCase(defaultLangCode)) {
+            return defaultLangCode;
+        }
+        return isAvailableInLanguage(scryfallCode, collectorNum, preferredLang) ? preferredLang : defaultLangCode;
+    }
+
     /**
      * Read-only counterpart to {@link #getCdnUrl}: never queues a sync or records a miss. Use
      * from the gameplay image-fetch path, which must not trigger background Scryfall traffic.
@@ -376,7 +400,22 @@ public final class CdnUuidCache {
     }
 
     private static File localCacheFile(String setCode) {
-        return new File(cacheDir(), setCode + ".json.gz");
+        return new File(cacheDir(), safeFileStem(setCode) + ".json.gz");
+    }
+
+    /**
+     * Windows reserves CON, PRN, AUX, NUL, COM1-9 and LPT1-9 as device names -- a file called
+     * {@code con.json.gz} can never be created there, extension or not. This bites us for real:
+     * Conflux's Scryfall set code is "con". Prefix the handful of set codes that collide so their
+     * cache files can actually be written; every other set code is untouched.
+     */
+    private static final java.util.Set<String> WINDOWS_RESERVED_NAMES = new java.util.HashSet<>(java.util.Arrays.asList(
+            "con", "prn", "aux", "nul",
+            "com1", "com2", "com3", "com4", "com5", "com6", "com7", "com8", "com9",
+            "lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9"));
+
+    private static String safeFileStem(String setCode) {
+        return WINDOWS_RESERVED_NAMES.contains(setCode.toLowerCase()) ? "set-" + setCode : setCode;
     }
 
     private static void writeLocalCache(File file, String json) {

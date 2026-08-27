@@ -4,6 +4,7 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.gui.FThreads;
+import forge.gui.download.CdnUuidCache;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
@@ -74,7 +75,8 @@ public abstract class ImageFetcher {
         if (edition == null) return;
 
         String setCode = edition.getScryfallCode();
-        String langCode = edition.getCardsLangCode();
+        String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+        String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, setCode, card.getCollectorNumber(), edition.getCardsLangCode());
 
         // Prefer CDN (no rate limit) if this set was already synced; read-only, see getCdnUrlIfCached().
         if (!StringUtils.isBlank(setCode)) {
@@ -155,7 +157,8 @@ public abstract class ImageFetcher {
                 CardEdition ed = StaticData.instance().getEditions().get(pc.getEdition());
                 if (ed != null) {
                     String setCode = ed.getScryfallCode();
-                    String langCode = ed.getCardsLangCode();
+                    String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+                    String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, setCode, pc.getCollectorNumber(), ed.getCardsLangCode());
                     downloadUrls.add("PLANECHASEBG:" + ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, "", setCode, langCode, true));
                     FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
                     File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, getPlanechaseFilename(cardName));
@@ -330,7 +333,8 @@ public abstract class ImageFetcher {
 
             if (tempdata.length > 2) {
                 String tokenCode = edition.getTokensCode();
-                String langCode = edition.getCardsLangCode();
+                String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+                String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, tokenCode, tempdata[2], edition.getCardsLangCode());
                 // Just assume the CNr from the token image is valid
                 downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tempdata[2], tokenCode, langCode, face));
             } else if (!allTokens.isEmpty()) {
@@ -345,10 +349,11 @@ public abstract class ImageFetcher {
                 while (it.hasNext()) {
                     tis = it.next();
                     String tokenCode = edition.getTokensCode();
-                    String langCode = edition.getCardsLangCode();
                     if (tis.collectorNumber() == null || tis.collectorNumber().isEmpty()) {
                         continue;
                     }
+                    String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+                    String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, tokenCode, tis.collectorNumber(), edition.getCardsLangCode());
 
                     downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tis.collectorNumber(), tokenCode, langCode, face));
                 }

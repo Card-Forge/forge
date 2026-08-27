@@ -397,6 +397,22 @@ public final class ForgeConstants {
         );
     }
 
+    public static Map<String, String> getScryfallCardLanguageMapping() {
+        final java.util.LinkedHashMap<String, String> map = new java.util.LinkedHashMap<>();
+        map.put("English", "en");
+        map.put("Spanish", "es");
+        map.put("French", "fr");
+        map.put("German", "de");
+        map.put("Italian", "it");
+        map.put("Portuguese", "pt");
+        map.put("Japanese", "ja");
+        map.put("Korean", "ko");
+        map.put("Russian", "ru");
+        map.put("Chinese Simplified", "zhs");
+        map.put("Chinese Traditional", "zht");
+        return map;
+    }
+
     public enum CounterDisplayLocation {
 
         TOP("Top of Card"), BOTTOM("Bottom of Card");

@@ -6,6 +6,7 @@ import forge.card.CardEdition;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.ImageUtil;
 import forge.util.ScryfallRateLimiter;
@@ -77,15 +78,22 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
             }
         }
 
-        int setIndex = 0;
-        for (String setCode : needSync) {
-            if (cancel) break;
-            setIndex++;
-            reportStatus("Syncing card data from Scryfall: set " + setIndex + "/" + needSync.size()
-                    + " (" + setCode.toUpperCase() + ")...");
-            ScryfallRateLimiter.awaitCooldownCleared(() -> cancel, this::reportStatus);
-            if (cancel) break;
-            ScryfallSetSync.sync(setCode);
+        // Syncing sets one at a time against the rate-limited Scryfall API is fine for a handful
+        // of sets, but with a cold cache (dozens/hundreds of missing sets) it can take minutes of
+        // sequential requests while barely updating the UI. Past a threshold, do it in one shot
+        // via the bulk-data export instead -- the same mechanism as the "Descarga masiva" button.
+        final int BULK_SYNC_THRESHOLD = 15;
+        if (needSync.size() > BULK_SYNC_THRESHOLD) {
+            reportStatus(needSync.size() + " sets need syncing; using bulk data sync instead of "
+                    + "one-by-one requests...");
+            int setCount = ScryfallBulkDataSync.sync(ScryfallBulkDataSync.BULK_TYPE_DEFAULT_CARDS, null,
+                    (message, fraction) -> reportStatus(message), () -> cancel);
+            if (setCount < 0 && !cancel) {
+                reportStatus("Bulk sync failed; falling back to per-set sync...");
+                syncSetsOneByOne(needSync);
+            }
+        } else {
+            syncSetsOneByOne(needSync);
         }
 
         for (final PaperCard c : matches) {
@@ -95,6 +103,19 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
             }
         }
         return downloads;
+    }
+
+    private void syncSetsOneByOne(List<String> needSync) {
+        int setIndex = 0;
+        for (String setCode : needSync) {
+            if (cancel) break;
+            setIndex++;
+            reportStatus("Syncing card data from an online source: set " + setIndex + "/" + needSync.size()
+                    + " (" + setCode.toUpperCase() + ")...");
+            ScryfallRateLimiter.awaitCooldownCleared(() -> cancel, this::reportStatus);
+            if (cancel) break;
+            ScryfallSetSync.sync(setCode);
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -128,19 +149,23 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
                 ? StaticData.instance().getEditions().get(c.getEdition()) : null;
         String scryfallCode = (edition != null) ? edition.getScryfallCode() : null;
         boolean hasScryfallCode = !StringUtils.isBlank(scryfallCode);
+        String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+        String langCode = (edition != null && hasScryfallCode)
+                ? CdnUuidCache.resolvePreferredLangCode(preferredLang, scryfallCode, collectorNum, edition.getCardsLangCode())
+                : null;
 
         // 1. CDN -- read-only (see CdnUuidCache.getCdnUrlIfCached()); falls through to the API
         // below if the warm-up loop above didn't resolve this set.
         if (edition != null && hasCollectorNum && hasScryfallCode) {
             String cdnUrl = CdnUuidCache.getCdnUrlIfCached(
-                    scryfallCode, collectorNum, edition.getCardsLangCode(), face, "normal");
+                    scryfallCode, collectorNum, langCode, face, "normal");
             if (cdnUrl != null) return cdnUrl;
         }
 
         // 2. Scryfall API
         if (hasCollectorNum && edition != null && hasScryfallCode) {
             String apiPath = ImageUtil.getScryfallDownloadUrl(
-                    c, face, scryfallCode, edition.getCardsLangCode(), false);
+                    c, face, scryfallCode, langCode, false);
             if (apiPath != null) return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + apiPath;
         }
 

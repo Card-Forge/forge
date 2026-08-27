@@ -12,6 +12,8 @@ import forge.gui.download.ScryfallBulkDataSync;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.itemmanager.SFilterUtil;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.toolbox.*;
@@ -54,6 +56,9 @@ public class DialogDownloadCardImages {
     private FPanel mainPanel;
     private FButton btnDownload;
     private FButton btnSyncBulkData;
+    private FComboBox<String> cbxIndexLang;
+    private FButton btnSyncBulkDataLang;
+    private FCheckBox cbPreferLangForUnique;
     private FButton btnClearCdnCache;
 
     public void show() {
@@ -93,7 +98,38 @@ public class DialogDownloadCardImages {
         btnDownload.addActionListener(e -> startDownload());
 
         btnSyncBulkData = new FButton(localizer.getMessage("btnSyncBulkCardData"));
-        btnSyncBulkData.addActionListener(e -> startBulkSync());
+        btnSyncBulkData.addActionListener(e -> startBulkSync(ScryfallBulkDataSync.BULK_TYPE_DEFAULT_CARDS, null, "English"));
+
+        final Map<String, String> cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
+        cbxIndexLang = new FComboBox<>();
+        for (Map.Entry<String, String> entry : cardLangMapping.entrySet()) {
+            if (!"en".equalsIgnoreCase(entry.getValue())) {
+                cbxIndexLang.addItem(entry.getKey());
+            }
+        }
+        final String savedLangCode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+        cardLangMapping.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(savedLangCode))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .ifPresent(cbxIndexLang::setSelectedItem);
+
+        cbPreferLangForUnique = new FCheckBox(localizer.getMessage("cbPreferLangForUniqueCards"),
+                FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS));
+        cbPreferLangForUnique.setToolTipText(localizer.getMessage("nlPreferLangForUniqueCards"));
+
+        btnSyncBulkDataLang = new FButton(localizer.getMessage("btnSyncBulkCardDataLang"));
+        btnSyncBulkDataLang.addActionListener(e -> {
+            String selectedLangName = (String) cbxIndexLang.getSelectedItem();
+            String selectedLangCode = cardLangMapping.get(selectedLangName);
+            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG, selectedLangCode);
+            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS,
+                    String.valueOf(cbPreferLangForUnique.isSelected()));
+            FModel.getPreferences().save();
+            applyPreferredLanguageAvailability(selectedLangCode);
+            startBulkSync(ScryfallBulkDataSync.BULK_TYPE_ALL_CARDS,
+                    new java.util.HashSet<>(java.util.Arrays.asList("en", selectedLangCode)), selectedLangName);
+        });
 
         btnClearCdnCache = new FButton(localizer.getMessage("btnClearCdnImageCache"));
         btnClearCdnCache.addActionListener(e -> clearCdnCache());
@@ -112,11 +148,14 @@ public class DialogDownloadCardImages {
         mainPanel.add(lblTotal, "w 480!, gaptop 15, center");
         mainPanel.add(lblDownloaded, "w 480!, center");
         mainPanel.add(lblMissing, "w 480!, center, gapbottom 10");
-        mainPanel.add(btnDownload, "w 300!, h 32!, center, gaptop 10");
-        mainPanel.add(btnSyncBulkData, "w 300!, h 32!, center, gaptop 8");
+        mainPanel.add(btnDownload, "w 460!, h 32!, center, gaptop 10");
+        mainPanel.add(btnSyncBulkData, "w 460!, h 32!, center, gaptop 8");
+        mainPanel.add(cbxIndexLang, "w 300!, h 32!, split 2, gaptop 8");
+        mainPanel.add(btnSyncBulkDataLang, "w 154!, h 32!");
+        mainPanel.add(cbPreferLangForUnique, "w 460!, center, gaptop 2");
         mainPanel.add(bulkSyncProgress, "w 460!, h 26!, center, gaptop 6");
-        mainPanel.add(btnClearCdnCache, "w 300!, h 32!, center, gaptop 8");
-        mainPanel.add(btnClose, "w 300!, h 32!, center, gaptop 8, gapbottom 15");
+        mainPanel.add(btnClearCdnCache, "w 460!, h 32!, center, gaptop 8");
+        mainPanel.add(btnClose, "w 460!, h 32!, center, gaptop 8, gapbottom 15");
     }
 
     private void showMainOverlay() {
@@ -191,20 +230,30 @@ public class DialogDownloadCardImages {
     /** Called after {@link #show()} to open straight into a confirmed bulk sync (e.g. the first-run prompt). */
     public void showAndAutoStartBulkSync() {
         show();
-        runBulkSync();
+        runBulkSync(ScryfallBulkDataSync.BULK_TYPE_DEFAULT_CARDS, null, "English");
     }
 
-    /** Resolves CDN links for every set at once from Scryfall's bulk data export, instead of one set at a time. */
-    private void startBulkSync() {
-        if (!SOptionPane.showConfirmDialog(localizer.getMessage("lblSyncBulkCardDataConfirm"))) {
+    private void applyPreferredLanguageAvailability(String langCode) {
+        boolean preferForUnique = cbPreferLangForUnique.isSelected();
+        if (!preferForUnique || langCode == null || langCode.isEmpty() || "en".equalsIgnoreCase(langCode)) {
+            FModel.getMagicDb().setPreferredLanguageAvailability(null);
+        } else {
+            FModel.getMagicDb().setPreferredLanguageAvailability((setCode, cn) -> CdnUuidCache.isAvailableInLanguage(setCode, cn, langCode));
+        }
+    }
+
+    /** Resolves CDN links for every set at once from an online bulk index, instead of one set at a time. */
+    private void startBulkSync(String bulkDataType, java.util.Set<String> allowedLangs, String langLabel) {
+        if (!SOptionPane.showConfirmDialog(localizer.getMessage("lblSyncBulkCardDataConfirm", ScryfallBulkDataSync.approxSizeLabel(bulkDataType)))) {
             return;
         }
-        runBulkSync();
+        runBulkSync(bulkDataType, allowedLangs, langLabel);
     }
 
-    private void runBulkSync() {
+    private void runBulkSync(String bulkDataType, java.util.Set<String> allowedLangs, String langLabel) {
         btnDownload.setEnabled(false);
         btnSyncBulkData.setEnabled(false);
+        btnSyncBulkDataLang.setEnabled(false);
         btnClearCdnCache.setEnabled(false);
 
         bulkSyncProgress.reset();
@@ -215,7 +264,7 @@ public class DialogDownloadCardImages {
         bulkSyncProgress.setDescription("Starting...");
 
         FThreads.invokeInBackgroundThread(() -> {
-            int setCount = ScryfallBulkDataSync.sync(
+            int setCount = ScryfallBulkDataSync.sync(bulkDataType, allowedLangs,
                     (message, fraction) -> FThreads.invokeInEdtLater(() -> {
                         bulkSyncProgress.setDescription(message);
                         if (fraction >= 0) {
@@ -229,11 +278,12 @@ public class DialogDownloadCardImages {
             FThreads.invokeInEdtLater(() -> {
                 btnDownload.setEnabled(true);
                 btnSyncBulkData.setEnabled(true);
+                btnSyncBulkDataLang.setEnabled(true);
                 btnClearCdnCache.setEnabled(true);
                 bulkSyncProgress.setIndeterminate(false);
                 if (setCount >= 0) {
                     bulkSyncProgress.setValue(100);
-                    bulkSyncProgress.setDescription(localizer.getMessage("lblBulkCardDataSynced") + " (" + setCount + " sets)");
+                    bulkSyncProgress.setDescription(localizer.getMessage("lblBulkCardDataSynced") + " (" + setCount + " sets) - " + langLabel);
                     scheduleStatsUpdate();
                 } else {
                     bulkSyncProgress.setDescription("Bulk sync failed -- see log for details.");

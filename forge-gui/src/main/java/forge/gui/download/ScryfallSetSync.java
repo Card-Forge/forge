@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.util.BuildInfo;
 import forge.util.ScryfallRateLimiter;
 import org.tinylog.Logger;
@@ -83,6 +85,9 @@ final class ScryfallSetSync {
 
     /** Per-face CDN UUIDs for one card, or {@code null} if it has no usable image data yet. Shared with {@link ScryfallBulkDataSync}. */
     static String[] frontBackUuids(JsonObject card) {
+        String imageStatus = str(card, "image_status");
+        if ("missing".equals(imageStatus) || "placeholder".equals(imageStatus)) return null;
+
         String front;
         String back = null;
         if (card.has("image_uris") && card.get("image_uris").isJsonObject()) {
@@ -123,10 +128,15 @@ final class ScryfallSetSync {
 
     private static String searchUrl(String setCode) {
         String base = searchBaseUrlOverride != null ? searchBaseUrlOverride : DEFAULT_SEARCH_URL;
-        // English only: CdnUuidCache.getCdnUrl() always falls back to "en", and virtually every
-        // edition's cards are English, so "lang:any" fetched ~10x more pages (every printed
-        // language) than needed and was tripping Scryfall's rate limit before finishing a set.
-        String query = "set:" + setCode + " lang:en";
+        // Always fetch English: CdnUuidCache.getCdnUrl() falls back to it, and virtually every
+        // edition's cards are English. "lang:any" fetched ~10x more pages (every printed
+        // language) than needed and was tripping Scryfall's rate limit before finishing a set --
+        // so if the user has a non-English language preference, add just that one language too,
+        // instead of every language.
+        String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+        String query = (preferredLang != null && !preferredLang.isEmpty() && !"en".equalsIgnoreCase(preferredLang))
+                ? "set:" + setCode + " (lang:en or lang:" + preferredLang + ")"
+                : "set:" + setCode + " lang:en";
         return base + "?unique=prints&q=" + URLEncoder.encode(query, StandardCharsets.UTF_8);
     }
 

@@ -17,6 +17,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BooleanSupplier;
 import java.util.zip.GZIPInputStream;
 
@@ -26,7 +27,8 @@ import java.util.zip.GZIPInputStream;
  */
 public final class ScryfallBulkDataSync {
     private static final String BULK_DATA_LISTING_URL = "https://api.scryfall.com/bulk-data";
-    private static final String BULK_DATA_TYPE = "default_cards";
+    public static final String BULK_TYPE_DEFAULT_CARDS = "default_cards";
+    public static final String BULK_TYPE_ALL_CARDS = "all_cards";
     private static final int CONNECT_TIMEOUT_MS = 15_000;
     private static final int READ_TIMEOUT_MS = 60_000;
 
@@ -35,25 +37,32 @@ public final class ScryfallBulkDataSync {
 
     private ScryfallBulkDataSync() {}
 
+    /** Approximate compressed download size for the given bulk type, measured against the live API. */
+    public static String approxSizeLabel(String bulkDataType) {
+        return BULK_TYPE_ALL_CARDS.equals(bulkDataType) ? "375 MB" : "75 MB";
+    }
+
     public interface ProgressListener {
         /** @param fractionDone 0.0-1.0, or -1 if not yet known (e.g. before a Content-Length is available) */
         void onProgress(String message, double fractionDone);
     }
 
     /**
-     * Downloads and parses the "default_cards" bulk file, merging every print into
-     * {@link CdnUuidCache}. Returns the number of sets written, or -1 on failure/cancellation
-     * before any data was merged.
+     * Downloads and parses the given Scryfall bulk file type ({@link #BULK_TYPE_DEFAULT_CARDS} or
+     * {@link #BULK_TYPE_ALL_CARDS}), merging every print into {@link CdnUuidCache}. If
+     * {@code allowedLangs} is non-null, only prints in one of those languages are kept -- lets a
+     * single-language sync of {@code all_cards} skip writing the other 16+ languages to disk.
+     * Returns the number of sets written, or -1 on failure/cancellation before any data was merged.
      */
-    public static int sync(ProgressListener progress, BooleanSupplier cancelled) {
-        String downloadUrl = findDefaultCardsUrl(progress);
+    public static int sync(String bulkDataType, Set<String> allowedLangs, ProgressListener progress, BooleanSupplier cancelled) {
+        String downloadUrl = findBulkDataUrl(bulkDataType, progress);
         if (downloadUrl == null || cancelled.getAsBoolean()) {
             return -1;
         }
 
         final Map<String, Map<String, Map<String, String[]>>> bySet = new HashMap<>();
         try {
-            streamAndAccumulate(downloadUrl, bySet, progress, cancelled);
+            streamAndAccumulate(downloadUrl, bySet, allowedLangs, progress, cancelled);
         } catch (IOException e) {
             Logger.error(e, "ScryfallBulkDataSync: failed to download/parse bulk data");
             if (progress != null) {
@@ -78,17 +87,17 @@ public final class ScryfallBulkDataSync {
             setCount++;
         }
         if (progress != null) {
-            progress.onProgress("Synced " + setCount + " sets from Scryfall bulk data.", 1.0);
+            progress.onProgress("Synced " + setCount + " sets from the online card index.", 1.0);
         }
         return setCount;
     }
 
     // -------------------------------------------------------------------------
 
-    private static String findDefaultCardsUrl(ProgressListener progress) {
+    private static String findBulkDataUrl(String bulkDataType, ProgressListener progress) {
         String url = listingUrlOverride != null ? listingUrlOverride : BULK_DATA_LISTING_URL;
         if (progress != null) {
-            progress.onProgress("Looking up Scryfall bulk data files...", -1);
+            progress.onProgress("Looking up available card index files...", -1);
         }
         try {
             ScryfallRateLimiter.acquire(url);
@@ -117,7 +126,7 @@ public final class ScryfallBulkDataSync {
             JsonArray data = root.has("data") ? root.getAsJsonArray("data") : new JsonArray();
             for (var el : data) {
                 JsonObject obj = el.getAsJsonObject();
-                if (!obj.has("type") || !BULK_DATA_TYPE.equals(obj.get("type").getAsString())) {
+                if (!obj.has("type") || !bulkDataType.equals(obj.get("type").getAsString())) {
                     continue;
                 }
                 if (obj.has("jsonl_download_uri")) {
@@ -127,7 +136,7 @@ public final class ScryfallBulkDataSync {
                     return obj.get("download_uri").getAsString();
                 }
             }
-            Logger.error("ScryfallBulkDataSync: no '{}' entry found in bulk-data listing", BULK_DATA_TYPE);
+            Logger.error("ScryfallBulkDataSync: no '{}' entry found in bulk-data listing", bulkDataType);
             return null;
         } catch (IOException e) {
             Logger.error(e, "ScryfallBulkDataSync: failed to fetch bulk-data listing");
@@ -136,7 +145,7 @@ public final class ScryfallBulkDataSync {
     }
 
     private static void streamAndAccumulate(String downloadUrl, Map<String, Map<String, Map<String, String[]>>> bySet,
-                                             ProgressListener progress, BooleanSupplier cancelled) throws IOException {
+                                             Set<String> allowedLangs, ProgressListener progress, BooleanSupplier cancelled) throws IOException {
         HttpURLConnection conn = (HttpURLConnection) new URL(downloadUrl).openConnection();
         conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
         conn.setReadTimeout(READ_TIMEOUT_MS);
@@ -190,7 +199,7 @@ public final class ScryfallBulkDataSync {
                 } catch (Exception e) {
                     continue; // skip a malformed line rather than aborting the whole sync
                 }
-                addCard(bySet, card);
+                addCard(bySet, card, allowedLangs);
                 cardsSeen[0]++;
 
                 long now = System.currentTimeMillis();
@@ -198,18 +207,21 @@ public final class ScryfallBulkDataSync {
                     lastReportAt = now;
                     double fraction = totalBytes > 0 ? Math.min(1.0, bytesRead[0] / (double) totalBytes) : -1;
                     String pct = totalBytes > 0 ? Math.round(fraction * 100) + "%" : (bytesRead[0] / 1_000_000) + " MB";
-                    progress.onProgress("Downloading Scryfall bulk card data: " + pct
+                    progress.onProgress("Downloading card index: " + pct
                             + " (" + cardsSeen[0] + " cards processed)...", fraction);
                 }
             }
         }
     }
 
-    private static void addCard(Map<String, Map<String, Map<String, String[]>>> bySet, JsonObject card) {
+    private static void addCard(Map<String, Map<String, Map<String, String[]>>> bySet, JsonObject card, Set<String> allowedLangs) {
         String setCode = ScryfallSetSync.str(card, "set");
         String cn = ScryfallSetSync.str(card, "collector_number");
         String lang = ScryfallSetSync.str(card, "lang");
         if (setCode == null || cn == null || lang == null) {
+            return;
+        }
+        if (allowedLangs != null && !allowedLangs.contains(lang)) {
             return;
         }
 

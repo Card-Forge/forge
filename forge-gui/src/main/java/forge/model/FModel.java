@@ -34,6 +34,7 @@ import forge.game.GameType;
 import forge.game.card.CardUtil;
 import forge.game.spellability.Spell;
 import forge.gamemodes.gauntlet.GauntletData;
+import forge.gui.download.CdnUuidCache;
 import forge.gamemodes.limited.GauntletMini;
 import forge.gamemodes.limited.ThemedChaosDraft;
 import forge.gamemodes.planarconquest.ConquestController;
@@ -63,6 +64,7 @@ import forge.util.storage.StorageBase;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 
 /**
@@ -85,7 +87,20 @@ public final class FModel {
             getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS),
             getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS),
             getPreferences().getPrefBoolean(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE),
-            getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART)));
+            getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART),
+            buildPreferredLanguageAvailability()));
+
+    private static BiPredicate<String, String> buildPreferredLanguageAvailability() {
+        if (!getPreferences().getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS)) {
+            return null;
+        }
+        String preferredLang = getPreferences().getPref(FPref.UI_CARD_DOWNLOAD_LANG);
+        if (preferredLang == null || preferredLang.isEmpty() || "en".equalsIgnoreCase(preferredLang)) {
+            return null;
+        }
+        return (setCode, collectorNumber) -> CdnUuidCache.isAvailableInLanguage(setCode, collectorNumber, preferredLang);
+    }
+
     private static final Supplier<QuestPreferences> questPreferences = Suppliers.memoize(QuestPreferences::new);
     private static final Supplier<ConquestPreferences> conquestPreferences = Suppliers.memoize(() -> {
        final ConquestPreferences cp = new ConquestPreferences();
