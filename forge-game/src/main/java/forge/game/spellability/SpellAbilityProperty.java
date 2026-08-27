@@ -153,7 +153,8 @@ public class SpellAbilityProperty {
             if (source.getEffectSourceAbility() == null) {
                 return false;
             }
-            if (!sa.equals(source.getEffectSourceAbility().getRootAbility().getOriginalAbility())) {
+            SpellAbility root = source.getEffectSourceAbility().getRootAbility();
+            if (!sa.equals(Objects.requireNonNullElse(root.getOriginalAbility(), root))) {
                 return false;
             }
         } else if (property.equals("LastChapter")) {

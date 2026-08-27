@@ -49,7 +49,7 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
         Scenario scenario = createDrawScenario(ZoneType.Exile, false, 20);
         Spell freeCast = makeOptionalFreeCast(scenario);
 
-        AssertJUnit.assertEquals(AiPlayDecision.CurseEffects,
+        AssertJUnit.assertEquals(AiPlayDecision.HybridSimRejected,
                 ai(scenario.ai).canPlayFromEffectAI(freeCast, false, true));
         AssertJUnit.assertEquals("Mandatory casts cannot be declined",
                 AiPlayDecision.WillPlay,
