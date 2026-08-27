@@ -1711,7 +1711,9 @@ public class AiController {
             timeoutReached = true;
             future.cancel(true);
             try {
-                t.join(500);
+                // The cancel flag is only checked between abilities, so wait for the one already
+                // running to finish. Carrying on would leave two threads changing the same game.
+                t.join(TimeUnit.SECONDS.toMillis(game.getAITimeout()));
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
             }
