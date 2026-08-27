@@ -7,6 +7,7 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_performer_flying_
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.withFlying+YouCtrl | ValidTarget$ Player | TriggerZones$ Command | Execute$ TrigChoose | TriggerDescription$ Whenever one or more creatures you control with flying deal combat damage to a player, you may return it to your hand. If you do, draw cards equal to its power.
 SVar:TrigChoose:DB$ ChooseCard | DefinedCards$ TriggeredSources | Amount$ NumSources | MinAmount$ 0 | RememberChosen$ True | ChoiceTitle$ Choose creatures to return to your hand | SubAbility$ TrigReturn
 SVar:NumSources:TriggerObjectsSources$Amount
+# Doesn't follow the strict wording of the Oracle text currently. The return effect currently returns cards who attacked back to their owner's hand instead of your hand.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | RememberLKI$ True | ForgetOtherRemembered$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ XPower | ConditionDefined$ RememberedLKI | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanupDraw
 SVar:XPower:RememberedLKI$CardPower
