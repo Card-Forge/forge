@@ -828,13 +828,16 @@ public class MapStage extends GameStage {
             currentMob.clearCollisionHeight();
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
+            float attackDuration = Math.max(1f,
+                    player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 1f));
             currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
                     currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
                     currentMob.resetCollisionHeight();
-                    startPause(0.3f, () -> {
+                    float deathDuration = currentMob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Death, 0.3f);
+                    startPause(deathDuration, () -> {
                         MapStage.this.getReward();
                         AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
                         AdventureQuestController.instance().showQuestDialogs(MapStage.this);
@@ -842,12 +845,15 @@ public class MapStage extends GameStage {
                     });
                     player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 }
-            }, 1f);
+            }, attackDuration);
         } else {
             currentMob.clearCollisionHeight();
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            startPause(0.3f, () -> {
+            float resultAnimationDuration = Math.max(
+                    player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Hit, 0.3f),
+                    currentMob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.3f));
+            startPause(resultAnimationDuration, () -> {
                 player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 currentMob.resetCollisionHeight();
@@ -1145,7 +1151,10 @@ public class MapStage extends GameStage {
         HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER, mob.getData().boss ? 400 : 200);
         Forge.advFreezePlayerControls = true;
         player.clearCollisionHeight();
-        startPause(0.8f, () -> {
+        float attackDuration = Math.max(
+                player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f),
+                mob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f));
+        startPause(attackDuration, () -> {
             if (started)
                 return;
             started = true;

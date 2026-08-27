@@ -134,18 +134,21 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 list = CardLists.filter(list, nameEquals.negate());
             }
 
-            //Nothing to target
             if (list.isEmpty()) {
             	return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             CardCollection betterList = CardLists.filter(list, CardPredicates.isRemAIDeck().negate());
-            if (betterList.isEmpty()) {
-                if (!mandatory) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
-            } else {
+            if (!betterList.isEmpty()) {
                 list = betterList;
+            } else if (!mandatory) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            betterList = CardLists.filter(list, c -> !c.getType().isLegendary() || canCopyLegendary || !c.getController().equals(aiPlayer));
+            if (!betterList.isEmpty()) {
+                list = betterList;
+            } else if (!mandatory) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             // Saheeli Rai + Felidar Guardian combo support
@@ -172,12 +175,15 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     }
                 }
 
-                list = CardLists.filter(list, c -> (!c.getType().isLegendary() || canCopyLegendary) || !c.getController().equals(aiPlayer));
                 Card choice;
                 if (list.stream().anyMatch(CardPredicates.CREATURES)) {
                     if (sa.hasParam("TargetingPlayer")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
+                        if (!sa.hasParam("SetToughness")) {
+                            // the copy would land under our control, where a toughness-setting CDA reads a different board
+                            list = ComputerUtilCard.filterOutFatalCopies(list, aiPlayer);
+                        }
                         choice = ComputerUtilCard.getBestCreatureAI(list);
                     }
                 } else {

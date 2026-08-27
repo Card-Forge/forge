@@ -30,6 +30,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 
 import java.util.Arrays;
@@ -58,6 +59,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
     private EventScene() {
         super(Forge.isLandscapeMode() ? "ui/event.json" : "ui/event_portrait.json");
+        Localizer localizer = Forge.getLocalizer();
         // TODO: Add translation
         float townPriceModifier = changes == null ? 1f : changes.getTownPriceModifier();
         DialogData introDialog = new DialogData();
@@ -78,7 +80,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
         enterWithShards.condition = new DialogData.ConditionData[]{hasShards};
 
         if (currentEvent.eventRules.acceptsChallengeCoin) {
-            enterWithCoin.name = "Redeem a Challenge Coin [+ChallengeCoin]";
+            enterWithCoin.name = localizer.getMessage("advRedeemChallengeCoin");
 
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
             hasCoin.item = "Challenge Coin";
@@ -88,7 +90,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
             giveCoin.removeItem = hasCoin.item;
             enterWithCoin.action = new DialogData.ActionData[]{giveCoin};
         } else if (currentEvent.eventRules.acceptsSilverChallengeCoin) {
-            enterWithCoin.name = "Redeem a Challenge Coin [+SilverChallengeCoin]";
+            enterWithCoin.name = localizer.getMessage("advRedeemSilverChallengeCoin");
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
             hasCoin.item = "Silver Challenge Coin";
             enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
@@ -97,7 +99,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
             giveCoin.removeItem = hasCoin.item;
             enterWithCoin.action = new DialogData.ActionData[]{giveCoin};
         } else if (currentEvent.eventRules.acceptsBronzeChallengeCoin) {
-            enterWithCoin.name = "Redeem a Challenge Coin [+BronzeChallengeCoin]";
+            enterWithCoin.name = localizer.getMessage("advRedeemBronzeChallengeCoin");
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
             hasCoin.item = "Bronze Challenge Coin";
             enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
@@ -246,8 +248,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 List<AdventureEventData.AdventureEventMatch> matches = currentEvent.getMatches(i + 1);
 
                 if (matches == null) {
-                    //todo: add translation
-                    round.add(Controls.newTextraLabel("Pairings not yet generated"));
+                    round.add(Controls.newTextraLabel(Forge.getLocalizer().getMessage("advPairingsNotGenerated")));
                 } else {
                     Table roundScrollContainer = new Table(Controls.getSkin());
                     for (AdventureEventData.AdventureEventMatch match : matches) {
