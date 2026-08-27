@@ -239,7 +239,6 @@ public class ComputerUtilAbility {
 
     public final static saComparator saEvaluator = new saComparator();
 
-    // not sure "playing biggest spell" matters?
     public final static class saComparator implements Comparator<SpellAbility> {
         @Override
         public int compare(final SpellAbility a, final SpellAbility b) {
@@ -357,6 +356,9 @@ public class ComputerUtilAbility {
                 if (source.isCreature()) {
                     p += 1;
                 }
+                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
+                    p -= 10;
+                }
                 if (source.hasSVar("AIPriorityModifier")) {
                     p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
                 }
@@ -364,8 +366,9 @@ public class ComputerUtilAbility {
                 if (source.isInPlay() && source.hasSVar("EndOfTurnLeavePlay")) {
                     p += 1;
                 }
-                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
-                    p -= 10;
+                // prefer spells from hand when it can lower risk of discarding
+                if (source.isInZone(ZoneType.Hand) && !ai.isUnlimitedHandSize()) {
+                    p += Math.max(0, CardLists.count(ai.getCardsIn(ZoneType.Hand), c -> !c.hasSVar("DiscardMe")) - ai.getMaxHandSize());
                 }
                 // don't play equipment before having any creatures
                 if (source.isEquipment() && noCreatures) {

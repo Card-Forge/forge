@@ -704,8 +704,10 @@ public abstract class GameStage extends Stage {
         PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
         if (poi != null) {
             Forge.advFreezePlayerControls = true;
-            getPlayerSprite().setAnimation(CharacterSprite.AnimationTypes.Death);
-            getPlayerSprite().playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            PlayerSprite playerSprite = getPlayerSprite();
+            playerSprite.setAnimation(CharacterSprite.AnimationTypes.Death);
+            playerSprite.playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            float deathDuration = playerSprite.getActionAnimationDuration(CharacterSprite.AnimationTypes.Death, 1f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
@@ -718,7 +720,7 @@ public abstract class GameStage extends Stage {
                         Forge.clearTransitionScreen();
                     }, Forge.takeScreenshot()))));
                 }
-            }, 1f);
+            }, deathDuration);
         }//Spawn shouldn't be null
     }
 
@@ -726,14 +728,16 @@ public abstract class GameStage extends Stage {
         if (!Current.player().hasEquippedItem())
             return;
         Forge.advFreezePlayerControls = true;
-        getPlayerSprite().setAnimation(CharacterSprite.AnimationTypes.Hit);
-        getPlayerSprite().playEffect(Paths.EFFECT_BLOOD, 0.5f);
+        PlayerSprite playerSprite = getPlayerSprite();
+        playerSprite.setAnimation(CharacterSprite.AnimationTypes.Hit);
+        playerSprite.playEffect(Paths.EFFECT_BLOOD, 0.5f);
+        float hitDuration = playerSprite.getActionAnimationDuration(CharacterSprite.AnimationTypes.Hit, 1f);
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 showImageDialog(Current.generateDefeatMessage(false), getDefeatBadge(), () -> Forge.advFreezePlayerControls = false);
             }
-        }, 1f);
+        }, hitDuration);
     }
 
     private FBufferedImage getDefeatBadge() {
