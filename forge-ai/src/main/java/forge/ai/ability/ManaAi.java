@@ -144,7 +144,7 @@ public class ManaAi extends SpellAbilityAi {
                 return true;
             }
         }
-        
+
         CardCollection manaSources = ComputerUtilMana.getAvailableManaSources(ai, true);
         int numManaSrcs = manaSources.size();
         int manaReceived = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
@@ -191,7 +191,7 @@ public class ManaAi extends SpellAbilityAi {
             ManaCost cost = testSa.getPayCosts().getTotalMana();
             boolean canPayWithAvailableColors = cost.canBePaidWithAvailable(ColorSet.fromNames(
                     ComputerUtilCost.getAvailableManaColors(ai, (List<Card>)null)).getColor());
-            
+
             if (cost.getCMC() == 0 && cost.countX() == 0) {
                 // no mana cost, no need to activate this SA then (additional mana not needed)
                 continue;
