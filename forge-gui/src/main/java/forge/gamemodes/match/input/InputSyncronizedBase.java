@@ -1,6 +1,7 @@
 package forge.gamemodes.match.input;
 
 import forge.util.IHasForgeLog;
+import forge.game.EngineOwner;
 import forge.gui.FThreads;
 import forge.gui.error.BugReporter;
 import forge.player.PlayerControllerHuman;
@@ -21,10 +22,14 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
     public void awaitLatchRelease() {
         FThreads.assertExecutedByEdt(false);
         netLog.trace("awaitLatchRelease() starting on {}, thread = {}", this.getClass().getSimpleName(), Thread.currentThread().getName());
+        final EngineOwner owner = getController().getGame().getTracker().getEngineOwner();
+        final int held = owner.park();
         try {
             cdlDone.await();
         } catch (final InterruptedException e) {
             BugReporter.reportException(e);
+        } finally {
+            owner.unpark(held, "InputSyncronizedBase.awaitLatchRelease");
         }
         netLog.trace("awaitLatchRelease() UNBLOCKED on {}, thread = {}", this.getClass().getSimpleName(), Thread.currentThread().getName());
     }

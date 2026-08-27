@@ -1605,7 +1605,11 @@ public class AiController {
         // in case of infinite loop reset below would not be reached
         timeoutReached = false;
 
+        // The eval thread takes ownership and lets go before it hands back a result
+        final EngineOwner owner = game.getTracker().getEngineOwner();
         FutureTask<SpellAbility> future = new FutureTask<>(() -> {
+          owner.enter("AiController.evalThread");
+          try {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1688,8 +1692,12 @@ public class AiController {
             }
 
             return null;
+          } finally {
+            owner.exit();
+          }
         });
 
+        final int held = owner.park();
         Thread t = new Thread(future, "Game AI Eval");
         t.start();
         try {
@@ -1728,6 +1736,8 @@ public class AiController {
             }
             // TODO mark some as skipped to increase chance to find something playable next priority
             return null;
+        } finally {
+            owner.unpark(held, "AiController.awaitEval");
         }
     }
 

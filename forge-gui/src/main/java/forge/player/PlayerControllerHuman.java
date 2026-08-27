@@ -1,6 +1,7 @@
 package forge.player;
 
 import com.google.common.collect.*;
+import forge.game.EngineOwner;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.AIOption;
@@ -1691,14 +1692,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 // pause slightly longer for spells and abilities on the stack resolving
                 delay = FControlGamePlayback.resolveDelay;
             }
-            if (delay > 0) {
-                try {
-                    Thread.sleep(delay);
-                } catch (final InterruptedException e) {
-                    e.printStackTrace();
+            // Deliberate pacing pauses — the game is idle, so it must not be held here
+            final int held = EngineOwner.parkCurrent();
+            try {
+                if (delay > 0) {
+                    try {
+                        Thread.sleep(delay);
+                    } catch (final InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
+                getGui().awaitNextInput();
+            } finally {
+                EngineOwner.unparkCurrent(held, "PlayerControllerHuman.autoPassDelay");
             }
-            getGui().awaitNextInput();
             netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
             return null;
         }
