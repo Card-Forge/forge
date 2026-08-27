@@ -1005,10 +1005,21 @@ public class AiBlockController {
     public void assignBlockersForCombat(final Combat combat) {
         assignBlockersForCombat(combat, null);
     }
-    public void assignBlockersForCombat(final Combat combat, final CardCollection exludedBlockers) {
+    public void assignBlockersForCombat(final Combat combat, final CardCollection excludedBlockers) {
+        assignBlockersForCombat(combat, excludedBlockers, null);
+    }
+    public void assignBlockersForCombat(final Combat combat, final CardCollection excludedBlockers,
+            final CardCollectionView additionalBlockers) {
         List<Card> possibleBlockers = ai.getCreaturesInPlay();
-        if (exludedBlockers != null && !exludedBlockers.isEmpty()) {
-            possibleBlockers.removeAll(exludedBlockers);
+        if (additionalBlockers != null) {
+            for (Card c : additionalBlockers) {
+                if (!possibleBlockers.contains(c)) {
+                    possibleBlockers.add(c);
+                }
+            }
+        }
+        if (excludedBlockers != null && !excludedBlockers.isEmpty()) {
+            possibleBlockers.removeAll(excludedBlockers);
         }
         attackers = sortPotentialAttackers(combat);
         assignBlockers(combat, possibleBlockers);
@@ -1019,14 +1030,7 @@ public class AiBlockController {
      * @param blockers blockers to add in addition to creatures already in play
      */
     public void assignAdditionalBlockers(final Combat combat, CardCollectionView blockers) {
-        List<Card> possibleBlockers = ai.getCreaturesInPlay();
-        for (Card c : blockers) {
-            if (!possibleBlockers.contains(c)) {
-                possibleBlockers.add(c);
-            }
-        }
-        attackers = sortPotentialAttackers(combat);
-        assignBlockers(combat, possibleBlockers);
+        assignBlockersForCombat(combat, null, blockers);
     }
 
     /**
