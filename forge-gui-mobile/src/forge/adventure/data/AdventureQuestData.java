@@ -22,6 +22,8 @@ import static forge.adventure.util.AdventureQuestController.QuestStatus.*;
 
 public class AdventureQuestData implements Serializable {
 
+    private static final long serialVersionUID = -859190699184917225L;
+
     private int id;
 
     public int getID(){
@@ -36,8 +38,8 @@ public class AdventureQuestData implements Serializable {
     public String synopsis =""; //Intended for Dev Mode only at most
     public transient boolean completed = false;
     public transient boolean failed = false;
-    private transient boolean prologueDisplayed = false;
-    private transient boolean epilogueDisplayed = false;
+    private boolean prologueDisplayed = false;
+    private boolean epilogueDisplayed = false;
 
     public DialogData offerDialog;
     public DialogData prologue;
