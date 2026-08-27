@@ -13,7 +13,6 @@ import forge.Forge;
 import forge.adventure.util.Config;
 import io.sentry.protocol.Device;
 import io.sentry.protocol.OperatingSystem;
-import forge.sound.SoundSystem;
 import org.lwjgl.system.Configuration;
 import oshi.SystemInfo;
 
@@ -114,11 +113,11 @@ public class GameLauncher {
         if (Config.instance().getSettingData().fullScreen) {
             config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
             config.setAutoIconify(true);
-            config.setHdpiMode(HdpiMode.Logical);
         } else {
             config.setWindowedMode(windowWidth, windowHeight);
             config.setResizable(false);
         }
+        config.setHdpiMode(HdpiMode.Logical);
         config.setTitle("Forge - " + versionString);
         config.setWindowListener(new Lwjgl3WindowAdapter() {
             @Override
@@ -132,17 +131,15 @@ public class GameLauncher {
             @Override
             public void focusGained() {
                 super.focusGained();
-                SoundSystem.instance.setWindowFocus(true);
+                Forge.setWindowFocus(true);
             }
 
             @Override
             public void focusLost() {
                 super.focusLost();
-                SoundSystem.instance.setWindowFocus(false);
+                Forge.setWindowFocus(false);
             }
         });
-
-        config.setHdpiMode(HdpiMode.Logical);
 
         new Lwjgl3Application(start, config);
     }

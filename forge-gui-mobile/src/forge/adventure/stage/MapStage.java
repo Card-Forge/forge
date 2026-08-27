@@ -44,7 +44,6 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.Queue;
 
-
 /**
  * Stage to handle tiled maps for points of interests
  */
@@ -164,12 +163,10 @@ public class MapStage extends GameStage {
 
     }
 
-
     Group collisionGroup;
 
     @Override
     public void debugCollision(boolean b) {
-
         if (collisionGroup == null) {
             collisionGroup = new Group();
 
@@ -191,8 +188,6 @@ public class MapStage extends GameStage {
         }
         super.debugCollision(b);
     }
-
-
 
     Array<EntryActor> otherEntries = new Array<>();
     Array<EntryActor> spawnClassified = new Array<>();
@@ -764,7 +759,8 @@ public class MapStage extends GameStage {
     public boolean exitDungeon(boolean defeated, boolean defeatedByBoss) {
         if (mustClearOnExit) {
             mustClearOnExit = false;
-            changes.clearDeletedObjects();
+
+            this.resetMapRecursive(AdventureQuestController.instance().mostRecentPOI.getData().map, new HashSet<>());
         }
 
         AdventureQuestController.instance().updateQuestsLeave();
@@ -782,6 +778,47 @@ public class MapStage extends GameStage {
         return true;
     }
 
+    /**
+     * Recursively clears map objects for the current map and all connected maps to reset the state of the dungeon when exiting from it.
+     * @param currentMap The filename of the map to clear and check for connected maps from.
+     * @param clearedMaps A set of maps that have already been cleared to avoid infinite recursion from circular connections between maps.
+     */
+    private void resetMapRecursive(String currentMap, HashSet<String> clearedMaps) {
+        if (clearedMaps.contains(currentMap)) {
+            return;
+        }
+
+        clearedMaps.add(currentMap);
+
+        // Clear the current map's deleted objects.
+        TileMapScene.instance().getPointOfInterestChanges(currentMap).clearDeletedObjects();
+        
+        TiledMap currentTiledMap = loadMapFile(currentMap);
+        
+        for (MapLayer layer : currentTiledMap.getLayers()) {
+            if (layer.getProperties().containsKey("spriteLayer") || layer instanceof TiledMapTileLayer) {
+                continue;
+            }
+            
+            // Attemps to find connected maps through "entry" type MapObjects and recursively clear them as well.
+            for (MapObject obj : layer.getObjects()) {
+                MapProperties prop = obj.getProperties();
+                String type = prop.get("type", String.class);
+                
+                if (type != null && type.equals("entry")) {
+                    String targetMap = prop.containsKey("teleport") ? prop.get("teleport").toString() : "";
+                    
+                    if (targetMap != null && !targetMap.isEmpty()) {
+                        resetMapRecursive(targetMap, clearedMaps);
+                    }
+                }
+            }
+        }
+    }
+
+    private TiledMap loadMapFile(String mapName) {
+        return new TemplateTmxMapLoader().load(Config.instance().getCommonFilePath(mapName));
+    }
 
     @Override
     public void setWinner(boolean playerWins, boolean isArena) {
@@ -791,13 +828,16 @@ public class MapStage extends GameStage {
             currentMob.clearCollisionHeight();
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
+            float attackDuration = Math.max(1f,
+                    player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 1f));
             currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
                     currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
                     currentMob.resetCollisionHeight();
-                    startPause(0.3f, () -> {
+                    float deathDuration = currentMob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Death, 0.3f);
+                    startPause(deathDuration, () -> {
                         MapStage.this.getReward();
                         AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
                         AdventureQuestController.instance().showQuestDialogs(MapStage.this);
@@ -805,12 +845,15 @@ public class MapStage extends GameStage {
                     });
                     player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 }
-            }, 1f);
+            }, attackDuration);
         } else {
             currentMob.clearCollisionHeight();
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            startPause(0.3f, () -> {
+            float resultAnimationDuration = Math.max(
+                    player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Hit, 0.3f),
+                    currentMob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.3f));
+            startPause(resultAnimationDuration, () -> {
                 player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 currentMob.resetCollisionHeight();
@@ -1108,7 +1151,10 @@ public class MapStage extends GameStage {
         HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER, mob.getData().boss ? 400 : 200);
         Forge.advFreezePlayerControls = true;
         player.clearCollisionHeight();
-        startPause(0.8f, () -> {
+        float attackDuration = Math.max(
+                player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f),
+                mob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f));
+        startPause(attackDuration, () -> {
             if (started)
                 return;
             started = true;

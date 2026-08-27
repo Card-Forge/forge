@@ -174,6 +174,10 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Secondary);
     }
 
+    public boolean hasPreparedSpell() {
+        return hasAlternateState() && getAlternateState().getState() == CardStateName.PreparedSpell;
+    }
+
     public boolean isModalCard() {
         return get(TrackableProperty.Modal);
     }
@@ -609,17 +613,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.NamedCard, c.getNamedCards());
         flagAsChanged(TrackableProperty.NamedCard);
     }
-    public boolean getMayPlayPlayers(PlayerView pv) {
-        TrackableCollection<PlayerView> col = get(TrackableProperty.MayPlayPlayers);
-        return col != null && col.indexOf(pv) != -1;
-    }
-    void setMayPlayPlayers(Iterable<Player> list) {
-        if (Iterables.isEmpty(list)) {
-            set(TrackableProperty.MayPlayPlayers, null);
-        } else {
-            set(TrackableProperty.MayPlayPlayers, PlayerView.getCollection(list));
-        }
-    }
+
     public boolean mayPlayerLook(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);
         // TODO don't use contains as it only queries the backing HashSet which is problematic for netplay because of unsynchronized player ids
@@ -1016,6 +1010,13 @@ public class CardView extends GameEntityView {
     }
     public void updateNeedsTransformAnimation(boolean value) {
         set(TrackableProperty.NeedsTransformAnimation, value);
+    }
+    public boolean useCardArt() {
+        // prevent NPE
+        if (getCurrentState() == null)
+            return false;
+        // Use card art for prepared spell
+        return CardStateName.PreparedSpell.equals(getCurrentState().state);
     }
 
     void updateState(Card c) {

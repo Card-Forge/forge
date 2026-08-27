@@ -385,7 +385,9 @@ public class ComputerUtilCost {
 
                 CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
                 if (differentNames) {
-                    final Set<Card> uniqueNameCards = Sets.newHashSet();
+                    // drives which cards get sacrificed on a scoring tie, so its order must not depend on Card
+                    // identity hashCode (which varies per JVM run)
+                    final Set<Card> uniqueNameCards = Sets.newLinkedHashSet();
                     for (final Card card : typeList) {
                         // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
                         if (!card.hasNoName()) {
@@ -730,7 +732,7 @@ public class ComputerUtilCost {
             }
         }
 
-        int x = ObjectUtils.defaultIfNull(val, 0);
+        int x = ObjectUtils.getIfNull(val, 0);
         sa.setXManaCostPaid(x);
         return x;
     }

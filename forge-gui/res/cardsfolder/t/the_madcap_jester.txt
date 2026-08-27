@@ -1,0 +1,11 @@
+Name:The Madcap Jester
+ManaCost:1 U B R
+Types:Legendary Creature Clown Wizard
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, each opponent exiles the top card of their library.
+SVar:TrigExile:DB$ Dig | Defined$ Player.Opponent | DestinationZone$ Exile | DigNum$ 1 | ChangeNum$ All
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Card.OppOwn | Origin$ Library | Destination$ Exile | ValidCause$ SpellAbility.YouCtrl | Execute$ TrigEffect | TriggerDescription$ Whenever a spell or ability you control causes one or more cards to be exiled from an opponent's library, you may play those cards until the end of your next turn. Mana of any type can be spent to cast spells this way.
+#Technically this should trigger once per opponent, not sure how to do that.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCards | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
+SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards until the end of your next turn. Mana of any type can be spent to cast spells this way.
+Oracle:Whenever The Madcap Jester attacks, each opponent exiles the top card of their library.\nWhenever a spell or ability you control causes one or more cards to be exiled from an opponent's library, you may play those cards until the end of your next turn. Mana of any type can be spent to cast spells this way.

@@ -1,0 +1,10 @@
+Name:Darksteel Angel
+ManaCost:9
+Types:Artifact Creature Angel
+PT:4/4
+K:Flying
+K:Indestructible
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | Layer$ CantHappen | Description$ You can't lose the game and your opponents can't win the game.
+R:Event$ GameWin | ActiveZones$ Battlefield | ValidPlayer$ Opponent | Layer$ CantHappen | Secondary$ True | Description$ You can't lose the game and your opponents can't win the game.
+S:Mode$ CantPutCounter | ValidCard$ Creature.YouCtrl | CounterType$ M1M1 | Description$ Creatures you control can't have -1/-1 counters put on them.
+Oracle:Flying, indestructible\nYou can't lose the game and your opponents can't win the game.\nCreatures you control can't have -1/-1 counters put on them.

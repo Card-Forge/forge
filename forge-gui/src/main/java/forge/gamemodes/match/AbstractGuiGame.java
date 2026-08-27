@@ -83,7 +83,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public String getDayTime() {
         return daytime;
     }
-
     @Override
     public void updateDayTime(String daytime) {
         this.daytime = daytime;
@@ -306,11 +305,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Backside:
                 return true;
             case Secondary:
-            case PreparedSpell:
                 if (cv.isFaceDown()) {
                     return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
                 }
                 return false;
+            case PreparedSpell:
+                if (cv.isFaceDown()) {
+                    return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
+                }
+                return cv.useCardArt();
             default:
                 return false;
         }

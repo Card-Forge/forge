@@ -47,7 +47,7 @@ UA01c U Moth Herb Elixir @
 UB01 U Devoted Abzan @
 UB01a U Bloodspatter Vampire @
 UB01b U Nim Mongoose @
-UL01 U Artist Alley @
+UL01 U P-Artist Alley @
 UL01a U Mana Conference @
 UL01b U Urza's Hot Dog Stand @
 UU01 U Dialogue Tree @
@@ -60,7 +60,7 @@ CA02c C Item Crate @
 CB02 C Reverse Ninja @
 CB02a C Demon Detective @
 CB02b C Syr Konrad's Squire @
-CB02c C Fear (Not the Alpha One) // Loathing @
+CB02c C Fear (split card) // Loathing @
 CG02a C Naturalize the Phyresis @
 CG02b C That's No Moonmist @
 CR02 C Fear of Going 0-2 Drop @
@@ -350,7 +350,7 @@ UA05c U Power Level Analyzer @
 UA05d U Kibo's Bananamobile @
 UB05 U Phyrexian Chimney Imp @
 UB05a U Fear of Fear Itself @
-UR05 U Joven and Chandler @
+UR05 U P-Joven and Chandler @
 UU05 U Adventurer Beguiler @
 UW05 U Rosewater's Nemesis @
 UW05a U Devoted Mardu @
@@ -518,3 +518,7 @@ RW90c R The Keeper of Favorite Cards @
 RW90d R The Keeper of Favorite Cards @
 RW90e R The Keeper of Favorite Cards @
 MZ99 M The Collector @
+
+[CreatureTypes]
+Glass:Glasses
+Stained:Stained

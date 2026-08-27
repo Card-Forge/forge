@@ -163,10 +163,11 @@ final class CardFace implements ICardFace, Cloneable {
     }
 
     
-    void assignMissingFields() { // Most scripts do not specify color explicitly
+    void assignMissingFields() {
         if ( null == oracleText ) { System.err.println(name + " has no Oracle text."); oracleText = ""; }
         if ( manaCost == null && color == null ) System.err.println(name + " has neither ManaCost nor Color");
         if ( manaCost == null ) manaCost = ManaCost.NO_COST;
+        // Most scripts do not specify color explicitly
         if ( color == null ) color = ColorSet.fromManaCost(manaCost);
 
         if ( keywords == null ) keywords = emptyList;
@@ -206,8 +207,9 @@ final class CardFace implements ICardFace, Cloneable {
             else
                 variant.oracleText = this.oracleText;
         }
+
+        if(variant.color == null) variant.color = variant.manaCost == null ? this.color : ColorSet.fromManaCost(this.manaCost);
         if(variant.manaCost == null) variant.manaCost = this.manaCost;
-        if(variant.color == null) variant.color = ColorSet.fromManaCost(variant.manaCost);
 
         if(variant.type == null) variant.type = this.type;
 

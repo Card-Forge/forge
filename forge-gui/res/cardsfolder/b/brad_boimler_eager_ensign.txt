@@ -1,0 +1,12 @@
+Name:Brad Boimler, Eager Ensign
+ManaCost:1 W
+Types:Legendary Creature Human Officer
+PT:2/2
+K:Lifelink
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ Whenever NICKNAME becomes tapped, until end of turn, if one or more counters would be put on a permanent you control, that many plus one of each of those kinds of counters are put on that permanent instead.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ CounterReplace
+SVar:CounterReplace:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Permanent.YouCtrl+inZoneBattlefield | ReplaceWith$ AddOneMoreCounters | Description$ If one or more counters would be put on a permanent you control, that many plus one of each of those kinds of counters are put on that permanent instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ChooseCounter$ True | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Plus.1
+DeckHints:Ability$Counters
+Oracle:Lifelink\nWhenever Brad Boimler becomes tapped, until end of turn, if one or more counters would be put on a permanent you control, that many plus one of each of those kinds of counters are put on that permanent instead.
