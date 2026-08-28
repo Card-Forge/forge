@@ -17,6 +17,7 @@ public enum KeyBinding {
     Inventory("Inventory", new int[]{Input.Keys.I, Input.Keys.BUTTON_X}),
     Status("Status", new int[]{Input.Keys.Q, Input.Keys.BUTTON_Y}),
     Deck("Deck", new int[]{Input.Keys.E, Input.Keys.BUTTON_A}),
+    Catalog("Catalog", new int[]{Input.Keys.C, Input.Keys.BUTTON_R1}),
     Map("Map", new int[]{Input.Keys.M, Input.Keys.BUTTON_SELECT}),
     Equip("Equip", new int[]{Input.Keys.E, Input.Keys.BUTTON_X}),
     ExitToWorldMap("ExitToWorldMap", new int[]{Input.Keys.F4, Input.Keys.BUTTON_L2}),

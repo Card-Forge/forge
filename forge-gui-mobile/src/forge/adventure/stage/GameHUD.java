@@ -47,6 +47,7 @@ import forge.adventure.scene.InventoryScene;
 import forge.adventure.scene.MapViewScene;
 import forge.adventure.scene.QuestLogScene;
 import forge.adventure.scene.Scene;
+import forge.adventure.scene.ShopCatalogScene;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.util.AdventureQuestController;
 import forge.adventure.util.Config;
@@ -78,7 +79,8 @@ public class GameHUD extends Stage {
     private final TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
-    private final TextraButton deckActor, openMapActor, menuActor, logbookActor, inventoryActor, exitToWorldMapActor, bookmarkActor;
+    private final TextraButton deckActor, openMapActor, menuActor, logbookActor, inventoryActor,
+            catalogActor, exitToWorldMapActor, bookmarkActor;
     public final UIActor ui;
     private final Touchpad touchpad;
     private final Console console;
@@ -122,6 +124,7 @@ public class GameHUD extends Stage {
         referenceX = menuActor.getX();
         logbookActor = ui.findActor("logbook");
         inventoryActor = ui.findActor("inventory");
+        catalogActor = ui.findActor("catalog");
         gamehud = ui.findActor("gamehud");
         exitToWorldMapActor = ui.findActor("exittoworldmap");
         bookmarkActor = ui.findActor("bookmark");
@@ -153,6 +156,7 @@ public class GameHUD extends Stage {
         ui.onButtonPress("inventory", this::openInventory);
         ui.onButtonPress("logbook", this::logbook);
         ui.onButtonPress("deck", this::openDeck);
+        ui.onButtonPress("catalog", this::openCatalog);
         ui.onButtonPress("exittoworldmap", this::exitToWorldMap);
         ui.onButtonPress("bookmark", this::bookmark);
         keyCollection = ui.findActor("keyCollection");
@@ -242,6 +246,7 @@ public class GameHUD extends Stage {
         menuGroup.addActor(menuActor);
         menuGroup.addActor(logbookActor);
         menuGroup.addActor(inventoryActor);
+        menuGroup.addActor(catalogActor);
         menuGroup.addActor(exitToWorldMapActor);
         menuGroup.addActor(bookmarkActor);
         ui.addActor(menuGroup);
@@ -338,6 +343,7 @@ public class GameHUD extends Stage {
                     && !(Controls.actorContainsVector(openMapActor, touch)) //not inside openmap button
                     && !(Controls.actorContainsVector(logbookActor, touch)) //not inside stats button
                     && !(Controls.actorContainsVector(inventoryActor, touch)) //not inside inventory button
+                    && !(Controls.actorContainsVector(catalogActor, touch)) //not inside shop catalog button
                     && !(Controls.actorContainsVector(exitToWorldMapActor, touch)) //not inside exit button
                     && !(Controls.actorContainsVector(bookmarkActor, touch)) //not inside bookmark button
                     && !(Controls.actorContainsVector(abilityButtonMap, touch)) //not inside abilityButtonMap
@@ -727,6 +733,14 @@ public class GameHUD extends Stage {
             return;
         WorldSave.getCurrentSave().header.createPreview();
         Forge.switchScene(InventoryScene.instance());
+    }
+
+    private void openCatalog() {
+        if (console.isVisible())
+            return;
+        if (Forge.advFreezePlayerControls)
+            return;
+        Forge.switchScene(ShopCatalogScene.instance());
     }
 
     private void exitToWorldMap() {

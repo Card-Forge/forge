@@ -21,6 +21,8 @@ import forge.adventure.data.ShopData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.shop.AdventureShopPrice;
+import forge.adventure.shop.ShopOfferId;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.assets.ImageCache;
@@ -518,9 +520,16 @@ public class RewardScene extends UIScene {
         int i = 0;
         for (Reward reward : new Array.ArrayIterator<>(newRewards)) {
             boolean skipCard = false;
+            ShopOfferId shopOfferId = null;
             if (type == Type.Shop) {
                 if (changes.wasCardBought(shopActor.getObjectId(), i)) {
                     skipCard = true;
+                }
+                if (!skipCard && Reward.Type.Card.equals(reward.getType())) {
+                    shopOfferId = new ShopOfferId(shopActor.getPointOfInterestChangesKey(),
+                            shopActor.getObjectId(), changes.getShopSeed(shopActor.getObjectId()), i);
+                    WorldSave.getCurrentSave().getShopCatalog().observe(shopOfferId, reward.getCard(),
+                            shopActor.getDescription(), shopActor.getLocationName(), shopActor.isUnlimited());
                 }
             }
 
@@ -540,7 +549,8 @@ public class RewardScene extends UIScene {
                 if (currentRow != ((i + 1) / numberOfColumns))
                     yOff += doneButton.getHeight();
 
-                BuyButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, actor, reward, doneButton, shopActor.getPriceModifier());
+                BuyButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, actor, reward,
+                        doneButton, shopOfferId);
                 generated.add(buyCardButton);
                 if (!skipCard) {
                     stage.addActor(buyCardButton);
@@ -589,6 +599,7 @@ public class RewardScene extends UIScene {
         private final int index;
         public RewardActor rewardActor;
         private Reward reward;
+        private final ShopOfferId shopOfferId;
         int price;
         boolean isSold;
 
@@ -609,19 +620,19 @@ public class RewardScene extends UIScene {
                 setText("[%75][+GoldCoin] " + price + "\n" + Forge.getLocalizer().getMessage("lblOwned") + ": " + AdventurePlayer.current().countItem(reward.getItem().name));
         }
 
-        public BuyButton(int id, int i, RewardActor actor, Reward reward, TextraButton style, float shopModifier) {
+        public BuyButton(int id, int i, RewardActor actor, Reward reward, TextraButton style,
+                         ShopOfferId shopOfferId) {
             super("", style.getStyle(), Controls.getTextraFont());
             this.objectID = id;
             this.index = i;
+            this.shopOfferId = shopOfferId;
             rewardActor = actor;
             this.reward = reward;
             setHeight(style.getHeight());
             setWidth(actor.getWidth());
             setX(actor.getX());
             setY(actor.getY() - getHeight());
-            price = CardUtil.getRewardPrice(actor.getReward());
-            price *= Current.player().goldModifier();
-            price *= shopModifier;
+            price = AdventureShopPrice.calculate(actor.getReward(), changes, objectID);
             setText("[+GoldCoin] " + price);
             updateOwned();
             addListener(new ClickListener() {
@@ -630,6 +641,9 @@ public class RewardScene extends UIScene {
                     if (Current.player().getGold() >= price) {
                         if (!shopActor.isUnlimited())
                             changes.buyCard(objectID, index);
+
+                        if (shopOfferId != null)
+                            WorldSave.getCurrentSave().getShopCatalog().consume(shopOfferId);
 
                         Current.player().takeGold(price);
                         Current.player().addReward(rewardActor.getReward());

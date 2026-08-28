@@ -6,6 +6,7 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.MapViewScene;
 import forge.adventure.scene.SaveLoadScene;
+import forge.adventure.shop.ShopCatalog;
 import forge.adventure.stage.PointOfInterestMapSprite;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.AdventureModes;
@@ -36,6 +37,7 @@ public class WorldSave {
     private final AdventurePlayer player = new AdventurePlayer();
     private final World world = new World();
     private final PointOfInterestChanges.Map pointOfInterestChanges = new PointOfInterestChanges.Map();
+    private final ShopCatalog shopCatalog = new ShopCatalog();
 
 
     private final SignalList onLoadList = new SignalList();
@@ -46,6 +48,10 @@ public class WorldSave {
 
     public AdventurePlayer getPlayer() {
         return player;
+    }
+
+    public ShopCatalog getShopCatalog() {
+        return shopCatalog;
     }
 
     public void onLoad(Runnable run) {
@@ -75,6 +81,7 @@ public class WorldSave {
                 try {
                     currentSave.world.load(mainData.readSubData("world"));
                     currentSave.pointOfInterestChanges.load(mainData.readSubData("pointOfInterestChanges"));
+                    currentSave.shopCatalog.load(mainData.readSubData("shopCatalog"));
                     WorldStage.getInstance().load(mainData.readSubData("worldStage"));
 
                 } catch (Exception e) {
@@ -130,6 +137,7 @@ public class WorldSave {
     public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode, int customDeckIndex, CardEdition starterEdition, long seed) {
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
+        currentSave.shopCatalog.clear();
         boolean chaos = mode == AdventureModes.Chaos;
         boolean custom = mode == AdventureModes.Custom;
 
@@ -173,8 +181,9 @@ public class WorldSave {
                 SaveFileData world = currentSave.world.save();
                 SaveFileData worldStage = WorldStage.getInstance().save();
                 SaveFileData poiChanges = currentSave.pointOfInterestChanges.save();
+                SaveFileData shopCatalog = currentSave.shopCatalog.save();
 
-                String message = getExceptionMessage(player, world, worldStage, poiChanges);
+                String message = getExceptionMessage(player, world, worldStage, poiChanges, shopCatalog);
                 if (!message.isEmpty()) {
                     oos.close();
                     fos.close();
@@ -188,6 +197,7 @@ public class WorldSave {
                 mainData.store("world", world);
                 mainData.store("worldStage", worldStage);
                 mainData.store("pointOfInterestChanges", poiChanges);
+                mainData.store("shopCatalog", shopCatalog);
 
                 if (mainData.readString("IOException") != null) {
                     oos.close();
@@ -242,6 +252,7 @@ public class WorldSave {
 
     public void clearChanges() {
         pointOfInterestChanges.clear();
+        shopCatalog.clear();
     }
 
     public void clearBookmarks() {

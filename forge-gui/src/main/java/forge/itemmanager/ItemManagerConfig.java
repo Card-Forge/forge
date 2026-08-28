@@ -133,6 +133,8 @@ public enum ItemManagerConfig {
             null, null, 6, 0),
     ADVENTURE_STORE_POOL(SColumnUtil.getAdventureCollectionDefaultColumns(), false, false, true,
             null, null, 6, 0),
+    ADVENTURE_SHOP_CATALOG(SColumnUtil.getCatalogDefaultColumns(false), false, false, false,
+            GroupDef.DEFAULT, ColumnDef.CMC, 6, 0),
     ADVENTURE_SIDEBOARD(SColumnUtil.getDeckEditorDefaultColumns(), false, false, true,
             null, null, 6, 0),
     SIDEBOARD(SColumnUtil.getDeckEditorDefaultColumns(), false, false, true,

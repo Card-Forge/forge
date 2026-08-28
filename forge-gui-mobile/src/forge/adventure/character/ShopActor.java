@@ -16,12 +16,17 @@ public class ShopActor extends MapActor {
     private final MapStage stage;
     private ShopData shopData;
     Array<Reward> rewardData;
+    private final String pointOfInterestChangesKey;
+    private final String locationName;
 
-    public ShopActor(MapStage stage, int id, Array<Reward> rewardData, ShopData data) {
+    public ShopActor(MapStage stage, int id, Array<Reward> rewardData, ShopData data,
+                     String pointOfInterestChangesKey, String locationName) {
         super(id);
         this.stage = stage;
         this.shopData = data;
         this.rewardData = rewardData;
+        this.pointOfInterestChangesKey = pointOfInterestChangesKey;
+        this.locationName = locationName;
     }
 
     public float getPriceModifier() {
@@ -74,5 +79,13 @@ public class ShopActor extends MapActor {
 
     public Array<Reward> getRewardData() {
         return rewardData;
+    }
+
+    public String getPointOfInterestChangesKey() {
+        return pointOfInterestChangesKey;
+    }
+
+    public String getLocationName() {
+        return locationName;
     }
 }

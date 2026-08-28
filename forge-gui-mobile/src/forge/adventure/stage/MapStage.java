@@ -721,7 +721,9 @@ public class MapStage extends GameStage {
                         for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
                             ret.addAll(rdata.generate(false, false));
                         }
-                        ShopActor actor = new ShopActor(this, id, ret, data);
+                        ShopActor actor = new ShopActor(this, id, ret, data,
+                                TileMapScene.instance().getPointOfInterestChangesKey(),
+                                TileMapScene.instance().rootPoint.getDisplayName());
                         addMapActor(obj, actor);
                         if (prop.containsKey("hasSign") && (boolean) prop.get("hasSign") && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
