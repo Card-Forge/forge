@@ -190,7 +190,7 @@
         <dependency>
             <groupId>org.jupnp</groupId>
             <artifactId>org.jupnp</artifactId>
-            <version>3.0.3</version>
+            <version>3.0.5</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
