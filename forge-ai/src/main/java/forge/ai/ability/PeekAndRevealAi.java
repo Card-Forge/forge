@@ -68,7 +68,6 @@ public class PeekAndRevealAi extends SpellAbilityAi {
             if (xPay == 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-            sa.getRootAbility().setXManaCostPaid(xPay);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
