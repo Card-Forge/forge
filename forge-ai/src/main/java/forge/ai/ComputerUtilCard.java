@@ -14,12 +14,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.StaticData;
 import forge.ai.simulation.GameStateEvaluator;
@@ -219,6 +221,34 @@ public class ComputerUtilCard {
      * @param list
      * @return a {@link forge.game.card.Card} object.
      */
+
+    /**
+     * Drops creatures whose copy would arrive dead under {@code newController}. A toughness-setting
+     * characteristic-defining ability reads its controller's board, so an opponent's 8/8 can be a
+     * 0/0 for us. Only cards with such an ability are priced, the rest are kept untouched.
+     */
+    public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController) {
+        final Game game = newController.getGame();
+        final MutableBoolean reset = new MutableBoolean(false);
+        final CardCollection kept = CardLists.filter(list, c -> {
+            if (!c.isCreature() || c.getController().equals(newController)) {
+                return true;
+            }
+            if (c.getStaticAbilities().stream().anyMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
+                final Card copy = CardCopyService.getLKICopy(c);
+                copy.setController(newController, game.getNextTimestamp());
+                game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), new CardCollection(copy));
+                reset.setTrue();
+                return copy.getNetToughness() > 0;
+            }
+            return true;
+        });
+        if (reset.isTrue()) {
+            game.getAction().checkStaticAbilities(false);
+        }
+        return kept;
+    }
+
     public static Card getBestLandAI(final Iterable<Card> list) {
         final List<Card> land = CardLists.filter(list, CardPredicates.LANDS);
         if (land.isEmpty()) {

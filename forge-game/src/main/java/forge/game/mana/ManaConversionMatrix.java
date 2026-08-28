@@ -17,7 +17,6 @@ public class ManaConversionMatrix {
     public boolean isSnowForColor() {
         return snowForColor;
     }
-
     public void setSnowForColor(boolean value) {
         snowForColor = value;
     }

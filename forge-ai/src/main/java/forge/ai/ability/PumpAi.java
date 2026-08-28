@@ -274,9 +274,7 @@ public class PumpAi extends PumpAiBase {
         int attack;
         if (numAttack.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             if (root.getXManaCostPaid() == null) {
-                final int xPay = ComputerUtilCost.setMaxXValue(root, ai, sa.isTrigger());
-                root.setXManaCostPaid(xPay);
-                attack = xPay;
+                attack = ComputerUtilCost.setMaxXValue(root, ai, sa.isTrigger());
             } else {
                 attack = root.getXManaCostPaid();
             }
@@ -693,7 +691,6 @@ public class PumpAi extends PumpAiBase {
         if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             if (root.getXManaCostPaid() == null) {
                 defense = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
-                root.setXManaCostPaid(defense);
             } else {
                 defense = root.getXManaCostPaid();
             }
