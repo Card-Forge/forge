@@ -3,8 +3,11 @@ package forge.game.card;
 import org.testng.annotations.Test;
 
 import forge.ai.AITest;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -110,6 +113,37 @@ public class AssimilateTest extends AITest {
         assertTrue("now an artifact too", ram.isArtifact());
         assertTrue("is a Borg", ram.getType().hasCreatureType("Borg"));
         assertFalse("lost Sheep", ram.getType().hasCreatureType("Sheep"));
+    }
+
+    /**
+     * No printed card assimilates a permanent yet, so this drives the API directly. It is the half
+     * of the effect that exists on speculation, and it is the half a future card would use.
+     */
+    @Test
+    public void assimilatingAPermanentTakesItWhereItStands() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card host = addCard(QUEEN, ai);
+        Card bears = addCard("Grizzly Bears", opp);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = AbilityFactory.getAbility(
+                "DB$ Assimilate | ValidTgts$ Creature.OppCtrl", host);
+        sa.setActivatingPlayer(ai);
+        sa.getTargets().add(bears);
+        AbilityUtils.resolve(sa);
+        game.getAction().checkStateEffects(true);
+
+        assertEquals("stays on the battlefield", ZoneType.Battlefield, bears.getZone().getZoneType());
+        assertEquals("changes hands", ai, bears.getController());
+        assertEquals(1, bears.getCounters(CounterEnumType.P1P1));
+        assertTrue("is an artifact", bears.isArtifact());
+        assertTrue("is a Borg", bears.getType().hasCreatureType("Borg"));
+        assertFalse("lost Bear", bears.getType().hasCreatureType("Bear"));
+        // 2/2 base, +1/+1 counter, +2/+0 now that it is our artifact creature
+        assertEquals(5, bears.getNetPower());
     }
 
     @Test
