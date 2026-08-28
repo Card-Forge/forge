@@ -127,8 +127,6 @@ public class DestroyAi extends SpellAbilityAi {
                     ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid"))) {
                 // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
                 maxTargets = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
-                // need to set XPaid to get the right number for
-                sa.getRootAbility().setXManaCostPaid(maxTargets);
                 // need to check for maxTargets
                 maxTargets = Math.min(maxTargets, sa.getMaxTargets());
             } else {

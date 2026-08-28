@@ -24,6 +24,7 @@ import forge.trackable.TrackableTypes.TrackableType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -135,7 +136,7 @@ public class DeltaSyncManager implements IHasForgeLog {
                 walkAndCollect(gameView, objectDeltas, newObjects, visited);
                 currentObjectIds = visited;
                 break;
-            } catch (RuntimeException e) {
+            } catch (ConcurrentModificationException e) {
                 netLog.warn(e, "[DeltaSync] Walk attempt {} of {} failed", attempt, MAX_WALK_ATTEMPTS);
             }
         }

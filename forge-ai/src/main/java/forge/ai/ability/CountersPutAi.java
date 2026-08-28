@@ -777,8 +777,6 @@ public class CountersPutAi extends CountersAi {
                     && sa.hasSVar(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
                 // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
                 int payX = ComputerUtilCost.setMaxXValue(sa, ai, true);
-
-                root.setXManaCostPaid(payX);
             }
 
             if (!mandatory) {
