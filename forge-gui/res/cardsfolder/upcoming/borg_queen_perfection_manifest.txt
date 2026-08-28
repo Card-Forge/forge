@@ -1,0 +1,10 @@
+Name:Borg Queen, Perfection Manifest
+ManaCost:4 B B
+Types:Legendary Artifact Creature Borg Noble
+PT:1/4
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddPower$ 2 | Description$ Artifact creatures you control get +2/+0.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAssimilate | TriggerDescription$ When NICKNAME enters, assimilate target creature card from an opponent's graveyard. (Put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
+SVar:TrigAssimilate:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select target creature card in an opponent's graveyard | GainControl$ True | WithCountersType$ P1P1 | StaticEffect$ Animate
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Artifact & Creature & Borg | RemoveCreatureTypes$ True
+DeckHas:Ability$Graveyard|Counters
+Oracle:Artifact creatures you control get +2/+0.\nWhen Borg Queen enters, assimilate target creature card from an opponent's graveyard. (Put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
