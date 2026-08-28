@@ -1302,6 +1302,18 @@ public class CardFactoryUtil {
             for (final Trigger trigger : triggers) {
                 inst.addTrigger(trigger);
             }
+        } else if (keyword.startsWith("Host")) {
+            final String trigForget = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any "
+                    + "| ValidCard$ Card.IsRemembered | TriggerZones$ Battlefield | Static$ True";
+            final Trigger forgetTrigger = TriggerHandler.parseTrigger(trigForget, card, intrinsic);
+            forgetTrigger.setOverridingAbility(AbilityFactory.getAbility("DB$ Pump | ForgetObjects$ TriggeredCard", card));
+            inst.addTrigger(forgetTrigger);
+
+            final String trigForgetAll = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any "
+                    + "| ValidCard$ Card.Self | Static$ True";
+            final Trigger forgetAllTrigger = TriggerHandler.parseTrigger(trigForgetAll, card, intrinsic);
+            forgetAllTrigger.setOverridingAbility(AbilityFactory.getAbility("DB$ Cleanup | ClearRemembered$ True", card));
+            inst.addTrigger(forgetAllTrigger);
         } else if (keyword.equals("Increment")) {
             final String trig = "Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Battlefield "
                     + " | Secondary$ True | TriggerDescription$ Increment (" + inst.getReminderText() + ")";
@@ -3081,6 +3093,28 @@ public class CardFactoryUtil {
                 sa.setIntrinsic(intrinsic);
                 inst.addSpellAbility(sa);
             }
+        } else if (keyword.startsWith("Host")) {
+            String[] k = keyword.split(":");
+            String hostCost = k[1];
+
+            final StringBuilder abilityStr = new StringBuilder();
+            abilityStr.append("AB$ Pump | Cost$ ");
+            abilityStr.append(hostCost);
+            abilityStr.append(" | ValidTgts$ Creature | TgtPrompt$ Select target creature ");
+            abilityStr.append("| SorcerySpeed$ True | RememberObjects$ Targeted ");
+
+            abilityStr.append("| StackDescription$ Host {c:Targeted}. ");
+            abilityStr.append("| PrecostDesc$ Host");
+            Cost cost = new Cost(hostCost, true);
+            abilityStr.append(cost.isOnlyManaCost() ? " " : "—");
+            abilityStr.append("| CostDesc$ ").append(cost.toSimpleString());
+            abilityStr.append(" | SpellDescription$ (");
+            abilityStr.append(inst.getReminderText()).append(")");
+
+            // instantiate host ability
+            final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
+            sa.setIntrinsic(intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Impending") && inst instanceof KeywordWithCostAndAmount impending) {
             final Cost cost = impending.getCost();
             final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(cost);
