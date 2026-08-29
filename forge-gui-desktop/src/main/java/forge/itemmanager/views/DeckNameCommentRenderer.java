@@ -22,12 +22,16 @@ import java.util.Map.Entry;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.Icon;
 
 
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.Deck;
+import forge.deck.DeckBrowserEntry;
 import forge.deck.DeckProxy;
+import forge.localinstance.skin.FSkinProp;
+import forge.toolbox.FSkin;
 
 /**
  * NAME column renderer for {@link forge.itemmanager.DeckManager}: shows deck display name and
@@ -37,6 +41,10 @@ import forge.deck.DeckProxy;
 public final class DeckNameCommentRenderer extends ItemCellRenderer {
 
     private static final int TOOLTIP_WRAP_WIDTH = 72;
+    private static final FSkin.SkinIcon ICO_FOLDER = FSkin.getIcon(FSkinProp.ICO_FOLDER).resize(16, 16);
+    private static final FSkin.SkinIcon ICO_NET_FOLDER = FSkin.getIcon(FSkinProp.ICO_OPEN).resize(16, 16);
+    private static final FSkin.SkinImage ICO_GENERATED = FSkin.getImage(FSkinProp.IMG_GENERATED_DECK).resize(16, 16);
+    private static final FSkin.SkinImage ICO_GENERATED_FOLDER = FSkin.getImage(FSkinProp.IMG_GENERATED_FOLDER).resize(16, 16);
 
     @Override
     public Component getTableCellRendererComponent(final JTable table, final Object value,
@@ -44,8 +52,17 @@ public final class DeckNameCommentRenderer extends ItemCellRenderer {
         final JLabel lbl = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         final DeckProxy proxy = deckProxyFromRow(table, row);
         if (proxy == null) {
+            lbl.setIcon(null);
             lbl.setToolTipText(null);
             return lbl;
+        }
+        lbl.setIcon(iconFor(proxy));
+        lbl.setIconTextGap(5);
+        if (proxy instanceof DeckBrowserEntry entry) {
+            if (!entry.isDeck() || entry.isGeneratedDeck()) {
+                lbl.setToolTipText(null);
+                return lbl;
+            }
         }
         final Deck deck = proxy.getDeck();
         final String comment = deck != null ? deck.getComment() : null;
@@ -56,6 +73,27 @@ public final class DeckNameCommentRenderer extends ItemCellRenderer {
             lbl.setToolTipText(null);
         }
         return lbl;
+    }
+
+    private static Icon iconFor(final DeckProxy proxy) {
+        if (!(proxy instanceof DeckBrowserEntry entry)) {
+            return null;
+        }
+        switch (entry.getKind()) {
+        case FOLDER:
+        case PARENT_FOLDER:
+            return ICO_FOLDER.getIcon();
+        case NET_FOLDER:
+            return ICO_NET_FOLDER.getIcon();
+        case GENERATED_GROUP:
+        case GENERATED_FOLDER:
+            return ICO_GENERATED_FOLDER.getIcon();
+        case GENERATED_OPTION:
+            return ICO_GENERATED.getIcon();
+        case DECK:
+        default:
+            return null;
+        }
     }
 
     private static DeckProxy deckProxyFromRow(final JTable table, final int row) {

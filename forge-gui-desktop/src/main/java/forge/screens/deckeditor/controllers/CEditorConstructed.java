@@ -154,7 +154,11 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
 
-        final Supplier<Deck> newCreator = Deck::new;
+        final Supplier<Deck> newCreator = () -> {
+            final Deck deck = new Deck();
+            deck.setDeckFormat(this.gameType.getDeckFormat());
+            return deck;
+        };
 
         switch (this.gameType) {
             case Constructed:

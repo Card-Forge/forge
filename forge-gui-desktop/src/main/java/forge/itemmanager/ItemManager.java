@@ -112,6 +112,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         .build();
 
     private final List<ItemView<T>> views = new ArrayList<>();
+    private final List<FLabel> extraViewButtons = new ArrayList<>();
     private final ItemListView<T> listView;
     private final ImageView<T> imageView;
     private ItemView<T> currentView;
@@ -187,6 +188,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         for (final ItemView<T> view : this.views) {
             this.add(view.getButton());
             view.getButton().setSelected(view == this.currentView);
+        }
+        for (final FLabel button : this.extraViewButtons) {
+            this.add(button);
         }
         this.add(this.btnViewOptions);
         this.btnViewOptions.setSelected(this.currentView.getPnlOptions().isVisible());
@@ -282,6 +286,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     public void setViewIndex(final int viewIndex) {
         if (viewIndex < 0 || viewIndex >= this.views.size()) { return; }
         final ItemView<T> view = this.views.get(viewIndex);
+        if (view == this.imageView && !this.imageView.getButton().isVisible()) { return; }
         if (this.currentView == view) { return; }
 
         if (this.config != null) {
@@ -315,9 +320,28 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.focus();
     }
 
+    protected void setImageViewVisible(final boolean visible) {
+        this.imageView.getButton().setVisible(visible);
+        if (!visible && this.currentView == this.imageView) {
+            this.setViewIndex(0);
+        }
+    }
+
     public void setHideViewOptions(final int viewIndex, final boolean hideViewOptions) {
         if (viewIndex < 0 || viewIndex >= this.views.size()) { return; }
         this.views.get(viewIndex).getPnlOptions().setVisible(!hideViewOptions);
+    }
+
+    public void addViewButton(final FLabel button) {
+        if (button == null || extraViewButtons.contains(button)) {
+            return;
+        }
+        extraViewButtons.add(button);
+        if (initialized) {
+            this.add(button);
+            this.revalidate();
+            this.repaint();
+        }
     }
 
     @Override
@@ -355,7 +379,19 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         final int ratioWidth = this.lblRatio.getAutoSizeWidth();
         int captionWidth = this.lblCaption.getAutoSizeWidth();
         final int cbxSectionWidth = this.cbxSection.isVisible() ? this.cbxSection.getAutoSizeWidth() : 0;
-        final int viewButtonCount = this.views.size() + 1; // +1 is for the options button
+        int visibleViewButtonCount = 0;
+        for (final ItemView<T> view : this.views) {
+            if (view.getButton().isVisible()) {
+                visibleViewButtonCount++;
+            }
+        }
+        int visibleExtraViewButtonCount = 0;
+        for (final FLabel button : this.extraViewButtons) {
+            if (button.isVisible()) {
+                visibleExtraViewButtonCount++;
+            }
+        }
+        final int viewButtonCount = visibleViewButtonCount + visibleExtraViewButtonCount + 1; // +1 is for the options button
         final int widthViewButtons = viewButtonCount * viewButtonWidth + helper.getGapX() * (viewButtonCount);
 
         // remove the space needed by all components that will be displayed
@@ -381,7 +417,17 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         helper.include(this.lblRatio, ratioWidth, FTextField.HEIGHT);
         helper.fillLine(this.lblEmpty, FTextField.HEIGHT, widthViewButtons);
         for (final ItemView<T> view : this.views) {
+            if (!view.getButton().isVisible()) {
+                continue;
+            }
             helper.include(view.getButton(), viewButtonWidth, FTextField.HEIGHT);
+            helper.offset(-1, 0);
+        }
+        for (final FLabel button : this.extraViewButtons) {
+            if (!button.isVisible()) {
+                continue;
+            }
+            helper.include(button, viewButtonWidth, FTextField.HEIGHT);
             helper.offset(-1, 0);
         }
         helper.include(this.btnViewOptions, viewButtonWidth, FTextField.HEIGHT);
@@ -483,6 +529,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
     public ItemView<T> getCurrentView() {
         return this.currentView;
+    }
+
+    protected boolean isInitialized() {
+        return this.initialized;
     }
 
     /**
@@ -675,6 +725,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     @Override
     public void setSelectedIndex(final int index) {
         this.currentView.setSelectedIndex(index);
+    }
+
+    public void clearSelection() {
+        this.currentView.clearSelectedItems();
     }
 
     /**
@@ -1036,21 +1090,27 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
 
         //update ratio of # in filtered pool / # in total pool
+        final int filteredCount = getDisplayCount(this.getFilteredItems());
         int total;
         if (!useFilter) {
-            total = this.getFilteredItems().countAll();
+            total = filteredCount;
         }
         else if (this.wantUnique) {
-            total = 0;
             final Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(this.pool, from -> from.getKey().getName());
-            for (final Entry<T, Integer> entry : items) {
-                total += entry.getValue();
-            }
+            total = getDisplayCount(items);
         }
         else {
-            total = this.pool.countAll();
+            total = getDisplayCount(this.pool);
         }
-        this.lblRatio.setText("(" + this.getFilteredItems().countAll() + " / " + total + ")");
+        this.lblRatio.setText("(" + filteredCount + " / " + total + ")");
+    }
+
+    protected int getDisplayCount(final Iterable<Entry<T, Integer>> items) {
+        int total = 0;
+        for (final Entry<T, Integer> entry : items) {
+            total += entry.getValue();
+        }
+        return total;
     }
 
     /**
