@@ -67,6 +67,11 @@ public class StaticData {
         this(cardReader, null, customCardReader, null, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false);
     }
     public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
+        this(cardReader, tokenReader, customCardReader, customTokenReader, editionFolder, customEditionsFolder,
+                blockDataFolder, setLookupFolder, cardArtPreference, "en-US", enableUnknownCards, loadNonLegalCards,
+                allowCustomCardsInDecksConformance, enableSmartCardArtSelection);
+    }
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, String preferredCardLanguage, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
@@ -129,6 +134,8 @@ public class StaticData {
             commonCards = new CardDb(regularCards, editions, filtered);
             variantCards = new CardDb(variantsCards, editions, filtered);
 
+            commonCards.setPreferredCardLanguage(preferredCardLanguage);
+            variantCards.setPreferredCardLanguage(preferredCardLanguage);
             commonCards.setCardArtPreference(cardArtPreference);
             variantCards.setCardArtPreference(cardArtPreference);
 
