@@ -89,7 +89,8 @@ public class PumpAi extends PumpAiBase {
         final Game game = ai.getGame();
         boolean main1Preferred = "Main1IfAble".equals(sa.getParam("AILogic")) && ph.is(PhaseType.MAIN1, ai);
         if (game.getStack().isEmpty() && sa.getPayCosts().hasTapCost()) {
-            if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
+            if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)
+                    && !isSorcerySpeed(sa, ai)) {
                 return false;
             }
             if (ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN) && ph.getPlayerTurn().isOpponentOf(ai)) {
