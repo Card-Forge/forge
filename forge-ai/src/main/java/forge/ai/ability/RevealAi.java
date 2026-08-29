@@ -7,7 +7,6 @@ import forge.ai.PlayerControllerAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCopyService;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
@@ -19,8 +18,12 @@ public class RevealAi extends RevealAiBase {
 
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
-        if (isRememberedSelfRevealAnyNumber(sa) && getRevealableCards(ai, sa).isEmpty()) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        if (isRememberedSelfRevealAnyNumber(sa)) {
+            CardCollection revealable = getRevealableCards(ai, sa);
+            if (revealable.isEmpty()) {
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
+            }
+            setAiEvaluationHost(sa, revealable);
         }
 
         if (!revealHandTargetAI(ai, sa, false)) {
@@ -32,22 +35,6 @@ public class RevealAi extends RevealAiBase {
         }
 
         return super.checkApiLogic(ai, sa);
-    }
-
-    @Override
-    protected Card getAiEvaluationHost(final Player ai, final SpellAbility sa, final Card host) {
-        if (!isRememberedSelfRevealAnyNumber(sa)) {
-            return host;
-        }
-
-        final CardCollection cards = getRevealableCards(ai, sa);
-        if (cards.isEmpty()) {
-            return host;
-        }
-
-        final Card projectedHost = CardCopyService.getLKICopy(host);
-        projectedHost.addRemembered(cards);
-        return projectedHost;
     }
 
     private static boolean isRememberedSelfRevealAnyNumber(final SpellAbility sa) {
