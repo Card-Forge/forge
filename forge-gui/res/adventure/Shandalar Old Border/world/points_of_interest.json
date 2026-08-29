@@ -4411,8 +4411,8 @@
 		"displayName": "Svyelunite Temple",
 		"type": "dungeon",
 		"count": 1,
-		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-		"sprite": "FortBlue",
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "SvyeluniteTemple",
 		"map": "../Shandalar Old Border/maps/map/fallen_empires/svyelunite_temple.tmx",
 		"radiusFactor": 0.6,
 		"questTags": [

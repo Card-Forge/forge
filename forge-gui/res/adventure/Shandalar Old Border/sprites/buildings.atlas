@@ -1,4 +1,4 @@
-../../common/maps/tileset/buildings.png
+buildings.png
 size: 448,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -1194,3 +1194,6 @@ frostbittencavern
 primaljungle
   xy: 0, 928
   size: 32, 32
+SvyeluniteTemple
+  xy: 240, 864
+  size: 48, 32
