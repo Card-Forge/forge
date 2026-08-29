@@ -13,6 +13,7 @@ import forge.card.mana.ManaCost;
 import forge.game.GameEntity;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCopyService;
 import forge.game.card.CardState;
 import forge.game.card.CounterType;
@@ -157,7 +158,8 @@ public abstract class SpellAbilityAi extends SpellAbilityEffect {
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if ("Never".equals(aiLogic)) {
             return false;
-        } else if ("Once".equals(aiLogic)) {
+        }
+        if ("Once".equals(aiLogic)) {
             return !sa.getHostCard().getAbilityActivatedThisTurn().getActivators(sa).contains(ai);
         }
         return true;
@@ -272,6 +274,7 @@ public abstract class SpellAbilityAi extends SpellAbilityEffect {
         }
 
         if (subAb == null) {
+            // TODO this should result in the average rating of each decision
             return decision;
         }
 
@@ -502,5 +505,21 @@ public abstract class SpellAbilityAi extends SpellAbilityEffect {
         }
 
         return phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai);
+    }
+
+    protected boolean setAiEvaluationHost(final SpellAbility sa, final CardCollection remember) {
+        if (sa.isTrigger() || sa.isCastFromPlayEffect()) {
+            // reset not supported yet
+            return false;
+        }
+        Card host = sa.getHostCard();
+        if (!host.isLKI()) {
+            host = CardCopyService.getLKICopy(host);
+            sa.getRootAbility().setHostCard(host);
+        }
+        if (remember != null) {
+            host.addRemembered(remember);
+        }
+        return true;
     }
 }

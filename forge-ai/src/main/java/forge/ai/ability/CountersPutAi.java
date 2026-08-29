@@ -776,7 +776,7 @@ public class CountersPutAi extends CountersAi {
                     && amount == 0 // And counter amount wasn't set previously by something (e.g. Wildborn Preserver)
                     && sa.hasSVar(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
                 // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
-                int payX = ComputerUtilCost.setMaxXValue(sa, ai, true);
+                ComputerUtilCost.setMaxXValue(sa, ai, true);
             }
 
             if (!mandatory) {

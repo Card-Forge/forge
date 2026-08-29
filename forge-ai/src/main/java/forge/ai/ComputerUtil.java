@@ -1381,7 +1381,8 @@ public class ComputerUtil {
         }
         if (abCost.hasTapCost() && source.hasSVar("AITapDown")) {
             return true;
-        } else if (sa.getRootAbility().isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+        }
+        if (sa.getRootAbility().isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
             for (final CostPart part : sa.getRootAbility().getPayCosts().getCostParts()) {
                 if (part instanceof CostPutCounter) {
                     return part.convertAmount() == null || part.convertAmount() > 0 || ai.isCardInPlay("Carth the Lion");
@@ -1390,16 +1391,7 @@ public class ComputerUtil {
         }
         for (final CostPart part : abCost.getCostParts()) {
             if (part instanceof CostSacrifice sac) {
-                if (sac.payCostFromSource()) {
-                    if (source.getSVar("SacMe").equals("6")) {
-                        return true;
-                    } else if (shouldSacrificeThreatenedCard(ai, source, sa)) {
-                        return true;
-                    }
-                    continue;
-                }
-
-                final CardCollection typeList =
+                final List<Card> typeList = sac.payCostFromSource() ? List.of(source) :
                         CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), sac.getType(), source.getController(), source, sa);
                 for (Card c : typeList) {
                     if (c.getSVar("SacMe").equals("6")) {
