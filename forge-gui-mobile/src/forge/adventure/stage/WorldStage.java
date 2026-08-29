@@ -12,6 +12,7 @@ import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.DuelScene;
+import forge.adventure.scene.GameScene;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.TileMapScene;
@@ -222,10 +223,14 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     if (point == collidingPoint) {
                         continue;
                     }
-                    WorldSave.getCurrentSave().autoSave();
-                    loadPOI(point.getPointOfInterest());
-                    point.getMapSprite().checkOut();
-                    WorldSave.getCurrentSave().getPointOfInterestChanges(point.getPointOfInterest().getID()).visit();
+                    // The loadPOI generates booster and other things that may take time to load, so show a little loading text.
+                    Forge.setOverlayText("[%240]" + GameScene.instance().getLocationColorID() + "{CAROUSEL} L O A D I N G ");
+                    startPause(1f, ()-> {
+                        WorldSave.getCurrentSave().autoSave();
+                        loadPOI(point.getPointOfInterest());
+                        point.getMapSprite().checkOut();
+                        WorldSave.getCurrentSave().getPointOfInterestChanges(point.getPointOfInterest().getID()).visit();
+                    });
                     return true;
                 } else {
                     if (point == collidingPoint) {

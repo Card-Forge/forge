@@ -97,14 +97,14 @@ public class Main {
         public void restart() {
             if (RestartUtil.prepareForRestart()) {
                 Gdx.app.exit();
-                System.exit(0);
+                //System.exit(0); // exit code -1073740791 (0xC0000409)
             }
         }
 
         @Override
         public void exit() {
-            Gdx.app.exit(); //can just use Gdx.app.exit for desktop
-            System.exit(0);
+            Gdx.app.exit(); // can just use Gdx.app.exit for desktop
+            //System.exit(0); // exit code -1073740791 (0xC0000409)
         }
 
         @Override

@@ -52,15 +52,19 @@ public class FrameRate implements Disposable{
         }
     }
 
-    public void render() {
-        batch.begin();
-        font.draw(batch, (int)frameRate + " FPS | " + cardsLoaded + " cards re/loaded | " + allocT + " MB", 3, Gdx.graphics.getHeight() - 3);
-        batch.end();
+    public void render(boolean showFPS) {
+        if (showFPS) {
+            batch.begin();
+            font.draw(batch, (int)frameRate + " FPS | " + cardsLoaded + " cards re/loaded | " + allocT + " MB", 3, Gdx.graphics.getHeight() - 3);
+            batch.end();
+        }
     }
 
     public void dispose() {
-        font.dispose();
-        batch.dispose();
+        if (font != null)
+            font.dispose();
+        if (batch != null)
+            batch.dispose();
     }
 
 }

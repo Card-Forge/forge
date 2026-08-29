@@ -824,7 +824,8 @@ public class Main extends AndroidApplication {
             finish();
 
             //ensure process fully killed
-            System.exit(0);
+            //System.exit(0); // System.exit(0) will bypass dispose
+            Gdx.app.exit();
         }
 
         @Override
