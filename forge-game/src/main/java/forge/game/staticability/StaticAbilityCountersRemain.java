@@ -1,4 +1,3 @@
-
 /*
  * Forge: Play Magic: the Gathering.
  * Copyright (C) 2011  Forge Team
@@ -24,7 +23,10 @@ import forge.game.card.CardCollection;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
-public class StaticAbilityCountersRemain {
+public final class StaticAbilityCountersRemain {
+
+    private StaticAbilityCountersRemain() {
+    }
 
     public static boolean countersRemain(final Card card, final Zone zone) {
         if (zone == null || zone.getZoneType().isHidden()) {
@@ -48,9 +50,6 @@ public class StaticAbilityCountersRemain {
     }
 
     public static boolean applyCountersRemainAbility(final StaticAbility stAb, final Card card) {
-        if (!stAb.matchesValidParam("ValidCard", card)) {
-            return false;
-        }
-        return true;
+        return stAb.matchesValidParam("ValidCard", card);
     }
 }
