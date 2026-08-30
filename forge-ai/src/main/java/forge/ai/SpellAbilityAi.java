@@ -520,6 +520,7 @@ public abstract class SpellAbilityAi extends SpellAbilityEffect {
         if (remember != null) {
             host.addRemembered(remember);
         }
+        // TODO addChangedSVars if Remembered is simply used to substitute some other non-Card field
         return true;
     }
 }
