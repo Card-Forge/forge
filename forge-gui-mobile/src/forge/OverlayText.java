@@ -1,6 +1,7 @@
 package forge;
 
 import com.github.tommyettinger.textra.TypingLabel;
+import forge.adventure.scene.GameScene;
 import forge.adventure.scene.TileMapScene;
 import org.apache.commons.lang3.StringUtils;
 
@@ -40,15 +41,18 @@ public class OverlayText {
             update("");
             return;
         }
-        alpha = Math.min(alpha + delta * 0.75f, 1f);
-        float oldAlpha = Forge.getGraphics().getfloatAlphaComposite();
-        Forge.getGraphics().setAlphaComposite(alpha);
-        Forge.getGraphics().begin(Forge.getScreenWidth(), Forge.getScreenHeight());
-        Forge.getGraphics().getBatch().draw(Forge.getGraphics().getBackropTexture(), 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-        Forge.getGraphics().setAlphaComposite(oldAlpha);
-        label.draw(Forge.getGraphics().getBatch(), 1f);
-        label.act(delta);
-        Forge.getGraphics().end();
+        // render only on GameScenes
+        if (Forge.currentScene instanceof GameScene) {
+            alpha = Math.min(alpha + delta * 0.75f, 1f);
+            float oldAlpha = Forge.getGraphics().getfloatAlphaComposite();
+            Forge.getGraphics().setAlphaComposite(alpha);
+            Forge.getGraphics().begin(Forge.getScreenWidth(), Forge.getScreenHeight());
+            Forge.getGraphics().getBatch().draw(Forge.getGraphics().getBackropTexture(), 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            Forge.getGraphics().setAlphaComposite(oldAlpha);
+            label.draw(Forge.getGraphics().getBatch(), 1f);
+            label.act(delta);
+            Forge.getGraphics().end();
+        }
     }
 
 }
