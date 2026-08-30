@@ -835,6 +835,8 @@ public class Graphics {
     }
 
     public void drawCardImage(Texture image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
+        if (image == null)
+            return;
         if (!drawGrayscale) {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
             if (damage_overlay != null && damaged)
@@ -896,6 +898,8 @@ public class Graphics {
     }
 
     public void drawGrayTransitionImage(Texture image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
+        if (image == null)
+            return;
         batch.end();
         shaderGrayscale.bind();
         shaderGrayscale.setUniformf("u_grayness", percentage);
@@ -1193,6 +1197,8 @@ public class Graphics {
     }
 
     public void drawWarpImage(Texture image, float x, float y, float w, float h, float time) {
+        if (image == null)
+            return;
         batch.end();
         shaderWarp.bind();
         shaderWarp.setUniformf("u_amount", 0.2f);
@@ -1209,6 +1215,8 @@ public class Graphics {
     }
 
     public void drawWarpImage(TextureRegion image, float x, float y, float w, float h, float time) {
+        if (image == null)
+            return;
         batch.end();
         shaderWarp.bind();
         shaderWarp.setUniformf("u_amount", 0.2f);
@@ -1407,10 +1415,14 @@ public class Graphics {
 
     //draw vertically flipped image
     public void drawFlippedImage(Texture image, float x, float y, float w, float h) {
+        if (image == null)
+            return;
         batch.draw(image, adjustX(x), adjustY(y, h), w, h, 0, 0, image.getWidth(), image.getHeight(), false, true);
     }
 
     public void drawImageWithTransforms(TextureRegion image, float x, float y, float w, float h, float rotation, boolean flipX, boolean flipY) {
+        if (image == null)
+            return;
         float originX = x + w / 2;
         float originY = y + h / 2;
         batch.draw(image.getTexture(), adjustX(x), adjustY(y, h), originX - x, h - (originY - y), w, h, 1, 1, rotation, image.getRegionX(), image.getRegionY(), image.getRegionWidth(), image.getRegionHeight(), flipX, flipY);
@@ -1449,10 +1461,14 @@ public class Graphics {
     }
 
     public void drawRotatedImage(TextureRegion image, float x, float y, float w, float h, float originX, float originY, float rotation) {
+        if (image == null)
+            return;
         drawRotatedImage(image.getTexture(), x, y, w, h, originX, originY, image.getRegionX(), image.getRegionY(), image.getRegionWidth(), image.getRegionHeight(), rotation);
     }
 
     public void drawRotatedImage(Texture image, float x, float y, float w, float h, float originX, float originY, int srcX, int srcY, int srcWidth, int srcHeight, float rotation) {
+        if (image == null)
+            return;
         batch.draw(image, adjustX(x), adjustY(y, h), originX - x, h - (originY - y), w, h, 1, 1, rotation, srcX, srcY, srcWidth, srcHeight, false, false);
     }
 

@@ -205,7 +205,7 @@ public abstract class GameStage extends Stage {
         dialog.clearListeners();
         DeckProxy dp = new DeckProxy(deck, "Constructed", GameType.Constructed, null);
         FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
-        if (cardArt != null) {
+        if (cardArt != null && cardArt.getTextureRegion() != null) {
             TextureRegion textureRegion = cardArt.getTextureRegion();
             if (CardImageRenderer.forgeArt == cardArt)
                 textureRegion.flip(false, true); // fix inverted
