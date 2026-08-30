@@ -1,6 +1,5 @@
 package forge.adventure.world;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,6 +12,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.adventure.scene.Scene;
 import forge.adventure.util.Serializer;
+import forge.util.ScreenUtil;
 
 import java.io.IOException;
 import java.util.Date;
@@ -49,19 +49,19 @@ public class WorldSaveHeader implements java.io.Serializable, Disposable {
     }
 
     public void createPreview() {
-        TextureRegion tr = Forge.takeScreenshot();
+        TextureRegion tr = ScreenUtil.getInstance().takeScreenshot();
         Matrix4 m  = new Matrix4();
         Graphics g = new Graphics();
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Forge.getScreenWidth(), Forge.getScreenHeight(), false);
         frameBuffer.begin();
-        m.setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        g.begin(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        m.setToOrtho2D(0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+        g.begin(Forge.getScreenWidth(), Forge.getScreenHeight());
         g.setProjectionMatrix(m);
         g.startClip();
-        g.drawImage(tr, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        g.drawImage(tr, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
         g.end();
         g.endClip();
-        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
         if (Forge.lastPreview != null)
             Forge.lastPreview.dispose();
         Pixmap blurred = BlurUtils.blur(pixmap, 4, 2, false, Config.instance().getBlurDivisor());

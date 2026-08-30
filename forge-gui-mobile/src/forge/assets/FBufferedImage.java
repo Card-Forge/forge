@@ -21,8 +21,8 @@ public abstract class FBufferedImage extends FImageComplex {
     }
 
     public FBufferedImage(float width0, float height0, float opacity0) {
-        width = width0;
-        height = height0;
+        width = Math.max(width0, 2f);
+        height = Math.max(height0, 2f);
         opacity = opacity0;
     }
 
@@ -48,12 +48,12 @@ public abstract class FBufferedImage extends FImageComplex {
 
     @Override
     public TextureRegion getTextureRegion() {
-        return new TextureRegion(checkFrameBuffer().getColorBufferTexture());
+        return checkFrameBuffer() == null ? null : new TextureRegion(checkFrameBuffer().getColorBufferTexture());
     }
 
     @Override
     public Texture getTexture() {
-        return checkFrameBuffer().getColorBufferTexture();
+        return checkFrameBuffer() == null ? null : checkFrameBuffer().getColorBufferTexture();
     }
 
     public void clear() {
@@ -66,28 +66,32 @@ public abstract class FBufferedImage extends FImageComplex {
     }
 
     public FrameBuffer checkFrameBuffer() {
-        if (frameBuffer == null) {
-            Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST); //prevent buffered image being clipped
+        try {
+            if (frameBuffer == null) {
+                Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST); //prevent buffered image being clipped
 
-            //render texture to frame buffer if needed
-            frameBuffer = new FrameBuffer(Format.RGBA8888, (int) width, (int) height, false);
-            frameBuffer.begin();
+                //render texture to frame buffer if needed
+                frameBuffer = new FrameBuffer(Format.RGBA8888, (int) width, (int) height, false);
+                frameBuffer.begin();
 
-            //frame graphics must be given a projection matrix
-            //so stuff is rendered properly to custom sized frame buffer
-            Graphics frameGraphics = new Graphics();
-            Matrix4 matrix = new Matrix4();
-            matrix.setToOrtho2D(0, 0, width, height);
-            frameGraphics.setProjectionMatrix(matrix);
+                //frame graphics must be given a projection matrix
+                //so stuff is rendered properly to custom sized frame buffer
+                Graphics frameGraphics = new Graphics();
+                Matrix4 matrix = new Matrix4();
+                matrix.setToOrtho2D(0, 0, width, height);
+                frameGraphics.setProjectionMatrix(matrix);
 
-            frameGraphics.begin(width, height);
-            draw(frameGraphics, width, height);
-            frameGraphics.end();
+                frameGraphics.begin(width, height);
+                draw(frameGraphics, width, height);
+                frameGraphics.end();
 
-            frameBuffer.end();
-            frameGraphics.dispose();
+                frameBuffer.end();
+                frameGraphics.dispose();
 
-            Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
+                Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return frameBuffer;
     }

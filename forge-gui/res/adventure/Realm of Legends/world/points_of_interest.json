@@ -456,6 +456,114 @@
 			"Story"]
 	},
 	{
+		"name": "Isolated Hut",
+		"displayName": "Isolated Hut",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building198",
+		"map": "../Realm of Legends/maps/map/evilgrove/Isolated_Hut.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "An-Havva Inn",
+		"displayName": "An-Havva Inn",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building41",
+		"map": "../Realm of Legends/maps/map/grove/An-Havva_Inn.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ancient Opal Cavern",
+		"displayName": "Ancient Opal Cavern",
+		"type": "castle",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "ForgottenCave",
+		"map": "../Realm of Legends/maps/map/cave/Ancient_Opal_Cavern.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Otherworldly Market",
+		"displayName": "Otherworldly Market",
+		"type": "capital",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Universe Portal",
+		"map": "../Realm of Legends/maps/map/cave/Otherworldly_Market.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Eclipsed Elven Court",
+		"displayName": "Eclipsed Elven Court",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Great Aurora",
+		"map": "../Realm of Legends/maps/map/evilgrove/Eclipsed_Elven_Court.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ashling's Domain",
+		"displayName": "Ashling's Domain",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Ashling Domain",
+		"map": "../Realm of Legends/maps/map/barbariancamp/Ashlings_Domain.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Idyllic Beachfront",
+		"displayName": "Idyllic Beachfront",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Idyllic Beachfront",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Idyllic_Beachfront.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Peaceful Clearing",
+		"displayName": "Peaceful Clearing",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Tranquil Clearing",
+		"map": "../Realm of Legends/maps/map/fort/Peaceful_Clearing.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Planeswalker Dueling Club",
+		"displayName": "Planeswalker Dueling Club",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building56",
+		"map": "../Realm of Legends/maps/map/cave/Planeswalker_Dueling_Club.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Gitrog Bog",
 		"displayName": "Gitrog Bog",
 		"type": "castle",
@@ -496,8 +604,8 @@
 		"displayName": "Condemned Sewers",
 		"type": "cave",
 		"count": 1,
-		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
-		"sprite": "Building180",
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Dimir Guildgate",
 		"map": "../Realm of Legends/maps/map/evilgrove/Hidden_Dimir_Base.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [

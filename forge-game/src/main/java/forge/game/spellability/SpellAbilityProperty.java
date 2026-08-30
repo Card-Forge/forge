@@ -16,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCastWithFlash;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -64,6 +65,8 @@ public class SpellAbilityProperty {
             return sa.isEmbalm();
         } else if (property.equals("Eternalize")) {
             return sa.isEternalize();
+        } else if (property.equals("BeamMeUp")) {
+            return sa.isBeamMeUp();
         } else if (property.equals("Flashback")) {
             return sa.isFlashback();
         } else if (property.equals("Harmonize")) {
@@ -151,7 +154,11 @@ public class SpellAbilityProperty {
             if (source.getEffectSourceAbility() == null) {
                 return false;
             }
-            if (!sa.equals(source.getEffectSourceAbility().getRootAbility().getOriginalAbility())) {
+            SpellAbility root = source.getEffectSourceAbility().getRootAbility();
+            if (root instanceof WrappedAbility wa) {
+                root = wa.getWrappedAbility();
+            }
+            if (!sa.equals(Objects.requireNonNullElse(root.getOriginalAbility(), root))) {
                 return false;
             }
         } else if (property.equals("LastChapter")) {

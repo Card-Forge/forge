@@ -83,8 +83,8 @@ Only needed if the card text doesn't contain the type/color words but the abilit
 ## Generic AI params
 - `IsCurse$ True` - for effects that are normally treated positive e.g. Pump
 - `AICheckSVar$ {Count}`
-- `AILogic$ {String}`
-- `AITgts$ BetterThanEvalRating.130` -Normally the AI will only prefer targeting cards that satisfy the constraint. However, you can add `AITgtsStrict$ True` if playing it should only happen when enough of these cards are available, e.g. *Rootwater Matriarch*.
+- `AILogic$ {String}` - this is a special param since it supports some globally available values, however many AI API classes also have very individual logic paths which will be mentioned in their sections 
+- `AITgts$ BetterThanEvalRating.130` - Normally the AI will only prefer targeting cards that satisfy the constraint. However, you can add `AITgtsStrict$ True` if playing it should only happen when enough of these cards are available, e.g. *Rootwater Matriarch*.
 
 # Factories (in Alphabetical Order)
 

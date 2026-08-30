@@ -35,12 +35,16 @@ import java.util.Map;
 import static forge.assets.FSkin.getDefaultSkinFile;
 
 public class Assets implements Disposable {
+    private static Assets instance;
+    public static Assets getInstance() {
+        return instance == null ? instance = new Assets() : instance;
+    }
     /**
      * Custom FileHandleResolver for iOS/Android that handles both:
      * - Absolute paths (for writable cache/Documents files)
      * - Relative paths (for read-only bundle resources)
      */
-    private static class HybridFileHandleResolver implements FileHandleResolver {
+    private class HybridFileHandleResolver implements FileHandleResolver {
         private final AbsoluteFileHandleResolver absoluteResolver = new AbsoluteFileHandleResolver();
         private final InternalFileHandleResolver internalResolver = new InternalFileHandleResolver();
 
@@ -66,7 +70,7 @@ public class Assets implements Disposable {
      * absolute(), which works fine in the sandbox. Every other platform keeps absolute() throughout
      * — Android's assets are extracted to storage and are NOT reachable via internal() APK paths.
      */
-    static FileHandle getFileHandle(String path) {
+    FileHandle getFileHandle(String path) {
         if (GuiBase.isIOS() && path.startsWith(ForgeConstants.ASSETS_DIR)) {
             return Gdx.files.internal(path.substring(ForgeConstants.ASSETS_DIR.length()));
         }
@@ -95,7 +99,7 @@ public class Assets implements Disposable {
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
     private Texture holofoil;
 
-    public Assets() {
+    private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
         try {
             //init titleLQ
