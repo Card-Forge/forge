@@ -1,0 +1,9 @@
+Name:Monoist Gravliner
+ManaCost:1 B
+Types:Artifact Spacecraft
+PT:2/3
+K:Station:6
+T:Mode$ Stationed | ValidCard$ Card.Self | ValidCrew$ Creature | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature stations this Spacecraft, that creature perpetually gains deathtouch and lifelink.
+SVar:TrigPump:DB$ Pump | Defined$ Valid Creature.TriggeredCrew | KW$ Deathtouch & Lifelink | Duration$ Perpetual
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE6_CHARGE | AddType$ Creature | AddKeyword$ Flying & Deathtouch & Lifelink | Description$ STATION 6+ Flying, deathtouch, lifelink
+Oracle:Whenever a creature stations this Spacecraft, that creature perpetually gains deathtouch and lifelink.\nStation\nSTATION 6+\nFlying, deathtouch, lifelink

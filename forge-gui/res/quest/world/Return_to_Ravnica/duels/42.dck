@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Samantha Stephens
+Title=Samantha Stephens
+Icon=Samantha Stephens.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/LMC_Championship/Kazumasa_Sato_-_Rakdos_Aggro_(Standard,_#38851).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Falkenrath Aristocrat
+4 Hellhole Flailer
+4 Knight of Infamy
+4 Rakdos Cackler
+4 Stromkirk Noble
+1 Zealous Conscripts
+4 Brimstone Volley
+4 Searing Spear
+4 Pillar of Flame
+4 Blood Crypt
+4 Dragonskull Summit
+11 Mountain
+4 Swamp
+[Sideboard]
+3 Dreadbore
+4 Duress
+2 Flames of the Firebrand
+2 Rakdos Charm
+2 Rakdos's Return
+2 Traitorous Blood

@@ -633,3 +633,12 @@ crescentus
 lodge_1
   xy: 272, 528
   size: 16, 16
+dark_forest
+  xy: 416, 496
+  size: 32, 32
+abbey
+    xy: 32, 80
+    size: 32, 32
+parish
+  xy: 352, 368
+  size: 32, 32

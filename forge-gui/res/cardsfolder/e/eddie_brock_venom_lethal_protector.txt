@@ -1,0 +1,27 @@
+Name:Eddie Brock
+Variant:UniversesWithin:FlavorName:Viggo, Enforcer of Ig's Crossing
+ManaCost:2 B
+Types:Legendary Creature Human Hero Villain
+PT:3/3
+AlternateMode:Modal
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return target creature card with mana value 1 or less from your graveyard to the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.cmcLE1+YouOwn | TgtPrompt$ Select target creature card with mana value 1 or less in your graveyard
+A:AB$ SetState | Cost$ 3 B R G | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+SVar:PlayMain1:TRUE
+Oracle:When Eddie Brock enters, return target creature card with mana value 1 or less from your graveyard to the battlefield.\n{3}{B}{R}{G}: Transform Eddie Brock. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Venom, Lethal Protector
+Variant:UniversesWithin:FlavorName:Viggo, End of Ig's Crossing
+ManaCost:3 B R G
+Types:Legendary Creature Symbiote Hero Villain
+PT:5/5
+K:Menace
+K:Trample
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, you may sacrifice another creature. If you do, draw X cards, then you may put a permanent card with mana value X or less from your hand onto the battlefield, where X is the sacrificed creature's mana value.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Creature.Other/another creature> | NumCards$ X | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Permanent.YouCtrl+cmcLEX | Origin$ Hand | Destination$ Battlefield | TgtPrompt$ Select permanent card with mana value less than or equal to the sacrificed creature's mana value
+SVar:X:Sacrificed$CardManaCost
+Oracle:Menace, trample, haste\nWhenever Venom attacks, you may sacrifice another creature. If you do, draw X cards, then you may put a permanent card with mana value X or less from your hand onto the battlefield, where X is the sacrificed creature's mana value.

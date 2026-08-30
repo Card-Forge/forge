@@ -1,18 +1,14 @@
 package forge.game.event;
 
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-public class GameEventPlayerLivesChanged extends GameEvent {
-    public final Player player;
-    public final int oldLives;
-    public final int newLives;
+public record GameEventPlayerLivesChanged(PlayerView player, int oldLives, int newLives) implements GameEvent {
 
-    public GameEventPlayerLivesChanged(Player who, int oldValue, int newValue) {
-        player = who;
-        oldLives = oldValue;
-        newLives = newValue;
+    public GameEventPlayerLivesChanged(Player player, int oldLives, int newLives) {
+        this(PlayerView.get(player), oldLives, newLives);
     }
 
     @Override

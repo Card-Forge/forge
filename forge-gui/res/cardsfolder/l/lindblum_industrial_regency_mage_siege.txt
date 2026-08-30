@@ -12,5 +12,5 @@ ALTERNATE
 Name:Mage Siege
 ManaCost:2 R
 Types:Instant Adventure
-A:SP$ Token | TokenAmount$ 1 | TokenScript$ b_0_1_wizard_snipe | TokenOwner$ You | SpellDescription$ Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+A:SP$ Token | TokenScript$ b_0_1_wizard_snipe | TokenOwner$ You | SpellDescription$ Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
 Oracle:Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."

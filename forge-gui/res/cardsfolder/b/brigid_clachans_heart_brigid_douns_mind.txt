@@ -1,0 +1,24 @@
+Name:Brigid, Clachan's Heart
+ManaCost:2 W
+Types:Legendary Creature Kithkin Warrior
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, create a 1/1 green and white Kithkin creature token.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, create a 1/1 green and white Kithkin creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_kithkin
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {G}. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ G | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:Whenever this creature enters or transforms into Brigid, Clachan's Heart, create a 1/1 green and white Kithkin creature token.\nAt the beginning of your first main phase, you may pay {G}. If you do, transform Brigid.
+
+ALTERNATE
+
+Name:Brigid, Doun's Mind
+ManaCost:no cost
+Colors:green
+Types:Legendary Creature Kithkin Soldier
+PT:3/2
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | Each$ X | SpellDescription$ Add X {G} or X {W}, where X is the number of other creatures you control.
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {W}. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ W | Defined$ Self | Mode$ Transform
+SVar:X:Count$Valid Creature.Other+YouCtrl
+Oracle:{T}: Add X {G} or X {W}, where X is the number of other creatures you control.\nAt the beginning of your first main phase, you may pay {W}. If you do, transform Brigid.

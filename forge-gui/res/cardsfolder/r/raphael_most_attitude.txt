@@ -1,0 +1,12 @@
+Name:Raphael, Most Attitude
+ManaCost:3 R
+Types:Legendary Creature Mutant Ninja Turtle
+PT:4/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Alliance — Whenever another creature you control enters, you may exile the top card of your library.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, until end of turn, you may play a card exiled with NICKNAME.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ STPlay | SpellDescription$ Until end of turn, you may play a card exiled with NICKNAME.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.ExiledWithEffectSource | AffectedZone$ Exile | MayPlayLimit$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nAlliance — Whenever another creature you control enters, you may exile the top card of your library.\nWhenever Raphael attacks, until end of turn, you may play a card exiled with Raphael.

@@ -1,0 +1,8 @@
+Name:Destined Confrontation
+ManaCost:2 W W
+Types:Sorcery
+A:SP$ ChooseCard | Defined$ Player | WithTotalPower$ 4 | Reveal$ True | SubAbility$ SacAllOthers | AILogic$ NegativePowerFirst | SpellDescription$ Each player chooses any number of creatures they control with total power 4 or less, then sacrifices all other creatures they control.
+SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.!ChosenCard
+AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
+Oracle:Each player chooses any number of creatures they control with total power 4 or less, then sacrifices all other creatures they control.

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Dream
+Title=Dream
+Icon=Dream.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/ActualGarbage_-_Mono_White_Tokens_(Standard,_#2221748).dck
+Deck Type=constructed
+
+[Main]
+3 Sanguine Evangelist
+4 Beza, the Bounding Spring
+4 Carrot Cake
+2 Virtue of Loyalty
+4 Get Lost
+2 Parting Gust
+4 Lay Down Arms
+4 Sunfall
+4 Caretaker's Talent
+1 The Eternal Wanderer
+3 Archangel Elspeth
+15 Plains
+2 Sunken Citadel
+4 Elegant Parlor
+4 Fountainport
+[Sideboard]
+2 Destroy Evil
+1 Loran of the Third Path
+2 Temporary Lockdown
+2 Boon-Bringer Valkyrie
+3 Imodane's Recruiter
+1 Not on My Watch
+4 Rest in Peace

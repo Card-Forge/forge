@@ -1,0 +1,9 @@
+Name:She-Hulk, Jennifer Walters
+ManaCost:3 R
+Types:Legendary Creature Gamma Berserker Hero
+PT:4/4
+K:Trample
+A:AB$ Draw | Cost$ 2 R Sac<1/Land> | SubAbility$ DBPutCounter | SpellDescription$ Draw a card and put a +1/+1 counter on NICKNAME.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Trample (This creature can deal excess combat damage to the player she's attacking.)\n{2}{R}, Sacrifice a land: Draw a card and put a +1/+1 counter on She-Hulk.

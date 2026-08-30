@@ -1,0 +1,8 @@
+Name:Mary Jane Watson
+Variant:UniversesWithin:FlavorName:Demera, Soul of a Spider
+ManaCost:1 GW
+Types:Legendary Creature Human Performer
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Spider.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerZones$ Battlefield | ActivationLimit$ 1 | TriggerDescription$ Whenever a Spider you control enters, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever a Spider you control enters, draw a card. This ability triggers only once each turn.

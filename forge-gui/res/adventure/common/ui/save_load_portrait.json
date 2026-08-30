@@ -57,6 +57,15 @@
       "height": 32,
       "x": 140,
       "y": 440
-    } 
+    },
+    {
+      "type": "TextButton",
+      "name": "sortToggle",
+      "text": "Sort by Recent",
+      "width": 120,
+      "height": 32,
+      "x": 10,
+      "y": 400
+    }
   ]
 }

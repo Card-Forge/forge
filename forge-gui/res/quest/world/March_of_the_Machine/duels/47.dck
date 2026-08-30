@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Terminator
+Title=Terminator
+Icon=Terminator.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine/Eurisko_-_[S]_UW_Control_(Standard,_#1637369).dck
+Deck Type=constructed
+
+[Main]
+4 Reckoner Bankbuster
+2 March of Otherworldly Light
+2 Syncopate
+2 Assimilate Essence
+2 Make Disappear
+2 Negate
+4 Memory Deluge
+1 White Sun's Twilight
+3 Sunfall
+1 Farewell
+2 Ossification
+1 Invasion of New Phyrexia
+1 Jace, the Perfected Mind
+4 The Wandering Emperor
+1 The Eternal Wanderer
+5 Plains
+4 Island
+4 Field of Ruin
+4 Deserted Beach
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+4 Raffine's Tower
+4 Spara's Headquarters
+1 Mirrex
+[Sideboard]
+1 Surge of Salvation
+1 Blue Sun's Twilight
+2 Disdainful Stroke
+1 Faerie Mastermind
+3 Sunset Revelry
+1 Unlicensed Hearse
+2 Chrome Host Seedshark
+1 Temporary Lockdown
+2 Boon-Bringer Valkyrie
+1 Hullbreaker Horror

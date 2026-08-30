@@ -1,0 +1,10 @@
+Name:Bebop, Skull & Crossbones
+ManaCost:1 B
+Types:Legendary Creature Boar Mutant
+PT:2/1
+K:Partner with:Rocksteady, Mutant Marauder:Rocksteady
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may draw X cards, where X is the number of counters on NICKNAME. If you do, you lose X life.
+SVar:TrigLoseLife:AB$ LoseLife | Defined$ You | LifeAmount$ X | Cost$ Draw<X/You>
+SVar:X:Count$CardCounters.ALL
+Oracle:Partner with Rocksteady, Mutant Marauder (When this creature enters, target player may put Rocksteady into their hand from their library, then shuffle.)\nDeathtouch\nWhenever Bebop deals combat damage to a player, you may draw X cards, where X is the number of counters on Bebop. If you do, you lose X life.

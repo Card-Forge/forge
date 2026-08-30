@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Abraham Lincoln
+Title=Abraham Lincoln
+Icon=Abraham Lincoln.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/DannBjorn_-_UW_Blink_(Modern,_#1498992).dck
+Deck Type=constructed
+
+[Main]
+1 Kami of False Hope
+1 Thraben Inspector
+1 Giant Killer
+2 Ambitious Farmhand
+3 Skyclave Apparition
+3 Esper Sentinel
+3 Sun Titan
+4 Wall of Omens
+4 Ranger-Captain of Eos
+4 Solitude
+4 Ephemerate
+3 Abiding Grace
+3 Teferi, Time Raveler
+1 Idyllic Grange
+1 Emeria, the Sky Ruin
+2 Emeria, the Sky Ruin
+3 Marsh Flats
+4 Flooded Strand
+4 Field of Ruin
+4 Hallowed Fountain
+5 Plains
+[Sideboard]
+1 Burrenton Forge-Tender
+1 Martyr of Sands
+1 Mistcaller
+2 Dovin's Veto
+3 Supreme Verdict
+3 Drannith Magistrate
+4 Temporary Lockdown

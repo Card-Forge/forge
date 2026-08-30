@@ -2,6 +2,6 @@ Name:Quagmire Druid
 ManaCost:2 B
 Types:Creature Zombie Druid
 PT:2/2
-A:AB$ Destroy | Cost$ G T Sac<1/Creature> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+A:AB$ Destroy | Cost$ G T Sac<1/Creature> | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
 AI:RemoveDeck:All
 Oracle:{G}, {T}, Sacrifice a creature: Destroy target enchantment.

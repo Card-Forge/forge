@@ -1,6 +1,6 @@
 Name:Dakmor Sorceress
 ManaCost:5 B
-Types:Creature Human Wizard
+Types:Creature Human Wizard Sorcerer
 PT:*/4
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of Swamps you control.
 SVar:X:Count$Valid Swamp.YouCtrl

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Colorless
+Title=Dungeon Crawling Colorless
+Icon=Dungeon Crawling Colorless.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Leighton_Zink_-_Bant_Reclamation_Wish_(Modern,_#798829).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+4 Cryptic Command
+4 Growth Spiral
+4 Hieroglyphic Illumination
+4 Path to Exile
+4 Remand
+4 Glittering Wish
+4 Wilderness Reclamation
+3 Teferi, Time Raveler
+2 Breeding Pool
+1 Celestial Colonnade
+4 Field of Ruin
+4 Flooded Strand
+1 Forest
+2 Hallowed Fountain
+4 Island
+1 Lumbering Falls
+4 Misty Rainforest
+1 Plains
+1 Windswept Heath
+[Sideboard]
+1 Teferi, Time Raveler
+1 Detention Sphere
+1 Dovin's Veto
+1 Fracturing Gust
+1 Geist of Saint Traft
+1 Heroes' Reunion
+1 Knight of Autumn
+1 Meddling Mage
+1 Reborn Hope
+1 Sigarda, Host of Herons
+1 Sphinx's Revelation
+1 Supreme Verdict
+2 Surgical Extraction
+1 Wheel of Sun and Moon

@@ -1,6 +1,7 @@
 package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
+import forge.Forge;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.PaperToken;
@@ -14,11 +15,13 @@ import java.util.stream.Collectors;
 
 public class EffectData implements Serializable {
     public String name = null;           //Effect name. Can be checked for.
+
     //Duel effects.
     public int lifeModifier = 0;         //Amount to add to starting Life.
     public int changeStartCards = 0;     //Amount to add to starting hand size.
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
     public String[] startBattleWithCardInCommandZone; //Cards that start in the Command Zone of the Battlefield.
+
     //Map only effects.
     public boolean colorView = false;    //Allows to display enemy colors on the map.
     public float moveSpeed = 1.0f;       //Change of movement speed. Map only.
@@ -107,7 +110,7 @@ public class EffectData implements Serializable {
         if(goldModifier > 0.0f)
             description+="Shop discount: x" + (goldModifier) + "\n";
         if(cardRewardBonus > 0)
-            description += "Bonus enemy deck rewards: +" + (cardRewardBonus) + "\n";
+            description += Forge.getLocalizer().getMessage("advBonusEnemyDeckRewards", cardRewardBonus);
         if(this.opponent != null) {
             String oppEffect = this.opponent.getDescription();
             description += "Gives Opponent:\n";

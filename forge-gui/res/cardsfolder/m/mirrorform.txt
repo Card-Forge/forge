@@ -1,0 +1,5 @@
+Name:Mirrorform
+ManaCost:4 U U
+Types:Instant
+A:SP$ Clone | Defined$ Targeted | CloneTarget$ Valid Permanent.nonLand+YouCtrl | ValidTgts$ Permanent.nonAura | TgtPrompt$ Select target non-Aura permanent | SpellDescription$ Each nonland permanent you control becomes a copy of target non-Aura permanent.
+Oracle:Each nonland permanent you control becomes a copy of target non-Aura permanent.

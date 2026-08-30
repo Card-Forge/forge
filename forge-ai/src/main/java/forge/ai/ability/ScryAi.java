@@ -46,11 +46,10 @@ public class ScryAi extends SpellAbilityAi {
             }
 
             if ("X".equals(sa.getParam("ScryNum")) && sa.getSVar("X").equals("Count$xPaid")) {
-                int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                int xPay = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
                 if (xPay == 0) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
-                sa.getRootAbility().setXManaCostPaid(xPay);
             }
 
             if (mandatory) {
@@ -59,16 +58,15 @@ public class ScryAi extends SpellAbilityAi {
 
             if (sa.isTargetNumberValid()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     } // scryTargetAI()
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         return doTriggerNoCost(ai, sa, false);
     }
     
@@ -177,7 +175,7 @@ public class ScryAi extends SpellAbilityAi {
         }
 
         if ("X".equals(sa.getParam("ScryNum")) && sa.getSVar("X").equals("Count$xPaid")) {
-            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            int xPay = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             if (xPay == 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }

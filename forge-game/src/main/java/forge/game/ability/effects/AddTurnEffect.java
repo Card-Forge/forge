@@ -47,7 +47,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
                 ExtraTurn extra = p.getGame().getPhaseHandler().addExtraTurn(p);
                 if (sa.hasParam("ExtraTurnDelayedTrigger")) {
                     final Trigger delTrig = TriggerHandler.parseTrigger(sa.getSVar(sa.getParam("ExtraTurnDelayedTrigger")), sa.getHostCard(), true);
-                    SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(sa.getParam("ExtraTurnDelayedTriggerExcute")), sa.getHostCard());
+                    SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(sa.getParam("ExtraTurnDelayedTriggerExecute")), sa.getHostCard());
                     overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
                     delTrig.setOverridingAbility(overridingSA);
                     delTrig.setSpawningAbility(sa.copy(sa.getHostCard(), true));
@@ -69,7 +69,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
     public static void createCantSetSchemesInMotionEffect(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
-        final String name = hostCard.getName() + "'s Effect";
+        final String name = hostCard.getDisplayName() + "'s Effect";
         final String image = hostCard.getImageKey();
 
         final Card eff = createEffect(sa, sa.getActivatingPlayer(), name, image);
@@ -79,7 +79,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
         eff.addReplacementEffect(re);
 
         game.getAction().moveToCommand(eff, sa);
-        game.getEndOfTurn().addUntil(exileEffectCommand(game, eff));
+        game.getEndOfTurn().addUntil(() -> game.getAction().exileEffect(eff));
     }
 
 }

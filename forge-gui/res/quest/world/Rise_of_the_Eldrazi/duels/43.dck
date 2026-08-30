@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Ontario_-_Canada/Ryan_Cameron_-_Naya_Vengevine_(Standard,_#1839).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Birds of Paradise
+4 Bloodbraid Elf
+4 Knight of the Reliquary
+4 Noble Hierarch
+3 Ranger of Eos
+1 Scute Mob
+2 Stoneforge Mystic
+4 Vengevine
+4 Wild Nacatl
+1 Basilisk Collar
+1 Behemoth Sledge
+4 Lightning Bolt
+2 Oblivion Ring
+4 Arid Mesa
+2 Evolving Wilds
+5 Forest
+3 Misty Rainforest
+2 Mountain
+2 Plains
+2 Raging Ravine
+2 Sejiri Steppe
+2 Stirring Wildwood
+[Sideboard]
+1 Bojuka Bog
+4 Cunning Sparkmage
+3 Manabarbs
+3 Path to Exile
+2 Qasali Pridemage

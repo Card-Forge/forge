@@ -1,0 +1,8 @@
+Name:Rockalanche
+ManaCost:2 G
+Types:Sorcery Lesson
+A:SP$ Earthbend | Num$ X | SpellDescription$ Earthbend X, where X is the number of Forests you control. (Target land you control becomes a 0/0 creature with haste that's still a land. Put X +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+K:Flashback:5 G
+SVar:X:Count$Valid Forest.YouCtrl
+SVar:BuffedBy:Forest
+Oracle:Earthbend X, where X is the number of Forests you control. (Target land you control becomes a 0/0 creature with haste that's still a land. Put X +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)\nFlashback {5}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

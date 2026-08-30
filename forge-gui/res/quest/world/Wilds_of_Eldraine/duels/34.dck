@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman
+Title=Gunnery Sergeant Hartman
+Icon=Gunnery Sergeant Hartman.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/7namecon_-_Red_Deck_Wins_(Standard,_#1744228).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodfeather Phoenix
+3 Charming Scoundrel
+3 Embereth Veteran
+3 Goddric, Cloaked Reveler
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+4 Voldaren Epicure
+3 Voldaren Thrillseeker
+3 Lightning Strike
+3 Play with Fire
+3 Stoke the Flames
+1 Mishra's Foundry
+20 Mountain
+2 Sokenzan, Crucible of Defiance
+[Sideboard]
+4 Chandra, Dressed to Kill
+2 Furnace Punisher
+3 Lithomantic Barrage
+2 Nahiri's Warcrafting
+4 Torch the Tower

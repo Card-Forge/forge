@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=Jubilee
+Title=Jubilee
+Icon=Jubilee.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Jeff_Rosado_-_Sultai_Midrange_(Modern,_#1578841)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Mercurial Spelldancer
+3 Tarmogoyf
+2 Snapcaster Mage
+1 Jace, Vryn's Prodigy
+3 Eternal Witness
+1 Tireless Tracker
+1 Murktide Regent
+3 Aether Vial
+1 Springleaf Drum
+1 Shadowspear
+4 Fatal Push
+4 Assassin's Trophy
+3 Cryptic Command
+4 Thoughtseize
+4 Witherbloom Command
+2 Collective Brutality
+3 Urza's Saga
+1 Jace, the Mind Sculptor
+3 Misty Rainforest
+2 Verdant Catacombs
+1 Polluted Delta
+1 Zagoth Triome
+1 Watery Grave
+1 Breeding Pool
+1 Overgrown Tomb
+1 Flooded Grove
+1 Urborg, Tomb of Yawgmoth
+1 Mana Confluence
+1 Boseiju, Who Endures
+2 Snow-Covered Island
+2 Snow-Covered Swamp
+1 Snow-Covered Forest
+[Sideboard]
+1 Engineered Explosives
+3 Veil of Summer
+1 Spell Pierce
+1 Haywire Mite
+1 Void Mirror
+2 Unmoored Ego
+2 Leyline of the Void
+1 Fracturing Gust
+1 Shadow of Doubt
+1 Damnation
+1 Kaito Shizuki

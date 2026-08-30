@@ -1,0 +1,42 @@
+[metadata]
+Name=Mardu Vehicles
+Deck Type=constructed
+Title=Mardu Vehicles
+Description=Mardu Vehicles
+Difficulty=Medium
+Icon=Captain America
+[Main]
+2 Abrade
+2 Aether Hub
+2 Aethersphere Harvester
+4 Bomat Courier
+2 Canyon Slough
+1 Chandra, Torch of Defiance
+4 Concealed Courtyard
+1 Dragonskull Summit
+2 Fatal Push
+3 Hazoret the Fervent
+4 Heart of Kiran
+4 Inspiring Vantage
+3 Mountain
+2 Pia Nalaar
+1 Plains
+2 Plains
+1 Ruin Raider
+4 Scrapheap Scrounger
+4 Spire of Industry
+4 Toolcraft Exemplar
+4 Unlicensed Disintegration
+3 Veteran Motorist
+1 Walking Ballista
+[Sideboard]
+1 Abrade
+1 Angrath, the Flame-Chained
+2 Chandra, Torch of Defiance
+2 Duress
+2 Fumigate
+1 Hour of Glory
+2 Ixalan's Binding
+2 Magma Spray
+1 Treasure Map
+1 Walking Ballista

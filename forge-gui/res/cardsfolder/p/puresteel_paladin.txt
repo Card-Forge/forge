@@ -3,6 +3,6 @@ ManaCost:W W
 Types:Creature Human Knight
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Equipment.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever an Equipment you control enters, you may draw a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:TrigDraw:DB$ Draw
 S:Mode$ Continuous | Affected$ Equipment.YouCtrl | Condition$ Metalcraft | AddKeyword$ Equip:0 | Description$ Metalcraft — Equipment you control have equip {0} as long as you control three or more artifacts.
 Oracle:Whenever an Equipment you control enters, you may draw a card.\nMetalcraft — Equipment you control have equip {0} as long as you control three or more artifacts.

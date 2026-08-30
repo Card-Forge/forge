@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Princess Selenia
+Title=Princess Selenia
+Icon=Princess Selenia.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/Liga_Modern_Comic_Stores_(Malaga)_-_Torneo_1/Juan_Carlos_Adebo_-_Dark_Burn_(Modern,_#22258).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+4 Goblin Guide
+4 Grim Lavamancer
+4 Keldon Marauders
+4 Spark Elemental
+4 Lightning Bolt
+3 Shard Volley
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+3 Blood Crypt
+4 Dragonskull Summit
+1 Marsh Flats
+5 Mountain
+4 Scalding Tarn
+[Sideboard]
+4 Bloodchief Ascension
+3 Flamebreak
+4 Inquisition of Kozilek
+4 Shattering Spree

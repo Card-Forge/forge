@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=MamanBrigitte
+Title=MamanBrigitte
+Icon=MamanBrigitte.jpg
+Difficulty=Medium
+Description=Oath_of_the_Gatewatch/Standard_Champs_#9462536/fgorge_-_Eldrazi_(Standard,_#606024).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dimensional Infiltrator
+3 Eldrazi Mimic
+4 Eldrazi Skyspawner
+4 Matter Reshaper
+4 Reality Smasher
+4 Thought-Knot Seer
+4 Whirler Rogue
+4 Ghostfire Blade
+1 Reality Shift
+2 Spatial Contortion
+4 Foundry of the Consuls
+9 Island
+2 Sea Gate Wreckage
+4 Shivan Reef
+4 Tomb of the Spirit Dragon
+3 Yavimaya Coast
+[Sideboard]
+3 Disdainful Stroke
+3 Dispel
+2 Encase in Ice
+2 Oblivion Sower
+2 Prophet of Distortion

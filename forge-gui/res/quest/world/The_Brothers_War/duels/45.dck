@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Asanbosam
+Title=Asanbosam
+Icon=Asanbosam.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/420dragon_-_Mono_White_Midrange_(Standard,_#1551591).dck
+Deck Type=constructed
+
+[Main]
+2 Sanctuary Warden
+2 Spirited Companion
+2 The Restoration of Eiganjo
+3 Loran of the Third Path
+3 Serra Paragon
+3 Ambitious Farmhand
+4 Reckoner Bankbuster
+2 Destroy Evil
+2 Farewell
+4 Lay Down Arms
+1 Wedding Announcement
+3 Wedding Announcement
+2 Elspeth Resplendent
+4 The Wandering Emperor
+1 Plains
+1 Plains
+1 Eiganjo, Seat of the Empire
+3 Plains
+3 Plains
+4 Plains
+4 Roadside Reliquary
+6 Plains
+[Sideboard]
+1 Banishing Slash
+2 Fateful Absence
+2 Depopulate
+2 Unlicensed Hearse
+2 Destroy Evil
+3 Sunset Revelry
+3 Temporary Lockdown

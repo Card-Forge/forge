@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Aigamuxa
+Title=Aigamuxa
+Icon=Aigamuxa.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/ATGerwaz_-_Sultai_Control_(Modern,_#1084232).dck
+Deck Type=constructed
+
+[Main]
+1 Primeval Titan
+1 Elder Gargaroth
+4 Uro, Titan of Nature's Wrath
+1 Assassin's Trophy
+1 Aether Gust
+2 Abrupt Decay
+3 Fatal Push
+3 Cryptic Command
+3 Force of Negation
+3 Archmage's Charm
+3 Growth Spiral
+3 Mana Leak
+1 Hour of Promise
+3 Thoughtseize
+1 Jace, the Mind Sculptor
+1 Forest
+1 Swamp
+1 Misty Rainforest
+1 Overgrown Tomb
+1 Flooded Strand
+1 Ghost Quarter
+1 Snow-Covered Forest
+1 Zagoth Triome
+1 Field of Ruin
+2 Breeding Pool
+2 Island
+2 Mystic Sanctuary
+2 Field of the Dead
+2 Watery Grave
+2 Snow-Covered Island
+3 Misty Rainforest
+4 Polluted Delta
+[Sideboard]
+1 Engineered Explosives
+1 Life from the Loam
+1 Aether Gust
+1 Gaea's Blessing
+1 Surgical Extraction
+2 Confounding Conundrum
+2 Damping Sphere
+2 Veil of Summer
+2 Ceremonious Rejection
+2 Ashiok, Dream Render

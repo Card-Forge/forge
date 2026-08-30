@@ -34,4 +34,16 @@ public class QuestEventDuel extends QuestEvent {
         super();
     }
 
+    public QuestEventDuel getRandomOpponent(QuestEventDifficulty difficulty) {
+        QuestEventDuel duel = new QuestEventDuel();
+        duel.setTitle("Random Opponent");
+        duel.setIconImageKey(getIconImageKey());
+        duel.setOpponentName(getTitle());
+        duel.setDifficulty(difficulty);
+        duel.setProfile(getProfile());
+        duel.setShowDifficulty(false);
+        duel.setDescription("Fight a random opponent");
+        duel.setEventDeck(getEventDeck());
+        return duel;
+    }
 }

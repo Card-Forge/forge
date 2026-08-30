@@ -1,0 +1,8 @@
+Name:Stalactite Dagger
+ManaCost:2
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Equipment enters, create a 1/1 colorless Shapeshifter creature token with changeling. (It's every creature type.)
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_shapeshifter_changeling | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddAllCreatureTypes$ True | Description$ Equipped creature gets +1/+1 and is every creature type.
+K:Equip:2
+Oracle:When this Equipment enters, create a 1/1 colorless Shapeshifter creature token with changeling. (It's every creature type.)\nEquipped creature gets +1/+1 and is all creature types.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

@@ -4,7 +4,7 @@ Types:Legendary Creature Human Wizard
 PT:3/4
 A:AB$ Mill | Cost$ 2 U T | Defined$ Player | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBExile | SpellDescription$ Each player mills three cards. Exile up to two creature cards put into graveyards this way. Create an X/X blue Zombie creature token, where X is the total power of the cards exiled this way.
 SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Creature.IsRemembered | Hidden$ True | ChangeNum$ 2 | ForgetOtherRemembered$ True | RememberLKI$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_x_x_zombie | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | TokenScript$ u_x_x_zombie | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 DeckHas:Ability$Token

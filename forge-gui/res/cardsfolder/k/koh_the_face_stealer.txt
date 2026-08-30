@@ -1,0 +1,11 @@
+Name:Koh, the Face Stealer
+ManaCost:4 B B
+Types:Legendary Creature Shapeshifter Spirit
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile1 | TriggerDescription$ When NICKNAME enters, exile up to one other target creature.
+SVar:TrigExile1:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one other target creature | Origin$ Battlefield | Destination$ Exile
+T:Mode$ ChangesZone | ValidCard$ Creature.!token+Other | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ TrigExile2 | TriggerZones$ Battlefield | TriggerDescription$ Whenever another nontoken creature dies, you may exile it.
+SVar:TrigExile2:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile
+A:AB$ ChooseCard | Cost$ PayLife<1> | Defined$ You | Amount$ 1 | Mandatory$ True | ChoiceTitle$ Choose an exiled card exiled with NICKNAME | Choices$ Creature.ExiledWithSource | ChoiceZone$ Exile | SpellDescription$ Choose a creature card exiled with Koh.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Card.ChosenCard | GainsTriggerAbsOf$ Card.ChosenCard | GainsAbilitiesOfZones$ Exile | Description$ NICKNAME has all activated and triggered abilities of the last chosen card.
+Oracle:When Koh enters, exile up to one other target creature.\nWhenever another nontoken creature dies, you may exile it.\nPay 1 life: Choose a creature card exiled with Koh.\nKoh has all activated and triggered abilities of the last chosen card.

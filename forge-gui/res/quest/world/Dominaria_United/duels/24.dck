@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Beast
+Title=Beast
+Icon=Beast.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/AshenFenix_-_Orzhov_Vampires_(Standard,_#1496791).dck
+Deck Type=constructed
+
+[Main]
+1 Cutthroat Contender
+1 Wedding Security
+1 Vampire Scrivener
+1 Sengir Connoisseur
+1 Henrika Domnathi
+1 Welcoming Vampire
+2 Falkenrath Forebear
+2 Bloodcrazed Socialite
+2 Bloodsworn Squire
+2 Edgar, Charmed Groom
+3 Gluttonous Guest
+3 Voldaren Bloodcaster
+3 Restless Bloodseeker
+3 Unholy Officiant
+3 Wedding Invitation
+4 Vampire's Kiss
+3 Gift of Fangs
+1 Voldaren Estate
+3 Evolving Wilds
+6 Plains
+14 Swamp
+[Sideboard]

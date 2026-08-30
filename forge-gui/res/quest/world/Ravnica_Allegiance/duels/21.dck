@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=The Torpor Orb
+Title=The Torpor Orb
+Icon=The Torpor Orb.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/AVess_-_Mardu_Angels_(Standard,_#781430).dck
+Deck Type=constructed
+
+[Main]
+3 Aurelia, Exemplar of Justice
+4 Dire Fleet Daredevil
+3 Lyra Dawnbringer
+4 Resplendent Angel
+4 Rix Maadi Reveler
+3 Seraph of the Scales
+3 Tithe Taker
+4 Bedevil
+4 Lava Coil
+3 Ajani, Adversary of Tyrants
+4 Blood Crypt
+4 Clifftop Retreat
+4 Dragonskull Summit
+4 Godless Shrine
+4 Isolated Chapel
+2 Plains
+3 Sacred Foundry
+[Sideboard]
+3 Angrath, the Flame-Chained
+4 Deafening Clarion
+4 Duress
+2 Midnight Reaper
+2 Shivan Fire

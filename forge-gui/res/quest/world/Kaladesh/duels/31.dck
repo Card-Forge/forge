@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=PapaLegba
+Title=PapaLegba
+Icon=PapaLegba.jpg
+Difficulty=Medium
+Description=Kaladesh/Regionals_-_Worcester,_MA/Ben_Reilly_-_R-B_Aggro_(Standard,_#644153).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bomat Courier
+4 Forerunner of Slaughter
+4 Inventor's Apprentice
+4 Pia Nalaar
+4 Scrapheap Scrounger
+2 Fleetwheel Cruiser
+2 Key to the City
+4 Smuggler's Copter
+4 Fiery Temper
+4 Unlicensed Disintegration
+4 Incendiary Flow
+4 Aether Hub
+4 Foreboding Ruins
+11 Mountain
+4 Swamp
+[Sideboard]
+4 Galvanic Bombardment
+2 Kalitas, Traitor of Ghet
+2 Lightning Axe
+4 Transgress the Mind
+3 Weaver of Lightning

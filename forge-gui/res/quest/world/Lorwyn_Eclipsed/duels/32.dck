@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Waylon Smithers
+Title=Waylon Smithers
+Icon=Waylon Smithers.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/AbyssWalker_01_-_U-B-R-G_Reanimator_(Standard,_#2779796).dck
+Deck Type=constructed
+
+[Main]
+4 Bringer of the Last Gift
+4 Formidable Speaker
+4 Overlord of the Balemurk
+4 Superior Spider-Man
+2 Ardyn, the Usurper
+2 Deceit
+2 Harvester of Misery
+2 Wistfulness
+1 Terror of the Peaks
+4 Bitter Triumph
+2 Requiting Hex
+2 Analyze the Pollen
+4 Awaken the Honored Dead
+4 Watery Grave
+3 Overgrown Tomb
+3 Wastewood Verge
+3 Willowrush Verge
+2 Blooming Marsh
+2 Cavern of Souls
+1 Breeding Pool
+1 Forest
+1 Island
+1 Swamp
+1 Undercity Sewers
+1 Underground Mortuary
+[Sideboard]
+3 Intimidation Tactics
+2 Deceit
+2 Requiting Hex
+1 Ardyn, the Usurper
+1 Ghost Vacuum
+1 Glarb, Calamity's Augur
+1 Myojin of Night's Reach
+1 Soul-Guide Lantern
+1 Sunderflock
+1 Urgent Necropsy
+1 Valgavoth, Terror Eater

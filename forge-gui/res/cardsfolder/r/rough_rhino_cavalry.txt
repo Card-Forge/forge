@@ -1,0 +1,9 @@
+Name:Rough Rhino Cavalry
+ManaCost:4 R
+Types:Creature Human Mercenary
+PT:5/5
+K:Firebending:2
+A:AB$ PutCounter | Cost$ 8 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | Exhaust$ True | SubAbility$ DBPump | SpellDescription$ Put two +1/+1 counters on this creature. It gains trample until end of turn. (Activate each exhaust ability only once.)
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Trample
+DeckHas:Ability$Counters
+Oracle:Firebending 2 (Whenever this creature attacks, add {R}{R}. This mana lasts until end of combat.)\nExhaust — {8}: Put two +1/+1 counters on this creature. It gains trample until end of turn. (Activate each exhaust ability only once.)

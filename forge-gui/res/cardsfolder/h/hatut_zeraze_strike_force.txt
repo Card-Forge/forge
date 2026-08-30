@@ -1,0 +1,10 @@
+Name:Hatut Zeraze Strike Force
+ManaCost:3 W
+Types:Creature Human Spy Warrior
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast this spell, copy it for each time you've cast your commander from the command zone this game.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ X | MayChooseTarget$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature enters, destroy up to one target artifact or enchantment.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | ValidTgtsDesc$ artifact or enchantment | TargetMin$ 0 | TargetMax$ 1
+SVar:X:Count$TotalCommanderCastFromCommandZone
+Oracle:When you cast this spell, copy it for each time you've cast your commander from the command zone this game.\nWhen this creature enters, destroy up to one target artifact or enchantment.

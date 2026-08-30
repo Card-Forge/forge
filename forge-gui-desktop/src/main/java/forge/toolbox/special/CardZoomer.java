@@ -230,8 +230,8 @@ public enum CardZoomer {
             return 0;
         }
         if (thisCard.getCard().isSplitCard()) {
-            String cardName = thisCard.getCard().getName();
-            if (cardName.isEmpty()) { cardName = thisCard.getCard().getAlternateState().getName(); }
+            String cardName = thisCard.getCard().getOracleName();
+            if (cardName.isEmpty()) { cardName = thisCard.getCard().getAlternateState().getOracleName(); }
             
             PaperCard pc = StaticData.instance().getCommonCards().getCard(cardName);
             boolean isAftermath = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH);

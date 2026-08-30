@@ -1,23 +1,29 @@
 package forge.game.event;
 
+import java.util.Map;
+
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import forge.game.GameEntity;
+import forge.game.GameEntityView;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventAttackersDeclared extends GameEvent {
+public record GameEventAttackersDeclared(PlayerView player, Multimap<GameEntityView, CardView> attackersMap) implements GameEvent {
 
-    public final Player player;
-    public final Multimap<GameEntity, Card> attackersMap;
+    public GameEventAttackersDeclared(Player player, Multimap<GameEntity, Card> attackersMap) {
+        this(PlayerView.get(player), convertMap(attackersMap));
+    }
 
-    public GameEventAttackersDeclared(Player playerTurn, Multimap<GameEntity, Card> attackersMap) {
-        this.player = playerTurn;
-        this.attackersMap = attackersMap;
+    private static Multimap<GameEntityView, CardView> convertMap(Multimap<GameEntity, Card> map) {
+        Multimap<GameEntityView, CardView> result = HashMultimap.create();
+        for (Map.Entry<GameEntity, Card> entry : map.entries()) {
+            result.put(GameEntityView.get(entry.getKey()), CardView.get(entry.getValue()));
+        }
+        return result;
     }
 
     /* (non-Javadoc)
@@ -25,8 +31,14 @@ public class GameEventAttackersDeclared extends GameEvent {
      */
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
-        // TODO Auto-generated method stub
         return visitor.visit(this);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "" + player + " declared attackers: " + attackersMap;
+    }
 }

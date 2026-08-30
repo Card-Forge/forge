@@ -44,6 +44,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
     public final void addToMelded(final Card c) {
         c.getZone().remove(c);
+        c.setZone(this);
         meldedCards.add(c);
     }
 
@@ -97,5 +98,9 @@ public class PlayerZoneBattlefield extends PlayerZone {
             cards = filteredCollection;
         }
         return cards;
+    }
+
+    public final CardCollection getMeldedCards() {
+        return meldedCards;
     }
 }

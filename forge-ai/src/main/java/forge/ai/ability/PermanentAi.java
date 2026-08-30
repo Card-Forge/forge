@@ -77,11 +77,10 @@ public class PermanentAi extends SpellAbilityAi {
 
         ManaCost mana = sa.getPayCosts().getTotalMana();
         if (mana.countX() > 0) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, false);
+            final int xPay = ComputerUtilCost.setMaxXValue(sa, ai, false);
             if (source.hasConverge()) {
-                int nColors = ComputerUtilMana.getConvergeCount(sa, ai);
-                for (int i = 1; i <= xPay; i++) {
+                int nColors = -1;
+                for (int i = 0; i <= xPay; i++) {
                     sa.setXManaCostPaid(i);
                     int newColors = ComputerUtilMana.getConvergeCount(sa, ai);
                     if (newColors > nColors) {
@@ -91,11 +90,8 @@ public class PermanentAi extends SpellAbilityAi {
                         break;
                     }
                 }
-            } else {
-                if (xPay <= 0) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
-                }
-                sa.setXManaCostPaid(xPay);
+            } else if (xPay <= 0) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
         } else if (mana.isZero()) {
             // if mana is zero, but card mana cost does have X, then something is wrong
@@ -108,11 +104,11 @@ public class PermanentAi extends SpellAbilityAi {
         if ("SacToReduceCost".equals(sa.getParam("AILogic"))) {
             // reset X to better calculate
             sa.setXManaCostPaid(0);
-            ManaCostBeingPaid paidCost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, true, 0, false);
+            ManaCostBeingPaid paidCost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false);
 
             int generic = paidCost.getGenericManaAmount();
             // Set PayX here to maximum value.
-            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, false);
+            int xPay = ComputerUtilCost.setMaxXValue(sa, ai, false);
             // currently cards with SacToReduceCost reduce by 2 generic
             xPay = Math.min(xPay, generic / 2);
             sa.setXManaCostPaid(xPay);
@@ -180,12 +176,16 @@ public class PermanentAi extends SpellAbilityAi {
 
         // don't play cards without being able to pay the upkeep for
         boolean hasUpkeepCost = false;
+        int upkeepLifeLoss = 0;
         Cost upkeepCost = new Cost("0", true);
         for (Trigger t : source.getTriggers()) {
             if (!TriggerType.Phase.equals(t.getMode())) {
                 continue;
             }
             if (!"Upkeep".equals(t.getParam("Phase"))) {
+                continue;
+            }
+            if (!t.matchesValidParam("ValidPlayer", ai)) {
                 continue;
             }
             SpellAbility ab = t.ensureAbility();
@@ -199,6 +199,11 @@ public class PermanentAi extends SpellAbilityAi {
                 }
                 hasUpkeepCost = true;
                 upkeepCost.add(AbilityUtils.calculateUnlessCost(ab, ab.getParam("UnlessCost"), true));
+            } else if (ApiType.LoseLife.equals(ab.getApi()) && !ab.usesTargeting()) {
+                ab.setActivatingPlayer(ai);
+                if (AbilityUtils.getDefinedPlayers(source, ab.getParam("Defined"), ab).contains(ai)) {
+                    upkeepLifeLoss += AbilityUtils.calculateAmount(source, ab.getParam("LifeAmount"), ab);
+                }
             }
         }
 
@@ -212,6 +217,10 @@ public class PermanentAi extends SpellAbilityAi {
             if (!ComputerUtilCost.canPayCost(emptyAbility, ai, true)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
             }
+        }
+        if (upkeepLifeLoss > 0 && (ai.getLife() <= upkeepLifeLoss
+                || ComputerUtil.aiLifeInDanger(ai, true, upkeepLifeLoss))) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // check for specific AI preferences
@@ -316,6 +325,9 @@ public class PermanentAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (mandatory) {
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+        }
         if (!sa.metConditions()) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
@@ -324,20 +336,12 @@ public class PermanentAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         final Cost cost = sa.getPayCosts();
-        final Card source = sa.getHostCard();
-        if (cost != null && !willPayCosts(ai, sa, cost, source)) {
+        if (cost != null && !willPayCosts(ai, sa, cost, sa.getHostCard())) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-        AiAbilityDecision decision = checkApiLogic(ai, sa);
-        if (decision.willingToPlay()) {
-            return decision;
-        } else if (mandatory) {
-            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
-        } else {
-            return decision;
-        }
+        return checkApiLogic(ai, sa);
      }
 }

@@ -2,7 +2,6 @@
 Code=UMA
 Date=2018-12-07
 Name=Ultimate Masters
-Code2=UMA
 Type=Reprint
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 RareMythic
@@ -277,7 +276,9 @@ ScryfallCode=UMA
 7 b_6_6_wurm_trample @Daarken
 8 b_2_2_zombie @Anna Steinbauer
 9 r_1_1_elemental @Jaime Jones
-9 r_1_1_elemental @Jaime Jones
+10 r_1_1_elemental @Winona Nelson
+11 r_1_1_soldier @Johann Bodin
+# Duplicated as there is no r_1_1_soldier_haste token yet
 11 r_1_1_soldier_haste @Johann Bodin
 12 spark_elemental @John Avon
 13 g_4_4_elemental @Brandon Kitkouski

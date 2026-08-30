@@ -1,0 +1,12 @@
+Name:Shredder, Unrelenting
+ManaCost:4 B
+Types:Legendary Creature Human Ninja
+PT:6/4
+K:Sneak:3 B
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME enters or attacks, another target creature you control gains deathtouch until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME enters or attacks, another target creature you control gains deathtouch until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDesc$ another creature you control | KW$ Deathtouch
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard
+Oracle:Sneak {3}{B} (You may cast this spell for {3}{B} if you also return an unblocked attacker you control to hand during the declare blockers step. He enters tapped and attacking.)\nDeathtouch\nWhenever Shredder enters or attacks, another target creature you control gains deathtouch until end of turn.

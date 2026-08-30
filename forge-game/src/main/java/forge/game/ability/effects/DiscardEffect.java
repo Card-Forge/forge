@@ -20,6 +20,7 @@ import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerPredicates;
+import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.*;
@@ -143,12 +144,12 @@ public class DiscardEffect extends SpellAbilityEffect {
                     continue;
                 }
 
-                boolean runDiscard = !sa.hasParam("Optional")
-                        || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, sa.getParam("DiscardMessage"), null);
-                if (runDiscard) {
-                    toBeDiscarded = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
-                    toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
+                if (sa.hasParam("Optional") && !p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, sa.getParam("DiscardMessage"), null)) {
+                    continue;
                 }
+
+                toBeDiscarded = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
+                toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
             }
 
             if (mode.equals("Hand")) {
@@ -157,6 +158,17 @@ public class DiscardEffect extends SpellAbilityEffect {
                 // Empty hand can still be discarded
                 if (!toBeDiscarded.isEmpty() && !p.canDiscardBy(sa, true)) {
                     continue;
+                }
+
+                String message = Localizer.getInstance().getMessage("lblDoYouWantDiscardYourHand");
+                if (sa.hasParam("Optional")) {
+                    if (!p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message, null)) {
+                        continue;
+                    } else if (discarders.size() > 1) {
+                        // later players need to know the decision
+                        message = Localizer.getInstance().getMessage("lblPlayerKeepNCardsHand", p.getName(), p.getZone(ZoneType.Hand).size());
+                        game.getAction().notifyOfValue(sa, p, message, p);
+                    }
                 }
 
                 toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
@@ -172,16 +184,17 @@ public class DiscardEffect extends SpellAbilityEffect {
                 if (!p.canDiscardBy(sa, true)) {
                     continue;
                 }
-                String message = Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", String.valueOf(numCards));
-                boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message, null);
 
-                if (runDiscard) {
-                    final String valid = sa.getParamOrDefault("DiscardValid", "Card");
-                    List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, source.getController(), source, sa);
-
-                    toBeDiscarded = new CardCollection(Aggregates.random(list, numCards));
-                    toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
+                String message = Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", numCards);
+                if (sa.hasParam("Optional") && !p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message, null)) {
+                    continue;
                 }
+
+                final String valid = sa.getParamOrDefault("DiscardValid", "Card");
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, source.getController(), source, sa);
+
+                toBeDiscarded = new CardCollection(Aggregates.random(list, numCards));
+                toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
             }
             else if (mode.equals("TgtChoose") && sa.hasParam("UnlessType")) {
                 if (!p.canDiscardBy(sa, true)) {
@@ -189,17 +202,18 @@ public class DiscardEffect extends SpellAbilityEffect {
                 }
                 if (numCardsInHand > 0) {
                     CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
-                    toBeDiscarded = p.getController().chooseCardsToDiscardUnlessType(Math.min(numCards, numCardsInHand), hand, sa.getParam("UnlessType"), sa);
+                    toBeDiscarded = p.getController().chooseCardsToDiscardUnlessType(numCards, hand, sa.getParam("UnlessType").split(","), sa);
                     toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game,toBeDiscarded, ZoneType.Graveyard, sa);
                 }
             }
             else if (mode.equals("RevealDiscardAll")) {
-                // Reveal
                 final CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
 
-                for (final Player opp : p.getAllOtherPlayers()) {
-                    opp.getController().reveal(dPHand, ZoneType.Hand, p, Localizer.getInstance().getMessage("lblReveal") + " ");
+                if (dPHand.isEmpty()) {
+                    continue;
                 }
+
+                game.getAction().reveal(dPHand, ZoneType.Hand, p, true, Localizer.getInstance().getMessage("lblReveal") + " ");
 
                 if (!p.canDiscardBy(sa, true)) {
                     continue;
@@ -207,17 +221,13 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                 String valid = sa.getParamOrDefault("DiscardValid", "Card");
 
-                if (valid.contains("X")) {
-                    valid = TextUtil.fastReplace(valid,
-                            "X", Integer.toString(AbilityUtils.calculateAmount(source, "X", sa)));
-                }
-
                 toBeDiscarded = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
                 toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
             } else if (mode.endsWith("YouChoose") || mode.endsWith("TgtChoose")) {
                 CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
-                if (dPHand.isEmpty())
-                    continue; // for loop over players
+                if (dPHand.isEmpty()) {
+                    continue;
+                }
 
                 if (sa.hasParam("RevealNumber")) {
                     int amount = AbilityUtils.calculateAmount(source, sa.getParam("RevealNumber"), sa);
@@ -248,7 +258,14 @@ public class DiscardEffect extends SpellAbilityEffect {
                 int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : Math.min(validCards.size(), numCards);
                 int max = sa.hasParam("AnyNumber") ? validCards.size() : Math.min(validCards.size(), numCards);
 
-                toBeDiscarded = max == 0 ? CardCollection.EMPTY : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
+                // Reveal/Look modes disclose dPHand to the chooser; non-valid revealed cards should remain visible during the choice.
+                final boolean revealed = mode.startsWith("Reveal") || mode.startsWith("Look");
+                final CardCollectionView visibleToChooser = revealed ? dPHand : validCards;
+                toBeDiscarded = max == 0 ? CardCollection.EMPTY : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max, visibleToChooser);
+
+                if (toBeDiscarded.isEmpty()) {
+                    continue;
+                }
 
                 toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
 
@@ -259,10 +276,15 @@ public class DiscardEffect extends SpellAbilityEffect {
             discardedMap.put(p, toBeDiscarded);
         }
 
+        if (sa.hasParam("RememberDiscardingPlayers")) {
+            source.addRemembered(discardedMap.keySet());
+        }
+
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable table = AbilityKey.addCardZoneTableParams(params, sa);
 
-        discard(sa, true, discardedMap, params);
+        // extra check for Circling Vultures
+        discard(sa, !(sa instanceof AbilityStatic), discardedMap, params);
 
         table.triggerChangesZoneAll(game, sa);
     }

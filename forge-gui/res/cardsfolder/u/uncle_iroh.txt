@@ -1,0 +1,8 @@
+Name:Uncle Iroh
+ManaCost:1 RG RG
+Types:Legendary Creature Human Noble Ally
+PT:4/2
+K:Firebending:1
+S:Mode$ ReduceCost | ValidCard$ Lesson | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Lesson spells you cast cost {1} less to cast.
+DeckHints:Type$Lesson
+Oracle:Firebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.)\nLesson spells you cast cost {1} less to cast.

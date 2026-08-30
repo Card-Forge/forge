@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Gimli
+Title=Gimli
+Icon=Gimli.jpg
+Difficulty=Easy
+Description=Kaladesh/Regionals_Plano/Evart_Moughon_-_W-R_Vehicles_(Standard,_#652532).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Depala, Pilot Exemplar
+2 Pia Nalaar
+3 Selfless Spirit
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+3 Fleetwheel Cruiser
+2 Skysovereign, Consul Flagship
+4 Smuggler's Copter
+2 Fiery Temper
+4 Declaration in Stone
+4 Inspiring Vantage
+6 Mountain
+4 Needle Spires
+10 Plains
+[Sideboard]
+3 Galvanic Bombardment
+3 Gideon, Ally of Zendikar
+4 Harnessed Lightning
+2 Reckless Bushwhacker
+1 Selfless Spirit
+2 Skywhaler's Shot

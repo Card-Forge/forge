@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ala
+Title=Ala
+Icon=Ala.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine/Chris_Schiber_-_UBR_Junk_(Standard,_#1632625).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+1 Tenacious Underdog
+3 Corpse Appraiser
+2 Capricious Hellraiser
+4 Hidetsugu and Kairi
+2 Reckoner Bankbuster
+2 Go for the Throat
+3 Cut Down
+3 Invoke Despair
+3 Explosive Singularity
+4 Invasion of Tarkir
+1 Island
+1 Swamp
+1 Mountain
+4 Blackcleave Cliffs
+3 Darkslick Shores
+4 Haunted Ridge
+3 Shipwreck Marsh
+3 Stormcarved Coast
+1 Takenuma, Abandoned Mire
+4 Xander's Lounge
+[Sideboard]
+4 Duress
+2 Abrade
+1 Go for the Throat
+3 Flame-Blessed Bolt
+1 Hidetsugu Consumes All
+1 Whack
+2 Unlicensed Hearse
+1 Pilfer

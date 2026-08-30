@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Sherlock Holmes
+Title=Sherlock Holmes
+Icon=Sherlock Holmes.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Abel_Jacoby_-_Orzhov_Tempo_(Standard,_#1059942).dck
+Deck Type=constructed
+
+[Main]
+1 Tazri, Beacon of Unity
+1 Legion Angel
+1 Lurrus of the Dream-Den
+3 Luminarch Aspirant
+4 Seasoned Hallowblade
+4 General Kudro of Drannith
+4 Acquisitions Expert
+4 Archpriest of Iona
+1 Maul of the Skyclaves
+3 Village Rites
+4 Dire Tactics
+4 Agadeem's Awakening
+4 Bastion of Remembrance
+2 Elspeth, Sun's Nemesis
+2 Castle Ardenvale
+4 Brightclimb Pathway
+4 Temple of Silence
+4 Swamp
+6 Plains
+[Sideboard]
+3 Legion Angel

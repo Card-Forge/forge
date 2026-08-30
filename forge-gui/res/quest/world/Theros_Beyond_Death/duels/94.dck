@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/ANBKI_-_Jund_Eldrazi_(Modern,_#925032).dck
+Deck Type=constructed
+
+[Main]
+2 Hazoret the Fervent
+3 Bonecrusher Giant
+4 Eldrazi Obligator
+4 Matter Reshaper
+4 Noble Hierarch
+4 Reality Smasher
+4 Thought-Knot Seer
+1 Temur Battle Rage
+4 Lightning Bolt
+4 Once Upon a Time
+4 Ancient Stirrings
+1 Kiora, Behemoth Beckoner
+1 Stomping Ground
+1 Cavern of Souls
+1 Wastes
+1 Mountain
+2 Wooded Foothills
+3 Forest
+4 Eldrazi Temple
+4 Karplusan Forest
+4 Grove of the Burnwillows
+[Sideboard]
+1 Cindervines
+1 Klothys, God of Destiny
+2 Grafdigger's Cage
+2 Abrade
+2 Phyrexian Revoker
+2 Scavenging Ooze
+2 Blood Sun
+3 Tunnel Ignus

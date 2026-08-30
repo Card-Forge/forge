@@ -35,11 +35,9 @@ public class AnimateEffect extends AnimateEffectBase {
             return;
         }
 
-        // Remember Objects
         if (sa.hasParam("RememberObjects")) {
             animateRemembered = sa.getParam("RememberObjects");
         }
-        // Imprint Cards
         if (sa.hasParam("ImprintCards")) {
             animateImprinted = sa.getParam("ImprintCards");
         }
@@ -106,8 +104,10 @@ public class AnimateEffect extends AnimateEffectBase {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
                 finalColors = ColorSet.fromNames(source.getChosenColors());
+            } else if (colors.equals("All")) {
+                finalColors = ColorSet.WUBRG;
             } else {
-                finalColors = ColorSet.fromNames(Arrays.asList(colors.split(",")));
+                finalColors = ColorSet.fromNames(colors.split(","));
             }
         }
 
@@ -323,8 +323,6 @@ public class AnimateEffect extends AnimateEffectBase {
                 sb.append("until your next upkeep");
             } else if ("UntilYourNextTurn".equals(duration)) {
                 sb.append("until your next turn");
-            } else if ("UntilControllerNextUntap".equals(duration)) {
-                sb.append("until its controller's next untap step");
             } else {
                 sb.append("until end of turn");
             }

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Kane
+Title=Kane
+Icon=Kane.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Chris_Deeter_-_Golgari_Demons_(Standard,_#2275947).dck
+Deck Type=constructed
+
+[Main]
+4 Archfiend of the Dross
+2 Glissa Sunslayer
+4 Llanowar Elves
+4 Mosswood Dreadknight
+3 Preacher of the Schism
+1 Sheoldred, the Apocalypse
+2 Anoint with Affliction
+3 Cut Down
+4 Go for the Throat
+2 Duress
+1 Maelstrom Pulse
+4 Unholy Annex // Ritual Chamber
+1 Vivien Reid
+4 Blooming Marsh
+6 Forest
+1 Fountainport
+4 Llanowar Wastes
+2 Restless Cottage
+2 Soulstone Sanctuary
+6 Swamp
+[Sideboard]
+3 Choking Miasma
+1 Duress
+2 Ghost Vacuum
+1 Gix's Command
+2 Liliana of the Veil
+1 Nissa, Ascended Animist
+2 Tear Asunder
+2 Tranquil Frillback
+1 Vivien Reid

@@ -1,0 +1,10 @@
+Name:Emrakul's Presence
+ManaCost:no cost
+Types:Artifact
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ X | SVarCompare$ LT8 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you have fewer than eight cards in hand, draw cards equal to the difference.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Difference
+SVar:X:Count$ValidHand Card.YouOwn
+SVar:Difference:Number$8/Minus.X
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigWish | TriggerDescription$ At the beginning of your upkeep, put a random permanent card from your graveyard or exile onto the battlefield.
+SVar:TrigWish:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Battlefield | ChangeType$ Permanent.YouCtrl | Hidden$ True | AtRandom$ True
+Oracle:At the beginning of your upkeep, put a random permanent card from your graveyard or exile onto the battlefield.\nAt the beginning of your end step, if you have fewer than eight cards in hand, draw cards equal to the difference.

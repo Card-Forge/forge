@@ -4,8 +4,9 @@ Types:Creature Spirit
 PT:1/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
-SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform | SubAbility$ DBAttach
-SVar:DBAttach:DB$ Attach | ValidTgts$ Creature.ControlledBy TriggeredTarget | TgtPrompt$ Select target creature that damaged player controls | AILogic$ GainControl
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform | RememberChanged$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | ValidTgts$ Creature.ControlledBy TriggeredTarget | TgtPrompt$ Select target creature that damaged player controls | AILogic$ GainControl | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AlternateMode:DoubleFaced
 Oracle:Flying\nWhen Soul Seizer deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
 

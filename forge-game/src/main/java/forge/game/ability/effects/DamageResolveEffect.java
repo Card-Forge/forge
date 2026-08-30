@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.CardDamageMap;
+import forge.game.card.CardDamageTable;
 import forge.game.spellability.SpellAbility;
 
 public class DamageResolveEffect extends SpellAbilityEffect {
@@ -17,8 +17,12 @@ public class DamageResolveEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        CardDamageMap damageMap = sa.getDamageMap();
-        CardDamageMap preventMap = sa.getPreventMap();
+        CardDamageTable damageMap = sa.getDamageMap();
+        if (damageMap == null) {
+            // this can happen if damagesource was missing
+            return;
+        }
+        CardDamageTable preventMap = sa.getPreventMap();
         GameEntityCounterTable counterTable = sa.getCounterTable();
 
         sa.getHostCard().getGame().getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);

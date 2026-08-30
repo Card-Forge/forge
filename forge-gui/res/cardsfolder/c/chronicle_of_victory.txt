@@ -1,0 +1,10 @@
+Name:Chronicle of Victory
+ManaCost:6
+Types:Legendary Artifact
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters, choose a creature type.
+S:Mode$ Continuous | Affected$ Creature.ChosenType+YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ First Strike & Trample | Description$ Creatures you control of the chosen type get +2/+2 and have first strike and trample.
+T:Mode$ SpellCast | ValidCard$ Card.ChosenType | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a spell of the chosen type, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:PlayMain1:TRUE
+Oracle:As Chronicle of Victory enters, choose a creature type.\nCreatures you control of the chosen type get +2/+2 and have first strike and trample.\nWhenever you cast a spell of the chosen type, draw a card.

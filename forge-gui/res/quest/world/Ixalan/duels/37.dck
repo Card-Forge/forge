@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Robot37
+Title=Robot37
+Icon=Brekyirihunuade.jpg
+Difficulty=Medium
+Description=Green Energy 
+Deck Type=constructed
+
+[Main]
+2 Bristling Hydra
+3 Glint-Sleeve Siphoner
+3 Hostage Taker
+4 Longtusk Cub
+2 Rishkar, Peema Renegade
+4 Rogue Refiner
+2 The Scarab God
+4 Walking Ballista
+4 Winding Constrictor
+3 Blossoming Defense
+4 Fatal Push
+4 Attune with Aether
+4 Aether Hub
+4 Blooming Marsh
+4 Botanical Sanctum
+2 Drowned Catacomb
+4 Forest
+1 Island
+2 Swamp
+[Sideboard]
+1 Confiscation Coup
+3 Deathgorge Scavenger
+3 Duress
+3 Negate
+1 Spell Pierce
+2 Vraska's Contempt
+2 Vraska, Relic Seeker

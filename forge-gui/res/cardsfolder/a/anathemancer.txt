@@ -4,6 +4,6 @@ Types:Creature Zombie Wizard
 PT:2/2
 K:Unearth:5 B R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters, it deals damage to target player equal to the number of nonbasic lands that player controls.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player | NumDmg$ X
 SVar:X:Count$Valid Land.nonBasic+TargetedPlayerCtrl
 Oracle:When Anathemancer enters, it deals damage to target player equal to the number of nonbasic lands that player controls.\nUnearth {5}{B}{R} ({5}{B}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

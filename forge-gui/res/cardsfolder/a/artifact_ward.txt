@@ -5,5 +5,5 @@ K:Enchant:Creature
 SVar:AttachAILogic:Pump
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.Artifact | Description$ Enchanted creature can't be blocked by artifact creatures.
 R:Event$ DamageDone | Prevent$ True | ActiveZones$ Battlefield | ValidTarget$ Creature.EnchantedBy | ValidSource$ Artifact | Description$ Prevent all damage that would be dealt to enchanted creature by artifact sources.
-S:Mode$ CantTarget | ValidCard$ Card.EnchantedBy | ValidSource$ Artifact | Description$ Enchanted creature can't be the target of abilities from artifact sources.
+S:Mode$ CantTarget | ValidTarget$ Card.EnchantedBy | ValidSource$ Artifact | Description$ Enchanted creature can't be the target of abilities from artifact sources.
 Oracle:Enchant creature\nEnchanted creature can't be blocked by artifact creatures.\nPrevent all damage that would be dealt to enchanted creature by artifact sources.\nEnchanted creature can't be the target of abilities from artifact sources.

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Frodo
+Title=Frodo
+Icon=Frodo.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/Adlai_MTG_-_Hammer_Time_(Modern,_#1630823)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Ornithopter
+2 Ornithopter
+4 Stoneforge Mystic
+1 Ornithopter
+2 Giver of Runes
+4 Puresteel Paladin
+4 Esper Sentinel
+1 The Reality Chip
+3 Springleaf Drum
+4 Colossus Hammer
+1 Shadowspear
+1 Sword of Fire and Ice
+1 Kaldra Compleat
+2 Spell Pierce
+2 Surge of Salvation
+1 Steelshaper's Gift
+4 Sigarda's Aid
+4 Urza's Saga
+2 Windswept Heath
+3 Seachrome Coast
+3 Inkmoth Nexus
+1 Arid Mesa
+1 Flooded Strand
+2 Hallowed Fountain
+1 Silent Clearing
+2 Marsh Flats
+3 Plains
+[Sideboard]
+1 Pithing Needle
+2 Hushbringer
+2 Lavinia, Azorius Renegade
+2 Orvar, the All-Form
+4 Sanctifier en-Vec
+2 March of Otherworldly Light
+2 Spell Pierce

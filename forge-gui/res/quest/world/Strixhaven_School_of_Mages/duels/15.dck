@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Impundulu
+Title=Impundulu
+Icon=Impundulu.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Eli_Loveman_-_Weenie_White_(Standard,_#1155936).dck
+Deck Type=constructed
+
+[Main]
+2 Legion Angel
+2 Drannith Magistrate
+3 Reidane, God of the Worthy
+4 Elite Spellbinder
+4 Seasoned Hallowblade
+4 Alseid of Life's Bounty
+4 Giant Killer
+4 Skyclave Apparition
+4 Selfless Savior
+4 Luminarch Aspirant
+1 Maul of the Skyclaves
+4 Faceless Haven
+20 Snow-Covered Plains
+[Sideboard]
+1 Drannith Magistrate
+1 Maul of the Skyclaves
+1 Archon of Emeria
+1 Banishing Light
+2 Lurrus of the Dream-Den
+2 Idol of Endurance
+2 Archon of Absolution
+2 Legion Angel
+3 Glass Casket

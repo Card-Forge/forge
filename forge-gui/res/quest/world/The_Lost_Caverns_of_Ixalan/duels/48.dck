@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=The Spectre
+Title=The Spectre
+Icon=The Spectre.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Theodor_eliassen_-_Abzan_Aggro_(Standard,_#1978015).dck
+Deck Type=constructed
+
+[Main]
+4 Archangel of Wrath
+4 Atraxa, Grand Unifier
+4 Topiary Stomper
+4 Herd Migration
+4 Sunfall
+4 Leyline Binding
+1 Spelunking
+4 Up the Beanstalk
+2 Temporary Lockdown
+4 Invasion of Zendikar
+1 Boseiju, Who Endures
+1 Cavern of Souls
+4 Forest
+1 Island
+4 Jetmir's Garden
+3 Plains
+4 Spara's Headquarters
+2 Swamp
+4 Ziatora's Proving Ground
+1 Mirrex
+[Sideboard]
+3 Negate
+2 Temporary Lockdown
+3 The Wandering Emperor
+1 Disdainful Stroke
+2 Chrome Host Seedshark
+2 Knockout Blow
+2 Destroy Evil

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Mines of Kazum Durl
+Title=Mines of Kazum Durl
+Icon=Mines of Kazum Durl.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Aaron_Arpon_-_Azorious_Glyph_(Standard,_#1975914).dck
+Deck Type=constructed
+
+[Main]
+1 Ezrim, Agency Chief
+4 Norn's Inquisitor
+4 Novice Inspector
+4 Spyglass Siren
+3 Warden of the Inner Sky
+2 Cryptic Coat
+3 Moonsnare Prototype
+3 Destroy Evil
+2 Disruption Protocol
+2 No More Lies
+3 Case of the Filched Falcon
+4 Zoetic Glyph
+2 Tezzeret, Betrayer of Flesh
+4 Adarkar Wastes
+2 Deserted Beach
+1 Eiganjo, Seat of the Empire
+1 Field of Ruin
+5 Island
+1 Otawara, Soaring City
+4 Plains
+1 Restless Anchorage
+4 Seachrome Coast
+[Sideboard]
+1 Akal Pakal, First Among Equals
+2 Boon-Bringer Valkyrie
+1 Chrome Host Seedshark
+2 Depopulate
+1 Disdainful Stroke
+1 Jace, the Perfected Mind
+1 Lantern of the Lost
+1 Negate
+1 Sunfall
+3 Temporary Lockdown
+1 The Eternal Wanderer

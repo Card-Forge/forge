@@ -5,7 +5,7 @@ Icon=NetherFiend.jpg
 Difficulty=easy
 Description=Black Lord of the Pit deck.
 Deck Type=constructed
-[main]
+[Main]
 4 Animate Dead|LEB
 4 Black Knight|4ED
 3 Bog Rats|DRK
@@ -20,4 +20,4 @@ Deck Type=constructed
 20 Swamp|4ED
 3 Terror|4ED
 4 The Hive|LEB
-[sideboard]
+[Sideboard]

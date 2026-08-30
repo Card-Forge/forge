@@ -1,0 +1,5 @@
+Name:Dina's Guidance
+ManaCost:1 B G
+Types:Instant
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | DestinationAlternative$ Graveyard | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal it, put it into your hand or graveyard, then shuffle.
+Oracle:Search your library for a creature card, reveal it, put it into your hand or graveyard, then shuffle.

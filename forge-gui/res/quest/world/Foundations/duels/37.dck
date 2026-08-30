@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Piper
+Title=Piper
+Icon=Piper.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/KingHairy_-_Dimir_Cauldron_(Standard,_#2277721).dck
+Deck Type=constructed
+
+[Main]
+4 Kiora, the Rising Tide
+4 Rona, Herald of Invasion
+3 Sheoldred, the Apocalypse
+2 Likeness Looter
+3 Arcanis the Omnipotent
+3 Spyglass Siren
+2 Overlord of the Floodpits
+4 Abyssal Harvester
+2 Overlord of the Balemurk
+4 Agatha's Soul Cauldron
+2 Cut Down
+1 Bitter Triumph
+2 Go for the Throat
+1 Kaito, Bane of Nightmares
+4 Darkslick Shores
+1 Restless Reef
+4 Gloomlake Verge
+4 Underground River
+3 Island
+3 Swamp
+4 Undercity Sewers
+[Sideboard]
+1 Cut Down
+4 Duress
+3 Negate
+2 Malicious Eclipse
+2 Unholy Annex // Ritual Chamber
+1 Sheoldred, the Apocalypse
+2 Kaito, Bane of Nightmares

@@ -2,6 +2,6 @@ Name:Frontier Warmonger
 ManaCost:3 R
 Types:Creature Human Warrior
 PT:4/4
-T:Mode$ AttackersDeclaredOneTarget | ValidCard$ Creature | AttackedTarget$ Opponent,Planeswalker.OppCtrl | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures attack one of your opponents or a planeswalker they control, those creatures gain menace until end of turn.
+T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Opponent,Planeswalker.OppCtrl | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures attack one of your opponents or a planeswalker they control, those creatures gain menace until end of turn.
 SVar:TrigPumpAll:DB$ Pump | Defined$ TriggeredAttackers | KW$ Menace
 Oracle:Whenever one or more creatures attack one of your opponents or a planeswalker they control, those creatures gain menace until end of turn.

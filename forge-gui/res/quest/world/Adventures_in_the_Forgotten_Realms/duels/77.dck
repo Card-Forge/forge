@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Pebbles Flintstone
+Title=Pebbles Flintstone
+Icon=Pebbles Flintstone.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Ítalo_Titimura_-_Infect_(Modern,_#1199030).dck
+Deck Type=constructed
+
+[Main]
+2 Spellskite
+4 Glistener Elf
+4 Noble Hierarch
+4 Blighted Agent
+2 Spell Pierce
+2 Groundswell
+3 Wild Shape
+3 Mutagenic Growth
+4 Blossoming Defense
+4 Might of Old Krosa
+4 Vines of Vastwood
+4 Scale Up
+1 Dryad Arbor
+2 Breeding Pool
+2 Wooded Foothills
+4 Windswept Heath
+4 Inkmoth Nexus
+7 Forest
+[Sideboard]
+1 Tormod's Crypt
+1 Sorcerous Spyglass
+1 Ceremonious Rejection
+1 Grafdigger's Cage
+1 Elixir of Immortality
+1 Gaea's Blessing
+2 Dismember
+2 Spell Pierce
+2 Distortion Strike
+3 Return to Nature

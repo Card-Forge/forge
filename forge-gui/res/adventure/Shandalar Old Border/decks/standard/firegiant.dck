@@ -1,16 +1,20 @@
 [metadata]
 Name=firegiant
 [Main]
-18 Mountain|TMP|2
-3 Forest|TMP|2
-4 Giant Strength|TMP|1
-4 Incinerate|ICE|1
-4 Karplusan Forest|ICE|1
-4 Lightning Bolt|4ED|1
-4 Mogg Fanatic|TMP|1
-4 Mogg Raider|TMP|1
-4 Ogre Taskmaster|MMQ|1
-4 Saber Ants|MMQ|1
-4 Shivan Dragon|4ED|1
-4 Spined Wurm|7ED|1
-4 Thunderclap|MMQ|1
+20 Mountain|USG
+4 Gauntlet of Might|2ED
+4 Bloodfire Colossus|APC
+4 Avatar of Fury|PCY
+4 Rockshard Elemental|LGN
+4 Laccolith Titan|NMS
+4 Butcher Orgg|ONS
+4 Gratuitous Violence|ONS
+4 Thundermare|POR
+4 Crater Hellion|USG
+4 Earthquake|7ED
+
+[StartInBattle_Reference]
+1 Mountain|INV|1
+1 Mountain|INV|2
+1 Mountain|INV|3
+1 Loafing Giant|INV

@@ -1,0 +1,11 @@
+Name:Anina, Natural Parallelist
+ManaCost:1 G U
+Types:Legendary Creature Human Wizard
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Card.hasXCost | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBNameCard | TriggerDescription$ Whenever you cast a spell with {X} in its mana cost, conjure a random creature card with mana value X onto the battlefield.
+SVar:DBNameCard:DB$ NameCard | AtRandom$ True | ValidCards$ Creature.cmcEQX | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Name$ ChosenName | Conjure$ True | Zone$ Battlefield | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True
+SVar:X:Count$xPaid
+A:AB$ Mana | Cost$ T | Produced$ G U | RestrictValid$ Spell.hasXCost | SpellDescription$ Add {G}{U}. Spend this mana only to cast spells with {X} in their mana costs.
+Oracle:Whenever you cast a spell with {X} in its mana cost, conjure a random creature card with mana value X onto the battlefield.\n{T}: Add {G}{U}. Spend this mana only to cast spells with {X} in their mana costs.

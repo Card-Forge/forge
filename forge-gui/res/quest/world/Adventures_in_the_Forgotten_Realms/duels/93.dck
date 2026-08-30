@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Nyarvirazi
+Title=Nyarvirazi
+Icon=Nyarvirazi.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Hattori_Taiki_-_Hammer_Time_(Modern,_#1226822)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Esper Sentinel
+4 Ingenious Smith
+4 Memnite
+4 Ornithopter
+4 Puresteel Paladin
+4 Stoneforge Mystic
+1 Cranial Plating
+1 Shadowspear
+4 Colossus Hammer
+4 Springleaf Drum
+1 Unearth
+4 Urza's Saga
+4 Sigarda's Aid
+1 Eiganjo Castle
+4 Concealed Courtyard
+4 Silent Clearing
+4 Inkmoth Nexus
+4 Plains
+[Sideboard]
+1 Lurrus of the Dream-Den
+1 Nihil Spellbomb
+2 Path to Exile
+2 Seal of Cleansing
+2 Void Mirror
+3 Sanctifier en-Vec
+4 Thoughtseize

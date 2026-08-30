@@ -1,0 +1,8 @@
+Name:Amazing Acrobatics
+Variant:UniversesWithin:FlavorName:Drix Interception
+ManaCost:1 U U
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBCounter,DBTap
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Counter target spell | SpellDescription$ Counter target spell.
+SVar:DBTap:DB$ Tap | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Choose one or two target creatures | SpellDescription$ Tap one or two target creatures.
+Oracle:Choose one or both —\n• Counter target spell.\n• Tap one or two target creatures.

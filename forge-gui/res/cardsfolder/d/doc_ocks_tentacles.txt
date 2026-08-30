@@ -1,0 +1,9 @@
+Name:Doc Ock's Tentacles
+Variant:UniversesWithin:FlavorName:Giantcraft Helm
+ManaCost:1
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+cmcGE5 | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control with mana value 5 or greater enters, you may attach this Equipment to it.
+SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCardLKICopy
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | AddToughness$ 4 | Description$ Equipped creature gets +4/+4.
+K:Equip:5
+Oracle:Whenever a creature you control with mana value 5 or greater enters, you may attach this Equipment to it.\nEquipped creature gets +4/+4.\nEquip {5}

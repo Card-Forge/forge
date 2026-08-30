@@ -4,6 +4,21 @@ public class Modular extends KeywordWithAmount {
     private boolean sunburst = false;
 
     @Override
+    public String getTitle() {
+        if (sunburst) {
+            return "Modular—Sunburst";
+        }
+        return super.getTitle();
+    }
+
+    public String getAmountString() {
+        if (sunburst) {
+            return "Sunburst";
+        }
+        return super.getAmountString();
+    }
+
+    @Override
     protected void parse(String details) {
         if ("Sunburst".equals(details)) {
             sunburst = true;

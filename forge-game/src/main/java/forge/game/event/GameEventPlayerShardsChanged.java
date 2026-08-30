@@ -1,18 +1,14 @@
 package forge.game.event;
 
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-public class GameEventPlayerShardsChanged extends GameEvent {
-    public final Player player;
-    public final int oldShards;
-    public final int newShards;
+public record GameEventPlayerShardsChanged(PlayerView player, int oldShards, int newShards) implements GameEvent {
 
-    public GameEventPlayerShardsChanged(Player who, int oldValue, int newValue) {
-        player = who;
-        oldShards = oldValue;
-        newShards = newValue;
+    public GameEventPlayerShardsChanged(Player player, int oldShards, int newShards) {
+        this(PlayerView.get(player), oldShards, newShards);
     }
 
     @Override

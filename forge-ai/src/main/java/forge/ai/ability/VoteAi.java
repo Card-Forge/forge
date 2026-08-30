@@ -27,15 +27,13 @@ public class VoteAi extends SpellAbilityAi {
             if (!CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
                     sa.getParam("VoteCard"), host.getController(), host, sa).isEmpty()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         } else if ("Torture".equals(logic)) {
             if (aiPlayer.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.MAIN1)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.WaitForMain2);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.WaitForMain2);
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
@@ -44,7 +42,7 @@ public class VoteAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         return canPlay(aiPlayer, sa);
     }
 

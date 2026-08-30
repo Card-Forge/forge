@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Dinosaur Spirit
 PT:1/1
 K:Flying
-A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Regenerate target artifact.
+A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact | SpellDescription$ Regenerate target artifact.
 AI:RemoveDeck:All
 Oracle:Flying\nSacrifice Pteron Ghost: Regenerate target artifact.

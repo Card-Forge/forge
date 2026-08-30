@@ -1,0 +1,68 @@
+ulamog.png
+size: 640,304
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 336, 32
+  size: 16, 16      
+Idle 
+  xy: 0, 0
+  size: 80, 80      
+Idle 
+  xy: 80, 0
+  size: 80, 80    
+Idle 
+  xy: 160, 0
+  size: 80, 80    
+Idle 
+  xy: 240, 0
+  size: 80, 80 
+Walk 
+  xy: 0, 64
+  size: 80, 64       
+Walk 
+  xy: 80, 80
+  size: 80, 64    
+Walk 
+  xy: 160, 64
+  size: 80, 64    
+Walk 
+  xy: 240, 64
+  size: 80, 64      
+Walk 
+  xy: 320, 64
+  size: 80, 64
+Walk 
+  xy: 400, 64
+  size: 80, 64
+Walk 
+  xy: 480, 64
+  size: 80, 64
+Walk 
+  xy: 560, 64
+  size: 80, 64               
+Attack 
+  xy: 0, 144
+  size: 80, 80      
+Attack 
+  xy: 80, 144
+  size: 80, 80      
+Attack 
+  xy: 160, 144
+  size: 80, 80      
+Attack 
+  xy: 240, 144
+  size: 80, 80
+Death 
+  xy: 0, 224
+  size: 80, 80      
+Death 
+  xy: 80, 224
+  size: 80, 80      
+Death 
+  xy: 160, 224
+  size: 80, 80
+Death 
+  xy: 240, 224
+  size: 80, 80 

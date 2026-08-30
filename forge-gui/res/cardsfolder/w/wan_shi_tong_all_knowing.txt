@@ -1,0 +1,11 @@
+Name:Wan Shi Tong, All-Knowing
+ManaCost:3 U U
+Types:Legendary Creature Bird Spirit
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, target nonland permanent's owner puts it into their library second from the top or on the bottom.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 1 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1
+T:Mode$ ChangesZoneAll | ValidCards$ Card.!token | Origin$ Any | Destination$ Library | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more cards are put into a library from anywhere, create two 1/1 colorless Spirit creature tokens with "This token can't block or be blocked by non-Spirit creatures."
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_spirit_spiritshadow | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Flying\nWhen Wan Shi Tong enters, target nonland permanent's owner puts it into their library second from the top or on the bottom.\nWhenever one or more cards are put into a library from anywhere, create two 1/1 colorless Spirit creature tokens with "This token can't block or be blocked by non-Spirit creatures."

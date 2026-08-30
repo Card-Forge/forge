@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Negoogunogumbar
+Title=Negoogunogumbar
+Icon=Negoogunogumbar.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/PeterThomsen_-_Dimir_Death’s_Shadow_(Modern,_#2187417).dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+4 Death's Shadow
+1 Mockingbird
+2 Murktide Regent
+3 Orcish Bowmasters
+2 Psychic Frog
+4 Street Wraith
+1 Subtlety
+4 Tamiyo, Inquisitive Student
+4 Counterspell
+3 Drown in the Loch
+4 Fatal Push
+2 Force of Negation
+3 Sink into Stupor
+1 Spell Pierce
+2 Spell Snare
+4 Preordain
+4 Flooded Strand
+2 Island
+4 Polluted Delta
+1 Swamp
+4 Watery Grave
+[Sideboard]
+3 Consign to Memory
+2 Dress Down
+2 Go for the Throat
+3 Harbinger of the Seas
+1 Mystical Dispute
+2 Stern Scolding
+2 Toxic Deluge

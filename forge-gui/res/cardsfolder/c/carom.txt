@@ -7,6 +7,6 @@ SVar:CaromDamage:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | Replac
 SVar:CaromDmg:DB$ ReplaceSplitDamage | DamageTarget$ Imprinted
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 AI:RemoveDeck:All
 Oracle:The next 1 damage that would be dealt to target creature this turn is dealt to another target creature instead.\nDraw a card.

@@ -22,13 +22,10 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        int numCards = 0;
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
-        boolean shuffle = false;
         Card host = sa.getHostCard();
-
-        numCards = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
-        shuffle = sa.hasParam("MayShuffle");
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
+        int numCards = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
+        boolean shuffle = sa.hasParam("MayShuffle");
 
         final StringBuilder ret = new StringBuilder();
         ret.append("Look at the top ");
@@ -102,7 +99,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
             return;
         }
 
-        CardCollection topCards  = player.getTopXCardsFromLibrary(numCards);
+        CardCollection topCards = player.getTopXCardsFromLibrary(numCards);
 
         CardCollectionView orderedCards = activator.getController().orderMoveToZoneList(topCards, ZoneType.Library, sa);
         for (Card next : orderedCards) {

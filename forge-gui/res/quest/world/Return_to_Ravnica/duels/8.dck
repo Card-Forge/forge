@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Regigigas
+Title=Regigigas
+Icon=Regigigas.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/Grand_Prix_Trial_San_Antonio/Orry_Swift_-_B-R_Aggro_(Standard,_#41491).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Diregraf Ghoul
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+3 Hellrider
+4 Knight of Infamy
+3 Thundermaw Hellkite
+2 Brimstone Volley
+4 Searing Spear
+1 Victim of Night
+1 Pillar of Flame
+2 Sign in Blood
+4 Blood Crypt
+4 Cavern of Souls
+4 Dragonskull Summit
+1 Mountain
+4 Rakdos Guildgate
+7 Swamp
+[Sideboard]
+2 Appetite for Brains
+2 Bonfire of the Damned
+2 Cremate
+1 Flames of the Firebrand
+2 Ultimate Price
+1 Underworld Connections
+2 Zealous Conscripts

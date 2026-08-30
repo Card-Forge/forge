@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 101315 - Inherit the Earth
 URL:http://www.gatheringmagic.com/seanuy-101315-inherit-the-earth/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Win this turn.
 [state]
 ActivePlayer=human

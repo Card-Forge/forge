@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Hookah-Smoking Caterpillar
+Title=Hookah-Smoking Caterpillar
+Icon=Hookah-Smoking Caterpillar.jpg
+Difficulty=Medium
+Description=Zendikar/US_States_2009_-_Connecticut/Scott_Metcalf_-_Jund_Ramp_(Standard,_#3125).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Broodmate Dragon
+3 Siege-Gang Commander
+4 Sprouting Thrinax
+3 Bituminous Blast
+4 Lightning Bolt
+3 Terminate
+4 Blightning
+3 Maelstrom Pulse
+3 Rampant Growth
+4 Dragonskull Summit
+3 Forest
+3 Mountain
+4 Rootbound Crag
+4 Savage Lands
+3 Swamp
+[Sideboard]
+2 Burst Lightning
+4 Goblin Ruinblaster
+3 Jund Charm
+2 Malakir Bloodwitch
+3 Mind Rot

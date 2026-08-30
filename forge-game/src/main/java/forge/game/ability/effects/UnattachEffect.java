@@ -14,7 +14,7 @@ public class UnattachEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Unattach ");
-        sb.append(Lang.joinHomogenous(getTargetCards(sa)));
+        sb.append(Lang.joinHomogenous(getDefinedCardsOrTargeted(sa)));
         return sb.toString();
     }
 
@@ -24,7 +24,7 @@ public class UnattachEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Game game = sa.getHostCard().getGame();
-        for (final Card tgtC : getTargetCards(sa)) {
+        for (final Card tgtC : getDefinedCardsOrTargeted(sa)) {
             if (!tgtC.isInPlay()) {
                 continue;
             }

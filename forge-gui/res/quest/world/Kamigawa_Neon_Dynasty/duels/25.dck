@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Medium
+Description=./Standard/Kamigawa_Neon_Dynasty/Ryuzo_Fujie_-_Naya_Humans_(Standard,_#1308112).dck
+Deck Type=constructed
+
+[Main]
+1 Reidane, God of the Worthy
+1 Adeline, Resplendent Cathar
+1 Minsc, Beloved Ranger
+2 Brutal Cathar
+3 Thalia, Guardian of Thraben
+3 Skyclave Apparition
+3 Usher of the Fallen
+3 Elite Spellbinder
+4 Halana and Alena, Partners
+4 Luminarch Aspirant
+4 Hopeful Initiate
+4 Intrepid Adversary
+1 Portable Hole
+1 Valorous Stance
+1 Paladin Class
+1 Sundown Pass
+1 Boseiju, Who Endures
+2 Overgrown Farmland
+2 Plains
+2 Cave of the Frost Dragon
+2 Eiganjo, Seat of the Empire
+3 Branchloft Pathway
+3 Cragcrown Pathway
+4 Needleverge Pathway
+4 Secluded Courtyard
+[Sideboard]
+1 Tamiyo's Safekeeping
+1 Snakeskin Veil
+1 Elite Spellbinder
+1 Portable Hole
+1 Reidane, God of the Worthy
+1 Skyclave Apparition
+2 Brutal Cathar
+2 Sigarda, Champion of Light
+2 Divine Smite
+3 Valorous Stance

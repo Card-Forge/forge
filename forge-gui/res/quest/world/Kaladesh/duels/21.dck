@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Ulasht
+Title=Ulasht
+Icon=Ulasht.jpg
+Difficulty=Easy
+Description=Kaladesh/Competitive_Standard_Constructed_League/Lennny_-_WR_Vehicles_(Standard,_#644210).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+4 Depala, Pilot Exemplar
+2 Pia Nalaar
+4 Selfless Spirit
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+1 Fleetwheel Cruiser
+4 Smuggler's Copter
+2 Harnessed Lightning
+3 Declaration in Stone
+2 Gideon, Ally of Zendikar
+4 Inspiring Vantage
+6 Mountain
+4 Needle Spires
+10 Plains
+[Sideboard]
+1 Chandra, Torch of Defiance
+1 Fleetwheel Cruiser
+1 Fragmentize
+4 Galvanic Bombardment
+2 Gideon, Ally of Zendikar
+2 Key to the City
+1 Skysovereign, Consul Flagship
+1 Skywhaler's Shot
+2 Stasis Snare

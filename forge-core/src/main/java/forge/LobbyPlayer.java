@@ -2,6 +2,8 @@ package forge;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Objects;
+
 /** 
  * This means a player's part unchanged for all games.
  * 
@@ -13,6 +15,8 @@ public abstract class LobbyPlayer {
     private int avatarIndex = -1;
     private int sleeveIndex = -1;
     private String avatarCardImageKey;
+    private String sleeveArtKey = "";
+    private int sleeveArtOffset = 500;
 
     public LobbyPlayer(String name) {
         this.name = name;
@@ -35,6 +39,9 @@ public abstract class LobbyPlayer {
         return result;
     }
 
+    /*
+     * Two LobbyPlayers are equal if they have the same name.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -47,14 +54,7 @@ public abstract class LobbyPlayer {
             return false;
         }
         LobbyPlayer other = (LobbyPlayer) obj;
-        if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.name)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(name, other.name);
     }
 
     public int getAvatarIndex() {
@@ -75,6 +75,22 @@ public abstract class LobbyPlayer {
     }
     public void setAvatarCardImageKey(String avatarImageKey0) {
         this.avatarCardImageKey = avatarImageKey0;
+    }
+
+    // empty means fall back to the built-in sleeveIndex
+    public String getSleeveArtKey() {
+        return sleeveArtKey == null ? "" : sleeveArtKey;
+    }
+    public void setSleeveArtKey(String sleeveArtKey0) {
+        this.sleeveArtKey = sleeveArtKey0 == null ? "" : sleeveArtKey0;
+    }
+
+    // crop offset along the slack axis for a card-art sleeve; ignored for built-in sleeves
+    public int getSleeveArtOffset() {
+        return sleeveArtOffset;
+    }
+    public void setSleeveArtOffset(int sleeveArtOffset0) {
+        this.sleeveArtOffset = sleeveArtOffset0;
     }
 
     public abstract void hear(LobbyPlayer player, String message);

@@ -1,0 +1,10 @@
+Name:Rocket-Powered Goblin Glider
+Variant:UniversesWithin:FlavorName:Stitcher's Wings
+ManaCost:3
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCastFromYourGraveyard | Execute$ TrigAttach | TriggerDescription$ When this Equipment enters, if it was cast from your graveyard, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Flying & Haste | Description$ Equipped creature gets +2/+0 and has flying and haste.
+K:Equip:2
+K:Mayhem:2
+Oracle:When this Equipment enters, if it was cast from your graveyard, attach it to target creature you control.\nEquipped creature gets +2/+0 and has flying and haste.\nEquip {2}\nMayhem {2}

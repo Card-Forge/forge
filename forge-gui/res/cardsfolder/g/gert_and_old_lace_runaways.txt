@@ -1,0 +1,8 @@
+Name:Gert and Old Lace, Runaways
+ManaCost:2 RG
+Types:Legendary Creature Human Dinosaur Hero
+PT:4/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When NICKNAME enter, you may discard a card. If you do, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1
+Oracle:Trample (This creature can deal excess combat damage to the player they're attacking.)\nWhen Gert and Old Lace enter, you may discard a card. If you do, search your library for a basic land card, reveal it, put it into your hand, then shuffle.

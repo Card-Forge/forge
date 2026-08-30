@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/Ganz87_-_Azorius_Oculus_(Standard,_#2624394).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+2 Quantum Riddler
+4 Picklock Prankster
+4 Cosmogrand Zenith
+2 Kiora, the Rising Tide
+2 Pinnacle Starcage
+4 Into the Flood Maw
+1 Spectral Denial
+1 Three Steps Ahead
+2 Get Lost
+4 Opt
+4 Chart a Course
+4 Helping Hand
+2 Call a Surprise Witness
+2 Restless Anchorage
+4 Floodfarm Verge
+4 Island
+4 Starting Town
+1 Undercity Sewers
+1 Plains
+4 Meticulous Archive
+[Sideboard]
+2 Exorcise
+2 Devout Decree
+1 Restoration Magic
+2 Annul
+2 Tishana's Tidebinder
+2 Negate
+1 Kutzil's Flanker
+1 Pinnacle Starcage
+2 Sheltered by Ghosts

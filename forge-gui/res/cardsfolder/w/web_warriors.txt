@@ -1,0 +1,9 @@
+Name:Web-Warriors
+Variant:UniversesWithin:FlavorName:Diligent Webkeepers
+ManaCost:4 GW
+Types:Creature Spider Hero
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When this creature enters, put a +1/+1 counter on each other creature you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.StrictlyOther+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:When this creature enters, put a +1/+1 counter on each other creature you control.

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Abraham_Gonzalez_Mesa_-_Selesnya_Midrange_(Standard,_#1050463).dck
+Deck Type=constructed
+
+[Main]
+1 Kogla, the Titan Ape
+3 Charming Prince
+4 Yorion, Sky Nomad
+4 Gilded Goose
+4 Skyclave Apparition
+4 Llanowar Visionary
+4 Wicked Wolf
+1 The Great Henge
+2 Glass Casket
+3 Emeria's Call
+3 Turntimber Symbiosis
+3 Elspeth Conquers Death
+4 Trail of Crumbs
+4 Branchloft Pathway
+4 Temple of Plenty
+4 Plains
+8 Forest
+[Sideboard]
+1 Heliod's Intervention
+1 Elspeth Conquers Death
+2 Glass Casket
+2 Vivien, Monsters' Advocate
+3 Chainweb Aracnir
+3 Scavenging Ooze
+3 Shatter the Sky

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Hameln
+Title=Hameln
+Icon=Hameln.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Jaffer_-_Golgari_Enchantments_(Standard,_#1743225).dck
+Deck Type=constructed
+
+[Main]
+4 Elvish Archivist
+2 Kami of Transience
+3 Glissa Sunslayer
+3 Sheoldred, the Apocalypse
+3 Jugan Defends the Temple
+3 Cut Down
+3 Go for the Throat
+3 Rowan's Grim Search
+2 Back for Seconds
+2 Virtue of Persistence
+4 The Witch's Vanity
+3 Welcome to Sweettooth
+2 Forest
+6 Swamp
+4 Llanowar Wastes
+4 Deathcap Glade
+4 Restless Cottage
+1 Mirrex
+2 Ziatora's Proving Ground
+1 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+[Sideboard]

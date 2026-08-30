@@ -3,22 +3,7 @@ package forge.gui.events;
 import forge.gamemodes.match.NextGameDecision;
 import forge.player.PlayerControllerHuman;
 
-public final class UiEventNextGameDecision extends UiEvent {
-
-    private final PlayerControllerHuman controller;
-    private final NextGameDecision decision;
-
-    public UiEventNextGameDecision(final PlayerControllerHuman controller, final NextGameDecision decision) {
-        this.controller = controller;
-        this.decision = decision;
-    }
-
-    public PlayerControllerHuman getController() {
-        return controller;
-    }
-    public NextGameDecision getDecision() {
-        return decision;
-    }
+public record UiEventNextGameDecision(PlayerControllerHuman controller, NextGameDecision decision) implements UiEvent {
 
     @Override
     public <T> T visit(IUiEventVisitor<T> visitor) {

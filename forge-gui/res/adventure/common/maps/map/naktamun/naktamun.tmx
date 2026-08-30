@@ -1040,7 +1040,7 @@
 				&quot;voiceFile&quot;:&quot;audio/WizPAR4.mp3&quot;
 				&quot;options&quot;:[
 				{
-				&quot;name&quot;:&quot;Thank you&quot;,
+				&quot;name&quot;:&quot;Thank you.&quot;,
 				&quot;action&quot;:[{&quot;advanceMapFlag&quot;:&quot;intro&quot;},{&quot;addItem&quot;:&quot;Colorless rune&quot;}]
 				}]
 				}]

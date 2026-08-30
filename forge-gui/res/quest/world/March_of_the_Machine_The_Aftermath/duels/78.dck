@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Reverend Lovejoy
+Title=Reverend Lovejoy
+Icon=Reverend Lovejoy.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Frank_Robert_Flørenes_-_Mono-White_Death_and_Taxes_(Modern,_#1661330).dck
+Deck Type=constructed
+
+[Main]
+3 Archon of Emeria
+4 Giver of Runes
+4 Leonin Arbiter
+2 Metropolis Reformer
+2 Serra Paragon
+1 Skrelv, Defector Mite
+3 Skyclave Apparition
+4 Solitude
+4 Stoneforge Mystic
+3 Thalia, Guardian of Thraben
+4 Aether Vial
+1 Kaldra Compleat
+1 Sword of Fire and Ice
+1 Sword of Light and Shadow
+2 Touch the Spirit Realm
+2 Blast Zone
+2 Demolition Field
+1 Eiganjo Castle
+2 Eiganjo, Seat of the Empire
+1 Flagstones of Trokair
+4 Ghost Quarter
+9 Plains
+[Sideboard]
+2 Burrenton Forge-Tender
+2 Cathar Commando
+2 Containment Priest
+2 Drannith Magistrate
+2 March of Otherworldly Light
+2 Rest in Peace
+3 Sanctifier en-Vec

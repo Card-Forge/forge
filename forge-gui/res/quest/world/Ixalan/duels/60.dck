@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Robot60
+Title=Robot60
+Icon=Sherlock Holmes.jpg
+Difficulty=Easy
+Description=Mathieux boucher 
+Deck Type=constructed
+
+[Main]
+4 Bomat Courier
+4 Hazoret the Fervent
+3 Kari Zev, Skyship Raider
+2 Rampaging Ferocidon
+4 Soul-Scar Mage
+4 Abrade
+4 Lightning Strike
+4 Shock
+13 Mountain
+4 Ramunap Ruins
+2 Scavenger Grounds
+4 Sunscorched Desert
+[Sideboard]
+3 Chandra's Defeat
+2 Hour of Devastation
+1 Rampaging Ferocidon
+3 Rigging Runner

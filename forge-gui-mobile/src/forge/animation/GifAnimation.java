@@ -45,10 +45,15 @@ public class GifAnimation extends ForgeAnimation {
 
     public void dispose() {
         if (animation != null) {
-            for (TextureRegion tr: animation.getKeyFrames()) {
-                try {
-                    tr.getTexture().dispose();
-                } catch (Exception e) {}
+            Object[] keyFrames = animation.getKeyFrames();
+            for (Object keyFrame : keyFrames) {
+                if (keyFrame instanceof TextureRegion textureRegion) {
+                    try {
+                        textureRegion.getTexture().dispose();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }

@@ -5,7 +5,7 @@ Difficulty=hard
 Description=Mono G Essence of the Wild deck
 Icon=Chewbacca.jpg
 Deck Type=constructed
-[main]
+[Main]
 4 Awakening Zone
 4 Birds of Paradise
 1 Concordant Crossroads
@@ -21,4 +21,4 @@ Deck Type=constructed
 1 Nest Invader
 4 Noble Hierarch
 1 Mox Emerald
-[sideboard]
+[Sideboard]

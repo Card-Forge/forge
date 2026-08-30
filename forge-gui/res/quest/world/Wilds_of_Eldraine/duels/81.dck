@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Regigigas
+Title=Regigigas
+Icon=Regigigas.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Jacob_Hauch_-_Golgari_Yawgmoth_(Modern,_#1741079)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Delighted Halfling
+2 Ignoble Hierarch
+4 Young Wolf
+1 Metallic Mimic
+4 Wall of Roots
+4 Orcish Bowmasters
+4 Yawgmoth, Thran Physician
+1 Hapatra, Vizier of Poisons
+1 Zulaport Cutthroat
+4 Agatha's Soul Cauldron
+4 Chord of Calling
+2 Eldritch Evolution
+4 Grist, the Hunger Tide
+1 Dryad Arbor
+1 Nurturing Peatland
+1 Twilight Mire
+2 Overgrown Tomb
+2 Forest
+1 Swamp
+1 Pendelhaven
+2 Boseiju, Who Endures
+3 Blooming Marsh
+4 Verdant Catacombs
+1 Misty Rainforest
+2 Khalni Garden
+[Sideboard]
+1 Scavenging Ooze
+2 Chalice of the Void
+2 Thoughtseize
+2 Endurance
+2 Force of Vigor
+1 Haywire Mite
+1 Void Mirror
+2 The One Ring
+1 Sheoldred, the Apocalypse
+1 Collector Ouphe

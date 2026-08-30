@@ -7,5 +7,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | Trigger
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Enchantment.YouCtrl
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE2
-SVar:Z:Count$Valid Enchantment.YouCtrl+inZoneBattlefield
+SVar:Z:Count$Valid Enchantment.YouCtrl
 Oracle:Flying\nAt the beginning of your upkeep, return an enchantment you control to its owner's hand.

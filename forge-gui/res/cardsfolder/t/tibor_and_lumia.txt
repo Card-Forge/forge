@@ -4,7 +4,7 @@ Types:Legendary Creature Human Wizard
 PT:3/3
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Card.Blue | TriggerZones$ Battlefield | Execute$ TrigFlying | TriggerDescription$ Whenever you cast a blue spell, target creature gains flying until end of turn.
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Card.Red | TriggerZones$ Battlefield | Execute$ TrigTremor | TriggerDescription$ Whenever you cast a red spell, CARDNAME deals 1 damage to each creature without flying.
-SVar:TrigFlying:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
+SVar:TrigFlying:DB$ Pump | ValidTgts$ Creature | KW$ Flying
 SVar:TrigTremor:DB$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ 1 | ValidDescription$ each creature without flying.
 SVar:BuffedBy:Card.Blue
 Oracle:Whenever you cast a blue spell, target creature gains flying until end of turn.\nWhenever you cast a red spell, Tibor and Lumia deals 1 damage to each creature without flying.

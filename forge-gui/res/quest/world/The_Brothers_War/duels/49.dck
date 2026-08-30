@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Aladdin
+Title=Aladdin
+Icon=Aladdin.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/German_Fraga_-_Mono-Blue_Tempo_(Standard,_#1549778).dck
+Deck Type=constructed
+
+[Main]
+4 Tolarian Terror
+4 Haughty Djinn
+2 Make Disappear
+2 Spell Pierce
+3 Slip Out the Back
+3 Negate
+4 Essence Scatter
+4 Impulse
+4 Fading Hope
+4 Thirst for Discovery
+4 Consider
+1 Otawara, Soaring City
+21 Island
+[Sideboard]
+1 Surge Engine
+1 Spectral Adversary
+1 Essence Capture
+1 Negate
+1 Suspicious Stowaway
+1 Pithing Needle
+2 Disdainful Stroke
+2 Shore Up
+2 Witness Protection
+3 Honored Heirloom

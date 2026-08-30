@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Aigamuxa
+Title=Aigamuxa
+Icon=Aigamuxa.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/ALEXANDRE_PEREIRA_-_Selesnya_Aggro_(Standard,_#965066).dck
+Deck Type=constructed
+
+[Main]
+4 Paradise Druid
+4 Alseid of Life's Bounty
+4 Setessan Champion
+3 Shadowspear
+4 Karametra's Blessing
+3 Conclave Tribunal
+3 Banishing Light
+3 Sentinel's Eyes
+4 Season of Growth
+4 All That Glitters
+2 Temple of Plenty
+4 Temple Garden
+8 Plains
+10 Forest
+[Sideboard]
+3 Warbriar Blessing
+3 Archon of Sun's Grace
+3 Shatter the Sky
+3 Leyline of Sanctity
+3 Revoke Existence

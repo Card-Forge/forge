@@ -1,0 +1,8 @@
+Name:Return of the Mole Man
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigMill | TriggerDescription$ Landfall — Whenever a land you control enters, you may mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | Optional$ True
+A:AB$ Token | Cost$ 5 G Sac<1/CARDNAME/this enchantment> | TokenAmount$ X | TokenScript$ moloid | SorcerySpeed$ True | SpellDescription$ Create X 1/1 green Minion creature tokens named Moloid, where X is the number of permanent cards in your graveyard. The tokens have "Whenever this token attacks, you may mill a card." Activate only as a sorcery.
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+Oracle:Landfall — Whenever a land you control enters, you may mill two cards.\n{5}{G}, Sacrifice this enchantment: Create X 1/1 green Minion creature tokens named Moloid, where X is the number of permanent cards in your graveyard. The tokens have "Whenever this token attacks, you may mill a card." Activate only as a sorcery.

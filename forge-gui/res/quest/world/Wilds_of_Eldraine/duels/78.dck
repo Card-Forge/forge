@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Picard
+Title=Picard
+Icon=Picard.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/Nitreglyze_-_Naya_Karn_(Modern,_#1754954).dck
+Deck Type=constructed
+
+[Main]
+1 Eternal Witness
+2 Wall of Omens
+2 Zacama, Primal Calamity
+3 Solitude
+1 Timeless Witness
+1 Solitude
+4 Fury
+2 The One Ring
+4 Valakut Awakening
+4 Unholy Heat
+1 Primal Command
+3 Escape to the Wilds
+4 Cleansing Wildfire
+1 Bala Ged Recovery
+4 Blood Sun
+4 Up the Beanstalk
+4 Karn, the Great Creator
+1 Sacred Foundry
+4 Flagstones of Trokair
+1 Forest
+1 Forest
+3 Grove of the Burnwillows
+1 Temple Garden
+4 Lotus Field
+4 Slagwoods Bridge
+2 Boseiju, Who Endures
+2 Jetmir's Garden
+1 Plains
+1 Plains
+[Sideboard]
+1 Sundering Titan
+1 Pithing Needle
+1 Liquimetal Coating
+1 Emrakul, the Aeons Torn
+4 Leyline of Sanctity
+1 Orbs of Warding
+2 Soul-Guide Lantern
+1 Walking Ballista
+2 Temporary Lockdown
+1 The One Ring

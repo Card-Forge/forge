@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Dead Girl
+Title=Dead Girl
+Icon=Dead Girl.jpg
+Difficulty=Easy
+Description=Avacyn_Restored/SCG_Invitational_Qualifier_-_Concord,_California/Patrick_Smith_-_Zombies_(Standard,_#32795).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Artist
+2 Butcher Ghoul
+4 Diregraf Ghoul
+1 Falkenrath Aristocrat
+2 Fume Spitter
+4 Geralf's Messenger
+3 Gloom Surgeon
+4 Gravecrawler
+3 Phyrexian Metamorph
+1 Zealous Conscripts
+4 Birthing Pod
+2 Go for the Throat
+3 Tragic Slip
+4 Blackcleave Cliffs
+3 Cavern of Souls
+4 Dragonskull Summit
+9 Swamp
+3 Woodland Cemetery
+[Sideboard]
+4 Crypt Creeper
+3 Geth's Verdict
+1 Manic Vandal
+1 Oxidda Scrapmelter
+3 Phyrexian Obliterator
+2 Ratchet Bomb

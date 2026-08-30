@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=DonkeyKong
+Title=DonkeyKong
+Icon=DonkeyKong.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Allen_Sun_-_Rakdos_Evoke_(Modern,_#1753074).dck
+Deck Type=constructed
+
+[Main]
+1 Kroxa, Titan of Death's Hunger
+4 Dauthi Voidwalker
+4 Fable of the Mirror-Breaker
+4 Fury
+4 Grief
+4 Orcish Bowmasters
+4 Ragavan, Nimble Pilferer
+3 Terminate
+2 Lightning Bolt
+1 Malakir Rebirth
+3 Not Dead After All
+1 Sheoldred's Edict
+2 Undying Malice
+4 Thoughtseize
+3 Blackcleave Cliffs
+3 Blood Crypt
+4 Bloodstained Mire
+1 Castle Locthwain
+1 Marsh Flats
+1 Mountain
+1 Polluted Delta
+1 Shizo, Death's Storehouse
+3 Swamp
+1 Verdant Catacombs
+[Sideboard]
+3 Blood Moon
+2 Chalice of the Void
+2 Engineered Explosives
+1 Fatal Push
+3 Leyline of the Void
+1 Magus of the Moon
+1 Sheoldred, the Apocalypse
+2 Tourach, Dread Cantor

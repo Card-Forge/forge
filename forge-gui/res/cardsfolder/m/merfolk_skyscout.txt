@@ -5,6 +5,6 @@ PT:2/3
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks or blocks, untap target permanent.
 T:Mode$ Blocks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, untap target permanent.
-SVar:TrigUntap:DB$ Untap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Permanent
 SVar:HasBlockEffect:TRUE
 Oracle:Flying\nWhenever Merfolk Skyscout attacks or blocks, untap target permanent.

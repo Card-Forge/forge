@@ -1,17 +1,12 @@
 package forge.game.event;
 
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 
-public class GameEventSpeedChanged extends GameEvent {
+public record GameEventSpeedChanged(PlayerView player, int oldValue, int newValue) implements GameEvent {
 
-    public final Player player;
-    public final int oldValue;
-    public final int newValue;
-
-    public GameEventSpeedChanged(Player affected, int oldValue, int newValue) {
-        player = affected;
-        this.oldValue = oldValue;
-        this.newValue = newValue;
+    public GameEventSpeedChanged(Player player, int oldValue, int newValue) {
+        this(PlayerView.get(player), oldValue, newValue);
     }
 
     @Override

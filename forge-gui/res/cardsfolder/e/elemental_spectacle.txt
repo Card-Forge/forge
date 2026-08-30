@@ -1,0 +1,9 @@
+Name:Elemental Spectacle
+ManaCost:5 G
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ rg_5_5_elemental | SubAbility$ DBGainLife | SpellDescription$ Vivid — Create a number of 5/5 red and green Elemental creature tokens equal to the number of colors among permanents you control. Then you gain life equal to the number of creatures you control.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y
+SVar:X:Count$Valid Permanent.YouCtrl$Colors
+SVar:Y:Count$Valid Creature.YouCtrl
+DeckHas:Ability$Token
+Oracle:Vivid — Create a number of 5/5 red and green Elemental creature tokens equal to the number of colors among permanents you control. Then you gain life equal to the number of creatures you control.

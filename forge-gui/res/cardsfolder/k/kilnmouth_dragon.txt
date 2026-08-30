@@ -2,7 +2,7 @@ Name:Kilnmouth Dragon
 ManaCost:5 R R
 Types:Creature Dragon
 PT:5/5
-K:Amplify:3:Dragon
+K:Amplify:3
 K:Flying
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of +1/+1 counters on it to any target.
 SVar:X:Count$CardCounters.P1P1

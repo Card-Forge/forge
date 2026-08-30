@@ -1,0 +1,9 @@
+Name:Captain Mar-Vell, Space-Born
+ManaCost:4 W
+Types:Legendary Creature Kree Soldier Hero
+PT:4/4
+K:Flying
+K:Vigilance
+S:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | Caster$ You | CheckSVar$ X | Description$ Cosmic Awareness — As long as an opponent has cast a spell this turn, you may cast spells as though they had flash.
+SVar:X:Count$ThisTurnCast_Card.OppCtrl
+Oracle:Flying, vigilance\nCosmic Awareness — As long as an opponent has cast a spell this turn, you may cast spells as though they had flash.

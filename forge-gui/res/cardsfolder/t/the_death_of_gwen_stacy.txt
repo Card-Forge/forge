@@ -1,0 +1,17 @@
+Name:The Death of Gwen Stacy
+Variant:UniversesWithin:FlavorName:The House Grows Hungry
+ManaCost:2 B
+Types:Enchantment Saga
+K:Chapter:3:DBDestroy,DBChoose,DBExile
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | SpellDescription$ Destroy target creature.
+SVar:DBChoose:DB$ GenericChoice | TempRemember$ Chooser | ShowChoice$ ExceptSelf | Defined$ Player | Choices$ Discard,No | SubAbility$ DBDiscard | SpellDescription$ Each player may discard a card. Each player who doesn't loses 3 life.
+SVar:Discard:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Discard | SpellDescription$ Discard a card.
+SVar:No:DB$ Pump | SpellDescription$ Do not discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ Player.NotedForDiscard | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ NonRememberedOwner | LifeAmount$ 3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBClearNotes
+SVar:DBClearNotes:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Discard
+SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select any number of target players | TargetMin$ 0 | TargetMax$ MaxTgt | ChangeType$ Card | StackDescription$ Exile graveyards ({p:Targeted}). | SpellDescription$ Exile any number of target players' graveyards.
+DeckHas:Ability$Discard
+SVar:MaxTgt:PlayerCountPlayers$Amount
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy target creature.\nII — Each player may discard a card. Each player who doesn't loses 3 life.\nIII — Exile any number of target players' graveyards.

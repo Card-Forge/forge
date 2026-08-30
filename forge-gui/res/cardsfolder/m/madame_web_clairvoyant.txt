@@ -1,0 +1,10 @@
+Name:Madame Web, Clairvoyant
+Variant:UniversesWithin:FlavorName:Olx, Mouth to Many Eyes
+ManaCost:4 U U
+Types:Legendary Creature Mutant Advisor
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Spider.TopLibrary+YouOwn+nonLand,Card.TopLibrary+YouOwn+nonCreature+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast Spider spells and noncreature spells from the top of your library.
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you attack, you may mill a card. (You may put the top card of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ You | Optional$ True
+Oracle:You may look at the top of your library any time.\nYou may cast Spider spells and noncreature spells from the top of your library.\nWhenever you attack, you may mill a card. (You may put the top card of your library into your graveyard.)

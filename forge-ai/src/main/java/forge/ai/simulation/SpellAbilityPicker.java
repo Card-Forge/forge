@@ -31,8 +31,8 @@ public class SpellAbilityPicker {
     private Plan plan;
     private int numSimulations;
 
-    public SpellAbilityPicker(Game game, Player player) {
-        this.game = game;
+    public SpellAbilityPicker(Player player) {
+        this.game = player.getGame();
         this.player = player;
     }
 
@@ -125,20 +125,6 @@ public class SpellAbilityPicker {
         }
     }
 
-    private static boolean isSorcerySpeed(SpellAbility sa, Player player) {
-        // TODO: Can we use the actual rules engine for this instead of trying to do the logic ourselves?
-        if (sa.isLandAbility()) {
-            return true;
-        }
-        if (sa.isSpell()) {
-            return !sa.withFlash(sa.getHostCard(), player);
-        }
-        if (sa.isPwAbility()) {
-            return !sa.withFlash(sa.getHostCard(), player);
-        }
-        return sa.isActivatedAbility() && sa.getRestrictions().isSorcerySpeed();
-    }
-
     private void createNewPlan(Score origGameScore, List<SpellAbility> candidateSAs) {
         plan = null;
 
@@ -152,7 +138,7 @@ public class SpellAbilityPicker {
         if (currentPhase.isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             List<SpellAbility> candidateSAs2 = new ArrayList<>();
             for (SpellAbility sa : candidateSAs) {
-                if (!isSorcerySpeed(sa, player)) {
+                if (!SpellAbilityAi.isSorcerySpeed(sa, player)) {
                     if (printOutput) {
                         System.err.println("Not sorcery: " + sa);
                     }
@@ -190,17 +176,17 @@ public class SpellAbilityPicker {
             }
         }
 
-        // To make the AI hold-off on playing creatures in MAIN1 if they give no other benefits,
-        // check the score for the bestSA while counting summon sick creatures for 0.
+        // To make the AI hold off on plays that only add unavailable resources, check the score
+        // while excluding phased-out permanents and summon sick creatures before MAIN2.
         // Do it here on the best SA, rather than for all evaluations, so that if the best SA
         // is indeed a creature spell, we don't pick something else to play now and then have
         // no mana to play the truly best SA post-combat.
-        if (bestSa != null && bestSaValue.summonSickValue <= origGameScore.summonSickValue) {
+        if (bestSa != null && bestSaValue.availableValue <= origGameScore.availableValue) {
             bestSa = null;
         }
 
         long execTime = System.currentTimeMillis() - startTime;
-        print("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue.summonSickValue + " TIME: " + execTime);
+        print("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue.availableValue + " TIME: " + execTime);
         this.bestScore = bestSaValue;
         return bestSa;
     }

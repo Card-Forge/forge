@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Edward Scissorhands
+Title=Edward Scissorhands
+Icon=Edward Scissorhands.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/IV_Torneo_Liga_Modern_-_Madrid/Carlos_Arnaiz_-_Red_Deck_Wins_(Modern,_#54410).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Deathrite Shaman
+4 Goblin Guide
+2 Grim Lavamancer
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+4 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Blackcleave Cliffs
+2 Blood Crypt
+2 Marsh Flats
+2 Mountain
+2 Sacred Foundry
+4 Scalding Tarn
+[Sideboard]
+3 Rakdos Charm
+2 Smash to Smithereens
+2 Tempest of Light
+3 Torpor Orb
+3 Volcanic Fallout

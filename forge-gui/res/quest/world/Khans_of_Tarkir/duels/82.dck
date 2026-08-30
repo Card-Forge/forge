@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Bushwhacked
+Title=Bushwhacked
+Icon=Bushwhacked.jpg
+Difficulty=Very Hard
+Description=../Modern/Khans_of_Tarkir/SCG_Invitational_Qualifier_CARY/Peter_Knepley_-_Naya_Burn_(Modern,_#268754).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+3 Searing Blaze
+1 Searing Blood
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+3 Mountain
+4 Sacred Foundry
+4 Scalding Tarn
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+1 Dragon's Claw
+2 Kor Firewalker
+2 Molten Rain
+2 Path to Exile
+1 Torpor Orb

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Harry Potter
+Title=Harry Potter
+Icon=Harry Potter.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Galanator_-_Counter_Burn_(Modern,_#1013772).dck
+Deck Type=constructed
+
+[Main]
+2 Bonecrusher Giant
+2 Brazen Borrower
+3 Snapcaster Mage
+1 Magmatic Sinkhole
+2 Spell Snare
+2 Cryptic Command
+3 Force of Negation
+4 Archmage's Charm
+4 Remand
+4 Opt
+4 Lightning Bolt
+3 Serum Visions
+3 Shark Typhoon
+1 Polluted Delta
+1 Mountain
+2 Misty Rainforest
+2 Flooded Strand
+3 Steam Vents
+3 Mystic Sanctuary
+4 Scalding Tarn
+7 Island
+[Sideboard]
+1 Deprive
+2 Platinum Emperion
+3 Madcap Experiment
+3 Flame Sweep
+3 Ceremonious Rejection
+3 Aether Gust

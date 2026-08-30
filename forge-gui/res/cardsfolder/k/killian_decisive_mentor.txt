@@ -1,0 +1,11 @@
+Name:Killian, Decisive Mentor
+ManaCost:1 W B
+Types:Legendary Creature Human Warlock
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever an enchantment you control enters, tap up to one target creature and goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | SubAbility$ DBGoad
+SVar:DBGoad:DB$ Goad | Defined$ Targeted
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.EnchantedBy Aura.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures that are enchanted by an Aura you control attack, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:BuffedBy:Enchantment
+Oracle:Whenever an enchantment you control enters, tap up to one target creature and goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)\nWhenever one or more creatures that are enchanted by an Aura you control attack, draw a card.

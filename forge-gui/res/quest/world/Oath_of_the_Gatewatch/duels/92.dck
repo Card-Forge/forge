@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Black Flame
+Title=Black Flame
+Icon=Black Flame.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/SCG_Invitational_Qualifier_Kansas_City/Charles_Laber_-_Eldrazi_(Modern,_#610196).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Mimic
+3 Eldrazi Obligator
+4 Eldrazi Skyspawner
+1 Endbringer
+3 Matter Reshaper
+4 Reality Smasher
+2 Ruination Guide
+4 Thought-Knot Seer
+4 Vile Aggregate
+1 Cyclonic Rift
+2 Dismember
+2 Cavern of Souls
+4 Eldrazi Temple
+4 Eye of Ugin
+2 Ghost Quarter
+2 Island
+4 Polluted Delta
+4 Shivan Reef
+2 Steam Vents
+[Sideboard]
+2 Chalice of the Void
+2 Echoing Truth
+1 Grafdigger's Cage
+2 Gut Shot
+2 Hurkyl's Recall
+1 Nihil Spellbomb
+1 Spell Pierce
+3 Stubborn Denial

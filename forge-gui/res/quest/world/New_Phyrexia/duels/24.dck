@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Neith
+Title=Neith
+Icon=Neith.jpg
+Difficulty=Easy
+Description=New_Phyrexia/2011_PTQ_Philadelphia_-_Burriana/Ruben_Perez_-_Valakut_(Standard,_#18210).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Avenger of Zendikar
+1 Birds of Paradise
+2 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+4 Solemn Simulacrum
+1 Dismember
+2 Lightning Bolt
+4 Explore
+4 Green Sun's Zenith
+4 Rampant Growth
+3 Evolving Wilds
+5 Forest
+10 Mountain
+1 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+2 Verdant Catacombs
+[Sideboard]
+2 Creeping Corrosion
+3 Memoricide
+2 Nature's Claim
+3 Obstinate Baloth
+1 Pyroclasm
+1 Slagstorm
+1 Swamp
+1 Thrun, the Last Troll

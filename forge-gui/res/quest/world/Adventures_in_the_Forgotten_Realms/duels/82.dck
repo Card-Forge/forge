@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Lazav
+Title=Lazav
+Icon=Lazav.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/BGWoodward_-_Orzhov_Stoneblade_(Modern,_#1194798)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Ethersworn Canonist
+3 Ingenious Smith
+3 Tidehollow Sculler
+4 Stoneforge Mystic
+4 Esper Sentinel
+1 Cranial Plating
+1 Relic of Progenitus
+1 Shadowspear
+1 Springleaf Drum
+1 Pithing Needle
+2 Welding Jar
+4 Nettlecyst
+4 Portable Hole
+3 Thoughtseize
+4 Urza's Saga
+2 Kaya, Orzhov Usurper
+1 Swamp
+1 Plains
+1 Inventors' Fair
+2 Godless Shrine
+2 Concealed Courtyard
+4 Goldmire Bridge
+4 Marsh Flats
+4 Inkmoth Nexus
+[Sideboard]
+1 Grafdigger's Cage
+1 Tormod's Crypt
+2 Chalice of the Void
+2 Damping Sphere
+2 Fragmentize
+2 Vindicate
+2 Void Mirror
+3 Dispatch

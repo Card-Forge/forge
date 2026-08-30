@@ -1,0 +1,31 @@
+[metadata]
+Name=Karn
+[Main]
+4 Tundra|LEA
+4 Flooded Strand|ONS
+4 Adarkar Wastes|ICE
+3 Plains|ICE
+3 Island|ICE
+2 Urza's Tower|ATQ
+2 Urza's Power Plant|ATQ
+2 Urza's Mine|ATQ
+3 Propaganda|TMP
+3 Humility|TMP
+2 Sift|STH
+2 Ivory Tower|ATQ
+4 Test of Endurance|JUD
+2 Congregate|USG
+2 Righteous Fury|PO2
+2 Fade Away|EXO
+2 Gerrard's Wisdom|WTH
+2 Orim's Prayer|TMP
+4 Absorb|INV
+4 Pacifism|TMP
+4 Ancestral Tribute|ODY
+
+[StartInBattle_Reference]
+1 Karn, Silver Golem|USG
+1 Treasure Trove|EXO
+1 Scrapheap|ULG
+1 Wall of Tears|STH
+1 Wall of Essence|STH

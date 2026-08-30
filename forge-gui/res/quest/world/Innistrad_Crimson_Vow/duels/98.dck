@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/spiderspace_-_Mono_b_reanimator_(Modern,_#1444262).dck
+Deck Type=constructed
+
+[Main]
+4 Griselbrand
+4 Archon of Cruelty
+4 Emrakul, the Aeons Torn
+4 Grief
+4 The Underworld Cookbook
+4 Blood Fountain
+4 Goryo's Vengeance
+4 Persist
+4 Thoughtseize
+4 Profane Tutor
+4 Urza's Saga
+1 Castle Locthwain
+15 Swamp
+[Sideboard]

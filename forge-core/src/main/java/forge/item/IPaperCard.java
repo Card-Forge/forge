@@ -6,6 +6,7 @@ import forge.card.ColorSet;
 import forge.card.ICardFace;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface IPaperCard extends InventoryItem, Serializable {
 
@@ -31,30 +32,22 @@ public interface IPaperCard extends InventoryItem, Serializable {
     boolean hasBackFace();
     ICardFace getMainFace();
     ICardFace getOtherFace();
+    List<ICardFace> getAllFaces();
     String getCardImageKey();
     String getCardAltImageKey();
-    String getCardWSpecImageKey();
-    String getCardUSpecImageKey();
-    String getCardBSpecImageKey();
-    String getCardRSpecImageKey();
-    String getCardGSpecImageKey();
 
     boolean isRebalanced();
 
     @Override
     default String getTranslationKey() {
-        if(!NO_FUNCTIONAL_VARIANT.equals(getFunctionalVariant()))
+        //Cards with flavor names will use that flavor name as their translation key. Other variants are just appended as a suffix.
+        if(!NO_FUNCTIONAL_VARIANT.equals(getFunctionalVariant()) && getAllFaces().stream().noneMatch(pc -> pc.getFlavorName() != null))
             return getName() + " $" + getFunctionalVariant();
-        return getName();
+        return getDisplayName();
     }
 
     @Override
     default String getUntranslatedType() {
         return getRules().getType().toString();
-    }
-
-    @Override
-    default String getUntranslatedOracle() {
-        return getRules().getOracleText();
     }
 }

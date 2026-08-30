@@ -1,0 +1,6 @@
+Name:Mutant Token
+ManaCost:no cost
+Colors:red
+Types:Creature Mutant
+PT:2/2
+Oracle:

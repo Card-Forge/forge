@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Dr Fate
+Title=Dr Fate
+Icon=Dr Fate.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/2012_States_-_South_Dakota/TimMittelstadt_-_Bant_Control_(Standard,_#39192).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Angel of Serenity
+2 Borderland Ranger
+4 Thragtusk
+2 Azorius Charm
+2 Selesnya Charm
+2 Sphinx's Revelation
+2 Unsummon
+1 Entreat the Angels
+3 Farseek
+2 Supreme Verdict
+4 Terminus
+3 Detention Sphere
+3 Jace, Architect of Thought
+2 Tamiyo, the Moon Sage
+1 Cavern of Souls
+2 Forest
+4 Glacial Fortress
+4 Hallowed Fountain
+2 Hinterland Harbor
+3 Island
+3 Plains
+3 Sunpetal Grove
+3 Temple Garden
+[Sideboard]
+3 Centaur Healer
+2 Ghost Quarter
+3 Knight of Glory
+2 Negate
+2 Rest in Peace
+3 Restoration Angel

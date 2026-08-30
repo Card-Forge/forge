@@ -1,0 +1,7 @@
+Name:Dose of Dawnglow
+ManaCost:4 B
+Types:Instant
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBBlight | SpellDescription$ Return target creature card from your graveyard to the battlefield. Then if it isn't your main phase, blight 2. (Put two -1/-1 counters on a creature you control.)
+SVar:DBBlight:DB$ Blight | Defined$ You | Num$ 2 | ConditionCheckSVar$ YourMainPhase
+SVar:YourMainPhase:Count$InOwnMainPhase.0.1
+Oracle:Return target creature card from your graveyard to the battlefield. Then if it isn't your main phase, blight 2. (Put two -1/-1 counters on a creature you control.)

@@ -63,11 +63,10 @@ public class ConniveAi extends SpellAbilityAi {
                 list.clear();
             }
         }
-        if (!sa.getTargets().isEmpty() && sa.isTargetNumberValid()) {
+        if (!sa.usesTargeting() || (!sa.getTargets().isEmpty() && sa.isTargetNumberValid())) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     @Override
@@ -119,7 +118,7 @@ public class ConniveAi extends SpellAbilityAi {
             }
         }
         return new AiAbilityDecision(
-                sa.isTargetNumberValid() && !sa.getTargets().isEmpty() ? 100 : 0,
+                sa.isTargetNumberValid() ? 100 : 0,
                 sa.isTargetNumberValid() ? AiPlayDecision.WillPlay : AiPlayDecision.TargetingFailed
         );
     }

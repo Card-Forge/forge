@@ -1,5 +1,5 @@
 Name:Michonne, Ruthless Survivor
-AltName:Enkira, Hostile Scavenger
+Variant:UniversesWithin:FlavorName:Enkira, Hostile Scavenger
 ManaCost:3 B G
 Types:Legendary Creature Human Warrior
 PT:3/3

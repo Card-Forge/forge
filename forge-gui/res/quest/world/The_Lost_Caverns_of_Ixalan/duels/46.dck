@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=The Very Hungry Caterpillar
+Title=The Very Hungry Caterpillar
+Icon=The Very Hungry Caterpillar.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Keggers_-_Esper_Midrange_(Standard,_#1979894).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+2 Tishana's Tidebinder
+1 Lord Skitter, Sewer King
+4 Raffine, Scheming Seer
+3 Dennick, Pious Apprentice
+2 Sheoldred, the Apocalypse
+1 Aclazotz, Deepest Betrayal
+2 Virtue of Loyalty
+3 Cut Down
+3 Make Disappear
+3 Go for the Throat
+4 Wedding Announcement
+2 The Wandering Emperor
+2 Underground River
+4 Restless Anchorage
+1 Deserted Beach
+1 Eiganjo, Seat of the Empire
+1 Plains
+1 Otawara, Soaring City
+2 Raffine's Tower
+2 Seachrome Coast
+4 Shattered Sanctum
+1 Takenuma, Abandoned Mire
+4 Darkslick Shores
+3 Caves of Koilos
+[Sideboard]
+1 Anoint with Affliction
+2 Destroy Evil
+2 Disdainful Stroke
+2 Duress
+1 Kaito Shizuki
+1 Path of Peril
+2 Temporary Lockdown
+2 Negate
+1 Loran of the Third Path
+1 Kutzil's Flanker

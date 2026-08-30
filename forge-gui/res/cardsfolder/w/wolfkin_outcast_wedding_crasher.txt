@@ -17,6 +17,6 @@ Colors:green
 Types:Creature Werewolf
 PT:6/5
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME or another Wolf or Werewolf you control dies, draw a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:TrigDraw:DB$ Draw
 K:Nightbound
 Oracle:Whenever Wedding Crasher or another Wolf or Werewolf you control dies, draw a card.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Starfire
+Title=Starfire
+Icon=Starfire.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/AlejandroAArenas_-_Red_Deck_Wins_(Standard,_#2000423).dck
+Deck Type=constructed
+
+[Main]
+4 Charming Scoundrel
+4 Fugitive Codebreaker
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+2 Goddric, Cloaked Reveler
+4 Phoenix Chick
+4 Lightning Strike
+4 Monstrous Rage
+4 Play with Fire
+3 Witchstalker Frenzy
+2 Case of the Crimson Pulse
+17 Mountain
+2 Sokenzan, Crucible of Defiance
+2 Mishra's Foundry
+[Sideboard]
+1 Case of the Crimson Pulse
+3 End the Festivities
+2 Kami's Flare
+3 Lithomantic Barrage
+1 Obliterating Bolt
+2 Twisted Fealty
+2 Urabrask's Forge
+1 Witchstalker Frenzy

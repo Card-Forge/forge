@@ -1,0 +1,12 @@
+Name:Krang, Master Mind
+ManaCost:6 U U
+Types:Legendary Artifact Creature Utrom Warrior
+PT:1/4
+K:Affinity:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ LT4 | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, if you have fewer than four cards in hand, draw cards equal to the difference.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Y
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ Z | Description$ NICKNAME gets +1/+0 for each other artifact you control.
+SVar:X:Count$ValidHand Card.YouOwn
+SVar:Y:Number$4/Minus.X
+SVar:Z:Count$Valid Artifact.Other+YouCtrl
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nWhen Krang enters, if you have fewer than four cards in hand, draw cards equal to the difference.\nKrang gets +1/+0 for each other artifact you control.

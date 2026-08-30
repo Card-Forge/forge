@@ -1,0 +1,11 @@
+Name:Scarlet Spider, Ben Reilly
+Variant:UniversesWithin:FlavorName:Borys, the Spider Rider
+ManaCost:1 R G
+Types:Legendary Creature Spider Human Hero
+PT:4/3
+K:Web-slinging:R G
+K:Trample
+R:Event$ Moved | ValidCard$ Card.Self+webSlinged+wasCast | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ AddExtraCounter | Description$ Sensational Save — If NICKNAME was cast using web-slinging, he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:CastSA>Returned$CardManaCost
+Oracle:Web-slinging {R}{G} (You may cast this spell for {R}{G} if you also return a tapped creature you control to its owner's hand.)\nTrample\nSensational Save — If Scarlet Spider was cast using web-slinging, he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.

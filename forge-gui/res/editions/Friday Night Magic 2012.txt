@@ -4,6 +4,7 @@ Date=2012-01-01
 Name=Friday Night Magic 2012
 Type=Promo
 ScryfallCode=F12
+TokensCode=F12
 
 [cards]
 1 R Glistener Elf @Mark Zug
@@ -20,5 +21,5 @@ ScryfallCode=F12
 12 R Gitaxian Probe @Trevor Claxton
 
 [tokens]
-w_1_1_human
-g_2_2_wolf
+1a w_1_1_human @Lars Grant-West
+1a☇ g_2_2_wolf @Lars Grant-West

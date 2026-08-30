@@ -1,0 +1,6 @@
+Name:Tiger-Dillo
+ManaCost:1 R
+Types:Creature Cat Armadillo
+PT:4/3
+S:Mode$ CantAttack,CantBlock | ValidCard$ Card.Self | IsPresent$ Creature.Other+YouCtrl+powerGE4 | PresentCompare$ EQ0 | Description$ This creature can't attack or block unless you control another creature with power 4 or greater.
+Oracle:This creature can't attack or block unless you control another creature with power 4 or greater.

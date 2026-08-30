@@ -1,0 +1,24 @@
+[metadata]
+Name=Phyrexian Angel
+[Main]
+4 Tainted Field|TOR
+4 Caves of Koilos|APC
+4 Plains|2ED
+8 Swamp|2ED
+4 Dark Ritual|LEA
+2 Desolation Angel|APC
+2 Soul Link|APC
+4 Death Grasp|APC
+4 Phyrexian Scuta|PLS
+4 Fallen Angel|LEG
+4 Royal Assassin|LEA
+4 King's Assassin|POR
+4 Benalish Trapper|INV
+4 Whipcorder|ONS
+4 Vindicate|APC
+
+[StartInBattle_Reference]
+1 Haunted Angel|APC
+1 Phyrexian Arena|APC
+1 Phyrexian Grimoire|TMP
+1 Phyrexian Walker|VIS

@@ -18,15 +18,11 @@
 package forge.gamemodes.planarconquest;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import forge.card.CardDb;
 import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
@@ -199,14 +195,11 @@ public final class ConquestData {
     }
 
     public int getAccessiblePlaneCount() {
-        // TODO: Java 8 stream implementation of filtering
-        int i = 0;
-        for (ConquestPlane plane : FModel.getPlanes()) {
-            if (!plane.isUnreachable()) {
-                i++;
-            }
-        }
-        return i;
+        return (int) FModel.getPlanes().stream().filter(Predicate.not(ConquestPlane::isUnreachable)).count();
+    }
+
+    public Set<ConquestPlane> getUnlockedPlanes() {
+        return planeDataMap.values().stream().map(ConquestPlaneData::getLocation).map(ConquestLocation::getPlane).collect(Collectors.toSet());
     }
 
     public void unlockPlane(ConquestPlane plane) {
@@ -298,16 +291,16 @@ public final class ConquestData {
                     commandersBeingExiled.add(commander); //cache commander to make it easier to remove later
                 }
                 if (commander.getDeck().getMain().contains(card)) {
-                    commandersUsingCard.append("\n").append(CardTranslation.getTranslatedName(commander.getName()));
+                    commandersUsingCard.append("\n").append(CardTranslation.getTranslatedName(commander.getDisplayName()));
                 }
             }
-
-            if (commandersUsingCard.length() > 0) {
-                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblCommandersCardCannotBeExiledByCard", CardTranslation.getTranslatedName(card.getName()), commandersUsingCard), title, SOptionPane.INFORMATION_ICON);
+            // Android API StringBuilder isEmpty() is unavailable. https://developer.android.com/reference/java/lang/StringBuilder
+            if (commandersUsingCard.length() != 0) {
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblCommandersCardCannotBeExiledByCard", CardTranslation.getTranslatedName(card.getDisplayName()), commandersUsingCard), title, SOptionPane.INFORMATION_ICON);
                 return false;
             }
 
-            message.append("\n").append(CardTranslation.getTranslatedName(card.getName()));
+            message.append("\n").append(CardTranslation.getTranslatedName(card.getDisplayName()));
         }
 
         if (SOptionPane.showConfirmDialog(message.toString(), title, Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"))) {

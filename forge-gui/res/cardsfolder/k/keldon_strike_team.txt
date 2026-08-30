@@ -1,6 +1,6 @@
 Name:Keldon Strike Team
 ManaCost:2 R
-Types:Creature Human Soldier
+Types:Creature Human Warrior
 PT:3/1
 K:Kicker:1 W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, if it was kicked, create two 1/1 white Soldier creature tokens.

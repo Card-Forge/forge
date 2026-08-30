@@ -1,0 +1,21 @@
+[metadata]
+Name=Chandler
+[Main]
+22 Mountain|2ED
+1 Joven|HML
+1 Chandler|HML
+4 Soldier of Fortune|ALL
+4 Mountain Bandit|PTK
+4 Ali Baba|ARN
+4 Orcish Spy|FEM
+4 Goblin Spy|INV
+4 Rogue Skycaptain|ALL
+4 Trumpet Blast|UDS
+2 Furious Assault|MMQ
+2 Onslaught|EXO
+2 Starke of Rath|TMP
+2 Hearth Charm|VIS
+
+[StartInBattle_Reference]
+1 Chandler|HML
+1 Uphill Battle|MMQ

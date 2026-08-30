@@ -1,0 +1,12 @@
+Name:Anti-Venom, Horrifying Healer
+Variant:UniversesWithin:FlavorName:Verilax the Havenskin
+ManaCost:W W W W W
+Types:Legendary Creature Symbiote Hero
+PT:5/5
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCast | Origin$ Any | Destination$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When NICKNAME enters, if he was cast, return target creature card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature in your graveyard | Origin$ Graveyard | Destination$ Battlefield
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ Counters | PreventionEffect$ True | AlwaysReplace$ True | Description$ If damage would be dealt to NICKNAME, prevent that damage and put that many +1/+1 counters on him.
+SVar:Counters:DB$ PutCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ X
+SVar:X:ReplaceCount$DamageAmount
+DeckHas:Ability$Counters
+Oracle:When Anti-Venom enters, if he was cast, return target creature card from your graveyard to the battlefield.\nIf damage would be dealt to Anti-Venom, prevent that damage and put that many +1/+1 counters on him.

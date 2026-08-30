@@ -1,0 +1,10 @@
+Name:Moon Girl and Devil Dinosaur
+ManaCost:1 G U
+Types:Legendary Creature Human Dinosaur Hero
+PT:2/2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you draw your second card each turn, until end of turn, CARDNAME's base power and toughness become 6/6 and they gain trample.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 6 | Toughness$ 6 | Keywords$ Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever an artifact you control enters, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Type$Artifact
+Oracle:Whenever you draw your second card each turn, until end of turn, Moon Girl and Devil Dinosaur's base power and toughness become 6/6 and they gain trample.\nWhenever an artifact you control enters, draw a card. This ability triggers only once each turn.

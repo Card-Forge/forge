@@ -66,6 +66,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean showRanking = false;
     private boolean showPriceInfo = false;
     private boolean multiSelectMode = false;
+    private boolean allowGroupIdentical = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private ContextMenuBuilder<T> contextMenuBuilder;
     private ContextMenu contextMenu;
@@ -728,6 +729,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     protected abstract AdvancedSearchFilter<? extends T> createAdvancedSearchFilter();
 
+    protected Iterable<Entry<T, Integer>> getUnique(final Iterable<Entry<T, Integer>> items) {
+        return Aggregates.uniqueByLast(items, from -> from.getKey().getName());
+    }
+
     public void addFilter(final ItemFilter<? extends T> filter) {
         filters.get().add(filter);
         add(filter.getWidget());
@@ -908,19 +913,29 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
+        //TO-maybe-DO: Share logic between this and identical method in desktop.
         final boolean useFilter = (forceFilter && (filterPredicate != null)) || !isUnfiltered();
 
-        if (useFilter || forceFilter) {
-            model.clear();
-
-            Iterable<Entry<T, Integer>> items = pool;
-            if (useFilter) {
-                Predicate<Entry<T, Integer>> pred = x -> filterPredicate.test(x.getKey());
-                items = IterableUtil.filter(pool, pred);
-            }
-            model.addItems(items);
+        if (useFilter || this.wantUnique || forceFilter) {
+            this.model.clear();
         }
 
+        if (useFilter && this.wantUnique) {
+            final Predicate<Entry<T, Integer>> filterForPool = x -> this.filterPredicate.test(x.getKey());
+            final Iterable<Entry<T, Integer>> items = getUnique(IterableUtil.filter(this.pool, filterForPool));
+            this.model.addItems(items);
+        }
+        else if (useFilter) {
+            final Predicate<Entry<T, Integer>> pred = x -> this.filterPredicate.test(x.getKey());
+            this.model.addItems(IterableUtil.filter(this.pool, pred));
+        }
+        else if (this.wantUnique) {
+            final Iterable<Entry<T, Integer>> items = getUnique(this.pool);
+            this.model.addItems(items);
+        }
+        else if (forceFilter) {
+            this.model.addItems(this.pool);
+        }
         currentView.refresh(itemsToSelect, getSelectedIndex(), forceFilter ? 0 : currentView.getScrollValue());
 
         //update ratio of # in filtered pool / # in total pool
@@ -948,6 +963,21 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         if(currentSort != null && currentSort.getConfig().getDef() == ColumnDef.PRICE)
             return true;
         return showPriceInfo;
+    }
+
+    public boolean getAllowGroupIdentical() {
+        return allowGroupIdentical;
+    }
+
+    public void setAllowGroupIdentical(boolean allowGroupIdentical0) {
+        if(allowGroupIdentical == allowGroupIdentical0) {
+            return;
+        }
+            
+        allowGroupIdentical = allowGroupIdentical0;
+        if (pool != null) {
+            updateView(false, null);
+        }
     }
 
     public void setWantUnique(boolean unique) {
@@ -1224,10 +1254,12 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         boolean usingListView = currentView == listView;
         switch(keyCode) {
-            case(Input.Keys.DPAD_RIGHT):
+            case Input.Keys.DPAD_RIGHT:
+            case Input.Keys.PAGE_DOWN:
                 setSelectedIndexRelative(usingListView ? 10 : 1);
                 return true;
             case Input.Keys.DPAD_LEFT:
+            case Input.Keys.PAGE_UP:
                 setSelectedIndexRelative(usingListView ? -10 : -1);
                 return true;
             case Input.Keys.DPAD_DOWN:

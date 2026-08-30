@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Darkseid
+Title=Darkseid
+Icon=Darkseid.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Episkey_-_Jeskai_Reanimator_(Standard,_#2275751).dck
+Deck Type=constructed
+
+[Main]
+2 Beza, the Bounding Spring
+1 Dragonhawk, Fate's Tempest
+3 Overlord of the Boilerbilges
+4 Trumpeting Carnosaur
+1 Zurgo and Ojutai
+2 Brass's Tunnel-Grinder
+2 Mazemind Tome
+3 Get Lost
+2 No More Lies
+2 Scorching Dragonfire
+3 Soul Partition
+2 Three Steps Ahead
+4 Ill-Timed Explosion
+4 Push // Pull
+2 Adarkar Wastes
+2 Battlefield Forge
+2 Elegant Parlor
+4 Fabled Passage
+2 Floodfarm Verge
+1 Inspiring Vantage
+2 Island
+2 Meticulous Archive
+2 Mountain
+2 Plains
+2 Spirebluff Canal
+2 Thundering Falls
+[Sideboard]
+2 Authority of the Consuls
+1 Destroy Evil
+1 Elesh Norn, Mother of Machines
+2 Elspeth's Smite
+2 Ghost Vacuum
+2 Lightning Helix
+1 Loran of the Third Path
+2 Negate
+2 Temporary Lockdown

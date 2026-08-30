@@ -1,0 +1,9 @@
+Name:Combustion Man
+ManaCost:3 R R
+Types:Legendary Creature Human Assassin
+PT:4/6
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME attacks, destroy target permanent unless its controller has CARDNAME deal damage to them equal to his power.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent | UnlessCost$ DamageYou<X> | TgtPrompt$ Select target permanent
+SVar:X:Count$CardPower
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Combustion Man attacks, destroy target permanent unless its controller has Combustion Man deal damage to them equal to his power.

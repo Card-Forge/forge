@@ -1,0 +1,7 @@
+Name:Villainous Wrath
+ManaCost:3 B B
+Types:Sorcery
+A:SP$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X | SubAbility$ DBDestroyAll | SpellDescription$ Target opponent loses life equal to the number of creatures they control. Then destroy all creatures.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature
+SVar:X:Count$Valid Creature.TargetedPlayerCtrl
+Oracle:Target opponent loses life equal to the number of creatures they control. Then destroy all creatures.

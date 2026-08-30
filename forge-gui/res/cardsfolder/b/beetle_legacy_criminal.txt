@@ -1,0 +1,9 @@
+Name:Beetle, Legacy Criminal
+Variant:UniversesWithin:FlavorName:Arala, Hedron Scaler
+ManaCost:3 U
+Types:Legendary Creature Human Rogue Villain
+PT:3/3
+K:Flying
+A:AB$ PutCounter | Cost$ 1 U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. It gains flying until end of turn. Activate only as a sorcery.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Flying
+Oracle:Flying\n{1}{U}, Exile this card from your graveyard: Put a +1/+1 counter on target creature. It gains flying until end of turn. Activate only as a sorcery.

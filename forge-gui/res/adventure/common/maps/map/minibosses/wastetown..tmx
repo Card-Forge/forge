@@ -134,7 +134,7 @@
   {
     &quot;text&quot;:&quot;The inscription reads: The Shandalar sewer system is currently under maintenance. A little green goo has polluted the water system. We have it completely under control and will have the sewer working again in no time.&quot;,
     &quot;options&quot;:[
-      { &quot;name&quot;:&quot;Walk away&quot; }
+      { &quot;name&quot;:&quot;Leave&quot; }
 ]
 }
 ]</property>

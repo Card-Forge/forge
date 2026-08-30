@@ -1,0 +1,5 @@
+Name:Aberrant Return
+ManaCost:4 B B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose one, two, or three target creature cards in graveyards | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ 3 | WithCountersType$ M1M1 | SpellDescription$ Put one, two, or three target creature cards from graveyards onto the battlefield under your control. Each of them enters with an additional -1/-1 counter on it.
+Oracle:Put one, two, or three target creature cards from graveyards onto the battlefield under your control. Each of them enters with an additional -1/-1 counter on it.

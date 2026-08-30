@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos
+Title=Rakdos
+Icon=Rakdos.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/Modern_Constructed_League/chiralane_-_Rogue_(Modern,_#503152).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blight Herder
+2 Endless One
+4 Oblivion Sower
+2 Ulamog, the Ceaseless Hunger
+1 Void Winnower
+4 Wasteland Strangler
+4 Expedition Map
+4 Mind Stone
+2 Nihil Spellbomb
+4 Relic of Progenitus
+2 Scrabbling Claws
+2 Duress
+2 Thoughtseize
+4 Eldrazi Temple
+4 Eye of Ugin
+4 Ghost Quarter
+1 Mortuary Mire
+8 Swamp
+2 Urborg, Tomb of Yawgmoth
+[Sideboard]
+1 Curse of Death's Hold
+2 Disfigure
+2 Memoricide
+2 Pithing Needle
+2 Ratchet Bomb
+2 Ruin Processor
+1 Slaughter Pact

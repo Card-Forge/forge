@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Sakpata
+Title=Sakpata
+Icon=Sakpata.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/Dmytro_Messel_-_Boros_Token_Control_(Standard,_#2188466).dck
+Deck Type=constructed
+
+[Main]
+4 Carrot Cake
+4 Urabrask's Forge
+4 Get Lost
+4 Lightning Helix
+4 Torch the Tower
+3 Brotherhood's End
+1 Season of the Burrow
+3 Sunfall
+4 Caretaker's Talent
+2 Archangel Elspeth
+1 The Eternal Wanderer
+4 Battlefield Forge
+2 Demolition Field
+4 Elegant Parlor
+3 Fountainport
+4 Inspiring Vantage
+1 Mirrex
+2 Mountain
+2 Plains
+4 Sunken Citadel
+[Sideboard]
+2 Abrade
+1 Beza, the Bounding Spring
+1 Bonehoard Dracosaur
+2 Destroy Evil
+2 Jaya, Fiery Negotiator
+2 Loran of the Third Path
+2 Rest in Peace
+1 Serra Paragon
+2 Temporary Lockdown

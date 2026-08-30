@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=IsaBere
+Title=IsaBere
+Icon=IsaBere.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/Standard_Champs_#8986325/Eluna_-_Grixis_Aggro_(Standard,_#336818).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodsoaked Champion
+4 Drana, Liberator of Malakir
+4 Flamewake Phoenix
+4 Forerunner of Slaughter
+2 Kolaghan, the Storm's Fury
+4 Thunderbreak Regent
+3 Zurgo Bellstriker
+4 Draconic Roar
+2 Fiery Impulse
+3 Murderous Cut
+2 Roast
+4 Bloodstained Mire
+4 Mountain
+4 Polluted Delta
+4 Smoldering Marsh
+4 Swamp
+4 Wooded Foothills
+[Sideboard]
+2 Complete Disregard
+4 Duress
+1 Goblin Heelcutter
+2 Outpost Siege
+4 Self-Inflicted Wound

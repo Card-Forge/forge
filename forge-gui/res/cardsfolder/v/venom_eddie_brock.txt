@@ -1,0 +1,10 @@
+Name:Venom, Eddie Brock
+ManaCost:4 B B
+Types:Legendary Creature Symbiote Villain
+PT:6/4
+K:Menace
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature dies, put a +1/+1 counter on NICKNAME. If that creature was a Villain, draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ TriggeredCardLKICopy | ConditionPresent$ Villain
+DeckHints:Type$Villain
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever another creature dies, put a +1/+1 counter on Venom. If that creature was a Villain, draw a card.

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tom Bombadil
+Title=Tom Bombadil
+Icon=Tom Bombadil.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Steve_Hatto_-_Mardu_Vehicles_(Standard,_#667085).dck
+Deck Type=constructed
+
+[Main]
+4 Inventor's Apprentice
+3 Pia Nalaar
+4 Scrapheap Scrounger
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+1 Cultivator's Caravan
+4 Heart of Kiran
+3 Shock
+4 Unlicensed Disintegration
+3 Gideon, Ally of Zendikar
+3 Aether Hub
+4 Concealed Courtyard
+4 Inspiring Vantage
+3 Mountain
+1 Needle Spires
+3 Plains
+4 Spire of Industry
+[Sideboard]
+2 Archangel Avacyn
+2 Cultivator's Caravan
+2 Fatal Push
+1 Fragmentize
+3 Fumigate
+1 Gideon, Ally of Zendikar
+2 Shambling Vent
+1 Shock
+1 Skysovereign, Consul Flagship

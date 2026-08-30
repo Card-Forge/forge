@@ -1,0 +1,11 @@
+Name:Daily Bugle Reporters
+Variant:UniversesWithin:FlavorName:Principled Referee
+ManaCost:3 W
+Types:Creature Human Citizen
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBReturn
+SVar:DBPutCounter:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Puff Piece — Put a +1/+1 counter on each of up to two target creatures.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn+cmcLE2 | SpellDescription$ Investigative Journalism — Return target creature card with mana value 2 or less from your graveyard to your hand.
+DeckHas:Ability$Counters
+Oracle:When this creature enters, choose one —\n• Puff Piece — Put a +1/+1 counter on each of up to two target creatures.\n• Investigative Journalism — Return target creature card with mana value 2 or less from your graveyard to your hand.

@@ -1,0 +1,14 @@
+Name:Hawkeye, Master Marksman
+ManaCost:1 R
+Types:Legendary Creature Human Archer Hero
+PT:2/2
+K:First Strike
+K:Reach
+T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigImmediateTrigger | TriggerDescription$ Trick Arrows — Whenever NICKNAME becomes tapped, you may pay {1} up to three times. When you do, ABILITY
+SVar:TrigImmediateTrigger:AB$ ImmediateTrigger | Cost$ Mana<1\NumTimes> | Announce$ NumTimes | AnnounceMax$ 3 | ConditionCheckSVar$ NumTimes | RememberSVarAmount$ NumTimes | Execute$ TrigCharm | TriggerDescription$ When you do, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 0 | CharmNum$ Count$TriggerRememberAmount | Choices$ DBNet,DBExplosive,DBBoomerang
+SVar:DBNet:DB$ Pump | ValidTgts$ Creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block. | SpellDescription$ Net — Target creature can't block this turn.
+SVar:DBExplosive:DB$ DealDamage | ValidTgts$ Player | NumDmg$ 2 | SpellDescription$ Explosive — NICKNAME deals 2 damage to target player.
+SVar:DBBoomerang:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Boomerang — Discard a card, then draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:First strike, reach\nTrick Arrows — Whenever Hawkeye becomes tapped, you may pay {1} up to three times. When you do, choose up to that many.\n• Net — Target creature can't block this turn.\n• Explosive — Hawkeye deals 2 damage to target player.\n• Boomerang — Discard a card, then draw a card.

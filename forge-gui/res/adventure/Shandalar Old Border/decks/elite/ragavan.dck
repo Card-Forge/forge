@@ -1,0 +1,21 @@
+[metadata]
+Name=ragavan
+[Main]
+10 Mountain|MIR|2
+6 Forest|MIR|2
+4 Treetop Village|ULG
+4 Mountain Valley|MIR
+4 Rampant Growth|MIR
+4 Uktabi Orangutan|VIS
+4 Ravenous Baboons|EXO
+2 Tree Monkey|PO2
+2 Zodiac Monkey|PTK
+4 Guerrilla Tactics|ALL|2
+4 Gorilla War Cry|ALL
+4 Kird Ape|ARN
+4 Monkey Cage|MMQ
+4 Simoon|VIS
+
+[StartInBattle_Reference]
+1 Tree Monkey|PO2
+1 Zodiac Monkey|PTK

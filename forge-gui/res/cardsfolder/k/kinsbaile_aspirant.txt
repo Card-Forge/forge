@@ -1,0 +1,10 @@
+Name:Kinsbaile Aspirant
+ManaCost:W
+Types:Creature Kithkin Citizen
+PT:2/1
+K:AlternateAdditionalCost:Behold<1/Kithkin>:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature you control enters, this creature gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+SVar:BuffedBy:Creature
+DeckHints:Type$Kithkin
+Oracle:As an additional cost to cast this spell, behold a Kithkin or pay {2}. (To behold a Kithkin, choose a Kithkin you control or reveal a Kithkin card from your hand.)\nWhenever another creature you control enters, this creature gets +1/+1 until end of turn.

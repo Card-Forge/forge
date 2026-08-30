@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Lilith
+Title=Lilith
+Icon=Lilith.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Dignika_-_Izzet_Spells_(Modern,_#1150053)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Soul-Scar Mage
+4 Sprite Dragon
+4 Stormwing Entity
+4 Monastery Swiftspear
+1 Burst Lightning
+2 Vapor Snag
+3 Mutagenic Growth
+4 Lava Dart
+4 Lightning Bolt
+4 Manamorphose
+3 Serum Visions
+4 Expressive Iteration
+1 Wooded Foothills
+2 Steam Vents
+4 Spirebluff Canal
+4 Mountain
+4 Bloodstained Mire
+4 Fiery Islet
+[Sideboard]
+1 Stern Dismissal
+1 Dispel
+2 Abrade
+2 Bedlam Reveler
+2 Cleansing Wildfire
+2 Kozilek's Return
+2 Spell Pierce
+3 Soul-Guide Lantern

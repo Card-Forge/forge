@@ -5,7 +5,7 @@ Difficulty=hard
 Description=UB Zombie deck
 Icon=The Zombie.jpg
 Deck Type=constructed
-[main]
+[Main]
 2 Swamp
 4 Island
 4 Underground Sea
@@ -32,4 +32,4 @@ Deck Type=constructed
 1 Havengul Runebinder
 1 Soulless One
 1 Vengeful Pharaoh
-[sideboard]
+[Sideboard]

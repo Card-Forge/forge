@@ -2,7 +2,7 @@ Name:Jacob Frye
 ManaCost:2 B
 Types:Legendary Creature Human Assassin
 PT:3/2
-K:Partner:Evie Frye
+K:Partner with:Evie Frye
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Assassin.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever one or more Assassins you control deal combat damage to a player, exile up to one target Assassin card or card with freerunning from your graveyard. If you do, copy it. You may cast the copy.
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Card.Assassin+YouCtrl,Card.withFreerunning+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select up to one target Assassin card or card with freerunning from your graveyard | RememberChanged$ True | SubAbility$ DBCast
 SVar:DBCast:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | CopyCard$ True | ValidSA$ Spell | Optional$ True | SubAbility$ DBCleanup

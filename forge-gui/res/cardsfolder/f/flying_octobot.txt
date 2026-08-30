@@ -1,0 +1,11 @@
+Name:Flying Octobot
+Variant:UniversesWithin:FlavorName:Vexed Bots
+ManaCost:1 U
+Types:Artifact Creature Robot Villain
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Villain.Other+YouCtrl | ActivationLimit$ 1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Villain you control enters, put a +1/+1 counter on this creature. This ability triggers only once each turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Villain
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever another Villain you control enters, put a +1/+1 counter on this creature. This ability triggers only once each turn.

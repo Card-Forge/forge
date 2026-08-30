@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+blocking | AddKeyword$ First Strike | CheckSVar$ X | SVarCompare$ GE1 | Description$ Enchanted creature has first strike as long as it's blocking and you control a snow land.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy+blocking | AddKeyword$ First Strike | CheckSVar$ X | Description$ Enchanted creature has first strike as long as it's blocking and you control a snow land.
 SVar:X:Count$Valid Land.Snow+YouCtrl
 Oracle:Enchant creature\nEnchanted creature has flying.\nEnchanted creature has first strike as long as it's blocking and you control a snow land.

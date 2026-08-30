@@ -3,5 +3,5 @@ ManaCost:3
 Types:Artifact
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Artifact.Other | SpellDescription$ You may have CARDNAME enter as a copy of any artifact on the battlefield.
-SVar:NeedsToPlay:Artifact.YouDontCtrl+notnamedSculpting Steel,Artifact.YouCtrl+nonLegendary+notnamedSculpting Steel
+SVar:NeedsToPlay:Artifact.YouDontCtrl+!namedSculpting Steel,Artifact.YouCtrl+nonLegendary+!namedSculpting Steel
 Oracle:You may have Sculpting Steel enter as a copy of any artifact on the battlefield.

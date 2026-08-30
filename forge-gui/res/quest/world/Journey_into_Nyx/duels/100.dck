@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Gbadu
+Title=Gbadu
+Icon=Gbadu.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/PTQ_Khans_of_Tarkir_-_Fargo,_ND/Gavin_Schmidt_-_Martyr_Proc_(Modern,_#84068).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel of Thune
+2 Auriok Champion
+4 Champion of the Parish
+1 Hero of Bladehold
+2 Iroas, God of Victory
+3 Mirran Crusader
+4 Serra Ascendant
+4 Soul Warden
+4 Soul's Attendant
+2 Sword of Fire and Ice
+2 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+2 Path to Exile
+1 Elspeth, Knight-Errant
+2 Battlefield Forge
+4 Clifftop Retreat
+1 Mountain
+9 Plains
+4 Sacred Foundry
+[Sideboard]
+2 Grafdigger's Cage
+1 Immortal Servitude
+2 Kataki, War's Wage
+2 Legion's Initiative
+1 Linvala, Keeper of Silence
+2 Rhox Faithmender
+1 Sword of Light and Shadow
+2 Wear // Tear

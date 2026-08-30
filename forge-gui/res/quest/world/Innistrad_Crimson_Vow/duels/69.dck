@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=The Thing
+Title=The Thing
+Icon=The Thing.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/Larissa_Adams_-_Dimir_Mill_(Modern,_#1245229).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+1 Crypt Incursion
+2 Counterspell
+3 Surgical Extraction
+4 Fatal Push
+4 Visions of Beyond
+4 Drown in the Loch
+4 Archive Trap
+4 Tasha's Hideous Laughter
+4 Fractured Sanity
+1 Shelldock Isle
+1 Darkslick Shores
+2 Misty Rainforest
+2 Watery Grave
+2 Scalding Tarn
+2 Swamp
+4 Island
+4 Field of Ruin
+4 Polluted Delta
+[Sideboard]
+1 Damnation
+1 Lurrus of the Dream-Den
+1 Lantern of the Lost
+1 Counterspell
+1 Extirpate
+1 Crypt Incursion
+1 Engineered Explosives
+2 Hurkyl's Recall
+2 Mesmeric Orb
+2 Chalice of the Void
+2 Soul-Guide Lantern

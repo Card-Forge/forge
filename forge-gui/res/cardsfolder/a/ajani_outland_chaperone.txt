@@ -1,0 +1,11 @@
+Name:Ajani, Outland Chaperone
+ManaCost:1 W W
+Types:Legendary Planeswalker Ajani
+Loyalty:3
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ gw_1_1_kithkin | SpellDescription$ Create a 1/1 green and white Kithkin creature token.
+A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | NumDmg$ 4 | SpellDescription$ NICKNAME deals 4 damage to target tapped creature.
+A:AB$ Dig | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | DigNum$ X | Optional$ True | ChangeNum$ Any | ChangeValid$ Card.Permanent+nonLand+cmcLE3 | DestinationZone$ Battlefield | DestinationZone2$ Library | SubAbility$ DBShuffle | SpellDescription$ Look at the top X cards of your library where X is your life total. You may put any number of nonland permanent cards with mana value 3 or less from among them onto the battlefield. Then shuffle.
+SVar:DBShuffle:DB$ Shuffle
+SVar:X:Count$YourLifeTotal
+DeckHas:Ability$Token
+Oracle:[+1]: Create a 1/1 green and white Kithkin creature token.\n[-2]: Ajani deals 4 damage to target tapped creature.\n[-8]: Look at the top X cards of your library, where X is your life total. You may put any number of nonland permanent cards with mana value 3 or less from among them onto the battlefield. Then shuffle.

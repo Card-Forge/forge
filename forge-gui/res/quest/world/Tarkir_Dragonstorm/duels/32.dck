@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/rudareis_-_Sultai_Dragons_(Standard,_#2439508).dck
+Deck Type=constructed
+
+[Main]
+4 Bloomvine Regent
+1 Disruptive Stormbrood
+2 Sagu Wildling
+4 Scavenger Regent
+1 Teval, Arbiter of Virtue
+3 Lumbering Worldwagon
+4 Caustic Exhale
+4 Cut Down
+4 Rakshasa's Bargain
+2 Sheoldred's Edict
+2 Maelstrom Pulse
+4 Up the Beanstalk
+4 Blooming Marsh
+5 Forest
+2 Island
+2 Maelstrom of the Spirit Dragon
+4 Opulent Palace
+3 Restless Reef
+3 Swamp
+2 Wastewood Verge
+[Sideboard]
+4 Dispelling Exhale
+2 Fangkeeper's Familiar
+1 Ghost Vacuum
+1 Go for the Throat
+2 Heritage Reclamation
+3 Obstinate Baloth
+2 Strategic Betrayal

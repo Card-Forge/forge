@@ -1,0 +1,9 @@
+Name:Scarblade Scout
+ManaCost:1 B
+Types:Creature Elf Scout
+PT:2/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill two cards. (Put the top two cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
+DeckHas:Ability$Mill|Graveyard
+Oracle:Lifelink\nWhen this creature enters, mill two cards. (Put the top two cards of your library into your graveyard.)

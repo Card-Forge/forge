@@ -1,0 +1,10 @@
+Name:Venom's Hunger
+Variant:UniversesWithin:FlavorName:Damning Caress
+ManaCost:4 B
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Villain.YouCtrl | Description$ This spell costs {2} less to cast if you control a Villain.
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBLifeGain | SpellDescription$ Destroy target creature. You gain 2 life.
+SVar:DBLifeGain:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+DeckHints:Type$Villain
+Oracle:This spell costs {2} less to cast if you control a Villain.\nDestroy target creature. You gain 2 life.

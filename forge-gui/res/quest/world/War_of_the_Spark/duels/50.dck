@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Pyro
+Title=Pyro
+Icon=Pyro.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Aaron_Osborne_-_Red_Deck_Wins_(Standard,_#798807).dck
+Deck Type=constructed
+
+[Main]
+4 Viashino Pyromancer
+3 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Goblin Chainwhirler
+1 Legion Warboss
+4 Wizard's Lightning
+4 Shock
+4 Risk Factor
+4 Lightning Strike
+3 Skewer the Critics
+4 Light Up the Stage
+1 Lava Coil
+20 Mountain
+[Sideboard]
+1 Tibalt, Rakish Instigator
+1 Fight with Fire
+2 Experimental Frenzy
+1 Dire Fleet Daredevil
+2 Chandra, Fire Artisan
+2 Banefire
+3 Lava Coil
+3 Legion Warboss

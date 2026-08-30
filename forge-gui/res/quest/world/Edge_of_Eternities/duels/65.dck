@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Zeus
+Title=Zeus
+Icon=Zeus.jpg
+Difficulty=Very Hard
+Description=./Modern/Edge_of_Eternities/Aldwore13_-_Azorius_(Modern,_#2649789).dck
+Deck Type=constructed
+
+[Main]
+4 Guide of Souls
+4 Ocelot Pride
+4 Phelia, Exuberant Shepherd
+4 Quantum Riddler
+4 Solitude
+4 Starfield Shepherd
+4 Witch Enchanter
+3 Haliya, Guided by Light
+1 Mockingbird
+4 Ephemerate
+2 Consign to Memory
+2 Spell Pierce
+2 Thraben Charm
+4 Flooded Strand
+3 Hallowed Fountain
+3 Plains
+3 Windswept Heath
+2 Meticulous Archive
+1 Island
+1 Marsh Flats
+1 Temple Garden
+[Sideboard]
+3 Wrath of the Skies
+2 Clarion Conqueror
+2 Consign to Memory
+2 Lavinia, Azorius Renegade
+2 Orim's Chant
+2 Rest in Peace
+1 Ashiok, Dream Render
+1 Haywire Mite

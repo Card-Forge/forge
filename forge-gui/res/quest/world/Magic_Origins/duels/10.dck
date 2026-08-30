@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Denethor
+Title=Denethor
+Icon=Denethor.jpg
+Difficulty=Easy
+Description=Magic_Origins/Grand_Prix_London_2015/Thomas_Van_Der_Paelt_-_Abzan_Midrange_(Standard,_#311538).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+3 Den Protector
+1 Hangarback Walker
+3 Nissa, Vastwood Seer
+4 Siege Rhino
+1 Tasigur, the Golden Fang
+4 Abzan Charm
+1 Bile Blight
+3 Hero's Downfall
+1 Ultimate Price
+2 Languish
+4 Thoughtseize
+2 Elspeth, Sun's Champion
+1 Ugin, the Spirit Dragon
+2 Caves of Koilos
+4 Forest
+2 Llanowar Wastes
+1 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Arashin Cleric
+1 Back to Nature
+2 Dromoka's Command
+2 Drown in Sorrow
+1 Duress
+2 Fleecemane Lion
+1 Garruk, Apex Predator
+1 Read the Bones
+2 Tragic Arrogance
+1 Unravel the AEther

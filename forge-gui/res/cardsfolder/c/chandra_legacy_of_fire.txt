@@ -13,4 +13,4 @@ SVar:STPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | Aff
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:Z:Count$RememberedNumber
 DeckHints:Type$Planeswalker
-Oracle:At the beginning of your end step, Chandra, Legacy of Fire deals X damage to each opponent, where X is the number of planeswalkers you control.\n[+1]:Add {R} for each planeswalker you control.\n[0]: Remove a loyalty counter from each of any number of permanents you control. Exile that many cards from the top of your library. You may play them this turn.
+Oracle:At the beginning of your end step, Chandra, Legacy of Fire deals X damage to each opponent, where X is the number of planeswalkers you control.\n[+1]: Add {R} for each planeswalker you control.\n[0]: Remove a loyalty counter from each of any number of permanents you control. Exile that many cards from the top of your library. You may play them this turn.

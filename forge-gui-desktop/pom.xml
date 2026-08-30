@@ -35,7 +35,6 @@
                             <goal>timestamp-property</goal>
                         </goals>
                         <configuration>
-                            <!-- generate MonthDate code to month.date property -->
                             <name>month.date</name>
                             <pattern>MM.dd</pattern>
                         </configuration>
@@ -47,7 +46,6 @@
                             <goal>regex-property</goal>
                         </goals>
                         <configuration>
-                            <!-- generate versionName from revision property to snapshot-version property  -->
                             <name>snapshot-version</name>
                             <value>${revision}</value>
                             <regex>-SNAPSHOT</regex>
@@ -160,9 +158,10 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <attach>false</attach>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
+                    <descriptors>
+                        <!-- we need a custom one because otherwise Forge tinylog service would be overwritten -->
+                        <descriptor>src/main/assembly/jar-with-dependencies.xml</descriptor>
+                    </descriptors>
                     <archive>
                         <manifestEntries>
                             <Implementation-Title>${project.name}</Implementation-Title>
@@ -189,7 +188,7 @@
   java.base/java.nio
   java.base/java.math
   java.base/java.util.concurrent
-  java.base/java.net                                     
+  java.base/java.net
 ]]>
                             </Add-Opens>
                             <Main-Class>forge.view.Main</Main-Class>
@@ -208,6 +207,52 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
+                <version>2.1.1</version>
+                <executions>
+                    <execution>
+                        <id>get-changelog-from-tag</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>
+<![CDATA[
+try {
+    def isOnTag = "git describe --exact-match --tags HEAD".execute().waitFor() == 0
+    def tagList = "git tag --sort=-version:refname".execute().text.split("\n")
+        .collect { it.trim() }
+        .findAll { it.startsWith("forge-") }
+
+    def tag = ""
+    if (isOnTag && tagList.size() > 1) {
+        tag = tagList[1]
+    } else if (!isOnTag && tagList.size() > 0) {
+        tag = tagList[0]
+    }
+
+    if (tag.isEmpty()) {
+        println "WARNING: No forge- tags found. CHANGES.txt will be empty."
+        project.properties['changelog.from.tag'] = 'HEAD'
+    } else {
+        project.properties['changelog.from.tag'] = tag
+        println "Using changelog from tag: ${tag}"
+    }
+} catch (Exception e) {
+    println "WARNING: Could not determine changelog tag: ${e.message}"
+    project.properties['changelog.from.tag'] = 'HEAD'
+}
+]]>
+                            </source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>se.bjurr.gitchangelog</groupId>
                 <artifactId>git-changelog-maven-plugin</artifactId>
@@ -220,26 +265,12 @@
                             <goal>git-changelog</goal>
                         </goals>
                         <configuration>
-                            <!-- TODO: insert placeholder for latest version tag -->
-                            <fromRef>forge-1.6.65</fromRef>
-                            <file>../forge-gui/release-files/CHANGES.txt</file>
+                            <!-- Generate changelog from the appropriate tag -->
+                            <fromRef>${changelog.from.tag}</fromRef>
+                            <file>${project.build.directory}/CHANGES.txt</file>
                             <templateContent>
 <![CDATA[
 {{#tags}}
-## {{name}}
- {{#issues}}
-  {{#hasIssue}}
-   {{#hasLink}}
-### {{name}} [{{issue}}]({{link}}) {{title}} {{#hasIssueType}} *{{issueType}}* {{/hasIssueType}} {{#hasLabels}} {{#labels}} *{{.}}* {{/labels}} {{/hasLabels}}
-   {{/hasLink}}
-   {{^hasLink}}
-### {{name}} {{issue}} {{title}} {{#hasIssueType}} *{{issueType}}* {{/hasIssueType}} {{#hasLabels}} {{#labels}} *{{.}}* {{/labels}} {{/hasLabels}}
-   {{/hasLink}}
-  {{/hasIssue}}
-  {{^hasIssue}}
-### {{name}}
-  {{/hasIssue}}
-
   {{#commits}}
 **{{{messageTitle}}}**
 
@@ -250,8 +281,6 @@
 [{{hash}}](https://github.com/{{ownerName}}/{{repoName}}/commit/{{hash}}) {{authorName}} *{{commitTime}}*
 
   {{/commits}}
-
- {{/issues}}
 {{/tags}}
 ]]>
                             </templateContent>
@@ -461,7 +490,7 @@
             <properties>
                 <license.file.name>"LICENSE.txt"</license.file.name>
                 <changes.file.name>"CHANGES.txt"</changes.file.name>
-                <readme.file.name>"MANUAL.txt"</readme.file.name>
+                <readme.file.name>"INSTALLATION.txt"</readme.file.name>
                 <forge.file.name>"Forge"</forge.file.name>
                 <applications.file.name>"Applications"</applications.file.name>
             </properties>
@@ -488,12 +517,10 @@
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}-osx" />
                                         <copy todir="${project.build.directory}/${project.build.finalName}-osx">
                                             <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui-desktop/target/" includes="CHANGES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="CONTRIBUTORS.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
                                             <fileset dir="${basedir}/" includes="sentry.properties" />
                                         </copy>
                                         <taskdef name="bundleapp" classpath="${basedir}/../forge-gui/${configSourceDirectory}/appbundler-1.0-custom.jar" classname="com.oracle.appbundler.AppBundlerTask" />
@@ -575,8 +602,8 @@
         <profile>
             <properties>
                 <license.file.name>"LICENSE.txt"</license.file.name>
-                <changes.file.name>"README.txt"</changes.file.name>
-                <readme.file.name>"MANUAL.txt"</readme.file.name>
+                <changes.file.name>"CHANGES.txt"</changes.file.name>
+                <readme.file.name>"INSTALLATION.txt"</readme.file.name>
                 <forge.file.name>"Forge"</forge.file.name>
                 <applications.file.name>"Applications"</applications.file.name>
             </properties>
@@ -604,7 +631,6 @@
                                         <copy todir="${project.build.directory}/${project.build.finalName}-osx">
                                             <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
                                             <fileset dir="${basedir}/../forge-gui/" includes="README.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
                                             <fileset dir="${basedir}/" includes="sentry.properties" />
                                         </copy>
                                         <taskdef name="bundleapp" classpath="${basedir}/../forge-gui/${configSourceDirectory}/appbundler-1.0-custom.jar" classname="com.oracle.appbundler.AppBundlerTask" />

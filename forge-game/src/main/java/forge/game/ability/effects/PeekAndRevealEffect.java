@@ -13,14 +13,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
-/**
- * PeekAndReveal is a simplified way of handling something that could be done with Dig and NoMove$.
- * Kinship cards use this, and many other cards could have simpler scripts by just using PeekAndReveal.
- */
 public class PeekAndRevealEffect extends SpellAbilityEffect {
 
     @Override
@@ -82,7 +77,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
             if (!noPeek) {
                 peekingPlayer.getController().reveal(peekCards, srcZone, zoneToPeek,
-                        CardTranslation.getTranslatedName(source.getName()) + " - " +
+                        source.getTranslatedName() + " - " +
                                 Localizer.getInstance().getMessage("lblLookingCardFrom"));
             }
 
@@ -91,7 +86,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
 
             if (doReveal) {
                 peekingPlayer.getGame().getAction().reveal(revealableCards, srcZone, zoneToPeek, !noPeek,
-                        CardTranslation.getTranslatedName(source.getName()) + " - " +
+                        source.getTranslatedName() + " - " +
                                 Localizer.getInstance().getMessage("lblRevealingCardFrom"));
 
                 if (rememberRevealed) {

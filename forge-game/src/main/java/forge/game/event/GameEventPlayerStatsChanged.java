@@ -4,24 +4,19 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.collect.FCollection;
 
-/**
- * This means card's characteristics have changed on server, clients must re-request them
- */
-public class GameEventPlayerStatsChanged extends GameEvent {
+public record GameEventPlayerStatsChanged(FCollection<PlayerView> players) implements GameEvent {
 
-    public final Collection<Player> players;
-    public final boolean updateCards;
-    public GameEventPlayerStatsChanged(Player affected, boolean updateCards) {
-        players = Arrays.asList(affected);
-        this.updateCards = updateCards;
+    public GameEventPlayerStatsChanged(Collection<Player> players) {
+        this(PlayerView.getCollection(players));
     }
 
-    public GameEventPlayerStatsChanged(Collection<Player> affected, boolean updateCards) {
-        players = affected;
-        this.updateCards = updateCards;
+    public GameEventPlayerStatsChanged(Player affected) {
+        this(Arrays.asList(affected));
     }
 
     /* (non-Javadoc)
@@ -29,7 +24,6 @@ public class GameEventPlayerStatsChanged extends GameEvent {
      */
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
-        // TODO Auto-generated method stub
         return visitor.visit(this);
     }
 

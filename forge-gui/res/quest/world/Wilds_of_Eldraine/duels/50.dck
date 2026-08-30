@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Kyouko Kasodani
+Title=Kyouko Kasodani
+Icon=Kyouko Kasodani.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Matts_-_Dimir_Faeries_(Standard,_#1754227).dck
+Deck Type=constructed
+
+[Main]
+3 Faerie Vandal
+2 Sheoldred, the Apocalypse
+4 Faerie Mastermind
+2 Picklock Prankster
+4 Sleep-Cursed Faerie
+3 Talion's Messenger
+2 Faerie Dreamthief
+2 Make Disappear
+2 Go for the Throat
+4 Spell Stutter
+4 Faerie Fencing
+4 Ego Drain
+1 Kaito Shizuki
+4 Shipwreck Marsh
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+4 Underground River
+4 Darkslick Shores
+1 Mirrex
+2 Swamp
+1 Island
+2 Island
+2 Swamp
+1 Island
+[Sideboard]
+2 Disdainful Stroke
+2 Siphon Insight
+2 Kaito Shizuki
+2 Sheoldred, the Apocalypse
+2 Duress
+2 Negate
+3 Virtue of Persistence

@@ -1,0 +1,9 @@
+Name:Bumi Bash
+ManaCost:3 R
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDamage,DBDestroy
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of lands you control to target creature.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.Land,Land.nonBasic | TgtPrompt$ Select target land creature or nonbasic land. | SpellDescription$ Destroy target land creature or nonbasic land.
+SVar:X:Count$Valid Land.YouCtrl
+SVar:BuffedBy:Land
+Oracle:Choose one —\n• Bumi Bash deals damage equal to the number of lands you control to target creature.\n• Destroy target land creature or nonbasic land.

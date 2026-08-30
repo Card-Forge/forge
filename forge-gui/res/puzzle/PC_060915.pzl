@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 060915 - Now You See It
 URL:http://www.gatheringmagic.com/seanuy-060915-now-you-see-it/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Win on this turn.
 [state]
 ActivePlayer=human

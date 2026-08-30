@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=NanaBuruku
+Title=NanaBuruku
+Icon=NanaBuruku.jpg
+Difficulty=Very Hard
+Description=../Modern/Zendikar/2011_PT_Philadelphia_-_18_Points_or_Better/Thomas_Dixon_-_BRG_Aggro_-_19_Points_(Modern,_#19377).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Dark Confidant
+4 Kird Ape
+4 Kitchen Finks
+4 Tarmogoyf
+4 Lightning Bolt
+4 Punishing Fire
+3 Terminate
+3 Blightning
+4 Thoughtseize
+2 Blood Crypt
+2 Forest
+4 Grove of the Burnwillows
+2 Mountain
+3 Overgrown Tomb
+3 Stomping Ground
+2 Swamp
+4 Verdant Catacombs
+[Sideboard]
+2 Ancient Grudge
+4 Burning-Tree Shaman
+3 Rise // Fall
+3 Seal of Primordium
+3 Sudden Death

@@ -4,6 +4,6 @@ Types:Creature Elf Shaman
 PT:3/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters, mill three cards. You may put a land card from your graveyard on top of your library.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | OptionalDecider$ You | ChangeType$ Land.YouOwn | ChangeNum$ 1 | Hidden$ True | Optional$ True
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ChangeType$ Land.YouOwn | ChangeNum$ 1 | Hidden$ True | Optional$ True
 DeckHas:Ability$Graveyard
 Oracle:When Glowspore Shaman enters, mill three cards. You may put a land card from your graveyard on top of your library.

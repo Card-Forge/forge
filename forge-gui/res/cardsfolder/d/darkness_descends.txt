@@ -1,0 +1,6 @@
+Name:Darkness Descends
+ManaCost:2 B B
+Types:Sorcery
+A:SP$ PutCounterAll | ValidCards$ Creature | CounterType$ M1M1 | CounterNum$ 2 | IsCurse$ True | SpellDescription$ Put two -1/-1 counters on each creature.
+SVar:X:Count$xPaid
+Oracle:Put two -1/-1 counters on each creature.

@@ -1,0 +1,7 @@
+Name:North Pole Patrol
+ManaCost:2 U
+Types:Creature Human Soldier Ally
+PT:2/3
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other+YouCtrl | TgtPrompt$ Select another target permanent you control | SpellDescription$ Untap another target permanent you control.
+A:AB$ Tap | Cost$ Waterbend<3> T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SpellDescription$ Tap target creature an opponent controls.
+Oracle:{T}: Untap another target permanent you control.\nWaterbend {3}, {T}: Tap target creature an opponent controls. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)

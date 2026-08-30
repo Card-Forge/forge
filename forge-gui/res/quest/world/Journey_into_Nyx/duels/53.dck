@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=SantaMuerte
+Title=SantaMuerte
+Icon=SantaMuerte.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/Grand_Prix_Minneapolis_2014/Nicholas_Heal_-_Red_Deck_Wins_(Modern,_#75557).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Grim Lavamancer
+4 Mogg Fanatic
+4 Vexing Devil
+2 Shrine of Burning Rage
+4 Lightning Bolt
+4 Searing Blaze
+2 Forked Bolt
+4 Molten Rain
+4 Rift Bolt
+4 Arid Mesa
+1 Keldon Megaliths
+11 Mountain
+4 Scalding Tarn
+[Sideboard]
+2 Blood Moon
+2 Dismember
+2 Dragon's Claw
+4 Pyrite Spellbomb
+2 Relic of Progenitus
+1 Shattering Spree
+2 Smash to Smithereens

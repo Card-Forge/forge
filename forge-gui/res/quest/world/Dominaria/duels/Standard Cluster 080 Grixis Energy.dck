@@ -1,0 +1,44 @@
+[metadata]
+Name=Grixis Energy
+Deck Type=constructed
+Title=Grixis Energy
+Description=Grixis Energy
+Difficulty=Hard
+Icon=Flandre Scarlet
+[Main]
+3 Abrade
+4 Aether Hub
+1 Canyon Slough
+2 Chandra, Torch of Defiance
+3 Dragonskull Summit
+4 Drowned Catacomb
+2 Essence Scatter
+3 Fatal Push
+2 Fetid Pools
+4 Glint-Sleeve Siphoner
+2 Gonti, Lord of Luxury
+3 Harnessed Lightning
+1 Island
+1 Island
+2 Mountain
+2 Rekindling Phoenix
+4 Spirebluff Canal
+2 Supreme Will
+1 Swamp
+1 Swamp
+1 Swamp
+3 The Scarab God
+2 Torrential Gearhulk
+3 Vraska's Contempt
+4 Whirler Virtuoso
+[Sideboard]
+1 Chandra's Defeat
+3 Duress
+1 Jace's Defeat
+3 Negate
+1 Nezahal, Primal Tide
+1 Search for Azcanta
+1 Tetzimoc, Primal Death
+1 Vizier of Many Faces
+1 Vona's Hunger
+2 Yahenni's Expertise

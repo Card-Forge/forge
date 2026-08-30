@@ -10,7 +10,6 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FOptionPane;
-import forge.util.Callback;
 import forge.util.ItemPool;
 
 /**
@@ -65,12 +64,9 @@ public class ShopScene extends ForgeScene {
                 return;
             FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", cards, profit),
                 Forge.getLocalizer().getMessage("lblAutoSellable"), Forge.getLocalizer().getMessage("lblSell"),
-                Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
-                    @Override
-                    public void run(Boolean result) {
-                        if (result) {
-                            doAutosell();
-                        }
+                Forge.getLocalizer().getMessage("lblCancel"), false, result -> {
+                    if (result) {
+                        doAutosell();
                     }
                 }
             );

@@ -4,6 +4,6 @@ Types:Creature Human Rogue
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSuspect | TriggerDescription$ When CARDNAME enters, suspect it. Create a 2/2 white and blue Detective creature token. (A suspected creature has menace and can't block.)
 SVar:TrigSuspect:DB$ AlterAttribute | Defined$ Self | Attributes$ Suspected | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ wu_2_2_detective
+SVar:DBToken:DB$ Token | TokenScript$ wu_2_2_detective
 DeckHas:Ability$Token & Type$Detective & Color$Blue|White
 Oracle:When Person of Interest enters, suspect it. Create a 2/2 white and blue Detective creature token. (A suspected creature has menace and can't block.)

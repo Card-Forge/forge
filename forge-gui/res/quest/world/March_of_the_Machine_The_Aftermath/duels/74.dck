@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Benjamin_Grønvold_-_Bant_Blink_(Modern,_#1661323).dck
+Deck Type=constructed
+
+[Main]
+1 Elesh Norn, Mother of Machines
+3 Eternal Witness
+4 Noble Hierarch
+4 Ice-Fang Coatl
+4 Solitude
+4 Soulherder
+2 Wall of Blossoms
+4 Wall of Omens
+4 Ephemerate
+3 Cosmic Rebirth
+2 Time Warp
+3 Teferi, Time Raveler
+1 Breeding Pool
+4 Flooded Strand
+2 Hallowed Fountain
+4 Misty Rainforest
+2 Snow-Covered Forest
+2 Snow-Covered Island
+1 Snow-Covered Plains
+1 Spara's Headquarters
+1 Temple Garden
+4 Windswept Heath
+[Sideboard]
+3 Sanctifier en-Vec
+1 Teferi, Time Raveler
+2 Force of Vigor
+1 Knight of Autumn
+2 Lavinia, Azorius Renegade
+2 Endurance
+2 Stony Silence
+2 Force of Negation

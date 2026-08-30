@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Aurelia
+Title=Aurelia
+Icon=Aurelia.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Luke_Rosser-Jones_-_Affinity_(Modern,_#1278478)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+4 Thought Monitor
+4 Sojourner's Companion
+4 Ornithopter
+4 Memnite
+4 Frogmite
+1 Welding Jar
+1 Aether Spellbomb
+1 Shadowspear
+2 Nettlecyst
+4 Springleaf Drum
+4 Cranial Plating
+4 Blood Fountain
+4 Thoughtcast
+4 Urza's Saga
+1 Island
+2 Mistvault Bridge
+3 Glimmervoid
+4 Treasure Vault
+4 Darksteel Citadel
+[Sideboard]
+1 Soul-Guide Lantern
+1 Pithing Needle
+1 Etched Champion
+1 Jegantha, the Wellspring
+2 Karn, Scion of Urza
+2 Hurkyl's Recall
+3 Dispatch
+4 Metallic Rebuke

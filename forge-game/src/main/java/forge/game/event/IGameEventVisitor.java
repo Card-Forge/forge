@@ -1,9 +1,5 @@
 package forge.game.event;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 public interface IGameEventVisitor<T> {
     T visit(GameEventAnteCardsSelected event);
     T visit(GameEventAttackersDeclared event);
@@ -61,6 +57,8 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventCardPlotted event);
     T visit(GameEventDayTimeChanged event);
     T visit(GameEventDoorChanged event);
+    T visit(GameEventSnapshotRestored gameEventSnapshotRestored);
+    T visit(GameEventAddLog event);
 
     // This is base class for all visitors.
     class Base<T> implements IGameEventVisitor<T>{
@@ -120,5 +118,7 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventCardPlotted event) { return null; }
         public T visit(GameEventDayTimeChanged event) { return null; }
         public T visit(GameEventDoorChanged event) { return null; }
+        public T visit(GameEventSnapshotRestored gameEventSnapshotRestored) { return null; }
+        public T visit(GameEventAddLog event) { return null; }
     }
 }

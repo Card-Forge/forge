@@ -1,0 +1,8 @@
+Name:Summit Sentinel
+ManaCost:1 U
+Types:Creature Elemental Soldier
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature dies, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:SacMe:1
+Oracle:When this creature dies, draw a card.

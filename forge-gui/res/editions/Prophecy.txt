@@ -72,6 +72,7 @@ FoilAlwaysInCommonSlot=False
 58 C Bog Glider @Brian Snõddy
 59 U Chilling Apparition @Ron Spears
 60 R Coffin Puppets @Arnie Swekel
+60s R Coffin Puppets @Glen Angus
 61 C Death Charmer @David Martin
 62 C Despoil @Scott M. Fischer
 63 U Endbringer's Revel @Pete Venters
@@ -155,8 +156,3 @@ FoilAlwaysInCommonSlot=False
 141 U Well of Life @Tom Wänerstrand
 142 U Rhystic Cave @Rob Alexander
 143 R Wintermoon Mesa @Tom Wänerstrand
-
-[tokens]
-b_1_1_minion
-g_x_x_elephant_resurgence
-g_1_1_squirrel

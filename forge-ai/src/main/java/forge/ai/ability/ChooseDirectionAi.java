@@ -44,7 +44,7 @@ public class ChooseDirectionAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         return canPlay(ai, sa);
     }
 

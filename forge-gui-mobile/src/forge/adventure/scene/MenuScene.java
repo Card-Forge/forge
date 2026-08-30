@@ -157,7 +157,7 @@ public class MenuScene extends UIScene {
                         loadDialog(option);
 
                         if (option.callback != null) {
-                            option.callback.run(true);
+                            option.callback.accept(true);
                         }
                     });
                     B.getTextraLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.

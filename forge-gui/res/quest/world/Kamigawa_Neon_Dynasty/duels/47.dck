@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Colossus
+Title=Colossus
+Icon=Colossus.jpg
+Difficulty=Medium
+Description=./Standard/Kamigawa_Neon_Dynasty/SATO_MINORU_-_WG_Ramp_(Standard,_#1302370).dck
+Deck Type=constructed
+
+[Main]
+1 Kura, the Boundless Sky
+2 Ao, the Dawn Sky
+3 Yasharn, Implacable Earth
+3 Elite Spellbinder
+4 Prosperous Innkeeper
+3 Esika's Chariot
+2 March of Otherworldly Light
+2 Fateful Absence
+1 Emeria's Call
+3 Storm the Festival
+2 Felidar Retreat
+3 Wedding Announcement
+3 Wrenn and Seven
+1 Cave of the Frost Dragon
+2 Field of Ruin
+2 Boseiju, Who Endures
+2 Branchloft Pathway
+2 Lair of the Hydra
+3 Eiganjo, Seat of the Empire
+4 Plains
+4 Tangled Florahedron
+4 Overgrown Farmland
+4 Forest
+[Sideboard]
+1 Elite Spellbinder
+2 Valorous Stance
+2 Toski, Bearer of Secrets
+2 Portable Hole
+2 Doomskar
+3 Thalia, Guardian of Thraben
+3 Reidane, God of the Worthy

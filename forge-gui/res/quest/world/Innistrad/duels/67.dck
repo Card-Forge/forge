@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Spike Spiegel
+Title=Spike Spiegel
+Icon=Spike Spiegel.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/SPb/Balabanov_Vasiliy_in_The_First_Modern_-_Zoo_(Modern,_#20283).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Figure of Destiny
+4 Grim Lavamancer
+4 Keldon Marauders
+4 Knight of the Reliquary
+4 Steppe Lynx
+4 Wild Nacatl
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+1 Elspeth, Knight-Errant
+4 Arid Mesa
+1 Copperline Gorge
+1 Forest
+2 Marsh Flats
+1 Mountain
+1 Plains
+4 Sacred Foundry
+4 Scalding Tarn
+2 Temple Garden
+[Sideboard]
+3 Daybreak Ranger
+3 Ethersworn Canonist
+2 Gaddock Teeg
+2 Krosan Grip
+2 Searing Blaze
+1 Stony Silence
+2 Vexing Shusher

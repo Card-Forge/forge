@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Peregrin Took
+Title=Peregrin Took
+Icon=Peregrin Took.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/2015_Modern_State_Championships_-_Mississippi/Jordan_Crandy_-_Red_Deck_Wins_(Modern,_#230614).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+1 Grim Lavamancer
+4 Monastery Swiftspear
+2 Soulfire Grand Master
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+3 Lightning Strike
+4 Searing Spear
+2 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+5 Mountain
+3 Plains
+3 Sacred Foundry
+1 Stomping Ground
+2 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+3 Destructive Revelry
+2 Kor Firewalker
+2 Molten Rain
+2 Peak Eruption
+4 Wear // Tear

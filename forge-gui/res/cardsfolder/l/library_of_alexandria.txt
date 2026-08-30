@@ -2,5 +2,5 @@ Name:Library of Alexandria
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Draw | Cost$ T | NumCards$ 1 | ActivationCardsInHand$ 7 | SpellDescription$ Draw a card. Activate only if you have exactly seven cards in hand.
+A:AB$ Draw | Cost$ T | PresentZone$ Hand | IsPresent$ Card.YouOwn | PresentCompare$ EQ7 | SpellDescription$ Draw a card. Activate only if you have exactly seven cards in hand.
 Oracle:{T}: Add {C}.\n{T}: Draw a card. Activate only if you have exactly seven cards in hand.

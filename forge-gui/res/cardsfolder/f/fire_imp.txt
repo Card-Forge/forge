@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Creature Imp
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 2 damage to target creature.
-SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 2
 SVar:PlayMain1:TRUE
 Oracle:When Fire Imp enters, it deals 2 damage to target creature.

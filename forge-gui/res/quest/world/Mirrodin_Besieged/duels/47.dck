@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Imperial Guard
+Title=Imperial Guard
+Icon=Imperial Guard.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/Neutral_Grounds_5k_Standard/Richard_Badlon_-_Boros_(Standard,_#10466).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+3 Mirran Crusader
+3 Plated Geopede
+4 Squadron Hawk
+4 Steppe Lynx
+4 Stoneforge Mystic
+2 Adventuring Gear
+1 Bonehoard
+1 Sword of Body and Mind
+3 Lightning Bolt
+3 Arc Lightning
+3 Journey to Nowhere
+4 Arid Mesa
+1 Evolving Wilds
+4 Marsh Flats
+5 Mountain
+5 Plains
+4 Scalding Tarn
+2 Terramorphic Expanse
+[Sideboard]
+1 Basilisk Collar
+2 Cunning Sparkmage
+2 Divine Offering
+3 Goblin Ruinblaster
+3 Kor Firewalker
+2 Koth of the Hammer
+1 Manic Vandal
+1 Sword of Feast and Famine

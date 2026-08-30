@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Snow White
+Title=Snow White
+Icon=Snow White.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Midnight_Hunt/DalaiOlai_-_Gruul_Werewolves_(Standard,_#1207311).dck
+Deck Type=constructed
+
+[Main]
+4 Outland Liberator
+4 Reckless Stormseeker
+4 Tovolar, Dire Overlord
+4 Kessig Naturalist
+3 Cinderclasm
+3 Moonrager's Slash
+3 Play with Fire
+3 Burn Down the House
+2 Unnatural Growth
+4 Arlinn, the Pack's Hope
+2 Field of Ruin
+2 Den of the Bugbear
+2 Lair of the Hydra
+4 Cragcrown Pathway
+4 Rockfall Vale
+5 Mountain
+7 Forest
+[Sideboard]
+1 Play with Fire
+1 Moonrager's Slash
+1 Cinderclasm
+1 Burn Down the House
+2 Pithing Needle
+2 Burning Hands
+2 Wrenn and Seven
+2 Roiling Vortex
+3 Storm the Festival

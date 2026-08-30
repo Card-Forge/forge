@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Swan
+Title=Swan
+Icon=Swan.jpg
+Difficulty=Easy
+Description=Khans_of_Tarkir/SCG_Invitational_Qualifier_Gulf_Breeze/Jason_Barhorst_-_Abzan_Reanimator_(Standard,_#143472).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+2 Doomwake Giant
+2 Fleecemane Lion
+3 Hornet Queen
+1 Reclamation Sage
+4 Satyr Wayfinder
+4 Siege Rhino
+1 Soul of Innistrad
+4 Sylvan Caryatid
+3 Whip of Erebos
+4 Murderous Cut
+2 Commune with the Gods
+2 Banishing Light
+3 Forest
+1 Llanowar Wastes
+2 Mana Confluence
+2 Plains
+2 Sandsteppe Citadel
+4 Temple of Malady
+1 Temple of Plenty
+3 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+1 Bile Blight
+1 Champion of Stray Souls
+1 Hero's Downfall
+1 Nissa, Worldwaker
+1 Pharika, God of Affliction
+4 Ruthless Ripper
+1 Stain the Mind
+3 Thoughtseize

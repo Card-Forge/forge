@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=BlackPanther
+Title=BlackPanther
+Icon=BlackPanther.jpg
+Difficulty=Hard
+Description=./Modern/Streets_of_New_Capenna/Felix_Johansson_-_Bant_Control_(Modern,_#1437558).dck
+Deck Type=constructed
+
+[Main]
+1 Wall of Blossoms
+2 Endurance
+3 Solitude
+3 Eternal Witness
+3 Deputy of Detention
+4 Soulherder
+4 Noble Hierarch
+4 Wall of Omens
+4 Ice-Fang Coatl
+4 Ephemerate
+4 Collected Company
+2 Time Warp
+1 Temple Garden
+1 Spara's Headquarters
+1 Breeding Pool
+1 Snow-Covered Plains
+2 Glasspool Mimic
+2 Hallowed Fountain
+2 Windswept Heath
+2 Snow-Covered Forest
+2 Snow-Covered Island
+4 Misty Rainforest
+4 Flooded Strand
+[Sideboard]
+1 Deputy of Detention
+1 Solitude
+1 Time Warp
+2 Endurance
+3 Force of Vigor
+3 Knight of Autumn
+4 Meddling Mage

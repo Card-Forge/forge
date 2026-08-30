@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Caprio
+Title=Caprio
+Icon=Caprio.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Luis_Vargas_-_Naya_Zoo_(Modern,_#1425898)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Ghor-Clan Rampager
+3 Kumano Faces Kakkazan
+4 Reckless Bushwhacker
+4 Wild Nacatl
+4 Hidden Herbalists
+4 Goblin Guide
+4 Goblin Bushwhacker
+4 Dryad Militant
+4 Burning-Tree Emissary
+2 Lightning Bolt
+4 Manamorphose
+4 Atarka's Command
+1 Scalding Tarn
+1 Sacred Foundry
+1 Arid Mesa
+1 Temple Garden
+1 Forest
+2 Stomping Ground
+2 Mountain
+2 Bloodstained Mire
+3 Wooded Foothills
+4 Windswept Heath
+[Sideboard]
+1 Wrap in Vigor
+2 Roiling Vortex
+2 Heroic Intervention
+2 Force of Vigor
+2 Destructive Revelry
+2 Scavenging Ooze
+4 Leyline of Combustion

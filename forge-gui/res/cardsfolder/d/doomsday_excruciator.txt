@@ -8,5 +8,5 @@ SVar:TrigExcruciator:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ 
 SVar:DBDigExile:DB$ Dig | DigNum$ X | ChangeNum$ All | Defined$ Player.IsRemembered | DestinationZone$ Exile | ExileFaceDown$ True | NoReveal$ True
 SVar:X:Count$ValidLibrary Card.RememberedPlayerCtrl/Minus.6
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, draw a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:TrigDraw:DB$ Draw | Defined$ You
 Oracle:Flying\nWhen Doomsday Excruciator enters, if it was cast, each player exiles all but the bottom six cards of their library face down.\nAt the beginning of your upkeep, draw a card.

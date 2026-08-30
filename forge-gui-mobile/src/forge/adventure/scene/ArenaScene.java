@@ -21,6 +21,7 @@ import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
+import forge.util.ScreenUtil;
 
 import java.util.Random;
 
@@ -103,14 +104,14 @@ public class ArenaScene extends UIScene implements IAfterMatch {
                     "\n" + Forge.getLocalizer().getMessage("lblConcedeCurrentGame"),
                     Forge.getLocalizer().getMessage("lblYes"),
                     Forge.getLocalizer().getMessage("lblNo"), () -> {
-                        this.loose();
+                        this.lose();
                         removeDialog();
                     }, this::removeDialog);
         }
         showDialog(concedeDialog);
     }
 
-    private void loose() {
+    private void lose() {
         doneButton.setText("[%80][+Exit]");
         doneButton.layout();
         startButton.setDisabled(true);
@@ -157,7 +158,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     }
 
     @Override
-    public void setWinner(boolean winner) {
+    public void setWinner(boolean winner, boolean isArena) {
         enable = false;
         Array<ArenaRecord> winners = new Array<>();
         Array<EnemySprite> winnersEnemies = new Array<>();
@@ -185,7 +186,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             markLostFighter(fighters.get(fighters.size - 1).actor);
             moveFighter(fighters.get(fighters.size - 2).actor, true);
             winners.add(fighters.get(fighters.size - 2));
-            loose();
+            lose();
         }
 
         fighters = winners;
@@ -250,7 +251,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             started = false;
             duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy, true, null);
             Forge.switchScene(duelScene);
-        }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName())));
+        }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName())));
     }
 
     public boolean start() {

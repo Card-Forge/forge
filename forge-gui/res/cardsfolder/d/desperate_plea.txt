@@ -1,0 +1,9 @@
+Name:Desperate Plea
+ManaCost:1 B
+Types:Sorcery Lesson
+A:SP$ Charm | Cost$ 1 B Sac<1/Creature> | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBChangeZone,DBDestroy
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard | ConditionDefined$ ThisTargetedCard | ConditionPresent$ Card.powerLEX | SpellDescription$ Return target creature card from your graveyard to the battlefield if its power is less than or equal to the sacrificed creature's power.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | SpellDescription$ Destroy target creature.
+SVar:X:Sacrificed$CardPower
+DeckHas:Ability$Graveyard
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nChoose one or both —\n• Return target creature card from your graveyard to the battlefield if its power is less than or equal to the sacrificed creature's power.\n• Destroy target creature.

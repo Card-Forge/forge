@@ -5,6 +5,7 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.utils.Align;
 
@@ -32,7 +33,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextArea;
 import forge.toolbox.GuiChoose;
-import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Utils;
 
@@ -80,7 +80,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         return true;
     }
 
-    public void onClose(Callback<Boolean> canCloseCallback) {
+    public void onClose(Consumer<Boolean> canCloseCallback) {
         FModel.getQuest().save();
         super.onClose(canCloseCallback);
     }
@@ -205,22 +205,19 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
             final int max = itemManager.getItemCount(item);
             if (max == 0) { return; }
 
-            final Callback<Integer> callback = new Callback<Integer>() {
-                @Override
-                public void run(final Integer result) {
-                    if (result == null || result <= 0) { return; }
+            final Consumer<Integer> callback = result -> {
+                if (result == null || result <= 0) { return; }
 
-                    //invoke in background thread so other dialogs can be shown properly
-                    FThreads.invokeInBackgroundThread(() -> {
-                        ItemPool<InventoryItem> items = new ItemPool<>(InventoryItem.class);
-                        items.add(item, result);
-                        activateItems(items);
-                        FThreads.invokeInEdtLater(() -> parentScreen.updateCreditsLabel());
-                    });
-                }
+                //invoke in background thread so other dialogs can be shown properly
+                FThreads.invokeInBackgroundThread(() -> {
+                    ItemPool<InventoryItem> items = new ItemPool<>(InventoryItem.class);
+                    items.add(item, result);
+                    activateItems(items);
+                    FThreads.invokeInEdtLater(() -> parentScreen.updateCreditsLabel());
+                });
             };
             if (max == 1) {
-                callback.run(max);
+                callback.accept(max);
             }
             else {
                 GuiChoose.getInteger(item + " - " + getVerb() + " " + Forge.getLocalizer().getMessage("lblHowMany"), 1, max, 20, callback);

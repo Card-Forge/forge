@@ -1,0 +1,12 @@
+Name:Champion of the Clachan
+ManaCost:3 W
+Types:Creature Kithkin Knight
+PT:4/5
+K:Flash
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ BeholdExile<1/Kithkin> | EffectZone$ All | Description$ As an additional cost to cast this spell, behold a Kithkin and exile it. (Exile a Kithkin you control or a Kithkin card from your hand.)
+S:Mode$ Continuous | Affected$ Kithkin.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Kithkin you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature leaves the battlefield, return the exiled card to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand
+SVar:PlayMain1:TRUE
+DeckHints:Type$Kithkin
+Oracle:Flash\nAs an additional cost to cast this spell, behold a Kithkin and exile it. (Exile a Kithkin you control or a Kithkin card from your hand.)\nOther Kithkin you control get +1/+1.\nWhen this creature leaves the battlefield, return the exiled card to its owner's hand.

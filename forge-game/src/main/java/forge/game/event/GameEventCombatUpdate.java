@@ -1,17 +1,18 @@
 package forge.game.event;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import forge.game.card.Card;
+import forge.game.card.CardView;
 
-public class GameEventCombatUpdate extends GameEvent {
+public record GameEventCombatUpdate(List<CardView> attackers, List<CardView> blockers) implements GameEvent {
 
-    public final List<Card> attackers;
-    public final List<Card> blockers;
-
-    public GameEventCombatUpdate(List<Card> attackers, List<Card> blockers) {
-        this.attackers = attackers;
-        this.blockers = blockers;
+    public static GameEventCombatUpdate fromCards(List<Card> attackers, List<Card> blockers) {
+        return new GameEventCombatUpdate(
+            attackers == null ? null : attackers.stream().map(CardView::get).collect(Collectors.toList()),
+            blockers == null ? null : blockers.stream().map(CardView::get).collect(Collectors.toList())
+        );
     }
 
     @Override

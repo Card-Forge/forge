@@ -2,7 +2,6 @@
 Code=SOK
 Date=2005-06-03
 Name=Saviors of Kamigawa
-Code2=SOK
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
@@ -72,7 +71,7 @@ ScryfallCode=SOK
 59 U Trusted Advisor @Jim Nelson
 60 R Twincast @Christopher Moeller
 61 R Akuta, Born of Ash @Ben Thompson
-62 R Choice of Damnations @Tim Hildebrandt
+62 R Choice of Damnations @Greg Hildebrandt
 63 C Death Denied @Greg Hildebrandt
 64 C Death of a Thousand Stings @Scott M. Fischer
 65 C Deathknell Kami @Puddnhead
@@ -111,7 +110,7 @@ ScryfallCode=SOK
 98 U Gaze of Adamaro @Paolo Parente
 99 U Ghost-Lit Raider @Ittoku
 100 C Glitterfang @Ron Spencer
-101 U Godo's Irregulars @Tim Hildebrandt
+101 U Godo's Irregulars @Greg Hildebrandt
 102 R Hidetsugu's Second Rite @Jeff Miracola
 103 R Homura, Human Ascendant @Kev Walker
 104 R Iizuka the Ruthless @Darrell Riche
@@ -137,7 +136,7 @@ ScryfallCode=SOK
 124 U Briarknit Kami @Brian Despain
 125 U Dense Canopy @Luca Zontini
 126 U Descendant of Masumaro @Rob Alexander
-127 C Dosan's Oldest Chant @Tim Hildebrandt
+127 C Dosan's Oldest Chant @Greg Hildebrandt
 128 C Elder Pine of Jukai @Alan Pollack
 129 R Endless Swarm @Jeremy Jarvis
 130 C Fiddlehead Kami @Rebecca Guay
@@ -164,7 +163,7 @@ ScryfallCode=SOK
 151 R Iname as One @Stephen Tappin
 152 R Ashes of the Fallen @Dan Frazier
 153 R Blood Clock @Keith Garletts
-154 U Ebony Owl Netsuke @Tim Hildebrandt
+154 U Ebony Owl Netsuke @Greg Hildebrandt
 155 U Ivory Crane Netsuke @Greg Hildebrandt
 156 U Manriki-Gusari @Thomas Gianni
 157 U O-Naginata @Brian Snõddy
@@ -176,10 +175,3 @@ ScryfallCode=SOK
 163 R Miren, the Moaning Well @Rob Alexander
 164 R Oboro, Palace in the Clouds @Rob Alexander
 165 R Tomb of Urami @Alex Horley-Orlandelli
-
-[tokens]
-urami
-c_1_1_spirit
-r_3_1_elemental_haste
-r_1_1_warrior
-g_1_1_snake

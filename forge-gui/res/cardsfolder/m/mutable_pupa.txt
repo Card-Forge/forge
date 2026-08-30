@@ -1,0 +1,8 @@
+Name:Mutable Pupa
+ManaCost:G
+Types:Creature Insect
+PT:1/1
+K:Evolve
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature you control enters, this creature perpetually gains flying if that creature has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ First Strike & Flying & Deathtouch & Double Strike & Haste & Hexproof & Indestructible & Lifelink & Menace & Reach & Trample & Vigilance | SharedKeywordsZone$ Battlefield,Hand,Graveyard,Exile,Library,Command | SharedRestrictions$ Card.TriggeredCard | Duration$ Perpetual
+Oracle:Evolve\nWhenever another creature you control enters, this creature perpetually gains flying if that creature has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.

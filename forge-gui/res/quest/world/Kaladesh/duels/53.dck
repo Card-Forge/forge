@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Marge Simpson
+Title=Marge Simpson
+Icon=Marge Simpson.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/Competitive_Modern_Constructed_League/RIWBTU_-_RIWBTU_(5-0)_(Modern,_#644569).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Anafenza, the Foremost
+4 Birds of Paradise
+1 Duskwatch Recruiter
+2 Eternal Witness
+4 Kitchen Finks
+1 Liliana, Heretical Healer
+4 Noble Hierarch
+3 Scavenging Ooze
+1 Selfless Spirit
+4 Tidehollow Sculler
+3 Tireless Tracker
+1 Abrupt Decay
+4 Collected Company
+1 Dismember
+2 Path to Exile
+2 Blooming Marsh
+2 Forest
+2 Gavony Township
+1 Godless Shrine
+2 Marsh Flats
+2 Overgrown Tomb
+1 Plains
+1 Swamp
+2 Temple Garden
+4 Verdant Catacombs
+4 Windswept Heath
+[Sideboard]
+1 Abrupt Decay
+4 Aven Mindcensor
+4 Fulminator Mage
+3 Qasali Pridemage
+2 Silklash Spider
+1 Tireless Tracker

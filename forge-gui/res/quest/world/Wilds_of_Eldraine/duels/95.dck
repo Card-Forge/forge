@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Crows in the Field
+Title=Crows in the Field
+Icon=Crows in the Field.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Morita_Masashi_-_Scale_Affinity_(Modern,_#1745747)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Walking Ballista
+4 Arcbound Ravager
+2 Arcbound Worker
+1 Steel Overseer
+3 Hangarback Walker
+4 Zabaz, the Glimmerwasp
+1 Syr Ginger, the Meal Ender
+1 Springleaf Drum
+2 Welding Jar
+1 Shadowspear
+2 The Ozolith
+2 Ozolith, the Shattered Spire
+3 Agatha's Soul Cauldron
+4 Ancient Stirrings
+4 Hardened Scales
+4 Urza's Saga
+3 Forest
+4 Grove of the Burnwillows
+1 Horizon Canopy
+1 Pendelhaven
+4 Inkmoth Nexus
+1 Ruins of Oran-Rief
+2 Copperline Gorge
+2 Boseiju, Who Endures
+[Sideboard]
+1 Tormod's Crypt
+1 Grafdigger's Cage
+1 Pithing Needle
+1 Welding Jar
+2 Dismember
+1 Life from the Loam
+1 Force of Vigor
+2 Void Mirror
+1 Tamiyo's Safekeeping
+1 Haywire Mite
+3 Soulless Jailer

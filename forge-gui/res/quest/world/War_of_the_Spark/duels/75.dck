@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=SantaMuerte
+Title=SantaMuerte
+Icon=SantaMuerte.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Alex_Winter_-_Infect_(Modern,_#796307).dck
+Deck Type=constructed
+
+[Main]
+1 Dryad Arbor
+3 Street Wraith
+4 Noble Hierarch
+4 Glistener Elf
+4 Blighted Agent
+4 Vines of Vastwood
+4 Mutagenic Growth
+4 Might of Old Krosa
+2 Groundswell
+1 Dismember
+4 Blossoming Defense
+3 Become Immense
+2 Distortion Strike
+1 Contentious Plan
+2 Wooded Foothills
+2 Windswept Heath
+2 Verdant Catacombs
+2 Pendelhaven
+3 Misty Rainforest
+4 Inkmoth Nexus
+2 Forest
+2 Breeding Pool
+[Sideboard]
+1 Surgical Extraction
+2 Spellskite
+2 Spell Pierce
+2 Shapers' Sanctuary
+2 Relic of Progenitus
+1 Nature's Claim
+1 Echoing Truth
+2 Dissenter's Deliverance
+1 Dispel
+1 Dismember

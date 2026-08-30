@@ -1,0 +1,9 @@
+Name:Spider-Rex, Daring Dino
+Variant:UniversesWithin:FlavorName:Chizak, Apex Arachnosaur
+ManaCost:4 G G
+Types:Legendary Creature Spider Dinosaur Hero
+PT:6/6
+K:Reach
+K:Trample
+K:Ward:2
+Oracle:Reach, trample\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)

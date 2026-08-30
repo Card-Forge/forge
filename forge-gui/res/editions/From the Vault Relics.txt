@@ -1,9 +1,9 @@
 [metadata]
-Code=FVR
+Code=V10
+Code2=FVR
 Date=2010-08-27
 Name=From the Vault: Relics
 Type=Collector_Edition
-Alias=V10
 ScryfallCode=V10
 
 [cards]
@@ -22,6 +22,3 @@ ScryfallCode=V10
 13 M Sundering Titan @Jim Murray
 14 M Sword of Body and Mind @Chris Rahn
 15 M Zuran Orb @Ryan Pancoast
-
-[tokens]
-g_2_2_wolf

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Radioactive Man
+Title=Radioactive Man
+Icon=Radioactive Man.jpg
+Difficulty=Medium
+Description=Innistrad/Standard_Roanoke_Tournament/Tim_Furrow_-_G-W_Tokens_(Standard,_#20330).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+2 Geist-Honored Monk
+4 Hero of Bladehold
+3 Llanowar Elves
+4 Mentor of the Meek
+2 Mikaeus, the Lunarch
+4 Mirran Crusader
+2 Overrun
+3 Elspeth Tirel
+4 Garruk Relentless
+9 Forest
+4 Gavony Township
+3 Plains
+4 Razorverge Thicket
+4 Sunpetal Grove
+[Sideboard]
+1 Beast Within
+4 Creeping Corrosion
+1 Fresh Meat
+2 Melira, Sylvok Outcast
+4 Oblivion Ring
+3 Phyrexian Revoker

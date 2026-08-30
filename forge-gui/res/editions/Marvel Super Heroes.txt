@@ -1,0 +1,689 @@
+[metadata]
+Code=MSH
+Date=2026-06-26
+Name=Marvel Super Heroes
+Type=Expansion
+ScryfallCode=MSH
+#https://mtgscribe.com/2026/06/03/marvel-super-heroes-play-booster-fact-sheet/
+BoosterSlots=Common,Common-Scene,Common-SourceMaterial,Uncommon,UncommonScene,RareMythic,Land,Wildcard,WildcardFoil
+Booster=5 Common, 1 Common-Scene, 1 Common-SourceMaterial, 2 Uncommon, 1 UncommonScene, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("MSH cards")
+
+[Common-Scene]
+Base=Common:fromSheet("MSH cards")
+Replace=0.086F Common:fromSheet("MSH scene")
+
+[Common-SourceMaterial]
+Base=Common:fromSheet("MSH cards")
+Replace=0.04167F fromSheet("MAR source material")
+
+[Uncommon]
+Base=Uncommon:fromSheet("MSH cards")
+
+[UncommonScene]
+Base=Uncommon:fromSheet("MSH cards")
+Replace=0.12F Uncommon:fromSheet("MSH scene")
+
+[RareMythic]
+Base=Rare:fromSheet("MSH cards")
+Replace=.166F Mythic:fromSheet("MSH cards")
+Replace=.01F Rare:fromSheet("MSH scene")
+Replace=.008F Mythic:fromSheet("MSH scene")
+Replace=0.024F Rare:fromSheet("MSH logo")
+Replace=0.007F Mythic:fromSheet("MSH logo")
+Replace=0.019F Rare:fromSheet("MSH panel")
+Replace=0.005F Mythic:fromSheet("MSH panel")
+
+[Wildcard]
+Base=Uncommon:fromSheet("MSH cards")
+Replace=0.124F Common:fromSheet("MSH cards")
+Replace=0.168F Rare:fromSheet("MSH cards")
+Replace=0.021F Mythic:fromSheet("MSH cards")
+Replace=0.00282F Common:fromSheet("MSH scene")
+Replace=0.027F Uncommon:fromSheet("MSH scene")
+Replace=0.001125F Rare:fromSheet("MSH scene")
+Replace=0.001055F Mythic:fromSheet("MSH scene")
+Replace=0.002113F Rare:fromSheet("MSH logo")
+Replace=0.000915F Mythic:fromSheet("MSH logo")
+Replace=0.001549F Rare:fromSheet("MSH panel")
+Replace=0.000423F Mythic:fromSheet("MSH panel")
+Replace=0.01F Rare:fromSheet("MSH borderless land")
+
+[WildcardFoil]
+Base=Common:fromSheet("MSH cards")
+Replace=0.296F Uncommon:fromSheet("MSH cards")
+Replace=0.059F Rare:fromSheet("MSH cards")
+Replace=0.012F Mythic:fromSheet("MSH cards")
+Replace=0.00396F Common:fromSheet("MSH scene")
+Replace=0.012F Uncommon:fromSheet("MSH scene")
+Replace=0.002286F Rare:fromSheet("MSH scene")
+Replace=0.002143F Mythic:fromSheet("MSH scene")
+Replace=0.004268F Rare:fromSheet("MSH logo")
+Replace=0.001849F Mythic:fromSheet("MSH logo")
+Replace=0.003130F Rare:fromSheet("MSH panel")
+Replace=0.000854F Mythic:fromSheet("MSH panel")
+Replace=0.003512F Rare:fromSheet("MSH borderless land")
+
+[Land]
+Base=BasicLand:!fromSheet("MSH basic frame"):!fromSheet("MSH city calm"):!fromSheet("MSH city chaos")
+Replace=.1F BasicLand:!fromSheet("MSH basic frame"):!fromSheet("MSH city calm"):!fromSheet("MSH city chaos")+
+Replace=.2F BasicLand:fromSheet("MSH basic frame")
+Replace=.05F BasicLand:fromSheet("MSH basic frame")+
+Replace=.1F fromSheet("MSH city calm")
+Replace=.025F fromSheet("MSH city calm")+
+Replace=.1F fromSheet("MSH city chaos")
+Replace=.025F fromSheet("MSH city chaos")+
+
+[cards]
+1 U Agent 13, Sharon Carter @Michael MacRae
+2 U Agent Maria Hill @Jake Murray
+3 C Agent of Atlas @Michael Machira
+4 R Agent Phil Coulson @Marc Aspinall
+5 C Agents of S.H.I.E.L.D. @Borja Pindado
+6 M Avengers Assemble! @Alex Horley-Orlandelli
+7 C Borough Backup @Gal Or
+8 C Brave Brawler @Lee Woo-chul
+9 M Captain America, Super-Soldier @Anna Podedworna
+10 R Captain America, Wings of Freedom @Dan Dos Santos
+11 M Captain Marvel, Earth's Protector @Victor Adame Minguez
+12 U Captain Mar-Vell, Space-Born @Gintas Galvanauskas
+13 U Colleen Wing, Street Samurai @Jurijus Chitrovas
+14 C Crowd of True Believers @Michele Giorgi
+15 C Helicarrier Strike @Maxim Ruabtsev
+16 C Hero in Training @Taurin Clarke
+17 U Invisible Woman, Sue Storm @Paolo Rivera
+18 M Jennifer Walters @Taurin Clarke
+19 C Kree Commandos @Aaron J. Riley
+20 U Luke Cage, Power Man @Aniekan Udofia
+21 M The Mind Stone @Volkan Baǵa
+22 U Mockingbird, Ace Agent @Sveta Pikul
+23 M Monica Rambeau @Xabi Gaztelua & Marta Nael
+24 C Murdock's Crusade @Gal Or
+25 R Nick Fury, Agent of S.H.I.E.L.D. @Marco Turini
+26 U Night Nurse, Healer of Heroes @Gal Or
+27 U Okoye, Dora Milaje Leader @L.A. Draws
+28 R Origin of the Avengers @Serena Malyon
+29 C Panther Pounce @Le Vuong
+30 U Patriot, Shield Wielder @Vlad Petruchik
+31 U Political Triumph @Monztre
+32 U Quake, Agent of S.H.I.E.L.D. @Solan
+33 C Raft Security Officer @Bartek Fedyczak
+34 U Red Guardian, Super-Soldier @Lee Woo-chul
+35 R The Sentry, Golden Guardian @Alexander Skripnikov
+36 C S.H.I.E.L.D. Spy Kit @Bachzim
+37 U Super Villain Lockup @Jurijus Chitrovas
+38 R Super-Soldier Serum @Rafater
+39 C Take Up the Shield @Greg Staples
+40 C Wakandan Drone Flock @Sean Vo
+41 C Web Up @Nathaniel Himawan
+42 U White Widow, Free Agent @Julia Vasilyeva
+43 C Aerial Doombot @Michael MacRae
+44 C A.I.M. Scientists @Bartek Fedyczak
+45 C Atlantean Cavalry @Eglė Mosakaitė
+46 C Atlantis Attacks @Alexander Skripnikov
+47 U Attuma, Atlantean Warlord @Nanna Marie Steffensen
+48 C Bold Biochemist @Marco Turini
+49 M Bruce Banner @Tommy Arnold
+50 C Depower @Nathaniel Himawan
+51 U Echo, Perceptive Prodigy @Jurijus Chitrovas
+52 U Falcon, Winged Wonder @Vilhelmas Banys
+53 U Falcon's Wing Harness @David Álvarez
+54 C Frozen in Ice @Ioannis Fiore
+55 C Futurist Forge @Arthur Yuan
+56 C Giant-Sized Flying Ant @Zoltan Boros
+57 C Hydraulic Helper @Kevin Glint
+58 C I Am Iron Man @Filipe Pagliuso
+59 U Iron Lad, Diverging Destiny @Erikas Perl
+60 R Ironheart, Clever Champion @Julia Vasilyeva
+61 U Justice, Vance Astrovik @Berto Martinez
+62 M Kang the Conqueror @Peter Scanlan
+63 U Kid Loki @Mintautas Šukys
+64 R Leader, Super-Genius @Anthony Devine
+65 R Loki, God of Mischief @Vilhelmas Banys
+66 U Mister Fantastic, Reed Richards @Rimas Valeikis
+67 R Ms. Marvel, Kamala Khan @Smirtouille
+68 M Multiversal Incursion @Lordigan
+69 M Namor the Sub-Mariner @Chris Rallis
+70 U Pym Particles @Eli Minaya
+71 U Rewrite History @Allen Douglas
+72 R Secret Invasion @Nino Is
+73 C S.H.I.E.L.D. Deployment Drone @Paulius Daščioras
+74 R S.H.I.E.L.D. Flying Car @Paulius Daščioras
+75 U Shuri, Wakandan Inventor @Wayne Wu
+76 U Stature, Size Shifter @Mintautas Šukys
+77 U Super Intelligence @Michele Giorgi
+78 C Super Suit @Smirtouille
+79 U Thirst for Knowledge @Greg Smallwood
+80 M Tony Stark @Alexander Lozano
+81 C Trickster's Stratagem @David Palumbo
+82 C We Say Thee Nay! @Mateus Manhanini
+83 U Wiccan, Rising Magician @Josu Hernaiz
+84 R The Wondrous Wasp @Gal Or
+85 C Agents of HYDRA @Wero Gallo
+86 U Arnim Zola, Bio-Fanatic @Immanuela Crovius
+87 R Baron Helmut Zemo @Wero Gallo
+88 U Baron Strucker, HYDRA Overlord @InHyuk Lee
+89 M Black Widow, Super Spy @Dan Brereton
+90 R Construct a Cosmic Cube @Eugene Maslovski
+91 U Crossbones, Malicious Mercenary @Kevin Sidharta
+92 C Cruel Alliance @Vilhelmas Banys
+93 U Dark Deed @Lixin Yin
+94 C Decoy Ploy @Le Vuong
+95 M Doctor Doom @David Palumbo
+96 R Doom Reigns Supreme @Alexander Gering
+97 R Elektra, Daughter of the Hand @Bastien L. Deharme
+98 U Grim Reaper, Lethal Legionnaire @Lie Setiawan
+99 C Hour of Defeat @Jake Murray
+100 C HYDRA Infiltration @Eli Minaya
+101 C HYDRA Troopers @Zoltan Boros
+102 C Kingpin's Enforcers @Kevin Sidharta
+103 U Klaw, Sonic Subjugator @Andreia Ugrai
+104 U Madame Masque @Javier Charro
+105 U The Masters of Evil @Bastien L. Deharme
+106 M M.O.D.O.K. @Simon Dominic
+107 U Moonstone, Harsh Mistress @Grace Zhu
+108 C Ninja of the Hand @InHyuk Lee
+109 C Project Deathlok Soldier @InHyuk Lee
+110 C Red Room Recruit @Borja Pindado
+111 U Robot Domination @Borja Pindado
+112 U Ronin, Shadow Stalker @Lie Setiawan
+113 C Roxxon Brutes @Zoltan Boros
+114 C Stolen Stark Tech @Lixin Yin
+115 R Super-Skrull @Zoltan Boros
+116 U Swordsman, Sharp Scoundrel @Lordigan
+117 R Thunderbolts Conspiracy @Lucio Parrillo
+118 U Too Evil to Stay Dead @Ioannis Fiore
+119 C Unliving Legionnaire @Björn Barends
+120 C Visions of Villainy @Pavel Kolomeyets
+121 U Whiplash, Vengeful Engineer @Alexander Gering
+122 C Widow's Bite @Borja Pindado
+123 U Yellowjacket, Heartless Marauder @Alexander Skripnikov
+124 R Avengers Disassembled @David Szabo
+125 C Blazing Crescendo @Pauline Voss
+126 C Crimson Operative @Kevin Glint
+127 U Death to Our Enemies @Lee Woo-chul
+128 U Evil's Thrall @Mintautas Šukys
+129 R Fin Fang Foom @Filipe Pagliuso
+130 R Hawkeye, Master Marksman @Bachzim
+131 U Hawkeye, Young Avenger @Darius Zablockis
+132 C Hawkeye's Bow @Marc Aspinall
+133 U Hex Magic @Kevin Glint
+134 C Hire a Crew @Lordigan
+135 C HULK SMASH! @Chris Rahn
+136 U Human Torch, Johnny Storm @Alexander Skripnikov
+137 C HYDRA Assault Robot @Wero Gallo
+138 U Iron Fist, Living Weapon @Erikas Perl
+139 U Jessica Jones, Private Eye @Julia Vasilyeva
+140 C K'un-Lun Warrior @Smirtouille
+141 C Kree Sentinel @Slawomir Maniak
+142 C Lightning Strike @Toni Infante
+143 U Loki Laufeyson @Julia Vasilyeva
+144 C Machinesmith Automaton @Wero Gallo
+145 U Misty Knight, Hero for Hire @Eglė Mosakaitė
+146 M Mjölnir, Hammer of Thor @Wayne Reynolds
+147 U Photon Blast Barrage @Immanuela Crovius
+148 R Quicksilver, Brash Blur @Michael MacRae
+149 U Red Hulk @Vilhelmas Banys
+150 C Repulsor Blast @Peter Scanlan
+151 R The Scarlet Witch @Magali Villeneuve
+152 U Speed, Young Avenger @Tyler Walpole
+153 C Stark Industries Executive @Xabi Gaztelua
+154 C Super Speed @Nereida
+155 U Team Tactics @Jake Murray
+156 M Thor, God of Thunder @Jesper Ejsing
+157 U Truck Toss @Alexander Skripnikov
+158 C Vision of Love @Lixin Yin
+159 C Volcanic Villain @Nino Is
+160 U Wonder Man, Hollywood Hero @Nanna Marie Steffensen
+161 C Ant-Man's Army @Bachzim
+162 C Call Damage Control @Slawomir Maniak
+163 U Claim the Kingdom @Lius Lasahido
+164 U Doc Samson, Super Psychiatrist @Ryan Pancoast
+165 M Earth's Mightiest Heroes @Steve Morris
+166 R Epic Fight @Wei Guan
+167 C Giant Growth @Andreia Ugrai
+168 C Go Nuts! @Ignatius Budi
+169 C Guerrilla Gorilla @Michele Giorgi
+170 U Hellcat, Undying Vigilante @Solan
+171 U Hercules, Prince of Power @David Talaski
+172 R Heroic Feast @Javier Charro
+173 U Hulkling, Burgeoning Bruiser @Wero Gallo
+174 U Ka-Zar of the Savage Land @Paolo Parente
+175 C Knight of Wundagore @Rafater
+176 U Mister Hyde, Monster Within @Svetlin Velinov
+177 R Mole Man, Moloid Master @Michele Giorgi
+178 C Pet Avengers @Leesha Hannigan
+179 C Powerful Broker @JB Casacop
+180 U Punishing Punch @Bachzim
+181 C Rapid Rescue @Raymond Bonilla
+182 U Reptil, Dinomorpher @Paolo Parente
+183 C Restorative Technique @Kevin Glint
+184 U Rick Jones, Destined Sidekick @Justyna Dura
+185 C Savage Land Dinosaur @Josu Hernaiz
+186 C Serpent Specialist @Daniel Landerman
+187 M Shang-Chi, Master of Kung Fu @Lee Woo-chul
+188 U She-Hulk, Jade Defender @Tyler Walpole
+189 C Super Strength @Tyler Walpole
+190 U The Thing, Ben Grimm @Gintas Galvanauskas
+191 U Tigra, Feline Fury @Ben Harvey
+192 U Training Regimen @Marco Turini
+193 R The Unbeatable Squirrel Girl @Kim Dingwall
+194 C Undercover Skrull @Svetlin Velinov
+195 C Wakandan Royal Guard @Randy Gallegos
+196 U White Tiger, Ava Ayala @Jennifer Hrabota Lesser
+197 R World War Hulk @Serena Malyon
+198 U Abomination, Terrifying Titan @Piotr Dura
+199 R Absorbing Man @Nathaniel Himawan
+200 R Alien Invasion @Björn Barends
+201 U Ant-Man, Colony Commander @Nathaniel Himawan
+202 R Ares, God of War @Fesbra
+203 R Armor Wars @Serena Malyon
+204 R The Astonishing Ant-Man @Randy Gallegos
+205 R Avengers: Under Siege @Serena Malyon
+206 U Beast, Erudite Aerialist @Bachzim
+207 U Black Panther, Vanguard @Aniekan Udofia
+208 U Black Widow, Double Agent @Michael MacRae
+209 U Bullseye, Death Dealer @Bartek Fedyczak
+210 U Captain America, Living Legend @Smirtouille
+211 R Cloak and Dagger, Entwined @Rimas Valeikis
+212 M The Coming of Galactus @Serena Malyon
+213 R Daredevil, Man Without Fear @Dan Brereton
+214 U Ghost, Spectral Saboteur @Lucio Parrillo
+215 U Hulk, Gamma Goliath @Zezhou Chen
+216 U Iron Man, Master of Machines @John Tyler Christopher
+217 U Kang, Temporal Tyrant @David Szabo
+218 U Killmonger, Scourge of Wakanda @Sean Vo
+219 M King T'Challa @Aaron J. Riley & Eric Wilkerson
+220 R The Kingpin of Crime @Steve Morris
+221 U Madame Hydra @Pauline Voss
+222 R The Mighty Thor, Jane Foster @Victor Adame Minguez
+223 R Moon Girl and Devil Dinosaur @Zezhou Chen
+224 R The Ruinous Wrecking Crew @Kevin Sidharta
+225 R Scientist Supreme of A.I.M. @Gal Or
+226 R The Serpent Society @Rimas Valeikis
+227 U Speedball, New Warrior @Borja Pindado
+228 U Spider-Man, To the Rescue @Anna Podedworna
+229 U Spider-Woman, Secret Agent @Pauline Voss
+230 R Storm, Windrider @Immanuela Crovius
+231 R The Super Hero Civil War @Serena Malyon
+232 R Taskmaster, Mercenary Mimic @Riccardo Federici
+233 M Thanos, the Mad Titan @Björn Barends
+234 U Thor Odinson @Sean Vo
+235 U Titania, Rugged Rumbler @Taurin Clarke
+236 U U.S.Agent, John Walker @Julia Vasilyeva
+237 R Vision Quest @Eglė Mosakaitė
+238 U War Machine, Legacy of Iron @Carlos Dattoli
+239 R Winter Soldier, Icy Assassin @Riccardo Federici
+240 R Wolverine, Fierce Fighter @Dan Brereton
+241 R Worlds Within Worlds @Michael MacRae
+242 C A.I.M. Synthoids @Alexander Skripnikov
+243 R Arc Reactor @Maxim Ruabtsev
+244 R Captain America's Shield @Eglė Mosakaitė
+245 M Cosmic Cube @Justyna Dura
+246 C Dependable Quinjet @Oliver Wetter
+247 C H.E.R.B.I.E. Scout Unit @David Álvarez
+248 M Iron Man Armor @Javier Charro
+249 U S.H.I.E.L.D. Helicarrier @Arthur Yuan
+250 R Super-Adaptoid @John Tyler Christopher
+251 M The Ten Rings @Arthur Yuan
+252 M Ultron, Artificial Malevolence @Nino Is
+253 C Ultron Drone @Rafater
+254 C Vibranium Energy Daggers @Irvin Rodriguez
+255 R The Vision @Carissa Susilo
+256 U Viv Vision, Teen Synthezoid @Nereida
+257 L A.I.M. Labs @Lixin Yin
+258 L Asgardian Citadel @Paulius Daščioras
+259 L Avengers Hangar @Pablo Mendoza
+260 U Avengers Tower @Arthur Yuan
+261 U Baxter Building @Paulius Daščioras
+262 L Birnin Zana Plaza @Raymond Bonilla
+263 R Castle Doom @Nino Is
+264 R Dark Fortress @Arthur Yuan
+265 L Fisk Tower @Arthur Yuan
+266 R Gathering Place @Pablo Mendoza
+267 R Gleaming Bastion @Arthur Yuan
+268 L Hell's Kitchen @Shahab Alizadeh
+269 R Hidden Lair @Pavel Kolomeyets
+270 L Los Diablos Missile Base @Rockey Chen
+271 L Pym Technologies @John Tyler Christopher
+272 L Stark Industries @Leon Tukker
+273 L Subterranean Cavern @JB Casacop
+274 C Surveillance Room @Maxim Ruabtsev
+275 R Training Compound @Jonas De Ro
+276 U Villainous Hideout @Paulius Daščioras
+277 L Plains @Marc Aspinall
+278 L Plains @Sylvia Liu
+279 L Island @Marc Aspinall
+280 L Island @Sylvia Liu
+281 L Swamp @Marc Aspinall
+282 L Swamp @Sylvia Liu
+283 L Mountain @Marc Aspinall
+284 L Mountain @Sylvia Liu
+285 L Forest @Marc Aspinall
+286 L Forest @Sylvia Liu
+287 L Plains @Domenico Cava
+288 L Plains @Jurijus Chitrovas
+289 L Island @Raymond Bonilla
+290 L Island @Rytis Sabaliauskas
+291 L Swamp @Eugene Maslovski
+292 L Swamp @Oliver Wetter
+293 L Mountain @Rockey Chen
+294 L Mountain @Pace Wilder
+295 L Forest @Domenico Cava
+296 L Forest @Rytis Sabaliauskas
+
+[borderless]
+297 M Avengers Assemble! @Steve Ellis
+298 R Origin of the Avengers @Tyler Walpole
+299 R Super-Soldier Serum @Tyler Walpole
+300 M Multiversal Incursion @Jim Cheung & Jay David Ramos
+301 R Secret Invasion @Veronica Fish
+302 R Avengers Disassembled @Roberta Ingranata
+303 M Mjölnir, Hammer of Thor @Jim Cheung & Jay David Ramos
+304 R World War Hulk @Steve Ellis
+305 R Armor Wars @Andrew Griffith
+306 R Avengers: Under Siege @Andrew Griffith
+307 M The Coming of Galactus @Veronica Fish
+308 R The Super Hero Civil War @Roberta Ingranata
+309 R Vision Quest @Roberta Ingranata
+310 R Arc Reactor @Steve Ellis
+311 R Captain America's Shield @Jim Cheung & Jay David Ramos
+312 M Cosmic Cube @Jim Cheung & Jay David Ramos
+313 M The Ten Rings @Jim Cheung & Jay David Ramos
+314 R Nick Fury, Agent of S.H.I.E.L.D. @Annie Wu
+315 U Baron Strucker, HYDRA Overlord @Annie Wu
+316 M Captain America, Super-Soldier @Annie Wu
+317 R Captain America's Shield @Annie Wu
+318 U Madame Hydra @Annie Wu
+319 U Arnim Zola, Bio-Fanatic @Annie Wu
+320 U Mister Fantastic, Reed Richards @Leinil Francis Yu & Sunny Gho
+321 U Human Torch, Johnny Storm @Leinil Francis Yu & Sunny Gho
+322 U The Thing, Ben Grimm @Leinil Francis Yu & Sunny Gho
+323 U Invisible Woman, Sue Storm @Leinil Francis Yu & Sunny Gho
+324 R Daredevil, Man Without Fear @Kev Walker
+325 U Bullseye, Death Dealer @Kev Walker
+326 R Elektra, Daughter of the Hand @Kev Walker
+327 R The Kingpin of Crime @Kev Walker
+328 M Jennifer Walters @Chris Bachalo & Adi Granov
+329 U Red Hulk @Adi Granov
+330 R Leader, Super-Genius @Adi Granov
+331 M Bruce Banner @Chris Bachalo & Adi Granov
+332 C HULK SMASH! @Adi Granov
+333 U Abomination, Terrifying Titan @Adi Granov
+334 U Avengers Tower @Johan Grenier
+335 U Spider-Man, To the Rescue @Johan Grenier
+336 M Doctor Doom @Johan Grenier
+337 M Cosmic Cube @Johan Grenier
+338 M Thor, God of Thunder @Johan Grenier
+339 M Mjölnir, Hammer of Thor @Johan Grenier
+340 C Blazing Crescendo @Johan Grenier
+341 M Avengers Assemble! @Johan Grenier
+342 M Captain Marvel, Earth's Protector @Johan Grenier
+343 R Loki, God of Mischief @Johan Grenier
+344 M Ultron, Artificial Malevolence @Johan Grenier
+345 M Monica Rambeau @Chris Bachalo & Johan Grenier
+346 M King T'Challa @Chris Bachalo & Johan Grenier
+347 M Black Widow, Super Spy @Johan Grenier
+348 C Take Up the Shield @Johan Grenier
+349 M Earth's Mightiest Heroes @Johan Grenier
+350 M Tony Stark @Chris Bachalo & Johan Grenier
+351 R Epic Fight @Johan Grenier
+352 M Captain America, Super-Soldier @Jim Cheung & Jay David Ramos
+353 R Captain America, Wings of Freedom @Elena Casagrande
+354 M Captain Marvel, Earth's Protector @Swayart
+355 M Jennifer Walters @Trevor Hairsine
+356 M Monica Rambeau @Trevor Hairsine
+357 R Nick Fury, Agent of S.H.I.E.L.D. @Leinil Francis Yu & Sunny Gho
+358 R The Sentry, Golden Guardian @Todd Nauck
+359 M Bruce Banner @Jim Cheung & Jay David Ramos
+360 R Ironheart, Clever Champion @Kael Ngu
+361 R Ms. Marvel, Kamala Khan @Roberta Ingranata
+362 M Namor the Sub-Mariner @Todd Nauck
+363 M Tony Stark @Jim Cheung & Jay David Ramos
+364 M Black Widow, Super Spy @Todd Nauck
+365 M Doctor Doom @Leonardo Vincent (Levinky)
+366 R Elektra, Daughter of the Hand @Leinil Francis Yu & Sunny Gho
+367 R Hawkeye, Master Marksman @Todd Nauck
+368 R The Scarlet Witch @Swayart
+369 M Thor, God of Thunder @Leinil Francis Yu & Sunny Gho
+370 M Shang-Chi, Master of Kung Fu @Leinil Francis Yu & Sunny Gho
+371 R The Unbeatable Squirrel Girl @Swayart
+372 R Daredevil, Man Without Fear @Trevor Hairsine
+373 M King T'Challa @John Tyler Christopher
+374 R The Kingpin of Crime @Trevor Hairsine
+375 R Storm, Windrider @Terry Dodson
+376 M Thanos, the Mad Titan @Trevor Hairsine
+377 R Winter Soldier, Icy Assassin @Todd Nauck
+378 R Wolverine, Fierce Fighter @Todd Nauck
+379 R The Vision @Trevor Hairsine
+380 R Dark Fortress @David Álvarez
+381 R Gathering Place @David Álvarez
+382 R Gleaming Bastion @David Álvarez
+383 R Hidden Lair @David Álvarez
+384 R Training Compound @David Álvarez
+385 M The Mind Stone @Madeline Boni
+386 M The Mind Stone @Leinil Francis Yu & Sunny Gho
+387 M Captain America, Super-Soldier @Jack Kirby & John Romita Sr.
+388 M Jennifer Walters @John Buscema & Chic Stone
+389 R Nick Fury, Agent of S.H.I.E.L.D. @Marie Severin
+390 M Bruce Banner @Jack Kirby & Paul Reinman
+391 M Namor the Sub-Mariner @John Buscema & Sol Brodsky
+392 M Tony Stark @Johnny Craig
+393 M Black Widow, Super Spy @Emanuela Lupacchino & Neeraj Menon
+394 M Doctor Doom @Larry Lieber & Vince Colletta
+395 R Elektra, Daughter of the Hand @Mike Deodato Jr.
+396 M Shang-Chi, Master of Kung Fu @Jim Cheung & Laura Martin
+397 R The Astonishing Ant-Man @Bob Layton
+398 R Daredevil, Man Without Fear @Jack Kirby
+399 M King T'Challa @Jack Kirby
+400 M Thanos, the Mad Titan @Jen Bartel
+401 M Ultron, Artificial Malevolence @Sal Buscema & Sam Grainger
+
+[extended art]
+402 R Agent Phil Coulson @Marc Aspinall
+403 M Kang the Conqueror @Peter Scanlan
+404 R S.H.I.E.L.D. Flying Car @Paulius Daščioras
+405 R Baron Helmut Zemo @Wero Gallo
+406 R Construct a Cosmic Cube @Eugene Maslovski
+407 R Doom Reigns Supreme @Alexander Gering
+408 M M.O.D.O.K. @Simon Dominic
+409 R Super-Skrull @Zoltan Boros
+410 R Thunderbolts Conspiracy @Lucio Parrillo
+411 R Fin Fang Foom @Filipe Pagliuso
+412 R Quicksilver, Brash Blur @Michael MacRae
+413 M Earth's Mightiest Heroes @Steve Morris
+414 R Heroic Feast @Javier Charro
+415 R Mole Man, Moloid Master @Michele Giorgi
+416 R Absorbing Man @Nathaniel Himawan
+417 R Alien Invasion @Björn Barends
+418 R Ares, God of War @Fesbra
+419 R Cloak and Dagger, Entwined @Rimas Valeikis
+420 R The Mighty Thor, Jane Foster @Victor Adame Minguez
+421 R Moon Girl and Devil Dinosaur @Zezhou Chen
+422 R The Ruinous Wrecking Crew @Kevin Sidharta
+423 R Scientist Supreme of A.I.M. @Gal Or
+424 R The Serpent Society @Rimas Valeikis
+425 R Taskmaster, Mercenary Mimic @Riccardo Federici
+426 R Worlds Within Worlds @Michael MacRae
+427 M Iron Man Armor @Javier Charro
+428 R Super-Adaptoid @John Tyler Christopher
+429 R Castle Doom @Nino Is
+431 R The Scarlet Witch @Julia Vasilyeva
+432 R Daredevil, Man Without Fear @Eric Deschamps
+433 L Plains @Marc Aspinall
+434 L Plains @Sylvia Liu
+435 L Island @Marc Aspinall
+436 L Island @Sylvia Liu
+437 L Swamp @Marc Aspinall
+438 L Swamp @Sylvia Liu
+439 L Mountain @Marc Aspinall
+440 L Mountain @Sylvia Liu
+441 L Forest @Marc Aspinall
+442 L Forest @Sylvia Liu
+443 U Captain Mar-Vell, Space-Born @Gintas Galvanauskas
+444 U Patriot, Shield Wielder @Vlad Petruchik
+445 U Mister Fantastic, Reed Richards @Rimas Valeikis
+446 U Baron Strucker, HYDRA Overlord @InHyuk Lee
+447 U Moonstone, Harsh Mistress @Grace Zhu
+448 U Speed, Young Avenger @Tyler Walpole
+449 U Captain America, Living Legend @Smirtouille
+450 U Kang, Temporal Tyrant @David Szabo
+451 U Madame Hydra @Pauline Voss
+452 U Avengers Tower @Arthur Yuan
+453 U Baxter Building @Paulius Daščioras
+454 U Villainous Hideout @Paulius Daščioras
+
+[basic frame]
+1 Plains|MSH|[287]
+1 Plains|MSH|[288]
+1 Island|MSH|[289]
+1 Island|MSH|[290]
+1 Swamp|MSH|[291]
+1 Swamp|MSH|[292]
+1 Mountain|MSH|[293]
+1 Mountain|MSH|[294]
+1 Forest|MSH|[295]
+1 Forest|MSH|[296]
+
+[city calm]
+1 Plains|MSH|[277]
+1 Island|MSH|[279]
+1 Swamp|MSH|[281]
+1 Mountain|MSH|[283]
+1 Forest|MSH|[285]
+
+[city chaos]
+1 Plains|MSH|[278]
+1 Island|MSH|[280]
+1 Swamp|MSH|[282]
+1 Mountain|MSH|[284]
+1 Forest|MSH|[286]
+
+[borderless land]
+1 Dark Fortress|MSH|[380]
+1 Gathering Place|MSH|[381]
+1 Gleaming Bastion|MSH|[382]
+1 Hidden Lair|MSH|[383]
+1 Training Compound|MSH|[384]
+
+[panel]
+1 Avengers Assemble!|MSH|[297]
+1 Origin of the Avengers|MSH|[298]
+1 Super-Soldier Serum|MSH|[299]
+1 Multiversal Incursion|MSH|[300]
+1 Secret Invasion|MSH|[301]
+1 Avengers Disassembled|MSH|[302]
+1 Mjölnir, Hammer of Thor|MSH|[303]
+1 World War Hulk|MSH|[304]
+1 Armor Wars|MSH|[305]
+1 Avengers: Under Siege|MSH|[306]
+1 The Coming of Galactus|MSH|[307]
+1 The Super Hero Civil War|MSH|[308]
+1 Vision Quest|MSH|[309]
+1 Arc Reactor|MSH|[310]
+1 Captain America's Shield|MSH|[311]
+1 Cosmic Cube|MSH|[312]
+1 The Ten Rings|MSH|[313]
+
+[scene]
+1 Nick Fury, Agent of S.H.I.E.L.D.|MSH|[314}
+1 Baron Strucker, HYDRA Overlord|MSH|[315]
+1 Captain America, Super-Soldier|MSH|[316]
+1 Captain America's Shield|MSH|[317]
+1 Madame Hydra|MSH|[318]
+1 Arnim Zola, Bio-Fanatic|MSH|[319]
+1 Mister Fantastic, Reed Richards|MSH|[320]
+1 Human Torch, Johnny Storm|MSH|[321]
+1 The Thing, Ben Grimm|MSH|[322]
+1 Invisible Woman, Sue Storm|MSH|[323]
+1 Daredevil, Man Without Fear|MSH|[324]
+1 Bullseye, Death Dealer|MSH|[325]
+1 Elektra, Daughter of the Hand|MSH|[326]
+1 The Kingpin of Crime|MSH|[327]
+1 Jennifer Walters|MSH|[328]
+1 Red Hulk|MSH|[329]
+1 Leader, Super-Genius|MSH|[330]
+1 Bruce Banner|MSH|[331]
+1 HULK SMASH!|MSH|[332]
+1 Abomination, Terrifying Titan|MSH|[333]
+1 Avengers Tower|MSH|[334]
+1 Spider-Man, To the Rescue|MSH|[335]
+1 Doctor Doom|MSH|[336]
+1 Cosmic Cube|MSH|[337]
+1 Thor, God of Thunder|MSH|[338]
+1 Mjölnir, Hammer of Thor|MSH|[339]
+1 Blazing Crescendo|MSH|[340]
+1 Avengers Assemble!|MSH|[341]
+1 Captain Marvel, Earth's Protector|MSH|[342]
+1 Loki, God of Mischief|MSH|[343]
+1 Ultron, Artificial Malevolence|MSH|[344]
+1 Monica Rambeau|MSH|[345]
+1 King T'Challa|MSH|[346]
+1 Black Widow, Super Spy|MSH|[347]
+1 Take Up the Shield|MSH|[348]
+1 Earth's Mightiest Heroes|MSH|[349]
+1 Tony Stark|MSH|[350]
+1 Epic Fight|MSH|[351]
+
+[logo]
+1 Captain America, Super-Soldier|MSH|[352]
+1 Captain America, Wings of Freedom|MSH|[353]
+1 Captain Marvel, Earth's Protector|MSH|[354]
+1 Jennifer Walters|MSH|[355]
+1 Monica Rambeau|MSH|[356]
+1 Nick Fury, Agent of S.H.I.E.L.D.|MSH|[357]
+1 The Sentry, Golden Guardian|MSH|[358]
+1 Bruce Banner|MSH|[359]
+1 Ironheart, Clever Champion|MSH|[360]
+1 Ms. Marvel, Kamala Khan|MSH|[361]
+1 Namor the Sub-Mariner|MSH|[362]
+1 Tony Stark|MSH|[363]
+1 Black Widow, Super Spy|MSH|[364]
+1 Doctor Doom|MSH|[365]
+1 Elektra, Daughter of the Hand|MSH|[366]
+1 Hawkeye, Master Marksman|MSH|[367]
+1 The Scarlet Witch|MSH|[368]
+1 Thor, God of Thunder|MSH|[369]
+1 Shang-Chi, Master of Kung Fu|MSH|[370]
+1 The Unbeatable Squirrel Girl|MSH|[371]
+1 Daredevil, Man Without Fear|MSH|[372]
+1 King T'Challa|MSH|[373]
+1 The Kingpin of Crime|MSH|[374]
+1 Storm, Windrider|MSH|[375]
+1 Thanos, the Mad Titan|MSH|[376]
+1 Winter Soldier, Icy Assassin|MSH|[377]
+1 Wolverine, Fierce Fighter|MSH|[378]
+1 The Vision|MSH|[379]
+
+[tokens]
+1 c_0_4_wall_defender @Thanh Tuấn
+2 w_3_2_hero_vigilance @Lixin Yin
+3 w_1_1_soldier @Nathaniel Himawan
+4 w_1_1_soldier @Bachzim
+5 u_6_5_leviathan_hexproof @Svetlin Velinov
+6 u_1_1_merfolk @Eilene Cherie
+7 redwing @Leesha Hannigan
+8 galactus @Justyna Dura
+9 b_2_1_villain_menace @Thanh Tuấn
+10 the_void @Lixin Yin
+11 r_1_1_alien_haste_must_attack @Michele Giorgi
+12 g_1_1_insect @Milivoj Ćeran
+13 moloid @Genel Jumalon
+14 g_1_1_squirrel @Brooklyn Smith
+15 the_tiger_god @Patrick Gañas
+16 zabu @Rhonda Libbey
+17 c_a_clue_draw @Rafater
+18 doombot @L J Koh
+19 c_a_food_sac @Javier Charro
+20 c_2_2_a_robot_villain @L J Koh
+21 sturdy_shield @Svetlin Velinov
+22 c_a_treasure_sac @Rafater
+23 w_1_1_soldier @Bachzim
+24 u_1_1_merfolk @Eilene Cherie
+25 b_2_1_villain_menace @Thanh Tuấn
+26 c_2_2_a_robot_villain @L J Koh
+27 c_a_treasure_sac @Rafater

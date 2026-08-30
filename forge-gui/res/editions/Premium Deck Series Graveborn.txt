@@ -36,8 +36,3 @@ ScryfallCode=PD3
 28 L Swamp @James Paick
 29 L Swamp @Jung Park
 30 L Swamp @Alan Pollack
-
-[tokens]
-b_2_2_zombie
-g_3_3_elephant
-g_1_1_saproling

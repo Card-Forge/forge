@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Savra
+Title=Savra
+Icon=Savra.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Ahmed_Siddik_-_Mono-White_Death_&_Taxes_(Modern,_#1964929).dck
+Deck Type=constructed
+
+[Main]
+4 Solitude
+4 Stoneforge Mystic
+4 Leonin Arbiter
+4 Archon of Emeria
+4 Giver of Runes
+1 Lion Sash
+2 Serra Paragon
+3 Skyclave Apparition
+3 Flickerwisp
+4 Aether Vial
+1 Kaldra Compleat
+1 Sword of Fire and Ice
+4 Ephemerate
+2 Reprieve
+13 Plains
+4 Volatile Fault
+4 Ghost Quarter
+2 Eiganjo, Seat of the Empire
+[Sideboard]
+4 Sanctifier en-Vec
+3 Path to Exile
+1 Extraction Specialist
+2 Loran of the Third Path
+3 Rest in Peace
+2 Dawnbringer Cleric

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ga-Gorib
+Title=Ga-Gorib
+Icon=Ga-Gorib.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Kondou_Ryuuki_-_Boros_Convoke_(Modern,_#2373890).dck
+Deck Type=constructed
+
+[Main]
+4 Thraben Inspector
+4 Venerated Loxodon
+1 Giant Killer
+4 Voldaren Epicure
+4 Resolute Reinforcements
+4 Knight-Errant of Eos
+4 Imodane's Recruiter
+4 Warden of the Inner Sky
+4 Novice Inspector
+4 Gleeful Demolition
+2 Case of the Gateway Express
+1 Plains
+4 Inspiring Vantage
+2 Shefet Dunes
+3 Battlefield Forge
+4 Sacred Foundry
+4 Needleverge Pathway
+1 Den of the Bugbear
+1 Eiganjo, Seat of the Empire
+1 Sunbillow Verge
+[Sideboard]
+1 Rending Volley
+3 Rest in Peace
+1 Deafening Silence
+3 Portable Hole
+1 Invasion of Gobakhan
+2 Torch the Tower
+2 Get Lost
+2 Sheltered by Ghosts

@@ -17,5 +17,5 @@ Colors:white,black
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 1 | AddKeyword$ Lifelink | Description$ Creature tokens you control get +1/+0 and have lifelink.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a 1/1 white and black Spirit creature token with flying.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ wb_1_1_spirit_flying
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ wb_1_1_spirit_flying
 Oracle:Creature tokens you control get +1/+0 and have lifelink.\nAt the beginning of your end step, create a 1/1 white and black Spirit creature token with flying.

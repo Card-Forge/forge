@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Mr Smith
+Title=Mr Smith
+Icon=Mr Smith.jpg
+Difficulty=Hard
+Description=../Modern/Born_of_the_Gods/Magic-League_Modern_Trial_16-05-2014/Strid3r_-_Red_Deck_Wins_(Modern,_#74277).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Hellspark Elemental
+4 Spark Elemental
+4 Flames of the Blood Hand
+4 Lightning Bolt
+4 Searing Blaze
+4 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+20 Mountain
+[Sideboard]
+2 Combust
+2 Flamebreak
+1 Relic of Progenitus
+4 Satyr Firedancer
+3 Searing Blood
+3 Smash to Smithereens

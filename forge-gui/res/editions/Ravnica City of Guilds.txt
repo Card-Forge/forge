@@ -2,7 +2,6 @@
 Code=RAV
 Date=2005-10-07
 Name=Ravnica: City of Guilds
-Code2=RAV
 Type=Expansion
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
@@ -41,7 +40,7 @@ ScryfallCode=RAV
 26 C Nightguard Patrol @Dany Orizio
 27 U Oathsworn Giant @Daren Bader
 28 U Sandsower @Kev Walker
-29 C Screeching Griffin @Tim Hildebrandt
+29 C Screeching Griffin @Greg Hildebrandt
 30 U Seed Spark @Jeff Miracola
 31 U Suppression Field @John Avon
 32 R Three Dreams @Shishizaru
@@ -319,13 +318,3 @@ ScryfallCode=RAV
 304 L Forest @Christopher Moeller
 305 L Forest @Anthony S. Waters
 306 L Forest @Richard Wright
-
-[tokens]
-voja
-w_2_2_knight
-w_1_1_spirit_flying
-u_1_1_faerie_flying
-b_4_4_horror
-r_1_1_goblin
-g_3_3_centaur_pro_black
-g_1_1_saproling

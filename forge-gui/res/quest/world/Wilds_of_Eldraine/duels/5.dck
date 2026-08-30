@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Homer Simpson
+Title=Homer Simpson
+Icon=Homer Simpson.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Jgast52_-_Temur_Ramp_(Standard,_#1740192).dck
+Deck Type=constructed
+
+[Main]
+3 Agatha of the Vile Cauldron
+3 Bramble Familiar
+4 Gruff Triplets
+2 Horned Loch-Whale
+3 Troyan, Gutsy Explorer
+3 Rootrider Faun
+3 The Goose Mother
+2 Vorinclex
+2 Virtue of Knowledge
+2 Virtue of Courage
+3 Virtue of Strength
+3 Return from the Wilds
+2 Thunderous Debut
+2 Invasion of Zendikar
+2 Restless Vinestalk
+2 Shivan Reef
+2 Yavimaya Coast
+2 Dreamroot Cascade
+3 Stormcarved Coast
+3 Rockfall Vale
+3 Forest
+3 Island
+3 Mountain
+[Sideboard]

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Keisuke_Sato_-_WB_Aggro_(Standard,_#1740419).dck
+Deck Type=constructed
+
+[Main]
+4 Regal Bunnicorn
+2 Lord Skitter, Sewer King
+4 Devouring Sugarmaw
+4 Pollen-Shield Hare
+4 Go for the Throat
+4 Virtue of Loyalty
+2 Rite of Oblivion
+4 Wedding Announcement
+4 Three Blind Mice
+2 The Wandering Emperor
+1 Archangel Elspeth
+1 Swamp
+4 Caves of Koilos
+2 Llanowar Wastes
+3 Razorverge Thicket
+2 Overgrown Farmland
+1 Deathcap Glade
+4 Shattered Sanctum
+1 Eiganjo, Seat of the Empire
+1 Takenuma, Abandoned Mire
+2 Mirrex
+4 Restless Fortress
+[Sideboard]

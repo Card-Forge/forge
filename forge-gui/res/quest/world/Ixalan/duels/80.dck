@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Robot80
+Title=Robot80
+Icon=Piper.jpg
+Difficulty=Very Hard
+Description=Mono Black 
+Deck Type=constructed
+
+[Main]
+4 Bone Picker
+4 Dread Wanderer
+2 Gifted Aetherborn
+4 Night Market Lookout
+4 Ruin Raider
+4 Scrapheap Scrounger
+3 Vicious Conquistador
+1 Aethersphere Harvester
+4 Heart of Kiran
+4 Fatal Push
+3 Supernatural Stamina
+3 Walk the Plank
+4 Ifnir Deadlands
+16 Swamp
+[Sideboard]
+2 Aethersphere Harvester
+4 Duress
+2 Gifted Aetherborn
+2 Harsh Scrutiny
+1 Key to the City
+2 Lost Legacy
+1 Supernatural Stamina
+1 Walk the Plank

@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Anakin Skywalker
+Title=Anakin Skywalker
+Icon=Anakin Skywalker.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Aaron_Payne_-_Dimir_Control_(Standard,_#1083370).dck
+Deck Type=constructed
+
+[Main]
+4 Mazemind Tome
+1 Soul Shatter
+1 Hagra Mauling
+1 Cling to Dust
+1 Drown in the Loch
+2 Thassa's Intervention
+2 Negate
+2 Eliminate
+3 Essence Scatter
+3 Neutralize
+4 Heartless Act
+4 Jwari Disruption
+2 Bloodchief's Thirst
+4 Extinction Event
+2 Kiora Bests the Sea God
+3 Shark Typhoon
+3 Elspeth's Nightmare
+4 Omen of the Sea
+2 Ashiok, Nightmare Muse
+2 Ugin, the Spirit Dragon
+1 Castle Vantress
+2 Temple of Deceit
+2 Field of Ruin
+4 Clearwater Pathway
+4 Fabled Passage
+4 Crawling Barrens
+6 Swamp
+7 Island
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Erebos's Intervention
+1 Eliminate
+1 Mystical Dispute
+2 Soul Shatter
+2 Bloodchief's Thirst
+2 Negate
+2 Duress
+3 Covetous Urge

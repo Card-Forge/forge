@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.utils.Align;
 
@@ -37,14 +38,7 @@ import forge.game.card.CardView;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
-import forge.toolbox.FCardPanel;
-import forge.toolbox.FContainer;
-import forge.toolbox.FDialog;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FScrollPane;
-import forge.util.Callback;
+import forge.toolbox.*;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 import forge.util.Utils;
@@ -54,7 +48,7 @@ public class VAssignCombatDamage extends FDialog {
     private static final float CARD_GAP_X = Utils.scale(10);
     private static final float ADD_BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
-    private final Callback<Map<CardView, Integer>> callback;
+    private final Consumer<Map<CardView, Integer>> callback;
     private final int totalDamageToAssign;
 
     private boolean attackerHasDeathtouch = false;
@@ -63,6 +57,8 @@ public class VAssignCombatDamage extends FDialog {
     private boolean attackerHasInfect = false;
     private boolean overrideCombatantOrder = false;
     private boolean skip = false;
+    private final int AUTO_INDEX = 0;
+    private final int OK_INDEX = 1;
 
     private final GameEntityView defender;
 
@@ -101,18 +97,18 @@ public class VAssignCombatDamage extends FDialog {
         pnlAttacker = add(new AttDefCardPanel(attacker));
         pnlDefenders = add(new DefendersPanel(blockers));
 
-        initButton(0, Forge.getLocalizer().getMessage("lblAuto"), e -> {
+        initButton(AUTO_INDEX, Forge.getLocalizer().getMessage("lblAuto"), e -> {
             resetAssignedDamage();
             initialAssignDamage(true);
             finish();
         });
-        initButton(1, Forge.getLocalizer().getMessage("lblOK"), e -> finish());
+        initButton(OK_INDEX, Forge.getLocalizer().getMessage("lblOK"), e -> finish());
         initButton(2, Forge.getLocalizer().getMessage("lblReset"), e -> {
             resetAssignedDamage();
             initialAssignDamage(false);
         });
         if (maySkip) {
-            initButton(2, Forge.getLocalizer().getMessage("lblSkip"), e -> {
+            initButton(3, Forge.getLocalizer().getMessage("lblSkip"), e -> {
                 skip = true;
                 finish();
             });
@@ -308,6 +304,12 @@ public class VAssignCombatDamage extends FDialog {
         }
 
         addDamage(source, damageToAdd);
+
+        FButton btnAuto = getButton(AUTO_INDEX);
+        if (btnAuto != null) {
+            btnAuto.setEnabled(allDamageToAssign());
+        }
+
         checkDamageQueue();
         updateLabels();
     }
@@ -365,6 +367,10 @@ public class VAssignCombatDamage extends FDialog {
         for (DamageTarget dt : defenders) {
             dt.damage = 0;
         }
+        FButton btnAuto = getButton(AUTO_INDEX);
+        if (btnAuto != null) {
+            btnAuto.setEnabled(true);
+        }
     }
     
     private void addDamage(final CardView card, int addedDamage) {
@@ -384,6 +390,15 @@ public class VAssignCombatDamage extends FDialog {
             spent += dt.damage;
         }
         return totalDamageToAssign - spent;
+    }
+
+    private boolean allDamageToAssign() {
+        for (DamageTarget dt : defenders) {
+            if (dt.damage > 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void updateLabels() {
@@ -409,7 +424,12 @@ public class VAssignCombatDamage extends FDialog {
 
         lblTotalDamage.setText(TextUtil.concatNoSpace(Forge.getLocalizer().getMessage("lblAvailableDamagePoints") + ": ",
                 String.valueOf(damageLeft), " (of ", String.valueOf(totalDamageToAssign), ")"));
-        setButtonEnabled(1, damageLeft == 0);
+
+        setButtonEnabled(OK_INDEX, damageLeft == 0);
+        FButton btnOK = getButton(OK_INDEX);
+        if (btnOK.isEnabled()) {
+            btnOK.requestFocusInWindow();
+        }
         lblAssignRemaining.setVisible(allHaveLethal && damageLeft > 0);
     }
 
@@ -421,7 +441,7 @@ public class VAssignCombatDamage extends FDialog {
             return;
         }
         hide();
-        callback.run(getDamageMap());
+        callback.accept(getDamageMap());
     }
 
     private int getDamageToKill(CardView source) {

@@ -1,0 +1,11 @@
+Name:Hobgoblin, Mantled Marauder
+Variant:UniversesWithin:FlavorName:Cam and Farrik, Havoc Duo
+ManaCost:1 R
+Types:Legendary Creature Goblin Human Villain
+PT:1/2
+K:Flying
+K:Haste
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you discard a card, NICKNAME gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2
+DeckHints:Ability$Discard
+Oracle:Flying, haste\nWhenever you discard a card, Hobgoblin gets +2/+0 until end of turn.

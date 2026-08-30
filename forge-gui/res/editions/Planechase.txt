@@ -9,7 +9,7 @@ ScryfallCode=HOP
 [cards]
 1 R Akroma's Vengeance @Greg Hildebrandt & Tim Hildebrandt
 2 C Congregate @Mark Zug
-3 C Kor Sanctifiers @Dan Scott
+3 C Kor Sanctifiers @Dan Murayama Scott
 4 C Oblivion Ring @Franz Vohwinkel
 5 C Orim's Thunder @Carl Critchlow
 6 U Prison Term @Zoltan Boros & Gabor Szikszai
@@ -145,7 +145,7 @@ ScryfallCode=HOP
 136 C Seat of the Synod @John Avon
 137 U Shivan Oasis @Rob Alexander
 138 U Sunhome, Fortress of the Legion @Martina Pilcerova
-139 C Terramorphic Expanse @Dan Scott
+139 C Terramorphic Expanse @Dan Murayama Scott
 140 C Tree of Tales @John Avon
 141 C Vault of Whispers @Rob Alexander
 142 L Plains @Martina Pilcerova
@@ -216,14 +216,3 @@ OHOP37 C Stronghold Furnace @Jim Pavelec
 OHOP38 C Turri Island @Raymond Swanland
 OHOP39 C Undercity Reaches @Stephan Martiniere
 OHOP40 C Velis Vel @Terese Nielsen
-
-[tokens]
-w_0_1_goat
-b_2_2_zombie
-r_5_5_dragon_flying
-r_1_1_goblin
-g_3_3_elephant
-g_1_1_insect
-g_1_1_saproling
-c_1_1_a_pentavite_flying
-c_0_1_a_pest

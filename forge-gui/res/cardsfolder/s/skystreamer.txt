@@ -5,6 +5,6 @@ PT:3/2
 K:Assist
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBGainLife | TriggerDescription$ When CARDNAME enters, target player gains 4 life.
-SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 4 | SpellDescription$ Target player gains 4 life.
+SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | LifeAmount$ 4 | SpellDescription$ Target player gains 4 life.
 DeckHas:Ability$LifeGain
 Oracle:Assist (Another player can pay up to {4} of this spell's cost.)\nFlying\nWhen Skystreamer enters, target player gains 4 life.

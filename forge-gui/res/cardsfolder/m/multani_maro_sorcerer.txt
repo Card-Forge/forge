@@ -1,6 +1,6 @@
 Name:Multani, Maro-Sorcerer
 ManaCost:4 G G
-Types:Legendary Creature Elemental
+Types:Legendary Creature Elemental Sorcerer
 PT:*/*
 K:Shroud
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the total number of cards in all players' hands.

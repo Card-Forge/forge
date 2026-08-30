@@ -1,0 +1,31 @@
+Name:Trystan, Callous Cultivator
+ManaCost:2 G
+Types:Legendary Creature Elf Druid
+PT:3/4
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, mill three cards. Then if there is an Elf card in your graveyard, you gain 2 life.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigMill | Secondary$ True | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, mill three cards. Then if there is an Elf card in your graveyard, you gain 2 life.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | ConditionCheckSVar$ X
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {B}. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ B | Defined$ Self | Mode$ Transform
+SVar:X:Count$ValidGraveyard Elf.YouOwn
+DeckHas:Ability$Mill|Graveyard
+DeckHints:Type$Elf
+AlternateMode:DoubleFaced
+Oracle:Deathtouch\nWhenever this creature enters or transforms into Trystan, Callous Cultivator, mill three cards. Then if there is an Elf card in your graveyard, you gain 2 life.\nAt the beginning of your first main phase, you may pay {B}. If you do, transform Trystan.
+
+ALTERNATE
+
+Name:Trystan, Penitent Culler
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Elf Warlock
+PT:3/4
+K:Deathtouch
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever this creature transforms into CARDNAME, mill three cards, then you may exile an Elf card from your graveyard. If you do, each opponent loses 2 life.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | UnlessCost$ ExileFromGrave<1/Elf> | UnlessPayer$ You | UnlessSwitched$ True | Defined$ Opponent | LifeAmount$ 2
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {G}. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ G | Defined$ Self | Mode$ Transform
+Oracle:Deathtouch\nWhenever this creature transforms into Trystan, Penitent Culler, mill three cards, then you may exile an Elf card from your graveyard. If you do, each opponent loses 2 life.\nAt the beginning of your first main phase, you may pay {G}. If you do, transform Trystan.

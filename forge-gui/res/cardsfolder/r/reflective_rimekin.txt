@@ -1,0 +1,9 @@
+Name:Reflective Rimekin
+ManaCost:2 U
+Types:Creature Elemental Wizard
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBoon | TriggerDescription$ When this creature enters, you get a one-time boon with "When you cast an instant or sorcery spell with mana value 3 or less, copy it. You may choose new targets for the copy."
+SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ CastTrig
+SVar:CastTrig:Mode$ SpellCast | ValidCard$ Instant.cmcLE3,Sorcery.cmcLE3 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When you cast an instant or sorcery spell with mana value 3 or less, copy it. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:When this creature enters, you get a one-time boon with "When you cast an instant or sorcery spell with mana value 3 or less, copy it. You may choose new targets for the copy."

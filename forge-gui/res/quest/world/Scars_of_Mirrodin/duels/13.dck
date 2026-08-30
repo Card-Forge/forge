@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Robot Santa
+Title=Robot Santa
+Icon=Robot Santa.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/Magic-League_Standard_Trial_28-09-2010/marc_31_-_Eldrazi_Ramp_(Standard,_#58).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Emrakul, the Aeons Torn
+4 Joraga Treespeaker
+1 Kozilek, Butcher of Truth
+4 Overgrown Battlement
+4 Primeval Titan
+1 Ulamog, the Infinite Gyre
+3 Wurmcoil Engine
+4 Summoning Trap
+2 All Is Dust
+3 Cultivate
+4 Explore
+3 Growth Spasm
+4 Eldrazi Temple
+1 Eye of Ugin
+12 Forest
+4 Khalni Garden
+1 Mystifying Maze
+4 Tectonic Edge
+[Sideboard]
+4 Acidic Slime
+3 Brittle Effigy
+4 Obstinate Baloth
+2 Pelakka Wurm
+2 Ratchet Bomb

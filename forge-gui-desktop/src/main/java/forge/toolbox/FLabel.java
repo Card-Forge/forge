@@ -596,11 +596,10 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
             final int x = iconAlignX == SwingConstants.CENTER
                     ? (int) ((w - sw) / 2 + iconInsets.getX())
                             : (int) iconInsets.getX();
-
-                    final int y = (int) (((h - sh) / 2) + iconInsets.getY());
+            final int y = (int) (((h - sh) / 2) + iconInsets.getY());
 
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-                    g.drawImage(img, x, y, sw + x, sh + y, 0, 0, iw, ih, null);
+            g.drawImage(img, x, y, sw + x, sh + y, 0, 0, iw, ih, null);
         }
 
         super.paintComponent(g);
@@ -656,7 +655,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
 
     protected void resetIcon() {
         // Non-background icon
-        if (img != null && iconScaleAuto  && !iconInBackground) {
+        if (img != null && iconScaleAuto && !iconInBackground) {
             final int h = (int) (getHeight() * iconScaleFactor);
             final int w = (int) (h * iar);
             if (w == 0 || h == 0) { return; }

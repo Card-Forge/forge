@@ -69,7 +69,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             } else {
                 String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : Localizer.getInstance().getMessage("lblChooseNumber");
                 if (anyNumber) {
-                    Integer value = p.getController().announceRequirements(sa, title);
+                    Integer value = p.getController().announceRequirements(sa, min, max, title);
                     chosen = value == null ? 0 : value;
                 } else if (sa.hasParam("RemoveChoices")) {
                     // currently we always remove remembered numbers, so the value is not really used yet
@@ -91,7 +91,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             } else if (secretlyChoose) {
                 chooseMap.put(p, chosen);
             } else {
-                source.setChosenNumber(chosen, false);
+                source.setChosenNumber(chosen);
             }
             if (sa.hasParam("Notify")) {
                 p.getGame().getAction().notifyOfValue(sa, source, Localizer.getInstance().
@@ -127,7 +127,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             for (Entry<Player, Integer> ev : chooseMap.entrySet()) {
                 int num = ev.getValue();
                 Player player = ev.getKey();
-                sb.append(Localizer.getInstance().getMessage("lblPlayerChoseNum", player.getName(), String.valueOf(num)));
+                sb.append(Localizer.getInstance().getMessage("lblPlayerChoseNum", player.getName(), num));
                 sb.append("\r\n");
                 if (num > highest) {
                     highestNum.clear();

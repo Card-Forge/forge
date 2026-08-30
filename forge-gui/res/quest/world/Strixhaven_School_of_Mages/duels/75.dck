@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Aragorn
+Title=Aragorn
+Icon=Aragorn.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/guaxiniinja_-_Burn_(Modern,_#1155183)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Soul-Scar Mage
+4 Monastery Swiftspear
+4 Sprite Dragon
+4 Stormwing Entity
+2 Wild Slash
+2 Vapor Snag
+3 Opt
+3 Mutagenic Growth
+4 Manamorphose
+4 Lightning Bolt
+4 Lava Dart
+4 Expressive Iteration
+2 Bloodstained Mire
+2 Steam Vents
+3 Scalding Tarn
+3 Fiery Islet
+4 Spirebluff Canal
+4 Mountain
+[Sideboard]
+1 Bedlam Reveler
+1 Soul-Guide Lantern
+1 Stern Dismissal
+2 Kozilek's Return
+2 Relic of Progenitus
+2 Cleansing Wildfire
+2 Spell Pierce
+2 Dispel
+2 Abrade

@@ -10,5 +10,5 @@ SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ TriggeredCardOwner | S
 SVar:DBExileTop:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ TriggeredCardOwner | DestinationZone$ Exile
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigTreasure | TriggerDescription$ Whenever chaos ensues, create two Treasure tokens.
 SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 2
-DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+DeckHas:Ability$Token|Sacrifice
 Oracle:When you planeswalk to The Matrix of Time, each player exiles the top card of their library.\nDuring your turn, you may play lands and cast spells from among cards exiled with The Matrix of Time.\nWhenever you play a land or cast a spell from among cards exiled with The Matrix of Time, that card's owner loses 3 life and exiles the top card of their library.\nWhenever chaos ensues, create two Treasure tokens.

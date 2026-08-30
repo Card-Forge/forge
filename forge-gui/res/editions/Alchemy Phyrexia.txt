@@ -30,7 +30,7 @@ ScryfallCode=YONE
 21 R Glistening Extractor @Jonas De Ro
 22 R Gyox, Brutal Carnivora @Daniel Ljunggren
 23 R Ichor Aberration @J.P. Targete
-24 R Innovative Metatect @LA Draws
+24 R Innovative Metatect @L.A. Draws
 25 U Mephidross Slime @Yeong-Hao Han
 26 U Quicksilver Lapidary @Caroline Gariba
 27 U Seething Skitter-Priest @Monztre

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Hard
+Description=./Modern/Foundations/Okabe_Kiyotaka_-_Goryo_shoot_(Modern,_#2273534).dck
+Deck Type=constructed
+
+[Main]
+4 Atraxa, Grand Unifier
+4 Psychic Frog
+4 Abhorrent Oculus
+1 Kiora, the Rising Tide
+4 Fatal Push
+1 Spell Pierce
+4 Counterspell
+2 Spell Snare
+2 Essence Flux
+4 Goryo's Vengeance
+2 Force of Negation
+2 Consider
+2 Tainted Indulgence
+2 Sink into Stupor
+4 Unearth
+2 Island
+1 Swamp
+3 Watery Grave
+4 Flooded Strand
+4 Polluted Delta
+2 Marsh Flats
+2 Undercity Sewers
+[Sideboard]
+2 Thoughtseize
+1 Pithing Needle
+1 Nihil Spellbomb
+2 Mystical Dispute
+2 Glistening Deluge
+1 Bitter Triumph
+4 Consign to Memory
+1 Into the Flood Maw
+1 Ghost Vacuum

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import forge.card.CardType;
 import forge.game.card.*;
 import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
@@ -54,7 +53,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             GameEntityCounterTable table = new GameEntityCounterTable();
             host.addCounter(CounterEnumType.AGE, 1, activator, table);
 
-            table.replaceCounterEffect(game, sa, true);
+            table.replaceCounterEffect(game, sa);
 
             Cost payCost = new Cost(ManaCost.ZERO, true);
             int n = host.getCounters(CounterEnumType.AGE);
@@ -77,13 +76,15 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
         // Expand Sacrifice keyword here depending on what we need out of it.
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Amount", "1"), sa);
-        final boolean devour = sa.isKeyword(Keyword.DEVOUR);
-        final boolean exploit = sa.isKeyword(Keyword.EXPLOIT);
         final boolean sacEachValid = sa.hasParam("SacEachValid");
 
         String valid = sa.getParamOrDefault("SacValid", "Self");
-        String msg = sa.getParamOrDefault("SacMessage", valid);
-        msg = CardType.CoreType.isValidEnum(msg) ? msg.toLowerCase() : msg;
+        String msg;
+        if (sa.hasParam("SacMessage")) {
+            msg = sa.getParam("SacMessage");
+        } else {
+            msg = Lang.getInstance().buildValidDesc(List.of(valid.split(",")), false);
+        }
 
         final boolean destroy = sa.hasParam("Destroy");
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
@@ -92,12 +93,11 @@ public class SacrificeEffect extends SpellAbilityEffect {
         CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
         if (valid.equals("Self") && game.getZoneOf(host) != null) {
-            if (host.getController().equals(activator) && game.getZoneOf(host).is(ZoneType.Battlefield)) {
-                if (!optional || activator.getController().confirmAction(sa, null,
-                        Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", host.getName()), null)) {
-                    if (game.getAction().sacrifice(new CardCollection(host), sa, true, params) != null && remSacrificed) {
-                        host.addRemembered(host);
-                    }
+            if (host.getController().equals(activator) && game.getZoneOf(host).is(ZoneType.Battlefield) &&
+                    (!optional || activator.getController().confirmAction(sa, null,
+                        Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", host.getDisplayName()), null))) {
+                if (game.getAction().sacrifice(new CardCollection(host), sa, true, params) != null && remSacrificed) {
+                    host.addRemembered(host);
                 }
             }
         } else {
@@ -161,14 +161,13 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 } else {
                     for (Card sac : game.getAction().sacrifice(choosenToSacrifice, sa, true, params)) {
                         Card lKICopy = zoneMovements.getLastStateBattlefield().get(sac);
-                        // Run Devour Trigger
-                        if (devour) {
+                        if (sa.isKeyword(Keyword.DEVOUR)) {
                             host.addDevoured(lKICopy);
                             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                             runParams.put(AbilityKey.Devoured, lKICopy);
                             game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
                         }
-                        if (exploit) {
+                        if (sa.isKeyword(Keyword.EXPLOIT)) {
                             host.addExploited(lKICopy);
                             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(host);
                             runParams.put(AbilityKey.Exploited, lKICopy);
@@ -209,8 +208,12 @@ public class SacrificeEffect extends SpellAbilityEffect {
             sb.append(Lang.joinHomogenous(tgts)).append(" ");
             boolean oneTgtP = tgts.size() == 1;
 
-            String msg = sa.getParamOrDefault("SacMessage", valid);
-            msg = CardType.CoreType.isValidEnum(msg) ? msg.toLowerCase() : msg;
+            String msg;
+            if (sa.hasParam("SacMessage")) {
+                msg = sa.getParam("SacMessage");
+            } else {
+                msg = Lang.getInstance().buildValidDesc(List.of(valid.split(",")), false);
+            }
 
             if (sa.hasParam("Destroy")) {
                 sb.append(oneTgtP ? "destroys " : " destroy ");

@@ -1,0 +1,18 @@
+[metadata]
+Code=O90P
+Date=1996-04-01
+Name=Oversized 90's Promos
+Type=Promo
+ScryfallCode=O90P
+
+[cards]
+1 R Chaos Orb @Mark Tedin
+2 R Black Lotus @Christopher Rush
+3 R Juzám Djinn @Mark Tedin
+4 R Jester's Cap @Dan Frazier
+5 R Shivan Dragon @Melissa A. Benson
+6 R Hurloon Minotaur @Anson Maddocks
+7 R Serra Angel @Douglas Shuler
+8 R Serra Angel @Rebecca Guay
+10 R Incoming! @Quinton Hoover
+11 R Thorn Elemental @rk post

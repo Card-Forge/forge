@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Captain America
+Title=Captain America
+Icon=Captain America.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/Luke_Christensen_-_UW_Control_(Modern,_#797422).dck
+Deck Type=constructed
+
+[Main]
+3 Snapcaster Mage
+2 Condemn
+3 Cryptic Command
+1 Dovin's Veto
+1 Logic Knot
+2 Mana Leak
+4 Opt
+4 Path to Exile
+1 Spell Pierce
+1 Surgical Extraction
+2 Serum Visions
+2 Supreme Verdict
+2 Detention Sphere
+3 Jace, the Mind Sculptor
+1 Narset, Parter of Veils
+2 Teferi, Hero of Dominaria
+2 Teferi, Time Raveler
+4 Celestial Colonnade
+4 Field of Ruin
+4 Flooded Strand
+2 Glacial Fortress
+2 Hallowed Fountain
+6 Island
+2 Plains
+[Sideboard]
+2 Celestial Purge
+2 Ceremonious Rejection
+1 Day of Judgment
+1 Dispel
+1 Dovin's Veto
+2 Rest in Peace
+1 Stony Silence
+2 Surgical Extraction
+1 Timely Reinforcements
+1 Vendilion Clique
+1 Wrath of God

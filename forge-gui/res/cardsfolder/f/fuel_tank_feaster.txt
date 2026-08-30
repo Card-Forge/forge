@@ -7,6 +7,6 @@ SVar:TrigRandom:DB$ ChooseCard | Defined$ You | Choices$ Creature.YouOwn+cmcEQX 
 SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | staticAbilities$ ReduceCost | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:X:Count$ValidHand Creature.YouOwn$GreatestCMC
+SVar:X:Count$ValidHand Creature.YouOwn$GreatestCardManaCost
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 Oracle:At the beginning of your first main phase, a random creature card with the greatest mana value among creature cards in your hand perpetually gains "This spell costs {1} less to cast."\n{T}: Add one mana of any color.

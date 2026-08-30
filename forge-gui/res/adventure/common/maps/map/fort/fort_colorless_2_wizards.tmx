@@ -194,7 +194,7 @@
 	{
 		&quot;text&quot;: &quot;A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.&quot;,
 		&quot;options&quot;: [
-			{ &quot;name&quot;: &quot;Leave.&quot; },
+			{ &quot;name&quot;: &quot;Leave&quot; },
 			{
 				&quot;name&quot;: &quot;Place your hand on the barrier&quot;,
 				&quot;text&quot;: &quot;The barrier fades into infinity before you.&quot;,

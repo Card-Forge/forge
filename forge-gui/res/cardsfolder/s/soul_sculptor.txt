@@ -2,6 +2,9 @@ Name:Soul Sculptor
 ManaCost:2 W
 Types:Creature Human
 PT:1/1
-A:AB$ Animate | Cost$ 1 W T | ValidTgts$ Creature | Types$ Enchantment | RemoveAllAbilities$ True | RemoveCardTypes$ True | Duration$ UntilAPlayerCastSpell Creature | SpellDescription$ Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.
+A:AB$ Effect | Cost$ 1 W T | ValidTgts$ Creature | RememberObjects$ Targeted | StaticAbilities$ Enchant | Triggers$ TrigCastSpell | ExileOnMoved$ Battlefield | Duration$ Permanent | SpellDescription$ Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.
+SVar:Enchant:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Enchantment | RemoveAllAbilities$ True | RemoveCardTypes$ True
+SVar:TrigCastSpell:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Creature | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All
 Oracle:{1}{W}, {T}: Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.

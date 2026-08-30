@@ -2,7 +2,7 @@ Name:Domesticated Hydra
 ManaCost:2 G G
 Types:Creature Hydra
 PT:3/3
-K:Monstrosity:X:X G G G
+A:AB$ PutCounter | Cost$ X G G G | Monstrosity$ X
 S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Trample | Description$ As long as CARDNAME is monstrous, it has trample.
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters

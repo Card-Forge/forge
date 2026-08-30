@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Saladin
+Title=Saladin
+Icon=Saladin.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Chipsoss_-_Orzhov_Stoneblade_(Modern,_#1147603).dck
+Deck Type=constructed
+
+[Main]
+3 Tidehollow Sculler
+3 Dark Confidant
+3 Skyclave Apparition
+4 Stoneforge Mystic
+1 Batterskull
+1 Nihil Spellbomb
+1 Sword of Fire and Ice
+1 Maul of the Skyclaves
+2 Vanishing Verse
+2 Kaya's Guile
+4 Fatal Push
+2 Lingering Souls
+3 Thoughtseize
+4 Inquisition of Kozilek
+3 Liliana of the Veil
+2 Silent Clearing
+2 Field of Ruin
+2 Brightclimb Pathway
+2 Plains
+2 Godless Shrine
+2 Shambling Vent
+3 Swamp
+4 Marsh Flats
+4 Concealed Courtyard
+[Sideboard]
+1 Gideon, Ally of Zendikar
+1 Kaya, Orzhov Usurper
+2 Rest in Peace
+2 Plague Engineer
+2 Engineered Explosives
+2 Blessed Alliance
+2 Nihil Spellbomb
+3 Damping Sphere

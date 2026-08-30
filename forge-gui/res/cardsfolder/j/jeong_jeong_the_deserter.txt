@@ -1,0 +1,10 @@
+Name:Jeong Jeong, the Deserter
+ManaCost:2 R
+Types:Legendary Creature Human Rebel Ally
+PT:2/3
+K:Firebending:1
+A:AB$ PutCounter | Cost$ 3 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | Exhaust$ True | SubAbility$ DBTrigger | SpellDescription$ Put a +1/+1 counter on NICKNAME. When you next cast a Lesson spell this turn, copy it and you may choose new targets for the copy. (Activate each exhaust ability only once.)
+SVar:DBTrigger:DB$ DelayedTrigger | Mode$ SpellCast | ValidCard$ Lesson | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | TriggerDescription$ When you next cast a Lesson spell this turn, copy it and you may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+DeckHints:Type$Lesson
+Oracle:Firebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.)\nExhaust — {3}: Put a +1/+1 counter on Jeong Jeong. When you next cast a Lesson spell this turn, copy it and you may choose new targets for the copy. (Activate each exhaust ability only once.)

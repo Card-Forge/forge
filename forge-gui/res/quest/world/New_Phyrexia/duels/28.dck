@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Zatanna
+Title=Zatanna
+Icon=Zatanna.jpg
+Difficulty=Medium
+Description=New_Phyrexia/2011_National_Qualifiers_-_Niigata,_Japan/Hideaki_Horikawa_-_Boros_(Standard,_#16856).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Mirran Crusader
+4 Squadron Hawk
+4 Steppe Lynx
+4 Stoneforge Mystic
+2 Batterskull
+2 Sword of War and Peace
+3 Dismember
+4 Lightning Bolt
+3 Koth of the Hammer
+4 Arid Mesa
+4 Marsh Flats
+6 Mountain
+6 Plains
+3 Scalding Tarn
+3 Terramorphic Expanse
+[Sideboard]
+1 Celestial Purge
+3 Divine Offering
+2 Gideon Jura
+1 Hero of Oxid Ridge
+4 Kor Firewalker
+2 Spellskite
+1 Sword of Body and Mind
+1 Sword of Feast and Famine

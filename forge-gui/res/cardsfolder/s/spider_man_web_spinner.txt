@@ -1,0 +1,9 @@
+Name:Spider-Man, Web-Spinner
+ManaCost:3 R
+Types:Legendary Creature Spider Human Hero
+PT:2/3
+K:Double Strike
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks, target creature can't block this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True
+Oracle:Double strike (This creature deals both first-strike and regular combat damage.)\nHaste (This creature can attack and {T} as soon as he comes under your control.)\nWhenever Spider-Man attacks, target creature can't block this turn.

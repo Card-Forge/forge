@@ -1,0 +1,6 @@
+Name:Song of Point Prime
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Sacrifice | Defined$ Opponent | SacValid$ Creature | SubAbility$ DBConjure | SpellDescription$ Each opponent sacrifices a creature of their choice.
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Name$ Cantor of the Refrain | Zone$ Graveyard | SpellDescription$ Conjure a card named Cantor of the Refrain into your graveyard.
+Oracle:Each opponent sacrifices a creature of their choice.\nConjure a card named Cantor of the Refrain into your graveyard.

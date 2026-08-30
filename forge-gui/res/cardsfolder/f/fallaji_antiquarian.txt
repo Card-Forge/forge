@@ -1,7 +1,7 @@
 Name:Fallaji Antiquarian
 ManaCost:3 R
 Types:Creature Human Artificer
-PT:2/4
+PT:3/3
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters, conjure a duplicate of another target nontoken creature or artifact you control into your graveyard. The duplicate perpetually gains unearth {1}{R}.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | TgtPrompt$ Select another target nontoken creature or artifact you control | DefinedName$ Targeted | ValidTgts$ Creature.YouCtrl+Other+!token,Artifact.YouCtrl+Other+!token | Zone$ Graveyard | RememberMade$ True | SubAbility$ DBPump

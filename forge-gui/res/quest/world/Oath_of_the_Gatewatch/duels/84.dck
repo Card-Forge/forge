@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=AidoHwedo
+Title=AidoHwedo
+Icon=AidoHwedo.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/Grand_Prix_Los_Angeles_2016/Philip_Yam_-_Zoo_(Modern,_#623509).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Kird Ape
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+1 Lightning Helix
+3 Mutagenic Growth
+3 Searing Blaze
+4 Arid Mesa
+4 Bloodstained Mire
+1 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+3 Stomping Ground
+1 Wooded Foothills
+[Sideboard]
+3 Grafdigger's Cage
+3 Gut Shot
+1 Koth of the Hammer
+3 Natural State
+2 Path to Exile
+1 Searing Blood
+1 Shattering Spree

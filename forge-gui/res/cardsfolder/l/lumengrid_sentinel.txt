@@ -4,5 +4,5 @@ Types:Creature Human Wizard
 PT:1/2
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Artifact.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever an artifact you control enters, you may tap target permanent.
-SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent
 Oracle:Flying\nWhenever an artifact you control enters, you may tap target permanent.

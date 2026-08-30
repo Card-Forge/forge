@@ -2,7 +2,7 @@ Name:Silvar, Devourer of the Free
 ManaCost:3 B R
 Types:Legendary Creature Cat Nightmare
 PT:4/2
-K:Partner:Trynn, Champion of Freedom:Trynn
+K:Partner with:Trynn, Champion of Freedom:Trynn
 K:Menace
 A:AB$ PutCounter | Cost$ Sac<1/Human> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on CARDNAME. It gains indestructible until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Indestructible

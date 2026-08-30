@@ -4,6 +4,6 @@ Types:Creature Human Noble
 PT:3/3
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a Cursed Role token attached to it. (Enchanted creature is 1/1.)
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_cursed | AttachedTo$ Self
+SVar:TrigToken:DB$ Token | TokenScript$ role_cursed | AttachedTo$ Self
 DeckHas:Ability$Token|LifeGain & Type$Aura|Enchantment|Role
 Oracle:Lifelink\nWhen Cursed Courtier enters, create a Cursed Role token attached to it. (Enchanted creature is 1/1.)

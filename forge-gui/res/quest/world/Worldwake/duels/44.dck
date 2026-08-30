@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Optimus Prime
+Title=Optimus Prime
+Icon=Optimus Prime.jpg
+Difficulty=Easy
+Description=Worldwake/Grand_Prix_Brussels_2010_-_Top10_Decks/Manuel_Godineau_-_U-W_Tapout_Control_(Standard,_#2140).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+4 Knight of the White Orchid
+4 Fieldmist Borderpost
+2 Essence Scatter
+2 Flashfreeze
+2 Path to Exile
+3 Day of Judgment
+4 Divination
+2 Martial Coup
+2 Mind Spring
+2 Oblivion Ring
+4 Spreading Seas
+3 Elspeth, Knight-Errant
+4 Celestial Colonnade
+2 Glacial Fortress
+4 Island
+10 Plains
+2 Tectonic Edge
+[Sideboard]
+2 Celestial Purge
+2 Jace Beleren
+4 Kor Firewalker
+1 Negate
+2 Pithing Needle
+2 Telemin Performance

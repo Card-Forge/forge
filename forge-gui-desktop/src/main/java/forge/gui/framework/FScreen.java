@@ -224,18 +224,19 @@ public class FScreen {
         return controller;
     }
 
+    public String getDaytime() {
+        return daytime;
+    }
+    public void setDaytime(final String daytime) {
+        this.daytime = daytime;
+    }
+
     public String getTabCaption() {
         return tabCaption;
     }
     public void setTabCaption(final String caption) {
         this.tabCaption = caption;
         FView.SINGLETON_INSTANCE.getNavigationBar().updateTitle(this);
-    }
-    public String getDaytime() {
-        return daytime;
-    }
-    public void setDaytime(final String daytime) {
-        this.daytime = daytime;
     }
 
     public SkinImage getTabIcon() {

@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/C4N7O_-_Grixis_Delver_(Modern,_#790489).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+4 Thing in the Ice
+1 Abrade
+1 Burst Lightning
+4 Cryptic Command
+4 Lightning Bolt
+1 Logic Knot
+1 Negate
+3 Opt
+4 Remand
+1 Spell Snare
+1 Ancestral Vision
+1 Anger of the Gods
+1 Flame Slash
+3 Serum Visions
+2 Blood Moon
+2 Jace, the Mind Sculptor
+1 Ral, Izzet Viceroy
+1 Desolate Lighthouse
+7 Island
+1 Mountain
+3 Polluted Delta
+4 Scalding Tarn
+1 Spirebluff Canal
+2 Steam Vents
+2 Sulfur Falls
+[Sideboard]
+1 Abrade
+1 Anger of the Gods
+1 Ceremonious Rejection
+1 Chandra, Torch of Defiance
+1 Dispel
+3 Dragon's Claw
+1 Engineered Explosives
+1 Keranos, God of Storms
+1 Relic of Progenitus
+1 Spell Pierce
+2 Surgical Extraction
+1 Vendilion Clique

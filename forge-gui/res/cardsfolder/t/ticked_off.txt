@@ -1,0 +1,5 @@
+Name:Ticked Off
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn. (It deals both first-strike and regular combat damage.)
+Oracle:Target creature gains double strike until end of turn. (It deals both first-strike and regular combat damage.)

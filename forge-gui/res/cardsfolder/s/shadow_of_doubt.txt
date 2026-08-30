@@ -3,6 +3,6 @@ ManaCost:UB UB
 Types:Instant
 A:SP$ Effect | StaticAbilities$ STCantSearch | SubAbility$ DBDraw | SpellDescription$ Players can't search libraries this turn. Draw a card.
 SVar:STCantSearch:Mode$ Continuous | Affected$ Player | AddKeyword$ CantSearchLibrary | Description$ Players can't search libraries.
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 AI:RemoveDeck:All
 Oracle:({U/B} can be paid with either {U} or {B}.)\nPlayers can't search libraries this turn.\nDraw a card.

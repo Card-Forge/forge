@@ -1,0 +1,14 @@
+Name:Cosmic Spider-Man
+Variant:UniversesWithin:FlavorName:Scions of the Ur-Spider
+ManaCost:W U B R G
+Types:Legendary Creature Spider Human Hero
+PT:5/5
+K:Flying
+K:First Strike
+K:Trample
+K:Lifelink
+K:Haste
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ At the beginning of combat on your turn, other Spiders you control gain flying, first strike, trample, lifelink, and haste until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Spider.Other+YouCtrl | KW$ Flying & First Strike & Trample & Lifelink & Haste
+DeckHints:Type$Spider
+Oracle:Flying, first strike, trample, lifelink, haste\nAt the beginning of combat on your turn, other Spiders you control gain flying, first strike, trample, lifelink, and haste until end of turn.

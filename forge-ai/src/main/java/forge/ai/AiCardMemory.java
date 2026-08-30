@@ -26,6 +26,7 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import forge.game.card.Card;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 
 
@@ -49,8 +50,7 @@ public class AiCardMemory {
      * (which, in its turn, defines how the AI utilizes the information
      * about remembered cards).
      */
-    public enum MemorySet {
-        MANDATORY_ATTACKERS, // These creatures must attack this turn
+    public enum MemorySet implements MemoryType<Card> {
         TRICK_ATTACKERS, // These creatures will attack to try to provoke the opponent to block them into a combat trick
         HELD_MANA_SOURCES_FOR_MAIN2, // These mana sources will not be used before Main 2
         HELD_MANA_SOURCES_FOR_DECLBLK, // These mana sources will not be used before Combat - Declare Blockers
@@ -60,19 +60,25 @@ public class AiCardMemory {
         ANIMATED_THIS_TURN, // These cards had their AF Animate effect activated this turn
         BOUNCED_THIS_TURN, // These cards were bounced this turn
         CHOSEN_FOG_EFFECT, // These cards are marked as the Fog-like effect the AI is planning to cast this turn
-        MARKED_TO_AVOID_REENTRY, // These cards may cause a stack smash when processed recursively, and are thus marked to avoid a crash
         PAYS_TAP_COST, // These cards will be tapped as part of a cost and cannot be chosen in another part
         PAYS_SAC_COST, // These cards will be sacrificed as part of a cost and cannot be chosen in another part
         REVEALED_CARDS // These cards were recently revealed to the AI by a call to PlayerControllerAi.reveal
     }
 
-    private final Supplier<Map<MemorySet, Set<Card>>> memoryMap = Suppliers.memoize(Maps::newConcurrentMap);
+    public enum MemorySetMana implements MemoryType<ManaCostBeingPaid> {
+        UNPAID_COSTS
+    }
+
+    public interface MemoryType<T> {
+    }
+
+    private final Supplier<Map<MemoryType, Set>> memoryMap = Suppliers.memoize(Maps::newConcurrentMap);
 
     public AiCardMemory() {
     }
 
-    private Set<Card> getMemorySet(MemorySet set) {
-        return memoryMap.get().computeIfAbsent(set, value -> Sets.newConcurrentHashSet());
+    private <T> Set<T> getMemorySet(MemoryType<T> set) {
+        return (Set<T>) memoryMap.get().computeIfAbsent(set, value -> Sets.newConcurrentHashSet());
     }
 
     /**
@@ -184,14 +190,14 @@ public class AiCardMemory {
      * @param set the memory set to inspect.
      * @return true, if the given memory set contains no remembered cards.
      */
-    public boolean isMemorySetEmpty(MemorySet set) {
+    public boolean isMemorySetEmpty(MemoryType set) {
         return set == null || getMemorySet(set).isEmpty();
     }
     
     /**
      * Clears the given memory set.
      */
-    public void clearMemorySet(MemorySet set) {
+    public void clearMemorySet(MemoryType set) {
         if (set != null) {
             getMemorySet(set).clear();
         }
@@ -201,13 +207,13 @@ public class AiCardMemory {
      * Clears all memory sets stored in this card memory for the given player.
      */
     public void clearAllRemembered() {
-        for (MemorySet memSet : MemorySet.values()) {
+        for (MemoryType memSet : memoryMap.get().keySet()) {
             clearMemorySet(memSet);
         }
     }
 
     // Static functions to simplify access to AI card memory of a given AI player.
-    public static Set<Card> getMemorySet(Player ai, MemorySet set) {
+    public static <T> Set<T> getMemorySet(Player ai, MemoryType<T> set) {
         if (!ai.getController().isAI()) {
             return null;
         }

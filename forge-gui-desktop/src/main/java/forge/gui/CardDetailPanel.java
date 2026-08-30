@@ -142,7 +142,7 @@ public class CardDetailPanel extends SkinnedPanel {
     }
 
     public final void setItem(final InventoryItemFromSet item) {
-        nameCostLabel.setText(item.getName());
+        nameCostLabel.setText(item.getDisplayName());
         typeLabel.setVisible(false);
         powerToughnessLabel.setVisible(false);
         idLabel.setText("");
@@ -194,14 +194,14 @@ public class CardDetailPanel extends SkinnedPanel {
         }
 
         final String name = CardDetailUtil.formatCardName(card, mayView, isInAltState), nameCost;
-        if (state.getManaCost().isNoCost() || !mayView) {
+        if (state.getOriginalManaCost().isNoCost() || !mayView) {
             nameCost = name;
         } else {
             final String manaCost;
             if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack && card.getZone() != ZoneType.Battlefield) { //only display current state's mana cost when on stack
-                manaCost = card.getLeftSplitState().getManaCost() + " // " + card.getAlternateState().getManaCost();
+                manaCost = card.getLeftSplitState().getOriginalManaCost() + " // " + card.getAlternateState().getOriginalManaCost();
             } else {
-                manaCost = state.getManaCost().toString();
+                manaCost = state.getOriginalManaCost().toString();
             }
             nameCost = String.format("%s - %s", name, manaCost);
         }

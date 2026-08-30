@@ -1,0 +1,24 @@
+[metadata]
+Name=Rayne, Academy Chancellor
+[Main]
+4 Tropical Island|LEA
+4 Yavimaya Coast|APC
+1 Tolaria|LEG
+7 Island|ICE
+8 Forest|ICE
+2 Blizzard Elemental|UDS
+2 Thieving Magpie|UDS
+4 Thran Golem|UDS
+4 Verduran Enchantress|LEA
+4 Enchantress's Presence|ONS
+4 Yavimaya's Embrace|APC
+4 Ancestral Mask|MMQ
+4 Rancor|ULG
+4 Pemmin's Aura|SCG
+2 Steal Enchantment|TMP
+2 Steal Artifact|4ED
+
+[StartInBattle_Reference]
+1 Rayne, Academy Chancellor|UDS
+1 Thieving Magpie|UDS
+1 Bubbling Beebles|UDS

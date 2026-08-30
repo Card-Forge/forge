@@ -1,0 +1,15 @@
+Name:Mikey & Don, Party Planners
+ManaCost:2 GU GU
+Types:Legendary Creature Mutant Ninja Turtle
+PT:3/3
+K:Ward:2
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Land.TopLibrary+YouOwn,Mutant.TopLibrary+YouOwn,Ninja.TopLibrary+YouOwn,Turtle.TopLibrary+YouOwn | AffectedZone$ Library | MayPlay$ True | Description$ You may play lands and cast Mutant, Ninja, or Turtle spells from the top of your library. If you cast a creature spell this way, that creature enters with an additional +1/+1 counter on it.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidSA$ Spell.MayPlaySource | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEffect | Secondary$ True | Static$ True | TriggerDescription$ If you cast a creature spell this way, that creature enters with an additional +1/+1 counter on it.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ReMoved | RememberObjects$ TriggeredCard
+SVar:ReMoved:Event$ Moved | Origin$ Stack | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBCounter
+SVar:ETBCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ RemoveSelf
+SVar:RemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+DeckHas:Ability$Counters
+DeckHints:Type$Mutant|Ninja|Turtle
+Oracle:Ward {2}\nYou may look at the top card of your library any time.\nYou may play lands and cast Mutant, Ninja, or Turtle spells from the top of your library. If you cast a creature spell this way, that creature enters with an additional +1/+1 counter on it.

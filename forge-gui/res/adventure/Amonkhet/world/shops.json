@@ -170,13 +170,13 @@
   "rewards": [
     {
       "count":6,
-	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure ",
+	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure",
 	  "colors": ["blue"],
       "editions":["AKH","HOU","MP2","AKR"]
     },
 	{
       "count":2,
-	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure ",
+	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure",
       "editions":["AKH","HOU","MP2","AKR"]
     }]
 },
@@ -1391,7 +1391,7 @@
     }]
 },{                                    
 "name":"Azorius",      
-"description":"Azorious Shop, LLC",
+"description":"Azorius Shop, LLC",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"AzoriusShop",
   "rewards": [

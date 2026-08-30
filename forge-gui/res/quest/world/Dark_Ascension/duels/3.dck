@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Colorless
+Title=Dungeon Crawling Colorless
+Icon=Dungeon Crawling Colorless.jpg
+Difficulty=Easy
+Description=Dark_Ascension/SCG_Invitational_Qualifier_-_Concord,_California/Ryan_Miller_-_Tokens_(Standard,_#29428).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Blade Splicer
+4 Champion of the Parish
+4 Hero of Bladehold
+4 Midnight Haunting
+4 Gather the Townsfolk
+4 Lingering Souls
+4 Honor of the Pure
+4 Intangible Virtue
+4 Oblivion Ring
+3 Sorin, Lord of Innistrad
+4 Isolated Chapel
+12 Plains
+4 Swamp
+2 Vault of the Archangel
+[Sideboard]
+4 Celestial Purge
+2 Deathmark
+2 Doom Blade
+2 Ghost Quarter
+1 Grafdigger's Cage
+2 Purify the Grave
+2 Timely Reinforcements

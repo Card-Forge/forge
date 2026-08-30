@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/AFitzsimmons_-_Mono_Black_Demons_(Standard,_#2616011).dck
+Deck Type=constructed
+
+[Main]
+2 Cecil, Dark Knight
+4 Bloodletter of Aclazotz
+4 Unstoppable Slasher
+4 Deep-Cavern Bat
+4 Demon Wall
+2 Preacher of the Schism
+4 Shoot the Sheriff
+2 Archenemy's Charm
+2 Cruelclaw's Heist
+2 Intimidation Tactics
+2 Duress
+4 Unholy Annex
+3 Soulstone Sanctuary
+21 Swamp
+[Sideboard]
+2 Bitter Triumph
+2 Qarsi Revenant
+2 Duress
+2 Stab
+2 Strategic Betrayal
+2 The End
+1 Zero Point Ballad
+2 Ghost Vacuum

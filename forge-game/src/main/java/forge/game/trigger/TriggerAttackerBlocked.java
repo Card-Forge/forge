@@ -21,9 +21,11 @@ import java.util.Map;
 
 import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
+import forge.util.Expressions;
 import forge.util.Localizer;
 
 /**
@@ -61,14 +63,10 @@ public class TriggerAttackerBlocked extends Trigger {
         }
 
         if (hasParam("ValidBlocker")) {
-            @SuppressWarnings("unchecked")
-            int count = CardLists.getValidCardCount(
-                    (Iterable<Card>) runParams.get(AbilityKey.Blockers),
-                    getParam("ValidBlocker"),
-                    getHostCard().getController(), getHostCard(), this
-            );
-
-            if (count == 0) {
+            String param = getParamOrDefault("ValidBlockerAmount", "GE1");
+            int attackers = CardLists.getValidCardCount((Iterable<Card>) runParams.get(AbilityKey.Blockers), getParam("ValidBlocker"), getHostCard().getController(), getHostCard(), this);
+            int amount = AbilityUtils.calculateAmount(getHostCard(), param.substring(2), this);
+            if (!Expressions.compare(attackers, param, amount)) {
                 return false;
             }
         }

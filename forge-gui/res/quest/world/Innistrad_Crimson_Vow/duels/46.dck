@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jengu
+Title=Jengu
+Icon=Jengu.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/Akaike_You_-_UR_Control_(Standard,_#1250603).dck
+Deck Type=constructed
+
+[Main]
+3 Wandering Mind
+2 Abrade
+2 Fading Hope
+3 Frost Bite
+3 Galvanic Iteration
+3 Jwari Disruption
+4 Unexpected Windfall
+4 Divide by Zero
+4 Spikefield Hazard
+1 Thundering Rebuke
+2 Burn Down the House
+4 Expressive Iteration
+4 Alrund's Epiphany
+1 Volatile Fjord
+2 Faceless Haven
+4 Riverglide Pathway
+4 Stormcarved Coast
+5 Snow-Covered Mountain
+5 Snow-Covered Island
+[Sideboard]
+1 Burn Down the House
+1 Environmental Sciences
+1 Mascot Exhibition
+1 Frost Bite
+1 Fading Hope
+1 Test of Talents
+1 Teachings of the Archaics
+2 Disdainful Stroke
+2 Lier, Disciple of the Drowned
+2 Hullbreaker Horror
+2 Goldspan Dragon

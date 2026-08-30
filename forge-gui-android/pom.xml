@@ -88,6 +88,12 @@
                 <filtering>true</filtering>
                 <targetPath>assets</targetPath>
             </resource>
+            <!-- tinylog + SLF4J service descriptors: the android-maven-plugin strips
+                 META-INF/ from dependency JARs during unpack, so we ship our own copies
+                 so tinylog's ServiceLoader can discover its providers at runtime. -->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
         </resources>
         <!-- append generated snapshot-version property -->
         <finalName>forge-android-${snapshot-version}</finalName>
@@ -97,7 +103,7 @@
             <groupId>org.robolectric</groupId>
             <artifactId>android-all</artifactId>
             <!-- update version: 16-robolectric-13921718 but needs to fix Android 16 Edge to edge enforcement -->
-            <version>15-robolectric-12650502</version>
+            <version>15-robolectric-13954326</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -142,7 +148,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-android</artifactId>
-            <version>1.13.5</version>
+            <version>1.14.2</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/libs/gdx-backend-android.jar</systemPath>
         </dependency>
@@ -156,7 +162,7 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-android</artifactId>
-            <version>8.19.1</version>
+            <version>8.21.1</version>
             <type>aar</type>
             <exclusions>
                 <exclusion>
@@ -177,7 +183,7 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-android-core</artifactId>
-            <version>8.19.1</version>
+            <version>8.21.1</version>
             <type>aar</type>
             <exclusions>
                 <exclusion>
@@ -201,7 +207,7 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-android-ndk</artifactId>
-            <version>8.19.1</version>
+            <version>8.21.1</version>
             <type>aar</type>
             <exclusions>
                 <exclusion>
@@ -248,7 +254,7 @@
         <dependency>
             <groupId>org.jupnp</groupId>
             <artifactId>org.jupnp.android</artifactId>
-            <version>3.0.3</version>
+            <version>3.0.5</version>
         </dependency>
     </dependencies>
 
@@ -487,9 +493,7 @@
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="CONTRIBUTORS.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
+                                            <fileset dir="${basedir}/../forge-gui-desktop/target/" includes="CHANGES.txt" />
                                             <fileset dir="${basedir}/../forge-gui-mobile-dev/" includes="sentry.properties" />
                                             <fileset dir="${basedir}/../forge-gui/">
                                                 <include name="res/**" />

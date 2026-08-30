@@ -1,0 +1,11 @@
+Name:Jackal, Genius Geneticist
+Variant:UniversesWithin:FlavorName:Druneth, Reviver of the Hive
+ManaCost:G U
+Types:Legendary Creature Human Scientist Villain
+PT:1/1
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Creature.cmcEQX | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with mana value equal to NICKNAME's power, copy that spell, except the copy isn't legendary. Then put a +1/+1 counter on NICKNAME. (The copy becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | NonLegendary$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$CardPower
+Oracle:Trample\nWhenever you cast a creature spell with mana value equal to Jackal's power, copy that spell, except the copy isn't legendary. Then put a +1/+1 counter on Jackal. (The copy becomes a token.)

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Impundulu
+Title=Impundulu
+Icon=Impundulu.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Allejandro_-_Mono_Blue_Tempo_(Standard,_#2180140).dck
+Deck Type=constructed
+
+[Main]
+4 Haughty Djinn
+4 Tolarian Terror
+1 Behind the Mask
+4 Deduce
+3 Flow of Knowledge
+4 Impulse
+3 Into the Flood Maw
+4 Moment of Truth
+3 Negate
+3 Rona's Vortex
+4 Sleight of Hand
+1 Teferi, Temporal Pilgrim
+22 Island
+[Sideboard]
+3 Behind the Mask
+1 Lost in the Maze
+1 Negate
+2 Out Cold
+2 Scatter Ray
+1 Shore Up
+3 Sugar Coat
+2 Unauthorized Exit

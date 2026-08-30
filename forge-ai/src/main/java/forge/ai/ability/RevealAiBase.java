@@ -43,7 +43,7 @@ public abstract class RevealAiBase extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         revealHandTargetAI(ai, sa, false);
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }

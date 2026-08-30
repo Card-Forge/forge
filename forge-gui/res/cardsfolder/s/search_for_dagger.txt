@@ -1,0 +1,7 @@
+Name:Search for Dagger
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.IsCommander+YouOwn | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever your commander enters or attacks, look at the top six cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+T:Mode$ Attacks | ValidCard$ Card.IsCommander+YouOwn | Execute$ TrigDig | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever your commander enters or attacks, look at the top six cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Creature.Legendary | RestRandomOrder$ True
+Oracle:Whenever your commander enters or attacks, look at the top six cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

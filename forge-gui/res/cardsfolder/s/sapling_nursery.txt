@@ -1,0 +1,9 @@
+Name:Sapling Nursery
+ManaCost:6 G G
+Types:Enchantment
+K:Affinity:Forest
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall — Whenever a land you control enters, create a 3/4 green Treefolk creature token with reach.
+SVar:TrigToken:DB$ Token | TokenScript$ g_3_4_treefolk_reach
+A:AB$ PumpAll | Cost$ 1 G Exile<1/CARDNAME/this creature> | ValidCards$ Treefolk.YouCtrl,Forest.YouCtrl | KW$ Indestructible | SpellDescription$ Treefolk and Forests you control gain indestructible until end of turn.
+DeckHints:Type$Treefolk
+Oracle:Affinity for Forests (This spell costs {1} less to cast for each Forest you control.)\nLandfall — Whenever a land you control enters, create a 3/4 green Treefolk creature token with reach.\n{1}{G}, Exile this enchantment: Treefolk and Forests you control gain indestructible until end of turn.

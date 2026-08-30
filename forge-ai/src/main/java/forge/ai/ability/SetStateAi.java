@@ -33,8 +33,7 @@ public class SetStateAi extends SpellAbilityAi {
         }
 
         if (sa.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
-            sa.setXManaCostPaid(xPay);
+            ComputerUtilCost.setMaxXValue(sa, aiPlayer, sa.isTrigger());
         }
 
         if ("Transform".equals(mode) || "Flip".equals(mode)) {
@@ -44,7 +43,7 @@ public class SetStateAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         // Gross generalization, but this always considers alternate states more powerful
         return sa.getHostCard().isInAlternateState() ? new AiAbilityDecision(0, AiPlayDecision.CantPlayAi) : new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
@@ -130,7 +129,7 @@ public class SetStateAi extends SpellAbilityAi {
         return compareCards(card, transformed, ai, ph);
     }
 
-    private boolean shouldTurnFace(Card card, Player ai, PhaseHandler ph, String mode) {
+    private boolean shouldTurnFace(Card card, final Player ai, PhaseHandler ph, String mode) {
         if (card.isFaceDown()) {
             if ("TurnFaceDown".equals(mode)) {
                 return false;
@@ -138,13 +137,8 @@ public class SetStateAi extends SpellAbilityAi {
             // hidden agenda
             if (card.getState(CardStateName.Original).hasKeyword(Keyword.HIDDEN_AGENDA)
                     && card.isInZone(ZoneType.Command)) {
-                String chosenName = card.getNamedCard();
-                for (Card cast : ai.getGame().getStack().getSpellsCastThisTurn()) {
-                    if (cast.getController() == ai && cast.getName().equals(chosenName)) {
-                        return true;
-                    }
-                }
-                return false;
+                final String chosenName = card.getNamedCard();
+                return ai.getGame().getStack().getSpellsCastThisTurn().stream().anyMatch(sp -> ai.equals(sp.getActivatingPlayer()) && sp.getHostCard().getName().equals(chosenName));
             }
 
             // non-permanent facedown can't be turned face up
@@ -236,9 +230,10 @@ public class SetStateAi extends SpellAbilityAi {
                 }
 
                 final Card othercard = aiPlayer.getCardsIn(ZoneType.Battlefield, other.getName()).getFirst();
+                CounterType ki = CounterType.getType("KI");
 
                 // for legendary KI counter creatures
-                if (othercard.getCounters(CounterEnumType.KI) >= source.getCounters(CounterEnumType.KI)) {
+                if (othercard.getCounters(ki) >= source.getCounters(ki)) {
                     // if the other legendary is useless try to replace it
                     return ComputerUtilCard.isUselessCreature(aiPlayer, othercard);
                 }

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Picard
+Title=Picard
+Icon=Picard.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/17hthompson_-_Burn_(Modern,_#796311).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+2 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Skewer the Critics
+4 Arid Mesa
+1 Bloodstained Mire
+4 Inspiring Vantage
+2 Mountain
+3 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+3 Destructive Revelry
+2 Ensnaring Bridge
+1 Exquisite Firecraft
+2 Kor Firewalker
+3 Path to Exile
+2 Relic of Progenitus
+2 Searing Blood

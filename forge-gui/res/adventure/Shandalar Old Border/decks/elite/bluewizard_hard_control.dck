@@ -1,0 +1,24 @@
+[metadata]
+Name=Master Blue Wizard - Mono Blue Control
+[Main]
+22 Island|LEA
+2 Sapphire Medallion|TMP
+4 Counterspell|LEA
+2 Mana Drain|LEG
+2 Desertion|VIS
+4 Fog Bank|USG
+2 Bribery|MMQ
+2 Treachery|UDS
+2 Back to Basics|USG
+1 Time Warp|TMP
+1 Temporal Manipulation|PO2
+1 Arcanis the Omnipotent|ONS
+3 Fact or Fiction|INV
+4 Morphling|USG
+4 Serendib Efreet|ARN
+2 Boomerang|LEG
+2 Evacuation|STH
+
+[StartInBattle_Reference]
+1 Wall of Air|LEA
+1 Mox Sapphire|LEA

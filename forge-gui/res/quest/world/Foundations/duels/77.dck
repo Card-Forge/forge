@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Orzhov-precon
+Title=Orzhov-precon
+Icon=Orzhov-precon.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/Koptek_-_Dimir_Murktide_(Modern,_#2276602).dck
+Deck Type=constructed
+
+[Main]
+1 Harbinger of the Seas
+4 Psychic Frog
+4 Abhorrent Oculus
+2 Kiora, the Rising Tide
+4 Counterspell
+2 Shoot the Sheriff
+2 Sink into Stupor
+3 Spell Snare
+1 Dismember
+4 Fatal Push
+2 Spell Pierce
+4 Thought Scour
+2 Force of Negation
+4 Unearth
+3 Thoughtseize
+2 Island
+1 Swamp
+1 Darkslick Shores
+3 Undercity Sewers
+4 Polluted Delta
+2 Bloodstained Mire
+2 Flooded Strand
+2 Watery Grave
+1 Otawara, Soaring City
+[Sideboard]
+1 Glistening Deluge
+2 Stern Scolding
+1 Toxic Deluge
+4 Consign to Memory
+2 Harbinger of the Seas
+2 Nihil Spellbomb
+1 Undercity Informer
+2 Mystical Dispute

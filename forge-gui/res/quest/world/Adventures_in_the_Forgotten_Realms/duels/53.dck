@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Gold Finger
+Title=Gold Finger
+Icon=Gold Finger.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Silas_Waltzer_-_Jund_Goblins_(Modern,_#1220079).dck
+Deck Type=constructed
+
+[Main]
+1 Goblin Trashmaster
+1 Battle Cry Goblin
+2 Sling-Gang Lieutenant
+2 Kiki-Jiki, Mirror Breaker
+3 Mogg War Marshal
+3 Goblin Ringleader
+3 Boggart Harbinger
+4 Ignoble Hierarch
+4 Conspicuous Snoop
+4 Munitions Expert
+4 Goblin Matron
+4 Aether Vial
+2 Unearth
+1 Swamp
+1 Stomping Ground
+2 Unclaimed Territory
+2 Scalding Tarn
+2 Blood Crypt
+3 Mountain
+4 Cavern of Souls
+4 Bloodstained Mire
+4 Auntie's Hovel
+[Sideboard]
+1 Goblin Cratermaker
+1 Stingscourger
+1 Warren Weirding
+2 Sling-Gang Lieutenant
+3 Blood Moon
+3 Tarfire
+4 Leyline of the Void

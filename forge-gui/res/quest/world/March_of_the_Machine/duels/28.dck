@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Ala
+Title=Ala
+Icon=Ala.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine/Apricotkota_-_Jeskai_Control_(Standard,_#1624960).dck
+Deck Type=constructed
+
+[Main]
+4 Spirited Companion
+4 Fable of the Mirror-Breaker
+2 Soul Partition
+4 Meeting of Minds
+3 Artistic Refusal
+1 Make Disappear
+4 Sunset Revelry
+4 Sunfall
+4 Wedding Announcement
+4 Invasion of New Phyrexia
+2 The Wandering Emperor
+1 Island
+1 Plains
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+2 Adarkar Wastes
+2 Deserted Beach
+3 Seachrome Coast
+3 Shivan Reef
+3 Stormcarved Coast
+4 Sundown Pass
+3 Battlefield Forge
+[Sideboard]
+2 Soul Partition
+1 Disdainful Stroke
+2 Negate
+2 Brotherhood's End
+2 Zurgo and Ojutai
+1 Hullbreaker Horror
+1 Destroy Evil
+1 The Wandering Emperor
+3 Union of the Third Path

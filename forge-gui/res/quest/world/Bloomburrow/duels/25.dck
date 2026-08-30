@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/Andrea94_-_Gruul_Aggro_(Standard,_#2183556).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Manifold Mouse
+4 Monastery Swiftspear
+4 Slickshot Show-Off
+4 Might of the Meek
+4 Monstrous Rage
+2 Royal Treatment
+4 Torch the Tower
+1 Snakeskin Veil
+4 Innkeeper's Talent
+7 Mountain
+2 Mirrex
+4 Karplusan Forest
+2 Rockface Village
+4 Copperline Gorge
+2 Restless Ridgeline
+[Sideboard]
+4 Pick Your Poison
+4 Questing Druid
+2 Scorching Shot
+4 Tectonic Hazard
+1 Twisted Fealty

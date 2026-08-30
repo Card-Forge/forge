@@ -1,0 +1,5 @@
+Name:Multiversal Incursion
+ManaCost:5 U U
+Types:Sorcery
+A:SP$ CopyPermanent | Defined$ Valid Creature.YouCtrl+!token | AILogic$ DuplicatePerms | NonLegendary$ True | StackDescription$ SpellDescription | SpellDescription$ For each nontoken creature you control, create a token that's a copy of that creature, except it isn't legendary.
+Oracle:For each nontoken creature you control, create a token that's a copy of that creature, except it isn't legendary.

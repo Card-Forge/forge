@@ -1,0 +1,8 @@
+Name:Bristlebane Outrider
+ManaCost:3 G
+Types:Creature Kithkin Knight
+PT:3/5
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ This creature can't be blocked by creatures with power 2 or less.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | CheckSVar$ X | Description$ As long as another creature entered the battlefield under your control this turn, this creature gets +2/+0.
+SVar:X:Count$ThisTurnEntered_Battlefield_Creature.YouCtrl+StrictlyOther
+Oracle:This creature can't be blocked by creatures with power 2 or less.\nAs long as another creature entered the battlefield under your control this turn, this creature gets +2/+0.

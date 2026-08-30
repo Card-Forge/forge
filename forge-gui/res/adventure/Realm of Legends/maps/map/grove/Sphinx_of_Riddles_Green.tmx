@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="29" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="31" nextobjectid="208">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="20481" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="30" name="Collision" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2B4AjdO4jE17STWXaN2jtqJzzx6pltS3DQKRsFwBQAJTwxZ
+  </data>
+ </layer>
+ <layer id="28" name="Stars" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzdlEkSwiAQRWnna8UxOVacr4VD9Fi+pQusbkNTVrl4O34X/AfEOoQLXOEGd+jgAU+QJoQBDGEEY5jAFGYQlXwFc1jAElaGmanMGjZQG/Ita7awgz0cPuzjfWYqc4QTnA35VA/aTK07LZ/qQZv5C599zpHrs885cn2W6CH3jpTwmXvHvvVZGWZ6+2wN3Xr7jAZf3j6l0bv19ikGX94+xfD+vH2K4a38g0+LrxL/bQmfL7OwhTA=
+  </data>
+ </layer>
+ <layer id="26" name="BackGround" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFMCDqy8AgBsTivqTJUQJCgeaFAXE4FnPxyVECpgLNmwbE07GYi09uFAwsgKVBStMhKebA0iCl6ZAUc2BpkNJ0SC1zRsHwAaNl/GgZjw8AAKMwJjU=
+  </data>
+ </layer>
+ <layer id="27" name="Clutter" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFyKDdmzw5SsBxPObikyMXTPVlYJgGxNN9qW/2QIFHjJhiokD/iRHA4mSGgScwXryA2BuIfZDiKBRoXhgBHI5kpy9Qrx8Q+wNxAIG47gTKdwFxNxD3UGBnL1BvHxD3A/EEAnaeBMqfAuLTQHyGAjvPAvWeA+LzQHyBzDRNqp0gAEoX2NIGLe2kFMDyJz48nPIuvcFoGT8KcAEAoH1QUg==
+  </data>
+ </layer>
+ <layer id="29" name="Teleport" width="29" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2D4AtYMBga2DOLFqQFagea2YTEbl/goIB5M0YBgYsWpbae0JgODjCbt7RwFo2AU0B8AALg5C9Y=
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="203" template="../../../../common/maps/obj/entry_up.tx" x="200.292" y="179.605" width="42.1" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="204" template="../../../../common/maps/obj/enemy.tx" x="208.842" y="118.105">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Mask of Riddles&quot;, &quot;Riddlekeeper&quot;, &quot;Riddleform&quot; ]
+}</property>
+    <property name="enemy" value="Eligeth and Anara"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="207" template="../../../../common/maps/obj/dialog.tx" x="134.842" y="156.833" width="169.5" height="14.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+    {
+    &quot;text&quot;: &quot;You find yourself on a lone platform in a vast starry void. A sphinx sits before you, an altered wolf curled next to him.
+
+'Answer my riddle and be rewarded. Fail it and face my fangs. I will allow you to choose your subject.'&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Ancient Lore&quot;,
+        &quot;text&quot;: &quot;'Which of the following legends was NOT a participant in the Mirage War of Jamuraa?'&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;Greven&quot;,
+            &quot;text&quot;: &quot;'Correct. Take this reward for your cleverness and be on your way, lest you test my patience.'&quot;,
+            &quot;action&quot;: [
+              {&quot;deleteMapObject&quot;:-1}, 
+              {&quot;grantRewards&quot;: [
+                  { &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Green&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 4 },
+                  {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000},
+                  {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 20}                
+                ]
+              }
+            ],
+            &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]
+          },
+          {
+            &quot;name&quot;: &quot;Mangara&quot;,
+            &quot;text&quot;: &quot;'Wrong. Now, foolish one, leave this place or I shall devour you.'&quot;,
+            &quot;options&quot;: [{&quot;name&quot;: &quot;Oops&quot;}],
+            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+          },
+          {
+            &quot;name&quot;: &quot;Kaervek&quot;,
+            &quot;text&quot;: &quot;'Wrong. Now, foolish one, leave this place or I shall devour you.'&quot;,
+            &quot;options&quot;: [{&quot;name&quot;: &quot;Oops&quot;}],
+            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+          },
+          {
+            &quot;name&quot;: &quot;Jolrael&quot;,
+            &quot;text&quot;: &quot;'Wrong. Now, foolish one, leave this place or I shall devour you.'&quot;,
+            &quot;options&quot;: [{&quot;name&quot;: &quot;Oops&quot;}],
+            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+          }]
+},
+{
+  &quot;name&quot;: &quot;Planar Lore&quot;,
+  &quot;text&quot;: &quot;'Which animal is the symbol of the only one of Amonkhet's original five gods to survive the Hour of Devastation?'&quot;,
+  &quot;options&quot;: [
+    {
+      &quot;name&quot;: &quot;Crocodile&quot;,
+      &quot;text&quot;: &quot;'Wrong. Now, foolish one, leave this place or I shall devour you.'&quot;,
+      &quot;options&quot;: [{&quot;name&quot;: &quot;Oops&quot;}],
+      &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+    },
+    {
+      &quot;name&quot;: &quot;Caracal&quot;,
+      &quot;text&quot;: &quot;'Wrong. Now, foolish one, leave this place or I shall devour you.'&quot;,
+      &quot;options&quot;: [{&quot;name&quot;: &quot;Oops&quot;}],
+      &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+    },
+    {
+      &quot;name&quot;: &quot;Ibis&quot;,
+      &quot;text&quot;: &quot;'Wrong. Now, foolish one, leave this place or I shall devour you.'&quot;,
+      &quot;options&quot;: [{&quot;name&quot;: &quot;Oops&quot;}],
+      &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+    },
+    {
+      &quot;name&quot;: &quot;Jackal&quot;,
+      &quot;text&quot;: &quot;'Correct. Take this reward for your cleverness and be on your way, lest you test my patience.'&quot;,
+      &quot;action&quot;: [
+        {&quot;deleteMapObject&quot;:-1}, 
+        {&quot;grantRewards&quot;: [
+            { &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Green&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 4 },
+            {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000},
+            {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 20}                
+          ]
+        }
+      ],
+      &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]
+    }]
+},
+{
+  &quot;name&quot;: &quot;Knowledge of Planeswalkers&quot;,
+  &quot;text&quot;: &quot;'If the planeswalker Wrenn were to have been desparked, she would have been considered a...'&quot;,
+  &quot;options&quot;: [
+    {
+      &quot;name&quot;: &quot;Treefolk&quot;,
+      &quot;text&quot;: &quot;'Wrong. Now, foolish one, leave this place or I shall devour you.'&quot;,
+      &quot;options&quot;: [{&quot;name&quot;: &quot;Oops&quot;}],
+      &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+    },
+    {
+      &quot;name&quot;: &quot;Human&quot;,
+      &quot;text&quot;: &quot;'Wrong. Now, foolish one, leave this place or I shall devour you.'&quot;,
+      &quot;options&quot;: [{&quot;name&quot;: &quot;Oops&quot;}],
+      &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+    },
+    {
+      &quot;name&quot;: &quot;Elemental&quot;,
+      &quot;text&quot;: &quot;'Wrong. Now, foolish one, leave this place or I shall devour you.'&quot;,
+      &quot;options&quot;: [{&quot;name&quot;: &quot;Oops&quot;}],
+      &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+    },
+    {
+      &quot;name&quot;: &quot;Dryad&quot;,
+      &quot;text&quot;: &quot;'Correct. Take this reward for your cleverness and be on your way, lest you test my patience.'&quot;,
+      &quot;action&quot;: [
+        {&quot;deleteMapObject&quot;:-1}, 
+        {&quot;grantRewards&quot;: [
+            { &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Green&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 4 },
+            {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000},
+            {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 20}                
+          ]
+        }
+      ],
+      &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]
+    }]
+}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

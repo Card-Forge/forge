@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Deadpool
+Title=Deadpool
+Icon=Deadpool.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/mateusf34_-_Raga_Eldrazi_(Modern,_#1517663).dck
+Deck Type=constructed
+
+[Main]
+2 Reality Smasher
+4 Ragavan, Nimble Pilferer
+4 Thought-Knot Seer
+4 Fury
+4 Fable of the Mirror-Breaker
+4 Eldrazi Obligator
+4 Bonecrusher Giant
+4 Relic of Progenitus
+2 Dismember
+3 Lightning Bolt
+4 Shatterskull Smashing
+1 Wastes
+2 Den of the Bugbear
+3 Cavern of Souls
+3 Mountain
+4 Ramunap Ruins
+4 Prismatic Vista
+4 Eldrazi Temple
+[Sideboard]
+1 Abrade
+2 Warping Wail
+2 Orvar, the All-Form
+2 Engineered Explosives
+2 Brotherhood's End
+3 Chalice of the Void
+3 Blood Moon

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Air-Walker
+Title=Air-Walker
+Icon=Air-Walker.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/demonictutors_-_Hammer_Time_(Modern,_#1623752)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Esper Sentinel
+1 Gingerbrute
+2 Giver of Runes
+3 Memnite
+3 Ornithopter
+4 Puresteel Paladin
+4 Stoneforge Mystic
+4 Colossus Hammer
+1 Kaldra Compleat
+1 Shadowspear
+4 Springleaf Drum
+3 Surge of Salvation
+4 Sigarda's Aid
+4 Urza's Saga
+1 Eiganjo, Seat of the Empire
+2 Horizon Canopy
+3 Inkmoth Nexus
+10 Plains
+2 Silent Clearing
+[Sideboard]
+3 Drannith Magistrate
+4 March of Otherworldly Light
+2 Orvar, the All-Form
+1 Pithing Needle
+4 Sanctifier en-Vec
+1 Sword of Fire and Ice

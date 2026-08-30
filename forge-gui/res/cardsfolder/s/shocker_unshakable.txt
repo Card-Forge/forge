@@ -1,0 +1,11 @@
+Name:Shocker, Unshakable
+Variant:UniversesWithin:FlavorName:Kazuo, Ruthless Rival
+ManaCost:4 R R
+Types:Legendary Creature Human Rogue Villain
+PT:5/5
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, NICKNAME has first strike.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Vibro-Shock Gauntlets — When NICKNAME enters, he deals 2 damage to target creature and 2 damage to that creature's controller.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 2 | DamageMap$ True | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+Oracle:During your turn, Shocker has first strike.\nVibro-Shock Gauntlets — When Shocker enters, he deals 2 damage to target creature and 2 damage to that creature's controller.

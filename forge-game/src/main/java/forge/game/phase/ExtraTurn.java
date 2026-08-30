@@ -28,7 +28,7 @@ import forge.game.trigger.Trigger;
 /**
  * <p>
  * ExtraTurn class.
- * Stores informations about extra turns
+ * Stores information about extra turns
  * </p>
  * 
  * @author Forge

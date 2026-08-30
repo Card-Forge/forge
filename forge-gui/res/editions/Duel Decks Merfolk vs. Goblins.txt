@@ -2,7 +2,6 @@
 Code=DDT
 Date=2017-10-24
 Name=Duel Decks: Merfolk vs. Goblins
-Code2=DDT
 Type=Duel_Deck
 ScryfallCode=DDT
 
@@ -75,4 +74,3 @@ ScryfallCode=DDT
 1 u_1_0_elemental @Svetlin Velinov
 2 u_5_5_wall_defender @Brian Snõddy
 3 r_1_1_goblin @Karl Kopinski
-4 r_1_1_goblin_haste @Karl Kopinski

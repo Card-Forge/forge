@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Master Splinter
+Title=Master Splinter
+Icon=Master Splinter.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Adrian_Zhu_-_Jeskai_Monument_(Standard,_#2381355).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+3 Fear of Missing Out
+4 Scrapwork Mutt
+4 Guardian of New Benalia
+4 Phyrexian Dragon Engine
+4 Monument to Endurance
+4 Torch the Tower
+3 Burst Lightning
+4 Recommission
+4 Helping Hand
+1 Plains
+4 Elegant Parlor
+3 The Mycosynth Gardens
+4 Inspiring Vantage
+4 Battlefield Forge
+2 Mountain
+4 Riverpyre Verge
+[Sideboard]
+3 Destroy Evil
+2 Ghost Vacuum
+3 Loran of the Third Path
+1 Brotherhood's End
+2 Exorcise
+1 Fuel the Flames
+3 Sheltered by Ghosts

@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
+
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.DialogData;
@@ -26,6 +27,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundSystem;
+import forge.util.Localizer;
 import forge.util.NameGenerator;
 
 import java.util.Random;
@@ -34,6 +36,7 @@ import java.util.Random;
  * NewGame scene that contains the character creation
  */
 public class NewGameScene extends MenuScene {
+
     TextField selectedName;
     ColorSet[] colorIds;
     CardEdition[] editionIds;
@@ -53,11 +56,12 @@ public class NewGameScene extends MenuScene {
     private final ImageButton modeHelp;
     private DialogData modeSummary;
     private final Random rand = new Random();
+    private String originalEditionLabelText;
+    private Array<String> originalEditionNames;
 
     private final Array<AdventureModes> modes = new Array<>();
 
     private NewGameScene() {
-
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
         gender = ui.findActor("gender");
         selectedName = ui.findActor("nameField");
@@ -67,6 +71,7 @@ public class NewGameScene extends MenuScene {
         modeHelp = ui.findActor("modeHelp");
         colorLabel = ui.findActor("colorIdL");
         String colorIdLabel = colorLabel.storedText;
+        String deckLabel = "[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":";
         custom = new Array<>();
         colorId = ui.findActor("colorId");
         String[] colorSet = Config.instance().colorIds();
@@ -97,31 +102,51 @@ public class NewGameScene extends MenuScene {
                 AdventureModes.Pile.setSelectionName(colorIdLabel);
                 AdventureModes.Pile.setModes(colorNames);
             }
+            if (diff.commanderDecks != null) {
+                modes.add(AdventureModes.Commander);
+                AdventureModes.Commander.setSelectionName(colorIdLabel);
+                AdventureModes.Commander.setModes(colorNames);
+            }
             break;
         }
 
         starterEdition = ui.findActor("starterEdition");
         starterEditionLabel = ui.findActor("starterEditionL");
+        originalEditionLabelText = starterEditionLabel.storedText;
         String[] starterEditions = Config.instance().starterEditions();
         String[] starterEditionNames = Config.instance().starterEditionNames();
         editionIds = new CardEdition[starterEditions.length];
         for (int i = 0; i < editionIds.length; i++)
             editionIds[i] = FModel.getMagicDb().getEditions().get(starterEditions[i]);
-        Array<String> editionNames = new Array<>(editionIds.length);
+        originalEditionNames = new Array<>(editionIds.length);
         for (String editionName : starterEditionNames)
-            editionNames.add(UIActor.localize(editionName));
-        starterEdition.setTextList(editionNames);
+            originalEditionNames.add(UIActor.localize(editionName));
+        starterEdition.setTextList(originalEditionNames);
+
+        // Precon mode: deck names in colorId, set filter in starterEdition
+        if (Config.instance().hasPreconDecks()) {
+            modes.add(AdventureModes.Precon);
+            AdventureModes.Precon.setSelectionName(deckLabel);
+            AdventureModes.Precon.setModes(Config.instance().filterPreconDecks(0));
+        }
+
+        if (Config.instance().hasCommanderPreconDecks()) {
+            modes.add(AdventureModes.CommanderPrecon);
+            AdventureModes.CommanderPrecon.setSelectionName(deckLabel);
+            AdventureModes.CommanderPrecon.setModes(Config.instance().filterCommanderPreconDecks(0));
+        }
 
         modes.add(AdventureModes.Chaos);
-        AdventureModes.Chaos.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
+        AdventureModes.Chaos.setSelectionName(deckLabel);
         AdventureModes.Chaos.setModes(new Array<>(new String[]{Forge.getLocalizer().getMessage("lblRandomDeck")}));
         for (DeckProxy deckProxy : DeckProxy.getAllCustomStarterDecks())
             custom.add(deckProxy.getName());
         if (!custom.isEmpty()) {
             modes.add(AdventureModes.Custom);
-            AdventureModes.Custom.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
+            AdventureModes.Custom.setSelectionName(deckLabel);
             AdventureModes.Custom.setModes(custom);
         }
+
         String[] modeNames = new String[modes.size];
         int constructedIndex = -1;
 
@@ -136,8 +161,7 @@ public class NewGameScene extends MenuScene {
         mode.setCurrentIndex(constructedIndex != -1 ? constructedIndex : 0);
 
         AdventureModes initialMode = modes.get(mode.getCurrentIndex());
-        starterEdition.setVisible(initialMode == AdventureModes.Standard);
-        starterEditionLabel.setVisible(initialMode == AdventureModes.Standard);
+        updateModeSelectionState(initialMode);
 
         gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale") + "[%120][CYAN] \u2642",
                 Forge.getLocalizer().getMessage("lblFemale") + "[%120][MAGENTA] \u2640"});
@@ -153,11 +177,18 @@ public class NewGameScene extends MenuScene {
         mode.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                updateModeSelectionState(modes.get(mode.getCurrentIndex()));
+            }
+        });
+        starterEdition.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
                 AdventureModes smode = modes.get(mode.getCurrentIndex());
-                colorLabel.setText(smode.getSelectionName());
-                colorId.setTextList(smode.getModes());
-                starterEdition.setVisible(smode == AdventureModes.Standard);
-                starterEditionLabel.setVisible(smode == AdventureModes.Standard);
+                if (smode == AdventureModes.Precon) {
+                    colorId.setTextList(Config.instance().filterPreconDecks(starterEdition.getCurrentIndex()));
+                } else if (smode == AdventureModes.CommanderPrecon) {
+                    colorId.setTextList(Config.instance().filterCommanderPreconDecks(starterEdition.getCurrentIndex()));
+                }
             }
         });
         race = ui.findActor("race");
@@ -205,6 +236,9 @@ public class NewGameScene extends MenuScene {
         });
     }
 
+    // class field
+    private RewardActor previewActor;
+
     private static NewGameScene object;
 
     public static NewGameScene instance() {
@@ -244,6 +278,50 @@ public class NewGameScene extends MenuScene {
         selectedName.setText(NameGenerator.getRandomName(val, "Any", ""));
     }
 
+    private void updateModeSelectionState(AdventureModes selectedMode) {
+        colorLabel.setText(selectedMode.getSelectionName());
+        boolean showEdition = selectedMode.usesStarterEditionSelector();
+        starterEdition.setVisible(showEdition);
+        starterEditionLabel.setVisible(showEdition);
+
+        if (selectedMode == AdventureModes.Precon) {
+            starterEdition.setTextList(Config.instance().getPreconSetNames());
+            starterEditionLabel.setText("[BLACK]" + Forge.getLocalizer().getMessageorUseDefault("lblEdition", "Edition") + ":");
+            colorId.setTextList(Config.instance().filterPreconDecks(starterEdition.getCurrentIndex()));
+        } else if (selectedMode == AdventureModes.CommanderPrecon) {
+            starterEdition.setTextList(Config.instance().getCommanderPreconSetNames());
+            starterEditionLabel.setText("[BLACK]" + Forge.getLocalizer().getMessageorUseDefault("lblEdition", "Edition") + ":");
+            colorId.setTextList(Config.instance().filterCommanderPreconDecks(starterEdition.getCurrentIndex()));
+        } else if (selectedMode == AdventureModes.Standard) {
+            starterEditionLabel.setText(originalEditionLabelText);
+            starterEdition.setTextList(originalEditionNames);
+            colorId.setTextList(selectedMode.getModes());
+        } else {
+            colorId.setTextList(selectedMode.getModes());
+        }
+    }
+
+    private ColorSet getStartingColor() {
+        AdventureModes currentMode = modes.get(mode.getCurrentIndex());
+        if (currentMode.usesFolderDeckPicker() || currentMode == AdventureModes.Chaos) {
+            return ColorSet.fromNames("W".toCharArray());
+        }
+        if (currentMode == AdventureModes.Custom) {
+            return colorIds[0];
+        }
+        int idx = colorId.getCurrentIndex();
+        return colorIds[idx < colorIds.length ? idx : 0];
+    }
+
+    private CardEdition getStartingEdition() {
+        AdventureModes currentMode = modes.get(mode.getCurrentIndex());
+        if (currentMode == AdventureModes.Standard && editionIds.length > 0) {
+            int idx = starterEdition.getCurrentIndex();
+            return editionIds[idx < editionIds.length ? idx : 0];
+        }
+        return editionIds.length > 0 ? editionIds[0] : null;
+    }
+
     boolean started = false;
 
     public boolean start() {
@@ -260,10 +338,10 @@ public class NewGameScene extends MenuScene {
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),
                     avatarIndex,
-                    colorIds[custom.isEmpty() || !AdventureModes.Custom.equals(modes.get(mode.getCurrentIndex())) ? colorId.getCurrentIndex() : 0],
+                    getStartingColor(),
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
+                    getStartingEdition(), 0);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().enterSpawnPOI();
@@ -302,17 +380,16 @@ public class NewGameScene extends MenuScene {
     @Override
     public void enter() {
         updateAvatar();
-
         if (Forge.createNewAdventureMap) {
             FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
             WorldSave.generateNewWorld(selectedName.getText(),
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),
                     avatarIndex,
-                    colorIds[colorId.getCurrentIndex()],
+                    getStartingColor(),
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()], 0);
+                    getStartingEdition(), 0);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             Forge.switchScene(GameScene.instance());
         }
@@ -323,21 +400,29 @@ public class NewGameScene extends MenuScene {
 
     private void showDifficultyHelp() {
         DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
+        boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
+        String startingEquipment = selectedDifficulty.startItems == null || selectedDifficulty.startItems.length == 0
+                ? "None"
+                : String.join(", ", selectedDifficulty.startItems);
 
         difficultySummary = new DialogData();
         difficultySummary.name = "Summary";
         switch (selectedDifficulty.name) {
             case "Easy":
-                difficultySummary.text = String.format("Difficulty: %s\nFor newer players or those who want a relaxed experience.\nStarter decks are monocolored.\nStarting equipment: Manasight Amulet, Leather Boots", selectedDifficulty.name);
+                difficultySummary.text = String.format("Difficulty: %s\nFor newer players or those who want a relaxed experience.\nStarter decks are monocolored.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
                 break;
             case "Normal":
-                difficultySummary.text = String.format("Difficulty: %s\nHow Adventure Mode is intended to be played.\nStarter decks will include a second color.\nStarting equipment: Leather Boots", selectedDifficulty.name);
+                difficultySummary.text = String.format("Difficulty: %s\nHow Adventure Mode is intended to be played.\nStarter decks will include a second color.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
                 break;
             case "Hard":
-                difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nSome enemies will use genetic AI decks.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                if (enableGeneticAI) {
+                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nSome enemies will use genetic AI decks.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                } else {
+                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                }
                 break;
             case "Insane":
-                difficultySummary.text = String.format("Difficulty: %s\nFor players who don't want to like the game.\nIdentical to Hard difficulty, but with even less forgiving and rewarding results.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                difficultySummary.text = String.format("Difficulty: %s\nFor players who don't want to like the game.\nIdentical to Hard difficulty, but with even less forgiving and rewarding results.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
                 break;
             default:
                 difficultySummary.text = "((Custom difficulty settings))";
@@ -375,89 +460,104 @@ public class NewGameScene extends MenuScene {
 
     private void showModeHelp() {
 
+        Localizer localizer = Forge.getLocalizer();
         AdventureModes selectedMode = modes.get(mode.getCurrentIndex());
         DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
+        boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
 
         modeSummary = new DialogData();
-        modeSummary.name = "Summary";
+        modeSummary.name = localizer.getMessage("lblSummary");
 
         StringBuilder summaryText = new StringBuilder();
         switch (selectedMode) {
             case Standard:
-                summaryText.append("Mode: Standard\n\nYour starting deck is built from 2-3 Jumpstart packs of twenty cards each.\n\n");
+                summaryText.append(localizer.getMessage("advModeStandardSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append("On your currently selected difficulty, Easy, you will receive three jumpstart packs of your chosen color.");
+                        summaryText.append(localizer.getMessage("advDiffEasyStandard"));
                         break;
                     case "Normal":
-                        summaryText.append("On your currently selected difficulty, Normal, you will receive two jumpstart packs of your chosen color and one of an allied color.");
+                        summaryText.append(localizer.getMessage("advDiffNormalStandard"));
                         break;
                     case "Hard":
-                        summaryText.append("On your currently selected difficulty, Hard, you will receive one jumpstart pack of your chosen color and one of an allied color.");
+                        summaryText.append(localizer.getMessage("advDiffHardStandard"));
                         break;
                     case "Insane":
-                        summaryText.append("On your currently selected difficulty, Insane, you will receive one jumpstart pack of your chosen color and one of an allied color.");
+                        summaryText.append(localizer.getMessage("advDiffInsaneStandard"));
                         break;
                     default:
-                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        difficultySummary.text = localizer.getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Constructed:
-                summaryText.append("Mode: Constructed\n\nYou will receive a specific preconstructed deck based on your chosen color and difficulty.\n\n");
+                summaryText.append(localizer.getMessage("advModeConstructedSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append("On your currently selected difficulty, Easy, your deck will only contain your chosen color.");
+                        summaryText.append(localizer.getMessage("advDiffEasyConstructed"));
                         break;
                     case "Normal":
-                        summaryText.append("On your currently selected difficulty, Normal, your deck will contain your chosen color and one allied color.");
+                        summaryText.append(localizer.getMessage("advDiffNormalConstructed"));
                         break;
                     case "Hard":
-                        summaryText.append("On your currently selected difficulty, Hard, your deck will contain your chosen color and one opposing color.");
+                        summaryText.append(localizer.getMessage("advDiffHardConstructed"));
                         break;
                     case "Insane":
-                        summaryText.append("On your currently selected difficulty, Insane, your deck will contain your chosen color and one opposing color.");
+                        summaryText.append(localizer.getMessage("advDiffInsaneConstructed"));
                         break;
                     default:
-                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        difficultySummary.text = localizer.getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Pile:
-                summaryText.append("Mode: Pile\n\nYou will receive a random pile of cards based on your chosen color and difficulty.\n\n");
+                summaryText.append(localizer.getMessage("advModePileSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append("On your currently selected difficulty, Easy, your deck will only contain your chosen color and one allied color.");
+                        summaryText.append(localizer.getMessage("advDiffEasyPile"));
                         break;
                     case "Normal":
-                        summaryText.append("On your currently selected difficulty, Normal, your deck will contain your chosen color and two allied colors.");
+                        summaryText.append(localizer.getMessage("advDiffNormalPile"));
                         break;
                     case "Hard":
-                        summaryText.append("On your currently selected difficulty, Hard, your deck will contain your chosen color and two allied colors.\n\n");
-                        summaryText.append("You will receive less uncommon and rare cards than on Normal difficulty.");
+                        summaryText.append(localizer.getMessage("advDiffHardPile"));
+                        summaryText.append(localizer.getMessage("advPileLessRareReward"));
                         break;
                     case "Insane":
-                        summaryText.append("On your currently selected difficulty, Insane, your deck will contain your chosen color and two allied colors.\n\n");
-                        summaryText.append("You will receive less uncommon and rare cards than on Normal difficulty.");
+                        summaryText.append(localizer.getMessage("advDiffInsanePile"));
+                        summaryText.append(localizer.getMessage("advPileLessRareReward"));
                         break;
                     default:
-                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        difficultySummary.text = localizer.getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Chaos:
-                summaryText.append("Mode: Chaos\n\nYou (and all enemies) will receive a random preconstructed deck.\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                summaryText.append(localizer.getMessage("advModeChaosSummary"));
                 break;
             case Custom:
-                summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                if (enableGeneticAI) {
+                    summaryText.append(localizer.getMessage("advModeCustomGeneticSummary"));
+                } else {
+                    summaryText.append(localizer.getMessage("advModeCustomSummary"));
+                }
+                break;
+            case Precon:
+                summaryText.append(localizer.getMessage("advModePreconSummary"));
+                break;
+            case Commander:
+                summaryText.append(localizer.getMessage("advModeCommanderSummary"));
+                break;
+            case CommanderPrecon:
+                summaryText.append(localizer.getMessage("advModeCommanderPreconSummary"));
                 break;
             default:
-                summaryText.append("No summary available for your this game mode.");
+                summaryText.append(localizer.getMessage("advNoModeSummaryAvailable"));
                 break;
         }
 
         DialogData dismiss = new DialogData();
-        dismiss.name = "OK";
+        dismiss.name = localizer.getMessage("lblOK");
         modeSummary.text = summaryText.toString();
         modeSummary.options = new DialogData[1];
         modeSummary.options[0] = dismiss;

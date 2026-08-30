@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Medium
+Description=./Standard/Kamigawa_Neon_Dynasty/Brandon_Oakley_-_Orzhov_Midrange_(Standard,_#1319209).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+3 Concealing Curtains
+4 Silverquill Silencer
+4 Luminarch Aspirant
+4 The Restoration of Eiganjo
+1 Infernal Grasp
+2 Vanishing Verse
+2 Hagra Mauling
+2 Humiliate
+2 Emeria's Call
+3 Duress
+2 The Meathook Massacre
+4 Wedding Announcement
+2 Lolth, Spider Queen
+3 The Wandering Emperor
+1 Takenuma, Abandoned Mire
+1 Eiganjo, Seat of the Empire
+3 Swamp
+3 Hive of the Eye Tyrant
+4 Brightclimb Pathway
+4 Shattered Sanctum
+5 Plains
+[Sideboard]
+1 Infernal Grasp
+1 Vanishing Verse
+1 Soul Shatter
+1 Lolth, Spider Queen
+1 Sorin the Mirthless
+2 Go Blank
+2 Bloodchief's Thirst
+3 Farewell
+3 Legion Angel

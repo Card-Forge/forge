@@ -1,0 +1,14 @@
+Name:Electro, Assaulting Battery
+Variant:UniversesWithin:FlavorName:Bayo, Irritable Instructor
+ManaCost:1 R R
+Types:Legendary Creature Human Villain
+PT:2/3
+K:Flying
+S:Mode$ UnspentMana | ValidPlayer$ You | ManaType$ Red | Description$ You don't lose unspent red mana as steps and phases end.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Whenever you cast an instant or sorcery spell, add {R}.
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When NICKNAME leaves the battlefield, you may pay {X}. When you do, he deals X damage to target player.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ X | Execute$ TrigDamage | TriggerDescription$ When you do, he deals X damage to target player.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player | NumDmg$ X
+SVar:X:Count$xPaid
+Oracle:Flying\nYou don't lose unspent red mana as steps and phases end.\nWhenever you cast an instant or sorcery spell, add {R}.\nWhen Electro leaves the battlefield, you may pay {X}. When you do, he deals X damage to target player.

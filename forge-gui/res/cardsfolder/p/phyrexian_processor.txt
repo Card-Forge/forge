@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PayLife | ReplacementResult$ Updated | Description$ As CARDNAME enters, pay any amount of life.
 SVar:PayLife:AB$ StoreSVar | Cost$ Mandatory PayLife<X> | SVar$ LifePaidOnETB | Type$ Calculate | Expression$ X
-A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ b_x_x_phyrexian_minion | TokenOwner$ You | TokenPower$ LifePaidOnETB | TokenToughness$ LifePaidOnETB | SpellDescription$ Create an X/X black Phyrexian Minion creature token, where X is the life paid as CARDNAME entered.
+A:AB$ Token | Cost$ 4 T | TokenScript$ b_x_x_phyrexian_minion | TokenOwner$ You | TokenPower$ LifePaidOnETB | TokenToughness$ LifePaidOnETB | SpellDescription$ Create an X/X black Phyrexian Minion creature token, where X is the life paid as CARDNAME entered.
 SVar:X:Count$xPaid
 SVar:LifePaidOnETB:Number$0
 AI:RemoveDeck:All

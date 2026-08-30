@@ -17,6 +17,12 @@ public class MouseTriggerEvent implements ITriggerEvent, Serializable {
         this.y = event.getY();
     }
 
+    public MouseTriggerEvent(final int button, final int x, final int y) {
+        this.button = button;
+        this.x = x;
+        this.y = y;
+    }
+
     @Override
     public int getButton() {
         return button;

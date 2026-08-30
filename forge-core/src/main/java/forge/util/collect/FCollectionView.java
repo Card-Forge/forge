@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 /**
  * Read-only interface to an {@link FCollection}.
  */
-public interface FCollectionView<T> extends Iterable<T> {
+public interface FCollectionView<T> extends Collection<T> {
     /**
      * @see Collection#isEmpty()
      */

@@ -1,0 +1,10 @@
+Name:The Fantasticar
+ManaCost:3
+Types:Legendary Artifact Vehicle
+PT:4/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | OptionalDecider$ You | TriggerDescription$ Whenever you cast a noncreature spell, you may have CARDNAME become an artifact creature until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Types$ Creature,Artifact
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ4 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast your fourth noncreature spell each turn, you may sacrifice CARDNAME. If you do, create four 4/4 colorless Construct artifact creature tokens with flying and haste.
+SVar:TrigToken:AB$ Token | Cost$ Sac<1/CARDNAME> | TokenOwner$ You | TokenScript$ c_4_4_a_construct_flying_haste | TokenAmount$ 4
+Oracle:Flying\nWhenever you cast a noncreature spell, you may have The Fantasticar become an artifact creature until end of turn.\nWhenever you cast your fourth noncreature spell each turn, you may sacrifice The Fantasticar. If you do, create four 4/4 colorless Construct artifact creature tokens with flying and haste.

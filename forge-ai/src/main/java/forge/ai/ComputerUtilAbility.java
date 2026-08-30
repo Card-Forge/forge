@@ -3,9 +3,12 @@ package forge.ai;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 
+import com.google.common.collect.Multimap;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -25,6 +28,10 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 public class ComputerUtilAbility {
@@ -32,10 +39,9 @@ public class ComputerUtilAbility {
         if (!game.getStack().isEmpty() || !game.getPhaseHandler().getPhase().isMain()) {
             return null;
         }
-        CardCollection landList = new CardCollection(player.getCardsIn(ZoneType.Hand));
 
         //filter out cards that can't be played
-        landList = CardLists.filter(landList, c -> {
+        CardCollection landList = CardLists.filter(player.getCardsIn(ZoneType.Hand), c -> {
             if (!c.hasPlayableLandFace()) {
                 return false;
             }
@@ -55,9 +61,6 @@ public class ComputerUtilAbility {
                 landList.add(crd);
             }
         }
-        if (landList.isEmpty()) {
-            return null;
-        }
         return landList;
     }
 
@@ -76,27 +79,34 @@ public class ComputerUtilAbility {
         return all;
     }
 
-    public static List<SpellAbility> getSpellAbilities(final CardCollectionView l, final Player player) {
+    public static List<SpellAbility> getSpellAbilities(final CardCollectionView all, final Player activator) {
         final List<SpellAbility> spellAbilities = Lists.newArrayList();
-        for (final Card c : l) {
-            spellAbilities.addAll(c.getAllPossibleAbilities(player, false));
+        for (final Card c : all) {
+            Multimap<SpellAbility, SpellAbility> unhiddenAltCost = ArrayListMultimap.create();
+            List<SpellAbility> possible = c.getAllPossibleAbilities(activator, false, unhiddenAltCost);
+            for (SpellAbility sa : unhiddenAltCost.keySet()) {
+                if (possible.contains(sa)) {
+                    // when SA can also be played as basic exclude its AltCost to prevent redundant check later
+                    possible.removeAll(unhiddenAltCost.get(sa));
+                }
+            }
+            spellAbilities.addAll(possible);
         }
         return spellAbilities;
     }
 
-    public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player player) {
-        final List<SpellAbility> newAbilities = Lists.newArrayList();
-
+    public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player activator) {
         List<SpellAbility> originListWithAddCosts = Lists.newArrayList();
         for (SpellAbility sa : originList) {
             // If this spell has alternative additional costs, add them instead of the unmodified SA itself
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(activator);
             originListWithAddCosts.addAll(GameActionUtil.getAdditionalCostSpell(sa));
         }
 
+        final List<SpellAbility> newAbilities = Lists.newArrayList();
         for (SpellAbility sa : originListWithAddCosts) {
             // determine which alternative costs are cheaper than the original and prioritize them
-            List<SpellAbility> saAltCosts = GameActionUtil.getAlternativeCosts(sa, player, false);
+            List<SpellAbility> saAltCosts = GameActionUtil.getAlternativeCosts(sa, activator, false);
             List<SpellAbility> priorityAltSa = Lists.newArrayList();
             List<SpellAbility> otherAltSa = Lists.newArrayList();
             for (SpellAbility altSa : saAltCosts) {
@@ -117,20 +127,20 @@ public class ComputerUtilAbility {
 
         final List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : newAbilities) {
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(activator);
 
             // Optional cost selection through the AI controller
             boolean choseOptCost = false;
             List<OptionalCostValue> list = GameActionUtil.getOptionalCostValues(sa);
             if (!list.isEmpty()) {
-                // still add base spell in case of Promise Gift
-                if (list.stream().anyMatch(ocv -> ocv.getType().equals(OptionalCost.PromiseGift))) {
-                    result.add(sa);
-                }
-                list = player.getController().chooseOptionalCosts(sa, list);
+                list = activator.getController().chooseOptionalCosts(sa, list);
                 if (!list.isEmpty()) {
-                    choseOptCost = true;
+                    // still check base spell first in case of Promise Gift
+                    if (list.stream().anyMatch(ocv -> ocv.getType().equals(OptionalCost.PromiseGift))) {
+                        result.add(sa);
+                    }
                     result.add(GameActionUtil.addOptionalCosts(sa, list));
+                    choseOptCost = true;
                 }
             }
 
@@ -219,7 +229,7 @@ public class ComputerUtilAbility {
     public static boolean isFullyTargetable(SpellAbility sa) {
         SpellAbility sub = sa;
         while (sub != null) {
-            if (sub.usesTargeting() && sub.getTargetRestrictions().getNumCandidates(sub, true) < sub.getMinTargets()) {
+            if (sub.usesTargeting() && sub.getTargetRestrictions().getNumCandidates(sub) < sub.getMinTargets()) {
                 return false;
             }
             sub = sub.getSubAbility();
@@ -229,22 +239,22 @@ public class ComputerUtilAbility {
 
     public final static saComparator saEvaluator = new saComparator();
 
-    // not sure "playing biggest spell" matters?
     public final static class saComparator implements Comparator<SpellAbility> {
         @Override
         public int compare(final SpellAbility a, final SpellAbility b) {
             return compareEvaluator(a, b, false);
         }
         public int compareEvaluator(final SpellAbility a, final SpellAbility b, boolean safeToEvaluateCreatures) {
-            // sort from highest cost to lowest
             // we want the highest costs first
+            // TODO support alternative strategies like going wide with attackers
             int a1 = a.getPayCosts().getTotalMana().getCMC();
             int b1 = b.getPayCosts().getTotalMana().getCMC();
 
             // deprioritize SAs explicitly marked as preferred to be activated last compared to all other SAs
             if (a.hasParam("AIActivateLast") && !b.hasParam("AIActivateLast")) {
                 return 1;
-            } else if (b.hasParam("AIActivateLast") && !a.hasParam("AIActivateLast")) {
+            }
+            if (b.hasParam("AIActivateLast") && !a.hasParam("AIActivateLast")) {
                 return -1;
             }
 
@@ -264,9 +274,8 @@ public class ComputerUtilAbility {
                         if (c.hasSVar("AIRollPlanarDieParams") && c.getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
                             if (ApiType.RollPlanarDice == a.getApi()) {
                                 return 1;
-                            } else {
-                                return -1;
                             }
+                            return -1;
                         }
                     }
                 }
@@ -287,20 +296,23 @@ public class ComputerUtilAbility {
             }
             if (a2 == 0 && b2 > 0) {
                 return -1;
-            } else if (b2 == 0 && a2 > 0) {
+            }
+            if (b2 == 0 && a2 > 0) {
                 return 1;
             }
 
-            // cast 0 mana cost spells first (might be a Mox)
+            // use 0 cmc abilities first (might be a Mox)
             if (a1 == 0 && b1 > 0 && ApiType.Mana != a.getApi()) {
                 return -1;
-            } else if (a1 > 0 && b1 == 0 && ApiType.Mana != b.getApi()) {
+            }
+            if (a1 > 0 && b1 == 0 && ApiType.Mana != b.getApi()) {
                 return 1;
             }
 
             if (a.getHostCard() != null && a.getHostCard().hasSVar("FreeSpellAI")) {
                 return -1;
-            } else if (b.getHostCard() != null && b.getHostCard().hasSVar("FreeSpellAI")) {
+            }
+            if (b.getHostCard() != null && b.getHostCard().hasSVar("FreeSpellAI")) {
                 return 1;
             }
 
@@ -310,7 +322,8 @@ public class ComputerUtilAbility {
                 // (looks like it's not a full-fledged alternative cost as such, and is not processed with other alt costs)
                 if (a.isSpectacle() && !b.isSpectacle() && a1 < b1) {
                     return 1;
-                } else if (b.isSpectacle() && !a.isSpectacle() && b1 < a1) {
+                }
+                if (b.isSpectacle() && !a.isSpectacle() && b1 < a1) {
                     return 1;
                 }
             }
@@ -318,10 +331,11 @@ public class ComputerUtilAbility {
             a1 += getSpellAbilityPriority(a);
             b1 += getSpellAbilityPriority(b);
 
-            // If both are creature spells sort them after
+            // if both are creature spells sort them after
             if (safeToEvaluateCreatures) {
-                a1 += Math.round(ComputerUtilCard.evaluateCreature(a) / 100f);
-                b1 += Math.round(ComputerUtilCard.evaluateCreature(b) / 100f);
+                // try to align the scales: if priority swings in either direction extra evaluation matters less
+                a1 += Math.round(ComputerUtilCard.evaluateCreature(a) / (10.5f + Math.abs(a1)));
+                b1 += Math.round(ComputerUtilCard.evaluateCreature(b) / (10.5f + Math.abs(b1)));
             }
 
             return b1 - a1;
@@ -342,6 +356,9 @@ public class ComputerUtilAbility {
                 if (source.isCreature()) {
                     p += 1;
                 }
+                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
+                    p -= 10;
+                }
                 if (source.hasSVar("AIPriorityModifier")) {
                     p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
                 }
@@ -349,10 +366,11 @@ public class ComputerUtilAbility {
                 if (source.isInPlay() && source.hasSVar("EndOfTurnLeavePlay")) {
                     p += 1;
                 }
-                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
-                    p -= 10;
+                // prefer spells from hand when it can lower risk of discarding
+                if (source.isInZone(ZoneType.Hand) && !ai.isUnlimitedHandSize()) {
+                    p += Math.max(0, CardLists.count(ai.getCardsIn(ZoneType.Hand), c -> !c.hasSVar("DiscardMe")) - ai.getMaxHandSize());
                 }
-                // don't play equipments before having any creatures
+                // don't play equipment before having any creatures
                 if (source.isEquipment() && noCreatures) {
                     p -= 9;
                 }
@@ -366,14 +384,31 @@ public class ComputerUtilAbility {
                     p -= 9;
                 }
                 // move snap-casted spells to front
-                if (source.isInZone(ZoneType.Graveyard)) {
-                    if (sa.getMayPlay() != null && source.mayPlay(sa.getMayPlay()) != null) {
-                        p += 50;
-                    }
+                if (source.isInZone(ZoneType.Graveyard) && source.mayPlay(sa.getMayPlay()) != null) {
+                    p += 50;
                 }
                 // if the profile specifies it, deprioritize Storm spells in an attempt to build up storm count
                 if (source.hasKeyword(Keyword.STORM) && ai.getController() instanceof PlayerControllerAi) {
                     p -= (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.PRIORITY_REDUCTION_FOR_STORM_SPELLS));
+                }
+
+                for (Trigger trig : source.getTriggers()) {
+                    if (!"Battlefield".equals(trig.getParam("TriggerZones"))) {
+                        continue;
+                    }
+                    final TriggerType mode = trig.getMode();
+                    // benefit from Magecraft abilities
+                    if ((mode == TriggerType.SpellCast || mode == TriggerType.SpellCastOrCopy) && "You".equals(sa.getParam("ValidActivatingPlayer"))) {
+                        p += 1;
+                    }
+                }
+
+                for (StaticAbility sta : source.getStaticAbilities()) {
+                    final Set<StaticAbilityMode> mode = sta.getMode();
+                    // reduce cost to enable more plays
+                    if (mode.contains(StaticAbilityMode.ReduceCost) && "You".equals(sta.getParam("Activator"))) {
+                        p += 1;
+                    }
                 }
             }
 
@@ -405,6 +440,11 @@ public class ComputerUtilAbility {
             // try to cast mana ritual spells before casting spells to maximize potential mana
             if ("ManaRitual".equals(sa.getParam("AILogic"))) {
                 p += 9;
+            }
+
+            if ((sa.isPlotting() || sa.isForetelling() || sa.isKeyword(Keyword.SUSPEND)) && ai.getTurn() > 10) {
+                // less time in late game, prefer something that affects board right away
+                p -= 1;
             }
 
             return p;

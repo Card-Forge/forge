@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Nekusar the Mindrazer
+Title=Nekusar the Mindrazer
+Icon=Nekusar the Mindrazer.jpg
+Difficulty=Easy
+Description=./Standard/Dominaria_United/JiggiestJay_-_Mono_White_Midrange_(Standard,_#1469161).dck
+Deck Type=constructed
+
+[Main]
+1 Ao, the Dawn Sky
+2 The Restoration of Eiganjo
+3 Serra Paragon
+4 Spirited Companion
+4 Anointed Peacekeeper
+4 Ambitious Farmhand
+1 The Celestus
+3 Reckoner Bankbuster
+3 March of Otherworldly Light
+3 Vanquish the Horde
+4 Wedding Announcement
+2 The Wandering Emperor
+3 Elspeth Resplendent
+1 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+18 Plains
+[Sideboard]
+1 Temporary Lockdown
+1 The Wandering Emperor
+1 March of Otherworldly Light
+2 Sunset Revelry
+2 Lion Sash
+2 Intrepid Adversary
+2 Farewell
+2 Extraction Specialist
+2 Destroy Evil

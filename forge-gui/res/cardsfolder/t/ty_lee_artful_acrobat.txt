@@ -1,0 +1,9 @@
+Name:Ty Lee, Artful Acrobat
+ManaCost:2 R
+Types:Legendary Creature Human Performer
+PT:3/2
+K:Prowess
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever NICKNAME attacks, you may pay {1}. When you do, target creature can't block this turn.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigPump | TriggerDescription$ When you do, target creature can't block this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhenever Ty Lee attacks, you may pay {1}. When you do, target creature can't block this turn.

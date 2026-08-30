@@ -1,16 +1,12 @@
 package forge.game.event;
 
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 
-public class GameEventPlayerRadiation extends GameEvent {
-    public final Player receiver;
-    public final Player source;
-    public final int change;
+public record GameEventPlayerRadiation(PlayerView receiver, PlayerView source, int change) implements GameEvent {
 
-    public GameEventPlayerRadiation(Player recv, Player src, int chng) {
-        receiver = recv;
-        source = src;
-        change = chng;
+    public GameEventPlayerRadiation(Player receiver, Player source, int change) {
+        this(PlayerView.get(receiver), PlayerView.get(source), change);
     }
 
     @Override

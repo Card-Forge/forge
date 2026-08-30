@@ -1,0 +1,8 @@
+Name:Eclipsed Realms
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | ValidTypes$ Elemental,Elf,Faerie,Giant,Goblin,Kithkin,Merfolk,Treefolk | SpellDescription$ As this land enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk. | AILogic$ MostProminentInComputerDeck
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.ChosenType,Activated.ChosenType | SpellDescription$ Add one mana of any color. Spend this mana only to cast a spell of the chosen type or activate an ability of a source of the chosen type.
+Oracle:As this land enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a spell of the chosen type or activate an ability of a source of the chosen type.

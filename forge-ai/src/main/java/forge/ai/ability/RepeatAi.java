@@ -32,14 +32,11 @@ public class RepeatAi extends SpellAbilityAi {
             if ("MaxXAtOppEOT".equals(logic) && !(ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn() == ai)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-            // Set PayX here to maximum value.
-            final int max = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            sa.setXManaCostPaid(max);
+            final int max = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             if (max <= 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
-            } else {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }

@@ -1,0 +1,8 @@
+Name:Giant Koi
+ManaCost:4 U U
+Types:Creature Fish
+PT:5/7
+K:TypeCycling:Island:2
+A:AB$ Effect | Cost$ Waterbend<3> | Defined$ Self | StaticAbilities$ Unblockable | AILogic$ Pump | SpellDescription$ This creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.EffectSource | Description$ This creature can't be blocked this turn.
+Oracle:Waterbend {3}: This creature can't be blocked this turn. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)

@@ -1,0 +1,10 @@
+Name:Venomized Cat
+Variant:UniversesWithin:FlavorName:Bane-Marked Leonin
+ManaCost:2 B
+Types:Creature Symbiote Cat Villain
+PT:2/3
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill two cards. (Put the top two cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 2
+DeckHints:Ability$Mill|Graveyard
+Oracle:Deathtouch\nWhen this creature enters, mill two cards. (Put the top two cards of your library into your graveyard.)

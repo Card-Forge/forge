@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Joker
+Title=Joker
+Icon=Joker.jpg
+Difficulty=Hard
+Description=./Modern/Tarkir_Dragonstorm/Jose_Mendoza_-_Domain_Zoo_(Modern,_#2452817).dck
+Deck Type=constructed
+
+[Main]
+4 Nishoba Brawler
+3 Phlage, Titan of Fire's Fury
+4 Ragavan, Nimble Pilferer
+4 Scion of Draco
+4 Territorial Kavu
+4 Lightning Bolt
+3 Stubborn Denial
+4 Tribal Flames
+1 Winternight Stories
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Arena of Glory
+4 Arid Mesa
+1 Blood Crypt
+4 Flooded Strand
+1 Indatha Triome
+1 Mountain
+1 Plains
+1 Sacred Foundry
+1 Steam Vents
+1 Temple Garden
+1 Thundering Falls
+4 Wooded Foothills
+[Sideboard]
+3 Consign to Memory
+2 Damping Sphere
+2 Doorkeeper Thrull
+2 Hidetsugu Consumes All
+1 Kozilek, Butcher of Truth
+2 Pyroclasm
+1 Rest in Peace
+2 Wear // Tear

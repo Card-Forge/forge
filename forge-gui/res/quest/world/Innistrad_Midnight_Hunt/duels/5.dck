@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Andrea_Bellanti_-_Mono-Green_Aggro_(Standard,_#1226269).dck
+Deck Type=constructed
+
+[Main]
+2 Briarbridge Tracker
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Sculptor of Winter
+4 Esika's Chariot
+2 Snakeskin Veil
+3 Inscription of Abundance
+4 Blizzard Brawl
+4 Ranger Class
+2 Wrenn and Seven
+4 Faceless Haven
+4 Kazandu Mammoth
+19 Snow-Covered Forest
+[Sideboard]
+1 Wrenn and Seven
+1 Toski, Bearer of Secrets
+1 Snakeskin Veil
+2 Tajuru Blightblade
+2 Devouring Tendrils
+2 Froghemoth
+2 Outland Liberator
+2 Choose Your Weapon
+2 Tangletrap

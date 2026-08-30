@@ -1,0 +1,9 @@
+Name:Gimli, Counter of Kills|Deck:Gimli, Counter of Kills.dck|Variant:Commander|Avatar:Gimli, Counter of Kills|Desc:
+Name:Grishnakh, Brash Instigator|Deck:Grishnakh, Brash Instigator.dck|Variant:Commander|Avatar:Grishnakh, Brash Instigator|Desc:
+Name:Gloin, Dwarf Emissary|Deck:Gloin, Dwarf Emissary.dck|Variant:Commander|Avatar:Gloin, Dwarf Emissary|Desc:
+Name:Mauhur, Uruk-hai Captain|Deck:Mauhur, Uruk-hai Captain.dck|Variant:Commander|Avatar:Mauhur, Uruk-hai Captain|Desc:
+Name:Red Planar Portal|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Eomer of the Riddermark|Deck:Eomer of the Riddermark.dck|Variant:Commander|Avatar:Eomer of the Riddermark|Desc:
+Name:The Balrog of Moria|Deck:The Balrog of Moria.dck|Variant:Commander|Avatar:The Balrog of Moria|Desc:
+Name:Bilbo, Retired Burglar|Deck:Bilbo, Retired Burglar.dck|Variant:Commander|Avatar:Bilbo, Retired Burglar|Desc:
+Name:Gandalf of the Secret Fire|Deck:Gandalf of the Secret Fire.dck|Variant:Commander|Avatar:Gandalf of the Secret Fire|Desc:

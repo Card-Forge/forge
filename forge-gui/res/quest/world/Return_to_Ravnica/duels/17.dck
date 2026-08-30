@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Denethor
+Title=Denethor
+Icon=Denethor.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Odessa/Bryan_Raney_-_R-B_Aggro_(Standard,_#42219).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Diregraf Ghoul
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+3 Hellrider
+4 Knight of Infamy
+3 Thundermaw Hellkite
+4 Searing Spear
+3 Ultimate Price
+3 Pillar of Flame
+4 Blood Crypt
+4 Cavern of Souls
+4 Dragonskull Summit
+4 Rakdos Guildgate
+8 Swamp
+[Sideboard]
+2 Appetite for Brains
+2 Cremate
+3 Flames of the Firebrand
+2 Underworld Connections
+4 Vampire Nighthawk
+2 Zealous Conscripts
