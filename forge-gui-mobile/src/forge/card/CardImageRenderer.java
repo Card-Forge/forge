@@ -786,6 +786,11 @@ public class CardImageRenderer {
         boolean canshow = MatchController.instance.mayView(card);
         String key = card.getState(altState).getImageKey();
         Texture image = new CachedCardImageRenderer(key).getImage();
+        if (image == null) {
+            //try if there's a texture set on the CardView ie RewardActor or Inventory Item
+            if (card.getTextureObject() instanceof Texture texture)
+                image = texture;
+        }
 
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         if (card.isImmutable() && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_IMAGES_EFFECT_CARDS)){

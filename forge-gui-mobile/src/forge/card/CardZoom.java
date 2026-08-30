@@ -11,8 +11,11 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.adventure.data.ItemData;
+import forge.adventure.util.RewardActor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.ImageCache;
 import forge.deck.ArchetypeDeckGenerator;
 import forge.deck.CardThemedDeckGenerator;
 import forge.deck.CommanderDeckGenerator;
@@ -33,6 +36,7 @@ import forge.toolbox.FDialog;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.util.ImageUtil;
+import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
@@ -55,6 +59,7 @@ public class CardZoom extends FOverlay {
     private static boolean showAltState;
     private static boolean showBackSide = false;
     private static boolean showMerged = false;
+    private static boolean isAdvBack = false;
 
     public static void show(Object item) {
         show(item, false);
@@ -71,8 +76,13 @@ public class CardZoom extends FOverlay {
         show((List<?>) items0, currentIndex0, activateHandler0);
     }
 
-    public static void show(final List<?> items0, int currentIndex0, ActivateHandler activateHandler0) {
+    public static void show(List<?> items0, int currentIndex0, ActivateHandler activateHandler0) {
+        show(items0, currentIndex0, activateHandler0, false);
+    }
+
+    public static void show(final List<?> items0, int currentIndex0, ActivateHandler activateHandler0, boolean advBack) {
         items = items0;
+        isAdvBack = advBack;
         if (items == null) { return; }
         if (currentIndex0 < 0 || items.size() <= currentIndex0) { return; }
         activateHandler = activateHandler0;
@@ -90,6 +100,10 @@ public class CardZoom extends FOverlay {
     }
 
     public static void hideZoom() {
+        if (isAdvBack) {
+            Forge.back();
+            return;
+        }
         if (activateHandler != null)
             activateHandler.setSelectedIndex(currentIndex);
         cardZoom.hide();
@@ -145,6 +159,8 @@ public class CardZoom extends FOverlay {
     private static void incrementCard(int dir) {
         if (dir > 0) {
             if (currentIndex == items.size() - 1) {
+                if (isAdvBack)
+                    Forge.back();
                 return;
             }
             currentIndex++;
@@ -154,7 +170,11 @@ public class CardZoom extends FOverlay {
             nextCard = currentIndex < items.size() - 1 ? getCardView(items.get(currentIndex + 1)) : null;
         }
         else {
-            if (currentIndex == 0) { return; }
+            if (currentIndex == 0) {
+                if (isAdvBack)
+                    Forge.back();
+                return;
+            }
             currentIndex--;
 
             nextCard = currentCard;
@@ -199,7 +219,7 @@ public class CardZoom extends FOverlay {
             } else if (item instanceof ArchetypeDeckGenerator gen) {
                 return CardView.getCardForUi(gen.getPaperCard());
             } else {
-                return new CardView(-1, null, deck.getName(), null, deck.getImageKey(false));
+                return new CardView(-1, null, deck.getName(), deck.getImageKey(false));
             }
 
         }
@@ -210,9 +230,32 @@ public class CardZoom extends FOverlay {
             return CardView.getCardForUi(cc.getCard());
         }
         if (item instanceof InventoryItem ii) {
-            return new CardView(-1, null, ii.getDisplayName(), null, ii.getImageKey(false));
+            return new CardView(-1, null, ii.getDisplayName(), ii.getItemType(), ImageCache.getInstance().getImage(ii));
         }
-        return new CardView(-1, null, item.toString());
+        if (item instanceof RewardActor actor) {
+            String name = "", description = "";
+            switch (actor.getReward().getType()) {
+                case Card -> { return CardView.getCardForUi(actor.getReward().getCard()); }
+                default -> {
+                    ItemData data = actor.getReward().getItem();
+                    if (data != null) {
+                        name = data.name;
+                        description = data.getDescription();
+                    } else if (actor.getReward().getDeck() != null) {
+                        name = actor.getReward().getDeck().getName();
+                    } else {
+                        name = actor.getReward().getType().name();
+                        description = "Adds " + actor.getReward().getCount() + " " + actor.getReward().getType();
+                    }
+                    if (data != null && description.isEmpty() && data.questItem)
+                        description = "Quest Item";
+                    TextUtil.fastReplace(description, "[+Shards]", "{M}");
+                    CardView cardView = new CardView(-1, null, name, description, actor.getImage());
+                    return cardView;
+                }
+            }
+        }
+        return new CardView(-1, null, item.toString(), "", null);
     }
 
     @Override
@@ -243,6 +286,8 @@ public class CardZoom extends FOverlay {
         showBackSide = false;
         showAltState = false;
         showMerged = false;
+        if (isAdvBack)
+            Forge.back();
         return true;
     }
 
@@ -436,6 +481,14 @@ public class CardZoom extends FOverlay {
 
     @Override
     public boolean keyDown(int keyCode) {
+        if (isAdvBack) {
+            if (keyCode == Input.Keys.ESCAPE || keyCode == Input.Keys.BACK) {
+                if (Forge.endKeyInput()) { return true; }
+
+                Forge.back();
+                return true;
+            }
+        }
         if (Forge.hasGamepad()) {
             if (keyCode == Input.Keys.DPAD_LEFT)
                 fling(300, 0);

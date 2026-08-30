@@ -11,6 +11,7 @@ public class Adventure implements Disposable {
     private float animationTimeout;
     boolean sceneWasSwapped;
     private SpriteBatch animationBatch, adventureBatch;
+    public boolean renderAnimation = true;
 
     private Adventure() {
         sceneWasSwapped = false;
@@ -28,40 +29,42 @@ public class Adventure implements Disposable {
 
     void render(float delta) {
         try {
-            float transitionTime = 0.12f;
-            if (sceneWasSwapped) {
-                sceneWasSwapped = false;
-                animationTimeout = transitionTime;
-                clear();
-                return;
-            }
-            if (animationTimeout >= 0) {
-                clear();
-                animationBatch.begin();
-                animationTimeout -= delta;
-                animationBatch.setColor(1, 1, 1, 1);
-                animationBatch.draw(ScreenUtil.getInstance().getLastScreenTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                animationBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * animationTimeout);
-                animationBatch.draw(Forge.getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                animationBatch.end();
-                if (animationTimeout < 0) {
-                    Forge.currentScene.render();
-                    Forge.storeScreen();
+            if (renderAnimation) {
+                float transitionTime = 0.12f;
+                if (sceneWasSwapped) {
+                    sceneWasSwapped = false;
+                    animationTimeout = transitionTime;
                     clear();
-                } else {
                     return;
                 }
-            }
-            if (animationTimeout >= -transitionTime) {
-                clear();
-                animationBatch.begin();
-                animationTimeout -= delta;
-                animationBatch.setColor(1, 1, 1, 1);
-                animationBatch.draw(ScreenUtil.getInstance().getLastScreenTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                animationBatch.setColor(1, 1, 1, (1 / transitionTime) * (animationTimeout + transitionTime));
-                animationBatch.draw(Forge.getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                animationBatch.end();
-                return;
+                if (animationTimeout >= 0) {
+                    clear();
+                    animationBatch.begin();
+                    animationTimeout -= delta;
+                    animationBatch.setColor(1, 1, 1, 1);
+                    animationBatch.draw(ScreenUtil.getInstance().getLastScreenTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    animationBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * animationTimeout);
+                    animationBatch.draw(Forge.getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    animationBatch.end();
+                    if (animationTimeout < 0) {
+                        Forge.currentScene.render();
+                        Forge.storeScreen();
+                        clear();
+                    } else {
+                        return;
+                    }
+                }
+                if (animationTimeout >= -transitionTime) {
+                    clear();
+                    animationBatch.begin();
+                    animationTimeout -= delta;
+                    animationBatch.setColor(1, 1, 1, 1);
+                    animationBatch.draw(ScreenUtil.getInstance().getLastScreenTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    animationBatch.setColor(1, 1, 1, (1 / transitionTime) * (animationTimeout + transitionTime));
+                    animationBatch.draw(Forge.getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    animationBatch.end();
+                    return;
+                }
             }
             Forge.currentScene.render();
             Forge.currentScene.act(delta);
