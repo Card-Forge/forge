@@ -249,7 +249,7 @@ public class CardZoom extends FOverlay {
                     }
                     if (data != null && description.isEmpty() && data.questItem)
                         description = "Quest Item";
-                    TextUtil.fastReplace(description, "[+Shards]", "{M}");
+                    description = TextUtil.fastReplace(description, "[+Shards]", "{M}");
                     CardView cardView = new CardView(-1, null, name, description, actor.getImage());
                     return cardView;
                 }

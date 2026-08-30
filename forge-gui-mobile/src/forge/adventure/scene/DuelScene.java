@@ -325,7 +325,7 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public void enter() {
-        Adventure.getInstance().renderAnimation = false;
+        Adventure.getInstance().renderTransitionScreen = false;
         Localizer localizer = Forge.getLocalizer();
         SoundSystem.instance.stopBackgroundMusic();
         GameType mainGameType;
@@ -704,7 +704,7 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public boolean leave() {
-        Adventure.getInstance().renderAnimation = true;
+        Adventure.getInstance().renderTransitionScreen = true;
         return super.leave();
     }
 

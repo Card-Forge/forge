@@ -44,7 +44,7 @@ public class DeckPreviewScene extends ForgeScene {
         screen = null;
         getScreen();
         screen.refresh();
-        Adventure.getInstance().renderAnimation = false;
+        Adventure.getInstance().renderTransitionScreen = false;
         super.enter();
 
     }
@@ -59,7 +59,7 @@ public class DeckPreviewScene extends ForgeScene {
 
     @Override
     public boolean leave() {
-        Adventure.getInstance().renderAnimation = true;
+        Adventure.getInstance().renderTransitionScreen = true;
         return super.leave();
     }
 

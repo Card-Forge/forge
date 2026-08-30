@@ -28,14 +28,14 @@ public class ViewRewardsScene extends ForgeScene {
     public void enter() {
         screen = null;
         getScreen();
-        Adventure.getInstance().renderAnimation = false;
+        Adventure.getInstance().renderTransitionScreen = false;
         super.enter();
 
         CardZoom.show(list, index, null, true);
     }
     @Override
     public boolean leave() {
-        Adventure.getInstance().renderAnimation = true;
+        Adventure.getInstance().renderTransitionScreen = true;
         return super.leave();
     }
 
