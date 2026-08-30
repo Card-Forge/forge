@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.Forge;
+import forge.OverlayText;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
@@ -225,7 +226,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         continue;
                     }
                     // The loadPOI generates booster and other things that may take time to load, so show a little loading text.
-                    Forge.setOverlayText("[%240]" + GameScene.instance().getLocationColorID() + "{CAROUSEL} L O A D I N G ");
+                    OverlayText.getInstance().update("[%240]" + GameScene.instance().getLocationColorID() + "{CAROUSEL} L O A D I N G ");
                     startPause(1f, ()-> {
                         WorldSave.getCurrentSave().autoSave();
                         loadPOI(point.getPointOfInterest());

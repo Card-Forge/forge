@@ -2,7 +2,6 @@ package forge;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import forge.util.ScreenUtil;
@@ -11,11 +10,16 @@ public class Adventure implements Disposable {
     private static Adventure instance;
     private float animationTimeout;
     boolean sceneWasSwapped;
-    private Batch animationBatch;
+    private SpriteBatch animationBatch, adventureBatch;
 
     private Adventure() {
         sceneWasSwapped = false;
-        animationBatch = new SpriteBatch();
+        animationBatch = new SpriteBatch(30);
+        adventureBatch = new SpriteBatch(600);
+    }
+
+    public SpriteBatch getAdventureBatch() {
+        return adventureBatch;
     }
 
     public static Adventure getInstance() {
@@ -75,5 +79,7 @@ public class Adventure implements Disposable {
     public void dispose() {
         if (animationBatch != null)
             animationBatch.dispose();
+        if (adventureBatch != null)
+            adventureBatch.dispose();
     }
 }

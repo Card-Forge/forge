@@ -91,8 +91,6 @@ public class Forge implements ApplicationListener {
     private static int screenWidth;
     private static int screenHeight;
     private static Graphics graphics;
-    private static FrameRate frameRate;
-    private static OverlayText overlayText;
     private static FScreen currentScreen;
     private static ControllerListener controllerListener;
     private static boolean hasGamepad = false;
@@ -209,8 +207,6 @@ public class Forge implements ApplicationListener {
         }
         graphics = new Graphics();
         splashScreen = new SplashScreen();
-        frameRate = new FrameRate();
-        overlayText = new OverlayText();
         inputProcessor = new MainInputProcessor();
 
         Gdx.input.setInputProcessor(inputProcessor);
@@ -290,9 +286,7 @@ public class Forge implements ApplicationListener {
             FThreads.invokeInBackgroundThread(() -> AssetsDownloader.checkForUpdates(exited, runnable));
         }
     }
-    public static void setOverlayText(String text) {
-        overlayText.update(text);
-    }
+
     public static void setAltZoneTabMode(String mode) {
         Forge.altZoneTabMode = mode;
         switch (Forge.altZoneTabMode) {
@@ -301,9 +295,11 @@ public class Forge implements ApplicationListener {
             default -> Forge.altZoneTabs = false;
         }
     }
+
     public static boolean isHorizontalTabLayout() {
         return Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode);
     }
+
     public static boolean hasGamepad() {
         //Classic Mode Various Screen GUI are not yet supported, needs control mapping for each screens
         if (isMobileAdventureMode) {
@@ -918,7 +914,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void render() {
         if (showFPS)
-            frameRate.update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
+            FrameRate.getInstance().update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
         ImageCache.getInstance().allowSingleLoad();
         ForgeAnimation.advanceAll();
@@ -941,14 +937,14 @@ public class Forge implements ApplicationListener {
                 Adventure.getInstance().render(delta);
             }
             // render overlay on top of adventure screen
-            overlayText.render(delta);
+            OverlayText.getInstance().render(delta);
             // render framerate if enabled
-            frameRate.render(showFPS);
+            FrameRate.getInstance().render(showFPS);
             return;
         }
         // render classic
         Classic.getInstance().render(screen);
-        frameRate.render(showFPS);
+        FrameRate.getInstance().render(showFPS);
     }
 
     private static FContainer getHierachyScreen() {
@@ -973,6 +969,9 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
+        // Investigate why this would be 0..
+        if (width < 1 || height < 1)
+            return;
         try {
             if (currentScreen != null) {
                 currentScreen.setSize(width, height);
@@ -1025,8 +1024,6 @@ public class Forge implements ApplicationListener {
         graphics.dispose();
         SoundSystem.instance.dispose();
         MapStage.getInstance().disposeWorld();
-        frameRate.dispose();
-        overlayText.dispose();
         getAssets().dispose();
 
         AdventureScreen.dispose();

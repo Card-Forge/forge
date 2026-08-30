@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -35,7 +34,7 @@ public class Graphics {
     private static final int GL_BLEND = GL20.GL_BLEND;
     private static final int GL_LINE_SMOOTH = 2848; //create constant here since not in GL20
 
-    private final Batch batch = new SpriteBatch();
+    private final SpriteBatch batch = new SpriteBatch(600);
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
     private final Deque<Matrix4> Dtransforms = new ArrayDeque<>();
     private final Vector3 tmp = new Vector3();
@@ -110,7 +109,7 @@ public class Graphics {
     public void dispose() {
         safeDispose(shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
             shaderRipple, shaderPixelateWarp, shaderChromaticAbberation, shaderHueShift, shaderRoundedRect,
-            shaderRoundedRect2, shaderNoiseFade, shaderPortal, dummyTexture, backdropTexture, grayTexture);
+            shaderRoundedRect2, shaderNoiseFade, shaderPortal, dummyTexture, backdropTexture, grayTexture, batch);
     }
 
     public void safeDispose(Disposable... disposables) {
@@ -123,7 +122,7 @@ public class Graphics {
         }
     }
 
-    public Batch getBatch() {
+    public SpriteBatch getBatch() {
         return batch;
     }
 
