@@ -303,7 +303,7 @@ public class Forge implements ApplicationListener {
     public static boolean hasGamepad() {
         //Classic Mode Various Screen GUI are not yet supported, needs control mapping for each screens
         if (isMobileAdventureMode) {
-            return true;//hasGamepad && isLandscapeMode(); //portrait is not supported for Gamepad
+            return hasGamepad && isLandscapeMode(); //portrait is not supported for Gamepad
         }
         return false;
     }
