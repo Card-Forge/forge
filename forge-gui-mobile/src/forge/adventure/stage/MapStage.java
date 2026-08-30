@@ -39,6 +39,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
+import forge.util.ScreenUtil;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -1170,7 +1171,7 @@ public class MapStage extends GameStage {
                         if (isInMap && effect != null && !mob.ignoreDungeonEffect)
                             duelScene.setDungeonEffect(effect);
                         Forge.switchScene(duelScene);
-                    }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
+                    }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                 }
             });
         });

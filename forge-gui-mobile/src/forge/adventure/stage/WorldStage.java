@@ -26,6 +26,7 @@ import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.MyRandom;
+import forge.util.ScreenUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -134,7 +135,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                                 collided = false;
                                 duelScene.initDuels(player, mob);
                                 Forge.switchScene(duelScene);
-                            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
+                            }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                             currentMob = mob;
                             WorldSave.getCurrentSave().autoSave();
                         });

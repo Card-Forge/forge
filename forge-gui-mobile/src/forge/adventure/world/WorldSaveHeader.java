@@ -13,6 +13,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.adventure.scene.Scene;
 import forge.adventure.util.Serializer;
+import forge.util.ScreenUtil;
 
 import java.io.IOException;
 import java.util.Date;
@@ -49,7 +50,7 @@ public class WorldSaveHeader implements java.io.Serializable, Disposable {
     }
 
     public void createPreview() {
-        TextureRegion tr = Forge.takeScreenshot();
+        TextureRegion tr = ScreenUtil.getInstance().takeScreenshot();
         Matrix4 m  = new Matrix4();
         Graphics g = new Graphics();
         FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);

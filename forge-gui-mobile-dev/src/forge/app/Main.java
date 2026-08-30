@@ -96,15 +96,19 @@ public class Main {
         @Override
         public void restart() {
             if (RestartUtil.prepareForRestart()) {
+                // Calls dispose()
                 Gdx.app.exit();
-                //System.exit(0); // exit code -1073740791 (0xC0000409)
+                // Note: exit code -1073740791 (0xC0000409), don't use System.exit(0) on android
+                System.exit(0);
             }
         }
 
         @Override
         public void exit() {
-            Gdx.app.exit(); // can just use Gdx.app.exit for desktop
-            //System.exit(0); // exit code -1073740791 (0xC0000409)
+            // Calls dispose()
+            Gdx.app.exit();
+            // Note: exit code -1073740791 (0xC0000409) don't use System.exit(0) on android
+            System.exit(0);
         }
 
         @Override

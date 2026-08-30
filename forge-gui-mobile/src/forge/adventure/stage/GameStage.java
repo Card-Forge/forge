@@ -56,6 +56,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.screens.CoverScreen;
 import forge.util.MyRandom;
+import forge.util.ScreenUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -718,7 +719,7 @@ public abstract class GameStage extends Stage {
                         WorldStage.getInstance().loadPOI(poi);
                         WorldSave.getCurrentSave().autoSave();
                         Forge.clearTransitionScreen();
-                    }, Forge.takeScreenshot()))));
+                    }, ScreenUtil.getInstance().takeScreenshot()))));
                 }
             }, deathDuration);
         }//Spawn shouldn't be null
