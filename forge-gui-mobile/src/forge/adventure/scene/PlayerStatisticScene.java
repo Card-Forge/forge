@@ -278,12 +278,14 @@ public class PlayerStatisticScene extends UIScene {
                     continue;
             }
             a.updateTrophyImage();
-            TextureRegion textureRegion = new TextureRegion(((FBufferedImage) a.getImage()).getTexture());
-            textureRegion.flip(false, true);
-            Image image = new Image(textureRegion);
             float alpha = a.isActive() ? 1f : 0.25f;
-            image.getColor().a = alpha;
-            achievementContainer.add(image).height(50).width(40).center().pad(5);
+            if (((FBufferedImage) a.getImage()).getTexture() != null) {
+                TextureRegion textureRegion = new TextureRegion(((FBufferedImage) a.getImage()).getTexture());
+                textureRegion.flip(false, true);
+                Image image = new Image(textureRegion);
+                image.getColor().a = alpha;
+                achievementContainer.add(image).height(50).width(40).center().pad(5);
+            }
             String value = "[%105]" + a.getDisplayName() + "[%98]";
             String subTitle = a.getSubTitle(true);
             if (subTitle != null)

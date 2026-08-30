@@ -894,7 +894,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         int pw = 192;
         int ph = 256;
         FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, pw, ph, false);
-        SpriteBatch batch = new SpriteBatch();
+        SpriteBatch batch = new SpriteBatch(30);
 
         frameBuffer.begin();
 
