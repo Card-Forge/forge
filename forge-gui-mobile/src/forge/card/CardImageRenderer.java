@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.ImageKeys;
+import forge.adventure.util.Reward;
+import forge.adventure.util.RewardActor;
 import forge.assets.*;
+import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
@@ -784,12 +787,17 @@ public class CardImageRenderer {
     }
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard, float modR) {
         boolean canshow = MatchController.instance.mayView(card);
+        boolean drawRewardActorDescription = false;
         String key = card.getState(altState).getImageKey();
         Texture image = new CachedCardImageRenderer(key).getImage();
         if (image == null) {
-            //try if there's a texture set on the CardView ie RewardActor or Inventory Item
-            if (card.getTextureObject() instanceof Texture texture)
-                image = texture;
+            //try if its Reward Actor object
+            if (card.getObject() instanceof RewardActor actor) {
+                image = actor.getImage(Reward.Type.CardPack != actor.getReward().getType());
+                drawRewardActorDescription = !(Reward.Type.Card == actor.getReward().getType() || Reward.Type.CardPack == actor.getReward().getType());
+            } else if (card.getObject() instanceof InventoryItem item) {
+                image = ImageCache.getInstance().getImage(item);
+            }
         }
 
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
@@ -913,6 +921,14 @@ public class CardImageRenderer {
         }
         if (canshow && !Forge.enableUIMask.equals("Full") && CardRendererUtils.drawFoil(card))
             g.drawFoil(x, y, w, h, 0f, CardRendererUtils.needsRotation(card, altState));
+        //TODO:display description for non card/cardpack reward Actors
+        /*if (drawRewardActorDescription) {
+            float scale = (w / h) * 3f;
+            String text = card.getCurrentState().getName();
+            g.drawText(card.getCurrentState().getOracleText(), Controls.getBitmapFont("default", scale), x, y + h / 3.5f, Color.WHITE, 1f);
+            //reset
+            Controls.getBitmapFont("default");
+        }*/
     }
 
     public static void drawDetails(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {

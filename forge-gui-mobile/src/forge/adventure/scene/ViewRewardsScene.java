@@ -18,8 +18,9 @@ public class ViewRewardsScene extends ForgeScene {
     private static ViewRewardsScene object;
 
     public static ViewRewardsScene getInstance(List<?> list0, int index0) {
-        if(object==null)
-            object=new ViewRewardsScene();
+        if (object == null)
+            object = new ViewRewardsScene();
+        // always set new list and index
         list = list0;
         index = index0;
         return object;
@@ -33,6 +34,7 @@ public class ViewRewardsScene extends ForgeScene {
 
         CardZoom.show(list, index, null, true);
     }
+
     @Override
     public boolean leave() {
         Adventure.getInstance().renderTransitionScreen = true;
@@ -41,7 +43,7 @@ public class ViewRewardsScene extends ForgeScene {
 
     @Override
     public FScreen getScreen() {
-        if (screen==null){
+        if (screen == null) {
             RewardScene scene = RewardScene.instance();
             TextureRegion background = scene.getUIBackground();
             if (RewardScene.Type.Shop.equals(scene.type)) {

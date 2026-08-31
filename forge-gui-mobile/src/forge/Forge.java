@@ -674,8 +674,11 @@ public class Forge implements ApplicationListener {
             exit(false); //prompt to exit if attempting to go back from home screen
             return;
         }
-        if(currentScreen == null)
+        if (currentScreen == null)
             return;
+        // trigger leave
+        if (currentScene instanceof ForgeScene forgeScene)
+            forgeScene.leave();
         currentScreen.onClose(result -> {
             if (result) {
                 Dscreens.pollFirst();

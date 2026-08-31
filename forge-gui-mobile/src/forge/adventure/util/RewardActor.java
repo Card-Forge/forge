@@ -146,6 +146,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     public Texture getImage() {
+        return getImage(false);
+    }
+    public Texture getImage(boolean raw) {
+        if (raw)
+            return image;
         if (Reward.Type.CardPack.equals(reward.type)) {
             Texture cached = ImageCache.getInstance().getImage(imageKey, false, true);
             return cached == null ? image : cached;

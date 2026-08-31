@@ -59,8 +59,8 @@ public class CardView extends GameEntityView {
         return Card.getCardForUi(pc).getView();
     }
 
-    public Object getTextureObject() {
-        return get(TrackableProperty.Texture);
+    public Object getObject() {
+        return get(TrackableProperty.Object);
     }
 
     public static TrackableCollection<CardView> getCollection(Iterable<Card> cards) {
@@ -90,13 +90,13 @@ public class CardView extends GameEntityView {
         super(id0, tracker);
         set(TrackableProperty.CurrentState, new CardStateView(id0, CardStateName.Original, tracker));
     }
-    public CardView(final int id0, final Tracker tracker, final String name0, final String description, final Object texture) {
+    public CardView(final int id0, final Tracker tracker, final String name0, final String description, final Object object) {
         super(id0, tracker);
         set(TrackableProperty.CurrentState, new CardStateView(id0, CardStateName.Original, tracker));
         getCurrentState().setName(name0);
         getCurrentState().setOracleText(description);
         set(TrackableProperty.Name, name0);
-        set(TrackableProperty.Texture, texture);
+        set(TrackableProperty.Object, object);
     }
     public CardView(final int id0, final Tracker tracker, final String name0) {
         this(id0, tracker);

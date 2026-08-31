@@ -15,7 +15,6 @@ import forge.adventure.data.ItemData;
 import forge.adventure.util.RewardActor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.assets.ImageCache;
 import forge.deck.ArchetypeDeckGenerator;
 import forge.deck.CardThemedDeckGenerator;
 import forge.deck.CommanderDeckGenerator;
@@ -230,7 +229,7 @@ public class CardZoom extends FOverlay {
             return CardView.getCardForUi(cc.getCard());
         }
         if (item instanceof InventoryItem ii) {
-            return new CardView(-1, null, ii.getDisplayName(), ii.getItemType(), ImageCache.getInstance().getImage(ii));
+            return new CardView(-1, null, ii.getDisplayName(), ii.getItemType(), item);
         }
         if (item instanceof RewardActor actor) {
             String name = "", description = "";
@@ -250,7 +249,7 @@ public class CardZoom extends FOverlay {
                     if (data != null && description.isEmpty() && data.questItem)
                         description = "Quest Item";
                     description = TextUtil.fastReplace(description, "[+Shards]", "{M}");
-                    CardView cardView = new CardView(-1, null, name, description, actor.getImage());
+                    CardView cardView = new CardView(-1, null, name, description, actor);
                     return cardView;
                 }
             }
@@ -436,7 +435,11 @@ public class CardZoom extends FOverlay {
             drawIconBounds(g, flipIconBounds, Forge.hdbuttons ? FSkinImage.HDFLIPCARD : FSkinImage.FLIPCARD, x, y, cardWidth, cardHeight);
         }
 
-        if (currentActivateAction != null) {
+        if (isAdvBack) {
+            String message = items.size() > 1 ? "Swipe Left/Right to navigate Zoom" : "Swipe Left/Right to close Zoom" ;
+            g.fillRect(FDialog.getMsgBackColor(), 0, 0, w, messageHeight);
+            g.drawText(message, FDialog.MSG_FONT, FDialog.getMsgForeColor(), 0, 0, w, messageHeight, false, Align.center, true);
+        } else if (currentActivateAction != null) {
             g.fillRect(FDialog.getMsgBackColor(), 0, 0, w, messageHeight);
             g.drawText(Forge.getLocalizer().getMessage("lblSwipeUpTo").replace("%s", currentActivateAction), FDialog.MSG_FONT, FDialog.getMsgForeColor(), 0, 0, w, messageHeight, false, Align.center, true);
         }
