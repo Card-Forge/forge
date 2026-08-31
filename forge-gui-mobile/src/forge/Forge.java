@@ -66,13 +66,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FGestureAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
-import forge.util.CardTranslation;
-import forge.util.FileUtil;
-import forge.util.HWInfo;
-import forge.util.Localizer;
-import forge.util.OperatingSystem;
-import forge.util.ScreenUtil;
-import forge.util.Utils;
+import forge.util.*;
 import io.sentry.ScopeType;
 import io.sentry.Sentry;
 
@@ -207,7 +201,7 @@ public class Forge implements ApplicationListener {
         if (!GuiBase.isAndroid() || (androidVersion > 25 && totalDeviceRAM > 3400)) {
             allowCardBG = true;
         }
-        graphics = new Graphics();
+        graphics = new Graphics(Forge.HIGH_SPRITES_CAP);
         splashScreen = new SplashScreen();
         inputProcessor = new MainInputProcessor();
 
@@ -1034,6 +1028,7 @@ public class Forge implements ApplicationListener {
         AdventureScreen.dispose();
         Adventure.getInstance().dispose();
         ScreenUtil.getInstance().dispose();
+        ShaderUtil.getInstance().dispose();
         try {
             ExceptionHandler.unregisterErrorHandling();
             if (lastPreview != null)

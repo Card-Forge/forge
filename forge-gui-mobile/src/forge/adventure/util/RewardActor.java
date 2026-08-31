@@ -60,6 +60,7 @@ import forge.util.MyRandom;
 import forge.util.CardTranslation;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
+import forge.util.ShaderUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -77,8 +78,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     Reward reward;
     public TextraButton autoSell;
     public TypingLabel ownedLabel;
-    ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
-    ShaderProgram shaderRoundRect = Forge.getGraphics().getShaderRoundedRect();
+    ShaderProgram shaderGrayscale = ShaderUtil.getInstance().getShaderGrayscale();
+    ShaderProgram shaderRoundRect = ShaderUtil.getInstance().getShaderRoundedRect();
 
     final int preview_w = 488; //Width and height for generated images.
     final int preview_h = 680;
@@ -369,7 +370,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                                 }
                             } catch (Exception ignored) {}
                         }
-                        T = renderPlaceholder(new Graphics(), reward.getCard(), false); //Now we can render the card.
+                        T = renderPlaceholder(new Graphics(Forge.LOW_SPRITES_CAP), reward.getCard(), false); //Now we can render the card.
                         setCardImage(T);
                         loaded = false;
                         if (!ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(false)))
@@ -633,7 +634,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
     private Texture getRenderedBackface(Reward r) {
         if (Talt == null)
-            Talt = renderPlaceholder(new Graphics(), r.getCard(), true);
+            Talt = renderPlaceholder(new Graphics(Forge.LOW_SPRITES_CAP), r.getCard(), true);
         return Talt;
     }
 
@@ -676,12 +677,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (shouldDisplayText) {
             if (backFace) {
                 if (Taltnotext == null)
-                    Taltnotext = renderPlaceholder(new Graphics(), reward.getCard(), true, false);
+                    Taltnotext = renderPlaceholder(new Graphics(Forge.LOW_SPRITES_CAP), reward.getCard(), true, false);
                 boolean flip = reward.getCard().getRules().getSplitType() == CardSplitType.Flip;
                 return new RewardImage(processDrawable(Taltnotext, flip));
             }
             if (Tnotext == null)
-                Tnotext = renderPlaceholder(new Graphics(), reward.getCard(), false, false);
+                Tnotext = renderPlaceholder(new Graphics(Forge.LOW_SPRITES_CAP), reward.getCard(), false, false);
             return new RewardImage(processDrawable(Tnotext));
         }
         return backFace ? alternateToolTipImage : toolTipImage;
@@ -1138,7 +1139,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (Reward.Type.Card.equals(reward.getType())) {
             if (!loaded || image == null) {
                 if (T == null) {
-                    T = renderPlaceholder(new Graphics(), reward.getCard(), false);
+                    T = renderPlaceholder(new Graphics(Forge.LOW_SPRITES_CAP), reward.getCard(), false);
                 }
 
                 drawCard(batch, T, x, width);
@@ -1187,7 +1188,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             }
             // this is needed here for cards hovered
             if (hover | hasKeyboardFocus()) {
-                batch.draw(Forge.getGraphics().getGrayTexture(), x, -getHeight() / 2, width, getHeight());
+                batch.draw(Forge.getAssets().getGrayTexture(), x, -getHeight() / 2, width, getHeight());
             }
             if (hasbackface) {
                 TextureRegion icon = FSkinImage.ADV_FLIPICON.getTextureRegion();
@@ -1199,7 +1200,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private Graphics getGraphics() {
         if (graphics == null)
-            graphics = new Graphics();
+            graphics = new Graphics(Forge.LOW_SPRITES_CAP);
         return graphics;
     }
 
@@ -1286,7 +1287,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             cLabel.setX(x);
             if (reward.type.equals(Reward.Type.CardPack)) {
                 //FIXME: this is needed until the cLabel.style = labelstyle override works for the description text backdrop
-                cBackDrop = new Image(Forge.getGraphics().getGrayTexture());
+                cBackDrop = new Image(Forge.getAssets().getGrayTexture());
                 cBackDrop.setBounds(cImage.getX(), 0, getWidth(), getHeight() / 3.5f);
                 addActorAt(0, cImage);
                 addActorAt(1, cBackDrop);

@@ -1,6 +1,7 @@
 package forge.card;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -59,7 +60,7 @@ public class CardZoom extends FOverlay {
     private static boolean showBackSide = false;
     private static boolean showMerged = false;
     private static boolean isAdvBack = false;
-    private static List<CardView> cardViewsToClearObject;
+    private static HashMap<Object, CardView> cardViewsToClearObject;
 
     public static void show(Object item) {
         show(item, false);
@@ -84,7 +85,7 @@ public class CardZoom extends FOverlay {
         items = items0;
         isAdvBack = advBack;
         if (items == null) { return; }
-        cardViewsToClearObject = new ArrayList<>();
+        cardViewsToClearObject = new HashMap<>();
         if (currentIndex0 < 0 || items.size() <= currentIndex0) { return; }
         activateHandler = activateHandler0;
         currentIndex = currentIndex0;
@@ -231,11 +232,17 @@ public class CardZoom extends FOverlay {
             return CardView.getCardForUi(cc.getCard());
         }
         if (item instanceof InventoryItem ii) {
-            CardView cardView = new CardView(-1, null, ii.getDisplayName(), ii.getItemType(), item);
-            cardViewsToClearObject.add(cardView);
+            CardView cardView = cardViewsToClearObject.get(ii);
+            if (cardView != null)
+                return cardView;
+            cardView = new CardView(-1, null, ii.getDisplayName(), ii.getItemType(), ii);
+            cardViewsToClearObject.put(item, cardView);
             return cardView;
         }
         if (item instanceof RewardActor actor) {
+            CardView cardView = cardViewsToClearObject.get(actor);
+            if (cardView != null)
+                return cardView;
             String name = "", description = "";
             switch (actor.getReward().getType()) {
                 case Card -> { return CardView.getCardForUi(actor.getReward().getCard()); }
@@ -253,8 +260,8 @@ public class CardZoom extends FOverlay {
                     if (data != null && description.isEmpty() && data.questItem)
                         description = "Quest Item";
                     description = TextUtil.fastReplace(description, "[+Shards]", "{M}");
-                    CardView cardView = new CardView(-1, null, name, description, actor);
-                    cardViewsToClearObject.add(cardView);
+                    cardView = new CardView(-1, null, name, description, actor);
+                    cardViewsToClearObject.put(actor, cardView);
                     return cardView;
                 }
             }
@@ -500,7 +507,7 @@ public class CardZoom extends FOverlay {
     public void hide() {
         // clear objects
         if (cardViewsToClearObject != null) {
-            for (CardView cardView : cardViewsToClearObject) {
+            for (CardView cardView : cardViewsToClearObject.values()) {
                 if (cardView != null) {
                     cardView.clearObject();
                 }

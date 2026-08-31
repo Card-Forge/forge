@@ -12,6 +12,7 @@ import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
@@ -93,11 +94,11 @@ public class Assets implements Disposable {
     private ObjectMap<Integer, BitmapFont> counterFonts;
     private ObjectMap<String, Texture> fallback_skins;
     private ObjectMap<String, Texture> tmxMap;
-    private Texture defaultImage, dummy;
+    private Texture defaultImage, blackTexture;
     private TextureParameter textureParameter;
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
-    private Texture holofoil;
+    private Texture whiteTexture, backdropTexture, grayTexture, holofoil;
 
     private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -114,48 +115,34 @@ public class Assets implements Disposable {
                 getTexture(Gdx.files.classpath("fallback_skin").child("transition.png"));
         } catch (Exception e) {
             fallback_skins().clear();
-            fallback_skins().put("title", getDummy());
-            fallback_skins().put("transition", getDummy());
+            fallback_skins().put("title", getBlackTexture());
+            fallback_skins().put("transition", getBlackTexture());
         }
     }
 
     @Override
     public void dispose() {
-        try {
-            if (counterFonts != null) {
-                for (BitmapFont bitmapFont : counterFonts.values())
-                    bitmapFont.dispose();
-                counterFonts.clear();
-            }
-        } catch (Exception ignored) {}
-        try {
-            if (fallback_skins != null) {
-                for (Texture texture : fallback_skins.values())
-                    texture.dispose();
-                fallback_skins.clear();
-            }
-        } catch (Exception ignored) {}
-        try {
-            if (tmxMap != null) {
-                for (Texture texture : tmxMap.values())
-                    texture.dispose();
-                tmxMap.clear();
-            }
-        } catch (Exception ignored) {}
-        try {
-            if (defaultImage != null)
-                defaultImage.dispose();
-        } catch (Exception ignored) {}
-        try {
-            if (dummy != null)
-                dummy.dispose();
-        } catch (Exception ignored) {}
-        try {
-            if (textrafonts != null) {
-                for (Font f : textrafonts.values())
-                    f.dispose();
-            }
-        } catch (Exception ignored) {}
+        if (counterFonts != null) {
+            for (BitmapFont bitmapFont : counterFonts.values())
+                safeDispose(bitmapFont);
+            counterFonts.clear();
+        }
+        if (fallback_skins != null) {
+            for (Texture texture : fallback_skins.values())
+                safeDispose(texture);
+            fallback_skins.clear();
+        }
+        if (tmxMap != null) {
+            for (Texture texture : tmxMap.values())
+                safeDispose(texture);
+            tmxMap.clear();
+        }
+        if (textrafonts != null) {
+            for (Font f : textrafonts.values())
+                safeDispose(f);
+            textrafonts.clear();
+        }
+        safeDispose(defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -180,10 +167,16 @@ public class Assets implements Disposable {
             cursor.clear();
         if (fonts != null)
             fonts.clear();
-        try {
-            if (manager != null)
-                manager.dispose();
-        } catch (Exception ignored) {}
+        safeDispose(manager);
+    }
+    private void safeDispose(Disposable... disposables) {
+        for (Disposable d : disposables) {
+            if (d != null) {
+                try {
+                    d.dispose();
+                } catch (Exception ignored) {}
+            }
+        }
     }
 
     public MemoryTrackingAssetManager manager() {
@@ -327,7 +320,7 @@ public class Assets implements Disposable {
             if (!required)
                 return null;
             System.err.println("Failed to load: " + file + "!. Creating dummy texture.");
-            return getDummy();
+            return getBlackTexture();
         }
 
         //internal path can be inside apk or jar..
@@ -377,7 +370,7 @@ public class Assets implements Disposable {
                 manager().finishLoadingAsset(blankImage.path());
                 defaultImage = manager().get(blankImage.path());
             } else {
-                defaultImage = getDummy();
+                defaultImage = getBlackTexture();
             }
         }
         return defaultImage;
@@ -401,15 +394,31 @@ public class Assets implements Disposable {
         }
     }
 
-    private Texture getDummy() {
-        if (dummy == null) {
-            Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-            P.setColor(0f, 0f, 0f, 1f);
-            P.drawPixel(0, 0);
-            dummy = new Texture(P);
-            P.dispose();
-        }
-        return dummy;
+    private Texture setTexture(Texture texture, Color color, float alphaComposite) {
+        if (texture != null)
+            return texture;
+        Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        P.setColor(color.r, color.g, color.b, alphaComposite);
+        P.drawPixel(0, 0);
+        texture = new Texture(P);
+        P.dispose();
+        return texture;
+    }
+
+    public Texture getWhiteTexture() {
+        return setTexture(whiteTexture, Color.WHITE, 1f);
+    }
+
+    public Texture getBackropTexture() {
+        return setTexture(backdropTexture, Color.BLACK, 0.5f);
+    }
+
+    public Texture getGrayTexture() {
+        return setTexture(grayTexture, Color.DARK_GRAY, 0.5f);
+    }
+
+    private Texture getBlackTexture() {
+        return setTexture(blackTexture, Color.BLACK, 1f);
     }
 
     public Texture getHolofoil() {
