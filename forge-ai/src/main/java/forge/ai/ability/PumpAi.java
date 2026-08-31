@@ -255,7 +255,7 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        if (!game.getStack().isEmpty() && !sa.isCurse() && !isFight) {
+        if (!game.getStack().isEmpty() && !sa.isCurse() && !isFight && !"ReplaySpell".equals(aiLogic)) {
             return ComputerUtilCard.canPumpAgainstRemoval(ai, sa);
         }
 
