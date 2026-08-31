@@ -23,6 +23,7 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCost;
+import forge.deck.DeckRule;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -369,7 +370,7 @@ public class CardFactory {
         }
 
         c.setManaCost(face.getManaCost());
-        c.setText(face.getNonAbilityText());
+        c.setText(withDeckRuleText(face));
 
         c.getCurrentState().setOracleText(face.getOracleText());
 
@@ -414,6 +415,18 @@ public class CardFactory {
             // add spells only after
             CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
         }
+    }
+
+    /** Folds any {@code DeckRule:} descriptions onto the face's non-ability text, so they display like any other printed text. */
+    private static String withDeckRuleText(final ICardFace face) {
+        String text = face.getNonAbilityText();
+        for (final DeckRule rule : DeckRule.parseAll(face.getDeckRules())) {
+            final String desc = rule.getDescription();
+            if (!desc.isEmpty()) {
+                text = text.isEmpty() ? desc : text + "\r\n" + desc;
+            }
+        }
+        return text;
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki, final boolean keepTextChanges) {

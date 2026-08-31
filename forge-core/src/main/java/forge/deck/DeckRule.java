@@ -66,12 +66,14 @@ public abstract class DeckRule {
 
     /** Parses every {@code DeckRule:} line on the given card into typed rule objects. */
     public static List<DeckRule> parseAll(final PaperCard card) {
-        final List<DeckRule> result = new ArrayList<>();
         final CardRules rules = card.getRules();
-        if (rules == null) {
-            return result;
-        }
-        for (final String raw : rules.getDeckRules()) {
+        return rules == null ? new ArrayList<>() : parseAll(rules.getDeckRules());
+    }
+
+    /** Parses a card face's raw {@code DeckRule:} line values (see {@link #parseAll(PaperCard)}). */
+    public static List<DeckRule> parseAll(final Iterable<String> rawDeckRuleLines) {
+        final List<DeckRule> result = new ArrayList<>();
+        for (final String raw : rawDeckRuleLines) {
             final int colonPos = raw.indexOf(':');
             final String ruleClass = colonPos > 0 ? raw.substring(0, colonPos) : raw;
             final String rest = colonPos > 0 ? raw.substring(colonPos + 1) : "";
