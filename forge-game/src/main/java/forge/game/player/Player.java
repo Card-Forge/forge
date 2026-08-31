@@ -80,6 +80,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private int life = 20;
     private int startingLife = 20;
+    private int startingLibrarySize = 0;
     private int lifeStartedThisTurnWith = startingLife;
     private int lifeLostThisTurn;
     private int lifeLostLastTurn;
@@ -437,6 +438,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         startingLife = startLife;
         life = startLife;
         view.updateLife(this);
+    }
+
+    /** The number of cards in this player's main deck (not counting Commander/Sideboard/etc.) at game start. */
+    public final int getStartingLibrarySize() {
+        return startingLibrarySize;
+    }
+    public final void setStartingLibrarySize(final int size) {
+        //Should only be called from newGame().
+        startingLibrarySize = size;
     }
 
     public final int getLife() {

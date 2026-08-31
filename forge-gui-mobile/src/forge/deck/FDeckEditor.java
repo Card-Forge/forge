@@ -1620,12 +1620,55 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return false;
             }
 
+            final byte cmdCI = commanderColorIdentity(parentScreen.getDeck());
+            final List<DeckRuleColorIdentity> ciRules = activeColorIdentityRules(parentScreen.getDeck());
+
+            if (card.getRules().getColorIdentity().hasNoColorsExcept(cmdCI)) {
+                return false;
+            }
+            for (final DeckRuleColorIdentity rule : ciRules) {
+                if (rule.allowsOffColorIdentity(card.getRules())) {
+                    return false; //Rulebreaker-style exemption - fine as an ordinary card, not partner-commander-only.
+                }
+            }
+            //Prime the stateful budget from the main deck first, then just check this candidate.
+            for (final DeckRuleColorIdentity rule : ciRules) {
+                for (final Entry<PaperCard, Integer> existing : parentScreen.getDeck().getMain()) {
+                    rule.tryApproveAdditionalColor(existing.getKey().getRules(), cmdCI);
+                }
+                if (rule.wouldApproveAdditionalColor(card.getRules(), cmdCI)) {
+                    return false; //fits within the commander's allowed additional color budget.
+                }
+            }
+            return true;
+        }
+
+        /** The combined color identity of the deck's current commanders (0 if there's no deck yet). */
+        protected static byte commanderColorIdentity(final Deck deck) {
             byte cmdCI = 0;
-            for (final PaperCard p : parentScreen.getDeck().getCommanders()) {
+            if (deck == null) {
+                return cmdCI;
+            }
+            for (final PaperCard p : deck.getCommanders()) {
                 cmdCI |= p.getRules().getColorIdentity().getColor();
             }
+            return cmdCI;
+        }
 
-            return !card.getRules().getColorIdentity().hasNoColorsExcept(cmdCI);
+        /** Every active DeckRule:ColorIdentity rule across the deck's current commanders (empty if there's no deck yet). */
+        protected static List<DeckRuleColorIdentity> activeColorIdentityRules(final Deck deck) {
+            final List<DeckRuleColorIdentity> rules = new ArrayList<>();
+            if (deck == null) {
+                return rules;
+            }
+            for (final PaperCard p : deck.getCommanders()) {
+                for (final DeckRule rule : DeckRule.parseAll(p)) {
+                    if (rule instanceof DeckRuleColorIdentity && rule.isActiveFor(DeckSection.Commander)) {
+                        rules.add((DeckRuleColorIdentity) rule);
+                    }
+                }
+            }
+            return rules;
         }
 
         protected void setVanguard(PaperCard card) {
@@ -1810,7 +1853,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         label = "lblCommanders";
                 }
                 else if(parentScreen.shouldEnforceConformity()) //If we have a commander, filter for color identity.
-                    cardPool.retainIf(deckFormat.isLegalCardForCommanderPredicate(currentDeck.getCommanders()));
+                    cardPool.retainIf(deckFormat.isLegalCardForCommanderPredicate(currentDeck.getCommanders(), currentDeck.getMain()));
             }
 
             cardManager.setCaption(Forge.getLocalizer().getMessage(label));
@@ -1929,6 +1972,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     protected static class DeckSectionPage extends CardManagerPage {
         private final String captionPrefix;
         protected final DeckSection deckSection;
+        /** Last-seen AllowedAdditionalColor$ budget usage for the active commander rule(s), one entry per rule; only relevant to the Main section. */
+        private List<Byte> lastApprovedAdditionalColors = Collections.emptyList();
 
         protected DeckSectionPage(CardManager cardManager, DeckSection deckSection) {
             this(cardManager, deckSection, ItemManagerConfig.DECK_EDITOR);
@@ -1965,6 +2010,31 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             if(parentScreen.hiddenExtraSections.contains(this.deckSection) && cardManager.getPool() != null && !cardManager.getPool().isEmpty())
                 parentScreen.showExtraSectionTab(this.deckSection);
+            //Main changes can shift an AllowedAdditionalColor$ budget, but only re-narrow the catalog when that
+            //budget actually moved - otherwise every ordinary addition would scroll it back to the top for nothing.
+            if(deckSection == DeckSection.Main && parentScreen.isCommanderEditor() && parentScreen.getCatalogPage() != null) {
+                List<Byte> approvedColors = snapshotApprovedAdditionalColors(parentScreen.getDeck());
+                if(!approvedColors.equals(lastApprovedAdditionalColors)) {
+                    lastApprovedAdditionalColors = approvedColors;
+                    parentScreen.getCatalogPage().scheduleRefresh();
+                }
+            }
+        }
+
+        /** Primes each active AllowedAdditionalColor$ rule from the deck's current main section and snapshots what it's approved so far. */
+        private static List<Byte> snapshotApprovedAdditionalColors(final Deck deck) {
+            final byte cmdCI = commanderColorIdentity(deck);
+            final List<Byte> approved = new ArrayList<>();
+            for (final DeckRuleColorIdentity rule : activeColorIdentityRules(deck)) {
+                if (!rule.hasAllowedAdditionalColorBudget()) {
+                    continue;
+                }
+                for (final Entry<PaperCard, Integer> existing : deck.getMain()) {
+                    rule.tryApproveAdditionalColor(existing.getKey().getRules(), cmdCI);
+                }
+                approved.add(rule.getApprovedAdditionalColors());
+            }
+            return approved;
         }
 
         /**

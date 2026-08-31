@@ -348,6 +348,7 @@ public class Game {
             } else {
                 pl.setStartingLife(psc.getStartingLife());
             }
+            pl.setStartingLibrarySize(psc.getDeck().getMain().countAll());
             pl.setMaxHandSize(psc.getStartingHand());
             pl.setStartingHandSize(psc.getStartingHand());
 
