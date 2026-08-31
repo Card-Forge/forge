@@ -1653,7 +1653,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final MagicStack stack = getGame().getStack();
 
         // Skip when already yielding — yield proceeds regardless of available-actions.
-        // shouldAutoYield, not isYieldActive: it clears yields that have run their course, so an expiring one no longer skips the scan.
+        // shouldAutoYield, not isYieldActive: it clears yields that have run their course, so an expiring one no longer skips the scan
         // Compute the actionable set when APINA / suggestions / highlights need it.
         boolean highlightsEnabled = yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
         if (!yieldController.shouldAutoYield() && (needsAvailableActions() || highlightsEnabled)) {
@@ -1673,7 +1673,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         // yieldJustEndedFlag is read from the EDT (didYieldJustEnd); synchronized writer/reader pair handles visibility.
-        // Only a real yield counts here: this tracks when one ends, and skipped phases happen every turn.
+        // Only a real yield counts here: this tracks when one ends, and skipped phases happen every turn
         boolean autoPassing = mayAutoPass();
         yieldController.noteMayAutoPassResult(autoPassing);
         boolean nowMayAutoPass = autoPassing || skipsPromptForStackOrPhase();
@@ -3791,7 +3791,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     /** True while the player is auto-passing. Deliberately does not cover a skipped phase or an auto-yielded
-     *  stack top: {@link #autoPassCancel} runs every cleanup, and would fire on those every turn. */
+     *  stack top: {@link #autoPassCancel} runs every cleanup, and cleanup is a skipped phase for most players. */
     public boolean mayAutoPass() {
         return yieldController.shouldAutoYield()
                 || yieldController.isAutoPassingNoActions(getLocalPlayerView());
@@ -3804,8 +3804,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (gameView == null) return false;
         final StackItemView top = gameView.peekStack();
         if (top != null) return top.isAbility() && shouldAutoYield(top.getKey());
-        return gameView.getPlayerTurn() != null && gameView.getPhase() != null
-                && isUiSetToSkipPhase(gameView.getPlayerTurn(), gameView.getPhase());
+        final PlayerView turnPlayer = gameView.getPlayerTurn();
+        final PhaseType phase = gameView.getPhase();
+        return turnPlayer != null && phase != null && isUiSetToSkipPhase(turnPlayer, phase);
     }
 
     public void autoPassUntilEndOfTurn() {
@@ -3895,13 +3896,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void setYieldPref(final FPref pref, final String value) {
         // Dialog already wrote to FModel; APINA is the only pref whose toggle can flip mayAutoPass for a
-        // sitting prompt, and the budget field saves on every keystroke, so sweeping for the rest is waste.
+        // sitting prompt, and the budget field saves on every keystroke, so sweeping for the rest is waste
         if (pref != FPref.YIELD_AUTO_PASS_NO_ACTIONS) return;
         refreshAvailableActionsForPrompt();
         tryAutoPassNow();
     }
 
-    /** Answers the input it tested, not whatever replaced it while the answer was being worked out. */
+    /** Holds the input it tested so a replacement cannot be answered in its place. isFinished narrows that
+     *  window but does not close it: the flag is set on the EDT, after the input has already been removed. */
     private void tryAutoPassNow() {
         if (inputProxy.getInput() instanceof InputPassPriority inp
                 && (mayAutoPass() || skipsPromptForStackOrPhase())) {

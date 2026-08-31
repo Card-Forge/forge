@@ -614,6 +614,8 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         for (final PlayerView p : getGameView().getPlayers()) {
             if (!p.equals(player) && !player.equals(p.getMindSlaveMaster())) continue;
             final boolean shouldSkip = isUiSetToSkipPhase(p, phase);
+            // Only the host's proxy for a remote player reads the value; a local controller answers from
+            // the label. Sent to both so either re-checks the prompt it is sitting on
             for (final IGameController c : getOriginalGameControllers()) {
                 c.sendYieldUpdate(new YieldUpdate.SkipPhase(p, phase, shouldSkip));
             }

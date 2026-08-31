@@ -737,8 +737,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (clickedSameLabel) {
             controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
         } else {
-            markLabelStopsAtPhase.run();
+            // Read the phase before un-skipping: that push can pass priority and move the game on
             boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
+            markLabelStopsAtPhase.run();
             controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
         }
         refreshYieldUi(local);

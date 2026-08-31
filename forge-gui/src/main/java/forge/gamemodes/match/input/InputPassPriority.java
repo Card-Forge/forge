@@ -265,7 +265,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         passPriority();
     }
 
-    /** Pass priority. Distinct from clicking OK, which accepts a yield suggestion when one is on screen. */
+    /** Distinct from clicking OK, which accepts a yield suggestion when one is on screen. */
     public void passPriority() {
         if (isFinished()) return;
         passPriority(() -> {
