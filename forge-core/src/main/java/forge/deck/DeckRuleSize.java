@@ -21,8 +21,7 @@ import java.util.Map;
 
 /**
  * {@code DeckRule:Size:AdjustMax$ <Unlimited|±n> | ActiveSection$ Commander} - lets a card change
- * the deck's max size. {@code AdjustMin$}/{@code Cumulative$} not implemented: Advantageous
- * Proclamation already hardcodes that check in {@link DeckFormat#getDeckConformanceProblem}.
+ * the deck's max size. {@code AdjustMin$}/{@code Cumulative$} not implemented.
  */
 public class DeckRuleSize extends DeckRule {
     private static final String UNLIMITED = "Unlimited";

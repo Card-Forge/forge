@@ -677,7 +677,7 @@ public enum DeckFormat {
 
     /**
      * @param currentMain deck's main-section cards so far (may be null/empty); primes any
-     *                     {@code AllowedAdditionalColor$} rule. Browsing alone commits nothing.
+     * {@code AllowedAdditionalColor$} rule. Browsing alone commits nothing.
      */
     public Predicate<PaperCard> isLegalCardForCommanderPredicate(List<PaperCard> commanders, Iterable<Entry<PaperCard, Integer>> currentMain) {
         byte cmdCI = 0;

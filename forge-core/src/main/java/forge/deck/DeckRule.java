@@ -28,8 +28,6 @@ import forge.item.PaperCard;
 /**
  * A deckbuilding-legality rule from a card's own {@code DeckRule:} line, e.g.
  * {@code DeckRule:ColorIdentity:Exempt$ Type:Artifact.Creature | ActiveSection$ Commander}.
- * Its own script line, not a {@code K:} keyword, since forge-core can't depend on forge-game's
- * Keyword system. See https://github.com/Card-Forge/forge/issues/8066.
  */
 public abstract class DeckRule {
     private final DeckSection activeSection;
