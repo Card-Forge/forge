@@ -2,6 +2,7 @@ package forge.util;
 
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Disposable;
+import forge.Forge;
 
 public class ShaderUtil implements Disposable {
     private static ShaderUtil instance;
@@ -99,18 +100,8 @@ public class ShaderUtil implements Disposable {
 
     @Override
     public void dispose() {
-        safeDispose(shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
+        Forge.safeDispose(shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
             shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderRoundedRect,
             shaderRoundedRect2, shaderNoiseFade, shaderPortal);
-    }
-
-    private void safeDispose(Disposable... disposables) {
-        for (Disposable d : disposables) {
-            if (d != null) {
-                try {
-                    d.dispose();
-                } catch (Exception ignored) {}
-            }
-        }
     }
 }

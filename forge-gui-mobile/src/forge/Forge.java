@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
+import com.badlogic.gdx.utils.Disposable;
 import forge.adventure.scene.DeckSelectScene;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.ForgeScene;
@@ -1018,23 +1019,44 @@ public class Forge implements ApplicationListener {
             currentScreen.onClose(null);
             currentScreen = null;
         }
-        FOverlay.hideAll();
+        // TODO: Implement disposable to applicable classes
+        try {
+            FOverlay.hideAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Dscreens.clear();
-        graphics.dispose();
-        SoundSystem.instance.dispose();
-        MapStage.getInstance().disposeWorld();
-        getAssets().dispose();
-
-        AdventureScreen.dispose();
-        Adventure.getInstance().dispose();
-        ScreenUtil.getInstance().dispose();
-        ShaderUtil.getInstance().dispose();
+        safeDispose(MapStage.getInstance(), Adventure.getInstance(), ScreenUtil.getInstance(), ShaderUtil.getInstance(),
+            graphics, getAssets());
+        try {
+            SoundSystem.instance.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            AdventureScreen.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             ExceptionHandler.unregisterErrorHandling();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
             if (lastPreview != null)
                 lastPreview.dispose();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public static void safeDispose(Disposable... disposables) {
+        for (Disposable d : disposables) {
+            if (d != null) {
+                try {
+                    d.dispose();
+                } catch (Exception ignored) {}
+            }
         }
     }
     /** Retrieve assets.

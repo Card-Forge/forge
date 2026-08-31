@@ -31,7 +31,7 @@ import forge.util.Utils;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class Graphics {
+public class Graphics implements Disposable {
     private static final int GL_BLEND = GL20.GL_BLEND;
     private static final int GL_LINE_SMOOTH = 2848; //create constant here since not in GL20
 
@@ -69,20 +69,11 @@ public class Graphics {
         }
     }
 
+    @Override
     public void dispose() {
         if (invokeShapeRenderer)
-            safeDispose(shapeRenderer.get());
-        safeDispose(batch);
-    }
-
-    public void safeDispose(Disposable... disposables) {
-        for (Disposable d : disposables) {
-            if (d != null) {
-                try {
-                    d.dispose();
-                } catch (Exception ignored) {}
-            }
-        }
+            Forge.safeDispose(shapeRenderer.get());
+        Forge.safeDispose(batch);
     }
 
     public SpriteBatch getBatch() {

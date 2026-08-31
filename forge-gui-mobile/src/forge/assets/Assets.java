@@ -124,25 +124,25 @@ public class Assets implements Disposable {
     public void dispose() {
         if (counterFonts != null) {
             for (BitmapFont bitmapFont : counterFonts.values())
-                safeDispose(bitmapFont);
+                Forge.safeDispose(bitmapFont);
             counterFonts.clear();
         }
         if (fallback_skins != null) {
             for (Texture texture : fallback_skins.values())
-                safeDispose(texture);
+                Forge.safeDispose(texture);
             fallback_skins.clear();
         }
         if (tmxMap != null) {
             for (Texture texture : tmxMap.values())
-                safeDispose(texture);
+                Forge.safeDispose(texture);
             tmxMap.clear();
         }
         if (textrafonts != null) {
             for (Font f : textrafonts.values())
-                safeDispose(f);
+                Forge.safeDispose(f);
             textrafonts.clear();
         }
-        safeDispose(defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture);
+        Forge.safeDispose(defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -167,16 +167,7 @@ public class Assets implements Disposable {
             cursor.clear();
         if (fonts != null)
             fonts.clear();
-        safeDispose(manager);
-    }
-    private void safeDispose(Disposable... disposables) {
-        for (Disposable d : disposables) {
-            if (d != null) {
-                try {
-                    d.dispose();
-                } catch (Exception ignored) {}
-            }
-        }
+        Forge.safeDispose(manager);
     }
 
     public MemoryTrackingAssetManager manager() {
