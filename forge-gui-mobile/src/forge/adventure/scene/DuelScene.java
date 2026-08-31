@@ -51,6 +51,7 @@ import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
 import forge.util.Localizer;
+import forge.util.ScreenUtil;
 import forge.util.StreamUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -217,7 +218,7 @@ public class DuelScene extends ForgeScene {
     }
 
     public void exitDuelScene() {
-        Forge.setTransitionScreen(new TransitionScreen(endRunnable, Forge.takeScreenshot(), false, false));
+        Forge.setTransitionScreen(new TransitionScreen(endRunnable, ScreenUtil.getInstance().takeScreenshot(), false, false));
     }
 
     private FOptionPane createFOption(String message, String title, FBufferedImage icon, Runnable runnable) {

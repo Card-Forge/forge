@@ -25,6 +25,7 @@ public class GameScene extends HudScene {
 
     private static GameScene object;
     private String location = "";
+    private String locationColorID = "[+c]";
 
     public static GameScene instance() {
         if (object == null)
@@ -61,6 +62,10 @@ public class GameScene extends HudScene {
         // WorldStage.getInstance().handlePointsOfInterestCollision();
     }
 
+    public String getLocationColorID() {
+        return locationColorID;
+    }
+
     public String getAdventurePlayerLocation(boolean forHeader, boolean skipRoads) {
         if (MapStage.getInstance().isInMap()) {
             location = forHeader ? TileMapScene.instance().rootPoint.getDisplayName() : TileMapScene.instance().rootPoint.getData().type;
@@ -78,6 +83,14 @@ public class GameScene extends HudScene {
             else {
                 BiomeData data = biomeData.get(currentBiome);
                 location = forHeader ? TextUtil.capitalize(data.name) + " Map" : data.name;
+                switch (data.name) {
+                    case "white" -> locationColorID = "[+w]";
+                    case "red" -> locationColorID = "[+r]";
+                    case "green" -> locationColorID = "[+g]";
+                    case "blue" -> locationColorID = "[+u]";
+                    case "black" -> locationColorID = "[+b]";
+                    default -> locationColorID = "[+c]";
+                }
             }
         }
         return location;
