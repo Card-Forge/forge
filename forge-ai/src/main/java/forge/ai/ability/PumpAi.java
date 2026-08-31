@@ -95,7 +95,9 @@ public class PumpAi extends PumpAiBase {
             boolean isBeforeOppCombat = ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN) && ph.getPlayerTurn().isOpponentOf(ai);
             CostTapType tapType = sa.getPayCosts().getCostPartByType(CostTapType.class);
             if (tapType != null && (tapType.getType().startsWith("Creature") || CardType.isACreatureType(tapType.getType()))) {
-                return isBeforeMyAttack || isBeforeOppCombat;
+                if (isBeforeMyAttack || isBeforeOppCombat) {
+                    return false;
+                }
             }
             Card host = sa.getHostCard();
             // wait until AI has decided if creature should attack/block instead
