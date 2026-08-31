@@ -375,7 +375,7 @@ public class ComputerUtil {
                 final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
                 nonLandsInHand.addAll(ai.getCardsIn(ZoneType.Library));
                 final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
-                if (landsInPlay.size() + landsInHand >= highestCMC) {
+                if (ai.getLandsInPlay().size() + landsInHand >= highestCMC) {
                     // Don't need more land.
                     return ComputerUtilCard.getWorstLand(landsInPlay);
                 }
