@@ -62,6 +62,9 @@ public class CardView extends GameEntityView {
     public Object getObject() {
         return get(TrackableProperty.Object);
     }
+    public void clearObject() {
+        set(TrackableProperty.Object, null);
+    }
 
     public static TrackableCollection<CardView> getCollection(Iterable<Card> cards) {
         TrackableCollection<CardView> collection = new TrackableCollection<>();

@@ -59,6 +59,7 @@ public class CardZoom extends FOverlay {
     private static boolean showBackSide = false;
     private static boolean showMerged = false;
     private static boolean isAdvBack = false;
+    private static List<CardView> cardViewsToClearObject;
 
     public static void show(Object item) {
         show(item, false);
@@ -83,6 +84,7 @@ public class CardZoom extends FOverlay {
         items = items0;
         isAdvBack = advBack;
         if (items == null) { return; }
+        cardViewsToClearObject = new ArrayList<>();
         if (currentIndex0 < 0 || items.size() <= currentIndex0) { return; }
         activateHandler = activateHandler0;
         currentIndex = currentIndex0;
@@ -229,7 +231,9 @@ public class CardZoom extends FOverlay {
             return CardView.getCardForUi(cc.getCard());
         }
         if (item instanceof InventoryItem ii) {
-            return new CardView(-1, null, ii.getDisplayName(), ii.getItemType(), item);
+            CardView cardView = new CardView(-1, null, ii.getDisplayName(), ii.getItemType(), item);
+            cardViewsToClearObject.add(cardView);
+            return cardView;
         }
         if (item instanceof RewardActor actor) {
             String name = "", description = "";
@@ -250,6 +254,7 @@ public class CardZoom extends FOverlay {
                         description = "Quest Item";
                     description = TextUtil.fastReplace(description, "[+Shards]", "{M}");
                     CardView cardView = new CardView(-1, null, name, description, actor);
+                    cardViewsToClearObject.add(cardView);
                     return cardView;
                 }
             }
@@ -436,7 +441,16 @@ public class CardZoom extends FOverlay {
         }
 
         if (isAdvBack) {
-            String message = items.size() > 1 ? "Swipe Left/Right to navigate Zoom" : "Swipe Left/Right to close Zoom" ;
+            String message;
+            if (items.size() > 1 ) {
+                message = "Swipe Left/Right to navigate Zoom";
+                if (currentIndex == 0)
+                    message = "Swipe Right to close Zoom";
+                else if (currentIndex == items.size() - 1)
+                    message = "Swipe Left to close Zoom";
+            } else
+                message = "Swipe Left/Right to close Zoom";
+
             g.fillRect(FDialog.getMsgBackColor(), 0, 0, w, messageHeight);
             g.drawText(message, FDialog.MSG_FONT, FDialog.getMsgForeColor(), 0, 0, w, messageHeight, false, Align.center, true);
         } else if (currentActivateAction != null) {
@@ -480,6 +494,21 @@ public class CardZoom extends FOverlay {
         }
         if (!MatchController.instance.isGamePaused())
             MatchController.instance.pauseMatch();
+    }
+
+    @Override
+    public void hide() {
+        // clear objects
+        if (cardViewsToClearObject != null) {
+            for (CardView cardView : cardViewsToClearObject) {
+                if (cardView != null) {
+                    cardView.clearObject();
+                }
+            }
+            cardViewsToClearObject.clear();
+            cardViewsToClearObject = null;
+        }
+        super.hide();
     }
 
     @Override
