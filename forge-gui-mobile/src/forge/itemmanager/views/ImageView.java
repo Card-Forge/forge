@@ -1358,7 +1358,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         String key = item.getImageKey(false);
                         if (key.startsWith(ImageKeys.PRECON_PREFIX) || key.startsWith(ImageKeys.FATPACK_PREFIX)
                                 || key.startsWith(ImageKeys.BOOSTERBOX_PREFIX) || key.startsWith(ImageKeys.BOOSTER_PREFIX) || key.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX)) {
-                            CardView cv = new CardView(-1, null, item.getDisplayName(), null, item.getImageKey(false));
+                            CardView cv = new CardView(-1, null, item.getDisplayName(), item.getItemType(), null);
                             CardImageRenderer.drawCardImage(g, cv, false, x, y, w, h, CardStackPosition.Top, false, false);
                             return;
                         }

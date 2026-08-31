@@ -47,7 +47,7 @@ public class OverlayText {
             float oldAlpha = Forge.getGraphics().getfloatAlphaComposite();
             Forge.getGraphics().setAlphaComposite(alpha);
             Forge.getGraphics().begin(Forge.getScreenWidth(), Forge.getScreenHeight());
-            Forge.getGraphics().getBatch().draw(Forge.getGraphics().getBackropTexture(), 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            Forge.getGraphics().getBatch().draw(Forge.getAssets().getBackropTexture(), 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             Forge.getGraphics().setAlphaComposite(oldAlpha);
             label.draw(Forge.getGraphics().getBatch(), 1f);
             label.act(delta);

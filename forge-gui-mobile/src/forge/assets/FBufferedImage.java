@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Matrix4;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.gui.FThreads;
 
@@ -76,7 +77,7 @@ public abstract class FBufferedImage extends FImageComplex {
 
                 //frame graphics must be given a projection matrix
                 //so stuff is rendered properly to custom sized frame buffer
-                Graphics frameGraphics = new Graphics();
+                Graphics frameGraphics = new Graphics(Forge.LOW_SPRITES_CAP);
                 Matrix4 matrix = new Matrix4();
                 matrix.setToOrtho2D(0, 0, width, height);
                 frameGraphics.setProjectionMatrix(matrix);

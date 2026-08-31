@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.ImmutableList;
+import forge.Adventure;
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
@@ -324,6 +325,7 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public void enter() {
+        Adventure.getInstance().renderTransitionScreen = false;
         Localizer localizer = Forge.getLocalizer();
         SoundSystem.instance.stopBackgroundMusic();
         GameType mainGameType;
@@ -698,6 +700,12 @@ public class DuelScene extends ForgeScene {
     @Override
     public FScreen getScreen() {
         return MatchController.getView();
+    }
+
+    @Override
+    public boolean leave() {
+        Adventure.getInstance().renderTransitionScreen = true;
+        return super.leave();
     }
 
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite) {

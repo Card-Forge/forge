@@ -7,8 +7,14 @@ import static forge.card.CardRenderer.isModernFrame;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.ImageKeys;
+import forge.adventure.util.Config;
+import forge.adventure.util.Controls;
+import forge.adventure.util.Reward;
+import forge.adventure.util.RewardActor;
 import forge.assets.*;
+import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
@@ -786,7 +792,58 @@ public class CardImageRenderer {
         boolean canshow = MatchController.instance.mayView(card);
         String key = card.getState(altState).getImageKey();
         Texture image = new CachedCardImageRenderer(key).getImage();
+        if (image == null) {
+            //try if its Reward Actor object
+            if (card.getObject() instanceof RewardActor actor) {
+                if (Reward.Type.Card == actor.getReward().getType() || Reward.Type.CardPack == actor.getReward().getType()) {
+                    image = actor.getImage(Reward.Type.CardPack != actor.getReward().getType());
+                } else {
+                    updateStaticFields(w, h);
+                    //draw cardBack
+                    g.drawImage(Config.instance().getItemSprite("CardBack"), x, y, w, h);
+                    // Draw Sprite
+                    float itemY = y + h / 4f;
+                    float itemW = w / 3f;
+                    float itemX = x + itemW;
+                    boolean center = false;
+                    String name = "";
+                    switch (actor.getReward().getType()) {
+                        case Item -> {
+                            name = actor.getReward().getItem().name;
+                            g.drawImage(actor.getReward().getItem().sprite(), itemX, itemY, itemW, itemW);
+                        }
+                        case Life, Shards, Gold -> {
+                            name = actor.getReward().getType().toString();
+                            center = true;
+                            g.drawImage(Config.instance().getItemSprite(actor.getReward().getType().toString()), itemX, itemY, itemW, itemW);
+                        }
+                    }
 
+                    String header = isCurrentCard ? "[%300]" : "[%240]";
+                    float inset = isCurrentCard ? MANA_SYMBOL_SIZE * 2.4f : MANA_SYMBOL_SIZE * 2.3f;
+
+                    // Item Name
+                    TextraLabel itemName = Controls.newTextraLabel(header + name);
+                    itemName.setWidth(w - (inset * 2));
+                    itemName.setAlignment(1);
+                    itemName.setPosition(x + inset, y + h / 1.15f);
+                    itemName.draw(g.getBatch(), g.getfloatAlphaComposite());
+
+                    // Description
+                    TextraLabel itemDescription = Controls.newTextraLabel(header + TextUtil.fastReplace(card.getCurrentState().getOracleText(), "{M}", "[+Shards]"));
+                    itemDescription.setWidth(w - (inset * 2));
+                    itemDescription.setWrap(true);
+                    float div = center ? 2.5f : 3.5f;
+                    itemDescription.setPosition(x + inset, y + h / div);
+                    if (center)
+                        itemDescription.setAlignment(1);
+                    itemDescription.draw(g.getBatch(), g.getfloatAlphaComposite());
+                    return;
+                }
+            } else if (card.getObject() instanceof InventoryItem item) {
+                image = ImageCache.getInstance().getImage(item);
+            }
+        }
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         if (card.isImmutable() && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_IMAGES_EFFECT_CARDS)){
             drawDetails(g, card, gameView, altState, x, y, w, h);

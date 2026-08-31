@@ -51,7 +51,7 @@ public class WorldSaveHeader implements java.io.Serializable, Disposable {
     public void createPreview() {
         TextureRegion tr = ScreenUtil.getInstance().takeScreenshot();
         Matrix4 m  = new Matrix4();
-        Graphics g = new Graphics();
+        Graphics g = new Graphics(Forge.LOW_SPRITES_CAP);
         FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Forge.getScreenWidth(), Forge.getScreenHeight(), false);
         frameBuffer.begin();
         m.setToOrtho2D(0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
