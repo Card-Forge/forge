@@ -1,7 +1,6 @@
 package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
-import forge.assets.Assets;
 import forge.assets.FSkinTexture;
 import forge.gui.GuiBase;
 import forge.util.BuildInfo;
@@ -52,10 +51,10 @@ public final class AdventureBackgroundDownloader {
             return;
         }
 
-        FileHandle listFile = Assets.getFileHandle(config.getFilePath(LIST_PATH));
+        FileHandle listFile = config.getFile(LIST_PATH);
         String customSource = config.getBattleBackgroundSource();
         if ((customSource != null && customSource.isEmpty())
-                || (customSource == null && (!listFile.exists() || listFile.isDirectory()))) {
+                || (customSource == null && (listFile == null || !listFile.exists() || listFile.isDirectory()))) {
             return;
         }
 
