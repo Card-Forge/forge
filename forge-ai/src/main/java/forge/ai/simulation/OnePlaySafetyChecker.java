@@ -3,6 +3,7 @@ package forge.ai.simulation;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -13,7 +14,8 @@ public final class OnePlaySafetyChecker {
         // Forge keeps the parent ability on the stack while it resolves. Score actions offered
         // during that resolution incrementally; priority responses need two full stack-resolution
         // branches and are not supported yet.
-        if (sa == null || CHECKING.get()
+        // A subability is never played on its own, so there is nothing here to rule unsafe.
+        if (sa == null || sa instanceof AbilitySub || CHECKING.get()
                 || (!player.getGame().getStack().isEmpty() && !player.getGame().getStack().isResolving())) {
             return true;
         }
