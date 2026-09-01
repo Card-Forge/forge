@@ -350,6 +350,11 @@ public class GuiDesktop implements IGuiBase {
     }
 
     private static float initializeScreenScale() {
+        // Main installs GuiDesktop before it reads the mode argument, so `sim` and `parse` load
+        // this class with no display.
+        if (GraphicsEnvironment.isHeadless()) {
+            return 1.0f;
+        }
         GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
         AffineTransform at = gc.getDefaultTransform();
         double scaleX = at.getScaleX();
