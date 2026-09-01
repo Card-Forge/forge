@@ -35,7 +35,9 @@ import forge.util.ComparableOp;
  * that check entirely, or grants a shared budget of {@code n} extra colors (deck-wide DISTINCT
  * colors, not card count) to cards matching a {@code Type:} branch. Branches tokenize dot-then-plus
  * like {@code ValidCard$} restriction strings (type/supertype/subtype words, {@code Permanent}, or
- * a stat filter like {@code powerGE4}).
+ * a stat filter like {@code powerGE4}). A creature-type token also matches cards with Changeling,
+ * which is every creature type per rule 702.73a (mirrors the same handling already established in
+ * {@link forge.card.DeckHints}).
  */
 public class DeckRuleColorIdentity extends DeckRule {
     private static final Pattern STAT_FILTER =
@@ -60,7 +62,7 @@ public class DeckRuleColorIdentity extends DeckRule {
                 }
             }
             for (final String sub : typeSpec.getSubtypes()) {
-                if (!candidate.hasSubtype(sub)) {
+                if (!candidate.hasSubtype(sub) && !(CardType.isACreatureType(sub) && hasChangeling(card))) {
                     return false;
                 }
             }
@@ -73,6 +75,17 @@ public class DeckRuleColorIdentity extends DeckRule {
                 }
             }
             return true;
+        }
+
+        /**
+         * True if {@code card} has Changeling, making it every creature type - rule 702.73a: "This ability
+         * works everywhere, even outside the game." Same {@code Type:} branch a normal creature-type card
+         * would need to match, just sourced from the keyword instead of the printed subtypes. Mirrors
+         * {@link forge.card.DeckHints}'s existing {@code CardType.isACreatureType(p)} + {@code hasKeyword("Changeling")}
+         * handling for the same problem.
+         */
+        private static boolean hasChangeling(final CardRules card) {
+            return CardRulesPredicates.hasKeyword("Changeling").test(card);
         }
     }
 
