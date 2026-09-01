@@ -1,5 +1,6 @@
 package forge.adventure.scene;
 
+import forge.Adventure;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -43,6 +44,7 @@ public class ShopScene extends ForgeScene {
         screen = null;
         getScreen();
         screen.refresh();
+        Adventure.getInstance().renderTransitionScreen = false;
         super.enter();
         processAutoSell();
     }
@@ -50,6 +52,12 @@ public class ShopScene extends ForgeScene {
     @Override
     public FScreen getScreen() {
         return screen == null ? screen = new AdventureDeckEditor(true) : screen;
+    }
+
+    @Override
+    public boolean leave() {
+        Adventure.getInstance().renderTransitionScreen = true;
+        return super.leave();
     }
 
     private void processAutoSell() {

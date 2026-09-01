@@ -21,40 +21,10 @@ public abstract class ForgeScene extends Scene implements IUpdateable {
 
     @Override
     public void render() {
-        /*Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
-        if (getScreen() == null) {
-            return;
-        }
-
-        Forge.getGraphics().begin(Forge.getScreenWidth(), Forge.getScreenHeight());
-        getScreen().screenPos.setSize(Forge.getScreenWidth(), Forge.getScreenHeight());
-        if (getScreen().getRotate180()) {
-            Forge.getGraphics().startRotateTransform( Forge.getScreenWidth() / 2f, Forge.getScreenHeight() / 2f, 180);
-        }
-        getScreen().draw(Forge.getGraphics());
-        if (getScreen().getRotate180()) {
-            Forge.getGraphics().endTransform();
-        }
-        for (FOverlay overlay : FOverlay.getOverlays()) {
-            if (overlay.isVisibleOnScreen(getScreen())) {
-                overlay.screenPos.setSize(Forge.getScreenWidth(), Forge.getScreenHeight());
-                overlay.setSize(Forge.getScreenWidth(), Forge.getScreenHeight()); //update overlay sizes as they're rendered
-                if (overlay.getRotate180()) {
-                    Forge.getGraphics().startRotateTransform(Forge.getScreenWidth() / 2f, Forge.getScreenHeight() / 2f, 180);
-                }
-                overlay.draw(Forge.getGraphics());
-                if (overlay.getRotate180()) {
-                    Forge.getGraphics().endTransform();
-                }
-            }
-        }
-        Forge.getGraphics().end();*/
     }
 
     @Override
     public void act(float delta) {
-        /*ImageCache.allowSingleLoad();
-        ForgeAnimation.advanceAll();*/
     }
 
 

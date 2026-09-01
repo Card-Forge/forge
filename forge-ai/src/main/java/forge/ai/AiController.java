@@ -813,34 +813,32 @@ public class AiController {
 
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         final Card host = sa.getHostCard();
-        Card altHost = host;
 
         if (sa instanceof Spell sp) {
-            altHost = sp.canPlayFromHost();
+            Card altHost = sp.canPlayFromHost();
             if (altHost == null) {
                 return AiPlayDecision.CantPlaySa;
+            }
+            // state needs to be switched here so API checks evaluate the right face
+            if (host != altHost) {
+                sa.setHostCard(altHost);
             }
             altHost.setCastSA(sa);
         } else if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
 
-        // state needs to be switched here so API checks evaluate the right face
-        if (host != altHost) {
-            sa.setHostCard(altHost);
+        try {
+            return canPlayAndPayForFace(sa);
+        } finally {
+            // in addition to engine some AI api can also switch host
+            if (sa.getHostCard() != host) {
+                sa.setHostCard(host);
+            }
+            if (sa.isSpell()) {
+                host.setCastSA(null);
+            }
         }
-
-        AiPlayDecision decision = canPlayAndPayForFace(sa);
-
-        if (host != altHost) {
-            sa.setHostCard(host);
-        }
-
-        if (sa.isSpell()) {
-            altHost.setCastSA(null);
-        }
-
-        return decision;
     }
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
@@ -967,7 +965,7 @@ public class AiController {
 
     private AiPlayDecision saSideEffects(final Card card, final SpellAbility sa) {
         if (usesHybridSimulation()) {
-            return OnePlaySafetyChecker.isAcceptable(player, sa) ? AiPlayDecision.WillPlay : AiPlayDecision.CurseEffects;
+            return OnePlaySafetyChecker.isAcceptable(player, sa) ? AiPlayDecision.WillPlay : AiPlayDecision.HybridSimRejected;
         }
 
         if ((!sa.isSpell() && !sa.isLandAbility()) || usesFullSimulation()) {
