@@ -6,4 +6,5 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Valid
 A:AB$ Draw | Cost$ 1 T Discard<1/Card.Legendary/legendary> | SpellDescription$ Draw a card.
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
+DeckHints:Type$Legendary
 Oracle:When this artifact enters, exile target nonland permanent an opponent controls with mana value 3 or less until this artifact leaves the battlefield.\n{1}, {T}, Discard a legendary card: Draw a card.
