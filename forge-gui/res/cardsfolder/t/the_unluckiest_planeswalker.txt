@@ -2,7 +2,7 @@ Name:The Unluckiest Planeswalker
 ManaCost:2 R
 Types:Legendary Planeswalker
 Loyalty:4
-DeckRule:ColorIdentity:Exempt$ Type:Aura,Basic.Land | ActiveSection$ Commander | Description$ Rulebreaker — A deck with this commander can have Aura cards of any color identity and any basic land cards.
+DeckRule:ColorIdentity:Exempt$ Aura,Basic.Land | ActiveSection$ Commander | Description$ Rulebreaker — A deck with this commander can have Aura cards of any color identity and any basic land cards.
 A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Produced$ Any | Planeswalker$ True | TriggersWhenSpent$ TrigToken | SpellDescription$ Add one mana of any color. When you spend this mana to cast an Aura spell this turn, create a 1/1 red Gremlin creature token.
 SVar:TrigToken:Mode$ SpellCast | ValidCard$ Aura | Execute$ TrigTokenMain | TriggerDescription$ When you spend this mana to cast an Aura spell this turn, create a 1/1 red Gremlin creature token.
 SVar:TrigTokenMain:DB$ Token | TokenScript$ r_1_1_gremlin | TokenOwner$ You

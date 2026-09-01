@@ -314,13 +314,10 @@ public final class CardRulesPredicates {
     private static final Pattern RESTRICTION_STAT_FILTER =
             Pattern.compile("^(power|toughness|cmc)(EQ|NE|GT|LT|GE|LE)(\\d+)$");
 
-    /** Parses a {@code [Type:]Branch1,Branch2,...} restriction list (as in {@code DeckRule:ColorIdentity}'s {@code Exempt$}) into a predicate matching any branch. */
+    /** Parses a {@code Branch1,Branch2,...} restriction list (as in {@code DeckRule:ColorIdentity}'s {@code Exempt$}) into a predicate matching any branch. */
     public static Predicate<CardRules> restrictionList(final String rawValue) {
         Predicate<CardRules> result = null;
-        String body = rawValue.trim();
-        if (body.startsWith("Type:")) {
-            body = body.substring("Type:".length());
-        }
+        final String body = rawValue.trim();
         for (final String rawBranch : body.split(",")) {
             final String trimmed = rawBranch.trim();
             if (!trimmed.isEmpty()) {

@@ -25,10 +25,11 @@ import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 
 /**
- * {@code DeckRule:ColorIdentity:Exempt$ Type:<branches> | Disable$ True | AllowedAdditionalColor$
- * <n>:Type:<branches>} - exempts matching cards from the deck's color-identity check, disables
- * it entirely, or grants a shared budget of {@code n} extra colors (distinct colors, not card
- * count) to cards matching a branch. Branch grammar/matching: {@link CardRulesPredicates#restrictionList}.
+ * {@code DeckRule:ColorIdentity:Exempt$ <branches> | Disable$ True | AllowedAdditionalColor$
+ * <n> | AllowedAdditionalColorType$ <branches>} - exempts matching cards from the deck's
+ * color-identity check, disables it entirely, or grants a shared budget of {@code n} extra
+ * colors (distinct colors, not card count) to cards matching a branch. Branch grammar/matching:
+ * {@link CardRulesPredicates#restrictionList}.
  */
 public class DeckRuleColorIdentity extends DeckRule {
     private final Predicate<CardRules> exemptPredicate;
@@ -43,17 +44,10 @@ public class DeckRuleColorIdentity extends DeckRule {
         final String exempt = params.get("Exempt");
         exemptPredicate = exempt != null ? CardRulesPredicates.restrictionList(exempt) : card -> false;
         final String additionalColor = params.get("AllowedAdditionalColor");
-        int count = 0;
-        Predicate<CardRules> parsedAdditionalColorPredicate = card -> false;
-        if (additionalColor != null) {
-            final int colonPos = additionalColor.indexOf(':');
-            if (colonPos >= 0) {
-                count = Integer.parseInt(additionalColor.substring(0, colonPos).trim());
-                parsedAdditionalColorPredicate = CardRulesPredicates.restrictionList(additionalColor.substring(colonPos + 1));
-            }
-        }
-        additionalColorCount = count;
-        additionalColorPredicate = parsedAdditionalColorPredicate;
+        additionalColorCount = additionalColor != null ? Integer.parseInt(additionalColor.trim()) : 0;
+        final String additionalColorType = params.get("AllowedAdditionalColorType");
+        additionalColorPredicate = additionalColorCount > 0 && additionalColorType != null
+                ? CardRulesPredicates.restrictionList(additionalColorType) : card -> false;
     }
 
     /** True if color identity checking is waived entirely for cards this rule applies to (The Paradise Bird-style). */
