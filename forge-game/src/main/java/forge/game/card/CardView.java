@@ -983,7 +983,6 @@ public class CardView extends GameEntityView {
     public boolean hasBackSide() {
         return get(TrackableProperty.HasBackSide);
     }
-    public String getAlternateStateName() { return get(TrackableProperty.AlternateStateName); }
 
     public CardStateView createAlternateState(final CardStateName state0) {
         return new CardStateView(getId(), state0, tracker);
@@ -992,9 +991,8 @@ public class CardView extends GameEntityView {
     public CardStateView getState(final boolean alternate0) {
         return alternate0 ? getAlternateState() : getCurrentState();
     }
-    void updateAlternateStateName(String stateName, boolean hasBackSide) {
+    void updateBackSide(boolean hasBackSide) {
         set(TrackableProperty.HasBackSide, hasBackSide);
-        set(TrackableProperty.AlternateStateName, stateName);
     }
 
     public boolean wasDestroyed() {
@@ -1051,9 +1049,9 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Room, c.isRoom());
         set(TrackableProperty.FacedownImageKey, c.getFacedownImageKey());
 
-        //alternateStateName && hasBackside
+        // hasBackside
         if (c.getAlternateState() != null)
-            updateAlternateStateName(c.getAlternateState().getName(), c.isDoubleFaced());
+            updateBackSide(c.isDoubleFaced());
 
         final Card cloner = c.getCloner();
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
