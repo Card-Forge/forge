@@ -7,6 +7,7 @@ ScryfallCode=FRA
 
 [cards]
 5 M Enlightened Confidant @Denman Rooke
+34 U Perfected Theory @Marta Nael
 43 M The Theorist, Jace Beleren @Ekaterina Burmak
 49 M Bloodline Recollector @Cynthia Sheppard
 78 M Craterclaw Colossus @Mark Zug
@@ -49,3 +50,6 @@ ScryfallCode=FRA
 449 M Enlightened Confidant @Jabari Weathers
 455 M Craterclaw Colossus @Raluca Marinescu
 457 M Stingcaster Mage @Gal Or
+
+[tokens]
+4 u_1_1_illusion @Daniel Cotter
