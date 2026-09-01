@@ -717,7 +717,7 @@ public class CountersPutAi extends CountersAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((!sa.isTargetNumberValid()) || (sa.getTargets().isEmpty())) {
+                    if (!sa.isTargetNumberValid() || sa.getTargets().isEmpty()) {
                         sa.resetTargets();
                         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     } else {
@@ -776,9 +776,7 @@ public class CountersPutAi extends CountersAi {
                     && amount == 0 // And counter amount wasn't set previously by something (e.g. Wildborn Preserver)
                     && sa.hasSVar(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
                 // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
-                int payX = ComputerUtilCost.setMaxXValue(sa, ai, true);
-
-                root.setXManaCostPaid(payX);
+                ComputerUtilCost.setMaxXValue(sa, ai, true);
             }
 
             if (!mandatory) {

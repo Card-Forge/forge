@@ -17,7 +17,7 @@ public class CardRendererUtils {
     }
     public static boolean needsRotation(final ForgePreferences.FPref fPref, final CardView card, boolean altState) {
         if (isPreferenceEnabled(fPref)) {
-            if (Forge.enableUIMask.equals("Art"))
+            if ((Forge.enableUIMask.equals("Art") || card.useCardArt()))
                 return false;
             switch (fPref) {
                 case UI_ROTATE_SPLIT_CARDS -> {

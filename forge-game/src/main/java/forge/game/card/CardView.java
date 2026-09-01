@@ -59,6 +59,13 @@ public class CardView extends GameEntityView {
         return Card.getCardForUi(pc).getView();
     }
 
+    public Object getObject() {
+        return get(TrackableProperty.Object);
+    }
+    public void clearObject() {
+        set(TrackableProperty.Object, null);
+    }
+
     public static TrackableCollection<CardView> getCollection(Iterable<Card> cards) {
         TrackableCollection<CardView> collection = new TrackableCollection<>();
         if (cards != null) {
@@ -86,6 +93,14 @@ public class CardView extends GameEntityView {
         super(id0, tracker);
         set(TrackableProperty.CurrentState, new CardStateView(id0, CardStateName.Original, tracker));
     }
+    public CardView(final int id0, final Tracker tracker, final String name0, final String description, final Object object) {
+        super(id0, tracker);
+        set(TrackableProperty.CurrentState, new CardStateView(id0, CardStateName.Original, tracker));
+        getCurrentState().setName(name0);
+        getCurrentState().setOracleText(description);
+        set(TrackableProperty.Name, name0);
+        set(TrackableProperty.Object, object);
+    }
     public CardView(final int id0, final Tracker tracker, final String name0) {
         this(id0, tracker);
         getCurrentState().setName(name0);
@@ -94,10 +109,8 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChangedTypes, new HashMap<String, String>());
         set(TrackableProperty.Sickness, true);
     }
-    public CardView(final int id0, final Tracker tracker, final String name0, final PlayerView ownerAndController, final String imageKey) {
+    public CardView(final int id0, final Tracker tracker, final String name0, final String imageKey) {
         this(id0, tracker, name0);
-        set(TrackableProperty.Owner, ownerAndController);
-        set(TrackableProperty.Controller, ownerAndController);
         set(TrackableProperty.ImageKey, imageKey);
     }
 
@@ -613,17 +626,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.NamedCard, c.getNamedCards());
         flagAsChanged(TrackableProperty.NamedCard);
     }
-    public boolean getMayPlayPlayers(PlayerView pv) {
-        TrackableCollection<PlayerView> col = get(TrackableProperty.MayPlayPlayers);
-        return col != null && col.indexOf(pv) != -1;
-    }
-    void setMayPlayPlayers(Iterable<Player> list) {
-        if (Iterables.isEmpty(list)) {
-            set(TrackableProperty.MayPlayPlayers, null);
-        } else {
-            set(TrackableProperty.MayPlayPlayers, PlayerView.getCollection(list));
-        }
-    }
+
     public boolean mayPlayerLook(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);
         // TODO don't use contains as it only queries the backing HashSet which is problematic for netplay because of unsynchronized player ids
@@ -1018,6 +1021,13 @@ public class CardView extends GameEntityView {
     }
     public void updateNeedsTransformAnimation(boolean value) {
         set(TrackableProperty.NeedsTransformAnimation, value);
+    }
+    public boolean useCardArt() {
+        // prevent NPE
+        if (getCurrentState() == null)
+            return false;
+        // Use card art for prepared spell
+        return CardStateName.PreparedSpell.equals(getCurrentState().state);
     }
 
     void updateState(Card c) {

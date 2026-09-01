@@ -3,11 +3,14 @@ package forge.ai.ability;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostTapType;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -87,19 +90,30 @@ public class PumpAi extends PumpAiBase {
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Game game = ai.getGame();
-        boolean main1Preferred = "Main1IfAble".equals(sa.getParam("AILogic")) && ph.is(PhaseType.MAIN1, ai);
-        if (game.getStack().isEmpty() && sa.getPayCosts().hasTapCost()) {
-            if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
-                return false;
+        if (game.getStack().isEmpty()) {
+            boolean isBeforeMyAttack = ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai);
+            boolean isBeforeOppCombat = ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN) && ph.getPlayerTurn().isOpponentOf(ai);
+            CostTapType tapType = sa.getPayCosts().getCostPartByType(CostTapType.class);
+            if (tapType != null && (tapType.getType().startsWith("Creature") || CardType.isACreatureType(tapType.getType()))) {
+                if (isBeforeMyAttack || isBeforeOppCombat) {
+                    return false;
+                }
             }
-            if (ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN) && ph.getPlayerTurn().isOpponentOf(ai)) {
-                return false;
+            Card host = sa.getHostCard();
+            // wait until AI has decided if creature should attack/block instead
+            if (host.isCreature() && sa.getPayCosts().hasTapCost()) {
+                if (isBeforeMyAttack && CombatUtil.canAttack(host)) {
+                    return false;
+                }
+                if (isBeforeOppCombat && CombatUtil.canBlock(host)) {
+                    return false;
+                }
             }
         }
         if (game.getStack().isEmpty() && (ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)
                 || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
-            // Instant-speed pumps should not be cast outside of combat when the
-            // stack is empty
+            boolean main1Preferred = "Main1IfAble".equals(sa.getParam("AILogic")) && ph.is(PhaseType.MAIN1, ai);
+            // save tricks until the last moment
             return sa.isCurse() || isSorcerySpeed(sa, ai) || main1Preferred;
         }
         return true;
@@ -274,9 +288,7 @@ public class PumpAi extends PumpAiBase {
         int attack;
         if (numAttack.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             if (root.getXManaCostPaid() == null) {
-                final int xPay = ComputerUtilCost.setMaxXValue(root, ai, sa.isTrigger());
-                root.setXManaCostPaid(xPay);
-                attack = xPay;
+                attack = ComputerUtilCost.setMaxXValue(root, ai, sa.isTrigger());
             } else {
                 attack = root.getXManaCostPaid();
             }
@@ -693,7 +705,6 @@ public class PumpAi extends PumpAiBase {
         if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             if (root.getXManaCostPaid() == null) {
                 defense = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
-                root.setXManaCostPaid(defense);
             } else {
                 defense = root.getXManaCostPaid();
             }

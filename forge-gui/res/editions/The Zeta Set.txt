@@ -1,0 +1,371 @@
+[metadata]
+Code=SLZ
+Date=2026-09-02
+Name=The Zeta Set
+Type=Collector_Edition
+ScryfallCode=SLZ
+
+[cards]
+1 C All That Glitters @MSCHF
+2 C Dispatch @MSCHF
+3 R Eerie Interlude @MSCHF
+4 C Generous Gift @MSCHF
+5 R Land Tax @MSCHF
+6 U Mother of Runes @MSCHF
+7 U Path to Exile @MSCHF
+8 C Return to Dust @MSCHF
+9 C Savannah Lions @MSCHF
+10 C Serra Angel @MSCHF
+11 R Split Up @MSCHF
+12 U White Sun's Zenith @MSCHF
+13 C Brainstorm @MSCHF
+14 U Chain of Vapor @MSCHF
+15 U Clone @MSCHF
+16 U Dig Through Time @MSCHF
+17 C Ghostly Flicker @MSCHF
+18 C High Tide @MSCHF
+19 R Hullbreaker Horror @MSCHF
+20 U Imprisoned in the Moon @MSCHF
+21 U Laboratory Maniac @MSCHF
+22 U Mental Misstep @MSCHF
+23 U Merchant Scroll @MSCHF
+24 C Merfolk of the Pearl Trident @MSCHF
+25 C Mulldrifter @MSCHF
+26 C Narcomoeba @MSCHF
+27 C An Offer You Can't Refuse @MSCHF
+28 C Power Sink @MSCHF
+29 M Quicksilver Elemental @MSCHF
+30 C Spell Pierce @MSCHF
+31 C Thought Scour @MSCHF
+32 U Thrummingbird @MSCHF
+33 U Windfall @MSCHF
+34 U Animate Dead @MSCHF
+35 C Cauldron Familiar @MSCHF
+36 U Cruel Reality @MSCHF
+37 C Cut Down @MSCHF
+38 U Dark Ritual @MSCHF
+39 U Doomsday @MSCHF
+40 C Duress @MSCHF
+41 C Feed the Swarm @MSCHF
+42 C Go for the Throat @MSCHF
+43 C Gray Merchant of Asphodel @MSCHF
+44 U Hypnotic Specter @MSCHF
+45 R Imp's Mischief @MSCHF
+46 U Lord Skitter, Sewer King @MSCHF
+47 M Mortuary @MSCHF
+48 C Night's Whisper @MSCHF
+49 C Sengir Vampire @MSCHF
+50 C Tragic Slip @MSCHF
+51 C Unearth @MSCHF
+52 R Vito, Thorn of the Dusk Rose @MSCHF
+53 U Yargle, Glutton of Urborg @MSCHF
+54 U Anger @MSCHF
+55 C Cathartic Reunion @MSCHF
+56 C Disintegrate @MSCHF
+57 C Fireball @MSCHF
+58 U Glimpse the Impossible @MSCHF
+59 C Gut Shot @MSCHF
+60 C Guttersnipe @MSCHF
+61 R Imperial Recruiter @MSCHF
+62 U Kazuul, Tyrant of the Cliffs @MSCHF
+63 C Lightning Bolt @MSCHF
+64 M Mana Echoes @MSCHF
+65 C Price of Progress @MSCHF
+66 U Pyroblast @MSCHF
+67 U Pyrokinesis @MSCHF
+68 C Simian Spirit Guide @MSCHF
+69 C Vandalblast @MSCHF
+70 U Wheel of Misfortune @MSCHF
+71 R Birds of Paradise @MSCHF
+72 C Chatterstorm @MSCHF
+73 C Colossal Dreadmaw @MSCHF
+74 C Cultivate @MSCHF
+75 C Giant Spider @MSCHF
+76 C Gigantosaurus @MSCHF
+77 C Grizzly Bears @MSCHF
+78 U Hornet Queen @MSCHF
+79 C Invigorate @MSCHF
+80 R Life from the Loam @MSCHF
+81 C Llanowar Elves @MSCHF
+82 C Nature's Claim @MSCHF
+83 U Ruxa, Patient Professor @MSCHF
+84 R Scute Swarm @MSCHF
+85 M Scythecat Cub @MSCHF
+86 C Wild Growth @MSCHF
+87 C Wild Nacatl @MSCHF
+88 C Baleful Strix @MSCHF
+89 R Dueling Grounds @MSCHF
+90 U Garth One-Eye @MSCHF
+91 U The Jolly Balloon Man @MSCHF
+92 U Obeka, Brute Chronologist @MSCHF
+93 U Raffine, Scheming Seer @MSCHF
+94 C Arcane Signet @MSCHF
+95 R Ashnod's Altar @MSCHF
+96 R Chromatic Lantern @MSCHF
+97 M Chromatic Orrery @MSCHF
+98 M Chrome Mox @MSCHF
+99 U Cloud Key @MSCHF
+100 U Clown Car @MSCHF
+101 M Copper Tablet @MSCHF
+102 R Darksteel Monolith @MSCHF
+103 R Eternity Vessel @MSCHF
+104 U Foundry Inspector @MSCHF
+105 U Jester's Cap @MSCHF
+106 U Manifold Key @MSCHF
+107 M Mox Tantalite @MSCHF
+108 R Mycosynth Golem @MSCHF
+109 C Ornithopter @MSCHF
+110 M Panoptic Mirror @MSCHF
+111 U Rogue's Gloves @MSCHF
+112 R Sensei's Divining Top @MSCHF
+113 R Skullclamp @MSCHF
+114 U Sol Ring @MSCHF
+115 C Soul-Guide Lantern @MSCHF
+116 C Thought Vessel @MSCHF
+117 R Ward of Bones @MSCHF
+118 C Command Tower @MSCHF
+119 R Oboro, Palace in the Clouds @MSCHF
+120 U Reliquary Tower @MSCHF
+121 M Urborg, Tomb of Yawgmoth @MSCHF
+122 C All That Glitters @MSCHF
+123 C Dispatch @MSCHF
+124 R Eerie Interlude @MSCHF
+125 C Generous Gift @MSCHF
+126 R Land Tax @MSCHF
+127 U Mother of Runes @MSCHF
+128 U Path to Exile @MSCHF
+129 C Return to Dust @MSCHF
+130 C Savannah Lions @MSCHF
+131 C Serra Angel @MSCHF
+132 R Split Up @MSCHF
+133 U White Sun's Zenith @MSCHF
+134 C Brainstorm @MSCHF
+135 U Chain of Vapor @MSCHF
+136 U Clone @MSCHF
+137 U Dig Through Time @MSCHF
+138 C Ghostly Flicker @MSCHF
+139 C High Tide @MSCHF
+140 R Hullbreaker Horror @MSCHF
+141 U Imprisoned in the Moon @MSCHF
+142 U Laboratory Maniac @MSCHF
+143 U Mental Misstep @MSCHF
+144 U Merchant Scroll @MSCHF
+145 C Merfolk of the Pearl Trident @MSCHF
+146 C Mulldrifter @MSCHF
+147 C Narcomoeba @MSCHF
+148 C An Offer You Can't Refuse @MSCHF
+149 C Power Sink @MSCHF
+150 M Quicksilver Elemental @MSCHF
+151 C Spell Pierce @MSCHF
+152 C Thought Scour @MSCHF
+153 U Thrummingbird @MSCHF
+154 U Windfall @MSCHF
+155 U Animate Dead @MSCHF
+156 C Cauldron Familiar @MSCHF
+157 U Cruel Reality @MSCHF
+158 C Cut Down @MSCHF
+159 U Dark Ritual @MSCHF
+160 U Doomsday @MSCHF
+161 C Duress @MSCHF
+162 C Feed the Swarm @MSCHF
+163 C Go for the Throat @MSCHF
+164 C Gray Merchant of Asphodel @MSCHF
+165 U Hypnotic Specter @MSCHF
+166 R Imp's Mischief @MSCHF
+167 U Lord Skitter, Sewer King @MSCHF
+168 M Mortuary @MSCHF
+169 C Night's Whisper @MSCHF
+170 C Sengir Vampire @MSCHF
+171 C Tragic Slip @MSCHF
+172 C Unearth @MSCHF
+173 R Vito, Thorn of the Dusk Rose @MSCHF
+174 U Yargle, Glutton of Urborg @MSCHF
+175 U Anger @MSCHF
+176 C Cathartic Reunion @MSCHF
+177 C Disintegrate @MSCHF
+178 C Fireball @MSCHF
+179 U Glimpse the Impossible @MSCHF
+180 C Gut Shot @MSCHF
+181 C Guttersnipe @MSCHF
+182 R Imperial Recruiter @MSCHF
+183 U Kazuul, Tyrant of the Cliffs @MSCHF
+184 C Lightning Bolt @MSCHF
+185 M Mana Echoes @MSCHF
+186 C Price of Progress @MSCHF
+187 U Pyroblast @MSCHF
+188 U Pyrokinesis @MSCHF
+189 C Simian Spirit Guide @MSCHF
+190 C Vandalblast @MSCHF
+191 U Wheel of Misfortune @MSCHF
+192 R Birds of Paradise @MSCHF
+193 C Chatterstorm @MSCHF
+194 C Colossal Dreadmaw @MSCHF
+195 C Cultivate @MSCHF
+196 C Giant Spider @MSCHF
+197 C Gigantosaurus @MSCHF
+198 C Grizzly Bears @MSCHF
+199 U Hornet Queen @MSCHF
+200 C Invigorate @MSCHF
+201 R Life from the Loam @MSCHF
+202 C Llanowar Elves @MSCHF
+203 C Nature's Claim @MSCHF
+204 U Ruxa, Patient Professor @MSCHF
+205 R Scute Swarm @MSCHF
+206 M Scythecat Cub @MSCHF
+207 C Wild Growth @MSCHF
+208 C Wild Nacatl @MSCHF
+209 C Baleful Strix @MSCHF
+210 R Dueling Grounds @MSCHF
+211 U Garth One-Eye @MSCHF
+212 U The Jolly Balloon Man @MSCHF
+213 U Obeka, Brute Chronologist @MSCHF
+214 U Raffine, Scheming Seer @MSCHF
+215 C Arcane Signet @MSCHF
+216 R Ashnod's Altar @MSCHF
+217 R Chromatic Lantern @MSCHF
+218 M Chromatic Orrery @MSCHF
+219 M Chrome Mox @MSCHF
+220 U Cloud Key @MSCHF
+221 U Clown Car @MSCHF
+222 M Copper Tablet @MSCHF
+223 R Darksteel Monolith @MSCHF
+224 R Eternity Vessel @MSCHF
+225 U Foundry Inspector @MSCHF
+226 U Jester's Cap @MSCHF
+227 U Manifold Key @MSCHF
+228 M Mox Tantalite @MSCHF
+229 R Mycosynth Golem @MSCHF
+230 C Ornithopter @MSCHF
+231 M Panoptic Mirror @MSCHF
+232 U Rogue's Gloves @MSCHF
+233 R Sensei's Divining Top @MSCHF
+234 R Skullclamp @MSCHF
+235 U Sol Ring @MSCHF
+236 C Soul-Guide Lantern @MSCHF
+237 C Thought Vessel @MSCHF
+238 R Ward of Bones @MSCHF
+239 C Command Tower @MSCHF
+240 R Oboro, Palace in the Clouds @MSCHF
+241 U Reliquary Tower @MSCHF
+242 M Urborg, Tomb of Yawgmoth @MSCHF
+243 C All That Glitters @MSCHF
+244 C Dispatch @MSCHF
+245 R Eerie Interlude @MSCHF
+246 C Generous Gift @MSCHF
+247 R Land Tax @MSCHF
+248 U Mother of Runes @MSCHF
+249 U Path to Exile @MSCHF
+250 C Return to Dust @MSCHF
+251 C Savannah Lions @MSCHF
+252 C Serra Angel @MSCHF
+253 R Split Up @MSCHF
+254 U White Sun's Zenith @MSCHF
+255 C Brainstorm @MSCHF
+256 U Chain of Vapor @MSCHF
+257 U Clone @MSCHF
+258 U Dig Through Time @MSCHF
+259 C Ghostly Flicker @MSCHF
+260 C High Tide @MSCHF
+261 R Hullbreaker Horror @MSCHF
+262 U Imprisoned in the Moon @MSCHF
+263 U Laboratory Maniac @MSCHF
+264 U Mental Misstep @MSCHF
+265 U Merchant Scroll @MSCHF
+266 C Merfolk of the Pearl Trident @MSCHF
+267 C Mulldrifter @MSCHF
+268 C Narcomoeba @MSCHF
+269 C An Offer You Can't Refuse @MSCHF
+270 C Power Sink @MSCHF
+271 M Quicksilver Elemental @MSCHF
+272 C Spell Pierce @MSCHF
+273 C Thought Scour @MSCHF
+274 U Thrummingbird @MSCHF
+275 U Windfall @MSCHF
+276 U Animate Dead @MSCHF
+277 C Cauldron Familiar @MSCHF
+278 U Cruel Reality @MSCHF
+279 C Cut Down @MSCHF
+280 U Dark Ritual @MSCHF
+281 U Doomsday @MSCHF
+282 C Duress @MSCHF
+283 C Feed the Swarm @MSCHF
+284 C Go for the Throat @MSCHF
+285 C Gray Merchant of Asphodel @MSCHF
+286 U Hypnotic Specter @MSCHF
+287 R Imp's Mischief @MSCHF
+288 U Lord Skitter, Sewer King @MSCHF
+289 M Mortuary @MSCHF
+290 C Night's Whisper @MSCHF
+291 C Sengir Vampire @MSCHF
+292 C Tragic Slip @MSCHF
+293 C Unearth @MSCHF
+294 R Vito, Thorn of the Dusk Rose @MSCHF
+295 U Yargle, Glutton of Urborg @MSCHF
+296 U Anger @MSCHF
+297 C Cathartic Reunion @MSCHF
+298 C Disintegrate @MSCHF
+299 C Fireball @MSCHF
+300 U Glimpse the Impossible @MSCHF
+301 C Gut Shot @MSCHF
+302 C Guttersnipe @MSCHF
+303 R Imperial Recruiter @MSCHF
+304 U Kazuul, Tyrant of the Cliffs @MSCHF
+305 C Lightning Bolt @MSCHF
+306 M Mana Echoes @MSCHF
+307 C Price of Progress @MSCHF
+308 U Pyroblast @MSCHF
+309 U Pyrokinesis @MSCHF
+310 C Simian Spirit Guide @MSCHF
+311 C Vandalblast @MSCHF
+312 U Wheel of Misfortune @MSCHF
+313 R Birds of Paradise @MSCHF
+314 C Chatterstorm @MSCHF
+315 C Colossal Dreadmaw @MSCHF
+316 C Cultivate @MSCHF
+317 C Giant Spider @MSCHF
+318 C Gigantosaurus @MSCHF
+319 C Grizzly Bears @MSCHF
+320 U Hornet Queen @MSCHF
+321 C Invigorate @MSCHF
+322 R Life from the Loam @MSCHF
+323 C Llanowar Elves @MSCHF
+324 C Nature's Claim @MSCHF
+325 U Ruxa, Patient Professor @MSCHF
+326 R Scute Swarm @MSCHF
+327 M Scythecat Cub @MSCHF
+328 C Wild Growth @MSCHF
+329 C Wild Nacatl @MSCHF
+330 C Baleful Strix @MSCHF
+331 R Dueling Grounds @MSCHF
+332 U Garth One-Eye @MSCHF
+333 U The Jolly Balloon Man @MSCHF
+334 U Obeka, Brute Chronologist @MSCHF
+335 U Raffine, Scheming Seer @MSCHF
+336 C Arcane Signet @MSCHF
+337 R Ashnod's Altar @MSCHF
+338 R Chromatic Lantern @MSCHF
+339 M Chromatic Orrery @MSCHF
+340 M Chrome Mox @MSCHF
+341 U Cloud Key @MSCHF
+342 U Clown Car @MSCHF
+343 M Copper Tablet @MSCHF
+344 R Darksteel Monolith @MSCHF
+345 R Eternity Vessel @MSCHF
+346 U Foundry Inspector @MSCHF
+347 U Jester's Cap @MSCHF
+348 U Manifold Key @MSCHF
+349 M Mox Tantalite @MSCHF
+350 R Mycosynth Golem @MSCHF
+351 C Ornithopter @MSCHF
+352 M Panoptic Mirror @MSCHF
+353 U Rogue's Gloves @MSCHF
+354 R Sensei's Divining Top @MSCHF
+355 R Skullclamp @MSCHF
+356 U Sol Ring @MSCHF
+357 C Soul-Guide Lantern @MSCHF
+358 C Thought Vessel @MSCHF
+359 R Ward of Bones @MSCHF
+360 C Command Tower @MSCHF
+361 R Oboro, Palace in the Clouds @MSCHF
+362 U Reliquary Tower @MSCHF
+363 M Urborg, Tomb of Yawgmoth @MSCHF

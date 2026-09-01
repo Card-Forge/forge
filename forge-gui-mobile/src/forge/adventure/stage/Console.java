@@ -18,11 +18,13 @@ public class Console extends Window {
 
     public void toggle() {
         if (isVisible()) {
+            Forge.advFreezePlayerControls = false;
             setVisible(false);
             getStage().unfocus(input);
             Gdx.input.setOnscreenKeyboardVisible(false);
         } else {
             if (!Forge.advFreezePlayerControls) {
+                Forge.advFreezePlayerControls = true;
                 setVisible(true);
                 getStage().setKeyboardFocus(input);
             }
@@ -58,7 +60,6 @@ public class Console extends Window {
                                     textField.setCursorPosition(Integer.MAX_VALUE);
                                 } else {
                                     index = 0;
-                                    textField.setText(commands.get(index));
                                     textField.setCursorPosition(Integer.MAX_VALUE);
                                 }
                             } else if (!commands.isEmpty()) {
@@ -78,7 +79,7 @@ public class Console extends Window {
                                     textField.setCursorPosition(Integer.MAX_VALUE);
                                 } else {
                                     index = commands.size - 1;
-                                    textField.setText(commands.get(index));
+                                    textField.setText("");
                                     textField.setCursorPosition(Integer.MAX_VALUE);
                                 }
                             } else if (!commands.isEmpty()) {

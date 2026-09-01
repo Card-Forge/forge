@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import forge.Adventure;
 import forge.deck.Deck;
 import forge.screens.FScreen;
 
@@ -43,6 +44,7 @@ public class DeckPreviewScene extends ForgeScene {
         screen = null;
         getScreen();
         screen.refresh();
+        Adventure.getInstance().renderTransitionScreen = false;
         super.enter();
 
     }
@@ -53,6 +55,12 @@ public class DeckPreviewScene extends ForgeScene {
         }
         screen.setEvent(null);
         return screen;
+    }
+
+    @Override
+    public boolean leave() {
+        Adventure.getInstance().renderTransitionScreen = true;
+        return super.leave();
     }
 
 }

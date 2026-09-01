@@ -633,34 +633,19 @@ public class CardFactoryUtil {
                         + " | Secondary$ True | Static$ True | Blessing$ False | IsPresent$ Permanent.YouCtrl | PresentCompare$ GE10"
                         + " | TriggerDescription$ Ascend (" + inst.getReminderText() + ")";
 
-                final String effect = "DB$ Ascend | Defined$ You";
-
                 final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
-                trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-
-                inst.addTrigger(trigger);
-            }
-        } else if (keyword.equals("Storied")) {
-            // Storied trigger only for Permanent, as with Ascend
-            if (card.isPermanent()) {
-                final String trig = "Mode$ Always | TriggerZones$ Battlefield"
-                        + " | Secondary$ True | Static$ True | EnduringStory$ False"
-                        + " | IsPresent$ Permanent.YouCtrl+Historic | PresentCompare$ GE3"
-                        + " | TriggerDescription$ Storied (" + inst.getReminderText() + ")";
-
-                final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
-                final SpellAbility gainStory = new AbilityStatic(card, Cost.Zero, null) {
+                final SpellAbility ascend = new AbilityStatic(card, Cost.Zero, null) {
                     @Override
                     public void resolve() {
                         final Player p = getActivatingPlayer();
                         if (p != null && p.isInGame()) {
-                            p.setEnduringStory(true, getOriginalHost().getSetCode());
+                            p.setBlessing(true, getOriginalHost().getSetCode());
                         }
                     }
                 };
                 // as AbilityFactory would have done, so getOriginalHost resolves on a copied trait
-                gainStory.setCardState(card.getCurrentState());
-                trigger.setOverridingAbility(gainStory);
+                ascend.setCardState(card.getCurrentState());
+                trigger.setOverridingAbility(ascend);
 
                 inst.addTrigger(trigger);
             }
@@ -1802,6 +1787,30 @@ public class CardFactoryUtil {
             squadTrigger.setOverridingAbility(squadAbility);
             squadTrigger.setSVar("SquadAmount", "Count$OptionalKeywordAmount");
             inst.addTrigger(squadTrigger);
+        } else if (keyword.equals("Storied")) {
+            // Storied trigger only for Permanent, as with Ascend
+            if (card.isPermanent()) {
+                final String trig = "Mode$ Always | TriggerZones$ Battlefield"
+                        + " | Secondary$ True | Static$ True | EnduringStory$ False"
+                        + " | IsPresent$ Permanent.YouCtrl+Historic | PresentCompare$ GE3"
+                        + " | TriggerDescription$ Storied (" + inst.getReminderText() + ")";
+
+                final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
+                final SpellAbility gainStory = new AbilityStatic(card, Cost.Zero, null) {
+                    @Override
+                    public void resolve() {
+                        final Player p = getActivatingPlayer();
+                        if (p != null && p.isInGame()) {
+                            p.setEnduringStory(true, getOriginalHost().getSetCode());
+                        }
+                    }
+                };
+                // as AbilityFactory would have done, so getOriginalHost resolves on a copied trait
+                gainStory.setCardState(card.getCurrentState());
+                trigger.setOverridingAbility(gainStory);
+
+                inst.addTrigger(trigger);
+            }
         } else if (keyword.equals("Storm")) {
             final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | Secondary$ True"
                     + "| TriggerDescription$ Storm (" + inst.getReminderText() + ")";
@@ -2240,46 +2249,29 @@ public class CardFactoryUtil {
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
             inst.addReplacement(re);
-        } else if (keyword.startsWith("Flashback")) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
-            sb.append("| ValidStackSa$ Spell.Flashback+castKeyword | Description$ Flashback");
-
-            if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
-                final String[] k = keyword.split(":");
-                final Cost cost = new Cost(k[1], false);
-                sb.append(cost.isOnlyManaCost() ? " " : "—").append(cost.toSimpleString());
-                sb.append(cost.isOnlyManaCost() ? "" : ".");
-
-                String extraDesc =  k.length > 3 ? k[3] : "";
-                if (!extraDesc.isEmpty()) { // extra params added in GameActionUtil, desc added here
-                    sb.append(cost.isOnlyManaCost() ? ". " : " ").append(extraDesc);
-                }
+        } else if (keyword.startsWith("Beam me up") || keyword.startsWith("Flashback")
+                || keyword.startsWith("Harmonize")) {
+            // all three read "cast this from your graveyard for <cost>, then exile this spell",
+            // so they differ only in the name shown and the property the stack check matches on
+            final String kwName;
+            final String saProperty;
+            if (keyword.startsWith("Beam me up")) {
+                kwName = "Beam me up";
+                saProperty = "BeamMeUp";
+            } else if (keyword.startsWith("Flashback")) {
+                kwName = "Flashback";
+                saProperty = "Flashback";
+            } else {
+                kwName = "Harmonize";
+                saProperty = "Harmonize";
             }
 
-            sb.append(" (").append(inst.getReminderText()).append(")");
-
-            String repeffstr = sb.toString();
-
-            String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
-
-            SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
-
-            if (!intrinsic) {
-                saExile.setIntrinsic(false);
-            }
-
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
-
-            re.setOverridingAbility(saExile);
-
-            inst.addReplacement(re);
-        } else if (keyword.startsWith("Harmonize")) {
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
-            sb.append("| ValidStackSa$ Spell.Harmonize+castKeyword | Description$ Harmonize");
+            sb.append("| ValidStackSa$ Spell.").append(saProperty).append("+castKeyword");
+            sb.append(" | Description$ ").append(kwName);
 
-            if (keyword.contains(":")) {
+            if (keyword.contains(":")) { // K:<keyword>:Cost:ExtraParams:ExtraDescription
                 final String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 sb.append(cost.isOnlyManaCost() ? " " : "—").append(cost.toSimpleString());
