@@ -28,7 +28,7 @@ public class StackItemView extends TrackableObject implements IHasCardView {
     }
 
     public StackItemView(SpellAbilityStackInstance si) {
-        super(si.getId(), si.getSourceCard().getGame().getTracker());
+        super(si.getId(), null);
         updateKey(si);
         updateSourceTrigger(si);
         updateText(si);
@@ -40,6 +40,7 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         updateOptionalTrigger(si);
         updateSubInstance(si);
         updateOptionalCost(si);
+        setTracker(si.getSourceCard().getGame().getTracker());
     }
 
     /**
