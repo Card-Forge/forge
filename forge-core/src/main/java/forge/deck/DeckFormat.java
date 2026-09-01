@@ -360,7 +360,7 @@ public enum DeckFormat {
                 if (allowsOffColorIdentity(commanderCIRules, cp.getKey().getRules())) {
                     continue;
                 }
-                if (tryApproveAdditionalColor(commanderCIRules, cp.getKey().getRules(), cmdCI)) {
+                if (approvesAdditionalColor(commanderCIRules, cp.getKey().getRules(), cmdCI)) {
                     continue;
                 }
                 ColorSet missingColors = cp.getKey().getRules().getColorIdentity().getMissingColors(cmdCI);
@@ -378,7 +378,7 @@ public enum DeckFormat {
                     if (allowsOffColorIdentity(commanderCIRules, cp.getKey().getRules())) {
                         continue;
                     }
-                    if (tryApproveAdditionalColor(commanderCIRules, cp.getKey().getRules(), cmdCI)) {
+                    if (approvesAdditionalColor(commanderCIRules, cp.getKey().getRules(), cmdCI)) {
                         continue;
                     }
                     if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI)) {
@@ -492,20 +492,10 @@ public enum DeckFormat {
         return false;
     }
 
-    /** True if some active commander DeckRule:ColorIdentity's AllowedAdditionalColor$ budget covers this candidate's missing colors. */
-    private static boolean tryApproveAdditionalColor(final List<DeckRuleColorIdentity> ciRules, final CardRules candidate, final byte commanderCI) {
+    /** True if some active commander DeckRule:ColorIdentity's player-chosen AllowedAdditionalColor$ colors cover this candidate. */
+    private static boolean approvesAdditionalColor(final List<DeckRuleColorIdentity> ciRules, final CardRules candidate, final byte commanderCI) {
         for (final DeckRuleColorIdentity rule : ciRules) {
-            if (rule.tryApproveAdditionalColor(candidate, commanderCI)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /** Read-only version of {@link #tryApproveAdditionalColor} for testing many candidates against an already-primed rule set. */
-    private static boolean wouldApproveAdditionalColor(final List<DeckRuleColorIdentity> ciRules, final CardRules candidate, final byte commanderCI) {
-        for (final DeckRuleColorIdentity rule : ciRules) {
-            if (rule.wouldApproveAdditionalColor(candidate, commanderCI)) {
+            if (rule.approvesAdditionalColor(candidate, commanderCI)) {
                 return true;
             }
         }
@@ -676,10 +666,10 @@ public enum DeckFormat {
     }
 
     /**
-     * @param currentMain deck's main-section cards so far (may be null/empty); primes any
-     * {@code AllowedAdditionalColor$} rule. Browsing alone commits nothing.
+     * @param commanders the deck's current commander(s); their AllowedAdditionalColor$ picks live
+     * on their marked colors, so no priming from the rest of the deck is needed.
      */
-    public Predicate<PaperCard> isLegalCardForCommanderPredicate(List<PaperCard> commanders, Iterable<Entry<PaperCard, Integer>> currentMain) {
+    public Predicate<PaperCard> isLegalCardForCommanderPredicate(List<PaperCard> commanders) {
         byte cmdCI = 0;
         final List<DeckRuleColorIdentity> ciRules = new ArrayList<>();
         for (final PaperCard p : commanders) {
@@ -693,16 +683,9 @@ public enum DeckFormat {
         if(cmdCI == MagicColor.ALL_COLORS)
             return x -> true;
         final byte finalCmdCI = cmdCI;
-        if (currentMain != null) {
-            for (final DeckRuleColorIdentity rule : ciRules) {
-                for (final Entry<PaperCard, Integer> existing : currentMain) {
-                    rule.tryApproveAdditionalColor(existing.getKey().getRules(), finalCmdCI);
-                }
-            }
-        }
         Predicate<CardRules> predicate = CardRulesPredicates.hasColorIdentity(cmdCI)
                 .or(candidate -> allowsOffColorIdentity(ciRules, candidate))
-                .or(candidate -> wouldApproveAdditionalColor(ciRules, candidate, finalCmdCI));
+                .or(candidate -> approvesAdditionalColor(ciRules, candidate, finalCmdCI));
         if (commanders.size() == 1 && commanders.get(0).getRules().canBePartnerCommander()) {
             // Also show available partners a commander can have a partner.
             // 702.124g If a legendary card has more than one partner ability, you may choose which one to use when designating your commander, but you can’t use both.
