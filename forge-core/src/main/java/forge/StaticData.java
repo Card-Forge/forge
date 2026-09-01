@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
  */
 public class StaticData {
     private final CardStorageReader cardReader;
+    private final CardStorageReader customCardReader;
     private final CardStorageReader tokenReader;
     private final String blockDataFolder;
     private final CardDb commonCards;
@@ -37,6 +38,8 @@ public class StaticData {
     private final CardEdition.Collection editions;
     private final Set<String> funnyCards = new HashSet<>();
     private final Set<String> filtered = new HashSet<>();
+    private final Map<String, CardRules> regularRules = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, CardRules> variantRules = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
     private final Set<String> placeholderFacesInProgress = new HashSet<>();
     private final Set<String> missingLazyCards = new HashSet<>();
     private final Object lazyLoadLock = new Object();
@@ -77,6 +80,7 @@ public class StaticData {
     }
     public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
         this.cardReader = cardReader;
+        this.customCardReader = customCardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         this.blockDataFolder = blockDataFolder;
@@ -89,9 +93,6 @@ public class StaticData {
         editions.append(new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true)));
 
         {
-            final Map<String, CardRules> regularCards = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
-            final Map<String, CardRules> variantsCards = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
-
             if (!loadNonLegalCards) {
                 for (CardEdition e : editions) {
                     if (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER) {
@@ -115,27 +116,15 @@ public class StaticData {
                     filtered.add(cardName);
 
                 if (card.isVariant()) {
-                    variantsCards.put(cardName, card);
+                    variantRules.put(cardName, card);
                 } else {
-                    regularCards.put(cardName, card);
+                    regularRules.put(cardName, card);
                 }
             }
-            if (customCardReader != null) { //Load user's custom cards.
-                for (CardRules card : customCardReader.loadCards()) {
-                    if (null == card) continue;
+            loadCustomCards();
 
-                    final String cardName = card.getName();
-                    card.setCustom();
-                    if (card.isVariant()) { //Append loaded custom cards to the respective list.
-                        variantsCards.put(cardName, card);
-                    } else {
-                        regularCards.put(cardName, card);
-                    }
-                }
-            }
-
-            commonCards = new CardDb(regularCards, editions, filtered);
-            variantCards = new CardDb(variantsCards, editions, filtered);
+            commonCards = new CardDb(regularRules, editions, filtered);
+            variantCards = new CardDb(variantRules, editions, filtered);
 
             commonCards.setCardArtPreference(cardArtPreference);
             variantCards.setCardArtPreference(cardArtPreference);
@@ -289,6 +278,23 @@ public class StaticData {
         }
     }
 
+    private void loadCustomCards() {
+        if (customCardReader == null) {
+            return;
+        }
+        for (CardRules card : customCardReader.loadCards()) {
+            if (null == card) continue;
+
+            final String cardName = card.getName();
+            card.setCustom();
+            if (card.isVariant()) { //Append loaded custom cards to the respective list.
+                variantRules.put(cardName, card);
+            } else {
+                regularRules.put(cardName, card);
+            }
+        }
+    }
+
     // Only safe while no game is reading the card dbs; callers guarantee quiescence.
     public void resetLazyLoadedCards() {
         if (!cardReader.isLoadingCardsLazily()) {
@@ -300,6 +306,16 @@ public class StaticData {
             missingLazyCards.clear();
             filtered.clear();
             allCardsLoaded = false;
+            if (customCardReader != null) {
+                lazyLoadDepth++;
+                try {
+                    loadCustomCards();
+                    commonCards.initialize(false, false, enableUnknownCards);
+                    variantCards.initialize(false, false, enableUnknownCards);
+                } finally {
+                    lazyLoadDepth--;
+                }
+            }
         }
     }
 

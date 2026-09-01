@@ -31,6 +31,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.function.BiFunction;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -72,6 +73,8 @@ public class CardStorageReader {
     private transient ZipFile zip;
     private transient NavigableMap<String, ZipEntry> zipEntriesByBaseName;
     private transient NavigableMap<String, File> cardFilesByBaseName;
+    private transient NavigableMap<String, ZipEntry> zipEntriesByCardName;
+    private transient NavigableMap<String, File> cardFilesByCardName;
     private final transient Charset charset;
 
     private final boolean loadCardsLazily;
@@ -161,14 +164,15 @@ public class CardStorageReader {
         if (chars[charIndex - 1] == '_') {
             charIndex--;
         }
-        return new String(chars, 0, charIndex);
+        final int from = charIndex > 0 && chars[0] == '_' ? 1 : 0;
+        return new String(chars, from, charIndex - from);
     }
 
     private synchronized NavigableMap<String, ZipEntry> getZipEntriesByBaseName() {
         if (zipEntriesByBaseName == null) {
             final TreeMap<String, ZipEntry> index = new TreeMap<>();
             for (ZipEntry entry : getZipEntries()) {
-                index.put(baseName(entry.getName()), entry);
+                index.put(transformName(baseName(entry.getName())), entry);
             }
             zipEntriesByBaseName = index;
         }
@@ -179,7 +183,7 @@ public class CardStorageReader {
         if (cardFilesByBaseName == null) {
             final TreeMap<String, File> index = new TreeMap<>();
             for (File file : collectCardFiles(new ArrayList<>(), cardsfolder)) {
-                index.put(baseName(file.getName()), file);
+                index.put(transformName(baseName(file.getName())), file);
             }
             cardFilesByBaseName = index;
         }
@@ -211,11 +215,16 @@ public class CardStorageReader {
     }
 
     private boolean rulesMatchName(CardRules rules, String transformedName) {
-        if (transformedName.equals(transformName(StringUtils.stripAccents(rules.getName())))) {
+        if (transformedName.equals(transformName(StringUtils.stripAccents(rules.getPreInitName())))) {
             return true;
         }
         for (ICardFace face : rules.getAllFaces()) {
-            if (transformedName.equals(transformName(StringUtils.stripAccents(face.getName())))) {
+            if (face != null && transformedName.equals(transformName(StringUtils.stripAccents(face.getName())))) {
+                return true;
+            }
+        }
+        for (String faceName : rules.getPlaceholderFaceNames()) {
+            if (transformedName.equals(transformName(StringUtils.stripAccents(faceName)))) {
                 return true;
             }
         }
@@ -257,6 +266,16 @@ public class CardStorageReader {
                 return rules;
             }
         }
+        if (zip != null) {
+            final ZipEntry entry = getZipEntriesByCardName().get(transformedName);
+            if (entry != null) {
+                return loadCard(rulesReader, entry);
+            }
+        }
+        final File file = getCardFilesByCardName().get(transformedName);
+        if (file != null) {
+            return loadCard(rulesReader, file);
+        }
         return null;
     }
 
@@ -270,6 +289,67 @@ public class CardStorageReader {
             }
         }
         return candidates;
+    }
+
+    // Last-resort index for names that never appear in filenames
+    private synchronized NavigableMap<String, ZipEntry> getZipEntriesByCardName() {
+        if (zipEntriesByCardName == null) {
+            zipEntriesByCardName = buildCardNameIndex(getZipEntriesByBaseName().values(), this::loadCard);
+        }
+        return zipEntriesByCardName;
+    }
+
+    private synchronized NavigableMap<String, File> getCardFilesByCardName() {
+        if (cardFilesByCardName == null) {
+            cardFilesByCardName = buildCardNameIndex(getCardFilesByBaseName().values(), this::loadCard);
+        }
+        return cardFilesByCardName;
+    }
+
+    private <T> NavigableMap<String, T> buildCardNameIndex(Collection<T> sources, BiFunction<CardRules.Reader, T, CardRules> loader) {
+        final StopWatch sw = new StopWatch();
+        sw.start();
+        final NavigableMap<String, T> index = new TreeMap<>();
+        final CardRules.Reader rulesReader = new CardRules.Reader();
+        for (T source : sources) {
+            final CardRules rules;
+            try {
+                rules = loader.apply(rulesReader, source);
+            } catch (RuntimeException e) {
+                continue; // a script that cannot be parsed cannot satisfy a lookup either
+            }
+            if (rules == null) {
+                continue;
+            }
+            for (String name : allNamesOf(rules)) {
+                final String key = transformName(StringUtils.stripAccents(name));
+                if (!key.isEmpty()) {
+                    index.putIfAbsent(key, source);
+                }
+            }
+        }
+        sw.stop();
+        System.out.printf("Lazy card database: indexed %d card names from %d files in %d ms%n", index.size(), sources.size(), sw.getTime());
+        return index;
+    }
+
+    private static List<String> allNamesOf(CardRules rules) {
+        final List<String> names = new ArrayList<>();
+        names.add(rules.getPreInitName());
+        for (ICardFace face : rules.getAllFaces()) {
+            if (face != null) {
+                names.add(face.getName());
+            }
+        }
+        final Collection<String> placeholderFaces = rules.getPlaceholderFaceNames();
+        names.addAll(placeholderFaces);
+        // getDisplayNameForVariant needs concrete faces, which placeholders lack.
+        if (placeholderFaces.isEmpty() && rules.getSupportedFunctionalVariants() != null) {
+            for (String variant : rules.getSupportedFunctionalVariants()) {
+                names.add(rules.getDisplayNameForVariant(variant));
+            }
+        }
+        return names;
     }
 
     public final Iterable<CardRules> loadCards() {
