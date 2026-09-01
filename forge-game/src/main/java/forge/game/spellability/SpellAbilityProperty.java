@@ -16,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCastWithFlash;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -154,7 +155,10 @@ public class SpellAbilityProperty {
                 return false;
             }
             SpellAbility root = source.getEffectSourceAbility().getRootAbility();
-            if (!sa.equals(Objects.requireNonNullElse(root.getOriginalAbility(), root))) {
+            if (root instanceof WrappedAbility wa) {
+                root = wa.getWrappedAbility();
+            }
+            if (!sa.getRootAbility().equals(Objects.requireNonNullElse(root.getOriginalAbility(), root))) {
                 return false;
             }
         } else if (property.equals("LastChapter")) {

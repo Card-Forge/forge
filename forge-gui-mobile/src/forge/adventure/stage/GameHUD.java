@@ -145,8 +145,6 @@ public class GameHUD extends Stage {
                 }
             }
         });
-        if (GuiBase.isAndroid()) //add touchpad for android
-            ui.addActor(touchpad);
 
         avatar = ui.findActor("avatar");
         ui.onButtonPress("menu", this::menu);
@@ -223,6 +221,9 @@ public class GameHUD extends Stage {
         notificationPane.getColor().a = 0f;
 
         ui.addActor(notificationPane);
+        //move touchpad here so z-index is over notificationPane and we can still move the player
+        if (GuiBase.isAndroid()) //add touchpad for android
+            ui.addActor(touchpad);
         //MAP
         mapGroup.addActor(miniMap);
         mapGroup.addActor(mapborder);

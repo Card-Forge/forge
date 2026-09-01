@@ -432,12 +432,12 @@ public class ComputerUtilAbility {
             if (ApiType.DestroyAll == sa.getApi()) {
                 // check boardwipe earlier
                 p += 4;
-            } else if (ApiType.Mana == sa.getApi()) {
+            } else if (sa.isManaAbility()) {
                 // keep mana abilities for paying
                 p -= 9;
             }
 
-            // try to cast mana ritual spells before casting spells to maximize potential mana
+            // try to use mana ritual before casting spells to maximize potential mana
             if ("ManaRitual".equals(sa.getParam("AILogic"))) {
                 p += 9;
             }

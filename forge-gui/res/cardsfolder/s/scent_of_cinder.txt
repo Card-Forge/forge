@@ -5,5 +5,5 @@ A:SP$ Reveal | Defined$ You | RevealValid$ Card.Red | AnyNumber$ True | Remember
 SVar:DBScentOfCinderDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ ScentOfCinderX | SubAbility$ DBScentOfCinderCleanup
 SVar:ScentOfCinderX:Remembered$Amount
 SVar:DBScentOfCinderCleanup:DB$ Cleanup | ClearRemembered$ True
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
 Oracle:Reveal any number of red cards in your hand. Scent of Cinder deals X damage to any target, where X is the number of cards revealed this way.

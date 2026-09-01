@@ -239,7 +239,7 @@ public class ComputerUtilCard {
                 copy.setController(newController, game.getNextTimestamp());
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), new CardCollection(copy));
                 reset.setTrue();
-                return copy.getNetToughness() >= 1;
+                return copy.getNetToughness() > 0;
             }
             return true;
         });

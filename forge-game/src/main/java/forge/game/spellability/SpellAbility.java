@@ -59,6 +59,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCastWithFlash;
+import forge.game.staticability.StaticAbilityManaRestriction;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -423,11 +424,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean allowsPayingWithShard(Card src, byte shard) {
-        if (!hasParam("ManaRestriction")) { return true; }
-        String res = getParam("ManaRestriction");
-        if (res.equals("None")) {
+        if (StaticAbilityManaRestriction.manaRestriction(this, src)) {
             return false;
         }
+        if (!hasParam("ManaRestriction")) { return true; }
+        String res = getParam("ManaRestriction");
         if (res.equals("ChosenColor")) {
             return this.getHostCard().hasChosenColor() && shard == ManaAtom.fromName(this.getHostCard().getChosenColor());
         }
