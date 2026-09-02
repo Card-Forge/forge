@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.geom.AffineTransform;
@@ -39,6 +40,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.interfaces.IGuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
 import forge.model.FModel;
@@ -162,18 +164,50 @@ public class GuiDesktop implements IGuiBase {
         return new FSkin.UnskinnedIcon(image, opacity);
     }
 
+    /** What {@link FOptionPane} returns when a dialog is closed without choosing an option. */
+    private static final int DIALOG_DISMISSED = -1;
+
+    /**
+     * Report a prompt that can't be shown because there's no display, so command line runs get the
+     * text on stderr instead of a {@link HeadlessException} thrown from inside the dialog.
+     */
+    private static void logSuppressedDialog(final String title, final String message, final String outcome) {
+        System.err.printf("[headless] %s: %s (%s)%n", title, message, outcome);
+    }
+
     @Override
     public void showImageDialog(final ISkinImage image, final String message, final String title) {
+        if (GraphicsEnvironment.isHeadless()) {
+            logSuppressedDialog(title, message, "dismissed");
+            return;
+        }
         FOptionPane.showMessageDialog(message, title, (SkinImage)image);
     }
 
     @Override
     public int showOptionDialog(final String message, final String title, final FSkinProp icon, final List<String> options, final int defaultOption) {
+        if (GraphicsEnvironment.isHeadless()) {
+            // Deliberately NOT defaultOption. SOptionPane.showConfirmDialog is built on this method with
+            // the Yes button at index 0 and defaultYes=true, so returning the default would silently
+            // approve every confirmation — including destructive ones like overwriting a file or
+            // restarting the app. DIALOG_DISMISSED is what FOptionPane already returns when a user
+            // closes a dialog without choosing, so callers must handle it.
+            logSuppressedDialog(title, message, "dismissed, no option chosen");
+            return DIALOG_DISMISSED;
+        }
         return FOptionPane.showOptionDialog(message, title, icon == null ? null : FSkin.getImage(icon), options, defaultOption);
     }
 
     @Override
     public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions, boolean isNumeric) {
+        if (GraphicsEnvironment.isHeadless()) {
+            // Never null — matches the convention in HeadlessGuiDesktop, which subclasses this class.
+            final String fallback = initialInput != null ? initialInput
+                    : inputOptions != null && !inputOptions.isEmpty() ? inputOptions.get(0)
+                    : isNumeric ? "0" : "";
+            logSuppressedDialog(title, message, "using initial input: " + fallback);
+            return fallback;
+        }
         return FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImage(icon), initialInput, inputOptions);
     }
 
@@ -238,6 +272,10 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public String showFileDialog(final String title, final String defaultDir) {
+        if (GraphicsEnvironment.isHeadless()) {
+            logSuppressedDialog(title, "file chooser", "cancelled");
+            return null;
+        }
         final JFileChooser fc = new JFileChooser(defaultDir);
         final int rc = fc.showDialog(null, title);
         if (rc != JFileChooser.APPROVE_OPTION) {
@@ -253,6 +291,27 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public File getSaveFile(final File defaultFile) {
+        if (GraphicsEnvironment.isHeadless()) {
+            // Callers fall back to the default path rather than prompting. A relative default is
+            // resolved against USER_DIR rather than the process working directory, keeping any
+            // sub-path it carries — but it is NOT contained: a default containing ".." still
+            // escapes, and a nested one can name a directory that does not exist, which
+            // BugReporter.saveToFile would fail to create. Callers passing anything but a bare
+            // filename should resolve it themselves.
+            //
+            // Null in, null out; every other input returns non-null, which is what
+            // BugReporter.saveToFile needs since it writes the result without a null check.
+            //
+            // Neither caller reaches this headless: BugReporter.saveToFile runs from the Swing Save
+            // button this class suppresses, and PlayerControllerHuman.dumpGameState from dev mode,
+            // passing an absolute path it then null-checks. So this is a guard for future callers
+            // rather than a fix for a live path.
+            if (defaultFile == null) {
+                return null;
+            }
+            return defaultFile.isAbsolute() ? defaultFile
+                    : new File(ForgeConstants.USER_DIR, defaultFile.getPath());
+        }
         final JFileChooser fc = new JFileChooser();
         fc.setSelectedFile(defaultFile);
         int result = fc.showSaveDialog(null);
@@ -266,6 +325,9 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void copyToClipboard(final String text) {
+        if (GraphicsEnvironment.isHeadless()) {
+            return; // no system clipboard without a display
+        }
         final StringSelection ss = new StringSelection(text);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
     }
@@ -349,14 +411,41 @@ public class GuiDesktop implements IGuiBase {
         OperatingSystem.preventSystemSleep(preventSleep);
     }
 
+    private static final float DEFAULT_SCREEN_SCALE = 1.0f;
+
     private static float initializeScreenScale() {
-        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        AffineTransform at = gc.getDefaultTransform();
-        double scaleX = at.getScaleX();
-        double scaleY = at.getScaleY();
-        return (float) Math.min(scaleX, scaleY);
+        if (GraphicsEnvironment.isHeadless()) {
+            // No display to measure — command line modes (sim, parse) run here.
+            return DEFAULT_SCREEN_SCALE;
+        }
+        try {
+            GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+            AffineTransform at = gc.getDefaultTransform();
+            double scaleX = at.getScaleX();
+            double scaleY = at.getScaleY();
+            return (float) Math.min(scaleX, scaleY);
+        } catch (final Throwable t) {
+            // isHeadless() said otherwise, but the display is unusable anyway — a stale DISPLAY over
+            // ssh, or an X server that died. That throws AWTError, not HeadlessException, so
+            // catching only the latter would never fire for the situation this guard exists for.
+            // Throwable rather than the two named types because a JRE without the AWT natives
+            // raises UnsatisfiedLinkError here: anything escaping would poison ScreenScaleHolder
+            // and make every later read throw NoClassDefFoundError on the paint path. There is a
+            // safe default, so nothing is gained by letting any of it propagate.
+            return DEFAULT_SCREEN_SCALE;
+        }
     }
-    static float screenScale = initializeScreenScale();
+
+    /**
+     * Resolved on first use rather than in a static initializer: loading {@link GuiDesktop} must
+     * never touch the display, or command line modes die before they can parse their own arguments.
+     * The holder keeps that laziness without putting a lock on {@link #getScreenScale()}, which is
+     * called per-paint. {@link #initializeScreenScale()} never throws, so this cannot fail to
+     * initialize and leave every later read throwing NoClassDefFoundError.
+     */
+    private static final class ScreenScaleHolder {
+        static final float VALUE = initializeScreenScale();
+    }
 
     @Override
     public boolean hasNetGame() {
@@ -368,6 +457,6 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public float getScreenScale() {
-        return screenScale;
+        return ScreenScaleHolder.VALUE;
     }
 }
