@@ -36,7 +36,7 @@ import java.util.Map;
 import static forge.assets.FSkin.getDefaultSkinFile;
 
 public class Assets implements Disposable {
-    private static Assets instance;
+    public static Assets instance;
     public static Assets getInstance() {
         return instance == null ? instance = new Assets() : instance;
     }
