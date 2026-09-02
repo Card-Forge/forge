@@ -362,8 +362,7 @@ public final class CardRulesPredicates {
 
     /** Builds a predicate from a branch's type/supertype/subtype words, via {@link CardType#parse}. */
     private static Predicate<CardRules> restrictionTypeWords(final List<String> typeWords) {
-        final CardType typeSpec = new CardType(true);
-        typeSpec.addAll(CardType.parse(String.join(" ", typeWords), true));
+        final CardType typeSpec = CardType.parse(String.join(" ", typeWords), true);
         return card -> {
             final CardType candidateType = card.getType();
             for (final CardType.CoreType ct : typeSpec.getCoreTypes()) {
