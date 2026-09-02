@@ -1055,7 +1055,9 @@ public class Forge implements ApplicationListener {
             if (d != null) {
                 try {
                     d.dispose();
-                } catch (Exception ignored) {}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
