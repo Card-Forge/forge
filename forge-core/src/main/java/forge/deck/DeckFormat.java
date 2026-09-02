@@ -483,7 +483,7 @@ public enum DeckFormat {
     }
 
     /** True if any active commander DeckRule:ColorIdentity exempts this candidate card. */
-    private static boolean allowsOffColorIdentity(final List<DeckRuleColorIdentity> ciRules, final CardRules candidate) {
+    public static boolean allowsOffColorIdentity(final List<DeckRuleColorIdentity> ciRules, final CardRules candidate) {
         for (final DeckRuleColorIdentity rule : ciRules) {
             if (rule.allowsOffColorIdentity(candidate)) {
                 return true;
@@ -493,7 +493,7 @@ public enum DeckFormat {
     }
 
     /** True if some active commander DeckRule:ColorIdentity's player-chosen AllowedAdditionalColor$ colors cover this candidate. */
-    private static boolean approvesAdditionalColor(final List<DeckRuleColorIdentity> ciRules, final CardRules candidate, final byte commanderCI) {
+    public static boolean approvesAdditionalColor(final List<DeckRuleColorIdentity> ciRules, final CardRules candidate, final byte commanderCI) {
         for (final DeckRuleColorIdentity rule : ciRules) {
             if (rule.approvesAdditionalColor(candidate, commanderCI)) {
                 return true;
