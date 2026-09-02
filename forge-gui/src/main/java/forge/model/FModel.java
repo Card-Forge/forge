@@ -259,7 +259,7 @@ public final class FModel {
         AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
         // Generate Deck Gen matrix
-        if(getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
+        if(getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED) && !loadCardsLazily) {
             boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
             deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
             if(!commanderDeckGenMatrixLoaded){
@@ -337,9 +337,9 @@ public final class FModel {
      */
     public static void loadDynamicGamedata() {
         if (!CardType.Constant.LOADED.isSet()) {
-            
+
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE));
-            
+
             for (String sectionName: contents.keySet()) {
                 CardType.Helper.parseTypes(sectionName, contents.get(sectionName));
             }
