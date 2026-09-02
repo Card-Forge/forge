@@ -1,6 +1,9 @@
 name: Sync upstream forge
 
 on:
+  # Daily 06:00 Paris time. GitHub cron is UTC only and cannot express DST:
+  # 04:00 UTC = 06:00 CEST (summer), 05:00 local in winter. Deliberately not
+  # push-triggered — daily freshness is enough, see commit for rationale.
   schedule:
     - cron: '0 4 * * *'
   workflow_dispatch:
@@ -32,6 +35,9 @@ jobs:
 
       - name: Check backlog
         id: behind
+        # Honest count: raw SHA count over-counts because fork cherry-picks
+        # upstream commits (same patch-id, different SHA). git cherry reports
+        # only commits whose content is actually absent from master.
         run: |
           RAW=$(git rev-list --count master..forge/master)
           HONEST=$(git cherry master forge/master | grep -c '^+')
@@ -48,8 +54,11 @@ jobs:
           else
             git checkout -b sync/upstream master
           fi
-          git merge --no-edit master
-          git merge --no-edit forge/master
+
+          # Allow merges to fail without aborting the step so we can inspect conflicts
+          git merge --no-edit master || true
+          git merge --no-edit forge/master || true
+
           # Fork-owned files: the fork intentionally keeps its own version
           # (branding; custom SwingImageFetcher). Upstream changes there are
           # folded in manually via cherry-pick when wanted, so auto-resolve
@@ -57,12 +66,14 @@ jobs:
           FORK_OWNED="README.md docs/Home.md forge-gui-desktop/src/main/java/forge/util/SwingImageFetcher.java"
           CONFLICTS=$(git ls-files -u | awk '{print $4}' | sort -u)
           UNEXPECTED=$(comm -23 <(echo "$CONFLICTS") <(echo "$FORK_OWNED" | tr ' ' '\n' | sort))
+
+          # If there are conflicts in files we don't expect, create a sync branch
+          # containing upstream (so we can push it and open a PR for manual resolution).
           if [ -n "$UNEXPECTED" ]; then
             echo "::warning::Unexpected merge conflicts with upstream:"
             echo "$UNEXPECTED"
             echo "::warning::Creating a sync branch from upstream so conflicts can be resolved in a PR."
-            # Abort the failed merge (if any), create sync/upstream from upstream head,
-            # and let the later Push/Open PR steps push and create the PR for manual resolution.
+            # Abort the attempted merge (if any) and make the branch reflect upstream
             git merge --abort || true
             git checkout -B sync/upstream forge/master
           else
@@ -98,6 +109,10 @@ jobs:
         run: |
           HEAD=${{ steps.push.outputs.head }}
           for i in $(seq 1 60); do
+            # The branch was just pushed: check-runs may not be registered yet,
+            # so wait until at least one exists AND none are pending.
+            # Poll the exact pushed SHA (not gh pr view) to avoid reading a
+            # stale headRefOid while the new commit's checks are still queued.
             DATA=$(gh api "repos/${{ github.repository }}/commits/$HEAD/check-runs" 2>/dev/null || echo '{"total_count":0,"check_runs":[]}')
             TOTAL=$(echo "$DATA" | jq '.total_count')
             PEND=$(echo "$DATA" | jq '[.check_runs[] | select(.status == "in_progress" or .status == "queued")] | length')
@@ -120,4 +135,6 @@ jobs:
         if: steps.behind.outputs.behind > 0
         run: |
           PR=${{ steps.pr.outputs.number }}
+          # ponytail: auto-merge needs the repo-level "Allow auto-merge" setting;
+          # fall back to a direct merge (safe after Wait for CI) when absent.
           gh pr merge "$PR" --merge --auto || gh pr merge "$PR" --merge
