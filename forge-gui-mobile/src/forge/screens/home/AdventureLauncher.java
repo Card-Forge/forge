@@ -13,12 +13,12 @@ import forge.util.Utils;
 
 import java.util.function.Consumer;
 
-public class AdventureScreen extends LaunchScreen {
+public class AdventureLauncher extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);
     private boolean loaded = false;
     private static GifAnimation animation = null;
     private final FTextArea lblDesc = new FTextArea(false, Forge.getLocalizer().getMessage("lblAdventureDescription"), animation);
-    public AdventureScreen() {
+    public AdventureLauncher() {
         super(null, NewGameMenu.getMenu());
         lblDesc.setFont(FSkinFont.get(12));
         lblDesc.setTextColor(FLabel.getInlineLabelColor());

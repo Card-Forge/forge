@@ -54,7 +54,9 @@ public class FThreads {
     private static int backgroundThreadCount;
     public static void invokeInBackgroundThread(final Runnable proc) {
         //start thread name with "Game" so isGuiThread() returns false on GuiMobile
-        new Thread(proc, "Game BT" + backgroundThreadCount).start();
+        Thread t = new Thread(proc, "Game BT" + backgroundThreadCount);
+        t.setDaemon(true);
+        t.start();
         backgroundThreadCount++;
     }
 

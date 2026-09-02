@@ -54,7 +54,7 @@ import forge.screens.ClosingScreen;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.TransitionScreen;
-import forge.screens.home.AdventureScreen;
+import forge.screens.home.AdventureLauncher;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
@@ -443,7 +443,7 @@ public class Forge implements ApplicationListener {
                 getAssets().fallback_skins().put("transition", new Texture(transitionFile));
             if (titleBGFile.exists())
                 getAssets().fallback_skins().put("title", new Texture(titleBGFile));
-            AdventureScreen.preload();
+            AdventureLauncher.preload();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1033,8 +1033,8 @@ public class Forge implements ApplicationListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try {
-            AdventureScreen.dispose();
+        try { // AdventureLauncher is part of Classic launcher to start Adventure mode. GifAnimation needs disposal
+            AdventureLauncher.dispose();
         } catch (Exception e) {
             e.printStackTrace();
         }
