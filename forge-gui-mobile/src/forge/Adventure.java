@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Disposable;
 import forge.util.ScreenUtil;
 
 public class Adventure implements Disposable {
-    private static Adventure instance;
+    public static Adventure instance;
     private float transitionTimeout;
     boolean sceneWasSwapped;
     private SpriteBatch transitionBatch, uiBatch;

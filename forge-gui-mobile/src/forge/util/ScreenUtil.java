@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Disposable;
 import forge.gui.FThreads;
 
 public class ScreenUtil implements Disposable {
-    private static ScreenUtil instance;
+    public static ScreenUtil instance;
     private TextureRegion lastScreenTexture;
 
     private ScreenUtil() {

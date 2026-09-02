@@ -1019,33 +1019,22 @@ public class Forge implements ApplicationListener {
             currentScreen.onClose(null);
             currentScreen = null;
         }
-        // TODO: Implement disposable to applicable classes
         try {
             FOverlay.hideAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
         Dscreens.clear();
-        safeDispose(MapStage.getInstance(), Adventure.getInstance(), ScreenUtil.getInstance(), ShaderUtil.getInstance(),
-            graphics, getAssets());
+        // don't call getInstance() or they will be recreated on dispose
+        safeDispose(MapStage.instance, Adventure.instance, ScreenUtil.instance, ShaderUtil.instance,
+            graphics, Assets.instance, lastPreview, AdventureScreen.animation);
         try {
             SoundSystem.instance.dispose();
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            AdventureScreen.dispose();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
             ExceptionHandler.unregisterErrorHandling();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            if (lastPreview != null)
-                lastPreview.dispose();
         } catch (Exception e) {
             e.printStackTrace();
         }

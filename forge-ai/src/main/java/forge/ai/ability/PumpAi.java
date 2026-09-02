@@ -94,26 +94,21 @@ public class PumpAi extends PumpAiBase {
             boolean isBeforeMyAttack = ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai);
             boolean isBeforeOppCombat = ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN) && ph.getPlayerTurn().isOpponentOf(ai);
             CostTapType tapType = sa.getPayCosts().getCostPartByType(CostTapType.class);
-            if (tapType != null && (tapType.getType().startsWith("Creature") || CardType.isACreatureType(tapType.getType()))) {
-                if (isBeforeMyAttack || isBeforeOppCombat) {
-                    return false;
-                }
+            if ((isBeforeMyAttack || isBeforeOppCombat) &&
+                    tapType != null && (tapType.getType().startsWith("Creature") || CardType.isACreatureType(tapType.getType().split("\\.")[0]))) {
+                return false;
             }
             Card host = sa.getHostCard();
-            // wait until AI has decided if creature should attack/block instead
-            if (host.isCreature() && sa.getPayCosts().hasTapCost()) {
-                if (isBeforeMyAttack && CombatUtil.canAttack(host)) {
-                    return false;
-                }
-                if (isBeforeOppCombat && CombatUtil.canBlock(host)) {
-                    return false;
-                }
+            // wait until AI has decided if creature should participate in combat instead
+            if (host.isCreature() && sa.getPayCosts().hasTapCost() &&
+                    ((isBeforeMyAttack && CombatUtil.canAttack(host)) || (isBeforeOppCombat && CombatUtil.canBlock(host)))) {
+                return false;
             }
         }
         if (game.getStack().isEmpty() && (ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)
                 || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
             boolean main1Preferred = "Main1IfAble".equals(sa.getParam("AILogic")) && ph.is(PhaseType.MAIN1, ai);
-            // save tricks until the last moment
+            // save tricks until last moment
             return sa.isCurse() || isSorcerySpeed(sa, ai) || main1Preferred;
         }
         return true;
