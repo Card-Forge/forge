@@ -54,7 +54,7 @@ import forge.screens.ClosingScreen;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.TransitionScreen;
-import forge.screens.home.AdventureLauncher;
+import forge.screens.home.AdventureScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
@@ -443,7 +443,7 @@ public class Forge implements ApplicationListener {
                 getAssets().fallback_skins().put("transition", new Texture(transitionFile));
             if (titleBGFile.exists())
                 getAssets().fallback_skins().put("title", new Texture(titleBGFile));
-            AdventureLauncher.preload();
+            AdventureScreen.preload();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1019,33 +1019,22 @@ public class Forge implements ApplicationListener {
             currentScreen.onClose(null);
             currentScreen = null;
         }
-        // TODO: Implement disposable to applicable classes
         try {
             FOverlay.hideAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
         Dscreens.clear();
-        safeDispose(MapStage.getInstance(), Adventure.getInstance(), ScreenUtil.getInstance(), ShaderUtil.getInstance(),
-            graphics, getAssets());
+        // don't call getInstance() or they will be recreated on dispose
+        safeDispose(MapStage.instance, Adventure.instance, ScreenUtil.instance, ShaderUtil.instance,
+            graphics, Assets.instance, lastPreview, AdventureScreen.animation);
         try {
             SoundSystem.instance.dispose();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try { // AdventureLauncher is part of Classic launcher to start Adventure mode. GifAnimation needs disposal
-            AdventureLauncher.dispose();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         try {
             ExceptionHandler.unregisterErrorHandling();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            if (lastPreview != null)
-                lastPreview.dispose();
         } catch (Exception e) {
             e.printStackTrace();
         }
