@@ -2,8 +2,10 @@ package forge;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
+import forge.adventure.stage.WorldStage;
 import forge.assets.FSkinFont;
 
 /**
@@ -50,9 +52,23 @@ public class FrameRate {
             return;
         if (showFPS) {
             Forge.getGraphics().getBatch().begin();
-            font.draw(Forge.getGraphics().getBatch(), (int)frameRate + " FPS | " + cardsLoaded + " cards re/loaded | " + allocT + " MB | Classic Sprites: " + Forge.getGraphics().getBatch().maxSpritesInBatch + " | Adventure Sprites: " + Adventure.getInstance().getAdventureBatch().maxSpritesInBatch, Color.WHITE, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), false, Align.left);
+            font.draw(Forge.getGraphics().getBatch(), composeDisplay(), Color.WHITE, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), false, Align.left);
             Forge.getGraphics().getBatch().end();
         }
     }
 
+    private String composeDisplay() {
+        // TODO: make the display better..
+        return (int)frameRate + " FPS | "
+            + cardsLoaded + " cards re/loaded | "
+            + allocT + " MB | "
+            + Forge.getGraphics().getBatch().maxSpritesInBatch + " Classic Sprites | "
+            + maxSprites() + " Adventure Sprites ";
+    }
+    private int maxSprites() {
+        // WorldStage batch (GameStage -> Stage class is managed unless set outside Stage class)
+        // https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/Stage.java#L869
+        return Adventure.getInstance().getUiBatch().maxSpritesInBatch
+            + ((SpriteBatch)WorldStage.getInstance().getBatch()).maxSpritesInBatch;
+    }
 }

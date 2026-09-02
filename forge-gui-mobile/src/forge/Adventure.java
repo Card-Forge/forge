@@ -10,7 +10,7 @@ public class Adventure implements Disposable {
     private static Adventure instance;
     private float transitionTimeout;
     boolean sceneWasSwapped;
-    private SpriteBatch transitionBatch, adventureBatch;
+    private SpriteBatch transitionBatch, uiBatch;
     public boolean renderTransitionScreen = true;
 
     private Adventure() {
@@ -18,11 +18,11 @@ public class Adventure implements Disposable {
         transitionBatch = new SpriteBatch(Forge.LOW_SPRITES_CAP);
         // adventureBatch is used on UIScene so every scene passed will use this shared batch
         // instead of creating new SpriteBatch each with default 1000 capacity (14 scenes currently)
-        adventureBatch = new SpriteBatch(Forge.HIGH_SPRITES_CAP);
+        uiBatch = new SpriteBatch(Forge.HIGH_SPRITES_CAP);
     }
 
-    public SpriteBatch getAdventureBatch() {
-        return adventureBatch;
+    public SpriteBatch getUiBatch() {
+        return uiBatch;
     }
 
     public static Adventure getInstance() {
@@ -86,7 +86,7 @@ public class Adventure implements Disposable {
     public void dispose() {
         if (transitionBatch != null)
             transitionBatch.dispose();
-        if (adventureBatch != null)
-            adventureBatch.dispose();
+        if (uiBatch != null)
+            uiBatch.dispose();
     }
 }

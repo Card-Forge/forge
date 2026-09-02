@@ -8910,6 +8910,832 @@ Gandalf the White|LTR
 1 Mountain|TLA
 2 Forest|TLA
 
+[MSH Agents of S.H.I.E.L.D.]
+1 Agent Phil Coulson|MSH
+1 Peggy Carter, Secret Agent|MSC
+1 Agent 13, Sharon Carter|MSH
+1 Agents of S.H.I.E.L.D.|MSH
+1 Quake, Agent of S.H.I.E.L.D.|MSH
+1 Nick Fury, Spymaster|MSC
+1 Strategic Intervention|MSC
+1 Web Up|MSH
+1 S.H.I.E.L.D. Helicarrier|MSH
+1 S.H.I.E.L.D. Spy Kit|MSH
+1 Helicarrier Strike|MSH
+1 Borough Backup|MSH
+1 Thriving Heath|MSC
+7 Plains|MSH
+
+[MSH Battalion]
+1 General Thunderbolt Ross|MSC
+1 The Howling Commandos|MSC
+1 Wakandan Shield Guard|MSC
+1 Wild Pack Squad|MSC
+1 Faclon, Joaquin Torres|MSC
+1 War Machine, James Rhodes|MSC
+1 U.S.Agent, John Walker|MSH
+1 Captain America, Skybound|MSC
+1 Ultimate Alliance|MSC
+1 Helicarrier Strike|MSH
+1 Heroic Teamwork|MSC
+1 Fall to Earth|MSC
+1 Thriving Heath|MSC
+7 Plains|MSH
+
+[MSH Caretakers]
+1 Crowd of True Believers|MSH
+1 Night Nurse, Healer of Heroes|MSH
+1 Donald Blake, Guise of Thor|MSC
+1 MJ, Rising Star|MSC
+1 Virtuous Variant|MSC
+1 Doctor Jane Foster|MSC
+1 Valkyrior Skyrider|MSC
+1 Doctor Strange, Surgeon|MSC
+1 Super Villain Lockup|MSH
+1 Infinity Formula|MSC
+1 Take Up the Shield|MSH
+1 Fall to Earth|MSC
+1 Thriving Heath|MSC
+7 Plains|MSH
+
+[MSH Counterargument]
+1 City Pigeon|MSC
+1 Selfless Police Captain|MSC
+1 Matt Murdock, Justice Seeker|MSC
+1 She-Hulk, Attorney-at-Law|MSC
+1 Foggy Nelson, On Retainer|MSC
+1 Daily Bugle Reporters|MSC
+1 Starling, Aerial Ally|MSC
+1 Vault Guardsman|MSC
+1 Political Triumph|MSH
+1 Web Up|MSH
+1 Costume Closet|MSC
+1 Murdock's Crusade|MSH
+1 Thriving Heath|MSC
+7 Plains|MSH
+
+[MSH Equipped]
+1 Bucky Barnes, Eager Ally|MSC
+1 Peggy Carter, Secret Agent|MSC
+1 The Howling Commandos|MSC
+1 Agent 13, Sharon Carter|MSH
+1 Patriot, Young Avenger|MSC
+1 U.S.Agent, John Walker|MSH
+1 Captain America, Liberator|MSC
+1 Origin of Captain America|MSC
+1 Secure Detention|MSC
+1 Captain America's Shield|MSH
+1 Infinity Formula|MSC
+1 Take Up the Shield|MSH
+1 Thriving Heath|MSC
+7 Plains|MSH
+
+[MSH Marvelous]
+1 Wakandan Shield Guard|MSC
+1 Raft Security Officer|MSH
+1 Marvel Boy, Noh-Varr|MSC
+1 Hero in Training|MSH
+1 Ms. Marvel, Elastic Ally|MSC
+1 Photon, Lady of Light|MSC
+1 Captain Mar-Vell, Space-Born|MSH
+1 Captain Marvel, Shooting Star|MSC
+1 Quantum Entanglement|MSC
+1 Super Villain Lockup|MSH
+1 Helicarrier Strike|MSH
+1 Fall to Earth|MSC
+1 Thriving Heath|MSC
+7 Plains|MSH
+
+[MSH Precise]
+1 Colleen Wing, Street Samurai|MSH
+1 Agent of Atlas|MSH
+1 Raft Security Officer|MSH
+1 Kree Commandos|MSH
+1 Hawkeye, Bowslinger|MSC
+1 Mockingbird, Ace Agent|MSH
+1 Valkyrior Skyrider|MSC
+1 Panther Pounce|MSH
+1 Sudden Strike|MSC
+1 Heroic Teamwork|MSC
+1 Fall to Earth|MSC
+1 Stunning Shot|MSC
+1 Thriving Heath|MSC
+7 Plains|MSH
+
+[MSH Squadron]
+1 Agent of Atlas|MSH
+1 Brave Brawler|MSH
+1 Nighthawk, Dark Defender|MSC
+1 Hero in Training|MSH
+1 Zarda, the Power Princess|MSC
+1 Doctor Spectrum|MSC
+1 Hyperion, Supreme Hero|MSC
+1 Web Up|MSH
+1 Blur of Heroism|MSC
+1 Hyperion's Atomic Vision|MSC
+1 Heroic Teamwork|MSC
+1 Borough Backup|MSH
+1 Thriving Heath|MSC
+7 Plains|MSH
+
+[MSH Wakanda]
+1 Wakandan Shield Guard|MSC
+1 Wakandan Tusker|MSC
+1 Black Panther, Most Dangerous|MSC
+1 Shuri, Vibranium Technologist|MSC
+1 Okoye, Dora Milaje Leader|MSH
+1 Wakandan Drone Flock|MSH
+1 Secure Detention|MSC
+1 Vibranium Energy Dagger|MSH
+1 Ultimate Alliance|MSC
+1 Panther Pounce|MSH
+1 Heroic Teamwork|MSC
+1 Borough Backup|MSH
+1 Thriving Heath|MSC
+7 Plains|MSH
+
+[MSH Web-Slinging]
+1 Aunt May|MSC
+1 Flash Thompson, Spider-Fan|MSC
+1 Gallant Citizen|MSC
+1 Spider-Man, Web-Slinger|MSC
+1 Virtuous Variant|MSC
+1 Spider-UK|MSC
+1 Amazing Spider-Girl|MSC
+1 Vault Guardsman|MSC
+1 Web Up|MSH
+1 Spider-Mobile|MSC
+1 Thwip!|MSC
+1 Spectacular Tactics|MSC
+1 Thriving Heath|MSC
+7 Plains|MSH
+
+[MSH Analyzed]
+1 Virtual Assistant|MSC
+1 TVA Bureaucrat|MSC
+1 Viv Vision, Teen Synthezoid|MSH
+1 Echo, Perceptive Prodigy|MSH
+1 Machine Man, Model X-51|MSC
+1 Victor Mancha, Runaway|MSC
+1 Vision, Spectral Synthezoid|MSC
+1 Quantum Reduction|MSC
+1 Frozen in Ice|MSH
+1 We Say Thee Nay!|MSH
+1 Timeline Inquiry|MSC
+1 Atlantis Attacks|MSH
+1 Thriving Isle|MSC
+7 Island|MSH
+
+[MSH Atlantis]
+1 Mist-Cloaked Herald|MSC
+1 Daughter of the Deep|MSC
+1 Atlantean Skirmisher|MSC
+1 Atlantean Cavalry|MSH
+1 Namora, the Sea Queen|MSC
+1 Attuma, Atlantean Warlord|MSH
+1 Shipwreck Patrol|MSC
+1 Namor, Scourge of the Seas|MSC
+1 Quantum Reduction|MSC
+1 Frozen in Ice|MSH
+1 Unstable Experiment|MSC
+1 Atlantis Attacks|MSH
+1 Thriving Isle|MSC
+7 Island|MSH
+
+[MSH Blink]
+1 Shi'ar Soldier|MSC
+1 Mob Lookout|MSC
+1 Imperial Cosmographer|MSC
+1 S.H.I.E.L.D. Deployment Drone|MSH
+1 Justice, Vance Astrovik|MSH
+1 Victor Timely, Wily Tycoon|MSC
+1 Shipwreck Patrol|MSC
+1 Silver Surfer, Cosmic Voyager|MSC
+1 Collector's Case|MSC
+1 Spaceshift|MSC
+1 We Say Thee Nay!|MSH
+1 Dismissive Denial|MSC
+1 Thriving Isle|MSC
+7 Island|MSH
+
+[MSH Conniving]
+1 Kid Loki|MSH
+1 Mob Lookout|MSC
+1 Flying Octobot|MSC
+1 Graviton, Fundamental Force|MSC
+1 Doc Ock's Henchmen|MSC
+1 Tiger Shark, Abyssal Hunter|MSC
+1 Leader, Super-Genius|MSH
+1 Doc Ock, Sinister Scientist|MSC
+1 Mysterio's Mirage|MSC
+1 Unstable Experiment|MSC
+1 Dismissive Denial|MSC
+1 Trickster's Stratagem|MSH
+1 Thriving Isle|MSC
+1 Villainous Hideout|MSH
+6 Island|MSH
+
+[MSH Geniuses]
+1 Kid Loki|MSH
+1 Bold Biochemist|MSH
+1 Brawn, Amadeus Cho|MSC
+1 Shuri, Vibranium Technologist|MSC
+1 Ant-Man, Reformed Rogue|MSC
+1 Beast, Erudite Aerialist|MSH
+1 Blue Marvel, Adam Brashear|MSC
+1 Reed Richards, Smartest Man|MSC
+1 Super Intelligence|MSH
+1 Frozen in Ice|MSH
+1 Futurist Forge|MSH
+1 Fantastic Bounce|MSC
+1 Thriving Isle|MSC
+7 Island|MSH
+
+[MSH Iron Man]
+1 Hydraulic Helper|MSH
+1 Rescue, Pepper Potts|MSC
+1 S.H.I.E.L.D. Deployment Drone|MSH
+1 Iron Lad, Young Avenger|MSC
+1 War Machine, James Rhodes|MSC
+1 Iron Man, Bleeding Edge|MSC
+1 Happy Hogan, Bodyguard|MSC
+1 Origin of Iron Man|MSC
+1 Iron Suitcase|MSC
+1 Collector's Case|MSC
+1 Futurist Forge|MSH
+1 I Am Iron Man|MSH
+1 Thriving Isle|MSC
+7 Island|MSH
+
+[MSH Kang Dynasty]
+1 Bold Biochemist|MSH
+1 TVA Bureaucrat|MSC
+1 S.H.I.E.L.D. Deployment Drone|MSH
+1 Iron Lad|MSC
+1 Immortus, Master of Eternity|MSC
+1 Victor Timely, Wily Tycoon|MSC
+1 Pharaoh Rama-Tut|MSC
+1 Think Twice|MSC
+1 Depower|MSH
+1 Timeline Inquiry|MSC
+1 Multiversal Recruitment|MSC
+1 Time Warp|MSC
+1 Thriving Isle|MSC
+7 Island|MSH
+
+[MSH Pym Particles]
+1 Aerial Doombot|MSH
+1 Bold Biochemist|MSH
+1 Ant-Man's Air Force|MSC
+1 Ant-Man, Reformed Rogue|MSC
+1 Wasp, Shrinking Savior|MSC
+1 A.I.M. Scientists|MSH
+1 Giant-Sized Flying Ant|MSH
+1 Quantum Reduction|MSC
+1 Robotics Mastery|MSC
+1 Super Suit|MSH
+1 Depower|MSH
+1 Pym Particles|MSH
+1 Thriving Isle|MSC
+7 Island|MSH
+
+[MSH Soaring]
+1 Aerial Doombot|MSH
+1 Rescue, Pepper Potts|MSC
+1 Flying Drone|MSC
+1 Namora, the Sea Queen|MSC
+1 S.H.I.E.L.D. Deployment Drone|MSH
+1 Justice, Vance Astrovik|MSH
+1 Vulture, Feathered Fiend|MSC
+1 Falcon, Winged Wonder|MSH
+1 Falcon's Wing Harness|MSH
+1 Whoosh!|MSC
+1 I Am Iron Man|MSH
+1 Dismissive Denial|MSC
+1 Thriving Isle|MSC
+7 Island|MSH
+
+[MSH Tricksters]
+1 Kid Loki|MSH
+1 Living Lies of Loki|MSC
+1 Ant-Man's Air Force|MSC
+1 Impossible Man|MSC
+1 Ghost, Spectral Saboteur|MSH
+1 Loki, Lord of Misrule|MSC
+1 A.I.M. Scientists|MSH
+1 Quantum Reduction|MSC
+1 The Clone Saga|MSC
+1 We Say Thee Nay!|MSH
+1 Trickster's Stratagem|MSH
+1 Multiversal Recruitment|MSC
+1 Thriving Isle|MSC
+7 Island|MSH
+
+[MSH Armed]
+1 Whiplash, Vengeful Engineer|MSH
+1 Swordsman, Sharp Scoundrel|MSH
+1 Red Room Recruit|MSH
+1 Ronin, Shadow Stalker|MSH
+1 Kingpin's Enforcers|MSH
+1 Armed Assailant|MSC
+1 U.S.Agent, John Walker|MSH
+1 HYDRA Disintegrator|MSC
+1 Stolen Stark Tech|MSH
+1 Voltaic Whip|MSC
+1 Swordsman's Steel|MSC
+1 Hour of Defeat|MSH
+1 Thriving Moor|MSC
+7 Swamp|MSH
+
+[MSH DOOM]
+1 Project Deathlok Soldier|MSH
+1 Common Crook|MSC
+1 Doom's Servo-Guards|MSC
+1 Doombot Harbinger|MSC
+1 Ninja of the Hand|MSH
+1 Doctor Doom, Unrivaled|MSC
+1 Roxxon Brutes|MSH
+1 Dark Ritual|MSC
+1 Doom Blade|MSC
+1 Deadly Dispute|MSC
+1 Doomfall|MSC
+1 Doomsday|MSC
+1 Thriving Moor|MSC
+7 Swamp|MSH
+
+[MSH HYDRA]
+1 Bob, Reluctant HYDRA Agent|MSC
+1 Viper, Cruel Conspirator|MSC
+1 Agents of HYDRA|MSH
+1 HYDRA Troopers|MSH
+1 Baron Strucker, HYDRA Overlord|MSH
+1 Arnim Zola, Bio-Fanatic|MSH
+1 Crossbones, Malicious Mercenary|MSH
+1 HYDRA Infiltration|MSH
+1 HYDRA Disintegrator|MSC
+1 Dark Deed|MSH
+1 Infernal Rebirth|MSC
+1 Cruel Alliance|MSH
+1 Thriving Moor|MSC
+7 Swamp|MSH
+
+[MSH Lethal]
+1 Red Room Recruit|MSH
+1 White Widow, Yelena Bolova|MSC
+1 Ninja of the Hand|MSH
+1 Venomized Cat|MSC
+1 Black Widow, Deadly Hunter|MSC
+1 Titanium Man|MSC
+1 Venom, Evil Unleashed|MSC
+1 Origin of Black Widow|MSC
+1 Stolen Stark Tech|MSH
+1 Widow's Bite|MSH
+1 Hour of Defeat|MSH
+1 Infernal Rebirth|MSC
+1 Thriving Moor|MSC
+7 Swamp|MSH
+
+[MSH Masters of Evil]
+1 Boomerang, Blade Flinger|MSC
+1 Yellowjacket, Heartless Marauder|MSH
+1 Titania, Rugged Rumbler|MSH
+1 Klaw, Sonic Subjugator|MSH
+1 Crimson Cowl, Master of Evil|MSC
+1 Tiger Shark, Abyssal Hunter|MSC
+1 Radioactive Man|MSC
+1 The Masters of Evil|MSH
+1 Villainous Syndication|MSC
+1 Visions of Villainy|MSH
+1 Hour of Defeat|MSH
+1 Cruel Alliance|MSH
+1 Thriving Moor|MSC
+7 Swamp|MSH
+
+[MSH Mayhem]
+1 Project Deathlok Soldier|MSH
+1 Red Room Recruit|MSH
+1 Yellowjacket, Heartless Marauder|MSH
+1 Swarm, Being of Bees|MSC
+1 Inner Demons Gangsters|MSC
+1 Roxxon Brutes|MSH
+1 Green Goblin, Back for More|MSC
+1 Alien Symbiosis|MSC
+1 Daily bugle Newspaper|MSC
+1 Rocket-Powered Goblin Glider|MSC
+1 Sadistic Slash|MSC
+1 Pumpkin Bombardment|MSC
+1 Thriving Moor|MSC
+7 Swamp|MSH
+
+[MSH Returned]
+1 Project Deathlok Soldier|MSH
+1 Doom's Servo-Guards|MSC
+1 Undead Hand Ninja|MSC
+1 Songbird, Sonic Screamer|MSC
+1 Arnim Zola, Bio-Fanatic|MSH
+1 Grim Reaper, Lethal Legionnaire|MSH
+1 Unliving Legionnaire|MSH
+1 Ultimo, Civilization's End|MSC
+1 Grim Reaper's Scythe|MSC
+1 Infernal Rebirth|MSC
+1 Minion Missile|MSC
+1 Too Evil to Stay Dead|MSH
+1 Thriving Moor|MSC
+7 Swamp|MSH
+
+[MSH Street Level Villains]
+1 Agents of HYDRA|MSH
+1 Common Crook|MSC
+1 Hammerhead, Maggia Boss|MSC
+1 Kingpin's Enforcers|MSH
+1 Tombstone, Career Criminal|MSC
+1 Kingpin, Wilson Fisk|MSC
+1 Madame Masque|MSH
+1 Count Nefaria|MSC
+1 Criminal Enterprise|MSC
+1 Deadly Dispute|MSC
+1 The Spot's Portal|MSC
+1 Minion Missile|MSC
+1 Thriving Moor|MSC
+7 Swamp|MSH
+
+[MSH Thunderbolts]
+1 MACH-1, Swooping Scoundrel|MSC
+1 Songbird, Sonic Screamer|MSC
+1 Fixer, Techno Terror|MSC
+1 Valentina Allegra de Fontaine|MSC
+1 Citizen V, Helmut Zemo|MSC
+1 Atlas, Sizable Stooge|MSC
+1 Moonstone, Harsh Mistress|MSH
+1 Roxxon Brutes|MSH
+1 Stolen Stark Tech|MSH
+1 Eerie Gravestone|MSC
+1 Void Helix|MSC
+1 Cruel Alliance|MSH
+1 Thriving Moor|MSC
+7 Swamp|MSH
+
+[MSH Ultron]
+1 Project Deathlok Soldier|MSH
+1 Doom's Servo-Guards|MSC
+1 Ultron's Auxiliary|MSC
+1 Doombot Harbinger|MSC
+1 Ultron Drone|MSH
+1 Ultron the Annihilator|MSC
+1 Victor Mancha, Runaway|MSC
+1 Robot Domination|MSH
+1 Stolen stark Tech|MSH
+1 Eerie Gravestone|MSC
+1 Dark Deed|MSH
+1 Minion Missile|MSC
+1 Thriving Moor|MSC
+7 Swamp|MSH
+
+[MSH Boosted]
+1 Quinjet Technician|MSC
+1 Extremis Elite|MSC
+1 Marvel Boy, Noh-Varr|MSC
+1 Jack of Hearts, Volatile Hero|MSC
+1 Molly Hayes, Runaway|MSC
+1 Human Torch, Johnny Storm|MSH
+1 Abomination, Terrifying Titan|MSH
+1 Wonder Man, Hollywood Hero|MSH
+1 Vision of Love|MSH
+1 HULK SMASH!|MSH
+1 Inspired Fire|MSC
+1 Heroes' Hangout|MSC
+1 Thriving Bluff|MSC
+7 Mountain|MSH
+
+[MSH Fearless]
+1 Unlucky Witness|MSC
+1 Taxi Driver|MSC
+1 Stick, Fearless Mentor|MSC
+1 Daredevil, Fearless Fighter|MSC
+1 Jessica Jones, Private Eye|MSH
+1 Elektra, Femme Fatale|MSC
+1 Stegron the Dinosaur Man|MSC
+1 Daredevil's Billy Club|MSC
+1 Blazing Crescendo|MSH
+1 HULK SMASH!|MSH
+1 Hire a Crew|MSH
+1 Fogwell's Gym|MSC
+1 Thriving Bluff|MSC
+7 Mountain|MSH
+
+[MSH Heroes for Hire]
+1 Stark Industries Executive|MSH
+1 K'un-Lun Warrior|MSH
+1 Misty Knight, Hero for Hire|MSH
+1 Iron Fist, Hero for Hire|MSC
+1 Contract Hero|MSC
+1 Jessica Jones, Private Eye|MSH
+1 Luke Cage, Hero for Hire|MSC
+1 Red Hulk|MSH
+1 Heroes for Hire|MSC
+1 Big Score|MSC
+1 Marvelous Melee|MSC
+1 Bionic Blow|MSC
+1 Thriving Bluff|MSC
+7 Mountain|MSH
+
+[MSH Runaways]
+1 Chase Stein, Runaway|MSC
+1 Alex Wilder, Runaway|MSC
+1 Molly Hayes, Runaway|MSC
+1 Gert and Old Lace, Runaways|MSC
+1 Karolina Dean, Runaway|MSC
+1 Nico Minoru, Runaway|MSC
+1 Victor Mancha, Runaway|MSC
+1 Shock|MSC
+1 Blazing Crescendo|MSH
+1 Crossover Collaboration|MSC
+1 Marvelous Melee|MSC
+1 Hex Magic|MSH
+1 Thriving Bluff|MSC
+7 Mountain|MSH
+
+[MSH Scarlet]
+1 Stark Industries Executive|MSH
+1 Loki Laufeyson|MSH
+1 Speed, Young Avenger|MSH
+1 Molten Lavamancer|MSC
+1 Wiccan, Young Avenger|MSC
+1 The Vision and Scarlet Witch|MSC
+1 Kree Sentinel|MSH
+1 Wanda's Vision|MSC
+1 Lightning Bolt|MSC
+1 Vision of Love|MSH
+1 Grapeshot|MSC
+1 Hex Magic|MSH
+1 Thriving Bluff|MSC
+7 Mountain|MSH
+
+[MSH Speedy]
+1 Masked Meower|MSC
+1 Quicksilver, Brash Blur|MSH
+1 Taxi Driver|MSC
+1 Speed, Young Avenger|MSH
+1 Whirlwind, Killer Cyclone|MSC
+1 Volcanic Villain|MSH
+1 The Whizzer, Classic Speedster|MSC
+1 Living Lightning, Charged Up|MSC
+1 Super Speed|MSH
+1 Pick Up the Pace|MSC
+1 Lightning Strike|MSH
+1 Marvelous Melee|MSC
+1 Thriving Bluff|MSC
+7 Mountain|MSH
+
+[MSH Spider-Verse]
+1 Masked Meower|MSC
+1 Hobgoblin, Mantled Marauder|MSC
+1 Lady Spider, Maybelle Reilly|MSC
+1 Spider-Gwen, Free Spirit|MSC
+1 Spider-Man, New Champion|MSC
+1 Iceman and Firestar|MSC
+1 Astonishing Spider-Man|MSC
+1 Stegron the Dinosaur Man|MSC
+1 Daily Bugle Newspaper|MSC
+1 Wisecrack|MSC
+1 Marvelous Melee|MSC
+1 Romantic Rendezvous|MSC
+1 Thriving Bluff|MSC
+1 Fogwell's Gym|MSC
+6 Mountain|MSH
+
+[MSH Thor]
+1 K'un-Lun Warrior|MSH
+1 Loki Laufeyson|MSH
+1 Sif's Spearmaster|MSC
+1 Molten Lavamancer|MSC
+1 Crimson Operative|MSH
+1 Thor, Asgard's Avenger|MSC
+1 Kree Sentinel|MSH
+1 Origin of Thor|MSC
+1 Lightning Bolt|MSC
+1 Lightning Strike|MSH
+1 Asgardian Inspiration|MSC
+1 Mjölnir's Might|MSC
+1 Thriving Bluff|MSC
+7 Mountain|MSH
+
+[MSH Vehicles]
+1 Intrepid Ace|MSC
+1 HYDRA Assault Robot|MSH
+1 Extremis Elite|MSC
+1 Taxi Driver|MSC
+1 Machinesmith Automaton|MSH
+1 Bullseye, Death Dealer|MSH
+1 Captain America's Motorcycle|MSC
+1 Big Wheel|MSC
+1 S.H.I.E.L.D. Helicarrier|MSH
+1 Sky Cycle|MSC
+1 The Thanos-Copter|MSC
+1 Truck Toss|MSH
+1 Thriving Bluff|MSC
+7 Mountain|MSH
+
+[MSH Young Avengers]
+1 Stature, Young Avenger|MSC
+1 Speed, Young Avenger|MSH
+1 Patriot, Young Avenger|MSC
+1 Iron Lad, Young Avenger|MSC
+1 Wiccan, Young Avenger|MSC
+1 Hawkeye, Young Avenger|MSH
+1 Hulkling, Young Avenger|MSC
+1 Hawkeye's Bow|MSH
+1 Team Tactics|MSH
+1 Lightning Strike|MSH
+1 Crossover Collaboration|MSC
+1 Marvelous Melee|MSC
+1 Thriving Bluff|MSC
+7 Mountain|MSH
+
+[MSH Animal]
+1 Lucky the Pizza Dog|MSC
+1 Guerilla Gorilla|MSH
+1 Tigra, Feline Fury|MSH
+1 Wakandan Tusker|MSC
+1 Ant-Man's Army|MSH
+1 Tippy-Toe, Terrific Partner|MSC
+1 Pet Avengers|MSH
+1 Savage Land Dinosaur|MSH
+1 Heroic Feast|MSH
+1 Beast Mode|MSC
+1 Go Nuts!|MSH
+1 Scout the City|MSC
+1 Thriving Grove|MSC
+7 Forest|MSH
+
+[MSH Great Lakes Avengers]
+1 Guerilla Gorilla|MSH
+1 Doorman|MSC
+1 Mister Immortal|MSC
+1 Tippy-Toe, Terrific Partner|MSC
+1 Flatman|MSC
+1 The Unbeatable Squirrel Girl|MSH
+1 Big Bertha|MSC
+1 Savage Land Dinosaur|MSH
+1 Training Regime|MSH
+1 Rapid Rescue|MSH
+1 Beast Mode|MSC
+1 Go Nuts!|MSH
+1 Thriving Grove|MSC
+7 Forest|MSH
+
+[MSH Incredible]
+1 Brawn, Amadeus Cho|MSC
+1 Guerilla Gorilla|MSH
+1 She-Hulk, Attorney-at-Law|MSC
+1 Hulk, Strongest There Is|MSC
+1 Abomination, Terrifying Titan|MSH
+1 Doc Samson, Super Psychologist|MSH
+1 Savage Land Dinosaur|MSH
+1 Origin of the Hulk|MSC
+1 Super Strength|MSH
+1 Giant Growth|MSH
+1 Hulk's Thunderclap|MSC
+1 Go Nuts!|MSH
+1 Thriving Grove|MSC
+7 Forest|MSH
+
+[MSH Rampaging]
+1 Serpent Specialist|MSH
+1 Knight of Wundagore|MSH
+1 Bushmaster, Coiled Henchman|MSC
+1 Titania, Rugged Rumbler|MSH
+1 Powerful Broker|MSH
+1 Mister Hyde, Monster Within|MSH
+1 Atlas, Sizable Stooge|MSC
+1 Rhino, Terrible Trampler|MSC
+1 Claim the Kingdom|MSH
+1 Beast Mode|MSC
+1 Rhino's Rampage|MSC
+1 Colossal Collision|MSC
+1 Thriving Grove|MSC
+7 Forest|MSH
+
+[MSH Savage Lands]
+1 Reptil, Dinomorpher|MSH
+1 Lurking Lizards|MSC
+1 Moon-Boy, Dino Rider|MSC
+1 Gert and Old LAce, Runaways|MSC
+1 Devil Dinosaur|MSC
+1 Ka-Zar of the Savage Lands|MSH
+1 Sauron, Dino-Devotee|MSC
+1 Savage Land Dinosaur|MSH
+1 Accelerated Evolution|MSC
+1 Terrific Team-Up|MSC
+1 Commune with Dinosaurs|MSC
+1 Go Nuts!|MSH
+1 Thriving Grove|MSC
+1 Savage Lands|MSC
+6 Forest|MSH
+
+[MSH Tenacious]
+1 Undercover Skrull|MSH
+1 White Tiger, Amulet Keeper|MSC
+1 Hellcat, Undying Vigilante|MSH
+1 Gert and Old Lace, Runaways|MSC
+1 Voracious Brood|MSC
+1 Pet Avengers|MSH
+1 Savage Land Dinosaur|MSH
+1 Return of the Mole Man|MSC
+1 Accelerated Evolution|MSC
+1 Punishing Punch|MSH
+1 Scout the City|MSC
+1 Call Damage Control|MSH
+1 Thriving Grove|MSC
+1 Terramorphic Expanse|MSC
+6 Forest|MSH
+
+[MSH Towering]
+1 Reptil, Dinomorpher|MSH
+1 Stature, Young Avenger|MSC
+1 Goliath, Mass Manipulator|MSC
+1 Ms. Marvel, Elastic Ally|MSC
+1 Ant-Man, Reformed Rogue|MSC
+1 Atlas, Sizable Stooge|MSC
+1 Giant-Man, Gargantuan Genius|MSC
+1 Spider-Rex, Daring Dino|MSC
+1 Giant Growth|MSH
+1 Rapid Rescue|MSH
+1 Terrific Team-Up|MSC
+1 Colossal Collision|MSC
+1 Thriving Grove|MSC
+7 Forest|MSH
+
+[MSH Trained]
+1 Serpent Specialist|MSH
+1 White Tiger, Ava Ayala|MSH
+1 Undercover Skrull|MSH
+1 Hercules, Prince of Power|MSH
+1 She-Hulk, Attorney-at-Law|MSC
+1 Pet Avengers|MSH
+1 Shang-Chi, Martial Mentor|MSC
+1 Wakandan Royal Guard|MSH
+1 Advancing the Spirit|MSC
+1 Punishing Punch|MSH
+1 Restorative Technique|MSH
+1 Colossal Collision|MSC
+1 Thriving Grove|MSC
+7 Forest|MSH
+
+[MSH Uncanny]
+1 Black Tom Cassidy|MSC
+1 Darwin, Adaptive Mutant|MSC
+1 Wolfsbane, Highland Hero|MSC
+1 X-23, Deadly Weapon|MSC
+1 Wolverine, Claws Out|MSC
+1 Beast, Erudite Aerialist|MSH
+1 Colossus, Steel Stalwart|MSC
+1 Storm, Shaker of Skies|MSC
+1 Accelerated Evolution|MSC
+1 Training Regime|MSH
+1 Go Nuts!|MSH
+1 Colossal Collision|MSC
+1 Thriving Grove|MSC
+7 Forest|MSH
+
+[MSH Wild]
+1 Hellcat, Undying Vigilante|MSH
+1 White Tiger, Amulet Keeper|MSC
+1 The Fabulous Frog-Man|MSC
+1 Gert and Old Lace, Runaways|MSC
+1 Mole Man, Moloid Master|MSH
+1 Hit-Monkey|MSC
+1 Ka-Zar of the Savage Land|MSH
+1 Claim the Kingdom|MSH
+1 Accelerated Evolution|MSC
+1 Restorative Technique|MSH
+1 Colossal Collision|MSC
+1 Terramorphic Expanse|MSC
+1 Thriving Grove|MSC
+7 Forest|MSH
+
+[MSH Fantastic]
+1 Human Torch, Johnny Storm|MSH
+1 H.E.R.B.I.E. Scout Unit|MSH
+1 Mister Fantastic, Reed Richards|MSH
+1 Invisible Woman, Sue Storm|MSH
+1 The Thing, Ben Grimm|MSH
+1 The Fantastic Four|MSC
+1 Daily Bugle Newspaper|MSC
+1 Wall Off|MSC
+1 Inspired Fire|MSC
+1 Thing Swing|MSC
+1 Farseek|MSC
+1 Fantastic Bounce|MSC
+1 Baxter Building|MSH
+1 Thriving Grove|MSC
+1 Pym Technologies|MSH
+1 Forest|MSH
+1 Plains|MSH
+1 Island|MSH
+1 Mountain|MSH
+1 Terramorphic Expanse|MSC
+
 #----------------------SHEN CUSTOM JUMPSTART PACKS START HERE---------------------------------#
 
 [ISD Dearly Departed 1]
