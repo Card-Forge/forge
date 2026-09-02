@@ -297,13 +297,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
-     * returns all players.
-     */
-    public final PlayerCollection getRegisteredPlayers() {
-        return game.getRegisteredPlayers();
-    }
-
-    /**
      * returns all opponents.
      * Should keep player relations somewhere in the match structure
      */
@@ -831,7 +824,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Get the greatest amount of combat damage assigned to a single player this turn.
      */
     public final int getMaxAssignedCombatDamage() {
-        return Aggregates.max(getRegisteredPlayers(), GameEntity::getAssignedCombatDamage);
+        return Aggregates.max(game.getRegisteredPlayers(), GameEntity::getAssignedCombatDamage);
     }
 
     public final boolean canReceiveCounters(final CounterType type) {

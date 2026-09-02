@@ -184,8 +184,7 @@ public class DestroyAi extends SpellAbilityAi {
                 });
             }
 
-            // If NoRegen is not set, filter out creatures that have a
-            // regeneration shield
+            // If NoRegen is not set, filter out creatures that have a regeneration shield
             if (!noRegen) {
                 // TODO filter out things that might be tougher?
                 list = CardLists.filter(list, c -> c.getShieldCount() == 0 && !ComputerUtil.canRegenerate(ai, c));
