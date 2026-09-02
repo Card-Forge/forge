@@ -29,6 +29,7 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.IllegalAbilityException;
 import forge.game.cost.*;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCardForetold;
@@ -480,7 +481,7 @@ public class CardFactoryUtil {
                 Sentry.addBreadcrumb(bread);
 
                 // rethrow the exception with card Name for the user
-                throw new RuntimeException("crash in raw Ability, check card script of " + card.getName(), e);
+                throw new IllegalAbilityException("crash in raw Ability, check card script of " + card.getName(), e, card.getRules() != null && card.getRules().isCustom());
             }
         }
     }
