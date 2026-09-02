@@ -484,49 +484,30 @@ public final class CardRulesPredicates {
             int value;
             switch (this.field) {
             case CMC:
-                return this.op(card.getManaCost().getCMC(), this.operand);
+                return this.operator.apply(card.getManaCost().getCMC(), this.operand);
             case GENERIC_COST:
-                return this.op(card.getManaCost().getGenericCost(), this.operand);
+                return this.operator.apply(card.getManaCost().getGenericCost(), this.operand);
             case LOYALTY:
                 String sLoyalty = card.getInitialLoyalty();
                 if (StringUtils.isBlank(sLoyalty) || !sLoyalty.matches("\\d+")) {
                     return false;
                 }
                 try {
-                    value = Integer.parseInt(sLoyalty) ;
+                    value = Integer.parseInt(sLoyalty);
                 }
                 catch (NumberFormatException ignored) {
                     return false;
                 }
-                return this.op(value, this.operand);
+                return this.operator.apply(value, this.operand);
             case POWER:
                 value = card.getIntPower();
-                return value != Integer.MAX_VALUE && this.op(value, this.operand);
+                return value != Integer.MAX_VALUE && this.operator.apply(value, this.operand);
             case TOUGHNESS:
                 value = card.getIntToughness();
-                return value != Integer.MAX_VALUE && this.op(value, this.operand);
+                return value != Integer.MAX_VALUE && this.operator.apply(value, this.operand);
             case PT:
                 value = card.getIntPower() + card.getIntToughness();
-                return value != Integer.MAX_VALUE && this.op(value, this.operand);
-            default:
-                return false;
-            }
-        }
-
-        private boolean op(final int op1, final int op2) {
-            switch (this.operator) {
-            case EQUALS:
-                return op1 == op2;
-            case GREATER_THAN:
-                return op1 > op2;
-            case GT_OR_EQUAL:
-                return op1 >= op2;
-            case LESS_THAN:
-                return op1 < op2;
-            case LT_OR_EQUAL:
-                return op1 <= op2;
-            case NOT_EQUALS:
-                return op1 != op2;
+                return value != Integer.MAX_VALUE && this.operator.apply(value, this.operand);
             default:
                 return false;
             }
