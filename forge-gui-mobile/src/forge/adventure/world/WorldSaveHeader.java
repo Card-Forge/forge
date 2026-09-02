@@ -52,31 +52,38 @@ public class WorldSaveHeader implements java.io.Serializable, Disposable {
         TextureRegion tr = ScreenUtil.getInstance().takeScreenshot();
         Matrix4 m  = new Matrix4();
         Graphics g = new Graphics(Forge.LOW_SPRITES_CAP);
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Forge.getScreenWidth(), Forge.getScreenHeight(), false);
-        frameBuffer.begin();
-        m.setToOrtho2D(0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-        g.begin(Forge.getScreenWidth(), Forge.getScreenHeight());
-        g.setProjectionMatrix(m);
-        g.startClip();
-        g.drawImage(tr, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-        g.end();
-        g.endClip();
-        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-        if (Forge.lastPreview != null)
-            Forge.lastPreview.dispose();
-        Pixmap blurred = BlurUtils.blur(pixmap, 4, 2, false, Config.instance().getBlurDivisor());
-        Forge.lastPreview = new Texture(blurred);
-        Pixmap scaled = new Pixmap(WorldSaveHeader.previewImageWidth, (int) (WorldSaveHeader.previewImageWidth / (Scene.getIntendedWidth() / (float) Scene.getIntendedHeight())), Pixmap.Format.RGBA8888);
-        scaled.drawPixmap(pixmap,
-                0, 0, pixmap.getWidth(), pixmap.getHeight(),
-                0, 0, scaled.getWidth(), scaled.getHeight());
-        pixmap.dispose();
-        blurred.dispose();
-        if (preview != null)
-            preview.dispose();
-        preview = scaled;
-        frameBuffer.end();
-        g.dispose();
-        frameBuffer.dispose();
+        // screenbuffer disposal is managed by assets dispose, so reuse it and create once
+        FrameBuffer frameBuffer = Forge.getAssets().getScreenFrameBuffer();
+        try {
+            frameBuffer.begin();
+            m.setToOrtho2D(0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            g.begin(Forge.getScreenWidth(), Forge.getScreenHeight());
+            g.setProjectionMatrix(m);
+            g.startClip();
+            g.drawImage(tr, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            g.end();
+            g.endClip();
+            Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            if (Forge.lastPreview != null)
+                Forge.lastPreview.dispose();
+            Pixmap blurred = BlurUtils.blur(pixmap, 4, 2, false, Config.instance().getBlurDivisor());
+            Forge.lastPreview = new Texture(blurred);
+            Pixmap scaled = new Pixmap(WorldSaveHeader.previewImageWidth, (int) (WorldSaveHeader.previewImageWidth / (Scene.getIntendedWidth() / (float) Scene.getIntendedHeight())), Pixmap.Format.RGBA8888);
+            scaled.drawPixmap(pixmap,
+                    0, 0, pixmap.getWidth(), pixmap.getHeight(),
+                    0, 0, scaled.getWidth(), scaled.getHeight());
+            pixmap.dispose();
+            blurred.dispose();
+            if (preview != null)
+                preview.dispose();
+            preview = scaled;
+            frameBuffer.end();
+        } catch (Exception e) {
+            // scaled preview failed
+            e.printStackTrace();
+        } finally {
+            g.dispose();
+        }
+
     }
 }

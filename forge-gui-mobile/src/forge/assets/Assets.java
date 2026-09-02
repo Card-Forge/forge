@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.tommyettinger.textra.Font;
@@ -99,6 +100,7 @@ public class Assets implements Disposable {
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
     private Texture whiteTexture, backdropTexture, grayTexture, holofoil;
+    private FrameBuffer screenFrameBuffer, cardFrameBuffer, itemFrameBuffer;
 
     private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -142,7 +144,7 @@ public class Assets implements Disposable {
                 Forge.safeDispose(f);
             textrafonts.clear();
         }
-        Forge.safeDispose(defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture);
+        Forge.safeDispose(defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture, screenFrameBuffer, cardFrameBuffer, itemFrameBuffer);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -168,6 +170,31 @@ public class Assets implements Disposable {
         if (fonts != null)
             fonts.clear();
         Forge.safeDispose(manager);
+    }
+
+    public FrameBuffer getScreenFrameBuffer() {
+        if (screenFrameBuffer == null) {
+            try {
+              screenFrameBuffer =  new FrameBuffer(Pixmap.Format.RGBA8888, Forge.getScreenWidth(), Forge.getScreenHeight(), false);
+            } catch (Exception e) {
+                // framebuffer creation failed
+                e.printStackTrace();
+            }
+        }
+        return screenFrameBuffer;
+    }
+
+    public FrameBuffer getItemFrameBuffer(final int w, final int h, boolean isCard) {
+        FrameBuffer buffer = isCard ? cardFrameBuffer : itemFrameBuffer;
+        if (buffer == null) {
+            try {
+                buffer =  new FrameBuffer(Pixmap.Format.RGB565, w, h, false);
+            } catch (Exception e) {
+                // framebuffer creation failed
+                e.printStackTrace();
+            }
+        }
+        return buffer;
     }
 
     public MemoryTrackingAssetManager manager() {
