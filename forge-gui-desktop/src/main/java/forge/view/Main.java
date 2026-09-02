@@ -47,9 +47,15 @@ public final class Main {
         // exception is reported and then discarded without ever reaching stderr. Install a printing
         // handler first so failures during the startup below are visible rather than a bare exit code.
         //
-        // Scope: ExceptionHandler.registerErrorHandling() replaces the default handler outright, so
-        // this one only covers the window up to that call — which is where GuiBase.setInterface runs.
-        // After it, visibility depends on BugReporter, which prints before it reports.
+        // This cannot just be registerErrorHandling() moved up: that reads ForgeConstants.LOG_FILE,
+        // whose class initializer resolves ASSETS_DIR through GuiBase.getInterface() and so needs the
+        // GUI interface already set. The window we need covered includes setting it, which is where
+        // the headless crash this fix is about used to happen — so the real handler cannot be
+        // installed early enough to see it, and something simpler has to cover the gap.
+        //
+        // Scope: registerErrorHandling() then replaces the default handler outright, so this one
+        // covers only the window up to that call. After it, visibility depends on BugReporter, which
+        // prints before it reports.
         Thread.setDefaultUncaughtExceptionHandler((t, ex) -> {
             System.err.println("Uncaught exception in thread " + t.getName() + ":");
             ex.printStackTrace();
