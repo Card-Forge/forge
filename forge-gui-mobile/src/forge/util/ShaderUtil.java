@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Disposable;
 import forge.Forge;
 
 public class ShaderUtil implements Disposable {
-    private static ShaderUtil instance;
+    public static ShaderUtil instance;
     private ShaderProgram shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
         shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderRoundedRect, shaderRoundedRect2,
         shaderNoiseFade, shaderPortal;
