@@ -7,6 +7,7 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -2914,6 +2915,98 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(cardName + " moves no card to or from a library",
                 manaAddingActivatedAbility(c).isManaAbility());
         AssertJUnit.assertFalse(cardName, c.getManaAbilities().isEmpty());
+    }
+
+    // The two predicates the clause is built from, checked directly. No mana ability uses Seek,
+    // Heist, Connive or Manifest today, so these are the only coverage those overrides get.
+
+    @DataProvider(name = "effectLibraryMovement")
+    public Object[][] effectLibraryMovement() {
+        return new Object[][] {
+                // always move a card to or from a library
+                {ApiType.Draw, true},
+                {ApiType.Mill, true},
+                {ApiType.Surveil, true},
+                {ApiType.Dig, true},
+                {ApiType.DigUntil, true},
+                {ApiType.Discover, true},
+                {ApiType.Learn, true},
+                {ApiType.Explore, true},
+                {ApiType.Seek, true},
+                {ApiType.Heist, true},
+                {ApiType.Connive, true},
+                {ApiType.Manifest, true},
+                {ApiType.ManifestDread, true},
+                {ApiType.Cloak, true},
+                // look at or reorder a library without moving a card out of it
+                {ApiType.Scry, false},
+                {ApiType.Shuffle, false},
+                {ApiType.Reveal, false},
+                {ApiType.PeekAndReveal, false},
+                {ApiType.RearrangeTopOfLibrary, false},
+                // nothing to do with libraries, guarding the inherited default
+                {ApiType.GainLife, false},
+                {ApiType.DealDamage, false},
+        };
+    }
+
+    @Test(dataProvider = "effectLibraryMovement")
+    public void testEffectLibraryMovement(ApiType api, boolean expected) {
+        SpellAbility sa = new SpellAbility.EmptySa(api, manaAbilityTestCard("Forest"));
+        AssertJUnit.assertEquals(api.toString(), expected,
+                api.getSpellEffect().movesCardToOrFromLibrary(sa));
+    }
+
+    @Test
+    public void testEffectLibraryMovementFollowsZoneParams() {
+        Card c = manaAbilityTestCard("Forest");
+
+        SpellAbility fromLibrary = new SpellAbility.EmptySa(ApiType.ChangeZone, c);
+        fromLibrary.putParam("Origin", "Library");
+        fromLibrary.putParam("Destination", "Hand");
+        AssertJUnit.assertTrue("ChangeZone out of a library",
+                ApiType.ChangeZone.getSpellEffect().movesCardToOrFromLibrary(fromLibrary));
+
+        SpellAbility fromGraveyard = new SpellAbility.EmptySa(ApiType.ChangeZone, c);
+        fromGraveyard.putParam("Origin", "Graveyard");
+        fromGraveyard.putParam("Destination", "Battlefield");
+        AssertJUnit.assertFalse("ChangeZone that never touches a library",
+                ApiType.ChangeZone.getSpellEffect().movesCardToOrFromLibrary(fromGraveyard));
+
+        SpellAbility playFromLibrary = new SpellAbility.EmptySa(ApiType.Play, c);
+        playFromLibrary.putParam("ValidZone", "Library");
+        AssertJUnit.assertTrue("Play off the top of a library",
+                ApiType.Play.getSpellEffect().movesCardToOrFromLibrary(playFromLibrary));
+
+        AssertJUnit.assertFalse("Play defaults to the hand",
+                ApiType.Play.getSpellEffect().movesCardToOrFromLibrary(
+                        new SpellAbility.EmptySa(ApiType.Play, c)));
+
+        // Manifest defaults to the top of the library, so only an explicit non-library ChoiceZone
+        // takes it out of scope
+        SpellAbility manifestFromHand = new SpellAbility.EmptySa(ApiType.Manifest, c);
+        manifestFromHand.putParam("ChoiceZone", "Hand");
+        AssertJUnit.assertFalse("Manifest from hand",
+                ApiType.Manifest.getSpellEffect().movesCardToOrFromLibrary(manifestFromHand));
+    }
+
+    @DataProvider(name = "costLibraryMovement")
+    public Object[][] costLibraryMovement() {
+        return new Object[][] {
+                {"T Mill<1>", true},
+                {"T Draw<1/You>", true},
+                {"T ExileFromTop<1/Card>", true},
+                {"T", false},
+                {"T Sac<1/CARDNAME>", false},
+                {"T Discard<1/Card>", false},
+                {"T ExileFromGrave<1/CARDNAME>", false},
+                {"T ExileFromHand<1/CARDNAME>", false},
+        };
+    }
+
+    @Test(dataProvider = "costLibraryMovement")
+    public void testCostLibraryMovement(String cost, boolean expected) {
+        AssertJUnit.assertEquals(cost, expected, new Cost(cost, true).movesCardToOrFromLibrary());
     }
 
     private Card manaAbilityTestCard(String cardName) {
