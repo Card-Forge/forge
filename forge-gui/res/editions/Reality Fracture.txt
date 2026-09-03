@@ -10,10 +10,12 @@ ScryfallCode=FRA
 34 U Perfected Theory @Marta Nael
 43 M The Theorist, Jace Beleren @Ekaterina Burmak
 49 M Bloodline Recollector @Cynthia Sheppard
+51 C Cast Away Doubt @Zara Alfonso
 78 M Craterclaw Colossus @Mark Zug
 93 M Stingcaster Mage @Matt Stewart
 143 U Paradox Shaper @Mark Zug
 146 U Prudent Fateseer @Gustavo Pelissari
+149 R Solitary Cell @Andrea Piparo
 151 U Stingerquill Voxmancer @Igor Grechanyi
 161 U Vigorbloom Vanguard @Denman Rooke
 165 U Woodwork Prodigy @Lius Lasahido

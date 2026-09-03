@@ -8931,7 +8931,7 @@ Gandalf the White|LTR
 1 The Howling Commandos|MSC
 1 Wakandan Shield Guard|MSC
 1 Wild Pack Squad|MSC
-1 Faclon, Joaquin Torres|MSC
+1 Falcon, Joaquin Torres|MSC
 1 War Machine, James Rhodes|MSC
 1 U.S.Agent, John Walker|MSH
 1 Captain America, Skybound|MSC
@@ -9046,7 +9046,7 @@ Gandalf the White|LTR
 1 Okoye, Dora Milaje Leader|MSH
 1 Wakandan Drone Flock|MSH
 1 Secure Detention|MSC
-1 Vibranium Energy Dagger|MSH
+1 Vibranium Energy Daggers|MSH
 1 Ultimate Alliance|MSC
 1 Panther Pounce|MSH
 1 Heroic Teamwork|MSC
@@ -9171,7 +9171,7 @@ Gandalf the White|LTR
 1 Bold Biochemist|MSH
 1 TVA Bureaucrat|MSC
 1 S.H.I.E.L.D. Deployment Drone|MSH
-1 Iron Lad|MSC
+1 Iron Lad, Young Avenger|MSC
 1 Immortus, Master of Eternity|MSC
 1 Victor Timely, Wily Tycoon|MSC
 1 Pharaoh Rama-Tut|MSC
@@ -9281,7 +9281,7 @@ Gandalf the White|LTR
 
 [MSH Lethal]
 1 Red Room Recruit|MSH
-1 White Widow, Yelena Bolova|MSC
+1 White Widow, Yelena Belova|MSC
 1 Ninja of the Hand|MSH
 1 Venomized Cat|MSC
 1 Black Widow, Deadly Hunter|MSC
@@ -9554,7 +9554,7 @@ Gandalf the White|LTR
 
 [MSH Animal]
 1 Lucky the Pizza Dog|MSC
-1 Guerilla Gorilla|MSH
+1 Guerrilla Gorilla|MSH
 1 Tigra, Feline Fury|MSH
 1 Wakandan Tusker|MSC
 1 Ant-Man's Army|MSH
@@ -9569,7 +9569,7 @@ Gandalf the White|LTR
 7 Forest|MSH
 
 [MSH Great Lakes Avengers]
-1 Guerilla Gorilla|MSH
+1 Guerrilla Gorilla|MSH
 1 Doorman|MSC
 1 Mister Immortal|MSC
 1 Tippy-Toe, Terrific Partner|MSC
@@ -9577,7 +9577,7 @@ Gandalf the White|LTR
 1 The Unbeatable Squirrel Girl|MSH
 1 Big Bertha|MSC
 1 Savage Land Dinosaur|MSH
-1 Training Regime|MSH
+1 Training Regimen|MSH
 1 Rapid Rescue|MSH
 1 Beast Mode|MSC
 1 Go Nuts!|MSH
@@ -9586,11 +9586,11 @@ Gandalf the White|LTR
 
 [MSH Incredible]
 1 Brawn, Amadeus Cho|MSC
-1 Guerilla Gorilla|MSH
+1 Guerrilla Gorilla|MSH
 1 She-Hulk, Attorney-at-Law|MSC
 1 Hulk, Strongest There Is|MSC
 1 Abomination, Terrifying Titan|MSH
-1 Doc Samson, Super Psychologist|MSH
+1 Doc Samson, Super Psychiatrist|MSH
 1 Savage Land Dinosaur|MSH
 1 Origin of the Hulk|MSC
 1 Super Strength|MSH
@@ -9622,8 +9622,8 @@ Gandalf the White|LTR
 1 Moon-Boy, Dino Rider|MSC
 1 Gert and Old LAce, Runaways|MSC
 1 Devil Dinosaur|MSC
-1 Ka-Zar of the Savage Lands|MSH
-1 Sauron, Dino-Devotee|MSC
+1 Ka-Zar of the Savage Land|MSH
+1 Sauron, Dino Devotee|MSC
 1 Savage Land Dinosaur|MSH
 1 Accelerated Evolution|MSC
 1 Terrific Team-Up|MSC
@@ -9692,7 +9692,7 @@ Gandalf the White|LTR
 1 Colossus, Steel Stalwart|MSC
 1 Storm, Shaker of Skies|MSC
 1 Accelerated Evolution|MSC
-1 Training Regime|MSH
+1 Training Regimen|MSH
 1 Go Nuts!|MSH
 1 Colossal Collision|MSC
 1 Thriving Grove|MSC

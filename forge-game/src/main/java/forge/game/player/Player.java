@@ -432,6 +432,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateLife(this);
     }
 
+    /** The number of cards in this player's main deck (not counting Commander/Sideboard/etc.) at game start. */
+    public final int getStartingLibrarySize() {
+        return getRegisteredPlayer().getDeck().getMain().countAll();
+    }
+
     public final int getLife() {
         return life;
     }

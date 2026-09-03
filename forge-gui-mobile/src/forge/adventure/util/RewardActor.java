@@ -802,7 +802,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             g.end();
         }
         Matrix4 m = new Matrix4();
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, preview_w, preview_h, false);
+        FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(preview_w, preview_h, true);
         frameBuffer.begin();
         m.setToOrtho2D(0, preview_h, preview_w, -preview_h); //So it renders flipped directly.
 
@@ -817,7 +817,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Texture result = new Texture(pixmap, Forge.isTextureFilteringEnabled());
         frameBuffer.end();
         g.dispose();
-        frameBuffer.dispose();
         pixmap.dispose();
         return result;
     }
@@ -825,7 +824,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private void processSprite(Sprite sprite, Sprite item, TextraLabel itemText, int modX, int modY, boolean isBooster) {
         int pw = 192;
         int ph = 256;
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, pw, ph, false);
+        FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(pw, ph, false);
         SpriteBatch batch = new SpriteBatch(Forge.LOW_SPRITES_CAP);
 
         frameBuffer.begin();
@@ -862,7 +861,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         frameBuffer.end();
         batch.dispose();
         pixmap.dispose();
-        frameBuffer.dispose();
     }
 
     private void setItemTooltips(Sprite icon, Sprite backSprite, boolean isBooster) {
@@ -872,7 +870,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             GlyphLayout layout = new GlyphLayout();
             ItemData item = getReward().getItem();
             boolean itemExists = item != null;
-            FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, preview_w, preview_h, false);
+            FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(preview_w, preview_h, true);
             frameBuffer.begin();
             try {
                 m.setToOrtho2D(0, preview_h, preview_w, -preview_h); //So it renders flipped directly.
@@ -918,7 +916,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             } finally {
                 frameBuffer.end();
                 getGraphics().dispose();
-                frameBuffer.dispose();
                 //reset bitmapfont to default
                 Controls.getBitmapFont("default");
             }
