@@ -180,8 +180,9 @@ public class Assets implements Disposable {
         return gifAnimation;
     }
 
-    public void setGifAnimation(String file, Animation.PlayMode playMode) {
-        gifAnimation = new GifAnimation(file, playMode);
+    public void setGifAnimation(FileHandle file, Animation.PlayMode playMode) {
+        if (file.exists())
+            gifAnimation = new GifAnimation(file.path(), playMode);
     }
 
     public void playGifAnimation() {

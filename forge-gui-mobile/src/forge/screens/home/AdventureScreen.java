@@ -1,10 +1,7 @@
 package forge.screens.home;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import forge.Forge;
 import forge.assets.FSkinFont;
-import forge.localinstance.properties.ForgeConstants;
 import forge.screens.LaunchScreen;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextArea;
@@ -53,11 +50,5 @@ public class AdventureScreen extends LaunchScreen {
     protected void startMatch() {
         Forge.isMobileAdventureMode = true; //set early for the transition logo
         Forge.switchToAdventure();
-    }
-    public static void preload() {
-        //keep low frame and under 1mb for performance
-        String demo = ForgeConstants.EFFECTS_DIR + "demo.gif";
-        if (Gdx.files.absolute(demo).exists())
-            Forge.getAssets().setGifAnimation(demo, Animation.PlayMode.LOOP);
     }
 }
