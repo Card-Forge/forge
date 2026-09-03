@@ -8931,7 +8931,7 @@ Gandalf the White|LTR
 1 The Howling Commandos|MSC
 1 Wakandan Shield Guard|MSC
 1 Wild Pack Squad|MSC
-1 Faclon, Joaquin Torres|MSC
+1 Falcon, Joaquin Torres|MSC
 1 War Machine, James Rhodes|MSC
 1 U.S.Agent, John Walker|MSH
 1 Captain America, Skybound|MSC
