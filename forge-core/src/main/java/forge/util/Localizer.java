@@ -159,14 +159,11 @@ public class Localizer {
             ClassLoader loader = new URLClassLoader(urls);
 
             try {
-                resourceBundle = ResourceBundle.getBundle(languageRegionID, new Locale(splitLocale[0], splitLocale[1]), loader);
-                // if the line above crashes englishBundle will not be set.
                 englishBundle = ResourceBundle.getBundle("en-US", new Locale("en", "US"), loader);
+                resourceBundle = ResourceBundle.getBundle(languageRegionID, new Locale(splitLocale[0], splitLocale[1]), loader);
             } catch (NullPointerException | MissingResourceException e) {
                 //If the language can't be loaded, default to US English
-                resourceBundle = ResourceBundle.getBundle("en-US", new Locale("en_US"), loader);
-                // We need to set this to prevent NPE check when englishBundle is invoke using getMessage
-                englishBundle = resourceBundle;
+                resourceBundle = englishBundle;
                 e.printStackTrace();
             }
 
