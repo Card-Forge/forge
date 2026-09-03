@@ -10,6 +10,7 @@ import forge.gamemodes.net.event.MessageEvent;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDown;
 import forge.menu.FMenuTab;
+import forge.menu.IUnreadIndicator;
 import forge.model.FModel;
 import forge.screens.online.ChatMessageBubble;
 import forge.screens.online.OnlineChatScreen;
@@ -24,6 +25,7 @@ public class VChat extends FDropDown implements IOnlineChatInterface {
     private final FTextField txtSendMessage = add(new FTextField());
 
     private IRemote gameClient;
+    private FDisplayObject owner;
 
     public VChat() {
         txtSendMessage.setGhostText(Forge.getLocalizer().getMessage("lblEnterMessageToSend"));
@@ -47,6 +49,25 @@ public class VChat extends FDropDown implements IOnlineChatInterface {
     }
 
     @Override
+    public void setMenuTab(FMenuTab menuTab) {
+        super.setMenuTab(menuTab);
+        this.owner = menuTab;
+    }
+
+    public void setDropdownOwner(FDisplayObject owner0) {
+        this.owner = owner0;
+    }
+
+    @Override
+    protected FDisplayObject getDropDownOwner() {
+        return owner;
+    }
+
+    private IUnreadIndicator unreadIndicator() {
+        return owner instanceof IUnreadIndicator ind ? ind : null;
+    }
+
+    @Override
     public void setGameClient(IRemote gameClient0) {
         gameClient = gameClient0;
     }
@@ -57,9 +78,9 @@ public class VChat extends FDropDown implements IOnlineChatInterface {
         if (isVisible()) {
             updateSizeAndPosition();
         } else {
-            FMenuTab tab = getMenuTab();
-            if (tab != null) {
-                tab.incrementUnread();
+            IUnreadIndicator indicator = unreadIndicator();
+            if (indicator != null) {
+                indicator.incrementUnread();
             }
         }
         Gdx.graphics.requestRendering();
@@ -70,9 +91,9 @@ public class VChat extends FDropDown implements IOnlineChatInterface {
         boolean wasVisible = isVisible();
         super.setVisible(visible0);
         if (visible0 && !wasVisible) {
-            FMenuTab tab = getMenuTab();
-            if (tab != null) {
-                tab.clearUnread();
+            IUnreadIndicator indicator = unreadIndicator();
+            if (indicator != null) {
+                indicator.clearUnread();
             }
         }
     }
