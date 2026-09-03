@@ -15,6 +15,7 @@ import forge.game.zone.ZoneType;
 import forge.util.StreamUtil;
 
 import org.testng.AssertJUnit;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.HashSet;
@@ -2857,6 +2858,64 @@ public class GameSimulationTest extends SimulationTest {
     // CR 605.1a, as of the 2026-08-07 rules update: an activated ability is not a mana ability if
     // its cost or effect moves a card to or from a library.
 
+    @DataProvider(name = "losesManaAbility")
+    public Object[][] losesManaAbility() {
+        return new Object[][] {
+                // the cost mills, so paying it moves a card out of the library
+                {"Charmed Pendant"},
+                {"Deranged Assistant"},
+                {"Millikin"},
+                {"Manakin and Millikin"},
+                // the draw is a sub-ability of the mana part, so the chain has to be walked past
+                // the mana part for these to be caught at all
+                {"Chromatic Sphere"},
+                {"Darkwater Egg"},
+                {"Mossfire Egg"},
+                {"Shadowblood Egg"},
+                {"Skycloud Egg"},
+                {"Sungrass Egg"},
+                {"Rainbow Dash"},
+                // Selvala alongside Panglacial Wurm is the interaction the rule change was aimed at
+                {"Selvala, Explorer Returned"},
+        };
+    }
+
+    @DataProvider(name = "keepsManaAbility")
+    public Object[][] keepsManaAbility() {
+        return new Object[][] {
+                // the draw belongs to a delayed trigger, which is a separate ability
+                {"Astrolabe"},
+                {"Barbed Sextant"},
+                // the draw or mill belongs to a reflexive trigger or to a trigger on spending the
+                // mana, again a separate ability
+                {"Brass Infiniscope"},
+                {"Gilanra, Caller of Wirewood"},
+                {"Shaun & Rebecca, Agents"},
+                // revealing moves no card, and these reveal from hand in any case
+                {"Metalworker"},
+                {"Rosheen, Roaring Prophet"},
+                {"Sacellum Godspeaker"},
+                // blunt guard: the clause must never catch a basic land
+                {"Forest"},
+        };
+    }
+
+    @Test(dataProvider = "losesManaAbility")
+    public void testLibraryMovementLosesManaAbility(String cardName) {
+        Card c = manaAbilityTestCard(cardName);
+        AssertJUnit.assertFalse(cardName + " moves a card to or from a library, so its ability now"
+                + " uses the stack", manaAddingActivatedAbility(c).isManaAbility());
+        AssertJUnit.assertTrue(cardName, c.getManaAbilities().isEmpty());
+    }
+
+    @Test(dataProvider = "keepsManaAbility")
+    public void testManaAbilityKeptWithoutLibraryMovement(String cardName) {
+        Card c = manaAbilityTestCard(cardName);
+        AssertJUnit.assertTrue(cardName + " moves no card to or from a library",
+                manaAddingActivatedAbility(c).isManaAbility());
+        AssertJUnit.assertFalse(cardName, c.getManaAbilities().isEmpty());
+    }
+
     private Card manaAbilityTestCard(String cardName) {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -2875,74 +2934,5 @@ public class GameSimulationTest extends SimulationTest {
         }
         AssertJUnit.fail("no mana-adding activated ability found on " + c.getName());
         return null;
-    }
-
-    @Test
-    public void testDrawSubAbilityLosesManaAbility() {
-        // The mana part sits on the root ability and the draw on a sub-ability, so the chain has
-        // to be walked past the mana part for this to be caught at all.
-        Card sphere = manaAbilityTestCard("Chromatic Sphere");
-        AssertJUnit.assertFalse("Chromatic Sphere draws, so its ability now uses the stack",
-                manaAddingActivatedAbility(sphere).isManaAbility());
-        AssertJUnit.assertTrue(sphere.getManaAbilities().isEmpty());
-    }
-
-    @Test
-    public void testMillCostLosesManaAbility() {
-        Card pendant = manaAbilityTestCard("Charmed Pendant");
-        AssertJUnit.assertFalse("milling as a cost moves a card out of the library",
-                manaAddingActivatedAbility(pendant).isManaAbility());
-        AssertJUnit.assertTrue(pendant.getManaAbilities().isEmpty());
-    }
-
-    @Test
-    public void testMillCostLosesManaAbilityOnCreature() {
-        Card assistant = manaAbilityTestCard("Deranged Assistant");
-        AssertJUnit.assertFalse(manaAddingActivatedAbility(assistant).isManaAbility());
-        AssertJUnit.assertTrue(assistant.getManaAbilities().isEmpty());
-    }
-
-    @Test
-    public void testParleyDrawLosesManaAbility() {
-        // Selvala alongside Panglacial Wurm is the interaction the rule change was aimed at.
-        Card selvala = manaAbilityTestCard("Selvala, Explorer Returned");
-        AssertJUnit.assertFalse(manaAddingActivatedAbility(selvala).isManaAbility());
-        AssertJUnit.assertTrue(selvala.getManaAbilities().isEmpty());
-    }
-
-    @Test
-    public void testDelayedDrawKeepsManaAbility() {
-        // The draw happens in a delayed trigger, which is a separate ability, so the mana ability
-        // itself moves no card.
-        Card sextant = manaAbilityTestCard("Barbed Sextant");
-        AssertJUnit.assertTrue("a delayed trigger is not part of the ability's effect",
-                manaAddingActivatedAbility(sextant).isManaAbility());
-        AssertJUnit.assertFalse(sextant.getManaAbilities().isEmpty());
-    }
-
-    @Test
-    public void testReflexiveMillKeepsManaAbility() {
-        // "Add {C}. When you do, mill two cards." The mill belongs to the reflexive trigger, not
-        // to the ability that made it.
-        Card agents = manaAbilityTestCard("Shaun & Rebecca, Agents");
-        AssertJUnit.assertTrue("a reflexive trigger is not part of the ability's effect",
-                manaAddingActivatedAbility(agents).isManaAbility());
-        AssertJUnit.assertFalse(agents.getManaAbilities().isEmpty());
-    }
-
-    @Test
-    public void testRevealFromHandKeepsManaAbility() {
-        // Revealing looks at cards without moving any, and Metalworker reveals from hand anyway.
-        Card metalworker = manaAbilityTestCard("Metalworker");
-        AssertJUnit.assertTrue(manaAddingActivatedAbility(metalworker).isManaAbility());
-        AssertJUnit.assertFalse(metalworker.getManaAbilities().isEmpty());
-    }
-
-    @Test
-    public void testBasicLandKeepsManaAbility() {
-        Card forest = manaAbilityTestCard("Forest");
-        AssertJUnit.assertTrue("basic lands must not be caught by the library clause",
-                manaAddingActivatedAbility(forest).isManaAbility());
-        AssertJUnit.assertFalse(forest.getManaAbilities().isEmpty());
     }
 }
