@@ -552,7 +552,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public List<LandTraitChanges> getLandTraitChanges() { return this.landTraitChanges; }
 
-    public record LandTraitChanges(CardState state) implements ICardTraitChanges, IKeywordsChange
+    record LandTraitChanges(CardState state) implements ICardTraitChanges, IKeywordsChange
     {
         public List<SpellAbility> applySpellAbility(List<SpellAbility> list) {
             if (state.getCard().hasRemoveIntrinsic()) {
