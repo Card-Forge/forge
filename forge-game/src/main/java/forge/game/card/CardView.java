@@ -91,11 +91,11 @@ public class CardView extends GameEntityView {
 
     public CardView(final int id0, final Tracker tracker) {
         super(id0, tracker);
-        set(TrackableProperty.CurrentState, new CardStateView(id0, CardStateName.Original, tracker));
+        set(TrackableProperty.CurrentState, createAlternateState(CardStateName.Original));
     }
     public CardView(final int id0, final Tracker tracker, final String name0, final String description, final Object object) {
         super(id0, tracker);
-        set(TrackableProperty.CurrentState, new CardStateView(id0, CardStateName.Original, tracker));
+        set(TrackableProperty.CurrentState, createAlternateState(CardStateName.Original));
         getCurrentState().setName(name0);
         getCurrentState().setOracleText(description);
         set(TrackableProperty.Name, name0);

@@ -407,7 +407,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         game = game0;
         paperCard = paperCard0;
-        view = new CardView(id0, tracker0);
+        view = game0 != null && game0.isNoGUIUser() ? new DummyCardView(id0, tracker0) : new CardView(id0, tracker0);
         currentState = new CardState(view.getCurrentState(), this);
         states.put(CardStateName.Original, currentState);
         view.updateChangedColorWords(this);

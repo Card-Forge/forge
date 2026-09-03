@@ -83,6 +83,7 @@ public class GameCopier {
         GameRules currentRules = origGame.getRules();
         Match newMatch = new Match(currentRules, newPlayers, origGame.getView().getTitle());
         Game newGame = new Game(newPlayers, currentRules, newMatch);
+        newGame.setNoGUIUser();
         newGame.dangerouslySetTimestamp(origGame.getTimestamp());
 
         for (int i = 0; i < origGame.getPlayers().size(); i++) {

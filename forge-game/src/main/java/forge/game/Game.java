@@ -67,6 +67,8 @@ public class Game {
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
 
+    private boolean noGUIUser;
+
     /** The ID. */
     private int id;
     private final GameRules rules;
@@ -265,7 +267,7 @@ public class Game {
     }
 
     public Player getPlayer(int id) {
-        for(Player p : allPlayers) {
+        for (Player p : allPlayers) {
             if (p.getId() == id) {
                 return p;
             }
@@ -1427,5 +1429,12 @@ public class Game {
     }
     public boolean canUseTimeout() {
         return AI_CAN_USE_TIMEOUT;
+    }
+
+    public boolean isNoGUIUser() {
+        return noGUIUser;
+    }
+    public void setNoGUIUser() {
+        noGUIUser = true;
     }
 }
