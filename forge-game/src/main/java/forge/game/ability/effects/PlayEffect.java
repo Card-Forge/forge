@@ -43,6 +43,13 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 
 public class PlayEffect extends SpellAbilityEffect {
+
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        // cards are played from hand unless ValidZone says otherwise
+        return zoneParamIsLibrary(sa, "ValidZone");
+    }
+
     @Override
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

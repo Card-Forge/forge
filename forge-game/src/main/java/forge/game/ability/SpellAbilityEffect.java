@@ -44,6 +44,26 @@ public abstract class SpellAbilityEffect {
 
     public void resolve(SpellAbility sa) {}
 
+    /**
+     * CR 605.1a: an activated ability is not a mana ability if its cost or effect moves any
+     * card to or from a library. Effects that can do so override this to return true.
+     *
+     * This is deliberately a question about the ability's script and not about the current game
+     * state: CR 605.1a says to disregard replacement effects other than self-replacement effects
+     * when evaluating the criteria, so whether an ability is a mana ability must not depend on
+     * what happens to be on the battlefield.
+     */
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return false;
+    }
+
+    /**
+     * True when the given zone parameter names the library, e.g. Origin$ Graveyard,Library.
+     */
+    protected static boolean zoneParamIsLibrary(final SpellAbility sa, final String param) {
+        return sa.getParamOrDefault(param, "").contains(ZoneType.Library.toString());
+    }
+
     protected String getStackDescription(final SpellAbility sa) {
         // Unless overridden, let the spell description also be the stack description
         return sa.getDescription();
@@ -246,6 +266,7 @@ public abstract class SpellAbilityEffect {
     private static CardCollection getCards(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         return getCards(definedFirst, definedParam, sa, null);
     }
+
     private static CardCollection getCards(final boolean definedFirst, final String definedParam, final SpellAbility sa, List<Card> resultDuplicate) {
         if (sa.hasParam("ThisDefinedAndTgts")) {
             CardCollection cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("ThisDefinedAndTgts"), sa);
