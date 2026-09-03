@@ -1,0 +1,9 @@
+[metadata]
+Name=Simple Bolt Test Deck
+Description=Minimal test deck with Mountains and Lightning Bolts for e2e testing
+
+[Main]
+20 Mountain
+40 Lightning Bolt
+
+[Sideboard]
