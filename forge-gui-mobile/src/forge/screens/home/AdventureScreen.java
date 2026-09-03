@@ -3,7 +3,6 @@ package forge.screens.home;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import forge.Forge;
-import forge.animation.GifAnimation;
 import forge.assets.FSkinFont;
 import forge.localinstance.properties.ForgeConstants;
 import forge.screens.LaunchScreen;
@@ -16,8 +15,7 @@ import java.util.function.Consumer;
 public class AdventureScreen extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);
     private boolean loaded = false;
-    public static GifAnimation animation = null;
-    private final FTextArea lblDesc = new FTextArea(false, Forge.getLocalizer().getMessage("lblAdventureDescription"), animation);
+    private final FTextArea lblDesc = new FTextArea(false, Forge.getLocalizer().getMessage("lblAdventureDescription"), Forge.getAssets().getGifAnimation());
     public AdventureScreen() {
         super(null, NewGameMenu.getMenu());
         lblDesc.setFont(FSkinFont.get(12));
@@ -39,18 +37,14 @@ public class AdventureScreen extends LaunchScreen {
             loaded = true;
             add(lblDesc);
         }
-        if (animation != null) {
-            animation.start();
-        }
+        Forge.getAssets().playGifAnimation();
         Forge.startContinuousRendering();
         super.onActivate();
     }
 
     @Override
     public void onSwitchAway(Consumer<Boolean> canSwitchCallback) {
-        if (animation != null) {
-            animation.stop();
-        }
+        Forge.getAssets().stopGifAnimation();
         Forge.stopContinuousRendering();
         super.onSwitchAway(canSwitchCallback);
     }
@@ -62,8 +56,8 @@ public class AdventureScreen extends LaunchScreen {
     }
     public static void preload() {
         //keep low frame and under 1mb for performance
-        String demo = ForgeConstants.EFFECTS_DIR+"demo.gif";
+        String demo = ForgeConstants.EFFECTS_DIR + "demo.gif";
         if (Gdx.files.absolute(demo).exists())
-            animation = new GifAnimation(demo, Animation.PlayMode.LOOP);
+            Forge.getAssets().setGifAnimation(demo, Animation.PlayMode.LOOP);
     }
 }
