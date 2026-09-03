@@ -26,6 +26,7 @@ import forge.card.CardDb.CardArtPreference;
 import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.deck.DeckRule;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -407,7 +408,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         game = game0;
         paperCard = paperCard0;
-        view = new CardView(id0, tracker0);
+        view = game0 != null && game0.isNoGUIUser() ? new DummyCardView(id0, tracker0) : new CardView(id0, tracker0);
         currentState = new CardState(view.getCurrentState(), this);
         states.put(CardStateName.Original, currentState);
         view.updateChangedColorWords(this);
@@ -2904,6 +2905,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         String keywordText = keywordsToText(getUnhiddenKeywords(state).getValues());
         sb.append(keywordText).append(keywordText.length() > 0 ? linebreak : "");
+
+        // DeckRule descriptions (e.g. Rulebreaker) print alongside the card's other rules text.
+        if (getRules() != null) {
+            for (final DeckRule rule : DeckRule.parseAll(getRules().getDeckRules())) {
+                final String desc = rule.getDescription();
+                if (!desc.isEmpty()) {
+                    sb.append(desc).append(linebreak);
+                }
+            }
+        }
 
         // Process replacement effects first so that "enters the battlefield tapped"
         // and "as ~ enters the battlefield, choose...", etc can be printed

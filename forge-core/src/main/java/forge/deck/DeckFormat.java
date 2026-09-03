@@ -272,6 +272,31 @@ public enum DeckFormat {
             // noBasicLands = conspiracies.countByName(SOVREALM) > 0;
         }
 
+        // Commander DeckRules (forge.deck.DeckRule), gathered once for use below.
+        final List<DeckRuleColorIdentity> commanderCIRules = new ArrayList<>();
+        final List<DeckRuleSize> commanderSizeRules = new ArrayList<>();
+        if (hasCommander()) {
+            for (final PaperCard cmd : deck.getCommanders()) {
+                for (final DeckRule rule : DeckRule.parseAll(cmd)) {
+                    if (!rule.isActiveFor(DeckSection.Commander)) {
+                        continue;
+                    }
+                    if (rule instanceof DeckRuleColorIdentity) {
+                        commanderCIRules.add((DeckRuleColorIdentity) rule);
+                    } else if (rule instanceof DeckRuleSize) {
+                        commanderSizeRules.add((DeckRuleSize) rule);
+                    }
+                }
+            }
+        }
+        for (final DeckRuleSize sizeRule : commanderSizeRules) {
+            if (sizeRule.removesMaxDeckSize()) {
+                max = Integer.MAX_VALUE;
+            } else if (max != Integer.MAX_VALUE) {
+                max += sizeRule.getMaxDelta();
+            }
+        }
+
         if (hasCommander()) {
             byte cmdCI = 0;
             int wildColors = 0;
@@ -332,6 +357,12 @@ public enum DeckFormat {
                         continue;
                     }
                 }
+                if (allowsOffColorIdentity(commanderCIRules, cp.getKey().getRules())) {
+                    continue;
+                }
+                if (approvesAdditionalColor(commanderCIRules, cp.getKey().getRules(), cmdCI)) {
+                    continue;
+                }
                 ColorSet missingColors = cp.getKey().getRules().getColorIdentity().getMissingColors(cmdCI);
                 if (missingColors.countColors() > 0) {
                     if (missingColors.countColors() <= wildColors) {
@@ -344,6 +375,12 @@ public enum DeckFormat {
             }
             if (deck.has(DeckSection.Sideboard)) {
                 for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
+                    if (allowsOffColorIdentity(commanderCIRules, cp.getKey().getRules())) {
+                        continue;
+                    }
+                    if (approvesAdditionalColor(commanderCIRules, cp.getKey().getRules(), cmdCI)) {
+                        continue;
+                    }
                     if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI)) {
                         erroneousCI.add(cp.getKey());
                     }
@@ -443,6 +480,26 @@ public enum DeckFormat {
         }
 
         return null;
+    }
+
+    /** True if any active commander DeckRule:ColorIdentity exempts this candidate card. */
+    public static boolean allowsOffColorIdentity(final List<DeckRuleColorIdentity> ciRules, final CardRules candidate) {
+        for (final DeckRuleColorIdentity rule : ciRules) {
+            if (rule.allowsOffColorIdentity(candidate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** True if some active commander DeckRule:ColorIdentity's player-chosen AllowedAdditionalColor$ colors cover this candidate. */
+    public static boolean approvesAdditionalColor(final List<DeckRuleColorIdentity> ciRules, final CardRules candidate, final byte commanderCI) {
+        for (final DeckRuleColorIdentity rule : ciRules) {
+            if (rule.approvesAdditionalColor(candidate, commanderCI)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getAttractionDeckConformanceProblem(Deck deck) {
@@ -608,14 +665,27 @@ public enum DeckFormat {
         return card -> isLegalCommander(card.getRules());
     }
 
+    /**
+     * @param commanders the deck's current commander(s); their AllowedAdditionalColor$ picks live
+     * on their marked colors, so no priming from the rest of the deck is needed.
+     */
     public Predicate<PaperCard> isLegalCardForCommanderPredicate(List<PaperCard> commanders) {
         byte cmdCI = 0;
+        final List<DeckRuleColorIdentity> ciRules = new ArrayList<>();
         for (final PaperCard p : commanders) {
             cmdCI |= p.getRules().getColorIdentity().getColor();
+            for (final DeckRule rule : DeckRule.parseAll(p)) {
+                if (rule instanceof DeckRuleColorIdentity && rule.isActiveFor(DeckSection.Commander)) {
+                    ciRules.add((DeckRuleColorIdentity) rule);
+                }
+            }
         }
         if(cmdCI == MagicColor.ALL_COLORS)
             return x -> true;
-        Predicate<CardRules> predicate = CardRulesPredicates.hasColorIdentity(cmdCI);
+        final byte finalCmdCI = cmdCI;
+        Predicate<CardRules> predicate = CardRulesPredicates.hasColorIdentity(cmdCI)
+                .or(candidate -> allowsOffColorIdentity(ciRules, candidate))
+                .or(candidate -> approvesAdditionalColor(ciRules, candidate, finalCmdCI));
         if (commanders.size() == 1 && commanders.get(0).getRules().canBePartnerCommander()) {
             // Also show available partners a commander can have a partner.
             // 702.124g If a legendary card has more than one partner ability, you may choose which one to use when designating your commander, but you can’t use both.

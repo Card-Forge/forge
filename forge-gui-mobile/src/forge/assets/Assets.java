@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -25,6 +26,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.tommyettinger.textra.Font;
 import forge.Forge;
+import forge.animation.GifAnimation;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -101,6 +103,7 @@ public class Assets implements Disposable {
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
     private Texture whiteTexture, backdropTexture, grayTexture, holofoil;
     private FrameBuffer screenFrameBuffer, cardFrameBuffer, itemFrameBuffer;
+    private GifAnimation gifAnimation;
 
     private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -144,7 +147,8 @@ public class Assets implements Disposable {
                 Forge.safeDispose(f);
             textrafonts.clear();
         }
-        Forge.safeDispose(defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture, screenFrameBuffer, cardFrameBuffer, itemFrameBuffer);
+        Forge.safeDispose(defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture, screenFrameBuffer,
+            cardFrameBuffer, itemFrameBuffer, gifAnimation);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -170,6 +174,25 @@ public class Assets implements Disposable {
         if (fonts != null)
             fonts.clear();
         Forge.safeDispose(manager);
+    }
+
+    public GifAnimation getGifAnimation() {
+        return gifAnimation;
+    }
+
+    public void setGifAnimation(FileHandle file, Animation.PlayMode playMode) {
+        if (file.exists())
+            gifAnimation = new GifAnimation(file.path(), playMode);
+    }
+
+    public void playGifAnimation() {
+        if (gifAnimation != null)
+            gifAnimation.start();
+    }
+
+    public void stopGifAnimation() {
+        if (gifAnimation != null)
+            gifAnimation.stop();
     }
 
     public FrameBuffer getScreenFrameBuffer() {
