@@ -484,8 +484,8 @@ public abstract class GameStage extends Stage {
             if (TileMapScene.instance().currentMap().isInMap()) {
                 DialogData noQuicksave = new DialogData();
                 DialogData noQuicksaveOK = new DialogData();
-                noQuicksave.text = "Game not saved. Quicksave is only available on the world map.";
-                noQuicksaveOK.name = "OK";
+                noQuicksave.text = Forge.getLocalizer().getMessageorUseDefault("lblQuicksaveOnlyOnWorldMap", "Game not saved. Quicksave is only available on the world map.");
+                noQuicksaveOK.name = Forge.getLocalizer().getMessage("lblOK");
                 noQuicksave.options = new DialogData[]{noQuicksaveOK};
                 MapDialog noQuicksaveDialog = new MapDialog(noQuicksave, MapStage.getInstance(), -1, null);
                 showDialog();

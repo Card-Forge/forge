@@ -251,12 +251,18 @@
   <object id="104" template="../../obj/waypoint.tx" x="125.636" y="200.909"/>
   <object id="108" name="Ward" type="dialog" gid="11912" x="192.063" y="128.292" width="48" height="16">
    <properties>
-    <property name="dialog">[{
-    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.&quot;,
-    &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; } 
-    ]
-}]</property>
+    <property name="dialog">[
+    {
+        &quot;text&quot;: &quot;A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.&quot;,
+        &quot;loctext&quot;: &quot;adv.monastery_unhallowed_abbey_2F.97.d.n0.text&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;Leave&quot;,
+                &quot;locname&quot;: &quot;adv.shared.leave&quot;
+            }
+        ]
+    }
+]</property>
    </properties>
   </object>
   <object id="109" name="Sacrifice1" type="dialog" gid="11905" x="159.667" y="123.333" width="16" height="16">
@@ -327,41 +333,82 @@
   </object>
   <object id="113" template="../../obj/dialog.tx" x="209.364" y="114.091" width="13.8182" height="13.3636">
    <properties>
-    <property name="dialog">[{
-    &quot;text&quot;:&quot;*The large, imposing demon before you smirks*\n Ah, so you must be the one who's been freeing my sacrifices...and the volunteer to be my new one. Tell me, mortal, as your last words that aren't a howl of pain - why challenge me?&quot;,
-    &quot;options&quot;:[{ 
-	&quot;name&quot;:&quot;Because you're a monster, and you should be stopped!&quot;,  
-	&quot;text&quot;:&quot;*The demon sneers.*\n Ah, a noble *hero*. I should have guessed. Your kind die like anyone else when your power runs dry - allow me to demonstrate!&quot;,
-	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;Continue&quot;,
-		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
-		}]
-   	},
-	{ 
-	&quot;name&quot;:&quot;I want power. I'll take it from what's left of you.&quot;,  
-	&quot;text&quot;:&quot;*The demon chuckles.*\n I'll commend your ambition, if not your sense. Fight hard enough, and I might let you replace that failure you dealt with upstairs.&quot;,
-	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;Continue&quot;,
-		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
-		}]
-    	},
-	{ 
-	&quot;name&quot;:&quot;Honestly, you just looked like you'd be a good fight.&quot;,  
-	&quot;text&quot;:&quot;*The demon blinks in surprise, then laughs.*\n Well, if that's what you seek, you'll find more than you bargained for here. I hope you enjoy the last battle of your life, *mortal*.&quot;,
-	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;Continue&quot;,
-		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
-		}]
-    	},
-	{ 
-	&quot;name&quot;:&quot;...&quot;,  
-	&quot;text&quot;:&quot;*The fiend's eyes narrow.*\n Too scared for words? So be it, mortal. You'll die all the same.&quot;,
-	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;Continue&quot;,
-		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
-		}]
-    }]
-}]</property>
+    <property name="dialog">[
+    {
+        &quot;text&quot;: &quot;*The large, imposing demon before you smirks*\n Ah, so you must be the one who's been freeing my sacrifices...and the volunteer to be my new one. Tell me, mortal, as your last words that aren't a howl of pain - why challenge me?&quot;,
+        &quot;loctext&quot;: &quot;adv.monastery_unhallowed_abbey_2F.113.d.n0.text&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;Because you're a monster, and you should be stopped!&quot;,
+                &quot;locname&quot;: &quot;adv.monastery_unhallowed_abbey_2F.113.d.n2.name&quot;,
+                &quot;text&quot;: &quot;*The demon sneers.*\n Ah, a noble *hero*. I should have guessed. Your kind die like anyone else when your power runs dry - allow me to demonstrate!&quot;,
+                &quot;loctext&quot;: &quot;adv.monastery_unhallowed_abbey_2F.113.d.n1.text&quot;,
+                &quot;options&quot;: [
+                    {
+                        &quot;name&quot;: &quot;Continue&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue&quot;,
+                        &quot;action&quot;: [
+                            {
+                                &quot;deleteMapObject&quot;: 113
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                &quot;name&quot;: &quot;I want power. I'll take it from what's left of you.&quot;,
+                &quot;locname&quot;: &quot;adv.monastery_unhallowed_abbey_2F.113.d.n4.name&quot;,
+                &quot;text&quot;: &quot;*The demon chuckles.*\n I'll commend your ambition, if not your sense. Fight hard enough, and I might let you replace that failure you dealt with upstairs.&quot;,
+                &quot;loctext&quot;: &quot;adv.monastery_unhallowed_abbey_2F.113.d.n3.text&quot;,
+                &quot;options&quot;: [
+                    {
+                        &quot;name&quot;: &quot;Continue&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue&quot;,
+                        &quot;action&quot;: [
+                            {
+                                &quot;deleteMapObject&quot;: 113
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                &quot;name&quot;: &quot;Honestly, you just looked like you'd be a good fight.&quot;,
+                &quot;locname&quot;: &quot;adv.monastery_unhallowed_abbey_2F.113.d.n6.name&quot;,
+                &quot;text&quot;: &quot;*The demon blinks in surprise, then laughs.*\n Well, if that's what you seek, you'll find more than you bargained for here. I hope you enjoy the last battle of your life, *mortal*.&quot;,
+                &quot;loctext&quot;: &quot;adv.monastery_unhallowed_abbey_2F.113.d.n5.text&quot;,
+                &quot;options&quot;: [
+                    {
+                        &quot;name&quot;: &quot;Continue&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue&quot;,
+                        &quot;action&quot;: [
+                            {
+                                &quot;deleteMapObject&quot;: 113
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                &quot;name&quot;: &quot;...&quot;,
+                &quot;locname&quot;: &quot;adv.monastery_unhallowed_abbey_2F.113.d.n8.name&quot;,
+                &quot;text&quot;: &quot;*The fiend's eyes narrow.*\n Too scared for words? So be it, mortal. You'll die all the same.&quot;,
+                &quot;loctext&quot;: &quot;adv.monastery_unhallowed_abbey_2F.113.d.n7.text&quot;,
+                &quot;options&quot;: [
+                    {
+                        &quot;name&quot;: &quot;Continue&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue&quot;,
+                        &quot;action&quot;: [
+                            {
+                                &quot;deleteMapObject&quot;: 113
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]</property>
    </properties>
   </object>
   <object id="116" template="../../obj/enemy.tx" x="203.566" y="96.2358" width="24" height="24">

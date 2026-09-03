@@ -47,28 +47,41 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;The Wounded Sliver looks at you interestedly&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.57.d.n0.text&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;What are you?&quot;,
+        &quot;locname&quot;: &quot;adv.skep_skep_outer.57.d.n2.name&quot;,
         &quot;text&quot;: &quot;I'm the queen of the Slivers of the Skep. At least I used to be, until my position was usurped.&quot;,
+        &quot;loctext&quot;: &quot;adv.skep_skep_outer.57.d.n1.text&quot;,
         &quot;options&quot;: [
           {
             &quot;name&quot;: &quot;Usurped? What are you talking about?&quot;,
+            &quot;locname&quot;: &quot;adv.skep_skep_outer.57.d.n4.name&quot;,
             &quot;text&quot;: &quot;For millenia I've been keeping the Slivers of the Skep healthy and peaceful, keeping them under control to prevent them attacking outsiders. Everything changed when the Sliver Queen attacked and took control over this hive. As you can see, I was unable to defeat her.&quot;,
+            &quot;loctext&quot;: &quot;adv.skep_skep_outer.57.d.n3.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;So I guess the Sliver Queen is causing the Slivers of the Skep to be this aggressive? &quot;,
+                &quot;locname&quot;: &quot;adv.skep_skep_outer.57.d.n6.name&quot;,
                 &quot;text&quot;: &quot;Exactly, she's been assembling a mighty host of Slivers from all around the multiverse. Soon enough she will have an army large enough to conquer the whole of Shandalar.&quot;,
+                &quot;loctext&quot;: &quot;adv.skep_skep_outer.57.d.n5.text&quot;,
                 &quot;options&quot;: [
                   {
                     &quot;name&quot;: &quot;Where is she located? I will take care of it.&quot;,
+                    &quot;locname&quot;: &quot;adv.skep_skep_outer.57.d.n8.name&quot;,
                     &quot;text&quot;: &quot;I appreciate your enthusiasm, however the queen is not an opponent to take on lightly. First of all, in order to gain access to her lair you need to defeat her three of her lieutenants that are scattered around here in the Skep. Only then will the magic shield disappear and will you be able to enter her lair.&quot;,
+                    &quot;loctext&quot;: &quot;adv.skep_skep_outer.57.d.n7.text&quot;,
                     &quot;options&quot;: [
                       {
                         &quot;name&quot;: &quot;Consider it done.&quot;,
+                        &quot;locname&quot;: &quot;adv.skep_skep_outer.57.d.n10.name&quot;,
                         &quot;text&quot;: &quot;Once you have dealt with the queen, return to me. Once I'm installed as the hive queen of the slivers of Shandalar, I will promise you to that the Slivers of the Skep will never be a danger to the people of Shandalar. Also, take this Hivestone, It will allow your creatures to become Slivers, causing confusion for the Sliver Queen.&quot;,
+                        &quot;loctext&quot;: &quot;adv.skep_skep_outer.57.d.n9.text&quot;,
                         &quot;action&quot;: [
-                          { &quot;addItem&quot;: &quot;Hivestone&quot; },
+                          {
+                            &quot;addItem&quot;: &quot;Hivestone&quot;
+                          },
                           {
                             &quot;setMapFlag&quot;: {
                               &quot;key&quot;: &quot;TalkToFallen&quot;,
@@ -89,33 +102,45 @@
   },
   {
     &quot;condition&quot;: [
-      { &quot;checkMapFlag&quot;: &quot;TalkToFallen&quot; },
+      {
+        &quot;checkMapFlag&quot;: &quot;TalkToFallen&quot;
+      },
       {
         &quot;checkMapFlag&quot;: &quot;SliverQueenDefeated&quot;,
         &quot;not&quot;: true
       }
     ],
     &quot;text&quot;: &quot;Weak, ... I am. Defeat the Sliver Queen ... before I lose the last of my strength.&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.57.d.n11.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;(Continue)&quot;
+        &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
       }
     ]
   },
   {
     &quot;condition&quot;: [
-      { &quot;checkMapFlag&quot;: &quot;TalkToFallen&quot; },
-      { &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot; }
+      {
+        &quot;checkMapFlag&quot;: &quot;TalkToFallen&quot;
+      },
+      {
+        &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot;
+      }
     ],
     &quot;name&quot;: &quot;The Sliver Queen has been defeated!&quot;,
+    &quot;locname&quot;: &quot;adv.skep_skep_outer.57.d.n13.name&quot;,
     &quot;text&quot;: &quot;My ... my gratitude to you stranger. I feel my strength slowly returning. As promised, I'll take control of the Slivers again as their queen. The people of Shandalar shouldn't fear the Slivers of the Skep anymore. Though be warned, adventurer, my children will still defend against any intruder who goes into the Skep. Goodbye, adventurer!&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.57.d.n12.text&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
         &quot;action&quot;: [
-          { &quot;deleteMapObject&quot;: -1 },
           {
-          }
+            &quot;deleteMapObject&quot;: -1
+          },
+          {}
         ]
       }
     ]
@@ -234,9 +259,11 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;Many mouths to feed, little time for smalltalk.&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.73.d.n0.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Leave&quot;
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
       }
     ]
   }
@@ -266,11 +293,15 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;The inscription reads: Stranger, tell our kinsmen that we lay here, staying faithful to our fight against the sliver menace.&quot;,
-    &quot;options&quot;:[
-      { &quot;name&quot;:&quot;Leave&quot; }
-]
-}
+    &quot;text&quot;: &quot;The inscription reads: Stranger, tell our kinsmen that we lay here, staying faithful to our fight against the sliver menace.&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.74.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>
@@ -292,9 +323,11 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;G'day to you, adventurer!&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.93.d.n0.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Leave&quot;
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
       }
     ]
   }
@@ -311,9 +344,11 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;G'day to you, adventurer!&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.99.d.n0.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Leave&quot;
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
       }
     ]
   }
@@ -330,9 +365,11 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;G'day to you, adventurer!&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.100.d.n0.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Leave&quot;
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
       }
     ]
   }
@@ -355,27 +392,39 @@
       }
     ],
     &quot;text&quot;: &quot;Good day, Adventurer. As you can see, we have quite a situation here.&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.101.d.n0.text&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;What is happening around here?&quot;,
+        &quot;locname&quot;: &quot;adv.skep_skep_outer.101.d.n2.name&quot;,
         &quot;text&quot;: &quot;For unknown reasons, the Slivers of the Skep have become hostile and have been launching raiding parties into the various towns of Shandalar. General Jarkhald has summoned a large host to deal with this situation.&quot;,
+        &quot;loctext&quot;: &quot;adv.skep_skep_outer.101.d.n1.text&quot;,
         &quot;options&quot;: [
           {
             &quot;name&quot;: &quot;So you intend to just storm the hive, and hope for the best?&quot;,
+            &quot;locname&quot;: &quot;adv.skep_skep_outer.101.d.n4.name&quot;,
             &quot;text&quot;: &quot;Well, we tried that before, but due to the huge amount of Slivers we haven't had much progress outside of walling off the hive to prevent further attacks against the surrounding villagers.&quot;,
+            &quot;loctext&quot;: &quot;adv.skep_skep_outer.101.d.n3.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Any way I could be of use to deal with the Slivers?&quot;,
+                &quot;locname&quot;: &quot;adv.skep_skep_outer.101.d.n6.name&quot;,
                 &quot;text&quot;: &quot;Slivers form a hivemind, meaning that if their queen would somehow be neutralized, the sliver won't be a problem anymore. Sadly, we don't have a brave volunteer who is willing to enter the hive and deal with the queen ... &quot;,
+                &quot;loctext&quot;: &quot;adv.skep_skep_outer.101.d.n5.text&quot;,
                 &quot;options&quot;: [
                   {
                     &quot;name&quot;: &quot;I'll can deal with the queen, but what's in it for me?&quot;,
+                    &quot;locname&quot;: &quot;adv.skep_skep_outer.101.d.n8.name&quot;,
                     &quot;text&quot;: &quot; Outside of the thanks of the people of Shandalar for dealing with these horrific creatures, I will give you a fancy new piece of armor that will help you in your upcoming adventures. Deal with the queen and come back to me to receive your reward. I'll have my men open the gate to let you enter the hive. Good luck Adventurer!&quot;,
+                    &quot;loctext&quot;: &quot;adv.skep_skep_outer.101.d.n7.text&quot;,
                     &quot;options&quot;: [
                       {
                         &quot;name&quot;: &quot;End&quot;,
+                        &quot;locname&quot;: &quot;adv.skep_skep_outer.101.d.n9.name&quot;,
                         &quot;action&quot;: [
-                          { &quot;deleteMapObject&quot;: 249 },
+                          {
+                            &quot;deleteMapObject&quot;: 249
+                          },
                           {
                             &quot;setMapFlag&quot;: {
                               &quot;key&quot;: &quot;TalkToCommander&quot;,
@@ -396,48 +445,74 @@
   },
   {
     &quot;condition&quot;: [
-      { &quot;checkMapFlag&quot;: &quot;TalkToCommander&quot; },
+      {
+        &quot;checkMapFlag&quot;: &quot;TalkToCommander&quot;
+      },
       {
         &quot;checkMapFlag&quot;: &quot;SliverQueenDefeated&quot;,
         &quot;not&quot;: true
       }
     ],
     &quot;text&quot;: &quot;Those things are still creeping beyond the walls, I take it you haven't yet taken care of the task?&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.101.d.n10.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;(Continue)&quot;
+        &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
       }
     ]
   },
   {
     &quot;condition&quot;: [
-      { &quot;checkMapFlag&quot;: &quot;TalkToCommander&quot; },
-      { &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot; }
+      {
+        &quot;checkMapFlag&quot;: &quot;TalkToCommander&quot;
+      },
+      {
+        &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot;
+      }
     ],
     &quot;name&quot;: &quot;The Slivers won't be a problem anymore.&quot;,
+    &quot;locname&quot;: &quot;adv.skep_skep_outer.101.d.n12.name&quot;,
     &quot;text&quot;: &quot;I didn't think you would actually be able to do it! As promised I'll give you the item I spoke of before. Thanks Adventurer. BOYS listen up! Our job here is done, the leader of these things is dead! Let's get out of this creepy place. Ale's on me!&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.101.d.n11.text&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
         &quot;options&quot;: [
           {
             &quot;action&quot;: [
-                { &quot;deleteMapObject&quot;: -1 },
-                { &quot;deleteMapObject&quot;: 98 },
-                { &quot;deleteMapObject&quot;: 99 },
-                { &quot;deleteMapObject&quot;: 100 },
-                { &quot;deleteMapObject&quot;: 238 },
-                { &quot;deleteMapObject&quot;: 239 },
-                { &quot;deleteMapObject&quot;: 240 },
-                { &quot;addItem&quot;: &quot;Armor of the Hivelord&quot; }
+              {
+                &quot;deleteMapObject&quot;: -1
+              },
+              {
+                &quot;deleteMapObject&quot;: 98
+              },
+              {
+                &quot;deleteMapObject&quot;: 99
+              },
+              {
+                &quot;deleteMapObject&quot;: 100
+              },
+              {
+                &quot;deleteMapObject&quot;: 238
+              },
+              {
+                &quot;deleteMapObject&quot;: 239
+              },
+              {
+                &quot;deleteMapObject&quot;: 240
+              },
+              {
+                &quot;addItem&quot;: &quot;Armor of the Hivelord&quot;
+              }
             ]
           }
         ]
       }
     ]
   }
-]
-        </property>
+]</property>
     <property name="displayNameOverride" value="Lord Garrin"/>
     <property name="enemy" value="Legionnaire"/>
     <property name="spawn.Easy" type="bool" value="true"/>
@@ -848,9 +923,11 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;G'day to you, adventurer!&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.150.d.n0.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Leave&quot;
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
       }
     ]
   }
@@ -867,9 +944,11 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;G'day to you, adventurer!&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.151.d.n0.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Leave&quot;
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
       }
     ]
   }
@@ -1038,9 +1117,11 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;Those things won't get past this gate. You can count on that, adventurer.&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.238.d.n0.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Leave&quot;
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
       }
     ]
   }
@@ -1057,9 +1138,11 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;G'day to you, adventurer!&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.239.d.n0.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Leave&quot;
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
       }
     ]
   }
@@ -1076,9 +1159,11 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;G'day to you, adventurer!&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.240.d.n0.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Leave&quot;
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
       }
     ]
   }
@@ -1095,18 +1180,19 @@
     <property name="dialog">[
 	{
 		&quot;text&quot;: &quot;G'day to you, adventurer!&quot;,
+		&quot;loctext&quot;: &quot;adv.skep_skep_outer.241.d.n0.text&quot;,
 		&quot;condition&quot;: [
 			{
 				&quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
 				&quot;not&quot;: true
 			}
 		],
-			&quot;options&quot;:
-			[
-				{
-					&quot;name&quot;: &quot;Leave&quot;
-				}
-			]
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;Leave&quot;,
+				&quot;locname&quot;: &quot;adv.shared.leave&quot;
+			}
+		]
 	}
 ]</property>
     <property name="enemy" value="Knight"/>
@@ -1126,18 +1212,43 @@
   <object id="248" template="../../obj/waypoint.tx" x="114" y="976"/>
   <object id="249" template="../../obj/gate.tx" x="481" y="1192">
    <properties>
-    <property name="dialog">[{
-    &quot;text&quot;:&quot;This gate is locked.&quot;,
-    &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; },
-    {      
-        &quot;name&quot;:&quot;Unlock with Outer Gate Key&quot;,     
-        &quot;condition&quot;:[{&quot;item&quot;:&quot;Outer Gate Key&quot;}],    
-        &quot;text&quot;:&quot;The gate is unlocked.&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Outer Gate Key&quot;}]} ]
+    <property name="dialog">[
+    {
+        &quot;text&quot;: &quot;This gate is locked.&quot;,
+        &quot;loctext&quot;: &quot;adv.skep_skep_outer.242.d.n0.text&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;Leave&quot;,
+                &quot;locname&quot;: &quot;adv.shared.leave&quot;
+            },
+            {
+                &quot;name&quot;: &quot;Unlock with Outer Gate Key&quot;,
+                &quot;locname&quot;: &quot;adv.skep_skep_outer.242.d.n2.name&quot;,
+                &quot;condition&quot;: [
+                    {
+                        &quot;item&quot;: &quot;Outer Gate Key&quot;
+                    }
+                ],
+                &quot;text&quot;: &quot;The gate is unlocked.&quot;,
+                &quot;loctext&quot;: &quot;adv.skep_skep_outer.242.d.n1.text&quot;,
+                &quot;options&quot;: [
+                    {
+                        &quot;name&quot;: &quot;Continue&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue&quot;,
+                        &quot;action&quot;: [
+                            {
+                                &quot;deleteMapObject&quot;: -1
+                            },
+                            {
+                                &quot;removeItem&quot;: &quot;Outer Gate Key&quot;
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
-    ]
-}]</property>
+]</property>
    </properties>
   </object>
   <object id="250" template="../../obj/enemy.tx" x="550.667" y="1260.67" width="16" height="16" visible="1">
@@ -1145,9 +1256,11 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;The horse looks at you with disinterest.&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.250.d.n0.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Leave&quot;
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
       }
     ]
   }
@@ -1188,11 +1301,20 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;A translucent, shimmering red field blocks your path. Strange sounds echo through the room behind you.&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.256.d.n0.text&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Leave&quot; },
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      },
       {
         &quot;name&quot;: &quot;The red field melts before your eyes. You are free to go forward.&quot;,
-        &quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 } ],
+        &quot;locname&quot;: &quot;adv.skep_skep_outer.256.d.n1.name&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;deleteMapObject&quot;: -1
+          }
+        ],
         &quot;condition&quot;: [
           {
             &quot;getMapFlag&quot;: {
@@ -1205,8 +1327,7 @@
       }
     ]
   }
-]
-</property>
+]</property>
    </properties>
   </object>
   <object id="257" template="../../obj/treasure.tx" x="751.667" y="508.667">
@@ -1317,27 +1438,30 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;Many mouths to feed, little time for smalltalk.&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.266.d.n0.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Leave&quot;
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
       }
     ]
   },
   {
-   &quot;condition&quot;: [
-      { &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot; }
+    &quot;condition&quot;: [
+      {
+        &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot;
+      }
     ],
-    &quot;text&quot;:&quot;Where did all those fancy folk just go to? Did someone say free ale?&quot;,
+    &quot;text&quot;: &quot;Where did all those fancy folk just go to? Did someone say free ale?&quot;,
+    &quot;loctext&quot;: &quot;adv.skep_skep_outer.266.d.n1.text&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Continue&quot;
+        &quot;name&quot;: &quot;Continue&quot;,
+        &quot;locname&quot;: &quot;adv.shared.continue&quot;
       }
     ]
-    
   }
-]
-
-</property>
+]</property>
     <property name="displayNameOverride" value="Exhausted Farmer"/>
     <property name="enemy" value="Farmer"/>
     <property name="spawn.Easy" type="bool" value="true"/>

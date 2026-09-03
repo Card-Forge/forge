@@ -72,12 +72,18 @@
     <property name="defeatDialog">[
 	{
 		&quot;text&quot;: &quot;The Torturer unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his tortured victims, you see the red barrier disappear. The way to Tibalt's chambers is open.&quot;,
+		&quot;loctext&quot;: &quot;adv.tibalt_tibalt_f3.119.x.n0.text&quot;,
 		&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;(Continue)&quot;,
+				&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
 				&quot;action&quot;: [
-					{ &quot;deleteMapObject&quot;: 201 },
-					{ &quot;deleteMapObject&quot;: -1 }
+					{
+						&quot;deleteMapObject&quot;: 201
+					},
+					{
+						&quot;deleteMapObject&quot;: -1
+					}
 				]
 			}
 		]
@@ -187,12 +193,18 @@
   </object>
   <object id="201" name="Ward" type="dialog" gid="23816" x="461.029" y="123.772" width="35.6276" height="16">
    <properties>
-    <property name="dialog">[{
-    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
-    &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; } 
-    ]
-}]</property>
+    <property name="dialog">[
+    {
+        &quot;text&quot;: &quot;A translucent, shimmering red field blocks your path. An ancient evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
+        &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f3.201.d.n0.text&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;Leave&quot;,
+                &quot;locname&quot;: &quot;adv.shared.leave&quot;
+            }
+        ]
+    }
+]</property>
    </properties>
   </object>
   <object id="202" template="../../obj/booster.tx" x="349.342" y="198.105">
@@ -222,18 +234,43 @@
   </object>
   <object id="204" template="../../obj/gate.tx" x="576.842" y="281.439" width="11.6666" height="22">
    <properties>
-    <property name="dialog">[{
-    &quot;text&quot;:&quot;This door is locked.&quot;,
-    &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; },
-    {      
-        &quot;name&quot;:&quot;Unlock with Torturer's key&quot;,     
-        &quot;condition&quot;:[{&quot;item&quot;:&quot;Torturer's Key&quot;}],    
-        &quot;text&quot;:&quot;The gate is unlocked, though the key breaks as you open the door.&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Torturer's Key&quot;}]} ]
+    <property name="dialog">[
+    {
+        &quot;text&quot;: &quot;This door is locked.&quot;,
+        &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f3.204.d.n0.text&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;Leave&quot;,
+                &quot;locname&quot;: &quot;adv.shared.leave&quot;
+            },
+            {
+                &quot;name&quot;: &quot;Unlock with Torturer's key&quot;,
+                &quot;locname&quot;: &quot;adv.tibalt_tibalt_f3.204.d.n2.name&quot;,
+                &quot;condition&quot;: [
+                    {
+                        &quot;item&quot;: &quot;Torturer's Key&quot;
+                    }
+                ],
+                &quot;text&quot;: &quot;The gate is unlocked, though the key breaks as you open the door.&quot;,
+                &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f3.204.d.n1.text&quot;,
+                &quot;options&quot;: [
+                    {
+                        &quot;name&quot;: &quot;Continue&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue&quot;,
+                        &quot;action&quot;: [
+                            {
+                                &quot;deleteMapObject&quot;: -1
+                            },
+                            {
+                                &quot;removeItem&quot;: &quot;Torturer's Key&quot;
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
-    ]
-}]</property>
+]</property>
    </properties>
   </object>
   <object id="205" template="../../obj/enemy.tx" x="141.675" y="196.105">

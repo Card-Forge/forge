@@ -502,11 +502,11 @@ public class MapStage extends GameStage {
                             EnemySprite mob = new EnemySprite(id, EN);
                             Object dialogObject = prop.get("dialog"); //Check if the enemy has a dialogue attached to it.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
-                                mob.dialog = new MapDialog(dialogObject.toString(), this, mob.getId());
+                                mob.dialog = new MapDialog(dialogObject.toString(), this, mob.getId(), currentMap);
                             }
                             dialogObject = prop.get("defeatDialog"); //Check if the enemy has a defeat dialogue attached to it.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
-                                mob.defeatDialog = new MapDialog(dialogObject.toString(), this, mob.getId());
+                                mob.defeatDialog = new MapDialog(dialogObject.toString(), this, mob.getId(), currentMap);
                             }
                             dialogObject = prop.get("displayNameOverride"); //Check for name override.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
@@ -625,9 +625,9 @@ public class MapStage extends GameStage {
                             TiledMapTileMapObject tiledObj = (TiledMapTileMapObject) obj;
                             DialogActor dialog;
                             if (prop.containsKey("sprite"))
-                                dialog = new DialogActor(this, id, prop.get("dialog").toString(), prop.get("sprite").toString());
+                                dialog = new DialogActor(this, id, prop.get("dialog").toString(), prop.get("sprite").toString(), currentMap);
                             else {
-                                dialog = new DialogActor(this, id, prop.get("dialog").toString(), tiledObj.getTextureRegion());
+                                dialog = new DialogActor(this, id, prop.get("dialog").toString(), tiledObj.getTextureRegion(), currentMap);
                             }
                             if (prop.containsKey("hidden") && Boolean.parseBoolean(prop.get("hidden").toString()))
                             {

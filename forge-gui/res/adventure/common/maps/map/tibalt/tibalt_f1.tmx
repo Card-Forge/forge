@@ -65,12 +65,18 @@
     <property name="defeatDialog">[
 	{
 		&quot;text&quot;: &quot;The Devil unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his victims, you see the red barrier disappear. The way above is open.&quot;,
+		&quot;loctext&quot;: &quot;adv.tibalt_tibalt_f1.136.x.n0.text&quot;,
 		&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;(Continue)&quot;,
+				&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
 				&quot;action&quot;: [
-					{ &quot;deleteMapObject&quot;: 218 },
-					{ &quot;deleteMapObject&quot;: -1 }
+					{
+						&quot;deleteMapObject&quot;: 218
+					},
+					{
+						&quot;deleteMapObject&quot;: -1
+					}
 				]
 			}
 		]
@@ -182,12 +188,18 @@
   <object id="217" template="../../obj/waypoint.tx" x="471.342" y="144.105"/>
   <object id="218" name="Ward" type="dialog" gid="56584" x="556.362" y="180.439" width="63.961" height="16">
    <properties>
-    <property name="dialog">[{
-    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
-    &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; } 
-    ]
-}]</property>
+    <property name="dialog">[
+    {
+        &quot;text&quot;: &quot;A translucent, shimmering red field blocks your path. An ancient evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
+        &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f1.217.d.n0.text&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;Leave&quot;,
+                &quot;locname&quot;: &quot;adv.shared.leave&quot;
+            }
+        ]
+    }
+]</property>
    </properties>
   </object>
   <object id="219" template="../../obj/treasure.tx" x="30.6754" y="297.772">

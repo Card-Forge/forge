@@ -58,11 +58,26 @@
   </object>
   <object id="52" template="../obj/gate.tx" x="224" y="384">
    <properties>
-    <property name="dialog">[{
-  &quot;text&quot;:&quot;I am a big gate. Greetings.&quot;,
-  &quot;options&quot;:[ { &quot;name&quot;:&quot;Okay...&quot; } ],
-  &quot;action&quot;: [ { &quot;setMapFlag&quot;: {&quot;key&quot;: &quot;gate&quot;, &quot;val&quot;: 1} } ]
-}]</property>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;I am a big gate. Greetings.&quot;,
+    &quot;loctext&quot;: &quot;adv.debug_map.52.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Okay...&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.52.d.n1.name&quot;
+      }
+    ],
+    &quot;action&quot;: [
+      {
+        &quot;setMapFlag&quot;: {
+          &quot;key&quot;: &quot;gate&quot;,
+          &quot;val&quot;: 1
+        }
+      }
+    ]
+  }
+]</property>
    </properties>
   </object>
   <object id="54" template="../obj/treasure.tx" x="336" y="176">
@@ -87,107 +102,305 @@
   <object id="71" template="../obj/gold.tx" x="64" y="352"/>
   <object id="79" template="../obj/gate.tx" x="144" y="208" width="32" height="16" visible="1">
    <properties>
-    <property name="dialog">[{
- &quot;text&quot;:&quot;Don't mind me, just chilling.&quot;,
- &quot;options&quot;:[ { &quot;name&quot;:&quot;Sure.&quot; } ]
-}]</property>
+    <property name="dialog">[
+ {
+  &quot;text&quot;: &quot;Don't mind me, just chilling.&quot;,
+  &quot;loctext&quot;: &quot;adv.debug_map.69.d.n0.text&quot;,
+  &quot;options&quot;: [
+   {
+    &quot;name&quot;: &quot;Sure.&quot;,
+    &quot;locname&quot;: &quot;adv.debug_map.69.d.n1.name&quot;
+   }
+  ]
+ }
+]</property>
    </properties>
   </object>
   <object id="80" template="../obj/enemy.tx" x="112" y="304">
    <properties>
     <property name="defeatDialog">[
   {
-    &quot;text&quot;:&quot;Impressive...&quot;,
-    &quot;loctext&quot;:&quot;&quot;,
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;Hey why are you still standing...?&quot; } ]
+    &quot;text&quot;: &quot;Impressive...&quot;,
+    &quot;loctext&quot;: &quot;adv.debug_map.80.x.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Hey why are you still standing...?&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.x.n1.name&quot;
+      }
+    ]
   }
 ]</property>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;I am an elf. I do elf things like hugging trees and being pretty.&quot;,
-    &quot;options&quot;:[
-      { &quot;name&quot;:&quot;OK&quot; },
+    &quot;text&quot;: &quot;I am an elf. I do elf things like hugging trees and being pretty.&quot;,
+    &quot;loctext&quot;: &quot;adv.debug_map.80.d.n0.text&quot;,
+    &quot;options&quot;: [
       {
-        &quot;name&quot;:&quot;Fight me, elf!&quot;,
+        &quot;name&quot;: &quot;OK&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n1.name&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Fight me, elf!&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n3.name&quot;,
         &quot;text&quot;: &quot;Gladly.&quot;,
+        &quot;loctext&quot;: &quot;adv.debug_map.80.d.n2.text&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Hey aren't you a bit swole for an elf...?&quot;, &quot;action&quot;: [ { &quot;battleWithActorID&quot;: -1 } ] }
-        ]
-      },
-      {
-        &quot;name&quot;: &quot;I want to be eco-friendly too.&quot;,
-        &quot;text&quot;: &quot;Listen to the forest, friend.\nYour color identity is now green!&quot;,
-        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;G&quot;, &quot;not&quot;: true } ],
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;Awesome.&quot;, &quot;action&quot;: [ { &quot;setColorIdentity&quot;: &quot;G&quot; } ]} ]
-      },
-      {
-        &quot;name&quot;:&quot;I wanna fight Emrakul over there!&quot;,
-        &quot;text&quot;: &quot;Really? Oh well... your funeral.\nHEY EMMY! THIS CHUMP WANTS TO DANCE!&quot;,
-        &quot;condition&quot;: [ { &quot;actorID&quot;: 50 } ],
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;WAIT IT WAS A JOKE!!!&quot;, &quot;action&quot;: [ { &quot;battleWithActorID&quot;: 50 } ]} ]
-      },
-      {
-        &quot;name&quot;:&quot;Where did Emrakul go?&quot;,
-        &quot;text&quot;: &quot;She left. Crying. You monster.&quot;,
-        &quot;condition&quot;: [ { &quot;actorID&quot;: 50, &quot;not&quot;: true } ],
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;Sorry...&quot; } ]
-      },
-      {
-        &quot;name&quot;:&quot;That's cool my green dude.&quot;,
-        &quot;text&quot;: &quot;You get it! Take this item.&quot;,
-        &quot;condition&quot;: [ { &quot;item&quot;: &quot;Treasure&quot;, &quot;not&quot;: true }, { &quot;colorIdentity&quot;: &quot;G&quot; } ],
-        &quot;action&quot;: [ { &quot;addItem&quot;: &quot;Treasure&quot; } ],
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;Thanks bro.&quot; } ]
-      },
-      {
-        &quot;name&quot;:&quot;Thanks for the blessing.&quot;,
-        &quot;text&quot;: &quot;You are welcome.&quot;,
-        &quot;condition&quot;: [ { &quot;hasBlessing&quot;: &quot;Debug Elf&quot; } ],
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;Thumbs up emoji&quot; } ]
-      },
-      {
-        &quot;name&quot;:&quot;Got any fancy elven blessing?&quot;,
-        &quot;text&quot;: &quot;If you give me a Treasure, I will give you the blessing of the Debug Elf.\nWhich is a Llanowar Elves and 2 extra life in your next battle. Sounds good?&quot;,
-        &quot;condition&quot;: [ { &quot;item&quot;: &quot;Treasure&quot; }, { &quot;hasBlessing&quot;:  &quot;Debug Elf&quot;, &quot;not&quot;: true } ],
-        &quot;options&quot;: [
-          { &quot;name&quot;: &quot;But I love my Treasure! I humbly refuse.&quot;},
           {
-            &quot;name&quot;: &quot;I'll take it&quot;,
+            &quot;name&quot;: &quot;Hey aren't you a bit swole for an elf...?&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n4.name&quot;,
             &quot;action&quot;: [
-              { &quot;removeItem&quot;: &quot;Treasure&quot;, &quot;giveBlessing&quot;: { &quot;name&quot;: &quot;Debug Elf&quot; ,&quot;goldModifier&quot;:0.2, &quot;lifeModifier&quot;: 2, &quot;startBattleWithCard&quot;: [ &quot;Llanowar Elves&quot; ] } }
+              {
+                &quot;battleWithActorID&quot;: -1
+              }
             ]
           }
         ]
       },
       {
-        &quot;name&quot;:&quot;Can you open that hidden wall?&quot;,
+        &quot;name&quot;: &quot;I want to be eco-friendly too.&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n6.name&quot;,
+        &quot;text&quot;: &quot;Listen to the forest, friend.\nYour color identity is now green!&quot;,
+        &quot;loctext&quot;: &quot;adv.debug_map.80.d.n5.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;colorIdentity&quot;: &quot;G&quot;,
+            &quot;not&quot;: true
+          }
+        ],
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;Awesome.&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n7.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;setColorIdentity&quot;: &quot;G&quot;
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I wanna fight Emrakul over there!&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n9.name&quot;,
+        &quot;text&quot;: &quot;Really? Oh well... your funeral.\nHEY EMMY! THIS CHUMP WANTS TO DANCE!&quot;,
+        &quot;loctext&quot;: &quot;adv.debug_map.80.d.n8.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;actorID&quot;: 50
+          }
+        ],
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;WAIT IT WAS A JOKE!!!&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n10.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;battleWithActorID&quot;: 50
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Where did Emrakul go?&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n12.name&quot;,
+        &quot;text&quot;: &quot;She left. Crying. You monster.&quot;,
+        &quot;loctext&quot;: &quot;adv.debug_map.80.d.n11.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;actorID&quot;: 50,
+            &quot;not&quot;: true
+          }
+        ],
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;Sorry...&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n13.name&quot;
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;That's cool my green dude.&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n15.name&quot;,
+        &quot;text&quot;: &quot;You get it! Take this item.&quot;,
+        &quot;loctext&quot;: &quot;adv.debug_map.80.d.n14.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;item&quot;: &quot;Treasure&quot;,
+            &quot;not&quot;: true
+          },
+          {
+            &quot;colorIdentity&quot;: &quot;G&quot;
+          }
+        ],
+        &quot;action&quot;: [
+          {
+            &quot;addItem&quot;: &quot;Treasure&quot;
+          }
+        ],
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;Thanks bro.&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n16.name&quot;
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Thanks for the blessing.&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n18.name&quot;,
+        &quot;text&quot;: &quot;You are welcome.&quot;,
+        &quot;loctext&quot;: &quot;adv.debug_map.80.d.n17.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;hasBlessing&quot;: &quot;Debug Elf&quot;
+          }
+        ],
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;Thumbs up emoji&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n19.name&quot;
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Got any fancy elven blessing?&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n21.name&quot;,
+        &quot;text&quot;: &quot;If you give me a Treasure, I will give you the blessing of the Debug Elf.\nWhich is a Llanowar Elves and 2 extra life in your next battle. Sounds good?&quot;,
+        &quot;loctext&quot;: &quot;adv.debug_map.80.d.n20.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;item&quot;: &quot;Treasure&quot;
+          },
+          {
+            &quot;hasBlessing&quot;: &quot;Debug Elf&quot;,
+            &quot;not&quot;: true
+          }
+        ],
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;But I love my Treasure! I humbly refuse.&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n22.name&quot;
+          },
+          {
+            &quot;name&quot;: &quot;I'll take it&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n23.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;removeItem&quot;: &quot;Treasure&quot;,
+                &quot;giveBlessing&quot;: {
+                  &quot;name&quot;: &quot;Debug Elf&quot;,
+                  &quot;goldModifier&quot;: 0.2,
+                  &quot;lifeModifier&quot;: 2,
+                  &quot;startBattleWithCard&quot;: [
+                    &quot;Llanowar Elves&quot;
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Can you open that hidden wall?&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n25.name&quot;,
         &quot;text&quot;: &quot;Since you asked nicely, I shall.&quot;,
-        &quot;condition&quot;: [ { &quot;actorID&quot;: 83 } ],
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;Thanks bro.&quot;, &quot;action&quot;: [ { &quot;deleteMapObject&quot;: 83 } ]} ]
+        &quot;loctext&quot;: &quot;adv.debug_map.80.d.n24.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;actorID&quot;: 83
+          }
+        ],
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;Thanks bro.&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n26.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;deleteMapObject&quot;: 83
+              }
+            ]
+          }
+        ]
       },
       {
         &quot;name&quot;: &quot;Got a quest?&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n28.name&quot;,
         &quot;text&quot;: &quot;Ah, perhaps you can help me. Can you ask the Debug Demon about his favorite color?&quot;,
-        &quot;condition&quot;: [ { &quot;checkQuestFlag&quot;:  &quot;128&quot;, &quot;not&quot;: true} ],
+        &quot;loctext&quot;: &quot;adv.debug_map.80.d.n27.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;checkQuestFlag&quot;: &quot;128&quot;,
+            &quot;not&quot;: true
+          }
+        ],
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;That's weird, but sure.&quot;, &quot;action&quot;: [ { &quot;setQuestFlag&quot;:  {&quot;key&quot;:&quot;128&quot;, &quot;val&quot;: 1} } ] },
-          { &quot;name&quot;: &quot;That guy scares me, I'd rather not.&quot; }
+          {
+            &quot;name&quot;: &quot;That's weird, but sure.&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n29.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;setQuestFlag&quot;: {
+                  &quot;key&quot;: &quot;128&quot;,
+                  &quot;val&quot;: 1
+                }
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;That guy scares me, I'd rather not.&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n30.name&quot;
+          }
         ]
       },
       {
         &quot;name&quot;: &quot;About that quest...&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n32.name&quot;,
         &quot;text&quot;: &quot;Please let me know what the Debug Demon's answer is.&quot;,
-        &quot;condition&quot;: [ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;&lt;&quot;, &quot;val&quot;: 3 } } ],
+        &quot;loctext&quot;: &quot;adv.debug_map.80.d.n31.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;getQuestFlag&quot;: {
+              &quot;key&quot;: &quot;128&quot;,
+              &quot;op&quot;: &quot;&lt;&quot;,
+              &quot;val&quot;: 3
+            }
+          }
+        ],
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Sure&quot; }
+          {
+            &quot;name&quot;: &quot;Sure&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n33.name&quot;
+          }
         ]
       },
       {
         &quot;name&quot;: &quot;Got it, bro.&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.80.d.n35.name&quot;,
         &quot;text&quot;: &quot;Ah. I see. Thank you friend, have this gold for your inconvenience.&quot;,
-        &quot;condition&quot;: [ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 3 } } ],
+        &quot;loctext&quot;: &quot;adv.debug_map.80.d.n34.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;getQuestFlag&quot;: {
+              &quot;key&quot;: &quot;128&quot;,
+              &quot;op&quot;: &quot;=&quot;,
+              &quot;val&quot;: 3
+            }
+          }
+        ],
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Thanks&quot;, &quot;action&quot;: [ { &quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;128&quot;, &quot;val&quot;: 4}, &quot;addGold&quot;: 250 } ] }
+          {
+            &quot;name&quot;: &quot;Thanks&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.80.d.n36.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;setQuestFlag&quot;: {
+                  &quot;key&quot;: &quot;128&quot;,
+                  &quot;val&quot;: 4
+                },
+                &quot;addGold&quot;: 250
+              }
+            ]
+          }
         ]
       }
     ]
@@ -206,6 +419,7 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;You...you hurt Grog!\nYou...you filthy swine! I will stop at nothing until I see you defeated!\nGods...anyone! Grant me strength! Grant me REVENGE!!!!&quot;,
+    &quot;loctext&quot;: &quot;adv.debug_map.81.d.n0.text&quot;,
     &quot;condition&quot;: [
       {
         &quot;actorID&quot;: 82,
@@ -215,6 +429,7 @@
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;Uh oh.&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.81.d.n1.name&quot;,
         &quot;action&quot;: [
           {
             &quot;setEffect&quot;: {
@@ -225,7 +440,8 @@
                 &quot;Elesh Norn, Grand Cenobite&quot;,
                 &quot;Emrakul, the Aeons Torn&quot;
               ]
-            }, &quot;battleWithActorID&quot;: -1
+            },
+            &quot;battleWithActorID&quot;: -1
           }
         ]
       }
@@ -239,10 +455,22 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;...&quot;,
-    &quot;condition&quot;:[ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;&lt;&quot;, &quot;val&quot;: 3 } } ],
-    &quot;options&quot;:[
-      { &quot;name&quot;:&quot;???&quot; }
+    &quot;text&quot;: &quot;...&quot;,
+    &quot;loctext&quot;: &quot;adv.debug_map.82.d.n0.text&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;getQuestFlag&quot;: {
+          &quot;key&quot;: &quot;128&quot;,
+          &quot;op&quot;: &quot;&lt;&quot;,
+          &quot;val&quot;: 3
+        }
+      }
+    ],
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;???&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.82.d.n1.name&quot;
+      }
     ]
   }
 ]</property>
@@ -254,58 +482,182 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;I have some things to offer for that life you have...&quot;,
-    &quot;options&quot;:[
-      { &quot;name&quot;:&quot;You are suspicious and have two shadows, I'm out.&quot; },
+    &quot;text&quot;: &quot;I have some things to offer for that life you have...&quot;,
+    &quot;loctext&quot;: &quot;adv.debug_map.83.d.n0.text&quot;,
+    &quot;options&quot;: [
       {
-        &quot;name&quot;:&quot;I'll vanquish you, demon!&quot;,
-        &quot;text&quot;: &quot;Oh look we got a tough guy over here!&quot;,
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;Have at thee!&quot;, &quot;action&quot;: [ { &quot;battleWithActorID&quot;: -1 } ]} ]
+        &quot;name&quot;: &quot;You are suspicious and have two shadows, I'm out.&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.83.d.n1.name&quot;
       },
       {
-        &quot;name&quot;: &quot;I dig your edge.&quot;,
-        &quot;text&quot;: &quot;You can be dark and edgy like me. Maybe for some of your life force...&quot;,
-        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;B&quot;, &quot;not&quot;: true }, { &quot;hasLife&quot;:  2 } ],
+        &quot;name&quot;: &quot;I'll vanquish you, demon!&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.83.d.n3.name&quot;,
+        &quot;text&quot;: &quot;Oh look we got a tough guy over here!&quot;,
+        &quot;loctext&quot;: &quot;adv.debug_map.83.d.n2.text&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Not my life force, I'll die without it!&quot; },
-          { &quot;name&quot;: &quot;I'm doing nothing better with it.&quot;, &quot;action&quot;: [ { &quot;setColorIdentity&quot;: &quot;B&quot;, &quot;addLife&quot;: -2 } ] }
+          {
+            &quot;name&quot;: &quot;Have at thee!&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.83.d.n4.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;battleWithActorID&quot;: -1
+              }
+            ]
+          }
         ]
       },
       {
         &quot;name&quot;: &quot;I dig your edge.&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.83.d.n6.name&quot;,
+        &quot;text&quot;: &quot;You can be dark and edgy like me. Maybe for some of your life force...&quot;,
+        &quot;loctext&quot;: &quot;adv.debug_map.83.d.n5.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;colorIdentity&quot;: &quot;B&quot;,
+            &quot;not&quot;: true
+          },
+          {
+            &quot;hasLife&quot;: 2
+          }
+        ],
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;Not my life force, I'll die without it!&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.83.d.n7.name&quot;
+          },
+          {
+            &quot;name&quot;: &quot;I'm doing nothing better with it.&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.83.d.n8.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;setColorIdentity&quot;: &quot;B&quot;,
+                &quot;addLife&quot;: -2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I dig your edge.&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.83.d.n10.name&quot;,
         &quot;text&quot;: &quot;You don't have enough life force...come back with more to offer.\nEat healthy, read a book, get that soul juicy.&quot;,
-        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;B&quot;, &quot;not&quot;: true }, { &quot;hasLife&quot;:  2, &quot;not&quot;: true } ],
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;Aw man...&quot; } ]
+        &quot;loctext&quot;: &quot;adv.debug_map.83.d.n9.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;colorIdentity&quot;: &quot;B&quot;,
+            &quot;not&quot;: true
+          },
+          {
+            &quot;hasLife&quot;: 2,
+            &quot;not&quot;: true
+          }
+        ],
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;Aw man...&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.83.d.n11.name&quot;
+          }
+        ]
       },
       {
         &quot;name&quot;: &quot;Any cool demon deals?&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.83.d.n13.name&quot;,
         &quot;text&quot;: &quot;I can offer you this Treasure for the fair price of 200 gold.&quot;,
-        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;B&quot; }, { &quot;hasGold&quot;:  200 } ],
+        &quot;loctext&quot;: &quot;adv.debug_map.83.d.n12.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;colorIdentity&quot;: &quot;B&quot;
+          },
+          {
+            &quot;hasGold&quot;: 200
+          }
+        ],
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;This gem has a lot of edge, just like me. Deal!&quot; , &quot;action&quot;: [ { &quot;addGold&quot;: -200, &quot;addItem&quot;: &quot;Treasure&quot; } ] },
-          { &quot;name&quot;: &quot;I'll think about it.&quot; }
+          {
+            &quot;name&quot;: &quot;This gem has a lot of edge, just like me. Deal!&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.83.d.n14.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;addGold&quot;: -200,
+                &quot;addItem&quot;: &quot;Treasure&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;I'll think about it.&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.83.d.n15.name&quot;
+          }
         ]
       },
       {
-        &quot;name&quot;:&quot;Got any fancy demon blessing?&quot;,
+        &quot;name&quot;: &quot;Got any fancy demon blessing?&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.83.d.n17.name&quot;,
         &quot;text&quot;: &quot;Give me that Treasure of yours...\n(+1 health, Manasight, move speed 120%, Lord of the Pit starts in play)&quot;,
-        &quot;condition&quot;: [ {&quot;colorIdentity&quot;: &quot;B&quot;}, { &quot;item&quot;: &quot;Treasure&quot; }, { &quot;hasBlessing&quot;:  &quot;Debug Demon&quot;, &quot;not&quot;: true } ],
+        &quot;loctext&quot;: &quot;adv.debug_map.83.d.n16.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;colorIdentity&quot;: &quot;B&quot;
+          },
+          {
+            &quot;item&quot;: &quot;Treasure&quot;
+          },
+          {
+            &quot;hasBlessing&quot;: &quot;Debug Demon&quot;,
+            &quot;not&quot;: true
+          }
+        ],
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;That's shady.&quot;},
+          {
+            &quot;name&quot;: &quot;That's shady.&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.83.d.n18.name&quot;
+          },
           {
             &quot;name&quot;: &quot;What can possibly go wrong?&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.83.d.n19.name&quot;,
             &quot;action&quot;: [
-              { &quot;removeItem&quot;: &quot;Treasure&quot;, &quot;giveBlessing&quot;: { &quot;name&quot;: &quot;Debug Demon&quot; , &quot;lifeModifier&quot;: 1, &quot;colorView&quot;: true, &quot;moveSpeed&quot;: 2, &quot;startBattleWithCard&quot;: [ &quot;Lord of the Pit&quot; ] } }
+              {
+                &quot;removeItem&quot;: &quot;Treasure&quot;,
+                &quot;giveBlessing&quot;: {
+                  &quot;name&quot;: &quot;Debug Demon&quot;,
+                  &quot;lifeModifier&quot;: 1,
+                  &quot;colorView&quot;: true,
+                  &quot;moveSpeed&quot;: 2,
+                  &quot;startBattleWithCard&quot;: [
+                    &quot;Lord of the Pit&quot;
+                  ]
+                }
+              }
             ]
           }
         ]
       },
       {
         &quot;name&quot;: &quot;Hey what's your favorite color?&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.83.d.n21.name&quot;,
         &quot;text&quot;: &quot;Pink. It's the color of my favorite blood milkshakes.\nVery dark and evil.&quot;,
-        &quot;condition&quot;: [ {&quot;getQuestFlag&quot;:  { &quot;key&quot;:&quot;128&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;:1 } } ],
+        &quot;loctext&quot;: &quot;adv.debug_map.83.d.n20.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;getQuestFlag&quot;: {
+              &quot;key&quot;: &quot;128&quot;,
+              &quot;op&quot;: &quot;=&quot;,
+              &quot;val&quot;: 1
+            }
+          }
+        ],
         &quot;options&quot;: [
-          { &quot;name&quot;:  &quot;Thank you Satan.&quot;, &quot;action&quot;:  [ { &quot;setQuestFlag&quot;:  { &quot;key&quot;:&quot;128&quot;, &quot;val&quot;:3 } } ] }
+          {
+            &quot;name&quot;: &quot;Thank you Satan.&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.83.d.n22.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;setQuestFlag&quot;: {
+                  &quot;key&quot;: &quot;128&quot;,
+                  &quot;val&quot;: 3
+                }
+              }
+            ]
+          }
         ]
       }
     ]
@@ -382,20 +734,51 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;*glub*\n(According to your Fish to English dictionary, he's greeting you)&quot;,
-    &quot;options&quot;:[
-      { &quot;name&quot;:&quot;Glub.&quot; },
+    &quot;text&quot;: &quot;*glub*\n(According to your Fish to English dictionary, he's greeting you)&quot;,
+    &quot;loctext&quot;: &quot;adv.debug_map.91.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Glub.&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.91.d.n1.name&quot;
+      },
       {
         &quot;name&quot;: &quot;I like your fishiness. I would like to be blue and smell funny too.&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.91.d.n3.name&quot;,
         &quot;text&quot;: &quot;*glub*\n(Your color identify is now blue)&quot;,
-        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;U&quot;, &quot;not&quot;: true } ],
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;It's working. Man, I can go eat some krill right now.&quot;, &quot;action&quot;: [ { &quot;setColorIdentity&quot;: &quot;U&quot; } ]} ]
-      },{
-        &quot;name&quot;: &quot;I talked to the gate. Somehow I think you will find this relevant.&quot;,
-        &quot;text&quot;: &quot;*glub, glub*\n (Fascinating.)&quot;,
-        &quot;condition&quot;: [ {&quot;checkMapFlag&quot;: &quot;gate&quot; } ],
+        &quot;loctext&quot;: &quot;adv.debug_map.91.d.n2.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;colorIdentity&quot;: &quot;U&quot;,
+            &quot;not&quot;: true
+          }
+        ],
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;I know, right?&quot; }
+          {
+            &quot;name&quot;: &quot;It's working. Man, I can go eat some krill right now.&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.91.d.n4.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;setColorIdentity&quot;: &quot;U&quot;
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I talked to the gate. Somehow I think you will find this relevant.&quot;,
+        &quot;locname&quot;: &quot;adv.debug_map.91.d.n6.name&quot;,
+        &quot;text&quot;: &quot;*glub, glub*\n (Fascinating.)&quot;,
+        &quot;loctext&quot;: &quot;adv.debug_map.91.d.n5.text&quot;,
+        &quot;condition&quot;: [
+          {
+            &quot;checkMapFlag&quot;: &quot;gate&quot;
+          }
+        ],
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;I know, right?&quot;,
+            &quot;locname&quot;: &quot;adv.debug_map.91.d.n7.name&quot;
+          }
         ]
       }
     ]

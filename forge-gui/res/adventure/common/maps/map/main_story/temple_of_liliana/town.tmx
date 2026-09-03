@@ -172,45 +172,117 @@
   <object id="187" template="../../../obj/enemy.tx" x="864" y="464">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;street&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;street&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking street as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.2.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.2.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.2.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Necromancer"/>
     <property name="pursueRange" type="int" value="200"/>
     <property name="threatRange" type="int" value="5"/>
@@ -219,45 +291,117 @@
   <object id="188" template="../../../obj/enemy.tx" x="384" y="48">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;alley&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;alley&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking alley as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;alley&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;alley&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking alley as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.188.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.188.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.188.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Scarecrow"/>
     <property name="reward">[
   {
@@ -284,45 +428,117 @@
   <object id="192" template="../../../obj/enemy.tx" x="448" y="464">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;docks&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;docks&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking docks as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be at the docks.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;docks&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;docks&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking docks as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.192.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be at the docks.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.192.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.192.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="effect">{
  &quot;lifeModifier&quot;: 10,
 }</property>
@@ -342,45 +558,117 @@
   <object id="193" template="../../../obj/enemy.tx" x="640" y="112">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;warehouse&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;warehouse&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking warehouse as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the warehouse.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;warehouse&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;warehouse&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking warehouse as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.193.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the warehouse.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.193.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.193.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Demon"/>
     <property name="reward">[
   {
@@ -397,90 +685,234 @@
   <object id="197" template="../../../obj/enemy.tx" x="112" y="96">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;temple&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;temple&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking temple as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;temple&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;temple&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking temple as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.194.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.194.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.194.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Necromancer"/>
    </properties>
   </object>
   <object id="200" template="../../../obj/enemy.tx" x="784" y="512">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;street&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;street&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking street as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.200.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.200.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.200.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="High Vampire"/>
     <property name="reward">[
   {
@@ -622,45 +1054,117 @@
   <object id="209" template="../../../obj/enemy.tx" x="72" y="40">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;temple&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;temple&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking temple as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;temple&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;temple&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking temple as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.209.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.209.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.209.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Immersturm Demon"/>
     <property name="reward">[
   {
@@ -676,90 +1180,234 @@
   <object id="210" template="../../../obj/enemy.tx" x="32" y="96">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;temple&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;temple&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking temple as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;temple&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;temple&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking temple as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.210.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.210.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.210.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Necromancer"/>
    </properties>
   </object>
   <object id="211" template="../../../obj/enemy.tx" x="704" y="80">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;warehouse&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;warehouse&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking warehouse as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the warehouse.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;warehouse&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;warehouse&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking warehouse as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.211.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the warehouse.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.211.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.211.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Volcano Elemental"/>
     <property name="pursueRange" type="int" value="80"/>
     <property name="reward">[
@@ -777,45 +1425,117 @@
   <object id="212" template="../../../obj/enemy.tx" x="384" y="208">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;street&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;street&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking street as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.212.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.212.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.212.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="High Vampire"/>
     <property name="reward">[
   {
@@ -833,45 +1553,117 @@
   <object id="213" template="../../../obj/enemy.tx" x="544" y="64">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;hut&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;hut&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking hut as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the witch's hut.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;hut&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;hut&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking hut as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.213.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the witch's hut.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.213.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.213.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Bog Witch"/>
     <property name="reward">[
   {
@@ -888,45 +1680,117 @@
   <object id="214" template="../../../obj/enemy.tx" x="544" y="128">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;hut&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;hut&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking hut as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the witch's hut.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;hut&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;hut&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking hut as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.214.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the witch's hut.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.214.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.214.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Bog Witch"/>
     <property name="reward">[
   {
@@ -942,45 +1806,117 @@
   <object id="215" template="../../../obj/enemy.tx" x="167" y="50">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;alley&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;alley&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking alley as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;alley&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;alley&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking alley as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.215.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.215.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.215.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Rogue"/>
     <property name="reward">[
   {
@@ -996,45 +1932,117 @@
   <object id="216" template="../../../obj/enemy.tx" x="240" y="224">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;street&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;street&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking street as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.216.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.216.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.216.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Rakdos Wizard"/>
     <property name="reward">[
   {
@@ -1052,45 +2060,117 @@
   <object id="217" template="../../../obj/enemy.tx" x="72" y="144">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;temple&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;temple&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking temple as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;temple&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;temple&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking temple as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.217.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.217.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.217.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Orzhov Cleric"/>
     <property name="reward">[
   {
@@ -1106,45 +2186,117 @@
   <object id="218" template="../../../obj/enemy.tx" x="465" y="33">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;alley&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;alley&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking alley as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;alley&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;alley&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking alley as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.218.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.218.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.218.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Rogue"/>
     <property name="reward">[
   {
@@ -1161,45 +2313,117 @@
   <object id="219" template="../../../obj/enemy.tx" x="352" y="208">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;street&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;street&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking street as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.219.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.219.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.219.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="effect" value="{&quot;lifeModifier&quot;: 10, &quot;startBattleWithCard&quot;: [ &quot;Black Knight&quot; ]}"/>
     <property name="enemy" value="Death Knight"/>
     <property name="reward">[
@@ -1218,45 +2442,117 @@
   <object id="220" template="../../../obj/enemy.tx" x="223" y="64">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;tavern&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;tavern&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking tavern as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the tavern.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;tavern&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;tavern&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking tavern as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.220.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the tavern.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.220.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.220.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Liliana's Alchemist"/>
     <property name="reward">[
   {
@@ -1272,45 +2568,117 @@
   <object id="221" template="../../../obj/enemy.tx" x="576" y="224">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;street&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;street&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking street as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.221.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.221.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.221.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="effect">{
  &quot;lifeModifier&quot;: 10,
 }</property>
@@ -1331,45 +2699,117 @@
   <object id="222" template="../../../obj/enemy.tx" x="266" y="99">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;tavern&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;tavern&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking tavern as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the tavern.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;tavern&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;tavern&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking tavern as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.222.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the tavern.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.222.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.222.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Rakdos Wizard"/>
     <property name="reward">[
   {
@@ -1386,45 +2826,117 @@
   <object id="223" template="../../../obj/enemy.tx" x="416" y="240">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;street&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;street&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking street as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.223.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.223.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.223.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Skeleton Champion"/>
     <property name="reward">[
   {
@@ -1442,23 +2954,45 @@
   <object id="224" template="../../../obj/enemy.tx" x="48" y="288">
    <properties>
     <property name="defeatDialog">[
-{
-   &quot;text&quot;:&quot;You pry the key away from the mayor's cold, dead (and dead again) hands. Now that you have it, there's not much between you and Liliana.&quot;,
-   &quot;options&quot;:[
-	{&quot;name&quot;:&quot;(Continue)&quot;,
-&quot;action&quot;:[{&quot;deleteMapObject&quot;: 278}, {&quot;deleteMapObject&quot;: -1}]}
-	]
-}
+   {
+      &quot;text&quot;: &quot;You pry the key away from the mayor's cold, dead (and dead again) hands. Now that you have it, there's not much between you and Liliana.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.224.x.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: 278
+               },
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;The mayor can only keep away from you for so long before you manage to fight through the crowd and reach him.&quot;,
-    &quot;options&quot;:[
-      { &quot;name&quot;:&quot;Walk away&quot; },
-      { &quot;name&quot;:&quot;Attack the Mayor&quot;,
-	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]}
-      ]   
-   }
+    &quot;text&quot;: &quot;The mayor can only keep away from you for so long before you manage to fight through the crowd and reach him.&quot;,
+    &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.224.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Walk away&quot;,
+        &quot;locname&quot;: &quot;adv.shared.walk_away&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Attack the Mayor&quot;,
+        &quot;locname&quot;: &quot;adv.main_story_temple_of_liliana_town.224.d.n1.name&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;battleWithActorID&quot;: -1
+          }
+        ]
+      }
+    ]
+  }
 ]</property>
     <property name="effect">{
  &quot;lifeModifier&quot;: 15,
@@ -1533,45 +3067,117 @@
   <object id="235" template="../../../obj/enemy.tx" x="624" y="480">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;archive&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;archive&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking archive as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the archives.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;archive&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;archive&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking archive as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.235.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the archives.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.235.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.235.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Lich"/>
     <property name="reward">[
   {
@@ -1588,45 +3194,117 @@
   <object id="236" template="../../../obj/enemy.tx" x="96" y="208">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;street&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;street&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking street as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.236.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.236.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.236.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="effect" value="{&quot;lifeModifier&quot;: 10,&quot;startBattleWithCard&quot;: [ &quot;Captivating Vampire&quot; ]}"/>
     <property name="enemy" value="Vampire"/>
     <property name="reward">[
@@ -1645,27 +3323,37 @@
   <object id="237" template="../../../obj/dialog.tx" x="0" y="448" width="144" height="16">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;At the northern edge of the bog you find a small settlement of unusual make-up. Even deep withing in the swamplands, it is rare to see anywhere near so many denizens of the night and practitioners of unholy arts in one location.&quot;,
-   &quot;options&quot;: [
    {
-      &quot;name&quot;: &quot;(Continue)&quot;,
-      &quot;text&quot;: &quot;Ahead of you, you see a rather regal looking mage with a large key hanging from his belt. It seems the mayor is easy enough to identify. However, he yelps in recognition as you approach, and obviously is not interested in staying to chat with you.&quot;,
+      &quot;text&quot;: &quot;At the northern edge of the bog you find a small settlement of unusual make-up. Even deep withing in the swamplands, it is rare to see anywhere near so many denizens of the night and practitioners of unholy arts in one location.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.237.d.n0.text&quot;,
       &quot;options&quot;: [
-      {
-         &quot;name&quot;: &quot;(Continue)&quot;,
-         &quot;text&quot;: &quot;The mayor disappears in a cloud of black smoke, but you feel fairly certain that he's still somewhere in the area. It's just a matter of finding him.&quot;,
-      &quot;options&quot;: [
-      {
-         &quot;name&quot;: &quot;(Continue)&quot;,
-         &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-      }
-      ]
-      }
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;text&quot;: &quot;Ahead of you, you see a rather regal looking mage with a large key hanging from his belt. It seems the mayor is easy enough to identify. However, he yelps in recognition as you approach, and obviously is not interested in staying to chat with you.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.237.d.n1.text&quot;,
+            &quot;options&quot;: [
+               {
+                  &quot;name&quot;: &quot;(Continue)&quot;,
+                  &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                  &quot;text&quot;: &quot;The mayor disappears in a cloud of black smoke, but you feel fairly certain that he's still somewhere in the area. It's just a matter of finding him.&quot;,
+                  &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.237.d.n2.text&quot;,
+                  &quot;options&quot;: [
+                     {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                           {
+                              &quot;deleteMapObject&quot;: -1
+                           }
+                        ]
+                     }
+                  ]
+               }
+            ]
+         }
       ]
    }
-   ]
-}
 ]</property>
     <property name="type" value="dialog"/>
    </properties>
@@ -1714,45 +3402,117 @@
   <object id="240" template="../../../obj/enemy.tx" x="304" y="464">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;docks&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;docks&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking docks as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be at the docks.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;docks&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;docks&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking docks as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.240.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be at the docks.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.240.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.240.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="enemy" value="Eye"/>
     <property name="pursueRange" type="int" value="90"/>
     <property name="reward">[
@@ -1796,45 +3556,117 @@
   <object id="259" template="../../../obj/enemy.tx" x="288" y="320" visible="1">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;graveyard&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;graveyard&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;graveyard&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.259.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.259.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.259.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
 }</property>
     <property name="enemy" value="Greater Zombie"/>
@@ -1855,45 +3687,117 @@
   <object id="260" template="../../../obj/enemy.tx" x="464" y="336" visible="1">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;graveyard&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;graveyard&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;graveyard&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.260.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.260.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.260.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
     <property name="hidden" type="bool" value="true"/>
@@ -1913,45 +3817,117 @@
   <object id="262" template="../../../obj/enemy.tx" x="240" y="384" visible="1">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;graveyard&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;graveyard&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;graveyard&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.262.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.262.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.262.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
     <property name="hidden" type="bool" value="true"/>
@@ -1971,45 +3947,117 @@
   <object id="263" template="../../../obj/enemy.tx" x="368" y="368" visible="1">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;graveyard&quot;, &quot;not&quot;:true}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-],
-   &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
-      ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
-   }]
-   },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-   }
-]
-</property>
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;checkMapFlag&quot;: &quot;graveyard&quot;,
+                        &quot;not&quot;: true
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;graveyard&quot;
+                  },
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;placesAlreadyChecked&quot;
+                  },
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ],
+            &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.263.x.n0.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&lt;&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.263.x.n1.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Continue your search)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue_search&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;not&quot;: true
+                  },
+                  {
+                        &quot;getMapFlag&quot;: {
+                              &quot;key&quot;: &quot;placesAlreadyChecked&quot;,
+                              &quot;op&quot;: &quot;&gt;=&quot;,
+                              &quot;val&quot;: 6
+                        }
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;advanceMapFlag&quot;: &quot;mayorSpawned&quot;,
+                        &quot;activateMapObject&quot;: 224
+                  }
+            ],
+            &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.263.x.n2.text&quot;,
+            &quot;options&quot;: [
+                  {
+                        &quot;name&quot;: &quot;(Chase after them!!!)&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.chase&quot;,
+                        &quot;action&quot;: [
+                              {
+                                    &quot;deleteMapObject&quot;: -1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            &quot;condition&quot;: [
+                  {
+                        &quot;checkMapFlag&quot;: &quot;mayorSpawned&quot;
+                  }
+            ],
+            &quot;action&quot;: [
+                  {
+                        &quot;deleteMapObject&quot;: -1
+                  }
+            ]
+      }
+]</property>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
 }</property>
     <property name="enemy" value="Greater Zombie"/>
@@ -2083,10 +4131,19 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;Behind this gate, you see the legendary Liliana. She appears to be deep into a ritual of some sort. But to reach her, you need to find the mayor first.&quot;,
-    &quot;loctext&quot;:&quot;&quot;,
-    &quot;condition&quot;: [ { &quot;actorID&quot;: 224 } ],
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;(Continue)&quot; } ]
+    &quot;text&quot;: &quot;Behind this gate, you see the legendary Liliana. She appears to be deep into a ritual of some sort. But to reach her, you need to find the mayor first.&quot;,
+    &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.266.d.n0.text&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;actorID&quot;: 224
+      }
+    ],
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
+      }
+    ]
   }
 ]</property>
     <property name="type" value="dialog"/>
@@ -2128,21 +4185,29 @@
   <object id="282" template="../../../obj/dialog.tx" x="864" y="156" width="16" height="16">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Liliana's ritual appears to be nearing completion. You see a portal on the other side of her leading out of her domain.&quot;,
-   &quot;options&quot;: [
    {
-      &quot;name&quot;: &quot;(Continue)&quot;,
-      &quot;text&quot;: &quot;As you open the gate, she reaches the apex of her incantations, and the piles of dead on either side of the portal begin to rise. You must stop her before this horde of undead is set loose upon Shandalar!!!&quot;,
+      &quot;text&quot;: &quot;Liliana's ritual appears to be nearing completion. You see a portal on the other side of her leading out of her domain.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.282.d.n0.text&quot;,
       &quot;options&quot;: [
-      {
-         &quot;name&quot;: &quot;(Continue)&quot;,
-         &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
-      }
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;text&quot;: &quot;As you open the gate, she reaches the apex of her incantations, and the piles of dead on either side of the portal begin to rise. You must stop her before this horde of undead is set loose upon Shandalar!!!&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_town.282.d.n1.text&quot;,
+            &quot;options&quot;: [
+               {
+                  &quot;name&quot;: &quot;(Continue)&quot;,
+                  &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                  &quot;action&quot;: [
+                     {
+                        &quot;deleteMapObject&quot;: -1
+                     }
+                  ]
+               }
+            ]
+         }
       ]
    }
-   ]
-}
 ]</property>
     <property name="type" value="dialog"/>
    </properties>

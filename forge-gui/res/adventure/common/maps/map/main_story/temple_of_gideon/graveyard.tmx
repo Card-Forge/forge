@@ -410,37 +410,78 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;At the edge of a reflecting pool stands a carved stone depiction angel. Posed as if fighting while in flight, the air around the statue's sword and shield shimmers with a prismatic haze. In another setting, it would be majestic. But here, it is ominous.&quot;,
-    &quot;condition&quot;: [ { &quot;actorID&quot;: 254 } ],
-    &quot;options&quot;:[
-      { &quot;name&quot;:&quot;Leave&quot; },
+    &quot;text&quot;: &quot;At the edge of a reflecting pool stands a carved stone depiction angel. Posed as if fighting while in flight, the air around the statue's sword and shield shimmers with a prismatic haze. In another setting, it would be majestic. But here, it is ominous.&quot;,
+    &quot;loctext&quot;: &quot;adv.main_story_temple_of_gideon_graveyard.256.d.n0.text&quot;,
+    &quot;condition&quot;: [
       {
-        &quot;name&quot;:&quot;Take a closer look at the statue&quot;,
+        &quot;actorID&quot;: 254
+      }
+    ],
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Take a closer look at the statue&quot;,
+        &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_graveyard.256.d.n2.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the monument. You also begin to note that many of the familiar holy symbols engraved around the base are twisted, incomplete, altered, or otherwise seem 'wrong'.&quot;,
+        &quot;loctext&quot;: &quot;adv.main_story_temple_of_gideon_graveyard.256.d.n1.text&quot;,
         &quot;options&quot;: [
-	{ &quot;name&quot;:&quot;Leave&quot; },
-	{ &quot;name&quot;:&quot;Drain the power from the statue&quot;,
-	  &quot;text&quot;:&quot;Whatever you're doing, it seems to be working. The glow around the statue's armaments begins to clear away, as does the barrier around the graveyard. You also find that you are able to channel this energy, and feel somewhat refreshed by it. (+15 health recovered)&quot;,
-	  &quot;action&quot;:[{&quot;addLife&quot;:15}],
-	  &quot;options&quot;:[{
-		&quot;name&quot;:&quot;(Continue)&quot;,
-		&quot;text&quot;:&quot;The statue begins to crack and shift, but it does not crumble. Instead, it speaks: \&quot;YOU INTERFERE WITH POWERS YOU KNOW NOTHING OF, MORTAL!!\&quot;. You have little time to process this before it attacks!&quot;,
-		&quot;options&quot;:[{		
-&quot;name&quot;:&quot;Prepare yourself!&quot;,
-&quot;action&quot;: [{ &quot;activateMapObject&quot;: 254 } ]
-		}]
-		}]
-	}
-	
+          {
+            &quot;name&quot;: &quot;Leave&quot;,
+            &quot;locname&quot;: &quot;adv.shared.leave&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Drain the power from the statue&quot;,
+            &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_graveyard.256.d.n4.name&quot;,
+            &quot;text&quot;: &quot;Whatever you're doing, it seems to be working. The glow around the statue's armaments begins to clear away, as does the barrier around the graveyard. You also find that you are able to channel this energy, and feel somewhat refreshed by it. (+15 health recovered)&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_temple_of_gideon_graveyard.256.d.n3.text&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;addLife&quot;: 15
+              }
+            ],
+            &quot;options&quot;: [
+              {
+                &quot;name&quot;: &quot;(Continue)&quot;,
+                &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                &quot;text&quot;: &quot;The statue begins to crack and shift, but it does not crumble. Instead, it speaks: \&quot;YOU INTERFERE WITH POWERS YOU KNOW NOTHING OF, MORTAL!!\&quot;. You have little time to process this before it attacks!&quot;,
+                &quot;loctext&quot;: &quot;adv.main_story_temple_of_gideon_graveyard.256.d.n5.text&quot;,
+                &quot;options&quot;: [
+                  {
+                    &quot;name&quot;: &quot;Prepare yourself!&quot;,
+                    &quot;locname&quot;: &quot;adv.shared.prepare&quot;,
+                    &quot;action&quot;: [
+                      {
+                        &quot;activateMapObject&quot;: 254
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
         ]
       }
-      ]
-   },
-   {
-        &quot;text&quot;: &quot;With the statue destroyed, you no longer feel the heavy presence you felt before that pushed you away from the boundaries of the graveyard.&quot;,
-        &quot;condition&quot;: [ { &quot;actorID&quot;: 254, &quot;not&quot;: true } ],
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;Look for a way out&quot; } ]
+    ]
+  },
+  {
+    &quot;text&quot;: &quot;With the statue destroyed, you no longer feel the heavy presence you felt before that pushed you away from the boundaries of the graveyard.&quot;,
+    &quot;loctext&quot;: &quot;adv.main_story_temple_of_gideon_graveyard.256.d.n6.text&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;actorID&quot;: 254,
+        &quot;not&quot;: true
       }
+    ],
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Look for a way out&quot;,
+        &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_graveyard.256.d.n7.name&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>

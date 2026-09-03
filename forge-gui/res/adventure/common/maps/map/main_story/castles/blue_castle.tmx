@@ -93,61 +93,97 @@
 	{
 		&quot;name&quot;: &quot;&quot;,
 		&quot;text&quot;: &quot;You come upon a gate.&quot;,
-		&quot;loctext&quot;: &quot;&quot;,
+		&quot;loctext&quot;: &quot;adv.main_story_castles_blue_castle.55.d.n0.text&quot;,
 		&quot;action&quot;: [
-			{ &quot;advanceMapFlag&quot;: &quot;intro&quot; }
+			{
+				&quot;advanceMapFlag&quot;: &quot;intro&quot;
+			}
 		],
-		&quot;options&quot;:
-			[
-				{
-					&quot;name&quot;: &quot;Lorthos, I've done as you asked! It's time to end this!&quot;,
-					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
-					&quot;condition&quot;: [
-						{
-							&quot;getMapFlag&quot;: {
-								&quot;key&quot;: &quot;enemiesDefeated&quot;,
-								&quot;op&quot;: &quot;&gt;=&quot;,
-								&quot;val&quot;: 4
-							}
-						},
-						{
-                            &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;,
-                            &quot;not&quot;: true
-                        }
-					],
-					&quot;text&quot;: &quot;Suddenly, the gate disappears right in front of your eyes. You are now free to pass.&quot;,
-					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
-				},
-				{
-                	&quot;name&quot;: &quot;Lorthos, I've done as you asked! It's time to end this!&quot;,
-                	&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 },{ &quot;deleteMapObject&quot;: 85 } ],
-                	&quot;condition&quot;: [
-                		{
-                			&quot;getMapFlag&quot;: {
-                				&quot;key&quot;: &quot;enemiesDefeated&quot;,
-                				&quot;op&quot;: &quot;&gt;=&quot;,
-                				&quot;val&quot;: 4
-                			}
-                		},
-                		{
-                             &quot;checkQuestFlag&quot;: &quot;Ch1BlueCastleComplete&quot;,
-                             &quot;not&quot;: true
-                        },
-                        {
-                             &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;
-                        }
-                	],
-                		&quot;text&quot;: &quot;Suddenly, the gate disappears right in front of your eyes. You are now free to pass.&quot;,
-                		&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
-                },
-				{
-					&quot;name&quot;: &quot;You knock on the door.&quot;,
-					&quot;condition&quot;: [ { &quot;checkMapFlag&quot;: &quot;intro&quot; } ],
-					&quot;text&quot;: &quot;YOU ARE NOT WORTHY, BEGONE!&quot;,
-					&quot;loctext&quot;: &quot;&quot;,
-					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
-				}
-			]
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;Lorthos, I've done as you asked! It's time to end this!&quot;,
+				&quot;locname&quot;: &quot;adv.main_story_castles_blue_castle.55.d.n2.name&quot;,
+				&quot;action&quot;: [
+					{
+						&quot;deleteMapObject&quot;: 55
+					}
+				],
+				&quot;condition&quot;: [
+					{
+						&quot;getMapFlag&quot;: {
+							&quot;key&quot;: &quot;enemiesDefeated&quot;,
+							&quot;op&quot;: &quot;&gt;=&quot;,
+							&quot;val&quot;: 4
+						}
+					},
+					{
+						&quot;checkQuestFlag&quot;: &quot;mainQuest&quot;,
+						&quot;not&quot;: true
+					}
+				],
+				&quot;text&quot;: &quot;Suddenly, the gate disappears right in front of your eyes. You are now free to pass.&quot;,
+				&quot;loctext&quot;: &quot;adv.main_story_castles_blue_castle.55.d.n1.text&quot;,
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;(Continue)&quot;,
+						&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
+					}
+				]
+			},
+			{
+				&quot;name&quot;: &quot;Lorthos, I've done as you asked! It's time to end this!&quot;,
+				&quot;locname&quot;: &quot;adv.main_story_castles_blue_castle.55.d.n4.name&quot;,
+				&quot;action&quot;: [
+					{
+						&quot;deleteMapObject&quot;: 55
+					},
+					{
+						&quot;deleteMapObject&quot;: 85
+					}
+				],
+				&quot;condition&quot;: [
+					{
+						&quot;getMapFlag&quot;: {
+							&quot;key&quot;: &quot;enemiesDefeated&quot;,
+							&quot;op&quot;: &quot;&gt;=&quot;,
+							&quot;val&quot;: 4
+						}
+					},
+					{
+						&quot;checkQuestFlag&quot;: &quot;Ch1BlueCastleComplete&quot;,
+						&quot;not&quot;: true
+					},
+					{
+						&quot;checkQuestFlag&quot;: &quot;mainQuest&quot;
+					}
+				],
+				&quot;text&quot;: &quot;Suddenly, the gate disappears right in front of your eyes. You are now free to pass.&quot;,
+				&quot;loctext&quot;: &quot;adv.main_story_castles_blue_castle.55.d.n3.text&quot;,
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;(Continue)&quot;,
+						&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
+					}
+				]
+			},
+			{
+				&quot;name&quot;: &quot;You knock on the door.&quot;,
+				&quot;locname&quot;: &quot;adv.main_story_castles_blue_castle.55.d.n6.name&quot;,
+				&quot;condition&quot;: [
+					{
+						&quot;checkMapFlag&quot;: &quot;intro&quot;
+					}
+				],
+				&quot;text&quot;: &quot;YOU ARE NOT WORTHY, BEGONE!&quot;,
+				&quot;loctext&quot;: &quot;adv.main_story_castles_blue_castle.55.d.n5.text&quot;,
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;(Continue)&quot;,
+						&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
+					}
+				]
+			}
+		]
 	}
 ]</property>
    </properties>
@@ -368,22 +404,28 @@
   </object>
   <object id="85" template="../../../obj/enemy.tx" x="398.667" y="652.667">
    <properties>
-    <property name="dialog">
-[
+    <property name="dialog">[
 	{
 		&quot;text&quot;: &quot;Welcome, {var=player_name}. Lorthos has been waiting eagerly for this moment.&quot;,
+		&quot;loctext&quot;: &quot;adv.main_story_castles_blue_castle.85.d.n0.text&quot;,
 		&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
+				&quot;locname&quot;: &quot;adv.main_story_castles_blue_castle.85.d.n2.name&quot;,
 				&quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Lorthos, master of the depths of the sea.&quot;,
+				&quot;loctext&quot;: &quot;adv.main_story_castles_blue_castle.85.d.n1.text&quot;,
 				&quot;options&quot;: [
 					{
 						&quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
+						&quot;locname&quot;: &quot;adv.main_story_castles_blue_castle.85.d.n4.name&quot;,
 						&quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
+						&quot;loctext&quot;: &quot;adv.main_story_castles_blue_castle.85.d.n3.text&quot;,
 						&quot;options&quot;: [
 							{
 								&quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I do defeat your challengers.&quot;,
+								&quot;locname&quot;: &quot;adv.main_story_castles_blue_castle.85.d.n5.name&quot;,
 								&quot;text&quot;: &quot;Leave&quot;,
+								&quot;loctext&quot;: &quot;adv.shared.leave&quot;,
 								&quot;action&quot;: [
 									{
 										&quot;setMapFlag&quot;: {
@@ -391,7 +433,6 @@
 											&quot;val&quot;: 1
 										}
 									}
-
 								]
 							}
 						]
@@ -402,18 +443,22 @@
 	},
 	{
 		&quot;text&quot;: &quot;The challengers are still alive, you shall not pass beyond this gate.&quot;,
+		&quot;loctext&quot;: &quot;adv.main_story_castles_blue_castle.85.d.n6.text&quot;,
 		&quot;condition&quot;: [
-			{ &quot;checkMapFlag&quot;: &quot;TalkToDoorGreeter&quot; }
-				],
-			&quot;options&quot;: [
 			{
-				&quot;name&quot;: &quot;(Continue)&quot;
-				}
+				&quot;checkMapFlag&quot;: &quot;TalkToDoorGreeter&quot;
+			}
+		],
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;,
+				&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
+			}
 		]
-
 	},
 	{
 		&quot;text&quot;: &quot;I am impressed, you are welcome to meet my master upstairs, though I can't guarantee you will be able to survive that encounter.&quot;,
+		&quot;loctext&quot;: &quot;adv.main_story_castles_blue_castle.85.d.n7.text&quot;,
 		&quot;condition&quot;: [
 			{
 				&quot;getMapFlag&quot;: {
@@ -426,8 +471,11 @@
 		&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;(Continue)&quot;,
+				&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
 				&quot;action&quot;: [
-					{ &quot;deleteMapObject&quot;: -1 }
+					{
+						&quot;deleteMapObject&quot;: -1
+					}
 				]
 			}
 		]

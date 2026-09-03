@@ -19,6 +19,8 @@ public class Localizer {
     private Locale locale;
     private ResourceBundle resourceBundle;
     private ResourceBundle englishBundle;
+    private ResourceBundle adventureBundle;
+    private String currentLanguageRegionID;
     private boolean silent = false;
     private boolean english = false;
 
@@ -81,10 +83,12 @@ public class Localizer {
     }
     public String getMessage(boolean forcedEnglish, final String key, final Object... messageArguments) {
         MessageFormat formatter = null;
+        String rawValue = null;
 
         try {
             //formatter = new MessageFormat(resourceBundle.getString(key.toLowerCase()), locale);
-            formatter = new MessageFormat(english || forcedEnglish ? englishBundle.getString(key) : resourceBundle.getString(key), english || forcedEnglish ? Locale.ENGLISH : locale);
+            rawValue = lookup(key, english || forcedEnglish);
+            formatter = new MessageFormat(rawValue, english || forcedEnglish ? Locale.ENGLISH : locale);
         } catch (final IllegalArgumentException | MissingResourceException e) {
             if (!silent)
                 e.printStackTrace();
@@ -101,6 +105,7 @@ public class Localizer {
             try {
                 formatter = new MessageFormat(englishBundle.getString(key), Locale.ENGLISH);
                 forcedEnglish = true;
+                rawValue = englishBundle.getString(key);
             } catch (final IllegalArgumentException | MissingResourceException e) {
                 if (!silent) {
                     e.printStackTrace();
@@ -116,7 +121,7 @@ public class Localizer {
         String formattedMessage = "CHAR ENCODING ERROR";
         final String[] charsets = { "ISO-8859-1", "UTF-8" };
         //Support non-English-standard characters
-        String detectedCharset = charset(english || forcedEnglish ? englishBundle.getString(key) : resourceBundle.getString(key), charsets);
+        String detectedCharset = charset(rawValue, charsets);
 
         final int argLength = messageArguments.length;
         Object[] syncEncodingMessageArguments = new Object[argLength];
@@ -157,6 +162,7 @@ public class Localizer {
             }
 
             ClassLoader loader = new URLClassLoader(urls);
+            currentLanguageRegionID = languageRegionID;
 
             try {
                 resourceBundle = ResourceBundle.getBundle(languageRegionID, new Locale(splitLocale[0], splitLocale[1]), loader);
@@ -167,10 +173,52 @@ public class Localizer {
                 e.printStackTrace();
             }
 
+            //Adventure Mode translations are NOT loaded here. This class is shared by
+            //every game mode, so it never scans for or depends on Adventure-specific
+            //assets on its own. Adventure Mode code calls loadAdventureBundle(plane)
+            //explicitly, only when it actually needs to (selecting a plane to play,
+            //or loading/starting a save), keeping this class agnostic of Adventure.
+            adventureBundle = null;
+
             System.out.println("Language '" + resourceBundle.getBaseBundleName() + "' loaded successfully.");
 
             notifyObservers();
         }
+    }
+
+    //Called explicitly by Adventure Mode code -- when a plane is selected to
+    //play, when a save is loaded, and when a new game is started -- never
+    //automatically from setLanguage(). "languagesDirectory" is that plane's
+    //OWN languages folder (e.g. ".../adventure/Shandalar/languages/"), kept
+    //with that plane's data rather than centralized, so a plane's
+    //translations can ship (or be omitted) independently of any other
+    //plane's. Loads ONLY that folder's bundle, no fallback to any other
+    //plane's translations; if "languagesDirectory" is null/empty, or has no
+    //translation file for the current language, dialog simply falls back to
+    //the English text already embedded in the .tmx (see MapDialog/MenuScene's
+    //getMessageorUseDefault calls). Safe to call multiple times, e.g. if the
+    //active plane changes mid-session.
+    public void loadAdventureBundle(final String languagesDirectory) {
+        if (currentLanguageRegionID == null || languagesDirectory == null || languagesDirectory.isEmpty()) {
+            adventureBundle = null;
+            return;
+        }
+        try {
+            URL[] urls = { new File(languagesDirectory).toURI().toURL() };
+            ClassLoader adventureLoader = new URLClassLoader(urls);
+            adventureBundle = ResourceBundle.getBundle("adventure-" + currentLanguageRegionID, locale, adventureLoader);
+        } catch (final MalformedURLException | NullPointerException | MissingResourceException e) {
+            adventureBundle = null;
+        }
+    }
+
+    private String lookup(final String key, final boolean forceEnglish) {
+        if (!forceEnglish && adventureBundle != null) {
+            try {
+                return adventureBundle.getString(key);
+            } catch (final MissingResourceException ignored) {}
+        }
+        return (forceEnglish ? englishBundle : resourceBundle).getString(key);
     }
 
     public void registerObserver(LocalizationChangeObserver observer) {

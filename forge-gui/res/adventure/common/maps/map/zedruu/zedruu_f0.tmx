@@ -223,18 +223,43 @@
   </object>
   <object id="223" template="../../obj/gate.tx" x="257.175" y="456.105">
    <properties>
-    <property name="dialog">[{
-    &quot;text&quot;:&quot;This door is locked.&quot;,
-    &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; },
-    {      
-        &quot;name&quot;:&quot;Unlock with Basement Key&quot;,     
-        &quot;condition&quot;:[{&quot;item&quot;:&quot;Basement Key&quot;}],    
-        &quot;text&quot;:&quot;The gate is unlocked.&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Basement Key&quot;}]} ]
+    <property name="dialog">[
+    {
+        &quot;text&quot;: &quot;This door is locked.&quot;,
+        &quot;loctext&quot;: &quot;adv.zedruu_zedruu_f0.223.d.n0.text&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;Leave&quot;,
+                &quot;locname&quot;: &quot;adv.shared.leave&quot;
+            },
+            {
+                &quot;name&quot;: &quot;Unlock with Basement Key&quot;,
+                &quot;locname&quot;: &quot;adv.zedruu_zedruu_f0.223.d.n2.name&quot;,
+                &quot;condition&quot;: [
+                    {
+                        &quot;item&quot;: &quot;Basement Key&quot;
+                    }
+                ],
+                &quot;text&quot;: &quot;The gate is unlocked.&quot;,
+                &quot;loctext&quot;: &quot;adv.zedruu_zedruu_f0.223.d.n1.text&quot;,
+                &quot;options&quot;: [
+                    {
+                        &quot;name&quot;: &quot;Continue&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue&quot;,
+                        &quot;action&quot;: [
+                            {
+                                &quot;deleteMapObject&quot;: -1
+                            },
+                            {
+                                &quot;removeItem&quot;: &quot;Basement Key&quot;
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
-    ]
-}]</property>
+]</property>
    </properties>
   </object>
   <object id="224" template="../../obj/waypoint.tx" x="95.8421" y="398.105"/>

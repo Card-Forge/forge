@@ -90,26 +90,32 @@
   <object id="59" name="switch" type="dialog" gid="4426" x="434.333" y="484.333" width="16" height="16">
    <properties>
     <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
-    &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;Leave&quot; } 	
-	] 
-	} 
-	
+  {
+    &quot;text&quot;: &quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;,
+    &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt_5.59.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>
   <object id="60" name="switch" type="dialog" gid="4426" x="434.333" y="338.667" width="16" height="16">
    <properties>
     <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
-    &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;Leave&quot; } 	
-	] 
-	} 
-	
+  {
+    &quot;text&quot;: &quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;,
+    &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt_5.60.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>
@@ -118,47 +124,63 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;A big switch is embedded into the wall.&quot;,
+    &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt_5.62.d.n0.text&quot;,
     &quot;options&quot;: [
       {
         &quot;text&quot;: &quot;You hear some loud sounds coming from the north.&quot;,
+        &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt_5.62.d.n1.text&quot;,
         &quot;name&quot;: &quot;Flip the switch&quot;,
+        &quot;locname&quot;: &quot;adv.graveyard_crypt_crypt_5.62.d.n2.name&quot;,
         &quot;options&quot;: [
           {
-            &quot;action&quot;: [ { &quot;deleteMapObject&quot;: 65 } ],
-            &quot;name&quot;: &quot;Continue&quot;
+            &quot;action&quot;: [
+              {
+                &quot;deleteMapObject&quot;: 65
+              }
+            ],
+            &quot;name&quot;: &quot;Continue&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue&quot;
           }
         ]
       },
-      { &quot;name&quot;: &quot;Leave&quot; }
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
     ]
   }
-
 ]</property>
    </properties>
   </object>
   <object id="63" name="switch" type="dialog" gid="4426" x="160.333" y="626.667" width="16" height="16">
    <properties>
     <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
-    &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;Leave&quot; } 	
-	] 
-	} 
-	
+  {
+    &quot;text&quot;: &quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;,
+    &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt_5.63.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>
   <object id="64" name="switch" type="dialog" gid="4426" x="448.667" y="627" width="16" height="16">
    <properties>
     <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
-    &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;Leave&quot; } 	
-	] 
-	} 
-	
+  {
+    &quot;text&quot;: &quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;,
+    &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt_5.64.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>
@@ -166,8 +188,14 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;This gate appears to be locked in place by some mechanism, but you do not see any controls here.&quot;,
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;Time to find them!&quot; } ]
+    &quot;text&quot;: &quot;This gate appears to be locked in place by some mechanism, but you do not see any controls here.&quot;,
+    &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt_5.65.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Time to find them!&quot;,
+        &quot;locname&quot;: &quot;adv.graveyard_crypt_crypt_5.65.d.n1.name&quot;
+      }
+    ]
   }
 ]</property>
    </properties>
@@ -175,26 +203,32 @@
   <object id="66" name="switch" type="dialog" gid="4426" x="430.667" y="194" width="16" height="16">
    <properties>
     <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
-    &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;Leave&quot; } 	
-	] 
-	} 
-	
+  {
+    &quot;text&quot;: &quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;,
+    &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt_5.66.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>
   <object id="67" name="switch" type="dialog" gid="4426" x="173.667" y="194" width="16" height="16">
    <properties>
     <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
-    &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;Leave&quot; } 	
-	] 
-	} 
-	
+  {
+    &quot;text&quot;: &quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;,
+    &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt_5.67.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>
@@ -290,13 +324,16 @@
   <object id="81" name="switch" type="dialog" gid="4426" x="192" y="340" width="16" height="16">
    <properties>
     <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
-    &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;Leave&quot; } 	
-	] 
-	} 
-	
+  {
+    &quot;text&quot;: &quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;,
+    &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt_5.79.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>

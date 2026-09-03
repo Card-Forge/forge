@@ -135,11 +135,15 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;The inscription reads: Welcome to the fishing village Haran&quot;,
-    &quot;options&quot;:[
-      { &quot;name&quot;:&quot;Leave&quot; }
-]
-}
+    &quot;text&quot;: &quot;The inscription reads: Welcome to the fishing village Haran&quot;,
+    &quot;loctext&quot;: &quot;adv.snowabbey_snowabbey_1.78.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>

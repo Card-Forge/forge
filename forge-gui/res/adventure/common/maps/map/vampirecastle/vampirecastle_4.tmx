@@ -201,20 +201,33 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;A big gate is blocking the path. Through the bars you can see an imposing figure in the room beyond.&quot;,
+    &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_4.82.d.n0.text&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Leave&quot; },
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      },
       {
         &quot;name&quot;: &quot;Unlock with the key&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_4.82.d.n2.name&quot;,
         &quot;condition&quot;: [
-          { &quot;item&quot;: &quot;Sorin's Key&quot; }
+          {
+            &quot;item&quot;: &quot;Sorin's Key&quot;
+          }
         ],
         &quot;text&quot;: &quot;The gate is unlocked.&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_4.82.d.n1.text&quot;,
         &quot;options&quot;: [
           {
             &quot;name&quot;: &quot;Continue&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue&quot;,
             &quot;action&quot;: [
-              { &quot;deleteMapObject&quot;: -1 },
-              { &quot;removeItem&quot;: &quot;Sorin's Key&quot; }
+              {
+                &quot;deleteMapObject&quot;: -1
+              },
+              {
+                &quot;removeItem&quot;: &quot;Sorin's Key&quot;
+              }
             ]
           }
         ]
@@ -262,23 +275,31 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;The poor peasant cowers before you.&quot;,
+    &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_4.98.d.n0.text&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;You are free to go, Sorin has been dealt with.&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_4.98.d.n2.name&quot;,
         &quot;text&quot;: &quot;Thanks... Thank you sir, please take this item as a token of my gratitude.&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_4.98.d.n1.text&quot;,
         &quot;options&quot;: [
           {
-              &quot;name&quot;: &quot;(Take the Challenge Coin)&quot;,            
-              &quot;action&quot;: [
-              { &quot;deleteMapObject&quot;: -1 },
-              { &quot;addItem&quot;: &quot;Challenge Coin&quot; }
+            &quot;name&quot;: &quot;(Take the Challenge Coin)&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_4.98.d.n3.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;deleteMapObject&quot;: -1
+              },
+              {
+                &quot;addItem&quot;: &quot;Challenge Coin&quot;
+              }
             ]
           }
         ]
       }
     ]
   }
-] </property>
+]</property>
     <property name="displayNameOverride" value="Captive"/>
     <property name="enemy" value="Farmer"/>
     <property name="speedModifier" type="float" value="30"/>

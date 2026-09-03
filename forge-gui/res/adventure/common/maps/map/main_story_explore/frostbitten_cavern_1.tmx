@@ -38,27 +38,42 @@
 ]</property>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;The mage at the heart of the cavern snarls at you, \&quot;If my companions haven't given you a cold enough welcoming, allow me...\&quot; &quot;,
-    &quot;options&quot;:[
+    &quot;text&quot;: &quot;The mage at the heart of the cavern snarls at you, \&quot;If my companions haven't given you a cold enough welcoming, allow me...\&quot; &quot;,
+    &quot;loctext&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.8.d.n0.text&quot;,
+    &quot;options&quot;: [
       {
-        &quot;name&quot;:&quot;\&quot;I just need one of those flowers...\&quot;&quot;,
-        &quot;text&quot;:&quot;\&quot;No. Now begone with you.&quot;,
-        &quot;options&quot;:[
-            {
-              &quot;name&quot;:&quot;(Fight)&quot;,
-              &quot;action&quot;: [ { &quot;battleWithActorID&quot;: -1 } ]
-            },
-            {
-              &quot;name&quot;:&quot;(Flee)&quot;
-            }
-         ]
+        &quot;name&quot;: &quot;\&quot;I just need one of those flowers...\&quot;&quot;,
+        &quot;locname&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.8.d.n2.name&quot;,
+        &quot;text&quot;: &quot;\&quot;No. Now begone with you.&quot;,
+        &quot;loctext&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.8.d.n1.text&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;(Fight)&quot;,
+            &quot;locname&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.8.d.n3.name&quot;,
+            &quot;action&quot;: [
+              {
+                &quot;battleWithActorID&quot;: -1
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;(Flee)&quot;,
+            &quot;locname&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.8.d.n4.name&quot;
+          }
+        ]
       },
       {
-        &quot;name&quot;:&quot;(Fight)&quot;,
-        &quot;action&quot;: [ { &quot;battleWithActorID&quot;: -1 } ]
+        &quot;name&quot;: &quot;(Fight)&quot;,
+        &quot;locname&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.8.d.n5.name&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;battleWithActorID&quot;: -1
+          }
+        ]
       },
       {
-        &quot;name&quot;:&quot;(Flee)&quot;
+        &quot;name&quot;: &quot;(Flee)&quot;,
+        &quot;locname&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.8.d.n6.name&quot;
       }
     ]
   }
@@ -131,11 +146,21 @@
   <object id="23" template="../../obj/dialog.tx" x="280" y="305" width="46" height="28">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Flowers grow, or attempt to, in all corners of the cave. Stalactites of ice dot a bright white roof of the cave like a chandelier, and it is much warmer in here than you would have expected.&quot;,
-   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}],
-   &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
-}
+   {
+      &quot;text&quot;: &quot;Flowers grow, or attempt to, in all corners of the cave. Stalactites of ice dot a bright white roof of the cave like a chandelier, and it is much warmer in here than you would have expected.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.19.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
+         }
+      ],
+      &quot;action&quot;: [
+         {
+            &quot;deleteMapObject&quot;: -1
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
@@ -163,9 +188,11 @@
     <property name="dialog">[
     {
         &quot;text&quot;: &quot;This flower has a very rich violet hue to it.&quot;,
+        &quot;loctext&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.25.d.n0.text&quot;,
         &quot;options&quot;: [
             {
                 &quot;name&quot;: &quot;Take the flower&quot;,
+                &quot;locname&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.25.d.n1.name&quot;,
                 &quot;action&quot;: [
                     {
                         &quot;deleteMapObject&quot;: -1,
@@ -190,9 +217,11 @@
     <property name="dialog">[
     {
         &quot;text&quot;: &quot;This flower is a very romantic shade of scarlet.&quot;,
+        &quot;loctext&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.26.d.n0.text&quot;,
         &quot;options&quot;: [
             {
                 &quot;name&quot;: &quot;Take the flower&quot;,
+                &quot;locname&quot;: &quot;adv.main_story_explore_frostbitten_cavern_1.26.d.n1.name&quot;,
                 &quot;action&quot;: [
                     {
                         &quot;deleteMapObject&quot;: -1,

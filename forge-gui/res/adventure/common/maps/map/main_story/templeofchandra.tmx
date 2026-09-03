@@ -347,8 +347,14 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;This ominous black gate stands between you and your goal and/or doom. Well-oiled gears are holding it closed.&quot;,
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;Leave&quot; } ]
+    &quot;text&quot;: &quot;This ominous black gate stands between you and your goal and/or doom. Well-oiled gears are holding it closed.&quot;,
+    &quot;loctext&quot;: &quot;adv.main_story_templeofchandra.1.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
   }
 ]</property>
    </properties>
@@ -420,13 +426,16 @@
   <object id="10" name="switch" type="dialog" gid="4426" x="276.038" y="279.87" width="16" height="16">
    <properties>
     <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
-    &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;Leave&quot; } 	
-	] 
-	} 
-	
+  {
+    &quot;text&quot;: &quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;,
+    &quot;loctext&quot;: &quot;adv.main_story_templeofchandra.10.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>
@@ -434,8 +443,14 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;This gate appears to be connected to the machinery to the west.&quot;,
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;Now to find a way to turn it on...&quot; } ]
+    &quot;text&quot;: &quot;This gate appears to be connected to the machinery to the west.&quot;,
+    &quot;loctext&quot;: &quot;adv.main_story_templeofchandra.11.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Now to find a way to turn it on...&quot;,
+        &quot;locname&quot;: &quot;adv.main_story_templeofchandra.11.d.n1.name&quot;
+      }
+    ]
   }
 ]</property>
    </properties>
@@ -463,13 +478,16 @@
   <object id="16" name="switch" type="dialog" gid="4426" x="921" y="115" width="16" height="16">
    <properties>
     <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
-    &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;Leave&quot; } 	
-	] 
-	} 
-	
+  {
+    &quot;text&quot;: &quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;,
+    &quot;loctext&quot;: &quot;adv.main_story_templeofchandra.16.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>
@@ -477,8 +495,14 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;This gate appears to be locked in place by some mechanism, but you do not see any controls here.&quot;,
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;Time to find them!&quot; } ]
+    &quot;text&quot;: &quot;This gate appears to be locked in place by some mechanism, but you do not see any controls here.&quot;,
+    &quot;loctext&quot;: &quot;adv.main_story_templeofchandra.17.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Time to find them!&quot;,
+        &quot;locname&quot;: &quot;adv.main_story_templeofchandra.17.d.n1.name&quot;
+      }
+    ]
   }
 ]</property>
    </properties>
@@ -487,8 +511,14 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;This gate appears to be locked in place by some mechanism, but you do not see any controls here.&quot;,
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;Time to find them. Again...&quot; } ]
+    &quot;text&quot;: &quot;This gate appears to be locked in place by some mechanism, but you do not see any controls here.&quot;,
+    &quot;loctext&quot;: &quot;adv.main_story_templeofchandra.18.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Time to find them. Again...&quot;,
+        &quot;locname&quot;: &quot;adv.main_story_templeofchandra.18.d.n1.name&quot;
+      }
+    ]
   }
 ]</property>
    </properties>

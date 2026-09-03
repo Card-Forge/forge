@@ -122,7 +122,7 @@ public class MenuScene extends UIScene {
 //        if (actor instanceof CharacterSprite)
 //            sprite = ((CharacterSprite) actor).getAvatar();
         String text; //Check for localized string (locname), otherwise print text.
-        if (dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessage(dialog.loctext);
+        if (dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessageorUseDefault(dialog.loctext, dialog.text);
         else text = dialog.text;
 
         TypingLabel A = Controls.newTypingLabel(text);
@@ -151,7 +151,7 @@ public class MenuScene extends UIScene {
             for (DialogData option : dialog.options) {
                 if (isConditionOk(option.condition)) {
                     String name; //Get localized label if present.
-                    if (option.locname != null && !option.locname.isEmpty()) name = L.getMessage(option.locname);
+                    if (option.locname != null && !option.locname.isEmpty()) name = L.getMessageorUseDefault(option.locname, option.name);
                     else name = option.name;
                     TextraButton B = Controls.newTextButton(name, () -> {
                         loadDialog(option);

@@ -193,13 +193,21 @@
     <property name="dialog">[
 	{
 		&quot;text&quot;: &quot;A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.&quot;,
+		&quot;loctext&quot;: &quot;adv.fort_fort_colorless_2_wizards.73.d.n0.text&quot;,
 		&quot;options&quot;: [
-			{ &quot;name&quot;: &quot;Leave&quot; },
+			{
+				&quot;name&quot;: &quot;Leave&quot;,
+				&quot;locname&quot;: &quot;adv.shared.leave&quot;
+			},
 			{
 				&quot;name&quot;: &quot;Place your hand on the barrier&quot;,
+				&quot;locname&quot;: &quot;adv.fort_fort_colorless_2_wizards.73.d.n2.name&quot;,
 				&quot;text&quot;: &quot;The barrier fades into infinity before you.&quot;,
+				&quot;loctext&quot;: &quot;adv.fort_fort_colorless_2_wizards.73.d.n1.text&quot;,
 				&quot;action&quot;: [
-					{ &quot;deleteMapObject&quot;: -1 }
+					{
+						&quot;deleteMapObject&quot;: -1
+					}
 				],
 				&quot;condition&quot;: [
 					{

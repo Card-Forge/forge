@@ -64,18 +64,27 @@
   <object id="71" name="switch" type="dialog" gid="4426" x="368" y="126.848" width="16" height="16">
    <properties>
     <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;A large, conspicuous switch juts from the wall in the back of the lab.&quot;, 
-    &quot;options&quot;:[ 
-	{ 
-		&quot;text&quot;:&quot;You hear the sound of metal sliding across metal from behind you.&quot;,
-		&quot;action&quot;:[{&quot;deleteMapObject&quot;:73}],
-		&quot;name&quot;:&quot;Flip the switch&quot; 
-	},
-	{ &quot;name&quot;:&quot;Leave&quot; } 	
-	] 
-	} 
-	
+  {
+    &quot;text&quot;: &quot;A large, conspicuous switch juts from the wall in the back of the lab.&quot;,
+    &quot;loctext&quot;: &quot;adv.phyrexia_phyrexian_b1.62.d.n0.text&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;text&quot;: &quot;You hear the sound of metal sliding across metal from behind you.&quot;,
+        &quot;loctext&quot;: &quot;adv.phyrexia_phyrexian_b1.62.d.n1.text&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;deleteMapObject&quot;: 73
+          }
+        ],
+        &quot;name&quot;: &quot;Flip the switch&quot;,
+        &quot;locname&quot;: &quot;adv.phyrexia_phyrexian_b1.62.d.n2.name&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Leave&quot;,
+        &quot;locname&quot;: &quot;adv.shared.leave&quot;
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>
@@ -119,12 +128,18 @@
   <object id="70" template="../../obj/waypoint.tx" x="192" y="34"/>
   <object id="73" template="../../obj/gate.tx" x="208.25" y="96.5">
    <properties>
-    <property name="dialog">[{
-    &quot;text&quot;:&quot;This gate is locked. There must be a way to open it somewhere else in here.&quot;,
-    &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Continue&quot; } 
-    ]
-}]</property>
+    <property name="dialog">[
+    {
+        &quot;text&quot;: &quot;This gate is locked. There must be a way to open it somewhere else in here.&quot;,
+        &quot;loctext&quot;: &quot;adv.phyrexia_phyrexian_b1.76.d.n0.text&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;Continue&quot;,
+                &quot;locname&quot;: &quot;adv.shared.continue&quot;
+            }
+        ]
+    }
+]</property>
    </properties>
   </object>
  </objectgroup>

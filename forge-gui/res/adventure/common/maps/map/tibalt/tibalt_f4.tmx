@@ -97,18 +97,43 @@
   </object>
   <object id="168" template="../../obj/gate.tx" gid="3221229597" x="226.93" y="108.325" width="9.99747" height="21.9971" rotation="90.4687">
    <properties>
-    <property name="dialog">[{
-    &quot;text&quot;:&quot;This door is locked.&quot;,
-    &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; },
-    {      
-        &quot;name&quot;:&quot;Unlock with Tibalt's Key&quot;,     
-        &quot;condition&quot;:[{&quot;item&quot;:&quot;Tibalt's Key&quot;}],    
-        &quot;text&quot;:&quot;The gate is unlocked.&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Tibalt's Key&quot;}]} ]
+    <property name="dialog">[
+    {
+        &quot;text&quot;: &quot;This door is locked.&quot;,
+        &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f4.168.d.n0.text&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;Leave&quot;,
+                &quot;locname&quot;: &quot;adv.shared.leave&quot;
+            },
+            {
+                &quot;name&quot;: &quot;Unlock with Tibalt's Key&quot;,
+                &quot;locname&quot;: &quot;adv.tibalt_tibalt_f4.168.d.n2.name&quot;,
+                &quot;condition&quot;: [
+                    {
+                        &quot;item&quot;: &quot;Tibalt's Key&quot;
+                    }
+                ],
+                &quot;text&quot;: &quot;The gate is unlocked.&quot;,
+                &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f4.168.d.n1.text&quot;,
+                &quot;options&quot;: [
+                    {
+                        &quot;name&quot;: &quot;Continue&quot;,
+                        &quot;locname&quot;: &quot;adv.shared.continue&quot;,
+                        &quot;action&quot;: [
+                            {
+                                &quot;deleteMapObject&quot;: -1
+                            },
+                            {
+                                &quot;removeItem&quot;: &quot;Tibalt's Key&quot;
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
-    ]
-}]</property>
+]</property>
    </properties>
   </object>
   <object id="170" template="../../obj/door_down.tx" x="124.811" y="303.18" width="32.3503" height="30.8105" rotation="0.284412">
@@ -139,6 +164,7 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;A low, haunting melody plays in the background, emanating from unseen sources. The sound seems to echo from the very walls, creating an unsettling ambiance that adds to the sense of foreboding. Strange artifacts and arcane relics are scattered throughout the chamber, testifying to Tibalt's mastery of dark magic.&quot;,
+    &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f4.176.d.n0.text&quot;,
     &quot;options&quot;: [
       {
         &quot;action&quot;: [
@@ -147,11 +173,12 @@
               &quot;key&quot;: &quot;TibaltPortal&quot;,
               &quot;val&quot;: 1
             },
-              &quot;activateMapObject&quot;: 175,
-              &quot;deleteMapObject&quot;: -1
+            &quot;activateMapObject&quot;: 175,
+            &quot;deleteMapObject&quot;: -1
           }
         ],
-        &quot;name&quot;: &quot;(Continue)&quot;
+        &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
       }
     ]
   }

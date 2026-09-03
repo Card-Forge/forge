@@ -182,48 +182,116 @@
   <object id="76" template="../../obj/dialog.tx" x="656" y="175" width="117" height="98">
    <properties>
     <property name="dialog">[
-{
-   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
-   &quot;text&quot;: &quot;One of the few sounds in the area, the water wheel on this old mill creaks as it spins gradually in the slowly moving and oddly colored water.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;condition&quot;: [
+         {
+            &quot;checkMapFlag&quot;: {
+               &quot;key&quot;: &quot;demonsActive&quot;
+            },
+            &quot;not&quot;: true
+         }
+      ],
+      &quot;text&quot;: &quot;One of the few sounds in the area, the water wheel on this old mill creaks as it spins gradually in the slowly moving and oddly colored water.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.76.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="77" template="../../obj/dialog.tx" x="400" y="448" width="160" height="190" visible="1">
    <properties>
     <property name="dialog">[
-{
-   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
-   &quot;text&quot;: &quot;These shops are as lifeless as the rest of the town, but it looks as though there might be some items left behind, suspiciously untouched after however long.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;condition&quot;: [
+         {
+            &quot;checkMapFlag&quot;: {
+               &quot;key&quot;: &quot;demonsActive&quot;
+            },
+            &quot;not&quot;: true
+         }
+      ],
+      &quot;text&quot;: &quot;These shops are as lifeless as the rest of the town, but it looks as though there might be some items left behind, suspiciously untouched after however long.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.77.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="78" template="../../obj/dialog.tx" x="202" y="448" width="166" height="159">
    <properties>
     <property name="dialog">[
-{
-   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
-   &quot;text&quot;: &quot;The inn is locked up tightly. The town hall in contrast is missing its front door, but you find nothing out of the ordinary inside, just well organized crumbling papers coveered in illegibly smeared ink.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;condition&quot;: [
+         {
+            &quot;checkMapFlag&quot;: {
+               &quot;key&quot;: &quot;demonsActive&quot;
+            },
+            &quot;not&quot;: true
+         }
+      ],
+      &quot;text&quot;: &quot;The inn is locked up tightly. The town hall in contrast is missing its front door, but you find nothing out of the ordinary inside, just well organized crumbling papers coveered in illegibly smeared ink.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.78.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="79" template="../../obj/dialog.tx" x="448" y="192" width="80" height="80" visible="1">
    <properties>
     <property name="dialog">[
-{
-   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
-   &quot;text&quot;: &quot;The vines covering these houses look sickly, as if they are searching for sustenance not found in the soil here.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;condition&quot;: [
+         {
+            &quot;checkMapFlag&quot;: {
+               &quot;key&quot;: &quot;demonsActive&quot;
+            },
+            &quot;not&quot;: true
+         }
+      ],
+      &quot;text&quot;: &quot;The vines covering these houses look sickly, as if they are searching for sustenance not found in the soil here.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.79.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
@@ -240,31 +308,84 @@
   <object id="82" template="../../obj/dialog.tx" x="240" y="176" width="160" height="112">
    <properties>
     <property name="dialog">[
-{
-   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
-   &quot;text&quot;: &quot;'Deathly still' seems a fitting description for the graveyard. You find yourself almost wishing for the dead to rise just to have something happen.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;condition&quot;: [
+         {
+            &quot;checkMapFlag&quot;: {
+               &quot;key&quot;: &quot;demonsActive&quot;
+            },
+            &quot;not&quot;: true
+         }
+      ],
+      &quot;text&quot;: &quot;'Deathly still' seems a fitting description for the graveyard. You find yourself almost wishing for the dead to rise just to have something happen.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.82.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="83" template="../../obj/dialog.tx" x="336" y="560" width="112" height="16">
    <properties>
-    <property name="dialog">[{
-   &quot;condition&quot;: [{&quot;checkMapFlag&quot;:&quot;demonsActive&quot;},{&quot;checkMapFlag&quot;: &quot;escaped&quot;, &quot;not&quot;: true}],
-   &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;, &quot;val&quot;: 0}}]
-},
-{
-   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: &quot;introShown&quot;, &quot;not&quot;: true}],
-   &quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;introShown&quot;}],
-   &quot;text&quot;: &quot;Just as the merchant described, an empty town lies behind these gates. Even the wind seems more still here as if afraid to disturb anything.&quot;,
-   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;,
-      &quot;text&quot;: &quot;As you move closer, it becomes obvious that most of the buildings are intact but in a state of disrepair or are outright overgrown. It is doubtful that anyone has resided here in quite some time.&quot;,
-      &quot;options&quot;: [{&quot;name&quot;: &quot;Time to go portal hunting. I don't guess I can ask anyone for directions...&quot;}]
-   }]
-}]
-</property>
+    <property name="dialog">[
+   {
+      &quot;condition&quot;: [
+         {
+            &quot;checkMapFlag&quot;: &quot;demonsActive&quot;
+         },
+         {
+            &quot;checkMapFlag&quot;: &quot;escaped&quot;,
+            &quot;not&quot;: true
+         }
+      ],
+      &quot;action&quot;: [
+         {
+            &quot;setMapFlag&quot;: {
+               &quot;key&quot;: &quot;demonsActive&quot;,
+               &quot;val&quot;: 0
+            }
+         }
+      ]
+   },
+   {
+      &quot;condition&quot;: [
+         {
+            &quot;checkMapFlag&quot;: &quot;introShown&quot;,
+            &quot;not&quot;: true
+         }
+      ],
+      &quot;action&quot;: [
+         {
+            &quot;advanceMapFlag&quot;: &quot;introShown&quot;
+         }
+      ],
+      &quot;text&quot;: &quot;Just as the merchant described, an empty town lies behind these gates. Even the wind seems more still here as if afraid to disturb anything.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.83.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;text&quot;: &quot;As you move closer, it becomes obvious that most of the buildings are intact but in a state of disrepair or are outright overgrown. It is doubtful that anyone has resided here in quite some time.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.83.d.n1.text&quot;,
+            &quot;options&quot;: [
+               {
+                  &quot;name&quot;: &quot;Time to go portal hunting. I don't guess I can ask anyone for directions...&quot;,
+                  &quot;locname&quot;: &quot;adv.main_story_defend_waste_town_abandoned.83.d.n2.name&quot;
+               }
+            ]
+         }
+      ]
+   }
+]</property>
     <property name="hidden" type="bool" value="true"/>
    </properties>
   </object>
@@ -319,12 +440,29 @@
   <object id="94" template="../../obj/dialog.tx" x="240" y="272" width="80" height="80" visible="1">
    <properties>
     <property name="dialog">[
-{
-   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
-   &quot;text&quot;: &quot;Perhaps just a trick of the mind, you can't shake the feeling that you're being watched as you explore the area.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;condition&quot;: [
+         {
+            &quot;checkMapFlag&quot;: {
+               &quot;key&quot;: &quot;demonsActive&quot;
+            },
+            &quot;not&quot;: true
+         }
+      ],
+      &quot;text&quot;: &quot;Perhaps just a trick of the mind, you can't shake the feeling that you're being watched as you explore the area.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.94.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>

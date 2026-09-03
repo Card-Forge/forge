@@ -32,121 +32,231 @@
   <object id="25" template="../../obj/dialog.tx" x="192" y="200">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Anatomical studies of various mundane animals are found on this shelf. Open on top is a text on snakes. Why did it have to be snakes?&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;text&quot;: &quot;Anatomical studies of various mundane animals are found on this shelf. Open on top is a text on snakes. Why did it have to be snakes?&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_1.25.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="26" template="../../obj/dialog.tx" x="128" y="200">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;This shelf contains books of recipes, but many of the ingredients are unfamiliar to you.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;text&quot;: &quot;This shelf contains books of recipes, but many of the ingredients are unfamiliar to you.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_1.26.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="27" template="../../obj/dialog.tx" x="352" y="200">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Here you find not so much books as collections of paperwork. It appears to consist of a series of caravan manifests and shipping ledgers affixed to maps. Comments and questions scribbled onto a set of calendars indicate that whomever collected these records suspected that the associated merchants were frequently conducting additional undocumented business along their routes.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;text&quot;: &quot;Here you find not so much books as collections of paperwork. It appears to consist of a series of caravan manifests and shipping ledgers affixed to maps. Comments and questions scribbled onto a set of calendars indicate that whomever collected these records suspected that the associated merchants were frequently conducting additional undocumented business along their routes.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_1.27.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="28" template="../../obj/dialog.tx" x="400" y="200">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;'The Impact of Personal Teleportation on Intercity Commerce' - Doesn't exactly sound like a page turner.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;text&quot;: &quot;'The Impact of Personal Teleportation on Intercity Commerce' - Doesn't exactly sound like a page turner.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_1.28.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="30" template="../../obj/dialog.tx" x="144" y="240">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Whatever knowledge was once contained in these texts is lost, their pages long ago having been soaked in the same dark liquid that appears to have stained the shelves below them.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;text&quot;: &quot;Whatever knowledge was once contained in these texts is lost, their pages long ago having been soaked in the same dark liquid that appears to have stained the shelves below them.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_1.30.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="31" template="../../obj/dialog.tx" x="368" y="240">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Dust covered tomes of nondescript subjects fill this shelf. You have a feeling these have been untouched for quite some time.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;text&quot;: &quot;Dust covered tomes of nondescript subjects fill this shelf. You have a feeling these have been untouched for quite some time.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_1.31.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="32" template="../../obj/dialog.tx" x="352" y="112">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;This shelf holds a journal with a sturdy cover which stands apart from the faded scrolls around it. The entries are a mystery to you, however, as they are written in some form of code.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;text&quot;: &quot;This shelf holds a journal with a sturdy cover which stands apart from the faded scrolls around it. The entries are a mystery to you, however, as they are written in some form of code.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_1.32.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="33" template="../../obj/dialog.tx" x="400" y="112">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;'Azgothian poems from a Midsummer Morning'. This book gives you a creepy feeling and you wisely leave the cover closed.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;text&quot;: &quot;'Azgothian poems from a Midsummer Morning'. This book gives you a creepy feeling and you wisely leave the cover closed.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_1.33.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="34" template="../../obj/dialog.tx" x="400" y="64">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Here you find a collection of biographies of wizards you've never heard of, and a quick skim of the contents makes you wonder who would bother to write these.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;text&quot;: &quot;Here you find a collection of biographies of wizards you've never heard of, and a quick skim of the contents makes you wonder who would bother to write these.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_1.34.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="35" template="../../obj/dialog.tx" x="128" y="64">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;A collection of children's drawings fill this bookcase, although unlike most similar collections these all seem to depict arcane subjects.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;text&quot;: &quot;A collection of children's drawings fill this bookcase, although unlike most similar collections these all seem to depict arcane subjects.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_1.35.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
   <object id="36" template="../../obj/dialog.tx" x="80" y="64">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Here you find a blueprint of the library itself. Unfortunately, there doesn't seem to be any list of secret passages to take advantage of.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
+   {
+      &quot;text&quot;: &quot;Here you find a blueprint of the library itself. Unfortunately, there doesn't seem to be any list of secret passages to take advantage of.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_1.36.d.n0.text&quot;,
+      &quot;options&quot;: [
+         {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;action&quot;: [
+               {
+                  &quot;deleteMapObject&quot;: -1
+               }
+            ]
+         }
+      ]
+   }
 ]</property>
    </properties>
   </object>
