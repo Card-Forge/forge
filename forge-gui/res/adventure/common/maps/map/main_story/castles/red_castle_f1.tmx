@@ -41,67 +41,26 @@
   </object>
   <object id="52" template="../../../obj/enemy.tx" x="195.509" y="264.061" width="32" height="32">
    <properties>
-    <property name="defeatDialog">[
-   {
-      &quot;condition&quot;: [
-         {
-            &quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;,
-            &quot;not&quot;: true
-         }
-      ],
-      &quot;text&quot;: &quot;As you land your final blow against Lathliss, you feel a significant pulse of mana.&quot;,
-      &quot;loctext&quot;: &quot;adv.main_story_castles_red_castle_f1.52.x.n0.text&quot;,
-      &quot;options&quot;: [
-         {
-            &quot;name&quot;: &quot;(Continue)&quot;,
-            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
-            &quot;action&quot;: [
-               {
-                  &quot;setQuestFlag&quot;: {
-                     &quot;key&quot;: &quot;Ch1RedCastleComplete&quot;,
-                     &quot;val&quot;: 1
-                  }
-               },
-               {
-                  &quot;deleteMapObject&quot;: -1
-               },
-               {
-                  &quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;
-               }
-            ]
-         }
-      ]
-   },
-   {
-      &quot;condition&quot;: [
-         {
-            &quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;
-         }
-      ],
-      &quot;text&quot;: &quot;As you land your final blow against Lathliss, you feel another pulse of mana.&quot;,
-      &quot;loctext&quot;: &quot;adv.main_story_castles_red_castle_f1.52.x.n1.text&quot;,
-      &quot;options&quot;: [
-         {
-            &quot;name&quot;: &quot;(Continue)&quot;,
-            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
-            &quot;action&quot;: [
-               {
-                  &quot;setQuestFlag&quot;: {
-                     &quot;key&quot;: &quot;Ch1RedCastleComplete&quot;,
-                     &quot;val&quot;: 1
-                  }
-               },
-               {
-                  &quot;deleteMapObject&quot;: -1
-               },
-               {
-                  &quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;
-               }
-            ]
-         }
-      ]
-   }
-]</property>
+    <property name="defeatDialog">[{
+   &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;, &quot;not&quot;:true}],
+   &quot;text&quot;: &quot;As you land your final blow against Lathliss, you feel a significant pulse of mana.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_castles_red_castle_f1.52.x.n0.text&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, 
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1RedCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
+   }]
+},
+{
+   &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}],
+   &quot;text&quot;: &quot;As you land your final blow against Lathliss, you feel another pulse of mana.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_castles_red_castle_f1.52.x.n2.text&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, 
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1RedCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
+   }]
+}]</property>
     <property name="effect">{
  &quot;startBattleWithCard&quot;: [ &quot;Mox Ruby&quot; ]
 }</property>
@@ -139,67 +98,26 @@
   </object>
   <object id="56" template="../../../obj/enemy.tx" x="195.103" y="271.379" width="32" height="32">
    <properties>
-    <property name="defeatDialog">[
-     {
-          &quot;condition&quot;: [
-               {
-                    &quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;,
-                    &quot;not&quot;: true
-               }
-          ],
-          &quot;text&quot;: &quot;As you land your final blow against Lathliss, you feel a significant pulse of mana.&quot;,
-          &quot;loctext&quot;: &quot;adv.main_story_castles_red_castle_f1.56.x.n0.text&quot;,
-          &quot;options&quot;: [
-               {
-                    &quot;name&quot;: &quot;(Continue)&quot;,
-                    &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
-                    &quot;action&quot;: [
-                         {
-                              &quot;setQuestFlag&quot;: {
-                                   &quot;key&quot;: &quot;Ch1RedCastleComplete&quot;,
-                                   &quot;val&quot;: 1
-                              }
-                         },
-                         {
-                              &quot;deleteMapObject&quot;: -1
-                         },
-                         {
-                              &quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;
-                         }
-                    ]
-               }
-          ]
-     },
-     {
-          &quot;condition&quot;: [
-               {
-                    &quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;
-               }
-          ],
-          &quot;text&quot;: &quot;As you land your final blow against Lathliss, you feel another pulse of mana.&quot;,
-          &quot;loctext&quot;: &quot;adv.main_story_castles_red_castle_f1.56.x.n1.text&quot;,
-          &quot;options&quot;: [
-               {
-                    &quot;name&quot;: &quot;(Continue)&quot;,
-                    &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
-                    &quot;action&quot;: [
-                         {
-                              &quot;setQuestFlag&quot;: {
-                                   &quot;key&quot;: &quot;Ch1RedCastleComplete&quot;,
-                                   &quot;val&quot;: 1
-                              }
-                         },
-                         {
-                              &quot;deleteMapObject&quot;: -1
-                         },
-                         {
-                              &quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;
-                         }
-                    ]
-               }
-          ]
-     }
-]</property>
+    <property name="defeatDialog">[{
+     &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;, &quot;not&quot;:true}],
+     &quot;text&quot;: &quot;As you land your final blow against Lathliss, you feel a significant pulse of mana.&quot;,
+     &quot;loctext&quot;: &quot;adv.main_story_castles_red_castle_f1.56.x.n0.text&quot;,
+     &quot;options&quot;: [{
+        &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+        &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1RedCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
+     }]
+  },
+  {
+     &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}],
+     &quot;text&quot;: &quot;As you land your final blow against Lathliss, you feel another pulse of mana.&quot;,
+     &quot;loctext&quot;: &quot;adv.main_story_castles_red_castle_f1.56.x.n2.text&quot;,
+     &quot;options&quot;: [{
+        &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+        &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1RedCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
+     }]
+  }]</property>
     <property name="effect" value="{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Lathliss' Presence (Hard Mode)&quot;]}"/>
     <property name="enemy" value="Lathliss"/>
     <property name="reward">[

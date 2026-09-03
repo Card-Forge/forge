@@ -91,18 +91,13 @@
   </object>
   <object id="63" name="Ward" type="dialog" gid="11912" x="196.5" y="127.353" width="23.9016" height="18.8115">
    <properties>
-    <property name="dialog">[
-    {
-        &quot;text&quot;: &quot;A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.63.d.n0.text&quot;,
-        &quot;options&quot;: [
-            {
-                &quot;name&quot;: &quot;Leave&quot;,
-                &quot;locname&quot;: &quot;adv.shared.leave&quot;
-            }
-        ]
-    }
-]</property>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.&quot;,
+    &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.63.d.n0.text&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; } 
+    ]
+}]</property>
    </properties>
   </object>
   <object id="65" template="../../obj/treasure.tx" x="228.164" y="25.3361">
@@ -247,39 +242,27 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.79.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.79.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.79.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.79.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.79.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.79.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.79.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, a powerful figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL?&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.79.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.79.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Prepare yourself!&quot;,
                 &quot;locname&quot;: &quot;adv.shared.prepare&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;activateMapObject&quot;: 50
-                  },
-                  {
-                    &quot;deleteMapObject&quot;: 63
-                  },
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  }
+                  { &quot;activateMapObject&quot;: 50 },
+                  { &quot;deleteMapObject&quot;: 63 },
+                  { &quot;deleteMapObject&quot;: -1 }
                 ]
               }
             ]
@@ -313,38 +296,28 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.82.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.82.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.82.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.82.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.82.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.82.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.82.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, a giant mole rat jumps from the coffin, looking very annoyed and angry.&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.82.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.82.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Time for some pest control!&quot;,
-                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.82.d.n5.name&quot;,
+                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.82.d.n7.name&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;activateMapObject&quot;: 81
-                  },
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  }
+                  { &quot;activateMapObject&quot;: 81 },
+                  { &quot;deleteMapObject&quot;: -1 }
                 ]
-              }
+              }     
             ]
           }
         ]
@@ -361,38 +334,28 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.83.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.83.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.83.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.83.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.83.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.83.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.83.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, a giant mole rat jumps from the coffin, looking very annoyed and angry&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.83.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.83.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Time for some pest control!&quot;,
-                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.83.d.n5.name&quot;,
+                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.83.d.n7.name&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;activateMapObject&quot;: 80
-                  },
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  }
+                  { &quot;activateMapObject&quot;: 80 },
+                  { &quot;deleteMapObject&quot;: -1 }
                 ]
-              }
+              }     
             ]
           }
         ]
@@ -409,41 +372,32 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.86.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.86.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.86.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.86.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.86.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.86.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.86.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.86.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.86.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
-                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.86.d.n5.name&quot;,
+                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.86.d.n7.name&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  },
-                  {
-                    &quot;grantRewards&quot;: [
-                      {
-                        &quot;type&quot;: &quot;gold&quot;,
-                        &quot;count&quot;: 25
-                      }
-                    ]
-                  }
+                    {&quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        {
+                          &quot;type&quot;: &quot;gold&quot;,
+                          &quot;count&quot;: 25
+                        }
+                      ]
+                    }
                 ]
               }
             ]
@@ -483,41 +437,32 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.97.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.97.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.97.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.97.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.97.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.97.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.97.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.97.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.97.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
-                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.97.d.n5.name&quot;,
+                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.97.d.n7.name&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  },
-                  {
-                    &quot;grantRewards&quot;: [
-                      {
-                        &quot;type&quot;: &quot;gold&quot;,
-                        &quot;count&quot;: 25
-                      }
-                    ]
-                  }
+                    {&quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        {
+                          &quot;type&quot;: &quot;gold&quot;,
+                          &quot;count&quot;: 25
+                        }
+                      ]
+                    }
                 ]
               }
             ]
@@ -536,41 +481,32 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.98.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.98.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.98.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.98.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.98.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.98.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.98.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.98.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.98.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
-                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.98.d.n5.name&quot;,
+                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.98.d.n7.name&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  },
-                  {
-                    &quot;grantRewards&quot;: [
-                      {
-                        &quot;type&quot;: &quot;gold&quot;,
-                        &quot;count&quot;: 25
-                      }
-                    ]
-                  }
+                    {&quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        {
+                          &quot;type&quot;: &quot;gold&quot;,
+                          &quot;count&quot;: 25
+                        }
+                      ]
+                    }
                 ]
               }
             ]
@@ -589,41 +525,32 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.99.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.99.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.99.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.99.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.99.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.99.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.99.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.99.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.99.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
-                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.99.d.n5.name&quot;,
+                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.99.d.n7.name&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  },
-                  {
-                    &quot;grantRewards&quot;: [
-                      {
-                        &quot;type&quot;: &quot;gold&quot;,
-                        &quot;count&quot;: 25
-                      }
-                    ]
-                  }
+                    {&quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        {
+                          &quot;type&quot;: &quot;gold&quot;,
+                          &quot;count&quot;: 25
+                        }
+                      ]
+                    }
                 ]
               }
             ]
@@ -642,41 +569,32 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.100.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.100.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.100.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.100.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.100.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.100.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.100.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.100.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.100.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
-                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.100.d.n5.name&quot;,
+                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.100.d.n7.name&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  },
-                  {
-                    &quot;grantRewards&quot;: [
-                      {
-                        &quot;type&quot;: &quot;gold&quot;,
-                        &quot;count&quot;: 25
-                      }
-                    ]
-                  }
+                    {&quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        {
+                          &quot;type&quot;: &quot;gold&quot;,
+                          &quot;count&quot;: 25
+                        }
+                      ]
+                    }
                 ]
               }
             ]
@@ -695,41 +613,32 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.101.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.101.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.101.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.101.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.101.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.101.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.101.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.101.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.101.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
-                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.101.d.n5.name&quot;,
+                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.101.d.n7.name&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  },
-                  {
-                    &quot;grantRewards&quot;: [
-                      {
-                        &quot;type&quot;: &quot;gold&quot;,
-                        &quot;count&quot;: 25
-                      }
-                    ]
-                  }
+                    {&quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        {
+                          &quot;type&quot;: &quot;gold&quot;,
+                          &quot;count&quot;: 25
+                        }
+                      ]
+                    }
                 ]
               }
             ]
@@ -748,41 +657,32 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.102.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.102.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.102.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.102.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.102.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.102.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.102.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.102.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.102.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
-                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.102.d.n5.name&quot;,
+                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.102.d.n7.name&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  },
-                  {
-                    &quot;grantRewards&quot;: [
-                      {
-                        &quot;type&quot;: &quot;gold&quot;,
-                        &quot;count&quot;: 25
-                      }
-                    ]
-                  }
+                    {&quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        {
+                          &quot;type&quot;: &quot;gold&quot;,
+                          &quot;count&quot;: 25
+                        }
+                      ]
+                    }
                 ]
               }
             ]
@@ -801,41 +701,32 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.103.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.103.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.103.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.103.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.103.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.103.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.103.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.103.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.103.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
-                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.103.d.n5.name&quot;,
+                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.103.d.n7.name&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  },
-                  {
-                    &quot;grantRewards&quot;: [
-                      {
-                        &quot;type&quot;: &quot;gold&quot;,
-                        &quot;count&quot;: 25
-                      }
-                    ]
-                  }
+                    {&quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        {
+                          &quot;type&quot;: &quot;gold&quot;,
+                          &quot;count&quot;: 25
+                        }
+                      ]
+                    }
                 ]
               }
             ]
@@ -854,41 +745,32 @@
     &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.104.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.104.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.104.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.104.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.104.d.n2.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Leave&quot;,
-            &quot;locname&quot;: &quot;adv.shared.leave&quot;
-          },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.104.d.n4.name&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.104.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
-            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.104.d.n3.text&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.104.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
-                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.104.d.n5.name&quot;,
+                &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_2.104.d.n7.name&quot;,
                 &quot;action&quot;: [
-                  {
-                    &quot;deleteMapObject&quot;: -1
-                  },
-                  {
-                    &quot;grantRewards&quot;: [
-                      {
-                        &quot;type&quot;: &quot;gold&quot;,
-                        &quot;count&quot;: 25
-                      }
-                    ]
-                  }
+                    {&quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        {
+                          &quot;type&quot;: &quot;gold&quot;,
+                          &quot;count&quot;: 25
+                        }
+                      ]
+                    }
                 ]
               }
             ]

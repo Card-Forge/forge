@@ -196,8 +196,8 @@
               &quot;key&quot;: &quot;FortressPortal&quot;,
               &quot;val&quot;: 1
             },
-            &quot;activateMapObject&quot;: 194,
-            &quot;deleteMapObject&quot;: -1
+              &quot;activateMapObject&quot;: 194,
+              &quot;deleteMapObject&quot;: -1
           }
         ],
         &quot;name&quot;: &quot;(Continue)&quot;,

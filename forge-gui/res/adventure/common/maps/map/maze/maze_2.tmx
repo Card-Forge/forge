@@ -45,16 +45,10 @@
 	{
 		&quot;text&quot;: &quot;Your opponent unleashes a shrill scream as they shift back into stone form, but no longer balanced upon a pedestal. The statue falls and shatters, with many of the pieces tumbling into the pool. You would almost swear you could hear the scream faintly continuing beneath the water's surface.&quot;,
 		&quot;loctext&quot;: &quot;adv.maze_maze_2.49.x.n0.text&quot;,
-		&quot;action&quot;: [
-			{
-				&quot;deleteMapObject&quot;: 58
-			},
-			{
-				&quot;deleteMapObject&quot;: 59
-			},
-			{
-				&quot;deleteMapObject&quot;: -1
-			}
+  	&quot;action&quot;: [
+			{ &quot;deleteMapObject&quot;: 58 },
+			{ &quot;deleteMapObject&quot;: 59 },
+			{ &quot;deleteMapObject&quot;: -1 }
 		]
 	}
 ]</property>
@@ -77,16 +71,16 @@
 				&quot;name&quot;: &quot;You have a bad feeling about this.&quot;,
 				&quot;locname&quot;: &quot;adv.maze_maze_2.58.d.n1.name&quot;,
 				&quot;action&quot;: [
-					{
-						&quot;activateMapObject&quot;: 57
-					},
-					{
-						&quot;deleteMapObject&quot;: -1
-					}
+					{ &quot;activateMapObject&quot;: 57 },			{ &quot;deleteMapObject&quot;: -1 }
+
 				]
+
 			}
+
 		]
+
 	}
+
 ]</property>
    </properties>
   </object>

@@ -34,18 +34,13 @@
   </object>
   <object id="69" template="../../obj/enemy.tx" x="205.747" y="594.972">
    <properties>
-    <property name="dialog">[
-  {
-    &quot;text&quot;: &quot;Hello, planeswalker {var=player_name}. This area is currently under construction and subject to change. Also this is a hard boss, so be prepared with a strong deck.&quot;,
-    &quot;loctext&quot;: &quot;adv.emrakul_wastetown.69.d.n0.text&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Continue&quot;,
-        &quot;locname&quot;: &quot;adv.shared.continue&quot;
-      }
-    ]
-  }
-]</property>
+    <property name="dialog">[{
+  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}. This area is currently under construction and subject to change. Also this is a hard boss, so be prepared with a strong deck.&quot;,
+  &quot;loctext&quot;: &quot;adv.emrakul_wastetown.69.d.n0.text&quot;,
+  &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Continue&quot;, &quot;locname&quot;: &quot;adv.shared.continue&quot; }
+  ]
+}]</property>
     <property name="enemy" value="Homarid"/>
    </properties>
   </object>

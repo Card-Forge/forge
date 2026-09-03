@@ -173,11 +173,6 @@ public class Localizer {
                 e.printStackTrace();
             }
 
-            //Adventure Mode translations are NOT loaded here. This class is shared by
-            //every game mode, so it never scans for or depends on Adventure-specific
-            //assets on its own. Adventure Mode code calls loadAdventureBundle(plane)
-            //explicitly, only when it actually needs to (selecting a plane to play,
-            //or loading/starting a save), keeping this class agnostic of Adventure.
             adventureBundle = null;
 
             System.out.println("Language '" + resourceBundle.getBaseBundleName() + "' loaded successfully.");
@@ -186,18 +181,6 @@ public class Localizer {
         }
     }
 
-    //Called explicitly by Adventure Mode code -- when a plane is selected to
-    //play, when a save is loaded, and when a new game is started -- never
-    //automatically from setLanguage(). "languagesDirectory" is that plane's
-    //OWN languages folder (e.g. ".../adventure/Shandalar/languages/"), kept
-    //with that plane's data rather than centralized, so a plane's
-    //translations can ship (or be omitted) independently of any other
-    //plane's. Loads ONLY that folder's bundle, no fallback to any other
-    //plane's translations; if "languagesDirectory" is null/empty, or has no
-    //translation file for the current language, dialog simply falls back to
-    //the English text already embedded in the .tmx (see MapDialog/MenuScene's
-    //getMessageorUseDefault calls). Safe to call multiple times, e.g. if the
-    //active plane changes mid-session.
     public void loadAdventureBundle(final String languagesDirectory) {
         if (currentLanguageRegionID == null || languagesDirectory == null || languagesDirectory.isEmpty()) {
             adventureBundle = null;

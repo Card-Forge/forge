@@ -171,43 +171,21 @@
   <object id="85" template="../../obj/manashards.tx" x="98.5" y="224"/>
   <object id="86" template="../../obj/gate.tx" x="207.75" y="124.5" width="16.4999" height="22">
    <properties>
-    <property name="dialog">[
-    {
-        &quot;text&quot;: &quot;This door is locked.&quot;,
-        &quot;loctext&quot;: &quot;adv.monastery_unhallowed_abbey_1F.85.d.n0.text&quot;,
-        &quot;options&quot;: [
-            {
-                &quot;name&quot;: &quot;Leave&quot;,
-                &quot;locname&quot;: &quot;adv.shared.leave&quot;
-            },
-            {
-                &quot;name&quot;: &quot;Unlock with Cultist's Key&quot;,
-                &quot;locname&quot;: &quot;adv.monastery_unhallowed_abbey_1F.85.d.n2.name&quot;,
-                &quot;condition&quot;: [
-                    {
-                        &quot;item&quot;: &quot;Cultist's Key&quot;
-                    }
-                ],
-                &quot;text&quot;: &quot;The gate is unlocked.&quot;,
-                &quot;loctext&quot;: &quot;adv.monastery_unhallowed_abbey_1F.85.d.n1.text&quot;,
-                &quot;options&quot;: [
-                    {
-                        &quot;name&quot;: &quot;Continue&quot;,
-                        &quot;locname&quot;: &quot;adv.shared.continue&quot;,
-                        &quot;action&quot;: [
-                            {
-                                &quot;deleteMapObject&quot;: -1
-                            },
-                            {
-                                &quot;removeItem&quot;: &quot;Cultist's Key&quot;
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This door is locked.&quot;,
+    &quot;loctext&quot;: &quot;adv.monastery_unhallowed_abbey_1F.85.d.n0.text&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with Cultist's Key&quot;,
+        &quot;locname&quot;: &quot;adv.monastery_unhallowed_abbey_1F.85.d.n3.name&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Cultist's Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked.&quot;,
+        &quot;loctext&quot;: &quot;adv.monastery_unhallowed_abbey_1F.85.d.n2.text&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;locname&quot;: &quot;adv.shared.continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Cultist's Key&quot;}]} ]
     }
-]</property>
+    ]
+}]</property>
    </properties>
   </object>
   <object id="87" template="../../obj/manashards.tx" x="321.5" y="217.75"/>

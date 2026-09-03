@@ -82,43 +82,21 @@
   </object>
   <object id="168" template="../../obj/gate.tx" gid="3221229597" x="287.943" y="843.397" width="14.0077" height="18.6486" rotation="90.4687" visible="1">
    <properties>
-    <property name="dialog">[
-    {
-        &quot;text&quot;: &quot;This door is locked.&quot;,
-        &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.168.d.n0.text&quot;,
-        &quot;options&quot;: [
-            {
-                &quot;name&quot;: &quot;Leave&quot;,
-                &quot;locname&quot;: &quot;adv.shared.leave&quot;
-            },
-            {
-                &quot;name&quot;: &quot;Unlock with Grolnok's Key&quot;,
-                &quot;locname&quot;: &quot;adv.grolnok_grolnok_f1.168.d.n2.name&quot;,
-                &quot;condition&quot;: [
-                    {
-                        &quot;item&quot;: &quot;Grolnok's Key&quot;
-                    }
-                ],
-                &quot;text&quot;: &quot;The gate is unlocked.&quot;,
-                &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.168.d.n1.text&quot;,
-                &quot;options&quot;: [
-                    {
-                        &quot;name&quot;: &quot;Continue&quot;,
-                        &quot;locname&quot;: &quot;adv.shared.continue&quot;,
-                        &quot;action&quot;: [
-                            {
-                                &quot;deleteMapObject&quot;: -1
-                            },
-                            {
-                                &quot;removeItem&quot;: &quot;Grolnok's Key&quot;
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This door is locked.&quot;,
+    &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.168.d.n0.text&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with Grolnok's Key&quot;,
+        &quot;locname&quot;: &quot;adv.grolnok_grolnok_f1.168.d.n3.name&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Grolnok's Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked.&quot;,
+        &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.168.d.n2.text&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;locname&quot;: &quot;adv.shared.continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Grolnok's Key&quot;}]} ]
     }
-]</property>
+    ]
+}]</property>
    </properties>
   </object>
   <object id="170" template="../../obj/door_down.tx" x="112.057" y="895.107" width="34.2466" height="35.0741" rotation="0.284412">
@@ -177,43 +155,21 @@
   </object>
   <object id="183" template="../../obj/gate.tx" gid="3221229597" x="226.355" y="821.63" width="15.7579" height="22.3749" rotation="0">
    <properties>
-    <property name="dialog">[
-    {
-        &quot;text&quot;: &quot;This door is locked.&quot;,
-        &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.183.d.n0.text&quot;,
-        &quot;options&quot;: [
-            {
-                &quot;name&quot;: &quot;Leave&quot;,
-                &quot;locname&quot;: &quot;adv.shared.leave&quot;
-            },
-            {
-                &quot;name&quot;: &quot;Unlock with Rusty Old Key&quot;,
-                &quot;locname&quot;: &quot;adv.grolnok_grolnok_f1.183.d.n2.name&quot;,
-                &quot;condition&quot;: [
-                    {
-                        &quot;item&quot;: &quot;Rusty Old Key&quot;
-                    }
-                ],
-                &quot;text&quot;: &quot;The gate is unlocked.&quot;,
-                &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.183.d.n1.text&quot;,
-                &quot;options&quot;: [
-                    {
-                        &quot;name&quot;: &quot;Continue&quot;,
-                        &quot;locname&quot;: &quot;adv.shared.continue&quot;,
-                        &quot;action&quot;: [
-                            {
-                                &quot;deleteMapObject&quot;: -1
-                            },
-                            {
-                                &quot;removeItem&quot;: &quot;Rusty Old Key&quot;
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This door is locked.&quot;,
+    &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.183.d.n0.text&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with Rusty Old Key&quot;,
+        &quot;locname&quot;: &quot;adv.grolnok_grolnok_f1.183.d.n3.name&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Rusty Old Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked.&quot;,
+        &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.183.d.n2.text&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;locname&quot;: &quot;adv.shared.continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Rusty Old Key&quot;}]} ]
     }
-]</property>
+    ]
+}]</property>
    </properties>
   </object>
   <object id="189" template="../../obj/enemy.tx" x="346" y="745.831" width="16" height="17.6724">

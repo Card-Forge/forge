@@ -132,15 +132,12 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;Dangerous beast ahead! Turn back now!&quot;,
+    &quot;text&quot;:&quot;Dangerous beast ahead! Turn back now!&quot;,
     &quot;loctext&quot;: &quot;adv.grove_grove_8_hydra.114.d.n0.text&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      }
-    ]
-  }
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; }
+]
+}
 ]</property>
    </properties>
   </object>

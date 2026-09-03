@@ -208,12 +208,6 @@ public class Config {
     }
 
     private String langFilePath(String fullPath, String rootPrefix) {
-        //Translated files live in ONE "languages" folder at the plane's own
-        //root (e.g. ".../Shandalar/languages/"), not scattered next to each
-        //individual original file, so there's always a single predictable
-        //place to find a plane's translations regardless of where in its
-        //own folder structure the original file happens to live.
-        //e.g. "world/quests.json" -> "<planeRoot>/languages/quests-es-ES.json"
         String baseName = fullPath.substring(fullPath.lastIndexOf('/') + 1);
         String nameNoExt = baseName.replaceFirst("[.][^.]+$", "");
         String ext = baseName.substring(baseName.lastIndexOf('.'));

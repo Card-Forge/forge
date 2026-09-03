@@ -22,8 +22,6 @@ forge-gui/res/adventure/Shandalar/languages/
 ```
 
 Filenames never repeat the world's name — the folder already identifies it.
-This keeps every language file for a world in one predictable place instead
-of scattered next to whatever original file each one happens to translate.
 
 ## 1. Main UI (menus, options, general strings)
 
@@ -33,7 +31,7 @@ existing localization system, unrelated to Adventure Mode.
 
 ## 2. Quests and shops
 
-Quest and shop text is translated by hand — there's no tooling for this part.
+Translated by hand — there's no tooling for this part.
 
 1. Find the English source files, e.g.:
    ```
@@ -46,66 +44,57 @@ Quest and shop text is translated by hand — there's no tooling for this part.
    forge-gui/res/adventure/Shandalar/languages/quests-es-ES.json
    forge-gui/res/adventure/Shandalar/languages/shops-es-ES.json
    ```
-3. Translate the readable text fields inside. Leave keys, IDs, and card
-   references untouched — only translate text a player would actually read.
-4. That's it — `Config.getFile()` finds it automatically once the UI
-   language matches. There's no fallback within this file, so make sure the
-   whole thing is translated before shipping it.
+3. Translate the readable text fields. Leave keys, IDs, and card references
+   untouched.
+4. `Config.getFile()` finds it automatically once the UI language matches.
+   There's no fallback within this file, so translate it fully before
+   shipping.
 
 ## 3. NPC dialog in maps (`.tmx` files)
 
-This part is covered by `adventure_i18n.py`, in `forge-gui/tools/`. Dialog
-trees are embedded as JSON inside each `.tmx` map. Each node that needs
-translating gets a stable key (`loctext`/`locname`) that survives the tree
-being reordered later — a translation never silently ends up attached to the
-wrong node just because someone edited a map.
+Covered by `adventure_i18n.py`, in `forge-gui/tools/`. Dialog trees are
+embedded as JSON inside each `.tmx` map. Each node that needs translating
+gets a stable key (`loctext`/`locname`) that survives the tree being
+reordered later.
 
-Edits are surgical: only the exact spot where a key gets added changes.
-Nothing else in the file — including unrelated content elsewhere in the same
-map — gets reformatted or reordered.
+Edits are surgical: the tool locates the exact position in the original text
+and inserts only what's needed there. It never parses-and-rewrites the
+surrounding JSON, so unrelated content — including formatting choices like
+single-line vs multi-line objects — is never touched.
 
 `--world` is the folder under `--adventure-root` holding the actual `.tmx`
 content (e.g. `common`, where Shandalar's maps live) — it doesn't have to
-match the plane the translations ship under. Point `--out` at whichever
-plane actually plays that content.
+match the plane the translations ship under. Point `--out`/`--properties` at
+whichever plane actually plays that content.
 
-### If the world already has keys assigned (e.g. `common`, covered by this PR)
+### Starting a translation
 
-You don't need to run `inject` — the keys already exist. Generate a
-translation template and fill it in:
+If the world already has keys assigned (e.g. `common`, covered by this PR),
+skip straight to `template`. Otherwise, run `inject` first:
+
+```
+python adventure_i18n.py inject --adventure-root ..\res\adventure --world common
+```
+
+Then generate the translation file, pre-filled with English:
 
 ```
 python adventure_i18n.py template --adventure-root ..\res\adventure --world common --out ..\res\adventure\Shandalar\languages\adventure-fr-FR.properties
 ```
 
-This creates the file with every existing key, pre-filled with English as a
-placeholder. Translate each line — the key stays on the left of the `=`,
-only the value on the right changes.
-
-Running the same command again later (e.g. once new dialog is added) is
-safe: it keeps whatever's already translated and only adds new keys.
-
-### If the world doesn't have keys yet
-
-Run `inject` first, once:
-
-```
-python adventure_i18n.py inject --adventure-root ..\res\adventure --world <world_name>
-```
-
-Then generate the template exactly as above.
+Translate each line — the key stays on the left of the `=`. Running
+`template` again later (e.g. once new dialog is added) is safe: it keeps
+what's translated and only adds new keys.
 
 ### Translating repeated strings only once
 
-Some strings ("(Continue)", "Leave"...) show up on dozens of unrelated
-nodes. To translate one of these only once instead of retyping it every
-time:
+Some strings show up on dozens of unrelated nodes. To handle one of these
+only once instead of retyping it every time, collapse into a CSV first:
 
 ```
 python adventure_i18n.py unique --adventure-root ..\res\adventure --world common --out unique-strings-fr-FR.csv
 ```
 
-This collapses every key sharing identical English text into one CSV row.
 Fill in the `translation` column (rows can be left blank and finished
 later), then expand it into the full file:
 
@@ -113,44 +102,40 @@ later), then expand it into the full file:
 python adventure_i18n.py fill --csv unique-strings-fr-FR.csv --out ..\res\adventure\Shandalar\languages\adventure-fr-FR.properties
 ```
 
-`fill` only touches rows with a translation filled in, and never overwrites
-a key that's already translated in `--out`. This doesn't change how
-translations are stored at runtime — the file still has one independent
-line per key, same as `template` would produce.
+This only saves typing — the resulting file still has one independent line
+per key, same as `template` produces.
 
 ### A small set of labels share a key for real
 
 A short, curated whitelist of purely generic navigation labels — "(Continue)",
-"Leave", and a few others (see `SHARED_LABELS` in the script) — are the one
+"Leave", and a few others (see `SHARED_LABELS` in the script) — is the one
 deliberate exception: every node with that exact English text points at the
-SAME key, rather than each getting its own. This is only safe because these
+SAME key, instead of each getting its own. This is only safe because these
 are pure UI labels with no narrative content; everything else keeps an
-independent key by default, specifically to avoid two unrelated dialog lines
-ever silently affecting each other.
+independent key by default.
 
 ```
 python adventure_i18n.py share --adventure-root ..\res\adventure --world common --properties ..\res\adventure\Shandalar\languages\adventure-es-ES.properties
 ```
 
-This rewrites the affected `.tmx` nodes to point at the shared key, and (if
-`--properties` is given) promotes one existing translation to that shared
-key while dropping the old per-node entries. Safe to run again later —
-already-shared nodes are left alone.
+Rewrites the affected `.tmx` nodes to point at the shared key, and (if
+`--properties` is given) promotes one existing translation to it while
+dropping the old per-node entries. Safe to run again later.
 
 ### Optional: a plain English reference
-
-For a clean read-only English file to check against, instead of translating
-a template file directly:
 
 ```
 python adventure_i18n.py reference --adventure-root ..\res\adventure --world common --out adventure-en-US-reference.properties
 ```
 
+A clean, read-only English file to check against, never merged with an
+existing translation.
+
 ### Regenerating keys cleanly
 
-If this tool itself gets updated and you need to regenerate keys (rather
-than manually reverting files with git — which risks discarding unrelated
-changes other contributors made to the same files in the meantime), use:
+If this tool gets updated and keys need regenerating, don't manually revert
+files with git — that risks discarding unrelated changes other contributors
+made in the meantime. Instead:
 
 ```
 python adventure_i18n.py strip --adventure-root ..\res\adventure --world common
@@ -158,31 +143,25 @@ python adventure_i18n.py inject --adventure-root ..\res\adventure --world common
 ```
 
 `strip` removes only the keys this tool itself added (recognized by their
-`adv.*` pattern), leaving everything else — including anyone else's
-unrelated edits — untouched.
+`adv.*` pattern), leaving everything else untouched.
 
 ## 4. Testing
 
-Switch Forge's UI language to the one you translated, start Adventure Mode,
-and load the world you translated. Any dialog line still missing a
-translation falls back to English automatically — nothing breaks, so partial
-translations are safe to test and ship incrementally. This applies the same
-way to a save file created in a different language: whatever language Forge
-is set to when you load a save is what gets used, regardless of what
-language the save was originally played in.
+Switch Forge's UI language, start Adventure Mode, and load the translated
+world. Any line still missing a translation falls back to English
+automatically — partial translations are safe to test and ship
+incrementally. Loading an existing save uses whatever language Forge is
+currently set to, regardless of what language the save was originally
+played in.
 
 ## Notes
 
-- `--world` is always required for every `adventure_i18n.py` command — a run
-  never touches more than one world at a time.
-- English devs adding new dialog don't need to do anything with this
-  process; untranslated content just displays in English until someone runs
-  `inject` and translates it.
-- `.tmx` files with pre-existing malformed JSON (unrelated to this tool) are
-  detected and left untouched rather than risking a bad edit.
+- `--world` is always required — a run never touches more than one world.
+- English devs adding new dialog don't need to do anything; untranslated
+  content just shows in English until someone runs `inject`.
+- `.tmx` files with pre-existing malformed JSON are detected and left
+  untouched.
 - Adventure translations are loaded on demand by Adventure Mode code itself
   (selecting a plane, loading a save, starting a new game) — never
-  automatically by Forge's core `Localizer`, which stays unaware of Adventure
-  Mode entirely. A plane with no translation file for the active language
-  simply shows English; nothing scans or depends on Adventure assets outside
-  of Adventure Mode itself.
+  automatically by Forge's core `Localizer`, which stays unaware of
+  Adventure Mode entirely.

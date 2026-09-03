@@ -332,15 +332,12 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;The inscription reads: The Neverglades National Park has been closed to visitors due to the arrival of unwanted guests on the perimeter of the park&quot;,
+    &quot;text&quot;:&quot;The inscription reads: The Neverglades National Park has been closed to visitors due to the arrival of unwanted guests on the perimeter of the park&quot;,
     &quot;loctext&quot;: &quot;adv.evilgrove_evilgrove_5_swamp.117.d.n0.text&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      }
-    ]
-  }
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; }
+]
+}
 ]</property>
    </properties>
   </object>

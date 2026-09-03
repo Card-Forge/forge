@@ -44,31 +44,22 @@
 		&quot;text&quot;: &quot;A massive magical red barrier is blocking the path.&quot;,
 		&quot;loctext&quot;: &quot;adv.emrakul_emrakul.71.d.n0.text&quot;,
 		&quot;options&quot;: [
-			{
-				&quot;name&quot;: &quot;Leave&quot;,
-				&quot;locname&quot;: &quot;adv.shared.leave&quot;
-			},
+			{ &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
 			{
 				&quot;name&quot;: &quot;Unlock with the strange key&quot;,
-				&quot;locname&quot;: &quot;adv.emrakul_emrakul.71.d.n2.name&quot;,
+				&quot;locname&quot;: &quot;adv.emrakul_emrakul.71.d.n3.name&quot;,
 				&quot;condition&quot;: [
-					{
-						&quot;item&quot;: &quot;Strange Key&quot;
-					}
+					{ &quot;item&quot;: &quot;Strange Key&quot; }
 				],
 				&quot;text&quot;: &quot;The gate is unlocked.&quot;,
-				&quot;loctext&quot;: &quot;adv.emrakul_emrakul.71.d.n1.text&quot;,
+				&quot;loctext&quot;: &quot;adv.emrakul_emrakul.71.d.n2.text&quot;,
 				&quot;options&quot;: [
 					{
 						&quot;name&quot;: &quot;Continue&quot;,
 						&quot;locname&quot;: &quot;adv.shared.continue&quot;,
 						&quot;action&quot;: [
-							{
-								&quot;deleteMapObject&quot;: -1
-							},
-							{
-								&quot;removeItem&quot;: &quot;Strange Key&quot;
-							}
+							{ &quot;deleteMapObject&quot;: -1 },
+							{ &quot;removeItem&quot;: &quot;Strange Key&quot; }
 						]
 					}
 				]

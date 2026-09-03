@@ -149,16 +149,16 @@
 				&quot;name&quot;: &quot;You have a bad feeling about this.&quot;,
 				&quot;locname&quot;: &quot;adv.grove_grove_1_bears.86.d.n1.name&quot;,
 				&quot;action&quot;: [
-					{
-						&quot;activateMapObject&quot;: 57
-					},
-					{
-						&quot;deleteMapObject&quot;: -1
-					}
+					{ &quot;activateMapObject&quot;: 57 },			{ &quot;deleteMapObject&quot;: -1 }
+
 				]
+
 			}
+
 		]
+
 	}
+
 ]</property>
    </properties>
   </object>

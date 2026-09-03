@@ -93,18 +93,13 @@
   </object>
   <object id="102" template="../../obj/gate.tx" x="207.807" y="95.793">
    <properties>
-    <property name="dialog">[
-    {
-        &quot;text&quot;: &quot;A gate is blocking the path. It looks like it is opened from elsewhere.&quot;,
-        &quot;loctext&quot;: &quot;adv.magetower_wastetown.102.d.n0.text&quot;,
-        &quot;options&quot;: [
-            {
-                &quot;name&quot;: &quot;Continue&quot;,
-                &quot;locname&quot;: &quot;adv.shared.continue&quot;
-            }
-        ]
-    }
-]</property>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A gate is blocking the path. It looks like it is opened from elsewhere.&quot;,
+    &quot;loctext&quot;: &quot;adv.magetower_wastetown.102.d.n0.text&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Continue&quot;, &quot;locname&quot;: &quot;adv.shared.continue&quot; } 
+    ]
+}]</property>
    </properties>
   </object>
   <object id="103" name="switch" type="dialog" gid="4426" x="141.352" y="114.291" width="16" height="16">

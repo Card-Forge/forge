@@ -147,55 +147,30 @@
     &quot;text&quot;: &quot;A big gate is blocking the path. Through the bars you can see an imposing figure in the room beyond. (You need all five shards from this dungeon to open this gate.)&quot;,
     &quot;loctext&quot;: &quot;adv.cave_cave_multilevel_cave_16BR3U.83.d.n0.text&quot;,
     &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Unlock with the five shards&quot;,
-        &quot;locname&quot;: &quot;adv.cave_cave_multilevel_cave_16BR3U.83.d.n2.name&quot;,
+        &quot;locname&quot;: &quot;adv.cave_cave_multilevel_cave_16BR3U.83.d.n3.name&quot;,
         &quot;condition&quot;: [
-          {
-            &quot;item&quot;: &quot;First Shard&quot;
-          },
-          {
-            &quot;item&quot;: &quot;Second Shard&quot;
-          },
-          {
-            &quot;item&quot;: &quot;Third Shard&quot;
-          },
-          {
-            &quot;item&quot;: &quot;Fourth Shard&quot;
-          },
-          {
-            &quot;item&quot;: &quot;Fifth Shard&quot;
-          }
+          { &quot;item&quot;: &quot;First Shard&quot; },
+          { &quot;item&quot;: &quot;Second Shard&quot; },
+          { &quot;item&quot;: &quot;Third Shard&quot; },
+          { &quot;item&quot;: &quot;Fourth Shard&quot; },
+          { &quot;item&quot;: &quot;Fifth Shard&quot; }
         ],
         &quot;text&quot;: &quot;The gate is unlocked.&quot;,
-        &quot;loctext&quot;: &quot;adv.cave_cave_multilevel_cave_16BR3U.83.d.n1.text&quot;,
+        &quot;loctext&quot;: &quot;adv.cave_cave_multilevel_cave_16BR3U.83.d.n2.text&quot;,
         &quot;options&quot;: [
           {
             &quot;name&quot;: &quot;Continue&quot;,
             &quot;locname&quot;: &quot;adv.shared.continue&quot;,
             &quot;action&quot;: [
-              {
-                &quot;deleteMapObject&quot;: -1
-              },
-              {
-                &quot;removeItem&quot;: &quot;First Shard&quot;
-              },
-              {
-                &quot;removeItem&quot;: &quot;Second Shard&quot;
-              },
-              {
-                &quot;removeItem&quot;: &quot;Third Shard&quot;
-              },
-              {
-                &quot;removeItem&quot;: &quot;Fourth Shard&quot;
-              },
-              {
-                &quot;removeItem&quot;: &quot;Fifth Shard&quot;
-              }
+              { &quot;deleteMapObject&quot;: -1 },
+              { &quot;removeItem&quot;: &quot;First Shard&quot; },
+              { &quot;removeItem&quot;: &quot;Second Shard&quot; },
+              { &quot;removeItem&quot;: &quot;Third Shard&quot; },
+              { &quot;removeItem&quot;: &quot;Fourth Shard&quot; },
+              { &quot;removeItem&quot;: &quot;Fifth Shard&quot; }
             ]
           }
         ]

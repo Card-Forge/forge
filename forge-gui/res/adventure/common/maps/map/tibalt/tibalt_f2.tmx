@@ -73,12 +73,8 @@
 				&quot;name&quot;: &quot;(Continue)&quot;,
 				&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
 				&quot;action&quot;: [
-					{
-						&quot;deleteMapObject&quot;: 200
-					},
-					{
-						&quot;deleteMapObject&quot;: -1
-					}
+					{ &quot;deleteMapObject&quot;: 200 },
+					{ &quot;deleteMapObject&quot;: -1 }
 				]
 			}
 		]
@@ -107,18 +103,13 @@
   </object>
   <object id="200" name="Ward" type="dialog" gid="23816" x="414.206" y="321.794" width="64.6728" height="16">
    <properties>
-    <property name="dialog">[
-    {
-        &quot;text&quot;: &quot;A translucent, shimmering red field blocks your path. An ancient evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
-        &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f2.200.d.n0.text&quot;,
-        &quot;options&quot;: [
-            {
-                &quot;name&quot;: &quot;Leave&quot;,
-                &quot;locname&quot;: &quot;adv.shared.leave&quot;
-            }
-        ]
-    }
-]</property>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
+    &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f2.200.d.n0.text&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; } 
+    ]
+}]</property>
    </properties>
   </object>
   <object id="201" template="../../obj/enemy.tx" x="398.782" y="66.7395">

@@ -54,95 +54,64 @@
 		&quot;text&quot;: &quot;You come upon a gate.&quot;,
 		&quot;loctext&quot;: &quot;adv.main_story_castles_green_castle.55.d.n0.text&quot;,
 		&quot;action&quot;: [
-			{
-				&quot;advanceMapFlag&quot;: &quot;intro&quot;
-			}
+			{ &quot;advanceMapFlag&quot;: &quot;intro&quot; }
 		],
-		&quot;options&quot;: [
-			{
-				&quot;name&quot;: &quot;Ghalta, I've done as you asked! It's time to end this!&quot;,
-				&quot;locname&quot;: &quot;adv.main_story_castles_green_castle.55.d.n2.name&quot;,
-				&quot;action&quot;: [
-					{
-						&quot;deleteMapObject&quot;: 55
-					}
-				],
-				&quot;condition&quot;: [
-					{
-						&quot;getMapFlag&quot;: {
-							&quot;key&quot;: &quot;enemiesDefeated&quot;,
-							&quot;op&quot;: &quot;&gt;=&quot;,
-							&quot;val&quot;: 4
-						}
-					},
-					{
-						&quot;checkQuestFlag&quot;: &quot;mainQuest&quot;,
-						&quot;not&quot;: true
-					}
-				],
-				&quot;text&quot;: &quot;With an extremely loud roar, the gate bursts open, leaving only ashes in your path. You are now free to pass.&quot;,
-				&quot;loctext&quot;: &quot;adv.main_story_castles_green_castle.55.d.n1.text&quot;,
-				&quot;options&quot;: [
-					{
-						&quot;name&quot;: &quot;(Continue)&quot;,
-						&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
-					}
-				]
-			},
-			{
-				&quot;name&quot;: &quot;Ghalta, I've done as you asked! It's time to end this!&quot;,
-				&quot;locname&quot;: &quot;adv.main_story_castles_green_castle.55.d.n4.name&quot;,
-				&quot;action&quot;: [
-					{
-						&quot;deleteMapObject&quot;: 55
-					},
-					{
-						&quot;deleteMapObject&quot;: 72
-					}
-				],
-				&quot;condition&quot;: [
-					{
-						&quot;getMapFlag&quot;: {
-							&quot;key&quot;: &quot;enemiesDefeated&quot;,
-							&quot;op&quot;: &quot;&gt;=&quot;,
-							&quot;val&quot;: 4
-						}
-					},
-					{
-						&quot;checkQuestFlag&quot;: &quot;Ch1GreenCastleComplete&quot;,
-						&quot;not&quot;: true
-					},
-					{
-						&quot;checkQuestFlag&quot;: &quot;mainQuest&quot;
-					}
-				],
-				&quot;text&quot;: &quot;With an extremely loud roar, the gate bursts open, leaving only ashes in your path. You are now free to pass.&quot;,
-				&quot;loctext&quot;: &quot;adv.main_story_castles_green_castle.55.d.n3.text&quot;,
-				&quot;options&quot;: [
-					{
-						&quot;name&quot;: &quot;(Continue)&quot;,
-						&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
-					}
-				]
-			},
-			{
-				&quot;name&quot;: &quot;You knock on the door.&quot;,
-				&quot;locname&quot;: &quot;adv.main_story_castles_green_castle.55.d.n6.name&quot;,
-				&quot;condition&quot;: [
-					{
-						&quot;checkMapFlag&quot;: &quot;intro&quot;
-					}
-				],
-				&quot;text&quot;: &quot;YOU ARE NOT WORTHY, BEGONE!&quot;,
-				&quot;loctext&quot;: &quot;adv.main_story_castles_green_castle.55.d.n5.text&quot;,
-				&quot;options&quot;: [
-					{
-						&quot;name&quot;: &quot;(Continue)&quot;,
-						&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
-					}
-				]
-			}
-		]
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Ghalta, I've done as you asked! It's time to end this!&quot;,
+					&quot;locname&quot;: &quot;adv.main_story_castles_green_castle.55.d.n2.name&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 4
+							}
+						},
+						{
+                            &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;,
+                            &quot;not&quot;: true
+                        }
+					],
+					&quot;text&quot;: &quot;With an extremely loud roar, the gate bursts open, leaving only ashes in your path. You are now free to pass.&quot;,
+					&quot;loctext&quot;: &quot;adv.main_story_castles_green_castle.55.d.n1.text&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot;, &quot;locname&quot;: &quot;adv.shared.continue_paren&quot; } ]
+				},
+				{
+                	&quot;name&quot;: &quot;Ghalta, I've done as you asked! It's time to end this!&quot;,
+                	&quot;locname&quot;: &quot;adv.main_story_castles_green_castle.55.d.n5.name&quot;,
+                	&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 },{ &quot;deleteMapObject&quot;: 72 } ],
+                	&quot;condition&quot;: [
+                		{
+                			&quot;getMapFlag&quot;: {
+                				&quot;key&quot;: &quot;enemiesDefeated&quot;,
+                				&quot;op&quot;: &quot;&gt;=&quot;,
+                				&quot;val&quot;: 4
+                			}
+                		},
+                		{
+                               &quot;checkQuestFlag&quot;: &quot;Ch1GreenCastleComplete&quot;,
+                               &quot;not&quot;: true
+                        },
+                        {
+                            &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;
+                        }
+                	],
+                	&quot;text&quot;: &quot;With an extremely loud roar, the gate bursts open, leaving only ashes in your path. You are now free to pass.&quot;,
+                	&quot;loctext&quot;: &quot;adv.main_story_castles_green_castle.55.d.n4.text&quot;,
+                	&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot;, &quot;locname&quot;: &quot;adv.shared.continue_paren&quot; } ]
+                },
+				{
+					&quot;name&quot;: &quot;You knock on the door.&quot;,
+					&quot;locname&quot;: &quot;adv.main_story_castles_green_castle.55.d.n8.name&quot;,
+					&quot;condition&quot;: [ { &quot;checkMapFlag&quot;: &quot;intro&quot; } ],
+					&quot;text&quot;: &quot;YOU ARE NOT WORTHY, BEGONE!&quot;,
+					&quot;loctext&quot;: &quot;adv.main_story_castles_green_castle.55.d.n7.text&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot;, &quot;locname&quot;: &quot;adv.shared.continue_paren&quot; } ]
+				}
+			]
 	}
 ]</property>
    </properties>
@@ -412,7 +381,7 @@
 						&quot;options&quot;: [
 							{
 								&quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I do defeat your challengers.&quot;,
-								&quot;locname&quot;: &quot;adv.main_story_castles_green_castle.72.d.n5.name&quot;,
+								&quot;locname&quot;: &quot;adv.main_story_castles_green_castle.72.d.n6.name&quot;,
 								&quot;text&quot;: &quot;Leave&quot;,
 								&quot;loctext&quot;: &quot;adv.shared.leave&quot;,
 								&quot;action&quot;: [
@@ -422,6 +391,7 @@
 											&quot;val&quot;: 1
 										}
 									}
+
 								]
 							}
 						]
@@ -432,22 +402,21 @@
 	},
 	{
 		&quot;text&quot;: &quot;The challengers are still alive, you shall not pass beyond this gate.&quot;,
-		&quot;loctext&quot;: &quot;adv.main_story_castles_green_castle.72.d.n6.text&quot;,
+		&quot;loctext&quot;: &quot;adv.main_story_castles_green_castle.72.d.n7.text&quot;,
 		&quot;condition&quot;: [
-			{
-				&quot;checkMapFlag&quot;: &quot;TalkToDoorGreeter&quot;
-			}
-		],
-		&quot;options&quot;: [
+			{ &quot;checkMapFlag&quot;: &quot;TalkToDoorGreeter&quot; }
+				],
+			&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;(Continue)&quot;,
 				&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
-			}
+				}
 		]
+
 	},
 	{
 		&quot;text&quot;: &quot;I am impressed, you are welcome to meet my master upstairs, though I can't guarantee you will be able to survive that encounter. Goodbye Adventurer&quot;,
-		&quot;loctext&quot;: &quot;adv.main_story_castles_green_castle.72.d.n7.text&quot;,
+		&quot;loctext&quot;: &quot;adv.main_story_castles_green_castle.72.d.n9.text&quot;,
 		&quot;condition&quot;: [
 			{
 				&quot;getMapFlag&quot;: {
@@ -462,9 +431,7 @@
 				&quot;name&quot;: &quot;(Continue)&quot;,
 				&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
 				&quot;action&quot;: [
-					{
-						&quot;deleteMapObject&quot;: -1
-					}
+					{ &quot;deleteMapObject&quot;: -1 }
 				]
 			}
 		]

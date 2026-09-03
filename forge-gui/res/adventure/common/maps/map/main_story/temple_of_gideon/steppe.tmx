@@ -411,11 +411,7 @@
             {
                 &quot;name&quot;: &quot;Lathliss! It's time to end this!&quot;,
                 &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_steppe.237.d.n2.name&quot;,
-                &quot;action&quot;: [
-                    {
-                        &quot;deleteMapObject&quot;: 55
-                    }
-                ],
+                &quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
                 &quot;condition&quot;: [
                     {
                         &quot;getMapFlag&quot;: {
@@ -425,18 +421,14 @@
                         }
                     }
                 ],
-                &quot;text&quot;: &quot;With a gust of red flames, the door burns away, leaving only ashes in your path. You are now free to pass.&quot;,
+                &quot;text&quot;:    &quot;With a gust of red flames, the door burns away, leaving only ashes in your path. You are now free to pass.&quot;,
                 &quot;loctext&quot;: &quot;adv.main_story_temple_of_gideon_steppe.237.d.n1.text&quot;,
-                &quot;options&quot;: [
-                    {
-                        &quot;name&quot;: &quot;(Continue)&quot;,
-                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
-                    }
-                ]
+                &quot;options&quot;:
+                    [ { &quot;name&quot;: &quot;(Continue)&quot;, &quot;locname&quot;: &quot;adv.shared.continue_paren&quot; } ]
             },
             {
                 &quot;name&quot;: &quot;You knock on the door&quot;,
-                &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_steppe.237.d.n4.name&quot;,
+                &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_steppe.237.d.n5.name&quot;,
                 &quot;condition&quot;: [
                     {
                         &quot;getMapFlag&quot;: {
@@ -447,7 +439,7 @@
                     }
                 ],
                 &quot;text&quot;: &quot;YOU ARE NOT WORTHY, BEGONE!&quot;,
-                &quot;loctext&quot;: &quot;adv.main_story_temple_of_gideon_steppe.237.d.n3.text&quot;
+                &quot;loctext&quot;: &quot;adv.main_story_temple_of_gideon_steppe.237.d.n4.text&quot;
             }
         ]
     }
@@ -554,45 +546,25 @@
 ]</property>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;An old crone leers at you, but does not raise her staff to attack.&quot;,
+    &quot;text&quot;:&quot;An old crone leers at you, but does not raise her staff to attack.&quot;,
     &quot;loctext&quot;: &quot;adv.main_story_temple_of_gideon_steppe.240.d.n0.text&quot;,
-    &quot;options&quot;: [
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Walk away&quot;, &quot;locname&quot;: &quot;adv.shared.walk_away&quot; },
+      { &quot;name&quot;:&quot;Attack the witch&quot;, &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_steppe.240.d.n2.name&quot;,
+	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]},
       {
-        &quot;name&quot;: &quot;Walk away&quot;,
-        &quot;locname&quot;: &quot;adv.shared.walk_away&quot;
-      },
-      {
-        &quot;name&quot;: &quot;Attack the witch&quot;,
-        &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_steppe.240.d.n1.name&quot;,
-        &quot;action&quot;: [
-          {
-            &quot;battleWithActorID&quot;: -1
-          }
-        ]
-      },
-      {
-        &quot;name&quot;: &quot;Approach her slowly&quot;,
-        &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_steppe.240.d.n3.name&quot;,
+        &quot;name&quot;:&quot;Approach her slowly&quot;,
+        &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_steppe.240.d.n4.name&quot;,
         &quot;text&quot;: &quot;\&quot;Be gone with you! You will not have them!\&quot; She steps back, dropping some of the herbs and mushrooms that she appears to have been gathering.&quot;,
-        &quot;loctext&quot;: &quot;adv.main_story_temple_of_gideon_steppe.240.d.n2.text&quot;,
+        &quot;loctext&quot;: &quot;adv.main_story_temple_of_gideon_steppe.240.d.n3.text&quot;,
         &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Walk away&quot;,
-            &quot;locname&quot;: &quot;adv.shared.walk_away&quot;
-          },
-          {
-            &quot;name&quot;: &quot;Attack the witch&quot;,
-            &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_steppe.240.d.n4.name&quot;,
-            &quot;action&quot;: [
-              {
-                &quot;battleWithActorID&quot;: -1
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+	{ &quot;name&quot;:&quot;Walk away&quot;, &quot;locname&quot;: &quot;adv.shared.walk_away&quot; },
+	{ &quot;name&quot;:&quot;Attack the witch&quot;, &quot;locname&quot;: &quot;adv.main_story_temple_of_gideon_steppe.240.d.n6.name&quot;,
+	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]
+	}
+	]
+      }]
+   }
 ]</property>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,

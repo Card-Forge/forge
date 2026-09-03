@@ -433,72 +433,42 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;name&quot;: &quot;&quot;,
-    &quot;condition&quot;: [
-      {
-        &quot;checkMapFlag&quot;: &quot;cemeteryKey&quot;,
-        &quot;not&quot;: true
-      }
-    ],
-    &quot;text&quot;: &quot;A large gate stands between you and the area to the north. Above the gate is an inscription that reads \&quot;DONT DEAD OPEN INSIDE\&quot;.&quot;,
-    &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n0.text&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Open the gate&quot;,
-        &quot;locname&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n2.name&quot;,
-        &quot;condition&quot;: [
-          {
-            &quot;checkMapFlag&quot;: &quot;cemeteryKey&quot;,
-            &quot;not&quot;: true
-          }
-        ],
-        &quot;text&quot;: &quot;The gate is closed with a large and elaborate lock.&quot;,
-        &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n1.text&quot;,
-        &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;Walk away in search of a key&quot;,
-            &quot;locname&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n3.name&quot;
-          }
-        ]
-      },
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      }
-    ]
+    &quot;name&quot;:&quot;&quot;,
+    &quot;condition&quot;: [ {&quot;checkMapFlag&quot;:&quot;cemeteryKey&quot;, &quot;not&quot;:true} ],
+    &quot;text&quot;:&quot;A large gate stands between you and the area to the north. Above the gate is an inscription that reads \&quot;DONT DEAD OPEN INSIDE\&quot;.&quot;,
+    &quot;loctext&quot;:&quot;adv.main_story_temple_of_liliana_forest.270.d.n0.text&quot;,
+    &quot;options&quot;:
+	[ 
+	{ &quot;name&quot;:&quot;Open the gate&quot;, &quot;locname&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n2.name&quot;,
+	  &quot;condition&quot;: [{&quot;checkMapFlag&quot;:&quot;cemeteryKey&quot;, &quot;not&quot;:true}],
+	  &quot;text&quot;: &quot;The gate is closed with a large and elaborate lock.&quot;,
+	  &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n1.text&quot;,
+	  &quot;options&quot;: [{ &quot;name&quot;:&quot;Walk away in search of a key&quot;, &quot;locname&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n3.name&quot; }]
+	}, 
+	{ 
+	  &quot;name&quot;:&quot;Leave&quot;,
+	  &quot;locname&quot;: &quot;adv.shared.leave&quot; 
+	} 
+	]
   },
-  {
-    &quot;name&quot;: &quot;&quot;,
-    &quot;condition&quot;: [
-      {
-        &quot;checkMapFlag&quot;: &quot;cemeteryKey&quot;
-      }
-    ],
-    &quot;text&quot;: &quot;A large gate stands between you and the area to the north. Above the gate is an inscription that reads \&quot;DONT DEAD OPEN INSIDE\&quot;.&quot;,
-    &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n4.text&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Open the gate&quot;,
-        &quot;locname&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n6.name&quot;,
-        &quot;action&quot;: [
-          {
-            &quot;deleteMapObject&quot;: 270
-          }
-        ],
-        &quot;text&quot;: &quot;With a screeching sound that could wake the dead, the gate swings open. You are now free to pass.&quot;,
-        &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n5.text&quot;,
-        &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;(Continue)&quot;,
-            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
-          }
-        ]
-      },
-      {
-        &quot;name&quot;: &quot;Leave&quot;,
-        &quot;locname&quot;: &quot;adv.shared.leave&quot;
-      }
-    ]
+{
+    &quot;name&quot;:&quot;&quot;,
+    &quot;condition&quot;: [{&quot;checkMapFlag&quot;:&quot;cemeteryKey&quot;}],
+    &quot;text&quot;:&quot;A large gate stands between you and the area to the north. Above the gate is an inscription that reads \&quot;DONT DEAD OPEN INSIDE\&quot;.&quot;,
+    &quot;loctext&quot;:&quot;adv.main_story_temple_of_liliana_forest.270.d.n5.text&quot;,
+    &quot;options&quot;:
+	[ 
+	{ &quot;name&quot;:&quot;Open the gate&quot;, &quot;locname&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n7.name&quot;,
+              &quot;action&quot;: [{&quot;deleteMapObject&quot;:270}],
+	   &quot;text&quot;: &quot;With a screeching sound that could wake the dead, the gate swings open. You are now free to pass.&quot;,
+	   &quot;loctext&quot;: &quot;adv.main_story_temple_of_liliana_forest.270.d.n6.text&quot;,
+	  &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;, &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;}]
+	 },
+	{ 
+	  &quot;name&quot;:&quot;Leave&quot;,
+	  &quot;locname&quot;: &quot;adv.shared.leave&quot; 
+	} 
+	]
   }
 ]</property>
    </properties>
