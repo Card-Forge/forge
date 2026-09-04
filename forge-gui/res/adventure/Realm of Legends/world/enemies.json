@@ -64731,16 +64731,6 @@
         "cardName": "Thurid, Mare of Destiny"
       },
       {
-        "type": "card",
-        "count": 1,
-        "cardName": "Joven"
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Chandler"
-      },
-      {
         "type": "deckCard",
         "count": 2,
         "addMaxCount": 2,
@@ -64751,8 +64741,8 @@
       },
       {
         "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "common",
           "uncommon"
@@ -65607,12 +65597,12 @@
     "ai": "",
     "speed": 45,
     "scale": 1,
-    "life": 40,
+    "life": 30,
     "rewards": [
       {
         "type": "item",
         "count": 1,
-        "itemName": "Chaos Orb"
+        "itemName": "Soothsayer's Hat"
       },
       {
         "type": "card",
@@ -65625,82 +65615,23 @@
         "cardName": "Battle of Wits"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Yorion, Sky Nomad"
+      },
+      {
         "type": "deckCard",
-        "count": 4,
-        "addMaxCount": 4,
+        "count": 2,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
         ]
-      },
-      {
-        "type": "randomCard",
-        "count": 3,
-        "addMaxCount": 6,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "gold",
-        "count": 500,
-        "addMaxCount": 2000
-      },
-      {
-        "type": "shards",
-        "count": 10,
-        "addMaxCount": 30
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "probability": 0.3,
-        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
-      },
-      {
-        "type": "landSketchbookShop",
-        "probability": 0.3,
-        "count": 1
-      }
-    ],
-    "colors": "UW",
-    "spawnRate": 0
-  },
-  {
-    "name": "Grizzlegom",
-    "sprite": "sprites/enemy/humanoid/minotaur/minotaur.atlas",
-    "deck": [
-      "decks/legends/grizzlegom.dck"
-    ],
-    "ai": "",
-    "speed": 60,
-    "scale": 1,
-    "life": 30,
-    "rewards": [
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Grizzlegom, Hurloon Hero"
       },
       {
         "type": "deckCard",
         "count": 2,
         "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
         "rarity": [
           "common",
           "uncommon"
@@ -65708,8 +65639,8 @@
       },
       {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -65733,6 +65664,80 @@
         "type": "shards",
         "count": 5,
         "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      }
+    ],
+    "colors": "UW",
+    "spawnRate": 0
+  },
+  {
+    "name": "Grizzlegom",
+    "sprite": "sprites/enemy/humanoid/minotaur/minotaur.atlas",
+    "deck": [
+      "decks/legends/grizzlegom.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Grizzlegom, Hurloon Hero"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 8,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 0,
+        "addMaxCount": 5
       }
     ],
     "colors": "RG",
@@ -65756,17 +65761,8 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 4,
+        "addMaxCount": 8,
         "rarity": [
           "common",
           "uncommon"
@@ -65774,8 +65770,8 @@
       },
       {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 3,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -65783,8 +65779,8 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "common",
           "uncommon"
@@ -65792,13 +65788,13 @@
       },
       {
         "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
+        "count": 50,
+        "addMaxCount": 250
       },
       {
         "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
+        "count": 0,
+        "addMaxCount": 5
       }
     ],
     "colors": "G",
@@ -65813,7 +65809,7 @@
     "ai": "",
     "speed": 60,
     "scale": 1,
-    "life": 30,
+    "life": 20,
     "rewards": [
       {
         "type": "card",
@@ -65879,7 +65875,7 @@
     "ai": "",
     "speed": 60,
     "scale": 1,
-    "life": 30,
+    "life": 20,
     "rewards": [
       {
         "type": "card",
@@ -65888,17 +65884,8 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 4,
+        "addMaxCount": 8,
         "rarity": [
           "common",
           "uncommon"
@@ -65906,8 +65893,8 @@
       },
       {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 3,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -65915,8 +65902,8 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "common",
           "uncommon"
@@ -65924,13 +65911,13 @@
       },
       {
         "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
+        "count": 50,
+        "addMaxCount": 250
       },
       {
         "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
+        "count": 0,
+        "addMaxCount": 5
       }
     ],
     "colors": "B",
@@ -65945,7 +65932,7 @@
     "ai": "",
     "speed": 60,
     "scale": 1,
-    "life": 30,
+    "life": 20,
     "rewards": [
       {
         "type": "card",
@@ -65954,17 +65941,8 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 4,
+        "addMaxCount": 8,
         "rarity": [
           "common",
           "uncommon"
@@ -65972,8 +65950,8 @@
       },
       {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 3,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -65981,8 +65959,8 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "common",
           "uncommon"
@@ -65990,13 +65968,13 @@
       },
       {
         "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
+        "count": 50,
+        "addMaxCount": 250
       },
       {
         "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
+        "count": 0,
+        "addMaxCount": 5
       }
     ],
     "colors": "C",
@@ -66011,7 +65989,7 @@
     "ai": "",
     "speed": 60,
     "scale": 1,
-    "life": 30,
+    "life": 20,
     "rewards": [
       {
         "type": "card",
@@ -66020,17 +65998,8 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 4,
+        "addMaxCount": 8,
         "rarity": [
           "common",
           "uncommon"
@@ -66038,8 +66007,8 @@
       },
       {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 3,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -66047,8 +66016,8 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "common",
           "uncommon"
@@ -66056,13 +66025,13 @@
       },
       {
         "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
+        "count": 50,
+        "addMaxCount": 250
       },
       {
         "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
+        "count": 0,
+        "addMaxCount": 5
       }
     ],
     "colors": "W",
@@ -66077,7 +66046,7 @@
     "ai": "",
     "speed": 60,
     "scale": 1,
-    "life": 30,
+    "life": 20,
     "rewards": [
       {
         "type": "card",
@@ -66086,17 +66055,8 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 4,
+        "addMaxCount": 8,
         "rarity": [
           "common",
           "uncommon"
@@ -66104,8 +66064,8 @@
       },
       {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 3,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -66113,8 +66073,8 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "common",
           "uncommon"
@@ -66122,13 +66082,13 @@
       },
       {
         "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
+        "count": 50,
+        "addMaxCount": 250
       },
       {
         "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
+        "count": 0,
+        "addMaxCount": 5
       }
     ],
     "colors": "R",
