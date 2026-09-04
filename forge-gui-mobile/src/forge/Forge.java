@@ -1026,8 +1026,14 @@ public class Forge implements ApplicationListener {
         }
         Dscreens.clear();
         // don't call getInstance() or they will be recreated on dispose
-        safeDispose(MapStage.instance, Adventure.instance, ScreenUtil.instance, ShaderUtil.instance,
-            graphics, Assets.instance, lastPreview);
+        safeDispose( // I need to know what line the startup bug occurs when the app is paused...
+            MapStage.instance,
+            Adventure.instance,
+            ScreenUtil.instance,
+            ShaderUtil.instance,
+            graphics,
+            Assets.instance,
+            lastPreview);
         try {
             SoundSystem.instance.dispose();
         } catch (Exception e) {

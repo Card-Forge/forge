@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
+import forge.Forge;
 import forge.gui.FThreads;
 
 public class ScreenUtil implements Disposable {
@@ -43,6 +44,6 @@ public class ScreenUtil implements Disposable {
     @Override
     public void dispose() {
         if (lastScreenTexture != null)
-            lastScreenTexture.getTexture().dispose();
+            Forge.safeDispose(lastScreenTexture.getTexture());
     }
 }

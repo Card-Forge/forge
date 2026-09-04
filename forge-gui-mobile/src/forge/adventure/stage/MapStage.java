@@ -131,13 +131,7 @@ public class MapStage extends GameStage {
     }
 
     public void disposeWorld() {
-        if (gdxWorld != null) {
-            try {
-                gdxWorld.dispose();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        Forge.safeDispose(gdxWorld);
     }
 
     public void addMapActor(MapObject obj, MapActor newActor) {

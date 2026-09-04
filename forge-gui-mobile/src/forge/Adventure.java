@@ -84,9 +84,6 @@ public class Adventure implements Disposable {
     }
     @Override
     public void dispose() {
-        if (transitionBatch != null)
-            transitionBatch.dispose();
-        if (uiBatch != null)
-            uiBatch.dispose();
+        Forge.safeDispose(transitionBatch, uiBatch);
     }
 }
