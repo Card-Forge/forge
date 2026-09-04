@@ -231,6 +231,7 @@ public final class FModel {
         getMagicDb().setStandardPredicate(getFormats().getStandard().getFilterRules());
         getMagicDb().setPioneerPredicate(getFormats().getPioneer().getFilterRules());
         getMagicDb().setModernPredicate(getFormats().getModern().getFilterRules());
+        // Wherever this commander filter rules comes from needs to apply the Rulebreaker rules
         getMagicDb().setCommanderPredicate(getFormats().get("Commander").getFilterRules());
         getMagicDb().setOathbreakerPredicate(getFormats().get("Oathbreaker").getFilterRules());
         getMagicDb().setBrawlPredicate(getFormats().get("Brawl").getFilterRules());

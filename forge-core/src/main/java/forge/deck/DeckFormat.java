@@ -610,8 +610,14 @@ public enum DeckFormat {
 
     public Predicate<PaperCard> isLegalCardForCommanderPredicate(List<PaperCard> commanders) {
         byte cmdCI = 0;
+        Map<String, String> allowances =  new HashMap<>();
         for (final PaperCard p : commanders) {
             cmdCI |= p.getRules().getColorIdentity().getColor();
+
+            DeckBuildingAdjustments adjustments = p.getRules().getDeckBuildingAdjustments();
+            if (adjustments != null && adjustments.getMatchType().equals("Commander")) {
+                allowances.putAll(adjustments.getValidAllowances());
+            }
         }
         if(cmdCI == MagicColor.ALL_COLORS)
             return x -> true;
@@ -622,9 +628,57 @@ public enum DeckFormat {
             // Notably, no partner ability or combination of partner abilities can ever let a player have more than two commanders.
             predicate = predicate.or(CardRulesPredicates.canBePartnerCommanderWith(commanders.get(0).getRules()));
         }
-        return PaperCardPredicates.fromRules(predicate);
 
         // Also consider if commanders provide a deckbuilding allowance
+        // Super Type + Card Type
+        // Subtype
+        // Card Type
+        // Card Type + CMC
+        // Card Type + Card Type
+        // Subtype
+        // Subtype
+        // Card Type / Card Type (single extra color)
 
+
+        for (Map.Entry<String, String> allowance : allowances.entrySet()) {
+            String key = allowance.getKey();
+            String value = allowance.getValue();
+
+            Predicate<CardRules> newPredicate = switch (key) {
+                case "Basic" -> CardRulesPredicates.superType(CardType.Supertype.valueOf(value)).and(CardRulesPredicates.coreType(value));
+                case "SuperType" -> CardRulesPredicates.superType(CardType.Supertype.valueOf(value));
+                case "CardType" -> CardRulesPredicates.coreType(value);
+                case "SubType" -> CardRulesPredicates.subType(value);
+//                case "CardType+CMC" -> {
+//                    String[] parts = value.split("\\+");
+//                    if (parts.length == 2) {
+//                        yield CardRulesPredicates.cardTypeAndCMC(parts[0], Integer.parseInt(parts[1]));
+//                    } else {
+//                        throw new IllegalArgumentException("Invalid allowance format for CardType+CMC: " + value);
+//                    }
+//                }
+//                case "CardType+CardType" -> {
+//                    String[] parts = value.split("\\+");
+//                    if (parts.length == 2) {
+//                        yield CardRulesPredicates.cardTypeAndCardType(parts[0], parts[1]);
+//                    } else {
+//                        throw new IllegalArgumentException("Invalid allowance format for CardType+CardType: " + value);
+//                    }
+//                }
+//                case "Subtype/Subtype" -> {
+//                    String[] parts = value.split("/");
+//                    if (parts.length == 2) {
+//                        yield CardRulesPredicates.subtypeOrSubtype(parts[0], parts[1]);
+//                    } else {
+//                        throw new IllegalArgumentException("Invalid allowance format for Subtype/Subtype: " + value);
+//                    }
+//                }
+                default -> throw new IllegalArgumentException("Unknown allowance type: " + key);
+            };
+
+            predicate = predicate.or(newPredicate);
+        }
+
+        return PaperCardPredicates.fromRules(predicate);
     }
 }

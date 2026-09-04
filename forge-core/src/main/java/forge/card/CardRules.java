@@ -443,6 +443,10 @@ public final class CardRules implements ICardCharacteristics {
         return partnerWith;
     }
 
+    public DeckBuildingAdjustments getDeckBuildingAdjustments() {
+        return deckBuildingAdjustments;
+    }
+
     public boolean getAddsWildCardColor() {
         return mainPart.getOracleText().contains(" is your commander, choose a color before the game begins.");
     }
