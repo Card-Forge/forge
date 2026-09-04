@@ -106,6 +106,7 @@ public class Assets implements Disposable {
     private FrameBuffer cardFrameBuffer, itemFrameBuffer;
     private GifAnimation gifAnimation;
     private Graphics assetGraphics;
+    private boolean isDisposed = false;
 
     private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -129,54 +130,57 @@ public class Assets implements Disposable {
 
     @Override
     public void dispose() {
-        if (counterFonts != null) {
-            for (BitmapFont bitmapFont : counterFonts.values())
-                Forge.safeDispose(bitmapFont);
-            counterFonts.clear();
+        if (!isDisposed) {
+            isDisposed = true;
+            if (counterFonts != null) {
+                for (BitmapFont bitmapFont : counterFonts.values())
+                    Forge.safeDispose(bitmapFont);
+                counterFonts.clear();
+            }
+            if (fallback_skins != null) {
+                for (Texture texture : fallback_skins.values())
+                    Forge.safeDispose(texture);
+                fallback_skins.clear();
+            }
+            if (tmxMap != null) {
+                for (Texture texture : tmxMap.values())
+                    Forge.safeDispose(texture);
+                tmxMap.clear();
+            }
+            if (textrafonts != null) {
+                for (Font f : textrafonts.values())
+                    Forge.safeDispose(f);
+                textrafonts.clear();
+            }
+            Forge.safeDispose(
+                defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
+                cardFrameBuffer, itemFrameBuffer, gifAnimation, assetGraphics);
+            if (cardArtCache != null)
+                cardArtCache.clear();
+            if (avatarImages != null)
+                avatarImages.clear();
+            if (manaImages != null)
+                manaImages.clear();
+            if (symbolLookup != null)
+                symbolLookup.clear();
+            if (images != null)
+                images.clear();
+            if (avatars != null)
+                avatars.clear();
+            if (sleeves != null)
+                sleeves.clear();
+            if (cracks != null)
+                cracks.clear();
+            if (borders != null)
+                borders.clear();
+            if (deckbox != null)
+                deckbox.clear();
+            if (cursor != null)
+                cursor.clear();
+            if (fonts != null)
+                fonts.clear();
+            Forge.safeDispose(manager);
         }
-        if (fallback_skins != null) {
-            for (Texture texture : fallback_skins.values())
-                Forge.safeDispose(texture);
-            fallback_skins.clear();
-        }
-        if (tmxMap != null) {
-            for (Texture texture : tmxMap.values())
-                Forge.safeDispose(texture);
-            tmxMap.clear();
-        }
-        if (textrafonts != null) {
-            for (Font f : textrafonts.values())
-                Forge.safeDispose(f);
-            textrafonts.clear();
-        }
-        Forge.safeDispose(
-            defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
-            cardFrameBuffer, itemFrameBuffer, gifAnimation, assetGraphics);
-        if (cardArtCache != null)
-            cardArtCache.clear();
-        if (avatarImages != null)
-            avatarImages.clear();
-        if (manaImages != null)
-            manaImages.clear();
-        if (symbolLookup != null)
-            symbolLookup.clear();
-        if (images != null)
-            images.clear();
-        if (avatars != null)
-            avatars.clear();
-        if (sleeves != null)
-            sleeves.clear();
-        if (cracks != null)
-            cracks.clear();
-        if (borders != null)
-            borders.clear();
-        if (deckbox != null)
-            deckbox.clear();
-        if (cursor != null)
-            cursor.clear();
-        if (fonts != null)
-            fonts.clear();
-        Forge.safeDispose(manager);
     }
 
     public Graphics getAssetGraphics() {
