@@ -29,8 +29,8 @@ public class ScreenUtil implements Disposable {
             if (lastScreenTexture != null)
                 lastScreenTexture.getTexture().dispose();
 
-            int width = Gdx.graphics.getBackBufferWidth();
-            int height = Gdx.graphics.getBackBufferHeight();
+            int width = Forge.getScreenWidth();
+            int height = Forge.getScreenHeight();
             Texture texture = new Texture(width, height, Pixmap.Format.RGB565);
             lastScreenTexture = new TextureRegion(texture);
             lastScreenTexture.flip(false, true);
@@ -50,8 +50,8 @@ public class ScreenUtil implements Disposable {
         Pixmap pixmap = new Pixmap(THUMB_WIDTH, THUMB_HEIGHT, Pixmap.Format.RGBA8888);
 
         // Read full framebuffer into a ByteBuffer
-        int fbW = Gdx.graphics.getBackBufferWidth();
-        int fbH = Gdx.graphics.getBackBufferHeight();
+        int fbW = Forge.getScreenWidth();
+        int fbH = Forge.getScreenHeight();
         ByteBuffer pixels = BufferUtils.newByteBuffer(fbW * fbH * 4);
 
         Gdx.gl.glPixelStorei(GL20.GL_PACK_ALIGNMENT, 1);
@@ -72,15 +72,33 @@ public class ScreenUtil implements Disposable {
                 pixmap.drawPixel(x, THUMB_HEIGHT - 1 - y, (r << 24) | (g << 16) | (b << 8) | a);
             }
         }
-        updateLastPreview(pixmap);
+        updateLastPreview(pixmap, 0.15f);
         return pixmap;
     }
 
-    private void updateLastPreview(Pixmap preview) {
-        Pixmap blurred = BlurUtils.blur(preview, 2, 2, false, 2, 0);
+    private void updateLastPreview(Pixmap original, float scaleFactor) {
+        // Calculate tiny target dimensions
+        int targetWidth = Math.max(1, Math.round(original.getWidth() * scaleFactor));
+        int targetHeight = Math.max(1, Math.round(original.getHeight() * scaleFactor));
+        int cropWidth = (int) (original.getWidth() * 0.66);
+        int cropHeight = (int) (original.getHeight() * 0.66);
+        int startX = (original.getWidth() - cropWidth) / 2;
+        int startY = (original.getHeight() - cropHeight) / 2;
+
+        // Create a small, lightweight Pixmap
+        Pixmap smallPixmap = new Pixmap(targetWidth, targetHeight, original.getFormat());
+
+        // Draw full-res Pixmap into the small Pixmap (CPU hardware downsampling)
+        smallPixmap.setFilter(Pixmap.Filter.BiLinear);
+        smallPixmap.drawPixmap(original,
+            startX, startY, cropWidth, cropHeight,
+            0, 0, targetWidth, targetHeight);
+
         if (Forge.lastPreview != null)
             Forge.lastPreview.dispose();
-        Forge.lastPreview = new Texture(blurred);
+        Forge.lastPreview = new Texture(smallPixmap);
+        Forge.lastPreview.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        smallPixmap.dispose();
     }
 
     @Override

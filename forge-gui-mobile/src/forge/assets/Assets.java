@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.tommyettinger.textra.Font;
 import forge.Forge;
+import forge.Graphics;
 import forge.animation.GifAnimation;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -104,6 +105,7 @@ public class Assets implements Disposable {
     private Texture whiteTexture, backdropTexture, grayTexture, holofoil;
     private FrameBuffer cardFrameBuffer, itemFrameBuffer;
     private GifAnimation gifAnimation;
+    private Graphics assetGraphics;
 
     private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -149,7 +151,7 @@ public class Assets implements Disposable {
         }
         Forge.safeDispose(
             defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
-            cardFrameBuffer, itemFrameBuffer, gifAnimation);
+            cardFrameBuffer, itemFrameBuffer, gifAnimation, assetGraphics);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -175,6 +177,12 @@ public class Assets implements Disposable {
         if (fonts != null)
             fonts.clear();
         Forge.safeDispose(manager);
+    }
+
+    public Graphics getAssetGraphics() {
+        if (assetGraphics == null)
+            assetGraphics = new Graphics(Forge.LOW_SPRITES_CAP);
+        return assetGraphics;
     }
 
     public GifAnimation getGifAnimation() {
