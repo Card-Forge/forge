@@ -65599,6 +65599,542 @@
     "spawnRate": 0
   },
   {
+    "name": "Whtz",
+    "sprite": "sprites/enemy/aberration/eye.atlas",
+    "deck": [
+      "decks/legends/whtz.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Chaos Orb"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Whtz, the Bibliophile"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Battle of Wits"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "UW",
+    "spawnRate": 0
+  },
+  {
+    "name": "Grizzlegom",
+    "sprite": "sprites/enemy/humanoid/minotaur/minotaur.atlas",
+    "deck": [
+      "decks/legends/grizzlegom.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Grizzlegom, Hurloon Hero"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "RG",
+    "spawnRate": 0
+  },
+  {
+    "name": "Maular",
+    "sprite": "sprites/enemy/beast/dinosaur/ghalta.atlas",
+    "deck": [
+      "decks/legends/maular.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 2,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Maular, the Next Evolution"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "G",
+    "spawnRate": 0
+  },
+  {
+    "name": "Tolabow",
+    "sprite": "sprites/enemy/beast/smallmammals/weasel.atlas",
+    "deck": [
+      "decks/legends/tolabow.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Tolabow, Loch Rascal"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "U",
+    "spawnRate": 0
+  },
+  {
+    "name": "Valko Indorian",
+    "sprite": "sprites/enemy/humanoid/human/warlock/false_monk.atlas",
+    "deck": [
+      "decks/legends/valko_indorian.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Valko Indorian"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "B",
+    "spawnRate": 0
+  },
+  {
+    "name": "The Everforger",
+    "sprite": "sprites/enemy/construct/prototype.atlas",
+    "deck": [
+      "decks/legends/the_everforger.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "The Everforger"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "C",
+    "spawnRate": 0
+  },
+  {
+    "name": "Seluma",
+    "sprite": "sprites/enemy/celestial/angel_1.atlas",
+    "deck": [
+      "decks/legends/seluma.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Seluma, Light of Aysen"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "W",
+    "spawnRate": 0
+  },
+  {
+    "name": "The Unluckiest",
+    "sprite": "sprites/enemy/humanoid/human/shaman/pyromancer.atlas",
+    "deck": [
+      "decks/legends/the_unluckiest.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "The Unluckiest Planeswalker"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "R",
+    "spawnRate": 0
+  },
+  {
     "name": "Zo-Zu the Punisher",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
     "deck": [
