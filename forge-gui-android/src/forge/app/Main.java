@@ -582,8 +582,9 @@ public class Main extends AndroidApplication {
             heapHeartbeatHandler.removeCallbacks(heapHeartbeat);
             heapHeartbeatHandler = null;
         }
-        if (forgeApp != null)
-            forgeApp.dispose();
+        // commented out since this prematurely destroy the running dispose scheduler
+        //if (forgeApp != null)
+            //forgeApp.dispose();
         super.onDestroy();
         //ensure app doesn't stick around
         //ActivityManager am = (ActivityManager)getSystemService(Activity.ACTIVITY_SERVICE);
@@ -827,7 +828,9 @@ public class Main extends AndroidApplication {
         @Override
         public void exit() {
             Gdx.app.exit();
-            finish();
+            // commented out finish() since this is called by Gdx.app,exit() calling finish() early here
+            // may break the dispose calls scheduler so let Gdx run its lifecycle scheduler instead of forcing it
+            //finish();
         }
 
         @Override

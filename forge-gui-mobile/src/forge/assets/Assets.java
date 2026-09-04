@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.tommyettinger.textra.Font;
 import forge.Forge;
+import forge.Graphics;
 import forge.animation.GifAnimation;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -102,8 +103,9 @@ public class Assets implements Disposable {
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
     private Texture whiteTexture, backdropTexture, grayTexture, holofoil;
-    private FrameBuffer screenFrameBuffer, cardFrameBuffer, itemFrameBuffer;
+    private FrameBuffer cardFrameBuffer, itemFrameBuffer;
     private GifAnimation gifAnimation;
+    private Graphics assetGraphics;
 
     private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -147,8 +149,9 @@ public class Assets implements Disposable {
                 Forge.safeDispose(f);
             textrafonts.clear();
         }
-        Forge.safeDispose(defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture, screenFrameBuffer,
-            cardFrameBuffer, itemFrameBuffer, gifAnimation);
+        Forge.safeDispose(
+            defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
+            cardFrameBuffer, itemFrameBuffer, gifAnimation, assetGraphics);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -176,6 +179,12 @@ public class Assets implements Disposable {
         Forge.safeDispose(manager);
     }
 
+    public Graphics getAssetGraphics() {
+        if (assetGraphics == null)
+            assetGraphics = new Graphics(Forge.LOW_SPRITES_CAP);
+        return assetGraphics;
+    }
+
     public GifAnimation getGifAnimation() {
         return gifAnimation;
     }
@@ -193,18 +202,6 @@ public class Assets implements Disposable {
     public void stopGifAnimation() {
         if (gifAnimation != null)
             gifAnimation.stop();
-    }
-
-    public FrameBuffer getScreenFrameBuffer() {
-        if (screenFrameBuffer == null) {
-            try {
-              screenFrameBuffer =  new FrameBuffer(Pixmap.Format.RGBA8888, Forge.getScreenWidth(), Forge.getScreenHeight(), false);
-            } catch (Exception e) {
-                // framebuffer creation failed
-                e.printStackTrace();
-            }
-        }
-        return screenFrameBuffer;
     }
 
     public FrameBuffer getItemFrameBuffer(final int w, final int h, boolean isCard) {
