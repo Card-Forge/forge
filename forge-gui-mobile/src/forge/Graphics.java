@@ -43,6 +43,7 @@ public class Graphics implements Disposable {
     private int failedClipCount;
     private float alphaComposite = 1;
     private int transformCount = 0;
+    private boolean isDisposed = false;
 
     public Graphics(final int spriteCapacity) {
         batch = new SpriteBatch(spriteCapacity);
@@ -66,7 +67,10 @@ public class Graphics implements Disposable {
 
     @Override
     public void dispose() {
-        Forge.safeDispose(batch, shapeRenderer);
+        if (!isDisposed) {
+            isDisposed = true;
+            Forge.safeDispose(batch, shapeRenderer);
+        }
     }
 
     public SpriteBatch getBatch() {

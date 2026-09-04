@@ -969,9 +969,6 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
-        // Investigate why this would be 0..
-        if (width < 1 || height < 1)
-            return;
         try {
             if (currentScreen != null) {
                 currentScreen.setSize(width, height);
@@ -1045,6 +1042,10 @@ public class Forge implements ApplicationListener {
             e.printStackTrace();
         }
     }
+    public boolean triggerDispose() {
+        dispose();
+        return true;
+    }
     public static void safeDispose(Disposable... disposables) {
         for (Disposable d : disposables) {
             if (d != null) {
@@ -1052,6 +1053,8 @@ public class Forge implements ApplicationListener {
                     d.dispose();
                 } catch (Exception e) {
                     e.printStackTrace();
+                } finally {
+                    d = null;
                 }
             }
         }
