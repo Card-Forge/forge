@@ -582,8 +582,7 @@ public class Main extends AndroidApplication {
             heapHeartbeatHandler.removeCallbacks(heapHeartbeat);
             heapHeartbeatHandler = null;
         }
-        if (forgeApp != null)
-            forgeApp = null;
+        triggerDispose();
         super.onDestroy();
         //ensure app doesn't stick around
         //ActivityManager am = (ActivityManager)getSystemService(Activity.ACTIVITY_SERVICE);
@@ -826,14 +825,10 @@ public class Main extends AndroidApplication {
 
         @Override
         public void exit() {
-            //TODO: Investigate why Gdx.app.exit() prevents restart once app is opened then close. Commented out and manage disposal manually
+            //TODO: Investigate why Gdx.app.exit() prevents restart once app is opened then close.
+            // Commented out and manage disposal manually
             //Gdx.app.exit();
-            if (forgeApp != null) {
-                netLog.info("Disposing Forge..");
-                if (((Forge)forgeApp).testDispose()) {
-                    finish();
-                }
-            }
+            triggerDispose();
         }
 
         @Override
@@ -932,6 +927,16 @@ public class Main extends AndroidApplication {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
         });
+    }
+
+    private void triggerDispose() {
+        if (forgeApp != null) {
+            netLog.info("Disposing Forge..");
+            if (((Forge)forgeApp).triggerDispose()) {
+                finish();
+                forgeApp = null;
+            }
+        }
     }
 
     private void triggerRebirth() {

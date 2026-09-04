@@ -1042,7 +1042,7 @@ public class Forge implements ApplicationListener {
             e.printStackTrace();
         }
     }
-    public boolean testDispose() {
+    public boolean triggerDispose() {
         dispose();
         return true;
     }
