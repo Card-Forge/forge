@@ -79,16 +79,18 @@ public class PumpAllAi extends PumpAiBase {
         final String valid = sa.getParamOrDefault("ValidCards", "");
 
         CardCollection comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
-        // A mass pump lands on every opponent's board at once, so weigh all of them. In a two
-        // player game this is the same list getStrongestOpponent() was giving.
-        CardCollection human = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
+        CardCollection human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
+        // Choosing X needs every board the sweep actually lands on, not just the strongest
+        // opponent's. The card-value comparison further down keeps the narrower list on purpose:
+        // its +200 margin is calibrated against one opponent and does not rescale to a sum.
+        CardCollection allFoes = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
 
         // Nothing else announces X for a -X/-X sweep: PumpAll has an AI class, so the generic X
         // handling in AiController is skipped, and on cards like Toxic Deluge the X lives in a
         // non-mana cost (PayLife<X>) that path would not see either. Without this the amounts
         // below both read 0 and the sweep evaluates as -0/-0.
         if (sa.isCurse() && usesPaidX(sa)) {
-            final SweepChoice sweep = chooseXForSweep(ai, sa, comp, human);
+            final SweepChoice sweep = chooseXForSweep(ai, sa, comp, allFoes);
             if (sweep.x() <= 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
@@ -203,20 +205,21 @@ public class PumpAllAi extends PumpAiBase {
      * Returns 0 when no value of X is worth casting at, so the caller can bail out.
      */
     private SweepChoice chooseXForSweep(final Player ai, final SpellAbility sa, final CardCollection own, final CardCollection foes) {
-        // Also sets X to its maximum, which is what the amounts would otherwise be read at.
-        final int maxX = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
-        if (maxX <= 0) {
-            return new SweepChoice(0, false);
+        // An X past the toughest thing we want dead kills no more of theirs and only more of ours,
+        // so it can never score better. That bounds the scan without asking what we can pay.
+        int worthwhile = 0;
+        for (Card c : foes) {
+            worthwhile = Math.max(worthwhile, Math.max(c.getNetToughness(), ComputerUtilCombat.getDamageToKill(c, false)));
         }
 
         // Which creatures die only changes at the toughnesses actually on the battlefield, so try
-        // those values instead of every point up to maxX - otherwise the AI walks its whole life
-        // total one point at a time to reach the same answer. A superset is fine; diesToCurse stays
-        // the single authority on what any given X actually kills.
+        // those values instead of every point up to the bound - otherwise the AI walks its whole
+        // life total one point at a time to reach the same answer. A superset is fine; diesToCurse
+        // stays the single authority on what any given X actually kills.
         final SortedSet<Integer> candidates = new TreeSet<>();
         for (Card c : Iterables.concat(own, foes)) {
-            addCandidate(candidates, c.getNetToughness(), maxX);
-            addCandidate(candidates, ComputerUtilCombat.getDamageToKill(c, false), maxX);
+            addCandidate(candidates, c.getNetToughness(), worthwhile);
+            addCandidate(candidates, ComputerUtilCombat.getDamageToKill(c, false), worthwhile);
         }
 
         final boolean paysLife = paysLifeForX(sa);
@@ -243,6 +246,23 @@ public class PumpAllAi extends PumpAiBase {
             if (cheapestLethal == 0 && couldReachLethal(ai, own, x, pumps && ourTurn ? x : 0)) {
                 cheapestLethal = x;
             }
+        }
+
+        // Asking what we can pay is the expensive part of this method - a mana solver call, about
+        // 4ms on a wide board - so it waits until the arithmetic above has found something worth
+        // paying for. The answer only ever narrows the candidates, so deferring it cannot change
+        // which X is chosen; on a board where the sweep can do nothing it is never made at all.
+        if (scores.isEmpty() && cheapestLethal == 0) {
+            return new SweepChoice(0, false);
+        }
+        final int maxX = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
+        if (maxX <= 0) {
+            return new SweepChoice(0, false);
+        }
+        scores.keySet().removeIf(x -> x > maxX);
+        // cheapestLethal is the smallest X that reached, so if it is unaffordable none below it is.
+        if (cheapestLethal > maxX) {
+            cheapestLethal = 0;
         }
 
         // Mirrors DamageAllAi: a sweep that just wins beats any card-value comparison. Only the
