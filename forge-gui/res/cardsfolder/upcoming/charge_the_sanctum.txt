@@ -1,0 +1,8 @@
+Name:Charge the Sanctum
+ManaCost:2 RW
+Types:Instant
+A:SP$ Charm | Choices$ DBPumpAll,DBPump
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +2 | KW$ First Strike | SubAbility$ DBPutCounter | SpellDescription$ Target creature gets +2/+0 and gains first strike until end of turn. Put a +1/+1 counter on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Choose one —\n• Creatures you control get +2/+0 until end of turn.\n• Target creature gets +2/+0 and gains first strike until end of turn. Put a +1/+1 counter on it.
