@@ -2904,9 +2904,13 @@ public class GameSimulationTest extends SimulationTest {
     @Test(dataProvider = "losesManaAbility")
     public void testLibraryMovementLosesManaAbility(String cardName) {
         Card c = manaAbilityTestCard(cardName);
+        SpellAbility sa = manaAddingActivatedAbility(c);
         AssertJUnit.assertFalse(cardName + " moves a card to or from a library, so its ability now"
-                + " uses the stack", manaAddingActivatedAbility(c).isManaAbility());
-        AssertJUnit.assertTrue(cardName, c.getManaAbilities().isEmpty());
+                + " uses the stack", sa.isManaAbility());
+        // the specific ability, not the card's whole mana-ability set, so this keeps working for a
+        // card that also has an unrelated mana ability
+        AssertJUnit.assertFalse(cardName + " is still offered as a mana source",
+                c.getManaAbilities().contains(sa));
     }
 
     @Test(dataProvider = "keepsManaAbility")
@@ -2914,7 +2918,8 @@ public class GameSimulationTest extends SimulationTest {
         Card c = manaAbilityTestCard(cardName);
         AssertJUnit.assertTrue(cardName + " moves no card to or from a library",
                 manaAddingActivatedAbility(c).isManaAbility());
-        AssertJUnit.assertFalse(cardName, c.getManaAbilities().isEmpty());
+        AssertJUnit.assertFalse(cardName + " has no mana ability left",
+                c.getManaAbilities().isEmpty());
     }
 
     // The two predicates the clause is built from, checked directly. No mana ability uses Seek,
@@ -2982,12 +2987,25 @@ public class GameSimulationTest extends SimulationTest {
                 ApiType.Play.getSpellEffect().movesCardToOrFromLibrary(
                         new SpellAbility.EmptySa(ApiType.Play, c)));
 
+        // card scripts write Destination$ TopOfLibrary and BottomOfLibrary, which name the library
+        // without being zone names
+        SpellAbility toTopOfLibrary = new SpellAbility.EmptySa(ApiType.ChangeZone, c);
+        toTopOfLibrary.putParam("Origin", "Graveyard");
+        toTopOfLibrary.putParam("Destination", "TopOfLibrary");
+        AssertJUnit.assertTrue("ChangeZone to the top of a library",
+                ApiType.ChangeZone.getSpellEffect().movesCardToOrFromLibrary(toTopOfLibrary));
+
         // Manifest defaults to the top of the library, so only an explicit non-library ChoiceZone
         // takes it out of scope
         SpellAbility manifestFromHand = new SpellAbility.EmptySa(ApiType.Manifest, c);
         manifestFromHand.putParam("ChoiceZone", "Hand");
         AssertJUnit.assertFalse("Manifest from hand",
                 ApiType.Manifest.getSpellEffect().movesCardToOrFromLibrary(manifestFromHand));
+
+        SpellAbility manifestBlankZone = new SpellAbility.EmptySa(ApiType.Manifest, c);
+        manifestBlankZone.putParam("ChoiceZone", "");
+        AssertJUnit.assertTrue("a blank ChoiceZone falls back to the library",
+                ApiType.Manifest.getSpellEffect().movesCardToOrFromLibrary(manifestBlankZone));
     }
 
     @DataProvider(name = "costLibraryMovement")

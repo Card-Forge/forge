@@ -15,13 +15,15 @@ import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class ManifestBaseEffect extends SpellAbilityEffect {
 
     @Override
     public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
-        // manifests the top of the library unless ChoiceZone points somewhere else
-        return !sa.hasParam("ChoiceZone") || zoneParamIsLibrary(sa, "ChoiceZone");
+        // manifests the top of the library unless ChoiceZone points somewhere else. A blank
+        // ChoiceZone is treated as absent, so it falls back to the library rather than out of scope.
+        return StringUtils.isBlank(sa.getParam("ChoiceZone")) || zoneParamIsLibrary(sa, "ChoiceZone");
     }
 
     @Override

@@ -409,7 +409,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
 
-        // CR 605.1a: not a mana ability if paying for it moves a card to or from a library
+        // CR 605.1a: not a mana ability if paying for it moves a card to or from a library.
+        // Only the root ability's cost is inspected because sub-abilities carry no cost of their
+        // own, an assumption the engine makes elsewhere too, see getCostDescription().
         final Cost cost = getPayCosts();
         if (cost != null && cost.movesCardToOrFromLibrary()) {
             return false;

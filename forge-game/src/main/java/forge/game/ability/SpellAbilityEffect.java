@@ -59,9 +59,14 @@ public abstract class SpellAbilityEffect {
 
     /**
      * True when the given zone parameter names the library, e.g. Origin$ Graveyard,Library.
+     *
+     * Deliberately a substring test rather than a zone-list equality test: card scripts also use
+     * Destination$ TopOfLibrary and Destination$ BottomOfLibrary, which name the library but are
+     * not zone names, so parsing the value as a ZoneType list would miss them.
      */
     protected static boolean zoneParamIsLibrary(final SpellAbility sa, final String param) {
-        return sa.getParamOrDefault(param, "").contains(ZoneType.Library.toString());
+        return StringUtils.containsIgnoreCase(sa.getParamOrDefault(param, ""),
+                ZoneType.Library.toString());
     }
 
     protected String getStackDescription(final SpellAbility sa) {
