@@ -582,8 +582,9 @@ public class Main extends AndroidApplication {
             heapHeartbeatHandler.removeCallbacks(heapHeartbeat);
             heapHeartbeatHandler = null;
         }
-        if (forgeApp != null)
-            forgeApp.dispose();
+        // commented out since this prematurely destroy the running dispose scheduler
+        //if (forgeApp != null)
+            //forgeApp.dispose();
         super.onDestroy();
         //ensure app doesn't stick around
         //ActivityManager am = (ActivityManager)getSystemService(Activity.ACTIVITY_SERVICE);
