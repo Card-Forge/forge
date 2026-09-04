@@ -102,7 +102,7 @@ public class Assets implements Disposable {
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
     private Texture whiteTexture, backdropTexture, grayTexture, holofoil;
-    private FrameBuffer screenFrameBuffer, cardFrameBuffer, itemFrameBuffer;
+    private FrameBuffer cardFrameBuffer, itemFrameBuffer;
     private GifAnimation gifAnimation;
 
     private Assets() {
@@ -147,7 +147,8 @@ public class Assets implements Disposable {
                 Forge.safeDispose(f);
             textrafonts.clear();
         }
-        Forge.safeDispose(defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture, screenFrameBuffer,
+        Forge.safeDispose(
+            defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
             cardFrameBuffer, itemFrameBuffer, gifAnimation);
         if (cardArtCache != null)
             cardArtCache.clear();
@@ -193,18 +194,6 @@ public class Assets implements Disposable {
     public void stopGifAnimation() {
         if (gifAnimation != null)
             gifAnimation.stop();
-    }
-
-    public FrameBuffer getScreenFrameBuffer() {
-        if (screenFrameBuffer == null) {
-            try {
-              screenFrameBuffer =  new FrameBuffer(Pixmap.Format.RGBA8888, Forge.getScreenWidth(), Forge.getScreenHeight(), false);
-            } catch (Exception e) {
-                // framebuffer creation failed
-                e.printStackTrace();
-            }
-        }
-        return screenFrameBuffer;
     }
 
     public FrameBuffer getItemFrameBuffer(final int w, final int h, boolean isCard) {

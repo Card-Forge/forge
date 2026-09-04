@@ -3,7 +3,6 @@ package forge.adventure.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -812,12 +811,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt);
         g.end();
         g.endClip();
-        //Rendering ends here. Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.
-        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h);
-        Texture result = new Texture(pixmap, Forge.isTextureFilteringEnabled());
         frameBuffer.end();
+        // Rendering ends here. Grab the rendered framebuffer and bind to texture (faster method than initializing new texture)
+        Texture result = frameBuffer.getColorBufferTexture();
+        result.bind();
+        // Generate Mipmaps if Texture Filtering is enabled
+        if (Forge.isTextureFilteringEnabled())
+            Gdx.gl.glGenerateMipmap(GL20.GL_TEXTURE_2D);
         g.dispose();
-        pixmap.dispose();
         return result;
     }
 
@@ -856,11 +857,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             itemText.draw(batch, 1);
         }
         batch.end();
-        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, pw, ph);
-        image = new Texture(pixmap);
         frameBuffer.end();
+        image = frameBuffer.getColorBufferTexture();
+        image.bind();
         batch.dispose();
-        pixmap.dispose();
     }
 
     private void setItemTooltips(Sprite icon, Sprite backSprite, boolean isBooster) {
@@ -908,13 +908,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     description = "Quest Item";
                 getGraphics().end();
                 getGraphics().endClip();
-                Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h);
-                generatedTooltip = new Texture(pixmap, Forge.isTextureFilteringEnabled());
-                pixmap.dispose();
             } catch (Exception e) {
-                //e.printStackTrace();
+                e.printStackTrace();
             } finally {
                 frameBuffer.end();
+                generatedTooltip = frameBuffer.getColorBufferTexture();
+                generatedTooltip.bind();
                 getGraphics().dispose();
                 //reset bitmapfont to default
                 Controls.getBitmapFont("default");

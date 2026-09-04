@@ -649,7 +649,7 @@ public class UIScene extends Scene {
             //create from lastPreview from header...
             try {
                 backgroundTexture = new TextureRegion(Forge.lastPreview);
-                backgroundTexture.flip(false, true);
+                //backgroundTexture.flip(false, true);
                 screenImage.setDrawable(new TextureRegionDrawable(backgroundTexture));
             } catch (Exception e) {
                 e.printStackTrace();

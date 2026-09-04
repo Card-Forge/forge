@@ -827,7 +827,9 @@ public class Main extends AndroidApplication {
         @Override
         public void exit() {
             Gdx.app.exit();
-            finish();
+            // commented out finish() since this is called by Gdx.app,exit() calling finish() early here
+            // may break the dispose calls scheduler so let Gdx run its lifecycle scheduler instead of forcing it
+            //finish();
         }
 
         @Override
