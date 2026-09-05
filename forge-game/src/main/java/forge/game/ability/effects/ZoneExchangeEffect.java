@@ -78,10 +78,10 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
         if (object2 == null || !object2.isInZone(zone2) || (type != null && !object2.getType().hasStringType(type))) {
             return;
         }
-        // if the aura can't enchant, nothing happened.
+        // Matches CR 701.12e for any attachment type
         Card c = null;
-        if (type != null && type.equals("Aura") && object1.getEnchantingCard() != null) {
-            c = object1.getEnchantingCard();
+        if (type != null && object1.getAttachedTo() != null) {
+            c = object1.getAttachedTo();
             if (!c.canBeAttached(object2, sa)) {
                 return;
             }
