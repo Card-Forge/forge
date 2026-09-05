@@ -286,6 +286,15 @@ public abstract class PlayerController {
         return chooseNumberForKeywordCost(sa, cost, keyword, prompt, 1) == 1;
     }
 
+    /**
+     * Colors this controller means to spend on a spell it has not paid for yet, as a color mask.
+     * Only asked while nothing has been spent. Zero - the answer for a human, who pays by tapping
+     * rather than by deciding up front - leaves the card reading its own payment as empty.
+     */
+    public byte getExpectedPayingColors(SpellAbility sa) {
+        return 0;
+    }
+
     public abstract int chooseNumber(SpellAbility sa, String title, int min, int max);
     public abstract int chooseNumber(SpellAbility sa, String title, List<Integer> values, Player relatedPlayer);
     public int chooseNumber(SpellAbility sa, String string, int min, int max, Map<String, Object> params) {
