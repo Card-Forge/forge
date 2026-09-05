@@ -3,6 +3,6 @@ ManaCost:1 B B
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.AttachedBy | Execute$ TrigSac | TriggerDescription$ When enchanted creature leaves the battlefield, its controller sacrifices a creature.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.AttachedBy | Execute$ TrigSac | TriggerDescription$ When enchanted creature leaves the battlefield, its controller sacrifices a creature of their choice.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature | Defined$ TriggeredCardController
-Oracle:Enchant creature\nWhen enchanted creature leaves the battlefield, its controller sacrifices a creature.
+Oracle:Enchant creature\nWhen enchanted creature leaves the battlefield, its controller sacrifices a creature of their choice.

@@ -3,5 +3,5 @@ ManaCost:3 R
 Types:Creature Zombie Minotaur Warrior
 PT:3/3
 K:Afflict:2
-A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-Oracle:Afflict 2 (Whenever this creature becomes blocked, defending player loses 2 life.)\n{1}{R}: Frontline Devastator gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +1 | SpellDescription$ This creature gets +1/+0 until end of turn.
+Oracle:Afflict 2 (Whenever this creature becomes blocked, defending player loses 2 life.)\n{1}{R}: This creature gets +1/+0 until end of turn.

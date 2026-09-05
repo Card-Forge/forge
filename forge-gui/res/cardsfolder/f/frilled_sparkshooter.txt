@@ -4,7 +4,7 @@ Types:Creature Lizard Archer
 PT:3/3
 K:Menace
 K:Reach
-K:etbCounter:P1P1:1:CheckSVar$ X:CARDNAME enters with a +1/+1 counter on it if an opponent lost life this turn.
+K:etbCounter:P1P1:1:CheckSVar$ X:This creature enters with a +1/+1 counter on it if an opponent lost life this turn.
 SVar:X:Count$LifeOppsLostThisTurn
 DeckHas:Ability$Counters
-Oracle:Menace, reach\nFrilled Sparkshooter enters with a +1/+1 counter on it if an opponent lost life this turn.
+Oracle:Menace, reach\nThis creature enters with a +1/+1 counter on it if an opponent lost life this turn.

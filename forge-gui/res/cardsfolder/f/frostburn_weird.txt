@@ -2,5 +2,5 @@ Name:Frostburn Weird
 ManaCost:UR UR
 Types:Creature Weird
 PT:1/4
-A:AB$ Pump | Cost$ UR | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
-Oracle:{U/R}: Frostburn Weird gets +1/-1 until end of turn.
+A:AB$ Pump | Cost$ UR | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ This creature gets +1/-1 until end of turn.
+Oracle:{U/R}: This creature gets +1/-1 until end of turn.

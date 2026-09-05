@@ -2,6 +2,6 @@ Name:Fallaji Chaindancer
 ManaCost:3 R
 Types:Creature Human Soldier
 PT:2/4
-A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ Double Strike | SpellDescription$ CARDNAME gains double strike until end of turn.
+A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ Double Strike | SpellDescription$ This creature gains double strike until end of turn.
 DeckHas:Keyword$Double Strike
-Oracle:{2}: Fallaji Chaindancer gains double strike until end of turn.
+Oracle:{2}: This creature gains double strike until end of turn.

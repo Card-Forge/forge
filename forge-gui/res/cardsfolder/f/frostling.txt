@@ -3,4 +3,4 @@ ManaCost:R
 Types:Creature Spirit
 PT:1/1
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | NumDmg$ 1 | SpellDescription$ It deals 1 damage to target creature.
-Oracle:Sacrifice Frostling: It deals 1 damage to target creature.
+Oracle:Sacrifice this creature: It deals 1 damage to target creature.
