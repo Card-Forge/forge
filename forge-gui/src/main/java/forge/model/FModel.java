@@ -82,6 +82,7 @@ public final class FModel {
         new StaticData(reader, tokenReader, customReader, customTokenReader, ForgeConstants.EDITIONS_DIR,
             ForgeConstants.USER_CUSTOM_EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR, ForgeConstants.SETLOOKUP_DIR,
             getPreferences().getPref(FPref.UI_PREFERRED_ART),
+            getPreferences().getPref(FPref.UI_LANGUAGE),
             getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS),
             getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS),
             getPreferences().getPrefBoolean(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE),
