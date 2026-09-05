@@ -30,7 +30,6 @@ import forge.util.FileSection;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -65,6 +64,14 @@ public class EffectAi extends SpellAbilityAi {
                     }
                     randomReturn = true;
                 }
+            } else if (logic.equals("UnblockableForLethal")) {
+                // making everything unblockable is only worth a loyalty point if the swing it
+                // enables actually wins, so hold it until the attack would be lethal
+                if (!phase.isPlayerTurn(ai) || phase.getPhase().isAfter(PhaseType.MAIN1)
+                        || !ComputerUtilCombat.unblockedAttackIsLethal(ai)) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+                randomReturn = true;
             } else if (logic.equals("RestrictBlocking")) {
                 if (!phase.isPlayerTurn(ai) || phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)
                         || phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -81,31 +88,24 @@ public class EffectAi extends SpellAbilityAi {
                 }
 
                 Player opp = ai.getStrongestOpponent();
-                List<Card> possibleAttackers = ai.getCreaturesInPlay();
-                List<Card> possibleBlockers = opp.getCreaturesInPlay();
-                possibleBlockers = CardLists.filter(possibleBlockers, CardPredicates.UNTAPPED);
-                final Combat combat = game.getCombat();
-                int oppLife = opp.getLife();
-                int potentialDmg = 0;
-                List<Card> currentAttackers = new ArrayList<>();
-
+                List<Card> possibleBlockers = CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.UNTAPPED);
                 if (possibleBlockers.isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
-                for (final Card creat : possibleAttackers) {
-                    if (CombatUtil.canAttack(creat, opp) && possibleBlockers.size() > 1) {
-                        potentialDmg += creat.getCurrentPower();
-                        if (potentialDmg >= oppLife) {
-                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                        }
-                    }
+                if (ComputerUtilCombat.unblockedAttackIsLethal(ai, opp, ai.getCreaturesInPlay())) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+
+                final Combat combat = game.getCombat();
+                int currentAttackers = 0;
+                for (final Card creat : ai.getCreaturesInPlay()) {
                     if (combat != null && combat.isAttacking(creat)) {
-                        currentAttackers.add(creat);
+                        currentAttackers++;
                     }
                 }
 
-                if (currentAttackers.size() > possibleBlockers.size()) {
+                if (currentAttackers > possibleBlockers.size()) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
