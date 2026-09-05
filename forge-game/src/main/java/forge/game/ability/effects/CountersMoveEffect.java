@@ -98,6 +98,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         }
 
         GameEntityCounterTable table = new GameEntityCounterTable();
+        GameEntityCounterTable removeTable = new GameEntityCounterTable();
 
         // uses for multi sources -> one defined/target
         // this needs given counter type
@@ -150,10 +151,10 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 if ("All".equals(counterName)) {
                     final Multiset<CounterType> tgtCounters = HashMultiset.create(src.getCounters());
                     for (Multiset.Entry<CounterType> e : tgtCounters.entrySet()) {
-                        removeCounter(sa, src, dest, e.getElement(), counterNum, countersToAdd);
+                        removeCounter(sa, src, dest, e.getElement(), counterNum, countersToAdd, removeTable);
                     }
                 } else {
-                    removeCounter(sa, src, dest, cType, counterNum, countersToAdd);
+                    removeCounter(sa, src, dest, cType, counterNum, countersToAdd, removeTable);
                 }
             }
             for (Multiset.Entry<CounterType> e : countersToAdd.entrySet()) {
@@ -217,7 +218,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                         0, source.getCounters(cType), params);
 
                 if (cnum > 0) {
-                    source.subtractCounter(cType, cnum, activator);
+                    source.subtractCounter(cType, cnum, activator, removeTable);
                     cur.addCounter(cType, cnum, activator, table);
                     game.updateLastStateForCard(cur);
                     updateSource = true;
@@ -267,7 +268,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                     if ("All".equals(counterName)) {
                         final Multiset<CounterType> tgtCounters = HashMultiset.create(source.getCounters());
                         for (CounterType e : tgtCounters.elementSet()) {
-                            removeCounter(sa, source, cur, e, counterNum, countersToAdd);
+                            removeCounter(sa, source, cur, e, counterNum, countersToAdd, removeTable);
                         }
                     } else if ("EachNotOn".equals(counterName)) {
                         final Multiset<CounterType> tgtCounters = HashMultiset.create(source.getCounters());
@@ -275,7 +276,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                             if (cur.getCounters(e) > 0) {
                                 continue;
                             }
-                            removeCounter(sa, source, cur, e, counterNum, countersToAdd);
+                            removeCounter(sa, source, cur, e, counterNum, countersToAdd, removeTable);
                         }
                     } else if ("Any".equals(counterName)) {
                         // any counterType currently only Leech Bonder
@@ -299,14 +300,14 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                             String title = Localizer.getInstance().getMessage("lblSelectRemoveCounterType");
                             CounterType chosenType = pc.chooseCounterType(typeChoices, sa, title, params);
 
-                            removeCounter(sa, source, cur, chosenType, counterNum, countersToAdd);
+                            removeCounter(sa, source, cur, chosenType, counterNum, countersToAdd, removeTable);
                             if (!counterNum.equals("Any")) {
                                 break;
                             }
                             typeChoices.remove(chosenType);
                         }
                     } else {
-                        removeCounter(sa, source, cur, cType, counterNum, countersToAdd);
+                        removeCounter(sa, source, cur, cType, counterNum, countersToAdd, removeTable);
                     }
 
                     for (Multiset.Entry<CounterType> e : countersToAdd.entrySet()) {
@@ -317,10 +318,11 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             // update source
             game.updateLastStateForCard(source);
         }
+        removeTable.replaceRemoveCounterEffect(game, sa);
         table.replaceCounterEffect(game, sa);
     } // moveCounterResolve
 
-    protected void removeCounter(SpellAbility sa, final Card src, final Card dest, CounterType cType, String counterNum, Multiset<CounterType> countersToAdd) {
+    protected void removeCounter(SpellAbility sa, final Card src, final Card dest, CounterType cType, String counterNum, Multiset<CounterType> countersToAdd, GameEntityCounterTable removeTable) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
@@ -360,7 +362,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             cnum = Math.min(cmax, AbilityUtils.calculateAmount(host, counterNum, sa));
         }
         if (cnum > 0) {
-            src.subtractCounter(cType, cnum, activator);
+            src.subtractCounter(cType, cnum, activator, removeTable);
             game.updateLastStateForCard(src);
             countersToAdd.add(cType, cnum);
         }
