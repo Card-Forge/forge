@@ -27,3 +27,27 @@ jobs:
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
           mvn -U -B clean test
+
+      # The card-script review test writes findings here; hand them, plus the PR
+      # number, to the Card-script review workflow. A pull_request build has a
+      # read-only token on fork PRs and cannot comment, so posting happens there.
+      # The number is a hint only: the poster re-checks it against the build's
+      # trusted head SHA before commenting, so a tampered artifact can't redirect it.
+      # One matrix leg only, and always() so a test failure still ships findings.
+      - name: Stage card-script review data
+        if: ${{ always() && github.event_name == 'pull_request' && matrix.java == '17' }}
+        run: |
+          printf '{"number": %s}\n' "${{ github.event.pull_request.number }}" > card-script-pr-meta.json
+          [ -f forge-game/target/card-script-findings.json ] \
+            && cp forge-game/target/card-script-findings.json card-script-findings.json || true
+
+      - name: Upload card-script review data
+        if: ${{ always() && github.event_name == 'pull_request' && matrix.java == '17' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: card-script-review
+          path: |
+            card-script-findings.json
+            card-script-pr-meta.json
+          if-no-files-found: ignore
+          retention-days: 1   # only needed until the poster runs minutes later
