@@ -2981,6 +2981,18 @@
      ]
     }
   },
+  {
+    "name": "Soothsayer's Hat",
+    "description": "X: Rearrange top X of library. 3UU: Shuffle.",
+    "equipmentSlot": "Neck",
+    "iconName": "Soothsayer'sHat",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCard": [
+        "Soothsaying"
+      ]
+    }
+  },
     {
     "name": "Bonder's Helm",
     "description": "Pay 2 and sac a creature to shock for 2",
