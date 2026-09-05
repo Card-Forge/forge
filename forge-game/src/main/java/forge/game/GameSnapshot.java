@@ -186,7 +186,6 @@ public class GameSnapshot {
         newPlayer.setCounters(HashMultiset.create(origPlayer.getCounters()));
         newPlayer.setBlessing(origPlayer.hasBlessing(), null);
         newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
-        newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
         newPlayer.setCommitedCrimeThisTurn(origPlayer.getCommittedCrimeThisTurn());
         newPlayer.setExpentThisTurn(origPlayer.getExpentThisTurn());
         for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++) {
