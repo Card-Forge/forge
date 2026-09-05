@@ -3,7 +3,7 @@ ManaCost:5 B
 Types:Creature Zombie
 PT:4/3
 K:Cycling:B B
-T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigLoseLife | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may have target player lose life equal to the number of Zombies on the battlefield.
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigLoseLife | OptionalDecider$ You | TriggerDescription$ When you cycle this card, you may have target player lose life equal to the number of Zombies on the battlefield.
 SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Player | LifeAmount$ X
 SVar:X:Count$Valid Zombie
-Oracle:Cycling {B}{B} ({B}{B}, Discard this card: Draw a card.)\nWhen you cycle Gempalm Polluter, you may have target player lose life equal to the number of Zombies on the battlefield.
+Oracle:Cycling {B}{B} ({B}{B}, Discard this card: Draw a card.)\nWhen you cycle this card, you may have target player lose life equal to the number of Zombies on the battlefield.

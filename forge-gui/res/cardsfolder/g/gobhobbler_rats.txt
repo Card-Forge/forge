@@ -2,7 +2,7 @@ Name:Gobhobbler Rats
 ManaCost:B R
 Types:Creature Rat
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddAbility$ Pump | Condition$ Hellbent | Description$ Hellbent — As long as you have no cards in hand, CARDNAME gets +1/+0 and has "{B}: Regenerate CARDNAME."
-SVar:Pump:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddAbility$ Pump | Condition$ Hellbent | Description$ Hellbent — As long as you have no cards in hand, this creature gets +1/+0 and has "{B}: Regenerate this creature." (The next time it would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)
+SVar:Pump:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate this creature.
 SVar:BuffedBy:Card
-Oracle:Hellbent — As long as you have no cards in hand, Gobhobbler Rats gets +1/+0 and has "{B}: Regenerate Gobhobbler Rats."
+Oracle:Hellbent — As long as you have no cards in hand, this creature gets +1/+0 and has "{B}: Regenerate this creature." (The next time it would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)

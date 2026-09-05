@@ -2,9 +2,9 @@ Name:Goblin Dynamo
 ManaCost:5 R R
 Types:Creature Goblin Mutant
 PT:4/4
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ This creature deals 1 damage to any target.
 A:AB$ DealDamage | Cost$ X R T Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ It deals X damage to any target.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 DeckHas:Ability$Sacrifice
-Oracle:{T}: Goblin Dynamo deals 1 damage to any target.\n{X}{R}, {T}, Sacrifice Goblin Dynamo: It deals X damage to any target.
+Oracle:{T}: This creature deals 1 damage to any target.\n{X}{R}, {T}, Sacrifice this creature: It deals X damage to any target.

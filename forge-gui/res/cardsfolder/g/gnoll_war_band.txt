@@ -6,4 +6,4 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone
 SVar:X:PlayerCountOpponents$HasPropertywasDealtDamageThisTurn
 K:Menace
 K:Myriad
-Oracle:This spell costs {1} less to cast for each opponent who was dealt damage this turn.\nMenace\nMyriad
+Oracle:This spell costs {1} less to cast for each opponent who was dealt damage this turn.\nMenace\nMyriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)

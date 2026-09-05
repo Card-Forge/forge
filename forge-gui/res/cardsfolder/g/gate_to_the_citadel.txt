@@ -6,4 +6,4 @@ SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Seek | Cost$ 3 W T | Type$ Card.nonLand | GameActivationLimit$ 1 | StackDescription$ {p:You} seeks a nonland card. | SpellDescription$ Seek a nonland card. Activate only once.
 Text:{T}: Add {W}.
 DeckHints:Type$Gate
-Oracle:Gate to the Citadel enters tapped.\n{3}{W}, {T}: Seek a nonland card. Activate only once.\n{T}: Add {W}.
+Oracle:({T}: Add {W}.)\nGate to the Citadel enters the battlefield tapped.\n{3}{W}, {T}: Seek a nonland card. Activate only once.

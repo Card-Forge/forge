@@ -4,4 +4,4 @@ Types:Enchantment Creature Fox Monk
 PT:2/3
 K:Lifelink
 DeckHas:Ability$LifeGain
-Oracle:Lifelink
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)

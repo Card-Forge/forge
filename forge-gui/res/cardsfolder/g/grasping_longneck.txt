@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Enchantment Creature Horror
 PT:4/2
 K:Reach
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME dies, you gain 2 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this creature dies, you gain 2 life.
 SVar:TrigSac:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 2
-Oracle:Reach\nWhen Grasping Longneck dies, you gain 2 life.
+Oracle:Reach\nWhen this creature dies, you gain 2 life.
