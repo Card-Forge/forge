@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
+import forge.deck.Deck;
 import forge.game.*;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSubgameEnd;
@@ -21,6 +22,7 @@ import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.net.NetworkGameEventListener;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.quest.QuestController;
+import forge.item.PaperCard;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGameEventHandler;
@@ -260,6 +262,20 @@ public class HostedMatch {
         for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.asMap().entrySet()) {
             e.getKey().openView(new TrackableCollection<>(e.getValue()));
         }
+
+        // Decode the deck images now rather than when a view first shows them all at once.
+        // Queued behind the views opening above: the desktop clears the image cache when
+        // switching to the match screen, which would discard anything warmed earlier.
+        final Set<PaperCard> deckCards = new LinkedHashSet<>();
+        for (final RegisteredPlayer rp : match.getPlayers()) {
+            final Deck deck = rp.getDeck();
+            if (deck != null) {
+                for (final Entry<PaperCard, Integer> entry : deck.getAllCardsInASinglePool()) {
+                    deckCards.add(entry.getKey());
+                }
+            }
+        }
+        GuiBase.getInterface().invokeInEdtLater(() -> GuiBase.getInterface().preloadCardImages(deckCards));
 
         if (humanCount == 0) { //watch game but do not participate
             final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();

@@ -370,6 +370,11 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public void preloadCardImages(final Collection<PaperCard> cards) {
+        ImageCache.preloadOriginals(cards);
+    }
+
+    @Override
     public void showSpellShop() {
         Singletons.getControl().setCurrentScreen(FScreen.QUEST_CARD_SHOP);
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
