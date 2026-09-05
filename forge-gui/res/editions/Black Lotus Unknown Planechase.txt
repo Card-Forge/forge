@@ -6,8 +6,8 @@ Type=Funny
 ScryfallCode=PUNK
 
 [cards]
-PLA001 C Artist Alley (Plane) @
-PLA001a C Artist Alley (Plane) @
+PLA001 C Artist Alley @
+PLA001a C Artist Alley @
 PLA002 C The Bean @
 PLA002a C The Bean @
 PLA003 C Black Lotus Lounge @
@@ -42,7 +42,7 @@ PLA027 C Elvish Impersonation Contest @
 PLA028 C High and Dry Black Market @
 PLA029 C Jalira's Show @
 PLA030 C Mojave Desert @
-PLA031 C No Way Out (Playtest) @
+PLA031 C P-No Way Out @
 PLA032 C Omenpath Instability @
 PLA033 C Preston's Stage @
 PLA034 C Pursued by Something @

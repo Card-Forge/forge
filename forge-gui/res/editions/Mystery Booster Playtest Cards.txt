@@ -102,7 +102,7 @@ ScryfallCode=CMB1
 93 R How to Keep an Izzet Mage Busy @Scott Van Essen
 94 R Kaya, Ghost Haunter @Sydney Adams
 95 R Louvaq, the Aberrant @Cynthia Sheppard
-96 R Personal Decoy @Alison Luhrs
+96 R Personal Decoy @Alison Lührs
 97 R P-Pick Your Poison @Corey Bowen
 98 R Seek Bolas's Counsel @Matt Warren
 99 R Sliv-Mizzet, Hivemind @Jeff Stewart

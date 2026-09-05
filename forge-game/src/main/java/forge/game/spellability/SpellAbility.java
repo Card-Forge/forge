@@ -59,6 +59,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCastWithFlash;
+import forge.game.staticability.StaticAbilityManaRestriction;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -423,11 +424,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean allowsPayingWithShard(Card src, byte shard) {
-        if (!hasParam("ManaRestriction")) { return true; }
-        String res = getParam("ManaRestriction");
-        if (res.equals("None")) {
+        if (StaticAbilityManaRestriction.manaRestriction(this, src)) {
             return false;
         }
+        if (!hasParam("ManaRestriction")) { return true; }
+        String res = getParam("ManaRestriction");
         if (res.equals("ChosenColor")) {
             return this.getHostCard().hasChosenColor() && shard == ManaAtom.fromName(this.getHostCard().getChosenColor());
         }
@@ -454,6 +455,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         for (OptionalCostValue val : GameActionUtil.getOptionalCostValues(this)) {
             if (canPlayWithOptionalCost(val)) {
                 return true;
+            }
+        }
+        if (isActivatedAbility() && hasParam("AlternateCost")) {
+            for (SpellAbility alt : GameActionUtil.getAdditionalCostSpell(this)) {
+                if (alt != this && alt.canPlay()) {
+                    return true;
+                }
             }
         }
         return false;
@@ -700,6 +708,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isAlternativeCost(AlternativeCost.Spectacle);
     }
 
+    public boolean isBeamMeUp() {
+        return this.isAlternativeCost(AlternativeCost.BeamMeUp);
+    }
     public boolean isFlashback() {
         return this.isAlternativeCost(AlternativeCost.Flashback);
     }
@@ -1241,7 +1252,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.replacingObjects = AbilityKey.newMap();
             }
 
-            clone.setPayCosts(getPayCosts().copy());
+            clone.setPayCosts(getPayCosts() == Cost.Zero ? Cost.Zero : getPayCosts().copy());
             if (manaPart != null) {
                 clone.manaPart = new AbilityManaPart(clone, mapParams);
             }
@@ -2594,7 +2605,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (getRestrictions().isInstantSpeed()) {
             return true;
         }
-        if ((isSpell() || this.isLandAbility()) && (isCastFromPlayEffect() || host.isInstant() || host.hasKeyword(Keyword.FLASH))) {
+        if ((isSpell() || isLandAbility()) && (isCastFromPlayEffect() || host.isInstant() || host.hasKeyword(Keyword.FLASH))) {
             return true;
         }
 

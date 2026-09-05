@@ -1,0 +1,8 @@
+Name:Large Bear
+ManaCost:3 BG BG
+Types:Creature Bear
+PT:5/5
+K:Reach
+K:Trample
+K:Haste
+Oracle:Reach, trample, haste

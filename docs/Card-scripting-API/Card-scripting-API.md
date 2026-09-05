@@ -1,7 +1,7 @@
 A reference guide for scripting cards using the API parsed by the Forge engine.
 
 # Base Structure
-By opening any file in the */res/cardsfolder* directory you can see the basic structure of how the data is created.  
+By opening any file in the */res/cardsfolder* directory you can see the basic syntax of how the data is created.  
 Here's an example of a vanilla creature:
 ```
 Name:Vanilla Creature
@@ -11,7 +11,7 @@ PT:2/2
 Oracle:
 ```
 
-* The name of this card is Vanilla Creature.
+* The name of this card is "Vanilla Creature".
 * It's casting cost is {2}{G}.
 * It has the types Creature and Beast.
 * It has a Power-Toughness of 2/2.
@@ -24,7 +24,7 @@ There are a few other properties that will appear in many cards. These can all b
 | Property | Description
 | - | -
 |`A`|[Ability effect](AbilityFactory.md)
-|`AI`|`RemoveDeck:`<br />* `All`<br />This will prevent the card from appearing in random AI decks. It is applicable for cards the AI can't use at all and also for cards that the AI could use, but only ineffectively. The AI won't draft these cards.<br />* `Random`<br /> This will prevent the card from appearing in random decks. It is only applicable for cards that are too narrow for random decks like *Root Cage* or *Into the North*. The AI won't draft these cards.<br />* `NonCommander`<br />
+|`AI`|`RemoveDeck:`<br />* `All`<br />This will prevent the card from appearing in random AI decks. It is applicable for cards the AI can't use at all and also for cards that the AI could use, but only ineffectively. The AI won't draft these cards and also avoid using them ingame if it somehow gains access to one.<br />* `Random`<br /> This will prevent the card from appearing in random decks. It is only applicable for cards that are too narrow for random decks like *Root Cage* or *Into the North*. The AI won't draft these cards.<br />* `NonCommander`<br />
 |`Colors`|Color(s) of the card<br /><br />When a card's color is determined by a color indicator rather than shards in a mana cost, this property must be defined. If no identifier is needed, this property should be omitted.<br /><br />Example:<br />`Colors:red,green` - Since *Arlinn, Embraced by the Moon* has no mana cost (it's the back of a double-faced card), the red and green indicator must be included.
 |`DeckHints`|AI-related hints for a deck including this card<br /><br />To improve synergy this will increase the rank of of all other cards that share some of its DeckHints types. The following types are supported:<br />* Color<br />* Keyword<br />* Name<br />* Type<br /><br />This helps with smoothing the selection so cards without these Entries won't be at an unfair disadvantage.<br /><br />The relevant code can be found in the [CardRanker](https://github.com/Card-Forge/forge/blob/master/forge-gui/src/main/java/forge/gamemodes/limited/CardRanker.java) class.
 |`DeckNeeds`|This can be considered a stronger variant when the AI should not put this card into its deck unless it has whatever other type is specified. The way this works is "inverted": it will directly decrease the rank of the card unless other cards are able to satisfy its types.<br />If a card demands more than one kind of type you can reuse it:<br />`DeckNeeds:Type$Human & Type$Warrior` will only find Human Warrior compared to `DeckNeeds:Type$Human\|Warrior` which is either
@@ -64,9 +64,7 @@ Examples:
 - Devoid
 - First Strike
 - Flash
-- Haste
 - Indestructible
-- Mentor
 - Provoke
 - Reach
 - Split second
@@ -118,7 +116,7 @@ Examples:
 - Ninjutsu:{cost}
 - Outlast:{cost}
 - Partner:{CardName}
-- Protection:{ValidCards}:{Description}
+- Protection:{ValidCards}:[Description]
 - Prowl:{cost}
 - Rampage:{magnitude}
 - Recover:{cost}
@@ -140,11 +138,9 @@ Only listing the most common ones here so you can recognize them.
 CARDNAME is replaced by the card's name ingame.
 
 - CARDNAME can't attack or block alone.
-- CARDNAME can't block unless a creature with greater power also blocks.
 - CARDNAME must be blocked if able.
 - Remove CARDNAME from your deck before playing if you're not playing for ante.
 - You may choose not to untap CARDNAME during your untap step.
-- CantSearchLibrary
 
 # General SVars
 * `SoundEffect:<file.mp3>`
@@ -164,25 +160,33 @@ number of instant and sorcery cards you own in exile and in your graveyard
 > Context switching
 
 # Common AI specific SVars
-* `AIEvaluationModifier:{ValidAmount}`
+* `AIEvaluationModifier:{XCount}`
+Each creature is assigned a score when AI decides which one to destroy/equip/etc. If the card has some exotic ability it may get judged less than it deserves, so this is a way to manually influence the resulting priority.
+
+* `AIPriorityModifier:{Integer}`
+Same reasoning as above, but applies to all abilities of a card (except lands) when AI decides which one to play.
 
 * `AIPreference:SacCost$Creature.token,Creature.cmcLE2`
 
 * `AntiBuffedBy:{ValidCards}`
-
 If a permanent with this SVar is on the battlefield under human control the AI will play the specified cards in Main1. Applicable for cards like *Timid Drake*.
 
 * `BuffedBy:{ValidCards}`
-
 If a permanent with this SVar is on the battlefield under its control the AI will play the specified cards in Main1. Applicable for creatures with a P/T setting static ability (e.g. *Kithkin Rabble*) or additional buffs (*Abzan Runemark*).
 
 * `EnchantMe:{Multiple/Once}`
-
 Creatures with "Multiple" in this SVar will always be preferred when the AI enchants (e.g *Rabid Wombat*), creatures with "Once" only if they are not enchanted already.
 
 * `EquipMe:{Multiple/Once>}`
-
 Creatures with "Multiple" in this SVar will always be preferred when the AI equips, creatures with "Once" only if they are not equipped already.
+
+* `DonateMe`
+
+* `DoNotDiscardIfAble`
+* `DiscardMe`
+
+* `SacMe:{1-6}`
+The AI will sacrifice these cards to pay costs. The higher the number the higher the priority. Example: *Hatching Plans* has `SVar:SacMe:5`.
 
 * `EndOfTurnLeavePlay:True`
 
@@ -199,7 +203,6 @@ Creatures with "Multiple" in this SVar will always be preferred when the AI equi
 * `ManaNeededToAvoidNegativeEffect:`
 
 * `NeedsToPlayVar:{SVar or #} {cmp}`
-
 Put this on cards that are very situational.
 
 Uses operand-operator syntax, where `{cmp}` is a comparator:  
@@ -219,20 +222,15 @@ SVar:Y:Count$Valid Creature.YouCtrl
 ```
 
 * `NonStackingEffect:True`
+This card's effect isn't cumulative, so AI won't bother with second copies.
 
 * `NoZeroToughnessAI:True`
 
 * `PlayMain1:{TRUE/OPPONENTCREATURES/ALWAYS}`
-
 The AI will play permanents with this SVar in its first main phase. For some more common mechanics the AI performs its own checks, e.g. to get Backup abilities on an attacker. But for complex cases without own AILogic, it will usually hold them until Main2 to save mana for combat tricks.  
 For other spells only "ALWAYS" is supported.
-
-* `SacMe:{1-6}`
-
-The AI will sacrifice these cards to pay costs. The higher the number the higher the priority. Example: *Hatching Plans* has `SVar:SacMe:5`.
 
 * `Targeting:Dies`
 
 * `UntapMe:True`
-
 The AI will prioritize untapping of this card.

@@ -42,7 +42,7 @@ import java.util.*;
 
 public abstract class SpellAbilityEffect {
 
-    public abstract void resolve(SpellAbility sa);
+    public void resolve(SpellAbility sa) {}
 
     protected String getStackDescription(final SpellAbility sa) {
         // Unless overridden, let the spell description also be the stack description
@@ -522,7 +522,7 @@ public abstract class SpellAbilityEffect {
     public static void addForgetOnMovedTrigger(final Card card, final String zone) {
         String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack,Exile | Destination$ Any | TriggerZones$ Command | Static$ True";
         // CR 400.8 Exiled card becomes new object when it's exiled
-        String trig2 = "Mode$ Exiled | ValidCard$ Card.IsRemembered | ValidCause$ SpellAbility.!EffectSource | TriggerZones$ Command | Static$ True";
+        String trig2 = "Mode$ Exiled | ValidCard$ Card.IsRemembered | ValidCause$ SpellAbility.!EffectSourceAbility | TriggerZones$ Command | Static$ True";
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         final Trigger parsedTrigger2 = TriggerHandler.parseTrigger(trig2, card, true);
@@ -535,7 +535,6 @@ public abstract class SpellAbilityEffect {
 
     protected static void addForgetOnCastTrigger(final Card card, String valid) {
         String trig = "Mode$ SpellCast | TriggerZones$ Command | Static$ True | ValidCard$ " + valid;
-
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
         card.addTrigger(parsedTrigger);
@@ -557,7 +556,6 @@ public abstract class SpellAbilityEffect {
 
     protected static void addForgetOnPhasedInTrigger(final Card card) {
         String trig = "Mode$ PhaseIn | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
-
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
         card.addTrigger(parsedTrigger);
@@ -890,30 +888,30 @@ public abstract class SpellAbilityEffect {
         }
     }
 
-    protected static void discard(SpellAbility sa, final boolean effect, Map<Player, CardCollectionView> discardedMap, Map<AbilityKey, Object> params) {
-        Set<Player> discarders = discardedMap.keySet();
+    protected static void discard(SpellAbility sa, final boolean effect, Map<Player, CardCollectionView> toDiscardMap, Map<AbilityKey, Object> params) {
         Map<Player, List<Card>> discardedBefore = Maps.newHashMap();
-        for (Player p : discarders) {
-            discardedBefore.put(p, Lists.newArrayList(p.getDiscardedThisTurn()));
+        Map<Player, CardCollectionView> discardedMap = Maps.newLinkedHashMap();
+        for (Map.Entry<Player, CardCollectionView> e : toDiscardMap.entrySet()) {
+            discardedBefore.put(e.getKey(), Lists.newArrayList(e.getKey().getDiscardedThisTurn()));
             final CardCollection discardedByPlayer = new CardCollection();
-            for (Card card : Lists.newArrayList(discardedMap.get(p))) { // without copying will get concurrent modification exception
+            // iterate a copy: the view may be a live zone list (e.g. whole hand) that discard() mutates
+            for (Card card : e.getValue().threadSafeIterable()) {
                 if (card == null) { continue; }
-                Card moved = p.discard(card, sa, effect, params);
+                Card moved = e.getKey().discard(card, sa, effect, params);
                 if (moved != null) {
                     discardedByPlayer.add(moved);
                 }
             }
-            discardedMap.put(p, discardedByPlayer);
+            discardedMap.put(e.getKey(), discardedByPlayer);
         }
 
-        for (Player p : discarders) {
-            CardCollectionView discardedByPlayer = discardedMap.get(p);
-            if (!discardedByPlayer.isEmpty()) {
-                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
-                runParams.put(AbilityKey.Cards, discardedByPlayer);
+        for (Map.Entry<Player, CardCollectionView> e : discardedMap.entrySet()) {
+            if (!e.getValue().isEmpty()) {
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(e.getKey());
+                runParams.put(AbilityKey.Cards, e.getValue());
                 runParams.put(AbilityKey.Cause, sa);
-                runParams.put(AbilityKey.DiscardedBefore, discardedBefore.get(p));
-                p.getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
+                runParams.put(AbilityKey.DiscardedBefore, discardedBefore.get(e.getKey()));
+                e.getKey().getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
             }
         }
     }

@@ -558,7 +558,7 @@ public class CountersPutAi extends CountersAi {
                         }
                         if (source != null && !source.isSpell() || increasesCharmOutcome // does not cost a card or can buff charm for no expense
                                 || ph.getTurn() - source.getTurnInZone() >= game.getPlayers().size() * 2) {
-                            if (abCost == Cost.Zero || ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai)) {
+                            if (abCost.isFree() || ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai)) {
                                 // only use at opponent EOT unless it is free
                                 choice = chooseBoonTarget(list, type);
                             }
@@ -717,7 +717,7 @@ public class CountersPutAi extends CountersAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((!sa.isTargetNumberValid()) || (sa.getTargets().isEmpty())) {
+                    if (!sa.isTargetNumberValid() || sa.getTargets().isEmpty()) {
                         sa.resetTargets();
                         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     } else {
@@ -776,9 +776,7 @@ public class CountersPutAi extends CountersAi {
                     && amount == 0 // And counter amount wasn't set previously by something (e.g. Wildborn Preserver)
                     && sa.hasSVar(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
                 // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
-                int payX = ComputerUtilCost.setMaxXValue(sa, ai, true);
-
-                root.setXManaCostPaid(payX);
+                ComputerUtilCost.setMaxXValue(sa, ai, true);
             }
 
             if (!mandatory) {

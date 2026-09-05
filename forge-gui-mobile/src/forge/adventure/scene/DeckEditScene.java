@@ -1,5 +1,6 @@
 package forge.adventure.scene;
 
+import forge.Adventure;
 import forge.adventure.data.AdventureEventData;
 import forge.screens.FScreen;
 
@@ -28,10 +29,17 @@ public class DeckEditScene extends ForgeScene {
     }
 
     @Override
+    public boolean leave() {
+        Adventure.getInstance().renderTransitionScreen = true;
+        return super.leave();
+    }
+
+    @Override
     public void enter() {
         screen = null;
         getScreen();
         screen.refresh();
+        Adventure.getInstance().renderTransitionScreen = false;
         super.enter();
     }
 

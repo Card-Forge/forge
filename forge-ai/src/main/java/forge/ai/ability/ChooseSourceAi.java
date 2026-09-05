@@ -72,9 +72,8 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     int dmg = AbilityUtils.calculateAmount(threatSource, topStack.getParam("NumDmg"), topStack);
                     if (ComputerUtilCombat.predictDamageTo(ai, dmg, threatSource, false) > 0) {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else {
-                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 if (game.getPhaseHandler().getPhase() != PhaseType.COMBAT_DECLARE_BLOCKERS) {
                     return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
@@ -139,11 +138,11 @@ public class ChooseSourceAi extends SpellAbilityAi {
 
                 if (!oppCreatures.isEmpty()) {
                     return ComputerUtilCard.getBestCreatureAI(oppCreatures);
-                } else if (!aiNonCreatures.isEmpty()) {
-                    return Aggregates.random(aiNonCreatures);
-                } else {
-                    return Aggregates.random(options);
                 }
+                if (!aiNonCreatures.isEmpty()) {
+                    return Aggregates.random(aiNonCreatures);
+                }
+                return Aggregates.random(options);
             } else if (!game.getStack().isEmpty()) {
                 // No permanent for the AI to choose. Should normally not happen unless using dev mode or something,
                 // but when it does happen, choose the top card on stack if possible (generally it'll be the SA
@@ -190,9 +189,4 @@ public class ChooseSourceAi extends SpellAbilityAi {
         return null;
     }
 
-    private static List<GameObject> getTargets(final SpellAbility sa) {
-        return sa.usesTargeting() && (!sa.hasParam("Defined"))
-                ? sa.getTargets()
-                : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
-    }
 }

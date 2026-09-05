@@ -83,11 +83,13 @@ public class GameCopier {
         GameRules currentRules = origGame.getRules();
         Match newMatch = new Match(currentRules, newPlayers, origGame.getView().getTitle());
         Game newGame = new Game(newPlayers, currentRules, newMatch);
+        newGame.setNoGUIUser();
         newGame.dangerouslySetTimestamp(origGame.getTimestamp());
 
         for (int i = 0; i < origGame.getPlayers().size(); i++) {
             Player origPlayer = origGame.getPlayers().get(i);
             Player newPlayer = newGame.getPlayer(origPlayer.getId());
+            newPlayer.setTeam(origPlayer.getTeam());
             newPlayer.setLife(origPlayer.getLife(), null);
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
@@ -211,7 +213,7 @@ public class GameCopier {
         LobbyPlayer lp = p.getPlayer();
         if (!(lp instanceof LobbyPlayerAi)) {
             // TODO should probably also override them if they're normal AI
-            lp = new LobbyPlayerAi(p.getPlayer().getName(), Sets.newHashSet(AIOption.USE_SIMULATION));
+            lp = new LobbyPlayerAi(p.getPlayer().getName(), Sets.newHashSet(AIOption.USE_FULL_SIMULATION));
         }
         clone.setPlayer(lp);
         return clone;
@@ -302,7 +304,7 @@ public class GameCopier {
         }
         if (USE_FROM_PAPER_CARD && !c.isImmutable() && c.getPaperCard() != null) {
             Card newCard;
-            if (PRUNE_HIDDEN_INFO && !c.getView().canBeShownTo(aiPlayer.getView())) {
+            if (PRUNE_HIDDEN_INFO && aiPlayer != null && !c.getView().canBeShownTo(aiPlayer.getView())) {
                 // TODO also check REVEALED_CARDS memory
                 newCard = new Card(c.getId(), hidden_info_card, newGame);
                 newCard.setOwner(newOwner);
@@ -493,21 +495,21 @@ public class GameCopier {
         }
     }
 
-    public GameObject find(GameObject o) {
+    public <T extends GameObject> T find(T o) {
         if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
-            return snapshot.find(o);
+            return (T) snapshot.find(o);
         }
 
-        GameObject result = null;
+        T result = null;
         if (o instanceof Card) {
-            result = cardMap.get(o);
+            result = (T) cardMap.get(o);
             if (result != null) {
                 return result;
             } else {
                 System.out.println("Couldn't map " + o + "/" + System.identityHashCode(o));
             }
         } else if (o instanceof Player) {
-            result = playerMap.get(o);
+            result = (T) playerMap.get(o);
             if (result != null)
                 return result;
         }

@@ -16,6 +16,7 @@ import forge.gui.download.GuiDownloadSetPicturesLQ;
 import forge.gui.download.GuiDownloadSkins;
 import forge.gui.error.BugReporter;
 import forge.gui.framework.ICDoc;
+import forge.util.BuildInfo;
 import forge.util.RSSReader;
 
 import java.util.concurrent.CompletableFuture;
@@ -33,7 +34,7 @@ public enum CSubmenuDownloaders implements ICDoc {
     SINGLETON_INSTANCE;
 
     private final UiCommand cmdLicensing = VSubmenuDownloaders.SINGLETON_INSTANCE::showLicensing;
-    private final UiCommand cmdCheckForUpdates = () -> new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_ATOM, FControl.instance.getBuildTimeStamp(), FControl.instance.getSnapsTimestamp())));
+    private final UiCommand cmdCheckForUpdates = () -> new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_ATOM, BuildInfo.getTimestamp(), FControl.instance.getSnapsTimestamp())));
 
     private final UiCommand cmdPicDownload = () -> new GuiDownloader(new GuiDownloadPicturesLQ()).show();
     private final UiCommand cmdPicDownloadHQ = () -> new GuiDownloader(new GuiDownloadPicturesHQ()).show();
