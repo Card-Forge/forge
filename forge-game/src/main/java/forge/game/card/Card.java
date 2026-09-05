@@ -629,6 +629,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // use by CopyPermanent
     public void setStates(Map<CardStateName, CardState> map) {
+        invalidateTraitCaches();
         states.clear();
         states.putAll(map);
     }
@@ -4166,6 +4167,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void updateTypeCache() {
+        // updateTypes() only refreshes the current state, so drop every state's cached traits here:
+        // clone and rollback paths reach this via updateChangedText(), and relying on a non-current
+        // state's cache happening to match its equally stale type would be far too subtle.
+        invalidateTraitCaches();
         this.getCurrentState().updateTypes();
     }
 
@@ -4895,6 +4900,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return changedCardTraitsByText;
     }
     public final void setChangedCardTraitsByText(Table<Long, Long, CardTraitChanges> changes) {
+        invalidateTraitCaches();
         changedCardTraitsByText.clear();
         for (Table.Cell<Long, Long, CardTraitChanges> e : changes.cellSet()) {
             changedCardTraitsByText.put(e.getRowKey(), e.getColumnKey(), e.getValue().copy(this, true));
@@ -4902,6 +4908,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void addChangedCardTraitsByText(Collection<SpellAbility> spells,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics, long timestamp, long staticId) {
+        invalidateTraitCaches();
         changedCardTraitsByText.put(timestamp, staticId, new CardTraitChanges(
             spells, trigger, replacements, statics, e -> true
         ));
@@ -4926,6 +4933,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return addChangedCardTraits(result, timestamp, staticId, updateView);
     }
     public final ICardTraitChanges addChangedCardTraits(ICardTraitChanges changes, long timestamp, long staticId, boolean updateView) {
+        invalidateTraitCaches();
         changedCardTraits.put(timestamp, staticId, changes);
         if (updateView) {
             updateAbilityTextForView();
@@ -4934,9 +4942,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean removeChangedCardTraits(long timestamp, long staticId) {
+        invalidateTraitCaches();
         return changedCardTraits.remove(timestamp, staticId) != null;
     }
     public final boolean removeChangedCardTraitsByText(long timestamp, long staticId) {
+        invalidateTraitCaches();
         return changedCardTraitsByText.remove(timestamp, staticId) != null;
     }
 
@@ -4956,6 +4966,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void setChangedCardTraits(Table<Long, Long, ICardTraitChanges> changes) {
+        invalidateTraitCaches();
         changedCardTraits.clear();
         for (Table.Cell<Long, Long, ICardTraitChanges> e : changes.cellSet()) {
             changedCardTraits.put(e.getRowKey(), e.getColumnKey(), e.getValue().copy(this, true));
@@ -4963,6 +4974,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean clearChangedCardTraits() {
+        invalidateTraitCaches();
         boolean changed = false;
         if (!changedCardTraitsByText.isEmpty()) {
             changed = true;
@@ -5195,7 +5207,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void updateKeywordsCache() {
         updateKeywordsCache(getCurrentState());
     }
+    /**
+     * Drop the cached trait lists (triggers / static abilities) on every state of this card.
+     * Called from each place an input to those lists can change.
+     */
+    public final void invalidateTraitCaches() {
+        for (CardState st : states.values()) {
+            st.invalidateTraitCache();
+        }
+    }
+
     public final void updateKeywordsCache(final CardState state) {
+        // Keywords contribute triggers and statics, so the trait lists must go too.
+        state.invalidateTraitCache();
         KeywordCollection keywords = new KeywordCollection();
 
         // Layer 1
