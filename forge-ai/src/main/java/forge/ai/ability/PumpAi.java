@@ -83,6 +83,8 @@ public class PumpAi extends PumpAiBase {
             if (ph.getPhase().isAfter(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE) || !ph.inCombat()) {
                 return false;
             }
+        } else if (logic.equals("Weld")) {
+            return super.checkPhaseRestrictions(ai, sa, ph, "AtOppEOT");
         }
         return super.checkPhaseRestrictions(ai, sa, ph);
     }
@@ -242,6 +244,8 @@ public class PumpAi extends PumpAiBase {
         } else if (aiLogic.startsWith("Donate")) {
             // Donate step 1 - try to target an opponent, preferably one who does not have a donate target yet
             return SpecialCardAi.Donate.considerTargetingOpponent(ai, sa);
+        } else if ("Weld".equals(aiLogic)) {
+            return doWeldLogic(ai, sa);
         } else if (aiLogic.equals("InfernoOfTheStarMounts")) {
             int numRedMana = ComputerUtilMana.determineLeftoverMana(new SpellAbility.EmptySa(source), ai, "R", false);
             int currentPower = source.getNetPower();
@@ -352,6 +356,63 @@ public class PumpAi extends PumpAiBase {
         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
+    /**
+     * Goblin Welder: this target is sacrificed and the sub-ability's target replaces it, both
+     * belonging to the same player, so the pair has to be picked as one trade.
+     */
+    private AiAbilityDecision doWeldLogic(final Player ai, final SpellAbility sa) {
+        final SpellAbility returnSa = sa.getSubAbility();
+        if (returnSa == null) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        sa.resetTargets();
+        final CardCollection targetable = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+
+        final List<Player> welders = Lists.newArrayList(ai);
+        welders.addAll(ai.getOpponents());
+        Card bestSacrifice = null;
+        int bestDelta = 0;
+        for (final Player p : welders) {
+            final boolean ours = p == ai;
+            final CardCollection board = CardLists.filter(targetable, CardPredicates.isController(p));
+            Card sacrificed;
+            if (ours) {
+                sacrificed = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "SacCost", board, sa);
+                if (sacrificed == null) {
+                    sacrificed = ComputerUtilCard.getWorstAI(board);
+                }
+            } else {
+                sacrificed = ComputerUtilCard.getBestRemovalTargetAI(ai, board);
+            }
+            if (sacrificed == null) {
+                continue;
+            }
+
+            // the sub-ability can only choose what comes back once this target is set
+            sa.getTargets().add(sacrificed);
+            if (pumpMandatoryTarget(ai, returnSa)) {
+                final Card returned = returnSa.getTargetCard();
+                final int delta = ours ? returned.getCMC() - sacrificed.getCMC()
+                        : sacrificed.getCMC() - returned.getCMC();
+                if (delta > bestDelta) {
+                    bestDelta = delta;
+                    bestSacrifice = sacrificed;
+                }
+            }
+            sa.resetTargets();
+            returnSa.resetTargets();
+        }
+
+        if (bestSacrifice == null) {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+
+        sa.getTargets().add(bestSacrifice);
+        pumpMandatoryTarget(ai, returnSa);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory,
                               boolean immediately) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
@@ -426,6 +487,9 @@ public class PumpAi extends PumpAiBase {
                     return true;
                 }
                 return false;
+            } else if (sa.getParam("AILogic").equals("Weld")) {
+                // best from our own graveyard, cheapest from an opponent's
+                return pumpMandatoryTarget(ai, sa);
             } else if (sa.getParam("AILogic").equals("SameName")) {
                 return doSameNameLogic(ai, sa);
             } else if (sa.getParam("AILogic").equals("SacOneEach")) {
