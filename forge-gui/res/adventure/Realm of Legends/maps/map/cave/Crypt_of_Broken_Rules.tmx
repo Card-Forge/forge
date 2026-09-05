@@ -166,7 +166,17 @@
 {
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 1,
-  &quot;cardName&quot;: &quot;Slaughter Singer&quot;
+  &quot;cardName&quot;: &quot;Darksteel Hydra&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Gyox, Brutal Carnivora&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Ekthi, Contaminator Priest&quot;
 },
 {
   &quot;type&quot;: &quot;card&quot;,
@@ -181,7 +191,7 @@
 {
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 1,
-  &quot;cardName&quot;: &quot;Skullpiercer Gnat&quot;
+  &quot;cardName&quot;: &quot;Davvol, Evincar of Rath&quot;
 }]</property>
    </properties>
   </object>
