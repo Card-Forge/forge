@@ -102,7 +102,7 @@ public class CardCopyService {
     private static void copyState(final Card from, final CardStateName fromState, final Card to,
                                  final CardStateName toState, boolean updateView) {
         // copy characteristics not associated with a state
-        to.setText(from.getSpellText());
+        to.setText(from.getState(fromState).getNonAbilityText());
 
         // get CardCharacteristics for desired state
         if (!to.getStates().contains(toState)) {

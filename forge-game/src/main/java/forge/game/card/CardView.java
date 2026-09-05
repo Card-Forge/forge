@@ -1064,7 +1064,10 @@ public class CardView extends GameEntityView {
             updateBackSide(c.isDoubleFaced());
 
         final Card cloner = c.getCloner();
-        set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
+        // Use the cloner's printed name; for self-clones (e.g. Sculpting Steel) its current
+        // name is the copied card's name, which would be misleading here.
+        set(TrackableProperty.Cloner, cloner == null ? null
+                : cloner.getOriginalState(CardStateName.Original).getName() + " (" + cloner.getId() + ")");
 
         CardCollection mergedCollection = new CardCollection();
         if (c.hasMergedCard()) {
