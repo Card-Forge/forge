@@ -49,6 +49,9 @@ public class Adventure implements Disposable {
                     transitionBatch.draw(ScreenUtil.getInstance().getLastScreenTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                     transitionBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * transitionTimeout);
                     transitionBatch.draw(Forge.getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    if (Forge.showFPS) {
+                        FrameRate.getInstance().sampleAdventure(transitionBatch);
+                    }
                     transitionBatch.end();
                     if (transitionTimeout < 0) {
                         Forge.currentScene.render();
@@ -66,6 +69,9 @@ public class Adventure implements Disposable {
                     transitionBatch.draw(ScreenUtil.getInstance().getLastScreenTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                     transitionBatch.setColor(1, 1, 1, (1 / transitionTime) * (transitionTimeout + transitionTime));
                     transitionBatch.draw(Forge.getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    if (Forge.showFPS) {
+                        FrameRate.getInstance().sampleAdventure(transitionBatch);
+                    }
                     transitionBatch.end();
                     return;
                 }
