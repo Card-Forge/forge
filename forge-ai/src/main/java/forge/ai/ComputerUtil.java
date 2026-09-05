@@ -3173,6 +3173,13 @@ public class ComputerUtil {
         return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, ai.getOpponents());
     }
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers, final List<Player> opps) {
+        return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, opps, null);
+    }
+    /**
+     * @param excludedAttackers creatures to leave out of the opponents' attack - ones we are about
+     *            to kill, say, so that a board wipe is not weighed against the board it removes.
+     */
+    public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers, final List<Player> opps, final CardCollection excludedAttackers) {
         // life won't change
         int remainingLife = Integer.MAX_VALUE;
 
@@ -3191,6 +3198,9 @@ public class ComputerUtil {
 
             // TODO !thisCombat should include cards that will phase in
             for (Card att : opp.getCreaturesInPlay()) {
+                if (excludedAttackers != null && excludedAttackers.contains(att)) {
+                    continue;
+                }
                 // TODO should be limited based on how much getAttackCost the opp can pay
                 if ((thisCombat && CombatUtil.canAttack(att, ai)) || (!thisCombat && ComputerUtilCombat.canAttackNextTurn(att, ai))) {
                     // TODO need to copy the card
