@@ -117,9 +117,11 @@ public class PlayEffect extends SpellAbilityEffect {
                         .map(name -> name.replace(";", ","))
                         .map(cardDb::getUniqueByName);
             } else if (valid.equalsIgnoreCase("sorcery")) {
+                StaticData.instance().ensureAllCardsLoaded();
                 cards = cardDb.streamUniqueCards()
                         .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_SORCERY));
             } else if (valid.equalsIgnoreCase("instant")) {
+                StaticData.instance().ensureAllCardsLoaded();
                 cards = cardDb.streamUniqueCards()
                         .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_INSTANT));
             } else {
