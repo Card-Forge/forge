@@ -1182,6 +1182,20 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(copySa);
 
             inst.addTrigger(trigger);
+        } else if (keyword.equals("Coststorm")) {
+            final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | Secondary$ True"
+                + "| TriggerDescription$ Coststorm (" + inst.getReminderText() + ")";
+
+            String effect = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ CoststormCount | MayChooseTarget$ True";
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setSVar("CoststormCount", "Count$DifferentManaValuesAmongSpellsAndLandsThisTurn_Card.YouCtrl+!CastSaSource");
+
+            parsedTrigger.setOverridingAbility(sa);
+
+            inst.addTrigger(parsedTrigger);
         } else if (keyword.startsWith("Haunt")) {
             final String[] k = keyword.split(":");
             final String hauntSVarName = k[1];

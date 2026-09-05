@@ -1,0 +1,6 @@
+Name:Friarball
+ManaCost:3 W
+Types:Sorcery
+K:Coststorm
+A:SP$ Token | TokenScript$ w_2_2_monk | TokenOwner$ You | SpellDescription$ Create a 2/2 white Monk creature token.
+Oracle:Create a 2/2 white Monk creature token.\nCoststorm (When you cast this spell, copy it for each different mana value among other spells and lands you've played this turn.)
