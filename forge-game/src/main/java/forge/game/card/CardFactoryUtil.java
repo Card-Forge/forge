@@ -2321,6 +2321,14 @@ public class CardFactoryUtil {
             final ReplacementEffect re = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self+impended", "");
 
             inst.addReplacement(re);
+        } else if (keyword.equals("Indestructible")) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Event$ Destroy | ValidCard$ Card.Self | Layer$ CantHappen");
+            sb.append("| ActiveZones$ Battlefield | Secondary$ True | Description$ Indestructible (");
+            sb.append(inst.getReminderText());
+            sb.append(")");
+
+            inst.addReplacement(ReplacementHandler.parseReplacement(sb.toString(), host, intrinsic, card));
         } else if (keyword.equals("Jump-start")) {
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
