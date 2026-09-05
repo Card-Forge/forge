@@ -65863,7 +65863,7 @@
         "addMaxCount": 15
       }
     ],
-    "colors": "U",
+    "colors": "UR",
     "spawnRate": 0
   },
   {
@@ -65925,7 +65925,7 @@
   },
   {
     "name": "The Everforger",
-    "sprite": "sprites/enemy/construct/prototype.atlas",
+    "sprite": "sprites/enemy/construct/golem.atlas",
     "deck": [
       "decks/legends/the_everforger.dck"
     ],
