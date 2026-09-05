@@ -9,4 +9,4 @@ SVar:ABToken:AB$ Token | Cost$ 2 ExileFromGrave<1/CARDNAME> | ActivationZone$ Gr
 SVar:X:Exiled$CardPower
 DeckHints:Ability$Sacrifice
 DeckHas:Ability$Sacrifice|Token & Type$Ooze
-Oracle:Blitz {B}{R}{G}\nWhenever you sacrifice Effluence Devourer or another creature, it perpetually gains "{2}, Exile this card from your graveyard: Create an X/X green Ooze creature token, where X is this card's power. Activate only as a sorcery."
+Oracle:Whenever you sacrifice Effluence Devourer or another creature, it perpetually gains "{2}, Exile this card from your graveyard: Create an X/X green Ooze creature token, where X is this card's power. Activate only as a sorcery."\nBlitz {B}{R}{G} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)

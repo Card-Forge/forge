@@ -2,7 +2,7 @@ Name:Elusive Krasis
 ManaCost:1 G U
 Types:Creature Fish Mutant
 PT:0/4
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ This creature can't be blocked.
 K:Evolve
 DeckHas:Ability$Counters
-Oracle:Elusive Krasis can't be blocked.\nEvolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
+Oracle:This creature can't be blocked.\nEvolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)

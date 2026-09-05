@@ -2,6 +2,6 @@ Name:Endless One
 ManaCost:X
 Types:Creature Eldrazi
 PT:0/0
-K:etbCounter:P1P1:X
+K:etbCounter:P1P1:X:no Condition:This creature enters with X +1/+1 counters on it.
 SVar:X:Count$xPaid
-Oracle:Endless One enters with X +1/+1 counters on it.
+Oracle:This creature enters with X +1/+1 counters on it.

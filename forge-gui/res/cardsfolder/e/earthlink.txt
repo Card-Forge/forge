@@ -1,9 +1,9 @@
 Name:Earthlink
 ManaCost:3 B R G
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {2}.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}.
 SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ 2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a creature dies, that creature's controller sacrifices a land.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a creature dies, that creature's controller sacrifices a land of their choice.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Land | Defined$ TriggeredCardController
 AI:RemoveDeck:Random
-Oracle:At the beginning of your upkeep, sacrifice Earthlink unless you pay {2}.\nWhenever a creature dies, that creature's controller sacrifices a land.
+Oracle:At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}.\nWhenever a creature dies, that creature's controller sacrifices a land of their choice.

@@ -3,11 +3,11 @@ ManaCost:U
 Types:Creature Otter
 PT:1/1
 K:Prowess
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTY | Description$ Creatures with power less than CARDNAME's power can't block it.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTY | Description$ Creatures with power less than this creature's power can't block it.
 SVar:Y:Count$CardPower
 DeckHas:Ability$Counters
 AlternateMode:Adventure
-Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nCreatures with power less than Elusive Otter's power can't block it.
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nCreatures with power less than this creature's power can't block it.
 
 ALTERNATE
 
