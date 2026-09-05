@@ -313,6 +313,7 @@ public final class CardPredicates {
     public static final Predicate<Card> LANDS = Card::isLand;
     public static final Predicate<Card> NON_LANDS = c -> !c.isLand();
     public static final Predicate<Card> LANDS_PRODUCING_MANA = c -> c.isBasicLand() || (c.isLand() && !c.getManaAbilities().isEmpty());
+    public static final Predicate<Card> PRODUCES_MANA = c -> c.isBasicLand() || !c.getManaAbilities().isEmpty();
     public static final Predicate<Card> PERMANENTS = Card::isPermanent;
     public static final Predicate<Card> NONLAND_PERMANENTS = c -> c.isPermanent() && !c.isLand();
     public static final Predicate<Card> hasFirstStrike = c -> c.isCreature() && (c.hasFirstStrike() || c.hasDoubleStrike());
