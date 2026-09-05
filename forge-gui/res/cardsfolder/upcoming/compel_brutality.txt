@@ -1,0 +1,11 @@
+Name:Compel Brutality
+ManaCost:1 G
+Types:Instant
+A:SP$ Charm | Choices$ DBPumpCreature,DBPumpPlaneswalker
+SVar:DBPumpCreature:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | ValidTgtsDesc$ creature you control | SubAbility$ DBDamageCreature | SpellDescription$ Target creature you control deals damage equal to its power to target creature or planeswalker an opponent controls.
+SVar:DBDamageCreature:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | AILogic$ PowerDmg | ValidTgtsDesc$ creature or planeswalker an opponent controls | NumDmg$ X | DamageSource$ ParentTarget
+SVar:DBPumpPlaneswalker:DB$ Pump | ValidTgts$ Planeswalker.YouCtrl | ValidTgtsDesc$ planeswalker you control | SubAbility$ DBDamagePlaneswalker | SpellDescription$ Target planeswalker you control deals damage equal to its loyalty to target creature or planeswalker an opponent controls.
+SVar:DBDamagePlaneswalker:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | ValidTgtsDesc$ creature or planeswalker an opponent controls | NumDmg$ Y | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower
+SVar:Y:ParentTargeted$CardCounters.LOYALTY
+Oracle:Choose one —\n• Target creature you control deals damage equal to its power to target creature or planeswalker an opponent controls.\n• Target planeswalker you control deals damage equal to its loyalty to target creature or planeswalker an opponent controls.
