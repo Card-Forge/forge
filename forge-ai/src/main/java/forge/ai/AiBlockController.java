@@ -444,7 +444,10 @@ public class AiBlockController {
                         && !ComputerUtilCombat.dealsFirstStrikeDamage(c, false, combat)) {
                     return false;
                 }
-                return lifeInDanger || wouldLikeToRandomlyTrade(attacker, c, combat) || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker);
+                // a blocker destroyed before it deals its damage can't help the gang kill the attacker
+                return (lifeInDanger || wouldLikeToRandomlyTrade(attacker, c, combat)
+                        || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker))
+                        && !ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(c, attacker, false);
             });
             if (usableBlockers.size() < 2) {
                 return;
@@ -563,8 +566,10 @@ public class AiBlockController {
             final List<Card> blockGang = new ArrayList<>();
             int absorbedDamage; // The amount of damage needed to kill the first blocker
 
-            List<Card> usableBlockers = CardLists.filter(blockers, c -> c.getNetToughness() > attacker.getNetCombatDamage() // performance shortcut
-                    || c.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, c, true) > attacker.getNetCombatDamage());
+            List<Card> usableBlockers = CardLists.filter(blockers, c -> (c.getNetToughness() > attacker.getNetCombatDamage() // performance shortcut
+                    || c.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, c, true) > attacker.getNetCombatDamage())
+                    // surviving the damage is no use if something destroys it before the damage step
+                    && !ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(c, attacker, false));
             if (usableBlockers.size() < 2) {
                 return;
             }
@@ -675,6 +680,11 @@ public class AiBlockController {
 
         boolean blocked = false;
         List<Card> chumpBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
+        if (attacker.hasKeyword(Keyword.TRAMPLE)) {
+            // a blocker that dies before combat damage soaks up none of it, so a trampling
+            // attacker connects for full anyway and the chump block is spent for nothing
+            chumpBlockers = CardLists.filter(chumpBlockers, c -> ComputerUtilCombat.shieldDamage(attacker, c) > 0);
+        }
         if (!chumpBlockers.isEmpty()) {
             final Card blocker = ComputerUtilCard.getWorstCreatureAI(chumpBlockers);
 
