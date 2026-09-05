@@ -2948,13 +2948,9 @@ public class ComputerUtil {
             // non combat check takes life into account here
             rating += opponent.getLife() * 3;
         } else {
-            // TODO: Consider whether the opponent is likely to attack a bigger threat instead.
+            // TODO Weight this by how likely the opponent is to attack this AI rather than another player.
             // This is hard to predict for human players and multiplayer politics.
-            int remainingLife = predictNextCombatsRemainingLife(ai, true, true, 0 , null, List.of(opponent));
-            if (remainingLife < ai.getLife()) {
-                int lifeLoss = Math.abs(ai.getLife() - Math.max(-20, remainingLife));
-                rating += lifeLoss * lifeLoss;
-            }
+            rating += getCombatTtkScore(ai, estimateCombatTurnsToKill(opponent, ai));
         }
 
         return rating;
@@ -3169,10 +3165,50 @@ public class ComputerUtil {
         return Integer.MIN_VALUE == AiCache.getCached("aiLifeInDanger", () -> predictNextCombatsRemainingLife(ai, serious, false, payment, null),
                 List.of(AiCache::identity, Objects::equals, Objects::equals), ai, serious, payment);
     }
+
+    /**
+     * Estimates how many identical, combat-only attacks {@code attacker} needs to defeat
+     * {@code defender}. The estimate uses the next-combat prediction and assumes the board
+     * remains unchanged between attacks.
+     */
+    public static int estimateCombatTurnsToKill(final Player attacker, final Player defender) {
+        if (attacker == null || defender == null || !attacker.isOpponentOf(defender)
+                || defender.getLife() <= 0 || !defender.canLoseLife() || defender.cantLoseForZeroOrLessLife()) {
+            return Integer.MAX_VALUE;
+        }
+        return AiCache.getCached("estimateCombatTurnsToKill",
+                () -> estimateCombatTurnsToKillChanged(attacker, defender),
+                List.of(AiCache::identity, AiCache::identity), attacker, defender);
+    }
+
+    public static int getCombatTtkScore(final Player ai, final int turnsToKill) {
+        final int horizon = AiProfileUtil.getIntProperty(ai, AiProps.COMBAT_TTK_HORIZON);
+        if (turnsToKill < 1 || turnsToKill > horizon) {
+            return 0;
+        }
+        return (horizon - turnsToKill + 1) * AiProfileUtil.getIntProperty(ai, AiProps.COMBAT_TTK_SCORE_PER_TURN);
+    }
+
+    private static int estimateCombatTurnsToKillChanged(final Player attacker, final Player defender) {
+        final int remainingLife = predictNextCombatsRemainingLife(defender, true, true, 0, null, List.of(attacker), true);
+        if (remainingLife == Integer.MIN_VALUE) {
+            return 1;
+        }
+        if (remainingLife == Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        final int damage = defender.getLife() - remainingLife;
+        return damage > 0 ? (defender.getLife() + damage - 1) / damage : Integer.MAX_VALUE;
+    }
+
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers) {
         return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, ai.getOpponents());
     }
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers, final List<Player> opps) {
+        return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, opps, false);
+    }
+    private static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment,
+            final CardCollection excludedBlockers, final List<Player> opps, final boolean checkingOther) {
         // life won't change
         int remainingLife = Integer.MAX_VALUE;
 
@@ -3203,7 +3239,7 @@ public class ComputerUtil {
                 continue;
             }
             // TODO if it's next turn ignore mustBlockCards
-            AiBlockController block = new AiBlockController(ai, false);
+            AiBlockController block = new AiBlockController(ai, checkingOther);
             // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
             block.assignBlockersForCombat(combat, excludedBlockers);
 
