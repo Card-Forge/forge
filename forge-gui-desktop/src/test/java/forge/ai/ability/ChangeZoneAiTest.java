@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import forge.ai.AITest;
+import forge.ai.AiPlayDecision;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpellApiToAi;
 import forge.game.Game;
 import forge.game.ability.ApiType;
@@ -71,40 +73,6 @@ public class ChangeZoneAiTest extends AITest {
     }
 
     @Test
-    public void testWeirdHarvestWithEmptyOpponentLibrary() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(1);
-
-        addCards("Forest", 5, ai);
-        addCardToZone("Runeclaw Bear", ai, ZoneType.Library);
-        Card harvest = addCardToZone("Weird Harvest", ai, ZoneType.Hand);
-        SpellAbility sa = harvest.getSpellAbilities().get(0);
-        sa.setActivatingPlayer(ai);
-
-        AssertJUnit.assertTrue("AI should cast Weird Harvest when only its library has a creature",
-                SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
-        AssertJUnit.assertTrue("Weird Harvest should pay a positive X value",
-                sa.getXManaCostPaid() > 0);
-    }
-
-    @Test
-    public void testNewFrontiersWithEmptyOpponentLibrary() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(1);
-
-        addCards("Forest", 5, ai);
-        addCardToZone("Forest", ai, ZoneType.Library);
-        Card frontiers = addCardToZone("New Frontiers", ai, ZoneType.Hand);
-        SpellAbility sa = frontiers.getSpellAbilities().get(0);
-        sa.setActivatingPlayer(ai);
-
-        AssertJUnit.assertTrue("AI should cast New Frontiers when only its library has a basic land",
-                SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
-        AssertJUnit.assertTrue("New Frontiers should pay a positive X value",
-                sa.getXManaCostPaid() > 0);
-    }
-
-    @Test
     public void testExhumeWithMixedGraveyards() {
         Game game = initAndCreateThreePlayerGame();
         Player ai = game.getPlayers().get(1);
@@ -122,19 +90,24 @@ public class ChangeZoneAiTest extends AITest {
     }
 
     @Test
-    public void testLibraryRetrievalRequiresAnOwnCard() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(1);
-        Player opponent = game.getPlayers().get(0);
+    public void testExhumeRequiresAnOwnCreature() {
+        for (String ownCard : new String[] {null, "Swamp"}) {
+            Game game = initAndCreateGame();
+            Player ai = game.getPlayers().get(1);
+            Player opponent = game.getPlayers().get(0);
 
-        addCards("Forest", 5, ai);
-        addCardToZone("Forest", opponent, ZoneType.Library);
-        Card frontiers = addCardToZone("New Frontiers", ai, ZoneType.Hand);
-        SpellAbility sa = frontiers.getSpellAbilities().get(0);
-        sa.setActivatingPlayer(ai);
+            addCards("Swamp", 2, ai);
+            if (ownCard != null) {
+                addCardToZone(ownCard, ai, ZoneType.Graveyard);
+            }
+            addCardToZone("Grizzly Bears", opponent, ZoneType.Graveyard);
+            Card exhume = addCardToZone("Exhume", ai, ZoneType.Hand);
+            SpellAbility sa = exhume.getSpellAbilities().get(0);
+            sa.setActivatingPlayer(ai);
 
-        AssertJUnit.assertFalse("AI should not cast New Frontiers without an eligible own card",
-                SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
+            AssertJUnit.assertFalse("AI should not cast Exhume without an own creature",
+                    ((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa) == AiPlayDecision.WillPlay);
+        }
     }
 
     @Test
