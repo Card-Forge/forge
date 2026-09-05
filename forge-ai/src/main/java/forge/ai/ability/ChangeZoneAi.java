@@ -333,10 +333,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
             ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         }
 
-        final boolean allowEmptyDefinedPlayers = isMandatoryCreatureGraveyardReturn(sa, origin, type);
+        final boolean allowEmptyDefinedPlayers = canIgnoreEmptyDefinedPlayers(ai, sa, origin,
+                destination, pDefined);
         boolean emptyDefinedPlayer = false;
-        boolean nonEmptyDefinedPlayer = false;
-        boolean ownCanReturn = false;
+        CardCollectionView ownCards = null;
 
         for (final Player p : pDefined) {
             CardCollectionView list = p.getCardsIn(origin);
@@ -362,24 +362,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 list = CardLists.getValidCards(list, type, source.getController(), source, sa);
             }
 
-            if (!activateForCost && list.isEmpty()) {
-                if (allowEmptyDefinedPlayers && p != ai) {
-                    emptyDefinedPlayer = true;
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
+            if (allowEmptyDefinedPlayers && !activateForCost && p != ai && list.isEmpty()) {
+                emptyDefinedPlayer = true;
+                continue;
             }
-            if (allowEmptyDefinedPlayers) {
-                if (p == ai) {
-                    for (final Card card : list) {
-                        if (!ComputerUtil.isETBprevented(card)) {
-                            ownCanReturn = true;
-                            break;
-                        }
-                    }
-                } else if (!list.isEmpty()) {
-                    nonEmptyDefinedPlayer = true;
-                }
+            if (!activateForCost && list.isEmpty()) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            if (allowEmptyDefinedPlayers && p == ai) {
+                ownCards = list;
             }
             if ("Atarka's Command".equals(sourceName)
                     && (list.size() < 2 || ai.getLandsPlayedThisTurn() < 1)) {
@@ -423,8 +414,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        if (!activateForCost && allowEmptyDefinedPlayers && emptyDefinedPlayer
-                && (nonEmptyDefinedPlayer || !ownCanReturn)) {
+        if (!activateForCost && emptyDefinedPlayer && "Battlefield".equals(destination)
+                && (ownCards == null || !Iterables.any(ownCards, card -> !ComputerUtil.isETBprevented(card)))) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
@@ -452,13 +443,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
-    private static boolean isMandatoryCreatureGraveyardReturn(final SpellAbility sa,
-            final List<ZoneType> origin, final String type) {
-        return sa.hasParam("Mandatory") && !sa.usesTargeting() && sa.hasParam("DefinedPlayer")
-                && "Player".equals(sa.getParam("DefinedPlayer")) && "Creature".equals(type)
-                && "1".equals(sa.getParamOrDefault("ChangeNum", "1"))
-                && ZoneType.Battlefield.equals(ZoneType.smartValueOf(sa.getParam("Destination")))
-                && origin != null && origin.size() == 1 && ZoneType.Graveyard.equals(origin.get(0));
+    private static boolean canIgnoreEmptyDefinedPlayers(final Player ai, final SpellAbility sa,
+            final List<ZoneType> origin, final String destination, final Iterable<Player> pDefined) {
+        return !sa.usesTargeting() && !sa.isCurse() && Iterables.contains(pDefined, ai)
+                && ("Hand".equals(destination) || "Battlefield".equals(destination))
+                && origin != null && origin.size() == 1
+                && (origin.get(0) == ZoneType.Library || origin.get(0) == ZoneType.Graveyard);
     }
 
     /**

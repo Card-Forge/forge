@@ -69,4 +69,118 @@ public class ChangeZoneAiTest extends AITest {
         AssertJUnit.assertTrue("AI should cast Exhume when only its graveyard has a creature",
                 SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
     }
+
+    @Test
+    public void testWeirdHarvestWithEmptyOpponentLibrary() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Forest", 5, ai);
+        addCardToZone("Runeclaw Bear", ai, ZoneType.Library);
+        Card harvest = addCardToZone("Weird Harvest", ai, ZoneType.Hand);
+        SpellAbility sa = harvest.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(ai);
+
+        AssertJUnit.assertTrue("AI should cast Weird Harvest when only its library has a creature",
+                SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
+        AssertJUnit.assertTrue("Weird Harvest should pay a positive X value",
+                sa.getXManaCostPaid() > 0);
+    }
+
+    @Test
+    public void testNewFrontiersWithEmptyOpponentLibrary() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Forest", 5, ai);
+        addCardToZone("Forest", ai, ZoneType.Library);
+        Card frontiers = addCardToZone("New Frontiers", ai, ZoneType.Hand);
+        SpellAbility sa = frontiers.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(ai);
+
+        AssertJUnit.assertTrue("AI should cast New Frontiers when only its library has a basic land",
+                SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
+        AssertJUnit.assertTrue("New Frontiers should pay a positive X value",
+                sa.getXManaCostPaid() > 0);
+    }
+
+    @Test
+    public void testExhumeWithMixedGraveyards() {
+        Game game = initAndCreateThreePlayerGame();
+        Player ai = game.getPlayers().get(1);
+        Player ally = game.getPlayers().get(2);
+
+        addCards("Swamp", 2, ai);
+        addCardToZone("Akroma, Angel of Wrath", ai, ZoneType.Graveyard);
+        addCardToZone("Grizzly Bears", ally, ZoneType.Graveyard);
+        Card exhume = addCardToZone("Exhume", ai, ZoneType.Hand);
+        SpellAbility sa = exhume.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(ai);
+
+        AssertJUnit.assertTrue("AI should cast Exhume when one opponent has no eligible creature",
+                SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
+    }
+
+    @Test
+    public void testLibraryRetrievalRequiresAnOwnCard() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCards("Forest", 5, ai);
+        addCardToZone("Forest", opponent, ZoneType.Library);
+        Card frontiers = addCardToZone("New Frontiers", ai, ZoneType.Hand);
+        SpellAbility sa = frontiers.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(ai);
+
+        AssertJUnit.assertFalse("AI should not cast New Frontiers without an eligible own card",
+                SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
+    }
+
+    @Test
+    public void testExhumeWithGrafdiggersCage() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCards("Swamp", 2, ai);
+        addCardToZone("Akroma, Angel of Wrath", ai, ZoneType.Graveyard);
+        addCard("Grafdigger's Cage", opponent);
+        game.getAction().checkStateEffects(true);
+        Card exhume = addCardToZone("Exhume", ai, ZoneType.Hand);
+        SpellAbility sa = exhume.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(ai);
+
+        AssertJUnit.assertFalse("AI should not cast Exhume through Grafdigger's Cage",
+                SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
+    }
+
+    @Test
+    public void testCurfewWithEmptyOpponentBattlefield() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Island", ai);
+        addCard("Runeclaw Bear", ai);
+        Card curfew = addCardToZone("Curfew", ai, ZoneType.Hand);
+        SpellAbility sa = curfew.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(ai);
+
+        AssertJUnit.assertFalse("AI should not cast Curfew when an opponent has no creature",
+                SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
+    }
+
+    @Test
+    public void testMindSwordsWithEmptyOpponentHand() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Swamp", 2, ai);
+        Card swords = addCardToZone("Mind Swords", ai, ZoneType.Hand);
+        SpellAbility sa = swords.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(ai);
+
+        AssertJUnit.assertFalse("AI should not cast Mind Swords when an opponent has no cards",
+                SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
+    }
 }
