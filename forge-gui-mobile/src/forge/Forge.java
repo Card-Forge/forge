@@ -945,6 +945,7 @@ public class Forge implements ApplicationListener {
         // render classic
         Classic.getInstance().render(screen);
         FrameRate.getInstance().render(showFPS);
+        //FrameRate.getInstance().updateHistoricalPeak(showFPS);
     }
 
     private static FContainer getHierachyScreen() {
@@ -969,9 +970,6 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
-        // Investigate why this would be 0..
-        if (width < 1 || height < 1)
-            return;
         try {
             if (currentScreen != null) {
                 currentScreen.setSize(width, height);
@@ -1026,8 +1024,14 @@ public class Forge implements ApplicationListener {
         }
         Dscreens.clear();
         // don't call getInstance() or they will be recreated on dispose
-        safeDispose(MapStage.instance, Adventure.instance, ScreenUtil.instance, ShaderUtil.instance,
-            graphics, Assets.instance, lastPreview);
+        safeDispose( // I need to know what line the startup bug occurs when the app is paused...
+            MapStage.instance,
+            Adventure.instance,
+            ScreenUtil.instance,
+            ShaderUtil.instance,
+            graphics,
+            Assets.instance,
+            lastPreview);
         try {
             SoundSystem.instance.dispose();
         } catch (Exception e) {
@@ -1039,12 +1043,20 @@ public class Forge implements ApplicationListener {
             e.printStackTrace();
         }
     }
+    public boolean triggerDispose() {
+        dispose();
+        return true;
+    }
     public static void safeDispose(Disposable... disposables) {
         for (Disposable d : disposables) {
             if (d != null) {
                 try {
                     d.dispose();
-                } catch (Exception ignored) {}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    d = null;
+                }
             }
         }
     }

@@ -16,8 +16,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.Disposable;
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import forge.adventure.util.Config;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -36,8 +34,7 @@ public class Graphics implements Disposable {
     private static final int GL_LINE_SMOOTH = 2848; //create constant here since not in GL20
 
     private final SpriteBatch batch;
-    private final Supplier<ShapeRenderer> shapeRenderer = Suppliers.memoize(ShapeRenderer::new);
-    private static boolean invokeShapeRenderer = false;
+    private final ShapeRenderer shapeRenderer = new ShapeRenderer();
     private final Deque<Matrix4> Dtransforms = new ArrayDeque<>();
     private final Vector3 tmp = new Vector3();
     private float regionHeight;
@@ -46,6 +43,7 @@ public class Graphics implements Disposable {
     private int failedClipCount;
     private float alphaComposite = 1;
     private int transformCount = 0;
+    private boolean isDisposed = false;
 
     public Graphics(final int spriteCapacity) {
         batch = new SpriteBatch(spriteCapacity);
@@ -62,18 +60,17 @@ public class Graphics implements Disposable {
         if (batch.isDrawing()) {
             batch.end();
         }
-        if (invokeShapeRenderer) {
-            if (shapeRenderer.get().getCurrentType() != null) {
-                shapeRenderer.get().end();
-            }
+        if (shapeRenderer.getCurrentType() != null) {
+            shapeRenderer.end();
         }
     }
 
     @Override
     public void dispose() {
-        if (invokeShapeRenderer)
-            Forge.safeDispose(shapeRenderer.get());
-        Forge.safeDispose(batch);
+        if (!isDisposed) {
+            isDisposed = true;
+            Forge.safeDispose(batch, shapeRenderer);
+        }
     }
 
     public SpriteBatch getBatch() {
@@ -261,8 +258,8 @@ public class Graphics implements Disposable {
         }
 
         startShape(ShapeType.Line);
-        shapeRenderer.get().setColor(color);
-        shapeRenderer.get().line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
+        shapeRenderer.setColor(color);
+        shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
         endShape();
 
         if (needSmoothing) {
@@ -298,26 +295,26 @@ public class Graphics implements Disposable {
             Gdx.gl.glEnable(GL_LINE_SMOOTH);
         }
         startShape(ShapeType.Filled);
-        shapeRenderer.get().setColor(color);
-        shapeRenderer.get().circle(adjustX(x2), adjustY(y2, 0), thickness);
-        shapeRenderer.get().setColor(Color.WHITE);
-        shapeRenderer.get().circle(adjustX(x2), adjustY(y2, 0), ct);
+        shapeRenderer.setColor(color);
+        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness);
+        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), ct);
         endShape();
 
         if (thickness > 1) {
             Gdx.gl.glLineWidth(thickness);
         }
         startShape(ShapeType.Line);
-        shapeRenderer.get().setColor(color);
-        shapeRenderer.get().line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
+        shapeRenderer.setColor(color);
+        shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
         endShape();
 
         if (lt > 1) {
             Gdx.gl.glLineWidth(lt);
         }
         startShape(ShapeType.Line);
-        shapeRenderer.get().setColor(Color.WHITE);
-        shapeRenderer.get().line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
+        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
         endShape();
 
         if (needSmoothing) {
@@ -368,13 +365,13 @@ public class Graphics implements Disposable {
 
         //draw arrow tail
         startShape(ShapeType.Filled);
-        shapeRenderer.get().setColor(color);
-        shapeRenderer.get().rectLine(adjustX(x1), adjustY(y1, 0),
+        shapeRenderer.setColor(color);
+        shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0),
                 adjustX(x2 - arrowHeadLen * (float) Math.cos(angle)), //shorten tail to make room for arrow head
                 adjustY(y2 - arrowHeadLen * (float) Math.sin(angle), 0), arrowThickness);
 
         //draw arrow head
-        shapeRenderer.get().triangle(vertices[0], vertices[1], vertices[2], vertices[3], vertices[4], vertices[5]);
+        shapeRenderer.triangle(vertices[0], vertices[1], vertices[2], vertices[3], vertices[4], vertices[5]);
         endShape();
 
         //draw border around arrow
@@ -382,8 +379,8 @@ public class Graphics implements Disposable {
             Gdx.gl.glLineWidth(borderThickness);
         }
         startShape(ShapeType.Line);
-        shapeRenderer.get().setColor(Color.BLACK);
-        shapeRenderer.get().polygon(vertices);
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.polygon(vertices);
         endShape();
         if (borderThickness > 1) {
             Gdx.gl.glLineWidth(1);
@@ -431,14 +428,14 @@ public class Graphics implements Disposable {
         h = Math.round(h + 1);
 
         startShape(ShapeType.Line);
-        shapeRenderer.get().setColor(color);
+        shapeRenderer.setColor(color);
 
-        shapeRenderer.get().arc(adjustX(x) + cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 90f, 90f);
-        shapeRenderer.get().arc(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 0f, 90f);
-        shapeRenderer.get().arc(adjustX(x) + w - cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 270, 90f);
-        shapeRenderer.get().arc(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 180, 90f);
-        shapeRenderer.get().rect(adjustX(x), adjustY(y + cornerRadius, h - cornerRadius * 2), w, h - cornerRadius * 2);
-        shapeRenderer.get().rect(adjustX(x + cornerRadius), adjustY(y, h), w - cornerRadius * 2, h);
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 90f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 0f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 270, 90f);
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 180, 90f);
+        shapeRenderer.rect(adjustX(x), adjustY(y + cornerRadius, h - cornerRadius * 2), w, h - cornerRadius * 2);
+        shapeRenderer.rect(adjustX(x + cornerRadius), adjustY(y, h), w - cornerRadius * 2, h);
 
         endShape();
 
@@ -468,13 +465,13 @@ public class Graphics implements Disposable {
             Gdx.gl.glEnable(GL_BLEND);
         }
         startShape(ShapeType.Filled);
-        shapeRenderer.get().setColor(color);
-        shapeRenderer.get().arc(adjustX(x) + cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 90f, 90f);
-        shapeRenderer.get().arc(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 0f, 90f);
-        shapeRenderer.get().arc(adjustX(x) + w - cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 270, 90f);
-        shapeRenderer.get().arc(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 180, 90f);
-        shapeRenderer.get().rect(adjustX(x), adjustY(y + cornerRadius, h - cornerRadius * 2), w, h - cornerRadius * 2);
-        shapeRenderer.get().rect(adjustX(x + cornerRadius), adjustY(y, h), w - cornerRadius * 2, h);
+        shapeRenderer.setColor(color);
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 90f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 0f, 90f);
+        shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 270, 90f);
+        shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 180, 90f);
+        shapeRenderer.rect(adjustX(x), adjustY(y + cornerRadius, h - cornerRadius * 2), w, h - cornerRadius * 2);
+        shapeRenderer.rect(adjustX(x + cornerRadius), adjustY(y, h), w - cornerRadius * 2, h);
         endShape();
         if (color.a < 1) {
             Gdx.gl.glDisable(GL_BLEND);
@@ -499,8 +496,8 @@ public class Graphics implements Disposable {
         Gdx.gl.glEnable(GL_LINE_SMOOTH); //must be smooth to ensure edges aren't missed
 
         startShape(ShapeType.Line);
-        shapeRenderer.get().setColor(color);
-        shapeRenderer.get().rect(adjustX(x), adjustY(y, h), w, h);
+        shapeRenderer.setColor(color);
+        shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
         endShape();
 
         Gdx.gl.glDisable(GL_LINE_SMOOTH);
@@ -534,8 +531,8 @@ public class Graphics implements Disposable {
         }
 
         startShape(ShapeType.Filled);
-        shapeRenderer.get().setColor(color);
-        shapeRenderer.get().rect(adjustX(x), adjustY(y, h), w, h);
+        shapeRenderer.setColor(color);
+        shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
         endShape();
 
         if (color.a < 1) {
@@ -562,8 +559,8 @@ public class Graphics implements Disposable {
         Gdx.gl.glEnable(GL_LINE_SMOOTH);
 
         startShape(ShapeType.Line);
-        shapeRenderer.get().setColor(color);
-        shapeRenderer.get().circle(adjustX(x), adjustY(y, 0), radius);
+        shapeRenderer.setColor(color);
+        shapeRenderer.circle(adjustX(x), adjustY(y, 0), radius);
         endShape();
 
         Gdx.gl.glDisable(GL_LINE_SMOOTH);
@@ -590,8 +587,8 @@ public class Graphics implements Disposable {
         }
 
         startShape(ShapeType.Filled);
-        shapeRenderer.get().setColor(color);
-        shapeRenderer.get().circle(adjustX(x), adjustY(y, 0), radius); //TODO: Make smoother
+        shapeRenderer.setColor(color);
+        shapeRenderer.circle(adjustX(x), adjustY(y, 0), radius); //TODO: Make smoother
         endShape();
 
         if (color.a < 1) {
@@ -616,8 +613,8 @@ public class Graphics implements Disposable {
         }
 
         startShape(ShapeType.Filled);
-        shapeRenderer.get().setColor(color);
-        shapeRenderer.get().triangle(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), adjustX(x3), adjustY(y3, 0));
+        shapeRenderer.setColor(color);
+        shapeRenderer.triangle(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), adjustX(x3), adjustY(y3, 0));
         endShape();
 
         if (color.a < 1) {
@@ -657,7 +654,7 @@ public class Graphics implements Disposable {
         Color bottomRightColor = color2;
 
         startShape(ShapeType.Filled);
-        shapeRenderer.get().rect(adjustX(x), adjustY(y, h), w, h, bottomLeftColor, bottomRightColor, topRightColor, topLeftColor);
+        shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h, bottomLeftColor, bottomRightColor, topRightColor, topLeftColor);
         endShape();
 
         if (needBlending) {
@@ -668,16 +665,15 @@ public class Graphics implements Disposable {
     }
 
     private void startShape(ShapeType shapeType) {
-        invokeShapeRenderer = true;
         if (!Dtransforms.isEmpty()) {
             //must copy matrix before starting shape if transformed
-            shapeRenderer.get().setTransformMatrix(batch.getTransformMatrix());
+            shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
         }
-        shapeRenderer.get().begin(shapeType);
+        shapeRenderer.begin(shapeType);
     }
 
     private void endShape() {
-        shapeRenderer.get().end();
+        shapeRenderer.end();
     }
 
     public void setColorRGBA(float r, float g, float b, float alphaComposite0) {
@@ -1385,8 +1381,7 @@ public class Graphics implements Disposable {
 
     public void setProjectionMatrix(Matrix4 matrix) {
         batch.setProjectionMatrix(matrix);
-        shapeRenderer.get().setProjectionMatrix(matrix);
-        invokeShapeRenderer = true;
+        shapeRenderer.setProjectionMatrix(matrix);
     }
 
     public void startRotateTransform(float originX, float originY, float rotation) {
@@ -1398,9 +1393,8 @@ public class Graphics implements Disposable {
     }
 
     public void endTransform() {
-        invokeShapeRenderer = true;
         batch.end();
-        shapeRenderer.get().setTransformMatrix(batch.getTransformMatrix().idt());
+        shapeRenderer.setTransformMatrix(batch.getTransformMatrix().idt());
         Dtransforms.removeFirst();
         transformCount--;
         if (transformCount != Dtransforms.size()) {
@@ -1409,7 +1403,7 @@ public class Graphics implements Disposable {
             Dtransforms.clear();
         }
         batch.getTransformMatrix().idt(); //reset
-        shapeRenderer.get().getTransformMatrix().idt(); //reset
+        shapeRenderer.getTransformMatrix().idt(); //reset
         batch.begin();
     }
 
