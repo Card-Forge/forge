@@ -489,7 +489,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        if (resultingPoison(ai, combat) >= ai.getGame().getRules().getPoisonCountersToLose()) {
+        if (resultingPoison(ai, combat) >= ai.getPoisonCounterThreshold()) {
             return true;
         }
 
@@ -2437,7 +2437,7 @@ public class ComputerUtilCombat {
         }
 
         int life = ai.getLife();
-        int poisonLife = 10 - ai.getPoisonCounters();
+        int poisonLife = ai.getPoisonCounterThreshold() - ai.getPoisonCounters();
         double percentLife = life * 1.0 / damageScore;
         double percentPoison = poisonLife * 1.0 / poisonScore;
 

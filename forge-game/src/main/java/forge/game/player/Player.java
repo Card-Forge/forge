@@ -972,6 +972,15 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void removePoisonCounters(final int num, final Player source) {
         subtractCounter(CounterEnumType.POISON, num, source);
     }
+    // Rule 704.5c base threshold, plus this player's own Poison Tolerance
+    // bonus from permanents they control (e.g. Rosewater's Nemesis).
+    public final int getPoisonCounterThreshold() {
+        int threshold = game.getRules().getPoisonCountersToLose();
+        for (final Card c : getCardsIn(ZoneType.Battlefield)) {
+            threshold += c.getKeywordMagnitude(Keyword.POISON_TOLERANCE);
+        }
+        return threshold;
+    }
     // ================ POISON Merged =================================
     public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp, final long staticId) {
         List<KeywordInterface> kws = Lists.newArrayList();
@@ -2043,9 +2052,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             return true;
         }
 
-        // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
+        // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game. Handles Poison Tolerance increasing the threshold as well.
         // 704.6b In a Two-Headed Giant game, if a team has fifteen or more poison counters, that team loses the game. See rule 810, “Two-Headed Giant Variant.”
-        if (getCounters(CounterEnumType.POISON) >= 10 && loseConditionMet(GameLossReason.Poisoned, null)) {
+        if (getCounters(CounterEnumType.POISON) >= getPoisonCounterThreshold() && loseConditionMet(GameLossReason.Poisoned, null)) {
             return true;
         }
 
