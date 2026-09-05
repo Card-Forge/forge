@@ -8,4 +8,4 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | T
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ g_2_2_cat_warrior_forestwalk
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
-Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)\nWhenever Jedit Ojanen of Efrava attacks or blocks, create a 2/2 green Cat Warrior creature token with forestwalk.
+Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)\nWhenever Jedit Ojanen attacks or blocks, create a 2/2 green Cat Warrior creature token with forestwalk.
