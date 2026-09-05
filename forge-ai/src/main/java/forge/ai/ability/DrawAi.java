@@ -315,6 +315,9 @@ public class DrawAi extends SpellAbilityAi {
         if ("YawgmothsBargain".equals(logic)) {
             return SpecialCardAi.YawgmothsBargain.consider(ai, sa);
         }
+        if ("WelcomeTheDarkness".equals(logic) && !SpecialCardAi.WelcomeTheDarkness.consider(ai, sa, numCards)) {
+            return false;
+        }
 
         // Generic logic for all cards that do not need any special handling
 

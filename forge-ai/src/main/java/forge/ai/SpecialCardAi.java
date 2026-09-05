@@ -20,6 +20,7 @@ package forge.ai;
 import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
 import forge.ai.ability.FightAi;
+import forge.ai.ability.TokenAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -1973,6 +1974,33 @@ public class SpecialCardAi {
             // Should ideally never get here
             System.err.println("Volrath's Shapeshifter AI: Could not find a discard target despite the previous confirmation to proceed!");
             return null;
+        }
+    }
+
+    // Welcome the Darkness
+    public static class WelcomeTheDarkness {
+        public static boolean consider(final Player ai, final SpellAbility sa, final int xValue) {
+            final int life = ai.getLife();
+            final boolean acceptableX = switch (xValue) {
+                case 1, 2 -> xValue >= life;
+                case 3 -> life <= 5;
+                case 4 -> life <= 7;
+                case 5 -> life <= 12;
+                default -> xValue >= 6;
+            };
+            if (!acceptableX) {
+                return false;
+            }
+
+            final SpellAbility tokenSa = sa.findSubAbilityByType(ApiType.Token);
+            if (tokenSa == null) {
+                return false;
+            }
+
+            final CardCollection additionalBlockers = new CardCollection(TokenAi.spawnToken(ai, tokenSa));
+            final int resultingLife = xValue > life && !ai.canGainLife() ? life : xValue;
+            final int lifeReduction = life - resultingLife;
+            return !ComputerUtil.aiLifeInDanger(ai, true, lifeReduction, additionalBlockers);
         }
     }
 
