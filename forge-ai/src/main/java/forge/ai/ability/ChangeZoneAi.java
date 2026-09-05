@@ -540,8 +540,31 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a List<Card> object.
      * @return a {@link forge.game.card.Card} object.
      */
-    private static Card basicManaFixing(final Player ai, List<Card> list) { // Search for a Basic Land
-        final CardCollectionView combined = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
+    private static Card basicManaFixing(final Player decider, final Player owner, List<Card> list) { // Search for a Basic Land
+        // the land ends up with its owner, so the colours that matter are theirs, not the
+        // chooser's. No card in the pool currently chooses for another player here, so rather
+        // than guess at that case it is left on the existing behaviour untouched.
+        if (!decider.isOpponentOf(owner)) {
+            // narrow to the lands worth the most, then let the basic-type spread and the
+            // dual-land preference below break the tie as they already did
+            final List<Card> best = new ArrayList<>();
+            int most = 0; // only worth narrowing for lands that improve the mana at all
+            for (Card c : list) {
+                final int value = ComputerUtilCard.getColorFixingValue(owner, c);
+                if (value > most) {
+                    most = value;
+                    best.clear();
+                }
+                if (value == most && most > 0) {
+                    best.add(c);
+                }
+            }
+            if (!best.isEmpty()) {
+                list = best;
+            }
+        }
+
+        final CardCollectionView combined = CardCollection.combine(owner.getCardsIn(ZoneType.Battlefield), owner.getCardsIn(ZoneType.Hand));
         final List<String> basics = new ArrayList<>();
 
         // what types can I go get?
@@ -552,7 +575,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // check if any SA we wanted to pay for had missing shards
-        Set<ManaCostBeingPaid> unpaid = AiCardMemory.getMemorySet(ai, AiCardMemory.MemorySetMana.UNPAID_COSTS);
+        Set<ManaCostBeingPaid> unpaid = AiCardMemory.getMemorySet(owner, AiCardMemory.MemorySetMana.UNPAID_COSTS);
         Map<String, Integer> basicTypes = Maps.newHashMap();
         if (unpaid != null) {
             for (ManaCostBeingPaid cost : unpaid) {
@@ -1605,7 +1628,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         } else if (origin.contains(ZoneType.Library) && (type.contains("Basic") || areAllBasics(type))) {
             if (keycardFound != null) return keycardFound;
 
-            c = basicManaFixing(decider, fetchList);
+            c = basicManaFixing(decider, player, fetchList);
         } else if (ZoneType.Hand.equals(destination) && CardLists.getNotType(fetchList, "Creature").isEmpty()) {
             if (keycardFound != null) return keycardFound;
 
@@ -1633,12 +1656,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
             CardCollectionView hand = decider.getCardsIn(ZoneType.Hand);
             if (!hand.anyMatch(CardPredicates.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS) < 4 &&
                     !hand.anyMatch(crd -> ComputerUtilMana.hasEnoughManaSourcesToCast(crd.getFirstSpellAbility(), decider))) {
-                c = basicManaFixing(decider, fetchList);
+                c = basicManaFixing(decider, player, fetchList);
             }
             if (c == null) {
                 if (fetchList.allMatch(CardPredicates.LANDS)) {
                     // we're only choosing from lands, so get the best land
-                    c = ComputerUtilCard.getBestLandAI(fetchList);
+                    c = ComputerUtilCard.getBestLandAI(player, fetchList);
                 } else {
                     fetchList = CardLists.getNotType(fetchList, "Land");
                     // Prefer to pull a creature, generally more useful for AI.
@@ -2124,7 +2147,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // If we are below the threshold, look for a land in the available choices and prefer it
         if (totalManaSources < threshold) {
-            Card manaFixing = basicManaFixing(ai, choices);
+            Card manaFixing = basicManaFixing(ai, ai, choices);
             if (manaFixing != null) {
                 return manaFixing;
             }
