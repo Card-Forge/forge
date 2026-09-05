@@ -396,7 +396,7 @@ public class GameHUD extends Stage {
             case "town":
                 if (MapStage.getInstance().isInMap()) {
                     int rep = TileMapScene.instance().getPointOfInterestChanges().getMapReputation();
-                    String reputationText = TileMapScene.instance().rootPoint.getDisplayName() + "\nReputation: " + (rep > 0 ? "[GREEN]" : rep < 0 ? "[RED]" : "[WHITE]") + rep + "[/]";
+                    String reputationText = TileMapScene.instance().rootPoint.getDisplayName() + "\n" + Forge.getLocalizer().getMessage("advReputation") + ": " + (rep > 0 ? "[GREEN]" : rep < 0 ? "[RED]" : "[WHITE]") + rep + "[/]";
                     if (fromWorldMap) {
                         addNotification(reputationText);
                         fromWorldMap = false;

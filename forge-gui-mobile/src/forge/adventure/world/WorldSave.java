@@ -1,5 +1,6 @@
 package forge.adventure.world;
 
+import forge.Forge;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -59,6 +60,8 @@ public class WorldSave {
     }
 
     static public boolean load(int currentSlot) {
+
+        Forge.getLocalizer().loadAdventureBundle(Config.instance().getPlanePath(Config.instance().getSettingData().plane) + "languages/");
 
         String fileName = WorldSave.getSaveFile(currentSlot);
         if (!new File(fileName).exists())
@@ -128,6 +131,7 @@ public class WorldSave {
     }
 
     public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode, int customDeckIndex, CardEdition starterEdition, long seed) {
+        Forge.getLocalizer().loadAdventureBundle(Config.instance().getPlanePath(Config.instance().getSettingData().plane) + "languages/");
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
         boolean chaos = mode == AdventureModes.Chaos;

@@ -50,8 +50,10 @@
     <property name="dialog">[
 {
    &quot;text&quot;: &quot;I was just here to pick up some pieces of old machinery. I didn't expect them to try to pick ME up. But at least it wasn't snakes this time...&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_explore_dig_site_0.61.d.n0.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;}]
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;}]
 }
 ]</property>
     <property name="enemy" value="Archaeologist"/>
