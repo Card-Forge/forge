@@ -945,6 +945,7 @@ public class Forge implements ApplicationListener {
         // render classic
         Classic.getInstance().render(screen);
         FrameRate.getInstance().render(showFPS);
+        //FrameRate.getInstance().updateHistoricalPeak(showFPS);
     }
 
     private static FContainer getHierachyScreen() {
