@@ -3000,24 +3000,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
             String sAbility = formatSpellAbility(sa);
 
-            // add Adventure to AbilityText
-            if (sa.isAdventure() && state.getStateName().equals(CardStateName.Original)) {
-                StringBuilder sbSA = new StringBuilder();
-                sbSA.append(Localizer.getInstance().getMessage("lblAdventure"));
-                sbSA.append(" — ").append(CardTranslation.getTranslatedName(getState(CardStateName.Secondary)));
-                sbSA.append(" ").append(sa.getPayCosts().toSimpleString());
-                sbSA.append(": ");
-                sbSA.append(sAbility);
-                sAbility = sbSA.toString();
-            } else if (sa.isOmen() && state.getStateName().equals(CardStateName.Original)) {
-                StringBuilder sbSA = new StringBuilder();
-                sbSA.append(Localizer.getInstance().getMessage("lblOmen"));
-                sbSA.append(" — ").append(CardTranslation.getTranslatedName(getState(CardStateName.Secondary)));
-                sbSA.append(" ").append(sa.getPayCosts().toSimpleString());
-                sbSA.append(": ");
-                sbSA.append(sAbility);
-                sAbility = sbSA.toString();
-            } else if (sa.isSpell() && sa.isBasicSpell()) {
+            if (sa.isSpell() && sa.isBasicSpell()) {
                 continue;
             } else if (sa.hasParam("DescriptionFromChosenName") && !getNamedCard().isEmpty()) {
                 String name = getNamedCard();

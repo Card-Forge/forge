@@ -657,14 +657,27 @@ public class CardDetailUtil {
             area.append("Owner: ").append(card.getOwner().toString());
         }
 
+        if (card.hasAlternateState() && card.getAlternateState().getType().hasSubtype("Adventure")) {
+            area.append("\n\n");
+            area.append(Localizer.getInstance().getMessage("lblAdventure") + " — " + getAlternateStateDesc(card));
+        }
+
+        if (card.hasAlternateState() && card.getAlternateState().getType().hasSubtype("Omen")) {
+            area.append("\n\n");
+            area.append(Localizer.getInstance().getMessage("lblOmen") + " — " + getAlternateStateDesc(card));
+        }
+
         if (card.hasPreparedSpell()) {
             area.append("\n\n");
-            area.append(Localizer.getInstance().getMessage("lblPrepared") + " — "
-                + card.getAlternateState().getName() + " "
-                + card.getAlternateState().getManaCost().toString() + ": "
-                + card.getAlternateState().getAbilityText()
-            );
+            area.append(Localizer.getInstance().getMessage("lblPrepared") + " — " + getAlternateStateDesc(card));
         }
         return area.toString().trim();
+    }
+
+    protected static String getAlternateStateDesc(CardView card) {
+        CardStateView state = card.getAlternateState();
+        return state.getName() + " "
+                + state.getManaCost().toString() + ": "
+                + state.getAbilityText();
     }
 }
