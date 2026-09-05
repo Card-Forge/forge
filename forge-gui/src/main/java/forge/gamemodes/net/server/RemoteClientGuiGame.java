@@ -198,7 +198,10 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         if (gameView == null) {
             return;
         }
+        gameView.getTracker().getEngineOwner().run(() -> updateGameViewOwned(gameView, flush));
+    }
 
+    private void updateGameViewOwned(GameView gameView, boolean flush) {
         if (!useDeltaSync || !initialSyncSent) {
             if (logBandwidth && !fallbackLogged) {
                 netLog.info("[DeltaSync] Client {}: Fallback to full state - useDeltaSync={}, initialSyncSent={}",
@@ -576,29 +579,31 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
             // delta properties first, then events forwarded.
             GameView gameView = getGameView();
             if (gameView != null) {
-                DeltaPacket delta = syncManager.collectDeltas(gameView);
-                delta.setEvents(TrackableSerializer.wrapEvents(events, gameView.getTracker()));
-                sender.send(ProtocolMethod.applyDelta, delta);
+                gameView.getTracker().getEngineOwner().run(() -> {
+                    DeltaPacket delta = syncManager.collectDeltas(gameView);
+                    delta.setEvents(TrackableSerializer.wrapEvents(events, gameView.getTracker()));
+                    sender.send(ProtocolMethod.applyDelta, delta);
 
-                if (logBandwidth) {
-                    int deltaSize = TrackableSerializer.measureSize(delta, gameView.getTracker());
-                    int eventsSize = TrackableSerializer.measureSize(events, gameView.getTracker());
-                    int stateOnlyFullSize = TrackableSerializer.measureSize(gameView, null);
-                    int fullStateSize = stateOnlyFullSize + eventsSize;
-                    int stateOnlyDeltaSize = TrackableSerializer.measureSize(delta.withoutEvents(), gameView.getTracker());
+                    if (logBandwidth) {
+                        int deltaSize = TrackableSerializer.measureSize(delta, gameView.getTracker());
+                        int eventsSize = TrackableSerializer.measureSize(events, gameView.getTracker());
+                        int stateOnlyFullSize = TrackableSerializer.measureSize(gameView, null);
+                        int fullStateSize = stateOnlyFullSize + eventsSize;
+                        int stateOnlyDeltaSize = TrackableSerializer.measureSize(delta.withoutEvents(), gameView.getTracker());
 
-                    totalDeltaBytes += deltaSize;
-                    totalFullStateBytes += fullStateSize;
-                    deltaPacketCount++;
+                        totalDeltaBytes += deltaSize;
+                        totalFullStateBytes += fullStateSize;
+                        deltaPacketCount++;
 
-                    int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
+                        int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
 
-                    netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%, StateOnlyDelta={} bytes, StateOnlyFull={} bytes",
-                        deltaPacketCount, deltaSize, fullStateSize, savings, stateOnlyDeltaSize, stateOnlyFullSize);
-                    netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
-                        totalDeltaBytes, totalFullStateBytes,
-                        totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
-                }
+                        netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%, StateOnlyDelta={} bytes, StateOnlyFull={} bytes",
+                            deltaPacketCount, deltaSize, fullStateSize, savings, stateOnlyDeltaSize, stateOnlyFullSize);
+                        netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
+                            totalDeltaBytes, totalFullStateBytes,
+                            totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
+                    }
+                });
             }
         } else {
             updateGameView(false);

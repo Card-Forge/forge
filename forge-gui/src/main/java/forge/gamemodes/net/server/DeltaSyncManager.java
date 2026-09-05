@@ -1,5 +1,6 @@
 package forge.gamemodes.net.server;
 
+import forge.game.EngineOwner;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
@@ -103,12 +104,22 @@ public class DeltaSyncManager implements IHasForgeLog {
      * New objects are registered with this consumer and sent in full.
      * Existing objects only send properties dirty for THIS consumer.
      *
-     * <p>Another thread can change the graph while this runs, so a walk that throws is tried
-     * again. If none of the attempts get through, the packet ships with whatever was collected
-     * rather than letting the exception reach the caller — on the game thread that would end
-     * the game loop and leave the match unable to continue.
+     * <p>Takes ownership of the game first, so nothing else changes the graph while it is read.
+     * The retry is for the case where ownership could not be taken and this ran anyway: a walk
+     * that throws is tried again, and if none of the attempts get through the packet ships with
+     * whatever was collected rather than letting the exception reach the caller.
      */
     public DeltaPacket collectDeltas(GameView gameView) {
+        EngineOwner owner = gameView.getTracker().getEngineOwner();
+        owner.enter("collectDeltas");
+        try {
+            return collectDeltasOwned(gameView);
+        } finally {
+            owner.exit();
+        }
+    }
+
+    private DeltaPacket collectDeltasOwned(GameView gameView) {
         Map<Integer, Map<TrackableProperty, Object>> objectDeltas = new HashMap<>();
         // need parent-before-child insertion order
         Map<Integer, Map<TrackableProperty, Object>> newObjects = new LinkedHashMap<>();

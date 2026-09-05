@@ -100,12 +100,12 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
                 // TODO: A property changing A->B->A between consumer reads would still be marked dirty.
                 // A checksum or version-per-property approach could skip this, but A->B->A is uncommon
                 // in typical Magic game flow. Revisit if profiling shows excessive no-op deltas.
-                markDirtyForConsumers(key);
+                markDirtyForConsumers(key, "TrackableObject.set");
                 key.updateObjLookup(tracker, value);
             }
         }
         else if (!value.equals(props.put(key, value))) {
-            markDirtyForConsumers(key);
+            markDirtyForConsumers(key, "TrackableObject.set");
             key.updateObjLookup(tracker, value);
         }
     }
@@ -113,9 +113,13 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     /**
      * Mark a property as dirty for all registered consumers and increment version.
      */
-    private void markDirtyForConsumers(final TrackableProperty key) {
+    private void markDirtyForConsumers(final TrackableProperty key, final String origin) {
         if (consumers == null) {
             return;
+        }
+        // After the early return so offline and AI-simulation games pay nothing
+        if (tracker != null) {
+            tracker.getEngineOwner().checkMutation(origin);
         }
         version++;
         for (EnumSet<TrackableProperty> dirtySet : consumers.values()) {
@@ -149,7 +153,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
 
     // use when updating collection type properties without using set (or assigning the same object)
     protected final void flagAsChanged(final TrackableProperty key) {
-        markDirtyForConsumers(key);
+        markDirtyForConsumers(key, "TrackableObject.flagAsChanged");
         key.updateObjLookup(tracker, props.get(key));
     }
 
