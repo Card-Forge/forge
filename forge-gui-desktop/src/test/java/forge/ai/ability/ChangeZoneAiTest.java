@@ -54,4 +54,19 @@ public class ChangeZoneAiTest extends AITest {
                     t.getController().equals(ai));
         }
     }
+
+    @Test
+    public void testExhumeWithEmptyOpponentGraveyard() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Swamp", 2, ai);
+        addCardToZone("Akroma, Angel of Wrath", ai, ZoneType.Graveyard);
+        Card exhume = addCardToZone("Exhume", ai, ZoneType.Hand);
+        SpellAbility sa = exhume.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(ai);
+
+        AssertJUnit.assertTrue("AI should cast Exhume when only its graveyard has a creature",
+                SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
+    }
 }

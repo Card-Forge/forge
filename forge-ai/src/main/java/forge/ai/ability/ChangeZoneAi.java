@@ -333,6 +333,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
             ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         }
 
+        final boolean allowEmptyDefinedPlayers = isMandatoryCreatureGraveyardReturn(sa, origin, type);
+        boolean emptyDefinedPlayer = false;
+        boolean nonEmptyDefinedPlayer = false;
+        boolean ownCanReturn = false;
+
         for (final Player p : pDefined) {
             CardCollectionView list = p.getCardsIn(origin);
 
@@ -358,7 +363,23 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             if (!activateForCost && list.isEmpty()) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                if (allowEmptyDefinedPlayers && p != ai) {
+                    emptyDefinedPlayer = true;
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+            }
+            if (allowEmptyDefinedPlayers) {
+                if (p == ai) {
+                    for (final Card card : list) {
+                        if (!ComputerUtil.isETBprevented(card)) {
+                            ownCanReturn = true;
+                            break;
+                        }
+                    }
+                } else if (!list.isEmpty()) {
+                    nonEmptyDefinedPlayer = true;
+                }
             }
             if ("Atarka's Command".equals(sourceName)
                     && (list.size() < 2 || ai.getLandsPlayedThisTurn() < 1)) {
@@ -402,6 +423,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
+        if (!activateForCost && allowEmptyDefinedPlayers && emptyDefinedPlayer
+                && (nonEmptyDefinedPlayer || !ownCanReturn)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
         if (ComputerUtil.playImmediately(ai, sa)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
@@ -424,6 +450,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    private static boolean isMandatoryCreatureGraveyardReturn(final SpellAbility sa,
+            final List<ZoneType> origin, final String type) {
+        return sa.hasParam("Mandatory") && !sa.usesTargeting() && sa.hasParam("DefinedPlayer")
+                && "Player".equals(sa.getParam("DefinedPlayer")) && "Creature".equals(type)
+                && "1".equals(sa.getParamOrDefault("ChangeNum", "1"))
+                && ZoneType.Battlefield.equals(ZoneType.smartValueOf(sa.getParam("Destination")))
+                && origin != null && origin.size() == 1 && ZoneType.Graveyard.equals(origin.get(0));
     }
 
     /**
