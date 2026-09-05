@@ -72,6 +72,9 @@ public class GameView extends TrackableObject {
     public String getTitle() {
         return get(TrackableProperty.Title);
     }
+    public void updateTitle() {
+        set(TrackableProperty.Title, match.getTitle());
+    }
 
     public boolean isCommander() {
         return get(TrackableProperty.IsCommander);
