@@ -11,8 +11,11 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
+import forge.deck.Deck;
+import forge.deck.DeckFormat;
 
 public class DeckSelectScene extends UIScene {
     private final IntMap<TextraButton> buttons = new IntMap<>();
@@ -241,5 +244,39 @@ public class DeckSelectScene extends UIScene {
         DeckEditScene editScene = DeckEditScene.getInstance();
         editScene.loadEvent(null);
         Forge.switchScene(editScene);
+    }
+
+    @Override
+    public boolean back() {
+        Deck deck = Current.player().getSelectedDeck();
+        int minimumDeckSize = Current.player().isCommanderMode()
+                ? DeckFormat.Commander.getMainRange().getMinimum()
+                : Config.instance().getConfigData().minDeckSize;
+        int mainDeckSize = deck.getMain().countAll();
+
+        if (Current.player().isCommanderMode()) {
+            mainDeckSize += Math.max(0, deck.getCommanders().size() - 1);
+        }
+
+        if (mainDeckSize < minimumDeckSize) {
+            Dialog warningDialog = createGenericDialog(
+                    null,
+                    null,
+                    Forge.getLocalizer().getMessage("lblContinue"),
+                    Forge.getLocalizer().getMessage("lblCancel"),
+                    () -> {
+                        removeDialog();
+                        super.back();
+                    },
+                    this::removeDialog);
+            TextraLabel warningLabel = Controls.newTextraLabel(
+                    Forge.getLocalizer().getMessage("lblAdventureDeckSelectionWarning", minimumDeckSize));
+            warningLabel.setWrap(true);
+            warningDialog.getContentTable().add(warningLabel).width(Math.min(400f, getIntendedWidth() - 40f));
+            showDialog(warningDialog);
+            return true;
+        }
+
+        return super.back();
     }
 }
