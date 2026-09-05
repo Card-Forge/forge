@@ -333,6 +333,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
             ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         }
 
+        final boolean allowEmptyDefinedPlayers = canIgnoreEmptyDefinedPlayers(ai, sa, origin,
+                destination, pDefined);
+        boolean emptyDefinedPlayer = false;
+        CardCollectionView ownCards = null;
+
         for (final Player p : pDefined) {
             CardCollectionView list = p.getCardsIn(origin);
 
@@ -357,8 +362,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 list = CardLists.getValidCards(list, type, source.getController(), source, sa);
             }
 
+            if (allowEmptyDefinedPlayers && !activateForCost && p != ai && list.isEmpty()) {
+                emptyDefinedPlayer = true;
+                continue;
+            }
             if (!activateForCost && list.isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            if (allowEmptyDefinedPlayers && p == ai) {
+                ownCards = list;
             }
             if ("Atarka's Command".equals(sourceName)
                     && (list.size() < 2 || ai.getLandsPlayedThisTurn() < 1)) {
@@ -402,6 +414,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
+        if (!activateForCost && emptyDefinedPlayer && "Battlefield".equals(destination)
+                && (ownCards == null || !Iterables.any(ownCards, card -> !ComputerUtil.isETBprevented(card)))) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
         if (ComputerUtil.playImmediately(ai, sa)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
@@ -424,6 +441,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    private static boolean canIgnoreEmptyDefinedPlayers(final Player ai, final SpellAbility sa,
+            final List<ZoneType> origin, final String destination, final Iterable<Player> pDefined) {
+        return !sa.usesTargeting() && !sa.isCurse() && Iterables.contains(pDefined, ai)
+                && ("Hand".equals(destination) || "Battlefield".equals(destination))
+                && origin != null && origin.size() == 1
+                && (origin.get(0) == ZoneType.Library || origin.get(0) == ZoneType.Graveyard);
     }
 
     /**
