@@ -369,13 +369,14 @@ public class Forge implements ApplicationListener {
      * home/adventure screen is open -- not while the mode-selector splash is still showing.
      */
     public static void maybePromptForBulkCdnSync() {
-        if (CdnUuidCache.hasAnyCachedSets()) {
+        if (!CdnUuidCache.shouldPromptForBulkSync()) {
             return;
         }
         FThreads.invokeInBackgroundThread(() -> {
             boolean confirmed = SOptionPane.showConfirmDialog(
                     getLocalizer().getMessage("lblFirstRunBulkCdnPrompt"),
                     "Forge", "Download Now", "Not Now", true);
+            CdnUuidCache.markBulkSyncPromptAnswered();
             if (confirmed) {
                 CardImageBrowserScreen.openAndAutoStartBulkSync();
             }

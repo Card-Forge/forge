@@ -38,6 +38,7 @@ import java.util.zip.GZIPOutputStream;
 public final class CdnUuidCache {
 
     private static final String FALLBACK_LANG    = "en";
+    private static final String BULK_SYNC_PROMPT_MARKER = ".bulk_sync_prompt";
     private static final Duration MISS_RETRY_AFTER = Duration.ofDays(1);
 
     /**
@@ -116,6 +117,25 @@ public final class CdnUuidCache {
     public static boolean hasAnyCachedSets() {
         File[] files = new File(cacheDir()).listFiles((dir, name) -> name.endsWith(".json.gz"));
         return files != null && files.length > 0;
+    }
+
+    public static boolean shouldPromptForBulkSync() {
+        return !hasAnyCachedSets() && !bulkSyncPromptMarker().exists();
+    }
+
+    public static void markBulkSyncPromptAnswered() {
+        File marker = bulkSyncPromptMarker();
+        try {
+            File dir = marker.getParentFile();
+            if (dir != null && !dir.isDirectory() && !dir.mkdirs()) return;
+            if (!marker.exists()) Files.createFile(marker.toPath());
+        } catch (Exception e) {
+            Logger.debug(e, "Could not write bulk sync prompt marker at {}", marker);
+        }
+    }
+
+    private static File bulkSyncPromptMarker() {
+        return new File(cacheDir(), BULK_SYNC_PROMPT_MARKER);
     }
 
     /** Deletes every local cache file and clears the in-memory cache. */

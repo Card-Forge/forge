@@ -237,13 +237,15 @@ public enum FView {
 
                     SwingUtilities.invokeLater(btnOk::requestFocusInWindow);
                 }).show();
-			} else if (!CdnUuidCache.hasAnyCachedSets()) {
+			} else if (CdnUuidCache.shouldPromptForBulkSync()) {
 				// First run (or cache cleared): offer the one-time bulk CDN sync so later card
 				// image downloads resolve instantly instead of one Scryfall set at a time. Skipped
 				// alongside the (rare) legacy-migration prompt above to avoid stacking dialogs.
-				if (SOptionPane.showConfirmDialog(
+				final boolean startBulkSync = SOptionPane.showConfirmDialog(
 						Localizer.getInstance().getMessage("lblFirstRunBulkCdnPrompt"),
-						"Forge", "Download Now", "Not Now", true)) {
+						"Forge", "Download Now", "Not Now", true);
+				CdnUuidCache.markBulkSyncPromptAnswered();
+				if (startBulkSync) {
 					new DialogDownloadCardImages().showAndAutoStartBulkSync();
 				}
 			}
