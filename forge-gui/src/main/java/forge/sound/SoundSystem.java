@@ -37,6 +37,12 @@ public class SoundSystem {
     private SoundSystem() {
         this.visualizer = new EventVisualizer(GamePlayerUtil.getGuiPlayer());
     }
+    private static boolean soundEnabled() {
+        return GuiBase.getInterface().isLibgdxPort()
+                ? FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS) >= 1
+                : FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS);
+    }
+
     private static boolean isUsingAltSystem() {
         return !GuiBase.getInterface().isLibgdxPort() && FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_SOUND_SYSTEM);
     }
@@ -96,12 +102,9 @@ public class SoundSystem {
     }
 
     public boolean hasResource(final SoundEffectType type) {
-        boolean result = true;
-        IAudioClip clip = fetchResource(type);
-        if(clip.equals(emptySound)) {
-            result = false;
-        }
-        return result;
+        // Called while choosing which effect to play. Building a clip to answer that opens an
+        // audio line as a side effect of an existence check; look for the file instead.
+        return soundEnabled() && getSoundResource(type.getResourceFileName()) != null;
     }
     
     /**

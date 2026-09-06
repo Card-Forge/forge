@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.MissingResourceException;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 
 import javax.sound.sampled.AudioFormat;
@@ -49,6 +50,14 @@ import com.sipgate.mp3wav.Converter;
  */
 public class AudioClip implements IAudioClip {
     private final int maxSize = 16;
+    /**
+     * maxSize is per sound file, but an audio line is a device-wide resource, so a long session can
+     * end up holding maxSize of them for every effect it has ever played. Once the device runs out,
+     * opening the next line blocks in the driver while holding the mixer's own monitor, which also
+     * stops clips that are still playing from ever reporting themselves idle.
+     */
+    private static final int MAX_TOTAL_CLIPS = 64;
+    private static final AtomicInteger openClips = new AtomicInteger();
     private final String filename;
     private final List<ClipWrapper> clips;
     private boolean failed;
@@ -90,9 +99,10 @@ public class AudioClip implements IAudioClip {
 
     @Override
     public void dispose() {
-        for (byte[] b : audioClips.values()) {
-            b = null;
+        for (ClipWrapper clip : clips) {
+            clip.close();
         }
+        clips.clear();
         audioClips.clear();
     }
 
@@ -116,12 +126,13 @@ public class AudioClip implements IAudioClip {
     }
 
     private ClipWrapper addClip() {
-        if (clips.size() < maxSize && !failed) {
+        if (clips.size() < maxSize && !failed && openClips.get() < MAX_TOTAL_CLIPS) {
             ClipWrapper clip = new ClipWrapper(filename);
             if (clip.isFailed()) {
                 failed = true;
             } else {
                 clips.add(clip);
+                openClips.incrementAndGet();
             }
             return clip;
         }
@@ -195,6 +206,17 @@ public class AudioClip implements IAudioClip {
             synchronized (this) {
                 clip.stop();
             }
+        }
+
+        void close() {
+            if (null == clip) {
+                return;
+            }
+            synchronized (this) {
+                clip.stop();
+                clip.close();
+            }
+            openClips.decrementAndGet();
         }
 
         boolean isRunning() {
