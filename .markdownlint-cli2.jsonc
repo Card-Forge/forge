@@ -1,0 +1,76 @@
+// markdownlint config for Crucible docs.
+// VSCode: DavidAnson.vscode-markdownlint reads this file.
+// CLI:    npx markdownlint-cli2 "CLAUDE.md" "docs/crucible/**/*.md"
+//
+// Two categories are turned off below:
+//   1. Rules Prettier already owns. Leaving them on produces warnings that
+//      `prettier --write` immediately re-introduces. Prettier wins (DOC-14).
+//   2. Rules whose default encodes a convention this doc set deliberately
+//      does not follow. Each carries its reason.
+//
+// Everything else stays on. Those are the semantic rules and they catch
+// real defects.
+{
+  "config": {
+    "default": true,
+
+    // --- 1. Prettier owns these ---------------------------------------
+    "MD004": false, // ul-style
+    "MD005": false, // list-indent
+    "MD007": false, // ul-indent
+    "MD009": false, // trailing-spaces
+    "MD010": false, // hard-tabs
+    "MD012": false, // multiple-blanks
+    "MD022": false, // blanks-around-headings
+    "MD023": false, // heading-start-left
+    "MD027": false, // blockquote spaces
+    "MD030": false, // list-marker-space
+    "MD031": false, // blanks-around-fences
+    "MD032": false, // blanks-around-lists
+    "MD035": false, // hr-style
+    "MD046": false, // code-block-style
+    "MD047": false, // single-trailing-newline
+    "MD048": false, // code-fence-style
+    "MD049": false, // emphasis-style
+    "MD050": false, // strong-style
+
+    // MD013 line-length: Prettier hard-wraps prose at 120 (.prettierrc
+    // printWidth). Tables and code blocks are exempt because Prettier pads
+    // table cells to content width, which no column limit can satisfy.
+    "MD013": {
+      "line_length": 120,
+      "tables": false,
+      "code_blocks": false,
+      "headings": false,
+    },
+
+    // --- 2. Deliberate conventions -------------------------------------
+
+    // MD025 single-h1: the implementation plan uses `# Phase n` as top-level
+    // section separators in one long document. One-H1-per-file is a blog
+    // convention, not a Markdown requirement.
+    "MD025": false,
+
+    // MD029 ol-prefix: the roadmap numbers its steps continuously (1..39)
+    // across milestone sections, so a step can be cited by number. Restarting
+    // at 1 in each section would break those citations.
+    "MD029": false,
+
+    // MD033 inline-html: not used today, but tables occasionally need <br>.
+    "MD033": false,
+  },
+
+  // Upstream Forge files. Never linted, never reformatted — see
+  // docs/crucible/guidelines/05-commit-and-review.md (REV-1).
+  "ignores": [
+    "**/node_modules/**",
+    "**/target/**",
+    "README.md",
+    "CONTRIBUTING.md",
+    "docs/*.md",
+    "docs/Development/**",
+    "adventure-editor/**",
+    "forge-*/**",
+    ".github/**",
+  ],
+}

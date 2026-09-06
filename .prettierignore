@@ -1,0 +1,26 @@
+# Upstream Forge files. Never reformat — every touched line is a future rebase
+# conflict when syncing from Card-Forge/forge.
+# See docs/crucible/guidelines/05-commit-and-review.md (REV-1).
+
+/docs/**/*.md
+!/docs/crucible/**/*.md
+
+/README.md
+/CONTRIBUTING.md
+
+/adventure-editor/
+/forge-ai/
+/forge-core/
+/forge-game/
+/forge-gui/
+/forge-gui-android/
+/forge-gui-desktop/
+/forge-gui-ios/
+/forge-gui-mobile/
+/forge-gui-mobile-dev/
+/forge-installer/
+/forge-lda/
+/.github/
+
+# Build output
+**/target/
