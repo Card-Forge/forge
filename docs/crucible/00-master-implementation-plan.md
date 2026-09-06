@@ -2,8 +2,10 @@
 
 **Automated MTG deck testing & optimization suite, built on a Go port of the Forge rules engine.**
 
-Version 0.1 · Status: DRAFT · Owner: `jc@archlab.pl` Base repo: fork of
-[Card-Forge/forge](https://github.com/Card-Forge/forge) @ `53a103721d6`
+- **Version:** 0.1
+- **Status:** Draft
+- **Owner:** `jc@archlab.pl`
+- **Base repo:** fork of [Card-Forge/forge](https://github.com/Card-Forge/forge) @ `53a103721d6`
 
 ---
 

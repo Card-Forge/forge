@@ -1,7 +1,8 @@
 # PORT — Java to Go Translation Rules
 
-**Status:** Active · **Applies to:** every unit ported from `forge-core`, `forge-game`, `forge-ai` **Rule IDs:** cite as
-`PORT-n`
+- **Status:** Active
+- **Applies to:** every unit ported from `forge-core`, `forge-game`, `forge-ai`
+- **Rule IDs:** cite as `PORT-n`
 
 Normative mapping. Read before touching a Java file. Deviating from a rule is allowed — recording the deviation in the
 unit's `port-log/` note is not optional.
@@ -86,9 +87,9 @@ One file per ported unit: `docs/crucible/porting/port-log/<unit>.md`.
 ```text
 # Port: GameAction.checkStateEffects
 
-**Java source:** `forge-game/src/main/java/forge/game/GameAction.java:1204-1890`
-**Go target:** `crucible/internal/engine/game/sba.go`
-**Status:** Done | In progress | Blocked
+- **Java source:** `forge-game/src/main/java/forge/game/GameAction.java:1204-1890`
+- **Go target:** `crucible/internal/engine/game/sba.go`
+- **Status:** Done | In progress | Blocked
 
 ## What it does
 

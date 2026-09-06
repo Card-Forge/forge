@@ -1,6 +1,6 @@
 # Crucible Guidelines
 
-**Status:** Active
+- **Status:** Active
 
 Binding rules for all Crucible work. Referenced from `/CLAUDE.md` at repo root, so both humans and Claude Code follow
 the same set.

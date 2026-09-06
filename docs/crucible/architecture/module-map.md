@@ -1,6 +1,6 @@
 # Module Map
 
-**Status:** Active (empty)
+- **Status:** Active (empty)
 
 Every Go package under `crucible/` gets a row here, in the same commit that creates the package (DOC-12).
 `crucible/tools/docgate` fails the build on a package with no row.

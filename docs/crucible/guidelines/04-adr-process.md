@@ -1,6 +1,8 @@
 # ADR — Architecture Decision Record Process
 
-**Status:** Active · **Applies to:** `docs/crucible/adr/` **Rule IDs:** cite as `ADRP-n`
+- **Status:** Active
+- **Applies to:** `docs/crucible/adr/`
+- **Rule IDs:** cite as `ADRP-n`
 
 ADR records a decision that is expensive to reverse. Not a design doc. Not a tutorial.
 
@@ -27,9 +29,9 @@ Test: would a new engineer six months from now ask "why is it like this?" → AD
 ```text
 # ADR-0009 — Game State Representation
 
-**Status:** Proposed | Accepted | Superseded by ADR-nnnn | Deprecated
-**Date:** 2026-09-06
-**Deciders:** <names>
+- **Status:** Proposed | Accepted | Superseded by ADR-nnnn | Deprecated
+- **Date:** 2026-09-06
+- **Deciders:** <names>
 
 ## Context
 

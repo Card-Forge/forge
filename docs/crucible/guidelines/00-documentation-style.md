@@ -1,7 +1,8 @@
 # DOC — Documentation Style
 
-**Status:** Active · **Applies to:** every file under `docs/crucible/`, every code comment, every ADR, every commit
-body. **Rule IDs:** cite as `DOC-n` in review comments and code.
+- **Status:** Active
+- **Applies to:** every file under `docs/crucible/`, every code comment, every ADR, every commit body
+- **Rule IDs:** cite as `DOC-n`
 
 This document is written in the style it defines. Read it as the reference example.
 
@@ -117,8 +118,9 @@ Two items → inline is fine.
 ```text
 # AREA — Short Title
 
-**Status:** Draft | Active | Superseded · **Applies to:** <scope>
-**Rule IDs:** cite as `AREA-n`
+- **Status:** Draft | Active | Superseded
+- **Applies to:** <scope>
+- **Rule IDs:** cite as `AREA-n`
 
 Short framing. 1-3 lines. What this governs, why it exists.
 
@@ -139,7 +141,10 @@ Short framing. 1-3 lines. What this governs, why it exists.
 - [other-doc](other-doc.md)
 ```
 
-Rule headings are stable IDs. **Never renumber.** Superseded rule keeps its number, gets `**Superseded by AREA-9.**`
+**Metadata header is a bullet list, always.** Prettier joins consecutive lines that fit inside 120 columns, so a header
+written as three bold lines collapses into one run-on line. List items survive.
+
+Rule headings are stable IDs. **Never renumber.** Superseded rule keeps its number, gets a `**Superseded by AREA-9.**`
 line.
 
 ---

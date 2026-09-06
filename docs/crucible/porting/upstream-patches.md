@@ -1,6 +1,6 @@
 # Upstream Patches
 
-**Status:** Active (empty)
+- **Status:** Active (empty)
 
 Log of every edit made to upstream Forge files. Required by REV-1
 ([../guidelines/05-commit-and-review.md](../guidelines/05-commit-and-review.md)).

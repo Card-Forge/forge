@@ -1,6 +1,6 @@
 # Parity Matrix
 
-**Status:** Generated (empty)
+- **Status:** Generated (empty)
 
 Support status of every card-script vocabulary item in the Go engine. Regenerated in CI from the effect registry and the
 corpus scan — **do not hand-edit**.

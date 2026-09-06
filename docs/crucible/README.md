@@ -1,6 +1,7 @@
 # Crucible
 
-**Status:** Active · Pre-implementation
+- **Status:** Active
+- **Phase:** pre-implementation
 
 Automated Magic: The Gathering deck testing and optimization suite, built on a Go port of the Forge rules engine.
 

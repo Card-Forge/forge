@@ -1,6 +1,6 @@
 # Port Log
 
-**Status:** Active (empty)
+- **Status:** Active (empty)
 
 One note per ported unit, named after the unit: `game-action.md`, `card-rules-reader.md`.
 

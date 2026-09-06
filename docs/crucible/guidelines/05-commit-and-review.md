@@ -1,6 +1,8 @@
 # REV — Commit, Branch, Review
 
-**Status:** Active · **Applies to:** all work in this fork **Rule IDs:** cite as `REV-n`
+- **Status:** Active
+- **Applies to:** all work in this fork
+- **Rule IDs:** cite as `REV-n`
 
 ---
 

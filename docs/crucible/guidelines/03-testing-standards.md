@@ -1,6 +1,8 @@
 # TEST — Testing Standards
 
-**Status:** Active · **Applies to:** all Go code under `crucible/` **Rule IDs:** cite as `TEST-n`
+- **Status:** Active
+- **Applies to:** all Go code under `crucible/`
+- **Rule IDs:** cite as `TEST-n`
 
 Default test level = **module**. Test the package through its public API. Drop lower only when a lower level tests
 something the module level cannot reach.

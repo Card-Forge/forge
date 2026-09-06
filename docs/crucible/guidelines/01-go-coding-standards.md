@@ -1,6 +1,8 @@
 # GO — Go Coding Standards
 
-**Status:** Active · **Applies to:** all Go code under `crucible/` **Rule IDs:** cite as `GO-n`
+- **Status:** Active
+- **Applies to:** all Go code under `crucible/`
+- **Rule IDs:** cite as `GO-n`
 
 Standard Go, plus rules that exist because this codebase is a port of a 210k-LOC Java engine. Java shapes leak. These
 rules block the leaks.
