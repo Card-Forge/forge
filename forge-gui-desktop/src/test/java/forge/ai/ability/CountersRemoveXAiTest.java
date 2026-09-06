@@ -9,6 +9,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -61,6 +62,44 @@ public class CountersRemoveXAiTest extends AITest {
         runMain2(game, ai);
 
         assertEquals(1, parasite.getNetPower());
+    }
+
+    @Test
+    public void willNotSpendItsLastLifeOnTheActivation() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card parasite = addCard("Hex Parasite", ai);
+        addCards("Mountain", 3, ai); // no black source, so {B/P} would cost 2 life
+        Card courser = addCard("Centaur Courser", opp);
+        courser.setCounters(CounterEnumType.P1P1, 1);
+        ai.setLife(5, null); // paying would leave 3, under the floor the AI keeps for life costs
+
+        runMain2(game, ai);
+
+        assertEquals(5, ai.getLife());
+        assertEquals(1, courser.getCounters(CounterEnumType.P1P1));
+        assertEquals(1, parasite.getNetPower());
+    }
+
+    @Test
+    public void paysTheLifeWhenItCanAffordTo() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card parasite = addCard("Hex Parasite", ai);
+        addCards("Mountain", 3, ai); // still no black source
+        Card jace = addCard("Jace Beleren", opp);
+        jace.setCounters(CounterEnumType.LOYALTY, 3);
+        ai.setLife(20, null);
+
+        runMain2(game, ai);
+
+        assertEquals(18, ai.getLife());
+        assertEquals(0, countCardsWithName(game, "Jace Beleren", ZoneType.Battlefield));
+        assertEquals(4, parasite.getNetPower());
     }
 
     @Test
