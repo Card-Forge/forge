@@ -50,9 +50,7 @@ public class Adventure implements Disposable {
                     transitionBatch.draw(ScreenUtil.getInstance().getLastScreenTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                     transitionBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * transitionTimeout);
                     transitionBatch.draw(Forge.getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                    if (Forge.showFPS) {
-                        FrameRate.getInstance().sampleAdventure(transitionBatch);
-                    }
+                    FrameRate.getInstance().sampleAdventure(transitionBatch, Forge.showFPS);
                     transitionBatch.end();
                     if (transitionTimeout < 0) {
                         Forge.currentScene.render();
@@ -70,9 +68,7 @@ public class Adventure implements Disposable {
                     transitionBatch.draw(ScreenUtil.getInstance().getLastScreenTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                     transitionBatch.setColor(1, 1, 1, (1 / transitionTime) * (transitionTimeout + transitionTime));
                     transitionBatch.draw(Forge.getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                    if (Forge.showFPS) {
-                        FrameRate.getInstance().sampleAdventure(transitionBatch);
-                    }
+                    FrameRate.getInstance().sampleAdventure(transitionBatch, Forge.showFPS);
                     transitionBatch.end();
                     return;
                 }
@@ -80,9 +76,8 @@ public class Adventure implements Disposable {
             // Adventure UIScene
             Forge.currentScene.render();
             Forge.currentScene.act(delta);
-            if (Forge.currentScene instanceof HudScene hudScene) {
-                FrameRate.getInstance().sampleAdventure(hudScene.getBatch());
-            }
+            if (Forge.currentScene instanceof HudScene hudScene)
+                FrameRate.getInstance().sampleAdventure(hudScene.getBatch(), Forge.showFPS);
         } catch (IllegalStateException | NullPointerException ie) {
             //silence this..
             //TODO: Don't silence this.

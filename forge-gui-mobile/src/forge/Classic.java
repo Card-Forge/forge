@@ -45,8 +45,7 @@ public class Classic {
                     Forge.needsUpdate = false;
             }
             //sample batch
-            if (Forge.showFPS)
-                FrameRate.getInstance().sampleClassic();
+            FrameRate.getInstance().sampleClassic(Forge.showFPS);
             Forge.getGraphics().end();
         } catch (Exception e) {
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry.
