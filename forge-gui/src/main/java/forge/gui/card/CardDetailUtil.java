@@ -681,6 +681,6 @@ public class CardDetailUtil {
         CardStateView state = card.getAlternateState();
         return state.getName() + " "
                 + state.getManaCost().toString() + ": "
-                + state.getAbilityText();
+                + (card.getId() > 0 ? state.getAbilityText() : state.getOracleText());
     }
 }
