@@ -657,20 +657,23 @@ public class CardDetailUtil {
             area.append("Owner: ").append(card.getOwner().toString());
         }
 
-        if (card.hasAlternateState() && card.getAlternateState().getType().hasSubtype("Adventure")) {
-            area.append("\n\n");
-            area.append(Localizer.getInstance().getMessage("lblAdventure") + " — " + getAlternateStateDesc(card));
+        if (card.hasAlternateState() && state.getState() == CardStateName.Original) {
+            if (card.getAlternateState().getType().hasSubtype("Adventure")) {
+                area.append("\n\n");
+                area.append(Localizer.getInstance().getMessage("lblAdventure") + " — " + getAlternateStateDesc(card));
+            }
+
+            if (card.getAlternateState().getType().hasSubtype("Omen")) {
+                area.append("\n\n");
+                area.append(Localizer.getInstance().getMessage("lblOmen") + " — " + getAlternateStateDesc(card));
+            }
+
+            if (card.hasPreparedSpell()) {
+                area.append("\n\n");
+                area.append(Localizer.getInstance().getMessage("lblPrepared") + " — " + getAlternateStateDesc(card));
+            }
         }
 
-        if (card.hasAlternateState() && card.getAlternateState().getType().hasSubtype("Omen")) {
-            area.append("\n\n");
-            area.append(Localizer.getInstance().getMessage("lblOmen") + " — " + getAlternateStateDesc(card));
-        }
-
-        if (card.hasPreparedSpell()) {
-            area.append("\n\n");
-            area.append(Localizer.getInstance().getMessage("lblPrepared") + " — " + getAlternateStateDesc(card));
-        }
         return area.toString().trim();
     }
 
