@@ -428,18 +428,10 @@ public class AiBlockController {
                 continue;
             }
 
-            int evalAttackerValue = ComputerUtilCard.evaluateCreature(attacker);
-
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
-            List<Card> usableBlockers;
-            final List<Card> blockGang = new ArrayList<>();
-            int absorbedDamage; // The amount of damage needed to kill the first blocker
-            int currentValue; // The value of the creatures in the blockgang
-            boolean foundDoubleBlock = false; // if true, a good double block is found
-
             // Try to add blockers that could be destroyed, but are worth less than the attacker
             // Don't use blockers without First Strike or Double Strike if attacker has it
-            usableBlockers = CardLists.filter(blockers, c -> {
+            List<Card> usableBlockers = CardLists.filter(blockers, c -> {
                 if (ComputerUtilCombat.dealsFirstStrikeDamage(attacker, false, combat)
                         && !ComputerUtilCombat.dealsFirstStrikeDamage(c, false, combat)) {
                     return false;
@@ -454,11 +446,14 @@ public class AiBlockController {
             }
 
             final Card leader = ComputerUtilCard.getBestCreatureAI(usableBlockers);
+            final List<Card> blockGang = new ArrayList<>();
             blockGang.add(leader);
             usableBlockers.remove(leader);
-            absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
-            currentValue = ComputerUtilCard.evaluateCreature(leader);
+            int absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
+            int currentValue = ComputerUtilCard.evaluateCreature(leader);
+            int evalAttackerValue = ComputerUtilCard.evaluateCreature(attacker);
 
+            boolean foundDoubleBlock = false;
             // consider a double block
             for (final Card blocker : usableBlockers) {
                 // Add an additional blocker if the current blockers are not
@@ -563,22 +558,16 @@ public class AiBlockController {
             }
 
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
-            final List<Card> blockGang = new ArrayList<>();
-            int absorbedDamage; // The amount of damage needed to kill the first blocker
-
-            // "neither of which will die" is exactly what `getSafeBlockers` answers, and it
-            // answers it through `canDestroyBlocker` - which tests
-            // `canDestroyBlockerBeforeFirstStrike` first. The hand-rolled toughness test here
-            // saw only the damage, so a blocker destroyed on block looked like a survivor.
             List<Card> usableBlockers = getSafeBlockers(combat, attacker, blockers);
             if (usableBlockers.size() < 2) {
                 return;
             }
 
             final Card leader = ComputerUtilCard.getWorstCreatureAI(usableBlockers);
+            final List<Card> blockGang = new ArrayList<>();
             blockGang.add(leader);
             usableBlockers.remove(leader);
-            absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
+            int absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
 
             // consider a double block
             for (final Card blocker : usableBlockers) {
@@ -679,18 +668,18 @@ public class AiBlockController {
             return;
         }
 
-        boolean blocked = false;
         List<Card> chumpBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
+        if (attacker.hasKeyword(Keyword.TRAMPLE)) {
+            // a blocker that dies before combat damage soaks up none of it, so a trampling
+            // attacker connects for full anyway and the chump block is spent for nothing
+            chumpBlockers.removeIf(c -> ComputerUtilCombat.shieldDamage(attackers.get(0), c) == 0);
+        }
         if (!chumpBlockers.isEmpty()) {
             final Card blocker = ComputerUtilCard.getWorstCreatureAI(chumpBlockers);
 
             // check if it's better to block a creature with lower power and without trample
             if (attacker.hasKeyword(Keyword.TRAMPLE)) {
-                // a blocker destroyed before the damage step soaks up none of the trample
-                // damage, so it absorbs nothing at all - the extreme of the case this
-                // redirect already handles, rather than a separate rule
-                final boolean soaks = ComputerUtilCombat.shieldDamage(attacker, blocker) > 0;
-                final int damageAbsorbed = soaks ? blocker.getLethalDamage() : 0;
+                final int damageAbsorbed = blocker.getLethalDamage();
                 if (attacker.getNetCombatDamage() > damageAbsorbed) {
                     for (Card other : attackers) {
                         if (other.equals(attacker)) {
@@ -701,31 +690,19 @@ public class AiBlockController {
                                 && !StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(other)
                                 && !ComputerUtilCombat.attackerHasThreateningAfflict(other, ai)
                                 && CombatUtil.canBlock(other, blocker, combat)) {
-                            combat.addBlocker(other, blocker);
-                            attackersLeft.remove(other);
-                            blockedButUnkilled.add(other);
-                            attackers.remove(other);
-                            makeChumpBlocks(combat, attackers, true);
-                            return;
+                            attacker = other;
+                            break;
                         }
                     }
-                }
-                if (!soaks) {
-                    // no other attacker to spend it on, and blocking here prevents no
-                    // damage at all - keep the creature rather than trade it for nothing
-                    attackers.remove(0);
-                    makeChumpBlocks(combat, attackers, false);
-                    return;
                 }
             }
 
             combat.addBlocker(attacker, blocker);
             attackersLeft.remove(attacker);
             blockedButUnkilled.add(attacker);
-            blocked = true;
         }
-        attackers.remove(0);
-        makeChumpBlocks(combat, attackers, blocked);
+        attackers.remove(attacker);
+        makeChumpBlocks(combat, attackers, !chumpBlockers.isEmpty());
     }
 
     // Block creatures with "can't be blocked except by two or more creatures"
