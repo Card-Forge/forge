@@ -7,4 +7,4 @@ SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Aura.AttachedTo Card.IsRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 DeckHas:Ability$Sacrifice
-Oracle:{5}, Sacrifice Gauntlets of Chaos: Exchange control of target artifact, creature, or land you control and target permanent an opponent controls that shares one of those types with it. If those permanents are exchanged this way, destroy all Auras attached to them.
+Oracle:{5}, Sacrifice this artifact: Exchange control of target artifact, creature, or land you control and target permanent an opponent controls that shares one of those types with it. If those permanents are exchanged this way, destroy all Auras attached to them.

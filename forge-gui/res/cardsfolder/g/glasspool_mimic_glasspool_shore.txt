@@ -3,16 +3,16 @@ ManaCost:2 U
 Types:Creature Shapeshifter Rogue
 PT:0/0
 K:ETBReplacement:Copy:DBCopy:Optional
-SVar:DBCopy:DB$ Clone | Choices$ Creature.YouCtrl | AddTypes$ Shapeshifter & Rogue | SpellDescription$ You may have CARDNAME enter as a copy of a creature you control, except it's a Shapeshifter Rogue in addition to its other types.
+SVar:DBCopy:DB$ Clone | Choices$ Creature.YouCtrl | AddTypes$ Shapeshifter & Rogue | SpellDescription$ You may have this creature enter as a copy of a creature you control, except it's a Shapeshifter Rogue in addition to its other types.
 AlternateMode:Modal
-Oracle:You may have Glasspool Mimic enter as a copy of a creature you control, except it's a Shapeshifter Rogue in addition to its other types.
+Oracle:You may have this creature enter as a copy of a creature you control, except it's a Shapeshifter Rogue in addition to its other types.
 
 ALTERNATE
 
 Name:Glasspool Shore
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-Oracle:Glasspool Shore enters tapped.\n{T}: Add {U}.
+Oracle:This land enters tapped.\n{T}: Add {U}.

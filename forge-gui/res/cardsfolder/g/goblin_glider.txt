@@ -3,5 +3,5 @@ ManaCost:1 R
 Types:Creature Goblin
 PT:1/1
 K:Flying
-S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
-Oracle:Flying\nGoblin Glider can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ This creature can't block.
+Oracle:Flying\nThis creature can't block.

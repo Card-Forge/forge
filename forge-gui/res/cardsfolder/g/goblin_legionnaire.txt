@@ -6,4 +6,4 @@ A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 2 | SpellD
 A:AB$ PreventDamage | Cost$ W Sac<1/CARDNAME> | ValidTgts$ Any | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
 AI:RemoveDeck:All
 DeckHas:Ability$Sacrifice
-Oracle:{R}, Sacrifice Goblin Legionnaire: It deals 2 damage to any target.\n{W}, Sacrifice Goblin Legionnaire: Prevent the next 2 damage that would be dealt to any target this turn.
+Oracle:{R}, Sacrifice this creature: It deals 2 damage to any target.\n{W}, Sacrifice this creature: Prevent the next 2 damage that would be dealt to any target this turn.

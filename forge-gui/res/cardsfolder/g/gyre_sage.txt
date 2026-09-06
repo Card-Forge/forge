@@ -3,8 +3,8 @@ ManaCost:1 G
 Types:Creature Elf Druid
 PT:1/2
 K:Evolve
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each +1/+1 counter on CARDNAME.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each +1/+1 counter on this creature.
 SVar:X:Count$CardCounters.P1P1
 DeckHas:Ability$Counters
 DeckHints:Ability$Counters
-Oracle:Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\n{T}: Add {G} for each +1/+1 counter on Gyre Sage.
+Oracle:Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\n{T}: Add {G} for each +1/+1 counter on this creature.

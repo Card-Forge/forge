@@ -5,9 +5,9 @@ K:Enchant:Land
 SVar:AttachAITgts:Mountain.Basic
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.Goblin | AddPower$ 1 | IsPresent$ Land.AttachedBy+Basic+Mountain | Description$ If enchanted land is a basic Mountain, Goblin creatures get +1/+0.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME leaves the battlefield, it deals 1 damage to each Goblin creature.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this Aura leaves the battlefield, it deals 1 damage to each Goblin creature.
 SVar:TrigDealDamage:DB$ DamageAll | ValidCards$ Creature.Goblin | NumDmg$ 1
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
 DeckNeeds:Type$Goblin
-Oracle:Enchant land\nAs long as enchanted land is a basic Mountain, Goblin creatures get +1/+0.\nWhen Goblin Shrine leaves the battlefield, it deals 1 damage to each Goblin creature.
+Oracle:Enchant land\nAs long as enchanted land is a basic Mountain, Goblin creatures get +1/+0.\nWhen this Aura leaves the battlefield, it deals 1 damage to each Goblin creature.

@@ -2,7 +2,7 @@ Name:Goblin Locksmith
 ManaCost:1 R
 Types:Creature Goblin Rogue
 PT:2/1
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever CARDNAME attacks, creatures with defender can't block this turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever this creature attacks, creatures with defender can't block this turn.
 SVar:TrigEffect:DB$ Effect | StaticAbilities$ KWPump
 SVar:KWPump:Mode$ Continuous | Affected$ Creature.withDefender | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures with defender can't block this turn.
-Oracle:Whenever Goblin Locksmith attacks, creatures with defender can't block this turn.
+Oracle:Whenever this creature attacks, creatures with defender can't block this turn.

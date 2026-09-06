@@ -4,5 +4,5 @@ Types:Creature Jellyfish
 PT:0/3
 K:Defender
 K:Flying
-A:AB$ ChangeZoneAll | Cost$ T | ChangeType$ Card.Self,Creature.blockedBySource | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True | SpellDescription$ Put CARDNAME and each creature it's blocking on top of their owners' libraries, then those players shuffle.
-Oracle:Defender, flying\n{T}: Put Gomazoa and each creature it's blocking on top of their owners' libraries, then those players shuffle.
+A:AB$ ChangeZoneAll | Cost$ T | ChangeType$ Card.Self,Creature.blockedBySource | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True | SpellDescription$ Put this creature and each creature it's blocking on top of their owners' libraries, then those players shuffle.
+Oracle:Defender, flying\n{T}: Put this creature and each creature it's blocking on top of their owners' libraries, then those players shuffle.

@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Dwarf Pilot
 PT:2/1
 K:First Strike
-T:Mode$ Crewed | ValidCrew$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME crews a Vehicle, that Vehicle gains first strike until end of turn.
+T:Mode$ Crewed | ValidCrew$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature crews a Vehicle, that Vehicle gains first strike until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredCardLKICopy | KW$ First Strike
-Oracle:First strike\nWhenever Gearshift Ace crews a Vehicle, that Vehicle gains first strike until end of turn.
+Oracle:First strike\nWhenever this creature crews a Vehicle, that Vehicle gains first strike until end of turn.

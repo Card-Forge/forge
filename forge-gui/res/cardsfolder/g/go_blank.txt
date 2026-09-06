@@ -2,5 +2,5 @@ Name:Go Blank
 ManaCost:2 B
 Types:Sorcery
 A:SP$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBChangeZoneAll | SpellDescription$ Target player discards two cards.
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Defined$ ParentTarget | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Then exile all cards from that player's graveyard.
-Oracle:Target player discards two cards. Then exile all cards from that player's graveyard.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Defined$ ParentTarget | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Then exile that player's graveyard.
+Oracle:Target player discards two cards. Then exile that player's graveyard.

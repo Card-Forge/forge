@@ -2,5 +2,5 @@ Name:Grapeshot Catapult
 ManaCost:4
 Types:Artifact Creature Construct
 PT:2/3
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature with flying.
-Oracle:{T}: Grapeshot Catapult deals 1 damage to target creature with flying.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 1 | SpellDescription$ This creature deals 1 damage to target creature with flying.
+Oracle:{T}: This creature deals 1 damage to target creature with flying.

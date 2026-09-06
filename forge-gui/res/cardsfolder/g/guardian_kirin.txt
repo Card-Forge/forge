@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Kirin
 PT:2/3
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control dies, put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control dies, put a +1/+1 counter on this creature.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
-Oracle:Flying\nWhenever another creature you control dies, put a +1/+1 counter on Guardian Kirin.
+Oracle:Flying\nWhenever another creature you control dies, put a +1/+1 counter on this creature.

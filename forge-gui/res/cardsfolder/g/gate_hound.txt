@@ -2,8 +2,8 @@ Name:Gate Hound
 ManaCost:2 W
 Types:Creature Dog
 PT:1/1
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance | IsPresent$ Card.Self+enchanted | Description$ Creatures you control have vigilance as long as CARDNAME is enchanted.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance | IsPresent$ Card.Self+enchanted | Description$ Creatures you control have vigilance as long as this creature is enchanted.
 SVar:EnchantMe:Once
 AI:RemoveDeck:Random
 DeckNeeds:Type$Enchantment
-Oracle:Creatures you control have vigilance as long as Gate Hound is enchanted.
+Oracle:Creatures you control have vigilance as long as this creature is enchanted.

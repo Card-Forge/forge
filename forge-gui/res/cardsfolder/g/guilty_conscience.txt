@@ -3,7 +3,7 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:SpecificCard
-T:Mode$ DamageDealtOnce | ValidSource$ Card.AttachedBy | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, CARDNAME deals that much damage to that creature.
+T:Mode$ DamageDealtOnce | ValidSource$ Card.AttachedBy | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, this Aura deals that much damage to that creature.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredSourceLKICopy | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
-Oracle:Enchant creature\nWhenever enchanted creature deals damage, Guilty Conscience deals that much damage to that creature.
+Oracle:Enchant creature\nWhenever enchanted creature deals damage, this Aura deals that much damage to that creature.

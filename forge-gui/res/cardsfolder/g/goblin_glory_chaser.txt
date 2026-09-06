@@ -3,6 +3,6 @@ ManaCost:R
 Types:Creature Goblin Warrior
 PT:1/1
 K:Renown:1
-S:Mode$ Continuous | Affected$ Card.Self+IsRenowned | AddKeyword$ Menace | Description$ As long as CARDNAME is renowned, it has menace.
+S:Mode$ Continuous | Affected$ Card.Self+IsRenowned | AddKeyword$ Menace | Description$ As long as this creature is renowned, it has menace.
 DeckHas:Ability$Counters
-Oracle:Renown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)\nAs long as Goblin Glory Chaser is renowned, it has menace. (It can't be blocked except by two or more creatures.)
+Oracle:Renown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)\nAs long as this creature is renowned, it has menace. (It can't be blocked except by two or more creatures.)

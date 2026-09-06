@@ -6,4 +6,4 @@ K:Flying
 K:Myriad
 T:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ True | ValidTarget$ Player | Execute$ DBToken | TriggerDescription$ Whenever this creature deals combat damage to a player, create a Treasure token.
 SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac
-Oracle:Flying, myriad\nWhenever this creature deals combat damage to a player, create a Treasure token.
+Oracle:Flying\nMyriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\nWhenever this creature deals combat damage to a player, create a Treasure token.

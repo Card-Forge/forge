@@ -3,8 +3,8 @@ ManaCost:8
 Types:Artifact Creature Construct
 PT:8/8
 K:Affinity:Gate
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Gate.YouCtrl | OptionalDecider$ You | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ Whenever a Gate you control enters, you may put CARDNAME from your graveyard on top of your library.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ This creature can't be blocked by creatures with power 2 or less.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Gate.YouCtrl | OptionalDecider$ You | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ Whenever a Gate you control enters, you may put this card from your graveyard on top of your library.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Defined$ Self
 DeckNeeds:Type$Gate
-Oracle:Affinity for Gates (This spell costs {1} less to cast for each Gate you control.)\nGate Colossus can't be blocked by creatures with power 2 or less.\nWhenever a Gate you control enters, you may put Gate Colossus from your graveyard on top of your library.
+Oracle:Affinity for Gates (This spell costs {1} less to cast for each Gate you control.)\nThis creature can't be blocked by creatures with power 2 or less.\nWhenever a Gate you control enters, you may put this card from your graveyard on top of your library.

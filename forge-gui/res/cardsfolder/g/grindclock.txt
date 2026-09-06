@@ -1,9 +1,9 @@
 Name:Grindclock
 ManaCost:2
 Types:Artifact
-A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
-A:AB$ Mill | Cost$ T | NumCards$ X | ValidTgts$ Player | SpellDescription$ Target player mills X cards, where X is the number of charge counters on CARDNAME.
+A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on this artifact.
+A:AB$ Mill | Cost$ T | NumCards$ X | ValidTgts$ Player | SpellDescription$ Target player mills X cards, where X is the number of charge counters on this artifact.
 SVar:X:Count$CardCounters.CHARGE
 SVar:UntapMe:True
 DeckHas:Ability$Counters
-Oracle:{T}: Put a charge counter on Grindclock.\n{T}: Target player mills X cards, where X is the number of charge counters on Grindclock.
+Oracle:{T}: Put a charge counter on this artifact.\n{T}: Target player mills X cards, where X is the number of charge counters on this artifact.

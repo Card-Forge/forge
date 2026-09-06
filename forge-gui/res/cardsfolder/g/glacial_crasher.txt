@@ -3,8 +3,8 @@ ManaCost:4 U U
 Types:Creature Elemental
 PT:5/5
 K:Trample
-S:Mode$ CantAttack | ValidCard$ Card.Self | IsPresent$ Mountain | PresentCompare$ EQ0 | Description$ CARDNAME can't attack unless there is a Mountain on the battlefield.
+S:Mode$ CantAttack | ValidCard$ Card.Self | IsPresent$ Mountain | PresentCompare$ EQ0 | Description$ This creature can't attack unless there is a Mountain on the battlefield.
 SVar:BuffedBy:Mountain
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red
-Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nGlacial Crasher can't attack unless there is a Mountain on the battlefield.
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nThis creature can't attack unless there is a Mountain on the battlefield.

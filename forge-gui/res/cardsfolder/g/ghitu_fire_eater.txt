@@ -5,4 +5,4 @@ PT:2/2
 A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ It deals damage equal to its power to any target.
 SVar:X:Sacrificed$CardPower
 DeckHas:Ability$Sacrifice
-Oracle:{T}, Sacrifice Ghitu Fire-Eater: It deals damage equal to its power to any target.
+Oracle:{T}, Sacrifice this creature: It deals damage equal to its power to any target.

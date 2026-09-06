@@ -2,6 +2,6 @@ Name:Giant Trap Door Spider
 ManaCost:1 R G
 Types:Creature Spider
 PT:2/3
-A:AB$ ChangeZone | Cost$ 1 R G T | ValidTgts$ Creature.attackingYou+withoutFlying | ThisDefinedAndTgts$ Self | TgtPrompt$ Select target creature without flying that's attacking you | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile CARDNAME and target creature without flying that's attacking you.
+A:AB$ ChangeZone | Cost$ 1 R G T | ValidTgts$ Creature.attackingYou+withoutFlying | ThisDefinedAndTgts$ Self | TgtPrompt$ Select target creature without flying that's attacking you | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile this creature and target creature without flying that's attacking you.
 AI:RemoveDeck:All
-Oracle:{1}{R}{G}, {T}: Exile Giant Trap Door Spider and target creature without flying that's attacking you.
+Oracle:{1}{R}{G}, {T}: Exile this creature and target creature without flying that's attacking you.

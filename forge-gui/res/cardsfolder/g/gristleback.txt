@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Boar Beast
 PT:2/2
 K:Bloodthirst:1
-A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to CARDNAME's power.
+A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to this creature's power.
 SVar:X:Sacrificed$CardPower
-Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters with a +1/+1 counter on it.)\nSacrifice Gristleback: You gain life equal to Gristleback's power.
+Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters with a +1/+1 counter on it.)\nSacrifice this creature: You gain life equal to this creature's power.

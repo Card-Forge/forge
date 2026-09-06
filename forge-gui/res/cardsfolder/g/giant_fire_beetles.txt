@@ -4,4 +4,4 @@ Types:Creature Insect
 PT:2/2
 K:Double team
 K:Menace
-Oracle:Menace\nDouble team
+Oracle:Menace, double team (When this creature attacks, conjure a duplicate into your hand, then both of them perpetually lose double team.)

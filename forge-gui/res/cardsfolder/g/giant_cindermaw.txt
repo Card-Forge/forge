@@ -4,4 +4,4 @@ Types:Creature Dinosaur Beast
 PT:4/3
 K:Trample
 S:Mode$ CantGainLife | ValidPlayer$ Player | Description$ Players can't gain life.
-Oracle:Trample\nPlayers can't gain life.
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nPlayers can't gain life.

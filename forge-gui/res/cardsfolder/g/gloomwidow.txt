@@ -3,5 +3,5 @@ ManaCost:2 G
 Types:Creature Spider
 PT:3/3
 K:Reach
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
-Oracle:Reach\nGloomwidow can block only creatures with flying.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ This creature can block only creatures with flying.
+Oracle:Reach\nThis creature can block only creatures with flying.

@@ -2,7 +2,7 @@ Name:Gangrenous Goliath
 ManaCost:3 B B
 Types:Creature Zombie Giant
 PT:4/4
-A:AB$ ChangeZone | Cost$ tapXType<3/Cleric> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+A:AB$ ChangeZone | Cost$ tapXType<3/Cleric> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return this card from your graveyard to your hand.
 AI:RemoveDeck:Random
 DeckNeeds:Type$Cleric
-Oracle:Tap three untapped Clerics you control: Return Gangrenous Goliath from your graveyard to your hand.
+Oracle:Tap three untapped Clerics you control: Return this card from your graveyard to your hand.
