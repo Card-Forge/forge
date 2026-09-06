@@ -1,6 +1,6 @@
 # ADR-0002 — Toolchain and Dependency Policy
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-06
 - **Deciders:** `jc@archlab.pl`
 

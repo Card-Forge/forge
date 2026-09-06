@@ -374,6 +374,10 @@ Each uses MADR format: Context / Decision Drivers / Considered Options / Decisio
 
 ## 3.1 Go project layout (ADR-0003)
 
+> **Superseded by [ADR-0003](adr/0003-go-project-layout.md).** The sibling-package tree below mirrors Java and does not
+> compile: `forge-game` has 82 direct two-package import cycles, and Go forbids them. The engine core is one package.
+> Kept here for the reasoning about what belongs where.
+
 ```text
 crucible/
   go.mod                        # module github.com/<you>/crucible

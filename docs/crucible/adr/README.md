@@ -12,8 +12,20 @@ Numbers are permanent. Files are never deleted. A superseded ADR keeps its numbe
 | ADR                                             | Title                           | Status   |
 | ----------------------------------------------- | ------------------------------- | -------- |
 | [0001](0001-fork-layout-and-upstream-sync.md)   | Fork layout and upstream sync   | Accepted |
-| [0002](0002-toolchain-and-dependency-policy.md) | Toolchain and dependency policy | Proposed |
+| [0002](0002-toolchain-and-dependency-policy.md) | Toolchain and dependency policy | Accepted |
+| [0003](0003-go-project-layout.md)               | Go project layout               | Proposed |
 
-Foundational set to write first (M0, plan §5): ~~fork layout and upstream sync~~ · ~~toolchain and dependency policy~~ ·
-Go project layout · Java-to-Go translation patterns · concurrency model · determinism and RNG · card DSL representation
-· effect dispatch · game state representation · differential testing strategy · card corpus scoping.
+## Remaining for the M0 gate
+
+The plan's exit gate (§5, M0) is ADR-0001 through ADR-0011 all `Accepted`. Still to write:
+
+| Next | Subject                         | Why it matters                                                              |
+| ---- | ------------------------------- | --------------------------------------------------------------------------- |
+| 0004 | Java-to-Go translation patterns | Already written as `PORT-n` in the guidelines; the ADR records why          |
+| 0005 | Concurrency model               | GO-2 and GO-3 already assume its outcome. Highest-consequence unwritten ADR |
+| 0006 | Determinism and RNG             | Gates the M1 `javarand` parity check                                        |
+| 0007 | Card DSL representation         | Compile-once AST vs runtime interpretation. Gates M3                        |
+| 0008 | Effect dispatch                 | Generated registry replacing Java reflection                                |
+| 0009 | Game state representation       | Arena and handles. What keeps the engine core from growing (ADR-0003)       |
+| 0010 | Differential testing strategy   | Defines every correctness gate from M2 onward                               |
+| 0011 | Card corpus scoping             | Defines what "done" means for card support                                  |
