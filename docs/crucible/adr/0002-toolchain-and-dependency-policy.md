@@ -87,9 +87,9 @@ instead of blocking a runtime update.
 
 **No `maven` ecosystem, ever, at the repository root.** Dependabot would open weekly PRs editing upstream's `pom.xml`
 and the `forge-*` modules — generating exactly the conflict surface ADR-0001 exists to prevent, automatically, without
-anyone deciding to. `crucible/oracle-java/pom.xml` can be tracked once it exists, scoped to that directory and nothing
-wider. The reasoning is repeated as a comment in `dependabot.yml` itself, because that is where someone will be when
-they are tempted.
+anyone deciding to. That exclusion is necessary but **not sufficient**; see the correction below.
+`crucible/oracle-java/pom.xml` can be tracked once it exists, scoped to that directory and nothing wider. The reasoning
+is repeated as a comment in `dependabot.yml` itself, because that is where someone will be when they are tempted.
 
 **Markdown tooling is pinned but not Dependabot-tracked**, and that gap is deliberate. Tracking it needs a
 `package.json` at the repository root, which needs `node_modules` in `.gitignore` — and `.gitignore` is an upstream
@@ -113,6 +113,40 @@ list it as a `<module>`.** Maven permits this: a child may name a parent that do
 dependency and plugin management, builds with `mvn -f crucible/oracle-java/pom.xml test` after upstream is installed,
 and the root `pom.xml` is never edited. Adding a `<module>` line instead would have been a one-line upstream edit in a
 file upstream changes often — exactly what ADR-0001 exists to prevent.
+
+## Correction — 2026-09-06
+
+The Dependabot decision above was incomplete, and the gap showed up within the hour.
+
+`dependabot.yml` governs **version updates only**. **Security updates** scan the entire dependency graph regardless of
+that file and open pull requests against any manifest holding a vulnerable dependency. There is no path scoping for
+them: security updates are repo-wide or off.
+
+So enabling `automated-security-fixes` produced PR #5 — `Bump at.yawk.lz4:lz4-java from 1.10.2 to 1.11.1 in /forge-gui`,
+a fix for CVE-2026-59949 — editing `forge-gui/pom.xml`. An upstream Card-Forge file, reached through a door the maven
+exclusion cannot close.
+
+**Resolution: split the two settings.**
+
+| Setting                    | State   | Reason                                                     |
+| -------------------------- | ------- | ---------------------------------------------------------- |
+| `vulnerability-alerts`     | **on**  | Read-only. Reports CVEs, touches no file, opens no PR      |
+| `automated-security-fixes` | **off** | This is the part that opens PRs editing upstream `pom.xml` |
+
+The security signal is kept; the automated edit is not. That trade is right here because Crucible does not ship Forge's
+jars — the Java engine is a CI-only differential-testing oracle — so an upstream Java CVE is upstream's fix to make, not
+a row in `upstream-patches.md`.
+
+Revisit when `crucible/oracle-java/pom.xml` exists and carries dependencies of its own. At that point the question is
+whether a Crucible-owned manifest justifies re-enabling repo-wide automated fixes, and the answer is probably still no
+while any upstream `pom.xml` remains in the tree.
+
+Verify current state with:
+
+```bash
+gh api repos/jczastkiewicz/crucible/vulnerability-alerts -i | head -1        # 204 = on
+gh api repos/jczastkiewicz/crucible/automated-security-fixes                # {"enabled":false}
+```
 
 ## Consequences
 

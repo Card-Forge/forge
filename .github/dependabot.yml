@@ -54,3 +54,15 @@ updates:
   #
   # crucible/oracle-java/pom.xml is ours and can be tracked once it exists, with directory
   # scoped to /crucible/oracle-java and nothing wider.
+  #
+  # That exclusion is necessary but NOT sufficient. This file governs version updates only.
+  # Dependabot SECURITY updates scan the whole dependency graph regardless of what is written
+  # here, and cannot be path-scoped — they are repo-wide or off. Enabling automated security
+  # fixes on 2026-09-06 immediately opened a PR editing forge-gui/pom.xml (CVE-2026-59949 in
+  # lz4-java), which had to be closed.
+  #
+  # Repo settings therefore matter as much as this file:
+  #   vulnerability-alerts      ON   read-only, reports CVEs, opens nothing
+  #   automated-security-fixes  OFF  this is what opens PRs against upstream pom.xml
+  #
+  # See the Correction section in ADR-0002 before turning automated fixes back on.
