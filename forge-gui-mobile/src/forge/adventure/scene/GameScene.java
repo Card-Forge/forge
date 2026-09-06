@@ -2,10 +2,8 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import forge.Forge;
-import forge.FrameRate;
 import forge.adventure.data.BiomeData;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.stage.MapStage;
@@ -50,9 +48,6 @@ public class GameScene extends HudScene {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
         hud.draw();
-        if (Forge.showFPS) {
-            FrameRate.getInstance().sampleAdventure((SpriteBatch) stage.getBatch());
-        }
     }
 
     @Override

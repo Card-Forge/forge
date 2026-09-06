@@ -64,27 +64,27 @@ public class FSkin {
         int missing = 0;
         if (!themeDir.child("bg_splash.png").exists()) {
             if (!silent)
-                System.err.println(themeDir + themeName + "/bg_splash.png not found.");
+                System.err.println(themeDir + "/" + themeName + "/bg_splash.png not found.");
             missing++;
         }
         if (!themeDir.child("bg_match.jpg").exists()) {
             if (!silent)
-                System.err.println(themeDir + themeName + "/bg_match.jpg not found.");
+                System.err.println(themeDir + "/" + themeName + "/bg_match.jpg not found.");
             missing++;
         }
         if (!themeDir.child("bg_texture.jpg").exists()) {
             if (!silent)
-                System.err.println(themeDir + themeName + "/bg_texture.jpg not found.");
+                System.err.println(themeDir + "/" + themeName + "/bg_texture.jpg not found.");
             missing++;
         }
         if (!themeDir.child("sprite_icons.png").exists()) {
             if (!silent)
-                System.err.println(themeDir + themeName + "/sprite_icons.png not found.");
+                System.err.println(themeDir + "/" + themeName + "/sprite_icons.png not found.");
             missing++;
         }
         if (!themeDir.child("font1.ttf").exists()) {
             if (!silent)
-                System.err.println(themeDir + themeName + "/font1.ttf not found.");
+                System.err.println(themeDir + "/" + themeName + "/font1.ttf not found.");
             missing++;
         }
         return missing == 0;

@@ -2,6 +2,7 @@ package forge;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -76,8 +77,8 @@ public class FrameRate {
         }
     }
 
-    public void sampleAdventure(SpriteBatch batch) {
-        int batchMax = batch.maxSpritesInBatch;
+    public void sampleAdventure(Batch batch) {
+        int batchMax = ((SpriteBatch) batch).maxSpritesInBatch;
         if (batchMax > maxAdventureSpritesThisFrame) {
             maxAdventureSpritesThisFrame = batchMax;
         }
