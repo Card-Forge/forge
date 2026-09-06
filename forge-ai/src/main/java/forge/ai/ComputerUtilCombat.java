@@ -369,7 +369,7 @@ public class ComputerUtilCombat {
         for (Card c : combat.getAttackers()) {
             if (c.isCommander() && combat.isAttacking(c, ai)) {
                 int currentCommanderDamage = ai.getCommanderDamage(c);
-                if (damageIfUnblocked(c, ai, combat, false) + currentCommanderDamage >= 21) {
+                if (damageIfUnblocked(c, ai, combat, false) + currentCommanderDamage >= ai.getLethalCommanderDamage()) {
                     res.add(c);
                 }
             }

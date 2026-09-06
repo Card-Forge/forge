@@ -1798,7 +1798,7 @@ public class ComputerUtil {
                     }
                 } else if (o instanceof Player p) {
                     if (source.hasKeyword(Keyword.INFECT)) {
-                        if (p.canReceiveCounters(CounterEnumType.POISON) && ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= 10 - p.getPoisonCounters()) {
+                        if (p.canReceiveCounters(CounterEnumType.POISON) && ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getLethalPoisonCounters() - p.getPoisonCounters()) {
                             threatened.add(p);
                         }
                     } else if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getLife()) {

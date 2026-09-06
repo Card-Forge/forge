@@ -25,6 +25,10 @@ public class RegisteredPlayer {
     private int startingLife = 20;
     private int startingHand = 7;
     private int manaShards = 0;
+
+    private int lethalPoisonCounters = 10;
+    private int lethalCommanderDamage = 21;
+
     private Iterable<IPaperCard> extraCardsOnBattlefield = null;
     private Iterable<IPaperCard> extraCardsInCommandZone = null;
     private Iterable<? extends IPaperCard> schemes = null;
@@ -69,6 +73,12 @@ public class RegisteredPlayer {
     public final void setManaShards(int manaShards) {
         this.manaShards = manaShards;
     }
+
+    public int getLethalPoisonCounters() { return lethalPoisonCounters; }
+    public void setLethalPoisonCounters(int lethalPoisonCounters) { this.lethalPoisonCounters = lethalPoisonCounters; }
+
+    public int getLethalCommanderDamage() { return lethalCommanderDamage; }
+    public void setLethalCommanderDamage(int lethalCommanderDamage) { this.lethalCommanderDamage = lethalCommanderDamage; }
 
     public boolean hasEnableETBCountersEffect() {
         return enableETBCountersEffect;

@@ -459,6 +459,14 @@ public class DuelScene extends ForgeScene {
             aiPlayer.setPlayer(enemyPlayer);
             aiPlayer.setTeamNumber(currentEnemy.teamNumber);
             aiPlayer.setStartingLife(eventData != null ? eventData.eventRules.startingLife : Math.round((float) currentEnemy.life * advPlayer.getDifficulty().enemyLifeFactor));
+            // Does eventData have Poison counters and Commander damage? If so, apply them to the AI player.
+            if (eventData != null) {
+                aiPlayer.setLethalPoisonCounters(eventData.eventRules.lethalPoisonCounters);
+                // Is the duel a Commander match? If so, apply the Commander damage to the AI player.
+                if (mainGameType == GameType.Commander || mainGameType == GameType.Brawl || mainGameType == GameType.Oathbreaker) {
+                    aiPlayer.setLethalCommanderDamage(eventData.eventRules.lethalCommanderDamage);
+                }
+            }
 
             Array<EffectData> equipmentEffects = new Array<>();
             if (eventData != null && eventData.eventRules.allowsItems) {

@@ -1018,6 +1018,8 @@ public class AdventureEventData implements Serializable {
         public boolean acceptsBronzeChallengeCoin = false;
         public GameType gameType = GameType.AdventureEvent;
         public int startingLife = 20;
+        public int lethalPoisonCounters = 10;
+        public int lethalCommanderDamage = 21;
         public boolean allowsShards = false;
         public boolean allowsItems = false;
         public boolean allowsBlessings = false;

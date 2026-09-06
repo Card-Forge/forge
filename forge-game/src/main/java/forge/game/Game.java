@@ -356,6 +356,11 @@ public class Game {
             if (psc.getManaShards() > 0) {
                 pl.setNumManaShards(psc.getManaShards());
             }
+
+            // Set Poison kill and Commander kill values
+            pl.setLethalPoisonCounters(psc.getLethalPoisonCounters());
+            pl.setLethalCommanderDamage(psc.getLethalCommanderDamage());
+
             int teamNum = psc.getTeamNumber();
             if (teamNum == -1) {
                 // RegisteredPlayer doesn't have an assigned team, set it to 1 higher than the highest found team number

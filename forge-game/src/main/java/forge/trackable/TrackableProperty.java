@@ -167,6 +167,8 @@ public enum TrackableProperty {
     SleeveArtOffset(TrackableTypes.IntegerType),
     Opponents(TrackableTypes.PlayerViewCollectionType),
     Life(TrackableTypes.IntegerType),
+    LethalPoisonCounters(TrackableTypes.IntegerType),
+    LethalCommanderDamage(TrackableTypes.IntegerType),
     MaxHandSize(TrackableTypes.IntegerType),
     HasUnlimitedHandSize(TrackableTypes.BooleanType),
     MaxLandPlay(TrackableTypes.IntegerType),

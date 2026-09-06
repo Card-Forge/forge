@@ -195,6 +195,19 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Life, p.getLife());
     }
 
+    public int getLethalPoisonCounters() {
+        return get(TrackableProperty.LethalPoisonCounters);
+    }
+    void updateLethalPoisonCounters(Player p) {
+        set(TrackableProperty.LethalPoisonCounters, p.getLethalPoisonCounters());
+    }
+    public int getLethalCommanderDamage() {
+        return get(TrackableProperty.LethalCommanderDamage);
+    }
+    void updateLethalCommanderDamage(Player p) {
+        set(TrackableProperty.LethalCommanderDamage, p.getLethalCommanderDamage());
+    }
+
     public boolean getIsExtraTurn() {
         return get(TrackableProperty.IsExtraTurn);
     }

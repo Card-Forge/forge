@@ -80,6 +80,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private int life = 20;
     private int startingLife = 20;
+    private int lethalCommanderDamage = 21;
+    private int lethalPoisonCounters = 10;
     private int lifeStartedThisTurnWith = startingLife;
     private int lifeLostThisTurn;
     private int lifeLostLastTurn;
@@ -431,6 +433,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         life = startLife;
         view.updateLife(this);
     }
+
+    public final int getLethalCommanderDamage() { return lethalCommanderDamage; }
+    public final int getLethalPoisonCounters() { return lethalPoisonCounters; }
+    public final void setLethalCommanderDamage(final int lethalCommanderDamage) { this.lethalCommanderDamage = lethalCommanderDamage; }
+    public final void setLethalPoisonCounters(final int lethalPoisonCounters) { this.lethalPoisonCounters = lethalPoisonCounters; }
 
     /** The number of cards in this player's main deck (not counting Commander/Sideboard/etc.) at game start. */
     public final int getStartingLibrarySize() {
@@ -2045,13 +2052,13 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
         // 704.6b In a Two-Headed Giant game, if a team has fifteen or more poison counters, that team loses the game. See rule 810, “Two-Headed Giant Variant.”
-        if (getCounters(CounterEnumType.POISON) >= 10 && loseConditionMet(GameLossReason.Poisoned, null)) {
+        if (getCounters(CounterEnumType.POISON) >= this.lethalPoisonCounters && loseConditionMet(GameLossReason.Poisoned, null)) {
             return true;
         }
 
         if (game.getRules().hasAppliedVariant(GameType.Commander)) {
             for (Entry<Card, Integer> entry : getCommanderDamage()) {
-                if (entry.getValue() >= 21 && loseConditionMet(GameLossReason.CommanderDamage, null)) {
+                if (entry.getValue() >= this.lethalCommanderDamage && loseConditionMet(GameLossReason.CommanderDamage, null)) {
                     return true;
                 }
             }
