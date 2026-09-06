@@ -13,8 +13,9 @@ Numbers are permanent. Files are never deleted. A superseded ADR keeps its numbe
 | ----------------------------------------------- | ------------------------------- | -------- |
 | [0001](0001-fork-layout-and-upstream-sync.md)   | Fork layout and upstream sync   | Accepted |
 | [0002](0002-toolchain-and-dependency-policy.md) | Toolchain and dependency policy | Accepted |
-| [0003](0003-go-project-layout.md)               | Go project layout               | Proposed |
-| [0005](0005-concurrency-model.md)               | Concurrency model               | Proposed |
+| [0003](0003-go-project-layout.md)               | Go project layout               | Accepted |
+| [0005](0005-concurrency-model.md)               | Concurrency model               | Accepted |
+| [0006](0006-determinism-and-rng.md)             | Determinism and RNG             | Proposed |
 
 ## Remaining for the M0 gate
 
@@ -23,7 +24,6 @@ The plan's exit gate (§5, M0) is ADR-0001 through ADR-0011 all `Accepted`. Stil
 | Next | Subject                         | Why it matters                                                        |
 | ---- | ------------------------------- | --------------------------------------------------------------------- |
 | 0004 | Java-to-Go translation patterns | Already written as `PORT-n` in the guidelines; the ADR records why    |
-| 0006 | Determinism and RNG             | Gates the M1 `javarand` parity check                                  |
 | 0007 | Card DSL representation         | Compile-once AST vs runtime interpretation. Gates M3                  |
 | 0008 | Effect dispatch                 | Generated registry replacing Java reflection                          |
 | 0009 | Game state representation       | Arena and handles. What keeps the engine core from growing (ADR-0003) |

@@ -1,6 +1,6 @@
 # ADR-0003 — Go Project Layout
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-06
 - **Deciders:** `jc@archlab.pl`
 
