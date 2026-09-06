@@ -11,6 +11,7 @@ import forge.game.event.GameEventRollDie;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerController;
+import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -226,6 +227,15 @@ public class RollDiceEffect extends SpellAbilityEffect {
         for (Integer unmodified : naturalRolls) {
             // Add all the unmodified rolls into the results
             resultsList.add(new DieRollResult(unmodified, unmodified));
+        }
+
+        //replacement effects that affect die results
+        for (DieRollResult roll: resultsList) {
+            repParams.put(AbilityKey.DiceResult, roll.getModifiedValue());
+            if (Objects.requireNonNull(player.getGame().getReplacementHandler().run(ReplacementType.RollDice, repParams)) == ReplacementResult.Updated) {
+                roll.setModifiedValue((int) repParams.get(AbilityKey.DiceResult));
+                hasBeenModified = true;
+            }
         }
 
         // Vedalken Exchange

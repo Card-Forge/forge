@@ -1,0 +1,15 @@
+Name:GO TO JAIL
+ManaCost:W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile target creature an opponent controls.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player| TriggerZones$ Battlefield | CheckSVar$ InJail | Execute$ GetOutRoll | TriggerDescription$ At the beginning of the upkeep of the exiled card’s owner, that player rolls two six-sided dice. If they roll doubles, sacrifice this enchantment.
+SVar:TrigExile:DB$ ChangeZone | IsCurse$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True
+SVar:TrigReturn:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:GetOutRoll:DB$ RollDice | Defined$ Player.Active | Amount$ 2 | Sides$ 6 | NoteDoubles$ True | SubAbility$ OutOfJail
+SVar:OutOfJail:DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ Doubles
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:InJail:Count$ValidExile Card.IsRemembered+OwnedBy ActivePlayer
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Creature.OppCtrl
+Oracle:When this enchantment enters, exile target creature an opponent controls until this enchantment leaves the battlefield.\nAt the beginning of the upkeep of the exiled card’s owner, that player rolls two six-sided dice. If they roll doubles, sacrifice this enchantment.
