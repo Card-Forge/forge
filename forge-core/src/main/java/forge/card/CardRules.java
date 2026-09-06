@@ -445,6 +445,11 @@ public final class CardRules implements ICardCharacteristics {
         return mainPart.getOracleText().contains(" is your commander, choose a color before the game begins.");
     }
 
+    /** Raw, unparsed {@code DeckRule:} lines carried by this card's main face. See forge.deck.DeckRule. */
+    public Iterable<String> getDeckRules() {
+        return mainPart.getDeckRules();
+    }
+
     public int getSetColorID() {
         //Could someday generalize this to support other kinds of markings.
         return setColorID;
@@ -740,6 +745,8 @@ public final class CardRules implements ICardCharacteristics {
                         needs = new DeckHints(value);
                     } else if ("DeckHas".equals(key)) {
                         has = new DeckHints(value);
+                    } else if ("DeckRule".equals(key)) {
+                        face.addDeckRule(value);
                     } else if ("Defense".equals(key)) {
                         face.setDefense(value);
                     } else if ("Draft".equals(key)) {

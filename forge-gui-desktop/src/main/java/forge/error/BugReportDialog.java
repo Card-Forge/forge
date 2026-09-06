@@ -19,6 +19,7 @@ package forge.error;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -55,6 +56,22 @@ public class BugReportDialog {
 
     public static void show(String title, String text, boolean showExitAppBtn) {
         if (dialogShown) { return; }
+
+        if (GraphicsEnvironment.isHeadless()) {
+            // Building the dialog would throw HeadlessException, and that secondary exception would
+            // replace the crash we were asked to report. Print instead.
+            //
+            // This repeats what BugReporter.reportException already wrote to stderr, so a crash is
+            // reported twice. That is deliberate: the alternative is inferring whether the caller
+            // already printed, and the only available signal (showExitAppBtn) means something else
+            // entirely, so a future caller would silently lose its whole report. De-duplicating
+            // properly means changing who prints in BugReporter, which is shared with the mobile
+            // ports and belongs in its own change. Duplicated output beats discarded output.
+            System.err.println("== " + title + " ==");
+            System.err.println(text);
+            System.err.flush();
+            return;
+        }
 
         JTextArea area = new JTextArea(text);
         area.setFont(new Font("Monospaced", Font.PLAIN, 10));

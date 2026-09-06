@@ -1620,12 +1620,49 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return false;
             }
 
+            final byte cmdCI = commanderColorIdentity(parentScreen.getDeck());
+            final List<DeckRuleColorIdentity> ciRules = activeColorIdentityRules(parentScreen.getDeck());
+
+            if (card.getRules().getColorIdentity().hasNoColorsExcept(cmdCI)) {
+                return false;
+            }
+            for (final DeckRuleColorIdentity rule : ciRules) {
+                if (rule.allowsOffColorIdentity(card.getRules())) {
+                    return false; //Rulebreaker-style exemption - fine as an ordinary card, not partner-commander-only.
+                }
+                if (rule.approvesAdditionalColor(card.getRules(), cmdCI)) {
+                    return false; //fits within the commander's player-chosen additional colors.
+                }
+            }
+            return true;
+        }
+
+        /** The combined color identity of the deck's current commanders (0 if there's no deck yet). */
+        protected static byte commanderColorIdentity(final Deck deck) {
             byte cmdCI = 0;
-            for (final PaperCard p : parentScreen.getDeck().getCommanders()) {
+            if (deck == null) {
+                return cmdCI;
+            }
+            for (final PaperCard p : deck.getCommanders()) {
                 cmdCI |= p.getRules().getColorIdentity().getColor();
             }
+            return cmdCI;
+        }
 
-            return !card.getRules().getColorIdentity().hasNoColorsExcept(cmdCI);
+        /** Every active DeckRule:ColorIdentity rule across the deck's current commanders (empty if there's no deck yet). */
+        protected static List<DeckRuleColorIdentity> activeColorIdentityRules(final Deck deck) {
+            final List<DeckRuleColorIdentity> rules = new ArrayList<>();
+            if (deck == null) {
+                return rules;
+            }
+            for (final PaperCard p : deck.getCommanders()) {
+                for (final DeckRule rule : DeckRule.parseAll(p)) {
+                    if (rule instanceof DeckRuleColorIdentity && rule.isActiveFor(DeckSection.Commander)) {
+                        rules.add((DeckRuleColorIdentity) rule);
+                    }
+                }
+            }
+            return rules;
         }
 
         protected void setVanguard(PaperCard card) {
@@ -2099,6 +2136,39 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         removeCard(card);
                     });
                 }));
+            }
+
+            if (currentDeck != null && deckSection == DeckSection.Commander) {
+                for (final DeckRule rule : DeckRule.parseAll(card)) {
+                    if (!(rule instanceof DeckRuleColorIdentity) || !rule.isActiveFor(DeckSection.Commander)) {
+                        continue;
+                    }
+                    final DeckRuleColorIdentity ciRule = (DeckRuleColorIdentity) rule;
+                    if (!ciRule.hasAllowedAdditionalColorBudget()) {
+                        continue;
+                    }
+                    final int additionalColorCount = ciRule.getAdditionalColorCount();
+                    final byte commanderCI = commanderColorIdentity(currentDeck);
+                    final List<String> colorChoices = new ArrayList<>();
+                    for (int i = 0; i < MagicColor.WUBRG.length; i++) {
+                        if ((commanderCI & MagicColor.WUBRG[i]) == 0) {
+                            colorChoices.add(MagicColor.Constant.ONLY_COLORS.get(i));
+                        }
+                    }
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAllowedAdditionalColors"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                        Set<String> currentColors;
+                        if(card.getMarkedColors() != null)
+                            currentColors = card.getMarkedColors().stream().map(MagicColor.Color::getName).collect(Collectors.toSet());
+                        else
+                            currentColors = null;
+                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblAllowedAdditionalColors"), 0, additionalColorCount, colorChoices, currentColors, null, result -> {
+                            addCard(card.copyWithMarkedColors(ColorSet.fromNames(result)));
+                            removeCard(card);
+                            if(parentScreen.getCatalogPage() != null)
+                                parentScreen.getCatalogPage().refresh(); //refresh so cards shown match the new allowed additional colors
+                        });
+                    }));
+                }
             }
         }
 

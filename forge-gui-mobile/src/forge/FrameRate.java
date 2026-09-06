@@ -1,11 +1,12 @@
 package forge;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
+import forge.assets.FSkinFont;
 
 /**
  * A nicer class for showing framerate that doesn't spam the console
@@ -14,30 +15,28 @@ import com.badlogic.gdx.utils.TimeUtils;
  * @author William Hartman
  */
 
-public class FrameRate implements Disposable{
+public class FrameRate {
     long lastTimeCounted;
     int cardsLoaded = 0;
     int allocT = 0;
     private float sinceChange;
     private float frameRate;
-    private BitmapFont font;
-    private SpriteBatch batch;
-    private OrthographicCamera cam;
+    private final FSkinFont font;
+    private static FrameRate instance;
+    private int maxClassicSpritesThisFrame = 0;
+    private int historicalClassicMaxSprites = 0;
+    private int maxAdventureSpritesThisFrame = 0;
+    private int historicalAdventureMaxSprites = 0;
 
-    public FrameRate() {
+    public static FrameRate getInstance() {
+        return instance == null ? instance = new FrameRate() : instance;
+    }
+
+    private FrameRate() {
+        font = FSkinFont.get(10);
         lastTimeCounted = TimeUtils.millis();
         sinceChange = 0;
         frameRate = Gdx.graphics.getFramesPerSecond();
-        font = new BitmapFont();
-        batch = new SpriteBatch();
-        cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    }
-
-    public void resize(int screenWidth, int screenHeight) {
-        cam = new OrthographicCamera(screenWidth, screenHeight);
-        cam.translate(screenWidth / 2, screenHeight / 2);
-        cam.update();
-        batch.setProjectionMatrix(cam.combined);
     }
 
     public void update(int loadedCardSize, float toAlloc) {
@@ -52,15 +51,54 @@ public class FrameRate implements Disposable{
         }
     }
 
-    public void render() {
-        batch.begin();
-        font.draw(batch, (int)frameRate + " FPS | " + cardsLoaded + " cards re/loaded | " + allocT + " MB", 3, Gdx.graphics.getHeight() - 3);
-        batch.end();
+    public void render(boolean showFPS) {
+        if (font == null) // shouldn't be null
+            return;
+        if (showFPS) {
+            Forge.getGraphics().getBatch().begin();
+            font.draw(Forge.getGraphics().getBatch(), composeDisplay(), Color.WHITE, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), false, Align.left);
+            Forge.getGraphics().getBatch().end();
+        }
     }
 
-    public void dispose() {
-        font.dispose();
-        batch.dispose();
+    private String composeDisplay() {
+        // TODO: make the display better..
+        return (int)frameRate + " FPS | "
+            + cardsLoaded + " cards re/loaded | "
+            + allocT + " MB | "
+            + maxClassicSpritesThisFrame + " Classic Sprites | "
+            + maxAdventureSpritesThisFrame + " Adventure Sprites ";
     }
 
+    public void sampleClassic() {
+        int batchMax = Forge.getGraphics().getBatch().maxSpritesInBatch;
+        if (batchMax > maxClassicSpritesThisFrame) {
+            maxClassicSpritesThisFrame = batchMax;
+        }
+    }
+
+    public void sampleAdventure(Batch batch) {
+        int batchMax = ((SpriteBatch) batch).maxSpritesInBatch;
+        if (batchMax > maxAdventureSpritesThisFrame) {
+            maxAdventureSpritesThisFrame = batchMax;
+        }
+    }
+
+    public void updateHistoricalPeak(boolean update) {
+        if (!update)
+            return;
+        if (maxAdventureSpritesThisFrame > historicalAdventureMaxSprites) {
+            historicalAdventureMaxSprites = maxAdventureSpritesThisFrame;
+        }
+        maxAdventureSpritesThisFrame = 0;
+
+        if (maxClassicSpritesThisFrame > historicalClassicMaxSprites) {
+            historicalClassicMaxSprites = maxClassicSpritesThisFrame;
+        }
+        maxClassicSpritesThisFrame = 0;
+    }
+
+    public int getHistoricalMaxSprites(boolean isAdventure) {
+        return isAdventure ? historicalAdventureMaxSprites : historicalClassicMaxSprites;
+    }
 }

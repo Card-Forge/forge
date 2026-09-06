@@ -125,14 +125,20 @@ public class CloneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private boolean cloneTgtAI(final SpellAbility sa, boolean mandatory) {
-        // Specific logic for cards
-        List<Card> targets = CardUtil.getValidCardsToTarget(sa);
-        if (mandatory && targets.isEmpty()) {
+        CardCollection targets = CardUtil.getValidCardsToTarget(sa);
+        if (targets.isEmpty()) {
             return false;
         }
 
         if (mandatory || "CloneBestCreature".equals(sa.getParam("AILogic"))) {
-            return cloneBestTarget(sa, targets, mandatory);
+            CardCollection viable = ComputerUtilCard.filterOutFatalCopies(targets, sa.getActivatingPlayer());
+            if (!viable.isEmpty()) {
+                targets = viable;
+            } else if (!mandatory) {
+                return false;
+            }
+            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(targets));
+            return true;
         }
 
         // Default:
@@ -141,27 +147,6 @@ public class CloneAi extends SpellAbilityAi {
         // AI:RemoveDeck:All until this can do a reasonably good job of picking
         // a good target
         return false;
-    }
-
-    /**
-     * A creature is evaluated under whoever controls it now, but the copy arrives under ours: an
-     * opponent's Nightmare is an 8/8 for them and a 0/0 for us.
-     */
-    private boolean cloneBestTarget(final SpellAbility sa, final List<Card> targets, final boolean mandatory) {
-        if (targets.isEmpty()) {
-            return false;
-        }
-        final Player self = sa.getActivatingPlayer();
-        CardCollection viable = ComputerUtilCard.filterOutFatalCopies(targets, self);
-        if (viable.isEmpty()) {
-            if (!mandatory) {
-                return false;
-            }
-            // no choice about it, so take the one the evaluation liked best
-            viable = new CardCollection(targets);
-        }
-        sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(viable));
-        return true;
     }
 
     /* (non-Javadoc)

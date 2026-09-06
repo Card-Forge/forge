@@ -297,13 +297,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
-     * returns all players.
-     */
-    public final PlayerCollection getRegisteredPlayers() {
-        return game.getRegisteredPlayers();
-    }
-
-    /**
      * returns all opponents.
      * Should keep player relations somewhere in the match structure
      */
@@ -437,6 +430,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         startingLife = startLife;
         life = startLife;
         view.updateLife(this);
+    }
+
+    /** The number of cards in this player's main deck (not counting Commander/Sideboard/etc.) at game start. */
+    public final int getStartingLibrarySize() {
+        return getRegisteredPlayer().getDeck().getMain().countAll();
     }
 
     public final int getLife() {
@@ -831,7 +829,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Get the greatest amount of combat damage assigned to a single player this turn.
      */
     public final int getMaxAssignedCombatDamage() {
-        return Aggregates.max(getRegisteredPlayers(), GameEntity::getAssignedCombatDamage);
+        return Aggregates.max(game.getRegisteredPlayers(), GameEntity::getAssignedCombatDamage);
     }
 
     public final boolean canReceiveCounters(final CounterType type) {

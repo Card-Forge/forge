@@ -1,4 +1,4 @@
-package forge;
+package forge.util;
 
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 

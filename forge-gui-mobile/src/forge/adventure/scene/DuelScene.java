@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.ImmutableList;
+import forge.Adventure;
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
@@ -51,6 +52,7 @@ import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
 import forge.util.Localizer;
+import forge.util.ScreenUtil;
 import forge.util.StreamUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -217,7 +219,7 @@ public class DuelScene extends ForgeScene {
     }
 
     public void exitDuelScene() {
-        Forge.setTransitionScreen(new TransitionScreen(endRunnable, Forge.takeScreenshot(), false, false));
+        Forge.setTransitionScreen(new TransitionScreen(endRunnable, ScreenUtil.getInstance().takeScreenshot(), false, false));
     }
 
     private FOptionPane createFOption(String message, String title, FBufferedImage icon, Runnable runnable) {
@@ -323,6 +325,7 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public void enter() {
+        Adventure.getInstance().renderTransitionScreen = false;
         Localizer localizer = Forge.getLocalizer();
         SoundSystem.instance.stopBackgroundMusic();
         GameType mainGameType;
@@ -577,6 +580,7 @@ public class DuelScene extends ForgeScene {
             //If they have a partner commander, it counts toward the 99.
             int commandExtras = Math.max(0, playerDeck.get(DeckSection.Commander).countAll() - 1);
             mainSize += commandExtras;
+            maxDeckSize = applyCommanderSizeRule(playerDeck.getCommanders(), maxDeckSize);
         }
 
         int excessCards = mainSize - maxDeckSize;
@@ -624,6 +628,22 @@ public class DuelScene extends ForgeScene {
         return section.toFlatList().stream()
                 .filter(e -> e.getCardName().equals(cardName))
                 .collect(StreamUtil.random(copies));
+    }
+
+    //Applies DeckRule:Size:AdjustMax$ from any commander that has one (e.g. Whtz, the Bibliophile).
+    private static int applyCommanderSizeRule(List<PaperCard> commanders, int maxDeckSize) {
+        for(PaperCard commander : commanders) {
+            for(DeckRule rule : DeckRule.parseAll(commander)) {
+                if(!(rule instanceof DeckRuleSize) || !rule.isActiveFor(DeckSection.Commander))
+                    continue;
+                DeckRuleSize sizeRule = (DeckRuleSize) rule;
+                if(sizeRule.removesMaxDeckSize())
+                    maxDeckSize = Integer.MAX_VALUE;
+                else if(maxDeckSize != Integer.MAX_VALUE)
+                    maxDeckSize += sizeRule.getMaxDelta();
+            }
+        }
+        return maxDeckSize;
     }
 
     private static void applyAdventureCommandZoneRules(Deck playerDeck, DeckFormat format) {
@@ -676,12 +696,20 @@ public class DuelScene extends ForgeScene {
         //4. Filter for color identity.
         byte cmdCI = 0;
         int wildColors = 0; //For Prismatic Piper and friends.
+        List<DeckRuleColorIdentity> ciRules = new ArrayList<>();
         for(PaperCard commander : playerDeck.getCommanders()) {
             cmdCI |= commander.getRules().getColorIdentity().getColor();
             wildColors += commander.getRules().getAddsWildCardColor() ? 1 : 0;
+            for(DeckRule rule : DeckRule.parseAll(commander)) {
+                if(rule instanceof DeckRuleColorIdentity && rule.isActiveFor(DeckSection.Commander))
+                    ciRules.add((DeckRuleColorIdentity) rule);
+            }
         }
         for(Map.Entry<PaperCard, Integer> e : mainPool) {
             PaperCard card = e.getKey();
+            if(DeckFormat.allowsOffColorIdentity(ciRules, card.getRules())
+                    || DeckFormat.approvesAdditionalColor(ciRules, card.getRules(), cmdCI))
+                continue; //Exempted or covered by the commander's DeckRule:ColorIdentity.
             ColorSet missingColors = card.getRules().getColorIdentity().getMissingColors(cmdCI);
             if (missingColors.countColors() > 0) {
                 if (missingColors.countColors() <= wildColors) {
@@ -697,6 +725,12 @@ public class DuelScene extends ForgeScene {
     @Override
     public FScreen getScreen() {
         return MatchController.getView();
+    }
+
+    @Override
+    public boolean leave() {
+        Adventure.getInstance().renderTransitionScreen = true;
+        return super.leave();
     }
 
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite) {

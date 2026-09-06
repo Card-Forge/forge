@@ -21,6 +21,7 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.UIData;
 import forge.adventure.scene.UIScene;
+import forge.util.ShaderUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -298,7 +299,7 @@ public class UIActor extends Group {
                     Texture t = Forge.getAssets().getTexture(Config.instance().getFile(property.value.toString()), is2D, false);
                     TextureRegion tr = new TextureRegion(t);
                     if (property.value.toString().contains("title_bg")) {
-                        ShaderProgram shaderNightDay = Forge.getGraphics().getShaderNightDay();
+                        ShaderProgram shaderNightDay = ShaderUtil.getInstance().getShaderNightDay();
                         newActor.setDrawable(new TextureRegionDrawable(tr) {
                             @Override
                             public void draw(Batch batch, float x, float y, float width, float height) {

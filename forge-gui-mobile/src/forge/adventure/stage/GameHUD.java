@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -101,7 +102,7 @@ public class GameHUD extends Stage {
     private final Group avatarGroup = new Group();
 
     private GameHUD(GameStage gameStage) {
-        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
+        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()));
         instance = this;
         this.gameStage = gameStage;
 
@@ -145,8 +146,6 @@ public class GameHUD extends Stage {
                 }
             }
         });
-        if (GuiBase.isAndroid()) //add touchpad for android
-            ui.addActor(touchpad);
 
         avatar = ui.findActor("avatar");
         ui.onButtonPress("menu", this::menu);
@@ -223,6 +222,9 @@ public class GameHUD extends Stage {
         notificationPane.getColor().a = 0f;
 
         ui.addActor(notificationPane);
+        //move touchpad here so z-index is over notificationPane and we can still move the player
+        if (GuiBase.isAndroid()) //add touchpad for android
+            ui.addActor(touchpad);
         //MAP
         mapGroup.addActor(miniMap);
         mapGroup.addActor(mapborder);
@@ -1139,5 +1141,9 @@ public class GameHUD extends Stage {
         notificationPane.setBounds(5, Forge.isLandscapeMode() ? -notificationText.getPrefHeight() : getHeight(), getWidth() * 0.4f, 25);
         notificationPane.setStyle(Controls.getSkin().get("paper", ScrollPane.ScrollPaneStyle.class));
         notificationPane.getColor().a = 0f;
+    }
+
+    public Batch getBatch() {
+        return gameStage.getBatch();
     }
 }
