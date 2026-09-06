@@ -209,7 +209,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             // fallback to remove any counter from opponent
             CardCollection oppList = CardLists.filterControlledBy(list, ai.getOpponents());
             oppList = CardLists.filter(oppList, CardPredicates.hasCounters());
-            if (!oppList.isEmpty()) {
+            while (!oppList.isEmpty()) {
                 final Card best = ComputerUtilCard.getBestAI(oppList);
 
                 for (final CounterType aType : best.getCounters().elementSet()) {
@@ -217,6 +217,8 @@ public class CountersRemoveAi extends SpellAbilityAi {
                         return takeTarget(sa, best, xPay, amount, best.getCounters(aType));
                     }
                 }
+                // its counters are all ones we would rather leave alone, so try the next one
+                oppList.remove(best);
             }
         } else if (type.equals("M1M1")) {
             // no special amount for that one yet

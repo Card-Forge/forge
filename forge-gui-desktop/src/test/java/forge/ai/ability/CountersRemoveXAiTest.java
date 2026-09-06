@@ -6,6 +6,7 @@ import forge.ai.AITest;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 
@@ -60,6 +61,26 @@ public class CountersRemoveXAiTest extends AITest {
         runMain2(game, ai);
 
         assertEquals(1, parasite.getNetPower());
+    }
+
+    @Test
+    public void looksPastAnOpponentsBestCardWhenItsCountersAreOnesWeWouldLeave() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card parasite = withParasite(game, ai);
+        // the best opposing permanent carries only a counter we would rather leave on it
+        Card dreadmaw = addCard("Colossal Dreadmaw", opp);
+        dreadmaw.setCounters(CounterEnumType.M1M1, 1);
+        Card chalice = addCard("Chalice of the Void", opp);
+        chalice.setCounters(CounterType.getType("CHARGE"), 2);
+
+        runMain2(game, ai);
+
+        assertEquals("its -1/-1 counter is left where it is", 1, dreadmaw.getCounters(CounterEnumType.M1M1));
+        assertEquals(0, chalice.getCounters(CounterType.getType("CHARGE")));
+        assertEquals(3, parasite.getNetPower());
     }
 
     private Card withParasite(Game game, Player ai) {
