@@ -566,10 +566,11 @@ public class AiBlockController {
             final List<Card> blockGang = new ArrayList<>();
             int absorbedDamage; // The amount of damage needed to kill the first blocker
 
-            List<Card> usableBlockers = CardLists.filter(blockers, c -> (c.getNetToughness() > attacker.getNetCombatDamage() // performance shortcut
-                    || c.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, c, true) > attacker.getNetCombatDamage())
-                    // surviving the damage is no use if something destroys it before the damage step
-                    && !ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(c, attacker, false));
+            // "neither of which will die" is exactly what `getSafeBlockers` answers, and it
+            // answers it through `canDestroyBlocker` - which tests
+            // `canDestroyBlockerBeforeFirstStrike` first. The hand-rolled toughness test here
+            // saw only the damage, so a blocker destroyed on block looked like a survivor.
+            List<Card> usableBlockers = getSafeBlockers(combat, attacker, blockers);
             if (usableBlockers.size() < 2) {
                 return;
             }
@@ -680,17 +681,16 @@ public class AiBlockController {
 
         boolean blocked = false;
         List<Card> chumpBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
-        if (attacker.hasKeyword(Keyword.TRAMPLE)) {
-            // a blocker that dies before combat damage soaks up none of it, so a trampling
-            // attacker connects for full anyway and the chump block is spent for nothing
-            chumpBlockers = CardLists.filter(chumpBlockers, c -> ComputerUtilCombat.shieldDamage(attacker, c) > 0);
-        }
         if (!chumpBlockers.isEmpty()) {
             final Card blocker = ComputerUtilCard.getWorstCreatureAI(chumpBlockers);
 
             // check if it's better to block a creature with lower power and without trample
             if (attacker.hasKeyword(Keyword.TRAMPLE)) {
-                final int damageAbsorbed = blocker.getLethalDamage();
+                // a blocker destroyed before the damage step soaks up none of the trample
+                // damage, so it absorbs nothing at all - the extreme of the case this
+                // redirect already handles, rather than a separate rule
+                final boolean soaks = ComputerUtilCombat.shieldDamage(attacker, blocker) > 0;
+                final int damageAbsorbed = soaks ? blocker.getLethalDamage() : 0;
                 if (attacker.getNetCombatDamage() > damageAbsorbed) {
                     for (Card other : attackers) {
                         if (other.equals(attacker)) {
@@ -709,6 +709,13 @@ public class AiBlockController {
                             return;
                         }
                     }
+                }
+                if (!soaks) {
+                    // no other attacker to spend it on, and blocking here prevents no
+                    // damage at all - keep the creature rather than trade it for nothing
+                    attackers.remove(0);
+                    makeChumpBlocks(combat, attackers, false);
+                    return;
                 }
             }
 
