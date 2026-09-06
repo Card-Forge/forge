@@ -1,0 +1,56 @@
+# ADR-0002 pins toolchain and library versions. Pinning without an update mechanism just
+# means stale and eventually vulnerable, so this file is the other half of that decision.
+#   docs/crucible/adr/0002-toolchain-and-dependency-policy.md
+#
+# `schedule` applies to version updates only. Security updates are driven by Dependabot
+# alerts and open as soon as an advisory is published, so `weekly` here does not delay
+# CVE fixes. Verify with: gh api repos/jczastkiewicz/crucible/automated-security-fixes
+#
+# Scope is deliberately narrow. Read the maven note at the bottom before adding ecosystems.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      github-actions-security:
+        applies-to: security-updates
+        patterns: ['*']
+      github-actions-versions:
+        applies-to: version-updates
+        patterns: ['*']
+
+  # Go modules. crucible/go.mod does not exist until M1. Uncomment in the same PR that
+  # creates it, or Dependabot reports a missing-manifest error on every run.
+  #
+  # - package-ecosystem: gomod
+  #   directory: /crucible
+  #   schedule:
+  #     interval: weekly
+  #     day: monday
+  #   open-pull-requests-limit: 5
+  #   groups:
+  #     go-security:
+  #       applies-to: security-updates
+  #       patterns: ['*']
+  #     # Test-only deps first — a go-cmp bump that reddens CI must not block runtime deps.
+  #     # Dependabot assigns each dependency to the first matching group, so order matters.
+  #     go-test-tooling:
+  #       applies-to: version-updates
+  #       patterns:
+  #         - 'github.com/google/go-cmp'
+  #     go-runtime:
+  #       applies-to: version-updates
+  #       patterns: ['*']
+
+  # DO NOT add a maven ecosystem pointing at /.
+  #
+  # The root pom.xml and every forge-* module belong to upstream Card-Forge. Dependabot
+  # would open weekly PRs editing them — generating exactly the conflict surface ADR-0001
+  # and REV-1 exist to prevent, automatically, without anyone deciding to.
+  #
+  # crucible/oracle-java/pom.xml is ours and can be tracked once it exists, with directory
+  # scoped to /crucible/oracle-java and nothing wider.

@@ -9,10 +9,11 @@ Numbers are permanent. Files are never deleted. A superseded ADR keeps its numbe
 
 ## Index
 
-| ADR                                           | Title                         | Status   |
-| --------------------------------------------- | ----------------------------- | -------- |
-| [0001](0001-fork-layout-and-upstream-sync.md) | Fork layout and upstream sync | Proposed |
+| ADR                                             | Title                           | Status   |
+| ----------------------------------------------- | ------------------------------- | -------- |
+| [0001](0001-fork-layout-and-upstream-sync.md)   | Fork layout and upstream sync   | Accepted |
+| [0002](0002-toolchain-and-dependency-policy.md) | Toolchain and dependency policy | Proposed |
 
-Foundational set to write first (M0, plan §5): ~~fork layout and upstream sync~~ · toolchain and dependency policy · Go
-project layout · Java-to-Go translation patterns · concurrency model · determinism and RNG · card DSL representation ·
-effect dispatch · game state representation · differential testing strategy · card corpus scoping.
+Foundational set to write first (M0, plan §5): ~~fork layout and upstream sync~~ · ~~toolchain and dependency policy~~ ·
+Go project layout · Java-to-Go translation patterns · concurrency model · determinism and RNG · card DSL representation
+· effect dispatch · game state representation · differential testing strategy · card corpus scoping.

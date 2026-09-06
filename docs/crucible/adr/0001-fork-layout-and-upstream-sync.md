@@ -1,6 +1,6 @@
 # ADR-0001 — Fork Layout and Upstream Sync
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-06
 - **Deciders:** `jc@archlab.pl`
 

@@ -3,12 +3,14 @@ name: Claude Code Review
 on:
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
-    # Optional: Only run on specific file changes
-    # paths:
-    #   - "src/**/*.ts"
-    #   - "src/**/*.tsx"
-    #   - "src/**/*.js"
-    #   - "src/**/*.jsx"
+    # Crucible-owned paths only. Without this filter, an upstream sync merge
+    # from Card-Forge/forge sends a 500-file Java diff to review. See
+    # docs/crucible/adr/0001-fork-layout-and-upstream-sync.md.
+    paths:
+      - "crucible/**"
+      - "docs/crucible/**"
+      - "CLAUDE.md"
+      - ".github/workflows/claude*.yml"
 
 jobs:
   claude-review:

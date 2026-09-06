@@ -252,7 +252,8 @@ Never leave `Draft` on something the team already follows. Never leave `Active` 
 
 ## DOC-14 — Prettier formats every Markdown file
 
-Config: `/.prettierrc` — `printWidth: 120`, `proseWrap: "always"` for `*.md`.
+Config: `/.prettierrc` — `printWidth: 120`, `proseWrap: "always"` for `*.md`. Pinned version: **prettier 3.8.3**
+(ADR-0002). A local install at a different version is fine; CI is the authority.
 
 ```bash
 prettier --write .      # respects .prettierignore
@@ -287,7 +288,7 @@ npx markdownlint-cli2 "CLAUDE.md" "docs/crucible/**/*.md"
 ```
 
 Config: `/.markdownlint-cli2.jsonc`. The VSCode extension `DavidAnson.vscode-markdownlint` reads the same file, so
-editor squiggles and CI agree.
+editor squiggles and CI agree. Pinned version: **markdownlint-cli2 0.23.2** (ADR-0002).
 
 Two categories are disabled there, each with its reason in a comment:
 
