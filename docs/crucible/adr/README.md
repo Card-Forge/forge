@@ -22,17 +22,14 @@ Numbers are permanent. Files are never deleted. A superseded ADR keeps its numbe
 | [0009](0009-game-state-representation.md)       | Game state representation                 | Accepted |
 | [0010](0010-differential-testing-strategy.md)   | Differential testing strategy             | Accepted |
 | [0011](0011-card-corpus-scoping.md)             | Card corpus scoping                       | Accepted |
-| [0012](0012-ports-and-adapters.md)              | Ports and adapters, and where they stop   | Proposed |
-| [0013](0013-telemetry-event-bus.md)             | Telemetry event bus and schema versioning | Proposed |
-| [0014](0014-telemetry-storage-format.md)        | Telemetry storage format                  | Proposed |
+| [0012](0012-ports-and-adapters.md)              | Ports and adapters, and where they stop   | Accepted |
+| [0013](0013-telemetry-event-bus.md)             | Telemetry event bus and schema versioning | Accepted |
+| [0014](0014-telemetry-storage-format.md)        | Telemetry storage format                  | Accepted |
 
-## M0 gate
+## Numbering
 
-The plan's exit gate (§5, M0) is ADR-0001 through ADR-0011 all `Accepted`.
+No gap and no missing number: 0001-0014, every number used exactly once. Numbers are allocated when an ADR is written,
+never reserved — the plan lists remaining subjects without numbers for that reason.
 
-There is no gap and no missing number: 0001-0014, every number used exactly once. Numbers are allocated when an ADR is
-written, never reserved — the plan lists remaining subjects without numbers for that reason.
-
-Remaining M0 work is not ADRs — the five `architecture/` documents, the DSL grammars under `porting/dsl/`,
-`telemetry/metric-definitions.md`, and `research/meta-gauntlet.md`, which ADR-0011 makes load-bearing by defining the
-card corpus in terms of it.
+The plan's M0 exit gate asked for ADR-0001 through ADR-0011 `Accepted`. The three subjects after it — ports and
+adapters, the telemetry event bus, the storage format — took the next free numbers as they were written.

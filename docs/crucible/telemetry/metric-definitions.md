@@ -7,6 +7,10 @@
 
 Normative. A metric means what this document says it means, and nothing else.
 
+Numbers are allocated in blocks by section — 1-3 general, 4-9 dead cards, 10-19 mana, 20-23 impact, 24-29 game context —
+so a new metric joins its section instead of landing at the end. Blocks leave gaps; the gaps are free numbers, not
+missing rules. `MET-n` is permanent once used (DOC-6).
+
 ---
 
 ## Why this exists before the engine

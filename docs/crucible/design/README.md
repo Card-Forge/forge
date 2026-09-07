@@ -16,13 +16,13 @@ Each is **replaced** by an architecture document once the code exists, not edite
 | [engine-design.md](engine-design.md)                             | ADR-0003, 0005, 0006, 0007, 0008, 0009      | M3, M5, M6 |
 | [card-compilation-pipeline.md](card-compilation-pipeline.md)     | ADR-0007, 0008, 0011 + the six DSL grammars | M2, M3     |
 | [concurrency-and-determinism.md](concurrency-and-determinism.md) | ADR-0005, 0006, 0009                        | M8         |
+| [telemetry-pipeline.md](telemetry-pipeline.md)                   | ADR-0005, 0006, 0013, 0014 + `MET-n`        | M8, M9     |
 
 ## Not written
 
-| Document             | Blocked by                                                                                                                                            |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `telemetry-pipeline` | ADR-0013 and ADR-0014 do not exist. ARCH-10 permits composing accepted ADRs only, so writing it would mean inventing the event bus and storage format |
-| `engine-state-model` | Covered by [engine-design.md](engine-design.md)'s lifetimes table. A separate document would duplicate it (DOC-11)                                    |
+| Document             | Why                                                                                                                |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `engine-state-model` | Covered by [engine-design.md](engine-design.md)'s lifetimes table. A separate document would duplicate it (DOC-11) |
 
 ## Related
 

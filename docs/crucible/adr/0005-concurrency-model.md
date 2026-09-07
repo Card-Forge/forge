@@ -82,8 +82,10 @@ shared mutable state into the one place this ADR keeps clean. Lookahead stays se
 **Each game gets its own RNG, derived from the run seed and the game index.** Never a shared source. A shared RNG makes
 output depend on scheduling order, which would destroy reproducibility — the mechanism is ADR-0006's.
 
-**Telemetry crosses the boundary by channel, one shard writer per worker.** No shared accumulator, no lock around a
-counter. Aggregation happens in a single merge pass after the run.
+**Telemetry never crosses a boundary while a game is running.** The game folds its own events in its own goroutine and
+hands finished rows to the worker's shard writer at game end — once per game, not once per event
+([ADR-0013](0013-telemetry-event-bus.md)). No shared accumulator, no lock around a counter. Aggregation is a single
+merge pass after the run.
 
 **A panicking game fails alone.** Each worker recovers at the game boundary, records the failure with a full state dump
 and the seed that produced it, and takes the next unit of work. The batch continues; the failure is reproducible from

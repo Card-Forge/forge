@@ -95,9 +95,6 @@ Listed rather than smoothed over (ARCH-10).
 
 - **Worker count against memory.** ADR-0005 makes memory the scaling limit and ADR-0009 makes clones cheap, so worker
   count and AI search depth are coupled. Neither has a number until a game state exists to measure. M7.
-- **Event sink backpressure.** ADR-0005 says telemetry crosses by channel, one writer per worker. Whether a slow writer
-  blocks the game or drops and records the drop is undecided — and it is a determinism question, because dropping
-  changes output. Belongs in ADR-0013.
 - **Failed-game accounting.** A recovered panic produces a failed game. Whether it counts in the denominator of a win
   rate, or is excluded and reported separately, is unsettled and affects every reported figure.
 - **Cross-platform reproducibility.** Nothing here guarantees a run on arm64 matches one on amd64. Floating point in the
@@ -106,7 +103,6 @@ Listed rather than smoothed over (ARCH-10).
 ## Invalidated by
 
 - `internal/sim` existing — replaced by an architecture document describing what was built
-- ADR-0013 landing, which settles the backpressure row
 - Any measurement showing worker count affecting output, which would contradict the central claim above
 
 ## Related

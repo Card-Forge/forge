@@ -1,6 +1,6 @@
 # ADR-0012 — Ports and Adapters, and Where They Stop
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-07
 - **Deciders:** `jc@archlab.pl`
 

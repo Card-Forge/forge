@@ -12,16 +12,17 @@ It is built on a Go port of the [Forge](https://github.com/Card-Forge/forge) rul
 
 ## Status
 
-**Pre-implementation.** There is no Go code yet.
+**Early.** The engine is not ported yet — no card is parsed and no game runs.
 
 ```console
 $ find crucible -name '*.go' | wc -l
-0
+14
 ```
 
-What exists is the decision and rule set the code will be written against: 11 accepted ADRs, 7 binding guidelines, and
-the implementation plan. That is deliberate — the port is documentation-driven, and the blueprint lands before the first
-line of Go.
+Those files are support code and build tooling: an insertion-ordered set, a bit-exact `java.util.Random`, and two
+linters that check the port's architectural premises. What is finished is the blueprint they are written against — 14
+accepted ADRs, 7 binding guidelines, 4 design documents and the implementation plan. That order is deliberate: the port
+is documentation-driven.
 
 Progress is tracked in [the implementation plan](docs/crucible/00-master-implementation-plan.md), §5.
 

@@ -21,15 +21,15 @@ stripped out, or a description of the system somebody hoped to build. Both read 
 
 ## ARCH-1 — Know which of the four you are writing
 
-| Document         | Answers                                        | Lifecycle                                                |
-| ---------------- | ---------------------------------------------- | -------------------------------------------------------- |
-| **ADR**          | Why is it like this? What else was considered? | Immutable and dated. Superseded, never edited            |
-| **Architecture** | How does it work, right now?                   | Living. Edited whenever the code moves                   |
-| **Design**       | How will the pieces fit, before they exist?    | Living until built, then replaced by an architecture doc |
-| **Guideline**    | What must I do?                                | Living. Normative                                        |
+| Document         | Answers                                        | Lifecycle                                                  |
+| ---------------- | ---------------------------------------------- | ---------------------------------------------------------- |
+| **ADR**          | Why is it like this? What else was considered? | Dated. Facts corrected in place; a new decision supersedes |
+| **Architecture** | How does it work, right now?                   | Living. Edited whenever the code moves                     |
+| **Design**       | How will the pieces fit, before they exist?    | Living until built, then replaced by an architecture doc   |
+| **Guideline**    | What must I do?                                | Living. Normative                                          |
 
 Confusing them is the common failure. An architecture doc that argues for its design is a late ADR. An ADR that
-describes current structure goes stale the moment the code changes and cannot be updated, because ADRs are immutable.
+describes current structure goes stale the moment the code changes, because an ADR records a decision, not a state.
 
 **Test:** if a sentence could start with "we chose this because", it belongs in an ADR. If it could start with "once
 this is built, it will", it belongs in a design document (ARCH-10), not here.
@@ -136,7 +136,7 @@ worked anywhere. A named trigger turns it into something a reviewer can check on
 | Document                         | Must establish                                                                                   |
 | -------------------------------- | ------------------------------------------------------------------------------------------------ |
 | `system-overview.md`             | What Crucible does, its boundaries, what it is not. The one document a newcomer reads first      |
-| `module-map.md`                  | Every Go package: responsibility, Java provenance, port-log link. Enforced by `docgate` (DOC-12) |
+| `module-map.md`                  | Every Go package: responsibility, Java provenance, port-log link. `docgate` enforces it (DOC-12) |
 | `engine-state-model.md`          | Arena, handles, what is mutable, what is shared, what a clone copies                             |
 | `card-compilation-pipeline.md`   | `.txt` to shared `CompiledCard`, and where the runtime overlay begins                            |
 | `concurrency-and-determinism.md` | Worker pool, per-game isolation, stream partitioning, what reproducibility guarantees hold       |

@@ -74,10 +74,9 @@ is made the answer is `compress/gzip` and NDJSON. Naming the pressure point is w
 broken silently.
 
 **Pinning without an update path is just rot, so Dependabot is part of this decision, not a follow-up.**
-`.github/dependabot.yml` tracks the `github-actions` ecosystem weekly — `actions/checkout` and
-`anthropics/claude-code-action` are the only pinned artifacts that exist today. The `gomod` entry is written but
-commented out, because `crucible/go.mod` does not exist until M1 and Dependabot reports a missing-manifest error every
-run against an empty directory. It gets uncommented in the PR that creates the module.
+`.github/dependabot.yml` tracks two ecosystems weekly: `github-actions` at the root, and `gomod` scoped to `/crucible`.
+Dependabot reports an error on every run for an ecosystem entry whose directory holds no manifest, so each entry lands
+in the same pull request as the manifest it tracks.
 
 Each ecosystem splits into a security group and a version group via `applies-to`. The split matters because the
 `schedule` interval governs version updates only — security updates open as soon as an advisory is published, so a
@@ -87,9 +86,33 @@ instead of blocking a runtime update.
 
 **No `maven` ecosystem, ever, at the repository root.** Dependabot would open weekly PRs editing upstream's `pom.xml`
 and the `forge-*` modules — generating exactly the conflict surface ADR-0001 exists to prevent, automatically, without
-anyone deciding to. That exclusion is necessary but **not sufficient**; see the correction below.
-`crucible/oracle-java/pom.xml` can be tracked once it exists, scoped to that directory and nothing wider. The reasoning
-is repeated as a comment in `dependabot.yml` itself, because that is where someone will be when they are tempted.
+anyone deciding to. `crucible/oracle-java/pom.xml` can be tracked once it carries dependencies, scoped to that directory
+and nothing wider. The reasoning is repeated as a comment in `dependabot.yml` itself, because that is where someone will
+be when they are tempted.
+
+**That exclusion is necessary but not sufficient, because `dependabot.yml` governs version updates only.** Security
+updates scan the whole dependency graph regardless of that file and open pull requests against any manifest holding a
+vulnerable dependency. There is no path scoping for them — security updates are repo-wide or off. Enabling
+`automated-security-fixes` therefore reaches `forge-gui/pom.xml` through a door the `maven` exclusion cannot close: a
+CVE fix in `at.yawk.lz4:lz4-java` arrives as a pull request editing an upstream Card-Forge file. So the two settings are
+split:
+
+| Setting                    | State   | Reason                                                     |
+| -------------------------- | ------- | ---------------------------------------------------------- |
+| `vulnerability-alerts`     | **on**  | Read-only. Reports CVEs, touches no file, opens no PR      |
+| `automated-security-fixes` | **off** | This is the part that opens PRs editing upstream `pom.xml` |
+
+The security signal is kept; the automated edit is not. That trade is right here because Crucible does not ship Forge's
+jars — the Java engine is a CI-only differential-testing oracle — so an upstream Java CVE is upstream's fix to make, not
+a row in `upstream-patches.md`. Revisit when `crucible/oracle-java/pom.xml` carries dependencies of its own; the answer
+is probably still no while any upstream `pom.xml` remains in the tree.
+
+Verify current state with:
+
+```bash
+gh api repos/jczastkiewicz/crucible/vulnerability-alerts -i | head -1        # 204 = on
+gh api repos/jczastkiewicz/crucible/automated-security-fixes                # {"enabled":false}
+```
 
 **Markdown tooling is pinned but not Dependabot-tracked**, and that gap is deliberate. Tracking it needs a
 `package.json` at the repository root, which needs `node_modules` in `.gitignore` — and `.gitignore` is an upstream
@@ -108,57 +131,13 @@ between a machine and CI.
 The machine this was written on runs JDK 25. It compiles `--release 17` correctly, but upstream does not test it, so CI
 pins 21 and local mismatches are tolerated rather than blessed.
 
-**`crucible/oracle-java/pom.xml` is standalone — no `<parent>`, and not listed in the root POM's `<modules>`.** The
-original text specified a parent via `<relativePath>`; see the second correction below for why that does not work.
+**`crucible/oracle-java/pom.xml` is standalone** — no `<parent>`, own coordinates, `maven.compiler.release` set to 17 to
+match upstream, and not listed in the root POM's `<modules>`. Adding a `<module>` line would be a one-line upstream edit
+in a file upstream changes often, which is what ADR-0001 exists to prevent.
 
-The superseded reasoning, kept because the goal it served still holds: a child may name a parent that does not aggregate
-it, which would have inherited dependency management while leaving the root `pom.xml` unedited. Maven permits this: a
-child may name a parent that does not aggregate it. The oracle inherits dependency and plugin management, builds with
-`mvn -f crucible/oracle-java/pom.xml test` after upstream is installed, and the root `pom.xml` is never edited. Adding a
-`<module>` line instead would have been a one-line upstream edit in a file upstream changes often — exactly what
-ADR-0001 exists to prevent.
-
-## Correction 1 — 2026-09-06
-
-The Dependabot decision above was incomplete, and the gap showed up within the hour.
-
-`dependabot.yml` governs **version updates only**. **Security updates** scan the entire dependency graph regardless of
-that file and open pull requests against any manifest holding a vulnerable dependency. There is no path scoping for
-them: security updates are repo-wide or off.
-
-So enabling `automated-security-fixes` produced PR #5 — `Bump at.yawk.lz4:lz4-java from 1.10.2 to 1.11.1 in /forge-gui`,
-a fix for CVE-2026-59949 — editing `forge-gui/pom.xml`. An upstream Card-Forge file, reached through a door the maven
-exclusion cannot close.
-
-**Resolution: split the two settings.**
-
-| Setting                    | State   | Reason                                                     |
-| -------------------------- | ------- | ---------------------------------------------------------- |
-| `vulnerability-alerts`     | **on**  | Read-only. Reports CVEs, touches no file, opens no PR      |
-| `automated-security-fixes` | **off** | This is the part that opens PRs editing upstream `pom.xml` |
-
-The security signal is kept; the automated edit is not. That trade is right here because Crucible does not ship Forge's
-jars — the Java engine is a CI-only differential-testing oracle — so an upstream Java CVE is upstream's fix to make, not
-a row in `upstream-patches.md`.
-
-Revisit when `crucible/oracle-java/pom.xml` exists and carries dependencies of its own. At that point the question is
-whether a Crucible-owned manifest justifies re-enabling repo-wide automated fixes, and the answer is probably still no
-while any upstream `pom.xml` remains in the tree.
-
-Verify current state with:
-
-```bash
-gh api repos/jczastkiewicz/crucible/vulnerability-alerts -i | head -1        # 204 = on
-gh api repos/jczastkiewicz/crucible/automated-security-fixes                # {"enabled":false}
-```
-
-## Correction 2 — 2026-09-07
-
-The oracle POM arrangement above does not work, and was found the first time it was built.
-
-The decision specified `crucible/oracle-java/pom.xml` naming the root Forge POM as its `<parent>` via `<relativePath>`.
-Maven does permit a child to name a parent that does not aggregate it, so that part was right. What the decision missed
-is how the root POM is versioned:
+Inheriting from the root POM is the arrangement that looks right and does not work. Maven does permit a child to name a
+parent that does not aggregate it, so dependency management could in principle be inherited with the root left unedited.
+What defeats it is how upstream versions that root:
 
 ```xml
 <version>${revision}</version>
@@ -173,17 +152,12 @@ outright:
 Non-resolvable parent POM for crucible:crucible-oracle: Could not find artifact forge:forge:pom:2.0.05-SNAPSHOT
 ```
 
-And hardcoding the correct value only moves the problem: `versionCode` changes on every upstream release, so the file
-would break on a sync. That is precisely the coupling ADR-0001 exists to avoid, arriving through the mechanism chosen to
-avoid it.
+Hardcoding the correct value only moves the problem: `versionCode` changes on every upstream release, so the file breaks
+on the next sync — precisely the coupling ADR-0001 exists to avoid, arriving through the mechanism chosen to avoid it.
 
-**Resolution: the oracle POM is standalone.** No parent, its own coordinates, `maven.compiler.release` set to 17 to
-match upstream. It costs nothing today because the dumpers use only the JDK. When one needs `forge-game`, it becomes an
-ordinary `<dependency>` against artifacts from `mvn install -DskipTests` at the root, with the version passed as
-`-Dforge.version=...` rather than hardcoded.
-
-Verified: `mvn -f crucible/oracle-java/pom.xml compile` succeeds, and the built dumper reproduces the committed golden
-byte-for-byte.
+Standalone costs nothing today, because the dumpers use only the JDK: `mvn -f crucible/oracle-java/pom.xml compile`
+succeeds against an unbuilt upstream. When a dumper needs `forge-game`, that becomes an ordinary `<dependency>` resolved
+from `mvn install -DskipTests` at the root, with the version passed as `-Dforge.version=...` rather than hardcoded.
 
 ## Consequences
 
@@ -195,9 +169,9 @@ Dependency review is cheap because the default answer is no and the exceptions a
 **Bad.** Toolchain bumps become deliberate work rather than something that happens by itself, and the pin will lag
 upstream Go releases. Markdown tool versions drift by hand until someone notices a check disagreeing between a laptop
 and CI. Refusing convenient libraries means writing things the ecosystem already solved — an ordered set, generic slice
-helpers, a bit-compatible `java.util.Random` — which is more code to own and test. The parent-without-module POM
-arrangement is unusual enough that it needs the comment in the file explaining why, or someone will helpfully "fix" it
-by adding the module line.
+helpers, a bit-compatible `java.util.Random` — which is more code to own and test. A standalone oracle POM is unusual
+enough that it needs the comment in the file explaining why, or someone will helpfully "fix" it by adding a `<parent>`
+or a root `<module>` line, either of which re-couples the oracle to upstream's version scheme.
 
 **Neutral.** Pinning tool versions in CI while leaving local installs unpinned means a contributor can see lint results
 that CI does not reproduce. Acceptable, since CI is the authority and the gap is visible immediately.

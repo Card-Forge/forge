@@ -20,10 +20,10 @@ rules block the leaks.
 
 Bare `//nolint` fails review.
 
-**`depguard` carries the architectural boundaries**, which were previously honour-system: runtime is stdlib only
-(ADR-0002), `math/rand`'s global source is banned outside `pkg/javarand` (ADR-0006), and the dependency arrow points
-into `internal/engine` and never out (ADR-0003). Several of those rules are inert until the packages they name exist,
-and are written now so the boundary is enforced from the first file rather than retrofitted.
+**`depguard` carries the architectural boundaries** that the compiler cannot express: runtime is stdlib only (ADR-0002),
+`math/rand`'s global source is banned outside `pkg/javarand` (ADR-0006), and the dependency arrow points into
+`internal/engine` and never out (ADR-0003). Several of those rules are inert until the packages they name exist, and are
+written now so the boundary is enforced from the first file rather than retrofitted.
 
 `depguard` works at package granularity and cannot see inside a package, which is why `internal/engine` additionally
 needs `crucible/tools/enginelint`.

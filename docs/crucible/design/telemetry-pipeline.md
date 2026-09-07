@@ -7,9 +7,6 @@
 An engine event to a figure in a report, end to end, with no stage skipped (ARCH-8). Reasoning stays in the ADRs and is
 linked (ARCH-3).
 
-This was blocked until ADR-0013 and ADR-0014 existed, because ARCH-10 permits composing accepted decisions and forbids
-inventing them.
-
 ---
 
 ## Stages

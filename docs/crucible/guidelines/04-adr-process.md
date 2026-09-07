@@ -66,14 +66,22 @@ ADR-0005, ADR-0010, [01-go-coding-standards](../guidelines/01-go-coding-standard
 
 ---
 
-## ADRP-3 — Numbering and immutability
+## ADRP-3 — Numbering, and one decision per file
 
 - Sequential, zero-padded, four digits: `0001`, `0002`.
 - **Numbers never reused. Files never deleted.**
 - Superseding: old ADR gets `**Status:** Superseded by ADR-0021` as its first line, body untouched. New ADR's Context
   says what changed.
 
-Reason: an ADR's value is the record of what was believed at the time. Editing history destroys it.
+**A wrong fact is corrected in the body, in place.** No "Correction" or "Update" sections, no dated amendments, no
+sentence about what an earlier version said. When a measurement turns out wrong, the number changes; when a mechanism
+turns out not to work, the Decision states the mechanism that does and why the obvious one fails.
+
+Reason: an ADR is read by someone deciding whether to follow it, and an amendment log makes them reconstruct the current
+state from a diff. Git already holds the history, with better tooling than prose.
+
+The line between correcting and superseding: **the decision changes → new ADR. Everything else → edit in place.** A new
+ADR is for a different answer to the same question, not for a fixed typo or a re-measured number.
 
 ---
 
@@ -81,7 +89,8 @@ Reason: an ADR's value is the record of what was believed at the time. Editing h
 
 ADR merges **before** the PR that implements it. Not same PR, not after.
 
-`crucible/tools/docgate` fails the build on a `// ADR-nnnn` code comment with no matching ADR file.
+`crucible/tools/docgate` will fail the build on a `// ADR-nnnn` code comment with no matching ADR file. Until it is
+built (M1), this is enforced in review.
 
 Reason: ADR written after the fact is a justification, not a decision. It never says "we considered X and rejected it",
 because by then X was never considered.

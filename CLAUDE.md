@@ -108,6 +108,9 @@ All docs use the compressed style in `guidelines/00-documentation-style.md`:
 - Code blocks and code comments stay normal English, uncompressed. (DOC-7)
 - Show Bad → Good pairs. (DOC-8)
 - Write in full sentences for destructive steps, ordered procedures, security and licensing. (DOC-9)
+- **State, never history.** No `Correction` / `Update` / changelog sections, no "this previously said". Fix the fact in
+  place; git holds the diff. Same for ADRs — a new decision supersedes, everything else is edited in place. (DOC-16,
+  ADRP-3)
 - **Run `prettier --write .` before every commit.** Config `/.prettierrc`, `printWidth: 120`, `proseWrap: always`.
   Prettier owns table alignment and wrapping — do not hand-align. (DOC-14)
 
@@ -125,7 +128,7 @@ npx markdownlint-cli2 "CLAUDE.md" "docs/crucible/**/*.md"   # semantic lint
 ```
 
 ```bash
-# Go (once crucible/ exists)
+# Go
 cd crucible && go test -race ./...
 cd crucible && go test -run TestScenarios ./internal/engine/game -update   # regen goldens, review the diff
 cd crucible && golangci-lint run
@@ -141,7 +144,8 @@ mvn -U -B clean test          # CI runs this under Xvfb
 
 ## Current state
 
-Pre-implementation. `crucible/` does not exist yet.
+M0 done — 14 ADRs `Accepted`, 7 guidelines, 4 design docs, 6 DSL grammars.
 
-Next: M0 — write `docs/crucible/adr/0001`…`0011` and the remaining `architecture/` docs. No Go until M0's gate is green.
-(Plan §5)
+M1 in progress. Built: `pkg/collect`, `pkg/javarand` (bit-matches Java over the committed golden), `tools/javacycles`,
+`tools/enginelint`, `oracle-java`. Remaining: `internal/mana`, `internal/cardtype`, `tools/docgate`. Nothing under
+`internal/` exists yet. (Plan §5)

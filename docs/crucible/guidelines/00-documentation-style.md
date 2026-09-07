@@ -231,8 +231,8 @@ Duplicated fact = two facts that will disagree in three months.
 New Go package → entry in `architecture/module-map.md` in the **same** commit. New ADR-worthy decision → ADR merged
 **before** the implementing PR. Ported Java unit → `porting/port-log/<unit>.md` note before merge.
 
-CI enforces: `crucible/tools/docgate` fails build on a package with no module-map row, or a `// ADR-nnnn` comment with
-no matching ADR file.
+CI will enforce this once `crucible/tools/docgate` exists (M1): it fails the build on a package with no module-map row,
+or a `// ADR-nnnn` comment with no matching ADR file.
 
 Reason: doc-after-code never happens.
 
@@ -305,6 +305,38 @@ rewrap the template you are trying to show — merging its `**Status:**` and `**
 
 ---
 
+## DOC-16 — Docs carry state, not history
+
+Every document reads as if written today, in one pass, by someone who already knew the answer.
+
+Banned: `Correction`, `Update`, `Changelog`, `Amendment` sections. Dated "as of" notes about the document itself.
+Sentences like "this previously said", "originally we chose", "the old approach was". A superseded paragraph kept "for
+context".
+
+**Bad:**
+
+```text
+## Correction — 2026-09-07
+
+The estimate above was low by 40%. A realistic figure is 50,000 to 65,000 lines.
+```
+
+**Good:**
+
+```text
+**Budget 50,000 to 65,000 lines in one package.**
+```
+
+Two exceptions, both about the subject rather than the document: a ledger whose whole purpose is a record
+(`porting/upstream-patches.md`, `port-log/`), and a measurement dated because the thing measured moves — "corpus as of
+2026-09-07" (ARCH-9).
+
+Reason: a reader wants the current answer, and an amendment log makes them derive it by replaying edits. Git holds the
+history, diffs it properly, and never disagrees with itself. Two statements of the same fact in one file is the failure
+mode DOC-11 exists to prevent, and a correction section is exactly that.
+
+---
+
 ## Checklist before merging a doc
 
 - [ ] Header: Status + Applies to
@@ -315,6 +347,7 @@ rewrap the template you are trying to show — merging its `**Status:**` and `**
 - [ ] At least one Bad/Good pair per non-obvious rule (DOC-8)
 - [ ] Dangerous or ordered parts written out in full (DOC-9)
 - [ ] No fact duplicated from another doc (DOC-11)
+- [ ] No correction, update, or changelog section (DOC-16)
 - [ ] `prettier --check .` clean (DOC-14)
 - [ ] `markdownlint-cli2` clean (DOC-15)
 

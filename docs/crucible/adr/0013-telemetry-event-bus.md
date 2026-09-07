@@ -1,6 +1,6 @@
 # ADR-0013 — Telemetry Event Bus and Schema Versioning
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-07
 - **Deciders:** `jc@archlab.pl`
 

@@ -1,6 +1,6 @@
 # ADR-0014 — Telemetry Storage Format
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-07
 - **Deciders:** `jc@archlab.pl`
 

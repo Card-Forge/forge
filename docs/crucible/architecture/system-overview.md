@@ -43,29 +43,31 @@ a card it refuses — a wrong win rate across 100,000 games looks exactly as con
 
 ## What exists today
 
-**No Go code. `crucible/` has not been created.**
+**The decision and rule set is complete. The Go module exists and holds no engine code.**
 
-```text
-find crucible -name '*.go' 2>/dev/null | wc -l     ->  0        (2026-09-07)
-```
+| Artefact           | Count | Command                                              |
+| ------------------ | ----: | ---------------------------------------------------- |
+| Crucible documents |    45 | `find docs/crucible -name '*.md' \| wc -l`           |
+| Accepted ADRs      |    14 | `ls docs/crucible/adr/0*.md \| wc -l`                |
+| Guidelines         |     7 | `ls docs/crucible/guidelines/0*.md \| wc -l`         |
+| Design documents   |     4 | `ls docs/crucible/design/*-*.md \| wc -l`            |
+| Go files           |    14 | `find crucible -name '*.go' \| wc -l`                |
+| Go lines           | 1,050 | `find crucible -name '*.go' -exec cat {} + \| wc -l` |
 
-What exists is the decision and rule set that governs the code before it is written:
-
-| Artefact           | Count | Command                                      |
-| ------------------ | ----: | -------------------------------------------- |
-| Crucible documents |    36 | `find docs/crucible -name '*.md' \| wc -l`   |
-| Accepted ADRs      |    11 | `ls docs/crucible/adr/0*.md \| wc -l`        |
-| Guidelines         |     7 | `ls docs/crucible/guidelines/0*.md \| wc -l` |
+Those 14 files are `pkg/collect`, `pkg/javarand`, `tools/javacycles` and `tools/enginelint` — support code and build
+tooling. Nothing under `internal/` exists, so no card is parsed and no game runs. [`module-map.md`](module-map.md)
+carries the per-package detail.
 
 And what it is built on, inherited from upstream Forge:
 
-| Input               |                         Size | Command                                                                                       |
-| ------------------- | ---------------------------: | --------------------------------------------------------------------------------------------- |
-| Card scripts        | 33,682 files / 302,710 lines | `find forge-gui/res/cardsfolder -name '*.txt' \| wc -l`                                       |
-| Java port surface   |                209,810 lines | `find forge-{core,game,ai}/src/main/java -name '*.java' -exec cat {} + \| wc -l`              |
-| Java tree, total    |                517,069 lines | `find . -name '*.java' -not -path '*/target/*' -exec cat {} + \| wc -l`                       |
-| Java tests          |                          456 | `grep -rh '@Test' forge-gui-desktop/src/test forge-game/src/test --include='*.java' \| wc -l` |
-| Decklists available |                       14,035 | `find forge-gui/res -name '*.dck' \| wc -l`                                                   |
+| Input               |          Size | Command                                                                                       |
+| ------------------- | ------------: | --------------------------------------------------------------------------------------------- |
+| Card scripts        |  33,682 files | `find forge-gui/res/cardsfolder -name '*.txt' \| wc -l`                                       |
+| Card script lines   |       302,710 | `find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \| wc -l`                        |
+| Java port surface   | 209,810 lines | `find forge-{core,game,ai}/src/main/java -name '*.java' -exec cat {} + \| wc -l`              |
+| Java tree, total    | 517,069 lines | `find . -name '*.java' -not -path '*/target/*' -exec cat {} + \| wc -l`                       |
+| Java tests          |           456 | `grep -rh '@Test' forge-gui-desktop/src/test forge-game/src/test --include='*.java' \| wc -l` |
+| Decklists available |        14,035 | `find forge-gui/res -name '*.dck' \| wc -l`                                                   |
 
 Everything in the next two sections is target state, and each stage names the milestone that builds it.
 

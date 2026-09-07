@@ -78,7 +78,9 @@ about card draw, a 48-bit ceiling is a needless limit on what those claims can m
 
 `pkg/javarand` reproduces the 48-bit LCG exactly — seed scrambling, `next(bits)`, `nextInt(bound)` including its
 power-of-two special case and rejection loop — plus the `Collections.shuffle` algorithm and `percentTrue`. Its M1 exit
-gate is 10^6 seeded draws and shuffles diffed against a Java dump, and it is never the default.
+gate is every draw kind diffed against a golden emitted by a real JVM, and it is never the default. Draw kinds, not draw
+counts: the LCG is deterministic, so a sequence matching at draw 1,000 matches forever, while an untested draw kind can
+be wrong forever.
 
 **Streams are partitioned by purpose, seeded independently.**
 

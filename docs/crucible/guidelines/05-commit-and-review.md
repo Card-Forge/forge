@@ -69,6 +69,9 @@ Types: `port`, `feat`, `fix`, `docs`, `test`, `refactor`, `perf`, `chore`.
 | L5 fuzz / soak                                   | No — opens a bug                             |
 | L6 benchmark regression                          | Yes, if over threshold on a hot path (GO-16) |
 
+Checks whose tooling does not exist yet — `docgate`, the coverage floor, L4-L6 — are enforced by the reviewer until it
+does. A gate listed here is binding either way; only the mechanism differs.
+
 ---
 
 ## REV-5 — Review checklist

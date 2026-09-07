@@ -125,7 +125,7 @@ Which decision governs each step. Nothing here is built; the milestone column sa
 | Priority; a controller answers through `PlayerController`                    | ADR-0010 (scripted, replay, AI) | M5, M7    |
 | AI lookahead: clone, play out, score, discard                                | ADR-0009 + interactions 4 and 5 | M7        |
 | Resolution: registry lookup by API type, effect mutates the game             | ADR-0008                        | M6        |
-| Events to the sink; telemetry folds them                                     | ADR-0013, not yet written       | M8        |
+| Recorder folds events in place; rows to the shard at game end                | ADR-0013                        | M8        |
 | Game ends; worker records the outcome and takes the next spec                | ADR-0005                        | M8        |
 
 ## Where the packages sit
@@ -154,17 +154,14 @@ Listed rather than smoothed over (ARCH-10). Each needs an ADR or a measurement b
   and AI search depth are coupled. Neither has a number, and neither can until a game state exists to measure. M7.
 - **Overlay representation.** Copy-on-write is stated; whether the overlay is a map, a small slice, or an inline array
   is a measurement, not a decision. M5.
-- **Event sink backpressure.** ADR-0005 says telemetry crosses by channel, one writer per worker. What happens when a
-  writer falls behind — block the game, or drop and record the drop — is unsettled and belongs in ADR-0013.
 - **LKI snapshots.** ADR-0009 forbids handle reuse so last-known-information stays valid, but does not say whether an
   LKI snapshot is a card copy or a handle plus a timestamp. M5.
 
 ## Invalidated by
 
 - Any of the five interactions above being contradicted by an implementation
-- ADR-0013 or ADR-0014 landing, which settles the telemetry rows
-- The first `internal/engine` code, which starts replacing this with
-  [`../architecture/engine-state-model.md`](../architecture/system-overview.md)
+- The first `internal/engine` code, which starts replacing this with an architecture document under
+  [`../architecture/`](../architecture/system-overview.md)
 
 ## Related
 

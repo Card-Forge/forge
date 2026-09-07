@@ -126,7 +126,10 @@ The order formats are added is a scheduling decision, made with that report in h
 
 ## Open questions
 
-- **Decklists are not chosen yet.** This is the blocking item; everything else here is structure.
+- **Decklists are not chosen yet.** Everything else here is structure. They need an external source: the 14,035 `.dck`
+  files in this repository are quest, adventure and AI-generated decks, not a competitive metagame. What they gate is
+  M6's backlog — `crucible corpus-coverage --decks gauntlets/modern/` is what defines "done" for card support — not
+  M1-M5, which need no gauntlet.
 - Weights need a source too, and an unweighted first gauntlet is acceptable provided reports say so.
 - Whether sideboards are simulated at all in M6, or deferred. Sideboarding needs `PlayerController` support for
   between-game decisions and is not in the plan's milestone list.

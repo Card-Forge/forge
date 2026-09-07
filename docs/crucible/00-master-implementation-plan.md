@@ -302,13 +302,12 @@ code comments, and commit bodies can cite them.
 fails the build when a new Go package appears without a corresponding entry in `architecture/module-map.md`, or when an
 ADR referenced by a code comment (`// ADR-0009`) does not exist.
 
-## 2.3 ADRs to write first, in order
+## 2.3 The ADR set, written before any Go
 
 Each uses MADR format: Context / Decision Drivers / Considered Options / Decision / Consequences / Status.
 
-**Foundational (must exist before line 1 of Go). All eleven are written and `Accepted` as of 2026-09-07 — see
-[`adr/README.md`](adr/README.md) for the live index; the descriptions below are the original intent, and each ADR's own
-text is authoritative where they differ.**
+**Foundational — all `Accepted` before line 1 of Go. The table is the question each one settles; the ADR itself is
+authoritative, and [`adr/README.md`](adr/README.md) is the index.**
 
 | ADR  | Title                                      | The question it settles                                                                     |
 | ---- | ------------------------------------------ | ------------------------------------------------------------------------------------------- |
@@ -323,19 +322,19 @@ text is authoritative where they differ.**
 | 0009 | Game state representation                  | Arena + integer handles vs. pointers; clone strategy for AI lookahead                       |
 | 0010 | Differential testing strategy              | The four-layer oracle harness (Section 3.3)                                                 |
 | 0011 | Card corpus scoping & coverage gate        | What "done" means for card support                                                          |
+| 0012 | Ports and adapters, and where they stop    | Which seams are interfaces and which are direct calls                                       |
+| 0013 | Telemetry event bus & schema versioning    | Synchronous folding in the game's goroutine; event schema version                           |
+| 0014 | Telemetry storage format                   | NDJSON + gzip shards from the stdlib; DuckDB invoked, never imported                        |
 
 **Near-term subjects, deliberately unnumbered:**
 
 Numbers are allocated when an ADR is written, never reserved in advance. Reserving them locks a subject to a number
 decided before anyone knew what the ADR would say, and leaves a permanent hole if the subject turns out unnecessary —
-ADRP-3 forbids reuse. ADR-0012 was the first of these to be written and took the next free number rather than the one
-this list once assigned it.
+ADRP-3 forbids reuse. Each subject below takes the next free number on the day it is written.
 
 | Subject                                                                  | Needed before       |
 | ------------------------------------------------------------------------ | ------------------- |
 | Error handling & panic policy — engine invariants vs. recoverable errors | M5                  |
-| Telemetry event bus & event schema versioning                            | M8                  |
-| Telemetry storage format — NDJSON+zstd shards, DuckDB/Parquet            | M8                  |
 | AI port strategy & parity tolerance — statistical, not bit-exact         | M7                  |
 | Causal attribution methodology for per-card impact metrics               | M9                  |
 | Reporting output formats & CLI UX                                        | M9                  |
@@ -386,59 +385,22 @@ this list once assigned it.
 
 ## 3.1 Go project layout (ADR-0003)
 
-> **Superseded by [ADR-0003](adr/0003-go-project-layout.md).** The sibling-package tree below mirrors Java and does not
-> compile: `forge-game` has 82 direct two-package import cycles, and Go forbids them. The engine core is one package.
-> Kept here for the reasoning about what belongs where.
+The layout is [ADR-0003](adr/0003-go-project-layout.md)'s: an engine core sized by what must be mutually recursive, with
+acyclic satellites around it. Not a mirror of Java's packages — `forge-game` has 82 direct two-package import cycles and
+Go forbids them, so the mirrored tree does not compile. [`architecture/module-map.md`](architecture/module-map.md)
+tracks which packages exist today.
 
-```text
-crucible/
-  go.mod                        # module github.com/<you>/crucible
-  cmd/
-    crucible/                   # main CLI: run, report, corpus-coverage, parity
-    crucible-oracle/            # differential-test driver (talks to the Java oracle)
-  internal/
-    carddb/                     # ← forge-core: card script loading (P1)
-      script/                   # lexer + line parser for .txt
-      compile/                  # AST builder: abilities, costs, valids, counts (P2)
-    mana/                       # ColorSet, ManaCost, ManaPool, payment
-    cardtype/                   # type line parse & queries
-    engine/                     # ← forge-game
-      game/                     # Game, Match, turn/phase loop, GameAction equivalent
-      card/                     # Card, State, Counters, Attachments, Memory
-      player/
-      zone/                     # zones + stack
-      sa/                       # SpellAbility, targeting, modes
-      cost/                     # cost payment
-      effect/                   # 203 API implementations (P5)
-      trigger/
-      replacement/
-      static/                   # continuous effects, layer system
-      combat/
-      keyword/
-      valid/                    # Valid-string evaluation (CardProperty port)
-      expr/                     # Count$/X expression evaluation
-      event/                    # typed game events (telemetry spine)
-      control/                  # PlayerController interface + Scripted/Replay impls
-    ai/                         # ← forge-ai
-      base/                     # AiController, per-API decision logic
-      eval/                     # board/state evaluation
-      lookahead/                # GameCopier/GameSimulator equivalent
-      profile/                  # .ai profile loading
-    sim/                        # batch runner, worker pool, scheduling
-    telemetry/                  # recorder, aggregation, metric computation
-    store/                      # NDJSON/Parquet writers, DuckDB query layer
-    report/                     # report generation (markdown/HTML/JSON)
-  pkg/
-    collect/                    # OrderedSet, generic helpers
-    javarand/                   # bit-compatible java.util.Random (oracle parity)
-  oracle-java/                  # Maven module: dumpers + recorders against Forge
-  testdata/
-    scenarios/                  # GameState-format fixtures (shared with Java)
-    golden/                     # golden AST dumps, event streams, decision logs
-  tools/
-    docgate/                    # doc-before-code CI check
-    gen/                        # go:generate sources (effect registry, param structs)
-```
+Beyond the packages that ADR names, the module carries:
+
+| Path                  | Contents                                                                |
+| --------------------- | ----------------------------------------------------------------------- |
+| `testdata/scenarios/` | `GameState`-format fixtures, shared with the Java oracle (TEST-5)       |
+| `testdata/golden/`    | Golden AST dumps, event streams, decision logs                          |
+| `tools/docgate/`      | Doc-before-code CI check (DOC-12)                                       |
+| `tools/gen/`          | `go:generate` sources — effect registry, typed param structs (ADR-0008) |
+| `tools/javacycles/`   | Re-runs ADR-0003's cycle count after an upstream sync                   |
+| `tools/enginelint/`   | File-group boundaries inside the single `internal/engine` package       |
+| `oracle-java/`        | Maven module: dumpers and recorders against Forge (ADR-0010)            |
 
 ## 3.2 Porting sequence — exact order, with exit gates
 
@@ -448,8 +410,11 @@ gate is green.**
 ### P0 — Foundation
 
 Repo scaffolding, `go.mod`, lint, CI, `pkg/collect`, `pkg/javarand`, `internal/mana`, `internal/cardtype`, ID types.
-**Gate:** `javarand` reproduces `java.util.Random.nextInt(n)` and `Collections.shuffle` for 10⁶ seeded draws, verified
-against a Java dump. `ManaCost` and type-line parsers round-trip every distinct value in the corpus.
+**Gate:** `javarand` reproduces every draw kind Forge uses — `nextInt()`, `nextInt(n)`, `nextLong`, `nextBoolean`,
+`nextDouble`, `nextFloat`, `nextGaussian`, `Collections.shuffle` — against a golden emitted by a real JVM
+(`crucible/oracle-java` `RandomDumper`, 1,199 records). Kind coverage is the gate, not draw count: the generator is an
+LCG, so a sequence that matches at draw 1,000 matches at draw 10⁶ by construction, while an unexercised draw kind can be
+wrong forever. `ManaCost` and type-line parsers round-trip every distinct value in the corpus.
 
 ### P1 — Static card database (`forge-core` port)
 
@@ -944,106 +909,97 @@ open-ended. Sequence is firm; durations are not.
 
 ## Milestones
 
-### M0 — Documentation & architecture foundation _(no Go code)_ — 1.5–2.5 wks
+### M0 — Documentation & architecture foundation _(no Go code)_ — 1.5-2.5 wks
 
-**Status as of 2026-09-07 — the decision half of M0 is complete.**
+**Complete.**
 
-| #   | Item                                                                             | State                                                                                                              |
-| --- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| 1   | `docs/crucible/` structure, `README.md`, `adr/README.md`                         | Done                                                                                                               |
-| 2   | **ADR-0001 … ADR-0011**                                                          | Done — all eleven `Accepted`                                                                                       |
-| 3   | `guidelines/` — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`, `ARCH-n` | Done — seven documents plus index                                                                                  |
-| 4   | `/CLAUDE.md`                                                                     | Done — inlines the ten non-negotiables and the module-first testing rule                                           |
-| 5   | Six `architecture/` documents                                                    | `system-overview` and `module-map` done. The remaining four describe unbuilt code, so they land M2-M8 under ARCH-2 |
-| 6   | DSL grammars under `porting/dsl/`                                                | Done — six grammars derived from the corpus                                                                        |
-| 7   | `telemetry/metric-definitions.md`                                                | Done — 21 numbered definitions, versioned                                                                          |
-| 8   | `research/meta-gauntlet.md`                                                      | Structure done — Modern first, all formats eventually. Blocked on decklists                                        |
+| #   | Item                                                                             | State                                                                                                                                                                           |
+| --- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | `docs/crucible/` structure, `README.md`, `adr/README.md`                         | Done                                                                                                                                                                            |
+| 2   | **ADR-0001 … ADR-0014**                                                          | Done — all fourteen `Accepted`. The gate asked for 0001-0011; 0012-0014 followed as ports-and-adapters and telemetry came into scope                                            |
+| 3   | `guidelines/` — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`, `ARCH-n` | Done — seven documents plus index                                                                                                                                               |
+| 4   | `/CLAUDE.md`                                                                     | Done — inlines the ten non-negotiables and the module-first testing rule                                                                                                        |
+| 5   | `architecture/` and `design/`                                                    | Done — `system-overview` and `module-map` describe what exists; four design documents (ARCH-10) hold the target shape. `engine-state-model` omitted, covered by `engine-design` |
+| 6   | DSL grammars under `porting/dsl/`                                                | Done — six grammars derived from the corpus                                                                                                                                     |
+| 7   | `telemetry/metric-definitions.md`                                                | Done — 21 numbered definitions, versioned                                                                                                                                       |
+| 8   | `research/meta-gauntlet.md`                                                      | Done — format, sources, refresh cadence, resulting corpus. The Modern decklists themselves need an external source and gate M6's backlog, not M0                                |
 
-The only blocking item left is the Modern decklists for item 8, which need an external source. Items 5 through 8 are
-restated below in their original wording.
+### M1 — Go foundation & the oracle harness skeleton — 1.5-2 wks
 
-5. Write `architecture/system-overview.md`, `module-map.md`, `engine-state-model.md`, `card-compilation-pipeline.md`,
-   `concurrency-and-determinism.md`, `telemetry-pipeline.md`. Governed by `ARCH-n`
-   ([`guidelines/06-architecture-docs.md`](guidelines/06-architecture-docs.md)), which is what keeps them describing
-   what exists rather than what is planned.
-6. Draft the DSL grammar docs under `porting/dsl/` from the analysis in 1.4 — EBNF for the top-level format, param maps,
-   valid strings, count expressions, cost strings.
-7. Write `telemetry/metric-definitions.md` **now**, not later — Phase 4's definitions are design decisions, and writing
-   them last means the engine won't have emitted what they need.
-8. Define the meta gauntlet in `research/meta-gauntlet.md`: format, deck sources, refresh cadence, and the resulting
-   card corpus. Measured against real decklists in this repository, a 30-deck gauntlet is 562 distinct cards needing 71
-   of the 192 APIs used corpus-wide — 1.7% of the corpus (ADR-0011). **Exit gate:** all listed docs exist and are
-   reviewed; ADR-0001…0011 status = Accepted.
+**In progress.**
 
-### M1 — Go foundation & the oracle harness skeleton — 1.5–2 wks
+| #   | Item                                                                    | State                                                               |
+| --- | ----------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| 9   | `crucible/` module, CI (build/lint/test), `pkg/collect`, `pkg/javarand` | Done                                                                |
+| 10  | `oracle-java/` Maven module wired into the build; first dumper          | Done — `RandomDumper`, standalone POM (ADR-0002)                    |
+| 11  | `tools/javacycles`, `tools/enginelint`                                  | Done — both premises of ADR-0003 now machine-checked                |
+| 12  | `internal/mana`, `internal/cardtype`                                    | Not started                                                         |
+| 13  | `tools/docgate`                                                         | Not started — DOC-12 and ADRP-4 are review-enforced until it exists |
 
-9. `crucible/` module, CI (build/lint/test/docgate), `pkg/collect`, `pkg/javarand`, `internal/mana`,
-   `internal/cardtype`.
-10. `oracle-java/` Maven module wired into the build; first dumper stub.
-11. `tools/docgate`. **Exit gate:** P0 gate (Section 3.2) — `javarand` bit-matches Java over 10⁶ draws and shuffles.
+**Exit gate:** P0 gate (Section 3.2). `javarand` is green; the parser round-trip half arrives with item 12.
 
 ### M2 — Card script parser & static DB (foundation port) — 3–4 wks
 
-12. `internal/carddb/script` — full top-level `Key:Value` parser, all faces, all variants.
-13. `CardRulesDumper` in Java; canonical-JSON dumper in Go.
-14. Deck (`.dck`) loading; `crucible corpus-coverage` first version. **Exit gate:** P1 gate — empty diff across all
+14. `internal/carddb/script` — full top-level `Key:Value` parser, all faces, all variants.
+15. `CardRulesDumper` in Java; canonical-JSON dumper in Go.
+16. Deck (`.dck`) loading; `crucible corpus-coverage` first version. **Exit gate:** P1 gate — empty diff across all
     33,682 cards.
 
 ### M3 — DSL compilation to typed AST — 3–5 wks
 
-15. `internal/carddb/compile`: param maps, SVar resolution + `SubAbility$` recursion, cost strings, valid strings,
+17. `internal/carddb/compile`: param maps, SVar resolution + `SubAbility$` recursion, cost strings, valid strings,
     count/X expressions, keyword strings.
-16. `go:generate` pipeline for typed param structs + the effect registry (ADR-0008).
-17. Vocabulary-completeness scanner (hard-fails on unknown keys/props/cost parts).
-18. `porting/parity-matrix.md` generated from the registry. **Exit gate:** P2 gates — zero unknowns outside the explicit
+18. `go:generate` pipeline for typed param structs + the effect registry (ADR-0008).
+19. Vocabulary-completeness scanner (hard-fails on unknown keys/props/cost parts).
+20. `porting/parity-matrix.md` generated from the registry. **Exit gate:** P2 gates — zero unknowns outside the explicit
     allowlist; golden AST diff clean.
 
 ### M4 — Core state model + controller interface + event bus — 2–3 wks
 
-19. `internal/engine/{game,card,player,zone,event,control}`; the ~110-method `PlayerController` interface with
+21. `internal/engine/{game,card,player,zone,event,control}`; the ~110-method `PlayerController` interface with
     `ScriptedController`.
-20. `GameState` fixture load/dump in Go (byte-identical to Java's).
-21. Event schema v1 implemented per ADR-0013. **Exit gate:** P3 gate — fixture round-trip parity.
+22. `GameState` fixture load/dump in Go (byte-identical to Java's).
+23. Event schema v1 implemented per ADR-0013. **Exit gate:** P3 gate — fixture round-trip parity.
 
 ### M5 — Rules kernel — 6–10 wks _(the largest single risk)_
 
-22. Turn/phase/step loop + priority (`PhaseHandler` port).
-23. Zone changes + state-based actions + game-over (`GameAction` port — budget the most time here).
-24. Stack, simultaneous trigger ordering, replacement effects (`MagicStack`, `replacement/`).
-25. Continuous effects & the layer system (`StaticAbilityContinuous`).
-26. Combat (`combat/`), mana payment (`mana/`), mulligans (`mulligan/`).
-27. Scenario-parity harness (Layer 2) + ≥300 fixtures. **Exit gate:** P4 gate — scenario suite green.
+24. Turn/phase/step loop + priority (`PhaseHandler` port).
+25. Zone changes + state-based actions + game-over (`GameAction` port — budget the most time here).
+26. Stack, simultaneous trigger ordering, replacement effects (`MagicStack`, `replacement/`).
+27. Continuous effects & the layer system (`StaticAbilityContinuous`).
+28. Combat (`combat/`), mana payment (`mana/`), mulligans (`mulligan/`).
+29. Scenario-parity harness (Layer 2) + ≥300 fixtures. **Exit gate:** P4 gate — scenario suite green.
 
 ### M6 — Effects, corpus-gated — 6–12 wks _(parallelizable; the long tail)_
 
-28. Implement APIs in corpus-first, then frequency order (Section 1.5). Keywords, triggers, replacements, cost parts
+30. Implement APIs in corpus-first, then frequency order (Section 1.5). Keywords, triggers, replacements, cost parts
     alongside.
-29. Three scenarios minimum per API. Parity matrix updated continuously.
-30. Replay-parity harness (Layer 3) stood up as soon as full games run at all — do not defer this to the end. **Exit
+31. Three scenarios minimum per API. Parity matrix updated continuously.
+32. Replay-parity harness (Layer 3) stood up as soon as full games run at all — do not defer this to the end. **Exit
     gate:** P5 gate — 100% corpus coverage for the active gauntlet; replay parity green over the nightly log corpus.
 
 ### M7 — AI port — 5–8 wks
 
-31. `ComputerUtilMana` first (the runner cannot play a real game without mana planning), then `ComputerUtilCombat`,
+33. `ComputerUtilMana` first (the runner cannot play a real game without mana planning), then `ComputerUtilCombat`,
     `ComputerUtilCard`, `CreatureEvaluator`.
-32. `AiController` + per-API `SpellAbilityAi` decision logic; `.ai` profile loading.
-33. Lookahead simulator on top of the cheap Go state clone. **Exit gate:** P6 gate — statistical parity within stated
+34. `AiController` + per-API `SpellAbilityAi` decision logic; `.ai` profile loading.
+35. Lookahead simulator on top of the cheap Go state clone. **Exit gate:** P6 gate — statistical parity within stated
     bounds vs. Java on the reference gauntlet.
 
 ### M8 — Simulation runner & telemetry — 2–3 wks
 
-34. `internal/sim`: worker pool, seed management, gauntlet config, turn caps, crash isolation (a panicking game fails
+36. `internal/sim`: worker pool, seed management, gauntlet config, turn caps, crash isolation (a panicking game fails
     that game only).
-35. `internal/telemetry`: recorder, castability probe, mana sampler, tenure tracking, aggregation.
-36. `internal/store`: shard writers, merge, DuckDB load, `manifest.json`. **Exit gate:** P7 gate — 100k games clean,
+37. `internal/telemetry`: recorder, castability probe, mana sampler, tenure tracking, aggregation.
+38. `internal/store`: shard writers, merge, DuckDB load, `manifest.json`. **Exit gate:** P7 gate — 100k games clean,
     deterministic re-run byte-identical.
 
 ### M9 — Reporting & the optimization loop — 2–4 wks
 
-37. `internal/report`: matchup matrix w/ CIs, dead-card table, mana health, per-card impact (all four attribution modes,
+39. `internal/report`: matchup matrix w/ CIs, dead-card table, mana health, per-card impact (all four attribution modes,
     each labelled), opening-hand analysis, play/draw split.
-38. Markdown + HTML + JSON output; `crucible report`.
-39. **A/B swap optimizer**: propose candidate swaps from the dead-card and impact tables, run the confirmatory A/B
+40. Markdown + HTML + JSON output; `crucible report`.
+41. **A/B swap optimizer**: propose candidate swaps from the dead-card and impact tables, run the confirmatory A/B
     gauntlet, rank by measured win-rate delta with CIs. This is the actual product. **Exit gate:** P8 gate — blind-test
     diagnosis matches expert assessment on known-good and known-bad decks.
 
