@@ -77,7 +77,7 @@ public class AITest {
         Deck d1 = new Deck();
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("opponent", null)));
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ai",
-                useSimulation ? Set.of(AIOption.USE_SIMULATION) : null)));
+                useSimulation ? Set.of(AIOption.USE_FULL_SIMULATION) : null)));
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ally", null)));
 
         GameRules rules = new GameRules(GameType.Constructed);
