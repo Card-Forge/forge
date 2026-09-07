@@ -11,15 +11,15 @@ Plan: `docs/crucible/00-master-implementation-plan.md`
 
 ## Read before working
 
-| Doing                                          | Read first                                              |
-| ---------------------------------------------- | ------------------------------------------------------- |
-| Writing **any** doc, ADR, comment, commit body | `docs/crucible/guidelines/00-documentation-style.md`    |
-| Writing Go                                     | `docs/crucible/guidelines/01-go-coding-standards.md`    |
-| Porting a Java file                            | `docs/crucible/guidelines/02-java-to-go-translation.md` |
-| Writing tests                                  | `docs/crucible/guidelines/03-testing-standards.md`      |
-| Making an architectural decision               | `docs/crucible/guidelines/04-adr-process.md`            |
-| Writing anything under `architecture/`         | `docs/crucible/guidelines/06-architecture-docs.md`      |
-| Committing / reviewing                         | `docs/crucible/guidelines/05-commit-and-review.md`      |
+| Doing                                               | Read first                                              |
+| --------------------------------------------------- | ------------------------------------------------------- |
+| Writing **any** doc, ADR, comment, commit body      | `docs/crucible/guidelines/00-documentation-style.md`    |
+| Writing Go                                          | `docs/crucible/guidelines/01-go-coding-standards.md`    |
+| Porting a Java file                                 | `docs/crucible/guidelines/02-java-to-go-translation.md` |
+| Writing tests                                       | `docs/crucible/guidelines/03-testing-standards.md`      |
+| Making an architectural decision                    | `docs/crucible/guidelines/04-adr-process.md`            |
+| Writing anything under `architecture/` or `design/` | `docs/crucible/guidelines/06-architecture-docs.md`      |
+| Committing / reviewing                              | `docs/crucible/guidelines/05-commit-and-review.md`      |
 
 Index: `docs/crucible/guidelines/README.md`
 

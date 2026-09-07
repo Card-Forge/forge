@@ -19,18 +19,20 @@ stripped out, or a description of the system somebody hoped to build. Both read 
 
 ---
 
-## ARCH-1 — Know which of the three you are writing
+## ARCH-1 — Know which of the four you are writing
 
-| Document         | Answers                                        | Lifecycle                                     |
-| ---------------- | ---------------------------------------------- | --------------------------------------------- |
-| **ADR**          | Why is it like this? What else was considered? | Immutable and dated. Superseded, never edited |
-| **Architecture** | How does it work, right now?                   | Living. Edited whenever the code moves        |
-| **Guideline**    | What must I do?                                | Living. Normative                             |
+| Document         | Answers                                        | Lifecycle                                                |
+| ---------------- | ---------------------------------------------- | -------------------------------------------------------- |
+| **ADR**          | Why is it like this? What else was considered? | Immutable and dated. Superseded, never edited            |
+| **Architecture** | How does it work, right now?                   | Living. Edited whenever the code moves                   |
+| **Design**       | How will the pieces fit, before they exist?    | Living until built, then replaced by an architecture doc |
+| **Guideline**    | What must I do?                                | Living. Normative                                        |
 
 Confusing them is the common failure. An architecture doc that argues for its design is a late ADR. An ADR that
 describes current structure goes stale the moment the code changes and cannot be updated, because ADRs are immutable.
 
-**Test:** if a sentence could start with "we chose this because", it belongs in an ADR.
+**Test:** if a sentence could start with "we chose this because", it belongs in an ADR. If it could start with "once
+this is built, it will", it belongs in a design document (ARCH-10), not here.
 
 ---
 
@@ -171,6 +173,33 @@ than no number because it looks researched.
 
 ---
 
+## ARCH-10 — Design documents, for what does not exist yet
+
+`architecture/` describes what is. `design/` describes what a set of accepted ADRs adds up to, before any of it is
+built.
+
+The category exists because ADRs are deliberately narrow. Each argues one decision and none shows how the pieces
+compose, so a milestone can satisfy every ADR individually and still assemble something incoherent. A design document is
+where the cross-ADR interactions get pinned — the questions no single ADR owns.
+
+| Rule      | Design document                                                               |
+| --------- | ----------------------------------------------------------------------------- |
+| Location  | `docs/crucible/design/`                                                       |
+| Header    | Must carry **Status: Target** and name the milestone that makes it real       |
+| Reasoning | Still forbidden. Link the ADR (ARCH-3)                                        |
+| Content   | Composition, lifetimes, and interactions — not decisions, and not restatement |
+| Lifecycle | **Replaced** by an architecture document once built, not edited into one      |
+
+Two rules keep it from becoming fiction.
+
+**It may only compose accepted ADRs.** A design document that introduces a decision is an ADR avoiding review. If
+writing one requires a choice nobody has made, stop and write the ADR.
+
+**Every unresolved interaction is listed, not smoothed over.** The value is in naming what the ADRs left ambiguous, so
+an open question is a finding rather than a gap to hide.
+
+---
+
 ## Checklist before merging an architecture doc
 
 - [ ] Describes what exists; anything absent is named with its milestone (ARCH-2)
@@ -180,6 +209,7 @@ than no number because it looks researched.
 - [ ] Ends with an invalidation condition (ARCH-6)
 - [ ] Data flow has no gaps (ARCH-8)
 - [ ] Numbers carry their command and date (ARCH-9)
+- [ ] Design documents carry **Status: Target**, compose only accepted ADRs, and list unresolved interactions (ARCH-10)
 - [ ] Style follows [00-documentation-style](00-documentation-style.md); `prettier` and `markdownlint` clean
 
 ## Related
