@@ -57,6 +57,14 @@ parses scripts and nothing consumes the result.
 
 A document describing an empty repository is still useful. A document describing an imaginary one is not.
 
+**Target state is allowed in its own section, never mixed into a description of the present.** A newcomer needs to know
+where the system is going, so a document may carry a clearly separated target section — but every stage in it names the
+milestone that builds it, and nothing outside that section describes anything unbuilt. Interleaving the two is what
+ARCH-2 exists to prevent; separating them is not a loophole, it is the required shape.
+
+Found while writing [`../architecture/system-overview.md`](../architecture/system-overview.md), where a rule that
+forbade target state outright would have produced a document a newcomer could not use.
+
 ---
 
 ## ARCH-3 — Never restate a decision. Link the ADR
