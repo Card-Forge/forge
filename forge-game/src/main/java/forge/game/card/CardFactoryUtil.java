@@ -1449,8 +1449,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Miracle")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
-            final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self"
-                    + " | MiracleCost$ " + manacost;
+            final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self";
             String abStrPlay = "DB$ Play | Defined$ Self | Optional$ True | PlayCost$ " + manacost;
             if (k.length > 2) {
                 abStrPlay += " | PlayReduceCost$ " + k[2];

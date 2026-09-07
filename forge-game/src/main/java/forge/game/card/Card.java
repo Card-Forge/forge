@@ -3461,19 +3461,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return res;
     }
 
-    public final FCollectionView<SpellAbility> getBasicSpells() {
-        return getBasicSpells(currentState);
-    }
-    public final FCollectionView<SpellAbility> getBasicSpells(CardState state) {
-        final FCollection<SpellAbility> res = new FCollection<>();
-        for (final SpellAbility sa : state.getNonManaAbilities()) {
-            if (sa.isSpell() && sa.isBasicSpell()) {
-                res.add(sa);
-            }
-        }
-        return res;
-    }
-
     // shield = regeneration
     public final int getShieldCount() {
         return shieldCount;
