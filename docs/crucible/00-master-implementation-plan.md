@@ -943,18 +943,19 @@ open-ended. Sequence is firm; durations are not.
 
 **Status as of 2026-09-07 — the decision half of M0 is complete.**
 
-| #   | Item                                                                             | State                                                                    |
-| --- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| 1   | `docs/crucible/` structure, `README.md`, `adr/README.md`                         | Done                                                                     |
-| 2   | **ADR-0001 … ADR-0011**                                                          | Done — all eleven `Accepted`                                             |
-| 3   | `guidelines/` — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`, `ARCH-n` | Done — seven documents plus index                                        |
-| 4   | `/CLAUDE.md`                                                                     | Done — inlines the ten non-negotiables and the module-first testing rule |
-| 5   | Five `architecture/` documents                                                   | **Open** — only the `module-map.md` stub exists                          |
-| 6   | DSL grammars under `porting/dsl/`                                                | **Open** — largest remaining piece                                       |
-| 7   | `telemetry/metric-definitions.md`                                                | **Open**                                                                 |
-| 8   | `research/meta-gauntlet.md`                                                      | **Open** — ADR-0011 makes it load-bearing                                |
+| #   | Item                                                                             | State                                                                               |
+| --- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| 1   | `docs/crucible/` structure, `README.md`, `adr/README.md`                         | Done                                                                                |
+| 2   | **ADR-0001 … ADR-0011**                                                          | Done — all eleven `Accepted`                                                        |
+| 3   | `guidelines/` — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`, `ARCH-n` | Done — seven documents plus index                                                   |
+| 4   | `/CLAUDE.md`                                                                     | Done — inlines the ten non-negotiables and the module-first testing rule            |
+| 5   | Six `architecture/` documents                                                    | `system-overview` done; the other four describe unbuilt code, so M1–M3 under ARCH-2 |
+| 6   | DSL grammars under `porting/dsl/`                                                | Done — five grammars derived from the corpus                                        |
+| 7   | `telemetry/metric-definitions.md`                                                | Done — 21 numbered definitions, versioned                                           |
+| 8   | `research/meta-gauntlet.md`                                                      | Structure done — Modern first, all formats eventually. Blocked on decklists         |
 
-Everything still open is documentation, not decisions. Items 5 through 8 are restated below in their original wording.
+The only blocking item left is the Modern decklists for item 8, which need an external source. Items 5 through 8 are
+restated below in their original wording.
 
 5. Write `architecture/system-overview.md`, `module-map.md`, `engine-state-model.md`, `card-compilation-pipeline.md`,
    `concurrency-and-determinism.md`, `telemetry-pipeline.md`. Governed by `ARCH-n`
