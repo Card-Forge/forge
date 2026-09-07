@@ -352,14 +352,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 });
             }
             // TODO: prevent ai searching its own library when Ob Nixilis, Unshackled is in play
-            if (origin != null && origin.size() == 1 && origin.get(0).isKnown()) {
+            else if (origin != null && origin.size() == 1 && origin.get(0).isKnown()) {
                 // FIXME: make this properly interact with several origin zones
                 list = CardLists.getValidCards(list, type, source.getController(), source, sa);
             }
 
-            if (!activateForCost && list.isEmpty()) {
+            if (!activateForCost &&
+                    (p == ai || !canIgnoreEmptyDefinedPlayers(ai, sa, origin, destination, pDefined)) &&
+                    (list.isEmpty() || ("Battlefield".equals(destination) && Iterables.any(list, card -> ComputerUtil.isETBprevented(card))))) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+
             if ("Atarka's Command".equals(sourceName)
                     && (list.size() < 2 || ai.getLandsPlayedThisTurn() < 1)) {
                 // be strict on playing lands off charms
@@ -426,6 +429,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+    private static boolean canIgnoreEmptyDefinedPlayers(final Player ai, final SpellAbility sa,
+            final List<ZoneType> origin, final String destination, final Iterable<Player> pDefined) {
+        return !sa.usesTargeting() && !sa.isCurse() && Iterables.contains(pDefined, ai)
+                && ("Hand".equals(destination) || "Battlefield".equals(destination))
+                && origin != null && origin.size() == 1
+                && (origin.get(0) == ZoneType.Library || origin.get(0) == ZoneType.Graveyard);
+    }
+
     /**
      * <p>
      * changeHiddenOriginPlayDrawbackAI.
@@ -466,9 +477,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private static AiAbilityDecision hiddenTriggerAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        // Fetching should occur fairly often as it helps cast more spells, and
-        // have access to more mana
-
         List<ZoneType> origin = new ArrayList<>();
         if (sa.hasParam("Origin")) {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));

@@ -2,10 +2,10 @@ package forge;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
-import forge.adventure.stage.WorldStage;
 import forge.assets.FSkinFont;
 
 /**
@@ -23,6 +23,10 @@ public class FrameRate {
     private float frameRate;
     private final FSkinFont font;
     private static FrameRate instance;
+    private int maxClassicSpritesThisFrame = 0;
+    private int historicalClassicMaxSprites = 0;
+    private int maxAdventureSpritesThisFrame = 0;
+    private int historicalAdventureMaxSprites = 0;
 
     public static FrameRate getInstance() {
         return instance == null ? instance = new FrameRate() : instance;
@@ -48,13 +52,11 @@ public class FrameRate {
     }
 
     public void render(boolean showFPS) {
-        if (font == null) // shouldn't be null
+        if (!showFPS || font == null)
             return;
-        if (showFPS) {
-            Forge.getGraphics().getBatch().begin();
-            font.draw(Forge.getGraphics().getBatch(), composeDisplay(), Color.WHITE, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), false, Align.left);
-            Forge.getGraphics().getBatch().end();
-        }
+        Forge.getGraphics().getBatch().begin();
+        font.draw(Forge.getGraphics().getBatch(), composeDisplay(), Color.WHITE, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), false, Align.left);
+        Forge.getGraphics().getBatch().end();
     }
 
     private String composeDisplay() {
@@ -62,13 +64,43 @@ public class FrameRate {
         return (int)frameRate + " FPS | "
             + cardsLoaded + " cards re/loaded | "
             + allocT + " MB | "
-            + Forge.getGraphics().getBatch().maxSpritesInBatch + " Classic Sprites | "
-            + maxSprites() + " Adventure Sprites ";
+            + maxClassicSpritesThisFrame + " Classic Sprites | "
+            + maxAdventureSpritesThisFrame + " Adventure Sprites ";
     }
-    private int maxSprites() {
-        // WorldStage batch (GameStage -> Stage class is managed unless set outside Stage class)
-        // https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/Stage.java#L869
-        return Adventure.getInstance().getUiBatch().maxSpritesInBatch
-            + ((SpriteBatch)WorldStage.getInstance().getBatch()).maxSpritesInBatch;
+
+    public void sampleClassic(boolean showFPS) {
+        if (!showFPS)
+            return;
+        int batchMax = Forge.getGraphics().getBatch().maxSpritesInBatch;
+        if (batchMax > maxClassicSpritesThisFrame) {
+            maxClassicSpritesThisFrame = batchMax;
+        }
+    }
+
+    public void sampleAdventure(Batch batch, boolean showFPS) {
+        if (!showFPS)
+            return;
+        int batchMax = ((SpriteBatch) batch).maxSpritesInBatch;
+        if (batchMax > maxAdventureSpritesThisFrame) {
+            maxAdventureSpritesThisFrame = batchMax;
+        }
+    }
+
+    public void updateHistoricalPeak(boolean update) {
+        if (!update)
+            return;
+        if (maxAdventureSpritesThisFrame > historicalAdventureMaxSprites) {
+            historicalAdventureMaxSprites = maxAdventureSpritesThisFrame;
+        }
+        maxAdventureSpritesThisFrame = 0;
+
+        if (maxClassicSpritesThisFrame > historicalClassicMaxSprites) {
+            historicalClassicMaxSprites = maxClassicSpritesThisFrame;
+        }
+        maxClassicSpritesThisFrame = 0;
+    }
+
+    public int getHistoricalMaxSprites(boolean isAdventure) {
+        return isAdventure ? historicalAdventureMaxSprites : historicalClassicMaxSprites;
     }
 }

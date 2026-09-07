@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Adventure;
 import forge.Forge;
+import forge.FrameRate;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
 
@@ -302,6 +303,7 @@ public class UIScene extends Scene {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
+        FrameRate.getInstance().sampleAdventure(stage.getBatch(), Forge.showFPS);
     }
 
     public UIActor getUI() {
