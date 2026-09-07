@@ -28,16 +28,16 @@ This repo is a fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). 
 
 ## Layout
 
-| Path                           | Contents                                                                  | State                                                    |
-| ------------------------------ | ------------------------------------------------------------------------- | -------------------------------------------------------- |
-| [guidelines/](guidelines/)     | Binding rules — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`    | Written                                                  |
-| [adr/](adr/)                   | Architecture Decision Records                                             | Empty — M0                                               |
-| [design/](design/)             | Target design — how accepted decisions compose (ARCH-10)                  | 3 written; `telemetry-pipeline` blocked on ADR-0013/0014 |
-| [architecture/](architecture/) | System overview, module map, state model, pipelines                       | Stub                                                     |
-| [porting/](porting/)           | Parity matrix, test port matrix, upstream patches, port log, DSL grammars | Stub                                                     |
-| `telemetry/`                   | Event schema, metric definitions, report formats                          | Not written — M0                                         |
-| `runbooks/`                    | How to run a batch, add card support, investigate a parity failure        | Not written                                              |
-| `research/`                    | Meta gauntlet definition, format scope                                    | Not written — M0                                         |
+| Path                           | Contents                                                                  | State                                                      |
+| ------------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| [guidelines/](guidelines/)     | Binding rules — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`    | Written                                                    |
+| [adr/](adr/)                   | Architecture Decision Records                                             | Empty — M0                                                 |
+| [design/](design/)             | Target design — how accepted decisions compose (ARCH-10)                  | 4 written; only `engine-state-model` omitted, as redundant |
+| [architecture/](architecture/) | System overview, module map, state model, pipelines                       | Stub                                                       |
+| [porting/](porting/)           | Parity matrix, test port matrix, upstream patches, port log, DSL grammars | Stub                                                       |
+| `telemetry/`                   | Event schema, metric definitions, report formats                          | Not written — M0                                           |
+| `runbooks/`                    | How to run a batch, add card support, investigate a parity failure        | Not written                                                |
+| `research/`                    | Meta gauntlet definition, format scope                                    | Not written — M0                                           |
 
 ---
 
