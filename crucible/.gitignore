@@ -1,0 +1,4 @@
+# Go build output and the oracle's Maven target dir. `target` is already in the
+# repo-root .gitignore for upstream's modules; this covers crucible/ without
+# editing that upstream file (ADR-0001).
+/oracle-java/target/

@@ -2,15 +2,22 @@
 <!--
   Crucible's differential-testing oracle.
 
-  NOTE ON THE PARENT: this module names the root Forge POM as its parent but is
-  deliberately NOT listed in that POM's <modules>. Maven permits a child to name
-  a parent that does not aggregate it, and doing so keeps the root pom.xml
-  unedited - it is an upstream file that upstream changes often, so a one-line
-  <module> addition there would conflict on every sync (ADR-0001, ADR-0002).
+  STANDALONE ON PURPOSE - no <parent>, and not listed in the root pom.xml
+  <modules>.
 
-  Do not "fix" this by adding a <module> entry upstream.
+  ADR-0002 originally specified naming the root POM as <parent> via
+  <relativePath>. That does not work: the root POM uses CI-friendly versioning,
+  <version>${revision}</version>, so a child must hardcode the resolved value
+  (2.0.15-SNAPSHOT today). That value changes on every upstream release, which
+  would make this file break on a sync - exactly the coupling ADR-0001 exists to
+  avoid. See the correction in ADR-0002.
 
-  Build standalone:
+  Standalone costs nothing today because the dumpers here use only the JDK. When
+  a dumper needs forge-game, add it as an ordinary <dependency> against the
+  artifacts produced by `mvn install -DskipTests` at the repository root, with
+  the version supplied as -Dforge.version=... rather than hardcoded.
+
+  Build:
       mvn -f crucible/oracle-java/pom.xml test
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -18,16 +25,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>forge</groupId>
-    <artifactId>forge</artifactId>
-    <version>2.0.05-SNAPSHOT</version>
-    <relativePath>../../pom.xml</relativePath>
-  </parent>
-
   <groupId>crucible</groupId>
   <artifactId>crucible-oracle</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
+
   <name>Crucible Differential Oracle</name>
   <description>
     Generates golden outputs from the Forge Java engine for the Go port to be
@@ -36,6 +38,8 @@
   </description>
 
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- 17, matching what upstream's own pom.xml targets. -->
     <maven.compiler.release>17</maven.compiler.release>
   </properties>
 </project>

@@ -108,13 +108,17 @@ between a machine and CI.
 The machine this was written on runs JDK 25. It compiles `--release 17` correctly, but upstream does not test it, so CI
 pins 21 and local mismatches are tolerated rather than blessed.
 
-**`crucible/oracle-java/pom.xml` declares the root POM as its `<parent>` via `<relativePath>`, and the root POM does not
-list it as a `<module>`.** Maven permits this: a child may name a parent that does not aggregate it. The oracle inherits
-dependency and plugin management, builds with `mvn -f crucible/oracle-java/pom.xml test` after upstream is installed,
-and the root `pom.xml` is never edited. Adding a `<module>` line instead would have been a one-line upstream edit in a
-file upstream changes often — exactly what ADR-0001 exists to prevent.
+**`crucible/oracle-java/pom.xml` is standalone — no `<parent>`, and not listed in the root POM's `<modules>`.** The
+original text specified a parent via `<relativePath>`; see the second correction below for why that does not work.
 
-## Correction — 2026-09-06
+The superseded reasoning, kept because the goal it served still holds: a child may name a parent that does not aggregate
+it, which would have inherited dependency management while leaving the root `pom.xml` unedited. Maven permits this: a
+child may name a parent that does not aggregate it. The oracle inherits dependency and plugin management, builds with
+`mvn -f crucible/oracle-java/pom.xml test` after upstream is installed, and the root `pom.xml` is never edited. Adding a
+`<module>` line instead would have been a one-line upstream edit in a file upstream changes often — exactly what
+ADR-0001 exists to prevent.
+
+## Correction 1 — 2026-09-06
 
 The Dependabot decision above was incomplete, and the gap showed up within the hour.
 
@@ -147,6 +151,39 @@ Verify current state with:
 gh api repos/jczastkiewicz/crucible/vulnerability-alerts -i | head -1        # 204 = on
 gh api repos/jczastkiewicz/crucible/automated-security-fixes                # {"enabled":false}
 ```
+
+## Correction 2 — 2026-09-07
+
+The oracle POM arrangement above does not work, and was found the first time it was built.
+
+The decision specified `crucible/oracle-java/pom.xml` naming the root Forge POM as its `<parent>` via `<relativePath>`.
+Maven does permit a child to name a parent that does not aggregate it, so that part was right. What the decision missed
+is how the root POM is versioned:
+
+```xml
+<version>${revision}</version>
+<revision>${versionCode}${snapshotName}</revision>
+```
+
+CI-friendly versioning. A child naming this parent must hardcode the **resolved** value — `2.0.15-SNAPSHOT` today —
+because Maven cannot interpolate a property into a parent version before the parent is resolved. Attempting it fails
+outright:
+
+```text
+Non-resolvable parent POM for crucible:crucible-oracle: Could not find artifact forge:forge:pom:2.0.05-SNAPSHOT
+```
+
+And hardcoding the correct value only moves the problem: `versionCode` changes on every upstream release, so the file
+would break on a sync. That is precisely the coupling ADR-0001 exists to avoid, arriving through the mechanism chosen to
+avoid it.
+
+**Resolution: the oracle POM is standalone.** No parent, its own coordinates, `maven.compiler.release` set to 17 to
+match upstream. It costs nothing today because the dumpers use only the JDK. When one needs `forge-game`, it becomes an
+ordinary `<dependency>` against artifacts from `mvn install -DskipTests` at the root, with the version passed as
+`-Dforge.version=...` rather than hardcoded.
+
+Verified: `mvn -f crucible/oracle-java/pom.xml compile` succeeds, and the built dumper reproduces the committed golden
+byte-for-byte.
 
 ## Consequences
 
