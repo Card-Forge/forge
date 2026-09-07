@@ -1,6 +1,6 @@
 # ADR-0009 — Game State Representation
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-07
 - **Deciders:** `jc@archlab.pl`
 

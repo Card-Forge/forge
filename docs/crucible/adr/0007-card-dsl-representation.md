@@ -1,6 +1,6 @@
 # ADR-0007 — Card DSL Representation
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-07
 - **Deciders:** `jc@archlab.pl`
 
