@@ -88,6 +88,73 @@ ADR-0009). That is what makes `valid` and `expr` separate packages rather than c
 Crucible semantics. Everything else stays unimportable from outside, because there is no API stability promise while the
 port is in progress.
 
+## Correction — 2026-09-07
+
+Two things, found while looking for a way out of the single-package core rather than while defending it.
+
+### The size estimate was low by roughly 40%
+
+The Consequences below say "plausibly 30k to 50k lines". Measured against what actually has to be in the cyclic core:
+
+```text
+forge-game, src/main                    125,436
+  GUI view-models, never ported          -3,974
+  ability/effects -> engine/effect       -26,583
+  ------------------------------------------------
+  genuinely cyclic core                   94,879
+  accessor declarations that vanish      -10,263   (3,421 declarations, GO-13)
+  valid/ and expr/ leave the core         -6,085   (CardProperty + AbilityUtils)
+  ------------------------------------------------
+  subtotal                                78,531
+  Go 20-35% denser than Java          51,000-63,000
+```
+
+**A realistic figure is 50,000 to 65,000 lines, not 30,000 to 50,000.** The decision does not change — there is no
+alternative, as the next section shows — but anyone costing M5 from the old number would be planning against a core
+about 40% smaller than the one they will get.
+
+### Handles do not dissolve the cycles, and neither does deleting the GUI
+
+The 82 cycles were measured on Java, where cards hold `*Game`. [ADR-0009](0009-game-state-representation.md) removes
+exactly that, so the obvious question is whether the ported design still cycles. It does:
+
+| Scenario                                                       | Cycles |
+| -------------------------------------------------------------- | -----: |
+| Java as-is                                                     |     82 |
+| Minus GUI view-models, which Crucible never ports              |     82 |
+| Minus shared base types and enums, extracted to a leaf package |     81 |
+| Both                                                           | **81** |
+
+Handles dissolve three cycles. Deleting the entire view layer dissolves none. Extracting `CardTraitBase`, `IHasSVars`,
+`EvenOdd`, `Direction` and `GameStage` into a leaf package dissolves one.
+
+What remains is genuine domain coupling — `card` with `zone`, `card` with `player`, `spellability` with `trigger`,
+`cost` with `mana`, `phase` with `combat`. Those are Magic's relationships, not Java artefacts, and no arrangement of Go
+packages removes them.
+
+**So the measurement strengthens this ADR rather than weakening it**, which is worth recording precisely because the
+investigation was looking for the opposite result.
+
+### Both numbers are now reproducible
+
+`crucible/tools/javacycles` re-runs the cycle count, so the premise can be checked after an upstream sync rather than
+trusted:
+
+```console
+$ cd crucible && go run ./tools/javacycles -root ../forge-game/src/main/java -prefix forge.game
+packages: 21
+direct two-package cycles: 82
+```
+
+Pass `-expect 82` to make a change in the premise a build failure.
+
+### And the weakest consequence now has a tool
+
+The Consequences below admit that "discipline replaces enforcement inside that boundary, which is exactly the weakest
+kind of guarantee". `crucible/tools/enginelint` closes that gap: it groups the package's own files, and fails on a
+reference crossing a boundary the config does not allow. Go offers no sub-package visibility, so this is the only way
+the arrangement can be enforced rather than remembered.
+
 ## Consequences
 
 **Good.** The layout compiles, which the mirrored alternative does not. Dependency direction is a single arrow into

@@ -15,14 +15,17 @@ Column meaning:
 
 ## Packages
 
-| Package                                          | Responsibility                                                                      | Java provenance                                                   | Port log                                                 |
-| ------------------------------------------------ | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------- |
-| [`pkg/collect`](../../../crucible/pkg/collect)   | Insertion-ordered set, because iteration order is load-bearing for trigger ordering | Guava-backed `FCollection`, used throughout `forge-game`          | — new code, not a line port                              |
-| [`pkg/javarand`](../../../crucible/pkg/javarand) | Bit-exact `java.util.Random`, for differential testing only                         | `java.util.Random`, `Collections.shuffle`, `MyRandom.percentTrue` | — algorithm is specified by javadoc, not read from Forge |
+| Package                                                  | Responsibility                                                                      | Java provenance                                                   | Port log                                                 |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------- |
+| [`pkg/collect`](../../../crucible/pkg/collect)           | Insertion-ordered set, because iteration order is load-bearing for trigger ordering | Guava-backed `FCollection`, used throughout `forge-game`          | — new code, not a line port                              |
+| [`pkg/javarand`](../../../crucible/pkg/javarand)         | Bit-exact `java.util.Random`, for differential testing only                         | `java.util.Random`, `Collections.shuffle`, `MyRandom.percentTrue` | — algorithm is specified by javadoc, not read from Forge |
+| [`tools/enginelint`](../../../crucible/tools/enginelint) | Enforces file-group boundaries inside the single `internal/engine` package          | — new code; exists because Go has no sub-package visibility       | —                                                        |
+| [`tools/javacycles`](../../../crucible/tools/javacycles) | Reproduces ADR-0003's Java package-cycle count                                      | — new code                                                        | —                                                        |
 
-**Two packages, both in `pkg/`.** That is deliberate and temporary: `pkg/` is reserved for code with no Crucible
-semantics ([ADR-0003](../adr/0003-go-project-layout.md)), and these two qualify — an ordered set and a generator port.
-Everything that follows goes in `internal/`.
+**Four packages: two in `pkg/`, two in `tools/`.** That is deliberate and temporary: `pkg/` is reserved for code with no
+Crucible semantics ([ADR-0003](../adr/0003-go-project-layout.md)), and these two qualify — an ordered set and a
+generator port. `tools/` holds build-time commands that are never imported by the engine. Everything else goes in
+`internal/`.
 
 ## Not Go, but built here
 

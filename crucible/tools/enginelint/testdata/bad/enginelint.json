@@ -1,0 +1,10 @@
+{
+  "package": ".",
+  "groups": {
+    "state": ["state.go"],
+    "stack": ["stack.go"]
+  },
+  "allow": {
+    "stack": ["state"]
+  }
+}

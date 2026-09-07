@@ -49,6 +49,22 @@ jobs:
       - name: go test -race
         run: go test -race -count=1 ./...
 
+      # ADR-0003's premise, re-checked rather than trusted. If an upstream sync
+      # ever changes the coupling in forge-game, the single-package engine core
+      # needs revisiting, and this is how we find out instead of assuming.
+      - name: ADR-0003 premise — java package cycles
+        run: go run ./tools/javacycles -root ../forge-game/src/main/java -prefix forge.game -expect 82
+
+      # ADR-0003 admits "discipline replaces enforcement inside that boundary".
+      # enginelint is the enforcement. Skipped until internal/engine exists.
+      - name: enginelint
+        run: |
+          if [ -f internal/engine/enginelint.json ]; then
+            go run ./tools/enginelint -config internal/engine/enginelint.json
+          else
+            echo "internal/engine does not exist yet (lands at M4); nothing to check"
+          fi
+
   oracle-parity:
     name: javarand vs java.util.Random
     runs-on: ubuntu-latest

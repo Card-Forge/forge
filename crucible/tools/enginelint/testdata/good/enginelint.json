@@ -1,0 +1,12 @@
+{
+  "package": ".",
+  "groups": {
+    "state": ["state.go"],
+    "layers": ["layers.go"],
+    "stack": ["stack.go"]
+  },
+  "allow": {
+    "layers": ["state"],
+    "stack": ["layers", "state"]
+  }
+}
