@@ -332,6 +332,10 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
             if ("True".equalsIgnoreCase(params.get("Blessing")) != hostController.hasBlessing()) return false;
         }
 
+        if (params.containsKey("EnduringStory")) {
+            if ("True".equalsIgnoreCase(params.get("EnduringStory")) != hostController.hasEnduringStory()) return false;
+        }
+
         if (params.containsKey("DayTime")) {
             if ("Day".equalsIgnoreCase(params.get("DayTime"))) {
                 if (!game.isDay()) {

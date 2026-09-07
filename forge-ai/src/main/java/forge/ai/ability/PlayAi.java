@@ -63,9 +63,8 @@ public class PlayAi extends SpellAbilityAi {
         if ("ReplaySpell".equals(logic)) {
             if (ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"), false)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         } else if (logic.startsWith("NeedsChosenCard")) {
             int minCMC = 0;
             if (sa.getPayCosts().getCostMana() != null) {
@@ -74,9 +73,8 @@ public class PlayAi extends SpellAbilityAi {
             cards = CardLists.filter(cards, CardPredicates.greaterCMC(minCMC));
             if (chooseSingleCard(ai, sa, cards, sa.hasParam("Optional"), null, null) != null) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         } else if ("WithTotalCMC".equals(logic)) {
             // Try to play only when there are more than three playable cards.
             if (cards.size() < 3)
@@ -104,9 +102,8 @@ public class PlayAi extends SpellAbilityAi {
 
             if (t.isPermanent() && !t.isLand()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

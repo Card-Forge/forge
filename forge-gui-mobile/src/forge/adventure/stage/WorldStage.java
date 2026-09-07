@@ -7,11 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.Forge;
+import forge.OverlayText;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.DuelScene;
+import forge.adventure.scene.GameScene;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.TileMapScene;
@@ -25,6 +27,7 @@ import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.MyRandom;
+import forge.util.ScreenUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -121,7 +124,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER, mob.getData().boss ? 400 : 200);
                     Forge.advFreezePlayerControls = true;
                     player.clearCollisionHeight();
-                    startPause(0.8f, () -> {
+                    float attackDuration = Math.max(
+                            player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f),
+                            mob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.8f));
+                    startPause(attackDuration, () -> {
                         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
                         DuelScene duelScene = DuelScene.instance();
@@ -130,7 +136,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                                 collided = false;
                                 duelScene.initDuels(player, mob);
                                 Forge.switchScene(duelScene);
-                            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
+                            }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                             currentMob = mob;
                             WorldSave.getCurrentSave().autoSave();
                         });
@@ -164,13 +170,16 @@ public class WorldStage extends GameStage implements SaveFileContent {
             currentMob.clearCollisionHeight();
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
+            float attackDuration = Math.max(1f,
+                    player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 1f));
             currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
                     currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
                     currentMob.resetCollisionHeight();
-                    startPause(0.3f, () -> {
+                    float deathDuration = currentMob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Death, 0.3f);
+                    startPause(deathDuration, () -> {
                         RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
                         WorldStage.this.removeEnemy(currentMob);
                         AdventureQuestController.instance().updateQuestsWin(currentMob);
@@ -179,12 +188,15 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         currentMob = null;
                     });
                 }
-            }, 1f);
+            }, attackDuration);
         } else {
             currentMob.clearCollisionHeight();
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            startPause(0.5f, () -> {
+            float resultAnimationDuration = Math.max(
+                    player.getActionAnimationDuration(CharacterSprite.AnimationTypes.Hit, 0.5f),
+                    currentMob.getActionAnimationDuration(CharacterSprite.AnimationTypes.Attack, 0.5f));
+            startPause(resultAnimationDuration, () -> {
                 currentMob.resetCollisionHeight();
                 boolean defeated = Current.player().defeated();
                 AdventureQuestController.instance().updateQuestsLose(currentMob);
@@ -213,10 +225,14 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     if (point == collidingPoint) {
                         continue;
                     }
-                    WorldSave.getCurrentSave().autoSave();
-                    loadPOI(point.getPointOfInterest());
-                    point.getMapSprite().checkOut();
-                    WorldSave.getCurrentSave().getPointOfInterestChanges(point.getPointOfInterest().getID()).visit();
+                    // The loadPOI generates booster and other things that may take time to load, so show a little loading text.
+                    OverlayText.getInstance().update("[%240]" + GameScene.instance().getLocationColorID() + "{CAROUSEL} L O A D I N G ");
+                    startPause(1f, ()-> {
+                        WorldSave.getCurrentSave().autoSave();
+                        loadPOI(point.getPointOfInterest());
+                        point.getMapSprite().checkOut();
+                        WorldSave.getCurrentSave().getPointOfInterestChanges(point.getPointOfInterest().getID()).visit();
+                    });
                     return true;
                 } else {
                     if (point == collidingPoint) {
@@ -230,8 +246,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
     public void loadPOI(PointOfInterest poi) {
         try {
-            TileMapScene.instance().load(poi);
             stop();
+            TileMapScene.instance().load(poi);
             TileMapScene.instance().setFromWorldMap(true);
             Forge.switchScene(TileMapScene.instance());
         } catch (Exception e) {
@@ -266,7 +282,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
 
         World world = WorldSave.getCurrentSave().getWorld();
-        int currentBiome = World.highestBiome(world.getBiome((int) player.getX() / world.getTileSize(), (int) player.getY() / world.getTileSize()));
+        int currentBiome = World.highestBiome(world.getBiome((int) ((player.getX() + player.getWidth() / 2f) / world.getTileSize()), (int) (player.getY() / world.getTileSize())));
         List<BiomeData> biomeData = WorldSave.getCurrentSave().getWorld().getData().GetBiomes();
         float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2 : 1;
         if (biomeData.size() <= currentBiome) {// "if isOnRoad
@@ -504,9 +520,9 @@ public class WorldStage extends GameStage implements SaveFileContent {
         for (AdventureQuestData adq: Current.player().getQuests())
         {
             if (adq.isTracked) {
-                PointOfInterest nearestValidPOI = adq.getClosestValidPOI(player.pos());
+                PointOfInterest nearestValidPOI = adq.getClosestValidPOI(player.getCenter());
                 if (nearestValidPOI != null) {
-                    navDirection = new Vector2(nearestValidPOI.getPosition()).sub(player.pos());
+                    navDirection = new Vector2(nearestValidPOI.getCenter()).sub(player.getCenter());
                     break;
                 }
 
@@ -527,7 +543,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     {
                         EnemySprite sprite = active.getValue();
                         if (sprite.equals(target)){
-                            navDirection = new Vector2(adq.getTargetEnemySprite().pos()).sub(player.pos());
+                            navDirection = new Vector2(adq.getTargetEnemySprite().getCenter()).sub(player.getCenter());
                         }
                     }
                 }

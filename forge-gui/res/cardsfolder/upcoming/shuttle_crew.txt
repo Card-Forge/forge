@@ -1,0 +1,9 @@
+Name:Shuttle Crew
+ManaCost:2 W
+Types:Creature Human Officer
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this creature enters, it deals 4 damage to target tapped creature an opponent controls.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.tapped+OppCtrl | ValidTgtsDes$ tapped creature an opponent controls | NumDmg$ 4
+SVar:PlayMain1:TRUE
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen this creature enters, it deals 4 damage to target tapped creature an opponent controls.

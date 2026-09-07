@@ -1,6 +1,6 @@
 [metadata]
 Code=SDS
-Date=2026-11-20
+Date=2026-11-13
 Name=Stardates
 Type=Collector_Edition
 ScryfallCode=SDS

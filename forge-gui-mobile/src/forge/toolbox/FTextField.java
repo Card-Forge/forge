@@ -9,6 +9,7 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
+import forge.gui.GuiBase;
 import forge.gui.interfaces.ITextField;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
@@ -53,6 +54,11 @@ public class FTextField extends FDisplayObject implements ITextField {
     private int alignment;
     private int selStart, selLength;
     private boolean isEditing, readOnly, isNumeric;
+    // CHANGE fires only on commit (endEdit) unless a field opts into live per-keystroke events.
+    // Several consumers treat CHANGE as a committed value — the online chat sends a network message
+    // per event and the lobby name field broadcasts full slot state per event — so per-keystroke
+    // firing must be opt-in, reserved for local-only uses like search filters.
+    private boolean liveChangeEvents;
 
     private final FPopupMenu contextMenu = new FPopupMenu() {
         @Override
@@ -90,6 +96,12 @@ public class FTextField extends FDisplayObject implements ITextField {
 
     public String getText() {
         return text;
+    }
+    public boolean isEditing() {
+        return isEditing;
+    }
+    public void setLiveChangeEvents(boolean liveChangeEvents0) {
+        liveChangeEvents = liveChangeEvents0;
     }
     public void setText(String text0) {
         if (text0 == null) {
@@ -254,7 +266,33 @@ public class FTextField extends FDisplayObject implements ITextField {
 
             @Override
             public boolean keyTyped(char ch) {
+                // iOS fix: the software keyboard delivers backspace/delete through
+                // keyTyped as \b (0x08) or 0x7F, not as a keyDown with
+                // Keys.BACKSPACE. Without this, pressing delete inserts a control
+                // character instead of deleting (the delete key does nothing in the
+                // Settings search field). Mirror the keyDown BACKSPACE handling.
+                if (ch == '\b' || ch == '\u007F') {
+                    if (text.length() > 0) {
+                        if (selLength == 0) { //delete previous character if selection empty
+                            if (selStart > 0) {
+                                selStart--;
+                            }
+                            selLength = 1;
+                        }
+                        insertText("");
+                        if (liveChangeEvents && changedHandler != null) { //live-filter search fields as characters are removed
+                            changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
+                        }
+                    }
+                    return true;
+                }
+                if (ch < ' ') { //ignore other control characters
+                    return false;
+                }
                 insertText(String.valueOf(ch));
+                if (liveChangeEvents && changedHandler != null) { //live-filter search fields as characters are typed
+                    changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
+                }
                 return true;
             }
 
@@ -270,6 +308,14 @@ public class FTextField extends FDisplayObject implements ITextField {
                     Forge.endKeyInput();
                     return true;
                 case Keys.BACKSPACE: //also handles Delete since those are processed the same by libgdx
+                    // iOS: a hardware backspace arrives twice while editing — this queued keyDown
+                    // plus keyTyped('\b') from gdx's invisible-UITextField delegate (the same path
+                    // the software keyboard uses; the backend suppresses its own queued KEY_TYPED
+                    // while that field is active, but not this keyDown). Skip here so the keyTyped
+                    // path performs the one deletion whichever keyboard sent it.
+                    if (GuiBase.isIOS()) {
+                        return true;
+                    }
                     if (text.length() > 0) {
                         if (selLength == 0) { //delete previous or next character if selection empty
                             if (selStart > 0) {
@@ -278,6 +324,9 @@ public class FTextField extends FDisplayObject implements ITextField {
                             selLength = 1;
                         }
                         insertText("");
+                        if (liveChangeEvents && changedHandler != null) { //live-filter search fields as characters are removed
+                            changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
+                        }
                     }
                     return true;
                 case Keys.LEFT:

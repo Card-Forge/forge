@@ -1,0 +1,9 @@
+Name:Old Fat Spider Can't See Me
+ManaCost:2 U
+Types:Enchantment Saga
+K:Chapter:4:DBPump,DBPrevent,DBDraw,DBDraw
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Hexproof | Duration$ AsLongAsInPlay | SpellDescription$ Target creature you control gains hexproof for as long as this Saga remains on the battlefield.
+SVar:DBPrevent:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | KW$ Prevent all damage that would be dealt by CARDNAME. | Duration$ AsLongAsInPlay | SpellDescription$ Prevent all damage that would be dealt by up to one target creature for as long as this Saga remains on the battlefield.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+DeckHas:Ability$Token
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Target creature you control gains hexproof for as long as this Saga remains on the battlefield.\nII — Prevent all damage that would be dealt by up to one target creature for as long as this Saga remains on the battlefield.\nIII, IV — Draw a card.

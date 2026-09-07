@@ -392,6 +392,18 @@ public class HostedMatch {
             humanController.getGui().updateDayTime(null);
         }
         humanControllers.clear();
+
+        // Force GC here rather than in Match.startGame so it runs ONLY for
+        // GUI-hosted matches — headless AI sims (DeckBattler, SimulateMatch,
+        // quest-draft bracket) build Match directly and bypass HostedMatch.
+        // Runs after game=null + afterGameEnd above, so the finished game's
+        // whole object graph is collectible (more than a gc while it's still
+        // referenced). iOS only: it keeps the iPad under its jetsam ceiling
+        // across the games of a multi-game Commander match; other platforms
+        // don't need it and shouldn't pay the GC stall.
+        if (GuiBase.isIOS()) {
+            System.gc();
+        }
     }
 
     public void pause() {

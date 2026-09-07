@@ -8,34 +8,83 @@ import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.tommyettinger.textra.Font;
 import forge.Forge;
+import forge.Graphics;
+import forge.animation.GifAnimation;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
 
 public class Assets implements Disposable {
+    public static Assets instance;
+    public static Assets getInstance() {
+        return instance == null ? instance = new Assets() : instance;
+    }
+    /**
+     * Custom FileHandleResolver for iOS/Android that handles both:
+     * - Absolute paths (for writable cache/Documents files)
+     * - Relative paths (for read-only bundle resources)
+     */
+    private class HybridFileHandleResolver implements FileHandleResolver {
+        private final AbsoluteFileHandleResolver absoluteResolver = new AbsoluteFileHandleResolver();
+        private final InternalFileHandleResolver internalResolver = new InternalFileHandleResolver();
+
+        @Override
+        public FileHandle resolve(String fileName) {
+            // iOS only: bundle-internal resources must resolve via internal() (the app bundle
+            // lives behind a /var symlink that absolute() fails to realpath inside the sandbox).
+            // All other platforms keep master's absolute-resolver behavior unchanged — Android's
+            // assets are extracted to storage and were always resolved absolutely.
+            if (GuiBase.isIOS() && !fileName.startsWith("/")) {
+                return internalResolver.resolve(fileName);
+            }
+            return absoluteResolver.resolve(fileName);
+        }
+    }
+
+    /**
+     * FileHandle for a resource, mirroring {@link HybridFileHandleResolver} for direct (non-manager)
+     * use — shared by FSkin/FSkinFont. iOS must use internal() with a relative path for bundled
+     * resources (the app bundle lives behind a /var symlink that absolute() fails to realpath inside
+     * the sandbox); only paths under ASSETS_DIR (the read-only bundle) are rerouted, so writable
+     * locations (cache/Documents — downloaded skins, generated .fnt files, planechase pics) keep
+     * absolute(), which works fine in the sandbox. Every other platform keeps absolute() throughout
+     * — Android's assets are extracted to storage and are NOT reachable via internal() APK paths.
+     */
+    FileHandle getFileHandle(String path) {
+        if (GuiBase.isIOS() && path.startsWith(ForgeConstants.ASSETS_DIR)) {
+            return Gdx.files.internal(path.substring(ForgeConstants.ASSETS_DIR.length()));
+        }
+        return Gdx.files.absolute(path);
+    }
+
     private MemoryTrackingAssetManager manager;
     private HashMap<Integer, FSkinFont> fonts;
-    private HashMap<String, FImageComplex> cardArtCache;
+    private LinkedHashMap<String, FImageComplex> cardArtCache;
     private HashMap<String, FImage> avatarImages;
     private HashMap<String, FSkinImageInterface> manaImages;
     private HashMap<String, FSkinImageInterface> symbolLookup;
@@ -49,102 +98,133 @@ public class Assets implements Disposable {
     private ObjectMap<Integer, BitmapFont> counterFonts;
     private ObjectMap<String, Texture> fallback_skins;
     private ObjectMap<String, Texture> tmxMap;
-    private Texture defaultImage, dummy;
+    private Texture defaultImage, blackTexture;
     private TextureParameter textureParameter;
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
-    private Texture holofoil;
+    private Texture whiteTexture, backdropTexture, grayTexture, holofoil;
+    private FrameBuffer cardFrameBuffer, itemFrameBuffer;
+    private GifAnimation gifAnimation;
+    private Graphics assetGraphics;
+    private boolean isDisposed = false;
 
-    public Assets() {
+    private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
         try {
             //init titleLQ
-            if (GuiBase.isAndroid())
+            if (GuiBase.isMobile())
                 getTexture(Gdx.files.internal("fallback_skin").child(titleFilename));
             else
                 getTexture(Gdx.files.classpath("fallback_skin").child(titleFilename));
             //init transition
-            if (GuiBase.isAndroid())
+            if (GuiBase.isMobile())
                 getTexture(Gdx.files.internal("fallback_skin").child("transition.png"));
             else
                 getTexture(Gdx.files.classpath("fallback_skin").child("transition.png"));
         } catch (Exception e) {
             fallback_skins().clear();
-            fallback_skins().put("title", getDummy());
-            fallback_skins().put("transition", getDummy());
+            fallback_skins().put("title", getBlackTexture());
+            fallback_skins().put("transition", getBlackTexture());
         }
     }
 
     @Override
     public void dispose() {
-        try {
+        if (!isDisposed) {
+            isDisposed = true;
             if (counterFonts != null) {
                 for (BitmapFont bitmapFont : counterFonts.values())
-                    bitmapFont.dispose();
+                    Forge.safeDispose(bitmapFont);
                 counterFonts.clear();
             }
-        } catch (Exception ignored) {}
-        try {
             if (fallback_skins != null) {
                 for (Texture texture : fallback_skins.values())
-                    texture.dispose();
+                    Forge.safeDispose(texture);
                 fallback_skins.clear();
             }
-        } catch (Exception ignored) {}
-        try {
             if (tmxMap != null) {
                 for (Texture texture : tmxMap.values())
-                    texture.dispose();
+                    Forge.safeDispose(texture);
                 tmxMap.clear();
             }
-        } catch (Exception ignored) {}
-        try {
-            if (defaultImage != null)
-                defaultImage.dispose();
-        } catch (Exception ignored) {}
-        try {
-            if (dummy != null)
-                dummy.dispose();
-        } catch (Exception ignored) {}
-        try {
             if (textrafonts != null) {
                 for (Font f : textrafonts.values())
-                    f.dispose();
+                    Forge.safeDispose(f);
+                textrafonts.clear();
             }
-        } catch (Exception ignored) {}
-        if (cardArtCache != null)
-            cardArtCache.clear();
-        if (avatarImages != null)
-            avatarImages.clear();
-        if (manaImages != null)
-            manaImages.clear();
-        if (symbolLookup != null)
-            symbolLookup.clear();
-        if (images != null)
-            images.clear();
-        if (avatars != null)
-            avatars.clear();
-        if (sleeves != null)
-            sleeves.clear();
-        if (cracks != null)
-            cracks.clear();
-        if (borders != null)
-            borders.clear();
-        if (deckbox != null)
-            deckbox.clear();
-        if (cursor != null)
-            cursor.clear();
-        if (fonts != null)
-            fonts.clear();
-        try {
-            if (manager != null)
-                manager.dispose();
-        } catch (Exception ignored) {}
+            Forge.safeDispose(
+                defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
+                cardFrameBuffer, itemFrameBuffer, gifAnimation, assetGraphics);
+            if (cardArtCache != null)
+                cardArtCache.clear();
+            if (avatarImages != null)
+                avatarImages.clear();
+            if (manaImages != null)
+                manaImages.clear();
+            if (symbolLookup != null)
+                symbolLookup.clear();
+            if (images != null)
+                images.clear();
+            if (avatars != null)
+                avatars.clear();
+            if (sleeves != null)
+                sleeves.clear();
+            if (cracks != null)
+                cracks.clear();
+            if (borders != null)
+                borders.clear();
+            if (deckbox != null)
+                deckbox.clear();
+            if (cursor != null)
+                cursor.clear();
+            if (fonts != null)
+                fonts.clear();
+            Forge.safeDispose(manager);
+        }
+    }
+
+    public Graphics getAssetGraphics() {
+        if (assetGraphics == null)
+            assetGraphics = new Graphics(Forge.LOW_SPRITES_CAP);
+        return assetGraphics;
+    }
+
+    public GifAnimation getGifAnimation() {
+        return gifAnimation;
+    }
+
+    public void setGifAnimation(FileHandle file, Animation.PlayMode playMode) {
+        if (file.exists())
+            gifAnimation = new GifAnimation(file.path(), playMode);
+    }
+
+    public void playGifAnimation() {
+        if (gifAnimation != null)
+            gifAnimation.start();
+    }
+
+    public void stopGifAnimation() {
+        if (gifAnimation != null)
+            gifAnimation.stop();
+    }
+
+    public FrameBuffer getItemFrameBuffer(final int w, final int h, boolean isCard) {
+        FrameBuffer buffer = isCard ? cardFrameBuffer : itemFrameBuffer;
+        if (buffer == null) {
+            try {
+                buffer =  new FrameBuffer(Pixmap.Format.RGB565, w, h, false);
+            } catch (Exception e) {
+                // framebuffer creation failed
+                e.printStackTrace();
+            }
+        }
+        return buffer;
     }
 
     public MemoryTrackingAssetManager manager() {
-        if (manager == null)
-            manager = new MemoryTrackingAssetManager(new AbsoluteFileHandleResolver());
+        if (manager == null) {
+            manager = new MemoryTrackingAssetManager(new HybridFileHandleResolver());
+        }
         return manager;
     }
 
@@ -154,9 +234,16 @@ public class Assets implements Disposable {
         return fonts;
     }
 
-    public HashMap<String, FImageComplex> cardArtCache() {
+    public LinkedHashMap<String, FImageComplex> cardArtCache() {
+        // LRU-capped: card art entries otherwise accumulate unboundedly over a
+        // long session (memory hygiene on RAM-constrained devices)
         if (cardArtCache == null)
-            cardArtCache = new HashMap<>();
+            cardArtCache = new LinkedHashMap<String, FImageComplex>(100, 0.75f, true) {
+                @Override
+                protected boolean removeEldestEntry(Map.Entry<String, FImageComplex> eldest) {
+                    return size() > 100;
+                }
+            };
         return cardArtCache;
     }
 
@@ -261,6 +348,7 @@ public class Assets implements Disposable {
         return textureParameter;
     }
 
+
     public Texture getTexture(FileHandle file) {
         return getTexture(file, true);
     }
@@ -274,8 +362,9 @@ public class Assets implements Disposable {
             if (!required)
                 return null;
             System.err.println("Failed to load: " + file + "!. Creating dummy texture.");
-            return getDummy();
+            return getBlackTexture();
         }
+
         //internal path can be inside apk or jar..
         if (!FileType.Absolute.equals(file.type()) || file.path().contains("fallback_skin")) {
             Texture f = fallback_skins().get(file.path());
@@ -313,7 +402,7 @@ public class Assets implements Disposable {
 
     public Texture getDefaultImage() {
         if (defaultImage == null) {
-            FileHandle blankImage = Gdx.files.absolute(ForgeConstants.NO_CARD_FILE);
+            FileHandle blankImage = getFileHandle(ForgeConstants.NO_CARD_FILE);
             if (blankImage.exists()) {
                 defaultImage = manager().get(blankImage.path(), Texture.class, false);
                 if (defaultImage != null)
@@ -323,7 +412,7 @@ public class Assets implements Disposable {
                 manager().finishLoadingAsset(blankImage.path());
                 defaultImage = manager().get(blankImage.path());
             } else {
-                defaultImage = getDummy();
+                defaultImage = getBlackTexture();
             }
         }
         return defaultImage;
@@ -337,6 +426,7 @@ public class Assets implements Disposable {
         try {
             if (file == null || !file.exists())
                 return;
+
             if (!FileType.Absolute.equals(file.type()))
                 return;
             manager().load(file.path(), Texture.class, parameter);
@@ -346,15 +436,31 @@ public class Assets implements Disposable {
         }
     }
 
-    private Texture getDummy() {
-        if (dummy == null) {
-            Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-            P.setColor(0f, 0f, 0f, 1f);
-            P.drawPixel(0, 0);
-            dummy = new Texture(P);
-            P.dispose();
-        }
-        return dummy;
+    private Texture setTexture(Texture texture, Color color, float alphaComposite) {
+        if (texture != null)
+            return texture;
+        Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        P.setColor(color.r, color.g, color.b, alphaComposite);
+        P.drawPixel(0, 0);
+        texture = new Texture(P);
+        P.dispose();
+        return texture;
+    }
+
+    public Texture getWhiteTexture() {
+        return setTexture(whiteTexture, Color.WHITE, 1f);
+    }
+
+    public Texture getBackropTexture() {
+        return setTexture(backdropTexture, Color.BLACK, 0.5f);
+    }
+
+    public Texture getGrayTexture() {
+        return setTexture(grayTexture, Color.DARK_GRAY, 0.5f);
+    }
+
+    private Texture getBlackTexture() {
+        return setTexture(blackTexture, Color.BLACK, 1f);
     }
 
     public Texture getHolofoil() {
@@ -420,9 +526,18 @@ public class Assets implements Disposable {
         }
         Music music = manager().get(file.path(), Music.class, false);
         if (music == null) {
-            manager().load(file.path(), Music.class);
-            manager().finishLoadingAsset(file.path());
-            music = manager().get(file.path(), Music.class);
+            // A load failure (unsupported/corrupt file, or audio unavailable) must
+            // not propagate: getMusic is called synchronously from the render loop
+            // (adventure dialog voice), where an uncaught exception kills the app.
+            // Callers already treat null as "no audio".
+            try {
+                manager().load(file.path(), Music.class);
+                manager().finishLoadingAsset(file.path());
+                music = manager().get(file.path(), Music.class);
+            } catch (Exception e) {
+                System.err.println("Failed to load music " + file.path() + ": " + e.getMessage());
+                return null;
+            }
         }
         return music;
     }

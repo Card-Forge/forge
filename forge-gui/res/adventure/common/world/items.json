@@ -365,6 +365,7 @@
     "description": "Draft a Chandra themed card that can be cast with mana of any color",
     "equipmentSlot": "Left",
     "iconName": "ChandrasTome",
+    "cost": 8000,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Chandra's Tome"
@@ -376,6 +377,7 @@
     "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color",
     "equipmentSlot": "Neck",
     "iconName": "PhoenixCharm",
+    "cost": 8000,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Phoenix Charm"
@@ -408,6 +410,7 @@
     "description": "Sign away your soul to know what the future holds",
     "equipmentSlot": "Right",
     "iconName": "DemonicContract",
+    "cost": 15000,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Demonic Contract"
@@ -473,6 +476,7 @@
     "name": "Sol Ring",
     "equipmentSlot": "Left",
     "iconName": "SolRing",
+    "cost": 25000,
     "effect": {
       "startBattleWithCard": [
         "Sol Ring"
@@ -483,6 +487,7 @@
     "name": "Mox Emerald",
     "equipmentSlot": "Neck",
     "iconName": "MoxEmerald",
+    "cost": 25000,
     "effect": {
       "startBattleWithCard": [
         "Mox Emerald"
@@ -493,6 +498,7 @@
     "name": "Black Lotus",
     "equipmentSlot": "Right",
     "iconName": "BlackLotus",
+    "cost": 30000,
     "effect": {
       "startBattleWithCard": [
         "Black Lotus"
@@ -503,6 +509,7 @@
     "name": "Mox Jet",
     "equipmentSlot": "Neck",
     "iconName": "MoxJet",
+    "cost": 25000,
     "effect": {
       "startBattleWithCard": [
         "Mox Jet"
@@ -513,6 +520,7 @@
     "name": "Mox Pearl",
     "equipmentSlot": "Neck",
     "iconName": "MoxPearl",
+    "cost": 25000,
     "effect": {
       "startBattleWithCard": [
         "Mox Pearl"
@@ -523,6 +531,7 @@
     "name": "Mox Ruby",
     "equipmentSlot": "Neck",
     "iconName": "MoxRuby",
+    "cost": 25000,
     "effect": {
       "startBattleWithCard": [
         "Mox Ruby"
@@ -533,6 +542,7 @@
     "name": "Mox Sapphire",
     "equipmentSlot": "Neck",
     "iconName": "MoxSapphire",
+    "cost": 25000,
     "effect": {
       "startBattleWithCard": [
         "Mox Sapphire"
@@ -543,6 +553,7 @@
     "name": "Battle Standard",
     "equipmentSlot": "Left",
     "iconName": "BattleStandard",
+    "cost": 1500,
     "effect": {
       "lifeModifier": -1,
       "startBattleWithCard": [
@@ -554,6 +565,7 @@
     "name": "Hivestone",
     "equipmentSlot": "Left",
     "iconName": "Hivestone",
+    "cost": 4000,
     "effect": {
       "startBattleWithCard": [
         "Hivestone"
@@ -738,6 +750,7 @@
     "name": "Armor of the Hivelord",
     "equipmentSlot": "Body",
     "iconName": "HiveLordArmor",
+    "cost": 20000,
     "effect": {
       "lifeModifier": 5,
       "changeStartCards": 1
@@ -747,6 +760,7 @@
     "name": "Leather Boots",
     "equipmentSlot": "Boots",
     "iconName": "LeatherBoots",
+    "cost": 500,
     "effect": {
       "moveSpeed": 1.15
     }
@@ -766,6 +780,7 @@
    "name": "Sorin's Amulet",
     "equipmentSlot": "Neck",
     "iconName": "SorinAmulet",
+    "cost": 12000,
     "effect": {
       "lifeModifier": 2,
       "startBattleWithCardInCommandZone": [
@@ -788,6 +803,7 @@
     "name": "Cheat",
     "equipmentSlot": "Neck",
     "iconName": "Goose",
+    "cost": 50000,
     "effect": {
       "startBattleWithCard": [
         "Blightsteel Colossus",
@@ -820,6 +836,7 @@
     "name": "Cursed Ring",
     "equipmentSlot": "Right",
     "iconName": "CursedRing",
+    "cost": 4000,
     "effect": {
       "startBattleWithCard": [
         "c_0_1_a_goblin_construct_noblock_ping",
@@ -863,6 +880,7 @@
     "name": "Presence of the Hydra",
     "equipmentSlot": "Left",
     "iconName": "PresenceoftheHydra",
+    "cost": 4000,
     "effect": {
       "lifeModifier": 2,
       "startBattleWithCardInCommandZone": [
@@ -1000,6 +1018,7 @@
     "description": "4/2 dinosaur",
     "equipmentSlot": "Boots",
     "iconName": "RaptorBondband",
+    "cost": 4000,
     "effect": {
         "lifeModifier": -3,
         "startBattleWithCard": [
@@ -1012,6 +1031,7 @@
     "description": "Filter mana or pay 2 for 3 life",
     "equipmentSlot": "Left",
     "iconName": "GoldenEgg",
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Golden Egg|ELD"
@@ -1056,6 +1076,7 @@
     "name": "Warren Tender's Baton",
     "equipmentSlot": "Left",
     "iconName": "WarrenTendersBaton",
+    "cost": 3000,
     "effect": {
       "lifeModifier": 1,
       "startBattleWithCard": [
@@ -1069,6 +1090,7 @@
     "description": "3R for 5 damage to a player",
     "equipmentSlot": "Left",
     "iconName": "PrayerbookofIre",
+    "cost": 3000,
     "effect": {
         "startBattleWithCard": [
         "Font of Ire|JOU"
@@ -1088,6 +1110,7 @@
       "name": "Robes of Omniscience",
     "equipmentSlot": "Body",
     "iconName": "RobesOfOmniscience",
+    "cost": 10000,
     "effect": {
       "lifeModifier": -6,
       "changeStartCards": 2
@@ -1099,6 +1122,7 @@
     "description": "Equip 4, +2/+2 and flying and become an angel",
     "equipmentSlot": "Right",
     "iconName": "AngelicArmaments",
+    "cost": 10000,
     "effect": {
         "lifeModifier": 4,
         "startBattleWithCard": [
@@ -1111,6 +1135,7 @@
     "description": "0/4 wall with flying",
     "equipmentSlot": "Boots",
     "iconName": "AngelicGreaves",
+      "cost": 8000,
     "effect": {
          "lifeModifier": 2,
         "startBattleWithCard": [
@@ -1122,6 +1147,7 @@
     "name": "Sandals",
     "equipmentSlot": "Boots",
     "iconName": "Sandals",
+    "cost": 100,
     "effect": {
       "moveSpeed": 1.1
     }
@@ -1261,6 +1287,7 @@
     "name": "Mad Staff",
     "equipmentSlot": "Left",
     "iconName": "MadStaff",
+    "cost": 4000,
     "effect": {
       "startBattleWithCard": [
         "Power Struggle"
@@ -1304,6 +1331,7 @@
     "name": "Entrancing Lyre",
     "equipmentSlot": "Right",
     "iconName": "EntrancingLyre",
+    "cost": 6000,
     "effect": {
       "startBattleWithCard": [
         "Entrancing Lyre"
@@ -1391,6 +1419,7 @@
     "name": "Amulet of Kroog",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofKroog",
+    "cost": 3000,
     "effect": {
       "startBattleWithCard": [
         "Amulet of Kroog"
@@ -1434,6 +1463,7 @@
     "name": "Jinxed Ring",
     "equipmentSlot": "Right",
     "iconName": "JinxedRing",
+    "cost": 2500,
     "effect": {
       "opponent": {
         "startBattleWithCard": [
@@ -1446,6 +1476,7 @@
     "name": "Nine-Ringed Bo",
     "equipmentSlot": "Left",
     "iconName": "Nine-RingedBo",
+    "cost": 1000,
     "effect": {
       "startBattleWithCard": [
         "Nine-Ringed Bo"
@@ -1456,6 +1487,7 @@
     "name": "Ring of Immortals",
     "equipmentSlot": "Right",
     "iconName": "RingofImmortals",
+    "cost": 4000,
     "effect": {
       "startBattleWithCard": [
         "Ring of Immortals"
@@ -1477,6 +1509,7 @@
     "name": "Ring of Renewal",
     "equipmentSlot": "Right",
     "iconName": "RingofRenewal",
+    "cost": 5000,
     "effect": {
       "startBattleWithCard": [
         "Ring of Renewal"
@@ -1513,7 +1546,8 @@
       "colorView": true
     },
     "description": "Grants Manasight, letting you know the colors used by your adversaries",
-    "iconName": "RelicAmulet"
+    "iconName": "RelicAmulet",
+    "cost": 4000
   },
   {
     "name": "Lightbringers Boots",
@@ -1539,7 +1573,8 @@
       "cardRewardBonus": 1
     },
     "description": "",
-    "iconName": "FortuneCoin"
+    "iconName": "FortuneCoin",
+    "cost": 10000
   },
   {
     "name": "Colorless rune",
@@ -1694,6 +1729,7 @@
     "name": "Slimefoot's Slimy Staff",
     "equipmentSlot": "Left",
     "iconName": "GreenStaff",
+    "cost": 8000,
     "effect": {
       "lifeModifier": 2,
       "startBattleWithCardInCommandZone": [
@@ -1705,6 +1741,7 @@
     "name": "Kiora's Bident",
     "equipmentSlot": "Left",
     "iconName": "SleepWand",
+    "cost": 10000,
     "effect": {
       "lifeModifier": -1,
       "startBattleWithCard": [
@@ -1719,6 +1756,7 @@
     "name": "Slime-Covered Boots",
     "equipmentSlot": "Boots",
     "iconName": "SteelBoots",
+    "cost": 6000,
     "effect": {
       "lifeModifier": -1,
       "moveSpeed": 1.20,
@@ -1731,6 +1769,7 @@
     "name": "Amulet of the Deceiver",
     "equipmentSlot": "Neck",
     "iconName": "MoxJet",
+    "cost": 10000,
     "effect": {
       "lifeModifier": -1,
       "moveSpeed": 1.20,
@@ -1748,6 +1787,7 @@
     "name": "Jace's Signature Hoodie",
     "equipmentSlot": "Body",
     "iconName": "BlueRobes",
+    "cost": 12000,
     "effect": {
       "lifeModifier": -1,
       "cardRewardBonus": 1,
@@ -1760,6 +1800,7 @@
     "name": "Teferi's Staff",
     "equipmentSlot": "Left",
     "iconName": "MadStaff",
+    "cost": 12000,
     "effect": {
       "lifeModifier": 1,
       "cardRewardBonus": 1,
@@ -1772,6 +1813,7 @@
     "name": "Garruk's Mighty Axe",
     "equipmentSlot": "Left",
     "iconName": "GarrukAxe",
+    "cost": 12000,
     "effect": {
       "lifeModifier": 3,
       "startBattleWithCardInCommandZone": [
@@ -1783,6 +1825,7 @@
     "name": "Nahiri's Armory",
     "equipmentSlot": "Right",
     "iconName": "Armory",
+    "cost": 12000,
     "effect": {
       "lifeModifier": 3,
       "startBattleWithCardInCommandZone": [
@@ -1794,6 +1837,7 @@
     "name": "Giant Scythe",
     "equipmentSlot": "Left",
     "iconName": "Scythe",
+    "cost": 6000,
     "effect": {
       "lifeModifier": 1,
       "startBattleWithCardInCommandZone": [
@@ -1805,6 +1849,7 @@
     "name": "Chicken Egg",
     "equipmentSlot": "Right",
     "iconName": "ChickenEgg",
+    "cost": 3000,
     "effect": {
       "lifeModifier": 1,
       "startBattleWithCard": [
@@ -1816,6 +1861,7 @@
     "name": "Tibalt's Bag of Tricks",
     "equipmentSlot": "Left",
     "iconName": "BurningBook",
+    "cost": 6000,
     "effect": {
       "lifeModifier": 1,
       "startBattleWithCardInCommandZone": [
@@ -1827,6 +1873,7 @@
     "name": "Xira's Fancy Hat",
     "equipmentSlot": "Neck",
     "iconName": "BrownHat",
+    "cost": 10000,
     "effect": {
       "lifeModifier": 2,
       "startBattleWithCard": [
@@ -1838,6 +1885,7 @@
     "name": "The Underworld Cookbook",
     "equipmentSlot": "Left",
     "iconName": "UnderworldCookbook",
+    "cost": 4000,
     "effect": {
       "startBattleWithCard": [
         "The Underworld Cookbook"
@@ -1848,6 +1896,7 @@
     "name": "Mantle of Ancient Lore",
     "equipmentSlot": "Body",
     "iconName": "Conjurer's Mantle",
+    "cost": 5000,
     "effect": {
       "lifeModifier": 1,
       "startBattleWithCardInCommandZone": [
@@ -1859,6 +1908,7 @@
     "name": "Zedruu's Lantern",
     "equipmentSlot": "Left",
     "iconName": "ZedruuLantern",
+    "cost": 8000,
     "effect": {
       "lifeModifier": 1,
       "startBattleWithCardInCommandZone": [
@@ -1870,6 +1920,7 @@
     "name": "Grolnok's Skin",
     "equipmentSlot": "Right",
     "iconName": "FrogSkin",
+    "cost": 10000,
     "effect": {
       "lifeModifier": 3,
       "startBattleWithCardInCommandZone": [
@@ -1881,6 +1932,7 @@
     "name": "Slobad's Iron Boots",
     "equipmentSlot": "Boots",
     "iconName": "MetallicBoots",
+    "cost": 10000,
     "effect": {
       "lifeModifier": 1,
       "moveSpeed": 1.35,
@@ -1894,6 +1946,7 @@
     "description": "Give a creature hexproof until end of turn",
     "equipmentSlot": "Neck",
     "iconName": "HallowedSigil",
+    "cost": 6000,
     "effect": {
       "startBattleWithCard": [
         "Hallowed Sigil"
@@ -1905,6 +1958,7 @@
     "description": "Devour the life of an enemy creature, killing it",
     "equipmentSlot": "Right",
     "iconName": "UnhallowedSigil",
+    "cost": 6000,
     "effect": {
       "startBattleWithCard": [
         "Sigil of Torment"

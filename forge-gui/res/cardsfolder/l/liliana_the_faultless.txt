@@ -1,0 +1,8 @@
+Name:Liliana the Faultless
+ManaCost:W
+Types:Legendary Creature Human Cleric
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl,Planeswalker.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature or planeswalker you control enters, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+A:AB$ Pump | Cost$ 1 T Discard<1/Card> | ValidTgts$ Creature.Other+YouCtrl,Planeswalker.Other+YouCtrl | ValidTgtsDesc$ another creature or planeswalker you control | KW$ Hexproof | SpellDescription$ Another target creature or planeswalker you control gains hexproof until end of turn.
+Oracle:Whenever another creature or planeswalker you control enters, you gain 1 life.\n{1}, {T}, Discard a card: Another target creature or planeswalker you control gains hexproof until end of turn.

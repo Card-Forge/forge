@@ -89,6 +89,9 @@ public enum StaticAbilityMode {
     // StaticAbilityCantBeCopied
     CantBeCopied,
 
+    // StaticAbilityCantBeBeamedUp
+    CantBeBeamedUp,
+
     // StaticAbilityCantBeSuspected
     CantBeSuspected,
 
@@ -200,6 +203,9 @@ public enum StaticAbilityMode {
 
     // StaticAbilityCountersRemain
     CountersRemain,
+
+    // StaticAbilityManaRestriction
+    ManaRestriction,
     ;
 
     public static StaticAbilityMode smartValueOf(final String value) {

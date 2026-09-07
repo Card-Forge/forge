@@ -464,6 +464,9 @@ public abstract class GameLobby implements IHasGameType {
                 }
                 lobbyPlayer = GamePlayerUtil.getGuiPlayer(name, avatar, sleeve, setNameNow);
             }
+            final Deck slotDeck = slot.getDeck();
+            lobbyPlayer.setSleeveArtKey(slotDeck == null ? "" : slotDeck.getSleeveArtKey());
+            lobbyPlayer.setSleeveArtOffset(slotDeck == null ? Deck.DEFAULT_SLEEVE_OFFSET : slotDeck.getSleeveArtOffset());
 
             Deck deck = slot.getDeck();
             if (autoGenerateVariant != null) {

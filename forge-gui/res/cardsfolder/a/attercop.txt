@@ -1,0 +1,10 @@
+Name:Attercop
+ManaCost:1 G
+Types:Creature Spider
+PT:2/1
+K:Reach
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land you control enters, this creature gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+SVar:BuffedBy:Land
+Oracle:Reach, deathtouch\nLandfall — Whenever a land you control enters, this creature gets +1/+1 until end of turn.

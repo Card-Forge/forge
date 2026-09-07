@@ -1,0 +1,8 @@
+Name:Trelane, Squire of Gothos
+ManaCost:5 U
+Types:Legendary Creature Q
+PT:4/5
+K:Vigilance
+K:Ward:2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ NICKNAME can't be blocked.
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nTrelane can't be blocked.

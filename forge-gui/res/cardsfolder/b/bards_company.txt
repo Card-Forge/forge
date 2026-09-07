@@ -1,0 +1,13 @@
+Name:Bard's Company
+ManaCost:2 W U
+Types:Creature Human Citizen
+PT:4/3
+S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell | IsPresent$ Human.YouCtrl | EffectZone$ All | Caster$ You | Description$ You may cast this spell as though it had flash if you control a Human.
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRecruit | TriggerDescription$ Whenever this creature enters or attacks, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRecruit | Secondary$ True | TriggerDescription$ Whenever this creature enters or attacks, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)
+SVar:TrigRecruit:DB$ Recruit
+SVar:PlayMain1:TRUE
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Human
+Oracle:You may cast this spell as though it had flash if you control a Human.\nOther creatures you control get +1/+1.\nWhenever this creature enters or attacks, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)

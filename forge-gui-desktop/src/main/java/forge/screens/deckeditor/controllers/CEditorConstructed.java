@@ -366,6 +366,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             break;
         case Commander:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblascommander"));
+            cmb.addAllowedAdditionalColors();
             break;
         case Avatar:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblasavatar"));

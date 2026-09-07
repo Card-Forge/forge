@@ -1,0 +1,7 @@
+Name:Stone by Sunlight
+ManaCost:1 W
+Types:Instant
+A:SP$ Charm | Choices$ DBDestroy,DBAnimate
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.powerGE4 | ValidTgtsDesc$ creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | Types$ Artifact | Keywords$ Indestructible | SpellDescription$ Until end of turn, target creature becomes an artifact in addition to its other types and gains indestructible. (Damage and effects that say "destroy" don't destroy it.)
+Oracle:Choose one -\n• Destroy target creature with power 4 or greater.\n• Until end of turn, target creature becomes an artifact in addition to its other types and gains indestructible. (Damage and effects that say "destroy" don't destroy it.)

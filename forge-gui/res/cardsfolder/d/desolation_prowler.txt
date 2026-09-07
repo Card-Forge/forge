@@ -1,0 +1,6 @@
+Name:Desolation Prowler
+ManaCost:1 B
+Types:Creature Wolf
+PT:2/2
+A:AB$ Pump | Cost$ PayLife<2> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ This creature gets +2/+2 until end of turn. Activate only once each turn.
+Oracle:Pay 2 life: This creature gets +2/+2 until end of turn. Activate only once each turn.

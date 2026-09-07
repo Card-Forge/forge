@@ -206,7 +206,7 @@ public final class StaticAbilityContinuous {
                     if (input.contains("CommanderColorID")) {
                         if (!hostCard.getController().getCommanders().isEmpty()) {
                             if (input.contains("NotCommanderColorID")) {
-                                for (MagicColor.Color color : hostCard.getController().getNotCommanderColorID()) {
+                                for (MagicColor.Color color : hostCard.getController().getCommanderColorID().inverse()) {
                                     newKeywords.add(input.replace("NotCommanderColorID", color.getName()));
                                 }
                                 return true;

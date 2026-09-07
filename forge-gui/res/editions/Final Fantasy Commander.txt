@@ -339,18 +339,18 @@ ScryfallCode=FIC
 331 R Void Rend @Justyna Dura
 332 C Arcane Signet @Grace Zhu
 333 C Arcane Signet @Randy Gallegos
-334 C Arcane Signet @Russell Lu
+334 C Arcane Signet @Russell Dongjun Lu
 335 C Arcane Signet @Madeline Boni
 336 R Armory Automaton @Gas1
-337 R Champion's Helm @Russell Lu
+337 R Champion's Helm @Russell Dongjun Lu
 338 U Colossus Hammer @Kevin Sidharta
 339 C Commander's Sphere @Alexandre Honoré
 340 R Conqueror's Flail @Russell Dongjun Lu
 341 R Coveted Jewel @Bruno Biazotto
-342 R Darksteel Plate @Russell Lu
+342 R Darksteel Plate @Russell Dongjun Lu
 343 U Everflowing Chalice @Makoto Shiki
 344 C Explorer's Scope @Racrufi
-345 U Hero's Blade @Russell Lu
+345 U Hero's Blade @Russell Dongjun Lu
 346 U Hero's Heirloom @Stella Spente
 347 R Inspiring Statuary @Andreia Ugrai
 348 R Key to the City @Elizabeth Peiró
@@ -359,7 +359,7 @@ ScryfallCode=FIC
 351 U Meteor Golem @Narendra Bintara Adi
 352 U Millikin @Anthony Devine
 353 U Mind Stone @Madeline Boni
-354 U Relic of Legends @Russell Lu
+354 U Relic of Legends @Russell Dongjun Lu
 355 U Skullclamp @Josephine Chang
 356 U Sol Ring @Andrea Tentori Montalto
 357 U Sol Ring @Kevin Glint
