@@ -1422,10 +1422,13 @@ public class SpecialCardAi {
 
             int numManaSrcs = CardLists.filter(ComputerUtilMana.getAvailableManaSources(ai, true), CardPredicates.UNTAPPED).size();
 
+            // the same sources answer this for every ability tested, so ask once
+            final byte availableColors = ColorSet.fromNames(
+                    ComputerUtilCost.getAvailableManaColors(ai, sa.getHostCard())).getColor();
+
             for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
                 ManaCost cost = testSa.getPayCosts().getTotalMana();
-                boolean canPayWithAvailableColors = cost.canBePaidWithAvailable(ColorSet.fromNames(
-                        ComputerUtilCost.getAvailableManaColors(ai, sa.getHostCard())).getColor());
+                boolean canPayWithAvailableColors = cost.canBePaidWithAvailable(availableColors);
 
                 byte colorProfile = cost.getColorProfile();
 

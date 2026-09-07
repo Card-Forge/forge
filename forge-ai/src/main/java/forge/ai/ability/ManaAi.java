@@ -190,10 +190,13 @@ public class ManaAi extends SpellAbilityAi {
         CardCollection cardList = new CardCollection();
         // TODO check other zones
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(ai.getCardsIn(ZoneType.Hand), ai);
+        // the same untapped sources answer this for every ability in hand, and nothing in the loop
+        // taps or adds one, so ask once
+        final byte availableColors = ColorSet.fromNames(
+                ComputerUtilCost.getAvailableManaColors(ai, (List<Card>)null)).getColor();
         for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
             ManaCost cost = testSa.getPayCosts().getTotalMana();
-            boolean canPayWithAvailableColors = cost.canBePaidWithAvailable(ColorSet.fromNames(
-                    ComputerUtilCost.getAvailableManaColors(ai, (List<Card>)null)).getColor());
+            boolean canPayWithAvailableColors = cost.canBePaidWithAvailable(availableColors);
 
             if (cost.getCMC() == 0 && cost.countX() == 0) {
                 // no mana cost, no need to activate this SA then (additional mana not needed)

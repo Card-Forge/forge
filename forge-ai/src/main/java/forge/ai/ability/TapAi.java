@@ -96,6 +96,9 @@ public class TapAi extends TapAiBase {
                     Integer amount = lifeCost.convertAmount();
                     if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa)) {
                         final int landsize = payer.getLandsInPlay().size() + 1;
+                        // the same sources answer this for every card in hand, so ask once
+                        final byte availableColors = ColorSet.fromNames(
+                                ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
                         for (Card c : payer.getCardsIn(ZoneType.Hand)) {
                             // Check if the AI has enough lands to play the card
                             if (landsize != c.getCMC()) {
@@ -103,7 +106,7 @@ public class TapAi extends TapAiBase {
                             }
                             // Check if the AI intends to play the card and if it can pay for it with the mana it has
                             boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
-                            boolean canPay = c.getManaCost().canBePaidWithAvailable(ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(payer, source)).getColor());
+                            boolean canPay = c.getManaCost().canBePaidWithAvailable(availableColors);
                             if (canPay && willPlay) {
                                 return true;
                             }
