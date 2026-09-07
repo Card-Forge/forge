@@ -1,6 +1,6 @@
 # ADR-0011 — Card Corpus Scoping
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-07
 - **Deciders:** `jc@archlab.pl`
 
