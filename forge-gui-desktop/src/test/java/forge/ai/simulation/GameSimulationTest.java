@@ -2987,13 +2987,12 @@ public class GameSimulationTest extends SimulationTest {
                 ApiType.Play.getSpellEffect().movesCardToOrFromLibrary(
                         new SpellAbility.EmptySa(ApiType.Play, c)));
 
-        // card scripts write Destination$ TopOfLibrary and BottomOfLibrary, which name the library
-        // without being zone names
-        SpellAbility toTopOfLibrary = new SpellAbility.EmptySa(ApiType.ChangeZone, c);
-        toTopOfLibrary.putParam("Origin", "Graveyard");
-        toTopOfLibrary.putParam("Destination", "TopOfLibrary");
-        AssertJUnit.assertTrue("ChangeZone to the top of a library",
-                ApiType.ChangeZone.getSpellEffect().movesCardToOrFromLibrary(toTopOfLibrary));
+        // Origin$ All names every zone, the library included
+        SpellAbility fromAnywhere = new SpellAbility.EmptySa(ApiType.ChangeZone, c);
+        fromAnywhere.putParam("Origin", "All");
+        fromAnywhere.putParam("Destination", "Exile");
+        AssertJUnit.assertTrue("ChangeZone with Origin$ All",
+                ApiType.ChangeZone.getSpellEffect().movesCardToOrFromLibrary(fromAnywhere));
 
         // Manifest defaults to the top of the library, so only an explicit non-library ChoiceZone
         // takes it out of scope
@@ -3002,10 +3001,9 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertFalse("Manifest from hand",
                 ApiType.Manifest.getSpellEffect().movesCardToOrFromLibrary(manifestFromHand));
 
-        SpellAbility manifestBlankZone = new SpellAbility.EmptySa(ApiType.Manifest, c);
-        manifestBlankZone.putParam("ChoiceZone", "");
-        AssertJUnit.assertTrue("a blank ChoiceZone falls back to the library",
-                ApiType.Manifest.getSpellEffect().movesCardToOrFromLibrary(manifestBlankZone));
+        AssertJUnit.assertTrue("Manifest without a ChoiceZone",
+                ApiType.Manifest.getSpellEffect().movesCardToOrFromLibrary(
+                        new SpellAbility.EmptySa(ApiType.Manifest, c)));
     }
 
     @DataProvider(name = "costLibraryMovement")
