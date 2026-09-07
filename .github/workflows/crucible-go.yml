@@ -45,11 +45,19 @@ jobs:
       # GO-1's linter set, plus depguard carrying the architectural boundaries
       # the ADRs state. Pinned, per ADR-0002's tools policy.
       #
-      # Version note: golangci-lint 2.6.x cannot read Go 1.27 export data
-      # ("export data version 4 is greater than maximum supported version 2").
-      # 2.13.2 is the first that can. Do not lower this without checking.
+      # Two version constraints, both found the hard way:
+      #
+      #   golangci-lint 2.6.x cannot read Go 1.27 export data, failing with
+      #   "export data version 4 is greater than maximum supported version 2".
+      #   2.13.2 is the first that can.
+      #
+      #   golangci-lint-action v6 rejects any v2 golangci-lint outright:
+      #   "golangci-lint v2 is not supported by golangci-lint-action v6".
+      #   v7 is the minimum; v9 is current and keeps the same inputs.
+      #
+      # Lower either without checking and the step fails before it lints.
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v9
         with:
           version: v2.13.2
           working-directory: crucible
