@@ -642,8 +642,8 @@ public class CardRenderer {
             }
         }
         if (image != null) {
-            if (image == ImageCache.getInstance().getDefaultImage() || Forge.enableUIMask.equals("Art")) {
-                CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, true, true);
+            if (image == ImageCache.getInstance().getDefaultImage() || (Forge.enableUIMask.equals("Art") || card.useCardArt())) {
+                CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos, true, true);
             } else {
                 if (Forge.enableUIMask.equals("Full")) {
                     if (ImageCache.getInstance().isFullBorder(image))
@@ -686,7 +686,7 @@ public class CardRenderer {
         }
         if (image != null) {
             float cardR = ImageCache.getInstance().getRadius(image);
-            if (image == ImageCache.getInstance().getDefaultImage() || Forge.enableUIMask.equals("Art")) {
+            if (image == ImageCache.getInstance().getDefaultImage() || (Forge.enableUIMask.equals("Art") ||card.useCardArt())) {
                 CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, true, false, isChoiceList, !CardRendererUtils.showCardIdOverlay(card));
             } else if (showsleeves) {
                 if (!card.isForeTold())

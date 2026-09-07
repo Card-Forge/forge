@@ -2,8 +2,7 @@ Name:Glava, Five-Advents Mage
 ManaCost:5 G G
 Types:Legendary Creature Human Wizard
 PT:5/5
-T:Mode$ SpellCast | ValidCard$ Permanent.hasXCost | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSetX | OptionalDecider$ You | ResolvedLimit$ 1 | TriggerDescription$ Whenever you cast a permanent spell with {X} in its mana cost or activate an ability with {X} in its activation cost that isn't a mana ability, you may have the value of X become 5. Do this only once each turn.
-T:Mode$ AbilityCast | ValidCard$ Card,Emblem | ValidSA$ Activated.hasXCost+!ManaAbility | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSetX | OptionalDecider$ You | ResolvedLimit$ 1 | Secondary$ True | TriggerDescription$ Whenever you cast a permanent spell with {X} in its mana cost or activate an ability with {X} in its activation cost that isn't a mana ability, you may have the value of X become 5. Do this only once each turn.
+T:Mode$ SpellAbilityCast | ValidSA$ Spell.Permanent,Activated.!ManaAbility | ValidActivatingPlayer$ You | HasXManaCost$ True | TriggerZones$ Battlefield | Execute$ TrigSetX | OptionalDecider$ You | ResolvedLimit$ 1 | TriggerDescription$ Whenever you cast a permanent spell with {X} in its mana cost or activate an ability with {X} in its activation cost that isn't a mana ability, you may have the value of X become 5. Do this only once each turn.
 SVar:TrigSetX:DB$ ChangeX | Defined$ TriggeredSpellAbility | Value$ 5
 DeckHas:Ability$Counters
 Oracle:Whenever you cast a permanent spell with {X} in its mana cost or activate an ability with {X} in its activation cost that isn't a mana ability, you may have the value of X become 5. Do this only once each turn.

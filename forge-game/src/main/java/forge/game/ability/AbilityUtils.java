@@ -2281,6 +2281,9 @@ public class AbilityUtils {
         if (sq[0].equals("YourStartingLife")) {
             return doXMath(player.getStartingLife(), expr, c, ctb);
         }
+        if (sq[0].equals("YourStartingLibrarySize")) {
+            return doXMath(player.getStartingLibrarySize(), expr, c, ctb);
+        }
 
         if (sq[0].equals("YourLifeTotal")) {
             return doXMath(player.getLife(), expr, c, ctb);
@@ -2791,7 +2794,7 @@ public class AbilityUtils {
                     activated++;
                 }
             }
-            return doXMath(activated, s, c, ctb);
+            return doXMath(activated, expr, c, ctb);
         }
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
@@ -3503,6 +3506,9 @@ public class AbilityUtils {
 
         if (value.contains("StartingLife")) {
             return doXMath(player.getStartingLife(), m, source, ctb);
+        }
+        if (value.contains("StartingLibrarySize")) {
+            return doXMath(player.getStartingLibrarySize(), m, source, ctb);
         }
 
         if (value.contains("LifeTotal")) {

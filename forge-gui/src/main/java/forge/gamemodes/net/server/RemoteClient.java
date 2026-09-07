@@ -188,6 +188,10 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
      * objects this client has actually been told about.
      */
     public void setCodecTracker(Tracker tracker, int consumerId) {
+        // Skip no-op rebinds: setGameView fires on every view push, the tracker changes per game.
+        if (tracker == codecTracker && consumerId == codecConsumerId) {
+            return;
+        }
         this.codecTracker = tracker;
         this.codecConsumerId = consumerId;
         applyCodecTracker(channel);
@@ -195,6 +199,12 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
 
     private void applyCodecTracker(Channel ch) {
         if (codecTracker == null || ch == null) {
+            return;
+        }
+        // Swap on the event loop so it lands between decoded frames: a message the
+        // client sent against the previous game must not resolve against the new one.
+        if (!ch.eventLoop().inEventLoop()) {
+            ch.eventLoop().execute(() -> applyCodecTracker(ch));
             return;
         }
         CompatibleObjectEncoder encoder = ch.pipeline().get(CompatibleObjectEncoder.class);

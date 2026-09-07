@@ -899,18 +899,20 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     private static List<String> sortedSubTypes;
     public static List<String> getSortedSubTypes() {
         if (sortedSubTypes == null) {
-            sortedSubTypes = Lists.newArrayList();
-            sortedSubTypes.addAll(Constant.BASIC_TYPES);
-            sortedSubTypes.addAll(Constant.LAND_TYPES);
-            sortedSubTypes.addAll(Constant.CREATURE_TYPES);
-            sortedSubTypes.addAll(Constant.SPELL_TYPES);
-            sortedSubTypes.addAll(Constant.ENCHANTMENT_TYPES);
-            sortedSubTypes.addAll(Constant.ARTIFACT_TYPES);
-            sortedSubTypes.addAll(Constant.WALKER_TYPES);
-            sortedSubTypes.addAll(Constant.DUNGEON_TYPES);
-            sortedSubTypes.addAll(Constant.BATTLE_TYPES);
-            sortedSubTypes.addAll(Constant.PLANAR_TYPES);
-            Collections.sort(sortedSubTypes);
+            // TreeSet sorts and drops duplicates (some types appear in two sections, e.g. Spacecraft);
+            // the immutable copy is built before publishing, so no caller can observe it mid-sort
+            final Set<String> tmp = new TreeSet<>();
+            tmp.addAll(Constant.BASIC_TYPES);
+            tmp.addAll(Constant.LAND_TYPES);
+            tmp.addAll(Constant.CREATURE_TYPES);
+            tmp.addAll(Constant.SPELL_TYPES);
+            tmp.addAll(Constant.ENCHANTMENT_TYPES);
+            tmp.addAll(Constant.ARTIFACT_TYPES);
+            tmp.addAll(Constant.WALKER_TYPES);
+            tmp.addAll(Constant.DUNGEON_TYPES);
+            tmp.addAll(Constant.BATTLE_TYPES);
+            tmp.addAll(Constant.PLANAR_TYPES);
+            sortedSubTypes = ImmutableList.copyOf(tmp);
         }
         return sortedSubTypes;
     }

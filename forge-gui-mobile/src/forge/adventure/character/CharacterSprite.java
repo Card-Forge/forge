@@ -16,6 +16,9 @@ import java.util.HashMap;
  */
 
 public class CharacterSprite extends MapActor {
+    private static final float DEFAULT_ANIMATION_FRAME_DURATION = 0.2f;
+    private static final float MAX_DEATH_ANIMATION_DURATION = 3f;
+    private static final float MAX_ACTION_ANIMATION_DURATION = 5f;
     private final HashMap<AnimationTypes, HashMap<AnimationDirections, Animation<TextureRegion>>> animations = new HashMap<>();
     float timer;
     private Animation<TextureRegion> currentAnimation = null;
@@ -62,7 +65,11 @@ public class CharacterSprite extends MapActor {
                     anim = Config.instance().getAnimatedSprites(path, stand.toString() + dir.toString());
 
                 if (anim.size != 0) {
-                    dirs.put(dir, new Animation<>(0.2f, anim));
+                    float frameDuration = DEFAULT_ANIMATION_FRAME_DURATION;
+                    if (stand == AnimationTypes.Death) {
+                        frameDuration = Math.min(frameDuration, MAX_DEATH_ANIMATION_DURATION / anim.size);
+                    }
+                    dirs.put(dir, new Animation<>(frameDuration, anim));
                     if (getWidth() == 0.0)//init size onload
                     {
                         setWidth(anim.first().getWidth());
@@ -128,30 +135,54 @@ public class CharacterSprite extends MapActor {
     }
 
     public void setAnimation(AnimationTypes type) {
-        if (currentAnimationType != type) {
+        Animation<TextureRegion> animation = getAnimation(type, currentAnimationDir);
+        if (animation == null) {
+            return;
+        }
+
+        if (currentAnimationType != type || currentAnimation != animation || isOneShotAnimation(type)) {
             currentAnimationType = type;
-            updateAnimation();
+            currentAnimation = animation;
+            if (isOneShotAnimation(type)) {
+                timer = 0.0f;
+            }
         }
     }
 
-    private void updateAnimation() {
-        AnimationTypes aniType = currentAnimationType;
-        AnimationDirections aniDir = currentAnimationDir;
-        if (!animations.containsKey(aniType)) {
-            aniType = AnimationTypes.Idle;
-        }
-        if (!animations.containsKey(aniType)) {
-            return;
-        }
-        HashMap<AnimationDirections, Animation<TextureRegion>> dirs = animations.get(aniType);
+    /**
+     * Returns the capped duration of an action animation in the sprite's current direction.
+     * Uses the supplied fallback when the atlas does not define that animation.
+     */
+    public float getActionAnimationDuration(AnimationTypes type, float fallbackDuration) {
+        Animation<TextureRegion> animation = getAnimation(type, currentAnimationDir);
+        float duration = animation == null ? fallbackDuration : animation.getAnimationDuration();
+        return Math.min(duration, MAX_ACTION_ANIMATION_DURATION);
+    }
 
-        if (!dirs.containsKey(aniDir)) {
-            aniDir = AnimationDirections.Right;
+    private Animation<TextureRegion> getAnimation(AnimationTypes type, AnimationDirections direction) {
+        HashMap<AnimationDirections, Animation<TextureRegion>> dirs = animations.get(type);
+        if (dirs == null || dirs.isEmpty()) {
+            return null;
         }
-        if (!dirs.containsKey(aniDir)) {
-            return;
+
+        Animation<TextureRegion> animation = dirs.get(direction);
+        return animation == null ? dirs.get(AnimationDirections.Right) : animation;
+    }
+
+    private boolean isOneShotAnimation(AnimationTypes type) {
+        return type == AnimationTypes.Attack
+                || type == AnimationTypes.Death
+                || type == AnimationTypes.Hit;
+    }
+
+    private void updateAnimation() {
+        Animation<TextureRegion> animation = getAnimation(currentAnimationType, currentAnimationDir);
+        if (animation == null) {
+            animation = getAnimation(AnimationTypes.Idle, currentAnimationDir);
         }
-        currentAnimation = dirs.get(aniDir);
+        if (animation != null) {
+            currentAnimation = animation;
+        }
     }
 
     public void setDirection(AnimationDirections dir) {
@@ -249,7 +280,7 @@ public class CharacterSprite extends MapActor {
         if (currentAnimationType.equals(AnimationTypes.Wake)) {
             currentFrame = currentAnimation.getKeyFrame(wakeTimer, false);
         } else {
-            currentFrame = currentAnimation.getKeyFrame(timer, true);
+            currentFrame = currentAnimation.getKeyFrame(timer, !isOneShotAnimation(currentAnimationType));
         }
 
         float scale = 1f;

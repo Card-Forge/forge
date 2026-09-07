@@ -64,7 +64,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     private boolean initialSyncSent = false;
     private boolean objectsRegistered = false;
-    private boolean codecTrackerSet = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
     private volatile boolean paused;
     private volatile boolean resyncPending;
@@ -295,12 +294,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     @Override
     public void setGameView(final GameView gameView) {
         super.setGameView(gameView);
-        // Set codec tracker before any client protocol messages arrive.
-        // setGameView is called before openView, and the client can't respond
-        // until after openView — so the encoder/decoder are ready in time.
-        if (!codecTrackerSet && gameView != null && gameView.getTracker() != null) {
+        // Each game owns a Tracker and restarts card ids at 1, so client IdRefs must resolve
+        // against the current game's. A null view is a transient clear between games — leave
+        // the codec on the outgoing game so its in-flight messages still resolve.
+        if (gameView != null) {
             client.setCodecTracker(gameView.getTracker(), syncManager.getConsumerId());
-            codecTrackerSet = true;
         }
         updateGameView();
     }

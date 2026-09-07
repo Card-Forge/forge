@@ -524,6 +524,8 @@ public class ImageCache {
     }
 
     public TextureRegion croppedBorderImage(Texture image) {
+        if (image == null)
+            return null;
         String key = getTextureKey(image);
         if (key == null || (!key.contains(".fullborder.") && !key.contains("tokens")))
             return new TextureRegion(image);

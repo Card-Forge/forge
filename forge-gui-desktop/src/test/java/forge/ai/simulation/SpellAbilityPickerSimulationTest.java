@@ -537,7 +537,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(saDesc, saDesc.startsWith("Lightning Bolt deals 3 damage to any target."));
     }
 
-    @Test(enabled = true)
+    @Test
     public void testPlayingPumpSpellsAfterBlocks() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
