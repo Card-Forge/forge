@@ -14,7 +14,7 @@ Numbers are permanent. Files are never deleted. A superseded ADR keeps its numbe
 | [0001](0001-fork-layout-and-upstream-sync.md)   | Fork layout and upstream sync   | Accepted |
 | [0002](0002-toolchain-and-dependency-policy.md) | Toolchain and dependency policy | Accepted |
 | [0003](0003-go-project-layout.md)               | Go project layout               | Accepted |
-| [0004](0004-java-to-go-translation-patterns.md) | Java to Go translation patterns | Proposed |
+| [0004](0004-java-to-go-translation-patterns.md) | Java to Go translation patterns | Accepted |
 | [0005](0005-concurrency-model.md)               | Concurrency model               | Accepted |
 | [0006](0006-determinism-and-rng.md)             | Determinism and RNG             | Accepted |
 | [0007](0007-card-dsl-representation.md)         | Card DSL representation         | Accepted |

@@ -1,6 +1,6 @@
 # ADR-0004 — Java to Go Translation Patterns
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-07
 - **Deciders:** `jc@archlab.pl`
 

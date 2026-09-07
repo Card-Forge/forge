@@ -18,11 +18,13 @@ Plan: `docs/crucible/00-master-implementation-plan.md`
 | Porting a Java file                            | `docs/crucible/guidelines/02-java-to-go-translation.md` |
 | Writing tests                                  | `docs/crucible/guidelines/03-testing-standards.md`      |
 | Making an architectural decision               | `docs/crucible/guidelines/04-adr-process.md`            |
+| Writing anything under `architecture/`         | `docs/crucible/guidelines/06-architecture-docs.md`      |
 | Committing / reviewing                         | `docs/crucible/guidelines/05-commit-and-review.md`      |
 
 Index: `docs/crucible/guidelines/README.md`
 
-Rules have stable IDs — `DOC-4`, `GO-2`, `TEST-1`, `PORT-2`, `ADRP-1`, `REV-5`. Cite them in comments and commit bodies.
+Rules have stable IDs — `DOC-4`, `GO-2`, `TEST-1`, `PORT-2`, `ADRP-1`, `REV-5`, `ARCH-2`. Cite them in comments and
+commit bodies.
 
 ---
 

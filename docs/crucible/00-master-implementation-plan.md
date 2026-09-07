@@ -278,7 +278,8 @@ docs/crucible/
     02-java-to-go-translation.md   # PORT-n — normative Java→Go mapping, port-log format
     03-testing-standards.md        # TEST-n — module-first testing
     04-adr-process.md              # ADRP-n — when/how to write an ADR
-    05-commit-and-review.md        # REV-n  — fork hygiene, commits, review order
+    05-commit-and-review.md        # REV-n  — fork hygiene, commits, review
+    06-architecture-docs.md        # ARCH-n — describing the system, not the plan order
   telemetry/
     event-schema.md                   # versioned event catalogue
     metric-definitions.md             # NORMATIVE definitions of screw/flood/dead
@@ -305,7 +306,9 @@ ADR referenced by a code comment (`// ADR-0009`) does not exist.
 
 Each uses MADR format: Context / Decision Drivers / Considered Options / Decision / Consequences / Status.
 
-**Foundational (must exist before line 1 of Go):**
+**Foundational (must exist before line 1 of Go). All eleven are written and `Accepted` as of 2026-09-07 — see
+[`adr/README.md`](adr/README.md) for the live index; the descriptions below are the original intent, and each ADR's own
+text is authoritative where they differ.**
 
 | ADR  | Title                                      | The question it settles                                                                     |
 | ---- | ------------------------------------------ | ------------------------------------------------------------------------------------------- |
@@ -318,7 +321,7 @@ Each uses MADR format: Context / Decision Drivers / Considered Options / Decisio
 | 0007 | Card DSL representation                    | Compile-once typed AST vs. Java's runtime string interpretation                             |
 | 0008 | Effect dispatch mechanism                  | Generated registry (`ApiType → Effect`) replacing Java reflection                           |
 | 0009 | Game state representation                  | Arena + integer handles vs. pointers; clone strategy for AI lookahead                       |
-| 0010 | Differential testing strategy              | The three-layer oracle harness (Section 3.3)                                                |
+| 0010 | Differential testing strategy              | The four-layer oracle harness (Section 3.3)                                                 |
 | 0011 | Card corpus scoping & coverage gate        | What "done" means for card support                                                          |
 
 **Near-term (before the module they govern):**
@@ -359,7 +362,7 @@ Each uses MADR format: Context / Decision Drivers / Considered Options / Decisio
 | `toString()` for debugging                                            | `String()` on value types; a dedicated `debug.DumpGame` for state                                                                                                                        |                                                                                                                        |
 | `Card.java` (8,105 LOC god object)                                    | **Split**: `card.Card` (identity + zone + owner), `card.State` (per-face characteristics), `card.Counters`, `card.Attachments`, `card.Damage`, `card.Memory` (Remembered/Imprinted)      | Explicitly a deviation from the Java structure; record in the port-log                                                 |
 
-**Additional Go standards** (`guidelines/go-coding-standards.md`):
+**Additional Go standards** (`guidelines/01-go-coding-standards.md`):
 
 - `gofmt` + `golangci-lint` (`errcheck`, `govet`, `staticcheck`, `revive`, `gocritic`, `ineffassign`) enforced in CI; no
   `nolint` without an inline reason.
@@ -938,20 +941,33 @@ open-ended. Sequence is firm; durations are not.
 
 ### M0 — Documentation & architecture foundation _(no Go code)_ — 1.5–2.5 wks
 
-1. Create `docs/crucible/` per Section 2.2; write `README.md` and `adr/README.md` (ADR process + template).
-2. Write **ADR-0001 … ADR-0011** (Section 2.3, foundational set).
-3. **DONE** — `guidelines/` written: doc style (`DOC-n`), Go standards (`GO-n`), Java→Go translation (`PORT-n`), testing
-   (`TEST-n`), ADR process (`ADRP-n`), commit/review (`REV-n`), plus `README.md` index.
-4. **DONE** — `/CLAUDE.md` written at repo root: points at the guideline set, inlines the ten non-negotiables and the
-   module-first testing rule, so Claude Code and humans follow one set.
+**Status as of 2026-09-07 — the decision half of M0 is complete.**
+
+| #   | Item                                                                             | State                                                                    |
+| --- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| 1   | `docs/crucible/` structure, `README.md`, `adr/README.md`                         | Done                                                                     |
+| 2   | **ADR-0001 … ADR-0011**                                                          | Done — all eleven `Accepted`                                             |
+| 3   | `guidelines/` — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`, `ARCH-n` | Done — seven documents plus index                                        |
+| 4   | `/CLAUDE.md`                                                                     | Done — inlines the ten non-negotiables and the module-first testing rule |
+| 5   | Five `architecture/` documents                                                   | **Open** — only the `module-map.md` stub exists                          |
+| 6   | DSL grammars under `porting/dsl/`                                                | **Open** — largest remaining piece                                       |
+| 7   | `telemetry/metric-definitions.md`                                                | **Open**                                                                 |
+| 8   | `research/meta-gauntlet.md`                                                      | **Open** — ADR-0011 makes it load-bearing                                |
+
+Everything still open is documentation, not decisions. Items 5 through 8 are restated below in their original wording.
+
 5. Write `architecture/system-overview.md`, `module-map.md`, `engine-state-model.md`, `card-compilation-pipeline.md`,
-   `concurrency-and-determinism.md`.
+   `concurrency-and-determinism.md`, `telemetry-pipeline.md`. Governed by `ARCH-n`
+   ([`guidelines/06-architecture-docs.md`](guidelines/06-architecture-docs.md)), which is what keeps them describing
+   what exists rather than what is planned.
 6. Draft the DSL grammar docs under `porting/dsl/` from the analysis in 1.4 — EBNF for the top-level format, param maps,
    valid strings, count expressions, cost strings.
 7. Write `telemetry/metric-definitions.md` **now**, not later — Phase 4's definitions are design decisions, and writing
    them last means the engine won't have emitted what they need.
 8. Define the meta gauntlet in `research/meta-gauntlet.md`: format, deck sources, refresh cadence, and the resulting
-   card corpus. **Exit gate:** all listed docs exist and are reviewed; ADR-0001…0011 status = Accepted.
+   card corpus. Measured against real decklists in this repository, a 30-deck gauntlet is 562 distinct cards needing 71
+   of the 192 APIs used corpus-wide — 1.7% of the corpus (ADR-0011). **Exit gate:** all listed docs exist and are
+   reviewed; ADR-0001…0011 status = Accepted.
 
 ### M1 — Go foundation & the oracle harness skeleton — 1.5–2 wks
 

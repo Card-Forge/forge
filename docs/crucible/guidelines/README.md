@@ -20,6 +20,7 @@ Compressed grammar, exact technical content, aimed at engineers.
 | [03-testing-standards](03-testing-standards.md)           | `TEST-n` | Module-first testing, when to drop to unit level, fixtures    |
 | [04-adr-process](04-adr-process.md)                       | `ADRP-n` | When an ADR is required, format, numbering                    |
 | [05-commit-and-review](05-commit-and-review.md)           | `REV-n`  | Fork hygiene, branches, commits, review order                 |
+| [06-architecture-docs](06-architecture-docs.md)           | `ARCH-n` | How to describe the system: what exists, not what is planned  |
 
 ---
 
@@ -50,6 +51,7 @@ guideline is stale — fix it in the same PR.
 4. [02-java-to-go-translation](02-java-to-go-translation.md) — before touching any Java file
 5. [05-commit-and-review](05-commit-and-review.md) — before opening a PR
 6. [04-adr-process](04-adr-process.md) — when you hit a decision
+7. [06-architecture-docs](06-architecture-docs.md) — before writing anything under `architecture/`
 
 ---
 
