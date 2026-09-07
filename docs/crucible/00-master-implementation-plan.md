@@ -173,6 +173,10 @@ objects exist yet. Multi-face cards switch face via `AlternateMode:` and continu
 
 ### Design consequence for Go
 
+> **Refined by [ADR-0007](adr/0007-card-dsl-representation.md).** The compile-once claim below is right about
+> definitions and wrong about SVars: `forge-game` has 144 `setSVar`/`removeSVar` call sites, so SVars are also a runtime
+> scratchpad. Definitions compile once and are shared; written values live in a per-card overlay.
+
 Java re-interprets these strings **at runtime, per card instance, per game**. For a suite running 100k+ games this is
 pure waste. **Crucible must compile scripts once at load into a typed, immutable AST** (ADR-0007), shared read-only
 across all goroutines. Per-game `Card` objects hold only mutable state plus a pointer to the shared compiled definition.
