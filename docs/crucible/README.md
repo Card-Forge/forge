@@ -15,12 +15,12 @@ This repo is a fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). 
 
 ## Read in this order
 
-| #   | Document                                                             | What it gives you                                             |
-| --- | -------------------------------------------------------------------- | ------------------------------------------------------------- |
-| 1   | [00-master-implementation-plan.md](00-master-implementation-plan.md) | Codebase analysis, port strategy, telemetry design, roadmap   |
-| 2   | [guidelines/README.md](guidelines/README.md)                         | The binding rule set. Start with the doc-style guide          |
-| 3   | [design/engine-design.md](design/engine-design.md)                   | How the engine's decisions compose, before any of it is built |
-| 3   | [adr/README.md](adr/README.md)                                       | Decisions, once written                                       |
+| #   | Document                                                             | What it gives you                                                                   |
+| --- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| 1   | [00-master-implementation-plan.md](00-master-implementation-plan.md) | Codebase analysis, port strategy, telemetry design, roadmap                         |
+| 2   | [guidelines/README.md](guidelines/README.md)                         | The binding rule set. Start with the doc-style guide                                |
+| 3   | [design/](design/)                                                   | How decisions compose before the code exists: engine, card compilation, concurrency |
+| 3   | [adr/README.md](adr/README.md)                                       | Decisions, once written                                                             |
 
 `/CLAUDE.md` at the repo root is the entry point for Claude Code and points at the same rules.
 
@@ -28,16 +28,16 @@ This repo is a fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). 
 
 ## Layout
 
-| Path                           | Contents                                                                  | State                   |
-| ------------------------------ | ------------------------------------------------------------------------- | ----------------------- |
-| [guidelines/](guidelines/)     | Binding rules — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`    | Written                 |
-| [adr/](adr/)                   | Architecture Decision Records                                             | Empty — M0              |
-| [design/](design/)             | Target design — how accepted decisions compose (ARCH-10)                  | `engine-design` written |
-| [architecture/](architecture/) | System overview, module map, state model, pipelines                       | Stub                    |
-| [porting/](porting/)           | Parity matrix, test port matrix, upstream patches, port log, DSL grammars | Stub                    |
-| `telemetry/`                   | Event schema, metric definitions, report formats                          | Not written — M0        |
-| `runbooks/`                    | How to run a batch, add card support, investigate a parity failure        | Not written             |
-| `research/`                    | Meta gauntlet definition, format scope                                    | Not written — M0        |
+| Path                           | Contents                                                                  | State                                                    |
+| ------------------------------ | ------------------------------------------------------------------------- | -------------------------------------------------------- |
+| [guidelines/](guidelines/)     | Binding rules — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`    | Written                                                  |
+| [adr/](adr/)                   | Architecture Decision Records                                             | Empty — M0                                               |
+| [design/](design/)             | Target design — how accepted decisions compose (ARCH-10)                  | 3 written; `telemetry-pipeline` blocked on ADR-0013/0014 |
+| [architecture/](architecture/) | System overview, module map, state model, pipelines                       | Stub                                                     |
+| [porting/](porting/)           | Parity matrix, test port matrix, upstream patches, port log, DSL grammars | Stub                                                     |
+| `telemetry/`                   | Event schema, metric definitions, report formats                          | Not written — M0                                         |
+| `runbooks/`                    | How to run a batch, add card support, investigate a parity failure        | Not written                                              |
+| `research/`                    | Meta gauntlet definition, format scope                                    | Not written — M0                                         |
 
 ---
 

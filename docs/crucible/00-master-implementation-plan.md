@@ -948,16 +948,16 @@ open-ended. Sequence is firm; durations are not.
 
 **Status as of 2026-09-07 — the decision half of M0 is complete.**
 
-| #   | Item                                                                             | State                                                                               |
-| --- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| 1   | `docs/crucible/` structure, `README.md`, `adr/README.md`                         | Done                                                                                |
-| 2   | **ADR-0001 … ADR-0011**                                                          | Done — all eleven `Accepted`                                                        |
-| 3   | `guidelines/` — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`, `ARCH-n` | Done — seven documents plus index                                                   |
-| 4   | `/CLAUDE.md`                                                                     | Done — inlines the ten non-negotiables and the module-first testing rule            |
-| 5   | Six `architecture/` documents                                                    | `system-overview` done; the other four describe unbuilt code, so M1–M3 under ARCH-2 |
-| 6   | DSL grammars under `porting/dsl/`                                                | Done — five grammars derived from the corpus                                        |
-| 7   | `telemetry/metric-definitions.md`                                                | Done — 21 numbered definitions, versioned                                           |
-| 8   | `research/meta-gauntlet.md`                                                      | Structure done — Modern first, all formats eventually. Blocked on decklists         |
+| #   | Item                                                                             | State                                                                                                              |
+| --- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| 1   | `docs/crucible/` structure, `README.md`, `adr/README.md`                         | Done                                                                                                               |
+| 2   | **ADR-0001 … ADR-0011**                                                          | Done — all eleven `Accepted`                                                                                       |
+| 3   | `guidelines/` — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`, `ARCH-n` | Done — seven documents plus index                                                                                  |
+| 4   | `/CLAUDE.md`                                                                     | Done — inlines the ten non-negotiables and the module-first testing rule                                           |
+| 5   | Six `architecture/` documents                                                    | `system-overview` and `module-map` done. The remaining four describe unbuilt code, so they land M2-M8 under ARCH-2 |
+| 6   | DSL grammars under `porting/dsl/`                                                | Done — six grammars derived from the corpus                                                                        |
+| 7   | `telemetry/metric-definitions.md`                                                | Done — 21 numbered definitions, versioned                                                                          |
+| 8   | `research/meta-gauntlet.md`                                                      | Structure done — Modern first, all formats eventually. Blocked on decklists                                        |
 
 The only blocking item left is the Modern decklists for item 8, which need an external source. Items 5 through 8 are
 restated below in their original wording.
