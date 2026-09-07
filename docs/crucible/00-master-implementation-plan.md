@@ -324,18 +324,23 @@ text is authoritative where they differ.**
 | 0010 | Differential testing strategy              | The four-layer oracle harness (Section 3.3)                                                 |
 | 0011 | Card corpus scoping & coverage gate        | What "done" means for card support                                                          |
 
-**Near-term (before the module they govern):**
+**Near-term subjects, deliberately unnumbered:**
 
-| ADR  | Title                                                                     |
-| ---- | ------------------------------------------------------------------------- |
-| 0012 | Error handling & panic policy (engine invariants vs. recoverable errors)  |
-| 0013 | Telemetry event bus & event schema versioning                             |
-| 0014 | Telemetry storage format (NDJSON+zstd shards → DuckDB/Parquet)            |
-| 0015 | AI port strategy & parity tolerance (statistical, not bit-exact)          |
-| 0016 | Causal attribution methodology for per-card impact metrics                |
-| 0017 | Reporting output formats & CLI UX                                         |
-| 0018 | Observability, logging, and profiling                                     |
-| 0019 | Card-image/oracle-data licensing & redistribution posture (repo is GPLv3) |
+Numbers are allocated when an ADR is written, never reserved in advance. Reserving them locks a subject to a number
+decided before anyone knew what the ADR would say, and leaves a permanent hole if the subject turns out unnecessary —
+ADRP-3 forbids reuse. ADR-0012 was the first of these to be written and took the next free number rather than the one
+this list once assigned it.
+
+| Subject                                                                  | Needed before       |
+| ------------------------------------------------------------------------ | ------------------- |
+| Error handling & panic policy — engine invariants vs. recoverable errors | M5                  |
+| Telemetry event bus & event schema versioning                            | M8                  |
+| Telemetry storage format — NDJSON+zstd shards, DuckDB/Parquet            | M8                  |
+| AI port strategy & parity tolerance — statistical, not bit-exact         | M7                  |
+| Causal attribution methodology for per-card impact metrics               | M9                  |
+| Reporting output formats & CLI UX                                        | M9                  |
+| Observability, logging, and profiling                                    | M8                  |
+| Oracle-data licensing & redistribution posture (repo is GPLv3)           | before distribution |
 
 ## 2.4 Java → Go translation rules (normative — the core of ADR-0004)
 
