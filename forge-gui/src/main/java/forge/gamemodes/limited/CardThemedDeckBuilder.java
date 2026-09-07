@@ -852,7 +852,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
     private int getMaxCopiesForGeneration(final PaperCard card) {
         final int formatMax = format.getMaxCardCopies(card);
-        return formatMax == format.getMaxCardCopies() ? maxDuplicates : formatMax;
+        return formatMax == format.getMaxCardCopies() ? Math.min(maxDuplicates, formatMax) : formatMax;
     }
 
     /**
