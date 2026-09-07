@@ -1,6 +1,6 @@
 # ADR-0006 — Determinism and RNG
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-06
 - **Deciders:** `jc@archlab.pl`
 
