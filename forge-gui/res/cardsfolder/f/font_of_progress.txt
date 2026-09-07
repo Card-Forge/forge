@@ -1,8 +1,8 @@
 Name:Font of Progress
 ManaCost:U
 Types:Artifact
-K:etbCounter:OIL:2
-A:AB$ Mill | Cost$ 3 T | NumCards$ X | ValidTgts$ Player | SpellDescription$ Target player mills X cards, where X is the number of oil counters on CARDNAME.
+K:etbCounter:OIL:2:no Condition:This artifact enters with two oil counters on it.
+A:AB$ Mill | Cost$ 3 T | NumCards$ X | ValidTgts$ Player | SpellDescription$ Target player mills X cards, where X is the number of oil counters on this artifact.
 SVar:X:Count$CardCounters.OIL
 DeckHas:Ability$Counters|Mill
-Oracle:Font of Progress enters with two oil counters on it.\n{3}, {T}: Target player mills X cards, where X is the number of oil counters on Font of Progress.
+Oracle:This artifact enters with two oil counters on it.\n{3}, {T}: Target player mills X cards, where X is the number of oil counters on this artifact.

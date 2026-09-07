@@ -3,8 +3,8 @@ ManaCost:1 G
 Types:Creature Halfling Citizen
 PT:2/2
 K:Devour:3:Food
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTY | Description$ Creatures with power less than CARDNAME's power can't block it.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTY | Description$ Creatures with power less than this creature's power can't block it.
 SVar:Y:Count$CardPower
 DeckHas:Ability$Sacrifice|Counters
 DeckHints:Type$Food
-Oracle:Devour Food 3 (As this enters, you may sacrifice any number of Foods. This creature enters with three times that many +1/+1 counters on it.)\nCreatures with power less than Feasting Hobbit's power can't block it.
+Oracle:Devour Food 3 (As this creature enters, you may sacrifice any number of Foods. It enters with three times that many +1/+1 counters on it.)\nCreatures with power less than this creature's power can't block it.

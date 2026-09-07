@@ -2,6 +2,6 @@ Name:Foul Familiar
 ManaCost:2 B
 Types:Creature Spirit
 PT:3/1
-S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
-A:AB$ ChangeZone | Cost$ B PayLife<1> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-Oracle:Foul Familiar can't block.\n{B}, Pay 1 life: Return Foul Familiar to its owner's hand.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ This creature can't block.
+A:AB$ ChangeZone | Cost$ B PayLife<1> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return this creature to its owner's hand.
+Oracle:This creature can't block.\n{B}, Pay 1 life: Return this creature to its owner's hand.

@@ -3,5 +3,5 @@ ManaCost:2 R
 Types:Creature Wolf
 PT:1/2
 K:Trample
-A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
-Oracle:Trample\n{1}{R}: Feral Ridgewolf gets +2/+0 until end of turn.
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ This creature gets +2/+0 until end of turn.
+Oracle:Trample\n{1}{R}: This creature gets +2/+0 until end of turn.

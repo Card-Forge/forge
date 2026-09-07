@@ -2,6 +2,6 @@ Name:Forgotten Sentinel
 ManaCost:4
 Types:Artifact Creature Golem
 PT:4/3
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-Oracle:Forgotten Sentinel enters tapped.
+Oracle:This creature enters tapped.

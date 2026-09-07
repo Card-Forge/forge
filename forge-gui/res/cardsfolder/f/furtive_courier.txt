@@ -2,12 +2,12 @@ Name:Furtive Courier
 ManaCost:2 U
 Types:Creature Merfolk Advisor
 PT:3/2
-S:Mode$ CantBlockBy | ValidAttacker$ Card.Self+attacking | CheckSVar$ SaccedThisTurn | Description$ CARDNAME can't be blocked as long as you've sacrificed an artifact this turn.
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self+attacking | CheckSVar$ SaccedThisTurn | Description$ This creature can't be blocked as long as you've sacrificed an artifact this turn.
 SVar:SaccedThisTurn:PlayerCountPropertyYou$SacrificedThisTurn Artifact
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, draw a card, then discard a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature attacks, draw a card, then discard a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Sacrifice|Discard
 DeckHints:Type$Artifact|Clue|Map|Treasure|Food
-Oracle:Furtive Courier can't be blocked as long as you've sacrificed an artifact this turn.\nWhenever Furtive Courier attacks, draw a card, then discard a card.
+Oracle:This creature can't be blocked as long as you've sacrificed an artifact this turn.\nWhenever this creature attacks, draw a card, then discard a card.

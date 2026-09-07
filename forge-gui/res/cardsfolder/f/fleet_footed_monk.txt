@@ -2,5 +2,5 @@ Name:Fleet-Footed Monk
 ManaCost:1 W
 Types:Creature Human Monk
 PT:1/1
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or greater.
-Oracle:Fleet-Footed Monk can't be blocked by creatures with power 2 or greater.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGE2 | Description$ This creature can't be blocked by creatures with power 2 or greater.
+Oracle:This creature can't be blocked by creatures with power 2 or greater.

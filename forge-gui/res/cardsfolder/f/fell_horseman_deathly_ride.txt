@@ -2,12 +2,12 @@ Name:Fell Horseman
 ManaCost:3 B
 Types:Creature Zombie Knight
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME dies, put it on the bottom of its owner's library.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this creature dies, put it on the bottom of its owner's library.
 SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1
 DeckHints:Type$Adventure
 DeckHas:Ability$Graveyard
 AlternateMode:Adventure
-Oracle:When Fell Horseman dies, put it on the bottom of its owner's library.
+Oracle:When this creature dies, put it on the bottom of its owner's library.
 
 ALTERNATE
 

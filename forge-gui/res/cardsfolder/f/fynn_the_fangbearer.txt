@@ -6,4 +6,4 @@ K:Deathtouch
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+withDeathtouch | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPoison | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control with deathtouch deals combat damage to a player, that player gets two poison counters. (A player with ten or more poison counters loses the game.)
 SVar:TrigPoison:DB$ Poison | Defined$ TriggeredTarget | Num$ 2
 DeckHas:Ability$Counters
-Oracle:Deathtouch\nWhenever a creature you control with deathtouch deals combat damage to a player, that player gets two poison counters. (A player with ten or more poison counters loses the game.)
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhenever a creature you control with deathtouch deals combat damage to a player, that player gets two poison counters. (A player with ten or more poison counters loses the game.)

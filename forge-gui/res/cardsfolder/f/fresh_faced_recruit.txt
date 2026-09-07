@@ -2,5 +2,5 @@ Name:Fresh-Faced Recruit
 ManaCost:1 RW
 Types:Creature Human Soldier
 PT:2/1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, CARDNAME has first strike.
-Oracle:During your turn, Fresh-Faced Recruit has first strike.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, this creature has first strike.
+Oracle:During your turn, this creature has first strike.

@@ -8,4 +8,4 @@ SVar:Y:SVar$X/Times.2
 SVar:X:PlayerCountRememberedController$HasPropertyOpponent
 DeckHas:Ability$Token & Type$Faerie
 DeckHints:Type$Faerie
-Oracle:Return all creatures to their owners' hands.\nFor each opponent who controlled a creature returned this way, you create two 1/1 blue Faerie creature tokens with flying and "This token can block only creatures with flying."
+Oracle:Return all creatures to their owners' hands. For each opponent who controlled a creature returned this way, you create two 1/1 blue Faerie creature tokens with flying and "This token can block only creatures with flying."

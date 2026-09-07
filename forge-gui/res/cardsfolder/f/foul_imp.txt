@@ -3,6 +3,6 @@ ManaCost:B B
 Types:Creature Imp
 PT:2/2
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters, you lose 2 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When this creature enters, you lose 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 2
-Oracle:Flying\nWhen Foul Imp enters, you lose 2 life.
+Oracle:Flying\nWhen this creature enters, you lose 2 life.
