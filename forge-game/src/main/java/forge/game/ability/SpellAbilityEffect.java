@@ -937,6 +937,9 @@ public abstract class SpellAbilityEffect {
                 runParams.put(AbilityKey.Cards, e.getValue());
                 runParams.put(AbilityKey.Cause, sa);
                 runParams.put(AbilityKey.DiscardedBefore, discardedBefore.get(e.getKey()));
+                if (params.containsKey(AbilityKey.Random)) {
+                    runParams.put(AbilityKey.Random, params.get(AbilityKey.Random));
+                }
                 e.getKey().getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
             }
         }
