@@ -3,6 +3,6 @@ ManaCost:4 B
 Types:Creature Eye
 PT:6/3
 S:Mode$ CantAttack | ValidCard$ Creature.nonEye+YouCtrl | Description$ Non-Eye creatures you control can't attack.
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigDestroyBlocker | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, destroy that creature.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigDestroyBlocker | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature becomes blocked by a creature, destroy that creature.
 SVar:TrigDestroyBlocker:DB$ Destroy | Defined$ TriggeredBlockerLKICopy
-Oracle:Non-Eye creatures you control can't attack.\nWhenever Evil Eye of Urborg becomes blocked by a creature, destroy that creature.
+Oracle:Non-Eye creatures you control can't attack.\nWhenever this creature becomes blocked by a creature, destroy that creature.

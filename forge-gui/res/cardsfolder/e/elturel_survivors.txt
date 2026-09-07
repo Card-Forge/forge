@@ -4,8 +4,8 @@ Types:Creature Tiefling Peasant
 PT:0/4
 K:Trample
 K:Myriad
-S:Mode$ Continuous | Affected$ Creature.Self+attacking | AddPower$ X | Description$ As long as CARDNAME is attacking, it gets +X/+0, where X is the number of lands defending player controls.
+S:Mode$ Continuous | Affected$ Creature.Self+attacking | AddPower$ X | Description$ As long as this creature is attacking, it gets +X/+0, where X is the number of lands defending player controls.
 SVar:X:Count$Valid Land.DefenderCtrl
 SVar:BuffedBy:Land.OppCtrl
 SVar:HasAttackEffect:TRUE
-Oracle:Trample, myriad\nAs long as Elturel Survivors is attacking, it gets +X/+0, where X is the number of lands defending player controls.
+Oracle:Trample, myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\nAs long as this creature is attacking, it gets +X/+0, where X is the number of lands defending player controls.

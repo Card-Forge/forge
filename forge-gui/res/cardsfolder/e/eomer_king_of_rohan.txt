@@ -3,7 +3,7 @@ ManaCost:3 R W
 Types:Legendary Creature Human Noble
 PT:2/2
 K:Double Strike
-K:etbCounter:P1P1:X:no Condition:CARDNAME enters with a +1/+1 counter on it for each other Human you control.
+K:etbCounter:P1P1:X:no Condition:NICKNAME enters with a +1/+1 counter on it for each other Human you control.
 SVar:X:Count$Valid Human.Other+YouCtrl
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When NICKNAME enters, target player becomes the monarch. NICKNAME deals damage equal to its power to any target.
 SVar:TrigMonarch:DB$ BecomeMonarch | ValidTgts$ Player | SubAbility$ DBPower
@@ -11,4 +11,4 @@ SVar:DBPower:DB$ DealDamage | ValidTgts$ Any | NumDmg$ Y
 SVar:Y:Count$CardPower
 DeckHas:Ability$Counters
 DeckNeeds:Type$Human
-Oracle:Double strike\nÉomer, King of Rohan enters with a +1/+1 counter on it for each other Human you control.\nWhen Éomer enters, target player becomes the monarch. Éomer deals damage equal to its power to any target.
+Oracle:Double strike\nÉomer enters with a +1/+1 counter on it for each other Human you control.\nWhen Éomer enters, target player becomes the monarch. Éomer deals damage equal to its power to any target.

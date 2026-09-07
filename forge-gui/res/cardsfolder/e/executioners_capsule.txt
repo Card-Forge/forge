@@ -3,4 +3,4 @@ ManaCost:B
 Types:Artifact
 A:AB$ Destroy | Cost$ 1 B T Sac<1/CARDNAME> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
 SVar:PlayMain1:TRUE
-Oracle:{1}{B}, {T}, Sacrifice Executioner's Capsule: Destroy target nonblack creature.
+Oracle:{1}{B}, {T}, Sacrifice this artifact: Destroy target nonblack creature.

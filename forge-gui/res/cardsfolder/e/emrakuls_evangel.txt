@@ -8,4 +8,4 @@ SVar:X:Count$xPaid
 SVar:AIPreference:SacCost$Creature.token
 DeckHas:Ability$Token|Sacrifice
 DeckHints:Ability$Token & Type$Eldrazi|Horror
-Oracle:{T}, Sacrifice Emrakul's Evangel and any number of other non-Eldrazi creatures: Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way.
+Oracle:{T}, Sacrifice this creature and any number of other non-Eldrazi creatures: Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way.

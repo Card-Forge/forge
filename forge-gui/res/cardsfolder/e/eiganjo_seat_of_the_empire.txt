@@ -6,4 +6,4 @@ A:AB$ DealDamage | PrecostDesc$ Channel — | Cost$ 2 W Discard<1/CARDNAME> | Ac
 SVar:X:Count$Valid Creature.Legendary+YouCtrl
 DeckHints:Type$Legendary
 DeckHas:Ability$Discard
-Oracle:{T}: Add {W}.\nChannel — {2}{W}, Discard Eiganjo, Seat of the Empire: It deals 4 damage to target attacking or blocking creature. This ability costs {1} less to activate for each legendary creature you control.
+Oracle:{T}: Add {W}.\nChannel — {2}{W}, Discard this card: It deals 4 damage to target attacking or blocking creature. This ability costs {1} less to activate for each legendary creature you control.

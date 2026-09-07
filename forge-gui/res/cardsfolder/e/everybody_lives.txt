@@ -7,4 +7,4 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ DBCantLose,DBCantWin | StaticAbil
 SVar:DBCantLose:Event$ GameLoss | ValidPlayer$ Player | Layer$ CantHappen | Description$ Players can't lose the game or win the game this turn.
 SVar:DBCantWin:Event$ GameWin | ValidPlayer$ Player | Layer$ CantHappen | Secondary$ True | Description$ Players can't lose the game or win the game this turn.
 SVar:STKeepLife:Mode$ CantLoseLife | ValidPlayer$ Player | Description$ Players can't lose life this turn.
-Oracle:All creatures gain hexproof and indestructible until end of turn. Players gain hexproof until end of turn.\nPlayers can't lose life this turn and players can't lose the game or win the game this turn.
+Oracle:All creatures gain hexproof and indestructible until end of turn. Players gain hexproof until end of turn. Players can't lose life this turn and players can't lose the game or win the game this turn.

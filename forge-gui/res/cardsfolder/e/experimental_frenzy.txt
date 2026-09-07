@@ -6,5 +6,5 @@ S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library |
 S:Mode$ CantPlayLand | Player$ You | Origin$ Hand | Description$ You can't play lands from your hand.
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | Origin$ Hand | Description$ You can't play lands or cast spells from your hand.
 SVar:NonStackingEffect:True
-A:AB$ Destroy | Cost$ 3 R | Defined$ Self | SpellDescription$ Destroy CARDNAME.
-Oracle:You may look at the top card of your library any time.\nYou may play lands and cast spells from the top of your library.\nYou can't play lands or cast spells from your hand.\n{3}{R}: Destroy Experimental Frenzy.
+A:AB$ Destroy | Cost$ 3 R | Defined$ Self | SpellDescription$ Destroy this enchantment.
+Oracle:You may look at the top card of your library any time.\nYou may play lands and cast spells from the top of your library.\nYou can't play lands or cast spells from your hand.\n{3}{R}: Destroy this enchantment.

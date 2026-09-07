@@ -2,5 +2,5 @@ Name:Energizer
 ManaCost:4
 Types:Artifact Creature Juggernaut
 PT:2/2
-A:AB$ PutCounter | Cost$ 2 T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
-Oracle:{2}, {T}: Put a +1/+1 counter on Energizer.
+A:AB$ PutCounter | Cost$ 2 T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on this creature.
+Oracle:{2}, {T}: Put a +1/+1 counter on this creature.

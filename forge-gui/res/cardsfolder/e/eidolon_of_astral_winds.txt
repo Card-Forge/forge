@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Enchantment Creature Spirit
 PT:2/4
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.YouCtrl | Execute$ TrigAnimate | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment you control enters, choose target creature you control. Until end of turn, that creature has base power and toughness 4/4 and gains flying.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.YouCtrl | Execute$ TrigAnimate | TriggerDescription$ Constellation — Whenever this creature or another enchantment you control enters, choose target creature you control. Until end of turn, that creature has base power and toughness 4/4 and gains flying.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Power$ 4 | Toughness$ 4 | Keywords$ Flying
 DeckHints:Type$Enchantment
-Oracle:Vigilance\nConstellation — Whenever Eidolon of Astral Winds or another enchantment you control enters, choose target creature you control. Until end of turn, that creature has base power and toughness 4/4 and gains flying.
+Oracle:Vigilance\nConstellation — Whenever this creature or another enchantment you control enters, choose target creature you control. Until end of turn, that creature has base power and toughness 4/4 and gains flying.

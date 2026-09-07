@@ -14,10 +14,10 @@ ALTERNATE
 Name:Apex Observatory
 ManaCost:no cost
 Types:Artifact
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | Description$ This artifact enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:ETBReplacement:Other:DBChooseType
-SVar:DBChooseType:DB$ ChooseType | Type$ Shared | TypesFromDefined$ ExiledWith | AILogic$ MostProminentComputerControlsOrOwns | SpellDescription$ As CARDNAME enters, choose a card type shared among two exiled cards used to craft it.
+SVar:DBChooseType:DB$ ChooseType | Type$ Shared | TypesFromDefined$ ExiledWith | AILogic$ MostProminentComputerControlsOrOwns | SpellDescription$ As it enters, choose a card type shared among two exiled cards used to craft it.
 A:AB$ Effect | Cost$ T | StaticAbilities$ Play | ForgetOnCast$ Card.ChosenType+YouCtrl | SpellDescription$ The next spell you cast this turn of the chosen type can be cast without paying its mana cost.
 SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayDontGrantZonePermissions$ True | Affected$ Card.ChosenType | AffectedZone$ Hand,Graveyard,Library,Exile,Command | Description$ The next spell you cast this turn of the chosen type can be cast without paying its mana cost.
-Oracle:Apex Observatory enters tapped. As it enters, choose a card type shared among two exiled cards used to craft it.\n{T}: The next spell you cast this turn of the chosen type can be cast without paying its mana cost.
+Oracle:This artifact enters tapped. As it enters, choose a card type shared among two exiled cards used to craft it.\n{T}: The next spell you cast this turn of the chosen type can be cast without paying its mana cost.

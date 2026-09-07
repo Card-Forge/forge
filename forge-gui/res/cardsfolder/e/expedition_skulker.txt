@@ -2,6 +2,6 @@ Name:Expedition Skulker
 ManaCost:1 B
 Types:Creature Vampire Rogue
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | IsPresent$ Rogue.YouCtrl+Other | Description$ CARDNAME has deathtouch as long as you control another Rogue.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | IsPresent$ Rogue.YouCtrl+Other | Description$ This creature has deathtouch as long as you control another Rogue. (Any amount of damage it deals to a creature is enough to destroy it.)
 DeckHints:Type$Rogue
-Oracle:Expedition Skulker has deathtouch as long as you control another Rogue.
+Oracle:This creature has deathtouch as long as you control another Rogue. (Any amount of damage it deals to a creature is enough to destroy it.)

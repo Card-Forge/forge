@@ -5,4 +5,4 @@ A:SP$ Dig | DigNum$ 3 | ChangeNum$ 1 | NoReveal$ True | SubAbility$ DBProliferat
 SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
 DeckHas:Ability$Proliferate|Counters
 DeckHints:Ability$Counters & Type$Planeswalker
-Oracle:Look at the top three cards of your library. Put one of them into your hand and rest on the bottom of your library in any order. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+Oracle:Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

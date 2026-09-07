@@ -4,6 +4,6 @@ Types:Creature Ooze
 PT:2/2
 K:Trample
 K:Cumulative upkeep:RG
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each age counter on it.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ This creature gets +1/+1 for each age counter on it.
 SVar:X:Count$CardCounters.AGE
-Oracle:Trample\nCumulative upkeep {R} or {G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nEarthen Goo gets +1/+1 for each age counter on it.
+Oracle:Trample\nCumulative upkeep {R} or {G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nThis creature gets +1/+1 for each age counter on it.

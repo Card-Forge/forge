@@ -2,8 +2,8 @@ Name:Embraal Bruiser
 ManaCost:1 B
 Types:Creature Human Warrior
 PT:3/1
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | IsPresent$ Artifact.YouCtrl | Description$ CARDNAME has menace as long as you control an artifact.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | IsPresent$ Artifact.YouCtrl | Description$ This creature has menace as long as you control an artifact.
 SVar:BuffedBy:Artifact
-Oracle:Embraal Bruiser enters tapped.\nEmbraal Bruiser has menace as long as you control an artifact.
+Oracle:This creature enters tapped.\nThis creature has menace as long as you control an artifact.
