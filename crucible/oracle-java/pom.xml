@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Crucible's differential-testing oracle.
+
+  NOTE ON THE PARENT: this module names the root Forge POM as its parent but is
+  deliberately NOT listed in that POM's <modules>. Maven permits a child to name
+  a parent that does not aggregate it, and doing so keeps the root pom.xml
+  unedited - it is an upstream file that upstream changes often, so a one-line
+  <module> addition there would conflict on every sync (ADR-0001, ADR-0002).
+
+  Do not "fix" this by adding a <module> entry upstream.
+
+  Build standalone:
+      mvn -f crucible/oracle-java/pom.xml test
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>forge</groupId>
+    <artifactId>forge</artifactId>
+    <version>2.0.05-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <groupId>crucible</groupId>
+  <artifactId>crucible-oracle</artifactId>
+  <packaging>jar</packaging>
+  <name>Crucible Differential Oracle</name>
+  <description>
+    Generates golden outputs from the Forge Java engine for the Go port to be
+    diffed against. Test tooling only - never shipped, never on Crucible's
+    execution path (ADR-0002, ADR-0010).
+  </description>
+
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+  </properties>
+</project>

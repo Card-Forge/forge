@@ -1,0 +1,84 @@
+# Crucible's Go build. Scoped to crucible/** so an upstream sync from
+# Card-Forge/forge never triggers it (ADR-0001).
+name: Crucible Go
+
+on:
+  push:
+    branches: [master]
+    paths: ['crucible/**', '.github/workflows/crucible-go.yml']
+  pull_request:
+    paths: ['crucible/**', '.github/workflows/crucible-go.yml']
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: crucible
+
+jobs:
+  build:
+    name: build, vet, test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # go-version-file reads crucible/go.mod, so the pinned toolchain in
+      # ADR-0002 is the single source of truth and CI cannot drift from it.
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: crucible/go.mod
+          cache-dependency-path: crucible/go.sum
+
+      - name: gofmt
+        run: |
+          unformatted=$(gofmt -l .)
+          if [ -n "$unformatted" ]; then
+            echo "::error::gofmt would change these files:"
+            echo "$unformatted"
+            exit 1
+          fi
+
+      - name: go vet
+        run: go vet ./...
+
+      # -race is not optional here. The engine is goroutine-per-game with an
+      # immutable shared card database, and a silently shared pointer is the
+      # highest-probability bug to import from Java's mutable statics
+      # (GO-2, TEST-7).
+      - name: go test -race
+        run: go test -race -count=1 ./...
+
+  oracle-parity:
+    name: javarand vs java.util.Random
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 21, not 25: upstream's own CI matrix tests 17 and 21 only, and 21 is
+      # the newer tested LTS (ADR-0002).
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: crucible/go.mod
+          cache-dependency-path: crucible/go.sum
+
+      # Regenerate the golden from a real JVM and require it to be byte-identical
+      # to the committed one. Without this the golden is just a file Go agrees
+      # with itself about, and the whole parity claim is circular.
+      - name: regenerate golden from a real JVM
+        run: |
+          javac -d /tmp/jout oracle-java/src/main/java/crucible/oracle/RandomDumper.java
+          java -cp /tmp/jout crucible.oracle.RandomDumper > /tmp/java-random.golden
+          if ! diff -u pkg/javarand/testdata/java-random.golden /tmp/java-random.golden; then
+            echo "::error::committed golden differs from this JVM's output"
+            exit 1
+          fi
+          echo "golden reproduced exactly: $(wc -l < /tmp/java-random.golden) records"
+
+      - name: parity test
+        run: go test -race -count=1 -run TestJavaParity -v ./pkg/javarand/
