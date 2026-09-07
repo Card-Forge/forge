@@ -6,7 +6,7 @@
 
 ## Context
 
-209,859 lines of Java become Go. Every unit of that is a choice between reproducing the Java structure and rewriting it
+209,810 lines of Java become Go. Every unit of that is a choice between reproducing the Java structure and rewriting it
 idiomatically, and the choice cannot be left to whoever is holding the file. Made ad hoc across ten milestones, it
 produces a codebase that is Java in some packages and Go in others, which is worse than either.
 
@@ -30,7 +30,9 @@ landed. What was missing is the record of _why_ — and by now there is evidence
 | `forge-core` |      26,401 |                   887 |
 | `forge-game` |     126,637 |                 3,421 |
 | `forge-ai`   |      56,821 |                   248 |
-| **Total**    | **209,859** |             **4,556** |
+| **Total**    | **209,810** |             **4,556** |
+
+Counted with `find forge-{core,game,ai}/src/main/java -name '*.java' -exec cat {} + | wc -l`.
 
 `Card.java` alone declares 628 accessors in 8,105 lines. At three lines each that is roughly 13,700 lines existing only
 because Java has no properties — about 6.5% of the port surface, reproducing nothing but a language limitation Go does

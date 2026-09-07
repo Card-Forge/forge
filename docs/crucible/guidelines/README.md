@@ -33,7 +33,7 @@ sba.go:88 — package-level cache breaks goroutine-per-game (GO-2).
 ```
 
 **Numbers are permanent.** A superseded rule keeps its number and gains a line pointing at its replacement — for example
-`**Superseded by GO-99.**`, where `GO-99` is whatever new rule replaced it. Never renumber; old citations must keep
+a bold "Superseded by GO-nn" line naming whatever new rule replaced it. Never renumber; old citations must keep
 resolving.
 
 **Conflict order:** a specific rule beats a general one. ADR beats a guideline. If a guideline and an ADR disagree, the

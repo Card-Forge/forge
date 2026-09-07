@@ -260,14 +260,14 @@ docs/crucible/
     concurrency-and-determinism.md
     telemetry-pipeline.md          # engine events → recorder → storage → report
   porting/
-    java-to-go-translation-rules.md   # normative; the table in 2.4
-    dsl/
-      card-script-grammar.md          # top-level Key:Value grammar (EBNF)
-      param-map-grammar.md
-      valid-string-grammar.md         # + full property vocabulary, generated
-      count-expression-grammar.md
-      cost-string-grammar.md
-      keyword-grammar.md
+    dsl/                              # WRITTEN — six grammars, derived from the corpus
+      README.md                       # index, derivation method, cross-grammar findings
+      01-card-script-grammar.md       # top-level Key:Value
+      02-param-map-grammar.md         # Key$ Value | Key$ Value
+      03-valid-string-grammar.md      # Creature.Green+attacking+YouCtrl
+      04-count-expression-grammar.md  # Count$...  — embeds grammar 03
+      05-cost-string-grammar.md       # 2 R T Sac<1/Creature>
+      06-keyword-grammar.md           # Dash:1 R
     parity-matrix.md                  # API/keyword/trigger → Go status, generated
     upstream-patches.md
     port-log/                         # one note per ported unit: decisions, deviations
@@ -279,7 +279,7 @@ docs/crucible/
     03-testing-standards.md        # TEST-n — module-first testing
     04-adr-process.md              # ADRP-n — when/how to write an ADR
     05-commit-and-review.md        # REV-n  — fork hygiene, commits, review
-    06-architecture-docs.md        # ARCH-n — describing the system, not the plan order
+    06-architecture-docs.md        # ARCH-n — describing the system, not the plan
   telemetry/
     event-schema.md                   # versioned event catalogue
     metric-definitions.md             # NORMATIVE definitions of screw/flood/dead

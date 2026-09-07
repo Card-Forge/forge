@@ -4,7 +4,7 @@
 - **Applies to:** `internal/carddb` and `internal/carddb/compile`
 - **Derived from:** the corpus as of 2026-09-07
 
-Five grammars. Together they specify everything `internal/carddb` must parse, and they are the input to the typed param
+Six grammars. Together they specify everything `internal/carddb` must parse, and they are the input to the typed param
 struct generator ([ADR-0007](../../adr/0007-card-dsl-representation.md), [ADR-0008](../../adr/0008-effect-dispatch.md)).
 
 | Grammar                                            | Governs                            | Java counterpart                   |

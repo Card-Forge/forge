@@ -53,7 +53,7 @@ What exists is the decision and rule set that governs the code before it is writ
 
 | Artefact           | Count | Command                                      |
 | ------------------ | ----: | -------------------------------------------- |
-| Crucible documents |    27 | `find docs/crucible -name '*.md' \| wc -l`   |
+| Crucible documents |    36 | `find docs/crucible -name '*.md' \| wc -l`   |
 | Accepted ADRs      |    11 | `ls docs/crucible/adr/0*.md \| wc -l`        |
 | Guidelines         |     7 | `ls docs/crucible/guidelines/0*.md \| wc -l` |
 
