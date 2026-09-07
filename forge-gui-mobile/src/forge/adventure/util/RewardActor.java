@@ -3,7 +3,6 @@ package forge.adventure.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -119,18 +118,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (needsToBeDisposed) {
             needsToBeDisposed = false;
             if (!Reward.Type.Card.equals(reward.type))
-                image.dispose(); //clear only generated images and let assetmanager handle the disposal of actual card texture
-            if (generatedTooltip != null)
-                generatedTooltip.dispose();
+                Forge.safeDispose(image); //clear only generated images and let assetmanager handle the disposal of actual card texture
+            Forge.safeDispose(generatedTooltip);
         }
-        if (T != null)
-            T.dispose();
-        if (Talt != null)
-            Talt.dispose();
-        if (Tnotext != null)
-            Tnotext.dispose();
-        if (Taltnotext != null)
-            Taltnotext.dispose();
+        Forge.safeDispose(T, Talt, Tnotext, Taltnotext);
     }
 
     @Override
@@ -370,7 +361,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                                 }
                             } catch (Exception ignored) {}
                         }
-                        T = renderPlaceholder(new Graphics(Forge.LOW_SPRITES_CAP), reward.getCard(), false); //Now we can render the card.
+                        T = renderPlaceholder(reward.getCard(), false); //Now we can render the card.
                         setCardImage(T);
                         loaded = false;
                         if (!ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(false)))
@@ -634,7 +625,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
     private Texture getRenderedBackface(Reward r) {
         if (Talt == null)
-            Talt = renderPlaceholder(new Graphics(Forge.LOW_SPRITES_CAP), r.getCard(), true);
+            Talt = renderPlaceholder(r.getCard(), true);
         return Talt;
     }
 
@@ -677,12 +668,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (shouldDisplayText) {
             if (backFace) {
                 if (Taltnotext == null)
-                    Taltnotext = renderPlaceholder(new Graphics(Forge.LOW_SPRITES_CAP), reward.getCard(), true, false);
+                    Taltnotext = renderPlaceholder(reward.getCard(), true, false);
                 boolean flip = reward.getCard().getRules().getSplitType() == CardSplitType.Flip;
                 return new RewardImage(processDrawable(Taltnotext, flip));
             }
             if (Tnotext == null)
-                Tnotext = renderPlaceholder(new Graphics(Forge.LOW_SPRITES_CAP), reward.getCard(), false, false);
+                Tnotext = renderPlaceholder(reward.getCard(), false, false);
             return new RewardImage(processDrawable(Tnotext));
         }
         return backFace ? alternateToolTipImage : toolTipImage;
@@ -789,35 +780,37 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         addListener(tooltip);
     }
 
-    private Texture renderPlaceholder(Graphics g, PaperCard card, boolean alternate) {
-        return renderPlaceholder(g, card, alternate, true);
+    private Texture renderPlaceholder(PaperCard card, boolean alternate) {
+        return renderPlaceholder(card, alternate, true);
     }
 
-    private Texture renderPlaceholder(Graphics g, PaperCard card, boolean alternate, boolean displayArt) { //Use CardImageRenderer to output a Texture.
+    private Texture renderPlaceholder(PaperCard card, boolean alternate, boolean displayArt) { //Use CardImageRenderer to output a Texture.
+        Graphics assetGraphics = Forge.getAssets().getAssetGraphics();
         if (renderedCount < 1) {
             renderedCount++;
             //The first time we find a card that has no art, render one out of view to fully initialize CardImageRenderer.
-            g.begin(preview_w, preview_h);
-            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt);
-            g.end();
+            assetGraphics.begin(preview_w, preview_h);
+            CardImageRenderer.drawCardImage(assetGraphics, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt);
+            assetGraphics.end();
         }
         Matrix4 m = new Matrix4();
         FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(preview_w, preview_h, true);
         frameBuffer.begin();
         m.setToOrtho2D(0, preview_h, preview_w, -preview_h); //So it renders flipped directly.
 
-        g.begin(preview_w, preview_h);
-        g.setProjectionMatrix(m);
-        g.startClip();
-        CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt);
-        g.end();
-        g.endClip();
-        //Rendering ends here. Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.
-        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h);
-        Texture result = new Texture(pixmap, Forge.isTextureFilteringEnabled());
+        assetGraphics.begin(preview_w, preview_h);
+        assetGraphics.setProjectionMatrix(m);
+        assetGraphics.startClip();
+        CardImageRenderer.drawCardImage(assetGraphics, CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt);
+        assetGraphics.end();
+        assetGraphics.endClip();
         frameBuffer.end();
-        g.dispose();
-        pixmap.dispose();
+        // Rendering ends here. Grab the rendered framebuffer and bind to texture (faster method than initializing new texture)
+        Texture result = frameBuffer.getColorBufferTexture();
+        result.bind();
+        // Generate Mipmaps if Texture Filtering is enabled
+        if (Forge.isTextureFilteringEnabled())
+            Gdx.gl.glGenerateMipmap(GL20.GL_TEXTURE_2D);
         return result;
     }
 
@@ -856,11 +849,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             itemText.draw(batch, 1);
         }
         batch.end();
-        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, pw, ph);
-        image = new Texture(pixmap);
         frameBuffer.end();
+        image = frameBuffer.getColorBufferTexture();
+        image.bind();
         batch.dispose();
-        pixmap.dispose();
     }
 
     private void setItemTooltips(Sprite icon, Sprite backSprite, boolean isBooster) {
@@ -908,13 +900,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     description = "Quest Item";
                 getGraphics().end();
                 getGraphics().endClip();
-                Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h);
-                generatedTooltip = new Texture(pixmap, Forge.isTextureFilteringEnabled());
-                pixmap.dispose();
             } catch (Exception e) {
-                //e.printStackTrace();
+                e.printStackTrace();
             } finally {
                 frameBuffer.end();
+                generatedTooltip = frameBuffer.getColorBufferTexture();
+                generatedTooltip.bind();
                 getGraphics().dispose();
                 //reset bitmapfont to default
                 Controls.getBitmapFont("default");
@@ -946,9 +937,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (tooltip.getActor() != null)
                 tooltip.getActor().remove();
         }
+        dispose();
     }
 
-    public void clearHoldToolTip() {
+    public void clearLabel() {
         if (autoSell != null)
             autoSell.remove();
 
@@ -1136,7 +1128,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (Reward.Type.Card.equals(reward.getType())) {
             if (!loaded || image == null) {
                 if (T == null) {
-                    T = renderPlaceholder(new Graphics(Forge.LOW_SPRITES_CAP), reward.getCard(), false);
+                    T = renderPlaceholder(reward.getCard(), false);
                 }
 
                 drawCard(batch, T, x, width);
