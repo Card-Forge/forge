@@ -6,9 +6,12 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
 import java.util.Arrays;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
 
 public class AiCache {
 
@@ -17,6 +20,13 @@ public class AiCache {
 
     public static boolean identity(Object a, Object b) {
         return a == b;
+    }
+
+    /** Creates an identity-keyed cache scoped to the returned function. */
+    public static <K> ToIntFunction<K> memoizeIdentityInt(
+            final ToIntFunction<K> evaluator) {
+        Map<K, Integer> values = new IdentityHashMap<>();
+        return key -> values.computeIfAbsent(key, evaluator::applyAsInt);
     }
 
     // the cache is global for calculations that can be shared between games

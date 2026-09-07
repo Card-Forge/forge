@@ -45,6 +45,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BooleanSupplier;
 
 /**
  * <p>
@@ -750,6 +751,20 @@ public class CombatUtil {
 
         final CardCollectionView attackers = combat.getAttackers();
 
+        if (blocker.getMustBlockCards().isEmpty()) {
+            boolean hasRequirement = false;
+            for (Card attacker : attackers) {
+                if (!attackerLureSatisfied(
+                        attacker, blocker, CardCollection.EMPTY)) {
+                    hasRequirement = true;
+                    break;
+                }
+            }
+            if (!hasRequirement) {
+                return false;
+            }
+        }
+
         final CardCollection requirementCards = new CardCollection();
         final Player defender = blocker.getController();
         for (final Card attacker : attackers) {
@@ -826,7 +841,8 @@ public class CombatUtil {
         return Collections.disjoint(combat.getAttackersBlockedBy(blocker), requirementCards);
     }
 
-    private static boolean attackerLureSatisfied(final Card attacker, final Card blocker, final CardCollection blockers) {
+    private static boolean attackerLureSatisfied(final Card attacker, final Card blocker,
+            final CardCollectionView blockers) {
         if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
                 || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
                         && blockers.isEmpty())
@@ -905,6 +921,15 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canBlock(final Card attacker, final Card blocker, final Combat combat) {
+        return canBlock(attacker, blocker, combat, () -> canBlock(attacker, blocker));
+    }
+
+    /**
+     * Checks combat-state-dependent restrictions using a previously calculated
+     * result for the stable attacker/blocker characteristics.
+     */
+    public static boolean canBlock(final Card attacker, final Card blocker, final Combat combat,
+            final BooleanSupplier canBlockWithoutCombat) {
         if (attacker == null || blocker == null) {
             return false;
         }
@@ -954,7 +979,7 @@ public class CombatUtil {
             return false;
         }
 
-        return canBlock(attacker, blocker);
+        return canBlockWithoutCombat.getAsBoolean();
     }
 
     // can the blocker block the attacker?

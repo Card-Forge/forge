@@ -47,10 +47,10 @@ import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-import forge.util.collect.FCollection;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.ToIntFunction;
 
 
 /**
@@ -295,6 +295,11 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int lifeThatWouldRemain(final Player ai, final Combat combat) {
+        return lifeThatWouldRemain(ai, combat, null);
+    }
+
+    static int lifeThatWouldRemain(final Player ai, final Combat combat,
+            final ToIntFunction<Card> unblockedDamage) {
         int damage = 0;
 
         if (ai.canLoseLife()) {
@@ -315,7 +320,13 @@ public class ComputerUtilCombat {
                 }
             }
 
-            damage += sumDamageIfUnblocked(unblocked, ai);
+            if (unblockedDamage == null) {
+                damage += sumDamageIfUnblocked(unblocked, ai);
+            } else {
+                for (Card attacker : unblocked) {
+                    damage += unblockedDamage.applyAsInt(attacker);
+                }
+            }
         }
 
         return ai.getLife() - damage;
@@ -390,6 +401,11 @@ public class ComputerUtilCombat {
         return lifeInDanger(ai, combat, 0);
     }
     public static boolean lifeInDanger(final Player ai, final Combat combat, final int payment) {
+        return lifeInDanger(ai, combat, payment, true, null);
+    }
+
+    static boolean lifeInDanger(final Player ai, final Combat combat, final int payment,
+            final boolean checkPoison, final ToIntFunction<Card> unblockedDamage) {
         // life in danger only cares about the player's life. Not Planeswalkers' life
         if (ai.cantLose() || combat == null || combat.getAttackingPlayer() == ai) {
             return false;
@@ -436,7 +452,8 @@ public class ComputerUtilCombat {
             }
         }
 
-        if (resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters())) {
+        if (checkPoison
+                && resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters())) {
             return true;
         }
 
@@ -450,7 +467,9 @@ public class ComputerUtilCombat {
             maxTreshold--;
         }
 
-        return !ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < Math.min(threshold, ai.getLife());
+        return !ai.cantLoseForZeroOrLessLife()
+                && lifeThatWouldRemain(ai, combat, unblockedDamage) - payment
+                < Math.min(threshold, ai.getLife());
     }
 
     /**
@@ -905,15 +924,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        final FCollection<Trigger> theTriggers = new FCollection<>();
-        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
-            theTriggers.addAll(card.getTriggers());
-        }
-        for (Card card : game.getCardsIn(ZoneType.Command)) {
-            theTriggers.addAll(card.getTriggers());
-        }
-        theTriggers.addAll(attacker.getTriggers());
-        for (final Trigger trigger : theTriggers) {
+        for (final Trigger trigger : CardTraitViewCache.getCombatTriggers(attacker)) {
             final Card source = trigger.getHostCard();
 
             if (!combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
@@ -1013,16 +1024,7 @@ public class ComputerUtilCombat {
             toughness += attacker.getNetToughness() - blocker.getNetToughness();
         }
 
-        final Game game = attacker.getGame();
-        final FCollection<Trigger> theTriggers = new FCollection<>();
-        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
-            theTriggers.addAll(card.getTriggers());
-        }
-        for (Card card : game.getCardsIn(ZoneType.Command)) {
-            theTriggers.addAll(card.getTriggers());
-        }
-        theTriggers.addAll(attacker.getTriggers());
-        for (final Trigger trigger : theTriggers) {
+        for (final Trigger trigger : CardTraitViewCache.getCombatTriggers(attacker)) {
             final Card source = trigger.getHostCard();
 
             if (!combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
@@ -1149,13 +1151,6 @@ public class ComputerUtilCombat {
         }
 
         final Game game = attacker.getGame();
-        final FCollection<Trigger> theTriggers = new FCollection<>();
-        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
-            theTriggers.addAll(card.getTriggers());
-        }
-        for (Card card : game.getCardsIn(ZoneType.Command)) {
-            theTriggers.addAll(card.getTriggers());
-        }
         // if the defender has first strike and wither the attacker will deal
         // less damage than expected
         if (null != blocker) {
@@ -1165,7 +1160,6 @@ public class ComputerUtilCombat {
                     && attacker.canReceiveCounters(CounterEnumType.M1M1)) {
                 power -= blocker.getNetCombatDamage();
             }
-            theTriggers.addAll(blocker.getTriggers());
         }
 
         // TODO consider Exert + Enlist
@@ -1192,7 +1186,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        for (final Trigger trigger : theTriggers) {
+        for (final Trigger trigger : CardTraitViewCache.getCombatTriggers(game, blocker)) {
             final Card source = trigger.getHostCard();
 
             if (!combatTriggerWillTrigger(attacker, blocker, trigger, combat)) {
@@ -1349,16 +1343,6 @@ public class ComputerUtilCombat {
         }
 
         final Game game = attacker.getGame();
-        final FCollection<Trigger> theTriggers = new FCollection<>();
-        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
-            theTriggers.addAll(card.getTriggers());
-        }
-        for (Card card : game.getCardsIn(ZoneType.Command)) {
-            theTriggers.addAll(card.getTriggers());
-        }
-        if (blocker != null) {
-            theTriggers.addAll(blocker.getTriggers());
-        }
 
         // look out for continuous static abilities that only care for attacking creatures
         if (!withoutCombatStaticAbilities) {
@@ -1395,7 +1379,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        for (final Trigger trigger : theTriggers) {
+        for (final Trigger trigger : CardTraitViewCache.getCombatTriggers(game, blocker)) {
             final Card source = trigger.getHostCard();
 
             if (!combatTriggerWillTrigger(attacker, blocker, trigger, combat)) {
@@ -1558,37 +1542,8 @@ public class ComputerUtilCombat {
             return true;
         }
 
-        // check Destroy triggers (Cockatrice and friends)
-        final FCollection<Trigger> theTriggers = new FCollection<>();
-        for (Card card : attacker.getGame().getCardsIn(ZoneType.Battlefield)) {
-            theTriggers.addAll(card.getTriggers());
-        }
-        for (Trigger trigger : theTriggers) {
-            final Card source = trigger.getHostCard();
-
-            if (!combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
-                continue;
-            }
-            SpellAbility sa = trigger.ensureAbility();
-            if (sa == null) {
-                continue;
-            }
-            if (ApiType.Destroy.equals(sa.getApi())) {
-                if (!sa.hasParam("Defined")) {
-                    continue;
-                }
-                if (sa.getParam("Defined").startsWith("TriggeredAttacker")) {
-                    return true;
-                }
-                if (sa.getParam("Defined").equals("Self") && source.equals(attacker)) {
-                    return true;
-                }
-                if (sa.getParam("Defined").equals("TriggeredTarget") && source.equals(blocker)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return combatDestroyTriggerWillDestroy(attacker, blocker,
+                "TriggeredAttacker", attacker, blocker);
     }
 
     // can the combatant be potentially destroyed or is it potentially indestructible?
@@ -1815,12 +1770,14 @@ public class ComputerUtilCombat {
         	return true;
         }
 
-        final Game game = blocker.getGame();
-        final FCollection<Trigger> theTriggers = new FCollection<>();
-        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
-            theTriggers.addAll(card.getTriggers());
-        }
-        for (Trigger trigger : theTriggers) {
+        return combatDestroyTriggerWillDestroy(attacker, blocker,
+                "TriggeredBlocker", blocker, attacker);
+    }
+
+    private static boolean combatDestroyTriggerWillDestroy(final Card attacker,
+            final Card blocker, final String triggeredDefined, final Card selfSource,
+            final Card triggeredTargetSource) {
+        for (Trigger trigger : CardTraitViewCache.getBattlefieldTriggers(attacker.getGame())) {
             final Card source = trigger.getHostCard();
 
             if (!combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
@@ -1830,24 +1787,17 @@ public class ComputerUtilCombat {
             if (sa == null) {
                 continue;
             }
-            // Destroy triggers
-            if (ApiType.Destroy.equals(sa.getApi())) {
-                if (!sa.hasParam("Defined")) {
-                    continue;
-                }
-                if (sa.getParam("Defined").startsWith("TriggeredBlocker")) {
-                    return true;
-                }
-                if (sa.getParam("Defined").equals("Self") && source.equals(blocker)) {
-                    return true;
-                }
-                if (sa.getParam("Defined").equals("TriggeredTarget") && source.equals(attacker)) {
-                    return true;
-                }
+            if (!ApiType.Destroy.equals(sa.getApi()) || !sa.hasParam("Defined")) {
+                continue;
+            }
+            final String defined = sa.getParam("Defined");
+            if (defined.startsWith(triggeredDefined)
+                    || defined.equals("Self") && source.equals(selfSource)
+                    || defined.equals("TriggeredTarget") && source.equals(triggeredTargetSource)) {
+                return true;
             }
         }
-
-    	return false;
+        return false;
     }
 
     // can the attacker destroy this blocker?
