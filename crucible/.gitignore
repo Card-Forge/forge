@@ -1,4 +1,12 @@
-# Go build output and the oracle's Maven target dir. `target` is already in the
-# repo-root .gitignore for upstream's modules; this covers crucible/ without
-# editing that upstream file (ADR-0001).
+# The oracle's Maven output. `target` is in the repo-root .gitignore for
+# upstream's modules, but that file is upstream's and is not edited (ADR-0001),
+# so crucible/ covers its own.
 /oracle-java/target/
+
+# Compiled Go commands. `go build ./tools/...` writes the binary into the
+# module root named after its package, which is how a 4.2 MB Mach-O executable
+# reached master in the first place. Named explicitly rather than by a broad
+# pattern, so a future Go source file cannot be silently ignored.
+/enginelint
+/javacycles
+/crucible
