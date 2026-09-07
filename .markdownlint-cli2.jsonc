@@ -65,7 +65,6 @@
   "ignores": [
     "**/node_modules/**",
     "**/target/**",
-    "README.md",
     "CONTRIBUTING.md",
     "docs/*.md",
     "docs/Development/**",

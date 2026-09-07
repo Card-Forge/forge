@@ -5,7 +5,7 @@
 /docs/**/*.md
 !/docs/crucible/**/*.md
 
-/README.md
+# /README.md is Crucible's own front page (see upstream-patches.md), so it IS formatted.
 /CONTRIBUTING.md
 
 /adventure-editor/

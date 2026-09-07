@@ -1,104 +1,88 @@
-# ⚔️  Forge: The Magic: The Gathering Rules Engine
+# Crucible
 
-Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
+Automated Magic: The Gathering deck testing and optimization.
 
-[![Test build](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml/badge.svg)](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml)
+Crucible plays a deck against a gauntlet of opposing decks tens or hundreds of thousands of times, records what happened
+in every game, and reports **where the deck loses** — which cards sat dead in hand and why, whether the mana base
+supports the curve, which cards actually change the win rate, and how the deck performs on the play versus the draw.
 
----
-
-## ✨ Introduction
-**Forge** is a dynamic and open-source **Rules Engine** tailored for **Magic: The Gathering** enthusiasts. Developed by a community of passionate programmers, Forge allows players to explore the rich universe of MTG through a flexible, engaging platform. 
-
-**Note:** Forge operates independently and is not affiliated with Wizards of the Coast.
+It is built on a Go port of the [Forge](https://github.com/Card-Forge/forge) rules engine, in a fork of that project.
 
 ---
 
-## 🌟 Key Features
-- **🌐 Cross-Platform Support:** Play on **Windows, Mac, Linux,** and **Android**.
-- **🔧 Extensible Architecture:** Built in **Java**, Forge encourages developers to contribute by adding features and cards.
-- **🎮 Versatile Gameplay:** Dive into single-player modes or challenge opponents online!
+## Status
+
+**Pre-implementation.** There is no Go code yet.
+
+```console
+$ find crucible -name '*.go' | wc -l
+0
+```
+
+What exists is the decision and rule set the code will be written against: 11 accepted ADRs, 7 binding guidelines, and
+the implementation plan. That is deliberate — the port is documentation-driven, and the blueprint lands before the first
+line of Go.
+
+Progress is tracked in [the implementation plan](docs/crucible/00-master-implementation-plan.md), §5.
 
 ---
 
-## 🛠️ Installation Steps
+## Start here
 
-### 📥 Desktop
-1. **Latest Releases:** Download the latest version [here](https://github.com/Card-Forge/forge/releases/latest).
-2. **Snapshot Build:** For the latest development version, grab the `forge-gui-desktop` tarball from our [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots).
-   - **Tip:** Extract to a new folder to prevent version conflicts.
-3. **User Data Management:** Previous players’ data is preserved during upgrades.
-4. **Java Requirement:** Ensure you have **Java 17 or later** installed.
+| If you want to                      | Read                                                                  |
+| ----------------------------------- | --------------------------------------------------------------------- |
+| Understand what this is             | [System overview](docs/crucible/architecture/system-overview.md)      |
+| See the whole plan                  | [Implementation plan](docs/crucible/00-master-implementation-plan.md) |
+| Know why something is the way it is | [Architecture Decision Records](docs/crucible/adr/README.md)          |
+| Contribute code or docs             | [Guidelines](docs/crucible/guidelines/README.md)                      |
 
-### 📱 Android
-- _(Note: **Android 11** is the minimum requirement with at least **6GB RAM** to run smoothly. You need to enable **"Install unknown apps"** for Forge to initialize and update itself)_
-- Download the **APK** from the [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots). On the first launch, Forge will automatically download all necessary assets.
-
-### 📱 iOS (early stage)
-- Build the **IPA** according to Wiki
-- No jailbreak needed, only developer mode and iOS 16-26
-- Connect your device to a PC to self-sign and upload the app file, multiple tools exist e.g. [Sideloadly](https://sideloadly.io)
+`/CLAUDE.md` is the entry point for Claude Code and points at the same rules.
 
 ---
 
-## 🎮 Modes of Play
-Forge offers various exciting gameplay options:
+## Why a port
 
-### 🌍 Adventure Mode
-Embark on a thrilling single-player journey where you can:
-- Explore an overworld map.
-- Challenge diverse AI opponents.
-- Collect cards and items to boost your abilities.
+Forge is a desktop application that plays one game at a time, so process-global mutable state is free — `MyRandom` and
+`StaticData` are both mutable statics. Two games in one JVM race on them.
 
-<img width="1282" height="752" alt="Shandalar World" src="https://github.com/user-attachments/assets/9af31471-d688-442f-9418-9807d8635b72" />
+Crucible's workload is the opposite shape: hundreds of thousands of independent games, embarrassingly parallel. The port
+exists to make that reachable — one goroutine per game, an immutable card database shared by pointer, and card scripts
+compiled once instead of re-parsed per card per game.
 
-### 🔍 Quest Mode
-Engage in focused gameplay without the overworld exploration—perfect for quick sessions!
-
-<img width="1282" height="752" alt="Quest Duels" src="https://github.com/user-attachments/assets/b9613b1c-e8c3-4320-8044-6922c519aad4" />
-
-### 🤖 AI Formats
-Test your skills against AI in multiple formats:
-- **Sealed**
-- **Draft**
-- **Commander**
-- **Cube**
-
-For comprehensive gameplay instructions, visit our [User Guide](https://github.com/Card-Forge/forge/wiki/User-Guide).
-
-<img width="1282" height="752" alt="Sealed" src="https://github.com/user-attachments/assets/ae603dbd-4421-4753-a333-87cb0a28d772" />
+The reasoning is in [ADR-0005](docs/crucible/adr/0005-concurrency-model.md) and
+[ADR-0007](docs/crucible/adr/0007-card-dsl-representation.md).
 
 ---
 
-## 💬 Support & Community
-Need help? Join our vibrant Discord community! 
-- 📜 Read the **#rules** and explore the **FAQ**.
-- ❓ Ask your questions in the **#help** channel for assistance.
+## Relationship to Forge
+
+This repository is a fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). **Almost everything in it is
+Forge's work, not Crucible's** — 517,069 lines of Java and 33,682 card scripts, built by the Forge community over more
+than a decade.
+
+Crucible uses that work three ways:
+
+| Purpose                 | What it means                                                                                                  |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Port source**         | `forge-core`, `forge-game` and `forge-ai` are the behaviour being reproduced in Go                             |
+| **Differential oracle** | The Java engine generates golden outputs the Go engine is diffed against, in CI only                           |
+| **Card scripts**        | `forge-gui/res/cardsfolder/` is read directly at runtime, so upstream card additions arrive with no conversion |
+
+**Crucible never executes Java at runtime.** The shipped artefact is one Go binary plus the card script files it reads
+as data.
+
+Crucible owns exactly two paths — `crucible/` and `docs/crucible/` — plus root tooling configuration. Everything else
+belongs to upstream and is not modified; anything landing outside those paths is recorded in
+[`upstream-patches.md`](docs/crucible/porting/upstream-patches.md). This file is the one deliberate exception, since a
+fork's front page has to describe the fork.
+
+Forge itself is excellent and actively developed. If you want to _play_ Magic rather than analyse a decklist, go there:
+**<https://github.com/Card-Forge/forge>**
+
+Forge operates independently and is not affiliated with Wizards of the Coast. Neither is Crucible.
 
 ---
 
-## 🤝 Contributing to Forge
-We love community contributions! Interested in helping? Check out our [Contributing Guidelines](CONTRIBUTING.md) for details on how to get started.
+## License
 
----
-
-## ℹ️ About Forge
-Forge aims to deliver an immersive and customizable Magic: The Gathering experience for fans around the world. 
-
-### 📊 Repository Statistics
-
-| Metric         | Count                                                       |
-|----------------|-------------------------------------------------------------|
-| **⭐ Stars:**   | [![GitHub stars](https://img.shields.io/github/stars/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/stargazers) |
-| **🍴 Forks:**   | [![GitHub forks](https://img.shields.io/github/forks/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/network) |
-| **👥 Contributors:** | [![GitHub contributors](https://img.shields.io/github/contributors/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/graphs/contributors) |
-
----
-
-**📄 License:** [GPL-3.0](LICENSE)
-<div align="center" style="display: flex; align-items: center; justify-content: center;">
-    <div style="margin-left: auto;">
-        <a href="#top">
-            <img src="https://img.shields.io/badge/Back%20to%20Top-000000?style=for-the-badge&logo=github&logoColor=white" alt="Back to Top">
-        </a>
-    </div>
-</div>
+GPLv3, inherited from Forge. See [LICENSE](LICENSE).

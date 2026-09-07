@@ -27,8 +27,27 @@ as the change.
 | 2026-09-06 | add  | `CLAUDE.md`                                | Claude Code reads it from the repo root only                                                                                                                   | `ff8c555fdf0` |
 | 2026-09-06 | add  | `.github/dependabot.yml`                   | Dependabot reads config from `.github/` only. Scoped to `github-actions`; a `maven` entry at the root would auto-generate PRs editing upstream `pom.xml` files | `pending`     |
 
-**Edits: none.** That is the target state. If this line ever changes, the reason belongs in an ADR, not just a table
-row.
+### Edits
+
+**One.** Everything else above is an `add`.
+
+| Date       | Path        | Change            | Why                                                                                                                                                                | Conflict rule                                        |
+| ---------- | ----------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| 2026-09-07 | `README.md` | Replaced entirely | A fork's front page has to describe the fork. Upstream's README describes Forge, which is misleading as the landing page of a repository whose purpose is Crucible | **Always keep ours.** Never merge upstream's version |
+
+This was previously **zero**, and that was the target state. Accepting one edit is a deliberate trade: the repository's
+front page is the single most-read file and describing the wrong project there is a real cost, while `README.md` is a
+file whose merge conflicts have exactly one correct resolution and no ambiguity.
+
+The change also removes `README.md` from the ignore lists in `.prettierignore` and `.markdownlint-cli2.jsonc`, since it
+is now Crucible's file and subject to DOC-14 and DOC-15 like the rest.
+
+The upstream version is preserved in git history at any commit before this one, and remains available at
+[Card-Forge/forge](https://github.com/Card-Forge/forge). Attribution to Forge is kept prominent in the replacement,
+along with the GPLv3 notice.
+
+**If a second edit is ever proposed, the reason belongs in an ADR, not a table row.** One exception with a mechanical
+resolution rule is manageable; a growing list is how a fork becomes unmergeable.
 
 ## Not logged here
 
