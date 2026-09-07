@@ -30,7 +30,7 @@ func TestJavaParity(t *testing.T) {
 	if err != nil {
 		t.Fatalf("open golden: %v", err)
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 
 	// Records for one (kind, seed) sequence arrive consecutively and share a
 	// generator, because Java drew them from one. Rebuilding per record would

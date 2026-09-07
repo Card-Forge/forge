@@ -16,6 +16,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"go/ast"
+	"go/build"
 	"go/parser"
 	"go/token"
 	"os"
@@ -105,14 +106,9 @@ func (c *Config) allows(from, to string) bool {
 func Check(cfgPath string, c *Config) (violations []Violation, ungrouped []string, err error) {
 	dir := filepath.Join(filepath.Dir(cfgPath), c.Package)
 	fset := token.NewFileSet()
-	pkgs, err := parser.ParseDir(fset, dir, func(fi os.FileInfo) bool {
-		// Test files are excluded: they legitimately reach across groups, and
-		// forcing them to comply would push tests toward the structure rather
-		// than the behaviour (TEST-1).
-		return !strings.HasSuffix(fi.Name(), "_test.go")
-	}, 0)
+	files, err := parsePackage(fset, dir)
 	if err != nil {
-		return nil, nil, fmt.Errorf("parse %s: %w", dir, err)
+		return nil, nil, err
 	}
 
 	// declaredIn maps a top-level identifier to the file that declares it.
@@ -122,51 +118,45 @@ func Check(cfgPath string, c *Config) (violations []Violation, ungrouped []strin
 	declaredIn := map[string]string{}
 	fileGroup := map[string]string{}
 
-	for _, pkg := range pkgs {
-		for path, f := range pkg.Files {
-			base := filepath.Base(path)
-			g, ok := c.groupOf(base)
-			if !ok {
-				ungrouped = append(ungrouped, base)
-				continue
-			}
-			fileGroup[base] = g
-			for _, d := range f.Decls {
-				for _, name := range topLevelNames(d) {
-					declaredIn[name] = base
-				}
+	for base, f := range files {
+		g, ok := c.groupOf(base)
+		if !ok {
+			ungrouped = append(ungrouped, base)
+			continue
+		}
+		fileGroup[base] = g
+		for _, d := range f.Decls {
+			for _, name := range topLevelNames(d) {
+				declaredIn[name] = base
 			}
 		}
 	}
 	sort.Strings(ungrouped)
 
-	for _, pkg := range pkgs {
-		for path, f := range pkg.Files {
-			base := filepath.Base(path)
-			from, ok := fileGroup[base]
-			if !ok {
-				continue
-			}
-			ast.Inspect(f, func(n ast.Node) bool {
-				id, ok := n.(*ast.Ident)
-				if !ok {
-					return true
-				}
-				decl, ok := declaredIn[id.Name]
-				if !ok || decl == base {
-					return true
-				}
-				to := fileGroup[decl]
-				if c.allows(from, to) {
-					return true
-				}
-				violations = append(violations, Violation{
-					File: base, Line: fset.Position(id.Pos()).Line,
-					Ident: id.Name, FromGrp: from, ToGrp: to, DeclFile: decl,
-				})
-				return true
-			})
+	for base, f := range files {
+		from, ok := fileGroup[base]
+		if !ok {
+			continue
 		}
+		ast.Inspect(f, func(n ast.Node) bool {
+			id, ok := n.(*ast.Ident)
+			if !ok {
+				return true
+			}
+			decl, ok := declaredIn[id.Name]
+			if !ok || decl == base {
+				return true
+			}
+			to := fileGroup[decl]
+			if c.allows(from, to) {
+				return true
+			}
+			violations = append(violations, Violation{
+				File: base, Line: fset.Position(id.Pos()).Line,
+				Ident: id.Name, FromGrp: from, ToGrp: to, DeclFile: decl,
+			})
+			return true
+		})
 	}
 	sort.Slice(violations, func(i, j int) bool {
 		if violations[i].File != violations[j].File {
@@ -200,4 +190,49 @@ func topLevelNames(d ast.Decl) []string {
 		}
 	}
 	return out
+}
+
+// parsePackage returns the non-test Go files of one directory, keyed by base
+// name, honouring build constraints.
+//
+// go/parser.ParseDir would be shorter and is wrong here: it is deprecated, and
+// it does not consider build tags when associating files with a package. A tool
+// whose entire job is knowing which files are in a package cannot be blind to
+// the thing that decides it — a debug-only file behind a build tag would be
+// grouped and checked as though it were always compiled.
+//
+// go/build is stdlib and applies the same constraints the compiler does, which
+// keeps this dependency-free (ADR-0002).
+func parsePackage(fset *token.FileSet, dir string) (map[string]*ast.File, error) {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, fmt.Errorf("read %s: %w", dir, err)
+	}
+	ctx := build.Default
+	out := map[string]*ast.File{}
+	for _, e := range entries {
+		name := e.Name()
+		if e.IsDir() || !strings.HasSuffix(name, ".go") {
+			continue
+		}
+		// Test files are excluded: they legitimately reach across groups, and
+		// forcing them to comply would push tests toward the structure rather
+		// than the behaviour (TEST-1).
+		if strings.HasSuffix(name, "_test.go") {
+			continue
+		}
+		ok, err := ctx.MatchFile(dir, name)
+		if err != nil {
+			return nil, fmt.Errorf("build constraints for %s: %w", name, err)
+		}
+		if !ok {
+			continue
+		}
+		f, err := parser.ParseFile(fset, filepath.Join(dir, name), nil, 0)
+		if err != nil {
+			return nil, fmt.Errorf("parse %s: %w", name, err)
+		}
+		out[name] = f
+	}
+	return out, nil
 }

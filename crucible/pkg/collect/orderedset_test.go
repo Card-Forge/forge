@@ -46,7 +46,7 @@ func TestOrderedSet(t *testing.T) {
 			t.Parallel()
 			s := collect.NewOrderedSet[int](0)
 			tc.ops(s)
-			if got := s.All(); !slices.Equal(got, tc.want) && !(len(got) == 0 && len(tc.want) == 0) {
+			if got := s.All(); !slices.Equal(got, tc.want) && (len(got) != 0 || len(tc.want) != 0) {
 				t.Errorf("order = %v, want %v", got, tc.want)
 			}
 			if got, want := s.Len(), len(tc.want); got != want {

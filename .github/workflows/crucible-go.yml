@@ -42,6 +42,18 @@ jobs:
       - name: go vet
         run: go vet ./...
 
+      # GO-1's linter set, plus depguard carrying the architectural boundaries
+      # the ADRs state. Pinned, per ADR-0002's tools policy.
+      #
+      # Version note: golangci-lint 2.6.x cannot read Go 1.27 export data
+      # ("export data version 4 is greater than maximum supported version 2").
+      # 2.13.2 is the first that can. Do not lower this without checking.
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v2.13.2
+          working-directory: crucible
+
       # -race is not optional here. The engine is goroutine-per-game with an
       # immutable shared card database, and a silently shared pointer is the
       # highest-probability bug to import from Java's mutable statics

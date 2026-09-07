@@ -90,7 +90,7 @@ func scan(root, prefix string) (map[string]map[string]bool, error) {
 		if err != nil {
 			return err
 		}
-		defer f.Close()
+		defer func() { _ = f.Close() }()
 		if edges[pkg] == nil {
 			edges[pkg] = map[string]bool{}
 		}

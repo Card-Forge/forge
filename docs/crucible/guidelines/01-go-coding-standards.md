@@ -11,14 +11,22 @@ rules block the leaks.
 
 ## GO-1 — Toolchain and formatting
 
-| Tool     | Setting                                                                                               |
-| -------- | ----------------------------------------------------------------------------------------------------- |
-| Go       | pinned in `go.mod`, bumped by ADR only                                                                |
-| Format   | `gofmt -s`. Non-negotiable, CI-enforced                                                               |
-| Lint     | `golangci-lint`: `errcheck`, `govet`, `staticcheck`, `revive`, `gocritic`, `ineffassign`, `unconvert` |
-| `nolint` | Requires inline reason: `//nolint:gocritic // hot path, bounds check hoisted manually`                |
+| Tool     | Setting                                                                                                                                                       |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Go       | pinned in `go.mod`, bumped by ADR only                                                                                                                        |
+| Format   | `gofmt -s`. Non-negotiable, CI-enforced                                                                                                                       |
+| Lint     | `golangci-lint` v2.13.2, config at `crucible/.golangci.yml`: `errcheck`, `govet`, `staticcheck`, `revive`, `gocritic`, `ineffassign`, `unconvert`, `depguard` |
+| `nolint` | Requires inline reason: `//nolint:gocritic // hot path, bounds check hoisted manually`                                                                        |
 
 Bare `//nolint` fails review.
+
+**`depguard` carries the architectural boundaries**, which were previously honour-system: runtime is stdlib only
+(ADR-0002), `math/rand`'s global source is banned outside `pkg/javarand` (ADR-0006), and the dependency arrow points
+into `internal/engine` and never out (ADR-0003). Several of those rules are inert until the packages they name exist,
+and are written now so the boundary is enforced from the first file rather than retrofitted.
+
+`depguard` works at package granularity and cannot see inside a package, which is why `internal/engine` additionally
+needs `crucible/tools/enginelint`.
 
 ---
 

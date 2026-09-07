@@ -1,0 +1,97 @@
+# GO-1's linter set, plus depguard carrying the architectural boundaries that
+# were previously honour-system.
+#
+# depguard is the ArchUnit-shaped part: it enforces between-package rules that
+# the ADRs state and nothing checked. It cannot see inside a package, which is
+# why internal/engine additionally needs tools/enginelint (ADR-0003).
+version: '2'
+
+linters:
+  default: none
+  enable:
+    # GO-1, verbatim.
+    - errcheck
+    - govet
+    - staticcheck
+    - revive
+    - gocritic
+    - ineffassign
+    - unconvert
+    # The architectural rules below.
+    - depguard
+
+  settings:
+    depguard:
+      rules:
+        # ADR-0002: runtime is stdlib only. Any non-stdlib import outside a
+        # test needs an ADR, and until now nothing enforced that.
+        runtime-is-stdlib-only:
+          files:
+            - '!$test'
+            - '!**/tools/**'
+          allow:
+            - $gostd
+            - github.com/jczastkiewicz/crucible
+          deny:
+            - pkg: github.com/google/go-cmp
+              desc: >-
+                go-cmp is test-only (ADR-0002). Importing it from non-test code
+                makes it a runtime dependency.
+
+        # ADR-0006: the RNG reaches code through *Game, never a global source.
+        # math/rand's package-level functions share one global generator, which
+        # would couple games that ADR-0005 requires be independent.
+        no-global-rng:
+          files:
+            - '!$test'
+            - '!**/pkg/javarand/**'
+          deny:
+            - pkg: math/rand
+              desc: >-
+                math/rand has a package-level global source. Use math/rand/v2
+                seeded per game (ADR-0006), or pkg/javarand for oracle parity.
+
+        # ADR-0003: the dependency arrow points into internal/engine and never
+        # out. engine declares interfaces; effect, valid, expr and ai implement
+        # or consume them. Inert until internal/engine exists at M4.
+        engine-core-imports-nothing-outward:
+          files:
+            - '**/internal/engine/*.go'
+            - '!$test'
+          deny:
+            - pkg: github.com/jczastkiewicz/crucible/internal/engine/effect
+              desc: 'ADR-0003: engine declares the Effect interface; effect implements it. The arrow points inward.'
+            - pkg: github.com/jczastkiewicz/crucible/internal/valid
+              desc: 'ADR-0003: valid evaluates against engine state, so it imports engine, not the reverse.'
+            - pkg: github.com/jczastkiewicz/crucible/internal/expr
+              desc: 'ADR-0003: expr evaluates against engine state, so it imports engine, not the reverse.'
+            - pkg: github.com/jczastkiewicz/crucible/internal/ai
+              desc: 'ADR-0003: the AI plugs in through PlayerController. engine must not know it exists.'
+            - pkg: github.com/jczastkiewicz/crucible/internal/telemetry
+              desc: 'ADR-0005: the engine emits events to a sink interface and never knows what records them.'
+            - pkg: github.com/jczastkiewicz/crucible/internal/sim
+              desc: 'ADR-0005: the runner drives the engine, not the other way round.'
+
+        # ADR-0007: carddb compiles card scripts and knows nothing about games.
+        # Inert until internal/carddb exists at M2.
+        carddb-is-independent-of-the-engine:
+          files:
+            - '**/internal/carddb/**'
+            - '!$test'
+          deny:
+            - pkg: github.com/jczastkiewicz/crucible/internal/engine
+              desc: 'ADR-0007: compilation happens once at load, before any game exists.'
+
+  exclusions:
+    rules:
+      # testdata holds deliberately malformed fixtures for tools/enginelint.
+      - path: 'tools/enginelint/testdata/'
+        linters: [revive, staticcheck, govet, unconvert, gocritic, errcheck, ineffassign]
+
+formatters:
+  enable:
+    - gofmt
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0

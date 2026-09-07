@@ -33,6 +33,14 @@ generator port. `tools/` holds build-time commands that are never imported by th
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`oracle-java/`](../../../crucible/oracle-java) | Differential-testing oracle. Standalone Maven module, JDK-only today. Never shipped, never on Crucible's execution path ([ADR-0010](../adr/0010-differential-testing-strategy.md)) |
 
+## Enforcement
+
+| Tool                                                     | Scope              | Enforces                                                                            |
+| -------------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------- |
+| `depguard`, inside `golangci-lint`                       | Between packages   | ADR-0002 stdlib-only runtime, ADR-0006 no global RNG, ADR-0003 arrow direction      |
+| [`tools/enginelint`](../../../crucible/tools/enginelint) | Inside one package | File-group boundaries within `internal/engine`, which no package-level tool can see |
+| [`tools/javacycles`](../../../crucible/tools/javacycles) | The Java tree      | Re-checks ADR-0003's 82-cycle premise after an upstream sync                        |
+
 ## What the arrows look like today
 
 Nothing imports anything. Both packages are leaves with no internal dependencies, which is what `pkg/` means.
