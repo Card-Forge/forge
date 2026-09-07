@@ -23,8 +23,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read
-      issues: read
+      # write, not read: the prompt below runs /code-review --comment, and the
+      # action's only allowed tool is create_inline_comment. With `read` the
+      # review runs to completion and every comment attempt is denied — runs go
+      # green, permission_denials_count climbs, and nothing is ever posted.
+      pull-requests: write
+      issues: write
       id-token: write
 
     steps:
