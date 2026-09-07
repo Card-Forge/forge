@@ -17,3 +17,5 @@ F6 R In Residence @Mark Rosewater
 9 R Utopia Sprawl @Yeong-Hao Han
 10 M Atraxa, Praetors' Voice @Tyler Jacobson & Scott Okumura
 F11 R Bicycle Elemental @Mark Rosewater
+12 R Fact or Fiction @Néstor Ossandón Leal
+13 R Explore @Bruce Brenneise

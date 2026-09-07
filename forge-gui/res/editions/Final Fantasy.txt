@@ -67,7 +67,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 
 [cards]
 1 M Summon: Bahamut @Arif Wijaya
-2 R Ultima, Origin of Oblivion @Russell Lu
+2 R Ultima, Origin of Oblivion @Russell Dongjun Lu
 3 U Adelbert Steiner @Lorenzo Mastroianni
 4 R Aerith Gainsborough @Nakamura8
 5 C Aerith Rescue Mission @Hokuyuu
@@ -154,7 +154,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 86 M Y'shtola Rhul @Immanuela Crovius
 87 C Ahriman @Kevin Sidharta
 88 U Al Bhed Salvagers @Masateru Ikeda
-89 R Ardyn, the Usurper @Russell Lu
+89 R Ardyn, the Usurper @Russell Dongjun Lu
 90 C Black Mage's Rod @Nino Is
 91 R Cecil, Dark Knight @Josu Hernaiz
 92 U Circle of Power @Josephine Chang
@@ -398,7 +398,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 415 U Cid, Timeless Artificer @Nurikabe
 416 U Cid, Timeless Artificer @David Astruga
 417 U Cid, Timeless Artificer @Arif Wijaya
-418 U Cid, Timeless Artificer @Russell Lu
+418 U Cid, Timeless Artificer @Russell Dongjun Lu
 419 U Cid, Timeless Artificer @Jason Kiantoro
 420 U Cid, Timeless Artificer @Magali Villeneuve
 
@@ -493,7 +493,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 577 M Y'shtola Rhul @Yusuke Mogi
 
 [extended art]
-421 R Ultima, Origin of Oblivion @Russell Lu
+421 R Ultima, Origin of Oblivion @Russell Dongjun Lu
 422 U Adelbert Steiner @Lorenzo Mastroianni
 423 R Aerith Gainsborough @Nakamura8
 424 U Ambrosia Whiteheart @Fajareka Setiawan
@@ -516,7 +516,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 441 R Ultimecia, Temporal Threat @Bachzim
 442 U Ultros, Obnoxious Octopus @Domenico Cava
 443 M Y'shtola Rhul @Immanuela Crovius
-444 R Ardyn, the Usurper @Russell Lu
+444 R Ardyn, the Usurper @Russell Dongjun Lu
 445 R Cecil, Dark Knight @Josu Hernaiz
 446 U Fang, Fearless l'Cie @Simon Dominic
 447 U Gaius van Baelsar @Nino Is

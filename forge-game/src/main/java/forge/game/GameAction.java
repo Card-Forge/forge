@@ -699,11 +699,11 @@ public class GameAction {
             stAb.setActiveZone(EnumSet.of(ZoneType.Command));
             // needed for ETB lookahead like Bronzehide Lion
             stAb.putParam("AffectedZone", "All");
-            SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Battlefield");
             eff.getOwner().getZone(ZoneType.Command).add(eff);
         }
 
         eff.addRemembered(copied);
+        copied.addLeavesPlayCommand(() -> cleanStaticEffect(eff, copied));
         // refresh needed for canEnchant checks
         checkStaticAbilities(false, Sets.newHashSet(copied), new CardCollection(copied));
         return eff;
@@ -2279,7 +2279,7 @@ public class GameAction {
 
         //shuffle
         List<Card> shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
-        Collections.shuffle(shuffledCards);
+        Collections.shuffle(shuffledCards, MyRandom.getRandom());
 
         //check a second hand
         List<Card> hand2 = shuffledCards.subList(0,p1.getMaxHandSize());

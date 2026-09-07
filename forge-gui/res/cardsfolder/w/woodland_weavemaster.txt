@@ -1,0 +1,12 @@
+Name:Woodland Weavemaster
+ManaCost:1 G
+Types:Creature Elf Druid
+PT:1/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Elf.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another Elf you control enters, this creature gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | RestrictValid$ Spell.Elf,Activated.Elf | SpellDescription$ Add X mana of any one color, where X is this creature's power. Spend this mana only to cast Elf spells and activate abilities of Elf sources.
+SVar:X:Count$CardPower
+SVar:BuffedBy:Elf
+DeckHints:Type$Elf
+Oracle:Vigilance\nWhenever another Elf you control enters, this creature gets +1/+1 until end of turn.\n{T}: Add X mana of any one color, where X is this creature's power. Spend this mana only to cast Elf spells and activate abilities of Elf sources.

@@ -115,7 +115,7 @@
                                                                 "options": [
                                                                     {
                                                                         "name": "(Continue)",
-                                                                        "text": "One more thing - It's dangerous to go alone! Take this.",
+                                                                        "text": "One more thing - It's dangerous to go alone! Take this. You may choose up to two packs.",
                                                                         "options": [
                                                                             {
                                                                                 "name": "(Accept Red Pack)",

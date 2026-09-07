@@ -1,0 +1,13 @@
+Name:Enlightened Confidant
+ManaCost:1 W
+Types:Creature Kor Cleric
+PT:2/1
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your end step, if you gained life this turn, surveil 1. If you put a card with mana value less than or equal to the amount of life you gained this turn into your graveyard this way, put that card into your hand.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1 | RememberMoved$ True | SubAbility$ DBChangeZoneAll
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Hand | ChangeType$ Card.cmcLEX+IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain
+DeckHints:Ability$LifeGain
+Oracle:Lifelink\nAt the beginning of your end step, if you gained life this turn, surveil 1. If you put a card with mana value less than or equal to the amount of life you gained this turn into your graveyard this way, put that card into your hand.

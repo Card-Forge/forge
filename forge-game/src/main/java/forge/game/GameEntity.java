@@ -79,6 +79,13 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
     public int staticDamagePrevention(int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
+        return staticDamagePrevention(damage, possiblePrevention, source, isCombat, null);
+    }
+
+    // combatDamagePreventedThisTurn: optional precomputed result of
+    // ReplacementHandler.isPreventCombatDamageThisTurn, so the AI can cache it
+    // instead of re-running the check for every attacker of a predicted combat
+    public int staticDamagePrevention(int damage, final int possiblePrevention, final Card source, final boolean isCombat, final Boolean combatDamagePreventedThisTurn) {
         if (damage <= 0) {
             return 0;
         }
@@ -86,8 +93,13 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
             return damage;
         }
 
-        if (isCombat && getGame().getReplacementHandler().isPreventCombatDamageThisTurn()) {
-            return 0;
+        if (isCombat) {
+            final boolean prevented = combatDamagePreventedThisTurn != null
+                    ? combatDamagePreventedThisTurn.booleanValue()
+                    : getGame().getReplacementHandler().isPreventCombatDamageThisTurn();
+            if (prevented) {
+                return 0;
+            }
         }
 
         for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {

@@ -1,0 +1,10 @@
+Name:Enchanted River's Grasp
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant:Creature
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted creature and remove all counters from it.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBRemoveCounter
+SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Enchanted | CounterType$ All | CounterNum$ All
+S:Mode$ Continuous | Affected$ Permanent.AttachedBy | RemoveAllAbilities$ True | Description$ Enchanted creature loses all abilities and doesn't untap during its controller's untap step.
+R:Event$ Untap | ValidCard$ Permanent.AttachedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Secondary$ True | Description$ Enchanted creature doesn't untap during its controller's untap step.
+Oracle:Enchant creature\nWhen this Aura enters, tap enchanted creature and remove all counters from it.\nEnchanted creature loses all abilities and doesn't untap during its controller's untap step.

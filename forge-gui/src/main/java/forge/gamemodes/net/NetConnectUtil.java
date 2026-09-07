@@ -1,5 +1,6 @@
 package forge.gamemodes.net;
 
+import forge.gamemodes.match.AbstractGuiGame;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.client.ClientGameLobby;
@@ -181,6 +182,9 @@ public class NetConnectUtil {
         final ClientGameLobby lobby = new ClientGameLobby();
         final ILobbyView view =  onlineLobby.setLobby(lobby);
         lobby.setListener(view);
+        if (gui instanceof AbstractGuiGame agg) {
+            agg.setClientLobby(lobby);
+        }
         client.addLobbyListener(new ILobbyListener() {
             @Override
             public void message(final String source, final String message, final ChatMessage.MessageType type) {

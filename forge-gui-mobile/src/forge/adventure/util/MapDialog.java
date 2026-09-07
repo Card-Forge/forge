@@ -173,7 +173,10 @@ public class MapDialog {
         if (dialog.voiceFile != null) {
             FileHandle file = Gdx.files.absolute(Config.instance().getFilePath(dialog.voiceFile));
             if (file.exists()) {
-                audio = Pair.of(file, Forge.getAssets().getMusic(file));
+                Music voice = Forge.getAssets().getMusic(file);
+                if (voice != null) {
+                    audio = Pair.of(file, voice);
+                }
             }
             if (audio != null) {
                 int vol = FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC);

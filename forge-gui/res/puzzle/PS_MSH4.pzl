@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Marvel Super Heroes #04
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/06/latest-4-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Start at the beginning of your upkeep and win this turn! Assume any cards you could draw are not relevant to the solution. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=UPKEEP
+p0life=20
+p0hand=Go Nuts!;Unstable Experiment;Super Suit;Widow's Bite;Roxxon Brutes;Super-Skrull
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Taskmaster, Mercenary Mimic;Undercover Skrull;Island;Island;Swamp;Forest
+p1life=10
+p1battlefield=Speedball, New Warrior;Iron Fist, Living Weapon

@@ -33,10 +33,9 @@ public class MutateAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        // Choose the best target
-        // TODO: maybe, instead of the standard evaluator, this could inspect the abilities and decide
-        // which are better in context, but that's a bit complicated for the time being (not sure if necessary?).
+        // TODO: instead of the standard evaluator, this could inspect the abilities and decide
         Card mutateTgt = ComputerUtilCard.getBestCreatureAI(mutateTgts);
+        sa.resetTargets();
         sa.getTargets().add(mutateTgt);
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

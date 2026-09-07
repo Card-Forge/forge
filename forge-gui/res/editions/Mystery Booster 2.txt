@@ -394,6 +394,8 @@ F619 R Temur Elevator @Marika Lord
 F620 R Under-Construction Skyscraper @Kevin Dubell
 F621 R Value Town @Hélio Frazão
 
+[CreatureTypes]
+Armored:Armored
 [LandTypes]
 Omenpath:Omenpaths
 [WalkerTypes]

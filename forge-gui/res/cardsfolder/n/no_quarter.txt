@@ -5,7 +5,5 @@ T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ LessPowe
 T:Mode$ AttackerBlockedByCreature | ValidCard$ LessPowerThanBlocker | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ DestroyAttacker | TriggerDescription$ Whenever a creature blocks a creature with lesser power, destroy the attacking creature.
 SVar:DestroyBlocker:DB$ Destroy | Defined$ TriggeredBlockerLKICopy
 SVar:DestroyAttacker:DB$ Destroy | Defined$ TriggeredAttackerLKICopy
-SVar:AttackerPower:Count$ TriggeredAttacker.Power
-SVar:BlockerPower:Count$ TriggeredBlocker.Power
 AI:RemoveDeck:Random
 Oracle:Whenever a creature becomes blocked by a creature with lesser power, destroy the blocking creature.\nWhenever a creature blocks a creature with lesser power, destroy the attacking creature.

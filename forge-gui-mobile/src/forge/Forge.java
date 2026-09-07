@@ -3,31 +3,43 @@ package forge;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
+import com.badlogic.gdx.utils.Disposable;
 import forge.adventure.scene.*;
 import forge.adventure.stage.MapStage;
+import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
-import forge.assets.*;
+import forge.assets.Assets;
+import forge.assets.AssetsDownloader;
+import forge.assets.FSkin;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinTexture;
+import forge.assets.ImageCache;
 import forge.error.ExceptionHandler;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.download.CdnUuidCache;
 import forge.gui.error.BugReporter;
+import forge.gui.util.SOptionPane;
 import forge.interfaces.IDeviceAdapter;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
@@ -37,14 +49,19 @@ import forge.screens.ClosingScreen;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.TransitionScreen;
-import forge.screens.home.AdventureScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
+import forge.screens.settings.CardImageBrowserScreen;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
-import forge.toolbox.*;
+import forge.toolbox.FContainer;
+import forge.toolbox.FDialog;
+import forge.toolbox.FDisplayObject;
+import forge.toolbox.FGestureAdapter;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FOverlay;
 import forge.util.*;
 import io.sentry.ScopeType;
 import io.sentry.Sentry;
@@ -58,17 +75,12 @@ public class Forge implements ApplicationListener {
     private static ApplicationListener app = null;
     static Scene currentScene = null;
     static Array<Scene> lastScene = new Array<>();
-    private static float animationTimeout;
-    static Batch animationBatch;
-    static TextureRegion lastScreenTexture;
-    private static boolean sceneWasSwapped = false;
     public static boolean advFreezePlayerControls = false;
     private static Clipboard clipboard;
     private static IDeviceAdapter deviceAdapter;
     private static int screenWidth;
     private static int screenHeight;
     private static Graphics graphics;
-    private static FrameRate frameRate;
     private static FScreen currentScreen;
     private static ControllerListener controllerListener;
     private static boolean hasGamepad = false;
@@ -79,7 +91,7 @@ public class Forge implements ApplicationListener {
     protected static TransitionScreen transitionScreen;
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited, initialized;
-    public boolean needsUpdate = false;
+    public static boolean needsUpdate = false;
     public static boolean switchClassic = false;
     public static boolean advStartup = false;
     public static boolean safeToClose = true;
@@ -107,7 +119,6 @@ public class Forge implements ApplicationListener {
     public static String selector = "Default";
     public static boolean isTabletDevice = false;
     public static String locale = "en-US";
-    public Assets assets;
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
     public static boolean isPortraitMode = false;
@@ -130,6 +141,8 @@ public class Forge implements ApplicationListener {
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
     private static boolean desktopAutoOrientation = true;
+    public static final int LOW_SPRITES_CAP = 30; // max capacity for transition, generated image renders
+    public static final int HIGH_SPRITES_CAP = 800; // max sprite capacity for adventure, classic renders
 
     public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean androidOrientation, boolean isTablet, int AndroidAPI) {
         if (app == null) {
@@ -184,11 +197,8 @@ public class Forge implements ApplicationListener {
         if (!GuiBase.isAndroid() || (androidVersion > 25 && totalDeviceRAM > 3400)) {
             allowCardBG = true;
         }
-        assets = new Assets();
-        graphics = new Graphics();
+        graphics = new Graphics(Forge.HIGH_SPRITES_CAP);
         splashScreen = new SplashScreen();
-        frameRate = new FrameRate();
-        animationBatch = new SpriteBatch();
         inputProcessor = new MainInputProcessor();
 
         Gdx.input.setInputProcessor(inputProcessor);
@@ -268,6 +278,7 @@ public class Forge implements ApplicationListener {
             FThreads.invokeInBackgroundThread(() -> AssetsDownloader.checkForUpdates(exited, runnable));
         }
     }
+
     public static void setAltZoneTabMode(String mode) {
         Forge.altZoneTabMode = mode;
         switch (Forge.altZoneTabMode) {
@@ -276,15 +287,35 @@ public class Forge implements ApplicationListener {
             default -> Forge.altZoneTabs = false;
         }
     }
+
     public static boolean isHorizontalTabLayout() {
         return Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode);
     }
+
     public static boolean hasGamepad() {
         //Classic Mode Various Screen GUI are not yet supported, needs control mapping for each screens
         if (isMobileAdventureMode) {
             return hasGamepad && isLandscapeMode(); //portrait is not supported for Gamepad
         }
         return false;
+    }
+
+    public static void setWindowFocus(boolean focused) {
+        if (SoundSystem.instance.hasWindowFocus() == focused) {
+            return;
+        }
+        SoundSystem.instance.setWindowFocus(focused);
+        if (!focused) {
+            haltControllerInput();
+        }
+    }
+
+    private static void haltControllerInput() {
+        if (!isMobileAdventureMode) {
+            return;
+        }
+        WorldStage.getInstance().stop();
+        MapStage.getInstance().stop();
     }
 
     public static boolean lastInputWasController() {
@@ -339,6 +370,29 @@ public class Forge implements ApplicationListener {
         //check
         /*for (FScreen fScreen : Dscreens)
             System.out.println(fScreen.toString());*/
+    }
+
+    /**
+     * First run (or cache cleared): offer the one-time bulk CDN sync so later card image
+     * downloads resolve instantly instead of one Scryfall set at a time. Call only once a real
+     * home/adventure screen is open -- not while the mode-selector splash is still showing.
+     */
+    public static void maybePromptForBulkCdnSync() {
+        // don't prompt if the game starts in adventure to prevent the prompt appearing on adventure loading screen
+        if (isMobileAdventureMode)
+            return;
+        if (!CdnUuidCache.shouldPromptForBulkSync()) {
+            return;
+        }
+        FThreads.invokeInBackgroundThread(() -> {
+            boolean confirmed = SOptionPane.showConfirmDialog(
+                    getLocalizer().getMessage("lblFirstRunBulkCdnPrompt"),
+                    "Forge", "Download Now", "Not Now", true);
+            CdnUuidCache.markBulkSyncPromptAnswered();
+            if (confirmed) {
+                CardImageBrowserScreen.openAndAutoStartBulkSync();
+            }
+        });
     }
 
     public static void openHomeDefault() {
@@ -407,7 +461,7 @@ public class Forge implements ApplicationListener {
                 getAssets().fallback_skins().put("transition", new Texture(transitionFile));
             if (titleBGFile.exists())
                 getAssets().fallback_skins().put("title", new Texture(titleBGFile));
-            AdventureScreen.preload();
+            getAssets().setGifAnimation(new FileHandle(ForgeConstants.EFFECTS_DIR + "demo.gif"), Animation.PlayMode.LOOP);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -432,33 +486,56 @@ public class Forge implements ApplicationListener {
                     }
                     //selection transition
                     setTransitionScreen(new TransitionScreen(() -> {
+                        boolean openedRealScreen;
                         if (createNewAdventureMap) {
                             openAdventure();
                             clearSplashScreen();
+                            openedRealScreen = true;
                         } else {
                             if (selector.equals("Classic")) {
                                 openHomeDefault();
                                 clearSplashScreen();
+                                openedRealScreen = true;
                             } else if (selector.equals("Adventure")) {
                                 openAdventure();
                                 clearSplashScreen();
+                                openedRealScreen = true;
                             } else if (splashScreen != null) {
                                 splashScreen.setShowModeSelector(true);
+                                openedRealScreen = false;
                             } else {//default mode in case splashscreen is null at some point as seen on resume..
                                 openHomeDefault();
                                 clearSplashScreen();
+                                openedRealScreen = true;
                             }
                         }
                         safeToClose = true;
                         clearTransitionScreen();
-                    }, takeScreenshot(), false, false, true, false));
+                        if (openedRealScreen) {
+                            maybePromptForBulkCdnSync();
+                        }
+                        if (GuiBase.isIOS()) {
+                            // POST-LOAD memory reclaim (iOS): booting parses ~32k card rules +
+                            // builds ~100k PaperCards + loads skin assets — a large transient
+                            // allocation spike that leaves ~200MB of freed-but-unmapped bytes in
+                            // the GC heap at idle home. Two full GCs return them to iOS (the GC
+                            // needs the second pass to unmap pages the first one freed) —
+                            // device-measured: GC heap 690→492MB before a game starts. Only
+                            // unreachable garbage is collected; iOS-gated because other
+                            // platforms don't sit against a per-process memory ceiling.
+                            FThreads.invokeInBackgroundThread(() -> {
+                                System.gc();
+                                System.gc();
+                            });
+                        }
+                    }, ScreenUtil.getInstance().takeScreenshot(), false, false, true, false));
                 });
             });
         }));
     }
 
     public static void setCursor(TextureRegion textureRegion, String name) {
-        if (GuiBase.isAndroid())
+        if (GuiBase.isMobile())
             return;
         if (isMobileAdventureMode) {
             if (cursorA0 != null && Objects.equals(name, "0")) {
@@ -619,8 +696,11 @@ public class Forge implements ApplicationListener {
             exit(false); //prompt to exit if attempting to go back from home screen
             return;
         }
-        if(currentScreen == null)
+        if (currentScreen == null)
             return;
+        // trigger leave
+        if (currentScene instanceof ForgeScene forgeScene)
+            forgeScene.leave();
         currentScreen.onClose(result -> {
             if (result) {
                 Dscreens.pollFirst();
@@ -792,7 +872,8 @@ public class Forge implements ApplicationListener {
             openHomeDefault();
             exited = false;
             switchClassic = false;
-        }, takeScreenshot(), false, false));
+            FrameRate.getInstance().updateHistoricalPeak(showFPS);
+        }, ScreenUtil.getInstance().takeScreenshot(), false, false));
     }
 
     public static void switchToAdventure() {
@@ -802,6 +883,7 @@ public class Forge implements ApplicationListener {
             clearTransitionScreen();
             openAdventure();
             exited = false;
+            FrameRate.getInstance().updateHistoricalPeak(showFPS);
         }, null, false, true));
     }
 
@@ -827,21 +909,6 @@ public class Forge implements ApplicationListener {
 
     public static void clearSplashScreen() {
         splashScreen = null;
-    }
-    public static TextureRegion takeScreenshot() {
-        FThreads.invokeInEdtNowOrLater(() -> {
-            if (lastScreenTexture != null)
-                lastScreenTexture.getTexture().dispose();
-            //some Android device don't support RGBA on FrameBuffer like Unisoc T618 with Mali G52 MP2 and maybe others...
-            Texture texture = new Texture(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGB888);
-            Gdx.gl.glEnable(GL20.GL_TEXTURE_2D);
-            Gdx.gl.glActiveTexture(GL20.GL_TEXTURE0);
-            texture.bind();
-            Gdx.gl.glCopyTexImage2D(GL20.GL_TEXTURE_2D, 0, GL20.GL_RGB, 0, 0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
-            Gdx.gl.glDisable(GL20.GL_TEXTURE_2D);
-            lastScreenTexture = new TextureRegion(texture, 0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
-        });
-        return lastScreenTexture;
     }
 
     private static void setCurrentScreen(FScreen screen0) {
@@ -876,126 +943,55 @@ public class Forge implements ApplicationListener {
     @Override
     public void render() {
         if (showFPS)
-            frameRate.update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
+            FrameRate.getInstance().update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
-        try {
-            ImageCache.getInstance().allowSingleLoad();
-            ForgeAnimation.advanceAll();
+        ImageCache.getInstance().allowSingleLoad();
+        ForgeAnimation.advanceAll();
 
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
-            //set delta for rotation
-            deltaTime += Gdx.graphics.getDeltaTime();
-            if (deltaTime > 22.5f)
-                deltaTime = 0f;
-            hueFragTime += Gdx.graphics.getDeltaTime();
-            if (hueFragTime > 6.29f)
-                hueFragTime = 0f;
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
+        float delta = Gdx.graphics.getDeltaTime();
+        //set delta for rotation
+        deltaTime += delta;
+        if (deltaTime > 22.5f)
+            deltaTime = 0f;
+        hueFragTime += delta;
+        if (hueFragTime > 6.29f)
+            hueFragTime = 0f;
 
-            FContainer screen = currentScreen;
-
-            if (closingScreen != null) {
-                screen = closingScreen;
-            } else if (transitionScreen != null) {
-                screen = transitionScreen;
-            } else if (screen == null) {
-                screen = splashScreen;
-                if (screen == null) {
-                    if (isMobileAdventureMode) {
-                        try {
-                            float delta = Gdx.graphics.getDeltaTime();
-                            float transitionTime = 0.12f;
-                            if (sceneWasSwapped) {
-                                sceneWasSwapped = false;
-                                animationTimeout = transitionTime;
-                                Gdx.gl.glClearColor(0, 0, 0, 1);
-                                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                return;
-                            }
-                            if (animationTimeout >= 0) {
-                                Gdx.gl.glClearColor(0, 0, 0, 1);
-                                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                animationBatch.begin();
-                                animationTimeout -= delta;
-                                animationBatch.setColor(1, 1, 1, 1);
-                                animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * animationTimeout);
-                                animationBatch.draw(getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.end();
-                                if (animationTimeout < 0) {
-                                    currentScene.render();
-                                    storeScreen();
-                                    Gdx.gl.glClearColor(0, 0, 0, 1);
-                                    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                } else {
-                                    return;
-                                }
-                            }
-                            if (animationTimeout >= -transitionTime) {
-                                Gdx.gl.glClearColor(0, 0, 0, 1);
-                                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                animationBatch.begin();
-                                animationTimeout -= delta;
-                                animationBatch.setColor(1, 1, 1, 1);
-                                animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.setColor(1, 1, 1, (1 / transitionTime) * (animationTimeout + transitionTime));
-                                animationBatch.draw(getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.end();
-                                return;
-                            }
-                            currentScene.render();
-                            currentScene.act(delta);
-                        } catch (IllegalStateException | NullPointerException ie) {
-                            //silence this..
-                            //TODO: Don't silence this.
-                        }
-                    }
-                    if (showFPS)
-                        frameRate.render();
-                    return;
-                }
+        // get classic/splash/transition/closing screen in priority order
+        FContainer screen = getHierachyScreen();
+        if (screen == null) {
+            if (isMobileAdventureMode) {
+                // render adventure
+                Adventure.getInstance().render(delta);
             }
-
-            graphics.begin(screenWidth, screenHeight);
-            screen.screenPos.setSize(screenWidth, screenHeight);
-            if (screen.getRotate180()) {
-                graphics.startRotateTransform(screenWidth / 2f, screenHeight / 2f, 180);
-            }
-            screen.draw(graphics);
-            if (screen.getRotate180()) {
-                graphics.endTransform();
-            }
-            for (FOverlay overlay : FOverlay.getOverlays()) {
-                if (overlay.isVisibleOnScreen(currentScreen)) {
-                    overlay.screenPos.setSize(screenWidth, screenHeight);
-                    overlay.setSize(screenWidth, screenHeight); //update overlay sizes as they're rendered
-                    if (overlay.getRotate180()) {
-                        graphics.startRotateTransform(screenWidth / 2f, screenHeight / 2f, 180);
-                    }
-                    overlay.draw(graphics);
-                    if (overlay.getRotate180()) {
-                        graphics.endTransform();
-                    }
-                }
-            }
-            //update here
-            if (needsUpdate) {
-                if (getAssets().manager().update())
-                    needsUpdate = false;
-            }
-            graphics.end();
-        } catch (Exception ex) {
-            graphics.end();
-            //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
-            if (BugReporter.isSentryEnabled())
-                BugReporter.reportException(ex);
-            else
-                ex.printStackTrace();
+            // render overlay on top of adventure screen
+            OverlayText.getInstance().render(delta);
+            // render framerate if enabled
+            FrameRate.getInstance().render(showFPS);
+            return;
         }
-        if (showFPS)
-            frameRate.render();
+        // render classic
+        Classic.getInstance().render(screen);
+        FrameRate.getInstance().render(showFPS);
     }
 
-    public static void delayedSwitchBack() {
+    private static FContainer getHierachyScreen() {
+        FContainer screen = currentScreen;
+        if (closingScreen != null) {
+            screen = closingScreen;
+        } else if (transitionScreen != null) {
+            screen = transitionScreen;
+        } else if (screen == null) {
+            screen = splashScreen;
+        }
+        return screen;
+    }
+
+    public static void delayedSwitchBack(String title, String message) {
+        // check if currentScene is SaveLoadScene
+        if (currentScene instanceof SaveLoadScene saveLoadScene)
+            saveLoadScene.showMessage(title, message);
         FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
             clearTransitionScreen();
             clearCurrentScreen();
@@ -1023,6 +1019,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void pause() {
+        setWindowFocus(false);
         if (MatchController.getHostedMatch() != null) {
             MatchController.getHostedMatch().pause();
         }
@@ -1030,6 +1027,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resume() {
+        setWindowFocus(true);
         try {
             Texture.setAssetManager(getAssets().manager());
             needsUpdate = true;
@@ -1050,25 +1048,56 @@ public class Forge implements ApplicationListener {
             currentScreen.onClose(null);
             currentScreen = null;
         }
-        FOverlay.hideAll();
+        try {
+            FOverlay.hideAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Dscreens.clear();
-        graphics.dispose();
-        SoundSystem.instance.dispose();
-        MapStage.getInstance().disposeWorld();
+        // don't call getInstance() or they will be recreated on dispose
+        safeDispose( // I need to know what line the startup bug occurs when the app is paused...
+            MapStage.instance,
+            Adventure.instance,
+            ScreenUtil.instance,
+            ShaderUtil.instance,
+            graphics,
+            Assets.instance,
+            lastPreview);
+        try {
+            SoundSystem.instance.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             ExceptionHandler.unregisterErrorHandling();
-            lastPreview.dispose();
-            assets.dispose();
-            AdventureScreen.dispose();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public boolean triggerDispose() {
+        dispose();
+        return true;
+    }
+    public static void safeDispose(Disposable... disposables) {
+        for (Disposable d : disposables) {
+            if (d != null) {
+                try {
+                    d.dispose();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    d = null;
+                }
+            }
         }
     }
     /** Retrieve assets.
      */
     public static Assets getAssets() {
-        return ((Forge)Gdx.app.getApplicationListener()).assets;
+        return Assets.getInstance();
     }
     public static boolean switchScene(Scene newScene) {
+        FrameRate.getInstance().updateHistoricalPeak(showFPS);
         return switchScene(newScene, false);
     }
     public static boolean switchScene(Scene newScene, boolean skipPreview) {
@@ -1089,7 +1118,7 @@ public class Forge implements ApplicationListener {
             lastScene.add(currentScene);
         }
         storeScreen();
-        sceneWasSwapped = true;
+        Adventure.getInstance().sceneWasSwapped = true;
         currentScene = newScene;
 
         currentScene.enter();
@@ -1100,7 +1129,7 @@ public class Forge implements ApplicationListener {
 
     protected static void storeScreen() {
         if (!(currentScene instanceof ForgeScene)) {
-            Forge.takeScreenshot();
+            ScreenUtil.getInstance().takeScreenshot();
         }
     }
 
@@ -1109,8 +1138,9 @@ public class Forge implements ApplicationListener {
             storeScreen();
             currentScene = lastScene.get(lastScene.size - 1);
             currentScene.enter();
-            sceneWasSwapped = true;
+            Adventure.getInstance().sceneWasSwapped = true;
             lastScene.removeIndex(lastScene.size - 1);
+            FrameRate.getInstance().updateHistoricalPeak(showFPS);
             return currentScene;
         }
         return null;
@@ -1271,7 +1301,18 @@ public class Forge implements ApplicationListener {
         @Override
         public boolean keyTyped(char ch) {
             if (keyInputAdapter != null) {
-                if (ch >= ' ' && ch <= '~') { //only process this event if character is printable
+                if (GuiBase.isIOS()) {
+                    // The iOS software keyboard delivers one keyTyped per tap and
+                    // routes backspace (0x08) / delete (0x7F) through keyTyped
+                    // rather than keyDown. The upstream de-dup below blocked
+                    // repeated characters (e.g. "aa" in "Kaalia") because iOS
+                    // gives no keyUp to reset it, and the printable-only filter
+                    // dropped delete entirely. Pass these straight through; the
+                    // text field handles backspace/delete.
+                    if ((ch >= ' ' && ch <= '~') || ch == '\b' || ch == '\u007F') {
+                        return keyInputAdapter.keyTyped(ch);
+                    }
+                } else if (ch >= ' ' && ch <= '~') { //only process this event if character is printable
                     //prevent firing this event more than once for the same character on the same key down, otherwise it fires too often
                     if (lastKeyTyped != ch || !keyTyped) {
                         keyTyped = true;
@@ -1525,6 +1566,9 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean buttonDown(Controller controller, int buttonIndex) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: "+buttonIndex);
+                    if (!SoundSystem.instance.hasWindowFocus()) {
+                        return false;
+                    }
                     hasGamepad = true;
                     lastInputWasController = true;
                     translateButtons(controller, buttonIndex, true);
@@ -1533,6 +1577,9 @@ public class Forge implements ApplicationListener {
 
                 @Override
                 public boolean buttonUp(Controller controller, int buttonIndex) {
+                    if (!SoundSystem.instance.hasWindowFocus()) {
+                        return false;
+                    }
                     hasGamepad = true;
                     translateButtons(controller, buttonIndex, false);
                     return super.buttonUp(controller, buttonIndex);
@@ -1541,6 +1588,9 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean axisMoved(Controller controller, int axisIndex, float value) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: axis: "+axisIndex+" - "+value);
+                    if (!SoundSystem.instance.hasWindowFocus()) {
+                        return false;
+                    }
                     hasGamepad = true;
                     // Axis deadzone filters joystick drift from counting
                     if (Math.abs(value) > 0.25f) {

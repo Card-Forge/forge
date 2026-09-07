@@ -1,0 +1,6 @@
+Name:Worf, Chief Tactical Officer
+ManaCost:2 W
+Types:Legendary Creature Klingon Warrior Officer
+PT:2/3
+K:Vigilance
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

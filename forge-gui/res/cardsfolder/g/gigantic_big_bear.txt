@@ -1,0 +1,8 @@
+Name:Gigantic Big Bear
+ManaCost:5 G G
+Types:Creature Bear
+PT:10/7
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+K:Hexproof
+K:Haste
+Oracle:This spell can't be countered.\nHexproof, haste

@@ -1,0 +1,9 @@
+Name:Mirkwood
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
+A:AB$ PutCounter | Cost$ 2 B G T Sac<1/CARDNAME/this land> | ValidTgts$ Bear.YouCtrl,Spider.YouCtrl,Wolf.YouCtrl | ValidTgtsDesc$ Bear, Spider, or Wolf you control | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on target Bear, Spider, or Wolf you control. Activate only as a sorcery.
+DeckHints:Type$Bear|Spider|Wolf
+Oracle:This land enters tapped.\n{T}: Add {B} or {G}.\n{2}{B}{G}, {T}, Sacrifice this land: Put two +1/+1 counters on target Bear, Spider, or Wolf you control. Activate only as a sorcery.

@@ -1,0 +1,10 @@
+Name:Worzel, the Protector
+ManaCost:1 W W W
+Types:Legendary Planeswalker Worzel
+Loyalty:4
+A:AB$ Token | Cost$ SubCounter<0/LOYALTY> | Planeswalker$ True | TokenScript$ w_1_1_cat_loyalty | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach | SpellDescription$ Create a 1/1 white Cat creature token with "{T}: Put a loyalty counter on each planeswalker you control."
+A:AB$ Dig | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Planeswalker,Plains.Basic | ForceRevealToController$ True | RememberChanged$ True | RestRandomOrder$ True | SpellDescription$ Look at the top six cards of your library. You may reveal a planeswalker or basic Plains card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+A:AB$ CopyPermanent | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | DefinedName$ Scryb Sprites | NumCopies$ 10 | SpellDescription$ Create ten Scryb Sprites tokens. (They're {G} 1/1 Faerie ceratures with flying.)
+Text:CARDNAME can be your commander.
+DeckHas:Ability$Token
+Oracle:[0]: Create a 1/1 white Cat creature token with "{T}: Put a loyalty counter on each planeswalker you control."\n[-1]: Look at the top six cards of your library. You may reveal a planeswalker or basic Plains card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\n[-8]: Create ten Scryb Sprites tokens. (They're {G} 1/1 Faerie ceratures with flying.)\nWorzel, the Protector can be your commander.

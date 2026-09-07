@@ -407,6 +407,13 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (s.isEmpty()) {
             return s;
         }
+        // With no hyphen to split on and a first character capitalize would leave alone, the
+        // loop below reassembles the argument unchanged - which is the case for every type name
+        // written the way a card script writes it. Skip the round trip through the StringBuilder.
+        final int first = s.codePointAt(0);
+        if (s.indexOf('-') < 0 && Character.toTitleCase(first) == first) {
+            return s;
+        }
         final StringBuilder sb = new StringBuilder();
         // to handle hyphenated Types
         // TODO checkout WordUtils for this
@@ -892,18 +899,20 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     private static List<String> sortedSubTypes;
     public static List<String> getSortedSubTypes() {
         if (sortedSubTypes == null) {
-            sortedSubTypes = Lists.newArrayList();
-            sortedSubTypes.addAll(Constant.BASIC_TYPES);
-            sortedSubTypes.addAll(Constant.LAND_TYPES);
-            sortedSubTypes.addAll(Constant.CREATURE_TYPES);
-            sortedSubTypes.addAll(Constant.SPELL_TYPES);
-            sortedSubTypes.addAll(Constant.ENCHANTMENT_TYPES);
-            sortedSubTypes.addAll(Constant.ARTIFACT_TYPES);
-            sortedSubTypes.addAll(Constant.WALKER_TYPES);
-            sortedSubTypes.addAll(Constant.DUNGEON_TYPES);
-            sortedSubTypes.addAll(Constant.BATTLE_TYPES);
-            sortedSubTypes.addAll(Constant.PLANAR_TYPES);
-            Collections.sort(sortedSubTypes);
+            // TreeSet sorts and drops duplicates (some types appear in two sections, e.g. Spacecraft);
+            // the immutable copy is built before publishing, so no caller can observe it mid-sort
+            final Set<String> tmp = new TreeSet<>();
+            tmp.addAll(Constant.BASIC_TYPES);
+            tmp.addAll(Constant.LAND_TYPES);
+            tmp.addAll(Constant.CREATURE_TYPES);
+            tmp.addAll(Constant.SPELL_TYPES);
+            tmp.addAll(Constant.ENCHANTMENT_TYPES);
+            tmp.addAll(Constant.ARTIFACT_TYPES);
+            tmp.addAll(Constant.WALKER_TYPES);
+            tmp.addAll(Constant.DUNGEON_TYPES);
+            tmp.addAll(Constant.BATTLE_TYPES);
+            tmp.addAll(Constant.PLANAR_TYPES);
+            sortedSubTypes = ImmutableList.copyOf(tmp);
         }
         return sortedSubTypes;
     }

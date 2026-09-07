@@ -1,0 +1,10 @@
+Name:Galion, Elvenking's Butler
+ManaCost:2 G G
+Types:Legendary Creature Elf Advisor
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ Whenever NICKNAME attacks, choose up to one other target creature you control. Its base power and toughness become equal to NICKNAME's power and toughness until end of turn.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDes$ another creature you control | TargetMin$ 0 | TargetMax$ 1 | Power$ X | Toughness$ Y
+SVar:HasAttackEffect:TRUE
+SVar:X:Count$CardPower
+SVar:Y:Count$CardToughness
+Oracle:Whenever Galion attacks, choose up to one other target creature you control. Its base power and toughness become equal to Galion's power and toughness until end of turn.

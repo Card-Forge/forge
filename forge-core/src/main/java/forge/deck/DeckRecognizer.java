@@ -438,9 +438,10 @@ public class DeckRecognizer {
     public static final String REX_COLL_NUMBER = String.format("(?<%s>\\*?[0-9A-Z]+(?:\\S[0-9A-Z]*)?)", REGRP_COLLNR);
     public static final String REX_CARD_COUNT = String.format("(?<%s>[\\d]{1,2})(?<mult>x)?", REGRP_CARDNO);
     // EXTRA
+    // Foil markers: (F) MTGGoldfish; *F* foil and *E* etched foil, Moxfield/MTGA style
     public static final String REGRP_FOIL_GFISH = "foil";
     private static final String REX_FOIL_MTGGOLDFISH = String.format(
-            "(?<%s>\\(F\\))?", REGRP_FOIL_GFISH);
+            "(?<%s>\\(F\\)|\\*[FE]\\*)?", REGRP_FOIL_GFISH);
     // XMage Sideboard indicator - pushed a bit further with deck section indication
     public static final String REGRP_DECK_SEC_XMAGE_STYLE = "decsec";
     private static final String REX_DECKSEC_XMAGE = String.format(

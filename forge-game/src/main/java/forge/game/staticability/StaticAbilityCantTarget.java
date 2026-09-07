@@ -32,12 +32,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-/**
- * The Class StaticAbilityCantTarget.
- */
 public class StaticAbilityCantTarget {
-
-    static String MODE = "CantTarget";
 
     public static StaticAbility cantTarget(final GameEntity entity, final SpellAbility spellAbility)  {
         final Game game = entity.getGame();

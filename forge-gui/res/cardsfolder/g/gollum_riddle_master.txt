@@ -1,0 +1,13 @@
+Name:Gollum, Riddle Master
+ManaCost:1 B
+Types:Legendary Creature Halfling Horror
+PT:3/1
+K:ETBReplacement:Other:ChooseEvenOdd
+SVar:ChooseEvenOdd:DB$ ChooseEvenOdd | Defined$ You | ListTitle$ Choose ODD or EVEN | SpellDescription$ As NICKNAME enters, choose odd or even. (Zero is even.)
+T:Mode$ SpellCast | ValidCard$ Card.cmcChosenEvenOdd | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever an opponent casts a spell with mana value of the chosen quality, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBLoseLife,DBDraw | ChoiceRestriction$ ThisGame
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on NICKNAME.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:As Gollum enters, choose odd or even. (Zero is even.)\nWhenever an opponent casts a spell with mana value of the chosen quality, choose one that hasn't been chosen —\n• Put a +1/+1 counter on Gollum.\n• Each opponent loses 2 life and you gain 2 life.\n• Draw a card.

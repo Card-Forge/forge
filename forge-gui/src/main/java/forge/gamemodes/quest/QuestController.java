@@ -220,7 +220,7 @@ public class QuestController {
             // read with a special class, that will fill sell rules as it processes each PreconDeck
             preconManager = new StorageBase<>("Quest shop decks", new PreconDeck.Reader(new File(ForgeConstants.QUEST_PRECON_DIR)) {
                 @Override
-                protected PreconDeck getPreconDeckFromSections(java.util.Map<String, java.util.List<String>> sections) {
+                protected PreconDeck getPreconDeckFromSections(Map<String, List<String>> sections) {
                     PreconDeck result = super.getPreconDeckFromSections(sections);
                     preconDeals.put(result.getName(), new SellRules(sections.get("shop")));
                     return result;

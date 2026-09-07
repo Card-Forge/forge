@@ -62,6 +62,7 @@ import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -76,7 +77,7 @@ import java.util.stream.Collectors;
  */
 public class ComputerUtil {
 
-    public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Runnable chooseTargets) {
+    public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Consumer<SpellAbility> chooseTargets) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final Card host = sa.getHostCard();
@@ -111,7 +112,7 @@ public class ComputerUtil {
             return false;
         }
         if (chooseTargets != null) {
-            chooseTargets.run();
+            chooseTargets.accept(sa);
             if (!sa.isTargetNumberValid()) {
                 return false;
             }
@@ -215,9 +216,9 @@ public class ComputerUtil {
     }
 
     public static final boolean playStack(SpellAbility sa, final Player ai, final Game game) {
-        sa.setActivatingPlayer(ai);
-        if (!ComputerUtilCost.canPayCost(sa, ai, false))
+        if (!ComputerUtilCost.canPayCost(sa, ai, false)) {
             return false;
+        }
 
         final Card source = sa.getHostCard();
 
@@ -249,7 +250,6 @@ public class ComputerUtil {
     }
 
     public static final boolean playNoStack(final Player ai, SpellAbility sa, final Game game, final boolean effect) {
-        sa.setActivatingPlayer(ai);
         // TODO: We should really restrict what doesn't use the Stack
         if (!ComputerUtilCost.canPayCost(sa, ai, effect)) {
             return false;
@@ -345,6 +345,7 @@ public class ComputerUtil {
             }
 
             if (AiProfileUtil.getBoolProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_ENABLE)) {
+                // TODO combine these into a Valid check
                 int minCMC = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MIN_CMC);
                 int maxCMC = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MAX_CMC);
                 int maxCreatureEval = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL);
@@ -369,15 +370,16 @@ public class ComputerUtil {
             }
 
             // Sac lands
-            final CardCollection landsInPlay = CardLists.getType(typeList, "Land");
-            if (!landsInPlay.isEmpty()) {
+            final CardCollection landsToSac = CardLists.getType(typeList, "Land");
+            if (!landsToSac.isEmpty()) {
                 final int landsInHand = Math.min(2, CardLists.getType(ai.getCardsIn(ZoneType.Hand), "Land").size());
                 final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
                 nonLandsInHand.addAll(ai.getCardsIn(ZoneType.Library));
+                // TODO add +1 for X shards
                 final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
-                if (landsInPlay.size() + landsInHand >= highestCMC) {
-                    // Don't need more land.
-                    return ComputerUtilCard.getWorstLand(landsInPlay);
+                if (ai.getLandsInPlay().size() + landsInHand >= highestCMC) {
+                    // Don't need more land
+                    return ComputerUtilCard.getWorstLand(landsToSac);
                 }
             }
 
@@ -536,7 +538,7 @@ public class ComputerUtil {
 
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
         if (differentNames) {
-            final Set<Card> uniqueNameCards = Sets.newHashSet();
+            final Set<Card> uniqueNameCards = Sets.newLinkedHashSet();
             for (final Card card : typeList) {
                 // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
                 if (!card.hasNoName()) {
@@ -872,7 +874,7 @@ public class ComputerUtil {
 
                         // Run non-mandatory trigger.
                         // These checks only work if the Executing SpellAbility is an Ability_Sub.
-                        if ((exSA instanceof AbilitySub) && !SpellApiToAi.Converter.get(exSA).doTrigger(ai, exSA, false)) {
+                        if (exSA instanceof AbilitySub && !SpellApiToAi.Converter.get(exSA).doTrigger(ai, exSA, false)) {
                             // AI would not run this trigger if given the chance
                             return sacrificed;
                         }
@@ -1381,7 +1383,8 @@ public class ComputerUtil {
         }
         if (abCost.hasTapCost() && source.hasSVar("AITapDown")) {
             return true;
-        } else if (sa.getRootAbility().isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+        }
+        if (sa.getRootAbility().isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
             for (final CostPart part : sa.getRootAbility().getPayCosts().getCostParts()) {
                 if (part instanceof CostPutCounter) {
                     return part.convertAmount() == null || part.convertAmount() > 0 || ai.isCardInPlay("Carth the Lion");
@@ -1390,16 +1393,7 @@ public class ComputerUtil {
         }
         for (final CostPart part : abCost.getCostParts()) {
             if (part instanceof CostSacrifice sac) {
-                if (sac.payCostFromSource()) {
-                    if (source.getSVar("SacMe").equals("6")) {
-                        return true;
-                    } else if (shouldSacrificeThreatenedCard(ai, source, sa)) {
-                        return true;
-                    }
-                    continue;
-                }
-
-                final CardCollection typeList =
+                final List<Card> typeList = sac.payCostFromSource() ? List.of(source) :
                         CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), sac.getType(), source.getController(), source, sa);
                 for (Card c : typeList) {
                     if (c.getSVar("SacMe").equals("6")) {
@@ -3088,12 +3082,11 @@ public class ComputerUtil {
     }
 
     public static int countUsefulCreatures(Player p) {
-        CardCollection creats = p.getCreaturesInPlay();
         int count = 0;
 
-        for (Card c : creats) {
+        for (Card c : p.getCreaturesInPlay()) {
             if (!ComputerUtilCard.isUselessCreature(p, c)) {
-                count ++;
+                count++;
             }
         }
 
@@ -3185,7 +3178,7 @@ public class ComputerUtil {
 
         // performance shortcut
         // TODO if checking upcoming turn it should be a permanent effect
-        if (ai.cantLoseForZeroOrLessLife()) {
+        if (ai.cantLose()) {
             return remainingLife;
         }
 

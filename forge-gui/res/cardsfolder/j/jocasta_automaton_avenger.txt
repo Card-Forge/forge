@@ -1,6 +1,6 @@
 Name:Jocasta, Automaton Avenger
 ManaCost:3
-Types:Legendary Creature Robot Hero
+Types:Legendary Artifact Creature Robot Hero
 PT:2/2
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Creature.IsCommander+YouOwn | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever your commander deals combat damage to a player, put a +1/+1 counter on NICKNAME.

@@ -20,8 +20,6 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
 import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
-import forge.game.player.PlayerView;
-import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -459,25 +457,6 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public boolean selectCard(boolean selectEntireStack) {
-            CardView cardView = getCard();
-            if (cardView != null) {
-                PlayerView cardController = cardView.getController();
-                PlayerView currentPlayer = MatchController.instance.getCurrentPlayer();
-                if (cardController != null) {
-                    /* TODO:
-                        IIRC this check is for mobile UI BUG that can cast nonland card as long as you can view it
-                        on any hand. Seems ridiculous, Investigate further. Should be rule based and this isn't needed.
-                        To reproduce omit this check and select nonland card on opponent hand while you have
-                        Telepathy card in play. */
-                    if (!cardController.equals(currentPlayer) && ZoneType.Hand.equals(cardView.getZone()))
-                        if (cardView.mayPlayerLook(currentPlayer)) { // can see the card, check if can play...
-                            if (!cardView.getMayPlayPlayers(currentPlayer))
-                                return false;
-                        } else {
-                            return false;
-                        }
-                }
-            }
             if (MatchController.instance.getGameController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
                 Gdx.graphics.requestRendering();
                 return true;

@@ -79,8 +79,6 @@ public class AiAttackController {
 
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
-    private final int timeOut;
-    private final boolean canUseTimeout;
     private List<CompletableFuture<Integer>> futures = new ArrayList<>();
 
     /**
@@ -99,8 +97,6 @@ public class AiAttackController {
         myList = ai.getCreaturesInPlay();
         this.nextTurn = nextTurn;
         refreshCombatants(defendingOpponent);
-        this.timeOut = ai.getGame().getAITimeout();
-        this.canUseTimeout = ai.getGame().canUseTimeout();
     } // overloaded constructor to evaluate attackers that should attack next turn
 
     public AiAttackController(final Player ai, Card attacker) {
@@ -114,8 +110,6 @@ public class AiAttackController {
             attackers.add(attacker);
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
-        this.timeOut = ai.getGame().getAITimeout();
-        this.canUseTimeout = ai.getGame().canUseTimeout();
     } // overloaded constructor to evaluate single specified attacker
 
     private void refreshCombatants(GameEntity defender) {
@@ -203,17 +197,14 @@ public class AiAttackController {
     }
     public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
         PlayerCollection opponents = ai.getOpponents();
-        if (opponents.size() == 1) {
-            return opponents.get(0);
+        if (opponents.size() < 2) {
+            return Iterables.getFirst(opponents, null);
         }
 
-        Player bestDefender = ai.getWeakestOpponent();
-        int bestScore = Integer.MIN_VALUE;
+        Map<Player, Integer> threatScores = Maps.newHashMap();
         for (Player opp : opponents) {
             final int life = opp.getLife();
             int score = ComputerUtil.evaluateBoardPosition(ai, opp);
-            // round away slightly so a single land drop doesn't mean players with earlier turn order are predictably attacked
-            score = (int) Math.ceil(score / 10) * 10;
             int lowLifeThreshold = Math.min(20, opp.getStartingLife());
             if (life > 0 && life < lowLifeThreshold) {
                 // TODO commander damage
@@ -234,21 +225,16 @@ public class AiAttackController {
                     score -= 50;
                 }
             }
-            if (score > bestScore || (score == bestScore && MyRandom.percentTrue(50))) {
-                bestScore = score;
-                bestDefender = opp;
-            }
+            threatScores.put(opp, score);
         }
-        return bestDefender;
+        // round away slightly so a single land drop doesn't mean players with earlier turn order are predictably attacked
+        // grows with game age since by then threat ranges become less narrow
+        int threatLimit = Collections.max(threatScores.values()) - 10 - ai.getGame().getPhaseHandler().getTurn();
+        threatScores.values().removeIf(e -> e < threatLimit);
+        return Aggregates.random(threatScores.keySet());
     }
 
-    /**
-     * <p>
-     * sortAttackers.
-     * </p>
-     *
-     */
-    public final static List<Card> sortAttackers(final List<Card> in) {
+    public static List<Card> sortAttackers(final List<Card> in) {
         final List<Card> result = new ArrayList<>();
 
         // Cards with triggers should come first (for Battle Cry)
@@ -867,7 +853,7 @@ public class AiAttackController {
         boolean simAI = false;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            simAI = aic.usesSimulation();
+            simAI = aic.usesFullSimulation();
             if (!simAI) {
                 playAggro = aic.getBoolProperty(AiProps.PLAY_AGGRO);
                 chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
@@ -940,7 +926,12 @@ public class AiAttackController {
                         }
                     }
                     if (mustAttackDef != null) {
-                        combat.addAttacker(attacker, mustAttackDef);
+                        // combat is shared across these parallel futures and its attacker
+                        // multimap is not thread-safe; unsynchronized addAttacker calls
+                        // collide (ConcurrentModificationException, dropped attackers)
+                        synchronized (combat) {
+                            combat.addAttacker(attacker, mustAttackDef);
+                        }
                         attackersLeft.remove(attacker);
                         numForcedAttackers.incrementAndGet();
                     }
@@ -951,8 +942,8 @@ public class AiAttackController {
                 }));
             }
             CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
-            if (canUseTimeout)
-                CompletableFuture.allOf(futuresArray).completeOnTimeout(null, timeOut, TimeUnit.SECONDS).join();
+            if (ai.getGame().canUseTimeout())
+                CompletableFuture.allOf(futuresArray).completeOnTimeout(null, ai.getGame().getAITimeout(), TimeUnit.SECONDS).join();
             else
                 CompletableFuture.allOf(futuresArray).join();
             futures.clear();
@@ -1000,7 +991,7 @@ public class AiAttackController {
         if (ai.getController().isAI()) {
             // Only do this if |ai| is actually an AI - as we could be trying to predict how the human will attack.
             for (Card attacker : this.attackers) {
-                if (AiCardMemory.isRememberedCard(ai, attacker, AiCardMemory.MemorySet.MANDATORY_ATTACKERS)) {
+                if (AiCardMemory.isRememberedCard(ai, attacker, AiCardMemory.MemorySet.TRICK_ATTACKERS)) {
                     combat.addAttacker(attacker, defender);
                     attackersLeft.remove(attacker);
                 }
@@ -1242,10 +1233,15 @@ public class AiAttackController {
                 && ComputerUtil.countUsefulCreatures(ai) > ComputerUtil.countUsefulCreatures(defendingOpponent)
                 && ai.getLife() > defendingOpponent.getLife()
                 && !ComputerUtilCombat.lifeInDanger(ai, combat) // this isn't really doing anything unless the attacking player in combat isn't the AI (which currently isn't used like that)
-                && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0) || tradeIfTappedOut
-                && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0) || MyRandom.percentTrue(extraChanceIfOppHasMana)
+                // our own mana: ATTACK_INTO_TRADE_WHEN_TAPPED_OUT lets us swing while tapped out,
+                // otherwise we want mana open so we can bluff or use a trick
+                && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0 || tradeIfTappedOut)
+                // the opponent's mana: safe when they're tapped out, otherwise take the extra roll
+                // for the risk of walking into a trick
+                && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0
+                        || MyRandom.percentTrue(extraChanceIfOppHasMana))
                 && (!tradeIfLowerLifePressure || (ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() <
-                defendingOpponent.getLifeLostThisTurn() + defendingOpponent.getLifeLostThisTurn()))) {
+                defendingOpponent.getLifeLostLastTurn() + defendingOpponent.getLifeLostThisTurn()))) {
             aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
         } else if (ratioDiff >= 0 && this.attackers.size() > 1) {
             aiAggression = 3; // attack expecting to make good trades or damage player.
@@ -1586,6 +1582,7 @@ public class AiAttackController {
                         sa = t.ensureAbility();
                         if (c.getController().isAI()) {
                             PlayerControllerAi aic = ((PlayerControllerAi) c.getController().getController());
+                            sa.setActivatingPlayer(c.getController());
                             if (!aic.getAi().doTrigger(sa, false)) {
                                 missTarget = true;
                                 break;
@@ -1729,8 +1726,6 @@ public class AiAttackController {
             i++;
             if (i + refPowerValue >= cre.getCurrentToughness()) {
                 attUnsafe.add(cre);
-            } else {
-                continue;
             }
         }
 

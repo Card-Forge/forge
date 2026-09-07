@@ -478,7 +478,7 @@
                         { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu, Devouring Chaos&quot;, &quot;count&quot;: 1 },
                         { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu Consumes All&quot;, &quot;count&quot;: 1 },
                         { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu's Second Rite&quot;, &quot;count&quot;: 1 },
-                        { &quot;type&quot;: &quot;card&quot;, &quot;cardType&quot;: [&quot;Sorcery&quot;], &quot;colors&quot;: [ &quot;red&quot;], &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ], &quot;count&quot;: 5 }
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardTypes&quot;: [&quot;Sorcery&quot;], &quot;colors&quot;: [ &quot;red&quot;], &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ], &quot;count&quot;: 5 }
                       ]
                     } ],
 					&quot;condition&quot;: [

@@ -1,0 +1,11 @@
+Name:Matoc, Lavamancer
+ManaCost:3 R
+Types:Legendary Creature Human Barbarian Wizard
+PT:2/3
+T:Mode$ DamageDealtOnce | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | AtLeastOneInstance$ EQ2 | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a source you control deals damage, if at least one permanent or player was dealt exactly 2 of that damage, exile the top card of your library. You may play it until the end of your next turn.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card until the end of your next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ DealDamage | Cost$ R T ExileFromGrave<2/Card> | ValidTgts$ Creature.Other,Planeswalker.Other,Battle.Other,Player | ValidTgtsDesc$ any other target | NumDmg$ 2 | SpellDescription$ NICKNAME deals 2 damage to any other target.
+Oracle:Whenever a source you control deals damage, if at least one permanent or player was dealt exactly 2 of that damage, exile the top card of your library. You may play it until the end of your next turn.\n{R}, {T}, Exile two cards from your graveyard: Matoc deals 2 damage to any other target.

@@ -1,0 +1,17 @@
+Name:Great Ugly-Looking Goblin
+ManaCost:5 B
+Types:Creature Goblin Soldier
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Menace | Description$ Each creature you control with a +1/+1 counter on it has menace. (It can't be blocked except by two or more creatures.)
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token|Counters
+AlternateMode:Adventure
+Oracle:Each creature you control with a +1/+1 counter on it has menace. (It can't be blocked except by two or more creatures.)
+
+ALTERNATE
+
+Name:Clap! Snap!
+ManaCost:1 B
+Types:Sorcery Adventure
+A:SP$ Amass | Type$ Goblin | Num$ 2 | SpellDescription$ Amass Goblins 2. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Amass Goblins 2. (Then exile this card. You may cast the creature later from exile.)
