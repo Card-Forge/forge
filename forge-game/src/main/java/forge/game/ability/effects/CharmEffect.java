@@ -253,8 +253,6 @@ public class CharmEffect extends SpellAbilityEffect {
                 List<AbilitySub> randomChosen = Aggregates.random(choices, num);
                 chainAbilities(sa, randomChosen);
                 if (!randomChosen.isEmpty()) {
-                    // choosing modes at random still counts as facing a dilemma (previously only the
-                    // player-chosen path below fired this trigger)
                     final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(activator);
                     runParams.put(AbilityKey.Random, true);
                     activator.getGame().getTriggerHandler().runTrigger(TriggerType.FacesDilemma, runParams, false);

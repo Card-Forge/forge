@@ -481,11 +481,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.SourceSA, sp);
             runParams.put(AbilityKey.Targets, distinctObjects);
             runParams.put(AbilityKey.Cause, sp.getHostCard());
-            // Random for BecomesTargetOnce isn't threaded through explicitly here - it's read
-            // directly off whichever ability in the chain actually did the targeting, the same
-            // walk getAllTargetChoices() above uses.
-            for (SpellAbility saWalk = sp.getRootAbility(); saWalk != null; saWalk = saWalk.getSubAbility()) {
-                if (saWalk.usesTargeting() && saWalk.getTargetRestrictions().isRandomTarget()) {
+            for (SpellAbility saWalk = sp; saWalk != null; saWalk = saWalk.getSubAbility()) {
+                if (saWalk.usesTargeting() && saWalk.getTargetRestrictions().isRandomTarget() && !saWalk.getTargets().isEmpty()) {
                     runParams.put(AbilityKey.Random, true);
                     break;
                 }

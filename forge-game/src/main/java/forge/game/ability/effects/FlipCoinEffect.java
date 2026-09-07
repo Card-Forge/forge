@@ -161,9 +161,10 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 }
             }
 
-            // fires once per flip instruction (regardless of Amount), for "flip one or more coins" triggers
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(flipper);
-            flipper.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoinOnce, runParams, false);
+            if (amount > 0) {
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(flipper);
+                flipper.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoinOnce, runParams, false);
+            }
         }
     }
 
