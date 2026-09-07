@@ -165,19 +165,7 @@ ScryfallCode=PZ2
 65835 C Cemetery Gate @Thomas M. Baxa
 65837 C Energy Tap @Mike Bierek
 65839 C Metamorphosis @Michael Sutfin
-65841 R The Unspeakable @Daarken
-65843 R Zo-Zu the Punisher @Wayne Reynolds
-65845 U Guttural Response @Ben Wootten
-65847 M Jhoira of the Ghitu @Magali Villeneuve
-65849 M Lovisa Coldeyes @Anna Steinbauer
-65851 U Desperate Ritual @Wayne Reynolds
-65853 M Warren Instigator @Svetlin Velinov
-65855 U Gempalm Incinerator @Mark Behm
-65857 R Goblin Goon @Steve Prescott
 65859 M Master of Waves @Svetlin Velinov
-65861 U Tidal Courier @Slawomir Maniak
-65863 C Lonely Sandbar @Noah Bradley
-65865 C Aquitect's Will @Dimitar Marinski
 68076 R Firesong and Sunspeaker @Zoltan Boros
 70649 R Nesting Dragon @Jehan Choo
 70651 R Yuriko, the Tiger's Shadow @Yongjae Choi

@@ -26,6 +26,7 @@ import forge.card.CardDb.CardArtPreference;
 import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.deck.DeckRule;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -407,7 +408,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         game = game0;
         paperCard = paperCard0;
-        view = new CardView(id0, tracker0);
+        view = game0 != null && game0.isNoGUIUser() ? new DummyCardView(id0, tracker0) : new CardView(id0, tracker0);
         currentState = new CardState(view.getCurrentState(), this);
         states.put(CardStateName.Original, currentState);
         view.updateChangedColorWords(this);
@@ -1933,7 +1934,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     @Override
     public final void setCounters(final Multiset<CounterType> allCounters) {
-        boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().allMatch(CounterType::isKeywordCounter);
+        boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().anyMatch(CounterType::isKeywordCounter);
         counters = allCounters;
         view.updateCounters(this);
 
@@ -1952,7 +1953,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     public final void clearCounters() {
         if (counters.isEmpty()) { return; }
-        boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().allMatch(CounterType::isKeywordCounter);
+        boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().anyMatch(CounterType::isKeywordCounter);
 
         counters.clear();
         view.updateCounters(this);
@@ -2905,6 +2906,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         String keywordText = keywordsToText(getUnhiddenKeywords(state).getValues());
         sb.append(keywordText).append(keywordText.length() > 0 ? linebreak : "");
 
+        // DeckRule descriptions (e.g. Rulebreaker) print alongside the card's other rules text.
+        if (getRules() != null) {
+            for (final DeckRule rule : DeckRule.parseAll(getRules().getDeckRules())) {
+                final String desc = rule.getDescription();
+                if (!desc.isEmpty()) {
+                    sb.append(desc).append(linebreak);
+                }
+            }
+        }
+
         // Process replacement effects first so that "enters the battlefield tapped"
         // and "as ~ enters the battlefield, choose...", etc can be printed
         // here. The rest will be printed later.
@@ -3115,18 +3126,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (isGoaded()) {
             sb.append("is goaded by: ").append(Lang.joinHomogenous(getGoaded()));
             sb.append("\r\n");
-        }
-
-        if (hasState(CardStateName.PreparedSpell) && state.getStateName().equals(CardStateName.Original)) {
-            CardState prepState = getState(CardStateName.PreparedSpell);
-            SpellAbility prepSA = prepState.getFirstSpellAbility();
-            if (prepSA != null) {
-                sb.append(Localizer.getInstance().getMessage("lblPrepared"));
-                sb.append(" — ").append(CardTranslation.getTranslatedName(prepState));
-                sb.append(" ").append(prepSA.getPayCosts().toSimpleString());
-                sb.append(": ");
-                sb.append(prepSA);
-            }
         }
 
         // replace triple line feeds with double line feeds
@@ -3439,10 +3438,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         for (SpellAbility sa : getSpellAbilities()) {
-            // morph up and disguise up are not part of the card
-            if (sa.isMorphUp() || sa.isDisguiseUp()) {
-                continue;
-            }
             // while Adventure and Omen are part of Secondary
             if ((sa.isAdventure() || sa.isOmen()) && !getCurrentStateName().equals(sa.getCardStateName())) {
                 continue;
@@ -3462,17 +3457,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             ck.applySpellAbility(list);
         }
 
-        // add Facedown abilities from Original state but only if this state is face down
-        // need CardStateView#getState or might crash in StackOverflow
-        if (isInPlay()) {
-            if (isFaceDown() && state.getStateName() == CardStateName.FaceDown) {
-                for (SpellAbility sa : getState(CardStateName.Original).getNonManaAbilities()) {
-                    if (sa.isTurnFaceUp()) {
-                        list.add(sa);
-                    }
-                }
-            }
-        } else if (hasState(CardStateName.Secondary) && state.getStateName() == CardStateName.Original) {
+        if (!isInPlay() && hasState(CardStateName.Secondary) && state.getStateName() == CardStateName.Original) {
             // Adventure and Omen may only be cast not from Battlefield
             list.addAll(getState(CardStateName.Secondary).getSpellAbilities());
         }
@@ -3838,15 +3823,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         getView().setPlayerMayLook(result);
     }
 
-    public final void updateMayPlay() {
-        PlayerCollection result = new PlayerCollection();
-        for (CardPlayOption o : mayPlay.values()) {
-            if (o.grantsZonePermissions())
-                result.add(o.getPlayer());
-        }
-        getView().setMayPlayPlayers(result);
-    }
-
     public final CardPlayOption mayPlay(final StaticAbility sta) {
         if (sta == null) {
             return null;
@@ -3865,11 +3841,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void setMayPlay(final Player player, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
         this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
-        this.updateMayPlay();
     }
     public final void removeMayPlay(final StaticAbility sta) {
         this.mayPlay.remove(sta);
-        this.updateMayPlay();
     }
     public final Map<StaticAbility, CardPlayOption> getMayPlay() {
         return Maps.newHashMap(mayPlay);
@@ -6617,7 +6591,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         preparedEffect = eff;
         view.updatePreparedSpell(this);
-        updateAbilityTextForView();
     }
 
     public final boolean isManifested() {
@@ -7469,13 +7442,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
-        if (isInPlay() && isFaceDown() && oState.getType().isCreature() && oState.getManaCost() != null && !oState.getManaCost().isNoCost())
-        {
-            if (isManifested()) {
-                abilities.add(oState.getManifestUp());
+        if (isInPlay() && isFaceDown()) {
+            if (getCurrentStateName() == CardStateName.FaceDown) {
+                for (SpellAbility sa : oState.getNonManaAbilities()) {
+                    if (sa.isTurnFaceUp()) {
+                        abilities.add(sa);
+                    }
+                }
             }
-            if (isCloaked()) {
-                abilities.add(oState.getCloakUp());
+            if (oState.getType().isCreature() && oState.getManaCost() != null && !oState.getManaCost().isNoCost()) {
+                if (isManifested()) {
+                    abilities.add(oState.getManifestUp());
+                }
+                if (isCloaked()) {
+                    abilities.add(oState.getCloakUp());
+                }
             }
         }
 

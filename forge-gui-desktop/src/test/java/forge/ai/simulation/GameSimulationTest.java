@@ -199,7 +199,7 @@ public class GameSimulationTest extends SimulationTest {
         GameSimulator sim = createSimulator(p);
         Game simGame = sim.getSimulatedGameState();
 
-        SpellAbility unmorphSA = findSAWithPrefix(ripper, "Morph — Reveal a black card");
+        SpellAbility unmorphSA = findSAWithPrefix(ripper.getAllPossibleAbilities(simGame.getPlayer(p.getId()), false), "Morph — Reveal a black card");
         AssertJUnit.assertNotNull(unmorphSA);
         sim.simulateSpellAbility(unmorphSA);
 

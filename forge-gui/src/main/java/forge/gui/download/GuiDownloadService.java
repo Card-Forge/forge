@@ -27,8 +27,10 @@ import forge.gui.interfaces.IButton;
 import forge.gui.interfaces.IProgressBar;
 import forge.gui.interfaces.ITextField;
 import forge.localinstance.properties.ForgeConstants;
+import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
+import forge.util.ScryfallRateLimiter;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -37,7 +39,6 @@ import java.net.*;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -120,6 +121,11 @@ public abstract class GuiDownloadService implements Runnable {
 
     protected String getStartOverrideDesc() {
         return null;
+    }
+
+    /** Updates the visible progress description from a background thread. */
+    protected void reportStatus(String message) {
+        FThreads.invokeInEdtLater(() -> progressBar.setDescription(message));
     }
 
     private void readyToStart() {
@@ -251,14 +257,22 @@ public abstract class GuiDownloadService implements Runnable {
             FileOutputStream fos = null;
             try {
                 final File base = fileDest.getParentFile();
-                if (FileUtil.ensureDirectoryExists(base)) { //ensure destination directory exists
+                if (ScryfallRateLimiter.isApiUrl(url)) {
+                    // Wait out an active cooldown rather than skipping -- this is a background,
+                    // cancelable bulk run, so it's worth pausing to actually finish downloading
+                    // instead of racing through the rest of a large queue in skip-only mode.
+                    ScryfallRateLimiter.awaitCooldownCleared(() -> cancel, this::reportStatus);
+                }
+                if (!cancel && FileUtil.ensureDirectoryExists(base)) { //ensure destination directory exists
                     URL imageUrl = new URL(url);
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection(p);
+                    // Scryfall asks for a descriptive User-Agent and rate-limits harder without one.
+                    conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
                     // don't allow redirections here -- they indicate 'file not found' on the server
                     // only allow redirections to consume Scryfall API
-                    if(url.contains("api.scryfall.com")) {
+                    if (ScryfallRateLimiter.isApiUrl(url)) {
                         conn.setInstanceFollowRedirects(true);
-                        TimeUnit.MILLISECONDS.sleep(100);
+                        ScryfallRateLimiter.acquire(url);
                     } else {
                         conn.setInstanceFollowRedirects(false);
                     }
@@ -310,12 +324,16 @@ public abstract class GuiDownloadService implements Runnable {
                         if(url.contains("/images/") && !isJPG && !isLogged)
                             System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
                         break;
+                    case 429:
+                        ScryfallRateLimiter.noteIfRateLimited(429, url, conn.getHeaderField("Retry-After"));
+                        conn.disconnect();
+                        break;
                     default:
                         conn.disconnect();
                         System.out.println("  Connection failed for url: " + url);
                         break;
                     }
-                } else {
+                } else if (!cancel) {
                     System.out.println("  Can't create folder: " + base.getAbsolutePath());
                 }
             }

@@ -428,34 +428,32 @@ public class AiBlockController {
                 continue;
             }
 
-            int evalAttackerValue = ComputerUtilCard.evaluateCreature(attacker);
-
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
-            List<Card> usableBlockers;
-            final List<Card> blockGang = new ArrayList<>();
-            int absorbedDamage; // The amount of damage needed to kill the first blocker
-            int currentValue; // The value of the creatures in the blockgang
-            boolean foundDoubleBlock = false; // if true, a good double block is found
-
             // Try to add blockers that could be destroyed, but are worth less than the attacker
             // Don't use blockers without First Strike or Double Strike if attacker has it
-            usableBlockers = CardLists.filter(blockers, c -> {
+            List<Card> usableBlockers = CardLists.filter(blockers, c -> {
                 if (ComputerUtilCombat.dealsFirstStrikeDamage(attacker, false, combat)
                         && !ComputerUtilCombat.dealsFirstStrikeDamage(c, false, combat)) {
                     return false;
                 }
-                return lifeInDanger || wouldLikeToRandomlyTrade(attacker, c, combat) || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker);
+                // a blocker destroyed before it deals its damage can't help the gang kill the attacker
+                return (lifeInDanger || wouldLikeToRandomlyTrade(attacker, c, combat)
+                        || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker))
+                        && !ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(c, attacker, false);
             });
             if (usableBlockers.size() < 2) {
                 return;
             }
 
             final Card leader = ComputerUtilCard.getBestCreatureAI(usableBlockers);
+            final List<Card> blockGang = new ArrayList<>();
             blockGang.add(leader);
             usableBlockers.remove(leader);
-            absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
-            currentValue = ComputerUtilCard.evaluateCreature(leader);
+            int absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
+            int currentValue = ComputerUtilCard.evaluateCreature(leader);
+            int evalAttackerValue = ComputerUtilCard.evaluateCreature(attacker);
 
+            boolean foundDoubleBlock = false;
             // consider a double block
             for (final Card blocker : usableBlockers) {
                 // Add an additional blocker if the current blockers are not
@@ -560,19 +558,16 @@ public class AiBlockController {
             }
 
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
-            final List<Card> blockGang = new ArrayList<>();
-            int absorbedDamage; // The amount of damage needed to kill the first blocker
-
-            List<Card> usableBlockers = CardLists.filter(blockers, c -> c.getNetToughness() > attacker.getNetCombatDamage() // performance shortcut
-                    || c.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, c, true) > attacker.getNetCombatDamage());
+            List<Card> usableBlockers = getSafeBlockers(combat, attacker, blockers);
             if (usableBlockers.size() < 2) {
                 return;
             }
 
             final Card leader = ComputerUtilCard.getWorstCreatureAI(usableBlockers);
+            final List<Card> blockGang = new ArrayList<>();
             blockGang.add(leader);
             usableBlockers.remove(leader);
-            absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
+            int absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
 
             // consider a double block
             for (final Card blocker : usableBlockers) {
@@ -673,8 +668,12 @@ public class AiBlockController {
             return;
         }
 
-        boolean blocked = false;
         List<Card> chumpBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
+        if (attacker.hasKeyword(Keyword.TRAMPLE)) {
+            // a blocker that dies before combat damage soaks up none of it, so a trampling
+            // attacker connects for full anyway and the chump block is spent for nothing
+            chumpBlockers.removeIf(c -> ComputerUtilCombat.shieldDamage(attackers.get(0), c) == 0);
+        }
         if (!chumpBlockers.isEmpty()) {
             final Card blocker = ComputerUtilCard.getWorstCreatureAI(chumpBlockers);
 
@@ -691,12 +690,8 @@ public class AiBlockController {
                                 && !StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(other)
                                 && !ComputerUtilCombat.attackerHasThreateningAfflict(other, ai)
                                 && CombatUtil.canBlock(other, blocker, combat)) {
-                            combat.addBlocker(other, blocker);
-                            attackersLeft.remove(other);
-                            blockedButUnkilled.add(other);
-                            attackers.remove(other);
-                            makeChumpBlocks(combat, attackers, true);
-                            return;
+                            attacker = other;
+                            break;
                         }
                     }
                 }
@@ -705,10 +700,9 @@ public class AiBlockController {
             combat.addBlocker(attacker, blocker);
             attackersLeft.remove(attacker);
             blockedButUnkilled.add(attacker);
-            blocked = true;
         }
-        attackers.remove(0);
-        makeChumpBlocks(combat, attackers, blocked);
+        attackers.remove(attacker);
+        makeChumpBlocks(combat, attackers, !chumpBlockers.isEmpty());
     }
 
     // Block creatures with "can't be blocked except by two or more creatures"

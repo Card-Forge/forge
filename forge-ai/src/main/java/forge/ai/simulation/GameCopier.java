@@ -83,6 +83,7 @@ public class GameCopier {
         GameRules currentRules = origGame.getRules();
         Match newMatch = new Match(currentRules, newPlayers, origGame.getView().getTitle());
         Game newGame = new Game(newPlayers, currentRules, newMatch);
+        newGame.setNoGUIUser();
         newGame.dangerouslySetTimestamp(origGame.getTimestamp());
 
         for (int i = 0; i < origGame.getPlayers().size(); i++) {
@@ -494,21 +495,21 @@ public class GameCopier {
         }
     }
 
-    public GameObject find(GameObject o) {
+    public <T extends GameObject> T find(T o) {
         if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
-            return snapshot.find(o);
+            return (T) snapshot.find(o);
         }
 
-        GameObject result = null;
+        T result = null;
         if (o instanceof Card) {
-            result = cardMap.get(o);
+            result = (T) cardMap.get(o);
             if (result != null) {
                 return result;
             } else {
                 System.out.println("Couldn't map " + o + "/" + System.identityHashCode(o));
             }
         } else if (o instanceof Player) {
-            result = playerMap.get(o);
+            result = (T) playerMap.get(o);
             if (result != null)
                 return result;
         }

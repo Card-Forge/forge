@@ -305,11 +305,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Backside:
                 return true;
             case Secondary:
-            case PreparedSpell:
                 if (cv.isFaceDown()) {
                     return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
                 }
                 return false;
+            case PreparedSpell:
+                if (cv.isFaceDown()) {
+                    return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
+                }
+                return cv.useCardArt();
             default:
                 return false;
         }
@@ -555,7 +559,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             String name = "?";
             if (this.currentPlayer != null)
                 name = this.currentPlayer.getLobbyPlayerName();
-            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name);
+            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name, true);
         }
     }
 

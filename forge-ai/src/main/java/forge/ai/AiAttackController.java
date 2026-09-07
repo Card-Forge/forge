@@ -997,7 +997,7 @@ public class AiAttackController {
         if (ai.getController().isAI()) {
             // Only do this if |ai| is actually an AI - as we could be trying to predict how the human will attack.
             for (Card attacker : this.attackers) {
-                if (AiCardMemory.isRememberedCard(ai, attacker, AiCardMemory.MemorySet.MANDATORY_ATTACKERS)) {
+                if (AiCardMemory.isRememberedCard(ai, attacker, AiCardMemory.MemorySet.TRICK_ATTACKERS)) {
                     combat.addAttacker(attacker, defender);
                     attackersLeft.remove(attacker);
                 }

@@ -302,7 +302,8 @@ public class SoundSystem {
     private void updatePlayPause() {
         if(currentTrack == null)
             return;
-        boolean shouldPlay = shouldPlayMusic && hasWindowFocus;
+        boolean shouldPlay = shouldPlayMusic && (hasWindowFocus
+                || !FModel.getPreferences().getPrefBoolean(FPref.UI_PAUSE_MUSIC_ON_FOCUS_LOSS));
         if(shouldPlay && !currentTrack.isPlaying())
             currentTrack.resume();
         else if(!shouldPlay && currentTrack.isPlaying())
