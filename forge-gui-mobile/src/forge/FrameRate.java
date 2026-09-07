@@ -2,6 +2,7 @@ package forge;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -51,13 +52,11 @@ public class FrameRate {
     }
 
     public void render(boolean showFPS) {
-        if (font == null) // shouldn't be null
+        if (!showFPS || font == null)
             return;
-        if (showFPS) {
-            Forge.getGraphics().getBatch().begin();
-            font.draw(Forge.getGraphics().getBatch(), composeDisplay(), Color.WHITE, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), false, Align.left);
-            Forge.getGraphics().getBatch().end();
-        }
+        Forge.getGraphics().getBatch().begin();
+        font.draw(Forge.getGraphics().getBatch(), composeDisplay(), Color.WHITE, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), false, Align.left);
+        Forge.getGraphics().getBatch().end();
     }
 
     private String composeDisplay() {
@@ -69,15 +68,19 @@ public class FrameRate {
             + maxAdventureSpritesThisFrame + " Adventure Sprites ";
     }
 
-    public void sampleClassic() {
+    public void sampleClassic(boolean showFPS) {
+        if (!showFPS)
+            return;
         int batchMax = Forge.getGraphics().getBatch().maxSpritesInBatch;
         if (batchMax > maxClassicSpritesThisFrame) {
             maxClassicSpritesThisFrame = batchMax;
         }
     }
 
-    public void sampleAdventure(SpriteBatch batch) {
-        int batchMax = batch.maxSpritesInBatch;
+    public void sampleAdventure(Batch batch, boolean showFPS) {
+        if (!showFPS)
+            return;
+        int batchMax = ((SpriteBatch) batch).maxSpritesInBatch;
         if (batchMax > maxAdventureSpritesThisFrame) {
             maxAdventureSpritesThisFrame = batchMax;
         }

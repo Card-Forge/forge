@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
@@ -193,5 +194,9 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
 
     public void setFromWorldMap(boolean val) {
         hud.fromWorldMap = val;
+    }
+
+    public Batch getBatch() {
+        return stage.getBatch();
     }
 }
