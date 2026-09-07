@@ -8182,7 +8182,7 @@ Fraying Sanity|Sanidade Corroída|Encantamento — Aura Maldição|Encantar joga
 Frazzle|Farrapo|Mágica Instantânea|Anule a mágica alvo que não seja azul.
 Free from Flesh|Livre da Carne|Mágica Instantânea|A criatura alvo recebe +2/+2 até o final do turno. Coloque dois marcadores de óleo nela.
 Free the Fae|Libertar as Fadinas|Mágica Instantânea — Aventura|Triture quatro cards. Depois, coloque um card de mágica instantânea, feitiço ou Fada dentre os cards triturados em sua mão.
-Freed from the Real|Libertos da Realidade|Encantar Criatura|{U}: Vira a criatura encantada.\n{U}: Desvira a criatura encantada.
+Freed from the Real|Libertos da Realidade|Encantar Criatura|Encantar criatura\n{U}: Vira a criatura encantada.\n{U}: Desvira a criatura encantada.
 Freejam Regent|Regente de Impróvia|Criatura — Dragão|Improvisar (Seus artefatos podem ajudar a conjurar esta mágica. Cada artefato que você vira após terminar de ativar habilidades de mana paga por {1}.)\nVr\n{1}{R}: Regente de Impróvia recebe +2/+0 até o final do turno.
 Freelance Muscle|Capanga Autônomo|Criatura — Rinoceronte Guerreiro|Toda vez que Capanga Autônomo ataca ou bloqueia, ele recebe +X/+X até o final do turno, sendo X o maior poder e/ou resistência entre os das outras criaturas que você controla.
 Freestrider Commando|Comando dos Desgarrados|Criatura — Centauro Mercenário|Comando dos Desgarrados entra no campo de batalha com dois marcadores +1/+1 se não tiver sido conjurado ou se nenhum mana tiver sido gasto para conjurá-lo.\nTramar {3}{G} (Você pode pagar {3}{G} e exilar este card de sua mão. Conjure-o como um feitiço num turno posterior sem pagar seu custo de mana. Trame somente como um feitiço.)

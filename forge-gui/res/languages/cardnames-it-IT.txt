@@ -9665,7 +9665,7 @@ Fraying Sanity|Strappare il Senno|Incantesimo — Aura Anatema|Incanta giocatore
 Frazzle|Logorare|Istantaneo|Neutralizza una magia bersaglio non blu.
 Free from Flesh|Liberare dalla Carne|Istantaneo|Una creatura bersaglio prende +2/+2 fino alla fine del turno. Metti due segnalini olio su di essa.
 Free the Fae|Liberare le Fate|Istantaneo — Avventura|Macina quattro carte. Poi aggiungi alla tua mano una carta istantaneo, stregoneria o Spiritello scelta tra le carte macinate.
-Freed from the Real|Libero dalla Realtà|Incanta Creatura|{U}: TAPpa la creatura incantata.\n{U}: STAPpa la creatura incantata.
+Freed from the Real|Libero dalla Realtà|Incanta Creatura|Incanta creatura\n{U}: TAPpa la creatura incantata.\n{U}: STAPpa la creatura incantata.
 Freejam Regent|Reggente di Freejam|Creatura — Drago|Improvvisare (I tuoi artefatti possono aiutarti a lanciare questa magia. Ogni artefatto che TAPpi dopo aver attivato le abilità di mana corrisponde al pagamento di {1}.)\nVare\n{1}{R}: Il Reggente di Freejam prende +2/+0 fino alla fine del turno.
 Freelance Muscle|Scagnozzo Prezzolato|Creatura — Guerriero Rinoceronte|Ogniqualvolta lo Scagnozzo Prezzolato attacca o blocca, prende +X/+X fino alla fine del turno, dove X è la forza e/o la costituzione maggiore tra le altre creature che controlli.
 Freestrider Commando|Commando Svincolato|Creatura — Mercenario Centauro|Il Commando Svincolato entra nel campo di battaglia con due segnalini +1/+1 se non è stato lanciato o se non è stato speso mana per lanciarlo.\nTramare {3}{G} (Puoi pagare {3}{G} ed esiliare questa carta dalla tua mano. Lanciala come una stregoneria in un turno successivo senza pagare il suo costo di mana. Trama solo come una stregoneria.)
