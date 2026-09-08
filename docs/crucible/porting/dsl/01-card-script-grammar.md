@@ -1,27 +1,50 @@
 # Card Script Grammar
 
 - **Status:** Active
-- **Java counterpart:** `forge-core/src/main/java/forge/card/CardRules.java:691` (`Reader.parseLine`)
+- **Java counterpart:** `forge-core/src/main/java/forge/card/CardRules.java`, `Reader.parseLine` (line number omitted
+  deliberately: it moved twice in one upstream sync)
+- **Port log:** [`../port-log/card-rules-reader.md`](../port-log/card-rules-reader.md)
 
-One `.txt` file per card, under `forge-gui/res/cardsfolder/<letter>/`. Line-oriented, `Key:Value`.
+One `.txt` file per card, under `forge-gui/res/cardsfolder/<letter>/`. Line-oriented, `Key:Value`, with one bare key
+that carries no value at all.
 
 ## Grammar
 
 ```ebnf
 script      = { line } ;
-line        = comment | blank | entry ;
+line        = comment | blank | entry | bare-key ;
 comment     = "#" , { any-char } ;
 entry       = key , ":" , value ;
+bare-key    = "ALTERNATE" ;               (* no colon, no value *)
 key         = letter , { letter | digit | "_" } ;
 value       = { any-char - newline } ;
 ```
 
-Parsing is stateful in exactly one way: `AlternateMode:` switches subsequent entries onto the next face
-(`CardRules.java:868`). Everything before the first `AlternateMode:` belongs to face 0.
+A line with no colon is not an error: the key is the whole line and the value is absent. `ALTERNATE` is the only such
+line in the corpus, and it is also the one that switches faces.
+
+## Faces, and the four ways parsing is stateful
+
+A script fills an array of **seven faces**. Which one an entry lands on depends on state built by earlier lines, and
+there are four separate mechanisms — not one.
+
+| Mechanism               | Effect                                                                          | In corpus |
+| ----------------------- | ------------------------------------------------------------------------------- | --------: |
+| `ALTERNATE`             | Subsequent entries go to face 1                                                 |       875 |
+| `SPECIALIZE:<COLOUR>`   | Subsequent entries go to face 2-6, by `WHITE BLUE BLACK RED GREEN`              |        95 |
+| `Variant:<name>:<line>` | The rest of the line is re-parsed onto a named variant face of the current face |       297 |
+| `CopyFaceFrom:<name>`   | Registers a placeholder resolved after the whole corpus has loaded              |        25 |
+
+`Name:` is what creates a face: it constructs the face object at the current index, so an entry before the first `Name:`
+on a face has nothing to attach to.
+
+**`AlternateMode:` does not switch faces.** It records how the faces relate — `DoubleFaced`, `Adventure`, `Split`,
+`Modal`, `Prepare`, `Flip`, `Specialize`, `Omen`, `Meld` — and nothing else. An earlier version of this document said
+`AlternateMode:` performed the face switch, which would have put the wrong face on roughly 875 cards.
 
 ## Keys
 
-31 distinct keys appear in the corpus. Counts as of 2026-09-07:
+31 distinct keys with a colon, plus the bare `ALTERNATE`. Counts as of 2026-09-08:
 
 ```console
 $ find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \
@@ -30,17 +53,17 @@ $ find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \
 
 | Key                                                 |  Count | Value grammar                                                                        |
 | --------------------------------------------------- | -----: | ------------------------------------------------------------------------------------ |
-| `SVar:`                                             | 59,405 | `name ":" ( param-map \| count-expression \| text )` — see below                     |
-| `Types:`                                            | 34,627 | Space-separated supertypes, card types, subtypes                                     |
-| `Oracle:`                                           | 34,627 | Free text. `\n` is a literal line break. Display only                                |
-| `ManaCost:`                                         | 34,626 | Mana cost, or the literal `no cost`                                                  |
-| `Name:`                                             | 34,618 | Free text; the card's identity                                                       |
-| `PT:`                                               | 19,198 | `power "/" toughness`, either may be `*` or a `Count$` reference                     |
-| `A:`                                                | 18,449 | Param map, first key `SP$` or `AB$`                                                  |
+| `SVar:`                                             | 59,418 | `name ":" ( param-map \| count-expression \| text )` — see below                     |
+| `Types:`                                            | 34,631 | Space-separated supertypes, card types, subtypes                                     |
+| `Oracle:`                                           | 34,631 | Free text. `\n` is a literal line break. Display only                                |
+| `ManaCost:`                                         | 34,630 | Mana cost, or the literal `no cost`                                                  |
+| `Name:`                                             | 34,622 | Free text; the card's identity                                                       |
+| `PT:`                                               | 19,199 | `power "/" toughness`, either may be `*` or a `Count$` reference                     |
+| `A:`                                                | 18,452 | Param map, first key `SP$` or `AB$`                                                  |
 | `K:`                                                | 18,245 | Keyword, optionally `name ":" arguments`                                             |
-| `T:`                                                | 16,971 | Param map, first key `Mode$`                                                         |
+| `T:`                                                | 16,976 | Param map, first key `Mode$`                                                         |
 | `DeckHas:`, `DeckHints:`, `DeckNeeds:`, `DeckRule:` | 13,590 | Deckbuilder metadata, `type$value` pairs                                             |
-| `S:`                                                |  7,093 | Param map, first key `Mode$`                                                         |
+| `S:`                                                |  7,094 | Param map, first key `Mode$`                                                         |
 | `AI:`                                               |  4,952 | AI hints, e.g. `RemoveDeck:All`                                                      |
 | `R:`                                                |  1,693 | Param map, first key `Event$`                                                        |
 | `AlternateMode:`                                    |    902 | `Split` \| `Transform` \| `Adventure` \| `Meld` \| `Specialize` \| `Modal` \| `Flip` |
@@ -54,10 +77,18 @@ $ find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \
 | `Defense:`                                          |     37 | Battle defense                                                                       |
 | `CopyFaceFrom:`                                     |     25 | Face inheritance                                                                     |
 | `MeldPair:`                                         |     14 | Meld partner name                                                                    |
-| `SETCODEID:`, `ODeckHints:`, `Lights:`              |      3 | Long tail; each appears once                                                         |
+| `SETCOLORID:`, `Lights:`                            |      2 | Long tail; each appears once                                                         |
 
-`DBCleanup:` also appears once, as a malformed line in a single script — a real corpus defect worth knowing about before
-the strict-mode parser rejects it.
+**Two keys in the corpus are silently ignored by Forge**, because `parseLine` switches on the first character and then
+matches the whole key, and neither matches anything:
+
+| Key           | Card                   | What it looks like it meant |
+| ------------- | ---------------------- | --------------------------- |
+| `ODeckHints:` | `spirit_of_resilience` | `DeckHints:`, mistyped      |
+| `DBCleanup:`  | `the_dawning_archaic`  | An `SVar:` body, unprefixed |
+
+Both are corpus defects rather than vocabulary. A strict parser has to decide about them explicitly — Crucible's does,
+in the port log — because "Forge ignores it" is behaviour, not permission.
 
 ## `SVar:` values
 
@@ -76,4 +107,5 @@ overlay ([ADR-0007](../../adr/0007-card-dsl-representation.md)).
 ## Invalidated by
 
 - An upstream sync introducing a 32nd top-level key — caught by the P2 vocabulary scan, not by review
-- Any change to `AlternateMode:` face-switching semantics
+- A change to which key switches faces, or a fifth way for parsing to be stateful
+- Either ignored key being fixed upstream, or a third appearing
