@@ -353,4 +353,4 @@ its load-outside-the-timeout-window workaround.
 
 - [00-documentation-style](00-documentation-style.md)
 - [02-java-to-go-translation](02-java-to-go-translation.md)
-- `docs/crucible/porting/test-port-matrix.md` — status of every ported Java test
+- [`../porting/test-port-matrix.md`](../porting/test-port-matrix.md) — status of every ported Java test

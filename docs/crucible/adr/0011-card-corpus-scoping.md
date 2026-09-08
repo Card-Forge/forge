@@ -44,8 +44,8 @@ answer whether a given card can be trusted.
 ## Decision
 
 **The corpus is the union of the target deck and the gauntlet, and nothing else.** It is defined by decklists checked
-into `docs/crucible/research/meta-gauntlet.md`, not by a card count or an API list. Changing the gauntlet changes the
-corpus, and the tool recomputes what that costs.
+into [`../research/meta-gauntlet.md`](../research/meta-gauntlet.md), not by a card count or an API list. Changing the
+gauntlet changes the corpus, and the tool recomputes what that costs.
 
 **`crucible corpus-coverage --decks <dir>` is the completion criterion.** It resolves every card to its script, extracts
 every API, keyword, trigger, replacement, cost part and card property required, and reports what the engine does not yet

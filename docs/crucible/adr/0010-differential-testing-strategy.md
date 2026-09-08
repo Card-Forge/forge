@@ -78,8 +78,8 @@ turn and game-ending distribution. Drift is an AI regression even when rules are
 dashboard rather than a pass/fail gate.
 
 **The inherited Java tests are an acceptance floor, not a specification.** They are ported as fixture directories rather
-than Go functions, tracked in `porting/test-port-matrix.md`. Passing all of them proves less than it sounds; L1 and L3
-are what actually carry the correctness argument.
+than Go functions, tracked in [`../porting/test-port-matrix.md`](../porting/test-port-matrix.md). Passing all of them
+proves less than it sounds; L1 and L3 are what actually carry the correctness argument.
 
 **The oracle is version-locked to the engine under test.** Same commit, same card scripts, no cross-repo coordination —
 which is the reason ADR-0001 keeps the Java tree in this repository rather than consuming it as a submodule.

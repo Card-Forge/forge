@@ -14,6 +14,7 @@ struct generator ([ADR-0007](../../adr/0007-card-dsl-representation.md), [ADR-00
 | [Valid string](03-valid-string-grammar.md)         | `Creature.Green+attacking+YouCtrl` | `CardProperty` (2,135 LOC)         |
 | [Count expression](04-count-expression-grammar.md) | `Count$CardsInYourHand/Twice`      | `AbilityUtils` (3,950 LOC)         |
 | [Cost string](05-cost-string-grammar.md)           | `2 R T Sac<1/Creature>`            | 52 files in `forge-game/.../cost/` |
+| [Keyword](06-keyword-grammar.md)                   | `Dash:1 R`, `Cycling:2`            | `Keyword`, `KeywordInterface`      |
 
 ---
 
