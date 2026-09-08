@@ -1063,6 +1063,10 @@ public class Forge implements ApplicationListener {
             graphics,
             Assets.instance,
             lastPreview);
+        safeDispose(currentScene);
+        for (Scene scene : lastScene) {
+            safeDispose(scene);
+        }
         try {
             SoundSystem.instance.dispose();
         } catch (Exception e) {
