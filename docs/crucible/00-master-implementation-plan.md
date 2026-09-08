@@ -397,6 +397,7 @@ Beyond the packages that ADR names, the module carries:
 | `testdata/scenarios/` | `GameState`-format fixtures, shared with the Java oracle (TEST-5)       |
 | `testdata/golden/`    | Golden AST dumps, event streams, decision logs                          |
 | `tools/docgate/`      | Doc-before-code CI check (DOC-12)                                       |
+| `tools/covergate/`    | Per-package coverage floor check, read from TEST-12                     |
 | `tools/gen/`          | `go:generate` sources — effect registry, typed param structs (ADR-0008) |
 | `tools/javacycles/`   | Re-runs ADR-0003's cycle count after an upstream sync                   |
 | `tools/enginelint/`   | File-group boundaries inside the single `internal/engine` package       |

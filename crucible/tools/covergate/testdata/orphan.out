@@ -1,0 +1,2 @@
+mode: set
+example.test/orphan/pkg/orphan/orphan.go:5.13,7.2 4 1

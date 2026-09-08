@@ -52,13 +52,13 @@ code.**
 | Accepted ADRs      |    14 | `ls docs/crucible/adr/0*.md \| wc -l`                |
 | Guidelines         |     7 | `ls docs/crucible/guidelines/0*.md \| wc -l`         |
 | Design documents   |     4 | `ls docs/crucible/design/*-*.md \| wc -l`            |
-| Go files           |    34 | `find crucible -name '*.go' \| wc -l`                |
-| Go lines           | 3,964 | `find crucible -name '*.go' -exec cat {} + \| wc -l` |
+| Go files           |    42 | `find crucible -name '*.go' \| wc -l`                |
+| Go lines           | 4,580 | `find crucible -name '*.go' -exec cat {} + \| wc -l` |
 
 Those files are `pkg/collect`, `pkg/javarand`, `internal/mana`, `internal/cardtype`, `tools/javacycles`,
-`tools/enginelint` and `tools/docgate` — value types, support code, and build tooling. The two `internal/` packages
-parse the `ManaCost` and `Types` lines of every card script and nothing else: no card is compiled and no game runs.
-[`module-map.md`](module-map.md) carries the per-package detail.
+`tools/enginelint`, `tools/docgate` and `tools/covergate` — value types, support code, and build tooling. The two
+`internal/` packages parse the `ManaCost` and `Types` lines of every card script and nothing else: no card is compiled
+and no game runs. [`module-map.md`](module-map.md) carries the per-package detail.
 
 And what it is built on, inherited from upstream Forge:
 

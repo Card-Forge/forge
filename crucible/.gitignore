@@ -7,6 +7,11 @@
 # module root named after its package, which is how a 4.2 MB Mach-O executable
 # reached master in the first place. Named explicitly rather than by a broad
 # pattern, so a future Go source file cannot be silently ignored.
+/covergate
+/docgate
 /enginelint
 /javacycles
 /crucible
+
+# Coverage profile, written by the test step and read by covergate.
+/cover.out

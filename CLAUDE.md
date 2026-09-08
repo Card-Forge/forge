@@ -130,6 +130,7 @@ npx markdownlint-cli2 "CLAUDE.md" "docs/crucible/**/*.md"   # semantic lint
 ```bash
 # Go
 cd crucible && go test -race ./...
+cd crucible && go test -race -coverprofile=cover.out ./... && go run ./tools/covergate -profile cover.out   # TEST-12 floors
 cd crucible && go test -run TestScenarios ./internal/engine/game -update   # regen goldens, review the diff
 cd crucible && golangci-lint run
 

@@ -274,18 +274,32 @@ Reason: every one of these produces a flake. Flaky suite gets muted, muted suite
 
 ---
 
-## TEST-12 — Coverage gates
+## TEST-12 — Coverage floors
 
-| Package group                                                     | Line coverage floor                               |
-| ----------------------------------------------------------------- | ------------------------------------------------- |
-| Parsers (`carddb/…`, `mana`, `cardtype`, `valid`, `expr`, `cost`) | 90%                                               |
-| Engine core (`engine/game`, `engine/zone`, `engine/static`)       | 80%                                               |
-| Effects (`engine/effect`)                                         | measured by **fixture count per API**, not line % |
-| AI (`ai/…`)                                                       | 60% + statistical parity dashboard                |
-| CLI, report rendering                                             | 50%                                               |
+This table is the input to `crucible/tools/covergate`, which reads it and the profile from `go test -coverprofile` and
+fails the build on a package below its floor. Editing a number here changes what CI enforces, so the reason column is
+not decoration.
 
-Effects use fixture count because line coverage on a 20-line effect is trivially 100% and proves nothing about rule
-correctness.
+Floors apply to production code — what a run executes. A trailing `/**` covers a package and everything under it. `none`
+means line coverage is the wrong instrument for that code, never that it is untested: each such row says what tests it
+instead. Tools still carry tests; they are simply gated by being run, not by a percentage.
+
+| Packages      | Floor | Why this number                                                                                                                                                            |
+| ------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `internal/**` | 90%   | Everything a run executes: parsers, rules, effects, AI, the data path. One number, because a reader should not have to look up which half of the engine a package falls in |
+| `pkg/**`      | 90%   | Small, self-contained, no Crucible semantics, and nothing else can be trusted if an ordered set is wrong                                                                   |
+| `cmd/**`      | 50%   | Flag plumbing and rendering. Wrong output is visible; every number behind it is gated upstream                                                                             |
+| `tools/**`    | none  | Build-time commands, never on the execution path. CI runs each against the real tree every build, which tests them on the input that matters                               |
+
+Ninety percent under `internal/` is deliberately flat. A per-package table invites the argument about which floor a new
+package deserves, and that argument is always won by the package that wants a lower one.
+
+The floor is a floor, not the test plan. `internal/engine/effect` still needs three fixtures per API (TEST-5), and
+`internal/ai` still answers to the statistical parity dashboard (ADR-0010, layer 4); line coverage on a 20-line effect
+is trivially 100% and proves nothing about rule correctness.
+
+**A package matching no row fails the check.** A package with no declared floor is a package with no gate, which is how
+a coverage rule quietly stops meaning anything.
 
 ---
 

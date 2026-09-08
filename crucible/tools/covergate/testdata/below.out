@@ -1,0 +1,7 @@
+mode: set
+example.test/fake/internal/mana/mana.go:5.13,7.2 8 1
+example.test/fake/internal/mana/mana.go:9.13,10.2 2 0
+example.test/fake/internal/carddb/compile/compile.go:5.13,7.2 19 1
+example.test/fake/internal/carddb/compile/compile.go:9.13,10.2 1 0
+example.test/fake/internal/engine/effect/effect.go:5.13,7.2 1 0
+example.test/fake/tools/thing/thing.go:5.13,7.2 5 0

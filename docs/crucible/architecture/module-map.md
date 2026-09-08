@@ -22,11 +22,12 @@ Column meaning:
 | [`pkg/javarand`](../../../crucible/pkg/javarand)           | Bit-exact `java.util.Random`, for differential testing only                         | `java.util.Random`, `Collections.shuffle`, `MyRandom.percentTrue`                       | — algorithm is specified by javadoc, not read from Forge |
 | [`internal/mana`](../../../crucible/internal/mana)         | Mana costs: colours, shards, and the `ManaCost` line every card script carries      | `forge.card.mana.ManaCost`, `ManaCostShard`, `ManaCostParser`, `ManaAtom`, `MagicColor` | [`mana-cost.md`](../porting/port-log/mana-cost.md)       |
 | [`internal/cardtype`](../../../crucible/internal/cardtype) | Type lines, and the subtype vocabulary they are checked against                     | `forge.card.CardType`, its `Helper.parseTypes`, and `FModel.loadDynamicGamedata`        | [`card-type.md`](../porting/port-log/card-type.md)       |
+| [`tools/covergate`](../../../crucible/tools/covergate)     | Fails the build on a package below the coverage floor TEST-12 declares for it       | — new code                                                                              | —                                                        |
 | [`tools/docgate`](../../../crucible/tools/docgate)         | Fails the build on code that landed without its documentation                       | — new code                                                                              | —                                                        |
 | [`tools/enginelint`](../../../crucible/tools/enginelint)   | Enforces file-group boundaries inside the single `internal/engine` package          | — new code; exists because Go has no sub-package visibility                             | —                                                        |
 | [`tools/javacycles`](../../../crucible/tools/javacycles)   | Reproduces ADR-0003's Java package-cycle count                                      | — new code                                                                              | —                                                        |
 
-**Seven packages: two in `pkg/`, two in `internal/`, three in `tools/`.** The split follows
+**Eight packages: two in `pkg/`, two in `internal/`, four in `tools/`.** The split follows
 [ADR-0003](../adr/0003-go-project-layout.md): `pkg/` is reserved for code with no Crucible semantics, and an ordered set
 and a generator port qualify; `tools/` holds build-time commands the engine never imports; everything with rules
 meaning, `mana` and `cardtype` included, goes in `internal/` where nothing outside the module can import it.
@@ -45,6 +46,7 @@ meaning, `mana` and `cardtype` included, goes in `internal/` where nothing outsi
 | [`tools/enginelint`](../../../crucible/tools/enginelint) | Inside one package | File-group boundaries within `internal/engine`, which no package-level tool can see |
 | [`tools/javacycles`](../../../crucible/tools/javacycles) | The Java tree      | Re-checks ADR-0003's 82-cycle premise after an upstream sync                        |
 | [`tools/docgate`](../../../crucible/tools/docgate)       | Code against docs  | DOC-12 module-map rows, PORT-4 port-log notes, ADRP-4 ADR-before-code               |
+| [`tools/covergate`](../../../crucible/tools/covergate)   | Tests against docs | TEST-12 coverage floors, read from the guideline rather than a second config        |
 
 ## What the arrows look like today
 

@@ -43,8 +43,9 @@ This repo is a fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). 
 
 ## Current state
 
-M0 and M1 are complete. `crucible/` holds 34 Go files, 3,964 lines: `pkg/collect`, `pkg/javarand`, `internal/mana`,
-`internal/cardtype`, `tools/javacycles`, `tools/enginelint`, `tools/docgate`, and the `oracle-java` Maven module.
+M0 and M1 are complete. `crucible/` holds 42 Go files, 4,580 lines: `pkg/collect`, `pkg/javarand`, `internal/mana`,
+`internal/cardtype`, `tools/javacycles`, `tools/enginelint`, `tools/docgate`, `tools/covergate`, and the `oracle-java`
+Maven module.
 
 [`architecture/module-map.md`](architecture/module-map.md) carries the package-by-package state and is the file that
 changes when code lands. M2 starts the port proper, with `internal/carddb`.

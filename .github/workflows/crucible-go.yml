@@ -89,7 +89,13 @@ jobs:
       # highest-probability bug to import from Java's mutable statics
       # (GO-2, TEST-7).
       - name: go test -race
-        run: go test -race -count=1 ./...
+        run: go test -race -count=1 -coverprofile=cover.out ./...
+
+      # TEST-12's floors, which REV-4 lists as blocking and nothing measured.
+      # covergate reads the floors out of the guideline itself, so the table
+      # there is the only place the numbers exist.
+      - name: covergate — TEST-12 coverage floors
+        run: go run ./tools/covergate -profile cover.out
 
       # ADR-0003's premise, re-checked rather than trusted. If an upstream sync
       # ever changes the coupling in forge-game, the single-package engine core
