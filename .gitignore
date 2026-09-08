@@ -103,3 +103,4 @@ __pycache__
 # EDHREC commander matrix tool intermediates
 forge-gui/tools/build
 forge-gui-ios/robovm.properties
+.headroom/memory.db
