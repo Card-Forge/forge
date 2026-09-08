@@ -1063,10 +1063,11 @@ public class Forge implements ApplicationListener {
             graphics,
             Assets.instance,
             lastPreview);
-        safeDispose(currentScene);
+        // No need to dispose Scene stages unless we use custom SpriteBatch for ownership
+        /*safeDispose(currentScene);
         for (Scene scene : lastScene) {
             safeDispose(scene);
-        }
+        }*/
         try {
             SoundSystem.instance.dispose();
         } catch (Exception e) {

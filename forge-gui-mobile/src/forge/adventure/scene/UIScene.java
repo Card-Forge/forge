@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -22,6 +24,7 @@ import forge.Forge;
 import forge.FrameRate;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
+import forge.util.ShaderUtil;
 
 import java.time.LocalTime;
 
@@ -648,11 +651,37 @@ public class UIScene extends Scene {
     @Override
     public void enter() {
         if (screenImage != null) {
-            //create from lastPreview from header...
+            //get tthe lastPreview generated from WorldSaveheader...
             try {
                 backgroundTexture = new TextureRegion(Forge.lastPreview);
                 //backgroundTexture.flip(false, true);
                 screenImage.setDrawable(new TextureRegionDrawable(backgroundTexture));
+                // get new drawable to render
+                Drawable last = screenImage.getDrawable();
+                // set this override drawable with our batch and shader set
+                Drawable override = new BaseDrawable() {
+                    @Override
+                    public void draw(Batch batch, float x, float y, float width, float height) {
+                        try {
+                            batch.end();
+                            float pixelSize = Forge.isLandscapeMode() ? width / height : height / width;
+                            ShaderUtil.getInstance().getShaderPix().bind();
+                            ShaderUtil.getInstance().getShaderPix().setUniformf("u_resolution", width, height);
+                            ShaderUtil.getInstance().getShaderPix().setUniformf("u_pixelSize", pixelSize * 1.2f);
+                            batch.setShader(ShaderUtil.getInstance().getShaderPix());
+                            batch.begin();
+                            // Simulate the blurred pixelated render using custom shader like the old renders of BlurUtils
+                            last.draw(batch, x, y, width, height);
+                            batch.end();
+                            batch.setShader(null);
+                            batch.begin();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                // use the override drawable to render as background
+                screenImage.setDrawable(override);
             } catch (Exception e) {
                 e.printStackTrace();
             }
