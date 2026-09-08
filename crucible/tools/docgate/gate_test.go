@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -12,6 +14,13 @@ import (
 
 func TestCheck(t *testing.T) {
 	t.Parallel()
+
+	// Line numbers are looked up in the fixture rather than written down, so
+	// reformatting a fixture -- prettier owns these files like every other
+	// Markdown file (DOC-14) -- cannot break the test.
+	badMap := filepath.Join("testdata", "bad", "docs", "architecture", "module-map.md")
+	portedRow := lineContaining(t, badMap, "internal/ported")
+	deletedRow := lineContaining(t, badMap, "pkg/deleted")
 
 	tests := []struct {
 		name string
@@ -27,10 +36,10 @@ func TestCheck(t *testing.T) {
 			dir:  "bad",
 			want: []string{
 				`pkg/undocumented: no row in architecture/module-map.md (DOC-12)`,
-				`module-map.md:8: "internal/ported" is a port`,
-				`module-map.md:9: row for "pkg/deleted", which does not exist`,
-				`module-map.md:9: link to "../../module/pkg/deleted", which does not exist`,
-				`module-map.md:9: link to "../porting/port-log/gone.md", which does not exist`,
+				fmt.Sprintf(`module-map.md:%d: "internal/ported" is a port`, portedRow),
+				fmt.Sprintf(`module-map.md:%d: row for "pkg/deleted", which does not exist`, deletedRow),
+				fmt.Sprintf(`module-map.md:%d: link to "../../module/pkg/deleted", which does not exist`, deletedRow),
+				fmt.Sprintf(`module-map.md:%d: link to "../porting/port-log/gone.md", which does not exist`, deletedRow),
 				`documented.go:4: cites ADR-9999, which does not exist (ADRP-4)`,
 			},
 		},
@@ -81,6 +90,24 @@ func TestCheckReportsAMissingModuleMap(t *testing.T) {
 	if _, err := Check(filepath.Join("testdata", "good", "module"), "testdata"); err == nil {
 		t.Error("Check with no module map succeeded, want an error")
 	}
+}
+
+// lineContaining returns the 1-based line number of the first line holding
+// want, so an expectation names the row rather than a position.
+func lineContaining(t *testing.T, path, want string) int {
+	t.Helper()
+
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("read %s: %v", path, err)
+	}
+	for i, line := range strings.Split(string(raw), "\n") {
+		if strings.Contains(line, want) {
+			return i + 1
+		}
+	}
+	t.Fatalf("%s holds no line containing %q", path, want)
+	return 0
 }
 
 func containsFinding(findings []Finding, want string) bool {

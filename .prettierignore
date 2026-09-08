@@ -24,8 +24,3 @@
 
 # Build output
 **/target/
-
-# Tool fixtures. These Markdown files are inputs to a test, not documents:
-# tools/docgate/testdata holds a module map with a deliberately dead row and a
-# deliberately broken link, and the test asserts on their line numbers.
-/crucible/tools/*/testdata/
