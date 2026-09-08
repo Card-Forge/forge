@@ -2032,6 +2032,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public ICardFace chooseSingleCardFace(final SpellAbility sa, final String message, final Predicate<ICardFace> cpp,
                                           final String name) {
+        FModel.getMagicDb().ensureAllCardsLoaded();
         List<CardFaceView> choices = FModel.getMagicDb().getCommonCards().streamAllFaces()
                 .filter(cpp)
                 .map(CardFaceView::new)
@@ -3354,6 +3355,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 f = lastAdded;
                 quantity = 1;
             } else {
+                FModel.getMagicDb().ensureAllCardsLoaded();
                 List<CardFaceView> choices = carddb.streamAllFaces().map(CardFaceView::new).collect(Collectors.toList());
                 Collections.sort(choices);
                 f = getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), choices);

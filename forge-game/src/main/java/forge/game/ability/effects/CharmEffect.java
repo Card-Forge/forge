@@ -250,7 +250,13 @@ public class CharmEffect extends SpellAbilityEffect {
                 random = Expressions.compare(value, compare.substring(0, 2), Integer.parseInt(compare.substring(2)));
             }
             if (random) {
-                chainAbilities(sa, Aggregates.random(choices, num));
+                List<AbilitySub> randomChosen = Aggregates.random(choices, num);
+                chainAbilities(sa, randomChosen);
+                if (!randomChosen.isEmpty()) {
+                    final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(activator);
+                    runParams.put(AbilityKey.Random, true);
+                    activator.getGame().getTriggerHandler().runTrigger(TriggerType.FacesDilemma, runParams, false);
+                }
                 return true;
             }
         }

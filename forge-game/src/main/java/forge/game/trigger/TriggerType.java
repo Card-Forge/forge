@@ -91,6 +91,7 @@ public enum TriggerType {
     FightOnce(TriggerFightOnce.class),
     Firebend(TriggerElementalbend.class),
     FlippedCoin(TriggerFlippedCoin.class),
+    FlippedCoinOnce(TriggerFlippedCoinOnce.class),
     Forage(TriggerForage.class),
     Foretell(TriggerForetell.class),
     FullyUnlock(TriggerFullyUnlock.class),

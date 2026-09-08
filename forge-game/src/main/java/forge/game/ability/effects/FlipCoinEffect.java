@@ -160,6 +160,11 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     }
                 }
             }
+
+            if (amount > 0) {
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(flipper);
+                flipper.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoinOnce, runParams, false);
+            }
         }
     }
 

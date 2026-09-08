@@ -378,6 +378,9 @@ public class Forge implements ApplicationListener {
      * home/adventure screen is open -- not while the mode-selector splash is still showing.
      */
     public static void maybePromptForBulkCdnSync() {
+        // don't prompt if the game starts in adventure to prevent the prompt appearing on adventure loading screen
+        if (isMobileAdventureMode)
+            return;
         if (!CdnUuidCache.shouldPromptForBulkSync()) {
             return;
         }

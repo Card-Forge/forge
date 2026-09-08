@@ -1,30 +1,30 @@
 package forge.game.trigger;
+
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
-import java.util.Map;
+public class TriggerFlippedCoinOnce extends Trigger {
 
-public class TriggerFacesDilemma extends Trigger {
-
-    public TriggerFacesDilemma(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerFlippedCoinOnce(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
+    /** {@inheritDoc}
+     * @param runParams
+     */
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;
         }
-        if (hasParam("Random")) {
-            if (!(boolean) runParams.getOrDefault(AbilityKey.Random, false)) {
-                return false;
-            }
-        }
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
@@ -32,8 +32,6 @@ public class TriggerFacesDilemma extends Trigger {
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblPlayer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Player));
-        return sb.toString();
+        return Localizer.getInstance().getMessage("lblPlayer") + ": " + sa.getTriggeringObject(AbilityKey.Player);
     }
 }

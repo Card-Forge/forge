@@ -208,9 +208,11 @@ public final class FModel {
         loadDynamicGamedata();
 
         // Load card database
-        // Lazy loading currently disabled
+        // Custom cards and tokens always load eagerly: StaticData.attemptToLoadCard only
+        // consults the main card reader, so a lazy custom reader would never be read.
+        final boolean loadCardsLazily = getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY);
         reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
-                false);
+                loadCardsLazily);
         tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
                 false);
 
@@ -272,7 +274,7 @@ public final class FModel {
         AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
         // Generate Deck Gen matrix
-        if(getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
+        if(getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED) && !loadCardsLazily) {
             boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
             deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
             if(!commanderDeckGenMatrixLoaded){
@@ -350,9 +352,9 @@ public final class FModel {
      */
     public static void loadDynamicGamedata() {
         if (!CardType.Constant.LOADED.isSet()) {
-            
+
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE));
-            
+
             for (String sectionName: contents.keySet()) {
                 CardType.Helper.parseTypes(sectionName, contents.get(sectionName));
             }
