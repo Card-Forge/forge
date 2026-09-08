@@ -25,20 +25,7 @@ public class SetInMotionEffect extends SpellAbilityEffect {
 
         for (int i = 0; i < repeats; i++) {
             if (again) {
-                Card scheme = null;
-
-                Object triggeredScheme = sa.getRootAbility().getTriggeringObject(AbilityKey.Scheme);
-                if (triggeredScheme instanceof Card) {
-                    scheme = controller.getGame().getCardState((Card) triggeredScheme, null);
-                }
-
-                if (scheme == null) {
-                    scheme = controller.getActiveScheme();
-                }
-
-                if (scheme != null) {
-                    controller.setSchemeInMotion(sa, scheme);
-                }
+                controller.setSchemeInMotion(sa, controller.getGame().getCardState((Card) sa.getRootAbility().getTriggeringObject(AbilityKey.Scheme), null));
             } else {
                 controller.setSchemeInMotion(sa);
             }

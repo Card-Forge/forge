@@ -161,8 +161,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private CardCollection currentPlanes = new CardCollection();
     private CardCollection planeswalkedToThisTurn = new CardCollection();
 
-    private Card activeScheme = null;
-
     private NavigableMap<Long, Pair<Player, PlayerController>> controlledBy = Maps.newTreeMap();
     private NavigableMap<Long, Player> controlledWhileSearching = Maps.newTreeMap();
 
@@ -273,10 +271,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return getZone(ZoneType.SchemeDeck).size() > 0; //Only the archenemy has schemes.
     }
 
-    public Card getActiveScheme() {
-        return activeScheme;
-    }
-
     public void setSchemeInMotion(SpellAbility cause) {
         setSchemeInMotion(cause, getZone(ZoneType.SchemeDeck).get(0));
     }
@@ -284,8 +278,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (game.getReplacementHandler().run(ReplacementType.SetInMotion, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return;
         }
-
-        activeScheme = scheme;
 
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
