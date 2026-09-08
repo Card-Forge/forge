@@ -17,16 +17,17 @@ Column meaning:
 
 ## Packages
 
-| Package                                                    | Responsibility                                                                      | Java provenance                                                                         | Port log                                                 |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| [`pkg/collect`](../../../crucible/pkg/collect)             | Insertion-ordered set, because iteration order is load-bearing for trigger ordering | Guava-backed `FCollection`, used throughout `forge-game`                                | — new code, not a line port                              |
-| [`pkg/javarand`](../../../crucible/pkg/javarand)           | Bit-exact `java.util.Random`, for differential testing only                         | `java.util.Random`, `Collections.shuffle`, `MyRandom.percentTrue`                       | — algorithm is specified by javadoc, not read from Forge |
-| [`internal/mana`](../../../crucible/internal/mana)         | Mana costs: colours, shards, and the `ManaCost` line every card script carries      | `forge.card.mana.ManaCost`, `ManaCostShard`, `ManaCostParser`, `ManaAtom`, `MagicColor` | [`mana-cost.md`](../porting/port-log/mana-cost.md)       |
-| [`internal/cardtype`](../../../crucible/internal/cardtype) | Type lines, and the subtype vocabulary they are checked against                     | `forge.card.CardType`, its `Helper.parseTypes`, and `FModel.loadDynamicGamedata`        | [`card-type.md`](../porting/port-log/card-type.md)       |
-| [`tools/covergate`](../../../crucible/tools/covergate)     | Fails the build on a package below the coverage floor TEST-12 declares for it       | — new code                                                                              | —                                                        |
-| [`tools/docgate`](../../../crucible/tools/docgate)         | Fails the build on code that landed without its documentation                       | — new code                                                                              | —                                                        |
-| [`tools/enginelint`](../../../crucible/tools/enginelint)   | Enforces file-group boundaries inside the single `internal/engine` package          | — new code; exists because Go has no sub-package visibility                             | —                                                        |
-| [`tools/javacycles`](../../../crucible/tools/javacycles)   | Reproduces ADR-0003's Java package-cycle count                                      | — new code                                                                              | —                                                        |
+| Package                                                    | Responsibility                                                                      | Java provenance                                                                         | Port log                                                           |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [`pkg/collect`](../../../crucible/pkg/collect)             | Insertion-ordered set, because iteration order is load-bearing for trigger ordering | Guava-backed `FCollection`, used throughout `forge-game`                                | — new code, not a line port                                        |
+| [`pkg/javarand`](../../../crucible/pkg/javarand)           | Bit-exact `java.util.Random`, for differential testing only                         | `java.util.Random`, `Collections.shuffle`, `MyRandom.percentTrue`                       | — algorithm is specified by javadoc, not read from Forge           |
+| [`internal/carddb`](../../../crucible/internal/carddb)     | Card scripts to `Card`: faces, keys, ability lines kept as text                     | `forge.card.CardRules` and its `Reader`, `CardFace`, `CardSplitType`                    | [`card-rules-reader.md`](../porting/port-log/card-rules-reader.md) |
+| [`internal/mana`](../../../crucible/internal/mana)         | Mana costs: colours, shards, and the `ManaCost` line every card script carries      | `forge.card.mana.ManaCost`, `ManaCostShard`, `ManaCostParser`, `ManaAtom`, `MagicColor` | [`mana-cost.md`](../porting/port-log/mana-cost.md)                 |
+| [`internal/cardtype`](../../../crucible/internal/cardtype) | Type lines, and the subtype vocabulary they are checked against                     | `forge.card.CardType`, its `Helper.parseTypes`, and `FModel.loadDynamicGamedata`        | [`card-type.md`](../porting/port-log/card-type.md)                 |
+| [`tools/covergate`](../../../crucible/tools/covergate)     | Fails the build on a package below the coverage floor TEST-12 declares for it       | — new code                                                                              | —                                                                  |
+| [`tools/docgate`](../../../crucible/tools/docgate)         | Fails the build on code that landed without its documentation                       | — new code                                                                              | —                                                                  |
+| [`tools/enginelint`](../../../crucible/tools/enginelint)   | Enforces file-group boundaries inside the single `internal/engine` package          | — new code; exists because Go has no sub-package visibility                             | —                                                                  |
+| [`tools/javacycles`](../../../crucible/tools/javacycles)   | Reproduces ADR-0003's Java package-cycle count                                      | — new code                                                                              | —                                                                  |
 
 **Eight packages: two in `pkg/`, two in `internal/`, four in `tools/`.** The split follows
 [ADR-0003](../adr/0003-go-project-layout.md): `pkg/` is reserved for code with no Crucible semantics, and an ordered set
@@ -51,20 +52,21 @@ meaning, `mana` and `cardtype` included, goes in `internal/` where nothing outsi
 
 ## What the arrows look like today
 
-Nothing imports anything. Every package is a leaf, and the two `internal/` ones read upstream data files rather than
-each other.
+`internal/carddb` is the first package to import another: it turns a card script into a value, and the mana cost and
+type line on that value are `internal/mana` and `internal/cardtype` types. Everything else is still a leaf.
 
 ```mermaid
 flowchart LR
   javarand["pkg/javarand"] -. "golden diffed against" .-> oracle["oracle-java<br/>RandomDumper"]
   collect["pkg/collect"]
-  scripts[("cardsfolder<br/>card scripts")] -. "corpus gate" .-> mana["internal/mana"]
-  scripts -. "corpus gate" .-> ct["internal/cardtype"]
-  lists[("TypeLists.txt")] --> ct
+  scripts[("cardsfolder<br/>card scripts")] --> db["internal/carddb"]
+  lists[("TypeLists.txt")] --> ct["internal/cardtype"]
+  db --> ct
+  db --> mana["internal/mana"]
 ```
 
 The one-way arrow into `internal/engine` that [ADR-0003](../adr/0003-go-project-layout.md) describes does not exist yet,
-because `internal/engine` does not. It starts at M2, when `internal/carddb` becomes the first package to import another.
+because `internal/engine` does not. It starts at M4.
 
 ## Planned, not built
 

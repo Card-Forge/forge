@@ -2,8 +2,8 @@
 
 - **Java source:** `forge-core/src/main/java/forge/card/CardRules.java` (943, of which `Reader` is roughly the last
   third), `CardFace.java` (279), `CardSplitType.java` (49)
-- **Go target:** `crucible/internal/carddb` — not written yet; this note is the specification it is written from
-- **Status:** In progress — M2, slice A of D
+- **Go target:** `crucible/internal/carddb`
+- **Status:** Parser done — M2. The canonical dump and the empty-diff gate against Java are the next slice
 
 ## What it does
 
@@ -37,18 +37,18 @@ carry any key the parser understands.
 `CopyFaceFrom:` is the only cross-card dependency in the whole reader. The face is filled in from another card after
 every script has been read, which means a single-card parse cannot be complete on its own.
 
-## Deviations from Java, planned
+## Deviations from Java
 
-Nothing is implemented yet. These are decisions this note exists to fix before code makes them by accident.
+Each was decided before the code was written, which is what this note is for.
 
-| Java                                                           | Go                                                                                                                                                                     |
-| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Unknown key is silently ignored                                | Error naming the file and line. The two known offenders are listed in an allowlist with their card names, so the corpus still loads and no third one gets in unnoticed |
-| `switch` on first character, then string compare               | One map from key to handler. The first-character dispatch is a 2011 micro-optimisation and it is what let `ODeckHints:` slip past                                      |
-| `case 'F':` falls through into `case 'H':` — a missing `break` | Not reproduced. It is unobservable, because no key is both `FlavorName` and `HandLifeModifier`, but it is a bug rather than a rule (PORT-7)                            |
-| Seven-element array with `null` holes                          | `[7]Face` with an `IsPresent` flag, so an absent face is not a nil dereference waiting to happen (GO-11)                                                               |
-| `SVar:` with no value throws `IllegalArgumentException`        | `error`, naming the card. A card script is data (GO-7)                                                                                                                 |
-| Reader is a mutable object reused across cards via `reset()`   | A function per script, returning a value. Nothing is reused, so nothing leaks between cards (GO-2)                                                                     |
+| Java                                                           | Go                                                                                                                                                              |
+| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Unknown key is silently ignored                                | Error naming the file and line. The two known offenders are in an allowlist with their card names, so the corpus still loads and no third one gets in unnoticed |
+| `switch` on first character, then string compare               | One map from key to handler. The first-character dispatch is a 2011 micro-optimisation and it is what let `ODeckHints:` slip past                               |
+| `case 'F':` falls through into `case 'H':` — a missing `break` | Not reproduced. It is unobservable, because no key is both `FlavorName` and `HandLifeModifier`, but it is a bug rather than a rule (PORT-7)                     |
+| Seven-element array with `null` holes                          | `[7]Face` with an `IsPresent` flag, so an absent face is not a nil dereference waiting to happen (GO-11)                                                        |
+| `SVar:` with no value throws `IllegalArgumentException`        | `error`, naming the card. A card script is data (GO-7)                                                                                                          |
+| Reader is a mutable object reused across cards via `reset()`   | A function per script, returning a value. Nothing is reused, so nothing leaks between cards (GO-2)                                                              |
 
 ## Null decisions
 

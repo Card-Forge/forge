@@ -574,7 +574,10 @@ printed form.
 
 ### M2 — Card script parser & static DB (foundation port) — 3–4 wks
 
-14. `internal/carddb/script` — full top-level `Key:Value` parser, all faces, all variants.
+**In progress.**
+
+14. `internal/carddb` — top-level `Key:Value` parser, all faces, all variants. **Done**: every script in the corpus
+    parses, every `CopyFaceFrom:` placeholder resolves, and the shape of the result is pinned by a summary golden.
 15. `CardRulesDumper` in Java; canonical-JSON dumper in Go.
 16. Deck (`.dck`) loading; `crucible corpus-coverage` first version. **Exit gate:** P1 gate — empty diff across the
     whole corpus.
