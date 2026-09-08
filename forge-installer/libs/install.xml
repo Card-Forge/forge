@@ -40,6 +40,8 @@
 		<res id="HTMLInfoPanel.info" src="ReadMeForge.txt"/>
 		<res id="InfoPanel.info" src="ReadMeForge.txt"/>
 		<res id="TargetPanel.dir.windows" src="default-dir.txt"/>
+		<!-- lets Forge's auto updater install this package unattended, see auto-install.xml -->
+		<res id="auto-install.xml" src="auto-install.xml"/>
 		<res id="installer.langsel.img" src="ic_launcher.png"/>
 		<res id="Heading.image" src="ic_launcher.png"/>
 		<res id="Installer.image" src="side.png"/>

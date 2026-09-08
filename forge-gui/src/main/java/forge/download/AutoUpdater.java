@@ -232,18 +232,35 @@ public class AutoUpdater {
         return false;
     }
     private void restartAndUpdate(String packagePath) {
+        File downloaded = new File(packagePath);
+        if (!downloaded.exists()) {
+            return;
+        }
+
+        // Install it in place if we can tell where this copy of Forge lives, so the user doesn't
+        // have to point the installer at their own installation by hand.
+        if (UpdateInstaller.isSupported(downloaded)) {
+            String installDir = UpdateInstaller.getInstallDir().getAbsolutePath();
+            List<String> options = List.of(localizer.getMessage("lblUpdateNow"), localizer.getMessage("lblUpdateLater"));
+            if (SOptionPane.showOptionDialog(localizer.getMessage("lblForgeUpdateInstallConfirm", installDir),
+                    localizer.getMessage("lblRestart"), null, options, 0) != 0) {
+                return; // the package stays where it was downloaded, they can run it whenever
+            }
+            if (UpdateInstaller.install(downloaded)) {
+                System.exit(0);
+            }
+            // handing it over failed, fall through to the installer's own UI
+        }
+
         if (SOptionPane.showOptionDialog(localizer.getMessage("lblForgeUpdateMessage", packagePath), localizer.getMessage("lblRestart"), null, List.of(localizer.getMessage("lblOK")), 0) == 0) {
             final Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
             if (desktop != null) {
                 try {
-                    File installer = new File(packagePath);
-                    if (installer.exists()) {
-                        if (packagePath.endsWith(".jar")) {
-                            installer.setExecutable(true, false);
-                            desktop.open(installer);
-                        } else {
-                            desktop.open(installer.getParentFile());
-                        }
+                    if (packagePath.endsWith(".jar")) {
+                        downloaded.setExecutable(true, false);
+                        desktop.open(downloaded);
+                    } else {
+                        desktop.open(downloaded.getParentFile());
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
