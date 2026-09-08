@@ -106,16 +106,16 @@ Follows [00-documentation-style](00-documentation-style.md).
 
 ## REV-7 — Upstream sync
 
-Merge upstream `master` on a cadence, never rebase Crucible work onto a moving upstream.
+A sync is a **merge**, never a rebase, and it lands through a pull request like every other change (REV-2). A weekly job
+proposes it; CI decides whether it is safe; a human merges it, **with a merge commit and never a squash**.
 
-After each sync:
-
-1. Re-run L2 corpus golden. Upstream card-script changes are absorbed for free — the diff tells you if the parser missed
-   a new key.
-2. Re-run `crucible corpus-coverage`. New scripts may use new APIs.
-3. Regenerate `parity-matrix.md`.
+Procedure and what to do when a gate goes red: [`../runbooks/upstream-sync.md`](../runbooks/upstream-sync.md). Decision
+and alternatives: [ADR-0015](../adr/0015-upstream-sync-procedure.md).
 
 Upstream Java changes to `forge-game` do **not** require Go changes unless L4 differential goes red.
+
+Reason a sync is gated rather than trusted: it is the one class of change that can move every corpus golden at once, and
+it is authored by people who have never heard of Crucible.
 
 ---
 

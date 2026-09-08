@@ -159,17 +159,20 @@ If a stage is not built yet, ARCH-2 applies — name it and its milestone rather
 
 Any figure in an architecture doc carries the command that produced it and the date it was run.
 
-**Bad:** "The card corpus is around 34,000 scripts."
+**Bad:** "The card corpus is 33,686 scripts." Exact, sourced from nothing, and wrong by the next upstream sync.
 
 **Good:**
 
 ```text
-33,686 card scripts (2026-09-07):
+33,686 card scripts (2026-09-08):
 find forge-gui/res/cardsfolder -name '*.txt' | wc -l
 ```
 
 Reason: unsourced numbers get copied forward past the point where they are true, and a stale number is more damaging
 than no number because it looks researched.
+
+This governs the figure where it is _stated_. A document arguing from the magnitude — "tens of thousands of scripts",
+"roughly 210,000 lines" — is doing something else, and should round rather than restate (DOC-11).
 
 ---
 

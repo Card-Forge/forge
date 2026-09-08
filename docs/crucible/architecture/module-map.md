@@ -12,7 +12,8 @@ Column meaning:
 - **Package** — import path under `crucible/`.
 - **Responsibility** — one line. If it needs two, the package is doing two things.
 - **Java provenance** — the source it reproduces, or `—` for new code.
-- **Port log** — note under [`../porting/port-log/`](../porting/port-log/README.md), required for ported units (PORT-4).
+- **Port log** — note under [`../porting/port-log/`](../porting/port-log/), required for ported units (PORT-4). This
+  column is the index of those notes; there is no second list.
 
 ## Packages
 
@@ -57,7 +58,7 @@ each other.
 flowchart LR
   javarand["pkg/javarand"] -. "golden diffed against" .-> oracle["oracle-java<br/>RandomDumper"]
   collect["pkg/collect"]
-  scripts[("cardsfolder<br/>33,686 scripts")] -. "corpus gate" .-> mana["internal/mana"]
+  scripts[("cardsfolder<br/>card scripts")] -. "corpus gate" .-> mana["internal/mana"]
   scripts -. "corpus gate" .-> ct["internal/cardtype"]
   lists[("TypeLists.txt")] --> ct
 ```

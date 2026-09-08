@@ -16,15 +16,15 @@ health, per-card impact), and emits actionable deck-improvement reports. The eng
 engine.
 
 **Concern, stated once, then the plan proceeds as specified.** The Java surface to be ported is ~210,000 LOC across
-`forge-core` + `forge-game` + `forge-ai`, driving 33,686 card scripts totalling 302,749 script lines, and exposing 203
-ability APIs, 203 keywords, 153 trigger types, 45 replacement types, and a ~2,100-line "valid string" predicate matcher.
-A complete, card-for-card port is a multi-engineer-year effort. Two adjustments make it tractable without violating
-either constraint:
+`forge-core` + `forge-game` + `forge-ai`, driving the whole card corpus — roughly 34,000 scripts, 300,000 script lines —
+and exposing 203 ability APIs, 203 keywords, 153 trigger types, 45 replacement types, and a ~2,100-line "valid string"
+predicate matcher. A complete, card-for-card port is a multi-engineer-year effort. Two adjustments make it tractable
+without violating either constraint:
 
-1. **Scope the port by card corpus, not by feature completeness.** Crucible does not need all 33,686 cards. It needs the
-   target deck plus a gauntlet — realistically 400–900 distinct cards. The porting order is driven by a _coverage gate_
-   over that corpus (Section 3.2). Measured coverage curve (Section 1.5) shows the top 30 of 192 used APIs fully cover
-   78.5% of the entire card pool; a curated modern/standard corpus concentrates far harder than that.
+1. **Scope the port by card corpus, not by feature completeness.** Crucible does not need every card in the corpus. It
+   needs the target deck plus a gauntlet — realistically 400–900 distinct cards. The porting order is driven by a
+   _coverage gate_ over that corpus (Section 3.2). Measured coverage curve (Section 1.5) shows the top 30 of 192 used
+   APIs fully cover 78.5% of the entire card pool; a curated modern/standard corpus concentrates far harder than that.
 2. **The Java engine stays as a test oracle, not as a runtime.** "No long-term hybrid" is satisfied: nothing Java is on
    Crucible's execution path. But Java remains a _CI dependency_ used to generate golden outputs for differential
    testing (Section 3.3). Deleting the oracle removes the only mechanism that proves rule accuracy. Keep it.
@@ -104,9 +104,9 @@ where the game asks a decision goes through it. Port it as a Go interface _first
 
 ## 1.4 How Forge parses `.txt` card definitions — the full pipeline
 
-Cards live at `forge-gui/res/cardsfolder/<letter>/<snake_case_name>.txt`, 29 subfolders, 33,686 files, 302,749 lines
-total. `CardStorageReader` (`forge-core/src/main/java/forge/CardStorageReader.java`) walks the tree (or a
-`cardsfolder.zip`), multi-threaded, and feeds each file to `CardRules.Reader`.
+Cards live at `forge-gui/res/cardsfolder/<letter>/<snake_case_name>.txt`, 29 subfolders, roughly 34,000 files.
+`CardStorageReader` (`forge-core/src/main/java/forge/CardStorageReader.java`) walks the tree (or a `cardsfolder.zip`),
+multi-threaded, and feeds each file to `CardRules.Reader`.
 
 **Parsing is two-stage, and the split matters enormously for the Go design.**
 
@@ -185,7 +185,7 @@ prominently in the translation rules so nobody "faithfully" ports the string int
 
 ## 1.5 Coverage curve — the lever that makes this feasible
 
-Measured across all 33,686 scripts (192 distinct APIs actually used out of 203 defined):
+Measured across the whole corpus (192 distinct APIs actually used out of 203 defined):
 
 | Ability instances |       | Cards **fully** covered |                      |
 | ----------------- | ----- | ----------------------- | -------------------- |
@@ -231,100 +231,24 @@ the backlog.
 
 ## 2.1 Where things live (and why)
 
-This repo is a **fork** that will keep pulling from upstream. Merge pain is the default failure mode. Therefore:
-
-- **All Crucible docs go in `docs/crucible/`**, never mixed into upstream's `docs/*.md`.
-- **All Go code goes in a top-level `crucible/` directory** with its own `go.mod`, never interleaved with Java module
-  trees.
-- **Zero edits to upstream Java** except additive, test-scoped oracle tooling under `crucible/oracle-java/` wired in as
-  a separate Maven module. If an upstream file _must_ change, record it in `docs/crucible/porting/upstream-patches.md`
-  with the rationale, so rebases are auditable.
-
-Written as **ADR-0001** before anything else.
+Two reserved paths — `crucible/` for Go, `docs/crucible/` for documentation — and no edits outside them, because every
+line touched elsewhere is a conflict on the next upstream merge. Decided in
+[ADR-0001](adr/0001-fork-layout-and-upstream-sync.md), enforced by `REV-1`, and the exceptions are logged in
+[`porting/upstream-patches.md`](porting/upstream-patches.md).
 
 ## 2.2 `/docs/crucible/` structure
 
-```text
-docs/crucible/
-  README.md                        # index, reading order, doc status table
-  00-master-implementation-plan.md # this document
-  adr/
-    README.md                      # ADR process, template, index, status legend
-    0001-fork-layout-and-upstream-sync.md
-    0002-...                       # (full list in 2.3)
-  architecture/
-    system-overview.md             # context + container diagram, data flow
-    module-map.md                  # Go package map ↔ Java package provenance
-    engine-state-model.md          # arena, IDs, zones, mutation & clone rules
-    card-compilation-pipeline.md   # .txt → tokens → AST → compiled definition
-    concurrency-and-determinism.md
-    telemetry-pipeline.md          # engine events → recorder → storage → report
-  porting/
-    dsl/                              # WRITTEN — six grammars, derived from the corpus
-      README.md                       # index, derivation method, cross-grammar findings
-      01-card-script-grammar.md       # top-level Key:Value
-      02-param-map-grammar.md         # Key$ Value | Key$ Value
-      03-valid-string-grammar.md      # Creature.Green+attacking+YouCtrl
-      04-count-expression-grammar.md  # Count$...  — embeds grammar 03
-      05-cost-string-grammar.md       # 2 R T Sac<1/Creature>
-      06-keyword-grammar.md           # Dash:1 R
-    parity-matrix.md                  # API/keyword/trigger → Go status, generated
-    upstream-patches.md
-    port-log/                         # one note per ported unit: decisions, deviations
-  guidelines/                      # WRITTEN — referenced from /CLAUDE.md
-    README.md                      # index, rule-ID scheme, reading order
-    00-documentation-style.md      # DOC-n  — compressed doc style, self-demonstrating
-    01-go-coding-standards.md      # GO-n   — style, layout, engine bans
-    02-java-to-go-translation.md   # PORT-n — normative Java→Go mapping, port-log format
-    03-testing-standards.md        # TEST-n — module-first testing
-    04-adr-process.md              # ADRP-n — when/how to write an ADR
-    05-commit-and-review.md        # REV-n  — fork hygiene, commits, review
-    06-architecture-docs.md        # ARCH-n — describing the system, not the plan
-  telemetry/
-    event-schema.md                   # versioned event catalogue
-    metric-definitions.md             # NORMATIVE definitions of screw/flood/dead
-    report-formats.md
-  runbooks/
-    running-a-batch.md
-    adding-card-support.md
-    regenerating-golden-corpus.md
-    investigating-a-parity-failure.md
-  research/
-    meta-gauntlet.md                  # the decks, sources, refresh cadence
-    format-scope.md
-```
+[`README.md`](README.md) is the index and carries the directory table. Documents are written in the compressed style
+[`guidelines/00-documentation-style.md`](guidelines/00-documentation-style.md) defines, and rules carry stable IDs
+(`GO-2`, `TEST-1`, `DOC-16`) so review comments, code comments and commit bodies can cite them.
 
-All guidelines are written in the compressed style defined by `00-documentation-style.md` — grammar compressed,
-technical content exact, audience is an IT engineer. Rules carry stable IDs (`GO-2`, `TEST-1`, …) so review comments,
-code comments, and commit bodies can cite them.
-
-**Doc-before-code enforcement** (put it in CI, not in a wiki page nobody reads): a `crucible/tools/docgate` check that
-fails the build when a new Go package appears without a corresponding entry in `architecture/module-map.md`, or when an
-ADR referenced by a code comment (`// ADR-0009`) does not exist.
+Doc-before-code is enforced by `crucible/tools/docgate` rather than by habit: a package with no module-map row, a ported
+package with no port-log note, or an `ADR-nnnn` citation with no ADR file all fail the build (DOC-12, PORT-4, ADRP-4).
 
 ## 2.3 The ADR set, written before any Go
 
-Each uses MADR format: Context / Decision Drivers / Considered Options / Decision / Consequences / Status.
-
-**Foundational — all `Accepted` before line 1 of Go. The table is the question each one settles; the ADR itself is
-authoritative, and [`adr/README.md`](adr/README.md) is the index.**
-
-| ADR  | Title                                      | The question it settles                                                                     |
-| ---- | ------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| 0001 | Fork layout & upstream sync strategy       | Where Go code and docs live; how upstream merges stay cheap                                 |
-| 0002 | Language, toolchain, and dependency policy | Go version, module path, allowed third-party deps (default: near-zero), lint config         |
-| 0003 | Go project layout                          | `cmd/`, `internal/`, `pkg/` split; package boundaries mirroring Java packages vs. re-cut    |
-| 0004 | Java→Go translation patterns               | Normative rules for inheritance, enums, null, exceptions, reflection, collections           |
-| 0005 | Concurrency model                          | Goroutine-per-game, shared immutable card DB, worker pool sizing, zero mutable global state |
-| 0006 | Determinism & RNG                          | Seeded per-game PRNG; bit-compatible `java.util.Random` port for oracle parity              |
-| 0007 | Card DSL representation                    | Compile-once typed AST vs. Java's runtime string interpretation                             |
-| 0008 | Effect dispatch mechanism                  | Generated registry (`ApiType → Effect`) replacing Java reflection                           |
-| 0009 | Game state representation                  | Arena + integer handles vs. pointers; clone strategy for AI lookahead                       |
-| 0010 | Differential testing strategy              | The four-layer oracle harness (Section 3.3)                                                 |
-| 0011 | Card corpus scoping & coverage gate        | What "done" means for card support                                                          |
-| 0012 | Ports and adapters, and where they stop    | Which seams are interfaces and which are direct calls                                       |
-| 0013 | Telemetry event bus & schema versioning    | Synchronous folding in the game's goroutine; event schema version                           |
-| 0014 | Telemetry storage format                   | NDJSON + gzip shards from the stdlib; DuckDB invoked, never imported                        |
+Fifteen ADRs, all `Accepted` before the first line of engine code, each in MADR format. The index, with the question
+each one settles, is [`adr/README.md`](adr/README.md).
 
 **Near-term subjects, deliberately unnumbered:**
 
@@ -341,66 +265,34 @@ ADRP-3 forbids reuse. Each subject below takes the next free number on the day i
 | Observability, logging, and profiling                                    | M8                  |
 | Oracle-data licensing & redistribution posture (repo is GPLv3)           | before distribution |
 
-## 2.4 Java → Go translation rules (normative — the core of ADR-0004)
+## 2.4 Java → Go translation rules
 
-**Written up in full as `docs/crucible/guidelines/02-java-to-go-translation.md` (`PORT-n` rules). Summary table below.**
+Normative in exactly one place: [`guidelines/02-java-to-go-translation.md`](guidelines/02-java-to-go-translation.md)
+(`PORT-1` to `PORT-7`), with the decision behind it in [ADR-0004](adr/0004-java-to-go-translation-patterns.md) and the
+Go rules it leans on in [`guidelines/01-go-coding-standards.md`](guidelines/01-go-coding-standards.md) (`GO-1` to
+`GO-16`).
 
-| Java construct                                                        | Go rule                                                                                                                                                                                  | Rationale / trap                                                                                                       |
-| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `abstract class SpellAbilityEffect` + 205 subclasses                  | `type Effect interface { Resolve(*Game, *SpellAbility) error; ... }` + a `BaseEffect` struct **embedded** for shared helpers                                                             | Do not fake inheritance with type switches on a mega-struct                                                            |
-| Enum-with-behavior (`ApiType` → class via reflection)                 | `type APIType uint16` + generated `var effectRegistry [numAPIs]EffectFactory`                                                                                                            | Reflection is banned in the engine (ADR-0008); registry is generated by `go:generate` from the enum so it cannot drift |
-| Deep hierarchy `SpellAbility → Spell / AbilityActivated / AbilitySub` | One concrete `SpellAbility` struct with a `Kind` discriminator + behavior via the `Effect` interface                                                                                     | The Java hierarchy is shallow-but-wide; flattening removes ~40 tiny types                                              |
-| `null`                                                                | Zero values; pointers **only** where "absent" is semantically distinct; `(T, bool)` for lookups                                                                                          | Every Java `null` check is a decision point — record it in the port-log, never translate blindly                       |
-| Checked/unchecked exceptions                                          | `error` returns for anything a card script can cause; `panic` **only** for engine invariant violation, recovered at the game boundary and reported as a failed game with full state dump | A malformed script must never kill a 100k-game batch                                                                   |
-| Guava `FCollection<T>` (ordered set)                                  | `pkg/collect.OrderedSet[T comparable]` — slice + index map                                                                                                                               | Iteration order is load-bearing in Forge (trigger ordering). Do not substitute a plain map                             |
-| Guava `Multimap`, `Iterables.filter`, `Predicates`                    | Plain slices + generic `collect.Filter/Map/Any` helpers                                                                                                                                  | No dependency; Go slices are faster than lazy iterables here                                                           |
-| `Map<String,String>` ability params                                   | **Typed param struct per API**, generated from the DSL vocabulary spec                                                                                                                   | The #1 source of silent bugs in the Java engine; typing them is a genuine improvement                                  |
-| Object identity (`==` on `Card`)                                      | `CardID uint32` handles into a per-`Game` arena; never compare struct values                                                                                                             | Cards are copied, LKI-snapshotted, and re-entered; pointer identity is unreliable even in Java                         |
-| `equals`/`hashCode`                                                   | Only on value types (mana cost, color set, type line). Never on `Card`/`Player`                                                                                                          |                                                                                                                        |
-| Static utility classes (`ComputerUtilCard`, `CardFactoryUtil`)        | Package-level functions in narrow packages (`ai/eval`, `card/build`)                                                                                                                     | Do not create a `util` package                                                                                         |
-| Mutable static singletons (`StaticData`, `FModel`, `MyRandom`)        | **Banned.** Explicit injection: `*carddb.DB`, `*rand.Rand` passed via `*Game`                                                                                                            | Non-negotiable for goroutine-per-game (ADR-0005)                                                                       |
-| `synchronized`, `ThreadUtil`                                          | No locks in the engine. Games share only immutable data                                                                                                                                  | If you need a mutex inside `internal/engine`, the design is wrong                                                      |
-| Generics `<T extends GameEntity>`                                     | Go type params with an interface constraint                                                                                                                                              | Mostly a clean 1:1                                                                                                     |
-| Anonymous/inner classes                                               | Closures, or a small named struct when it holds state                                                                                                                                    |                                                                                                                        |
-| Getter/setter pairs                                                   | Exported fields when there is no invariant; methods only to enforce one                                                                                                                  | Do not mechanically translate 8,000 lines of accessors                                                                 |
-| `toString()` for debugging                                            | `String()` on value types; a dedicated `debug.DumpGame` for state                                                                                                                        |                                                                                                                        |
-| `Card.java` (8,105 LOC god object)                                    | **Split**: `card.Card` (identity + zone + owner), `card.State` (per-face characteristics), `card.Counters`, `card.Attachments`, `card.Damage`, `card.Memory` (Remembered/Imprinted)      | Explicitly a deviation from the Java structure; record in the port-log                                                 |
-
-**Additional Go standards** (`guidelines/01-go-coding-standards.md`):
-
-- `gofmt` + `golangci-lint` (`errcheck`, `govet`, `staticcheck`, `revive`, `gocritic`, `ineffassign`) enforced in CI; no
-  `nolint` without an inline reason.
-- No `interface{}`/`any` in engine packages. Telemetry payloads use typed variants.
-- No package-level mutable state in `internal/engine/...` — enforced by a custom lint rule.
-- Errors wrapped with `%w` and context: `fmt.Errorf("resolve %s on %s: %w", api, cardName, err)`.
-- Table-driven tests everywhere; golden files under `testdata/`.
-- Every ported unit carries a header comment:
-  `// Ported from forge-game/src/main/java/forge/game/GameAction.java (checkStateEffects). See docs/crucible/porting/port-log/game-action.md`.
-- Benchmarks required for anything on the per-game hot path.
-- Public API of `internal/engine` documented; `godoc` output published as part of the docs build.
+The stance, in one line: **port behaviour, not structure.** Java's shape came from Java's constraints — reflection
+dispatch, checked exceptions, mutable singletons, 8,000 lines of accessors — and none of them exist in Go.
 
 ---
 
 # Phase 3 — Golang Porting Strategy
 
-## 3.1 Go project layout (ADR-0003)
+## 3.1 Go project layout
 
-The layout is [ADR-0003](adr/0003-go-project-layout.md)'s: an engine core sized by what must be mutually recursive, with
-acyclic satellites around it. Not a mirror of Java's packages — `forge-game` has 82 direct two-package import cycles and
-Go forbids them, so the mirrored tree does not compile. [`architecture/module-map.md`](architecture/module-map.md)
-tracks which packages exist today.
+[ADR-0003](adr/0003-go-project-layout.md) decides it: an engine core sized by what must be mutually recursive, with
+acyclic satellites around it — not a mirror of Java's packages, because `forge-game` has 82 direct two-package import
+cycles and Go forbids them. [`architecture/module-map.md`](architecture/module-map.md) tracks which packages exist
+today.
 
-Beyond the packages that ADR names, the module carries:
+Paths the module carries that are not packages, and so appear in neither document:
 
 | Path                  | Contents                                                                |
 | --------------------- | ----------------------------------------------------------------------- |
 | `testdata/scenarios/` | `GameState`-format fixtures, shared with the Java oracle (TEST-5)       |
 | `testdata/golden/`    | Golden AST dumps, event streams, decision logs                          |
-| `tools/docgate/`      | Doc-before-code CI check (DOC-12)                                       |
-| `tools/covergate/`    | Per-package coverage floor check, read from TEST-12                     |
 | `tools/gen/`          | `go:generate` sources — effect registry, typed param structs (ADR-0008) |
-| `tools/javacycles/`   | Re-runs ADR-0003's cycle count after an upstream sync                   |
-| `tools/enginelint/`   | File-group boundaries inside the single `internal/engine` package       |
 | `oracle-java/`        | Maven module: dumpers and recorders against Forge (ADR-0010)            |
 
 ## 3.2 Porting sequence — exact order, with exit gates
@@ -421,8 +313,8 @@ wrong forever. `ManaCost` and type-line parsers round-trip every distinct value 
 
 Port `CardStorageReader` + `CardRules.Reader` → `internal/carddb`. All top-level keys, all faces, all `AlternateMode`
 variants, deck metadata keys. **Gate — the highest-value cheap gate in the whole project:** a Java dumper
-(`oracle-java`) emits normalized JSON for all 33,686 `CardRules`; Go emits the same; **the diff must be empty.** 100%
-corpus coverage, fully deterministic, catches parser divergence before it can hide behind rules bugs.
+(`oracle-java`) emits normalized JSON for every `CardRules` in the corpus; Go emits the same; **the diff must be
+empty.** 100% corpus coverage, fully deterministic, catches parser divergence before it can hide behind rules bugs.
 
 ### P2 — DSL front-end (compile to typed AST)
 
@@ -484,9 +376,9 @@ Four layers, each removing a class of divergence. All Java-side tooling is addit
 
 ### Layer 1 — Static parity (P1–P2) — total, deterministic, cheap
 
-Java `CardRulesDumper` and `CardAstDumper` emit canonical JSON for all 33,686 cards. Go emits the same. CI diffs them.
-Any parser divergence — a missed key, a mis-split param, a wrong SVar resolution — is caught here across 100% of the
-corpus, before any game is ever simulated. **Build this on day one of P1; it pays for itself immediately.**
+Java `CardRulesDumper` and `CardAstDumper` emit canonical JSON for every card. Go emits the same. CI diffs them. Any
+parser divergence — a missed key, a mis-split param, a wrong SVar resolution — is caught here across 100% of the corpus,
+before any game is ever simulated. **Build this on day one of P1; it pays for itself immediately.**
 
 ### Layer 2 — Scenario parity (P3–P5) — targeted, deterministic
 
@@ -546,8 +438,8 @@ builds), no memory growth across 10⁵ games.
 
 ## 3.4 What the Java side already tests — and what it doesn't
 
-Measured: **492 `@Test` methods across 120 files, ~26,245 LOC.** Framework is **TestNG** (not JUnit), with Mockito and
-PowerMock for the card-DB tests.
+Measured: **roughly 490 `@Test` methods across ~120 files, ~26,000 LOC.** Framework is **TestNG** (not JUnit), with
+Mockito and PowerMock for the card-DB tests.
 
 **Placement is an accident of module layout, not intent.** Only 2 test files (3 tests) live in `forge-game` —
 `ManaCostBeingPaidTest` (convoke payment) and `AbilityKeyTest`. Everything else sits in
@@ -589,95 +481,23 @@ compile, and the fixtures cannot be shared with a second engine.
 
 ### Honest gap assessment
 
-492 tests for a 210,000-LOC engine driving 33,686 card scripts is thin, and it is concentrated in _AI simulation_ rather
-than _rules_. There is no per-card regression suite, no `src/test/resources` fixture directory anywhere in the repo, and
-no coverage of the vast majority of the 203 APIs, 153 trigger types, or the layer system's ordering cases.
+Fewer than five hundred tests for a 210,000-line engine driving tens of thousands of card scripts is thin, and it is
+concentrated in _AI simulation_ rather than _rules_. There is no per-card regression suite, no `src/test/resources`
+fixture directory anywhere in the repo, and no coverage of the vast majority of the 203 APIs, 153 trigger types, or the
+layer system's ordering cases.
 
-**So the Java suite is an acceptance floor, not a specification.** It is genuinely useful — 492 free, already-debugged
-assertions about real card behaviour — but passing all of it proves far less than it sounds. The differential harness in
-3.3 remains the primary correctness mechanism; the ported tests are a fast inner loop that runs in seconds without a
-JVM.
+**So the Java suite is an acceptance floor, not a specification.** It is genuinely useful — hundreds of free,
+already-debugged assertions about real card behaviour — but passing all of it proves far less than it sounds. The
+differential harness in 3.3 remains the primary correctness mechanism; the ported tests are a fast inner loop that runs
+in seconds without a JVM.
 
 ## 3.5 Go test architecture
 
-Six layers. Stdlib `testing` throughout; `github.com/google/go-cmp` is the single test dependency worth admitting under
-ADR-0002's near-zero-dependency rule (structured diffs on ASTs and game states are otherwise painful to read).
+Six layers, module-first, fixtures as data rather than Go functions. Normative in
+[`guidelines/03-testing-standards.md`](guidelines/03-testing-standards.md) (`TEST-1` to `TEST-14`); `TEST-13` is the
+layer table and `TEST-5` the fixture format.
 
-| Layer                | What                                                                                                                                                            | Runs                                      |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| **L1 Unit**          | Table-driven tests for every parser and value type: mana cost, type line, param map, valid strings, count/X expressions, cost strings, `OrderedSet`, `javarand` | every commit, seconds                     |
-| **L2 Corpus golden** | One test parses all 33,686 scripts and diffs canonical JSON against the Java dump; a second asserts zero unknown vocabulary                                     | every commit, ~seconds                    |
-| **L3 Scenario**      | Data-driven rules fixtures — the port target for the 492 Java tests                                                                                             | every commit                              |
-| **L4 Differential**  | Scenario + replay parity against the Java oracle (3.3)                                                                                                          | build-tagged `//go:build oracle`, nightly |
-| **L5 Fuzz & soak**   | `testing.F` targets on every parser; randomized-deck game soak with invariant checks                                                                            | nightly + on parser changes               |
-| **L6 Bench & race**  | `go test -race` always; benchmarks on per-game hot paths with regression thresholds                                                                             | every commit / nightly                    |
-
-### L3 is the important one: fixtures as data, not code
-
-Each scenario is a directory, walked by one Go test that emits a subtest per fixture. The same files feed the Java
-oracle, which is what makes Layer 4 possible at all.
-
-```text
-testdata/scenarios/
-  cr704-state-based-actions/
-    creature-zero-toughness/
-      setup.state      # GameState text format — shared with Java
-      actions.log      # explicit scripted decisions, no AI
-      expect.state     # post-state dump
-      expect.events    # normalized event stream
-  cr613-layers/
-    layer7b-setting-pt-then-modifying/
-  effects/
-    DealDamage/
-      basic/ edge-zero-damage/ interaction-with-protection/
-```
-
-```go
-func TestScenarios(t *testing.T) {
-    db := testdb(t) // sync.Once-loaded shared card DB
-    filepath.WalkDir("testdata/scenarios", func(path string, d fs.DirEntry, err error) error {
-        if !isScenario(d) { return nil }
-        t.Run(rel(path), func(t *testing.T) {
-            t.Parallel()
-            got := runScenario(t, db, path)
-            if diff := cmp.Diff(golden(t, path), got); diff != "" {
-                t.Errorf("scenario mismatch (-want +got):\n%s", diff)
-            }
-        })
-        return nil
-    })
-}
-```
-
-Adding a rules test becomes "add a directory", not "write a Go function" — which is the only way a suite reaches the
-thousands of cases this engine actually needs. Support `-update` to regenerate golden files, and require that
-regeneration diffs be reviewed, never blind-accepted.
-
-**Porting the 492 Java tests means converting each into a fixture directory**, not into a Go test function. Track it in
-`docs/crucible/porting/test-port-matrix.md`: one row per Java test, with status (ported / superseded / not-applicable)
-and the fixture path. That matrix doubles as a milestone gate — M5 exits when every rules-relevant row is green.
-
-### Go-specific conventions
-
-- **`TestMain` + `sync.Once` for the card DB.** Replaces `AITest.@BeforeMethod initializeModel()` and its comment about
-  load-outside-the-timeout-window. Loading once per package into an immutable `*carddb.DB` is the natural Go shape and
-  removes that entire class of flakiness.
-- **`t.Parallel()` by default.** The engine is designed goroutine-per-game (ADR-0005), so tests must exercise that.
-  Combined with `-race`, this is the mechanism that catches any accidental shared mutable state — the single most likely
-  bug to be _imported_ from Java, where `StaticData`, `FModel`, and `MyRandom` are all mutable singletons.
-- **No mocking framework.** Java needs Mockito and PowerMock precisely because of those static singletons. Explicit
-  dependency injection makes mocks unnecessary; a test that wants a different card DB or RNG passes one in. If a Go test
-  ever needs a mocking library, treat it as a design smell and fix the seam.
-- **A `enginetest` helper package** mirroring `AITest`'s useful bits: `enginetest.NewGame(t)`,
-  `AddCard(t, g, "Sidewinder Sliver", p)`, `FindSAWithPrefix`, `CountCardsWithName`, `AdvanceToPhase`. These are
-  genuinely good helpers — port them.
-- **Fuzz targets**: `FuzzCardScript`, `FuzzParamMap`, `FuzzValidString`, `FuzzCountExpr`, `FuzzManaCost`,
-  `FuzzCostString`. Seed corpora from real card scripts. Property: never panic, and parse→serialize→parse is a fixed
-  point.
-- **Coverage gates per package**, set higher for the parser packages (which are pure functions of text and have no
-  excuse) than for effect implementations.
-
-### Where tests slot into the roadmap
+What belongs here rather than there is when each layer has to exist:
 
 | Milestone | Test work that is part of its exit gate                                     |
 | --------- | --------------------------------------------------------------------------- |
@@ -690,216 +510,26 @@ and the fixture path. That matrix doubles as a milestone gate — M5 exits when 
 | M7        | Port the 137 `ai/simulation` + 38 `ai/ability` tests; statistical dashboard |
 | M8        | L5 soak at 10⁵ games; determinism re-run test                               |
 
+Porting an inherited Java test means converting it into a fixture directory, not into a Go test function. One row per
+test in [`porting/test-port-matrix.md`](porting/test-port-matrix.md), which doubles as M5's exit gate.
+
 ---
 
 # Phase 4 — Telemetry & Game Event Design (Go)
 
-## 4.1 Architecture
+The engine **emits, never stores**: it writes flat events into a per-game buffer and knows nothing about what records
+them. Everything this phase used to specify has since been decided or defined elsewhere, and is normative there.
 
-The engine **emits, never stores**. `internal/engine/event` defines typed events (mirroring the 60+ types in
-`forge-game/src/main/java/forge/game/event/`); `internal/telemetry` consumes.
+| Subject                                                          | Owner                                                                                      |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Event struct, recording levels, schema versioning                | [ADR-0013](adr/0013-telemetry-event-bus.md)                                                |
+| Shard format, and why DuckDB is invoked rather than imported     | [ADR-0014](adr/0014-telemetry-storage-format.md)                                           |
+| Dead cards, castability probe, mana health, per-card impact      | [`telemetry/metric-definitions.md`](telemetry/metric-definitions.md) — `MET-1` to `MET-25` |
+| How an engine event becomes a figure in a report, stage by stage | [`design/telemetry-pipeline.md`](design/telemetry-pipeline.md)                             |
 
-```go
-// internal/engine/event
-type Sink interface { Emit(e Event) }
-
-type Kind uint8 // TurnBegan, PhaseChanged, ZoneChange, SpellCast, Resolved,
-                // DamageDealt, LifeChanged, ManaProduced, ManaSpent, LandPlayed,
-                // Mulligan, Draw, Discard, AttackersDeclared, ..., GameFinished
-
-// Flat struct, not an interface tree: this is allocated millions of times.
-type Event struct {
-    Kind     Kind
-    Turn     uint16
-    Phase    PhaseType
-    Active   PlayerID
-    Actor    PlayerID
-    Card     CardID
-    Target   EntityID
-    From, To ZoneType
-    Amount   int32
-    Flags    EventFlags
-    Detail   uint32 // Kind-specific enum payload (reason codes, counter type, ...)
-}
-```
-
-Rationale (record in ADR-0013): an interface-per-event-type allocates and escapes; a flat 48-byte struct written into a
-preallocated per-game ring buffer does not. Rich payloads that don't fit go to a side channel used only when full-detail
-recording is enabled.
-
-**Two recording levels**, selected per game by the runner:
-
-- `LevelAggregate` (default, ~99% of games): the recorder folds events into counters/accumulators in place. Nothing is
-  written per-event.
-- `LevelFull` (sampled ~1%, plus every game that errors): the whole event stream is retained and written out for
-  debugging and for report drill-downs.
-
-Every emitted record carries `SchemaVersion` and `MetricsVersion` constants so historical batches remain interpretable.
-
-## 4.2 Dead-card tracking
-
-A card is not "dead" merely because it sat in hand — it is dead because it _could not be used_, and the reason is what
-makes the report actionable. Reason attribution requires engine cooperation, not post-hoc inference.
-
-**Mechanism — the castability probe.** Once per turn, at end of the controller's precombat main phase with an empty
-stack, the engine evaluates every card in hand:
-
-```go
-type CastabilityProbe struct {
-    Turn    uint16
-    Player  PlayerID
-    Results []CardCastability
-}
-
-type CardCastability struct {
-    Card     CardID
-    OracleID string
-    Castable bool
-    Blocked  BlockReason // bitmask; zero when Castable
-}
-
-type BlockReason uint16
-const (
-    BlockInsufficientMana BlockReason = 1 << iota // total available < CMC
-    BlockColorUnavailable                          // generic payable, colors not
-    BlockNoLegalTarget                             // targeting requirement unmet
-    BlockTimingRestriction                         // sorcery-speed, phase, once-per-turn
-    BlockZoneOrStateRestriction                    // "only if", threshold, etc.
-    BlockOpponentLock                              // a static ability forbids it (stax)
-    BlockLandDropUsed                              // land specifically
-)
-```
-
-`BlockColorUnavailable` vs `BlockInsufficientMana` is distinguished by running the mana solver twice: once against the
-real available sources, once against a hypothetical all-colors pool of the same size. Payable in the second but not the
-first ⇒ **color screw on that card**, which is the single most actionable dead-card signal for a deckbuilder.
-
-**Per-card tenure record**, closed when the card leaves hand or the game ends:
-
-```go
-type HandTenure struct {
-    Card        CardID
-    OracleID    string
-    EnteredTurn uint16    // turn it entered hand
-    Source      HandEntry // OpeningHand, Draw, Bounce, Tutor
-    ExitTurn    uint16    // 0 if never left
-    Exit        HandExit  // Cast, Discarded, Bounced, StillInHandAtEnd
-    // derived
-    TurnsHeld          uint16
-    TurnsBlocked       uint16     // probe said not castable
-    TurnsPlayableUnused uint16    // probe said castable, AI chose not to — a DIFFERENT signal
-    BlockedBy          BlockReason // union over all blocked turns
-    DominantBlock      BlockReason // most frequent single reason
-}
-```
-
-**`TurnsPlayableUnused` is deliberately separate from `TurnsBlocked`.** "The card was castable and the AI never wanted
-to cast it" means the card is _weak or situational_; "the card was never castable" means the _mana base or curve_ is
-wrong. Collapsing them produces a report that blames the wrong thing. Report them as two distinct columns.
-
-Aggregate outputs: per-card dead rate, mean turns-stuck, block-reason histogram, and dead-rate conditioned on game
-outcome.
-
-## 4.3 Mana analytics
-
-Sampled every turn at end of turn, plus at each mana payment:
-
-```go
-type ManaTurnSample struct {
-    Turn              uint16
-    Player            PlayerID
-    LandsInPlay       uint8
-    LandsInHand       uint8
-    NonLandSources    uint8       // mana dorks, rocks, treasures
-    UntappedSources   uint8
-    AvailableByColor  [6]uint8    // W U B R G C — max simultaneously producible
-    ColorsAvailable   ColorSet
-    ColorsNeededInHand ColorSet   // union of colors required by cards in hand
-    ManaAvailable     uint8
-    ManaSpent         uint8
-    ManaFloatedLost   uint8       // emptied at step/phase end
-    MissedLandDrop    bool        // had land available, didn't/couldn't play it
-    LandDropAvailable bool
-    CurveTarget       uint8       // min(turn, deck's top relevant CMC)
-}
-```
-
-**Metric definitions are normative and versioned** — they live in `docs/crucible/telemetry/metric-definitions.md`, and
-`MetricsVersion` is stamped into every output. Proposed v1:
-
-- **Mana screw**: `LandsInPlay < min(Turn, ScrewCurveCap)` for ≥2 consecutive turns within turns 1–`ScrewWindow`
-  (defaults: cap 4, window 6). Also flag opening hands kept on ≤1 land.
-- **Mana flood**: after turn `FloodStartTurn` (default 5), `LandsInPlay + LandsInHand > CurveTarget + FloodExcess`
-  (default 2) **and** `ManaAvailable - ManaSpent ≥ FloodSlack` (default 2) — i.e. surplus lands _and_ nothing to spend
-  on. Requiring both conditions avoids flagging a functioning ramp deck as flooded.
-- **Color screw**: any turn where a card in hand is blocked with `BlockColorUnavailable` (see 4.2). Reported per missing
-  color and per card, because the fix is "add sources of color X".
-- **Unused mana**: `Σ(ManaAvailable − ManaSpent)` over turns, plus `Σ ManaFloatedLost`. Reported both raw and normalized
-  per turn, split by game outcome.
-- **Missed land drops**: count and turn distribution. Split into "no land in hand" vs "chose not to".
-- **Curve adherence**: fraction of turns where mana spent ≥ turn number (capped at the deck's curve top).
-
-All thresholds are config, not constants. Ship defaults, expose them in the run config, and print them in the report
-header — an unlabelled "mana screw: 18%" is not actionable.
-
-## 4.4 Impact metrics — and the confounding problem
-
-Naive `P(win | card was cast)` is **confounded**: players who are winning cast more spells, so nearly every card looks
-like it "causes" wins. A tool that reports this uncritically will systematically mis-rank cards. Crucible therefore
-offers four attribution modes, in increasing order of causal strength, and **labels every number with its mode**:
-
-```go
-type CardImpact struct {
-    OracleID string
-
-    // Mode 1: raw conditional (weakest; report but mark as observational)
-    GamesCast, WinsWhenCast int
-    GamesNotCast, WinsWhenNotCast int
-
-    // Mode 2: turn-controlled — P(win | cast by turn T) vs baseline at turn T,
-    // conditioning on games still live at T. Removes most game-length bias.
-    ByTurn [MaxTrackedTurn]TurnConditional
-
-    // Mode 3: opening-hand presence. The opener IS randomized, so this is
-    // near-experimental for free.
-    GamesInOpener, WinsInOpener int
-    GamesNotInOpener, WinsNotInOpener int
-
-    // Mode 4: A/B swap — the only truly causal mode. Run the same gauntlet
-    // with the card swapped for a candidate; compare win rates directly.
-    ABResults []ABSwapResult
-
-    // Supporting descriptives
-    MeanTurnFirstCast float32
-    DeadRate          float32
-    MeanTurnsStuck    float32
-}
-```
-
-**Mode 3 (opening-hand delta) is the best cheap estimator** and should lead the report: whether a card is in the opening
-hand is randomized by the shuffle, so the comparison is close to a randomized trial. **Mode 4 (A/B swap)** is the gold
-standard and is what "deck optimization" ultimately runs on — the optimizer loop is: rank candidates by modes 2–3, then
-confirm the top-K by A/B swap.
-
-Additional required breakdowns:
-
-- **Play/draw**: `OnThePlay bool` recorded per game; every metric reportable split by it. Play/draw win-rate delta is
-  itself a deck diagnostic (a large gap indicates a deck that loses on the back foot).
-- **Opening-hand analysis**: keep/mull decisions, hand size kept, land count, color coverage, curve signature → win
-  rate. Surfaces "this deck mulligans 22% of games" and "5-land keeps win 31%".
-- **Matchup matrix**: win rate per gauntlet deck, on play and on draw, with confidence intervals. Always report
-  intervals; a 10-game sample difference is noise.
-
-## 4.5 Storage & aggregation
-
-- Each worker owns a shard writer. `LevelAggregate` games append one row per game plus per-card/per-turn rows to
-  **NDJSON + zstd** shards. `LevelFull` games additionally write their event stream.
-- A merge step loads shards into **DuckDB** (or Parquet + DuckDB) for reporting queries. Rationale: reports are ad-hoc
-  analytical queries over tens of millions of rows; SQL over columnar storage is the right tool and avoids hand-writing
-  aggregations.
-- Every run directory contains a `manifest.json`: git SHA, engine version, schema/metrics versions, seeds, deck hashes,
-  gauntlet definition, config including all metric thresholds. **A run that cannot be reproduced from its manifest is a
-  bug.**
+The one cross-milestone dependency worth repeating here, because it decides M5's scope: **the castability probe asks the
+rules engine a question, and only the engine can answer it.** M5 ships that support for a consumer that does not exist
+until M8 (`MET-5`, `MET-6`).
 
 ---
 
@@ -945,8 +575,8 @@ printed form.
 
 14. `internal/carddb/script` — full top-level `Key:Value` parser, all faces, all variants.
 15. `CardRulesDumper` in Java; canonical-JSON dumper in Go.
-16. Deck (`.dck`) loading; `crucible corpus-coverage` first version. **Exit gate:** P1 gate — empty diff across all
-    33,686 cards.
+16. Deck (`.dck`) loading; `crucible corpus-coverage` first version. **Exit gate:** P1 gate — empty diff across all the
+    whole corpus.
 
 ### M3 — DSL compilation to typed AST — 3–5 wks
 
@@ -1017,7 +647,7 @@ printed form.
 | Risk                                                                                             | Mitigation                                                                                                                                                   |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Layer system divergence** (silently wrong P/T, types, costs — poisons every downstream metric) | Dedicated fixture family per layer and per timestamp-ordering case, built during M5 before any effect work                                                   |
-| **Effect long tail is unbounded**                                                                | Corpus gate (ADR-0011). "Done" is defined by the gauntlet, not by 33,686 cards. Unsupported card in a deck = hard error at load, never a silent misplay      |
+| **Effect long tail is unbounded**                                                                | Corpus gate (ADR-0011). "Done" is defined by the gauntlet, not by the whole corpus. Unsupported card in a deck = hard error at load, never a silent misplay  |
 | **AI divergence masking rules bugs**                                                             | Replay-parity harness (Layer 3) removes AI from rules comparison entirely. Build it in M6, not M7                                                            |
 | **Upstream fork drift**                                                                          | ADR-0001: no edits to upstream Java; all patches logged. Upstream card-script changes are absorbed automatically, since Crucible reads the same `.txt` files |
 | **Telemetry metrics that are subtly wrong** (worse than no metrics)                              | Normative, versioned definitions written in M0; thresholds in config and printed in every report header                                                      |

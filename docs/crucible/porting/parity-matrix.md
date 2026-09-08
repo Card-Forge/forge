@@ -1,9 +1,10 @@
 # Parity Matrix
 
-- **Status:** Generated (empty)
+- **Status:** Placeholder. Generated from M2, when the corpus scanner and the effect registry exist
 
-Support status of every card-script vocabulary item in the Go engine. Regenerated in CI from the effect registry and the
-corpus scan — **do not hand-edit**.
+Support status of every card-script vocabulary item in the Go engine. From M2 it is regenerated in CI from the effect
+registry and the corpus scan, and **must not be hand-edited**. Until then the counts below are measured by hand and the
+file is a gate waiting for its generator.
 
 Also the home of the deliberate-exclusion allowlist: anything the P2 vocabulary scanner is permitted to skip must be
 listed here with a reason, or the build fails.

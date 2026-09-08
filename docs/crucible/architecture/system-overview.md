@@ -48,8 +48,8 @@ code.**
 
 | Artefact           | Count | Command                                              |
 | ------------------ | ----: | ---------------------------------------------------- |
-| Crucible documents |    47 | `find docs/crucible -name '*.md' \| wc -l`           |
-| Accepted ADRs      |    14 | `ls docs/crucible/adr/0*.md \| wc -l`                |
+| Crucible documents |    48 | `find docs/crucible -name '*.md' \| wc -l`           |
+| Accepted ADRs      |    15 | `ls docs/crucible/adr/0*.md \| wc -l`                |
 | Guidelines         |     7 | `ls docs/crucible/guidelines/0*.md \| wc -l`         |
 | Design documents   |     4 | `ls docs/crucible/design/*-*.md \| wc -l`            |
 | Go files           |    42 | `find crucible -name '*.go' \| wc -l`                |
@@ -79,7 +79,7 @@ Everything in the next two sections is target state, and each stage names the mi
 
 ```mermaid
 flowchart TB
-  scripts[".txt card scripts<br/>33,686 files"] --> carddb["carddb<br/>M2"]
+  scripts[".txt card scripts"] --> carddb["carddb<br/>M2"]
   carddb --> compile["carddb/compile<br/>M3"]
   compile --> defs[("CompiledCard<br/>immutable, shared")]
   decks["decklists"] --> sim["sim: worker pool<br/>M8"]
@@ -132,7 +132,7 @@ The Java tree serves three distinct purposes:
 
 | Purpose                 | What it means                                                                                                                                                                      |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Port source**         | 210,501 lines of `forge-core`, `forge-game`, `forge-ai` are the behaviour being reproduced                                                                                         |
+| **Port source**         | Roughly 210,000 lines of `forge-core`, `forge-game`, `forge-ai` are the behaviour being reproduced                                                                                 |
 | **Differential oracle** | The Java engine generates golden outputs that Go is diffed against, in CI only ([ADR-0010](../adr/0010-differential-testing-strategy.md))                                          |
 | **Card script supply**  | `forge-gui/res/cardsfolder/` is read directly by the Go engine at runtime. Upstream additions arrive with no conversion ([ADR-0001](../adr/0001-fork-layout-and-upstream-sync.md)) |
 

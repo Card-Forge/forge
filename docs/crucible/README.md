@@ -28,16 +28,16 @@ This repo is a fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). 
 
 ## Layout
 
-| Path                           | Contents                                                                         | State                                                  |
-| ------------------------------ | -------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| [guidelines/](guidelines/)     | Binding rules — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`, `ARCH-n` | 7 documents                                            |
-| [adr/](adr/)                   | Architecture Decision Records                                                    | 0001-0014, all `Accepted`                              |
-| [design/](design/)             | Target design — how accepted decisions compose (ARCH-10)                         | 4 documents; `engine-state-model` omitted as redundant |
-| [architecture/](architecture/) | What exists right now (ARCH-2)                                                   | `system-overview`, `module-map`                        |
-| [porting/](porting/)           | Parity matrix, test port matrix, upstream patches, port log, 6 DSL grammars      | Written; the matrices fill as units land               |
-| [telemetry/](telemetry/)       | Metric definitions; event schema and report formats later                        | `metric-definitions` — 21 `MET-n`, versioned           |
-| [research/](research/)         | Meta gauntlet definition, format scope                                           | Structure written; Modern decklists pending            |
-| `runbooks/`                    | How to run a batch, add card support, investigate a parity failure               | Needs working code — M8                                |
+| Path                           | Contents                                                                                             | State                                                  |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [guidelines/](guidelines/)     | Binding rules — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`, `ARCH-n`                     | 7 documents                                            |
+| [adr/](adr/)                   | Architecture Decision Records                                                                        | 0001-0014, all `Accepted`                              |
+| [design/](design/)             | Target design — how accepted decisions compose (ARCH-10)                                             | 4 documents; `engine-state-model` omitted as redundant |
+| [architecture/](architecture/) | What exists right now (ARCH-2)                                                                       | `system-overview`, `module-map`                        |
+| [porting/](porting/)           | Parity matrix, test port matrix, upstream patches, port log, 6 DSL grammars                          | Written; the matrices fill as units land               |
+| [telemetry/](telemetry/)       | Metric definitions; event schema and report formats later                                            | `metric-definitions` — 21 `MET-n`, versioned           |
+| [research/](research/)         | Meta gauntlet definition, format scope                                                               | Structure written; Modern decklists pending            |
+| `runbooks/`                    | [`upstream-sync.md`](runbooks/upstream-sync.md). Batch runs, card support and parity failures follow | Sync now; the rest needs working code — M8             |
 
 ---
 
