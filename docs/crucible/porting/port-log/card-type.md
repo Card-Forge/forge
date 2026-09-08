@@ -26,7 +26,7 @@ type is caught by the corpus golden on the sync itself (see [`mana-cost.md`](man
 | The vocabulary is a `*Registry` passed in, not `CardType.Constant`'s statics | `Constant` is a mutable static guarded by a `LOADED` flag — the exact singleton shape GO-2 bans. One immutable registry is shared by every game instead                                                         |
 | `" - "` is a separator, not a word                                           | Java splits on spaces and lets the dash become a subtype, which survives only because the next step deletes subtypes that make no sense. Treating it as a separator is what makes `Parse(l.String())` equal `l` |
 | Multiword subtypes match longest-first                                       | Java takes the first `startsWith` hit from a `HashSet`, so the result depends on hash order. Iteration order is load-bearing here (GO-12)                                                                       |
-| `Parse` returns no error                                                     | No type line can fail: an unknown or illegal subtype is dropped, exactly as Java drops it. Words the vocabulary does not contain are reported by `UnknownTypes` instead                                         |
+| `Parse` returns no error                                                     | No type line can fail. Nothing is dropped either: `CardType.parse` adds each word with `add()`, which never calls `sanisfySubtypes`, so Forge's own database holds `Contraption` and `Killbot` as written       |
 | Core and supertypes are bitmasks; subtypes stay an ordered slice             | Java uses `EnumSet` (iterates in declaration order) and `LinkedHashSet` (iterates in insertion order). Bitmask plus slice reproduces both, and `Line` stays copyable                                            |
 | `Line` is immutable, and `Parse` is the only constructor                     | Java's `CardType` is mutable, with `add`, `remove`, `clear` and a `calculatedType` cache invalidated on every write. Static card data never changes after load (PORT-2)                                         |
 
@@ -50,10 +50,13 @@ type is caught by the corpus golden on the sync itself (see [`mana-cost.md`](man
 
 ## Open questions
 
-- **Twenty-three subtypes in the corpus are not in `TypeLists.txt`** — `Killbot`, `Clamfolk`, `Cow`, `Omenpath`,
-  `Sivitri`, `B.O.B.` and the rest, pinned in `internal/cardtype/testdata/unknown-types.golden`. Forge drops every one
-  of them, so a Doctor Who or Unglued card silently loses a subtype in Forge as much as here. The golden makes the list
-  reviewable; whether Crucible ships its own additions to the vocabulary is a corpus-scoping question
-  ([ADR-0011](../../adr/0011-card-corpus-scoping.md)) to answer at M2, when the cards are actually loaded.
+- **Twenty-four subtypes in the corpus are not in `TypeLists.txt`** — `Killbot`, `Clamfolk`, `Cow`, `Omenpath`,
+  `Sivitri`, `B.O.B.` and the rest, pinned in `internal/cardtype/testdata/unknown-types.golden`. Forge keeps them on the
+  card anyway: they are absent from the vocabulary, not from the type line. What the vocabulary decides is which
+  subtypes survive a type-changing effect, which is M4's problem, not the database's.
 - **`Dungeon Master` parses as the core type `Dungeon` plus the unknown word `Master`.** Java does the same, because the
   multiword list has no entry for it. Pinned rather than fixed (PORT-7).
+- **A `-` in a script's type line is a subtype.** `gandalf_shadows_foe` writes the printed form,
+  `Legendary Creature - Avatar Wizard`, and Forge stores a literal `-` subtype for it, printing
+  `Legendary Creature - - Avatar Wizard`. That is what the P1 diff demanded, and it costs the round-trip property
+  `Parse(l.String()) == l`, which this parser was never required to have.

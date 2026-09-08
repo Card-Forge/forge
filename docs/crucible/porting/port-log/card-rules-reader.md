@@ -3,7 +3,7 @@
 - **Java source:** `forge-core/src/main/java/forge/card/CardRules.java` (943, of which `Reader` is roughly the last
   third), `CardFace.java` (279), `CardSplitType.java` (49)
 - **Go target:** `crucible/internal/carddb`
-- **Status:** Parser done — M2. The canonical dump and the empty-diff gate against Java are the next slice
+- **Status:** Done — M2. The P1 gate is green: the canonical dump is byte-identical to Forge's across all 33,686 cards
 
 ## What it does
 
@@ -58,10 +58,27 @@ Each was decided before the code was written, which is what this note is for.
 | `faces[i]` is `null` until a `Name:` line                         | `Face.IsPresent bool`                                |
 | `placeholderFaces` is `null` when the card has no `CopyFaceFrom:` | Empty map, because the caller iterates it either way |
 
+## What the empty-diff gate cost
+
+Four divergences stood between the first dump and an empty diff, and every one was Crucible being tidier than Forge:
+
+| Divergence                                                   |   Cards | Resolution                                                                                  |
+| ------------------------------------------------------------ | ------: | ------------------------------------------------------------------------------------------- |
+| Colour derived from the mana cost when no `Colors:` declared | ~29,400 | Derive it in the dump, as `CardFace` does when it seals a face                              |
+| Subtypes dropped when the vocabulary disallows them          |      77 | `CardType.parse` never sanisfies; the database keeps them. Fixed in `internal/cardtype`     |
+| `Partner with:A:B` read as the whole remainder               |      27 | Java reads `split(":")[1]`, so only the second segment is the name                          |
+| Placeholder faces resolved before dumping                    |      23 | Forge's Reader leaves them for `CardDb`; the dump names them and leaves them unfilled       |
+| `Colors:black, red` read as two colours                      |       1 | Java trims nothing, so `" red"` matches nothing and the face is mono-black. Pinned (PORT-7) |
+| A `-` in a type line treated as a separator                  |       1 | Java keeps it as a subtype, so `gandalf_shadows_foe` really does have one                   |
+
+The last two cost a property: `Parse(l.String())` no longer equals `l` for a type line with subtypes. Matching the
+oracle is worth more than a round trip this parser was never required to have.
+
 ## Open questions
 
 - **Whether to reproduce the ignore-unknown-keys behaviour.** Erroring is the P2 vocabulary gate's whole premise, and
   Forge tolerating a typo is not a licence to. The allowlist keeps the two known defects loading while making a third
   one loud, which is the same shape as `internal/cardtype`'s `UnknownTypes`.
-- **What the P1 dumper does with a placeholder face.** The empty diff is defined over `CardRules`, and a `CopyFaceFrom:`
-  face is not resolved until every card is read, so the dump has to happen after the full corpus load on both sides.
+- **What the canonical dump leaves out**, because the two sides model it differently and the gate is about rules rather
+  than deck-building: `DeckHints`, `DeckNeeds`, `DeckHas`, the token list, and the derived integer power and toughness.
+  Each is parsed and kept by `internal/carddb`; none is compared. Adding one means adding it on both sides at once.

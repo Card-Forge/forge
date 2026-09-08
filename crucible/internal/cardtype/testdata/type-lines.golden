@@ -6,7 +6,7 @@ Artifact Book Clue	Artifact - Book Clue
 Artifact Book Equipment	Artifact - Book Equipment
 Artifact Clue	Artifact - Clue
 Artifact Clue Equipment	Artifact - Clue Equipment
-Artifact Contraption	Artifact
+Artifact Contraption	Artifact - Contraption
 Artifact Creature Alien Angel	Artifact Creature - Alien Angel
 Artifact Creature Alien Soldier	Artifact Creature - Alien Soldier
 Artifact Creature Angel	Artifact Creature - Angel
@@ -44,8 +44,8 @@ Artifact Creature Construct Alien	Artifact Creature - Construct Alien
 Artifact Creature Construct Scout	Artifact Creature - Construct Scout
 Artifact Creature Crab	Artifact Creature - Crab
 Artifact Creature Cyberman	Artifact Creature - Cyberman
-Artifact Creature Cyborg Knight	Artifact Creature - Knight
-Artifact Creature Cyborg Rigger	Artifact Creature - Rigger
+Artifact Creature Cyborg Knight	Artifact Creature - Cyborg Knight
+Artifact Creature Cyborg Rigger	Artifact Creature - Cyborg Rigger
 Artifact Creature Dalek	Artifact Creature - Dalek
 Artifact Creature Demon	Artifact Creature - Demon
 Artifact Creature Demon Construct	Artifact Creature - Demon Construct
@@ -136,7 +136,7 @@ Artifact Creature Insect	Artifact Creature - Insect
 Artifact Creature Insect Thopter	Artifact Creature - Insect Thopter
 Artifact Creature Jellyfish	Artifact Creature - Jellyfish
 Artifact Creature Juggernaut	Artifact Creature - Juggernaut
-Artifact Creature Killbot	Artifact Creature
+Artifact Creature Killbot	Artifact Creature - Killbot
 Artifact Creature Knight	Artifact Creature - Knight
 Artifact Creature Kree Robot Villain	Artifact Creature - Kree Robot Villain
 Artifact Creature Leviathan	Artifact Creature - Leviathan
@@ -253,7 +253,7 @@ Artifact Creature Vedalken Knight	Artifact Creature - Vedalken Knight
 Artifact Creature Vedalken Scout	Artifact Creature - Vedalken Scout
 Artifact Creature Vedalken Wizard	Artifact Creature - Vedalken Wizard
 Artifact Creature Wall	Artifact Creature - Wall
-Artifact Creature Walrus	Artifact Creature
+Artifact Creature Walrus	Artifact Creature - Walrus
 Artifact Creature Warrior	Artifact Creature - Warrior
 Artifact Creature Wizard	Artifact Creature - Wizard
 Artifact Creature Wolf Construct	Artifact Creature - Wolf Construct
@@ -270,7 +270,7 @@ Artifact Food	Artifact - Food
 Artifact Food Clue	Artifact - Food Clue
 Artifact Food Equipment	Artifact - Food Equipment
 Artifact Fortification	Artifact - Fortification
-Artifact Key	Artifact
+Artifact Key	Artifact - Key
 Artifact Land	Artifact Land
 Artifact Land Clue	Artifact Land - Clue
 Artifact Spacecraft	Artifact - Spacecraft
@@ -340,7 +340,7 @@ Creature Ape Spirit	Creature - Ape Spirit
 Creature Ape Warrior	Creature - Ape Warrior
 Creature Archon	Creature - Archon
 Creature Armadillo	Creature - Armadillo
-Creature Armored Dragon	Creature - Dragon
+Creature Armored Dragon	Creature - Armored Dragon
 Creature Astartes Cleric	Creature - Astartes Cleric
 Creature Astartes Knight	Creature - Astartes Knight
 Creature Astartes Scout	Creature - Astartes Scout
@@ -448,7 +448,7 @@ Creature Boar Monger	Creature - Boar Monger
 Creature Boar Monkey	Creature - Boar Monkey
 Creature Boar Porcupine	Creature - Boar Porcupine
 Creature Boar Rhino	Creature - Boar Rhino
-Creature Brainiac	Creature
+Creature Brainiac	Creature - Brainiac
 Creature Bringer	Creature - Bringer
 Creature Brushwagg	Creature - Brushwagg
 Creature Brushwagg Mount	Creature - Brushwagg Mount
@@ -517,12 +517,12 @@ Creature Centaur Warrior	Creature - Centaur Warrior
 Creature Centaur Wizard	Creature - Centaur Wizard
 Creature Chimera	Creature - Chimera
 Creature Chimera Hydra	Creature - Chimera Hydra
-Creature Clamfolk	Creature
+Creature Clamfolk	Creature - Clamfolk
 Creature Cleric	Creature - Cleric
 Creature Cleric Avatar	Creature - Cleric Avatar
 Creature Cleric Knight	Creature - Cleric Knight
 Creature Cockatrice	Creature - Cockatrice
-Creature Cow	Creature
+Creature Cow	Creature - Cow
 Creature Coyote	Creature - Coyote
 Creature Crab	Creature - Crab
 Creature Crab Beast	Creature - Crab Beast
@@ -539,7 +539,7 @@ Creature Crocodile Demon	Creature - Crocodile Demon
 Creature Crocodile Frog	Creature - Crocodile Frog
 Creature Crocodile Skeleton	Creature - Crocodile Skeleton
 Creature Crocodile Spirit	Creature - Crocodile Spirit
-Creature Custodes Warrior	Creature - Warrior
+Creature Custodes Warrior	Creature - Custodes Warrior
 Creature Cyclops	Creature - Cyclops
 Creature Cyclops Berserker	Creature - Cyclops Berserker
 Creature Cyclops Giant	Creature - Cyclops Giant
@@ -2479,7 +2479,7 @@ Land Mountain Forest Plains	Land - Mountain Forest Plains
 Land Mountain Gate	Land - Mountain Gate
 Land Mountain Plains	Land - Mountain Plains
 Land Mountain Plains Swamp	Land - Mountain Plains Swamp
-Land Omenpath	Land
+Land Omenpath	Land - Omenpath
 Land Plains	Land - Plains
 Land Plains Gate	Land - Plains Gate
 Land Plains Island	Land - Plains Island
@@ -2574,7 +2574,7 @@ Legendary Artifact Planeswalker Equipment	Legendary Artifact Planeswalker - Equi
 Legendary Artifact Powerstone	Legendary Artifact - Powerstone
 Legendary Artifact Spacecraft	Legendary Artifact - Spacecraft
 Legendary Artifact Vehicle	Legendary Artifact - Vehicle
-Legendary Creature - Avatar Wizard	Legendary Creature - Avatar Wizard
+Legendary Creature - Avatar Wizard	Legendary Creature - - Avatar Wizard
 Legendary Creature Aetherborn Rogue	Legendary Creature - Aetherborn Rogue
 Legendary Creature Aetherborn Vampire	Legendary Creature - Aetherborn Vampire
 Legendary Creature Alien	Legendary Creature - Alien
@@ -3028,7 +3028,7 @@ Legendary Creature Human Berserker	Legendary Creature - Human Berserker
 Legendary Creature Human Bird	Legendary Creature - Human Bird
 Legendary Creature Human Bird Hero	Legendary Creature - Human Bird Hero
 Legendary Creature Human Boar	Legendary Creature - Human Boar
-Legendary Creature Human Chef	Legendary Creature - Human
+Legendary Creature Human Chef	Legendary Creature - Human Chef
 Legendary Creature Human Citizen	Legendary Creature - Human Citizen
 Legendary Creature Human Citizen Ally	Legendary Creature - Human Citizen Ally
 Legendary Creature Human Citizen Hero	Legendary Creature - Human Citizen Hero
@@ -3651,7 +3651,7 @@ Legendary Planeswalker Angrath	Legendary Planeswalker - Angrath
 Legendary Planeswalker Arlinn	Legendary Planeswalker - Arlinn
 Legendary Planeswalker Arzakon	Legendary Planeswalker - Arzakon
 Legendary Planeswalker Ashiok	Legendary Planeswalker - Ashiok
-Legendary Planeswalker B.O.B.	Legendary Planeswalker
+Legendary Planeswalker B.O.B.	Legendary Planeswalker - B.O.B.
 Legendary Planeswalker Bahamut	Legendary Planeswalker - Bahamut
 Legendary Planeswalker Basri	Legendary Planeswalker - Basri
 Legendary Planeswalker Bolas	Legendary Planeswalker - Bolas
@@ -3662,17 +3662,17 @@ Legendary Planeswalker Dack	Legendary Planeswalker - Dack
 Legendary Planeswalker Dakkon	Legendary Planeswalker - Dakkon
 Legendary Planeswalker Daretti	Legendary Planeswalker - Daretti
 Legendary Planeswalker Davriel	Legendary Planeswalker - Davriel
-Legendary Planeswalker Deb	Legendary Planeswalker
+Legendary Planeswalker Deb	Legendary Planeswalker - Deb
 Legendary Planeswalker Dellian	Legendary Planeswalker - Dellian
 Legendary Planeswalker Dihada	Legendary Planeswalker - Dihada
 Legendary Planeswalker Domri	Legendary Planeswalker - Domri
 Legendary Planeswalker Dovin	Legendary Planeswalker - Dovin
-Legendary Planeswalker Dungeon Master	Legendary Dungeon Planeswalker
+Legendary Planeswalker Dungeon Master	Legendary Dungeon Planeswalker - Master
 Legendary Planeswalker Dyfed	Legendary Planeswalker - Dyfed
 Legendary Planeswalker Ellywick	Legendary Planeswalker - Ellywick
 Legendary Planeswalker Elminster	Legendary Planeswalker - Elminster
 Legendary Planeswalker Elspeth	Legendary Planeswalker - Elspeth
-Legendary Planeswalker Ersta	Legendary Planeswalker
+Legendary Planeswalker Ersta	Legendary Planeswalker - Ersta
 Legendary Planeswalker Estrid	Legendary Planeswalker - Estrid
 Legendary Planeswalker Feroz	Legendary Planeswalker - Feroz
 Legendary Planeswalker Freyalise	Legendary Planeswalker - Freyalise
@@ -3682,7 +3682,7 @@ Legendary Planeswalker Greensleeves	Legendary Planeswalker - Greensleeves
 Legendary Planeswalker Grist	Legendary Planeswalker - Grist
 Legendary Planeswalker Guff	Legendary Planeswalker - Guff
 Legendary Planeswalker Huatli	Legendary Planeswalker - Huatli
-Legendary Planeswalker Inzerva	Legendary Planeswalker
+Legendary Planeswalker Inzerva	Legendary Planeswalker - Inzerva
 Legendary Planeswalker Jace	Legendary Planeswalker - Jace
 Legendary Planeswalker Jared	Legendary Planeswalker - Jared
 Legendary Planeswalker Jaya	Legendary Planeswalker - Jaya
@@ -3697,7 +3697,7 @@ Legendary Planeswalker Liliana	Legendary Planeswalker - Liliana
 Legendary Planeswalker Lolth	Legendary Planeswalker - Lolth
 Legendary Planeswalker Lukka	Legendary Planeswalker - Lukka
 Legendary Planeswalker Minsc	Legendary Planeswalker - Minsc
-Legendary Planeswalker Monopoly	Legendary Planeswalker
+Legendary Planeswalker Monopoly	Legendary Planeswalker - Monopoly
 Legendary Planeswalker Mordenkainen	Legendary Planeswalker - Mordenkainen
 Legendary Planeswalker Nahiri	Legendary Planeswalker - Nahiri
 Legendary Planeswalker Narset	Legendary Planeswalker - Narset
@@ -3713,9 +3713,9 @@ Legendary Planeswalker Samut	Legendary Planeswalker - Samut
 Legendary Planeswalker Sarkhan	Legendary Planeswalker - Sarkhan
 Legendary Planeswalker Serra	Legendary Planeswalker - Serra
 Legendary Planeswalker Sifa	Legendary Planeswalker - Sifa
-Legendary Planeswalker Sivitri	Legendary Planeswalker
+Legendary Planeswalker Sivitri	Legendary Planeswalker - Sivitri
 Legendary Planeswalker Sorin	Legendary Planeswalker - Sorin
-Legendary Planeswalker Stone	Legendary Planeswalker
+Legendary Planeswalker Stone	Legendary Planeswalker - Stone
 Legendary Planeswalker Szat	Legendary Planeswalker - Szat
 Legendary Planeswalker Tamiyo	Legendary Planeswalker - Tamiyo
 Legendary Planeswalker Tasha	Legendary Planeswalker - Tasha
@@ -3739,7 +3739,7 @@ Legendary Planeswalker Wrenn	Legendary Planeswalker - Wrenn
 Legendary Planeswalker Xenagos	Legendary Planeswalker - Xenagos
 Legendary Planeswalker Yanggu	Legendary Planeswalker - Yanggu
 Legendary Planeswalker Yanling	Legendary Planeswalker - Yanling
-Legendary Planeswalker You	Legendary Planeswalker
+Legendary Planeswalker You	Legendary Planeswalker - You
 Legendary Planeswalker Zariel	Legendary Planeswalker - Zariel
 Legendary Snow Artifact	Legendary Snow Artifact
 Legendary Snow Creature God	Legendary Snow Creature - God
@@ -3827,14 +3827,14 @@ Plane Theros	Plane - Theros
 Plane Time	Plane - Time
 Plane Trenzalore	Plane - Trenzalore
 Plane Ulgrotha	Plane - Ulgrotha
-Plane Unknown Planet	Plane
+Plane Unknown Planet	Plane - Unknown Planet
 Plane Valla	Plane - Valla
 Plane Vryn	Plane - Vryn
 Plane Wildfire	Plane - Wildfire
 Plane Xerex	Plane - Xerex
 Plane Zendikar	Plane - Zendikar
 Plane Zhalfir	Plane - Zhalfir
-Planeswalker Duck	Planeswalker
+Planeswalker Duck	Planeswalker - Duck
 Scheme	Scheme
 Snow Artifact	Snow Artifact
 Snow Artifact Creature Golem	Snow Artifact Creature - Golem
@@ -3865,7 +3865,7 @@ Snow Creature Illusion	Snow Creature - Illusion
 Snow Creature Insect	Snow Creature - Insect
 Snow Creature Kraken	Snow Creature - Kraken
 Snow Creature Lizard	Snow Creature - Lizard
-Snow Creature Mammoth	Snow Creature
+Snow Creature Mammoth	Snow Creature - Mammoth
 Snow Creature Serpent	Snow Creature - Serpent
 Snow Creature Shade	Snow Creature - Shade
 Snow Creature Skeleton	Snow Creature - Skeleton

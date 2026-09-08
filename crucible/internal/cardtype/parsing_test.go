@@ -74,15 +74,6 @@ func TestParseTypeLine(t *testing.T) {
 			permanent: true,
 		},
 		{
-			name:      "printed form with the separator parses back",
-			in:        "Legendary Creature - Elf Warrior",
-			want:      "Legendary Creature - Elf Warrior",
-			core:      []cardtype.CoreType{cardtype.Creature},
-			super:     []cardtype.Supertype{cardtype.Legendary},
-			subtypes:  []string{"Elf", "Warrior"},
-			permanent: true,
-		},
-		{
 			name:      "subtype order is kept as printed",
 			in:        "Creature Warrior Elf",
 			want:      "Creature - Warrior Elf",
@@ -132,18 +123,28 @@ func TestParseTypeLine(t *testing.T) {
 			permanent: true,
 		},
 		{
-			name:      "subtype from the wrong category is dropped",
+			name:      "a subtype from another category is kept, as Forge keeps it",
 			in:        "Creature Elf Equipment",
-			want:      "Creature - Elf",
+			want:      "Creature - Elf Equipment",
 			core:      []cardtype.CoreType{cardtype.Creature},
-			subtypes:  []string{"Elf"},
+			subtypes:  []string{"Elf", "Equipment"},
 			permanent: true,
 		},
 		{
-			name:      "unknown subtype is dropped, as Forge drops it",
+			name:      "a subtype the vocabulary never heard of is kept too",
 			in:        "Artifact Creature Killbot",
-			want:      "Artifact Creature",
+			want:      "Artifact Creature - Killbot",
 			core:      []cardtype.CoreType{cardtype.Artifact, cardtype.Creature},
+			subtypes:  []string{"Killbot"},
+			permanent: true,
+		},
+		{
+			name:      "a dash in a script type line is a subtype, not a separator",
+			in:        "Legendary Creature - Avatar Wizard",
+			want:      "Legendary Creature - - Avatar Wizard",
+			core:      []cardtype.CoreType{cardtype.Creature},
+			super:     []cardtype.Supertype{cardtype.Legendary},
+			subtypes:  []string{"-", "Avatar", "Wizard"},
 			permanent: true,
 		},
 		{
@@ -177,12 +178,6 @@ func TestParseTypeLine(t *testing.T) {
 			if got.IsEmpty() != (tt.in == "") {
 				t.Errorf("Parse(%q).IsEmpty() = %v, want %v", tt.in, got.IsEmpty(), tt.in == "")
 			}
-
-			// The property the corpus gate rests on.
-			again := cardtype.Parse(reg, got.String())
-			if !again.Equal(got) {
-				t.Errorf("Parse(%q) round trip = %q, want %q", tt.in, again, got)
-			}
 		})
 	}
 }
@@ -197,8 +192,8 @@ func TestUnknownTypes(t *testing.T) {
 	}{
 		{"Legendary Creature Elf Warrior", nil},
 		{"Artifact Creature Killbot", []string{"Killbot"}},
-		// Known, but illegal here: Equipment is an artifact type. Dropped by
-		// Parse, and deliberately not reported as unknown.
+		// Known to the vocabulary, if in another category: kept by Parse and
+		// deliberately not reported as unknown.
 		{"Creature Elf Equipment", nil},
 		{"Legendary Planeswalker Sivitri", []string{"Sivitri"}},
 	}

@@ -111,7 +111,9 @@ func (p *parser) line(text string, face *Face) error {
 		p.card.PlaceholderFaces[p.cur] = value
 		return nil
 	case "Name":
-		*face = Face{Present: true, Name: value}
+		// A face with no ManaCost: line has no cost, which is not {0}: Java
+		// coalesces its null to NO_COST, and the two print differently.
+		*face = Face{Present: true, Name: value, ManaCost: mana.NoCost()}
 		return nil
 	case "AI":
 		p.aiHint(value)
@@ -172,11 +174,7 @@ func (p *parser) faceEntry(key, value string, face *Face) error {
 		}
 		face.Power, face.Toughness = power, toughness
 	case "Colors":
-		colors, err := parseColors(value)
-		if err != nil {
-			return err
-		}
-		face.Colors, face.HasColors = colors, true
+		face.Colors, face.HasColors = parseColors(value), true
 	case "Loyalty":
 		face.InitialLoyalty = value
 	case "Defense":
@@ -229,7 +227,7 @@ func (p *parser) variant(value string, face *Face) error {
 	}
 	target, ok := face.Variants[name]
 	if !ok {
-		target = &Face{Present: true, Name: face.Name}
+		target = &Face{Present: true, Name: face.Name, ManaCost: mana.NoCost()}
 		face.Variants[name] = target
 	}
 	if err := p.line(rest, target); err != nil {
@@ -263,12 +261,16 @@ func (p *parser) aiHint(value string) {
 // partnerFrom picks the partner out of a keyword line, which is where Java
 // keeps it: `Partner with:<name>` and `Partner:<type>`.
 func (p *parser) partnerFrom(keyword string) {
+	// Java reads value.split(":")[1], so a keyword carrying a third segment --
+	// "Partner with:Rory Williams:Rory" -- names only the second.
 	if rest, ok := strings.CutPrefix(keyword, "Partner with:"); ok {
-		p.card.PartnerWith = rest
+		name, _, _ := strings.Cut(rest, ":")
+		p.card.PartnerWith = name
 		return
 	}
 	if rest, ok := strings.CutPrefix(keyword, "Partner:"); ok {
-		p.card.PartnerType = rest
+		kind, _, _ := strings.Cut(rest, ":")
+		p.card.PartnerType = kind
 	}
 }
 
@@ -291,17 +293,22 @@ func (p *parser) harvestTokens(value string) {
 }
 
 // parseColors reads a `Colors:` override: comma-separated colour words.
-func parseColors(value string) (mana.Colors, error) {
+//
+// Words are not trimmed and an unrecognised one contributes nothing, both of
+// which are Java's ColorSet.fromNames. That combination is a trap and it has
+// already caught a card: `flamewar_brash_veteran_flamewar_streetwise_operative`
+// writes "black, red", and the leading space on " red" makes Forge read the
+// face as mono-black. Reproduced rather than fixed, because the static database
+// has to match the oracle before anything can be trusted to diverge from it
+// (PORT-7).
+func parseColors(value string) mana.Colors {
 	var out mana.Colors
 	for _, word := range strings.Split(value, ",") {
-		word = strings.TrimSpace(word)
-		colour, ok := colorFromWord(word)
-		if !ok {
-			return 0, fmt.Errorf("bad Colors: unknown colour %q", word)
+		if colour, ok := colorFromWord(word); ok {
+			out |= colour
 		}
-		out |= colour
 	}
-	return out, nil
+	return out
 }
 
 func colorFromWord(word string) (mana.Colors, bool) {

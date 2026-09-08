@@ -17,7 +17,9 @@ var update = flag.Bool("update", false, "rewrite golden files")
 const goldenPath = "testdata/type-lines.golden"
 
 // TestCorpusTypeLines is the other half of the P0 gate: every distinct Types
-// value in the card corpus parses, and round-trips through the printed form.
+// value in the card corpus parses, and prints to the form the golden pins --
+// which is the form Forge's own CardType.toString produces, checked card by
+// card by the P1 dump diff.
 //
 // Like the mana corpus test, it reads the card scripts in place rather than a
 // copy under testdata: the corpus is committed here and is the same input the
@@ -40,9 +42,12 @@ func TestCorpusTypeLines(t *testing.T) {
 	for _, raw := range lines {
 		parsed := cardtype.Parse(reg, raw)
 
-		again := cardtype.Parse(reg, parsed.String())
-		if !again.Equal(parsed) {
-			t.Errorf("corpus type line %q: round trip through %q gave %q", raw, parsed, again)
+		// Parsing twice must agree. Parsing the *printed* form must not, and is
+		// not checked: String() writes the " - " separator that Java's parser
+		// reads back as a subtype, which is why gandalf_shadows_foe holds a
+		// literal "-" (PORT-7).
+		if again := cardtype.Parse(reg, raw); !again.Equal(parsed) {
+			t.Errorf("corpus type line %q parsed differently twice: %q then %q", raw, parsed, again)
 			continue
 		}
 

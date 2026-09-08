@@ -31,19 +31,25 @@ const Separator = " - "
 
 // Parse reads a type line: "Legendary Creature Elf Warrior".
 //
-// The printed form with a separator, "Legendary Creature - Elf Warrior", is
-// accepted too, so that Parse(line.String()) equals line. Java's parser has no
-// such property; it splits on spaces and lets a stray "-" become a subtype,
-// which survives only because the next step deletes subtypes that make no
-// sense.
+// A "-" is an ordinary word and becomes a subtype, which is what Java does and
+// therefore what the card database holds: `gandalf_shadows_foe` writes its type
+// line in printed form, "Legendary Creature - Avatar Wizard", and Forge stores
+// a literal "-" subtype for it. Parse(l.String()) is consequently not a fixed
+// point for a line with subtypes, and matching the oracle is worth more than a
+// property this parser was never required to have (PORT-7).
 //
-// Parse returns no error, because no type line can fail: a subtype that the
-// vocabulary does not allow for these core types is dropped, exactly as Java
-// drops it. That covers both an illegal subtype -- Equipment on a creature that
-// is not an artifact -- and one the vocabulary has never heard of. Twenty-four
-// corpus type lines are in the second group today, and the words they lose are
-// reported by [UnknownTypes] rather than by failing a load that Forge itself
-// accepts (PORT-7).
+// Parse returns no error, because no type line can fail. Every word that is not
+// a core type or a supertype becomes a subtype, including one the vocabulary has
+// never heard of: Java's CardType.parse adds each word with add(), which never
+// runs sanisfySubtypes, so Forge's own card database holds Contraption and
+// Killbot exactly as the script wrote them.
+//
+// Dropping a subtype is something Java does only on the type-changing path
+// (addAll, removeAll, getTypeWithChanges), which belongs to the layer system at
+// M4. Doing it here would make 77 cards differ from the oracle.
+//
+// [UnknownTypes] reports the words the vocabulary does not contain, which is
+// what the P2 vocabulary gate consumes.
 //
 // A nil registry is a programming error, not card data, so it panics (GO-7).
 func Parse(reg *Registry, text string) Line {
@@ -54,9 +60,6 @@ func Parse(reg *Registry, text string) Line {
 	var out Line
 	var subtypes []string
 	for _, word := range splitTypes(reg, strings.TrimSpace(text)) {
-		if word == strings.TrimSpace(Separator) {
-			continue
-		}
 		if core, ok := CoreTypeFromName(word); ok {
 			out.coreTypes |= 1 << uint(core)
 			continue
@@ -68,7 +71,7 @@ func Parse(reg *Registry, text string) Line {
 		subtypes = append(subtypes, word)
 	}
 
-	out.subtypes = out.keepLegalSubtypes(reg, subtypes)
+	out.subtypes = subtypes
 	return out
 }
 
@@ -86,9 +89,6 @@ func UnknownTypes(reg *Registry, text string) []string {
 
 	var out []string
 	for _, word := range splitTypes(reg, strings.TrimSpace(text)) {
-		if word == strings.TrimSpace(Separator) {
-			continue
-		}
 		if _, ok := CoreTypeFromName(word); ok {
 			continue
 		}
@@ -125,48 +125,6 @@ func splitTypes(reg *Registry, text string) []string {
 		i += j
 	}
 	return out
-}
-
-// keepLegalSubtypes drops subtypes whose category no core type on the card
-// allows. Java calls this "sanisfySubtypes" and runs it after every change.
-func (l Line) keepLegalSubtypes(reg *Registry, subtypes []string) []string {
-	if len(subtypes) == 0 {
-		return nil
-	}
-	out := subtypes[:0]
-	for _, s := range subtypes {
-		if l.allowsSubtype(reg, s) {
-			out = append(out, s)
-		}
-	}
-	if len(out) == 0 {
-		return nil
-	}
-	return out
-}
-
-func (l Line) allowsSubtype(reg *Registry, name string) bool {
-	switch {
-	case (l.Has(Creature) || l.Has(Kindred)) && reg.IsCreatureType(name):
-		return true
-	case l.Has(Land) && reg.IsLandType(name):
-		return true
-	case l.Has(Artifact) && reg.Is(CategoryArtifact, name):
-		return true
-	case l.Has(Enchantment) && reg.Is(CategoryEnchantment, name):
-		return true
-	case (l.Has(Instant) || l.Has(Sorcery)) && reg.Is(CategorySpell, name):
-		return true
-	case l.Has(Planeswalker) && reg.Is(CategoryPlaneswalker, name):
-		return true
-	case l.Has(Dungeon) && reg.Is(CategoryDungeon, name):
-		return true
-	case l.Has(Battle) && reg.Is(CategoryBattle, name):
-		return true
-	case l.Has(Plane) && reg.Is(CategoryPlanar, name):
-		return true
-	}
-	return false
 }
 
 // known reports whether a word appears in any subtype category.

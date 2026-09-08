@@ -298,6 +298,33 @@ A:AB$ Token | TokenScript$ w_1_1_soldier,w_2_2_knight | Cost$ W
 	}
 }
 
+// Java's ColorSet.fromNames trims nothing and ignores what it does not
+// recognise, so a stray space silently drops a colour. Pinned rather than
+// fixed: the static database has to match the oracle first (PORT-7).
+func TestColorsFollowJavasQuirks(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name  string
+		value string
+		want  string
+	}{
+		{"a space after the comma loses the colour", "black, red", "B"},
+		{"no space keeps both", "black,red", "BR"},
+		{"an unrecognised word contributes nothing", "puce", "C"},
+	}
+	for _, tt := range tests {
+		card := parse(t, "Name:X\nManaCost:2\nTypes:Artifact\nColors:"+tt.value+"\n")
+		face := card.Primary()
+		if !face.HasColors {
+			t.Errorf("Colors:%s left HasColors false", tt.value)
+		}
+		if got := face.Colors.String(); got != tt.want {
+			t.Errorf("Colors:%s = %s, want %s -- %s", tt.value, got, tt.want, tt.name)
+		}
+	}
+}
+
 func TestColorsOverride(t *testing.T) {
 	t.Parallel()
 
@@ -329,7 +356,6 @@ func TestParseRejectsBrokenScripts(t *testing.T) {
 		{"SVar without a value", "Name:X\nManaCost:R\nTypes:Instant\nSVar:Lonely\n", "a name but no value"},
 		{"PT with no slash", "Name:X\nManaCost:R\nTypes:Creature Elf\nPT:22\n", "is not power/toughness"},
 		{"PT with two slashes", "Name:X\nManaCost:R\nTypes:Creature Elf\nPT:2/2/2\n", "is not power/toughness"},
-		{"unknown colour", "Name:X\nManaCost:R\nTypes:Instant\nColors:puce\n", `unknown colour "puce"`},
 		{"unknown split mode", "Name:X\nManaCost:R\nTypes:Instant\nAlternateMode:Wobble\n", `unknown mode "Wobble"`},
 		{"unknown specialize colour", "Name:X\nManaCost:R\nTypes:Instant\nSPECIALIZE:PUCE\n", `unknown colour "PUCE"`},
 		{"variant with no name", "Name:X\nManaCost:R\nTypes:Instant\nVariant:Flying\n", "no variant name"},

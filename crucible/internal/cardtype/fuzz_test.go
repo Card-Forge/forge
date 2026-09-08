@@ -7,9 +7,11 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
 )
 
-// FuzzTypeLine checks TEST-10's parser properties that apply here: never panic,
-// and parse-then-print is a fixed point. The third property, no partial result
-// on failure, does not apply -- Parse has no failure mode by design.
+// FuzzTypeLine checks the parser properties that still apply here: never panic,
+// and parsing is deterministic. Parse-then-print is deliberately not a fixed
+// point -- String() writes the printed form with a " - " separator, and Parse
+// reads that dash as a subtype because Java does (PORT-7). The no-partial-result
+// property does not apply either: Parse has no failure mode by design.
 func FuzzTypeLine(f *testing.F) {
 	seeds := []string{
 		"", " ", "-", " - ", "Creature", "Legendary Creature Elf Warrior",
@@ -31,20 +33,15 @@ func FuzzTypeLine(f *testing.F) {
 	f.Fuzz(func(t *testing.T, in string) {
 		line := cardtype.Parse(reg, in)
 
-		printed := line.String()
-		again := cardtype.Parse(reg, printed)
-		if !again.Equal(line) {
-			t.Fatalf("Parse(%q) = %q, reparsed as %q", in, printed, again)
-		}
-		if again.String() != printed {
-			t.Fatalf("Parse(%q) printed %q, reparse printed %q", in, printed, again.String())
+		if again := cardtype.Parse(reg, in); !again.Equal(line) {
+			t.Fatalf("Parse(%q) is not deterministic: %q then %q", in, line, again)
 		}
 
-		// Every word Parse threw away is either an unknown type or a subtype
-		// the card's types do not allow. Nothing else may vanish.
+		// Nothing is dropped: a word the vocabulary has never seen is still a
+		// subtype, which is what Forge's card database holds.
 		for _, word := range cardtype.UnknownTypes(reg, in) {
-			if line.HasSubtype(word) {
-				t.Fatalf("Parse(%q) kept %q, which the vocabulary does not contain", in, word)
+			if !line.HasSubtype(word) {
+				t.Fatalf("Parse(%q) dropped %q; Java keeps it", in, word)
 			}
 		}
 	})

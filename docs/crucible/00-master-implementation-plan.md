@@ -578,7 +578,8 @@ printed form.
 
 14. `internal/carddb` — top-level `Key:Value` parser, all faces, all variants. **Done**: every script in the corpus
     parses, every `CopyFaceFrom:` placeholder resolves, and the shape of the result is pinned by a summary golden.
-15. `CardRulesDumper` in Java; canonical-JSON dumper in Go.
+15. `CardRulesDumper` in Java; canonical-JSON dumper in Go. **Done**: the two agree byte for byte across the whole
+    corpus, which is the P1 gate.
 16. Deck (`.dck`) loading; `crucible corpus-coverage` first version. **Exit gate:** P1 gate — empty diff across the
     whole corpus.
 

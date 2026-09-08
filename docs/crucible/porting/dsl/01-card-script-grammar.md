@@ -90,6 +90,9 @@ matches the whole key, and neither matches anything:
 Both are corpus defects rather than vocabulary. A strict parser has to decide about them explicitly — Crucible's does,
 in the port log — because "Forge ignores it" is behaviour, not permission.
 
+An unknown **subtype**, by contrast, is not dropped by either side: `CardType.parse` adds every word with `add()`, which
+never runs `sanisfySubtypes`, so the database keeps `Contraption` and `Killbot` exactly as written.
+
 ## `SVar:` values
 
 Three shapes, disambiguated by content rather than by a marker:

@@ -118,6 +118,54 @@ jobs:
             echo "internal/engine does not exist yet (lands at M4); nothing to check"
           fi
 
+  card-rules-parity:
+    name: carddb vs Forge's own reader
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: crucible/go.mod
+          cache-dependency-path: crucible/go.sum
+
+      # The dumper reads the corpus with Forge's own CardRules.Reader, so
+      # forge-core has to exist as classes. -am builds what it needs and nothing
+      # else; the GUI modules are not involved.
+      - name: build forge-core
+        working-directory: .
+        run: mvn -B -q -pl forge-core -am install -DskipTests
+
+      # javac rather than a Maven dependency: forge-core's installed POM keeps
+      # its parent's ${revision} placeholder, so Maven cannot resolve it from
+      # outside the reactor (ADR-0002). A classpath file sidesteps that entirely.
+      - name: dump with Forge
+        working-directory: .
+        run: |
+          mvn -B -q -pl forge-core dependency:build-classpath -Dmdep.outputFile=/tmp/core-cp.txt
+          CP="forge-core/target/classes:$(cat /tmp/core-cp.txt)"
+          javac -d /tmp/jout -cp "$CP" crucible/oracle-java/src/main/java/crucible/oracle/CardRulesDumper.java
+          java -cp "/tmp/jout:$CP" crucible.oracle.CardRulesDumper \
+            forge-gui/res/cardsfolder forge-gui/res/lists/TypeLists.txt > /tmp/java-cards.ndjson
+          wc -l /tmp/java-cards.ndjson
+
+      # P1's gate, stated in the plan as "the diff must be empty". Not a
+      # sample, not a hash: every card, byte for byte.
+      - name: dump with Crucible and diff
+        run: |
+          go run ./tools/carddump > /tmp/go-cards.ndjson
+          if ! diff /tmp/java-cards.ndjson /tmp/go-cards.ndjson > /tmp/cards.diff; then
+            echo "::error::P1 gate: the card dumps differ"
+            head -40 /tmp/cards.diff
+            exit 1
+          fi
+          echo "P1 gate green: $(wc -l < /tmp/go-cards.ndjson) cards, byte-identical"
+
   oracle-parity:
     name: javarand vs java.util.Random
     runs-on: ubuntu-latest

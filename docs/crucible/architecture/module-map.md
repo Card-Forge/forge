@@ -24,6 +24,7 @@ Column meaning:
 | [`internal/carddb`](../../../crucible/internal/carddb)     | Card scripts to `Card`: faces, keys, ability lines kept as text                     | `forge.card.CardRules` and its `Reader`, `CardFace`, `CardSplitType`                    | [`card-rules-reader.md`](../porting/port-log/card-rules-reader.md) |
 | [`internal/mana`](../../../crucible/internal/mana)         | Mana costs: colours, shards, and the `ManaCost` line every card script carries      | `forge.card.mana.ManaCost`, `ManaCostShard`, `ManaCostParser`, `ManaAtom`, `MagicColor` | [`mana-cost.md`](../porting/port-log/mana-cost.md)                 |
 | [`internal/cardtype`](../../../crucible/internal/cardtype) | Type lines, and the subtype vocabulary they are checked against                     | `forge.card.CardType`, its `Helper.parseTypes`, and `FModel.loadDynamicGamedata`        | [`card-type.md`](../porting/port-log/card-type.md)                 |
+| [`tools/carddump`](../../../crucible/tools/carddump)       | Writes the whole corpus as canonical JSON, for the P1 diff against Forge's reader   | — new code                                                                              | —                                                                  |
 | [`tools/covergate`](../../../crucible/tools/covergate)     | Fails the build on a package below the coverage floor TEST-12 declares for it       | — new code                                                                              | —                                                                  |
 | [`tools/docgate`](../../../crucible/tools/docgate)         | Fails the build on code that landed without its documentation                       | — new code                                                                              | —                                                                  |
 | [`tools/enginelint`](../../../crucible/tools/enginelint)   | Enforces file-group boundaries inside the single `internal/engine` package          | — new code; exists because Go has no sub-package visibility                             | —                                                                  |
@@ -49,6 +50,7 @@ meaning, `mana` and `cardtype` included, goes in `internal/` where nothing outsi
 | [`tools/javacycles`](../../../crucible/tools/javacycles) | The Java tree      | Re-checks ADR-0003's 82-cycle premise after an upstream sync                        |
 | [`tools/docgate`](../../../crucible/tools/docgate)       | Code against docs  | DOC-12 module-map rows, PORT-4 port-log notes, ADRP-4 ADR-before-code               |
 | [`tools/covergate`](../../../crucible/tools/covergate)   | Tests against docs | TEST-12 coverage floors, read from the guideline rather than a second config        |
+| [`tools/carddump`](../../../crucible/tools/carddump)     | Go against Java    | P1: every card's canonical JSON, diffed against `oracle-java`'s `CardRulesDumper`   |
 
 ## What the arrows look like today
 
