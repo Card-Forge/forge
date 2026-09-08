@@ -449,9 +449,7 @@ public abstract class GameLobby implements IHasGameType {
             final int avatar = slot.getAvatarIndex();
             final int sleeve = slot.getSleeveIndex();
             final boolean isArchenemy = slot.isArchenemy();
-            final int team = variantTypes.contains(GameType.Archenemy)
-                    ? (isArchenemy ? 0 : 1)
-                    : slot.getTeam();
+            final int team = slot.getTeam();
             final Set<AIOption> aiOptions = slot.getAiOptions(); // TODO: could AiOptions carry the choice of which AI is selected to play against?
 
             final boolean isAI = slot.getType() == LobbySlotType.AI;
