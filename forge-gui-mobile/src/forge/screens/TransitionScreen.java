@@ -176,7 +176,7 @@ public class TransitionScreen extends FContainer {
                 enemyAvatar = Config.instance().getAtlas(enemyAtlasPath).createSprite("Avatar");
                 if (enemyAvatar != null)
                     enemyAvatar.flip(true, false);
-                float fontScale = GuiBase.isAndroid() ? 14f : 10f;
+                float fontScale = GuiBase.isAndroid() ? 12f : 10f;
                 BitmapFont font = Controls.getBitmapFont("default", fontScale / (screenW / screenH));
                 if (textureRegion != null) {
                     if (isArenaScene)

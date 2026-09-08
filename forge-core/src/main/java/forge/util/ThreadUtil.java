@@ -16,7 +16,9 @@ public class ThreadUtil {
         }
 
         public Thread newThread(Runnable r) {
-            return new Thread(r, prefix + "-" + countr++);
+            Thread t = new Thread(r, prefix + "-" + countr++);
+            t.setDaemon(true); //set daemon to true for succesfully exiting the game while disposing assets
+            return t;
         }
     }
 
@@ -27,7 +29,11 @@ public class ThreadUtil {
 
     // This pool is designed to parallel CPU or IO intensive tasks like parse cards or download images, assuming a load factor of 0.5
     public final static ExecutorService getComputingPool(float loadFactor) {
-        return Executors.newFixedThreadPool((int)(Runtime.getRuntime().availableProcessors() / (1-loadFactor)));
+        return Executors.newFixedThreadPool((int) (Runtime.getRuntime().availableProcessors() / (1 - loadFactor)), r -> {
+            Thread t = Executors.defaultThreadFactory().newThread(r);
+            t.setDaemon(true);
+            return t;
+        });
     }
 
     public static boolean isMultiCoreSystem() {
@@ -68,7 +74,11 @@ public class ThreadUtil {
         return result;
     }
     public static <T> T executeWithTimeout(Callable<T> task, int milliseconds) {
-        ExecutorService executor = Executors.newCachedThreadPool();
+        ExecutorService executor = Executors.newCachedThreadPool(r -> {
+            Thread thread = new Thread(r);
+            thread.setDaemon(true);
+            return thread;
+        });
         Future<T> future = executor.submit(task);
         T result;
         try {

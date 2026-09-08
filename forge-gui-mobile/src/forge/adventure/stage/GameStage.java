@@ -56,6 +56,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.screens.CoverScreen;
 import forge.util.MyRandom;
+import forge.util.ScreenUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -204,7 +205,7 @@ public abstract class GameStage extends Stage {
         dialog.clearListeners();
         DeckProxy dp = new DeckProxy(deck, "Constructed", GameType.Constructed, null);
         FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
-        if (cardArt != null) {
+        if (cardArt != null && cardArt.getTextureRegion() != null) {
             TextureRegion textureRegion = cardArt.getTextureRegion();
             if (CardImageRenderer.forgeArt == cardArt)
                 textureRegion.flip(false, true); // fix inverted
@@ -718,7 +719,7 @@ public abstract class GameStage extends Stage {
                         WorldStage.getInstance().loadPOI(poi);
                         WorldSave.getCurrentSave().autoSave();
                         Forge.clearTransitionScreen();
-                    }, Forge.takeScreenshot()))));
+                    }, ScreenUtil.getInstance().takeScreenshot()))));
                 }
             }, deathDuration);
         }//Spawn shouldn't be null

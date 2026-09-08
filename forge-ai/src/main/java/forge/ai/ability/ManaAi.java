@@ -147,6 +147,9 @@ public class ManaAi extends SpellAbilityAi {
 
         CardCollection manaSources = ComputerUtilMana.getAvailableManaSources(ai, true);
         int numManaSrcs = manaSources.size();
+        if (manaSources.contains(host) && ComputerUtilCost.isSacrificeSelfCost(sa.getRootAbility().getPayCosts())) {
+            numManaSrcs--;
+        }
         int manaReceived = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
         manaReceived *= sa.getParam("Produced").split(" ").length;
 

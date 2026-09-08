@@ -328,6 +328,9 @@ public class StaticEffect {
                 if (hasParam("CanBlockAmount")) {
                     affectedCard.removeCanBlockAdditional(getTimestamp());
                 }
+                if (hasParam("LethalDamageByPower")) {
+                    affectedCard.removeLethalDamageByPower(getTimestamp());
+                }
                 addCard(affectedPerLayer, StaticAbilityLayer.RULES, affectedCard);
             }
         }

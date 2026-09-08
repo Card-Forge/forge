@@ -9,10 +9,15 @@ import forge.assets.FSkinFont;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.gui.FThreads;
+import forge.gui.download.CdnUuidCache;
 import forge.gui.download.GuiDownloadFilteredCardImages;
+import forge.gui.download.ScryfallBulkDataSync;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.filters.ArchivedFormatSelect;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.*;
@@ -31,12 +36,19 @@ public class CardImageBrowserScreen extends FScreen {
     private static final float BTN_HEIGHT   = Math.round(Utils.AVG_FINGER_HEIGHT * 0.9f);
     private static final FSkinFont STAT_FONT = FSkinFont.get(16);
 
+    private final FScrollPane       scroller;
     private final FTextField        txtSearch;
     private final FComboBox<Object> cbxFormats;
     private final FLabel            lblTotal;
     private final FLabel            lblDownloaded;
     private final FLabel            lblMissing;
     private final FButton           btnDownload;
+    private final FButton           btnSyncBulkData;
+    private final FComboBox<String> cbxIndexLang;
+    private final FButton           btnSyncBulkDataLang;
+    private final FCheckBox         cbPreferLangForUnique;
+    private final FProgressBar      bulkSyncProgress;
+    private final FButton           btnClearCdnCache;
 
     private GameFormat   selectedFormat    = null;
     private String       selectedFormatText;
@@ -49,8 +61,57 @@ public class CardImageBrowserScreen extends FScreen {
     public CardImageBrowserScreen() {
         super(Forge.getLocalizer().getMessage("btnDownloadCardImages"));
 
+        scroller = add(new FScrollPane() {
+            @Override
+            protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+                float x = PADDING;
+                float y = PADDING;
+                float w = visibleWidth - 2 * PADDING;
+
+                txtSearch.setBounds(x, y, w, FIELD_HEIGHT);
+                y += FIELD_HEIGHT + PADDING;
+
+                cbxFormats.setBounds(x, y, w, FIELD_HEIGHT);
+                y += FIELD_HEIGHT + PADDING * 5;
+
+                lblTotal.setBounds(x, y, w, STAT_HEIGHT);
+                y += STAT_HEIGHT + PADDING;
+
+                lblDownloaded.setBounds(x, y, w, STAT_HEIGHT);
+                y += STAT_HEIGHT + PADDING;
+
+                lblMissing.setBounds(x, y, w, STAT_HEIGHT);
+                y += STAT_HEIGHT + PADDING * 5;
+
+                float btnW = Math.min(w * 0.6f, Utils.AVG_FINGER_HEIGHT * 4);
+                btnDownload.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
+                y += BTN_HEIGHT + PADDING;
+
+                btnSyncBulkData.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
+                y += BTN_HEIGHT + PADDING;
+
+                cbxIndexLang.setBounds(x, y, w, FIELD_HEIGHT);
+                y += FIELD_HEIGHT + PADDING;
+
+                btnSyncBulkDataLang.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
+                y += BTN_HEIGHT + PADDING;
+
+                float checkboxHeight = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
+                cbPreferLangForUnique.setBounds(x, y, w, checkboxHeight);
+                y += checkboxHeight + PADDING;
+
+                bulkSyncProgress.setBounds(x, y, w, STAT_HEIGHT * 0.8f);
+                y += STAT_HEIGHT * 0.8f + PADDING;
+
+                btnClearCdnCache.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
+                y += BTN_HEIGHT + PADDING;
+
+                return new ScrollBounds(visibleWidth, y);
+            }
+        });
+
         // ── Search text field ────────────────────────────────────────────────
-        txtSearch = add(new FTextField());
+        txtSearch = scroller.add(new FTextField());
         txtSearch.setFont(FSkinFont.get(12));
         txtSearch.setGhostText(Forge.getLocalizer().getMessage("lblSearch") + " " +
                 Forge.getLocalizer().getMessage("lblCards") + "...");
@@ -59,7 +120,7 @@ public class CardImageBrowserScreen extends FScreen {
         txtSearch.setChangedHandler(e -> scheduleStatsUpdate());
 
         // ── Format / Sets combo — same options as the deck-browser filter ────
-        cbxFormats = add(new FComboBox<>());
+        cbxFormats = scroller.add(new FComboBox<>());
         cbxFormats.setFont(FSkinFont.get(12));
         cbxFormats.addItem(Forge.getLocalizer().getMessage("lblAllSetsFormats"));
         for (GameFormat fmt : FModel.getFormats().getFilterList()) {
@@ -107,13 +168,52 @@ public class CardImageBrowserScreen extends FScreen {
         });
 
         // ── Stats labels ─────────────────────────────────────────────────────
-        lblTotal      = add(new FLabel.Builder().text("--").font(STAT_FONT).align(Align.center).build());
-        lblDownloaded = add(new FLabel.Builder().text("--").font(STAT_FONT).align(Align.center).build());
-        lblMissing    = add(new FLabel.Builder().text("--").font(STAT_FONT).align(Align.center).build());
+        lblTotal      = scroller.add(new FLabel.Builder().text("--").font(STAT_FONT).align(Align.center).build());
+        lblDownloaded = scroller.add(new FLabel.Builder().text("--").font(STAT_FONT).align(Align.center).build());
+        lblMissing    = scroller.add(new FLabel.Builder().text("--").font(STAT_FONT).align(Align.center).build());
 
         // ── Download button ──────────────────────────────────────────────────
-        btnDownload = add(new FButton(Forge.getLocalizer().getMessage("btnDownloadCardImages")));
+        btnDownload = scroller.add(new FButton(Forge.getLocalizer().getMessage("btnDownloadCardImages")));
         btnDownload.setCommand(e -> startDownload());
+
+        // ── Bulk data sync buttons ───────────────────────────────────────────
+        btnSyncBulkData = scroller.add(new FButton(Forge.getLocalizer().getMessage("btnSyncBulkCardData")));
+        btnSyncBulkData.setCommand(e -> startBulkSync(ScryfallBulkDataSync.BULK_TYPE_DEFAULT_CARDS, null, "English"));
+
+        final Map<String, String> cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
+        cbxIndexLang = scroller.add(new FComboBox<>());
+        cbxIndexLang.setFont(FSkinFont.get(12));
+        for (Map.Entry<String, String> entry : cardLangMapping.entrySet()) {
+            if (!"en".equalsIgnoreCase(entry.getValue())) {
+                cbxIndexLang.addItem(entry.getKey());
+            }
+        }
+        final String savedLangCode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+        cardLangMapping.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(savedLangCode))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .ifPresent(cbxIndexLang::setSelectedItem);
+
+        cbPreferLangForUnique = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("cbPreferLangForUniqueCards"),
+                FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS)));
+
+        btnSyncBulkDataLang = scroller.add(new FButton(Forge.getLocalizer().getMessage("btnSyncBulkCardDataLang")));
+        btnSyncBulkDataLang.setCommand(e -> {
+            String selectedLangName = cbxIndexLang.getSelectedItem();
+            String selectedLangCode = cardLangMapping.get(selectedLangName);
+            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG, selectedLangCode);
+            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS,
+                    String.valueOf(cbPreferLangForUnique.isSelected()));
+            FModel.getPreferences().save();
+            applyPreferredLanguageAvailability(selectedLangCode);
+            startBulkSync(ScryfallBulkDataSync.BULK_TYPE_ALL_CARDS, new HashSet<>(Arrays.asList("en", selectedLangCode)), selectedLangName);
+        });
+        bulkSyncProgress = scroller.add(new FProgressBar());
+
+        // ── Clear CDN cache button ─────────────────────────────────────────────
+        btnClearCdnCache = scroller.add(new FButton(Forge.getLocalizer().getMessage("btnClearCdnImageCache")));
+        btnClearCdnCache.setCommand(e -> clearCdnCache());
 
         // Run initial stats for "All cards, all sets" as soon as the screen opens
         scheduleStatsUpdate();
@@ -167,6 +267,100 @@ public class CardImageBrowserScreen extends FScreen {
     }
 
     // =========================================================================
+    //  Bulk data sync: resolve CDN links for every set at once
+    // =========================================================================
+
+    /** Opens the screen and immediately starts a bulk sync that's already been confirmed elsewhere (e.g. the first-run prompt). Safe to call from any thread. */
+    public static void openAndAutoStartBulkSync() {
+        FThreads.invokeInEdtLater(() -> {
+            CardImageBrowserScreen screen = new CardImageBrowserScreen();
+            Forge.openScreen(screen);
+            screen.runBulkSync(ScryfallBulkDataSync.BULK_TYPE_DEFAULT_CARDS, null, "English");
+        });
+    }
+
+    private void applyPreferredLanguageAvailability(String langCode) {
+        boolean preferForUnique = cbPreferLangForUnique.isSelected();
+        if (!preferForUnique || langCode == null || langCode.isEmpty() || "en".equalsIgnoreCase(langCode)) {
+            FModel.getMagicDb().setPreferredLanguageAvailability(null);
+        } else {
+            FModel.getMagicDb().setPreferredLanguageAvailability((setCode, cn) -> CdnUuidCache.isAvailableInLanguage(setCode, cn, langCode));
+        }
+    }
+
+    private void startBulkSync(String bulkDataType, Set<String> allowedLangs, String langLabel) {
+        // SOptionPane.showConfirmDialog() blocks its caller while the dialog renders on the EDT,
+        // so it must never be called directly from a tap handler (which runs on the EDT itself)
+        // -- that throws immediately and the whole method aborts before any UI update happens.
+        FThreads.invokeInBackgroundThread(() -> {
+            if (!SOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSyncBulkCardDataConfirm", ScryfallBulkDataSync.approxSizeLabel(bulkDataType)))) {
+                return;
+            }
+            runBulkSync(bulkDataType, allowedLangs, langLabel);
+        });
+    }
+
+    /** Runs the sync itself; always hops onto its own background thread, so it's safe to call from the EDT or not. */
+    private void runBulkSync(String bulkDataType, Set<String> allowedLangs, String langLabel) {
+        FThreads.invokeInBackgroundThread(() -> {
+            FThreads.invokeInEdtLater(() -> {
+                btnDownload.setEnabled(false);
+                btnSyncBulkData.setEnabled(false);
+                btnSyncBulkDataLang.setEnabled(false);
+                btnClearCdnCache.setEnabled(false);
+                bulkSyncProgress.reset();
+                bulkSyncProgress.setMaximum(100);
+                bulkSyncProgress.setShowETA(false);
+                bulkSyncProgress.setShowCount(false);
+                bulkSyncProgress.setDescription("Starting...");
+                bulkSyncProgress.setShowProgressTrail(true);
+            });
+
+            int setCount = ScryfallBulkDataSync.sync(bulkDataType, allowedLangs,
+                    (message, fraction) -> FThreads.invokeInEdtLater(() -> {
+                        bulkSyncProgress.setDescription(message);
+                        if (fraction >= 0) {
+                            bulkSyncProgress.setShowProgressTrail(false);
+                            bulkSyncProgress.setValue((int) Math.round(fraction * 100));
+                        } else {
+                            bulkSyncProgress.setShowProgressTrail(true);
+                        }
+                    }),
+                    () -> false);
+            FThreads.invokeInEdtLater(() -> {
+                btnDownload.setEnabled(true);
+                btnSyncBulkData.setEnabled(true);
+                btnSyncBulkDataLang.setEnabled(true);
+                btnClearCdnCache.setEnabled(true);
+                bulkSyncProgress.setShowProgressTrail(false);
+                if (setCount >= 0) {
+                    bulkSyncProgress.setValue(100);
+                    bulkSyncProgress.setDescription(Forge.getLocalizer().getMessage("lblBulkCardDataSynced") + " (" + setCount + " sets) - " + langLabel);
+                    scheduleStatsUpdate();
+                } else {
+                    bulkSyncProgress.setDescription("Bulk sync failed -- see log for details.");
+                }
+            });
+        });
+    }
+
+    // =========================================================================
+    //  CDN image lookup cache: clear
+    // =========================================================================
+
+    private void clearCdnCache() {
+        // Same EDT restriction as startBulkSync() -- must not call SOptionPane directly from a
+        // tap handler.
+        FThreads.invokeInBackgroundThread(() -> {
+            if (!SOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblClearCdnImageCacheConfirm"))) {
+                return;
+            }
+            CdnUuidCache.clearCache();
+            SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblCdnImageCacheCleared"));
+        });
+    }
+
+    // =========================================================================
     //  Helpers
     // =========================================================================
 
@@ -186,27 +380,7 @@ public class CardImageBrowserScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float x = PADDING;
-        float y = startY + PADDING;
-        float w = width - 2 * PADDING;
-
-        txtSearch.setBounds(x, y, w, FIELD_HEIGHT);
-        y += FIELD_HEIGHT + PADDING;
-
-        cbxFormats.setBounds(x, y, w, FIELD_HEIGHT);
-        y += FIELD_HEIGHT + PADDING * 5;
-
-        lblTotal.setBounds(x, y, w, STAT_HEIGHT);
-        y += STAT_HEIGHT + PADDING;
-
-        lblDownloaded.setBounds(x, y, w, STAT_HEIGHT);
-        y += STAT_HEIGHT + PADDING;
-
-        lblMissing.setBounds(x, y, w, STAT_HEIGHT);
-        y += STAT_HEIGHT + PADDING * 5;
-
-        float btnW = Math.min(w * 0.6f, Utils.AVG_FINGER_HEIGHT * 4);
-        btnDownload.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
+        scroller.setBounds(0, startY, width, height - startY);
     }
 
     // =========================================================================

@@ -559,7 +559,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             String name = "?";
             if (this.currentPlayer != null)
                 name = this.currentPlayer.getLobbyPlayerName();
-            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name);
+            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name, true);
         }
     }
 
