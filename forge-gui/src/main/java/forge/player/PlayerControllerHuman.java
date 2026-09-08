@@ -3889,7 +3889,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         }
         if (update instanceof YieldUpdate.SeedFromClient
-                || (update instanceof YieldUpdate.SetYieldPref u && u.pref() == FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+                || (update instanceof YieldUpdate.SetYieldPref u
+                        && u.pref() == FPref.YIELD_AUTO_PASS_NO_ACTIONS && Boolean.parseBoolean(u.value()))) {
             refreshAvailableActionsForPrompt();
         }
         tryAutoPassNow();
@@ -3897,9 +3898,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void setYieldPref(final FPref pref, final String value) {
-        // Dialog already wrote to FModel; APINA is the only pref whose toggle can flip mayAutoPass for a
-        // sitting prompt, and the budget field saves on every keystroke, so sweeping for the rest is waste
-        if (pref != FPref.YIELD_AUTO_PASS_NO_ACTIONS) return;
+        // Dialog already wrote to FModel; switching APINA on is the only change that can flip mayAutoPass
+        // for a sitting prompt, and the budget field saves on every keystroke, so sweeping else is waste
+        if (pref != FPref.YIELD_AUTO_PASS_NO_ACTIONS || !Boolean.parseBoolean(value)) return;
         refreshAvailableActionsForPrompt();
         tryAutoPassNow();
     }
