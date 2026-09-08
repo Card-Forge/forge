@@ -1,13 +1,35 @@
-# Crucible's Go build. Scoped to crucible/** so an upstream sync from
-# Card-Forge/forge never triggers it (ADR-0001).
+# Crucible's Go build.
+#
+# Triggered by Crucible's own code and by the upstream files Crucible reads --
+# and by nothing else, so unrelated upstream churn (forge-gui, the mobile
+# shells, upstream docs) never runs this job.
+#
+# The upstream paths are not optional. ADR-0001 requires the corpus checks to
+# run after every upstream sync, and says new card scripts are "immediately
+# visible to the corpus golden test". Both goldens under internal/ are derived
+# from res/cardsfolder and res/lists, and tools/javacycles measures ADR-0003's
+# 82-cycle premise from forge-game. A trigger that skipped them would make a
+# sync that breaks any of those three silent until the next Crucible push.
 name: Crucible Go
 
+# The two lists are duplicated on purpose: GitHub's workflow parser rejects
+# YAML anchors, so there is no way to write them once.
 on:
   push:
     branches: [master]
-    paths: ['crucible/**', '.github/workflows/crucible-go.yml']
+    paths:
+      - 'crucible/**'
+      - '.github/workflows/crucible-go.yml'
+      - 'forge-gui/res/cardsfolder/**'
+      - 'forge-gui/res/lists/TypeLists.txt'
+      - 'forge-game/src/main/java/**'
   pull_request:
-    paths: ['crucible/**', '.github/workflows/crucible-go.yml']
+    paths:
+      - 'crucible/**'
+      - '.github/workflows/crucible-go.yml'
+      - 'forge-gui/res/cardsfolder/**'
+      - 'forge-gui/res/lists/TypeLists.txt'
+      - 'forge-game/src/main/java/**'
 
 permissions:
   contents: read

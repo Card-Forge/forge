@@ -13,6 +13,10 @@ one symbol — `{W}`, `{2/U}`, `{G/P}`, `{S}`, `{X}` — described by a bitmask 
 Everything downstream reads that value: mana value, colour, the mana solver at M6, and the mana-health metrics
 ([`../../telemetry/metric-definitions.md`](../../telemetry/metric-definitions.md), MET-10 to MET-15).
 
+The golden in `internal/mana/testdata` is derived from `forge-gui/res/cardsfolder`, so `crucible-go.yml` triggers on
+that path as well as on `crucible/**`. An upstream sync that adds a mana symbol fails the corpus test on the sync
+itself, which is what [ADR-0001](../../adr/0001-fork-layout-and-upstream-sync.md) asks for.
+
 Java's is three classes and an iterator interface, because the parser is an `Iterator<ManaCostShard>` that the cost
 constructor drains. Go has one `Parse` function; the iterator carried no behaviour worth keeping.
 
@@ -57,10 +61,5 @@ before (PORT-6).
 
 ## Open questions
 
-- **The corpus tests do not run when the corpus changes.** `.github/workflows/crucible-go.yml` is scoped to
-  `crucible/**` so an upstream sync never triggers it ([ADR-0001](../../adr/0001-fork-layout-and-upstream-sync.md)), but
-  the golden in `internal/mana/testdata` is derived from `forge-gui/res/cardsfolder`. A sync that adds a mana symbol is
-  caught on the next push that touches `crucible/`, not on the sync itself. Widening the trigger contradicts ADR-0001
-  and needs a decision, not a workflow edit.
 - **Card scripts spell the same shard three ways** — `2/B`, `2B`, and `PRG` for `{R/G/P}`. All three parse, and the
   printed form is canonical, so the corpus golden shows exactly where the corpus is inconsistent.

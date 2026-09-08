@@ -16,6 +16,9 @@ with a bit test instead of a string comparison, millions of times per batch.
 Subtypes are open-ended — every creature type ever printed — so they stay strings, checked against a vocabulary loaded
 from `TypeLists.txt`. That vocabulary is also what makes `Time Lord` one subtype rather than two.
 
+Both that file and the card scripts are upstream inputs, so `crucible-go.yml` triggers on them and a sync that adds a
+type is caught by the corpus golden on the sync itself (see [`mana-cost.md`](mana-cost.md)).
+
 ## Deviations from Java
 
 | Deviation                                                                    | Reason                                                                                                                                                                                                          |
@@ -54,4 +57,3 @@ from `TypeLists.txt`. That vocabulary is also what makes `Time Lord` one subtype
   ([ADR-0011](../../adr/0011-card-corpus-scoping.md)) to answer at M2, when the cards are actually loaded.
 - **`Dungeon Master` parses as the core type `Dungeon` plus the unknown word `Master`.** Java does the same, because the
   multiword list has no entry for it. Pinned rather than fixed (PORT-7).
-- The corpus test's CI trigger has the same gap described in [`mana-cost.md`](mana-cost.md).
