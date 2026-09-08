@@ -45,7 +45,22 @@ jobs:
           plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
           plugins: 'code-review@claude-code-plugins'
           prompt: '/code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}'
-          claude_args: '--allowedTools "mcp__github_inline_comment__create_inline_comment"'
+          # --allowedTools replaces the default allowlist, it does not add to
+          # it. Listing only the comment tool left the review unable to read the
+          # diff it was reviewing: every run finished green with
+          # permission_denials_count between 1 and 11 and posted nothing, on
+          # every PR since this workflow was added.
+          #
+          # /code-review needs to read the change before it can comment on it —
+          # git for the diff, Read/Grep/Glob for the files around it, Task for
+          # the verify pass — and then the MCP tool to post.
+          #
+          # --debug names each denied tool in the log instead of only counting
+          # them. Keep it until a run shows zero denials, then trim this list to
+          # what the review actually used.
+          claude_args: >-
+            --debug
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Read,Grep,Glob,Bash(git:*),TodoWrite,Task"
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
 
