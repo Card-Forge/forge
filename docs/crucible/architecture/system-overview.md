@@ -43,7 +43,8 @@ a card it refuses — a wrong win rate across 100,000 games looks exactly as con
 
 ## What exists today
 
-**The decision and rule set is complete. The Go module exists and holds no engine code.**
+**The decision and rule set is complete. The Go module holds the value types the engine will be built on, and no engine
+code.**
 
 | Artefact           | Count | Command                                              |
 | ------------------ | ----: | ---------------------------------------------------- |
@@ -51,12 +52,13 @@ a card it refuses — a wrong win rate across 100,000 games looks exactly as con
 | Accepted ADRs      |    14 | `ls docs/crucible/adr/0*.md \| wc -l`                |
 | Guidelines         |     7 | `ls docs/crucible/guidelines/0*.md \| wc -l`         |
 | Design documents   |     4 | `ls docs/crucible/design/*-*.md \| wc -l`            |
-| Go files           |    14 | `find crucible -name '*.go' \| wc -l`                |
-| Go lines           | 1,050 | `find crucible -name '*.go' -exec cat {} + \| wc -l` |
+| Go files           |    34 | `find crucible -name '*.go' \| wc -l`                |
+| Go lines           | 3,964 | `find crucible -name '*.go' -exec cat {} + \| wc -l` |
 
-Those 14 files are `pkg/collect`, `pkg/javarand`, `tools/javacycles` and `tools/enginelint` — support code and build
-tooling. Nothing under `internal/` exists, so no card is parsed and no game runs. [`module-map.md`](module-map.md)
-carries the per-package detail.
+Those files are `pkg/collect`, `pkg/javarand`, `internal/mana`, `internal/cardtype`, `tools/javacycles`,
+`tools/enginelint` and `tools/docgate` — value types, support code, and build tooling. The two `internal/` packages
+parse the `ManaCost` and `Types` lines of every card script and nothing else: no card is compiled and no game runs.
+[`module-map.md`](module-map.md) carries the per-package detail.
 
 And what it is built on, inherited from upstream Forge:
 
@@ -145,7 +147,7 @@ to upstream and is not edited; anything that lands outside those paths is logged
 
 ## Invalidated by
 
-- `crucible/` gaining its first Go file — the "what exists today" section becomes wrong immediately
+- Any package landing under `crucible/` — the "what exists today" section becomes wrong immediately
 - Any milestone in the data flow table completing
 - A new top-level package that is not in [`module-map.md`](module-map.md)
 - Crucible acquiring a runtime dependency on the JVM, which would contradict the section above and require an ADR

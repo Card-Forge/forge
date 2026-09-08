@@ -146,6 +146,6 @@ mvn -U -B clean test          # CI runs this under Xvfb
 
 M0 done — 14 ADRs `Accepted`, 7 guidelines, 4 design docs, 6 DSL grammars.
 
-M1 in progress. Built: `pkg/collect`, `pkg/javarand` (bit-matches Java over the committed golden), `tools/javacycles`,
-`tools/enginelint`, `oracle-java`. Remaining: `internal/mana`, `internal/cardtype`, `tools/docgate`. Nothing under
-`internal/` exists yet. (Plan §5)
+M1 done — `pkg/collect`, `pkg/javarand` (bit-matches Java over the committed golden), `internal/mana`,
+`internal/cardtype` (both round-trip the whole card corpus), `tools/javacycles`, `tools/enginelint`, `tools/docgate`,
+`oracle-java`. Next: M2, `internal/carddb`. (Plan §5)

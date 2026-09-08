@@ -1,0 +1,858 @@
+0	{0}	0	C
+1	{1}	1	C
+1 2U 2R	{1}{2/U}{2/R}	5	UR
+1 B	{1}{B}	2	B
+1 B B	{1}{B}{B}	3	B
+1 B B B	{1}{B}{B}{B}	4	B
+1 B B B B	{1}{B}{B}{B}{B}	5	B
+1 B B B G G G	{1}{B}{B}{B}{G}{G}{G}	7	BG
+1 B B G	{1}{B}{B}{G}	4	BG
+1 B B R R	{1}{B}{B}{R}{R}	5	BR
+1 B BG G	{1}{B}{B/G}{G}	4	BG
+1 B G	{1}{B}{G}	3	BG
+1 B G G	{1}{B}{G}{G}	4	BG
+1 B G U	{1}{B}{G}{U}	4	UBG
+1 B R	{1}{B}{R}	3	BR
+1 B R G	{1}{B}{R}{G}	4	BRG
+1 B R R	{1}{B}{R}{R}	4	BR
+1 BG	{1}{B/G}	2	BG
+1 BG BG	{1}{B/G}{B/G}	3	BG
+1 BG BG BG	{1}{B/G}{B/G}{B/G}	4	BG
+1 BG R	{1}{B/G}{R}	3	BRG
+1 BP	{1}{B/P}	2	B
+1 BP BP	{1}{B/P}{B/P}	3	B
+1 BR	{1}{B/R}	2	BR
+1 BR BR	{1}{B/R}{B/R}	3	BR
+1 BR BR BR	{1}{B/R}{B/R}{B/R}	4	BR
+1 BR R RG	{1}{B/R}{R}{R/G}	4	BRG
+1 C	{1}{C}	2	C
+1 C G	{1}{C}{G}	3	G
+1 C R	{1}{C}{R}	3	R
+1 G	{1}{G}	2	G
+1 G G	{1}{G}{G}	3	G
+1 G G G	{1}{G}{G}{G}	4	G
+1 G G G G	{1}{G}{G}{G}{G}	5	G
+1 G G U	{1}{G}{G}{U}	4	UG
+1 G G W	{1}{G}{G}{W}	4	WG
+1 G G W W	{1}{G}{G}{W}{W}	5	WG
+1 G GU U	{1}{G}{G/U}{U}	4	UG
+1 G GWP W	{1}{G}{G/W/P}{W}	4	WG
+1 G U	{1}{G}{U}	3	UG
+1 G U R	{1}{G}{U}{R}	4	URG
+1 G U U	{1}{G}{U}{U}	4	UG
+1 G W	{1}{G}{W}	3	WG
+1 G W U	{1}{G}{W}{U}	4	WUG
+1 G W W	{1}{G}{W}{W}	4	WG
+1 GU	{1}{G/U}	2	UG
+1 GU GU	{1}{G/U}{G/U}	3	UG
+1 GW	{1}{G/W}	2	WG
+1 GW GW	{1}{G/W}{G/W}	3	WG
+1 GW GW GW	{1}{G/W}{G/W}{G/W}	4	WG
+1 R	{1}{R}	2	R
+1 R G	{1}{R}{G}	3	RG
+1 R G G	{1}{R}{G}{G}	4	RG
+1 R G W	{1}{R}{G}{W}	4	WRG
+1 R G W U	{1}{R}{G}{W}{U}	5	WURG
+1 R R	{1}{R}{R}	3	R
+1 R R G	{1}{R}{R}{G}	4	RG
+1 R R R	{1}{R}{R}{R}	4	R
+1 R R R R	{1}{R}{R}{R}{R}	5	R
+1 R R W	{1}{R}{R}{W}	4	WR
+1 R RWP W	{1}{R}{R/W/P}{W}	4	WR
+1 R W	{1}{R}{W}	3	WR
+1 R W B	{1}{R}{W}{B}	4	WBR
+1 R W W	{1}{R}{W}{W}	4	WR
+1 RG	{1}{R/G}	2	RG
+1 RG RG	{1}{R/G}{R/G}	3	RG
+1 RG RG RG	{1}{R/G}{R/G}{R/G}	4	RG
+1 RW	{1}{R/W}	2	WR
+1 RW RW	{1}{R/W}{R/W}	3	WR
+1 U	{1}{U}	2	U
+1 U B	{1}{U}{B}	3	UB
+1 U B B	{1}{U}{B}{B}	4	UB
+1 U B R	{1}{U}{B}{R}	4	UBR
+1 U R	{1}{U}{R}	3	UR
+1 U R W	{1}{U}{R}{W}	4	WUR
+1 U U	{1}{U}{U}	3	U
+1 U U B	{1}{U}{U}{B}	4	UB
+1 U U R	{1}{U}{U}{R}	4	UR
+1 U U R R	{1}{U}{U}{R}{R}	5	UR
+1 U U U	{1}{U}{U}{U}	4	U
+1 U U U U	{1}{U}{U}{U}{U}	5	U
+1 U UR R	{1}{U}{U/R}{R}	4	UR
+1 UB	{1}{U/B}	2	UB
+1 UB UB	{1}{U/B}{U/B}	3	UB
+1 UB UB G G	{1}{U/B}{U/B}{G}{G}	5	UBG
+1 UB UB UB	{1}{U/B}{U/B}{U/B}	4	UB
+1 UR	{1}{U/R}	2	UR
+1 UR UR	{1}{U/R}{U/R}	3	UR
+1 W	{1}{W}	2	W
+1 W B	{1}{W}{B}	3	WB
+1 W B B	{1}{W}{B}{B}	4	WB
+1 W B G	{1}{W}{B}{G}	4	WBG
+1 W U	{1}{W}{U}	3	WU
+1 W U B	{1}{W}{U}{B}	4	WUB
+1 W U B R G	{1}{W}{U}{B}{R}{G}	6	WUBRG
+1 W U R G	{1}{W}{U}{R}{G}	5	WURG
+1 W W	{1}{W}{W}	3	W
+1 W W B	{1}{W}{W}{B}	4	WB
+1 W W B B	{1}{W}{W}{B}{B}	5	WB
+1 W W U	{1}{W}{W}{U}	4	WU
+1 W W U U	{1}{W}{W}{U}{U}	5	WU
+1 W W W	{1}{W}{W}{W}	4	W
+1 W W W W	{1}{W}{W}{W}{W}	5	W
+1 WB	{1}{W/B}	2	WB
+1 WB WB	{1}{W/B}{W/B}	3	WB
+1 WB WB WB	{1}{W/B}{W/B}{W/B}	4	WB
+1 WP	{1}{W/P}	2	W
+1 WU	{1}{W/U}	2	WU
+1 WU WU	{1}{W/U}{W/U}	3	WU
+1 WU WU WU	{1}{W/U}{W/U}{W/U}	4	WU
+10	{10}	10	C
+10 B B	{10}{B}{B}	12	B
+10 G	{10}{G}	11	G
+10 G G	{10}{G}{G}	12	G
+10 G G G W W	{10}{G}{G}{G}{W}{W}	15	WG
+10 R R	{10}{R}{R}	12	R
+10 U U	{10}{U}{U}	12	U
+11	{11}	11	C
+12	{12}	12	C
+12 U U	{12}{U}{U}	14	U
+13	{13}	13	C
+13 B B	{13}{B}{B}	15	B
+14 G	{14}{G}	15	G
+15	{15}	15	C
+16	{16}	16	C
+2	{2}	2	C
+2 B	{2}{B}	3	B
+2 B B	{2}{B}{B}	4	B
+2 B B B	{2}{B}{B}{B}	5	B
+2 B B G	{2}{B}{B}{G}	5	BG
+2 B B G G	{2}{B}{B}{G}{G}	6	BG
+2 B B R	{2}{B}{B}{R}	5	BR
+2 B B R R	{2}{B}{B}{R}{R}	6	BR
+2 B B R R G G	{2}{B}{B}{R}{R}{G}{G}	8	BRG
+2 B G	{2}{B}{G}	4	BG
+2 B G G	{2}{B}{G}{G}	5	BG
+2 B G U	{2}{B}{G}{U}	5	UBG
+2 B R	{2}{B}{R}	4	BR
+2 B R G	{2}{B}{R}{G}	5	BRG
+2 B R R	{2}{B}{R}{R}	5	BR
+2 B U	{2}{B}{U}	4	UB
+2 BG	{2}{B/G}	3	BG
+2 BG BG	{2}{B/G}{B/G}	4	BG
+2 BG BG BG	{2}{B/G}{B/G}{B/G}	5	BG
+2 BR	{2}{B/R}	3	BR
+2 BR BR	{2}{B/R}{B/R}	4	BR
+2 C	{2}{C}	3	C
+2 C C	{2}{C}{C}	4	C
+2 G	{2}{G}	3	G
+2 G B	{2}{G}{B}	4	BG
+2 G G	{2}{G}{G}	4	G
+2 G G G	{2}{G}{G}{G}	5	G
+2 G G G G	{2}{G}{G}{G}{G}	6	G
+2 G G U	{2}{G}{G}{U}	5	UG
+2 G G U U	{2}{G}{G}{U}{U}	6	UG
+2 G G W	{2}{G}{G}{W}	5	WG
+2 G G W W	{2}{G}{G}{W}{W}	6	WG
+2 G G W W U U	{2}{G}{G}{W}{W}{U}{U}	8	WUG
+2 G GUP U	{2}{G}{G/U/P}{U}	5	UG
+2 G R	{2}{G}{R}	4	RG
+2 G U	{2}{G}{U}	4	UG
+2 G U R	{2}{G}{U}{R}	5	URG
+2 G U U	{2}{G}{U}{U}	5	UG
+2 G W	{2}{G}{W}	4	WG
+2 G W U	{2}{G}{W}{U}	5	WUG
+2 G W W	{2}{G}{W}{W}	5	WG
+2 GU	{2}{G/U}	3	UG
+2 GU GU	{2}{G/U}{G/U}	4	UG
+2 GU GU GU	{2}{G/U}{G/U}{G/U}	5	UG
+2 GU W	{2}{G/U}{W}	4	WUG
+2 GW	{2}{G/W}	3	WG
+2 GW GW	{2}{G/W}{G/W}	4	WG
+2 GW GW GW	{2}{G/W}{G/W}{G/W}	5	WG
+2 R	{2}{R}	3	R
+2 R B	{2}{R}{B}	4	BR
+2 R G	{2}{R}{G}	4	RG
+2 R G W	{2}{R}{G}{W}	5	WRG
+2 R GW	{2}{R}{G/W}	4	WRG
+2 R PRG G	{2}{R}{R/G/P}{G}	5	RG
+2 R R	{2}{R}{R}	4	R
+2 R R G	{2}{R}{R}{G}	5	RG
+2 R R G G	{2}{R}{R}{G}{G}	6	RG
+2 R R G G W W	{2}{R}{R}{G}{G}{W}{W}	8	WRG
+2 R R R	{2}{R}{R}{R}	5	R
+2 R R R G	{2}{R}{R}{R}{G}	6	RG
+2 R R R R	{2}{R}{R}{R}{R}	6	R
+2 R R W	{2}{R}{R}{W}	5	WR
+2 R R W W	{2}{R}{R}{W}{W}	6	WR
+2 R R W W B B	{2}{R}{R}{W}{W}{B}{B}	8	WBR
+2 R W	{2}{R}{W}	4	WR
+2 R W B	{2}{R}{W}{B}	5	WBR
+2 R W W	{2}{R}{W}{W}	5	WR
+2 RG	{2}{R/G}	3	RG
+2 RG RG	{2}{R/G}{R/G}	4	RG
+2 RG U	{2}{R/G}{U}	4	URG
+2 RW	{2}{R/W}	3	WR
+2 RW G	{2}{R/W}{G}	4	WRG
+2 RW RW	{2}{R/W}{R/W}	4	WR
+2 RW RW RW	{2}{R/W}{R/W}{R/W}	5	WR
+2 U	{2}{U}	3	U
+2 U B	{2}{U}{B}	4	UB
+2 U B B	{2}{U}{B}{B}	5	UB
+2 U B R	{2}{U}{B}{R}	5	UBR
+2 U R	{2}{U}{R}	4	UR
+2 U R W	{2}{U}{R}{W}	5	WUR
+2 U U	{2}{U}{U}	4	U
+2 U U B	{2}{U}{U}{B}	5	UB
+2 U U B B	{2}{U}{U}{B}{B}	6	UB
+2 U U B B R R	{2}{U}{U}{B}{B}{R}{R}	8	UBR
+2 U U R	{2}{U}{U}{R}	5	UR
+2 U U R R	{2}{U}{U}{R}{R}	6	UR
+2 U U U	{2}{U}{U}{U}	5	U
+2 U U U U	{2}{U}{U}{U}{U}	6	U
+2 UB	{2}{U/B}	3	UB
+2 UB B BR	{2}{U/B}{B}{B/R}	5	UBR
+2 UB UB	{2}{U/B}{U/B}	4	UB
+2 UB UB UB	{2}{U/B}{U/B}{U/B}	5	UB
+2 UP	{2}{U/P}	3	U
+2 UP U	{2}{U/P}{U}	4	U
+2 UR	{2}{U/R}	3	UR
+2 UR B	{2}{U/R}{B}	4	UBR
+2 UR UR	{2}{U/R}{U/R}	4	UR
+2 W	{2}{W}	3	W
+2 W B	{2}{W}{B}	4	WB
+2 W B B	{2}{W}{B}{B}	5	WB
+2 W B G	{2}{W}{B}{G}	5	WBG
+2 W G	{2}{W}{G}	4	WG
+2 W U	{2}{W}{U}	4	WU
+2 W U B	{2}{W}{U}{B}	5	WUB
+2 W U B R G	{2}{W}{U}{B}{R}{G}	7	WUBRG
+2 W U U	{2}{W}{U}{U}	5	WU
+2 W U U B	{2}{W}{U}{U}{B}	6	WUB
+2 W W	{2}{W}{W}	4	W
+2 W W B	{2}{W}{W}{B}	5	WB
+2 W W B B	{2}{W}{W}{B}{B}	6	WB
+2 W W U	{2}{W}{W}{U}	5	WU
+2 W W U U	{2}{W}{W}{U}{U}	6	WU
+2 W W U U B B	{2}{W}{W}{U}{U}{B}{B}	8	WUB
+2 W W W	{2}{W}{W}{W}	5	W
+2 W W W W	{2}{W}{W}{W}{W}	6	W
+2 W WB B	{2}{W}{W/B}{B}	5	WB
+2 WB	{2}{W/B}	3	WB
+2 WB U	{2}{W/B}{U}	4	WUB
+2 WB WB	{2}{W/B}{W/B}	4	WB
+2 WB WB WB	{2}{W/B}{W/B}{W/B}	5	WB
+2 WP	{2}{W/P}	3	W
+2 WU	{2}{W/U}	3	WU
+2 WU WU	{2}{W/U}{W/U}	4	WU
+2 X G	{X}{2}{G}	3	G
+2 X R	{X}{2}{R}	3	R
+2/B 2/R 2/G	{2/B}{2/R}{2/G}	6	BRG
+2B 2B 2B	{2/B}{2/B}{2/B}	6	B
+2B 2G 2U	{2/B}{2/G}{2/U}	6	UBG
+2G 2G	{2/G}{2/G}	4	G
+2G 2G 2G	{2/G}{2/G}{2/G}	6	G
+2G 2U 2R	{2/G}{2/U}{2/R}	6	URG
+2R 2R 2R	{2/R}{2/R}{2/R}	6	R
+2R 2W 2B	{2/R}{2/W}{2/B}	6	WBR
+2U 2R 2W	{2/U}{2/R}{2/W}	6	WUR
+2U 2U 2U	{2/U}{2/U}{2/U}	6	U
+2W 2B 2G	{2/W}{2/B}{2/G}	6	WBG
+2W 2U 2B 2R 2G	{2/W}{2/U}{2/B}{2/R}{2/G}	10	WUBRG
+2W 2W 2W	{2/W}{2/W}{2/W}	6	W
+3	{3}	3	C
+3 B	{3}{B}	4	B
+3 B B	{3}{B}{B}	5	B
+3 B B B	{3}{B}{B}{B}	6	B
+3 B B B B	{3}{B}{B}{B}{B}	7	B
+3 B B G	{3}{B}{B}{G}	6	BG
+3 B B R	{3}{B}{B}{R}	6	BR
+3 B B R R	{3}{B}{B}{R}{R}	7	BR
+3 B G	{3}{B}{G}	5	BG
+3 B G U	{3}{B}{G}{U}	6	UBG
+3 B R	{3}{B}{R}	5	BR
+3 B R G	{3}{B}{R}{G}	6	BRG
+3 B R R	{3}{B}{R}{R}	6	BR
+3 BG	{3}{B/G}	4	BG
+3 BG BG	{3}{B/G}{B/G}	5	BG
+3 BG BG BG	{3}{B/G}{B/G}{B/G}	6	BG
+3 BG R	{3}{B/G}{R}	5	BRG
+3 BR BR	{3}{B/R}{B/R}	5	BR
+3 C	{3}{C}	4	C
+3 C C	{3}{C}{C}	5	C
+3 C C C	{3}{C}{C}{C}	6	C
+3 G	{3}{G}	4	G
+3 G G	{3}{G}{G}	5	G
+3 G G G	{3}{G}{G}{G}	6	G
+3 G G G G	{3}{G}{G}{G}{G}	7	G
+3 G G GP GP	{3}{G}{G}{G/P}{G/P}	7	G
+3 G G U U	{3}{G}{G}{U}{U}	7	UG
+3 G G W	{3}{G}{G}{W}	6	WG
+3 G G W W	{3}{G}{G}{W}{W}	7	WG
+3 G U	{3}{G}{U}	5	UG
+3 G U R	{3}{G}{U}{R}	6	URG
+3 G U U	{3}{G}{U}{U}	6	UG
+3 G U W	{3}{G}{U}{W}	6	WUG
+3 G W	{3}{G}{W}	5	WG
+3 G W U	{3}{G}{W}{U}	6	WUG
+3 G W U B	{3}{G}{W}{U}{B}	7	WUBG
+3 G W W	{3}{G}{W}{W}	6	WG
+3 GP	{3}{G/P}	4	G
+3 GU	{3}{G/U}	4	UG
+3 GU GU	{3}{G/U}{G/U}	5	UG
+3 GU GU GU	{3}{G/U}{G/U}{G/U}	6	UG
+3 GW	{3}{G/W}	4	WG
+3 GW GW	{3}{G/W}{G/W}	5	WG
+3 R	{3}{R}	4	R
+3 R G	{3}{R}{G}	5	RG
+3 R G G	{3}{R}{G}{G}	6	RG
+3 R G W	{3}{R}{G}{W}	6	WRG
+3 R R	{3}{R}{R}	5	R
+3 R R G	{3}{R}{R}{G}	6	RG
+3 R R G G	{3}{R}{R}{G}{G}	7	RG
+3 R R R	{3}{R}{R}{R}	6	R
+3 R R R R	{3}{R}{R}{R}{R}	7	R
+3 R R W	{3}{R}{R}{W}	6	WR
+3 R RW W	{3}{R}{R/W}{W}	6	WR
+3 R W	{3}{R}{W}	5	WR
+3 R W B	{3}{R}{W}{B}	6	WBR
+3 R W W	{3}{R}{W}{W}	6	WR
+3 RG	{3}{R/G}	4	RG
+3 RG RG	{3}{R/G}{R/G}	5	RG
+3 RP	{3}{R/P}	4	R
+3 RP RP	{3}{R/P}{R/P}	5	R
+3 RW	{3}{R/W}	4	WR
+3 RW RW	{3}{R/W}{R/W}	5	WR
+3 U	{3}{U}	4	U
+3 U B	{3}{U}{B}	5	UB
+3 U B B	{3}{U}{B}{B}	6	UB
+3 U B R	{3}{U}{B}{R}	6	UBR
+3 U R	{3}{U}{R}	5	UR
+3 U R R	{3}{U}{R}{R}	6	UR
+3 U R W	{3}{U}{R}{W}	6	WUR
+3 U U	{3}{U}{U}	5	U
+3 U U B	{3}{U}{U}{B}	6	UB
+3 U U B B	{3}{U}{U}{B}{B}	7	UB
+3 U U R R	{3}{U}{U}{R}{R}	7	UR
+3 U U U	{3}{U}{U}{U}	6	U
+3 UB	{3}{U/B}	4	UB
+3 UB UB	{3}{U/B}{U/B}	5	UB
+3 UB UB UB	{3}{U/B}{U/B}{U/B}	6	UB
+3 UP	{3}{U/P}	4	U
+3 UR	{3}{U/R}	4	UR
+3 UR B	{3}{U/R}{B}	5	UBR
+3 UR UR	{3}{U/R}{U/R}	5	UR
+3 UR UR UR	{3}{U/R}{U/R}{U/R}	6	UR
+3 W	{3}{W}	4	W
+3 W B	{3}{W}{B}	5	WB
+3 W B B	{3}{W}{B}{B}	6	WB
+3 W B G	{3}{W}{B}{G}	6	WBG
+3 W G	{3}{W}{G}	5	WG
+3 W R	{3}{W}{R}	5	WR
+3 W U	{3}{W}{U}	5	WU
+3 W U B	{3}{W}{U}{B}	6	WUB
+3 W U B R G	{3}{W}{U}{B}{R}{G}	8	WUBRG
+3 W U U	{3}{W}{U}{U}	6	WU
+3 W W	{3}{W}{W}	5	W
+3 W W B B	{3}{W}{W}{B}{B}	7	WB
+3 W W U	{3}{W}{W}{U}	6	WU
+3 W W U U	{3}{W}{W}{U}{U}	7	WU
+3 W W W	{3}{W}{W}{W}	6	W
+3 W W W W	{3}{W}{W}{W}{W}	7	W
+3 WB	{3}{W/B}	4	WB
+3 WB WB	{3}{W/B}{W/B}	5	WB
+3 WB WB WB	{3}{W/B}{W/B}{W/B}	6	WB
+3 WP WP	{3}{W/P}{W/P}	5	W
+3 WU	{3}{W/U}	4	WU
+3 WU WU	{3}{W/U}{W/U}	5	WU
+3 WU WU WU	{3}{W/U}{W/U}{W/U}	6	WU
+3 X G	{X}{3}{G}	4	G
+4	{4}	4	C
+4 B	{4}{B}	5	B
+4 B B	{4}{B}{B}	6	B
+4 B B B	{4}{B}{B}{B}	7	B
+4 B B B B	{4}{B}{B}{B}{B}	8	B
+4 B B G G	{4}{B}{B}{G}{G}	8	BG
+4 B B R	{4}{B}{B}{R}	7	BR
+4 B B R R	{4}{B}{B}{R}{R}	8	BR
+4 B BP	{4}{B}{B/P}	6	B
+4 B G	{4}{B}{G}	6	BG
+4 B G U	{4}{B}{G}{U}	7	UBG
+4 B R	{4}{B}{R}	6	BR
+4 B R G	{4}{B}{R}{G}	7	BRG
+4 B R R	{4}{B}{R}{R}	7	BR
+4 B R R G	{4}{B}{R}{R}{G}	8	BRG
+4 BG	{4}{B/G}	5	BG
+4 BG BG	{4}{B/G}{B/G}	6	BG
+4 BG BG BG	{4}{B/G}{B/G}{B/G}	7	BG
+4 BP	{4}{B/P}	5	B
+4 BP BP BP	{4}{B/P}{B/P}{B/P}	7	B
+4 BR	{4}{B/R}	5	BR
+4 BR BR	{4}{B/R}{B/R}	6	BR
+4 C	{4}{C}	5	C
+4 C C	{4}{C}{C}	6	C
+4 G	{4}{G}	5	G
+4 G G	{4}{G}{G}	6	G
+4 G G G	{4}{G}{G}{G}	7	G
+4 G G G G	{4}{G}{G}{G}{G}	8	G
+4 G G U	{4}{G}{G}{U}	7	UG
+4 G G W W	{4}{G}{G}{W}{W}	8	WG
+4 G U	{4}{G}{U}	6	UG
+4 G U R	{4}{G}{U}{R}	7	URG
+4 G W	{4}{G}{W}	6	WG
+4 G W U	{4}{G}{W}{U}	7	WUG
+4 G W W U	{4}{G}{W}{W}{U}	8	WUG
+4 GP GP	{4}{G/P}{G/P}	6	G
+4 GU GU	{4}{G/U}{G/U}	6	UG
+4 GU GU GU	{4}{G/U}{G/U}{G/U}	7	UG
+4 GW	{4}{G/W}	5	WG
+4 GW GW	{4}{G/W}{G/W}	6	WG
+4 R	{4}{R}	5	R
+4 R G	{4}{R}{G}	6	RG
+4 R G G W	{4}{R}{G}{G}{W}	8	WRG
+4 R G W	{4}{R}{G}{W}	7	WRG
+4 R R	{4}{R}{R}	6	R
+4 R R G	{4}{R}{R}{G}	7	RG
+4 R R G G	{4}{R}{R}{G}{G}	8	RG
+4 R R R	{4}{R}{R}{R}	7	R
+4 R R R R	{4}{R}{R}{R}{R}	8	R
+4 R R W	{4}{R}{R}{W}	7	WR
+4 R R W W	{4}{R}{R}{W}{W}	8	WR
+4 R W	{4}{R}{W}	6	WR
+4 R W B	{4}{R}{W}{B}	7	WBR
+4 R W W	{4}{R}{W}{W}	7	WR
+4 RG	{4}{R/G}	5	RG
+4 RG RG	{4}{R/G}{R/G}	6	RG
+4 RG RG RG	{4}{R/G}{R/G}{R/G}	7	RG
+4 RP	{4}{R/P}	5	R
+4 RP RP	{4}{R/P}{R/P}	6	R
+4 RW RW	{4}{R/W}{R/W}	6	WR
+4 U	{4}{U}	5	U
+4 U B	{4}{U}{B}	6	UB
+4 U B B R	{4}{U}{B}{B}{R}	8	UBR
+4 U B R	{4}{U}{B}{R}	7	UBR
+4 U G	{4}{U}{G}	6	UG
+4 U R	{4}{U}{R}	6	UR
+4 U R R	{4}{U}{R}{R}	7	UR
+4 U R W	{4}{U}{R}{W}	7	WUR
+4 U U	{4}{U}{U}	6	U
+4 U U U	{4}{U}{U}{U}	7	U
+4 U U U U	{4}{U}{U}{U}{U}	8	U
+4 U W	{4}{U}{W}	6	WU
+4 UB	{4}{U/B}	5	UB
+4 UB UB	{4}{U/B}{U/B}	6	UB
+4 UR UR	{4}{U/R}{U/R}	6	UR
+4 W	{4}{W}	5	W
+4 W B	{4}{W}{B}	6	WB
+4 W B B	{4}{W}{B}{B}	7	WB
+4 W B G	{4}{W}{B}{G}	7	WBG
+4 W U	{4}{W}{U}	6	WU
+4 W U B	{4}{W}{U}{B}	7	WUB
+4 W U B R G	{4}{W}{U}{B}{R}{G}	9	WUBRG
+4 W U U B	{4}{W}{U}{U}{B}	8	WUB
+4 W W	{4}{W}{W}	6	W
+4 W W B B	{4}{W}{W}{B}{B}	8	WB
+4 W W U	{4}{W}{W}{U}	7	WU
+4 W W W	{4}{W}{W}{W}	7	W
+4 WB WB	{4}{W/B}{W/B}	6	WB
+4 WB WB WB	{4}{W/B}{W/B}{W/B}	7	WB
+4 WU	{4}{W/U}	5	WU
+4 WU WU	{4}{W/U}{W/U}	6	WU
+4 WU WU WU WU	{4}{W/U}{W/U}{W/U}{W/U}	8	WU
+5	{5}	5	C
+5 B	{5}{B}	6	B
+5 B B	{5}{B}{B}	7	B
+5 B B B	{5}{B}{B}{B}	8	B
+5 B G	{5}{B}{G}	7	BG
+5 B G U	{5}{B}{G}{U}	8	UBG
+5 B R	{5}{B}{R}	7	BR
+5 B R G	{5}{B}{R}{G}	8	BRG
+5 BG BG	{5}{B/G}{B/G}	7	BG
+5 BR	{5}{B/R}	6	BR
+5 BR BR	{5}{B/R}{B/R}	7	BR
+5 BR BR BR	{5}{B/R}{B/R}{B/R}	8	BR
+5 C	{5}{C}	6	C
+5 C C	{5}{C}{C}	7	C
+5 G	{5}{G}	6	G
+5 G G	{5}{G}{G}	7	G
+5 G G G	{5}{G}{G}{G}	8	G
+5 G U	{5}{G}{U}	7	UG
+5 G U R	{5}{G}{U}{R}	8	URG
+5 G U U	{5}{G}{U}{U}	8	UG
+5 G W	{5}{G}{W}	7	WG
+5 GU GU	{5}{G/U}{G/U}	7	UG
+5 R	{5}{R}	6	R
+5 R G	{5}{R}{G}	7	RG
+5 R G W	{5}{R}{G}{W}	8	WRG
+5 R R	{5}{R}{R}	7	R
+5 R R R	{5}{R}{R}{R}	8	R
+5 R W	{5}{R}{W}	7	WR
+5 R W B	{5}{R}{W}{B}	8	WBR
+5 RG	{5}{R/G}	6	RG
+5 RG RG	{5}{R/G}{R/G}	7	RG
+5 U	{5}{U}	6	U
+5 U B	{5}{U}{B}	7	UB
+5 U B B	{5}{U}{B}{B}	8	UB
+5 U B R	{5}{U}{B}{R}	8	UBR
+5 U G	{5}{U}{G}	7	UG
+5 U R	{5}{U}{R}	7	UR
+5 U U	{5}{U}{U}	7	U
+5 U U U	{5}{U}{U}{U}	8	U
+5 U U U U	{5}{U}{U}{U}{U}	9	U
+5 UB	{5}{U/B}	6	UB
+5 UB UB	{5}{U/B}{U/B}	7	UB
+5 UR UR	{5}{U/R}{U/R}	7	UR
+5 W	{5}{W}	6	W
+5 W B	{5}{W}{B}	7	WB
+5 W B G	{5}{W}{B}{G}	8	WBG
+5 W U	{5}{W}{U}	7	WU
+5 W U B	{5}{W}{U}{B}	8	WUB
+5 W U B R G	{5}{W}{U}{B}{R}{G}	10	WUBRG
+5 W W	{5}{W}{W}	7	W
+5 W W U	{5}{W}{W}{U}	8	WU
+5 W W W	{5}{W}{W}{W}	8	W
+6	{6}	6	C
+6 B	{6}{B}	7	B
+6 B B	{6}{B}{B}	8	B
+6 B B B	{6}{B}{B}{B}	9	B
+6 B G	{6}{B}{G}	8	BG
+6 B R	{6}{B}{R}	8	BR
+6 C	{6}{C}	7	C
+6 C C	{6}{C}{C}	8	C
+6 G	{6}{G}	7	G
+6 G G	{6}{G}{G}	8	G
+6 G G G	{6}{G}{G}{G}	9	G
+6 G W	{6}{G}{W}	8	WG
+6 R	{6}{R}	7	R
+6 R G	{6}{R}{G}	8	RG
+6 R G W	{6}{R}{G}{W}	9	WRG
+6 R R	{6}{R}{R}	8	R
+6 R R R	{6}{R}{R}{R}	9	R
+6 U	{6}{U}	7	U
+6 U B	{6}{U}{B}	8	UB
+6 U G	{6}{U}{G}	8	UG
+6 U R	{6}{U}{R}	8	UR
+6 U U	{6}{U}{U}	8	U
+6 U U U	{6}{U}{U}{U}	9	U
+6 W	{6}{W}	7	W
+6 W B	{6}{W}{B}	8	WB
+6 W U	{6}{W}{U}	8	WU
+6 W W	{6}{W}{W}	8	W
+6 W W W	{6}{W}{W}{W}	9	W
+7	{7}	7	C
+7 B	{7}{B}	8	B
+7 B B	{7}{B}{B}	9	B
+7 B B B	{7}{B}{B}{B}	10	B
+7 B G	{7}{B}{G}	9	BG
+7 G	{7}{G}	8	G
+7 G G	{7}{G}{G}	9	G
+7 G G G	{7}{G}{G}{G}	10	G
+7 R	{7}{R}	8	R
+7 R R	{7}{R}{R}	9	R
+7 R R R	{7}{R}{R}{R}	10	R
+7 U	{7}{U}	8	U
+7 U U	{7}{U}{U}	9	U
+7 U U U	{7}{U}{U}{U}	10	U
+7 W	{7}{W}	8	W
+7 W U	{7}{W}{U}	9	WU
+7 W W	{7}{W}{W}	9	W
+7 W W W	{7}{W}{W}{W}	10	W
+8	{8}	8	C
+8 B	{8}{B}	9	B
+8 B B B	{8}{B}{B}{B}	11	B
+8 B B G G	{8}{B}{B}{G}{G}	12	BG
+8 B B R	{8}{B}{B}{R}	11	BR
+8 C C	{8}{C}{C}	10	C
+8 G	{8}{G}	9	G
+8 G G	{8}{G}{G}	10	G
+8 G G G	{8}{G}{G}{G}	11	G
+8 R	{8}{R}	9	R
+8 R R	{8}{R}{R}	10	R
+8 U B	{8}{U}{B}	10	UB
+8 U R	{8}{U}{R}	10	UR
+8 U U	{8}{U}{U}	10	U
+8 U U U	{8}{U}{U}{U}	11	U
+8 U U U U	{8}{U}{U}{U}{U}	12	U
+8 W W	{8}{W}{W}	10	W
+9	{9}	9	C
+9 B	{9}{B}	10	B
+9 C C C	{9}{C}{C}{C}	12	C
+9 R	{9}{R}	10	R
+B	{B}	1	B
+B B	{B}{B}	2	B
+B B B	{B}{B}{B}	3	B
+B B B B	{B}{B}{B}{B}	4	B
+B B B B B	{B}{B}{B}{B}{B}	5	B
+B B B B B B	{B}{B}{B}{B}{B}{B}	6	B
+B B G	{B}{B}{G}	3	BG
+B B G G	{B}{B}{G}{G}	4	BG
+B B G G G U U	{B}{B}{G}{G}{G}{U}{U}	7	UBG
+B B R	{B}{B}{R}	3	BR
+B B R R	{B}{B}{R}{R}	4	BR
+B B R R R G G	{B}{B}{R}{R}{R}{G}{G}	7	BRG
+B BG G	{B}{B/G}{G}	3	BG
+B G	{B}{G}	2	BG
+B G G	{B}{G}{G}	3	BG
+B G U	{B}{G}{U}	3	UBG
+B R	{B}{R}	2	BR
+B R G	{B}{R}{G}	3	BRG
+B R G W	{B}{R}{G}{W}	4	WBRG
+B R R	{B}{R}{R}	3	BR
+BG	{B/G}	1	BG
+BG BG	{B/G}{B/G}	2	BG
+BG BG BG	{B/G}{B/G}{B/G}	3	BG
+BG BG BG BG	{B/G}{B/G}{B/G}{B/G}	4	BG
+BG BG BG BG BG	{B/G}{B/G}{B/G}{B/G}{B/G}	5	BG
+BG R	{B/G}{R}	2	BRG
+BP	{B/P}	1	B
+BR	{B/R}	1	BR
+BR BR	{B/R}{B/R}	2	BR
+BR BR BR	{B/R}{B/R}{B/R}	3	BR
+BR BR BR BR	{B/R}{B/R}{B/R}{B/R}	4	BR
+BR BR BR BR BR	{B/R}{B/R}{B/R}{B/R}{B/R}	5	BR
+BR WB	{B/R}{W/B}	2	WBR
+C	{C}	1	C
+C W U B R G	{C}{W}{U}{B}{R}{G}	6	WUBRG
+CW CU CB CR CG	{C/W}{C/U}{C/B}{C/R}{C/G}	5	WUBRG
+G	{G}	1	G
+G G	{G}{G}	2	G
+G G G	{G}{G}{G}	3	G
+G G G G G	{G}{G}{G}{G}{G}	5	G
+G G G G G G	{G}{G}{G}{G}{G}{G}	6	G
+G G G G G G G G	{G}{G}{G}{G}{G}{G}{G}{G}	8	G
+G G G U U U	{G}{G}{G}{U}{U}{U}	6	UG
+G G G W W W	{G}{G}{G}{W}{W}{W}	6	WG
+G G U	{G}{G}{U}	3	UG
+G G U U	{G}{G}{U}{U}	4	UG
+G G U U U R R	{G}{G}{U}{U}{U}{R}{R}	7	URG
+G G W	{G}{G}{W}	3	WG
+G G W W	{G}{G}{W}{W}	4	WG
+G G W W W U U	{G}{G}{W}{W}{W}{U}{U}	7	WUG
+G GU U	{G}{G/U}{U}	3	UG
+G GW W	{G}{G/W}{W}	3	WG
+G U	{G}{U}	2	UG
+G U R	{G}{U}{R}	3	URG
+G U U	{G}{U}{U}	3	UG
+G W	{G}{W}	2	WG
+G W U	{G}{W}{U}	3	WUG
+G W U B	{G}{W}{U}{B}	4	WUBG
+G W W	{G}{W}{W}	3	WG
+GP	{G/P}	1	G
+GU	{G/U}	1	UG
+GU GU	{G/U}{G/U}	2	UG
+GU GU GU	{G/U}{G/U}{G/U}	3	UG
+GU GU GU GU	{G/U}{G/U}{G/U}{G/U}	4	UG
+GU GU GU GU GU	{G/U}{G/U}{G/U}{G/U}{G/U}	5	UG
+GU W	{G/U}{W}	2	WUG
+GW	{G/W}	1	WG
+GW GU BG RG	{G/W}{G/U}{B/G}{R/G}	4	WUBRG
+GW GW	{G/W}{G/W}	2	WG
+GW GW GW	{G/W}{G/W}{G/W}	3	WG
+GW GW GW GW	{G/W}{G/W}{G/W}{G/W}	4	WG
+GW GW GW GW GW	{G/W}{G/W}{G/W}{G/W}{G/W}	5	WG
+GW W WU	{G/W}{W}{W/U}	3	WUG
+R	{R}	1	R
+R G	{R}{G}	2	RG
+R G W	{R}{G}{W}	3	WRG
+R G W U	{R}{G}{W}{U}	4	WURG
+R R	{R}{R}	2	R
+R R G	{R}{R}{G}	3	RG
+R R G G	{R}{R}{G}{G}	4	RG
+R R G G G W W	{R}{R}{G}{G}{G}{W}{W}	7	WRG
+R R R	{R}{R}{R}	3	R
+R R R R	{R}{R}{R}{R}	4	R
+R R W W	{R}{R}{W}{W}	4	WR
+R R W W W B B	{R}{R}{W}{W}{W}{B}{B}	7	WBR
+R RW W	{R}{R/W}{W}	3	WR
+R W	{R}{W}	2	WR
+R W B	{R}{W}{B}	3	WBR
+R W U	{R}{W}{U}	3	WUR
+R W W	{R}{W}{W}	3	WR
+RG	{R/G}	1	RG
+RG G GW	{R/G}{G}{G/W}	3	WRG
+RG RG	{R/G}{R/G}	2	RG
+RG RG RG	{R/G}{R/G}{R/G}	3	RG
+RG RG RG RG	{R/G}{R/G}{R/G}{R/G}	4	RG
+RG RG RG RG RG	{R/G}{R/G}{R/G}{R/G}{R/G}	5	RG
+RG W U	{R/G}{W}{U}	3	WURG
+RP	{R/P}	1	R
+RW	{R/W}	1	WR
+RW G	{R/W}{G}	2	WRG
+RW RW	{R/W}{R/W}	2	WR
+RW RW RW	{R/W}{R/W}{R/W}	3	WR
+RW RW RW RW	{R/W}{R/W}{R/W}{R/W}	4	WR
+RW RW RW RW RW	{R/W}{R/W}{R/W}{R/W}{R/W}	5	WR
+S	{S}	1	C
+U	{U}	1	U
+U B	{U}{B}	2	UB
+U B B	{U}{B}{B}	3	UB
+U B B B R	{U}{B}{B}{B}{R}	5	UBR
+U B B R	{U}{B}{B}{R}	4	UBR
+U B R	{U}{B}{R}	3	UBR
+U B R G	{U}{B}{R}{G}	4	UBRG
+U G	{U}{G}	2	UG
+U R	{U}{R}	2	UR
+U R R	{U}{R}{R}	3	UR
+U R W	{U}{R}{W}	3	WUR
+U U	{U}{U}	2	U
+U U B	{U}{U}{B}	3	UB
+U U B B	{U}{U}{B}{B}	4	UB
+U U B B B R R	{U}{U}{B}{B}{B}{R}{R}	7	UBR
+U U R	{U}{U}{R}	3	UR
+U U R R	{U}{U}{R}{R}	4	UR
+U U R R R W W	{U}{U}{R}{R}{R}{W}{W}	7	WUR
+U U U	{U}{U}{U}	3	U
+U U U R R R	{U}{U}{U}{R}{R}{R}	6	UR
+U U U U	{U}{U}{U}{U}	4	U
+U UR R	{U}{U/R}{R}	3	UR
+UB	{U/B}	1	UB
+UB UB	{U/B}{U/B}	2	UB
+UB UB UB	{U/B}{U/B}{U/B}	3	UB
+UB UB UB UB	{U/B}{U/B}{U/B}{U/B}	4	UB
+UB UB UB UB UB	{U/B}{U/B}{U/B}{U/B}{U/B}	5	UB
+UP	{U/P}	1	U
+UR	{U/R}	1	UR
+UR B	{U/R}{B}	2	UBR
+UR RG GW WB	{U/R}{R/G}{G/W}{W/B}	4	WUBRG
+UR UR	{U/R}{U/R}	2	UR
+UR UR UR	{U/R}{U/R}{U/R}	3	UR
+UR UR UR UR	{U/R}{U/R}{U/R}{U/R}	4	UR
+UR UR UR UR UR	{U/R}{U/R}{U/R}{U/R}{U/R}	5	UR
+W	{W}	1	W
+W B	{W}{B}	2	WB
+W B B	{W}{B}{B}	3	WB
+W B G	{W}{B}{G}	3	WBG
+W U	{W}{U}	2	WU
+W U B	{W}{U}{B}	3	WUB
+W U B R	{W}{U}{B}{R}	4	WUBR
+W U B R G	{W}{U}{B}{R}{G}	5	WUBRG
+W U BP R G	{W}{U}{B/P}{R}{G}	5	WUBRG
+W U U	{W}{U}{U}	3	WU
+W U U B	{W}{U}{U}{B}	4	WUB
+W W	{W}{W}	2	W
+W W B	{W}{W}{B}	3	WB
+W W B B	{W}{W}{B}{B}	4	WB
+W W B B B G G	{W}{W}{B}{B}{B}{G}{G}	7	WBG
+W W U U	{W}{W}{U}{U}	4	WU
+W W U U B B R R G G	{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}	10	WUBRG
+W W U U U B B	{W}{W}{U}{U}{U}{B}{B}	7	WUB
+W W W	{W}{W}{W}	3	W
+W W W W	{W}{W}{W}{W}	4	W
+W W W W W	{W}{W}{W}{W}{W}	5	W
+W WB B	{W}{W/B}{B}	3	WB
+WB	{W/B}	1	WB
+WB U	{W/B}{U}	2	WUB
+WB WB	{W/B}{W/B}	2	WB
+WB WB WB	{W/B}{W/B}{W/B}	3	WB
+WB WB WB WB	{W/B}{W/B}{W/B}{W/B}	4	WB
+WB WB WB WB WB	{W/B}{W/B}{W/B}{W/B}{W/B}	5	WB
+WP	{W/P}	1	W
+WU	{W/U}	1	WU
+WU U UB	{W/U}{U}{U/B}	3	WUB
+WU WU	{W/U}{W/U}	2	WU
+WU WU WU	{W/U}{W/U}{W/U}	3	WU
+WU WU WU WU	{W/U}{W/U}{W/U}{W/U}	4	WU
+WU WU WU WU WU	{W/U}{W/U}{W/U}{W/U}{W/U}	5	WU
+X	{X}	0	C
+X 1 B	{X}{1}{B}	2	B
+X 1 G	{X}{1}{G}	2	G
+X 1 R R	{X}{1}{R}{R}	3	R
+X 1 R W	{X}{1}{R}{W}	3	WR
+X 1 U	{X}{1}{U}	2	U
+X 1 U U	{X}{1}{U}{U}	3	U
+X 1 W	{X}{1}{W}	2	W
+X 2 B	{X}{2}{B}	3	B
+X 2 B B	{X}{2}{B}{B}	4	B
+X 2 B R	{X}{2}{B}{R}	4	BR
+X 2 G	{X}{2}{G}	3	G
+X 2 G G	{X}{2}{G}{G}	4	G
+X 2 G U	{X}{2}{G}{U}	4	UG
+X 2 R	{X}{2}{R}	3	R
+X 2 R R	{X}{2}{R}{R}	4	R
+X 2 U	{X}{2}{U}	3	U
+X 2 U B	{X}{2}{U}{B}	4	UB
+X 2 W	{X}{2}{W}	3	W
+X 3 B	{X}{3}{B}	4	B
+X 3 B B	{X}{3}{B}{B}	5	B
+X 3 W	{X}{3}{W}	4	W
+X 4	{X}{4}	4	C
+X 4 B	{X}{4}{B}	5	B
+X 4 G G	{X}{4}{G}{G}	6	G
+X 5 R	{X}{5}{R}	6	R
+X 6	{X}{6}	6	C
+X B	{X}{B}	1	B
+X B B	{X}{B}{B}	2	B
+X B B B	{X}{B}{B}{B}	3	B
+X B B B B	{X}{B}{B}{B}{B}	4	B
+X B B G	{X}{B}{B}{G}	3	BG
+X B G	{X}{B}{G}	2	BG
+X B G U	{X}{B}{G}{U}	3	UBG
+X B R	{X}{B}{R}	2	BR
+X B R G	{X}{B}{R}{G}	3	BRG
+X BP	{X}{B/P}	1	B
+X C C	{X}{C}{C}	2	C
+X G	{X}{G}	1	G
+X G G	{X}{G}{G}	2	G
+X G G G	{X}{G}{G}{G}	3	G
+X G G U	{X}{G}{G}{U}	3	UG
+X G G W	{X}{G}{G}{W}	3	WG
+X G U	{X}{G}{U}	2	UG
+X G W	{X}{G}{W}	2	WG
+X G W U	{X}{G}{W}{U}	3	WUG
+X G W W	{X}{G}{W}{W}	3	WG
+X GP	{X}{G/P}	1	G
+X GU GU	{X}{G/U}{G/U}	2	UG
+X GW	{X}{G/W}	1	WG
+X R	{X}{R}	1	R
+X R G	{X}{R}{G}	2	RG
+X R G W	{X}{R}{G}{W}	3	WRG
+X R R	{X}{R}{R}	2	R
+X R R G	{X}{R}{R}{G}	3	RG
+X R R G G	{X}{R}{R}{G}{G}	4	RG
+X R R R	{X}{R}{R}{R}	3	R
+X R R W W	{X}{R}{R}{W}{W}	4	WR
+X R W	{X}{R}{W}	2	WR
+X U	{X}{U}	1	U
+X U B	{X}{U}{B}	2	UB
+X U R	{X}{U}{R}	2	UR
+X U U	{X}{U}{U}	2	U
+X U U B	{X}{U}{U}{B}	3	UB
+X U U R	{X}{U}{U}{R}	3	UR
+X U U R R	{X}{U}{U}{R}{R}	4	UR
+X U U U	{X}{U}{U}{U}	3	U
+X U U U U	{X}{U}{U}{U}{U}	4	U
+X W	{X}{W}	1	W
+X W B	{X}{W}{B}	2	WB
+X W B G	{X}{W}{B}{G}	3	WBG
+X W R	{X}{W}{R}	2	WR
+X W U	{X}{W}{U}	2	WU
+X W U B	{X}{W}{U}{B}	3	WUB
+X W U B R G	{X}{W}{U}{B}{R}{G}	5	WUBRG
+X W U U	{X}{W}{U}{U}	3	WU
+X W W	{X}{W}{W}	2	W
+X W W B B	{X}{W}{W}{B}{B}	4	WB
+X W W W	{X}{W}{W}{W}	3	W
+X WB WB WB	{X}{W/B}{W/B}{W/B}	3	WB
+X X	{X}{X}	0	C
+X X 2 W	{X}{X}{2}{W}	3	W
+X X 2 W W	{X}{X}{2}{W}{W}	4	W
+X X B	{X}{X}{B}	1	B
+X X B B B	{X}{X}{B}{B}{B}	3	B
+X X B B B B	{X}{X}{B}{B}{B}{B}	4	B
+X X B R G	{X}{X}{B}{R}{G}	3	BRG
+X X G	{X}{X}{G}	1	G
+X X G G	{X}{X}{G}{G}	2	G
+X X G U	{X}{X}{G}{U}	2	UG
+X X R	{X}{X}{R}	1	R
+X X U	{X}{X}{U}	1	U
+X X U U	{X}{X}{U}{U}	2	U
+X X U U U	{X}{X}{U}{U}{U}	3	U
+X X U U U U	{X}{X}{U}{U}{U}{U}	4	U
+X X W	{X}{X}{W}	1	W
+X X W W	{X}{X}{W}{W}	2	W
+X X W W W	{X}{X}{W}{W}{W}	3	W
+X X X	{X}{X}{X}	0	C
+X X X G U	{X}{X}{X}{G}{U}	2	UG
+X X X R R	{X}{X}{X}{R}{R}	2	R
+no cost	no cost	0	C

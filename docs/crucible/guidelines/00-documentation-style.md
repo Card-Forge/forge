@@ -231,8 +231,8 @@ Duplicated fact = two facts that will disagree in three months.
 New Go package → entry in `architecture/module-map.md` in the **same** commit. New ADR-worthy decision → ADR merged
 **before** the implementing PR. Ported Java unit → `porting/port-log/<unit>.md` note before merge.
 
-CI will enforce this once `crucible/tools/docgate` exists (M1): it fails the build on a package with no module-map row,
-or a `// ADR-nnnn` comment with no matching ADR file.
+CI enforces it. `crucible/tools/docgate` fails the build on a package with no module-map row, on a ported package whose
+row links to no port-log note, and on an `ADR-nnnn` reference in Go code with no matching ADR file.
 
 Reason: doc-after-code never happens.
 

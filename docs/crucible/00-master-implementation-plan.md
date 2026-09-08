@@ -926,17 +926,19 @@ open-ended. Sequence is firm; durations are not.
 
 ### M1 — Go foundation & the oracle harness skeleton — 1.5-2 wks
 
-**In progress.**
+**Complete.**
 
 | #   | Item                                                                    | State                                                               |
 | --- | ----------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | 9   | `crucible/` module, CI (build/lint/test), `pkg/collect`, `pkg/javarand` | Done                                                                |
 | 10  | `oracle-java/` Maven module wired into the build; first dumper          | Done — `RandomDumper`, standalone POM (ADR-0002)                    |
 | 11  | `tools/javacycles`, `tools/enginelint`                                  | Done — both premises of ADR-0003 now machine-checked                |
-| 12  | `internal/mana`, `internal/cardtype`                                    | Not started                                                         |
-| 13  | `tools/docgate`                                                         | Not started — DOC-12 and ADRP-4 are review-enforced until it exists |
+| 12  | `internal/mana`, `internal/cardtype`                                    | Done — both corpus round-trips green, goldens committed             |
+| 13  | `tools/docgate`                                                         | Done — DOC-12, PORT-4 and ADRP-4 now fail the build, not the review |
 
-**Exit gate:** P0 gate (Section 3.2). `javarand` is green; the parser round-trip half arrives with item 12.
+**Exit gate:** P0 gate (Section 3.2), green. `javarand` reproduces every draw kind over the 1,199-record golden; all 858
+distinct `ManaCost` values and all 3,908 distinct `Types` values in the corpus parse and round-trip through their
+printed form.
 
 ### M2 — Card script parser & static DB (foundation port) — 3–4 wks
 

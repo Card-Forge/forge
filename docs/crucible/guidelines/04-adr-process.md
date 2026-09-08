@@ -89,8 +89,7 @@ ADR is for a different answer to the same question, not for a fixed typo or a re
 
 ADR merges **before** the PR that implements it. Not same PR, not after.
 
-`crucible/tools/docgate` will fail the build on a `// ADR-nnnn` code comment with no matching ADR file. Until it is
-built (M1), this is enforced in review.
+`crucible/tools/docgate` fails the build on an `ADR-nnnn` reference in Go code with no matching ADR file.
 
 Reason: ADR written after the fact is a justification, not a decision. It never says "we considered X and rejected it",
 because by then X was never considered.

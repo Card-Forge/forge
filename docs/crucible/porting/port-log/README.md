@@ -1,8 +1,13 @@
 # Port Log
 
-- **Status:** Active (empty)
+- **Status:** Active
 
 One note per ported unit, named after the unit: `game-action.md`, `card-rules-reader.md`.
+
+| Note                           | Unit                                        | Milestone |
+| ------------------------------ | ------------------------------------------- | --------- |
+| [`mana-cost.md`](mana-cost.md) | `ManaCost` and its parser                   | M1        |
+| [`card-type.md`](card-type.md) | `CardType`, static half, and its vocabulary | M1        |
 
 Required **before** the implementing PR merges (PORT-3, PORT-4). Format and a worked example:
 [../../guidelines/02-java-to-go-translation.md](../../guidelines/02-java-to-go-translation.md).

@@ -75,6 +75,11 @@ jobs:
       - name: ADR-0003 premise — java package cycles
         run: go run ./tools/javacycles -root ../forge-game/src/main/java -prefix forge.game -expect 82
 
+      # DOC-12 and ADRP-4 say the documentation lands with the code. docgate is
+      # what makes that a build failure instead of a review habit.
+      - name: docgate — doc-before-code (DOC-12, PORT-4, ADRP-4)
+        run: go run ./tools/docgate -module . -docs ../docs/crucible
+
       # ADR-0003 admits "discipline replaces enforcement inside that boundary".
       # enginelint is the enforcement. Skipped until internal/engine exists.
       - name: enginelint

@@ -59,18 +59,18 @@ Types: `port`, `feat`, `fix`, `docs`, `test`, `refactor`, `perf`, `chore`.
 
 ## REV-4 — What blocks a merge
 
-| Check                                            | Blocking                                     |
-| ------------------------------------------------ | -------------------------------------------- |
-| `gofmt -s`, `golangci-lint`                      | Yes                                          |
-| `go test -race ./...` (L1–L3)                    | Yes                                          |
-| `docgate` — module-map row, ADR existence        | Yes                                          |
-| Coverage floor for the touched package (TEST-12) | Yes                                          |
-| L4 differential parity                           | No — opens a bug                             |
-| L5 fuzz / soak                                   | No — opens a bug                             |
-| L6 benchmark regression                          | Yes, if over threshold on a hot path (GO-16) |
+| Check                                                    | Blocking                                     |
+| -------------------------------------------------------- | -------------------------------------------- |
+| `gofmt -s`, `golangci-lint`                              | Yes                                          |
+| `go test -race ./...` (L1–L3)                            | Yes                                          |
+| `docgate` — module-map row, port-log note, ADR existence | Yes                                          |
+| Coverage floor for the touched package (TEST-12)         | Yes                                          |
+| L4 differential parity                                   | No — opens a bug                             |
+| L5 fuzz / soak                                           | No — opens a bug                             |
+| L6 benchmark regression                                  | Yes, if over threshold on a hot path (GO-16) |
 
-Checks whose tooling does not exist yet — `docgate`, the coverage floor, L4-L6 — are enforced by the reviewer until it
-does. A gate listed here is binding either way; only the mechanism differs.
+Checks whose tooling does not exist yet — the coverage floor, L4-L6 — are enforced by the reviewer until it does. A gate
+listed here is binding either way; only the mechanism differs.
 
 ---
 
