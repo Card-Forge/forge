@@ -651,27 +651,27 @@ public class UIScene extends Scene {
     @Override
     public void enter() {
         if (screenImage != null) {
-            //get tthe lastPreview generated from WorldSaveheader...
             try {
+                // Set the backgroundTexture from lastPreview generated from WorldSaveHeader
                 backgroundTexture = new TextureRegion(Forge.lastPreview);
-                //backgroundTexture.flip(false, true);
                 screenImage.setDrawable(new TextureRegionDrawable(backgroundTexture));
-                // get new drawable to render
-                Drawable last = screenImage.getDrawable();
-                // set this override drawable with our batch and shader set
-                Drawable override = new BaseDrawable() {
+                // Get the lastPreview drawable
+                Drawable lastPreview = screenImage.getDrawable();
+                // Create a BaseDrawable with the custom shader
+                Drawable previewWithShader = new BaseDrawable() {
                     @Override
                     public void draw(Batch batch, float x, float y, float width, float height) {
                         try {
                             batch.end();
-                            float pixelSize = Forge.isLandscapeMode() ? width / height : height / width;
+                            float mul = 1.2f;
+                            float pixelSize = width > height ? (width / height) * mul : (height / width) * mul;
                             ShaderUtil.getInstance().getShaderPix().bind();
                             ShaderUtil.getInstance().getShaderPix().setUniformf("u_resolution", width, height);
-                            ShaderUtil.getInstance().getShaderPix().setUniformf("u_pixelSize", pixelSize * 1.2f);
+                            ShaderUtil.getInstance().getShaderPix().setUniformf("u_pixelSize", pixelSize);
                             batch.setShader(ShaderUtil.getInstance().getShaderPix());
                             batch.begin();
                             // Simulate the blurred pixelated render using custom shader like the old renders of BlurUtils
-                            last.draw(batch, x, y, width, height);
+                            lastPreview.draw(batch, x, y, width, height);
                             batch.end();
                             batch.setShader(null);
                             batch.begin();
@@ -680,8 +680,8 @@ public class UIScene extends Scene {
                         }
                     }
                 };
-                // use the override drawable to render as background
-                screenImage.setDrawable(override);
+                // Set the previewWithShader as drawable for the ScreenImage
+                screenImage.setDrawable(previewWithShader);
             } catch (Exception e) {
                 e.printStackTrace();
             }
