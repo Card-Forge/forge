@@ -22,7 +22,7 @@ flowchart LR
   q --> wn["worker N<br/>= GOMAXPROCS"]
   db[("CompiledCard set<br/>immutable")] -.pointer.-> w1 & w2 & wn
   w1 & w2 & wn --> sh["one shard writer each"]
-  sh --> merge["merge → DuckDB"]
+  sh --> merge["read once → report"]
 ```
 
 | Element      | Rule                                                                                    |

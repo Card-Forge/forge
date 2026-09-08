@@ -524,6 +524,7 @@ them. Everything this phase used to specify has since been decided or defined el
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Event struct, recording levels, schema versioning                | [ADR-0013](adr/0013-telemetry-event-bus.md)                                                |
 | Shard format, and why DuckDB is invoked rather than imported     | [ADR-0014](adr/0014-telemetry-storage-format.md)                                           |
+| Why v1 reports without DuckDB at all                             | [ADR-0016](adr/0016-reporting-without-duckdb.md)                                           |
 | Dead cards, castability probe, mana health, per-card impact      | [`telemetry/metric-definitions.md`](telemetry/metric-definitions.md) — `MET-1` to `MET-25` |
 | How an engine event becomes a figure in a report, stage by stage | [`design/telemetry-pipeline.md`](design/telemetry-pipeline.md)                             |
 
@@ -575,7 +576,7 @@ printed form.
 
 14. `internal/carddb/script` — full top-level `Key:Value` parser, all faces, all variants.
 15. `CardRulesDumper` in Java; canonical-JSON dumper in Go.
-16. Deck (`.dck`) loading; `crucible corpus-coverage` first version. **Exit gate:** P1 gate — empty diff across all the
+16. Deck (`.dck`) loading; `crucible corpus-coverage` first version. **Exit gate:** P1 gate — empty diff across the
     whole corpus.
 
 ### M3 — DSL compilation to typed AST — 3–5 wks
@@ -624,8 +625,8 @@ printed form.
 36. `internal/sim`: worker pool, seed management, gauntlet config, turn caps, crash isolation (a panicking game fails
     that game only).
 37. `internal/telemetry`: recorder, castability probe, mana sampler, tenure tracking, aggregation.
-38. `internal/store`: shard writers, merge, DuckDB load, `manifest.json`. **Exit gate:** P7 gate — 100k games clean,
-    deterministic re-run byte-identical.
+38. `internal/store`: shard writers, `manifest.json`, and a streaming reader (ADR-0016). **Exit gate:** P7 gate — 100k
+    games clean, deterministic re-run byte-identical.
 
 ### M9 — Reporting & the optimization loop — 2–4 wks
 

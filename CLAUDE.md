@@ -145,7 +145,7 @@ mvn -U -B clean test          # CI runs this under Xvfb
 
 ## Current state
 
-M0 done — 15 ADRs `Accepted`, 7 guidelines, 4 design docs, 6 DSL grammars.
+M0 done — 16 ADRs `Accepted`, 7 guidelines, 4 design docs, 6 DSL grammars.
 
 M1 done — `pkg/collect`, `pkg/javarand` (bit-matches Java over the committed golden), `internal/mana`,
 `internal/cardtype` (both round-trip the whole card corpus), `tools/javacycles`, `tools/enginelint`, `tools/docgate`,

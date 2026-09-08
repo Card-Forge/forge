@@ -48,8 +48,8 @@ code.**
 
 | Artefact           | Count | Command                                              |
 | ------------------ | ----: | ---------------------------------------------------- |
-| Crucible documents |    48 | `find docs/crucible -name '*.md' \| wc -l`           |
-| Accepted ADRs      |    15 | `ls docs/crucible/adr/0*.md \| wc -l`                |
+| Crucible documents |    49 | `find docs/crucible -name '*.md' \| wc -l`           |
+| Accepted ADRs      |    16 | `ls docs/crucible/adr/0*.md \| wc -l`                |
 | Guidelines         |     7 | `ls docs/crucible/guidelines/0*.md \| wc -l`         |
 | Design documents   |     4 | `ls docs/crucible/design/*-*.md \| wc -l`            |
 | Go files           |    42 | `find crucible -name '*.go' \| wc -l`                |
@@ -88,7 +88,7 @@ flowchart TB
   ai["ai<br/>M7"] --> engine
   engine --> events["event stream"]
   events --> tel["telemetry<br/>M8"]
-  tel --> store["store<br/>NDJSON to DuckDB"]
+  tel --> store["store<br/>NDJSON shards"]
   store --> report["report<br/>M9"]
 ```
 
@@ -111,7 +111,7 @@ Traced from a card script to a figure in a report. No stage is skipped; unbuilt 
 | 5   | `engine`         | Work item to a played game, emitting typed events                            | M5, M6                   |
 | 6   | `ai`             | Game state to a decision, through the `PlayerController` interface           | M7                       |
 | 7   | `telemetry`      | Event stream to per-game rows — hand tenure, mana samples, outcome           | M8                       |
-| 8   | `store`          | Rows to NDJSON shards, merged into DuckDB                                    | M8                       |
+| 8   | `store`          | Rows to gzipped NDJSON shards, one writer per worker                         | M8                       |
 | 9   | `report`         | Queries to matchup matrix, dead-card table, mana health, per-card impact     | M9                       |
 
 Two things cross the whole flow. A run seed and game index reproduce any single game in isolation

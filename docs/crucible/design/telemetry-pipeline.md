@@ -16,7 +16,7 @@ flowchart LR
   eng["engine<br/>M5-M6"] -->|"Emit(Event)"| rec["recorder<br/>same goroutine"]
   rec -->|"per-game rows"| sh["shard writer<br/>one per worker"]
   sh --> gz[("worker-NNN<br/>.ndjson.gz")]
-  gz --> duck["DuckDB<br/>invoked as a tool"]
+  gz --> rep0["Go aggregation<br/>v1"]
   duck --> rep["report<br/>M9"]
   rec -.->|"1% sampled"| full[("full event stream")]
 ```
@@ -28,7 +28,7 @@ flowchart LR
 | 3   | Probing      | Once per turn, hand to castability rows | Game goroutine, needs the rules engine | M5 for support, M8 to record |
 | 4   | Row emission | Accumulators to ~80 rows                | Game end                               | M8                           |
 | 5   | Shard write  | Rows to `ndjson.gz`                     | Worker, one writer, append-only        | M8                           |
-| 6   | Query        | Shards to aggregates                    | DuckDB, offline                        | M9                           |
+| 6   | Query        | Shards to aggregates                    | Go, streaming; DuckDB later (ADR-0016) | M9                           |
 | 7   | Rendering    | Aggregates to Markdown, HTML, JSON      | `report`                               | M9                           |
 
 **Stage 2 runs in the game's own goroutine, and that is the load-bearing choice.** There is no queue on the common path,
@@ -69,12 +69,12 @@ full detail.
 
 ## What crosses which boundary
 
-| Boundary                | Carries                               | Direction                                    |
-| ----------------------- | ------------------------------------- | -------------------------------------------- |
-| `engine` to `telemetry` | The `Sink` interface only             | Engine knows nothing downstream (ADR-0012)   |
-| Game to worker          | Finished per-game rows, once per game | Not per event                                |
-| Worker to disk          | Its own shard, no coordination        | Independence preserved to disk (ADR-0005)    |
-| Disk to report          | Files, read by a tool                 | DuckDB is invoked, never imported (ADR-0014) |
+| Boundary                | Carries                               | Direction                                                                              |
+| ----------------------- | ------------------------------------- | -------------------------------------------------------------------------------------- |
+| `engine` to `telemetry` | The `Sink` interface only             | Engine knows nothing downstream (ADR-0012)                                             |
+| Game to worker          | Finished per-game rows, once per game | Not per event                                                                          |
+| Worker to disk          | Its own shard, no coordination        | Independence preserved to disk (ADR-0005)                                              |
+| Disk to report          | Files, read once and streamed         | Go for v1; DuckDB invoked, never imported, when a query needs SQL (ADR-0014, ADR-0016) |
 
 A clone's sink is a discard, so AI lookahead contributes nothing ([`engine-design.md`](engine-design.md) §5).
 

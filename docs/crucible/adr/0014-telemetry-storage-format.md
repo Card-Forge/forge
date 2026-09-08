@@ -69,8 +69,10 @@ runs/<run-id>/
 One writer per worker means no coordination, which is what keeps [ADR-0005](0005-concurrency-model.md)'s independence
 intact all the way to disk. Shards are immutable once closed.
 
-**Querying is DuckDB, and this is the part worth being precise about.** DuckDB reads gzipped NDJSON directly, so
-reporting is:
+**Querying is DuckDB, and this is the part worth being precise about.** [ADR-0016](0016-reporting-without-duckdb.md)
+later deferred it: v1 reports are counters and means, computed in Go over the same shards, and DuckDB arrives with the
+first query that needs SQL. The storage decision below is unaffected. DuckDB reads gzipped NDJSON directly, so reporting
+is:
 
 ```sql
 SELECT * FROM read_json_auto('runs/<id>/shards/*.ndjson.gz');
