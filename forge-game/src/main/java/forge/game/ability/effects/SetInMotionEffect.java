@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -24,11 +25,23 @@ public class SetInMotionEffect extends SpellAbilityEffect {
 
         for (int i = 0; i < repeats; i++) {
             if (again) {
-                controller.setSchemeInMotion(sa, controller.getActiveScheme());
+                Card scheme = null;
+
+                Object triggeredScheme = sa.getRootAbility().getTriggeringObject(AbilityKey.Scheme);
+                if (triggeredScheme instanceof Card) {
+                    scheme = controller.getGame().getCardState((Card) triggeredScheme, null);
+                }
+
+                if (scheme == null) {
+                    scheme = controller.getActiveScheme();
+                }
+
+                if (scheme != null) {
+                    controller.setSchemeInMotion(sa, scheme);
+                }
             } else {
                 controller.setSchemeInMotion(sa);
             }
         }
     }
-
 }
