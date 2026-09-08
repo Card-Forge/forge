@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.card.CardRules;
-import forge.item.PaperCard;
+import forge.item.IPaperCard;
 
 /**
  * A deckbuilding-legality rule from a card's own {@code DeckRule:} line, e.g.
@@ -62,22 +62,22 @@ public abstract class DeckRule {
         return description;
     }
 
-    /** Parses every {@code DeckRule:} line on the given card into typed rule objects (also picks up its marked colors for AllowedAdditionalColor$). */
-    public static List<DeckRule> parseAll(final PaperCard card) {
+    /** Parses every {@code DeckRule:} line on the given card into typed rule objects (also picks up its marked colors for AllowedAdditionalColor$, and its own name for Copies' CARDNAME). */
+    public static List<DeckRule> parseAll(final IPaperCard card) {
         final CardRules rules = card.getRules();
         if (rules == null) {
             return new ArrayList<>();
         }
         final byte chosenAdditionalColors = card.getMarkedColors() != null ? card.getMarkedColors().getColor() : 0;
-        return parseAll(rules.getDeckRules(), chosenAdditionalColors);
+        return parseAll(rules.getDeckRules(), chosenAdditionalColors, rules.getName());
     }
 
-    /** Parses a card face's raw {@code DeckRule:} line values (see {@link #parseAll(PaperCard)}). */
-    public static List<DeckRule> parseAll(final Iterable<String> rawDeckRuleLines) {
-        return parseAll(rawDeckRuleLines, (byte) 0);
+    /** Parses a card face's raw {@code DeckRule:} line values (see {@link #parseAll(IPaperCard)}). */
+    public static List<DeckRule> parseAll(final Iterable<String> rawDeckRuleLines, final String ownerName) {
+        return parseAll(rawDeckRuleLines, (byte) 0, ownerName);
     }
 
-    private static List<DeckRule> parseAll(final Iterable<String> rawDeckRuleLines, final byte chosenAdditionalColors) {
+    private static List<DeckRule> parseAll(final Iterable<String> rawDeckRuleLines, final byte chosenAdditionalColors, final String ownerName) {
         final List<DeckRule> result = new ArrayList<>();
         for (final String raw : rawDeckRuleLines) {
             final int colonPos = raw.indexOf(':');
@@ -90,6 +90,9 @@ public abstract class DeckRule {
                     break;
                 case "Size":
                     result.add(new DeckRuleSize(params));
+                    break;
+                case "Copies":
+                    result.add(new DeckRuleCopies(params, ownerName));
                     break;
                 default:
                     break; // unrecognized rule class - ignore

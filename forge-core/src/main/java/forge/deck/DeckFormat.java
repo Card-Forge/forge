@@ -18,7 +18,6 @@
 package forge.deck;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.card.*;
 import forge.deck.generation.DeckGenPool;
@@ -526,15 +525,33 @@ public enum DeckFormat {
         return null;
     }
 
+    /** True if {@code iCard} is a basic land, or its own DeckRule:Copies allows unlimited copies. */
     public static boolean canHaveAnyNumberOf(final IPaperCard iCard) {
-        return iCard.getRules().getType().isBasicLand()
-            || Iterables.contains(iCard.getRules().getMainPart().getKeywords(),
-                "A deck can have any number of cards named CARDNAME.");
+        if (iCard.getRules().getType().isBasicLand()) {
+            return true;
+        }
+        final Integer limit = getOwnCopiesLimit(iCard);
+        return limit != null && limit == Integer.MAX_VALUE;
     }
 
+    /** This card's own DeckRule:Copies limit, if any; null falls back to the format default. */
     public static Integer canHaveSpecificNumberInDeck(final IPaperCard card) {
-        // Ideally, this would be parsed during card parsing and set this value
-        return card.getRules().getKeywordMagnitude("DeckLimit");
+        final Integer limit = getOwnCopiesLimit(card);
+        return limit != null && limit != Integer.MAX_VALUE ? limit : null;
+    }
+
+    /** The DeckRule:Copies limit {@code iCard} imposes on itself, if any. */
+    private static Integer getOwnCopiesLimit(final IPaperCard iCard) {
+        final CardRules rules = iCard.getRules();
+        for (final DeckRule rule : DeckRule.parseAll(iCard)) {
+            if (rule instanceof DeckRuleCopies) {
+                final Integer limit = ((DeckRuleCopies) rule).getLimit(rules);
+                if (limit != null) {
+                    return limit;
+                }
+            }
+        }
+        return null;
     }
 
     public static String getPlaneSectionConformanceProblem(final CardPool planes) {

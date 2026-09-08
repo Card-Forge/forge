@@ -906,16 +906,6 @@ public final class CardRules implements ICardCharacteristics {
         return false;
     }
 
-    public Integer getKeywordMagnitude(final String k) {
-        for (final String inst : mainPart.getKeywords()) {
-            final String[] parts = inst.split(":");
-            if (parts[0].equals(k) && StringUtils.isNumeric(parts[1])) {
-                return Integer.valueOf(parts[1]);
-            }
-        }
-        return null;
-    }
-
     public ColorSet getDeckbuildingColors() {
         if (deckbuildingColors == null) {
             byte colors = 0;
