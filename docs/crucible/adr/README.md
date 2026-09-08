@@ -25,10 +25,11 @@ Numbers are permanent. Files are never deleted. A superseded ADR keeps its numbe
 | [0012](0012-ports-and-adapters.md)              | Ports and adapters, and where they stop   | Accepted |
 | [0013](0013-telemetry-event-bus.md)             | Telemetry event bus and schema versioning | Accepted |
 | [0014](0014-telemetry-storage-format.md)        | Telemetry storage format                  | Accepted |
+| [0015](0015-upstream-sync-procedure.md)         | Upstream sync procedure                   | Accepted |
 
 ## Numbering
 
-No gap and no missing number: 0001-0014, every number used exactly once. Numbers are allocated when an ADR is written,
+No gap and no missing number: 0001-0015, every number used exactly once. Numbers are allocated when an ADR is written,
 never reserved — the plan lists remaining subjects without numbers for that reason.
 
 The plan's M0 exit gate asked for ADR-0001 through ADR-0011 `Accepted`. The three subjects after it — ports and
