@@ -10,6 +10,7 @@ import forge.game.GameLogVerbosity;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
+import forge.gui.download.CdnUuidCache;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgeConstants;
@@ -205,6 +206,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeDefaultFontSizeComboBox();
         initializeCardArtFormatComboBox();
         initializeCardArtPreference();
+        initializeCardDownloadLanguageComboBox();
         initializeAutoUpdaterComboBox();
         initializeServerUPnPComboBox();
         initializeMulliganRuleComboBox();
@@ -416,6 +418,46 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createComboBox(updatePaths, updatePreference);
         final String selectedItem = this.prefs.getPref(updatePreference);
         panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeCardDownloadLanguageComboBox() {
+        final Map<String, String> cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
+        final String[] localizedOptions = cardLangMapping.keySet().toArray(new String[0]);
+
+        final FPref cardLangPreference = FPref.UI_CARD_DOWNLOAD_LANG;
+
+        final FComboBoxPanel<String> panel = this.view.getCbpCardDownloadLangComboBoxPanel();
+        final FComboBox<String> comboBox = createLocalizedComboBox(localizedOptions, cardLangPreference, cardLangMapping);
+        comboBox.addItemListener(e -> applyPreferredLanguageAvailability());
+
+        final String savedCode = this.prefs.getPref(cardLangPreference);
+        final String selectedDisplayName = cardLangMapping.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(savedCode))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse("English");
+
+        panel.setComboBox(comboBox, selectedDisplayName);
+
+        final JCheckBox cbPreferLang = this.view.getCbPreferLangForUniqueCards();
+        cbPreferLang.setSelected(this.prefs.getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS));
+        cbPreferLang.addItemListener(e -> {
+            this.prefs.setPref(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS, String.valueOf(cbPreferLang.isSelected()));
+            this.prefs.save();
+            applyPreferredLanguageAvailability();
+        });
+
+        applyPreferredLanguageAvailability();
+    }
+
+    private void applyPreferredLanguageAvailability() {
+        String langCode = this.prefs.getPref(FPref.UI_CARD_DOWNLOAD_LANG);
+        boolean preferForUnique = this.prefs.getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS);
+        if (!preferForUnique || langCode == null || langCode.isEmpty() || "en".equalsIgnoreCase(langCode)) {
+            FModel.getMagicDb().setPreferredLanguageAvailability(null);
+        } else {
+            FModel.getMagicDb().setPreferredLanguageAvailability((setCode, cn) -> CdnUuidCache.isAvailableInLanguage(setCode, cn, langCode));
+        }
     }
 
     private void initializeServerUPnPComboBox() {

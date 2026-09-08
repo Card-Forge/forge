@@ -9,6 +9,7 @@ import forge.game.GameFormat;
 import forge.gamemodes.quest.QuestWorld;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gui.GuiUtils;
+import forge.gui.download.CdnUuidCache;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.*;
 import forge.localinstance.properties.ForgePreferences;
@@ -62,6 +63,14 @@ public class CardManager extends ItemManager<PaperCard> {
             entriesByName.put(cardName, item);
         }
 
+        String preferredLang = null;
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS)) {
+            String pref = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+            if (pref != null && !pref.isEmpty() && !"en".equalsIgnoreCase(pref)) {
+                preferredLang = pref;
+            }
+        }
+
         // Now we're ready to go on with retrieving cards to be returned
         Map<PaperCard, Integer> cardsMap = new HashMap<>();
         for (String cardName : entriesByName.keySet()) {
@@ -85,7 +94,7 @@ public class CardManager extends ItemManager<PaperCard> {
                 // Policy is too strict for current PaperCard in Entry. Remove any filter
                 acceptedEditions.addAll(entriesByEdition.keySet());
 
-            Entry<PaperCard, Integer> cardEntry = getCardEntryToAdd(entriesByEdition, acceptedEditions);
+            Entry<PaperCard, Integer> cardEntry = getCardEntryToAdd(entriesByEdition, acceptedEditions, preferredLang);
             if (cardEntry != null)
                 cardsMap.put(cardEntry.getKey(), cardEntry.getValue());
         }
@@ -95,7 +104,7 @@ public class CardManager extends ItemManager<PaperCard> {
     // Select the Card Art Entry to add, based on current Card Art Preference Order.
     // This method will prefer the entry currently having an image. If that's not the case,
     private Entry<PaperCard, Integer> getCardEntryToAdd(ListMultimap<CardEdition, Entry<PaperCard, Integer>> entriesByEdition,
-                                                            List<CardEdition> acceptedEditions) {
+                                                            List<CardEdition> acceptedEditions, String preferredLang) {
         // Use standard sort + index, for better performance!
         Collections.sort(acceptedEditions);
         if (StaticData.instance().cardArtPreferenceIsLatest())
@@ -107,6 +116,20 @@ public class CardManager extends ItemManager<PaperCard> {
             CardEdition cardEdition = editionIterator.next();
             // These are now the entries to add to Cards Map
             List<Entry<PaperCard, Integer>> cardEntries = entriesByEdition.get(cardEdition);
+
+            if (preferredLang != null) {
+                for (Entry<PaperCard, Integer> entry : cardEntries) {
+                    if (isPreferredLanguagePrint(entry.getKey(), preferredLang)) {
+                        if (firstCandidateEntryFound == null)
+                            firstCandidateEntryFound = entry;
+                        candidateEntry = entry;
+                        break;
+                    }
+                }
+                if (candidateEntry != null)
+                    break;
+            }
+
             Iterator<Entry<PaperCard, Integer>> entriesIterator = cardEntries.iterator();
             candidateEntry = entriesIterator.hasNext() ? entriesIterator.next() : null;
             if (candidateEntry != null && firstCandidateEntryFound == null)
@@ -121,6 +144,14 @@ public class CardManager extends ItemManager<PaperCard> {
                 candidateEntry = null;  // resetting for next edition
         }
         return candidateEntry != null ? candidateEntry : firstCandidateEntryFound;
+    }
+
+    private boolean isPreferredLanguagePrint(PaperCard card, String preferredLang) {
+        CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
+        if (edition == null) {
+            return false;
+        }
+        return CdnUuidCache.isAvailableInLanguage(edition.getScryfallCode(), card.getCollectorNumber(), preferredLang);
     }
 
     /* Static overrides shared with SpellShopManager*/

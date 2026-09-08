@@ -23,6 +23,11 @@ import java.util.stream.Collectors;
 
 public class ConniveEffect extends SpellAbilityEffect {
 
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
     /* (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
      * returns the automatically generated stack description string

@@ -35,6 +35,7 @@ public enum CSubmenuDownloaders implements ICDoc {
 
     private final UiCommand cmdLicensing = VSubmenuDownloaders.SINGLETON_INSTANCE::showLicensing;
     private final UiCommand cmdCheckForUpdates = () -> new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_ATOM, BuildInfo.getTimestamp(), FControl.instance.getSnapsTimestamp())));
+    private final UiCommand cmdDownloadCardImages = () -> new DialogDownloadCardImages().show();
 
     private final UiCommand cmdPicDownload = () -> new GuiDownloader(new GuiDownloadPicturesLQ()).show();
     private final UiCommand cmdPicDownloadHQ = () -> new GuiDownloader(new GuiDownloadPicturesHQ()).show();
@@ -59,6 +60,7 @@ public enum CSubmenuDownloaders implements ICDoc {
     public void initialize() {
         final VSubmenuDownloaders view = VSubmenuDownloaders.SINGLETON_INSTANCE;
         view.setCheckForUpdatesCommand(cmdCheckForUpdates);
+        view.setDownloadCardImagesCommand(cmdDownloadCardImages);
         view.setDownloadPicsCommand(cmdPicDownload);
         view.setDownloadPicsHQCommand(cmdPicDownloadHQ);
         view.setDownloadSetPicsCommand(cmdSetDownload);

@@ -77,6 +77,14 @@ public class Cost implements Serializable {
     public final boolean isFree() {
         return isOnlyManaCost() && getTotalMana().isZero();
     }
+
+    /**
+     * CR 605.1a: true when paying this cost moves any card to or from a library.
+     */
+    public final boolean movesCardToOrFromLibrary() {
+        return LibraryMovementCostVisitor.movesCardToOrFromLibrary(this);
+    }
+
     public final boolean hasSpecificCostType(Class<? extends CostPart> costType) {
         for (CostPart p : getCostParts()) {
             if (costType.isInstance(p)) {
