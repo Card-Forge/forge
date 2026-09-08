@@ -210,21 +210,31 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return changed;
     }
     public boolean addAll(final CardTypeView type) {
+        return addAll(type, true);
+    }
+    public boolean addAll(final CardTypeView type, final boolean sanisfy) {
         boolean changed = false;
         if (Iterables.addAll(coreTypes, type.getCoreTypes())) { changed = true; }
         if (Iterables.addAll(supertypes, type.getSupertypes())) { changed = true; }
         if (Iterables.addAll(subtypes, type.getSubtypes())) { changed = true; }
-        sanisfySubtypes();
+        if (sanisfy) {
+            sanisfySubtypes();
+        }
         return changed;
     }
 
     public boolean removeAll(final CardTypeView type) {
+        return removeAll(type, true);
+    }
+    public boolean removeAll(final CardTypeView type, final boolean sanisfy) {
         boolean changed = false;
         if (coreTypes.removeAll(type.getCoreTypes())) { changed = true; }
         if (supertypes.removeAll(type.getSupertypes())) { changed = true; }
         if (subtypes.removeAll(type.getSubtypes())) { changed = true; }
         if (changed) {
-            sanisfySubtypes();
+            if (sanisfy) {
+                sanisfySubtypes();
+            }
             calculatedType = null;
             return true;
         }

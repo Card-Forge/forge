@@ -82,11 +82,15 @@ public record CardChangedType(CardTypeView addType, CardTypeView removeType, boo
                 newType.subtypes.removeIf(CardType::isAnEnchantmentType);
             }
         }
+        // No sanitizing here: entries are folded in timestamp order, but a subtype
+        // grant may legitimately precede its legitimizing type change (CR 613.8
+        // dependency, e.g. Arcane Adaptation out before an earthbend animation).
+        // Validity is enforced once on the final type in getTypeWithChanges.
         if (removeType() != null) {
-            newType.removeAll(removeType());
+            newType.removeAll(removeType(), false);
         }
         if (addType() != null) {
-            newType.addAll(addType());
+            newType.addAll(addType(), false);
             if (addType().hasAllCreatureTypes()) {
                 newType.allCreatureTypes = true;
             }
