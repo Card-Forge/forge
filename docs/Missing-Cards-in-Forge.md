@@ -77,4 +77,4 @@ The Teenage Mutant Ninja Turtles "Turtle Team-Up" box set featured a PvE variant
 
 ## Missing nonlegal and funny cards
 
-Complete support for Un-cards and other non-legal cards is a non-goal of Forge, but individual cards may be implemented when they work within the scope of the project. For a complete list, see [Un-cards, Playtest Cards, and Other Funny Cards](https://github.com/Card-Forge/forge/wiki/Un%E2%80%90cards,-Playtest-Cards,-and-Other-Funny-Cards).
+Complete support for Un-cards and other non-legal cards is a non-goal of Forge, but individual cards may be implemented when they work within the scope of the project. For a complete list, see [Un-cards, Playtest Cards, and Other Funny Cards](Un-cards,-Playtest-Cards,-and-Other-Funny-Cards.md).
