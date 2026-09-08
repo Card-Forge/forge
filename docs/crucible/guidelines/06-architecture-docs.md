@@ -164,7 +164,7 @@ Any figure in an architecture doc carries the command that produced it and the d
 **Good:**
 
 ```text
-33,682 card scripts (2026-09-07):
+33,686 card scripts (2026-09-07):
 find forge-gui/res/cardsfolder -name '*.txt' | wc -l
 ```
 

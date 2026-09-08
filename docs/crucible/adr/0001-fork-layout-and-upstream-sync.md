@@ -6,10 +6,10 @@
 
 ## Context
 
-Crucible is built inside a fork of [Card-Forge/forge](https://github.com/Card-Forge/forge), currently at `53a103721d6`.
+Crucible is built inside a fork of [Card-Forge/forge](https://github.com/Card-Forge/forge), currently at `b05ee47a6fd`.
 The fork is not a snapshot — it must keep pulling from upstream indefinitely.
 
-The reason is the card corpus. `forge-gui/res/cardsfolder/` holds **33,682 card scripts, 302,710 lines**, and upstream
+The reason is the card corpus. `forge-gui/res/cardsfolder/` holds **33,686 card scripts, 302,749 lines**, and upstream
 adds and corrects them continuously as sets release. Crucible reads those exact files. Every upstream sync is free card
 support, and a fork that stops syncing goes stale within one set release.
 
@@ -17,8 +17,8 @@ Upstream is also the correctness oracle. Differential testing runs the Java engi
 inputs, so the Java tree has to stay present, buildable, and version-matched to the scripts it is being compared on.
 
 That makes merge conflicts the primary operational risk of the entire project. Every line touched in an upstream file is
-a conflict on the next sync, forever. Upstream is 517,069 lines of Java across 2,607 files and 12 Maven modules, plus 61
-Markdown files under `docs/`, plus 456 TestNG tests. Nothing on the Crucible side needs to modify any of it.
+a conflict on the next sync, forever. Upstream is 521,958 lines of Java across 2,607 files and 12 Maven modules, plus 61
+Markdown files under `docs/`, plus 492 TestNG tests. Nothing on the Crucible side needs to modify any of it.
 
 ## Decision Drivers
 
@@ -84,7 +84,7 @@ immediately visible to the corpus golden test, which turns "upstream added cards
 into a failing check. The Java oracle stays in-tree and automatically version-matched to the scripts it is compared
 against, so differential testing needs no cross-repo coordination.
 
-**Bad.** The repository carries 517,069 lines of Java that Crucible never executes, which makes clones large and
+**Bad.** The repository carries 521,958 lines of Java that Crucible never executes, which makes clones large and
 full-text search noisy — every `grep` needs a path filter. Contributors see a tree where most of the content is
 off-limits, which is confusing until they read this ADR. Crucible's own history is interleaved with upstream merge
 commits on the same branch, so `git log` needs a path filter to be readable.

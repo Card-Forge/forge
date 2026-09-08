@@ -6,7 +6,7 @@
 
 ## Context
 
-209,810 lines of Java become Go. Every unit of that is a choice between reproducing the Java structure and rewriting it
+210,501 lines of Java become Go. Every unit of that is a choice between reproducing the Java structure and rewriting it
 idiomatically, and the choice cannot be left to whoever is holding the file. Made ad hoc across ten milestones, it
 produces a codebase that is Java in some packages and Go in others, which is worse than either.
 
@@ -30,7 +30,7 @@ landed. What was missing is the record of _why_ — and by now there is evidence
 | `forge-core` |      26,401 |                   887 |
 | `forge-game` |     126,637 |                 3,421 |
 | `forge-ai`   |      56,821 |                   248 |
-| **Total**    | **209,810** |             **4,556** |
+| **Total**    | **210,501** |             **4,556** |
 
 Counted with `find forge-{core,game,ai}/src/main/java -name '*.java' -exec cat {} + | wc -l`.
 
@@ -65,7 +65,7 @@ restated here (DOC-11). It is the operative document; this ADR is the reasoning 
 diverge in detail as the guideline is amended.
 
 **What makes deviation responsible is ADR-0010, not confidence.** Restructuring is safe in proportion to how well
-behaviour can be proven identical: static parity over all 33,682 cards, scenario parity on fixtures with no AI, replay
+behaviour can be proven identical: static parity over all 33,686 cards, scenario parity on fixtures with no AI, replay
 parity on recorded games. Without that harness this decision would be reckless. With it, keeping Java's structure buys
 nothing that the differential tests do not already provide.
 

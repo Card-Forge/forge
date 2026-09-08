@@ -4,7 +4,7 @@
 - **Real at:** M2 (`carddb`), M3 (`carddb/compile`)
 - **Composes:** ADR-0007, ADR-0008, ADR-0011, and the six DSL grammars
 
-How 33,682 text files become an immutable structure every game shares. Reasoning stays in the ADRs and is linked
+How 33,686 text files become an immutable structure every game shares. Reasoning stays in the ADRs and is linked
 (ARCH-3).
 
 The input side is fully specified — six grammars derived from the corpus — so this is the one pipeline whose shape is
@@ -16,7 +16,7 @@ known before any of it exists.
 
 ```mermaid
 flowchart LR
-  txt[".txt<br/>33,682 files"] --> line["line parse<br/>M2"]
+  txt[".txt<br/>33,686 files"] --> line["line parse<br/>M2"]
   line --> rules["CardRules<br/>per face"]
   rules --> comp["compile<br/>M3"]
   comp --> def[("CompiledCard<br/>immutable, shared")]
@@ -85,7 +85,7 @@ unimplemented and the corpus gate — not the compiler — decides whether that 
 
 ## Corpus scope does not change the pipeline
 
-[ADR-0011](../adr/0011-card-corpus-scoping.md) scopes support by decklist, but **all 33,682 scripts compile**. Scoping
+[ADR-0011](../adr/0011-card-corpus-scoping.md) scopes support by decklist, but **all 33,686 scripts compile**. Scoping
 applies at deck load, not at card compilation.
 
 Compiling everything is what makes the L1 static-parity gate total: the Java dumper and the Go compiler both process the
@@ -102,7 +102,7 @@ Load work is O(cards in corpus), once per process, against O(cards x games) in J
 largest single performance difference between the two engines, and it is the reason
 [ADR-0005](../adr/0005-concurrency-model.md)'s shared card database is worth having at all.
 
-The trade is startup latency: all 33,682 scripts compile before the first game begins. Irrelevant for a batch run of
+The trade is startup latency: all 33,686 scripts compile before the first game begins. Irrelevant for a batch run of
 hours, noticeable when iterating on one fixture — which argues for a corpus-scoped load in test binaries, not for lazy
 compilation.
 
@@ -114,7 +114,7 @@ Listed rather than smoothed over (ARCH-10).
 
 - **Overlay representation.** Copy-on-write is decided; map, small slice, or inline array is a measurement nobody can
   take until a game state exists. M5.
-- **Compile-time budget.** No measurement exists for how long compiling 33,682 scripts takes in Go, so "irrelevant for a
+- **Compile-time budget.** No measurement exists for how long compiling 33,686 scripts takes in Go, so "irrelevant for a
   batch run" is an expectation rather than a finding. M2 gives the first number.
 - **Whether `CompiledCard` is reachable by name or index.** Deck loading resolves names; the engine wants an index. The
   boundary between them is unsettled.

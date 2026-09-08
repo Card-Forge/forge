@@ -9,9 +9,9 @@
 Nothing else in this project decides whether it works. A deck-tuning tool built on a rules engine that quietly misplays
 produces confident, wrong recommendations — worse than no tool, because the numbers look authoritative.
 
-The engine being ported is 210,000 lines implementing 203 ability APIs, 152 trigger types, 45 replacement types, a
-2,135-line valid-string matcher and a layer system, against 33,682 card scripts. It cannot be verified by reading it,
-and its own test suite is thin: 456 TestNG tests, of which only 3 live in `forge-game` itself and 137 of the useful
+The engine being ported is 210,000 lines implementing 203 ability APIs, 153 trigger types, 45 replacement types, a
+2,135-line valid-string matcher and a layer system, against 33,686 card scripts. It cannot be verified by reading it,
+and its own test suite is thin: 492 TestNG tests, of which only 3 live in `forge-game` itself and 137 of the useful
 remainder are AI-simulation tests rather than rules tests.
 
 So correctness has to come from comparison. Four ADRs already depend on this one existing — ADR-0001 keeps the Java tree
@@ -31,7 +31,7 @@ would fail, and none of the failures would tell you whether the rules are wrong.
 
 ## Considered Options
 
-1. **Hand-written expectations only**, no oracle. Rejected — someone has to decide what 33,682 cards should do, and that
+1. **Hand-written expectations only**, no oracle. Rejected — someone has to decide what 33,686 cards should do, and that
    someone would be guessing.
 2. **Full-game comparison with both AIs running.** Rejected — AI divergence swamps rules divergence, producing failures
    that cannot be attributed.
@@ -43,7 +43,7 @@ would fail, and none of the failures would tell you whether the rules are wrong.
 
 | Layer                     | Compares                                              | Divergence removed                                    | Coverage                 | Gates merge     |
 | ------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ------------------------ | --------------- |
-| **L1** Static parity      | Canonical JSON of parsed `CardRules` and compiled AST | Everything except the parser                          | All 33,682 cards         | Yes             |
+| **L1** Static parity      | Canonical JSON of parsed `CardRules` and compiled AST | Everything except the parser                          | All 33,686 cards         | Yes             |
 | **L2** Scenario parity    | Post-state dump and event stream from a fixture       | The AI — decisions are scripted                       | Hand-written fixtures    | Yes             |
 | **L3** Replay parity      | Full-game event stream                                | The AI — decisions are replayed from a Java recording | Nightly generated corpus | No, opens a bug |
 | **L4** Statistical parity | Win rate, game length, mulligan rate, spend curve     | Nothing; compares distributions                       | 10,000 games per matchup | No, dashboard   |
@@ -77,7 +77,7 @@ strategy fails quietly.
 turn and game-ending distribution. Drift is an AI regression even when rules are correct, so it is tracked as a
 dashboard rather than a pass/fail gate.
 
-**The 456 Java tests are an acceptance floor, not a specification.** They are ported as fixture directories rather than
+**The 492 Java tests are an acceptance floor, not a specification.** They are ported as fixture directories rather than
 Go functions, tracked in `porting/test-port-matrix.md`. Passing all of them proves less than it sounds; L1 and L3 are
 what actually carry the correctness argument.
 

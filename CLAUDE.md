@@ -137,7 +137,7 @@ cd crucible && golangci-lint run
 # Java oracle
 mvn -pl crucible/oracle-java -am test
 
-# Upstream Java suite: 456 TestNG tests, needs a display
+# Upstream Java suite: 492 TestNG tests, needs a display
 mvn -U -B clean test          # CI runs this under Xvfb
 ```
 

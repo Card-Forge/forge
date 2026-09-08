@@ -5,7 +5,7 @@
 - **Version:** 0.1
 - **Status:** Draft
 - **Owner:** `jc@archlab.pl`
-- **Base repo:** fork of [Card-Forge/forge](https://github.com/Card-Forge/forge) @ `53a103721d6`
+- **Base repo:** fork of [Card-Forge/forge](https://github.com/Card-Forge/forge) @ `b05ee47a6fd`
 
 ---
 
@@ -16,12 +16,12 @@ health, per-card impact), and emits actionable deck-improvement reports. The eng
 engine.
 
 **Concern, stated once, then the plan proceeds as specified.** The Java surface to be ported is ~210,000 LOC across
-`forge-core` + `forge-game` + `forge-ai`, driving 33,682 card scripts totalling 302,710 script lines, and exposing 203
-ability APIs, 203 keywords, 152 trigger types, 45 replacement types, and a ~2,100-line "valid string" predicate matcher.
+`forge-core` + `forge-game` + `forge-ai`, driving 33,686 card scripts totalling 302,749 script lines, and exposing 203
+ability APIs, 203 keywords, 153 trigger types, 45 replacement types, and a ~2,100-line "valid string" predicate matcher.
 A complete, card-for-card port is a multi-engineer-year effort. Two adjustments make it tractable without violating
 either constraint:
 
-1. **Scope the port by card corpus, not by feature completeness.** Crucible does not need all 33,682 cards. It needs the
+1. **Scope the port by card corpus, not by feature completeness.** Crucible does not need all 33,686 cards. It needs the
    target deck plus a gauntlet — realistically 400–900 distinct cards. The porting order is driven by a _coverage gate_
    over that corpus (Section 3.2). Measured coverage curve (Section 1.5) shows the top 30 of 192 used APIs fully cover
    78.5% of the entire card pool; a curated modern/standard corpus concentrates far harder than that.
@@ -104,7 +104,7 @@ where the game asks a decision goes through it. Port it as a Go interface _first
 
 ## 1.4 How Forge parses `.txt` card definitions — the full pipeline
 
-Cards live at `forge-gui/res/cardsfolder/<letter>/<snake_case_name>.txt`, 29 subfolders, 33,682 files, 302,710 lines
+Cards live at `forge-gui/res/cardsfolder/<letter>/<snake_case_name>.txt`, 29 subfolders, 33,686 files, 302,749 lines
 total. `CardStorageReader` (`forge-core/src/main/java/forge/CardStorageReader.java`) walks the tree (or a
 `cardsfolder.zip`), multi-threaded, and feeds each file to `CardRules.Reader`.
 
@@ -185,7 +185,7 @@ prominently in the translation rules so nobody "faithfully" ports the string int
 
 ## 1.5 Coverage curve — the lever that makes this feasible
 
-Measured across all 33,682 scripts (192 distinct APIs actually used out of 203 defined):
+Measured across all 33,686 scripts (192 distinct APIs actually used out of 203 defined):
 
 | Ability instances |       | Cards **fully** covered |                      |
 | ----------------- | ----- | ----------------------- | -------------------- |
@@ -421,7 +421,7 @@ wrong forever. `ManaCost` and type-line parsers round-trip every distinct value 
 
 Port `CardStorageReader` + `CardRules.Reader` → `internal/carddb`. All top-level keys, all faces, all `AlternateMode`
 variants, deck metadata keys. **Gate — the highest-value cheap gate in the whole project:** a Java dumper
-(`oracle-java`) emits normalized JSON for all 33,682 `CardRules`; Go emits the same; **the diff must be empty.** 100%
+(`oracle-java`) emits normalized JSON for all 33,686 `CardRules`; Go emits the same; **the diff must be empty.** 100%
 corpus coverage, fully deterministic, catches parser divergence before it can hide behind rules bugs.
 
 ### P2 — DSL front-end (compile to typed AST)
@@ -484,7 +484,7 @@ Four layers, each removing a class of divergence. All Java-side tooling is addit
 
 ### Layer 1 — Static parity (P1–P2) — total, deterministic, cheap
 
-Java `CardRulesDumper` and `CardAstDumper` emit canonical JSON for all 33,682 cards. Go emits the same. CI diffs them.
+Java `CardRulesDumper` and `CardAstDumper` emit canonical JSON for all 33,686 cards. Go emits the same. CI diffs them.
 Any parser divergence — a missed key, a mis-split param, a wrong SVar resolution — is caught here across 100% of the
 corpus, before any game is ever simulated. **Build this on day one of P1; it pays for itself immediately.**
 
@@ -546,7 +546,7 @@ builds), no memory growth across 10⁵ games.
 
 ## 3.4 What the Java side already tests — and what it doesn't
 
-Measured: **456 `@Test` methods across 118 files, ~25,518 LOC.** Framework is **TestNG** (not JUnit), with Mockito and
+Measured: **492 `@Test` methods across 120 files, ~26,245 LOC.** Framework is **TestNG** (not JUnit), with Mockito and
 PowerMock for the card-DB tests.
 
 **Placement is an accident of module layout, not intent.** Only 2 test files (3 tests) live in `forge-game` —
@@ -589,11 +589,11 @@ compile, and the fixtures cannot be shared with a second engine.
 
 ### Honest gap assessment
 
-456 tests for a 210,000-LOC engine driving 33,682 card scripts is thin, and it is concentrated in _AI simulation_ rather
+492 tests for a 210,000-LOC engine driving 33,686 card scripts is thin, and it is concentrated in _AI simulation_ rather
 than _rules_. There is no per-card regression suite, no `src/test/resources` fixture directory anywhere in the repo, and
-no coverage of the vast majority of the 203 APIs, 152 trigger types, or the layer system's ordering cases.
+no coverage of the vast majority of the 203 APIs, 153 trigger types, or the layer system's ordering cases.
 
-**So the Java suite is an acceptance floor, not a specification.** It is genuinely useful — 456 free, already-debugged
+**So the Java suite is an acceptance floor, not a specification.** It is genuinely useful — 492 free, already-debugged
 assertions about real card behaviour — but passing all of it proves far less than it sounds. The differential harness in
 3.3 remains the primary correctness mechanism; the ported tests are a fast inner loop that runs in seconds without a
 JVM.
@@ -606,8 +606,8 @@ ADR-0002's near-zero-dependency rule (structured diffs on ASTs and game states a
 | Layer                | What                                                                                                                                                            | Runs                                      |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
 | **L1 Unit**          | Table-driven tests for every parser and value type: mana cost, type line, param map, valid strings, count/X expressions, cost strings, `OrderedSet`, `javarand` | every commit, seconds                     |
-| **L2 Corpus golden** | One test parses all 33,682 scripts and diffs canonical JSON against the Java dump; a second asserts zero unknown vocabulary                                     | every commit, ~seconds                    |
-| **L3 Scenario**      | Data-driven rules fixtures — the port target for the 456 Java tests                                                                                             | every commit                              |
+| **L2 Corpus golden** | One test parses all 33,686 scripts and diffs canonical JSON against the Java dump; a second asserts zero unknown vocabulary                                     | every commit, ~seconds                    |
+| **L3 Scenario**      | Data-driven rules fixtures — the port target for the 492 Java tests                                                                                             | every commit                              |
 | **L4 Differential**  | Scenario + replay parity against the Java oracle (3.3)                                                                                                          | build-tagged `//go:build oracle`, nightly |
 | **L5 Fuzz & soak**   | `testing.F` targets on every parser; randomized-deck game soak with invariant checks                                                                            | nightly + on parser changes               |
 | **L6 Bench & race**  | `go test -race` always; benchmarks on per-game hot paths with regression thresholds                                                                             | every commit / nightly                    |
@@ -653,7 +653,7 @@ Adding a rules test becomes "add a directory", not "write a Go function" — whi
 thousands of cases this engine actually needs. Support `-update` to regenerate golden files, and require that
 regeneration diffs be reviewed, never blind-accepted.
 
-**Porting the 456 Java tests means converting each into a fixture directory**, not into a Go test function. Track it in
+**Porting the 492 Java tests means converting each into a fixture directory**, not into a Go test function. Track it in
 `docs/crucible/porting/test-port-matrix.md`: one row per Java test, with status (ported / superseded / not-applicable)
 and the fixture path. That matrix doubles as a milestone gate — M5 exits when every rules-relevant row is green.
 
@@ -946,7 +946,7 @@ printed form.
 14. `internal/carddb/script` — full top-level `Key:Value` parser, all faces, all variants.
 15. `CardRulesDumper` in Java; canonical-JSON dumper in Go.
 16. Deck (`.dck`) loading; `crucible corpus-coverage` first version. **Exit gate:** P1 gate — empty diff across all
-    33,682 cards.
+    33,686 cards.
 
 ### M3 — DSL compilation to typed AST — 3–5 wks
 
@@ -1017,7 +1017,7 @@ printed form.
 | Risk                                                                                             | Mitigation                                                                                                                                                   |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Layer system divergence** (silently wrong P/T, types, costs — poisons every downstream metric) | Dedicated fixture family per layer and per timestamp-ordering case, built during M5 before any effect work                                                   |
-| **Effect long tail is unbounded**                                                                | Corpus gate (ADR-0011). "Done" is defined by the gauntlet, not by 33,682 cards. Unsupported card in a deck = hard error at load, never a silent misplay      |
+| **Effect long tail is unbounded**                                                                | Corpus gate (ADR-0011). "Done" is defined by the gauntlet, not by 33,686 cards. Unsupported card in a deck = hard error at load, never a silent misplay      |
 | **AI divergence masking rules bugs**                                                             | Replay-parity harness (Layer 3) removes AI from rules comparison entirely. Build it in M6, not M7                                                            |
 | **Upstream fork drift**                                                                          | ADR-0001: no edits to upstream Java; all patches logged. Upstream card-script changes are absorbed automatically, since Crucible reads the same `.txt` files |
 | **Telemetry metrics that are subtly wrong** (worse than no metrics)                              | Normative, versioned definitions written in M0; thresholds in config and printed in every report header                                                      |

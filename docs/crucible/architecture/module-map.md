@@ -57,7 +57,7 @@ each other.
 flowchart LR
   javarand["pkg/javarand"] -. "golden diffed against" .-> oracle["oracle-java<br/>RandomDumper"]
   collect["pkg/collect"]
-  scripts[("cardsfolder<br/>33,682 scripts")] -. "corpus gate" .-> mana["internal/mana"]
+  scripts[("cardsfolder<br/>33,686 scripts")] -. "corpus gate" .-> mana["internal/mana"]
   scripts -. "corpus gate" .-> ct["internal/cardtype"]
   lists[("TypeLists.txt")] --> ct
 ```

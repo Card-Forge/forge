@@ -13,7 +13,7 @@ What Crucible actually is, computationally, decides the dependency posture. It i
 per run, goroutine-per-game, CPU-bound, no network, no UI, no server. The hard problems are rules correctness and
 determinism, not I/O or framework integration. That is a profile the standard library covers almost entirely.
 
-Dependency weight also matters more here than on a typical project, because the engine is a port of a 517,069-line Java
+Dependency weight also matters more here than on a typical project, because the engine is a port of a 521,958-line Java
 codebase whose behaviour is not fully documented anywhere. When a rules bug is being chased through the layer system,
 every third-party abstraction in the stack is one more thing that has to be understood or ruled out first.
 

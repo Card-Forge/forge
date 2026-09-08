@@ -50,7 +50,7 @@ Compression applies to grammar. Not to facts.
 
 - Identifiers: `CardRules.Reader.parseLine`, `ApiType`, `--race`
 - File paths + line refs: `forge-game/src/main/java/forge/game/GameAction.java:2897`
-- Numbers with units: `33,682 scripts`, `6–10 weeks`, `±1.5pp`
+- Numbers with units: `33,686 scripts`, `6–10 weeks`, `±1.5pp`
 - Error strings: verbatim, in backticks, never paraphrased
 - Version/flag names: `go1.24`, `-DskipTests`
 

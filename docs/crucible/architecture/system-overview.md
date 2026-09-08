@@ -2,7 +2,7 @@
 
 - **Status:** Active
 - **Applies to:** the whole of Crucible
-- **Describes:** state as of 2026-09-07
+- **Describes:** state as of 2026-09-08
 
 The first document to read. What Crucible is, what it is not, what exists today, and what the ADRs commit it to
 becoming.
@@ -48,7 +48,7 @@ code.**
 
 | Artefact           | Count | Command                                              |
 | ------------------ | ----: | ---------------------------------------------------- |
-| Crucible documents |    45 | `find docs/crucible -name '*.md' \| wc -l`           |
+| Crucible documents |    47 | `find docs/crucible -name '*.md' \| wc -l`           |
 | Accepted ADRs      |    14 | `ls docs/crucible/adr/0*.md \| wc -l`                |
 | Guidelines         |     7 | `ls docs/crucible/guidelines/0*.md \| wc -l`         |
 | Design documents   |     4 | `ls docs/crucible/design/*-*.md \| wc -l`            |
@@ -64,12 +64,12 @@ And what it is built on, inherited from upstream Forge:
 
 | Input               |          Size | Command                                                                                       |
 | ------------------- | ------------: | --------------------------------------------------------------------------------------------- |
-| Card scripts        |  33,682 files | `find forge-gui/res/cardsfolder -name '*.txt' \| wc -l`                                       |
-| Card script lines   |       302,710 | `find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \| wc -l`                        |
-| Java port surface   | 209,810 lines | `find forge-{core,game,ai}/src/main/java -name '*.java' -exec cat {} + \| wc -l`              |
-| Java tree, total    | 517,069 lines | `find . -name '*.java' -not -path '*/target/*' -exec cat {} + \| wc -l`                       |
-| Java tests          |           456 | `grep -rh '@Test' forge-gui-desktop/src/test forge-game/src/test --include='*.java' \| wc -l` |
-| Decklists available |        14,035 | `find forge-gui/res -name '*.dck' \| wc -l`                                                   |
+| Card scripts        |  33,686 files | `find forge-gui/res/cardsfolder -name '*.txt' \| wc -l`                                       |
+| Card script lines   |       302,749 | `find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \| wc -l`                        |
+| Java port surface   | 210,501 lines | `find forge-{core,game,ai}/src/main/java -name '*.java' -exec cat {} + \| wc -l`              |
+| Java tree, total    | 521,958 lines | `find . -name '*.java' -not -path '*/target/*' -exec cat {} + \| wc -l`                       |
+| Java tests          |           492 | `grep -rh '@Test' forge-gui-desktop/src/test forge-game/src/test --include='*.java' \| wc -l` |
+| Decklists available |        14,044 | `find forge-gui/res -name '*.dck' \| wc -l`                                                   |
 
 Everything in the next two sections is target state, and each stage names the milestone that builds it.
 
@@ -79,7 +79,7 @@ Everything in the next two sections is target state, and each stage names the mi
 
 ```mermaid
 flowchart TB
-  scripts[".txt card scripts<br/>33,682 files"] --> carddb["carddb<br/>M2"]
+  scripts[".txt card scripts<br/>33,686 files"] --> carddb["carddb<br/>M2"]
   carddb --> compile["carddb/compile<br/>M3"]
   compile --> defs[("CompiledCard<br/>immutable, shared")]
   decks["decklists"] --> sim["sim: worker pool<br/>M8"]
@@ -132,7 +132,7 @@ The Java tree serves three distinct purposes:
 
 | Purpose                 | What it means                                                                                                                                                                      |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Port source**         | 209,810 lines of `forge-core`, `forge-game`, `forge-ai` are the behaviour being reproduced                                                                                         |
+| **Port source**         | 210,501 lines of `forge-core`, `forge-game`, `forge-ai` are the behaviour being reproduced                                                                                         |
 | **Differential oracle** | The Java engine generates golden outputs that Go is diffed against, in CI only ([ADR-0010](../adr/0010-differential-testing-strategy.md))                                          |
 | **Card script supply**  | `forge-gui/res/cardsfolder/` is read directly by the Go engine at runtime. Upstream additions arrive with no conversion ([ADR-0001](../adr/0001-fork-layout-and-upstream-sync.md)) |
 

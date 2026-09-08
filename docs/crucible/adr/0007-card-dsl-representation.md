@@ -6,7 +6,7 @@
 
 ## Context
 
-Card behaviour is text. 33,682 scripts hold 103,611 parseable ability and variable lines:
+Card behaviour is text. 33,686 scripts hold 103,611 parseable ability and variable lines:
 
 | Key     |  Lines | Per card |
 | ------- | -----: | -------: |
@@ -95,7 +95,7 @@ which one it is asking. Get that wrong and a card either ignores a runtime write
 second failure mode is a data race that only appears under parallel load. The overlay's fallthrough also makes the SVar
 lookup path harder to reason about than Java's single map.
 
-**Neutral.** Load time grows, since all 33,682 scripts compile before the first game starts. Irrelevant for a batch run
+**Neutral.** Load time grows, since all 33,686 scripts compile before the first game starts. Irrelevant for a batch run
 of hours; noticeable when iterating on a single fixture, which argues for a corpus-scoped load in test binaries.
 
 ## Related
