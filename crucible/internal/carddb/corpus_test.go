@@ -44,13 +44,7 @@ func TestCorpusParses(t *testing.T) {
 		return
 	}
 
-	byName := make(map[string]*carddb.Card, len(cards))
-	for _, c := range cards {
-		if name := c.Name(); name != "" {
-			byName[name] = c
-		}
-	}
-	if err := carddb.ResolvePlaceholders(cards, byName); err != nil {
+	if err := carddb.ResolvePlaceholders(cards, carddb.IndexByFaceName(cards)); err != nil {
 		t.Fatalf("resolve placeholders: %v", err)
 	}
 

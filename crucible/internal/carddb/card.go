@@ -232,8 +232,30 @@ type Card struct {
 // Primary returns the face a card is identified by.
 func (c *Card) Primary() *Face { return &c.Faces[FacePrimary] }
 
-// Name returns the primary face's name, which is the card's name.
-func (c *Card) Name() string { return c.Faces[FacePrimary].Name }
+// Name returns the card's name, which is what a decklist refers to.
+//
+// A split card is named by both halves joined with " // ", because its faces
+// combine rather than replace each other: Java switches on the split type's
+// aggregation method, and Split is the only one that COMBINEs.
+func (c *Card) Name() string {
+	primary := c.Faces[FacePrimary].Name
+	if c.SplitType == SplitSplit && c.Faces[FaceAlternate].Present {
+		return primary + " // " + c.Faces[FaceAlternate].Name
+	}
+	return primary
+}
+
+// FaceNames returns the name of every present face, primary first. A decklist
+// can refer to a card by a face rather than by the card's name.
+func (c *Card) FaceNames() []string {
+	var out []string
+	for _, i := range c.PresentFaces() {
+		if name := c.Faces[i].Name; name != "" {
+			out = append(out, name)
+		}
+	}
+	return out
+}
 
 // PresentFaces returns the indices of the faces the script filled, in order.
 func (c *Card) PresentFaces() []int {
@@ -244,4 +266,49 @@ func (c *Card) PresentFaces() []int {
 		}
 	}
 	return out
+}
+
+// accentFolds is every accented rune the card corpus uses, and what it folds
+// to. Sixteen of them, measured rather than guessed:
+//
+//	grep -rh '^Name:' forge-gui/res/cardsfolder --include='*.txt'
+//
+// Java uses commons-lang3's StringUtils.stripAccents, which decomposes and
+// drops the combining marks. Go has no equivalent in the standard library, and
+// a table over a closed set is exact where a dependency would be convenient
+// (GO-14).
+var accentFolds = map[rune]rune{
+	'à': 'a', 'á': 'a', 'â': 'a', 'ä': 'a',
+	'é': 'e', 'É': 'E',
+	'í': 'i', 'ï': 'i',
+	'ñ': 'n',
+	'ó': 'o', 'Ó': 'O', 'ö': 'o', 'ō': 'o',
+	'ú': 'u', 'û': 'u', 'ü': 'u',
+}
+
+// NormalizeName folds accents out of a card name.
+//
+// Forge indexes every card under both its real name and its accent-free form,
+// so a decklist written as "Lim-Dul's Vault" finds "Lim-Dûl's Vault". Lookup is
+// also case-insensitive there, which is the caller's business rather than this
+// function's.
+func NormalizeName(name string) string {
+	if isASCII(name) {
+		return name
+	}
+	return strings.Map(func(r rune) rune {
+		if folded, ok := accentFolds[r]; ok {
+			return folded
+		}
+		return r
+	}, name)
+}
+
+func isASCII(s string) bool {
+	for i := 0; i < len(s); i++ {
+		if s[i] >= 0x80 {
+			return false
+		}
+	}
+	return true
 }

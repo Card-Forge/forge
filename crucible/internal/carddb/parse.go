@@ -349,12 +349,22 @@ func containsString(xs []string, want string) bool {
 	return false
 }
 
-// ResolvePlaceholders fills every `CopyFaceFrom:` face from the card it names.
-// It runs once, after the whole corpus is parsed, because the face being copied
-// may belong to a card that had not been read yet.
-//
-// byName indexes cards by primary face name, which is how a script refers to
-// another card.
+// IndexByFaceName indexes cards by every face name they carry, which is what a
+// `CopyFaceFrom:` value refers to: `start_fire` copies from "Start", a face of
+// the split card whose own name is "Start // Fire".
+func IndexByFaceName(cards []*Card) map[string]*Card {
+	out := make(map[string]*Card, len(cards)*2)
+	for _, card := range cards {
+		for _, name := range card.FaceNames() {
+			if _, taken := out[name]; !taken {
+				out[name] = card
+			}
+		}
+	}
+	return out
+}
+
+// ResolvePlaceholders fills every placeholder face. See [IndexByFaceName].
 func ResolvePlaceholders(cards []*Card, byName map[string]*Card) error {
 	for _, card := range cards {
 		for index, from := range card.PlaceholderFaces {

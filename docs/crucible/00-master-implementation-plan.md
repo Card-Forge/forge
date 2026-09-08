@@ -574,14 +574,14 @@ printed form.
 
 ### M2 — Card script parser & static DB (foundation port) — 3–4 wks
 
-**In progress.**
+**Complete.**
 
 14. `internal/carddb` — top-level `Key:Value` parser, all faces, all variants. **Done**: every script in the corpus
     parses, every `CopyFaceFrom:` placeholder resolves, and the shape of the result is pinned by a summary golden.
 15. `CardRulesDumper` in Java; canonical-JSON dumper in Go. **Done**: the two agree byte for byte across the whole
     corpus, which is the P1 gate.
-16. Deck (`.dck`) loading; `crucible corpus-coverage` first version. **Exit gate:** P1 gate — empty diff across the
-    whole corpus.
+16. Deck (`.dck`) loading; `crucible corpus-coverage` first version. **Done**: all 14,044 decklists parse, and coverage
+    reports the named cards the database lacks. **Exit gate:** P1 gate — empty diff across the whole corpus, green.
 
 ### M3 — DSL compilation to typed AST — 3–5 wks
 
