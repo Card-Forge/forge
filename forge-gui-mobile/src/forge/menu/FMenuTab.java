@@ -14,7 +14,7 @@ import forge.assets.FSkinImage;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
-public class FMenuTab extends FDisplayObject {
+public class FMenuTab extends FDisplayObject implements IUnreadIndicator {
     public static final FSkinFont FONT = FSkinFont.get(12);
     boolean iconOnly = false;
     boolean active = false;
@@ -195,16 +195,19 @@ public class FMenuTab extends FDisplayObject {
         } else
             g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
 
-        //unread badge in the top-right corner
-        if (unreadCount > 0) {
-            String label = unreadCount > 99 ? "99+" : Integer.toString(unreadCount);
-            float textW = BADGE_FONT.getBounds(label).width;
-            float diameter = Math.max(BADGE_FONT.getLineHeight(), textW + 2 * Utils.scale(4));
-            float bx = getWidth() - diameter - PADDING;
-            float by = PADDING;
-            g.fillRect(BADGE_COLOR, bx, by, diameter, diameter);
-            g.drawText(label, BADGE_FONT, BADGE_TEXT_COLOR, bx, by, diameter, diameter, false, Align.center, true);
-        }
+        drawUnreadBadge(g, unreadCount, getWidth());
+    }
+
+    /** Draws the unread-message count badge in the top-right corner of a widget of the given width. */
+    public static void drawUnreadBadge(Graphics g, int unreadCount, float widgetWidth) {
+        if (unreadCount <= 0) { return; }
+        String label = unreadCount > 99 ? "99+" : Integer.toString(unreadCount);
+        float textW = BADGE_FONT.getBounds(label).width;
+        float diameter = Math.max(BADGE_FONT.getLineHeight(), textW + 2 * Utils.scale(4));
+        float bx = widgetWidth - diameter - PADDING;
+        float by = PADDING;
+        g.fillRect(BADGE_COLOR, bx, by, diameter, diameter);
+        g.drawText(label, BADGE_FONT, BADGE_TEXT_COLOR, bx, by, diameter, diameter, false, Align.center, true);
     }
     public boolean isShowingDropdownMenu(boolean any) {
         if (dropDown == null)

@@ -395,7 +395,7 @@ public abstract class GuiDownloadService implements Runnable {
     }
 
     public abstract String getTitle();
-    protected abstract Map<String, String> getNeededFiles();
+    protected abstract Map<String, String> getNeededFiles() throws UnsupportedEncodingException;
 
     protected static void addMissingItems(Map<String, String> list, String nameUrlFile, String dir) {
         addMissingItems(list, nameUrlFile, dir, false);

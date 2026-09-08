@@ -14,6 +14,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
     }
 
     @Override
-    protected Map<String, String> getNeededFiles() {
+    protected Map<String, String> getNeededFiles() throws UnsupportedEncodingException {
         final Map<String, String> downloads = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         final List<PaperCard> matches = new ArrayList<>();
@@ -105,7 +106,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         return downloads;
     }
 
-    private void syncSetsOneByOne(List<String> needSync) {
+    private void syncSetsOneByOne(List<String> needSync) throws UnsupportedEncodingException {
         int setIndex = 0;
         for (String setCode : needSync) {
             if (cancel) break;
