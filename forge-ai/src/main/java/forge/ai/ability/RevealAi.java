@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -54,16 +55,27 @@ public class RevealAi extends RevealAiBase {
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // logic to see if it should reveal Miracle Card
-        if (sa.hasParam("MiracleCost")) {
+        if (sa.isKeyword(Keyword.MIRACLE)) {
             final Card c = sa.getHostCard();
-            for (SpellAbility s : c.getBasicSpells()) {
+
+            // the PlayEffect with Miracle Cost
+            SpellAbility playSub = sa.getSubAbility().getAdditionalAbility("Execute");
+            Cost playCost = new Cost(playSub.getParam("PlayCost"), false);
+
+            for (SpellAbility s : c.getAllPossibleAbilities(ai, false)) {
+                if (!s.isBasicSpell()) {
+                    continue;
+                }
                 Spell spell = (Spell) s;
                 s.setActivatingPlayer(ai);
                 // timing restrictions still apply
                 if (!s.getRestrictions().checkTimingRestrictions(c, s))
                     continue;
 
-                spell = (Spell) spell.copyWithDefinedCost(new Cost(sa.getParam("MiracleCost"), false));
+                spell = (Spell) spell.copyWithDefinedCost(playCost);
+                if (playSub.hasParam("PlayReduceCost")) {
+                    spell.putParam("ReduceCost", playSub.getParam("PlayReduceCost"));
+                }
 
                 AiPlayDecision decision = ((PlayerControllerAi) ai.getController()).getAi()
                         .canPlayFromEffectAI(spell, false, false);
@@ -83,7 +95,10 @@ public class RevealAi extends RevealAiBase {
             if (c == null || (!c.isInstant() && !c.isSorcery())) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-            for (SpellAbility s : c.getBasicSpells()) {
+            for (SpellAbility s : c.getAllPossibleAbilities(ai, false)) {
+                if (!s.isBasicSpell()) {
+                    continue;
+                }
                 Spell spell = (Spell) s.copy(ai);
                 // timing restrictions still apply
                 if (!spell.getRestrictions().checkTimingRestrictions(c, spell))
