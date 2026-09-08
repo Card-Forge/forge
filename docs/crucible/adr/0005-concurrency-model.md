@@ -26,9 +26,9 @@ game at a time, so process-global mutable state is free. `MyRandom.random` is a 
 Crucible's workload is the opposite shape: 10^5 to 10^6 games per run, each fully independent, no communication between
 them, no shared mutable state required by the domain. Embarrassingly parallel, and currently unreachable.
 
-The card database is what makes the naive approaches fail. 33,686 card scripts, 302,749 lines, parsed into an immutable
-`CardRules` graph. Forge's own `CardStorageReader` is multi-threaded specifically because loading it is slow. Any design
-that loads or copies that per game is dead on arrival.
+The card database is what makes the naive approaches fail. The corpus is tens of thousands of card scripts, parsed into
+an immutable `CardRules` graph. Forge's own `CardStorageReader` is multi-threaded specifically because loading it is
+slow. Any design that loads or copies that per game is dead on arrival.
 
 ## Decision Drivers
 
@@ -41,8 +41,8 @@ that loads or copies that per game is dead on arrival.
 
 ## Considered Options
 
-1. **Process per game.** What Java effectively does today. Rejected — process startup plus a 33,686-file card database
-   load per game dwarfs the game itself. This is precisely why the Java engine cannot serve this workload.
+1. **Process per game.** What Java effectively does today. Rejected — process startup plus a full-corpus ile card
+   database load per game dwarfs the game itself. This is precisely why the Java engine cannot serve this workload.
 2. **Goroutine per game, shared mutable state guarded by locks.** A faithful port of the Java structure with
    `sync.Mutex` where `static` used to be. Rejected — serialises the exact thing the port exists to parallelise, and
    leaves every global as a latent race that only appears under load.

@@ -308,7 +308,7 @@ a coverage rule quietly stops meaning anything.
 | Layer                | What                                                                   | Runs                             |
 | -------------------- | ---------------------------------------------------------------------- | -------------------------------- |
 | **L1** Unit / table  | Parsers, value types, `javarand`                                       | Every commit                     |
-| **L2** Corpus golden | All 33,686 scripts → canonical JSON, diffed against Java dump          | Every commit                     |
+| **L2** Corpus golden | Every script → canonical JSON, diffed against Java dump                | Every commit                     |
 | **L3** Scenario      | TEST-5 fixtures                                                        | Every commit                     |
 | **L4** Differential  | Scenario + replay parity vs Java oracle. Build tag `//go:build oracle` | Nightly                          |
 | **L5** Fuzz + soak   | TEST-10, plus randomized-deck games with invariant checks              | Nightly                          |
@@ -353,4 +353,4 @@ its load-outside-the-timeout-window workaround.
 
 - [00-documentation-style](00-documentation-style.md)
 - [02-java-to-go-translation](02-java-to-go-translation.md)
-- `docs/crucible/porting/test-port-matrix.md` — status of all 492 ported Java tests
+- `docs/crucible/porting/test-port-matrix.md` — status of every ported Java test

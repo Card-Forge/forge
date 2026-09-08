@@ -6,9 +6,9 @@
 
 ## Context
 
-210,501 lines of Java become Go. Every unit of that is a choice between reproducing the Java structure and rewriting it
-idiomatically, and the choice cannot be left to whoever is holding the file. Made ad hoc across ten milestones, it
-produces a codebase that is Java in some packages and Go in others, which is worse than either.
+Roughly 210,000 lines of Java become Go. Every unit of that is a choice between reproducing the Java structure and
+rewriting it idiomatically, and the choice cannot be left to whoever is holding the file. Made ad hoc across ten
+milestones, it produces a codebase that is Java in some packages and Go in others, which is worse than either.
 
 This ADR is written after the rules it governs. `PORT-n` in
 [02-java-to-go-translation.md](../guidelines/02-java-to-go-translation.md) has been enforced since the guidelines
@@ -32,7 +32,8 @@ landed. What was missing is the record of _why_ — and by now there is evidence
 | `forge-ai`   |      56,821 |                   248 |
 | **Total**    | **210,501** |             **4,556** |
 
-Counted with `find forge-{core,game,ai}/src/main/java -name '*.java' -exec cat {} + | wc -l`.
+Counted at `b05ee47a6fd` with `find forge-{core,game,ai}/src/main/java -name '*.java' -exec cat {} + | wc -l`. A dated
+snapshot: the ratio is the argument, and it does not move when upstream adds a set (ARCH-9).
 
 `Card.java` alone declares 628 accessors in 8,105 lines. At three lines each that is roughly 13,700 lines existing only
 because Java has no properties — about 6.5% of the port surface, reproducing nothing but a language limitation Go does
@@ -65,9 +66,9 @@ restated here (DOC-11). It is the operative document; this ADR is the reasoning 
 diverge in detail as the guideline is amended.
 
 **What makes deviation responsible is ADR-0010, not confidence.** Restructuring is safe in proportion to how well
-behaviour can be proven identical: static parity over all 33,686 cards, scenario parity on fixtures with no AI, replay
-parity on recorded games. Without that harness this decision would be reckless. With it, keeping Java's structure buys
-nothing that the differential tests do not already provide.
+behaviour can be proven identical: static parity over every card, scenario parity on fixtures with no AI, replay parity
+on recorded games. Without that harness this decision would be reckless. With it, keeping Java's structure buys nothing
+that the differential tests do not already provide.
 
 **Deviations are recorded, not remembered.** Every ported unit carries a `porting/port-log/<unit>.md` note stating what
 the Java does, where Go departs from it, how each Java `null` was translated, and which behaviours were pinned rather

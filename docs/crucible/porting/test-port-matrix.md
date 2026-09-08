@@ -2,8 +2,8 @@
 
 - **Status:** Active (empty)
 
-Status of all 492 TestNG tests inherited from upstream Forge. One row per Java test. Doubles as a milestone gate: M5
-exits when every rules-relevant row is green.
+Status of every TestNG test inherited from upstream Forge. One row per Java test. Doubles as a milestone gate: M5 exits
+when every rules-relevant row is green.
 
 Status values:
 

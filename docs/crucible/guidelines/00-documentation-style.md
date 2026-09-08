@@ -50,7 +50,7 @@ Compression applies to grammar. Not to facts.
 
 - Identifiers: `CardRules.Reader.parseLine`, `ApiType`, `--race`
 - File paths + line refs: `forge-game/src/main/java/forge/game/GameAction.java:2897`
-- Numbers with units: `33,686 scripts`, `6–10 weeks`, `±1.5pp`
+- Numbers with units: `82 cycles`, `6–10 weeks`, `±1.5pp`
 - Error strings: verbatim, in backticks, never paraphrased
 - Version/flag names: `go1.24`, `-DskipTests`
 
@@ -223,6 +223,16 @@ Reason: relative links resolve on GitHub, in IDEs, and in any Markdown viewer. W
 brackets outside Obsidian.
 
 Duplicated fact = two facts that will disagree in three months.
+
+**Measured figures are facts with a shelf life.** Exact ones live in
+[`../architecture/system-overview.md`](../architecture/system-overview.md), beside the command that reproduces them.
+`crucible/tools/metrics` will check them against the tree once it lands
+([ADR-0015](../adr/0015-upstream-sync-procedure.md)); until then this is maintained by review. Anywhere else, round the
+number or link to it: "tens of thousands of card scripts", "roughly 210,000 lines". A dated snapshot may keep exact
+figures, because the date says when they were true (ARCH-9).
+
+Reason: an upstream sync moves every one of these. Restating them turned one sync into a 72-line diff across 22
+documents in which nothing was learned.
 
 ---
 

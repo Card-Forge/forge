@@ -20,7 +20,7 @@ kind something is.
 ```mermaid
 flowchart TB
   subgraph proc["Process — loaded once, then immutable"]
-    db[("CompiledCard set<br/>33,686 definitions")]
+    db[("CompiledCard set<br/>one per card")]
     reg[("Effect registry<br/>203 entries")]
   end
   subgraph game["Per game — one goroutine, no sharing"]
@@ -72,7 +72,7 @@ copies a nil map header.
 ### 2 · Compiled definitions are never deep-copied
 
 A `Card` in the arena holds `def *CompiledCard`. A slice copy copies the pointer, which is correct and must stay that
-way — deep-copying 33,686 shared definitions per clone would make lookahead unusable and would violate the immutability
+way — deep-copying every shared definition per clone would make lookahead unusable and would violate the immutability
 the sharing depends on ([ADR-0005](../adr/0005-concurrency-model.md)).
 
 Correct by construction rather than by discipline, provided `Card` never gains a by-value definition field.
@@ -116,7 +116,7 @@ Which decision governs each step. Nothing here is built; the milestone column sa
 
 | Step                                                                         | Governed by                     | Milestone |
 | ---------------------------------------------------------------------------- | ------------------------------- | --------- |
-| Process start: load 33,686 scripts, compile definitions, freeze              | ADR-0007                        | M2, M3    |
+| Process start: load every script, compile definitions, freeze                | ADR-0007                        | M2, M3    |
 | Wire the effect registry from `cmd/`, freeze                                 | ADR-0008                        | M6        |
 | Worker pulls a game spec; derive per-stream seeds from run seed + game index | ADR-0005, ADR-0006              | M8        |
 | Build `Game`: arena of cards pointing at shared definitions, players, zones  | ADR-0009                        | M4        |

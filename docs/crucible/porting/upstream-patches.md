@@ -58,5 +58,5 @@ changes no file and creates no conflict surface, so it is deliberately not a pat
 gh api -X PUT /repos/jczastkiewicz/crucible/actions/workflows/<id>/enable
 ```
 
-`351717668` is `test-build.yaml`, which runs upstream's 492 TestNG tests. Re-enable it around M1, when the Java oracle
-needs to be known-buildable.
+`351717668` is `test-build.yaml`, which runs upstream's TestNG suite. Re-enable it around M1, when the Java oracle needs
+to be known-buildable.

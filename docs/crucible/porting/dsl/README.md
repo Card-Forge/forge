@@ -20,8 +20,8 @@ struct generator ([ADR-0007](../../adr/0007-card-dsl-representation.md), [ADR-00
 ## How these were derived
 
 **From the corpus, not from reading the Java.** Reading 6,000 lines of `CardProperty` and `AbilityUtils` would produce a
-grammar of what Java _can_ accept; extracting from 33,686 scripts produces a grammar of what is _used_, which is what
-must actually parse.
+grammar of what Java _can_ accept; extracting from the corpus produces a grammar of what is _used_, which is what must
+actually parse.
 
 Each grammar states the measurements behind it and the command that produced them. Corpus totals as of 2026-09-07:
 

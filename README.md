@@ -58,8 +58,8 @@ The reasoning is in [ADR-0005](docs/crucible/adr/0005-concurrency-model.md) and
 ## Relationship to Forge
 
 This repository is a fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). **Almost everything in it is
-Forge's work, not Crucible's** — 521,958 lines of Java and 33,686 card scripts, built by the Forge community over more
-than a decade.
+Forge's work, not Crucible's** — half a million lines of Java and tens of thousands of card scripts, built by the Forge
+community over more than a decade.
 
 Crucible uses that work three ways:
 

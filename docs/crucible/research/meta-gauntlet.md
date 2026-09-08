@@ -35,7 +35,7 @@ Worth stating plainly, because it changes how that ADR should be read.
 | ---------------------------- | -------: | ------------: | --------------------------------: |
 | A real ~15-deck gauntlet     | ~316–562 |         59–71 |                            31–37% |
 | The entire Modern legal pool |   22,107 |       **148** |                           **77%** |
-| All formats, in the limit    |  ~33,686 |           192 |                              100% |
+| All formats, in the limit    |  ~34,000 |           192 |                              100% |
 
 ```console
 $ # Modern pool, resolved against card scripts
@@ -98,7 +98,7 @@ Candidate sources are public metagame trackers and tournament result aggregators
 `gauntlet.toml` alongside the snapshot date, so a run's `manifest.json` identifies exactly what it was measured against.
 
 Decks are stored in Forge's `.dck` format, which the engine already reads ([grammar](../porting/dsl/README.md),
-`forge-gui/res` has 14,044 examples).
+`forge-gui/res` ships thousands of examples).
 
 ## Refresh cadence
 
@@ -126,10 +126,10 @@ The order formats are added is a scheduling decision, made with that report in h
 
 ## Open questions
 
-- **Decklists are not chosen yet.** Everything else here is structure. They need an external source: the 14,044 `.dck`
-  files in this repository are quest, adventure and AI-generated decks, not a competitive metagame. What they gate is
-  M6's backlog — `crucible corpus-coverage --decks gauntlets/modern/` is what defines "done" for card support — not
-  M1-M5, which need no gauntlet.
+- **Decklists are not chosen yet.** Everything else here is structure. They need an external source: the `.dck` files in
+  this repository are quest, adventure and AI-generated decks, not a competitive metagame. What they gate is M6's
+  backlog — `crucible corpus-coverage --decks gauntlets/modern/` is what defines "done" for card support — not M1-M5,
+  which need no gauntlet.
 - Weights need a source too, and an unweighted first gauntlet is acceptable provided reports say so.
 - Whether sideboards are simulated at all in M6, or deferred. Sideboarding needs `PlayerController` support for
   between-game decisions and is not in the plan's milestone list.

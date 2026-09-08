@@ -6,10 +6,10 @@
 
 ## Context
 
-"Port the card engine" has no natural end. There are 33,686 card scripts using 192 distinct ability APIs, and the tail
-is long: the top 30 APIs fully cover 78.5% of cards, and the last 42 APIs are needed by the final 0.3%. Chasing that
-tail is most of the work and none of the value, because Crucible does not play with 33,686 cards. It plays with a target
-deck and a gauntlet.
+"Port the card engine" has no natural end. The corpus holds tens of thousands of card scripts using 192 distinct ability
+APIs, and the tail is long: the top 30 APIs fully cover 78.5% of cards, and the last 42 APIs are needed by the final
+0.3%. Chasing that tail is most of the work and none of the value, because Crucible does not play with every card in it.
+It plays with a target deck and a gauntlet.
 
 **Measured against real decklists in this repository**, sampling constructed decks and resolving each card to its
 script:
@@ -37,7 +37,7 @@ answer whether a given card can be trusted.
 ## Considered Options
 
 1. **Implement everything.** Rejected — the tail is most of the effort and the gauntlet does not reach it.
-2. **Implement the top N APIs by frequency.** Rejected — frequency across all 33,686 cards is a proxy for what a
+2. **Implement the top N APIs by frequency.** Rejected — frequency across the whole corpus is a proxy for what a
    specific gauntlet needs, and a proxy is exactly what a tool can avoid.
 3. **Scope by the decks under test, gated by a tool.** **Chosen.**
 

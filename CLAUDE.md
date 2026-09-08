@@ -137,7 +137,7 @@ cd crucible && golangci-lint run
 # Java oracle
 mvn -pl crucible/oracle-java -am test
 
-# Upstream Java suite: 492 TestNG tests, needs a display
+# Upstream Java suite: TestNG, needs a display
 mvn -U -B clean test          # CI runs this under Xvfb
 ```
 
@@ -145,7 +145,7 @@ mvn -U -B clean test          # CI runs this under Xvfb
 
 ## Current state
 
-M0 done — 14 ADRs `Accepted`, 7 guidelines, 4 design docs, 6 DSL grammars.
+M0 done — 15 ADRs `Accepted`, 7 guidelines, 4 design docs, 6 DSL grammars.
 
 M1 done — `pkg/collect`, `pkg/javarand` (bit-matches Java over the committed golden), `internal/mana`,
 `internal/cardtype` (both round-trip the whole card corpus), `tools/javacycles`, `tools/enginelint`, `tools/docgate`,
