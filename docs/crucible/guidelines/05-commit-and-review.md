@@ -106,8 +106,8 @@ Follows [00-documentation-style](00-documentation-style.md).
 
 ## REV-7 — Upstream sync
 
-A sync is a **merge**, never a rebase, and it lands through a pull request like every other change (REV-2). A weekly job
-proposes it; CI decides whether it is safe; a human merges it, **with a merge commit and never a squash**.
+A sync is a **merge**, never a rebase, and it lands through a pull request like every other change (REV-2). You start it
+when you want the new cards; CI decides whether it is safe; you merge it, **with a merge commit and never a squash**.
 
 Procedure and what to do when a gate goes red: [`../runbooks/upstream-sync.md`](../runbooks/upstream-sync.md). Decision
 and alternatives: [ADR-0015](../adr/0015-upstream-sync-procedure.md).

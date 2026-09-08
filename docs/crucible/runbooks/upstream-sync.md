@@ -1,20 +1,41 @@
 # Runbook — Upstream Sync
 
-- **Status:** Active. The weekly workflow and `tools/metrics` land in the PR that implements
-  [ADR-0015](../adr/0015-upstream-sync-procedure.md); until then the same steps are run by hand.
+- **Status:** Active. `tools/metrics` lands in the PR that implements
+  [ADR-0015](../adr/0015-upstream-sync-procedure.md); until then its check is run by eye.
 - **Applies to:** every merge of `Card-Forge/forge` into this fork
 - **Decision and reasoning:** [ADR-0015](../adr/0015-upstream-sync-procedure.md). This file is the procedure only.
 
-Upstream lands about 10 commits a day, so a weekly sync is roughly 70 commits and a handful of card scripts. Most syncs
-are a rubber stamp. The ones that are not are the reason every step below exists.
+Commits are read from `Card-Forge/forge` and land in `jczastkiewicz/crucible`. Never the other way: nothing Crucible
+does is pushed to upstream.
+
+Upstream lands about 10 commits a day, so a week between syncs is roughly 70 commits and a handful of card scripts, and
+a month is closer to 300. Most syncs are a rubber stamp. The ones that are not are the reason every step below exists.
+
+A clone has the `upstream` remote only if someone added it. Once, per checkout:
+
+```bash
+git remote add upstream https://github.com/Card-Forge/forge.git
+git remote -v      # origin -> jczastkiewicz/crucible, upstream -> Card-Forge/forge
+```
 
 ---
 
-## What happens without you
+## The sync itself
 
-Once a week the sync workflow fetches `upstream/master`. If there is nothing new it stops and opens nothing. Otherwise
-it cuts `sync/<yyyy-mm-dd>-<upstream-short-sha>` from `master`, merges upstream into it, pushes, and opens a pull
-request. If the merge conflicts, the job stops without pushing and you do it by hand, using the manual procedure below.
+Nothing runs on a schedule. Sync when you want the new cards, and prefer the gap between milestones over the middle of
+one — the oracle moving under a port in flight is the one timing that costs you something.
+
+```bash
+git fetch upstream                                       # Card-Forge/forge
+git log --oneline master..upstream/master | wc -l        # how much is coming; zero means stop here
+git checkout -b sync/$(date +%F)-$(git rev-parse --short upstream/master) master
+git merge upstream/master
+git push -u origin HEAD                                  # jczastkiewicz/crucible
+gh pr create --repo jczastkiewicz/crucible --base master --fill
+```
+
+Open the pull request as yourself rather than from a script: GitHub raises no workflow runs for events from the default
+`GITHUB_TOKEN`, so an automated PR would arrive with no checks on it at all.
 
 The pull request runs the same checks as any other. Four of them can be broken by upstream:
 
@@ -135,19 +156,14 @@ changed; reverting it only delays learning.
 
 ---
 
-## Manual sync
+## Checking locally before pushing
 
-Use this when the schedule is off, when a conflict stopped the job, or when a milestone is mid-flight and you want the
-sync on your own timing.
+Optional — CI runs all of it on the pull request — but it turns a red check into a fixed one before anybody sees it.
 
 ```bash
-git fetch upstream
-git log --oneline master..upstream/master | wc -l        # how much is coming
-git checkout -b sync/$(date +%F)-$(git rev-parse --short upstream/master) master
-git merge upstream/master
-cd crucible && go test -race -count=1 ./... && go run ./tools/javacycles -root ../forge-game/src/main/java -prefix forge.game -expect 82
-git push -u origin HEAD
-gh pr create --repo jczastkiewicz/crucible --base master --fill
+cd crucible
+go test -race -count=1 ./...
+go run ./tools/javacycles -root ../forge-game/src/main/java -prefix forge.game -expect 82
 ```
 
 ## Never
