@@ -89,9 +89,7 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
-    private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
-    private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
+    private final ImmutableList<VariantCheckBox> vntBoxes  =
             ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
 
     // Player frame elements
@@ -227,13 +225,6 @@ public class VLobby implements ILobbyView {
 
         ////////////////////////////////////////////////////////
         //////////////////// Variants Panel ////////////////////
-        ImmutableList<VariantCheckBox> vntBoxes = null;
-        if (lobby.isAllowNetworking()) {
-            vntBoxes = vntBoxesNetwork;
-        } else {
-            vntBoxes = vntBoxesLocal;
-        }
-
         variantsPanel.setOpaque(false);
         variantsPanel.add(newLabel(localizer.getMessage("lblVariants")));
         for (final VariantCheckBox vcb : vntBoxes) {
@@ -380,12 +371,6 @@ public class VLobby implements ILobbyView {
         controller.syncModeFromHost();
         controller.onLobbyDataChanged();
 
-        ImmutableList<VariantCheckBox> vntBoxes;
-        if (lobby.isAllowNetworking()) {
-            vntBoxes = vntBoxesNetwork;
-        } else {
-            vntBoxes = vntBoxesLocal;
-        }
         for (final VariantCheckBox vcb : vntBoxes) {
             vcb.setSelected(hasVariant(vcb.variant));
             vcb.setEnabled(lobby.hasControl());

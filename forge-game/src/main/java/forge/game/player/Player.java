@@ -285,6 +285,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         }
 
+        activeScheme = scheme;
+
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());

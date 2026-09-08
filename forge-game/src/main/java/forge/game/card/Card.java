@@ -4985,8 +4985,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final void updateKeywords() {
         getCurrentState().getView().updateKeywords(this, getCurrentState());
-        // Keywords (and P/T from them) can affect displayed lethal damage
-        getView().updateLethalDamage(this);
     }
 
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
