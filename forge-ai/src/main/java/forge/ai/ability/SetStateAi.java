@@ -138,7 +138,7 @@ public class SetStateAi extends SpellAbilityAi {
             if (card.getState(CardStateName.Original).hasKeyword(Keyword.HIDDEN_AGENDA)
                     && card.isInZone(ZoneType.Command)) {
                 final String chosenName = card.getNamedCard();
-                return ai.getGame().getStack().getSpellsCastThisTurn().stream().anyMatch(sp -> ai.equals(sp.getActivatingPlayer()) && sp.getHostCard().getName().equals(chosenName));
+                return ai.getGame().getStack().getSpellsCastThisTurn().get(ai).stream().anyMatch(sp -> sp.getHostCard().getName().equals(chosenName));
             }
 
             // non-permanent facedown can't be turned face up

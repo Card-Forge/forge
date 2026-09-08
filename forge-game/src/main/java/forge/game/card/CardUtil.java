@@ -130,7 +130,11 @@ public final class CardUtil {
     }
 
     public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, controller, src, ctb);
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellCardsCastLastTurn(), valid, controller, src, ctb);
+    }
+
+    public static List<Card> getThisGameCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellCardsCastThisGame(), valid, controller, src, ctb);
     }
 
     public static List<SpellAbility> getThisTurnActivated(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
