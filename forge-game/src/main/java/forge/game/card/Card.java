@@ -3339,8 +3339,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final Set<String> getProducibleColors() {
         Set<String> colors = new HashSet<>();
         for (final SpellAbility ab : getManaAbilities()) {
-            // canProduce is far more expensive with no activating player set, so fill it in for
-            // the duration of the check and put it back afterwards - this is a read, and
+            // without an activating player getComboColors gives up on its NotedColors branch and
+            // the source reports no colors at all; areMet also logs a warning on every check.
+            // Fill one in for the read and put it back after - this is a read, and
             // setActivatingPlayer trickles down to sub-abilities
             final Player fillIn = ab.getActivatingPlayer() == null ? getController() : null;
             if (fillIn != null) {

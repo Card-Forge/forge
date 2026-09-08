@@ -6,6 +6,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -96,14 +97,16 @@ public class TapAi extends TapAiBase {
                     Integer amount = lifeCost.convertAmount();
                     if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa)) {
                         final int landsize = payer.getLandsInPlay().size() + 1;
+                        // Check if the AI has enough lands to play the card
+                        final CardCollection playable = CardLists.filter(
+                                payer.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(landsize));
+                        if (playable.isEmpty()) {
+                            return false;
+                        }
                         // the same sources answer this for every card in hand, so ask once
                         final byte availableColors = ColorSet.fromNames(
                                 ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
-                        for (Card c : payer.getCardsIn(ZoneType.Hand)) {
-                            // Check if the AI has enough lands to play the card
-                            if (landsize != c.getCMC()) {
-                                continue;
-                            }
+                        for (Card c : playable) {
                             // Check if the AI intends to play the card and if it can pay for it with the mana it has
                             boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
                             boolean canPay = c.getManaCost().canBePaidWithAvailable(availableColors);
