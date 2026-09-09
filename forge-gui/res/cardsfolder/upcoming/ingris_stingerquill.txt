@@ -6,6 +6,6 @@ K:Flying
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature you control attacks, that creature deals 1 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | DamageSource$ TriggeredAttackerLKICopy | NumDmg$ 1
 A:AB$ Token | Cost$ 4 | TokenScript$ cadet | TokenOwner$ You | SubAbility$ DBPumpAll | SpellDescription$ Create a 2/2 colorless Wizard Soldier creature token named Cadet. Then creatures you control gain haste until end of turn.
-Svar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste
 SVar:HasAttackEffect:TRUE
 Oracle:Flying\nWhenever a creature you control attacks, that creature deals 1 damage to each opponent.\n{4}: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Then creatures you control gain haste until end of turn.
