@@ -21,9 +21,10 @@ func TestCanonicalJSON(t *testing.T) {
 			name:   "a minimal card",
 			script: "Name:Bolt\nManaCost:R\nTypes:Instant\nOracle:Deals 3 damage.\n",
 			want: `{"file":"fixture","split":"None","partnerWith":"","meldWith":"","remAI":false,` +
-				`"remRandom":false,"remNonCommander":false,"placeholders":[],"faces":[` +
+				`"remRandom":false,"remNonCommander":false,"tokens":[],"placeholders":[],"faces":[` +
 				`{"i":0,"name":"Bolt","flavorName":"","type":"Instant","manaCost":"{R}","colors":8,` +
-				`"power":"","toughness":"","loyalty":"","defense":"","lights":"","text":"",` +
+				`"power":"","toughness":"","intPower":2147483647,"intToughness":2147483647,` +
+				`"loyalty":"","defense":"","lights":"","text":"",` +
 				`"oracle":"Deals 3 damage.","abilities":[],"keywords":[],"triggers":[],"statics":[],` +
 				`"replacements":[],"deckRules":[],"draftActions":[],"svars":[],"variants":[]}]}`,
 		},
@@ -61,6 +62,16 @@ func TestCanonicalJSON(t *testing.T) {
 			name:   "variant names print sorted",
 			script: "Name:X\nManaCost:2\nTypes:Artifact\nVariant:B:K:Two\nVariant:A:K:One\n",
 			want:   `"variants":["A","B"]`,
+		},
+		{
+			name:   "tokens are dumped on the card in script order, not sorted",
+			script: "Name:X\nManaCost:R\nTypes:Instant\nA:SP$ Token | TokenScript$ zombie,soldier | Cost$ R\n",
+			want:   `"tokens":["zombie","soldier"],`,
+		},
+		{
+			name:   "a star power is dumped as the number it reduces to, next to the text it was written as",
+			script: "Name:X\nManaCost:R\nTypes:Creature Elf\nPT:1+*/*\n",
+			want:   `"power":"1+*","toughness":"*","intPower":1,"intToughness":0,`,
 		},
 		{
 			name:   "a placeholder face is named and left unfilled, as Forge's reader leaves it",

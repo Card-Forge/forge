@@ -52,11 +52,12 @@ Each was decided before the code was written, which is what this note is for.
 
 ## Null decisions
 
-| Java                                                              | Go                                                   |
-| ----------------------------------------------------------------- | ---------------------------------------------------- |
-| `value` is `null` when the line has no colon                      | `(string, bool)`; only `ALTERNATE` produces it       |
-| `faces[i]` is `null` until a `Name:` line                         | `Face.IsPresent bool`                                |
-| `placeholderFaces` is `null` when the card has no `CopyFaceFrom:` | Empty map, because the caller iterates it either way |
+| Java                                                                  | Go                                                     |
+| --------------------------------------------------------------------- | ------------------------------------------------------ |
+| `value` is `null` when the line has no colon                          | `(string, bool)`; only `ALTERNATE` produces it         |
+| `faces[i]` is `null` until a `Name:` line                             | `Face.IsPresent bool`                                  |
+| `placeholderFaces` is `null` when the card has no `CopyFaceFrom:`     | Empty map, because the caller iterates it either way   |
+| `iPower` / `iToughness` sit at `Integer.MAX_VALUE` until a `PT:` line | `PTUnset`, same value. A face with no P/T is not a 0/0 |
 
 ## What the empty-diff gate cost
 
@@ -74,11 +75,26 @@ Four divergences stood between the first dump and an empty diff, and every one w
 The last two cost a property: `Parse(l.String())` no longer equals `l` for a type line with subtypes. Matching the
 oracle is worth more than a round trip this parser was never required to have.
 
+## Power and toughness are dumped twice
+
+Once as the script wrote them, once as the number Forge computes with. `CardFace.parsePT` turns a
+characteristic-defining `*` into zero and removes the sign binding it, so `1+*` is 1, `*+1` is 1 and `7-*` is 7 — 245
+corpus lines take that path. Agreeing on the string `"1+*"` says nothing about agreeing that it means 1, and the
+normalisation is the part with a rule in it, so both are in the diff.
+
+The four replacements run in sequence rather than as one pass, because Java chains `String.replace` and the two differ
+on a value holding more than one `*` (PORT-7). A value that survives normalisation without being a number is an error
+naming the card, which is Java throwing out of `setPtText`; no corpus card does it.
+
+Tokens are dumped on the card rather than a face: Java harvests every `TokenScript$` on the Reader itself, whichever
+face's line carried it, and keeps them in script order.
+
 ## Open questions
 
 - **Whether to reproduce the ignore-unknown-keys behaviour.** Erroring is the P2 vocabulary gate's whole premise, and
   Forge tolerating a typo is not a licence to. The allowlist keeps the two known defects loading while making a third
   one loud, which is the same shape as `internal/cardtype`'s `UnknownTypes`.
-- **What the canonical dump leaves out**, because the two sides model it differently and the gate is about rules rather
-  than deck-building: `DeckHints`, `DeckNeeds`, `DeckHas`, the token list, and the derived integer power and toughness.
-  Each is parsed and kept by `internal/carddb`; none is compared. Adding one means adding it on both sides at once.
+- **What the canonical dump leaves out:** `DeckHints`, `DeckNeeds` and `DeckHas`. Java parses each into a
+  `Map<Type, List<String>>` with no `toString`, so comparing them means porting that parser and writing a renderer on
+  the Java side. All three are parsed and kept by `internal/carddb`; none is compared, so a divergence in them would be
+  invisible.

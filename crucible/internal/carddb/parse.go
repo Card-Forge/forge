@@ -172,6 +172,16 @@ func (p *parser) faceEntry(key, value string, face *Face) error {
 		if !ok || strings.Contains(toughness, "/") {
 			return fmt.Errorf("PT: %q is not power/toughness", value)
 		}
+		// Both halves are normalised to a number here rather than on first
+		// read, because Java normalises in setPtText and throws there. A card
+		// whose P/T does not reduce to a number is a broken script, and it has
+		// to fail while the script is in hand to say which one.
+		if _, err := parsePT(power); err != nil {
+			return fmt.Errorf("PT: power %q: %w", power, err)
+		}
+		if _, err := parsePT(toughness); err != nil {
+			return fmt.Errorf("PT: toughness %q: %w", toughness, err)
+		}
 		face.Power, face.Toughness = power, toughness
 	case "Colors":
 		face.Colors, face.HasColors = parseColors(value), true

@@ -15,7 +15,7 @@ import (
 // DumpVersion is stamped on nothing, and exists so a change to the canonical
 // form is a deliberate edit rather than a surprise diff. Bump it when a field
 // is added, removed or reordered, and regenerate both goldens.
-const DumpVersion = 1
+const DumpVersion = 2
 
 // CanonicalJSON writes the card as one line of JSON.
 //
@@ -25,10 +25,11 @@ const DumpVersion = 1
 // order is the order below, strings escape only what JSON requires, and absent
 // values are written as empty rather than omitted.
 //
-// Deliberately not dumped, because the two sides model them differently and the
-// P1 gate is about rules parity rather than deck-builder metadata: DeckHints,
-// DeckNeeds, DeckHas, the token list, and the derived integer power and
-// toughness. Each is listed in the port log.
+// Deliberately not dumped: DeckHints, DeckNeeds and DeckHas. Java parses them
+// into a Map<Type, List<String>> with no toString, so matching them byte for
+// byte means porting that parser and writing a renderer on the Java side, for
+// data nothing in Crucible reads -- the gauntlet is fixed decklists (ADR-0011)
+// and the deck generator is out of scope (PORT-6). Recorded in the port log.
 func (c *Card) CanonicalJSON() []byte {
 	var b strings.Builder
 	b.Grow(1024)
@@ -47,6 +48,11 @@ func (c *Card) CanonicalJSON() []byte {
 	writeJSONBool(&b, c.RemovedFromRandomDecks)
 	b.WriteString(`,"remNonCommander":`)
 	writeJSONBool(&b, c.RemovedFromNonCommanderDecks)
+
+	// Tokens belong to the card rather than a face: Java harvests every
+	// TokenScript$ on the Reader, whichever face's line carried it. Script
+	// order, unsorted, because that is the order Forge keeps.
+	writeJSONStrings(&b, "tokens", c.Tokens)
 
 	// Placeholder faces are still unfilled here, exactly as Forge's Reader
 	// leaves them: resolution needs every card and happens in CardDb. Naming
@@ -107,6 +113,13 @@ func (f *Face) writeCanonical(b *strings.Builder, index int) {
 	writeJSONString(b, f.Power)
 	b.WriteString(`,"toughness":`)
 	writeJSONString(b, f.Toughness)
+	// The derived numbers, not just the written ones. `"1+*"` matching on both
+	// sides says nothing about whether the two agree that it means 1, and that
+	// normalisation is the part with a rule in it.
+	b.WriteString(`,"intPower":`)
+	b.WriteString(strconv.Itoa(f.IntPower()))
+	b.WriteString(`,"intToughness":`)
+	b.WriteString(strconv.Itoa(f.IntToughness()))
 	b.WriteString(`,"loyalty":`)
 	writeJSONString(b, f.InitialLoyalty)
 	b.WriteString(`,"defense":`)

@@ -356,6 +356,7 @@ func TestParseRejectsBrokenScripts(t *testing.T) {
 		{"SVar without a value", "Name:X\nManaCost:R\nTypes:Instant\nSVar:Lonely\n", "a name but no value"},
 		{"PT with no slash", "Name:X\nManaCost:R\nTypes:Creature Elf\nPT:22\n", "is not power/toughness"},
 		{"PT with two slashes", "Name:X\nManaCost:R\nTypes:Creature Elf\nPT:2/2/2\n", "is not power/toughness"},
+		{"PT that is not a number", "Name:X\nManaCost:R\nTypes:Creature Elf\nPT:X/2\n", `PT: power "X"`},
 		{"unknown split mode", "Name:X\nManaCost:R\nTypes:Instant\nAlternateMode:Wobble\n", `unknown mode "Wobble"`},
 		{"unknown specialize colour", "Name:X\nManaCost:R\nTypes:Instant\nSPECIALIZE:PUCE\n", `unknown colour "PUCE"`},
 		{"variant with no name", "Name:X\nManaCost:R\nTypes:Instant\nVariant:Flying\n", "no variant name"},
@@ -467,4 +468,57 @@ func diffInts(got, want []int) string {
 		}
 	}
 	return fmt.Sprintf("got %v, want %v", got, want)
+}
+
+// A characteristic-defining power reduces to a number, and the sign that binds
+// the star goes with it. The numbers are what the oracle dump diffs, so they
+// are pinned here per form rather than only in aggregate.
+func TestPowerToughnessNumbers(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		pt               string
+		power, toughness int
+	}{
+		{"2/3", 2, 3},
+		{"0/0", 0, 0},
+		{"*/*", 0, 0},
+		{"1+*/1+*", 1, 1},
+		{"*+1/*", 1, 0},
+		{"7-*/2", 7, 2},
+		{"-1/2", -1, 2},
+	}
+
+	reg := testRegistry(t)
+	for _, tt := range tests {
+		t.Run(tt.pt, func(t *testing.T) {
+			t.Parallel()
+
+			card, err := carddb.ParseScript(reg, "fixture", []byte("Name:X\nManaCost:R\nTypes:Creature Elf\nPT:"+tt.pt+"\n"))
+			if err != nil {
+				t.Fatalf("ParseScript failed: %v", err)
+			}
+			face := card.Primary()
+			if got := face.IntPower(); got != tt.power {
+				t.Errorf("IntPower() = %d, want %d", got, tt.power)
+			}
+			if got := face.IntToughness(); got != tt.toughness {
+				t.Errorf("IntToughness() = %d, want %d", got, tt.toughness)
+			}
+		})
+	}
+}
+
+// A face with no PT: line is not a 0/0. Java leaves both fields at
+// Integer.MAX_VALUE, and callers rely on telling the two apart.
+func TestPowerToughnessUnset(t *testing.T) {
+	t.Parallel()
+
+	face := parse(t, "Name:X\nManaCost:R\nTypes:Instant\n").Primary()
+	if got := face.IntPower(); got != carddb.PTUnset {
+		t.Errorf("IntPower() = %d, want PTUnset (%d)", got, carddb.PTUnset)
+	}
+	if got := face.IntToughness(); got != carddb.PTUnset {
+		t.Errorf("IntToughness() = %d, want PTUnset (%d)", got, carddb.PTUnset)
+	}
 }

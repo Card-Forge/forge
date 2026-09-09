@@ -105,6 +105,10 @@ public final class CardRulesDumper {
         b.append(",\"remRandom\":").append(rules.getAiHints().getRemRandomDecks());
         b.append(",\"remNonCommander\":").append(rules.getAiHints().getRemNonCommanderDecks());
 
+        // Tokens hang off the rules, not a face: the Reader harvests every
+        // TokenScript$ it sees regardless of which face's line carried it.
+        writeStrings(b, "tokens", rules.getTokens());
+
         b.append(",\"placeholders\":[");
         boolean firstPlaceholder = true;
         for (String name : new TreeSet<>(rules.getPlaceholderFaceNames())) {
@@ -159,6 +163,11 @@ public final class CardRulesDumper {
         writeString(b, face.getPower());
         b.append(",\"toughness\":");
         writeString(b, face.getToughness());
+        // Derived, so worth diffing: agreeing on the string "1+*" says nothing
+        // about agreeing that it means 1. Integer.MAX_VALUE here is a face with
+        // no PT line at all.
+        b.append(",\"intPower\":").append(face.getIntPower());
+        b.append(",\"intToughness\":").append(face.getIntToughness());
         b.append(",\"loyalty\":");
         writeString(b, face.getInitialLoyalty());
         b.append(",\"defense\":");
