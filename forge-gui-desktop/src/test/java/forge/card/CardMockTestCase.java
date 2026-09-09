@@ -54,6 +54,20 @@ public class CardMockTestCase {
     protected MockedStatic<FModel> fModelMock;
     protected MockedStatic<ImageKeys> imageKeysMock;
 
+    /**
+     * The {@link Localizer} that was installed when this class last replaced it with a mock,
+     * put back after every method.
+     *
+     * <p>
+     * Clearing the singleton instead breaks every AITest-based class that runs later in the
+     * same JVM: those initialise the Localizer through {@code FModel.initialize()} exactly
+     * once, behind a static {@code initialized} flag, and once the singleton is null
+     * {@code Localizer.getInstance()} silently hands out a bare instance whose resourceBundle
+     * is null.
+     * </p>
+     */
+    private static Localizer localizerBeforeMocking;
+
     @BeforeMethod
     public void initMocks() throws Exception {
         // BaseGameSimulationTest.runGame() calls this again part-way through a test, and
@@ -75,9 +89,12 @@ public class CardMockTestCase {
             fModelMock.close();
             fModelMock = null;
         }
-        // Leaving a mock Localizer behind would make FModel.initialize() a no-op for every
-        // AITest-based class that runs later in the same JVM.
-        setLocalizerInstance(null);
+        // Undo our own mock and nothing else. Leaving the mock in place, or clearing the
+        // singleton outright, breaks every AITest-based class that runs later in this JVM.
+        Localizer current = getLocalizerInstance();
+        if (current != null && Mockito.mockingDetails(current).isMock()) {
+            setLocalizerInstance(localizerBeforeMocking);
+        }
     }
 
     /**
@@ -101,7 +118,21 @@ public class CardMockTestCase {
     }
 
     protected void setMock(Localizer mock) {
+        Localizer current = getLocalizerInstance();
+        if (current == null || !Mockito.mockingDetails(current).isMock()) {
+            localizerBeforeMocking = current;
+        }
         setLocalizerInstance(mock);
+    }
+
+    private static Localizer getLocalizerInstance() {
+        try {
+            Field instance = Localizer.class.getDeclaredField("instance");
+            instance.setAccessible(true);
+            return (Localizer) instance.get(null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void setLocalizerInstance(Localizer mock) {
