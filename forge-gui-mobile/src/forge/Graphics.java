@@ -1077,6 +1077,23 @@ public class Graphics implements Disposable {
         }
     }
 
+    public void drawPix(TextureRegion texture, float x, float y, float w, float h) {
+        if (texture == null)
+            return;
+        batch.end();
+        float mul = 3f;
+        float pixelSize = w > h ? (w / h) * mul : (h / w) * mul;
+        ShaderUtil.getInstance().getShaderPix().bind();
+        ShaderUtil.getInstance().getShaderPix().setUniformf("u_resolution", w, h);
+        ShaderUtil.getInstance().getShaderPix().setUniformf("u_pixelSize", pixelSize);
+        ShaderUtil.getInstance().getShaderPix().setUniformf("u_bias", 0.8f);
+        batch.setShader(ShaderUtil.getInstance().getShaderPix());
+        batch.begin();
+        batch.draw(texture, x, y, w, h);
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+    }
     public void drawPixelated(FImage image, float x, float y, float w, float h, Float amount, boolean flipY) {
         if (image == null)
             return;

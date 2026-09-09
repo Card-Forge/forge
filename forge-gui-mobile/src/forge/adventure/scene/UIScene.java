@@ -668,6 +668,7 @@ public class UIScene extends Scene {
                             ShaderUtil.getInstance().getShaderPix().bind();
                             ShaderUtil.getInstance().getShaderPix().setUniformf("u_resolution", width, height);
                             ShaderUtil.getInstance().getShaderPix().setUniformf("u_pixelSize", pixelSize);
+                            ShaderUtil.getInstance().getShaderPix().setUniformf("u_bias", 0.8f);
                             batch.setShader(ShaderUtil.getInstance().getShaderPix());
                             batch.begin();
                             // Simulate the blurred pixelated render using custom shader like the old renders of BlurUtils

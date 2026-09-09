@@ -36,11 +36,6 @@ public class OverlayText {
     void render(float delta) {
         if (!render)
             return;
-        //TODO: Add detection check to be used on other needed scenes..
-        if (Forge.currentScene instanceof TileMapScene) {
-            update("");
-            return;
-        }
         // render only on GameScenes
         if (Forge.currentScene instanceof GameScene) {
             alpha = Math.min(alpha + delta * 0.75f, 1f);
