@@ -33,12 +33,14 @@ type IgnoredKey struct {
 	Why string
 }
 
-// ignoredKeys are those defects, listed so the corpus still loads while a third
-// one is an error rather than a shrug.
-var ignoredKeys = map[string]IgnoredKey{
-	"ODeckHints": {Card: "the_dawning_archaic", Why: "DeckHints, mistyped"},
-	"DBCleanup":  {Card: "spirit_of_resilience", Why: "an SVar body that lost its SVar: prefix"},
-}
+// ignoredKeys are those defects. Empty: the corpus currently has none, so
+// every key a script carries is one the parser understands, and an unknown one
+// is an error with nothing standing in front of it.
+//
+// The mechanism stays because the next malformed line will land the same way,
+// and an exemption with the card named beside it is what keeps one defect from
+// becoming a blanket "ignore what we do not recognise".
+var ignoredKeys = map[string]IgnoredKey{}
 
 // IgnoredScriptKeys returns the allowlist: which keys are dropped, and which
 // card each was found on.

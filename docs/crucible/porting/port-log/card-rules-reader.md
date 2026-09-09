@@ -92,10 +92,11 @@ face's line carried it, and keeps them in script order.
 ## Decided, not open
 
 **An unknown key is an error.** Forge ignoring one is behaviour, not permission: P2's vocabulary gate has to enumerate
-every key a script may carry, and a parser that shrugs at an unrecognised one cannot produce that list. The two corpus
-defects are exempted by name in `IgnoredScriptKeys`, each carrying the card it was found on, and the corpus test fails
-when an exemption no longer matches exactly that card. A sync that fixes the typo therefore deletes the exemption
-instead of leaving a dead one behind to swallow the next real unknown key.
+every key a script may carry, and a parser that shrugs at an unrecognised one cannot produce that list. No key is exempt
+today -- the two corpus defects that needed exemptions are fixed ([`../upstream-patches.md`](../upstream-patches.md)) --
+and `IgnoredScriptKeys` is where the next one goes, with the card it occurs on beside it. The corpus test fails when an
+entry stops matching exactly that card, so an exemption cannot outlive the defect it was written for and start
+swallowing real errors.
 
 **`DeckHints`, `DeckNeeds` and `DeckHas` are never dumped.** Java parses each into a `Map<Type, List<String>>` and
 `DeckHints.java` (239) has no `toString`, so comparing them means porting that parser and writing a renderer on the Java

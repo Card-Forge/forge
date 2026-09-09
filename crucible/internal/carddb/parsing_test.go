@@ -393,12 +393,21 @@ func TestParseRejectsBrokenScripts(t *testing.T) {
 
 // Two corpus lines match no key in Forge's switch and are dropped silently.
 // Crucible drops the same two knowingly, and errors on anything else.
-func TestKnownCorpusDefectsAreIgnored(t *testing.T) {
+// Nothing is exempt. Forge ignores a key its switch misses, and the two scripts
+// that relied on that are fixed upstream, so every key in the corpus is one the
+// parser understands. An exemption added later has to be justified where the
+// corpus test can check it still applies.
+func TestNoKeysAreExempt(t *testing.T) {
 	t.Parallel()
 
-	card := parse(t, "Name:X\nManaCost:R\nTypes:Instant\nODeckHints:Ability$Graveyard\nDBCleanup:DB$ Cleanup\n")
-	if card.DeckHints != "" {
-		t.Errorf("DeckHints = %q, want empty -- ODeckHints is a typo, not an alias", card.DeckHints)
+	if got := carddb.IgnoredScriptKeys(); len(got) != 0 {
+		t.Errorf("IgnoredScriptKeys() = %v, want empty", got)
+	}
+	for _, line := range []string{"ODeckHints:Ability$Graveyard", "DBCleanup:DB$ Cleanup"} {
+		script := "Name:X\nManaCost:R\nTypes:Instant\n" + line + "\n"
+		if _, err := carddb.ParseScript(testRegistry(t), "fixture", []byte(script)); err == nil {
+			t.Errorf("ParseScript accepted %q", line)
+		}
 	}
 }
 

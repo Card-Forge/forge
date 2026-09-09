@@ -79,16 +79,14 @@ $ find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \
 | `MeldPair:`                                         |     14 | Meld partner name                                                                    |
 | `SETCOLORID:`, `Lights:`                            |      2 | Long tail; each appears once                                                         |
 
-**Two keys in the corpus are silently ignored by Forge**, because `parseLine` switches on the first character and then
-matches the whole key, and neither matches anything:
+**A key Forge's `parseLine` matches no case for is ignored without complaint**, which is how a malformed line survives
+in the corpus: it costs the card its effect and says nothing. `spirit_of_resilience` wrote `DBCleanup:` for
+`SVar:DBCleanup:`, so its clone never cleared the chosen card, and `the_dawning_archaic` wrote `ODeckHints:` for
+`DeckHints:`. Both are fixed; the vocabulary below is now total over the corpus.
 
-| Key           | Card                   | What it looks like it meant |
-| ------------- | ---------------------- | --------------------------- |
-| `ODeckHints:` | `the_dawning_archaic`  | `DeckHints:`, mistyped      |
-| `DBCleanup:`  | `spirit_of_resilience` | An `SVar:` body, unprefixed |
-
-Both are corpus defects rather than vocabulary. A strict parser has to decide about them explicitly — Crucible's does,
-in the port log — because "Forge ignores it" is behaviour, not permission.
+Crucible errors on an unknown key instead, because "Forge ignores it" is behaviour, not permission, and P2's gate has to
+enumerate every key a script may carry. `IgnoredScriptKeys` is where a future defect is exempted by name, with the card
+beside it so the corpus test can fail when the exemption stops applying.
 
 An unknown **subtype**, by contrast, is not dropped by either side: `CardType.parse` adds every word with `add()`, which
 never runs `sanisfySubtypes`, so the database keeps `Contraption` and `Killbot` exactly as written.

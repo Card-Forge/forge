@@ -29,7 +29,8 @@ as the change.
 
 ### Edits
 
-**One.** Everything else above is an `add`.
+**One permanent.** Everything else above is an `add`, and the card-script fixes below carry their own deletion
+condition.
 
 | Date       | Path        | Change            | Why                                                                                                                                                                | Conflict rule                                        |
 | ---------- | ----------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
@@ -46,8 +47,32 @@ The upstream version is preserved in git history at any commit before this one, 
 [Card-Forge/forge](https://github.com/Card-Forge/forge). Attribution to Forge is kept prominent in the replacement,
 along with the GPLv3 notice.
 
-**If a second edit is ever proposed, the reason belongs in an ADR, not a table row.** One exception with a mechanical
-resolution rule is manageable; a growing list is how a fork becomes unmergeable.
+**A second permanent edit belongs in an ADR, not a table row.** One exception with a mechanical resolution rule is
+manageable; a growing list is how a fork becomes unmergeable. An edit that mirrors an open pull request against upstream
+is not permanent and is logged in the next section instead: it names the condition that deletes it, and a list that
+empties itself is not the list that makes a fork unmergeable.
+
+### Pending upstream fixes
+
+Edits whose whole purpose is to disappear. The same change is open as a pull request against
+[Card-Forge/forge](https://github.com/Card-Forge/forge); when upstream merges it, the next sync brings the identical
+content back and the row is deleted along with the local edit.
+
+| Date       | Path                                                                                    | Change                                                           | Upstream                                                     |
+| ---------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------ |
+| 2026-09-09 | `forge-gui/res/cardsfolder/s/spirit_of_resilience.txt`, `.../t/the_dawning_archaic.txt` | `DBCleanup:` to `SVar:DBCleanup:`, `ODeckHints:` to `DeckHints:` | PR from `jczastkiewicz:fix/malformed-card-script-keys`, open |
+
+**Conflict rule: always take upstream.** If upstream applies the identical change, git merges both sides silently and
+there is nothing to resolve. If upstream fixes it differently, upstream's version wins without discussion — the point of
+the edit was the fix, not the wording.
+
+Why the edit exists at all rather than waiting: both keys matched no case in Forge's parser, so `spirit_of_resilience`
+never cleared its chosen card and `the_dawning_archaic` lost its deck hint. Carrying the fix makes Crucible's corpus the
+corrected one and lets `internal/carddb` drop its key exemptions, which is what keeps an unknown key an error rather
+than a shrug.
+
+If upstream rejects the pull request, this stops being pending: the rows move up into **Edits**, and by the rule above
+that needs an ADR.
 
 ## Not logged here
 
