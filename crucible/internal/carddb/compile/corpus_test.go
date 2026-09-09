@@ -21,7 +21,9 @@ import (
 //
 // A failure here is a card script that says less than its text does, not a
 // parser gap -- Java drops an unresolved reference with a message on stdout,
-// so nothing downstream ever notices (PORT-8).
+// so nothing downstream ever notices (PORT-8). The corpus currently has none:
+// the five it had are fixed, and the fixes are carried until upstream merges
+// them (docs/crucible/porting/card-script-defects.md).
 func TestCorpusCompiles(t *testing.T) {
 	t.Parallel()
 
@@ -29,22 +31,12 @@ func TestCorpusCompiles(t *testing.T) {
 	var (
 		failures []string
 		byKind   = map[string]int{}
-		fixed    []string
 		compiled int
 		lines    int
 		subs     int
 	)
 	for _, card := range cards {
 		out, err := compile.Compile(card)
-		if _, known := knownDefects[card.Filename]; known {
-			// The entry has to keep failing. An upstream fix makes it dead,
-			// and a dead exemption hides the next card that breaks the same
-			// way -- the failure mode the allowlist exists to prevent.
-			if err == nil {
-				fixed = append(fixed, card.Filename)
-			}
-			continue
-		}
 		if err != nil {
 			failures = append(failures, err.Error())
 			byKind[kindOf(err)]++
@@ -69,9 +61,6 @@ func TestCorpusCompiles(t *testing.T) {
 	for _, kind := range sortedKeys(byKind) {
 		t.Logf("%-24s %d", kind, byKind[kind])
 	}
-	for _, name := range fixed {
-		t.Errorf("%s compiles now -- delete its knownDefects entry", name)
-	}
 	sort.Strings(failures)
 	for i, f := range failures {
 		if i == 20 {
@@ -80,20 +69,6 @@ func TestCorpusCompiles(t *testing.T) {
 		}
 		t.Error(f)
 	}
-}
-
-// knownDefects are cards that do not compile because of an upstream defect
-// Crucible is not going to work around (PORT-8). Each is listed in
-// docs/crucible/porting/card-script-defects.md with its printed text, and each
-// is exempted by name so the rest of the corpus stays gated.
-//
-// An entry is a debt, not a decision: it names one card, and the test above
-// fails when that card starts compiling, so the exemption cannot outlive the
-// defect.
-var knownDefects = map[string]string{
-	"typhoid_mary_fractured": "SubAbility$ DBCharm names an SVar the card never defines. " +
-		"Repairing it means writing the second Charm the author intended, which is a scripting " +
-		"decision rather than a deletion",
 }
 
 func countSubs(a *compile.Ability) int {

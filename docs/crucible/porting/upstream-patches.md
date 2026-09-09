@@ -57,9 +57,9 @@ An edit whose whole purpose is to disappear: the same change open as a pull requ
 [Card-Forge/forge](https://github.com/Card-Forge/forge), with the row and the local edit both deleted once upstream
 merges it and a sync brings the identical content back.
 
-| Date       | Path                                                                                                                       | Change                                                                | Upstream |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | -------- |
-| 2026-09-09 | `cardsfolder/c/casey_raph_hotheads.txt`, `c/circadian_struggle.txt`, `w/withering_curse.txt`, `w/worzel_the_protector.txt` | Four dangling `SubAbility$` references: one SVar added, three removed | Open     |
+| Date       | Path                                                                                                                                                       | Change                                                               | Upstream |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | -------- |
+| 2026-09-09 | `cardsfolder/c/casey_raph_hotheads.txt`, `c/circadian_struggle.txt`, `w/withering_curse.txt`, `w/worzel_the_protector.txt`, `t/typhoid_mary_fractured.txt` | Five dangling `SubAbility$` references: one SVar added, four removed | Open     |
 
 Detail per card, with the printed text each was checked against, in [`card-script-defects.md`](card-script-defects.md).
 

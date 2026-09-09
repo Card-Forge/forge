@@ -61,6 +61,6 @@ Order is kept anyway, because Java's TreeMap loses it and nothing should depend 
 
 ## Known defects it surfaces
 
-Compiling the corpus found five cards whose `SubAbility$` names an SVar that does not exist. Four are fixed; the fifth,
-`typhoid_mary_fractured`, is exempted by name in the corpus test until its author decides what the missing `DBCharm`
-should be. All five are in [`../card-script-defects.md`](../card-script-defects.md).
+Compiling the corpus found five cards whose `SubAbility$` names an SVar that does not exist. All five are fixed and
+carried until upstream merges them, so the corpus compiles whole with no exemption. Each is in
+[`../card-script-defects.md`](../card-script-defects.md) with the printed text it was checked against.

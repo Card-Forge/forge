@@ -18,12 +18,11 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 | `circadian_struggle`     | Cleanup chains to a `DBEffect` that does not exist | Sub-ability resolution | Open, carried                                                    |
 | `withering_curse`        | Chains to a `DBPutCounter` that does not exist     | Sub-ability resolution | Open, carried                                                    |
 | `worzel_the_protector`   | Chains to a `DBAttach` that does not exist         | Sub-ability resolution | Open, carried                                                    |
-| `typhoid_mary_fractured` | Chains to a `DBCharm` that does not exist          | Sub-ability resolution | Not reported — the fix is a scripting decision, not a deletion   |
+| `typhoid_mary_fractured` | Chains to a `DBCharm` that does not exist          | Sub-ability resolution | Open, carried                                                    |
 
 An **open, carried** fix is applied to Crucible's corpus while its pull request waits, logged in
-[`upstream-patches.md`](upstream-patches.md) with the condition that deletes it. `typhoid_mary_fractured` is instead
-exempted by name in `internal/carddb/compile`'s corpus test, which fails when the card starts compiling so the exemption
-cannot outlive the defect.
+[`upstream-patches.md`](upstream-patches.md) with the condition that deletes it. All five are carried, so
+`internal/carddb/compile` compiles the whole corpus with no exemption of any kind.
 
 Two more are known and deliberately unreported: `the_eagles_are_coming` writes `SubAbility$` twice on one line, where
 Java's param map keeps only the last, and `worzel_the_protector`'s `Oracle:` line spells "Faerie ceratures". Neither
@@ -56,9 +55,12 @@ The list lives on the card and outlives the spell, so the chain ends with `DB$ C
 
 {4}{R} Legendary Creature — Mutant Ninja Human Turtle, 4/4. Teenage Mutant Ninja Turtles Eternal (`tmc`).
 
-> When Casey & Raph enter, choose one or both. Each mode must target a different player. • Target player exiles the top
-> card of their library. Until that player's next end step, they may play that card without paying its mana cost. •
-> Target player creates two Treasure tokens.
+```text
+When Casey & Raph enter, choose one or both. Each mode must target a different player.
+• Target player exiles the top card of their library. Until that player's next end step, they may play that card
+  without paying its mana cost.
+• Target player creates two Treasure tokens.
+```
 
 Chain: `TrigCharm` → `DBExile` (exiles, `RememberChanged$ True`) → `DBEffect` (grants the permission, reading
 `RememberObjects$ Remembered`) → `SubAbility$ DBCleanup`, **which was never written**.
@@ -75,9 +77,11 @@ Fix: add `SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True`, which is the line
 
 {4}{G/U}{G/U} Instant. Alchemy: Lorwyn Eclipsed (`yecl`).
 
-> Vivid — Seek X cards that each share a color with one or more permanents you control, where X is the number of colors
-> among permanents you control. For each color among permanents you control, those cards perpetually gain "This spell
-> costs {1} less to cast."
+```text
+Vivid — Seek X cards that each share a color with one or more permanents you control, where X is the number of
+colors among permanents you control. For each color among permanents you control, those cards perpetually gain
+"This spell costs {1} less to cast."
+```
 
 Chain: `Seek` → five `AnimateAll` steps, one per colour, each gated on `ConditionPresent$ Permanent.YouCtrl+<colour>`
 and carrying `Duration$ Perpetual | staticAbilities$ ReduceCost` → `DBCleanup`.
@@ -91,7 +95,10 @@ Fix: drop the trailing `| SubAbility$ DBEffect`. Nothing changes; Forge discarde
 
 {1}{B}{B} Sorcery, mythic. Secrets of Strixhaven (`sos`). **Standard legal**, unlike the other three.
 
-> All creatures get -2/-2 until end of turn. Infusion — If you gained life this turn, destroy all creatures instead.
+```text
+All creatures get -2/-2 until end of turn.
+Infusion — If you gained life this turn, destroy all creatures instead.
+```
 
 Chain: `PumpAll` (when `X`, life gained this turn, is 0) → `DBDestroyAll` (otherwise) → `SubAbility$ DBPutCounter`,
 which does not exist. Neither the printed text nor the script involves counters; `foolish_fate` writes the same Infusion
@@ -103,10 +110,13 @@ Fix: drop `| SubAbility$ DBPutCounter`.
 
 {1}{W}{W}{W} Legendary Planeswalker — Worzel, loyalty 4. Mystery Booster Commander Edition (`mbc`).
 
-> 0: Create a 1/1 white Cat creature token with "{T}: Put a loyalty counter on each planeswalker you control." −1: Look
-> at the top six cards of your library. You may reveal a planeswalker or basic Plains card from among them and put it
-> into your hand. Put the rest on the bottom of your library in a random order. −8: Create ten Scryb Sprites tokens.
-> (They're {G} 1/1 Faerie creatures with flying.) Worzel, the Protector can be your commander.
+```text
+0: Create a 1/1 white Cat creature token with "{T}: Put a loyalty counter on each planeswalker you control."
+−1: Look at the top six cards of your library. You may reveal a planeswalker or basic Plains card from among them
+    and put it into your hand. Put the rest on the bottom of your library in a random order.
+−8: Create ten Scryb Sprites tokens. (They're {G} 1/1 Faerie creatures with flying.)
+Worzel, the Protector can be your commander.
+```
 
 The `0:` ability creates the Cat, remembers it with `RememberTokens$ True`, then chains to `SubAbility$ DBAttach`, which
 does not exist. Attaching is for Auras and Equipment; a Cat token is neither, and nothing in the printed text attaches
@@ -117,11 +127,24 @@ question from the broken reference, and widening the diff makes the defect harde
 
 ## Typhoid Mary, Fractured
 
-Chain: `TrigCharm` → `SubAbility$ DBCharm`, which does not exist.
+{1}{B}{R} Legendary Creature — Mutant Villain, 3/3. Marvel Super Heroes Commander (`msc`).
 
-The line reads `Random$ Compare | RandomCompareSVar$ Y | RandomCompare$ LT1`, with `Y` the cards discarded this turn,
-and the card's text says the mode is chosen rather than random when you have discarded. So `DBCharm` should be a second
-`Charm` guarded on `ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1`.
+```text
+Whenever Typhoid Mary attacks, choose one at random. If you discarded a card this turn, you choose one instead.
+• Mary — Create a Treasure token.
+• Typhoid Mary — Draw a card.
+• Bloody Mary — Each opponent loses 2 life and you gain 2 life.
+```
 
-That is design intent rather than a typo, so it belongs to whoever scripted the card. Deleting the reference would make
-the script honest and leave the card wrong.
+Chain: the attack trigger runs `TrigCharm`, which chains to `SubAbility$ DBCharm`, which does not exist.
+
+**The card is already correct without it.** `Random$ Compare | RandomCompareSVar$ Y | RandomCompare$ LT1` is the whole
+of "choose one at random, unless you discarded": `CharmEffect` computes `random = Expressions.compare(Y, "LT", 1)`, and
+when that is false it falls through to the ordinary choose-a-mode path in the same effect
+(`forge-game/src/main/java/forge/game/ability/effects/CharmEffect.java:245-262`). `Y` is
+`PlayerCountPropertyYou$CardsDiscardedThisTurn`.
+
+So `DBCharm` is a leftover of the same kind as the other three, not a missing feature — a second `Charm` would make the
+card offer two modes, which its text does not say.
+
+Fix: drop `| SubAbility$ DBCharm`.
