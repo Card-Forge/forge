@@ -198,7 +198,11 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.SourceSA, tgtSA);
                 runParams.put(AbilityKey.Targets, distinctObjects);
-                // Cause must be a Card, like MagicStack's own BecomesTargetOnce firing, or ValidCause$ never matches
+                // cause is the permanent/card responsible for this retargeting (e.g. the Chef's
+                // Kiss-style redirect source), not necessarily whoever ends up choosing/rolling
+                // the new target - that's fine for "did You cause this" checks (ValidCause$
+                // Card.YouCtrl) as long as Chooser$ (a different player making the actual choice)
+                // is never combined with random retargeting; it isn't today.
                 runParams.put(AbilityKey.Cause, sa.getHostCard());
                 if (random) {
                     runParams.put(AbilityKey.Random, true);
