@@ -17,6 +17,7 @@ import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
@@ -648,16 +649,29 @@ public class ComputerUtilCost {
         }
 
         for (Card c : cardsToConsider) {
-            // the raw Produced$ is a script string, and every caller runs this through
-            // ColorSet.fromNames, which drops anything that is not a colour name - so an "Any"
-            // source used to contribute nothing at all
-            colorsAvailable.addAll(c.getProducibleColors());
+            colorsAvailable.addAll(getProducibleColors(c));
             if (colorsAvailable.size() == MagicColor.Constant.COLORS_AND_COLORLESS.size()) {
                 break; // nothing left for a further source to add
             }
         }
 
         return colorsAvailable;
+    }
+
+    /** Every color this card could produce, walking its mana abilities once. */
+    private static Set<String> getProducibleColors(Card c) {
+        Set<String> colors = Sets.newHashSet();
+        for (final SpellAbility ab : c.getManaAbilities()) {
+            if (ab.getApi() == ApiType.ManaReflected) {
+                colors.addAll(CardUtil.getReflectableManaColors(ab));
+            } else {
+                colors = CardUtil.canProduce(6, ab, colors);
+            }
+            if (colors.size() == MagicColor.Constant.COLORS_AND_COLORLESS.size()) {
+                break; // nothing left for a further ability to add
+            }
+        }
+        return colors;
     }
 
     public static boolean isFreeCastAllowedByPermanent(Player player, String altCost) {

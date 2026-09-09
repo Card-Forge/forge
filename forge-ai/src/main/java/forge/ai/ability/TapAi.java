@@ -107,10 +107,9 @@ public class TapAi extends TapAiBase {
                         final byte availableColors = ColorSet.fromNames(
                                 ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
                         for (Card c : playable) {
-                            // Check if the AI intends to play the card and if it can pay for it with the mana it has
-                            boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
-                            boolean canPay = c.getManaCost().canBePaidWithAvailable(availableColors);
-                            if (canPay && willPlay) {
+                            // Check if the AI can pay for the card with the mana it has and intends to play it
+                            if (c.getManaCost().canBePaidWithAvailable(availableColors)
+                                    && ComputerUtil.hasReasonToPlayCardThisTurn(payer, c)) {
                                 return true;
                             }
                         }
