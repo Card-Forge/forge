@@ -103,21 +103,21 @@ ScryfallCode=FRA
 358 M Uldaros Theorix @Eugene Maslovski
 363 M The Theorist, Jace Beleren @Miles Johnston
 381 R Theorist's Sanctum @Jaime A. Zuverza
-382 C Plains @Alayna Danner
-383 C Plains @Alayna Danner
-384 C Plains @Alayna Danner
-385 C Island @Calder Moore
-386 C Island @Calder Moore
-387 C Island @Calder Moore
-388 C Swamp @Daniel Romanovsky
-389 C Swamp @Daniel Romanovsky
-390 C Swamp @Daniel Romanovsky
-391 C Mountain @Leon Tukker
-392 C Mountain @Leon Tukker
-393 C Mountain @Leon Tukker
-394 C Forest @Adam Paquette
-395 C Forest @Adam Paquette
-396 C Forest @Adam Paquette
+382 L Plains @Alayna Danner
+383 L Plains @Alayna Danner
+384 L Plains @Alayna Danner
+385 L Island @Calder Moore
+386 L Island @Calder Moore
+387 L Island @Calder Moore
+388 L Swamp @Daniel Romanovsky
+389 L Swamp @Daniel Romanovsky
+390 L Swamp @Daniel Romanovsky
+391 L Mountain @Leon Tukker
+392 L Mountain @Leon Tukker
+393 L Mountain @Leon Tukker
+394 L Forest @Adam Paquette
+395 L Forest @Adam Paquette
+396 L Forest @Adam Paquette
 397 R Deserted Beach @Piotr Dura
 398 R Haunted Ridge @Piotr Dura
 399 R Overgrown Farmland @Piotr Dura
